@@ -1,28 +1,28 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 // Header file for elements that are used to apply Sommerfeld
 // boundary conditions to the Helmholtz equations
 #ifndef OOMPH_HELMHOLTZ_BC_ELEMENTS_HEADER
@@ -42,1998 +42,1984 @@
 
 namespace oomph
 {
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-// Collection of the  Bessel functions used in the Helmholtz problem 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  // Collection of the  Bessel functions used in the Helmholtz problem
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
 
-//====================================================================
-/// Namespace to provide Hankel function of the first kind
-/// and various orders -- needed for Helmholtz computations.
-//====================================================================
-namespace Hankel_functions_for_helmholtz_problem
-{
-
-//====================================================================
-/// Compute Hankel function of the first kind of orders 0...n and 
-/// its derivates  at coordinate x. The function returns the vector 
-/// then its derivative. 
-//====================================================================
- void Hankel_first(const unsigned& n, const double& x,
-                   Vector<std::complex<double> >& h, 
-                   Vector<std::complex<double> >& hp)
- {
-  int  n_actual = 0;
-  Vector<double> jn(n+1),yn(n+1),jnp(n+1), ynp(n+1);
-  CRBond_Bessel::bessjyna(int(n),x,n_actual,&jn[0],&yn[0],
-                          &jnp[0],&ynp[0]);
-#ifdef PARANOID
-  if (n_actual!=int(n))
+  //====================================================================
+  /// Namespace to provide Hankel function of the first kind
+  /// and various orders -- needed for Helmholtz computations.
+  //====================================================================
+  namespace Hankel_functions_for_helmholtz_problem
   {
-   std::ostringstream error_stream; 
-   error_stream << "CRBond_Bessel::bessjyna() only computed "
-		<< n_actual << " rather than " << n
-		<< " Bessel functions.\n";    
-   throw OomphLibError(error_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-  for (unsigned i=0;i<n;i++)
-  {
-   h[i] =std::complex<double>(jn[i], yn[i]);
-   hp[i]=std::complex<double>(jnp[i],ynp[i]);
-  }
- } // End of Hankel_first
- 
-//====================================================================
-/// Compute Hankel function of the first kind of orders 0...n and 
-/// its derivates at coordinate x. The function returns the vector 
-/// then its derivative (complex version). This functionality is only
-/// required in the computation of the solution for the complex-
-/// shifted Laplacian preconditioner.
-//====================================================================
- void CHankel_first(const unsigned& n,
-		    const std::complex<double>& x,
-		    Vector<std::complex<double> >& h, 
-		    Vector<std::complex<double> >& hp)
- {
-  // Set the highest order actually calculated
-  int n_actual=0;
-
-  // Create a vector for the Bessel function of the 1st kind
-  Vector<std::complex<double> > jn(n+1);
-
-  // Create a vector for the Bessel function of the 2nd kind
-  Vector<std::complex<double> > yn(n+1);
-  
-  // Create a vector for the Bessel function (1st kind) derivative
-  Vector<std::complex<double> > jnp(n+1);
-  
-  // Create a vector for the Bessel function (2nd kind) derivative
-  Vector<std::complex<double> > ynp(n+1);
-
-  // Call the (complex) Bessel function to calculate the solution
-  CRBond_Bessel::cbessjyna(int(n),x,n_actual,&jn[0],
-			   &yn[0],&jnp[0],&ynp[0]);
-  
-#ifdef PARANOID
-  // Tell the user if they tried to calculate higher order terms
-  if (n_actual!=int(n))
-  {
-   // Create an output stream
-   std::ostringstream error_message_stream;
-
-   // Create the error message
-   error_message_stream << "CRBond_Bessel::cbessjyna() only computed "
-			<< n_actual << " rather than " << n
-			<< " Bessel functions.\n";
-   
-   // Throw the error message
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
-  // Loop over the number of terms requested (only the first entry
-  // has *actually* been calculated)
-  for (unsigned i=0;i<n;i++)
-  {
-   // Set the entries in the Hankel function vector
-   h[i]=std::complex<double>(jn[i].real()-yn[i].imag(),
-			     jn[i].imag()+yn[i].real());
-
-   // Set the entries in the Hankel function derivative vector
-   hp[i]=std::complex<double>(jnp[i].real()-ynp[i].imag(),
-			      jnp[i].imag()+ynp[i].real());
-  }
- } // End of Hankel_first 
-} // End of namespace
-
-
-
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-
-
-//======================================================================
-/// \short A class for elements that allow the approximation of the 
-/// Sommerfeld radiation BC.
-/// The element geometry is obtained from the  FaceGeometry<ELEMENT> 
-/// policy class.
-//======================================================================
-template <class ELEMENT>
- class HelmholtzBCElementBase : public virtual FaceGeometry<ELEMENT>, 
- public virtual FaceElement
- {
-   public:
-  
-  /// \short Constructor, takes the pointer to the "bulk" element and the 
-  /// index of the face to which the element is attached.
-  HelmholtzBCElementBase(FiniteElement* const &bulk_el_pt, 
-                         const int& face_index); 
-  
-  ///\short  Broken empty constructor
-  HelmholtzBCElementBase()
-   {
-    throw OomphLibError(
-     "Don't call empty constructor for HelmholtzBCElementBase",
-     OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
-   }
-  
-  /// Broken copy constructor
-  HelmholtzBCElementBase(const HelmholtzBCElementBase& dummy) 
-   { 
-    BrokenCopy::broken_copy("HelmholtzBCElementBase");
-   } 
-  
-  /// Broken assignment operator
-//Commented out broken assignment operator because this can lead to a conflict warning
-//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
-//realise that two separate implementations of the broken function are the same and so,
-//quite rightly, it shouts.
-  /*void operator=(const HelmholtzBCElementBase&) 
-   {
-    BrokenCopy::broken_assign("HelmholtzBCElementBase");
-    }*/
-  
-  
-  /// \short Specify the value of nodal zeta from the face geometry
-  /// The "global" intrinsic coordinate of the element when
-  /// viewed as part of a geometric object should be given by
-  /// the FaceElement representation, by default (needed to break
-  /// indeterminacy if bulk element is SolidElement)
-  double zeta_nodal(const unsigned &n, const unsigned &k,           
-                    const unsigned &i) const 
-  {return FaceElement::zeta_nodal(n,k,i);}     
-  
-
-  /// Output function -- forward to broken version in FiniteElement
-  /// until somebody decides what exactly they want to plot here...
-  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
-  
-  /// \short Output function -- forward to broken version in FiniteElement
-  /// until somebody decides what exactly they want to plot here...
-  void output(std::ostream &outfile, const unsigned &n_plot)
-  {FiniteElement::output(outfile,n_plot);}
-  
-  /// C-style output function -- forward to broken version in FiniteElement
-  /// until somebody decides what exactly they want to plot here...
-  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-  
-  /// \short C-style output function -- forward to broken version in 
-  /// FiniteElement until somebody decides what exactly they want to plot 
-  /// here...
-  void output(FILE* file_pt, const unsigned &n_plot)
-  {FiniteElement::output(file_pt,n_plot);}
-
-  /// \short Return the index at which the real/imag unknown value
-  /// is stored.
-  virtual inline std::complex<unsigned> u_index_helmholtz() const 
-   {
-    return std::complex<unsigned>(U_index_helmholtz.real(),
-                                  U_index_helmholtz.imag());
-   }
-    
-  /// \short Compute the element's contribution to the time-averaged 
-  /// radiated power over the artificial boundary
-  double global_power_contribution()
-  {   
-   // Dummy output file
-   std::ofstream outfile;
-   return global_power_contribution(outfile);
-  }
-  
-  /// \short Compute the element's contribution to the time-averaged 
-  /// radiated power over the artificial boundary. Also output the
-  /// power density as a fct of the polar angle in the specified 
-  ///output file if it's open.
-  double global_power_contribution(std::ofstream& outfile)
-  {   
-   // pointer to the corresponding bulk element
-   ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt()); 
-   
-   // Number of nodes in bulk element
-   unsigned nnode_bulk=bulk_elem_pt->nnode();
-   const unsigned n_node_local = nnode();
-   
-   //get the dim of the bulk and local nodes
-   const unsigned bulk_dim= bulk_elem_pt->dim();    
-   const unsigned local_dim= this->dim();
-   
-   //Set up memory for the shape and test functions
-   Shape psi(n_node_local);
-   
-   //Set up memory for the shape functions
-   Shape psi_bulk(nnode_bulk);
-   DShape dpsi_bulk_dx(nnode_bulk,bulk_dim);
-   
-   //Set up memory for the outer unit normal
-   Vector< double > unit_normal(bulk_dim);    
-   
-   //Set the value of n_intpt
-   const unsigned n_intpt = integral_pt()->nweight();
-   
-   //Set the Vector to hold local coordinates
-   Vector<double> s(local_dim);
-   double power=0.0;    
-   
-   // Output?
-   if (outfile.is_open())
+    //====================================================================
+    /// Compute Hankel function of the first kind of orders 0...n and
+    /// its derivates  at coordinate x. The function returns the vector
+    /// then its derivative.
+    //====================================================================
+    void Hankel_first(const unsigned& n,
+                      const double& x,
+                      Vector<std::complex<double>>& h,
+                      Vector<std::complex<double>>& hp)
     {
-     outfile << "ZONE\n";
-    }
-
-   //Loop over the integration points
-   //--------------------------------
-   for(unsigned ipt=0;ipt<n_intpt;ipt++)
-    { 
-     //Assign values of s
-     for(unsigned i=0;i<local_dim;i++)
-      {
-       s[i] = integral_pt()->knot(ipt,i);
-      }
-     //get the outer_unit_ext vector      
-     this->outer_unit_normal(s,unit_normal); 
-     
-     //Get the integral weight
-     double w = integral_pt()->weight(ipt);
-     
-     // Get jacobian of mapping
-     double J=J_eulerian(s);
-     
-     //Premultiply the weights and the Jacobian
-     double W = w*J;
-     
-     // Get local coordinates in bulk element by copy construction
-     Vector<double> s_bulk(local_coordinate_in_bulk(s));
-     
-     //Call the derivatives of the shape  functions
-     //in the bulk -- must do this via s because this point
-     //is not an integration point the bulk element!
-     (void)bulk_elem_pt->dshape_eulerian(s_bulk,psi_bulk,dpsi_bulk_dx);
-     this->shape(s,psi);
-     
-     // Derivs of Eulerian coordinates w.r.t. local coordinates
-     std::complex<double>  dphi_dn(0.0,0.0);
-     Vector<std::complex <double> > interpolated_dphidx(bulk_dim);
-     std::complex<double> interpolated_phi(0.0,0.0);
-     Vector<double> x(bulk_dim);
-
-     //Calculate function value and derivatives:
-     //-----------------------------------------
-     // Loop over nodes
-     for(unsigned l=0;l<nnode_bulk;l++) 
-      {
-       //Get the nodal value of the helmholtz unknown
-       const std::complex<double> phi_value(
-        bulk_elem_pt->nodal_value(l,bulk_elem_pt->u_index_helmholtz().real()),
-        bulk_elem_pt->nodal_value(l,bulk_elem_pt->u_index_helmholtz().imag()));
-              
-       //Loop over directions
-       for(unsigned i=0;i<bulk_dim;i++)
-        {
-         interpolated_dphidx[i] += phi_value*dpsi_bulk_dx(l,i);
-        }
-      } // End of loop over the bulk_nodes
-     
-     for(unsigned l=0;l<n_node_local;l++) 
-      {
-       //Get the nodal value of the helmholtz unknown
-       const std::complex<double> phi_value(
-        nodal_value(l,u_index_helmholtz().real()),
-        nodal_value(l,u_index_helmholtz().imag()));
-       
-       interpolated_phi += phi_value*psi(l);
-      }
-     
-     //define dphi_dn 
-     for(unsigned i=0;i<bulk_dim;i++)
-      {
-       dphi_dn += interpolated_dphidx[i]*unit_normal[i];
-      }
-
-     // Power density
-     double integrand=0.5*
-      (interpolated_phi.real()*dphi_dn.imag()-
-       interpolated_phi.imag()*dphi_dn.real());
-     
-     // Output?
-     if (outfile.is_open())
-      {
-       interpolated_x(s,x);
-       double phi=atan2(x[1],x[0]);
-       outfile << x[0] << " "
-               << x[1] << " "
-               << phi << " "
-               << integrand << "\n";
-      }
-
-     // ...add to integral
-     power+=integrand*W;
-    }  
-   
-   return  power;
-  }
-
-
-
-  /// \short Compute element's contribution to Fourier components of the
-  /// solution -- length of vector indicates number of terms to be computed. 
-  void compute_contribution_to_fourier_components(
-   Vector<std::complex<double> >& a_coeff_pos,
-   Vector<std::complex<double> >& a_coeff_neg)
-  {
-
+      int n_actual = 0;
+      Vector<double> jn(n + 1), yn(n + 1), jnp(n + 1), ynp(n + 1);
+      CRBond_Bessel::bessjyna(
+        int(n), x, n_actual, &jn[0], &yn[0], &jnp[0], &ynp[0]);
 #ifdef PARANOID
-   if (a_coeff_pos.size()!=a_coeff_neg.size())
-   {
-    std::ostringstream error_stream; 
-    error_stream << "a_coeff_pos and a_coeff_neg must have "
-                 << "the same size. \n";
-    throw OomphLibError(
-     error_stream.str(),
-     OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-   // define the imaginary number
-   const std::complex<double> I(0.0,1.0);
-     
-   //Find out how many nodes there are
-   const unsigned n_node = this->nnode();
-   
-   //Set up memory for the shape  functions
-   Shape psi(n_node); 
-   DShape dpsi(n_node,1);
-   
-   //Set the value of n_intpt
-   const unsigned n_intpt=this->integral_pt()->nweight();
-   
-   //Set the Vector to hold local coordinates
-   Vector<double> s(this->Dim-1);
-   
-   // Initialise
-   unsigned n=a_coeff_pos.size();
-   for (unsigned i=0;i<n;i++)
-    {
-     a_coeff_pos[i]=std::complex<double>(0.0,0.0);
-     a_coeff_neg[i]=std::complex<double>(0.0,0.0);
-    }
-   
-   //Loop over the integration points
-   //--------------------------------
-  for(unsigned ipt=0;ipt<n_intpt;ipt++)
-   {
-    //Assign values of s
-    for(unsigned i=0;i<(this->Dim-1);i++) 
-     {
-      s[i]=this->integral_pt()->knot(ipt,i);
-     }
-    
-    //Get the integral weight
-    double w=this->integral_pt()->weight(ipt);
-    
-    // Get the shape functions
-    this->dshape_local(s,psi,dpsi);
-    
-    // Eulerian coordinates at Gauss point
-    Vector<double> interpolated_x(this->Dim,0.0);
-    
-    // Derivs of Eulerian coordinates w.r.t. local coordinates
-    Vector<double> interpolated_dxds(this->Dim);
-    std::complex<double> interpolated_u(0.0,0.0);
-    
-    // Assemble x and its derivs
-    for(unsigned l=0;l<n_node;l++) 
-     {
-      //Loop over directions
-      for(unsigned i=0;i<this->Dim;i++)
-       {
-        interpolated_x[i]+=this->nodal_position(l,i)*psi[l];
-        interpolated_dxds[i]+=this->nodal_position(l,i)*dpsi(l,0);
-       }
-      
-      //Get the nodal value of the helmholtz unknown
-      const std::complex<double> u_value(
-       this->nodal_value(l,this->U_index_helmholtz.real()),
-       this->nodal_value(l,this->U_index_helmholtz.imag()));
-
-      //Add to the interpolated value
-      interpolated_u += u_value*psi(l);         
-     } // End of loop over the nodes
-    
-    // calculate the integral
-    //-----------------------
-
-    // Get polar angle
-    double phi=atan2(interpolated_x[1],interpolated_x[0]);
-
-    //define dphi_ds=(-yx'+y'x)/(x^2+y^2)
-    double denom =(interpolated_x[0]*interpolated_x[0])+
-     (interpolated_x[1]*interpolated_x[1]);
-    double nom =-interpolated_dxds[1]*interpolated_x[0]+
-     interpolated_dxds[0]*interpolated_x[1];
-    double dphi_ds=std::fabs(nom/denom);
-    
-    // Positive coefficients 
-    for (unsigned i=0;i<n;i++)
-     {
-      a_coeff_pos[i]+=interpolated_u*exp(-I*phi*double(i))*dphi_ds*w;
-     }
-    // Negative coefficients 
-    for (unsigned i=1;i<n;i++)
-     {
-      a_coeff_neg[i]+=interpolated_u*exp(I*phi*double(i))*dphi_ds*w;
-     }
-    
-   }//End of loop over integration points    
-  
-  }
-  
-
-
-  
-   protected:
-  
-  /// \short Function to compute the shape and test functions and to return 
-  /// the Jacobian of mapping between local and global (Eulerian)
-  /// coordinates
-  inline double test_only(const Vector<double> &s, Shape &test) const
-  {
-   //Get the shape functions
-   shape(s,test);
-   
-   //Return the value of the jacobian
-   return J_eulerian(s);
-  }
-
- /// \short Function to compute the shape, test functions and derivates 
- /// and to return
- /// the Jacobian of mapping between local and global (Eulerian)
- /// coordinates
- inline double d_shape_and_test_local(const Vector<double> &s, Shape &psi, 
-                                      Shape &test,
-                                      DShape &dpsi_ds,DShape &dtest_ds)
-  const
-  {
-   //Find number of nodes
-   unsigned n_node = nnode();
-   
-   //Get the shape functions
-   dshape_local(s,psi,dpsi_ds);
-
-   //Set the test functions to be the same as the shape functions
-   for(unsigned i=0;i<n_node;i++) 
-    {
-     for(unsigned j=0;j<(Dim-1);j++) 
-      {      
-       test[i] = psi[i];
-       dtest_ds(i,j)= dpsi_ds(i,j);
-      }
-    }
-   //Return the value of the jacobian
-   return J_eulerian(s);
-  }
- 
- /// \short The index at which the real and imag part of the unknown is stored 
- /// at the nodes
- std::complex<unsigned> U_index_helmholtz;
- 
- ///The spatial dimension of the problem
- unsigned Dim;
-  
- 
- }; 
-
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-
-
-///=================================================================
-/// Mesh for DtN boundary condition elements -- provides
-/// functionality to apply Sommerfeld radiation condtion
-/// via DtN BC
-///=================================================================
-template<class ELEMENT>
- class HelmholtzDtNMesh : public virtual Mesh
-{
-  public:
- 
- /// Constructor: Specify radius of outer boundary and number of
- /// Fourier terms used in the computation of the gamma integral
-  HelmholtzDtNMesh(const double& outer_radius, 
-                   const unsigned& nfourier_terms) : 
- Outer_radius(outer_radius), Nfourier_terms(nfourier_terms)
- {}
- 
- /// \short Compute and store the gamma integral at all integration
- /// points of the constituent elements.
- void setup_gamma();
-
- /// \short Compute Fourier components of the solution -- length of
- /// vector indicates number of terms to be computed. 
- void compute_fourier_components(Vector<std::complex<double> >& a_coeff_pos,
-                                 Vector<std::complex<double> >& a_coeff_neg);
- 
- /// \short Gamma integral evaluated at Gauss points 
- /// for specified element
- Vector<std::complex<double> >& gamma_at_gauss_point(FiniteElement* el_pt) 
-  {                                          
-   return Gamma_at_gauss_point[el_pt];
-  }
- 
- /// \short Derivative of Gamma integral w.r.t global unknown, evaluated 
- /// at Gauss points for specified element
- Vector<std::map<unsigned,std::complex<double> > >
-  &d_gamma_at_gauss_point(FiniteElement* el_pt) 
-  {                                          
-   return D_Gamma_at_gauss_point[el_pt];
-  }
- 
- /// \short The outer radius  
- double &outer_radius() 
- {                                          
-  return Outer_radius ;
- }
- 
- /// \short Number of Fourier terms used in the computation of the
- /// gamma integral
- unsigned& nfourier_terms() 
- {                                          
-  return Nfourier_terms;
- }
- 
-  private:
- 
- /// Outer radius
-  double Outer_radius;
-  
-/// Nbr of Fourier terms used in the  Gamma computation
-  unsigned Nfourier_terms;
-  
-  
-  /// \short Container to store the gamma integral for given Gauss point
-  /// and element
-  std::map<FiniteElement*,Vector<std::complex<double> > > Gamma_at_gauss_point;
-  
-  
-  /// \short Container to store the derivate of Gamma integral w.r.t 
-  /// global unknown evaluated at Gauss points for specified element
-  std::map<FiniteElement*,Vector<std::map<unsigned,std::complex<double> > > > 
-   D_Gamma_at_gauss_point;
-  
-};
-
-
-
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-
-
-//=============================================================
-/// Absorbing BC element for approximation imposition of 
-/// Sommerfeld radiation condition
-//==============================================================  
-template<class ELEMENT>
-class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
-{
- 
-  public:
-
-
- /// \short Construct element from specification of bulk element and
- /// face index.
- HelmholtzAbsorbingBCElement (FiniteElement* const &bulk_el_pt, 
-                              const int& face_index) : 
- HelmholtzBCElementBase<ELEMENT>(bulk_el_pt,face_index)
-  {
-   // Initialise pointers
-   Outer_radius_pt=0;
-   
-   // Initialise order of absorbing boundary condition
-   ABC_order_pt=0;
-  }
- 
-  /// Pointer to order of absorbing boundary condition
- unsigned*& abc_order_pt()
- {
-  return ABC_order_pt;
- }
- 
- 
- /// Add the element's contribution to its residual vector
- inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
- {
-  //Call the generic residuals function with flag set to 0
-  //using a dummy matrix argument
-  fill_in_generic_residual_contribution_helmholtz_abc(
-   residuals,GeneralisedElement::Dummy_matrix,0);
- }
- 
- /// \short Add the element's contribution to its residual vector and its 
- /// Jacobian matrix
- inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                              DenseMatrix<double> &jacobian)
- {
-  //Call the generic routine with the flag set to 1
-  fill_in_generic_residual_contribution_helmholtz_abc(residuals,jacobian,1);
- }
- 
- 
- /// Get pointer to radius of outer boundary (must be a cirle)
- double*& outer_radius_pt()
- { 
-  return Outer_radius_pt;
- }
- 
-  private:
- 
- /// \short Compute the element's residual vector and the (
- /// Jacobian matrix.
- /// Overloaded version, using the abc approximation
- void fill_in_generic_residual_contribution_helmholtz_abc(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  const unsigned& flag)
- {
-
-#ifdef PARANOID
-
-  if (ABC_order_pt==0)
-   {
-    throw OomphLibError(
-     "Order of ABC hasn't been set!",
-     OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
-   }
-  
-  if (this->Outer_radius_pt==0)
-   {
-    throw OomphLibError(
-     "Pointer to outer radius hasn't been set!",
-     OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
-   }
-  
-#endif
-
-  //Find out how many nodes there are
-  const unsigned n_node = this->nnode();
-  
-  //Set up memory for the shape and test functions
-  Shape psi(n_node), test(n_node);
-  DShape dpsi_ds (n_node,this->Dim-1),
-   dtest_ds(n_node,this->Dim-1),
-   dtest_dS(n_node,this->Dim-1),
-   dpsi_dS (n_node,this->Dim-1);
-  
-  //Set the value of Nintpt
-  const unsigned n_intpt = this->integral_pt()->nweight();
-  
-  //Set the Vector to hold local coordinates
-  Vector<double> s(this->Dim-1);
-  
-  //Integers to hold the local equation and unknown numbers
-  int local_eqn_real=0,local_unknown_real=0;
-  int local_eqn_imag=0,local_unknown_imag=0;   
-  
-  // Define the problem parameters
-  double R=*Outer_radius_pt;
-  double k=sqrt(dynamic_cast<ELEMENT*>(this->bulk_element_pt())->k_squared());  
-  
-  //Loop over the integration points
-  //--------------------------------
-  for(unsigned ipt=0;ipt<n_intpt;ipt++)
-   {
-    //Assign values of s
-    for(unsigned i=0;i<(this->Dim-1);i++)
-     {
-      s[i] = this->integral_pt()->knot(ipt,i);
-     }
-    
-    //Get the integral weight
-    double w = this->integral_pt()->weight(ipt);
-    
-    //Find the shape test functions and derivates; return the Jacobian
-    //of the mapping between local and global (Eulerian)
-    // coordinates
-    double J = this->d_shape_and_test_local(s,psi,test,dpsi_ds,dtest_ds);
-    
-    //Premultiply the weights and the Jacobian
-    double W = w*J;
-    // get the inverse of jacibian
-    double inv_J=1/J;     
-    
-    //Need to find position to feed into flux function, 
-    //initialise to zero
-    std::complex<double> interpolated_u(0.0,0.0);
-    std::complex<double> du_dS(0.0,0.0);
-    
-    //Calculate velocities and derivatives:loop over the nodes
-    for(unsigned l=0;l<n_node;l++) 
-     {    
-      // Loop over real and imag part
-      //Get the nodal value of the helmholtz unknown
-      const std::complex<double> u_value(
-       this->nodal_value(l,this->U_index_helmholtz.real()),
-       this->nodal_value(l,this->U_index_helmholtz.imag()));
-
-      interpolated_u += u_value*psi[l];
-
-      du_dS += u_value*dpsi_ds(l,0)*inv_J;
-      
-      // Get the value of dtest_dS
-      dtest_dS(l,0)=dtest_ds(l,0)*inv_J;
-      // Get the value of dpsif_dS
-      dpsi_dS(l,0)=dpsi_ds(l,0)*inv_J;
-     }
-    
-    // use ABC first order approximation
-    if (*ABC_order_pt==1)
-     {
-      //Now add to the appropriate equations:use second order approximation
-      //Loop over the test functions
-      for(unsigned l=0;l<n_node;l++)
-       {
-        local_eqn_real = this->nodal_local_eqn
-         (l,this->U_index_helmholtz.real());
-        local_eqn_imag = this->nodal_local_eqn
-         (l,this->U_index_helmholtz.imag());
-        
-        // first, calculate the real part contrubution 
-        //-----------------------    
-        //IF it's not a boundary condition
-        if(local_eqn_real >= 0)
-         {
-          //Add the second order terms:compute manually real and imag part
-          
-          residuals[local_eqn_real] +=
-           (k*interpolated_u.imag()+(0.5/R)
-            *interpolated_u.real())*test[l]*W;
-     
-          // Calculate the jacobian
-          //-----------------------
-          if(flag)
-           {
-            //Loop over the shape functions again
-            for(unsigned l2=0;l2<n_node;l2++)
-             {     
-              local_unknown_real = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.real());
-              local_unknown_imag = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.imag());
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_real >= 0)
-               {
-                jacobian(local_eqn_real,local_unknown_real)
-                 +=(0.5/R)*psi[l2]*test[l]*W;  
-               }
-              
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_imag >= 0)
-               {
-                jacobian(local_eqn_real,local_unknown_imag)
-                 +=           k   *psi[l2]*test[l]*W;
-           
-               }  
-             }
-           }
-         }// end of local_eqn_real
-        
-        // second, calculate the imag part contrubution 
-        //-----------------------  
-        //IF it's not a boundary condition
-        if(local_eqn_imag >= 0)
-         {
-          //Add the second order terms contibution to the residual
-          residuals[local_eqn_imag] +=
-           (-k*interpolated_u.real()+(0.5/R)
-            *interpolated_u.imag())*test[l]*W;
-         
-       
-          // Calculate the jacobian
-          //-----------------------
-          if(flag)
-           {
-            //Loop over the shape functions again
-            for(unsigned l2=0;l2<n_node;l2++)
-             {     
-              local_unknown_real = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.real());
-              local_unknown_imag = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.imag());
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_real >= 0)
-               {
-                jacobian(local_eqn_imag,local_unknown_real)
-                 +=    (-k)     *psi[l2]*test[l]*W;
-               }     
-              
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_imag >= 0)
-               {
-                jacobian(local_eqn_imag,local_unknown_imag)
-                 +=(0.5/R)*psi[l2]*test[l]*W; 
-               }   
-             }
-           }
-         }
-       }// End of loop over the nodes   
-     }
-    
-    //:use second order approximation
-    if(*ABC_order_pt==2) 
-     {
-      //Now add to the appropriate equations:use second order approximation
-      //Loop over the test functions
-      for(unsigned l=0;l<n_node;l++)
-       {
-        local_eqn_real = this->nodal_local_eqn
-         (l,this->U_index_helmholtz.real());
-        local_eqn_imag = this->nodal_local_eqn
-         (l,this->U_index_helmholtz.imag());
-         
-        // first, calculate the real part contrubution 
-        //-----------------------    
-        //IF it's not a boundary condition
-        if(local_eqn_real >= 0)
-         {
-          //Add the second order terms:compute manually real and imag part
-           
-          residuals[local_eqn_real] +=
-           (k*interpolated_u.imag()+(0.5/R)
-            *interpolated_u.real())*test[l]*W
-           + ((0.125/(k*R*R))*interpolated_u.imag())*test[l]*W;
-           
-          residuals[local_eqn_real] +=
-           (-0.5/k)*du_dS.imag()*dtest_dS(l,0)*W;
-           
-          // Calculate the jacobian
-          //-----------------------
-          if(flag)
-           {
-            //Loop over the shape functions again
-            for(unsigned l2=0;l2<n_node;l2++)
-             {     
-              local_unknown_real = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.real());
-              local_unknown_imag = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.imag());
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_real >= 0)
-               {
-                jacobian(local_eqn_real,local_unknown_real)
-                 +=(0.5/R)*psi[l2]*test[l]*W;  
-               }
-               
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_imag >= 0)
-               {
-                jacobian(local_eqn_real,local_unknown_imag)
-                 +=           k   *psi[l2]*test[l]*W
-                 +  (0.125/(k*R*R))*psi[l2]*test[l]*W;
-                 
-                jacobian(local_eqn_real,local_unknown_imag)
-                 +=(-0.5/k)*dpsi_dS(l2,0)*dtest_dS(l,0)*W; 
-               }  
-             }
-           }
-         }// end of local_eqn_real
-         
-        // second, calculate the imag part contrubution 
-        //-----------------------  
-        //IF it's not a boundary condition
-        if(local_eqn_imag >= 0)
-         {
-          //Add the second order terms contibution to the residual
-          residuals[local_eqn_imag] +=
-           (-k*interpolated_u.real()+(0.5/R)
-            *interpolated_u.imag())*test[l]*W
-           + ((-0.125/(k*R*R))*interpolated_u.real())*test[l]*W;
-           
-          residuals[local_eqn_imag] +=
-           (0.5/k)*du_dS.real()*dtest_dS(l,0)*W;
-           
-          // Calculate the jacobian
-          //-----------------------
-          if(flag)
-           {
-            //Loop over the shape functions again
-            for(unsigned l2=0;l2<n_node;l2++)
-             {     
-              local_unknown_real = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.real());
-              local_unknown_imag = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.imag());
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_real >= 0)
-               {
-                jacobian(local_eqn_imag,local_unknown_real)
-                 +=    (-k)     *psi[l2]*test[l]*W
-                 -(0.125/(k*R*R))*psi[l2]*test[l]*W;
-                 
-                jacobian(local_eqn_imag,local_unknown_real)
-                 +=(0.5/k)*dpsi_dS(l2,0)*dtest_dS(l,0)*W;
-               }     
-               
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_imag >= 0)
-               {
-                jacobian(local_eqn_imag,local_unknown_imag)
-                 +=(0.5/R)*psi[l2]*test[l]*W; 
-               }   
-             }
-           }
-         }
-       }// End of loop over the nodes   
-     } 
-     
-    if(*ABC_order_pt==3)
-     {
-      //Now add to the appropriate equations:use second order approximation
-      //Loop over the test functions
-      for(unsigned l=0;l<n_node;l++)
-       {
-        local_eqn_real = this->nodal_local_eqn
-         (l,this->U_index_helmholtz.real());
-        local_eqn_imag = this->nodal_local_eqn
-         (l,this->U_index_helmholtz.imag());
-         
-        // first, calculate the real part contrubution 
-        //-----------------------    
-        //IF it's not a boundary condition
-        if(local_eqn_real >= 0)
-         {
-          //Add the second order terms:compute manually real and imag part
-          residuals[local_eqn_real] +=
-           ((k*(1+0.125/(k*k*R*R)))*interpolated_u.imag()
-            +(0.5/R-0.125/(k*k*R*R*R))*interpolated_u.real())
-           *test[l]*W;
-           
-          residuals[local_eqn_real] +=
-           ((-0.5/k)*du_dS.imag()+(0.5/(k*k*R))*du_dS.real()) 
-           *dtest_dS(l,0)*W;
-           
-          // Calculate the jacobian
-          //-----------------------
-          if(flag)
-           {
-            //Loop over the shape functions again
-            for(unsigned l2=0;l2<n_node;l2++)
-             {     
-              local_unknown_real = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.real());
-              local_unknown_imag = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.imag());
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_real >= 0)
-               {
-                jacobian(local_eqn_real,local_unknown_real)
-                 +=(0.5/R-0.125/(k*k*R*R*R))*psi[l2]*test[l]*W;
-                 
-                jacobian(local_eqn_real,local_unknown_real)
-                 +=(0.5/(k*k*R))*dpsi_dS(l2,0)*dtest_dS(l,0)*W; 
-               }
-               
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_imag >= 0)
-               {
-                jacobian(local_eqn_real,local_unknown_imag)
-                 +=(k*(1+0.125/(k*k*R*R)))*psi[l2]*test[l]*W;
-                 
-                jacobian(local_eqn_real,local_unknown_imag)
-                 +=(-0.5/k)*dpsi_dS(l2,0)*dtest_dS(l,0)*W;
-               }  
-             }
-           }
-         }// end of local_eqn_real
-         
-        // second, calculate the imag part contrubution 
-        //-----------------------  
-        //IF it's not a boundary condition
-        if(local_eqn_imag >= 0)
-         {
-          //Add the second order terms contibution to the residual
-          residuals[local_eqn_imag] +=
-           ((-k*(1+0.125/(k*k*R*R)))*interpolated_u.real()
-            +(0.5/R-0.125/(k*k*R*R*R))*interpolated_u.imag())
-           *test[l]*W;
-           
-          residuals[local_eqn_imag] +=
-           ((0.5/k)*du_dS.real()+(0.5/(k*k*R))*du_dS.imag())
-           *dtest_dS(l,0)*W;
-           
-          // Calculate the jacobian
-          //-----------------------
-          if(flag)
-           {
-            //Loop over the shape functions again
-            for(unsigned l2=0;l2<n_node;l2++)
-             {     
-              local_unknown_real = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.real());
-              local_unknown_imag = this->nodal_local_eqn(
-               l2,this->U_index_helmholtz.imag());
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_real >= 0)
-               {
-                jacobian(local_eqn_imag,local_unknown_real)
-                 +=(-k*(1+0.125/(k*k*R*R)))*psi[l2]*test[l]*W;
-                 
-                jacobian(local_eqn_imag,local_unknown_real)
-                 +=(0.5/k)*dpsi_dS(l2,0)*dtest_dS(l,0)*W;
-               }
-              //If at a non-zero degree of freedom add in the entry
-              if(local_unknown_imag >= 0)
-               {
-                jacobian(local_eqn_imag,local_unknown_imag)
-                 +=(0.5/R-0.125/(k*k*R*R*R))*psi[l2]*test[l]*W;
-                 
-                jacobian(local_eqn_imag,local_unknown_imag)
-                 +=(0.5/(k*k*R))*dpsi_dS(l2,0)*dtest_dS(l,0)*W;
-               }   
-             }
-           }
-         }
-       }// End of loop over the nodes   
-     }
-   } //End of loop over int_pt
-   
- } // End of fill_in_generic_residual_contribution_helmholtz_flux
-  
-  private:
-  
- /// Pointer to radius of outer boundary (must be a circle!)
- double* Outer_radius_pt;
-   
- /// Pointer to order of absorbing boundary condition
- unsigned* ABC_order_pt;
-  
-};
-
-//=============================================================
-/// FaceElement used to apply Sommerfeld radiation conditon
-/// via Dirichlet to Neumann map. 
-//==============================================================  
-template<class ELEMENT>
-class HelmholtzDtNBoundaryElement : public  HelmholtzBCElementBase<ELEMENT>
-{
- 
-  public:
- 
-  /// \short Construct element from specification of bulk element and
-  /// face index.
-  HelmholtzDtNBoundaryElement(FiniteElement* const &bulk_el_pt, 
-                              const int& face_index) : 
- HelmholtzBCElementBase<ELEMENT>(bulk_el_pt,face_index)
-  {}
- 
- /// Add the element's contribution to its residual vector
- inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
- {
-  //Call the generic residuals function with flag set to 0
-  //using a dummy matrix argument
-  fill_in_generic_residual_contribution_helmholtz_DtN_bc
-   (residuals,GeneralisedElement::Dummy_matrix,0);
- }
- 
- /// \short Add the element's contribution to its residual vector and its 
- /// Jacobian matrix
- inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                              DenseMatrix<double> &jacobian)
- {
-  //Call the generic routine with the flag set to 1
-  fill_in_generic_residual_contribution_helmholtz_DtN_bc
-   (residuals,jacobian,1);
- }
- 
- /// \short Compute the contribution of the element 
- /// to the Gamma integral and its derivates w.r.t 
- /// to global unknows; the function takes the wavenumber and the polar 
- /// angle phi as input  
- void compute_gamma_contribution(const double& phi,const int& n, 
-                                 std::complex<double>& gamma_con,
-                                 std::map<unsigned,std::complex<double> >& 
-                                 d_gamma_con);
- 
-
- /// \short Access function to mesh of all DtN boundary condition elements
- /// (needed to get access to gamma values)
- HelmholtzDtNMesh<ELEMENT>* outer_boundary_mesh_pt() const
-  {
-   return Outer_boundary_mesh_pt;
-  }
- 
- /// \short Set mesh of all DtN boundary condition elements
- void set_outer_boundary_mesh_pt
-  (HelmholtzDtNMesh<ELEMENT>* mesh_pt)
- {
-  Outer_boundary_mesh_pt=mesh_pt;
- }
- 
-
- /// \short Complete the setup of additional dependencies arising
- /// through the far-away interaction with other nodes in 
- /// Outer_boundary_mesh_pt.
- void complete_setup_of_dependencies()
- {
-  // Create a set of all nodes
-  std::set<Node*> node_set;
-  unsigned nel=Outer_boundary_mesh_pt->nelement();
-  for (unsigned e=0;e<nel;e++)
-   {
-    FiniteElement* el_pt=Outer_boundary_mesh_pt->finite_element_pt(e);
-    unsigned nnod=el_pt->nnode();
-    for (unsigned j=0;j<nnod;j++)
-     {
-      Node* nod_pt=el_pt->node_pt(j);
-      
-      // Don't add copied nodes
-      if (!(nod_pt->is_a_copy()))
-       {
-        node_set.insert(nod_pt);
-       }
-     }
-   }
-  // Now erase the current element's own nodes
-  unsigned nnod=this->nnode();
-  for (unsigned j=0;j<nnod;j++)
-   {
-    Node* nod_pt=this->node_pt(j);
-    node_set.erase(nod_pt);
-    
-    // If the element's node is a copy then its "master" will 
-    // already have been added in the set above -- remove the
-    // master to avoid double counting eqn numbers
-    if (nod_pt->is_a_copy())
-     {
-      node_set.erase(nod_pt->copied_node_pt());     
-     }
-   }
-  
-  // Now declare these nodes to be the element's external Data
-  for (std::set<Node*>::iterator it=node_set.begin();
-       it!=node_set.end();it++)
-   {
-    this->add_external_data(*it);
-   }
- }
-
- 
-  private:
- 
-  /// \short Compute the element's residual vector  
-  /// Jacobian matrix.
-  /// Overloaded version, using the gamma computed in the mesh
-  void fill_in_generic_residual_contribution_helmholtz_DtN_bc
-   (Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-    const unsigned& flag)
-  {
-   //Find out how many nodes there are
-   const unsigned n_node = this->nnode();
-   
-   //Set up memory for the shape and test functions
-   Shape test(n_node);
-   
-   //Set the value of Nintpt
-   const unsigned n_intpt = this->integral_pt()->nweight();
-   
-   //Set the Vector to hold local coordinates
-   Vector<double> s(this->Dim-1);
-   
-   //Integers to hold the local equation and unknown numbers
-   int local_eqn_real=0,local_unknown_real=0,global_eqn_real=0,
-    local_eqn_imag=0,local_unknown_imag=0,global_eqn_imag=0;
-   int external_global_eqn_real=0, external_unknown_real=0,
-    external_global_eqn_imag=0, external_unknown_imag=0;
-   
-   
-   // Get the gamma value for the current integration point
-   // from the mesh
-   Vector<std::complex<double> > 
-    gamma(Outer_boundary_mesh_pt->gamma_at_gauss_point(this));
-   
-   Vector<std::map<unsigned,std::complex<double> > >
-    d_gamma(Outer_boundary_mesh_pt->d_gamma_at_gauss_point(this));
-   
-   //Loop over the integration points
-   //--------------------------------
-   for(unsigned ipt=0;ipt<n_intpt;ipt++)
-    {
-     //Assign values of s
-     for(unsigned i=0;i<(this->Dim-1);i++)
+      if (n_actual != int(n))
       {
-       s[i] = this->integral_pt()->knot(ipt,i);
-      }
-     
-     //Get the integral weight
-     double w = this->integral_pt()->weight(ipt);
-     
-     //Find the shape test functions and derivates; return the Jacobian
-     //of the mapping between local and global (Eulerian)
-     // coordinates
-     double J = this->test_only(s,test);
-     
-     //Premultiply the weights and the Jacobian
-     double W = w*J;
-     
-     //Now add to the appropriate equations
-     //Loop over the test functions:loop over the nodes
-     for(unsigned l=0;l<n_node;l++)
-      {
-       local_eqn_real = this->nodal_local_eqn
-        (l,this->U_index_helmholtz.real());
-       local_eqn_imag = this->nodal_local_eqn
-        (l,this->U_index_helmholtz.imag());
-       
-       //IF it's not a boundary condition
-       if(local_eqn_real >= 0)
-        {
-         //Add the gamma contribution in this int_point to the res
-         residuals[local_eqn_real] -=gamma[ipt].real()*test[l]*W;
-         
-         // Calculate the jacobian
-         //-----------------------
-         if(flag)
-          {
-           //Loop over the shape functions again
-           for(unsigned l2=0;l2<n_node;l2++)
-            { 
-             // Add the contribution of the local data
-             local_unknown_real = this->nodal_local_eqn(
-              l2,this->U_index_helmholtz.real());
-             
-             local_unknown_imag = this->nodal_local_eqn(
-              l2,this->U_index_helmholtz.imag());
-             
-             //If at a non-zero degree of freedom add in the entry
-             if(local_unknown_real >= 0)
-              {
-               global_eqn_real=this->eqn_number(local_unknown_real);
-
-               // Add the first order terms contribution
-               jacobian(local_eqn_real,local_unknown_real)
-                -=d_gamma[ipt][global_eqn_real].real()*test[l]*W; 
-              }
-             if(local_unknown_imag >= 0)
-              {
-               global_eqn_imag=this->eqn_number(local_unknown_imag);
-
-               // Add the first order terms contribution
-               jacobian(local_eqn_real,local_unknown_imag)
-                -=d_gamma[ipt][global_eqn_imag].real()*test[l]*W; 
-              }
-            } // End of loop over nodes l2  
-           
-           // Add the contribution of the external data
-           unsigned n_ext_data=this->nexternal_data();
-           //Loop over the shape functions again
-           for(unsigned l2=0;l2<n_ext_data;l2++)
-            { 
-             // Add the contribution of the local data
-             external_unknown_real = this->external_local_eqn(
-              l2,this->U_index_helmholtz.real());
-             
-             external_unknown_imag = this->external_local_eqn(
-              l2,this->U_index_helmholtz.imag());
-             
-             //If at a non-zero degree of freedom add in the entry
-             if(external_unknown_real >= 0)
-              {
-               external_global_eqn_real=this->eqn_number(external_unknown_real);
-
-               // Add the first order terms contribution
-               jacobian(local_eqn_real,external_unknown_real)
-                -=d_gamma[ipt][external_global_eqn_real].real()*test[l]*W;
-              }
-             if(external_unknown_imag >= 0)
-              {
-               external_global_eqn_imag=this->eqn_number(external_unknown_imag);
-
-               // Add the first order terms contribution
-               jacobian(local_eqn_real,external_unknown_imag)
-                -=d_gamma[ipt][external_global_eqn_imag].real()*test[l]*W;
-              }
-            } // End of loop over external data    
-          }// End of flag
-        }// end of local_eqn_real
-       
-       if(local_eqn_imag >= 0)
-        {
-         //Add the gamma contribution in this int_point to the res
-         residuals[local_eqn_imag] -=gamma[ipt].imag()*test[l]*W;
-         
-         // Calculate the jacobian
-         //-----------------------
-         if(flag)
-          {
-           //Loop over the shape functions again
-           for(unsigned l2=0;l2<n_node;l2++)
-            { 
-             // Add the contribution of the local data
-             local_unknown_real = this->nodal_local_eqn(
-              l2,this->U_index_helmholtz.real());
-             
-             local_unknown_imag = this->nodal_local_eqn(
-              l2,this->U_index_helmholtz.imag());
-
-             //If at a non-zero degree of freedom add in the entry
-             if(local_unknown_real >= 0)
-              {
-               global_eqn_real=this->eqn_number(local_unknown_real);
-
-               // Add the first order terms contribution
-               jacobian(local_eqn_imag,local_unknown_real)
-                -=d_gamma[ipt][global_eqn_real].imag()*test[l]*W;
-              }
-             if(local_unknown_imag >= 0)
-              {
-               global_eqn_imag=this->eqn_number(local_unknown_imag);
-
-               // Add the first order terms contribution
-               jacobian(local_eqn_imag,local_unknown_imag)
-                -=d_gamma[ipt][global_eqn_imag].imag()*test[l]*W; 
-              }
-            } // End of loop over nodes l2  
-           
-           // Add the contribution of the external data
-           unsigned n_ext_data=this->nexternal_data();
-           //Loop over the shape functions again
-           for(unsigned l2=0;l2<n_ext_data;l2++)
-            { 
-             // Add the contribution of the local data
-             external_unknown_real = this->external_local_eqn(
-              l2,this->U_index_helmholtz.real());
-             
-             external_unknown_imag = this->external_local_eqn(
-              l2,this->U_index_helmholtz.imag());
-             
-             //If at a non-zero degree of freedom add in the entry
-             if(external_unknown_real >= 0)
-              {
-               external_global_eqn_real=this->eqn_number(external_unknown_real);
-
-               // Add the first order terms contribution
-               jacobian(local_eqn_imag,external_unknown_real)
-                -=d_gamma[ipt][external_global_eqn_real].imag()*test[l]*W;
-              }
-             if(external_unknown_imag >= 0)
-              {
-               external_global_eqn_imag=this->eqn_number(external_unknown_imag);
-
-               // Add the first order terms contribution
-               jacobian(local_eqn_imag,external_unknown_imag)
-                -=d_gamma[ipt][external_global_eqn_imag].imag()*test[l]*W;
-              }
-            } // End of loop over external data    
-          }// End of flag
-        } // end of local_eqn_imag   
-      }// end of llop over yhe node
-    } //End of loop over int_pt
-  } // End of fill_in_generic_residual_contribution_helmholtz_flux
-  
-   
-  /// \short Pointer to mesh of all DtN boundary condition elements
-  /// (needed to get access to gamma values)
-  HelmholtzDtNMesh<ELEMENT>* Outer_boundary_mesh_pt;
-  
-};
-
-
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-
-
-
-//===========start_compute_gamma_contribution==================
-/// \short compute the contribution of the element 
-/// to the Gamma integral and its derivates w.r.t 
-/// to global unknows; the function takes wavenumber n 
-/// and polar angle phi as input.  
-//==============================================================  
-template<class ELEMENT>
- void HelmholtzDtNBoundaryElement<ELEMENT>::
- compute_gamma_contribution(
-  const double& phi,
-  const int& n, 
-  std::complex<double>& gamma_con,
-  std::map<unsigned,std::complex<double> >& d_gamma_con)
- {  
-  // define the imaginary number
-  const std::complex<double> I(0.0,1.0);
-
-  //Find out how many nodes there are
-  const unsigned n_node = this->nnode();
-  
-  //Set up memory for the shape  functions
-  Shape psi(n_node); 
-  DShape dpsi(n_node,1);
-  
-  // initialise the variable
-  int local_unknown_real=0, local_unknown_imag=0;
-  int global_unknown_real=0,global_unknown_imag=0;
-  
-  //Set the value of n_intpt
-  const unsigned n_intpt=this->integral_pt()->nweight();
-  
- //Set the Vector to hold local coordinates
-  Vector<double> s(this->Dim-1);
-  
-  // Initialise
-  gamma_con=std::complex<double>(0.0,0.0);
-  d_gamma_con.clear();
-  
-  //Loop over the integration points
-  //--------------------------------
-  for(unsigned ipt=0;ipt<n_intpt;ipt++)
-   {
-   //Assign values of s
-    for(unsigned i=0;i<(this->Dim-1);i++) 
-     {
-      s[i]=this->integral_pt()->knot(ipt,i);
-     }
-    
-    //Get the integral weight
-    double w=this->integral_pt()->weight(ipt);
-    
-    // Get the shape functions
-    this->dshape_local(s,psi,dpsi);
-    
-    // Eulerian coordinates at Gauss point
-    Vector<double> interpolated_x(this->Dim,0.0);
-    
-    // Derivs of Eulerian coordinates w.r.t. local coordinates
-    Vector<double> interpolated_dxds(this->Dim);
-    std::complex<double> interpolated_u(0.0,0.0);
-    
-    // Assemble x and its derivs
-    for(unsigned l=0;l<n_node;l++) 
-     {
-      //Loop over directions
-      for(unsigned i=0;i<this->Dim;i++)
-       {
-        interpolated_x[i]+=this->nodal_position(l,i)*psi[l];
-        interpolated_dxds[i]+=this->nodal_position(l,i)*dpsi(l,0);
-       }
-      
-      //Get the nodal value of the helmholtz unknown
-      std::complex<double> u_value(
-       this->nodal_value(l,this->U_index_helmholtz.real()),
-       this->nodal_value(l,this->U_index_helmholtz.imag()));
-
-      interpolated_u += u_value*psi(l);
-     } // End of loop over the nodes
-    
-    // calculate the integral
-    //-----------------------
-    // define the variable phi_p
-    double phi_p=atan2(interpolated_x[1],interpolated_x[0]);
-    
-    //define dphi_ds=(-yx'+y'x)/(x^2+y^2)
-    double denom =(interpolated_x[0]*interpolated_x[0])+
-     (interpolated_x[1]*interpolated_x[1]);
-    double nom =-interpolated_dxds[1]*interpolated_x[0]+
-     interpolated_dxds[0]*interpolated_x[1];
-    double dphi_ds=std::fabs(nom/denom);
-    
-    // compute the element contribution to gamma
-    // ALH: The awkward construction with pow and the static_cast is to
-    // avoid a floating point error on my machine when running unoptimised
-    // (no idea why!)
-    gamma_con+=(dphi_ds)*w*pow(exp(I*(phi-phi_p)),static_cast<double>(n))
-     *interpolated_u;
-    
-    // compute the contribution to each node to the map   
-    for(unsigned l=0;l<n_node;l++) 
-     {
-      // Add the contribution of the real local data
-      local_unknown_real = this->nodal_local_eqn(
-       l,this->U_index_helmholtz.real());
-     if (local_unknown_real >= 0)
-      {   
-       global_unknown_real=this->eqn_number(local_unknown_real);
-       d_gamma_con[global_unknown_real]+=
-        (dphi_ds)*w*exp(I*(phi-phi_p)*double(n))*psi(l);
-      }
-     
-     // Add the contribution of the imag local data
-     local_unknown_imag = this->nodal_local_eqn(
-      l,this->U_index_helmholtz.imag());
-     if (local_unknown_imag >= 0)
-      {   
-       global_unknown_imag=this->eqn_number(local_unknown_imag);
-       // ALH: The awkward construction with pow and the static_cast is to
-       // avoid a floating point error on my machine when running unoptimised
-       // (no idea why!)
-       d_gamma_con[global_unknown_imag]+=
-        I* (dphi_ds)*w*pow(exp(I*(phi-phi_p)),static_cast<double>(n))*psi(l);
-      }
-     }// end of loop over the node
-   }//End of loop over integration points    
-  
- }
-
-
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-
-
-//===========================================================================
-/// \short Namespace for checking radius of nodes on (assumed to be circular) 
-/// DtN boundary
-//===========================================================================
-namespace ToleranceForHelmholtzOuterBoundary
-{
- /// \short Relative tolerance to within radius of points on DtN boundary
- /// are allowed to deviate from specified value
- extern double Tol;
-
-}
-
-
-//===========================================================================
-/// \short Namespace for checking radius of nodes on (assumed to be circular) 
-/// DtN boundary
-//===========================================================================
-namespace ToleranceForHelmholtzOuterBoundary
-{
- /// \short Relative tolerance to within radius of points on DtN boundary
- /// are allowed to deviate from specified value
- double Tol=1.0e-3;
-
-}
-
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-
-
-///================================================================
- /// \short Compute Fourier components of the solution -- length of
- /// vector indicates number of terms to be computed. 
-///================================================================
-template<class ELEMENT>
-void HelmholtzDtNMesh<ELEMENT>::compute_fourier_components(
- Vector<std::complex<double> >& a_coeff_pos,
- Vector<std::complex<double> >& a_coeff_neg)
-{
- 
-#ifdef PARANOID
-   if (a_coeff_pos.size()!=a_coeff_neg.size())
-   {
-    std::ostringstream error_stream; 
-    error_stream << "a_coeff_pos and a_coeff_neg must have "
-                 << "the same size. \n";
-    throw OomphLibError(
-     error_stream.str(),
-     OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
- 
- // Initialise
- unsigned n=a_coeff_pos.size();
- Vector<std::complex<double> > el_a_coeff_pos(n);
- Vector<std::complex<double> > el_a_coeff_neg(n);
- for (unsigned i=0;i<n;i++)
-  {
-   a_coeff_pos[i]=std::complex<double>(0.0,0.0);
-   a_coeff_neg[i]=std::complex<double>(0.0,0.0);
-  }
- 
- //Loop over elements e
- unsigned nel=this->nelement();
- for (unsigned e=0;e<nel;e++)
-  {
-   // Get a pointer to element   
-   HelmholtzBCElementBase<ELEMENT>* el_pt=
-    dynamic_cast<HelmholtzBCElementBase<ELEMENT>*>(this->element_pt(e));    
-   
-   // Compute contribution
-   el_pt->compute_contribution_to_fourier_components(el_a_coeff_pos,
-                                                     el_a_coeff_neg);
-   
-   // Add to coefficients
-   for (unsigned i=0;i<n;i++)
-    {
-     a_coeff_pos[i]+=el_a_coeff_pos[i];
-     a_coeff_neg[i]+=el_a_coeff_neg[i];
-    }
-  }
-
-}
- 
-
-
-
-///================================================================
-/// Compute and store the gamma integral and derivates 
-// /w.r.t global unknows at all integration  points
-/// of the mesh's constituent elements
-//================================================================
-template<class ELEMENT>
-void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
-{ 
-  
-#ifdef PARANOID
- {
-  // Loop over elements e
-  unsigned nel=this->nelement();
-  for (unsigned e=0;e<nel;e++)
-   {
-    FiniteElement* fe_pt=finite_element_pt(e);
-    unsigned nnod=fe_pt->nnode();
-    for (unsigned j=0;j<nnod;j++)
-     {
-      Node* nod_pt=fe_pt->node_pt(j);
-      
-      // Extract nodal coordinates from node:
-      Vector<double> x(2);
-      x[0]=nod_pt->x(0);
-      x[1]=nod_pt->x(1);
-      
-      // Evaluate the radial distance 
-      double r=sqrt(x[0]*x[0]+x[1]*x[1]); 
-      
-      // Check
-      if (Outer_radius==0.0)
-       {
+        std::ostringstream error_stream;
+        error_stream << "CRBond_Bessel::bessjyna() only computed " << n_actual
+                     << " rather than " << n << " Bessel functions.\n";
         throw OomphLibError(
-         "Outer radius for DtN BC must not be zero!",
-         OOMPH_CURRENT_FUNCTION,
-         OOMPH_EXCEPTION_LOCATION);
-       }
-      
-      if(std::fabs((r-this->Outer_radius)/Outer_radius)
-         >ToleranceForHelmholtzOuterBoundary::Tol)
-       { 
-        std::ostringstream error_stream; 
-        error_stream << "Node at " << x[0] << " " << x[1] 
-                     << " has radius " << r << " which does not "
-                     << " agree with \nspecified outer radius "
-                     << this->Outer_radius << " within relative tolerance " 
-                     << ToleranceForHelmholtzOuterBoundary::Tol 
-                     << ".\nYou can adjust the tolerance via\n"
-                     << "ToleranceForHelmholtzOuterBoundary::Tol\n" 
-                     << "or recompile without PARANOID.\n";
-        throw OomphLibError(
-         error_stream.str(),
-         OOMPH_CURRENT_FUNCTION,
-         OOMPH_EXCEPTION_LOCATION);
-       }
-     }
-   }
- }
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      for (unsigned i = 0; i < n; i++)
+      {
+        h[i] = std::complex<double>(jn[i], yn[i]);
+        hp[i] = std::complex<double>(jnp[i], ynp[i]);
+      }
+    } // End of Hankel_first
+
+    //====================================================================
+    /// Compute Hankel function of the first kind of orders 0...n and
+    /// its derivates at coordinate x. The function returns the vector
+    /// then its derivative (complex version). This functionality is only
+    /// required in the computation of the solution for the complex-
+    /// shifted Laplacian preconditioner.
+    //====================================================================
+    void CHankel_first(const unsigned& n,
+                       const std::complex<double>& x,
+                       Vector<std::complex<double>>& h,
+                       Vector<std::complex<double>>& hp)
+    {
+      // Set the highest order actually calculated
+      int n_actual = 0;
+
+      // Create a vector for the Bessel function of the 1st kind
+      Vector<std::complex<double>> jn(n + 1);
+
+      // Create a vector for the Bessel function of the 2nd kind
+      Vector<std::complex<double>> yn(n + 1);
+
+      // Create a vector for the Bessel function (1st kind) derivative
+      Vector<std::complex<double>> jnp(n + 1);
+
+      // Create a vector for the Bessel function (2nd kind) derivative
+      Vector<std::complex<double>> ynp(n + 1);
+
+      // Call the (complex) Bessel function to calculate the solution
+      CRBond_Bessel::cbessjyna(
+        int(n), x, n_actual, &jn[0], &yn[0], &jnp[0], &ynp[0]);
+
+#ifdef PARANOID
+      // Tell the user if they tried to calculate higher order terms
+      if (n_actual != int(n))
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
+
+        // Create the error message
+        error_message_stream << "CRBond_Bessel::cbessjyna() only computed "
+                             << n_actual << " rather than " << n
+                             << " Bessel functions.\n";
+
+        // Throw the error message
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-
- // Get Helmholtz parameter from bulk element
- HelmholtzDtNBoundaryElement<ELEMENT>* el_pt=
-  dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT>*>
-  (this->element_pt(0));    
- double k=sqrt(dynamic_cast<ELEMENT*>(el_pt->bulk_element_pt())->k_squared());  
- 
- // Precompute factors in sum
- Vector<std::complex<double> > h_a(Nfourier_terms), hp_a(Nfourier_terms),
-  q(Nfourier_terms);
- Hankel_functions_for_helmholtz_problem::
-  Hankel_first(Nfourier_terms,Outer_radius*k,h_a,hp_a);
- for (unsigned i=0;i<Nfourier_terms;i++)
-  {
-   q[i]=(k/(2.0*MathematicalConstants::Pi))*(hp_a[i]/h_a[i]);  
-  } 
- 
- //first loop over elements e
- unsigned nel=this->nelement();
- for (unsigned e=0;e<nel;e++)
-   {
-    // Get a pointer to element   
-    HelmholtzDtNBoundaryElement<ELEMENT>* el_pt=
-     dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT>*>
-     (this->element_pt(e));    
-    
-    //Set the value of n_intpt
-    const unsigned n_intpt =el_pt->integral_pt()->nweight();
-    
-    // initialise gamma integral and its derivatives
-    Vector<std::complex<double> > gamma_vector(
-     n_intpt,std::complex<double>(0.0,0.0));
-    Vector<std::map<unsigned,std::complex<double> > > 
-     d_gamma_vector(n_intpt);
-    
-    //Loop over the integration points
-    for(unsigned ipt=0;ipt<n_intpt;ipt++)
-     {
-      //Allocate and initialise coordinate
-      unsigned ndim_local=el_pt->dim();
-      Vector<double> x(ndim_local+1,0.0);
-      
-      //Set the Vector to hold local coordinates
-      Vector<double> s(ndim_local,0.0);
-      for(unsigned i=0;i<ndim_local;i++) 
-       {
-        s[i]=el_pt->integral_pt()->knot(ipt,i);
-       }
-      
-      //Get the coordinates of the integration point
-      el_pt->interpolated_x(s,x);
-      
-      // Polar angle
-      double  phi=atan2(x[1],x[0]);
-      
-      // Elemental contribution to gamma integral and its derivative
-      std::complex<double> gamma_con_p(0.0,0.0),gamma_con_n(0.0,0.0);
-      std::map<unsigned,std::complex<double> > d_gamma_con_p,d_gamma_con_n;
-      
-      // loop over the Fourier terms
-      for (unsigned nn=0;nn<Nfourier_terms;nn++)
-       {
-        //Second loop over the element 
-        //to evaluate the complete integral
-        for (unsigned ee=0;ee<nel;ee++)
-         {
-          HelmholtzDtNBoundaryElement<ELEMENT>* eel_pt=
-           dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT>*>
-           (this->element_pt(ee));
-          
-          // contribution of the positive term in the sum
-          eel_pt->compute_gamma_contribution(
-           phi,int(nn),gamma_con_p,d_gamma_con_p) ;
-          
-          // contribution of the negative term in the sum
-          eel_pt->compute_gamma_contribution(
-           phi,-int(nn),gamma_con_n,d_gamma_con_n) ;
-          
-          unsigned n_node=eel_pt->nnode();
-          if (nn==0)
-           { 
-            gamma_vector[ipt]+=q[nn]*gamma_con_p;
-            for(unsigned l=0;l<n_node;l++) 
-             {
-              // Add the contribution of the real local data
-              int local_unknown_p_real=eel_pt->nodal_local_eqn(
-               l,eel_pt->u_index_helmholtz().real());
-              if (local_unknown_p_real >= 0)
-               {   
-                int global_unknown_p_real=eel_pt->eqn_number(
-                 local_unknown_p_real);
-                d_gamma_vector[ipt][global_unknown_p_real]+=
-                 q[nn]*d_gamma_con_p[global_unknown_p_real];
-               }
-              
-              // Add the contribution of the imag local data
-              int local_unknown_p_imag=
-               eel_pt->nodal_local_eqn(
-                l,eel_pt->u_index_helmholtz().imag());
-              
-              if (local_unknown_p_imag >= 0)
-               {   
-                int global_unknown_p_imag=eel_pt->eqn_number(
-                 local_unknown_p_imag);
-                
-                d_gamma_vector[ipt][global_unknown_p_imag]+=
-                 q[nn]*d_gamma_con_p[global_unknown_p_imag];
-               }
-             }// end of loop over the node
-           }//End of if
-          else 
-           { 
-            gamma_vector[ipt]+=q[nn]*(gamma_con_p+gamma_con_n);
-            for(unsigned l=0;l<n_node;l++) 
-             {
-              // Add the contribution of the real local data
-              int local_unknown_real=eel_pt->nodal_local_eqn(
-               l,eel_pt->u_index_helmholtz().real());
-              if (local_unknown_real >= 0)
-               {          
-                int global_unknown_real=eel_pt->eqn_number(local_unknown_real);
-                d_gamma_vector[ipt][global_unknown_real]+=
-                 q[nn]*(d_gamma_con_p[global_unknown_real]+
-                        d_gamma_con_n[global_unknown_real]);
-               }  
-              // Add the contribution of the imag local data
-              int local_unknown_imag=eel_pt->nodal_local_eqn(
-               l,eel_pt->u_index_helmholtz().imag());
-              if (local_unknown_imag >= 0)
-               {          
-                int global_unknown_imag=eel_pt->eqn_number(local_unknown_imag);
-                d_gamma_vector[ipt][global_unknown_imag]+=
-                 q[nn]*(d_gamma_con_p[global_unknown_imag]+
-                        d_gamma_con_n[global_unknown_imag]);
-               }  
-             }// end of loop over the node
-           }//End of else  
-         }// End of second loop over the elements 
-       }// End of loop over Fourier terms  
-     }// end of loop over integration point
-    
-    // Store it in map
-    Gamma_at_gauss_point[el_pt]=gamma_vector;
-    D_Gamma_at_gauss_point[el_pt]=d_gamma_vector;
-    
-   }// end of first loop over element  
-}
-
-//===========================================================================
-/// Constructor, takes the pointer to the "bulk" element and the face index
-//===========================================================================
-template<class ELEMENT>
- HelmholtzBCElementBase<ELEMENT>::
- HelmholtzBCElementBase(FiniteElement* const &bulk_el_pt, 
-                        const int &face_index) : 
- FaceGeometry<ELEMENT>(), FaceElement()
- { 
-#ifdef PARANOID
-  {
-   //Check that the element is not a refineable 3d element
-   ELEMENT* elem_pt = new ELEMENT;
-   //If it's three-d
-   if(elem_pt->dim()==3)
-    {
-     //Is it refineable
-     if(dynamic_cast<RefineableElement*>(elem_pt))
+      // Loop over the number of terms requested (only the first entry
+      // has *actually* been calculated)
+      for (unsigned i = 0; i < n; i++)
       {
-       //Issue a warning
-       OomphLibWarning(
-        "This flux element will not" 
-        "work correctly if nodes are hanging\n",
-        "HelmholtzBCElementBase::Constructor",
+        // Set the entries in the Hankel function vector
+        h[i] = std::complex<double>(jn[i].real() - yn[i].imag(),
+                                    jn[i].imag() + yn[i].real());
+
+        // Set the entries in the Hankel function derivative vector
+        hp[i] = std::complex<double>(jnp[i].real() - ynp[i].imag(),
+                                     jnp[i].imag() + ynp[i].real());
+      }
+    } // End of Hankel_first
+  } // namespace Hankel_functions_for_helmholtz_problem
+
+
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+
+
+  //======================================================================
+  /// \short A class for elements that allow the approximation of the
+  /// Sommerfeld radiation BC.
+  /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
+  /// policy class.
+  //======================================================================
+  template<class ELEMENT>
+  class HelmholtzBCElementBase : public virtual FaceGeometry<ELEMENT>,
+                                 public virtual FaceElement
+  {
+  public:
+    /// \short Constructor, takes the pointer to the "bulk" element and the
+    /// index of the face to which the element is attached.
+    HelmholtzBCElementBase(FiniteElement* const& bulk_el_pt,
+                           const int& face_index);
+
+    ///\short  Broken empty constructor
+    HelmholtzBCElementBase()
+    {
+      throw OomphLibError(
+        "Don't call empty constructor for HelmholtzBCElementBase",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
-      }
     }
-  }
-#endif   
-  
-  // Let the bulk element build the FaceElement, i.e. setup the pointers 
-  // to its nodes (by referring to the appropriate nodes in the bulk
-  // element), etc.
-  bulk_el_pt->build_face_element(face_index,this);
-  
-  // Extract the dimension of the problem from the dimension of 
-  // the first node
-  Dim = this->node_pt(0)->ndim();
-  
-  //Set up U_index_helmholtz. Initialise to zero, which probably won't change
-  //in most cases, oh well, the price we pay for generality
-  U_index_helmholtz = std::complex<unsigned>(0,1);
 
-   //Cast to the appropriate HelmholtzEquation so that we can
-   //find the index at which the variable is stored
-   //We assume that the dimension of the full problem is the same
-   //as the dimension of the node, if this is not the case you will have
-   //to write custom elements, sorry
-   switch(Dim)
+    /// Broken copy constructor
+    HelmholtzBCElementBase(const HelmholtzBCElementBase& dummy)
     {
-     //One dimensional problem
-    case 1:
-    {
-     HelmholtzEquations<1>* eqn_pt = 
-      dynamic_cast<HelmholtzEquations<1>*>(bulk_el_pt);
-     //If the cast has failed die
-     if(eqn_pt==0)
-      {
-       std::string error_string =
-        "Bulk element must inherit from HelmholtzEquations.";
-       error_string += 
-        "Nodes are one dimensional, but cannot cast the bulk element to\n";
-       error_string += "HelmholtzEquations<1>\n.";
-       error_string += 
-        "If you desire this functionality, you must implement it yourself\n";
-       
-       throw OomphLibError(error_string,
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-     //Otherwise read out the value
-     else
-      {  
-       //Read the index from the (cast) bulk element
-       U_index_helmholtz = eqn_pt->u_index_helmholtz();
-      }
+      BrokenCopy::broken_copy("HelmholtzBCElementBase");
     }
-    break;
-    
-    //Two dimensional problem
-    case 2:
-    {
-     HelmholtzEquations<2>* eqn_pt = 
-      dynamic_cast<HelmholtzEquations<2>*>(bulk_el_pt);
-     //If the cast has failed die
-     if(eqn_pt==0)
-      {
-       std::string error_string =
-        "Bulk element must inherit from HelmholtzEquations.";
-       error_string += 
-        "Nodes are two dimensional, but cannot cast the bulk element to\n";
-       error_string += "HelmholtzEquations<2>\n.";
-       error_string += 
-        "If you desire this functionality, you must implement it yourself\n";
-       
-       throw OomphLibError(error_string,
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-     else
-      {
-       //Read the index from the (cast) bulk element
-       U_index_helmholtz = eqn_pt->u_index_helmholtz();
-      }   
-    }
-    
-    break;
-    
-    //Three dimensional problem
-    case 3: 
-    {
-     HelmholtzEquations<3>* eqn_pt = 
-      dynamic_cast<HelmholtzEquations<3>*>(bulk_el_pt);
-     //If the cast has failed die
-     if(eqn_pt==0)
-      {
-       std::string error_string =
-        "Bulk element must inherit from HelmholtzEquations.";
-       error_string += 
-        "Nodes are three dimensional, but cannot cast the bulk element to\n";
-       error_string += "HelmholtzEquations<3>\n.";
-       error_string += 
-        "If you desire this functionality, you must implement it yourself\n";
-       
-       throw OomphLibError(error_string,
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION); 
-      }
-     else 
-      {
-       //Read the index from the (cast) bulk element
-       U_index_helmholtz = eqn_pt->u_index_helmholtz();
-      }
-    }
-    break;
-    
-    //Any other case is an error
-    default:
-     std::ostringstream error_stream; 
-     error_stream <<  "Dimension of node is " << Dim 
-                  << ". It should be 1,2, or 3!" << std::endl;
-     
-     throw OomphLibError(error_stream.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-     break;
-    }
- }
- 
 
-}
+    /// Broken assignment operator
+    // Commented out broken assignment operator because this can lead to a
+    // conflict warning when used in the virtual inheritence hierarchy.
+    // Essentially the compiler doesn't realise that two separate
+    // implementations of the broken function are the same and so, quite
+    // rightly, it shouts.
+    /*void operator=(const HelmholtzBCElementBase&)
+     {
+      BrokenCopy::broken_assign("HelmholtzBCElementBase");
+      }*/
+
+
+    /// \short Specify the value of nodal zeta from the face geometry
+    /// The "global" intrinsic coordinate of the element when
+    /// viewed as part of a geometric object should be given by
+    /// the FaceElement representation, by default (needed to break
+    /// indeterminacy if bulk element is SolidElement)
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
+    {
+      return FaceElement::zeta_nodal(n, k, i);
+    }
+
+
+    /// Output function -- forward to broken version in FiniteElement
+    /// until somebody decides what exactly they want to plot here...
+    void output(std::ostream& outfile)
+    {
+      FiniteElement::output(outfile);
+    }
+
+    /// \short Output function -- forward to broken version in FiniteElement
+    /// until somebody decides what exactly they want to plot here...
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      FiniteElement::output(outfile, n_plot);
+    }
+
+    /// C-style output function -- forward to broken version in FiniteElement
+    /// until somebody decides what exactly they want to plot here...
+    void output(FILE* file_pt)
+    {
+      FiniteElement::output(file_pt);
+    }
+
+    /// \short C-style output function -- forward to broken version in
+    /// FiniteElement until somebody decides what exactly they want to plot
+    /// here...
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      FiniteElement::output(file_pt, n_plot);
+    }
+
+    /// \short Return the index at which the real/imag unknown value
+    /// is stored.
+    virtual inline std::complex<unsigned> u_index_helmholtz() const
+    {
+      return std::complex<unsigned>(U_index_helmholtz.real(),
+                                    U_index_helmholtz.imag());
+    }
+
+    /// \short Compute the element's contribution to the time-averaged
+    /// radiated power over the artificial boundary
+    double global_power_contribution()
+    {
+      // Dummy output file
+      std::ofstream outfile;
+      return global_power_contribution(outfile);
+    }
+
+    /// \short Compute the element's contribution to the time-averaged
+    /// radiated power over the artificial boundary. Also output the
+    /// power density as a fct of the polar angle in the specified
+    /// output file if it's open.
+    double global_power_contribution(std::ofstream& outfile)
+    {
+      // pointer to the corresponding bulk element
+      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
+
+      // Number of nodes in bulk element
+      unsigned nnode_bulk = bulk_elem_pt->nnode();
+      const unsigned n_node_local = nnode();
+
+      // get the dim of the bulk and local nodes
+      const unsigned bulk_dim = bulk_elem_pt->dim();
+      const unsigned local_dim = this->dim();
+
+      // Set up memory for the shape and test functions
+      Shape psi(n_node_local);
+
+      // Set up memory for the shape functions
+      Shape psi_bulk(nnode_bulk);
+      DShape dpsi_bulk_dx(nnode_bulk, bulk_dim);
+
+      // Set up memory for the outer unit normal
+      Vector<double> unit_normal(bulk_dim);
+
+      // Set the value of n_intpt
+      const unsigned n_intpt = integral_pt()->nweight();
+
+      // Set the Vector to hold local coordinates
+      Vector<double> s(local_dim);
+      double power = 0.0;
+
+      // Output?
+      if (outfile.is_open())
+      {
+        outfile << "ZONE\n";
+      }
+
+      // Loop over the integration points
+      //--------------------------------
+      for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+      {
+        // Assign values of s
+        for (unsigned i = 0; i < local_dim; i++)
+        {
+          s[i] = integral_pt()->knot(ipt, i);
+        }
+        // get the outer_unit_ext vector
+        this->outer_unit_normal(s, unit_normal);
+
+        // Get the integral weight
+        double w = integral_pt()->weight(ipt);
+
+        // Get jacobian of mapping
+        double J = J_eulerian(s);
+
+        // Premultiply the weights and the Jacobian
+        double W = w * J;
+
+        // Get local coordinates in bulk element by copy construction
+        Vector<double> s_bulk(local_coordinate_in_bulk(s));
+
+        // Call the derivatives of the shape  functions
+        // in the bulk -- must do this via s because this point
+        // is not an integration point the bulk element!
+        (void)bulk_elem_pt->dshape_eulerian(s_bulk, psi_bulk, dpsi_bulk_dx);
+        this->shape(s, psi);
+
+        // Derivs of Eulerian coordinates w.r.t. local coordinates
+        std::complex<double> dphi_dn(0.0, 0.0);
+        Vector<std::complex<double>> interpolated_dphidx(bulk_dim);
+        std::complex<double> interpolated_phi(0.0, 0.0);
+        Vector<double> x(bulk_dim);
+
+        // Calculate function value and derivatives:
+        //-----------------------------------------
+        // Loop over nodes
+        for (unsigned l = 0; l < nnode_bulk; l++)
+        {
+          // Get the nodal value of the helmholtz unknown
+          const std::complex<double> phi_value(
+            bulk_elem_pt->nodal_value(l,
+                                      bulk_elem_pt->u_index_helmholtz().real()),
+            bulk_elem_pt->nodal_value(
+              l, bulk_elem_pt->u_index_helmholtz().imag()));
+
+          // Loop over directions
+          for (unsigned i = 0; i < bulk_dim; i++)
+          {
+            interpolated_dphidx[i] += phi_value * dpsi_bulk_dx(l, i);
+          }
+        } // End of loop over the bulk_nodes
+
+        for (unsigned l = 0; l < n_node_local; l++)
+        {
+          // Get the nodal value of the helmholtz unknown
+          const std::complex<double> phi_value(
+            nodal_value(l, u_index_helmholtz().real()),
+            nodal_value(l, u_index_helmholtz().imag()));
+
+          interpolated_phi += phi_value * psi(l);
+        }
+
+        // define dphi_dn
+        for (unsigned i = 0; i < bulk_dim; i++)
+        {
+          dphi_dn += interpolated_dphidx[i] * unit_normal[i];
+        }
+
+        // Power density
+        double integrand = 0.5 * (interpolated_phi.real() * dphi_dn.imag() -
+                                  interpolated_phi.imag() * dphi_dn.real());
+
+        // Output?
+        if (outfile.is_open())
+        {
+          interpolated_x(s, x);
+          double phi = atan2(x[1], x[0]);
+          outfile << x[0] << " " << x[1] << " " << phi << " " << integrand
+                  << "\n";
+        }
+
+        // ...add to integral
+        power += integrand * W;
+      }
+
+      return power;
+    }
+
+
+    /// \short Compute element's contribution to Fourier components of the
+    /// solution -- length of vector indicates number of terms to be computed.
+    void compute_contribution_to_fourier_components(
+      Vector<std::complex<double>>& a_coeff_pos,
+      Vector<std::complex<double>>& a_coeff_neg)
+    {
+#ifdef PARANOID
+      if (a_coeff_pos.size() != a_coeff_neg.size())
+      {
+        std::ostringstream error_stream;
+        error_stream << "a_coeff_pos and a_coeff_neg must have "
+                     << "the same size. \n";
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // define the imaginary number
+      const std::complex<double> I(0.0, 1.0);
+
+      // Find out how many nodes there are
+      const unsigned n_node = this->nnode();
+
+      // Set up memory for the shape  functions
+      Shape psi(n_node);
+      DShape dpsi(n_node, 1);
+
+      // Set the value of n_intpt
+      const unsigned n_intpt = this->integral_pt()->nweight();
+
+      // Set the Vector to hold local coordinates
+      Vector<double> s(this->Dim - 1);
+
+      // Initialise
+      unsigned n = a_coeff_pos.size();
+      for (unsigned i = 0; i < n; i++)
+      {
+        a_coeff_pos[i] = std::complex<double>(0.0, 0.0);
+        a_coeff_neg[i] = std::complex<double>(0.0, 0.0);
+      }
+
+      // Loop over the integration points
+      //--------------------------------
+      for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+      {
+        // Assign values of s
+        for (unsigned i = 0; i < (this->Dim - 1); i++)
+        {
+          s[i] = this->integral_pt()->knot(ipt, i);
+        }
+
+        // Get the integral weight
+        double w = this->integral_pt()->weight(ipt);
+
+        // Get the shape functions
+        this->dshape_local(s, psi, dpsi);
+
+        // Eulerian coordinates at Gauss point
+        Vector<double> interpolated_x(this->Dim, 0.0);
+
+        // Derivs of Eulerian coordinates w.r.t. local coordinates
+        Vector<double> interpolated_dxds(this->Dim);
+        std::complex<double> interpolated_u(0.0, 0.0);
+
+        // Assemble x and its derivs
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          // Loop over directions
+          for (unsigned i = 0; i < this->Dim; i++)
+          {
+            interpolated_x[i] += this->nodal_position(l, i) * psi[l];
+            interpolated_dxds[i] += this->nodal_position(l, i) * dpsi(l, 0);
+          }
+
+          // Get the nodal value of the helmholtz unknown
+          const std::complex<double> u_value(
+            this->nodal_value(l, this->U_index_helmholtz.real()),
+            this->nodal_value(l, this->U_index_helmholtz.imag()));
+
+          // Add to the interpolated value
+          interpolated_u += u_value * psi(l);
+        } // End of loop over the nodes
+
+        // calculate the integral
+        //-----------------------
+
+        // Get polar angle
+        double phi = atan2(interpolated_x[1], interpolated_x[0]);
+
+        // define dphi_ds=(-yx'+y'x)/(x^2+y^2)
+        double denom = (interpolated_x[0] * interpolated_x[0]) +
+                       (interpolated_x[1] * interpolated_x[1]);
+        double nom = -interpolated_dxds[1] * interpolated_x[0] +
+                     interpolated_dxds[0] * interpolated_x[1];
+        double dphi_ds = std::fabs(nom / denom);
+
+        // Positive coefficients
+        for (unsigned i = 0; i < n; i++)
+        {
+          a_coeff_pos[i] +=
+            interpolated_u * exp(-I * phi * double(i)) * dphi_ds * w;
+        }
+        // Negative coefficients
+        for (unsigned i = 1; i < n; i++)
+        {
+          a_coeff_neg[i] +=
+            interpolated_u * exp(I * phi * double(i)) * dphi_ds * w;
+        }
+
+      } // End of loop over integration points
+    }
+
+
+  protected:
+    /// \short Function to compute the shape and test functions and to return
+    /// the Jacobian of mapping between local and global (Eulerian)
+    /// coordinates
+    inline double test_only(const Vector<double>& s, Shape& test) const
+    {
+      // Get the shape functions
+      shape(s, test);
+
+      // Return the value of the jacobian
+      return J_eulerian(s);
+    }
+
+    /// \short Function to compute the shape, test functions and derivates
+    /// and to return
+    /// the Jacobian of mapping between local and global (Eulerian)
+    /// coordinates
+    inline double d_shape_and_test_local(const Vector<double>& s,
+                                         Shape& psi,
+                                         Shape& test,
+                                         DShape& dpsi_ds,
+                                         DShape& dtest_ds) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+
+      // Get the shape functions
+      dshape_local(s, psi, dpsi_ds);
+
+      // Set the test functions to be the same as the shape functions
+      for (unsigned i = 0; i < n_node; i++)
+      {
+        for (unsigned j = 0; j < (Dim - 1); j++)
+        {
+          test[i] = psi[i];
+          dtest_ds(i, j) = dpsi_ds(i, j);
+        }
+      }
+      // Return the value of the jacobian
+      return J_eulerian(s);
+    }
+
+    /// \short The index at which the real and imag part of the unknown is
+    /// stored at the nodes
+    std::complex<unsigned> U_index_helmholtz;
+
+    /// The spatial dimension of the problem
+    unsigned Dim;
+  };
+
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+
+
+  ///=================================================================
+  /// Mesh for DtN boundary condition elements -- provides
+  /// functionality to apply Sommerfeld radiation condtion
+  /// via DtN BC
+  ///=================================================================
+  template<class ELEMENT>
+  class HelmholtzDtNMesh : public virtual Mesh
+  {
+  public:
+    /// Constructor: Specify radius of outer boundary and number of
+    /// Fourier terms used in the computation of the gamma integral
+    HelmholtzDtNMesh(const double& outer_radius, const unsigned& nfourier_terms)
+      : Outer_radius(outer_radius), Nfourier_terms(nfourier_terms)
+    {
+    }
+
+    /// \short Compute and store the gamma integral at all integration
+    /// points of the constituent elements.
+    void setup_gamma();
+
+    /// \short Compute Fourier components of the solution -- length of
+    /// vector indicates number of terms to be computed.
+    void compute_fourier_components(Vector<std::complex<double>>& a_coeff_pos,
+                                    Vector<std::complex<double>>& a_coeff_neg);
+
+    /// \short Gamma integral evaluated at Gauss points
+    /// for specified element
+    Vector<std::complex<double>>& gamma_at_gauss_point(FiniteElement* el_pt)
+    {
+      return Gamma_at_gauss_point[el_pt];
+    }
+
+    /// \short Derivative of Gamma integral w.r.t global unknown, evaluated
+    /// at Gauss points for specified element
+    Vector<std::map<unsigned, std::complex<double>>>& d_gamma_at_gauss_point(
+      FiniteElement* el_pt)
+    {
+      return D_Gamma_at_gauss_point[el_pt];
+    }
+
+    /// \short The outer radius
+    double& outer_radius()
+    {
+      return Outer_radius;
+    }
+
+    /// \short Number of Fourier terms used in the computation of the
+    /// gamma integral
+    unsigned& nfourier_terms()
+    {
+      return Nfourier_terms;
+    }
+
+  private:
+    /// Outer radius
+    double Outer_radius;
+
+    /// Nbr of Fourier terms used in the  Gamma computation
+    unsigned Nfourier_terms;
+
+
+    /// \short Container to store the gamma integral for given Gauss point
+    /// and element
+    std::map<FiniteElement*, Vector<std::complex<double>>> Gamma_at_gauss_point;
+
+
+    /// \short Container to store the derivate of Gamma integral w.r.t
+    /// global unknown evaluated at Gauss points for specified element
+    std::map<FiniteElement*, Vector<std::map<unsigned, std::complex<double>>>>
+      D_Gamma_at_gauss_point;
+  };
+
+
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+
+
+  //=============================================================
+  /// Absorbing BC element for approximation imposition of
+  /// Sommerfeld radiation condition
+  //==============================================================
+  template<class ELEMENT>
+  class HelmholtzAbsorbingBCElement : public HelmholtzBCElementBase<ELEMENT>
+  {
+  public:
+    /// \short Construct element from specification of bulk element and
+    /// face index.
+    HelmholtzAbsorbingBCElement(FiniteElement* const& bulk_el_pt,
+                                const int& face_index)
+      : HelmholtzBCElementBase<ELEMENT>(bulk_el_pt, face_index)
+    {
+      // Initialise pointers
+      Outer_radius_pt = 0;
+
+      // Initialise order of absorbing boundary condition
+      ABC_order_pt = 0;
+    }
+
+    /// Pointer to order of absorbing boundary condition
+    unsigned*& abc_order_pt()
+    {
+      return ABC_order_pt;
+    }
+
+
+    /// Add the element's contribution to its residual vector
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      // Call the generic residuals function with flag set to 0
+      // using a dummy matrix argument
+      fill_in_generic_residual_contribution_helmholtz_abc(
+        residuals, GeneralisedElement::Dummy_matrix, 0);
+    }
+
+    /// \short Add the element's contribution to its residual vector and its
+    /// Jacobian matrix
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution_helmholtz_abc(
+        residuals, jacobian, 1);
+    }
+
+
+    /// Get pointer to radius of outer boundary (must be a cirle)
+    double*& outer_radius_pt()
+    {
+      return Outer_radius_pt;
+    }
+
+  private:
+    /// \short Compute the element's residual vector and the (
+    /// Jacobian matrix.
+    /// Overloaded version, using the abc approximation
+    void fill_in_generic_residual_contribution_helmholtz_abc(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
+    {
+#ifdef PARANOID
+
+      if (ABC_order_pt == 0)
+      {
+        throw OomphLibError("Order of ABC hasn't been set!",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+
+      if (this->Outer_radius_pt == 0)
+      {
+        throw OomphLibError("Pointer to outer radius hasn't been set!",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 
 #endif
 
+      // Find out how many nodes there are
+      const unsigned n_node = this->nnode();
+
+      // Set up memory for the shape and test functions
+      Shape psi(n_node), test(n_node);
+      DShape dpsi_ds(n_node, this->Dim - 1), dtest_ds(n_node, this->Dim - 1),
+        dtest_dS(n_node, this->Dim - 1), dpsi_dS(n_node, this->Dim - 1);
+
+      // Set the value of Nintpt
+      const unsigned n_intpt = this->integral_pt()->nweight();
+
+      // Set the Vector to hold local coordinates
+      Vector<double> s(this->Dim - 1);
+
+      // Integers to hold the local equation and unknown numbers
+      int local_eqn_real = 0, local_unknown_real = 0;
+      int local_eqn_imag = 0, local_unknown_imag = 0;
+
+      // Define the problem parameters
+      double R = *Outer_radius_pt;
+      double k =
+        sqrt(dynamic_cast<ELEMENT*>(this->bulk_element_pt())->k_squared());
+
+      // Loop over the integration points
+      //--------------------------------
+      for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+      {
+        // Assign values of s
+        for (unsigned i = 0; i < (this->Dim - 1); i++)
+        {
+          s[i] = this->integral_pt()->knot(ipt, i);
+        }
+
+        // Get the integral weight
+        double w = this->integral_pt()->weight(ipt);
+
+        // Find the shape test functions and derivates; return the Jacobian
+        // of the mapping between local and global (Eulerian)
+        // coordinates
+        double J =
+          this->d_shape_and_test_local(s, psi, test, dpsi_ds, dtest_ds);
+
+        // Premultiply the weights and the Jacobian
+        double W = w * J;
+        // get the inverse of jacibian
+        double inv_J = 1 / J;
+
+        // Need to find position to feed into flux function,
+        // initialise to zero
+        std::complex<double> interpolated_u(0.0, 0.0);
+        std::complex<double> du_dS(0.0, 0.0);
+
+        // Calculate velocities and derivatives:loop over the nodes
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          // Loop over real and imag part
+          // Get the nodal value of the helmholtz unknown
+          const std::complex<double> u_value(
+            this->nodal_value(l, this->U_index_helmholtz.real()),
+            this->nodal_value(l, this->U_index_helmholtz.imag()));
+
+          interpolated_u += u_value * psi[l];
+
+          du_dS += u_value * dpsi_ds(l, 0) * inv_J;
+
+          // Get the value of dtest_dS
+          dtest_dS(l, 0) = dtest_ds(l, 0) * inv_J;
+          // Get the value of dpsif_dS
+          dpsi_dS(l, 0) = dpsi_ds(l, 0) * inv_J;
+        }
+
+        // use ABC first order approximation
+        if (*ABC_order_pt == 1)
+        {
+          // Now add to the appropriate equations:use second order approximation
+          // Loop over the test functions
+          for (unsigned l = 0; l < n_node; l++)
+          {
+            local_eqn_real =
+              this->nodal_local_eqn(l, this->U_index_helmholtz.real());
+            local_eqn_imag =
+              this->nodal_local_eqn(l, this->U_index_helmholtz.imag());
+
+            // first, calculate the real part contrubution
+            //-----------------------
+            // IF it's not a boundary condition
+            if (local_eqn_real >= 0)
+            {
+              // Add the second order terms:compute manually real and imag part
+
+              residuals[local_eqn_real] += (k * interpolated_u.imag() +
+                                            (0.5 / R) * interpolated_u.real()) *
+                                           test[l] * W;
+
+              // Calculate the jacobian
+              //-----------------------
+              if (flag)
+              {
+                // Loop over the shape functions again
+                for (unsigned l2 = 0; l2 < n_node; l2++)
+                {
+                  local_unknown_real =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.real());
+                  local_unknown_imag =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.imag());
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_real >= 0)
+                  {
+                    jacobian(local_eqn_real, local_unknown_real) +=
+                      (0.5 / R) * psi[l2] * test[l] * W;
+                  }
+
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_imag >= 0)
+                  {
+                    jacobian(local_eqn_real, local_unknown_imag) +=
+                      k * psi[l2] * test[l] * W;
+                  }
+                }
+              }
+            } // end of local_eqn_real
+
+            // second, calculate the imag part contrubution
+            //-----------------------
+            // IF it's not a boundary condition
+            if (local_eqn_imag >= 0)
+            {
+              // Add the second order terms contibution to the residual
+              residuals[local_eqn_imag] += (-k * interpolated_u.real() +
+                                            (0.5 / R) * interpolated_u.imag()) *
+                                           test[l] * W;
+
+
+              // Calculate the jacobian
+              //-----------------------
+              if (flag)
+              {
+                // Loop over the shape functions again
+                for (unsigned l2 = 0; l2 < n_node; l2++)
+                {
+                  local_unknown_real =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.real());
+                  local_unknown_imag =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.imag());
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_real >= 0)
+                  {
+                    jacobian(local_eqn_imag, local_unknown_real) +=
+                      (-k) * psi[l2] * test[l] * W;
+                  }
+
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_imag >= 0)
+                  {
+                    jacobian(local_eqn_imag, local_unknown_imag) +=
+                      (0.5 / R) * psi[l2] * test[l] * W;
+                  }
+                }
+              }
+            }
+          } // End of loop over the nodes
+        }
+
+        //:use second order approximation
+        if (*ABC_order_pt == 2)
+        {
+          // Now add to the appropriate equations:use second order approximation
+          // Loop over the test functions
+          for (unsigned l = 0; l < n_node; l++)
+          {
+            local_eqn_real =
+              this->nodal_local_eqn(l, this->U_index_helmholtz.real());
+            local_eqn_imag =
+              this->nodal_local_eqn(l, this->U_index_helmholtz.imag());
+
+            // first, calculate the real part contrubution
+            //-----------------------
+            // IF it's not a boundary condition
+            if (local_eqn_real >= 0)
+            {
+              // Add the second order terms:compute manually real and imag part
+
+              residuals[local_eqn_real] +=
+                (k * interpolated_u.imag() +
+                 (0.5 / R) * interpolated_u.real()) *
+                  test[l] * W +
+                ((0.125 / (k * R * R)) * interpolated_u.imag()) * test[l] * W;
+
+              residuals[local_eqn_real] +=
+                (-0.5 / k) * du_dS.imag() * dtest_dS(l, 0) * W;
+
+              // Calculate the jacobian
+              //-----------------------
+              if (flag)
+              {
+                // Loop over the shape functions again
+                for (unsigned l2 = 0; l2 < n_node; l2++)
+                {
+                  local_unknown_real =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.real());
+                  local_unknown_imag =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.imag());
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_real >= 0)
+                  {
+                    jacobian(local_eqn_real, local_unknown_real) +=
+                      (0.5 / R) * psi[l2] * test[l] * W;
+                  }
+
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_imag >= 0)
+                  {
+                    jacobian(local_eqn_real, local_unknown_imag) +=
+                      k * psi[l2] * test[l] * W +
+                      (0.125 / (k * R * R)) * psi[l2] * test[l] * W;
+
+                    jacobian(local_eqn_real, local_unknown_imag) +=
+                      (-0.5 / k) * dpsi_dS(l2, 0) * dtest_dS(l, 0) * W;
+                  }
+                }
+              }
+            } // end of local_eqn_real
+
+            // second, calculate the imag part contrubution
+            //-----------------------
+            // IF it's not a boundary condition
+            if (local_eqn_imag >= 0)
+            {
+              // Add the second order terms contibution to the residual
+              residuals[local_eqn_imag] +=
+                (-k * interpolated_u.real() +
+                 (0.5 / R) * interpolated_u.imag()) *
+                  test[l] * W +
+                ((-0.125 / (k * R * R)) * interpolated_u.real()) * test[l] * W;
+
+              residuals[local_eqn_imag] +=
+                (0.5 / k) * du_dS.real() * dtest_dS(l, 0) * W;
+
+              // Calculate the jacobian
+              //-----------------------
+              if (flag)
+              {
+                // Loop over the shape functions again
+                for (unsigned l2 = 0; l2 < n_node; l2++)
+                {
+                  local_unknown_real =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.real());
+                  local_unknown_imag =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.imag());
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_real >= 0)
+                  {
+                    jacobian(local_eqn_imag, local_unknown_real) +=
+                      (-k) * psi[l2] * test[l] * W -
+                      (0.125 / (k * R * R)) * psi[l2] * test[l] * W;
+
+                    jacobian(local_eqn_imag, local_unknown_real) +=
+                      (0.5 / k) * dpsi_dS(l2, 0) * dtest_dS(l, 0) * W;
+                  }
+
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_imag >= 0)
+                  {
+                    jacobian(local_eqn_imag, local_unknown_imag) +=
+                      (0.5 / R) * psi[l2] * test[l] * W;
+                  }
+                }
+              }
+            }
+          } // End of loop over the nodes
+        }
+
+        if (*ABC_order_pt == 3)
+        {
+          // Now add to the appropriate equations:use second order approximation
+          // Loop over the test functions
+          for (unsigned l = 0; l < n_node; l++)
+          {
+            local_eqn_real =
+              this->nodal_local_eqn(l, this->U_index_helmholtz.real());
+            local_eqn_imag =
+              this->nodal_local_eqn(l, this->U_index_helmholtz.imag());
+
+            // first, calculate the real part contrubution
+            //-----------------------
+            // IF it's not a boundary condition
+            if (local_eqn_real >= 0)
+            {
+              // Add the second order terms:compute manually real and imag part
+              residuals[local_eqn_real] +=
+                ((k * (1 + 0.125 / (k * k * R * R))) * interpolated_u.imag() +
+                 (0.5 / R - 0.125 / (k * k * R * R * R)) *
+                   interpolated_u.real()) *
+                test[l] * W;
+
+              residuals[local_eqn_real] +=
+                ((-0.5 / k) * du_dS.imag() +
+                 (0.5 / (k * k * R)) * du_dS.real()) *
+                dtest_dS(l, 0) * W;
+
+              // Calculate the jacobian
+              //-----------------------
+              if (flag)
+              {
+                // Loop over the shape functions again
+                for (unsigned l2 = 0; l2 < n_node; l2++)
+                {
+                  local_unknown_real =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.real());
+                  local_unknown_imag =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.imag());
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_real >= 0)
+                  {
+                    jacobian(local_eqn_real, local_unknown_real) +=
+                      (0.5 / R - 0.125 / (k * k * R * R * R)) * psi[l2] *
+                      test[l] * W;
+
+                    jacobian(local_eqn_real, local_unknown_real) +=
+                      (0.5 / (k * k * R)) * dpsi_dS(l2, 0) * dtest_dS(l, 0) * W;
+                  }
+
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_imag >= 0)
+                  {
+                    jacobian(local_eqn_real, local_unknown_imag) +=
+                      (k * (1 + 0.125 / (k * k * R * R))) * psi[l2] * test[l] *
+                      W;
+
+                    jacobian(local_eqn_real, local_unknown_imag) +=
+                      (-0.5 / k) * dpsi_dS(l2, 0) * dtest_dS(l, 0) * W;
+                  }
+                }
+              }
+            } // end of local_eqn_real
+
+            // second, calculate the imag part contrubution
+            //-----------------------
+            // IF it's not a boundary condition
+            if (local_eqn_imag >= 0)
+            {
+              // Add the second order terms contibution to the residual
+              residuals[local_eqn_imag] +=
+                ((-k * (1 + 0.125 / (k * k * R * R))) * interpolated_u.real() +
+                 (0.5 / R - 0.125 / (k * k * R * R * R)) *
+                   interpolated_u.imag()) *
+                test[l] * W;
+
+              residuals[local_eqn_imag] +=
+                ((0.5 / k) * du_dS.real() +
+                 (0.5 / (k * k * R)) * du_dS.imag()) *
+                dtest_dS(l, 0) * W;
+
+              // Calculate the jacobian
+              //-----------------------
+              if (flag)
+              {
+                // Loop over the shape functions again
+                for (unsigned l2 = 0; l2 < n_node; l2++)
+                {
+                  local_unknown_real =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.real());
+                  local_unknown_imag =
+                    this->nodal_local_eqn(l2, this->U_index_helmholtz.imag());
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_real >= 0)
+                  {
+                    jacobian(local_eqn_imag, local_unknown_real) +=
+                      (-k * (1 + 0.125 / (k * k * R * R))) * psi[l2] * test[l] *
+                      W;
+
+                    jacobian(local_eqn_imag, local_unknown_real) +=
+                      (0.5 / k) * dpsi_dS(l2, 0) * dtest_dS(l, 0) * W;
+                  }
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown_imag >= 0)
+                  {
+                    jacobian(local_eqn_imag, local_unknown_imag) +=
+                      (0.5 / R - 0.125 / (k * k * R * R * R)) * psi[l2] *
+                      test[l] * W;
+
+                    jacobian(local_eqn_imag, local_unknown_imag) +=
+                      (0.5 / (k * k * R)) * dpsi_dS(l2, 0) * dtest_dS(l, 0) * W;
+                  }
+                }
+              }
+            }
+          } // End of loop over the nodes
+        }
+      } // End of loop over int_pt
+
+    } // End of fill_in_generic_residual_contribution_helmholtz_flux
+
+  private:
+    /// Pointer to radius of outer boundary (must be a circle!)
+    double* Outer_radius_pt;
+
+    /// Pointer to order of absorbing boundary condition
+    unsigned* ABC_order_pt;
+  };
+
+  //=============================================================
+  /// FaceElement used to apply Sommerfeld radiation conditon
+  /// via Dirichlet to Neumann map.
+  //==============================================================
+  template<class ELEMENT>
+  class HelmholtzDtNBoundaryElement : public HelmholtzBCElementBase<ELEMENT>
+  {
+  public:
+    /// \short Construct element from specification of bulk element and
+    /// face index.
+    HelmholtzDtNBoundaryElement(FiniteElement* const& bulk_el_pt,
+                                const int& face_index)
+      : HelmholtzBCElementBase<ELEMENT>(bulk_el_pt, face_index)
+    {
+    }
+
+    /// Add the element's contribution to its residual vector
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      // Call the generic residuals function with flag set to 0
+      // using a dummy matrix argument
+      fill_in_generic_residual_contribution_helmholtz_DtN_bc(
+        residuals, GeneralisedElement::Dummy_matrix, 0);
+    }
+
+    /// \short Add the element's contribution to its residual vector and its
+    /// Jacobian matrix
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution_helmholtz_DtN_bc(
+        residuals, jacobian, 1);
+    }
+
+    /// \short Compute the contribution of the element
+    /// to the Gamma integral and its derivates w.r.t
+    /// to global unknows; the function takes the wavenumber and the polar
+    /// angle phi as input
+    void compute_gamma_contribution(
+      const double& phi,
+      const int& n,
+      std::complex<double>& gamma_con,
+      std::map<unsigned, std::complex<double>>& d_gamma_con);
+
+
+    /// \short Access function to mesh of all DtN boundary condition elements
+    /// (needed to get access to gamma values)
+    HelmholtzDtNMesh<ELEMENT>* outer_boundary_mesh_pt() const
+    {
+      return Outer_boundary_mesh_pt;
+    }
+
+    /// \short Set mesh of all DtN boundary condition elements
+    void set_outer_boundary_mesh_pt(HelmholtzDtNMesh<ELEMENT>* mesh_pt)
+    {
+      Outer_boundary_mesh_pt = mesh_pt;
+    }
+
+
+    /// \short Complete the setup of additional dependencies arising
+    /// through the far-away interaction with other nodes in
+    /// Outer_boundary_mesh_pt.
+    void complete_setup_of_dependencies()
+    {
+      // Create a set of all nodes
+      std::set<Node*> node_set;
+      unsigned nel = Outer_boundary_mesh_pt->nelement();
+      for (unsigned e = 0; e < nel; e++)
+      {
+        FiniteElement* el_pt = Outer_boundary_mesh_pt->finite_element_pt(e);
+        unsigned nnod = el_pt->nnode();
+        for (unsigned j = 0; j < nnod; j++)
+        {
+          Node* nod_pt = el_pt->node_pt(j);
+
+          // Don't add copied nodes
+          if (!(nod_pt->is_a_copy()))
+          {
+            node_set.insert(nod_pt);
+          }
+        }
+      }
+      // Now erase the current element's own nodes
+      unsigned nnod = this->nnode();
+      for (unsigned j = 0; j < nnod; j++)
+      {
+        Node* nod_pt = this->node_pt(j);
+        node_set.erase(nod_pt);
+
+        // If the element's node is a copy then its "master" will
+        // already have been added in the set above -- remove the
+        // master to avoid double counting eqn numbers
+        if (nod_pt->is_a_copy())
+        {
+          node_set.erase(nod_pt->copied_node_pt());
+        }
+      }
+
+      // Now declare these nodes to be the element's external Data
+      for (std::set<Node*>::iterator it = node_set.begin();
+           it != node_set.end();
+           it++)
+      {
+        this->add_external_data(*it);
+      }
+    }
+
+
+  private:
+    /// \short Compute the element's residual vector
+    /// Jacobian matrix.
+    /// Overloaded version, using the gamma computed in the mesh
+    void fill_in_generic_residual_contribution_helmholtz_DtN_bc(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
+    {
+      // Find out how many nodes there are
+      const unsigned n_node = this->nnode();
+
+      // Set up memory for the shape and test functions
+      Shape test(n_node);
+
+      // Set the value of Nintpt
+      const unsigned n_intpt = this->integral_pt()->nweight();
+
+      // Set the Vector to hold local coordinates
+      Vector<double> s(this->Dim - 1);
+
+      // Integers to hold the local equation and unknown numbers
+      int local_eqn_real = 0, local_unknown_real = 0, global_eqn_real = 0,
+          local_eqn_imag = 0, local_unknown_imag = 0, global_eqn_imag = 0;
+      int external_global_eqn_real = 0, external_unknown_real = 0,
+          external_global_eqn_imag = 0, external_unknown_imag = 0;
+
+
+      // Get the gamma value for the current integration point
+      // from the mesh
+      Vector<std::complex<double>> gamma(
+        Outer_boundary_mesh_pt->gamma_at_gauss_point(this));
+
+      Vector<std::map<unsigned, std::complex<double>>> d_gamma(
+        Outer_boundary_mesh_pt->d_gamma_at_gauss_point(this));
+
+      // Loop over the integration points
+      //--------------------------------
+      for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+      {
+        // Assign values of s
+        for (unsigned i = 0; i < (this->Dim - 1); i++)
+        {
+          s[i] = this->integral_pt()->knot(ipt, i);
+        }
+
+        // Get the integral weight
+        double w = this->integral_pt()->weight(ipt);
+
+        // Find the shape test functions and derivates; return the Jacobian
+        // of the mapping between local and global (Eulerian)
+        // coordinates
+        double J = this->test_only(s, test);
+
+        // Premultiply the weights and the Jacobian
+        double W = w * J;
+
+        // Now add to the appropriate equations
+        // Loop over the test functions:loop over the nodes
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          local_eqn_real =
+            this->nodal_local_eqn(l, this->U_index_helmholtz.real());
+          local_eqn_imag =
+            this->nodal_local_eqn(l, this->U_index_helmholtz.imag());
+
+          // IF it's not a boundary condition
+          if (local_eqn_real >= 0)
+          {
+            // Add the gamma contribution in this int_point to the res
+            residuals[local_eqn_real] -= gamma[ipt].real() * test[l] * W;
+
+            // Calculate the jacobian
+            //-----------------------
+            if (flag)
+            {
+              // Loop over the shape functions again
+              for (unsigned l2 = 0; l2 < n_node; l2++)
+              {
+                // Add the contribution of the local data
+                local_unknown_real =
+                  this->nodal_local_eqn(l2, this->U_index_helmholtz.real());
+
+                local_unknown_imag =
+                  this->nodal_local_eqn(l2, this->U_index_helmholtz.imag());
+
+                // If at a non-zero degree of freedom add in the entry
+                if (local_unknown_real >= 0)
+                {
+                  global_eqn_real = this->eqn_number(local_unknown_real);
+
+                  // Add the first order terms contribution
+                  jacobian(local_eqn_real, local_unknown_real) -=
+                    d_gamma[ipt][global_eqn_real].real() * test[l] * W;
+                }
+                if (local_unknown_imag >= 0)
+                {
+                  global_eqn_imag = this->eqn_number(local_unknown_imag);
+
+                  // Add the first order terms contribution
+                  jacobian(local_eqn_real, local_unknown_imag) -=
+                    d_gamma[ipt][global_eqn_imag].real() * test[l] * W;
+                }
+              } // End of loop over nodes l2
+
+              // Add the contribution of the external data
+              unsigned n_ext_data = this->nexternal_data();
+              // Loop over the shape functions again
+              for (unsigned l2 = 0; l2 < n_ext_data; l2++)
+              {
+                // Add the contribution of the local data
+                external_unknown_real =
+                  this->external_local_eqn(l2, this->U_index_helmholtz.real());
+
+                external_unknown_imag =
+                  this->external_local_eqn(l2, this->U_index_helmholtz.imag());
+
+                // If at a non-zero degree of freedom add in the entry
+                if (external_unknown_real >= 0)
+                {
+                  external_global_eqn_real =
+                    this->eqn_number(external_unknown_real);
+
+                  // Add the first order terms contribution
+                  jacobian(local_eqn_real, external_unknown_real) -=
+                    d_gamma[ipt][external_global_eqn_real].real() * test[l] * W;
+                }
+                if (external_unknown_imag >= 0)
+                {
+                  external_global_eqn_imag =
+                    this->eqn_number(external_unknown_imag);
+
+                  // Add the first order terms contribution
+                  jacobian(local_eqn_real, external_unknown_imag) -=
+                    d_gamma[ipt][external_global_eqn_imag].real() * test[l] * W;
+                }
+              } // End of loop over external data
+            } // End of flag
+          } // end of local_eqn_real
+
+          if (local_eqn_imag >= 0)
+          {
+            // Add the gamma contribution in this int_point to the res
+            residuals[local_eqn_imag] -= gamma[ipt].imag() * test[l] * W;
+
+            // Calculate the jacobian
+            //-----------------------
+            if (flag)
+            {
+              // Loop over the shape functions again
+              for (unsigned l2 = 0; l2 < n_node; l2++)
+              {
+                // Add the contribution of the local data
+                local_unknown_real =
+                  this->nodal_local_eqn(l2, this->U_index_helmholtz.real());
+
+                local_unknown_imag =
+                  this->nodal_local_eqn(l2, this->U_index_helmholtz.imag());
+
+                // If at a non-zero degree of freedom add in the entry
+                if (local_unknown_real >= 0)
+                {
+                  global_eqn_real = this->eqn_number(local_unknown_real);
+
+                  // Add the first order terms contribution
+                  jacobian(local_eqn_imag, local_unknown_real) -=
+                    d_gamma[ipt][global_eqn_real].imag() * test[l] * W;
+                }
+                if (local_unknown_imag >= 0)
+                {
+                  global_eqn_imag = this->eqn_number(local_unknown_imag);
+
+                  // Add the first order terms contribution
+                  jacobian(local_eqn_imag, local_unknown_imag) -=
+                    d_gamma[ipt][global_eqn_imag].imag() * test[l] * W;
+                }
+              } // End of loop over nodes l2
+
+              // Add the contribution of the external data
+              unsigned n_ext_data = this->nexternal_data();
+              // Loop over the shape functions again
+              for (unsigned l2 = 0; l2 < n_ext_data; l2++)
+              {
+                // Add the contribution of the local data
+                external_unknown_real =
+                  this->external_local_eqn(l2, this->U_index_helmholtz.real());
+
+                external_unknown_imag =
+                  this->external_local_eqn(l2, this->U_index_helmholtz.imag());
+
+                // If at a non-zero degree of freedom add in the entry
+                if (external_unknown_real >= 0)
+                {
+                  external_global_eqn_real =
+                    this->eqn_number(external_unknown_real);
+
+                  // Add the first order terms contribution
+                  jacobian(local_eqn_imag, external_unknown_real) -=
+                    d_gamma[ipt][external_global_eqn_real].imag() * test[l] * W;
+                }
+                if (external_unknown_imag >= 0)
+                {
+                  external_global_eqn_imag =
+                    this->eqn_number(external_unknown_imag);
+
+                  // Add the first order terms contribution
+                  jacobian(local_eqn_imag, external_unknown_imag) -=
+                    d_gamma[ipt][external_global_eqn_imag].imag() * test[l] * W;
+                }
+              } // End of loop over external data
+            } // End of flag
+          } // end of local_eqn_imag
+        } // end of llop over yhe node
+      } // End of loop over int_pt
+    } // End of fill_in_generic_residual_contribution_helmholtz_flux
+
+
+    /// \short Pointer to mesh of all DtN boundary condition elements
+    /// (needed to get access to gamma values)
+    HelmholtzDtNMesh<ELEMENT>* Outer_boundary_mesh_pt;
+  };
+
+
+  ////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
+
+
+  //===========start_compute_gamma_contribution==================
+  /// \short compute the contribution of the element
+  /// to the Gamma integral and its derivates w.r.t
+  /// to global unknows; the function takes wavenumber n
+  /// and polar angle phi as input.
+  //==============================================================
+  template<class ELEMENT>
+  void HelmholtzDtNBoundaryElement<ELEMENT>::compute_gamma_contribution(
+    const double& phi,
+    const int& n,
+    std::complex<double>& gamma_con,
+    std::map<unsigned, std::complex<double>>& d_gamma_con)
+  {
+    // define the imaginary number
+    const std::complex<double> I(0.0, 1.0);
+
+    // Find out how many nodes there are
+    const unsigned n_node = this->nnode();
+
+    // Set up memory for the shape  functions
+    Shape psi(n_node);
+    DShape dpsi(n_node, 1);
+
+    // initialise the variable
+    int local_unknown_real = 0, local_unknown_imag = 0;
+    int global_unknown_real = 0, global_unknown_imag = 0;
+
+    // Set the value of n_intpt
+    const unsigned n_intpt = this->integral_pt()->nweight();
+
+    // Set the Vector to hold local coordinates
+    Vector<double> s(this->Dim - 1);
+
+    // Initialise
+    gamma_con = std::complex<double>(0.0, 0.0);
+    d_gamma_con.clear();
+
+    // Loop over the integration points
+    //--------------------------------
+    for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+    {
+      // Assign values of s
+      for (unsigned i = 0; i < (this->Dim - 1); i++)
+      {
+        s[i] = this->integral_pt()->knot(ipt, i);
+      }
+
+      // Get the integral weight
+      double w = this->integral_pt()->weight(ipt);
+
+      // Get the shape functions
+      this->dshape_local(s, psi, dpsi);
+
+      // Eulerian coordinates at Gauss point
+      Vector<double> interpolated_x(this->Dim, 0.0);
+
+      // Derivs of Eulerian coordinates w.r.t. local coordinates
+      Vector<double> interpolated_dxds(this->Dim);
+      std::complex<double> interpolated_u(0.0, 0.0);
+
+      // Assemble x and its derivs
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Loop over directions
+        for (unsigned i = 0; i < this->Dim; i++)
+        {
+          interpolated_x[i] += this->nodal_position(l, i) * psi[l];
+          interpolated_dxds[i] += this->nodal_position(l, i) * dpsi(l, 0);
+        }
+
+        // Get the nodal value of the helmholtz unknown
+        std::complex<double> u_value(
+          this->nodal_value(l, this->U_index_helmholtz.real()),
+          this->nodal_value(l, this->U_index_helmholtz.imag()));
+
+        interpolated_u += u_value * psi(l);
+      } // End of loop over the nodes
+
+      // calculate the integral
+      //-----------------------
+      // define the variable phi_p
+      double phi_p = atan2(interpolated_x[1], interpolated_x[0]);
+
+      // define dphi_ds=(-yx'+y'x)/(x^2+y^2)
+      double denom = (interpolated_x[0] * interpolated_x[0]) +
+                     (interpolated_x[1] * interpolated_x[1]);
+      double nom = -interpolated_dxds[1] * interpolated_x[0] +
+                   interpolated_dxds[0] * interpolated_x[1];
+      double dphi_ds = std::fabs(nom / denom);
+
+      // compute the element contribution to gamma
+      // ALH: The awkward construction with pow and the static_cast is to
+      // avoid a floating point error on my machine when running unoptimised
+      // (no idea why!)
+      gamma_con += (dphi_ds)*w *
+                   pow(exp(I * (phi - phi_p)), static_cast<double>(n)) *
+                   interpolated_u;
+
+      // compute the contribution to each node to the map
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Add the contribution of the real local data
+        local_unknown_real =
+          this->nodal_local_eqn(l, this->U_index_helmholtz.real());
+        if (local_unknown_real >= 0)
+        {
+          global_unknown_real = this->eqn_number(local_unknown_real);
+          d_gamma_con[global_unknown_real] +=
+            (dphi_ds)*w * exp(I * (phi - phi_p) * double(n)) * psi(l);
+        }
+
+        // Add the contribution of the imag local data
+        local_unknown_imag =
+          this->nodal_local_eqn(l, this->U_index_helmholtz.imag());
+        if (local_unknown_imag >= 0)
+        {
+          global_unknown_imag = this->eqn_number(local_unknown_imag);
+          // ALH: The awkward construction with pow and the static_cast is to
+          // avoid a floating point error on my machine when running unoptimised
+          // (no idea why!)
+          d_gamma_con[global_unknown_imag] +=
+            I * (dphi_ds)*w *
+            pow(exp(I * (phi - phi_p)), static_cast<double>(n)) * psi(l);
+        }
+      } // end of loop over the node
+    } // End of loop over integration points
+  }
+
+
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+
+
+  //===========================================================================
+  /// \short Namespace for checking radius of nodes on (assumed to be circular)
+  /// DtN boundary
+  //===========================================================================
+  namespace ToleranceForHelmholtzOuterBoundary
+  {
+    /// \short Relative tolerance to within radius of points on DtN boundary
+    /// are allowed to deviate from specified value
+    extern double Tol;
+
+  } // namespace ToleranceForHelmholtzOuterBoundary
+
+
+  //===========================================================================
+  /// \short Namespace for checking radius of nodes on (assumed to be circular)
+  /// DtN boundary
+  //===========================================================================
+  namespace ToleranceForHelmholtzOuterBoundary
+  {
+    /// \short Relative tolerance to within radius of points on DtN boundary
+    /// are allowed to deviate from specified value
+    double Tol = 1.0e-3;
+
+  } // namespace ToleranceForHelmholtzOuterBoundary
+
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
+
+
+  ///================================================================
+  /// \short Compute Fourier components of the solution -- length of
+  /// vector indicates number of terms to be computed.
+  ///================================================================
+  template<class ELEMENT>
+  void HelmholtzDtNMesh<ELEMENT>::compute_fourier_components(
+    Vector<std::complex<double>>& a_coeff_pos,
+    Vector<std::complex<double>>& a_coeff_neg)
+  {
+#ifdef PARANOID
+    if (a_coeff_pos.size() != a_coeff_neg.size())
+    {
+      std::ostringstream error_stream;
+      error_stream << "a_coeff_pos and a_coeff_neg must have "
+                   << "the same size. \n";
+      throw OomphLibError(
+        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // Initialise
+    unsigned n = a_coeff_pos.size();
+    Vector<std::complex<double>> el_a_coeff_pos(n);
+    Vector<std::complex<double>> el_a_coeff_neg(n);
+    for (unsigned i = 0; i < n; i++)
+    {
+      a_coeff_pos[i] = std::complex<double>(0.0, 0.0);
+      a_coeff_neg[i] = std::complex<double>(0.0, 0.0);
+    }
+
+    // Loop over elements e
+    unsigned nel = this->nelement();
+    for (unsigned e = 0; e < nel; e++)
+    {
+      // Get a pointer to element
+      HelmholtzBCElementBase<ELEMENT>* el_pt =
+        dynamic_cast<HelmholtzBCElementBase<ELEMENT>*>(this->element_pt(e));
+
+      // Compute contribution
+      el_pt->compute_contribution_to_fourier_components(el_a_coeff_pos,
+                                                        el_a_coeff_neg);
+
+      // Add to coefficients
+      for (unsigned i = 0; i < n; i++)
+      {
+        a_coeff_pos[i] += el_a_coeff_pos[i];
+        a_coeff_neg[i] += el_a_coeff_neg[i];
+      }
+    }
+  }
+
+
+  ///================================================================
+  /// Compute and store the gamma integral and derivates
+  // /w.r.t global unknows at all integration  points
+  /// of the mesh's constituent elements
+  //================================================================
+  template<class ELEMENT>
+  void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
+  {
+#ifdef PARANOID
+    {
+      // Loop over elements e
+      unsigned nel = this->nelement();
+      for (unsigned e = 0; e < nel; e++)
+      {
+        FiniteElement* fe_pt = finite_element_pt(e);
+        unsigned nnod = fe_pt->nnode();
+        for (unsigned j = 0; j < nnod; j++)
+        {
+          Node* nod_pt = fe_pt->node_pt(j);
+
+          // Extract nodal coordinates from node:
+          Vector<double> x(2);
+          x[0] = nod_pt->x(0);
+          x[1] = nod_pt->x(1);
+
+          // Evaluate the radial distance
+          double r = sqrt(x[0] * x[0] + x[1] * x[1]);
+
+          // Check
+          if (Outer_radius == 0.0)
+          {
+            throw OomphLibError("Outer radius for DtN BC must not be zero!",
+                                OOMPH_CURRENT_FUNCTION,
+                                OOMPH_EXCEPTION_LOCATION);
+          }
+
+          if (std::fabs((r - this->Outer_radius) / Outer_radius) >
+              ToleranceForHelmholtzOuterBoundary::Tol)
+          {
+            std::ostringstream error_stream;
+            error_stream << "Node at " << x[0] << " " << x[1] << " has radius "
+                         << r << " which does not "
+                         << " agree with \nspecified outer radius "
+                         << this->Outer_radius << " within relative tolerance "
+                         << ToleranceForHelmholtzOuterBoundary::Tol
+                         << ".\nYou can adjust the tolerance via\n"
+                         << "ToleranceForHelmholtzOuterBoundary::Tol\n"
+                         << "or recompile without PARANOID.\n";
+            throw OomphLibError(error_stream.str(),
+                                OOMPH_CURRENT_FUNCTION,
+                                OOMPH_EXCEPTION_LOCATION);
+          }
+        }
+      }
+    }
+#endif
+
+
+    // Get Helmholtz parameter from bulk element
+    HelmholtzDtNBoundaryElement<ELEMENT>* el_pt =
+      dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT>*>(this->element_pt(0));
+    double k =
+      sqrt(dynamic_cast<ELEMENT*>(el_pt->bulk_element_pt())->k_squared());
+
+    // Precompute factors in sum
+    Vector<std::complex<double>> h_a(Nfourier_terms), hp_a(Nfourier_terms),
+      q(Nfourier_terms);
+    Hankel_functions_for_helmholtz_problem::Hankel_first(
+      Nfourier_terms, Outer_radius * k, h_a, hp_a);
+    for (unsigned i = 0; i < Nfourier_terms; i++)
+    {
+      q[i] = (k / (2.0 * MathematicalConstants::Pi)) * (hp_a[i] / h_a[i]);
+    }
+
+    // first loop over elements e
+    unsigned nel = this->nelement();
+    for (unsigned e = 0; e < nel; e++)
+    {
+      // Get a pointer to element
+      HelmholtzDtNBoundaryElement<ELEMENT>* el_pt =
+        dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT>*>(
+          this->element_pt(e));
+
+      // Set the value of n_intpt
+      const unsigned n_intpt = el_pt->integral_pt()->nweight();
+
+      // initialise gamma integral and its derivatives
+      Vector<std::complex<double>> gamma_vector(n_intpt,
+                                                std::complex<double>(0.0, 0.0));
+      Vector<std::map<unsigned, std::complex<double>>> d_gamma_vector(n_intpt);
+
+      // Loop over the integration points
+      for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+      {
+        // Allocate and initialise coordinate
+        unsigned ndim_local = el_pt->dim();
+        Vector<double> x(ndim_local + 1, 0.0);
+
+        // Set the Vector to hold local coordinates
+        Vector<double> s(ndim_local, 0.0);
+        for (unsigned i = 0; i < ndim_local; i++)
+        {
+          s[i] = el_pt->integral_pt()->knot(ipt, i);
+        }
+
+        // Get the coordinates of the integration point
+        el_pt->interpolated_x(s, x);
+
+        // Polar angle
+        double phi = atan2(x[1], x[0]);
+
+        // Elemental contribution to gamma integral and its derivative
+        std::complex<double> gamma_con_p(0.0, 0.0), gamma_con_n(0.0, 0.0);
+        std::map<unsigned, std::complex<double>> d_gamma_con_p, d_gamma_con_n;
+
+        // loop over the Fourier terms
+        for (unsigned nn = 0; nn < Nfourier_terms; nn++)
+        {
+          // Second loop over the element
+          // to evaluate the complete integral
+          for (unsigned ee = 0; ee < nel; ee++)
+          {
+            HelmholtzDtNBoundaryElement<ELEMENT>* eel_pt =
+              dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT>*>(
+                this->element_pt(ee));
+
+            // contribution of the positive term in the sum
+            eel_pt->compute_gamma_contribution(
+              phi, int(nn), gamma_con_p, d_gamma_con_p);
+
+            // contribution of the negative term in the sum
+            eel_pt->compute_gamma_contribution(
+              phi, -int(nn), gamma_con_n, d_gamma_con_n);
+
+            unsigned n_node = eel_pt->nnode();
+            if (nn == 0)
+            {
+              gamma_vector[ipt] += q[nn] * gamma_con_p;
+              for (unsigned l = 0; l < n_node; l++)
+              {
+                // Add the contribution of the real local data
+                int local_unknown_p_real = eel_pt->nodal_local_eqn(
+                  l, eel_pt->u_index_helmholtz().real());
+                if (local_unknown_p_real >= 0)
+                {
+                  int global_unknown_p_real =
+                    eel_pt->eqn_number(local_unknown_p_real);
+                  d_gamma_vector[ipt][global_unknown_p_real] +=
+                    q[nn] * d_gamma_con_p[global_unknown_p_real];
+                }
+
+                // Add the contribution of the imag local data
+                int local_unknown_p_imag = eel_pt->nodal_local_eqn(
+                  l, eel_pt->u_index_helmholtz().imag());
+
+                if (local_unknown_p_imag >= 0)
+                {
+                  int global_unknown_p_imag =
+                    eel_pt->eqn_number(local_unknown_p_imag);
+
+                  d_gamma_vector[ipt][global_unknown_p_imag] +=
+                    q[nn] * d_gamma_con_p[global_unknown_p_imag];
+                }
+              } // end of loop over the node
+            } // End of if
+            else
+            {
+              gamma_vector[ipt] += q[nn] * (gamma_con_p + gamma_con_n);
+              for (unsigned l = 0; l < n_node; l++)
+              {
+                // Add the contribution of the real local data
+                int local_unknown_real = eel_pt->nodal_local_eqn(
+                  l, eel_pt->u_index_helmholtz().real());
+                if (local_unknown_real >= 0)
+                {
+                  int global_unknown_real =
+                    eel_pt->eqn_number(local_unknown_real);
+                  d_gamma_vector[ipt][global_unknown_real] +=
+                    q[nn] * (d_gamma_con_p[global_unknown_real] +
+                             d_gamma_con_n[global_unknown_real]);
+                }
+                // Add the contribution of the imag local data
+                int local_unknown_imag = eel_pt->nodal_local_eqn(
+                  l, eel_pt->u_index_helmholtz().imag());
+                if (local_unknown_imag >= 0)
+                {
+                  int global_unknown_imag =
+                    eel_pt->eqn_number(local_unknown_imag);
+                  d_gamma_vector[ipt][global_unknown_imag] +=
+                    q[nn] * (d_gamma_con_p[global_unknown_imag] +
+                             d_gamma_con_n[global_unknown_imag]);
+                }
+              } // end of loop over the node
+            } // End of else
+          } // End of second loop over the elements
+        } // End of loop over Fourier terms
+      } // end of loop over integration point
+
+      // Store it in map
+      Gamma_at_gauss_point[el_pt] = gamma_vector;
+      D_Gamma_at_gauss_point[el_pt] = d_gamma_vector;
+
+    } // end of first loop over element
+  }
+
+  //===========================================================================
+  /// Constructor, takes the pointer to the "bulk" element and the face index
+  //===========================================================================
+  template<class ELEMENT>
+  HelmholtzBCElementBase<ELEMENT>::HelmholtzBCElementBase(
+    FiniteElement* const& bulk_el_pt, const int& face_index)
+    : FaceGeometry<ELEMENT>(), FaceElement()
+  {
+#ifdef PARANOID
+    {
+      // Check that the element is not a refineable 3d element
+      ELEMENT* elem_pt = new ELEMENT;
+      // If it's three-d
+      if (elem_pt->dim() == 3)
+      {
+        // Is it refineable
+        if (dynamic_cast<RefineableElement*>(elem_pt))
+        {
+          // Issue a warning
+          OomphLibWarning("This flux element will not"
+                          "work correctly if nodes are hanging\n",
+                          "HelmholtzBCElementBase::Constructor",
+                          OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+#endif
+
+    // Let the bulk element build the FaceElement, i.e. setup the pointers
+    // to its nodes (by referring to the appropriate nodes in the bulk
+    // element), etc.
+    bulk_el_pt->build_face_element(face_index, this);
+
+    // Extract the dimension of the problem from the dimension of
+    // the first node
+    Dim = this->node_pt(0)->ndim();
+
+    // Set up U_index_helmholtz. Initialise to zero, which probably won't change
+    // in most cases, oh well, the price we pay for generality
+    U_index_helmholtz = std::complex<unsigned>(0, 1);
+
+    // Cast to the appropriate HelmholtzEquation so that we can
+    // find the index at which the variable is stored
+    // We assume that the dimension of the full problem is the same
+    // as the dimension of the node, if this is not the case you will have
+    // to write custom elements, sorry
+    switch (Dim)
+    {
+        // One dimensional problem
+      case 1:
+      {
+        HelmholtzEquations<1>* eqn_pt =
+          dynamic_cast<HelmholtzEquations<1>*>(bulk_el_pt);
+        // If the cast has failed die
+        if (eqn_pt == 0)
+        {
+          std::string error_string =
+            "Bulk element must inherit from HelmholtzEquations.";
+          error_string +=
+            "Nodes are one dimensional, but cannot cast the bulk element to\n";
+          error_string += "HelmholtzEquations<1>\n.";
+          error_string += "If you desire this functionality, you must "
+                          "implement it yourself\n";
+
+          throw OomphLibError(
+            error_string, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+        // Otherwise read out the value
+        else
+        {
+          // Read the index from the (cast) bulk element
+          U_index_helmholtz = eqn_pt->u_index_helmholtz();
+        }
+      }
+      break;
+
+      // Two dimensional problem
+      case 2:
+      {
+        HelmholtzEquations<2>* eqn_pt =
+          dynamic_cast<HelmholtzEquations<2>*>(bulk_el_pt);
+        // If the cast has failed die
+        if (eqn_pt == 0)
+        {
+          std::string error_string =
+            "Bulk element must inherit from HelmholtzEquations.";
+          error_string +=
+            "Nodes are two dimensional, but cannot cast the bulk element to\n";
+          error_string += "HelmholtzEquations<2>\n.";
+          error_string += "If you desire this functionality, you must "
+                          "implement it yourself\n";
+
+          throw OomphLibError(
+            error_string, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+        else
+        {
+          // Read the index from the (cast) bulk element
+          U_index_helmholtz = eqn_pt->u_index_helmholtz();
+        }
+      }
+
+      break;
+
+      // Three dimensional problem
+      case 3:
+      {
+        HelmholtzEquations<3>* eqn_pt =
+          dynamic_cast<HelmholtzEquations<3>*>(bulk_el_pt);
+        // If the cast has failed die
+        if (eqn_pt == 0)
+        {
+          std::string error_string =
+            "Bulk element must inherit from HelmholtzEquations.";
+          error_string += "Nodes are three dimensional, but cannot cast the "
+                          "bulk element to\n";
+          error_string += "HelmholtzEquations<3>\n.";
+          error_string += "If you desire this functionality, you must "
+                          "implement it yourself\n";
+
+          throw OomphLibError(
+            error_string, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+        else
+        {
+          // Read the index from the (cast) bulk element
+          U_index_helmholtz = eqn_pt->u_index_helmholtz();
+        }
+      }
+      break;
+
+      // Any other case is an error
+      default:
+        std::ostringstream error_stream;
+        error_stream << "Dimension of node is " << Dim
+                     << ". It should be 1,2, or 3!" << std::endl;
+
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        break;
+    }
+  }
+
+
+} // namespace oomph
+
+#endif

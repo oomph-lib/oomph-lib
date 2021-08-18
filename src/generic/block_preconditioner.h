@@ -1,29 +1,29 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
-//Include guards
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+// Include guards
 #ifndef OOMPH_BLOCK_PRECONDITION_HEADER
 #define OOMPH_BLOCK_PRECONDITION_HEADER
 
@@ -49,3529 +49,3494 @@
 
 namespace oomph
 {
-
-//=============================================================================
-/// \short Data structure to store information about a certain "block" or
-/// sub-matrix from the overall matrix in the block preconditioning framework.
-///
-/// Example of use: Let's assume we want to form a concatenated matrix
-/// from the blocks of a Jacobian matrix that contains the following blocks:
-/// 
-/// [J_00, J_01, J_02
-///  J_10, J_11, J_12
-///  J_20, J_21, J_22]
-/// 
-/// so that the new matrix has the entries
-///
-/// [ J_01, J_00 
-///   J_21,   0  ] 
-/// 
-/// where "0" indicates zero matrix of the required size.
-/// 
-/// To do this we create a 2x2 (the block size of the new concatenated
-/// matrix) VectorMatrix of BlockSelectors and then declare for each
-/// entry the block indices in the original matrix and if the entry
-/// is to be included (and copied from the corresponding entry in 
-/// the Jacobian (final boolean argument true) or if the block is
-/// to be omitted and replaced by an appropriately sized zero matrix.
-/// For the example above this would be done as follows:
-///
-/// VectorMatrix<BlockSelector> required_block(2,2);
-/// required_block[0][0].select_block(0,1,true);
-/// required_block[0][1].select_block(0,0,true);
-/// required_block[1][0].select_block(2,1,true);
-/// required_block[1][1].select_block(2,0,false);
-///
-/// and the concatenated matrix would then be built as
-/// 
-/// CRDoubleMatrix concatenated_block1 
-///   = get_concatenated_block(required_block);
-///
-/// Note that it is necessary to identify the row and column indices of any
-/// omitted blocks (here block J_20 in the original matrix) to enable
-/// the correct setup of the sparse matrix storage. 
-/// 
-/// The initial assignment of the boolean may be over-written with the
-/// do_not_want_block() member function; this can again be reversed
-/// with the want_block() counterpart. So if we call
-///
-/// required_block[0][0].do_not_want_block();
-///
-/// and the build a new conctatenated matrix with
-/// 
-/// CRDoubleMatrix concatenated_block2
-///   = get_concatenated_block(required_block);
-///
-/// the resulting matrix would the anti-diagonal matrix
-///
-/// [   0  , J_00 
-///   J_21 ,   0  ] 
-/// 
-/// Finally it is possible to specify a replacement block 
-/// by specifying a pointer to an appropriately sized matrix
-/// that is to be used instead of the block in the Jacobian 
-/// matrix, so if replacement_block_pt points to a matrix, R, say,
-/// of the same size as J_01, then 
-/// 
-/// selected_block[0][0].select_block(0,1,true,replacement_block_pt);
-///
-/// then the resulting concatenated matrix would contain 
-///
-/// [   R  , J_00 
-///   J_21 ,   0  ] 
-/// 
-//=============================================================================
-class BlockSelector
-{
+  //=============================================================================
+  /// \short Data structure to store information about a certain "block" or
+  /// sub-matrix from the overall matrix in the block preconditioning framework.
+  ///
+  /// Example of use: Let's assume we want to form a concatenated matrix
+  /// from the blocks of a Jacobian matrix that contains the following blocks:
+  ///
+  /// [J_00, J_01, J_02
+  ///  J_10, J_11, J_12
+  ///  J_20, J_21, J_22]
+  ///
+  /// so that the new matrix has the entries
+  ///
+  /// [ J_01, J_00
+  ///   J_21,   0  ]
+  ///
+  /// where "0" indicates zero matrix of the required size.
+  ///
+  /// To do this we create a 2x2 (the block size of the new concatenated
+  /// matrix) VectorMatrix of BlockSelectors and then declare for each
+  /// entry the block indices in the original matrix and if the entry
+  /// is to be included (and copied from the corresponding entry in
+  /// the Jacobian (final boolean argument true) or if the block is
+  /// to be omitted and replaced by an appropriately sized zero matrix.
+  /// For the example above this would be done as follows:
+  ///
+  /// VectorMatrix<BlockSelector> required_block(2,2);
+  /// required_block[0][0].select_block(0,1,true);
+  /// required_block[0][1].select_block(0,0,true);
+  /// required_block[1][0].select_block(2,1,true);
+  /// required_block[1][1].select_block(2,0,false);
+  ///
+  /// and the concatenated matrix would then be built as
+  ///
+  /// CRDoubleMatrix concatenated_block1
+  ///   = get_concatenated_block(required_block);
+  ///
+  /// Note that it is necessary to identify the row and column indices of any
+  /// omitted blocks (here block J_20 in the original matrix) to enable
+  /// the correct setup of the sparse matrix storage.
+  ///
+  /// The initial assignment of the boolean may be over-written with the
+  /// do_not_want_block() member function; this can again be reversed
+  /// with the want_block() counterpart. So if we call
+  ///
+  /// required_block[0][0].do_not_want_block();
+  ///
+  /// and the build a new conctatenated matrix with
+  ///
+  /// CRDoubleMatrix concatenated_block2
+  ///   = get_concatenated_block(required_block);
+  ///
+  /// the resulting matrix would the anti-diagonal matrix
+  ///
+  /// [   0  , J_00
+  ///   J_21 ,   0  ]
+  ///
+  /// Finally it is possible to specify a replacement block
+  /// by specifying a pointer to an appropriately sized matrix
+  /// that is to be used instead of the block in the Jacobian
+  /// matrix, so if replacement_block_pt points to a matrix, R, say,
+  /// of the same size as J_01, then
+  ///
+  /// selected_block[0][0].select_block(0,1,true,replacement_block_pt);
+  ///
+  /// then the resulting concatenated matrix would contain
+  ///
+  /// [   R  , J_00
+  ///   J_21 ,   0  ]
+  ///
+  //=============================================================================
+  class BlockSelector
+  {
   public:
-
-  /// \short Default constructor, 
-  /// initialise block index i, j to 0 and bool to false.
-  BlockSelector()
-  {
-    // Needs to be set to zero because if the build function leaves the
-    // Replacement_block_pt alone if replacement_block_pt = 0 (the default argument).
-    Replacement_block_pt = 0;
-    this->build(0,0,false);
-  }
-
- /// \short Constructor, takes the row and column indices 
- /// and a boolean indicating if the block is required or not. The optional
- /// parameter replacement_block_pt is set to null. If the block is not required a block
- /// of the correct dimensions full of 0s is used.
- BlockSelector(const unsigned& row_index, 
-               const unsigned& column_index, 
-               const bool& wanted,
-               CRDoubleMatrix* replacement_block_pt = 0)
-  {
-#ifdef PARANOID
-   if((wanted == false) && (replacement_block_pt !=0))
+    /// \short Default constructor,
+    /// initialise block index i, j to 0 and bool to false.
+    BlockSelector()
     {
-     std::ostringstream err_msg;
-     err_msg << "Trying to construct a BlockSelector object with:\n" 
-             << "replacement_block_pt != 0 and wanted == false"
-             << "If you require the block, please set wanted == true.\n";
-     throw OomphLibError(err_msg.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION); 
+      // Needs to be set to zero because if the build function leaves the
+      // Replacement_block_pt alone if replacement_block_pt = 0 (the default
+      // argument).
+      Replacement_block_pt = 0;
+      this->build(0, 0, false);
     }
-#endif
-   
-   // Needs to be set to zero because if the build function leaves the
-   // Replacement_block_pt alone if replacement_block_pt = 0 (the default argument).
-   // Thus if it is not set here, it would not be initialised to null.
-   Replacement_block_pt = 0;
-   
-   this->build(row_index,column_index,wanted,replacement_block_pt);
-  }
 
-  /// \short Default destructor.
-  virtual ~BlockSelector()
-  {
-#ifdef PARANOID
-    if(Replacement_block_pt != 0)
+    /// \short Constructor, takes the row and column indices
+    /// and a boolean indicating if the block is required or not. The optional
+    /// parameter replacement_block_pt is set to null. If the block is not
+    /// required a block of the correct dimensions full of 0s is used.
+    BlockSelector(const unsigned& row_index,
+                  const unsigned& column_index,
+                  const bool& wanted,
+                  CRDoubleMatrix* replacement_block_pt = 0)
     {
-      std::ostringstream warning_msg;
-      warning_msg << "Warning: BlockSelector destructor is called but...\n"
-                  << "replacement_block_pt() is not null.\n"
-                  << "Please remember to null this via the function\n"
-                  << "BlockSelector::null_replacement_block_pt()\n" 
-                  << "Row_index: " << Row_index << "\n"
-                  << "Column_index: " << Column_index << std::endl;
-      
-      OomphLibWarning(warning_msg.str(),
-                      OOMPH_CURRENT_FUNCTION,
-                      OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-  }
-
-  /// \short Select a block.
-  void select_block(const unsigned& row_index, 
-                    const unsigned& column_index, 
-                    const bool& wanted,
-                    CRDoubleMatrix* replacement_block_pt = 0)
-  {
 #ifdef PARANOID
-    if((wanted == false) && (replacement_block_pt !=0))
-    {
-      std::ostringstream err_msg;
-      err_msg << "Trying to select block with:\n" 
-        << "replacement_block_pt != 0 and wanted == false"
-        << "If you require the block, please set wanted == true.\n"
-        << "row_index: " << row_index << "\n"
-        << "column_index: " << column_index << "\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION); 
-    }
+      if ((wanted == false) && (replacement_block_pt != 0))
+      {
+        std::ostringstream err_msg;
+        err_msg << "Trying to construct a BlockSelector object with:\n"
+                << "replacement_block_pt != 0 and wanted == false"
+                << "If you require the block, please set wanted == true.\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    this->build(row_index,column_index,wanted,replacement_block_pt);
-  }
+      // Needs to be set to zero because if the build function leaves the
+      // Replacement_block_pt alone if replacement_block_pt = 0 (the default
+      // argument). Thus if it is not set here, it would not be initialised to
+      // null.
+      Replacement_block_pt = 0;
 
-
-  /// \short Indicate that we require the block (set Wanted to true).
-  void want_block()
-  {
-    Wanted = true;
-  }
-
-  /// \short Indicate that we do not want the block (set Wanted to false).
-  void do_not_want_block()
-  {
-#ifdef PARANOID
-    if(Replacement_block_pt !=0)
-    {
-      std::ostringstream warning_msg;
-      warning_msg << "Trying to set Wanted = false, but replacement_block_pt is not null.\n"
-        << "Please call null_replacement_block_pt()\n"
-        << "(remember to free memory if necessary)\n"
-        << "Row_index: " << Row_index << "\n"
-        << "Column_index: " << Column_index << "\n";
-          OomphLibWarning(warning_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
+      this->build(row_index, column_index, wanted, replacement_block_pt);
     }
+
+    /// \short Default destructor.
+    virtual ~BlockSelector()
+    {
+#ifdef PARANOID
+      if (Replacement_block_pt != 0)
+      {
+        std::ostringstream warning_msg;
+        warning_msg << "Warning: BlockSelector destructor is called but...\n"
+                    << "replacement_block_pt() is not null.\n"
+                    << "Please remember to null this via the function\n"
+                    << "BlockSelector::null_replacement_block_pt()\n"
+                    << "Row_index: " << Row_index << "\n"
+                    << "Column_index: " << Column_index << std::endl;
+
+        OomphLibWarning(
+          warning_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
-      
-    null_replacement_block_pt();
-
-    Wanted = false;
-  }
-
-  /// \short Set Replacement_block_pt to null.
-  void null_replacement_block_pt()
-  {
-    Replacement_block_pt = 0;
-  }
-
-  /// \short set Replacement_block_pt.
-  void set_replacement_block_pt(CRDoubleMatrix* replacement_block_pt)
-  {
-#ifdef PARANOID
-    if(Wanted == false)
-    {
-      std::ostringstream err_msg;
-      err_msg << "Trying to set replacement_block_pt, but Wanted == false.\n" 
-        << "Please call want_block()\n"
-        << "Row_index: " <<  Row_index << "\n"
-        << "Column_index: " << Column_index << "\n";
-      throw OomphLibError(err_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION); 
     }
+
+    /// \short Select a block.
+    void select_block(const unsigned& row_index,
+                      const unsigned& column_index,
+                      const bool& wanted,
+                      CRDoubleMatrix* replacement_block_pt = 0)
+    {
+#ifdef PARANOID
+      if ((wanted == false) && (replacement_block_pt != 0))
+      {
+        std::ostringstream err_msg;
+        err_msg << "Trying to select block with:\n"
+                << "replacement_block_pt != 0 and wanted == false"
+                << "If you require the block, please set wanted == true.\n"
+                << "row_index: " << row_index << "\n"
+                << "column_index: " << column_index << "\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    Replacement_block_pt = replacement_block_pt;
-  }
-
-  /// \short Returns Replacement_block_pt
-  CRDoubleMatrix* replacement_block_pt() const
-  {
-    return Replacement_block_pt;
-  }
-
-  /// \short Set the row index.
-  void set_row_index(const unsigned& row_index)
-  {
-    Row_index = row_index;
-  }
-
-  /// \short returns the row index.
-  const unsigned& row_index() const
-  {
-    return Row_index;
-  }
-
-  /// \short Set the column index.
-  void set_column_index(const unsigned& column_index)
-  {
-    Column_index = column_index;
-  }
-
-  /// \short returns the column index.
-  const unsigned& column_index() const
-  {
-    return Column_index;
-  }
-
-  /// \short returns whether the block is wanted or not.
-  const bool& wanted() const
-  {
-    return Wanted;
-  }
+      this->build(row_index, column_index, wanted, replacement_block_pt);
+    }
 
 
-  /// \short Output function, outputs the Row_index, Column_index, Wanted and
-  /// the address of the Replacement_block_pt.
- /// P.M.: The address of a null pointer on a Mac is 0x0 but for self-tests
- /// the address needs to be simply 0. Easy (but hacky) check sorts that out...
-  friend std::ostream& operator<<(std::ostream& o_stream,
-                           const BlockSelector& block_selector)
-  {
-    o_stream << "Row_index = " << block_selector.row_index() << "\n"
-             << "Column_index = " << block_selector.column_index() << "\n"
-             << "Wanted = " << block_selector.wanted() << "\n"
-	   << "Replacement_block_pt = ";
-  if (block_selector.replacement_block_pt()==0)
-  {
-   o_stream << 0;
-  }
+    /// \short Indicate that we require the block (set Wanted to true).
+    void want_block()
+    {
+      Wanted = true;
+    }
 
-    return o_stream;
-  }
-
-  private:
-
-  /// Build function, sets the Row_index, Column_index and Wanted variables.
-  /// the Replacement_block_pt is only set if it is not null. Otherwise it is left alone.
-  void build(const unsigned& row_index, 
-      const unsigned& column_index, 
-      const bool& wanted,
-      CRDoubleMatrix* replacement_block_pt = 0)
-  {
-    Row_index = row_index;
-    Column_index = column_index;
-    Wanted = wanted;
-
-    // Only set the replacement_block_pt if it is wanted. Otherwise we leave it alone.
-    // All constructors should set Replacement_block_pt to 0.
-    if(replacement_block_pt != 0)
+    /// \short Indicate that we do not want the block (set Wanted to false).
+    void do_not_want_block()
     {
 #ifdef PARANOID
-      if(Wanted == false)
+      if (Replacement_block_pt != 0)
+      {
+        std::ostringstream warning_msg;
+        warning_msg << "Trying to set Wanted = false, but replacement_block_pt "
+                       "is not null.\n"
+                    << "Please call null_replacement_block_pt()\n"
+                    << "(remember to free memory if necessary)\n"
+                    << "Row_index: " << Row_index << "\n"
+                    << "Column_index: " << Column_index << "\n";
+        OomphLibWarning(
+          warning_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      null_replacement_block_pt();
+
+      Wanted = false;
+    }
+
+    /// \short Set Replacement_block_pt to null.
+    void null_replacement_block_pt()
+    {
+      Replacement_block_pt = 0;
+    }
+
+    /// \short set Replacement_block_pt.
+    void set_replacement_block_pt(CRDoubleMatrix* replacement_block_pt)
+    {
+#ifdef PARANOID
+      if (Wanted == false)
       {
         std::ostringstream err_msg;
         err_msg << "Trying to set replacement_block_pt, but Wanted == false.\n"
-                << "Please either not set the replacement_block_pt or call the function\n"
-                << "do_not_want_block()\n"
+                << "Please call want_block()\n"
                 << "Row_index: " << Row_index << "\n"
                 << "Column_index: " << Column_index << "\n";
-        throw OomphLibError(err_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION); 
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 #endif
 
       Replacement_block_pt = replacement_block_pt;
     }
-  }
 
-  /// Row index of the block.
-  unsigned Row_index;
-
-  /// Column index of the block.
-  unsigned Column_index;
-
-  /// Bool to indicate if we require this block.
-  bool Wanted;
-
-  /// Pointer to the block.
-  CRDoubleMatrix* Replacement_block_pt;
-
-};
-
-
- //============================================================================
- /// Block Preconditioner base class. The block structure of the
- /// overall problem is determined from the \c Mesh's constituent
- /// elements. Each constituent element must be block-preconditionable - i.e
- /// must implement the \c GeneralisedElements functions \c ndof_types() and
- /// get_dof_numbers_for_unknowns(...). A \c Problem can have several
- /// \c Meshes, but each \c Mesh must contain elements with the same DOF types.
- /// The association between global degrees of freedom and their unique local
- /// dof numbers is therefore based on information provided by the elements.
- /// We refer to the local dof numbers provided by the elements as the 
- /// elemental dof numbers.
- /// 
- /// By default each type of DOF is assumed to be unique type of block,
- /// but DOF types can be grouped together in a single block when
- /// block_setup(...) is called.
- /// 
- /// This class can function in one of two ways. Either it acts as a
- /// stand-alone block preconditioner which computes and stores
- /// the association between global degrees of freedom and their unique global
- /// block numbers itself. Alternatively, the block preconditioner can act as
- /// a subsidiary block preconditioner within a (larger) master block
- /// preconditioner (pointed to by Master_block_preconditioner_pt).
- /// The master block preconditioner
- /// must have an equal or greater number of block types. Examples
- /// are the FSI preconditioner which is the 3x3 "master block preconditioner"
- /// for the Navier-Stokes preconditioners which deals with the
- /// 2x2 fluid-blocks within the overall structure. In this case, \b only
- /// the master block preconditioner computes and stores the master
- /// lookup schemes. All block preconditioners compute and store their own
- /// optimised lookup schemes.
- /// 
- /// In cases where a \c Problem contains elements of different element types
- /// (e.g. fluid and solid elements in a fluid-structure interaction problem),
- /// access to the elements of the same type must be provided via pointers to
- /// (possibly auxiliary) \c Meshes that only contain elements of a single
- /// type. The block preconditioner will then create global block
- /// numbers by concatenating the block types. Consider, e.g. a fluid-structure
- /// interaction problem in which the first \c Mesh contains (fluid)
- /// elements whose degrees of freedom have been subdivided into
- /// types "0" (the velocity, say) and "1" (the pressure say), while
- /// the second \c Mesh contains (solid) elements whose degrees of freedom
- /// are the nodal displacements, classified as its type "0".
- /// The combined block preconditioner then has three "block types":
- /// "0": Fluid velocity, "1": Fluid pressure, "2": Solid nodal positions.
- /// NOTE: currently this preconditioner uses the same communicator as the
- /// underlying problem. We may need to change this in the future.
- //============================================================================
- template<typename MATRIX>
- class BlockPreconditioner : public Preconditioner
- {
-  public:
-
-  /// \short Constructor
-  BlockPreconditioner()
-   : Ndof_types_in_mesh(0)
-  {
-   // Initially set the master block preconditioner pointer to zero
-   // indicating that this is stand-alone preconditioner (i.e. the upper most
-   // level preconditioner) that will set up its own block lookup schemes etc.
-   Master_block_preconditioner_pt = 0;
-
-   // The distribution of the concatenation of the internal block 
-   // distributions.
-   // I.e. LinearAlgebraDistributionHelpers::concatenate
-   //        (distributions of internal blocks).
-   //
-   // The concatenation of the internal block distributions is stored in two
-   // places depending on if this is the upper-most master block preconditioner
-   // or not.
-   //
-   // If this is a master block preconditioner (Master_block_preconditioner_pt
-   // is null), then it is stored in the variable 
-   // Internal_preconditioner_matrix_distribution_pt (below).
-   // For subsidiary block preconditioners, this remains null.
-   //
-   // Because BlockPreconditioners are DistributedLinearAlgebraObjects, they 
-   // have a distribution. For the upper-most master block preconditioner,
-   // this is the distribution of the underlying Jacobian.
-   //
-   // For all subsidiary block preconditioners, this remains null. The 
-   // concatenation of the distribution of the internal blocks are stored
-   // as the distribution of the BlockPreconditioner.
-   //
-   // This seems inconsistent and I cannot figure out why this is done.
-   Internal_preconditioner_matrix_distribution_pt = 0;
-
-   // The concatenation of the external block distributions.
-   Preconditioner_matrix_distribution_pt = 0;
-
-   // Initialise number of rows in this block preconditioner.
-   // This information is maintained if used as subsidiary or
-   // stand-alone block preconditioner (in the latter case it
-   // obviously stores the number of rows within the subsidiary
-   // preconditioner.
-   Nrow=0;
-
-   // Initialise number of different block types in this preconditioner.
-   // This information is maintained if used as subsidiary or
-   // stand-alone block preconditioner (in the latter case it
-   // obviously stores the number of rows within the subsidiary
-   // preconditioner.
-   Internal_nblock_types=0;
-
-   // Initialise number of different dof types in this preconditioner.
-   // This information is maintained if used as subsidiary or
-   // stand-alone block preconditioner (in the latter case it
-   // obviously stores the number of rows within the subsidiary
-   // preconditioner.
-   Internal_ndof_types=0;
-   
-   // There are no blocks to start off with.
-   Block_distribution_pt.resize(0);
-
-   // The distributions of the underlying internal blocks.
-   Internal_block_distribution_pt.resize(0);
-
-   // The distribution of the dof-level blocks, these are used during the
-   // concatenation process to create the distribution of the blocks.
-   Dof_block_distribution_pt.resize(0);
-
-   // Clear both the Block_to_dof_map_coarse and Block_to_dof_map_fine 
-   // vectors.
-   Block_to_dof_map_coarse.resize(0);
-   Block_to_dof_map_fine.resize(0);
-
-   // Default the debug flag to false.
-   Recursive_debug_flag = false;
-
-   // Default the debug flag to false.
-   Debug_flag = false;
-  } // EOFunc constructor
-
-
-
-  /// Destructor
-  virtual ~BlockPreconditioner()
-  {
-   this->clear_block_preconditioner_base();
-  } // EOFunc destructor
-
-  /// Broken copy constructor
-  BlockPreconditioner(const BlockPreconditioner&)
-  {
-   BrokenCopy::broken_copy("BlockPreconditioner");
-  }
-
-  /// Broken assignment operator
-  void operator=(const BlockPreconditioner&)
-  {
-   BrokenCopy::broken_assign("BlockPreconditioner");
-  }
-
-  /// \short Access function to matrix_pt. If this is the master then cast
-  /// the matrix pointer to MATRIX*, error check and return. Otherwise ask
-  /// the master for its matrix pointer.
-  MATRIX* matrix_pt() const
-  {
-   if(is_subsidiary_block_preconditioner())
+    /// \short Returns Replacement_block_pt
+    CRDoubleMatrix* replacement_block_pt() const
     {
-     return master_block_preconditioner_pt()->matrix_pt();
+      return Replacement_block_pt;
     }
-   else 
+
+    /// \short Set the row index.
+    void set_row_index(const unsigned& row_index)
     {
-     MATRIX* m_pt = dynamic_cast<MATRIX*>(Preconditioner::matrix_pt());
-#ifdef PARANOID
-     if(m_pt == 0)
+      Row_index = row_index;
+    }
+
+    /// \short returns the row index.
+    const unsigned& row_index() const
+    {
+      return Row_index;
+    }
+
+    /// \short Set the column index.
+    void set_column_index(const unsigned& column_index)
+    {
+      Column_index = column_index;
+    }
+
+    /// \short returns the column index.
+    const unsigned& column_index() const
+    {
+      return Column_index;
+    }
+
+    /// \short returns whether the block is wanted or not.
+    const bool& wanted() const
+    {
+      return Wanted;
+    }
+
+
+    /// \short Output function, outputs the Row_index, Column_index, Wanted and
+    /// the address of the Replacement_block_pt.
+    /// P.M.: The address of a null pointer on a Mac is 0x0 but for self-tests
+    /// the address needs to be simply 0. Easy (but hacky) check sorts that
+    /// out...
+    friend std::ostream& operator<<(std::ostream& o_stream,
+                                    const BlockSelector& block_selector)
+    {
+      o_stream << "Row_index = " << block_selector.row_index() << "\n"
+               << "Column_index = " << block_selector.column_index() << "\n"
+               << "Wanted = " << block_selector.wanted() << "\n"
+               << "Replacement_block_pt = ";
+      if (block_selector.replacement_block_pt() == 0)
       {
-       std::ostringstream error_msg;
-       error_msg << "Matrix is not correct type.";
-       throw OomphLibError(error_msg.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
+        o_stream << 0;
       }
-#endif
-     return m_pt;
+
+      return o_stream;
     }
-  } // EOFunc matrix_pt()
 
-
-  /// \short Toggles on the recursive debug flag. The change goes 
-  /// up the block preconditioning  hierarchy.
-  void turn_on_recursive_debug_flag()
-  {
-    Recursive_debug_flag = true;
-    if(is_subsidiary_block_preconditioner())
-      this->master_block_preconditioner_pt()
-            ->turn_on_recursive_debug_flag();
-  }
-
-  /// \short Toggles off the recursive debug flag. The change goes 
-  /// up the block preconditioning hierarchy.
-  void turn_off_recursive_debug_flag()
-  {
-    Recursive_debug_flag = false;
-    if(is_subsidiary_block_preconditioner())
-      this->master_block_preconditioner_pt()
-            ->turn_off_recursive_debug_flag();
-  }
-
-  /// \short Toggles on the debug flag.
-  void turn_on_debug_flag()
-  {
-    Debug_flag = true;
-  }
-
-  /// \short Toggles off the debug flag.
-  void turn_off_debug_flag()
-  {
-    Debug_flag = false;
-  }
-
-  /// \short Function to turn this preconditioner into a
-  /// subsidiary preconditioner that operates within a bigger
-  /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
-  /// preconditioner dealing with the fluid sub-blocks within a
-  /// 3x3 FSI preconditioner. Once this is done the master block
-  /// preconditioner deals with the block setup etc. 
-  /// The vector doftype_in_master_preconditioner_coarse must specify the 
-  /// dof number in the master preconditioner that corresponds to a dof number 
-  /// in this preconditioner.
-  /// \b 1. The length of the vector is used to determine the number of
-  /// blocks in this preconditioner therefore it must be correctly sized. 
-  /// \b 2. block_setup(...) should be called in the master preconditioner
-  /// before this method is called. 
-  /// \b 3. block_setup(...) should be called in the corresponding subsidiary
-  /// preconditioner after this method is called.
-  /// 
-  /// This calls the other turn_into_subsidiary_block_preconditioner 
-  /// function with the identity mapping for doftype_coarsen_map_coarse
-  /// vector.
-  void turn_into_subsidiary_block_preconditioner
-  (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-   const Vector<unsigned>& doftype_in_master_preconditioner_coarse);
-
-  /// \short Function to turn this preconditioner into a
-  /// subsidiary preconditioner that operates within a bigger
-  /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
-  /// preconditioner dealing with the fluid sub-blocks within a
-  /// 3x3 FSI preconditioner. Once this is done the master block
-  /// preconditioner deals with the block setup etc. 
-  /// The vector doftype_in_master_preconditioner_coarse must specify the 
-  /// dof number in the master preconditioner that corresponds to a dof number 
-  /// in this preconditioner.
-  /// \b 1. The length of the vector is used to determine the number of
-  /// blocks in this preconditioner therefore it must be correctly sized. 
-  /// \b 2. block_setup(...) should be called in the master preconditioner
-  /// before this method is called. 
-  /// \b 3. block_setup(...) should be called in the corresponding subsidiary
-  /// preconditioner after this method is called.
-  ///
-  /// The doftype_coarsen_map_coarse is a mapping of the dof numbers in the 
-  /// master preconditioner to the dof numbers REQUIRED by THIS preconditioner.
-  /// This allows for coarsening of the dof types if the master preconditioner
-  /// has a more fine grain dof type splitting.
-  /// 
-  /// For example, the Lagrangian preconditioner (in 3D with one constraint) 
-  /// has doftypes:
-  /// 0  1  2  3  4  5  6 7
-  /// ub vb wb uc vc wc p Lc
-  /// 
-  /// We wish to use an existing Navier-Stokes preconditioner, for example, 
-  /// LSC, to solve the sub-system associated with the dof numbers
-  /// 0, 1, 2, 3, 4, 5, 6. But the existing LSC preconditioner only works
-  /// with four dof types (3 velocity dof types and 1 pressure dof types).
-  /// We need to coarsen the number of dof types in the master preconditioner.
-  /// 
-  /// If the LSC preconditioner requires the dof ordering: u, v, w, p. Then 
-  /// the doftype_coarsen_map_coarse will be:
-  /// [0 3] -> u velocity dof type
-  /// [1 4] -> v velocity dof type
-  /// [2 5] -> w velocity dof type
-  /// [6] -> pressure dof type.
-  void turn_into_subsidiary_block_preconditioner
-  (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-   const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
-   const Vector<Vector<unsigned> > & doftype_coarsen_map_coarse);
-
-
-
-  /// \short Determine the size of the matrix blocks and setup the
-  /// lookup schemes relating the global degrees of freedom with
-  /// their "blocks" and their indices (row/column numbers) in those
-  /// blocks.
-  /// The distributions of the preconditioner and the internal blocks are
-  /// automatically specified (and assumed to be uniform) at this
-  /// stage.
-  /// This method should be used if the identity dof-to-block mapping is okay,
-  /// i.e. 
-  /// dof number 0 corresponds to block number 0
-  /// dof number 1 corresponds to block number 1
-  /// dof number 2 corresponds to block number 2
-  /// etc...
-  virtual void block_setup();
-
-  /// \short Determine the size of the matrix blocks and setup the
-  /// lookup schemes relating the global degrees of freedom with
-  /// their "blocks" and their indices (row/column numbers) in those
-  /// blocks.
-  /// The distributions of the preconditioner and the blocks are
-  /// automatically specified (and assumed to be uniform) at this
-  /// stage.
-  /// This method should be used if anything other than the identity
-  /// dof-to-block mapping is required. The argument vector dof_to_block_map 
-  /// should be of length ndof. The indices represents the dof types whilst the
-  /// value represents the block types. In general we want:
-  ///
-  ///   dof_to_block_map[dof_number] = block_number.
-  void block_setup(const Vector<unsigned>& dof_to_block_map);
-
-  /// \short Put block (i,j) into output_matrix. This block accounts for any
-  /// coarsening of dof types and any replaced dof-level blocks above this
-  /// preconditioner.
-  void get_block(const unsigned& i, const unsigned& j,
-      MATRIX& output_matrix, 
-      const bool& ignore_replacement_block = false) const
-  {
-#ifdef PARANOID
-    // Check the range of i and j, they should not be greater than nblock_types
-    unsigned n_block_types = this->nblock_types();
-    if((i > n_block_types) || (j > n_block_types))
+  private:
+    /// Build function, sets the Row_index, Column_index and Wanted variables.
+    /// the Replacement_block_pt is only set if it is not null. Otherwise it is
+    /// left alone.
+    void build(const unsigned& row_index,
+               const unsigned& column_index,
+               const bool& wanted,
+               CRDoubleMatrix* replacement_block_pt = 0)
     {
-      std::ostringstream err_msg;
-      err_msg << "Requested block("<< i <<","<< j <<")"<<"\n"
-        << "but nblock_types() is " << n_block_types << ".\n"
-        << "Maybe your argument to block_setup(...) is incorrect?"
-        << std::endl;
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
+      Row_index = row_index;
+      Column_index = column_index;
+      Wanted = wanted;
 
-    // The logic is this:
-    //
-    // Block_to_dof_map_coarse tells us which dof types belongs in each block.
-    // This is relative to this preconditioner, and describes the external
-    // block and dof type mappings (what the preconditioner writer 
-    // expects/sees).
-    // 
-    // As such, the dof types in Block_to_dof_map_coarse describes the
-    // dof-level blocks needed to be concatenated to produce block(i,j). These
-    // dofs may have been coarsened.
-    //
-    // Now, the dof blocks to concatenate comes from:
-    // If the dof block exists in Replacement_dof_block_pt, then we make a
-    // deep copy of it. Otherwise, if this is the upper-most master block 
-    // preconditioner then we get it from the original matrix via function 
-    // internal_get_block(...) otherwise, if this is a subsidiary 
-    // block preconditioner, we go one level up the hierarchy and repeat the 
-    // process.
-    //
-    //
-    // A small note about indirections which caused me some headache.
-    // Thought I would mention it here in case the below code needs to be
-    // re-visited.
-    //
-    // A small subtlety with indirections:
-    //
-    // The underlying ordering of the dof-level blocks is STILL AND ALWAYS the 
-    // `natural' ordering determined by first the elements then the order of 
-    // the meshes.
-    // 
-    // But during the process of block_setup(...), the external (perceived) 
-    // block ordering may have changed. So some indirection has to take place,
-    // this mapping is maintained in Block_to_dof_map_coarse.
-    //
-    // For example, take the Lagrangian preconditioner, which expects the 
-    // natural dof type ordering:
-    // 0 1 2 3  4  5
-    // u v p uc vc L
-    //
-    // If the mapping given to block_setup(...) is:
-    // dof_to_block_map = [0, 1, 4, 2, 3, 5]
-    // saying that: dof type 0 goes to block 0
-    //              dof type 1 goes to block 1
-    //              dof type 2 goes to block 4
-    //              dof type 3 goes to block 2
-    //              dof type 4 goes to block 3
-    //              dof type 5 goes to block 5
-    //
-    // The function block_setup(...) will populate the vector 
-    // Block_to_dof_map_coarse with [[0][1][3][4][2][5]],
-    // which says that get_block(0,0) will get the u block
-    //                 get_block(1,1) will get the v block
-    //                 get_block(2,2) will get the uc block
-    //                 get_block(3,3) will get the vc block
-    //                 get_block(4,4) will get the p block
-    //                 get_block(5,5) will get the L block
-    //
-    // i.e. the ordering of the block types is a permutation of the dof types,
-    // so that we now have the following block ordering:
-    // 0 1 2  3  4 5 <- block ordering
-    // u v uc vc p L
-    //
-    // Now, the writer expects to work with the block ordering. I.e. when we 
-    // replace a dof-level block, say the pressure block, we call
-    // set_replacement_dof_block(4,4,Matrix);
-    // Similarly, when we want the pressure block, we call
-    // get_block(4,4);
-    //
-    // Now, the below code uses the indirection maintained in 
-    // Block_to_dof_map_coarse. I.e. When we call get_block(4,4), we use the 
-    // mapping Block_to_dof_map_coarse[4] = 2, we get the block (2,2) 
-    // (from Replacement_dof_block_pt or internal_get_block), since the
-    // underlying dof_to_block mapping is still the identity, i.e. it has not
-    // changed from:
-    // 0 1 2 3  4  5
-    // u v p uc vc L
-    //
-    // So, block (4,4) (pressure block) maps to the block (2,2).
-
-    // How many external dof types are in this block?
-    const unsigned ndofblock_in_row = Block_to_dof_map_coarse[i].size();
-    const unsigned ndofblock_in_col = Block_to_dof_map_coarse[j].size();
-
-    // If there is only one dof block in this block then there is no need to 
-    // concatenate.
-    if(ndofblock_in_row == 1 && ndofblock_in_col == 1)
-    {
-      // Get the indirection for the dof we want.
-      const unsigned wanted_dof_row = Block_to_dof_map_coarse[i][0];
-      const unsigned wanted_dof_col = Block_to_dof_map_coarse[j][0];
-
-      // If the block has NOT been replaced or if we want to ignore the
-      // replacement, then we call get_dof_level_block(...) which will get the
-      // dof-level blocks up the preconditioning hierarchy, dragging down
-      // any replacement dof blocks of parent preconditioners if required.
-      if((Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col) == 0) ||
-          ignore_replacement_block)
+      // Only set the replacement_block_pt if it is wanted. Otherwise we leave
+      // it alone. All constructors should set Replacement_block_pt to 0.
+      if (replacement_block_pt != 0)
       {
-        get_dof_level_block(wanted_dof_row, wanted_dof_col,
-                            output_matrix, ignore_replacement_block);
+#ifdef PARANOID
+        if (Wanted == false)
+        {
+          std::ostringstream err_msg;
+          err_msg
+            << "Trying to set replacement_block_pt, but Wanted == false.\n"
+            << "Please either not set the replacement_block_pt or call the "
+               "function\n"
+            << "do_not_want_block()\n"
+            << "Row_index: " << Row_index << "\n"
+            << "Column_index: " << Column_index << "\n";
+          throw OomphLibError(
+            err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+        Replacement_block_pt = replacement_block_pt;
+      }
+    }
+
+    /// Row index of the block.
+    unsigned Row_index;
+
+    /// Column index of the block.
+    unsigned Column_index;
+
+    /// Bool to indicate if we require this block.
+    bool Wanted;
+
+    /// Pointer to the block.
+    CRDoubleMatrix* Replacement_block_pt;
+  };
+
+
+  //============================================================================
+  /// Block Preconditioner base class. The block structure of the
+  /// overall problem is determined from the \c Mesh's constituent
+  /// elements. Each constituent element must be block-preconditionable - i.e
+  /// must implement the \c GeneralisedElements functions \c ndof_types() and
+  /// get_dof_numbers_for_unknowns(...). A \c Problem can have several
+  /// \c Meshes, but each \c Mesh must contain elements with the same DOF types.
+  /// The association between global degrees of freedom and their unique local
+  /// dof numbers is therefore based on information provided by the elements.
+  /// We refer to the local dof numbers provided by the elements as the
+  /// elemental dof numbers.
+  ///
+  /// By default each type of DOF is assumed to be unique type of block,
+  /// but DOF types can be grouped together in a single block when
+  /// block_setup(...) is called.
+  ///
+  /// This class can function in one of two ways. Either it acts as a
+  /// stand-alone block preconditioner which computes and stores
+  /// the association between global degrees of freedom and their unique global
+  /// block numbers itself. Alternatively, the block preconditioner can act as
+  /// a subsidiary block preconditioner within a (larger) master block
+  /// preconditioner (pointed to by Master_block_preconditioner_pt).
+  /// The master block preconditioner
+  /// must have an equal or greater number of block types. Examples
+  /// are the FSI preconditioner which is the 3x3 "master block preconditioner"
+  /// for the Navier-Stokes preconditioners which deals with the
+  /// 2x2 fluid-blocks within the overall structure. In this case, \b only
+  /// the master block preconditioner computes and stores the master
+  /// lookup schemes. All block preconditioners compute and store their own
+  /// optimised lookup schemes.
+  ///
+  /// In cases where a \c Problem contains elements of different element types
+  /// (e.g. fluid and solid elements in a fluid-structure interaction problem),
+  /// access to the elements of the same type must be provided via pointers to
+  /// (possibly auxiliary) \c Meshes that only contain elements of a single
+  /// type. The block preconditioner will then create global block
+  /// numbers by concatenating the block types. Consider, e.g. a fluid-structure
+  /// interaction problem in which the first \c Mesh contains (fluid)
+  /// elements whose degrees of freedom have been subdivided into
+  /// types "0" (the velocity, say) and "1" (the pressure say), while
+  /// the second \c Mesh contains (solid) elements whose degrees of freedom
+  /// are the nodal displacements, classified as its type "0".
+  /// The combined block preconditioner then has three "block types":
+  /// "0": Fluid velocity, "1": Fluid pressure, "2": Solid nodal positions.
+  /// NOTE: currently this preconditioner uses the same communicator as the
+  /// underlying problem. We may need to change this in the future.
+  //============================================================================
+  template<typename MATRIX>
+  class BlockPreconditioner : public Preconditioner
+  {
+  public:
+    /// \short Constructor
+    BlockPreconditioner() : Ndof_types_in_mesh(0)
+    {
+      // Initially set the master block preconditioner pointer to zero
+      // indicating that this is stand-alone preconditioner (i.e. the upper most
+      // level preconditioner) that will set up its own block lookup schemes
+      // etc.
+      Master_block_preconditioner_pt = 0;
+
+      // The distribution of the concatenation of the internal block
+      // distributions.
+      // I.e. LinearAlgebraDistributionHelpers::concatenate
+      //        (distributions of internal blocks).
+      //
+      // The concatenation of the internal block distributions is stored in two
+      // places depending on if this is the upper-most master block
+      // preconditioner or not.
+      //
+      // If this is a master block preconditioner
+      // (Master_block_preconditioner_pt is null), then it is stored in the
+      // variable Internal_preconditioner_matrix_distribution_pt (below). For
+      // subsidiary block preconditioners, this remains null.
+      //
+      // Because BlockPreconditioners are DistributedLinearAlgebraObjects, they
+      // have a distribution. For the upper-most master block preconditioner,
+      // this is the distribution of the underlying Jacobian.
+      //
+      // For all subsidiary block preconditioners, this remains null. The
+      // concatenation of the distribution of the internal blocks are stored
+      // as the distribution of the BlockPreconditioner.
+      //
+      // This seems inconsistent and I cannot figure out why this is done.
+      Internal_preconditioner_matrix_distribution_pt = 0;
+
+      // The concatenation of the external block distributions.
+      Preconditioner_matrix_distribution_pt = 0;
+
+      // Initialise number of rows in this block preconditioner.
+      // This information is maintained if used as subsidiary or
+      // stand-alone block preconditioner (in the latter case it
+      // obviously stores the number of rows within the subsidiary
+      // preconditioner.
+      Nrow = 0;
+
+      // Initialise number of different block types in this preconditioner.
+      // This information is maintained if used as subsidiary or
+      // stand-alone block preconditioner (in the latter case it
+      // obviously stores the number of rows within the subsidiary
+      // preconditioner.
+      Internal_nblock_types = 0;
+
+      // Initialise number of different dof types in this preconditioner.
+      // This information is maintained if used as subsidiary or
+      // stand-alone block preconditioner (in the latter case it
+      // obviously stores the number of rows within the subsidiary
+      // preconditioner.
+      Internal_ndof_types = 0;
+
+      // There are no blocks to start off with.
+      Block_distribution_pt.resize(0);
+
+      // The distributions of the underlying internal blocks.
+      Internal_block_distribution_pt.resize(0);
+
+      // The distribution of the dof-level blocks, these are used during the
+      // concatenation process to create the distribution of the blocks.
+      Dof_block_distribution_pt.resize(0);
+
+      // Clear both the Block_to_dof_map_coarse and Block_to_dof_map_fine
+      // vectors.
+      Block_to_dof_map_coarse.resize(0);
+      Block_to_dof_map_fine.resize(0);
+
+      // Default the debug flag to false.
+      Recursive_debug_flag = false;
+
+      // Default the debug flag to false.
+      Debug_flag = false;
+    } // EOFunc constructor
+
+
+    /// Destructor
+    virtual ~BlockPreconditioner()
+    {
+      this->clear_block_preconditioner_base();
+    } // EOFunc destructor
+
+    /// Broken copy constructor
+    BlockPreconditioner(const BlockPreconditioner&)
+    {
+      BrokenCopy::broken_copy("BlockPreconditioner");
+    }
+
+    /// Broken assignment operator
+    void operator=(const BlockPreconditioner&)
+    {
+      BrokenCopy::broken_assign("BlockPreconditioner");
+    }
+
+    /// \short Access function to matrix_pt. If this is the master then cast
+    /// the matrix pointer to MATRIX*, error check and return. Otherwise ask
+    /// the master for its matrix pointer.
+    MATRIX* matrix_pt() const
+    {
+      if (is_subsidiary_block_preconditioner())
+      {
+        return master_block_preconditioner_pt()->matrix_pt();
       }
       else
-      // Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col) is not
-      // null, this means that the block has been replaced. We simply make
-      // a deep copy of it.
       {
-        CRDoubleMatrixHelpers::deep_copy(
-            Replacement_dof_block_pt.get(wanted_dof_row, wanted_dof_col), 
+        MATRIX* m_pt = dynamic_cast<MATRIX*>(Preconditioner::matrix_pt());
+#ifdef PARANOID
+        if (m_pt == 0)
+        {
+          std::ostringstream error_msg;
+          error_msg << "Matrix is not correct type.";
+          throw OomphLibError(
+            error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+        return m_pt;
+      }
+    } // EOFunc matrix_pt()
+
+
+    /// \short Toggles on the recursive debug flag. The change goes
+    /// up the block preconditioning  hierarchy.
+    void turn_on_recursive_debug_flag()
+    {
+      Recursive_debug_flag = true;
+      if (is_subsidiary_block_preconditioner())
+        this->master_block_preconditioner_pt()->turn_on_recursive_debug_flag();
+    }
+
+    /// \short Toggles off the recursive debug flag. The change goes
+    /// up the block preconditioning hierarchy.
+    void turn_off_recursive_debug_flag()
+    {
+      Recursive_debug_flag = false;
+      if (is_subsidiary_block_preconditioner())
+        this->master_block_preconditioner_pt()->turn_off_recursive_debug_flag();
+    }
+
+    /// \short Toggles on the debug flag.
+    void turn_on_debug_flag()
+    {
+      Debug_flag = true;
+    }
+
+    /// \short Toggles off the debug flag.
+    void turn_off_debug_flag()
+    {
+      Debug_flag = false;
+    }
+
+    /// \short Function to turn this preconditioner into a
+    /// subsidiary preconditioner that operates within a bigger
+    /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
+    /// preconditioner dealing with the fluid sub-blocks within a
+    /// 3x3 FSI preconditioner. Once this is done the master block
+    /// preconditioner deals with the block setup etc.
+    /// The vector doftype_in_master_preconditioner_coarse must specify the
+    /// dof number in the master preconditioner that corresponds to a dof number
+    /// in this preconditioner.
+    /// \b 1. The length of the vector is used to determine the number of
+    /// blocks in this preconditioner therefore it must be correctly sized.
+    /// \b 2. block_setup(...) should be called in the master preconditioner
+    /// before this method is called.
+    /// \b 3. block_setup(...) should be called in the corresponding subsidiary
+    /// preconditioner after this method is called.
+    ///
+    /// This calls the other turn_into_subsidiary_block_preconditioner
+    /// function with the identity mapping for doftype_coarsen_map_coarse
+    /// vector.
+    void turn_into_subsidiary_block_preconditioner(
+      BlockPreconditioner<MATRIX>* master_block_prec_pt,
+      const Vector<unsigned>& doftype_in_master_preconditioner_coarse);
+
+    /// \short Function to turn this preconditioner into a
+    /// subsidiary preconditioner that operates within a bigger
+    /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
+    /// preconditioner dealing with the fluid sub-blocks within a
+    /// 3x3 FSI preconditioner. Once this is done the master block
+    /// preconditioner deals with the block setup etc.
+    /// The vector doftype_in_master_preconditioner_coarse must specify the
+    /// dof number in the master preconditioner that corresponds to a dof number
+    /// in this preconditioner.
+    /// \b 1. The length of the vector is used to determine the number of
+    /// blocks in this preconditioner therefore it must be correctly sized.
+    /// \b 2. block_setup(...) should be called in the master preconditioner
+    /// before this method is called.
+    /// \b 3. block_setup(...) should be called in the corresponding subsidiary
+    /// preconditioner after this method is called.
+    ///
+    /// The doftype_coarsen_map_coarse is a mapping of the dof numbers in the
+    /// master preconditioner to the dof numbers REQUIRED by THIS
+    /// preconditioner. This allows for coarsening of the dof types if the
+    /// master preconditioner has a more fine grain dof type splitting.
+    ///
+    /// For example, the Lagrangian preconditioner (in 3D with one constraint)
+    /// has doftypes:
+    /// 0  1  2  3  4  5  6 7
+    /// ub vb wb uc vc wc p Lc
+    ///
+    /// We wish to use an existing Navier-Stokes preconditioner, for example,
+    /// LSC, to solve the sub-system associated with the dof numbers
+    /// 0, 1, 2, 3, 4, 5, 6. But the existing LSC preconditioner only works
+    /// with four dof types (3 velocity dof types and 1 pressure dof types).
+    /// We need to coarsen the number of dof types in the master preconditioner.
+    ///
+    /// If the LSC preconditioner requires the dof ordering: u, v, w, p. Then
+    /// the doftype_coarsen_map_coarse will be:
+    /// [0 3] -> u velocity dof type
+    /// [1 4] -> v velocity dof type
+    /// [2 5] -> w velocity dof type
+    /// [6] -> pressure dof type.
+    void turn_into_subsidiary_block_preconditioner(
+      BlockPreconditioner<MATRIX>* master_block_prec_pt,
+      const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
+      const Vector<Vector<unsigned>>& doftype_coarsen_map_coarse);
+
+
+    /// \short Determine the size of the matrix blocks and setup the
+    /// lookup schemes relating the global degrees of freedom with
+    /// their "blocks" and their indices (row/column numbers) in those
+    /// blocks.
+    /// The distributions of the preconditioner and the internal blocks are
+    /// automatically specified (and assumed to be uniform) at this
+    /// stage.
+    /// This method should be used if the identity dof-to-block mapping is okay,
+    /// i.e.
+    /// dof number 0 corresponds to block number 0
+    /// dof number 1 corresponds to block number 1
+    /// dof number 2 corresponds to block number 2
+    /// etc...
+    virtual void block_setup();
+
+    /// \short Determine the size of the matrix blocks and setup the
+    /// lookup schemes relating the global degrees of freedom with
+    /// their "blocks" and their indices (row/column numbers) in those
+    /// blocks.
+    /// The distributions of the preconditioner and the blocks are
+    /// automatically specified (and assumed to be uniform) at this
+    /// stage.
+    /// This method should be used if anything other than the identity
+    /// dof-to-block mapping is required. The argument vector dof_to_block_map
+    /// should be of length ndof. The indices represents the dof types whilst
+    /// the value represents the block types. In general we want:
+    ///
+    ///   dof_to_block_map[dof_number] = block_number.
+    void block_setup(const Vector<unsigned>& dof_to_block_map);
+
+    /// \short Put block (i,j) into output_matrix. This block accounts for any
+    /// coarsening of dof types and any replaced dof-level blocks above this
+    /// preconditioner.
+    void get_block(const unsigned& i,
+                   const unsigned& j,
+                   MATRIX& output_matrix,
+                   const bool& ignore_replacement_block = false) const
+    {
+#ifdef PARANOID
+      // Check the range of i and j, they should not be greater than
+      // nblock_types
+      unsigned n_block_types = this->nblock_types();
+      if ((i > n_block_types) || (j > n_block_types))
+      {
+        std::ostringstream err_msg;
+        err_msg << "Requested block(" << i << "," << j << ")"
+                << "\n"
+                << "but nblock_types() is " << n_block_types << ".\n"
+                << "Maybe your argument to block_setup(...) is incorrect?"
+                << std::endl;
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // The logic is this:
+      //
+      // Block_to_dof_map_coarse tells us which dof types belongs in each block.
+      // This is relative to this preconditioner, and describes the external
+      // block and dof type mappings (what the preconditioner writer
+      // expects/sees).
+      //
+      // As such, the dof types in Block_to_dof_map_coarse describes the
+      // dof-level blocks needed to be concatenated to produce block(i,j). These
+      // dofs may have been coarsened.
+      //
+      // Now, the dof blocks to concatenate comes from:
+      // If the dof block exists in Replacement_dof_block_pt, then we make a
+      // deep copy of it. Otherwise, if this is the upper-most master block
+      // preconditioner then we get it from the original matrix via function
+      // internal_get_block(...) otherwise, if this is a subsidiary
+      // block preconditioner, we go one level up the hierarchy and repeat the
+      // process.
+      //
+      //
+      // A small note about indirections which caused me some headache.
+      // Thought I would mention it here in case the below code needs to be
+      // re-visited.
+      //
+      // A small subtlety with indirections:
+      //
+      // The underlying ordering of the dof-level blocks is STILL AND ALWAYS the
+      // `natural' ordering determined by first the elements then the order of
+      // the meshes.
+      //
+      // But during the process of block_setup(...), the external (perceived)
+      // block ordering may have changed. So some indirection has to take place,
+      // this mapping is maintained in Block_to_dof_map_coarse.
+      //
+      // For example, take the Lagrangian preconditioner, which expects the
+      // natural dof type ordering:
+      // 0 1 2 3  4  5
+      // u v p uc vc L
+      //
+      // If the mapping given to block_setup(...) is:
+      // dof_to_block_map = [0, 1, 4, 2, 3, 5]
+      // saying that: dof type 0 goes to block 0
+      //              dof type 1 goes to block 1
+      //              dof type 2 goes to block 4
+      //              dof type 3 goes to block 2
+      //              dof type 4 goes to block 3
+      //              dof type 5 goes to block 5
+      //
+      // The function block_setup(...) will populate the vector
+      // Block_to_dof_map_coarse with [[0][1][3][4][2][5]],
+      // which says that get_block(0,0) will get the u block
+      //                 get_block(1,1) will get the v block
+      //                 get_block(2,2) will get the uc block
+      //                 get_block(3,3) will get the vc block
+      //                 get_block(4,4) will get the p block
+      //                 get_block(5,5) will get the L block
+      //
+      // i.e. the ordering of the block types is a permutation of the dof types,
+      // so that we now have the following block ordering:
+      // 0 1 2  3  4 5 <- block ordering
+      // u v uc vc p L
+      //
+      // Now, the writer expects to work with the block ordering. I.e. when we
+      // replace a dof-level block, say the pressure block, we call
+      // set_replacement_dof_block(4,4,Matrix);
+      // Similarly, when we want the pressure block, we call
+      // get_block(4,4);
+      //
+      // Now, the below code uses the indirection maintained in
+      // Block_to_dof_map_coarse. I.e. When we call get_block(4,4), we use the
+      // mapping Block_to_dof_map_coarse[4] = 2, we get the block (2,2)
+      // (from Replacement_dof_block_pt or internal_get_block), since the
+      // underlying dof_to_block mapping is still the identity, i.e. it has not
+      // changed from:
+      // 0 1 2 3  4  5
+      // u v p uc vc L
+      //
+      // So, block (4,4) (pressure block) maps to the block (2,2).
+
+      // How many external dof types are in this block?
+      const unsigned ndofblock_in_row = Block_to_dof_map_coarse[i].size();
+      const unsigned ndofblock_in_col = Block_to_dof_map_coarse[j].size();
+
+      // If there is only one dof block in this block then there is no need to
+      // concatenate.
+      if (ndofblock_in_row == 1 && ndofblock_in_col == 1)
+      {
+        // Get the indirection for the dof we want.
+        const unsigned wanted_dof_row = Block_to_dof_map_coarse[i][0];
+        const unsigned wanted_dof_col = Block_to_dof_map_coarse[j][0];
+
+        // If the block has NOT been replaced or if we want to ignore the
+        // replacement, then we call get_dof_level_block(...) which will get the
+        // dof-level blocks up the preconditioning hierarchy, dragging down
+        // any replacement dof blocks of parent preconditioners if required.
+        if ((Replacement_dof_block_pt.get(wanted_dof_row, wanted_dof_col) ==
+             0) ||
+            ignore_replacement_block)
+        {
+          get_dof_level_block(wanted_dof_row,
+                              wanted_dof_col,
+                              output_matrix,
+                              ignore_replacement_block);
+        }
+        else
+        // Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col) is not
+        // null, this means that the block has been replaced. We simply make
+        // a deep copy of it.
+        {
+          CRDoubleMatrixHelpers::deep_copy(
+            Replacement_dof_block_pt.get(wanted_dof_row, wanted_dof_col),
             output_matrix);
+        }
+      }
+      else
+      // This block contains more than one dof-level block. So we need to
+      // concatenate the (external) dof-level blocks.
+      {
+        // The CRDoubleMatrixHelpers::concatenate_without_communication(...)
+        // takes a DenseMatrix of pointers to CRDoubleMatrices to concatenate.
+        DenseMatrix<CRDoubleMatrix*> tmp_blocks_pt(
+          ndofblock_in_row, ndofblock_in_col, 0);
+
+        // Vector of Vectors of unsigns to indicate whether we have created
+        // CRDoubleMatrices with new or not... so we can delete it later.
+        // 0 - no new CRDoubleMatrix is created.
+        // 1 - a new CRDoubleMatrix is created.
+        // If we ever use C++11, remove this and use smart pointers.
+        Vector<Vector<unsigned>> new_block(
+          ndofblock_in_row, Vector<unsigned>(ndofblock_in_col, 0));
+
+        // Loop through the number of dof block rows and then the number of dof
+        // block columns, either get the pointer from Replacement_dof_block_pt
+        // or from get_dof_level_block(...).
+        for (unsigned row_dofblock = 0; row_dofblock < ndofblock_in_row;
+             row_dofblock++)
+        {
+          // Indirection for the row, as discuss in the large chunk of text
+          // previously.
+          const unsigned wanted_dof_row =
+            Block_to_dof_map_coarse[i][row_dofblock];
+
+          for (unsigned col_dofblock = 0; col_dofblock < ndofblock_in_col;
+               col_dofblock++)
+          {
+            // Indirection for the column as discussed in the large chunk of
+            // text above.
+            const unsigned wanted_dof_col =
+              Block_to_dof_map_coarse[j][col_dofblock];
+
+            // Get the pointer from Replacement_dof_block_pt.
+            tmp_blocks_pt(row_dofblock, col_dofblock) =
+              Replacement_dof_block_pt.get(wanted_dof_row, wanted_dof_col);
+
+            // If the pointer from Replacement_dof_block_pt is null, or if
+            // we have to ignore replacement blocks, build a new CRDoubleMatrix
+            // via get_dof_level_block.
+            if ((tmp_blocks_pt(row_dofblock, col_dofblock) == 0) ||
+                ignore_replacement_block)
+            {
+              // We have to create a new CRDoubleMatrix, so put in 1 to indicate
+              // that we have to delete it later.
+              new_block[row_dofblock][col_dofblock] = 1;
+
+              // Create the new CRDoubleMatrix. Note that we do not use the
+              // indirection, since the indirection is only used one way.
+              tmp_blocks_pt(row_dofblock, col_dofblock) = new CRDoubleMatrix;
+
+              // Get the dof-level block, as discussed above.
+              get_dof_level_block(wanted_dof_row,
+                                  wanted_dof_col,
+                                  *tmp_blocks_pt(row_dofblock, col_dofblock),
+                                  ignore_replacement_block);
+            }
+          }
+        }
+
+        // Concatenation of matrices require the distribution of the individual
+        // sub-matrices (for both row and column). This is because concatenation
+        // is implemented without communication in such a way that the rows
+        // and column values are both permuted, the permutation is defined by
+        // the individual distributions of the sub blocks.
+        // Without a vector of distributions describing the distributions of
+        // of the rows, we do not know how to permute the rows. For the columns,
+        // although CRDoubleMatrices does not have a column distribution, the
+        // concatenated matrix must have it's columns permuted, so we mirror
+        // the diagonal and get the corresponding row distribution.
+        //
+        // Confused? - Example: Say we have a matrix with dof blocking
+        //
+        //   | a | b | c | d | e |
+        // --|---|---|---|---|---|
+        // a |   |   |   |   |   |
+        // --|---|---|---|---|---|
+        // b |   |   |   |   |   |
+        // --|---|---|---|---|---|
+        // c |   |   |   |   |   |
+        // --|---|---|---|---|---|
+        // d |   |   |   |   |   |
+        // --|---|---|---|---|---|
+        // e |   |   |   |   |   |
+        // --|---|---|---|---|---|
+        //
+        // We wish to concatenate the blocks
+        //
+        //   | d | e |
+        // --|---|---|
+        // a |   |   |
+        // --|---|---|
+        // b |   |   |
+        // --|---|---|
+        //
+        // Then clearly the row distributions required are the distributions for
+        // the dof blocks a and b. But block(a,d) does not have a column
+        // distribution since it is a CRDoubleMatrix! - We use the distribution
+        // mirrored by the diagonal, so the column distributions required to
+        // concatenate these blocks is the same as the distributions of the rows
+        // for dof block d and e.
+
+        // First we do the row distribution.
+
+        // Storage for the row distribution pointers.
+        Vector<LinearAlgebraDistribution*> tmp_row_dist_pt(ndofblock_in_row, 0);
+
+        // Loop through the number of dof blocks in the row. For the upper-most
+        // master block preconditioner, the external dof distributions is the
+        // same as the internal BLOCK distributions. Recall what we said above
+        // about the underlying blocks maintaining it's natural ordering.
+        //
+        // If this is a subsidiary block preconditioner, then the distributions
+        // for the dof blocks are stored in Dof_block_distribution_pt. The
+        // reason why this is different for subsidiary block preconditioners is
+        // because subsidiary block preconditioners would have it's dof types
+        // coarsened. Then a single dof distribution in a subsidiary block
+        // preconditioner could be a concatenation of many dof distributions of
+        // the master dof distributions.
+        for (unsigned row_dof_i = 0; row_dof_i < ndofblock_in_row; row_dof_i++)
+        {
+          const unsigned mapped_dof_i = Block_to_dof_map_coarse[i][row_dof_i];
+          if (is_master_block_preconditioner())
+          {
+            tmp_row_dist_pt[row_dof_i] =
+              Internal_block_distribution_pt[mapped_dof_i];
+          }
+          else
+          {
+            tmp_row_dist_pt[row_dof_i] =
+              Dof_block_distribution_pt[mapped_dof_i];
+          }
+        }
+
+        // Storage for the column distribution pointers.
+        Vector<LinearAlgebraDistribution*> tmp_col_dist_pt(ndofblock_in_col, 0);
+
+        // We do the same thing as before.
+        for (unsigned col_dof_i = 0; col_dof_i < ndofblock_in_col; col_dof_i++)
+        {
+          const unsigned mapped_dof_j = Block_to_dof_map_coarse[j][col_dof_i];
+          if (is_master_block_preconditioner())
+          {
+            tmp_col_dist_pt[col_dof_i] =
+              Internal_block_distribution_pt[mapped_dof_j];
+          }
+          else
+          {
+            tmp_col_dist_pt[col_dof_i] =
+              Dof_block_distribution_pt[mapped_dof_j];
+          }
+        }
+
+        // Perform the concatenation.
+        CRDoubleMatrixHelpers::concatenate_without_communication(
+          tmp_row_dist_pt, tmp_col_dist_pt, tmp_blocks_pt, output_matrix);
+
+        // Delete any new CRDoubleMatrices we have created.
+        for (unsigned row_i = 0; row_i < ndofblock_in_row; row_i++)
+        {
+          for (unsigned col_i = 0; col_i < ndofblock_in_col; col_i++)
+          {
+            if (new_block[row_i][col_i])
+            {
+              delete tmp_blocks_pt(row_i, col_i);
+            }
+          }
+        }
+      } // else need to concatenate
+    } // EOFunc get_block(...)
+
+
+    /// \short Return block (i,j). If the optional argument
+    /// ignore_replacement_block is true, then any blocks in
+    /// Replacement_dof_block_pt will be ignored throughout the preconditioning
+    /// hierarchy.
+    MATRIX get_block(const unsigned& i,
+                     const unsigned& j,
+                     const bool& ignore_replacement_block = false) const
+    {
+      MATRIX output_matrix;
+      get_block(i, j, output_matrix, ignore_replacement_block);
+      return output_matrix;
+    } // EOFunc get_block(...)
+
+    /// \short Set the matrix_pt in the upper-most master preconditioner.
+    void set_master_matrix_pt(MATRIX* in_matrix_pt)
+    {
+      if (is_subsidiary_block_preconditioner())
+      {
+        master_block_preconditioner_pt()->set_master_matrix_pt(in_matrix_pt);
+      }
+      else
+      {
+        this->set_matrix_pt(in_matrix_pt);
       }
     }
-    else
-    // This block contains more than one dof-level block. So we need to 
-    // concatenate the (external) dof-level blocks.
+
+    /// \short Get a block from a different matrix using the blocking scheme
+    /// that has already been set up.
+    void get_block_other_matrix(const unsigned& i,
+                                const unsigned& j,
+                                MATRIX* in_matrix_pt,
+                                MATRIX& output_matrix)
     {
-      // The CRDoubleMatrixHelpers::concatenate_without_communication(...)
-      // takes a DenseMatrix of pointers to CRDoubleMatrices to concatenate.
-      DenseMatrix<CRDoubleMatrix*> tmp_blocks_pt(ndofblock_in_row,
-                                                 ndofblock_in_col,0);
+      MATRIX* backup_matrix_pt = matrix_pt();
+      set_master_matrix_pt(in_matrix_pt);
+      get_block(i, j, output_matrix, true);
+      set_master_matrix_pt(backup_matrix_pt);
+    } // EOFunc get_block_other_matrix(...)
+
+    /// \short Get all the block matrices required by the block
+    /// preconditioner.  Takes a pointer to a matrix of bools that indicate
+    /// if a specified sub-block is required for the preconditioning
+    /// operation. Computes the required block matrices, and stores pointers
+    /// to them in the matrix block_matrix_pt. If an entry in block_matrix_pt
+    /// is equal to NULL on return, that sub-block has not been requested and
+    /// is therefore not available.
+    ///
+    /// WARNING: the matrix pointers are created using new so you must delete
+    /// them all manually!
+    ///
+    /// WARNING 2: the matrix pointers in block_matrix_pt MUST be null
+    /// because Richard in all his wisdom decided to call delete on any
+    /// non-null pointers. Presumably to avoid fixing his memory leaks
+    /// properly...
+    void get_blocks(DenseMatrix<bool>& required_blocks,
+                    DenseMatrix<MATRIX*>& block_matrix_pt) const;
+
+    /// \short Gets dof-level block (i,j).
+    /// If Replacement_dof_block_pt(i,j) is not null, then the replacement
+    /// block is returned via a deep copy.
+    ///
+    /// Otherwise if this is the uppermost block preconditioner then it calls
+    /// internal_get_block(i,j), else if it is a subsidiary
+    /// block preconditioner, it will call it's master block preconditioners'
+    /// get_dof_level_block function.
+    void get_dof_level_block(
+      const unsigned& i,
+      const unsigned& j,
+      MATRIX& output_block,
+      const bool& ignore_replacement_block = false) const;
+
+
+    /// \short Returns a concatenation of the block matrices specified by the
+    /// argument selected_block. The VectorMatrix selected_block must be
+    /// correctly sized as it is used to determine the number of sub block
+    /// matrices to concatenate.
+    ///
+    /// For each entry in the VectorMatrix, the following variables must
+    /// correctly set:
+    /// BlockSelector::Row_index - Refers to the row index of the block.
+    /// BlockSelector::Column_index - Refers to the column index of the block.
+    /// BlockSelector::Wanted - Do we want the block?
+    /// BlockSelector::Replacement_block_pt - If not null, this block will be
+    /// used instead of
+    ///                           get_block(Row_index,Column_index).
+    ///
+    /// For example, assume that we have a matrix of the following blocking:
+    ///       0   1   2   3   4
+    ///      | a | b | c | d | e |
+    ///    --|---|---|---|---|---|
+    /// 0  a |   |   |   |   |   |
+    ///    --|---|---|---|---|---|
+    /// 1  b |   |   |   |   |   |
+    ///    --|---|---|---|---|---|
+    /// 2  c |   |   |   |   |   |
+    ///    --|---|---|---|---|---|
+    /// 3  d |   |   |   |   |   |
+    ///    --|---|---|---|---|---|
+    /// 4  e |   |   |   |   |   |
+    ///    --|---|---|---|---|---|
+    ///
+    /// If we want a block matrix corresponding to the concatenation of the
+    /// blocks [(a,d), (a,e)
+    ///              , (b,e)* ]
+    /// where top left and top right blocks comes from the function
+    /// get_block(...), the bottom left entry is empty, and the bottom right is
+    /// a modified block.
+    ///
+    /// Then we create a VectorMatrix of size 2 by 2
+    ///   VectorMatrix<BlockSelector> selected_block(2,2);
+    ///
+    /// In the [0][0] entry:
+    ///  row index is 0,
+    ///  column index is 3,
+    ///  do we want this block? - yes (true).
+    /// selected_block[0][0].select_block(0,3,true);
+    ///
+    /// In the [0][1] entry:
+    ///  row index is 0,
+    ///  column index is 4,
+    ///  do we want this block? - yes (true).
+    /// selected_block[0][0].select_block(0,4,true);
+    ///
+    /// In the [1][0] entry:
+    ///  row index is 1,
+    ///  column index is 3,
+    ///  do we want this block? - no (false).
+    /// selected_block[0][0].select_block(1,3,false);
+    ///
+    /// In the [1][1] entry:
+    ///  row index is 1,
+    ///  column index is 4,
+    ///  do we want this block? - yes (true).
+    /// selected_block[0][0].select_block(1,4,true,block_pt);
+    ///
+    /// where block_pt is a pointer to the modified block.
+    ///
+    /// Then we can call:
+    ///
+    ///  CRDoubleMatrix my_block = get_concatenated_block(selected_block);
+    ///
+    /// NOTE: It is important to set the row and column indices even if you do
+    /// not want the block. This is because, if we allow the row and column
+    /// indices to be "not set", then we can have a whole empty block row
+    /// without any indices. But concatenation of blocks without communication
+    /// requires both the row and column distributions, so we know how to
+    /// permute the rows and columns. So in short, we require that the column
+    /// and row indices to always be set for every entry in the
+    /// VectorMatrix<BlockSelector> object for convenience and consistency
+    /// checks.
+    MATRIX get_concatenated_block(
+      const VectorMatrix<BlockSelector>& selected_block)
+    {
+#ifdef PARANOID
+
+      unsigned const para_selected_block_nrow = selected_block.nrow();
+      unsigned const para_selected_block_ncol = selected_block.ncol();
+      unsigned const para_nblocks = this->nblock_types();
+
+      // Check that selected_block size is not 0.
+      if (para_selected_block_nrow == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg << "selected_block has nrow = 0.\n";
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // Check that the number of blocks is not outside of the range
+      // nblock_types(). Since this function builds matrices for block
+      // preconditioning, it does not make sense for us to concatenate more
+      // blocks than nblock_types().
+      if ((para_selected_block_nrow > para_nblocks) ||
+          (para_selected_block_ncol > para_nblocks))
+      {
+        std::ostringstream error_msg;
+        error_msg << "Trying to concatenate a " << para_selected_block_nrow
+                  << " by " << para_selected_block_ncol << " block matrix,\n"
+                  << "but there are only " << para_nblocks << " block types.\n";
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // Check that selected_block make sense, i.e. the row indices of each row
+      // are the same, and the column indices of each column are the same.
+
+      // First check if the row indices are consistent.
+      // For each row, loop through the columns, comparing the row index against
+      // the first column.
+      for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++)
+      {
+        const unsigned col_0_row_index = selected_block[row_i][0].row_index();
+
+        for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++)
+        {
+          const unsigned para_b_i = selected_block[row_i][col_i].row_index();
+          const unsigned para_b_j = selected_block[row_i][col_i].column_index();
+
+          if (col_0_row_index != para_b_i)
+          {
+            std::ostringstream err_msg;
+            err_msg << "Block index for block(" << row_i << "," << col_i << ") "
+                    << "contains block indices (" << para_b_i << "," << para_b_j
+                    << ").\n"
+                    << "But the row index for the first column is "
+                    << col_0_row_index << ", they must be the same!\n";
+            throw OomphLibError(
+              err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+          }
+        }
+      }
+
+      // Do the same for the column indices, consistency check.
+      // For each column, loop through the rows, comparing the column index
+      // against the first row.
+      for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++)
+      {
+        const unsigned row_0_col_index =
+          selected_block[0][col_i].column_index();
+
+        for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++)
+        {
+          const unsigned para_b_i = selected_block[row_i][col_i].row_index();
+          const unsigned para_b_j = selected_block[row_i][col_i].column_index();
+
+          if (row_0_col_index != para_b_j)
+          {
+            std::ostringstream err_msg;
+            err_msg << "Block index for block(" << row_i << "," << col_i << ") "
+                    << "contains block indices (" << para_b_i << "," << para_b_j
+                    << ").\n"
+                    << "But the col index for the first row is "
+                    << row_0_col_index << ", they must be the same!\n";
+            throw OomphLibError(
+              err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+          }
+        }
+      }
+
+      // Check to see if the values in selected_block is within the range
+      // nblock_types()
+      //
+      // Since we know that the column and row indices are consistent (by the
+      // two paranoia checks above), we only need to check the column indices
+      // in the first row, and the row indices in the first column.
+
+      // Check that the row indices in the first column are within the range
+      // nblock_types()
+      for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++)
+      {
+        const unsigned para_b_i = selected_block[row_i][0].row_index();
+        const unsigned para_b_j = selected_block[row_i][0].column_index();
+        if (para_b_i > para_nblocks)
+        {
+          std::ostringstream err_msg;
+          err_msg << "Block index for block(" << row_i << ",0) "
+                  << "contains block indices (" << para_b_i << "," << para_b_j
+                  << ").\n"
+                  << "But there are only " << para_nblocks
+                  << " nblock_types().\n";
+          throw OomphLibError(
+            err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+
+      // Check that the col indices in the first row are within the range
+      // nblock_types()
+      for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++)
+      {
+        const unsigned para_b_i = selected_block[0][col_i].row_index();
+        const unsigned para_b_j = selected_block[0][col_i].column_index();
+        if (para_b_j > para_nblocks)
+        {
+          std::ostringstream err_msg;
+          err_msg << "Block index for block(0," << col_i << ") "
+                  << "contains block indices (" << para_b_i << "," << para_b_j
+                  << ").\n"
+                  << "But there are only " << para_nblocks
+                  << " nblock_types().\n";
+          throw OomphLibError(
+            err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+
+      // Stricter test - can be removed is required in the future. For the first
+      // column, check that the row indices does not repeat.
+      std::set<unsigned> row_index_set;
+      for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++)
+      {
+        std::pair<std::set<unsigned>::iterator, bool> row_index_set_ret;
+
+        const unsigned row_i_index = selected_block[row_i][0].row_index();
+
+        row_index_set_ret = row_index_set.insert(row_i_index);
+
+        if (!row_index_set_ret.second)
+        {
+          std::ostringstream err_msg;
+          err_msg << "The row " << row_i_index << " is already inserted.\n";
+          throw OomphLibError(
+            err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+
+      // Stricter test - can be removed is required in the future. For the first
+      // row, check that the column indices does not repeat.
+      std::set<unsigned> col_index_set;
+      for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++)
+      {
+        std::pair<std::set<unsigned>::iterator, bool> col_index_set_ret;
+
+        const unsigned col_i_index = selected_block[0][col_i].column_index();
+
+        col_index_set_ret = col_index_set.insert(col_i_index);
+
+        if (!col_index_set_ret.second)
+        {
+          std::ostringstream err_msg;
+          err_msg << "The col " << col_i_index << " is already inserted.\n";
+          throw OomphLibError(
+            err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+
+      // Loop through all the block_pt and check:
+      // 1) The non-null pointers point to built matrices.
+      // 2) The distribution matches those defined by selected_block within
+      //    Block_distribution_pt.
+      for (unsigned block_i = 0; block_i < para_selected_block_nrow; block_i++)
+      {
+        for (unsigned block_j = 0; block_j < para_selected_block_ncol;
+             block_j++)
+        {
+          const CRDoubleMatrix* tmp_block_pt =
+            selected_block[block_i][block_j].replacement_block_pt();
+
+          if (tmp_block_pt != 0)
+          {
+            if (!tmp_block_pt->built())
+            {
+              std::ostringstream err_msg;
+              err_msg << "The matrix pointed to by block(" << block_i << ","
+                      << block_j << ") is not built.\n";
+              throw OomphLibError(err_msg.str(),
+                                  OOMPH_CURRENT_FUNCTION,
+                                  OOMPH_EXCEPTION_LOCATION);
+            }
+
+            const LinearAlgebraDistribution* const tmp_block_dist_pt =
+              tmp_block_pt->distribution_pt();
+
+            const unsigned row_selected_block =
+              selected_block[block_i][block_j].row_index();
+
+            const LinearAlgebraDistribution* const another_tmp_block_dist_pt =
+              block_distribution_pt(row_selected_block);
+
+            if (*tmp_block_dist_pt != *another_tmp_block_dist_pt)
+            {
+              std::ostringstream err_msg;
+              err_msg << "block_distribution_pt " << row_selected_block << "\n"
+                      << "does not match the distribution from the block_pt() "
+                      << " in selected_block[" << block_i << "][" << block_j
+                      << "].\n";
+              throw OomphLibError(err_msg.str(),
+                                  OOMPH_CURRENT_FUNCTION,
+                                  OOMPH_EXCEPTION_LOCATION);
+            }
+          }
+        }
+      }
+
+      // Attempt a similar check for the column index. This is not as rigorous
+      // since a CRDoubleMatrix does not have a distribution for the columns.
+      // However, we can check if the ncol of the matrices in block_pt matches
+      // those in the block_distribution_pt corresponding to the columns.
+      // (I hope this makes sense... both the row and columns are permuted in
+      // CRDoubleMatrixHelpers::concatenate_without_communication(...))
+      //
+      // The test for the row distributions checks if the nrow_local is correct.
+      // We do not have the equivalent for columns.
+      for (unsigned block_i = 0; block_i < para_selected_block_nrow; block_i++)
+      {
+        for (unsigned block_j = 0; block_j < para_selected_block_ncol;
+             block_j++)
+        {
+          // Cache the block_pt
+          const CRDoubleMatrix* tmp_block_pt =
+            selected_block[block_i][block_j].replacement_block_pt();
+
+          if (tmp_block_pt != 0)
+          {
+            const unsigned tmp_block_ncol = tmp_block_pt->ncol();
+
+            const unsigned selected_block_col =
+              selected_block[block_i][block_j].column_index();
+
+            // YES, nrow, this is not incorrect.
+            const unsigned another_tmp_block_ncol =
+              block_distribution_pt(selected_block_col)->nrow();
+
+            if (tmp_block_ncol != another_tmp_block_ncol)
+            {
+              std::ostringstream err_msg;
+              err_msg << "block_pt in selected_block[" << block_i << "]["
+                      << block_j << "] "
+                      << "has ncol = " << tmp_block_ncol << ".\n"
+                      << "But the corresponding block_distribution_pt("
+                      << selected_block_col
+                      << ") has nrow = " << another_tmp_block_ncol << ").\n";
+              throw OomphLibError(err_msg.str(),
+                                  OOMPH_CURRENT_FUNCTION,
+                                  OOMPH_EXCEPTION_LOCATION);
+            }
+          }
+        }
+      }
+#endif
+
+      // The return matrix.
+      MATRIX output_matrix;
+
+      // How many sub matrices are there in the row and column?
+      const unsigned nblock_row = selected_block.nrow();
+      const unsigned nblock_col = selected_block.ncol();
+
+      // Get the row and col distributions, this is required for concatenation
+      // without communication.
+      Vector<LinearAlgebraDistribution*> row_dist_pt(nblock_row, 0);
+      Vector<LinearAlgebraDistribution*> col_dist_pt(nblock_col, 0);
+
+      // For the row distributions, use the first column of selected_block
+      // Also, store the index of the block rows.
+      Vector<unsigned> block_row_index(nblock_row, 0);
+      for (unsigned row_i = 0; row_i < nblock_row; row_i++)
+      {
+        const unsigned selected_row_index =
+          selected_block[row_i][0].row_index();
+
+        row_dist_pt[row_i] = Block_distribution_pt[selected_row_index];
+        block_row_index[row_i] = selected_row_index;
+      }
+
+      // For the col distributions, use the first row of selected_block
+      Vector<unsigned> block_col_index(nblock_col, 0);
+      for (unsigned col_i = 0; col_i < nblock_col; col_i++)
+      {
+        const unsigned selected_col_index =
+          selected_block[0][col_i].column_index();
+
+        col_dist_pt[col_i] = Block_distribution_pt[selected_col_index];
+        block_col_index[col_i] = selected_col_index;
+      }
+
+      // Now build the output matrix. The output_matrix needs a distribution,
+      // this distribution is a concatenation of the block rows. But because
+      // concatenation of distributions requires communication, we try to
+      // minimise this process by creating it once, then store a key to the
+      // concatenated distribution. First check to see if the block row indices
+      // is already a key in Auxiliary_block_distribution_pt, if it is in there,
+      // we use the distribution it corresponds to. Otherwise, we create the
+      // distribution and store it for possible further use.
+      std::map<Vector<unsigned>, LinearAlgebraDistribution*>::const_iterator
+        iter;
+
+      iter = Auxiliary_block_distribution_pt.find(block_row_index);
+
+      if (iter != Auxiliary_block_distribution_pt.end())
+      {
+        output_matrix.build(iter->second);
+      }
+      else
+      {
+        LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
+        LinearAlgebraDistributionHelpers::concatenate(row_dist_pt,
+                                                      *tmp_dist_pt);
+        insert_auxiliary_block_distribution(block_row_index, tmp_dist_pt);
+        output_matrix.build(tmp_dist_pt);
+      }
+
+      // Do the same for the column dist, since we might need it for the RHS
+      // vector..
+      iter = Auxiliary_block_distribution_pt.find(block_col_index);
+      if (iter == Auxiliary_block_distribution_pt.end())
+      {
+        LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
+        LinearAlgebraDistributionHelpers::concatenate(col_dist_pt,
+                                                      *tmp_dist_pt);
+        insert_auxiliary_block_distribution(block_col_index, tmp_dist_pt);
+      }
+
+      // Storage for the pointers to CRDoubleMatrices to concatenate.
+      DenseMatrix<CRDoubleMatrix*> block_pt(nblock_row, nblock_col, 0);
 
       // Vector of Vectors of unsigns to indicate whether we have created
       // CRDoubleMatrices with new or not... so we can delete it later.
       // 0 - no new CRDoubleMatrix is created.
       // 1 - a new CRDoubleMatrix is created.
       // If we ever use C++11, remove this and use smart pointers.
-      Vector<Vector<unsigned> >new_block(ndofblock_in_row,
-                                         Vector<unsigned>(ndofblock_in_col,0));
+      Vector<Vector<unsigned>> new_block(nblock_row,
+                                         Vector<unsigned>(nblock_col, 0));
 
-      // Loop through the number of dof block rows and then the number of dof
-      // block columns, either get the pointer from Replacement_dof_block_pt
-      // or from get_dof_level_block(...).
-      for (unsigned row_dofblock = 0; row_dofblock < ndofblock_in_row; 
-           row_dofblock++) 
+      // Get blocks if wanted.
+      for (unsigned block_i = 0; block_i < nblock_row; block_i++)
       {
-        // Indirection for the row, as discuss in the large chunk of text
-        // previously.
-        const unsigned wanted_dof_row 
-          = Block_to_dof_map_coarse[i][row_dofblock];
-
-        for (unsigned col_dofblock = 0; col_dofblock < ndofblock_in_col; 
-             col_dofblock++) 
+        for (unsigned block_j = 0; block_j < nblock_col; block_j++)
         {
-          // Indirection for the column as discussed in the large chunk of text
-          // above.
-          const unsigned wanted_dof_col 
-            = Block_to_dof_map_coarse[j][col_dofblock];
+          const bool block_wanted = selected_block[block_i][block_j].wanted();
 
-          // Get the pointer from Replacement_dof_block_pt.
-          tmp_blocks_pt(row_dofblock,col_dofblock) 
-            = Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col);
-
-          // If the pointer from Replacement_dof_block_pt is null, or if
-          // we have to ignore replacement blocks, build a new CRDoubleMatrix
-          // via get_dof_level_block.
-          if((tmp_blocks_pt(row_dofblock,col_dofblock) == 0) ||
-              ignore_replacement_block)
+          if (block_wanted)
           {
-            // We have to create a new CRDoubleMatrix, so put in 1 to indicate
-            // that we have to delete it later.
-            new_block[row_dofblock][col_dofblock] = 1;
+            CRDoubleMatrix* tmp_block_pt =
+              selected_block[block_i][block_j].replacement_block_pt();
 
-            // Create the new CRDoubleMatrix. Note that we do not use the
-            // indirection, since the indirection is only used one way.
-            tmp_blocks_pt(row_dofblock,col_dofblock) = new CRDoubleMatrix;
+            if (tmp_block_pt == 0)
+            {
+              new_block[block_i][block_j] = 1;
 
-            // Get the dof-level block, as discussed above.
-            get_dof_level_block(wanted_dof_row,
-                                wanted_dof_col,
-                                *tmp_blocks_pt(row_dofblock,col_dofblock),
-                                ignore_replacement_block);
+              block_pt(block_i, block_j) = new CRDoubleMatrix;
+
+              // temp variables for readability purposes.
+              const unsigned tmp_block_i = block_row_index[block_i];
+              const unsigned tmp_block_j = block_col_index[block_j];
+
+              // Get the block.
+              this->get_block(
+                tmp_block_i, tmp_block_j, *block_pt(block_i, block_j));
+            }
+            else
+            {
+              block_pt(block_i, block_j) = tmp_block_pt;
+            }
           }
-        }
-      }
-
-      // Concatenation of matrices require the distribution of the individual
-      // sub-matrices (for both row and column). This is because concatenation
-      // is implemented without communication in such a way that the rows
-      // and column values are both permuted, the permutation is defined by
-      // the individual distributions of the sub blocks.
-      // Without a vector of distributions describing the distributions of
-      // of the rows, we do not know how to permute the rows. For the columns,
-      // although CRDoubleMatrices does not have a column distribution, the
-      // concatenated matrix must have it's columns permuted, so we mirror
-      // the diagonal and get the corresponding row distribution.
-      //
-      // Confused? - Example: Say we have a matrix with dof blocking
-      //
-      //   | a | b | c | d | e |
-      // --|---|---|---|---|---|
-      // a |   |   |   |   |   |
-      // --|---|---|---|---|---|
-      // b |   |   |   |   |   |
-      // --|---|---|---|---|---|
-      // c |   |   |   |   |   |
-      // --|---|---|---|---|---|
-      // d |   |   |   |   |   |
-      // --|---|---|---|---|---|
-      // e |   |   |   |   |   |
-      // --|---|---|---|---|---|
-      //
-      // We wish to concatenate the blocks
-      //
-      //   | d | e | 
-      // --|---|---|
-      // a |   |   |
-      // --|---|---|
-      // b |   |   |
-      // --|---|---|
-      //
-      // Then clearly the row distributions required are the distributions for
-      // the dof blocks a and b. But block(a,d) does not have a column 
-      // distribution since it is a CRDoubleMatrix! - We use the distribution
-      // mirrored by the diagonal, so the column distributions required to
-      // concatenate these blocks is the same as the distributions of the rows
-      // for dof block d and e.
-
-      // First we do the row distribution.
-      
-      // Storage for the row distribution pointers.
-      Vector<LinearAlgebraDistribution*> tmp_row_dist_pt(ndofblock_in_row,0);
-
-      // Loop through the number of dof blocks in the row. For the upper-most
-      // master block preconditioner, the external dof distributions is the
-      // same as the internal BLOCK distributions. Recall what we said above
-      // about the underlying blocks maintaining it's natural ordering.
-      //
-      // If this is a subsidiary block preconditioner, then the distributions
-      // for the dof blocks are stored in Dof_block_distribution_pt. The reason
-      // why this is different for subsidiary block preconditioners is because
-      // subsidiary block preconditioners would have it's dof types coarsened.
-      // Then a single dof distribution in a subsidiary block preconditioner
-      // could be a concatenation of many dof distributions of the master
-      // dof distributions.
-      for (unsigned row_dof_i = 0; row_dof_i < ndofblock_in_row; row_dof_i++) 
-      {
-        const unsigned mapped_dof_i = Block_to_dof_map_coarse[i][row_dof_i];
-        if(is_master_block_preconditioner())
-        {
-          tmp_row_dist_pt[row_dof_i] 
-            = Internal_block_distribution_pt[mapped_dof_i];
-        }
-        else
-        {
-          tmp_row_dist_pt[row_dof_i] 
-            = Dof_block_distribution_pt[mapped_dof_i];
-        }
-      }
-
-      // Storage for the column distribution pointers.
-      Vector<LinearAlgebraDistribution*> tmp_col_dist_pt(ndofblock_in_col,0);
-
-      // We do the same thing as before.
-      for (unsigned col_dof_i = 0; col_dof_i < ndofblock_in_col; col_dof_i++) 
-      {
-        const unsigned mapped_dof_j = Block_to_dof_map_coarse[j][col_dof_i];
-        if(is_master_block_preconditioner())
-        {
-          tmp_col_dist_pt[col_dof_i] 
-            = Internal_block_distribution_pt[mapped_dof_j];
-        }
-        else
-        {
-          tmp_col_dist_pt[col_dof_i] 
-            = Dof_block_distribution_pt[mapped_dof_j];
         }
       }
 
       // Perform the concatenation.
-      CRDoubleMatrixHelpers::concatenate_without_communication(tmp_row_dist_pt,
-          tmp_col_dist_pt,
-          tmp_blocks_pt,
-          output_matrix);
+      CRDoubleMatrixHelpers::concatenate_without_communication(
+        row_dist_pt, col_dist_pt, block_pt, output_matrix);
 
-      // Delete any new CRDoubleMatrices we have created.
-      for (unsigned row_i = 0; row_i < ndofblock_in_row; row_i++) 
+      // Delete any new CRDoubleMatrices we created.
+      for (unsigned block_i = 0; block_i < nblock_row; block_i++)
       {
-        for (unsigned col_i = 0; col_i < ndofblock_in_col; col_i++) 
+        for (unsigned block_j = 0; block_j < nblock_col; block_j++)
         {
-          if(new_block[row_i][col_i])
+          if (new_block[block_i][block_j])
           {
-            delete tmp_blocks_pt(row_i,col_i);
+            delete block_pt(block_i, block_j);
           }
         }
       }
-    }// else need to concatenate
-  } // EOFunc get_block(...)
 
+      return output_matrix;
+    } // EOFunc get_concatenated_block(...)
 
-  /// \short Return block (i,j). If the optional argument
-  /// ignore_replacement_block is true, then any blocks in 
-  /// Replacement_dof_block_pt will be ignored throughout the preconditioning
-  /// hierarchy.
-  MATRIX get_block(const unsigned& i, const unsigned& j, 
-                   const bool& ignore_replacement_block = false) const
-   {
-    MATRIX output_matrix;
-    get_block(i, j, output_matrix, ignore_replacement_block);
-    return output_matrix;
-   } // EOFunc get_block(...)
+    /// \short Takes the naturally ordered vector and extracts the blocks
+    /// indicated by the block number (the values) in the Vector
+    /// block_vec_number all at once, then concatenates them without
+    /// communication. Here, the values in block_vec_number is the block number
+    /// in the current preconditioner.
+    /// This is a non-const function because distributions may be created
+    /// and stored in Auxiliary_block_distribution_pt for future use.
+    void get_concatenated_block_vector(const Vector<unsigned>& block_vec_number,
+                                       const DoubleVector& v,
+                                       DoubleVector& b);
 
-  /// \short Set the matrix_pt in the upper-most master preconditioner.
-  void set_master_matrix_pt(MATRIX* in_matrix_pt)
-  {
-    if(is_subsidiary_block_preconditioner())
-    {
-      master_block_preconditioner_pt()
-        ->set_master_matrix_pt(in_matrix_pt);
-    }
-    else
-    {
-      this->set_matrix_pt(in_matrix_pt);
-    }
-  }
-
-  /// \short Get a block from a different matrix using the blocking scheme
-  /// that has already been set up.
-  void get_block_other_matrix(const unsigned& i, const unsigned& j,
-                              MATRIX* in_matrix_pt,
-                              MATRIX& output_matrix)
-  {
-   MATRIX* backup_matrix_pt = matrix_pt();
-   set_master_matrix_pt(in_matrix_pt);
-   get_block(i, j, output_matrix, true);
-   set_master_matrix_pt(backup_matrix_pt);
-  } // EOFunc get_block_other_matrix(...)
-
-  /// \short Get all the block matrices required by the block
-  /// preconditioner.  Takes a pointer to a matrix of bools that indicate
-  /// if a specified sub-block is required for the preconditioning
-  /// operation. Computes the required block matrices, and stores pointers
-  /// to them in the matrix block_matrix_pt. If an entry in block_matrix_pt
-  /// is equal to NULL on return, that sub-block has not been requested and
-  /// is therefore not available.
-  ///
-  /// WARNING: the matrix pointers are created using new so you must delete
-  /// them all manually!
-  ///
-  /// WARNING 2: the matrix pointers in block_matrix_pt MUST be null
-  /// because Richard in all his wisdom decided to call delete on any
-  /// non-null pointers. Presumably to avoid fixing his memory leaks
-  /// properly...
-  void get_blocks(DenseMatrix<bool>& required_blocks,
-                  DenseMatrix<MATRIX*>& block_matrix_pt) const;
-
-  /// \short Gets dof-level block (i,j).
-  /// If Replacement_dof_block_pt(i,j) is not null, then the replacement
-  /// block is returned via a deep copy.
-  ///
-  /// Otherwise if this is the uppermost block preconditioner then it calls
-  /// internal_get_block(i,j), else if it is a subsidiary
-  /// block preconditioner, it will call it's master block preconditioners'
-  /// get_dof_level_block function.
-  void get_dof_level_block(const unsigned& i, const unsigned& j,
-                           MATRIX& output_block,
-                           const bool& ignore_replacement_block = false) const;
-
-
-  /// \short Returns a concatenation of the block matrices specified by the
-  /// argument selected_block. The VectorMatrix selected_block must be 
-  /// correctly sized as it is used to determine the number of sub block 
-  /// matrices to concatenate.
-  /// 
-  /// For each entry in the VectorMatrix, the following variables must 
-  /// correctly set:
-  /// BlockSelector::Row_index - Refers to the row index of the block.
-  /// BlockSelector::Column_index - Refers to the column index of the block.
-  /// BlockSelector::Wanted - Do we want the block?
-  /// BlockSelector::Replacement_block_pt - If not null, this block will be used instead of
-  ///                           get_block(Row_index,Column_index).
-  ///
-  /// For example, assume that we have a matrix of the following blocking:
-  ///       0   1   2   3   4
-  ///      | a | b | c | d | e |
-  ///    --|---|---|---|---|---|
-  /// 0  a |   |   |   |   |   |
-  ///    --|---|---|---|---|---|
-  /// 1  b |   |   |   |   |   |
-  ///    --|---|---|---|---|---|
-  /// 2  c |   |   |   |   |   |
-  ///    --|---|---|---|---|---|
-  /// 3  d |   |   |   |   |   |
-  ///    --|---|---|---|---|---|
-  /// 4  e |   |   |   |   |   |
-  ///    --|---|---|---|---|---|
-  ///  
-  /// If we want a block matrix corresponding to the concatenation of the 
-  /// blocks [(a,d), (a,e)
-  ///              , (b,e)* ]
-  /// where top left and top right blocks comes from the function 
-  /// get_block(...), the bottom left entry is empty, and the bottom right is
-  /// a modified block.
-  /// 
-  /// Then we create a VectorMatrix of size 2 by 2
-  ///   VectorMatrix<BlockSelector> selected_block(2,2);
-  ///
-  /// In the [0][0] entry:
-  ///  row index is 0, 
-  ///  column index is 3, 
-  ///  do we want this block? - yes (true).
-  /// selected_block[0][0].select_block(0,3,true);
-  ///
-  /// In the [0][1] entry:
-  ///  row index is 0, 
-  ///  column index is 4, 
-  ///  do we want this block? - yes (true).
-  /// selected_block[0][0].select_block(0,4,true);
-  ///
-  /// In the [1][0] entry:
-  ///  row index is 1, 
-  ///  column index is 3, 
-  ///  do we want this block? - no (false).
-  /// selected_block[0][0].select_block(1,3,false);
-  /// 
-  /// In the [1][1] entry:
-  ///  row index is 1, 
-  ///  column index is 4, 
-  ///  do we want this block? - yes (true).
-  /// selected_block[0][0].select_block(1,4,true,block_pt);
-  /// 
-  /// where block_pt is a pointer to the modified block.
-  /// 
-  /// Then we can call:
-  ///
-  ///  CRDoubleMatrix my_block = get_concatenated_block(selected_block);
-  /// 
-  /// NOTE: It is important to set the row and column indices even if you do
-  /// not want the block. This is because, if we allow the row and column 
-  /// indices to be "not set", then we can have a whole empty block row without
-  /// any indices. But concatenation of blocks without communication requires 
-  /// both the row and column distributions, so we know how to permute the
-  /// rows and columns. So in short, we require that the column and row 
-  /// indices to always be set for every entry in the 
-  /// VectorMatrix<BlockSelector> object for convenience and consistency 
-  /// checks.
-  MATRIX get_concatenated_block(const VectorMatrix<BlockSelector> 
-      &selected_block)
-  {
-#ifdef PARANOID
-
-    unsigned const para_selected_block_nrow = selected_block.nrow();
-    unsigned const para_selected_block_ncol = selected_block.ncol();
-    unsigned const para_nblocks = this->nblock_types();
-
-    // Check that selected_block size is not 0.
-    if(para_selected_block_nrow == 0)
-    {
-      std::ostringstream error_msg;
-      error_msg << "selected_block has nrow = 0.\n";
-      throw OomphLibError(error_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check that the number of blocks is not outside of the range 
-    // nblock_types(). Since this function builds matrices for block
-    // preconditioning, it does not make sense for us to concatenate more
-    // blocks than nblock_types().
-    if((para_selected_block_nrow > para_nblocks) ||
-        (para_selected_block_ncol > para_nblocks))
-    {
-      std::ostringstream error_msg;
-      error_msg << "Trying to concatenate a " 
-        << para_selected_block_nrow << " by " 
-        << para_selected_block_ncol 
-        << " block matrix,\n"
-        << "but there are only " 
-        << para_nblocks << " block types.\n";
-      throw OomphLibError(error_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check that selected_block make sense, i.e. the row indices of each row
-    // are the same, and the column indices of each column are the same.
-
-    // First check if the row indices are consistent. 
-    // For each row, loop through the columns, comparing the row index against
-    // the first column.
-    for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++)
-    {
-      const unsigned col_0_row_index = selected_block[row_i][0].row_index();
-
-      for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++)
-      {
-        const unsigned para_b_i = selected_block[row_i][col_i].row_index();
-        const unsigned para_b_j = selected_block[row_i][col_i].column_index();
-
-        if(col_0_row_index != para_b_i)
-        {
-          std::ostringstream err_msg;
-          err_msg << "Block index for block(" << row_i << "," << col_i <<") "
-            << "contains block indices (" << para_b_i << "," 
-            << para_b_j << ").\n"
-            << "But the row index for the first column is " 
-            << col_0_row_index <<", they must be the same!\n";
-          throw OomphLibError(err_msg.str(),
-              OOMPH_CURRENT_FUNCTION,
-              OOMPH_EXCEPTION_LOCATION); 
-        }
-      }
-    }
-
-    // Do the same for the column indices, consistency check.
-    // For each column, loop through the rows, comparing the column index
-    // against the first row.
-    for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++) 
-    {
-      const unsigned row_0_col_index = selected_block[0][col_i].column_index();
-
-      for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
-      {
-        const unsigned para_b_i = selected_block[row_i][col_i].row_index();
-        const unsigned para_b_j = selected_block[row_i][col_i].column_index();
-
-        if(row_0_col_index != para_b_j)
-        {
-          std::ostringstream err_msg;
-          err_msg << "Block index for block(" << row_i << "," << col_i <<") "
-            << "contains block indices (" << para_b_i << "," 
-            << para_b_j << ").\n"
-            << "But the col index for the first row is " 
-            << row_0_col_index <<", they must be the same!\n";
-          throw OomphLibError(err_msg.str(),
-              OOMPH_CURRENT_FUNCTION,
-              OOMPH_EXCEPTION_LOCATION); 
-        }
-      }
-    }
-
-    // Check to see if the values in selected_block is within the range 
-    // nblock_types()
-    //
-    // Since we know that the column and row indices are consistent (by the
-    // two paranoia checks above), we only need to check the column indices
-    // in the first row, and the row indices in the first column.
-
-    // Check that the row indices in the first column are within the range
-    // nblock_types()
-    for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
-    {
-      const unsigned para_b_i = selected_block[row_i][0].row_index();
-      const unsigned para_b_j = selected_block[row_i][0].column_index();
-      if(para_b_i > para_nblocks)
-      {
-        std::ostringstream err_msg;
-        err_msg << "Block index for block(" << row_i << ",0) "
-          << "contains block indices (" << para_b_i << "," 
-          << para_b_j << ").\n"
-          << "But there are only " << para_nblocks 
-          << " nblock_types().\n";
-        throw OomphLibError(err_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION); 
-      }
-    }
-
-    // Check that the col indices in the first row are within the range
-    // nblock_types()
-    for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++)
-    {
-      const unsigned para_b_i = selected_block[0][col_i].row_index();
-      const unsigned para_b_j = selected_block[0][col_i].column_index();
-      if(para_b_j > para_nblocks)
-      {
-        std::ostringstream err_msg;
-        err_msg << "Block index for block(0," << col_i << ") "
-          << "contains block indices (" << para_b_i << "," 
-          << para_b_j << ").\n"
-          << "But there are only " << para_nblocks 
-          << " nblock_types().\n";
-        throw OomphLibError(err_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION); 
-      }
-    }
-
-    // Stricter test - can be removed is required in the future. For the first
-    // column, check that the row indices does not repeat.
-    std::set<unsigned> row_index_set;
-    for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
-    {
-      std::pair<std::set<unsigned>::iterator,bool> row_index_set_ret;
-
-      const unsigned row_i_index = selected_block[row_i][0].row_index();
-
-      row_index_set_ret
-        = row_index_set.insert(row_i_index);
-
-      if(!row_index_set_ret.second)
-      {
-        std::ostringstream err_msg;
-        err_msg << "The row " << row_i_index << " is already inserted.\n";
-        throw OomphLibError(err_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-
-    // Stricter test - can be removed is required in the future. For the first
-    // row, check that the column indices does not repeat.
-    std::set<unsigned> col_index_set;
-    for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++) 
-    {
-      std::pair<std::set<unsigned>::iterator,bool> col_index_set_ret;
-
-      const unsigned col_i_index = selected_block[0][col_i].column_index();
-
-      col_index_set_ret
-        = col_index_set.insert(col_i_index);
-
-      if(!col_index_set_ret.second)
-      {
-        std::ostringstream err_msg;
-        err_msg << "The col " << col_i_index << " is already inserted.\n";
-        throw OomphLibError(err_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-
-    // Loop through all the block_pt and check:
-    // 1) The non-null pointers point to built matrices.
-    // 2) The distribution matches those defined by selected_block within 
-    //    Block_distribution_pt.
-    for (unsigned block_i = 0; block_i < para_selected_block_nrow; block_i++)
-    {
-      for (unsigned block_j = 0; block_j < para_selected_block_ncol; block_j++)
-      {
-        const CRDoubleMatrix* tmp_block_pt 
-          = selected_block[block_i][block_j].replacement_block_pt();
-
-        if(tmp_block_pt != 0)
-        {
-          if(!tmp_block_pt->built())
-          {
-            std::ostringstream err_msg;
-            err_msg << "The matrix pointed to by block(" 
-              << block_i << "," << block_j << ") is not built.\n";
-            throw OomphLibError(err_msg.str(),
-                OOMPH_CURRENT_FUNCTION,
-                OOMPH_EXCEPTION_LOCATION);
-          }
-
-          const LinearAlgebraDistribution* const tmp_block_dist_pt
-            = tmp_block_pt->distribution_pt();
-
-          const unsigned row_selected_block 
-            = selected_block[block_i][block_j].row_index();
-
-          const LinearAlgebraDistribution* const another_tmp_block_dist_pt
-            = block_distribution_pt(row_selected_block);
-
-          if(*tmp_block_dist_pt != *another_tmp_block_dist_pt)
-          {
-            std::ostringstream err_msg;
-            err_msg << "block_distribution_pt " << row_selected_block << "\n"
-              << "does not match the distribution from the block_pt() "
-              << " in selected_block["
-              << block_i << "][" << block_j <<"].\n";
-            throw OomphLibError(err_msg.str(),
-                OOMPH_CURRENT_FUNCTION,
-                OOMPH_EXCEPTION_LOCATION);
-          }
-        }
-      }
-    }
-
-    // Attempt a similar check for the column index. This is not as rigorous
-    // since a CRDoubleMatrix does not have a distribution for the columns.
-    // However, we can check if the ncol of the matrices in block_pt matches
-    // those in the block_distribution_pt corresponding to the columns.
-    // (I hope this makes sense... both the row and columns are permuted in
-    // CRDoubleMatrixHelpers::concatenate_without_communication(...))
-    //
-    // The test for the row distributions checks if the nrow_local is correct.
-    // We do not have the equivalent for columns.
-    for (unsigned block_i = 0; block_i < para_selected_block_nrow; block_i++) 
-    {
-      for (unsigned block_j = 0; block_j < para_selected_block_ncol; block_j++) 
-      {
-        // Cache the block_pt
-        const CRDoubleMatrix* tmp_block_pt 
-          = selected_block[block_i][block_j].replacement_block_pt();
-
-        if(tmp_block_pt != 0)
-        {
-          const unsigned tmp_block_ncol = tmp_block_pt->ncol();
-
-          const unsigned selected_block_col
-            = selected_block[block_i][block_j].column_index();
-
-          // YES, nrow, this is not incorrect.
-          const unsigned another_tmp_block_ncol 
-            = block_distribution_pt(selected_block_col)->nrow();
-
-          if(tmp_block_ncol != another_tmp_block_ncol)
-          {
-            std::ostringstream err_msg;
-            err_msg << "block_pt in selected_block[" 
-              << block_i << "][" << block_j << "] "
-              << "has ncol = " << tmp_block_ncol << ".\n"
-              << "But the corresponding block_distribution_pt("
-              << selected_block_col << ") has nrow = " 
-              << another_tmp_block_ncol 
-              << ").\n";
-            throw OomphLibError(err_msg.str(),
-                OOMPH_CURRENT_FUNCTION,
-                OOMPH_EXCEPTION_LOCATION);
-          }
-        }
-      }
-    }
-#endif
-
-    // The return matrix.
-    MATRIX output_matrix;
-
-    // How many sub matrices are there in the row and column?
-    const unsigned nblock_row = selected_block.nrow();
-    const unsigned nblock_col = selected_block.ncol();
-
-    // Get the row and col distributions, this is required for concatenation
-    // without communication.
-    Vector<LinearAlgebraDistribution*> row_dist_pt(nblock_row,0);
-    Vector<LinearAlgebraDistribution*> col_dist_pt(nblock_col,0);
-
-    // For the row distributions, use the first column of selected_block
-    // Also, store the index of the block rows.
-    Vector<unsigned> block_row_index(nblock_row,0);
-    for (unsigned row_i = 0; row_i < nblock_row; row_i++) 
-    {
-      const unsigned selected_row_index 
-        = selected_block[row_i][0].row_index();
-
-      row_dist_pt[row_i] = Block_distribution_pt[selected_row_index];
-      block_row_index[row_i] = selected_row_index;
-    }
-
-    // For the col distributions, use the first row of selected_block
-    Vector<unsigned> block_col_index(nblock_col,0);
-    for (unsigned col_i = 0; col_i < nblock_col; col_i++) 
-    {
-      const unsigned selected_col_index 
-        = selected_block[0][col_i].column_index();
-
-      col_dist_pt[col_i] = Block_distribution_pt[selected_col_index];
-      block_col_index[col_i] = selected_col_index;
-    }
-
-    // Now build the output matrix. The output_matrix needs a distribution,
-    // this distribution is a concatenation of the block rows. But because
-    // concatenation of distributions requires communication, we try to 
-    // minimise this process by creating it once, then store a key to the
-    // concatenated distribution. First check to see if the block row indices 
-    // is already a key in Auxiliary_block_distribution_pt, if it is in there, 
-    // we use the distribution it corresponds to. Otherwise, we create the 
-    // distribution and store it for possible further use.
-    std::map<Vector<unsigned>,
-             LinearAlgebraDistribution* >::const_iterator iter;
-
-    iter = Auxiliary_block_distribution_pt.find(block_row_index);
-
-    if(iter != Auxiliary_block_distribution_pt.end())
-    {
-      output_matrix.build(iter->second);
-    }
-    else
-    {
-      LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
-      LinearAlgebraDistributionHelpers::concatenate(row_dist_pt,*tmp_dist_pt);
-      insert_auxiliary_block_distribution(block_row_index,tmp_dist_pt);
-      output_matrix.build(tmp_dist_pt);
-    }
-
-    // Do the same for the column dist, since we might need it for the RHS
-    // vector..
-    iter = Auxiliary_block_distribution_pt.find(block_col_index);
-    if(iter == Auxiliary_block_distribution_pt.end())
-    {
-      LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
-      LinearAlgebraDistributionHelpers::concatenate(col_dist_pt,*tmp_dist_pt);
-      insert_auxiliary_block_distribution(block_col_index,tmp_dist_pt);
-    }
-
-    // Storage for the pointers to CRDoubleMatrices to concatenate.
-    DenseMatrix<CRDoubleMatrix*> block_pt(nblock_row,nblock_col,0);
-
-    // Vector of Vectors of unsigns to indicate whether we have created
-    // CRDoubleMatrices with new or not... so we can delete it later.
-    // 0 - no new CRDoubleMatrix is created.
-    // 1 - a new CRDoubleMatrix is created.
-    // If we ever use C++11, remove this and use smart pointers. 
-    Vector<Vector<unsigned> > new_block(nblock_row,
-                                        Vector<unsigned>(nblock_col,0));
-
-    // Get blocks if wanted.
-    for (unsigned block_i = 0; block_i < nblock_row; block_i++) 
-    {
-      for (unsigned block_j = 0; block_j < nblock_col; block_j++) 
-      {
-        const bool block_wanted = selected_block[block_i][block_j].wanted();
-        
-        if(block_wanted)
-        {
-          CRDoubleMatrix* tmp_block_pt 
-            = selected_block[block_i][block_j].replacement_block_pt();
-
-          if(tmp_block_pt == 0)
-          {
-            new_block[block_i][block_j] = 1;
-
-            block_pt(block_i,block_j) = new CRDoubleMatrix;
-
-            // temp variables for readability purposes.
-            const unsigned tmp_block_i = block_row_index[block_i];
-            const unsigned tmp_block_j = block_col_index[block_j];
-
-            // Get the block.
-            this->get_block(tmp_block_i,tmp_block_j,
-                            *block_pt(block_i,block_j));
-          }
-          else
-          {
-            block_pt(block_i,block_j) = tmp_block_pt;
-          }
-        }
-      }
-    }
-
-    // Perform the concatenation.
-    CRDoubleMatrixHelpers::concatenate_without_communication(row_dist_pt,
-        col_dist_pt,
-        block_pt,
-        output_matrix);
-
-    // Delete any new CRDoubleMatrices we created.
-    for (unsigned block_i = 0; block_i < nblock_row; block_i++) 
-    {
-      for (unsigned block_j = 0; block_j < nblock_col; block_j++) 
-      {
-        if(new_block[block_i][block_j])
-        {
-          delete block_pt(block_i,block_j);
-        }
-      }
-    }
-
-    return output_matrix;
-  } // EOFunc get_concatenated_block(...)
-
-  /// \short Takes the naturally ordered vector and extracts the blocks 
-  /// indicated by the block number (the values) in the Vector 
-  /// block_vec_number all at once, then concatenates them without 
-  /// communication. Here, the values in block_vec_number is the block number
-  /// in the current preconditioner.
-  /// This is a non-const function because distributions may be created
-  /// and stored in Auxiliary_block_distribution_pt for future use.
-  void get_concatenated_block_vector(const Vector<unsigned>& block_vec_number,
-                                     const DoubleVector& v,
-                                     DoubleVector& b);
-
-  /// \short Takes concatenated block ordered vector, b, and copies its 
-  /// entries to the appropriate entries in the naturally ordered vector, v.
-  /// Here the values in block_vec_number indicates which blocks the vector
-  /// b is a concatenation of. The block number are those in the current
-  /// preconditioner. If the preconditioner is a subsidiary block
-  /// preconditioner the other entries in v that are not associated with it 
-  /// are left alone.
-  void return_concatenated_block_vector(
+    /// \short Takes concatenated block ordered vector, b, and copies its
+    /// entries to the appropriate entries in the naturally ordered vector, v.
+    /// Here the values in block_vec_number indicates which blocks the vector
+    /// b is a concatenation of. The block number are those in the current
+    /// preconditioner. If the preconditioner is a subsidiary block
+    /// preconditioner the other entries in v that are not associated with it
+    /// are left alone.
+    void return_concatenated_block_vector(
       const Vector<unsigned>& block_vec_number,
       const DoubleVector& b,
       DoubleVector& v) const;
- 
-  /// \short Takes the naturally ordered vector and rearranges it into a
-  /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
-  /// the i-th entry in the vector associated with block b.
-  /// Note: If the preconditioner is a subsidiary preconditioner then only the
-  /// sub-vectors associated with the blocks of the subsidiary preconditioner
-  /// will be included. Hence the length of v is master_nrow() whereas the
-  /// total length of the s vectors is the sum of the lengths of the
-  /// individual block vectors defined in block_vec_number.
-  void get_block_vectors(const Vector<unsigned> & block_vec_number,
-                         const DoubleVector& v,
-                         Vector<DoubleVector >& s) const;
 
-  /// \short Takes the naturally ordered vector and rearranges it into a
-  /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
-  /// the i-th entry in the vector associated with block b.
-  /// Note: If the preconditioner is a subsidiary preconditioner then only the
-  /// sub-vectors associated with the blocks of the subsidiary preconditioner
-  /// will be included. Hence the length of v is master_nrow() whereas the
-  /// total length of the s vectors is Nrow.
-  /// This is simply a wrapper around the other get_block_vectors(...) function
-  /// where the block_vec_number Vector is the identity, i.e.
-  /// block_vec_number is [0, 1, ..., nblock_types - 1].
-  void get_block_vectors(const DoubleVector& v,
-                         Vector<DoubleVector >& s) const;
+    /// \short Takes the naturally ordered vector and rearranges it into a
+    /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
+    /// the i-th entry in the vector associated with block b.
+    /// Note: If the preconditioner is a subsidiary preconditioner then only the
+    /// sub-vectors associated with the blocks of the subsidiary preconditioner
+    /// will be included. Hence the length of v is master_nrow() whereas the
+    /// total length of the s vectors is the sum of the lengths of the
+    /// individual block vectors defined in block_vec_number.
+    void get_block_vectors(const Vector<unsigned>& block_vec_number,
+                           const DoubleVector& v,
+                           Vector<DoubleVector>& s) const;
 
-  /// \short Takes the vector of block vectors, s, and copies its entries into
-  /// the naturally ordered vector, v. If this is a subsidiary block
-  /// preconditioner only those entries in v that are associated with its
-  /// blocks are affected. The block_vec_number indicates which block the
-  /// vectors in s came from. The block number corresponds to the block 
-  /// numbers in this preconditioner.
-  void return_block_vectors(const Vector<unsigned>& block_vec_number,
-                            const Vector<DoubleVector >& s,
-                            DoubleVector& v) const; 
+    /// \short Takes the naturally ordered vector and rearranges it into a
+    /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
+    /// the i-th entry in the vector associated with block b.
+    /// Note: If the preconditioner is a subsidiary preconditioner then only the
+    /// sub-vectors associated with the blocks of the subsidiary preconditioner
+    /// will be included. Hence the length of v is master_nrow() whereas the
+    /// total length of the s vectors is Nrow.
+    /// This is simply a wrapper around the other get_block_vectors(...)
+    /// function where the block_vec_number Vector is the identity, i.e.
+    /// block_vec_number is [0, 1, ..., nblock_types - 1].
+    void get_block_vectors(const DoubleVector& v,
+                           Vector<DoubleVector>& s) const;
 
-  /// \short Takes the vector of block vectors, s, and copies its entries into
-  /// the naturally ordered vector, v. If this is a subsidiary block
-  /// preconditioner only those entries in v that are associated with its
-  /// blocks are affected. The block_vec_number indicates which block the
-  /// vectors in s came from. The block number corresponds to the block
-  /// numbers in this preconditioner.
-  /// This is simply a wrapper around the other return_block_vectors(...) 
-  /// function where the block_vec_number Vector is the identity, i.e.
-  /// block_vec_number is [0, 1, ..., nblock_types - 1].
-  void return_block_vectors(const Vector<DoubleVector >& s,
-                            DoubleVector& v) const;
+    /// \short Takes the vector of block vectors, s, and copies its entries into
+    /// the naturally ordered vector, v. If this is a subsidiary block
+    /// preconditioner only those entries in v that are associated with its
+    /// blocks are affected. The block_vec_number indicates which block the
+    /// vectors in s came from. The block number corresponds to the block
+    /// numbers in this preconditioner.
+    void return_block_vectors(const Vector<unsigned>& block_vec_number,
+                              const Vector<DoubleVector>& s,
+                              DoubleVector& v) const;
 
-  /// \short Takes the naturally ordered vector, v and returns the n-th
-  /// block vector, b. Here n is the block number in the current
-  /// preconditioner.
-  void get_block_vector(const unsigned& n, const DoubleVector& v,
-                        DoubleVector& b) const;
+    /// \short Takes the vector of block vectors, s, and copies its entries into
+    /// the naturally ordered vector, v. If this is a subsidiary block
+    /// preconditioner only those entries in v that are associated with its
+    /// blocks are affected. The block_vec_number indicates which block the
+    /// vectors in s came from. The block number corresponds to the block
+    /// numbers in this preconditioner.
+    /// This is simply a wrapper around the other return_block_vectors(...)
+    /// function where the block_vec_number Vector is the identity, i.e.
+    /// block_vec_number is [0, 1, ..., nblock_types - 1].
+    void return_block_vectors(const Vector<DoubleVector>& s,
+                              DoubleVector& v) const;
 
-  /// \short Takes the n-th block ordered vector, b,  and copies its entries
-  /// to the appropriate entries in the naturally ordered vector, v.
-  /// Here n is the block number in the current block preconditioner.
-  /// If the preconditioner is a subsidiary block preconditioner
-  /// the other entries in v  that are not associated with it
-  /// are left alone.
-  void return_block_vector(const unsigned& n, const DoubleVector& b,
-                           DoubleVector& v) const;
+    /// \short Takes the naturally ordered vector, v and returns the n-th
+    /// block vector, b. Here n is the block number in the current
+    /// preconditioner.
+    void get_block_vector(const unsigned& n,
+                          const DoubleVector& v,
+                          DoubleVector& b) const;
 
-  /// \short Given the naturally ordered vector, v, return
-  /// the vector rearranged in block order in w. This function calls
-  /// get_concatenated_block_vector(...) with the identity block mapping.
-  /// 
-  /// This function has been re-written to work with the new dof type 
-  /// coarsening feature. The old function is kept alive in
-  /// internal_get_block_ordered_preconditioner_vector(...) and is moved to
-  /// the private section of the code. The differences between the two are:
-  /// 
-  /// 1) This function extracts all the block vectors (in one go) via the
-  ///    function internal_get_block_vectors(...), and concatenates them.
-  /// 
-  /// 2) The old function makes use of the variables ending in "get_ordered",
-  ///    thus is slightly more efficient since it does not have to concatenate
-  ///    any block vectors.
-  ///
-  /// 3) The old function no longer respect the new indirections if dof types
-  ///    have been coarsened.
-  ///
-  /// 4) This function extracts the most fine grain dof-level vectors and 
-  ///    concatenates them. These dof-level vectors respect the re-ordering
-  ///    caused by the coarsening of dof types. The overhead associated with
-  ///    concatenating DoubleVectors without communication is very small.
-  /// 
-  /// This function should be used.
-  void get_block_ordered_preconditioner_vector(const DoubleVector& v,
-                                               DoubleVector& w);
+    /// \short Takes the n-th block ordered vector, b,  and copies its entries
+    /// to the appropriate entries in the naturally ordered vector, v.
+    /// Here n is the block number in the current block preconditioner.
+    /// If the preconditioner is a subsidiary block preconditioner
+    /// the other entries in v  that are not associated with it
+    /// are left alone.
+    void return_block_vector(const unsigned& n,
+                             const DoubleVector& b,
+                             DoubleVector& v) const;
 
-  /// \short Takes the block ordered vector, w, and reorders it in natural
-  /// order. Reordered vector is returned in v. Note: If the preconditioner is
-  /// a subsidiary preconditioner then only the components of the vector
-  /// associated with the blocks of the subsidiary preconditioner will be
-  /// included. Hence the length of v is master_nrow() whereas that of the 
-  /// vector w is of length this->nrow(). 
-  /// 
-  /// This is the return function for the function
-  /// get_block_ordered_preconditioner_vector(...).
-  /// 
-  /// It calls the function return_concatenated_block_vector(...) with the
-  /// identity block number ordering.
-  void return_block_ordered_preconditioner_vector(const DoubleVector& w,
-                                                  DoubleVector& v) const;
+    /// \short Given the naturally ordered vector, v, return
+    /// the vector rearranged in block order in w. This function calls
+    /// get_concatenated_block_vector(...) with the identity block mapping.
+    ///
+    /// This function has been re-written to work with the new dof type
+    /// coarsening feature. The old function is kept alive in
+    /// internal_get_block_ordered_preconditioner_vector(...) and is moved to
+    /// the private section of the code. The differences between the two are:
+    ///
+    /// 1) This function extracts all the block vectors (in one go) via the
+    ///    function internal_get_block_vectors(...), and concatenates them.
+    ///
+    /// 2) The old function makes use of the variables ending in "get_ordered",
+    ///    thus is slightly more efficient since it does not have to concatenate
+    ///    any block vectors.
+    ///
+    /// 3) The old function no longer respect the new indirections if dof types
+    ///    have been coarsened.
+    ///
+    /// 4) This function extracts the most fine grain dof-level vectors and
+    ///    concatenates them. These dof-level vectors respect the re-ordering
+    ///    caused by the coarsening of dof types. The overhead associated with
+    ///    concatenating DoubleVectors without communication is very small.
+    ///
+    /// This function should be used.
+    void get_block_ordered_preconditioner_vector(const DoubleVector& v,
+                                                 DoubleVector& w);
 
-  /// \short Return the number of block types.
-  unsigned nblock_types() const
-  {
-#ifdef PARANOID
-    if(Block_to_dof_map_coarse.size() == 0)
-    {
-      std::ostringstream error_msg;
-      error_msg <<"The Block_to_dof_map_coarse vector is not setup for \n"
-        << "this block preconditioner.\n\n"
+    /// \short Takes the block ordered vector, w, and reorders it in natural
+    /// order. Reordered vector is returned in v. Note: If the preconditioner is
+    /// a subsidiary preconditioner then only the components of the vector
+    /// associated with the blocks of the subsidiary preconditioner will be
+    /// included. Hence the length of v is master_nrow() whereas that of the
+    /// vector w is of length this->nrow().
+    ///
+    /// This is the return function for the function
+    /// get_block_ordered_preconditioner_vector(...).
+    ///
+    /// It calls the function return_concatenated_block_vector(...) with the
+    /// identity block number ordering.
+    void return_block_ordered_preconditioner_vector(const DoubleVector& w,
+                                                    DoubleVector& v) const;
 
-        << "This vector is always set up within block_setup(...).\n"
-        << "If block_setup() is already called, then perhaps there is\n"
-        << "something wrong with your block preconditionable elements.\n"
-        << std::endl;
-      throw OomphLibError(error_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Return the number of block types.
-    return Block_to_dof_map_coarse.size();
-  } // EOFunc nblock_types(...)
-
-  /// \short Return the total number of DOF types.
-  unsigned ndof_types() const
-  {
-#ifdef PARANOID
-  // Subsidiary preconditioners don't really need the meshes
-  if (this->is_master_block_preconditioner())
-   {
-    std::ostringstream err_msg;
-    unsigned n=nmesh();
-    if (n==0)
-     {
-      err_msg << "No meshes have been set for this block preconditioner!\n"
-              << "Set one with set_nmesh(...), set_mesh(...)" << std::endl;
-      throw OomphLibError(err_msg.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-      for (unsigned m=0;m<n;m++)
-       {
-        if (Mesh_pt[m]==0)
-         {        
-          err_msg << "The mesh pointer to mesh " << m << " is null!\n"
-                  << "Set a non-null one with set_mesh(...)" << std::endl;
-          throw OomphLibError(err_msg.str(),
-                              OOMPH_CURRENT_FUNCTION,
-                              OOMPH_EXCEPTION_LOCATION);
-          
-         }
-       }
-     }
-   }
-#endif
-
-    // If this is a subsidiary block preconditioner, then the function
-    // turn_into_subsidiary_block_preconditioner(...) should have been called,
-    // this function would have set up the look up lists between coarsened
-    // dof types and the internal dof types. Of coarse, the user (the writer 
-    // of the preconditioners) should not care about the internal dof types
-    // and what happens under the hood. Thus they should get the number of 
-    // coarsened dof types (i.e. the number of dof types the preconditioner 
-    // above (parent preconditioner) decides to give to this preconditioner).
-    if(is_subsidiary_block_preconditioner())
+    /// \short Return the number of block types.
+    unsigned nblock_types() const
     {
 #ifdef PARANOID
-      if(Doftype_coarsen_map_coarse.size() == 0)
+      if (Block_to_dof_map_coarse.size() == 0)
       {
         std::ostringstream error_msg;
-        error_msg <<"The Doftype_coarsen_map_coarse vector is not setup for \n"
-          << "this SUBSIDIARY block preconditioner.\n\n"
+        error_msg
+          << "The Block_to_dof_map_coarse vector is not setup for \n"
+          << "this block preconditioner.\n\n"
 
-          << "For SUBSIDARY block preconditioners at any level, this\n"
-          << "vector is set up in the function \n"
-          << "turn_into_subsidiary_block_preconditioner(...).\n\n"
-
-          << "Being a SUBSIDIARY block preconditioner means that \n"
-          << "(Master_block_preconditioner_pt == 0) is true.\n"
-          << "The Master_block_preconditioner_pt MUST be set in the "
-          << "function \n"
-          << "turn_into_subsidiary_block_preconditioner(...).\n\n"
-
-          << "Somewhere, the Master_block_preconditioner_pt pointer is\n"
-          << "set but not by the function\n"
-          << "turn_into_subsidiary_block_preconditioner(...).\n"
+          << "This vector is always set up within block_setup(...).\n"
+          << "If block_setup() is already called, then perhaps there is\n"
+          << "something wrong with your block preconditionable elements.\n"
           << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 #endif
-      // return the number of dof types.
-      return Doftype_coarsen_map_coarse.size();
-    }
-    else
-      // Otherwise the number of ndof types is the same as the internal number 
-      // of dof types, since no coarsening of the dof types is done at the 
+
+      // Return the number of block types.
+      return Block_to_dof_map_coarse.size();
+    } // EOFunc nblock_types(...)
+
+    /// \short Return the total number of DOF types.
+    unsigned ndof_types() const
+    {
+#ifdef PARANOID
+      // Subsidiary preconditioners don't really need the meshes
+      if (this->is_master_block_preconditioner())
+      {
+        std::ostringstream err_msg;
+        unsigned n = nmesh();
+        if (n == 0)
+        {
+          err_msg << "No meshes have been set for this block preconditioner!\n"
+                  << "Set one with set_nmesh(...), set_mesh(...)" << std::endl;
+          throw OomphLibError(
+            err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+          for (unsigned m = 0; m < n; m++)
+          {
+            if (Mesh_pt[m] == 0)
+            {
+              err_msg << "The mesh pointer to mesh " << m << " is null!\n"
+                      << "Set a non-null one with set_mesh(...)" << std::endl;
+              throw OomphLibError(err_msg.str(),
+                                  OOMPH_CURRENT_FUNCTION,
+                                  OOMPH_EXCEPTION_LOCATION);
+            }
+          }
+        }
+      }
+#endif
+
+      // If this is a subsidiary block preconditioner, then the function
+      // turn_into_subsidiary_block_preconditioner(...) should have been called,
+      // this function would have set up the look up lists between coarsened
+      // dof types and the internal dof types. Of coarse, the user (the writer
+      // of the preconditioners) should not care about the internal dof types
+      // and what happens under the hood. Thus they should get the number of
+      // coarsened dof types (i.e. the number of dof types the preconditioner
+      // above (parent preconditioner) decides to give to this preconditioner).
+      if (is_subsidiary_block_preconditioner())
+      {
+#ifdef PARANOID
+        if (Doftype_coarsen_map_coarse.size() == 0)
+        {
+          std::ostringstream error_msg;
+          error_msg
+            << "The Doftype_coarsen_map_coarse vector is not setup for \n"
+            << "this SUBSIDIARY block preconditioner.\n\n"
+
+            << "For SUBSIDARY block preconditioners at any level, this\n"
+            << "vector is set up in the function \n"
+            << "turn_into_subsidiary_block_preconditioner(...).\n\n"
+
+            << "Being a SUBSIDIARY block preconditioner means that \n"
+            << "(Master_block_preconditioner_pt == 0) is true.\n"
+            << "The Master_block_preconditioner_pt MUST be set in the "
+            << "function \n"
+            << "turn_into_subsidiary_block_preconditioner(...).\n\n"
+
+            << "Somewhere, the Master_block_preconditioner_pt pointer is\n"
+            << "set but not by the function\n"
+            << "turn_into_subsidiary_block_preconditioner(...).\n"
+            << std::endl;
+          throw OomphLibError(
+            error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+        // return the number of dof types.
+        return Doftype_coarsen_map_coarse.size();
+      }
+      else
+      // Otherwise the number of ndof types is the same as the internal number
+      // of dof types, since no coarsening of the dof types is done at the
       // top-most master level.
-    {
-      return internal_ndof_types();
-    }
-  } // EOFunc ndof_types(...)
-
-
-  /// \short Access to i-th mesh (of the various meshes that contain block
-  /// preconditionable elements of the same number of dof type). 
-  /// 
-  /// WARNING: This should only be used if the derived class is the 
-  /// upper-most master block preconditioner. An error is thrown is
-  /// this function is called from a subsidiary preconditioner. 
-  /// They (and since every block preconditioner can in principle
-  /// be used as s subsidiary preconditioner: all block preconditioners) 
-  /// should store local copies of "their meshes" (if they're needed 
-  /// for anything)
-  const Mesh* mesh_pt(const unsigned& i) const
-  {
-#ifdef PARANOID
-    if(is_subsidiary_block_preconditioner())
-    {
-      std::ostringstream error_msg;
-      error_msg << "The mesh_pt() function should not be called on a\n"
-        << "subsidiary block preconditioner." << std::endl;
-      throw OomphLibError(error_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    const Mesh* mesh_i_pt = Mesh_pt[i];
-
-#ifdef PARANOID
-    if(mesh_i_pt == 0)
-    {
-      std::ostringstream error_msg;
-      error_msg << "Mesh pointer " << mesh_i_pt << " is null.";
-      throw OomphLibError(error_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    return mesh_i_pt;
-  } // EOFunc mesh_pt(...)
-
-  /// \short Return the number of meshes in Mesh_pt.
-  ///
-  /// WARNING: This should only be used if the derived class is the 
-  /// upper-most master block preconditioner. All block preconditioners) 
-  /// should store local copies of "their meshes" (if they're needed 
-  /// for anything)
-  unsigned nmesh() const 
-  {
-    return Mesh_pt.size();
-  } // EOFunc nmesh()
-
-  /// \short Return the block number corresponding to a global index i_dof.
-  int block_number(const unsigned& i_dof) const
-  {
-    int internal_block_number = this->internal_block_number(i_dof);
-
-    if(internal_block_number == -1)
-    {
-      return internal_block_number;
-    }
-    else
-    {
-      // Map the internal block to the "external" block number, i.e. what the
-      // writer of the preconditioner is expects.
-      unsigned block_i = 0;
-      while(std::find(Block_to_dof_map_fine[block_i].begin(), 
-                      Block_to_dof_map_fine[block_i].end(), 
-                      internal_block_number)
-                      == Block_to_dof_map_fine[block_i].end())
       {
-        block_i++;
+        return internal_ndof_types();
       }
+    } // EOFunc ndof_types(...)
 
-      return block_i;
-    }
-  }
 
-  /// \short Given a global dof number, returns the index in the block it 
-  /// belongs to.
-  /// This is the overall index, not local block (in parallel).
-  int index_in_block(const unsigned& i_dof) const
-  {
-    // the dof block number
-    int internal_dof_block_number = this->internal_dof_number(i_dof);
-
-    if(internal_dof_block_number >= 0)
+    /// \short Access to i-th mesh (of the various meshes that contain block
+    /// preconditionable elements of the same number of dof type).
+    ///
+    /// WARNING: This should only be used if the derived class is the
+    /// upper-most master block preconditioner. An error is thrown is
+    /// this function is called from a subsidiary preconditioner.
+    /// They (and since every block preconditioner can in principle
+    /// be used as s subsidiary preconditioner: all block preconditioners)
+    /// should store local copies of "their meshes" (if they're needed
+    /// for anything)
+    const Mesh* mesh_pt(const unsigned& i) const
     {
-      // the external block number
-      unsigned ex_blk_number = this->block_number(i_dof);
-      
-      int internal_index_in_dof = this->internal_index_in_dof(i_dof);
-
-      // find the processor which this global index in block belongs to.
-      unsigned block_proc 
-        = internal_block_distribution_pt(internal_dof_block_number)
-        ->rank_of_global_row(internal_index_in_dof);
-
-      // Add up all of the first rows.
-      const unsigned ndof_in_block 
-        = Block_to_dof_map_fine[ex_blk_number].size();
-
-      unsigned index = 0;
-      for (unsigned dof_i = 0; dof_i < ndof_in_block; dof_i++)
-      {
-        index += internal_block_distribution_pt(
-                 Block_to_dof_map_fine[ex_blk_number][dof_i])
-                 ->first_row(block_proc);
-      }
-
-      // Now add up all the nrow_local up to this dof block.
-      unsigned j = 0;
-      
-      while(int(Block_to_dof_map_fine[ex_blk_number][j])!= internal_dof_block_number)
-      {
-        index += internal_block_distribution_pt(
-            Block_to_dof_map_fine[ex_blk_number][j])->nrow_local(block_proc);
-        j++;
-      }
-
-      // Now add the index of this block...
-      index += (internal_index_in_dof - 
-                internal_block_distribution_pt(
-                  internal_dof_block_number)
-                ->first_row(block_proc));
-
-      return index;
-    }
-
-    return -1;
-  }
-
-  /// \short Access function to the block distributions (const version).
-  const LinearAlgebraDistribution*
-  block_distribution_pt(const unsigned& b) const
-  {
 #ifdef PARANOID
-      if(Block_distribution_pt.size() == 0)
+      if (is_subsidiary_block_preconditioner())
       {
         std::ostringstream error_msg;
-        error_msg <<"Block distributions are not set up.\n"
-          << "Have you called block_setup(...)?\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
+        error_msg << "The mesh_pt() function should not be called on a\n"
+                  << "subsidiary block preconditioner." << std::endl;
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
-      if(b > nblock_types())
+#endif
+
+      const Mesh* mesh_i_pt = Mesh_pt[i];
+
+#ifdef PARANOID
+      if (mesh_i_pt == 0)
       {
         std::ostringstream error_msg;
-        error_msg <<"You requested the distribution for the block "
-          << b << ".\n"
-          << "But there are only " << nblock_types() << " block types.\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
+        error_msg << "Mesh pointer " << mesh_i_pt << " is null.";
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 #endif
 
-   return Block_distribution_pt[b];
-  } // EOFunc block_distribution_pt(...)
+      return mesh_i_pt;
+    } // EOFunc mesh_pt(...)
 
-  /// \short Access function to the block distributions (non-const version).
-  LinearAlgebraDistribution*
-  block_distribution_pt(const unsigned b)
-  {
-#ifdef PARANOID
-      if(Block_distribution_pt.size() == 0)
+    /// \short Return the number of meshes in Mesh_pt.
+    ///
+    /// WARNING: This should only be used if the derived class is the
+    /// upper-most master block preconditioner. All block preconditioners)
+    /// should store local copies of "their meshes" (if they're needed
+    /// for anything)
+    unsigned nmesh() const
+    {
+      return Mesh_pt.size();
+    } // EOFunc nmesh()
+
+    /// \short Return the block number corresponding to a global index i_dof.
+    int block_number(const unsigned& i_dof) const
+    {
+      int internal_block_number = this->internal_block_number(i_dof);
+
+      if (internal_block_number == -1)
       {
-        std::ostringstream error_msg;
-        error_msg <<"Block distributions are not set up.\n"
-          << "Have you called block_setup(...)?\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-      }
-      if(b > nblock_types())
-      {
-        std::ostringstream error_msg;
-        error_msg <<"You requested the distribution for the block "
-          << b << ".\n"
-          << "But there are only " << nblock_types() << " block types.\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-
-   return Block_distribution_pt[b];
-  } // EOFunc block_distribution_pt(...)
-
-  /// \short Access function to the dof-level block distributions.
-  LinearAlgebraDistribution*
-  dof_block_distribution_pt(const unsigned& b)
-  {
-#ifdef PARANOID
-      if(b > ndof_types())
-      {
-        std::ostringstream error_msg;
-        error_msg <<"You requested the distribution for the dof block "
-          << b << ".\n"
-          << "But there are only " << ndof_types() << " DOF types.\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-      }
-
-#endif
-
-    if(is_master_block_preconditioner())
-    {
-#ifdef PARANOID
-      if(Internal_block_distribution_pt.size() == 0)
-      {
-        std::ostringstream error_msg;
-        error_msg <<"Internal block distributions are not set up.\n"
-          << "Have you called block_setup(...)?\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-
-      // The dof block is distribution is the same as the internal
-      // block distribution.
-      return Internal_block_distribution_pt[b];
-    }
-    else
-    {
-#ifdef PARANOID
-      if(Dof_block_distribution_pt.size() == 0)
-      {
-        std::ostringstream error_msg;
-        error_msg <<"Dof block distributions are not set up.\n"
-          << "Have you called block_setup(...)?\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-      return Dof_block_distribution_pt[b];
-    }
-  } // EOFunc block_distribution_pt(...)
-
-
-  /// \short Access function to the distribution of the master
-  /// preconditioner. If this preconditioner does not have a master
-  /// preconditioner then the distribution of this preconditioner is returned.
-  const LinearAlgebraDistribution* master_distribution_pt() const
-  {
-   if (is_master_block_preconditioner())
-    {
-     return this->distribution_pt();
-    }
-   else
-    {
-     return Master_block_preconditioner_pt->master_distribution_pt();
-    }
-  } // EOFunc master_distribution_pt(...)
-
-  /// \short Return the number of DOF types in mesh i.
-  /// WARNING: This should only be used by the upper-most master block 
-  /// preconditioner. An error is thrown is
-  /// this function is called from a subsidiary preconditioner. 
-  /// They (and since every block preconditioner can in principle
-  /// be used as s subsidiary preconditioner: all block preconditioners) 
-  /// should store local copies of "their meshes" (if they're needed 
-  /// for anything)
-  unsigned ndof_types_in_mesh(const unsigned& i) const
-  {
-#ifdef PARANOID
-    if (is_subsidiary_block_preconditioner())
-    {
-      std::ostringstream err_msg;
-      err_msg << "A subsidiary block preconditioner should not care about\n"
-        << "anything to do with meshes.";
-      throw OomphLibError(err_msg.str(), OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-    if(Ndof_types_in_mesh.size() == 0)
-    {
-      return mesh_pt(i)->ndof_types();
-    }
-    else
-    {
-      return Ndof_types_in_mesh[i];
-    }
-  } // EOFunc ndof_types_in_mesh(...)
-
-  /// \short Return true if this preconditioner is a subsidiary
-  /// preconditioner.
-  bool is_subsidiary_block_preconditioner() const
-  {
-    return (this->Master_block_preconditioner_pt != 0);
-  } // EOFunc is_subsidiary_block_preconditioner()
-
-  /// \short Return true if this preconditioner is the master block
-  /// preconditioner.
-  bool is_master_block_preconditioner() const
-  {
-    return (this->Master_block_preconditioner_pt == 0);
-  } // EOFunc is_master_block_preconditioner()
-
-  /// \short Set the base part of the filename to output blocks to. If it is
-  /// set then all blocks will be output at the end of block_setup. If it is
-  /// left empty nothing will be output.
-  void set_block_output_to_files(const std::string& basefilename)
-  {
-    Output_base_filename = basefilename;
-  } // EOFunc set_block_output_to_files(...)
-
-  /// \short Turn off output of blocks (by clearing the basefilename string).
-  void disable_block_output_to_files()
-  {
-    Output_base_filename.clear();
-  } // EOFunc disable_block_output_to_files()
-
-  /// \short Test if output of blocks is on or not.
-  bool block_output_on() const
-  {
-    return Output_base_filename.size() > 0;
-  } // EOFunc block_output_on()
-
-  /// Output all blocks to numbered files. Called at the end of get blocks if
-  /// an output filename has been set.
-  void output_blocks_to_files(const std::string& basefilename,
-                              const unsigned& precision = 8) const
-  {
-   unsigned nblocks = internal_nblock_types();
-
-   for(unsigned i=0; i<nblocks; i++)
-    {
-     for(unsigned j=0; j<nblocks; j++)
-      {
-       // Construct the filename.
-       std::string filename(basefilename + "_block_"
-                            + StringConversion::to_string(i)
-                            + "_" + StringConversion::to_string(j));
-
-       // Write out the block.
-       get_block(i,j).sparse_indexed_output(filename, precision, true);
-      }
-    }
-  } // EOFunc output_blocks_to_files(...)
-
-  /// \short A helper method to reduce the memory requirements of block
-  /// preconditioners. Once the methods get_block(...), get_blocks(...)
-  /// and build_preconditioner_matrix(...) have been called in this and
-  /// all subsidiary block preconditioners this method can be called to
-  /// clean up.
-  void post_block_matrix_assembly_partial_clear()
-  {
-   if (is_master_block_preconditioner())
-    {
-     Index_in_dof_block_dense.clear();
-     Dof_number_dense.clear();
-#ifdef OOMPH_HAS_MPI
-     Index_in_dof_block_sparse.clear();
-     Dof_number_sparse.clear();
-     Global_index_sparse.clear();
-     Index_in_dof_block_sparse.clear();
-     Dof_number_sparse.clear();
-#endif
-     Dof_dimension.clear();
-    }
-   Ndof_in_block.clear();
-   Dof_number_to_block_number_lookup.clear();
-   Block_number_to_dof_number_lookup.clear();
-  } // EOFunc post_block_matrix_assembly_partial_clear()
-
-  /// \short Access function to the master block preconditioner pt.
-  BlockPreconditioner<MATRIX>* master_block_preconditioner_pt() const
-  {
-#ifdef PARANOID
-   if (is_master_block_preconditioner())
-    {
-     std::ostringstream error_message;
-     error_message << "This block preconditioner does not have "
-                   << "a master preconditioner.";
-     throw OomphLibError(error_message.str(), OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   return Master_block_preconditioner_pt;
-  } // EOFunc master_block_preconditioner_pt()
-
-  /// \short Clears all BlockPreconditioner data. Called by the destructor
-  /// and the block_setup(...) methods
-  void clear_block_preconditioner_base()
-  {
-
-    Replacement_dof_block_pt.clear();
-
-   // clear the Distributions
-   this->clear_distribution();
-   unsigned nblock = Internal_block_distribution_pt.size();
-   for (unsigned b = 0; b < nblock; b++)
-    {
-     delete Internal_block_distribution_pt[b];
-    }
-   Internal_block_distribution_pt.resize(0);
-
-   // clear the global index
-   Global_index.clear();
-
-   // call the post block matrix assembly clear
-   this->post_block_matrix_assembly_partial_clear();
-
-#ifdef OOMPH_HAS_MPI
-   // storage if the matrix is distributed
-   unsigned nr = Rows_to_send_for_get_block.nrow();
-   unsigned nc = Rows_to_send_for_get_block.ncol();
-   for (unsigned p = 0; p < nc; p++)
-    {
-     delete[] Rows_to_send_for_get_ordered[p];
-     delete[] Rows_to_recv_for_get_ordered[p];
-     for (unsigned b = 0; b < nr; b++)
-      {
-       delete[] Rows_to_recv_for_get_block(b,p);
-       delete[] Rows_to_send_for_get_block(b,p);
-      }
-    }
-   Rows_to_recv_for_get_block.resize(0,0);
-   Nrows_to_recv_for_get_block.resize(0,0);
-   Rows_to_send_for_get_block.resize(0,0);
-   Nrows_to_send_for_get_block.resize(0,0);
-   Rows_to_recv_for_get_ordered.clear();
-   Nrows_to_recv_for_get_ordered.clear();
-   Rows_to_send_for_get_ordered.clear();
-   Nrows_to_send_for_get_ordered.clear();
-
-#endif
-
-   // zero
-   if (is_master_block_preconditioner())
-    {
-     Nrow = 0;
-     Internal_ndof_types = 0;
-     Internal_nblock_types = 0;
-    }
-
-   // delete the prec matrix dist pt
-   delete Internal_preconditioner_matrix_distribution_pt;
-   Internal_preconditioner_matrix_distribution_pt = 0;
-   delete Preconditioner_matrix_distribution_pt;
-   Preconditioner_matrix_distribution_pt = 0;
-
-   // Delete any existing (external) block distributions.
-   const unsigned n_existing_block_dist 
-     = Block_distribution_pt.size();
-    for (unsigned dist_i = 0; dist_i < n_existing_block_dist; dist_i++) 
-    {
-      delete Block_distribution_pt[dist_i];
-    }
-
-    // Clear the vector.
-    Block_distribution_pt.clear();
-
-
-    // Create the identity key.
-    Vector<unsigned> preconditioner_matrix_key(n_existing_block_dist,0);
-    for (unsigned i = 0; i < n_existing_block_dist; i++)
-    {
-      preconditioner_matrix_key[i] = i;
-    }
-
-   // Now iterate through Auxiliary_block_distribution_pt 
-   // and delete all distributions, except for the one which corresponds
-   // to the identity since this is already deleted.
-   std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter
-     = Auxiliary_block_distribution_pt.begin();
-
-   while(iter != Auxiliary_block_distribution_pt.end())
-   {
-     if(iter->first != preconditioner_matrix_key)
-     {
-       delete iter->second;
-       iter++;
-     }
-     else
-     {
-       ++iter;
-     }
-   }
-
-   // Now clear it.
-   Auxiliary_block_distribution_pt.clear();
-
-   // Delete any dof block distributions
-   const unsigned ndof_block_dist = Dof_block_distribution_pt.size();
-   for (unsigned dof_i = 0; dof_i < ndof_block_dist; dof_i++) 
-   {
-     delete Dof_block_distribution_pt[dof_i];
-   }
-   Dof_block_distribution_pt.clear();
-
-  } // EOFunc clear_block_preconditioner_base()
-
-  /// \short debugging method to document the setup.
-  /// Should only be called after block_setup(...).
-  void document()
-  {
-   oomph_info << std::endl;
-   oomph_info << "===========================================" << std::endl;
-   oomph_info << "Block Preconditioner Documentation" << std::endl
-              << std::endl;
-   oomph_info << "Number of DOF types: " << internal_ndof_types() << std::endl;
-   oomph_info << "Number of block types: " << internal_nblock_types() 
-              << std::endl;
-   oomph_info << std::endl;
-   if (is_subsidiary_block_preconditioner())
-    {
-     for (unsigned d = 0; d < Internal_ndof_types; d++)
-      {
-       oomph_info << "Master DOF number " << d << " : "
-                  << this->internal_master_dof_number(d) << std::endl;
-      }
-    }
-   oomph_info << std::endl;
-   for (unsigned b = 0; b < internal_nblock_types(); b++)
-    {
-     oomph_info << "Block " << b << " DOF types:";
-     for (unsigned i = 0; i < Block_number_to_dof_number_lookup[b].size();
-          i++)
-      {
-       oomph_info << " " << Block_number_to_dof_number_lookup[b][i];
-      }
-     oomph_info << std::endl;
-    }
-   oomph_info << std::endl;
-   oomph_info << "Master block preconditioner distribution:" << std::endl;
-   oomph_info << *master_distribution_pt() << std::endl;
-   oomph_info << "Internal preconditioner matrix distribution:" << std::endl;
-   oomph_info << *internal_preconditioner_matrix_distribution_pt() << std::endl;
-   oomph_info << "Preconditioner matrix distribution:" << std::endl;
-   oomph_info << *preconditioner_matrix_distribution_pt() << std::endl;
-   for (unsigned b = 0; b < Internal_nblock_types; b++)
-    {
-     oomph_info << "Internal block " << b << " distribution:" << std::endl;
-     oomph_info << *Internal_block_distribution_pt[b] << std::endl;
-    }
-   for (unsigned b = 0; b < nblock_types(); b++)
-    {
-     oomph_info << "Block " << b << " distribution:" << std::endl;
-     oomph_info << *Block_distribution_pt[b] << std::endl;
-    }
-
-   // DS: the functions called here no longer exist and this function is
-   // never used as far as I can tell, so it should be fine to comment this
-   // bit out:
-   // if (is_master_block_preconditioner())
-   //  {
-   //   oomph_info << "First look-up row: " << this->first_lookup_row()
-   //              << std::endl;
-   //   oomph_info << "Number of look-up rows: "
-   //              << this->nlookup_rows() << std::endl;
-   //  }
-   oomph_info << "===========================================" << std::endl;
-   oomph_info << std::endl;
-  } // EOFunc document()
-
-  /// \short Access function for the Doftype_coarsen_map_fine
-  /// variable.
-  Vector<Vector<unsigned> > doftype_coarsen_map_fine() const
-  {
-    return Doftype_coarsen_map_fine;
-  }
-
-  /// \short Returns the most fine grain dof types in a (possibly coarsened)
-  /// dof type.
-  Vector<unsigned> get_fine_grain_dof_types_in(const unsigned& i) const
-  {
-#ifdef PARANOID
-    const unsigned n_dof_types = ndof_types();
-
-    if(i >= n_dof_types)
-    {
-      std::ostringstream err_msg;
-      err_msg << "Trying to get the most fine grain dof types in dof type "
-        << i << ",\nbut there are only " << n_dof_types 
-        << " number of dof types.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-    return Doftype_coarsen_map_fine[i];
-  }
-
-  /// \short Access function for the number of most fine grain dof types in 
-  /// a (possibly coarsened) dof type.
-  unsigned nfine_grain_dof_types_in(const unsigned& i) const
-  {
-#ifdef PARANOID
-    const unsigned n_dof_types = ndof_types();
-
-    if(i >= n_dof_types)
-    {
-      std::ostringstream err_msg;
-      err_msg << "Trying to get the number of most fine grain dof types "
-        << "in dof type " << i << ",\n"
-        << "but there are only " << n_dof_types 
-        << " number of dof types.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-    return Doftype_coarsen_map_fine[i].size();
-  }
-
-  /// \short Access function to the replaced dof-level blocks.
-  MapMatrix<unsigned,CRDoubleMatrix*> replacement_dof_block_pt() const
-  {
-    return Replacement_dof_block_pt;
-  }  // EOFunc replacement_block_pt()
-
-  /// \short Setup a matrix vector product.
-  /// matvec_prod_pt is a pointer to the MatrixVectorProduct,
-  /// block_pt is a pointer to the block matrix,
-  /// block_col_indices is a vector indicating which block indices does the
-  /// RHS vector we want to multiply the matrix by.
-  /// 
-  /// The distribution of the block column must be the same as the 
-  /// RHS vector being solved. By default, OOMPH-LIB's uniform row distribution
-  /// is employed. When block matrices are concatenated without communication,
-  /// the columns are permuted, as a result, the distribution of the columns
-  /// may no longer be uniform.
-  void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
-      CRDoubleMatrix* block_pt,
-      const Vector<unsigned>& block_col_indices)
-  {
-    const unsigned nblock = block_col_indices.size();
-
-    if(nblock == 1)
-    {
-      const unsigned col_index = block_col_indices[0];
-      matvec_prod_pt->setup(block_pt,
-          Block_distribution_pt[col_index]);
-    }
-    else
-    {
-      std::map<Vector<unsigned>,
-        LinearAlgebraDistribution* >::const_iterator iter;
-
-      iter = Auxiliary_block_distribution_pt.find(block_col_indices);
-      if(iter != Auxiliary_block_distribution_pt.end())
-      {
-        matvec_prod_pt->setup(block_pt,iter->second);
+        return internal_block_number;
       }
       else
       {
-        Vector<LinearAlgebraDistribution*> tmp_vec_dist_pt(nblock,0);
-        for (unsigned b = 0; b < nblock; b++) 
+        // Map the internal block to the "external" block number, i.e. what the
+        // writer of the preconditioner is expects.
+        unsigned block_i = 0;
+        while (std::find(Block_to_dof_map_fine[block_i].begin(),
+                         Block_to_dof_map_fine[block_i].end(),
+                         internal_block_number) ==
+               Block_to_dof_map_fine[block_i].end())
         {
-          tmp_vec_dist_pt[b] = Block_distribution_pt[block_col_indices[b]];
+          block_i++;
         }
 
-        LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
-        LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,
-            *tmp_dist_pt);
-        insert_auxiliary_block_distribution(block_col_indices,tmp_dist_pt);
-        matvec_prod_pt->setup(block_pt,tmp_dist_pt);
+        return block_i;
       }
     }
-  } // EOFunc setup_matrix_vector_product(...)
 
-  /// \short Setup matrix vector product. This is simply a wrapper
-  /// around the other setup_matrix_vector_product function.
-  void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
-      CRDoubleMatrix* block_pt,
-      const unsigned& block_col_index)
-  {
-    Vector<unsigned> col_index_vector(1,block_col_index);
-    setup_matrix_vector_product(matvec_prod_pt,block_pt,col_index_vector);
-  } // EOFunc setup_matrix_vector_product(...)
+    /// \short Given a global dof number, returns the index in the block it
+    /// belongs to.
+    /// This is the overall index, not local block (in parallel).
+    int index_in_block(const unsigned& i_dof) const
+    {
+      // the dof block number
+      int internal_dof_block_number = this->internal_dof_number(i_dof);
 
-// private:
+      if (internal_dof_block_number >= 0)
+      {
+        // the external block number
+        unsigned ex_blk_number = this->block_number(i_dof);
 
-  /// \short Given the naturally ordered vector, v, return
-  /// the vector rearranged in block order in w. This is a legacy function
-  /// from the old block preconditioning framework. Kept alive in case it may
-  /// be needed again.
-  /// 
-  /// This uses the variables ending in "get_ordered". We no longer use this
-  /// type of method. This function copy values from v and re-order them 
-  /// in "block order" and place them in w. Block order means that the
-  /// values in w are the same as the concatenated block vectors.
-  ///
-  /// I.e. - v is naturally ordered.
-  ///        v -> s_b, v is ordered into blocks vectors 
-  ///                  (requires communication)
-  ///        concatenate_without_communication(s_{0,...,nblocks},w) gives w.
-  /// 
-  /// But this function skips out the concatenation part and builds w directly
-  /// from v.
-  ///
-  /// This is nice but the function is implemented in such a way that it
-  /// always use all the (internal) blocks and concatenated with the 
-  /// identity ordering. I.e. if this preconditioner has 3 block types, then
-  /// w will always be:
-  /// concatenate_without_communication([s_0, s_1, s_2], w). There is easy
-  /// way to change this.
-  /// 
-  /// Furthermore, it does not take into account the new dof type coarsening 
-  /// feature. So this function will most likely produce the incorrect vector 
-  /// w from what the user intended. It still works, but w will be the
-  /// concatenation of the most fine grain dof block vectors with the
-  /// "natural" dof type ordering.
-  /// 
-  /// This has been superseded by the function 
-  /// get_block_ordered_preconditioner_vector(...) which does the correct 
-  /// thing.
-  void internal_get_block_ordered_preconditioner_vector(const DoubleVector& v,
-                                                        DoubleVector& w) const;
+        int internal_index_in_dof = this->internal_index_in_dof(i_dof);
 
-  /// \short Takes the block ordered vector, w, and reorders it in the natural
-  /// order. Reordered vector is returned in v. Note: If the preconditioner is
-  /// a subsidiary preconditioner then only the components of the vector
-  /// associated with the blocks of the subsidiary preconditioner will be
-  /// included. Hence the length of v is master_nrow() whereas that of the 
-  /// vector w is of length this->nrow(). 
-  /// 
-  /// This is the return function for the function
-  /// internal_get_block_ordered_preconditioner_vector(...).
-  /// Both internal_get_block_ordered_preconditioner_vector(...) and
-  /// internal_return_block_ordered_preconditioner_vector(...) has been 
-  /// superseded by the functions
-  /// 
-  /// get_block_ordered_preconditioner_vector(...) and
-  /// return_block_ordered_preconditioner_vector(...),
-  ///
-  /// Thus this function is moved to the private section of the code.
-  void internal_return_block_ordered_preconditioner_vector(
+        // find the processor which this global index in block belongs to.
+        unsigned block_proc =
+          internal_block_distribution_pt(internal_dof_block_number)
+            ->rank_of_global_row(internal_index_in_dof);
+
+        // Add up all of the first rows.
+        const unsigned ndof_in_block =
+          Block_to_dof_map_fine[ex_blk_number].size();
+
+        unsigned index = 0;
+        for (unsigned dof_i = 0; dof_i < ndof_in_block; dof_i++)
+        {
+          index += internal_block_distribution_pt(
+                     Block_to_dof_map_fine[ex_blk_number][dof_i])
+                     ->first_row(block_proc);
+        }
+
+        // Now add up all the nrow_local up to this dof block.
+        unsigned j = 0;
+
+        while (int(Block_to_dof_map_fine[ex_blk_number][j]) !=
+               internal_dof_block_number)
+        {
+          index += internal_block_distribution_pt(
+                     Block_to_dof_map_fine[ex_blk_number][j])
+                     ->nrow_local(block_proc);
+          j++;
+        }
+
+        // Now add the index of this block...
+        index += (internal_index_in_dof -
+                  internal_block_distribution_pt(internal_dof_block_number)
+                    ->first_row(block_proc));
+
+        return index;
+      }
+
+      return -1;
+    }
+
+    /// \short Access function to the block distributions (const version).
+    const LinearAlgebraDistribution* block_distribution_pt(
+      const unsigned& b) const
+    {
+#ifdef PARANOID
+      if (Block_distribution_pt.size() == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg << "Block distributions are not set up.\n"
+                  << "Have you called block_setup(...)?\n"
+                  << std::endl;
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+      if (b > nblock_types())
+      {
+        std::ostringstream error_msg;
+        error_msg << "You requested the distribution for the block " << b
+                  << ".\n"
+                  << "But there are only " << nblock_types()
+                  << " block types.\n"
+                  << std::endl;
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      return Block_distribution_pt[b];
+    } // EOFunc block_distribution_pt(...)
+
+    /// \short Access function to the block distributions (non-const version).
+    LinearAlgebraDistribution* block_distribution_pt(const unsigned b)
+    {
+#ifdef PARANOID
+      if (Block_distribution_pt.size() == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg << "Block distributions are not set up.\n"
+                  << "Have you called block_setup(...)?\n"
+                  << std::endl;
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+      if (b > nblock_types())
+      {
+        std::ostringstream error_msg;
+        error_msg << "You requested the distribution for the block " << b
+                  << ".\n"
+                  << "But there are only " << nblock_types()
+                  << " block types.\n"
+                  << std::endl;
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      return Block_distribution_pt[b];
+    } // EOFunc block_distribution_pt(...)
+
+    /// \short Access function to the dof-level block distributions.
+    LinearAlgebraDistribution* dof_block_distribution_pt(const unsigned& b)
+    {
+#ifdef PARANOID
+      if (b > ndof_types())
+      {
+        std::ostringstream error_msg;
+        error_msg << "You requested the distribution for the dof block " << b
+                  << ".\n"
+                  << "But there are only " << ndof_types() << " DOF types.\n"
+                  << std::endl;
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+
+#endif
+
+      if (is_master_block_preconditioner())
+      {
+#ifdef PARANOID
+        if (Internal_block_distribution_pt.size() == 0)
+        {
+          std::ostringstream error_msg;
+          error_msg << "Internal block distributions are not set up.\n"
+                    << "Have you called block_setup(...)?\n"
+                    << std::endl;
+          throw OomphLibError(
+            error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+        // The dof block is distribution is the same as the internal
+        // block distribution.
+        return Internal_block_distribution_pt[b];
+      }
+      else
+      {
+#ifdef PARANOID
+        if (Dof_block_distribution_pt.size() == 0)
+        {
+          std::ostringstream error_msg;
+          error_msg << "Dof block distributions are not set up.\n"
+                    << "Have you called block_setup(...)?\n"
+                    << std::endl;
+          throw OomphLibError(
+            error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+        return Dof_block_distribution_pt[b];
+      }
+    } // EOFunc block_distribution_pt(...)
+
+
+    /// \short Access function to the distribution of the master
+    /// preconditioner. If this preconditioner does not have a master
+    /// preconditioner then the distribution of this preconditioner is returned.
+    const LinearAlgebraDistribution* master_distribution_pt() const
+    {
+      if (is_master_block_preconditioner())
+      {
+        return this->distribution_pt();
+      }
+      else
+      {
+        return Master_block_preconditioner_pt->master_distribution_pt();
+      }
+    } // EOFunc master_distribution_pt(...)
+
+    /// \short Return the number of DOF types in mesh i.
+    /// WARNING: This should only be used by the upper-most master block
+    /// preconditioner. An error is thrown is
+    /// this function is called from a subsidiary preconditioner.
+    /// They (and since every block preconditioner can in principle
+    /// be used as s subsidiary preconditioner: all block preconditioners)
+    /// should store local copies of "their meshes" (if they're needed
+    /// for anything)
+    unsigned ndof_types_in_mesh(const unsigned& i) const
+    {
+#ifdef PARANOID
+      if (is_subsidiary_block_preconditioner())
+      {
+        std::ostringstream err_msg;
+        err_msg << "A subsidiary block preconditioner should not care about\n"
+                << "anything to do with meshes.";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      if (Ndof_types_in_mesh.size() == 0)
+      {
+        return mesh_pt(i)->ndof_types();
+      }
+      else
+      {
+        return Ndof_types_in_mesh[i];
+      }
+    } // EOFunc ndof_types_in_mesh(...)
+
+    /// \short Return true if this preconditioner is a subsidiary
+    /// preconditioner.
+    bool is_subsidiary_block_preconditioner() const
+    {
+      return (this->Master_block_preconditioner_pt != 0);
+    } // EOFunc is_subsidiary_block_preconditioner()
+
+    /// \short Return true if this preconditioner is the master block
+    /// preconditioner.
+    bool is_master_block_preconditioner() const
+    {
+      return (this->Master_block_preconditioner_pt == 0);
+    } // EOFunc is_master_block_preconditioner()
+
+    /// \short Set the base part of the filename to output blocks to. If it is
+    /// set then all blocks will be output at the end of block_setup. If it is
+    /// left empty nothing will be output.
+    void set_block_output_to_files(const std::string& basefilename)
+    {
+      Output_base_filename = basefilename;
+    } // EOFunc set_block_output_to_files(...)
+
+    /// \short Turn off output of blocks (by clearing the basefilename string).
+    void disable_block_output_to_files()
+    {
+      Output_base_filename.clear();
+    } // EOFunc disable_block_output_to_files()
+
+    /// \short Test if output of blocks is on or not.
+    bool block_output_on() const
+    {
+      return Output_base_filename.size() > 0;
+    } // EOFunc block_output_on()
+
+    /// Output all blocks to numbered files. Called at the end of get blocks if
+    /// an output filename has been set.
+    void output_blocks_to_files(const std::string& basefilename,
+                                const unsigned& precision = 8) const
+    {
+      unsigned nblocks = internal_nblock_types();
+
+      for (unsigned i = 0; i < nblocks; i++)
+      {
+        for (unsigned j = 0; j < nblocks; j++)
+        {
+          // Construct the filename.
+          std::string filename(basefilename + "_block_" +
+                               StringConversion::to_string(i) + "_" +
+                               StringConversion::to_string(j));
+
+          // Write out the block.
+          get_block(i, j).sparse_indexed_output(filename, precision, true);
+        }
+      }
+    } // EOFunc output_blocks_to_files(...)
+
+    /// \short A helper method to reduce the memory requirements of block
+    /// preconditioners. Once the methods get_block(...), get_blocks(...)
+    /// and build_preconditioner_matrix(...) have been called in this and
+    /// all subsidiary block preconditioners this method can be called to
+    /// clean up.
+    void post_block_matrix_assembly_partial_clear()
+    {
+      if (is_master_block_preconditioner())
+      {
+        Index_in_dof_block_dense.clear();
+        Dof_number_dense.clear();
+#ifdef OOMPH_HAS_MPI
+        Index_in_dof_block_sparse.clear();
+        Dof_number_sparse.clear();
+        Global_index_sparse.clear();
+        Index_in_dof_block_sparse.clear();
+        Dof_number_sparse.clear();
+#endif
+        Dof_dimension.clear();
+      }
+      Ndof_in_block.clear();
+      Dof_number_to_block_number_lookup.clear();
+      Block_number_to_dof_number_lookup.clear();
+    } // EOFunc post_block_matrix_assembly_partial_clear()
+
+    /// \short Access function to the master block preconditioner pt.
+    BlockPreconditioner<MATRIX>* master_block_preconditioner_pt() const
+    {
+#ifdef PARANOID
+      if (is_master_block_preconditioner())
+      {
+        std::ostringstream error_message;
+        error_message << "This block preconditioner does not have "
+                      << "a master preconditioner.";
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      return Master_block_preconditioner_pt;
+    } // EOFunc master_block_preconditioner_pt()
+
+    /// \short Clears all BlockPreconditioner data. Called by the destructor
+    /// and the block_setup(...) methods
+    void clear_block_preconditioner_base()
+    {
+      Replacement_dof_block_pt.clear();
+
+      // clear the Distributions
+      this->clear_distribution();
+      unsigned nblock = Internal_block_distribution_pt.size();
+      for (unsigned b = 0; b < nblock; b++)
+      {
+        delete Internal_block_distribution_pt[b];
+      }
+      Internal_block_distribution_pt.resize(0);
+
+      // clear the global index
+      Global_index.clear();
+
+      // call the post block matrix assembly clear
+      this->post_block_matrix_assembly_partial_clear();
+
+#ifdef OOMPH_HAS_MPI
+      // storage if the matrix is distributed
+      unsigned nr = Rows_to_send_for_get_block.nrow();
+      unsigned nc = Rows_to_send_for_get_block.ncol();
+      for (unsigned p = 0; p < nc; p++)
+      {
+        delete[] Rows_to_send_for_get_ordered[p];
+        delete[] Rows_to_recv_for_get_ordered[p];
+        for (unsigned b = 0; b < nr; b++)
+        {
+          delete[] Rows_to_recv_for_get_block(b, p);
+          delete[] Rows_to_send_for_get_block(b, p);
+        }
+      }
+      Rows_to_recv_for_get_block.resize(0, 0);
+      Nrows_to_recv_for_get_block.resize(0, 0);
+      Rows_to_send_for_get_block.resize(0, 0);
+      Nrows_to_send_for_get_block.resize(0, 0);
+      Rows_to_recv_for_get_ordered.clear();
+      Nrows_to_recv_for_get_ordered.clear();
+      Rows_to_send_for_get_ordered.clear();
+      Nrows_to_send_for_get_ordered.clear();
+
+#endif
+
+      // zero
+      if (is_master_block_preconditioner())
+      {
+        Nrow = 0;
+        Internal_ndof_types = 0;
+        Internal_nblock_types = 0;
+      }
+
+      // delete the prec matrix dist pt
+      delete Internal_preconditioner_matrix_distribution_pt;
+      Internal_preconditioner_matrix_distribution_pt = 0;
+      delete Preconditioner_matrix_distribution_pt;
+      Preconditioner_matrix_distribution_pt = 0;
+
+      // Delete any existing (external) block distributions.
+      const unsigned n_existing_block_dist = Block_distribution_pt.size();
+      for (unsigned dist_i = 0; dist_i < n_existing_block_dist; dist_i++)
+      {
+        delete Block_distribution_pt[dist_i];
+      }
+
+      // Clear the vector.
+      Block_distribution_pt.clear();
+
+
+      // Create the identity key.
+      Vector<unsigned> preconditioner_matrix_key(n_existing_block_dist, 0);
+      for (unsigned i = 0; i < n_existing_block_dist; i++)
+      {
+        preconditioner_matrix_key[i] = i;
+      }
+
+      // Now iterate through Auxiliary_block_distribution_pt
+      // and delete all distributions, except for the one which corresponds
+      // to the identity since this is already deleted.
+      std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter =
+        Auxiliary_block_distribution_pt.begin();
+
+      while (iter != Auxiliary_block_distribution_pt.end())
+      {
+        if (iter->first != preconditioner_matrix_key)
+        {
+          delete iter->second;
+          iter++;
+        }
+        else
+        {
+          ++iter;
+        }
+      }
+
+      // Now clear it.
+      Auxiliary_block_distribution_pt.clear();
+
+      // Delete any dof block distributions
+      const unsigned ndof_block_dist = Dof_block_distribution_pt.size();
+      for (unsigned dof_i = 0; dof_i < ndof_block_dist; dof_i++)
+      {
+        delete Dof_block_distribution_pt[dof_i];
+      }
+      Dof_block_distribution_pt.clear();
+
+    } // EOFunc clear_block_preconditioner_base()
+
+    /// \short debugging method to document the setup.
+    /// Should only be called after block_setup(...).
+    void document()
+    {
+      oomph_info << std::endl;
+      oomph_info << "===========================================" << std::endl;
+      oomph_info << "Block Preconditioner Documentation" << std::endl
+                 << std::endl;
+      oomph_info << "Number of DOF types: " << internal_ndof_types()
+                 << std::endl;
+      oomph_info << "Number of block types: " << internal_nblock_types()
+                 << std::endl;
+      oomph_info << std::endl;
+      if (is_subsidiary_block_preconditioner())
+      {
+        for (unsigned d = 0; d < Internal_ndof_types; d++)
+        {
+          oomph_info << "Master DOF number " << d << " : "
+                     << this->internal_master_dof_number(d) << std::endl;
+        }
+      }
+      oomph_info << std::endl;
+      for (unsigned b = 0; b < internal_nblock_types(); b++)
+      {
+        oomph_info << "Block " << b << " DOF types:";
+        for (unsigned i = 0; i < Block_number_to_dof_number_lookup[b].size();
+             i++)
+        {
+          oomph_info << " " << Block_number_to_dof_number_lookup[b][i];
+        }
+        oomph_info << std::endl;
+      }
+      oomph_info << std::endl;
+      oomph_info << "Master block preconditioner distribution:" << std::endl;
+      oomph_info << *master_distribution_pt() << std::endl;
+      oomph_info << "Internal preconditioner matrix distribution:" << std::endl;
+      oomph_info << *internal_preconditioner_matrix_distribution_pt()
+                 << std::endl;
+      oomph_info << "Preconditioner matrix distribution:" << std::endl;
+      oomph_info << *preconditioner_matrix_distribution_pt() << std::endl;
+      for (unsigned b = 0; b < Internal_nblock_types; b++)
+      {
+        oomph_info << "Internal block " << b << " distribution:" << std::endl;
+        oomph_info << *Internal_block_distribution_pt[b] << std::endl;
+      }
+      for (unsigned b = 0; b < nblock_types(); b++)
+      {
+        oomph_info << "Block " << b << " distribution:" << std::endl;
+        oomph_info << *Block_distribution_pt[b] << std::endl;
+      }
+
+      // DS: the functions called here no longer exist and this function is
+      // never used as far as I can tell, so it should be fine to comment this
+      // bit out:
+      // if (is_master_block_preconditioner())
+      //  {
+      //   oomph_info << "First look-up row: " << this->first_lookup_row()
+      //              << std::endl;
+      //   oomph_info << "Number of look-up rows: "
+      //              << this->nlookup_rows() << std::endl;
+      //  }
+      oomph_info << "===========================================" << std::endl;
+      oomph_info << std::endl;
+    } // EOFunc document()
+
+    /// \short Access function for the Doftype_coarsen_map_fine
+    /// variable.
+    Vector<Vector<unsigned>> doftype_coarsen_map_fine() const
+    {
+      return Doftype_coarsen_map_fine;
+    }
+
+    /// \short Returns the most fine grain dof types in a (possibly coarsened)
+    /// dof type.
+    Vector<unsigned> get_fine_grain_dof_types_in(const unsigned& i) const
+    {
+#ifdef PARANOID
+      const unsigned n_dof_types = ndof_types();
+
+      if (i >= n_dof_types)
+      {
+        std::ostringstream err_msg;
+        err_msg << "Trying to get the most fine grain dof types in dof type "
+                << i << ",\nbut there are only " << n_dof_types
+                << " number of dof types.\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      return Doftype_coarsen_map_fine[i];
+    }
+
+    /// \short Access function for the number of most fine grain dof types in
+    /// a (possibly coarsened) dof type.
+    unsigned nfine_grain_dof_types_in(const unsigned& i) const
+    {
+#ifdef PARANOID
+      const unsigned n_dof_types = ndof_types();
+
+      if (i >= n_dof_types)
+      {
+        std::ostringstream err_msg;
+        err_msg << "Trying to get the number of most fine grain dof types "
+                << "in dof type " << i << ",\n"
+                << "but there are only " << n_dof_types
+                << " number of dof types.\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      return Doftype_coarsen_map_fine[i].size();
+    }
+
+    /// \short Access function to the replaced dof-level blocks.
+    MapMatrix<unsigned, CRDoubleMatrix*> replacement_dof_block_pt() const
+    {
+      return Replacement_dof_block_pt;
+    } // EOFunc replacement_block_pt()
+
+    /// \short Setup a matrix vector product.
+    /// matvec_prod_pt is a pointer to the MatrixVectorProduct,
+    /// block_pt is a pointer to the block matrix,
+    /// block_col_indices is a vector indicating which block indices does the
+    /// RHS vector we want to multiply the matrix by.
+    ///
+    /// The distribution of the block column must be the same as the
+    /// RHS vector being solved. By default, OOMPH-LIB's uniform row
+    /// distribution is employed. When block matrices are concatenated without
+    /// communication, the columns are permuted, as a result, the distribution
+    /// of the columns may no longer be uniform.
+    void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
+                                     CRDoubleMatrix* block_pt,
+                                     const Vector<unsigned>& block_col_indices)
+    {
+      const unsigned nblock = block_col_indices.size();
+
+      if (nblock == 1)
+      {
+        const unsigned col_index = block_col_indices[0];
+        matvec_prod_pt->setup(block_pt, Block_distribution_pt[col_index]);
+      }
+      else
+      {
+        std::map<Vector<unsigned>, LinearAlgebraDistribution*>::const_iterator
+          iter;
+
+        iter = Auxiliary_block_distribution_pt.find(block_col_indices);
+        if (iter != Auxiliary_block_distribution_pt.end())
+        {
+          matvec_prod_pt->setup(block_pt, iter->second);
+        }
+        else
+        {
+          Vector<LinearAlgebraDistribution*> tmp_vec_dist_pt(nblock, 0);
+          for (unsigned b = 0; b < nblock; b++)
+          {
+            tmp_vec_dist_pt[b] = Block_distribution_pt[block_col_indices[b]];
+          }
+
+          LinearAlgebraDistribution* tmp_dist_pt =
+            new LinearAlgebraDistribution;
+          LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,
+                                                        *tmp_dist_pt);
+          insert_auxiliary_block_distribution(block_col_indices, tmp_dist_pt);
+          matvec_prod_pt->setup(block_pt, tmp_dist_pt);
+        }
+      }
+    } // EOFunc setup_matrix_vector_product(...)
+
+    /// \short Setup matrix vector product. This is simply a wrapper
+    /// around the other setup_matrix_vector_product function.
+    void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
+                                     CRDoubleMatrix* block_pt,
+                                     const unsigned& block_col_index)
+    {
+      Vector<unsigned> col_index_vector(1, block_col_index);
+      setup_matrix_vector_product(matvec_prod_pt, block_pt, col_index_vector);
+    } // EOFunc setup_matrix_vector_product(...)
+
+    // private:
+
+    /// \short Given the naturally ordered vector, v, return
+    /// the vector rearranged in block order in w. This is a legacy function
+    /// from the old block preconditioning framework. Kept alive in case it may
+    /// be needed again.
+    ///
+    /// This uses the variables ending in "get_ordered". We no longer use this
+    /// type of method. This function copy values from v and re-order them
+    /// in "block order" and place them in w. Block order means that the
+    /// values in w are the same as the concatenated block vectors.
+    ///
+    /// I.e. - v is naturally ordered.
+    ///        v -> s_b, v is ordered into blocks vectors
+    ///                  (requires communication)
+    ///        concatenate_without_communication(s_{0,...,nblocks},w) gives w.
+    ///
+    /// But this function skips out the concatenation part and builds w directly
+    /// from v.
+    ///
+    /// This is nice but the function is implemented in such a way that it
+    /// always use all the (internal) blocks and concatenated with the
+    /// identity ordering. I.e. if this preconditioner has 3 block types, then
+    /// w will always be:
+    /// concatenate_without_communication([s_0, s_1, s_2], w). There is easy
+    /// way to change this.
+    ///
+    /// Furthermore, it does not take into account the new dof type coarsening
+    /// feature. So this function will most likely produce the incorrect vector
+    /// w from what the user intended. It still works, but w will be the
+    /// concatenation of the most fine grain dof block vectors with the
+    /// "natural" dof type ordering.
+    ///
+    /// This has been superseded by the function
+    /// get_block_ordered_preconditioner_vector(...) which does the correct
+    /// thing.
+    void internal_get_block_ordered_preconditioner_vector(
+      const DoubleVector& v, DoubleVector& w) const;
+
+    /// \short Takes the block ordered vector, w, and reorders it in the natural
+    /// order. Reordered vector is returned in v. Note: If the preconditioner is
+    /// a subsidiary preconditioner then only the components of the vector
+    /// associated with the blocks of the subsidiary preconditioner will be
+    /// included. Hence the length of v is master_nrow() whereas that of the
+    /// vector w is of length this->nrow().
+    ///
+    /// This is the return function for the function
+    /// internal_get_block_ordered_preconditioner_vector(...).
+    /// Both internal_get_block_ordered_preconditioner_vector(...) and
+    /// internal_return_block_ordered_preconditioner_vector(...) has been
+    /// superseded by the functions
+    ///
+    /// get_block_ordered_preconditioner_vector(...) and
+    /// return_block_ordered_preconditioner_vector(...),
+    ///
+    /// Thus this function is moved to the private section of the code.
+    void internal_return_block_ordered_preconditioner_vector(
       const DoubleVector& w, DoubleVector& v) const;
 
-  /// \short Return the number internal blocks. This should be the same
-  /// as the number of internal dof types. Internally, the block 
-  /// preconditioning framework always work with the most fine grain
-  /// blocks. I.e. it always deal with the most fine grain dof-level blocks.
-  /// This allows for coarsening of dof types. When we extract a block,
-  /// we look at the Block_to_dof_map_fine vector to find out which most fine 
-  /// grain dof types belongs to this block.
-  ///
-  /// The preconditioner writer should not have to deal with internal 
-  /// dof/block types and thus this function has been moved to private.
-  ///
-  /// This is legacy code from before the coarsening dof type functionality 
-  /// was added. This is kept alive because it is still used in the 
-  /// internal workings of the block preconditioning framework.
-  ///
-  /// The function nblock_types(...) should be used if the number of block
-  /// types is required.
-  unsigned internal_nblock_types() const
-  {
+    /// \short Return the number internal blocks. This should be the same
+    /// as the number of internal dof types. Internally, the block
+    /// preconditioning framework always work with the most fine grain
+    /// blocks. I.e. it always deal with the most fine grain dof-level blocks.
+    /// This allows for coarsening of dof types. When we extract a block,
+    /// we look at the Block_to_dof_map_fine vector to find out which most fine
+    /// grain dof types belongs to this block.
+    ///
+    /// The preconditioner writer should not have to deal with internal
+    /// dof/block types and thus this function has been moved to private.
+    ///
+    /// This is legacy code from before the coarsening dof type functionality
+    /// was added. This is kept alive because it is still used in the
+    /// internal workings of the block preconditioning framework.
+    ///
+    /// The function nblock_types(...) should be used if the number of block
+    /// types is required.
+    unsigned internal_nblock_types() const
+    {
 #ifdef PARANOID
-    if(Internal_nblock_types == 0)
-    {
-      std::ostringstream err_msg;
-      err_msg <<"(Internal_nblock_types == 0) is true. \n"
-        << "Did you remember to call the function block_setup(...)?\n\n"
+      if (Internal_nblock_types == 0)
+      {
+        std::ostringstream err_msg;
+        err_msg
+          << "(Internal_nblock_types == 0) is true. \n"
+          << "Did you remember to call the function block_setup(...)?\n\n"
 
-        << "This variable is always set up within block_setup(...).\n"
-        << "If block_setup() is already called, then perhaps there is\n"
-        << "something wrong with your block preconditionable elements.\n"
-        << std::endl;
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
+          << "This variable is always set up within block_setup(...).\n"
+          << "If block_setup() is already called, then perhaps there is\n"
+          << "something wrong with your block preconditionable elements.\n"
+          << std::endl;
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
 
-    if(Internal_nblock_types != internal_ndof_types())
-    {
-      std::ostringstream err_msg;
-      err_msg << "The number of internal block types and "
-        << "internal dof types does not match... \n\n"
-        << "Internally, the number of block types and the number of dof "
-        << "types must be the same.\n"
-        << std::endl;
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
+      if (Internal_nblock_types != internal_ndof_types())
+      {
+        std::ostringstream err_msg;
+        err_msg
+          << "The number of internal block types and "
+          << "internal dof types does not match... \n\n"
+          << "Internally, the number of block types and the number of dof "
+          << "types must be the same.\n"
+          << std::endl;
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-    // return the number of internal block types.
-    return Internal_nblock_types;
-  } // EOFunc internal_nblock_types(...)
+      // return the number of internal block types.
+      return Internal_nblock_types;
+    } // EOFunc internal_nblock_types(...)
 
-  /// \short Return the number of internal dof types. This is the number of
-  /// most fine grain dof types. The preconditioner writer should not have to
-  /// concern him/her-self with the internal dof/block types. Thus this fuction
-  /// is moved to private.
-  /// We have kept this function alive since it it still used deep within
-  /// the inner workings of the block preconditioning framework.
-  unsigned internal_ndof_types() const
-  {
-    if (is_subsidiary_block_preconditioner())
-    // If this is a subsidiary block preconditioner, then the variable
-    // Internal_ndof_types must always be set up.
+    /// \short Return the number of internal dof types. This is the number of
+    /// most fine grain dof types. The preconditioner writer should not have to
+    /// concern him/her-self with the internal dof/block types. Thus this
+    /// fuction is moved to private. We have kept this function alive since it
+    /// it still used deep within the inner workings of the block
+    /// preconditioning framework.
+    unsigned internal_ndof_types() const
     {
-#ifdef PARANOID
-      if(Internal_ndof_types == 0)
+      if (is_subsidiary_block_preconditioner())
+      // If this is a subsidiary block preconditioner, then the variable
+      // Internal_ndof_types must always be set up.
       {
-        std::ostringstream error_msg;
-        error_msg <<"(Internal_ndof_types == 0) is true.\n"
-          << "This means that the Master_block_preconditioner_pt pointer is\n"
-          << "set but possibly not by the function\n"
-          << "turn_into_subsidiary_block_preconditioner(...).\n\n"
+#ifdef PARANOID
+        if (Internal_ndof_types == 0)
+        {
+          std::ostringstream error_msg;
+          error_msg
+            << "(Internal_ndof_types == 0) is true.\n"
+            << "This means that the Master_block_preconditioner_pt pointer is\n"
+            << "set but possibly not by the function\n"
+            << "turn_into_subsidiary_block_preconditioner(...).\n\n"
 
-          << "This goes against the block preconditioning framework "
-          << "methodology.\n"
-          << "Many machinery relies on the look up lists set up by the \n"
-          << "function turn_into_subsidiary_block_preconditioner(...) \n"
-          << "between the parent and child block preconditioners.\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-      }
+            << "This goes against the block preconditioning framework "
+            << "methodology.\n"
+            << "Many machinery relies on the look up lists set up by the \n"
+            << "function turn_into_subsidiary_block_preconditioner(...) \n"
+            << "between the parent and child block preconditioners.\n"
+            << std::endl;
+          throw OomphLibError(
+            error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        }
 #endif
-      return Internal_ndof_types;
-    }
-    else
-    // Else, this is a master block preconditioner, calculate the number of
-    // dof types from the meshes.
-    {
-      unsigned ndof = 0;
-      for (unsigned i = 0; i < nmesh(); i++)
-      {ndof += ndof_types_in_mesh(i);}
-      return ndof;
-    }
-  } // EOFunc internal_ndof_types(...)
-
-  /// \short Takes the n-th block ordered vector, b,  and copies its entries
-  /// to the appropriate entries in the naturally ordered vector, v.
-  /// Here n is the block number in the current block preconditioner.
-  /// If the preconditioner is a subsidiary block preconditioner
-  /// the other entries in v  that are not associated with it
-  /// are left alone.
-  ///
-  /// This version works with the internal block types. This is legacy code
-  /// but is kept alive, hence moved to private. Please use the 
-  /// function "return_block_vector(...)".
-  void internal_return_block_vector(const unsigned& n,
-                           const DoubleVector& b,
-                           DoubleVector& v) const;
-
-  /// \short A helper function, takes the naturally ordered vector, v, 
-  /// and extracts the n-th block vector, b. 
-  /// Here n is the block number in the current preconditioner. 
-  /// NOTE: The ordering of the vector b is the same as the 
-  /// ordering of the block matrix from internal_get_block(...).
-  void internal_get_block_vector(
-    const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
-
-
-  /// \short Takes the naturally ordered vector and 
-  /// rearranges it into a vector of sub vectors corresponding to the blocks, 
-  /// so s[b][i] contains the i-th entry in the vector associated with block b. 
-  /// The block_vec_number indicates which blocks we want.
-  /// These blocks and vectors are those corresponding to the internal blocks.
-  /// Note: If the preconditioner is a subsidiary preconditioner then only the
-  /// sub-vectors associated with the blocks of the subsidiary preconditioner
-  /// will be included. Hence the length of v is master_nrow() whereas the
-  /// total length of the s vectors is the sum of the Nrow of the sub vectors. 
-  void internal_get_block_vectors(
-      const Vector<unsigned>& block_vec_number, 
-      const DoubleVector& v, Vector<DoubleVector >& s) const;
-
-  /// \short A helper function, takes the naturally ordered vector and 
-  /// rearranges it into a vector of sub vectors corresponding to the blocks, 
-  /// so s[b][i] contains the i-th entry in the vector associated with block b. 
-  /// The block_vec_number indicates which blocks we want.
-  /// These blocks and vectors are those corresponding to the internal blocks.
-  /// Note: If the preconditioner is a subsidiary preconditioner then only the
-  /// sub-vectors associated with the blocks of the subsidiary preconditioner
-  /// will be included. Hence the length of v is master_nrow() whereas the
-  /// total length of the s vectors is the sum of the Nrow of the sub vectors. 
-  /// This is simply a wrapper around the other internal_get_block_vectors(...)
-  /// function with the identity block_vec_number vector.
-  void internal_get_block_vectors(
-      const DoubleVector& v, Vector<DoubleVector >& s) const;
-
-  /// \short A helper function, takes the vector of block vectors, s, and 
-  /// copies its entries into the naturally ordered vector, v. 
-  /// If this is a subsidiary block preconditioner only those entries in v 
-  /// that are associated with its blocks are affected.
-  void internal_return_block_vectors(
-      const Vector<unsigned>& block_vec_number,
-      const Vector<DoubleVector >& s, DoubleVector& v) const;
-
-  /// \short A helper function, takes the vector of block vectors, s, and 
-  /// copies its entries into the naturally ordered vector, v. 
-  /// If this is a subsidiary block preconditioner only those entries in v 
-  /// that are associated with its blocks are affected.
-  /// This is simple a wrapper around the other 
-  /// internal_return_block_vectors(...) function with the identity
-  /// block_vec_number vector.
-  void internal_return_block_vectors(
-      const Vector<DoubleVector >& s, DoubleVector& v) const;
-
-  /// \short Gets block (i,j) from the matrix pointed to by
-  /// Matrix_pt and returns it in output_block. This is associated with the
-  /// internal blocks. Please use the other get_block(...) function.
-  void internal_get_block(const unsigned& i, const unsigned& j,
-                                      MATRIX& output_block) const;
-
-  /// \short Return the block number corresponding to a global index i_dof.
-  /// This returns the block number corresponding to the internal blocks.
-  /// What this means is that this returns the most fine grain dof-block 
-  /// number which this global index i_dof corresponds to. Since the writer
-  /// of the preconditioner does not need to care about the internal block
-  /// types, this function should not be used and thus moved to private.
-  /// This function should not be removed since it is still used deep within
-  /// the inner workings of the block preconditioning framework.
-  int internal_block_number(const unsigned& i_dof) const
-  {
-   int dn = internal_dof_number(i_dof);
-   if (dn == -1)
-    {
-     return dn;
-    }
-   else
-    {
-     return Dof_number_to_block_number_lookup[dn];
-    }
-  } // EOFunc internal_block_number(...)
-
-  /// \short Return the index in the block corresponding to a global block
-  /// number i_dof. The index returned corresponds to the internal blocks,
-  /// which is the most fine grain dof blocks.
-  int internal_index_in_block(const unsigned& i_dof) const
-  {
-   // the index in the dof block
-   unsigned index = internal_index_in_dof(i_dof);
-
-   // the dof block number
-   int internal_dof_block_number = internal_dof_number(i_dof);
-   if (internal_dof_block_number >= 0)
-    {
-
-     // the 'actual' block number
-     unsigned blk_number = internal_block_number(i_dof);
-
-     // compute the index in the block
-     unsigned j = 0;
-     while (int(Block_number_to_dof_number_lookup[blk_number][j]) !=
-            internal_dof_block_number)
-      {
-       index +=
-        internal_dof_block_dimension
-        (Block_number_to_dof_number_lookup[blk_number][j]);
-       j++;
+        return Internal_ndof_types;
       }
+      else
+      // Else, this is a master block preconditioner, calculate the number of
+      // dof types from the meshes.
+      {
+        unsigned ndof = 0;
+        for (unsigned i = 0; i < nmesh(); i++)
+        {
+          ndof += ndof_types_in_mesh(i);
+        }
+        return ndof;
+      }
+    } // EOFunc internal_ndof_types(...)
 
-     // and return
-     return index;
-    }
-   return -1;
-  } // EOFunc internal_index_in_block(...)
+    /// \short Takes the n-th block ordered vector, b,  and copies its entries
+    /// to the appropriate entries in the naturally ordered vector, v.
+    /// Here n is the block number in the current block preconditioner.
+    /// If the preconditioner is a subsidiary block preconditioner
+    /// the other entries in v  that are not associated with it
+    /// are left alone.
+    ///
+    /// This version works with the internal block types. This is legacy code
+    /// but is kept alive, hence moved to private. Please use the
+    /// function "return_block_vector(...)".
+    void internal_return_block_vector(const unsigned& n,
+                                      const DoubleVector& b,
+                                      DoubleVector& v) const;
 
-  /// \short Access function to the internal block distributions.
-  const LinearAlgebraDistribution*
-    internal_block_distribution_pt(const unsigned& b) const
+    /// \short A helper function, takes the naturally ordered vector, v,
+    /// and extracts the n-th block vector, b.
+    /// Here n is the block number in the current preconditioner.
+    /// NOTE: The ordering of the vector b is the same as the
+    /// ordering of the block matrix from internal_get_block(...).
+    void internal_get_block_vector(const unsigned& n,
+                                   const DoubleVector& v,
+                                   DoubleVector& b) const;
+
+
+    /// \short Takes the naturally ordered vector and
+    /// rearranges it into a vector of sub vectors corresponding to the blocks,
+    /// so s[b][i] contains the i-th entry in the vector associated with block
+    /// b. The block_vec_number indicates which blocks we want. These blocks and
+    /// vectors are those corresponding to the internal blocks. Note: If the
+    /// preconditioner is a subsidiary preconditioner then only the sub-vectors
+    /// associated with the blocks of the subsidiary preconditioner will be
+    /// included. Hence the length of v is master_nrow() whereas the total
+    /// length of the s vectors is the sum of the Nrow of the sub vectors.
+    void internal_get_block_vectors(const Vector<unsigned>& block_vec_number,
+                                    const DoubleVector& v,
+                                    Vector<DoubleVector>& s) const;
+
+    /// \short A helper function, takes the naturally ordered vector and
+    /// rearranges it into a vector of sub vectors corresponding to the blocks,
+    /// so s[b][i] contains the i-th entry in the vector associated with block
+    /// b. The block_vec_number indicates which blocks we want. These blocks and
+    /// vectors are those corresponding to the internal blocks. Note: If the
+    /// preconditioner is a subsidiary preconditioner then only the sub-vectors
+    /// associated with the blocks of the subsidiary preconditioner will be
+    /// included. Hence the length of v is master_nrow() whereas the total
+    /// length of the s vectors is the sum of the Nrow of the sub vectors. This
+    /// is simply a wrapper around the other internal_get_block_vectors(...)
+    /// function with the identity block_vec_number vector.
+    void internal_get_block_vectors(const DoubleVector& v,
+                                    Vector<DoubleVector>& s) const;
+
+    /// \short A helper function, takes the vector of block vectors, s, and
+    /// copies its entries into the naturally ordered vector, v.
+    /// If this is a subsidiary block preconditioner only those entries in v
+    /// that are associated with its blocks are affected.
+    void internal_return_block_vectors(const Vector<unsigned>& block_vec_number,
+                                       const Vector<DoubleVector>& s,
+                                       DoubleVector& v) const;
+
+    /// \short A helper function, takes the vector of block vectors, s, and
+    /// copies its entries into the naturally ordered vector, v.
+    /// If this is a subsidiary block preconditioner only those entries in v
+    /// that are associated with its blocks are affected.
+    /// This is simple a wrapper around the other
+    /// internal_return_block_vectors(...) function with the identity
+    /// block_vec_number vector.
+    void internal_return_block_vectors(const Vector<DoubleVector>& s,
+                                       DoubleVector& v) const;
+
+    /// \short Gets block (i,j) from the matrix pointed to by
+    /// Matrix_pt and returns it in output_block. This is associated with the
+    /// internal blocks. Please use the other get_block(...) function.
+    void internal_get_block(const unsigned& i,
+                            const unsigned& j,
+                            MATRIX& output_block) const;
+
+    /// \short Return the block number corresponding to a global index i_dof.
+    /// This returns the block number corresponding to the internal blocks.
+    /// What this means is that this returns the most fine grain dof-block
+    /// number which this global index i_dof corresponds to. Since the writer
+    /// of the preconditioner does not need to care about the internal block
+    /// types, this function should not be used and thus moved to private.
+    /// This function should not be removed since it is still used deep within
+    /// the inner workings of the block preconditioning framework.
+    int internal_block_number(const unsigned& i_dof) const
+    {
+      int dn = internal_dof_number(i_dof);
+      if (dn == -1)
+      {
+        return dn;
+      }
+      else
+      {
+        return Dof_number_to_block_number_lookup[dn];
+      }
+    } // EOFunc internal_block_number(...)
+
+    /// \short Return the index in the block corresponding to a global block
+    /// number i_dof. The index returned corresponds to the internal blocks,
+    /// which is the most fine grain dof blocks.
+    int internal_index_in_block(const unsigned& i_dof) const
+    {
+      // the index in the dof block
+      unsigned index = internal_index_in_dof(i_dof);
+
+      // the dof block number
+      int internal_dof_block_number = internal_dof_number(i_dof);
+      if (internal_dof_block_number >= 0)
+      {
+        // the 'actual' block number
+        unsigned blk_number = internal_block_number(i_dof);
+
+        // compute the index in the block
+        unsigned j = 0;
+        while (int(Block_number_to_dof_number_lookup[blk_number][j]) !=
+               internal_dof_block_number)
+        {
+          index += internal_dof_block_dimension(
+            Block_number_to_dof_number_lookup[blk_number][j]);
+          j++;
+        }
+
+        // and return
+        return index;
+      }
+      return -1;
+    } // EOFunc internal_index_in_block(...)
+
+    /// \short Access function to the internal block distributions.
+    const LinearAlgebraDistribution* internal_block_distribution_pt(
+      const unsigned& b) const
     {
 #ifdef PARANOID
-      if(Internal_block_distribution_pt.size() == 0)
+      if (Internal_block_distribution_pt.size() == 0)
       {
         std::ostringstream error_msg;
-        error_msg <<"Internal block distributions are not set up.\n"
-          << "Have you called block_setup(...)?\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
+        error_msg << "Internal block distributions are not set up.\n"
+                  << "Have you called block_setup(...)?\n"
+                  << std::endl;
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
-      if(b > internal_nblock_types())
+      if (b > internal_nblock_types())
       {
         std::ostringstream error_msg;
-        error_msg <<"You requested the distribution for the internal block "
-                  << b << ".\n" << "But there are only " 
-                  << internal_nblock_types()
-                  << " block types.\n" << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
+        error_msg << "You requested the distribution for the internal block "
+                  << b << ".\n"
+                  << "But there are only " << internal_nblock_types()
+                  << " block types.\n"
+                  << std::endl;
+        throw OomphLibError(
+          error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 #endif
       return Internal_block_distribution_pt[b];
     } // EOFunc internal_block_distribution_pt(...)
 
-  /// \short insert a Vector<unsigned> and LinearAlgebraDistribution* pair
-  /// into Auxiliary_block_distribution_pt. The 
-  /// Auxiliary_block_distribution_pt should only contain pointers to 
-  /// distributions concatenated at this block level. We try to ensure this by
-  /// checking if the block_vec_number vector is within the range 
-  /// nblock_types(). Of course, this does not guarantee correctness, but this
-  /// is the least we can do.
-  void insert_auxiliary_block_distribution(
+    /// \short insert a Vector<unsigned> and LinearAlgebraDistribution* pair
+    /// into Auxiliary_block_distribution_pt. The
+    /// Auxiliary_block_distribution_pt should only contain pointers to
+    /// distributions concatenated at this block level. We try to ensure this by
+    /// checking if the block_vec_number vector is within the range
+    /// nblock_types(). Of course, this does not guarantee correctness, but this
+    /// is the least we can do.
+    void insert_auxiliary_block_distribution(
       const Vector<unsigned>& block_vec_number,
       LinearAlgebraDistribution* dist_pt)
-  {
-  #ifdef PARANOID
-    const unsigned max_block_number 
-      = *std::max_element(block_vec_number.begin(), 
-          block_vec_number.end());
-  
-    const unsigned nblocks = nblock_types();
-    if(max_block_number >= nblocks)
     {
-      std::ostringstream err_msg;
-      err_msg << "Cannot insert into Auxiliary_block_distribution_pt\n"
-        << "because " << max_block_number << " is equal to or \n"
-        << "greater than " << nblocks << ".\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-  
-    // Now check if the pair already exists in Auxiliary_block_distribution_pt.
-    // This is a stricter test and can be removed if required.
-  
-    // Attempt to get an iterator pointing to the pair with the value
-    // block_vec_number.
-    std::map<Vector<unsigned>,
-      LinearAlgebraDistribution* >::const_iterator iter
-        = Auxiliary_block_distribution_pt.find(block_vec_number);
-  
-    if(iter != Auxiliary_block_distribution_pt.end())
+#ifdef PARANOID
+      const unsigned max_block_number =
+        *std::max_element(block_vec_number.begin(), block_vec_number.end());
+
+      const unsigned nblocks = nblock_types();
+      if (max_block_number >= nblocks)
+      {
+        std::ostringstream err_msg;
+        err_msg << "Cannot insert into Auxiliary_block_distribution_pt\n"
+                << "because " << max_block_number << " is equal to or \n"
+                << "greater than " << nblocks << ".\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // Now check if the pair already exists in
+      // Auxiliary_block_distribution_pt. This is a stricter test and can be
+      // removed if required.
+
+      // Attempt to get an iterator pointing to the pair with the value
+      // block_vec_number.
+      std::map<Vector<unsigned>, LinearAlgebraDistribution*>::const_iterator
+        iter = Auxiliary_block_distribution_pt.find(block_vec_number);
+
+      if (iter != Auxiliary_block_distribution_pt.end())
       // If it exists, we throw an error
-    {
-      std::ostringstream err_msg;
-      err_msg << "Cannot insert into Auxiliary_block_distribution_pt\n"
-        << "because the first in the pair already exists.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-  #endif
-  
-    Auxiliary_block_distribution_pt.insert(
-        std::make_pair(block_vec_number,
-          dist_pt));
-  } // insert_auxiliary_block_distribution(...)
-
-  /// \short Private helper function to check that every element in the block
-  /// matrix (i,j) matches the corresponding element in the original matrix
-  void block_matrix_test(const unsigned& i,
-                         const unsigned& j,
-                         const MATRIX* block_matrix_pt) const;
-
- /// \short Get the index of first occurrence of value in a vector.
- /// If the element does not exist, -1 is returned.
- /// The optional parameter indicates of the Vector is sorted or not.
- /// Complexity: if the Vector is sorted, then on average, logarithmic in the 
- /// distance between first and last: Performs approximately log2(N)+2 
- /// element comparisons.
- /// Otherwise, up to linear in the distance between first and last: 
- /// Compares elements until a match is found.
- template<typename myType>
- inline int get_index_of_value(const Vector<myType>& vec, 
-                               const myType val,
-                               const bool sorted = false) const
- {
-   if(sorted)
-   {
-     typename Vector<myType>::const_iterator low 
-       = std::lower_bound(vec.begin(),vec.end(),val);
- 
-     return (low == vec.end() || *low != val) ? -1 : (low - vec.begin());
-   }
-   else
-   {
-     int pos = std::find(vec.begin(),vec.end(),val) - vec.begin();
-     return (pos < int(vec.size()) && pos >=0) ? pos : -1;
-   }
- }
-
- private:
-
- protected:
-
-  /// \short Specify the number of meshes required by this block 
-  /// preconditioner.
-  /// Note: elements in different meshes correspond to different types
-  /// of DOF.
-  void set_nmesh(const unsigned& n)
-  {
-   Mesh_pt.resize(n,0);
-   Allow_multiple_element_type_in_mesh.resize(n,0);
-  } // EOFunc set_nmesh(...)
-
-
-  /// \short Set the i-th mesh for this block preconditioner.
-  /// Note:
-  /// The method set_nmesh(...) must be called before this method
-  /// to specify the number of meshes.
-  /// By default, it is assumed that each mesh only contains elements of the 
-  /// same type. This condition may be relaxed by setting the boolean
-  /// allow_multiple_element_type_in_mesh to true, however, each mesh must only 
-  /// contain elements with the same number of dof types.
-  void set_mesh(const unsigned& i, const Mesh* const mesh_pt,
-                const bool &allow_multiple_element_type_in_mesh = false)
-  {
-#ifdef PARANOID
-   // paranoid check that mesh i can be set
-   if (i >= nmesh())
-    {
-     std::ostringstream err_msg;
-     err_msg
-      << "The mesh pointer has space for " << nmesh()
-      << " meshes.\n" << "Cannot store a mesh at entry " << i << "\n"
-      << "Has set_nmesh(...) been called?";
-     throw OomphLibError(err_msg.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-   // Check that the mesh pointer is not null.
-   if(mesh_pt == 0)
-    {
-     std::ostringstream err_msg;
-     err_msg
-      << "Tried to set the " << i << "-th mesh pointer, but it is null.";
-     throw OomphLibError(err_msg.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-   // store the mesh pt and n dof types
-   Mesh_pt[i]=mesh_pt;
-
-   // Does this mesh contain multiple element types?
-   Allow_multiple_element_type_in_mesh[i] 
-     = unsigned(allow_multiple_element_type_in_mesh);
-  } // EOFunc set_mesh(...)
-
-
-  /// \short Set replacement dof-level blocks.
-  /// Only dof-level blocks can be set. This is important due to how the
-  /// dof type coarsening feature operates.
-  ///
-  /// IMPORTANT: The block indices (block_i, block_j) is the dof-level 
-  /// ordering, NOT the block-ordering. The block-ordering is determined by
-  /// the parameters given to block_setup(...).
-  /// The DOF-ordering is determined by the two-level ordering scheme of 
-  /// first the elements, then the meshes.
-  void set_replacement_dof_block(const unsigned &block_i, 
-      const unsigned &block_j,
-      CRDoubleMatrix* replacement_dof_block_pt)
-  {
-#ifdef PARANOID
-    // Check if block_setup(...) has been called.
-    if(nblock_types() == 0)
-    {
-      std::ostringstream err_msg;
-      err_msg << "nblock_types() is 0, has block_setup(...) been called?\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-
-    // Range checking for replacement dof block.
-    unsigned para_ndof_types = this->ndof_types();
-
-    if((block_i >= para_ndof_types) ||
-       (block_j >= para_ndof_types))
-    {
-      std::ostringstream err_msg;
-      err_msg << "Replacement dof block (" 
-              << block_i << "," << block_j << ") is outside of range:\n"
-              << para_ndof_types;
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-
-//    // Check that the most fine grain mapping has been used in block_setup(...)
-//    // i.e. nblock_types() == ndof_types()
-//    if(ndof_types() != nblock_types())
-//    {
-//      std::ostringstream err_msg;
-//      err_msg << "ndof_types() != nblock_types()\n"
-//              << "Only the dof-level blocks can be replaced.\n"
-//              << "Please re-think your blocking scheme.\n";
-//      throw OomphLibError(err_msg.str(),
-//          OOMPH_CURRENT_FUNCTION,
-//          OOMPH_EXCEPTION_LOCATION);
-//    }
-
-    // Check that the replacement block pt is not null
-    if(replacement_dof_block_pt == 0)
-    {
-      std::ostringstream err_msg;
-      err_msg << "Replacing block(" << block_i << "," << block_i << ")\n"
-        << " but the pointer is NULL." << std::endl;
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check that the replacement block has been built
-    if(!replacement_dof_block_pt->built())
-    {
-      std::ostringstream err_msg;
-      err_msg << "Replacement block(" << block_i << "," << block_i << ")"
-        << " is not built." << std::endl;
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check if the distribution matches. Determine which natural ordering dof
-    // this should go to. I.e. we convert from dof-block index to dof index.
-    // Luckily, this is stored in Block_to_dof_map_coarse.
-//    const unsigned para_dof_block_i = Block_to_dof_map_coarse[block_i][0];
-    const unsigned para_dof_block_i = block_i;
-
-    if(*dof_block_distribution_pt(para_dof_block_i) !=
-       *replacement_dof_block_pt->distribution_pt() )
-    {
-      std::ostringstream err_msg;
-      err_msg << "The distribution of the replacement dof_block_pt\n"
-              << "is different from the Dof_block_distribution_pt["
-              << para_dof_block_i<<"].\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Now that we know the distribution of the replacement block is 
-    // correct, we check the number of columns.
-    const unsigned para_dof_block_j = block_j;
-    unsigned para_replacement_block_ncol = replacement_dof_block_pt->ncol();
-    unsigned para_required_ncol 
-      = dof_block_distribution_pt(para_dof_block_j)->nrow();
-    if(para_replacement_block_ncol != para_required_ncol)
-    {
-      std::ostringstream err_msg;
-      err_msg << "Replacement dof block has ncol = " 
-              << para_replacement_block_ncol << ".\n"
-              << "But required ncol is " << para_required_ncol << ".\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-    
-    // Block_to_dof_map_coarse[x][0] sense because we only can use this if 
-    // nblock_types() == ndof_types(), i.e. each sub-vector is of length 1.
-    //
-    // We use this indirection so that the placement of the pointer is 
-    // consistent with internal_get_block(...).
-//    const unsigned dof_block_i = Block_to_dof_map_coarse[block_i][0];
-//    const unsigned dof_block_j = Block_to_dof_map_coarse[block_j][0];
-
-//    Replacement_dof_block_pt(dof_block_i,dof_block_j) 
-//      = replacement_dof_block_pt;
-
-    Replacement_dof_block_pt(block_i,block_j) 
-      = replacement_dof_block_pt;
-  }
-
-  /// \short Check if any of the meshes are distributed. This is equivalent
-  /// to problem.distributed() and is used as a replacement.
-  bool any_mesh_distributed() const
-  {
-#ifdef OOMPH_HAS_MPI
-   // is_mesh_distributed() is only available with MPI
-   for(unsigned i=0, n=nmesh(); i<n; i++)
-    {
-     if(mesh_pt(i)->is_mesh_distributed()) { return true; }
-    }
-#endif
-   return false;
-  }
-
-  /// \short Return the number of the block associated with global unknown
-  /// i_dof. If this preconditioner is a subsidiary block preconditioner then
-  /// the block number in the subsidiary block preconditioner is returned. If
-  /// a particular global DOF is not associated with this preconditioner then
-  /// -1 is returned
-  int internal_dof_number(const unsigned& i_dof) const
-  {
-
-   if (is_master_block_preconditioner())
-    {
-#ifdef OOMPH_HAS_MPI
-     unsigned first_row = this->distribution_pt()->first_row();
-     unsigned nrow_local = this->distribution_pt()->nrow_local();
-     unsigned last_row = first_row+nrow_local-1;
-     if (i_dof >= first_row && i_dof <= last_row)
       {
-       return static_cast<int>(Dof_number_dense[i_dof-first_row]);
+        std::ostringstream err_msg;
+        err_msg << "Cannot insert into Auxiliary_block_distribution_pt\n"
+                << "because the first in the pair already exists.\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
-     else
+#endif
+
+      Auxiliary_block_distribution_pt.insert(
+        std::make_pair(block_vec_number, dist_pt));
+    } // insert_auxiliary_block_distribution(...)
+
+    /// \short Private helper function to check that every element in the block
+    /// matrix (i,j) matches the corresponding element in the original matrix
+    void block_matrix_test(const unsigned& i,
+                           const unsigned& j,
+                           const MATRIX* block_matrix_pt) const;
+
+    /// \short Get the index of first occurrence of value in a vector.
+    /// If the element does not exist, -1 is returned.
+    /// The optional parameter indicates of the Vector is sorted or not.
+    /// Complexity: if the Vector is sorted, then on average, logarithmic in the
+    /// distance between first and last: Performs approximately log2(N)+2
+    /// element comparisons.
+    /// Otherwise, up to linear in the distance between first and last:
+    /// Compares elements until a match is found.
+    template<typename myType>
+    inline int get_index_of_value(const Vector<myType>& vec,
+                                  const myType val,
+                                  const bool sorted = false) const
+    {
+      if (sorted)
       {
-       //int index = this->get_index_of_element(Global_index_sparse,i_dof);
-       int index = get_index_of_value<unsigned>(Global_index_sparse,i_dof,true);
-       if (index >= 0)
+        typename Vector<myType>::const_iterator low =
+          std::lower_bound(vec.begin(), vec.end(), val);
+
+        return (low == vec.end() || *low != val) ? -1 : (low - vec.begin());
+      }
+      else
+      {
+        int pos = std::find(vec.begin(), vec.end(), val) - vec.begin();
+        return (pos < int(vec.size()) && pos >= 0) ? pos : -1;
+      }
+    }
+
+  private:
+  protected:
+    /// \short Specify the number of meshes required by this block
+    /// preconditioner.
+    /// Note: elements in different meshes correspond to different types
+    /// of DOF.
+    void set_nmesh(const unsigned& n)
+    {
+      Mesh_pt.resize(n, 0);
+      Allow_multiple_element_type_in_mesh.resize(n, 0);
+    } // EOFunc set_nmesh(...)
+
+
+    /// \short Set the i-th mesh for this block preconditioner.
+    /// Note:
+    /// The method set_nmesh(...) must be called before this method
+    /// to specify the number of meshes.
+    /// By default, it is assumed that each mesh only contains elements of the
+    /// same type. This condition may be relaxed by setting the boolean
+    /// allow_multiple_element_type_in_mesh to true, however, each mesh must
+    /// only contain elements with the same number of dof types.
+    void set_mesh(const unsigned& i,
+                  const Mesh* const mesh_pt,
+                  const bool& allow_multiple_element_type_in_mesh = false)
+    {
+#ifdef PARANOID
+      // paranoid check that mesh i can be set
+      if (i >= nmesh())
+      {
+        std::ostringstream err_msg;
+        err_msg << "The mesh pointer has space for " << nmesh() << " meshes.\n"
+                << "Cannot store a mesh at entry " << i << "\n"
+                << "Has set_nmesh(...) been called?";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // Check that the mesh pointer is not null.
+      if (mesh_pt == 0)
+      {
+        std::ostringstream err_msg;
+        err_msg << "Tried to set the " << i
+                << "-th mesh pointer, but it is null.";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // store the mesh pt and n dof types
+      Mesh_pt[i] = mesh_pt;
+
+      // Does this mesh contain multiple element types?
+      Allow_multiple_element_type_in_mesh[i] =
+        unsigned(allow_multiple_element_type_in_mesh);
+    } // EOFunc set_mesh(...)
+
+
+    /// \short Set replacement dof-level blocks.
+    /// Only dof-level blocks can be set. This is important due to how the
+    /// dof type coarsening feature operates.
+    ///
+    /// IMPORTANT: The block indices (block_i, block_j) is the dof-level
+    /// ordering, NOT the block-ordering. The block-ordering is determined by
+    /// the parameters given to block_setup(...).
+    /// The DOF-ordering is determined by the two-level ordering scheme of
+    /// first the elements, then the meshes.
+    void set_replacement_dof_block(const unsigned& block_i,
+                                   const unsigned& block_j,
+                                   CRDoubleMatrix* replacement_dof_block_pt)
+    {
+#ifdef PARANOID
+      // Check if block_setup(...) has been called.
+      if (nblock_types() == 0)
+      {
+        std::ostringstream err_msg;
+        err_msg << "nblock_types() is 0, has block_setup(...) been called?\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+
+
+      // Range checking for replacement dof block.
+      unsigned para_ndof_types = this->ndof_types();
+
+      if ((block_i >= para_ndof_types) || (block_j >= para_ndof_types))
+      {
+        std::ostringstream err_msg;
+        err_msg << "Replacement dof block (" << block_i << "," << block_j
+                << ") is outside of range:\n"
+                << para_ndof_types;
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+
+
+      //    // Check that the most fine grain mapping has been used in
+      //    block_setup(...)
+      //    // i.e. nblock_types() == ndof_types()
+      //    if(ndof_types() != nblock_types())
+      //    {
+      //      std::ostringstream err_msg;
+      //      err_msg << "ndof_types() != nblock_types()\n"
+      //              << "Only the dof-level blocks can be replaced.\n"
+      //              << "Please re-think your blocking scheme.\n";
+      //      throw OomphLibError(err_msg.str(),
+      //          OOMPH_CURRENT_FUNCTION,
+      //          OOMPH_EXCEPTION_LOCATION);
+      //    }
+
+      // Check that the replacement block pt is not null
+      if (replacement_dof_block_pt == 0)
+      {
+        std::ostringstream err_msg;
+        err_msg << "Replacing block(" << block_i << "," << block_i << ")\n"
+                << " but the pointer is NULL." << std::endl;
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // Check that the replacement block has been built
+      if (!replacement_dof_block_pt->built())
+      {
+        std::ostringstream err_msg;
+        err_msg << "Replacement block(" << block_i << "," << block_i << ")"
+                << " is not built." << std::endl;
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // Check if the distribution matches. Determine which natural ordering dof
+      // this should go to. I.e. we convert from dof-block index to dof index.
+      // Luckily, this is stored in Block_to_dof_map_coarse.
+      //    const unsigned para_dof_block_i =
+      //    Block_to_dof_map_coarse[block_i][0];
+      const unsigned para_dof_block_i = block_i;
+
+      if (*dof_block_distribution_pt(para_dof_block_i) !=
+          *replacement_dof_block_pt->distribution_pt())
+      {
+        std::ostringstream err_msg;
+        err_msg << "The distribution of the replacement dof_block_pt\n"
+                << "is different from the Dof_block_distribution_pt["
+                << para_dof_block_i << "].\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // Now that we know the distribution of the replacement block is
+      // correct, we check the number of columns.
+      const unsigned para_dof_block_j = block_j;
+      unsigned para_replacement_block_ncol = replacement_dof_block_pt->ncol();
+      unsigned para_required_ncol =
+        dof_block_distribution_pt(para_dof_block_j)->nrow();
+      if (para_replacement_block_ncol != para_required_ncol)
+      {
+        std::ostringstream err_msg;
+        err_msg << "Replacement dof block has ncol = "
+                << para_replacement_block_ncol << ".\n"
+                << "But required ncol is " << para_required_ncol << ".\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Block_to_dof_map_coarse[x][0] sense because we only can use this if
+      // nblock_types() == ndof_types(), i.e. each sub-vector is of length 1.
+      //
+      // We use this indirection so that the placement of the pointer is
+      // consistent with internal_get_block(...).
+      //    const unsigned dof_block_i = Block_to_dof_map_coarse[block_i][0];
+      //    const unsigned dof_block_j = Block_to_dof_map_coarse[block_j][0];
+
+      //    Replacement_dof_block_pt(dof_block_i,dof_block_j)
+      //      = replacement_dof_block_pt;
+
+      Replacement_dof_block_pt(block_i, block_j) = replacement_dof_block_pt;
+    }
+
+    /// \short Check if any of the meshes are distributed. This is equivalent
+    /// to problem.distributed() and is used as a replacement.
+    bool any_mesh_distributed() const
+    {
+#ifdef OOMPH_HAS_MPI
+      // is_mesh_distributed() is only available with MPI
+      for (unsigned i = 0, n = nmesh(); i < n; i++)
+      {
+        if (mesh_pt(i)->is_mesh_distributed())
         {
-         return Dof_number_sparse[index];
+          return true;
         }
       }
-     // if we here we couldn't find the i_dof
-#ifdef PARANOID
-     unsigned my_rank = comm_pt()->my_rank();
-     std::ostringstream error_message;
-     error_message
-      << "Proc " << my_rank<<": Requested internal_dof_number(...) for global DOF " 
-      << i_dof << "\n"
-      << "cannot be found.\n";
-     throw OomphLibError(
-                         error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
 #endif
-#else
-     return static_cast<int>(Dof_number_dense[i_dof]);
-#endif
+      return false;
     }
-   // else this preconditioner  is a subsidiary one, and its Block_number
-   // lookup schemes etc haven't been set up
-   else
-    {
-     // Block number in master prec
-     unsigned blk_num = Master_block_preconditioner_pt->internal_dof_number(i_dof);
 
-     // Search through the Block_number_in_master_preconditioner for master
-     // block blk_num and return the block number in this preconditioner
-     for (unsigned i = 0; i < this->internal_ndof_types(); i++)
+    /// \short Return the number of the block associated with global unknown
+    /// i_dof. If this preconditioner is a subsidiary block preconditioner then
+    /// the block number in the subsidiary block preconditioner is returned. If
+    /// a particular global DOF is not associated with this preconditioner then
+    /// -1 is returned
+    int internal_dof_number(const unsigned& i_dof) const
+    {
+      if (is_master_block_preconditioner())
       {
-       if (Doftype_in_master_preconditioner_fine[i] == blk_num)
-        {return static_cast<int>(i);}
-      }
-     // if the master block preconditioner number is not found return -1
-     return -1;
-    }
-
-   // Shouldn't get here
-   throw OomphLibError("Never get here\n",
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-   // Dummy return
-   return -1;
-  }
-
-  /// \short Return the row/column number of global unknown i_dof within it's
-  /// block.
-  unsigned internal_index_in_dof(const unsigned& i_dof) const
-  {
-   if (is_master_block_preconditioner())
-    {
 #ifdef OOMPH_HAS_MPI
-     unsigned first_row = this->distribution_pt()->first_row();
-     unsigned nrow_local = this->distribution_pt()->nrow_local();
-     unsigned last_row = first_row+nrow_local-1;
-     if (i_dof >= first_row && i_dof <= last_row)
-      {
-       return static_cast<int>(Index_in_dof_block_dense[i_dof-first_row]);
-      }
-     else
-      {
-       //int index = this->get_index_of_element(Global_index_sparse,i_dof);
-       int index = get_index_of_value<unsigned>(Global_index_sparse,i_dof,true);
-       if (index >= 0)
+        unsigned first_row = this->distribution_pt()->first_row();
+        unsigned nrow_local = this->distribution_pt()->nrow_local();
+        unsigned last_row = first_row + nrow_local - 1;
+        if (i_dof >= first_row && i_dof <= last_row)
         {
-         return Index_in_dof_block_sparse[index];
+          return static_cast<int>(Dof_number_dense[i_dof - first_row]);
         }
-      }
-     // if we here we couldn't find the i_dof
+        else
+        {
+          // int index = this->get_index_of_element(Global_index_sparse,i_dof);
+          int index =
+            get_index_of_value<unsigned>(Global_index_sparse, i_dof, true);
+          if (index >= 0)
+          {
+            return Dof_number_sparse[index];
+          }
+        }
+        // if we here we couldn't find the i_dof
 #ifdef PARANOID
-     std::ostringstream error_message;
-     error_message
-      << "Requested internal_index_in_dof(...) for global DOF " << i_dof << "\n"
-      << "cannot be found.\n";
-     throw OomphLibError(
-                         error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
+        unsigned my_rank = comm_pt()->my_rank();
+        std::ostringstream error_message;
+        error_message << "Proc " << my_rank
+                      << ": Requested internal_dof_number(...) for global DOF "
+                      << i_dof << "\n"
+                      << "cannot be found.\n";
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
 #endif
 #else
-     return Index_in_dof_block_dense[i_dof];
+        return static_cast<int>(Dof_number_dense[i_dof]);
 #endif
+      }
+      // else this preconditioner  is a subsidiary one, and its Block_number
+      // lookup schemes etc haven't been set up
+      else
+      {
+        // Block number in master prec
+        unsigned blk_num =
+          Master_block_preconditioner_pt->internal_dof_number(i_dof);
+
+        // Search through the Block_number_in_master_preconditioner for master
+        // block blk_num and return the block number in this preconditioner
+        for (unsigned i = 0; i < this->internal_ndof_types(); i++)
+        {
+          if (Doftype_in_master_preconditioner_fine[i] == blk_num)
+          {
+            return static_cast<int>(i);
+          }
+        }
+        // if the master block preconditioner number is not found return -1
+        return -1;
+      }
+
+      // Shouldn't get here
+      throw OomphLibError(
+        "Never get here\n", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      // Dummy return
+      return -1;
     }
-   else
+
+    /// \short Return the row/column number of global unknown i_dof within it's
+    /// block.
+    unsigned internal_index_in_dof(const unsigned& i_dof) const
     {
-     return Master_block_preconditioner_pt->internal_index_in_dof(i_dof);
-    }
-
-   // Shouldn't get here
-   throw OomphLibError("Never get here\n",
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-   // Dummy return
-   return -1;
-  }
-
-  /// \short Return the number of degrees of freedom in block b. Note that if
-  /// this preconditioner acts as a subsidiary preconditioner then b refers
-  /// to the block number in the subsidiary preconditioner not the master
-  /// block preconditioner.
-  unsigned internal_block_dimension(const unsigned& b) const
-  {
+      if (is_master_block_preconditioner())
+      {
+#ifdef OOMPH_HAS_MPI
+        unsigned first_row = this->distribution_pt()->first_row();
+        unsigned nrow_local = this->distribution_pt()->nrow_local();
+        unsigned last_row = first_row + nrow_local - 1;
+        if (i_dof >= first_row && i_dof <= last_row)
+        {
+          return static_cast<int>(Index_in_dof_block_dense[i_dof - first_row]);
+        }
+        else
+        {
+          // int index = this->get_index_of_element(Global_index_sparse,i_dof);
+          int index =
+            get_index_of_value<unsigned>(Global_index_sparse, i_dof, true);
+          if (index >= 0)
+          {
+            return Index_in_dof_block_sparse[index];
+          }
+        }
+        // if we here we couldn't find the i_dof
 #ifdef PARANOID
-    const unsigned i_nblock_types = internal_nblock_types();
-    if(b >= i_nblock_types)
-    {
-      std::ostringstream err_msg;
-      err_msg << "Trying to get internal block dimension for \n"
-              << "internal block " << b <<".\n" 
-              << "But there are only " << i_nblock_types
-              << " internal dof types.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION); 
-    }
+        std::ostringstream error_message;
+        error_message << "Requested internal_index_in_dof(...) for global DOF "
+                      << i_dof << "\n"
+                      << "cannot be found.\n";
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
 #endif
-   return Internal_block_distribution_pt[b]->nrow();
-  }
+#else
+        return Index_in_dof_block_dense[i_dof];
+#endif
+      }
+      else
+      {
+        return Master_block_preconditioner_pt->internal_index_in_dof(i_dof);
+      }
 
-  /// \short Return the size of the dof "block" i, i.e. how many degrees of
-  /// freedom are associated with it. Note that if this preconditioner acts as
-  /// a subsidiary preconditioner, then i refers to the block number in the
-  /// subsidiary preconditioner not the master block preconditioner
-  unsigned internal_dof_block_dimension(const unsigned& i) const
-  {
+      // Shouldn't get here
+      throw OomphLibError(
+        "Never get here\n", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      // Dummy return
+      return -1;
+    }
+
+    /// \short Return the number of degrees of freedom in block b. Note that if
+    /// this preconditioner acts as a subsidiary preconditioner then b refers
+    /// to the block number in the subsidiary preconditioner not the master
+    /// block preconditioner.
+    unsigned internal_block_dimension(const unsigned& b) const
+    {
 #ifdef PARANOID
-    const unsigned i_n_dof_types = internal_ndof_types();
-    if(i >= i_n_dof_types)
-    {
-      std::ostringstream err_msg;
-      err_msg << "Trying to get internal dof block dimension for \n"
-              << "internal dof block " << i <<".\n" 
-              << "But there are only " << i_n_dof_types 
-              << " internal dof types.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION); 
-    }
+      const unsigned i_nblock_types = internal_nblock_types();
+      if (b >= i_nblock_types)
+      {
+        std::ostringstream err_msg;
+        err_msg << "Trying to get internal block dimension for \n"
+                << "internal block " << b << ".\n"
+                << "But there are only " << i_nblock_types
+                << " internal dof types.\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
-   // I don't understand the difference between this function and
-   // block_dimension(...) but I'm not going to mess with it... David
-
-   if(is_master_block_preconditioner())
-    {
-     return Dof_dimension[i];
+      return Internal_block_distribution_pt[b]->nrow();
     }
-   else
+
+    /// \short Return the size of the dof "block" i, i.e. how many degrees of
+    /// freedom are associated with it. Note that if this preconditioner acts as
+    /// a subsidiary preconditioner, then i refers to the block number in the
+    /// subsidiary preconditioner not the master block preconditioner
+    unsigned internal_dof_block_dimension(const unsigned& i) const
     {
-     unsigned master_i = internal_master_dof_number(i);
-     return Master_block_preconditioner_pt->internal_dof_block_dimension(master_i);
-    }
-  }
+#ifdef PARANOID
+      const unsigned i_n_dof_types = internal_ndof_types();
+      if (i >= i_n_dof_types)
+      {
+        std::ostringstream err_msg;
+        err_msg << "Trying to get internal dof block dimension for \n"
+                << "internal dof block " << i << ".\n"
+                << "But there are only " << i_n_dof_types
+                << " internal dof types.\n";
+        throw OomphLibError(
+          err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      // I don't understand the difference between this function and
+      // block_dimension(...) but I'm not going to mess with it... David
 
-  /// \short Return the number of dofs (number of rows or columns) in the
-  /// overall problem. The prefix "master_" is sort of redundant when used as
-  /// a stand-alone block preconditioner but is required to avoid ambiguities.
-  /// The latter is stored (and maintained) separately for each specific block
-  /// preconditioner regardless of its role.
-  unsigned master_nrow() const
-  {
-   if (is_master_block_preconditioner())
+      if (is_master_block_preconditioner())
+      {
+        return Dof_dimension[i];
+      }
+      else
+      {
+        unsigned master_i = internal_master_dof_number(i);
+        return Master_block_preconditioner_pt->internal_dof_block_dimension(
+          master_i);
+      }
+    }
+
+    /// \short Return the number of dofs (number of rows or columns) in the
+    /// overall problem. The prefix "master_" is sort of redundant when used as
+    /// a stand-alone block preconditioner but is required to avoid ambiguities.
+    /// The latter is stored (and maintained) separately for each specific block
+    /// preconditioner regardless of its role.
+    unsigned master_nrow() const
     {
-     return Nrow;
+      if (is_master_block_preconditioner())
+      {
+        return Nrow;
+      }
+      else
+      {
+        return (this->Master_block_preconditioner_pt->master_nrow());
+      }
     }
-   else
+
+    /// \short Takes the block number within this preconditioner and returns the
+    /// corresponding block number in the master preconditioner. If this
+    /// preconditioner does not have a master block preconditioner then the
+    /// block number passed is returned
+    unsigned internal_master_dof_number(const unsigned& b) const
     {
-     return (this->Master_block_preconditioner_pt->master_nrow());
+      if (is_master_block_preconditioner()) return b;
+      else
+        return Doftype_in_master_preconditioner_fine[b];
     }
-  }
 
-  /// \short Takes the block number within this preconditioner and returns the
-  /// corresponding block number in the master preconditioner. If this
-  /// preconditioner does not have a master block preconditioner then the
-  /// block number passed is returned
-  unsigned internal_master_dof_number(const unsigned& b) const
-  {
-   if (is_master_block_preconditioner())
-    return b;
-   else
-    return Doftype_in_master_preconditioner_fine[b];
-  }
+    /// \short access function to the internal
+    /// preconditioner matrix distribution pt.
+    /// preconditioner_matrix_distribution_pt always returns the concatenation
+    /// of the internal block distributions. Since the writer of the
+    /// preconditioner does not need to concern themselves with the internal
+    /// dof/block, please use preconditioner_matrix_distribution_pt().
+    const LinearAlgebraDistribution* internal_preconditioner_matrix_distribution_pt()
+      const
+    {
+      if (is_master_block_preconditioner())
+        return Internal_preconditioner_matrix_distribution_pt;
+      else
+        return this->distribution_pt();
+    }
 
-  /// \short access function to the internal 
-  /// preconditioner matrix distribution pt.
-  /// preconditioner_matrix_distribution_pt always returns the concatenation 
-  /// of the internal block distributions. Since the writer of the 
-  /// preconditioner does not need to concern themselves with the internal
-  /// dof/block, please use preconditioner_matrix_distribution_pt().
-  const LinearAlgebraDistribution*
-  internal_preconditioner_matrix_distribution_pt() const
-  {
-   if (is_master_block_preconditioner())
-    return Internal_preconditioner_matrix_distribution_pt;
-   else
-    return this->distribution_pt();
-  }
+    /// \short Access function to the preconditioner matrix distribution
+    /// pointer. This is the concatenation of the block distributions with the
+    /// identity ordering. I.e. if this preconditioner has three block types,
+    /// with the three associated block distributions dist_b0, dist_b1 and
+    /// dist_b2, then this distribution is:
+    /// LinearAlgebraDistributionHelpers::concatenate(dist_b0, dist_b1,
+    /// dist_b2).
+    const LinearAlgebraDistribution* preconditioner_matrix_distribution_pt()
+      const
+    {
+      return Preconditioner_matrix_distribution_pt;
+    }
 
-  /// \short Access function to the preconditioner matrix distribution pointer.
-  /// This is the concatenation of the block distributions with the identity
-  /// ordering. I.e. if this preconditioner has three block types, with the
-  /// three associated block distributions dist_b0, dist_b1 and dist_b2, then
-  /// this distribution is:
-  /// LinearAlgebraDistributionHelpers::concatenate(dist_b0, dist_b1, dist_b2).
-  const LinearAlgebraDistribution*
-  preconditioner_matrix_distribution_pt() const
-  {
-    return Preconditioner_matrix_distribution_pt;
-  }
+    /// \short The replacement dof-level blocks.
+    MapMatrix<unsigned, CRDoubleMatrix*> Replacement_dof_block_pt;
 
-  /// \short The replacement dof-level blocks.
-  MapMatrix<unsigned,CRDoubleMatrix*> Replacement_dof_block_pt;
-  
-  /// \short The distribution for the blocks.
-  Vector<LinearAlgebraDistribution*> Block_distribution_pt;
+    /// \short The distribution for the blocks.
+    Vector<LinearAlgebraDistribution*> Block_distribution_pt;
 
-  /// \short Mapping for block types to dof types. These are the dof types
-  /// the writer of the preconditioner expects. For the upper-most master
-  /// block preconditioner, this would be the sum of the dof types in the 
-  /// meshes. For subsidiary block preconditioners, this is determined by
-  /// the parent preconditioner when passing in the doftype_coarsen_map_coarse
-  /// vector in turn_into_subsidiary_block_preconditioner(...).
-  Vector<Vector<unsigned> > Block_to_dof_map_coarse;
+    /// \short Mapping for block types to dof types. These are the dof types
+    /// the writer of the preconditioner expects. For the upper-most master
+    /// block preconditioner, this would be the sum of the dof types in the
+    /// meshes. For subsidiary block preconditioners, this is determined by
+    /// the parent preconditioner when passing in the doftype_coarsen_map_coarse
+    /// vector in turn_into_subsidiary_block_preconditioner(...).
+    Vector<Vector<unsigned>> Block_to_dof_map_coarse;
 
-  /// \short Mapping for the block types to the most fine grain dof types.
-  Vector<Vector<unsigned> > Block_to_dof_map_fine;
+    /// \short Mapping for the block types to the most fine grain dof types.
+    Vector<Vector<unsigned>> Block_to_dof_map_fine;
 
-  /// \short Mapping for dof types within THIS precondition. This is usually
-  /// passed down from the parent preconditioner.
-  /// This list is used to tell which does types should
-  /// be considered as a single dof type within this preconditioner. I.e. we
-  /// "coarsen" the dof types. The values are local to this preconditioner,
-  /// for example, even if the 
-  /// Doftype_in_master_preconditioner_coarse = [2,3,4], the vector
-  /// Doftype_coarsen_map_coarse = [[0],[1,2]], saying your local dof types
-  /// 0 should be considered as dof type 0 and dof types 1 and 2 are considered
-  /// as dof type 1.
-  /// 
-  /// Furthermore, the dof types are that the preconditioner above this one 
-  /// knows; these dof types may or may not be coarsened. For example, say that
-  /// this preconditioner expects two dof types, 0 and 1.
-  /// The preconditioner above this one wishes to use this preconditioner to 
-  /// solve the block associated with it's dof types 2, 3 and 4. It passes the
-  /// Vector [2,3,4] to this preconditioner via the function 
-  /// turn_into_subsidiary_block_preconditioner(...), this list is to be stored
-  /// in Doftype_in_master_preconditioner_coarse. It also passes in the
-  /// 2D vector [[0][1,2]] (as described above), this list is to be stored in
-  /// Doftype_coarsen_map_coarse. BUT, the master's preconditioner dof types
-  /// may also be coarsened. I.e. the underlying dof types of the master block
-  /// preconditioner may be [0,1,2,3,4,5,6,7], for which it may have the 
-  /// Doftype_coarsen_map_coarse = [[0,1][2,3][4,5][6,7]].
-  /// 
-  /// An additional list has to be kept for the most fine grain dof type 
-  /// mapping. This is stored in Doftype_coarsen_map_fine, in this case it 
-  /// would be:
-  /// 
-  /// Doftype_coarsen_map_fine = [[0,1][2,3,4,5]], since the dof types passed
-  /// to this preconditioner is [2, 3, 4] from the master preconditioner, but
-  /// it actually refers to the underlying dof types [2,3,4,5,6,7].
-  /// 
-  /// In the case of the top most master block 
-  /// preconditioner, the block_setup(...) function fills the vector with the
-  /// identity mapping.
-  Vector<Vector<unsigned> > Doftype_coarsen_map_coarse;
+    /// \short Mapping for dof types within THIS precondition. This is usually
+    /// passed down from the parent preconditioner.
+    /// This list is used to tell which does types should
+    /// be considered as a single dof type within this preconditioner. I.e. we
+    /// "coarsen" the dof types. The values are local to this preconditioner,
+    /// for example, even if the
+    /// Doftype_in_master_preconditioner_coarse = [2,3,4], the vector
+    /// Doftype_coarsen_map_coarse = [[0],[1,2]], saying your local dof types
+    /// 0 should be considered as dof type 0 and dof types 1 and 2 are
+    /// considered as dof type 1.
+    ///
+    /// Furthermore, the dof types are that the preconditioner above this one
+    /// knows; these dof types may or may not be coarsened. For example, say
+    /// that this preconditioner expects two dof types, 0 and 1. The
+    /// preconditioner above this one wishes to use this preconditioner to solve
+    /// the block associated with it's dof types 2, 3 and 4. It passes the
+    /// Vector [2,3,4] to this preconditioner via the function
+    /// turn_into_subsidiary_block_preconditioner(...), this list is to be
+    /// stored in Doftype_in_master_preconditioner_coarse. It also passes in the
+    /// 2D vector [[0][1,2]] (as described above), this list is to be stored in
+    /// Doftype_coarsen_map_coarse. BUT, the master's preconditioner dof types
+    /// may also be coarsened. I.e. the underlying dof types of the master block
+    /// preconditioner may be [0,1,2,3,4,5,6,7], for which it may have the
+    /// Doftype_coarsen_map_coarse = [[0,1][2,3][4,5][6,7]].
+    ///
+    /// An additional list has to be kept for the most fine grain dof type
+    /// mapping. This is stored in Doftype_coarsen_map_fine, in this case it
+    /// would be:
+    ///
+    /// Doftype_coarsen_map_fine = [[0,1][2,3,4,5]], since the dof types passed
+    /// to this preconditioner is [2, 3, 4] from the master preconditioner, but
+    /// it actually refers to the underlying dof types [2,3,4,5,6,7].
+    ///
+    /// In the case of the top most master block
+    /// preconditioner, the block_setup(...) function fills the vector with the
+    /// identity mapping.
+    Vector<Vector<unsigned>> Doftype_coarsen_map_coarse;
 
-  /// \short Mapping the dof types within this preconditioner. The values in
-  /// here refers to the most grain dof types. This list is automatically
-  /// generated either in block_setup(...) (for the top-most preconditioner)
-  /// or the turn_into_subsidiary_block_preconditioner(...) function.
-  /// Please refer to the comment above Doftype_coarsen_map_coarse for more
-  /// details.
-  Vector<Vector<unsigned> > Doftype_coarsen_map_fine;
-  
-  /// \short Storage for the default distribution for each internal block.
-  Vector<LinearAlgebraDistribution*> Internal_block_distribution_pt;
+    /// \short Mapping the dof types within this preconditioner. The values in
+    /// here refers to the most grain dof types. This list is automatically
+    /// generated either in block_setup(...) (for the top-most preconditioner)
+    /// or the turn_into_subsidiary_block_preconditioner(...) function.
+    /// Please refer to the comment above Doftype_coarsen_map_coarse for more
+    /// details.
+    Vector<Vector<unsigned>> Doftype_coarsen_map_fine;
 
-  /// \short Storage for the default distribution for each dof block at
-  /// this level.
-  Vector<LinearAlgebraDistribution*> Dof_block_distribution_pt;
+    /// \short Storage for the default distribution for each internal block.
+    Vector<LinearAlgebraDistribution*> Internal_block_distribution_pt;
 
-  /// \short Vector of unsigned to indicate which meshes contain multiple
-  /// element types.
-  Vector<unsigned> Allow_multiple_element_type_in_mesh;
+    /// \short Storage for the default distribution for each dof block at
+    /// this level.
+    Vector<LinearAlgebraDistribution*> Dof_block_distribution_pt;
 
-  /// \short Vector of pointers to the meshes containing the elements used in
-  /// the block preconditioner. Const pointers to prevent modification of the
-  /// mesh by the preconditioner (this could be relaxed if needed). If this is
-  /// a subsidiary preconditioner, then the information is looked up in the
-  /// master preconditioner.
-  Vector<const Mesh*> Mesh_pt;
-  
-  /// \short Storage for number of types of degree of freedom of the elements
-  /// in each mesh.
-  Vector<unsigned> Ndof_types_in_mesh;
+    /// \short Vector of unsigned to indicate which meshes contain multiple
+    /// element types.
+    Vector<unsigned> Allow_multiple_element_type_in_mesh;
 
-  /// \short Number of different block types in this preconditioner. Note that
-  /// this information is maintained if used as a subsidiary or stand-alone
-  /// block preconditioner, in the latter case it stores the number of blocks
-  /// within the subsidiary preconditioner.
-  unsigned Internal_nblock_types;
+    /// \short Vector of pointers to the meshes containing the elements used in
+    /// the block preconditioner. Const pointers to prevent modification of the
+    /// mesh by the preconditioner (this could be relaxed if needed). If this is
+    /// a subsidiary preconditioner, then the information is looked up in the
+    /// master preconditioner.
+    Vector<const Mesh*> Mesh_pt;
 
-  ///\short Number of different DOF types in this preconditioner. Note that
-  /// this information is maintained if used as a subsidiary or stand-alone
-  /// block preconditioner, in the latter case it stores the number of dofs
-  /// within the subsidiary preconditioner.
-  unsigned Internal_ndof_types;
- 
- private:
+    /// \short Storage for number of types of degree of freedom of the elements
+    /// in each mesh.
+    Vector<unsigned> Ndof_types_in_mesh;
 
-  /// \short Debugging variable. Set true or false via the access functions
-  /// turn_on_recursive_debug_flag(...)
-  /// turn_off_recursive_debug_flag(...)
-  /// These will turn on/off the debug flag up the hierarchy.
-  bool Recursive_debug_flag;
+    /// \short Number of different block types in this preconditioner. Note that
+    /// this information is maintained if used as a subsidiary or stand-alone
+    /// block preconditioner, in the latter case it stores the number of blocks
+    /// within the subsidiary preconditioner.
+    unsigned Internal_nblock_types;
 
-  /// \short Debugging variable. Set true or false via the access functions
-  /// turn_on_debug_flag(...)
-  /// turn_off_debug_flag(...)
-  bool Debug_flag;
+    ///\short Number of different DOF types in this preconditioner. Note that
+    /// this information is maintained if used as a subsidiary or stand-alone
+    /// block preconditioner, in the latter case it stores the number of dofs
+    /// within the subsidiary preconditioner.
+    unsigned Internal_ndof_types;
 
-  /// \short Stores any block-level distributions / concatenation of 
-  /// block-level distributions required. The first in the pair 
-  /// (Vector<unsigned>) represents the block numbers of the distributions
-  /// concatenated to get the second in the pair (LinearAlgebraDistribution*).
-  std::map<Vector<unsigned>,LinearAlgebraDistribution*> 
-    Auxiliary_block_distribution_pt;
+  private:
+    /// \short Debugging variable. Set true or false via the access functions
+    /// turn_on_recursive_debug_flag(...)
+    /// turn_off_recursive_debug_flag(...)
+    /// These will turn on/off the debug flag up the hierarchy.
+    bool Recursive_debug_flag;
 
-  /// \short Number of DOFs (# of rows or columns in the matrix) in this
-  /// preconditioner. Note that this information is maintained if used as a
-  /// subsidiary or stand-alone block preconditioner, in the latter case it
-  /// stores the number of rows within the subsidiary preconditioner.
-  unsigned Nrow;
+    /// \short Debugging variable. Set true or false via the access functions
+    /// turn_on_debug_flag(...)
+    /// turn_off_debug_flag(...)
+    bool Debug_flag;
 
-  /// \short If the block preconditioner is acting a subsidiary block
-  /// preconditioner then a pointer to the master preconditioner is stored
-  /// here. If the preconditioner does not have a master block preconditioner
-  /// then this  pointer remains null.
-  BlockPreconditioner<MATRIX>* Master_block_preconditioner_pt;
+    /// \short Stores any block-level distributions / concatenation of
+    /// block-level distributions required. The first in the pair
+    /// (Vector<unsigned>) represents the block numbers of the distributions
+    /// concatenated to get the second in the pair (LinearAlgebraDistribution*).
+    std::map<Vector<unsigned>, LinearAlgebraDistribution*>
+      Auxiliary_block_distribution_pt;
 
-  /// \short The map between the dof types in this preconditioner and the master
-  /// preconditioner. If there is no master preconditioner it remains empty.
-  /// This list contains the mapping for the underlying dof types.
-  Vector<unsigned> Doftype_in_master_preconditioner_fine;
+    /// \short Number of DOFs (# of rows or columns in the matrix) in this
+    /// preconditioner. Note that this information is maintained if used as a
+    /// subsidiary or stand-alone block preconditioner, in the latter case it
+    /// stores the number of rows within the subsidiary preconditioner.
+    unsigned Nrow;
 
-  /// \short The map between the dof types in this preconditioner and the 
-  /// master preconditioner. If there is no master preconditioner, it remains
-  /// empty. This is the version for which the master preconditioner expects.
-  /// The dof types in here may or may not be coarsened in the preconditioner
-  /// above this one.
-  Vector<unsigned> Doftype_in_master_preconditioner_coarse;
+    /// \short If the block preconditioner is acting a subsidiary block
+    /// preconditioner then a pointer to the master preconditioner is stored
+    /// here. If the preconditioner does not have a master block preconditioner
+    /// then this  pointer remains null.
+    BlockPreconditioner<MATRIX>* Master_block_preconditioner_pt;
 
-  /// \short **This was uncommented** Presumably a non-distributed analogue of
-  /// Index_in_dof_block_sparse.
-  Vector<unsigned> Index_in_dof_block_dense;
+    /// \short The map between the dof types in this preconditioner and the
+    /// master preconditioner. If there is no master preconditioner it remains
+    /// empty. This list contains the mapping for the underlying dof types.
+    Vector<unsigned> Doftype_in_master_preconditioner_fine;
 
-  /// \short Vector to store the mapping from the global DOF number to its
-  /// block. Empty if this preconditioner has a master preconditioner, in this
-  /// case the information is obtained from the master preconditioner.
-  Vector<unsigned> Dof_number_dense;
+    /// \short The map between the dof types in this preconditioner and the
+    /// master preconditioner. If there is no master preconditioner, it remains
+    /// empty. This is the version for which the master preconditioner expects.
+    /// The dof types in here may or may not be coarsened in the preconditioner
+    /// above this one.
+    Vector<unsigned> Doftype_in_master_preconditioner_coarse;
+
+    /// \short **This was uncommented** Presumably a non-distributed analogue of
+    /// Index_in_dof_block_sparse.
+    Vector<unsigned> Index_in_dof_block_dense;
+
+    /// \short Vector to store the mapping from the global DOF number to its
+    /// block. Empty if this preconditioner has a master preconditioner, in this
+    /// case the information is obtained from the master preconditioner.
+    Vector<unsigned> Dof_number_dense;
 
 #ifdef OOMPH_HAS_MPI
 
-  // The following three vectors store data on the matrix rows/matrix
-  // columns/dofs (the three are equivalent) that are not on this processor.
+    // The following three vectors store data on the matrix rows/matrix
+    // columns/dofs (the three are equivalent) that are not on this processor.
 
-  /// \short For global indices outside of the range this->first_row()
-  /// to this->first_row()+this->nrow_local(), the Index_in_dof_block
-  /// and Dof_number are stored sparsely in the vectors:
-  /// + Index_in_dof_block_sparse;
-  /// + Dof_number_sparse;
-  /// The corresponding global indices are stored in this vector.
-  Vector<unsigned> Global_index_sparse;
+    /// \short For global indices outside of the range this->first_row()
+    /// to this->first_row()+this->nrow_local(), the Index_in_dof_block
+    /// and Dof_number are stored sparsely in the vectors:
+    /// + Index_in_dof_block_sparse;
+    /// + Dof_number_sparse;
+    /// The corresponding global indices are stored in this vector.
+    Vector<unsigned> Global_index_sparse;
 
-  /// \short Vector to store the mapping from the global DOF number to the
-  /// index (row/column number) within its block (empty if this preconditioner
-  /// has a master preconditioner as this information is obtained from the
-  /// master preconditioner). Sparse version: for global indices outside of the
-  /// range this->first_row() to this->first_row()+this->nrow_local(). The
-  /// global index of an element in this vector is defined in
-  /// Global_index_sparse.
-  Vector<unsigned> Index_in_dof_block_sparse;
+    /// \short Vector to store the mapping from the global DOF number to the
+    /// index (row/column number) within its block (empty if this preconditioner
+    /// has a master preconditioner as this information is obtained from the
+    /// master preconditioner). Sparse version: for global indices outside of
+    /// the range this->first_row() to this->first_row()+this->nrow_local(). The
+    /// global index of an element in this vector is defined in
+    /// Global_index_sparse.
+    Vector<unsigned> Index_in_dof_block_sparse;
 
-  /// \short Vector to store the mapping from the global DOF number to its
-  /// block (empty if this preconditioner has a master preconditioner as this
-  /// information is obtained from the master preconditioner). Sparse
-  /// version: for global indices outside of the range this->first_row() to
-  /// this->first_row()+this->nrow_local(). The global index of an element in
-  /// this vector is defined in Global_index_sparse.
-  Vector<unsigned> Dof_number_sparse;
+    /// \short Vector to store the mapping from the global DOF number to its
+    /// block (empty if this preconditioner has a master preconditioner as this
+    /// information is obtained from the master preconditioner). Sparse
+    /// version: for global indices outside of the range this->first_row() to
+    /// this->first_row()+this->nrow_local(). The global index of an element in
+    /// this vector is defined in Global_index_sparse.
+    Vector<unsigned> Dof_number_sparse;
 #endif
 
-  /// \short Vector containing the size of each block, i.e. the number of
-  /// global DOFs associated with it. (Empty if this preconditioner has a
-  /// master preconditioner as this information is obtain from the master
-  /// preconditioner.)
-  Vector<unsigned> Dof_dimension;
+    /// \short Vector containing the size of each block, i.e. the number of
+    /// global DOFs associated with it. (Empty if this preconditioner has a
+    /// master preconditioner as this information is obtain from the master
+    /// preconditioner.)
+    Vector<unsigned> Dof_dimension;
 
-  /// \short Vectors of vectors for the mapping from block number and block
-  /// row to global row number. Empty if this preconditioner has a master
-  /// preconditioner as this information is obtain from the master
-  /// preconditioner.
-  Vector<Vector<unsigned> > Global_index;
+    /// \short Vectors of vectors for the mapping from block number and block
+    /// row to global row number. Empty if this preconditioner has a master
+    /// preconditioner as this information is obtain from the master
+    /// preconditioner.
+    Vector<Vector<unsigned>> Global_index;
 
-  /// \short Vector of vectors to store the mapping from block number to the
-  /// DOF number (each element could be a vector because we allow multiple
-  /// DOFs types in a single block).
-  Vector<Vector<unsigned> > Block_number_to_dof_number_lookup;
+    /// \short Vector of vectors to store the mapping from block number to the
+    /// DOF number (each element could be a vector because we allow multiple
+    /// DOFs types in a single block).
+    Vector<Vector<unsigned>> Block_number_to_dof_number_lookup;
 
-  /// \short Vector to the mapping from DOF number to block number.
-  Vector<unsigned> Dof_number_to_block_number_lookup;
+    /// \short Vector to the mapping from DOF number to block number.
+    Vector<unsigned> Dof_number_to_block_number_lookup;
 
-  /// \short Number of types of degree of freedom associated with each block.
-  Vector<unsigned> Ndof_in_block;
-
+    /// \short Number of types of degree of freedom associated with each block.
+    Vector<unsigned> Ndof_in_block;
 
 
 #ifdef OOMPH_HAS_MPI
-  /// \short The global rows to be sent of block b to processor p (matrix
-  /// indexed [b][p]).
-  DenseMatrix<int*> Rows_to_send_for_get_block;
+    /// \short The global rows to be sent of block b to processor p (matrix
+    /// indexed [b][p]).
+    DenseMatrix<int*> Rows_to_send_for_get_block;
 
-  /// \short The number of global rows to be sent of block b to processor p
-  /// (matrix indexed [b][p]).
-  DenseMatrix<unsigned> Nrows_to_send_for_get_block;
+    /// \short The number of global rows to be sent of block b to processor p
+    /// (matrix indexed [b][p]).
+    DenseMatrix<unsigned> Nrows_to_send_for_get_block;
 
-  /// \short The block rows to be received from processor p for block b
-  /// (matrix indexed [b][p]).
-  DenseMatrix<int*> Rows_to_recv_for_get_block;
+    /// \short The block rows to be received from processor p for block b
+    /// (matrix indexed [b][p]).
+    DenseMatrix<int*> Rows_to_recv_for_get_block;
 
-  /// \short The number of block rows to be received from processor p for
-  /// block b (matrix indexed [b][p]).
-  DenseMatrix<unsigned> Nrows_to_recv_for_get_block;
+    /// \short The number of block rows to be received from processor p for
+    /// block b (matrix indexed [b][p]).
+    DenseMatrix<unsigned> Nrows_to_recv_for_get_block;
 
-  /// \short The global rows to be sent to processor p for
-  /// get_block_ordered_... type methods.
-  Vector<int*> Rows_to_send_for_get_ordered;
+    /// \short The global rows to be sent to processor p for
+    /// get_block_ordered_... type methods.
+    Vector<int*> Rows_to_send_for_get_ordered;
 
-  /// \short The number global rows to be sent to processor p for
-  /// get_block_ordered_... type methods.
-  Vector<unsigned> Nrows_to_send_for_get_ordered;
+    /// \short The number global rows to be sent to processor p for
+    /// get_block_ordered_... type methods.
+    Vector<unsigned> Nrows_to_send_for_get_ordered;
 
-  /// \short The preconditioner rows to be received from processor p for
-  /// get_block_ordered_... type methods.
-  Vector<int*> Rows_to_recv_for_get_ordered;
+    /// \short The preconditioner rows to be received from processor p for
+    /// get_block_ordered_... type methods.
+    Vector<int*> Rows_to_recv_for_get_ordered;
 
-  /// \short The number of preconditioner rows to be received from processor
-  /// p for get_block_ordered_... type methods.
-  Vector<unsigned> Nrows_to_recv_for_get_ordered;
+    /// \short The number of preconditioner rows to be received from processor
+    /// p for get_block_ordered_... type methods.
+    Vector<unsigned> Nrows_to_recv_for_get_ordered;
 #endif
 
-  /// \short The distribution of the (internal) preconditioner matrix. This is 
-  /// formed by concatenating the distribution of the internal blocks.
-  /// This is obsolete code, maintained for backwards compatibility.
-  /// Below is the old comment:
-  /// 
-  /// - only used if this preconditioner is a master preconditioner. 
-  /// Warning: always use the access function 
-  /// internal_preconditioner_matrix_distribution_pt().
-  LinearAlgebraDistribution* Internal_preconditioner_matrix_distribution_pt;
+    /// \short The distribution of the (internal) preconditioner matrix. This is
+    /// formed by concatenating the distribution of the internal blocks.
+    /// This is obsolete code, maintained for backwards compatibility.
+    /// Below is the old comment:
+    ///
+    /// - only used if this preconditioner is a master preconditioner.
+    /// Warning: always use the access function
+    /// internal_preconditioner_matrix_distribution_pt().
+    LinearAlgebraDistribution* Internal_preconditioner_matrix_distribution_pt;
 
-  /// \short The distribution of the preconditioner matrix. This is the
-  /// concatenation of the block distribution.
-  LinearAlgebraDistribution* Preconditioner_matrix_distribution_pt;
+    /// \short The distribution of the preconditioner matrix. This is the
+    /// concatenation of the block distribution.
+    LinearAlgebraDistribution* Preconditioner_matrix_distribution_pt;
 
-  /// \short Static boolean to allow block_matrix_test(...) to be run.
-  /// Defaults to false.
-  static bool Run_block_matrix_test;
+    /// \short Static boolean to allow block_matrix_test(...) to be run.
+    /// Defaults to false.
+    static bool Run_block_matrix_test;
 
-  /// \short String giving the base of the files to write block data into. If
-  /// empty then do not output blocks. Default is empty.
-  std::string Output_base_filename;
- };
+    /// \short String giving the base of the files to write block data into. If
+    /// empty then do not output blocks. Default is empty.
+    std::string Output_base_filename;
+  };
 
 
-}
+} // namespace oomph
 #endif

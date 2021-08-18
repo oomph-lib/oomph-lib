@@ -1,29 +1,29 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
-//Header file for Navier Stokes elements
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+// Header file for Navier Stokes elements
 
 #ifndef OOMPH_SPHERICAL_NAVIER_STOKES_ELEMENTS_HEADER
 #define OOMPH_SPHERICAL_NAVIER_STOKES_ELEMENTS_HEADER
@@ -34,1190 +34,1328 @@
 #endif
 
 
-//OOMPH-LIB headers 
+// OOMPH-LIB headers
 #include "../generic/Qelements.h"
 #include "../generic/fsi.h"
 //#include "generic/block_preconditioner.h"
 
 namespace oomph
 {
-
-
-//======================================================================
-/// A class for elements that solve the Navier--Stokes equations,
-/// in axisymmetric spherical polar coordinates.
-/// This contains the generic maths -- any concrete implementation must 
-/// be derived from this.
-///
-/// We also provide all functions required to use this element
-/// in FSI problems, by deriving it from the FSIFluidElement base
-/// class. 
-//======================================================================
- class SphericalNavierStokesEquations : public virtual FSIFluidElement,
-    public virtual NavierStokesElementWithDiagonalMassMatrices
-{
-
+  //======================================================================
+  /// A class for elements that solve the Navier--Stokes equations,
+  /// in axisymmetric spherical polar coordinates.
+  /// This contains the generic maths -- any concrete implementation must
+  /// be derived from this.
+  ///
+  /// We also provide all functions required to use this element
+  /// in FSI problems, by deriving it from the FSIFluidElement base
+  /// class.
+  //======================================================================
+  class SphericalNavierStokesEquations
+    : public virtual FSIFluidElement,
+      public virtual NavierStokesElementWithDiagonalMassMatrices
+  {
   public:
+    /// \short Function pointer to body force function fct(t,x,f(x))
+    /// x is a Vector!
+    typedef void (*SphericalNavierStokesBodyForceFctPt)(
+      const double& time, const Vector<double>& x, Vector<double>& body_force);
 
- /// \short Function pointer to body force function fct(t,x,f(x))
- /// x is a Vector!
- typedef void (*SphericalNavierStokesBodyForceFctPt)(
-  const double& time,const Vector<double>& x,Vector<double>& body_force);
-
- /// \short Function pointer to source function fct(t,x)
- /// x is a Vector!
- typedef double (*SphericalNavierStokesSourceFctPt)(const double& time,
-                                           const Vector<double>& x);
+    /// \short Function pointer to source function fct(t,x)
+    /// x is a Vector!
+    typedef double (*SphericalNavierStokesSourceFctPt)(const double& time,
+                                                       const Vector<double>& x);
 
   private:
+    /// \short Static "magic" number that indicates that the pressure is
+    /// not stored at a node
+    static int Pressure_not_stored_at_node;
 
- /// \short Static "magic" number that indicates that the pressure is
- /// not stored at a node
- static int Pressure_not_stored_at_node;
+    /// Static default value for the physical constants (all initialised to
+    /// zero)
+    static double Default_Physical_Constant_Value;
 
- /// Static default value for the physical constants (all initialised to zero)
- static double Default_Physical_Constant_Value;
+    /// Static default value for the physical ratios (all are initialised to
+    /// one)
+    static double Default_Physical_Ratio_Value;
 
- /// Static default value for the physical ratios (all are initialised to one)
- static double Default_Physical_Ratio_Value;
-
- /// Static default value for the gravity vector
- static Vector<double> Default_Gravity_vector; 
+    /// Static default value for the gravity vector
+    static Vector<double> Default_Gravity_vector;
 
   protected:
+    // Physical constants
 
- //Physical constants
+    /// \short Pointer to the viscosity ratio (relative to the
+    /// viscosity used in the definition of the Reynolds number)
+    double* Viscosity_Ratio_pt;
 
- /// \short Pointer to the viscosity ratio (relative to the 
- /// viscosity used in the definition of the Reynolds number)
- double *Viscosity_Ratio_pt;
- 
- /// \short Pointer to the density ratio (relative to the density used in the 
- /// definition of the Reynolds number)
- double *Density_Ratio_pt;
- 
- // Pointers to global physical constants
+    /// \short Pointer to the density ratio (relative to the density used in the
+    /// definition of the Reynolds number)
+    double* Density_Ratio_pt;
 
- /// Pointer to global Reynolds number
- double *Re_pt;
- 
- /// Pointer to global Reynolds number x Strouhal number (=Womersley)
- double *ReSt_pt;
- 
- /// \short Pointer to global Reynolds number x inverse Froude number
- /// (= Bond number / Capillary number) 
- double *ReInvFr_pt;
+    // Pointers to global physical constants
 
- /// \short Pointer to global Reynolds number x inverse Rossby number
- /// (used when in a rotating frame)
- double *ReInvRo_pt;
+    /// Pointer to global Reynolds number
+    double* Re_pt;
 
- /// Pointer to global gravity Vector
- Vector<double> *G_pt;
- 
- /// Pointer to body force function
- SphericalNavierStokesBodyForceFctPt Body_force_fct_pt;
- 
- /// Pointer to volumetric source function
- SphericalNavierStokesSourceFctPt Source_fct_pt;
+    /// Pointer to global Reynolds number x Strouhal number (=Womersley)
+    double* ReSt_pt;
 
- /// \short Boolean flag to indicate if ALE formulation is disabled when
- /// time-derivatives are computed. Only set to true if you're sure
- /// that the mesh is stationary.
- bool ALE_is_disabled;
- 
- /// \short Access function for the local equation number information for
- /// the pressure.
- /// p_local_eqn[n] = local equation number or < 0 if pinned
- virtual int p_local_eqn(const unsigned &n)const=0;
+    /// \short Pointer to global Reynolds number x inverse Froude number
+    /// (= Bond number / Capillary number)
+    double* ReInvFr_pt;
 
- /// \short Compute the shape functions and derivatives 
- /// w.r.t. global coords at local coordinate s.
- /// Return Jacobian of mapping between local and global coordinates.
- virtual double dshape_and_dtest_eulerian_spherical_nst(
-  const Vector<double> &s, 
-  Shape &psi, 
-  DShape &dpsidx, Shape &test, 
-  DShape &dtestdx) const=0;
+    /// \short Pointer to global Reynolds number x inverse Rossby number
+    /// (used when in a rotating frame)
+    double* ReInvRo_pt;
 
- /// \short Compute the shape functions and derivatives 
- /// w.r.t. global coords at ipt-th integration point
- /// Return Jacobian of mapping between local and global coordinates.
- virtual double dshape_and_dtest_eulerian_at_knot_spherical_nst(
-  const unsigned &ipt, 
-  Shape &psi, 
-  DShape &dpsidx, 
-  Shape &test, 
-  DShape &dtestdx) const=0;
+    /// Pointer to global gravity Vector
+    Vector<double>* G_pt;
 
- /// Compute the pressure shape functions at local coordinate s
- virtual void pshape_spherical_nst(const Vector<double> &s, Shape &psi) 
-  const=0;
- 
- /// \short Compute the pressure shape and test functions 
- /// at local coordinate s
- virtual void pshape_spherical_nst(const Vector<double> &s, Shape &psi, 
-                         Shape &test) const=0;
- 
+    /// Pointer to body force function
+    SphericalNavierStokesBodyForceFctPt Body_force_fct_pt;
 
- /// \short Calculate the body force at a given time and local and/or 
- /// Eulerian position. This function is virtual so that it can be 
- /// overloaded in multi-physics elements where the body force might
- /// depend on another variable.
- virtual void get_body_force_spherical_nst(const double &time,
-                                           const unsigned& ipt,
-                                           const Vector<double> &s,
-                                           const Vector<double> &x, 
-                                           Vector<double> &result)
-  {
-   //If the function pointer is zero return zero
-   if(Body_force_fct_pt == 0)
+    /// Pointer to volumetric source function
+    SphericalNavierStokesSourceFctPt Source_fct_pt;
+
+    /// \short Boolean flag to indicate if ALE formulation is disabled when
+    /// time-derivatives are computed. Only set to true if you're sure
+    /// that the mesh is stationary.
+    bool ALE_is_disabled;
+
+    /// \short Access function for the local equation number information for
+    /// the pressure.
+    /// p_local_eqn[n] = local equation number or < 0 if pinned
+    virtual int p_local_eqn(const unsigned& n) const = 0;
+
+    /// \short Compute the shape functions and derivatives
+    /// w.r.t. global coords at local coordinate s.
+    /// Return Jacobian of mapping between local and global coordinates.
+    virtual double dshape_and_dtest_eulerian_spherical_nst(
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
+
+    /// \short Compute the shape functions and derivatives
+    /// w.r.t. global coords at ipt-th integration point
+    /// Return Jacobian of mapping between local and global coordinates.
+    virtual double dshape_and_dtest_eulerian_at_knot_spherical_nst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
+
+    /// Compute the pressure shape functions at local coordinate s
+    virtual void pshape_spherical_nst(const Vector<double>& s,
+                                      Shape& psi) const = 0;
+
+    /// \short Compute the pressure shape and test functions
+    /// at local coordinate s
+    virtual void pshape_spherical_nst(const Vector<double>& s,
+                                      Shape& psi,
+                                      Shape& test) const = 0;
+
+
+    /// \short Calculate the body force at a given time and local and/or
+    /// Eulerian position. This function is virtual so that it can be
+    /// overloaded in multi-physics elements where the body force might
+    /// depend on another variable.
+    virtual void get_body_force_spherical_nst(const double& time,
+                                              const unsigned& ipt,
+                                              const Vector<double>& s,
+                                              const Vector<double>& x,
+                                              Vector<double>& result)
     {
-     //Loop over three spatial dimensions and set body forces to zero
-     for(unsigned i=0;i<3;i++) {result[i] = 0.0;}
-    }
-   //Otherwise call the function
-   else
-    {
-     (*Body_force_fct_pt)(time,x,result);
-    }
-  }
-
- /// \short Calculate the source fct at given time and
- /// Eulerian position 
- virtual double get_source_spherical_nst(double time, const unsigned& ipt,
-                                         const Vector<double> &x)
-  {
-   //If the function pointer is zero return zero
-   if (Source_fct_pt == 0) {return 0;}
-   //Otherwise call the function
-   else {return (*Source_fct_pt)(time,x);}
-  }
- 
- ///\short Compute the residuals for the Navier--Stokes equations; 
- /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
- virtual void fill_in_generic_residual_contribution_spherical_nst(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  DenseMatrix<double> &mass_matrix, unsigned flag);
-
-    
-public:
-
- /// Include a cot function to simplify the 
- /// NS momentum and jacobian expressions
- inline double cot(const double &th) const {return(1/tan(th));}
- 
-
- /// \short Constructor: NULL the body force and source function
- /// and make sure the ALE terms are included by default.
- SphericalNavierStokesEquations() : Body_force_fct_pt(0), Source_fct_pt(0),
-  ALE_is_disabled(false) 
-  {
-   //Set all the Physical parameter pointers to the default value zero
-   Re_pt = &Default_Physical_Constant_Value;
-   ReSt_pt = &Default_Physical_Constant_Value;
-   ReInvFr_pt = &Default_Physical_Constant_Value;
-   ReInvRo_pt = &Default_Physical_Constant_Value;
-   G_pt = &Default_Gravity_vector;
-   //Set the Physical ratios to the default value of 1
-   Viscosity_Ratio_pt = &Default_Physical_Ratio_Value;
-   Density_Ratio_pt = &Default_Physical_Ratio_Value;
-  }
-
- /// Vector to decide whether the stress-divergence form is used or not
- // N.B. This needs to be public so that the intel compiler gets things correct
- // somehow the access function messes things up when going to refineable
- // navier--stokes
- static Vector<double> Gamma;
-
- //Access functions for the physical constants
-
- /// Reynolds number
- const double &re() const {return *Re_pt;}
-
- /// Product of Reynolds and Strouhal number (=Womersley number)
- const double &re_st() const {return *ReSt_pt;}
-
- /// Pointer to Reynolds number
- double* &re_pt() {return Re_pt;}
-
- /// Pointer to product of Reynolds and Strouhal number (=Womersley number)
- double* &re_st_pt() {return ReSt_pt;}
-
- /// \short Viscosity ratio for element: Element's viscosity relative to the 
- /// viscosity used in the definition of the Reynolds number
- const double &viscosity_ratio() const {return *Viscosity_Ratio_pt;}
-
- /// Pointer to Viscosity Ratio
- double* &viscosity_ratio_pt() {return Viscosity_Ratio_pt;}
-
- /// \short Density ratio for element: Element's density relative to the 
- ///  viscosity used in the definition of the Reynolds number
- const double &density_ratio() const {return *Density_Ratio_pt;}
-
- /// Pointer to Density ratio
- double* &density_ratio_pt() {return Density_Ratio_pt;}
-
- /// Global inverse Froude number
- const double &re_invfr() const {return *ReInvFr_pt;}
-
- /// Pointer to global inverse Froude number
- double* &re_invfr_pt() {return ReInvFr_pt;}
- 
-  /// Global Reynolds number multiplied by inverse Rossby number
- const double &re_invro() const {return *ReInvRo_pt;}
-
- /// Pointer to global inverse Froude number
- double* &re_invro_pt() {return ReInvRo_pt;}
-
- /// Vector of gravitational components
- const Vector<double> &g() const {return *G_pt;}
-
- /// Pointer to Vector of gravitational components
- Vector<double>* &g_pt() {return G_pt;}
-
- /// Access function for the body-force pointer
- SphericalNavierStokesBodyForceFctPt& body_force_fct_pt() 
-  {return Body_force_fct_pt;}
-
- /// Access function for the body-force pointer. Const version
- SphericalNavierStokesBodyForceFctPt body_force_fct_pt() const
-  {return Body_force_fct_pt;}
- 
- ///Access function for the source-function pointer
- SphericalNavierStokesSourceFctPt& source_fct_pt() {return Source_fct_pt;}
-
- ///Access function for the source-function pointer. Const version
- SphericalNavierStokesSourceFctPt source_fct_pt() const {return Source_fct_pt;}
- 
- ///Function to return number of pressure degrees of freedom
- virtual unsigned npres_spherical_nst() const=0;
- 
- /// \short Velocity i at local node n. Uses suitably interpolated value 
- /// for hanging nodes. 
- /// The use of u_index_spherical_nst() permits the use of this
- /// element as the basis for multi-physics elements. The default
- /// is to assume that the i-th velocity component is stored at the
- /// i-th location of the node
- double u_spherical_nst(const unsigned &n, const unsigned &i) const
-  {return nodal_value(n,u_index_spherical_nst(i));}
-
- /// \short Velocity i at local node n at timestep t (t=0: present; 
- /// t>0: previous). Uses suitably interpolated value for hanging nodes.
- double u_spherical_nst(const unsigned &t, const unsigned &n, 
-              const unsigned &i) const
-  {return nodal_value(t,n,u_index_spherical_nst(i));}
- 
-  /// \short Return the index at which the i-th unknown velocity component
- /// is stored. The default value, i, is appropriate for single-physics
- /// problems.
- /// In derived multi-physics elements, this function should be overloaded
- /// to reflect the chosen storage scheme. Note that these equations require
- /// that the unknowns are always stored at the same indices at each node.
- virtual inline unsigned u_index_spherical_nst(const unsigned &i) 
-  const {return i;}
-
-
- /// \short i-th component of du/dt at local node n. 
- /// Uses suitably interpolated value for hanging nodes.
- double du_dt_spherical_nst(const unsigned &n, const unsigned &i) const
-  {
-   // Get the data's timestepper
-   TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
-
-   //Initialise dudt
-   double dudt=0.0;
-
-   //Loop over the timesteps, if there is a non Steady timestepper
-   if (time_stepper_pt->type()!="Steady")
-    {
-     //Find the index at which the dof is stored
-     const unsigned u_nodal_index = this->u_index_spherical_nst(i);
-     
-     // Number of timsteps (past & present)
-     const unsigned n_time = time_stepper_pt->ntstorage();
-     // Loop over the timesteps
-     for(unsigned t=0;t<n_time;t++)
+      // If the function pointer is zero return zero
+      if (Body_force_fct_pt == 0)
       {
-       dudt+=time_stepper_pt->weight(1,t)*nodal_value(t,n,u_nodal_index);
+        // Loop over three spatial dimensions and set body forces to zero
+        for (unsigned i = 0; i < 3; i++)
+        {
+          result[i] = 0.0;
+        }
+      }
+      // Otherwise call the function
+      else
+      {
+        (*Body_force_fct_pt)(time, x, result);
       }
     }
-   
-   return dudt;
-  }
 
- /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
- /// at your own risk!
- void disable_ALE()
-  {
-   ALE_is_disabled=true;
-  }
+    /// \short Calculate the source fct at given time and
+    /// Eulerian position
+    virtual double get_source_spherical_nst(double time,
+                                            const unsigned& ipt,
+                                            const Vector<double>& x)
+    {
+      // If the function pointer is zero return zero
+      if (Source_fct_pt == 0)
+      {
+        return 0;
+      }
+      // Otherwise call the function
+      else
+      {
+        return (*Source_fct_pt)(time, x);
+      }
+    }
 
- /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
- /// when evaluating the time-derivative. Note: By default, ALE is
- /// enabled, at the expense of possibly creating unnecessary work
- /// in problems where the mesh is, in fact, stationary.
- void enable_ALE()
-  {
-   ALE_is_disabled=false;
-  }
-
- /// \short Pressure at local pressure "node" n_p
- /// Uses suitably interpolated value for hanging nodes.
- virtual double p_spherical_nst(const unsigned &n_p)const=0; 
-
- /// Pin p_dof-th pressure dof and set it to value specified by p_value.
- virtual void fix_pressure(const unsigned &p_dof, const double &p_value)=0;
-
- /// \short Return the index at which the pressure is stored if it is
- /// stored at the nodes. If not stored at the nodes this will return 
- /// a negative number.
- virtual int p_nodal_index_spherical_nst() const 
-  {return Pressure_not_stored_at_node;}
- 
- /// Integral of pressure over element
- double pressure_integral() const;
-
- /// \short Return integral of dissipation over element
- double dissipation() const;
- 
- /// \short Return dissipation at local coordinate s
- double dissipation(const Vector<double>& s) const;
-
- /// \short Compute the vorticity vector at local coordinate s
- void get_vorticity(const Vector<double>& s, Vector<double>& vorticity) const;
-
- /// \short Get integral of kinetic energy over element
- double kin_energy() const;
-
- /// \short Get integral of time derivative of kinetic energy over element
- double d_kin_energy_dt() const;
-
- /// Strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
- void strain_rate(const Vector<double>& s, 
-                  DenseMatrix<double>& strain_rate) const;
- 
- /// \short Compute traction (on the viscous scale) exerted onto 
- /// the fluid at local coordinate s. N has to be outer unit normal
- /// to the fluid. 
- void get_traction(const Vector<double>& s, const Vector<double>& N, 
-                   Vector<double>& traction);
+    ///\short Compute the residuals for the Navier--Stokes equations;
+    /// flag=1(or 0): do (or don't) compute the Jacobian as well.
+    virtual void fill_in_generic_residual_contribution_spherical_nst(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      unsigned flag);
 
 
- /// \short This implements a pure virtual function defined
- /// in the FSIFluidElement class. The function computes
- /// the traction (on the viscous scale), at the element's local 
- /// coordinate s, that the fluid element exerts onto an adjacent
- /// solid element. The number of arguments is imposed by
- /// the interface defined in the FSIFluidElement -- only the 
- /// unit normal N (pointing into the fluid!) is actually used
- /// in the computation. 
- void get_load(const Vector<double> &s, 
-               const Vector<double> &N,
-               Vector<double> &load)
-  {
-   // Note: get_traction() computes the traction onto the fluid
-   // if N is the outer unit normal onto the fluid; here we're
-   // exepcting N to point into the fluid so we're getting the
-   // traction onto the adjacent wall instead!
-   get_traction(s,N,load);
-  }
-
- /// \short Compute the diagonal of the velocity/pressure mass matrices.
- /// If which one=0, both are computed, otherwise only the pressure 
- /// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
- /// LSC version of the preconditioner only needs that one)
- /// NOTE: pressure versions isn't implemented yet because this
- ///       element has never been tried with Fp preconditoner.
- void get_pressure_and_velocity_mass_matrix_diagonal(
-  Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
-  const unsigned& which_one=0);
+  public:
+    /// Include a cot function to simplify the
+    /// NS momentum and jacobian expressions
+    inline double cot(const double& th) const
+    {
+      return (1 / tan(th));
+    }
 
 
- /// \short Output function: x,y,[z],u,v,[w],p
- /// in tecplot format. Default number of plot points
- void output(std::ostream &outfile)
-  {
-   unsigned nplot=5;
-   output(outfile,nplot);
-  }
+    /// \short Constructor: NULL the body force and source function
+    /// and make sure the ALE terms are included by default.
+    SphericalNavierStokesEquations()
+      : Body_force_fct_pt(0), Source_fct_pt(0), ALE_is_disabled(false)
+    {
+      // Set all the Physical parameter pointers to the default value zero
+      Re_pt = &Default_Physical_Constant_Value;
+      ReSt_pt = &Default_Physical_Constant_Value;
+      ReInvFr_pt = &Default_Physical_Constant_Value;
+      ReInvRo_pt = &Default_Physical_Constant_Value;
+      G_pt = &Default_Gravity_vector;
+      // Set the Physical ratios to the default value of 1
+      Viscosity_Ratio_pt = &Default_Physical_Ratio_Value;
+      Density_Ratio_pt = &Default_Physical_Ratio_Value;
+    }
 
- /// \short Output function: x,y,[z],u,v,[w],p
- /// in tecplot format. nplot points in each coordinate direction
- void output(std::ostream &outfile, const unsigned &nplot);
+    /// Vector to decide whether the stress-divergence form is used or not
+    // N.B. This needs to be public so that the intel compiler gets things
+    // correct somehow the access function messes things up when going to
+    // refineable navier--stokes
+    static Vector<double> Gamma;
 
- /// \short C-style output function: x,y,[z],u,v,[w],p
- /// in tecplot format. Default number of plot points
- void output(FILE* file_pt)
-  {
-   unsigned nplot=5;
-   output(file_pt,nplot);
-  }
+    // Access functions for the physical constants
 
- /// \short C-style output function: x,y,[z],u,v,[w],p
- /// in tecplot format. nplot points in each coordinate direction
- void output(FILE* file_pt, const unsigned &nplot);
+    /// Reynolds number
+    const double& re() const
+    {
+      return *Re_pt;
+    }
 
- /// \short Full output function: 
- /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
- /// in tecplot format. Default number of plot points
- void full_output(std::ostream &outfile) 
-  {
-   unsigned nplot=5;
-   full_output(outfile,nplot);
-  }
+    /// Product of Reynolds and Strouhal number (=Womersley number)
+    const double& re_st() const
+    {
+      return *ReSt_pt;
+    }
 
- /// \short Full output function: 
- /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
- /// in tecplot format. nplot points in each coordinate direction
- void full_output(std::ostream &outfile, const unsigned &nplot);
+    /// Pointer to Reynolds number
+    double*& re_pt()
+    {
+      return Re_pt;
+    }
+
+    /// Pointer to product of Reynolds and Strouhal number (=Womersley number)
+    double*& re_st_pt()
+    {
+      return ReSt_pt;
+    }
+
+    /// \short Viscosity ratio for element: Element's viscosity relative to the
+    /// viscosity used in the definition of the Reynolds number
+    const double& viscosity_ratio() const
+    {
+      return *Viscosity_Ratio_pt;
+    }
+
+    /// Pointer to Viscosity Ratio
+    double*& viscosity_ratio_pt()
+    {
+      return Viscosity_Ratio_pt;
+    }
+
+    /// \short Density ratio for element: Element's density relative to the
+    ///  viscosity used in the definition of the Reynolds number
+    const double& density_ratio() const
+    {
+      return *Density_Ratio_pt;
+    }
+
+    /// Pointer to Density ratio
+    double*& density_ratio_pt()
+    {
+      return Density_Ratio_pt;
+    }
+
+    /// Global inverse Froude number
+    const double& re_invfr() const
+    {
+      return *ReInvFr_pt;
+    }
+
+    /// Pointer to global inverse Froude number
+    double*& re_invfr_pt()
+    {
+      return ReInvFr_pt;
+    }
+
+    /// Global Reynolds number multiplied by inverse Rossby number
+    const double& re_invro() const
+    {
+      return *ReInvRo_pt;
+    }
+
+    /// Pointer to global inverse Froude number
+    double*& re_invro_pt()
+    {
+      return ReInvRo_pt;
+    }
+
+    /// Vector of gravitational components
+    const Vector<double>& g() const
+    {
+      return *G_pt;
+    }
+
+    /// Pointer to Vector of gravitational components
+    Vector<double>*& g_pt()
+    {
+      return G_pt;
+    }
+
+    /// Access function for the body-force pointer
+    SphericalNavierStokesBodyForceFctPt& body_force_fct_pt()
+    {
+      return Body_force_fct_pt;
+    }
+
+    /// Access function for the body-force pointer. Const version
+    SphericalNavierStokesBodyForceFctPt body_force_fct_pt() const
+    {
+      return Body_force_fct_pt;
+    }
+
+    /// Access function for the source-function pointer
+    SphericalNavierStokesSourceFctPt& source_fct_pt()
+    {
+      return Source_fct_pt;
+    }
+
+    /// Access function for the source-function pointer. Const version
+    SphericalNavierStokesSourceFctPt source_fct_pt() const
+    {
+      return Source_fct_pt;
+    }
+
+    /// Function to return number of pressure degrees of freedom
+    virtual unsigned npres_spherical_nst() const = 0;
+
+    /// \short Velocity i at local node n. Uses suitably interpolated value
+    /// for hanging nodes.
+    /// The use of u_index_spherical_nst() permits the use of this
+    /// element as the basis for multi-physics elements. The default
+    /// is to assume that the i-th velocity component is stored at the
+    /// i-th location of the node
+    double u_spherical_nst(const unsigned& n, const unsigned& i) const
+    {
+      return nodal_value(n, u_index_spherical_nst(i));
+    }
+
+    /// \short Velocity i at local node n at timestep t (t=0: present;
+    /// t>0: previous). Uses suitably interpolated value for hanging nodes.
+    double u_spherical_nst(const unsigned& t,
+                           const unsigned& n,
+                           const unsigned& i) const
+    {
+      return nodal_value(t, n, u_index_spherical_nst(i));
+    }
+
+    /// \short Return the index at which the i-th unknown velocity component
+    /// is stored. The default value, i, is appropriate for single-physics
+    /// problems.
+    /// In derived multi-physics elements, this function should be overloaded
+    /// to reflect the chosen storage scheme. Note that these equations require
+    /// that the unknowns are always stored at the same indices at each node.
+    virtual inline unsigned u_index_spherical_nst(const unsigned& i) const
+    {
+      return i;
+    }
 
 
- /// \short Output function: x,y,[z],u,v,[w] in tecplot format.
- /// nplot points in each coordinate direction at timestep t
- /// (t=0: present; t>0: previous timestep)
- void output_veloc(std::ostream &outfile, const unsigned &nplot, 
-                   const unsigned& t);
+    /// \short i-th component of du/dt at local node n.
+    /// Uses suitably interpolated value for hanging nodes.
+    double du_dt_spherical_nst(const unsigned& n, const unsigned& i) const
+    {
+      // Get the data's timestepper
+      TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
+
+      // Initialise dudt
+      double dudt = 0.0;
+
+      // Loop over the timesteps, if there is a non Steady timestepper
+      if (time_stepper_pt->type() != "Steady")
+      {
+        // Find the index at which the dof is stored
+        const unsigned u_nodal_index = this->u_index_spherical_nst(i);
+
+        // Number of timsteps (past & present)
+        const unsigned n_time = time_stepper_pt->ntstorage();
+        // Loop over the timesteps
+        for (unsigned t = 0; t < n_time; t++)
+        {
+          dudt +=
+            time_stepper_pt->weight(1, t) * nodal_value(t, n, u_nodal_index);
+        }
+      }
+
+      return dudt;
+    }
+
+    /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
+    /// at your own risk!
+    void disable_ALE()
+    {
+      ALE_is_disabled = true;
+    }
+
+    /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
+    /// when evaluating the time-derivative. Note: By default, ALE is
+    /// enabled, at the expense of possibly creating unnecessary work
+    /// in problems where the mesh is, in fact, stationary.
+    void enable_ALE()
+    {
+      ALE_is_disabled = false;
+    }
+
+    /// \short Pressure at local pressure "node" n_p
+    /// Uses suitably interpolated value for hanging nodes.
+    virtual double p_spherical_nst(const unsigned& n_p) const = 0;
+
+    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+    virtual void fix_pressure(const unsigned& p_dof, const double& p_value) = 0;
+
+    /// \short Return the index at which the pressure is stored if it is
+    /// stored at the nodes. If not stored at the nodes this will return
+    /// a negative number.
+    virtual int p_nodal_index_spherical_nst() const
+    {
+      return Pressure_not_stored_at_node;
+    }
+
+    /// Integral of pressure over element
+    double pressure_integral() const;
+
+    /// \short Return integral of dissipation over element
+    double dissipation() const;
+
+    /// \short Return dissipation at local coordinate s
+    double dissipation(const Vector<double>& s) const;
+
+    /// \short Compute the vorticity vector at local coordinate s
+    void get_vorticity(const Vector<double>& s,
+                       Vector<double>& vorticity) const;
+
+    /// \short Get integral of kinetic energy over element
+    double kin_energy() const;
+
+    /// \short Get integral of time derivative of kinetic energy over element
+    double d_kin_energy_dt() const;
+
+    /// Strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
+    void strain_rate(const Vector<double>& s,
+                     DenseMatrix<double>& strain_rate) const;
+
+    /// \short Compute traction (on the viscous scale) exerted onto
+    /// the fluid at local coordinate s. N has to be outer unit normal
+    /// to the fluid.
+    void get_traction(const Vector<double>& s,
+                      const Vector<double>& N,
+                      Vector<double>& traction);
 
 
- /// \short Output function: x,y,[z], [omega_x,omega_y,[and/or omega_z]] 
- /// in tecplot format. nplot points in each coordinate direction
- void output_vorticity(std::ostream &outfile, 
-                       const unsigned &nplot);
+    /// \short This implements a pure virtual function defined
+    /// in the FSIFluidElement class. The function computes
+    /// the traction (on the viscous scale), at the element's local
+    /// coordinate s, that the fluid element exerts onto an adjacent
+    /// solid element. The number of arguments is imposed by
+    /// the interface defined in the FSIFluidElement -- only the
+    /// unit normal N (pointing into the fluid!) is actually used
+    /// in the computation.
+    void get_load(const Vector<double>& s,
+                  const Vector<double>& N,
+                  Vector<double>& load)
+    {
+      // Note: get_traction() computes the traction onto the fluid
+      // if N is the outer unit normal onto the fluid; here we're
+      // exepcting N to point into the fluid so we're getting the
+      // traction onto the adjacent wall instead!
+      get_traction(s, N, load);
+    }
 
- /// \short Output exact solution specified via function pointer
- /// at a given number of plot points. Function prints as
- /// many components as are returned in solution Vector
- void output_fct(std::ostream &outfile, const unsigned &nplot, 
-                 FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+    /// \short Compute the diagonal of the velocity/pressure mass matrices.
+    /// If which one=0, both are computed, otherwise only the pressure
+    /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
+    /// LSC version of the preconditioner only needs that one)
+    /// NOTE: pressure versions isn't implemented yet because this
+    ///       element has never been tried with Fp preconditoner.
+    void get_pressure_and_velocity_mass_matrix_diagonal(
+      Vector<double>& press_mass_diag,
+      Vector<double>& veloc_mass_diag,
+      const unsigned& which_one = 0);
 
- /// \short Output exact solution specified via function pointer
- /// at a given time and at a given number of plot points.
- /// Function prints as many components as are returned in solution Vector.
- void output_fct(std::ostream &outfile, const unsigned &nplot, 
-                 const double& time,
-                 FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
- /// \short Validate against exact solution at given time
- /// Solution is provided via function pointer.
- /// Plot at a given number of plot points and compute L2 error
- /// and L2 norm of velocity solution over element
- void compute_error(std::ostream &outfile,
-                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+    /// \short Output function: x,y,[z],u,v,[w],p
+    /// in tecplot format. Default number of plot points
+    void output(std::ostream& outfile)
+    {
+      unsigned nplot = 5;
+      output(outfile, nplot);
+    }
+
+    /// \short Output function: x,y,[z],u,v,[w],p
+    /// in tecplot format. nplot points in each coordinate direction
+    void output(std::ostream& outfile, const unsigned& nplot);
+
+    /// \short C-style output function: x,y,[z],u,v,[w],p
+    /// in tecplot format. Default number of plot points
+    void output(FILE* file_pt)
+    {
+      unsigned nplot = 5;
+      output(file_pt, nplot);
+    }
+
+    /// \short C-style output function: x,y,[z],u,v,[w],p
+    /// in tecplot format. nplot points in each coordinate direction
+    void output(FILE* file_pt, const unsigned& nplot);
+
+    /// \short Full output function:
+    /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
+    /// in tecplot format. Default number of plot points
+    void full_output(std::ostream& outfile)
+    {
+      unsigned nplot = 5;
+      full_output(outfile, nplot);
+    }
+
+    /// \short Full output function:
+    /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
+    /// in tecplot format. nplot points in each coordinate direction
+    void full_output(std::ostream& outfile, const unsigned& nplot);
+
+
+    /// \short Output function: x,y,[z],u,v,[w] in tecplot format.
+    /// nplot points in each coordinate direction at timestep t
+    /// (t=0: present; t>0: previous timestep)
+    void output_veloc(std::ostream& outfile,
+                      const unsigned& nplot,
+                      const unsigned& t);
+
+
+    /// \short Output function: x,y,[z], [omega_x,omega_y,[and/or omega_z]]
+    /// in tecplot format. nplot points in each coordinate direction
+    void output_vorticity(std::ostream& outfile, const unsigned& nplot);
+
+    /// \short Output exact solution specified via function pointer
+    /// at a given number of plot points. Function prints as
+    /// many components as are returned in solution Vector
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
+                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+
+    /// \short Output exact solution specified via function pointer
+    /// at a given time and at a given number of plot points.
+    /// Function prints as many components as are returned in solution Vector.
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
                     const double& time,
-                    double& error, double& norm);
+                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
- /// \short Validate against exact solution.
- /// Solution is provided via function pointer.
- /// Plot at a given number of plot points and compute L2 error
- /// and L2 norm of velocity solution over element
- void compute_error(std::ostream &outfile,
-                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                    double& error, double& norm);
-                    
- /// Validate against exact solution.
- /// Solution is provided direct from exact_soln function.
- /// Plot at a given number of plot points and compute the energy error
- /// and energy norm of the velocity solution over the element.
- void compute_error_e(std::ostream &outfile,
-                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                      FiniteElement::SteadyExactSolutionFctPt exact_soln_dr_pt,
-                      FiniteElement::SteadyExactSolutionFctPt 
-                      exact_soln_dtheta_pt,
-                      double& u_error, double& u_norm, 
-                      double& p_error, double& p_norm);
- 
- // Listing for the shear stress function
- void compute_shear_stress(std::ostream &outfile);
- 
- // Listing for the velocity extraction function
- void extract_velocity(std::ostream &outfile);
- 
- // Calculate the analytic solution at the point x and output a vector
- Vector<double> actual (const Vector<double> &x)
-  { 
-   const double Re = this->re();
-   
-   double r = x[0];
-   double theta = x[1];
-   Vector<double> ans(4,0.0);
-   
-   ans[2] = r*sin(theta);
-   ans[3] = 0.5*Re*r*r*sin(theta)*sin(theta);
-   
-   return(ans);
-  }
- 
- // Calculate the r-derivatives of the analytic solution at the point x and output a vector
- Vector<double> actual_dr (const Vector<double> &x)
-  {
-   const double Re = this->re();
-		
-   double r = x[0];
-   double theta = x[1];
-   Vector<double> ans(4,0.0);
-   
-   ans[2] = sin(theta);
-   ans[3] = Re*r*sin(theta)*sin(theta);
-   
-   return(ans);	
-  }
- 
-	// Calculate the theta-derivatives of the analytic solution at the point x and output a vector
- Vector<double> actual_dth (const Vector<double> &x)
-  {
-   const double Re = this->re();
-   
-   double r = x[0];
-   double theta = x[1];
-   Vector<double> ans(4,0.0);
-   
-   ans[2] = r*cos(theta);
-   ans[3] = Re*r*r*sin(theta)*cos(theta);
-		
-   return(ans);	
-  }
+    /// \short Validate against exact solution at given time
+    /// Solution is provided via function pointer.
+    /// Plot at a given number of plot points and compute L2 error
+    /// and L2 norm of velocity solution over element
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                       const double& time,
+                       double& error,
+                       double& norm);
 
- /// Compute the element's residual Vector
- void fill_in_contribution_to_residuals(Vector<double> &residuals)
-  {
-   //Call the generic residuals function with flag set to 0
-   //and using a dummy matrix argument
-   fill_in_generic_residual_contribution_spherical_nst(
-    residuals,GeneralisedElement::Dummy_matrix,
-    GeneralisedElement::Dummy_matrix,0);
-  }
+    /// \short Validate against exact solution.
+    /// Solution is provided via function pointer.
+    /// Plot at a given number of plot points and compute L2 error
+    /// and L2 norm of velocity solution over element
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                       double& error,
+                       double& norm);
 
- //\short Compute the element's residual Vector and the jacobian matrix
- // Virtual function can be overloaded by hanging-node version
- void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                   DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   fill_in_generic_residual_contribution_spherical_nst(
-    residuals, jacobian,
-    GeneralisedElement::Dummy_matrix,1);
-  }
- 
-  /// Add the element's contribution to its residuals vector,
- /// jacobian matrix and mass matrix
- void fill_in_contribution_to_jacobian_and_mass_matrix(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  DenseMatrix<double> &mass_matrix)
-  {
-   //Call the generic routine with the flag set to 2
-   fill_in_generic_residual_contribution_spherical_nst(residuals,
-                                                       jacobian,mass_matrix,2);
-  }
+    /// Validate against exact solution.
+    /// Solution is provided direct from exact_soln function.
+    /// Plot at a given number of plot points and compute the energy error
+    /// and energy norm of the velocity solution over the element.
+    void compute_error_e(
+      std::ostream& outfile,
+      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+      FiniteElement::SteadyExactSolutionFctPt exact_soln_dr_pt,
+      FiniteElement::SteadyExactSolutionFctPt exact_soln_dtheta_pt,
+      double& u_error,
+      double& u_norm,
+      double& p_error,
+      double& p_norm);
 
- /// Compute vector of FE interpolated velocity u at local coordinate s
- void interpolated_u_spherical_nst(const Vector<double> &s, Vector<double>& veloc) const
-  {
-   //Find number of nodes
-   unsigned n_node = nnode();
-   //Local shape function
-   Shape psi(n_node);
-   //Find values of shape function
-   shape(s,psi);
-   
-   for (unsigned i=0;i<3;i++)
+    // Listing for the shear stress function
+    void compute_shear_stress(std::ostream& outfile);
+
+    // Listing for the velocity extraction function
+    void extract_velocity(std::ostream& outfile);
+
+    // Calculate the analytic solution at the point x and output a vector
+    Vector<double> actual(const Vector<double>& x)
     {
-     //Index at which the nodal value is stored
-     unsigned u_nodal_index = u_index_spherical_nst(i);
-     //Initialise value of u
-     veloc[i] = 0.0;
-     //Loop over the local nodes and sum
-     for(unsigned l=0;l<n_node;l++) 
+      const double Re = this->re();
+
+      double r = x[0];
+      double theta = x[1];
+      Vector<double> ans(4, 0.0);
+
+      ans[2] = r * sin(theta);
+      ans[3] = 0.5 * Re * r * r * sin(theta) * sin(theta);
+
+      return (ans);
+    }
+
+    // Calculate the r-derivatives of the analytic solution at the point x and
+    // output a vector
+    Vector<double> actual_dr(const Vector<double>& x)
+    {
+      const double Re = this->re();
+
+      double r = x[0];
+      double theta = x[1];
+      Vector<double> ans(4, 0.0);
+
+      ans[2] = sin(theta);
+      ans[3] = Re * r * sin(theta) * sin(theta);
+
+      return (ans);
+    }
+
+    // Calculate the theta-derivatives of the analytic solution at the point x
+    // and output a vector
+    Vector<double> actual_dth(const Vector<double>& x)
+    {
+      const double Re = this->re();
+
+      double r = x[0];
+      double theta = x[1];
+      Vector<double> ans(4, 0.0);
+
+      ans[2] = r * cos(theta);
+      ans[3] = Re * r * r * sin(theta) * cos(theta);
+
+      return (ans);
+    }
+
+    /// Compute the element's residual Vector
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      // Call the generic residuals function with flag set to 0
+      // and using a dummy matrix argument
+      fill_in_generic_residual_contribution_spherical_nst(
+        residuals,
+        GeneralisedElement::Dummy_matrix,
+        GeneralisedElement::Dummy_matrix,
+        0);
+    }
+
+    //\short Compute the element's residual Vector and the jacobian matrix
+    // Virtual function can be overloaded by hanging-node version
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution_spherical_nst(
+        residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
+    }
+
+    /// Add the element's contribution to its residuals vector,
+    /// jacobian matrix and mass matrix
+    void fill_in_contribution_to_jacobian_and_mass_matrix(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
+    {
+      // Call the generic routine with the flag set to 2
+      fill_in_generic_residual_contribution_spherical_nst(
+        residuals, jacobian, mass_matrix, 2);
+    }
+
+    /// Compute vector of FE interpolated velocity u at local coordinate s
+    void interpolated_u_spherical_nst(const Vector<double>& s,
+                                      Vector<double>& veloc) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+      // Local shape function
+      Shape psi(n_node);
+      // Find values of shape function
+      shape(s, psi);
+
+      for (unsigned i = 0; i < 3; i++)
       {
-       veloc[i] += nodal_value(l,u_nodal_index)*psi[l];
+        // Index at which the nodal value is stored
+        unsigned u_nodal_index = u_index_spherical_nst(i);
+        // Initialise value of u
+        veloc[i] = 0.0;
+        // Loop over the local nodes and sum
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          veloc[i] += nodal_value(l, u_nodal_index) * psi[l];
+        }
+      }
+    }
+
+    /// Return FE interpolated velocity u[i] at local coordinate s
+    double interpolated_u_spherical_nst(const Vector<double>& s,
+                                        const unsigned& i) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+      // Local shape function
+      Shape psi(n_node);
+      // Find values of shape function
+      shape(s, psi);
+
+      // Get nodal index at which i-th velocity is stored
+      unsigned u_nodal_index = u_index_spherical_nst(i);
+
+      // Initialise value of u
+      double interpolated_u = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        interpolated_u += nodal_value(l, u_nodal_index) * psi[l];
+      }
+
+      return (interpolated_u);
+    }
+
+    /// Return matrix entry dudx(i,j) of the FE interpolated velocity derivative
+    /// at local coordinate s
+    double interpolated_dudx_spherical_nst(const Vector<double>& s,
+                                           const unsigned& i,
+                                           const unsigned& j) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+      // Local shape function
+      Shape psi(n_node);
+      DShape dpsidx(n_node, 2);
+      // Find values of shape function
+      (void)dshape_eulerian(s, psi, dpsidx);
+
+      // Get nodal index at which i-th velocity is stored
+      unsigned u_nodal_index = u_index_spherical_nst(i);
+
+      // Initialise value of u
+      double interpolated_dudx = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        interpolated_dudx += nodal_value(l, u_nodal_index) * dpsidx(l, j);
+      }
+
+      return (interpolated_dudx);
+    }
+
+    /// Return FE interpolated pressure at local coordinate s
+    double interpolated_p_spherical_nst(const Vector<double>& s) const
+    {
+      // Find number of nodes
+      unsigned n_pres = npres_spherical_nst();
+      // Local shape function
+      Shape psi(n_pres);
+      // Find values of shape function
+      pshape_spherical_nst(s, psi);
+
+      // Initialise value of p
+      double interpolated_p = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        interpolated_p += p_spherical_nst(l) * psi[l];
+      }
+
+      return (interpolated_p);
+    }
+  };
+
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+
+
+  //==========================================================================
+  /// Crouzeix_Raviart elements are Navier--Stokes elements with quadratic
+  /// interpolation for velocities and positions, but a discontinuous linear
+  /// pressure interpolation. They can be used within oomph-lib's
+  /// block preconditioning framework.
+  //==========================================================================
+  class QSphericalCrouzeixRaviartElement
+    : public virtual QElement<2, 3>,
+      public virtual SphericalNavierStokesEquations
+  {
+  private:
+    /// Static array of ints to hold required number of variables at nodes
+    static const unsigned Initial_Nvalue[];
+
+  protected:
+    /// Internal index that indicates at which internal data the pressure
+    /// is stored
+    unsigned P_spherical_nst_internal_index;
+
+
+    /// \short Velocity shape and test functions and their derivs
+    /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_spherical_nst(
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
+
+    /// \short Velocity shape and test functions and their derivs
+    /// w.r.t. to global coords at ipt-th integation point (taken from geometry)
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_at_knot_spherical_nst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
+
+    /// Pressure shape functions at local coordinate s
+    inline void pshape_spherical_nst(const Vector<double>& s, Shape& psi) const;
+
+    /// Pressure shape and test functions at local coordinte s
+    inline void pshape_spherical_nst(const Vector<double>& s,
+                                     Shape& psi,
+                                     Shape& test) const;
+
+    /// Return the local equation numbers for the pressure values.
+    inline int p_local_eqn(const unsigned& n) const
+    {
+      return this->internal_local_eqn(P_spherical_nst_internal_index, n);
+    }
+
+  public:
+    /// Constructor, there are 3 internal values (for the pressure)
+    QSphericalCrouzeixRaviartElement()
+      : QElement<2, 3>(), SphericalNavierStokesEquations()
+    {
+      // Allocate and add one Internal data object that stored 2+1 pressure
+      // values;
+      P_spherical_nst_internal_index = this->add_internal_data(new Data(3));
+    }
+
+    /// \short Number of values (pinned or dofs) required at local node n.
+    inline unsigned required_nvalue(const unsigned& n) const
+    {
+      return 3;
+    }
+
+
+    /// \short Return the i-th pressure value
+    /// (Discontinous pressure interpolation -- no need to cater for hanging
+    /// nodes).
+    double p_spherical_nst(const unsigned& i) const
+    {
+      return this->internal_data_pt(P_spherical_nst_internal_index)->value(i);
+    }
+
+    /// Return number of pressure values
+    unsigned npres_spherical_nst() const
+    {
+      return 3;
+    }
+
+    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+    void fix_pressure(const unsigned& p_dof, const double& p_value)
+    {
+      this->internal_data_pt(P_spherical_nst_internal_index)->pin(p_dof);
+      this->internal_data_pt(P_spherical_nst_internal_index)
+        ->set_value(p_dof, p_value);
+    }
+
+    /// \short  Add to the set \c paired_load_data pairs containing
+    /// - the pointer to a Data object
+    /// and
+    /// - the index of the value in that Data object
+    /// .
+    /// for all values (pressures, velocities) that affect the
+    /// load computed in the \c get_load(...) function.
+    void identify_load_data(
+      std::set<std::pair<Data*, unsigned>>& paired_load_data);
+
+    /// \short  Add to the set \c paired_pressure_data pairs containing
+    /// - the pointer to a Data object
+    /// and
+    /// - the index of the value in that Data object
+    /// .
+    /// for pressure values that affect the
+    /// load computed in the \c get_load(...) function.
+    void identify_pressure_data(
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data);
+
+    /// Redirect output to SphericalNavierStokesEquations output
+    void output(std::ostream& outfile)
+    {
+      SphericalNavierStokesEquations::output(outfile);
+    }
+
+    /// Redirect output to SphericalNavierStokesEquations output
+    void output(std::ostream& outfile, const unsigned& nplot)
+    {
+      SphericalNavierStokesEquations::output(outfile, nplot);
+    }
+
+
+    /// Redirect output to SphericalNavierStokesEquations output
+    void output(FILE* file_pt)
+    {
+      SphericalNavierStokesEquations::output(file_pt);
+    }
+
+    /// Redirect output to SphericalNavierStokesEquations output
+    void output(FILE* file_pt, const unsigned& nplot)
+    {
+      SphericalNavierStokesEquations::output(file_pt, nplot);
+    }
+
+
+    /// \short Full output function:
+    /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
+    /// in tecplot format. Default number of plot points
+    void full_output(std::ostream& outfile)
+    {
+      SphericalNavierStokesEquations::full_output(outfile);
+    }
+
+    /// \short Full output function:
+    /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
+    /// in tecplot format. nplot points in each coordinate direction
+    void full_output(std::ostream& outfile, const unsigned& nplot)
+    {
+      SphericalNavierStokesEquations::full_output(outfile, nplot);
+    }
+
+
+    /// \short The number of "DOF types" that degrees of freedom in this element
+    /// are sub-divided into: Velocity (three comp) and pressure.
+    unsigned ndof_types() const
+    {
+      return 4;
+    }
+
+    /// \short Create a list of pairs for all unknowns in this element,
+    /// so that the first entry in each pair contains the global equation
+    /// number of the unknown, while the second one contains the number
+    /// of the "DOF type" that this unknown is associated with.
+    /// (Function can obviously only be called if the equation numbering
+    /// scheme has been set up.)
+    void get_dof_numbers_for_unknowns(
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
+  };
+
+  // Inline functions
+
+  //=======================================================================
+  /// Derivatives of the shape functions and test functions w.r.t. to global
+  /// (Eulerian) coordinates. Return Jacobian of mapping between
+  /// local and global coordinates.
+  //=======================================================================
+  inline double QSphericalCrouzeixRaviartElement::
+    dshape_and_dtest_eulerian_spherical_nst(const Vector<double>& s,
+                                            Shape& psi,
+                                            DShape& dpsidx,
+                                            Shape& test,
+                                            DShape& dtestdx) const
+  {
+    // Call the geometrical shape functions and derivatives
+    double J = this->dshape_eulerian(s, psi, dpsidx);
+    // Loop over the test functions and derivatives and set them equal to the
+    // shape functions
+    for (unsigned i = 0; i < 9; i++)
+    {
+      test[i] = psi[i];
+      dtestdx(i, 0) = dpsidx(i, 0);
+      dtestdx(i, 1) = dpsidx(i, 1);
+    }
+    // Return the jacobian
+    return J;
+  }
+
+  //=======================================================================
+  /// Derivatives of the shape functions and test functions w.r.t. to global
+  /// (Eulerian) coordinates. Return Jacobian of mapping between
+  /// local and global coordinates.
+  //=======================================================================
+  inline double QSphericalCrouzeixRaviartElement::
+    dshape_and_dtest_eulerian_at_knot_spherical_nst(const unsigned& ipt,
+                                                    Shape& psi,
+                                                    DShape& dpsidx,
+                                                    Shape& test,
+                                                    DShape& dtestdx) const
+  {
+    // Call the geometrical shape functions and derivatives
+    double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
+    // Loop over the test functions and derivatives and set them equal to the
+    // shape functions
+    for (unsigned i = 0; i < 9; i++)
+    {
+      test[i] = psi[i];
+      dtestdx(i, 0) = dpsidx(i, 0);
+      dtestdx(i, 1) = dpsidx(i, 1);
+    }
+    // Return the jacobian
+    return J;
+  }
+
+
+  //=======================================================================
+  /// Pressure shape functions
+  //=======================================================================
+  inline void QSphericalCrouzeixRaviartElement::pshape_spherical_nst(
+    const Vector<double>& s, Shape& psi) const
+  {
+    psi[0] = 1.0;
+    psi[1] = s[0];
+    psi[2] = s[1];
+  }
+
+  /// Define the pressure shape and test functions
+  inline void QSphericalCrouzeixRaviartElement::pshape_spherical_nst(
+    const Vector<double>& s, Shape& psi, Shape& test) const
+  {
+    // Call the pressure shape functions
+    pshape_spherical_nst(s, psi);
+    // Loop over the test functions and set them equal to the shape functions
+    for (unsigned i = 0; i < 3; i++) test[i] = psi[i];
+  }
+
+  //=======================================================================
+  /// Face geometry of the Spherical Crouzeix_Raviart elements
+  //=======================================================================
+  template<>
+  class FaceGeometry<QSphericalCrouzeixRaviartElement>
+    : public virtual QElement<1, 3>
+  {
+  public:
+    FaceGeometry() : QElement<1, 3>() {}
+  };
+
+  //=======================================================================
+  /// Face geometry of the FaceGeometry of the Spherical
+  /// Crouzeix_Raviart elements
+  //=======================================================================
+  template<>
+  class FaceGeometry<FaceGeometry<QSphericalCrouzeixRaviartElement>>
+    : public virtual PointElement
+  {
+  public:
+    FaceGeometry() : PointElement() {}
+  };
+
+
+  ////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////
+
+
+  //=======================================================================
+  /// Taylor--Hood elements are Navier--Stokes elements
+  /// with quadratic interpolation for velocities and positions and
+  /// continous linear pressure interpolation. They can be used
+  /// within oomph-lib's block-preconditioning framework.
+  //=======================================================================
+  class QSphericalTaylorHoodElement
+    : public virtual QElement<2, 3>,
+      public virtual SphericalNavierStokesEquations
+  {
+  private:
+    /// Static array of ints to hold number of variables at node
+    static const unsigned Initial_Nvalue[];
+
+  protected:
+    /// \short Static array of ints to hold conversion from pressure
+    /// node numbers to actual node numbers
+    static const unsigned Pconv[];
+
+    /// \short Velocity shape and test functions and their derivs
+    /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_spherical_nst(
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
+
+    /// \short Velocity shape and test functions and their derivs
+    /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_at_knot_spherical_nst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
+
+    /// Pressure shape functions at local coordinate s
+    inline void pshape_spherical_nst(const Vector<double>& s, Shape& psi) const;
+
+    /// Pressure shape and test functions at local coordinte s
+    inline void pshape_spherical_nst(const Vector<double>& s,
+                                     Shape& psi,
+                                     Shape& test) const;
+
+    /// Return the local equation numbers for the pressure values.
+    inline int p_local_eqn(const unsigned& n) const
+    {
+      return this->nodal_local_eqn(Pconv[n], p_nodal_index_spherical_nst());
+    }
+
+  public:
+    /// Constructor, no internal data points
+    QSphericalTaylorHoodElement()
+      : QElement<2, 3>(), SphericalNavierStokesEquations()
+    {
+    }
+
+    /// \short Number of values (pinned or dofs) required at node n. Can
+    /// be overwritten for hanging node version
+    inline virtual unsigned required_nvalue(const unsigned& n) const
+    {
+      return Initial_Nvalue[n];
+    }
+
+    /// \short Set the value at which the pressure is stored in the nodes
+    /// In this case the third index because there are three velocity components
+    int p_nodal_index_spherical_nst() const
+    {
+      return 3;
+    }
+
+    /// \short Access function for the pressure values at local pressure
+    /// node n_p (const version)
+    double p_spherical_nst(const unsigned& n_p) const
+    {
+      return this->nodal_value(Pconv[n_p], this->p_nodal_index_spherical_nst());
+    }
+
+    /// Return number of pressure values
+    unsigned npres_spherical_nst() const
+    {
+      return 4;
+    }
+
+    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+    void fix_pressure(const unsigned& p_dof, const double& p_value)
+    {
+      this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_spherical_nst());
+      this->node_pt(Pconv[p_dof])
+        ->set_value(this->p_nodal_index_spherical_nst(), p_value);
+    }
+
+
+    /// \short  Add to the set \c paired_load_data pairs containing
+    /// - the pointer to a Data object
+    /// and
+    /// - the index of the value in that Data object
+    /// .
+    /// for all values (pressures, velocities) that affect the
+    /// load computed in the \c get_load(...) function.
+    void identify_load_data(
+      std::set<std::pair<Data*, unsigned>>& paired_load_data);
+
+
+    /// \short  Add to the set \c paired_pressure_data pairs containing
+    /// - the pointer to a Data object
+    /// and
+    /// - the index of the value in that Data object
+    /// .
+    /// for pressure values that affect the
+    /// load computed in the \c get_load(...) function.
+    void identify_pressure_data(
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data);
+
+    /// Redirect output to SphericalNavierStokesEquations output
+    void output(std::ostream& outfile)
+    {
+      SphericalNavierStokesEquations::output(outfile);
+    }
+
+    /// Redirect output to SphericalNavierStokesEquations output
+    void output(std::ostream& outfile, const unsigned& nplot)
+    {
+      SphericalNavierStokesEquations::output(outfile, nplot);
+    }
+
+    /// Redirect output to SphericalNavierStokesEquations output
+    void output(FILE* file_pt)
+    {
+      SphericalNavierStokesEquations::output(file_pt);
+    }
+
+    /// Redirect output to SphericalNavierStokesEquations output
+    void output(FILE* file_pt, const unsigned& nplot)
+    {
+      SphericalNavierStokesEquations::output(file_pt, nplot);
+    }
+
+
+    /// \short The number of "DOF types" that degrees of freedom in this element
+    /// are sub-divided into: Velocity (3 components) and pressure.
+    unsigned ndof_types() const
+    {
+      return 4;
+    }
+
+    /// \short Create a list of pairs for all unknowns in this element,
+    /// so that the first entry in each pair contains the global equation
+    /// number of the unknown, while the second one contains the number
+    /// of the "Dof type" that this unknown is associated with.
+    /// (Function can obviously only be called if the equation numbering
+    /// scheme has been set up.)
+    void get_dof_numbers_for_unknowns(
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
+  };
+
+  // Inline functions
+
+  //==========================================================================
+  /// 2D :
+  /// Derivatives of the shape functions and test functions w.r.t to
+  /// global (Eulerian) coordinates. Return Jacobian of mapping between
+  /// local and global coordinates.
+  //==========================================================================
+  inline double QSphericalTaylorHoodElement::
+    dshape_and_dtest_eulerian_spherical_nst(const Vector<double>& s,
+                                            Shape& psi,
+                                            DShape& dpsidx,
+                                            Shape& test,
+                                            DShape& dtestdx) const
+  {
+    // Call the geometrical shape functions and derivatives
+    double J = this->dshape_eulerian(s, psi, dpsidx);
+    // Loop over the test functions and derivatives and set them equal to the
+    // shape functions
+    for (unsigned i = 0; i < 9; i++)
+    {
+      test[i] = psi[i];
+      dtestdx(i, 0) = dpsidx(i, 0);
+      dtestdx(i, 1) = dpsidx(i, 1);
+    }
+    // Return the jacobian
+    return J;
+  }
+
+
+  //==========================================================================
+  /// Derivatives of the shape functions and test functions w.r.t to
+  /// global (Eulerian) coordinates. Return Jacobian of mapping between
+  /// local and global coordinates.
+  //==========================================================================
+  inline double QSphericalTaylorHoodElement::
+    dshape_and_dtest_eulerian_at_knot_spherical_nst(const unsigned& ipt,
+                                                    Shape& psi,
+                                                    DShape& dpsidx,
+                                                    Shape& test,
+                                                    DShape& dtestdx) const
+  {
+    // Call the geometrical shape functions and derivatives
+    double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
+    // Loop over the test functions and derivatives and set them equal to the
+    // shape functions
+    for (unsigned i = 0; i < 9; i++)
+    {
+      test[i] = psi[i];
+      dtestdx(i, 0) = dpsidx(i, 0);
+      dtestdx(i, 1) = dpsidx(i, 1);
+    }
+    // Return the jacobian
+    return J;
+  }
+
+  //==========================================================================
+  /// Pressure shape functions
+  //==========================================================================
+  inline void QSphericalTaylorHoodElement::pshape_spherical_nst(
+    const Vector<double>& s, Shape& psi) const
+  {
+    // Local storage
+    double psi1[2], psi2[2];
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[0], psi1);
+    OneDimLagrange::shape<2>(s[1], psi2);
+
+    // Now let's loop over the nodal points in the element
+    // s1 is the "x" coordinate, s2 the "y"
+    for (unsigned i = 0; i < 2; i++)
+    {
+      for (unsigned j = 0; j < 2; j++)
+      {
+        /*Multiply the two 1D functions together to get the 2D function*/
+        psi[2 * i + j] = psi2[i] * psi1[j];
       }
     }
   }
 
- /// Return FE interpolated velocity u[i] at local coordinate s
- double interpolated_u_spherical_nst(const Vector<double> &s, const unsigned &i) const
-  {
-   //Find number of nodes
-   unsigned n_node = nnode();
-   //Local shape function
-   Shape psi(n_node);
-   //Find values of shape function
-   shape(s,psi);
-   
-   //Get nodal index at which i-th velocity is stored
-   unsigned u_nodal_index = u_index_spherical_nst(i);
 
-   //Initialise value of u
-   double interpolated_u = 0.0;
-   //Loop over the local nodes and sum
-   for(unsigned l=0;l<n_node;l++) 
-    {
-     interpolated_u += nodal_value(l,u_nodal_index)*psi[l];
-    }
-   
-   return(interpolated_u);
-  }
-
-  /// Return matrix entry dudx(i,j) of the FE interpolated velocity derivative at local coordinate s
- double interpolated_dudx_spherical_nst(const Vector<double> &s,
-                              const unsigned &i, const unsigned &j) const
+  //==========================================================================
+  /// Pressure shape and test functions
+  //==========================================================================
+  inline void QSphericalTaylorHoodElement::pshape_spherical_nst(
+    const Vector<double>& s, Shape& psi, Shape& test) const
   {
-   //Find number of nodes
-   unsigned n_node = nnode();
-   //Local shape function
-   Shape psi(n_node);
-   DShape dpsidx(n_node,2);
-   //Find values of shape function
-   (void) dshape_eulerian(s,psi,dpsidx);
-   
-   //Get nodal index at which i-th velocity is stored
-   unsigned u_nodal_index = u_index_spherical_nst(i);
-
-   //Initialise value of u
-   double interpolated_dudx = 0.0;
-   //Loop over the local nodes and sum
-   for(unsigned l=0;l<n_node;l++) 
-    {
-     interpolated_dudx += nodal_value(l,u_nodal_index)*dpsidx(l,j);
-    }
-   
-   return(interpolated_dudx);
-  }
-  
- /// Return FE interpolated pressure at local coordinate s
- double interpolated_p_spherical_nst(const Vector<double> &s) const
-  {
-   //Find number of nodes
-   unsigned n_pres = npres_spherical_nst();
-   //Local shape function
-   Shape psi(n_pres);
-   //Find values of shape function
-   pshape_spherical_nst(s,psi);
-   
-   //Initialise value of p
-   double interpolated_p = 0.0;
-   //Loop over the local nodes and sum
-   for(unsigned l=0;l<n_pres;l++) 
-    {
-     interpolated_p += p_spherical_nst(l)*psi[l];
-    }
-   
-   return(interpolated_p);
+    // Call the pressure shape functions
+    pshape_spherical_nst(s, psi);
+    // Loop over the test functions and set them equal to the shape functions
+    for (unsigned i = 0; i < 4; i++) test[i] = psi[i];
   }
 
 
-}; 
-
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-
-//==========================================================================
-/// Crouzeix_Raviart elements are Navier--Stokes elements with quadratic
-/// interpolation for velocities and positions, but a discontinuous linear
-/// pressure interpolation. They can be used within oomph-lib's
-/// block preconditioning framework.
-//==========================================================================
-class QSphericalCrouzeixRaviartElement : public virtual QElement<2,3>, 
- public virtual SphericalNavierStokesEquations
-{
-  private:
-
- /// Static array of ints to hold required number of variables at nodes
- static const unsigned Initial_Nvalue[];
- 
-  protected:
-
- /// Internal index that indicates at which internal data the pressure
- /// is stored
- unsigned P_spherical_nst_internal_index;
- 
- 
- /// \short Velocity shape and test functions and their derivs 
- /// w.r.t. to global coords  at local coordinate s (taken from geometry)
- ///Return Jacobian of mapping between local and global coordinates.
- inline double dshape_and_dtest_eulerian_spherical_nst(const Vector<double> &s, 
-                                             Shape &psi, 
-                                             DShape &dpsidx, Shape &test, 
-                                             DShape &dtestdx) const;
-
- /// \short Velocity shape and test functions and their derivs 
- /// w.r.t. to global coords at ipt-th integation point (taken from geometry)
- ///Return Jacobian of mapping between local and global coordinates.
- inline double dshape_and_dtest_eulerian_at_knot_spherical_nst(const unsigned &ipt, 
-                                                     Shape &psi, 
-                                                     DShape &dpsidx, 
-                                                     Shape &test, 
-                                                     DShape &dtestdx) const;
-
- /// Pressure shape functions at local coordinate s
- inline void pshape_spherical_nst(const Vector<double> &s, Shape &psi) const;
- 
- /// Pressure shape and test functions at local coordinte s
- inline void pshape_spherical_nst(const Vector<double> &s, Shape &psi, 
-                        Shape &test) const;
- 
- /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)const
-  {return this->internal_local_eqn(P_spherical_nst_internal_index,n);}
-
-public:
-
- /// Constructor, there are 3 internal values (for the pressure)
- QSphericalCrouzeixRaviartElement() : 
-  QElement<2,3>(), SphericalNavierStokesEquations()
+  //=======================================================================
+  /// Face geometry of the Spherical Taylor_Hood elements
+  //=======================================================================
+  template<>
+  class FaceGeometry<QSphericalTaylorHoodElement>
+    : public virtual QElement<1, 3>
   {
-   //Allocate and add one Internal data object that stored 2+1 pressure
-   //values;
-   P_spherical_nst_internal_index = this->add_internal_data(new Data(3));
-  }
- 
- /// \short Number of values (pinned or dofs) required at local node n. 
- inline unsigned required_nvalue(const unsigned &n) const {return 3;}
-
- 
- /// \short Return the i-th pressure value
- /// (Discontinous pressure interpolation -- no need to cater for hanging 
- /// nodes). 
- double p_spherical_nst(const unsigned &i) const
-  {return this->internal_data_pt(P_spherical_nst_internal_index)->value(i);}
-
- /// Return number of pressure values
- unsigned npres_spherical_nst() const {return 3;} 
- 
- /// Pin p_dof-th pressure dof and set it to value specified by p_value.
- void fix_pressure(const unsigned &p_dof, const double &p_value)
-  {
-   this->internal_data_pt(P_spherical_nst_internal_index)->pin(p_dof);
-   this->internal_data_pt(P_spherical_nst_internal_index)->set_value(p_dof,p_value);
-  }
-
- /// \short  Add to the set \c paired_load_data pairs containing
- /// - the pointer to a Data object
- /// and
- /// - the index of the value in that Data object
- /// .
- /// for all values (pressures, velocities) that affect the
- /// load computed in the \c get_load(...) function.
- void identify_load_data(std::set<std::pair<Data*,unsigned> > 
-                         &paired_load_data);
- 
- /// \short  Add to the set \c paired_pressure_data pairs containing
- /// - the pointer to a Data object
- /// and
- /// - the index of the value in that Data object
- /// .
- /// for pressure values that affect the
- /// load computed in the \c get_load(...) function.
- void identify_pressure_data(std::set<std::pair<Data*,unsigned> > 
-                             &paired_pressure_data);
-
- /// Redirect output to SphericalNavierStokesEquations output
- void output(std::ostream &outfile)
-  {SphericalNavierStokesEquations::output(outfile);}
-
- /// Redirect output to SphericalNavierStokesEquations output
- void output(std::ostream &outfile, const unsigned &nplot)
-  {SphericalNavierStokesEquations::output(outfile,nplot);}
-
-
- /// Redirect output to SphericalNavierStokesEquations output
- void output(FILE* file_pt) 
-  {SphericalNavierStokesEquations::output(file_pt);}
-
- /// Redirect output to SphericalNavierStokesEquations output
- void output(FILE* file_pt, const unsigned &nplot)
-  {SphericalNavierStokesEquations::output(file_pt,nplot);}
-
-
- /// \short Full output function: 
- /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
- /// in tecplot format. Default number of plot points
- void full_output(std::ostream &outfile)
-  {SphericalNavierStokesEquations::full_output(outfile);}
-
- /// \short Full output function: 
- /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
- /// in tecplot format. nplot points in each coordinate direction
- void full_output(std::ostream &outfile, const unsigned &nplot)
-  {SphericalNavierStokesEquations::full_output(outfile,nplot);}
-
-
- /// \short The number of "DOF types" that degrees of freedom in this element
- /// are sub-divided into: Velocity (three comp) and pressure.
- unsigned ndof_types() const
-  {
-   return 4;
-  }
- 
- /// \short Create a list of pairs for all unknowns in this element,
- /// so that the first entry in each pair contains the global equation
- /// number of the unknown, while the second one contains the number
- /// of the "DOF type" that this unknown is associated with.
- /// (Function can obviously only be called if the equation numbering
- /// scheme has been set up.) 
- void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const;
-
-};
-
-//Inline functions
-
-//=======================================================================
-/// Derivatives of the shape functions and test functions w.r.t. to global
-/// (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//=======================================================================
-inline double QSphericalCrouzeixRaviartElement::
-dshape_and_dtest_eulerian_spherical_nst(
- const Vector<double> &s, Shape &psi, 
- DShape &dpsidx, Shape &test, 
- DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = this->dshape_eulerian(s,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
- //Return the jacobian
- return J;
-}
-
-//=======================================================================
-/// Derivatives of the shape functions and test functions w.r.t. to global
-/// (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//=======================================================================
-inline double QSphericalCrouzeixRaviartElement::
-dshape_and_dtest_eulerian_at_knot_spherical_nst(
- const unsigned &ipt, Shape &psi, 
- DShape &dpsidx, Shape &test, 
- DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
- //Return the jacobian
- return J;
-}
-
-
-//=======================================================================
-/// Pressure shape functions
-//=======================================================================
-inline void QSphericalCrouzeixRaviartElement::
-pshape_spherical_nst(const Vector<double> &s, Shape &psi)
-const
-{
- psi[0] = 1.0;
- psi[1] = s[0];
- psi[2] = s[1];
-}
-
-///Define the pressure shape and test functions
-inline void QSphericalCrouzeixRaviartElement::pshape_spherical_nst(
- const Vector<double> &s, 
- Shape &psi, 
- Shape &test) const
-{
- //Call the pressure shape functions
- pshape_spherical_nst(s,psi);
- //Loop over the test functions and set them equal to the shape functions
- for(unsigned i=0;i<3;i++) test[i] = psi[i];
-}
-
-//=======================================================================
-/// Face geometry of the Spherical Crouzeix_Raviart elements
-//=======================================================================
-template<>
-class FaceGeometry<QSphericalCrouzeixRaviartElement>: 
-public virtual QElement<1,3>
-{
   public:
- FaceGeometry() : QElement<1,3>() {}
-};
+    FaceGeometry() : QElement<1, 3>() {}
+  };
 
-//=======================================================================
-/// Face geometry of the FaceGeometry of the Spherical 
-/// Crouzeix_Raviart elements
-//=======================================================================
-template<>
-class FaceGeometry<FaceGeometry<QSphericalCrouzeixRaviartElement> >: 
-public virtual PointElement
-{
+  //=======================================================================
+  /// Face geometry of the FaceGeometry of the 2D Taylor Hoodelements
+  //=======================================================================
+  template<>
+  class FaceGeometry<FaceGeometry<QSphericalTaylorHoodElement>>
+    : public virtual PointElement
+  {
   public:
- FaceGeometry() : PointElement() {}
-};
+    FaceGeometry() : PointElement() {}
+  };
 
 
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-
-//=======================================================================
-/// Taylor--Hood elements are Navier--Stokes elements 
-/// with quadratic interpolation for velocities and positions and 
-/// continous linear pressure interpolation. They can be used
-/// within oomph-lib's block-preconditioning framework.
-//=======================================================================
-class QSphericalTaylorHoodElement : public virtual QElement<2,3>, 
- public virtual SphericalNavierStokesEquations
-{
-  private:
- 
- /// Static array of ints to hold number of variables at node
- static const unsigned Initial_Nvalue[];
- 
-  protected:
-
- /// \short Static array of ints to hold conversion from pressure 
- /// node numbers to actual node numbers
- static const unsigned Pconv[];
- 
- /// \short Velocity shape and test functions and their derivs 
- /// w.r.t. to global coords  at local coordinate s (taken from geometry)
- /// Return Jacobian of mapping between local and global coordinates.
- inline double dshape_and_dtest_eulerian_spherical_nst(const Vector<double> &s, 
-                                             Shape &psi, 
-                                             DShape &dpsidx, Shape &test, 
-                                             DShape &dtestdx) const;
-
- /// \short Velocity shape and test functions and their derivs 
- /// w.r.t. to global coords  at local coordinate s (taken from geometry)
- /// Return Jacobian of mapping between local and global coordinates.
- inline double dshape_and_dtest_eulerian_at_knot_spherical_nst(const unsigned &ipt, 
-                                                     Shape &psi, 
-                                                     DShape &dpsidx, 
-                                                     Shape &test, 
-                                                     DShape &dtestdx) const;
-
- /// Pressure shape functions at local coordinate s
- inline void pshape_spherical_nst(const Vector<double> &s, Shape &psi) const;
-
- /// Pressure shape and test functions at local coordinte s
- inline void pshape_spherical_nst(const Vector<double> &s, Shape &psi, 
-                        Shape &test) const;
- 
- /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)const
-  {return this->nodal_local_eqn(Pconv[n],p_nodal_index_spherical_nst());}
-
-public:
-
- /// Constructor, no internal data points
- QSphericalTaylorHoodElement() : 
-  QElement<2,3>(),  SphericalNavierStokesEquations() {}
- 
- /// \short Number of values (pinned or dofs) required at node n. Can
- /// be overwritten for hanging node version
- inline virtual unsigned required_nvalue(const unsigned &n) const 
-  {return Initial_Nvalue[n];}
-
- /// \short Set the value at which the pressure is stored in the nodes
- /// In this case the third index because there are three velocity components
- int p_nodal_index_spherical_nst() const {return 3;}
-
- /// \short Access function for the pressure values at local pressure 
- /// node n_p (const version)
- double p_spherical_nst(const unsigned &n_p) const
-  {return this->nodal_value(Pconv[n_p],this->p_nodal_index_spherical_nst());}
- 
- /// Return number of pressure values
- unsigned npres_spherical_nst() const {return 4;}
-
- /// Pin p_dof-th pressure dof and set it to value specified by p_value.
- void fix_pressure(const unsigned &p_dof, const double &p_value)
-  {
-   this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_spherical_nst());
-   this->node_pt(Pconv[p_dof])->set_value(this->p_nodal_index_spherical_nst(),p_value);
-  }
-
-
- /// \short  Add to the set \c paired_load_data pairs containing
- /// - the pointer to a Data object
- /// and
- /// - the index of the value in that Data object
- /// .
- /// for all values (pressures, velocities) that affect the
- /// load computed in the \c get_load(...) function.
- void identify_load_data(std::set<std::pair<Data*,unsigned> > &
-                         paired_load_data);
-
-
- /// \short  Add to the set \c paired_pressure_data pairs containing
- /// - the pointer to a Data object
- /// and
- /// - the index of the value in that Data object
- /// .
- /// for pressure values that affect the
- /// load computed in the \c get_load(...) function.
- void identify_pressure_data(
-  std::set<std::pair<Data*,unsigned> > &paired_pressure_data);
-
- /// Redirect output to SphericalNavierStokesEquations output
- void output(std::ostream &outfile) 
-  {SphericalNavierStokesEquations::output(outfile);}
-
- /// Redirect output to SphericalNavierStokesEquations output
- void output(std::ostream &outfile, const unsigned &nplot)
-  {SphericalNavierStokesEquations::output(outfile,nplot);}
-
- /// Redirect output to SphericalNavierStokesEquations output
- void output(FILE* file_pt) {SphericalNavierStokesEquations::output(file_pt);}
-
- /// Redirect output to SphericalNavierStokesEquations output
- void output(FILE* file_pt, const unsigned &nplot)
-  {SphericalNavierStokesEquations::output(file_pt,nplot);}
-
-
- /// \short The number of "DOF types" that degrees of freedom in this element
- /// are sub-divided into: Velocity (3 components) and pressure.
- unsigned ndof_types() const
-  {
-   return 4;
-  }
- 
- /// \short Create a list of pairs for all unknowns in this element,
- /// so that the first entry in each pair contains the global equation
- /// number of the unknown, while the second one contains the number
- /// of the "Dof type" that this unknown is associated with.
- /// (Function can obviously only be called if the equation numbering
- /// scheme has been set up.) 
- void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list)const;
- 
- 
-};
-
-//Inline functions
-
-//==========================================================================
-/// 2D : 
-/// Derivatives of the shape functions and test functions w.r.t to
-/// global (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//==========================================================================
-inline double QSphericalTaylorHoodElement::
-dshape_and_dtest_eulerian_spherical_nst(
- const Vector<double> &s,
- Shape &psi, 
- DShape &dpsidx, Shape &test, 
- DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = this->dshape_eulerian(s,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
- //Return the jacobian
- return J;
-}
-
-
-//==========================================================================
-/// Derivatives of the shape functions and test functions w.r.t to
-/// global (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//==========================================================================
-inline double QSphericalTaylorHoodElement::
-dshape_and_dtest_eulerian_at_knot_spherical_nst(
- const unsigned &ipt,Shape &psi, DShape &dpsidx, Shape &test, 
- DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
- //Return the jacobian
- return J;
-}
-
-//==========================================================================
-/// Pressure shape functions
-//==========================================================================
-inline void QSphericalTaylorHoodElement::
-pshape_spherical_nst(const Vector<double> &s, Shape &psi)
- const
-{
- //Local storage
- double psi1[2], psi2[2];
- //Call the OneDimensional Shape functions
- OneDimLagrange::shape<2>(s[0],psi1);
- OneDimLagrange::shape<2>(s[1],psi2);
-
- //Now let's loop over the nodal points in the element
- //s1 is the "x" coordinate, s2 the "y" 
- for(unsigned i=0;i<2;i++)
-  {
-   for(unsigned j=0;j<2;j++)
-    {
-     /*Multiply the two 1D functions together to get the 2D function*/
-     psi[2*i + j] = psi2[i]*psi1[j];
-    }
-  }
-}
-
-
-//==========================================================================
-/// Pressure shape and test functions
-//==========================================================================
-inline void QSphericalTaylorHoodElement::pshape_spherical_nst(const Vector<double> &s, 
-                                                    Shape &psi, 
-                                                    Shape &test) const
-{
- //Call the pressure shape functions
- pshape_spherical_nst(s,psi);
- //Loop over the test functions and set them equal to the shape functions
- for(unsigned i=0;i<4;i++) test[i] = psi[i];
-}
-
-
-//=======================================================================
-/// Face geometry of the Spherical Taylor_Hood elements
-//=======================================================================
-template<>
-class FaceGeometry<QSphericalTaylorHoodElement>: public virtual QElement<1,3>
-{
-  public:
- FaceGeometry() : QElement<1,3>() {}
-};
-
-//=======================================================================
-/// Face geometry of the FaceGeometry of the 2D Taylor Hoodelements
-//=======================================================================
-template<>
-class FaceGeometry<FaceGeometry<QSphericalTaylorHoodElement> >: 
-public virtual PointElement
-{
-  public:
- FaceGeometry() : PointElement() {}
-};
-
-
-}
+} // namespace oomph
 
 #endif

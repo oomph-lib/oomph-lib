@@ -1,28 +1,28 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 #ifndef OOMPH_PML_MESH_HEADER
 #define OOMPH_PML_MESH_HEADER
 
@@ -38,2332 +38,2461 @@
 
 namespace oomph
 {
-
-//=======================================================================
-/// General definition of policy class defining the elements to 
-/// be used in the actual PML layers. Has to be instantiated for
-/// each specific "bulk" PML element type.
-//=======================================================================
- template<class ELEMENT>
- class PMLLayerElement
- {
-
- };
-
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-
-//==============================================================
-/// Base class for elements with pml capabilities
-//==============================================================
- template<unsigned DIM>
- class PMLElementBase
- {
-
- public:
- 
-  /// Constructor
-  PMLElementBase() : Pml_is_enabled(false), 
-		     Pml_direction_active(DIM,false),
-		     Pml_inner_boundary(DIM,0.0),
-		     Pml_outer_boundary(DIM,0.0)
-   {}
-
-  /// Virtual destructor
-  virtual ~PMLElementBase(){}
-
-  /// \short Disable pml. Ensures the PML-ification in all directions
-  /// has been deactivated
-  void disable_pml()
-   {
-    // Disable the PML-ification
-    Pml_is_enabled=false;
-
-    // Loop over the entries in Pml_direction_active and deactivate the
-    // PML in this direction
-    for (unsigned direction=0;direction<DIM;direction++)
-    {
-     // Disable the PML in this direction
-     Pml_direction_active[direction]=false;
-    }
-   } // End of disable_pml
- 
-  /// \short Enable pml. Specify the coordinate direction along which 
-  /// pml boundary is constant, as well as the coordinate
-  /// along the dimension for the interface between the physical and artificial
-  /// domains and the coordinate for the outer boundary.
-  /// All of these are used to adjust the perfectly matched layer
-  /// mechanism. Needs to be called separately for each pml-ified direction
-  /// (if needed -- e.g. in corner elements)
-  void enable_pml(const int& direction, const double& interface_border_value, 
-		  const double& outer_domain_border_value)
-   {
-    Pml_is_enabled=true;
-    Pml_direction_active[direction] = true;
-    Pml_inner_boundary[direction] = interface_border_value;
-    Pml_outer_boundary[direction] = outer_domain_border_value;
-   }
-
-  /// \short Pure virtual function in which we have to specify the
-  /// values to be pinned (and set to zero) on the outer edge of
-  /// the pml layer. This is usually all of the nodal values
-  /// (values 0 and 1 (real and imag part) for Helmholtz; 
-  /// values 0,1,2 and 3 (real and imag part of x- and y-displacement
-  /// for 2D time-harmonic linear elasticity; etc.). Vector
-  /// must be resized internally!
-  virtual void values_to_be_pinned_on_outer_pml_boundary(
-   Vector<unsigned>& values_to_pin)=0;
-
- protected:
-
-  /// Boolean indicating if element is used in pml mode
-  bool Pml_is_enabled;
-
-  /// \short Coordinate direction along which pml boundary is constant; 
-  /// alternatively: coordinate direction in which coordinate stretching
-  /// is performed.
-  std::vector<bool> Pml_direction_active;
-
-  /// \short Coordinate of inner pml boundary 
-  /// (Storage is provided for any coordinate
-  /// direction; only the entries for "active" directions is used.)
-  Vector<double> Pml_inner_boundary;
-
-  /// \short Coordinate of outer pml boundary 
-  /// (Storage is provided for any coordinate
-  /// direction; only the entries for "active" directions is used.)
-  Vector<double> Pml_outer_boundary;
- };
-
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-
-//===================================================================
-/// \short All helper routines for 2D bulk boundary mesh usage in order to 
-/// generate PML meshes aligned to the main mesh
-//===================================================================
- namespace TwoDimensionalPMLHelper
- {
-  /// helper function for sorting the right boundary nodes
-  extern bool sorter_right_boundary(Node* nod_i_pt, Node* nod_j_pt);
- 
-  /// helper function for sorting the top boundary nodes
-  extern bool sorter_top_boundary(Node* nod_i_pt, Node* nod_j_pt);
- 
-  /// helper function for sorting the left boundary nodes
-  extern bool sorter_left_boundary(Node* nod_i_pt, Node* nod_j_pt);
-
-  /// helper function for sorting the bottom boundary nodes
-  extern bool sorter_bottom_boundary(Node* nod_i_pt, Node* nod_j_pt);
-
- }
-
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
-//====================================================================
-/// PML mesh base class. Contains a pure virtual locate_zeta function
-/// to be uploaded in PMLQuadMesh and PMLBrickMesh (once the code for
-/// it has been written)
-//====================================================================
- class PMLMeshBase
- {
- public:
-
-  /// \short Pure virtual function to provide an optimised version of
-  /// the locate_zeta function for PML meshes. As the PML meshes are
-  /// rectangular (in 2D, or rectangular prisms in 3D) the location of
-  /// a point in the mesh is simpler than in a more complex mesh
-  virtual void pml_locate_zeta(const Vector<double>& x, 
-			       FiniteElement*& el_pt)=0;
- };
- 
-//====================================================================
-/// PML mesh class. Policy class for 2D PML meshes
-//====================================================================
- template<class ELEMENT>
- class PMLQuadMeshBase : public RectangularQuadMesh<ELEMENT>,
-			 public PMLMeshBase
- {
- public:
-  
-  /// \short Constructor: Create the underlying rectangular quad mesh
-  PMLQuadMeshBase(const unsigned& n_pml_x, const unsigned& n_pml_y,
-		  const double& x_pml_start, const double& x_pml_end, 
-		  const double& y_pml_start, const double& y_pml_end,
-		  TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper) :
-   RectangularQuadMesh<ELEMENT>(n_pml_x,n_pml_y,
-				x_pml_start,x_pml_end,
-				y_pml_start,y_pml_end,
-				time_stepper_pt)
-   {}
-
-  /// \short Overloaded function to allow the user to locate an element
-  /// in mesh given the (Eulerian) position of a point. Note, the result
-  /// may be nonunique if the given point lies on the boundary of two
-  /// elements in the mesh. Additionally, we assume that the PML mesh is
-  /// axis aligned when deciding if the given point lies inside the mesh
-  void pml_locate_zeta(const Vector<double>& x,
-		       FiniteElement*& coarse_mesh_el_pt)
-   {    
-    //------------------------------------------
-    // Make sure the point lies inside the mesh:
-    //------------------------------------------
-    // Get the lower x limit of the mesh
-    const double x_min=this->x_min();
- 
-    // Get the upper x limit of the mesh
-    const double x_max=this->x_max();
- 
-    // Get the lower y limit of the mesh
-    const double y_min=this->y_min();
- 
-    // Get the upper y limit of the mesh
-    const double y_max=this->y_max();
-    
-    // Due to roundoff error we will choose a small tolerance which will be
-    // used to determine whether or not the point lies in the mesh
-    double tol=1.0e-12;
- 
-    // Assuming the mesh is axis-aligned we merely need to check if the
-    // x-coordinate of the input lies in the range [x_min,x_max] and the
-    // y-coordinate of the input lies in the range [y_min,y_max]
-    if ((x[0]<x_min-tol)||(x[0]>x_max+tol)||(x[1]<y_min-tol)||(x[1]>y_max+tol))
-    {
-     // Open an output string stream
-     std::ostringstream error_message_stream;
-
-     // Create an error message
-     error_message_stream << "Point does not lie in the mesh." << std::endl;
-
-     // Throw the error message
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
- 
-    //-----------------------------------------
-    // Collect some information about the mesh:
-    //-----------------------------------------
-    // Find out how many elements there are in the x-direction
-    const unsigned nx=this->nx();
- 
-    // Find out how many elements there are in the y-direction
-    const unsigned ny=this->ny();
-
-    // Find out how many nodes there are in one direction in each element
-    unsigned nnode_1d=this->finite_element_pt(0)->nnode_1d();
- 
-    // Find out how many nodes there are in each element
-    unsigned nnode=this->finite_element_pt(0)->nnode();
- 
-    // Create a pointer to store the element pointer as a FiniteElement
-    FiniteElement* el_pt=0;
- 
-    // Vector to store the coordinate of each element corner node which
-    // lies on the bottom boundary of the mesh and varies, i.e. if we're
-    // on the bottom boundary of the PML mesh then the y-coordinate will
-    // be fixed therefore we need only store the x-coordinates of the
-    // corner nodes of each element attached to this boundary
-    Vector<double> bottom_boundary_x_coordinates(nx+1,0.0);
-
-    // Vector to store the coordinate of each element corner node which lies
-    // on the right boundary of the mesh and varies
-    Vector<double> right_boundary_y_coordinates(ny+1,0.0);
- 
-    // Recall, we already know the start and end coordinates of the mesh
-    // in the x-direction so we can assign these entries straight away.
-    // Note, these values are exactly the same as those had we instead
-    // considered the upper boundary so it is only necessary to store
-    // the information of the one of these boundaries. A similar argument
-    // holds for the left and right boundaries.
-
-    // The first entry of bottom_boundary_x_coordinates is:
-    bottom_boundary_x_coordinates[0]=x_min;
- 
-    // The last entry is:
-    bottom_boundary_x_coordinates[nx]=x_max;
-
-    // The first entry of right_boundary_y_coordinates is:
-    right_boundary_y_coordinates[0]=y_min;
- 
-    // The last entry is:
-    right_boundary_y_coordinates[ny]=y_max;
- 
-    // To collect the remaining entries we need to loop over all of the
-    // elements on the bottom boundary and collect the x-coordinate of
-    // the bottom right node in the element. To avoid assigning the
-    // last entry twice we ignore the last element.
-
-    // Store the lower boundary ID
-    unsigned lower_boundary_id=0;
- 
-    // Store the right boundary ID
-    unsigned right_boundary_id=1;
- 
-    // Loop over the elements on the bottom boundary
-    for (unsigned i=0;i<nx;i++)
-    {
-     // Assign the element pointer
-     el_pt=this->boundary_element_pt(lower_boundary_id,i);
-  
-     // Store the x-coordinate of the bottom right node in this element
-     bottom_boundary_x_coordinates[i+1]=el_pt->node_pt(nnode_1d-1)->x(0);
-    }
- 
-    // To collect the remaining entries we need to loop over all of the
-    // elements on the right boundary and collect the y-coordinate of
-    // the top right node in the element. To avoid assigning the
-    // last entry twice we ignore the last element.
- 
-    // Loop over the elements on the bottom boundary
-    for (unsigned i=0;i<ny;i++)
-    {
-     // Assign the element pointer
-     el_pt=this->boundary_element_pt(right_boundary_id,i);
-  
-     // Store the y-coordinate of the top right node in this element
-     right_boundary_y_coordinates[i+1]=el_pt->node_pt(nnode-1)->x(1);
-    }
-
-    //---------------------------
-    // Find the matching element:
-    //--------------------------- 
-    // Boolean variable to indicate that the ID of the element in the
-    // x-direction has been found. Note, the value of this ID must lie
-    // in the range [0,nx]
-    bool element_x_id_has_been_found=false;
- 
-    // Boolean variable to indicate that the ID of the element in the
-    // y-direction has been found. Note, the value of this ID must lie
-    // in the range [0,ny]
-    bool element_y_id_has_been_found=false;
-
-    // Initialise the ID of the element in the x-direction
-    unsigned element_x_id=0;
- 
-    // Initialise the ID of the element in the y-direction
-    unsigned element_y_id=0;
- 
-    // Loop over all of the entries in bottom_boundary_x_coordinates
-    for (unsigned i=0;i<nx;i++)
-    {
-     // Check if the x-coordinate of the input lies in this interval
-     if ((x[0]>=bottom_boundary_x_coordinates[i])&&
-	 (x[0]<=bottom_boundary_x_coordinates[i+1]))
-     {
-      // The point lies in the i-th interval so the element ID is i
-      element_x_id=i;
-
-      // Indicate that the element ID has been found
-      element_x_id_has_been_found=true;
-     }
-    } // for (unsigned i=0;i<nx;i++)
-
-    // If the element ID hasn't been found
-    if (!element_x_id_has_been_found)
-    {
-     // Open an output string stream
-     std::ostringstream error_message_stream;
-
-     // Create an error message
-     error_message_stream << "The ID of the element in the x-direction "
-			  << "has not been found." << std::endl;
-
-     // Throw the error message
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
- 
-    // Loop over all of the entries in right_boundary_y_coordinates
-    for (unsigned i=0;i<ny;i++)
-    {
-     // Check if the y-coordinate of the input lies in this interval
-     if ((x[1]>=right_boundary_y_coordinates[i])&&
-	 (x[1]<=right_boundary_y_coordinates[i+1]))
-     {
-      // The point lies in the i-th interval so the element ID is i
-      element_y_id=i;
-
-      // Indicate that the element ID has been found
-      element_y_id_has_been_found=true;
-     }
-    } // for (unsigned i=0;i<ny;i++)
- 
-    // If the element ID hasn't been found
-    if (!element_y_id_has_been_found)
-    {
-     // Open an output string stream
-     std::ostringstream error_message_stream;
-
-     // Create an error message
-     error_message_stream << "The ID of the element in the y-direction "
-			  << "has not been found." << std::endl;
-
-     // Throw the error message
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Calculate the element number in the mesh
-    unsigned el_id=element_y_id*nx+element_x_id;
-
-    // Set the pointer to this element
-    coarse_mesh_el_pt=dynamic_cast<FiniteElement*>(this->element_pt(el_id));
-   } // End of pml_locate_zeta 
- };
- 
-//====================================================================
-/// PML mesh, derived from RectangularQuadMesh.
-//====================================================================
- template<class ELEMENT>
- class PMLQuadMesh : public PMLQuadMeshBase<ELEMENT>
- {
-
- public:
-  
-  /// \short Constructor: Pass pointer to "bulk" mesh,
-  /// the boundary ID of axis aligned boundary to which the
-  /// mesh is supposed to be attached and the boundary ID in the
-  /// rectangular quad mesh that contains the pml elements.
-  ///             0: constant y, bulk mesh below;
-  ///             1: constant x, bulk mesh to the right;
-  ///             2: constant y, bulk mesh above;
-  ///             3: constant x, bulk mesh to left.
-  PMLQuadMesh(Mesh* bulk_mesh_pt, 
-              const unsigned& boundary_id, const unsigned& quad_boundary_id, 
-              const unsigned& n_pml_x, const unsigned& n_pml_y,
-              const double& x_pml_start, const double& x_pml_end, 
-              const double& y_pml_start, const double& y_pml_end,
-              TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper) :
-   PMLQuadMeshBase<ELEMENT>(n_pml_x,n_pml_y,
-			    x_pml_start,x_pml_end,
-			    y_pml_start,y_pml_end,
-			    time_stepper_pt)
-   {
-    unsigned n_boundary_node = bulk_mesh_pt -> nboundary_node(boundary_id);
- 
-    // Create a vector of ordered boundary nodes
-    Vector<Node*> ordered_boundary_node_pt(n_boundary_node);
-
-    // Fill the vector with the nodes on the respective boundary
-    for (unsigned n=0; n<n_boundary_node; n++)
-    {
-     ordered_boundary_node_pt[n] = 
-      bulk_mesh_pt -> boundary_node_pt(boundary_id, n);
-    }
-
-    /// Sort them depending on the boundary being used
-   
-    // Right boundary
-    if (quad_boundary_id == 3)
-    {
-     std::sort(ordered_boundary_node_pt.begin(),
-               ordered_boundary_node_pt.end(),
-               TwoDimensionalPMLHelper::sorter_right_boundary);
-    }
-
-    /// Top boundary
-    if (quad_boundary_id == 0)
-    {
-     std::sort(ordered_boundary_node_pt.begin(),
-               ordered_boundary_node_pt.end(),
-               TwoDimensionalPMLHelper::sorter_top_boundary);
-    }
-
-    /// Left boundary
-    if (quad_boundary_id == 1)
-    {
-     std::sort(ordered_boundary_node_pt.begin(),
-               ordered_boundary_node_pt.end(),
-	       TwoDimensionalPMLHelper::sorter_left_boundary);
-    }
-
-    /// Bottom boundary
-    if (quad_boundary_id == 2)
-    {
-     std::sort(ordered_boundary_node_pt.begin(),
-               ordered_boundary_node_pt.end(),
-	       TwoDimensionalPMLHelper::sorter_bottom_boundary);
-    }
-
-    unsigned nnode_1d = this->finite_element_pt(0)->nnode_1d();
-   
-    /// \short Simple interior node numbering helpers
-    /// to be precomputed before the main loop
-
-    /// Top left node in element
-    unsigned interior_node_nr_helper_1 = nnode_1d * (nnode_1d - 1);
-    /// Lower right node in element
-    unsigned interior_node_nr_helper_2 = nnode_1d - 1;
-    /// Used to find nodes in top row
-    unsigned interior_node_nr_helper_3 = nnode_1d * (nnode_1d - 1) - 1;
-
-    /// \short Set all nodes from the PML mesh that must disappear
-    /// after merging as obsolete
-    unsigned nnod = this -> nboundary_node(quad_boundary_id);
-    for (unsigned j=0;j<nnod;j++)
-    {
-     this -> boundary_node_pt(quad_boundary_id,j)->set_obsolete();
-    }
-   
-    // Kill the obsolete nodes
-    this -> prune_dead_nodes();
-   
-    // Find the number of elements inside the PML mesh
-    unsigned n_pml_element = this -> nelement();
-
-    /// Simple interior element numbering helpers
-
-    /// Last element in mesh (top right)
-    unsigned interior_element_nr_helper_1 = n_pml_element-1;
-
- 
-    // Connect the elements in the pml mesh to the ones
-    // in the triangular mesh at element level
-    unsigned count = 0;
-
-    // Each boundary requires a specific treatment
-    // Right boundary
-    if (quad_boundary_id == 3) {
-     for(unsigned e=0; e<n_pml_element; e++)
-     {
-      // If element is on the right boundary
-      if ((e % n_pml_x) == 0) 
-      {        
-       // Upcast from GeneralisedElement to bulk element
-       ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	this -> element_pt(e));
-       
-       // Loop over all nodes in element
-       unsigned n_node = el_pt -> nnode();
-       for (unsigned inod = 0; inod<n_node; inod++)
-       {
-	if (inod % nnode_1d == 0 )
-	{
-	 // Get the pointer from the triangular mesh
-	 el_pt->node_pt(inod) = ordered_boundary_node_pt[count];
-	 count++;
-
-	 // Node between two elements
-	 if (inod == interior_node_nr_helper_1) {count--;} 
-	} 
-       }
-      } 
-     }
-    }
-
-    // Top boundary
-    if (quad_boundary_id == 0) {
-     for(unsigned e=0; e<n_pml_element; e++)
-     {
-      // If element is on the right boundary
-      if ((int)(e / n_pml_x) == 0) 
-      {        
-       // Upcast from GeneralisedElement to bulk element
-       ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	this -> element_pt(e));
-       
-       // Loop over all nodes in element
-       unsigned n_node = el_pt -> nnode();
-       for (unsigned inod = 0; inod<n_node; inod++)
-       {
-	if ((int) (inod / nnode_1d) == 0 )
-	{
-	 // Get the pointer from the triangular mesh
-	 el_pt->node_pt(inod) = ordered_boundary_node_pt[count];
-	 count++;
-
-	 // Node between two elements
-	 if (inod == interior_node_nr_helper_2) {count--;} 
-	} 
-       }
-      } 
-     }
-    }
-
-    // Left boundary
-    if (quad_boundary_id == 1) {
-     for(unsigned e=interior_element_nr_helper_1; e < n_pml_element; e--)
-     {
-      // If element is on the right boundary
-      if ((e % n_pml_x) == (n_pml_x-1)) 
-      {        
-       // Upcast from GeneralisedElement to bulk element
-       ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	this -> element_pt(e));
-       
-       // Loop over all nodes in element
-       unsigned n_node = el_pt -> nnode();
-       unsigned starter = n_node-1;
-       for (unsigned inod = starter; inod<=starter; inod--)
-       {
-	if (inod % nnode_1d == interior_node_nr_helper_2 )
-	{
-	 // Get the pointer from the triangular mesh
-	 el_pt->node_pt(inod) = ordered_boundary_node_pt[count];
-	 count++;
-
-	 // Node between two elements
-	 if (inod == interior_node_nr_helper_2) {count--;} 
-	} 
-       }
-      } 
-     }
-    }
-
-    // Bottom boundary
-    if (quad_boundary_id == 2) {
-     for(unsigned e=interior_element_nr_helper_1; e < n_pml_element; e--)
-     {
-      // If element is on the top boundary
-      if (e  >= (n_pml_x*(n_pml_y-1))) 
-      {        
-       // Upcast from GeneralisedElement to bulk element
-       ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	this -> element_pt(e));
-       
-       // Loop over all nodes in element
-       unsigned n_node = el_pt -> nnode();
-       unsigned starter = n_node-1;
-       for (unsigned inod = starter; inod<=starter; inod--)
-       {
-	if (inod > interior_node_nr_helper_3 )
-	{
-	 // Get the pointer from the triangular mesh
-	 el_pt->node_pt(inod) = ordered_boundary_node_pt[count];
-	 count++;
-
-	 // Node between two elements
-	 if (inod == interior_node_nr_helper_1) {count--;} 
-	} 
-       }
-      } 
-     }
-    }
-
-    /// \short The alignment is done individually for each boundary
-    /// and depends on the ordering of the nodes, in this case of the
-    /// RectangularQuadMesh<2,3> for each boundary. There are operations
-    /// with mod and div 3 necessary in this case, as well as specific
-    /// mechanisms to loop over the boundary in a certain way in order
-    /// to obtain the convenient coordinates.
-
-    // Loop over all elements and make sure the coordinates are aligned
-    for(unsigned e=0; e<n_pml_element; e++)
-    {
-     // Upcast from GeneralisedElement to bulk element
-     ELEMENT *el_pt = 
-      dynamic_cast<ELEMENT* >(this -> element_pt(e));
-     unsigned n_node = el_pt -> nnode();
-     
-     // Loop over all nodes in element
-     double temp_coordinate = 0.0;
-     for (unsigned inod = 0; inod<n_node; inod++)
-     {      
-      // Check if we are looking at the left boundary of the quad mesh
-      if (quad_boundary_id == 3) {
-       // If it is one of the ones on the left boundary
-       if (inod % nnode_1d == 0)
-       {
-	// Get the y-coordinate of the leftmost node in that element
-	temp_coordinate = el_pt -> node_pt(inod) -> x(1);
-       } 
-        
-       // Each node's y-coordinate is reset to be the one of the leftmost
-       // node in that element on its x-coordinate
-       el_pt -> node_pt(inod) -> x(1) = temp_coordinate;
-      }
-      // End of left quad boundary check
-       
-      // Check if we are looking at the top boundary of the quad mesh
-      if (quad_boundary_id == 0) {
-       // If it is one of the ones on the bottom boundary
-       if (inod > interior_node_nr_helper_2)
-       {
-	// Get the y-coordinate of the leftmost node in that element
-	el_pt -> node_pt(inod) -> x(0) = 
-	 el_pt -> node_pt(inod - nnode_1d) -> x(0);
-       } 
-      }
-      // End of top quad boundary check
-     }
-    }
-
-    for(unsigned e=interior_element_nr_helper_1; e<n_pml_element; e--)
-    {
-     // Upcast from GeneralisedElement to bulk element
-     ELEMENT *el_pt = 
-      dynamic_cast<ELEMENT* >(this -> element_pt(e));
-     unsigned n_node = el_pt -> nnode();
-     
-     // Loop over all nodes in element
-     double temp_coordinate = 0.0;
-     unsigned starter = n_node-1;
-     for (unsigned inod = starter; inod <= starter; inod--)
-     {      
-      // Check if we are looking at the right boundary of the quad mesh
-      if (quad_boundary_id == 1) {
-       // If it is one of the ones on the left boundary
-       if (inod % nnode_1d == interior_node_nr_helper_2)
-       {
-	// Get the y-coordinate of the leftmost node in that element
-	temp_coordinate = el_pt -> node_pt(inod) -> x(1);
-       } 
-        
-       // Each node's y-coordinate is reset to be the one of the leftmost
-       // node in that element on its x-coordinate
-       el_pt -> node_pt(inod) -> x(1) = temp_coordinate;
-      }
-      // End of right quad boundary check
-       
-      // Check if we are looking at the top boundary of the quad mesh
-      if (quad_boundary_id == 2) {
-       // If it is one of the ones on the bottom boundary
-       if (inod < interior_node_nr_helper_1)
-       {
-	// Get the y-coordinate of the leftmost node in that element
-	el_pt -> node_pt(inod) -> x(0) = 
-	 el_pt -> node_pt(inod + nnode_1d) -> x(0);
-       }
-     
-      }
-      // End of top quad boundary check  
-     }
-    }
-    // End of alignment
-   }
- };
-
-
-
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-
-
-//====================================================================
-/// PML mesh, derived from RectangularQuadMesh.
-//====================================================================
- template<class ELEMENT>
- class PMLCornerQuadMesh : public PMLQuadMeshBase<ELEMENT>
- {
- public:
-
-  /// \short Constructor: Pass pointer to "bulk" mesh
-  /// and the two existing PML meshes in order to construct the corner
-  /// PML mesh in between them based on their element number
-  /// and coordinates.
-  PMLCornerQuadMesh(Mesh* PMLQuad_mesh_x_pt, 
-		    Mesh* PMLQuad_mesh_y_pt, 
-		    Mesh* bulk_mesh_pt, 
-		    Node* special_corner_node_pt,
-		    const unsigned& parent_boundary_x_id, 
-		    const unsigned& parent_boundary_y_id, 
-		    const unsigned& current_boundary_x_id, 
-		    const unsigned& current_boundary_y_id,  
-		    const unsigned& n_pml_x, const unsigned& n_pml_y,
-		    const double& x_pml_start, const double& x_pml_end, 
-		    const double& y_pml_start, const double& y_pml_end,
-		    TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper) :   
-   PMLQuadMeshBase<ELEMENT>(n_pml_x,n_pml_y,
-			    x_pml_start,x_pml_end,
-			    y_pml_start,y_pml_end,
-			    time_stepper_pt)
-   {
-    unsigned nnode_1d = this->finite_element_pt(0)->nnode_1d();
-
-    /// \short Simple interior node numbering helpers
-    /// to be precomputed before the main loop
-
-    /// Top left node in element
-    unsigned interior_node_nr_helper_1 = nnode_1d * (nnode_1d - 1);
-    /// Lower right node in element
-    unsigned interior_node_nr_helper_2 = nnode_1d - 1;
-    /// Top right node in element
-    unsigned interior_node_nr_helper_3 = nnode_1d * nnode_1d - 1;
-
-    // Set up top right corner element
-    //--------------------------------
-    if ((parent_boundary_x_id == 2) && (parent_boundary_y_id == 1)){
-
-     // Get the number of nodes to be connected on the horizontal boundary
-     unsigned n_boundary_x_node = 
-      PMLQuad_mesh_x_pt -> nboundary_node(parent_boundary_x_id);
- 
-     // Create a vector of ordered boundary nodes
-     Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
-
-     // Fill the vector with the nodes on the respective boundary
-     for (unsigned n=0; n<n_boundary_x_node; n++)
-     {
-      ordered_boundary_x_node_pt[n] = 
-       PMLQuad_mesh_x_pt -> boundary_node_pt(parent_boundary_x_id, n);
-     }
-   
-     // Sort them from lowest to highest (in x coordinate)
-     if (parent_boundary_x_id == 2)
-     {
-      std::sort(ordered_boundary_x_node_pt.begin(),
-                ordered_boundary_x_node_pt.end(),
-		TwoDimensionalPMLHelper::sorter_top_boundary);
-     }
-    
-     // Get the number of nodes to be connected on the vertical boundary
-     unsigned n_boundary_y_node = 
-      PMLQuad_mesh_y_pt -> nboundary_node(parent_boundary_y_id);
-    
-     // Create a vector of ordered boundary nodes
-     Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
-    
-     // Fill the vector with the nodes on the respective boundary
-     for (unsigned n=0; n<n_boundary_y_node; n++)
-     {
-      ordered_boundary_y_node_pt[n] = 
-       PMLQuad_mesh_y_pt -> boundary_node_pt(parent_boundary_y_id, n);
-     }
-    
-     // Sort them
-     if (parent_boundary_y_id == 1)
-     {
-      std::sort(ordered_boundary_y_node_pt.begin(),
-                ordered_boundary_y_node_pt.end(),
-		TwoDimensionalPMLHelper::sorter_right_boundary);
-     }
-    
-     unsigned x_nnod = this -> nboundary_node(current_boundary_x_id);
-     for (unsigned j=0;j<x_nnod;j++) 
-     {
-      this -> boundary_node_pt(current_boundary_x_id,j)->set_obsolete();
-     }
-    
-     unsigned y_nnod = this -> nboundary_node(current_boundary_y_id);
-     for (unsigned j=0;j<y_nnod;j++)
-     {
-      this -> boundary_node_pt(current_boundary_y_id,j)->set_obsolete();
-     }
-        
-     // Kill the obsolete nodes
-     this -> prune_dead_nodes();
-    
-     unsigned n_pml_element = this -> nelement();
-    
-     // Connect the elements in the pml mesh to the ones
-     // in the triangular mesh at element level
-     unsigned count = 0;
-    
-     if (parent_boundary_y_id == 1) {
-      for(unsigned e=0; e<n_pml_element; e++)
-      {
-       // If element is on the right boundary
-       if ((e % n_pml_x) == 0) 
-       {         
-	// Upcast from GeneralisedElement to bulk element
-	ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	 this -> element_pt(e));
-         
-	// Loop over all nodes in element
-	unsigned n_node = el_pt -> nnode();
-	for (unsigned inod = 0; inod<n_node; inod++)
-	{
-	 // If it is one of the ones on the left boundary
-	 if (e==0)
-	 {
-	  if (inod==0) el_pt->node_pt(inod) = special_corner_node_pt;
-	  if ((inod % nnode_1d == 0) && (inod>0)) {
-
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_1) {count--;} 
-	  }
-	 } 
-	 else
-	 {
-	  if ((inod % nnode_1d) == 0){
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_1) {count--;}
-	  } 
-	 }
-	}
-       } 
-      }
-     }
-
-     count = 0;
-    
-     if (parent_boundary_x_id == 2) {
-      for(unsigned e=0; e<n_pml_element; e++)
-      {
-       // If element is on the right boundary
-       if ((int)(e / n_pml_x) == 0) 
-       {       
-	// Upcast from GeneralisedElement to bulk element
-	ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	 this -> element_pt(e));
-       
-	// Loop over all nodes in element
-	unsigned n_node = el_pt -> nnode();
-	for (unsigned inod = 0; inod<n_node; inod++)
-	{
-	 if (e==0){
-	  if (((int) (inod / nnode_1d) == 0 ) && (inod > 0))
-	  {
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_2) {count--;} 
-	  } 
-	 } else
-	 {
-	  if ((int) (inod / nnode_1d) == 0 )
-	  {
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_2) {count--;} 
-	  }      
-	 }
-	}
-       } 
-      }
-     }
-    }
-
-    // Set up bottom right corner element
-    //--------------------------------
-    if ((parent_boundary_x_id == 0) && (parent_boundary_y_id == 1)){
-     // Get the number of nodes to be connected on the horizontal boundary
-     unsigned n_boundary_x_node = 
-      PMLQuad_mesh_x_pt -> nboundary_node(parent_boundary_x_id);
- 
-     // Create a vector of ordered boundary nodes
-     Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
-
-     // Fill the vector with the nodes on the respective boundary
-     for (unsigned n=0; n<n_boundary_x_node; n++)
-     {
-      ordered_boundary_x_node_pt[n] = 
-       PMLQuad_mesh_x_pt -> boundary_node_pt(parent_boundary_x_id, n);
-     }
-   
-     // Sort them from lowest to highest (in x coordinate)
-     if (parent_boundary_x_id == 0)
-     {
-      std::sort(ordered_boundary_x_node_pt.begin(),
-                ordered_boundary_x_node_pt.end(),
-		TwoDimensionalPMLHelper::sorter_top_boundary);
-     }
-    
-     // Get the number of nodes to be connected on the vertical boundary
-     unsigned n_boundary_y_node = 
-      PMLQuad_mesh_y_pt -> nboundary_node(parent_boundary_y_id);
-    
-     // Create a vector of ordered boundary nodes
-     Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
-    
-     // Fill the vector with the nodes on the respective boundary
-     for (unsigned n=0; n<n_boundary_y_node; n++)
-     {
-      ordered_boundary_y_node_pt[n] = 
-       PMLQuad_mesh_y_pt -> boundary_node_pt(parent_boundary_y_id, n);
-     }
-    
-     // Sort them
-     if (parent_boundary_y_id == 1)
-     {
-      std::sort(ordered_boundary_y_node_pt.begin(),
-                ordered_boundary_y_node_pt.end(),
-		TwoDimensionalPMLHelper::sorter_right_boundary);
-     }
-    
-     unsigned x_nnod = this -> nboundary_node(current_boundary_x_id);
-     for (unsigned j=0;j<x_nnod;j++) 
-     {
-      this -> boundary_node_pt(current_boundary_x_id,j)->set_obsolete();
-     }
-    
-     unsigned y_nnod = this -> nboundary_node(current_boundary_y_id);
-     for (unsigned j=0;j<y_nnod;j++)
-     {
-      this -> boundary_node_pt(current_boundary_y_id,j)->set_obsolete();
-     }
-    
-     // Kill the obsolete nodes
-     this -> prune_dead_nodes();
-    
-     // Get the number of elements in the PML mesh
-     unsigned n_pml_element = this -> nelement();
-    
-     // Connect the elements in the pml mesh to the ones
-     // in the triangular mesh at element level
-     unsigned count = 0;
-    
-     if (parent_boundary_y_id == 1) {
-      for(unsigned e=0; e<n_pml_element; e++)
-      {
-       // If element is on the right boundary
-       if ((e % n_pml_x) == 0) 
-       {         
-	// Upcast from GeneralisedElement to bulk element
-	ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	 this -> element_pt(e));
-         
-	// Loop over all nodes in element
-	unsigned n_node = el_pt -> nnode();
-	for (unsigned inod = 0; inod<n_node; inod++)
-	{
-	 if (e==((n_pml_x) * (n_pml_y-1)))
-	 {
-             
-	  if (inod==interior_node_nr_helper_1) {
-	   el_pt->node_pt(inod) = special_corner_node_pt;
-	  } 
-	  if ((inod%nnode_1d == 0) && (inod<interior_node_nr_helper_1) ) {
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_1) {count--;} 
-	  }
-	 } 
-	 else
-	 {
-	  if ((inod % nnode_1d) == 0){
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_1) {count--;}
-	  } 
-	 }
-	}
-       } 
-      }
-     }
-
-     count = 0;
-    
-     if (parent_boundary_x_id == 0) {
-      for(unsigned e=0; e<n_pml_element; e++)
-      {
-       // If element is on the right boundary
-       if (e>=((n_pml_x-0) * (n_pml_y-1))) 
-       {        
-	// Upcast from GeneralisedElement to bulk element
-	ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	 this -> element_pt(e));
-       
-	// Loop over all nodes in element
-	unsigned n_node = el_pt -> nnode();
-	for (unsigned inod = 0; inod<n_node; inod++)
-	{
-	 if (e==((n_pml_x) * (n_pml_y-1))){
-	  if (((unsigned) (inod / nnode_1d) == interior_node_nr_helper_2 ) 
-	      && (inod > interior_node_nr_helper_1))
-	  {
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_3) {count--;} 
-	  } 
-	 } else
-	 {
-	  if ((unsigned) (inod / nnode_1d) == interior_node_nr_helper_2 )
-	  {
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_3) {count--;} 
-	  }      
-	 }
-	}
-       } 
-      }
-     }
-    }
-  
-    // Set up top left corner element
-    //--------------------------------
-    if ((parent_boundary_x_id == 2) && (parent_boundary_y_id == 3)){
-     // Get the number of nodes to be connected on the horizontal boundary
-     unsigned n_boundary_x_node = 
-      PMLQuad_mesh_x_pt -> nboundary_node(parent_boundary_x_id);
- 
-     // Create a vector of ordered boundary nodes
-     Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
-
-     // Fill the vector with the nodes on the respective boundary
-     for (unsigned n=0; n<n_boundary_x_node; n++)
-     {
-      ordered_boundary_x_node_pt[n] = 
-       PMLQuad_mesh_x_pt -> boundary_node_pt(parent_boundary_x_id, n);
-     }
-   
-     // Sort them from lowest to highest (in x coordinate)
-     if (parent_boundary_x_id == 2)
-     {
-      std::sort(ordered_boundary_x_node_pt.begin(),
-                ordered_boundary_x_node_pt.end(),
-		TwoDimensionalPMLHelper::sorter_top_boundary);
-     }
-    
-     // Get the number of nodes to be connected on the vertical boundary
-     unsigned n_boundary_y_node = 
-      PMLQuad_mesh_y_pt -> nboundary_node(parent_boundary_y_id);
-    
-     // Create a vector of ordered boundary nodes
-     Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
-    
-     // Fill the vector with the nodes on the respective boundary
-     for (unsigned n=0; n<n_boundary_y_node; n++)
-     {
-      ordered_boundary_y_node_pt[n] = 
-       PMLQuad_mesh_y_pt -> boundary_node_pt(parent_boundary_y_id, n);
-     }
-    
-     // Sort them from lowest to highest (in x coordinate)
-     if (parent_boundary_y_id == 1)
-     {
-      std::sort(ordered_boundary_y_node_pt.begin(),
-                ordered_boundary_y_node_pt.end(),
-		TwoDimensionalPMLHelper::sorter_right_boundary);
-     }
-    
-     unsigned x_nnod = this -> nboundary_node(current_boundary_x_id);
-     for (unsigned j=0;j<x_nnod;j++) 
-     {
-      this -> boundary_node_pt(current_boundary_x_id,j)->set_obsolete();
-     }
-    
-     unsigned y_nnod = this -> nboundary_node(current_boundary_y_id);
-     for (unsigned j=0;j<y_nnod;j++)
-     {
-      this -> boundary_node_pt(current_boundary_y_id,j)->set_obsolete();
-     }
-    
-     // Kill the obsolete nodes
-     this -> prune_dead_nodes();
-  
-     // Get the number of elements in the PML mesh
-     unsigned n_pml_element = this -> nelement();
-    
-     // Connect the elements in the pml mesh to the ones
-     // in the triangular mesh at element level
-     unsigned count = 0;
-    
-     if (parent_boundary_y_id == 3) {
-      for(unsigned e=0; e<n_pml_element; e++)
-      {
-       // If element is on the right boundary
-       if ((e % n_pml_x) == (n_pml_x-1)) 
-       {
-	// Upcast from GeneralisedElement to bulk element
-	ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	 this -> element_pt(e));
-         
-	// Loop over all nodes in element
-	unsigned n_node = el_pt -> nnode();
-	for (unsigned inod = 0; inod<n_node; inod++)
-	{
-	 if (e==(n_pml_x-1))
-	 {
-	  if (inod == interior_node_nr_helper_2) 
-	   el_pt->node_pt(inod) = special_corner_node_pt;
-	  if ((inod % nnode_1d == interior_node_nr_helper_2) 
-	      && (inod > (nnode_1d - 1))) {
-
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_3) {count--;} 
-	  }
-	 } 
-	 else
-	 {
-	  if ((inod % nnode_1d) == interior_node_nr_helper_2){
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_3) {count--;}
-	  } 
-	 }
-	}
-       } 
-      }
-     }
-
-     count = 0;
-    
-     if (parent_boundary_x_id == 2) {
-      for(unsigned e=0; e<n_pml_element; e++)
-      {
-       // If element is on the right boundary
-       if ((int)(e / n_pml_x) == 0) 
-       {        
-	// Upcast from GeneralisedElement to bulk element
-	ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	 this -> element_pt(e));
-       
-	// Loop over all nodes in element
-	unsigned n_node = el_pt -> nnode();
-	for (unsigned inod = 0; inod<n_node; inod++)
-	{
-	 // If it is one of the ones on the left boundary
-	 if (e==(n_pml_x-1)){
-	  if (((int) (inod / nnode_1d) == 0 ) 
-	      && (inod < interior_node_nr_helper_2))
-	  {
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == (nnode_1d - 1)) {count--;} 
-	  } 
-	 } else
-	 {
-	  if ((int) (inod / nnode_1d) == 0 )
-	  {
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_2) {count--;} 
-	  }      
-	 }
-	}
-       } 
-      }
-     }
-    }
-
-    // Set up bottom left corner element
-    //--------------------------------
-    if ((parent_boundary_x_id == 0) && (parent_boundary_y_id == 3)){
-     // Get the number of nodes to be connected on the horizontal boundary
-     unsigned n_boundary_x_node = 
-      PMLQuad_mesh_x_pt -> nboundary_node(parent_boundary_x_id);
-    
-     // Create a vector of ordered boundary nodes
-     Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
-    
-     // Fill the vector with the nodes on the respective boundary
-     for (unsigned n=0; n<n_boundary_x_node; n++)
-     {
-      ordered_boundary_x_node_pt[n] = 
-       PMLQuad_mesh_x_pt -> boundary_node_pt(parent_boundary_x_id, n);
-     }
-    
-     // Sort them
-     if (parent_boundary_x_id == 0)
-     {
-      std::sort(ordered_boundary_x_node_pt.begin(),
-                ordered_boundary_x_node_pt.end(),
-                TwoDimensionalPMLHelper::sorter_top_boundary);
-     }
-    
-     // Get the number of nodes to be connected on the vertical boundary
-     unsigned n_boundary_y_node = 
-      PMLQuad_mesh_y_pt -> nboundary_node(parent_boundary_y_id);
-    
-     // Create a vector of ordered boundary nodes
-     Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
-    
-     // Fill the vector with the nodes on the respective boundary
-     for (unsigned n=0; n<n_boundary_y_node; n++)
-     {
-      ordered_boundary_y_node_pt[n] = 
-       PMLQuad_mesh_y_pt -> boundary_node_pt(parent_boundary_y_id, n);
-     }
-    
-     // Sort them 
-     if (parent_boundary_y_id == 3)
-     {
-      std::sort(ordered_boundary_y_node_pt.begin(),
-                ordered_boundary_y_node_pt.end(),
-                TwoDimensionalPMLHelper::sorter_right_boundary);
-     }
-    
-     unsigned x_nnod = this -> nboundary_node(current_boundary_x_id);
-     for (unsigned j=0;j<x_nnod;j++) 
-     {
-      this -> boundary_node_pt(current_boundary_x_id,j)->set_obsolete();
-     }
-    
-     unsigned y_nnod = this -> nboundary_node(current_boundary_y_id);
-     for (unsigned j=0;j<y_nnod;j++)
-     {
-      this -> boundary_node_pt(current_boundary_y_id,j)->set_obsolete();
-     }
-    
-     // Kill the obsolete nodes
-     this -> prune_dead_nodes();
-    
-     unsigned n_pml_element = this -> nelement();
-    
-     // Connect the elements in the pml mesh to the ones
-     // in the triangular mesh at element level
-     unsigned count = 0;
-    
-     if (parent_boundary_y_id == 3) {
-      for(unsigned e=0; e<n_pml_element; e++)
-      {
-       // If element is on the right boundary
-       if ((e % n_pml_x) == (n_pml_x-1)) 
-       {         
-	// Upcast from GeneralisedElement to bulk element
-	ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	 this -> element_pt(e));
-         
-	// Loop over all nodes in element
-	unsigned n_node = el_pt -> nnode();
-	for (unsigned inod = 0; inod<n_node; inod++)
-	{
-	 if (e==(n_pml_element-1))
-	 {  
-	  if (inod == interior_node_nr_helper_3) {
-	   el_pt->node_pt(inod) = special_corner_node_pt;
-	  }
-	  if ((inod % nnode_1d == interior_node_nr_helper_2) 
-	      && (inod < interior_node_nr_helper_3 )) {
-
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_3) {count--;} 
-	  }
-	 } 
-	 else
-	 {
-	  if ((inod % nnode_1d) == interior_node_nr_helper_2){
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_3) {count--;}
-	  } 
-	 }
-	}
-       } 
-      }
-     }
-    
-     count = 0;
-    
-     if (parent_boundary_x_id == 0) {
-      for(unsigned e=0; e<n_pml_element; e++)
-      {
-       // If element is on the right boundary
-       if (e>=((n_pml_x) * (n_pml_y-1))) 
-       {
-	// Upcast from GeneralisedElement to bulk element
-	ELEMENT *el_pt = dynamic_cast<ELEMENT* >(
-	 this -> element_pt(e));
-         
-	// Loop over all nodes in element
-	unsigned n_node = el_pt -> nnode();
-	for (unsigned inod = 0; inod<n_node; inod++)
-	{
-	 if (e==(n_pml_element-1)){
-	  if (((unsigned) (inod / nnode_1d) == interior_node_nr_helper_2 ) 
-	      && (inod < interior_node_nr_helper_3))
-	  {
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_3) {count--;} 
-	  } 
-	 } else
-	 {
-	  if ((unsigned) (inod / nnode_1d) == interior_node_nr_helper_2 )
-	  {
-	   // Get the pointer from the triangular mesh
-	   el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
-	   count++;
-
-	   // Node between two elements
-	   if (inod == interior_node_nr_helper_3) {count--;} 
-	  }      
-	 }
-	}
-       } 
-      }
-     }
-    } 
-   }
- };
-
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-
-
-//===================================================================
-/// \short All helper routines for 2D bulk boundary mesh usage in order to 
-/// generate PML meshes aligned to the main mesh
-//===================================================================
- namespace TwoDimensionalPMLHelper
- {
-
-  //============================================================================
-  /// "Constructor" for PML mesh,aligned with the right physical domain boundary
-  //============================================================================
-  template<class ASSOCIATED_PML_QUAD_ELEMENT>
-  Mesh* create_right_pml_mesh(Mesh* bulk_mesh_pt,
-			      const unsigned& right_boundary_id,
-			      const unsigned& n_x_right_pml,
-			      const double& width_x_right_pml,
-			      TimeStepper* time_stepper_pt=
-			      &Mesh::Default_TimeStepper)
-  {  
-   // Look at the right boundary of the triangular mesh
-   unsigned n_right_boundary_node = 
-    bulk_mesh_pt -> nboundary_node(right_boundary_id);
-  
-   // Create a vector of ordered boundary nodes
-   Vector<Node*> ordered_right_boundary_node_pt(n_right_boundary_node);
-  
-   // Fill the vector with the nodes on the respective boundary
-   for (unsigned n=0; n<n_right_boundary_node; n++)
-   {
-    ordered_right_boundary_node_pt[n] = 
-     bulk_mesh_pt->boundary_node_pt(right_boundary_id,n);
-   }
-  
-   // Sort them from lowest to highest (in y coordinate)
-   std::sort(ordered_right_boundary_node_pt.begin(),
-	     ordered_right_boundary_node_pt.end(),
-	     sorter_right_boundary);
-  
-   // The number of elements in y is taken from the triangular mesh
-   unsigned n_y_right_pml = 
-    bulk_mesh_pt -> nboundary_element(right_boundary_id);
-  
-   // Specific PML sizes needed, taken directly from physical domain
-   double l_pml_right_x_start = 
-    ordered_right_boundary_node_pt[0] -> x(0);
-   /// \short PML layer with added to the bulk mesh coordinate
-   double l_pml_right_x_end   = 
-    width_x_right_pml 
-    + ordered_right_boundary_node_pt[0] -> x(0);
-   double l_pml_right_y_start = 
-    ordered_right_boundary_node_pt[0] -> x(1);
-   double l_pml_right_y_end   = 
-    ordered_right_boundary_node_pt[n_right_boundary_node-1] -> x(1);
-  
-   // Rectangular boundary id to be merged with triangular mesh
-   unsigned right_quadPML_boundary_id = 3;
-  
-   // Create the mesh to be designated to the PML
-   Mesh* pml_right_mesh_pt = 0;
-
-   // Build the right one
-   pml_right_mesh_pt=
-    new PMLQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>
-    (bulk_mesh_pt, right_boundary_id, right_quadPML_boundary_id,  
-     n_x_right_pml, n_y_right_pml, 
-     l_pml_right_x_start, l_pml_right_x_end, 
-     l_pml_right_y_start, l_pml_right_y_end,
-     time_stepper_pt);
-
-   // Enable PML damping on the entire mesh
-   unsigned n_element_pml_right = pml_right_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element_pml_right;e++)
-   {
-    // Upcast
-    PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-     (pml_right_mesh_pt->element_pt(e));
-    el_pt -> enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
-   }
-  
-   // Get the values to be pinned from the first element (which we
-   // assume exists!)
-   PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-    (pml_right_mesh_pt->element_pt(0));
-   Vector<unsigned> values_to_pin;
-   el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
-   unsigned npin=values_to_pin.size();
-
-   // Exterior boundary needs to be set to Dirichlet 0
-   // in both real and imaginary parts
-   unsigned n_bound_pml_right = pml_right_mesh_pt->nboundary();
-   for(unsigned b=0;b<n_bound_pml_right;b++)
-   {
-    unsigned n_node = pml_right_mesh_pt -> nboundary_node(b);
-    for (unsigned n=0;n<n_node;n++)
-    {
-     Node* nod_pt=pml_right_mesh_pt -> boundary_node_pt(b,n);
-     if (b==1)
-     {
-      for (unsigned j=0;j<npin;j++)
-      {
-       unsigned j_val=values_to_pin[j];
-       nod_pt->pin(j_val);
-       nod_pt->set_value(j_val,0.0);
-      }
-     }
-    }
-   }
-  
-   /// \short Return the finalized mesh, with PML enabled 
-   /// and boundary conditions added
-   return pml_right_mesh_pt;
-  }
-
-  //===========================================================================
-  /// "Constructor" for PML mesh, aligned with the top physical domain boundary
-  //===========================================================================
-  template<class ASSOCIATED_PML_QUAD_ELEMENT>
-  Mesh* create_top_pml_mesh(Mesh* bulk_mesh_pt,
-			    const unsigned& top_boundary_id,
-			    const unsigned& n_y_top_pml,
-			    const double& width_y_top_pml,
-			    TimeStepper* time_stepper_pt=
-			    &Mesh::Default_TimeStepper)
-  {  
-   // Look at the top boundary of the triangular mesh
-   unsigned n_top_boundary_node = 
-    bulk_mesh_pt -> nboundary_node(top_boundary_id);
-  
-   // Create a vector of ordered boundary nodes
-   Vector<Node*> ordered_top_boundary_node_pt(n_top_boundary_node);
-  
-   // Fill the vector with the nodes on the respective boundary
-   for (unsigned n=0; n<n_top_boundary_node; n++)
-   {
-    ordered_top_boundary_node_pt[n] = 
-     bulk_mesh_pt->boundary_node_pt(top_boundary_id,n);
-   }
-  
-   // Sort them from lowest to highest (in x coordinate)
-   std::sort(ordered_top_boundary_node_pt.begin(),
-	     ordered_top_boundary_node_pt.end(),
-	     sorter_top_boundary);
- 
-   // The number of elements in x is taken from the triangular mesh
-   unsigned n_x_top_pml = bulk_mesh_pt -> nboundary_element(top_boundary_id);
-  
-   // Specific PML sizes needed, taken directly from physical domain
-   double l_pml_top_x_start = 
-    ordered_top_boundary_node_pt[0] -> x(0);
-   double l_pml_top_x_end   = 
-    ordered_top_boundary_node_pt[n_top_boundary_node-1] -> x(0);
-   double l_pml_top_y_start = 
-    ordered_top_boundary_node_pt[0] -> x(1);
-   /// \short PML layer width added to the bulk mesh coordinate
-   double l_pml_top_y_end   = 
-    width_y_top_pml 
-    + ordered_top_boundary_node_pt[0] -> x(1);
-  
-   unsigned top_quadPML_boundary_id = 0;
-
-   // Create the mesh to be designated to the PML
-   Mesh* pml_top_mesh_pt = 0;
-
-   // Build the top PML mesh 
-   pml_top_mesh_pt=
-    new PMLQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>
-    (bulk_mesh_pt, top_boundary_id, top_quadPML_boundary_id,  
-     n_x_top_pml, n_y_top_pml, 
-     l_pml_top_x_start, l_pml_top_x_end, 
-     l_pml_top_y_start, l_pml_top_y_end,
-     time_stepper_pt);
-
-   // Enable PML damping on the entire mesh
-   unsigned n_element_pml_top = pml_top_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element_pml_top;e++)
-   {
-    // Upcast
-    PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-     (pml_top_mesh_pt->element_pt(e));
-    el_pt -> enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
-   }
-  
-   // Get the values to be pinned from the first element (which we
-   // assume exists!)
-   PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-    (pml_top_mesh_pt->element_pt(0));
-   Vector<unsigned> values_to_pin;
-   el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
-   unsigned npin=values_to_pin.size();
-
-   // Exterior boundary needs to be set to Dirichlet 0
-   // for both real and imaginary parts of all fields
-   // in the problem
-   unsigned n_bound_pml_top = pml_top_mesh_pt->nboundary();
-   for(unsigned b=0;b<n_bound_pml_top;b++)
-   {
-    unsigned n_node = pml_top_mesh_pt -> nboundary_node(b);
-    for (unsigned n=0;n<n_node;n++)
-    {
-     Node* nod_pt=pml_top_mesh_pt -> boundary_node_pt(b,n);
-     if (b==2)
-     {
-      for (unsigned j=0;j<npin;j++)
-      {
-       unsigned j_val=values_to_pin[j];
-       nod_pt->pin(j_val);
-       nod_pt->set_value(j_val,0.0);
-      }
-     }
-    }
-   }
-
-   /// \short Return the finalized mesh, with PML enabled 
-   /// and boundary conditions added
-   return pml_top_mesh_pt;
-  }
-
-  //============================================================================
-  /// "Constructor" for PML mesh, aligned with the left physical domain boundary
-  //============================================================================
-  template<class ASSOCIATED_PML_QUAD_ELEMENT>
-  Mesh* create_left_pml_mesh(Mesh* bulk_mesh_pt,
-			     const unsigned& left_boundary_id,
-			     const unsigned& n_x_left_pml,
-			     const double& width_x_left_pml,
-			     TimeStepper* time_stepper_pt=
-			     &Mesh::Default_TimeStepper)
+  //=======================================================================
+  /// General definition of policy class defining the elements to
+  /// be used in the actual PML layers. Has to be instantiated for
+  /// each specific "bulk" PML element type.
+  //=======================================================================
+  template<class ELEMENT>
+  class PMLLayerElement
   {
-   // Look at the left boundary of the triangular mesh
-   unsigned n_left_boundary_node = 
-    bulk_mesh_pt -> nboundary_node(left_boundary_id);
-  
-   // Create a vector of ordered boundary nodes
-   Vector<Node*> ordered_left_boundary_node_pt(n_left_boundary_node);
-  
-   // Fill the vector with the nodes on the respective boundary
-   for (unsigned n=0; n<n_left_boundary_node; n++)
-   {
-    ordered_left_boundary_node_pt[n] = 
-     bulk_mesh_pt->boundary_node_pt(left_boundary_id,n);
-   }
-  
-   // Sort them from lowest to highest (in y coordinate)
-   std::sort(ordered_left_boundary_node_pt.begin(),
-	     ordered_left_boundary_node_pt.end(),
-	     sorter_left_boundary);
-  
-   // The number of elements in y is taken from the triangular mesh
-   unsigned n_y_left_pml = bulk_mesh_pt -> nboundary_element(left_boundary_id);
- 
-   // Specific PML sizes needed, taken directly from physical domain
-   /// \short PML layer width subtracted from left bulk mesh coordinate
-   double l_pml_left_x_start = 
-    - width_x_left_pml 
-    + ordered_left_boundary_node_pt[n_left_boundary_node-1] -> x(0);
-   double l_pml_left_x_end   = 
-    ordered_left_boundary_node_pt[n_left_boundary_node-1] -> x(0);
-   double l_pml_left_y_start = 
-    ordered_left_boundary_node_pt[n_left_boundary_node-1] -> x(1);
-   double l_pml_left_y_end   = 
-    ordered_left_boundary_node_pt[0] -> x(1);
+  };
 
-   unsigned left_quadPML_boundary_id = 1;
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
 
-   // Create the mesh to be designated to the PML
-   Mesh* pml_left_mesh_pt = 0;
-
-   // Build the left PML mesh
-   pml_left_mesh_pt=
-    new PMLQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>
-    (bulk_mesh_pt, left_boundary_id, left_quadPML_boundary_id,  
-     n_x_left_pml, n_y_left_pml, 
-     l_pml_left_x_start, l_pml_left_x_end, 
-     l_pml_left_y_start, l_pml_left_y_end,
-     time_stepper_pt);  
-
-   // Enable PML damping on the entire mesh
-   unsigned n_element_pml_left = pml_left_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element_pml_left;e++)
-   {
-    // Upcast
-    PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-     (pml_left_mesh_pt->element_pt(e));
-    el_pt -> enable_pml(0, l_pml_left_x_end, l_pml_left_x_start);
-   }
-
-   // Get the values to be pinned from the first element (which we
-   // assume exists!)
-   PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-    (pml_left_mesh_pt->element_pt(0));
-   Vector<unsigned> values_to_pin;
-   el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
-   unsigned npin=values_to_pin.size();
-
-   // Exterior boundary needs to be set to Dirichlet 0
-   // for both real and imaginary parts of all fields
-   // in the problem
-   unsigned n_bound_pml_left = pml_left_mesh_pt->nboundary();
-   for(unsigned b=0;b<n_bound_pml_left;b++)
-   {
-    unsigned n_node = pml_left_mesh_pt -> nboundary_node(b);
-    for (unsigned n=0;n<n_node;n++)
-    {
-     Node* nod_pt=pml_left_mesh_pt -> boundary_node_pt(b,n);
-     if (b==3)
-     {
-      for (unsigned j=0;j<npin;j++)
-      {
-       unsigned j_val=values_to_pin[j];
-       nod_pt->pin(j_val);
-       nod_pt->set_value(j_val,0.0);
-      }
-     }
-    }
-   }
-
-   /// \short Return the finalized mesh, with PML enabled 
-   /// and boundary conditions added
-   return pml_left_mesh_pt;
-  }
-
-  //============================================================================
-  ///"Constructor" for PML mesh,aligned with the bottom physical domain boundary
-  //============================================================================
-  template<class ASSOCIATED_PML_QUAD_ELEMENT>
-  Mesh* create_bottom_pml_mesh(Mesh* bulk_mesh_pt,
-			       const unsigned& bottom_boundary_id,
-			       const unsigned& n_y_bottom_pml,
-			       const double& width_y_bottom_pml,
-			       TimeStepper* time_stepper_pt=
-			       &Mesh::Default_TimeStepper)
+  //==============================================================
+  /// Base class for elements with pml capabilities
+  //==============================================================
+  template<unsigned DIM>
+  class PMLElementBase
   {
-   // Look at the bottom boundary of the triangular mesh
-   unsigned n_bottom_boundary_node = 
-    bulk_mesh_pt -> nboundary_node(bottom_boundary_id);
- 
-   // Create a vector of ordered boundary nodes
-   Vector<Node*> ordered_bottom_boundary_node_pt(n_bottom_boundary_node);
-
-   // Fill the vector with the nodes on the respective boundary
-   for (unsigned n=0; n<n_bottom_boundary_node; n++)
-   {
-    ordered_bottom_boundary_node_pt[n] = 
-     bulk_mesh_pt->boundary_node_pt(bottom_boundary_id,n);
-   }
-
-   // Sort them from highest to lowest (in x coordinate)
-   std::sort(ordered_bottom_boundary_node_pt.begin(),
-	     ordered_bottom_boundary_node_pt.end(),
-	     sorter_bottom_boundary);
- 
-   // The number of elements in y is taken from the triangular mesh
-   unsigned n_x_bottom_pml = 
-    bulk_mesh_pt -> nboundary_element(bottom_boundary_id);
- 
-   // Specific PML sizes needed, taken directly from physical domain
-   double l_pml_bottom_x_start = 
-    ordered_bottom_boundary_node_pt[n_bottom_boundary_node-1] -> x(0);
-   double l_pml_bottom_x_end   = 
-    ordered_bottom_boundary_node_pt[0] -> x(0);
-   /// \short PML layer width subtracted from the bulk mesh lower 
-   /// boundary coordinate
-   double l_pml_bottom_y_start = 
-    - width_y_bottom_pml 
-    + ordered_bottom_boundary_node_pt[0] -> x(1);
-   double l_pml_bottom_y_end   = 
-    ordered_bottom_boundary_node_pt[0] -> x(1);
-
-   unsigned bottom_quadPML_boundary_id = 2;
-
-   // Create the mesh to be designated to the PML
-   Mesh* pml_bottom_mesh_pt = 0;
-
-   // Build the bottom PML mesh
-   pml_bottom_mesh_pt=
-    new PMLQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>
-    (bulk_mesh_pt, bottom_boundary_id, bottom_quadPML_boundary_id,  
-     n_x_bottom_pml, n_y_bottom_pml, 
-     l_pml_bottom_x_start, l_pml_bottom_x_end, 
-     l_pml_bottom_y_start, l_pml_bottom_y_end,
-     time_stepper_pt);
-  
-   // Enable PML damping on the entire mesh
-   unsigned n_element_pml_bottom = pml_bottom_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element_pml_bottom;e++)
-   {
-    // Upcast
-    PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-     (pml_bottom_mesh_pt->element_pt(e));
-    el_pt -> enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
-   }
-
-   // Get the values to be pinned from the first element (which we
-   // assume exists!)
-   PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-    (pml_bottom_mesh_pt->element_pt(0));
-   Vector<unsigned> values_to_pin;
-   el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
-   unsigned npin=values_to_pin.size();
-
-   // Exterior boundary needs to be set to Dirichlet 0
-   // for both real and imaginary parts of all fields
-   // in the problem
-   unsigned n_bound_pml_bottom = pml_bottom_mesh_pt->nboundary();
-   for(unsigned b=0;b<n_bound_pml_bottom;b++)
-   {
-    unsigned n_node = pml_bottom_mesh_pt -> nboundary_node(b);
-    for (unsigned n=0;n<n_node;n++)
+  public:
+    /// Constructor
+    PMLElementBase()
+      : Pml_is_enabled(false),
+        Pml_direction_active(DIM, false),
+        Pml_inner_boundary(DIM, 0.0),
+        Pml_outer_boundary(DIM, 0.0)
     {
-     Node* nod_pt=pml_bottom_mesh_pt -> boundary_node_pt(b,n);
-     if (b==0)
-     {
-      for (unsigned j=0;j<npin;j++)
-      {
-       unsigned j_val=values_to_pin[j];
-       nod_pt->pin(j_val);
-       nod_pt->set_value(j_val,0.0);
-      }
-     }
     }
-   }
-  
-   /// \short Return the finalized mesh, with PML enabled 
-   /// and boundary conditions added
-   return pml_bottom_mesh_pt;
-  }
 
-//==========================================================================
-/// \short "Constructor" for PML top right corner mesh,
-/// aligned with the existing PML meshes
-//==========================================================================
-  template<class ASSOCIATED_PML_QUAD_ELEMENT>
-  Mesh* create_top_right_pml_mesh(Mesh* pml_right_mesh_pt, 
-				  Mesh* pml_top_mesh_pt, 
-				  Mesh* bulk_mesh_pt,
-				  const unsigned& right_boundary_id,
-				  TimeStepper* time_stepper_pt=
-				  &Mesh::Default_TimeStepper)
+    /// Virtual destructor
+    virtual ~PMLElementBase() {}
+
+    /// \short Disable pml. Ensures the PML-ification in all directions
+    /// has been deactivated
+    void disable_pml()
+    {
+      // Disable the PML-ification
+      Pml_is_enabled = false;
+
+      // Loop over the entries in Pml_direction_active and deactivate the
+      // PML in this direction
+      for (unsigned direction = 0; direction < DIM; direction++)
+      {
+        // Disable the PML in this direction
+        Pml_direction_active[direction] = false;
+      }
+    } // End of disable_pml
+
+    /// \short Enable pml. Specify the coordinate direction along which
+    /// pml boundary is constant, as well as the coordinate
+    /// along the dimension for the interface between the physical and
+    /// artificial domains and the coordinate for the outer boundary. All of
+    /// these are used to adjust the perfectly matched layer mechanism. Needs to
+    /// be called separately for each pml-ified direction (if needed -- e.g. in
+    /// corner elements)
+    void enable_pml(const int& direction,
+                    const double& interface_border_value,
+                    const double& outer_domain_border_value)
+    {
+      Pml_is_enabled = true;
+      Pml_direction_active[direction] = true;
+      Pml_inner_boundary[direction] = interface_border_value;
+      Pml_outer_boundary[direction] = outer_domain_border_value;
+    }
+
+    /// \short Pure virtual function in which we have to specify the
+    /// values to be pinned (and set to zero) on the outer edge of
+    /// the pml layer. This is usually all of the nodal values
+    /// (values 0 and 1 (real and imag part) for Helmholtz;
+    /// values 0,1,2 and 3 (real and imag part of x- and y-displacement
+    /// for 2D time-harmonic linear elasticity; etc.). Vector
+    /// must be resized internally!
+    virtual void values_to_be_pinned_on_outer_pml_boundary(
+      Vector<unsigned>& values_to_pin) = 0;
+
+  protected:
+    /// Boolean indicating if element is used in pml mode
+    bool Pml_is_enabled;
+
+    /// \short Coordinate direction along which pml boundary is constant;
+    /// alternatively: coordinate direction in which coordinate stretching
+    /// is performed.
+    std::vector<bool> Pml_direction_active;
+
+    /// \short Coordinate of inner pml boundary
+    /// (Storage is provided for any coordinate
+    /// direction; only the entries for "active" directions is used.)
+    Vector<double> Pml_inner_boundary;
+
+    /// \short Coordinate of outer pml boundary
+    /// (Storage is provided for any coordinate
+    /// direction; only the entries for "active" directions is used.)
+    Vector<double> Pml_outer_boundary;
+  };
+
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+
+  //===================================================================
+  /// \short All helper routines for 2D bulk boundary mesh usage in order to
+  /// generate PML meshes aligned to the main mesh
+  //===================================================================
+  namespace TwoDimensionalPMLHelper
   {
+    /// helper function for sorting the right boundary nodes
+    extern bool sorter_right_boundary(Node* nod_i_pt, Node* nod_j_pt);
 
-   /// \short Relevant boundary id's to be used in construction
-   /// Parent id refers to already existing PML meshes
-   unsigned parent_boundary_x_id = 2;
-   unsigned parent_boundary_y_id = 1;
-   // Current id refers to the mesh that is to be constructed
-   unsigned current_boundary_x_id = 0;
-   unsigned current_boundary_y_id = 3;
+    /// helper function for sorting the top boundary nodes
+    extern bool sorter_top_boundary(Node* nod_i_pt, Node* nod_j_pt);
 
-   // Look at the right boundary of the triangular mesh
-   unsigned n_right_boundary_node = 
-    bulk_mesh_pt -> nboundary_node(right_boundary_id);
- 
-   // Create a vector of ordered boundary nodes
-   Vector<Node*> ordered_right_boundary_node_pt(n_right_boundary_node);
+    /// helper function for sorting the left boundary nodes
+    extern bool sorter_left_boundary(Node* nod_i_pt, Node* nod_j_pt);
 
-   // Fill the vector with the nodes on the respective boundary
-   for (unsigned n=0; n<n_right_boundary_node; n++)
-   {
-    ordered_right_boundary_node_pt[n] = 
-     bulk_mesh_pt->boundary_node_pt(right_boundary_id,n);
-   }
+    /// helper function for sorting the bottom boundary nodes
+    extern bool sorter_bottom_boundary(Node* nod_i_pt, Node* nod_j_pt);
 
-   // Sort them from lowest to highest (in y coordinate)
-   std::sort(ordered_right_boundary_node_pt.begin(),
-	     ordered_right_boundary_node_pt.end(),
-	     sorter_right_boundary);
+  } // namespace TwoDimensionalPMLHelper
 
-   /// \short Number of elements and boundary nodes to be acted upon during
-   /// construction are extracted from the 'parent' PML meshes
-   unsigned n_x_right_pml = 
-    pml_right_mesh_pt -> nboundary_element(parent_boundary_x_id);
-   unsigned n_y_top_pml = 
-    pml_top_mesh_pt -> nboundary_element(parent_boundary_y_id);
-   unsigned n_x_boundary_nodes = 
-    pml_right_mesh_pt -> nboundary_node(parent_boundary_x_id);
-   unsigned n_y_boundary_nodes = 
-    pml_top_mesh_pt -> nboundary_node(parent_boundary_y_id);
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
 
-   /// \short Specific PML sizes needed, taken directly from physical domain
-   /// and existing PML meshes
-   double l_pml_right_x_start = 
-    ordered_right_boundary_node_pt[n_right_boundary_node-1] -> x(0);
-   double l_pml_right_x_end =
-    pml_right_mesh_pt -> 
-    boundary_node_pt(parent_boundary_x_id, n_x_boundary_nodes-1)-> x(0);
-   double l_pml_top_y_start = 
-    ordered_right_boundary_node_pt[n_right_boundary_node-1] -> x(1);
-   double l_pml_top_y_end = 
-    pml_top_mesh_pt -> 
-    boundary_node_pt(parent_boundary_y_id, n_y_boundary_nodes-1)-> x(1);
-
-   // Create the mesh to be designated to the PML
-   Mesh* pml_top_right_mesh_pt = 0;
-  
-   // Build the top right corner PML mesh
-   pml_top_right_mesh_pt = new PMLCornerQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>
-    (pml_right_mesh_pt, pml_top_mesh_pt, bulk_mesh_pt, 
-     ordered_right_boundary_node_pt[n_right_boundary_node-1],
-     parent_boundary_x_id, parent_boundary_y_id, 
-     current_boundary_x_id, current_boundary_y_id,  
-     n_x_right_pml, n_y_top_pml, 
-     l_pml_right_x_start, l_pml_right_x_end, 
-     l_pml_top_y_start, l_pml_top_y_end,
-     time_stepper_pt);
-
-   // Enable PML damping on the entire mesh
-   /// \short The enabling must be perfromed in both x- and y-directions
-   /// as this is a corner PML mesh
-   unsigned n_element_pml_top_right = pml_top_right_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element_pml_top_right;e++)
-   {
-    // Upcast
-    PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>   
-     (pml_top_right_mesh_pt->element_pt(e));
-    el_pt -> enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
-    el_pt -> enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
-   }
-
-   // Get the values to be pinned from the first element (which we
-   // assume exists!)
-   PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-    (pml_top_right_mesh_pt->element_pt(0));
-   Vector<unsigned> values_to_pin;
-   el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
-   unsigned npin=values_to_pin.size();
-
-   // Exterior boundary needs to be set to Dirichlet 0
-   // for both real and imaginary parts of all fields
-   // in the problem
-   unsigned n_bound_pml_top_right = pml_top_right_mesh_pt->nboundary();
-   for(unsigned b=0;b<n_bound_pml_top_right;b++)
-   {
-    unsigned n_node = pml_top_right_mesh_pt -> nboundary_node(b);
-    for (unsigned n=0;n<n_node;n++)
-    {
-     Node* nod_pt=pml_top_right_mesh_pt -> boundary_node_pt(b,n);
-     if ((b==1)||(b==2))
-     {
-      for (unsigned j=0;j<npin;j++)
-      {
-       unsigned j_val=values_to_pin[j];
-       nod_pt->pin(j_val);
-       nod_pt->set_value(j_val,0.0);
-      }
-     }
-    }
-   }
-    
-   /// \short Return the finalized mesh, with PML enabled 
-   /// and boundary conditions added
-   return pml_top_right_mesh_pt;
-  }
-
-  //==========================================================================
-  /// \short  "Constructor" for PML bottom right corner mesh, 
-  /// aligned with the existing PML meshes
-  //==========================================================================
-  template<class ASSOCIATED_PML_QUAD_ELEMENT>
-  Mesh* create_bottom_right_pml_mesh(Mesh* pml_right_mesh_pt, 
-				     Mesh* pml_bottom_mesh_pt, 
-				     Mesh* bulk_mesh_pt,
-				     const unsigned& right_boundary_id,
-				     TimeStepper* time_stepper_pt=
-				     &Mesh::Default_TimeStepper)
+  //====================================================================
+  /// PML mesh base class. Contains a pure virtual locate_zeta function
+  /// to be uploaded in PMLQuadMesh and PMLBrickMesh (once the code for
+  /// it has been written)
+  //====================================================================
+  class PMLMeshBase
   {
+  public:
+    /// \short Pure virtual function to provide an optimised version of
+    /// the locate_zeta function for PML meshes. As the PML meshes are
+    /// rectangular (in 2D, or rectangular prisms in 3D) the location of
+    /// a point in the mesh is simpler than in a more complex mesh
+    virtual void pml_locate_zeta(const Vector<double>& x,
+                                 FiniteElement*& el_pt) = 0;
+  };
 
-   /// \short Relevant boundary id's to be used in construction
-   /// Parent id refers to already existing PML meshes
-   unsigned parent_boundary_x_id = 0;
-   unsigned parent_boundary_y_id = 1;
-   // Current id refers to the mesh that is to be constructed
-   unsigned current_boundary_x_id = 2;
-   unsigned current_boundary_y_id = 3;
-
-   // Look at the right boundary of the triangular mesh
-   unsigned n_right_boundary_node = 
-    bulk_mesh_pt -> nboundary_node(right_boundary_id);
- 
-   // Create a vector of ordered boundary nodes
-   Vector<Node*> ordered_right_boundary_node_pt(n_right_boundary_node);
-
-   // Fill the vector with the nodes on the respective boundary
-   for (unsigned n=0; n<n_right_boundary_node; n++)
-   {
-    ordered_right_boundary_node_pt[n] = 
-     bulk_mesh_pt->boundary_node_pt(right_boundary_id,n);
-   }
-
-   // Sort them from lowest to highest (in y coordinate)
-   std::sort(ordered_right_boundary_node_pt.begin(),
-	     ordered_right_boundary_node_pt.end(),
-	     sorter_right_boundary);
-
-   /// \short Number of elements and boundary nodes to be acted upon during
-   /// construction are extracted from the 'parent' PML meshes
-   unsigned n_x_right_pml = 
-    pml_right_mesh_pt -> nboundary_element(parent_boundary_x_id);
-   unsigned n_y_bottom_pml = 
-    pml_bottom_mesh_pt -> nboundary_element(parent_boundary_y_id);
-   unsigned n_x_boundary_nodes = 
-    pml_right_mesh_pt -> nboundary_node(parent_boundary_x_id);
-
-   /// \short Specific PML sizes needed, taken directly from physical domain
-   /// and existing PML meshes
-   double l_pml_right_x_start = 
-    ordered_right_boundary_node_pt[0] -> x(0);
-   double l_pml_right_x_end = 
-    pml_right_mesh_pt -> 
-    boundary_node_pt(parent_boundary_x_id, n_x_boundary_nodes-1)-> x(0);
-   double l_pml_bottom_y_start = 
-    pml_bottom_mesh_pt -> boundary_node_pt(parent_boundary_y_id, 0)-> x(1);
-   double l_pml_bottom_y_end = 
-    ordered_right_boundary_node_pt[0] -> x(1);
-
-   // Create the mesh to be designated to the PML
-   Mesh* pml_bottom_right_mesh_pt = 0;
-
-   // Build the bottom right corner PML mesh
-   pml_bottom_right_mesh_pt=
-    new PMLCornerQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>
-    (pml_right_mesh_pt, pml_bottom_mesh_pt, bulk_mesh_pt, 
-     ordered_right_boundary_node_pt[0],
-     parent_boundary_x_id, parent_boundary_y_id, 
-     current_boundary_x_id, current_boundary_y_id,  
-     n_x_right_pml, n_y_bottom_pml, 
-     l_pml_right_x_start, l_pml_right_x_end, 
-     l_pml_bottom_y_start, l_pml_bottom_y_end,
-     time_stepper_pt);  
-  
-   // Enable PML damping on the entire mesh
-   /// \short The enabling must be perfromed in both x- and y-directions
-   /// as this is a corner PML mesh
-   unsigned n_element_pml_bottom_right = 
-    pml_bottom_right_mesh_pt->nelement();
-
-   for(unsigned e=0;e<n_element_pml_bottom_right;e++)
-   {
-    // Upcast
-    PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>   
-     (pml_bottom_right_mesh_pt->element_pt(e));
-    el_pt -> enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
-    el_pt -> enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
-   }
-
-   // Get the values to be pinned from the first element (which we
-   // assume exists!)
-   PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-    (pml_bottom_right_mesh_pt->element_pt(0));
-   Vector<unsigned> values_to_pin;
-   el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
-   unsigned npin=values_to_pin.size();
-
-   // Exterior boundary needs to be set to Dirichlet 0
-   // for both real and imaginary parts of all fields
-   // in the problem
-   unsigned n_bound_pml_bottom_right = pml_bottom_right_mesh_pt->nboundary();
-   for(unsigned b=0;b<n_bound_pml_bottom_right;b++)
-   {
-    unsigned n_node = pml_bottom_right_mesh_pt -> nboundary_node(b);
-    for (unsigned n=0;n<n_node;n++)
-    {
-     Node* nod_pt=pml_bottom_right_mesh_pt -> boundary_node_pt(b,n);
-     if ((b==0)||(b==1))
-     {
-      for (unsigned j=0;j<npin;j++)
-      {
-       unsigned j_val=values_to_pin[j];
-       nod_pt->pin(j_val);
-       nod_pt->set_value(j_val,0.0);
-      }
-     }
-    }
-   }
-  
-   /// \short Return the finalized mesh, with PML enabled 
-   /// and boundary conditions added
-   return pml_bottom_right_mesh_pt;
-  }
-
-  //==========================================================================
-  /// \short "Constructor" for PML top left corner mesh, 
-  /// aligned with the existing PML meshes
-  //==========================================================================
-  template<class ASSOCIATED_PML_QUAD_ELEMENT>
-  Mesh* create_top_left_pml_mesh(Mesh* pml_left_mesh_pt, 
-				 Mesh* pml_top_mesh_pt, 
-				 Mesh* bulk_mesh_pt,
-				 const unsigned& left_boundary_id,
-				 TimeStepper* time_stepper_pt=
-				 &Mesh::Default_TimeStepper)
+  //====================================================================
+  /// PML mesh class. Policy class for 2D PML meshes
+  //====================================================================
+  template<class ELEMENT>
+  class PMLQuadMeshBase : public RectangularQuadMesh<ELEMENT>,
+                          public PMLMeshBase
   {
-
-   /// \short Relevant boundary id's to be used in construction
-   /// Parent id refers to already existing PML meshes
-   unsigned parent_boundary_x_id = 2;
-   unsigned parent_boundary_y_id = 3;
-   // Current id refers to the mesh that is to be constructed
-   unsigned current_boundary_x_id = 0;
-   unsigned current_boundary_y_id = 1;
-
-   // Look at the left boundary of the triangular mesh
-   unsigned n_left_boundary_node = 
-    bulk_mesh_pt -> nboundary_node(left_boundary_id);
- 
-   // Create a vector of ordered boundary nodes
-   Vector<Node*> ordered_left_boundary_node_pt(n_left_boundary_node);
-
-   // Fill the vector with the nodes on the respective boundary
-   for (unsigned n=0; n<n_left_boundary_node; n++)
-   {
-    ordered_left_boundary_node_pt[n] = 
-     bulk_mesh_pt->boundary_node_pt(left_boundary_id,n);
-   }
-
-   /// \short Sort them from lowest to highest (in y coordinate)
-   /// sorter_right_boundary is still functional, as the sorting
-   /// is performed by the same criterion
-   std::sort(ordered_left_boundary_node_pt.begin(),
-	     ordered_left_boundary_node_pt.end(),
-	     sorter_right_boundary);
-
-   /// \short Number of elements and boundary nodes to be acted upon during
-   /// construction are extracted from the 'parent' PML meshes
-   unsigned n_x_left_pml = 
-    pml_left_mesh_pt -> nboundary_element(parent_boundary_x_id);
-   unsigned n_y_top_pml = 
-    pml_top_mesh_pt -> nboundary_element(parent_boundary_y_id);
-   unsigned n_y_boundary_nodes = 
-    pml_top_mesh_pt -> nboundary_node(parent_boundary_y_id);
-
-   /// \short Specific PML sizes needed, taken directly from physical domain
-   /// and existing PML meshes
-   double l_pml_left_x_start =  
-    pml_left_mesh_pt -> boundary_node_pt(parent_boundary_x_id, 0)-> x(0);
-   double l_pml_left_x_end = 
-    ordered_left_boundary_node_pt[n_left_boundary_node-1] -> x(0);
-   double l_pml_top_y_start = 
-    ordered_left_boundary_node_pt[n_left_boundary_node-1] -> x(1);
-   double l_pml_top_y_end = 
-    pml_top_mesh_pt -> 
-    boundary_node_pt(parent_boundary_y_id, n_y_boundary_nodes-1)-> x(1);
-
-   // Create the mesh to be designated to the PML
-   Mesh* pml_top_left_mesh_pt = 0; 
-
-   // Build the top left corner PML mesh
-   pml_top_left_mesh_pt=
-    new PMLCornerQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>
-    (pml_left_mesh_pt, pml_top_mesh_pt, bulk_mesh_pt, 
-     ordered_left_boundary_node_pt[n_left_boundary_node-1], 
-     parent_boundary_x_id, parent_boundary_y_id, 
-     current_boundary_x_id, current_boundary_y_id,  
-     n_x_left_pml, n_y_top_pml, 
-     l_pml_left_x_start, l_pml_left_x_end, 
-     l_pml_top_y_start, l_pml_top_y_end,
-     time_stepper_pt);
-
-   // Enable PML damping on the entire mesh
-   /// \short The enabling must be perfromed in both x- and y-directions
-   /// as this is a corner PML mesh
-   unsigned n_element_pml_top_left = pml_top_left_mesh_pt->nelement();
-
-   for(unsigned e=0;e<n_element_pml_top_left;e++)
-   {
-    // Upcast
-    PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>   
-     (pml_top_left_mesh_pt->element_pt(e));
-    el_pt -> enable_pml(0, l_pml_left_x_end, l_pml_left_x_start);
-    el_pt -> enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
-   }
-
-   // Get the values to be pinned from the first element (which we
-   // assume exists!)
-   PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-    (pml_top_left_mesh_pt->element_pt(0));
-   Vector<unsigned> values_to_pin;
-   el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
-   unsigned npin=values_to_pin.size();
-
-   // Exterior boundary needs to be set to Dirichlet 0
-   // for both real and imaginary parts of all fields
-   // in the problem
-   unsigned n_bound_pml_top_left = pml_top_left_mesh_pt->nboundary();
-   for(unsigned b=0;b<n_bound_pml_top_left;b++)
-   {
-    unsigned n_node = pml_top_left_mesh_pt -> nboundary_node(b);
-    for (unsigned n=0;n<n_node;n++)
+  public:
+    /// \short Constructor: Create the underlying rectangular quad mesh
+    PMLQuadMeshBase(const unsigned& n_pml_x,
+                    const unsigned& n_pml_y,
+                    const double& x_pml_start,
+                    const double& x_pml_end,
+                    const double& y_pml_start,
+                    const double& y_pml_end,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(n_pml_x,
+                                     n_pml_y,
+                                     x_pml_start,
+                                     x_pml_end,
+                                     y_pml_start,
+                                     y_pml_end,
+                                     time_stepper_pt)
     {
-     Node* nod_pt=pml_top_left_mesh_pt -> boundary_node_pt(b,n);
-     if ((b==2)||(b==3))
-     {
-      for (unsigned j=0;j<npin;j++)
-      {
-       unsigned j_val=values_to_pin[j];
-       nod_pt->pin(j_val);
-       nod_pt->set_value(j_val,0.0);
-      }
-     }
     }
-   }
 
-   /// \short Return the finalized mesh, with PML enabled 
-   /// and boundary conditions added
-   return pml_top_left_mesh_pt;
-  }
+    /// \short Overloaded function to allow the user to locate an element
+    /// in mesh given the (Eulerian) position of a point. Note, the result
+    /// may be nonunique if the given point lies on the boundary of two
+    /// elements in the mesh. Additionally, we assume that the PML mesh is
+    /// axis aligned when deciding if the given point lies inside the mesh
+    void pml_locate_zeta(const Vector<double>& x,
+                         FiniteElement*& coarse_mesh_el_pt)
+    {
+      //------------------------------------------
+      // Make sure the point lies inside the mesh:
+      //------------------------------------------
+      // Get the lower x limit of the mesh
+      const double x_min = this->x_min();
 
-  //==========================================================================
-  /// \short "Constructor" for PML bottom left corner mesh, 
-  /// aligned with the existing PML meshes
-  //==========================================================================
-  template<class ASSOCIATED_PML_QUAD_ELEMENT>
-  Mesh* create_bottom_left_pml_mesh(Mesh* pml_left_mesh_pt, 
-				    Mesh* pml_bottom_mesh_pt, 
-				    Mesh* bulk_mesh_pt,
-				    const unsigned& left_boundary_id,
-				    TimeStepper* time_stepper_pt=
-				    &Mesh::Default_TimeStepper)
+      // Get the upper x limit of the mesh
+      const double x_max = this->x_max();
+
+      // Get the lower y limit of the mesh
+      const double y_min = this->y_min();
+
+      // Get the upper y limit of the mesh
+      const double y_max = this->y_max();
+
+      // Due to roundoff error we will choose a small tolerance which will be
+      // used to determine whether or not the point lies in the mesh
+      double tol = 1.0e-12;
+
+      // Assuming the mesh is axis-aligned we merely need to check if the
+      // x-coordinate of the input lies in the range [x_min,x_max] and the
+      // y-coordinate of the input lies in the range [y_min,y_max]
+      if ((x[0] < x_min - tol) || (x[0] > x_max + tol) ||
+          (x[1] < y_min - tol) || (x[1] > y_max + tol))
+      {
+        // Open an output string stream
+        std::ostringstream error_message_stream;
+
+        // Create an error message
+        error_message_stream << "Point does not lie in the mesh." << std::endl;
+
+        // Throw the error message
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+
+      //-----------------------------------------
+      // Collect some information about the mesh:
+      //-----------------------------------------
+      // Find out how many elements there are in the x-direction
+      const unsigned nx = this->nx();
+
+      // Find out how many elements there are in the y-direction
+      const unsigned ny = this->ny();
+
+      // Find out how many nodes there are in one direction in each element
+      unsigned nnode_1d = this->finite_element_pt(0)->nnode_1d();
+
+      // Find out how many nodes there are in each element
+      unsigned nnode = this->finite_element_pt(0)->nnode();
+
+      // Create a pointer to store the element pointer as a FiniteElement
+      FiniteElement* el_pt = 0;
+
+      // Vector to store the coordinate of each element corner node which
+      // lies on the bottom boundary of the mesh and varies, i.e. if we're
+      // on the bottom boundary of the PML mesh then the y-coordinate will
+      // be fixed therefore we need only store the x-coordinates of the
+      // corner nodes of each element attached to this boundary
+      Vector<double> bottom_boundary_x_coordinates(nx + 1, 0.0);
+
+      // Vector to store the coordinate of each element corner node which lies
+      // on the right boundary of the mesh and varies
+      Vector<double> right_boundary_y_coordinates(ny + 1, 0.0);
+
+      // Recall, we already know the start and end coordinates of the mesh
+      // in the x-direction so we can assign these entries straight away.
+      // Note, these values are exactly the same as those had we instead
+      // considered the upper boundary so it is only necessary to store
+      // the information of the one of these boundaries. A similar argument
+      // holds for the left and right boundaries.
+
+      // The first entry of bottom_boundary_x_coordinates is:
+      bottom_boundary_x_coordinates[0] = x_min;
+
+      // The last entry is:
+      bottom_boundary_x_coordinates[nx] = x_max;
+
+      // The first entry of right_boundary_y_coordinates is:
+      right_boundary_y_coordinates[0] = y_min;
+
+      // The last entry is:
+      right_boundary_y_coordinates[ny] = y_max;
+
+      // To collect the remaining entries we need to loop over all of the
+      // elements on the bottom boundary and collect the x-coordinate of
+      // the bottom right node in the element. To avoid assigning the
+      // last entry twice we ignore the last element.
+
+      // Store the lower boundary ID
+      unsigned lower_boundary_id = 0;
+
+      // Store the right boundary ID
+      unsigned right_boundary_id = 1;
+
+      // Loop over the elements on the bottom boundary
+      for (unsigned i = 0; i < nx; i++)
+      {
+        // Assign the element pointer
+        el_pt = this->boundary_element_pt(lower_boundary_id, i);
+
+        // Store the x-coordinate of the bottom right node in this element
+        bottom_boundary_x_coordinates[i + 1] =
+          el_pt->node_pt(nnode_1d - 1)->x(0);
+      }
+
+      // To collect the remaining entries we need to loop over all of the
+      // elements on the right boundary and collect the y-coordinate of
+      // the top right node in the element. To avoid assigning the
+      // last entry twice we ignore the last element.
+
+      // Loop over the elements on the bottom boundary
+      for (unsigned i = 0; i < ny; i++)
+      {
+        // Assign the element pointer
+        el_pt = this->boundary_element_pt(right_boundary_id, i);
+
+        // Store the y-coordinate of the top right node in this element
+        right_boundary_y_coordinates[i + 1] = el_pt->node_pt(nnode - 1)->x(1);
+      }
+
+      //---------------------------
+      // Find the matching element:
+      //---------------------------
+      // Boolean variable to indicate that the ID of the element in the
+      // x-direction has been found. Note, the value of this ID must lie
+      // in the range [0,nx]
+      bool element_x_id_has_been_found = false;
+
+      // Boolean variable to indicate that the ID of the element in the
+      // y-direction has been found. Note, the value of this ID must lie
+      // in the range [0,ny]
+      bool element_y_id_has_been_found = false;
+
+      // Initialise the ID of the element in the x-direction
+      unsigned element_x_id = 0;
+
+      // Initialise the ID of the element in the y-direction
+      unsigned element_y_id = 0;
+
+      // Loop over all of the entries in bottom_boundary_x_coordinates
+      for (unsigned i = 0; i < nx; i++)
+      {
+        // Check if the x-coordinate of the input lies in this interval
+        if ((x[0] >= bottom_boundary_x_coordinates[i]) &&
+            (x[0] <= bottom_boundary_x_coordinates[i + 1]))
+        {
+          // The point lies in the i-th interval so the element ID is i
+          element_x_id = i;
+
+          // Indicate that the element ID has been found
+          element_x_id_has_been_found = true;
+        }
+      } // for (unsigned i=0;i<nx;i++)
+
+      // If the element ID hasn't been found
+      if (!element_x_id_has_been_found)
+      {
+        // Open an output string stream
+        std::ostringstream error_message_stream;
+
+        // Create an error message
+        error_message_stream << "The ID of the element in the x-direction "
+                             << "has not been found." << std::endl;
+
+        // Throw the error message
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // Loop over all of the entries in right_boundary_y_coordinates
+      for (unsigned i = 0; i < ny; i++)
+      {
+        // Check if the y-coordinate of the input lies in this interval
+        if ((x[1] >= right_boundary_y_coordinates[i]) &&
+            (x[1] <= right_boundary_y_coordinates[i + 1]))
+        {
+          // The point lies in the i-th interval so the element ID is i
+          element_y_id = i;
+
+          // Indicate that the element ID has been found
+          element_y_id_has_been_found = true;
+        }
+      } // for (unsigned i=0;i<ny;i++)
+
+      // If the element ID hasn't been found
+      if (!element_y_id_has_been_found)
+      {
+        // Open an output string stream
+        std::ostringstream error_message_stream;
+
+        // Create an error message
+        error_message_stream << "The ID of the element in the y-direction "
+                             << "has not been found." << std::endl;
+
+        // Throw the error message
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // Calculate the element number in the mesh
+      unsigned el_id = element_y_id * nx + element_x_id;
+
+      // Set the pointer to this element
+      coarse_mesh_el_pt = dynamic_cast<FiniteElement*>(this->element_pt(el_id));
+    } // End of pml_locate_zeta
+  };
+
+  //====================================================================
+  /// PML mesh, derived from RectangularQuadMesh.
+  //====================================================================
+  template<class ELEMENT>
+  class PMLQuadMesh : public PMLQuadMeshBase<ELEMENT>
   {
-
-   /// \short Relevant boundary id's to be used in construction
-   /// Parent id refers to already existing PML meshes
-   unsigned parent_boundary_x_id = 0;
-   unsigned parent_boundary_y_id = 3;
-   // Current id refers to the mesh that is to be constructed
-   unsigned current_boundary_x_id = 2;
-   unsigned current_boundary_y_id = 1;
-
-   // Look at the left boundary of the triangular mesh
-   unsigned n_left_boundary_node = 
-    bulk_mesh_pt -> nboundary_node(left_boundary_id);
- 
-   // Create a vector of ordered boundary nodes
-   Vector<Node*> ordered_left_boundary_node_pt(n_left_boundary_node);
-
-   // Fill the vector with the nodes on the respective boundary
-   for (unsigned n=0; n<n_left_boundary_node; n++)
-   {
-    ordered_left_boundary_node_pt[n] = 
-     bulk_mesh_pt->boundary_node_pt(left_boundary_id,n);
-   }
-
-   /// \short Sort them from lowest to highest (in y coordinate)
-   /// sorter_right_boundary is still functional, as the sorting
-   /// is performed by the same criterion
-   std::sort(ordered_left_boundary_node_pt.begin(),
-	     ordered_left_boundary_node_pt.end(),
-	     sorter_right_boundary);
-
-   /// \short Number of elements and boundary nodes to be acted upon during
-   /// construction are extracted from the 'parent' PML meshes
-   unsigned n_x_left_pml = 
-    pml_left_mesh_pt -> nboundary_element(parent_boundary_x_id);
-   unsigned n_y_bottom_pml = 
-    pml_bottom_mesh_pt -> nboundary_element(parent_boundary_y_id);
-
-   /// \short Specific PML sizes needed, taken directly from physical domain
-   /// and existing PML meshes
-   double l_pml_left_x_start =  
-    pml_left_mesh_pt -> boundary_node_pt(parent_boundary_x_id, 0)-> x(0);
-   double l_pml_left_x_end = 
-    ordered_left_boundary_node_pt[n_left_boundary_node-1] -> x(0);
-   double l_pml_bottom_y_start =
-    pml_bottom_mesh_pt -> boundary_node_pt(parent_boundary_y_id, 0)-> x(1);
-   double l_pml_bottom_y_end = 
-    ordered_left_boundary_node_pt[0] -> x(1);
-
-   // Create the mesh to be designated to the PML
-   Mesh* pml_bottom_left_mesh_pt = 0;
-
-   // Build the bottom left corner PML mesh
-   pml_bottom_left_mesh_pt=
-    new PMLCornerQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>
-    (pml_left_mesh_pt, pml_bottom_mesh_pt, bulk_mesh_pt, 
-     ordered_left_boundary_node_pt[0], 
-     parent_boundary_x_id, parent_boundary_y_id, 
-     current_boundary_x_id, current_boundary_y_id,  
-     n_x_left_pml, n_y_bottom_pml, 
-     l_pml_left_x_start, l_pml_left_x_end, 
-     l_pml_bottom_y_start, l_pml_bottom_y_end,
-     time_stepper_pt);
-  
-   //Enable PML damping on the entire mesh
-   /// \short The enabling must be perfromed in both x- and y-directions
-   /// as this is a corner PML mesh
-   unsigned n_element_pml_bottom_left = pml_bottom_left_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element_pml_bottom_left;e++)
-   {
-    // Upcast
-    PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>   
-     (pml_bottom_left_mesh_pt->element_pt(e));
-    el_pt -> enable_pml(0, l_pml_left_x_end, l_pml_left_x_start);
-    el_pt -> enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
-   }
-
-   // Get the values to be pinned from the first element (which we
-   // assume exists!)
-   PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
-    (pml_bottom_left_mesh_pt->element_pt(0));
-   Vector<unsigned> values_to_pin;
-   el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
-   unsigned npin=values_to_pin.size();
-
-   // Exterior boundary needs to be set to Dirichlet 0
-   // for both real and imaginary parts of all fields
-   // in the problem
-   unsigned n_bound_pml_bottom_left = pml_bottom_left_mesh_pt->nboundary();
-   for(unsigned b=0;b<n_bound_pml_bottom_left;b++)
-   {
-    unsigned n_node = pml_bottom_left_mesh_pt -> nboundary_node(b);
-    for (unsigned n=0;n<n_node;n++)
+  public:
+    /// \short Constructor: Pass pointer to "bulk" mesh,
+    /// the boundary ID of axis aligned boundary to which the
+    /// mesh is supposed to be attached and the boundary ID in the
+    /// rectangular quad mesh that contains the pml elements.
+    ///             0: constant y, bulk mesh below;
+    ///             1: constant x, bulk mesh to the right;
+    ///             2: constant y, bulk mesh above;
+    ///             3: constant x, bulk mesh to left.
+    PMLQuadMesh(Mesh* bulk_mesh_pt,
+                const unsigned& boundary_id,
+                const unsigned& quad_boundary_id,
+                const unsigned& n_pml_x,
+                const unsigned& n_pml_y,
+                const double& x_pml_start,
+                const double& x_pml_end,
+                const double& y_pml_start,
+                const double& y_pml_end,
+                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : PMLQuadMeshBase<ELEMENT>(n_pml_x,
+                                 n_pml_y,
+                                 x_pml_start,
+                                 x_pml_end,
+                                 y_pml_start,
+                                 y_pml_end,
+                                 time_stepper_pt)
     {
-     Node* nod_pt=pml_bottom_left_mesh_pt -> boundary_node_pt(b,n);
-     if ((b==0)||(b==3))
-     {
-      for (unsigned j=0;j<npin;j++)
+      unsigned n_boundary_node = bulk_mesh_pt->nboundary_node(boundary_id);
+
+      // Create a vector of ordered boundary nodes
+      Vector<Node*> ordered_boundary_node_pt(n_boundary_node);
+
+      // Fill the vector with the nodes on the respective boundary
+      for (unsigned n = 0; n < n_boundary_node; n++)
       {
-       unsigned j_val=values_to_pin[j];
-       nod_pt->pin(j_val);
-       nod_pt->set_value(j_val,0.0);
+        ordered_boundary_node_pt[n] =
+          bulk_mesh_pt->boundary_node_pt(boundary_id, n);
       }
-     }
+
+      /// Sort them depending on the boundary being used
+
+      // Right boundary
+      if (quad_boundary_id == 3)
+      {
+        std::sort(ordered_boundary_node_pt.begin(),
+                  ordered_boundary_node_pt.end(),
+                  TwoDimensionalPMLHelper::sorter_right_boundary);
+      }
+
+      /// Top boundary
+      if (quad_boundary_id == 0)
+      {
+        std::sort(ordered_boundary_node_pt.begin(),
+                  ordered_boundary_node_pt.end(),
+                  TwoDimensionalPMLHelper::sorter_top_boundary);
+      }
+
+      /// Left boundary
+      if (quad_boundary_id == 1)
+      {
+        std::sort(ordered_boundary_node_pt.begin(),
+                  ordered_boundary_node_pt.end(),
+                  TwoDimensionalPMLHelper::sorter_left_boundary);
+      }
+
+      /// Bottom boundary
+      if (quad_boundary_id == 2)
+      {
+        std::sort(ordered_boundary_node_pt.begin(),
+                  ordered_boundary_node_pt.end(),
+                  TwoDimensionalPMLHelper::sorter_bottom_boundary);
+      }
+
+      unsigned nnode_1d = this->finite_element_pt(0)->nnode_1d();
+
+      /// \short Simple interior node numbering helpers
+      /// to be precomputed before the main loop
+
+      /// Top left node in element
+      unsigned interior_node_nr_helper_1 = nnode_1d * (nnode_1d - 1);
+      /// Lower right node in element
+      unsigned interior_node_nr_helper_2 = nnode_1d - 1;
+      /// Used to find nodes in top row
+      unsigned interior_node_nr_helper_3 = nnode_1d * (nnode_1d - 1) - 1;
+
+      /// \short Set all nodes from the PML mesh that must disappear
+      /// after merging as obsolete
+      unsigned nnod = this->nboundary_node(quad_boundary_id);
+      for (unsigned j = 0; j < nnod; j++)
+      {
+        this->boundary_node_pt(quad_boundary_id, j)->set_obsolete();
+      }
+
+      // Kill the obsolete nodes
+      this->prune_dead_nodes();
+
+      // Find the number of elements inside the PML mesh
+      unsigned n_pml_element = this->nelement();
+
+      /// Simple interior element numbering helpers
+
+      /// Last element in mesh (top right)
+      unsigned interior_element_nr_helper_1 = n_pml_element - 1;
+
+
+      // Connect the elements in the pml mesh to the ones
+      // in the triangular mesh at element level
+      unsigned count = 0;
+
+      // Each boundary requires a specific treatment
+      // Right boundary
+      if (quad_boundary_id == 3)
+      {
+        for (unsigned e = 0; e < n_pml_element; e++)
+        {
+          // If element is on the right boundary
+          if ((e % n_pml_x) == 0)
+          {
+            // Upcast from GeneralisedElement to bulk element
+            ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+            // Loop over all nodes in element
+            unsigned n_node = el_pt->nnode();
+            for (unsigned inod = 0; inod < n_node; inod++)
+            {
+              if (inod % nnode_1d == 0)
+              {
+                // Get the pointer from the triangular mesh
+                el_pt->node_pt(inod) = ordered_boundary_node_pt[count];
+                count++;
+
+                // Node between two elements
+                if (inod == interior_node_nr_helper_1)
+                {
+                  count--;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // Top boundary
+      if (quad_boundary_id == 0)
+      {
+        for (unsigned e = 0; e < n_pml_element; e++)
+        {
+          // If element is on the right boundary
+          if ((int)(e / n_pml_x) == 0)
+          {
+            // Upcast from GeneralisedElement to bulk element
+            ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+            // Loop over all nodes in element
+            unsigned n_node = el_pt->nnode();
+            for (unsigned inod = 0; inod < n_node; inod++)
+            {
+              if ((int)(inod / nnode_1d) == 0)
+              {
+                // Get the pointer from the triangular mesh
+                el_pt->node_pt(inod) = ordered_boundary_node_pt[count];
+                count++;
+
+                // Node between two elements
+                if (inod == interior_node_nr_helper_2)
+                {
+                  count--;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // Left boundary
+      if (quad_boundary_id == 1)
+      {
+        for (unsigned e = interior_element_nr_helper_1; e < n_pml_element; e--)
+        {
+          // If element is on the right boundary
+          if ((e % n_pml_x) == (n_pml_x - 1))
+          {
+            // Upcast from GeneralisedElement to bulk element
+            ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+            // Loop over all nodes in element
+            unsigned n_node = el_pt->nnode();
+            unsigned starter = n_node - 1;
+            for (unsigned inod = starter; inod <= starter; inod--)
+            {
+              if (inod % nnode_1d == interior_node_nr_helper_2)
+              {
+                // Get the pointer from the triangular mesh
+                el_pt->node_pt(inod) = ordered_boundary_node_pt[count];
+                count++;
+
+                // Node between two elements
+                if (inod == interior_node_nr_helper_2)
+                {
+                  count--;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // Bottom boundary
+      if (quad_boundary_id == 2)
+      {
+        for (unsigned e = interior_element_nr_helper_1; e < n_pml_element; e--)
+        {
+          // If element is on the top boundary
+          if (e >= (n_pml_x * (n_pml_y - 1)))
+          {
+            // Upcast from GeneralisedElement to bulk element
+            ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+            // Loop over all nodes in element
+            unsigned n_node = el_pt->nnode();
+            unsigned starter = n_node - 1;
+            for (unsigned inod = starter; inod <= starter; inod--)
+            {
+              if (inod > interior_node_nr_helper_3)
+              {
+                // Get the pointer from the triangular mesh
+                el_pt->node_pt(inod) = ordered_boundary_node_pt[count];
+                count++;
+
+                // Node between two elements
+                if (inod == interior_node_nr_helper_1)
+                {
+                  count--;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      /// \short The alignment is done individually for each boundary
+      /// and depends on the ordering of the nodes, in this case of the
+      /// RectangularQuadMesh<2,3> for each boundary. There are operations
+      /// with mod and div 3 necessary in this case, as well as specific
+      /// mechanisms to loop over the boundary in a certain way in order
+      /// to obtain the convenient coordinates.
+
+      // Loop over all elements and make sure the coordinates are aligned
+      for (unsigned e = 0; e < n_pml_element; e++)
+      {
+        // Upcast from GeneralisedElement to bulk element
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+        unsigned n_node = el_pt->nnode();
+
+        // Loop over all nodes in element
+        double temp_coordinate = 0.0;
+        for (unsigned inod = 0; inod < n_node; inod++)
+        {
+          // Check if we are looking at the left boundary of the quad mesh
+          if (quad_boundary_id == 3)
+          {
+            // If it is one of the ones on the left boundary
+            if (inod % nnode_1d == 0)
+            {
+              // Get the y-coordinate of the leftmost node in that element
+              temp_coordinate = el_pt->node_pt(inod)->x(1);
+            }
+
+            // Each node's y-coordinate is reset to be the one of the leftmost
+            // node in that element on its x-coordinate
+            el_pt->node_pt(inod)->x(1) = temp_coordinate;
+          }
+          // End of left quad boundary check
+
+          // Check if we are looking at the top boundary of the quad mesh
+          if (quad_boundary_id == 0)
+          {
+            // If it is one of the ones on the bottom boundary
+            if (inod > interior_node_nr_helper_2)
+            {
+              // Get the y-coordinate of the leftmost node in that element
+              el_pt->node_pt(inod)->x(0) =
+                el_pt->node_pt(inod - nnode_1d)->x(0);
+            }
+          }
+          // End of top quad boundary check
+        }
+      }
+
+      for (unsigned e = interior_element_nr_helper_1; e < n_pml_element; e--)
+      {
+        // Upcast from GeneralisedElement to bulk element
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+        unsigned n_node = el_pt->nnode();
+
+        // Loop over all nodes in element
+        double temp_coordinate = 0.0;
+        unsigned starter = n_node - 1;
+        for (unsigned inod = starter; inod <= starter; inod--)
+        {
+          // Check if we are looking at the right boundary of the quad mesh
+          if (quad_boundary_id == 1)
+          {
+            // If it is one of the ones on the left boundary
+            if (inod % nnode_1d == interior_node_nr_helper_2)
+            {
+              // Get the y-coordinate of the leftmost node in that element
+              temp_coordinate = el_pt->node_pt(inod)->x(1);
+            }
+
+            // Each node's y-coordinate is reset to be the one of the leftmost
+            // node in that element on its x-coordinate
+            el_pt->node_pt(inod)->x(1) = temp_coordinate;
+          }
+          // End of right quad boundary check
+
+          // Check if we are looking at the top boundary of the quad mesh
+          if (quad_boundary_id == 2)
+          {
+            // If it is one of the ones on the bottom boundary
+            if (inod < interior_node_nr_helper_1)
+            {
+              // Get the y-coordinate of the leftmost node in that element
+              el_pt->node_pt(inod)->x(0) =
+                el_pt->node_pt(inod + nnode_1d)->x(0);
+            }
+          }
+          // End of top quad boundary check
+        }
+      }
+      // End of alignment
     }
-   }
+  };
 
-   /// \short Return the finalized mesh, with PML enabled 
-   /// and boundary conditions added
-   return pml_bottom_left_mesh_pt;
-  }
 
- }
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
 
-}
+  //====================================================================
+  /// PML mesh, derived from RectangularQuadMesh.
+  //====================================================================
+  template<class ELEMENT>
+  class PMLCornerQuadMesh : public PMLQuadMeshBase<ELEMENT>
+  {
+  public:
+    /// \short Constructor: Pass pointer to "bulk" mesh
+    /// and the two existing PML meshes in order to construct the corner
+    /// PML mesh in between them based on their element number
+    /// and coordinates.
+    PMLCornerQuadMesh(Mesh* PMLQuad_mesh_x_pt,
+                      Mesh* PMLQuad_mesh_y_pt,
+                      Mesh* bulk_mesh_pt,
+                      Node* special_corner_node_pt,
+                      const unsigned& parent_boundary_x_id,
+                      const unsigned& parent_boundary_y_id,
+                      const unsigned& current_boundary_x_id,
+                      const unsigned& current_boundary_y_id,
+                      const unsigned& n_pml_x,
+                      const unsigned& n_pml_y,
+                      const double& x_pml_start,
+                      const double& x_pml_end,
+                      const double& y_pml_start,
+                      const double& y_pml_end,
+                      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : PMLQuadMeshBase<ELEMENT>(n_pml_x,
+                                 n_pml_y,
+                                 x_pml_start,
+                                 x_pml_end,
+                                 y_pml_start,
+                                 y_pml_end,
+                                 time_stepper_pt)
+    {
+      unsigned nnode_1d = this->finite_element_pt(0)->nnode_1d();
+
+      /// \short Simple interior node numbering helpers
+      /// to be precomputed before the main loop
+
+      /// Top left node in element
+      unsigned interior_node_nr_helper_1 = nnode_1d * (nnode_1d - 1);
+      /// Lower right node in element
+      unsigned interior_node_nr_helper_2 = nnode_1d - 1;
+      /// Top right node in element
+      unsigned interior_node_nr_helper_3 = nnode_1d * nnode_1d - 1;
+
+      // Set up top right corner element
+      //--------------------------------
+      if ((parent_boundary_x_id == 2) && (parent_boundary_y_id == 1))
+      {
+        // Get the number of nodes to be connected on the horizontal boundary
+        unsigned n_boundary_x_node =
+          PMLQuad_mesh_x_pt->nboundary_node(parent_boundary_x_id);
+
+        // Create a vector of ordered boundary nodes
+        Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
+
+        // Fill the vector with the nodes on the respective boundary
+        for (unsigned n = 0; n < n_boundary_x_node; n++)
+        {
+          ordered_boundary_x_node_pt[n] =
+            PMLQuad_mesh_x_pt->boundary_node_pt(parent_boundary_x_id, n);
+        }
+
+        // Sort them from lowest to highest (in x coordinate)
+        if (parent_boundary_x_id == 2)
+        {
+          std::sort(ordered_boundary_x_node_pt.begin(),
+                    ordered_boundary_x_node_pt.end(),
+                    TwoDimensionalPMLHelper::sorter_top_boundary);
+        }
+
+        // Get the number of nodes to be connected on the vertical boundary
+        unsigned n_boundary_y_node =
+          PMLQuad_mesh_y_pt->nboundary_node(parent_boundary_y_id);
+
+        // Create a vector of ordered boundary nodes
+        Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
+
+        // Fill the vector with the nodes on the respective boundary
+        for (unsigned n = 0; n < n_boundary_y_node; n++)
+        {
+          ordered_boundary_y_node_pt[n] =
+            PMLQuad_mesh_y_pt->boundary_node_pt(parent_boundary_y_id, n);
+        }
+
+        // Sort them
+        if (parent_boundary_y_id == 1)
+        {
+          std::sort(ordered_boundary_y_node_pt.begin(),
+                    ordered_boundary_y_node_pt.end(),
+                    TwoDimensionalPMLHelper::sorter_right_boundary);
+        }
+
+        unsigned x_nnod = this->nboundary_node(current_boundary_x_id);
+        for (unsigned j = 0; j < x_nnod; j++)
+        {
+          this->boundary_node_pt(current_boundary_x_id, j)->set_obsolete();
+        }
+
+        unsigned y_nnod = this->nboundary_node(current_boundary_y_id);
+        for (unsigned j = 0; j < y_nnod; j++)
+        {
+          this->boundary_node_pt(current_boundary_y_id, j)->set_obsolete();
+        }
+
+        // Kill the obsolete nodes
+        this->prune_dead_nodes();
+
+        unsigned n_pml_element = this->nelement();
+
+        // Connect the elements in the pml mesh to the ones
+        // in the triangular mesh at element level
+        unsigned count = 0;
+
+        if (parent_boundary_y_id == 1)
+        {
+          for (unsigned e = 0; e < n_pml_element; e++)
+          {
+            // If element is on the right boundary
+            if ((e % n_pml_x) == 0)
+            {
+              // Upcast from GeneralisedElement to bulk element
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+              // Loop over all nodes in element
+              unsigned n_node = el_pt->nnode();
+              for (unsigned inod = 0; inod < n_node; inod++)
+              {
+                // If it is one of the ones on the left boundary
+                if (e == 0)
+                {
+                  if (inod == 0) el_pt->node_pt(inod) = special_corner_node_pt;
+                  if ((inod % nnode_1d == 0) && (inod > 0))
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_1)
+                    {
+                      count--;
+                    }
+                  }
+                }
+                else
+                {
+                  if ((inod % nnode_1d) == 0)
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_1)
+                    {
+                      count--;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        count = 0;
+
+        if (parent_boundary_x_id == 2)
+        {
+          for (unsigned e = 0; e < n_pml_element; e++)
+          {
+            // If element is on the right boundary
+            if ((int)(e / n_pml_x) == 0)
+            {
+              // Upcast from GeneralisedElement to bulk element
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+              // Loop over all nodes in element
+              unsigned n_node = el_pt->nnode();
+              for (unsigned inod = 0; inod < n_node; inod++)
+              {
+                if (e == 0)
+                {
+                  if (((int)(inod / nnode_1d) == 0) && (inod > 0))
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_2)
+                    {
+                      count--;
+                    }
+                  }
+                }
+                else
+                {
+                  if ((int)(inod / nnode_1d) == 0)
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_2)
+                    {
+                      count--;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // Set up bottom right corner element
+      //--------------------------------
+      if ((parent_boundary_x_id == 0) && (parent_boundary_y_id == 1))
+      {
+        // Get the number of nodes to be connected on the horizontal boundary
+        unsigned n_boundary_x_node =
+          PMLQuad_mesh_x_pt->nboundary_node(parent_boundary_x_id);
+
+        // Create a vector of ordered boundary nodes
+        Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
+
+        // Fill the vector with the nodes on the respective boundary
+        for (unsigned n = 0; n < n_boundary_x_node; n++)
+        {
+          ordered_boundary_x_node_pt[n] =
+            PMLQuad_mesh_x_pt->boundary_node_pt(parent_boundary_x_id, n);
+        }
+
+        // Sort them from lowest to highest (in x coordinate)
+        if (parent_boundary_x_id == 0)
+        {
+          std::sort(ordered_boundary_x_node_pt.begin(),
+                    ordered_boundary_x_node_pt.end(),
+                    TwoDimensionalPMLHelper::sorter_top_boundary);
+        }
+
+        // Get the number of nodes to be connected on the vertical boundary
+        unsigned n_boundary_y_node =
+          PMLQuad_mesh_y_pt->nboundary_node(parent_boundary_y_id);
+
+        // Create a vector of ordered boundary nodes
+        Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
+
+        // Fill the vector with the nodes on the respective boundary
+        for (unsigned n = 0; n < n_boundary_y_node; n++)
+        {
+          ordered_boundary_y_node_pt[n] =
+            PMLQuad_mesh_y_pt->boundary_node_pt(parent_boundary_y_id, n);
+        }
+
+        // Sort them
+        if (parent_boundary_y_id == 1)
+        {
+          std::sort(ordered_boundary_y_node_pt.begin(),
+                    ordered_boundary_y_node_pt.end(),
+                    TwoDimensionalPMLHelper::sorter_right_boundary);
+        }
+
+        unsigned x_nnod = this->nboundary_node(current_boundary_x_id);
+        for (unsigned j = 0; j < x_nnod; j++)
+        {
+          this->boundary_node_pt(current_boundary_x_id, j)->set_obsolete();
+        }
+
+        unsigned y_nnod = this->nboundary_node(current_boundary_y_id);
+        for (unsigned j = 0; j < y_nnod; j++)
+        {
+          this->boundary_node_pt(current_boundary_y_id, j)->set_obsolete();
+        }
+
+        // Kill the obsolete nodes
+        this->prune_dead_nodes();
+
+        // Get the number of elements in the PML mesh
+        unsigned n_pml_element = this->nelement();
+
+        // Connect the elements in the pml mesh to the ones
+        // in the triangular mesh at element level
+        unsigned count = 0;
+
+        if (parent_boundary_y_id == 1)
+        {
+          for (unsigned e = 0; e < n_pml_element; e++)
+          {
+            // If element is on the right boundary
+            if ((e % n_pml_x) == 0)
+            {
+              // Upcast from GeneralisedElement to bulk element
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+              // Loop over all nodes in element
+              unsigned n_node = el_pt->nnode();
+              for (unsigned inod = 0; inod < n_node; inod++)
+              {
+                if (e == ((n_pml_x) * (n_pml_y - 1)))
+                {
+                  if (inod == interior_node_nr_helper_1)
+                  {
+                    el_pt->node_pt(inod) = special_corner_node_pt;
+                  }
+                  if ((inod % nnode_1d == 0) &&
+                      (inod < interior_node_nr_helper_1))
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_1)
+                    {
+                      count--;
+                    }
+                  }
+                }
+                else
+                {
+                  if ((inod % nnode_1d) == 0)
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_1)
+                    {
+                      count--;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        count = 0;
+
+        if (parent_boundary_x_id == 0)
+        {
+          for (unsigned e = 0; e < n_pml_element; e++)
+          {
+            // If element is on the right boundary
+            if (e >= ((n_pml_x - 0) * (n_pml_y - 1)))
+            {
+              // Upcast from GeneralisedElement to bulk element
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+              // Loop over all nodes in element
+              unsigned n_node = el_pt->nnode();
+              for (unsigned inod = 0; inod < n_node; inod++)
+              {
+                if (e == ((n_pml_x) * (n_pml_y - 1)))
+                {
+                  if (((unsigned)(inod / nnode_1d) ==
+                       interior_node_nr_helper_2) &&
+                      (inod > interior_node_nr_helper_1))
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_3)
+                    {
+                      count--;
+                    }
+                  }
+                }
+                else
+                {
+                  if ((unsigned)(inod / nnode_1d) == interior_node_nr_helper_2)
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_3)
+                    {
+                      count--;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // Set up top left corner element
+      //--------------------------------
+      if ((parent_boundary_x_id == 2) && (parent_boundary_y_id == 3))
+      {
+        // Get the number of nodes to be connected on the horizontal boundary
+        unsigned n_boundary_x_node =
+          PMLQuad_mesh_x_pt->nboundary_node(parent_boundary_x_id);
+
+        // Create a vector of ordered boundary nodes
+        Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
+
+        // Fill the vector with the nodes on the respective boundary
+        for (unsigned n = 0; n < n_boundary_x_node; n++)
+        {
+          ordered_boundary_x_node_pt[n] =
+            PMLQuad_mesh_x_pt->boundary_node_pt(parent_boundary_x_id, n);
+        }
+
+        // Sort them from lowest to highest (in x coordinate)
+        if (parent_boundary_x_id == 2)
+        {
+          std::sort(ordered_boundary_x_node_pt.begin(),
+                    ordered_boundary_x_node_pt.end(),
+                    TwoDimensionalPMLHelper::sorter_top_boundary);
+        }
+
+        // Get the number of nodes to be connected on the vertical boundary
+        unsigned n_boundary_y_node =
+          PMLQuad_mesh_y_pt->nboundary_node(parent_boundary_y_id);
+
+        // Create a vector of ordered boundary nodes
+        Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
+
+        // Fill the vector with the nodes on the respective boundary
+        for (unsigned n = 0; n < n_boundary_y_node; n++)
+        {
+          ordered_boundary_y_node_pt[n] =
+            PMLQuad_mesh_y_pt->boundary_node_pt(parent_boundary_y_id, n);
+        }
+
+        // Sort them from lowest to highest (in x coordinate)
+        if (parent_boundary_y_id == 1)
+        {
+          std::sort(ordered_boundary_y_node_pt.begin(),
+                    ordered_boundary_y_node_pt.end(),
+                    TwoDimensionalPMLHelper::sorter_right_boundary);
+        }
+
+        unsigned x_nnod = this->nboundary_node(current_boundary_x_id);
+        for (unsigned j = 0; j < x_nnod; j++)
+        {
+          this->boundary_node_pt(current_boundary_x_id, j)->set_obsolete();
+        }
+
+        unsigned y_nnod = this->nboundary_node(current_boundary_y_id);
+        for (unsigned j = 0; j < y_nnod; j++)
+        {
+          this->boundary_node_pt(current_boundary_y_id, j)->set_obsolete();
+        }
+
+        // Kill the obsolete nodes
+        this->prune_dead_nodes();
+
+        // Get the number of elements in the PML mesh
+        unsigned n_pml_element = this->nelement();
+
+        // Connect the elements in the pml mesh to the ones
+        // in the triangular mesh at element level
+        unsigned count = 0;
+
+        if (parent_boundary_y_id == 3)
+        {
+          for (unsigned e = 0; e < n_pml_element; e++)
+          {
+            // If element is on the right boundary
+            if ((e % n_pml_x) == (n_pml_x - 1))
+            {
+              // Upcast from GeneralisedElement to bulk element
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+              // Loop over all nodes in element
+              unsigned n_node = el_pt->nnode();
+              for (unsigned inod = 0; inod < n_node; inod++)
+              {
+                if (e == (n_pml_x - 1))
+                {
+                  if (inod == interior_node_nr_helper_2)
+                    el_pt->node_pt(inod) = special_corner_node_pt;
+                  if ((inod % nnode_1d == interior_node_nr_helper_2) &&
+                      (inod > (nnode_1d - 1)))
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_3)
+                    {
+                      count--;
+                    }
+                  }
+                }
+                else
+                {
+                  if ((inod % nnode_1d) == interior_node_nr_helper_2)
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_3)
+                    {
+                      count--;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        count = 0;
+
+        if (parent_boundary_x_id == 2)
+        {
+          for (unsigned e = 0; e < n_pml_element; e++)
+          {
+            // If element is on the right boundary
+            if ((int)(e / n_pml_x) == 0)
+            {
+              // Upcast from GeneralisedElement to bulk element
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+              // Loop over all nodes in element
+              unsigned n_node = el_pt->nnode();
+              for (unsigned inod = 0; inod < n_node; inod++)
+              {
+                // If it is one of the ones on the left boundary
+                if (e == (n_pml_x - 1))
+                {
+                  if (((int)(inod / nnode_1d) == 0) &&
+                      (inod < interior_node_nr_helper_2))
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == (nnode_1d - 1))
+                    {
+                      count--;
+                    }
+                  }
+                }
+                else
+                {
+                  if ((int)(inod / nnode_1d) == 0)
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_2)
+                    {
+                      count--;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // Set up bottom left corner element
+      //--------------------------------
+      if ((parent_boundary_x_id == 0) && (parent_boundary_y_id == 3))
+      {
+        // Get the number of nodes to be connected on the horizontal boundary
+        unsigned n_boundary_x_node =
+          PMLQuad_mesh_x_pt->nboundary_node(parent_boundary_x_id);
+
+        // Create a vector of ordered boundary nodes
+        Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
+
+        // Fill the vector with the nodes on the respective boundary
+        for (unsigned n = 0; n < n_boundary_x_node; n++)
+        {
+          ordered_boundary_x_node_pt[n] =
+            PMLQuad_mesh_x_pt->boundary_node_pt(parent_boundary_x_id, n);
+        }
+
+        // Sort them
+        if (parent_boundary_x_id == 0)
+        {
+          std::sort(ordered_boundary_x_node_pt.begin(),
+                    ordered_boundary_x_node_pt.end(),
+                    TwoDimensionalPMLHelper::sorter_top_boundary);
+        }
+
+        // Get the number of nodes to be connected on the vertical boundary
+        unsigned n_boundary_y_node =
+          PMLQuad_mesh_y_pt->nboundary_node(parent_boundary_y_id);
+
+        // Create a vector of ordered boundary nodes
+        Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
+
+        // Fill the vector with the nodes on the respective boundary
+        for (unsigned n = 0; n < n_boundary_y_node; n++)
+        {
+          ordered_boundary_y_node_pt[n] =
+            PMLQuad_mesh_y_pt->boundary_node_pt(parent_boundary_y_id, n);
+        }
+
+        // Sort them
+        if (parent_boundary_y_id == 3)
+        {
+          std::sort(ordered_boundary_y_node_pt.begin(),
+                    ordered_boundary_y_node_pt.end(),
+                    TwoDimensionalPMLHelper::sorter_right_boundary);
+        }
+
+        unsigned x_nnod = this->nboundary_node(current_boundary_x_id);
+        for (unsigned j = 0; j < x_nnod; j++)
+        {
+          this->boundary_node_pt(current_boundary_x_id, j)->set_obsolete();
+        }
+
+        unsigned y_nnod = this->nboundary_node(current_boundary_y_id);
+        for (unsigned j = 0; j < y_nnod; j++)
+        {
+          this->boundary_node_pt(current_boundary_y_id, j)->set_obsolete();
+        }
+
+        // Kill the obsolete nodes
+        this->prune_dead_nodes();
+
+        unsigned n_pml_element = this->nelement();
+
+        // Connect the elements in the pml mesh to the ones
+        // in the triangular mesh at element level
+        unsigned count = 0;
+
+        if (parent_boundary_y_id == 3)
+        {
+          for (unsigned e = 0; e < n_pml_element; e++)
+          {
+            // If element is on the right boundary
+            if ((e % n_pml_x) == (n_pml_x - 1))
+            {
+              // Upcast from GeneralisedElement to bulk element
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+              // Loop over all nodes in element
+              unsigned n_node = el_pt->nnode();
+              for (unsigned inod = 0; inod < n_node; inod++)
+              {
+                if (e == (n_pml_element - 1))
+                {
+                  if (inod == interior_node_nr_helper_3)
+                  {
+                    el_pt->node_pt(inod) = special_corner_node_pt;
+                  }
+                  if ((inod % nnode_1d == interior_node_nr_helper_2) &&
+                      (inod < interior_node_nr_helper_3))
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_3)
+                    {
+                      count--;
+                    }
+                  }
+                }
+                else
+                {
+                  if ((inod % nnode_1d) == interior_node_nr_helper_2)
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_y_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_3)
+                    {
+                      count--;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        count = 0;
+
+        if (parent_boundary_x_id == 0)
+        {
+          for (unsigned e = 0; e < n_pml_element; e++)
+          {
+            // If element is on the right boundary
+            if (e >= ((n_pml_x) * (n_pml_y - 1)))
+            {
+              // Upcast from GeneralisedElement to bulk element
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
+
+              // Loop over all nodes in element
+              unsigned n_node = el_pt->nnode();
+              for (unsigned inod = 0; inod < n_node; inod++)
+              {
+                if (e == (n_pml_element - 1))
+                {
+                  if (((unsigned)(inod / nnode_1d) ==
+                       interior_node_nr_helper_2) &&
+                      (inod < interior_node_nr_helper_3))
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_3)
+                    {
+                      count--;
+                    }
+                  }
+                }
+                else
+                {
+                  if ((unsigned)(inod / nnode_1d) == interior_node_nr_helper_2)
+                  {
+                    // Get the pointer from the triangular mesh
+                    el_pt->node_pt(inod) = ordered_boundary_x_node_pt[count];
+                    count++;
+
+                    // Node between two elements
+                    if (inod == interior_node_nr_helper_3)
+                    {
+                      count--;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+
+  ////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
+
+
+  //===================================================================
+  /// \short All helper routines for 2D bulk boundary mesh usage in order to
+  /// generate PML meshes aligned to the main mesh
+  //===================================================================
+  namespace TwoDimensionalPMLHelper
+  {
+    //============================================================================
+    /// "Constructor" for PML mesh,aligned with the right physical domain
+    /// boundary
+    //============================================================================
+    template<class ASSOCIATED_PML_QUAD_ELEMENT>
+    Mesh* create_right_pml_mesh(
+      Mesh* bulk_mesh_pt,
+      const unsigned& right_boundary_id,
+      const unsigned& n_x_right_pml,
+      const double& width_x_right_pml,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+    {
+      // Look at the right boundary of the triangular mesh
+      unsigned n_right_boundary_node =
+        bulk_mesh_pt->nboundary_node(right_boundary_id);
+
+      // Create a vector of ordered boundary nodes
+      Vector<Node*> ordered_right_boundary_node_pt(n_right_boundary_node);
+
+      // Fill the vector with the nodes on the respective boundary
+      for (unsigned n = 0; n < n_right_boundary_node; n++)
+      {
+        ordered_right_boundary_node_pt[n] =
+          bulk_mesh_pt->boundary_node_pt(right_boundary_id, n);
+      }
+
+      // Sort them from lowest to highest (in y coordinate)
+      std::sort(ordered_right_boundary_node_pt.begin(),
+                ordered_right_boundary_node_pt.end(),
+                sorter_right_boundary);
+
+      // The number of elements in y is taken from the triangular mesh
+      unsigned n_y_right_pml =
+        bulk_mesh_pt->nboundary_element(right_boundary_id);
+
+      // Specific PML sizes needed, taken directly from physical domain
+      double l_pml_right_x_start = ordered_right_boundary_node_pt[0]->x(0);
+      /// \short PML layer with added to the bulk mesh coordinate
+      double l_pml_right_x_end =
+        width_x_right_pml + ordered_right_boundary_node_pt[0]->x(0);
+      double l_pml_right_y_start = ordered_right_boundary_node_pt[0]->x(1);
+      double l_pml_right_y_end =
+        ordered_right_boundary_node_pt[n_right_boundary_node - 1]->x(1);
+
+      // Rectangular boundary id to be merged with triangular mesh
+      unsigned right_quadPML_boundary_id = 3;
+
+      // Create the mesh to be designated to the PML
+      Mesh* pml_right_mesh_pt = 0;
+
+      // Build the right one
+      pml_right_mesh_pt =
+        new PMLQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>(bulk_mesh_pt,
+                                                     right_boundary_id,
+                                                     right_quadPML_boundary_id,
+                                                     n_x_right_pml,
+                                                     n_y_right_pml,
+                                                     l_pml_right_x_start,
+                                                     l_pml_right_x_end,
+                                                     l_pml_right_y_start,
+                                                     l_pml_right_y_end,
+                                                     time_stepper_pt);
+
+      // Enable PML damping on the entire mesh
+      unsigned n_element_pml_right = pml_right_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_element_pml_right; e++)
+      {
+        // Upcast
+        PMLElementBase<2>* el_pt =
+          dynamic_cast<PMLElementBase<2>*>(pml_right_mesh_pt->element_pt(e));
+        el_pt->enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
+      }
+
+      // Get the values to be pinned from the first element (which we
+      // assume exists!)
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_right_mesh_pt->element_pt(0));
+      Vector<unsigned> values_to_pin;
+      el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+      unsigned npin = values_to_pin.size();
+
+      // Exterior boundary needs to be set to Dirichlet 0
+      // in both real and imaginary parts
+      unsigned n_bound_pml_right = pml_right_mesh_pt->nboundary();
+      for (unsigned b = 0; b < n_bound_pml_right; b++)
+      {
+        unsigned n_node = pml_right_mesh_pt->nboundary_node(b);
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          Node* nod_pt = pml_right_mesh_pt->boundary_node_pt(b, n);
+          if (b == 1)
+          {
+            for (unsigned j = 0; j < npin; j++)
+            {
+              unsigned j_val = values_to_pin[j];
+              nod_pt->pin(j_val);
+              nod_pt->set_value(j_val, 0.0);
+            }
+          }
+        }
+      }
+
+      /// \short Return the finalized mesh, with PML enabled
+      /// and boundary conditions added
+      return pml_right_mesh_pt;
+    }
+
+    //===========================================================================
+    /// "Constructor" for PML mesh, aligned with the top physical domain
+    /// boundary
+    //===========================================================================
+    template<class ASSOCIATED_PML_QUAD_ELEMENT>
+    Mesh* create_top_pml_mesh(
+      Mesh* bulk_mesh_pt,
+      const unsigned& top_boundary_id,
+      const unsigned& n_y_top_pml,
+      const double& width_y_top_pml,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+    {
+      // Look at the top boundary of the triangular mesh
+      unsigned n_top_boundary_node =
+        bulk_mesh_pt->nboundary_node(top_boundary_id);
+
+      // Create a vector of ordered boundary nodes
+      Vector<Node*> ordered_top_boundary_node_pt(n_top_boundary_node);
+
+      // Fill the vector with the nodes on the respective boundary
+      for (unsigned n = 0; n < n_top_boundary_node; n++)
+      {
+        ordered_top_boundary_node_pt[n] =
+          bulk_mesh_pt->boundary_node_pt(top_boundary_id, n);
+      }
+
+      // Sort them from lowest to highest (in x coordinate)
+      std::sort(ordered_top_boundary_node_pt.begin(),
+                ordered_top_boundary_node_pt.end(),
+                sorter_top_boundary);
+
+      // The number of elements in x is taken from the triangular mesh
+      unsigned n_x_top_pml = bulk_mesh_pt->nboundary_element(top_boundary_id);
+
+      // Specific PML sizes needed, taken directly from physical domain
+      double l_pml_top_x_start = ordered_top_boundary_node_pt[0]->x(0);
+      double l_pml_top_x_end =
+        ordered_top_boundary_node_pt[n_top_boundary_node - 1]->x(0);
+      double l_pml_top_y_start = ordered_top_boundary_node_pt[0]->x(1);
+      /// \short PML layer width added to the bulk mesh coordinate
+      double l_pml_top_y_end =
+        width_y_top_pml + ordered_top_boundary_node_pt[0]->x(1);
+
+      unsigned top_quadPML_boundary_id = 0;
+
+      // Create the mesh to be designated to the PML
+      Mesh* pml_top_mesh_pt = 0;
+
+      // Build the top PML mesh
+      pml_top_mesh_pt =
+        new PMLQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>(bulk_mesh_pt,
+                                                     top_boundary_id,
+                                                     top_quadPML_boundary_id,
+                                                     n_x_top_pml,
+                                                     n_y_top_pml,
+                                                     l_pml_top_x_start,
+                                                     l_pml_top_x_end,
+                                                     l_pml_top_y_start,
+                                                     l_pml_top_y_end,
+                                                     time_stepper_pt);
+
+      // Enable PML damping on the entire mesh
+      unsigned n_element_pml_top = pml_top_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_element_pml_top; e++)
+      {
+        // Upcast
+        PMLElementBase<2>* el_pt =
+          dynamic_cast<PMLElementBase<2>*>(pml_top_mesh_pt->element_pt(e));
+        el_pt->enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
+      }
+
+      // Get the values to be pinned from the first element (which we
+      // assume exists!)
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_top_mesh_pt->element_pt(0));
+      Vector<unsigned> values_to_pin;
+      el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+      unsigned npin = values_to_pin.size();
+
+      // Exterior boundary needs to be set to Dirichlet 0
+      // for both real and imaginary parts of all fields
+      // in the problem
+      unsigned n_bound_pml_top = pml_top_mesh_pt->nboundary();
+      for (unsigned b = 0; b < n_bound_pml_top; b++)
+      {
+        unsigned n_node = pml_top_mesh_pt->nboundary_node(b);
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          Node* nod_pt = pml_top_mesh_pt->boundary_node_pt(b, n);
+          if (b == 2)
+          {
+            for (unsigned j = 0; j < npin; j++)
+            {
+              unsigned j_val = values_to_pin[j];
+              nod_pt->pin(j_val);
+              nod_pt->set_value(j_val, 0.0);
+            }
+          }
+        }
+      }
+
+      /// \short Return the finalized mesh, with PML enabled
+      /// and boundary conditions added
+      return pml_top_mesh_pt;
+    }
+
+    //============================================================================
+    /// "Constructor" for PML mesh, aligned with the left physical domain
+    /// boundary
+    //============================================================================
+    template<class ASSOCIATED_PML_QUAD_ELEMENT>
+    Mesh* create_left_pml_mesh(
+      Mesh* bulk_mesh_pt,
+      const unsigned& left_boundary_id,
+      const unsigned& n_x_left_pml,
+      const double& width_x_left_pml,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+    {
+      // Look at the left boundary of the triangular mesh
+      unsigned n_left_boundary_node =
+        bulk_mesh_pt->nboundary_node(left_boundary_id);
+
+      // Create a vector of ordered boundary nodes
+      Vector<Node*> ordered_left_boundary_node_pt(n_left_boundary_node);
+
+      // Fill the vector with the nodes on the respective boundary
+      for (unsigned n = 0; n < n_left_boundary_node; n++)
+      {
+        ordered_left_boundary_node_pt[n] =
+          bulk_mesh_pt->boundary_node_pt(left_boundary_id, n);
+      }
+
+      // Sort them from lowest to highest (in y coordinate)
+      std::sort(ordered_left_boundary_node_pt.begin(),
+                ordered_left_boundary_node_pt.end(),
+                sorter_left_boundary);
+
+      // The number of elements in y is taken from the triangular mesh
+      unsigned n_y_left_pml = bulk_mesh_pt->nboundary_element(left_boundary_id);
+
+      // Specific PML sizes needed, taken directly from physical domain
+      /// \short PML layer width subtracted from left bulk mesh coordinate
+      double l_pml_left_x_start =
+        -width_x_left_pml +
+        ordered_left_boundary_node_pt[n_left_boundary_node - 1]->x(0);
+      double l_pml_left_x_end =
+        ordered_left_boundary_node_pt[n_left_boundary_node - 1]->x(0);
+      double l_pml_left_y_start =
+        ordered_left_boundary_node_pt[n_left_boundary_node - 1]->x(1);
+      double l_pml_left_y_end = ordered_left_boundary_node_pt[0]->x(1);
+
+      unsigned left_quadPML_boundary_id = 1;
+
+      // Create the mesh to be designated to the PML
+      Mesh* pml_left_mesh_pt = 0;
+
+      // Build the left PML mesh
+      pml_left_mesh_pt =
+        new PMLQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>(bulk_mesh_pt,
+                                                     left_boundary_id,
+                                                     left_quadPML_boundary_id,
+                                                     n_x_left_pml,
+                                                     n_y_left_pml,
+                                                     l_pml_left_x_start,
+                                                     l_pml_left_x_end,
+                                                     l_pml_left_y_start,
+                                                     l_pml_left_y_end,
+                                                     time_stepper_pt);
+
+      // Enable PML damping on the entire mesh
+      unsigned n_element_pml_left = pml_left_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_element_pml_left; e++)
+      {
+        // Upcast
+        PMLElementBase<2>* el_pt =
+          dynamic_cast<PMLElementBase<2>*>(pml_left_mesh_pt->element_pt(e));
+        el_pt->enable_pml(0, l_pml_left_x_end, l_pml_left_x_start);
+      }
+
+      // Get the values to be pinned from the first element (which we
+      // assume exists!)
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_left_mesh_pt->element_pt(0));
+      Vector<unsigned> values_to_pin;
+      el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+      unsigned npin = values_to_pin.size();
+
+      // Exterior boundary needs to be set to Dirichlet 0
+      // for both real and imaginary parts of all fields
+      // in the problem
+      unsigned n_bound_pml_left = pml_left_mesh_pt->nboundary();
+      for (unsigned b = 0; b < n_bound_pml_left; b++)
+      {
+        unsigned n_node = pml_left_mesh_pt->nboundary_node(b);
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          Node* nod_pt = pml_left_mesh_pt->boundary_node_pt(b, n);
+          if (b == 3)
+          {
+            for (unsigned j = 0; j < npin; j++)
+            {
+              unsigned j_val = values_to_pin[j];
+              nod_pt->pin(j_val);
+              nod_pt->set_value(j_val, 0.0);
+            }
+          }
+        }
+      }
+
+      /// \short Return the finalized mesh, with PML enabled
+      /// and boundary conditions added
+      return pml_left_mesh_pt;
+    }
+
+    //============================================================================
+    ///"Constructor" for PML mesh,aligned with the bottom physical domain
+    /// boundary
+    //============================================================================
+    template<class ASSOCIATED_PML_QUAD_ELEMENT>
+    Mesh* create_bottom_pml_mesh(
+      Mesh* bulk_mesh_pt,
+      const unsigned& bottom_boundary_id,
+      const unsigned& n_y_bottom_pml,
+      const double& width_y_bottom_pml,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+    {
+      // Look at the bottom boundary of the triangular mesh
+      unsigned n_bottom_boundary_node =
+        bulk_mesh_pt->nboundary_node(bottom_boundary_id);
+
+      // Create a vector of ordered boundary nodes
+      Vector<Node*> ordered_bottom_boundary_node_pt(n_bottom_boundary_node);
+
+      // Fill the vector with the nodes on the respective boundary
+      for (unsigned n = 0; n < n_bottom_boundary_node; n++)
+      {
+        ordered_bottom_boundary_node_pt[n] =
+          bulk_mesh_pt->boundary_node_pt(bottom_boundary_id, n);
+      }
+
+      // Sort them from highest to lowest (in x coordinate)
+      std::sort(ordered_bottom_boundary_node_pt.begin(),
+                ordered_bottom_boundary_node_pt.end(),
+                sorter_bottom_boundary);
+
+      // The number of elements in y is taken from the triangular mesh
+      unsigned n_x_bottom_pml =
+        bulk_mesh_pt->nboundary_element(bottom_boundary_id);
+
+      // Specific PML sizes needed, taken directly from physical domain
+      double l_pml_bottom_x_start =
+        ordered_bottom_boundary_node_pt[n_bottom_boundary_node - 1]->x(0);
+      double l_pml_bottom_x_end = ordered_bottom_boundary_node_pt[0]->x(0);
+      /// \short PML layer width subtracted from the bulk mesh lower
+      /// boundary coordinate
+      double l_pml_bottom_y_start =
+        -width_y_bottom_pml + ordered_bottom_boundary_node_pt[0]->x(1);
+      double l_pml_bottom_y_end = ordered_bottom_boundary_node_pt[0]->x(1);
+
+      unsigned bottom_quadPML_boundary_id = 2;
+
+      // Create the mesh to be designated to the PML
+      Mesh* pml_bottom_mesh_pt = 0;
+
+      // Build the bottom PML mesh
+      pml_bottom_mesh_pt =
+        new PMLQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>(bulk_mesh_pt,
+                                                     bottom_boundary_id,
+                                                     bottom_quadPML_boundary_id,
+                                                     n_x_bottom_pml,
+                                                     n_y_bottom_pml,
+                                                     l_pml_bottom_x_start,
+                                                     l_pml_bottom_x_end,
+                                                     l_pml_bottom_y_start,
+                                                     l_pml_bottom_y_end,
+                                                     time_stepper_pt);
+
+      // Enable PML damping on the entire mesh
+      unsigned n_element_pml_bottom = pml_bottom_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_element_pml_bottom; e++)
+      {
+        // Upcast
+        PMLElementBase<2>* el_pt =
+          dynamic_cast<PMLElementBase<2>*>(pml_bottom_mesh_pt->element_pt(e));
+        el_pt->enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
+      }
+
+      // Get the values to be pinned from the first element (which we
+      // assume exists!)
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_bottom_mesh_pt->element_pt(0));
+      Vector<unsigned> values_to_pin;
+      el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+      unsigned npin = values_to_pin.size();
+
+      // Exterior boundary needs to be set to Dirichlet 0
+      // for both real and imaginary parts of all fields
+      // in the problem
+      unsigned n_bound_pml_bottom = pml_bottom_mesh_pt->nboundary();
+      for (unsigned b = 0; b < n_bound_pml_bottom; b++)
+      {
+        unsigned n_node = pml_bottom_mesh_pt->nboundary_node(b);
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          Node* nod_pt = pml_bottom_mesh_pt->boundary_node_pt(b, n);
+          if (b == 0)
+          {
+            for (unsigned j = 0; j < npin; j++)
+            {
+              unsigned j_val = values_to_pin[j];
+              nod_pt->pin(j_val);
+              nod_pt->set_value(j_val, 0.0);
+            }
+          }
+        }
+      }
+
+      /// \short Return the finalized mesh, with PML enabled
+      /// and boundary conditions added
+      return pml_bottom_mesh_pt;
+    }
+
+    //==========================================================================
+    /// \short "Constructor" for PML top right corner mesh,
+    /// aligned with the existing PML meshes
+    //==========================================================================
+    template<class ASSOCIATED_PML_QUAD_ELEMENT>
+    Mesh* create_top_right_pml_mesh(
+      Mesh* pml_right_mesh_pt,
+      Mesh* pml_top_mesh_pt,
+      Mesh* bulk_mesh_pt,
+      const unsigned& right_boundary_id,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+    {
+      /// \short Relevant boundary id's to be used in construction
+      /// Parent id refers to already existing PML meshes
+      unsigned parent_boundary_x_id = 2;
+      unsigned parent_boundary_y_id = 1;
+      // Current id refers to the mesh that is to be constructed
+      unsigned current_boundary_x_id = 0;
+      unsigned current_boundary_y_id = 3;
+
+      // Look at the right boundary of the triangular mesh
+      unsigned n_right_boundary_node =
+        bulk_mesh_pt->nboundary_node(right_boundary_id);
+
+      // Create a vector of ordered boundary nodes
+      Vector<Node*> ordered_right_boundary_node_pt(n_right_boundary_node);
+
+      // Fill the vector with the nodes on the respective boundary
+      for (unsigned n = 0; n < n_right_boundary_node; n++)
+      {
+        ordered_right_boundary_node_pt[n] =
+          bulk_mesh_pt->boundary_node_pt(right_boundary_id, n);
+      }
+
+      // Sort them from lowest to highest (in y coordinate)
+      std::sort(ordered_right_boundary_node_pt.begin(),
+                ordered_right_boundary_node_pt.end(),
+                sorter_right_boundary);
+
+      /// \short Number of elements and boundary nodes to be acted upon during
+      /// construction are extracted from the 'parent' PML meshes
+      unsigned n_x_right_pml =
+        pml_right_mesh_pt->nboundary_element(parent_boundary_x_id);
+      unsigned n_y_top_pml =
+        pml_top_mesh_pt->nboundary_element(parent_boundary_y_id);
+      unsigned n_x_boundary_nodes =
+        pml_right_mesh_pt->nboundary_node(parent_boundary_x_id);
+      unsigned n_y_boundary_nodes =
+        pml_top_mesh_pt->nboundary_node(parent_boundary_y_id);
+
+      /// \short Specific PML sizes needed, taken directly from physical domain
+      /// and existing PML meshes
+      double l_pml_right_x_start =
+        ordered_right_boundary_node_pt[n_right_boundary_node - 1]->x(0);
+      double l_pml_right_x_end =
+        pml_right_mesh_pt
+          ->boundary_node_pt(parent_boundary_x_id, n_x_boundary_nodes - 1)
+          ->x(0);
+      double l_pml_top_y_start =
+        ordered_right_boundary_node_pt[n_right_boundary_node - 1]->x(1);
+      double l_pml_top_y_end =
+        pml_top_mesh_pt
+          ->boundary_node_pt(parent_boundary_y_id, n_y_boundary_nodes - 1)
+          ->x(1);
+
+      // Create the mesh to be designated to the PML
+      Mesh* pml_top_right_mesh_pt = 0;
+
+      // Build the top right corner PML mesh
+      pml_top_right_mesh_pt =
+        new PMLCornerQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>(
+          pml_right_mesh_pt,
+          pml_top_mesh_pt,
+          bulk_mesh_pt,
+          ordered_right_boundary_node_pt[n_right_boundary_node - 1],
+          parent_boundary_x_id,
+          parent_boundary_y_id,
+          current_boundary_x_id,
+          current_boundary_y_id,
+          n_x_right_pml,
+          n_y_top_pml,
+          l_pml_right_x_start,
+          l_pml_right_x_end,
+          l_pml_top_y_start,
+          l_pml_top_y_end,
+          time_stepper_pt);
+
+      // Enable PML damping on the entire mesh
+      /// \short The enabling must be perfromed in both x- and y-directions
+      /// as this is a corner PML mesh
+      unsigned n_element_pml_top_right = pml_top_right_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_element_pml_top_right; e++)
+      {
+        // Upcast
+        PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>(
+          pml_top_right_mesh_pt->element_pt(e));
+        el_pt->enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
+        el_pt->enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
+      }
+
+      // Get the values to be pinned from the first element (which we
+      // assume exists!)
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_top_right_mesh_pt->element_pt(0));
+      Vector<unsigned> values_to_pin;
+      el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+      unsigned npin = values_to_pin.size();
+
+      // Exterior boundary needs to be set to Dirichlet 0
+      // for both real and imaginary parts of all fields
+      // in the problem
+      unsigned n_bound_pml_top_right = pml_top_right_mesh_pt->nboundary();
+      for (unsigned b = 0; b < n_bound_pml_top_right; b++)
+      {
+        unsigned n_node = pml_top_right_mesh_pt->nboundary_node(b);
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          Node* nod_pt = pml_top_right_mesh_pt->boundary_node_pt(b, n);
+          if ((b == 1) || (b == 2))
+          {
+            for (unsigned j = 0; j < npin; j++)
+            {
+              unsigned j_val = values_to_pin[j];
+              nod_pt->pin(j_val);
+              nod_pt->set_value(j_val, 0.0);
+            }
+          }
+        }
+      }
+
+      /// \short Return the finalized mesh, with PML enabled
+      /// and boundary conditions added
+      return pml_top_right_mesh_pt;
+    }
+
+    //==========================================================================
+    /// \short  "Constructor" for PML bottom right corner mesh,
+    /// aligned with the existing PML meshes
+    //==========================================================================
+    template<class ASSOCIATED_PML_QUAD_ELEMENT>
+    Mesh* create_bottom_right_pml_mesh(
+      Mesh* pml_right_mesh_pt,
+      Mesh* pml_bottom_mesh_pt,
+      Mesh* bulk_mesh_pt,
+      const unsigned& right_boundary_id,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+    {
+      /// \short Relevant boundary id's to be used in construction
+      /// Parent id refers to already existing PML meshes
+      unsigned parent_boundary_x_id = 0;
+      unsigned parent_boundary_y_id = 1;
+      // Current id refers to the mesh that is to be constructed
+      unsigned current_boundary_x_id = 2;
+      unsigned current_boundary_y_id = 3;
+
+      // Look at the right boundary of the triangular mesh
+      unsigned n_right_boundary_node =
+        bulk_mesh_pt->nboundary_node(right_boundary_id);
+
+      // Create a vector of ordered boundary nodes
+      Vector<Node*> ordered_right_boundary_node_pt(n_right_boundary_node);
+
+      // Fill the vector with the nodes on the respective boundary
+      for (unsigned n = 0; n < n_right_boundary_node; n++)
+      {
+        ordered_right_boundary_node_pt[n] =
+          bulk_mesh_pt->boundary_node_pt(right_boundary_id, n);
+      }
+
+      // Sort them from lowest to highest (in y coordinate)
+      std::sort(ordered_right_boundary_node_pt.begin(),
+                ordered_right_boundary_node_pt.end(),
+                sorter_right_boundary);
+
+      /// \short Number of elements and boundary nodes to be acted upon during
+      /// construction are extracted from the 'parent' PML meshes
+      unsigned n_x_right_pml =
+        pml_right_mesh_pt->nboundary_element(parent_boundary_x_id);
+      unsigned n_y_bottom_pml =
+        pml_bottom_mesh_pt->nboundary_element(parent_boundary_y_id);
+      unsigned n_x_boundary_nodes =
+        pml_right_mesh_pt->nboundary_node(parent_boundary_x_id);
+
+      /// \short Specific PML sizes needed, taken directly from physical domain
+      /// and existing PML meshes
+      double l_pml_right_x_start = ordered_right_boundary_node_pt[0]->x(0);
+      double l_pml_right_x_end =
+        pml_right_mesh_pt
+          ->boundary_node_pt(parent_boundary_x_id, n_x_boundary_nodes - 1)
+          ->x(0);
+      double l_pml_bottom_y_start =
+        pml_bottom_mesh_pt->boundary_node_pt(parent_boundary_y_id, 0)->x(1);
+      double l_pml_bottom_y_end = ordered_right_boundary_node_pt[0]->x(1);
+
+      // Create the mesh to be designated to the PML
+      Mesh* pml_bottom_right_mesh_pt = 0;
+
+      // Build the bottom right corner PML mesh
+      pml_bottom_right_mesh_pt =
+        new PMLCornerQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>(
+          pml_right_mesh_pt,
+          pml_bottom_mesh_pt,
+          bulk_mesh_pt,
+          ordered_right_boundary_node_pt[0],
+          parent_boundary_x_id,
+          parent_boundary_y_id,
+          current_boundary_x_id,
+          current_boundary_y_id,
+          n_x_right_pml,
+          n_y_bottom_pml,
+          l_pml_right_x_start,
+          l_pml_right_x_end,
+          l_pml_bottom_y_start,
+          l_pml_bottom_y_end,
+          time_stepper_pt);
+
+      // Enable PML damping on the entire mesh
+      /// \short The enabling must be perfromed in both x- and y-directions
+      /// as this is a corner PML mesh
+      unsigned n_element_pml_bottom_right =
+        pml_bottom_right_mesh_pt->nelement();
+
+      for (unsigned e = 0; e < n_element_pml_bottom_right; e++)
+      {
+        // Upcast
+        PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>(
+          pml_bottom_right_mesh_pt->element_pt(e));
+        el_pt->enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
+        el_pt->enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
+      }
+
+      // Get the values to be pinned from the first element (which we
+      // assume exists!)
+      PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>(
+        pml_bottom_right_mesh_pt->element_pt(0));
+      Vector<unsigned> values_to_pin;
+      el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+      unsigned npin = values_to_pin.size();
+
+      // Exterior boundary needs to be set to Dirichlet 0
+      // for both real and imaginary parts of all fields
+      // in the problem
+      unsigned n_bound_pml_bottom_right = pml_bottom_right_mesh_pt->nboundary();
+      for (unsigned b = 0; b < n_bound_pml_bottom_right; b++)
+      {
+        unsigned n_node = pml_bottom_right_mesh_pt->nboundary_node(b);
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          Node* nod_pt = pml_bottom_right_mesh_pt->boundary_node_pt(b, n);
+          if ((b == 0) || (b == 1))
+          {
+            for (unsigned j = 0; j < npin; j++)
+            {
+              unsigned j_val = values_to_pin[j];
+              nod_pt->pin(j_val);
+              nod_pt->set_value(j_val, 0.0);
+            }
+          }
+        }
+      }
+
+      /// \short Return the finalized mesh, with PML enabled
+      /// and boundary conditions added
+      return pml_bottom_right_mesh_pt;
+    }
+
+    //==========================================================================
+    /// \short "Constructor" for PML top left corner mesh,
+    /// aligned with the existing PML meshes
+    //==========================================================================
+    template<class ASSOCIATED_PML_QUAD_ELEMENT>
+    Mesh* create_top_left_pml_mesh(
+      Mesh* pml_left_mesh_pt,
+      Mesh* pml_top_mesh_pt,
+      Mesh* bulk_mesh_pt,
+      const unsigned& left_boundary_id,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+    {
+      /// \short Relevant boundary id's to be used in construction
+      /// Parent id refers to already existing PML meshes
+      unsigned parent_boundary_x_id = 2;
+      unsigned parent_boundary_y_id = 3;
+      // Current id refers to the mesh that is to be constructed
+      unsigned current_boundary_x_id = 0;
+      unsigned current_boundary_y_id = 1;
+
+      // Look at the left boundary of the triangular mesh
+      unsigned n_left_boundary_node =
+        bulk_mesh_pt->nboundary_node(left_boundary_id);
+
+      // Create a vector of ordered boundary nodes
+      Vector<Node*> ordered_left_boundary_node_pt(n_left_boundary_node);
+
+      // Fill the vector with the nodes on the respective boundary
+      for (unsigned n = 0; n < n_left_boundary_node; n++)
+      {
+        ordered_left_boundary_node_pt[n] =
+          bulk_mesh_pt->boundary_node_pt(left_boundary_id, n);
+      }
+
+      /// \short Sort them from lowest to highest (in y coordinate)
+      /// sorter_right_boundary is still functional, as the sorting
+      /// is performed by the same criterion
+      std::sort(ordered_left_boundary_node_pt.begin(),
+                ordered_left_boundary_node_pt.end(),
+                sorter_right_boundary);
+
+      /// \short Number of elements and boundary nodes to be acted upon during
+      /// construction are extracted from the 'parent' PML meshes
+      unsigned n_x_left_pml =
+        pml_left_mesh_pt->nboundary_element(parent_boundary_x_id);
+      unsigned n_y_top_pml =
+        pml_top_mesh_pt->nboundary_element(parent_boundary_y_id);
+      unsigned n_y_boundary_nodes =
+        pml_top_mesh_pt->nboundary_node(parent_boundary_y_id);
+
+      /// \short Specific PML sizes needed, taken directly from physical domain
+      /// and existing PML meshes
+      double l_pml_left_x_start =
+        pml_left_mesh_pt->boundary_node_pt(parent_boundary_x_id, 0)->x(0);
+      double l_pml_left_x_end =
+        ordered_left_boundary_node_pt[n_left_boundary_node - 1]->x(0);
+      double l_pml_top_y_start =
+        ordered_left_boundary_node_pt[n_left_boundary_node - 1]->x(1);
+      double l_pml_top_y_end =
+        pml_top_mesh_pt
+          ->boundary_node_pt(parent_boundary_y_id, n_y_boundary_nodes - 1)
+          ->x(1);
+
+      // Create the mesh to be designated to the PML
+      Mesh* pml_top_left_mesh_pt = 0;
+
+      // Build the top left corner PML mesh
+      pml_top_left_mesh_pt = new PMLCornerQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>(
+        pml_left_mesh_pt,
+        pml_top_mesh_pt,
+        bulk_mesh_pt,
+        ordered_left_boundary_node_pt[n_left_boundary_node - 1],
+        parent_boundary_x_id,
+        parent_boundary_y_id,
+        current_boundary_x_id,
+        current_boundary_y_id,
+        n_x_left_pml,
+        n_y_top_pml,
+        l_pml_left_x_start,
+        l_pml_left_x_end,
+        l_pml_top_y_start,
+        l_pml_top_y_end,
+        time_stepper_pt);
+
+      // Enable PML damping on the entire mesh
+      /// \short The enabling must be perfromed in both x- and y-directions
+      /// as this is a corner PML mesh
+      unsigned n_element_pml_top_left = pml_top_left_mesh_pt->nelement();
+
+      for (unsigned e = 0; e < n_element_pml_top_left; e++)
+      {
+        // Upcast
+        PMLElementBase<2>* el_pt =
+          dynamic_cast<PMLElementBase<2>*>(pml_top_left_mesh_pt->element_pt(e));
+        el_pt->enable_pml(0, l_pml_left_x_end, l_pml_left_x_start);
+        el_pt->enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
+      }
+
+      // Get the values to be pinned from the first element (which we
+      // assume exists!)
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_top_left_mesh_pt->element_pt(0));
+      Vector<unsigned> values_to_pin;
+      el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+      unsigned npin = values_to_pin.size();
+
+      // Exterior boundary needs to be set to Dirichlet 0
+      // for both real and imaginary parts of all fields
+      // in the problem
+      unsigned n_bound_pml_top_left = pml_top_left_mesh_pt->nboundary();
+      for (unsigned b = 0; b < n_bound_pml_top_left; b++)
+      {
+        unsigned n_node = pml_top_left_mesh_pt->nboundary_node(b);
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          Node* nod_pt = pml_top_left_mesh_pt->boundary_node_pt(b, n);
+          if ((b == 2) || (b == 3))
+          {
+            for (unsigned j = 0; j < npin; j++)
+            {
+              unsigned j_val = values_to_pin[j];
+              nod_pt->pin(j_val);
+              nod_pt->set_value(j_val, 0.0);
+            }
+          }
+        }
+      }
+
+      /// \short Return the finalized mesh, with PML enabled
+      /// and boundary conditions added
+      return pml_top_left_mesh_pt;
+    }
+
+    //==========================================================================
+    /// \short "Constructor" for PML bottom left corner mesh,
+    /// aligned with the existing PML meshes
+    //==========================================================================
+    template<class ASSOCIATED_PML_QUAD_ELEMENT>
+    Mesh* create_bottom_left_pml_mesh(
+      Mesh* pml_left_mesh_pt,
+      Mesh* pml_bottom_mesh_pt,
+      Mesh* bulk_mesh_pt,
+      const unsigned& left_boundary_id,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+    {
+      /// \short Relevant boundary id's to be used in construction
+      /// Parent id refers to already existing PML meshes
+      unsigned parent_boundary_x_id = 0;
+      unsigned parent_boundary_y_id = 3;
+      // Current id refers to the mesh that is to be constructed
+      unsigned current_boundary_x_id = 2;
+      unsigned current_boundary_y_id = 1;
+
+      // Look at the left boundary of the triangular mesh
+      unsigned n_left_boundary_node =
+        bulk_mesh_pt->nboundary_node(left_boundary_id);
+
+      // Create a vector of ordered boundary nodes
+      Vector<Node*> ordered_left_boundary_node_pt(n_left_boundary_node);
+
+      // Fill the vector with the nodes on the respective boundary
+      for (unsigned n = 0; n < n_left_boundary_node; n++)
+      {
+        ordered_left_boundary_node_pt[n] =
+          bulk_mesh_pt->boundary_node_pt(left_boundary_id, n);
+      }
+
+      /// \short Sort them from lowest to highest (in y coordinate)
+      /// sorter_right_boundary is still functional, as the sorting
+      /// is performed by the same criterion
+      std::sort(ordered_left_boundary_node_pt.begin(),
+                ordered_left_boundary_node_pt.end(),
+                sorter_right_boundary);
+
+      /// \short Number of elements and boundary nodes to be acted upon during
+      /// construction are extracted from the 'parent' PML meshes
+      unsigned n_x_left_pml =
+        pml_left_mesh_pt->nboundary_element(parent_boundary_x_id);
+      unsigned n_y_bottom_pml =
+        pml_bottom_mesh_pt->nboundary_element(parent_boundary_y_id);
+
+      /// \short Specific PML sizes needed, taken directly from physical domain
+      /// and existing PML meshes
+      double l_pml_left_x_start =
+        pml_left_mesh_pt->boundary_node_pt(parent_boundary_x_id, 0)->x(0);
+      double l_pml_left_x_end =
+        ordered_left_boundary_node_pt[n_left_boundary_node - 1]->x(0);
+      double l_pml_bottom_y_start =
+        pml_bottom_mesh_pt->boundary_node_pt(parent_boundary_y_id, 0)->x(1);
+      double l_pml_bottom_y_end = ordered_left_boundary_node_pt[0]->x(1);
+
+      // Create the mesh to be designated to the PML
+      Mesh* pml_bottom_left_mesh_pt = 0;
+
+      // Build the bottom left corner PML mesh
+      pml_bottom_left_mesh_pt =
+        new PMLCornerQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>(
+          pml_left_mesh_pt,
+          pml_bottom_mesh_pt,
+          bulk_mesh_pt,
+          ordered_left_boundary_node_pt[0],
+          parent_boundary_x_id,
+          parent_boundary_y_id,
+          current_boundary_x_id,
+          current_boundary_y_id,
+          n_x_left_pml,
+          n_y_bottom_pml,
+          l_pml_left_x_start,
+          l_pml_left_x_end,
+          l_pml_bottom_y_start,
+          l_pml_bottom_y_end,
+          time_stepper_pt);
+
+      // Enable PML damping on the entire mesh
+      /// \short The enabling must be perfromed in both x- and y-directions
+      /// as this is a corner PML mesh
+      unsigned n_element_pml_bottom_left = pml_bottom_left_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_element_pml_bottom_left; e++)
+      {
+        // Upcast
+        PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>(
+          pml_bottom_left_mesh_pt->element_pt(e));
+        el_pt->enable_pml(0, l_pml_left_x_end, l_pml_left_x_start);
+        el_pt->enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
+      }
+
+      // Get the values to be pinned from the first element (which we
+      // assume exists!)
+      PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>(
+        pml_bottom_left_mesh_pt->element_pt(0));
+      Vector<unsigned> values_to_pin;
+      el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+      unsigned npin = values_to_pin.size();
+
+      // Exterior boundary needs to be set to Dirichlet 0
+      // for both real and imaginary parts of all fields
+      // in the problem
+      unsigned n_bound_pml_bottom_left = pml_bottom_left_mesh_pt->nboundary();
+      for (unsigned b = 0; b < n_bound_pml_bottom_left; b++)
+      {
+        unsigned n_node = pml_bottom_left_mesh_pt->nboundary_node(b);
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          Node* nod_pt = pml_bottom_left_mesh_pt->boundary_node_pt(b, n);
+          if ((b == 0) || (b == 3))
+          {
+            for (unsigned j = 0; j < npin; j++)
+            {
+              unsigned j_val = values_to_pin[j];
+              nod_pt->pin(j_val);
+              nod_pt->set_value(j_val, 0.0);
+            }
+          }
+        }
+      }
+
+      /// \short Return the finalized mesh, with PML enabled
+      /// and boundary conditions added
+      return pml_bottom_left_mesh_pt;
+    }
+
+  } // namespace TwoDimensionalPMLHelper
+
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+
+} // namespace oomph
 
 #endif

@@ -1,29 +1,29 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
-//Header file for Navier Stokes elements
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+// Header file for Navier Stokes elements
 
 #ifndef OOMPH_NAVIER_STOKES_ELEMENTS_HEADER
 #define OOMPH_NAVIER_STOKES_ELEMENTS_HEADER
@@ -34,7 +34,7 @@
 #endif
 
 
-//OOMPH-LIB headers
+// OOMPH-LIB headers
 #include "../generic/Qelements.h"
 #include "../generic/fsi.h"
 #include "../generic/projection.h"
@@ -44,8 +44,6 @@
 
 namespace oomph
 {
-
-
   //======================================================================
   /// Helper class for elements that impose Robin boundary conditions
   /// on pressure advection diffusion problem required by Fp preconditioner
@@ -54,7 +52,6 @@ namespace oomph
   class FpPressureAdvDiffRobinBCElementBase : public virtual FaceElement
   {
   public:
-
     /// Constructor
     FpPressureAdvDiffRobinBCElementBase() {}
 
@@ -65,18 +62,15 @@ namespace oomph
     /// traction function. flag=1 (or 0): do (or don't) compute the
     /// Jacobian as well.
     virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      unsigned flag)=0;
-
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      unsigned flag) = 0;
   };
 
 
-
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
-
 
 
   //======================================================================
@@ -87,54 +81,51 @@ namespace oomph
   /// class and and thus, we can be generic enough without the need to have
   /// a separate equations class
   //======================================================================
-  template <class ELEMENT>
-  class FpPressureAdvDiffRobinBCElement : public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement,
-    public virtual FpPressureAdvDiffRobinBCElementBase
+  template<class ELEMENT>
+  class FpPressureAdvDiffRobinBCElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual FaceElement,
+      public virtual FpPressureAdvDiffRobinBCElementBase
   {
-
   public:
-
-    ///Constructor, which takes a "bulk" element and the value of the index
-    ///and its limit. Optional boolean flag indicates if it's called
+    /// Constructor, which takes a "bulk" element and the value of the index
+    /// and its limit. Optional boolean flag indicates if it's called
     // refineable constructor.
     FpPressureAdvDiffRobinBCElement(
-      FiniteElement* const &element_pt,
-      const int &face_index,
-      const bool& called_from_refineable_constructor=false)
-      :   FaceGeometry<ELEMENT>(), FaceElement()
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const bool& called_from_refineable_constructor = false)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
-
-      //Attach the geometrical information to the element. N.B. This function
-      //also assigns nbulk_value from the required_nvalue of the bulk element
-      element_pt->build_face_element(face_index,this);
+      // Attach the geometrical information to the element. N.B. This function
+      // also assigns nbulk_value from the required_nvalue of the bulk element
+      element_pt->build_face_element(face_index, this);
 
 #ifdef PARANOID
       {
-        //Check that the element is not a refineable 3d element
+        // Check that the element is not a refineable 3d element
         if (!called_from_refineable_constructor)
         {
-          //If it's three-d
-          if (element_pt->dim()==3)
+          // If it's three-d
+          if (element_pt->dim() == 3)
           {
-            //Is it refineable
-            RefineableElement* ref_el_pt=
+            // Is it refineable
+            RefineableElement* ref_el_pt =
               dynamic_cast<RefineableElement*>(element_pt);
-            if (ref_el_pt!=0)
+            if (ref_el_pt != 0)
             {
               if (this->has_hanging_nodes())
               {
-                throw OomphLibError(
-                  "This flux element will not work correctly if nodes are hanging\n",
-                  OOMPH_CURRENT_FUNCTION,
-                  OOMPH_EXCEPTION_LOCATION);
+                throw OomphLibError("This flux element will not work correctly "
+                                    "if nodes are hanging\n",
+                                    OOMPH_CURRENT_FUNCTION,
+                                    OOMPH_EXCEPTION_LOCATION);
               }
             }
           }
         }
       }
 #endif
-
     }
 
     /// Empty destructor
@@ -144,54 +135,50 @@ namespace oomph
     /// traction function. flag=1 (or 0): do (or don't) compute the
     /// Jacobian as well.
     virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
 
-    ///This function returns just the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    /// This function returns just the residuals
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       std::ostringstream error_message;
       error_message
-          << "fill_in_contribution_to_residuals() must not be called directly.\n"
-          << "since it uses the local equation numbering of the bulk element\n"
-          << "which calls the relevant helper function directly.\n";
+        << "fill_in_contribution_to_residuals() must not be called directly.\n"
+        << "since it uses the local equation numbering of the bulk element\n"
+        << "which calls the relevant helper function directly.\n";
       throw OomphLibError(
-        error_message.str(),
-        OOMPH_CURRENT_FUNCTION,
-        OOMPH_EXCEPTION_LOCATION);
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///This function returns the residuals and the jacobian
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-        DenseMatrix<double> &jacobian)
+    /// This function returns the residuals and the jacobian
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       std::ostringstream error_message;
       error_message
-          << "fill_in_contribution_to_jacobian() must not be called directly.\n"
-          << "since it uses the local equation numbering of the bulk element\n"
-          << "which calls the relevant helper function directly.\n";
+        << "fill_in_contribution_to_jacobian() must not be called directly.\n"
+        << "since it uses the local equation numbering of the bulk element\n"
+        << "which calls the relevant helper function directly.\n";
       throw OomphLibError(
-        error_message.str(),
-        OOMPH_CURRENT_FUNCTION,
-        OOMPH_EXCEPTION_LOCATION);
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///Overload the output function
-    void output(std::ostream &outfile) {FiniteElement::output(outfile);}
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      FiniteElement::output(outfile);
+    }
 
-    ///Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(std::ostream &outfile, const unsigned &nplot)
-    {FiniteElement::output(outfile,nplot);}
-
+    /// Output function: x,y,[z],u,v,[w],p in tecplot format
+    void output(std::ostream& outfile, const unsigned& nplot)
+    {
+      FiniteElement::output(outfile, nplot);
+    }
   };
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
-
-
 
 
   //============================================================================
@@ -200,113 +187,110 @@ namespace oomph
   //============================================================================
   template<class ELEMENT>
   void FpPressureAdvDiffRobinBCElement<ELEMENT>::
-  fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    unsigned flag)
+    fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
-    //Storage for local coordinates in FaceElement and associted bulk element
-    unsigned my_dim=this->dim();
+    // Storage for local coordinates in FaceElement and associted bulk element
+    unsigned my_dim = this->dim();
     Vector<double> s(my_dim);
-    Vector<double> s_bulk(my_dim+1);
+    Vector<double> s_bulk(my_dim + 1);
 
     // Storage for outer unit normal
-    Vector<double> unit_normal(my_dim+1);
+    Vector<double> unit_normal(my_dim + 1);
 
-    //Storage for veloc in bulk element
-    Vector<double> veloc(my_dim+1);
+    // Storage for veloc in bulk element
+    Vector<double> veloc(my_dim + 1);
 
-    //Set the value of n_intpt
+    // Set the value of n_intpt
     unsigned n_intpt = this->integral_pt()->nweight();
 
-    //Integers to store local equation numbers
-    int local_eqn=0;
-    int local_unknown=0;
+    // Integers to store local equation numbers
+    int local_eqn = 0;
+    int local_unknown = 0;
 
     // Get cast bulk element
-    ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(this->bulk_element_pt());
+    ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
-    //Find out how many pressure dofs there are in the bulk element
+    // Find out how many pressure dofs there are in the bulk element
     unsigned n_pres = bulk_el_pt->npres_nst();
 
     // Get the Reynolds number from the bulk element
     double re = bulk_el_pt->re();
 
-    //Set up memory for pressure shape and test functions
+    // Set up memory for pressure shape and test functions
     Shape psip(n_pres), testp(n_pres);
 
-    //Loop over the integration points
-    for (unsigned ipt=0; ipt<n_intpt; ipt++)
+    // Loop over the integration points
+    for (unsigned ipt = 0; ipt < n_intpt; ipt++)
     {
-      //Get the integral weight
+      // Get the integral weight
       double w = this->integral_pt()->weight(ipt);
 
-      //Assign values of local coordinate in FaceElement
-      for (unsigned i=0; i<my_dim; i++) s[i] = this->integral_pt()->knot(ipt,i);
+      // Assign values of local coordinate in FaceElement
+      for (unsigned i = 0; i < my_dim; i++)
+        s[i] = this->integral_pt()->knot(ipt, i);
 
       // Find corresponding coordinate in the the bulk element
-      s_bulk=this->local_coordinate_in_bulk(s);
+      s_bulk = this->local_coordinate_in_bulk(s);
 
       /// Get outer unit normal
-      this->outer_unit_normal(ipt,unit_normal);
+      this->outer_unit_normal(ipt, unit_normal);
 
       // Get velocity in bulk element
-      bulk_el_pt->interpolated_u_nst(s_bulk,veloc);
+      bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
 
       // Get normal component of veloc
-      double flux=0.0;
-      for (unsigned i=0; i<my_dim+1; i++)
+      double flux = 0.0;
+      for (unsigned i = 0; i < my_dim + 1; i++)
       {
-        flux+=veloc[i]*unit_normal[i];
+        flux += veloc[i] * unit_normal[i];
       }
 
       // Modify bc: If outflow (flux>0) apply Neumann condition instead
-      if (flux>0.0) flux=0.0;
+      if (flux > 0.0) flux = 0.0;
 
       // Get pressure
-      double interpolated_press=bulk_el_pt->interpolated_p_nst(s_bulk);
+      double interpolated_press = bulk_el_pt->interpolated_p_nst(s_bulk);
 
-      //Call the pressure shape and test functions in bulk element
-      bulk_el_pt->pshape_nst(s_bulk,psip,testp);
+      // Call the pressure shape and test functions in bulk element
+      bulk_el_pt->pshape_nst(s_bulk, psip, testp);
 
-      //Find the Jacobian of the mapping within the FaceElement
+      // Find the Jacobian of the mapping within the FaceElement
       double J = this->J_eulerian(s);
 
-      //Premultiply the weights and the Jacobian
-      double W = w*J;
+      // Premultiply the weights and the Jacobian
+      double W = w * J;
 
-      //Loop over the pressure shape functions in bulk
+      // Loop over the pressure shape functions in bulk
       //(wasteful but they'll be zero on the boundary)
-      for (unsigned l=0; l<n_pres; l++)
+      for (unsigned l = 0; l < n_pres; l++)
       {
-        local_eqn=bulk_el_pt->p_local_eqn(l);
+        local_eqn = bulk_el_pt->p_local_eqn(l);
 
-        //If not a boundary conditions
+        // If not a boundary conditions
         if (local_eqn >= 0)
         {
-          residuals[local_eqn] -=
-            re*flux*interpolated_press*testp[l]*W;
+          residuals[local_eqn] -= re * flux * interpolated_press * testp[l] * W;
 
           // Jacobian too?
           if (flag)
           {
-            //Loop over the shape functions in bulk
-            for (unsigned l2=0; l2<n_pres; l2++)
+            // Loop over the shape functions in bulk
+            for (unsigned l2 = 0; l2 < n_pres; l2++)
             {
               local_unknown = bulk_el_pt->p_local_eqn(l2);
 
-              //If not a boundary conditions
+              // If not a boundary conditions
               if (local_unknown >= 0)
               {
-                jacobian(local_eqn,local_unknown)-=
-                  re*flux*psip[l2]*testp[l]*W;
+                jacobian(local_eqn, local_unknown) -=
+                  re * flux * psip[l2] * testp[l] * W;
               }
             }
           } /*End of Jacobian calculation*/
-        } //End of if not boundary condition
-      }//End of loop over l
+        } // End of if not boundary condition
+      } // End of loop over l
     }
-
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -318,58 +302,56 @@ namespace oomph
   /// Template-free base class for Navier-Stokes equations to avoid
   /// casting problems
   //======================================================================
-  class TemplateFreeNavierStokesEquationsBase :
-    public virtual NavierStokesElementWithDiagonalMassMatrices,
-    public virtual FiniteElement
+  class TemplateFreeNavierStokesEquationsBase
+    : public virtual NavierStokesElementWithDiagonalMassMatrices,
+      public virtual FiniteElement
   {
-
   public:
-
     /// Constructor (empty)
-    TemplateFreeNavierStokesEquationsBase() {};
+    TemplateFreeNavierStokesEquationsBase(){};
 
     /// Virtual destructor (empty)
-    virtual ~TemplateFreeNavierStokesEquationsBase() {};
+    virtual ~TemplateFreeNavierStokesEquationsBase(){};
 
     /// \short Compute the residuals for the associated pressure advection
     /// diffusion problem. Used by the Fp preconditioner.
-    virtual void fill_in_pressure_advection_diffusion_residuals(Vector<double>&
-        residuals)=0;
+    virtual void fill_in_pressure_advection_diffusion_residuals(
+      Vector<double>& residuals) = 0;
 
     /// \short Compute the residuals and Jacobian for the associated
     /// pressure advection diffusion problem. Used by the Fp preconditioner.
     virtual void fill_in_pressure_advection_diffusion_jacobian(
-      Vector<double>& residuals, DenseMatrix<double> &jacobian)=0;
+      Vector<double>& residuals, DenseMatrix<double>& jacobian) = 0;
 
     /// \short Return the index at which the pressure is stored if it is
     /// stored at the nodes. If not stored at the nodes this will return
     /// a negative number.
-    virtual int p_nodal_index_nst() const =0;
+    virtual int p_nodal_index_nst() const = 0;
 
     /// \short Access function for the local equation number information for
     /// the pressure.
     /// p_local_eqn[n] = local equation number or < 0 if pinned
-    virtual int p_local_eqn(const unsigned &n)const=0;
+    virtual int p_local_eqn(const unsigned& n) const = 0;
 
     /// \short Global eqn number of pressure dof that's pinned in pressure
     /// adv diff problem
-    virtual int& pinned_fp_pressure_eqn()=0;
+    virtual int& pinned_fp_pressure_eqn() = 0;
 
 
     /// \short Pin all non-pressure dofs and backup eqn numbers of all Data
-    virtual void pin_all_non_pressure_dofs(std::map<Data*,std::vector<int> >&
-                                           eqn_number_backup)=0;
+    virtual void pin_all_non_pressure_dofs(
+      std::map<Data*, std::vector<int>>& eqn_number_backup) = 0;
 
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
-    virtual void build_fp_press_adv_diff_robin_bc_element(const unsigned&
-        face_index)=0;
+    virtual void build_fp_press_adv_diff_robin_bc_element(
+      const unsigned& face_index) = 0;
 
     /// \short Delete the FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
-    virtual void delete_pressure_advection_diffusion_robin_elements()=0;
+    virtual void delete_pressure_advection_diffusion_robin_elements() = 0;
 
 
     /// \short Compute the diagonal of the velocity/pressure mass matrices.
@@ -377,18 +359,15 @@ namespace oomph
     /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
     /// LSC version of the preconditioner only needs that one)
     virtual void get_pressure_and_velocity_mass_matrix_diagonal(
-      Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
-      const unsigned& which_one=0)=0;
-
+      Vector<double>& press_mass_diag,
+      Vector<double>& veloc_mass_diag,
+      const unsigned& which_one = 0) = 0;
   };
 
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
-
-
-
 
 
   //======================================================================
@@ -415,23 +394,22 @@ namespace oomph
   /// in FSI problems, by deriving it from the FSIFluidElement base
   /// class.
   //======================================================================
-  template <unsigned DIM>
-  class NavierStokesEquations : public virtual FSIFluidElement,
-    public virtual TemplateFreeNavierStokesEquationsBase
+  template<unsigned DIM>
+  class NavierStokesEquations
+    : public virtual FSIFluidElement,
+      public virtual TemplateFreeNavierStokesEquationsBase
   {
-
   public:
-
     /// \short Function pointer to body force function fct(t,x,f(x))
     /// x is a Vector!
     typedef void (*NavierStokesBodyForceFctPt)(const double& time,
-        const Vector<double>& x,
-        Vector<double>& body_force);
+                                               const Vector<double>& x,
+                                               Vector<double>& body_force);
 
     /// \short Function pointer to source function fct(t,x)
     /// x is a Vector!
     typedef double (*NavierStokesSourceFctPt)(const double& time,
-        const Vector<double>& x);
+                                              const Vector<double>& x);
 
 
     /// \short Function pointer to source function fct(x) for the
@@ -441,46 +419,46 @@ namespace oomph
       const Vector<double>& x);
 
   private:
-
     /// \short Static "magic" number that indicates that the pressure is
     /// not stored at a node
     static int Pressure_not_stored_at_node;
 
-    /// Static default value for the physical constants (all initialised to zero)
+    /// Static default value for the physical constants (all initialised to
+    /// zero)
     static double Default_Physical_Constant_Value;
 
-    /// Static default value for the physical ratios (all are initialised to one)
+    /// Static default value for the physical ratios (all are initialised to
+    /// one)
     static double Default_Physical_Ratio_Value;
 
     /// Static default value for the gravity vector
     static Vector<double> Default_Gravity_vector;
 
   protected:
-
-    //Physical constants
+    // Physical constants
 
     /// \short Pointer to the viscosity ratio (relative to the
     /// viscosity used in the definition of the Reynolds number)
-    double *Viscosity_Ratio_pt;
+    double* Viscosity_Ratio_pt;
 
     /// \short Pointer to the density ratio (relative to the density used in the
     /// definition of the Reynolds number)
-    double *Density_Ratio_pt;
+    double* Density_Ratio_pt;
 
     // Pointers to global physical constants
 
     /// Pointer to global Reynolds number
-    double *Re_pt;
+    double* Re_pt;
 
     /// Pointer to global Reynolds number x Strouhal number (=Womersley)
-    double *ReSt_pt;
+    double* ReSt_pt;
 
     /// \short Pointer to global Reynolds number x inverse Froude number
     /// (= Bond number / Capillary number)
-    double *ReInvFr_pt;
+    double* ReInvFr_pt;
 
     /// Pointer to global gravity Vector
-    Vector<double> *G_pt;
+    Vector<double>* G_pt;
 
     /// Pointer to body force function
     NavierStokesBodyForceFctPt Body_force_fct_pt;
@@ -497,10 +475,10 @@ namespace oomph
     /// that the mesh is stationary.
     bool ALE_is_disabled;
 
-    /// \short Storage for FaceElements that apply Robin BC for pressure adv diff
-    /// equation used in Fp preconditioner.
+    /// \short Storage for FaceElements that apply Robin BC for pressure adv
+    /// diff equation used in Fp preconditioner.
     Vector<FpPressureAdvDiffRobinBCElementBase*>
-    Pressure_advection_diffusion_robin_element_pt;
+      Pressure_advection_diffusion_robin_element_pt;
 
     /// \short Global eqn number of pressure dof that's pinned in
     /// pressure advection diffusion problem (defaults to -1)
@@ -509,32 +487,34 @@ namespace oomph
     /// \short Compute the shape functions and derivatives
     /// w.r.t. global coords at local coordinate s.
     /// Return Jacobian of mapping between local and global coordinates.
-    virtual double dshape_and_dtest_eulerian_nst(const Vector<double> &s,
-        Shape &psi,
-        DShape &dpsidx, Shape &test,
-        DShape &dtestdx) const=0;
+    virtual double dshape_and_dtest_eulerian_nst(const Vector<double>& s,
+                                                 Shape& psi,
+                                                 DShape& dpsidx,
+                                                 Shape& test,
+                                                 DShape& dtestdx) const = 0;
 
     /// \short Compute the shape functions and derivatives
     /// w.r.t. global coords at ipt-th integration point
     /// Return Jacobian of mapping between local and global coordinates.
-    virtual double dshape_and_dtest_eulerian_at_knot_nst(const unsigned &ipt,
-        Shape &psi,
-        DShape &dpsidx,
-        Shape &test,
-        DShape &dtestdx) const=0;
+    virtual double dshape_and_dtest_eulerian_at_knot_nst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     virtual double dshape_and_dtest_eulerian_at_knot_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const=0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const = 0;
 
     /// \short Calculate the body force at a given time and local and/or
     /// Eulerian position. This function is virtual so that it can be
@@ -542,28 +522,31 @@ namespace oomph
     /// depend on another variable.
     virtual void get_body_force_nst(const double& time,
                                     const unsigned& ipt,
-                                    const Vector<double> &s,
-                                    const Vector<double> &x,
-                                    Vector<double> &result)
+                                    const Vector<double>& s,
+                                    const Vector<double>& x,
+                                    Vector<double>& result)
     {
-      //If the function pointer is zero return zero
+      // If the function pointer is zero return zero
       if (Body_force_fct_pt == 0)
       {
-        //Loop over dimensions and set body forces to zero
-        for (unsigned i=0; i<DIM; i++) {result[i] = 0.0;}
+        // Loop over dimensions and set body forces to zero
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          result[i] = 0.0;
+        }
       }
-      //Otherwise call the function
+      // Otherwise call the function
       else
       {
-        (*Body_force_fct_pt)(time,x,result);
+        (*Body_force_fct_pt)(time, x, result);
       }
     }
 
-    /// Get gradient of body force term at (Eulerian) position x. This function is
-    /// virtual to allow overloading in multi-physics problems where
-    /// the strength of the source function might be determined by
-    /// another system of equations. Computed via function pointer
-    /// (if set) or by finite differencing (default)
+    /// Get gradient of body force term at (Eulerian) position x. This function
+    /// is virtual to allow overloading in multi-physics problems where the
+    /// strength of the source function might be determined by another system of
+    /// equations. Computed via function pointer (if set) or by finite
+    /// differencing (default)
     inline virtual void get_body_force_gradient_nst(
       const double& time,
       const unsigned& ipt,
@@ -576,22 +559,23 @@ namespace oomph
       /*    if(Body_force_fct_gradient_pt==0) */
       {
         // Reference value
-        Vector<double> body_force(DIM,0.0);
-        get_body_force_nst(time,ipt,s,x,body_force);
+        Vector<double> body_force(DIM, 0.0);
+        get_body_force_nst(time, ipt, s, x, body_force);
 
         // FD it
-        double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
-        Vector<double> body_force_pls(DIM,0.0);
+        double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
+        Vector<double> body_force_pls(DIM, 0.0);
         Vector<double> x_pls(x);
-        for (unsigned i=0; i<DIM; i++)
+        for (unsigned i = 0; i < DIM; i++)
         {
-          x_pls[i]+=eps_fd;
-          get_body_force_nst(time,ipt,s,x_pls,body_force_pls);
-          for (unsigned j=0; j<DIM; j++)
+          x_pls[i] += eps_fd;
+          get_body_force_nst(time, ipt, s, x_pls, body_force_pls);
+          for (unsigned j = 0; j < DIM; j++)
           {
-            d_body_force_dx(j,i)=(body_force_pls[j]-body_force[j])/eps_fd;
+            d_body_force_dx(j, i) =
+              (body_force_pls[j] - body_force[j]) / eps_fd;
           }
-          x_pls[i]=x[i];
+          x_pls[i] = x[i];
         }
       }
       /*    else */
@@ -602,16 +586,22 @@ namespace oomph
     }
 
 
-
     /// \short Calculate the source fct at given time and
     /// Eulerian position
-    virtual double get_source_nst(const double& time, const unsigned& ipt,
-                                  const Vector<double> &x)
+    virtual double get_source_nst(const double& time,
+                                  const unsigned& ipt,
+                                  const Vector<double>& x)
     {
-      //If the function pointer is zero return zero
-      if (Source_fct_pt == 0) {return 0;}
-      //Otherwise call the function
-      else {return (*Source_fct_pt)(time,x);}
+      // If the function pointer is zero return zero
+      if (Source_fct_pt == 0)
+      {
+        return 0;
+      }
+      // Otherwise call the function
+      else
+      {
+        return (*Source_fct_pt)(time, x);
+      }
     }
 
 
@@ -620,29 +610,28 @@ namespace oomph
     /// the strength of the source function might be determined by
     /// another system of equations. Computed via function pointer
     /// (if set) or by finite differencing (default)
-    inline virtual void get_source_gradient_nst(
-      const double& time,
-      const unsigned& ipt,
-      const Vector<double>& x,
-      Vector<double>& gradient)
+    inline virtual void get_source_gradient_nst(const double& time,
+                                                const unsigned& ipt,
+                                                const Vector<double>& x,
+                                                Vector<double>& gradient)
     {
       // hierher: Implement function pointer version
       /*    //If no gradient function has been set, FD it */
       /*    if(Source_fct_gradient_pt==0) */
       {
         // Reference value
-        double source=get_source_nst(time,ipt,x);
+        double source = get_source_nst(time, ipt, x);
 
         // FD it
-        double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
-        double source_pls=0.0;
+        double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
+        double source_pls = 0.0;
         Vector<double> x_pls(x);
-        for (unsigned i=0; i<DIM; i++)
+        for (unsigned i = 0; i < DIM; i++)
         {
-          x_pls[i]+=eps_fd;
-          source_pls=get_source_nst(time,ipt,x_pls);
-          gradient[i]=(source_pls-source)/eps_fd;
-          x_pls[i]=x[i];
+          x_pls[i] += eps_fd;
+          source_pls = get_source_nst(time, ipt, x_pls);
+          gradient[i] = (source_pls - source) / eps_fd;
+          x_pls[i] = x[i];
         }
       }
       /*    else */
@@ -657,159 +646,222 @@ namespace oomph
     /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
     /// Flag=2: Fill in mass matrix too.
     virtual void fill_in_generic_residual_contribution_nst(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix, unsigned flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      unsigned flag);
 
 
     /// \short Compute the residuals for the associated pressure advection
     /// diffusion problem. Used by the Fp preconditioner.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     virtual void fill_in_generic_pressure_advection_diffusion_contribution_nst(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
     ///\short Compute the derivatives of the
     /// residuals for the Navier--Stokes equations with respect to a parameter
     /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
     /// Flag=2: Fill in mass matrix too.
     virtual void fill_in_generic_dresidual_contribution_nst(
-      double* const &parameter_pt,
-      Vector<double> &dres_dparam, DenseMatrix<double> &djac_dparam,
-      DenseMatrix<double> &dmass_matrix_dparam, unsigned flag);
+      double* const& parameter_pt,
+      Vector<double>& dres_dparam,
+      DenseMatrix<double>& djac_dparam,
+      DenseMatrix<double>& dmass_matrix_dparam,
+      unsigned flag);
 
     /// \short Compute the hessian tensor vector products required to
     /// perform continuation of bifurcations analytically
     void fill_in_contribution_to_hessian_vector_products(
-      Vector<double> const &Y,
-      DenseMatrix<double> const &C,
-      DenseMatrix<double> &product);
+      Vector<double> const& Y,
+      DenseMatrix<double> const& C,
+      DenseMatrix<double>& product);
 
 
   public:
-
     /// \short Constructor: NULL the body force and source function
     /// and make sure the ALE terms are included by default.
-    NavierStokesEquations() : Body_force_fct_pt(0), Source_fct_pt(0),
-      Press_adv_diff_source_fct_pt(0), ALE_is_disabled(false),
-      Pinned_fp_pressure_eqn(-1)
+    NavierStokesEquations()
+      : Body_force_fct_pt(0),
+        Source_fct_pt(0),
+        Press_adv_diff_source_fct_pt(0),
+        ALE_is_disabled(false),
+        Pinned_fp_pressure_eqn(-1)
     {
-      //Set all the Physical parameter pointers to the default value zero
+      // Set all the Physical parameter pointers to the default value zero
       Re_pt = &Default_Physical_Constant_Value;
       ReSt_pt = &Default_Physical_Constant_Value;
       ReInvFr_pt = &Default_Physical_Constant_Value;
       G_pt = &Default_Gravity_vector;
-      //Set the Physical ratios to the default value of 1
+      // Set the Physical ratios to the default value of 1
       Viscosity_Ratio_pt = &Default_Physical_Ratio_Value;
       Density_Ratio_pt = &Default_Physical_Ratio_Value;
     }
 
     /// Vector to decide whether the stress-divergence form is used or not
-    // N.B. This needs to be public so that the intel compiler gets things correct
-    // somehow the access function messes things up when going to refineable
-    // navier--stokes
+    // N.B. This needs to be public so that the intel compiler gets things
+    // correct somehow the access function messes things up when going to
+    // refineable navier--stokes
     static Vector<double> Gamma;
 
-    //Access functions for the physical constants
+    // Access functions for the physical constants
 
     /// Reynolds number
-    const double &re() const {return *Re_pt;}
+    const double& re() const
+    {
+      return *Re_pt;
+    }
 
     /// Product of Reynolds and Strouhal number (=Womersley number)
-    const double &re_st() const {return *ReSt_pt;}
+    const double& re_st() const
+    {
+      return *ReSt_pt;
+    }
 
     /// Pointer to Reynolds number
-    double* &re_pt() {return Re_pt;}
+    double*& re_pt()
+    {
+      return Re_pt;
+    }
 
     /// Pointer to product of Reynolds and Strouhal number (=Womersley number)
-    double* &re_st_pt() {return ReSt_pt;}
+    double*& re_st_pt()
+    {
+      return ReSt_pt;
+    }
 
     /// \short Viscosity ratio for element: Element's viscosity relative to the
     /// viscosity used in the definition of the Reynolds number
-    const double &viscosity_ratio() const {return *Viscosity_Ratio_pt;}
+    const double& viscosity_ratio() const
+    {
+      return *Viscosity_Ratio_pt;
+    }
 
     /// Pointer to Viscosity Ratio
-    double* &viscosity_ratio_pt() {return Viscosity_Ratio_pt;}
+    double*& viscosity_ratio_pt()
+    {
+      return Viscosity_Ratio_pt;
+    }
 
     /// \short Density ratio for element: Element's density relative to the
     ///  viscosity used in the definition of the Reynolds number
-    const double &density_ratio() const {return *Density_Ratio_pt;}
+    const double& density_ratio() const
+    {
+      return *Density_Ratio_pt;
+    }
 
     /// Pointer to Density ratio
-    double* &density_ratio_pt() {return Density_Ratio_pt;}
+    double*& density_ratio_pt()
+    {
+      return Density_Ratio_pt;
+    }
 
     /// Global inverse Froude number
-    const double &re_invfr() const {return *ReInvFr_pt;}
+    const double& re_invfr() const
+    {
+      return *ReInvFr_pt;
+    }
 
     /// Pointer to global inverse Froude number
-    double* &re_invfr_pt() {return ReInvFr_pt;}
+    double*& re_invfr_pt()
+    {
+      return ReInvFr_pt;
+    }
 
     /// Vector of gravitational components
-    const Vector<double> &g() const {return *G_pt;}
+    const Vector<double>& g() const
+    {
+      return *G_pt;
+    }
 
     /// Pointer to Vector of gravitational components
-    Vector<double>* &g_pt() {return G_pt;}
+    Vector<double>*& g_pt()
+    {
+      return G_pt;
+    }
 
     /// Access function for the body-force pointer
     NavierStokesBodyForceFctPt& body_force_fct_pt()
-    {return Body_force_fct_pt;}
+    {
+      return Body_force_fct_pt;
+    }
 
     /// Access function for the body-force pointer. Const version
     NavierStokesBodyForceFctPt body_force_fct_pt() const
-    {return Body_force_fct_pt;}
+    {
+      return Body_force_fct_pt;
+    }
 
-    ///Access function for the source-function pointer
-    NavierStokesSourceFctPt& source_fct_pt() {return Source_fct_pt;}
+    /// Access function for the source-function pointer
+    NavierStokesSourceFctPt& source_fct_pt()
+    {
+      return Source_fct_pt;
+    }
 
-    ///Access function for the source-function pointer. Const version
-    NavierStokesSourceFctPt source_fct_pt() const {return Source_fct_pt;}
+    /// Access function for the source-function pointer. Const version
+    NavierStokesSourceFctPt source_fct_pt() const
+    {
+      return Source_fct_pt;
+    }
 
     /// \short Access function for the source-function pointer for pressure
     /// advection diffusion  (used for validation only).
     NavierStokesPressureAdvDiffSourceFctPt& source_fct_for_pressure_adv_diff()
-    {return Press_adv_diff_source_fct_pt;}
+    {
+      return Press_adv_diff_source_fct_pt;
+    }
 
     /// \short Access function for the source-function pointer for pressure
     /// advection diffusion  (used for validation only). Const version.
     NavierStokesPressureAdvDiffSourceFctPt source_fct_for_pressure_adv_diff()
-    const
-    {return Press_adv_diff_source_fct_pt;}
+      const
+    {
+      return Press_adv_diff_source_fct_pt;
+    }
 
     /// \short Global eqn number of pressure dof that's pinned in pressure
     /// adv diff problem
-    int& pinned_fp_pressure_eqn() {return Pinned_fp_pressure_eqn;}
+    int& pinned_fp_pressure_eqn()
+    {
+      return Pinned_fp_pressure_eqn;
+    }
 
-    ///Function to return number of pressure degrees of freedom
-    virtual unsigned npres_nst() const=0;
+    /// Function to return number of pressure degrees of freedom
+    virtual unsigned npres_nst() const = 0;
 
     /// Compute the pressure shape functions at local coordinate s
-    virtual void pshape_nst(const Vector<double> &s, Shape &psi) const=0;
+    virtual void pshape_nst(const Vector<double>& s, Shape& psi) const = 0;
 
     /// \short Compute the pressure shape and test functions
     /// at local coordinate s
-    virtual void pshape_nst(const Vector<double> &s, Shape &psi,
-                            Shape &test) const=0;
+    virtual void pshape_nst(const Vector<double>& s,
+                            Shape& psi,
+                            Shape& test) const = 0;
 
     /// \short Compute the pressure shape and test functions and derivatives
     /// w.r.t. global coords at local coordinate s.
     /// Return Jacobian of mapping between local and global coordinates.
-    virtual double dpshape_and_dptest_eulerian_nst(const Vector<double> &s,
-        Shape &ppsi,
-        DShape &dppsidx,
-        Shape &ptest,
-        DShape &dptestdx) const=0;
+    virtual double dpshape_and_dptest_eulerian_nst(const Vector<double>& s,
+                                                   Shape& ppsi,
+                                                   DShape& dppsidx,
+                                                   Shape& ptest,
+                                                   DShape& dptestdx) const = 0;
 
     /// \short Velocity i at local node n. Uses suitably interpolated value
     /// for hanging nodes. The use of u_index_nst() permits the use of this
     /// element as the basis for multi-physics elements. The default
     /// is to assume that the i-th velocity component is stored at the
     /// i-th location of the node
-    double u_nst(const unsigned &n, const unsigned &i) const
-    {return nodal_value(n,u_index_nst(i));}
+    double u_nst(const unsigned& n, const unsigned& i) const
+    {
+      return nodal_value(n, u_index_nst(i));
+    }
 
     /// \short Velocity i at local node n at timestep t (t=0: present;
     /// t>0: previous). Uses suitably interpolated value for hanging nodes.
-    double u_nst(const unsigned &t, const unsigned &n,
-                 const unsigned &i) const
-    {return nodal_value(t,n,u_index_nst(i));}
+    double u_nst(const unsigned& t, const unsigned& n, const unsigned& i) const
+    {
+      return nodal_value(t, n, u_index_nst(i));
+    }
 
     /// \short Return the index at which the i-th unknown velocity component
     /// is stored. The default value, i, is appropriate for single-physics
@@ -817,34 +869,41 @@ namespace oomph
     /// In derived multi-physics elements, this function should be overloaded
     /// to reflect the chosen storage scheme. Note that these equations require
     /// that the unknowns are always stored at the same indices at each node.
-    virtual inline unsigned u_index_nst(const unsigned &i) const {return i;}
+    virtual inline unsigned u_index_nst(const unsigned& i) const
+    {
+      return i;
+    }
 
     /// \short Return the number of velocity components
     /// Used in FluidInterfaceElements
-    inline unsigned n_u_nst() const {return DIM;}
+    inline unsigned n_u_nst() const
+    {
+      return DIM;
+    }
 
     /// \short i-th component of du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
-    double du_dt_nst(const unsigned &n, const unsigned &i) const
+    double du_dt_nst(const unsigned& n, const unsigned& i) const
     {
       // Get the data's timestepper
       TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
 
-      //Initialise dudt
-      double dudt=0.0;
+      // Initialise dudt
+      double dudt = 0.0;
 
-      //Loop over the timesteps, if there is a non Steady timestepper
+      // Loop over the timesteps, if there is a non Steady timestepper
       if (!time_stepper_pt->is_steady())
       {
-        //Find the index at which the dof is stored
+        // Find the index at which the dof is stored
         const unsigned u_nodal_index = this->u_index_nst(i);
 
         // Number of timsteps (past & present)
         const unsigned n_time = time_stepper_pt->ntstorage();
         // Loop over the timesteps
-        for (unsigned t=0; t<n_time; t++)
+        for (unsigned t = 0; t < n_time; t++)
         {
-          dudt+=time_stepper_pt->weight(1,t)*nodal_value(t,n,u_nodal_index);
+          dudt +=
+            time_stepper_pt->weight(1, t) * nodal_value(t, n, u_nodal_index);
         }
       }
 
@@ -855,7 +914,7 @@ namespace oomph
     /// at your own risk!
     void disable_ALE()
     {
-      ALE_is_disabled=true;
+      ALE_is_disabled = true;
     }
 
     /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
@@ -864,23 +923,26 @@ namespace oomph
     /// in problems where the mesh is, in fact, stationary.
     void enable_ALE()
     {
-      ALE_is_disabled=false;
+      ALE_is_disabled = false;
     }
 
     /// \short Pressure at local pressure "node" n_p
     /// Uses suitably interpolated value for hanging nodes.
-    virtual double p_nst(const unsigned &n_p)const=0;
+    virtual double p_nst(const unsigned& n_p) const = 0;
 
     /// \short Pressure at local pressure "node" n_p at time level t
-    virtual double p_nst(const unsigned &t, const unsigned &n_p)const=0;
+    virtual double p_nst(const unsigned& t, const unsigned& n_p) const = 0;
 
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
-    virtual void fix_pressure(const unsigned &p_dof, const double &p_value)=0;
+    virtual void fix_pressure(const unsigned& p_dof, const double& p_value) = 0;
 
     /// \short Return the index at which the pressure is stored if it is
     /// stored at the nodes. If not stored at the nodes this will return
     /// a negative number.
-    virtual int p_nodal_index_nst() const {return Pressure_not_stored_at_node;}
+    virtual int p_nodal_index_nst() const
+    {
+      return Pressure_not_stored_at_node;
+    }
 
     /// Integral of pressure over element
     double pressure_integral() const;
@@ -892,7 +954,8 @@ namespace oomph
     double dissipation(const Vector<double>& s) const;
 
     /// \short Compute the vorticity vector at local coordinate s
-    void get_vorticity(const Vector<double>& s, Vector<double>& vorticity) const;
+    void get_vorticity(const Vector<double>& s,
+                       Vector<double>& vorticity) const;
 
     /// \short Compute the scalar vorticity at local coordinate s (2D)
     void get_vorticity(const Vector<double>& s, double& vorticity) const;
@@ -910,14 +973,16 @@ namespace oomph
     /// \short Compute traction (on the viscous scale) exerted onto
     /// the fluid at local coordinate s. N has to be outer unit normal
     /// to the fluid.
-    void get_traction(const Vector<double>& s, const Vector<double>& N,
+    void get_traction(const Vector<double>& s,
+                      const Vector<double>& N,
                       Vector<double>& traction);
 
     /// \short Compute traction (on the viscous scale) exerted onto
     /// the fluid at local coordinate s, decomposed into pressure and
     /// normal and tangential viscous components.
     /// N has to be outer unit normal to the fluid.
-    void get_traction(const Vector<double>& s, const Vector<double>& N,
+    void get_traction(const Vector<double>& s,
+                      const Vector<double>& N,
                       Vector<double>& traction_p,
                       Vector<double>& traction_visc_n,
                       Vector<double>& traction_visc_t);
@@ -930,15 +995,15 @@ namespace oomph
     /// the interface defined in the FSIFluidElement -- only the
     /// unit normal N (pointing into the fluid!) is actually used
     /// in the computation.
-    void get_load(const Vector<double> &s,
-                  const Vector<double> &N,
-                  Vector<double> &load)
+    void get_load(const Vector<double>& s,
+                  const Vector<double>& N,
+                  Vector<double>& load)
     {
       // Note: get_traction() computes the traction onto the fluid
       // if N is the outer unit normal onto the fluid; here we're
       // exepcting N to point into the fluid so we're getting the
       // traction onto the adjacent wall instead!
-      get_traction(s,N,load);
+      get_traction(s, N, load);
     }
 
     /// \short Compute the diagonal of the velocity/pressure mass matrices.
@@ -946,14 +1011,15 @@ namespace oomph
     /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
     /// LSC version of the preconditioner only needs that one)
     void get_pressure_and_velocity_mass_matrix_diagonal(
-      Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
-      const unsigned& which_one=0);
+      Vector<double>& press_mass_diag,
+      Vector<double>& veloc_mass_diag,
+      const unsigned& which_one = 0);
 
     /// \short Number of scalars/fields output by this element. Reimplements
     /// broken virtual function in base class.
     unsigned nscalar_paraview() const
     {
-      return DIM+1;
+      return DIM + 1;
     }
 
     /// \short Write values of the i-th scalar field at the plot points. Needs
@@ -967,31 +1033,35 @@ namespace oomph
 
 
       // Loop over plot points
-      unsigned num_plot_points=nplot_points_paraview(nplot);
-      for (unsigned iplot=0; iplot<num_plot_points; iplot++)
+      unsigned num_plot_points = nplot_points_paraview(nplot);
+      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
       {
-
         // Get local coordinates of plot point
-        get_s_plot(iplot,nplot,s);
+        get_s_plot(iplot, nplot, s);
 
         // Velocities
-        if (i<DIM) {file_out << interpolated_u_nst(s,i) << std::endl;}
+        if (i < DIM)
+        {
+          file_out << interpolated_u_nst(s, i) << std::endl;
+        }
 
         // Pressure
-        else if (i==DIM) {file_out << interpolated_p_nst(s)  << std::endl;}
+        else if (i == DIM)
+        {
+          file_out << interpolated_p_nst(s) << std::endl;
+        }
 
         // Never get here
         else
         {
 #ifdef PARANOID
           std::stringstream error_stream;
-          error_stream
-              << "These Navier Stokes elements only store " << DIM+1 << " fields, "
-              << "but i is currently  " << i << std::endl;
-          throw OomphLibError(
-            error_stream.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
+          error_stream << "These Navier Stokes elements only store " << DIM + 1
+                       << " fields, "
+                       << "but i is currently  " << i << std::endl;
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
 #endif
         }
       }
@@ -1000,57 +1070,56 @@ namespace oomph
 
     /// \short Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
-    void scalar_value_fct_paraview(std::ofstream& file_out,
-                                   const unsigned& i,
-                                   const unsigned& nplot,
-                                   const double& time,
-                                   FiniteElement::UnsteadyExactSolutionFctPt
-                                   exact_soln_pt) const
+    void scalar_value_fct_paraview(
+      std::ofstream& file_out,
+      const unsigned& i,
+      const unsigned& nplot,
+      const double& time,
+      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt) const
     {
 #ifdef PARANOID
-      if (i>DIM)
+      if (i > DIM)
       {
         // Create an output stream
         std::stringstream error_stream;
 
         // Create the error message
-        error_stream << "These Navier Stokes elements only store " << DIM+1
+        error_stream << "These Navier Stokes elements only store " << DIM + 1
                      << " fields, but i is currently " << i << std::endl;
 
         // Throw the error message
-        throw OomphLibError(error_stream.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 #endif
 
       // Vector of local coordinates
-      Vector<double> s(DIM+1,0.0);
+      Vector<double> s(DIM + 1, 0.0);
 
       // Storage for the spatial coordinates
-      Vector<double> spatial_coordinates(DIM,0.0);
+      Vector<double> spatial_coordinates(DIM, 0.0);
 
       // How many plot points do we have in total?
-      unsigned num_plot_points=nplot_points_paraview(nplot);
+      unsigned num_plot_points = nplot_points_paraview(nplot);
 
       // Loop over plot points
-      for (unsigned iplot=0; iplot<num_plot_points; iplot++)
+      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
       {
         // Get the local coordinates of the iplot-th plot point
-        get_s_plot(iplot,nplot,s);
+        get_s_plot(iplot, nplot, s);
 
         // Loop over the spatial coordinates
-        for (unsigned j=0; j<DIM; j++)
+        for (unsigned j = 0; j < DIM; j++)
         {
           // Assign the i-th spatial coordinate
-          spatial_coordinates[j]=interpolated_x(s,j);
+          spatial_coordinates[j] = interpolated_x(s, j);
         }
 
         // Exact solution vector (here it's simply a scalar)
-        Vector<double> exact_soln(DIM+1,0.0);
+        Vector<double> exact_soln(DIM + 1, 0.0);
 
         // Get the exact solution at this point
-        (*exact_soln_pt)(time,spatial_coordinates,exact_soln);
+        (*exact_soln_pt)(time, spatial_coordinates, exact_soln);
 
         // Output the interpolated solution value
         file_out << exact_soln[i] << std::endl;
@@ -1064,12 +1133,12 @@ namespace oomph
     std::string scalar_name_paraview(const unsigned& i) const
     {
       // Velocities
-      if (i<DIM)
+      if (i < DIM)
       {
-        return "Velocity "+StringConversion::to_string(i);
+        return "Velocity " + StringConversion::to_string(i);
       }
       // Preussre
-      else if (i==DIM)
+      else if (i == DIM)
       {
         return "Pressure";
       }
@@ -1077,13 +1146,11 @@ namespace oomph
       else
       {
         std::stringstream error_stream;
-        error_stream
-            << "These Navier Stokes elements only store " << DIM+1 << "  fields,\n"
-            << "but i is currently  " << i << std::endl;
+        error_stream << "These Navier Stokes elements only store " << DIM + 1
+                     << "  fields,\n"
+                     << "but i is currently  " << i << std::endl;
         throw OomphLibError(
-          error_stream.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
         // Dummy return
         return " ";
       }
@@ -1091,65 +1158,67 @@ namespace oomph
 
     /// \short Output function: x,y,[z],u,v,[w],p
     /// in tecplot format. Default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
-      unsigned nplot=5;
-      output(outfile,nplot);
+      unsigned nplot = 5;
+      output(outfile, nplot);
     }
 
     /// \short Output function: x,y,[z],u,v,[w],p
     /// in tecplot format. nplot points in each coordinate direction
-    void output(std::ostream &outfile, const unsigned &nplot);
+    void output(std::ostream& outfile, const unsigned& nplot);
 
     /// \short C-style output function: x,y,[z],u,v,[w],p
     /// in tecplot format. Default number of plot points
     void output(FILE* file_pt)
     {
-      unsigned nplot=5;
-      output(file_pt,nplot);
+      unsigned nplot = 5;
+      output(file_pt, nplot);
     }
 
     /// \short C-style output function: x,y,[z],u,v,[w],p
     /// in tecplot format. nplot points in each coordinate direction
-    void output(FILE* file_pt, const unsigned &nplot);
+    void output(FILE* file_pt, const unsigned& nplot);
 
     /// \short Full output function:
     /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
     /// in tecplot format. Default number of plot points
-    void full_output(std::ostream &outfile)
+    void full_output(std::ostream& outfile)
     {
-      unsigned nplot=5;
-      full_output(outfile,nplot);
+      unsigned nplot = 5;
+      full_output(outfile, nplot);
     }
 
     /// \short Full output function:
     /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
     /// in tecplot format. nplot points in each coordinate direction
-    void full_output(std::ostream &outfile, const unsigned &nplot);
+    void full_output(std::ostream& outfile, const unsigned& nplot);
 
 
     /// \short Output function: x,y,[z],u,v,[w] in tecplot format.
     /// nplot points in each coordinate direction at timestep t
     /// (t=0: present; t>0: previous timestep)
-    void output_veloc(std::ostream &outfile, const unsigned &nplot,
+    void output_veloc(std::ostream& outfile,
+                      const unsigned& nplot,
                       const unsigned& t);
 
 
     /// \short Output function: x,y,[z], [omega_x,omega_y,[and/or omega_z]]
     /// in tecplot format. nplot points in each coordinate direction
-    void output_vorticity(std::ostream &outfile,
-                          const unsigned &nplot);
+    void output_vorticity(std::ostream& outfile, const unsigned& nplot);
 
     /// \short Output exact solution specified via function pointer
     /// at a given number of plot points. Function prints as
     /// many components as are returned in solution Vector
-    void output_fct(std::ostream &outfile, const unsigned &nplot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// \short Output exact solution specified via function pointer
     /// at a given time and at a given number of plot points.
     /// Function prints as many components as are returned in solution Vector.
-    void output_fct(std::ostream &outfile, const unsigned &nplot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
                     const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
@@ -1163,135 +1232,151 @@ namespace oomph
     /// Solution is provided via function pointer.
     /// Plot at a given number of plot points and compute L2 error
     /// and L2 norm of velocity solution over element
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
                        const double& time,
-                       double& error, double& norm);
+                       double& error,
+                       double& norm);
 
     /// \short Validate against exact solution.
     /// Solution is provided via function pointer.
     /// Plot at a given number of plot points and compute L2 error
     /// and L2 norm of velocity solution over element
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double& error, double& norm);
+                       double& error,
+                       double& norm);
 
     /// \short Validate against exact solution. Solution is provided via
     /// function pointer. Compute L2 error and L2 norm of velocity solution
     /// over element.
     void compute_error(FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double& time, double& error, double& norm);
+                       const double& time,
+                       double& error,
+                       double& norm);
 
     /// \short Validate against exact solution. Solution is provided via
     /// function pointer. Compute L2 error and L2 norm of velocity solution
     /// over element.
     void compute_error(FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double& error, double& norm);
+                       double& error,
+                       double& norm);
 
     /// Compute the element's residual Vector
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
-      //Call the generic residuals function with flag set to 0
-      //and using a dummy matrix argument
+      // Call the generic residuals function with flag set to 0
+      // and using a dummy matrix argument
       fill_in_generic_residual_contribution_nst(
-        residuals,GeneralisedElement::Dummy_matrix,
-        GeneralisedElement::Dummy_matrix,0);
+        residuals,
+        GeneralisedElement::Dummy_matrix,
+        GeneralisedElement::Dummy_matrix,
+        0);
     }
 
     ///\short Compute the element's residual Vector and the jacobian matrix
     /// Virtual function can be overloaded by hanging-node version
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
-      //Call the generic routine with the flag set to 1
-      fill_in_generic_residual_contribution_nst(residuals,jacobian,
-          GeneralisedElement::Dummy_matrix,1);
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution_nst(
+        residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
     }
 
     /// \short Add the element's contribution to its residuals vector,
     /// jacobian matrix and mass matrix
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
-      //Call the generic routine with the flag set to 2
-      fill_in_generic_residual_contribution_nst(residuals,jacobian,mass_matrix,2);
+      // Call the generic routine with the flag set to 2
+      fill_in_generic_residual_contribution_nst(
+        residuals, jacobian, mass_matrix, 2);
     }
 
     /// Compute the element's residual Vector
     void fill_in_contribution_to_dresiduals_dparameter(
-      double* const &parameter_pt,Vector<double> &dres_dparam)
+      double* const& parameter_pt, Vector<double>& dres_dparam)
     {
-      //Call the generic residuals function with flag set to 0
-      //and using a dummy matrix argument
+      // Call the generic residuals function with flag set to 0
+      // and using a dummy matrix argument
       fill_in_generic_dresidual_contribution_nst(
         parameter_pt,
-        dres_dparam,GeneralisedElement::Dummy_matrix,
-        GeneralisedElement::Dummy_matrix,0);
+        dres_dparam,
+        GeneralisedElement::Dummy_matrix,
+        GeneralisedElement::Dummy_matrix,
+        0);
     }
 
     ///\short Compute the element's residual Vector and the jacobian matrix
     /// Virtual function can be overloaded by hanging-node version
     void fill_in_contribution_to_djacobian_dparameter(
-      double* const &parameter_pt,Vector<double> &dres_dparam,
-      DenseMatrix<double> &djac_dparam)
+      double* const& parameter_pt,
+      Vector<double>& dres_dparam,
+      DenseMatrix<double>& djac_dparam)
     {
-      //Call the generic routine with the flag set to 1
+      // Call the generic routine with the flag set to 1
       fill_in_generic_dresidual_contribution_nst(
         parameter_pt,
-        dres_dparam,djac_dparam,GeneralisedElement::Dummy_matrix,1);
+        dres_dparam,
+        djac_dparam,
+        GeneralisedElement::Dummy_matrix,
+        1);
     }
 
     /// Add the element's contribution to its residuals vector,
     /// jacobian matrix and mass matrix
     void fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter(
-      double* const &parameter_pt,
-      Vector<double> &dres_dparam,
-      DenseMatrix<double> &djac_dparam,
-      DenseMatrix<double> &dmass_matrix_dparam)
+      double* const& parameter_pt,
+      Vector<double>& dres_dparam,
+      DenseMatrix<double>& djac_dparam,
+      DenseMatrix<double>& dmass_matrix_dparam)
     {
-      //Call the generic routine with the flag set to 2
+      // Call the generic routine with the flag set to 2
       fill_in_generic_dresidual_contribution_nst(
-        parameter_pt,dres_dparam,djac_dparam,dmass_matrix_dparam,2);
+        parameter_pt, dres_dparam, djac_dparam, dmass_matrix_dparam, 2);
     }
 
 
     /// \short Compute the residuals for the associated pressure advection
     /// diffusion problem. Used by the Fp preconditioner.
-    void fill_in_pressure_advection_diffusion_residuals(Vector<double>& residuals)
+    void fill_in_pressure_advection_diffusion_residuals(
+      Vector<double>& residuals)
     {
       fill_in_generic_pressure_advection_diffusion_contribution_nst(
-        residuals,GeneralisedElement::Dummy_matrix,0);
+        residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
     /// \short Compute the residuals and Jacobian for the associated
     /// pressure advection diffusion problem. Used by the Fp preconditioner.
     void fill_in_pressure_advection_diffusion_jacobian(
-      Vector<double>& residuals, DenseMatrix<double> &jacobian)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       fill_in_generic_pressure_advection_diffusion_contribution_nst(
-        residuals,jacobian,1);
+        residuals, jacobian, 1);
     }
 
 
     /// \short Pin all non-pressure dofs and backup eqn numbers
-    void pin_all_non_pressure_dofs(std::map<Data*,std::vector<int> >&
-                                   eqn_number_backup)
+    void pin_all_non_pressure_dofs(
+      std::map<Data*, std::vector<int>>& eqn_number_backup)
     {
       // Loop over internal data and pin the values (having established that
       // pressure dofs aren't amongst those)
-      unsigned nint=this->ninternal_data();
-      for (unsigned j=0; j<nint; j++)
+      unsigned nint = this->ninternal_data();
+      for (unsigned j = 0; j < nint; j++)
       {
-        Data* data_pt=this->internal_data_pt(j);
-        if (eqn_number_backup[data_pt].size()==0)
+        Data* data_pt = this->internal_data_pt(j);
+        if (eqn_number_backup[data_pt].size() == 0)
         {
-          unsigned nvalue=data_pt->nvalue();
+          unsigned nvalue = data_pt->nvalue();
           eqn_number_backup[data_pt].resize(nvalue);
-          for (unsigned i=0; i<nvalue; i++)
+          for (unsigned i = 0; i < nvalue; i++)
           {
             // Backup
-            eqn_number_backup[data_pt][i]=data_pt->eqn_number(i);
+            eqn_number_backup[data_pt][i] = data_pt->eqn_number(i);
 
             // Pin everything
             data_pt->pin(i);
@@ -1300,24 +1385,22 @@ namespace oomph
       }
 
       // Now deal with nodal values
-      unsigned nnod=this->nnode();
-      for (unsigned j=0; j<nnod; j++)
+      unsigned nnod = this->nnode();
+      for (unsigned j = 0; j < nnod; j++)
       {
-
-        Node* nod_pt=this->node_pt(j);
-        if (eqn_number_backup[nod_pt].size()==0)
+        Node* nod_pt = this->node_pt(j);
+        if (eqn_number_backup[nod_pt].size() == 0)
         {
-
-          unsigned nvalue=nod_pt->nvalue();
+          unsigned nvalue = nod_pt->nvalue();
           eqn_number_backup[nod_pt].resize(nvalue);
-          for (unsigned i=0; i<nvalue; i++)
+          for (unsigned i = 0; i < nvalue; i++)
           {
             // Pin everything apart from the nodal pressure
             // value
-            if (int(i)!=this->p_nodal_index_nst())
+            if (int(i) != this->p_nodal_index_nst())
             {
               // Backup
-              eqn_number_backup[nod_pt][i]=nod_pt->eqn_number(i);
+              eqn_number_backup[nod_pt][i] = nod_pt->eqn_number(i);
 
               // Pin
               nod_pt->pin(i);
@@ -1326,28 +1409,28 @@ namespace oomph
             else
             {
               // Exclude non-nodal pressure based elements
-              if (this->p_nodal_index_nst()>=0)
+              if (this->p_nodal_index_nst() >= 0)
               {
                 // Backup
-                eqn_number_backup[nod_pt][i]=nod_pt->eqn_number(i);
+                eqn_number_backup[nod_pt][i] = nod_pt->eqn_number(i);
               }
             }
           }
 
 
           // If it's a solid node deal with its positional data too
-          SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-          if (solid_nod_pt!=0)
+          SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
+          if (solid_nod_pt != 0)
           {
-            Data* solid_posn_data_pt=solid_nod_pt->variable_position_pt();
-            if (eqn_number_backup[solid_posn_data_pt].size()==0)
+            Data* solid_posn_data_pt = solid_nod_pt->variable_position_pt();
+            if (eqn_number_backup[solid_posn_data_pt].size() == 0)
             {
-              unsigned nvalue=solid_posn_data_pt->nvalue();
+              unsigned nvalue = solid_posn_data_pt->nvalue();
               eqn_number_backup[solid_posn_data_pt].resize(nvalue);
-              for (unsigned i=0; i<nvalue; i++)
+              for (unsigned i = 0; i < nvalue; i++)
               {
                 // Backup
-                eqn_number_backup[solid_posn_data_pt][i]=
+                eqn_number_backup[solid_posn_data_pt][i] =
                   solid_posn_data_pt->eqn_number(i);
 
                 // Pin
@@ -1363,36 +1446,38 @@ namespace oomph
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
-    virtual void build_fp_press_adv_diff_robin_bc_element(const unsigned&
-        face_index)=0;
+    virtual void build_fp_press_adv_diff_robin_bc_element(
+      const unsigned& face_index) = 0;
 
     /// \short Output the FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
-    void output_pressure_advection_diffusion_robin_elements(std::ostream &outfile)
+    void output_pressure_advection_diffusion_robin_elements(
+      std::ostream& outfile)
     {
-      unsigned nel=Pressure_advection_diffusion_robin_element_pt.size();
-      for (unsigned e=0; e<nel; e++)
+      unsigned nel = Pressure_advection_diffusion_robin_element_pt.size();
+      for (unsigned e = 0; e < nel; e++)
       {
-        FaceElement* face_el_pt=Pressure_advection_diffusion_robin_element_pt[e];
+        FaceElement* face_el_pt =
+          Pressure_advection_diffusion_robin_element_pt[e];
         outfile << "ZONE" << std::endl;
         Vector<double> unit_normal(DIM);
         Vector<double> x(DIM);
-        Vector<double> s(DIM-1);
-        unsigned n=face_el_pt->integral_pt()->nweight();
-        for (unsigned ipt=0; ipt<n; ipt++)
+        Vector<double> s(DIM - 1);
+        unsigned n = face_el_pt->integral_pt()->nweight();
+        for (unsigned ipt = 0; ipt < n; ipt++)
         {
-          for (unsigned i=0; i<DIM-1; i++)
+          for (unsigned i = 0; i < DIM - 1; i++)
           {
-            s[i]=face_el_pt->integral_pt()->knot(ipt,i);
+            s[i] = face_el_pt->integral_pt()->knot(ipt, i);
           }
-          face_el_pt->interpolated_x(s,x);
-          face_el_pt->outer_unit_normal(ipt,unit_normal);
-          for (unsigned i=0; i<DIM; i++)
+          face_el_pt->interpolated_x(s, x);
+          face_el_pt->outer_unit_normal(ipt, unit_normal);
+          for (unsigned i = 0; i < DIM; i++)
           {
             outfile << x[i] << " ";
           }
-          for (unsigned i=0; i<DIM; i++)
+          for (unsigned i = 0; i < DIM; i++)
           {
             outfile << unit_normal[i] << " ";
           }
@@ -1406,8 +1491,8 @@ namespace oomph
     /// Fp preconditioner
     void delete_pressure_advection_diffusion_robin_elements()
     {
-      unsigned nel=Pressure_advection_diffusion_robin_element_pt.size();
-      for (unsigned e=0; e<nel; e++)
+      unsigned nel = Pressure_advection_diffusion_robin_element_pt.size();
+      for (unsigned e = 0; e < nel; e++)
       {
         delete Pressure_advection_diffusion_robin_element_pt[e];
       }
@@ -1418,54 +1503,54 @@ namespace oomph
     /// to nodal coordinates. Overwrites default implementation in
     /// FiniteElement base class.
     /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
-    virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
-        dresidual_dnodal_coordinates);
-
+    virtual void get_dresidual_dnodal_coordinates(
+      RankThreeTensor<double>& dresidual_dnodal_coordinates);
 
 
     /// Compute vector of FE interpolated velocity u at local coordinate s
-    void interpolated_u_nst(const Vector<double> &s, Vector<double>& veloc) const
+    void interpolated_u_nst(const Vector<double>& s,
+                            Vector<double>& veloc) const
     {
-      //Find number of nodes
+      // Find number of nodes
       unsigned n_node = nnode();
-      //Local shape function
+      // Local shape function
       Shape psi(n_node);
-      //Find values of shape function
-      shape(s,psi);
+      // Find values of shape function
+      shape(s, psi);
 
-      for (unsigned i=0; i<DIM; i++)
+      for (unsigned i = 0; i < DIM; i++)
       {
-        //Index at which the nodal value is stored
+        // Index at which the nodal value is stored
         unsigned u_nodal_index = u_index_nst(i);
-        //Initialise value of u
+        // Initialise value of u
         veloc[i] = 0.0;
-        //Loop over the local nodes and sum
-        for (unsigned l=0; l<n_node; l++)
+        // Loop over the local nodes and sum
+        for (unsigned l = 0; l < n_node; l++)
         {
-          veloc[i] += nodal_value(l,u_nodal_index)*psi[l];
+          veloc[i] += nodal_value(l, u_nodal_index) * psi[l];
         }
       }
     }
 
     /// Return FE interpolated velocity u[i] at local coordinate s
-    double interpolated_u_nst(const Vector<double> &s, const unsigned &i) const
+    double interpolated_u_nst(const Vector<double>& s, const unsigned& i) const
     {
-      //Find number of nodes
+      // Find number of nodes
       unsigned n_node = nnode();
-      //Local shape function
+      // Local shape function
       Shape psi(n_node);
-      //Find values of shape function
-      shape(s,psi);
+      // Find values of shape function
+      shape(s, psi);
 
-      //Get nodal index at which i-th velocity is stored
+      // Get nodal index at which i-th velocity is stored
       unsigned u_nodal_index = u_index_nst(i);
 
-      //Initialise value of u
+      // Initialise value of u
       double interpolated_u = 0.0;
-      //Loop over the local nodes and sum
-      for (unsigned l=0; l<n_node; l++)
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
       {
-        interpolated_u += nodal_value(l,u_nodal_index)*psi[l];
+        interpolated_u += nodal_value(l, u_nodal_index) * psi[l];
       }
 
       return (interpolated_u);
@@ -1474,27 +1559,27 @@ namespace oomph
     /// \short Return FE interpolated velocity u[i] at local coordinate s
     /// at time level t (t=0: present; t>0: history)
     double interpolated_u_nst(const unsigned& t,
-                              const Vector<double> &s,
-                              const unsigned &i) const
+                              const Vector<double>& s,
+                              const unsigned& i) const
     {
-      //Find number of nodes
+      // Find number of nodes
       unsigned n_node = nnode();
 
-      //Local shape function
+      // Local shape function
       Shape psi(n_node);
 
-      //Find values of shape function
-      shape(s,psi);
+      // Find values of shape function
+      shape(s, psi);
 
-      //Get nodal index at which i-th velocity is stored
+      // Get nodal index at which i-th velocity is stored
       unsigned u_nodal_index = u_index_nst(i);
 
-      //Initialise value of u
+      // Initialise value of u
       double interpolated_u = 0.0;
-      //Loop over the local nodes and sum
-      for (unsigned l=0; l<n_node; l++)
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
       {
-        interpolated_u += nodal_value(t,l,u_nodal_index)*psi[l];
+        interpolated_u += nodal_value(t, l, u_nodal_index) * psi[l];
       }
 
       return (interpolated_u);
@@ -1505,48 +1590,51 @@ namespace oomph
     /// to all data that can affect its value. In addition, return the global
     /// equation numbers corresponding to the data. The function is virtual
     /// so that it can be overloaded in the refineable version
-    virtual void dinterpolated_u_nst_ddata(const Vector<double> &s,
-                                           const unsigned &i,
-                                           Vector<double> &du_ddata,
-                                           Vector<unsigned> &global_eqn_number)
+    virtual void dinterpolated_u_nst_ddata(const Vector<double>& s,
+                                           const unsigned& i,
+                                           Vector<double>& du_ddata,
+                                           Vector<unsigned>& global_eqn_number)
     {
-      //Find number of nodes
+      // Find number of nodes
       unsigned n_node = nnode();
-      //Local shape function
+      // Local shape function
       Shape psi(n_node);
-      //Find values of shape function
-      shape(s,psi);
+      // Find values of shape function
+      shape(s, psi);
 
-      //Find the index at which the velocity component is stored
+      // Find the index at which the velocity component is stored
       const unsigned u_nodal_index = u_index_nst(i);
 
-      //Find the number of dofs associated with interpolated u
-      unsigned n_u_dof=0;
-      for (unsigned l=0; l<n_node; l++)
+      // Find the number of dofs associated with interpolated u
+      unsigned n_u_dof = 0;
+      for (unsigned l = 0; l < n_node; l++)
       {
         int global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
-        //If it's positive add to the count
-        if (global_eqn >= 0) {++n_u_dof;}
+        // If it's positive add to the count
+        if (global_eqn >= 0)
+        {
+          ++n_u_dof;
+        }
       }
 
-      //Now resize the storage schemes
-      du_ddata.resize(n_u_dof,0.0);
-      global_eqn_number.resize(n_u_dof,0);
+      // Now resize the storage schemes
+      du_ddata.resize(n_u_dof, 0.0);
+      global_eqn_number.resize(n_u_dof, 0);
 
-      //Loop over th nodes again and set the derivatives
-      unsigned count=0;
-      //Loop over the local nodes and sum
-      for (unsigned l=0; l<n_node; l++)
+      // Loop over th nodes again and set the derivatives
+      unsigned count = 0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
       {
-        //Get the global equation number
+        // Get the global equation number
         int global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
         if (global_eqn >= 0)
         {
-          //Set the global equation number
+          // Set the global equation number
           global_eqn_number[count] = global_eqn;
-          //Set the derivative with respect to the unknown
+          // Set the derivative with respect to the unknown
           du_ddata[count] = psi[l];
-          //Increase the counter
+          // Increase the counter
           ++count;
         }
       }
@@ -1554,21 +1642,21 @@ namespace oomph
 
 
     /// Return FE interpolated pressure at local coordinate s
-    virtual double interpolated_p_nst(const Vector<double> &s) const
+    virtual double interpolated_p_nst(const Vector<double>& s) const
     {
-      //Find number of nodes
+      // Find number of nodes
       unsigned n_pres = npres_nst();
-      //Local shape function
+      // Local shape function
       Shape psi(n_pres);
-      //Find values of shape function
-      pshape_nst(s,psi);
+      // Find values of shape function
+      pshape_nst(s, psi);
 
-      //Initialise value of p
+      // Initialise value of p
       double interpolated_p = 0.0;
-      //Loop over the local nodes and sum
-      for (unsigned l=0; l<n_pres; l++)
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_pres; l++)
       {
-        interpolated_p += p_nst(l)*psi[l];
+        interpolated_p += p_nst(l) * psi[l];
       }
 
       return (interpolated_p);
@@ -1576,21 +1664,21 @@ namespace oomph
 
 
     /// Return FE interpolated pressure at local coordinate s at time level t
-    double interpolated_p_nst(const unsigned &t, const Vector<double> &s) const
+    double interpolated_p_nst(const unsigned& t, const Vector<double>& s) const
     {
-      //Find number of nodes
+      // Find number of nodes
       unsigned n_pres = npres_nst();
-      //Local shape function
+      // Local shape function
       Shape psi(n_pres);
-      //Find values of shape function
-      pshape_nst(s,psi);
+      // Find values of shape function
+      pshape_nst(s, psi);
 
-      //Initialise value of p
+      // Initialise value of p
       double interpolated_p = 0.0;
-      //Loop over the local nodes and sum
-      for (unsigned l=0; l<n_pres; l++)
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_pres; l++)
       {
-        interpolated_p += p_nst(t,l)*psi[l];
+        interpolated_p += p_nst(t, l) * psi[l];
       }
 
       return (interpolated_p);
@@ -1599,9 +1687,9 @@ namespace oomph
 
     /// Return FE interpolated derivatives of velocity component u[i]
     /// w.r.t spatial global coordinate direction x[j] at local coordinate s
-    double interpolated_dudx_nst(const Vector<double> &s,
-                                 const unsigned &i,
-                                 const unsigned &j) const
+    double interpolated_dudx_nst(const Vector<double>& s,
+                                 const unsigned& i,
+                                 const unsigned& j) const
     {
       // Determine number of nodes
       const unsigned n_node = nnode();
@@ -1609,10 +1697,10 @@ namespace oomph
       // Allocate storage for local shape function and its derivatives
       // with respect to space
       Shape psif(n_node);
-      DShape dpsifdx(n_node,DIM);
+      DShape dpsifdx(n_node, DIM);
 
       // Find values of shape function (ignore jacobian)
-      (void)this->dshape_eulerian(s,psif,dpsifdx);
+      (void)this->dshape_eulerian(s, psif, dpsifdx);
 
       // Get the index at which the velocity is stored
       const unsigned u_nodal_index = u_index_nst(i);
@@ -1621,9 +1709,9 @@ namespace oomph
       double interpolated_dudx = 0.0;
 
       // Loop over the local nodes and sum
-      for (unsigned l=0; l<n_node; l++)
+      for (unsigned l = 0; l < n_node; l++)
       {
-        interpolated_dudx += nodal_value(l,u_nodal_index)*dpsifdx(l,j);
+        interpolated_dudx += nodal_value(l, u_nodal_index) * dpsifdx(l, j);
       }
 
       return (interpolated_dudx);
@@ -1632,23 +1720,22 @@ namespace oomph
 
     /// \short Output solution in data vector at local cordinates s:
     /// x,y [,z], u,v,[w], p
-    void point_output_data(const Vector<double> &s, Vector<double>& data)
+    void point_output_data(const Vector<double>& s, Vector<double>& data)
     {
       // Dimension
-      unsigned dim=s.size();
+      unsigned dim = s.size();
 
       // Resize data for values
-      data.resize(2*dim+1);
+      data.resize(2 * dim + 1);
 
       // Write values in the vector
-      for (unsigned i=0; i<dim; i++)
+      for (unsigned i = 0; i < dim; i++)
       {
-        data[i]=interpolated_x(s,i);
-        data[i+dim]=this->interpolated_u_nst(s,i);
+        data[i] = interpolated_x(s, i);
+        data[i + dim] = this->interpolated_u_nst(s, i);
       }
-      data[2*dim]=this->interpolated_p_nst(s);
+      data[2 * dim] = this->interpolated_p_nst(s);
     }
-
   };
 
   //////////////////////////////////////////////////////////////////////////////
@@ -1662,17 +1749,15 @@ namespace oomph
   /// pressure interpolation. They can be used within oomph-lib's
   /// block preconditioning framework.
   //==========================================================================
-  template <unsigned DIM>
-  class QCrouzeixRaviartElement : public virtual QElement<DIM,3>,
-    public virtual NavierStokesEquations<DIM>
+  template<unsigned DIM>
+  class QCrouzeixRaviartElement : public virtual QElement<DIM, 3>,
+                                  public virtual NavierStokesEquations<DIM>
   {
   private:
-
     /// Static array of ints to hold required number of variables at nodes
     static const unsigned Initial_Nvalue[];
 
   protected:
-
     /// Internal index that indicates at which internal data the pressure
     /// is stored
     unsigned P_nst_internal_index;
@@ -1680,101 +1765,109 @@ namespace oomph
 
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
-    ///Return Jacobian of mapping between local and global coordinates.
-    inline double dshape_and_dtest_eulerian_nst(const Vector<double> &s,
-        Shape &psi,
-        DShape &dpsidx,
-        Shape &test,
-        DShape &dtestdx) const;
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_nst(const Vector<double>& s,
+                                                Shape& psi,
+                                                DShape& dpsidx,
+                                                Shape& test,
+                                                DShape& dtestdx) const;
 
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords at ipt-th integation point (taken from geometry)
-    ///Return Jacobian of mapping between local and global coordinates.
-    inline double dshape_and_dtest_eulerian_at_knot_nst(const unsigned &ipt,
-        Shape &psi,
-        DShape &dpsidx,
-        Shape &test,
-        DShape &dtestdx) const;
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_at_knot_nst(const unsigned& ipt,
+                                                        Shape& psi,
+                                                        DShape& dpsidx,
+                                                        Shape& test,
+                                                        DShape& dtestdx) const;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const;
 
 
   public:
-
     /// Constructor, there are DIM+1 internal values (for the pressure)
-    QCrouzeixRaviartElement() : QElement<DIM,3>(), NavierStokesEquations<DIM>()
+    QCrouzeixRaviartElement() : QElement<DIM, 3>(), NavierStokesEquations<DIM>()
     {
-      //Allocate and add one Internal data object that stored DIM+1 pressure
-      //values;
-      P_nst_internal_index = this->add_internal_data(new Data(DIM+1));
+      // Allocate and add one Internal data object that stored DIM+1 pressure
+      // values;
+      P_nst_internal_index = this->add_internal_data(new Data(DIM + 1));
     }
 
     /// \short Number of values (pinned or dofs) required at local node n.
-    virtual unsigned required_nvalue(const unsigned &n) const;
+    virtual unsigned required_nvalue(const unsigned& n) const;
 
 
     /// Pressure shape functions at local coordinate s
-    inline void pshape_nst(const Vector<double> &s, Shape &psi) const;
+    inline void pshape_nst(const Vector<double>& s, Shape& psi) const;
 
     /// Pressure shape and test functions at local coordinte s
-    inline void pshape_nst(const Vector<double> &s, Shape &psi,
-                           Shape &test) const;
+    inline void pshape_nst(const Vector<double>& s,
+                           Shape& psi,
+                           Shape& test) const;
 
     /// \short Return the i-th pressure value
     /// (Discontinous pressure interpolation -- no need to cater for hanging
     /// nodes).
-    double p_nst(const unsigned &i) const
-    {return this->internal_data_pt(P_nst_internal_index)->value(i);}
+    double p_nst(const unsigned& i) const
+    {
+      return this->internal_data_pt(P_nst_internal_index)->value(i);
+    }
 
     /// \short Return the i-th pressure value
     /// (Discontinous pressure interpolation -- no need to cater for hanging
     /// nodes).
-    double p_nst(const unsigned &t, const unsigned &i) const
-    {return this->internal_data_pt(P_nst_internal_index)->value(t,i);}
+    double p_nst(const unsigned& t, const unsigned& i) const
+    {
+      return this->internal_data_pt(P_nst_internal_index)->value(t, i);
+    }
 
     /// Return number of pressure values
-    unsigned npres_nst() const {return DIM+1;}
+    unsigned npres_nst() const
+    {
+      return DIM + 1;
+    }
 
     /// \short Pressure shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
-    inline double dpshape_and_dptest_eulerian_nst(const Vector<double> &s,
-        Shape &ppsi,
-        DShape &dppsidx,
-        Shape &ptest,
-        DShape &dptestdx) const;
+    inline double dpshape_and_dptest_eulerian_nst(const Vector<double>& s,
+                                                  Shape& ppsi,
+                                                  DShape& dppsidx,
+                                                  Shape& ptest,
+                                                  DShape& dptestdx) const;
 
     /// Return the local equation numbers for the pressure values.
-    inline int p_local_eqn(const unsigned &n) const
-    {return this->internal_local_eqn(P_nst_internal_index,n);}
+    inline int p_local_eqn(const unsigned& n) const
+    {
+      return this->internal_local_eqn(P_nst_internal_index, n);
+    }
 
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
-    void fix_pressure(const unsigned &p_dof, const double &p_value)
+    void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
       this->internal_data_pt(P_nst_internal_index)->pin(p_dof);
-      this->internal_data_pt(P_nst_internal_index)->set_value(p_dof,p_value);
+      this->internal_data_pt(P_nst_internal_index)->set_value(p_dof, p_value);
     }
 
 
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
-    void build_fp_press_adv_diff_robin_bc_element(const unsigned&
-        face_index)
+    void build_fp_press_adv_diff_robin_bc_element(const unsigned& face_index)
     {
       this->Pressure_advection_diffusion_robin_element_pt.push_back(
-        new FpPressureAdvDiffRobinBCElement<QCrouzeixRaviartElement<DIM> >(
+        new FpPressureAdvDiffRobinBCElement<QCrouzeixRaviartElement<DIM>>(
           this, face_index));
     }
 
@@ -1786,7 +1879,7 @@ namespace oomph
     /// for all values (pressures, velocities) that affect the
     /// load computed in the \c get_load(...) function.
     void identify_load_data(
-      std::set<std::pair<Data*,unsigned> > &paired_load_data);
+      std::set<std::pair<Data*, unsigned>>& paired_load_data);
 
     /// \short  Add to the set \c paired_pressure_data pairs
     /// containing
@@ -1797,44 +1890,57 @@ namespace oomph
     /// for all pressure values that affect the
     /// load computed in the \c get_load(...) function.
     void identify_pressure_data(
-      std::set<std::pair<Data*,unsigned> > &paired_pressure_data);
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data);
 
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile)
-    {NavierStokesEquations<DIM>::output(outfile);}
+    void output(std::ostream& outfile)
+    {
+      NavierStokesEquations<DIM>::output(outfile);
+    }
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile, const unsigned &nplot)
-    {NavierStokesEquations<DIM>::output(outfile,nplot);}
+    void output(std::ostream& outfile, const unsigned& nplot)
+    {
+      NavierStokesEquations<DIM>::output(outfile, nplot);
+    }
 
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE* file_pt) {NavierStokesEquations<DIM>::output(file_pt);}
+    void output(FILE* file_pt)
+    {
+      NavierStokesEquations<DIM>::output(file_pt);
+    }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE* file_pt, const unsigned &nplot)
-    {NavierStokesEquations<DIM>::output(file_pt,nplot);}
+    void output(FILE* file_pt, const unsigned& nplot)
+    {
+      NavierStokesEquations<DIM>::output(file_pt, nplot);
+    }
 
 
     /// \short Full output function:
     /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
     /// in tecplot format. Default number of plot points
-    void full_output(std::ostream &outfile)
-    {NavierStokesEquations<DIM>::full_output(outfile);}
+    void full_output(std::ostream& outfile)
+    {
+      NavierStokesEquations<DIM>::full_output(outfile);
+    }
 
     /// \short Full output function:
     /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
     /// in tecplot format. nplot points in each coordinate direction
-    void full_output(std::ostream &outfile, const unsigned &nplot)
-    {NavierStokesEquations<DIM>::full_output(outfile,nplot);}
+    void full_output(std::ostream& outfile, const unsigned& nplot)
+    {
+      NavierStokesEquations<DIM>::full_output(outfile, nplot);
+    }
 
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Velocity and pressure.
     unsigned ndof_types() const
     {
-      return DIM+1;
+      return DIM + 1;
     }
 
     /// \short Create a list of pairs for all unknowns in this element,
@@ -1844,11 +1950,10 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.) Velocity=0; Pressure=1
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const;
-
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
   };
 
-  //Inline functions
+  // Inline functions
 
   //=======================================================================
   /// Derivatives of the shape functions and test functions w.r.t. to global
@@ -1857,16 +1962,18 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   inline double QCrouzeixRaviartElement<DIM>::dshape_and_dtest_eulerian_nst(
-    const Vector<double> &s, Shape &psi,
-    DShape &dpsidx, Shape &test,
-    DShape &dtestdx) const
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
-    //Call the geometrical shape functions and derivatives
-    double J = this->dshape_eulerian(s,psi,dpsidx);
-    //The test functions are equal to the shape functions
+    // Call the geometrical shape functions and derivatives
+    double J = this->dshape_eulerian(s, psi, dpsidx);
+    // The test functions are equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    //Return the jacobian
+    // Return the jacobian
     return J;
   }
 
@@ -1876,18 +1983,19 @@ namespace oomph
   /// local and global coordinates.
   //=======================================================================
   template<unsigned DIM>
-  inline double QCrouzeixRaviartElement<DIM>::
-  dshape_and_dtest_eulerian_at_knot_nst(
-    const unsigned &ipt, Shape &psi,
-    DShape &dpsidx, Shape &test,
-    DShape &dtestdx) const
+  inline double QCrouzeixRaviartElement<
+    DIM>::dshape_and_dtest_eulerian_at_knot_nst(const unsigned& ipt,
+                                                Shape& psi,
+                                                DShape& dpsidx,
+                                                Shape& test,
+                                                DShape& dtestdx) const
   {
-    //Call the geometrical shape functions and derivatives
-    double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
-    //The test functions are equal to the shape functions
+    // Call the geometrical shape functions and derivatives
+    double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
+    // The test functions are equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
-    //Return the jacobian
+    // Return the jacobian
     return J;
   }
 
@@ -1903,33 +2011,35 @@ namespace oomph
   //=======================================================================
   template<>
   inline double QCrouzeixRaviartElement<2>::
-  dshape_and_dtest_eulerian_at_knot_nst(
-    const unsigned &ipt, Shape &psi, DShape &dpsidx,
-    RankFourTensor<double> &d_dpsidx_dX,
-    Shape &test, DShape &dtestdx,
-    RankFourTensor<double> &d_dtestdx_dX,
-    DenseMatrix<double> &djacobian_dX) const
+    dshape_and_dtest_eulerian_at_knot_nst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const
   {
     // Call the geometrical shape functions and derivatives
-    const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
-                     djacobian_dX,
-                     d_dpsidx_dX);
+    const double J = this->dshape_eulerian_at_knot(
+      ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
     // Loop over the test functions and derivatives and set them equal to the
     // shape functions
-    for (unsigned i=0; i<9; i++)
+    for (unsigned i = 0; i < 9; i++)
     {
       test[i] = psi[i];
 
-      for (unsigned k=0; k<2; k++)
+      for (unsigned k = 0; k < 2; k++)
       {
-        dtestdx(i,k) = dpsidx(i,k);
+        dtestdx(i, k) = dpsidx(i, k);
 
-        for (unsigned p=0; p<2; p++)
+        for (unsigned p = 0; p < 2; p++)
         {
-          for (unsigned q=0; q<9; q++)
+          for (unsigned q = 0; q < 9; q++)
           {
-            d_dtestdx_dX(p,q,i,k) = d_dpsidx_dX(p,q,i,k);
+            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
           }
         }
       }
@@ -1951,33 +2061,35 @@ namespace oomph
   //=======================================================================
   template<>
   inline double QCrouzeixRaviartElement<3>::
-  dshape_and_dtest_eulerian_at_knot_nst(
-    const unsigned &ipt, Shape &psi, DShape &dpsidx,
-    RankFourTensor<double> &d_dpsidx_dX,
-    Shape &test, DShape &dtestdx,
-    RankFourTensor<double> &d_dtestdx_dX,
-    DenseMatrix<double> &djacobian_dX) const
+    dshape_and_dtest_eulerian_at_knot_nst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const
   {
     // Call the geometrical shape functions and derivatives
-    const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
-                     djacobian_dX,
-                     d_dpsidx_dX);
+    const double J = this->dshape_eulerian_at_knot(
+      ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
     // Loop over the test functions and derivatives and set them equal to the
     // shape functions
-    for (unsigned i=0; i<27; i++)
+    for (unsigned i = 0; i < 27; i++)
     {
       test[i] = psi[i];
 
-      for (unsigned k=0; k<3; k++)
+      for (unsigned k = 0; k < 3; k++)
       {
-        dtestdx(i,k) = dpsidx(i,k);
+        dtestdx(i, k) = dpsidx(i, k);
 
-        for (unsigned p=0; p<3; p++)
+        for (unsigned p = 0; p < 3; p++)
         {
-          for (unsigned q=0; q<27; q++)
+          for (unsigned q = 0; q < 27; q++)
           {
-            d_dtestdx_dX(p,q,i,k) = d_dpsidx_dX(p,q,i,k);
+            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
           }
         }
       }
@@ -1988,21 +2100,18 @@ namespace oomph
   }
 
 
-
   //=======================================================================
   /// 2D :
   /// Pressure shape functions
   //=======================================================================
   template<>
-  inline void QCrouzeixRaviartElement<2>::pshape_nst(const Vector<double> &s,
-      Shape &psi)
-  const
+  inline void QCrouzeixRaviartElement<2>::pshape_nst(const Vector<double>& s,
+                                                     Shape& psi) const
   {
     psi[0] = 1.0;
     psi[1] = s[0];
     psi[2] = s[1];
   }
-
 
 
   //==========================================================================
@@ -2012,49 +2121,47 @@ namespace oomph
   //==========================================================================
   template<>
   inline double QCrouzeixRaviartElement<2>::dpshape_and_dptest_eulerian_nst(
-    const Vector<double> &s,
-    Shape &ppsi,
-    DShape &dppsidx,
-    Shape &ptest,
-    DShape &dptestdx) const
+    const Vector<double>& s,
+    Shape& ppsi,
+    DShape& dppsidx,
+    Shape& ptest,
+    DShape& dptestdx) const
   {
-
     // Initalise with shape fcts and derivs. w.r.t. to local coordinates
     ppsi[0] = 1.0;
     ppsi[1] = s[0];
     ppsi[2] = s[1];
 
-    dppsidx(0,0) = 0.0;
-    dppsidx(1,0) = 1.0;
-    dppsidx(2,0) = 0.0;
+    dppsidx(0, 0) = 0.0;
+    dppsidx(1, 0) = 1.0;
+    dppsidx(2, 0) = 0.0;
 
-    dppsidx(0,1) = 0.0;
-    dppsidx(1,1) = 0.0;
-    dppsidx(2,1) = 1.0;
+    dppsidx(0, 1) = 0.0;
+    dppsidx(1, 1) = 0.0;
+    dppsidx(2, 1) = 1.0;
 
 
-    //Get the values of the shape functions and their local derivatives
+    // Get the values of the shape functions and their local derivatives
     Shape psi(9);
-    DShape dpsi(9,2);
-    dshape_local(s,psi,dpsi);
+    DShape dpsi(9, 2);
+    dshape_local(s, psi, dpsi);
 
-    //Allocate memory for the inverse 2x2 jacobian
+    // Allocate memory for the inverse 2x2 jacobian
     DenseMatrix<double> inverse_jacobian(2);
 
-    //Now calculate the inverse jacobian
-    const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+    // Now calculate the inverse jacobian
+    const double det = local_to_eulerian_mapping(dpsi, inverse_jacobian);
 
-    //Now set the values of the derivatives to be derivs w.r.t. to the
+    // Now set the values of the derivatives to be derivs w.r.t. to the
     // Eulerian coordinates
-    transform_derivatives(inverse_jacobian,dppsidx);
+    transform_derivatives(inverse_jacobian, dppsidx);
 
-    //The test functions are equal to the shape functions
+    // The test functions are equal to the shape functions
     ptest = ppsi;
     dptestdx = dppsidx;
 
-    //Return the determinant of the jacobian
+    // Return the determinant of the jacobian
     return det;
-
   }
 
 
@@ -2062,14 +2169,13 @@ namespace oomph
   /// Ppressure shape and test functions
   //=======================================================================
   template<unsigned DIM>
-  inline void QCrouzeixRaviartElement<DIM>::
-  pshape_nst(const Vector<double> &s,
-             Shape &psi,
-             Shape &test) const
+  inline void QCrouzeixRaviartElement<DIM>::pshape_nst(const Vector<double>& s,
+                                                       Shape& psi,
+                                                       Shape& test) const
   {
-    //Call the pressure shape functions
-    this->pshape_nst(s,psi);
-    //Test functions are equal to shape functions
+    // Call the pressure shape functions
+    this->pshape_nst(s, psi);
+    // Test functions are equal to shape functions
     test = psi;
   }
 
@@ -2079,9 +2185,8 @@ namespace oomph
   /// Pressure shape functions
   //=======================================================================
   template<>
-  inline void QCrouzeixRaviartElement<3>::pshape_nst(const Vector<double> &s,
-      Shape &psi)
-  const
+  inline void QCrouzeixRaviartElement<3>::pshape_nst(const Vector<double>& s,
+                                                     Shape& psi) const
   {
     psi[0] = 1.0;
     psi[1] = s[0];
@@ -2097,57 +2202,55 @@ namespace oomph
   //==========================================================================
   template<>
   inline double QCrouzeixRaviartElement<3>::dpshape_and_dptest_eulerian_nst(
-    const Vector<double> &s,
-    Shape &ppsi,
-    DShape &dppsidx,
-    Shape &ptest,
-    DShape &dptestdx) const
+    const Vector<double>& s,
+    Shape& ppsi,
+    DShape& dppsidx,
+    Shape& ptest,
+    DShape& dptestdx) const
   {
-
     // Initalise with shape fcts and derivs. w.r.t. to local coordinates
     ppsi[0] = 1.0;
     ppsi[1] = s[0];
     ppsi[2] = s[1];
     ppsi[3] = s[2];
 
-    dppsidx(0,0) = 0.0;
-    dppsidx(1,0) = 1.0;
-    dppsidx(2,0) = 0.0;
-    dppsidx(3,0) = 0.0;
+    dppsidx(0, 0) = 0.0;
+    dppsidx(1, 0) = 1.0;
+    dppsidx(2, 0) = 0.0;
+    dppsidx(3, 0) = 0.0;
 
-    dppsidx(0,1) = 0.0;
-    dppsidx(1,1) = 0.0;
-    dppsidx(2,1) = 1.0;
-    dppsidx(3,1) = 0.0;
+    dppsidx(0, 1) = 0.0;
+    dppsidx(1, 1) = 0.0;
+    dppsidx(2, 1) = 1.0;
+    dppsidx(3, 1) = 0.0;
 
-    dppsidx(0,2) = 0.0;
-    dppsidx(1,2) = 0.0;
-    dppsidx(2,2) = 0.0;
-    dppsidx(3,2) = 1.0;
+    dppsidx(0, 2) = 0.0;
+    dppsidx(1, 2) = 0.0;
+    dppsidx(2, 2) = 0.0;
+    dppsidx(3, 2) = 1.0;
 
 
-    //Get the values of the shape functions and their local derivatives
+    // Get the values of the shape functions and their local derivatives
     Shape psi(27);
-    DShape dpsi(27,3);
-    dshape_local(s,psi,dpsi);
+    DShape dpsi(27, 3);
+    dshape_local(s, psi, dpsi);
 
     // Allocate memory for the inverse 3x3 jacobian
     DenseMatrix<double> inverse_jacobian(3);
 
     // Now calculate the inverse jacobian
-    const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+    const double det = local_to_eulerian_mapping(dpsi, inverse_jacobian);
 
     // Now set the values of the derivatives to be derivs w.r.t. to the
     // Eulerian coordinates
-    transform_derivatives(inverse_jacobian,dppsidx);
+    transform_derivatives(inverse_jacobian, dppsidx);
 
-    //The test functions are equal to the shape functions
+    // The test functions are equal to the shape functions
     ptest = ppsi;
     dptestdx = dppsidx;
 
     // Return the determinant of the jacobian
     return det;
-
   }
 
 
@@ -2155,29 +2258,28 @@ namespace oomph
   /// Face geometry of the 2D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<QCrouzeixRaviartElement<2> >: public virtual QElement<1,3>
+  class FaceGeometry<QCrouzeixRaviartElement<2>> : public virtual QElement<1, 3>
   {
   public:
-    FaceGeometry() : QElement<1,3>() {}
+    FaceGeometry() : QElement<1, 3>() {}
   };
 
   //=======================================================================
   /// Face geometry of the 3D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<QCrouzeixRaviartElement<3> >: public virtual QElement<2,3>
+  class FaceGeometry<QCrouzeixRaviartElement<3>> : public virtual QElement<2, 3>
   {
-
   public:
-    FaceGeometry() : QElement<2,3>() {}
+    FaceGeometry() : QElement<2, 3>() {}
   };
 
   //=======================================================================
   /// Face geometry of the FaceGeometry of the 2D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<2> > >:
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<2>>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
@@ -2188,13 +2290,12 @@ namespace oomph
   /// Face geometry of the FaceGeometry of the 3D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<3> > >:
-    public virtual QElement<1,3>
+  class FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<3>>>
+    : public virtual QElement<1, 3>
   {
   public:
-    FaceGeometry() : QElement<1,3>() {}
+    FaceGeometry() : QElement<1, 3>() {}
   };
-
 
 
   ////////////////////////////////////////////////////////////////////////////
@@ -2207,17 +2308,15 @@ namespace oomph
   /// continuous linear pressure interpolation. They can be used
   /// within oomph-lib's block-preconditioning framework.
   //=======================================================================
-  template <unsigned DIM>
-  class QTaylorHoodElement : public virtual QElement<DIM,3>,
-    public virtual NavierStokesEquations<DIM>
+  template<unsigned DIM>
+  class QTaylorHoodElement : public virtual QElement<DIM, 3>,
+                             public virtual NavierStokesEquations<DIM>
   {
   private:
-
     /// Static array of ints to hold number of variables at node
     static const unsigned Initial_Nvalue[];
 
   protected:
-
     /// \short Static array of ints to hold conversion from pressure
     /// node numbers to actual node numbers
     static const unsigned Pconv[];
@@ -2225,110 +2324,123 @@ namespace oomph
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
-    inline double dshape_and_dtest_eulerian_nst(const Vector<double> &s,
-        Shape &psi,
-        DShape &dpsidx, Shape &test,
-        DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_nst(const Vector<double>& s,
+                                                Shape& psi,
+                                                DShape& dpsidx,
+                                                Shape& test,
+                                                DShape& dtestdx) const;
 
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
-    inline double dshape_and_dtest_eulerian_at_knot_nst(const unsigned &ipt,
-        Shape &psi,
-        DShape &dpsidx,
-        Shape &test,
-        DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_at_knot_nst(const unsigned& ipt,
+                                                        Shape& psi,
+                                                        DShape& dpsidx,
+                                                        Shape& test,
+                                                        DShape& dtestdx) const;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const;
 
   public:
-
     /// Constructor, no internal data points
-    QTaylorHoodElement() : QElement<DIM,3>(),  NavierStokesEquations<DIM>() {}
+    QTaylorHoodElement() : QElement<DIM, 3>(), NavierStokesEquations<DIM>() {}
 
     /// \short Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version
-    inline virtual unsigned required_nvalue(const unsigned &n) const
-    {return Initial_Nvalue[n];}
+    inline virtual unsigned required_nvalue(const unsigned& n) const
+    {
+      return Initial_Nvalue[n];
+    }
 
 
     /// Pressure shape functions at local coordinate s
-    inline void pshape_nst(const Vector<double> &s, Shape &psi) const;
+    inline void pshape_nst(const Vector<double>& s, Shape& psi) const;
 
     /// Pressure shape and test functions at local coordinte s
-    inline void pshape_nst(const Vector<double> &s, Shape &psi,
-                           Shape &test) const;
+    inline void pshape_nst(const Vector<double>& s,
+                           Shape& psi,
+                           Shape& test) const;
 
     /// \short Set the value at which the pressure is stored in the nodes
-    virtual int p_nodal_index_nst() const {return static_cast<int>(DIM);}
+    virtual int p_nodal_index_nst() const
+    {
+      return static_cast<int>(DIM);
+    }
 
     /// Return the local equation numbers for the pressure values.
-    inline int p_local_eqn(const unsigned &n) const
-    {return this->nodal_local_eqn(Pconv[n],p_nodal_index_nst());}
+    inline int p_local_eqn(const unsigned& n) const
+    {
+      return this->nodal_local_eqn(Pconv[n], p_nodal_index_nst());
+    }
 
     /// \short Access function for the pressure values at local pressure
     /// node n_p (const version)
-    double p_nst(const unsigned &n_p) const
-    {return this->nodal_value(Pconv[n_p],this->p_nodal_index_nst());}
+    double p_nst(const unsigned& n_p) const
+    {
+      return this->nodal_value(Pconv[n_p], this->p_nodal_index_nst());
+    }
 
     /// \short Access function for the pressure values at local pressure
     /// node n_p (const version)
-    double p_nst(const unsigned &t, const unsigned &n_p) const
-    {return this->nodal_value(t,Pconv[n_p],this->p_nodal_index_nst());}
+    double p_nst(const unsigned& t, const unsigned& n_p) const
+    {
+      return this->nodal_value(t, Pconv[n_p], this->p_nodal_index_nst());
+    }
 
     /// \short Pressure shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry).
     /// Return Jacobian of mapping between local and global coordinates.
-    inline double dpshape_and_dptest_eulerian_nst(const Vector<double> &s,
-        Shape &ppsi,
-        DShape &dppsidx,
-        Shape &ptest,
-        DShape &dptestdx) const;
+    inline double dpshape_and_dptest_eulerian_nst(const Vector<double>& s,
+                                                  Shape& ppsi,
+                                                  DShape& dppsidx,
+                                                  Shape& ptest,
+                                                  DShape& dptestdx) const;
 
     /// Return number of pressure values
     unsigned npres_nst() const
-    {return static_cast<unsigned>(pow(2.0,static_cast<int>(DIM)));}
+    {
+      return static_cast<unsigned>(pow(2.0, static_cast<int>(DIM)));
+    }
 
 
     /// Deduce whether or not the provided node is a pressure node
     bool is_pressure_node(const unsigned& n) const
     {
       // The number of pressure nodes
-      unsigned n_p=npres_nst();
+      unsigned n_p = npres_nst();
 
       // See if the value n is in the array Pconv
-      return std::find(this->Pconv,this->Pconv+n_p,n)!=this->Pconv+n_p;
+      return std::find(this->Pconv, this->Pconv + n_p, n) != this->Pconv + n_p;
     } // End of is_pressure_node
 
 
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
-    void fix_pressure(const unsigned &p_dof, const double &p_value)
+    void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
       this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_nst());
-      this->node_pt(Pconv[p_dof])->set_value(this->p_nodal_index_nst(),p_value);
+      this->node_pt(Pconv[p_dof])
+        ->set_value(this->p_nodal_index_nst(), p_value);
     }
-
 
 
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
-    void build_fp_press_adv_diff_robin_bc_element(const unsigned&
-        face_index)
+    void build_fp_press_adv_diff_robin_bc_element(const unsigned& face_index)
     {
       this->Pressure_advection_diffusion_robin_element_pt.push_back(
-        new FpPressureAdvDiffRobinBCElement<QTaylorHoodElement<DIM> >(
+        new FpPressureAdvDiffRobinBCElement<QTaylorHoodElement<DIM>>(
           this, face_index));
     }
 
@@ -2341,7 +2453,7 @@ namespace oomph
     /// for all values (pressures, velocities) that affect the
     /// load computed in the \c get_load(...) function.
     void identify_load_data(
-      std::set<std::pair<Data*,unsigned> > &paired_load_data);
+      std::set<std::pair<Data*, unsigned>>& paired_load_data);
 
 
     /// \short  Add to the set \c paired_pressure_data pairs
@@ -2353,30 +2465,39 @@ namespace oomph
     /// for all pressure values that affect the
     /// load computed in the \c get_load(...) function.
     void identify_pressure_data(
-      std::set<std::pair<Data*,unsigned> > &paired_pressure_data);
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data);
 
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile)
-    {NavierStokesEquations<DIM>::output(outfile);}
+    void output(std::ostream& outfile)
+    {
+      NavierStokesEquations<DIM>::output(outfile);
+    }
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile, const unsigned &nplot)
-    {NavierStokesEquations<DIM>::output(outfile,nplot);}
+    void output(std::ostream& outfile, const unsigned& nplot)
+    {
+      NavierStokesEquations<DIM>::output(outfile, nplot);
+    }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE* file_pt) {NavierStokesEquations<DIM>::output(file_pt);}
+    void output(FILE* file_pt)
+    {
+      NavierStokesEquations<DIM>::output(file_pt);
+    }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE* file_pt, const unsigned &nplot)
-    {NavierStokesEquations<DIM>::output(file_pt,nplot);}
+    void output(FILE* file_pt, const unsigned& nplot)
+    {
+      NavierStokesEquations<DIM>::output(file_pt, nplot);
+    }
 
 
     /// \short Returns the number of "DOF types" that degrees of freedom
     /// in this element are sub-divided into: Velocity and pressure.
     unsigned ndof_types() const
     {
-      return DIM+1;
+      return DIM + 1;
     }
 
     /// \short Create a list of pairs for all unknowns in this element,
@@ -2386,12 +2507,10 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.) Velocity=0; Pressure=1
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned> >& dof_lookup_list) const;
-
-
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
   };
 
-  //Inline functions
+  // Inline functions
 
   //==========================================================================
   /// Derivatives of the shape functions and test functions w.r.t to
@@ -2400,19 +2519,20 @@ namespace oomph
   //==========================================================================
   template<unsigned DIM>
   inline double QTaylorHoodElement<DIM>::dshape_and_dtest_eulerian_nst(
-    const Vector<double> &s,
-    Shape &psi,
-    DShape &dpsidx, Shape &test,
-    DShape &dtestdx) const
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
-    //Call the geometrical shape functions and derivatives
-    double J = this->dshape_eulerian(s,psi,dpsidx);
+    // Call the geometrical shape functions and derivatives
+    double J = this->dshape_eulerian(s, psi, dpsidx);
 
-    //The test functions are equal to the shape functions
+    // The test functions are equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
 
-    //Return the jacobian
+    // Return the jacobian
     return J;
   }
 
@@ -2424,17 +2544,20 @@ namespace oomph
   //==========================================================================
   template<unsigned DIM>
   inline double QTaylorHoodElement<DIM>::dshape_and_dtest_eulerian_at_knot_nst(
-    const unsigned &ipt,Shape &psi, DShape &dpsidx, Shape &test,
-    DShape &dtestdx) const
+    const unsigned& ipt,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
-    //Call the geometrical shape functions and derivatives
-    double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
+    // Call the geometrical shape functions and derivatives
+    double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
 
-    //The test functions are equal to the shape functions
+    // The test functions are equal to the shape functions
     test = psi;
     dtestdx = dpsidx;
 
-    //Return the jacobian
+    // Return the jacobian
     return J;
   }
 
@@ -2446,61 +2569,58 @@ namespace oomph
   //==========================================================================
   template<>
   inline double QTaylorHoodElement<2>::dpshape_and_dptest_eulerian_nst(
-    const Vector<double> &s,
-    Shape &ppsi,
-    DShape &dppsidx,
-    Shape &ptest,
-    DShape &dptestdx) const
+    const Vector<double>& s,
+    Shape& ppsi,
+    DShape& dppsidx,
+    Shape& ptest,
+    DShape& dptestdx) const
   {
-
-    //Local storage
+    // Local storage
     double psi1[2], psi2[2];
-    double dpsi1[2],dpsi2[2];
+    double dpsi1[2], dpsi2[2];
 
-    //Call the OneDimensional Shape functions
-    OneDimLagrange::shape<2>(s[0],psi1);
-    OneDimLagrange::shape<2>(s[1],psi2);
-    OneDimLagrange::dshape<2>(s[0],dpsi1);
-    OneDimLagrange::dshape<2>(s[1],dpsi2);
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[0], psi1);
+    OneDimLagrange::shape<2>(s[1], psi2);
+    OneDimLagrange::dshape<2>(s[0], dpsi1);
+    OneDimLagrange::dshape<2>(s[1], dpsi2);
 
-    //Now let's loop over the nodal points in the element
-    //s1 is the "x" coordinate, s2 the "y"
-    for (unsigned i=0; i<2; i++)
+    // Now let's loop over the nodal points in the element
+    // s1 is the "x" coordinate, s2 the "y"
+    for (unsigned i = 0; i < 2; i++)
     {
-      for (unsigned j=0; j<2; j++)
+      for (unsigned j = 0; j < 2; j++)
       {
         /*Multiply the two 1D functions together to get the 2D function*/
-        ppsi[2*i+j] = psi2[i]*psi1[j];
-        dppsidx(2*i+j,0)= psi2[i]*dpsi1[j];
-        dppsidx(2*i+j,1)=dpsi2[i]* psi1[j];
+        ppsi[2 * i + j] = psi2[i] * psi1[j];
+        dppsidx(2 * i + j, 0) = psi2[i] * dpsi1[j];
+        dppsidx(2 * i + j, 1) = dpsi2[i] * psi1[j];
       }
     }
 
 
-    //Get the values of the shape functions and their local derivatives
+    // Get the values of the shape functions and their local derivatives
     Shape psi(9);
-    DShape dpsi(9,2);
-    dshape_local(s,psi,dpsi);
+    DShape dpsi(9, 2);
+    dshape_local(s, psi, dpsi);
 
     // Allocate memory for the inverse 2x2 jacobian
     DenseMatrix<double> inverse_jacobian(2);
 
     // Now calculate the inverse jacobian
-    const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+    const double det = local_to_eulerian_mapping(dpsi, inverse_jacobian);
 
     // Now set the values of the derivatives to be derivs w.r.t. to the
     // Eulerian coordinates
-    transform_derivatives(inverse_jacobian,dppsidx);
+    transform_derivatives(inverse_jacobian, dppsidx);
 
-    //The test functions are equal to the shape functions
+    // The test functions are equal to the shape functions
     ptest = ppsi;
     dptestdx = dppsidx;
 
     // Return the determinant of the jacobian
     return det;
-
   }
-
 
 
   //==========================================================================
@@ -2513,34 +2633,35 @@ namespace oomph
   /// Galerkin: Test functions = shape functions
   //==========================================================================
   template<>
-  inline double QTaylorHoodElement<2>::
-  dshape_and_dtest_eulerian_at_knot_nst(
-    const unsigned &ipt, Shape &psi, DShape &dpsidx,
-    RankFourTensor<double> &d_dpsidx_dX,
-    Shape &test, DShape &dtestdx,
-    RankFourTensor<double> &d_dtestdx_dX,
-    DenseMatrix<double> &djacobian_dX) const
+  inline double QTaylorHoodElement<2>::dshape_and_dtest_eulerian_at_knot_nst(
+    const unsigned& ipt,
+    Shape& psi,
+    DShape& dpsidx,
+    RankFourTensor<double>& d_dpsidx_dX,
+    Shape& test,
+    DShape& dtestdx,
+    RankFourTensor<double>& d_dtestdx_dX,
+    DenseMatrix<double>& djacobian_dX) const
   {
     // Call the geometrical shape functions and derivatives
-    const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
-                     djacobian_dX,
-                     d_dpsidx_dX);
+    const double J = this->dshape_eulerian_at_knot(
+      ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
     // Loop over the test functions and derivatives and set them equal to the
     // shape functions
-    for (unsigned i=0; i<9; i++)
+    for (unsigned i = 0; i < 9; i++)
     {
       test[i] = psi[i];
 
-      for (unsigned k=0; k<2; k++)
+      for (unsigned k = 0; k < 2; k++)
       {
-        dtestdx(i,k) = dpsidx(i,k);
+        dtestdx(i, k) = dpsidx(i, k);
 
-        for (unsigned p=0; p<2; p++)
+        for (unsigned p = 0; p < 2; p++)
         {
-          for (unsigned q=0; q<9; q++)
+          for (unsigned q = 0; q < 9; q++)
           {
-            d_dtestdx_dX(p,q,i,k) = d_dpsidx_dX(p,q,i,k);
+            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
           }
         }
       }
@@ -2561,34 +2682,35 @@ namespace oomph
   /// Galerkin: Test functions = shape functions
   //==========================================================================
   template<>
-  inline double QTaylorHoodElement<3>::
-  dshape_and_dtest_eulerian_at_knot_nst(
-    const unsigned &ipt, Shape &psi, DShape &dpsidx,
-    RankFourTensor<double> &d_dpsidx_dX,
-    Shape &test, DShape &dtestdx,
-    RankFourTensor<double> &d_dtestdx_dX,
-    DenseMatrix<double> &djacobian_dX) const
+  inline double QTaylorHoodElement<3>::dshape_and_dtest_eulerian_at_knot_nst(
+    const unsigned& ipt,
+    Shape& psi,
+    DShape& dpsidx,
+    RankFourTensor<double>& d_dpsidx_dX,
+    Shape& test,
+    DShape& dtestdx,
+    RankFourTensor<double>& d_dtestdx_dX,
+    DenseMatrix<double>& djacobian_dX) const
   {
     // Call the geometrical shape functions and derivatives
-    const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
-                     djacobian_dX,
-                     d_dpsidx_dX);
+    const double J = this->dshape_eulerian_at_knot(
+      ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
     // Loop over the test functions and derivatives and set them equal to the
     // shape functions
-    for (unsigned i=0; i<27; i++)
+    for (unsigned i = 0; i < 27; i++)
     {
       test[i] = psi[i];
 
-      for (unsigned k=0; k<3; k++)
+      for (unsigned k = 0; k < 3; k++)
       {
-        dtestdx(i,k) = dpsidx(i,k);
+        dtestdx(i, k) = dpsidx(i, k);
 
-        for (unsigned p=0; p<3; p++)
+        for (unsigned p = 0; p < 3; p++)
         {
-          for (unsigned q=0; q<27; q++)
+          for (unsigned q = 0; q < 27; q++)
           {
-            d_dtestdx_dX(p,q,i,k) = d_dpsidx_dX(p,q,i,k);
+            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
           }
         }
       }
@@ -2599,30 +2721,28 @@ namespace oomph
   }
 
 
-
   //==========================================================================
   /// 2D :
   /// Pressure shape functions
   //==========================================================================
   template<>
-  inline void QTaylorHoodElement<2>::pshape_nst(const Vector<double> &s,
-      Shape &psi)
-  const
+  inline void QTaylorHoodElement<2>::pshape_nst(const Vector<double>& s,
+                                                Shape& psi) const
   {
-    //Local storage
+    // Local storage
     double psi1[2], psi2[2];
-    //Call the OneDimensional Shape functions
-    OneDimLagrange::shape<2>(s[0],psi1);
-    OneDimLagrange::shape<2>(s[1],psi2);
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[0], psi1);
+    OneDimLagrange::shape<2>(s[1], psi2);
 
-    //Now let's loop over the nodal points in the element
-    //s1 is the "x" coordinate, s2 the "y"
-    for (unsigned i=0; i<2; i++)
+    // Now let's loop over the nodal points in the element
+    // s1 is the "x" coordinate, s2 the "y"
+    for (unsigned i = 0; i < 2; i++)
     {
-      for (unsigned j=0; j<2; j++)
+      for (unsigned j = 0; j < 2; j++)
       {
         /*Multiply the two 1D functions together to get the 2D function*/
-        psi[2*i + j] = psi2[i]*psi1[j];
+        psi[2 * i + j] = psi2[i] * psi1[j];
       }
     }
   }
@@ -2635,64 +2755,63 @@ namespace oomph
   //==========================================================================
   template<>
   inline double QTaylorHoodElement<3>::dpshape_and_dptest_eulerian_nst(
-    const Vector<double> &s,
-    Shape &ppsi,
-    DShape &dppsidx,
-    Shape &ptest,
-    DShape &dptestdx) const
+    const Vector<double>& s,
+    Shape& ppsi,
+    DShape& dppsidx,
+    Shape& ptest,
+    DShape& dptestdx) const
   {
-    //Local storage
+    // Local storage
     double psi1[2], psi2[2], psi3[2];
-    double dpsi1[2],dpsi2[2],dpsi3[2];
+    double dpsi1[2], dpsi2[2], dpsi3[2];
 
-    //Call the OneDimensional Shape functions
-    OneDimLagrange::shape<2>(s[0],psi1);
-    OneDimLagrange::shape<2>(s[1],psi2);
-    OneDimLagrange::shape<2>(s[2],psi3);
-    OneDimLagrange::dshape<2>(s[0],dpsi1);
-    OneDimLagrange::dshape<2>(s[1],dpsi2);
-    OneDimLagrange::dshape<2>(s[2],dpsi3);
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[0], psi1);
+    OneDimLagrange::shape<2>(s[1], psi2);
+    OneDimLagrange::shape<2>(s[2], psi3);
+    OneDimLagrange::dshape<2>(s[0], dpsi1);
+    OneDimLagrange::dshape<2>(s[1], dpsi2);
+    OneDimLagrange::dshape<2>(s[2], dpsi3);
 
-    //Now let's loop over the nodal points in the element
-    //s0 is the "x" coordinate, s1 the "y", s2 is the "z"
-    for (unsigned i=0; i<2; i++)
+    // Now let's loop over the nodal points in the element
+    // s0 is the "x" coordinate, s1 the "y", s2 is the "z"
+    for (unsigned i = 0; i < 2; i++)
     {
-      for (unsigned j=0; j<2; j++)
+      for (unsigned j = 0; j < 2; j++)
       {
-        for (unsigned k=0; k<2; k++)
+        for (unsigned k = 0; k < 2; k++)
         {
           /*Multiply the three 1D functions together to get the 3D function*/
-          ppsi[4*i + 2*j + k] = psi3[i]*psi2[j]*psi1[k];
-          dppsidx(4*i + 2*j + k,0) =  psi3[i]   * psi2[j]    *dpsi1[k];
-          dppsidx(4*i + 2*j + k,1) =  psi3[i]   *dpsi2[j]    * psi1[k];
-          dppsidx(4*i + 2*j + k,2) = dpsi3[i]   * psi2[j]    * psi1[k];
+          ppsi[4 * i + 2 * j + k] = psi3[i] * psi2[j] * psi1[k];
+          dppsidx(4 * i + 2 * j + k, 0) = psi3[i] * psi2[j] * dpsi1[k];
+          dppsidx(4 * i + 2 * j + k, 1) = psi3[i] * dpsi2[j] * psi1[k];
+          dppsidx(4 * i + 2 * j + k, 2) = dpsi3[i] * psi2[j] * psi1[k];
         }
       }
     }
 
 
-    //Get the values of the shape functions and their local derivatives
+    // Get the values of the shape functions and their local derivatives
     Shape psi(27);
-    DShape dpsi(27,3);
-    dshape_local(s,psi,dpsi);
+    DShape dpsi(27, 3);
+    dshape_local(s, psi, dpsi);
 
     // Allocate memory for the inverse 3x3 jacobian
     DenseMatrix<double> inverse_jacobian(3);
 
     // Now calculate the inverse jacobian
-    const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+    const double det = local_to_eulerian_mapping(dpsi, inverse_jacobian);
 
     // Now set the values of the derivatives to be derivs w.r.t. to the
     // Eulerian coordinates
-    transform_derivatives(inverse_jacobian,dppsidx);
+    transform_derivatives(inverse_jacobian, dppsidx);
 
-    //The test functions are equal to the shape functions
+    // The test functions are equal to the shape functions
     ptest = ppsi;
     dptestdx = dppsidx;
 
     // Return the determinant of the jacobian
     return det;
-
   }
 
   //==========================================================================
@@ -2700,28 +2819,27 @@ namespace oomph
   /// Pressure shape functions
   //==========================================================================
   template<>
-  inline void QTaylorHoodElement<3>::pshape_nst(const Vector<double> &s,
-      Shape &psi)
-  const
+  inline void QTaylorHoodElement<3>::pshape_nst(const Vector<double>& s,
+                                                Shape& psi) const
   {
-    //Local storage
+    // Local storage
     double psi1[2], psi2[2], psi3[2];
 
-    //Call the OneDimensional Shape functions
-    OneDimLagrange::shape<2>(s[0],psi1);
-    OneDimLagrange::shape<2>(s[1],psi2);
-    OneDimLagrange::shape<2>(s[2],psi3);
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[0], psi1);
+    OneDimLagrange::shape<2>(s[1], psi2);
+    OneDimLagrange::shape<2>(s[2], psi3);
 
-    //Now let's loop over the nodal points in the element
-    //s0 is the "x" coordinate, s1 the "y", s2 is the "z"
-    for (unsigned i=0; i<2; i++)
+    // Now let's loop over the nodal points in the element
+    // s0 is the "x" coordinate, s1 the "y", s2 is the "z"
+    for (unsigned i = 0; i < 2; i++)
     {
-      for (unsigned j=0; j<2; j++)
+      for (unsigned j = 0; j < 2; j++)
       {
-        for (unsigned k=0; k<2; k++)
+        for (unsigned k = 0; k < 2; k++)
         {
           /*Multiply the three 1D functions together to get the 3D function*/
-          psi[4*i + 2*j + k] = psi3[i]*psi2[j]*psi1[k];
+          psi[4 * i + 2 * j + k] = psi3[i] * psi2[j] * psi1[k];
         }
       }
     }
@@ -2732,13 +2850,13 @@ namespace oomph
   /// Pressure shape and test functions
   //==========================================================================
   template<unsigned DIM>
-  inline void QTaylorHoodElement<DIM>::pshape_nst(const Vector<double> &s,
-      Shape &psi,
-      Shape &test) const
+  inline void QTaylorHoodElement<DIM>::pshape_nst(const Vector<double>& s,
+                                                  Shape& psi,
+                                                  Shape& test) const
   {
-    //Call the pressure shape functions
-    this->pshape_nst(s,psi);
-    //Test functions are shape functions
+    // Call the pressure shape functions
+    this->pshape_nst(s, psi);
+    // Test functions are shape functions
     test = psi;
   }
 
@@ -2747,21 +2865,20 @@ namespace oomph
   /// Face geometry of the 2D Taylor_Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<QTaylorHoodElement<2> >: public virtual QElement<1,3>
+  class FaceGeometry<QTaylorHoodElement<2>> : public virtual QElement<1, 3>
   {
   public:
-    FaceGeometry() : QElement<1,3>() {}
+    FaceGeometry() : QElement<1, 3>() {}
   };
 
   //=======================================================================
   /// Face geometry of the 3D Taylor_Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<QTaylorHoodElement<3> >: public virtual QElement<2,3>
+  class FaceGeometry<QTaylorHoodElement<3>> : public virtual QElement<2, 3>
   {
-
   public:
-    FaceGeometry() : QElement<2,3>() {}
+    FaceGeometry() : QElement<2, 3>() {}
   };
 
 
@@ -2769,8 +2886,8 @@ namespace oomph
   /// Face geometry of the FaceGeometry of the 2D Taylor Hoodelements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QTaylorHoodElement<2> > >:
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<QTaylorHoodElement<2>>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
@@ -2781,17 +2898,12 @@ namespace oomph
   /// Face geometry of the FaceGeometry of the 3D Taylor_Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QTaylorHoodElement<3> > >:
-    public virtual QElement<1,3>
+  class FaceGeometry<FaceGeometry<QTaylorHoodElement<3>>>
+    : public virtual QElement<1, 3>
   {
   public:
-    FaceGeometry() : QElement<1,3>() {}
+    FaceGeometry() : QElement<1, 3>() {}
   };
-
-
-
-
-
 
 
   ////////////////////////////////////////////////////////////////////
@@ -2803,12 +2915,10 @@ namespace oomph
   /// Taylor Hood upgraded to become projectable
   //==========================================================
   template<class TAYLOR_HOOD_ELEMENT>
-  class ProjectableTaylorHoodElement :
-    public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
+  class ProjectableTaylorHoodElement
+    : public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
   {
-
   public:
-
     /// \short Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableTaylorHoodElement() {}
@@ -2820,57 +2930,57 @@ namespace oomph
     /// In the underlying Taylor Hood elements the fld-th velocities are stored
     /// at the fld-th value of the nodes; the pressures (the dim-th
     /// field) are the dim-th values at the vertex nodes etc.
-    Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+    Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
     {
       // Create the vector
-      Vector<std::pair<Data*,unsigned> > data_values;
+      Vector<std::pair<Data*, unsigned>> data_values;
 
       // Velocities dofs
-      if (fld<this->dim())
+      if (fld < this->dim())
       {
         // Loop over all nodes
-        unsigned nnod=this->nnode();
-        for (unsigned j=0; j<nnod; j++)
+        unsigned nnod = this->nnode();
+        for (unsigned j = 0; j < nnod; j++)
         {
           // Add the data value associated with the velocity components
-          data_values.push_back(std::make_pair(this->node_pt(j),fld));
+          data_values.push_back(std::make_pair(this->node_pt(j), fld));
         }
       }
       // Pressure
       else
       {
         // Loop over all vertex nodes
-        unsigned Pconv_size=this->dim()+1;
-        for (unsigned j=0; j<Pconv_size; j++)
+        unsigned Pconv_size = this->dim() + 1;
+        for (unsigned j = 0; j < Pconv_size; j++)
         {
           // Add the data value associated with the pressure components
-          unsigned vertex_index=this->Pconv[j];
-          data_values.push_back(std::make_pair(this->node_pt(vertex_index),fld));
+          unsigned vertex_index = this->Pconv[j];
+          data_values.push_back(
+            std::make_pair(this->node_pt(vertex_index), fld));
         }
       }
 
       // Return the vector
       return data_values;
-
     }
 
     /// \short Number of fields to be projected: dim+1, corresponding to
     /// velocity components and  pressure
     unsigned nfields_for_projection()
     {
-      return this->dim()+1;
+      return this->dim() + 1;
     }
 
     /// \short Number of history values to be stored for fld-th field. Whatever
     /// the timestepper has set up for the velocity components and
     /// none for the pressure field.
     /// (Note: count includes current value!)
-    unsigned nhistory_values_for_projection(const unsigned &fld)
+    unsigned nhistory_values_for_projection(const unsigned& fld)
     {
-      if (fld==this->dim())
+      if (fld == this->dim())
       {
-        //pressure doesn't have history values
-        return this->node_pt(0)->ntstorage();//1;
+        // pressure doesn't have history values
+        return this->node_pt(0)->ntstorage(); // 1;
       }
       else
       {
@@ -2887,84 +2997,82 @@ namespace oomph
 
     /// \short Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
-    double jacobian_and_shape_of_field(const unsigned &fld,
-                                       const Vector<double> &s,
-                                       Shape &psi)
+    double jacobian_and_shape_of_field(const unsigned& fld,
+                                       const Vector<double>& s,
+                                       Shape& psi)
     {
-      unsigned n_dim=this->dim();
-      unsigned n_node=this->nnode();
+      unsigned n_dim = this->dim();
+      unsigned n_node = this->nnode();
 
-      if (fld==n_dim)
+      if (fld == n_dim)
       {
-        //We are dealing with the pressure
-        this->pshape_nst(s,psi);
+        // We are dealing with the pressure
+        this->pshape_nst(s, psi);
 
-        Shape psif(n_node),testf(n_node);
-        DShape dpsifdx(n_node,n_dim), dtestfdx(n_node,n_dim);
+        Shape psif(n_node), testf(n_node);
+        DShape dpsifdx(n_node, n_dim), dtestfdx(n_node, n_dim);
 
-        //Domain Shape
-        double J=this->dshape_and_dtest_eulerian_nst(s,psif,dpsifdx,
-                 testf,dtestfdx);
+        // Domain Shape
+        double J = this->dshape_and_dtest_eulerian_nst(
+          s, psif, dpsifdx, testf, dtestfdx);
         return J;
       }
       else
       {
         Shape testf(n_node);
-        DShape dpsifdx(n_node,n_dim), dtestfdx(n_node,n_dim);
+        DShape dpsifdx(n_node, n_dim), dtestfdx(n_node, n_dim);
 
-        //Domain Shape
-        double J=this->dshape_and_dtest_eulerian_nst(s,psi,dpsifdx,
-                 testf,dtestfdx);
+        // Domain Shape
+        double J =
+          this->dshape_and_dtest_eulerian_nst(s, psi, dpsifdx, testf, dtestfdx);
         return J;
       }
     }
 
 
-
-    /// \short Return interpolated field fld at local coordinate s, at time level
-    /// t (t=0: present; t>0: history values)
-    double get_field(const unsigned &t,
-                     const unsigned &fld,
+    /// \short Return interpolated field fld at local coordinate s, at time
+    /// level t (t=0: present; t>0: history values)
+    double get_field(const unsigned& t,
+                     const unsigned& fld,
                      const Vector<double>& s)
     {
-      unsigned n_dim =this->dim();
-      unsigned n_node=this->nnode();
+      unsigned n_dim = this->dim();
+      unsigned n_node = this->nnode();
 
-      //If fld=n_dim, we deal with the pressure
-      if (fld==n_dim)
+      // If fld=n_dim, we deal with the pressure
+      if (fld == n_dim)
       {
-        return this->interpolated_p_nst(t,s);
+        return this->interpolated_p_nst(t, s);
       }
       // Velocity
       else
       {
-        //Find the index at which the variable is stored
+        // Find the index at which the variable is stored
         unsigned u_nodal_index = this->u_index_nst(fld);
 
-        //Local shape function
+        // Local shape function
         Shape psi(n_node);
 
-        //Find values of shape function
-        this->shape(s,psi);
+        // Find values of shape function
+        this->shape(s, psi);
 
-        //Initialise value of u
+        // Initialise value of u
         double interpolated_u = 0.0;
 
-        //Sum over the local nodes at that time
-        for (unsigned l=0; l<n_node; l++)
+        // Sum over the local nodes at that time
+        for (unsigned l = 0; l < n_node; l++)
         {
-          interpolated_u += this->nodal_value(t,l,u_nodal_index)*psi[l];
+          interpolated_u += this->nodal_value(t, l, u_nodal_index) * psi[l];
         }
         return interpolated_u;
       }
     }
 
 
-
-    ///Return number of values in field fld
-    unsigned nvalue_of_field(const unsigned &fld)
+    /// Return number of values in field fld
+    unsigned nvalue_of_field(const unsigned& fld)
     {
-      if (fld==this->dim())
+      if (fld == this->dim())
       {
         return this->npres_nst();
       }
@@ -2975,21 +3083,19 @@ namespace oomph
     }
 
 
-    ///Return local equation number of value j in field fld.
-    int local_equation(const unsigned &fld,
-                       const unsigned &j)
+    /// Return local equation number of value j in field fld.
+    int local_equation(const unsigned& fld, const unsigned& j)
     {
-      if (fld==this->dim())
+      if (fld == this->dim())
       {
         return this->p_local_eqn(j);
       }
       else
       {
         const unsigned u_nodal_index = this->u_index_nst(fld);
-        return this->nodal_local_eqn(j,u_nodal_index);
+        return this->nodal_local_eqn(j, u_nodal_index);
       }
     }
-
   };
 
 
@@ -2998,7 +3104,7 @@ namespace oomph
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableTaylorHoodElement<ELEMENT> >
+  class FaceGeometry<ProjectableTaylorHoodElement<ELEMENT>>
     : public virtual FaceGeometry<ELEMENT>
   {
   public:
@@ -3011,11 +3117,11 @@ namespace oomph
   /// that for the underlying wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<FaceGeometry<ProjectableTaylorHoodElement<ELEMENT> > >
-    : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+  class FaceGeometry<FaceGeometry<ProjectableTaylorHoodElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
-    FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+    FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
 
 
@@ -3023,12 +3129,10 @@ namespace oomph
   /// Crouzeix Raviart upgraded to become projectable
   //==========================================================
   template<class CROUZEIX_RAVIART_ELEMENT>
-  class ProjectableCrouzeixRaviartElement :
-    public virtual ProjectableElement<CROUZEIX_RAVIART_ELEMENT>
+  class ProjectableCrouzeixRaviartElement
+    : public virtual ProjectableElement<CROUZEIX_RAVIART_ELEMENT>
   {
-
   public:
-
     /// \short Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableCrouzeixRaviartElement() {}
@@ -3039,33 +3143,32 @@ namespace oomph
     /// In the underlying Crouzeix Raviart elements the
     /// fld-th velocities are stored
     /// at the fld-th value of the nodes; the pressures are stored internally
-    Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+    Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
     {
       // Create the vector
-      Vector<std::pair<Data*,unsigned> > data_values;
+      Vector<std::pair<Data*, unsigned>> data_values;
 
       // Velocities dofs
       if (fld < this->dim())
       {
         // Loop over all nodes
-        const unsigned n_node=this->nnode();
-        for (unsigned n=0; n<n_node; n++)
+        const unsigned n_node = this->nnode();
+        for (unsigned n = 0; n < n_node; n++)
         {
           // Add the data value associated with the velocity components
-          data_values.push_back(std::make_pair(this->node_pt(n),fld));
+          data_values.push_back(std::make_pair(this->node_pt(n), fld));
         }
       }
       // Pressure
       else
       {
-        //Need to push back the internal data
+        // Need to push back the internal data
         const unsigned n_press = this->npres_nst();
-        //Loop over all pressure values
-        for (unsigned j=0; j<n_press; j++)
+        // Loop over all pressure values
+        for (unsigned j = 0; j < n_press; j++)
         {
-          data_values.push_back(
-            std::make_pair(
-              this->internal_data_pt(this->P_nst_internal_index),j));
+          data_values.push_back(std::make_pair(
+            this->internal_data_pt(this->P_nst_internal_index), j));
         }
       }
 
@@ -3077,18 +3180,18 @@ namespace oomph
     /// velocity components and  pressure
     unsigned nfields_for_projection()
     {
-      return this->dim()+1;
+      return this->dim() + 1;
     }
 
     /// \short Number of history values to be stored for fld-th field. Whatever
     /// the timestepper has set up for the velocity components and
     /// none for the pressure field.
     /// (Note: count includes current value!)
-    unsigned nhistory_values_for_projection(const unsigned &fld)
+    unsigned nhistory_values_for_projection(const unsigned& fld)
     {
-      if (fld==this->dim())
+      if (fld == this->dim())
       {
-        //pressure doesn't have history values
+        // pressure doesn't have history values
         return 1;
       }
       else
@@ -3106,65 +3209,64 @@ namespace oomph
 
     /// \short Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
-    double jacobian_and_shape_of_field(const unsigned &fld,
-                                       const Vector<double> &s,
-                                       Shape &psi)
+    double jacobian_and_shape_of_field(const unsigned& fld,
+                                       const Vector<double>& s,
+                                       Shape& psi)
     {
-      unsigned n_dim=this->dim();
-      unsigned n_node=this->nnode();
+      unsigned n_dim = this->dim();
+      unsigned n_node = this->nnode();
 
-      if (fld==n_dim)
+      if (fld == n_dim)
       {
-        //We are dealing with the pressure
-        this->pshape_nst(s,psi);
+        // We are dealing with the pressure
+        this->pshape_nst(s, psi);
 
-        Shape psif(n_node),testf(n_node);
-        DShape dpsifdx(n_node,n_dim), dtestfdx(n_node,n_dim);
+        Shape psif(n_node), testf(n_node);
+        DShape dpsifdx(n_node, n_dim), dtestfdx(n_node, n_dim);
 
-        //Domain Shape
-        double J=this->dshape_and_dtest_eulerian_nst(s,psif,dpsifdx,
-                 testf,dtestfdx);
+        // Domain Shape
+        double J = this->dshape_and_dtest_eulerian_nst(
+          s, psif, dpsifdx, testf, dtestfdx);
         return J;
       }
       else
       {
         Shape testf(n_node);
-        DShape dpsifdx(n_node,n_dim), dtestfdx(n_node,n_dim);
+        DShape dpsifdx(n_node, n_dim), dtestfdx(n_node, n_dim);
 
-        //Domain Shape
-        double J=this->dshape_and_dtest_eulerian_nst(s,psi,dpsifdx,
-                 testf,dtestfdx);
+        // Domain Shape
+        double J =
+          this->dshape_and_dtest_eulerian_nst(s, psi, dpsifdx, testf, dtestfdx);
         return J;
       }
     }
 
 
-
-    /// \short Return interpolated field fld at local coordinate s, at time level
-    /// t (t=0: present; t>0: history values)
-    double get_field(const unsigned &t,
-                     const unsigned &fld,
+    /// \short Return interpolated field fld at local coordinate s, at time
+    /// level t (t=0: present; t>0: history values)
+    double get_field(const unsigned& t,
+                     const unsigned& fld,
                      const Vector<double>& s)
     {
-      unsigned n_dim =this->dim();
+      unsigned n_dim = this->dim();
 
-      //If fld=n_dim, we deal with the pressure
-      if (fld==n_dim)
+      // If fld=n_dim, we deal with the pressure
+      if (fld == n_dim)
       {
         return this->interpolated_p_nst(s);
       }
       // Velocity
       else
       {
-        return this->interpolated_u_nst(t,s,fld);
+        return this->interpolated_u_nst(t, s, fld);
       }
     }
 
 
-    ///Return number of values in field fld
-    unsigned nvalue_of_field(const unsigned &fld)
+    /// Return number of values in field fld
+    unsigned nvalue_of_field(const unsigned& fld)
     {
-      if (fld==this->dim())
+      if (fld == this->dim())
       {
         return this->npres_nst();
       }
@@ -3175,21 +3277,19 @@ namespace oomph
     }
 
 
-    ///Return local equation number of value j in field fld.
-    int local_equation(const unsigned &fld,
-                       const unsigned &j)
+    /// Return local equation number of value j in field fld.
+    int local_equation(const unsigned& fld, const unsigned& j)
     {
-      if (fld==this->dim())
+      if (fld == this->dim())
       {
         return this->p_local_eqn(j);
       }
       else
       {
         const unsigned u_nodal_index = this->u_index_nst(fld);
-        return this->nodal_local_eqn(j,u_nodal_index);
+        return this->nodal_local_eqn(j, u_nodal_index);
       }
     }
-
   };
 
 
@@ -3198,7 +3298,7 @@ namespace oomph
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableCrouzeixRaviartElement<ELEMENT> >
+  class FaceGeometry<ProjectableCrouzeixRaviartElement<ELEMENT>>
     : public virtual FaceGeometry<ELEMENT>
   {
   public:
@@ -3211,14 +3311,14 @@ namespace oomph
   /// that for the underlying wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<FaceGeometry<ProjectableCrouzeixRaviartElement<ELEMENT> > >
-    : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+  class FaceGeometry<FaceGeometry<ProjectableCrouzeixRaviartElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
-    FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+    FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
 
 
-}
+} // namespace oomph
 
 #endif

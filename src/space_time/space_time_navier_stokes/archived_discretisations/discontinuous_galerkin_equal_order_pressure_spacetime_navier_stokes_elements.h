@@ -1,28 +1,28 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 // Header file for SpaceTimeNavierStokes elements
 #ifndef OOMPH_DISCONTINUOUS_GALERKIN_EQUAL_ORDER_PRESSURE_SPACETIME_NAVIER_STOKES_ELEMENTS_HEADER
 #define OOMPH_DISCONTINUOUS_GALERKIN_EQUAL_ORDER_PRESSURE_SPACETIME_NAVIER_STOKES_ELEMENTS_HEADER
@@ -37,3101 +37,3148 @@
 
 namespace oomph
 {
- //======================================================================
- /// Helper class for elements that impose Robin boundary conditions
- /// on pressure advection diffusion problem required by Fp preconditioner
- /// (class used to get around some templating issues)
- //======================================================================
- class FpPressureAdvDiffRobinBCSpaceTimeElementBase : public virtual FaceElement
- {
- public:
- 
-  /// Constructor
-  FpPressureAdvDiffRobinBCSpaceTimeElementBase() {}
- 
-  /// Empty virtual destructor
-  virtual ~FpPressureAdvDiffRobinBCSpaceTimeElementBase(){}
- 
-  /// \short This function returns the residuals for the traction
-  /// function. If compute_jacobian_flag=1 (or 0): do (or don't) compute
-  /// the Jacobian as well. 
-  virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
-   Vector<double>& residuals,
-   DenseMatrix<double>& jacobian,
-   const unsigned& compute_jacobian_flag)=0;
- };
+  //======================================================================
+  /// Helper class for elements that impose Robin boundary conditions
+  /// on pressure advection diffusion problem required by Fp preconditioner
+  /// (class used to get around some templating issues)
+  //======================================================================
+  class FpPressureAdvDiffRobinBCSpaceTimeElementBase
+    : public virtual FaceElement
+  {
+  public:
+    /// Constructor
+    FpPressureAdvDiffRobinBCSpaceTimeElementBase() {}
 
- ///////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////
+    /// Empty virtual destructor
+    virtual ~FpPressureAdvDiffRobinBCSpaceTimeElementBase() {}
 
- //======================================================================
- /// A class for elements that allow the imposition of Robin boundary
- /// conditions for the pressure advection diffusion problem in the
- /// Fp preconditioner.
- /// The geometrical information can be read from the FaceGeometry<ELEMENT> 
- /// class and and thus, we can be generic enough without the need to have
- /// a separate equations class
- //======================================================================
- template<class ELEMENT>
- class FpPressureAdvDiffRobinBCSpaceTimeElement :
-  public virtual FaceGeometry<ELEMENT>, 
-  public virtual FaceElement, 
-  public virtual FpPressureAdvDiffRobinBCSpaceTimeElementBase 
- { 
- public:
- 
-  /// \short Constructor, which takes a "bulk" element and the value of the
-  /// index and its limit. Optional boolean flag indicates if it's called
-  /// refineable constructor.
-  FpPressureAdvDiffRobinBCSpaceTimeElement(
-   FiniteElement* const& element_pt, 
-   const int& face_index,
-   const bool& called_from_refineable_constructor=false) :
-   FaceGeometry<ELEMENT>(),
-   FaceElement()
-  { 
-   // Attach the geometrical information to the element. N.B. This function
-   // also assigns nbulk_value from the required_nvalue of the bulk element
-   element_pt->build_face_element(face_index,this);
-   
-#ifdef PARANOID
-   // Check that the element is not a refineable 3D element
-   if (!called_from_refineable_constructor)
-   {
-    // If it's a three-dimensional element
-    if (element_pt->dim()==3)
+    /// \short This function returns the residuals for the traction
+    /// function. If compute_jacobian_flag=1 (or 0): do (or don't) compute
+    /// the Jacobian as well.
+    virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& compute_jacobian_flag) = 0;
+  };
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+  //======================================================================
+  /// A class for elements that allow the imposition of Robin boundary
+  /// conditions for the pressure advection diffusion problem in the
+  /// Fp preconditioner.
+  /// The geometrical information can be read from the FaceGeometry<ELEMENT>
+  /// class and and thus, we can be generic enough without the need to have
+  /// a separate equations class
+  //======================================================================
+  template<class ELEMENT>
+  class FpPressureAdvDiffRobinBCSpaceTimeElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual FaceElement,
+      public virtual FpPressureAdvDiffRobinBCSpaceTimeElementBase
+  {
+  public:
+    /// \short Constructor, which takes a "bulk" element and the value of the
+    /// index and its limit. Optional boolean flag indicates if it's called
+    /// refineable constructor.
+    FpPressureAdvDiffRobinBCSpaceTimeElement(
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const bool& called_from_refineable_constructor = false)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
-     // Upcast the element to a RefineableElement
-     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(element_pt);
-     
-     // Is it actually refineable?
-     if (ref_el_pt!=0)
-     {
-      // If it is refineable then check if it has any hanging nodes 
-      if (this->has_hanging_nodes())
+      // Attach the geometrical information to the element. N.B. This function
+      // also assigns nbulk_value from the required_nvalue of the bulk element
+      element_pt->build_face_element(face_index, this);
+
+#ifdef PARANOID
+      // Check that the element is not a refineable 3D element
+      if (!called_from_refineable_constructor)
       {
-       // Create an output stream
-       std::ostringstream error_message_stream;
+        // If it's a three-dimensional element
+        if (element_pt->dim() == 3)
+        {
+          // Upcast the element to a RefineableElement
+          RefineableElement* ref_el_pt =
+            dynamic_cast<RefineableElement*>(element_pt);
 
-       // Create an error message
-       error_message_stream << "This flux element will not work correctly "
-			    << "if nodes are hanging!" << std::endl;
+          // Is it actually refineable?
+          if (ref_el_pt != 0)
+          {
+            // If it is refineable then check if it has any hanging nodes
+            if (this->has_hanging_nodes())
+            {
+              // Create an output stream
+              std::ostringstream error_message_stream;
 
-       // Throw an error message
-       throw OomphLibError(error_message_stream.str(),
-			   OOMPH_CURRENT_FUNCTION,
-			   OOMPH_EXCEPTION_LOCATION);
+              // Create an error message
+              error_message_stream
+                << "This flux element will not work correctly "
+                << "if nodes are hanging!" << std::endl;
+
+              // Throw an error message
+              throw OomphLibError(error_message_stream.str(),
+                                  OOMPH_CURRENT_FUNCTION,
+                                  OOMPH_EXCEPTION_LOCATION);
+            }
+          } // if (ref_el_pt!=0)
+        } // if (element_pt->dim()==3)
+      } // if (!called_from_refineable_constructor)
+#endif
+    } // End of FpPressureAdvDiffRobinBCSpaceTimeElement
+
+
+    /// Empty destructor
+    ~FpPressureAdvDiffRobinBCSpaceTimeElement() {}
+
+
+    /// \short This function returns the residuals for the traction
+    /// function. flag=1 (or 0): do (or don't) compute the Jacobian
+    /// as well.
+    virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
+
+
+    /// This function returns just the residuals
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      // Create an output stream
+      std::ostringstream error_message;
+
+      // Create an error message
+      error_message << "fill_in_contribution_to_residuals() must not be "
+                    << "called directly.\nsince it uses the local equation "
+                    << "numbering of the bulk element\nwhich calls the "
+                    << "relevant helper function directly." << std::endl;
+
+      // Throw an error
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    } // End of fill_in_contribution_to_residuals
+
+
+    /// This function returns the residuals and the jacobian
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
+    {
+      // Create an output stream
+      std::ostringstream error_message;
+
+      // Create an error message
+      error_message << "fill_in_contribution_to_jacobian() must not be "
+                    << "called directly.\nsince it uses the local equation "
+                    << "numbering of the bulk element\nwhich calls the "
+                    << "relevant helper function directly." << std::endl;
+
+      // Throw an error
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    } // End of fill_in_contribution_to_jacobian
+
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      // Call the output function from the FiniteElement base class
+      FiniteElement::output(outfile);
+    } // End of output
+
+
+    /// Output function: x,y,[z],u,v,[w],p in tecplot format
+    void output(std::ostream& outfile, const unsigned& nplot)
+    {
+      // Call the output function from the FiniteElement base class
+      FiniteElement::output(outfile, nplot);
+    } // End of output
+  };
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+  //============================================================================
+  /// Get residuals and Jacobian of Robin boundary conditions in pressure
+  /// advection diffusion problem in Fp preconditoner
+  /// NOTE: Care has to be taken here as fluxes are spatially dependent and
+  /// not temporally dependent but the template elements are space-time
+  /// elements!
+  //============================================================================
+  template<class ELEMENT>
+  void FpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>::
+    fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
+  {
+    // Throw a warning
+    throw OomphLibError("You shouldn't be using this just yet!",
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+
+    // Get the dimension of the element
+    // DRAIG: Should be 2 as bulk (space-time) element is 3D...
+    unsigned my_dim = this->dim();
+
+    // Storage for local coordinates in FaceElement
+    Vector<double> s(my_dim, 0.0);
+
+    // Storage for local coordinates in the associated bulk element
+    Vector<double> s_bulk(my_dim + 1, 0.0);
+
+    // Storage for outer unit normal
+    // DRAIG: Need to be careful here...
+    Vector<double> unit_normal(my_dim + 1, 0.0);
+
+    // Storage for velocity in bulk element
+    // DRAIG: Need to be careful here...
+    Vector<double> velocity(my_dim, 0.0);
+
+    // Set the value of n_intpt
+    unsigned n_intpt = this->integral_pt()->nweight();
+
+    // Integer to store local equation number
+    int local_eqn = 0;
+
+    // Integer to store local unknown number
+    int local_unknown = 0;
+
+    // Get upcast bulk element
+    ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
+
+    // Find out how many pressure dofs there are in the bulk element
+    unsigned n_pres = bulk_el_pt->npres_nst();
+
+    // Get the Reynolds number from the bulk element
+    double re = bulk_el_pt->re();
+
+    // Set up memory for pressure shape functions
+    Shape psip(n_pres);
+
+    // Set up memory for pressure test functions
+    Shape testp(n_pres);
+
+    // Loop over the integration points
+    for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+    {
+      // Get the integral weight
+      double w = this->integral_pt()->weight(ipt);
+
+      // Assign values of local coordinate in FaceElement
+      for (unsigned i = 0; i < my_dim; i++)
+      {
+        // Get the i-th local coordinate at this knot point
+        s[i] = this->integral_pt()->knot(ipt, i);
       }
-     } // if (ref_el_pt!=0)
-    } // if (element_pt->dim()==3)
-   } // if (!called_from_refineable_constructor)
-#endif   
-  } // End of FpPressureAdvDiffRobinBCSpaceTimeElement
 
-  
-  /// Empty destructor
-  ~FpPressureAdvDiffRobinBCSpaceTimeElement(){}
+      // Find corresponding coordinate in the bulk element
+      s_bulk = this->local_coordinate_in_bulk(s);
 
-  
-  /// \short This function returns the residuals for the traction
-  /// function. flag=1 (or 0): do (or don't) compute the Jacobian
-  /// as well. 
-  virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
-   Vector<double>& residuals, 
-   DenseMatrix<double>& jacobian, 
-   const unsigned& flag);
- 
+      // Get outer unit normal
+      // DRAIG: Make sure the normal is calculated properly; i.e.
+      // the normal needs to be calculated in the spatial direction
+      // and NOT in the temporal direction!!!
+      this->outer_unit_normal(ipt, unit_normal);
 
-  /// This function returns just the residuals
-  inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
-  {
-   // Create an output stream
-   std::ostringstream error_message;
+      // Get velocity in bulk element
+      bulk_el_pt->interpolated_u_nst(s_bulk, velocity);
 
-   // Create an error message
-   error_message << "fill_in_contribution_to_residuals() must not be "
-		 << "called directly.\nsince it uses the local equation "
-		 << "numbering of the bulk element\nwhich calls the "
-		 << "relevant helper function directly." << std::endl;
+      // Get normal component of velocity
+      double flux = 0.0;
 
-   // Throw an error
-   throw OomphLibError(error_message.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  } // End of fill_in_contribution_to_residuals
-
-  
-  /// This function returns the residuals and the jacobian
-  inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
-					       DenseMatrix<double>& jacobian)
-  {
-   // Create an output stream
-   std::ostringstream error_message;
-
-   // Create an error message
-   error_message << "fill_in_contribution_to_jacobian() must not be "
-		 << "called directly.\nsince it uses the local equation "
-		 << "numbering of the bulk element\nwhich calls the "
-		 << "relevant helper function directly." << std::endl;
-
-   // Throw an error
-   throw OomphLibError(error_message.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  } // End of fill_in_contribution_to_jacobian
-  
- 
-  /// Overload the output function
-  void output(std::ostream& outfile)
-  {
-   // Call the output function from the FiniteElement base class 
-   FiniteElement::output(outfile);
-  } // End of output
-  
- 
-  /// Output function: x,y,[z],u,v,[w],p in tecplot format
-  void output(std::ostream& outfile, const unsigned& nplot)
-  {
-   // Call the output function from the FiniteElement base class
-   FiniteElement::output(outfile,nplot);
-  } // End of output
- };
-
- ///////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////
-
- //============================================================================
- /// Get residuals and Jacobian of Robin boundary conditions in pressure
- /// advection diffusion problem in Fp preconditoner
- /// NOTE: Care has to be taken here as fluxes are spatially dependent and
- /// not temporally dependent but the template elements are space-time
- /// elements!
- //============================================================================
- template<class ELEMENT>
- void FpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>::
- fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
-  Vector<double>& residuals, 
-  DenseMatrix<double>& jacobian, 
-  const unsigned& flag)
- {
-  // Throw a warning
-  throw OomphLibError("You shouldn't be using this just yet!",
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
-  
-  // Get the dimension of the element
-  // DRAIG: Should be 2 as bulk (space-time) element is 3D...
-  unsigned my_dim=this->dim();
-  
-  // Storage for local coordinates in FaceElement
-  Vector<double> s(my_dim,0.0);
-  
-  // Storage for local coordinates in the associated bulk element
-  Vector<double> s_bulk(my_dim+1,0.0);
- 
-  // Storage for outer unit normal
-  // DRAIG: Need to be careful here...
-  Vector<double> unit_normal(my_dim+1,0.0);
- 
-  // Storage for velocity in bulk element
-  // DRAIG: Need to be careful here...
-  Vector<double> velocity(my_dim,0.0);
- 
-  // Set the value of n_intpt
-  unsigned n_intpt=this->integral_pt()->nweight();
- 
-  // Integer to store local equation number
-  int local_eqn=0;
-  
-  // Integer to store local unknown number
-  int local_unknown=0;
- 
-  // Get upcast bulk element
-  ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(this->bulk_element_pt());
- 
-  // Find out how many pressure dofs there are in the bulk element
-  unsigned n_pres=bulk_el_pt->npres_nst();
- 
-  // Get the Reynolds number from the bulk element
-  double re=bulk_el_pt->re();
- 
-  // Set up memory for pressure shape functions
-  Shape psip(n_pres);
-  
-  // Set up memory for pressure test functions
-  Shape testp(n_pres);
- 
-  // Loop over the integration points
-  for (unsigned ipt=0;ipt<n_intpt;ipt++)
-  {
-   // Get the integral weight
-   double w=this->integral_pt()->weight(ipt);
-   
-   // Assign values of local coordinate in FaceElement
-   for (unsigned i=0;i<my_dim;i++)
-   {
-    // Get the i-th local coordinate at this knot point
-    s[i]=this->integral_pt()->knot(ipt,i);
-   }
-   
-   // Find corresponding coordinate in the bulk element
-   s_bulk=this->local_coordinate_in_bulk(s);
-   
-   // Get outer unit normal
-   // DRAIG: Make sure the normal is calculated properly; i.e.
-   // the normal needs to be calculated in the spatial direction
-   // and NOT in the temporal direction!!!
-   this->outer_unit_normal(ipt,unit_normal);
-   
-   // Get velocity in bulk element
-   bulk_el_pt->interpolated_u_nst(s_bulk,velocity);
-   
-   // Get normal component of velocity
-   double flux=0.0;
-
-   // Loop over the velocity components
-   for (unsigned i=0;i<my_dim;i++)
-   {
-    // Update the flux quantity
-    flux+=velocity[i]*unit_normal[i];
-   }
-   
-   // Modify BC: If outflow (flux>0) apply Neumann condition instead
-   if (flux>0.0)
-   {
-    // Apply no flux condition
-    flux=0.0;
-   }
-
-   // Get the pressure at these local coordinates
-   double interpolated_press=bulk_el_pt->interpolated_p_nst(s_bulk);
-   
-   // Call the pressure shape and test functions in bulk element
-   bulk_el_pt->pshape_nst(s_bulk,psip,testp);
-   
-   // Find the Jacobian of the mapping within the FaceElement
-   double J=this->J_eulerian(s);
-   
-   // Premultiply the weights and the Jacobian
-   double W=w*J;
-   
-   // Loop over the pressure shape functions in bulk
-   // (wasteful but they'll be zero on the boundary)
-   for (unsigned l=0;l<n_pres;l++)
-   {
-    // Get the local equation number associated with this pressure dof
-    local_eqn=bulk_el_pt->p_local_eqn(l);
-     
-    // If it's not a boundary condition
-    if (local_eqn>=0)
-    {
-     // Update the residuals
-     residuals[local_eqn]-=re*flux*interpolated_press*testp[l]*W;
-       
-     // If the Jacobian needs to be computed too
-     if (flag)
-     {
-      // Loop over the shape functions in bulk
-      for (unsigned l2=0;l2<n_pres;l2++)
+      // Loop over the velocity components
+      for (unsigned i = 0; i < my_dim; i++)
       {
-       // Get the equation number associated with this pressure dof
-       local_unknown=bulk_el_pt->p_local_eqn(l2);
-           
-       // If it's not a boundary condition
-       if (local_unknown>=0)
-       {
-	// Update the appropriate Jacobian entry
-	jacobian(local_eqn,local_unknown)-=re*flux*psip[l2]*testp[l]*W;
-       }
-      } // for (unsigned l2=0;l2<n_pres;l2++)
-     } // if (flag)
-    } // if (local_eqn>=0)
-   } // for (unsigned l=0;l<n_pres;l++)
-  } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
- } // End of fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc
-
- ///////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////
-
- //======================================================================
- /// Template-free base class for Navier-Stokes equations to avoid
- /// casting problems
- //======================================================================
- class TemplateFreeSpaceTimeNavierStokesEquationsBase : 
-  public virtual NavierStokesElementWithDiagonalMassMatrices,
-  public virtual FiniteElement
- {
-
- public:
-
-  /// Constructor (empty)
-  TemplateFreeSpaceTimeNavierStokesEquationsBase(){};
-
-  
-  /// Virtual destructor (empty)
-  virtual ~TemplateFreeSpaceTimeNavierStokesEquationsBase(){};
-
-  
-  /// \short Compute the residuals for the associated pressure advection 
-  /// diffusion problem. Used by the Fp preconditioner.
-  virtual void fill_in_pressure_advection_diffusion_residuals(Vector<double>& 
-							      residuals)=0;
-
-  
-  /// \short Compute the residuals and Jacobian for the associated 
-  /// pressure advection diffusion problem. Used by the Fp preconditioner.
-  virtual void fill_in_pressure_advection_diffusion_jacobian(
-   Vector<double>& residuals,
-   DenseMatrix<double>& jacobian)=0;
-
-  
-  /// \short Return the index at which the pressure is stored if it is
-  /// stored at the nodes. If not stored at the nodes this will return 
-  /// a negative number.
-  virtual int p_nodal_index_nst() const=0;
-
-  
-  /// \short Access function for the local equation number information for
-  /// the pressure.
-  /// p_local_eqn[n] = local equation number or < 0 if pinned
-  virtual int p_local_eqn(const unsigned& n) const=0;
-
-  
-  /// \short Global eqn number of pressure dof that's pinned in pressure
-  /// adv diff problem
-  virtual int& pinned_fp_pressure_eqn()=0;
-
-
-  /// \short Pin all non-pressure dofs and backup eqn numbers of all Data
-  virtual void pin_all_non_pressure_dofs(std::map<Data*,std::vector<int> >& 
-					 eqn_number_backup)=0;
-
-  
-  /// \short Build FaceElements that apply the Robin boundary condition
-  /// to the pressure advection diffusion problem required by 
-  /// Fp preconditioner
-  virtual void build_fp_press_adv_diff_robin_bc_element(const unsigned& 
-							face_index)=0;
-
-  
-  /// \short Delete the FaceElements that apply the Robin boundary condition
-  /// to the pressure advection diffusion problem required by 
-  /// Fp preconditioner
-  virtual void delete_pressure_advection_diffusion_robin_elements()=0;
-
-
-  /// \short Compute the diagonal of the velocity/pressure mass matrices.
-  /// If which one=0, both are computed, otherwise only the pressure 
-  /// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
-  /// LSC version of the preconditioner only needs that one)
-  virtual void get_pressure_and_velocity_mass_matrix_diagonal(
-   Vector<double>& press_mass_diag,
-   Vector<double>& veloc_mass_diag,
-   const unsigned& which_one=0)=0;
- };
- 
- ///////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////
-
- //======================================================================
- /// A class for elements that solve the Cartesian Navier-Stokes
- /// equations, templated by the dimension DIM.
- /// This contains the generic maths -- any concrete implementation must
- /// be derived from this.
- ///
- /// We're solving:
- ///
- ///  \f$ { Re \left( St \frac{\partial u_i}{\partial t}+
- ///              (u_j-u_j^{M}) \frac{\partial u_i}{\partial x_j} \right)=
- ///     -\frac{\partial p}{\partial x_i} -R_\rho B_i(x_j) -
- ///       \frac{Re}{Fr} G_i +
- ///        \frac{\partial }{\partial x_j} \left[  R_\mu \left(
- ///        \frac{\partial u_i}{\partial x_j}+
- ///         \frac{\partial u_j}{\partial x_i} \right) \right] } \f$
- ///
- ///  and
- ///
- ///  \f$ { \frac{\partial u_i}{\partial x_i}=Q } \f$
- ///
- /// We also provide all functions required to use this element
- /// in FSI problems, by deriving it from the FSIFluidElement base
- /// class.
- ///
- /// --------------------
- /// SPACE-TIME ELEMENTS:
- /// --------------------
- /// The space-time extension is written ONLY for the 2D Navier-Stokes 
- /// equations. The result is a 3D problem (x,y,t) to be solved on a
- /// 3D mesh. The template parameter DIM now corresponds to the
- /// dimension of the space-time problem (i.e. DIM=3 for the 2D flow).
- //======================================================================
- template<unsigned DIM>
- class SpaceTimeNavierStokesEquations
-  : public virtual FSIFluidElement,
-    public virtual TemplateFreeSpaceTimeNavierStokesEquationsBase
- {
- public:
-
-  /// \short Function pointer to body force function fct(t,x,f(x))
-  /// x is a Vector!
-  typedef void (*NavierStokesBodyForceFctPt)(const double& time,
-					     const Vector<double>& x,
-					     Vector<double>& body_force);
-
-  /// \short Function pointer to source function fct(t,x) (x is a Vector!)
-  typedef double (*NavierStokesSourceFctPt)(const double& time,
-					    const Vector<double>& x);
-
-  /// \short Function pointer to source function fct(x) for the
-  /// pressure advection diffusion equation (only used during
-  /// validation!). x is a Vector!
-  typedef double (*NavierStokesPressureAdvDiffSourceFctPt)
-  (const Vector<double>& x);
-   
- private:
-
-  /// \short Static "magic" number that indicates that the pressure is
-  /// not stored at a node
-  static int Pressure_not_stored_at_node;
-
-  /// Static default value for the physical constants (all initialised to zero)
-  static double Default_Physical_Constant_Value;
-
-  /// Static default value for the physical ratios (all are initialised to one)
-  static double Default_Physical_Ratio_Value;
-
-  /// Static default value for the gravity vector
-  static Vector<double> Default_Gravity_vector;
-
- protected:
-
-  // Physical constants:
-
-  /// \short Pointer to the viscosity ratio (relative to the
-  /// viscosity used in the definition of the Reynolds number)
-  double* Viscosity_Ratio_pt;
-
-  /// \short Pointer to the density ratio (relative to the density used in the
-  /// definition of the Reynolds number)
-  double* Density_Ratio_pt;
-
-  // Pointers to global physical constants:
-
-  /// Pointer to global Reynolds number
-  double* Re_pt;
-
-  /// Pointer to global Reynolds number x Strouhal number (=Womersley)
-  double* St_pt;
-
-  /// \short Boolean to indicate whether or not the Strouhal value is
-  /// stored as external data (if it's also an unknown of the problem)
-  bool Strouhal_is_stored_as_external_data;
-  
-  /// \short Pointer to global Reynolds number x inverse Froude number
-  /// (= Bond number / Capillary number)
-  double* ReInvFr_pt;
-
-  /// Pointer to global gravity Vector
-  Vector<double>* G_pt;
-
-  /// Pointer to body force function
-  NavierStokesBodyForceFctPt Body_force_fct_pt;
-
-  /// Pointer to volumetric source function
-  NavierStokesSourceFctPt Source_fct_pt;
-
-  /// \short Pointer to source function pressure advection diffusion equation
-  /// (only to be used during validation)
-  NavierStokesPressureAdvDiffSourceFctPt Press_adv_diff_source_fct_pt;
-
-  /// \short Boolean flag to indicate if ALE formulation is disabled when
-  /// time-derivatives are computed. Only set to true if you're sure
-  /// that the mesh is stationary.
-  bool ALE_is_disabled;
-
-  /// \short Storage for FaceElements that apply Robin BC for pressure adv diff
-  /// equation used in Fp preconditioner.
-  Vector<FpPressureAdvDiffRobinBCSpaceTimeElementBase*>
-  Pressure_advection_diffusion_robin_element_pt;
- 
-  /// \short Global eqn number of pressure dof that's pinned in
-  /// pressure advection diffusion problem (defaults to -1)
-  int Pinned_fp_pressure_eqn;
-
-  
-  /// \short Compute the shape functions and derivatives
-  /// w.r.t. global coords at local coordinate s.
-  /// Return Jacobian of mapping between local and global coordinates.
-  virtual double dshape_and_dtest_eulerian_nst(const Vector<double>& s,
-					       Shape& psi,
-					       DShape& dpsidx,
-					       Shape& test,
-					       DShape& dtestdx) const=0;
-
- 
-  /// \short Compute the shape functions and derivatives
-  /// w.r.t. global coords at ipt-th integration point
-  /// Return Jacobian of mapping between local and global coordinates.
-  virtual double dshape_and_dtest_eulerian_at_knot_nst(const unsigned& ipt,
-						       Shape& psi,
-						       DShape& dpsidx,
-						       Shape& test,
-						       DShape& dtestdx) const=0;
-
- 
-  /// \short Shape/test functions and derivs w.r.t. to global coords at
-  /// integration point ipt; return Jacobian of mapping (J). Also compute
-  /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
-  virtual double dshape_and_dtest_eulerian_at_knot_nst(
-   const unsigned& ipt,
-   Shape& psi,
-   DShape& dpsidx,
-   RankFourTensor<double>& d_dpsidx_dX,
-   Shape& test,
-   DShape& dtestdx,
-   RankFourTensor<double>& d_dtestdx_dX,
-   DenseMatrix<double>& djacobian_dX) const=0;
-
- 
-  /// \short Pressure shape functions and their derivs w.r.t. to global coords
-  /// at local coordinate s (taken from geometry). Return Jacobian of mapping
-  /// between local and global coordinates.
-  virtual double dpshape_eulerian(const Vector<double>& s, 
-				  Shape& ppsi, 
-				  DShape& dppsidx) const=0;
-  
-
-  /// \short Pressure test functions and their derivs w.r.t. to global coords
-  /// at local coordinate s (taken from geometry). Return Jacobian of mapping
-  /// between local and global coordinates.
-  virtual double dptest_eulerian(const Vector<double>& s, 
-				 Shape& ptest, 
-				 DShape& dptestdx) const=0;
-
-  
-  /// \short Compute the pressure shape and test functions and derivatives
-  /// w.r.t. global coords at local coordinate s.
-  /// Return Jacobian of mapping between local and global coordinates.
-  virtual double dpshape_and_dptest_eulerian_nst(const Vector<double>& s,
-						 Shape& ppsi,
-						 DShape& dppsidx,
-						 Shape& ptest,
-						 DShape& dptestdx) const=0;
-
- 
-  /// \short Calculate the body force at a given time and local and/or
-  /// Eulerian position. This function is virtual so that it can be
-  /// overloaded in multi-physics elements where the body force might
-  /// depend on another variable.
-  virtual void get_body_force_nst(const double& time,
-				  const unsigned& ipt,
-				  const Vector<double>& s,
-				  const Vector<double>& x,
-				  Vector<double>& result)
-  {
-   // If a function has not been provided
-   if (Body_force_fct_pt==0)
-   {
-    // Set the body forces to zero
-    result.initialise(0.0);
-   }
-   // If the function pointer is non-zero
-   else
-   {
-    // Call the function
-    (*Body_force_fct_pt)(time,x,result);
-   } // if (Body_force_fct_pt!=0)
-  } // End of get_body_force_nst
-
- 
-  /// Get gradient of body force term at (Eulerian) position x. This function
-  /// is virtual to allow overloading in multi-physics problems where
-  /// the strength of the source function might be determined by another
-  /// system of equations. Computed via function pointer (if set) or by
-  /// finite differencing (default)
-  inline virtual void get_body_force_gradient_nst(
-   const double& time,
-   const unsigned& ipt,
-   const Vector<double>& s,
-   const Vector<double>& x,
-   DenseMatrix<double>& d_body_force_dx)
-  {
-   // Reference value
-   Vector<double> body_force(DIM,0.0);
-
-   // Get the body force vector
-   get_body_force_nst(time,ipt,s,x,body_force);
-
-   // Get the finite-difference step size
-   double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
-
-   // The body force computed at the perturbed coordinates
-   Vector<double> body_force_pls(DIM,0.0);
-
-   // Copy the (Eulerian) coordinate vector x
-   Vector<double> x_pls(x);
-
-   // Loop over the coordinate directions
-   for (unsigned i=0;i<DIM;i++)
-   {
-    // Update the i-th entry
-    x_pls[i]+=eps_fd;
-
-    // Get the body force at the current time
-    get_body_force_nst(time,ipt,s,x_pls,body_force_pls);
-
-    // Loop over the coordinate directions
-    for (unsigned j=0;j<DIM;j++)
-    {
-     // Finite-difference the body force derivative
-     d_body_force_dx(j,i)=(body_force_pls[j]-body_force[j])/eps_fd;
-    }
-
-    // Reset the i-th entry
-    x_pls[i]=x[i];
-   }
-  } // End of get_body_force_gradient_nst
-
- 
-  /// \short Calculate the source fct at a given time and Eulerian position
-  virtual double get_source_nst(const double& time,
-				const unsigned& ipt,
-				const Vector<double>& x)
-  {
-   // If the function pointer is null
-   if (Source_fct_pt==0)
-   {
-    // Set the source function value to zero
-    return 0;
-   }
-   // Otherwise call the function pointer
-   else
-   {
-    // Return the appropriate value
-    return (*Source_fct_pt)(time,x);
-   }
-  } // End of get_source_nst
-
-
-  /// Get gradient of source term at (Eulerian) position x. This function
-  /// is virtual to allow overloading in multi-physics problems where the
-  /// strength of the source function might be determined by another system
-  /// of equations. Computed via function pointer (if set) or by finite
-  /// differencing (default)
-  inline virtual void get_source_gradient_nst(const double& time,
-					      const unsigned& ipt,
-					      const Vector<double>& x,
-					      Vector<double>& gradient)
-  {
-   // Reference value
-   double source=get_source_nst(time,ipt,x);
-
-   // Get the finite-difference step size
-   double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
-
-   // The source function value computed at the perturbed coordinates
-   double source_pls=0.0;
-
-   // Copy the (Eulerian) coordinate vector, x
-   Vector<double> x_pls(x);
-
-   // Loop over the coordinate directions
-   for (unsigned i=0;i<DIM;i++)
-   {
-    // Update the i-th entry
-    x_pls[i]+=eps_fd;
-
-    // Get the body force at the current time
-    source_pls=get_source_nst(time,ipt,x_pls);
-
-    // Loop over the coordinate directions
-    for (unsigned j=0;j<DIM;j++)
-    {
-     // Finite-difference the source function gradient
-     gradient[i]=(source_pls-source)/eps_fd;
-    }
-
-    // Reset the i-th entry
-    x_pls[i]=x[i];
-   }
-  } // End of get_source_gradient_nst
-
-
-  ///\short Compute the residuals for the Navier-Stokes equations.
-  /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
-  /// Flag=2: Fill in mass matrix too.
-  virtual void fill_in_generic_residual_contribution_nst(
-   Vector<double>& residuals,
-   DenseMatrix<double>& jacobian,
-   DenseMatrix<double>& mass_matrix,
-   const unsigned& flag);
-
-
-  /// \short Compute the residuals for the associated pressure advection
-  /// diffusion problem. Used by the Fp preconditioner.
-  /// flag=1(or 0): do (or don't) compute the Jacobian as well.
-  virtual void fill_in_generic_pressure_advection_diffusion_contribution_nst(
-   Vector<double>& residuals,
-   DenseMatrix<double>& jacobian,
-   const unsigned& flag);
-
- 
-  ///\short Compute the derivatives of the
-  /// residuals for the Navier-Stokes equations with respect to a parameter
-  /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
-  /// Flag=2: Fill in mass matrix too.
-  virtual void fill_in_generic_dresidual_contribution_nst(
-   double* const& parameter_pt,
-   Vector<double>& dres_dparam,
-   DenseMatrix<double>& djac_dparam,
-   DenseMatrix<double>& dmass_matrix_dparam,
-   const unsigned& flag);
-
- 
-  /// \short Compute the hessian tensor vector products required to
-  /// perform continuation of bifurcations analytically
-  void fill_in_contribution_to_hessian_vector_products(
-   Vector<double> const& Y,
-   DenseMatrix<double> const& C,
-   DenseMatrix<double>& product);
-
- public:
-
-  /// \short Constructor: NULL the body force and source function
-  /// and make sure the ALE terms are included by default.
-  SpaceTimeNavierStokesEquations() : Body_force_fct_pt(0),
-				     Source_fct_pt(0),
-				     Press_adv_diff_source_fct_pt(0),
-				     ALE_is_disabled(false),
-				     Pinned_fp_pressure_eqn(-1)
-  {
-   // Set all the Physical parameter pointers:
-
-   // Set the Reynolds number to the value zero 
-   Re_pt=&Default_Physical_Constant_Value;
-  
-   // Set the Strouhal number to the value zero
-   St_pt=&Default_Physical_Constant_Value;
-  
-   // The Strouhal number (which is a proxy for the period here) is not
-   // stored as external data
-   Strouhal_is_stored_as_external_data=false;
-   
-   // Set the Reynolds / Froude value to zero
-   ReInvFr_pt=&Default_Physical_Constant_Value;
-  
-   // Set the gravity vector to be the zero vector
-   G_pt=&Default_Gravity_vector;
-   
-   // Set the Physical ratios:
-
-   // Set the viscosity ratio to the value one
-   Viscosity_Ratio_pt=&Default_Physical_Ratio_Value;
-  
-   // Set the density ratio to the value one
-   Density_Ratio_pt=&Default_Physical_Ratio_Value;
-  }
-
-  /// Vector to decide whether the stress-divergence form is used or not
-  /// N.B. This needs to be public so that the intel compiler gets things
-  /// correct somehow the access function messes things up when going to
-  /// refineable Navier-Stokes
-  static Vector<double> Gamma;
-
-
-  /// Function that tells us whether the period is stored as external data
-  void store_strouhal_as_external_data(Data* strouhal_data_pt)
-  {
-#ifdef PARANOID
-   // Sanity check; make sure it's not a null pointer
-   if (strouhal_data_pt==0)
-   {
-    // Create an output stream
-    std::ostringstream error_message_stream;
-
-    // Create an error message
-    error_message_stream << "User supplied Strouhal number as external data\n"
-			 << "but the pointer provided is a null pointer!"
-			 << std::endl;
-    
-    // Throw an error
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-   // Set the Strouhal value pointer (the Strouhal number is stored as the
-   // only piece of internal data in the phase condition element)
-   this->add_external_data(strouhal_data_pt);
-   
-   // Indicate that the Strouhal number is store as external data
-   Strouhal_is_stored_as_external_data=true;   
-  } // End of store_strouhal_as_external_data
-
-  
-  // Access functions for the physical constants:
-
-  /// Reynolds number
-  const double& re() const
-  {
-   // Use the Reynolds number pointer to get the Reynolds value
-   return *Re_pt;
-  } // End of re
-
-  
-  /// Pointer to Reynolds number
-  double*& re_pt()
-  {
-   // Return the Reynolds number pointer
-   return Re_pt;
-  } // End of re_pt
-
-
-  /// Are we storing the Strouhal number as external data?
-  bool is_strouhal_stored_as_external_data() const
-  {
-   // Return the flags value
-   return Strouhal_is_stored_as_external_data;
-  } // End of is_strouhal_stored_as_external_data
-  
-  
-  /// Strouhal parameter (const. version)
-  const double& st() const
-  {
-   // If the st is stored as external data
-   if (Strouhal_is_stored_as_external_data)
-   {
-    // The index of the external data (which contains the st)
-    unsigned data_index=0;
-
-    // The index of the value at which the Strouhal is stored
-    unsigned strouhal_index=0;
-    
-    // Return the value of the st in the external data
-    return *(this->external_data_pt(data_index)->value_pt(strouhal_index));
-   }
-   // Otherwise the st is just stored as a pointer
-   else
-   {
-    // Return the value of St
-    return *St_pt;
-   }
-  } // End of st
-  
-  
-  /// Pointer to Strouhal parameter (const. version)
-  double* st_pt() const
-  {
-   // If the strouhal is stored as external data
-   if (Strouhal_is_stored_as_external_data)
-   {
-    // The index of the external data (which contains the strouhal)
-    unsigned data_index=0;
-
-    // The index of the value at which the strouhal is stored (the only value)
-    unsigned strouhal_index=0;
-    
-    // Return the value of the strouhal in the external data
-    return this->external_data_pt(data_index)->value_pt(strouhal_index);
-   }
-   // Otherwise the strouhal is just stored as a pointer
-   else
-   {
-    // Return the value of Strouhal
-    return St_pt;
-   }
-  } // End of st_pt
-
-  
-  /// Pointer to Strouhal number (can only assign to private member data)
-  double*& st_pt()
-  {
-   // Return the Strouhal number pointer
-   return St_pt;
-  } // End of st_pt
-
-  
-  /// Product of Reynolds and Strouhal number (=Womersley number)
-  double re_st() const
-  {
-   // Return the product of the appropriate physical constants
-   return (*Re_pt)*(*st_pt());
-  } // End of re_st
-  
-
-  /// \short Viscosity ratio for element: Element's viscosity relative to the
-  /// viscosity used in the definition of the Reynolds number
-  const double& viscosity_ratio() const {return *Viscosity_Ratio_pt;}
-
-  /// Pointer to Viscosity Ratio
-  double*& viscosity_ratio_pt() {return Viscosity_Ratio_pt;}
-
-  /// \short Density ratio for element: Element's density relative to the
-  ///  viscosity used in the definition of the Reynolds number
-  const double& density_ratio() const {return *Density_Ratio_pt;}
-
-  /// Pointer to Density ratio
-  double*& density_ratio_pt() {return Density_Ratio_pt;}
-
-  /// Global inverse Froude number
-  const double& re_invfr() const {return *ReInvFr_pt;}
-
-  /// Pointer to global inverse Froude number
-  double*& re_invfr_pt() {return ReInvFr_pt;}
-
-  /// Vector of gravitational components
-  const Vector<double>& g() const {return *G_pt;}
-
-  /// Pointer to Vector of gravitational components
-  Vector<double>*& g_pt() {return G_pt;}
-
-  /// Access function for the body-force pointer
-  NavierStokesBodyForceFctPt& body_force_fct_pt()
-  {return Body_force_fct_pt;}
-
-  /// Access function for the body-force pointer. Const version
-  NavierStokesBodyForceFctPt body_force_fct_pt() const
-  {return Body_force_fct_pt;}
-
-  /// Access function for the source-function pointer
-  NavierStokesSourceFctPt& source_fct_pt() {return Source_fct_pt;}
-
-  ///Access function for the source-function pointer. Const version
-  NavierStokesSourceFctPt source_fct_pt() const {return Source_fct_pt;}
-
-  /// \short Access function for the source-function pointer for pressure
-  /// advection diffusion (used for validation only).
-  NavierStokesPressureAdvDiffSourceFctPt& source_fct_for_pressure_adv_diff()
-  {return Press_adv_diff_source_fct_pt;}
-
-  /// \short Access function for the source-function pointer for pressure
-  /// advection diffusion  (used for validation only). Const version.
-  NavierStokesPressureAdvDiffSourceFctPt source_fct_for_pressure_adv_diff()
-   const {return Press_adv_diff_source_fct_pt;}
-
-  /// \short Global eqn number of pressure dof that's pinned in pressure
-  /// adv diff problem
-  int& pinned_fp_pressure_eqn()
-  {
-   // Return the appropriate equation number
-   return Pinned_fp_pressure_eqn;
-  }
-
-  /// Function to return number of pressure degrees of freedom
-  virtual unsigned npres_nst() const=0;
-
-  /// Compute the pressure shape functions at local coordinate s
-  virtual void pshape_nst(const Vector<double>& s, Shape& psi) const=0;
-
-  /// \short Compute the pressure shape and test functions
-  /// at local coordinate s
-  virtual void pshape_nst(const Vector<double>& s,
-			  Shape& psi,
-			  Shape& test) const=0;
-
-  /// \short Velocity i at local node n. Uses suitably interpolated value
-  /// for hanging nodes. The use of u_index_nst() permits the use of this
-  /// element as the basis for multi-physics elements. The default
-  /// is to assume that the i-th velocity component is stored at the
-  /// i-th location of the node
-  double u_nst(const unsigned& n, const unsigned& i) const
-  {
-   return nodal_value(n,u_index_nst(i));
-  } 
-
-  /// \short Velocity i at local node n at timestep t (t=0: present;
-  /// t>0: previous). Uses suitably interpolated value for hanging nodes.
-  double u_nst(const unsigned& t, const unsigned& n,
-	       const unsigned& i) const
-  {
-#ifdef PARANOID
-   // Since we're using space-time elements, this only makes sense if t=0
-   if (t!=0)
-   {
-    // Throw an error
-    throw OomphLibError("Space-time elements cannot have history values!",
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-#endif  
-
-   // Return the appropriate nodal value (noting that t=0 here)
-   return nodal_value(t,n,u_index_nst(i));
-  } // End of u_nst
-
-  /// \short Return the index at which the i-th unknown velocity component
-  /// is stored. The default value, i, is appropriate for single-physics
-  /// problems.
-  /// In derived multi-physics elements, this function should be overloaded
-  /// to reflect the chosen storage scheme. Note that these equations require
-  /// that the unknowns are always stored at the same indices at each node.
-  virtual inline unsigned u_index_nst(const unsigned& i) const
-  {
-#ifdef PARANOID
-   if (i>DIM-1)
-   {
-    // Create an output stream
-    std::ostringstream error_message_stream;
-
-    // Create an error message
-    error_message_stream << "Input index " << i << " does not correspond "
-			 << "to a velocity component when DIM=" << DIM
-			 << "!" << std::endl;
-
-    // Throw an error
-    throw OomphLibError(error_message_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-   // Return the appropriate entry
-   return i;
-  } // End of u_index_nst
-
-  
-  /// Return the number of velocity components (used in FluidInterfaceElements)
-  inline unsigned n_u_nst() const
-  {
-   // Return the number of equations to solve
-   return DIM;
-  } // End of n_u_nst
-  
-  
-  /// \short i-th component of du/dt at local node n.
-  /// Uses suitably interpolated value for hanging nodes.
-  /// NOTE: This is essentially a wrapper for du_dt_nst()
-  /// so it can be called externally.
-  double get_du_dt(const unsigned& n,const unsigned& i) const
-  {
-   // Return the value calculated by du_dt_vdp
-   return du_dt_nst(n,i);
-  } // End of get_du_dt
-
-  
-  /// \short i-th component of du/dt at local node n.
-  /// Uses suitably interpolated value for hanging nodes.
-  double du_dt_nst(const unsigned& n,const unsigned& i) const
-  {
-   // Storage for the local coordinates
-   Vector<double> s(DIM+1,0.0);
-    
-   // Get the local coordinate at the n-th node
-   local_coordinate_of_node(n,s);
-    
-   // Return the interpolated du_i/dt value
-   return interpolated_du_dt_nst(s,i);
-  } // End of du_dt_nst
-
-  
-  /// \short Return FE representation of function value du_i/dt(s) at local
-  /// coordinate s
-  inline double interpolated_du_dt_nst(const Vector<double>& s,
-				       const unsigned& i) const
-  {
-   // Find number of nodes
-   unsigned n_node=nnode();
-
-   // Local shape function
-   Shape psi(n_node);
-    
-   // Allocate space for the derivatives of the shape functions
-   DShape dpsidx(n_node,DIM+1);
-  
-   // Compute the geometric shape functions and also first derivatives
-   // w.r.t. global coordinates at local coordinate s
-   dshape_eulerian(s,psi,dpsidx);
-    
-   // Initialise value of du_i/dt
-   double interpolated_dudt=0.0;
-
-   // Find the index at which the variable is stored
-   unsigned u_nodal_index=u_index_nst(i);
-   
-   // Loop over the local nodes and sum
-   for (unsigned l=0;l<n_node;l++)
-   {
-    // Update the interpolated du_i/dt value
-    interpolated_dudt+=nodal_value(l,u_nodal_index)*dpsidx(l,DIM);
-   }
-
-   // Return the interpolated du_i/dt value
-   return interpolated_dudt;
-  } // End of interpolated_du_dt_nst
-
-  
-  /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
-  /// at your own risk!
-  void disable_ALE()
-  {
-   ALE_is_disabled=true;
-  } // End of disable_ALE
-  
-
-  /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
-  /// when evaluating the time-derivative. Note: By default, ALE is
-  /// enabled, at the expense of possibly creating unnecessary work
-  /// in problems where the mesh is, in fact, stationary.
-  void enable_ALE()
-  {
-   ALE_is_disabled=false;
-  } // End of enable_ALE
-
-  
-  /// \short Pressure at local pressure "node" n_p
-  /// Uses suitably interpolated value for hanging nodes.
-  virtual double p_nst(const unsigned& n_p) const=0;
-
-  /// \short Pressure at local pressure "node" n_p at time level t
-  virtual double p_nst(const unsigned& t, const unsigned& n_p) const=0;
-
-  /// Pin p_dof-th pressure dof and set it to value specified by p_value.
-  virtual void fix_pressure(const unsigned& p_dof, const double& p_value)=0;
-
-  /// \short Return the index at which the pressure is stored if it is
-  /// stored at the nodes. If not stored at the nodes this will return
-  /// a negative number.
-  virtual int p_nodal_index_nst() const {return Pressure_not_stored_at_node;}
-
-  /// Integral of pressure over element
-  double pressure_integral() const;
-
-  /// \short Return integral of dissipation over element
-  double dissipation() const;
-
-  /// \short Return dissipation at local coordinate s
-  double dissipation(const Vector<double>& s) const;
-
-  /// \short Compute the vorticity vector at local coordinate s
-  void get_vorticity(const Vector<double>& s, Vector<double>& vorticity) const;
-
-  /// \short Compute the vorticity vector at local coordinate s
-  void get_vorticity(const Vector<double>& s, double& vorticity) const;
-
-  /// \short Get integral of kinetic energy over element
-  double kin_energy() const;
-
-  /// \short Get integral of time derivative of kinetic energy over element
-  double d_kin_energy_dt() const;
-
-  /// Strain-rate tensor: 1/2 (du_i/dx_j+du_j/dx_i)
-  void strain_rate(const Vector<double>& s,
-		   DenseMatrix<double>& strain_rate) const;
-
-  /// \short Compute traction (on the viscous scale) exerted onto
-  /// the fluid at local coordinate s. N has to be outer unit normal
-  /// to the fluid.
-  void get_traction(const Vector<double>& s,
-		    const Vector<double>& N,
-		    Vector<double>& traction);
-
-  /// \short Compute traction (on the viscous scale) exerted onto
-  /// the fluid at local coordinate s, decomposed into pressure and
-  /// normal and tangential viscous components.
-  /// N has to be outer unit normal to the fluid.
-  void get_traction(const Vector<double>& s, const Vector<double>& N,
-		    Vector<double>& traction_p,
-		    Vector<double>& traction_visc_n,
-		    Vector<double>& traction_visc_t);
-
-  /// \short This implements a pure virtual function defined
-  /// in the FSIFluidElement class. The function computes
-  /// the traction (on the viscous scale), at the element's local
-  /// coordinate s, that the fluid element exerts onto an adjacent
-  /// solid element. The number of arguments is imposed by
-  /// the interface defined in the FSIFluidElement -- only the
-  /// unit normal N (pointing into the fluid!) is actually used
-  /// in the computation.
-  void get_load(const Vector<double>& s,
-		const Vector<double>& N,
-		Vector<double>& load)
-  {
-   // Note: get_traction() computes the traction onto the fluid
-   // if N is the outer unit normal onto the fluid; here we're
-   // expecting N to point into the fluid so we're getting the
-   // traction onto the adjacent wall instead!
-   get_traction(s,N,load);
-  }
-
-  /// \short Compute the diagonal of the velocity/pressure mass matrices.
-  /// If which one=0, both are computed, otherwise only the pressure
-  /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
-  /// LSC version of the preconditioner only needs that one)
-  void get_pressure_and_velocity_mass_matrix_diagonal(
-   Vector<double>& press_mass_diag, Vector<double>& veloc_mass_diag,
-   const unsigned& which_one=0);
-
-  /// \short Number of scalars/fields output by this element. Reimplements
-  /// broken virtual function in base class.
-  unsigned nscalar_paraview() const
-  {
-   // The number of velocity components plus the pressure field
-   return DIM+1;
-  }
-
-  /// \short Write values of the i-th scalar field at the plot points. Needs
-  /// to be implemented for each new specific element type.
-  void scalar_value_paraview(std::ofstream& file_out,
-			     const unsigned& i,
-			     const unsigned& nplot) const
-  {
-   // Vector of local coordinates
-   Vector<double> s(DIM+1,0.0);
-
-   // How many plot points do we have in total?
-   unsigned num_plot_points=nplot_points_paraview(nplot);
-  
-   // Loop over plot points
-   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-   {
-    // Get the local coordinates of the iplot-th plot point
-    get_s_plot(iplot,nplot,s);
-
-    // Velocities
-    if (i<DIM)
-    {
-     // Output the i-th velocity component
-     file_out << interpolated_u_nst(s,i) << std::endl;
-    }
-    // Pressure
-    else if (i==DIM)
-    {
-     // Output the pressure at this point
-     file_out << interpolated_p_nst(s) << std::endl;
-    }
-    // Never get here
-    else
-    {
-#ifdef PARANOID
-     // Create an output stream
-     std::stringstream error_stream;
-
-     // Create the error message
-     error_stream << "These Navier Stokes elements only store " << DIM+1
-		  << " fields, " << "but i is currently  " << i << std::endl;
-
-     // Throw the error message
-     throw OomphLibError(error_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-#endif
-    }
-   } // for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-  } // End of scalar_value_paraview
-
-  
-  /// \short Write values of the i-th scalar field at the plot points. Needs 
-  /// to be implemented for each new specific element type.
-  void scalar_value_fct_paraview(std::ofstream& file_out,
-				 const unsigned& i,
-				 const unsigned& nplot,
-				 const double& time,
-				 FiniteElement::UnsteadyExactSolutionFctPt
-				 exact_soln_pt) const
-  {
-#ifdef PARANOID
-   if (i>DIM)
-   {
-     // Create an output stream
-     std::stringstream error_stream;
-
-     // Create the error message
-     error_stream << "These Navier Stokes elements only store " << DIM+1
-		  << " fields, but i is currently " << i << std::endl;
-
-     // Throw the error message
-     throw OomphLibError(error_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-     
-   // Vector of local coordinates
-   Vector<double> s(DIM+1,0.0);
-
-   // Storage for the time value
-   double interpolated_t=0.0;
-  
-   // Storage for the spatial coordinates
-   Vector<double> spatial_coordinates(DIM,0.0);
-
-   // How many plot points do we have in total?
-   unsigned num_plot_points=nplot_points_paraview(nplot);
-  
-   // Loop over plot points
-   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-   {
-    // Get the local coordinates of the iplot-th plot point
-    get_s_plot(iplot,nplot,s);
-
-    // Loop over the spatial coordinates
-    for (unsigned i=0;i<DIM;i++)
-    {
-     // Assign the i-th spatial coordinate
-     spatial_coordinates[i]=interpolated_x(s,i);
-    }
-
-    // Get the time value
-    interpolated_t=interpolated_x(s,DIM);
-        
-    // ------ DRAIG: REMOVE ----------------------------------------
-    // Exact solution vector (here it's simply a scalar)
-    Vector<double> exact_soln(DIM+1,0.0);
-    // DRAIG: Needs to be changed to a Vector of size DIM
-    // ------ DRAIG: REMOVE ----------------------------------------
-  
-    // Get the exact solution at this point
-    (*exact_soln_pt)(interpolated_t,spatial_coordinates,exact_soln);
-   
-    // Output the interpolated solution value
-    file_out << exact_soln[i] << std::endl;
-   } // for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-  } // End of scalar_value_fct_paraview
-
-  
-  /// \short Name of the i-th scalar field. Default implementation
-  /// returns V1 for the first one, V2 for the second etc. Can (should!) be
-  /// overloaded with more meaningful names in specific elements.
-  std::string scalar_name_paraview(const unsigned& i) const
-  {
-   // Velocities
-   if (i<DIM)
-   {
-    // Return the appropriate string for the i-th velocity component
-    return "Velocity "+StringConversion::to_string(i);
-   }
-   // Pressure
-   else if (i==DIM)
-   {
-    // Return the name for the pressure
-    return "Pressure";
-   }
-   // Never get here
-   else
-   {
-    // Create an output stream
-    std::stringstream error_stream;
-
-    // Create the error message
-    error_stream << "These Navier Stokes elements only store " << DIM+1
-		 << " fields,\nbut i is currently " << i << std::endl;
-    
-    // Throw the error message
-    throw OomphLibError(error_stream.str(),
-			OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-    
-    // Dummy return so the compiler doesn't complain
-    return " ";
-   }
-  } // End of scalar_name_paraview
-
- 
-  /// \short Output function: x,y,t,u,v,p in tecplot format. The
-  /// default number of plot points is five
-  void output(std::ostream& outfile)
-  {
-   // Set the number of plot points in each direction
-   unsigned n_plot=5;
-
-   // Forward the call to the appropriate output function
-   output(outfile,n_plot);
-  } // End of output
-
-  
-  /// \short Output function: x,y,[z],u,v,[w],p in tecplot format. Here,
-  /// we use n_plot plot points in each coordinate direction
-  void output(std::ostream& outfile,const unsigned& n_plot);
- 
-
-  /// \short C-style output function: x,y,[z],u,v,[w],p in tecplot format. The
-  /// default number of plot points is five
-  void output(FILE* file_pt)
-  {
-   // Set the number of plot points in each direction
-   unsigned n_plot=5;
-
-   // Forward the call to the appropriate output function
-   output(file_pt,n_plot);
-  } // End of output
-
- 
-  /// \short C-style output function: x,y,[z],u,v,[w],p in tecplot format. Use
-  /// n_plot points in each coordinate direction
-  void output(FILE* file_pt,const unsigned& n_plot);
-
- 
-  /// \short Full output function:
-  /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation in tecplot format. The
-  /// default number of plot points is five
-  void full_output(std::ostream& outfile)
-  {
-   // Set the number of plot points in each direction
-   unsigned n_plot=5;
-
-   // Forward the call to the appropriate output function
-   full_output(outfile,n_plot);
-  } // End of full_output
-
- 
-  /// \short Full output function:
-  /// x,y,t,u,v,p,du/dt,dv/dt,dissipation in tecplot format. Use
-  /// n_plot plot points in each coordinate direction
-  void full_output(std::ostream& outfile,const unsigned& n_plot);
-
-
-  /// \short Output function: x,y,t,u,v in tecplot format. Use
-  /// n_plot points in each coordinate direction at timestep t (t=0:
-  /// present; t>0: previous timestep)
-  void output_veloc(std::ostream& outfile,
-		    const unsigned& nplot,
-		    const unsigned& t);
-
-
-  /// \short Output function: x,y,t,omega
-  /// in tecplot format. nplot points in each coordinate direction
-  void output_vorticity(std::ostream& outfile,const unsigned& nplot);
-
- 
-  /// \short Output exact solution specified via function pointer
-  /// at a given number of plot points. Function prints as
-  /// many components as are returned in solution Vector
-  void output_fct(std::ostream& outfile,
-		  const unsigned& nplot,
-		  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
-
- 
-  /// \short Output exact solution specified via function pointer
-  /// at a given time and at a given number of plot points.
-  /// Function prints as many components as are returned in solution Vector.
-  void output_fct(std::ostream& outfile,
-		  const unsigned& nplot,
-		  const double& time,
-		  FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
-
-  
-  /// Compute the vector norm of the FEM solution
-  void compute_norm(Vector<double>& norm);
-
-  
-  /// \short Validate against exact solution at given time
-  /// Solution is provided via function pointer.
-  /// Plot at a given number of plot points and compute L2 error
-  /// and L2 norm of velocity solution over element
-  void compute_error(std::ostream& outfile,
-		     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-		     const double& time,
-		     double& error,
-		     double& norm);
-
-  
-  /// \short Validate against exact solution at given time
-  /// Solution is provided via function pointer.
-  /// Plot at a given number of plot points and compute L2 error
-  /// and L2 norm of velocity solution over element
-  void compute_error(std::ostream& outfile,
-		     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-		     const double& time,
-		     Vector<double>& error,
-		     Vector<double>& norm);
-  
- 
-  /// \short Validate against exact solution.
-  /// Solution is provided via function pointer.
-  /// Plot at a given number of plot points and compute L2 error
-  /// and L2 norm of velocity solution over element
-  void compute_error(std::ostream& outfile,
-		     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-		     double& error,
-		     double& norm);
- 
-
-  /// \short Validate against exact solution. Solution is provided via
-  /// function pointer. Compute L2 error and L2 norm of velocity solution
-  /// over element.
-  void compute_error(FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-		     const double& time,
-		     double& error,
-		     double& norm);
- 
-
-  /// \short Validate against exact solution. Solution is provided via
-  /// function pointer. Compute L2 error and L2 norm of velocity solution
-  /// over element.
-  void compute_error(FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-		     double& error,
-		     double& norm);
-
-
-  /// Compute the element's residual Vector
-  void fill_in_contribution_to_residuals(Vector<double>& residuals)
-  {
-   // Do we want to compute the Jacobian? ANSWER: No!
-   unsigned compute_jacobian_flag=0;
-  
-   // Call the generic residuals function using a dummy matrix argument
-   fill_in_generic_residual_contribution_nst(residuals,
-					     GeneralisedElement::Dummy_matrix,
-					     GeneralisedElement::Dummy_matrix,
-					     compute_jacobian_flag);
-  } // End of fill_in_contribution_to_residuals
-
-  
-  ///\short Compute the element's residual Vector and the jacobian matrix
-  /// Virtual function can be overloaded by hanging-node version
-  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
-					DenseMatrix<double>& jacobian)
-  {
-   // Do we want to compute the Jacobian? ANSWER: Yes!
-   unsigned compute_jacobian_flag=1;
-  
-   // Call the generic routine with the flag set to 1
-   fill_in_generic_residual_contribution_nst(residuals,
-					     jacobian,
-					     GeneralisedElement::Dummy_matrix,
-					     compute_jacobian_flag);
-  } // End of fill_in_contribution_to_residuals
-  
-
-  /// \short Add the element's contribution to its residuals vector,
-  /// jacobian matrix and mass matrix
-  void fill_in_contribution_to_jacobian_and_mass_matrix(
-   Vector<double>& residuals,
-   DenseMatrix<double>& jacobian,
-   DenseMatrix<double>& mass_matrix)
-  {
-   // Do we want to compute the Jacobian AND mass matrix? ANSWER: Yes!
-   unsigned compute_matrices_flag=2;
-  
-   // Call the generic routine with the flag set to 2
-   fill_in_generic_residual_contribution_nst(residuals,
-					     jacobian,
-					     mass_matrix,
-					     compute_matrices_flag);
-  } // End of fill_in_contribution_to_jacobian_and_mass_matrix
-  
- 
-  /// Compute the element's residual Vector (differentiated w.r.t. a parameter)
-  void fill_in_contribution_to_dresiduals_dparameter(
-   double* const& parameter_pt,
-   Vector<double>& dres_dparam)
-  {
-   // Do we want to compute the Jacobian? ANSWER: No!
-   unsigned compute_jacobian_flag=0;
-  
-   // Call the generic residuals function using a dummy matrix argument
-   fill_in_generic_dresidual_contribution_nst(parameter_pt,
-					      dres_dparam,
-					      GeneralisedElement::Dummy_matrix,
-					      GeneralisedElement::Dummy_matrix,
-					      compute_jacobian_flag);
-  } // End of fill_in_contribution_to_dresiduals_dparameter
-
- 
-  /// \short Compute the element's residual Vector and the jacobian matrix
-  /// Virtual function can be overloaded by hanging-node version
-  void fill_in_contribution_to_djacobian_dparameter(
-   double* const& parameter_pt,
-   Vector<double>& dres_dparam,
-   DenseMatrix<double>& djac_dparam)
-  {
-   // Do we want to compute the Jacobian? ANSWER: Yes!
-   unsigned compute_jacobian_flag=1;
-  
-   // Call the generic routine with the flag set to 1
-   fill_in_generic_dresidual_contribution_nst(parameter_pt,
-					      dres_dparam,
-					      djac_dparam,
-					      GeneralisedElement::Dummy_matrix,
-					      compute_jacobian_flag);
-  } // End of fill_in_contribution_to_djacobian_dparameter
-
- 
-  /// Add the element's contribution to its residuals vector,
-  /// jacobian matrix and mass matrix
-  void fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter(
-   double* const& parameter_pt,
-   Vector<double>& dres_dparam,
-   DenseMatrix<double>& djac_dparam,
-   DenseMatrix<double>& dmass_matrix_dparam)
-  {
-   // Do we want to compute the Jacobian AND mass matrix? ANSWER: Yes!
-   unsigned compute_matrices_flag=2;
-  
-   // Call the generic routine with the appropriate flag
-   fill_in_generic_dresidual_contribution_nst(parameter_pt,
-					      dres_dparam,
-					      djac_dparam,
-					      dmass_matrix_dparam,
-					      compute_matrices_flag);
-  } // End of fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter
-
-
-  /// \short Compute the residuals for the associated pressure advection
-  /// diffusion problem. Used by the Fp preconditioner.
-  void fill_in_pressure_advection_diffusion_residuals(Vector<double>& residuals)
-  {
-   // Do we want to compute the Jacobian? ANSWER: No!
-   unsigned compute_jacobian_flag=0;
-
-   // Call the generic routine with the appropriate flag
-   fill_in_generic_pressure_advection_diffusion_contribution_nst(
-    residuals,GeneralisedElement::Dummy_matrix,compute_jacobian_flag);
-  } // End of fill_in_pressure_advection_diffusion_residuals
-
- 
-  /// \short Compute the residuals and Jacobian for the associated
-  /// pressure advection diffusion problem. Used by the Fp preconditioner.
-  void fill_in_pressure_advection_diffusion_jacobian(
-   Vector<double>& residuals,
-   DenseMatrix<double>& jacobian)
-  {
-   // Do we want to compute the Jacobian? ANSWER: Yes!
-   unsigned compute_jacobian_flag=1;
-
-   // Call the generic routine with the appropriate flag
-   fill_in_generic_pressure_advection_diffusion_contribution_nst(
-    residuals,jacobian,compute_jacobian_flag);
-  } // End of fill_in_pressure_advection_diffusion_jacobian
-
-
-  /// \short Pin all non-pressure dofs and backup eqn numbers
-  void pin_all_non_pressure_dofs(std::map<Data*,std::vector<int> >&
-				 eqn_number_backup)
-  {
-   // Loop over internal data and pin the values (having established that
-   // pressure dofs aren't amongst those)
-   unsigned nint=this->ninternal_data();
-   for (unsigned j=0;j<nint;j++)
-   {
-    Data* data_pt=this->internal_data_pt(j);
-    if (eqn_number_backup[data_pt].size()==0)
-    {
-     unsigned nvalue=data_pt->nvalue();
-     eqn_number_backup[data_pt].resize(nvalue);
-     for (unsigned i=0;i<nvalue;i++)
-     {
-      // Backup
-      eqn_number_backup[data_pt][i]=data_pt->eqn_number(i);
-
-      // Pin everything
-      data_pt->pin(i);
-     }
-    }
-   }
-
-   // Now deal with nodal values
-   unsigned nnod=this->nnode();
-   for (unsigned j=0;j<nnod;j++)
-   {
-
-    Node* nod_pt=this->node_pt(j);
-    if (eqn_number_backup[nod_pt].size()==0)
-    {
-
-     unsigned nvalue=nod_pt->nvalue();
-     eqn_number_backup[nod_pt].resize(nvalue);
-     for (unsigned i=0;i<nvalue;i++)
-     {
-      // Pin everything apart from the nodal pressure
-      // value
-      if (int(i)!=this->p_nodal_index_nst())
-      {
-       // Backup
-       eqn_number_backup[nod_pt][i]=nod_pt->eqn_number(i);
-
-       // Pin
-       nod_pt->pin(i);
+        // Update the flux quantity
+        flux += velocity[i] * unit_normal[i];
       }
-      // Else it's a pressure value
+
+      // Modify BC: If outflow (flux>0) apply Neumann condition instead
+      if (flux > 0.0)
+      {
+        // Apply no flux condition
+        flux = 0.0;
+      }
+
+      // Get the pressure at these local coordinates
+      double interpolated_press = bulk_el_pt->interpolated_p_nst(s_bulk);
+
+      // Call the pressure shape and test functions in bulk element
+      bulk_el_pt->pshape_nst(s_bulk, psip, testp);
+
+      // Find the Jacobian of the mapping within the FaceElement
+      double J = this->J_eulerian(s);
+
+      // Premultiply the weights and the Jacobian
+      double W = w * J;
+
+      // Loop over the pressure shape functions in bulk
+      // (wasteful but they'll be zero on the boundary)
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        // Get the local equation number associated with this pressure dof
+        local_eqn = bulk_el_pt->p_local_eqn(l);
+
+        // If it's not a boundary condition
+        if (local_eqn >= 0)
+        {
+          // Update the residuals
+          residuals[local_eqn] -= re * flux * interpolated_press * testp[l] * W;
+
+          // If the Jacobian needs to be computed too
+          if (flag)
+          {
+            // Loop over the shape functions in bulk
+            for (unsigned l2 = 0; l2 < n_pres; l2++)
+            {
+              // Get the equation number associated with this pressure dof
+              local_unknown = bulk_el_pt->p_local_eqn(l2);
+
+              // If it's not a boundary condition
+              if (local_unknown >= 0)
+              {
+                // Update the appropriate Jacobian entry
+                jacobian(local_eqn, local_unknown) -=
+                  re * flux * psip[l2] * testp[l] * W;
+              }
+            } // for (unsigned l2=0;l2<n_pres;l2++)
+          } // if (flag)
+        } // if (local_eqn>=0)
+      } // for (unsigned l=0;l<n_pres;l++)
+    } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
+  } // End of fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+  //======================================================================
+  /// Template-free base class for Navier-Stokes equations to avoid
+  /// casting problems
+  //======================================================================
+  class TemplateFreeSpaceTimeNavierStokesEquationsBase
+    : public virtual NavierStokesElementWithDiagonalMassMatrices,
+      public virtual FiniteElement
+  {
+  public:
+    /// Constructor (empty)
+    TemplateFreeSpaceTimeNavierStokesEquationsBase(){};
+
+
+    /// Virtual destructor (empty)
+    virtual ~TemplateFreeSpaceTimeNavierStokesEquationsBase(){};
+
+
+    /// \short Compute the residuals for the associated pressure advection
+    /// diffusion problem. Used by the Fp preconditioner.
+    virtual void fill_in_pressure_advection_diffusion_residuals(
+      Vector<double>& residuals) = 0;
+
+
+    /// \short Compute the residuals and Jacobian for the associated
+    /// pressure advection diffusion problem. Used by the Fp preconditioner.
+    virtual void fill_in_pressure_advection_diffusion_jacobian(
+      Vector<double>& residuals, DenseMatrix<double>& jacobian) = 0;
+
+
+    /// \short Return the index at which the pressure is stored if it is
+    /// stored at the nodes. If not stored at the nodes this will return
+    /// a negative number.
+    virtual int p_nodal_index_nst() const = 0;
+
+
+    /// \short Access function for the local equation number information for
+    /// the pressure.
+    /// p_local_eqn[n] = local equation number or < 0 if pinned
+    virtual int p_local_eqn(const unsigned& n) const = 0;
+
+
+    /// \short Global eqn number of pressure dof that's pinned in pressure
+    /// adv diff problem
+    virtual int& pinned_fp_pressure_eqn() = 0;
+
+
+    /// \short Pin all non-pressure dofs and backup eqn numbers of all Data
+    virtual void pin_all_non_pressure_dofs(
+      std::map<Data*, std::vector<int>>& eqn_number_backup) = 0;
+
+
+    /// \short Build FaceElements that apply the Robin boundary condition
+    /// to the pressure advection diffusion problem required by
+    /// Fp preconditioner
+    virtual void build_fp_press_adv_diff_robin_bc_element(
+      const unsigned& face_index) = 0;
+
+
+    /// \short Delete the FaceElements that apply the Robin boundary condition
+    /// to the pressure advection diffusion problem required by
+    /// Fp preconditioner
+    virtual void delete_pressure_advection_diffusion_robin_elements() = 0;
+
+
+    /// \short Compute the diagonal of the velocity/pressure mass matrices.
+    /// If which one=0, both are computed, otherwise only the pressure
+    /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
+    /// LSC version of the preconditioner only needs that one)
+    virtual void get_pressure_and_velocity_mass_matrix_diagonal(
+      Vector<double>& press_mass_diag,
+      Vector<double>& veloc_mass_diag,
+      const unsigned& which_one = 0) = 0;
+  };
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
+  //======================================================================
+  /// A class for elements that solve the Cartesian Navier-Stokes
+  /// equations, templated by the dimension DIM.
+  /// This contains the generic maths -- any concrete implementation must
+  /// be derived from this.
+  ///
+  /// We're solving:
+  ///
+  ///  \f$ { Re \left( St \frac{\partial u_i}{\partial t}+
+  ///              (u_j-u_j^{M}) \frac{\partial u_i}{\partial x_j} \right)=
+  ///     -\frac{\partial p}{\partial x_i} -R_\rho B_i(x_j) -
+  ///       \frac{Re}{Fr} G_i +
+  ///        \frac{\partial }{\partial x_j} \left[  R_\mu \left(
+  ///        \frac{\partial u_i}{\partial x_j}+
+  ///         \frac{\partial u_j}{\partial x_i} \right) \right] } \f$
+  ///
+  ///  and
+  ///
+  ///  \f$ { \frac{\partial u_i}{\partial x_i}=Q } \f$
+  ///
+  /// We also provide all functions required to use this element
+  /// in FSI problems, by deriving it from the FSIFluidElement base
+  /// class.
+  ///
+  /// --------------------
+  /// SPACE-TIME ELEMENTS:
+  /// --------------------
+  /// The space-time extension is written ONLY for the 2D Navier-Stokes
+  /// equations. The result is a 3D problem (x,y,t) to be solved on a
+  /// 3D mesh. The template parameter DIM now corresponds to the
+  /// dimension of the space-time problem (i.e. DIM=3 for the 2D flow).
+  //======================================================================
+  template<unsigned DIM>
+  class SpaceTimeNavierStokesEquations
+    : public virtual FSIFluidElement,
+      public virtual TemplateFreeSpaceTimeNavierStokesEquationsBase
+  {
+  public:
+    /// \short Function pointer to body force function fct(t,x,f(x))
+    /// x is a Vector!
+    typedef void (*NavierStokesBodyForceFctPt)(const double& time,
+                                               const Vector<double>& x,
+                                               Vector<double>& body_force);
+
+    /// \short Function pointer to source function fct(t,x) (x is a Vector!)
+    typedef double (*NavierStokesSourceFctPt)(const double& time,
+                                              const Vector<double>& x);
+
+    /// \short Function pointer to source function fct(x) for the
+    /// pressure advection diffusion equation (only used during
+    /// validation!). x is a Vector!
+    typedef double (*NavierStokesPressureAdvDiffSourceFctPt)(
+      const Vector<double>& x);
+
+  private:
+    /// \short Static "magic" number that indicates that the pressure is
+    /// not stored at a node
+    static int Pressure_not_stored_at_node;
+
+    /// Static default value for the physical constants (all initialised to
+    /// zero)
+    static double Default_Physical_Constant_Value;
+
+    /// Static default value for the physical ratios (all are initialised to
+    /// one)
+    static double Default_Physical_Ratio_Value;
+
+    /// Static default value for the gravity vector
+    static Vector<double> Default_Gravity_vector;
+
+  protected:
+    // Physical constants:
+
+    /// \short Pointer to the viscosity ratio (relative to the
+    /// viscosity used in the definition of the Reynolds number)
+    double* Viscosity_Ratio_pt;
+
+    /// \short Pointer to the density ratio (relative to the density used in the
+    /// definition of the Reynolds number)
+    double* Density_Ratio_pt;
+
+    // Pointers to global physical constants:
+
+    /// Pointer to global Reynolds number
+    double* Re_pt;
+
+    /// Pointer to global Reynolds number x Strouhal number (=Womersley)
+    double* St_pt;
+
+    /// \short Boolean to indicate whether or not the Strouhal value is
+    /// stored as external data (if it's also an unknown of the problem)
+    bool Strouhal_is_stored_as_external_data;
+
+    /// \short Pointer to global Reynolds number x inverse Froude number
+    /// (= Bond number / Capillary number)
+    double* ReInvFr_pt;
+
+    /// Pointer to global gravity Vector
+    Vector<double>* G_pt;
+
+    /// Pointer to body force function
+    NavierStokesBodyForceFctPt Body_force_fct_pt;
+
+    /// Pointer to volumetric source function
+    NavierStokesSourceFctPt Source_fct_pt;
+
+    /// \short Pointer to source function pressure advection diffusion equation
+    /// (only to be used during validation)
+    NavierStokesPressureAdvDiffSourceFctPt Press_adv_diff_source_fct_pt;
+
+    /// \short Boolean flag to indicate if ALE formulation is disabled when
+    /// time-derivatives are computed. Only set to true if you're sure
+    /// that the mesh is stationary.
+    bool ALE_is_disabled;
+
+    /// \short Storage for FaceElements that apply Robin BC for pressure adv
+    /// diff equation used in Fp preconditioner.
+    Vector<FpPressureAdvDiffRobinBCSpaceTimeElementBase*>
+      Pressure_advection_diffusion_robin_element_pt;
+
+    /// \short Global eqn number of pressure dof that's pinned in
+    /// pressure advection diffusion problem (defaults to -1)
+    int Pinned_fp_pressure_eqn;
+
+
+    /// \short Compute the shape functions and derivatives
+    /// w.r.t. global coords at local coordinate s.
+    /// Return Jacobian of mapping between local and global coordinates.
+    virtual double dshape_and_dtest_eulerian_nst(const Vector<double>& s,
+                                                 Shape& psi,
+                                                 DShape& dpsidx,
+                                                 Shape& test,
+                                                 DShape& dtestdx) const = 0;
+
+
+    /// \short Compute the shape functions and derivatives
+    /// w.r.t. global coords at ipt-th integration point
+    /// Return Jacobian of mapping between local and global coordinates.
+    virtual double dshape_and_dtest_eulerian_at_knot_nst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
+
+
+    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    /// integration point ipt; return Jacobian of mapping (J). Also compute
+    /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+    virtual double dshape_and_dtest_eulerian_at_knot_nst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const = 0;
+
+
+    /// \short Pressure shape functions and their derivs w.r.t. to global coords
+    /// at local coordinate s (taken from geometry). Return Jacobian of mapping
+    /// between local and global coordinates.
+    virtual double dpshape_eulerian(const Vector<double>& s,
+                                    Shape& ppsi,
+                                    DShape& dppsidx) const = 0;
+
+
+    /// \short Pressure test functions and their derivs w.r.t. to global coords
+    /// at local coordinate s (taken from geometry). Return Jacobian of mapping
+    /// between local and global coordinates.
+    virtual double dptest_eulerian(const Vector<double>& s,
+                                   Shape& ptest,
+                                   DShape& dptestdx) const = 0;
+
+
+    /// \short Compute the pressure shape and test functions and derivatives
+    /// w.r.t. global coords at local coordinate s.
+    /// Return Jacobian of mapping between local and global coordinates.
+    virtual double dpshape_and_dptest_eulerian_nst(const Vector<double>& s,
+                                                   Shape& ppsi,
+                                                   DShape& dppsidx,
+                                                   Shape& ptest,
+                                                   DShape& dptestdx) const = 0;
+
+
+    /// \short Calculate the body force at a given time and local and/or
+    /// Eulerian position. This function is virtual so that it can be
+    /// overloaded in multi-physics elements where the body force might
+    /// depend on another variable.
+    virtual void get_body_force_nst(const double& time,
+                                    const unsigned& ipt,
+                                    const Vector<double>& s,
+                                    const Vector<double>& x,
+                                    Vector<double>& result)
+    {
+      // If a function has not been provided
+      if (Body_force_fct_pt == 0)
+      {
+        // Set the body forces to zero
+        result.initialise(0.0);
+      }
+      // If the function pointer is non-zero
       else
       {
-       // Exclude non-nodal pressure based elements
-       if (this->p_nodal_index_nst()>=0)
-       {
-	// Backup
-	eqn_number_backup[nod_pt][i]=nod_pt->eqn_number(i);
-       }
-      }
-     }
+        // Call the function
+        (*Body_force_fct_pt)(time, x, result);
+      } // if (Body_force_fct_pt!=0)
+    } // End of get_body_force_nst
 
 
-     // If it's a solid node deal with its positional data too
-     SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-     if (solid_nod_pt!=0)
-     {
-      Data* solid_posn_data_pt=solid_nod_pt->variable_position_pt();
-      if (eqn_number_backup[solid_posn_data_pt].size()==0)
+    /// Get gradient of body force term at (Eulerian) position x. This function
+    /// is virtual to allow overloading in multi-physics problems where
+    /// the strength of the source function might be determined by another
+    /// system of equations. Computed via function pointer (if set) or by
+    /// finite differencing (default)
+    inline virtual void get_body_force_gradient_nst(
+      const double& time,
+      const unsigned& ipt,
+      const Vector<double>& s,
+      const Vector<double>& x,
+      DenseMatrix<double>& d_body_force_dx)
+    {
+      // Reference value
+      Vector<double> body_force(DIM, 0.0);
+
+      // Get the body force vector
+      get_body_force_nst(time, ipt, s, x, body_force);
+
+      // Get the finite-difference step size
+      double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
+
+      // The body force computed at the perturbed coordinates
+      Vector<double> body_force_pls(DIM, 0.0);
+
+      // Copy the (Eulerian) coordinate vector x
+      Vector<double> x_pls(x);
+
+      // Loop over the coordinate directions
+      for (unsigned i = 0; i < DIM; i++)
       {
-       unsigned nvalue=solid_posn_data_pt->nvalue();
-       eqn_number_backup[solid_posn_data_pt].resize(nvalue);
-       for (unsigned i=0;i<nvalue;i++)
-       {
-	// Backup
-	eqn_number_backup[solid_posn_data_pt][i]=
-	 solid_posn_data_pt->eqn_number(i);
+        // Update the i-th entry
+        x_pls[i] += eps_fd;
 
-	// Pin
-	solid_posn_data_pt->pin(i);
-       }
+        // Get the body force at the current time
+        get_body_force_nst(time, ipt, s, x_pls, body_force_pls);
+
+        // Loop over the coordinate directions
+        for (unsigned j = 0; j < DIM; j++)
+        {
+          // Finite-difference the body force derivative
+          d_body_force_dx(j, i) = (body_force_pls[j] - body_force[j]) / eps_fd;
+        }
+
+        // Reset the i-th entry
+        x_pls[i] = x[i];
       }
-     }
-    }
-   }
-  } // End of pin_all_non_pressure_dofs
+    } // End of get_body_force_gradient_nst
 
 
-  /// \short Build FaceElements that apply the Robin boundary condition
-  /// to the pressure advection diffusion problem required by
-  /// Fp preconditioner
-  virtual void build_fp_press_adv_diff_robin_bc_element(const unsigned&
-							face_index)=0;
-
- 
-  /// \short Output the FaceElements that apply the Robin boundary condition
-  /// to the pressure advection diffusion problem required by
-  /// Fp preconditioner
-  void output_pressure_advection_diffusion_robin_elements(std::ostream& outfile)
-  {
-   unsigned nel=Pressure_advection_diffusion_robin_element_pt.size();
-   for (unsigned e=0;e<nel;e++)
-   {
-    FaceElement* face_el_pt=Pressure_advection_diffusion_robin_element_pt[e];
-    outfile << "ZONE" << std::endl;
-    Vector<double> unit_normal(DIM);
-    Vector<double> x(DIM+1);
-    Vector<double> s(DIM);
-    unsigned n=face_el_pt->integral_pt()->nweight();
-    for (unsigned ipt=0;ipt<n;ipt++)
+    /// \short Calculate the source fct at a given time and Eulerian position
+    virtual double get_source_nst(const double& time,
+                                  const unsigned& ipt,
+                                  const Vector<double>& x)
     {
-     for (unsigned i=0;i<DIM;i++)
-     {
-      s[i]=face_el_pt->integral_pt()->knot(ipt,i);
-     }
-     face_el_pt->interpolated_x(s,x);
-     face_el_pt->outer_unit_normal(ipt,unit_normal);
-     for (unsigned i=0;i<DIM+1;i++)
-     {
-      outfile << x[i] << " ";
-     }
-     for (unsigned i=0;i<DIM;i++)
-     {
-      outfile << unit_normal[i] << " ";
-     }
-     outfile << std::endl;
-    }
-   }
-  } // End of output_pressure_advection_diffusion_robin_elements
- 
-
-  /// \short Delete the FaceElements that apply the Robin boundary condition
-  /// to the pressure advection diffusion problem required by
-  /// Fp preconditioner
-  void delete_pressure_advection_diffusion_robin_elements()
-  {
-   unsigned nel=Pressure_advection_diffusion_robin_element_pt.size();
-   for (unsigned e=0;e<nel;e++)
-   {
-    delete Pressure_advection_diffusion_robin_element_pt[e];
-   }
-   Pressure_advection_diffusion_robin_element_pt.clear();
-  } // End of delete_pressure_advection_diffusion_robin_elements
-
-  
-  /// \short Compute derivatives of elemental residual vector with respect
-  /// to nodal coordinates. Overwrites default implementation in
-  /// FiniteElement base class.
-  /// dresidual_dnodal_coordinates(l,i,j)=d res(l) / dX_{ij}
-  virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
-						dresidual_dnodal_coordinates);
+      // If the function pointer is null
+      if (Source_fct_pt == 0)
+      {
+        // Set the source function value to zero
+        return 0;
+      }
+      // Otherwise call the function pointer
+      else
+      {
+        // Return the appropriate value
+        return (*Source_fct_pt)(time, x);
+      }
+    } // End of get_source_nst
 
 
-  /// Compute vector of FE interpolated velocity u at local coordinate s
-  void interpolated_u_nst(const Vector<double>& s,
-			  Vector<double>& velocity) const
-  {
-   // Find the number of nodes
-   unsigned n_node=nnode();
-  
-   // Local shape function
-   Shape psi(n_node);
-  
-   // Find values of shape function
-   shape(s,psi);
-
-   // Loop over the velocity components
-   for (unsigned i=0;i<DIM;i++)
-   {
-    // Index at which the nodal value is stored
-    unsigned u_nodal_index=u_index_nst(i);
-   
-    // Initialise the i-th value of the velocity vector
-    velocity[i]=0.0;
-   
-    // Loop over the local nodes and sum
-    for (unsigned l=0;l<n_node;l++)
+    /// Get gradient of source term at (Eulerian) position x. This function
+    /// is virtual to allow overloading in multi-physics problems where the
+    /// strength of the source function might be determined by another system
+    /// of equations. Computed via function pointer (if set) or by finite
+    /// differencing (default)
+    inline virtual void get_source_gradient_nst(const double& time,
+                                                const unsigned& ipt,
+                                                const Vector<double>& x,
+                                                Vector<double>& gradient)
     {
-     // Update the i-th velocity component approximation
-     velocity[i]+=nodal_value(l,u_nodal_index)*psi[l];
-    }
-   } // for (unsigned i=0;i<DIM;i++)
-  } // End of interpolated_u_nst
+      // Reference value
+      double source = get_source_nst(time, ipt, x);
 
-  
-  /// Return FE interpolated velocity u[i] at local coordinate s
-  double interpolated_u_nst(const Vector<double>& s,const unsigned& i) const
-  {
-   // Find the number of nodes
-   unsigned n_node=nnode();
-  
-   // Local shape function
-   Shape psi(n_node);
-  
-   // Find values of shape function
-   shape(s,psi);
+      // Get the finite-difference step size
+      double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
 
-   // Get nodal index at which i-th velocity is stored
-   unsigned u_nodal_index=u_index_nst(i);
+      // The source function value computed at the perturbed coordinates
+      double source_pls = 0.0;
 
-   // Initialise value of u
-   double interpolated_u=0.0;
-  
-   // Loop over the local nodes and sum
-   for (unsigned l=0;l<n_node;l++)
-   {
-    // Update the i-th velocity component approximation
-    interpolated_u+=nodal_value(l,u_nodal_index)*psi[l];
-   }
+      // Copy the (Eulerian) coordinate vector, x
+      Vector<double> x_pls(x);
 
-   // Return the calculated approximation to the i-th velocity component
-   return interpolated_u;
-  } // End of interpolated_u_nst
- 
+      // Loop over the coordinate directions
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        // Update the i-th entry
+        x_pls[i] += eps_fd;
 
-  /// \short Return FE interpolated velocity u[i] at local coordinate s
-  /// time level, t. Purposely broken for space-time elements.
-  double interpolated_u_nst(const unsigned& t,
-			    const Vector<double>& s,
-			    const unsigned& i) const
-  {
-   // Create an output stream
-   std::ostringstream error_message_stream;
+        // Get the body force at the current time
+        source_pls = get_source_nst(time, ipt, x_pls);
 
-   // Create an error message
-   error_message_stream << "This interface doesn't make sense in "
-			<< "space-time elements!" << std::endl;
-   
-   // Throw an error
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  } // End of interpolated_u_nst
- 
+        // Loop over the coordinate directions
+        for (unsigned j = 0; j < DIM; j++)
+        {
+          // Finite-difference the source function gradient
+          gradient[i] = (source_pls - source) / eps_fd;
+        }
 
-  /// \short Compute the derivatives of the i-th component of
-  /// velocity at point s with respect
-  /// to all data that can affect its value. In addition, return the global
-  /// equation numbers corresponding to the data. The function is virtual
-  /// so that it can be overloaded in the refineable version
-  virtual void dinterpolated_u_nst_ddata(const Vector<double>& s,
-					 const unsigned& i,
-					 Vector<double>& du_ddata,
-					 Vector<unsigned>& global_eqn_number)
-  {
-   // Find the number of nodes
-   unsigned n_node=nnode();
-  
-   // Local shape function
-   Shape psi(n_node);
-  
-   // Find values of shape function
-   shape(s,psi);
+        // Reset the i-th entry
+        x_pls[i] = x[i];
+      }
+    } // End of get_source_gradient_nst
 
-   // Get nodal index at which i-th velocity is stored
-   unsigned u_nodal_index=u_index_nst(i);
 
-   // Find the number of dofs associated with interpolated u
-   unsigned n_u_dof=0;
+    ///\short Compute the residuals for the Navier-Stokes equations.
+    /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
+    /// Flag=2: Fill in mass matrix too.
+    virtual void fill_in_generic_residual_contribution_nst(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      const unsigned& flag);
 
-   // Loop over the nodes
-   for (unsigned l=0;l<n_node;l++)
-   {
-    // Get the global equation number of the dof
-    int global_eqn=this->node_pt(l)->eqn_number(u_nodal_index);
-   
-    // If it's positive add to the count
-    if (global_eqn>=0)
+
+    /// \short Compute the residuals for the associated pressure advection
+    /// diffusion problem. Used by the Fp preconditioner.
+    /// flag=1(or 0): do (or don't) compute the Jacobian as well.
+    virtual void fill_in_generic_pressure_advection_diffusion_contribution_nst(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
+
+
+    ///\short Compute the derivatives of the
+    /// residuals for the Navier-Stokes equations with respect to a parameter
+    /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
+    /// Flag=2: Fill in mass matrix too.
+    virtual void fill_in_generic_dresidual_contribution_nst(
+      double* const& parameter_pt,
+      Vector<double>& dres_dparam,
+      DenseMatrix<double>& djac_dparam,
+      DenseMatrix<double>& dmass_matrix_dparam,
+      const unsigned& flag);
+
+
+    /// \short Compute the hessian tensor vector products required to
+    /// perform continuation of bifurcations analytically
+    void fill_in_contribution_to_hessian_vector_products(
+      Vector<double> const& Y,
+      DenseMatrix<double> const& C,
+      DenseMatrix<double>& product);
+
+  public:
+    /// \short Constructor: NULL the body force and source function
+    /// and make sure the ALE terms are included by default.
+    SpaceTimeNavierStokesEquations()
+      : Body_force_fct_pt(0),
+        Source_fct_pt(0),
+        Press_adv_diff_source_fct_pt(0),
+        ALE_is_disabled(false),
+        Pinned_fp_pressure_eqn(-1)
     {
-     // Increment the counter
-     n_u_dof++;
+      // Set all the Physical parameter pointers:
+
+      // Set the Reynolds number to the value zero
+      Re_pt = &Default_Physical_Constant_Value;
+
+      // Set the Strouhal number to the value zero
+      St_pt = &Default_Physical_Constant_Value;
+
+      // The Strouhal number (which is a proxy for the period here) is not
+      // stored as external data
+      Strouhal_is_stored_as_external_data = false;
+
+      // Set the Reynolds / Froude value to zero
+      ReInvFr_pt = &Default_Physical_Constant_Value;
+
+      // Set the gravity vector to be the zero vector
+      G_pt = &Default_Gravity_vector;
+
+      // Set the Physical ratios:
+
+      // Set the viscosity ratio to the value one
+      Viscosity_Ratio_pt = &Default_Physical_Ratio_Value;
+
+      // Set the density ratio to the value one
+      Density_Ratio_pt = &Default_Physical_Ratio_Value;
     }
-   } // End of dinterpolated_u_nst_ddata
 
-   // Now resize the storage schemes
-   du_ddata.resize(n_u_dof,0.0);
-   global_eqn_number.resize(n_u_dof,0);
+    /// Vector to decide whether the stress-divergence form is used or not
+    /// N.B. This needs to be public so that the intel compiler gets things
+    /// correct somehow the access function messes things up when going to
+    /// refineable Navier-Stokes
+    static Vector<double> Gamma;
 
-   //Loop over th nodes again and set the derivatives
-   unsigned count=0;
-   //Loop over the local nodes and sum
-   for (unsigned l=0;l<n_node;l++)
-   {
-    //Get the global equation number
-    int global_eqn=this->node_pt(l)->eqn_number(u_nodal_index);
-    if (global_eqn >= 0)
+
+    /// Function that tells us whether the period is stored as external data
+    void store_strouhal_as_external_data(Data* strouhal_data_pt)
     {
-     //Set the global equation number
-     global_eqn_number[count]=global_eqn;
-     //Set the derivative with respect to the unknown
-     du_ddata[count]=psi[l];
-     //Increase the counter
-     ++count;
+#ifdef PARANOID
+      // Sanity check; make sure it's not a null pointer
+      if (strouhal_data_pt == 0)
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
+
+        // Create an error message
+        error_message_stream
+          << "User supplied Strouhal number as external data\n"
+          << "but the pointer provided is a null pointer!" << std::endl;
+
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Set the Strouhal value pointer (the Strouhal number is stored as the
+      // only piece of internal data in the phase condition element)
+      this->add_external_data(strouhal_data_pt);
+
+      // Indicate that the Strouhal number is store as external data
+      Strouhal_is_stored_as_external_data = true;
+    } // End of store_strouhal_as_external_data
+
+
+    // Access functions for the physical constants:
+
+    /// Reynolds number
+    const double& re() const
+    {
+      // Use the Reynolds number pointer to get the Reynolds value
+      return *Re_pt;
+    } // End of re
+
+
+    /// Pointer to Reynolds number
+    double*& re_pt()
+    {
+      // Return the Reynolds number pointer
+      return Re_pt;
+    } // End of re_pt
+
+
+    /// Are we storing the Strouhal number as external data?
+    bool is_strouhal_stored_as_external_data() const
+    {
+      // Return the flags value
+      return Strouhal_is_stored_as_external_data;
+    } // End of is_strouhal_stored_as_external_data
+
+
+    /// Strouhal parameter (const. version)
+    const double& st() const
+    {
+      // If the st is stored as external data
+      if (Strouhal_is_stored_as_external_data)
+      {
+        // The index of the external data (which contains the st)
+        unsigned data_index = 0;
+
+        // The index of the value at which the Strouhal is stored
+        unsigned strouhal_index = 0;
+
+        // Return the value of the st in the external data
+        return *(this->external_data_pt(data_index)->value_pt(strouhal_index));
+      }
+      // Otherwise the st is just stored as a pointer
+      else
+      {
+        // Return the value of St
+        return *St_pt;
+      }
+    } // End of st
+
+
+    /// Pointer to Strouhal parameter (const. version)
+    double* st_pt() const
+    {
+      // If the strouhal is stored as external data
+      if (Strouhal_is_stored_as_external_data)
+      {
+        // The index of the external data (which contains the strouhal)
+        unsigned data_index = 0;
+
+        // The index of the value at which the strouhal is stored (the only
+        // value)
+        unsigned strouhal_index = 0;
+
+        // Return the value of the strouhal in the external data
+        return this->external_data_pt(data_index)->value_pt(strouhal_index);
+      }
+      // Otherwise the strouhal is just stored as a pointer
+      else
+      {
+        // Return the value of Strouhal
+        return St_pt;
+      }
+    } // End of st_pt
+
+
+    /// Pointer to Strouhal number (can only assign to private member data)
+    double*& st_pt()
+    {
+      // Return the Strouhal number pointer
+      return St_pt;
+    } // End of st_pt
+
+
+    /// Product of Reynolds and Strouhal number (=Womersley number)
+    double re_st() const
+    {
+      // Return the product of the appropriate physical constants
+      return (*Re_pt) * (*st_pt());
+    } // End of re_st
+
+
+    /// \short Viscosity ratio for element: Element's viscosity relative to the
+    /// viscosity used in the definition of the Reynolds number
+    const double& viscosity_ratio() const
+    {
+      return *Viscosity_Ratio_pt;
     }
-   }
-  } // End of dinterpolated_u_nst_ddata
+
+    /// Pointer to Viscosity Ratio
+    double*& viscosity_ratio_pt()
+    {
+      return Viscosity_Ratio_pt;
+    }
+
+    /// \short Density ratio for element: Element's density relative to the
+    ///  viscosity used in the definition of the Reynolds number
+    const double& density_ratio() const
+    {
+      return *Density_Ratio_pt;
+    }
+
+    /// Pointer to Density ratio
+    double*& density_ratio_pt()
+    {
+      return Density_Ratio_pt;
+    }
+
+    /// Global inverse Froude number
+    const double& re_invfr() const
+    {
+      return *ReInvFr_pt;
+    }
+
+    /// Pointer to global inverse Froude number
+    double*& re_invfr_pt()
+    {
+      return ReInvFr_pt;
+    }
+
+    /// Vector of gravitational components
+    const Vector<double>& g() const
+    {
+      return *G_pt;
+    }
+
+    /// Pointer to Vector of gravitational components
+    Vector<double>*& g_pt()
+    {
+      return G_pt;
+    }
+
+    /// Access function for the body-force pointer
+    NavierStokesBodyForceFctPt& body_force_fct_pt()
+    {
+      return Body_force_fct_pt;
+    }
+
+    /// Access function for the body-force pointer. Const version
+    NavierStokesBodyForceFctPt body_force_fct_pt() const
+    {
+      return Body_force_fct_pt;
+    }
+
+    /// Access function for the source-function pointer
+    NavierStokesSourceFctPt& source_fct_pt()
+    {
+      return Source_fct_pt;
+    }
+
+    /// Access function for the source-function pointer. Const version
+    NavierStokesSourceFctPt source_fct_pt() const
+    {
+      return Source_fct_pt;
+    }
+
+    /// \short Access function for the source-function pointer for pressure
+    /// advection diffusion (used for validation only).
+    NavierStokesPressureAdvDiffSourceFctPt& source_fct_for_pressure_adv_diff()
+    {
+      return Press_adv_diff_source_fct_pt;
+    }
+
+    /// \short Access function for the source-function pointer for pressure
+    /// advection diffusion  (used for validation only). Const version.
+    NavierStokesPressureAdvDiffSourceFctPt source_fct_for_pressure_adv_diff()
+      const
+    {
+      return Press_adv_diff_source_fct_pt;
+    }
+
+    /// \short Global eqn number of pressure dof that's pinned in pressure
+    /// adv diff problem
+    int& pinned_fp_pressure_eqn()
+    {
+      // Return the appropriate equation number
+      return Pinned_fp_pressure_eqn;
+    }
+
+    /// Function to return number of pressure degrees of freedom
+    virtual unsigned npres_nst() const = 0;
+
+    /// Compute the pressure shape functions at local coordinate s
+    virtual void pshape_nst(const Vector<double>& s, Shape& psi) const = 0;
+
+    /// \short Compute the pressure shape and test functions
+    /// at local coordinate s
+    virtual void pshape_nst(const Vector<double>& s,
+                            Shape& psi,
+                            Shape& test) const = 0;
+
+    /// \short Velocity i at local node n. Uses suitably interpolated value
+    /// for hanging nodes. The use of u_index_nst() permits the use of this
+    /// element as the basis for multi-physics elements. The default
+    /// is to assume that the i-th velocity component is stored at the
+    /// i-th location of the node
+    double u_nst(const unsigned& n, const unsigned& i) const
+    {
+      return nodal_value(n, u_index_nst(i));
+    }
+
+    /// \short Velocity i at local node n at timestep t (t=0: present;
+    /// t>0: previous). Uses suitably interpolated value for hanging nodes.
+    double u_nst(const unsigned& t, const unsigned& n, const unsigned& i) const
+    {
+#ifdef PARANOID
+      // Since we're using space-time elements, this only makes sense if t=0
+      if (t != 0)
+      {
+        // Throw an error
+        throw OomphLibError("Space-time elements cannot have history values!",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Return the appropriate nodal value (noting that t=0 here)
+      return nodal_value(t, n, u_index_nst(i));
+    } // End of u_nst
+
+    /// \short Return the index at which the i-th unknown velocity component
+    /// is stored. The default value, i, is appropriate for single-physics
+    /// problems.
+    /// In derived multi-physics elements, this function should be overloaded
+    /// to reflect the chosen storage scheme. Note that these equations require
+    /// that the unknowns are always stored at the same indices at each node.
+    virtual inline unsigned u_index_nst(const unsigned& i) const
+    {
+#ifdef PARANOID
+      if (i > DIM - 1)
+      {
+        // Create an output stream
+        std::ostringstream error_message_stream;
+
+        // Create an error message
+        error_message_stream << "Input index " << i << " does not correspond "
+                             << "to a velocity component when DIM=" << DIM
+                             << "!" << std::endl;
+
+        // Throw an error
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Return the appropriate entry
+      return i;
+    } // End of u_index_nst
 
 
-  /// Return FE interpolated pressure at local coordinate s
-  virtual double interpolated_p_nst(const Vector<double>& s) const
+    /// Return the number of velocity components (used in
+    /// FluidInterfaceElements)
+    inline unsigned n_u_nst() const
+    {
+      // Return the number of equations to solve
+      return DIM;
+    } // End of n_u_nst
+
+
+    /// \short i-th component of du/dt at local node n.
+    /// Uses suitably interpolated value for hanging nodes.
+    /// NOTE: This is essentially a wrapper for du_dt_nst()
+    /// so it can be called externally.
+    double get_du_dt(const unsigned& n, const unsigned& i) const
+    {
+      // Return the value calculated by du_dt_vdp
+      return du_dt_nst(n, i);
+    } // End of get_du_dt
+
+
+    /// \short i-th component of du/dt at local node n.
+    /// Uses suitably interpolated value for hanging nodes.
+    double du_dt_nst(const unsigned& n, const unsigned& i) const
+    {
+      // Storage for the local coordinates
+      Vector<double> s(DIM + 1, 0.0);
+
+      // Get the local coordinate at the n-th node
+      local_coordinate_of_node(n, s);
+
+      // Return the interpolated du_i/dt value
+      return interpolated_du_dt_nst(s, i);
+    } // End of du_dt_nst
+
+
+    /// \short Return FE representation of function value du_i/dt(s) at local
+    /// coordinate s
+    inline double interpolated_du_dt_nst(const Vector<double>& s,
+                                         const unsigned& i) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+
+      // Local shape function
+      Shape psi(n_node);
+
+      // Allocate space for the derivatives of the shape functions
+      DShape dpsidx(n_node, DIM + 1);
+
+      // Compute the geometric shape functions and also first derivatives
+      // w.r.t. global coordinates at local coordinate s
+      dshape_eulerian(s, psi, dpsidx);
+
+      // Initialise value of du_i/dt
+      double interpolated_dudt = 0.0;
+
+      // Find the index at which the variable is stored
+      unsigned u_nodal_index = u_index_nst(i);
+
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Update the interpolated du_i/dt value
+        interpolated_dudt += nodal_value(l, u_nodal_index) * dpsidx(l, DIM);
+      }
+
+      // Return the interpolated du_i/dt value
+      return interpolated_dudt;
+    } // End of interpolated_du_dt_nst
+
+
+    /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
+    /// at your own risk!
+    void disable_ALE()
+    {
+      ALE_is_disabled = true;
+    } // End of disable_ALE
+
+
+    /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
+    /// when evaluating the time-derivative. Note: By default, ALE is
+    /// enabled, at the expense of possibly creating unnecessary work
+    /// in problems where the mesh is, in fact, stationary.
+    void enable_ALE()
+    {
+      ALE_is_disabled = false;
+    } // End of enable_ALE
+
+
+    /// \short Pressure at local pressure "node" n_p
+    /// Uses suitably interpolated value for hanging nodes.
+    virtual double p_nst(const unsigned& n_p) const = 0;
+
+    /// \short Pressure at local pressure "node" n_p at time level t
+    virtual double p_nst(const unsigned& t, const unsigned& n_p) const = 0;
+
+    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+    virtual void fix_pressure(const unsigned& p_dof, const double& p_value) = 0;
+
+    /// \short Return the index at which the pressure is stored if it is
+    /// stored at the nodes. If not stored at the nodes this will return
+    /// a negative number.
+    virtual int p_nodal_index_nst() const
+    {
+      return Pressure_not_stored_at_node;
+    }
+
+    /// Integral of pressure over element
+    double pressure_integral() const;
+
+    /// \short Return integral of dissipation over element
+    double dissipation() const;
+
+    /// \short Return dissipation at local coordinate s
+    double dissipation(const Vector<double>& s) const;
+
+    /// \short Compute the vorticity vector at local coordinate s
+    void get_vorticity(const Vector<double>& s,
+                       Vector<double>& vorticity) const;
+
+    /// \short Compute the vorticity vector at local coordinate s
+    void get_vorticity(const Vector<double>& s, double& vorticity) const;
+
+    /// \short Get integral of kinetic energy over element
+    double kin_energy() const;
+
+    /// \short Get integral of time derivative of kinetic energy over element
+    double d_kin_energy_dt() const;
+
+    /// Strain-rate tensor: 1/2 (du_i/dx_j+du_j/dx_i)
+    void strain_rate(const Vector<double>& s,
+                     DenseMatrix<double>& strain_rate) const;
+
+    /// \short Compute traction (on the viscous scale) exerted onto
+    /// the fluid at local coordinate s. N has to be outer unit normal
+    /// to the fluid.
+    void get_traction(const Vector<double>& s,
+                      const Vector<double>& N,
+                      Vector<double>& traction);
+
+    /// \short Compute traction (on the viscous scale) exerted onto
+    /// the fluid at local coordinate s, decomposed into pressure and
+    /// normal and tangential viscous components.
+    /// N has to be outer unit normal to the fluid.
+    void get_traction(const Vector<double>& s,
+                      const Vector<double>& N,
+                      Vector<double>& traction_p,
+                      Vector<double>& traction_visc_n,
+                      Vector<double>& traction_visc_t);
+
+    /// \short This implements a pure virtual function defined
+    /// in the FSIFluidElement class. The function computes
+    /// the traction (on the viscous scale), at the element's local
+    /// coordinate s, that the fluid element exerts onto an adjacent
+    /// solid element. The number of arguments is imposed by
+    /// the interface defined in the FSIFluidElement -- only the
+    /// unit normal N (pointing into the fluid!) is actually used
+    /// in the computation.
+    void get_load(const Vector<double>& s,
+                  const Vector<double>& N,
+                  Vector<double>& load)
+    {
+      // Note: get_traction() computes the traction onto the fluid
+      // if N is the outer unit normal onto the fluid; here we're
+      // expecting N to point into the fluid so we're getting the
+      // traction onto the adjacent wall instead!
+      get_traction(s, N, load);
+    }
+
+    /// \short Compute the diagonal of the velocity/pressure mass matrices.
+    /// If which one=0, both are computed, otherwise only the pressure
+    /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
+    /// LSC version of the preconditioner only needs that one)
+    void get_pressure_and_velocity_mass_matrix_diagonal(
+      Vector<double>& press_mass_diag,
+      Vector<double>& veloc_mass_diag,
+      const unsigned& which_one = 0);
+
+    /// \short Number of scalars/fields output by this element. Reimplements
+    /// broken virtual function in base class.
+    unsigned nscalar_paraview() const
+    {
+      // The number of velocity components plus the pressure field
+      return DIM + 1;
+    }
+
+    /// \short Write values of the i-th scalar field at the plot points. Needs
+    /// to be implemented for each new specific element type.
+    void scalar_value_paraview(std::ofstream& file_out,
+                               const unsigned& i,
+                               const unsigned& nplot) const
+    {
+      // Vector of local coordinates
+      Vector<double> s(DIM + 1, 0.0);
+
+      // How many plot points do we have in total?
+      unsigned num_plot_points = nplot_points_paraview(nplot);
+
+      // Loop over plot points
+      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      {
+        // Get the local coordinates of the iplot-th plot point
+        get_s_plot(iplot, nplot, s);
+
+        // Velocities
+        if (i < DIM)
+        {
+          // Output the i-th velocity component
+          file_out << interpolated_u_nst(s, i) << std::endl;
+        }
+        // Pressure
+        else if (i == DIM)
+        {
+          // Output the pressure at this point
+          file_out << interpolated_p_nst(s) << std::endl;
+        }
+        // Never get here
+        else
+        {
+#ifdef PARANOID
+          // Create an output stream
+          std::stringstream error_stream;
+
+          // Create the error message
+          error_stream << "These Navier Stokes elements only store " << DIM + 1
+                       << " fields, "
+                       << "but i is currently  " << i << std::endl;
+
+          // Throw the error message
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+#endif
+        }
+      } // for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+    } // End of scalar_value_paraview
+
+
+    /// \short Write values of the i-th scalar field at the plot points. Needs
+    /// to be implemented for each new specific element type.
+    void scalar_value_fct_paraview(
+      std::ofstream& file_out,
+      const unsigned& i,
+      const unsigned& nplot,
+      const double& time,
+      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt) const
+    {
+#ifdef PARANOID
+      if (i > DIM)
+      {
+        // Create an output stream
+        std::stringstream error_stream;
+
+        // Create the error message
+        error_stream << "These Navier Stokes elements only store " << DIM + 1
+                     << " fields, but i is currently " << i << std::endl;
+
+        // Throw the error message
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Vector of local coordinates
+      Vector<double> s(DIM + 1, 0.0);
+
+      // Storage for the time value
+      double interpolated_t = 0.0;
+
+      // Storage for the spatial coordinates
+      Vector<double> spatial_coordinates(DIM, 0.0);
+
+      // How many plot points do we have in total?
+      unsigned num_plot_points = nplot_points_paraview(nplot);
+
+      // Loop over plot points
+      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      {
+        // Get the local coordinates of the iplot-th plot point
+        get_s_plot(iplot, nplot, s);
+
+        // Loop over the spatial coordinates
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          // Assign the i-th spatial coordinate
+          spatial_coordinates[i] = interpolated_x(s, i);
+        }
+
+        // Get the time value
+        interpolated_t = interpolated_x(s, DIM);
+
+        // ------ DRAIG: REMOVE ----------------------------------------
+        // Exact solution vector (here it's simply a scalar)
+        Vector<double> exact_soln(DIM + 1, 0.0);
+        // DRAIG: Needs to be changed to a Vector of size DIM
+        // ------ DRAIG: REMOVE ----------------------------------------
+
+        // Get the exact solution at this point
+        (*exact_soln_pt)(interpolated_t, spatial_coordinates, exact_soln);
+
+        // Output the interpolated solution value
+        file_out << exact_soln[i] << std::endl;
+      } // for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+    } // End of scalar_value_fct_paraview
+
+
+    /// \short Name of the i-th scalar field. Default implementation
+    /// returns V1 for the first one, V2 for the second etc. Can (should!) be
+    /// overloaded with more meaningful names in specific elements.
+    std::string scalar_name_paraview(const unsigned& i) const
+    {
+      // Velocities
+      if (i < DIM)
+      {
+        // Return the appropriate string for the i-th velocity component
+        return "Velocity " + StringConversion::to_string(i);
+      }
+      // Pressure
+      else if (i == DIM)
+      {
+        // Return the name for the pressure
+        return "Pressure";
+      }
+      // Never get here
+      else
+      {
+        // Create an output stream
+        std::stringstream error_stream;
+
+        // Create the error message
+        error_stream << "These Navier Stokes elements only store " << DIM + 1
+                     << " fields,\nbut i is currently " << i << std::endl;
+
+        // Throw the error message
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+
+        // Dummy return so the compiler doesn't complain
+        return " ";
+      }
+    } // End of scalar_name_paraview
+
+
+    /// \short Output function: x,y,t,u,v,p in tecplot format. The
+    /// default number of plot points is five
+    void output(std::ostream& outfile)
+    {
+      // Set the number of plot points in each direction
+      unsigned n_plot = 5;
+
+      // Forward the call to the appropriate output function
+      output(outfile, n_plot);
+    } // End of output
+
+
+    /// \short Output function: x,y,[z],u,v,[w],p in tecplot format. Here,
+    /// we use n_plot plot points in each coordinate direction
+    void output(std::ostream& outfile, const unsigned& n_plot);
+
+
+    /// \short C-style output function: x,y,[z],u,v,[w],p in tecplot format. The
+    /// default number of plot points is five
+    void output(FILE* file_pt)
+    {
+      // Set the number of plot points in each direction
+      unsigned n_plot = 5;
+
+      // Forward the call to the appropriate output function
+      output(file_pt, n_plot);
+    } // End of output
+
+
+    /// \short C-style output function: x,y,[z],u,v,[w],p in tecplot format. Use
+    /// n_plot points in each coordinate direction
+    void output(FILE* file_pt, const unsigned& n_plot);
+
+
+    /// \short Full output function:
+    /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation in tecplot format. The
+    /// default number of plot points is five
+    void full_output(std::ostream& outfile)
+    {
+      // Set the number of plot points in each direction
+      unsigned n_plot = 5;
+
+      // Forward the call to the appropriate output function
+      full_output(outfile, n_plot);
+    } // End of full_output
+
+
+    /// \short Full output function:
+    /// x,y,t,u,v,p,du/dt,dv/dt,dissipation in tecplot format. Use
+    /// n_plot plot points in each coordinate direction
+    void full_output(std::ostream& outfile, const unsigned& n_plot);
+
+
+    /// \short Output function: x,y,t,u,v in tecplot format. Use
+    /// n_plot points in each coordinate direction at timestep t (t=0:
+    /// present; t>0: previous timestep)
+    void output_veloc(std::ostream& outfile,
+                      const unsigned& nplot,
+                      const unsigned& t);
+
+
+    /// \short Output function: x,y,t,omega
+    /// in tecplot format. nplot points in each coordinate direction
+    void output_vorticity(std::ostream& outfile, const unsigned& nplot);
+
+
+    /// \short Output exact solution specified via function pointer
+    /// at a given number of plot points. Function prints as
+    /// many components as are returned in solution Vector
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
+                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+
+
+    /// \short Output exact solution specified via function pointer
+    /// at a given time and at a given number of plot points.
+    /// Function prints as many components as are returned in solution Vector.
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
+                    const double& time,
+                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
+
+
+    /// Compute the vector norm of the FEM solution
+    void compute_norm(Vector<double>& norm);
+
+
+    /// \short Validate against exact solution at given time
+    /// Solution is provided via function pointer.
+    /// Plot at a given number of plot points and compute L2 error
+    /// and L2 norm of velocity solution over element
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                       const double& time,
+                       double& error,
+                       double& norm);
+
+
+    /// \short Validate against exact solution at given time
+    /// Solution is provided via function pointer.
+    /// Plot at a given number of plot points and compute L2 error
+    /// and L2 norm of velocity solution over element
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                       const double& time,
+                       Vector<double>& error,
+                       Vector<double>& norm);
+
+
+    /// \short Validate against exact solution.
+    /// Solution is provided via function pointer.
+    /// Plot at a given number of plot points and compute L2 error
+    /// and L2 norm of velocity solution over element
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                       double& error,
+                       double& norm);
+
+
+    /// \short Validate against exact solution. Solution is provided via
+    /// function pointer. Compute L2 error and L2 norm of velocity solution
+    /// over element.
+    void compute_error(FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                       const double& time,
+                       double& error,
+                       double& norm);
+
+
+    /// \short Validate against exact solution. Solution is provided via
+    /// function pointer. Compute L2 error and L2 norm of velocity solution
+    /// over element.
+    void compute_error(FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                       double& error,
+                       double& norm);
+
+
+    /// Compute the element's residual Vector
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      // Do we want to compute the Jacobian? ANSWER: No!
+      unsigned compute_jacobian_flag = 0;
+
+      // Call the generic residuals function using a dummy matrix argument
+      fill_in_generic_residual_contribution_nst(
+        residuals,
+        GeneralisedElement::Dummy_matrix,
+        GeneralisedElement::Dummy_matrix,
+        compute_jacobian_flag);
+    } // End of fill_in_contribution_to_residuals
+
+
+    ///\short Compute the element's residual Vector and the jacobian matrix
+    /// Virtual function can be overloaded by hanging-node version
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Do we want to compute the Jacobian? ANSWER: Yes!
+      unsigned compute_jacobian_flag = 1;
+
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution_nst(
+        residuals,
+        jacobian,
+        GeneralisedElement::Dummy_matrix,
+        compute_jacobian_flag);
+    } // End of fill_in_contribution_to_residuals
+
+
+    /// \short Add the element's contribution to its residuals vector,
+    /// jacobian matrix and mass matrix
+    void fill_in_contribution_to_jacobian_and_mass_matrix(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
+    {
+      // Do we want to compute the Jacobian AND mass matrix? ANSWER: Yes!
+      unsigned compute_matrices_flag = 2;
+
+      // Call the generic routine with the flag set to 2
+      fill_in_generic_residual_contribution_nst(
+        residuals, jacobian, mass_matrix, compute_matrices_flag);
+    } // End of fill_in_contribution_to_jacobian_and_mass_matrix
+
+
+    /// Compute the element's residual Vector (differentiated w.r.t. a
+    /// parameter)
+    void fill_in_contribution_to_dresiduals_dparameter(
+      double* const& parameter_pt, Vector<double>& dres_dparam)
+    {
+      // Do we want to compute the Jacobian? ANSWER: No!
+      unsigned compute_jacobian_flag = 0;
+
+      // Call the generic residuals function using a dummy matrix argument
+      fill_in_generic_dresidual_contribution_nst(
+        parameter_pt,
+        dres_dparam,
+        GeneralisedElement::Dummy_matrix,
+        GeneralisedElement::Dummy_matrix,
+        compute_jacobian_flag);
+    } // End of fill_in_contribution_to_dresiduals_dparameter
+
+
+    /// \short Compute the element's residual Vector and the jacobian matrix
+    /// Virtual function can be overloaded by hanging-node version
+    void fill_in_contribution_to_djacobian_dparameter(
+      double* const& parameter_pt,
+      Vector<double>& dres_dparam,
+      DenseMatrix<double>& djac_dparam)
+    {
+      // Do we want to compute the Jacobian? ANSWER: Yes!
+      unsigned compute_jacobian_flag = 1;
+
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_dresidual_contribution_nst(
+        parameter_pt,
+        dres_dparam,
+        djac_dparam,
+        GeneralisedElement::Dummy_matrix,
+        compute_jacobian_flag);
+    } // End of fill_in_contribution_to_djacobian_dparameter
+
+
+    /// Add the element's contribution to its residuals vector,
+    /// jacobian matrix and mass matrix
+    void fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter(
+      double* const& parameter_pt,
+      Vector<double>& dres_dparam,
+      DenseMatrix<double>& djac_dparam,
+      DenseMatrix<double>& dmass_matrix_dparam)
+    {
+      // Do we want to compute the Jacobian AND mass matrix? ANSWER: Yes!
+      unsigned compute_matrices_flag = 2;
+
+      // Call the generic routine with the appropriate flag
+      fill_in_generic_dresidual_contribution_nst(parameter_pt,
+                                                 dres_dparam,
+                                                 djac_dparam,
+                                                 dmass_matrix_dparam,
+                                                 compute_matrices_flag);
+    } // End of fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter
+
+
+    /// \short Compute the residuals for the associated pressure advection
+    /// diffusion problem. Used by the Fp preconditioner.
+    void fill_in_pressure_advection_diffusion_residuals(
+      Vector<double>& residuals)
+    {
+      // Do we want to compute the Jacobian? ANSWER: No!
+      unsigned compute_jacobian_flag = 0;
+
+      // Call the generic routine with the appropriate flag
+      fill_in_generic_pressure_advection_diffusion_contribution_nst(
+        residuals, GeneralisedElement::Dummy_matrix, compute_jacobian_flag);
+    } // End of fill_in_pressure_advection_diffusion_residuals
+
+
+    /// \short Compute the residuals and Jacobian for the associated
+    /// pressure advection diffusion problem. Used by the Fp preconditioner.
+    void fill_in_pressure_advection_diffusion_jacobian(
+      Vector<double>& residuals, DenseMatrix<double>& jacobian)
+    {
+      // Do we want to compute the Jacobian? ANSWER: Yes!
+      unsigned compute_jacobian_flag = 1;
+
+      // Call the generic routine with the appropriate flag
+      fill_in_generic_pressure_advection_diffusion_contribution_nst(
+        residuals, jacobian, compute_jacobian_flag);
+    } // End of fill_in_pressure_advection_diffusion_jacobian
+
+
+    /// \short Pin all non-pressure dofs and backup eqn numbers
+    void pin_all_non_pressure_dofs(
+      std::map<Data*, std::vector<int>>& eqn_number_backup)
+    {
+      // Loop over internal data and pin the values (having established that
+      // pressure dofs aren't amongst those)
+      unsigned nint = this->ninternal_data();
+      for (unsigned j = 0; j < nint; j++)
+      {
+        Data* data_pt = this->internal_data_pt(j);
+        if (eqn_number_backup[data_pt].size() == 0)
+        {
+          unsigned nvalue = data_pt->nvalue();
+          eqn_number_backup[data_pt].resize(nvalue);
+          for (unsigned i = 0; i < nvalue; i++)
+          {
+            // Backup
+            eqn_number_backup[data_pt][i] = data_pt->eqn_number(i);
+
+            // Pin everything
+            data_pt->pin(i);
+          }
+        }
+      }
+
+      // Now deal with nodal values
+      unsigned nnod = this->nnode();
+      for (unsigned j = 0; j < nnod; j++)
+      {
+        Node* nod_pt = this->node_pt(j);
+        if (eqn_number_backup[nod_pt].size() == 0)
+        {
+          unsigned nvalue = nod_pt->nvalue();
+          eqn_number_backup[nod_pt].resize(nvalue);
+          for (unsigned i = 0; i < nvalue; i++)
+          {
+            // Pin everything apart from the nodal pressure
+            // value
+            if (int(i) != this->p_nodal_index_nst())
+            {
+              // Backup
+              eqn_number_backup[nod_pt][i] = nod_pt->eqn_number(i);
+
+              // Pin
+              nod_pt->pin(i);
+            }
+            // Else it's a pressure value
+            else
+            {
+              // Exclude non-nodal pressure based elements
+              if (this->p_nodal_index_nst() >= 0)
+              {
+                // Backup
+                eqn_number_backup[nod_pt][i] = nod_pt->eqn_number(i);
+              }
+            }
+          }
+
+
+          // If it's a solid node deal with its positional data too
+          SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
+          if (solid_nod_pt != 0)
+          {
+            Data* solid_posn_data_pt = solid_nod_pt->variable_position_pt();
+            if (eqn_number_backup[solid_posn_data_pt].size() == 0)
+            {
+              unsigned nvalue = solid_posn_data_pt->nvalue();
+              eqn_number_backup[solid_posn_data_pt].resize(nvalue);
+              for (unsigned i = 0; i < nvalue; i++)
+              {
+                // Backup
+                eqn_number_backup[solid_posn_data_pt][i] =
+                  solid_posn_data_pt->eqn_number(i);
+
+                // Pin
+                solid_posn_data_pt->pin(i);
+              }
+            }
+          }
+        }
+      }
+    } // End of pin_all_non_pressure_dofs
+
+
+    /// \short Build FaceElements that apply the Robin boundary condition
+    /// to the pressure advection diffusion problem required by
+    /// Fp preconditioner
+    virtual void build_fp_press_adv_diff_robin_bc_element(
+      const unsigned& face_index) = 0;
+
+
+    /// \short Output the FaceElements that apply the Robin boundary condition
+    /// to the pressure advection diffusion problem required by
+    /// Fp preconditioner
+    void output_pressure_advection_diffusion_robin_elements(
+      std::ostream& outfile)
+    {
+      unsigned nel = Pressure_advection_diffusion_robin_element_pt.size();
+      for (unsigned e = 0; e < nel; e++)
+      {
+        FaceElement* face_el_pt =
+          Pressure_advection_diffusion_robin_element_pt[e];
+        outfile << "ZONE" << std::endl;
+        Vector<double> unit_normal(DIM);
+        Vector<double> x(DIM + 1);
+        Vector<double> s(DIM);
+        unsigned n = face_el_pt->integral_pt()->nweight();
+        for (unsigned ipt = 0; ipt < n; ipt++)
+        {
+          for (unsigned i = 0; i < DIM; i++)
+          {
+            s[i] = face_el_pt->integral_pt()->knot(ipt, i);
+          }
+          face_el_pt->interpolated_x(s, x);
+          face_el_pt->outer_unit_normal(ipt, unit_normal);
+          for (unsigned i = 0; i < DIM + 1; i++)
+          {
+            outfile << x[i] << " ";
+          }
+          for (unsigned i = 0; i < DIM; i++)
+          {
+            outfile << unit_normal[i] << " ";
+          }
+          outfile << std::endl;
+        }
+      }
+    } // End of output_pressure_advection_diffusion_robin_elements
+
+
+    /// \short Delete the FaceElements that apply the Robin boundary condition
+    /// to the pressure advection diffusion problem required by
+    /// Fp preconditioner
+    void delete_pressure_advection_diffusion_robin_elements()
+    {
+      unsigned nel = Pressure_advection_diffusion_robin_element_pt.size();
+      for (unsigned e = 0; e < nel; e++)
+      {
+        delete Pressure_advection_diffusion_robin_element_pt[e];
+      }
+      Pressure_advection_diffusion_robin_element_pt.clear();
+    } // End of delete_pressure_advection_diffusion_robin_elements
+
+
+    /// \short Compute derivatives of elemental residual vector with respect
+    /// to nodal coordinates. Overwrites default implementation in
+    /// FiniteElement base class.
+    /// dresidual_dnodal_coordinates(l,i,j)=d res(l) / dX_{ij}
+    virtual void get_dresidual_dnodal_coordinates(
+      RankThreeTensor<double>& dresidual_dnodal_coordinates);
+
+
+    /// Compute vector of FE interpolated velocity u at local coordinate s
+    void interpolated_u_nst(const Vector<double>& s,
+                            Vector<double>& velocity) const
+    {
+      // Find the number of nodes
+      unsigned n_node = nnode();
+
+      // Local shape function
+      Shape psi(n_node);
+
+      // Find values of shape function
+      shape(s, psi);
+
+      // Loop over the velocity components
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        // Index at which the nodal value is stored
+        unsigned u_nodal_index = u_index_nst(i);
+
+        // Initialise the i-th value of the velocity vector
+        velocity[i] = 0.0;
+
+        // Loop over the local nodes and sum
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          // Update the i-th velocity component approximation
+          velocity[i] += nodal_value(l, u_nodal_index) * psi[l];
+        }
+      } // for (unsigned i=0;i<DIM;i++)
+    } // End of interpolated_u_nst
+
+
+    /// Return FE interpolated velocity u[i] at local coordinate s
+    double interpolated_u_nst(const Vector<double>& s, const unsigned& i) const
+    {
+      // Find the number of nodes
+      unsigned n_node = nnode();
+
+      // Local shape function
+      Shape psi(n_node);
+
+      // Find values of shape function
+      shape(s, psi);
+
+      // Get nodal index at which i-th velocity is stored
+      unsigned u_nodal_index = u_index_nst(i);
+
+      // Initialise value of u
+      double interpolated_u = 0.0;
+
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Update the i-th velocity component approximation
+        interpolated_u += nodal_value(l, u_nodal_index) * psi[l];
+      }
+
+      // Return the calculated approximation to the i-th velocity component
+      return interpolated_u;
+    } // End of interpolated_u_nst
+
+
+    /// \short Return FE interpolated velocity u[i] at local coordinate s
+    /// time level, t. Purposely broken for space-time elements.
+    double interpolated_u_nst(const unsigned& t,
+                              const Vector<double>& s,
+                              const unsigned& i) const
+    {
+      // Create an output stream
+      std::ostringstream error_message_stream;
+
+      // Create an error message
+      error_message_stream << "This interface doesn't make sense in "
+                           << "space-time elements!" << std::endl;
+
+      // Throw an error
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    } // End of interpolated_u_nst
+
+
+    /// \short Compute the derivatives of the i-th component of
+    /// velocity at point s with respect
+    /// to all data that can affect its value. In addition, return the global
+    /// equation numbers corresponding to the data. The function is virtual
+    /// so that it can be overloaded in the refineable version
+    virtual void dinterpolated_u_nst_ddata(const Vector<double>& s,
+                                           const unsigned& i,
+                                           Vector<double>& du_ddata,
+                                           Vector<unsigned>& global_eqn_number)
+    {
+      // Find the number of nodes
+      unsigned n_node = nnode();
+
+      // Local shape function
+      Shape psi(n_node);
+
+      // Find values of shape function
+      shape(s, psi);
+
+      // Get nodal index at which i-th velocity is stored
+      unsigned u_nodal_index = u_index_nst(i);
+
+      // Find the number of dofs associated with interpolated u
+      unsigned n_u_dof = 0;
+
+      // Loop over the nodes
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Get the global equation number of the dof
+        int global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
+
+        // If it's positive add to the count
+        if (global_eqn >= 0)
+        {
+          // Increment the counter
+          n_u_dof++;
+        }
+      } // End of dinterpolated_u_nst_ddata
+
+      // Now resize the storage schemes
+      du_ddata.resize(n_u_dof, 0.0);
+      global_eqn_number.resize(n_u_dof, 0);
+
+      // Loop over th nodes again and set the derivatives
+      unsigned count = 0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Get the global equation number
+        int global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
+        if (global_eqn >= 0)
+        {
+          // Set the global equation number
+          global_eqn_number[count] = global_eqn;
+          // Set the derivative with respect to the unknown
+          du_ddata[count] = psi[l];
+          // Increase the counter
+          ++count;
+        }
+      }
+    } // End of dinterpolated_u_nst_ddata
+
+
+    /// Return FE interpolated pressure at local coordinate s
+    virtual double interpolated_p_nst(const Vector<double>& s) const
+    {
+      // Find number of nodes
+      unsigned n_pres = npres_nst();
+      // Local shape function
+      Shape psi(n_pres);
+      // Find values of shape function
+      pshape_nst(s, psi);
+
+      // Initialise value of p
+      double interpolated_p = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        interpolated_p += p_nst(l) * psi[l];
+      }
+
+      return (interpolated_p);
+    }
+
+
+    /// Return FE interpolated pressure at local coordinate s at time level t
+    double interpolated_p_nst(const unsigned& t, const Vector<double>& s) const
+    {
+      // Find number of nodes
+      unsigned n_pres = npres_nst();
+      // Local shape function
+      Shape psi(n_pres);
+      // Find values of shape function
+      pshape_nst(s, psi);
+
+      // Initialise value of p
+      double interpolated_p = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        interpolated_p += p_nst(t, l) * psi[l];
+      }
+
+      return (interpolated_p);
+    }
+
+
+    /// \short Output solution in data vector at local cordinates s:
+    /// x,y,z,u,v,p
+    void point_output_data(const Vector<double>& s, Vector<double>& data)
+    {
+      // Resize data for values
+      data.resize(2 * DIM + 2);
+
+      // Write values in the vector
+      for (unsigned i = 0; i < DIM + 1; i++)
+      {
+        // Output the i-th (Eulerian) coordinate at these local coordinates
+        data[i] = interpolated_x(s, i);
+      }
+
+      // Write values in the vector
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        // Output the i-th velocity component at these local coordinates
+        data[i + (DIM + 1)] = this->interpolated_u_nst(s, i);
+      }
+
+      // Output the pressure field value at these local coordinates
+      data[2 * DIM + 1] = this->interpolated_p_nst(s);
+    } // End of point_output_data
+  };
+
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+
+  //=======================================================================
+  /// Taylor-Hood elements are Navier-Stokes elements with quadratic
+  /// interpolation for velocities and positions and continuous linear
+  /// pressure interpolation. They can be used within oomph-lib's
+  /// block-preconditioning framework.
+  //=======================================================================
+  template<unsigned DIM>
+  class QTaylorHoodSpaceTimeElement
+    : public virtual QElement<DIM + 1, 3>,
+      public virtual SpaceTimeNavierStokesEquations<DIM>
   {
-   //Find number of nodes
-   unsigned n_pres=npres_nst();
-   //Local shape function
-   Shape psi(n_pres);
-   //Find values of shape function
-   pshape_nst(s,psi);
+  private:
+    /// Static array of ints to hold number of variables at node
+    static const unsigned Initial_Nvalue[];
 
-   //Initialise value of p
-   double interpolated_p=0.0;
-   //Loop over the local nodes and sum
-   for (unsigned l=0;l<n_pres;l++)
-   {
-    interpolated_p += p_nst(l)*psi[l];
-   }
-
-   return(interpolated_p);
-  }
+  protected:
+    /// \short Static array of ints to hold conversion from pressure
+    /// node numbers to actual node numbers
+    static const unsigned Pconv[];
 
 
-  /// Return FE interpolated pressure at local coordinate s at time level t
-  double interpolated_p_nst(const unsigned& t, const Vector<double>& s) const
+    /// \short Velocity shape and test functions and their derivs
+    /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_nst(const Vector<double>& s,
+                                                Shape& psi,
+                                                DShape& dpsidx,
+                                                Shape& test,
+                                                DShape& dtestdx) const;
+
+
+    /// \short Velocity shape and test functions and their derivs
+    /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dshape_and_dtest_eulerian_at_knot_nst(const unsigned& ipt,
+                                                        Shape& psi,
+                                                        DShape& dpsidx,
+                                                        Shape& test,
+                                                        DShape& dtestdx) const;
+
+
+    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    /// integration point ipt; return Jacobian of mapping (J). Also compute
+    /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+    inline double dshape_and_dtest_eulerian_at_knot_nst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const;
+
+
+    /// \short Pressure shape functions and their derivs w.r.t. to global coords
+    /// at local coordinate s (taken from geometry). Return Jacobian of mapping
+    /// between local and global coordinates.
+    inline double dpshape_eulerian(const Vector<double>& s,
+                                   Shape& ppsi,
+                                   DShape& dppsidx) const;
+
+
+    /// \short Pressure test functions and their derivs w.r.t. to global coords
+    /// at local coordinate s (taken from geometry). Return Jacobian of mapping
+    /// between local and global coordinates.
+    inline double dptest_eulerian(const Vector<double>& s,
+                                  Shape& ptest,
+                                  DShape& dptestdx) const;
+
+
+    /// \short Pressure shape and test functions and their derivs
+    /// w.r.t. to global coords  at local coordinate s (taken from geometry).
+    /// Return Jacobian of mapping between local and global coordinates.
+    inline double dpshape_and_dptest_eulerian_nst(const Vector<double>& s,
+                                                  Shape& ppsi,
+                                                  DShape& dppsidx,
+                                                  Shape& ptest,
+                                                  DShape& dptestdx) const;
+
+  public:
+    /// Constructor, no internal data points
+    QTaylorHoodSpaceTimeElement()
+      : QElement<DIM + 1, 3>(), SpaceTimeNavierStokesEquations<DIM>()
+    {
+    }
+
+    /// \short Number of values (pinned or dofs) required at node n. Can
+    /// be overwritten for hanging node version
+    inline virtual unsigned required_nvalue(const unsigned& n) const
+    {
+      // Return the appropriate entry from Initial_Nvalue
+      return Initial_Nvalue[n];
+    } // End of required_nvalue
+
+
+    /// Pressure shape functions at local coordinate s
+    inline void pshape_nst(const Vector<double>& s, Shape& psi) const;
+
+
+    /// Pressure test functions at local coordinate s
+    inline void ptest_nst(const Vector<double>& s, Shape& psi) const;
+
+
+    /// Pressure shape and test functions at local coordinte s
+    inline void pshape_nst(const Vector<double>& s,
+                           Shape& psi,
+                           Shape& test) const;
+
+
+    /// \short Set the value at which the pressure is stored in the nodes
+    virtual int p_nodal_index_nst() const
+    {
+      // The pressure is stored straight after the velocity components
+      return static_cast<int>(DIM);
+    } // End of p_nodal_index_nst
+
+
+    /// Return the local equation numbers for the pressure values.
+    inline int p_local_eqn(const unsigned& n) const
+    {
+      // Get the local equation number associated with the n-th pressure dof
+      return this->nodal_local_eqn(Pconv[n], p_nodal_index_nst());
+    } // End of p_local_eqn
+
+
+    /// \short Access function for the pressure values at local pressure
+    /// node n_p (const version)
+    double p_nst(const unsigned& n_p) const
+    {
+      // Get the nodal value associated with the n_p-th pressure dof
+      return this->nodal_value(Pconv[n_p], this->p_nodal_index_nst());
+    } // End of p_nst
+
+
+    /// \short Access function for the pressure values at local pressure
+    /// node n_p (const version)
+    double p_nst(const unsigned& t, const unsigned& n_p) const
+    {
+      // Return the pressure value of the n_p-th pressure dof at time-level t
+      return this->nodal_value(t, Pconv[n_p], this->p_nodal_index_nst());
+    } // End of p_nst
+
+
+    /// Return number of pressure values
+    unsigned npres_nst() const
+    {
+      // There are 3*(2^{DIM}) pressure dofs where DIM is the spatial dimension
+      // (remembering that these are space-time elements)
+      return 3.0 * static_cast<unsigned>(pow(2.0, static_cast<int>(DIM)));
+    } // End of npres_nst
+
+
+    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+    void fix_pressure(const unsigned& p_dof, const double& p_value)
+    {
+      // Pin the pressure dof
+      this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_nst());
+
+      // Now set its value
+      this->node_pt(Pconv[p_dof])
+        ->set_value(this->p_nodal_index_nst(), p_value);
+    } // End of fix_pressure
+
+
+    /// \short Build FaceElements that apply the Robin boundary condition
+    /// to the pressure advection diffusion problem required by
+    /// Fp preconditioner
+    void build_fp_press_adv_diff_robin_bc_element(const unsigned& face_index)
+    {
+      // Create a new Robic BC element and add it to the storage
+      this->Pressure_advection_diffusion_robin_element_pt.push_back(
+        new FpPressureAdvDiffRobinBCSpaceTimeElement<
+          QTaylorHoodSpaceTimeElement<DIM>>(this, face_index));
+    } // End of build_fp_press_adv_diff_robin_bc_element
+
+
+    /// \short Add to the set \c paired_load_data pairs containing
+    /// - the pointer to a Data object
+    /// and
+    /// - the index of the value in that Data object
+    /// .
+    /// for all values (pressures, velocities) that affect the
+    /// load computed in the \c get_load(...) function.
+    void identify_load_data(
+      std::set<std::pair<Data*, unsigned>>& paired_load_data);
+
+
+    /// \short Add to the set \c paired_pressure_data pairs
+    /// containing
+    /// - the pointer to a Data object
+    /// and
+    /// - the index of the value in that Data object
+    /// .
+    /// for all pressure values that affect the
+    /// load computed in the \c get_load(...) function.
+    void identify_pressure_data(
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data);
+
+
+    /// Redirect output to NavierStokesEquations output
+    void output(std::ostream& outfile)
+    {
+      // Call the base class implementation
+      SpaceTimeNavierStokesEquations<DIM>::output(outfile);
+    } // End of output
+
+
+    /// Redirect output to NavierStokesEquations output
+    void output(std::ostream& outfile, const unsigned& nplot)
+    {
+      // Call the base class implementation
+      SpaceTimeNavierStokesEquations<DIM>::output(outfile, nplot);
+    } // End of output
+
+
+    /// Redirect output to NavierStokesEquations output
+    void output(FILE* file_pt)
+    {
+      // Call the base class implementation
+      SpaceTimeNavierStokesEquations<DIM>::output(file_pt);
+    } // End of output
+
+
+    /// Redirect output to NavierStokesEquations output
+    void output(FILE* file_pt, const unsigned& nplot)
+    {
+      // Call the base class implementation
+      SpaceTimeNavierStokesEquations<DIM>::output(file_pt, nplot);
+    } // End of output
+
+
+    /// \short Returns the number of "DOF types" that degrees of freedom
+    /// in this element are sub-divided into: Velocity and pressure.
+    unsigned ndof_types() const
+    {
+      // There are DIM velocity components and 1 pressure component
+      return DIM + 1;
+    } // End of ndof_types
+
+
+    /// \short Create a list of pairs for all unknowns in this element,
+    /// so that the first entry in each pair contains the global equation
+    /// number of the unknown, while the second one contains the number
+    /// of the "DOF type" that this unknown is associated with.
+    /// (Function can obviously only be called if the equation numbering
+    /// scheme has been set up.) Velocity=0; Pressure=1
+    void get_dof_numbers_for_unknowns(
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
+  };
+
+  // Inline functions:
+
+  //==========================================================================
+  /// Derivatives of the shape functions and test functions w.r.t to
+  /// global (Eulerian) coordinates. Return Jacobian of mapping between
+  /// local and global coordinates.
+  //==========================================================================
+  template<unsigned DIM>
+  inline double QTaylorHoodSpaceTimeElement<DIM>::dshape_and_dtest_eulerian_nst(
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
-   //Find number of nodes
-   unsigned n_pres=npres_nst();
-   //Local shape function
-   Shape psi(n_pres);
-   //Find values of shape function
-   pshape_nst(s,psi);
+    //--------------------------
+    // Call the shape functions:
+    //--------------------------
+    // Find the element dimension
+    const unsigned el_dim = this->dim();
 
-   //Initialise value of p
-   double interpolated_p=0.0;
-   //Loop over the local nodes and sum
-   for (unsigned l=0;l<n_pres;l++)
-   {
-    interpolated_p += p_nst(t,l)*psi[l];
-   }
+    // Get the values of the shape functions and their local derivatives,
+    // temporarily stored in dpsi
+    this->dshape_local(s, psi, dpsidx);
 
-   return(interpolated_p);
-  }
+    // Allocate memory for the inverse jacobian
+    DenseMatrix<double> inverse_jacobian(el_dim);
 
+    // Now calculate the inverse jacobian
+    const double det =
+      this->local_to_eulerian_mapping(dpsidx, inverse_jacobian);
 
-  /// \short Output solution in data vector at local cordinates s:
-  /// x,y,z,u,v,p
-  void point_output_data(const Vector<double>& s,Vector<double>& data)
+    // Now set the values of the derivatives to be dpsidx
+    this->transform_derivatives(inverse_jacobian, dpsidx);
+
+    //-------------------------
+    // Call the test functions:
+    //-------------------------
+    // Make sure we're using 3D elements
+    if (el_dim != 3)
+    {
+      // Create an output stream
+      std::ostringstream error_message_stream;
+
+      // Create an error message
+      error_message_stream << "Need 3D space-time elements for this to work!"
+                           << std::endl;
+
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+
+    //--------start_of_dshape_local--------------------------------------
+    // Local storage
+    double test_values[3][3];
+    double dtest_values[3][3];
+
+    // Index of the total shape function
+    unsigned index = 0;
+
+    // Call the 1D shape functions and derivatives
+    OneDimLagrange::shape<3>(s[0], test_values[0]);
+    OneDimLagrange::shape<3>(s[1], test_values[1]);
+    OneDimLagrange::dshape<3>(s[0], dtest_values[0]);
+    OneDimLagrange::dshape<3>(s[1], dtest_values[1]);
+
+    // Set the time discretisation
+    OneDimDiscontinuousGalerkin::shape<3>(s[2], test_values[2]);
+    OneDimDiscontinuousGalerkin::dshape<3>(s[2], dtest_values[2]);
+
+    // Loop over the nodes in the third local coordinate direction
+    for (unsigned k = 0; k < 3; k++)
+    {
+      // Loop over the nodes in the second local coordinate direction
+      for (unsigned j = 0; j < 3; j++)
+      {
+        // Loop over the nodes in the first local coordinate direction
+        for (unsigned i = 0; i < 3; i++)
+        {
+          // Calculate dtest/ds_0
+          dtestdx(index, 0) =
+            dtest_values[0][i] * test_values[1][j] * test_values[2][k];
+
+          // Calculate dtest/ds_1
+          dtestdx(index, 1) =
+            test_values[0][i] * dtest_values[1][j] * test_values[2][k];
+
+          // Calculate dtest/ds_2
+          dtestdx(index, 2) =
+            test_values[0][i] * test_values[1][j] * dtest_values[2][k];
+
+          // Calculate the index-th entry of test
+          test[index] =
+            test_values[0][i] * test_values[1][j] * test_values[2][k];
+
+          // Increment the index
+          index++;
+        }
+      } // for (unsigned j=0;j<3;j++)
+    } // for (unsigned k=0;k<3;k++)
+    //--------end_of_dshape_local----------------------------------------
+
+    // Transform derivatives from dtest/ds to dtest/dx
+    this->transform_derivatives(inverse_jacobian, dtestdx);
+
+    // Return the determinant value
+    return det;
+  } // End of dshape_and_dtest_eulerian_nst
+
+  //==========================================================================
+  /// Derivatives of the shape functions and test functions w.r.t to
+  /// global (Eulerian) coordinates. Return Jacobian of mapping between
+  /// local and global coordinates.
+  //==========================================================================
+  template<unsigned DIM>
+  inline double QTaylorHoodSpaceTimeElement<
+    DIM>::dshape_and_dtest_eulerian_at_knot_nst(const unsigned& ipt,
+                                                Shape& psi,
+                                                DShape& dpsidx,
+                                                Shape& test,
+                                                DShape& dtestdx) const
   {
-   // Resize data for values
-   data.resize(2*DIM+2);
+    // Calculate the element dimension
+    const unsigned el_dim = DIM + 1;
 
-   // Write values in the vector
-   for (unsigned i=0;i<DIM+1;i++)
-   {
-    // Output the i-th (Eulerian) coordinate at these local coordinates
-    data[i]=interpolated_x(s,i);
-   }
-   
-   // Write values in the vector
-   for (unsigned i=0;i<DIM;i++)
-   {
-    // Output the i-th velocity component at these local coordinates
-    data[i+(DIM+1)]=this->interpolated_u_nst(s,i);
-   }
-  
-   // Output the pressure field value at these local coordinates
-   data[2*DIM+1]=this->interpolated_p_nst(s);
-  } // End of point_output_data
- };
+    // Storage for the local coordinates of the integration point
+    Vector<double> s(el_dim, 0.0);
 
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- 
- //=======================================================================
- /// Taylor-Hood elements are Navier-Stokes elements with quadratic
- /// interpolation for velocities and positions and continuous linear
- /// pressure interpolation. They can be used within oomph-lib's
- /// block-preconditioning framework.
- //=======================================================================
- template<unsigned DIM>
- class QTaylorHoodSpaceTimeElement :
-  public virtual QElement<DIM+1,3>, 
-  public virtual SpaceTimeNavierStokesEquations<DIM>
- {
- private:
- 
-  /// Static array of ints to hold number of variables at node
-  static const unsigned Initial_Nvalue[];
- 
- protected:
+    // Set the local coordinate
+    for (unsigned i = 0; i < el_dim; i++)
+    {
+      // Calculate the i-th local coordinate at the ipt-th knot point
+      s[i] = this->integral_pt()->knot(ipt, i);
+    }
 
-  /// \short Static array of ints to hold conversion from pressure 
-  /// node numbers to actual node numbers
-  static const unsigned Pconv[];
+    // Return the Jacobian of the geometrical shape functions and derivatives
+    return dshape_and_dtest_eulerian_nst(s, psi, dpsidx, test, dtestdx);
+  } // End of dshape_and_dtest_eulerian_at_knot_nst
 
-  
-  /// \short Velocity shape and test functions and their derivs 
-  /// w.r.t. to global coords  at local coordinate s (taken from geometry)
-  /// Return Jacobian of mapping between local and global coordinates.
-  inline double dshape_and_dtest_eulerian_nst(const Vector<double>& s, 
-					      Shape& psi, 
-					      DShape& dpsidx, Shape& test, 
-					      DShape& dtestdx) const;
 
-  
-  /// \short Velocity shape and test functions and their derivs 
-  /// w.r.t. to global coords  at local coordinate s (taken from geometry)
-  /// Return Jacobian of mapping between local and global coordinates.
-  inline double dshape_and_dtest_eulerian_at_knot_nst(const unsigned& ipt, 
-						      Shape& psi, 
-						      DShape& dpsidx, 
-						      Shape& test, 
-						      DShape& dtestdx) const;
+  //==========================================================================
+  /// 2D (in space): Pressure shape and test functions and derivs w.r.t. to
+  /// Eulerian coordinates. Return Jacobian of mapping between local and
+  /// global coordinates.
+  //==========================================================================
+  template<>
+  inline double QTaylorHoodSpaceTimeElement<2>::dpshape_eulerian(
+    const Vector<double>& s, Shape& ppsi, DShape& dppsidx) const
+  {
+    // Local storage for the shape function (x-direction)
+    double psi1[2];
 
-  
-  /// \short Shape/test functions and derivs w.r.t. to global coords at 
-  /// integration point ipt; return Jacobian of mapping (J). Also compute
+    // Local storage for the shape function (y-direction)
+    double psi2[2];
+
+    // Local storage for the shape function (t-direction)
+    double psi3[3];
+
+    // Local storage for the shape function derivatives (x-direction)
+    double dpsi1[2];
+
+    // Local storage for the test function derivatives (y-direction)
+    double dpsi2[2];
+
+    // Local storage for the test function derivatives (t-direction)
+    double dpsi3[3];
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[0], psi1);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[1], psi2);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<3>(s[2], psi3);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::dshape<2>(s[0], dpsi1);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::dshape<2>(s[1], dpsi2);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::dshape<3>(s[2], dpsi3);
+
+    //--------------------------------------------------------------------
+    // Now let's loop over the nodal points in the element with s1 being
+    // the "x" coordinate, s2 being the "y" coordinate and s3 being the
+    // "z" coordinate:
+    //--------------------------------------------------------------------
+    // Loop over the points in the t-direction
+    for (unsigned i = 0; i < 3; i++)
+    {
+      // Loop over the points in the y-direction
+      for (unsigned j = 0; j < 2; j++)
+      {
+        // Loop over the points in the x-direction
+        for (unsigned k = 0; k < 2; k++)
+        {
+          // Multiply the three 1D functions together to get the 3D function
+          ppsi[4 * i + 2 * j + k] = psi3[i] * psi2[j] * psi1[k];
+
+          // Multiply the appropriate shape and shape function derivatives
+          // together
+          dppsidx(4 * i + 2 * j + k, 0) = psi3[i] * psi2[j] * dpsi1[k];
+
+          // Multiply the appropriate shape and shape function derivatives
+          // together
+          dppsidx(4 * i + 2 * j + k, 1) = psi3[i] * dpsi2[j] * psi1[k];
+
+          // Multiply the appropriate shape and shape function derivatives
+          // together
+          dppsidx(4 * i + 2 * j + k, 2) = dpsi3[i] * psi2[j] * psi1[k];
+        }
+      } // for (unsigned j=0;j<2;j++)
+    } // for (unsigned i=0;i<3;i++)
+
+    // Allocate space for the geometrical shape functions
+    Shape psi(27);
+
+    // Allocate space for the geometrical shape function derivatives
+    DShape dpsi(27, 3);
+
+    // Get the values of the shape functions and their derivatives
+    dshape_local(s, psi, dpsi);
+
+    // Allocate memory for the 3x3 inverse jacobian
+    DenseMatrix<double> inverse_jacobian(3);
+
+    // Now calculate the inverse jacobian
+    const double det = local_to_eulerian_mapping(dpsi, inverse_jacobian);
+
+    // Now set the values of the derivatives to be derivatives w.r.t. to
+    // the Eulerian coordinates
+    transform_derivatives(inverse_jacobian, dppsidx);
+
+    // Return the determinant of the jacobian
+    return det;
+  } // End of dpshape_eulerian
+
+
+  //==========================================================================
+  /// 2D (in space): Pressure shape and test functions and derivs w.r.t. to
+  /// Eulerian coordinates. Return Jacobian of mapping between local and
+  /// global coordinates.
+  //==========================================================================
+  template<>
+  inline double QTaylorHoodSpaceTimeElement<2>::dptest_eulerian(
+    const Vector<double>& s, Shape& ptest, DShape& dptestdx) const
+  {
+    // Local storage for the shape function (x-direction)
+    double test1[2];
+
+    // Local storage for the shape function (y-direction)
+    double test2[2];
+
+    // Local storage for the shape function (t-direction)
+    double test3[3];
+
+    // Local storage for the shape function derivatives (x-direction)
+    double dtest1[2];
+
+    // Local storage for the test function derivatives (y-direction)
+    double dtest2[2];
+
+    // Local storage for the test function derivatives (t-direction)
+    double dtest3[3];
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[0], test1);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[1], test2);
+
+    // Call the OneDimensional Shape functions
+    OneDimDiscontinuousGalerkin::shape<3>(s[2], test3);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::dshape<2>(s[0], dtest1);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::dshape<2>(s[1], dtest2);
+
+    // Call the OneDimensional Shape functions
+    OneDimDiscontinuousGalerkin::dshape<3>(s[2], dtest3);
+
+    //--------------------------------------------------------------------
+    // Now let's loop over the nodal points in the element with s1 being
+    // the "x" coordinate, s2 being the "y" coordinate and s3 being the
+    // "z" coordinate:
+    //--------------------------------------------------------------------
+    // Loop over the points in the t-direction
+    for (unsigned i = 0; i < 3; i++)
+    {
+      // Loop over the points in the y-direction
+      for (unsigned j = 0; j < 2; j++)
+      {
+        // Loop over the points in the x-direction
+        for (unsigned k = 0; k < 2; k++)
+        {
+          // Multiply the three 1D functions together to get the 3D function
+          ptest[4 * i + 2 * j + k] = test3[i] * test2[j] * test1[k];
+
+          // Multiply the appropriate shape and shape function derivatives
+          // together
+          dptestdx(4 * i + 2 * j + k, 0) = test3[i] * test2[j] * dtest1[k];
+
+          // Multiply the appropriate shape and shape function derivatives
+          // together
+          dptestdx(4 * i + 2 * j + k, 1) = test3[i] * dtest2[j] * test1[k];
+
+          // Multiply the appropriate shape and shape function derivatives
+          // together
+          dptestdx(4 * i + 2 * j + k, 2) = dtest3[i] * test2[j] * test1[k];
+        }
+      } // for (unsigned j=0;j<2;j++)
+    } // for (unsigned i=0;i<3;i++)
+
+    // Allocate space for the geometrical shape functions
+    Shape psi(27);
+
+    // Allocate space for the geometrical shape function derivatives
+    DShape dpsi(27, 3);
+
+    // Get the values of the shape functions and their derivatives
+    dshape_local(s, psi, dpsi);
+
+    // Allocate memory for the 3x3 inverse jacobian
+    DenseMatrix<double> inverse_jacobian(3);
+
+    // Now calculate the inverse jacobian
+    const double det = local_to_eulerian_mapping(dpsi, inverse_jacobian);
+
+    // Now set the values of the derivatives to be derivatives w.r.t. to
+    // the Eulerian coordinates
+    transform_derivatives(inverse_jacobian, dptestdx);
+
+    // Return the determinant of the jacobian
+    return det;
+  } // End of dptest_eulerian
+
+
+  //==========================================================================
+  /// 2D (in space): Pressure shape and test functions and derivs w.r.t. to
+  /// Eulerian coordinates. Return Jacobian of mapping between local and
+  /// global coordinates.
+  //==========================================================================
+  template<>
+  inline double QTaylorHoodSpaceTimeElement<2>::dpshape_and_dptest_eulerian_nst(
+    const Vector<double>& s,
+    Shape& ppsi,
+    DShape& dppsidx,
+    Shape& ptest,
+    DShape& dptestdx) const
+  {
+    // Call the test functions and derivatives
+    dptest_eulerian(s, ptest, dptestdx);
+
+    // Call the shape functions and derivatives and the Jacobian of the mapping
+    return this->dpshape_eulerian(s, ppsi, dppsidx);
+  } // End of dpshape_and_dptest_eulerian_nst
+
+
+  //==========================================================================
+  /// 2D (in space):
+  /// Define the shape functions (psi) and test functions (test) and
+  /// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
+  /// and return Jacobian of mapping (J). Additionally compute the
   /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
-  inline double dshape_and_dtest_eulerian_at_knot_nst(
-   const unsigned& ipt, 
-   Shape& psi, 
-   DShape& dpsidx,
-   RankFourTensor<double>& d_dpsidx_dX,
-   Shape& test, 
-   DShape& dtestdx,
-   RankFourTensor<double>& d_dtestdx_dX,
-   DenseMatrix<double>& djacobian_dX) const;
-
-
-  /// \short Pressure shape functions and their derivs w.r.t. to global coords
-  /// at local coordinate s (taken from geometry). Return Jacobian of mapping
-  /// between local and global coordinates.
-  inline double dpshape_eulerian(const Vector<double>& s, 
-				 Shape& ppsi, 
-				 DShape& dppsidx) const;
-  
-
-  /// \short Pressure test functions and their derivs w.r.t. to global coords
-  /// at local coordinate s (taken from geometry). Return Jacobian of mapping
-  /// between local and global coordinates.
-  inline double dptest_eulerian(const Vector<double>& s, 
-				Shape& ptest, 
-				DShape& dptestdx) const;
-  
-
-  /// \short Pressure shape and test functions and their derivs 
-  /// w.r.t. to global coords  at local coordinate s (taken from geometry).
-  /// Return Jacobian of mapping between local and global coordinates.
-  inline double dpshape_and_dptest_eulerian_nst(const Vector<double>& s, 
-						Shape& ppsi, 
-						DShape& dppsidx, 
-						Shape& ptest, 
-						DShape& dptestdx) const;
- 
- public:
-
-  /// Constructor, no internal data points
-  QTaylorHoodSpaceTimeElement() :
-   QElement<DIM+1,3>(),
-   SpaceTimeNavierStokesEquations<DIM>()
-  {}
- 
-  /// \short Number of values (pinned or dofs) required at node n. Can
-  /// be overwritten for hanging node version
-  inline virtual unsigned required_nvalue(const unsigned& n) const 
+  ///
+  /// Galerkin: Test functions = shape functions
+  //==========================================================================
+  template<>
+  inline double QTaylorHoodSpaceTimeElement<2>::
+    dshape_and_dtest_eulerian_at_knot_nst(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const
   {
-   // Return the appropriate entry from Initial_Nvalue
-   return Initial_Nvalue[n];
-  } // End of required_nvalue
+    // Call the geometrical shape functions and derivatives
+    const double J = this->dshape_eulerian_at_knot(
+      ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
 
+    // DRAIG: Delete!
+    throw OomphLibError("Hasn't been implemented properly yet!",
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
 
-  /// Pressure shape functions at local coordinate s
-  inline void pshape_nst(const Vector<double>& s, Shape& psi) const;
-
-  
-  /// Pressure test functions at local coordinate s
-  inline void ptest_nst(const Vector<double>& s, Shape& psi) const;
-
-  
-  /// Pressure shape and test functions at local coordinte s
-  inline void pshape_nst(const Vector<double>& s,
-			 Shape& psi, 
-			 Shape& test) const;
-
-  
-  /// \short Set the value at which the pressure is stored in the nodes
-  virtual int p_nodal_index_nst() const
-  {
-   // The pressure is stored straight after the velocity components
-   return static_cast<int>(DIM);
-  } // End of p_nodal_index_nst
-  
-
-  /// Return the local equation numbers for the pressure values.
-  inline int p_local_eqn(const unsigned& n) const
-  {
-   // Get the local equation number associated with the n-th pressure dof
-   return this->nodal_local_eqn(Pconv[n],p_nodal_index_nst());
-  } // End of p_local_eqn
-
-  
-  /// \short Access function for the pressure values at local pressure 
-  /// node n_p (const version)
-  double p_nst(const unsigned& n_p) const
-  {
-   // Get the nodal value associated with the n_p-th pressure dof
-   return this->nodal_value(Pconv[n_p],this->p_nodal_index_nst());
-  } // End of p_nst
-
-  
-  /// \short Access function for the pressure values at local pressure 
-  /// node n_p (const version)
-  double p_nst(const unsigned& t,const unsigned& n_p) const
-  {
-   // Return the pressure value of the n_p-th pressure dof at time-level t
-   return this->nodal_value(t,Pconv[n_p],this->p_nodal_index_nst());
-  } // End of p_nst
-  
- 
-  /// Return number of pressure values
-  unsigned npres_nst() const 
-  {
-   // There are 3*(2^{DIM}) pressure dofs where DIM is the spatial dimension
-   // (remembering that these are space-time elements)
-   return 3.0*static_cast<unsigned>(pow(2.0,static_cast<int>(DIM)));
-  } // End of npres_nst
-  
-
-  /// Pin p_dof-th pressure dof and set it to value specified by p_value.
-  void fix_pressure(const unsigned& p_dof,const double& p_value)
-  {
-   // Pin the pressure dof
-   this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_nst());
-
-   // Now set its value
-   this->node_pt(Pconv[p_dof])->set_value(this->p_nodal_index_nst(),p_value);
-  } // End of fix_pressure
-
-
-  /// \short Build FaceElements that apply the Robin boundary condition
-  /// to the pressure advection diffusion problem required by 
-  /// Fp preconditioner
-  void build_fp_press_adv_diff_robin_bc_element(const unsigned& face_index)
-  {
-   // Create a new Robic BC element and add it to the storage
-   this->Pressure_advection_diffusion_robin_element_pt.push_back(
-    new FpPressureAdvDiffRobinBCSpaceTimeElement<
-    QTaylorHoodSpaceTimeElement<DIM> >(this,face_index));
-  } // End of build_fp_press_adv_diff_robin_bc_element
-
-
-  /// \short Add to the set \c paired_load_data pairs containing
-  /// - the pointer to a Data object
-  /// and
-  /// - the index of the value in that Data object
-  /// .
-  /// for all values (pressures, velocities) that affect the
-  /// load computed in the \c get_load(...) function.
-  void identify_load_data(std::set<std::pair<Data*,unsigned> >&
-			  paired_load_data);
-
-
-  /// \short Add to the set \c paired_pressure_data pairs 
-  /// containing
-  /// - the pointer to a Data object
-  /// and
-  /// - the index of the value in that Data object
-  /// .
-  /// for all pressure values that affect the
-  /// load computed in the \c get_load(...) function.
-  void identify_pressure_data(std::set<std::pair<Data*,unsigned> >&
-			      paired_pressure_data);
-
-
-  /// Redirect output to NavierStokesEquations output
-  void output(std::ostream& outfile) 
-  {
-   // Call the base class implementation
-   SpaceTimeNavierStokesEquations<DIM>::output(outfile);
-  } // End of output
-
-  
-  /// Redirect output to NavierStokesEquations output
-  void output(std::ostream& outfile, const unsigned& nplot)
-  {
-   // Call the base class implementation
-   SpaceTimeNavierStokesEquations<DIM>::output(outfile,nplot);
-  } // End of output
-
-  
-  /// Redirect output to NavierStokesEquations output
-  void output(FILE* file_pt)
-  {
-   // Call the base class implementation
-   SpaceTimeNavierStokesEquations<DIM>::output(file_pt);
-  } // End of output
-  
-
-  /// Redirect output to NavierStokesEquations output
-  void output(FILE* file_pt, const unsigned& nplot)
-  {
-   // Call the base class implementation
-   SpaceTimeNavierStokesEquations<DIM>::output(file_pt,nplot);
-  } // End of output
-
- 
-  /// \short Returns the number of "DOF types" that degrees of freedom
-  /// in this element are sub-divided into: Velocity and pressure.
-  unsigned ndof_types() const
-  {
-   // There are DIM velocity components and 1 pressure component
-   return DIM+1;
-  } // End of ndof_types
-
-  
-  /// \short Create a list of pairs for all unknowns in this element,
-  /// so that the first entry in each pair contains the global equation
-  /// number of the unknown, while the second one contains the number
-  /// of the "DOF type" that this unknown is associated with.
-  /// (Function can obviously only be called if the equation numbering
-  /// scheme has been set up.) Velocity=0; Pressure=1
-  void get_dof_numbers_for_unknowns(std::list<std::pair<unsigned long,
-				    unsigned> >& dof_lookup_list) const;
- };
-
- // Inline functions:
- 
- //==========================================================================
- /// Derivatives of the shape functions and test functions w.r.t to
- /// global (Eulerian) coordinates. Return Jacobian of mapping between
- /// local and global coordinates.
- //==========================================================================
- template<unsigned DIM>
- inline double QTaylorHoodSpaceTimeElement<DIM>::
- dshape_and_dtest_eulerian_nst(const Vector<double>& s,
-			       Shape& psi, 
-			       DShape& dpsidx,
-			       Shape& test, 
-			       DShape& dtestdx) const
- {
-  //--------------------------
-  // Call the shape functions:
-  //--------------------------
-  // Find the element dimension
-  const unsigned el_dim=this->dim();
- 
-  // Get the values of the shape functions and their local derivatives,
-  // temporarily stored in dpsi
-  this->dshape_local(s,psi,dpsidx);
-  
-  // Allocate memory for the inverse jacobian
-  DenseMatrix<double> inverse_jacobian(el_dim);
-  
-  // Now calculate the inverse jacobian
-  const double det=this->local_to_eulerian_mapping(dpsidx,inverse_jacobian);
-  
-  // Now set the values of the derivatives to be dpsidx
-  this->transform_derivatives(inverse_jacobian,dpsidx);
-  
-  //-------------------------
-  // Call the test functions:
-  //-------------------------
-  // Make sure we're using 3D elements
-  if (el_dim!=3)
-  {
-   // Create an output stream
-   std::ostringstream error_message_stream;
-
-   // Create an error message
-   error_message_stream << "Need 3D space-time elements for this to work!"
-			<< std::endl;
-
-   // Throw the error message
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);		       
-  }
-  
-  //--------start_of_dshape_local--------------------------------------  
-  // Local storage
-  double test_values[3][3];
-  double dtest_values[3][3];
-  
-  // Index of the total shape function
-  unsigned index=0;
-
-  // Call the 1D shape functions and derivatives
-  OneDimLagrange::shape<3>(s[0],test_values[0]);
-  OneDimLagrange::shape<3>(s[1],test_values[1]);
-  OneDimLagrange::dshape<3>(s[0],dtest_values[0]);
-  OneDimLagrange::dshape<3>(s[1],dtest_values[1]);
-
-  // Set the time discretisation 
-  OneDimDiscontinuousGalerkin::shape<3>(s[2],test_values[2]);
-  OneDimDiscontinuousGalerkin::dshape<3>(s[2],dtest_values[2]);
-
-  // Loop over the nodes in the third local coordinate direction
-  for (unsigned k=0;k<3;k++)
-  {
-   // Loop over the nodes in the second local coordinate direction
-   for (unsigned j=0;j<3;j++)
-   {
-    // Loop over the nodes in the first local coordinate direction
-    for (unsigned i=0;i<3;i++)
+    // Loop over the test functions and derivatives
+    for (unsigned i = 0; i < 27; i++)
     {
-     // Calculate dtest/ds_0
-     dtestdx(index,0)=dtest_values[0][i]*test_values[1][j]*test_values[2][k];
-     
-     // Calculate dtest/ds_1
-     dtestdx(index,1)=test_values[0][i]*dtest_values[1][j]*test_values[2][k];
-     
-     // Calculate dtest/ds_2
-     dtestdx(index,2)=test_values[0][i]*test_values[1][j]*dtest_values[2][k];
+      // The test functions are the same as the shape functions
+      test[i] = psi[i];
 
-     // Calculate the index-th entry of test
-     test[index]=test_values[0][i]*test_values[1][j]*test_values[2][k];
-     
-     // Increment the index
-     index++;
-    }
-   } // for (unsigned j=0;j<3;j++)
-  } // for (unsigned k=0;k<3;k++)
-  //--------end_of_dshape_local----------------------------------------
-        
-  // Transform derivatives from dtest/ds to dtest/dx
-  this->transform_derivatives(inverse_jacobian,dtestdx);
+      // Loop over the spatial derivatives
+      for (unsigned k = 0; k < 3; k++)
+      {
+        // Set the test function derivatives to the shape function derivatives
+        dtestdx(i, k) = dpsidx(i, k);
 
-  // Return the determinant value
-  return det;
- } // End of dshape_and_dtest_eulerian_nst
+        // Loop over the dimensions
+        for (unsigned p = 0; p < 3; p++)
+        {
+          // Loop over test functions
+          for (unsigned q = 0; q < 27; q++)
+          {
+            // Set the test function derivatives to the shape function
+            // derivatives
+            d_dtestdx_dX(p, q, i, k) = d_dpsidx_dX(p, q, i, k);
+          }
+        } // for (unsigned p=0;p<3;p++)
+      } // for (unsigned k=0;k<3;k++)
+    } // for (unsigned i=0;i<27;i++)
 
- //==========================================================================
- /// Derivatives of the shape functions and test functions w.r.t to
- /// global (Eulerian) coordinates. Return Jacobian of mapping between
- /// local and global coordinates.
- //==========================================================================
- template<unsigned DIM>
- inline double QTaylorHoodSpaceTimeElement<DIM>::
- dshape_and_dtest_eulerian_at_knot_nst(const unsigned& ipt,
-				       Shape& psi,
-				       DShape& dpsidx,
-				       Shape& test, 
-				       DShape& dtestdx) const
- {
-  // Calculate the element dimension
-  const unsigned el_dim=DIM+1;
-
-  // Storage for the local coordinates of the integration point
-  Vector<double> s(el_dim,0.0);
-  
-  // Set the local coordinate
-  for (unsigned i=0;i<el_dim;i++)
-  {
-   // Calculate the i-th local coordinate at the ipt-th knot point
-   s[i]=this->integral_pt()->knot(ipt,i);
-  }
-  
-  // Return the Jacobian of the geometrical shape functions and derivatives
-  return dshape_and_dtest_eulerian_nst(s,psi,dpsidx,test,dtestdx);
- } // End of dshape_and_dtest_eulerian_at_knot_nst
-
- 
- //==========================================================================
- /// 2D (in space): Pressure shape and test functions and derivs w.r.t. to
- /// Eulerian coordinates. Return Jacobian of mapping between local and
- /// global coordinates.
- //==========================================================================
- template<>
- inline double QTaylorHoodSpaceTimeElement<2>::
- dpshape_eulerian(const Vector<double>& s, 
-		  Shape& ppsi, 
-		  DShape& dppsidx) const
- {  
-  // Local storage for the shape function (x-direction)
-  double psi1[2];
-  
-  // Local storage for the shape function (y-direction)
-  double psi2[2];
-  
-  // Local storage for the shape function (t-direction)
-  double psi3[3];
-  
-  // Local storage for the shape function derivatives (x-direction)
-  double dpsi1[2];
-  
-  // Local storage for the test function derivatives (y-direction)
-  double dpsi2[2];
-  
-  // Local storage for the test function derivatives (t-direction)
-  double dpsi3[3];
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::shape<2>(s[0],psi1);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::shape<2>(s[1],psi2);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::shape<3>(s[2],psi3);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::dshape<2>(s[0],dpsi1);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::dshape<2>(s[1],dpsi2);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::dshape<3>(s[2],dpsi3);
-
-  //--------------------------------------------------------------------
-  // Now let's loop over the nodal points in the element with s1 being
-  // the "x" coordinate, s2 being the "y" coordinate and s3 being the
-  // "z" coordinate:
-  //--------------------------------------------------------------------
-  // Loop over the points in the t-direction
-  for (unsigned i=0;i<3;i++)
-  {
-   // Loop over the points in the y-direction
-   for (unsigned j=0;j<2;j++)
-   {
-    // Loop over the points in the x-direction
-    for (unsigned k=0;k<2;k++)
-    {
-     // Multiply the three 1D functions together to get the 3D function
-     ppsi[4*i+2*j+k]=psi3[i]*psi2[j]*psi1[k];
-     
-     // Multiply the appropriate shape and shape function derivatives together
-     dppsidx(4*i+2*j+k,0)=psi3[i]*psi2[j]*dpsi1[k];
-     
-     // Multiply the appropriate shape and shape function derivatives together
-     dppsidx(4*i+2*j+k,1)=psi3[i]*dpsi2[j]*psi1[k];
-     
-     // Multiply the appropriate shape and shape function derivatives together
-     dppsidx(4*i+2*j+k,2)=dpsi3[i]*psi2[j]*psi1[k];
-    }
-   } // for (unsigned j=0;j<2;j++)
-  } // for (unsigned i=0;i<3;i++)
-  
-  // Allocate space for the geometrical shape functions
-  Shape psi(27);
-  
-  // Allocate space for the geometrical shape function derivatives
-  DShape dpsi(27,3);
-  
-  // Get the values of the shape functions and their derivatives
-  dshape_local(s,psi,dpsi);
-  
-  // Allocate memory for the 3x3 inverse jacobian
-  DenseMatrix<double> inverse_jacobian(3);
-  
-  // Now calculate the inverse jacobian
-  const double det=local_to_eulerian_mapping(dpsi,inverse_jacobian);
-  
-  // Now set the values of the derivatives to be derivatives w.r.t. to
-  // the Eulerian coordinates
-  transform_derivatives(inverse_jacobian,dppsidx);
-    
-  // Return the determinant of the jacobian
-  return det;
- } // End of dpshape_eulerian
-
- 
- //==========================================================================
- /// 2D (in space): Pressure shape and test functions and derivs w.r.t. to
- /// Eulerian coordinates. Return Jacobian of mapping between local and
- /// global coordinates.
- //==========================================================================
- template<>
- inline double QTaylorHoodSpaceTimeElement<2>::
- dptest_eulerian(const Vector<double>& s,
-		 Shape& ptest, 
-		 DShape& dptestdx) const
- {  
-  // Local storage for the shape function (x-direction)
-  double test1[2];
-  
-  // Local storage for the shape function (y-direction)
-  double test2[2];
-  
-  // Local storage for the shape function (t-direction)
-  double test3[3];
-  
-  // Local storage for the shape function derivatives (x-direction)
-  double dtest1[2];
-  
-  // Local storage for the test function derivatives (y-direction)
-  double dtest2[2];
-  
-  // Local storage for the test function derivatives (t-direction)
-  double dtest3[3];
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::shape<2>(s[0],test1);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::shape<2>(s[1],test2);
-  
-  // Call the OneDimensional Shape functions
-  OneDimDiscontinuousGalerkin::shape<3>(s[2],test3);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::dshape<2>(s[0],dtest1);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::dshape<2>(s[1],dtest2);
-  
-  // Call the OneDimensional Shape functions
-  OneDimDiscontinuousGalerkin::dshape<3>(s[2],dtest3);
-
-  //--------------------------------------------------------------------
-  // Now let's loop over the nodal points in the element with s1 being
-  // the "x" coordinate, s2 being the "y" coordinate and s3 being the
-  // "z" coordinate:
-  //--------------------------------------------------------------------
-  // Loop over the points in the t-direction
-  for (unsigned i=0;i<3;i++)
-  {
-   // Loop over the points in the y-direction
-   for (unsigned j=0;j<2;j++)
-   {
-    // Loop over the points in the x-direction
-    for (unsigned k=0;k<2;k++)
-    {
-     // Multiply the three 1D functions together to get the 3D function
-     ptest[4*i+2*j+k]=test3[i]*test2[j]*test1[k];
-     
-     // Multiply the appropriate shape and shape function derivatives together
-     dptestdx(4*i+2*j+k,0)=test3[i]*test2[j]*dtest1[k];
-     
-     // Multiply the appropriate shape and shape function derivatives together
-     dptestdx(4*i+2*j+k,1)=test3[i]*dtest2[j]*test1[k];
-     
-     // Multiply the appropriate shape and shape function derivatives together
-     dptestdx(4*i+2*j+k,2)=dtest3[i]*test2[j]*test1[k];
-    }
-   } // for (unsigned j=0;j<2;j++)
-  } // for (unsigned i=0;i<3;i++)
-  
-  // Allocate space for the geometrical shape functions
-  Shape psi(27);
-  
-  // Allocate space for the geometrical shape function derivatives
-  DShape dpsi(27,3);
-  
-  // Get the values of the shape functions and their derivatives
-  dshape_local(s,psi,dpsi);
-  
-  // Allocate memory for the 3x3 inverse jacobian
-  DenseMatrix<double> inverse_jacobian(3);
-  
-  // Now calculate the inverse jacobian
-  const double det=local_to_eulerian_mapping(dpsi,inverse_jacobian);
-  
-  // Now set the values of the derivatives to be derivatives w.r.t. to
-  // the Eulerian coordinates
-  transform_derivatives(inverse_jacobian,dptestdx);
-
-  // Return the determinant of the jacobian
-  return det;
- } // End of dptest_eulerian
- 
- 
- //==========================================================================
- /// 2D (in space): Pressure shape and test functions and derivs w.r.t. to
- /// Eulerian coordinates. Return Jacobian of mapping between local and
- /// global coordinates.
- //==========================================================================
- template<>
- inline double QTaylorHoodSpaceTimeElement<2>::
- dpshape_and_dptest_eulerian_nst(const Vector<double>& s, 
-				 Shape& ppsi, 
-				 DShape& dppsidx, 
-				 Shape& ptest, 
-				 DShape& dptestdx) const
- {
-  // Call the test functions and derivatives
-  dptest_eulerian(s,ptest,dptestdx);
-
-  // Call the shape functions and derivatives and the Jacobian of the mapping
-  return this->dpshape_eulerian(s,ppsi,dppsidx);
- } // End of dpshape_and_dptest_eulerian_nst
- 
-
- //==========================================================================
- /// 2D (in space): 
- /// Define the shape functions (psi) and test functions (test) and
- /// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
- /// and return Jacobian of mapping (J). Additionally compute the
- /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
- ///
- /// Galerkin: Test functions = shape functions
- //==========================================================================
- template<>
- inline double QTaylorHoodSpaceTimeElement<2>::
- dshape_and_dtest_eulerian_at_knot_nst(const unsigned& ipt,
-				       Shape& psi,
-				       DShape& dpsidx,
-				       RankFourTensor<double>& d_dpsidx_dX,
-				       Shape& test,
-				       DShape& dtestdx,
-				       RankFourTensor<double>& d_dtestdx_dX,
-				       DenseMatrix<double>& djacobian_dX) const
- {
-  // Call the geometrical shape functions and derivatives  
-  const double J=this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
-					       djacobian_dX,
-					       d_dpsidx_dX);
-
-  // DRAIG: Delete!
-  throw OomphLibError("Hasn't been implemented properly yet!",
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
-  
-  // Loop over the test functions and derivatives
-  for (unsigned i=0;i<27;i++)
-  {
-   // The test functions are the same as the shape functions
-   test[i]=psi[i];
-
-   // Loop over the spatial derivatives
-   for (unsigned k=0;k<3;k++)
-   {
-    // Set the test function derivatives to the shape function derivatives
-    dtestdx(i,k)=dpsidx(i,k);
-
-    // Loop over the dimensions 
-    for (unsigned p=0;p<3;p++)
-    {
-     // Loop over test functions
-     for (unsigned q=0;q<27;q++)
-     {
-      // Set the test function derivatives to the shape function derivatives
-      d_dtestdx_dX(p,q,i,k)=d_dpsidx_dX(p,q,i,k);
-     }
-    } // for (unsigned p=0;p<3;p++)
-   } // for (unsigned k=0;k<3;k++)
-  } // for (unsigned i=0;i<27;i++)
-
-  // Return the jacobian
-  return J;
- } // End of dshape_and_dtest_eulerian_at_knot_nst
-
- 
- //==========================================================================
- /// 2D (in space): Pressure shape functions
- //==========================================================================
- template<>
- inline void QTaylorHoodSpaceTimeElement<2>::pshape_nst(const Vector<double>& s,
-							Shape& psi) const
- {
-  // Local storage for the shape function value (in the x-direction)
-  double psi1[2];
-  
-  // Local storage for the shape function value (in the y-direction)
-  double psi2[2];
-  
-  // Local storage for the shape function value (in the z-direction)
-  double psi3[3];
-
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::shape<2>(s[0],psi1);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::shape<2>(s[1],psi2);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::shape<3>(s[2],psi3);
-
-  //--------------------------------------------------------------------
-  // Now let's loop over the nodal points in the element with s1 being
-  // the "x" coordinate, s2 being the "y" coordinate and s3 being the
-  // "z" coordinate:
-  //--------------------------------------------------------------------
-  // Loop over the points in the t-direction
-  for (unsigned i=0;i<3;i++)
-  {
-   // Loop over the points in the y-direction
-   for (unsigned j=0;j<2;j++)
-   {
-    // Loop over the points in the x-direction
-    for (unsigned k=0;k<2;k++)
-    {
-     // Multiply the three 1D functions together to get the 3D function
-     psi[4*i+2*j+k]=psi3[i]*psi2[j]*psi1[k];
-    }
-   } // for (unsigned j=0;j<2;j++)
-  } // for (unsigned i=0;i<3;i++)
- } // End of pshape_nst
-
- 
- //==========================================================================
- /// 2D (in space): Pressure shape functions
- //==========================================================================
- template<>
- inline void QTaylorHoodSpaceTimeElement<2>::ptest_nst(const Vector<double>& s,
-						       Shape& test) const
- {
-  // Local storage for the shape function value (in the x-direction)
-  double test1[2];
-  
-  // Local storage for the shape function value (in the y-direction)
-  double test2[2];
-  
-  // Local storage for the shape function value (in the z-direction)
-  double test3[3];
-
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::shape<2>(s[0],test1);
-  
-  // Call the OneDimensional Shape functions
-  OneDimLagrange::shape<2>(s[1],test2);
-  
-  // Call the OneDimensional Shape functions
-  OneDimDiscontinuousGalerkin::shape<3>(s[2],test3);
-  
-  //--------------------------------------------------------------------
-  // Now let's loop over the nodal points in the element with s1 being
-  // the "x" coordinate, s2 being the "y" coordinate and s3 being the
-  // "z" coordinate:
-  //--------------------------------------------------------------------
-  // Loop over the points in the z-direction
-  for (unsigned i=0;i<3;i++)
-  {
-   // Loop over the points in the y-direction
-   for (unsigned j=0;j<2;j++)
-   {
-    // Loop over the points in the x-direction
-    for (unsigned k=0;k<2;k++)
-    {
-     // Multiply the three 1D functions together to get the 3D function
-     test[4*i+2*j+k]=test3[i]*test2[j]*test1[k];
-    }
-   } // for (unsigned j=0;j<2;j++)
-  } // for (unsigned i=0;i<3;i++)
- } // End of ptest_nst
-
- 
- //==========================================================================
- /// Pressure shape and test functions
- //==========================================================================
- template<unsigned DIM>
- inline void QTaylorHoodSpaceTimeElement<DIM>::
- pshape_nst(const Vector<double>& s,Shape& psi,Shape& test) const
- {
-  // Call the pressure shape functions
-  pshape_nst(s,psi);
-  
-  // Call the pressure test functions
-  ptest_nst(s,test);
- } // End of pshape_nst
- 
-
- //=======================================================================
- /// Face geometry of the 2D Taylor_Hood elements
- //=======================================================================
- template<>
- class FaceGeometry<QTaylorHoodSpaceTimeElement<2> > :
-  public virtual QElement<2,3>
- {
- public:
-
-  /// Constructor; empty
-  FaceGeometry() : QElement<2,3>() {}
- };
-
- //=======================================================================
- /// Face geometry of the FaceGeometry of the 2D Taylor Hoodelements
- //=======================================================================
- template<>
- class FaceGeometry<FaceGeometry<QTaylorHoodSpaceTimeElement<2> > > : 
-  public virtual QElement<1,3>
- {
- public:
-  
-  /// Constructor; empty
-  FaceGeometry() : QElement<1,3>() {}
- };
-
- ////////////////////////////////////////////////////////////////////
- ////////////////////////////////////////////////////////////////////
- ////////////////////////////////////////////////////////////////////
-
- //==========================================================
- /// Taylor Hood upgraded to become projectable
- //==========================================================
- template<class TAYLOR_HOOD_ELEMENT>
- class ProjectableTaylorHoodSpaceTimeElement : 
-  public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
- {
- public:
-
-  /// \short Constructor [this was only required explicitly
-  /// from gcc 4.5.2 onwards...]
-  ProjectableTaylorHoodSpaceTimeElement(){}
-
-  
-  /// \short Specify the values associated with field fld. 
-  /// The information is returned in a vector of pairs which comprise 
-  /// the Data object and the value within it, that correspond to field fld. 
-  /// In the underlying Taylor Hood elements the fld-th velocities are stored
-  /// at the fld-th value of the nodes; the pressures (the dim-th 
-  /// field) are the dim-th values at the vertex nodes etc. 
-  Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
-  {   
-   // Create the vector
-   Vector<std::pair<Data*,unsigned> > data_values;
-   
-   // If we're dealing with the velocity dofs
-   if (fld<this->dim()-1)
-   {
-    // How many nodes in the element?
-    unsigned nnod=this->nnode();
-    
-    // Loop over all nodes
-    for (unsigned j=0;j<nnod;j++)
-    {
-     // Add the data value associated with the velocity components
-     data_values.push_back(std::make_pair(this->node_pt(j),fld));
-    }
-   }
-   // If we're dealing with the pressure dof
-   else
-   {
-    // How many pressure dofs are there?
-    // DRAIG: Shouldn't there be more?
-    unsigned Pconv_size=this->dim();
-    
-    // Loop over all vertex nodes
-    for (unsigned j=0;j<Pconv_size;j++)
-    {
-     // Get the vertex index associated with the j-th pressure dof
-     unsigned vertex_index=this->Pconv[j];
-     
-     // Add the data value associated with the pressure components
-     data_values.push_back(std::make_pair(this->node_pt(vertex_index),fld));
-    }
-   } // if (fld<this->dim())
-
-   // Return the vector
-   return data_values;
-  } // End of data_values_of_field
-  
-
-  /// \short Number of fields to be projected: dim+1, corresponding to 
-  /// velocity components and pressure
-  unsigned nfields_for_projection()
-  {
-   // There are dim velocity dofs and 1 pressure dof
-   return this->dim();
-  } // End of nfields_for_projection
-  
- 
-  /// \short Number of history values to be stored for fld-th field. Whatever
-  /// the timestepper has set up for the velocity components and none for
-  /// the pressure field. NOTE: The count includes the current value!
-  unsigned nhistory_values_for_projection(const unsigned& fld)
-  {
-   // If we're dealing with the pressure dof
-   if (fld==this->dim())
-   {
-    // Pressure doesn't have history values
-    return this->node_pt(0)->ntstorage(); 
-   }
-   // If we're dealing with the velocity dofs
-   else 
-   {
-    // The velocity dofs have ntstorage() history values
-    return this->node_pt(0)->ntstorage();
-   }
-  } // End of nhistory_values_for_projection
-  
-
-  /// \short Number of positional history values 
-  /// (Note: count includes current value!)
-  unsigned nhistory_values_for_coordinate_projection()
-  {
-   // Return the number of positional history values 
-   return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
-  } // End of nhistory_values_for_coordinate_projection
-  
- 
-  /// \short Return the Jacobian of the mapping and the shape functions
-  /// of field fld at local coordinate s
-  double jacobian_and_shape_of_field(const unsigned& fld, 
-                                     const Vector<double>& s, 
-                                     Shape& psi)
-  {
-   // How many dimensions in this element?
-   unsigned n_dim=this->dim();
-
-   // How many nodes in this element?
-   unsigned n_node=this->nnode();
-
-   // If we're on the pressure dof
-   if (fld==n_dim) 
-   {
-    // Call the pressure interpolation function
-    this->pshape_nst(s,psi);
-
-    // Allocate space for the pressure shape function
-    Shape psif(n_node);
-
-    // Allocate space for the pressure test function
-    Shape testf(n_node);
-    
-    // Allocate space for the pressure shape function derivatives
-    DShape dpsifdx(n_node,n_dim);
-    
-    // Allocate space for the pressure test function derivatives
-    DShape dtestfdx(n_node,n_dim);
-     
-    // Calculate the Jacobian of the mapping
-    double J=this->dshape_and_dtest_eulerian_nst(s,psif,dpsifdx,
-						 testf,dtestfdx);
-
-    // Return the Jacobian
+    // Return the jacobian
     return J;
-   }
-   // If we're on the velocity components
-   else 
-   {
-    // Allocate space for the test functions
-    Shape testf(n_node);
-    
-    // Allocate space for the shape function derivatives
-    DShape dpsifdx(n_node,n_dim);
-    
-    // Allocate space for the test function derivatives
-    DShape dtestfdx(n_node,n_dim);
-     
-    // Calculate the Jacobian of the mapping
-    double J=this->dshape_and_dtest_eulerian_nst(s,psi,dpsifdx,testf,dtestfdx);
+  } // End of dshape_and_dtest_eulerian_at_knot_nst
 
-    // Return the Jacobian
-    return J;
-   }
-  } // End of jacobian_and_shape_of_field
-  
 
-  /// \short Return interpolated field fld at local coordinate s, at time level
-  /// t (t=0: present; t>0: history values)
-  double get_field(const unsigned& t, 
-                   const unsigned& fld,
-                   const Vector<double>& s)
+  //==========================================================================
+  /// 2D (in space): Pressure shape functions
+  //==========================================================================
+  template<>
+  inline void QTaylorHoodSpaceTimeElement<2>::pshape_nst(
+    const Vector<double>& s, Shape& psi) const
   {
-   unsigned n_dim =this->dim(); 
-   unsigned n_node=this->nnode();
-   
-   //If fld=n_dim, we deal with the pressure
-   if (fld==n_dim)
-   {
-    return this->interpolated_p_nst(t,s);
-   }
-   // Velocity
-   else
-   {
-    //Find the index at which the variable is stored
-    unsigned u_nodal_index = this->u_index_nst(fld);
-     
-    //Local shape function
-    Shape psi(n_node);
-     
-    //Find values of shape function
-    this->shape(s,psi);
-     
-    //Initialise value of u
-    double interpolated_u = 0.0;
-     
-    //Sum over the local nodes at that time
-    for(unsigned l=0;l<n_node;l++) 
+    // Local storage for the shape function value (in the x-direction)
+    double psi1[2];
+
+    // Local storage for the shape function value (in the y-direction)
+    double psi2[2];
+
+    // Local storage for the shape function value (in the z-direction)
+    double psi3[3];
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[0], psi1);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[1], psi2);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<3>(s[2], psi3);
+
+    //--------------------------------------------------------------------
+    // Now let's loop over the nodal points in the element with s1 being
+    // the "x" coordinate, s2 being the "y" coordinate and s3 being the
+    // "z" coordinate:
+    //--------------------------------------------------------------------
+    // Loop over the points in the t-direction
+    for (unsigned i = 0; i < 3; i++)
     {
-     interpolated_u += this->nodal_value(t,l,u_nodal_index)*psi[l];
+      // Loop over the points in the y-direction
+      for (unsigned j = 0; j < 2; j++)
+      {
+        // Loop over the points in the x-direction
+        for (unsigned k = 0; k < 2; k++)
+        {
+          // Multiply the three 1D functions together to get the 3D function
+          psi[4 * i + 2 * j + k] = psi3[i] * psi2[j] * psi1[k];
+        }
+      } // for (unsigned j=0;j<2;j++)
+    } // for (unsigned i=0;i<3;i++)
+  } // End of pshape_nst
+
+
+  //==========================================================================
+  /// 2D (in space): Pressure shape functions
+  //==========================================================================
+  template<>
+  inline void QTaylorHoodSpaceTimeElement<2>::ptest_nst(const Vector<double>& s,
+                                                        Shape& test) const
+  {
+    // Local storage for the shape function value (in the x-direction)
+    double test1[2];
+
+    // Local storage for the shape function value (in the y-direction)
+    double test2[2];
+
+    // Local storage for the shape function value (in the z-direction)
+    double test3[3];
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[0], test1);
+
+    // Call the OneDimensional Shape functions
+    OneDimLagrange::shape<2>(s[1], test2);
+
+    // Call the OneDimensional Shape functions
+    OneDimDiscontinuousGalerkin::shape<3>(s[2], test3);
+
+    //--------------------------------------------------------------------
+    // Now let's loop over the nodal points in the element with s1 being
+    // the "x" coordinate, s2 being the "y" coordinate and s3 being the
+    // "z" coordinate:
+    //--------------------------------------------------------------------
+    // Loop over the points in the z-direction
+    for (unsigned i = 0; i < 3; i++)
+    {
+      // Loop over the points in the y-direction
+      for (unsigned j = 0; j < 2; j++)
+      {
+        // Loop over the points in the x-direction
+        for (unsigned k = 0; k < 2; k++)
+        {
+          // Multiply the three 1D functions together to get the 3D function
+          test[4 * i + 2 * j + k] = test3[i] * test2[j] * test1[k];
+        }
+      } // for (unsigned j=0;j<2;j++)
+    } // for (unsigned i=0;i<3;i++)
+  } // End of ptest_nst
+
+
+  //==========================================================================
+  /// Pressure shape and test functions
+  //==========================================================================
+  template<unsigned DIM>
+  inline void QTaylorHoodSpaceTimeElement<DIM>::pshape_nst(
+    const Vector<double>& s, Shape& psi, Shape& test) const
+  {
+    // Call the pressure shape functions
+    pshape_nst(s, psi);
+
+    // Call the pressure test functions
+    ptest_nst(s, test);
+  } // End of pshape_nst
+
+
+  //=======================================================================
+  /// Face geometry of the 2D Taylor_Hood elements
+  //=======================================================================
+  template<>
+  class FaceGeometry<QTaylorHoodSpaceTimeElement<2>>
+    : public virtual QElement<2, 3>
+  {
+  public:
+    /// Constructor; empty
+    FaceGeometry() : QElement<2, 3>() {}
+  };
+
+  //=======================================================================
+  /// Face geometry of the FaceGeometry of the 2D Taylor Hoodelements
+  //=======================================================================
+  template<>
+  class FaceGeometry<FaceGeometry<QTaylorHoodSpaceTimeElement<2>>>
+    : public virtual QElement<1, 3>
+  {
+  public:
+    /// Constructor; empty
+    FaceGeometry() : QElement<1, 3>() {}
+  };
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+  //==========================================================
+  /// Taylor Hood upgraded to become projectable
+  //==========================================================
+  template<class TAYLOR_HOOD_ELEMENT>
+  class ProjectableTaylorHoodSpaceTimeElement
+    : public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
+  {
+  public:
+    /// \short Constructor [this was only required explicitly
+    /// from gcc 4.5.2 onwards...]
+    ProjectableTaylorHoodSpaceTimeElement() {}
+
+
+    /// \short Specify the values associated with field fld.
+    /// The information is returned in a vector of pairs which comprise
+    /// the Data object and the value within it, that correspond to field fld.
+    /// In the underlying Taylor Hood elements the fld-th velocities are stored
+    /// at the fld-th value of the nodes; the pressures (the dim-th
+    /// field) are the dim-th values at the vertex nodes etc.
+    Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
+    {
+      // Create the vector
+      Vector<std::pair<Data*, unsigned>> data_values;
+
+      // If we're dealing with the velocity dofs
+      if (fld < this->dim() - 1)
+      {
+        // How many nodes in the element?
+        unsigned nnod = this->nnode();
+
+        // Loop over all nodes
+        for (unsigned j = 0; j < nnod; j++)
+        {
+          // Add the data value associated with the velocity components
+          data_values.push_back(std::make_pair(this->node_pt(j), fld));
+        }
+      }
+      // If we're dealing with the pressure dof
+      else
+      {
+        // How many pressure dofs are there?
+        // DRAIG: Shouldn't there be more?
+        unsigned Pconv_size = this->dim();
+
+        // Loop over all vertex nodes
+        for (unsigned j = 0; j < Pconv_size; j++)
+        {
+          // Get the vertex index associated with the j-th pressure dof
+          unsigned vertex_index = this->Pconv[j];
+
+          // Add the data value associated with the pressure components
+          data_values.push_back(
+            std::make_pair(this->node_pt(vertex_index), fld));
+        }
+      } // if (fld<this->dim())
+
+      // Return the vector
+      return data_values;
+    } // End of data_values_of_field
+
+
+    /// \short Number of fields to be projected: dim+1, corresponding to
+    /// velocity components and pressure
+    unsigned nfields_for_projection()
+    {
+      // There are dim velocity dofs and 1 pressure dof
+      return this->dim();
+    } // End of nfields_for_projection
+
+
+    /// \short Number of history values to be stored for fld-th field. Whatever
+    /// the timestepper has set up for the velocity components and none for
+    /// the pressure field. NOTE: The count includes the current value!
+    unsigned nhistory_values_for_projection(const unsigned& fld)
+    {
+      // If we're dealing with the pressure dof
+      if (fld == this->dim())
+      {
+        // Pressure doesn't have history values
+        return this->node_pt(0)->ntstorage();
+      }
+      // If we're dealing with the velocity dofs
+      else
+      {
+        // The velocity dofs have ntstorage() history values
+        return this->node_pt(0)->ntstorage();
+      }
+    } // End of nhistory_values_for_projection
+
+
+    /// \short Number of positional history values
+    /// (Note: count includes current value!)
+    unsigned nhistory_values_for_coordinate_projection()
+    {
+      // Return the number of positional history values
+      return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+    } // End of nhistory_values_for_coordinate_projection
+
+
+    /// \short Return the Jacobian of the mapping and the shape functions
+    /// of field fld at local coordinate s
+    double jacobian_and_shape_of_field(const unsigned& fld,
+                                       const Vector<double>& s,
+                                       Shape& psi)
+    {
+      // How many dimensions in this element?
+      unsigned n_dim = this->dim();
+
+      // How many nodes in this element?
+      unsigned n_node = this->nnode();
+
+      // If we're on the pressure dof
+      if (fld == n_dim)
+      {
+        // Call the pressure interpolation function
+        this->pshape_nst(s, psi);
+
+        // Allocate space for the pressure shape function
+        Shape psif(n_node);
+
+        // Allocate space for the pressure test function
+        Shape testf(n_node);
+
+        // Allocate space for the pressure shape function derivatives
+        DShape dpsifdx(n_node, n_dim);
+
+        // Allocate space for the pressure test function derivatives
+        DShape dtestfdx(n_node, n_dim);
+
+        // Calculate the Jacobian of the mapping
+        double J = this->dshape_and_dtest_eulerian_nst(
+          s, psif, dpsifdx, testf, dtestfdx);
+
+        // Return the Jacobian
+        return J;
+      }
+      // If we're on the velocity components
+      else
+      {
+        // Allocate space for the test functions
+        Shape testf(n_node);
+
+        // Allocate space for the shape function derivatives
+        DShape dpsifdx(n_node, n_dim);
+
+        // Allocate space for the test function derivatives
+        DShape dtestfdx(n_node, n_dim);
+
+        // Calculate the Jacobian of the mapping
+        double J =
+          this->dshape_and_dtest_eulerian_nst(s, psi, dpsifdx, testf, dtestfdx);
+
+        // Return the Jacobian
+        return J;
+      }
+    } // End of jacobian_and_shape_of_field
+
+
+    /// \short Return interpolated field fld at local coordinate s, at time
+    /// level t (t=0: present; t>0: history values)
+    double get_field(const unsigned& t,
+                     const unsigned& fld,
+                     const Vector<double>& s)
+    {
+      unsigned n_dim = this->dim();
+      unsigned n_node = this->nnode();
+
+      // If fld=n_dim, we deal with the pressure
+      if (fld == n_dim)
+      {
+        return this->interpolated_p_nst(t, s);
+      }
+      // Velocity
+      else
+      {
+        // Find the index at which the variable is stored
+        unsigned u_nodal_index = this->u_index_nst(fld);
+
+        // Local shape function
+        Shape psi(n_node);
+
+        // Find values of shape function
+        this->shape(s, psi);
+
+        // Initialise value of u
+        double interpolated_u = 0.0;
+
+        // Sum over the local nodes at that time
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          interpolated_u += this->nodal_value(t, l, u_nodal_index) * psi[l];
+        }
+        return interpolated_u;
+      }
     }
-    return interpolated_u;     
-   }
-  }
 
 
+    /// Return number of values in field fld
+    unsigned nvalue_of_field(const unsigned& fld)
+    {
+      if (fld == this->dim())
+      {
+        return this->npres_nst();
+      }
+      else
+      {
+        return this->nnode();
+      }
+    }
 
-  ///Return number of values in field fld
-  unsigned nvalue_of_field(const unsigned& fld)
+
+    /// Return local equation number of value j in field fld.
+    int local_equation(const unsigned& fld, const unsigned& j)
+    {
+      if (fld == this->dim())
+      {
+        return this->p_local_eqn(j);
+      }
+      else
+      {
+        const unsigned u_nodal_index = this->u_index_nst(fld);
+        return this->nodal_local_eqn(j, u_nodal_index);
+      }
+    }
+  };
+
+
+  //=======================================================================
+  /// Face geometry for element is the same as that for the underlying
+  /// wrapped element
+  //=======================================================================
+  template<class ELEMENT>
+  class FaceGeometry<ProjectableTaylorHoodSpaceTimeElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
-   if (fld==this->dim())
-   {
-    return this->npres_nst();
-   }
-   else
-   {
-    return this->nnode();
-   }
-  }
+  public:
+    FaceGeometry() : FaceGeometry<ELEMENT>() {}
+  };
 
- 
-  ///Return local equation number of value j in field fld.
-  int local_equation(const unsigned& fld,
-                     const unsigned& j)
+  //=======================================================================
+  /// Face geometry of the Face Geometry for element is the same as
+  /// that for the underlying wrapped element
+  //=======================================================================
+  template<class ELEMENT>
+  class FaceGeometry<
+    FaceGeometry<ProjectableTaylorHoodSpaceTimeElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
-   if (fld==this->dim()) 
-   {
-    return this->p_local_eqn(j);
-   }
-   else
-   {
-    const unsigned u_nodal_index = this->u_index_nst(fld);
-    return this->nodal_local_eqn(j,u_nodal_index);
-   }
-  }
-  
- };
+  public:
+    FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
+  };
 
-
- //=======================================================================
- /// Face geometry for element is the same as that for the underlying
- /// wrapped element
- //=======================================================================
- template<class ELEMENT>
- class FaceGeometry<ProjectableTaylorHoodSpaceTimeElement<ELEMENT> > :
-  public virtual FaceGeometry<ELEMENT>
- {
- public:
-  FaceGeometry() : FaceGeometry<ELEMENT>() {}
- };
-
- //=======================================================================
- /// Face geometry of the Face Geometry for element is the same as 
- /// that for the underlying wrapped element
- //=======================================================================
- template<class ELEMENT>
- class FaceGeometry<FaceGeometry<ProjectableTaylorHoodSpaceTimeElement<ELEMENT> > > :
-  public virtual FaceGeometry<FaceGeometry<ELEMENT> >
- {
- public:
-  FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
- };
- 
 } // End of namespace oomph
 
 #endif

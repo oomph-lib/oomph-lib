@@ -1,31 +1,31 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
-//A header containing useful utility classes, functions and constants
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+// A header containing useful utility classes, functions and constants
 
-//Include guard to prevent multiple inclusions of the header
+// Include guard to prevent multiple inclusions of the header
 #ifndef OOMPH_UTILITIES_HEADER
 #define OOMPH_UTILITIES_HEADER
 
@@ -36,20 +36,20 @@
 
 
 #ifdef OOMPH_HAS_MPI
-//mpi headers
+// mpi headers
 #include "mpi.h"
 #endif
 
-//Standard libray headers
-#include<string>
-#include<sstream>
-#include<fstream>
-#include<cmath>
-#include<map>
-#include<ctime>
-#include<complex>
+// Standard libray headers
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <cmath>
+#include <map>
+#include <ctime>
+#include <complex>
 
-//oomph-lib headers
+// oomph-lib headers
 #include "Vector.h"
 #include "oomph_definitions.h"
 #include "communicator.h"
@@ -69,1139 +69,1172 @@
 
 namespace oomph
 {
- //======start_of_ANSIEscapeCode_namespace=================
- /// Contains an enumeration of the ANSI escape codes used for
- /// colouring text (when piped to the command line). Adapted from 
- /// the guide on:
- /// https://stackoverflow.com/questions/2616906/how-do-i-output-
- /// coloured-text-to-a-linux-terminal?utm_medium=organic&utm_source=
- /// google_rich_qa&utm_campaign=google_rich_qa
- /// Here, \033 is the ESC character, ASCII 27. It is followed by [,
- /// then zero or more numbers separated by ;, and finally the letter
- /// m. The numbers describe the colour and format to switch to from
- /// that point onwards.
- //====================================================================
- namespace ANSIEscapeCode
- {
-  /// \short Function to change text effect. NOTE: This assumes the user
-  /// knows what they're doing/assigning; no error checking done here...
-  extern void set_text_effect(std::string text_effect);
-
-  /// Variable to decide on effects
-  extern std::string Text_effect;
-
-  /// The code for each type of colour
-  extern std::string Black;
-  extern std::string Red;
-  extern std::string Green;
-  extern std::string Yellow;
-  extern std::string Blue;
-  extern std::string Magenta;
-  extern std::string Cyan;
-  extern std::string Reset;
- } // End of ANSIEscapeCode
-
- //=====================================================================
- /// \short Namespace for debugging helpers. Currently only contains a
- /// function to prett-ify file name and line numbers (in red) to use
- /// when debugging. Makes it easy to identify where a std::cout
- /// statement was called.
- //=====================================================================
- namespace DebugHelpers
- {
-  /// \short Return the concaternation of the initials of the input
-  /// file name and line number. The make_new_line flag indicates
-  /// whether the string starts on a new line or not
-  extern std::string debug_string(const std::string& filename,
-				  const int& line,
-				  const bool& make_new_line=false);
- } // End of DebugHelpers
- 
- // Forward declaration needed for second invariant helper
- template<class TYPE>
- class DenseMatrix;
-
- //=====================================================================
- /// Helper namespace containing function that computes second invariant
- /// of tensor
- //=====================================================================
- namespace SecondInvariantHelper
- {
-  
-  /// Compute second invariant of tensor
-  extern double second_invariant(const DenseMatrix<double>& tensor);
-  
- }
-
-
-//==============================================
-/// Namespace for error messages for broken
-/// copy constructors and assignment operators
-//==============================================
- namespace BrokenCopy
- {
-
-  /// Issue error message and terminate execution
-  extern void broken_assign(const std::string& class_name);
- 
-  /// Issue error message and terminate execution
-  extern void broken_copy(const std::string& class_name);
- 
- }
-
-//========================================
-/// Namespace for mathematical constants
-///
-//=======================================
- namespace MathematicalConstants
- {
-  /// 50 digits from maple
-  const double Pi=3.1415926535897932384626433832795028841971693993751;
- 
-  /// The imaginary unit
-  const std::complex<double> I(0.0,1.0);
- }
-
-
-//================================================================
-/// Function-type-object to perform absolute comparison of objects.
-/// Apparently this inlines better
-//================================================================
- template <class T>
- class AbsCmp
- {
- public:
-
-  /// Comparison. Are the values identical or not?
-  bool operator()(const T &x, const T &y) const
+  //======start_of_ANSIEscapeCode_namespace=================
+  /// Contains an enumeration of the ANSI escape codes used for
+  /// colouring text (when piped to the command line). Adapted from
+  /// the guide on:
+  /// https://stackoverflow.com/questions/2616906/how-do-i-output-
+  /// coloured-text-to-a-linux-terminal?utm_medium=organic&utm_source=
+  /// google_rich_qa&utm_campaign=google_rich_qa
+  /// Here, \033 is the ESC character, ASCII 27. It is followed by [,
+  /// then zero or more numbers separated by ;, and finally the letter
+  /// m. The numbers describe the colour and format to switch to from
+  /// that point onwards.
+  //====================================================================
+  namespace ANSIEscapeCode
   {
-   return std::abs(x) < std::abs(y);
-  }
- };
+    /// \short Function to change text effect. NOTE: This assumes the user
+    /// knows what they're doing/assigning; no error checking done here...
+    extern void set_text_effect(std::string text_effect);
 
+    /// Variable to decide on effects
+    extern std::string Text_effect;
 
-// =================================================================
-/// Conversion functions for easily making strings (e.g. for filenames - to
-/// avoid stack smashing problems with cstrings and long filenames).
-// =================================================================
- namespace StringConversion
- {
- 
-  /// \short Conversion function that should work for anything with
-  /// operator<< defined (at least all basic types).
-  template<class T> std::string to_string(T object, unsigned float_precision=8)
+    /// The code for each type of colour
+    extern std::string Black;
+    extern std::string Red;
+    extern std::string Green;
+    extern std::string Yellow;
+    extern std::string Blue;
+    extern std::string Magenta;
+    extern std::string Cyan;
+    extern std::string Reset;
+  } // namespace ANSIEscapeCode
+
+  //=====================================================================
+  /// \short Namespace for debugging helpers. Currently only contains a
+  /// function to prett-ify file name and line numbers (in red) to use
+  /// when debugging. Makes it easy to identify where a std::cout
+  /// statement was called.
+  //=====================================================================
+  namespace DebugHelpers
   {
-   std::stringstream ss;
-   ss.precision(float_precision);
-   ss << object;
-   return ss.str();
-  }
- 
-  /// \short Convert a string to lower case (outputs a copy).
-  std::string to_lower(const std::string& input);
+    /// \short Return the concaternation of the initials of the input
+    /// file name and line number. The make_new_line flag indicates
+    /// whether the string starts on a new line or not
+    extern std::string debug_string(const std::string& filename,
+                                    const int& line,
+                                    const bool& make_new_line = false);
+  } // namespace DebugHelpers
 
-  /// \short Convert a string to upper case (outputs a copy).
-  std::string to_upper(const std::string& input);
+  // Forward declaration needed for second invariant helper
+  template<class TYPE>
+  class DenseMatrix;
 
-  /// \short Split a string, s, into a vector of strings where ever there is
-  /// an instance of delimiter (i.e. is delimiter is " " will give a list of
-  /// words). Note that multiple delimiters in a row will give empty
-  /// strings.
-  void split_string(const std::string &s, char delim, Vector<std::string> &elems);
-
-  /// \short Split a string, s, into a vector of strings where ever there is
-  /// an instance of delimiter (i.e. is delimiter is " " will give a list of
-  /// words). Note that multiple delimiters in a row will give empty
-  /// strings. Return by value.
-  Vector<std::string> split_string(const std::string &s, char delim);
-
- }
-
-
- namespace TypeNames
- {
-
-  /// \short Get the type name of an object. Only for use in debugging, do
-  /// not write real code using this function as it is implementation
-  /// dependant!
-  template<class T> std::string get_type_name(T& obj)
+  //=====================================================================
+  /// Helper namespace containing function that computes second invariant
+  /// of tensor
+  //=====================================================================
+  namespace SecondInvariantHelper
   {
-   using namespace StringConversion;
+    /// Compute second invariant of tensor
+    extern double second_invariant(const DenseMatrix<double>& tensor);
 
-   int status;
-   std::string typestr = to_string(abi::__cxa_demangle(typeid(obj).name(),0,0,&status));
+  } // namespace SecondInvariantHelper
 
-   // Throw if there was an error
-   if(status != 0)
-   {
-    std::string err = "Error code " + to_string(status) +
-     " in demangler, see documentation of abi::__cxa_demangle for the meaning";
-    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-   }
 
-   return typestr;
-  }
-
-  /// \short Get the type name of an object from a pointer to the object (we
-  /// usually want the type of the object itself not the pointer because the
-  /// type of the pointer may be a base class). Only for use in debugging,
-  /// do not write real code using this function as it is implementation
-  /// dependant!
-  template<class T> std::string get_type_name(T* obj)
+  //==============================================
+  /// Namespace for error messages for broken
+  /// copy constructors and assignment operators
+  //==============================================
+  namespace BrokenCopy
   {
-   return get_type_name(*obj);
-  }
-  
- }
+    /// Issue error message and terminate execution
+    extern void broken_assign(const std::string& class_name);
 
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
+    /// Issue error message and terminate execution
+    extern void broken_copy(const std::string& class_name);
 
+  } // namespace BrokenCopy
 
-
-//====================================================================
-/// Namespace for global (cumulative) timings
-//====================================================================
- namespace CumulativeTimings
- {
-
-  /// (Re-)start i-th timer
-  extern void start(const unsigned& i);
-
-  /// Halt i-th timer
-  extern void halt(const unsigned& i);
-
-  /// Reset i-th timer
-  extern void reset(const unsigned& i);
-
-  /// Reset all timers
-  extern void reset();
-
-  /// Report time accumulated by i-th timer
-  extern double cumulative_time(const unsigned& i);
-
-  /// Set number of timings that can be recorded in parallel
-  extern void set_ntimers(const unsigned& ntimers);
-
-  /// Cumulative timings
-  extern Vector<clock_t> Timing;
-
-  /// Start times of active timers
-  extern Vector<clock_t> Start_time;
-
- }
-
-
- // ============================================================
- // Automatically checked casting functions (from boost)
- // ============================================================ 
-
- /// \short Runtime checked dynamic cast. This is the safe but slightly slower
- /// cast. Use it in any of these cases:
- /// - You aren't entirely sure the cast is always safe.
- /// - You have strange inheritance structures (e.g. the "Diamond of Death" in 
- ///   element inheritance).
- /// - Efficiency is not critical. 
- /// Note that if you just want to check if a pointer can be converted to
- /// some type you will need to use a plain dynamic_cast. Adapted from
- /// polymorphic_cast in boost/cast.hpp, see
- /// http://www.boost.org/doc/libs/1_52_0/libs/conversion/cast.htm for more
- /// details.
- template <class Target, class Source>
- inline Target checked_dynamic_cast(Source* x)
- {
-  Target tmp = dynamic_cast<Target>(x);
-#ifdef PARANOID
-  if(tmp == 0)
+  //========================================
+  /// Namespace for mathematical constants
+  ///
+  //=======================================
+  namespace MathematicalConstants
   {
-   throw OomphLibError("Bad cast.", OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-  return tmp;
- }
+    /// 50 digits from maple
+    const double Pi = 3.1415926535897932384626433832795028841971693993751;
 
- /// \short Checked static cast. Only use this cast if ALL of these are true:
- /// - You are sure that the cast will always succeed.
- /// - You aren't using any strange inheritance structures (e.g. the "Diamond of
- /// Death" in element inheritance, if you aren't sure just try compiling).
- /// - You need efficiency.
- /// Adapted from polymorphic_downcast in boost/cast.hpp, See
- /// http://www.boost.org/doc/libs/1_52_0/libs/conversion/cast.htm for more
- /// details.
- template <class Target, class Source>
- inline Target checked_static_cast(Source* x)
- {
-#ifdef PARANOID
-  // Check that the cast will work as expected.
-  if(dynamic_cast<Target>(x) != x)
+    /// The imaginary unit
+    const std::complex<double> I(0.0, 1.0);
+  } // namespace MathematicalConstants
+
+
+  //================================================================
+  /// Function-type-object to perform absolute comparison of objects.
+  /// Apparently this inlines better
+  //================================================================
+  template<class T>
+  class AbsCmp
   {
-   throw OomphLibError("Bad cast.", OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-  return static_cast<Target>(x);
- }
-
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
-//====================================================================
-/// Timer 
-//====================================================================
- class Timer
- {
-
- public:
-
-  /// Constructor: Specify number of timers
-  Timer(const unsigned& n_timer)
-  {
-   set_ntimers(n_timer);
-  }
- 
-  /// (Re-)start i-th timer
-  void start(const unsigned& i)
-  {
-   Start_time[i]=clock();
-  }
- 
-  /// Halt i-th timer
-  void halt(const unsigned& i)
-  {
-   Timing[i]+=clock()-Start_time[i];
-  }
- 
-  /// Report time accumulated by i-th timer
-  double cumulative_time(const unsigned& i)
-  {
-   return double(Timing[i])/CLOCKS_PER_SEC;
-  }
- 
-  /// Reset i-th timer
-  void reset(const unsigned& i)
-  {
-   Timing[i]=clock_t(0.0);
-  }
- 
-  /// Reset all timers
-  void reset()
-  {
-   unsigned n=Timing.size();
-   for (unsigned i=0;i<n;i++)
-   {
-    Timing[i]=clock_t(0.0);
-   }
-  }
- 
-  /// Set number of timings that can be recorded in parallel
-  void set_ntimers(const unsigned& ntimers)
-  {
-   Timing.resize(ntimers,clock_t(0.0));
-   Start_time.resize(ntimers,clock_t(0.0));
-  }
- 
- private:
- 
-  /// Cumulative timings
-  Vector<clock_t> Timing;
- 
-  /// Start times of active timers
-  Vector<clock_t> Start_time;
-
- };
-
-
-//====================================================================
-/// \short Collection of data structures for storing information about
-/// linear solves. Currently only contains storage for the
-/// iteration counts and the linear solver time.
-//====================================================================
- class DocLinearSolverInfo
- {
- 
- public:
-
-  /// \short Constructor. Initialised the Iterations_and_times vector of vector
-  /// of pairs.
-  DocLinearSolverInfo() : Iterations_and_times()
-  {}
-
-  /// \short Set up a new vector of pairs for a new time step.
-  void setup_new_time_step()
-  {
-   // For each new time step, we have a new vector consisting of pairs of
-   // unsigned (for the iteration) and double (for the timing results).
-   Iterations_and_times.push_back(Vector<Vector<double> >());
-  }
-
-  void clear_current_time_step()
-  {
-   Iterations_and_times.pop_back();
-   setup_new_time_step();
-  }
-
-  /// \short Add a new iteration and time pair.
-  void add_iteration_and_time
-  (unsigned iter, double prec_setup_time, double linear_solver_time)
-  {
-#ifdef PARANOID
-   if(Iterations_and_times.size() == 0)
-   {
-    std::ostringstream error_message;
-    error_message << "Iterations_and_times is empty. "
-		  << "Call setup_new_time_step()\n";
-    throw OomphLibError(
-     error_message.str(),OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
-   }
-#endif 
-   Vector<double> tmp_iter_time_vec(3,0);
-   tmp_iter_time_vec[0] = (double)iter;
-   tmp_iter_time_vec[1] = prec_setup_time;
-   tmp_iter_time_vec[2] = linear_solver_time;
-   Iterations_and_times.back().push_back(tmp_iter_time_vec);
-  }
-
-  /// The number of time steps
-  unsigned current_ntime_step() const 
-  {return Iterations_and_times.size();}
-
-  /// The number of Newton steps.
-  unsigned current_nnewton_step() const 
-  {return Iterations_and_times.back().size();}
-
-  /// \short Accessor function for the iteration and times.
-  Vector<Vector<Vector<double> > >& iterations_and_times()
-  {return Iterations_and_times;}
-
-  /// \short Accessor function for the iteration and times (const version).
-  Vector<Vector<Vector<double> > > iterations_and_times() const 
-  {return Iterations_and_times;}
- 
- private:
-
-  /// Storage for number of iterations during Newton steps 
-  Vector<Vector<Vector<double> > > Iterations_and_times;
- };
-
-//====================================================================
-/// \short Information for documentation of results: 
-/// Directory and file number to enable output
-/// in the form RESLT/filename11.dat, say.
-/// Documentation can be switched on and off.
-//====================================================================
- class DocInfo
- {
- 
- public:
-
-  /// \short Constructor. Default settings: Current directory, step `0',
-  /// label="", full documentation enabled and output directory is not required
-  /// to exist when set_directory() is called.
-  DocInfo() : Directory("."), Doc_flag(true), Number(0),
-	      Label(""), Directory_must_exist(false)
-  {}
-
-  /// \short Constructor with specific directory.
-  DocInfo(const std::string& directory) :
-   Directory(directory), Doc_flag(true), Number(0),
-   Label(""), Directory_must_exist(false)
-  {}
-
-  /// Output directory
-  std::string directory() const {return Directory;}
-
-  /// \short Set output directory (we try to open a file in it
-  /// to see if the directory exists -- if it doesn't we'll
-  /// issue a warning -- or, if directory_must_exist()==true,
-  /// throw and OomphLibError
-  void set_directory(const std::string& directory);
-
-  /// \short Enable documentation
-  void enable_doc() {Doc_flag=true;}
-
-  /// \short Disable documentation
-  void disable_doc() {Doc_flag=false;}
-
-  /// \short Are we documenting?
-  bool is_doc_enabled() const {return Doc_flag;}
-
-  /// Number used (e.g.) for labeling output files
-  unsigned& number() {return Number;}
-
-  /// Number used (e.g.) for labeling output files. Const version.
-  unsigned number() const {return Number;}
-
-  /// Get number as a string (useful to completely avoid C-strings).
-  std::string number_as_string() const
-  {
-   return StringConversion::to_string(Number); 
-  } 
-
-  /// String used (e.g.) for labeling output files
-  std::string& label() {return Label;}
-
-  /// String used (e.g.) for labeling output files. Const version.
-  std::string label() const {return Label;}
-
-  /// \short Call to throw an error if directory does not exist
-  void enable_error_if_directory_does_not_exist() {Directory_must_exist=true;}
-
-  /// \short Call to issue a warning if the directory does not exists
-  void disable_error_if_directory_does_not_exist() {Directory_must_exist=false;}
-
- private:
-
-  /// Directory name
-  std::string Directory;
-
-  /// Doc or don't?
-  bool Doc_flag;
-
-  /// Number to label output file, say
-  unsigned Number;
-
-  /// String to label output file, say
-  std::string Label;
-               
-  /// Boolean flag to decide response if an output 
-  /// directory doesn't exist: If true, we terminate
-  /// code execution by throwing an OomphLibError rather than 
-  /// just issuing a warning.
-  bool Directory_must_exist;
- };
-
-
-//====================================================================
-// Namespace for command line arguments
-//====================================================================
- namespace CommandLineArgs
- {
- 
-  /// Structure to store information on a command line argument
-  template<class T> 
-  struct ArgInfo
-  {
-
-   /// Proper constructor
-   ArgInfo(const bool& is_set, 
-	   T* arg_pt,
-	   const std::string& doc)
-   {
-    this->is_set = is_set;
-    this->arg_pt = arg_pt;
-    this->doc = doc;
-   }
-
-   /// Default constructor. We need this to be able to store these things in
-   /// maps.
-   ArgInfo()
-   {
-    this->is_set = false;
-    this->arg_pt = 0;
-    this->doc = "";
-   }
-
-   // /// Assignment operator. We need this to be able to store these things in
-   // /// maps.
-   // void operator=(const ArgInfo& that)
-   //  {
-   //   this->is_set = that.is_set;
-   //   this->arg_pt = that.arg_pt;
-   //   this->doc = that.doc;
-   //  }
-
-   /// Has this argument been set?
-   bool is_set;
-
-   /// The place to put the argument's value when it is set
-   T* arg_pt;
-
-   /// Information about what the argument does
-   std::string doc;
+  public:
+    /// Comparison. Are the values identical or not?
+    bool operator()(const T& x, const T& y) const
+    {
+      return std::abs(x) < std::abs(y);
+    }
   };
 
-  // Number of arguments + 1
-  extern int Argc;
 
-  // Arguments themselves
-  extern char** Argv;
+  // =================================================================
+  /// Conversion functions for easily making strings (e.g. for filenames - to
+  /// avoid stack smashing problems with cstrings and long filenames).
+  // =================================================================
+  namespace StringConversion
+  {
+    /// \short Conversion function that should work for anything with
+    /// operator<< defined (at least all basic types).
+    template<class T>
+    std::string to_string(T object, unsigned float_precision = 8)
+    {
+      std::stringstream ss;
+      ss.precision(float_precision);
+      ss << object;
+      return ss.str();
+    }
 
-  /// Map to indicate an input flag as having been set
-  extern std::map<std::string, ArgInfo<bool> > Specified_command_line_flag;
+    /// \short Convert a string to lower case (outputs a copy).
+    std::string to_lower(const std::string& input);
 
-  /// Map to associate an input flag with a double -- specified via pointer
-  extern std::map<std::string, ArgInfo<double> > 
-  Specified_command_line_double_pt;
+    /// \short Convert a string to upper case (outputs a copy).
+    std::string to_upper(const std::string& input);
 
-  /// Map to associate an input flag with an int -- specified via pointer
-  extern std::map<std::string, ArgInfo<int> > 
-  Specified_command_line_int_pt;
+    /// \short Split a string, s, into a vector of strings where ever there is
+    /// an instance of delimiter (i.e. is delimiter is " " will give a list of
+    /// words). Note that multiple delimiters in a row will give empty
+    /// strings.
+    void split_string(const std::string& s,
+                      char delim,
+                      Vector<std::string>& elems);
 
-  /// Map to associate an input flag with an unsigned -- specified via pointer
-  extern std::map<std::string, ArgInfo<unsigned> > 
-  Specified_command_line_unsigned_pt;
+    /// \short Split a string, s, into a vector of strings where ever there is
+    /// an instance of delimiter (i.e. is delimiter is " " will give a list of
+    /// words). Note that multiple delimiters in a row will give empty
+    /// strings. Return by value.
+    Vector<std::string> split_string(const std::string& s, char delim);
 
-  /// Map to associate an input flag with a string -- specified via pointer
-  extern std::map<std::string, ArgInfo<std::string> > 
-  Specified_command_line_string_pt;
+  } // namespace StringConversion
 
-  // Set values
-  extern void setup(int argc, char** argv);
 
-  // Doc the command line arguments
-  extern void output();
+  namespace TypeNames
+  {
+    /// \short Get the type name of an object. Only for use in debugging, do
+    /// not write real code using this function as it is implementation
+    /// dependant!
+    template<class T>
+    std::string get_type_name(T& obj)
+    {
+      using namespace StringConversion;
 
-  /// Specify possible argument-free command line flag
-  extern void specify_command_line_flag
-  (const std::string& command_line_flag,
-   const std::string& documentation="Undocumented");
+      int status;
+      std::string typestr =
+        to_string(abi::__cxa_demangle(typeid(obj).name(), 0, 0, &status));
 
-  /// \short Specify possible command line flag that specifies a double, accessed
-  /// via pointer
-  extern void specify_command_line_flag
-  (const std::string& command_line_flag, double* arg_pt,
-   const std::string& documentation="Undocumented");
+      // Throw if there was an error
+      if (status != 0)
+      {
+        std::string err = "Error code " + to_string(status) +
+                          " in demangler, see documentation of "
+                          "abi::__cxa_demangle for the meaning";
+        throw OomphLibError(
+          err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
 
-  /// \short Specify possible command line flag that specifies an int, accessed
-  /// via pointer
-  extern void specify_command_line_flag
-  (const std::string& command_line_flag, int* arg_pt,
-   const std::string& documentation="Undocumented");
+      return typestr;
+    }
 
-  /// \short Specify possible command line flag that specifies an unsigned, 
-  /// accessed via pointer
-  extern void specify_command_line_flag
-  (const std::string& command_line_flag, unsigned* arg_pt,
-   const std::string& documentation="Undocumented");
+    /// \short Get the type name of an object from a pointer to the object (we
+    /// usually want the type of the object itself not the pointer because the
+    /// type of the pointer may be a base class). Only for use in debugging,
+    /// do not write real code using this function as it is implementation
+    /// dependant!
+    template<class T>
+    std::string get_type_name(T* obj)
+    {
+      return get_type_name(*obj);
+    }
 
-  /// \short Specify possible command line flag that specifies a string, 
-  /// accessed via pointer
-  extern void specify_command_line_flag
-  (const std::string& command_line_flag, std::string* arg_pt,
-   const std::string& documentation="Undocumented");
+  } // namespace TypeNames
 
-  /// \short Check if specified flag has been set (the associated 
-  /// value will have been assigned directly)
-  extern bool command_line_flag_has_been_set(const std::string& flag);
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
 
-  /// Document the values of all flags (specified or not)
-  extern void doc_all_flags(std::ostream& outstream=*oomph_info.stream_pt());
 
-  /// Document specified command line flags
-  extern void doc_specified_flags();
+  //====================================================================
+  /// Namespace for global (cumulative) timings
+  //====================================================================
+  namespace CumulativeTimings
+  {
+    /// (Re-)start i-th timer
+    extern void start(const unsigned& i);
 
-  /// Document available command line flags
-  extern void doc_available_flags();
+    /// Halt i-th timer
+    extern void halt(const unsigned& i);
 
-  /// Helper function to check if command line index is legal
-  extern void check_arg_index(const int& argc,const int& arg_index);
+    /// Reset i-th timer
+    extern void reset(const unsigned& i);
 
-  /// \short Parse command line, check for recognised flags and assign 
-  /// associated values
-  extern void parse_and_assign(int argc, char *argv[], 
-			       const bool& throw_on_unrecognised_args=false);
+    /// Reset all timers
+    extern void reset();
 
-  /// \short Parse previously specified command line, check for 
-  /// recognised flags and assign associated values
-  extern void parse_and_assign(const bool& throw_on_unrecognised_args=false);
+    /// Report time accumulated by i-th timer
+    extern double cumulative_time(const unsigned& i);
 
- }
+    /// Set number of timings that can be recorded in parallel
+    extern void set_ntimers(const unsigned& ntimers);
 
-// forward declaration of OomphCommunicator class
- class OomphCommunicator;
+    /// Cumulative timings
+    extern Vector<clock_t> Timing;
+
+    /// Start times of active timers
+    extern Vector<clock_t> Start_time;
+
+  } // namespace CumulativeTimings
+
+
+  // ============================================================
+  // Automatically checked casting functions (from boost)
+  // ============================================================
+
+  /// \short Runtime checked dynamic cast. This is the safe but slightly slower
+  /// cast. Use it in any of these cases:
+  /// - You aren't entirely sure the cast is always safe.
+  /// - You have strange inheritance structures (e.g. the "Diamond of Death" in
+  ///   element inheritance).
+  /// - Efficiency is not critical.
+  /// Note that if you just want to check if a pointer can be converted to
+  /// some type you will need to use a plain dynamic_cast. Adapted from
+  /// polymorphic_cast in boost/cast.hpp, see
+  /// http://www.boost.org/doc/libs/1_52_0/libs/conversion/cast.htm for more
+  /// details.
+  template<class Target, class Source>
+  inline Target checked_dynamic_cast(Source* x)
+  {
+    Target tmp = dynamic_cast<Target>(x);
+#ifdef PARANOID
+    if (tmp == 0)
+    {
+      throw OomphLibError(
+        "Bad cast.", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+    return tmp;
+  }
+
+  /// \short Checked static cast. Only use this cast if ALL of these are true:
+  /// - You are sure that the cast will always succeed.
+  /// - You aren't using any strange inheritance structures (e.g. the "Diamond
+  /// of Death" in element inheritance, if you aren't sure just try compiling).
+  /// - You need efficiency.
+  /// Adapted from polymorphic_downcast in boost/cast.hpp, See
+  /// http://www.boost.org/doc/libs/1_52_0/libs/conversion/cast.htm for more
+  /// details.
+  template<class Target, class Source>
+  inline Target checked_static_cast(Source* x)
+  {
+#ifdef PARANOID
+    // Check that the cast will work as expected.
+    if (dynamic_cast<Target>(x) != x)
+    {
+      throw OomphLibError(
+        "Bad cast.", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+    return static_cast<Target>(x);
+  }
+
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+
+  //====================================================================
+  /// Timer
+  //====================================================================
+  class Timer
+  {
+  public:
+    /// Constructor: Specify number of timers
+    Timer(const unsigned& n_timer)
+    {
+      set_ntimers(n_timer);
+    }
+
+    /// (Re-)start i-th timer
+    void start(const unsigned& i)
+    {
+      Start_time[i] = clock();
+    }
+
+    /// Halt i-th timer
+    void halt(const unsigned& i)
+    {
+      Timing[i] += clock() - Start_time[i];
+    }
+
+    /// Report time accumulated by i-th timer
+    double cumulative_time(const unsigned& i)
+    {
+      return double(Timing[i]) / CLOCKS_PER_SEC;
+    }
+
+    /// Reset i-th timer
+    void reset(const unsigned& i)
+    {
+      Timing[i] = clock_t(0.0);
+    }
+
+    /// Reset all timers
+    void reset()
+    {
+      unsigned n = Timing.size();
+      for (unsigned i = 0; i < n; i++)
+      {
+        Timing[i] = clock_t(0.0);
+      }
+    }
+
+    /// Set number of timings that can be recorded in parallel
+    void set_ntimers(const unsigned& ntimers)
+    {
+      Timing.resize(ntimers, clock_t(0.0));
+      Start_time.resize(ntimers, clock_t(0.0));
+    }
+
+  private:
+    /// Cumulative timings
+    Vector<clock_t> Timing;
+
+    /// Start times of active timers
+    Vector<clock_t> Start_time;
+  };
+
+
+  //====================================================================
+  /// \short Collection of data structures for storing information about
+  /// linear solves. Currently only contains storage for the
+  /// iteration counts and the linear solver time.
+  //====================================================================
+  class DocLinearSolverInfo
+  {
+  public:
+    /// \short Constructor. Initialised the Iterations_and_times vector of
+    /// vector of pairs.
+    DocLinearSolverInfo() : Iterations_and_times() {}
+
+    /// \short Set up a new vector of pairs for a new time step.
+    void setup_new_time_step()
+    {
+      // For each new time step, we have a new vector consisting of pairs of
+      // unsigned (for the iteration) and double (for the timing results).
+      Iterations_and_times.push_back(Vector<Vector<double>>());
+    }
+
+    void clear_current_time_step()
+    {
+      Iterations_and_times.pop_back();
+      setup_new_time_step();
+    }
+
+    /// \short Add a new iteration and time pair.
+    void add_iteration_and_time(unsigned iter,
+                                double prec_setup_time,
+                                double linear_solver_time)
+    {
+#ifdef PARANOID
+      if (Iterations_and_times.size() == 0)
+      {
+        std::ostringstream error_message;
+        error_message << "Iterations_and_times is empty. "
+                      << "Call setup_new_time_step()\n";
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      Vector<double> tmp_iter_time_vec(3, 0);
+      tmp_iter_time_vec[0] = (double)iter;
+      tmp_iter_time_vec[1] = prec_setup_time;
+      tmp_iter_time_vec[2] = linear_solver_time;
+      Iterations_and_times.back().push_back(tmp_iter_time_vec);
+    }
+
+    /// The number of time steps
+    unsigned current_ntime_step() const
+    {
+      return Iterations_and_times.size();
+    }
+
+    /// The number of Newton steps.
+    unsigned current_nnewton_step() const
+    {
+      return Iterations_and_times.back().size();
+    }
+
+    /// \short Accessor function for the iteration and times.
+    Vector<Vector<Vector<double>>>& iterations_and_times()
+    {
+      return Iterations_and_times;
+    }
+
+    /// \short Accessor function for the iteration and times (const version).
+    Vector<Vector<Vector<double>>> iterations_and_times() const
+    {
+      return Iterations_and_times;
+    }
+
+  private:
+    /// Storage for number of iterations during Newton steps
+    Vector<Vector<Vector<double>>> Iterations_and_times;
+  };
+
+  //====================================================================
+  /// \short Information for documentation of results:
+  /// Directory and file number to enable output
+  /// in the form RESLT/filename11.dat, say.
+  /// Documentation can be switched on and off.
+  //====================================================================
+  class DocInfo
+  {
+  public:
+    /// \short Constructor. Default settings: Current directory, step `0',
+    /// label="", full documentation enabled and output directory is not
+    /// required to exist when set_directory() is called.
+    DocInfo()
+      : Directory("."),
+        Doc_flag(true),
+        Number(0),
+        Label(""),
+        Directory_must_exist(false)
+    {
+    }
+
+    /// \short Constructor with specific directory.
+    DocInfo(const std::string& directory)
+      : Directory(directory),
+        Doc_flag(true),
+        Number(0),
+        Label(""),
+        Directory_must_exist(false)
+    {
+    }
+
+    /// Output directory
+    std::string directory() const
+    {
+      return Directory;
+    }
+
+    /// \short Set output directory (we try to open a file in it
+    /// to see if the directory exists -- if it doesn't we'll
+    /// issue a warning -- or, if directory_must_exist()==true,
+    /// throw and OomphLibError
+    void set_directory(const std::string& directory);
+
+    /// \short Enable documentation
+    void enable_doc()
+    {
+      Doc_flag = true;
+    }
+
+    /// \short Disable documentation
+    void disable_doc()
+    {
+      Doc_flag = false;
+    }
+
+    /// \short Are we documenting?
+    bool is_doc_enabled() const
+    {
+      return Doc_flag;
+    }
+
+    /// Number used (e.g.) for labeling output files
+    unsigned& number()
+    {
+      return Number;
+    }
+
+    /// Number used (e.g.) for labeling output files. Const version.
+    unsigned number() const
+    {
+      return Number;
+    }
+
+    /// Get number as a string (useful to completely avoid C-strings).
+    std::string number_as_string() const
+    {
+      return StringConversion::to_string(Number);
+    }
+
+    /// String used (e.g.) for labeling output files
+    std::string& label()
+    {
+      return Label;
+    }
+
+    /// String used (e.g.) for labeling output files. Const version.
+    std::string label() const
+    {
+      return Label;
+    }
+
+    /// \short Call to throw an error if directory does not exist
+    void enable_error_if_directory_does_not_exist()
+    {
+      Directory_must_exist = true;
+    }
+
+    /// \short Call to issue a warning if the directory does not exists
+    void disable_error_if_directory_does_not_exist()
+    {
+      Directory_must_exist = false;
+    }
+
+  private:
+    /// Directory name
+    std::string Directory;
+
+    /// Doc or don't?
+    bool Doc_flag;
+
+    /// Number to label output file, say
+    unsigned Number;
+
+    /// String to label output file, say
+    std::string Label;
+
+    /// Boolean flag to decide response if an output
+    /// directory doesn't exist: If true, we terminate
+    /// code execution by throwing an OomphLibError rather than
+    /// just issuing a warning.
+    bool Directory_must_exist;
+  };
+
+
+  //====================================================================
+  // Namespace for command line arguments
+  //====================================================================
+  namespace CommandLineArgs
+  {
+    /// Structure to store information on a command line argument
+    template<class T>
+    struct ArgInfo
+    {
+      /// Proper constructor
+      ArgInfo(const bool& is_set, T* arg_pt, const std::string& doc)
+      {
+        this->is_set = is_set;
+        this->arg_pt = arg_pt;
+        this->doc = doc;
+      }
+
+      /// Default constructor. We need this to be able to store these things in
+      /// maps.
+      ArgInfo()
+      {
+        this->is_set = false;
+        this->arg_pt = 0;
+        this->doc = "";
+      }
+
+      // /// Assignment operator. We need this to be able to store these things
+      // in
+      // /// maps.
+      // void operator=(const ArgInfo& that)
+      //  {
+      //   this->is_set = that.is_set;
+      //   this->arg_pt = that.arg_pt;
+      //   this->doc = that.doc;
+      //  }
+
+      /// Has this argument been set?
+      bool is_set;
+
+      /// The place to put the argument's value when it is set
+      T* arg_pt;
+
+      /// Information about what the argument does
+      std::string doc;
+    };
+
+    // Number of arguments + 1
+    extern int Argc;
+
+    // Arguments themselves
+    extern char** Argv;
+
+    /// Map to indicate an input flag as having been set
+    extern std::map<std::string, ArgInfo<bool>> Specified_command_line_flag;
+
+    /// Map to associate an input flag with a double -- specified via pointer
+    extern std::map<std::string, ArgInfo<double>>
+      Specified_command_line_double_pt;
+
+    /// Map to associate an input flag with an int -- specified via pointer
+    extern std::map<std::string, ArgInfo<int>> Specified_command_line_int_pt;
+
+    /// Map to associate an input flag with an unsigned -- specified via pointer
+    extern std::map<std::string, ArgInfo<unsigned>>
+      Specified_command_line_unsigned_pt;
+
+    /// Map to associate an input flag with a string -- specified via pointer
+    extern std::map<std::string, ArgInfo<std::string>>
+      Specified_command_line_string_pt;
+
+    // Set values
+    extern void setup(int argc, char** argv);
+
+    // Doc the command line arguments
+    extern void output();
+
+    /// Specify possible argument-free command line flag
+    extern void specify_command_line_flag(
+      const std::string& command_line_flag,
+      const std::string& documentation = "Undocumented");
+
+    /// \short Specify possible command line flag that specifies a double,
+    /// accessed via pointer
+    extern void specify_command_line_flag(
+      const std::string& command_line_flag,
+      double* arg_pt,
+      const std::string& documentation = "Undocumented");
+
+    /// \short Specify possible command line flag that specifies an int,
+    /// accessed via pointer
+    extern void specify_command_line_flag(
+      const std::string& command_line_flag,
+      int* arg_pt,
+      const std::string& documentation = "Undocumented");
+
+    /// \short Specify possible command line flag that specifies an unsigned,
+    /// accessed via pointer
+    extern void specify_command_line_flag(
+      const std::string& command_line_flag,
+      unsigned* arg_pt,
+      const std::string& documentation = "Undocumented");
+
+    /// \short Specify possible command line flag that specifies a string,
+    /// accessed via pointer
+    extern void specify_command_line_flag(
+      const std::string& command_line_flag,
+      std::string* arg_pt,
+      const std::string& documentation = "Undocumented");
+
+    /// \short Check if specified flag has been set (the associated
+    /// value will have been assigned directly)
+    extern bool command_line_flag_has_been_set(const std::string& flag);
+
+    /// Document the values of all flags (specified or not)
+    extern void doc_all_flags(
+      std::ostream& outstream = *oomph_info.stream_pt());
+
+    /// Document specified command line flags
+    extern void doc_specified_flags();
+
+    /// Document available command line flags
+    extern void doc_available_flags();
+
+    /// Helper function to check if command line index is legal
+    extern void check_arg_index(const int& argc, const int& arg_index);
+
+    /// \short Parse command line, check for recognised flags and assign
+    /// associated values
+    extern void parse_and_assign(
+      int argc, char* argv[], const bool& throw_on_unrecognised_args = false);
+
+    /// \short Parse previously specified command line, check for
+    /// recognised flags and assign associated values
+    extern void parse_and_assign(
+      const bool& throw_on_unrecognised_args = false);
+
+  } // namespace CommandLineArgs
+
+  // forward declaration of OomphCommunicator class
+  class OomphCommunicator;
 
 #ifdef OOMPH_HAS_MPI
-//========================================================================
-/// MPI output modifier: Precedes every output by 
-/// specification of the processor ID. Output can be restricted
-/// to a single processor.
-//========================================================================
- class MPIOutputModifier : public OutputModifier
- {
-
- private:
-
-  /// \short Rank of single processor that produces output (only used
-  /// if  Output_from_single_processor=true
-  unsigned Output_rank; 
-
-  /// Boolean to control if output is performed only on a single
-  /// processor (default: false)
-  bool Output_from_single_processor;
-
-  /// Communicator
-  OomphCommunicator* Communicator_pt;
-
- public:
-
-
-  /// Constructor -- initialise flags for output from all processors
-  MPIOutputModifier() : Output_rank(0), 
-			Output_from_single_processor(false)
-  {}
-
-  /// Return pointer to communicator
-  OomphCommunicator*& communicator_pt() { return Communicator_pt; }
-
-  /// Precede the output by the processor ID but output everything
-  virtual bool operator()(std::ostream &stream);
-
-  /// Switch to ensure output is only produced from a single
-  /// processor (default: Master node, i.e. rank 0)
-  void restrict_output_to_single_processor(const unsigned& output_rank=0)
+  //========================================================================
+  /// MPI output modifier: Precedes every output by
+  /// specification of the processor ID. Output can be restricted
+  /// to a single processor.
+  //========================================================================
+  class MPIOutputModifier : public OutputModifier
   {
-   Output_from_single_processor=true;
-   Output_rank=output_rank;
-  }
+  private:
+    /// \short Rank of single processor that produces output (only used
+    /// if  Output_from_single_processor=true
+    unsigned Output_rank;
+
+    /// Boolean to control if output is performed only on a single
+    /// processor (default: false)
+    bool Output_from_single_processor;
+
+    /// Communicator
+    OomphCommunicator* Communicator_pt;
+
+  public:
+    /// Constructor -- initialise flags for output from all processors
+    MPIOutputModifier() : Output_rank(0), Output_from_single_processor(false) {}
+
+    /// Return pointer to communicator
+    OomphCommunicator*& communicator_pt()
+    {
+      return Communicator_pt;
+    }
+
+    /// Precede the output by the processor ID but output everything
+    virtual bool operator()(std::ostream& stream);
+
+    /// Switch to ensure output is only produced from a single
+    /// processor (default: Master node, i.e. rank 0)
+    void restrict_output_to_single_processor(const unsigned& output_rank = 0)
+    {
+      Output_from_single_processor = true;
+      Output_rank = output_rank;
+    }
 
 
-  /// Switch to ensure output is only produced from a single
-  /// processor (default: Master node, i.e. rank 0)
-  void allow_output_from_all_processors()
-  {
-   Output_from_single_processor=false;
-  }
+    /// Switch to ensure output is only produced from a single
+    /// processor (default: Master node, i.e. rank 0)
+    void allow_output_from_all_processors()
+    {
+      Output_from_single_processor = false;
+    }
+  };
 
 
- };
+  //========================================================================
+  /// Single (global) instantiation of the mpi output modifier
+  //========================================================================
+  extern MPIOutputModifier oomph_mpi_output;
 
+  //=== Forward DenseMatrix class
+  template<class T>
+  class DenseMatrix;
 
-//========================================================================
-/// Single (global) instantiation of the mpi output modifier
-//========================================================================
- extern MPIOutputModifier oomph_mpi_output;
-
-//=== Forward DenseMatrix class
- template <class T>
- class DenseMatrix;
-
-// forward declaration of oomph-communicator class
-//class OomphCommunicator;
+  // forward declaration of oomph-communicator class
+  // class OomphCommunicator;
 
 #endif
 
 
-//======================================================================
-/// \short MPI_Helpers class contains static helper methods to support MPI 
-/// within oomph-lib. The methods init(...) and finalize() initialize and 
-/// finalize MPI in oomph-lib and manage the oomph-libs global communicator
-/// communicator_pt().
-/// NOTE: This class encapsulates static helper methods and instances of it 
-/// CANNOT be instantiated.
-//=====================================================================
- class MPI_Helpers
- {
+  //======================================================================
+  /// \short MPI_Helpers class contains static helper methods to support MPI
+  /// within oomph-lib. The methods init(...) and finalize() initialize and
+  /// finalize MPI in oomph-lib and manage the oomph-libs global communicator
+  /// communicator_pt().
+  /// NOTE: This class encapsulates static helper methods and instances of it
+  /// CANNOT be instantiated.
+  //=====================================================================
+  class MPI_Helpers
+  {
+  public:
+    /// \short initialise mpi (oomph-libs equivalent of MPI_Init(...))
+    /// Initialises MPI and creates the global oomph-lib communicator.
+    /// If optional boolean flag is set to false, we use
+    /// MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true.
+    static void init(int argc,
+                     char** argv,
+                     const bool& make_duplicate_of_mpi_comm_world = true);
 
- public:
+    /// finalize mpi (oomph-lib equivalent of MPI_Finalize())
+    /// Deletes the global oomph-lib communicator and finalizes MPI.
+    static void finalize();
 
-  /// \short initialise mpi (oomph-libs equivalent of MPI_Init(...)) 
-  /// Initialises MPI and creates the global oomph-lib communicator.
-  /// If optional boolean flag is set to false, we use
-  /// MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true.
-  static void init(int argc, char **argv, 
-		   const bool& make_duplicate_of_mpi_comm_world=true);
+    /// access to global communicator. This is the oomph-lib equivalent of
+    /// MPI_COMM_WORLD
+    static OomphCommunicator* communicator_pt();
 
-  /// finalize mpi (oomph-lib equivalent of MPI_Finalize()) 
-  /// Deletes the global oomph-lib communicator and finalizes MPI.
-  static void finalize();
+    /// return true if MPI has been initialised
+    static bool mpi_has_been_initialised()
+    {
+      return MPI_has_been_initialised;
+    }
 
-  /// access to global communicator. This is the oomph-lib equivalent of
-  /// MPI_COMM_WORLD
-  static OomphCommunicator* communicator_pt();
+  private:
+    /// \short private default constructor definition (to prevent instances of
+    /// the class being instantiated)
+    MPI_Helpers();
 
-  /// return true if MPI has been initialised
-  static bool mpi_has_been_initialised() { return MPI_has_been_initialised; }
+    /// \short private copy constructor definition (to prevent instances of
+    /// the class being instantiated)
+    MPI_Helpers(const MPI_Helpers&);
 
- private:
+    /// Bool set to true if MPI has been initialised
+    static bool MPI_has_been_initialised;
 
-  /// \short private default constructor definition (to prevent instances of 
-  /// the class being instantiated)
-  MPI_Helpers();
-
-  /// \short private copy constructor definition (to prevent instances of 
-  /// the class being instantiated)
-  MPI_Helpers(const MPI_Helpers&);
-
-  /// Bool set to true if MPI has been initialised
-  static bool MPI_has_been_initialised;
-
-  /// the global communicator
-  static OomphCommunicator* Communicator_pt;
- };
+    /// the global communicator
+    static OomphCommunicator* Communicator_pt;
+  };
 
 
-//====================================================================
-// Namespace for flagging up obsolete parts of the code
-//====================================================================
- namespace ObsoleteCode
- {
- 
-  // Flag up obsolete parts of the code
-  extern bool FlagObsoleteCode;
+  //====================================================================
+  // Namespace for flagging up obsolete parts of the code
+  //====================================================================
+  namespace ObsoleteCode
+  {
+    // Flag up obsolete parts of the code
+    extern bool FlagObsoleteCode;
 
-  // Output warning message
-  extern void obsolete();
+    // Output warning message
+    extern void obsolete();
 
-  // Output specified warning message
-  extern void obsolete(const std::string &message);
+    // Output specified warning message
+    extern void obsolete(const std::string& message);
 
- }
+  } // namespace ObsoleteCode
 
-//====================================================================
-// Namespace for tecplot stuff
-//====================================================================
- namespace TecplotNames
- {
+  //====================================================================
+  // Namespace for tecplot stuff
+  //====================================================================
+  namespace TecplotNames
+  {
+    // Tecplot colours
+    extern Vector<std::string> colour;
 
-  // Tecplot colours 
-  extern Vector<std::string> colour;
+    // Setup tecplot colours namespace
+    extern void setup();
 
-  // Setup tecplot colours namespace
-  extern void setup();
-
- }
+  } // namespace TecplotNames
 
 
 #ifdef LEAK_CHECK
 
-//====================================================================
-// Namespace for leak check: Keep a running count of all instantiated
-// objects -- add your own if you want to...
-//====================================================================
- namespace LeakCheckNames
- {
+  //====================================================================
+  // Namespace for leak check: Keep a running count of all instantiated
+  // objects -- add your own if you want to...
+  //====================================================================
+  namespace LeakCheckNames
+  {
+    extern long QuadTree_build;
+    extern long OcTree_build;
+    extern long QuadTreeForest_build;
+    extern long OcTreeForest_build;
+    extern long RefineableQElement<2> _build;
+    extern long RefineableQElement<3> _build;
+    extern long MacroElement_build;
+    extern long HangInfo_build;
+    extern long Node_build;
+    extern long GeomReference_build;
+    extern long AlgebraicNodeNodeUpdateInfo_build;
+    extern long AlgebraicNode_build;
 
-  extern long QuadTree_build;
-  extern long OcTree_build;
-  extern long QuadTreeForest_build;
-  extern long OcTreeForest_build;
-  extern long RefineableQElement<2>_build;
-  extern long RefineableQElement<3>_build;
-  extern long MacroElement_build;
-  extern long HangInfo_build;
-  extern long Node_build;
-  extern long GeomReference_build;
-  extern long AlgebraicNodeNodeUpdateInfo_build;
-  extern long AlgebraicNode_build;
+    // Reset counters
+    extern void reset();
 
-  // Reset counters
-  extern void reset();
-
-  // Doc counters
-  extern void doc();
- }
+    // Doc counters
+    extern void doc();
+  } // namespace LeakCheckNames
 
 #endif
 
-//====================================================================
-// Namespace for pause() command
-//====================================================================
- namespace PauseFlags
- {
- 
-  // Flag to enable pausing code
-  extern bool PauseFlag;
+  //====================================================================
+  // Namespace for pause() command
+  //====================================================================
+  namespace PauseFlags
+  {
+    // Flag to enable pausing code
+    extern bool PauseFlag;
 
- }
+  } // namespace PauseFlags
 
-/// Pause and dump out message
- void pause(std::string message);
-
+  /// Pause and dump out message
+  void pause(std::string message);
 
 
-//=============================================================================
-/// Helper for recording execution time.
-//=============================================================================
- namespace TimingHelpers
- {
+  //=============================================================================
+  /// Helper for recording execution time.
+  //=============================================================================
+  namespace TimingHelpers
+  {
+    /// returns the time in seconds after some point in past
+    double timer();
 
-  /// returns the time in seconds after some point in past
-  double timer();
-
- }//end of namespace TimingHelpers
-
+  } // end of namespace TimingHelpers
 
 
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
 
 
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
+  //===============================================================
+  /// Namespace with helper functions to assess total memory usage
+  /// on the fly using system() -- details are very machine specific! This just
+  /// provides the overall machinery with default settings for
+  /// our own (linux machines). Uses the system command
+  /// to spawn a command that computes the total memory usage
+  /// on the machine where this is called.  [Disclaimer: works
+  /// on my machine(s) -- no guarantees for any other platform;
+  /// Linux or not. MH]
+  //===============================================================
+  namespace MemoryUsage
+  {
+    /// \short Boolean to suppress synchronisation of doc memory
+    /// usage on processors (via mpi barriers). True (i.e. sync is
+    /// is suppressed by default because not all processors may
+    /// execute the reach the relevant doc memory usage statements
+    /// causing the code to hang).
+    extern bool Suppress_mpi_synchronisation;
 
+    /// \short String containing system command that obtains memory usage
+    /// of all processes.
+    /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
+    /// no guarantees for any other platform; Linux or not. MH]
+    extern std::string My_memory_usage_system_string;
 
+    /// \short Bool allowing quick bypassing of ALL operations related
+    /// to memory usage monitoring -- this allows the code to remain
+    /// "instrumented" without incurring the heavy penalties associated
+    /// with the system calls and i/o. Default setting: false.
+    extern bool Bypass_all_memory_usage_monitoring;
 
-//===============================================================
-/// Namespace with helper functions to assess total memory usage
-/// on the fly using system() -- details are very machine specific! This just
-/// provides the overall machinery with default settings for
-/// our own (linux machines). Uses the system command
-/// to spawn a command that computes the total memory usage
-/// on the machine where this is called.  [Disclaimer: works 
-/// on my machine(s) -- no guarantees for any other platform; 
-/// Linux or not. MH]
-//===============================================================
- namespace MemoryUsage
- {
- 
-  /// \short Boolean to suppress synchronisation of doc memory
-  /// usage on processors (via mpi barriers). True (i.e. sync is
-  /// is suppressed by default because not all processors may
-  /// execute the reach the relevant doc memory usage statements
-  /// causing the code to hang).
-  extern bool Suppress_mpi_synchronisation;
+    /// \short String containing name of file in which we document
+    /// my memory usage -- you may want to change this to allow different
+    /// processors to write to separate files (especially in mpi
+    /// context). Note that file is appended to
+    /// so it ought to be emptied (either manually or by calling
+    /// helper function empty_memory_usage_file()
+    extern std::string My_memory_usage_filename;
 
-  /// \short String containing system command that obtains memory usage
-  /// of all processes.
-  /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
-  /// no guarantees for any other platform; Linux or not. MH]
-  extern std::string My_memory_usage_system_string;
+    /// \short Function to empty file that records my memory usage in
+    /// file whose name is specified by My_memory_usage_filename.
+    void empty_my_memory_usage_file();
 
-  /// \short Bool allowing quick bypassing of ALL operations related
-  /// to memory usage monitoring -- this allows the code to remain
-  /// "instrumented" without incurring the heavy penalties associated
-  /// with the system calls and i/o. Default setting: false.
-  extern bool Bypass_all_memory_usage_monitoring;
- 
-  /// \short String containing name of file in which we document
-  /// my memory usage -- you may want to change this to allow different
-  /// processors to write to separate files (especially in mpi 
-  /// context). Note that file is appended to 
-  /// so it ought to be emptied (either manually or by calling
-  /// helper function empty_memory_usage_file()
-  extern std::string My_memory_usage_filename;
- 
-  /// \short Function to empty file that records my memory usage in
-  /// file whose name is specified by My_memory_usage_filename.
-  void empty_my_memory_usage_file();
- 
 #ifdef OOMPH_HAS_UNISTDH
 
-  /// \short Doc my memory usage, prepended by string (which allows
-  /// identification from where the function is called, say) that records 
-  /// memory usage in file whose name is specified by My_memory_usage_filename.
-  /// Data is appended to that file; wipe it with empty_my_memory_usage_file().
-  /// Note: This requires getpid() which is defined in unistd.h so if you
-  /// don't have that we won't build that function!
-  void doc_my_memory_usage(const std::string& prefix_string=0);
+    /// \short Doc my memory usage, prepended by string (which allows
+    /// identification from where the function is called, say) that records
+    /// memory usage in file whose name is specified by
+    /// My_memory_usage_filename. Data is appended to that file; wipe it with
+    /// empty_my_memory_usage_file(). Note: This requires getpid() which is
+    /// defined in unistd.h so if you don't have that we won't build that
+    /// function!
+    void doc_my_memory_usage(const std::string& prefix_string = 0);
 
 #endif
- 
-  /// \short String containing system command that obtains total memory usage.
-  /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
-  /// no guarantees for any other platform; Linux or not. MH]
-  extern std::string Total_memory_usage_system_string;
- 
-  /// \short String containing name of file in which we document total
-  /// memory usage -- you may want to change this to allow different
-  /// processors to write to separate files (especially in mpi 
-  /// context). Note that file is appended to 
-  /// so it ought to be emptied (either manually or by calling
-  /// helper function empty_memory_usage_file()
-  extern std::string Total_memory_usage_filename;
- 
-  /// \short Function to empty file that records total memory usage in
-  /// file whose name is specified by Total_memory_usage_filename.
-  void empty_total_memory_usage_file();
- 
-  /// \short Doc total memory usage, prepended by string (which allows
-  /// identification from where the function is called, say) that records 
-  /// mem usage in file whose name is specified by Total_memory_usage_filename.
-  /// Data is appended to that file; wipe it with empty_memory_usage_file().
-  void doc_total_memory_usage(const std::string& prefix_string="");
- 
-  /// \short Function to empty file that records total and local memory usage
-  /// in appropriate files
-  void empty_memory_usage_files();
- 
-  /// \short Doc total and local memory usage, prepended by string (which allows
-  /// identification from where the function is called, say)
-  void doc_memory_usage(const std::string& prefix_string="");
 
-  /// \short String containing system command that runs "top" (or equivalent)
-  /// "indefinitely" and writes to file specified in Top_output_filename.
-  /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
-  /// no guarantees for any other platform; Linux or not. MH]
-  extern std::string Top_system_string;
- 
-  /// \short  String containing name of file in which we document "continuous"
-  /// output from "top" (or equivalent)-- you may want to change this to 
-  /// allow different processors to write to separate files (especially in mpi 
-  /// context). Note that file is appended to 
-  /// so it ought to be emptied (either manually or by calling
-  /// helper function empty_top_file()
-  extern std::string Top_output_filename;
- 
-  /// \short Function to empty file that records continuous output from top in
-  /// file whose name is specified by Top_output_filename
-  void empty_top_file();
- 
-  /// \short Start running top continuously and output (append) into 
-  /// file specified by Top_output_filename. Wipe that file  with 
-  /// empty_top_file() first if you wish. Note that this is again 
-  /// quite Linux specific and unlikely to work on other operating systems.
-  /// Insert optional comment into output file before starting.
-  void run_continous_top(const std::string& comment="");
+    /// \short String containing system command that obtains total memory usage.
+    /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
+    /// no guarantees for any other platform; Linux or not. MH]
+    extern std::string Total_memory_usage_system_string;
 
-  /// \short Stop running top continuously. Note that this is 
-  /// again quite Linux specific and unlikely to work on other operating 
-  /// systems.
-  /// Insert optional comment into output file before stopping.
-  void stop_continous_top(const std::string& comment="");
-  
-  /// \short Insert comment into running continuous top output
-  void insert_comment_to_continous_top(const std::string& comment);
- 
- } // end of namespace MemoryUsage
+    /// \short String containing name of file in which we document total
+    /// memory usage -- you may want to change this to allow different
+    /// processors to write to separate files (especially in mpi
+    /// context). Note that file is appended to
+    /// so it ought to be emptied (either manually or by calling
+    /// helper function empty_memory_usage_file()
+    extern std::string Total_memory_usage_filename;
+
+    /// \short Function to empty file that records total memory usage in
+    /// file whose name is specified by Total_memory_usage_filename.
+    void empty_total_memory_usage_file();
+
+    /// \short Doc total memory usage, prepended by string (which allows
+    /// identification from where the function is called, say) that records
+    /// mem usage in file whose name is specified by
+    /// Total_memory_usage_filename. Data is appended to that file; wipe it with
+    /// empty_memory_usage_file().
+    void doc_total_memory_usage(const std::string& prefix_string = "");
+
+    /// \short Function to empty file that records total and local memory usage
+    /// in appropriate files
+    void empty_memory_usage_files();
+
+    /// \short Doc total and local memory usage, prepended by string (which
+    /// allows identification from where the function is called, say)
+    void doc_memory_usage(const std::string& prefix_string = "");
+
+    /// \short String containing system command that runs "top" (or equivalent)
+    /// "indefinitely" and writes to file specified in Top_output_filename.
+    /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
+    /// no guarantees for any other platform; Linux or not. MH]
+    extern std::string Top_system_string;
+
+    /// \short  String containing name of file in which we document "continuous"
+    /// output from "top" (or equivalent)-- you may want to change this to
+    /// allow different processors to write to separate files (especially in mpi
+    /// context). Note that file is appended to
+    /// so it ought to be emptied (either manually or by calling
+    /// helper function empty_top_file()
+    extern std::string Top_output_filename;
+
+    /// \short Function to empty file that records continuous output from top in
+    /// file whose name is specified by Top_output_filename
+    void empty_top_file();
+
+    /// \short Start running top continuously and output (append) into
+    /// file specified by Top_output_filename. Wipe that file  with
+    /// empty_top_file() first if you wish. Note that this is again
+    /// quite Linux specific and unlikely to work on other operating systems.
+    /// Insert optional comment into output file before starting.
+    void run_continous_top(const std::string& comment = "");
+
+    /// \short Stop running top continuously. Note that this is
+    /// again quite Linux specific and unlikely to work on other operating
+    /// systems.
+    /// Insert optional comment into output file before stopping.
+    void stop_continous_top(const std::string& comment = "");
+
+    /// \short Insert comment into running continuous top output
+    void insert_comment_to_continous_top(const std::string& comment);
+
+  } // end of namespace MemoryUsage
 
 
+  ////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
 
- ////////////////////////////////////////////////////////////////
- ////////////////////////////////////////////////////////////////
- ////////////////////////////////////////////////////////////////
+  // Forward decl.
+  class Problem;
+  template<class T>
+  class DenseMatrix;
 
- // Forward decl.
- class Problem;
- template <class T> class DenseMatrix;
-
- /// Function base class for exact solutions/initial conditions/boundary
- /// conditions. This is needed so that we can have solutions that depend
- /// on problem parameters with resorting to global variables.
- class SolutionFunctorBase
- {
- public:
-  // Some typedefs first:
-
-  /// General function of space and time which returns a double.
-  typedef double (*TimeSpaceToDoubleFctPt)(const double& t,
-                                           const Vector<double>&x);
-
-  /// General function of space and time which returns a vector of doubles.
-  typedef Vector<double> (*TimeSpaceToDoubleVectFctPt) (const double& t,
-                                                        const Vector<double>&x);
-
-  /// General function of time, space and a value vector which returns a
-  /// vector of doubles.
-  typedef Vector<double> (*TimeSpaceValueToDoubleVectFctPt)
-  (const double& t, const Vector<double>&x, const Vector<double>&u);
-
-  /// Virtual destructor
-  virtual ~SolutionFunctorBase() {}
-
-  /// Call the function.
-  virtual Vector<double> operator()(const double& t, 
-                                    const Vector<double>&x) const = 0;
-   
-  /// Call the derivative function.
-  virtual Vector<double> derivative(const double& t, const Vector<double>& x,
-                                    const Vector<double>& u) const = 0;
-
-  /// The derivatives of the derivative function with respect to u (note
-  /// that this is not quite the jacobian of the residuals for an ODE
-  /// problem defined by this solution: you also need the time derivative
-  /// part there). Broken virtual function because not often needed.
-  virtual void jacobian(const double& t, const Vector<double>& x,
-                        const Vector<double>& u, 
-                        DenseMatrix<double>& jacobian) const
+  /// Function base class for exact solutions/initial conditions/boundary
+  /// conditions. This is needed so that we can have solutions that depend
+  /// on problem parameters with resorting to global variables.
+  class SolutionFunctorBase
   {
-   std::string err = "No Jacobian function implemented";
-   throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
+  public:
+    // Some typedefs first:
 
-  /// Is a jacobian function implemented?
-  virtual bool have_jacobian() const {return false;}
+    /// General function of space and time which returns a double.
+    typedef double (*TimeSpaceToDoubleFctPt)(const double& t,
+                                             const Vector<double>& x);
 
-  /// Overload to grab data from the problem.
-  virtual void initialise_from_problem(const Problem* problem_pt) {}
- };
+    /// General function of space and time which returns a vector of doubles.
+    typedef Vector<double> (*TimeSpaceToDoubleVectFctPt)(
+      const double& t, const Vector<double>& x);
+
+    /// General function of time, space and a value vector which returns a
+    /// vector of doubles.
+    typedef Vector<double> (*TimeSpaceValueToDoubleVectFctPt)(
+      const double& t, const Vector<double>& x, const Vector<double>& u);
+
+    /// Virtual destructor
+    virtual ~SolutionFunctorBase() {}
+
+    /// Call the function.
+    virtual Vector<double> operator()(const double& t,
+                                      const Vector<double>& x) const = 0;
+
+    /// Call the derivative function.
+    virtual Vector<double> derivative(const double& t,
+                                      const Vector<double>& x,
+                                      const Vector<double>& u) const = 0;
+
+    /// The derivatives of the derivative function with respect to u (note
+    /// that this is not quite the jacobian of the residuals for an ODE
+    /// problem defined by this solution: you also need the time derivative
+    /// part there). Broken virtual function because not often needed.
+    virtual void jacobian(const double& t,
+                          const Vector<double>& x,
+                          const Vector<double>& u,
+                          DenseMatrix<double>& jacobian) const
+    {
+      std::string err = "No Jacobian function implemented";
+      throw OomphLibError(
+        err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    /// Is a jacobian function implemented?
+    virtual bool have_jacobian() const
+    {
+      return false;
+    }
+
+    /// Overload to grab data from the problem.
+    virtual void initialise_from_problem(const Problem* problem_pt) {}
+  };
 
 
-
- /// Function class for a simple function with no external parameters (just
- /// stores a function pointer, only needed for compatability).
- class SolutionFunctor : public SolutionFunctorBase
- {
-  // This could easily be extended to take
-  // FiniteElement::UnsteadyExactSolutionFctPt function (i.e. functions
-  // where the output is placed into a given vector rather than returned)
-  // as well--just add the appropriate storage pointers and constructors.
-
- public:
-  // Constructors:
-
-  SolutionFunctor()
+  /// Function class for a simple function with no external parameters (just
+  /// stores a function pointer, only needed for compatability).
+  class SolutionFunctor : public SolutionFunctorBase
   {
-   Solution_fpt = 0;
-   Derivative_fpt = 0;
-  }
+    // This could easily be extended to take
+    // FiniteElement::UnsteadyExactSolutionFctPt function (i.e. functions
+    // where the output is placed into a given vector rather than returned)
+    // as well--just add the appropriate storage pointers and constructors.
 
-  SolutionFunctor(TimeSpaceToDoubleVectFctPt solution_fpt)
-  {
-   Solution_fpt = solution_fpt;
-   Derivative_fpt = 0;
-  }
+  public:
+    // Constructors:
 
-  SolutionFunctor(TimeSpaceToDoubleVectFctPt solution_fpt,
-                  TimeSpaceValueToDoubleVectFctPt derivative_fpt)
-  {
-   Solution_fpt = solution_fpt;
-   Derivative_fpt = derivative_fpt;
-  }
+    SolutionFunctor()
+    {
+      Solution_fpt = 0;
+      Derivative_fpt = 0;
+    }
 
-  virtual ~SolutionFunctor() {}
+    SolutionFunctor(TimeSpaceToDoubleVectFctPt solution_fpt)
+    {
+      Solution_fpt = solution_fpt;
+      Derivative_fpt = 0;
+    }
 
-  SolutionFunctor(const SolutionFunctor& that)
-  {
-   Solution_fpt = that.Solution_fpt;
-   Derivative_fpt = that.Derivative_fpt;
-  }
+    SolutionFunctor(TimeSpaceToDoubleVectFctPt solution_fpt,
+                    TimeSpaceValueToDoubleVectFctPt derivative_fpt)
+    {
+      Solution_fpt = solution_fpt;
+      Derivative_fpt = derivative_fpt;
+    }
 
-  void operator=(const SolutionFunctor& that)
-  {
-   this->Solution_fpt = that.Solution_fpt;
-   this->Derivative_fpt = that.Derivative_fpt;
-  }
+    virtual ~SolutionFunctor() {}
 
-  /// Call the function.
-  virtual Vector<double> operator()(const double& t, const Vector<double>&x) const
-  {
+    SolutionFunctor(const SolutionFunctor& that)
+    {
+      Solution_fpt = that.Solution_fpt;
+      Derivative_fpt = that.Derivative_fpt;
+    }
+
+    void operator=(const SolutionFunctor& that)
+    {
+      this->Solution_fpt = that.Solution_fpt;
+      this->Derivative_fpt = that.Derivative_fpt;
+    }
+
+    /// Call the function.
+    virtual Vector<double> operator()(const double& t,
+                                      const Vector<double>& x) const
+    {
 #ifdef PARANOID
-   if(Solution_fpt == 0)
-   {
-    std::string err = "Solution_fpt is null!";
-    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
+      if (Solution_fpt == 0)
+      {
+        std::string err = "Solution_fpt is null!";
+        throw OomphLibError(
+          err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
-   return Solution_fpt(t, x);
-  }
+      return Solution_fpt(t, x);
+    }
 
-  /// Call the derivative function.
-  virtual Vector<double> derivative(const double& t, const Vector<double>& x,
-                                    const Vector<double>& u) const
-  {
+    /// Call the derivative function.
+    virtual Vector<double> derivative(const double& t,
+                                      const Vector<double>& x,
+                                      const Vector<double>& u) const
+    {
 #ifdef PARANOID
-   if(Derivative_fpt == 0)
-   {
-    std::string err = "Derivative_fpt is null!";
-    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
-			OOMPH_EXCEPTION_LOCATION);
-   }
+      if (Derivative_fpt == 0)
+      {
+        std::string err = "Derivative_fpt is null!";
+        throw OomphLibError(
+          err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
-   return Derivative_fpt(t, x, u);
-  }
+      return Derivative_fpt(t, x, u);
+    }
 
-  /// Storage for solution
-  TimeSpaceToDoubleVectFctPt Solution_fpt;
+    /// Storage for solution
+    TimeSpaceToDoubleVectFctPt Solution_fpt;
 
-  /// Storage for derivative
-  TimeSpaceValueToDoubleVectFctPt Derivative_fpt;
- };
+    /// Storage for derivative
+    TimeSpaceValueToDoubleVectFctPt Derivative_fpt;
+  };
 
 
-}
+} // namespace oomph
 #endif
