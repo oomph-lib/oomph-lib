@@ -11,11 +11,10 @@ _Notation:_ We prefix any command line input with "`>>>`" and generally show the
   - [The steps in detail](#the-steps-in-detail)
   - [Advanced: pulling in upstream changes from the command-line](#advanced-pulling-in-upstream-changes-from-the-command-line)
   - [Clang-format](#clang-format)
-    - [Pre-commit hook](#pre-commit-hook)
-      - [Installing](#installing)
-        - [Ubuntu](#ubuntu)
-        - [MacOS](#macos)
-      - [Uninstalling](#uninstalling)
+  - [Pre-commit hooks (optional)](#pre-commit-hooks-optional)
+    - [Installing](#installing)
+    - [Uninstalling](#uninstalling)
+    - [Remarks](#remarks)
 
 ## Basic setup (only to be done once)
 
@@ -112,7 +111,7 @@ This involves the following steps:
 ## The steps in detail
 
 
-1. Start from the branch you want to work on, e.g. `development`,
+1. Start from the branch you want to work on, e.g. `development`
    ```bash
    >>> git checkout development
    Switched to branch 'development'
@@ -133,9 +132,9 @@ This involves the following steps:
    >>> git checkout -b feature/add-new-important-headers
    Switched to a new branch 'feature/add-new-important-headers'
    ```
-   (This combines the two separate commands `git branch feature/add-new-important-headers` and `git checkout feature/add-new-important-headers`).
+   (This combines the two separate commands `git branch feature/add-new-important-headers` and `git checkout feature/add-new-important-headers`.)
 
-   **Note:** the "/" is just part of the branch name and doesn't play a special role; it could in principle be replaced by any other character like another hyphen. There's also no need to prefix the branch with "feature", though this is common practice. Using the "/" has the advantage that it can be perceived as a creating a hierarchical subset of branches (so `upstream/feature/*` refers to all the feature branches at `upstream`).
+   **Note:** the "/" is just part of the branch name and doesn't play a special role; it could in principle be replaced by any other character like another hyphen. There's also no need to prefix the branch with "feature", though this is common practice. Using a "/" has the advantage that it can be perceived as a creating a hierarchical subset of branches (so `upstream/feature/*` refers to all the feature branches at `upstream`).
 
    Now check (if you don't believe it) that you're really on the new branch:
    ```bash
@@ -194,35 +193,50 @@ This involves the following steps:
    create mode 100644 new-file2.h
    ```
    **IMPORTANT:**
-   You can switch between branches at any point (e.g. `git checkout main` will get you onto the `main` branch 
-   in your local repository) but if you have not committed your work, the changes will automatically be moved across to the 
-   branch you are switching to. This is unlikely to be the desired outcome as we are specifically working on a separate 
+   You can switch between branches at any point (e.g. `git checkout main` will get you onto the `main` branch
+   in your local repository) but if you have not committed your work, the changes will automatically be moved across to the
+   branch you are switching to. This is unlikely to be the desired outcome as we are specifically working on a separate
    branch to keep our new work isolated from the rest of the code. If you accidentally ended up moving changed files onto another branch
-   you can simply switch back to the branch you were just on (i.e. do  `git checkoutfeature/add-new-important-headers`) and commit your changes there. 
+   you can simply switch back to the branch you were just on (i.e. do  `git checkoutfeature/add-new-important-headers`) and commit your changes there.
    When you then switch back to the `main` branch, these changes will no longer follow you.
-     
+
    If your work is not quite ready to be committed, you use can save your changes for later by first running
    ```bash
    >>> git stash
-   ```        
-   and, once you have returned to the branch upon which you made changes, running      
+   ```
+   and, once you have returned to the branch upon which you made changes, running
    ```bash
    >>> git stash apply
-   ```        
+   ```
    to restore them; see `git help stash` for more detail
 
 5. Now push the commit to your (GitHub-hosted) remote forked repository (`origin`).
 
-   The first time you do this you have to this explicitly state that you want the branch to be added to the `origin` repository, using the `--set-upstream` flag,
+   The first time you do this you have to this explicitly state that you want the branch to be added to the `origin` repository, using the `--set-upstream` flag (which can be abbreviated to `-u`)
    ```bash
    >>> git push --set-upstream origin feature/add-new-important-headers
    ```
-   (where `--set-upstream` can be abbreviated to `-u`)
 
    Subsequent pushes will no longer require the `--set-upstream` flag, so you can just do
    ```bash
    >>> git push origin feature/add-new-important-headers
    ```
+   
+   **IMPORTANT:** During subsequent pushes you may encounter an error from GitHub 
+   telling you that your push request was rejected because a file that you want to push
+   was changed in the remote forked repository. This may come as a surprise since you're 
+   (typically) the only person working with this repository and you'd surely remember if you'd 
+   pushed any changes in between, so you're not expecting any conflicts. If so, this is almost
+   certainly because of the automatic code formatting we use (see
+   [Clang-format](#clang-format)). Once you push a file to the remote repository it is
+   automatically formatted, and if this produces any changes they are then committed 
+   automatically, meaning that the remote forked repository is "ahead" of your local cloned 
+   version. Running
+   ```bash
+   >>> git pull origin feature/add-new-important-headers
+   ```
+   will pull these formatting changes back into your local repository. To avoid merge conflicts
+   it's a good habit to do this a few minutes after pushing anything to your remote repository.
 
 6. Now go to the GitHub webpage for your remote forked repository
    (https://github.com/JoeCoolDummy/oomph-lib/) and click on the button with a branch symbol and the text "`main`":
@@ -230,7 +244,7 @@ This involves the following steps:
     ![](doc/README/main_button.png)
 
     then click on the `feature/add-new-important-headers` branch in the drop-down menu that appears. When you reach the new page, click the green "Compare & pull request" button.
-    
+
     ![](doc/README/compare_and_pull_request_button.png)
 
      Carefully check all changes (shown at the bottom of the page) and select reviewers, using the button on the right hand side of the screen.
@@ -248,9 +262,9 @@ This involves the following steps:
 
    Provide a meaningful description of your changes in the textbox, press the button "Create pull request" and wait for somebody to merge your changes in (or get back to you with comments/requests). Note that subsequent changes (in response to discussions/requests, say) can simply be submitted to the same branch (repeating everything from step 3 above); they will automatically be added/included to the same pull request.
 
-   Note that when you return to the branch's GitHub page (on your remote forked repository) you won't see the lovely green 
-   
-   ![](doc/README/compare_and_pull_request_button.png) 
+   Note that when you return to the branch's GitHub page (on your remote forked repository) you won't see the lovely green
+
+   ![](doc/README/compare_and_pull_request_button.png)
 
    button any more (presumably because a pull request is already pending). To add the newly made changes to the existing pull request, click on the "Contribute" button, next to the "Fetch upstream" one
 
@@ -305,8 +319,6 @@ This involves the following steps:
    ```bash
    >>> git push origin --delete feature/add-new-important-headers
    ```
-
-
 ## Advanced: pulling in upstream changes from the command-line
 
 Described below is an alternative way to pull changes from the official repository (`upstream`) into your local forked and remote forked repositories using the command-line.
@@ -347,8 +359,8 @@ Described below is an alternative way to pull changes from the official reposito
 To ensure a consistent C++ code style throughout the `oomph-lib` library, we use
 the [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html) code formatter,
 automated through the use of a GitHub Action. The [`.clang-format`](.clang-format)
-file in the root directory provides the style specification to `clang-format` and
-the [`.github/workflows/clang-format.yml`](.github/workflows/clang-format.yml)
+file in the root directory provides the style specification for `clang-format` and
+the [`.github/workflows/clang-format.yaml`](.github/workflows/clang-format.yaml)
 GitHub Action applies the formatting. If you followed the steps in [Basic setup
 (only to be done once)](#basic-setup-only-to-be-done-once), this Action will
 automatically be enabled for you.
@@ -361,14 +373,6 @@ directly anyway!) After formatting your code it will create an extra commit
 containing any changes that were made. If your code did not require any changes,
 an additional commit will not be created.
 
-Importantly, because of this automation, you should always run
-```bash
->>> git pull origin <branch-name>
-```
-where `<branch-name>` is the name of your current branch, before you push a
-commit to your GitHub repository, otherwise you may not be able to push your
-commit.
-
 ## Pre-commit hooks (optional)
 
 A pre-commit hook is something that automatically runs on your local computer
@@ -379,7 +383,7 @@ formatting.
 To manage our hooks, we use the [`pre-commit`](https://pre-commit.com/)
 framework. If you're curious, you can find the specification for these hooks in
 [`.pre-commit-config.yaml`](.pre-commit-config.yaml). The hooks will be run
-automatically when you run `git commit` (see Step 4 of [The steps in
+automatically when you run `git commit` (i.e. at Step 4 of [The steps in
 detail](#the-steps-in-detail)) and only the files that you have staged for the
 commit will be affected. If any changes are made by one of these pre-commit
 hooks, your commit will fail to complete, providing you with the opportunity to
@@ -388,12 +392,12 @@ correct the inadmissible changes.
 At the moment, we currently only provide support to run `clang-format` as a
 pre-commit hook. We allow this hook to perform "in-place" editing so when it
 runs it will automatically format your code for you. If changes were made, the
-commit will fail, as mentioned above. However, as the files will be formatted
-for you, all you need to do is simply add the formatted files to the commit.
-When you run `git commit` again, the pre-commit hook tests should pass and your
-commit will complete.
+commit will fail, as mentioned above. However, as the files are not formatted,
+all you need to do is simply add the formatted files to the commit. When you
+run `git commit` again, the pre-commit hook tests should pass and your commit
+will complete.
 
-_To use this hook, you need at least version 10.0.0 of `clang-format`._
+_To use this hook, you will need at least version 10.0.0 of `clang-format`._
 
 ### Installing
 
