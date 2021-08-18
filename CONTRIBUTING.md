@@ -222,6 +222,22 @@ This involves the following steps:
    ```bash
    >>> git push origin feature/add-new-important-headers
    ```
+   
+   **IMPORTANT:** During subsequent pushes you may encounter an error from GitHub, 
+   telling you that your push request was rejected because a file that you want to push
+   was changed in the remote forked repository. This may come as a surprise since you're 
+   (typically) the only person working with this repository and you'd surely remember if you'd 
+   pushed any changes in between, so you're not expecting any conflicts. If so, this is almost
+   certainly because of the automatic code formatting we use (see
+   [Clang-format](#clang-format)). Once you push a file to the remote repository it is
+   automatically formatted, and if this produces any changes they are then committed 
+   automatically, meaning that the remote forked repository is "ahead" of your local cloned 
+   version. Running
+   ```bash
+   >>> git pull origin feature/add-new-important-headers
+   ```
+   will pull these formatting changes back into your local repository. To avoid merge conflicts
+   it's a good habit to do this immediately after pushing anything to your remote repository.
 
 6. Now go to the GitHub webpage for your remote forked repository
    (https://github.com/JoeCoolDummy/oomph-lib/) and click on the button with a branch symbol and the text "`main`":
@@ -304,16 +320,6 @@ This involves the following steps:
    ```bash
    >>> git push origin --delete feature/add-new-important-headers
    ```
-
-**IMPORTANT:** Because of the automatic code formatting we use (see
-[Clang-format](#clang-format)), before you push a
-commit to your GitHub repository you should always run
-```bash
->>> git pull origin <branch-name>
-```
-where `<branch-name>` is the name of your current branch, otherwise you may not
-be able to push your commit to your forked repository.
-
 ## Advanced: pulling in upstream changes from the command-line
 
 Described below is an alternative way to pull changes from the official repository (`upstream`) into your local forked and remote forked repositories using the command-line.
