@@ -20,7 +20,7 @@ jobs:
           && ( export LC_ALL=C; sort -o config/configure_options/default config/configure_options/default )
 
       - name: Build
-        run: ./non_interactive_autogen.sh -s -j$(nproc)
+        run: ./non_interactive_autogen.sh -s -j$(sysctl -n hw.logicalcpu)
 
       - name: Validate
         run: ./bin/parallel_self_test.py
