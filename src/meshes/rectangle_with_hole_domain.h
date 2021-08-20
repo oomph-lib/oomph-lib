@@ -93,7 +93,6 @@ namespace oomph
       }
     }
 
-
     /// Destructor: Empty; cleanup done in base class
     ~RectangleWithHoleDomain() {}
 

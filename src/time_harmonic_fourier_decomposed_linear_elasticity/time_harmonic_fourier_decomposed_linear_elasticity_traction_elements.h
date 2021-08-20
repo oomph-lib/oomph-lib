@@ -37,7 +37,7 @@
 
 // OOMPH-LIB headers
 //#include "generic/Qelements.h"
-#include "sgeneric/Qelements.h"
+#include "generic/Qelements.h"
 
 namespace oomph
 {

@@ -3,7 +3,11 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
+// LIC//    Version 1.0; svn revision $LastChangedRevision: 1162 $
+// LIC//
+// LIC// $LastChangedDate: 2016-04-18 13:27:54 +0100 (Mon, 18 Apr 2016) $
+// LIC//
+// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -32,9 +36,9 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "generic/domain.h"
-#include "generic/geom_objects.h"
-#include "generic/refineable_quad_mesh.h"
+#include "../generic/domain.h"
+#include "../generic/geom_objects.h"
+#include "../generic/refineable_quad_mesh.h"
 
 // Refineable quad mesh headers
 #include "rectangular_quadmesh.h"

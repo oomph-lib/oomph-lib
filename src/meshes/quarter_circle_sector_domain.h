@@ -73,12 +73,6 @@ namespace oomph
       BrokenCopy::broken_copy("QuarterCircleSectorDomain");
     }
 
-    /// Broken copy constructor
-    QuarterCircleSectorDomain(const QuarterCircleSectorDomain&)
-    {
-      BrokenCopy::broken_copy("QuarterCircleSectorDomain");
-    }
-
     /// Broken assignment operator
     void operator=(const QuarterCircleSectorDomain&)
     {
@@ -94,7 +88,6 @@ namespace oomph
     /// coordinate to the return value
     typedef double (*BLSquashFctPt)(const double& s);
 
-
     /// \short Function pointer for function that squashes
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
@@ -102,47 +95,6 @@ namespace oomph
     BLSquashFctPt& bl_squash_fct_pt()
     {
       return BL_squash_fct_pt;
-    }
-
-    /// \short Vector representation of the  i_macro-th macro element
-    /// boundary i_direct (N/S/W/E) at time level t
-    /// (t=0: present; t>0: previous):
-    /// f(s). Note that the local coordinate \b s is a 1D
-    /// Vector rather than a scalar -- this is unavoidable because
-    /// this function implements the pure virtual function in the
-    /// Domain base class.
-    void macro_element_boundary(const unsigned& t,
-                                const unsigned& i_macro,
-                                const unsigned& i_direct,
-                                const Vector<double>& s,
-                                Vector<double>& f);
-
-  private:
-    /// Lower limit for the (1D) coordinates along the wall
-    double Xi_lo;
-
-    /// Fraction along wall where outer ring is to be divided
-    double Fract_mid;
-
-    /// Upper limit for the (1D) coordinates along the wall
-    double Xi_hi;
-
-    /// Pointer to geometric object that represents the curved wall
-    GeomObject* Wall_pt;
-
-    /// \short Function pointer for function that squashes
-    /// the outer two macro elements towards
-    /// the wall by mapping the input value of the "radial" macro element
-    /// coordinate to the return value
-    BLSquashFctPt BL_squash_fct_pt;
-
-    /// \short Default for function that squashes
-    /// the outer two macro elements towards
-    /// the wall by mapping the input value of the "radial" macro element
-    /// coordinate to the return value: Identity.
-    static double default_BL_squash_fct(const double& s)
-    {
-      return s;
     }
 
     /// \short Function that squashes the outer two macro elements towards
@@ -165,7 +117,6 @@ namespace oomph
                                 const unsigned& i_direct,
                                 const Vector<double>& s,
                                 Vector<double>& f);
-
 
   private:
     /// Lower limit for the (1D) coordinates along the wall
@@ -396,7 +347,6 @@ namespace oomph
     }
   }
 
-
   //=================================================================
   /// Northern edge of top left macro element \f$ s \in [-1,1] \f$
   //=================================================================
@@ -411,9 +361,6 @@ namespace oomph
 
     Wall_pt->position(t, x, f);
   }
-
-  // Coordinate along wall
-  x[0] = Xi_hi + (Fract_mid * (Xi_hi - Xi_lo) - Xi_hi) * 0.5 * (s[0] + 1.0);
 
   //=================================================================
   /// Western edge of top left macro element \f$s \in [-1,1] \f$
@@ -434,7 +381,6 @@ namespace oomph
     f[1] = 0.5 * r_top[1] * (1.0 + s_squashed(0.5 * (s[0] + 1.0)));
   }
 
-
   //=================================================================
   /// Southern edge of top left macro element \f$ s \in [-1,1] \f$
   //=================================================================
@@ -450,7 +396,6 @@ namespace oomph
 
     Wall_pt->position(t, x, r_top);
 
-
     // Bottom right corner
     Vector<double> r_bot(2);
     x[0] = 0.0;
@@ -460,10 +405,6 @@ namespace oomph
     f[0] = 0.5 * r_bot[0] * 0.5 * (s[0] + 1.0);
     f[1] = 0.5 * r_top[1];
   }
-
-  // Bottom right corner
-  Vector<double> r_bot(2);
-  x[0] = 0.0;
 
   //=================================================================
   /// Eastern edge of top left macro element \f$ s \in [-1,1] \f$
@@ -497,7 +438,6 @@ namespace oomph
     f[1] = 0.5 * (r_top[1] + s_squashed(0.5 * (s[0] + 1.0)) *
                                (2.0 * r_half[1] - r_top[1]));
   }
-
 
   //=================================================================
   /// Northern edge of bottom right macro element
@@ -548,7 +488,6 @@ namespace oomph
     x[0] = Xi_lo;
     Wall_pt->position(t, x, r_bot);
 
-
     f[0] = 0.5 * r_bot[0] * (1.0 + s_squashed(0.5 * (s[0] + 1.0)));
     f[1] = 0.0;
   }
@@ -568,7 +507,6 @@ namespace oomph
     Wall_pt->position(t, x, f);
   }
 
-
   //=================================================================
   /// Northern edge of central box
   //=================================================================
@@ -578,7 +516,6 @@ namespace oomph
   {
     r_top_left_S(t, s, f);
   }
-
 
   //=================================================================
   /// Eastern edge of central box
@@ -608,11 +545,6 @@ namespace oomph
     f[1] = 0.0;
   }
 
-  // Bottom right corner
-  Vector<double> r_bot(2);
-  x[0] = Xi_lo;
-  Wall_pt->position(t, x, r_bot);
-
   //=================================================================
   /// Western  edge of central box
   //=================================================================
@@ -630,10 +562,6 @@ namespace oomph
     f[0] = 0.0;
     f[1] = 0.5 * r_top[1] * 0.5 * (s[0] + 1.0);
   }
-
-  f[0] = 0.0;
-  f[1] = 0.5 * r_top[1] * 0.5 * (s[0] + 1.0);
-}
 
 } // namespace oomph
 

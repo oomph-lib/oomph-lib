@@ -110,7 +110,6 @@ namespace oomph
       BrokenCopy::broken_assign("TubeDomain");
     }
 
-
     /// Destructor: Empty; cleanup done in base class
     ~TubeDomain() {}
 
@@ -160,11 +159,9 @@ namespace oomph
     }
   };
 
-
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
-
 
   //=================================================================
   /// \short Vector representation of the  imacro-th macro element
@@ -352,7 +349,6 @@ namespace oomph
 
         break;
 
-
         // Macro element 1: Bottom
       case 1:
 
@@ -452,7 +448,6 @@ namespace oomph
             lin_interpolate(pos_1, pos_2, s[1], f);
             break;
 
-
           default:
 
             std::ostringstream error_stream;
@@ -464,7 +459,6 @@ namespace oomph
                                 OOMPH_EXCEPTION_LOCATION);
             break;
         }
-
 
         break;
 
@@ -567,7 +561,6 @@ namespace oomph
             lin_interpolate(pos_2, pos_1, s[0], f);
             break;
 
-
           default:
             std::ostringstream error_stream;
             error_stream << "idirect is " << idirect
@@ -598,7 +591,6 @@ namespace oomph
             zeta[2] = Radius_box[3];
             Volume_pt->position(t, zeta, pos_2);
 
-
             // Now linearly interpolate between the two
             lin_interpolate(pos_2, pos_1, s[0], f);
             break;
@@ -614,7 +606,6 @@ namespace oomph
             // Get the position on the box
             zeta[2] = Radius_box[2];
             Volume_pt->position(t, zeta, pos_2);
-
 
             // Now linearly interpolate between the two
             lin_interpolate(pos_2, pos_1, s[0], f);
@@ -683,7 +674,6 @@ namespace oomph
             lin_interpolate(pos_2, pos_1, s[1], f);
             break;
 
-
           default:
             std::ostringstream error_stream;
             error_stream << "idirect is " << idirect
@@ -695,7 +685,6 @@ namespace oomph
         }
 
         break;
-
 
         // Macro element 4: Left
       case 4:
@@ -744,11 +733,9 @@ namespace oomph
             zeta[2] = 1.0;
             Volume_pt->position(t, zeta, pos_1);
 
-
             // Get the position on the box
             zeta[2] = Radius_box[0];
             Volume_pt->position(t, zeta, pos_2);
-
 
             // Now linearly interpolate between the two
             lin_interpolate(pos_1, pos_2, s[0], f);
@@ -787,7 +774,6 @@ namespace oomph
             lin_interpolate(pos_1, pos_2, s[0], f);
             break;
 
-
           case F:
             // Get the position on the wall
             // Again be careful of the branch cut
@@ -805,7 +791,6 @@ namespace oomph
             lin_interpolate(pos_1, pos_2, s[0], f);
             break;
 
-
           default:
             std::ostringstream error_stream;
             error_stream << "idirect is " << idirect
@@ -816,7 +801,6 @@ namespace oomph
                                 OOMPH_EXCEPTION_LOCATION);
         }
         break;
-
 
       default:
         // Error

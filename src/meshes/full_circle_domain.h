@@ -104,10 +104,8 @@ namespace oomph
       BrokenCopy::broken_assign("FullCircleDomain");
     }
 
-
     /// Destructor: Empty; cleanup done in base class
     ~FullCircleDomain() {}
-
 
     /// \short Vector representation of the  i_macro-th macro element
     /// boundary i_direct (N/S/W/E) at time level t

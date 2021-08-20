@@ -80,7 +80,6 @@ namespace oomph
       BrokenCopy::broken_copy("QuarterPipeDomain");
     }
 
-
     /// Broken assignment operator
     void operator=(const QuarterPipeDomain&)
     {
@@ -508,40 +507,16 @@ namespace oomph
     Vector<double> r_inner(2);
     Inner_boundary_cross_section_pt->position(t, x, r_inner);
 
-    //=================================================================
-    /// Back face of a macro element \f$ s \in [-1,1]*[-1,1] \f$
-    //=================================================================
-    void QuarterPipeDomain::r_B(const unsigned& t,
-                                const Vector<double>& s,
-                                Vector<double>& f,
-                                const double& rmin,
-                                const double& rmax,
-                                const double& thetamin,
-                                const double& thetamax,
-                                const double& zmin,
-                                const double& zmax)
+    // Get layer
+    double rad = rmin + (0.5 * (s[1] + 1.0)) * (rmax - rmin);
+    for (unsigned i = 0; i < 2; i++)
     {
-      Vector<double> x(1);
-      x[0] = thetamax + (0.5 * (s[0] + 1.0)) * (thetamin - thetamax);
-
-      // Point on outer wall
-      Vector<double> r_outer(2);
-      Outer_boundary_cross_section_pt->position(t, x, r_outer);
-
-      // Point on inner wall
-      Vector<double> r_inner(2);
-      Inner_boundary_cross_section_pt->position(t, x, r_inner);
-
-      // Get layer
-      double rad = rmin + (0.5 * (s[1] + 1.0)) * (rmax - rmin);
-      for (unsigned i = 0; i < 2; i++)
-      {
-        f[i] =
-          r_inner[i] + (r_outer[i] - r_inner[i]) * (rad - Rmin) / (Rmax - Rmin);
-      }
-      f[2] = zmin;
+      f[i] =
+        r_inner[i] + (r_outer[i] - r_inner[i]) * (rad - Rmin) / (Rmax - Rmin);
     }
+    f[2] = zmin;
+  }
 
-  } // namespace oomph
+} // namespace oomph
 
 #endif
