@@ -1,4 +1,4 @@
-name: clang-format
+name: Formatting
 
 on:
   # Trigger the workflow when a push is made to any branch except 'main'. The
@@ -22,7 +22,8 @@ jobs:
 
       # Format all files in the src/ directory except cfortran.h, lapack_qz.h,
       # superlu.c, superlu_dist.c, which sit in the src/generic/ subdirectory.
-      - uses: PuneetMatharu/clang-format-lint-action@v0.13
+      - name: Format oomph-lib sources
+        uses: PuneetMatharu/clang-format-lint-action@v0.13
         with:
           files: ^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|hpp|cc|cpp|tpp)$
           clangFormatVersion: 12
@@ -33,3 +34,15 @@ jobs:
         with:
           commit_user_name: clang-format-bot
           commit_message: 'Automated commit of clang-format CI changes.'
+
+      - name: Format CMake files
+        id: cmake-format
+        uses: PuneetMatharu/cmake-format-lint-action@v1.0.0
+        with:
+          args: --config-files .cmake-format.json --in-place
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_user_name: cmake-format-bot
+          commit_message: 'Automated commit of cmake-format CI changes.'

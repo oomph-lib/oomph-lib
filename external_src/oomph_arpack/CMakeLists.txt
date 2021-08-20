@@ -45,9 +45,7 @@ set(LIBNAME oomph_arpack)
 
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
-oomph_library_config(
-  LIBNAME ${LIBNAME}
-  HEADERS ${HEADERS}
+oomph_library_config(LIBNAME ${LIBNAME} HEADERS ${HEADERS}
   SOURCES ${SOURCES}
   HEADERS_NO_COMBINE ${HEADERS_NO_COMBINE})
 
