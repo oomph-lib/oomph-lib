@@ -68,7 +68,7 @@ jobs:
       - name: Build & install
         working-directory: build
         run: |
-          make --jobs 16
+          make --jobs $(nproc)
           make install
 
       - name: Run self-tests
@@ -77,7 +77,7 @@ jobs:
           cd demo_drivers
           cmake -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/$INSTALL_LOCATION -B build
           cd build
-          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j 4 --timeout 10000
+          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j $(nproc) --timeout 10000
         continue-on-error: true
 
       - name: Upload validation log file

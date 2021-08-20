@@ -58,6 +58,13 @@
 
 namespace oomph
 {
+  // Forward declarations
+  template<class ELEMENT>
+  class FaceElementAsGeomObject;
+
+  template<class ELEMENT>
+  class CompareBoundaryCoordinate;
+
   //// Templated helper functions for multi-domain methods using locate_zeta
 
 
