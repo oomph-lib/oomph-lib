@@ -20,7 +20,7 @@ if [[ uname -eq "Darwin" ]]; then
   echo "#==================================================== " >>Validation/validation.log
   echo "dummy [OK] -- Test fails on macOS, not running it! " >>Validation/validation.log
   echo "#====================================================" >>Validation/validation.log
-  . $OOMPH_ROOT_DIR/bin/validate_ok_count
+  . $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
   # Never get here
   exit 10
