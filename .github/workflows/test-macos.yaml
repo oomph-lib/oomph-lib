@@ -55,7 +55,7 @@ jobs:
           cd demo_drivers
           cmake -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/$INSTALL_LOCATION -B build
           cd build
-          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j $(sysctl -n hw.logicalcpu) --timeout 10000
+          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j $(sysctl -n hw.logicalcpu) --timeout 10000 --no-label-summary
         continue-on-error: true
 
       - name: Upload validation log file
