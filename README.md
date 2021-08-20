@@ -1,9 +1,9 @@
 [![oomph-lib](doc/figures/oomph_logo.png)](http://oomph-lib.maths.man.ac.uk)
 
 [![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)
-[![Ubuntu tests status](https://github.com/oomph-lib/oomph-lib/actions/workflows/test-ubuntu.yaml/badge.svg)](https://github.com/oomph-lib/oomph-lib/actions/workflows/test-ubuntu.yaml/badge.svg)
-[![macOS tests status](https://github.com/oomph-lib/oomph-lib/actions/workflows/test-macos.yaml/badge.svg)](https://github.com/oomph-lib/oomph-lib/actions/workflows/test-macos.yaml/badge.svg)
-[![Documentation](https://github.com/oomph-lib/oomph-lib/actions/workflows/build-and-publish-docs.yaml/badge.svg)](https://github.com/oomph-lib/oomph-lib/actions/workflows/build-and-publish-docs.yaml)
+[![Ubuntu tests status](../../../actions/workflows/test-ubuntu.yaml/badge.svg)](../../../actions/workflows/test-ubuntu.yaml)
+[![macOS tests status](../../../actions/workflows/test-macos.yaml/badge.svg)](../../../actions/workflows/test-macos.yaml)
+[![Documentation](../../../actions/workflows/build-and-publish-docs.yaml/badge.svg)](../../../actions/workflows/build-and-publish-docs.yaml)
 
 ## Table of contents
 
