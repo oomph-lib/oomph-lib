@@ -20,9 +20,4 @@ oomph_add_test(
   EXTRA_REQUIRES
   LABELS "reaction_diffusion;one_d_act_inhibit")
 
-# Disable this test on macOS only (where a mysterious segmentation fault arises)
-if(APPLE)
-  set_tests_properties(reaction_diffusion.one_d_act_inhibit PROPERTIES DISABLED
-                                                                       YES)
-endif()
 # ------------------------------------------------------------------------------
