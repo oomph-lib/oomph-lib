@@ -54,9 +54,9 @@ namespace oomph
     const unsigned& n_element,
     const double& length,
     GeomObject* undef_eulerian_posn_pt,
-    TimeStepper* time_stepper_pt) :
-    OneDMesh<ELEMENT>(n_element, length, time_stepper_pt),
-    Undef_eulerian_posn_pt(undef_eulerian_posn_pt)
+    TimeStepper* time_stepper_pt)
+    : OneDMesh<ELEMENT>(n_element, length, time_stepper_pt),
+      Undef_eulerian_posn_pt(undef_eulerian_posn_pt)
   {
     // Mesh can only be built with 1D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(1);
@@ -86,9 +86,9 @@ namespace oomph
     const double& xmin,
     const double& xmax,
     GeomObject* undef_eulerian_posn_pt,
-    TimeStepper* time_stepper_pt) :
-    OneDMesh<ELEMENT>(n_element, xmin, xmax, time_stepper_pt),
-    Undef_eulerian_posn_pt(undef_eulerian_posn_pt)
+    TimeStepper* time_stepper_pt)
+    : OneDMesh<ELEMENT>(n_element, xmin, xmax, time_stepper_pt),
+      Undef_eulerian_posn_pt(undef_eulerian_posn_pt)
   {
     // Mesh can only be built with 1D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(1);

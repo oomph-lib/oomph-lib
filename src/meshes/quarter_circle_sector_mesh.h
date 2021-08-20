@@ -180,9 +180,9 @@ namespace oomph
   ///
   //====================================================================
   template<class ELEMENT>
-  class RefineableQuarterCircleSectorMesh :
-    public QuarterCircleSectorMesh<ELEMENT>,
-    public virtual RefineableQuadMesh<ELEMENT>
+  class RefineableQuarterCircleSectorMesh
+    : public QuarterCircleSectorMesh<ELEMENT>,
+      public virtual RefineableQuadMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass pointer to geometric object that
@@ -196,9 +196,9 @@ namespace oomph
       const double& xi_lo,
       const double& fract_mid,
       const double& xi_hi,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      QuarterCircleSectorMesh<ELEMENT>(
-        wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : QuarterCircleSectorMesh<ELEMENT>(
+          wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
     {
       // Basic mesh has been built -- just need to setup the
       // adaptivity information:
@@ -252,9 +252,9 @@ namespace oomph
   /// need to be derived from MacroElementNodeUpdateElementBase.
   //========================================================================
   template<class ELEMENT>
-  class MacroElementNodeUpdateRefineableQuarterCircleSectorMesh :
-    public virtual MacroElementNodeUpdateMesh,
-    public virtual RefineableQuarterCircleSectorMesh<ELEMENT>
+  class MacroElementNodeUpdateRefineableQuarterCircleSectorMesh
+    : public virtual MacroElementNodeUpdateMesh,
+      public virtual RefineableQuarterCircleSectorMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass pointer to geometric object, start and
@@ -269,10 +269,10 @@ namespace oomph
       const double& xi_lo,
       const double& fract_mid,
       const double& xi_hi,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      MacroElementNodeUpdateMesh(),
-      RefineableQuarterCircleSectorMesh<ELEMENT>(
-        wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : MacroElementNodeUpdateMesh(),
+        RefineableQuarterCircleSectorMesh<ELEMENT>(
+          wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
     {
 #ifdef PARANOID
       ELEMENT* el_pt = new ELEMENT;
@@ -431,9 +431,9 @@ namespace oomph
   /// this mesh, we implement algebraic node update functions for the nodes.
   //========================================================================
   template<class ELEMENT>
-  class AlgebraicRefineableQuarterCircleSectorMesh :
-    public virtual AlgebraicMesh,
-    public RefineableQuarterCircleSectorMesh<ELEMENT>
+  class AlgebraicRefineableQuarterCircleSectorMesh
+    : public virtual AlgebraicMesh,
+      public RefineableQuarterCircleSectorMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass pointer to geometric object, start and
@@ -448,9 +448,9 @@ namespace oomph
       const double& xi_lo,
       const double& fract_mid,
       const double& xi_hi,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RefineableQuarterCircleSectorMesh<ELEMENT>(
-        wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RefineableQuarterCircleSectorMesh<ELEMENT>(
+          wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
     {
 #ifdef PARANOID
       ELEMENT* el_pt = new ELEMENT;

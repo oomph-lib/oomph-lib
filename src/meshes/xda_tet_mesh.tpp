@@ -199,8 +199,7 @@ namespace oomph
       count++;
 
       // Get ready for allocation of total number of boundaries
-      if (oomph_lib_bound_id > max_bound)
-        max_bound = oomph_lib_bound_id;
+      if (oomph_lib_bound_id > max_bound) max_bound = oomph_lib_bound_id;
 
       // Identify the "side nodes" (i.e. the nodes on the faces of
       // the bulk tet) according to the
@@ -510,8 +509,7 @@ namespace oomph
                        normal[2] * my_normal[2];
 
         error -= 1.0;
-        if (switch_normal)
-          error += 1.0;
+        if (switch_normal) error += 1.0;
 
         if (error > Tolerance_for_boundary_finding)
         {

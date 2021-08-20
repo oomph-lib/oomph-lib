@@ -59,9 +59,8 @@ namespace oomph
   /// completely specify the problem.
   //======================================================================
   template<class ELEMENT>
-  class TwoLayerSpineMesh :
-    public RectangularQuadMesh<ELEMENT>,
-    public SpineMesh
+  class TwoLayerSpineMesh : public RectangularQuadMesh<ELEMENT>,
+                            public SpineMesh
   {
   public:
     /// \short Constructor: Pass number of elements in x-direction, number of

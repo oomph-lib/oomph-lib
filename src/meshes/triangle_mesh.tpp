@@ -29679,10 +29679,8 @@ namespace oomph
     double min_area = DBL_MAX;
     for (unsigned e = 0; e < n; e++)
     {
-      if (target_area[e] > max_area)
-        max_area = target_area[e];
-      if (target_area[e] < min_area)
-        min_area = target_area[e];
+      if (target_area[e] > max_area) max_area = target_area[e];
+      if (target_area[e] < min_area) min_area = target_area[e];
 
       // tmp << (finite_element_pt(e)->node_pt(0)->x(0)+
       //            finite_element_pt(e)->node_pt(1)->x(0)+
@@ -29733,8 +29731,7 @@ namespace oomph
         outer_boundary_update_necessary = this->update_polygon_using_face_mesh(
           this->Outer_boundary_pt[i_outer], check_only);
         // Break the loop if at least one needs updating
-        if (outer_boundary_update_necessary)
-          break;
+        if (outer_boundary_update_necessary) break;
       }
 
       // Do not waste time if we already know that it is necessary an update
@@ -29761,8 +29758,7 @@ namespace oomph
               this->update_open_curve_using_face_mesh(
                 this->Internal_open_curve_pt[i], check_only);
             // If at least one needs modification then break the for loop
-            if (inner_open_boundary_update_necessary)
-              break;
+            if (inner_open_boundary_update_necessary) break;
           }
         }
       }

@@ -110,9 +110,8 @@ namespace oomph
   ///
   //=============================================================
   template<class ELEMENT>
-  class RefineableFullCircleMesh :
-    public FullCircleMesh<ELEMENT>,
-    public RefineableQuadMesh<ELEMENT>
+  class RefineableFullCircleMesh : public FullCircleMesh<ELEMENT>,
+                                   public RefineableQuadMesh<ELEMENT>
 
   {
   public:
@@ -128,9 +127,9 @@ namespace oomph
       GeomObject* wall_pt,
       const Vector<double>& theta_positions,
       const Vector<double>& radius_box,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      FullCircleMesh<ELEMENT>(
-        wall_pt, theta_positions, radius_box, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : FullCircleMesh<ELEMENT>(
+          wall_pt, theta_positions, radius_box, time_stepper_pt)
     {
       // Loop over all elements and set macro element pointer
       for (unsigned ielem = 0; ielem < FullCircleMesh<ELEMENT>::nelement();

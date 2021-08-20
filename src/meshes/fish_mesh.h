@@ -124,16 +124,15 @@ namespace oomph
   /// the Domain object FishDomain.
   //=============================start_adaptive_fish_mesh============
   template<class ELEMENT>
-  class RefineableFishMesh :
-    public virtual FishMesh<ELEMENT>,
-    public RefineableQuadMesh<ELEMENT>
+  class RefineableFishMesh : public virtual FishMesh<ELEMENT>,
+                             public RefineableQuadMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass pointer to timestepper -- defaults to (Steady)
     /// default timestepper defined in the Mesh base class
     RefineableFishMesh(
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      FishMesh<ELEMENT>(time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : FishMesh<ELEMENT>(time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // FishMesh<...>. Only need to setup adaptive information.
@@ -148,8 +147,8 @@ namespace oomph
     /// (defaults to (Steady) default timestepper defined in Mesh)
     RefineableFishMesh(
       GeomObject* back_pt,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      FishMesh<ELEMENT>(back_pt, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : FishMesh<ELEMENT>(back_pt, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // FishMesh<...>. Only need to setup adaptive information.
@@ -191,9 +190,9 @@ namespace oomph
   /// must inherit from MacroElementNodeUpdateElementBase.
   //========================================================================
   template<class ELEMENT>
-  class MacroElementNodeUpdateRefineableFishMesh :
-    public virtual MacroElementNodeUpdateMesh,
-    public virtual RefineableFishMesh<ELEMENT>
+  class MacroElementNodeUpdateRefineableFishMesh
+    : public virtual MacroElementNodeUpdateMesh,
+      public virtual RefineableFishMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass pointer GeomObject that defines
@@ -201,9 +200,9 @@ namespace oomph
     /// (defaults to (Steady) default timestepper defined in Mesh).
     MacroElementNodeUpdateRefineableFishMesh(
       GeomObject* back_pt,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      FishMesh<ELEMENT>(back_pt, time_stepper_pt),
-      RefineableFishMesh<ELEMENT>(time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : FishMesh<ELEMENT>(back_pt, time_stepper_pt),
+        RefineableFishMesh<ELEMENT>(time_stepper_pt)
     {
 #ifdef PARANOID
       ELEMENT* el_pt = new ELEMENT;
@@ -317,16 +316,14 @@ namespace oomph
   /// \short Fish shaped mesh with algebraic node update function for nodes.
   //=================================================================
   template<class ELEMENT>
-  class AlgebraicFishMesh :
-    public AlgebraicMesh,
-    public virtual FishMesh<ELEMENT>
+  class AlgebraicFishMesh : public AlgebraicMesh,
+                            public virtual FishMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass pointer to timestepper.
     /// (defaults to (Steady) default timestepper defined in Mesh)
-    AlgebraicFishMesh(
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      FishMesh<ELEMENT>(time_stepper_pt)
+    AlgebraicFishMesh(TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : FishMesh<ELEMENT>(time_stepper_pt)
     {
       // Setup algebraic node update operations
       setup_algebraic_node_update();
@@ -335,10 +332,9 @@ namespace oomph
     /// \short Constructor: Pass pointer GeomObject that defines
     /// the fish's back and pointer to timestepper
     /// (defaults to (Steady) default timestepper defined in Mesh).
-    AlgebraicFishMesh(
-      GeomObject* back_pt,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      FishMesh<ELEMENT>(back_pt, time_stepper_pt)
+    AlgebraicFishMesh(GeomObject* back_pt,
+                      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : FishMesh<ELEMENT>(back_pt, time_stepper_pt)
     {
       // Add the geometric object to the list associated with this AlgebraicMesh
       AlgebraicMesh::add_geom_object_list_pt(back_pt);
@@ -480,9 +476,8 @@ namespace oomph
   /// \short Refineable fish shaped mesh with algebraic node update function.
   //=================================================================
   template<class ELEMENT>
-  class AlgebraicRefineableFishMesh :
-    public AlgebraicFishMesh<ELEMENT>,
-    public RefineableFishMesh<ELEMENT>
+  class AlgebraicRefineableFishMesh : public AlgebraicFishMesh<ELEMENT>,
+                                      public RefineableFishMesh<ELEMENT>
   {
   public:
     /// Constructor: Pass pointer to timestepper.
@@ -492,10 +487,10 @@ namespace oomph
     // the constructors of the derived meshes don't call the
     // base constructor again and simply add the extra functionality.
     AlgebraicRefineableFishMesh(
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      FishMesh<ELEMENT>(time_stepper_pt),
-      AlgebraicFishMesh<ELEMENT>(time_stepper_pt),
-      RefineableFishMesh<ELEMENT>(time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : FishMesh<ELEMENT>(time_stepper_pt),
+        AlgebraicFishMesh<ELEMENT>(time_stepper_pt),
+        RefineableFishMesh<ELEMENT>(time_stepper_pt)
     {
     }
 
@@ -508,10 +503,10 @@ namespace oomph
     // base constructor again and simply add the extra functionality.
     AlgebraicRefineableFishMesh(
       GeomObject* back_pt,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      FishMesh<ELEMENT>(back_pt, time_stepper_pt),
-      AlgebraicFishMesh<ELEMENT>(back_pt, time_stepper_pt),
-      RefineableFishMesh<ELEMENT>(back_pt, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : FishMesh<ELEMENT>(back_pt, time_stepper_pt),
+        AlgebraicFishMesh<ELEMENT>(back_pt, time_stepper_pt),
+        RefineableFishMesh<ELEMENT>(back_pt, time_stepper_pt)
     {
     }
 

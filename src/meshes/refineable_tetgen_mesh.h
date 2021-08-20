@@ -47,9 +47,8 @@ namespace oomph
   // Unstructured refineable TetgenMesh
   //=========================================================================
   template<class ELEMENT>
-  class RefineableTetgenMesh :
-    public virtual TetgenMesh<ELEMENT>,
-    public virtual RefineableTetMeshBase
+  class RefineableTetgenMesh : public virtual TetgenMesh<ELEMENT>,
+                               public virtual RefineableTetMeshBase
   {
   public:
     /// \short Build mesh, based on a TetMeshFacetedClosedSurface that specifies
@@ -62,14 +61,14 @@ namespace oomph
       const double& element_volume,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& use_attributes = false,
-      const bool& split_corner_elements = false) :
-      TetgenMesh<ELEMENT>(outer_boundary_pt,
-                          internal_closed_surface_pt,
-                          element_volume,
-                          time_stepper_pt,
-                          use_attributes,
-                          split_corner_elements),
-      Corner_elements_must_be_split(split_corner_elements)
+      const bool& split_corner_elements = false)
+      : TetgenMesh<ELEMENT>(outer_boundary_pt,
+                            internal_closed_surface_pt,
+                            element_volume,
+                            time_stepper_pt,
+                            use_attributes,
+                            split_corner_elements),
+        Corner_elements_must_be_split(split_corner_elements)
     {
       // Initialise the data associated with adaptation
       initialise_adaptation_data();

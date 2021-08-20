@@ -46,8 +46,8 @@ namespace oomph
   FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
                                           const Vector<double>& theta_positions,
                                           const Vector<double>& radius_box,
-                                          TimeStepper* time_stepper_pt) :
-    Area_pt(area_pt)
+                                          TimeStepper* time_stepper_pt)
+    : Area_pt(area_pt)
   {
 // Check that the vectors are the correct sizes.
 #ifdef PARANOID

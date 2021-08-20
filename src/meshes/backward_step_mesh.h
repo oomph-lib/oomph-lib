@@ -62,8 +62,8 @@ namespace oomph
       const unsigned& ny_cut_out,
       const double& lx,
       const double& ly,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Do the actual build
       build_mesh(nx, ny, nx_cut_out, ny_cut_out, lx, ly);
@@ -91,9 +91,9 @@ namespace oomph
   /// Refineable backward step mesh
   //=================================================================
   template<class ELEMENT>
-  class RefineableBackwardStepQuadMesh :
-    public virtual BackwardStepQuadMesh<ELEMENT>,
-    public RefineableQuadMesh<ELEMENT>
+  class RefineableBackwardStepQuadMesh
+    : public virtual BackwardStepQuadMesh<ELEMENT>,
+      public RefineableQuadMesh<ELEMENT>
   {
   public:
     /// \short Pass overall number of elements in the horizontal
@@ -109,10 +109,10 @@ namespace oomph
       const unsigned& ny_cut_out,
       const double& lx,
       const double& ly,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
-      BackwardStepQuadMesh<ELEMENT>(
-        nx, ny, nx_cut_out, ny_cut_out, lx, ly, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
+        BackwardStepQuadMesh<ELEMENT>(
+          nx, ny, nx_cut_out, ny_cut_out, lx, ly, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // SimpleRectangularQuadMesh<...> --> We only need to set up

@@ -51,8 +51,8 @@ namespace oomph
                                             const double& fract_mid,
                                             const Vector<double>& xi_hi,
                                             const unsigned& nlayer,
-                                            TimeStepper* time_stepper_pt) :
-    Wall_pt(wall_pt), Xi_lo(xi_lo), Fract_mid(fract_mid), Xi_hi(xi_hi)
+                                            TimeStepper* time_stepper_pt)
+    : Wall_pt(wall_pt), Xi_lo(xi_lo), Fract_mid(fract_mid), Xi_hi(xi_hi)
   {
     // Mesh can only be built with 3D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3);

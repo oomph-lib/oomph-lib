@@ -120,8 +120,7 @@ namespace oomph
              it++)
         {
           unsigned b = (*it);
-          if (b > 0)
-            b += 2;
+          if (b > 0) b += 2;
           this->add_boundary_node(b, nod_pt);
         }
       }

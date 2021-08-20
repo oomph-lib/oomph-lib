@@ -56,17 +56,17 @@ namespace oomph
     const double& ldown,
     const double& ly,
     GeomObject* wall_pt,
-    TimeStepper* time_stepper_pt) :
-    SimpleRectangularQuadMesh<ELEMENT>(nup + ncollapsible + ndown,
-                                       ny,
-                                       lup + lcollapsible + ldown,
-                                       ly,
-                                       time_stepper_pt),
-    Nup(nup),
-    Ncollapsible(ncollapsible),
-    Ndown(ndown),
-    Ny(ny),
-    Wall_pt(wall_pt)
+    TimeStepper* time_stepper_pt)
+    : SimpleRectangularQuadMesh<ELEMENT>(nup + ncollapsible + ndown,
+                                         ny,
+                                         lup + lcollapsible + ldown,
+                                         ly,
+                                         time_stepper_pt),
+      Nup(nup),
+      Ncollapsible(ncollapsible),
+      Ndown(ndown),
+      Ny(ny),
+      Wall_pt(wall_pt)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);

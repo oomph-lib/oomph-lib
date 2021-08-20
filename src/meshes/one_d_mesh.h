@@ -61,8 +61,8 @@ namespace oomph
     /// time-dependence).
     OneDMesh(const unsigned& n_element,
              const double& length,
-             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Xmin(0.0), Xmax(length), N(n_element)
+             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Xmin(0.0), Xmax(length), N(n_element)
     {
       check_1d();
 
@@ -75,8 +75,8 @@ namespace oomph
     OneDMesh(const unsigned& n_element,
              const double& xmin,
              const double& xmax,
-             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Xmin(xmin), Xmax(xmax), N(n_element)
+             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Xmin(xmin), Xmax(xmax), N(n_element)
     {
       check_1d();
 
@@ -121,9 +121,8 @@ namespace oomph
   /// Refineable version of the OneDMesh
   //====================================================================
   template<class ELEMENT>
-  class RefineableOneDMesh :
-    public virtual OneDMesh<ELEMENT>,
-    public RefineableLineMesh<ELEMENT>
+  class RefineableOneDMesh : public virtual OneDMesh<ELEMENT>,
+                             public RefineableLineMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass number of elements, n_element, length of
@@ -131,8 +130,8 @@ namespace oomph
     RefineableOneDMesh(
       const unsigned& n_element,
       const double& length,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      OneDMesh<ELEMENT>(n_element, length, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : OneDMesh<ELEMENT>(n_element, length, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for OneDMesh<...>
       // so only need to set up binary tree forest
@@ -146,8 +145,8 @@ namespace oomph
       const unsigned& n_element,
       const double& xmin,
       const double& xmax,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      OneDMesh<ELEMENT>(n_element, xmin, xmax, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : OneDMesh<ELEMENT>(n_element, xmin, xmax, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for OneDMesh<...>
       // so only need to set up binary tree forest

@@ -74,23 +74,23 @@ namespace oomph
     const double& zeta_transition_start,
     const double& zeta_transition_end,
     const double& zeta_end,
-    TimeStepper* time_stepper_pt) :
-    SingleLayerSpineMesh<ELEMENT>(
-      2 * (nx1 + nx2 + nhalf), nh, 1.0, h, time_stepper_pt),
-    Nx1(nx1),
-    Nx2(nx2),
-    Nx3(nx3),
-    Nhalf(nhalf),
-    Nh(nh),
-    H(h),
-    Upper_wall_pt(upper_wall_pt),
-    Lower_wall_pt(lower_wall_pt),
-    Zeta_start(zeta_start),
-    Zeta_end(zeta_end),
-    Zeta_transition_start(zeta_transition_start),
-    Zeta_transition_end(zeta_transition_end),
-    Spine_centre_fraction_pt(&Default_spine_centre_fraction),
-    Default_spine_centre_fraction(0.5)
+    TimeStepper* time_stepper_pt)
+    : SingleLayerSpineMesh<ELEMENT>(
+        2 * (nx1 + nx2 + nhalf), nh, 1.0, h, time_stepper_pt),
+      Nx1(nx1),
+      Nx2(nx2),
+      Nx3(nx3),
+      Nhalf(nhalf),
+      Nh(nh),
+      H(h),
+      Upper_wall_pt(upper_wall_pt),
+      Lower_wall_pt(lower_wall_pt),
+      Zeta_start(zeta_start),
+      Zeta_end(zeta_end),
+      Zeta_transition_start(zeta_transition_start),
+      Zeta_transition_end(zeta_transition_end),
+      Spine_centre_fraction_pt(&Default_spine_centre_fraction),
+      Default_spine_centre_fraction(0.5)
   {
     // Add the created elements to the bulk domain
     unsigned n_bulk = this->nelement();
@@ -273,8 +273,7 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0)
-                  set_boundary_node_pt[0].insert(nod_pt);
+                if (j == 0) set_boundary_node_pt[0].insert(nod_pt);
               }
             }
           }
@@ -382,8 +381,7 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0)
-                  set_boundary_node_pt[0].insert(nod_pt);
+                if (j == 0) set_boundary_node_pt[0].insert(nod_pt);
               }
             }
           }
@@ -477,8 +475,7 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0)
-                  set_boundary_node_pt[1].insert(nod_pt);
+                if (j == 0) set_boundary_node_pt[1].insert(nod_pt);
               }
             }
           }
@@ -572,8 +569,7 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0)
-                  set_boundary_node_pt[1].insert(nod_pt);
+                if (j == 0) set_boundary_node_pt[1].insert(nod_pt);
               }
             }
           }
@@ -656,8 +652,7 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0)
-                  set_boundary_node_pt[2].insert(nod_pt);
+                if (j == 0) set_boundary_node_pt[2].insert(nod_pt);
               }
             }
           }
@@ -729,8 +724,7 @@ namespace oomph
                 nod_pt->spine_pt()->set_geom_object_pt(geom_object_pt);
 
                 // Push the node back onto boundaries
-                if (j == 0)
-                  set_boundary_node_pt[2].insert(nod_pt);
+                if (j == 0) set_boundary_node_pt[2].insert(nod_pt);
               }
             }
           }

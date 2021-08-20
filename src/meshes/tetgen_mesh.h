@@ -66,8 +66,8 @@ namespace oomph
                const std::string& element_file_name,
                const std::string& face_file_name,
                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
-               const bool& use_attributes = false) :
-      Tetgenio_exists(false), Tetgenio_pt(0)
+               const bool& use_attributes = false)
+      : Tetgenio_exists(false), Tetgenio_pt(0)
     {
       // Mesh can only be built with 3D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(3);
@@ -731,9 +731,8 @@ namespace oomph
   /// enumerates all boundaries.
   //=========================================================================
   template<class ELEMENT>
-  class SolidTetgenMesh :
-    public virtual TetgenMesh<ELEMENT>,
-    public virtual SolidMesh
+  class SolidTetgenMesh : public virtual TetgenMesh<ELEMENT>,
+                          public virtual SolidMesh
   {
   public:
     /// \short Constructor. Boundary coordinates are setup
@@ -743,13 +742,13 @@ namespace oomph
                     const std::string& face_file_name,
                     const bool& split_corner_elements,
                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
-                    const bool& use_attributes = false) :
-      TetgenMesh<ELEMENT>(node_file_name,
-                          element_file_name,
-                          face_file_name,
-                          split_corner_elements,
-                          time_stepper_pt,
-                          use_attributes)
+                    const bool& use_attributes = false)
+      : TetgenMesh<ELEMENT>(node_file_name,
+                            element_file_name,
+                            face_file_name,
+                            split_corner_elements,
+                            time_stepper_pt,
+                            use_attributes)
     {
       // Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();
@@ -764,13 +763,13 @@ namespace oomph
                     const bool& split_corner_elements,
                     const bool& switch_normal,
                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
-                    const bool& use_attributes = false) :
-      TetgenMesh<ELEMENT>(node_file_name,
-                          element_file_name,
-                          face_file_name,
-                          split_corner_elements,
-                          time_stepper_pt,
-                          use_attributes)
+                    const bool& use_attributes = false)
+      : TetgenMesh<ELEMENT>(node_file_name,
+                            element_file_name,
+                            face_file_name,
+                            split_corner_elements,
+                            time_stepper_pt,
+                            use_attributes)
     {
       // Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();

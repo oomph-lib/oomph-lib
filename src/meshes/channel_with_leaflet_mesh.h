@@ -103,9 +103,9 @@ namespace oomph
   /// Refineable version of ChannelWithLeafletMesh
   //===================================================================
   template<class ELEMENT>
-  class RefineableChannelWithLeafletMesh :
-    public virtual ChannelWithLeafletMesh<ELEMENT>,
-    public RefineableQuadMesh<ELEMENT>
+  class RefineableChannelWithLeafletMesh
+    : public virtual ChannelWithLeafletMesh<ELEMENT>,
+      public RefineableQuadMesh<ELEMENT>
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
@@ -127,17 +127,17 @@ namespace oomph
       const unsigned& nright,
       const unsigned& ny1,
       const unsigned& ny2,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
-                                      lleft,
-                                      lright,
-                                      hleaflet,
-                                      htot,
-                                      nleft,
-                                      nright,
-                                      ny1,
-                                      ny2,
-                                      time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
+                                        lleft,
+                                        lright,
+                                        hleaflet,
+                                        htot,
+                                        nleft,
+                                        nright,
+                                        ny1,
+                                        ny2,
+                                        time_stepper_pt)
     {
       // Build quadtree forest
       this->setup_quadtree_forest();
@@ -162,9 +162,9 @@ namespace oomph
   /// must inherit from MacroElementNodeUpdateElementBase.
   //========================================================================
   template<class ELEMENT>
-  class MacroElementNodeUpdateChannelWithLeafletMesh :
-    public virtual MacroElementNodeUpdateMesh,
-    public virtual ChannelWithLeafletMesh<ELEMENT>
+  class MacroElementNodeUpdateChannelWithLeafletMesh
+    : public virtual MacroElementNodeUpdateMesh,
+      public virtual ChannelWithLeafletMesh<ELEMENT>
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
@@ -186,17 +186,17 @@ namespace oomph
       const unsigned& nright,
       const unsigned& ny1,
       const unsigned& ny2,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
-                                      lleft,
-                                      lright,
-                                      hleaflet,
-                                      htot,
-                                      nleft,
-                                      nright,
-                                      ny1,
-                                      ny2,
-                                      time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
+                                        lleft,
+                                        lright,
+                                        hleaflet,
+                                        htot,
+                                        nleft,
+                                        nright,
+                                        ny1,
+                                        ny2,
+                                        time_stepper_pt)
     {
 #ifdef PARANOID
       ELEMENT* el_pt = new ELEMENT;
@@ -284,9 +284,9 @@ namespace oomph
   /// Refineable  mesh with MacroElement-based node update.
   //========================================================================
   template<class ELEMENT>
-  class MacroElementNodeUpdateRefineableChannelWithLeafletMesh :
-    public virtual MacroElementNodeUpdateChannelWithLeafletMesh<ELEMENT>,
-    public virtual RefineableQuadMesh<ELEMENT>
+  class MacroElementNodeUpdateRefineableChannelWithLeafletMesh
+    : public virtual MacroElementNodeUpdateChannelWithLeafletMesh<ELEMENT>,
+      public virtual RefineableQuadMesh<ELEMENT>
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
@@ -308,27 +308,27 @@ namespace oomph
       const unsigned& nright,
       const unsigned& ny1,
       const unsigned& ny2,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
-                                      lleft,
-                                      lright,
-                                      hleaflet,
-                                      htot,
-                                      nleft,
-                                      nright,
-                                      ny1,
-                                      ny2,
-                                      time_stepper_pt),
-      MacroElementNodeUpdateChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
-                                                            lleft,
-                                                            lright,
-                                                            hleaflet,
-                                                            htot,
-                                                            nleft,
-                                                            nright,
-                                                            ny1,
-                                                            ny2,
-                                                            time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
+                                        lleft,
+                                        lright,
+                                        hleaflet,
+                                        htot,
+                                        nleft,
+                                        nright,
+                                        ny1,
+                                        ny2,
+                                        time_stepper_pt),
+        MacroElementNodeUpdateChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
+                                                              lleft,
+                                                              lright,
+                                                              hleaflet,
+                                                              htot,
+                                                              nleft,
+                                                              nright,
+                                                              ny1,
+                                                              ny2,
+                                                              time_stepper_pt)
     {
       // Build quadtree forest
       this->setup_quadtree_forest();
@@ -349,9 +349,9 @@ namespace oomph
   /// when the algebraic node update is set up.
   //=================================================================
   template<class ELEMENT>
-  class AlgebraicChannelWithLeafletMesh :
-    public AlgebraicMesh,
-    public virtual ChannelWithLeafletMesh<ELEMENT>
+  class AlgebraicChannelWithLeafletMesh
+    : public AlgebraicMesh,
+      public virtual ChannelWithLeafletMesh<ELEMENT>
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
@@ -373,17 +373,17 @@ namespace oomph
       const unsigned& nright,
       const unsigned& ny1,
       const unsigned& ny2,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
-                                      lleft,
-                                      lright,
-                                      hleaflet,
-                                      htot,
-                                      nleft,
-                                      nright,
-                                      ny1,
-                                      ny2,
-                                      time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
+                                        lleft,
+                                        lright,
+                                        hleaflet,
+                                        htot,
+                                        nleft,
+                                        nright,
+                                        ny1,
+                                        ny2,
+                                        time_stepper_pt)
     {
       // Store origin of leaflet for fast reference
       Vector<double> zeta(1);
@@ -455,9 +455,9 @@ namespace oomph
   /// Refineable version of algebraic ChannelWithLeafletMesh
   //===================================================================
   template<class ELEMENT>
-  class RefineableAlgebraicChannelWithLeafletMesh :
-    public RefineableQuadMesh<ELEMENT>,
-    public virtual AlgebraicChannelWithLeafletMesh<ELEMENT>
+  class RefineableAlgebraicChannelWithLeafletMesh
+    : public RefineableQuadMesh<ELEMENT>,
+      public virtual AlgebraicChannelWithLeafletMesh<ELEMENT>
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
@@ -479,27 +479,27 @@ namespace oomph
       const unsigned& nright,
       const unsigned& ny1,
       const unsigned& ny2,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
-                                      lleft,
-                                      lright,
-                                      hleaflet,
-                                      htot,
-                                      nleft,
-                                      nright,
-                                      ny1,
-                                      ny2,
-                                      time_stepper_pt),
-      AlgebraicChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
-                                               lleft,
-                                               lright,
-                                               hleaflet,
-                                               htot,
-                                               nleft,
-                                               nright,
-                                               ny1,
-                                               ny2,
-                                               time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
+                                        lleft,
+                                        lright,
+                                        hleaflet,
+                                        htot,
+                                        nleft,
+                                        nright,
+                                        ny1,
+                                        ny2,
+                                        time_stepper_pt),
+        AlgebraicChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
+                                                 lleft,
+                                                 lright,
+                                                 hleaflet,
+                                                 htot,
+                                                 nleft,
+                                                 nright,
+                                                 ny1,
+                                                 ny2,
+                                                 time_stepper_pt)
     {
       // Build quadtree forest
       this->setup_quadtree_forest();
@@ -518,9 +518,9 @@ namespace oomph
   /// Channel with leaflet mesh upgraded to (pseudo-)solid mesh
   //==========================================================================
   template<class ELEMENT>
-  class PseudoElasticChannelWithLeafletMesh :
-    public virtual ChannelWithLeafletMesh<ELEMENT>,
-    public virtual SolidMesh
+  class PseudoElasticChannelWithLeafletMesh
+    : public virtual ChannelWithLeafletMesh<ELEMENT>,
+      public virtual SolidMesh
   {
   public:
     ///\short Constructor: Pass pointer to GeomObject that represents the
@@ -541,17 +541,17 @@ namespace oomph
       const unsigned& nright,
       const unsigned& ny1,
       const unsigned& ny2,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
-                                      lleft,
-                                      lright,
-                                      hleaflet,
-                                      htot,
-                                      nleft,
-                                      nright,
-                                      ny1,
-                                      ny2,
-                                      time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
+                                        lleft,
+                                        lright,
+                                        hleaflet,
+                                        htot,
+                                        nleft,
+                                        nright,
+                                        ny1,
+                                        ny2,
+                                        time_stepper_pt)
     {
       // Update position of all nodes (the ones haven't been given
       // positions yet!)

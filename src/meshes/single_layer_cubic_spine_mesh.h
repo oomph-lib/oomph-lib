@@ -47,9 +47,8 @@ namespace oomph
   /// coincides with the numeration of the spines
   //======================================================================
   template<class ELEMENT>
-  class SingleLayerCubicSpineMesh :
-    public SimpleCubicMesh<ELEMENT>,
-    public SpineMesh
+  class SingleLayerCubicSpineMesh : public SimpleCubicMesh<ELEMENT>,
+                                    public SpineMesh
   {
   public:
     /// \short Constructor: Pass number of elements in x-direction, number of

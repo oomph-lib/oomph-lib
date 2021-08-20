@@ -51,12 +51,12 @@ namespace oomph
     const double& ly,
     const double& gap_fraction,
     GeomObject* wall_pt,
-    TimeStepper* time_stepper_pt) :
-    SimpleRectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
-    Nx(nx),
-    Ny(ny),
-    Gap_fraction(gap_fraction),
-    Wall_pt(wall_pt)
+    TimeStepper* time_stepper_pt)
+    : SimpleRectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
+      Nx(nx),
+      Ny(ny),
+      Gap_fraction(gap_fraction),
+      Wall_pt(wall_pt)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);

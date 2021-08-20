@@ -156,9 +156,8 @@ namespace oomph
   ///               on the geometric object that specifies the wall.
   //=============================================================
   template<class ELEMENT>
-  class RefineableQuarterTubeMesh :
-    public virtual QuarterTubeMesh<ELEMENT>,
-    public RefineableBrickMesh<ELEMENT>
+  class RefineableQuarterTubeMesh : public virtual QuarterTubeMesh<ELEMENT>,
+                                    public RefineableBrickMesh<ELEMENT>
 
   {
   public:
@@ -175,9 +174,9 @@ namespace oomph
       const double& fract_mid,
       const Vector<double>& xi_hi,
       const unsigned& nlayer,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      QuarterTubeMesh<ELEMENT>(
-        wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : QuarterTubeMesh<ELEMENT>(
+          wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt)
     {
       // Loop over all elements and set macro element pointer
       for (unsigned ielem = 0; ielem < QuarterTubeMesh<ELEMENT>::nelement();
@@ -233,9 +232,9 @@ namespace oomph
   /// MacroElementNodeUpdate version of RefineableQuarterTubeMesh
   //========================================================================
   template<class ELEMENT>
-  class MacroElementNodeUpdateRefineableQuarterTubeMesh :
-    public virtual MacroElementNodeUpdateMesh,
-    public virtual RefineableQuarterTubeMesh<ELEMENT>
+  class MacroElementNodeUpdateRefineableQuarterTubeMesh
+    : public virtual MacroElementNodeUpdateMesh,
+      public virtual RefineableQuarterTubeMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass pointer to geometric object, start and
@@ -251,12 +250,12 @@ namespace oomph
       const double& fract_mid,
       const Vector<double>& xi_hi,
       const unsigned& nlayer,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      MacroElementNodeUpdateMesh(),
-      RefineableQuarterTubeMesh<ELEMENT>(
-        wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
-      QuarterTubeMesh<ELEMENT>(
-        wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : MacroElementNodeUpdateMesh(),
+        RefineableQuarterTubeMesh<ELEMENT>(
+          wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
+        QuarterTubeMesh<ELEMENT>(
+          wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt)
     {
 #ifdef PARANOID
       ELEMENT* el_pt = new ELEMENT;
@@ -429,9 +428,9 @@ namespace oomph
   /// uniform when setup_algebraic_node_update() is called.
   //========================================================================
   template<class ELEMENT>
-  class AlgebraicRefineableQuarterTubeMesh :
-    public virtual AlgebraicMesh,
-    public RefineableQuarterTubeMesh<ELEMENT>
+  class AlgebraicRefineableQuarterTubeMesh
+    : public virtual AlgebraicMesh,
+      public RefineableQuarterTubeMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass pointer to geometric object, start and
@@ -448,12 +447,12 @@ namespace oomph
       const Vector<double>& xi_hi,
       const unsigned& nlayer,
       const double centre_box_size = 1.0,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      QuarterTubeMesh<ELEMENT>(
-        wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
-      RefineableQuarterTubeMesh<ELEMENT>(
-        wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
-      Centre_box_size(centre_box_size)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : QuarterTubeMesh<ELEMENT>(
+          wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
+        RefineableQuarterTubeMesh<ELEMENT>(
+          wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
+        Centre_box_size(centre_box_size)
     {
 #ifdef PARANOID
       ELEMENT* el_pt = new ELEMENT;

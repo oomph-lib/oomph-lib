@@ -59,10 +59,8 @@ namespace oomph
     double min_size = DBL_MAX;
     for (unsigned e = 0; e < n; e++)
     {
-      if (target_size[e] > max_size)
-        max_size = target_size[e];
-      if (target_size[e] < min_size)
-        min_size = target_size[e];
+      if (target_size[e] > max_size) max_size = target_size[e];
+      if (target_size[e] < min_size) min_size = target_size[e];
     }
 
     oomph_info << "Maximum target size: " << max_size << std::endl;

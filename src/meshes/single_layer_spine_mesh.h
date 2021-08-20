@@ -46,9 +46,8 @@ namespace oomph
   /// must be specified externally or else there will be problems.
   //======================================================================
   template<class ELEMENT>
-  class SingleLayerSpineMesh :
-    public RectangularQuadMesh<ELEMENT>,
-    public SpineMesh
+  class SingleLayerSpineMesh : public RectangularQuadMesh<ELEMENT>,
+                               public SpineMesh
   {
   public:
     /// \short Constructor: Pass number of elements in x-direction, number of

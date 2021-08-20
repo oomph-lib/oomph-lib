@@ -122,9 +122,8 @@ namespace oomph
   ///
   //=============================================================
   template<class ELEMENT>
-  class RefineableTubeMesh :
-    public TubeMesh<ELEMENT>,
-    public RefineableBrickMesh<ELEMENT>
+  class RefineableTubeMesh : public TubeMesh<ELEMENT>,
+                             public RefineableBrickMesh<ELEMENT>
 
   {
   public:
@@ -142,13 +141,13 @@ namespace oomph
       const Vector<double>& theta_positions,
       const Vector<double>& radius_box,
       const unsigned& nlayer,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      TubeMesh<ELEMENT>(wall_pt,
-                        centreline_limits,
-                        theta_positions,
-                        radius_box,
-                        nlayer,
-                        time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : TubeMesh<ELEMENT>(wall_pt,
+                          centreline_limits,
+                          theta_positions,
+                          radius_box,
+                          nlayer,
+                          time_stepper_pt)
     {
       // Loop over all elements and set macro element pointer
       for (unsigned ielem = 0; ielem < TubeMesh<ELEMENT>::nelement(); ielem++)

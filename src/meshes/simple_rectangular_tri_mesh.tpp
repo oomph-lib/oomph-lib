@@ -61,8 +61,8 @@ namespace oomph
     const unsigned& n_y,
     const double& l_x,
     const double& l_y,
-    TimeStepper* time_stepper_pt) :
-    Nx(n_x), Ny(n_y), Lx(l_x), Ly(l_y)
+    TimeStepper* time_stepper_pt)
+    : Nx(n_x), Ny(n_y), Lx(l_x), Ly(l_y)
   {
     using namespace MathematicalConstants;
 

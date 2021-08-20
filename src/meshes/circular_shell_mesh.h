@@ -51,9 +51,9 @@ namespace oomph
   /// 2D mesh and is therefore inherited from the generic RectangularQuadMesh
   //=======================================================================
   template<class ELEMENT>
-  class CircularCylindricalShellMesh :
-    public virtual RectangularQuadMesh<ELEMENT>,
-    public virtual SolidMesh
+  class CircularCylindricalShellMesh
+    : public virtual RectangularQuadMesh<ELEMENT>,
+      public virtual SolidMesh
   {
   public:
     /// Typedef for fct that defines the axial stretching fct
@@ -65,8 +65,8 @@ namespace oomph
       const unsigned& ny,
       const double& lx,
       const double& ly,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Use default stretching fct
       Axial_bl_stretching_fct_pt = 0;
@@ -88,8 +88,8 @@ namespace oomph
       const double& lx,
       const double& ly,
       AxialBLStretchingFctPt axial_bl_stretching_fct_pt,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Apply stretching fct
       Axial_bl_stretching_fct_pt = axial_bl_stretching_fct_pt;
@@ -112,8 +112,8 @@ namespace oomph
       const double& ly,
       const unsigned& nx_bl,
       const double& delta_bl,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Use default stretching fct
       Axial_bl_stretching_fct_pt = 0;

@@ -103,14 +103,14 @@ namespace oomph
       const double& ymax,
       const bool& periodic_in_x,
       const bool& build,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Nx(nx),
-      Ny(ny),
-      Xmin(xmin),
-      Xmax(xmax),
-      Ymin(ymin),
-      Ymax(ymax),
-      Xperiodic(periodic_in_x)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Nx(nx),
+        Ny(ny),
+        Xmin(xmin),
+        Xmax(xmax),
+        Ymin(ymin),
+        Ymax(ymax),
+        Xperiodic(periodic_in_x)
     {
       if (build)
       {
@@ -129,8 +129,14 @@ namespace oomph
       const unsigned& ny,
       const double& lx,
       const double& ly,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Nx(nx), Ny(ny), Xmin(0.0), Xmax(lx), Ymin(0.0), Ymax(ly), Xperiodic(false)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Nx(nx),
+        Ny(ny),
+        Xmin(0.0),
+        Xmax(lx),
+        Ymin(0.0),
+        Ymax(ly),
+        Xperiodic(false)
     {
       // Mesh can only be built with 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -148,14 +154,14 @@ namespace oomph
       const double& xmax,
       const double& ymin,
       const double& ymax,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Nx(nx),
-      Ny(ny),
-      Xmin(xmin),
-      Xmax(xmax),
-      Ymin(ymin),
-      Ymax(ymax),
-      Xperiodic(false)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Nx(nx),
+        Ny(ny),
+        Xmin(xmin),
+        Xmax(xmax),
+        Ymin(ymin),
+        Ymax(ymax),
+        Xperiodic(false)
     {
       // Mesh can only be built with 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -175,14 +181,14 @@ namespace oomph
       const double& lx,
       const double& ly,
       const bool& periodic_in_x,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Nx(nx),
-      Ny(ny),
-      Xmin(0.0),
-      Xmax(lx),
-      Ymin(0.0),
-      Ymax(ly),
-      Xperiodic(periodic_in_x)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Nx(nx),
+        Ny(ny),
+        Xmin(0.0),
+        Xmax(lx),
+        Ymin(0.0),
+        Ymax(ly),
+        Xperiodic(periodic_in_x)
     {
       // Mesh can only be built with 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -202,14 +208,14 @@ namespace oomph
       const double& ymin,
       const double& ymax,
       const bool& periodic_in_x,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Nx(nx),
-      Ny(ny),
-      Xmin(xmin),
-      Xmax(xmax),
-      Ymin(ymin),
-      Ymax(ymax),
-      Xperiodic(periodic_in_x)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Nx(nx),
+        Ny(ny),
+        Xmin(xmin),
+        Xmax(xmax),
+        Ymin(ymin),
+        Ymax(ymax),
+        Xperiodic(periodic_in_x)
     {
       // Mesh can only be built with 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -317,9 +323,9 @@ namespace oomph
   /// spacing. The default is uniformly spaced nodes in each direction.
   //===========================================================================
   template<class ELEMENT>
-  class RefineableRectangularQuadMesh :
-    public virtual RectangularQuadMesh<ELEMENT>,
-    public RefineableQuadMesh<ELEMENT>
+  class RefineableRectangularQuadMesh
+    : public virtual RectangularQuadMesh<ELEMENT>,
+      public RefineableQuadMesh<ELEMENT>
   {
   public:
     /// \short Simple constructor: nx: number of elements in x direction;
@@ -331,8 +337,8 @@ namespace oomph
       const unsigned& ny,
       const double& lx,
       const double& ly,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // RectangularMesh<...>. Only need to setup quadtree forest
@@ -350,9 +356,9 @@ namespace oomph
       const double& lx,
       const double& ly,
       const bool& periodic_in_x,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(
-        nx, ny, lx, ly, periodic_in_x, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(
+          nx, ny, lx, ly, periodic_in_x, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // RectangularMesh<...>. Only need to setup quadtree forest
@@ -369,9 +375,9 @@ namespace oomph
       const double& xmax,
       const double& ymin,
       const double& ymax,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(
-        nx, ny, xmin, xmax, ymin, ymax, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(
+          nx, ny, xmin, xmax, ymin, ymax, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // RectangularMesh<...>. Only need to setup quadtree forest
@@ -389,9 +395,9 @@ namespace oomph
       const double& ymin,
       const double& ymax,
       const bool& periodic_in_x,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(
-        nx, ny, xmin, xmax, ymin, ymax, periodic_in_x, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(
+          nx, ny, xmin, xmax, ymin, ymax, periodic_in_x, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // RectangularMesh<...>. Only need to setup quadtree forest
@@ -412,9 +418,9 @@ namespace oomph
   /// configuration.
   //================================================================
   template<class ELEMENT>
-  class ElasticRectangularQuadMesh :
-    public virtual RectangularQuadMesh<ELEMENT>,
-    public virtual SolidMesh
+  class ElasticRectangularQuadMesh
+    : public virtual RectangularQuadMesh<ELEMENT>,
+      public virtual SolidMesh
   {
   public:
     /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
@@ -427,8 +433,8 @@ namespace oomph
       const double& lx,
       const double& ly,
       const Vector<double>& origin,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Translate the nodes
       unsigned nnod = nnode();
@@ -455,8 +461,8 @@ namespace oomph
       const unsigned& ny,
       const double& lx,
       const double& ly,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // No shift
       Vector<double> origin(2, 0.0);
@@ -480,9 +486,9 @@ namespace oomph
       const double& lx,
       const double& ly,
       const bool& periodic_in_x,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(
-        nx, ny, lx, ly, periodic_in_x, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(
+          nx, ny, lx, ly, periodic_in_x, time_stepper_pt)
     {
       // No shift
       Vector<double> origin(2, 0.0);
@@ -557,9 +563,9 @@ namespace oomph
   /// for the beam-type problems for which this mesh was developed.
   //================================================================
   template<class ELEMENT>
-  class ElasticRefineableRectangularQuadMesh :
-    public virtual ElasticRectangularQuadMesh<ELEMENT>,
-    public RefineableQuadMesh<ELEMENT>
+  class ElasticRefineableRectangularQuadMesh
+    : public virtual ElasticRectangularQuadMesh<ELEMENT>,
+      public RefineableQuadMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
@@ -571,9 +577,9 @@ namespace oomph
       const unsigned& ny,
       const double& lx,
       const double& ly,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
-      ElasticRectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
+        ElasticRectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
 
     {
       // Nodal positions etc. were created in base class.
@@ -591,11 +597,11 @@ namespace oomph
       const double& lx,
       const double& ly,
       const bool& periodic_in_x,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(
-        nx, ny, lx, ly, periodic_in_x, time_stepper_pt),
-      ElasticRectangularQuadMesh<ELEMENT>(
-        nx, ny, lx, ly, periodic_in_x, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(
+          nx, ny, lx, ly, periodic_in_x, time_stepper_pt),
+        ElasticRectangularQuadMesh<ELEMENT>(
+          nx, ny, lx, ly, periodic_in_x, time_stepper_pt)
     {
       // Nodal positions etc. were created in base class.
       // Only need to setup quadtree forest
@@ -613,10 +619,10 @@ namespace oomph
       const double& lx,
       const double& ly,
       const Vector<double>& origin,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
-      ElasticRectangularQuadMesh<ELEMENT>(
-        nx, ny, lx, ly, origin, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
+        ElasticRectangularQuadMesh<ELEMENT>(
+          nx, ny, lx, ly, origin, time_stepper_pt)
 
     {
       // Nodal positions etc. were created in base class.

@@ -123,16 +123,15 @@ namespace oomph
   /// Xda-based tet mesh upgraded to become a solid mesh.
   //=========================================================================
   template<class ELEMENT>
-  class SolidXdaTetMesh :
-    public virtual XdaTetMesh<ELEMENT>,
-    public virtual SolidMesh
+  class SolidXdaTetMesh : public virtual XdaTetMesh<ELEMENT>,
+                          public virtual SolidMesh
   {
   public:
     /// \short Constructor. Boundary coordinates are setup
     /// automatically.
     SolidXdaTetMesh(const std::string xda_file_name,
-                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      XdaTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : XdaTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
     {
       // Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();

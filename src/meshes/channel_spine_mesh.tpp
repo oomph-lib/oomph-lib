@@ -60,23 +60,23 @@ namespace oomph
                                               const double& lx2,
                                               const double& h,
                                               GeomObject* wall_pt,
-                                              TimeStepper* time_stepper_pt) :
-    RectangularQuadMesh<ELEMENT>(nx0 + nx1 + nx2,
-                                 ny,
-                                 0.0,
-                                 lx0 + lx1 + lx2,
-                                 0.0,
-                                 h,
-                                 false,
-                                 false,
-                                 time_stepper_pt),
-    Nx0(nx0),
-    Nx1(nx1),
-    Nx2(nx2),
-    Lx0(lx0),
-    Lx1(lx1),
-    Lx2(lx2),
-    Wall_pt(wall_pt)
+                                              TimeStepper* time_stepper_pt)
+    : RectangularQuadMesh<ELEMENT>(nx0 + nx1 + nx2,
+                                   ny,
+                                   0.0,
+                                   lx0 + lx1 + lx2,
+                                   0.0,
+                                   h,
+                                   false,
+                                   false,
+                                   time_stepper_pt),
+      Nx0(nx0),
+      Nx1(nx1),
+      Nx2(nx2),
+      Lx0(lx0),
+      Lx1(lx1),
+      Lx2(lx2),
+      Wall_pt(wall_pt)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -115,23 +115,23 @@ namespace oomph
                                               const double& h,
                                               GeomObject* wall_pt,
                                               const bool& periodic_in_x,
-                                              TimeStepper* time_stepper_pt) :
-    RectangularQuadMesh<ELEMENT>(nx0 + nx1 + nx2,
-                                 ny,
-                                 0.0,
-                                 lx0 + lx1 + lx2,
-                                 0.0,
-                                 h,
-                                 periodic_in_x,
-                                 false,
-                                 time_stepper_pt),
-    Nx0(nx0),
-    Nx1(nx1),
-    Nx2(nx2),
-    Lx0(lx0),
-    Lx1(lx1),
-    Lx2(lx2),
-    Wall_pt(wall_pt)
+                                              TimeStepper* time_stepper_pt)
+    : RectangularQuadMesh<ELEMENT>(nx0 + nx1 + nx2,
+                                   ny,
+                                   0.0,
+                                   lx0 + lx1 + lx2,
+                                   0.0,
+                                   h,
+                                   periodic_in_x,
+                                   false,
+                                   time_stepper_pt),
+      Nx0(nx0),
+      Nx1(nx1),
+      Nx2(nx2),
+      Lx0(lx0),
+      Lx1(lx1),
+      Lx2(lx2),
+      Wall_pt(wall_pt)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -566,8 +566,7 @@ namespace oomph
 
       // Last spine needs special treatment in x-periodic meshes:
       unsigned n_pmax = n_p;
-      if ((this->Xperiodic) && (j == n_x - 1))
-        n_pmax = n_p - 1;
+      if ((this->Xperiodic) && (j == n_x - 1)) n_pmax = n_p - 1;
 
       for (unsigned l2 = 1; l2 < n_pmax; l2++)
       {

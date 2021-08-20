@@ -83,27 +83,26 @@ namespace oomph
   public:
     /// Constructor: Only takes the outer boundary, all the other parameters
     /// are stated with the specific parameters
-    TriangleMeshParameters(
-      Vector<TriangleMeshClosedCurve*>& outer_boundary_pt) :
-      Outer_boundary_pt(outer_boundary_pt),
-      Element_area(0.2),
-      Use_attributes(false),
-      Boundary_refinement(true),
-      Internal_boundary_refinement(true),
-      Allow_automatic_creation_of_vertices_on_boundaries(true),
-      Comm_pt(0)
+    TriangleMeshParameters(Vector<TriangleMeshClosedCurve*>& outer_boundary_pt)
+      : Outer_boundary_pt(outer_boundary_pt),
+        Element_area(0.2),
+        Use_attributes(false),
+        Boundary_refinement(true),
+        Internal_boundary_refinement(true),
+        Allow_automatic_creation_of_vertices_on_boundaries(true),
+        Comm_pt(0)
     {
     }
 
     /// Constructor: Only takes the outer boundary, all the other parameters
     /// are stated with the specific parameters
-    TriangleMeshParameters(TriangleMeshClosedCurve* outer_boundary_pt) :
-      Element_area(0.2),
-      Use_attributes(false),
-      Boundary_refinement(true),
-      Internal_boundary_refinement(true),
-      Allow_automatic_creation_of_vertices_on_boundaries(true),
-      Comm_pt(0)
+    TriangleMeshParameters(TriangleMeshClosedCurve* outer_boundary_pt)
+      : Element_area(0.2),
+        Use_attributes(false),
+        Boundary_refinement(true),
+        Internal_boundary_refinement(true),
+        Allow_automatic_creation_of_vertices_on_boundaries(true),
+        Comm_pt(0)
     {
       Outer_boundary_pt.resize(1);
       Outer_boundary_pt[0] = outer_boundary_pt;
@@ -111,13 +110,13 @@ namespace oomph
 
     /// Constructor: Takes nothing and initializes the other parameters to
     /// the default ones
-    TriangleMeshParameters() :
-      Element_area(0.2),
-      Use_attributes(false),
-      Boundary_refinement(true),
-      Internal_boundary_refinement(true),
-      Allow_automatic_creation_of_vertices_on_boundaries(true),
-      Comm_pt(0)
+    TriangleMeshParameters()
+      : Element_area(0.2),
+        Use_attributes(false),
+        Boundary_refinement(true),
+        Internal_boundary_refinement(true),
+        Allow_automatic_creation_of_vertices_on_boundaries(true),
+        Comm_pt(0)
     {
     }
 
@@ -2220,9 +2219,8 @@ namespace oomph
   // comms
   //#define ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION
   template<class ELEMENT>
-  class RefineableTriangleMesh :
-    public virtual TriangleMesh<ELEMENT>,
-    public virtual RefineableMeshBase
+  class RefineableTriangleMesh : public virtual TriangleMesh<ELEMENT>,
+                                 public virtual RefineableMeshBase
   {
   public:
     /// \short Function pointer to function that updates the
@@ -2246,8 +2244,8 @@ namespace oomph
     /// TriangleMeshParameters
     RefineableTriangleMesh(
       TriangleMeshParameters& triangle_mesh_parameters,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
     {
       // Initialise the data associated with adaptation
       initialise_adaptation_data();
@@ -2264,12 +2262,13 @@ namespace oomph
       const std::string& element_file_name,
       const std::string& poly_file_name,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool& allow_automatic_creation_of_vertices_on_boundaries = true) :
-      TriangleMesh<ELEMENT>(node_file_name,
-                            element_file_name,
-                            poly_file_name,
-                            time_stepper_pt,
-                            allow_automatic_creation_of_vertices_on_boundaries)
+      const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
+      : TriangleMesh<ELEMENT>(
+          node_file_name,
+          element_file_name,
+          poly_file_name,
+          time_stepper_pt,
+          allow_automatic_creation_of_vertices_on_boundaries)
     {
       // Create and fill the data structures to give rise to polylines so that
       // the mesh can use the adapt methods
@@ -3855,9 +3854,8 @@ namespace oomph
   /// Unstructured Triangle Mesh upgraded to solid mesh
   //=========================================================================
   template<class ELEMENT>
-  class SolidTriangleMesh :
-    public virtual TriangleMesh<ELEMENT>,
-    public virtual SolidMesh
+  class SolidTriangleMesh : public virtual TriangleMesh<ELEMENT>,
+                            public virtual SolidMesh
   {
   public:
 #ifdef OOMPH_HAS_TRIANGLE_LIB
@@ -3865,10 +3863,9 @@ namespace oomph
     /// \short Build mesh, based on closed curve that specifies
     /// the outer boundary of the domain and any number of internal
     /// clsed curves. Specify target area for uniform element size.
-    SolidTriangleMesh(
-      TriangleMeshParameters& triangle_mesh_parameters,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
+    SolidTriangleMesh(TriangleMeshParameters& triangle_mesh_parameters,
+                      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
     {
       // Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();
@@ -3881,12 +3878,13 @@ namespace oomph
       const std::string& element_file_name,
       const std::string& poly_file_name,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool& allow_automatic_creation_of_vertices_on_boundaries = true) :
-      TriangleMesh<ELEMENT>(node_file_name,
-                            element_file_name,
-                            poly_file_name,
-                            time_stepper_pt,
-                            allow_automatic_creation_of_vertices_on_boundaries)
+      const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
+      : TriangleMesh<ELEMENT>(
+          node_file_name,
+          element_file_name,
+          poly_file_name,
+          time_stepper_pt,
+          allow_automatic_creation_of_vertices_on_boundaries)
     {
       // Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();
@@ -3906,18 +3904,19 @@ namespace oomph
   /// Unstructured refineable Triangle Mesh upgraded to solid mesh
   //=========================================================================
   template<class ELEMENT>
-  class RefineableSolidTriangleMesh :
-    public virtual RefineableTriangleMesh<ELEMENT>,
-    public virtual SolidMesh
+  class RefineableSolidTriangleMesh
+    : public virtual RefineableTriangleMesh<ELEMENT>,
+      public virtual SolidMesh
   {
   public:
     /// \short Build mesh, based on the specifications on
     /// TriangleMeshParameter
     RefineableSolidTriangleMesh(
       TriangleMeshParameters& triangle_mesh_parameters,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt),
-      RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt),
+        RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters,
+                                        time_stepper_pt)
     {
       // Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();
@@ -3931,14 +3930,14 @@ namespace oomph
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& use_attributes = false,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true,
-      OomphCommunicator* comm_pt = 0) :
-      RefineableTriangleMesh<ELEMENT>(
-        target_area,
-        triangulate_io,
-        time_stepper_pt,
-        use_attributes,
-        allow_automatic_creation_of_vertices_on_boundaries,
-        comm_pt)
+      OomphCommunicator* comm_pt = 0)
+      : RefineableTriangleMesh<ELEMENT>(
+          target_area,
+          triangulate_io,
+          time_stepper_pt,
+          use_attributes,
+          allow_automatic_creation_of_vertices_on_boundaries,
+          comm_pt)
     {
       // Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();

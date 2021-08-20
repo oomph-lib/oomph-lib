@@ -54,9 +54,9 @@ namespace oomph
                     const unsigned& nr,
                     const double& a,
                     const double& h,
-                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(
-        ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt)
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(
+          ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt)
     {
       // Mesh can only be built with 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -74,9 +74,9 @@ namespace oomph
                     const double& a,
                     const double& h,
                     const double& phi,
-                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(
-        ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt)
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(
+          ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt)
     {
       // Mesh can only be built with 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -102,9 +102,8 @@ namespace oomph
   /// of thickness h surrounding it.
   //==================================================================
   template<class ELEMENT>
-  class RefineableTwoDAnnularMesh :
-    public virtual TwoDAnnularMesh<ELEMENT>,
-    public virtual RefineableQuadMesh<ELEMENT>
+  class RefineableTwoDAnnularMesh : public virtual TwoDAnnularMesh<ELEMENT>,
+                                    public virtual RefineableQuadMesh<ELEMENT>
   {
   public:
     /// Constructor
@@ -115,11 +114,11 @@ namespace oomph
       const unsigned& nr,
       const double& a,
       const double& h,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(
-        ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt),
-      TwoDAnnularMesh<ELEMENT>(
-        periodic, azimuthal_fraction, ntheta, nr, a, h, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(
+          ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt),
+        TwoDAnnularMesh<ELEMENT>(
+          periodic, azimuthal_fraction, ntheta, nr, a, h, time_stepper_pt)
     {
       // Mesh can only be built with 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -183,11 +182,11 @@ namespace oomph
       const double& a,
       const double& h,
       const double& phi,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(
-        ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt),
-      TwoDAnnularMesh<ELEMENT>(
-        periodic, azimuthal_fraction, ntheta, nr, a, h, phi, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(
+          ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt),
+        TwoDAnnularMesh<ELEMENT>(
+          periodic, azimuthal_fraction, ntheta, nr, a, h, phi, time_stepper_pt)
     {
       // Mesh can only be built with 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);

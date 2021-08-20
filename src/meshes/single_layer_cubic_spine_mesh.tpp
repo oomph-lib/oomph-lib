@@ -52,8 +52,8 @@ namespace oomph
     const double& lx,
     const double& ly,
     const double& h,
-    TimeStepper* time_stepper_pt) :
-    SimpleCubicMesh<ELEMENT>(nx, ny, nz, lx, ly, h, time_stepper_pt)
+    TimeStepper* time_stepper_pt)
+    : SimpleCubicMesh<ELEMENT>(nx, ny, nz, lx, ly, h, time_stepper_pt)
   {
     // Mesh can only be built with 3D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3);

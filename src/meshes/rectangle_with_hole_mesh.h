@@ -251,9 +251,8 @@ namespace oomph
   /// this needs on uniform refinement to work...
   //===================================================================
   template<class ELEMENT>
-  class RefineableRectangleWithHoleMesh :
-    public RectangleWithHoleMesh<ELEMENT>,
-    public RefineableQuadMesh<ELEMENT>
+  class RefineableRectangleWithHoleMesh : public RectangleWithHoleMesh<ELEMENT>,
+                                          public RefineableQuadMesh<ELEMENT>
   {
   public:
     /// \short Constructor. Pass pointer to geometric object that
@@ -265,8 +264,8 @@ namespace oomph
     RefineableRectangleWithHoleMesh(
       GeomObject* cylinder_pt,
       const double& length,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangleWithHoleMesh<ELEMENT>(cylinder_pt, length, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangleWithHoleMesh<ELEMENT>(cylinder_pt, length, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // Cylinder...<...>. Need to setup adaptive information.

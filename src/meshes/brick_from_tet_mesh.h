@@ -161,16 +161,15 @@ namespace oomph
   /// quadratic (27 node) elements.
   //=====================================================================
   template<class ELEMENT>
-  class SolidBrickFromTetMesh :
-    public virtual BrickFromTetMesh<ELEMENT>,
-    public SolidMesh
+  class SolidBrickFromTetMesh : public virtual BrickFromTetMesh<ELEMENT>,
+                                public SolidMesh
   {
   public:
     /// Constructor: Pass xda file name.
     SolidBrickFromTetMesh(
       const std::string xda_file_name,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      BrickFromTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : BrickFromTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
     {
       // Make the current configuration the undeformed one by
       // setting the nodal Lagrangian coordinates to their current
@@ -184,8 +183,9 @@ namespace oomph
     SolidBrickFromTetMesh(
       const std::string xda_file_name,
       XdaTetMesh<TElement<3, 3>>*& xda_tet_mesh_pt,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      BrickFromTetMesh<ELEMENT>(xda_file_name, xda_tet_mesh_pt, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : BrickFromTetMesh<ELEMENT>(
+          xda_file_name, xda_tet_mesh_pt, time_stepper_pt)
     {
       // Make the current configuration the undeformed one by
       // setting the nodal Lagrangian coordinates to their current
@@ -204,16 +204,15 @@ namespace oomph
   /// quadratic (27 node) elements.
   //=====================================================================
   template<class ELEMENT>
-  class RefineableBrickFromTetMesh :
-    public virtual BrickFromTetMesh<ELEMENT>,
-    public virtual RefineableBrickMesh<ELEMENT>
+  class RefineableBrickFromTetMesh : public virtual BrickFromTetMesh<ELEMENT>,
+                                     public virtual RefineableBrickMesh<ELEMENT>
   {
   public:
     /// Constructor: Pass xda file name.
     RefineableBrickFromTetMesh(
       const std::string xda_file_name,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      BrickFromTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : BrickFromTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // nonrefineable mesh. Only need to setup quadtree forest
@@ -226,8 +225,9 @@ namespace oomph
     RefineableBrickFromTetMesh(
       const std::string xda_file_name,
       XdaTetMesh<TElement<3, 3>>*& xda_tet_mesh_pt,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      BrickFromTetMesh<ELEMENT>(xda_file_name, xda_tet_mesh_pt, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : BrickFromTetMesh<ELEMENT>(
+          xda_file_name, xda_tet_mesh_pt, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // RectangularMesh<...>. Only need to setup quadtree forest
@@ -245,18 +245,18 @@ namespace oomph
   /// quadratic (27 node) elements.
   //=====================================================================
   template<class ELEMENT>
-  class RefineableSolidBrickFromTetMesh :
-    public virtual BrickFromTetMesh<ELEMENT>,
-    public virtual RefineableBrickMesh<ELEMENT>,
-    public SolidMesh
+  class RefineableSolidBrickFromTetMesh
+    : public virtual BrickFromTetMesh<ELEMENT>,
+      public virtual RefineableBrickMesh<ELEMENT>,
+      public SolidMesh
 
   {
   public:
     /// Constructor: Pass xda file name.
     RefineableSolidBrickFromTetMesh(
       const std::string xda_file_name,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      BrickFromTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : BrickFromTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
     {
       // Make the current configuration the undeformed one by
       // setting the nodal Lagrangian coordinates to their current
@@ -274,8 +274,9 @@ namespace oomph
     RefineableSolidBrickFromTetMesh(
       const std::string xda_file_name,
       XdaTetMesh<TElement<3, 3>>*& xda_tet_mesh_pt,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      BrickFromTetMesh<ELEMENT>(xda_file_name, xda_tet_mesh_pt, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : BrickFromTetMesh<ELEMENT>(
+          xda_file_name, xda_tet_mesh_pt, time_stepper_pt)
     {
       // Make the current configuration the undeformed one by
       // setting the nodal Lagrangian coordinates to their current

@@ -47,8 +47,8 @@ namespace oomph
                               const Vector<double>& theta_positions,
                               const Vector<double>& radius_box,
                               const unsigned& nlayer,
-                              TimeStepper* time_stepper_pt) :
-    Volume_pt(volume_pt)
+                              TimeStepper* time_stepper_pt)
+    : Volume_pt(volume_pt)
   {
     // Mesh can only be built with 3D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3);

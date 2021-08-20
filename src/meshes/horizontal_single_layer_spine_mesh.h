@@ -46,9 +46,8 @@ namespace oomph
   /// equations must be specified in order to determine how the spines move.
   //======================================================================
   template<class ELEMENT>
-  class HorizontalSingleLayerSpineMesh :
-    public RectangularQuadMesh<ELEMENT>,
-    public SpineMesh
+  class HorizontalSingleLayerSpineMesh : public RectangularQuadMesh<ELEMENT>,
+                                         public SpineMesh
   {
   public:
     /// \short Constructor: Pass number of elements in x-direction, number of

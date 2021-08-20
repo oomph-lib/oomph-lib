@@ -57,22 +57,23 @@ namespace oomph
     /// Other parameters get default values and can be set via
     /// member functions
     GmshParameters(TetMeshFacetedClosedSurface* const& outer_boundary_pt,
-                   const std::string& gmsh_command_line_invocation) :
-      Outer_boundary_pt(outer_boundary_pt),
-      Element_volume(1.0),
-      Target_size_file_name(".gmsh_target_size_for_adaptation.dat"),
-      Geo_and_msh_file_stem(".geo_file"),
-      Gmsh_command_line_invocation(gmsh_command_line_invocation),
-      Max_element_size(1.0),
-      Min_element_size(0.01),
-      Max_permitted_edge_ratio(2.0),
-      Dx_for_target_size_transfer(0.05),
-      Max_sample_points_for_limited_locate_zeta_during_target_size_transfer(5),
-      Stem_for_filename_gmsh_size_transfer(""),
-      Counter_for_filename_gmsh_size_transfer(-1),
-      Projection_is_disabled(false),
-      Gmsh_onscreen_output_file_name(""),
-      Gmsh_onscreen_output_counter(0)
+                   const std::string& gmsh_command_line_invocation)
+      : Outer_boundary_pt(outer_boundary_pt),
+        Element_volume(1.0),
+        Target_size_file_name(".gmsh_target_size_for_adaptation.dat"),
+        Geo_and_msh_file_stem(".geo_file"),
+        Gmsh_command_line_invocation(gmsh_command_line_invocation),
+        Max_element_size(1.0),
+        Min_element_size(0.01),
+        Max_permitted_edge_ratio(2.0),
+        Dx_for_target_size_transfer(0.05),
+        Max_sample_points_for_limited_locate_zeta_during_target_size_transfer(
+          5),
+        Stem_for_filename_gmsh_size_transfer(""),
+        Counter_for_filename_gmsh_size_transfer(-1),
+        Projection_is_disabled(false),
+        Gmsh_onscreen_output_file_name(""),
+        Gmsh_onscreen_output_counter(0)
     {
     }
 
@@ -370,8 +371,8 @@ namespace oomph
     /// to true, the target element sizes are read from file (used during
     /// adaptation; otherwise uniform target size is used).
     GmshTetScaffoldMesh(GmshParameters* gmsh_parameters_pt,
-                        const bool& use_mesh_grading_from_file) :
-      Gmsh_parameters_pt(gmsh_parameters_pt)
+                        const bool& use_mesh_grading_from_file)
+      : Gmsh_parameters_pt(gmsh_parameters_pt)
     {
       double t_start = TimingHelpers::timer();
 
@@ -1342,8 +1343,7 @@ namespace oomph
           std::set<unsigned> region_id(
             facet_pt->one_based_adjacent_region_id());
           unsigned nr = region_id.size();
-          if (nr == 1)
-            outer_bounding_facet.push_back(nfacet_offset + f + 1);
+          if (nr == 1) outer_bounding_facet.push_back(nfacet_offset + f + 1);
           if ((nr == 0) && inner_surface_is_closed)
           {
             // Add to list of plane surfaces that don't bound regions so we
@@ -1631,8 +1631,8 @@ namespace oomph
   public:
     /// \short Constructor
     GmshTetMesh(GmshParameters* gmsh_parameters_pt,
-                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Gmsh_parameters_pt(gmsh_parameters_pt)
+                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Gmsh_parameters_pt(gmsh_parameters_pt)
     {
       bool use_mesh_grading_from_file = false;
       build_it(time_stepper_pt, use_mesh_grading_from_file);
@@ -1643,8 +1643,8 @@ namespace oomph
     /// adaptation; otherwise uniform target size is used).
     GmshTetMesh(GmshParameters* gmsh_parameters_pt,
                 const bool& use_mesh_grading_from_file,
-                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Gmsh_parameters_pt(gmsh_parameters_pt)
+                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Gmsh_parameters_pt(gmsh_parameters_pt)
     {
       build_it(time_stepper_pt, use_mesh_grading_from_file);
     }
@@ -2239,9 +2239,8 @@ namespace oomph
   // Refineable Gmsh-based Tet Mesh
   //=========================================================================
   template<class ELEMENT>
-  class RefineableGmshTetMesh :
-    public virtual GmshTetMesh<ELEMENT>,
-    public virtual RefineableTetMeshBase
+  class RefineableGmshTetMesh : public virtual GmshTetMesh<ELEMENT>,
+                                public virtual RefineableTetMeshBase
   {
   public:
     /// \short Constructor. If boolean is set
@@ -2250,9 +2249,9 @@ namespace oomph
     RefineableGmshTetMesh(
       GmshParameters* gmsh_parameters_pt,
       const bool& use_mesh_grading_from_file,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      GmshTetMesh<ELEMENT>(
-        gmsh_parameters_pt, use_mesh_grading_from_file, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : GmshTetMesh<ELEMENT>(
+          gmsh_parameters_pt, use_mesh_grading_from_file, time_stepper_pt)
     {
       initialise_adaptation_data();
     }
@@ -2260,11 +2259,11 @@ namespace oomph
     /// \short Constructor
     RefineableGmshTetMesh(
       GmshParameters* gmsh_parameters_pt,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      GmshTetMesh<ELEMENT>(gmsh_parameters_pt,
-                           false, // Don't read mesh size data from file unless
-                                  // explicitly requested.
-                           time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : GmshTetMesh<ELEMENT>(gmsh_parameters_pt,
+                             false, // Don't read mesh size data from file
+                                    // unless explicitly requested.
+                             time_stepper_pt)
     {
       initialise_adaptation_data();
     }

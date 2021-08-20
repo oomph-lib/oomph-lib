@@ -65,9 +65,8 @@ namespace oomph
   /// (defaults to (Steady) default timestepper defined in Mesh)
   //=================================================================
   template<class ELEMENT>
-  FishMesh<ELEMENT>::FishMesh(GeomObject* back_pt,
-                              TimeStepper* time_stepper_pt) :
-    Back_pt(back_pt)
+  FishMesh<ELEMENT>::FishMesh(GeomObject* back_pt, TimeStepper* time_stepper_pt)
+    : Back_pt(back_pt)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -591,8 +590,7 @@ namespace oomph
             Back_pt->position(zeta, r);
 
             // Flip it
-            if (ibound == 0)
-              r[1] = -r[1];
+            if (ibound == 0) r[1] = -r[1];
 
             // Check:
             for (unsigned i = 0; i < 2; i++)

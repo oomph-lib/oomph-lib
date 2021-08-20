@@ -539,8 +539,7 @@ namespace oomph
 #endif
 
     // north boundary
-    if (i_direct == N)
-      r_N(s, f);
+    if (i_direct == N) r_N(s, f);
     // east boundary
     else if (i_direct == E)
       r_E(s, f);
@@ -576,8 +575,7 @@ namespace oomph
 #endif
 
     // north boundary
-    if (i_direct == N)
-      dr_N(s, f);
+    if (i_direct == N) dr_N(s, f);
     // east boundary
     else if (i_direct == E)
       dr_E(s, f);
@@ -613,8 +611,7 @@ namespace oomph
 #endif
 
     // north boundary
-    if (i_direct == N)
-      d2r_N(s, f);
+    if (i_direct == N) d2r_N(s, f);
     // east boundary
     else if (i_direct == E)
       d2r_E(s, f);

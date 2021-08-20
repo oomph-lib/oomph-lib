@@ -88,17 +88,16 @@ namespace oomph
   /// - Boundary 3: The surface of the sphere.
   //======================================================================
   template<class ELEMENT>
-  class RefineableEighthSphereMesh :
-    public EighthSphereMesh<ELEMENT>,
-    public virtual RefineableBrickMesh<ELEMENT>
+  class RefineableEighthSphereMesh : public EighthSphereMesh<ELEMENT>,
+                                     public virtual RefineableBrickMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass radius and timestepper; defaults to
     /// static default timestepper
     RefineableEighthSphereMesh(
       const double& radius,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      EighthSphereMesh<ELEMENT>(radius, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : EighthSphereMesh<ELEMENT>(radius, time_stepper_pt)
     {
       // Loop over all elements and set macro element pointer
       unsigned nel = this->nelement();

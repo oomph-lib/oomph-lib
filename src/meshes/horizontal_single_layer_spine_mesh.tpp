@@ -55,9 +55,9 @@ namespace oomph
     const unsigned& ny,
     const double& lx,
     const double& h,
-    TimeStepper* time_stepper_pt) :
-    RectangularQuadMesh<ELEMENT>(
-      nx, ny, 0.0, lx, 0.0, h, false, false, time_stepper_pt)
+    TimeStepper* time_stepper_pt)
+    : RectangularQuadMesh<ELEMENT>(
+        nx, ny, 0.0, lx, 0.0, h, false, false, time_stepper_pt)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);

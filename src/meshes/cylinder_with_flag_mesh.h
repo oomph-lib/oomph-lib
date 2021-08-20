@@ -95,9 +95,8 @@ namespace oomph
   /// Refineable version of CylinderWithFlagMesh.
   //===================================================================
   template<class ELEMENT>
-  class RefineableCylinderWithFlagMesh :
-    public CylinderWithFlagMesh<ELEMENT>,
-    public RefineableQuadMesh<ELEMENT>
+  class RefineableCylinderWithFlagMesh : public CylinderWithFlagMesh<ELEMENT>,
+                                         public RefineableQuadMesh<ELEMENT>
   {
   public:
     /// \short Constructor. Pass the pointers to the GeomObjects that
@@ -117,19 +116,19 @@ namespace oomph
       const double& centre_x,
       const double& centre_y,
       const double& a,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      CylinderWithFlagMesh<ELEMENT>(cylinder_pt,
-                                    top_flag_pt,
-                                    bottom_flag_pt,
-                                    tip_flag_pt,
-                                    length,
-                                    height,
-                                    flag_length,
-                                    flag_height,
-                                    centre_x,
-                                    centre_y,
-                                    a,
-                                    time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : CylinderWithFlagMesh<ELEMENT>(cylinder_pt,
+                                      top_flag_pt,
+                                      bottom_flag_pt,
+                                      tip_flag_pt,
+                                      length,
+                                      height,
+                                      flag_length,
+                                      flag_height,
+                                      centre_x,
+                                      centre_y,
+                                      a,
+                                      time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // Cylinder...<...>. Need to setup adaptive information.
@@ -150,9 +149,9 @@ namespace oomph
   /// Algebraic version of CylinderWithFlagMesh.
   //===================================================================
   template<class ELEMENT>
-  class AlgebraicCylinderWithFlagMesh :
-    public AlgebraicMesh,
-    public virtual CylinderWithFlagMesh<ELEMENT>
+  class AlgebraicCylinderWithFlagMesh
+    : public AlgebraicMesh,
+      public virtual CylinderWithFlagMesh<ELEMENT>
   {
   public:
     /// \short Constructor. Pass the pointers to the GeomObjects that
@@ -172,30 +171,30 @@ namespace oomph
       const double& centre_x,
       const double& centre_y,
       const double& a,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      CylinderWithFlagMesh<ELEMENT>(cylinder_pt,
-                                    top_flag_pt,
-                                    bottom_flag_pt,
-                                    tip_flag_pt,
-                                    length,
-                                    height,
-                                    flag_length,
-                                    flag_height,
-                                    centre_x,
-                                    centre_y,
-                                    a,
-                                    time_stepper_pt),
-      Cylinder_pt(cylinder_pt),
-      Top_flag_pt(top_flag_pt),
-      Bottom_flag_pt(bottom_flag_pt),
-      Tip_flag_pt(tip_flag_pt),
-      Length(length),
-      Height(height),
-      Flag_length(flag_length),
-      Flag_height(flag_height),
-      Centre_x(centre_x),
-      Centre_y(centre_y),
-      A(a)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : CylinderWithFlagMesh<ELEMENT>(cylinder_pt,
+                                      top_flag_pt,
+                                      bottom_flag_pt,
+                                      tip_flag_pt,
+                                      length,
+                                      height,
+                                      flag_length,
+                                      flag_height,
+                                      centre_x,
+                                      centre_y,
+                                      a,
+                                      time_stepper_pt),
+        Cylinder_pt(cylinder_pt),
+        Top_flag_pt(top_flag_pt),
+        Bottom_flag_pt(bottom_flag_pt),
+        Tip_flag_pt(tip_flag_pt),
+        Length(length),
+        Height(height),
+        Flag_length(flag_length),
+        Flag_height(flag_height),
+        Centre_x(centre_x),
+        Centre_y(centre_y),
+        A(a)
     {
       // Add the geometric objects to the list associated with this
       // AlgebraicMesh
@@ -339,9 +338,9 @@ namespace oomph
   /// Refineable version of  AlgebraicCylinderWithFlagMesh
   //===================================================================
   template<class ELEMENT>
-  class RefineableAlgebraicCylinderWithFlagMesh :
-    public RefineableQuadMesh<ELEMENT>,
-    public virtual AlgebraicCylinderWithFlagMesh<ELEMENT>
+  class RefineableAlgebraicCylinderWithFlagMesh
+    : public RefineableQuadMesh<ELEMENT>,
+      public virtual AlgebraicCylinderWithFlagMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass the pointers to the GeomObjects that
@@ -361,31 +360,31 @@ namespace oomph
       const double& centre_x,
       const double& centre_y,
       const double& a,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      CylinderWithFlagMesh<ELEMENT>(cylinder_pt,
-                                    top_flag_pt,
-                                    bottom_flag_pt,
-                                    tip_flag_pt,
-                                    length,
-                                    height,
-                                    flag_length,
-                                    flag_height,
-                                    centre_x,
-                                    centre_y,
-                                    a,
-                                    time_stepper_pt),
-      AlgebraicCylinderWithFlagMesh<ELEMENT>(cylinder_pt,
-                                             top_flag_pt,
-                                             bottom_flag_pt,
-                                             tip_flag_pt,
-                                             length,
-                                             height,
-                                             flag_length,
-                                             flag_height,
-                                             centre_x,
-                                             centre_y,
-                                             a,
-                                             time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : CylinderWithFlagMesh<ELEMENT>(cylinder_pt,
+                                      top_flag_pt,
+                                      bottom_flag_pt,
+                                      tip_flag_pt,
+                                      length,
+                                      height,
+                                      flag_length,
+                                      flag_height,
+                                      centre_x,
+                                      centre_y,
+                                      a,
+                                      time_stepper_pt),
+        AlgebraicCylinderWithFlagMesh<ELEMENT>(cylinder_pt,
+                                               top_flag_pt,
+                                               bottom_flag_pt,
+                                               tip_flag_pt,
+                                               length,
+                                               height,
+                                               flag_length,
+                                               flag_height,
+                                               centre_x,
+                                               centre_y,
+                                               a,
+                                               time_stepper_pt)
     {
       // Build quadtree forest
       this->setup_quadtree_forest();

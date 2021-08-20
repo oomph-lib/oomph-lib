@@ -59,16 +59,16 @@ namespace oomph
                     const double& lx,
                     const double& ly,
                     const double& lz,
-                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Nx(nx),
-      Ny(ny),
-      Nz(nz),
-      Xmin(0.0),
-      Xmax(lx),
-      Ymin(0.0),
-      Ymax(ly),
-      Zmin(0.0),
-      Zmax(lz)
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Nx(nx),
+        Ny(ny),
+        Nz(nz),
+        Xmin(0.0),
+        Xmax(lx),
+        Ymin(0.0),
+        Ymax(ly),
+        Zmin(0.0),
+        Zmax(lz)
     {
       // Mesh can only be built with 3D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3);
@@ -89,16 +89,16 @@ namespace oomph
                     const double& ymax,
                     const double& zmin,
                     const double& zmax,
-                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Nx(nx),
-      Ny(ny),
-      Nz(nz),
-      Xmin(xmin),
-      Xmax(xmax),
-      Ymin(ymin),
-      Ymax(ymax),
-      Zmin(zmin),
-      Zmax(zmax)
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Nx(nx),
+        Ny(ny),
+        Nz(nz),
+        Xmin(xmin),
+        Xmax(xmax),
+        Ymin(ymin),
+        Ymax(ymax),
+        Zmin(zmin),
+        Zmax(zmax)
     {
       // Mesh can only be built with 3D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3);
@@ -165,9 +165,8 @@ namespace oomph
   /// Refineable version of simple cubic 3D Brick mesh class.
   //=======================================================================
   template<class ELEMENT>
-  class RefineableSimpleCubicMesh :
-    public virtual SimpleCubicMesh<ELEMENT>,
-    public virtual RefineableBrickMesh<ELEMENT>
+  class RefineableSimpleCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
+                                    public virtual RefineableBrickMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass number of elements in the x, y, and z
@@ -180,8 +179,8 @@ namespace oomph
       const double& lx,
       const double& ly,
       const double& lz,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      SimpleCubicMesh<ELEMENT>(nx, ny, nz, lx, ly, lz, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : SimpleCubicMesh<ELEMENT>(nx, ny, nz, lx, ly, lz, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // base class Only need to setup octree forest
@@ -201,9 +200,9 @@ namespace oomph
       const double& ymax,
       const double& zmin,
       const double& zmax,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      SimpleCubicMesh<ELEMENT>(
-        nx, ny, nz, xmin, xmax, ymin, ymax, zmin, zmax, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : SimpleCubicMesh<ELEMENT>(
+          nx, ny, nz, xmin, xmax, ymin, ymax, zmin, zmax, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // base class Only need to setup octree forest
