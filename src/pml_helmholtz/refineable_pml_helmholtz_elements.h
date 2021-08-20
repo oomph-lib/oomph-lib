@@ -33,6 +33,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib headers
 #include "generic/refineable_quad_element.h"
 #include "generic/refineable_brick_element.h"
@@ -45,23 +46,24 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// Refineable version of PMLHelmholtz equations
   ///
   ///
   //======================================================================
   template<unsigned DIM>
-  class RefineablePMLHelmholtzEquations :
-    public virtual PMLHelmholtzEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineablePMLHelmholtzEquations
+    : public virtual PMLHelmholtzEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Constructor, simply call other constructors
-    RefineablePMLHelmholtzEquations() :
-      PMLHelmholtzEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineablePMLHelmholtzEquations()
+      : PMLHelmholtzEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
 
@@ -105,6 +107,7 @@ namespace oomph
       }
     }
 
+
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
@@ -139,6 +142,7 @@ namespace oomph
       }
     }
 
+
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
@@ -166,6 +170,7 @@ namespace oomph
       }
     }
 
+
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
@@ -173,6 +178,7 @@ namespace oomph
                               this->father_element_pt())
                               ->source_fct_pt();
     }
+
 
   private:
     /// \short Add element's contribution to elemental residual vector and/or
@@ -185,26 +191,28 @@ namespace oomph
       const unsigned& flag);
   };
 
+
   //======================================================================
   /// Refineable version of QPMLHelmholtzElement elements
   ///
   ///
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQPMLHelmholtzElement :
-    public QPMLHelmholtzElement<DIM, NNODE_1D>,
-    public virtual RefineablePMLHelmholtzEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQPMLHelmholtzElement
+    : public QPMLHelmholtzElement<DIM, NNODE_1D>,
+      public virtual RefineablePMLHelmholtzEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// \short Constructor, simply call the other constructors
-    RefineableQPMLHelmholtzElement() :
-      RefineableElement(),
-      RefineablePMLHelmholtzEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QPMLHelmholtzElement<DIM, NNODE_1D>()
+    RefineableQPMLHelmholtzElement()
+      : RefineableElement(),
+        RefineablePMLHelmholtzEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QPMLHelmholtzElement<DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQPMLHelmholtzElement(
@@ -252,9 +260,11 @@ namespace oomph
     void further_setup_hanging_nodes() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the RefineableQuadPMLHelmholtzElement elements:
@@ -264,8 +274,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<RefineableQPMLHelmholtzElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<RefineableQPMLHelmholtzElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -278,8 +288,8 @@ namespace oomph
   /// PML layers. Same!
   //=======================================================================
   template<unsigned NNODE_1D>
-  class PMLLayerElement<RefineableQPMLHelmholtzElement<2, NNODE_1D>> :
-    public virtual RefineableQPMLHelmholtzElement<2, NNODE_1D>
+  class PMLLayerElement<RefineableQPMLHelmholtzElement<2, NNODE_1D>>
+    : public virtual RefineableQPMLHelmholtzElement<2, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "solid_preconditioners.h"
 
+
 namespace oomph
 {
   //===========================================================================
@@ -272,7 +273,9 @@ namespace oomph
       }
     }
 
+
     /////////////////////////////////////////////////////////////////////////////
+
 
     // otherwise we are not forming BFBt
     else
@@ -391,7 +394,9 @@ namespace oomph
       }
     }
 
+
     /////////////////////////////////////////////////////////////////////////////
+
 
     // form the matrix vector operator for Bt
     double t_Bt_MV_start = TimingHelpers::timer();
@@ -481,6 +486,7 @@ namespace oomph
     Preconditioner_has_been_setup = true;
   }
 
+
   //=======================================================================
   /// Apply preconditioner to r.
   //=======================================================================
@@ -531,6 +537,7 @@ namespace oomph
     // includes displacement/position and pressure dofs in some random fashion)
     this->get_block_vector(1, r, temp_vec);
 
+
     if (Doc_time)
     {
       t_end = TimingHelpers::timer();
@@ -556,6 +563,7 @@ namespace oomph
     // use some Preconditioner's preconditioner_solve function
     P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
 
+
     if (Doc_time)
     {
       t_end = TimingHelpers::timer();
@@ -564,6 +572,7 @@ namespace oomph
                  << std::endl;
       t_start = TimingHelpers::timer();
     }
+
 
     // NOTE: The vector another_temp_vec now contains the vector P^{-1} r_p
 
@@ -582,6 +591,7 @@ namespace oomph
       QBt_mat_vec_pt->multiply_transpose(another_temp_vec, temp_vec);
     }
 
+
     if (Doc_time)
     {
       t_end = TimingHelpers::timer();
@@ -596,6 +606,7 @@ namespace oomph
     another_temp_vec.clear();
     P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
 
+
     if (Doc_time)
     {
       t_end = TimingHelpers::timer();
@@ -604,6 +615,7 @@ namespace oomph
                  << std::endl;
       t_start = TimingHelpers::timer();
     }
+
 
     // NOTE: The vector another_temp_vec now contains  z_p = P^{-1} E P^{-1} r_p
     //       as required (apart from the sign which we'll fix in the
@@ -624,6 +636,7 @@ namespace oomph
     // result in temp_vec (vector resizes itself).
     temp_vec.clear();
     Bt_mat_vec_pt->multiply(another_temp_vec, temp_vec);
+
 
     if (Doc_time)
     {
@@ -681,6 +694,7 @@ namespace oomph
                  << std::endl;
     }
   }
+
 
   //========================================================================
   /// Helper function to assemble the diagonal of the
@@ -775,6 +789,7 @@ namespace oomph
           SolidElementWithDiagonalMassMatrix* cast_el_pt =
             dynamic_cast<SolidElementWithDiagonalMassMatrix*>(
               Solid_mesh_pt->element_pt(e));
+
 
           if (cast_el_pt == 0)
           {

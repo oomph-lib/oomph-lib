@@ -26,6 +26,7 @@
 #ifndef SPARSE_VECTOR_HEADER
 #define SPARSE_VECTOR_HEADER
 
+
 namespace oomph
 {
   //========================================================================
@@ -140,5 +141,6 @@ namespace oomph
     /// Keep track of the filled and empty bins
     std::vector<bool> Has_entry;
   };
+
 
 #endif

@@ -132,6 +132,7 @@ namespace oomph
     // Resize the Element vector
     Element_pt.resize(n_element);
 
+
     // Process curve file to extract information about boundaries
     // ----------------------------------------------------------
 
@@ -248,6 +249,7 @@ namespace oomph
           curv[b - 1][1]; // 1st value of vector at [0] !!
       }
     }
+
 
     // Create the elements
     //--------------------

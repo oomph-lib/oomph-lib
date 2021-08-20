@@ -52,13 +52,13 @@ namespace oomph
   /// to a function of type SubsidiaryPreconditionerFctPt to the method
   /// subsidiary_preconditioner_function_pt().
   //=============================================================================
-  class SpaceTimeNavierStokesSubsidiaryPreconditioner :
-    public BlockPreconditioner<CRDoubleMatrix>
+  class SpaceTimeNavierStokesSubsidiaryPreconditioner
+    : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
     /// Constructor. (By default this preconditioner is upper triangular).
-    SpaceTimeNavierStokesSubsidiaryPreconditioner() :
-      BlockPreconditioner<CRDoubleMatrix>()
+    SpaceTimeNavierStokesSubsidiaryPreconditioner()
+      : BlockPreconditioner<CRDoubleMatrix>()
     {
       // By default, don't store the memory statistics of this preconditioner
       Compute_memory_statistics = false;
@@ -147,6 +147,7 @@ namespace oomph
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
+
     /// Document the memory usage
     void enable_doc_memory_usage()
     {
@@ -154,12 +155,14 @@ namespace oomph
       Compute_memory_statistics = true;
     } // End of enable_doc_memory_usage
 
+
     /// Don't document the memory usage!
     void disable_doc_memory_usage()
     {
       /// Set the appropriate flag to false
       Compute_memory_statistics = false;
     } // End of disable_doc_memory_usage
+
 
     /// Get the memory statistics
     double get_memory_usage_in_bytes()
@@ -245,24 +248,25 @@ namespace oomph
     MatrixVectorProduct* G_mat_vec_pt;
   };
 
+
   //=============================================================================
   /// \short The block preconditioner form of GMRES. This version extracts
   /// the blocks from the global systems and assembles the system by
   /// concatenating all the matrices together
   //=============================================================================
-  class GMRESBlockPreconditioner :
-    public IterativeLinearSolver,
-    public virtual BlockPreconditioner<CRDoubleMatrix>
+  class GMRESBlockPreconditioner
+    : public IterativeLinearSolver,
+      public virtual BlockPreconditioner<CRDoubleMatrix>
   {
   public:
     /// Constructor (empty)
-    GMRESBlockPreconditioner() :
-      BlockPreconditioner<CRDoubleMatrix>(),
-      Matrix_pt(0),
-      Navier_stokes_subsidiary_preconditioner_pt(0),
-      Iterations(0),
-      Preconditioner_has_been_setup(false),
-      Preconditioner_LHS(false)
+    GMRESBlockPreconditioner()
+      : BlockPreconditioner<CRDoubleMatrix>(),
+        Matrix_pt(0),
+        Navier_stokes_subsidiary_preconditioner_pt(0),
+        Iterations(0),
+        Preconditioner_has_been_setup(false),
+        Preconditioner_LHS(false)
     {
       // By default, don't store the memory statistics of this preconditioner
       Compute_memory_statistics = false;
@@ -350,6 +354,7 @@ namespace oomph
       Preconditioner_LHS = false;
     }
 
+
     /// Document the memory usage
     void enable_doc_memory_statistics()
     {
@@ -357,12 +362,14 @@ namespace oomph
       Compute_memory_statistics = true;
     } // End of enable_doc_memory_statistics
 
+
     /// Don't document the memory usage!
     void disable_doc_memory_statistics()
     {
       /// Set the appropriate flag to false
       Compute_memory_statistics = false;
     } // End of disable_doc_memory_statistics
+
 
     /// Get the memory statistics
     double get_memory_usage_in_bytes()
@@ -415,6 +422,7 @@ namespace oomph
         return 0.0;
       } // if (Preconditioner_has_been_setup)
     } // End of get_memory_usage_in_bytes
+
 
     /// Handle to the Navier-Stokes subsidiary block preconditioner
     /// DRAIG: Make sure the desired const-ness is correct later...

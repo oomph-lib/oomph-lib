@@ -26,6 +26,7 @@
 #include "double_vector.h"
 #include "matrices.h"
 
+
 namespace oomph
 {
   //============================================================================
@@ -531,6 +532,7 @@ namespace oomph
       Values_pt[i] -= v_values_pt[i];
     }
   }
+
 
   //============================================================================
   /// Multiply by double
@@ -1111,6 +1113,7 @@ namespace oomph
       }
 #endif
 
+
       // Now we do the concatenation.
       if ((comm_pt->nproc() == 1) || !distributed)
       {
@@ -1539,6 +1542,7 @@ namespace oomph
         // With the out_p (processor to send data to) and out vector, we get the
         // out_first_row which then allows us to work out the out_local_eqn.
 
+
         // Get the number of processors
         unsigned nproc = comm_pt->nproc();
 
@@ -1587,6 +1591,7 @@ namespace oomph
           unsigned out_local_eqn =
             out_global_eqn -
             out_vector_pt[out_vector_i]->distribution_pt()->first_row(out_p);
+
 
           // Fill in the data to send
 
@@ -1981,6 +1986,7 @@ namespace oomph
       tmp_distribution.clear();
       out_distribution.clear();
 #endif
+
 
       unsigned out_value_offset = 0;
 

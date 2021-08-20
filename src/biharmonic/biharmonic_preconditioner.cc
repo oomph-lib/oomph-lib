@@ -28,8 +28,10 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib includes
 #include "biharmonic_preconditioner.h"
+
 
 namespace oomph
 {
@@ -176,6 +178,7 @@ namespace oomph
         oomph_info << "Using inexact BBD with LU\n";
         break;
 
+
         // Inexact BBD with AMG
       case 2:
 
@@ -204,6 +207,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // setup sub preconditioner pt 1
     Sub_preconditioner_1_pt->setup(matrix_pt());
 
@@ -231,6 +235,7 @@ namespace oomph
       j_44_pt = 0;
     }
   }
+
 
   //============================================================================
   /// \short preconditioner solve for the biharmonic preconditioner
@@ -323,6 +328,7 @@ namespace oomph
     // preconditioner_matrix will now go out of scope (and is destroyed).
   }
 
+
   //============================================================================
   /// \short preconditioner solve for the exact sub biharmonic preconditioner
   //============================================================================
@@ -342,6 +348,7 @@ namespace oomph
     // return the sub z vector to the master z vector
     return_block_ordered_preconditioner_vector(sub_z, z);
   }
+
 
   //============================================================================
   /// setup for the inexact sub biharmonic preconditioner
@@ -642,6 +649,7 @@ namespace oomph
       J_02_value[i] *= J_22_lumped_and_inverted[J_02_column_index[i]];
     }
   }
+
 
   //============================================================================
   /// \short preconditioner solve for the inexact sub biharmonic preconditioner

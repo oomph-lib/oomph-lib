@@ -106,6 +106,7 @@ namespace oomph
     /// in the element. These must be returned in order.
     virtual void get_interpolation_data(Vector<Data*>& interpolation_data);
 
+
     ///\short Calculate the normal numerical flux at the integration point.
     /// This is the most general interface that can be overloaded if desired
     virtual void numerical_flux_at_knot(const unsigned& ipt,
@@ -141,6 +142,7 @@ namespace oomph
                                     const Vector<double>& u_ext,
                                     DenseMatrix<double>& dflux_du_int,
                                     DenseMatrix<double>& dflux_du_ext);
+
 
     ///\short Add the contribution from integrating the numerical flux
     // over the face to the residuals
@@ -195,13 +197,13 @@ namespace oomph
 
   public:
     /// Constructor, initialise the pointers to zero
-    DGElement() :
-      DG_mesh_pt(0),
-      M_pt(0),
-      Average_value(0),
-      Mass_matrix_reuse_is_enabled(false),
-      Mass_matrix_has_been_computed(false),
-      Can_delete_mass_matrix(true)
+    DGElement()
+      : DG_mesh_pt(0),
+        M_pt(0),
+        Average_value(0),
+        Mass_matrix_reuse_is_enabled(false),
+        Mass_matrix_has_been_computed(false),
+        Can_delete_mass_matrix(true)
     {
     }
 
@@ -248,6 +250,7 @@ namespace oomph
       // Recalculate the mass matrix
       Mass_matrix_has_been_computed = false;
     }
+
 
     /// Set the mass matrix to point to one in another element
     virtual void set_mass_matrix_from_element(DGElement* const& element_pt)
@@ -327,6 +330,7 @@ namespace oomph
       DG_mesh_pt = mesh_pt;
     }
 
+
     /// Construct the nodes and faces of the element
     void construct_nodes_and_faces(DGMesh* const& mesh_pt,
                                    TimeStepper* const& time_stepper_pt)
@@ -396,6 +400,7 @@ namespace oomph
       }
     }
 
+
     /// Loop over all faces and add their integrated numerical fluxes
     /// to the residuals
     void add_flux_contributions_to_residuals(Vector<double>& residuals,
@@ -439,6 +444,7 @@ namespace oomph
       return Average_value[i];
     }
 
+
     /// \short Return the average values
     const double& average_value(const unsigned& i) const
     {
@@ -476,6 +482,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // Setup the face information for all the elements
     /// If the boolean flag is set to true then the data from neighbouring
     /// faces will be added as external data to the bulk element.
@@ -509,6 +516,7 @@ namespace oomph
       }
     }
   };
+
 
   //======================================================
   /// \short Base class for slope limiters
@@ -545,8 +553,8 @@ namespace oomph
     ///\short Constructor takes a value for the modification parameter M
     ///(default to zero --- classic min mod) and a flag to indicate whether
     /// we use MUSCL limiting or not --- default false
-    MinModLimiter(const double& m = 0.0, const bool& muscl = false) :
-      SlopeLimiter(), M(m), MUSCL(muscl)
+    MinModLimiter(const double& m = 0.0, const bool& muscl = false)
+      : SlopeLimiter(), M(m), MUSCL(muscl)
     {
     }
 
@@ -556,6 +564,7 @@ namespace oomph
     /// The basic minmod function
     double minmod(Vector<double>& args);
 
+
     /// The modified  minmod function
     double minmodB(Vector<double>& args, const double& h);
 
@@ -563,6 +572,7 @@ namespace oomph
     void limit(const unsigned& i,
                const Vector<DGElement*>& required_element_pt);
   };
+
 
 } // namespace oomph
 #endif

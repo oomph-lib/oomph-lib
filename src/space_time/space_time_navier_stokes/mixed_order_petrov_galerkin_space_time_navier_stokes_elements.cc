@@ -189,6 +189,7 @@ namespace oomph
     } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
   } // End of get_pressure_and_velocity_mass_matrix_diagonal
 
+
   //======================================================================
   /// Compute the vector norm of FEM solution
   //======================================================================
@@ -234,6 +235,7 @@ namespace oomph
       norm[DIM] += pow(interpolated_p_nst(s), 2) * W;
     } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
   } // End of compute_norm
+
 
   //======================================================================
   /// Validate against exact velocity solution at given time. Solution is
@@ -378,6 +380,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, n_plot);
   } // End of compute_error
 
+
   //======================================================================
   /// Validate against exact velocity solution at given time. Solution is
   /// provided via function pointer. Plot at a given number of plot points
@@ -520,6 +523,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, n_plot);
   } // End of compute_error
+
 
   //======================================================================
   /// Validate against exact velocity solution at given time.
@@ -1215,6 +1219,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, n_plot);
   } // End of full_output
 
+
   //==============================================================
   /// Output function for vorticity.
   /// x,y,[z],[omega_x,omega_y,[and/or omega_z]]
@@ -1666,6 +1671,7 @@ namespace oomph
 
   } // End of kin_energy
 
+
   //==========================================================================
   /// \short Get integral of time derivative of kinetic energy over element:
   //==========================================================================
@@ -1747,6 +1753,7 @@ namespace oomph
         }
       }
 
+
       // Loop over directions and add up u du/dt  terms
       double sum = 0.0;
       for (unsigned i = 0; i < DIM; i++)
@@ -1760,6 +1767,7 @@ namespace oomph
     return d_kin_en_dt;
 
   } // End of d_kin_energy_dt
+
 
   //==============================================================
   /// Return pressure integrated over the element
@@ -1805,6 +1813,7 @@ namespace oomph
     return press_int;
   }
 
+
   //==============================================================
   /// Compute the residuals for the associated pressure advection
   /// diffusion problem. Used by the Fp preconditioner.
@@ -1823,6 +1832,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
   } // End of fill_in_generic_pressure_advection_diffusion_contribution_nst
 
+
   //==============================================================
   /// Compute the residuals for the Navier-Stokes
   /// equations; flag=1 (or 0): do (or don't) compute the
@@ -1836,8 +1846,7 @@ namespace oomph
                                               const unsigned& flag)
   {
     // Return immediately if there are no dofs
-    if (ndof() == 0)
-      return;
+    if (ndof() == 0) return;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -2327,6 +2336,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   } // End of get_dresidual_dnodal_coordinates
+
 
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////

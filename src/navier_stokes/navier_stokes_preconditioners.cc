@@ -31,6 +31,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   //======start_of_namespace============================================
   /// Namespace for exact solution for pressure advection diffusion
   /// problem
@@ -95,6 +96,7 @@ namespace oomph
       x[0] = x_vect[0];
       x[1] = x_vect[1];
 
+
       double source = 0.0;
 
       if (Flag == 0)
@@ -126,11 +128,14 @@ namespace oomph
       return source;
     }
 
+
   } // namespace PressureAdvectionDiffusionValidation
+
 
   ////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// Setup the least-squares commutator Navier Stokes preconditioner. This
@@ -165,6 +170,7 @@ namespace oomph
                  << std::endl;
     }
 
+
 #ifdef PARANOID
     // paranoid check that the navier stokes mesh pt has been set
     if (Navier_stokes_mesh_pt == 0)
@@ -176,6 +182,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Set the mesh
     this->set_nmesh(1);
@@ -190,6 +197,7 @@ namespace oomph
     // shout if that can't be done.
     CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
+
 #ifdef PARANOID
     if (cr_matrix_pt == 0)
     {
@@ -202,6 +210,7 @@ namespace oomph
     }
 #endif
 
+
     if (doc_block_matrices)
     {
       std::stringstream junk;
@@ -210,6 +219,7 @@ namespace oomph
       cr_matrix_pt->sparse_indexed_output_with_offset(junk.str());
       oomph_info << "Done output of " << junk.str() << std::endl;
     }
+
 
     // Set up block look up schemes (done automatically in the
     // BlockPreconditioner base class, based on the information
@@ -250,6 +260,7 @@ namespace oomph
       oomph_info << "LSC: block_setup: " << block_setup_time << std::endl;
     }
 
+
     // determine whether the F preconditioner is a block preconditioner (and
     // therefore a subsidiary preconditioner)
     BlockPreconditioner<CRDoubleMatrix>* F_block_preconditioner_pt =
@@ -285,6 +296,7 @@ namespace oomph
       oomph_info << "Done output of " << junk.str() << std::endl;
     }
 
+
     // get the inverse velocity and pressure mass matrices
     CRDoubleMatrix* inv_v_mass_pt = 0;
     CRDoubleMatrix* inv_p_mass_pt = 0;
@@ -317,6 +329,7 @@ namespace oomph
                  << std::endl;
     }
 
+
     if (doc_block_matrices)
     {
       std::stringstream junk;
@@ -324,6 +337,7 @@ namespace oomph
       inv_v_mass_pt->sparse_indexed_output_with_offset(junk.str());
       oomph_info << "Done output of " << junk.str() << std::endl;
     }
+
 
     // Get gradient matrix Bt
     CRDoubleMatrix* bt_pt = new CRDoubleMatrix;
@@ -348,6 +362,7 @@ namespace oomph
       bt_pt->sparse_indexed_output_with_offset(junk.str());
       oomph_info << "Done output of " << junk.str() << std::endl;
     }
+
 
     // Build pressure Poisson matrix
     CRDoubleMatrix* p_matrix_pt = new CRDoubleMatrix;
@@ -396,6 +411,7 @@ namespace oomph
       oomph_info << "LSC: t_p_time (matrix multiplication): " << t_p_time
                  << std::endl;
     }
+
 
     // Build the matvec operator for QBt
     double t_QBt_MV_start = TimingHelpers::timer();
@@ -462,6 +478,7 @@ namespace oomph
       fp_qp_inv_pt = 0;
     }
 
+
     // Get momentum block F
     CRDoubleMatrix* f_pt = new CRDoubleMatrix;
     double t_get_F_start = TimingHelpers::timer();
@@ -497,6 +514,7 @@ namespace oomph
                  << std::endl;
     }
 
+
     // if F is a block preconditioner then we can delete the F matrix
     if (F_preconditioner_is_block_preconditioner)
     {
@@ -520,6 +538,7 @@ namespace oomph
       oomph_info << "LSC: get_block t_get_Bt_time2: " << t_get_Bt_time2
                  << std::endl;
     }
+
 
     // form the matrix vector operator for Bt
     double t_Bt_MV_start = TimingHelpers::timer();
@@ -578,6 +597,7 @@ namespace oomph
       oomph_info << "LSC: p_prec setup time: " << t_p_prec_time << std::endl;
     }
 
+
     // Set up solver for solution of system with momentum matrix
     // ----------------------------------------------------------
 
@@ -630,6 +650,7 @@ namespace oomph
     // come here next...
     Preconditioner_has_been_setup = true;
   }
+
 
   //=======================================================================
   /// Apply preconditioner to r.
@@ -710,6 +731,7 @@ namespace oomph
       temp_vec.clear();
       QBt_mat_vec_pt->multiply_transpose(another_temp_vec, temp_vec);
 
+
       // NOTE: The vector temp_vec now contains E P^{-1} r_p
 
       // Solve second pressure Poisson system using preconditioner_solve
@@ -760,6 +782,7 @@ namespace oomph
     temp_vec -= another_temp_vec;
     return_block_vector(1, temp_vec, z);
 
+
     // Step 2 - apply preconditioner to velocity unknowns (block 0)
     // ------------------------------------------------------------
 
@@ -808,6 +831,7 @@ namespace oomph
       return_block_vector(0, temp_vec, z);
     }
   }
+
 
   //========================================================================
   /// Helper function to assemble the inverse diagonals of the pressure and
@@ -898,8 +922,7 @@ namespace oomph
 
       // Do the two blocks (0: veloc; 1: press)
       unsigned max_block = 0;
-      if (!Use_LSC)
-        max_block = 1;
+      if (!Use_LSC) max_block = 1;
       for (unsigned block_index = 0; block_index <= max_block; block_index++)
       {
         // Local working variables: Default to velocity
@@ -911,6 +934,7 @@ namespace oomph
           v_or_p_first_row = p_first_row;
           v_or_p_values = p_values;
         }
+
 
         // the diagonal mass matrix contributions that have been
         // classified and should be sent to another processor
@@ -953,8 +977,7 @@ namespace oomph
             Vector<double> el_pmm_diagonal(el_dof, 0.0);
 
             unsigned which_one = 2;
-            if (block_index == 1)
-              which_one = 1;
+            if (block_index == 1) which_one = 1;
 
             NavierStokesElementWithDiagonalMassMatrices* cast_el_pt = 0;
             cast_el_pt =
@@ -1485,8 +1508,7 @@ namespace oomph
 
       // Fp needs pressure and velocity mass matrices
       unsigned which_one = 0;
-      if (Use_LSC)
-        which_one = 2;
+      if (Use_LSC) which_one = 2;
 
       // get the contribution for each element
       for (unsigned e = 0; e < n_el; e++)
@@ -1679,5 +1701,6 @@ namespace oomph
       }
     }
   }
+
 
 } // namespace oomph

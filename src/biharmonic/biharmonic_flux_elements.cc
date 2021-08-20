@@ -31,6 +31,7 @@
 // oomph-lib includes
 #include "biharmonic_flux_elements.h"
 
+
 namespace oomph
 {
   //=============================================================================
@@ -43,10 +44,8 @@ namespace oomph
   //=============================================================================
   template<>
   BiharmonicFluxElement<2>::BiharmonicFluxElement(
-    FiniteElement* const& bulk_el_pt,
-    const int& face_index,
-    const unsigned& b) :
-    FaceGeometry<BiharmonicElement<2>>(), FaceElement()
+    FiniteElement* const& bulk_el_pt, const int& face_index, const unsigned& b)
+    : FaceGeometry<BiharmonicElement<2>>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
     // to its nodes (by referring to the appropriate nodes in the bulk
@@ -63,6 +62,7 @@ namespace oomph
     //
     Boundary = b;
   }
+
 
   //=============================================================================
   /// \short Calculate the Jacobian of the mapping between local and global
@@ -114,6 +114,7 @@ namespace oomph
     // Return the Jacobian
     return dtds_t;
   }
+
 
   //=============================================================================
   /// \short Compute the elemental contribution to the residual vector for 2D
@@ -220,6 +221,7 @@ namespace oomph
       double W = w * J;
 
       // Now add to the appropriate equations
+
 
       // Loop over the test function nodes
       for (unsigned n = 0; n < n_node; n++)

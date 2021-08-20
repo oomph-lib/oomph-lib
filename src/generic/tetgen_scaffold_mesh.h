@@ -30,7 +30,8 @@
 #include "Telements.h"
 
 // Include the data structure from tetgen
-#include "oomph_tetgen.h"
+//#include "../../external_src/oomph_tetgen/tetgen.h"
+#include "oomph_tetgen/tetgen.h"
 
 namespace oomph
 {
@@ -112,6 +113,7 @@ namespace oomph
     {
       return Element_attribute[e];
     }
+
 
   protected:
     /// \short Storage for the number of global faces

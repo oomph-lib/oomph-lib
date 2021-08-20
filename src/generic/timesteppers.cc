@@ -29,6 +29,7 @@
 // Required so that we can delete the predictor.
 #include "explicit_timesteppers.h"
 
+
 namespace oomph
 {
   /// Destructor for time stepper, in .cc file so that we don't have to
@@ -39,6 +40,7 @@ namespace oomph
     delete Explicit_predictor_pt;
     Explicit_predictor_pt = 0;
   }
+
 
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -63,11 +65,13 @@ namespace oomph
   template class Steady<3>;
   template class Steady<4>;
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   // Weights for specific bdf schemes
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Assign the values of the weights
@@ -79,6 +83,7 @@ namespace oomph
     Weight(1, 0) = 1.0 / dt;
     Weight(1, 1) = -1.0 / dt;
   }
+
 
   //======================================================================
   /// Set the predictor weights (Gresho and Sani pg. 270)
@@ -99,6 +104,7 @@ namespace oomph
       Predictor_weight[2] = dt;
     }
   }
+
 
   //=======================================================================
   /// Calculate the predicted values and store them at the appropriate
@@ -134,6 +140,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Calculate predictions for the positions
   //=======================================================================
@@ -166,6 +173,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Set the error weights  (Gresho and Sani pg. 270)
   //=======================================================================
@@ -193,6 +201,7 @@ namespace oomph
       return 0.0;
     }
   }
+
 
   //=========================================================================
   /// Function to calculate the error in the data value i
@@ -326,6 +335,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Function that sets the error weights
   //=======================================================================
@@ -343,6 +353,7 @@ namespace oomph
          2.0 * pow((dtprev / dt), 3.0));
     }
   }
+
 
   //===================================================================
   /// Function to compute the error in position i at node
@@ -363,6 +374,7 @@ namespace oomph
     }
   }
 
+
   //=========================================================================
   /// Function to calculate the error in the data value i
   //=========================================================================
@@ -381,6 +393,7 @@ namespace oomph
       return 0.0;
     }
   }
+
 
   //====================================================================
   /// Assign the values of the weights; pass the value of the timestep
@@ -407,6 +420,7 @@ namespace oomph
     Weight(1, 3) = -16.0 / 12.0 / dt;
     Weight(1, 4) = 3.0 / 12.0 / dt;
   }
+
 
   //======================================================================
   /// Calculate the predictor weights
@@ -462,6 +476,7 @@ namespace oomph
     return 0.0;
   }
 
+
   //=========================================================================
   /// Function to calculate the error in the data value i
   //=========================================================================
@@ -474,9 +489,11 @@ namespace oomph
     return 0.0;
   }
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// \short Initialise the time-history for the values,
@@ -505,6 +522,7 @@ namespace oomph
       data_pt->set_value(NSTEPS + 2, j, 0.0);
     }
   }
+
 
   //=========================================================================
   /// \short Initialise the time-history for the values,
@@ -540,6 +558,7 @@ namespace oomph
       }
     }
   }
+
 
   //=========================================================================
   /// \short  Initialise the time-history for the Data values,
@@ -659,6 +678,7 @@ namespace oomph
     }
   }
 
+
   //=========================================================================
   /// \short  Initialise the time-history for the Data values,
   /// so that the Newmark representations for current veloc and
@@ -673,6 +693,7 @@ namespace oomph
   {
     // Set weights
     set_weights();
+
 
 #ifdef PARANOID
     // Check if the 3 vectors of functions have the same size
@@ -781,6 +802,7 @@ namespace oomph
     }
   }
 
+
   //=========================================================================
   /// \short  First step in a two-stage procedure to assign
   /// the history values for the Newmark scheme so
@@ -835,6 +857,7 @@ namespace oomph
 
           data_pt->set_value(NSTEPS + 2, j, data_pt->value(j));
           break;
+
 
           // None other are possible!
         default:
@@ -899,6 +922,7 @@ namespace oomph
 
       matrix.solve(vect);
 
+
       // Now assign the discrete coefficients
       // so that the Newmark scheme returns the correct
       // results for the present values, and 1st and 2nd derivatives:
@@ -916,6 +940,7 @@ namespace oomph
       data_pt->set_value(NSTEPS + 2, j, vect[1]);
     }
   }
+
 
   //=========================================================================
   /// \short This function updates the Data's time history so that
@@ -1037,6 +1062,7 @@ namespace oomph
       dt * (1.0 - Beta1) + Beta1 * dt * Weight(2, NSTEPS + 2);
   }
 
+
   //===================================================================
   // Force build of templates: These are all the ones that might be
   // needed if Newmark is used together with BDF schemes (they require
@@ -1046,6 +1072,7 @@ namespace oomph
   template class Newmark<2>;
   template class Newmark<3>;
   template class Newmark<4>;
+
 
   //=========================================================================
   /// \short This function updates the Data's time history so that
@@ -1074,6 +1101,7 @@ namespace oomph
         accel[i] += this->weight(2, t) * data_pt->value(t, i);
       }
     }
+
 
     // Loop over values
     for (unsigned j = 0; j < n_value; j++)
@@ -1148,6 +1176,7 @@ namespace oomph
       }
     }
   }
+
 
   //=========================================================================
   /// Set weights
@@ -1272,5 +1301,6 @@ namespace oomph
   template class NewmarkBDF<1>;
   template class NewmarkBDF<2>;
   template class NewmarkBDF<4>;
+
 
 } // namespace oomph

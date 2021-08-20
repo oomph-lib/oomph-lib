@@ -56,16 +56,16 @@ namespace oomph
                                     double& f);
 
     /// Constructor
-    PoroelasticityEquations() :
-      Elasticity_tensor_pt(0),
-      Force_solid_fct_pt(0),
-      Force_fluid_fct_pt(0),
-      Mass_source_fct_pt(0),
-      Lambda_sq_pt(&Default_lambda_sq_value),
-      Density_ratio_pt(&Default_density_ratio_value),
-      K_inv_pt(&Default_k_inv_value),
-      Alpha_pt(&Default_alpha_value),
-      Porosity_pt(&Default_porosity_value)
+    PoroelasticityEquations()
+      : Elasticity_tensor_pt(0),
+        Force_solid_fct_pt(0),
+        Force_fluid_fct_pt(0),
+        Mass_source_fct_pt(0),
+        Lambda_sq_pt(&Default_lambda_sq_value),
+        Density_ratio_pt(&Default_density_ratio_value),
+        K_inv_pt(&Default_k_inv_value),
+        Alpha_pt(&Default_alpha_value),
+        Porosity_pt(&Default_porosity_value)
     {
     }
 

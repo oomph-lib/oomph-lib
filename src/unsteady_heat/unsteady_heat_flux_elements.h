@@ -26,6 +26,7 @@
 // Header file for elements that are used to apply prescribed flux
 // boundary conditions to the UnsteadyHeat equations
 
+
 #ifndef OOMPH_UNSTEADY_HEAT_FLUX_ELEMENTS_HEADER
 #define OOMPH_UNSTEADY_HEAT_FLUX_ELEMENTS_HEADER
 
@@ -40,6 +41,7 @@
 // oomph-lib ncludes
 #include "generic/Qelements.h"
 
+
 namespace oomph
 {
   //======================================================================
@@ -49,9 +51,8 @@ namespace oomph
   /// policy class.
   //======================================================================
   template<class ELEMENT>
-  class UnsteadyHeatFluxElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class UnsteadyHeatFluxElement : public virtual FaceGeometry<ELEMENT>,
+                                  public virtual FaceElement
   {
   public:
     /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
@@ -59,6 +60,7 @@ namespace oomph
     typedef void (*UnsteadyHeatPrescribedFluxFctPt)(const double& time,
                                                     const Vector<double>& x,
                                                     double& flux);
+
 
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to be created
@@ -97,6 +99,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
+
     /// Compute the element's residual vector and its Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -105,6 +108,7 @@ namespace oomph
       fill_in_generic_residual_contribution_ust_heat_flux(
         residuals, jacobian, 1);
     }
+
 
     /// \short Specify the value of nodal zeta from the face geometry:
     /// The "global" intrinsic coordinate of the element when
@@ -187,11 +191,13 @@ namespace oomph
       }
     }
 
+
   private:
     /// \short Compute the element residual vector.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_ust_heat_flux(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
+
 
     /// Function pointer to the (global) prescribed-flux function
     UnsteadyHeatPrescribedFluxFctPt Flux_fct_pt;
@@ -213,8 +219,8 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   UnsteadyHeatFluxElement<ELEMENT>::UnsteadyHeatFluxElement(
-    FiniteElement* const& bulk_el_pt, const int& face_index) :
-    FaceGeometry<ELEMENT>(), FaceElement()
+    FiniteElement* const& bulk_el_pt, const int& face_index)
+    : FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
     // to its nodes (by referring to the appropriate nodes in the bulk
@@ -358,6 +364,7 @@ namespace oomph
     }
   }
 
+
   //===========================================================================
   /// Compute the element's residual vector and the (zero) Jacobian matrix.
   //===========================================================================
@@ -449,6 +456,7 @@ namespace oomph
       }
     }
   }
+
 
 } // namespace oomph
 

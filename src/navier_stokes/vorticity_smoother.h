@@ -33,187 +33,188 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 //===============================================================
 // WARNING: THIS IS WORK IN PROGRESS -- ONLY USED IN 2D SO FAR
 //===============================================================
-
-//===========================================================================
-/// Namespace with helper functions for (2D) vorticity (and derivatives)
-/// recovery
-//===========================================================================
-namespace VorticityRecoveryHelpers
-{
-  //========================================================================
-  /// \short Class to indicate which derivatives of the vorticity/
-  /// velocity we want to recover. We choose to immediately instantiate
-  /// an object of this class by dropping the semi-colon after the class
-  /// description.
-  //========================================================================
-  class RecoveryHelper
-  {
-  public:
-    /// Constructor
-    RecoveryHelper()
-    {
-      // Set the default (max) order of vorticity derivative to recover
-      Maximum_order_of_vorticity_derivative = -1;
-
-      // Set the default (max) order of velocity derivative to recover
-      Maximum_order_of_velocity_derivative = 0;
-    }
-
-    /// The maximum order of derivatives calculated in the vorticity recovery
-    int maximum_order_of_vorticity_derivative() const
-    {
-      // Return the appropriate value
-      return Maximum_order_of_vorticity_derivative;
-    } // End of get_maximum_order_of_vorticity_derivative
-
-    /// The maximum order of derivatives calculated in the velocity recovery
-    int maximum_order_of_velocity_derivative() const
-    {
-      // Return the appropriate value
-      return Maximum_order_of_velocity_derivative;
-    } // End of get_maximum_order_of_velocity_derivative
-
-    /// The maximum order of derivatives calculated in the vorticity recovery
-    void set_maximum_order_of_vorticity_derivative(const int& max_deriv)
-    {
-      // Make sure the user has supplied a valid input value
-      if ((max_deriv < -1) || (max_deriv > 3))
-      {
-        // Throw an error
-        throw OomphLibError("Invalid input value! Should be between -1 and 3!",
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-
-      // Return the appropriate value
-      Maximum_order_of_vorticity_derivative = max_deriv;
-
-      // Calculate the value of Number_of_values_per_field with the updated
-      // value of Maximum_order_of_vorticity_derivative
-      calculate_number_of_values_per_field();
-    } // End of set_maximum_order_of_vorticity_derivative
-
-    /// The maximum order of derivatives calculated in the velocity recovery
-    void set_maximum_order_of_velocity_derivative(const int& max_deriv)
-    {
-      // Make sure the user has supplied a valid input value. Note, unlike the
-      // vorticity, we always output the zeroth derivative of the velocity
-      // so we don't use -1 as an input
-      if ((max_deriv < 0) || (max_deriv > 1))
-      {
-        // Throw an error
-        throw OomphLibError("Invalid input value! Should be between 0 and 3!",
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-
-      // Return the appropriate value
-      Maximum_order_of_velocity_derivative = max_deriv;
-
-      // Calculate the value of Number_of_values_per_field with the updated
-      // value of Maximum_order_of_velocity_derivative
-      calculate_number_of_values_per_field();
-    } // End of set_maximum_order_of_vorticity_derivative
-
-    /// \short Calculates the number of values per field given the number of
-    /// vorticity and velocity derivatives to recover (stored as private data)
-    void calculate_number_of_values_per_field()
-    {
-      // Output: u,v,p
-      Number_of_values_per_field = 3;
-
-      // Loop over the vorticity derivatives
-      for (unsigned i = 0;
-           i < unsigned(Maximum_order_of_vorticity_derivative + 1);
-           i++)
-      {
-        // Update the number of values per field
-        Number_of_values_per_field += npartial_derivative(i);
-      }
-
-      // Loop over the velocity derivatives
-      for (unsigned i = 1;
-           i < unsigned(Maximum_order_of_velocity_derivative + 1);
-           i++)
-      {
-        // Update the number of values per field
-        Number_of_values_per_field += 2 * npartial_derivative(i);
-      }
-    } // End of calculate_number_of_values_per_field
-
-    /// \short Helper function that determines the number of n-th order partial
-    /// derivatives in d-dimensions. Specifically there are (n+d-1)(choose)(d-1)
-    /// possible n-th order partial derivatives in d-dimensions. Implementation
-    /// makes use of the code found at:
-    ///    www.geeksforgeeks.org/space-and-time-efficient-binomial-coefficient/
-    unsigned npartial_derivative(const unsigned& n) const
-    {
-      // This will only work in 2D so n_dim is always 2
-      unsigned n_dim = 2;
-
-      // Calculate m
-      unsigned n_bins = n + n_dim - 1;
-
-      // Calculate k
-      unsigned k = n_dim - 1;
-
-      // Initialise the result
-      unsigned value = 1;
-
-      // Since C(n_bins,k)=C(n_bins,n_bins-k)
-      if (k > n_bins - k)
-      {
-        // Replace k
-        k = n_bins - k;
-      }
-
-      // Calculate [n_bins*(n_bins-1)*...*(n_bins-k+1)]/[k*(k-1)*...*1]
-      for (unsigned i = 0; i < k; ++i)
-      {
-        // First update
-        value *= (n_bins - i);
-
-        // Second update
-        value /= (i + 1);
-      }
-
-      // Return the result
-      return value;
-    } // End of npartial_derivative
-
-    /// Number of continuously interpolated values:
-    unsigned ncont_interpolated_values() const
-    {
-      // Return the number of values used per field
-      return Number_of_values_per_field;
-    } // End of ncont_interpolated_values
-
-  private:
-    /// \short Number of values per field; how many of the following do we want:
-    /// u,v,p,omega,d/dx,d/dy,
-    /// d^2/dx^2,d^2/dxdy,d^2/dy^2,
-    /// d^3/dx^3,d^3/dx^2dy,d^3/dxdy^2,d^3/dy^3,
-    /// du/dx,du/dy,dv/dx,dv/dy
-    unsigned Number_of_values_per_field;
-
-    /// \short Maximum number of derivatives to retain in the vorticity
-    /// recovery. Note, the value -1 means we ONLY output u,v[,w],p.
-    int Maximum_order_of_vorticity_derivative;
-
-    /// \short Maximum number of derivatives to retain in the velocity
-    /// recovery. Note, the value 0 means we don't calculate the
-    /// derivatives of the velocity
-    int Maximum_order_of_velocity_derivative;
-  } Recovery_helper;
-
-} // namespace VorticityRecoveryHelpers
-
-// namespace extension
 namespace oomph
 {
+  //===========================================================================
+  /// Namespace with helper functions for (2D) vorticity (and derivatives)
+  /// recovery
+  //===========================================================================
+  namespace VorticityRecoveryHelpers
+  {
+    //========================================================================
+    /// \short Class to indicate which derivatives of the vorticity/
+    /// velocity we want to recover. We choose to immediately instantiate
+    /// an object of this class by dropping the semi-colon after the class
+    /// description.
+    //========================================================================
+    class RecoveryHelper
+    {
+    public:
+      /// Constructor
+      RecoveryHelper()
+      {
+        // Set the default (max) order of vorticity derivative to recover
+        Maximum_order_of_vorticity_derivative = -1;
+
+        // Set the default (max) order of velocity derivative to recover
+        Maximum_order_of_velocity_derivative = 0;
+      }
+
+      /// The maximum order of derivatives calculated in the vorticity recovery
+      int maximum_order_of_vorticity_derivative() const
+      {
+        // Return the appropriate value
+        return Maximum_order_of_vorticity_derivative;
+      } // End of get_maximum_order_of_vorticity_derivative
+
+      /// The maximum order of derivatives calculated in the velocity recovery
+      int maximum_order_of_velocity_derivative() const
+      {
+        // Return the appropriate value
+        return Maximum_order_of_velocity_derivative;
+      } // End of get_maximum_order_of_velocity_derivative
+
+      /// The maximum order of derivatives calculated in the vorticity recovery
+      void set_maximum_order_of_vorticity_derivative(const int& max_deriv)
+      {
+        // Make sure the user has supplied a valid input value
+        if ((max_deriv < -1) || (max_deriv > 3))
+        {
+          // Throw an error
+          throw OomphLibError(
+            "Invalid input value! Should be between -1 and 3!",
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+        }
+
+        // Return the appropriate value
+        Maximum_order_of_vorticity_derivative = max_deriv;
+
+        // Calculate the value of Number_of_values_per_field with the updated
+        // value of Maximum_order_of_vorticity_derivative
+        calculate_number_of_values_per_field();
+      } // End of set_maximum_order_of_vorticity_derivative
+
+      /// The maximum order of derivatives calculated in the velocity recovery
+      void set_maximum_order_of_velocity_derivative(const int& max_deriv)
+      {
+        // Make sure the user has supplied a valid input value. Note, unlike the
+        // vorticity, we always output the zeroth derivative of the velocity
+        // so we don't use -1 as an input
+        if ((max_deriv < 0) || (max_deriv > 1))
+        {
+          // Throw an error
+          throw OomphLibError("Invalid input value! Should be between 0 and 3!",
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+
+        // Return the appropriate value
+        Maximum_order_of_velocity_derivative = max_deriv;
+
+        // Calculate the value of Number_of_values_per_field with the updated
+        // value of Maximum_order_of_velocity_derivative
+        calculate_number_of_values_per_field();
+      } // End of set_maximum_order_of_vorticity_derivative
+
+      /// \short Calculates the number of values per field given the number of
+      /// vorticity and velocity derivatives to recover (stored as private data)
+      void calculate_number_of_values_per_field()
+      {
+        // Output: u,v,p
+        Number_of_values_per_field = 3;
+
+        // Loop over the vorticity derivatives
+        for (unsigned i = 0;
+             i < unsigned(Maximum_order_of_vorticity_derivative + 1);
+             i++)
+        {
+          // Update the number of values per field
+          Number_of_values_per_field += npartial_derivative(i);
+        }
+
+        // Loop over the velocity derivatives
+        for (unsigned i = 1;
+             i < unsigned(Maximum_order_of_velocity_derivative + 1);
+             i++)
+        {
+          // Update the number of values per field
+          Number_of_values_per_field += 2 * npartial_derivative(i);
+        }
+      } // End of calculate_number_of_values_per_field
+
+      /// \short Helper function that determines the number of n-th order
+      /// partial derivatives in d-dimensions. Specifically there are
+      /// (n+d-1)(choose)(d-1) possible n-th order partial derivatives in
+      /// d-dimensions. Implementation makes use of the code found at:
+      ///    www.geeksforgeeks.org/space-and-time-efficient-binomial-coefficient/
+      unsigned npartial_derivative(const unsigned& n) const
+      {
+        // This will only work in 2D so n_dim is always 2
+        unsigned n_dim = 2;
+
+        // Calculate m
+        unsigned n_bins = n + n_dim - 1;
+
+        // Calculate k
+        unsigned k = n_dim - 1;
+
+        // Initialise the result
+        unsigned value = 1;
+
+        // Since C(n_bins,k)=C(n_bins,n_bins-k)
+        if (k > n_bins - k)
+        {
+          // Replace k
+          k = n_bins - k;
+        }
+
+        // Calculate [n_bins*(n_bins-1)*...*(n_bins-k+1)]/[k*(k-1)*...*1]
+        for (unsigned i = 0; i < k; ++i)
+        {
+          // First update
+          value *= (n_bins - i);
+
+          // Second update
+          value /= (i + 1);
+        }
+
+        // Return the result
+        return value;
+      } // End of npartial_derivative
+
+      /// Number of continuously interpolated values:
+      unsigned ncont_interpolated_values() const
+      {
+        // Return the number of values used per field
+        return Number_of_values_per_field;
+      } // End of ncont_interpolated_values
+
+    private:
+      /// \short Number of values per field; how many of the following do we
+      /// want: u,v,p,omega,d/dx,d/dy, d^2/dx^2,d^2/dxdy,d^2/dy^2,
+      /// d^3/dx^3,d^3/dx^2dy,d^3/dxdy^2,d^3/dy^3,
+      /// du/dx,du/dy,dv/dx,dv/dy
+      unsigned Number_of_values_per_field;
+
+      /// \short Maximum number of derivatives to retain in the vorticity
+      /// recovery. Note, the value -1 means we ONLY output u,v[,w],p.
+      int Maximum_order_of_vorticity_derivative;
+
+      /// \short Maximum number of derivatives to retain in the velocity
+      /// recovery. Note, the value 0 means we don't calculate the
+      /// derivatives of the velocity
+      int Maximum_order_of_velocity_derivative;
+    } Recovery_helper;
+
+
+  } // namespace VorticityRecoveryHelpers
+
+
   //===============================================
   /// Overloaded element that allows projection of
   /// vorticity.
@@ -446,6 +447,7 @@ namespace oomph
       // We'll never get here but need to return something
       return container_id;
     } // End of vorticity_dof_to_container_id
+
 
     /// \short Helper function that, given the local dof number of the i-th
     /// vorticity or velocity derivative, returns the index in the container
@@ -1235,6 +1237,7 @@ namespace oomph
       this->write_tecplot_zone_footer(outfile, nplot);
     } // End of output
 
+
     /// Get raw derivative of velocity
     void get_raw_velocity_deriv(const Vector<double>& s,
                                 Vector<double>& dveloc_dx) const
@@ -1445,6 +1448,7 @@ namespace oomph
       } // for (unsigned l=0;l<n_node;l++)
     } // End of get_raw_vorticity_second_deriv
 
+
     /// Get raw derivative of smoothed derivative vorticity
     /// [0]: d^2/dx^2, [1]: d^2/dxdy, [2]: d^2/dy^2
     void get_raw_vorticity_second_deriv(const Vector<double>& s,
@@ -1545,6 +1549,7 @@ namespace oomph
           this->nodal_value(l, Smoothed_vorticity_index + 5) * dpsifdx(l, 1);
       }
     } // End of get_raw_vorticity_third_deriv
+
 
     /// Get raw derivative of smoothed derivative vorticity
     /// [0]: d^3/dx^3, [1]: d^3/dx^2dy, [2]: d^3/dxdy^2, [3]: d^3/dy^3,
@@ -1730,6 +1735,7 @@ namespace oomph
       return norm_squared;
     } // End of vorticity_error_squared
 
+
     /// \short Compute smoothed vorticity and its derivatives
     void vorticity_and_its_derivs(const Vector<double>& s,
                                   Vector<Vector<double>>& vort_and_derivs) const
@@ -1816,841 +1822,855 @@ namespace oomph
     /// derivs (for validation).
     ExactVorticityFctPt Exact_vorticity_fct_pt;
   };
-} // End of namespace oomph
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
 
-//========================================================
-/// Smoother for vorticity in 2D
-//========================================================
-template<class ELEMENT>
-class VorticitySmoother
-{
-public:
-  /// Constructor: Set order of recovery shape functions
-  VorticitySmoother(const unsigned& recovery_order) :
-    Recovery_order(recovery_order)
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+
+
+  //========================================================
+  /// Smoother for vorticity in 2D
+  //========================================================
+  template<class ELEMENT>
+  class VorticitySmoother
   {
-  }
-
-  /// Broken copy constructor
-  VorticitySmoother(const VorticitySmoother&)
-  {
-    BrokenCopy::broken_copy("VorticitySmoother");
-  }
-
-  /// Broken assignment operator
-  void operator=(const VorticitySmoother&)
-  {
-    BrokenCopy::broken_assign("VorticitySmoother");
-  }
-
-  /// Empty virtual destructor
-  virtual ~VorticitySmoother() {}
-
-  /// Access function for order of recovery polynomials
-  unsigned& recovery_order()
-  {
-    // Return the order of recovery
-    return Recovery_order;
-  }
-
-  /// \short Recovery shape functions as functions of the global, Eulerian
-  /// coordinate x of dimension dim. The recovery shape functions are complete
-  /// polynomials of the order specified by Recovery_order.
-  void shape_rec(const Vector<double>& x, Vector<double>& psi_r)
-  {
-    // Create an ostringstream object to create a string
-    std::ostringstream error_stream;
-
-    // Find order of recovery shape functions
-    switch (recovery_order())
+  public:
+    /// Constructor: Set order of recovery shape functions
+    VorticitySmoother(const unsigned& recovery_order)
+      : Recovery_order(recovery_order)
     {
-      case 1:
-        // Complete linear polynomial in 2D:
-        psi_r[0] = 1.0;
-        psi_r[1] = x[0];
-        psi_r[2] = x[1];
-        break;
-
-      case 2:
-        // Complete quadratic polynomial in 2D:
-        psi_r[0] = 1.0;
-        psi_r[1] = x[0];
-        psi_r[2] = x[1];
-        psi_r[3] = x[0] * x[0];
-        psi_r[4] = x[0] * x[1];
-        psi_r[5] = x[1] * x[1];
-        break;
-
-      case 3:
-        // Complete cubic polynomial in 2D:
-        psi_r[0] = 1.0;
-        psi_r[1] = x[0];
-        psi_r[2] = x[1];
-        psi_r[3] = x[0] * x[0];
-        psi_r[4] = x[0] * x[1];
-        psi_r[5] = x[1] * x[1];
-        psi_r[6] = x[0] * x[0] * x[0];
-        psi_r[7] = x[0] * x[0] * x[1];
-        psi_r[8] = x[0] * x[1] * x[1];
-        psi_r[9] = x[1] * x[1] * x[1];
-        break;
-
-      default:
-        // Create an error message for this case
-        error_stream << "Recovery shape functions for recovery order "
-                     << recovery_order()
-                     << " haven't yet been implemented for 2D" << std::endl;
-
-        // Throw an error
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-  } // End of shape_rec
-
-  /// Integation scheme associated with the recovery shape functions
-  /// must be of sufficiently high order to integrate the mass matrix
-  /// associated with the recovery shape functions. The argument is the
-  /// dimension of the elements.
-  /// The integration is performed locally over the elements, so the
-  /// integration scheme does depend on the geometry of the element.
-  /// The type of element is specified by the boolean which is
-  /// true if elements in the patch are QElements and false if they are
-  /// TElements (will need change if we ever have other element types)
-  Integral* integral_rec(const bool& is_q_mesh)
-  {
-    // Create an ostringstream object to create a string
-    std::ostringstream error_stream;
-
-    //----
-    // 2D:
-    //----
-    /// Find order of recovery shape functions
-    switch (recovery_order())
-    {
-      case 1:
-        // Complete linear polynomial in 2D:
-        if (is_q_mesh)
-        {
-          // Return the appropriate Gauss integration scheme
-          return (new Gauss<2, 2>);
-        }
-        else
-        {
-          // Return the appropriate Gauss integration scheme
-          return (new TGauss<2, 2>);
-        }
-        break;
-
-      case 2:
-        // Complete quadratic polynomial in 2D:
-        if (is_q_mesh)
-        {
-          // Return the appropriate Gauss integration scheme
-          return (new Gauss<2, 3>);
-        }
-        else
-        {
-          // Return the appropriate Gauss integration scheme
-          return (new TGauss<2, 3>);
-        }
-        break;
-
-      case 3:
-        // Complete cubic polynomial in 2D:
-        if (is_q_mesh)
-        {
-          // Return the appropriate Gauss integration scheme
-          return (new Gauss<2, 4>);
-        }
-        else
-        {
-          // Return the appropriate Gauss integration scheme
-          return (new TGauss<2, 4>);
-        }
-        break;
-
-      default:
-        // Create an error messaage
-        error_stream << "Recovery shape functions for recovery order "
-                     << recovery_order()
-                     << " haven't yet been implemented for 2D" << std::endl;
-
-        // Throw an error
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    // Dummy return (never get here)
-    return 0;
-  } // End of integral_rec
-
-  /// \short Setup patches: For each vertex node pointed to by nod_pt,
-  /// adjacent_elements_pt[nod_pt] contains the pointer to the vector that
-  /// contains the pointers to the elements that the node is part of.
-  /// Also returns a Vector of vertex nodes for use in get_element_errors.
-  void setup_patches(Mesh*& mesh_pt,
-                     std::map<Node*, Vector<ELEMENT*>*>& adjacent_elements_pt,
-                     Vector<Node*>& vertex_node_pt)
-  {
-    // Clear: hierher should we do this in Z2 as well?
-    adjacent_elements_pt.clear();
-
-    // Auxiliary map that contains element-adjacency for ALL nodes
-    std::map<Node*, Vector<ELEMENT*>*> aux_adjacent_elements_pt;
-
-#ifdef PARANOID
-    // Check if all elements request the same recovery order
-    unsigned ndisagree = 0;
-#endif
-
-    // Loop over all elements to setup adjacency for all nodes.
-    // Need to do this because midside nodes can be corner nodes for
-    // adjacent smaller elements! Admittedly, the inclusion of interior
-    // nodes is wasteful...
-    unsigned nelem = mesh_pt->nelement();
-    for (unsigned e = 0; e < nelem; e++)
+    /// Broken copy constructor
+    VorticitySmoother(const VorticitySmoother&)
     {
-      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
+      BrokenCopy::broken_copy("VorticitySmoother");
+    }
+
+    /// Broken assignment operator
+    void operator=(const VorticitySmoother&)
+    {
+      BrokenCopy::broken_assign("VorticitySmoother");
+    }
+
+    /// Empty virtual destructor
+    virtual ~VorticitySmoother() {}
+
+    /// Access function for order of recovery polynomials
+    unsigned& recovery_order()
+    {
+      // Return the order of recovery
+      return Recovery_order;
+    }
+
+    /// \short Recovery shape functions as functions of the global, Eulerian
+    /// coordinate x of dimension dim. The recovery shape functions are complete
+    /// polynomials of the order specified by Recovery_order.
+    void shape_rec(const Vector<double>& x, Vector<double>& psi_r)
+    {
+      // Create an ostringstream object to create a string
+      std::ostringstream error_stream;
+
+      // Find order of recovery shape functions
+      switch (recovery_order())
+      {
+        case 1:
+          // Complete linear polynomial in 2D:
+          psi_r[0] = 1.0;
+          psi_r[1] = x[0];
+          psi_r[2] = x[1];
+          break;
+
+        case 2:
+          // Complete quadratic polynomial in 2D:
+          psi_r[0] = 1.0;
+          psi_r[1] = x[0];
+          psi_r[2] = x[1];
+          psi_r[3] = x[0] * x[0];
+          psi_r[4] = x[0] * x[1];
+          psi_r[5] = x[1] * x[1];
+          break;
+
+        case 3:
+          // Complete cubic polynomial in 2D:
+          psi_r[0] = 1.0;
+          psi_r[1] = x[0];
+          psi_r[2] = x[1];
+          psi_r[3] = x[0] * x[0];
+          psi_r[4] = x[0] * x[1];
+          psi_r[5] = x[1] * x[1];
+          psi_r[6] = x[0] * x[0] * x[0];
+          psi_r[7] = x[0] * x[0] * x[1];
+          psi_r[8] = x[0] * x[1] * x[1];
+          psi_r[9] = x[1] * x[1] * x[1];
+          break;
+
+        default:
+          // Create an error message for this case
+          error_stream << "Recovery shape functions for recovery order "
+                       << recovery_order()
+                       << " haven't yet been implemented for 2D" << std::endl;
+
+          // Throw an error
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+      }
+    } // End of shape_rec
+
+
+    /// Integation scheme associated with the recovery shape functions
+    /// must be of sufficiently high order to integrate the mass matrix
+    /// associated with the recovery shape functions. The argument is the
+    /// dimension of the elements.
+    /// The integration is performed locally over the elements, so the
+    /// integration scheme does depend on the geometry of the element.
+    /// The type of element is specified by the boolean which is
+    /// true if elements in the patch are QElements and false if they are
+    /// TElements (will need change if we ever have other element types)
+    Integral* integral_rec(const bool& is_q_mesh)
+    {
+      // Create an ostringstream object to create a string
+      std::ostringstream error_stream;
+
+      //----
+      // 2D:
+      //----
+      /// Find order of recovery shape functions
+      switch (recovery_order())
+      {
+        case 1:
+          // Complete linear polynomial in 2D:
+          if (is_q_mesh)
+          {
+            // Return the appropriate Gauss integration scheme
+            return (new Gauss<2, 2>);
+          }
+          else
+          {
+            // Return the appropriate Gauss integration scheme
+            return (new TGauss<2, 2>);
+          }
+          break;
+
+        case 2:
+          // Complete quadratic polynomial in 2D:
+          if (is_q_mesh)
+          {
+            // Return the appropriate Gauss integration scheme
+            return (new Gauss<2, 3>);
+          }
+          else
+          {
+            // Return the appropriate Gauss integration scheme
+            return (new TGauss<2, 3>);
+          }
+          break;
+
+        case 3:
+          // Complete cubic polynomial in 2D:
+          if (is_q_mesh)
+          {
+            // Return the appropriate Gauss integration scheme
+            return (new Gauss<2, 4>);
+          }
+          else
+          {
+            // Return the appropriate Gauss integration scheme
+            return (new TGauss<2, 4>);
+          }
+          break;
+
+        default:
+          // Create an error messaage
+          error_stream << "Recovery shape functions for recovery order "
+                       << recovery_order()
+                       << " haven't yet been implemented for 2D" << std::endl;
+
+          // Throw an error
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // Dummy return (never get here)
+      return 0;
+    } // End of integral_rec
+
+    /// \short Setup patches: For each vertex node pointed to by nod_pt,
+    /// adjacent_elements_pt[nod_pt] contains the pointer to the vector that
+    /// contains the pointers to the elements that the node is part of.
+    /// Also returns a Vector of vertex nodes for use in get_element_errors.
+    void setup_patches(Mesh*& mesh_pt,
+                       std::map<Node*, Vector<ELEMENT*>*>& adjacent_elements_pt,
+                       Vector<Node*>& vertex_node_pt)
+    {
+      // Clear: hierher should we do this in Z2 as well?
+      adjacent_elements_pt.clear();
+
+      // Auxiliary map that contains element-adjacency for ALL nodes
+      std::map<Node*, Vector<ELEMENT*>*> aux_adjacent_elements_pt;
 
 #ifdef PARANOID
       // Check if all elements request the same recovery order
-      if (el_pt->nrecovery_order() != Recovery_order)
-      {
-        ndisagree++;
-      }
+      unsigned ndisagree = 0;
 #endif
 
-      // Loop all nodes in element
-      unsigned nnod = el_pt->nnode();
-      for (unsigned n = 0; n < nnod; n++)
+      // Loop over all elements to setup adjacency for all nodes.
+      // Need to do this because midside nodes can be corner nodes for
+      // adjacent smaller elements! Admittedly, the inclusion of interior
+      // nodes is wasteful...
+      unsigned nelem = mesh_pt->nelement();
+      for (unsigned e = 0; e < nelem; e++)
       {
-        // Make a pointer to the n-th node
-        Node* nod_pt = el_pt->node_pt(n);
-
-        // Has this node been considered before?
-        if (aux_adjacent_elements_pt[nod_pt] == 0)
-        {
-          // Create Vector of pointers to its adjacent elements
-          aux_adjacent_elements_pt[nod_pt] = new Vector<ELEMENT*>;
-        }
-
-        // Add pointer to adjacent element
-        (*aux_adjacent_elements_pt[nod_pt]).push_back(el_pt);
-      }
-    } // end element loop
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
 
 #ifdef PARANOID
-    // Check if all elements request the same recovery order
-    if (ndisagree != 0)
-    {
-      oomph_info
-        << "\n\n======================================================\n"
-        << "WARNING:\n"
-        << ndisagree << " out of " << mesh_pt->nelement() << " elements"
-        << "\nhave different preferences for the order of the recovery"
-        << "\nshape functions. We are using: Recovery_order=" << Recovery_order
-        << std::endl;
-      oomph_info
-        << "======================================================\n\n";
-    }
+        // Check if all elements request the same recovery order
+        if (el_pt->nrecovery_order() != Recovery_order)
+        {
+          ndisagree++;
+        }
 #endif
 
-    // Loop over all elements, extract adjacency for corner nodes only
-    nelem = mesh_pt->nelement();
-    for (unsigned e = 0; e < nelem; e++)
-    {
-      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
-
-      // Loop over corner nodes
-      unsigned n_node = el_pt->nvertex_node();
-      for (unsigned n = 0; n < n_node; n++)
-      {
-        Node* nod_pt = el_pt->vertex_node_pt(n);
-
-        // Has this node been considered before?
-        if (adjacent_elements_pt[nod_pt] == 0)
+        // Loop all nodes in element
+        unsigned nnod = el_pt->nnode();
+        for (unsigned n = 0; n < nnod; n++)
         {
-          // Add the node pointer to the vertex node container
-          vertex_node_pt.push_back(nod_pt);
+          // Make a pointer to the n-th node
+          Node* nod_pt = el_pt->node_pt(n);
 
-          // Create Vector of pointers to its adjacent elements
-          adjacent_elements_pt[nod_pt] = new Vector<ELEMENT*>;
-
-          // Copy across:
-          unsigned nel = (*aux_adjacent_elements_pt[nod_pt]).size();
-          for (unsigned e = 0; e < nel; e++)
+          // Has this node been considered before?
+          if (aux_adjacent_elements_pt[nod_pt] == 0)
           {
-            (*adjacent_elements_pt[nod_pt])
-              .push_back((*aux_adjacent_elements_pt[nod_pt])[e]);
+            // Create Vector of pointers to its adjacent elements
+            aux_adjacent_elements_pt[nod_pt] = new Vector<ELEMENT*>;
+          }
+
+          // Add pointer to adjacent element
+          (*aux_adjacent_elements_pt[nod_pt]).push_back(el_pt);
+        }
+      } // end element loop
+
+#ifdef PARANOID
+      // Check if all elements request the same recovery order
+      if (ndisagree != 0)
+      {
+        oomph_info
+          << "\n\n======================================================\n"
+          << "WARNING:\n"
+          << ndisagree << " out of " << mesh_pt->nelement() << " elements"
+          << "\nhave different preferences for the order of the recovery"
+          << "\nshape functions. We are using: Recovery_order="
+          << Recovery_order << std::endl;
+        oomph_info
+          << "======================================================\n\n";
+      }
+#endif
+
+      // Loop over all elements, extract adjacency for corner nodes only
+      nelem = mesh_pt->nelement();
+      for (unsigned e = 0; e < nelem; e++)
+      {
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
+
+        // Loop over corner nodes
+        unsigned n_node = el_pt->nvertex_node();
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          Node* nod_pt = el_pt->vertex_node_pt(n);
+
+          // Has this node been considered before?
+          if (adjacent_elements_pt[nod_pt] == 0)
+          {
+            // Add the node pointer to the vertex node container
+            vertex_node_pt.push_back(nod_pt);
+
+            // Create Vector of pointers to its adjacent elements
+            adjacent_elements_pt[nod_pt] = new Vector<ELEMENT*>;
+
+            // Copy across:
+            unsigned nel = (*aux_adjacent_elements_pt[nod_pt]).size();
+            for (unsigned e = 0; e < nel; e++)
+            {
+              (*adjacent_elements_pt[nod_pt])
+                .push_back((*aux_adjacent_elements_pt[nod_pt])[e]);
+            }
           }
         }
+      } // End of loop over elements
+
+      // Cleanup
+      for (typename std::map<Node*, Vector<ELEMENT*>*>::iterator it =
+             aux_adjacent_elements_pt.begin();
+           it != aux_adjacent_elements_pt.end();
+           it++)
+      {
+        delete it->second;
       }
-    } // End of loop over elements
+    } // End of setup_patches
 
-    // Cleanup
-    for (typename std::map<Node*, Vector<ELEMENT*>*>::iterator it =
-           aux_adjacent_elements_pt.begin();
-         it != aux_adjacent_elements_pt.end();
-         it++)
+    /// \short Given the vector of elements that make up a patch, compute
+    /// the vector of recovered vorticity coefficients and return a pointer
+    /// to it. n_deriv indicates which derivative of the vorticity is
+    /// supposed to be smoothed: 0: zeroth (i.e. the vorticity itself)
+    /// 1: d/dx; 2: d/dy; 3: d^2/dx^2; 4: d^2/dxdy 5: d^2/dy^2
+    /// 6: d^3/dx^3, 7: d^3/dx^2dy, 8: d^3/dxdy^2, 9: d^3/dy^3,
+    /// 10: du/dx, 11: du/dy, 12: dv/dx, 13: dv/dy
+    void get_recovered_vorticity_in_patch(
+      const Vector<ELEMENT*>& patch_el_pt,
+      const unsigned& num_recovery_terms,
+      Vector<double>*& recovered_vorticity_coefficient_pt,
+      unsigned& n_deriv)
     {
-      delete it->second;
-    }
-  } // End of setup_patches
+      // Find the number of elements in the patch
+      unsigned nelem = patch_el_pt.size();
 
-  /// \short Given the vector of elements that make up a patch, compute
-  /// the vector of recovered vorticity coefficients and return a pointer
-  /// to it. n_deriv indicates which derivative of the vorticity is
-  /// supposed to be smoothed: 0: zeroth (i.e. the vorticity itself)
-  /// 1: d/dx; 2: d/dy; 3: d^2/dx^2; 4: d^2/dxdy 5: d^2/dy^2
-  /// 6: d^3/dx^3, 7: d^3/dx^2dy, 8: d^3/dxdy^2, 9: d^3/dy^3,
-  /// 10: du/dx, 11: du/dy, 12: dv/dx, 13: dv/dy
-  void get_recovered_vorticity_in_patch(
-    const Vector<ELEMENT*>& patch_el_pt,
-    const unsigned& num_recovery_terms,
-    Vector<double>*& recovered_vorticity_coefficient_pt,
-    unsigned& n_deriv)
-  {
-    // Find the number of elements in the patch
-    unsigned nelem = patch_el_pt.size();
-
-    // Get a pointer to any element
-    ELEMENT* el_pt = patch_el_pt[0];
+      // Get a pointer to any element
+      ELEMENT* el_pt = patch_el_pt[0];
 
 #ifdef PARANOID
-    // If there's at least one element
-    if (nelem > 0)
-    {
-      // Get the number of vorticity derivatives to recover
-      int n_vort_derivs = el_pt->get_maximum_order_of_vorticity_derivative();
-
-      // Get the number of vorticity derivatives to recover
-      int n_veloc_derivs = el_pt->get_maximum_order_of_velocity_derivative();
-
-      // If we're not recovering anything, we shouldn't be here
-      if (n_vort_derivs + n_veloc_derivs == -1)
+      // If there's at least one element
+      if (nelem > 0)
       {
-        // Create an ostringstream object to create an error message
-        std::ostringstream error_stream;
+        // Get the number of vorticity derivatives to recover
+        int n_vort_derivs = el_pt->get_maximum_order_of_vorticity_derivative();
 
-        // Create the error message
-        error_stream << "Not recovering anything. Change the maximum number "
-                     << "of derivatives to recover.";
+        // Get the number of vorticity derivatives to recover
+        int n_veloc_derivs = el_pt->get_maximum_order_of_velocity_derivative();
 
-        // Throw an error
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-      }
-    } // if (nelem>0)
+        // If we're not recovering anything, we shouldn't be here
+        if (n_vort_derivs + n_veloc_derivs == -1)
+        {
+          // Create an ostringstream object to create an error message
+          std::ostringstream error_stream;
+
+          // Create the error message
+          error_stream << "Not recovering anything. Change the maximum number "
+                       << "of derivatives to recover.";
+
+          // Throw an error
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+      } // if (nelem>0)
 #endif
 
-    // Find the container indices associated with n_deriv
-    std::pair<unsigned, unsigned> container_id =
-      el_pt->vorticity_dof_to_container_id(n_deriv);
+      // Find the container indices associated with n_deriv
+      std::pair<unsigned, unsigned> container_id =
+        el_pt->vorticity_dof_to_container_id(n_deriv);
 
-    // Maximum vorticity derivative order we can recover
-    unsigned max_recoverable_vort_order =
-      el_pt->get_maximum_order_of_recoverable_vorticity_derivative();
+      // Maximum vorticity derivative order we can recover
+      unsigned max_recoverable_vort_order =
+        el_pt->get_maximum_order_of_recoverable_vorticity_derivative();
 
-    // Maximum velocity derivative order we can recover
-    unsigned max_recoverable_veloc_order =
-      el_pt->get_maximum_order_of_recoverable_velocity_derivative();
+      // Maximum velocity derivative order we can recover
+      unsigned max_recoverable_veloc_order =
+        el_pt->get_maximum_order_of_recoverable_velocity_derivative();
 
-    // Make a counter
-    unsigned counter = 0;
+      // Make a counter
+      unsigned counter = 0;
 
-    // Calculate the case value (initialise to -1 so we know if it's set later)
-    int case_value = -1;
+      // Calculate the case value (initialise to -1 so we know if it's set
+      // later)
+      int case_value = -1;
 
-    // Loop over the derivatives
-    for (unsigned i = 0; i < max_recoverable_vort_order + 1; i++)
-    {
-      // Increment by the number of partial derivatives of order i
-      counter += el_pt->npartial_derivative(i);
-
-      // If we've exceeded the value of n_deriv then we know which vorticity
-      // derivative to recover
-      if (n_deriv < counter)
+      // Loop over the derivatives
+      for (unsigned i = 0; i < max_recoverable_vort_order + 1; i++)
       {
-        // We need to recover the i-th order of derivative of the vorticity
-        case_value = i;
-
-        // We're done here
-        break;
-      }
-    } // for (unsigned i=0;i<max_recoverable_order+1;i++)
-
-    // If we haven't set the case value yet then we must be recovering a
-    // velocity derivative
-    if (case_value == -1)
-    {
-      // Loop over the velocity order
-      for (unsigned i = 1; i < max_recoverable_veloc_order + 1; i++)
-      {
-        // Increment by the number of velocity partial derivatives of order i
-        counter += 2 * el_pt->npartial_derivative(i);
+        // Increment by the number of partial derivatives of order i
+        counter += el_pt->npartial_derivative(i);
 
         // If we've exceeded the value of n_deriv then we know which vorticity
         // derivative to recover
         if (n_deriv < counter)
         {
           // We need to recover the i-th order of derivative of the vorticity
-          case_value = max_recoverable_vort_order + i;
+          case_value = i;
 
           // We're done here
           break;
         }
-      } // for (unsigned i=1;i<max_recoverable_veloc_order+1;i++)
-    } // if (case_value==-1)
+      } // for (unsigned i=0;i<max_recoverable_order+1;i++)
+
+      // If we haven't set the case value yet then we must be recovering a
+      // velocity derivative
+      if (case_value == -1)
+      {
+        // Loop over the velocity order
+        for (unsigned i = 1; i < max_recoverable_veloc_order + 1; i++)
+        {
+          // Increment by the number of velocity partial derivatives of order i
+          counter += 2 * el_pt->npartial_derivative(i);
+
+          // If we've exceeded the value of n_deriv then we know which vorticity
+          // derivative to recover
+          if (n_deriv < counter)
+          {
+            // We need to recover the i-th order of derivative of the vorticity
+            case_value = max_recoverable_vort_order + i;
+
+            // We're done here
+            break;
+          }
+        } // for (unsigned i=1;i<max_recoverable_veloc_order+1;i++)
+      } // if (case_value==-1)
 
 #ifdef PARANOID
-    // Sanity check: if the case value hasn't been set then something's wrong
-    if (case_value == -1)
-    {
-      // Create a ostringstream object to create an error message
-      std::ostringstream error_message_stream;
-
-      // Create an error message
-      error_message_stream << "Case order has not been set. Something's wrong!";
-
-      // Throw an error
-      throw OomphLibError(error_message_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Create space for the recovered quantity
-    double recovered_quantity = 0.0;
-
-    // Create/initialise matrix for linear system
-    DenseDoubleMatrix recovery_mat(num_recovery_terms, num_recovery_terms, 0.0);
-
-    // Create/initialise vector for RHS
-    Vector<double> rhs(num_recovery_terms, 0.0);
-
-    // Create a new integration scheme based on the recovery order
-    // in the elements. Need to find the type of the element, default
-    // is to assume a quad
-    bool is_q_mesh = true;
-
-    // If we can dynamic cast to the TElementBase, then it's a triangle/tet
-    // Note that I'm assuming that all elements are of the same geometry, but
-    // if they weren't we could adapt...
-    if (dynamic_cast<TElementBase*>(patch_el_pt[0]))
-    {
-      // We're dealing with a triangle-based mesh so change the bool value
-      is_q_mesh = false;
-    }
-
-    // Get a pointer to the appropriate integration type
-    Integral* const integ_pt = this->integral_rec(is_q_mesh);
-
-    // Loop over all elements in patch to assemble linear system
-    for (unsigned e = 0; e < nelem; e++)
-    {
-      // Get pointer to element
-      ELEMENT* const el_pt = patch_el_pt[e];
-
-      // Create storage for the recovery shape function values
-      Vector<double> psi_r(num_recovery_terms);
-
-      // Create vector to hold local coordinates
-      Vector<double> s(2, 0.0);
-
-      // Find the number of integration points
-      unsigned n_intpt = integ_pt->nweight();
-
-      // Loop over the integration points
-      for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+      // Sanity check: if the case value hasn't been set then something's wrong
+      if (case_value == -1)
       {
-        // Assign values of s, the local coordinate
-        for (unsigned i = 0; i < 2; i++)
-        {
-          // Get the i-th entry of the local coordinate
-          s[i] = integ_pt->knot(ipt, i);
-        }
-
-        // Get the integral weight
-        double w = integ_pt->weight(ipt);
-
-        // Jacobian of mapping
-        double J = el_pt->J_eulerian(s);
-
-        // Allocate space for the global coordinates
-        Vector<double> x(2, 0.0);
-
-        // Interpolate the global (Eulerian) coordinate
-        el_pt->interpolated_x(s, x);
-
-        // Premultiply the weights and the Jacobian and the geometric
-        // Jacobian weight (used in axisymmetric and spherical coordinate
-        // systems) -- hierher really fct of x? probably yes, actually).
-        double W = w * J * (el_pt->geometric_jacobian(x));
-
-        // Recovery shape functions at global (Eulerian) coordinate
-        shape_rec(x, psi_r);
-
-        // Use a switch statement to decide on which function to call
-        switch (case_value)
-        {
-          case 0:
-          {
-            Vector<double> vorticity(1, 0.0);
-            el_pt->get_vorticity(s, vorticity);
-            recovered_quantity = vorticity[0];
-            break;
-          }
-          case 1:
-          {
-            el_pt->get_raw_vorticity_deriv(
-              s, recovered_quantity, container_id.second);
-            break;
-          }
-          case 2:
-          {
-            el_pt->get_raw_vorticity_second_deriv(
-              s, recovered_quantity, container_id.second);
-            break;
-          }
-          case 3:
-          {
-            el_pt->get_raw_vorticity_third_deriv(
-              s, recovered_quantity, container_id.second);
-            break;
-          }
-          case 4:
-          {
-            el_pt->get_raw_velocity_deriv(
-              s, recovered_quantity, container_id.second);
-            break;
-          }
-          default:
-          {
-            oomph_info << "Never get here." << std::endl;
-            abort();
-          }
-        }
-
-        // Add elemental RHSs and recovery matrix to global versions
-        //----------------------------------------------------------
-        // RHS: Loop over the nodes for the test functions
-        for (unsigned l = 0; l < num_recovery_terms; l++)
-        {
-          // Update the RHS entry ()
-          rhs[l] += recovered_quantity * psi_r[l] * W;
-        }
-
-        // Loop over the nodes for the test functions
-        for (unsigned l = 0; l < num_recovery_terms; l++)
-        {
-          // Loop over the nodes for the variables
-          for (unsigned l2 = 0; l2 < num_recovery_terms; l2++)
-          {
-            // Add contribution to recovery matrix
-            recovery_mat(l, l2) += psi_r[l] * psi_r[l2] * W;
-          }
-        } // for (unsigned l=0;l<num_recovery_terms;l++)
-      } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
-    } // End of loop over elements that make up patch.
-
-    // Delete the integration scheme
-    delete integ_pt;
-
-    // Linear system is now assembled: Solve recovery system
-    //------------------------------------------------------
-    // LU decompose the recovery matrix
-    recovery_mat.ludecompose();
-
-    // Back-substitute
-    recovery_mat.lubksub(rhs);
-
-    // Now create a matrix to store the vorticity recovery coefficients.
-    // Pointer to this matrix will be returned.
-    recovered_vorticity_coefficient_pt = new Vector<double>(num_recovery_terms);
-
-    // Loop over the number of recovered terms
-    for (unsigned icoeff = 0; icoeff < num_recovery_terms; icoeff++)
-    {
-      // Copy the RHS value over
-      (*recovered_vorticity_coefficient_pt)[icoeff] = rhs[icoeff];
-    }
-  } // End of get_recovered_vorticity_in_patch
-
-  /// Get the recovery order
-  unsigned nrecovery_order() const
-  {
-    // Use a switch statement
-    switch (Recovery_order)
-    {
-      case 1:
-        // Linear recovery shape functions
-        //--------------------------------
-        return 3; // 1, x, y
-        break;
-
-      case 2:
-        // Quadratic recovery shape functions
-        //-----------------------------------
-        return 6; // 1, x, y, x^2, xy, y^2
-        break;
-
-      case 3:
-        // Cubic recovery shape functions
-        //--------------------------------
-        return 10; // 1, x, y, x^2, xy, y^2, x^3, x^2 y, x y^2, y^3
-        break;
-
-      default:
-        // Any other recovery order?
-        //--------------------------
-        // Use an ostringstream object to create an error message
-        std::ostringstream error_stream;
+        // Create a ostringstream object to create an error message
+        std::ostringstream error_message_stream;
 
         // Create an error message
-        error_stream << "Wrong Recovery_order " << Recovery_order << std::endl;
+        error_message_stream
+          << "Case order has not been set. Something's wrong!";
 
         // Throw an error
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-  } // End of nrecovery_order
-
-  /// Recover vorticity from patches
-  void recover_vorticity(Mesh* mesh_pt)
-  {
-    // Create a DocInfo object (used as a dummy argument)
-    DocInfo doc_info;
-
-    // Disable any documentation
-    doc_info.disable_doc();
-
-    // Recover the vorticity
-    recover_vorticity(mesh_pt, doc_info);
-  }
-
-  /// \short Recover vorticity from patches -- output intermediate steps
-  /// to directory specified by DocInfo object
-  void recover_vorticity(Mesh* mesh_pt, DocInfo& doc_info)
-  {
-    // Start the timer
-    double t_start = TimingHelpers::timer();
-
-    // Allocate space for the local coordinates
-    Vector<double> s(2, 0.0);
-
-    // Allocate space for the global coordinates
-    Vector<double> x(2, 0.0);
-
-    // Make patches
-    //-------------
-    // Allocate space for the mapping from nodes to elements
-    std::map<Node*, Vector<ELEMENT*>*> adjacent_elements_pt;
-
-    // Allocate space for the vertex nodes
-    Vector<Node*> vertex_node_pt;
-
-    // Set up the patches information
-    setup_patches(mesh_pt, adjacent_elements_pt, vertex_node_pt);
-
-    // Grab any element (this shouldn't be a null pointer)
-    ELEMENT* const el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(0));
-
-    // Get the index of the vorticity
-    unsigned smoothed_vorticity_index = el_pt->smoothed_vorticity_index();
-
-    // Maximum order of vorticity derivative (that can be recovered)
-    unsigned max_vort_order =
-      el_pt->get_maximum_order_of_recoverable_vorticity_derivative();
-
-    // Maximum order of velocity derivative (that can be recovered)
-    unsigned max_veloc_order =
-      el_pt->get_maximum_order_of_recoverable_velocity_derivative();
-
-    // Maximum number of recoverable vorticity terms
-    unsigned max_vort_recov = 0;
-
-    // Maximum number of recoverable velocity terms
-    unsigned max_veloc_recov = 0;
-
-    // Loop over the entries of the vector
-    for (unsigned i = 0; i < max_vort_order + 1; i++)
-    {
-      // Get the number of partial derivatives of the vorticity
-      max_vort_recov += el_pt->npartial_derivative(i);
-    }
-
-    // Loop over the entries of the vector
-    for (unsigned i = 1; i < max_veloc_order + 1; i++)
-    {
-      // Get the number of partial derivatives of the vorticity
-      max_veloc_recov += 2 * el_pt->npartial_derivative(i);
-    }
-
-    // Number of recovered vorticity derivatives
-    unsigned n_recovered_vort_derivs =
-      el_pt->nvorticity_derivatives_to_recover();
-
-    // Number of recovered velocity derivatives
-    unsigned n_recovered_veloc_derivs =
-      el_pt->nvelocity_derivatives_to_recover();
-
-    // Determine number of coefficients for expansion of recovered vorticity.
-    // Use complete polynomial of given order for recovery
-    unsigned num_recovery_terms = nrecovery_order();
-
-    // Counter for averaging of recovered vorticity and its derivatives
-    std::map<Node*, unsigned> count;
-
-    // Counter for which nodal value we're assigning
-    unsigned nodal_dof = 0;
-
-    // Loop over derivatives
-    for (unsigned deriv = 0; deriv < max_vort_recov + max_veloc_recov; deriv++)
-    {
-      // If we're not recovering this vorticity derivative. Note, we cast
-      // to an int because n_recovered_vort_derivs can be zero (so subtracting
-      // any positive integer can cause trouble)
-      if ((int(deriv) > int(n_recovered_vort_derivs - 1)) &&
-          (deriv < max_vort_recov))
-      {
-        // We're done here
-        continue;
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
       }
-      // If we're not recovering any of the velocity derivatives and we're
-      // finished with the vorticity derivatives
-      else if ((n_recovered_veloc_derivs == 0) && (deriv >= max_vort_recov))
+#endif
+
+      // Create space for the recovered quantity
+      double recovered_quantity = 0.0;
+
+      // Create/initialise matrix for linear system
+      DenseDoubleMatrix recovery_mat(
+        num_recovery_terms, num_recovery_terms, 0.0);
+
+      // Create/initialise vector for RHS
+      Vector<double> rhs(num_recovery_terms, 0.0);
+
+      // Create a new integration scheme based on the recovery order
+      // in the elements. Need to find the type of the element, default
+      // is to assume a quad
+      bool is_q_mesh = true;
+
+      // If we can dynamic cast to the TElementBase, then it's a triangle/tet
+      // Note that I'm assuming that all elements are of the same geometry, but
+      // if they weren't we could adapt...
+      if (dynamic_cast<TElementBase*>(patch_el_pt[0]))
       {
-        // We're done here
-        continue;
+        // We're dealing with a triangle-based mesh so change the bool value
+        is_q_mesh = false;
       }
 
-      // Storage for accumulated nodal vorticity (used to compute nodal
-      // averages)
-      std::map<Node*, double> averaged_recovered_vort;
+      // Get a pointer to the appropriate integration type
+      Integral* const integ_pt = this->integral_rec(is_q_mesh);
 
-      // Calculation of vorticity
-      //-------------------------
-      // Do patch recovery
-      // unsigned counter=0;
+      // Loop over all elements in patch to assemble linear system
+      for (unsigned e = 0; e < nelem; e++)
+      {
+        // Get pointer to element
+        ELEMENT* const el_pt = patch_el_pt[e];
+
+        // Create storage for the recovery shape function values
+        Vector<double> psi_r(num_recovery_terms);
+
+        // Create vector to hold local coordinates
+        Vector<double> s(2, 0.0);
+
+        // Find the number of integration points
+        unsigned n_intpt = integ_pt->nweight();
+
+        // Loop over the integration points
+        for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+        {
+          // Assign values of s, the local coordinate
+          for (unsigned i = 0; i < 2; i++)
+          {
+            // Get the i-th entry of the local coordinate
+            s[i] = integ_pt->knot(ipt, i);
+          }
+
+          // Get the integral weight
+          double w = integ_pt->weight(ipt);
+
+          // Jacobian of mapping
+          double J = el_pt->J_eulerian(s);
+
+          // Allocate space for the global coordinates
+          Vector<double> x(2, 0.0);
+
+          // Interpolate the global (Eulerian) coordinate
+          el_pt->interpolated_x(s, x);
+
+          // Premultiply the weights and the Jacobian and the geometric
+          // Jacobian weight (used in axisymmetric and spherical coordinate
+          // systems) -- hierher really fct of x? probably yes, actually).
+          double W = w * J * (el_pt->geometric_jacobian(x));
+
+          // Recovery shape functions at global (Eulerian) coordinate
+          shape_rec(x, psi_r);
+
+          // Use a switch statement to decide on which function to call
+          switch (case_value)
+          {
+            case 0:
+            {
+              Vector<double> vorticity(1, 0.0);
+              el_pt->get_vorticity(s, vorticity);
+              recovered_quantity = vorticity[0];
+              break;
+            }
+            case 1:
+            {
+              el_pt->get_raw_vorticity_deriv(
+                s, recovered_quantity, container_id.second);
+              break;
+            }
+            case 2:
+            {
+              el_pt->get_raw_vorticity_second_deriv(
+                s, recovered_quantity, container_id.second);
+              break;
+            }
+            case 3:
+            {
+              el_pt->get_raw_vorticity_third_deriv(
+                s, recovered_quantity, container_id.second);
+              break;
+            }
+            case 4:
+            {
+              el_pt->get_raw_velocity_deriv(
+                s, recovered_quantity, container_id.second);
+              break;
+            }
+            default:
+            {
+              oomph_info << "Never get here." << std::endl;
+              abort();
+            }
+          }
+
+          // Add elemental RHSs and recovery matrix to global versions
+          //----------------------------------------------------------
+          // RHS: Loop over the nodes for the test functions
+          for (unsigned l = 0; l < num_recovery_terms; l++)
+          {
+            // Update the RHS entry ()
+            rhs[l] += recovered_quantity * psi_r[l] * W;
+          }
+
+          // Loop over the nodes for the test functions
+          for (unsigned l = 0; l < num_recovery_terms; l++)
+          {
+            // Loop over the nodes for the variables
+            for (unsigned l2 = 0; l2 < num_recovery_terms; l2++)
+            {
+              // Add contribution to recovery matrix
+              recovery_mat(l, l2) += psi_r[l] * psi_r[l2] * W;
+            }
+          } // for (unsigned l=0;l<num_recovery_terms;l++)
+        } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
+      } // End of loop over elements that make up patch.
+
+      // Delete the integration scheme
+      delete integ_pt;
+
+      // Linear system is now assembled: Solve recovery system
+      //------------------------------------------------------
+      // LU decompose the recovery matrix
+      recovery_mat.ludecompose();
+
+      // Back-substitute
+      recovery_mat.lubksub(rhs);
+
+      // Now create a matrix to store the vorticity recovery coefficients.
+      // Pointer to this matrix will be returned.
+      recovered_vorticity_coefficient_pt =
+        new Vector<double>(num_recovery_terms);
+
+      // Loop over the number of recovered terms
+      for (unsigned icoeff = 0; icoeff < num_recovery_terms; icoeff++)
+      {
+        // Copy the RHS value over
+        (*recovered_vorticity_coefficient_pt)[icoeff] = rhs[icoeff];
+      }
+    } // End of get_recovered_vorticity_in_patch
+
+    /// Get the recovery order
+    unsigned nrecovery_order() const
+    {
+      // Use a switch statement
+      switch (Recovery_order)
+      {
+        case 1:
+          // Linear recovery shape functions
+          //--------------------------------
+          return 3; // 1, x, y
+          break;
+
+        case 2:
+          // Quadratic recovery shape functions
+          //-----------------------------------
+          return 6; // 1, x, y, x^2, xy, y^2
+          break;
+
+        case 3:
+          // Cubic recovery shape functions
+          //--------------------------------
+          return 10; // 1, x, y, x^2, xy, y^2, x^3, x^2 y, x y^2, y^3
+          break;
+
+        default:
+          // Any other recovery order?
+          //--------------------------
+          // Use an ostringstream object to create an error message
+          std::ostringstream error_stream;
+
+          // Create an error message
+          error_stream << "Wrong Recovery_order " << Recovery_order
+                       << std::endl;
+
+          // Throw an error
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+      }
+    } // End of nrecovery_order
+
+    /// Recover vorticity from patches
+    void recover_vorticity(Mesh* mesh_pt)
+    {
+      // Create a DocInfo object (used as a dummy argument)
+      DocInfo doc_info;
+
+      // Disable any documentation
+      doc_info.disable_doc();
+
+      // Recover the vorticity
+      recover_vorticity(mesh_pt, doc_info);
+    }
+
+    /// \short Recover vorticity from patches -- output intermediate steps
+    /// to directory specified by DocInfo object
+    void recover_vorticity(Mesh* mesh_pt, DocInfo& doc_info)
+    {
+      // Start the timer
+      double t_start = TimingHelpers::timer();
+
+      // Allocate space for the local coordinates
+      Vector<double> s(2, 0.0);
+
+      // Allocate space for the global coordinates
+      Vector<double> x(2, 0.0);
+
+      // Make patches
+      //-------------
+      // Allocate space for the mapping from nodes to elements
+      std::map<Node*, Vector<ELEMENT*>*> adjacent_elements_pt;
+
+      // Allocate space for the vertex nodes
+      Vector<Node*> vertex_node_pt;
+
+      // Set up the patches information
+      setup_patches(mesh_pt, adjacent_elements_pt, vertex_node_pt);
+
+      // Grab any element (this shouldn't be a null pointer)
+      ELEMENT* const el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(0));
+
+      // Get the index of the vorticity
+      unsigned smoothed_vorticity_index = el_pt->smoothed_vorticity_index();
+
+      // Maximum order of vorticity derivative (that can be recovered)
+      unsigned max_vort_order =
+        el_pt->get_maximum_order_of_recoverable_vorticity_derivative();
+
+      // Maximum order of velocity derivative (that can be recovered)
+      unsigned max_veloc_order =
+        el_pt->get_maximum_order_of_recoverable_velocity_derivative();
+
+      // Maximum number of recoverable vorticity terms
+      unsigned max_vort_recov = 0;
+
+      // Maximum number of recoverable velocity terms
+      unsigned max_veloc_recov = 0;
+
+      // Loop over the entries of the vector
+      for (unsigned i = 0; i < max_vort_order + 1; i++)
+      {
+        // Get the number of partial derivatives of the vorticity
+        max_vort_recov += el_pt->npartial_derivative(i);
+      }
+
+      // Loop over the entries of the vector
+      for (unsigned i = 1; i < max_veloc_order + 1; i++)
+      {
+        // Get the number of partial derivatives of the vorticity
+        max_veloc_recov += 2 * el_pt->npartial_derivative(i);
+      }
+
+      // Number of recovered vorticity derivatives
+      unsigned n_recovered_vort_derivs =
+        el_pt->nvorticity_derivatives_to_recover();
+
+      // Number of recovered velocity derivatives
+      unsigned n_recovered_veloc_derivs =
+        el_pt->nvelocity_derivatives_to_recover();
+
+      // Determine number of coefficients for expansion of recovered vorticity.
+      // Use complete polynomial of given order for recovery
+      unsigned num_recovery_terms = nrecovery_order();
+
+      // Counter for averaging of recovered vorticity and its derivatives
+      std::map<Node*, unsigned> count;
+
+      // Counter for which nodal value we're assigning
+      unsigned nodal_dof = 0;
+
+      // Loop over derivatives
+      for (unsigned deriv = 0; deriv < max_vort_recov + max_veloc_recov;
+           deriv++)
+      {
+        // If we're not recovering this vorticity derivative. Note, we cast
+        // to an int because n_recovered_vort_derivs can be zero (so subtracting
+        // any positive integer can cause trouble)
+        if ((int(deriv) > int(n_recovered_vort_derivs - 1)) &&
+            (deriv < max_vort_recov))
+        {
+          // We're done here
+          continue;
+        }
+        // If we're not recovering any of the velocity derivatives and we're
+        // finished with the vorticity derivatives
+        else if ((n_recovered_veloc_derivs == 0) && (deriv >= max_vort_recov))
+        {
+          // We're done here
+          continue;
+        }
+
+        // Storage for accumulated nodal vorticity (used to compute nodal
+        // averages)
+        std::map<Node*, double> averaged_recovered_vort;
+
+        // Calculation of vorticity
+        //-------------------------
+        // Do patch recovery
+        // unsigned counter=0;
+        for (typename std::map<Node*, Vector<ELEMENT*>*>::iterator it =
+               adjacent_elements_pt.begin();
+             it != adjacent_elements_pt.end();
+             it++)
+        {
+          // Pointer to the recovered vorticity coefficients
+          Vector<double>* recovered_vorticity_coefficient_pt;
+
+          // Setup smoothed vorticity field for patches
+          get_recovered_vorticity_in_patch(*(it->second),
+                                           num_recovery_terms,
+                                           recovered_vorticity_coefficient_pt,
+                                           deriv);
+
+          // Now get the nodal average of the recovered vorticity (nodes are
+          // generally part of multiple patches):
+
+          // Get the number of elements in adjacent_elements_pt
+          unsigned nelem = (*(it->second)).size();
+
+          // Loop over all elements to get recovered vorticity
+          for (unsigned e = 0; e < nelem; e++)
+          {
+            // Get pointer to element
+            ELEMENT* const el_pt = (*(it->second))[e];
+
+            // Get the number of nodes by element
+            unsigned nnode_el = el_pt->nnode();
+
+            // Loop over the nodes in the element
+            for (unsigned j = 0; j < nnode_el; j++)
+            {
+              // Get a pointer to the j-th node in this element
+              Node* nod_pt = el_pt->node_pt(j);
+
+              // Get the local coordinates of the node
+              el_pt->local_coordinate_of_node(j, s);
+
+              // Interpolate the global (Eulerian) coordinate
+              el_pt->interpolated_x(s, x);
+
+              // Recovery shape functions at global (Eulerian) coordinate
+              Vector<double> psi_r(num_recovery_terms);
+
+              // Recover the shape function values at the position x
+              shape_rec(x, psi_r);
+
+              // Initialise the value of the recovered quantity
+              double recovered_vort = 0.0;
+
+              // Loop over the recovery terms
+              for (unsigned i = 0; i < num_recovery_terms; i++)
+              {
+                // Assemble recovered vorticity
+                recovered_vort +=
+                  (*recovered_vorticity_coefficient_pt)[i] * psi_r[i];
+              }
+
+              // Keep adding
+              averaged_recovered_vort[nod_pt] += recovered_vort;
+
+              // Increment the counter
+              count[nod_pt]++;
+            } // for (unsigned j=0;j<nnode_el;j++)
+          } // for (unsigned e=0;e<nelem;e++)
+
+          // Delete the recovered coefficient data
+          delete recovered_vorticity_coefficient_pt;
+
+          // Make it a null pointer
+          recovered_vorticity_coefficient_pt = 0;
+        } // for (typename std::map<Node*,Vector<ELEMENT*>*>::iterator it=...
+
+        // Find out how many nodes there are in the mesh
+        unsigned nnod = mesh_pt->nnode();
+
+        // Loop over all nodes to actually work out the average
+        for (unsigned j = 0; j < nnod; j++)
+        {
+          // Make a pointer to the j-th node
+          Node* nod_pt = mesh_pt->node_pt(j);
+
+          // Calculate the values of the smoothed vorticity
+          averaged_recovered_vort[nod_pt] /= count[nod_pt];
+
+          // Assign smoothed vorticity to nodal values
+          nod_pt->set_value(smoothed_vorticity_index + nodal_dof,
+                            averaged_recovered_vort[nod_pt]);
+        }
+
+        // We're done with this dof so increment the counter
+        nodal_dof++;
+
+        // Start again
+        count.clear();
+      } // for (unsigned deriv=0;deriv<max_vort_recov+max_veloc_recov;deriv++)
+
+      // Cleanup
       for (typename std::map<Node*, Vector<ELEMENT*>*>::iterator it =
              adjacent_elements_pt.begin();
            it != adjacent_elements_pt.end();
            it++)
       {
-        // Pointer to the recovered vorticity coefficients
-        Vector<double>* recovered_vorticity_coefficient_pt;
-
-        // Setup smoothed vorticity field for patches
-        get_recovered_vorticity_in_patch(*(it->second),
-                                         num_recovery_terms,
-                                         recovered_vorticity_coefficient_pt,
-                                         deriv);
-
-        // Now get the nodal average of the recovered vorticity (nodes are
-        // generally part of multiple patches):
-
-        // Get the number of elements in adjacent_elements_pt
-        unsigned nelem = (*(it->second)).size();
-
-        // Loop over all elements to get recovered vorticity
-        for (unsigned e = 0; e < nelem; e++)
-        {
-          // Get pointer to element
-          ELEMENT* const el_pt = (*(it->second))[e];
-
-          // Get the number of nodes by element
-          unsigned nnode_el = el_pt->nnode();
-
-          // Loop over the nodes in the element
-          for (unsigned j = 0; j < nnode_el; j++)
-          {
-            // Get a pointer to the j-th node in this element
-            Node* nod_pt = el_pt->node_pt(j);
-
-            // Get the local coordinates of the node
-            el_pt->local_coordinate_of_node(j, s);
-
-            // Interpolate the global (Eulerian) coordinate
-            el_pt->interpolated_x(s, x);
-
-            // Recovery shape functions at global (Eulerian) coordinate
-            Vector<double> psi_r(num_recovery_terms);
-
-            // Recover the shape function values at the position x
-            shape_rec(x, psi_r);
-
-            // Initialise the value of the recovered quantity
-            double recovered_vort = 0.0;
-
-            // Loop over the recovery terms
-            for (unsigned i = 0; i < num_recovery_terms; i++)
-            {
-              // Assemble recovered vorticity
-              recovered_vort +=
-                (*recovered_vorticity_coefficient_pt)[i] * psi_r[i];
-            }
-
-            // Keep adding
-            averaged_recovered_vort[nod_pt] += recovered_vort;
-
-            // Increment the counter
-            count[nod_pt]++;
-          } // for (unsigned j=0;j<nnode_el;j++)
-        } // for (unsigned e=0;e<nelem;e++)
-
-        // Delete the recovered coefficient data
-        delete recovered_vorticity_coefficient_pt;
-
-        // Make it a null pointer
-        recovered_vorticity_coefficient_pt = 0;
-      } // for (typename std::map<Node*,Vector<ELEMENT*>*>::iterator it=...
-
-      // Find out how many nodes there are in the mesh
-      unsigned nnod = mesh_pt->nnode();
-
-      // Loop over all nodes to actually work out the average
-      for (unsigned j = 0; j < nnod; j++)
-      {
-        // Make a pointer to the j-th node
-        Node* nod_pt = mesh_pt->node_pt(j);
-
-        // Calculate the values of the smoothed vorticity
-        averaged_recovered_vort[nod_pt] /= count[nod_pt];
-
-        // Assign smoothed vorticity to nodal values
-        nod_pt->set_value(smoothed_vorticity_index + nodal_dof,
-                          averaged_recovered_vort[nod_pt]);
+        // Delete the vector of element pointers
+        delete it->second;
       }
 
-      // We're done with this dof so increment the counter
-      nodal_dof++;
+      // Inform the user
+      oomph_info << "Time for vorticity recovery [sec]: "
+                 << TimingHelpers::timer() - t_start << std::endl;
+    } // End of recover_vorticity
 
-      // Start again
-      count.clear();
-    } // for (unsigned deriv=0;deriv<max_vort_recov+max_veloc_recov;deriv++)
+  private:
+    /// Order of recovery polynomials
+    unsigned Recovery_order;
+  };
 
-    // Cleanup
-    for (typename std::map<Node*, Vector<ELEMENT*>*>::iterator it =
-           adjacent_elements_pt.begin();
-         it != adjacent_elements_pt.end();
-         it++)
-    {
-      // Delete the vector of element pointers
-      delete it->second;
-    }
-
-    // Inform the user
-    oomph_info << "Time for vorticity recovery [sec]: "
-               << TimingHelpers::timer() - t_start << std::endl;
-  } // End of recover_vorticity
-
-private:
-  /// Order of recovery polynomials
-  unsigned Recovery_order;
-};
+} // namespace oomph
 
 #endif

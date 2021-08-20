@@ -30,6 +30,7 @@ namespace oomph
 {
   /// 2D GeneralisedAdvection Diffusion elements
 
+
   /// Default value for Peclet number
   template<unsigned DIM>
   double GeneralisedAdvectionDiffusionEquations<DIM>::Default_peclet_number =
@@ -101,6 +102,7 @@ namespace oomph
       Vector<double> interpolated_dudx(DIM, 0.0);
       Vector<double> mesh_velocity(DIM, 0.0);
 
+
       // Calculate function value and derivatives:
       //-----------------------------------------
       // Loop over nodes
@@ -130,10 +132,12 @@ namespace oomph
         }
       }
 
+
       // Get source function
       //-------------------
       double source;
       get_source_cons_adv_diff(ipt, interpolated_x, source);
+
 
       // Get wind
       //--------
@@ -143,6 +147,7 @@ namespace oomph
       // Get the conserved wind (non-divergence free)
       Vector<double> conserved_wind(DIM);
       get_conserved_wind_cons_adv_diff(ipt, s, interpolated_x, conserved_wind);
+
 
       // Get diffusivity tensor
       DenseMatrix<double> D(DIM, DIM);
@@ -241,8 +246,10 @@ namespace oomph
         }
       }
 
+
     } // End of loop over integration points
   }
+
 
   //======================================================================
   /// Self-test:  Return 0 for OK
@@ -269,6 +276,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// \short Output function:
   ///
@@ -282,6 +290,7 @@ namespace oomph
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
+
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -340,6 +349,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// C-style output function:
   ///
@@ -374,6 +384,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// \short  Output exact solution
@@ -425,6 +436,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// \short Validate against exact solution
@@ -556,6 +568,7 @@ namespace oomph
     return sum;
   }
 
+
   //======================================================================
   // Set the data for the number of Variables at each node
   //======================================================================
@@ -581,5 +594,6 @@ namespace oomph
   template class QGeneralisedAdvectionDiffusionElement<3, 2>;
   template class QGeneralisedAdvectionDiffusionElement<3, 3>;
   template class QGeneralisedAdvectionDiffusionElement<3, 4>;
+
 
 } // namespace oomph

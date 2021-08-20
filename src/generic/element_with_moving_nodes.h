@@ -30,6 +30,7 @@
 #ifndef OOMPH_ELEMENT_WITH_MOVING_NODES
 #define OOMPH_ELEMENT_WITH_MOVING_NODES
 
+
 // oomph-lib headers
 #include "elements.h"
 
@@ -38,6 +39,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// \short A policy class that serves to establish the
@@ -71,11 +73,11 @@ namespace oomph
     };
 
     /// Constructor
-    ElementWithMovingNodes() :
-      Geometric_data_local_eqn(0),
-      Bypass_fill_in_jacobian_from_geometric_data(false),
-      Evaluate_dresidual_dnodal_coordinates_by_fd(false),
-      Method_for_shape_derivs(Shape_derivs_by_direct_fd)
+    ElementWithMovingNodes()
+      : Geometric_data_local_eqn(0),
+        Bypass_fill_in_jacobian_from_geometric_data(false),
+        Evaluate_dresidual_dnodal_coordinates_by_fd(false),
+        Method_for_shape_derivs(Shape_derivs_by_direct_fd)
     // hierher: Anything other than the fd-based method is currently broken;
     // at least for refineable elements -- this all needs to be checked
     // VERY carefully again (see instructions in commit log). Until this
@@ -166,6 +168,7 @@ namespace oomph
 #endif
       return Geometric_data_local_eqn[n][i];
     }
+
 
     /// Return a set of all geometric data associated with the element
     void assemble_set_of_all_geometric_data(
@@ -336,6 +339,7 @@ namespace oomph
       }
     }
 
+
     /// \short Vector that stores pointers to all Data that affect the
     /// node update operations, i.e. the variables that can affect
     /// the position of the node.
@@ -373,14 +377,14 @@ namespace oomph
     int Method_for_shape_derivs;
   };
 
+
   //===============================================================
   /// Specific implementation of the class for specified element
   /// and node type.
   //==============================================================
   template<class ELEMENT, class NODE_TYPE>
-  class ElementWithSpecificMovingNodes :
-    public ELEMENT,
-    public ElementWithMovingNodes
+  class ElementWithSpecificMovingNodes : public ELEMENT,
+                                         public ElementWithMovingNodes
   {
   public:
     /// \short Function to describe the local dofs of the element. The ostream
@@ -403,8 +407,8 @@ namespace oomph
 
     /// Constructor used for face elements
     ElementWithSpecificMovingNodes(FiniteElement* const& element_pt,
-                                   const int& face_index) :
-      ELEMENT(element_pt, face_index), ElementWithMovingNodes()
+                                   const int& face_index)
+      : ELEMENT(element_pt, face_index), ElementWithMovingNodes()
     {
     }
 
@@ -417,6 +421,7 @@ namespace oomph
       ElementWithMovingNodes::describe_local_dofs(out, curr_str);
       ELEMENT::describe_local_dofs(out, curr_str);
     }
+
 
     /// \short Overload the node assignment routine to assign nodes of the
     /// appropriate type.
@@ -476,6 +481,7 @@ namespace oomph
       return this->node_pt(n);
     }
 
+
     /// \short Complete the setup of additional dependencies. Overloads
     /// empty virtual function in GeneralisedElement to determine the "geometric
     /// Data", i.e. the Data that affects the element's shape.
@@ -490,6 +496,7 @@ namespace oomph
       // Call function of the element with moving nodes
       ElementWithMovingNodes::complete_setup_of_dependencies();
     }
+
 
     /// \short Assign local equation numbers for the underlying element, then
     /// deal with the additional geometric dofs
@@ -523,8 +530,10 @@ namespace oomph
       this->fill_in_jacobian_from_geometric_data(jacobian);
     }
 
+
   private:
   };
+
 
 } // namespace oomph
 #endif

@@ -41,9 +41,8 @@ namespace oomph
   /// impose the pressure.
   //========================================================================
   template<class ELEMENT>
-  class ImposeParallelOutflowElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class ImposeParallelOutflowElement : public virtual FaceGeometry<ELEMENT>,
+                                       public virtual FaceElement
   {
   private:
     /// pointer to imposed pressure -- if null then no pressure imposed.
@@ -52,6 +51,7 @@ namespace oomph
     /// Lagrange Id
     unsigned Id;
 
+
   public:
     /// \short Constructor takes a "bulk" element, the
     /// index that identifies which face the
@@ -59,8 +59,8 @@ namespace oomph
     /// to be attached to, and the face element ID
     ImposeParallelOutflowElement(FiniteElement* const& element_pt,
                                  const int& face_index,
-                                 const unsigned& id = 0) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+                                 const unsigned& id = 0)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       //  set the Id
       Id = id;
@@ -123,6 +123,7 @@ namespace oomph
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
+
 
     ///  Access function for the pressure
     double*& pressure_pt()

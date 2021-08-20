@@ -50,18 +50,18 @@ namespace oomph
   /// a separate equations class
   //======================================================================
   template<class ELEMENT>
-  class RefineableFpPressureAdvDiffRobinBCSpaceTimeElement :
-    public virtual FpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>
+  class RefineableFpPressureAdvDiffRobinBCSpaceTimeElement
+    : public virtual FpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>
   {
   public:
     /// Constructor, which takes a "bulk" element and the value of the
     /// index and its limit
     RefineableFpPressureAdvDiffRobinBCSpaceTimeElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      FaceGeometry<ELEMENT>(),
-      FaceElement(),
-      FpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>(
-        element_pt, face_index, true)
+      FiniteElement* const& element_pt, const int& face_index)
+      : FaceGeometry<ELEMENT>(),
+        FaceElement(),
+        FpPressureAdvDiffRobinBCSpaceTimeElement<ELEMENT>(
+          element_pt, face_index, true)
     {
     }
 
@@ -73,6 +73,7 @@ namespace oomph
       DenseMatrix<double>& jacobian,
       const unsigned& construct_jacobian_flag);
   };
+
 
   //======================================================================
   /// Get residuals and Jacobian of Robin boundary conditions in pressure
@@ -204,8 +205,7 @@ namespace oomph
       }
 
       // Modify bc: If outflow (flux>0) apply Neumann condition instead
-      if (flux > 0.0)
-        flux = 0.0;
+      if (flux > 0.0) flux = 0.0;
 
       // Get pressure
       double interpolated_press = bulk_el_pt->interpolated_p_nst(s_bulk);
@@ -218,6 +218,7 @@ namespace oomph
 
       // Premultiply the weights and the Jacobian
       double W = w * J;
+
 
       // Number of master nodes and storage for the weight of the shape function
       unsigned n_master = 1;
@@ -335,10 +336,10 @@ namespace oomph
   /// Refineable version of the Navier-Stokes equations
   //======================================================================
   template<unsigned DIM>
-  class RefineableSpaceTimeNavierStokesEquations :
-    public virtual SpaceTimeNavierStokesEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableSpaceTimeNavierStokesEquations
+    : public virtual SpaceTimeNavierStokesEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   protected:
     /// \short Unpin all pressure dofs in the element
@@ -350,12 +351,13 @@ namespace oomph
 
   public:
     /// \short Constructor
-    RefineableSpaceTimeNavierStokesEquations() :
-      SpaceTimeNavierStokesEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableSpaceTimeNavierStokesEquations()
+      : SpaceTimeNavierStokesEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// \short  Loop over all elements in Vector (which typically contains
     /// all the elements in a fluid mesh) and pin the nodal pressure degrees
@@ -383,6 +385,7 @@ namespace oomph
       }
     } // End of pin_redundant_nodal_pressures
 
+
     /// \short Unpin all pressure dofs in elements listed in vector.
     static void unpin_all_pressure_dofs(
       const Vector<GeneralisedElement*>& element_pt)
@@ -400,6 +403,7 @@ namespace oomph
       }
     } // End of unpin_all_pressure_dofs
 
+
     /// \short Pointer to n_p-th pressure node (Default: NULL,
     /// indicating that pressure is not based on nodal interpolation).
     virtual Node* pressure_node_pt(const unsigned& n_p)
@@ -407,6 +411,7 @@ namespace oomph
       // Return a null pointer
       return NULL;
     } // End of pressure_node_pt
+
 
     /// \short Compute the diagonal of the velocity/pressure mass matrices.
     /// If which one=0, both are computed, otherwise only the pressure
@@ -417,6 +422,7 @@ namespace oomph
       Vector<double>& veloc_mass_diag,
       const unsigned& which_one = 0);
 
+
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
     {
@@ -424,6 +430,7 @@ namespace oomph
       // DIM velocity time-derivatives)
       return (DIM + (DIM * (DIM - 1)) / 2) + DIM;
     } // End of num_Z2_flux_terms
+
 
     /// \short Get 'flux' for Z2 error recovery: Upper triangular entries
     /// in strain rate tensor.
@@ -509,6 +516,7 @@ namespace oomph
       } // for (unsigned j=0;j<DIM;j++)
     } // End of get_Z2_flux
 
+
     ///  Further build, pass the pointers down to the sons
     void further_build()
     {
@@ -560,6 +568,7 @@ namespace oomph
       // Set the ALE flag
       this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
     } // End of further_build
+
 
     /// \short Compute the derivatives of the i-th component of
     /// velocity at point s with respect
@@ -722,6 +731,7 @@ namespace oomph
       DenseMatrix<double>& mass_matrix,
       const unsigned& compute_jacobian_flag);
 
+
     /// \short Compute the residuals for the associated pressure advection
     /// diffusion problem. Used by the Fp preconditioner.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
@@ -729,6 +739,7 @@ namespace oomph
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
       const unsigned& compute_jacobian_flag);
+
 
     /// \short Compute derivatives of elemental residual vector with respect
     /// to nodal coordinates. Overwrites default implementation in
@@ -738,25 +749,27 @@ namespace oomph
       RankThreeTensor<double>& dresidual_dnodal_coordinates);
   };
 
+
   //======================================================================
   /// Refineable version of Taylor Hood elements. These classes
   /// can be written in total generality.
   //======================================================================
   template<unsigned DIM>
-  class RefineableQTaylorHoodSpaceTimeElement :
-    public QTaylorHoodSpaceTimeElement<DIM>,
-    public virtual RefineableSpaceTimeNavierStokesEquations<DIM>,
-    public virtual RefineableQElement<DIM + 1>
+  class RefineableQTaylorHoodSpaceTimeElement
+    : public QTaylorHoodSpaceTimeElement<DIM>,
+      public virtual RefineableSpaceTimeNavierStokesEquations<DIM>,
+      public virtual RefineableQElement<DIM + 1>
   {
   public:
     /// \short Constructor
-    RefineableQTaylorHoodSpaceTimeElement() :
-      RefineableElement(),
-      RefineableSpaceTimeNavierStokesEquations<DIM>(),
-      RefineableQElement<DIM + 1>(),
-      QTaylorHoodSpaceTimeElement<DIM>()
+    RefineableQTaylorHoodSpaceTimeElement()
+      : RefineableElement(),
+        RefineableSpaceTimeNavierStokesEquations<DIM>(),
+        RefineableQElement<DIM + 1>(),
+        QTaylorHoodSpaceTimeElement<DIM>()
     {
     }
+
 
     /// \short Number of values required at local node n. In order to simplify
     /// matters, we allocate storage for pressure variables at all the nodes
@@ -767,6 +780,7 @@ namespace oomph
       return DIM + 1;
     } // End of required_nvalue
 
+
     /// Number of continuously interpolated values
     unsigned ncont_interpolated_values() const
     {
@@ -774,8 +788,10 @@ namespace oomph
       return DIM + 1;
     } // End of ncont_interpolated_values
 
+
     /// Rebuild from sons: empty
     void rebuild_from_sons(Mesh*& mesh_pt) {}
+
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
@@ -785,6 +801,7 @@ namespace oomph
       return 2;
     } // End of nrecovery_order
 
+
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
@@ -792,12 +809,14 @@ namespace oomph
       return QTaylorHoodSpaceTimeElement<DIM>::nvertex_node();
     } // End of nvertex_node
 
+
     /// \short Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       // Call the base class implementation of the function
       return QTaylorHoodSpaceTimeElement<DIM>::vertex_node_pt(j);
     } // End of vertex_node_pt
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function is usually
@@ -819,6 +838,7 @@ namespace oomph
       // Calculate the pressure field at local coordinates s
       values[DIM] = this->interpolated_p_nst(s);
     } // End of get_interpolated_values
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
@@ -850,6 +870,7 @@ namespace oomph
       }
     } // End of get_interpolated_values
 
+
     /// \short Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. The pressures are stored
     /// at the p_nodal_index_nst-th location in each node
@@ -859,12 +880,14 @@ namespace oomph
       this->setup_hang_for_value(this->p_nodal_index_nst());
     } // End of further_setup_hanging_nodes
 
+
     /// \short Pointer to n_p-th pressure node
     Node* pressure_node_pt(const unsigned& n_p)
     {
       // Return a pointer to the n_p-th pressure node
       return this->node_pt(this->Pconv[n_p]);
     } // End of pressure node_pt
+
 
     /// \short The velocities are isoparametric and so the "nodes" interpolating
     /// the velocities are the geometric nodes. The pressure "nodes" are a
@@ -887,6 +910,7 @@ namespace oomph
       }
     } // End of interpolating_node_pt
 
+
     /// \short The pressure nodes are the corner nodes, so when n_value==DIM,
     /// the fraction is the same as the 1D node number, 0 or 1.
     double local_one_d_fraction_of_interpolating_node(const unsigned& n_1d,
@@ -906,6 +930,7 @@ namespace oomph
         return this->local_one_d_fraction_of_node(n_1d, i);
       }
     } // End of local_one_d_fraction_of_interpolating_node
+
 
     /// \short The velocity nodes are the same as the geometric nodes. The
     /// pressure nodes must be calculated by using the same methods as
@@ -982,6 +1007,7 @@ namespace oomph
       } // if (value_id==DIM)
     } // End of get_interpolating_node_at_local_coordinate
 
+
     /// \short The number of 1D pressure nodes is 2, the number of 1D velocity
     /// nodes is the same as the number of 1D geometric nodes.
     unsigned ninterpolating_node_1d(const int& value_id)
@@ -1000,6 +1026,7 @@ namespace oomph
       }
     } // End of ninterpolating_node_1d
 
+
     /// \short The number of pressure nodes is 2^DIM. The number of
     /// velocity nodes is the same as the number of geometric nodes.
     unsigned ninterpolating_node(const int& value_id)
@@ -1017,6 +1044,7 @@ namespace oomph
         return this->nnode();
       }
     } // End if ninterpolating_node
+
 
     /// \short The basis interpolating the pressure is given by pshape().
     //// The basis interpolating the velocity is shape().
@@ -1038,6 +1066,7 @@ namespace oomph
       }
     } // End of interpolating_basis
 
+
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
@@ -1047,6 +1076,7 @@ namespace oomph
         new RefineableFpPressureAdvDiffRobinBCSpaceTimeElement<
           RefineableQTaylorHoodSpaceTimeElement<DIM>>(this, face_index));
     } // End of build_fp_press_adv_diff_robin_bc_element
+
 
     /// \short Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
@@ -1174,6 +1204,7 @@ namespace oomph
       }
     } // End of unpin_elemental_pressure_dofs
 
+
     /// Pin all nodal pressure dofs that are not required
     void pin_elemental_redundant_nodal_pressure_dofs()
     {
@@ -1209,18 +1240,20 @@ namespace oomph
     } // End of pin_elemental_redundant_nodal_pressure_dofs
   };
 
+
   //=======================================================================
   /// \short Face geometry of the RefineableQTaylorHoodSpaceTimeElements is the
   /// same as the Face geometry of the QTaylorHoodSpaceTimeElements.
   //=======================================================================
   template<unsigned DIM>
-  class FaceGeometry<RefineableQTaylorHoodSpaceTimeElement<DIM>> :
-    public virtual FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>
+  class FaceGeometry<RefineableQTaylorHoodSpaceTimeElement<DIM>>
+    : public virtual FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>
   {
   public:
     /// Constructor; empty
     FaceGeometry() : FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>() {}
   };
+
 
   //=======================================================================
   /// \short Face geometry of the face geometry of the
@@ -1228,13 +1261,14 @@ namespace oomph
   /// of the Face geometry of QTaylorHoodSpaceTimeElements.
   //=======================================================================
   template<unsigned DIM>
-  class FaceGeometry<FaceGeometry<RefineableQTaylorHoodSpaceTimeElement<DIM>>> :
-    public virtual FaceGeometry<FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>>
+  class FaceGeometry<FaceGeometry<RefineableQTaylorHoodSpaceTimeElement<DIM>>>
+    : public virtual FaceGeometry<
+        FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>>
   {
   public:
     /// Constructor; empty
-    FaceGeometry() :
-      FaceGeometry<FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>>()
+    FaceGeometry()
+      : FaceGeometry<FaceGeometry<QTaylorHoodSpaceTimeElement<DIM>>>()
     {
     }
   };

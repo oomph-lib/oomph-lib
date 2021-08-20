@@ -202,16 +202,16 @@ namespace oomph
     const double& flag_height,
     const double& centre_x,
     const double& centre_y,
-    const double& a) :
-    Cylinder_pt(cylinder_pt),
-    Top_flag_pt(top_flag_pt),
-    Bottom_flag_pt(bottom_flag_pt),
-    Tip_flag_pt(tip_flag_pt),
-    Lx(flag_length),
-    Ly(flag_height),
-    Centre_x(centre_x),
-    Centre_y(centre_y),
-    A(a)
+    const double& a)
+    : Cylinder_pt(cylinder_pt),
+      Top_flag_pt(top_flag_pt),
+      Bottom_flag_pt(bottom_flag_pt),
+      Tip_flag_pt(tip_flag_pt),
+      Lx(flag_length),
+      Ly(flag_height),
+      Centre_x(centre_x),
+      Centre_y(centre_y),
+      A(a)
   {
     // Vertices of rectangle
     // Those are points of references of the domain

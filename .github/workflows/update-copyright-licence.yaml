@@ -1,0 +1,29 @@
+name: Copyright
+
+# IMPORTANT: A schedule workflow action *must* be placed on the default branch
+# of the repository. Only then will it run as scheduled. It is also placed in a
+# queue when scheduled, so it may not run exactly at the requested time.
+on:
+  # Calculated using crontab.guru. See here: https://crontab.guru/#1_0_1_1_*.
+  # Scheduled to run at 00:01 on January 1st of each year.
+  schedule:
+  - cron: '1 0 1 1 *'
+
+jobs:
+  update-copyright-notice:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository and switch to 'development' branch
+      uses: actions/checkout@v2
+      with:
+        ref: development
+
+    - name: Update copyright notice
+      run: ./bin/update_copyright_licence_header.sh
+
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_user_name: copyright-notice-cron-bot
+        commit_message: 'Automated update of copyright notices.'

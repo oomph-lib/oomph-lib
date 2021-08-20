@@ -33,6 +33,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib headers
 #include "refineable_poisson_elements.h"
 #include "generic/refineable_line_spectral_element.h"
@@ -47,21 +48,22 @@ namespace oomph
   ///
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQSpectralPoissonElement :
-    public QSpectralPoissonElement<DIM, NNODE_1D>,
-    public virtual RefineablePoissonEquations<DIM>,
-    public virtual RefineableQSpectralElement<DIM>
+  class RefineableQSpectralPoissonElement
+    : public QSpectralPoissonElement<DIM, NNODE_1D>,
+      public virtual RefineablePoissonEquations<DIM>,
+      public virtual RefineableQSpectralElement<DIM>
   {
   public:
     /// \short Constructor: Pass refinement level to refineable quad element
     /// (default 0 = root)
-    RefineableQSpectralPoissonElement() :
-      RefineableElement(),
-      RefineablePoissonEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QSpectralPoissonElement<DIM, NNODE_1D>()
+    RefineableQSpectralPoissonElement()
+      : RefineableElement(),
+        RefineablePoissonEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QSpectralPoissonElement<DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQSpectralPoissonElement(
@@ -138,6 +140,7 @@ namespace oomph
     void further_setup_hanging_nodes() {}
   };
 
+
   //=======================================================================
   /// Face geometry for the RefineableQuadPoissonElement elements: The spatial
   /// dimension of the face elements is one lower than that of the
@@ -145,8 +148,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<RefineableQSpectralPoissonElement<DIM, NNODE_1D>> :
-    public virtual QSpectralElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<RefineableQSpectralPoissonElement<DIM, NNODE_1D>>
+    : public virtual QSpectralElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -155,5 +158,6 @@ namespace oomph
   };
 
 } // namespace oomph
+
 
 #endif

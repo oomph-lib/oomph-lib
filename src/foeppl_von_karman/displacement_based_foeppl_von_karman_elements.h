@@ -39,6 +39,7 @@
 #include "generic/nodes.h"
 #include "generic/oomph_utilities.h"
 
+
 namespace oomph
 {
   //=============================================================
@@ -73,8 +74,8 @@ namespace oomph
     /// \short Constructor (must initialise the Pressure_fct_pt and the
     /// Traction_fct_pt. Also set physical parameters to their default
     /// values.
-    DisplacementBasedFoepplvonKarmanEquations() :
-      Pressure_fct_pt(0), Traction_fct_pt(0)
+    DisplacementBasedFoepplvonKarmanEquations()
+      : Pressure_fct_pt(0), Traction_fct_pt(0)
     {
       // Set default
       Nu_pt = &Default_Nu_Value;
@@ -181,11 +182,13 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
+
     /// Get error against and norm of exact solution
     void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                        double& error,
                        double& norm);
+
 
     /// Dummy, time dependent error checker
     void compute_error(std::ostream& outfile,
@@ -433,9 +436,11 @@ namespace oomph
 
       } // Loop over nodes for (l<n_node)
 
+
       // Get in-plane stress
       get_sigma(
         sigma, interpolated_dwdx, interpolated_duxdx, interpolated_duydx);
+
 
       // The strain tensor values
       // E_xx
@@ -454,6 +459,7 @@ namespace oomph
       strain(1, 0) = strain(0, 1);
     }
 
+
     /// hierher dummy
     void fill_in_contribution_to_jacobian_and_mass_matrix(
       Vector<double>& residuals,
@@ -471,6 +477,7 @@ namespace oomph
         mass_matrix(i, i) += 1.0;
       }
     }
+
 
     /// Fill in the residuals with this element's contribution
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -657,6 +664,7 @@ namespace oomph
       } // End of loop over integration points
     }
 
+
     /// \short Return FE representation of function value w_fvk(s)
     /// at local coordinate s (by default - if index > 0, returns
     /// FE representation of valued stored at index^th nodal index
@@ -723,6 +731,7 @@ namespace oomph
       }
     }
 
+
   protected:
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
@@ -732,6 +741,7 @@ namespace oomph
                                                  Shape& test,
                                                  DShape& dtestdx) const = 0;
 
+
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_fvk(
@@ -740,6 +750,7 @@ namespace oomph
       DShape& dpsidx,
       Shape& test,
       DShape& dtestdx) const = 0;
+
 
     /// Pointer to global Poisson's ratio
     double* Nu_pt;
@@ -765,12 +776,13 @@ namespace oomph
     bool Linear_bending_model;
   };
 
+
   //==========================================================
   /// Foeppl von Karman upgraded to become projectable
   //==========================================================
   template<class FVK_ELEMENT>
-  class ProjectableDisplacementBasedFoepplvonKarmanElement :
-    public virtual ProjectableElement<FVK_ELEMENT>
+  class ProjectableDisplacementBasedFoepplvonKarmanElement
+    : public virtual ProjectableElement<FVK_ELEMENT>
   {
   public:
     /// \short Specify the values associated with field fld.  The
@@ -830,6 +842,7 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
+
     ///\short Number of positional history values
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
@@ -862,6 +875,7 @@ namespace oomph
         this->dshape_and_dtest_eulerian_fvk(s, psi, dpsidx, test, dtestdx);
       return J;
     }
+
 
     /// \short Return interpolated field fld at local coordinate s, at
     /// time level t (t=0: present; t>0: history values)
@@ -901,6 +915,7 @@ namespace oomph
       return interpolated_w;
     }
 
+
     /// Return number of values in field fld: One per node
     unsigned nvalue_of_field(const unsigned& fld)
     {
@@ -917,6 +932,7 @@ namespace oomph
 #endif
       return this->nnode();
     }
+
 
     /// Return local equation number of field fld of node j.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -943,12 +959,13 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   class FaceGeometry<
-    ProjectableDisplacementBasedFoepplvonKarmanElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+    ProjectableDisplacementBasedFoepplvonKarmanElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
@@ -956,8 +973,8 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   class FaceGeometry<
-    FaceGeometry<ProjectableDisplacementBasedFoepplvonKarmanElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+    FaceGeometry<ProjectableDisplacementBasedFoepplvonKarmanElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}

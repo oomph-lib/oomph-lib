@@ -33,6 +33,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
 #endif
@@ -46,6 +47,7 @@
 #include "macro_element.h"
 
 #include "Qelement_face_coordinate_translation_schemes.h"
+
 
 namespace oomph
 {
@@ -82,9 +84,11 @@ namespace oomph
       }*/
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Base class for Qelements
@@ -140,12 +144,11 @@ namespace oomph
       for (unsigned i = 0; i < ncoord; i++)
       {
         // Adjust to move it onto the boundary
-        if (s[i] > s_max())
-          s[i] = s_max();
-        if (s[i] < s_min())
-          s[i] = s_min();
+        if (s[i] > s_max()) s[i] = s_max();
+        if (s[i] < s_min()) s[i] = s_min();
       }
     }
+
 
     /// \short Set pointer to macro element also sets up storage for the
     /// reference coordinates and initialises them
@@ -189,6 +192,7 @@ namespace oomph
       FiniteElement::set_macro_elem_pt(macro_elem_pt);
     }
 
+
     /// \short Access fct to the i-th coordinate of the element's
     /// "lower left" vertex in the associated MacroElement
     double& s_macro_ll(const unsigned& i)
@@ -203,6 +207,7 @@ namespace oomph
 #endif
       return (*S_macro_ll_pt)[i];
     }
+
 
     /// \short Access fct to the i-th coordinate of the element's
     /// "upper right" vertex in the associated MacroElement
@@ -219,6 +224,7 @@ namespace oomph
       return (*S_macro_ur_pt)[i];
     }
 
+
     /// \short Access fct to the i-th coordinate of the element's
     /// "lower left" vertex in the associated MacroElement. (const version)
     double s_macro_ll(const unsigned& i) const
@@ -233,6 +239,7 @@ namespace oomph
 #endif
       return (*S_macro_ll_pt)[i];
     }
+
 
     /// \short Access fct to the i-th coordinate of the element's
     /// "upper right" vertex in the associated MacroElement. (const version)
@@ -322,16 +329,17 @@ namespace oomph
     Vector<double>* S_macro_ur_pt;
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
 
+
   //========================================================================
   /// Base class for Solid Qelements
   //========================================================================
-  class QSolidElementBase :
-    public virtual QElementBase,
-    public virtual SolidFiniteElement
+  class QSolidElementBase : public virtual QElementBase,
+                            public virtual SolidFiniteElement
   {
   public:
     /// Constructor: Empty
@@ -422,6 +430,7 @@ namespace oomph
         Undeformed_macro_elem_pt->macro_map(s_macro, xi);
       }
 
+
       // Eulerian coordinate directly from  underlying FE representation
       unsigned n_x = x_fe.size();
       for (unsigned i = 0; i < n_x; i++)
@@ -452,9 +461,11 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// General QElement class
@@ -597,12 +608,14 @@ namespace oomph
              double(j) / double(NNODE_1D - 1) * (this->s_max() - this->s_min());
     }
 
+
     /// Get the local fraction of node j in the element
     void local_fraction_of_node(const unsigned& j, Vector<double>& s_fraction)
     {
       s_fraction.resize(1);
       s_fraction[0] = double(j) / double(NNODE_1D - 1);
     }
+
 
     /// This function returns the local fraction of all nodes at the n-th
     /// position in a one dimensional expansion along the i-th local coordinate
@@ -696,6 +709,7 @@ namespace oomph
 
     /// C_style output at n_plot points
     void output(FILE* file_pt, const unsigned& n_plot);
+
 
     /// \short  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
@@ -918,6 +932,7 @@ namespace oomph
       return 1.0;
     }
 
+
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
@@ -954,6 +969,7 @@ namespace oomph
       }
       return nod_pt;
     }
+
 
     /// Get local coordinates of node j in the element; vector sets its own size
     void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
@@ -1074,6 +1090,7 @@ namespace oomph
 
     /// C_style output at n_plot points
     void output(FILE* file_pt, const unsigned& n_plot);
+
 
     /// \short  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
@@ -1281,6 +1298,7 @@ namespace oomph
       set_integration_scheme(&Default_integration_scheme);
     }
 
+
     /// Broken copy constructor
     QElement(const QElement&)
     {
@@ -1314,6 +1332,7 @@ namespace oomph
                        Shape& psi,
                        DShape& dpsids,
                        DShape& d2psids) const;
+
 
     /// \short Overload the template-free interface for the calculation of
     /// the inverse jacobian mapping. This is a three-dimensional element,
@@ -1467,6 +1486,7 @@ namespace oomph
         for (unsigned i = 0; i < sub_plot; i++)
         {
           unsigned d = ((i - (i % (nplot - 1))) / (nplot - 1));
+
 
           // Lower level of rectangle
           file_out
@@ -1758,13 +1778,13 @@ namespace oomph
   {
   };
 
+
   //=======================================================================
   /// SolidQElement elements, specialised to one spatial dimension
   //=======================================================================
   template<unsigned NNODE_1D>
-  class SolidQElement<1, NNODE_1D> :
-    public virtual QElement<1, NNODE_1D>,
-    public virtual QSolidElementBase
+  class SolidQElement<1, NNODE_1D> : public virtual QElement<1, NNODE_1D>,
+                                     public virtual QSolidElementBase
   {
   public:
     /// Constructor
@@ -1825,6 +1845,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////
   // 1D SolidQElements
   ///////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// The output function for n_plot points in each coordinate direction
@@ -1906,6 +1927,7 @@ namespace oomph
     fprintf(file_pt, "\n");
   }
 
+
   //===========================================================
   /// Function to setup geometrical information for lower-dimensional
   /// FaceElements (which are of type SolidQElement<0,1>).
@@ -1923,21 +1945,21 @@ namespace oomph
         static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
+
   //=======================================================================
   /// SolidQElement elements, specialised to two spatial dimensions
   //=======================================================================
   template<unsigned NNODE_1D>
-  class SolidQElement<2, NNODE_1D> :
-    public virtual QElement<2, NNODE_1D>,
-    public virtual QSolidElementBase
+  class SolidQElement<2, NNODE_1D> : public virtual QElement<2, NNODE_1D>,
+                                     public virtual QSolidElementBase
   {
   public:
     /// Constructor
-    SolidQElement() :
-      QElementBase(),
-      QElement<2, NNODE_1D>(),
-      SolidFiniteElement(),
-      QSolidElementBase()
+    SolidQElement()
+      : QElementBase(),
+        QElement<2, NNODE_1D>(),
+        SolidFiniteElement(),
+        QSolidElementBase()
     {
       // Set the Lagrangian dimension of the element
       set_lagrangian_dimension(2);
@@ -1973,6 +1995,7 @@ namespace oomph
     /// C_style output at n_plot points
     inline void output(FILE* file_pt, const unsigned& n_plot);
 
+
     /// \short Build the lower-dimensional FaceElement (an element of type
     /// SolidQElement<1,NNODE_1D>).The face index takes one of four values
     /// corresponding to the four possible faces:
@@ -1983,6 +2006,7 @@ namespace oomph
     inline void build_face_element(const int& face_index,
                                    FaceElement* face_element_pt);
   };
+
 
   ///////////////////////////////////////////////////////////////////////////
   // 2D SolidQElements
@@ -2031,6 +2055,7 @@ namespace oomph
     outfile << std::endl;
   }
 
+
   //====================================================================
   /// C-style output function for any number of points per element
   //====================================================================
@@ -2074,6 +2099,7 @@ namespace oomph
     fprintf(file_pt, "\n");
   }
 
+
   //===========================================================
   /// Function to setup geometrical information for lower-dimensional
   /// FaceElements (which are of type SolidQElement<1,NNODE_1D>).
@@ -2091,21 +2117,21 @@ namespace oomph
         static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
+
   //=======================================================================
   /// SolidQElement elements, specialised to three spatial dimensions
   //=======================================================================
   template<unsigned NNODE_1D>
-  class SolidQElement<3, NNODE_1D> :
-    public virtual QElement<3, NNODE_1D>,
-    public virtual QSolidElementBase
+  class SolidQElement<3, NNODE_1D> : public virtual QElement<3, NNODE_1D>,
+                                     public virtual QSolidElementBase
   {
   public:
     /// Constructor
-    SolidQElement() :
-      QElementBase(),
-      QElement<3, NNODE_1D>(),
-      SolidFiniteElement(),
-      QSolidElementBase()
+    SolidQElement()
+      : QElementBase(),
+        QElement<3, NNODE_1D>(),
+        SolidFiniteElement(),
+        QSolidElementBase()
     {
       // Set the Lagrangian dimension of the element
       set_lagrangian_dimension(3);
@@ -2141,6 +2167,7 @@ namespace oomph
     /// C_style output at n_plot points
     inline void output(FILE* file_pt, const unsigned& n_plot);
 
+
     /// \short Build the lower-dimensional FaceElement (an element of type
     /// SolidQElement<2,NNODE_1D>). The face index takes of one
     /// six values corresponding
@@ -2154,6 +2181,7 @@ namespace oomph
     inline void build_face_element(const int& face_index,
                                    FaceElement* face_element_pt);
   };
+
 
   ///////////////////////////////////////////////////////////////////////////
   // 3D SolidQElements
@@ -2207,6 +2235,7 @@ namespace oomph
     outfile << std::endl;
   }
 
+
   //====================================================================
   /// C-style output function for any number of points per element
   //====================================================================
@@ -2256,6 +2285,7 @@ namespace oomph
     fprintf(file_pt, "\n");
   }
 
+
   //===========================================================
   /// Function to setup geometrical information for lower-dimensional
   /// FaceElements (which are of type SolidQElement<1,NNODE_1D>).
@@ -2272,6 +2302,7 @@ namespace oomph
       ->set_lagrangian_dimension(
         static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
+
 
   //==============================================================
   /// A class that is used to template the refineable Q elements
@@ -2311,6 +2342,7 @@ namespace oomph
     /// Empty constuctor
     RefineableSolidQElement() {}
   };
+
 
 } // namespace oomph
 

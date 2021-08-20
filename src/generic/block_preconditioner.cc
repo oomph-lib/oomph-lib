@@ -32,6 +32,7 @@ namespace oomph
   template<typename MATRIX>
   bool BlockPreconditioner<MATRIX>::Run_block_matrix_test = false;
 
+
   //============================================================================
   /// Determine the size of the matrix blocks and setup the
   /// lookup schemes relating the global degrees of freedom with
@@ -102,6 +103,7 @@ namespace oomph
         throw OomphLibError(
           err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
+
 
       // PARANOID checks for Doftype_coarsen_map_coarse
       // This is also set in the function
@@ -394,6 +396,7 @@ namespace oomph
         master_fine_doftype_translated.push_back(tmp_sub_vec);
       }
 
+
       // master_fine_doftype_translated now contains vectors with values are
       // from 0, 1, 2, ..,
       //
@@ -529,6 +532,7 @@ namespace oomph
       }
 #endif
     }
+
 
     // Now we create the vector Block_to_dof_map_coarse.
     // Recall that the vector describe which dof types are in which block with
@@ -799,6 +803,7 @@ namespace oomph
     unsigned nproc = comm_pt()->nproc();
 #endif
 
+
     /////////////////////////////////////////////////////////////////////////////
     // start of master block preconditioner only operations
     /////////////////////////////////////////////////////////////////////////////
@@ -843,6 +848,7 @@ namespace oomph
         (this->distribution_pt()->distributed() &&
          this->distribution_pt()->communicator_pt()->nproc() > 1);
 
+
       // Matrix must be a CR matrix.
       CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
@@ -855,6 +861,7 @@ namespace oomph
                             OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
       }
+
 
       // Get distribution.
       unsigned first_row = this->distribution_pt()->first_row();
@@ -1465,6 +1472,7 @@ namespace oomph
       }
 #endif
 
+
       // for every global degree of freedom required by this processor we now
       // have the corresponding dof number
 
@@ -1489,6 +1497,7 @@ namespace oomph
       else
       {
 #ifdef OOMPH_HAS_MPI
+
 
         // first compute how many instances of each dof are on this
         // processor
@@ -1747,6 +1756,7 @@ namespace oomph
 
         Dof_block_distribution_pt[dof_i] = new LinearAlgebraDistribution;
 
+
         LinearAlgebraDistributionHelpers::concatenate(
           tmp_dist_pt, *Dof_block_distribution_pt[dof_i]);
       }
@@ -1788,6 +1798,7 @@ namespace oomph
       }
 
     } // Creating Block_distribution_pt.
+
 
     // Create the distribution of the preconditioner matrix,
     // if this preconditioner is a subsidiary preconditioner then it stored
@@ -2053,6 +2064,7 @@ namespace oomph
           new int[Nrows_to_send_for_get_ordered[p]];
       }
 
+
       // loop over my rows to allocate the nrows
       DenseMatrix<unsigned> ptr_block(Internal_nblock_types, nproc, 0);
       for (unsigned i = 0; i < nrow_local; i++)
@@ -2273,6 +2285,7 @@ namespace oomph
 
       // cleaning up Waitalls
 
+
       // wait for the recv requests so we can compute
       // Nrows_to_recv_for_get_ordered
       unsigned n_req_rows = req_rows.size();
@@ -2340,8 +2353,7 @@ namespace oomph
     }
 
     // If we asked for output of blocks to a file then do it.
-    if (block_output_on())
-      output_blocks_to_files(Output_base_filename);
+    if (block_output_on()) output_blocks_to_files(Output_base_filename);
   }
 
   //============================================================================
@@ -2386,6 +2398,7 @@ namespace oomph
       doftype_in_master_preconditioner_coarse,
       doftype_coarsen_map_coarse);
   }
+
 
   //============================================================================
   /// \short Function to turn this block preconditioner into a
@@ -2454,6 +2467,7 @@ namespace oomph
       doftype_in_master_preconditioner_coarse;
   } // end of turn_into_subsidiary_block_preconditioner(...)
 
+
   //============================================================================
   /// Determine the size of the matrix blocks and setup the
   /// lookup schemes relating the global degrees of freedom with
@@ -2509,6 +2523,7 @@ namespace oomph
     // call the block setup method
     this->block_setup(dof_to_block_lookup);
   }
+
 
   //============================================================================
   /// Get the block matrices required for the block preconditioner. Takes a
@@ -3070,6 +3085,7 @@ namespace oomph
     }
   } // get_block_vectors(...)
 
+
   //============================================================================
   /// \short Takes the naturally ordered vector and rearranges it into a
   /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
@@ -3622,6 +3638,7 @@ namespace oomph
     // Return the block vectors all in one go.
     internal_return_block_vectors(most_fine_grain_dof, dof_vector, v);
   } // return_block_vectors(...)
+
 
   //============================================================================
   /// \short Takes the vector of block vectors, s, and copies its entries into
@@ -4868,6 +4885,7 @@ namespace oomph
     }
 #endif
 
+
     // if + only one processor
     //    + more than one processor but matrix_pt is not distributed
     // then use the serial get_block method
@@ -5008,6 +5026,7 @@ namespace oomph
 #endif
     } // else use mpi
   } // function return_block_ordered_preconditioner_vector
+
 
   //============================================================================
   /// \short Takes the block ordered vector, w, and reorders it in natural
@@ -5204,6 +5223,7 @@ namespace oomph
         }
       }
 
+
       // Fill in the compressed row matrix ??ds Note: I kept the calls to
       // build as close as I could to before (had to replace new(dist) with
       // .build(dist) ).
@@ -5221,6 +5241,7 @@ namespace oomph
       }
 #endif
     }
+
 
     // otherwise we are dealing with a distributed matrix
     else
@@ -5866,6 +5887,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
   }
+
 
   template class BlockPreconditioner<CRDoubleMatrix>;
 

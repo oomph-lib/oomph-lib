@@ -128,9 +128,11 @@ namespace oomph
          }
          }*/
 
+
       // Get body force
       double source;
       this->get_source_spherical_adv_diff(ipt, interpolated_x, source);
+
 
       // Get wind
       //--------
@@ -143,6 +145,7 @@ namespace oomph
       double sin_th = sin(interpolated_x[1]);
       // dS is the area weighting
       double dS = r * r * sin_th;
+
 
       // Assemble residuals and Jacobian
       //================================
@@ -295,6 +298,7 @@ namespace oomph
 
     } // End of loop over integration points
   }
+
 
   //====================================================================
   // Force build of templates

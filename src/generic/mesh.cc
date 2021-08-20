@@ -33,6 +33,7 @@
 #include <limits.h>
 #include <typeinfo>
 
+
 // oomph-lib headers
 #include "oomph_utilities.h"
 #include "mesh.h"
@@ -48,6 +49,7 @@ namespace oomph
   /// The Steady Timestepper
   //======================================================
   Steady<0> Mesh::Default_TimeStepper;
+
 
   //=======================================================================
   /// Static boolean flag to control warning about mesh level timesteppers
@@ -178,6 +180,7 @@ namespace oomph
     } // End of loop over submeshes
   }
 
+
   //========================================================
   /// Remove the information about nodes stored on the
   /// b-th boundary of the mesh
@@ -231,6 +234,7 @@ namespace oomph
     // If not do nothing
   }
 
+
   //========================================================
   /// Add the node node_pt to the b-th boundary of the mesh
   /// This function also sets the boundary information in the
@@ -262,6 +266,7 @@ namespace oomph
       Boundary_node_pt[b].push_back(node_pt);
     }
   }
+
 
   //=======================================================
   /// Update nodal positions in response to changes in the domain shape.
@@ -495,6 +500,7 @@ namespace oomph
                << TimingHelpers::timer() - t_start << std::endl;
   }
 
+
   //=======================================================
   /// Reorder nodes in the order in which they are
   /// encountered when stepping through the elements
@@ -637,6 +643,7 @@ namespace oomph
     } // if (use_old_ordering)
   } // End of get_node_reordering
 
+
   //========================================================
   /// Virtual Destructor to clean up all memory
   //========================================================
@@ -751,6 +758,7 @@ namespace oomph
     }
   }
 
+
   //========================================================
   /// Assign local equation numbers in all elements
   //========================================================
@@ -773,8 +781,7 @@ namespace oomph
     bool passed = true;
 
     // Check the mesh for repeated nodes (issues its own error message)
-    if (0 != check_for_repeated_nodes())
-      passed = false;
+    if (0 != check_for_repeated_nodes()) passed = false;
 
     // hierher -- re-enable once problem with Hermite elements has been
     // resolved.
@@ -814,6 +821,7 @@ namespace oomph
       passed = false;
     }
 
+
     // Loop over the nodes, check for duplicates and do self test
     std::set<Node*> node_set_pt;
     unsigned long Node_pt_range = Node_pt.size();
@@ -847,6 +855,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //========================================================
   ///  Check for inverted elements and report outcome
@@ -948,6 +957,7 @@ namespace oomph
       backup;
   }
 
+
   //========================================================
   /// Nodes that have been marked as obsolete are removed
   /// from the mesh and the its boundaries. Returns vector
@@ -988,6 +998,7 @@ namespace oomph
 
     // Now update old vector by setting it equal to the new vector
     Node_pt = new_node_pt;
+
 
     // Boundaries
     //-----------
@@ -1042,6 +1053,7 @@ namespace oomph
     return deleted_node_pt;
   }
 
+
   //========================================================
   /// Output function for the mesh boundaries
   ///
@@ -1067,6 +1079,7 @@ namespace oomph
       }
     }
   }
+
 
   //===================================================================
   /// Dump function for the mesh class.
@@ -1109,6 +1122,7 @@ namespace oomph
       }
     }
   }
+
 
   //=======================================================
   /// Read solution from restart file
@@ -1199,6 +1213,7 @@ namespace oomph
     }
   }
 
+
   //========================================================
   /// Output in paraview format into specified file.
   ///
@@ -1227,6 +1242,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
 #ifdef PARANOID
     // Check if all elements have the same number of degrees of freedom,
@@ -1275,6 +1291,7 @@ namespace oomph
       total_number_of_elements += fe_pt->nsub_elements_paraview(nplot);
     }
 
+
     // File Declaration
     //------------------
 
@@ -1286,6 +1303,7 @@ namespace oomph
              << "<UnstructuredGrid>\n"
              << "<Piece NumberOfPoints=\"" << number_of_nodes
              << "\" NumberOfCells=\"" << total_number_of_elements << "\">\n";
+
 
     // Point Data
     //-----------
@@ -1336,6 +1354,7 @@ namespace oomph
     // Close off the PointData set
     file_out << "</PointData>\n";
 
+
     // Geometric Points
     //------------------
 
@@ -1368,6 +1387,7 @@ namespace oomph
 
     file_out << "</DataArray>\n"
              << "</Points>\n";
+
 
     // Cells
     //-------
@@ -1451,12 +1471,14 @@ namespace oomph
     file_out << "</DataArray>\n"
              << "</Cells>\n";
 
+
     // File Closure
     //-------------
     file_out << "</Piece>\n"
              << "</UnstructuredGrid>\n"
              << "</VTKFile>";
   }
+
 
   //========================================================
   /// Output in paraview format into specified file.
@@ -1488,6 +1510,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
 #ifdef PARANOID
     // Check if all elements have the same number of degrees of freedom,
@@ -1536,6 +1559,7 @@ namespace oomph
       total_number_of_elements += fe_pt->nsub_elements_paraview(nplot);
     }
 
+
     // File Declaration
     //------------------
 
@@ -1547,6 +1571,7 @@ namespace oomph
              << "<UnstructuredGrid>\n"
              << "<Piece NumberOfPoints=\"" << number_of_nodes
              << "\" NumberOfCells=\"" << total_number_of_elements << "\">\n";
+
 
     // Point Data
     //-----------
@@ -1597,6 +1622,7 @@ namespace oomph
     // Close off the PointData set
     file_out << "</PointData>\n";
 
+
     // Geometric Points
     //------------------
 
@@ -1629,6 +1655,7 @@ namespace oomph
 
     file_out << "</DataArray>\n"
              << "</Points>\n";
+
 
     // Cells
     //-------
@@ -1712,12 +1739,14 @@ namespace oomph
     file_out << "</DataArray>\n"
              << "</Cells>\n";
 
+
     // File Closure
     //-------------
     file_out << "</Piece>\n"
              << "</UnstructuredGrid>\n"
              << "</VTKFile>";
   }
+
 
   //========================================================
   /// Output in paraview format into specified file.
@@ -1750,6 +1779,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
 #ifdef PARANOID
     // Check if all elements have the same number of degrees of freedom,
@@ -1798,6 +1828,7 @@ namespace oomph
       total_number_of_elements += fe_pt->nsub_elements_paraview(nplot);
     }
 
+
     // File Declaration
     //------------------
 
@@ -1809,6 +1840,7 @@ namespace oomph
              << "<UnstructuredGrid>\n"
              << "<Piece NumberOfPoints=\"" << number_of_nodes
              << "\" NumberOfCells=\"" << total_number_of_elements << "\">\n";
+
 
     // Point Data
     //-----------
@@ -1860,6 +1892,7 @@ namespace oomph
     // Close off the PointData set
     file_out << "</PointData>\n";
 
+
     // Geometric Points
     //------------------
 
@@ -1892,6 +1925,7 @@ namespace oomph
 
     file_out << "</DataArray>\n"
              << "</Points>\n";
+
 
     // Cells
     //-------
@@ -1975,12 +2009,14 @@ namespace oomph
     file_out << "</DataArray>\n"
              << "</Cells>\n";
 
+
     // File Closure
     //-------------
     file_out << "</Piece>\n"
              << "</UnstructuredGrid>\n"
              << "</VTKFile>";
   }
+
 
   //========================================================
   /// Output function for the mesh class
@@ -2066,6 +2102,7 @@ namespace oomph
     }
   }
 
+
   //========================================================
   /// Output function for the mesh class
   ///
@@ -2150,6 +2187,7 @@ namespace oomph
       }
     }
   }
+
 
   //========================================================
   /// Output function for the mesh class
@@ -2425,6 +2463,7 @@ namespace oomph
     }
   }
 
+
   //===============================================================
   /// Return true if the pointer corresponds to any data stored in
   /// the mesh and false if not
@@ -2468,6 +2507,7 @@ namespace oomph
     // If we get here we haven't found the data, so return false
     return false;
   }
+
 
   //===============================================================
   /// Set the time stepper associated with all the nodal data
@@ -2529,8 +2569,7 @@ namespace oomph
     {
       // Some elements may not have been build yet, just store a null pointer
       // for these cases.
-      if (Element_pt[e] == 0)
-        fe_pt[e] = 0;
+      if (Element_pt[e] == 0) fe_pt[e] = 0;
       else
         fe_pt[e] = finite_element_pt(e);
     }
@@ -2602,6 +2641,7 @@ namespace oomph
       throw OomphLibError(
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
+
 
     // Create temporary storage for a pointer to the old node.
     // This is required because if we have passed a reference to the
@@ -2823,6 +2863,7 @@ namespace oomph
 
     } // end loop over processes
 
+
     double t_end = 0.0;
     if (Global_timings::Doc_comprehensive_timings)
     {
@@ -2865,6 +2906,7 @@ namespace oomph
     int n_proc = Comm_pt->nproc();
     int my_rank = Comm_pt->my_rank();
 
+
 #ifdef PARANOID
     // Has some twit filled in shared nodes with own process?!
     // Check at start of function
@@ -2876,6 +2918,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Stage 1: Populate the set of of processor IDs that
     // each haloed node on current processor is haloed by.
@@ -2916,6 +2959,7 @@ namespace oomph
       tt_start = TimingHelpers::timer();
     }
 
+
     // Stage 2: All-to-all communication to inform all processors that
     // hold halo nodes with current processor about all domains that the current
     // processor shares nodes with [This will allow the other processors to add
@@ -2930,6 +2974,7 @@ namespace oomph
 
     // Start location within send_data for data to be sent to each processor
     Vector<int> send_displacement(n_proc, 0);
+
 
     // Loop over haloed nodes with other domains
     for (int domain = 0; domain < n_proc; domain++)
@@ -2975,12 +3020,14 @@ namespace oomph
       send_n[domain] = send_data.size() - send_displacement[domain];
     }
 
+
     // Storage for the number of data to be received from each processor
     Vector<int> receive_n(n_proc, 0);
 
     // Now send numbers of data to be sent between all processors
     MPI_Alltoall(
       &send_n[0], 1, MPI_INT, &receive_n[0], 1, MPI_INT, Comm_pt->mpi_comm());
+
 
     // We now prepare the data to be received
     // by working out the displacements from the received data
@@ -3019,6 +3066,7 @@ namespace oomph
                   MPI_UNSIGNED,
                   Comm_pt->mpi_comm());
 
+
     if (Global_timings::Doc_comprehensive_timings)
     {
       tt_end = TimingHelpers::timer();
@@ -3027,6 +3075,7 @@ namespace oomph
       tt_start = TimingHelpers::timer();
     }
 
+
     if (Global_timings::Doc_comprehensive_timings)
     {
       oomph_info << "Starting vector to set conversion in "
@@ -3034,6 +3083,7 @@ namespace oomph
                  << nshared_node() << " nodes\n";
       tt_start = TimingHelpers::timer();
     }
+
 
     // Copy vector-based representation of shared nodes into
     // sets for faster search
@@ -3047,6 +3097,7 @@ namespace oomph
       }
     }
 
+
     if (Global_timings::Doc_comprehensive_timings)
     {
       tt_end = TimingHelpers::timer();
@@ -3055,6 +3106,7 @@ namespace oomph
         << tt_end - tt_start << std::endl;
       tt_start = TimingHelpers::timer();
     }
+
 
     // Now use the received data
     for (int send_rank = 0; send_rank < n_proc; send_rank++)
@@ -3105,6 +3157,7 @@ namespace oomph
             std::make_pair(nod_pt, domain_set);
 
         } // end of loop over halo nodes
+
 
         // Now add new shared nodes in order
 #ifdef PARANOID
@@ -3171,6 +3224,7 @@ namespace oomph
 
     } // end of loop over send ranks
 
+
 #ifdef PARANOID
     // Has some twit filled in shared nodes with own process?!
     // Check at end pf function.
@@ -3182,6 +3236,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     if (Global_timings::Doc_comprehensive_timings)
     {
@@ -3199,6 +3254,7 @@ namespace oomph
                  << t_end - t_start << std::endl;
     }
   }
+
 
   //========================================================================
   /// Classify all halo and haloed information in the mesh
@@ -3236,6 +3292,7 @@ namespace oomph
       oomph_info.stream_pt()->flush();
       tt_start = TimingHelpers::timer();
     }
+
 
     // Wipe existing storage schemes for halo(ed) nodes
     Halo_node_pt.clear();
@@ -3288,6 +3345,7 @@ namespace oomph
       }
     }
 
+
     // Loop over all [non-halo] elements and associate their nodes
     // with current procesor
     unsigned nelem = this->nelement();
@@ -3319,6 +3377,7 @@ namespace oomph
         }
       }
     }
+
 
     if (Global_timings::Doc_comprehensive_timings)
     {
@@ -3391,6 +3450,7 @@ namespace oomph
             }
           }
         }
+
 
         // Send the information
         MPI_Send(&count_data, 1, MPI_UNSIGNED, d, 0, Comm_pt->mpi_comm());
@@ -3493,6 +3553,7 @@ namespace oomph
       tt_start = TimingHelpers::timer();
     }
 
+
     // MemoryUsage::doc_memory_usage("after pt2pt send/recv");
 
     // Loop over all nodes on the present processor and put the highest-numbered
@@ -3520,8 +3581,7 @@ namespace oomph
            it != procs_set.end();
            it++)
       {
-        if (*it > proc_max)
-          proc_max = *it;
+        if (*it > proc_max) proc_max = *it;
       }
       processor_in_charge[nod_pt] = proc_max;
 
@@ -3536,13 +3596,13 @@ namespace oomph
              it != procs_set_solid.end();
              it++)
         {
-          if (*it > proc_max_solid)
-            proc_max_solid = *it;
+          if (*it > proc_max_solid) proc_max_solid = *it;
         }
         processor_in_charge[solid_nod_pt->variable_position_pt()] =
           proc_max_solid;
       }
     }
+
 
     // First stab at determining halo nodes. They are located on the halo
     // elements and the processor in charge differs from the
@@ -3622,6 +3682,7 @@ namespace oomph
       }
     }
 
+
     // First stab at determining haloed nodes. They are located on the haloed
     // elements and the processor in charge is the current processor
 
@@ -3673,6 +3734,7 @@ namespace oomph
       }
     }
 
+
     if (Global_timings::Doc_comprehensive_timings)
     {
       tt_end = TimingHelpers::timer();
@@ -3684,6 +3746,7 @@ namespace oomph
     }
 
     // MemoryUsage::doc_memory_usage("after first classific");
+
 
     // Find any overlooked halo nodes: These are any nodes on the halo/haloed
     // elements (i.e. precisely the nodes currently contained in the shared
@@ -3700,6 +3763,7 @@ namespace oomph
     // through the intermediate processor (here proc 0) that contains the node
     // in lookup schemes with the halo processor (here proc 3, this one) and the
     // one that contains the non-halo counterpart (here proc 1).
+
 
     // Counter for number of overlooked halos (if there aren't any we don't
     // need any comms below)
@@ -3776,6 +3840,7 @@ namespace oomph
       send_n[domain] = send_data.size() - send_displacement[domain];
     }
 
+
     // Check if any processor has stumbled across overlooked halos
     // (if not we can omit the comms below)
     unsigned global_max_n_overlooked_halo = 0;
@@ -3785,6 +3850,7 @@ namespace oomph
                   MPI_UNSIGNED,
                   MPI_MAX,
                   Comm_pt->mpi_comm());
+
 
     oomph_info << "Global max number of overlooked haloes: "
                << global_max_n_overlooked_halo << std::endl;
@@ -3811,6 +3877,7 @@ namespace oomph
       MPI_Alltoall(
         &send_n[0], 1, MPI_INT, &receive_n[0], 1, MPI_INT, Comm_pt->mpi_comm());
 
+
       if (Global_timings::Doc_comprehensive_timings)
       {
         tt_end = TimingHelpers::timer();
@@ -3822,6 +3889,7 @@ namespace oomph
       }
 
       // MemoryUsage::doc_memory_usage("after 1st alltoall");
+
 
       // We now prepare the data to be received
       // by working out the displacements from the received data
@@ -3859,6 +3927,7 @@ namespace oomph
                     &receive_displacement[0],
                     MPI_INT,
                     Comm_pt->mpi_comm());
+
 
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -3908,11 +3977,13 @@ namespace oomph
               // Find actual node from shared node lookup scheme
               Node* nod_pt = shared_node_pt(send_rank, j);
 
+
               // Note: This search seems relatively cheap
               //       and in the tests done, did not benefit
               //       from conversion to map-based search
               //       as in
               //       TreeBasedRefineableMeshBase::synchronise_hanging_nodes()
+
 
               // Locate its index in lookup scheme with proc in charge
               bool found = false;
@@ -3950,6 +4021,7 @@ namespace oomph
           }
         }
       } // End of data is received
+
 
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -3997,6 +4069,7 @@ namespace oomph
           all_send_data.size() - all_send_displacement[domain];
       }
 
+
       if (Global_timings::Doc_comprehensive_timings)
       {
         tt_end = TimingHelpers::timer();
@@ -4020,6 +4093,7 @@ namespace oomph
                    1,
                    MPI_INT,
                    Comm_pt->mpi_comm());
+
 
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -4071,6 +4145,7 @@ namespace oomph
                     MPI_INT,
                     Comm_pt->mpi_comm());
 
+
       if (Global_timings::Doc_comprehensive_timings)
       {
         tt_end = TimingHelpers::timer();
@@ -4082,6 +4157,7 @@ namespace oomph
       }
 
       // MemoryUsage::doc_memory_usage("after 4th alltoall");
+
 
       // Now use the received data
       for (int send_rank = 0; send_rank < n_proc; send_rank++)
@@ -4174,6 +4250,7 @@ namespace oomph
         }
       }
 
+
       // Doc stats
       if (report_stats)
       {
@@ -4237,6 +4314,7 @@ namespace oomph
       //   }
 
     } // end if comms reqd because we encountered overlooked halo elements
+
 
     // MemoryUsage::doc_memory_usage("before sync halo nodes");
 
@@ -4308,6 +4386,7 @@ namespace oomph
       }
     }
 
+
     // MemoryUsage::doc_memory_usage("before resize halo nodes");
 
     // Now resize halo nodes if required (can be over-ruled from the outside
@@ -4332,6 +4411,7 @@ namespace oomph
     //  MemoryUsage::doc_memory_usage(
     //   "at end of Mesh::classify_halo_and_halo_nodes()");
   }
+
 
   //========================================================================
   /// Helper function that resizes halo nodes to the same
@@ -4661,6 +4741,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Get all the halo data stored in the mesh and add pointers to
   /// the data to the map, indexed by global equation number
@@ -4754,6 +4835,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Get halo node stats for this distributed mesh:
   /// Average/max/min number of halo nodes over all processors.
@@ -4797,10 +4879,8 @@ namespace oomph
       for (int i = 0; i < n_proc; i++)
       {
         av_number += double(nhalo_nodes[i]);
-        if (int(nhalo_nodes[i]) > max)
-          max = nhalo_nodes[i];
-        if (int(nhalo_nodes[i]) < min)
-          min = nhalo_nodes[i];
+        if (int(nhalo_nodes[i]) > max) max = nhalo_nodes[i];
+        if (int(nhalo_nodes[i]) < min) min = nhalo_nodes[i];
       }
       av_number /= double(n_proc);
     }
@@ -4813,6 +4893,7 @@ namespace oomph
     max_number = max;
     min_number = min;
   }
+
 
   //========================================================================
   /// Get haloed node stats for this distributed mesh:
@@ -4857,10 +4938,8 @@ namespace oomph
       for (int i = 0; i < n_proc; i++)
       {
         av_number += double(nhaloed_nodes[i]);
-        if (int(nhaloed_nodes[i]) > max)
-          max = nhaloed_nodes[i];
-        if (int(nhaloed_nodes[i]) < min)
-          min = nhaloed_nodes[i];
+        if (int(nhaloed_nodes[i]) > max) max = nhaloed_nodes[i];
+        if (int(nhaloed_nodes[i]) < min) min = nhaloed_nodes[i];
       }
       av_number /= double(n_proc);
     }
@@ -5028,6 +5107,7 @@ namespace oomph
     {
       this->node_pt(j)->set_obsolete();
     }
+
 
     // Backup old mesh data and flush mesh
     //-------------------------------------
@@ -5265,6 +5345,7 @@ namespace oomph
           ref_el_pt->tree_pt()->flush_object();
         }
 
+
         // Store pointer to the element that's about to be deleted.
 
         // Only for structured meshes since this "deleted_element_pt"
@@ -5319,6 +5400,7 @@ namespace oomph
         }
       }
     }
+
 
     // Now get root haloed elements: root_haloed_element[p][j] stores
     // the element number (in the order in which the elements are stored
@@ -5397,6 +5479,7 @@ namespace oomph
                   comm_pt->mpi_comm());
     }
 
+
     // Determine root haloed elements
     //-------------------------------
 
@@ -5446,6 +5529,7 @@ namespace oomph
       }
     }
 
+
     // Doc stats
     if (report_stats)
     {
@@ -5455,6 +5539,7 @@ namespace oomph
                  << this->nroot_haloed_element() << " are root haloed elements"
                  << std::endl;
     }
+
 
     // Loop over all retained elements and mark their nodes
     //-----------------------------------------------------
@@ -5479,8 +5564,10 @@ namespace oomph
       }
     }
 
+
     // Now remove the pruned nodes
     this->prune_dead_nodes();
+
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
     if (is_a_triangle_mesh_base_mesh)
@@ -5522,6 +5609,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// (Irreversibly) prune halo(ed) elements and nodes, usually
   /// after another round of refinement, to get rid of
@@ -5536,6 +5624,7 @@ namespace oomph
     const bool& report_stats)
   {
     // MemoryUsage::doc_memory_usage("at start of mesh-level prunes");
+
 
 #ifdef OOMPH_HAS_MPI
     // Delete any external element storage before performing the redistribution
@@ -5584,6 +5673,7 @@ namespace oomph
         oomph_info
           << "----------------------------------------------------\n\n";
       }
+
 
       double t_start = 0.0;
       if (Global_timings::Doc_comprehensive_timings)
@@ -5672,6 +5762,7 @@ namespace oomph
         &local_n_ref, &int_n_ref, 1, MPI_INT, MPI_MAX, Comm_pt->mpi_comm());
       unsigned n_ref = int(int_n_ref);
 
+
       double t_end = 0.0;
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -5708,6 +5799,7 @@ namespace oomph
           // Extract correct element...
           RefineableElement* ref_el_pt = base_level_elements_pt[e];
 
+
           // Check it exists
           if (ref_el_pt != 0)
           {
@@ -5738,6 +5830,7 @@ namespace oomph
         &n_unif_local, &n_unif, 1, MPI_UNSIGNED, MPI_MAX, Comm_pt->mpi_comm());
       ref_mesh_pt->uniform_refinement_level_when_pruned() = n_unif;
 
+
       t_end = 0.0;
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -5749,7 +5842,9 @@ namespace oomph
         t_start = TimingHelpers::timer();
       }
 
+
       // MemoryUsage::doc_memory_usage("after synchronising refinement levels");
+
 
       // Now work on which "root" halo elements to keep at this level
       // Can't use the current set directly; however,
@@ -6002,6 +6097,7 @@ namespace oomph
       // MemoryUsage::doc_memory_usage("after pt2pt comms of retention
       // pattern");
 
+
       // Backup pointers to nodes in this mesh
       nnod = this->nnode();
       Vector<Node*> backed_up_nod_pt(nnod);
@@ -6108,6 +6204,7 @@ namespace oomph
       }
 
       // MemoryUsage::doc_memory_usage("after deleting superfluous elements");
+
 
       // Wipe the storage scheme for (root) halo(ed) elements and then re-assign
       Root_haloed_element_pt.clear();
@@ -6233,6 +6330,7 @@ namespace oomph
       // on refined meshes
       this->reorder_nodes();
 
+
       if (Global_timings::Doc_comprehensive_timings)
       {
         t_end = TimingHelpers::timer();
@@ -6281,6 +6379,7 @@ namespace oomph
 
     // MemoryUsage::doc_memory_usage("end of mesh level prune");
   }
+
 
   //========================================================================
   ///  Get efficiency of mesh distribution: In an ideal distribution
@@ -6349,10 +6448,8 @@ namespace oomph
           eff = double(n_elements[i] - nhalo_elements[i]) / double(nel);
         }
         av_efficiency += eff;
-        if (eff > max)
-          max = eff;
-        if (eff < min)
-          min = eff;
+        if (eff > max) max = eff;
+        if (eff < min) min = eff;
       }
       av_efficiency /= double(n_proc);
     }
@@ -6365,6 +6462,7 @@ namespace oomph
     max_efficiency = max;
     min_efficiency = min;
   }
+
 
   //========================================================================
   /// Doc the mesh distribution
@@ -6419,6 +6517,7 @@ namespace oomph
     }
 
     some_file.close();
+
 
     // Doc halo elements on this processor
     filename.str("");
@@ -6559,6 +6658,7 @@ namespace oomph
     }
     some_file.close();
 
+
     // Doc non-halo nodes on this processor
     filename.str("");
     filename << doc_info.directory() << "/" << doc_info.label()
@@ -6582,6 +6682,7 @@ namespace oomph
       }
     }
     some_file.close();
+
 
     // Doc nodes on this processor
     filename.str("");
@@ -6627,6 +6728,7 @@ namespace oomph
     }
     some_file.close();
 
+
     // Doc halo nodes on this processor
     filename.str("");
     filename << doc_info.directory() << "/" << doc_info.label()
@@ -6660,6 +6762,7 @@ namespace oomph
       some_file2.close();
     }
     some_file.close();
+
 
     // Doc haloed nodes on this processor
     filename.str("");
@@ -6695,6 +6798,7 @@ namespace oomph
     }
     some_file.close();
 
+
     // Doc shared nodes on this processor
     filename.str("");
     filename << doc_info.directory() << "/" << doc_info.label()
@@ -6728,6 +6832,7 @@ namespace oomph
     }
     some_file.close();
 
+
     // Doc mesh
     filename.str("");
     filename << doc_info.directory() << "/" << doc_info.label() << "mesh"
@@ -6736,6 +6841,7 @@ namespace oomph
     this->output(some_file, 5);
     some_file.close();
 
+
     // Doc boundary scheme
     filename.str("");
     filename << doc_info.directory() << "/" << doc_info.label() << "boundaries"
@@ -6743,6 +6849,7 @@ namespace oomph
     some_file.open(filename.str().c_str());
     this->output_boundaries(some_file);
     some_file.close();
+
 
     // Doc elements next to boundaries scheme
     // if set up
@@ -6766,6 +6873,7 @@ namespace oomph
       }
     }
   }
+
 
   //========================================================================
   /// Check the halo/haloed/shared node/element schemes on the Mesh
@@ -6791,6 +6899,7 @@ namespace oomph
     // Storage for current processor and number of processors
     int n_proc = Comm_pt->nproc();
     int my_rank = Comm_pt->my_rank();
+
 
     // Check the shared node scheme first: if this is incorrect then
     // the halo(ed) node scheme is likely to be wrong too
@@ -6847,6 +6956,7 @@ namespace oomph
       }
     }
 
+
     // Check for duplicates in shared node scheme
     for (int d = 0; d < n_proc; d++)
     {
@@ -6896,6 +7006,7 @@ namespace oomph
       }
     }
 
+
     // Check shared nodes lookup schemes
     //----------------------------------
     double max_error = 0.0;
@@ -6941,6 +7052,7 @@ namespace oomph
                                     OOMPH_CURRENT_FUNCTION,
                                     OOMPH_EXCEPTION_LOCATION);
               }
+
 
               unsigned nod_dim = finite_element_pt(0)->node_pt(0)->ndim();
 
@@ -7233,6 +7345,7 @@ namespace oomph
                                     OOMPH_EXCEPTION_LOCATION);
               }
 
+
               // We can only check nodal stuff for meshes of finite elements
               if (dynamic_cast<FiniteElement*>(this->element_pt(0)))
               {
@@ -7263,6 +7376,7 @@ namespace oomph
                            Comm_pt->mpi_comm(),
                            &status);
                 }
+
 
                 // Receive hanging info to be checked
                 Vector<int> other_nodal_hangings;
@@ -7379,8 +7493,7 @@ namespace oomph
                         count_hanging++;
 
                         // Record geom hang status of other node
-                        if (i == -1)
-                          other_geom_hanging = nmaster_other;
+                        if (i == -1) other_geom_hanging = nmaster_other;
 
                         // Value is hanging on local proc: Does it have the same
                         // number of masters as its counterpart on other proc?
@@ -7468,6 +7581,7 @@ namespace oomph
                               OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
                         }
+
 
                         // If documenting, write to output files
                         if (doc_info.is_doc_enabled())
@@ -7699,6 +7813,7 @@ namespace oomph
         halo_file.close();
       }
 
+
       // Loop over domains for haloed nodes
       for (int d = 0; d < n_proc; d++)
       {
@@ -7796,6 +7911,7 @@ namespace oomph
                                     OOMPH_EXCEPTION_LOCATION);
               }
 
+
               unsigned nod_dim = finite_element_pt(0)->node_pt(0)->ndim();
 
               // Get strung-together nodal positions from other processor
@@ -7890,6 +8006,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // Now check the external halo/haloed element lookup scheme
 
     // Doc external halo/haoloed element lookup schemes
@@ -7906,6 +8023,7 @@ namespace oomph
         ext_halo_file.open(filename.str().c_str());
         output_external_halo_elements(dd, ext_halo_file);
         ext_halo_file.close();
+
 
         filename.str("");
         filename << doc_info.directory() << "/ext_halo_node_check"
@@ -7953,6 +8071,7 @@ namespace oomph
         ext_haloed_file.open(filename.str().c_str());
         output_external_haloed_elements(d, ext_haloed_file);
         ext_haloed_file.close();
+
 
         filename.str("");
         filename << doc_info.directory() << "/ext_haloed_node_check"
@@ -8044,6 +8163,7 @@ namespace oomph
                                     OOMPH_EXCEPTION_LOCATION);
               }
 
+
               // We can only check nodal stuff for meshes of finite elements
               FiniteElement* fe_pt =
                 dynamic_cast<FiniteElement*>(ext_haloed_elem_pt[0]);
@@ -8076,6 +8196,7 @@ namespace oomph
                            Comm_pt->mpi_comm(),
                            &status);
                 }
+
 
                 // Receive hanging info to be checked
                 Vector<int> other_nodal_hangings;
@@ -8192,8 +8313,7 @@ namespace oomph
                         count_hanging++;
 
                         // Record geom hang status of other node
-                        if (i == -1)
-                          other_geom_hanging = nmaster_other;
+                        if (i == -1) other_geom_hanging = nmaster_other;
 
                         // Value is hanging on local proc: Does it have the same
                         // number of masters as its counterpart on other proc?
@@ -8281,6 +8401,7 @@ namespace oomph
                               OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
                         }
+
 
                         // If documenting, write to output files
                         if (doc_info.is_doc_enabled())
@@ -8441,6 +8562,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Null out specified external halo node (used when deleting duplicates)
   //========================================================================
@@ -8458,6 +8580,7 @@ namespace oomph
       }
     }
   }
+
 
   //========================================================================
   /// Consolidate external halo node storage by removing nulled out
@@ -8528,12 +8651,14 @@ namespace oomph
       send_n[domain] = send_data.size() - send_displacement[domain];
     }
 
+
     // Storage for the number of data to be received from each processor
     Vector<int> receive_n(n_proc, 0);
 
     // Now send numbers of data to be sent between all processors
     MPI_Alltoall(
       &send_n[0], 1, MPI_INT, &receive_n[0], 1, MPI_INT, Comm_pt->mpi_comm());
+
 
     // We now prepare the data to be received
     // by working out the displacements from the received data
@@ -8628,6 +8753,7 @@ namespace oomph
   }
 
 #endif
+
 
   // =================================================================
   /// Get the number of dof types in the mesh from the first element of the
@@ -8777,8 +8903,7 @@ namespace oomph
 
     // If int_ndof_types if still -1 then no elements were found for this mesh,
     // so it has no dofs.
-    if (int_ndof_types == -1)
-      int_ndof_types = 0;
+    if (int_ndof_types == -1) int_ndof_types = 0;
 
     return unsigned(int_ndof_types);
   }
@@ -8916,8 +9041,7 @@ namespace oomph
 
     // If int_dim if still -1 then no elements were found for this mesh, so it
     // has no elemental dimension.
-    if (int_dim == -1)
-      int_dim = 0;
+    if (int_dim == -1) int_dim = 0;
 
     return unsigned(int_dim);
   }
@@ -9055,8 +9179,7 @@ namespace oomph
 
     // If int_dim if still -1 then no elements were found for this mesh, so it
     // has no nodal dimension.
-    if (int_dim == -1)
-      int_dim = 0;
+    if (int_dim == -1) int_dim = 0;
 
     return unsigned(int_dim);
   }
@@ -9166,6 +9289,7 @@ namespace oomph
                 bool update_all_time_levels = true;
                 alg_node_pt->node_update(update_all_time_levels);
               }
+
 
               // If it's a Solid node, update Lagrangian coordinates
               // from its hanging node representation
@@ -9332,6 +9456,7 @@ namespace oomph
 #endif
   }
 
+
 #ifdef OOMPH_HAS_MPI
 
   // NOTE: the add_external_haloed_node_pt and add_external_haloed_element_pt
@@ -9423,11 +9548,13 @@ namespace oomph
 
 #endif
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   // Functions for solid meshes
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Make the current configuration the undeformed one by
@@ -9466,15 +9593,18 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Static problem that can be used to assign initial conditions
   /// on a given mesh.
   //=======================================================================
   SolidICProblem SolidMesh::Solid_IC_problem;
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=================================================================
   /// Namespace for paraview-style output helper functions
@@ -9516,5 +9646,6 @@ namespace oomph
   ////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////
+
 
 } // namespace oomph

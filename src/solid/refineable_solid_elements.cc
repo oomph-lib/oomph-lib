@@ -245,6 +245,7 @@ namespace oomph
         this->get_d_stress_dG_upper(g, G, sigma, d_stress_dG);
       }
 
+
       // Add pre-stress
       for (unsigned i = 0; i < DIM; i++)
       {
@@ -256,6 +257,7 @@ namespace oomph
 
       //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL
       // DISPLACEMENTS========
+
 
       // Default setting for non-hanging node
       unsigned n_master = 1;
@@ -280,6 +282,7 @@ namespace oomph
         {
           n_master = 1;
         }
+
 
         // Storage for local equation numbers at node indexed by
         // type and direction
@@ -347,6 +350,7 @@ namespace oomph
                 }
                 residuals[local_eqn] += W * sum * hang_weight;
 
+
                 // Get Jacobian too?
                 if (flag == 1)
                 {
@@ -376,6 +380,7 @@ namespace oomph
                     {
                       nn_master = 1;
                     }
+
 
                     // Storage for local unknown numbers at node indexed by
                     // type and direction
@@ -412,6 +417,7 @@ namespace oomph
                         hhang_weight = 1.0;
                       }
 
+
                       // Loop of types of dofs again
                       for (unsigned kk = 0; kk < n_position_type; kk++)
                       {
@@ -422,12 +428,14 @@ namespace oomph
                           int local_unknown =
                             position_local_unk_at_node(kk, ii);
 
+
                           /*IF it's not a boundary condition*/
                           if (local_unknown >= 0)
                           {
                             // Offset for faster access in general stress loop
                             const unsigned offset2 = d_G_dX.offset(ll, kk, ii);
                             const unsigned offset4 = dpsidxi.offset(ll, kk);
+
 
                             // General stress term
                             //--------------------
@@ -442,8 +450,7 @@ namespace oomph
                               {
                                 double factor =
                                   d_G_dX.raw_direct_access(count1);
-                                if (a == b)
-                                  factor *= 0.5;
+                                if (a == b) factor *= 0.5;
 
                                 // Offset for faster access
                                 unsigned offset3 = d_stress_dG.offset(a, b);
@@ -534,6 +541,7 @@ namespace oomph
       } // End of loop over nodes
     } // End of loop over integration points
   }
+
 
   //=======================================================================
   /// Compute the diagonal of the velocity mass matrix for LSC
@@ -651,6 +659,7 @@ namespace oomph
     } // End integration loop
   }
 
+
   //===========================================================================
   /// Fill in element's contribution to the elemental
   /// residual vector and/or Jacobian matrix.
@@ -683,6 +692,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Simply set up initial condition?
     if (Solid_ic_pt != 0)
@@ -734,12 +744,14 @@ namespace oomph
     // Timescale ratio (non-dim density)
     double lambda_sq = this->lambda_sq();
 
+
     // Time factor
     double time_factor = 0.0;
     if (lambda_sq > 0)
     {
       time_factor = this->node_pt(0)->position_time_stepper_pt()->weight(2, 0);
     }
+
 
     // Set up memory for the shape functions
     Shape psi(n_node, n_position_type);
@@ -851,6 +863,7 @@ namespace oomph
         interpolated_solid_p += this->solid_p(l) * psisp[l];
       }
 
+
       // Declare and calculate the deformed metric tensor
       DenseMatrix<double> G(DIM);
 
@@ -921,6 +934,7 @@ namespace oomph
           }
         }
       }
+
 
       // Incompressible: Compute the deviatoric part of the stress tensor, the
       // contravariant deformed metric tensor and the determinant
@@ -1016,6 +1030,7 @@ namespace oomph
           n_master = 1;
         }
 
+
         // Storage for local equation numbers at node indexed by
         // type and direction
         DenseMatrix<int> position_local_eqn_at_node(n_position_type, DIM);
@@ -1047,6 +1062,7 @@ namespace oomph
             // Hang weight is one
             hang_weight = 1.0;
           }
+
 
           // Loop of types of dofs
           for (unsigned k = 0; k < n_position_type; k++)
@@ -1082,6 +1098,7 @@ namespace oomph
                 }
                 residuals[local_eqn] += W * sum * hang_weight;
 
+
                 // Get the mass matrix
                 // This involves another loop over the points
                 // because the jacobian may NOT be being calculated analytically
@@ -1114,6 +1131,7 @@ namespace oomph
                       nn_master = 1;
                     }
 
+
                     // Storage for local unknown numbers at node indexed by
                     // type and direction
                     DenseMatrix<int> position_local_unk_at_node(n_position_type,
@@ -1149,6 +1167,7 @@ namespace oomph
                         hhang_weight = 1.0;
                       }
 
+
                       // Loop of types of dofs again
                       for (unsigned kk = 0; kk < n_position_type; kk++)
                       {
@@ -1166,6 +1185,7 @@ namespace oomph
                     }
                   }
                 }
+
 
                 // Get Jacobian too?
                 if ((flag == 1) || (flag == 3))
@@ -1197,6 +1217,7 @@ namespace oomph
                       nn_master = 1;
                     }
 
+
                     // Storage for local unknown numbers at node indexed by
                     // type and direction
                     DenseMatrix<int> position_local_unk_at_node(n_position_type,
@@ -1232,6 +1253,7 @@ namespace oomph
                         hhang_weight = 1.0;
                       }
 
+
                       // Loop of types of dofs again
                       for (unsigned kk = 0; kk < n_position_type; kk++)
                       {
@@ -1249,6 +1271,7 @@ namespace oomph
                             const unsigned offset2 = d_G_dX.offset(ll, kk, ii);
                             const unsigned offset4 = dpsidxi.offset(ll, kk);
 
+
                             // General stress term
                             //--------------------
                             double sum = 0.0;
@@ -1262,8 +1285,7 @@ namespace oomph
                               {
                                 double factor =
                                   d_G_dX.raw_direct_access(count1);
-                                if (a == b)
-                                  factor *= 0.5;
+                                if (a == b) factor *= 0.5;
 
                                 // Offset for faster access
                                 unsigned offset3 = d_stress_dG.offset(a, b);
@@ -1533,6 +1555,7 @@ namespace oomph
                       hhang_weight = 1.0;
                     }
 
+
                     // Loop of types of dofs again
                     for (unsigned kk = 0; kk < n_position_type; kk++)
                     {
@@ -1612,6 +1635,7 @@ namespace oomph
                     nn_master = 1;
                   }
 
+
                   // Storage for local unknown numbers at node indexed by
                   // type and direction
                   DenseMatrix<int> position_local_unk_at_node(n_position_type,
@@ -1646,6 +1670,7 @@ namespace oomph
                       // Hang weight is one
                       hhang_weight = 1.0;
                     }
+
 
                     // Loop of types of dofs again
                     for (unsigned kk = 0; kk < n_position_type; kk++)
@@ -1687,6 +1712,7 @@ namespace oomph
                   }
                 }
               }
+
 
               // Add in the pressure jacobian terms
               if (flag > 0)
@@ -1745,12 +1771,14 @@ namespace oomph
                 } // End of loop over pressure dofs
               } // End of pressure Jacobian
 
+
             } // End of nearly incompressible case
           } // End of if not boundary condition
         } // End of loop over master nodes
       } // End of loop over pressure dofs
     } // End of loop over integration points
   }
+
 
   //====================================================================
   /// Forcing building of required templates

@@ -45,8 +45,8 @@ namespace oomph
     /// The GeomObject must be parametrised such that
     /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
     /// in anticlockwise direction.
-    RectangleWithHoleDomain(GeomObject* cylinder_pt, const double& length) :
-      Cylinder_pt(cylinder_pt)
+    RectangleWithHoleDomain(GeomObject* cylinder_pt, const double& length)
+      : Cylinder_pt(cylinder_pt)
     {
       // Vertices of rectangle
       Lower_left.resize(2);
@@ -92,6 +92,7 @@ namespace oomph
         Macro_element_pt[i] = new QMacroElement<2>(this, i);
       }
     }
+
 
     /// Destructor: Empty; cleanup done in base class
     ~RectangleWithHoleDomain() {}

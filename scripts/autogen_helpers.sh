@@ -57,12 +57,12 @@ YesNoRead()
 }
 
 # Takes the configure options file and edits the FLAGS to include the
-# -fPIC flag and, for the CXXFLAGS and CFLAGS, the -DPIC flag 
+# -fPIC flag and, for the CXXFLAGS and CFLAGS, the -DPIC flag
 InsertExtraFlags()
 {
     # Read in the first argument: the configure options file
     temp_configure_options_file="$1";
-    
+
     # The folder of the configure options
     config_opts_dir=`dirname "$temp_configure_options_file"`;
 
@@ -76,7 +76,7 @@ InsertExtraFlags()
     # I simply direct the output to a temporary file and use that file to
     # update the original one.
     temp_file="$config_opts_dir/.$config_opts_base"_"$RANDOM";
-    
+
     # Read in the second argument: the additional configure flags
     extra_flags="$2";
 
@@ -101,19 +101,71 @@ InsertExtraFlags()
 		then
 		    # Get the line number associated with this flag
 		    flag_line_num=`echo "$configure_options_line" | cut -d":" -f1`
-		    
+
 		    # Extract the line containing this flag from the file and
 		    # create a string with the *second* instance of quotation marks
 		    # with the flag and closing speech marks
 		    flag_opts=`echo "$configure_options_line" | cut -d":" -f2 | sed 's/"/ '$extra_flags'"/2'`
 
-		    # Now replace the flags with the updated flags 
+		    # Now replace the flags with the updated flags
 		    sed -e "$flag_line_num"'s/.*/'"$flag_opts"'/' \
 			$temp_configure_options_file > $temp_file \
 			&& mv $temp_file $temp_configure_options_file
 		fi
 	    fi
 	done <<< "$configure_options"
+    done
+}
+
+
+# Adds the '-std=c++11' flag to the CXXFLAGS variable inside the configure
+# options file.
+InsertFlagsForEnablingC++11() {
+    # Read in the first argument: the configure options file
+    temp_configure_options_file="$1"
+
+    # The configure options directory
+    config_opts_dir=$(dirname "$temp_configure_options_file")
+
+    # The configure options file
+    config_opts_base=$(basename "$temp_configure_options_file")
+
+    # Temporary file to store the intermediate line-by-line edits when
+    # using sed. NOTE: the BSD implementation of 'sed' on macOS can't handle
+    # in-place edits so direct the output to a temporary file and use that
+    # file to update the original one.
+    temp_file="$config_opts_dir/.$config_opts_base"_"$RANDOM"
+
+    # Add compiler flags
+    extra_cxx_flags=("-std=c++11")
+
+    # Loop over the flags
+    for flag in ${extra_cxx_flags[@]}; do
+        # Get the line (and line number) associated with the C++ flags
+        configure_options=$(cat $temp_configure_options_file | grep -n "CXXFLAGS=")
+
+        # Loop over the lines found
+        while read -r configure_options_line; do
+            # If we have NOT already included these flags
+            if [[ $configure_options_line != *"$flag"* ]]; then
+                # Make sure the line doesn't start with a # character (we don't
+                # want to use commented out lines!)
+                if [[ $configure_options_line != "#"* ]]; then
+                    # Get the line number associated with this flag
+                    flag_line_num=$(echo "$configure_options_line" | cut -d":" -f1)
+
+                    # Extract the line containing this flag from the file and
+                    # create a string with the *second* instance of quotation marks
+                    # with the flag and closing speech marks
+                    flag_opts=$(echo "$configure_options_line" | cut -d":" -f2 | sed 's/"/ '$flag'"/2')
+
+                    # Now replace the flags with the updated flags
+                    sed -e "$flag_line_num"'s/.*/'"$flag_opts"'/' \
+                        $temp_configure_options_file >$temp_file &&
+                        mv $temp_file $temp_configure_options_file
+                fi
+            fi
+        done <<<"$configure_options"
     done
 }
 
@@ -139,7 +191,7 @@ CheckOptions()
    NF {# pattern NF ignores blank lines since it expands to 0 for empty lines!
    # Ignore any comments (first entry in row starts with "#")
    if (substr($1,1,1)!="#")
-    { 
+    {
      # Does the first entry in the line start with "--"?
      if (substr($1,1,2)=="--"){encountered_first_minus_minus=1}
 
@@ -193,7 +245,7 @@ EchoUsage()
     echo "  "
     echo "  -k"
     echo "      Keep compiling as far as possible even after errors occur (this"
-    echo "      can save time but makes it harder to spot error messages)." 
+    echo "      can save time but makes it harder to spot error messages)."
     echo "  "
     echo "  -s"
     echo "      Silent mode: don't output so much useless spam from make and ./configure."
@@ -234,7 +286,7 @@ EchoUsageForInteractiveScript()
         echo " --rebuild     : Complete re-configure, followed by normal build sequence."
         echo " "
         echo "--jobs[=N]     :  Run N make jobs simultaneously."
-        echo "                  Useful for speeding up the build on multi-core processors." 
+        echo "                  Useful for speeding up the build on multi-core processors."
         exit
 }
 

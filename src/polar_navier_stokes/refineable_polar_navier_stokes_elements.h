@@ -51,10 +51,10 @@ namespace oomph
   ///
   ///
   //======================================================================
-  class RefineablePolarNavierStokesEquations :
-    public virtual PolarNavierStokesEquations,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineablePolarNavierStokesEquations
+    : public virtual PolarNavierStokesEquations,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   protected:
     /// \short Pointer to n_p-th pressure node (Default: NULL,
@@ -73,12 +73,13 @@ namespace oomph
 
   public:
     /// \short Constructor
-    RefineablePolarNavierStokesEquations() :
-      PolarNavierStokesEquations(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineablePolarNavierStokesEquations()
+      : PolarNavierStokesEquations(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// \short  Loop over all elements in Vector (which typically contains
     /// all the elements in a fluid mesh) and pin the nodal pressure degrees
@@ -116,6 +117,7 @@ namespace oomph
           ->unpin_elemental_pressure_dofs();
       }
     }
+
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -210,14 +212,15 @@ namespace oomph
       unsigned flag);
   };
 
+
   //======================================================================
   /// Refineable version of Polar Taylor Hood elements. These classes
   /// can be written in total generality.
   //======================================================================
-  class RefineablePolarTaylorHoodElement :
-    public PolarTaylorHoodElement,
-    public virtual RefineablePolarNavierStokesEquations,
-    public virtual RefineableQElement<2>
+  class RefineablePolarTaylorHoodElement
+    : public PolarTaylorHoodElement,
+      public virtual RefineablePolarNavierStokesEquations,
+      public virtual RefineableQElement<2>
   {
   private:
     /// \short Pointer to n_p-th pressure node
@@ -266,11 +269,11 @@ namespace oomph
 
   public:
     /// \short Constructor
-    RefineablePolarTaylorHoodElement() :
-      RefineableElement(),
-      RefineablePolarNavierStokesEquations(),
-      RefineableQElement<2>(),
-      PolarTaylorHoodElement()
+    RefineablePolarTaylorHoodElement()
+      : RefineableElement(),
+        RefineablePolarNavierStokesEquations(),
+        RefineableQElement<2>(),
+        PolarTaylorHoodElement()
     {
     }
 
@@ -501,6 +504,7 @@ namespace oomph
       }
     }
 
+
     /// \short The number of 1d pressure nodes is 2, the number of 1d velocity
     /// nodes is the same as the number of 1d geometric nodes.
     unsigned ninterpolating_node_1d(const int& value_id)
@@ -544,6 +548,7 @@ namespace oomph
         return this->shape(s, psi);
       }
     }
+
 
     /// \short Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
@@ -643,29 +648,32 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// \short Face geometry of the RefineablePolarTaylorHoodElements is the
   /// same as the Face geometry of the PolarTaylorHoodElements.
   //=======================================================================
   template<>
-  class FaceGeometry<RefineablePolarTaylorHoodElement> :
-    public virtual FaceGeometry<PolarTaylorHoodElement>
+  class FaceGeometry<RefineablePolarTaylorHoodElement>
+    : public virtual FaceGeometry<PolarTaylorHoodElement>
   {
   public:
     FaceGeometry() : FaceGeometry<PolarTaylorHoodElement>() {}
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// Refineable version of Crouzeix Raviart elements. Generic class definitions
   //======================================================================
-  class RefineablePolarCrouzeixRaviartElement :
-    public PolarCrouzeixRaviartElement,
-    public virtual RefineablePolarNavierStokesEquations,
-    public virtual RefineableQElement<2>
+  class RefineablePolarCrouzeixRaviartElement
+    : public PolarCrouzeixRaviartElement,
+      public virtual RefineablePolarNavierStokesEquations,
+      public virtual RefineableQElement<2>
   {
   private:
     /// Unpin all internal pressure dofs
@@ -681,11 +689,11 @@ namespace oomph
 
   public:
     /// \short Constructor
-    RefineablePolarCrouzeixRaviartElement() :
-      RefineableElement(),
-      RefineablePolarNavierStokesEquations(),
-      RefineableQElement<2>(),
-      PolarCrouzeixRaviartElement()
+    RefineablePolarCrouzeixRaviartElement()
+      : RefineableElement(),
+        RefineablePolarNavierStokesEquations(),
+        RefineableQElement<2>(),
+        PolarCrouzeixRaviartElement()
     {
     }
 
@@ -808,6 +816,7 @@ namespace oomph
     /// elements. This must be specialised for each dimension.
     inline void further_build();
 
+
     /// \short Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
     /// and
@@ -867,6 +876,7 @@ namespace oomph
         }
       }
 
+
       // Loop over the pressure data (can't be hanging!)
       unsigned n_pres = this->npres_pnst();
       for (unsigned l = 0; l < n_pres; l++)
@@ -879,16 +889,18 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry of the RefineableQuadQCrouzeixRaviartElements
   //=======================================================================
   template<>
-  class FaceGeometry<RefineablePolarCrouzeixRaviartElement> :
-    public virtual FaceGeometry<PolarCrouzeixRaviartElement>
+  class FaceGeometry<RefineablePolarCrouzeixRaviartElement>
+    : public virtual FaceGeometry<PolarCrouzeixRaviartElement>
   {
   public:
     FaceGeometry() : FaceGeometry<PolarCrouzeixRaviartElement>() {}
   };
+
 
   //=====================================================================
   /// 2D Rebuild from sons: Reconstruct pressure from the (merged) sons
@@ -924,6 +936,7 @@ namespace oomph
     internal_data_pt(this->P_pnst_internal_index)
       ->set_value(0, 0.25 * av_press);
 
+
     // Slope in s_0 direction
     //----------------------
 
@@ -954,9 +967,11 @@ namespace oomph
                       ->internal_data_pt(this->P_pnst_internal_index)
                       ->value(0);
 
+
     // Use the average
     internal_data_pt(this->P_pnst_internal_index)
       ->set_value(1, 0.5 * (slope1 + slope2));
+
 
     // Slope in s_1 direction
     //----------------------
@@ -987,6 +1002,7 @@ namespace oomph
                ->object_pt()
                ->internal_data_pt(this->P_pnst_internal_index)
                ->value(0);
+
 
     // Use the average
     internal_data_pt(this->P_pnst_internal_index)

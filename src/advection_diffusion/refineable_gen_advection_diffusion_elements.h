@@ -51,19 +51,20 @@ namespace oomph
   /// are taken into account.
   //======================================================================
   template<unsigned DIM>
-  class RefineableGeneralisedAdvectionDiffusionEquations :
-    public virtual GeneralisedAdvectionDiffusionEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableGeneralisedAdvectionDiffusionEquations
+    : public virtual GeneralisedAdvectionDiffusionEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Empty Constructor
-    RefineableGeneralisedAdvectionDiffusionEquations() :
-      GeneralisedAdvectionDiffusionEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableGeneralisedAdvectionDiffusionEquations()
+      : GeneralisedAdvectionDiffusionEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// Broken copy constructor
     RefineableGeneralisedAdvectionDiffusionEquations(
@@ -92,6 +93,7 @@ namespace oomph
     {
       this->get_flux(s, flux);
     }
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
@@ -158,6 +160,7 @@ namespace oomph
       }
     }
 
+
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
@@ -191,26 +194,28 @@ namespace oomph
       unsigned flag);
   };
 
+
   //======================================================================
   /// \short Refineable version of QGeneralisedAdvectionDiffusionElement.
   /// Inherit from the standard QGeneralisedAdvectionDiffusionElement and the
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQGeneralisedAdvectionDiffusionElement :
-    public QGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>,
-    public virtual RefineableGeneralisedAdvectionDiffusionEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQGeneralisedAdvectionDiffusionElement
+    : public QGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>,
+      public virtual RefineableGeneralisedAdvectionDiffusionEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// \short Empty Constructor:
-    RefineableQGeneralisedAdvectionDiffusionElement() :
-      RefineableElement(),
-      RefineableGeneralisedAdvectionDiffusionEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>()
+    RefineableQGeneralisedAdvectionDiffusionElement()
+      : RefineableElement(),
+        RefineableGeneralisedAdvectionDiffusionEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQGeneralisedAdvectionDiffusionElement(
@@ -268,6 +273,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the
   /// RefineableQuadGeneralisedAdvectionDiffusionElement elements: The spatial
@@ -277,8 +283,8 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   class FaceGeometry<
-    RefineableQGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+    RefineableQGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

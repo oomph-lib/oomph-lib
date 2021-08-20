@@ -93,6 +93,7 @@ namespace oomph
       }
     }
 
+
     // Set up memory for the fluid shape and test functions
     Shape psif(n_node), testf(n_node);
     DShape dpsifdx(n_node, DIM), dtestfdx(n_node, DIM);
@@ -285,6 +286,7 @@ namespace oomph
       // velocity components w.r.t. global coordinates
       get_base_flow_dudx(time, ipt, interpolated_x, base_flow_dudx);
 
+
       // MOMENTUM EQUATIONS
       //------------------
 
@@ -365,6 +367,7 @@ namespace oomph
                 residual_contribution.real() * hang_weight;
             }
 
+
             if (is_node_hanging)
             {
               local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
@@ -382,6 +385,7 @@ namespace oomph
               residuals[local_eqn] +=
                 residual_contribution.imag() * hang_weight;
             }
+
 
             // CALCULATE THE JACOBIAN
             /*if(flag)
@@ -467,6 +471,7 @@ namespace oomph
           } // End of loop over dimension
         } // End of loop over master nodes
       } // End of loop over shape functions
+
 
       // CONTINUITY EQUATION
       //-------------------

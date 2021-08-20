@@ -33,6 +33,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 
@@ -46,16 +47,15 @@ namespace oomph
   /// argument.
   //======================================================================
   template<class ELEMENT>
-  class NavierStokesSurfacePowerElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class NavierStokesSurfacePowerElement : public virtual FaceGeometry<ELEMENT>,
+                                          public virtual FaceElement
   {
   public:
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
     NavierStokesSurfacePowerElement(FiniteElement* const& element_pt,
-                                    const int& face_index) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+                                    const int& face_index)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -64,6 +64,7 @@ namespace oomph
       // Set the dimension from the dimension of the first node
       Dim = node_pt(0)->ndim();
     }
+
 
     /// \short The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
@@ -78,12 +79,14 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
+
     /// \short Get drag force (traction acting on fluid)
     Vector<double> drag_force()
     {
       std::ofstream dummy_file;
       return drag_force(dummy_file);
     }
+
 
     /// \short Get  drag force (traction acting on fluid)
     /// Doc in outfile.
@@ -107,13 +110,13 @@ namespace oomph
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
 
+
       // Get pointer to assocated bulk element
       ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
       // Hacky: This is only appropriate for 3 point integration of
       // 1D line elements
-      if (outfile.is_open())
-        outfile << "ZONE I=3" << std::endl;
+      if (outfile.is_open()) outfile << "ZONE I=3" << std::endl;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -196,6 +199,7 @@ namespace oomph
             outfile << traction[i] << " ";
           }
 
+
           // Output normal
           for (unsigned i = 0; i < ndim + 1; i++)
           {
@@ -215,6 +219,7 @@ namespace oomph
       std::ofstream dummy_file;
       return get_rate_of_traction_work(dummy_file);
     }
+
 
     /// \short Get integral of instantaneous rate of work done by
     /// the traction that's exerted onto the fluid. Doc in outfile.
@@ -238,13 +243,13 @@ namespace oomph
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
 
+
       // Get pointer to assocated bulk element
       ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
-      if (outfile.is_open())
-        outfile << "ZONE I=3, J=3" << std::endl;
+      if (outfile.is_open()) outfile << "ZONE I=3, J=3" << std::endl;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -299,6 +304,7 @@ namespace oomph
         Vector<double> normal(ndim + 1);
         outer_unit_normal(s, normal);
 
+
         // Get velocity from bulk element
         Vector<double> veloc(ndim + 1);
         bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
@@ -306,6 +312,7 @@ namespace oomph
         // Get traction from bulk element
         Vector<double> traction(ndim + 1);
         bulk_el_pt->get_traction(s_bulk, normal, traction);
+
 
         // Local rate of work:
         double rate_of_work = 0.0;
@@ -356,6 +363,7 @@ namespace oomph
       return rate_of_work_integral;
     }
 
+
     /// \short Get integral of instantaneous rate of work done by
     /// the traction that's exerted onto the fluid, decomposed into pressure
     /// and normal and tangential viscous components.
@@ -369,6 +377,7 @@ namespace oomph
                                            rate_of_work_integral_n,
                                            rate_of_work_integral_t);
     }
+
 
     /// \short Get integral of instantaneous rate of work done by
     /// the traction that's exerted onto the fluid, decomposed into pressure
@@ -398,13 +407,13 @@ namespace oomph
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
 
+
       // Get pointer to assocated bulk element
       ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
-      if (outfile.is_open())
-        outfile << "ZONE I=3, J=3" << std::endl;
+      if (outfile.is_open()) outfile << "ZONE I=3, J=3" << std::endl;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -459,6 +468,7 @@ namespace oomph
         Vector<double> normal(ndim + 1);
         outer_unit_normal(s, normal);
 
+
         // Get velocity from bulk element
         Vector<double> veloc(ndim + 1);
         bulk_el_pt->interpolated_u_nst(s_bulk, veloc);
@@ -469,6 +479,7 @@ namespace oomph
         Vector<double> traction_t(ndim + 1);
         bulk_el_pt->get_traction(
           s_bulk, normal, traction_p, traction_n, traction_t);
+
 
         // Local rate of work:
         double rate_of_work_p = 0.0;
@@ -547,12 +558,14 @@ namespace oomph
       }
     }
 
+
     /// \short Get integral of kinetic energy flux
     double get_kinetic_energy_flux()
     {
       std::ofstream dummy_file;
       return get_kinetic_energy_flux(dummy_file);
     }
+
 
     /// \short Get integral of kinetic energy flux and doc
     double get_kinetic_energy_flux(std::ofstream& outfile)
@@ -580,8 +593,7 @@ namespace oomph
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
-      if (outfile.is_open())
-        outfile << "ZONE I=3, J=3" << std::endl;
+      if (outfile.is_open()) outfile << "ZONE I=3, J=3" << std::endl;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -687,12 +699,14 @@ namespace oomph
       return kinetic_energy_flux_integral;
     }
 
+
     /// \short Get integral of volume flux
     double get_volume_flux()
     {
       std::ofstream dummy_file;
       return get_volume_flux(dummy_file);
     }
+
 
     /// \short Get integral of volume flux and doc
     double get_volume_flux(std::ofstream& outfile)
@@ -720,8 +734,7 @@ namespace oomph
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
-      if (outfile.is_open())
-        outfile << "ZONE I=3, J=3" << std::endl;
+      if (outfile.is_open()) outfile << "ZONE I=3, J=3" << std::endl;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -732,6 +745,7 @@ namespace oomph
         {
           s[i] = integral_pt()->knot(ipt, i);
         }
+
 
         // Get the bulk coordinates
         this->get_local_coordinate_in_bulk(s, s_bulk);
@@ -820,10 +834,12 @@ namespace oomph
       return volume_flux_integral;
     }
 
+
   private:
     /// The highest dimension of the problem
     unsigned Dim;
   };
+
 
 } // namespace oomph
 

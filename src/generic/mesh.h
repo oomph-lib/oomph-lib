@@ -69,9 +69,11 @@ namespace oomph
     /// Problem is a friend
     friend class Problem;
 
+
     /// \short Default Steady Timestepper, to be used in default arguments
     /// to Mesh constructors
     static Steady<0> Default_TimeStepper;
+
 
   protected:
     /// \short Vector of Vector of pointers to nodes on the boundaries:
@@ -125,6 +127,7 @@ namespace oomph
 
     /// Map of vectors holding the pointers to the external haloed elements
     std::map<unsigned, Vector<GeneralisedElement*>> External_haloed_element_pt;
+
 
     // External halo(ed) nodes are on the external halo(ed) elements
 
@@ -197,8 +200,10 @@ namespace oomph
 
     void convert_to_boundary_node(Node*& node_pt);
 
+
   public:
 #ifdef OOMPH_HAS_MPI
+
 
     /// \short Helper function that resizes halo nodes to the same
     /// size as their non-halo counterparts if required. (A discrepancy
@@ -211,6 +216,7 @@ namespace oomph
     void resize_halo_nodes();
 
 #endif
+
 
     /// \short Typedef for function pointer to function that computes
     /// steady exact solution
@@ -296,8 +302,7 @@ namespace oomph
     template<class BULK_ELEMENT>
     void doc_boundary_coordinates(const unsigned& b, std::ofstream& the_file)
     {
-      if (nelement() == 0)
-        return;
+      if (nelement() == 0) return;
       if (!Boundary_coordinate_exists[b])
       {
         oomph_info << "No boundary coordinates were set up for boundary " << b
@@ -361,6 +366,7 @@ namespace oomph
       }
     }
 
+
     /// \short Scale all nodal coordinates by given factor. Virtual
     /// so it can be overloaded in SolidMesh class where it also
     /// re-assigns the Lagrangian coordinates.
@@ -378,6 +384,7 @@ namespace oomph
       }
     }
 
+
     /// Broken copy constructor
     Mesh(const Mesh& dummy)
     {
@@ -392,6 +399,7 @@ namespace oomph
 
     /// Virtual Destructor to clean up all memory
     virtual ~Mesh();
+
 
     /// \short Flush storage for elements and nodes by emptying the
     /// vectors that store the pointers to them. This is
@@ -685,6 +693,7 @@ namespace oomph
     /// \short Self-test: Check elements and nodes. Return 0 for OK
     unsigned self_test();
 
+
     /// \short Determine max and min area for all FiniteElements in the mesh
     /// (non-FiniteElements are ignored)
     void max_and_min_element_size(double& max_size, double& min_size)
@@ -698,6 +707,7 @@ namespace oomph
         min_size = std::min(min_size, finite_element_pt(e)->size());
       }
     }
+
 
     /// \short Determine the sum of all "sizes" of the FiniteElements in the
     /// mesh (non-FiniteElements are ignored). This gives the length/area/volume
@@ -717,6 +727,7 @@ namespace oomph
       return size;
     }
 
+
     /// \short Check for inverted elements and report outcome
     /// in boolean variable. This visits all elements at their
     /// integration points and checks if the Jacobian of the
@@ -727,6 +738,7 @@ namespace oomph
     /// stream is open).
     void check_inverted_elements(bool& mesh_has_inverted_elements,
                                  std::ofstream& inverted_element_file);
+
 
     /// \short Check for inverted elements and report outcome
     /// in boolean variable. This visits all elements at their
@@ -740,6 +752,7 @@ namespace oomph
       check_inverted_elements(mesh_has_inverted_elements,
                               inverted_element_file);
     }
+
 
     /// \short Check for repeated nodes within a given spatial tolerance.
     /// Return (0/1) for (pass/fail).
@@ -805,8 +818,7 @@ namespace oomph
           }
         }
       }
-      if (failed)
-        return 1;
+      if (failed) return 1;
 
       // If we made it to here, we must have passed the test.
       oomph_info << "...done: Test passed!" << std::endl << std::endl;
@@ -830,6 +842,7 @@ namespace oomph
       return Boundary_node_pt[ibound].size();
     }
 
+
     /// Return pointer to e-th finite element on boundary b
     FiniteElement* boundary_element_pt(const unsigned& b,
                                        const unsigned& e) const
@@ -845,6 +858,7 @@ namespace oomph
 #endif
       return Boundary_element_pt[b][e];
     }
+
 
     /// \short Find a node not on any boundary in mesh_pt (useful for pinning
     /// a single node in a purely Neumann problem so that it is fully
@@ -881,6 +895,7 @@ namespace oomph
 #endif
       return Boundary_element_pt[b].size();
     }
+
 
     /// \short For the e-th finite element on boundary b, return int to indicate
     /// the face_index of the face adjacent to the boundary. This is consistent
@@ -921,6 +936,7 @@ namespace oomph
 
     /// \short Read solution from restart file
     virtual void read(std::ifstream& restart_file);
+
 
     /// \short Output in paraview format into specified file. Breaks up each
     /// element into sub-elements for plotting purposes. We assume
@@ -1013,6 +1029,7 @@ namespace oomph
     /// Data
     void shift_time_values();
 
+
     /// \short Calculate predictions for all Data and positions associated
     /// with the mesh, usually used in adaptive time-stepping.
     void calculate_predictions();
@@ -1080,6 +1097,7 @@ namespace oomph
       }
     }
 
+
     /// \short Compute norm of solution by summing contributions of
     /// compute_norm(...) for all constituent elements in the mesh.
     /// What that norm means depends on what's defined in the element's
@@ -1122,6 +1140,7 @@ namespace oomph
         }
       } // for (unsigned long e=0;e<n_element;e++)
     } // End of compute_norm
+
 
     /// \short Plot error when compared against a given exact solution.
     ///  Also returns the norm  of the error and that of the exact solution
@@ -1212,6 +1231,7 @@ namespace oomph
       }
     }
 
+
     /// \short Plot error when compared against a given time-dependent
     /// exact solution. Also returns the norm of the error and
     /// that of the exact solution
@@ -1258,6 +1278,7 @@ namespace oomph
         error += el_error;
       }
     } // End of compute_error
+
 
     /// \short Plot error when compared against a given time-dependent
     /// exact solution. Also returns the norm of the error and
@@ -1328,6 +1349,7 @@ namespace oomph
         }
       } // for (unsigned long e=0;e<element_pt_range;e++)
     } // End of compute_error
+
 
     /// \short Plot error when compared against a given time-depdendent
     ///  exact solution. Also returns the norm  of the error and
@@ -1503,6 +1525,7 @@ namespace oomph
       }
     }
 
+
     /// \short Returns the norm of the error and that of the exact solution.
     /// Version with vectors of norms and errors so that different variables'
     /// norms and errors can be returned individually
@@ -1567,6 +1590,7 @@ namespace oomph
       } // for (unsigned long e=0;e<Element_pt_range;e++)
     } // End of compute_error
 
+
     /// Boolean to indicate if Mesh has been distributed
     bool is_mesh_distributed() const
     {
@@ -1588,6 +1612,7 @@ namespace oomph
       return 0;
 #endif
     }
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -1655,6 +1680,7 @@ namespace oomph
       prune_halo_elements_and_nodes(deleted_element_pt, doc_info, report_stats);
     }
 
+
     /// \short (Irreversibly) prune halo(ed) elements and nodes, usually
     /// after another round of refinement, to get rid of
     /// excessively wide halo layers. Note that the current
@@ -1711,6 +1737,7 @@ namespace oomph
     /// schemes over all processors.
     void synchronise_shared_nodes(const bool& report_stats);
 
+
     /// \short Get all the halo data stored in the mesh and add pointers to
     /// the data to the map, indexed by global equation number
     void get_all_halo_data(std::map<unsigned, double*>& map_of_halo_data);
@@ -1752,6 +1779,7 @@ namespace oomph
       }
       return vec_el_pt;
     }
+
 
     /// \short Return vector of haloed elements in this Mesh
     /// whose haloing counterpart is held on processor p.
@@ -1799,11 +1827,11 @@ namespace oomph
       unsigned n = nelement();
       for (unsigned e = 0; e < n; e++)
       {
-        if (!(element_pt(e)->is_halo()))
-          count++;
+        if (!(element_pt(e)->is_halo())) count++;
       }
       return count;
     }
+
 
     /// \short Total number of root halo elements in this Mesh
     unsigned nroot_halo_element()
@@ -1819,12 +1847,14 @@ namespace oomph
       return n;
     }
 
+
     /// \short Number of root halo elements in this Mesh whose non-halo
     /// counterpart is held on processor p.
     unsigned nroot_halo_element(const unsigned& p)
     {
       return Root_halo_element_pt[p].size();
     }
+
 
     /// \short Vector of pointers to root halo elements in this Mesh
     /// whose non-halo counterpart is held on processor p.
@@ -1833,6 +1863,7 @@ namespace oomph
       return Root_halo_element_pt[p];
     }
 
+
     /// \short Access fct to the e-th root halo element in this Mesh
     /// whose non-halo counterpart is held on processor p.
     GeneralisedElement*& root_halo_element_pt(const unsigned& p,
@@ -1840,6 +1871,7 @@ namespace oomph
     {
       return Root_halo_element_pt[p][e];
     }
+
 
     /// \short Add root halo element whose non-halo counterpart is held
     /// on processor p to this Mesh.
@@ -1883,12 +1915,14 @@ namespace oomph
       Halo_node_pt[p].push_back(nod_pt);
     }
 
+
     /// \short  Access fct to the j-th halo node in this Mesh
     /// whose non-halo counterpart is held on processor p.
     Node* halo_node_pt(const unsigned& p, const unsigned& j)
     {
       return Halo_node_pt[p][j];
     }
+
 
     /// \short Total number of root haloed elements in this Mesh
     unsigned nroot_haloed_element()
@@ -1917,6 +1951,7 @@ namespace oomph
       }
       return (*it).second.size();
     }
+
 
     /// \short Vector of pointers to root haloed elements in this Mesh
     /// whose non-halo counterpart is held on processor p.
@@ -1952,6 +1987,7 @@ namespace oomph
       Root_haloed_element_pt[p].push_back(el_pt);
     }
 
+
     /// \short Total number of haloed nodes in this Mesh
     unsigned nhaloed_node()
     {
@@ -1965,6 +2001,7 @@ namespace oomph
       }
       return n;
     }
+
 
     /// \short Number of haloed nodes in this Mesh whose haloed counterpart
     /// is held on processor p.
@@ -1996,12 +2033,14 @@ namespace oomph
     /// Bool for output of halo elements
     bool Output_halo_elements;
 
+
     /// \short Function to suppress resizing of halo nodes -- optmisation
     /// but call it at your own risk!
     void disable_resizing_of_halo_nodes()
     {
       Resize_halo_nodes_not_required = true;
     }
+
 
     /// \short Function to (re-)enable resizing of halo nodes -- this returns
     /// things to the default behaviour.
@@ -2094,6 +2133,7 @@ namespace oomph
       }
     }
 
+
     /// \short Add shared node whose counterpart is held
     /// on processor p to the storage scheme for shared nodes.
     /// (NB: ensure that this routine is called twice, once for each process)
@@ -2152,6 +2192,7 @@ namespace oomph
       }
     }
 
+
     /// \short Output all external haloed elements
     void output_external_haloed_elements(std::ostream& outfile,
                                          const unsigned& n_plot = 5)
@@ -2182,6 +2223,7 @@ namespace oomph
         }
       }
     }
+
 
     /// \short Total number of external halo elements in this Mesh
     unsigned nexternal_halo_element()
@@ -2283,6 +2325,7 @@ namespace oomph
       return n;
     }
 
+
     /// \short Get vector of pointers to all external halo nodes
     void get_external_halo_node_pt(Vector<Node*>& external_halo_node_pt)
     {
@@ -2312,6 +2355,7 @@ namespace oomph
 #endif
     }
 
+
     /// \short Number of external halo nodes in this Mesh whose non-halo
     /// (external) counterpart is held on processor p.
     unsigned nexternal_halo_node(const unsigned& p)
@@ -2333,6 +2377,7 @@ namespace oomph
       External_halo_node_pt[p].push_back(nod_pt);
       nod_pt->set_halo(p);
     }
+
 
     /// \short Access fct to the j-th external halo node in this Mesh
     /// whose non-halo external counterpart is held on processor p.
@@ -2502,6 +2547,7 @@ namespace oomph
     void delete_all_external_storage();
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
@@ -2536,6 +2582,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("SolidMesh");
     }
+
 
     /// \short Constructor builds combined mesh from the meshes specified.
     /// Note: This simply merges the meshes' elements and nodes (ignoring
@@ -2630,6 +2677,7 @@ namespace oomph
     /// Eulerian ones
     void set_lagrangian_nodal_coordinates();
 
+
     /// \short Scale all nodal coordinates by given factor and re-assign the
     /// Lagrangian coordinates
     void scale_mesh(const double& factor)
@@ -2645,9 +2693,11 @@ namespace oomph
     static SolidICProblem Solid_IC_problem;
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //===================================================
   /// Edge class
@@ -2668,6 +2718,7 @@ namespace oomph
 #endif
       }
 
+
       // Sort lexicographically based on pointer address of nodes
       if (node1_pt > node2_pt)
       {
@@ -2680,6 +2731,7 @@ namespace oomph
         Node2_pt = node1_pt;
       }
     }
+
 
     /// Access to the first vertex node
     Node* node1_pt() const
@@ -2706,6 +2758,7 @@ namespace oomph
         return false;
       }
     }
+
 
     /// Less-than operator
     bool operator<(const Edge& other) const
@@ -2738,6 +2791,7 @@ namespace oomph
       return (Node1_pt->is_on_boundary() && Node2_pt->is_on_boundary());
     }
 
+
     /// \short Test whether the Edge is a boundary edge, i.e. does it
     /// connnect two boundary nodes?
     bool is_boundary_edge() const
@@ -2754,9 +2808,11 @@ namespace oomph
     Node* Node2_pt;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=================================================================
   /// Namespace with helper function to check element type in mesh
@@ -2838,9 +2894,11 @@ namespace oomph
 
   } // namespace MeshChecker
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=================paraview_helper=================================
   /// Namespace for paraview-style output helper functions
@@ -2899,6 +2957,7 @@ namespace oomph
         err, OOMPH_EXCEPTION_LOCATION, OOMPH_CURRENT_FUNCTION);
     }
   } // namespace NodeOrdering
+
 
 } // namespace oomph
 

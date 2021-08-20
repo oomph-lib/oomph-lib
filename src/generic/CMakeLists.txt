@@ -108,7 +108,8 @@ set(HEADERS
     sparse_vector.h
     geom_obj_with_boundary.h
     extruded_macro_element.h
-    extruded_domain.h)
+    extruded_domain.h
+    black_box_newton_solver.h)
 
 if(OOMPH_HAS_STACKTRACE)
   list(APPEND HEADERS stacktrace.h)
@@ -196,7 +197,8 @@ set(SOURCES
     sample_point_parameters.cc
     geometric_multigrid.cc
     extruded_macro_element.cc
-    extruded_domain.cc)
+    extruded_domain.cc
+    black_box_newton_solver.cc)
 
 # Need to worry about these for dependency but they shouldn't be included into
 # the include directory

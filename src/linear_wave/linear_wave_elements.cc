@@ -28,9 +28,11 @@
 // Non-inline functions for LinearWave elements
 #include "linear_wave_elements.h"
 
+
 namespace oomph
 {
   /// 2D LinearWave elements
+
 
   //======================================================================
   // Set the data for the number of Variables at each node
@@ -63,6 +65,7 @@ namespace oomph
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
 
   //======================================================================
   /// Compute element residual Vector and/or element Jacobian matrix
@@ -136,6 +139,7 @@ namespace oomph
         }
       }
 
+
       // Get source function
       //-------------------
       double source;
@@ -159,6 +163,7 @@ namespace oomph
           {
             residuals[local_eqn] += interpolated_dudx[k] * dtestdx(l, k) * W;
           }
+
 
           // Calculate the jacobian
           //-----------------------
@@ -188,8 +193,10 @@ namespace oomph
         }
       }
 
+
     } // End of loop over integration points
   }
+
 
   //======================================================================
   /// Self-test:  Return 0 for OK
@@ -215,6 +222,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// Output function:
@@ -288,6 +296,7 @@ namespace oomph
     write_tecplot_zone_footer(file_pt, nplot);
   }
 
+
   //======================================================================
   /// Output exact solution
   ///
@@ -338,6 +347,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution at time t
@@ -392,6 +402,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// Validate against exact solution
   ///
@@ -415,6 +426,7 @@ namespace oomph
 
     // Vector for coordintes
     Vector<double> x(DIM);
+
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -469,6 +481,7 @@ namespace oomph
       error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * W;
     }
   }
+
 
   //======================================================================
   /// Validate against exact solution at time t.
@@ -550,6 +563,7 @@ namespace oomph
     }
   }
 
+
   //====================================================================
   // Force build of templates
   //====================================================================
@@ -564,5 +578,6 @@ namespace oomph
   template class QLinearWaveElement<3, 2>;
   template class QLinearWaveElement<3, 3>;
   template class QLinearWaveElement<3, 4>;
+
 
 } // namespace oomph

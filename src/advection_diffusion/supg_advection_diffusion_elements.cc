@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "supg_advection_diffusion_elements.h"
 
+
 namespace oomph
 {
   //======================================================================
@@ -93,6 +94,7 @@ namespace oomph
     return J;
   }
 
+
   //======================================================================
   /// \short Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
@@ -153,26 +155,32 @@ namespace oomph
       }
     }
 
+
     // Return the jacobian
     return J;
   }
+
 
   // Force template instantiation.
   template class QSUPGAdvectionDiffusionElement<2, 2>;
   template class QSUPGAdvectionDiffusionElement<2, 3>;
   template class QSUPGAdvectionDiffusionElement<2, 4>;
 
+
   template class QSUPGAdvectionDiffusionElement<3, 2>;
   template class QSUPGAdvectionDiffusionElement<3, 3>;
   template class QSUPGAdvectionDiffusionElement<3, 4>;
+
 
   // Force template instantiation.
   template class RefineableQSUPGAdvectionDiffusionElement<2, 2>;
   template class RefineableQSUPGAdvectionDiffusionElement<2, 3>;
   template class RefineableQSUPGAdvectionDiffusionElement<2, 4>;
 
+
   template class RefineableQSUPGAdvectionDiffusionElement<3, 2>;
   template class RefineableQSUPGAdvectionDiffusionElement<3, 3>;
   template class RefineableQSUPGAdvectionDiffusionElement<3, 4>;
+
 
 } // namespace oomph

@@ -34,11 +34,13 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
 #endif
 
 #include <complex>
+
 
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
@@ -137,6 +139,7 @@ namespace oomph
       return (interpolated_u);
     }
 
+
     /// \short Function pointer to function that specifies the body force
     /// as a function of the Cartesian coordinates and time FCT(t,x,b) --
     /// x and b are  Vectors!
@@ -147,10 +150,10 @@ namespace oomph
     /// \short Constructor: Set null pointers for constitutive law and for
     /// isotropic growth function. Set physical parameter values to
     /// default values, and set body force to zero.
-    TimeHarmonicLinearElasticityEquationsBase() :
-      Elasticity_tensor_pt(0),
-      Omega_sq_pt(&Default_omega_sq_value),
-      Body_force_fct_pt(0)
+    TimeHarmonicLinearElasticityEquationsBase()
+      : Elasticity_tensor_pt(0),
+        Omega_sq_pt(&Default_omega_sq_value),
+        Body_force_fct_pt(0)
     {
     }
 
@@ -282,6 +285,7 @@ namespace oomph
       }
     }
 
+
   protected:
     /// Pointer to the elasticity tensor
     TimeHarmonicElasticityTensor* Elasticity_tensor_pt;
@@ -296,17 +300,19 @@ namespace oomph
     static double Default_omega_sq_value;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// A class for elements that solve the equations of linear elasticity
   /// in cartesian coordinates.
   //=======================================================================
   template<unsigned DIM>
-  class TimeHarmonicLinearElasticityEquations :
-    public TimeHarmonicLinearElasticityEquationsBase<DIM>
+  class TimeHarmonicLinearElasticityEquations
+    : public TimeHarmonicLinearElasticityEquationsBase<DIM>
   {
   public:
     /// \short  Constructor
@@ -325,6 +331,7 @@ namespace oomph
       fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
+
 
     /// The jacobian is calculated by finite differences by default,
     /// We need only to take finite differences w.r.t. positional variables
@@ -358,6 +365,7 @@ namespace oomph
     /// Output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
     void output(std::ostream& outfile, const unsigned& n_plot);
 
+
     /// C-style output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
     void output(FILE* file_pt)
     {
@@ -367,6 +375,7 @@ namespace oomph
 
     /// Output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
     void output(FILE* file_pt, const unsigned& n_plot);
+
 
     /// \short Compute norm of solution: square of the L2 norm
     void compute_norm(double& norm);
@@ -378,23 +387,25 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// An Element that solves the equations of linear elasticity
   /// in Cartesian coordinates, using QElements for the geometry
   //============================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class QTimeHarmonicLinearElasticityElement :
-    public virtual QElement<DIM, NNODE_1D>,
-    public virtual TimeHarmonicLinearElasticityEquations<DIM>
+  class QTimeHarmonicLinearElasticityElement
+    : public virtual QElement<DIM, NNODE_1D>,
+      public virtual TimeHarmonicLinearElasticityEquations<DIM>
   {
   public:
     /// Constructor
-    QTimeHarmonicLinearElasticityElement() :
-      QElement<DIM, NNODE_1D>(), TimeHarmonicLinearElasticityEquations<DIM>()
+    QTimeHarmonicLinearElasticityElement()
+      : QElement<DIM, NNODE_1D>(), TimeHarmonicLinearElasticityEquations<DIM>()
     {
     }
 
@@ -410,6 +421,7 @@ namespace oomph
       TimeHarmonicLinearElasticityEquations<DIM>::output(outfile, n_plot);
     }
 
+
     /// C-style output function
     void output(FILE* file_pt)
     {
@@ -423,49 +435,53 @@ namespace oomph
     }
   };
 
+
   //============================================================================
   /// FaceGeometry of a linear 2D QTimeHarmonicLinearElasticityElement element
   //============================================================================
   template<>
-  class FaceGeometry<QTimeHarmonicLinearElasticityElement<2, 2>> :
-    public virtual QElement<1, 2>
+  class FaceGeometry<QTimeHarmonicLinearElasticityElement<2, 2>>
+    : public virtual QElement<1, 2>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
     FaceGeometry() : QElement<1, 2>() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a quadratic 2D QTimeHarmonicLinearElasticityElement
   /// element
   //============================================================================
   template<>
-  class FaceGeometry<QTimeHarmonicLinearElasticityElement<2, 3>> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<QTimeHarmonicLinearElasticityElement<2, 3>>
+    : public virtual QElement<1, 3>
   {
   public:
     /// Constructor must call the constructor of the underlying element
     FaceGeometry() : QElement<1, 3>() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a cubic 2D QTimeHarmonicLinearElasticityElement element
   //============================================================================
   template<>
-  class FaceGeometry<QTimeHarmonicLinearElasticityElement<2, 4>> :
-    public virtual QElement<1, 4>
+  class FaceGeometry<QTimeHarmonicLinearElasticityElement<2, 4>>
+    : public virtual QElement<1, 4>
   {
   public:
     /// Constructor must call the constructor of the underlying element
     FaceGeometry() : QElement<1, 4>() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a linear 3D QTimeHarmonicLinearElasticityElement element
   //============================================================================
   template<>
-  class FaceGeometry<QTimeHarmonicLinearElasticityElement<3, 2>> :
-    public virtual QElement<2, 2>
+  class FaceGeometry<QTimeHarmonicLinearElasticityElement<3, 2>>
+    : public virtual QElement<2, 2>
   {
   public:
     /// Constructor must call the constructor of the underlying element
@@ -477,20 +493,21 @@ namespace oomph
   /// element
   //============================================================================
   template<>
-  class FaceGeometry<QTimeHarmonicLinearElasticityElement<3, 3>> :
-    public virtual QElement<2, 3>
+  class FaceGeometry<QTimeHarmonicLinearElasticityElement<3, 3>>
+    : public virtual QElement<2, 3>
   {
   public:
     /// Constructor must call the constructor of the underlying element
     FaceGeometry() : QElement<2, 3>() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a cubic 3D QTimeHarmonicLinearElasticityElement element
   //============================================================================
   template<>
-  class FaceGeometry<QTimeHarmonicLinearElasticityElement<3, 4>> :
-    public virtual QElement<2, 4>
+  class FaceGeometry<QTimeHarmonicLinearElasticityElement<3, 4>>
+    : public virtual QElement<2, 4>
   {
   public:
     /// Constructor must call the constructor of the underlying element
@@ -501,17 +518,19 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
+
   //==========================================================
   /// Time-harmonic linear elasticity upgraded to become projectable
   //==========================================================
   template<class TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
-  class ProjectableTimeHarmonicLinearElasticityElement :
-    public virtual ProjectableElement<TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
+  class ProjectableTimeHarmonicLinearElasticityElement
+    : public virtual ProjectableElement<TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
   {
   public:
     /// \short Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableTimeHarmonicLinearElasticityElement() {}
+
 
     /// \short Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
@@ -583,6 +602,7 @@ namespace oomph
       return this->dshape_eulerian(s, psi, dpsidx);
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -626,11 +646,13 @@ namespace oomph
       return interpolated_u;
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
       return this->nnode();
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -653,17 +675,19 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableTimeHarmonicLinearElasticityElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableTimeHarmonicLinearElasticityElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
@@ -671,12 +695,13 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   class FaceGeometry<
-    FaceGeometry<ProjectableTimeHarmonicLinearElasticityElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+    FaceGeometry<ProjectableTimeHarmonicLinearElasticityElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
+
 
 } // namespace oomph
 

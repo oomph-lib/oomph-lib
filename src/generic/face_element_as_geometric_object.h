@@ -56,10 +56,9 @@ namespace oomph
   /// that they lie on a particular boundary of the mesh.
   //=======================================================================
   template<class ELEMENT>
-  class FaceElementAsGeomObject :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement,
-    public virtual ElementWithExternalElement
+  class FaceElementAsGeomObject : public virtual FaceGeometry<ELEMENT>,
+                                  public virtual FaceElement,
+                                  public virtual ElementWithExternalElement
   {
   public:
     ///\short Constructor which takes a pointer to a "bulk" element,
@@ -71,14 +70,14 @@ namespace oomph
     /// constructor. Hence the boundary number (within the mesh) on which this
     /// element is located must be setup afterwards!
     FaceElementAsGeomObject(FiniteElement* const& element_pt,
-                            const int& face_index) :
-      FaceGeometry<ELEMENT>(),
-      FaceElement(),
-      // The geometric object has an intrinsic dimension one less than
-      // the "bulk" element, but the actual dimension of the problem remains
-      // the same
-      // GeomObject(element_pt->dim()-1,element_pt->nodal_dimension()),
-      ElementWithExternalElement()
+                            const int& face_index)
+      : FaceGeometry<ELEMENT>(),
+        FaceElement(),
+        // The geometric object has an intrinsic dimension one less than
+        // the "bulk" element, but the actual dimension of the problem remains
+        // the same
+        // GeomObject(element_pt->dim()-1,element_pt->nodal_dimension()),
+        ElementWithExternalElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -86,6 +85,7 @@ namespace oomph
       GeomObject::set_nlagrangian_and_ndim(element_pt->dim() - 1,
                                            element_pt->nodal_dimension());
     }
+
 
     /// Broken copy constructor
     FaceElementAsGeomObject(const FaceElementAsGeomObject&)
@@ -113,6 +113,7 @@ namespace oomph
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
+
 
     /// \short How many items of Data does the shape of the object depend on?
     /// None! We're dealing with a pure geometric FiniteElement!
@@ -178,6 +179,7 @@ namespace oomph
     }
   };
 
+
   //============================================================================
   /// \short A class to do comparison of the elements by lexicographic
   /// ordering, based on the boundary coordinates at the element's first node.
@@ -220,6 +222,7 @@ namespace oomph
       }
 #endif
 
+
       // Warning that this still needs to be generalised to higher
       // dimensions (don't want to implement it until I can test it
       // -- at the moment, the ordering isn't particularly important
@@ -238,10 +241,12 @@ namespace oomph
       //                         OOMPH_EXCEPTION_LOCATION);
       //       }
 
+
       return cast_element1_pt->zeta_nodal(0, 0, 0) <
              cast_element2_pt->zeta_nodal(0, 0, 0);
     }
   };
+
 
 } // namespace oomph
 

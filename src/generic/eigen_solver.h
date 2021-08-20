@@ -82,6 +82,7 @@ namespace oomph
                                     Vector<std::complex<double>>& eigenvalue,
                                     Vector<DoubleVector>& eigenvector) = 0;
 
+
     /// Set the value of the shift
     void set_shift(const double& shift_value)
     {
@@ -94,6 +95,7 @@ namespace oomph
       return Sigma_real;
     }
   };
+
 
   //=====================================================================
   /// Class for the ARPACK eigensolver
@@ -112,8 +114,10 @@ namespace oomph
     /// to be small or large.
     int Spectrum;
 
+
     /// \short Number of Arnoldi vectors to compute
     int NArnoldi;
+
 
     ///\short Boolean to set which part of the spectrum left (default) or right
     /// of the shifted value.
@@ -121,6 +125,7 @@ namespace oomph
 
     /// \short Boolean to indicate whether or not to compute the eigenvectors
     bool Compute_eigenvectors;
+
 
   public:
     /// Constructor
@@ -167,6 +172,7 @@ namespace oomph
     //                      Vector<std::complex<double> > &eigenvalue,
     //                      Vector<Vector<double> > &eigenvector);
 
+
     /// Set the desired eigenvalues to be left of the shift
     void get_eigenvalues_left_of_shift()
     {
@@ -209,6 +215,7 @@ namespace oomph
       return Linear_solver_pt;
     }
   };
+
 
   //=====================================================================
   /// Class for the LAPACK eigensolver

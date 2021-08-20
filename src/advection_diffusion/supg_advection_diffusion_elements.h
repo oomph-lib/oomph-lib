@@ -39,15 +39,15 @@ namespace oomph
   ///
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class QSUPGAdvectionDiffusionElement :
-    public virtual QAdvectionDiffusionElement<DIM, NNODE_1D>
+  class QSUPGAdvectionDiffusionElement
+    : public virtual QAdvectionDiffusionElement<DIM, NNODE_1D>
   {
   public:
     ///\short  Constructor: Call constructors for underlying
     /// QAdvectionDiffusion element. Initialise stabilisation parameter
     /// to zero
-    QSUPGAdvectionDiffusionElement() :
-      QAdvectionDiffusionElement<DIM, NNODE_1D>()
+    QSUPGAdvectionDiffusionElement()
+      : QAdvectionDiffusionElement<DIM, NNODE_1D>()
     {
       Tau_SUPG = 0.0;
     }
@@ -58,11 +58,13 @@ namespace oomph
       return Tau_SUPG;
     }
 
+
     /// Set stabilisation parameter for the element to zero
     void switch_off_stabilisation()
     {
       Tau_SUPG = 0.0;
     }
+
 
     /// Compute stabilisation parameter for the element
     void compute_stabilisation_parameter()
@@ -110,8 +112,7 @@ namespace oomph
           pow(this->vertex_node_pt(2)->x(0) - this->vertex_node_pt(1)->x(0),
               2) +
           pow(this->vertex_node_pt(2)->x(1) - this->vertex_node_pt(1)->x(1), 2);
-        if (h1 > h)
-          h = h1;
+        if (h1 > h) h = h1;
         h = sqrt(h);
       }
       else if (DIM == 3)
@@ -128,8 +129,7 @@ namespace oomph
                 2) +
             pow(this->vertex_node_pt(n1)->x(2) - this->vertex_node_pt(n2)->x(2),
                 2);
-          if (h1 > h)
-            h = h1;
+          if (h1 > h) h = h1;
           n1++;
           n2--;
         }
@@ -161,6 +161,7 @@ namespace oomph
         Tau_SUPG = 0.0;
       }
     }
+
 
     /// \short Output function:
     /// x,y,u,w_x,w_y,tau_supg  or    x,y,z,u,w_x,w_y,w_z,tau_supg
@@ -226,6 +227,7 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
+
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
@@ -234,6 +236,7 @@ namespace oomph
                                               DShape& dpsidx,
                                               Shape& test,
                                               DShape& dtestdx) const;
+
 
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
@@ -247,9 +250,11 @@ namespace oomph
     double Tau_SUPG;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// \short Refineable version of QSUPGAdvectionDiffusionElement.
@@ -257,21 +262,22 @@ namespace oomph
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQSUPGAdvectionDiffusionElement :
-    public QSUPGAdvectionDiffusionElement<DIM, NNODE_1D>,
-    public virtual RefineableAdvectionDiffusionEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQSUPGAdvectionDiffusionElement
+    : public QSUPGAdvectionDiffusionElement<DIM, NNODE_1D>,
+      public virtual RefineableAdvectionDiffusionEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// \short Constructor: Pass refinement level to refineable quad element
     /// (default 0 = root)
-    RefineableQSUPGAdvectionDiffusionElement() :
-      RefineableElement(),
-      RefineableAdvectionDiffusionEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QSUPGAdvectionDiffusionElement<DIM, NNODE_1D>()
+    RefineableQSUPGAdvectionDiffusionElement()
+      : RefineableElement(),
+        RefineableAdvectionDiffusionEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QSUPGAdvectionDiffusionElement<DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQSUPGAdvectionDiffusionElement(
@@ -319,6 +325,7 @@ namespace oomph
     /// that are not interpolated by all nodes. Empty.
     void further_setup_hanging_nodes() {}
   };
+
 
 } // namespace oomph
 

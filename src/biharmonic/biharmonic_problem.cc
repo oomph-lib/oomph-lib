@@ -31,6 +31,7 @@
 // oomph-lib includes
 #include "biharmonic_problem.h"
 
+
 namespace oomph
 {
   //=============================================================================
@@ -284,6 +285,7 @@ namespace oomph
     }
   }
 
+
   //=============================================================================
   /// \short Imposes a 'free' edge. Imposes the prescribed Neumann BCs
   /// laplacian(u) and dlaplacian(u)/dn with flux edge elements
@@ -317,6 +319,7 @@ namespace oomph
       BiharmonicFluxElement<2>* flux_element_pt =
         new BiharmonicFluxElement<2>(bulk_elem_pt, face_index, b);
 
+
       // pass the flux BC pointers to the flux elements
       flux_element_pt->flux0_fct_pt() = flux0_fct_pt;
       if (flux1_fct_pt != 0)
@@ -328,6 +331,7 @@ namespace oomph
       Face_element_mesh_pt->add_element_pt(flux_element_pt);
     }
   }
+
 
   //=============================================================================
   /// \short documents the solution, and if an exact solution is provided, then
@@ -376,6 +380,7 @@ namespace oomph
                  << std::endl;
     }
   }
+
 
   //=============================================================================
   /// \short Computes the elemental residual vector and the elemental jacobian
@@ -441,6 +446,7 @@ namespace oomph
     }
   }
 
+
   //=============================================================================
   /// \short Imposes a solid boundary - no flow into boundary or along boundary
   /// v_n = 0 and v_t = 0. User must presribe the streamfunction psi to ensure
@@ -468,6 +474,7 @@ namespace oomph
       mesh_pt()->boundary_node_pt(b, n)->set_value(0, psi);
     }
   }
+
 
   //=============================================================================
   /// \short Impose a traction free edge - i.e. v_t = 0 or dpsi/dn = 0. In
@@ -641,6 +648,7 @@ namespace oomph
     }
   }
 
+
   //=============================================================================
   /// \short Impose a prescribed fluid flow comprising the velocity normal to
   /// the boundary (u_imposed_fn[0]) and the velocity tangential to the
@@ -688,6 +696,7 @@ namespace oomph
                             OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
     }
+
 
     // node position along edge b in macro element boundary representation
     // [-1,1]
@@ -791,6 +800,7 @@ namespace oomph
       mesh_pt()->boundary_node_pt(b, n)->set_value(3, d2uds_nds_t);
     }
   }
+
 
   //=============================================================================
   /// \short documents the solution, and if an exact solution is provided, then

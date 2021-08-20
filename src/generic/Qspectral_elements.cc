@@ -26,13 +26,16 @@
 #include "Qspectral_elements.h"
 #include "Qelement_face_coordinate_translation_schemes.h"
 
+
 namespace oomph
 {
   std::map<unsigned, Vector<double>> OneDLegendreShapeParam::z;
 
+
   //////////////////////////////////////////////////////////////////////////
   ///                   1D QLegendreElements
   //////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Assign the static integral
@@ -180,6 +183,7 @@ namespace oomph
         face_element_pt->bulk_node_number(0) = NNODE_1D - 1;
         face_element_pt->normal_sign() = +1;
 
+
         // Set the pointer to the function that determines the bulk coordinates
         // in the face element
         face_element_pt->face_to_bulk_coordinate_fct_pt() =
@@ -189,6 +193,7 @@ namespace oomph
         // derivatives
         face_element_pt->bulk_coordinate_derivatives_fct_pt() =
           &QElement1BulkCoordinateDerivatives::faces0;
+
 
         // Set the number of values stored when the node is part of the "bulk"
         // element.
@@ -206,6 +211,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
     }
   }
+
 
   //////////////////////////////////////////////////////////////////////////
   ///                   2D QLegendreElements
@@ -254,6 +260,7 @@ namespace oomph
     outfile << std::endl;
   }
 
+
   //=======================================================================
   /// The output function for n+plot points in each coordinate direction
   //=======================================================================
@@ -288,6 +295,7 @@ namespace oomph
     }
     outfile << std::endl;
   }
+
 
   //===========================================================
   /// Function to setup geometrical information for lower-dimensional
@@ -429,6 +437,7 @@ namespace oomph
     }
   }
 
+
   //////////////////////////////////////////////////////////////////////////
   ///                   3D QLegendreElements
   //////////////////////////////////////////////////////////////////////////
@@ -520,6 +529,7 @@ namespace oomph
     outfile << std::endl;
   }
 
+
   //=======================================================================
   /// Function to setup geometrical information for lower-dimensional
   /// FaceElements (which are of type QElement<3,NNODE_1D>).
@@ -606,6 +616,7 @@ namespace oomph
         // tangent vectors
         face_element_pt->normal_sign() = 1;
 
+
         break;
 
         // DOWN:
@@ -638,6 +649,7 @@ namespace oomph
         face_element_pt->normal_sign() = 1;
       }
       break;
+
 
       // UP:
       //----
@@ -701,6 +713,7 @@ namespace oomph
       }
       break;
 
+
       // RIGHT:
       //-------
       case 1:
@@ -733,6 +746,7 @@ namespace oomph
       }
       break;
 
+
       // Cover all other cases
       default:
         std::ostringstream error_message;
@@ -744,6 +758,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
     } // end switch
   }
+
 
   template class QSpectralElement<1, 2>;
   template class QSpectralElement<1, 3>;

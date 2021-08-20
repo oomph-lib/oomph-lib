@@ -34,14 +34,15 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// \short Class that makes the finite element specified as template argument
   /// projectable -- on the assumption that all fields are interpolated
   /// by isoparametric Lagrange interpolation between the nodes.
   //======================================================================
   template<class ELEMENT>
-  class GenericLagrangeInterpolatedProjectableElement :
-    public virtual ProjectableElement<ELEMENT>
+  class GenericLagrangeInterpolatedProjectableElement
+    : public virtual ProjectableElement<ELEMENT>
   {
   public:
     /// Constructor
@@ -142,6 +143,7 @@ namespace oomph
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
+
     /// \short Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s.
     double jacobian_and_shape_of_field(const unsigned& fld,
@@ -151,6 +153,7 @@ namespace oomph
       this->shape(s, psi);
       return this->J_eulerian(s);
     }
+
 
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
@@ -182,6 +185,7 @@ namespace oomph
       return this->nnode();
     }
 
+
     /// \short Return local equation number of value j in field fld. Assumed to
     /// be the local nodal equation.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -189,14 +193,17 @@ namespace oomph
       return this->nodal_local_eqn(j, fld);
     }
 
+
   private:
     /// Boundary id
     unsigned Boundary_id;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Class that makes backup (via a deep copy) of a mesh, keeping alive
@@ -223,9 +230,9 @@ namespace oomph
     BackupMeshForProjection(
       Mesh* mesh_pt,
       const unsigned& boundary_id,
-      const unsigned& id_of_field_to_be_projected = UINT_MAX) :
-      Boundary_id(boundary_id),
-      ID_of_field_to_be_projected(id_of_field_to_be_projected)
+      const unsigned& id_of_field_to_be_projected = UINT_MAX)
+      : Boundary_id(boundary_id),
+        ID_of_field_to_be_projected(id_of_field_to_be_projected)
     {
       // Find unique nodes (via elements because Node_pt vector in
       // original mesh may not have been filled (typical for most
@@ -287,6 +294,7 @@ namespace oomph
             {
               Node* new_nod_pt = 0;
 
+
 #ifdef PARANOID
               // Check boundary node-ness
               if (!old_node_pt->is_on_boundary())
@@ -298,6 +306,7 @@ namespace oomph
                                     OOMPH_EXCEPTION_LOCATION);
               }
 #endif
+
 
               // How many values are we projecting? Default: All
               unsigned nval = old_node_pt->nvalue();
@@ -410,6 +419,7 @@ namespace oomph
       delete projectable_new_mesh_pt;
     }
 
+
     /// \short Copy nodal values back onto original mesh from which this
     /// mesh was built. This obviously only makes sense if the original
     /// mesh still exists!
@@ -452,6 +462,7 @@ namespace oomph
       }
     }
 
+
   private:
     /// Map returning new node, labeled by node point in original mesh
     std::map<Node*, Node*> New_node_pt;
@@ -463,6 +474,7 @@ namespace oomph
     /// which case we're doing all of them.
     unsigned ID_of_field_to_be_projected;
   };
+
 
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////

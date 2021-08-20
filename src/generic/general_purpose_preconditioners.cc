@@ -28,8 +28,10 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib includes
 #include "general_purpose_preconditioners.h"
+
 
 namespace oomph
 {
@@ -107,6 +109,7 @@ namespace oomph
       this->build_distribution(dist);
     }
   }
+
 
   //=============================================================================
   /// Apply preconditioner: Multiply r by the inverse of the diagonal.
@@ -269,6 +272,7 @@ namespace oomph
     this->build_distribution(cr_matrix_pt->distribution_pt());
   }
 
+
   //=============================================================================
   /// Apply preconditioner: Multiply r by the inverse of the lumped matrix
   //=============================================================================
@@ -310,9 +314,11 @@ namespace oomph
     }
   }
 
+
   // ensure the lumped preconditioner get built
   template class MatrixBasedLumpedPreconditioner<CCDoubleMatrix>;
   template class MatrixBasedLumpedPreconditioner<CRDoubleMatrix>;
+
 
   //=============================================================================
   /// setup ILU(0) preconditioner for Matrices of CCDoubleMatrix type
@@ -418,6 +424,7 @@ namespace oomph
                 U_row_entry.begin() + U_column_start[i + 1]);
     }
 
+
     // factorise matrix
     int i;
     unsigned j, pn, qn, rn;
@@ -459,6 +466,7 @@ namespace oomph
       }
     }
   }
+
 
   //=============================================================================
   /// setup ILU(0) preconditioner for Matrices of CRDoubleMatrix Type
@@ -563,6 +571,7 @@ namespace oomph
       }
     }
 
+
     // factorise matrix
     unsigned i, j, pn, qn, rn;
     pn = 0;
@@ -606,6 +615,7 @@ namespace oomph
       delete cr_matrix_pt;
     }
   }
+
 
   //=============================================================================
   /// \short Apply ILU(0) preconditioner for CCDoubleMatrix: Solve Ly=r then

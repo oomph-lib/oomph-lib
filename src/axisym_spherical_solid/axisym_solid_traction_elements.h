@@ -48,9 +48,8 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class ELEMENT>
-  class AxisymmetricSolidTractionElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class AxisymmetricSolidTractionElement : public virtual FaceGeometry<ELEMENT>,
+                                           public virtual FaceElement
   {
   private:
     /// Pointer to an imposed traction function
@@ -87,8 +86,8 @@ namespace oomph
     /// \short Constructor, which takes a "bulk" element and
     /// the value of the index and its limit
     AxisymmetricSolidTractionElement(FiniteElement* const& element_pt,
-                                     const int& face_index) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+                                     const int& face_index)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -145,9 +144,11 @@ namespace oomph
     }
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Return the residuals for the AxisymmetricSolidTractionElements
@@ -225,6 +226,7 @@ namespace oomph
         (interpolated_dxds[1] + interpolated_x[0] * interpolated_dxids[1]) *
           (interpolated_dxds[1] + interpolated_x[0] * interpolated_dxids[1]);
 
+
       A(1, 1) = (interpolated_x[0] * sin(interpolated_xi[1]) +
                  interpolated_x[1] * cos(interpolated_xi[1])) *
                 (interpolated_x[0] * sin(interpolated_xi[1]) +
@@ -301,6 +303,7 @@ namespace oomph
       } // End of loop over shape functions
     } // End of loop over integration points
   }
+
 
 } // namespace oomph
 

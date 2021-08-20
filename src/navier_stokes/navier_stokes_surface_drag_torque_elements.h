@@ -44,17 +44,17 @@ namespace oomph
   /// argument.
   //======================================================================
   template<class ELEMENT>
-  class NavierStokesSurfaceDragTorqueElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement,
-    public virtual ElementWithDragFunction
+  class NavierStokesSurfaceDragTorqueElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual FaceElement,
+      public virtual ElementWithDragFunction
   {
   public:
     ///\short Constructor, which takes a "bulk" element and the value of an
     /// index describing to which face the element should be attached.
     NavierStokesSurfaceDragTorqueElement(FiniteElement* const& element_pt,
-                                         const int& face_index) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+                                         const int& face_index)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -74,11 +74,13 @@ namespace oomph
       this->Translation_index = this->add_external_data(object_data_pt);
     }
 
+
     /// \short Access function for the centre of rotation
     double& centre_of_rotation(const unsigned& i)
     {
       return this->Centre_of_rotation[i];
     }
+
 
     /// \short Function that specifies the drag force and the torque about
     /// the origin
@@ -217,6 +219,7 @@ namespace oomph
       //          << drag_torque[0] << "\n";
     }
 
+
     /// \short Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
@@ -228,6 +231,7 @@ namespace oomph
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
+
 
     /// \short Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
@@ -312,6 +316,7 @@ namespace oomph
       this->write_tecplot_zone_footer(outfile, n_plot);
     }
 
+
   private:
     /// The highest dimension of the problem
     unsigned Dim;
@@ -322,6 +327,7 @@ namespace oomph
     /// The index of where the translation and rotation data is stored
     unsigned Translation_index;
   };
+
 
 } // namespace oomph
 

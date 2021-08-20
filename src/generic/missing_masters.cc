@@ -67,6 +67,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
+
     // Functions for location method in multi-domain problems
 
     //========start of add_external_haloed_node_to_storage====================
@@ -95,6 +96,7 @@ namespace oomph
                                                       send_unsigneds,
                                                       send_doubles);
     }
+
 
     //========================================================================
     /// Recursively add any master nodes (and their master nodes etc) of
@@ -297,6 +299,7 @@ namespace oomph
       }
     }
 
+
     //==========start of add_external_haloed_master_node_helper===============
     /// Helper function to add external haloed node that is a master
     //========================================================================
@@ -422,6 +425,7 @@ namespace oomph
         }
       }
     }
+
 
     //========start of get_required_nodal_information_helper==================
     /// Helper function to get the required nodal information from an
@@ -934,6 +938,7 @@ namespace oomph
                        << "==" << macro_node_update_el_pt << std::endl;
           }
 
+
           // Say haloed element already exists
           send_unsigneds.push_back(0);
 #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
@@ -1207,6 +1212,7 @@ namespace oomph
       }
     }
 
+
     //=======start of add_external_halo_node_helper===========================
     /// Helper functiono to add external halo node that is not a master
     //========================================================================
@@ -1282,6 +1288,7 @@ namespace oomph
         }
       }
     }
+
 
     //========start of construct_new_external_halo_node_helper=================
     /// Helper function which constructs a new external halo node (on new
@@ -1587,6 +1594,7 @@ namespace oomph
         }
       }
     }
+
 
 #endif
 

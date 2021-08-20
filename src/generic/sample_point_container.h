@@ -26,6 +26,7 @@
 #ifndef SAMPLE_POINT_CONTAINER_HEADER
 #define SAMPLE_POINT_CONTAINER_HEADER
 
+
 #ifdef OOMPH_HAS_CGAL
 
 #include <CGAL/Cartesian_d.h>
@@ -44,6 +45,7 @@
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 
+
 //=============================================================================
 /// \short Class for containing sample points: Number of finite element in
 /// its mesh and index of sample point within that element.
@@ -54,9 +56,9 @@ public:
   /// \short Construct SamplePoint object from number of finite element
   /// in its mesh, and index of sample point within that element
   SamplePoint(const unsigned& element_index_in_mesh,
-              const unsigned& sample_point_index_in_element) :
-    Element_index_in_mesh(element_index_in_mesh),
-    Sample_point_index_in_element(sample_point_index_in_element)
+              const unsigned& sample_point_index_in_element)
+    : Element_index_in_mesh(element_index_in_mesh),
+      Sample_point_index_in_element(sample_point_index_in_element)
   {
   }
 
@@ -84,6 +86,7 @@ public:
     return Sample_point_index_in_element;
   }
 
+
 private:
   /// Index of finite element in its mesh
   unsigned Element_index_in_mesh;
@@ -92,12 +95,15 @@ private:
   unsigned Sample_point_index_in_element;
 };
 
+
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 
+
 //  Forward declaration of the RefineableBinArray class.
 class RefineableBinArray;
+
 
 //==============================================================================
 /// RefineableBin class. Contains sample points and is embedded in a
@@ -111,13 +117,14 @@ public:
   /// contains this bin and the index of the newly created bin in that
   /// RefineableBinArray
   RefineableBin(RefineableBinArray* bin_array_pt,
-                const unsigned& bin_index_in_bin_array) :
-    Sample_point_pt(0),
-    Sub_bin_array_pt(0),
-    Bin_array_pt(bin_array_pt),
-    Bin_index_in_bin_array(bin_index_in_bin_array)
+                const unsigned& bin_index_in_bin_array)
+    : Sample_point_pt(0),
+      Sub_bin_array_pt(0),
+      Bin_array_pt(bin_array_pt),
+      Bin_index_in_bin_array(bin_index_in_bin_array)
   {
   }
+
 
   /// \short Broken copy constructor.
   RefineableBin(const RefineableBin& data)
@@ -200,6 +207,7 @@ protected:
     Vector<std::pair<double, double>>& min_and_max_coordinates);
 };
 
+
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -216,17 +224,18 @@ public:
     const Vector<std::pair<double, double>>& min_and_max_coordinates,
     const bool& use_eulerian_coordinates_during_setup,
     const bool& ignore_halo_elements_during_locate_zeta_search,
-    const unsigned& nsample_points_generated_per_element) :
-    Mesh_pt(mesh_pt),
-    Min_and_max_coordinates(min_and_max_coordinates),
-    Use_eulerian_coordinates_during_setup(
-      use_eulerian_coordinates_during_setup),
+    const unsigned& nsample_points_generated_per_element)
+    : Mesh_pt(mesh_pt),
+      Min_and_max_coordinates(min_and_max_coordinates),
+      Use_eulerian_coordinates_during_setup(
+        use_eulerian_coordinates_during_setup),
 #ifdef OOMPH_HAS_MPI
-    Ignore_halo_elements_during_locate_zeta_search(
-      ignore_halo_elements_during_locate_zeta_search),
+      Ignore_halo_elements_during_locate_zeta_search(
+        ignore_halo_elements_during_locate_zeta_search),
 #endif
-    Nsample_points_generated_per_element(nsample_points_generated_per_element),
-    Total_number_of_sample_points_visited_during_locate_zeta_from_top_level(0)
+      Nsample_points_generated_per_element(
+        nsample_points_generated_per_element),
+      Total_number_of_sample_points_visited_during_locate_zeta_from_top_level(0)
   {
     // Don't limit max. search radius
     Max_search_radius = DBL_MAX;
@@ -263,6 +272,7 @@ public:
   virtual void locate_zeta(const Vector<double>& zeta,
                            GeomObject*& sub_geom_object_pt,
                            Vector<double>& s) = 0;
+
 
   /// \short Counter to keep track of how many sample points we've
   /// visited during top level call to locate_zeta. Virtual so it can be
@@ -301,6 +311,7 @@ public:
     return Min_and_max_coordinates;
   }
 
+
 #ifdef OOMPH_HAS_MPI
 
   /// Ignore halo elements?
@@ -336,6 +347,7 @@ public:
   {
     return Max_search_radius;
   }
+
 
   /// File to record sequence of visited sample points in. Used for debugging/
   /// illustration of search procedures.
@@ -396,9 +408,11 @@ protected:
   double Max_search_radius;
 };
 
+
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
+
 
 //=========================================================================
 /// \short Base class for all bin arrays
@@ -412,13 +426,13 @@ public:
            const Vector<unsigned>& dimensions_of_bin_array,
            const bool& use_eulerian_coordinates_during_setup,
            const bool& ignore_halo_elements_during_locate_zeta_search,
-           const unsigned& nsample_points_generated_per_element) :
-    SamplePointContainer(mesh_pt,
-                         min_and_max_coordinates,
-                         use_eulerian_coordinates_during_setup,
-                         ignore_halo_elements_during_locate_zeta_search,
-                         nsample_points_generated_per_element),
-    Dimensions_of_bin_array(dimensions_of_bin_array)
+           const unsigned& nsample_points_generated_per_element)
+    : SamplePointContainer(mesh_pt,
+                           min_and_max_coordinates,
+                           use_eulerian_coordinates_during_setup,
+                           ignore_halo_elements_during_locate_zeta_search,
+                           nsample_points_generated_per_element),
+      Dimensions_of_bin_array(dimensions_of_bin_array)
   {
     // Note: Resizing of Dimensions_of_bin_array if no sizes are specified
     // is delayed to derived class since refineable and nonrefineable
@@ -464,9 +478,11 @@ public:
   /// versions of the get_neighbouring_bins_helper(...) function
   void profile_get_neighbouring_bins_helper();
 
+
   /// \short Get (linearly enumerated) bin index of bin that
   /// contains specified zeta
   unsigned coords_to_bin_index(const Vector<double>& zeta);
+
 
   /// \short  Get "coordinates" of bin that contains specified zeta
   void coords_to_vectorial_bin_index(const Vector<double>& zeta,
@@ -497,12 +513,14 @@ public:
     return Dimensions_of_bin_array[i];
   }
 
+
   /// \short Number of bins in coordinate directions. Const vector-based
   /// version
   Vector<unsigned> dimensions_of_bin_array() const
   {
     return Dimensions_of_bin_array;
   }
+
 
   /// \short Number of bins in specified coordinate direction
   unsigned dimensions_of_bin_array(const unsigned& i) const
@@ -515,9 +533,11 @@ protected:
   Vector<unsigned> Dimensions_of_bin_array;
 };
 
+
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
+
 
 //==============================================================================
 /// RefineableBinArray class.
@@ -701,6 +721,7 @@ public:
                                 const unsigned& radius,
                                 std::ofstream& outfile);
 
+
   /// \short Counter to keep track of how many sample points we've
   /// visited during top level call to locate_zeta
   unsigned& total_number_of_sample_points_visited_during_locate_zeta_from_top_level()
@@ -753,6 +774,7 @@ public:
     return Initial_last_sample_point_to_actually_lookup_during_locate_zeta;
   }
 
+
 private:
   /// Fill the bin array with sample points from FiniteElements stored in mesh
   void fill_bin_array();
@@ -762,6 +784,7 @@ private:
   /// element in its mesh.
   void create_sample_points_from_element(FiniteElement* const element_pt,
                                          const unsigned& n_element);
+
 
   /// Vector of pointers to constituent RefineableBins.
   Vector<RefineableBin*> Bin_pt;
@@ -814,9 +837,11 @@ private:
   unsigned Initial_last_sample_point_to_actually_lookup_during_locate_zeta;
 };
 
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
 
 //==============================================================================
 /// NonRefineableBinArray class.
@@ -959,6 +984,7 @@ public:
   /// up to the specified "radius" (default 1)
   void fill_bin_by_diffusion(const unsigned& bin_diffusion_radius = 1);
 
+
   /// Output bins
   void output_bins(std::ofstream& outfile);
 
@@ -1036,11 +1062,13 @@ private:
   unsigned Nspiral_chunk;
 };
 
+
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
 #ifdef OOMPH_HAS_CGAL
+
 
 //====================================================================
 /// CGAL-based SamplePointContainer
@@ -1091,6 +1119,7 @@ public:
     return Last_sample_point_to_actually_lookup_during_locate_zeta;
   }
 
+
   /// \short Every time we've completed a "spiral", visiting a finite
   /// number of sample points in a deterministic order, use this
   /// multiplier to increase the max. number of sample points to be visited.
@@ -1111,12 +1140,14 @@ public:
     return Initial_last_sample_point_to_actually_lookup_during_locate_zeta;
   }
 
+
   /// \short Find sub-GeomObject (finite element) and the local coordinate
   /// s within it that contains point with global coordinate zeta.
   /// sub_geom_object_pt=0 if point can't be found.
   void locate_zeta(const Vector<double>& zeta,
                    GeomObject*& sub_geom_object_pt,
                    Vector<double>& s);
+
 
   /// \short Find the sub geometric object and local coordinate therein that
   /// corresponds to the intrinsic coordinate zeta, using up to the specified
@@ -1127,6 +1158,7 @@ public:
     const unsigned& max_sample_points_for_newton_based_search,
     GeomObject*& sub_geom_object_pt,
     Vector<double>& s);
+
 
   /// Dimension of the zeta ( =  dim of local coordinate of elements)
   unsigned ndim_zeta() const
@@ -1196,6 +1228,7 @@ private:
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
+
 
 } // end of namespace extension
 

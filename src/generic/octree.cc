@@ -35,6 +35,7 @@ namespace oomph
   //========================================================================
   bool OcTree::Static_data_has_been_setup = false;
 
+
   // Public static member data:
   //---------------------------
 
@@ -100,13 +101,16 @@ namespace oomph
            std::pair<int, int>>
     OcTree::Up_and_right_equivalent_for_pairs_of_vertices;
 
+
   // Protected static member data:
   //------------------------------
+
 
   //====================================================================
   /// Entry in rotation matrix: cos(i*90)
   //====================================================================
   Vector<int> OcTree::Cosi;
+
 
   //====================================================================
   /// Entry in rotation matrix: sin(i*90)
@@ -158,6 +162,7 @@ namespace oomph
   /// of \c S_steplo(i,face) in the 3D coordinate \c s[i]. S_steplo(i,direction)
   //====================================================================
   DenseMatrix<double> OcTree::S_steplo;
+
 
   //====================================================================
   /// If we're located on face \c face [L/R/F/B/U/D], then
@@ -213,8 +218,10 @@ namespace oomph
   //====================================================================
   DenseMatrix<double> OcTree::S_direct_edge;
 
+
   // End static data
   //----------------
+
 
   //===================================================================
   /// This function is used to translate the position of a vertex node
@@ -399,6 +406,7 @@ namespace oomph
     return faces;
   } // End of faces_of_common_edge
 
+
   //==================================================================
   /// Return the local node number of given vertex
   /// in an element with nnode1d nodes in each coordinate direction.
@@ -430,6 +438,7 @@ namespace oomph
         return nnode1d - 1;
         break;
 
+
       case LUB:
         return nnode1d * (nnode1d - 1);
         break;
@@ -438,9 +447,11 @@ namespace oomph
         return nnode1d * nnode1d - 1;
         break;
 
+
       case LDF:
         return nnode1d * nnode1d * (nnode1d - 1);
         break;
+
 
       case RDF:
         return (nnode1d * nnode1d + 1) * (nnode1d - 1);
@@ -464,12 +475,14 @@ namespace oomph
         break;
     }
 
+
     std::ostringstream error_stream;
     error_stream << "Never get here. vertex: " << Direct_string[vertex]
                  << std::endl;
     throw OomphLibError(
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
+
 
   //==================================================================
   /// \short Return the vertex of local (vertex) node n
@@ -540,6 +553,7 @@ namespace oomph
     }
   }
 
+
   //==================================================================
   /// This function takes as argument two node numbers of two nodes
   /// delimiting an edge, and one face of this edge and returns the
@@ -586,6 +600,7 @@ namespace oomph
     // return the corresponding face
     return Vector_to_direction[vect_other_face];
   }
+
 
   //====================================================================
   /// Build the rotation matrix for a rotation around the axis \c axis of
@@ -665,6 +680,7 @@ namespace oomph
     }
   }
 
+
   //===================================================================
   /// Helper: Performs the operation Vect2=Mat*Vect1
   //===================================================================
@@ -683,6 +699,7 @@ namespace oomph
       vect2[i] = sum;
     }
   }
+
 
   //===================================================================
   /// A rotation is defined by the newUp and newRight
@@ -724,6 +741,7 @@ namespace oomph
     // translate the vector back to a direction
     return Vector_to_direction[vect_new_dir];
   }
+
 
   //==================================================================
   /// This function rotates a vector according to a rotation of
@@ -1015,12 +1033,14 @@ namespace oomph
     return vect_new_dir;
   }
 
+
   //====================================================================
   /// Setup static data for OcTree
   //====================================================================
   void OcTree::setup_static_data()
   {
     using namespace OcTreeNames;
+
 
 #ifdef PARANOID
     if (Tree::OMEGA != OcTree::OMEGA)
@@ -1053,6 +1073,7 @@ namespace oomph
     Sini[1] = 1;
     Sini[2] = 0;
     Sini[3] = -1;
+
 
     // Build direction/octant adjacency scheme
     // Is_adjacent(i_face,j_octant):
@@ -1115,6 +1136,7 @@ namespace oomph
     Is_adjacent(B, RUF) = false;
     Is_adjacent(F, RUF) = true;
 
+
     // Build direction/octant adjacency scheme
     // Is_adjacent(i_edge,j_octant):
     // Is edge adjacent to octant?
@@ -1137,6 +1159,7 @@ namespace oomph
     Is_adjacent(LU, RUB) = false;
     Is_adjacent(LU, RUF) = false;
 
+
     Is_adjacent(LB, LDB) = true;
     Is_adjacent(LB, LDF) = false;
     Is_adjacent(LB, LUB) = true;
@@ -1145,6 +1168,7 @@ namespace oomph
     Is_adjacent(LB, RDF) = false;
     Is_adjacent(LB, RUB) = false;
     Is_adjacent(LB, RUF) = false;
+
 
     Is_adjacent(LF, LDB) = false;
     Is_adjacent(LF, LDF) = true;
@@ -1155,6 +1179,7 @@ namespace oomph
     Is_adjacent(LF, RUB) = false;
     Is_adjacent(LF, RUF) = false;
 
+
     Is_adjacent(RD, LDB) = false;
     Is_adjacent(RD, LDF) = false;
     Is_adjacent(RD, LUB) = false;
@@ -1163,6 +1188,7 @@ namespace oomph
     Is_adjacent(RD, RDF) = true;
     Is_adjacent(RD, RUB) = false;
     Is_adjacent(RD, RUF) = false;
+
 
     Is_adjacent(RU, LDB) = false;
     Is_adjacent(RU, LDF) = false;
@@ -1191,6 +1217,7 @@ namespace oomph
     Is_adjacent(RF, RUB) = false;
     Is_adjacent(RF, RUF) = true;
 
+
     Is_adjacent(DB, LDB) = true;
     Is_adjacent(DB, LDF) = false;
     Is_adjacent(DB, LUB) = false;
@@ -1199,6 +1226,7 @@ namespace oomph
     Is_adjacent(DB, RDF) = false;
     Is_adjacent(DB, RUB) = false;
     Is_adjacent(DB, RUF) = false;
+
 
     Is_adjacent(DF, LDB) = false;
     Is_adjacent(DF, LDF) = true;
@@ -1226,6 +1254,7 @@ namespace oomph
     Is_adjacent(UF, RDF) = false;
     Is_adjacent(UF, RUB) = false;
     Is_adjacent(UF, RUF) = true;
+
 
     // Common face of various octants from Samet's book
     Common_face.resize(27, 27);
@@ -1301,6 +1330,7 @@ namespace oomph
     Common_face(RUF, RUB) = OMEGA;
     Common_face(RUF, RUF) = OMEGA;
 
+
     // Common face of various edges/octants from Samet's book
     Common_face(LD, LDB) = OMEGA;
     Common_face(LD, LDF) = OMEGA;
@@ -1374,6 +1404,7 @@ namespace oomph
     Common_face(RF, RUB) = R;
     Common_face(RF, RUF) = OMEGA;
 
+
     Common_face(DB, LDB) = OMEGA;
     Common_face(DB, LDF) = D;
     Common_face(DB, LUB) = B;
@@ -1410,6 +1441,7 @@ namespace oomph
     Common_face(UF, RUB) = U;
     Common_face(UF, RUF) = OMEGA;
 
+
     // Tecplot colours for neighbours in various directions
     Colour.resize(27);
     Colour[R] = "CYAN";
@@ -1430,12 +1462,14 @@ namespace oomph
     Colour[LU] = "GREEN";
     Colour[RU] = "GREEN";
 
+
     Colour[LF] = "RED";
     Colour[RF] = "RED";
     Colour[DF] = "RED";
     Colour[UF] = "RED";
 
     Colour[OMEGA] = "YELLOW";
+
 
     // Reflection scheme:
     // Reflect(direction,octant): Get mirror of octant in direction
@@ -1498,6 +1532,7 @@ namespace oomph
     Reflect(B, RUF) = RUB;
     Reflect(F, RUF) = RUB;
 
+
     // Reflection scheme:
     // Reflect(direction (edge) ,octant): Get mirror of edge in direction
     // Table in Samet book as well
@@ -1522,6 +1557,7 @@ namespace oomph
     Reflect(RD, LUF) = RDF;
     Reflect(RU, LUF) = RDF;
 
+
     Reflect(LD, RDB) = LUB;
     Reflect(LU, RDB) = LUB;
     Reflect(RD, RDB) = LUB;
@@ -1541,6 +1577,7 @@ namespace oomph
     Reflect(LU, RUF) = LDF;
     Reflect(RD, RUF) = LDF;
     Reflect(RU, RUF) = LDF;
+
 
     Reflect(LB, LDB) = RDF;
     Reflect(LF, LDB) = RDF;
@@ -1582,6 +1619,7 @@ namespace oomph
     Reflect(RB, RUF) = LUB;
     Reflect(RF, RUF) = LUB;
 
+
     Reflect(DB, LDB) = LUF;
     Reflect(DF, LDB) = LUF;
     Reflect(UB, LDB) = LUF;
@@ -1621,6 +1659,7 @@ namespace oomph
     Reflect(DF, RUF) = RDB;
     Reflect(UB, RUF) = RDB;
     Reflect(UF, RUF) = RDB;
+
 
     // S_base(i,direction) etc.:  Initial value/increment for coordinate s[i] on
     // the face indicated by direction (L/R/U/D/F/B)
@@ -1688,6 +1727,7 @@ namespace oomph
     S_stephi(1, B) = 2.0;
     S_stephi(2, B) = 0.0;
 
+
     // Relative to the left/down/back vertex in any (father) octree, the
     // corresponding vertex in the son specified by \c son_octant has an offset.
     // If we project the son_octant's left/down/back vertex onto the
@@ -1753,6 +1793,7 @@ namespace oomph
     S_directlo(F, RUF) = 1.0;
     S_directlo(B, RUF) = 1.0;
 
+
     S_directhi(L, LDB) = 0.0;
     S_directhi(R, LDB) = 0.0;
     S_directhi(U, LDB) = 0.0;
@@ -1808,6 +1849,7 @@ namespace oomph
     S_directhi(D, RUF) = 1.0;
     S_directhi(F, RUF) = 1.0;
     S_directhi(B, RUF) = 1.0;
+
 
     // S_base_edge(i,direction):  Initial value/increment for coordinate s[i] on
     // the edge indicated by direction (LB,RB,...)
@@ -1870,6 +1912,7 @@ namespace oomph
     S_step_edge(1, RU) = 0.0;
     S_step_edge(2, RU) = 2.0;
 
+
     S_base_edge(0, LF) = -1.0;
     S_base_edge(1, LF) = -1.0;
     S_base_edge(2, LF) = 1.0;
@@ -1897,6 +1940,7 @@ namespace oomph
     S_step_edge(0, UF) = 2.0;
     S_step_edge(1, UF) = 0.0;
     S_step_edge(2, UF) = 0.0;
+
 
     // Relative to the left/down/back vertex in any (father) octree, the
     // corresponding vertex in the son specified by \c son_octant has an offset.
@@ -1956,6 +2000,7 @@ namespace oomph
     S_direct_edge(DF, RUB) = 1.0;
     S_direct_edge(UF, RUB) = 1.0;
 
+
     S_direct_edge(LB, LDF) = 0.0;
     S_direct_edge(RB, LDF) = 0.0;
     S_direct_edge(DB, LDF) = 0.0;
@@ -2008,6 +2053,7 @@ namespace oomph
     S_direct_edge(DF, RUF) = 1.0;
     S_direct_edge(UF, RUF) = 1.0;
 
+
     // Public static data:
     //-------------------
 
@@ -2021,6 +2067,7 @@ namespace oomph
     Direct_string[RDF] = "RDF";
     Direct_string[RUB] = "RUB";
     Direct_string[RUF] = "RUF";
+
 
     Direct_string[L] = "L";
     Direct_string[R] = "R";
@@ -2043,6 +2090,7 @@ namespace oomph
     Direct_string[DB] = "DB";
 
     Direct_string[OMEGA] = "OMEGA";
+
 
     // Get opposite face, e.g. Reflect_face(L)=R
     Reflect_face.resize(27);
@@ -2081,6 +2129,7 @@ namespace oomph
     Reflect_vertex[RUB] = LDF;
     Reflect_vertex[LDF] = RUB;
 
+
     // Vertices at ends of edges
     Vertex_at_end_of_edge.resize(27);
 
@@ -2092,6 +2141,7 @@ namespace oomph
     Vertex_at_end_of_edge[UB][0] = LUB; // Pattern: both other indices
     Vertex_at_end_of_edge[UB][1] = RUB;
 
+
     Vertex_at_end_of_edge[LB].resize(2);
     Vertex_at_end_of_edge[LB][0] = LUB; // Pattern: both other indices
     Vertex_at_end_of_edge[LB][1] = LDB;
@@ -2099,6 +2149,7 @@ namespace oomph
     Vertex_at_end_of_edge[RB].resize(2);
     Vertex_at_end_of_edge[RB][0] = RUB; // Pattern: both other indices
     Vertex_at_end_of_edge[RB][1] = RDB;
+
 
     Vertex_at_end_of_edge[LD].resize(2);
     Vertex_at_end_of_edge[LD][0] = LDF; // Pattern: both other indices
@@ -2116,6 +2167,7 @@ namespace oomph
     Vertex_at_end_of_edge[RU][0] = RUF; // Pattern: both other indices
     Vertex_at_end_of_edge[RU][1] = RUB;
 
+
     Vertex_at_end_of_edge[DF].resize(2);
     Vertex_at_end_of_edge[DF][0] = LDF; // Pattern: both other indices
     Vertex_at_end_of_edge[DF][1] = RDF;
@@ -2131,6 +2183,7 @@ namespace oomph
     Vertex_at_end_of_edge[RF].resize(2);
     Vertex_at_end_of_edge[RF][0] = RUF; // Pattern: both other indices
     Vertex_at_end_of_edge[RF][1] = RDF;
+
 
     // Initialisation of the values of Vector_to_direction
     Vector<int> vect(3);
@@ -2247,6 +2300,7 @@ namespace oomph
       }
     }
 
+
     // Initialisation of Direction_to_vector:
     // Translate Octant, face, edge into direction vector using the
     // value of Direct_string; Direction_to_vector[U]={0,1,0};
@@ -2293,6 +2347,7 @@ namespace oomph
       }
     }
 
+
     // Setup map that works out required rotations based on
     //-----------------------------------------------------
     // adjacent edge vertices
@@ -2300,6 +2355,7 @@ namespace oomph
 
     int new_up, new_right;
     int new_vertex;
+
 
     // Map that stores the set of rotations (as a pairs consisting of
     // the up_equivalent and the right_equivalent) that move the vertex
@@ -2335,6 +2391,7 @@ namespace oomph
       required_rotation[std::make_pair(vertex, new_vertex)].insert(
         std::make_pair(new_up, new_right));
 
+
       new_up = D;
       new_right = R;
       new_vertex = OcTree::rotate(new_up, new_right, vertex);
@@ -2359,6 +2416,7 @@ namespace oomph
       required_rotation[std::make_pair(vertex, new_vertex)].insert(
         std::make_pair(new_up, new_right));
 
+
       new_up = R;
       new_right = D;
       new_vertex = OcTree::rotate(new_up, new_right, vertex);
@@ -2383,6 +2441,7 @@ namespace oomph
       required_rotation[std::make_pair(vertex, new_vertex)].insert(
         std::make_pair(new_up, new_right));
 
+
       new_up = L;
       new_right = D;
       new_vertex = OcTree::rotate(new_up, new_right, vertex);
@@ -2406,6 +2465,7 @@ namespace oomph
       new_vertex = OcTree::rotate(new_up, new_right, vertex);
       required_rotation[std::make_pair(vertex, new_vertex)].insert(
         std::make_pair(new_up, new_right));
+
 
       new_up = F;
       new_right = R;
@@ -2430,6 +2490,7 @@ namespace oomph
       new_vertex = OcTree::rotate(new_up, new_right, vertex);
       required_rotation[std::make_pair(vertex, new_vertex)].insert(
         std::make_pair(new_up, new_right));
+
 
       new_up = B;
       new_right = R;
@@ -2456,11 +2517,13 @@ namespace oomph
         std::make_pair(new_up, new_right));
     }
 
+
     // Each vertex is part of three edges. This container stores the
     // vertices in each of the three edge neighbours that are
     // adjacent to this node if there's no relative rotation between
     // the elements.
     std::map<int, Vector<int>> vertex_in_edge_neighbour;
+
 
     // Each vertex is part of three edges. This container stores the
     // vertices at the other end of the edge
@@ -2470,6 +2533,7 @@ namespace oomph
     // vertices in the adjacent element at the other end of the edge
     // assuming there are no rotations between the elements.
     std::map<int, Vector<int>> other_vertex_in_edge_neighbour;
+
 
     vertex_in_edge_neighbour[LDB].resize(3);
     vertex_in_edge_neighbour[LDB][0] =
@@ -2488,6 +2552,7 @@ namespace oomph
     other_vertex_in_edge_neighbour[LDB][1] = RUF;
     other_vertex_in_edge_neighbour[LDB][2] = RUF;
 
+
     vertex_in_edge_neighbour[RDB].resize(3);
     vertex_in_edge_neighbour[RDB][0] =
       RUF; // Pattern: exactly one letter matches
@@ -2504,6 +2569,7 @@ namespace oomph
     other_vertex_in_edge_neighbour[RDB][0] = LUF; // Pattern: full reflection
     other_vertex_in_edge_neighbour[RDB][1] = LUF;
     other_vertex_in_edge_neighbour[RDB][2] = LUF;
+
 
     vertex_in_edge_neighbour[LUB].resize(3);
     vertex_in_edge_neighbour[LUB][0] =
@@ -2522,6 +2588,7 @@ namespace oomph
     other_vertex_in_edge_neighbour[LUB][1] = RDF;
     other_vertex_in_edge_neighbour[LUB][2] = RDF;
 
+
     vertex_in_edge_neighbour[RUB].resize(3);
     vertex_in_edge_neighbour[RUB][0] =
       RDF; // Pattern: exactly one letter matches
@@ -2538,6 +2605,7 @@ namespace oomph
     other_vertex_in_edge_neighbour[RUB][0] = LDF; // Pattern: full reflection
     other_vertex_in_edge_neighbour[RUB][1] = LDF;
     other_vertex_in_edge_neighbour[RUB][2] = LDF;
+
 
     vertex_in_edge_neighbour[LDF].resize(3);
     vertex_in_edge_neighbour[LDF][0] =
@@ -2556,6 +2624,7 @@ namespace oomph
     other_vertex_in_edge_neighbour[LDF][1] = RUB;
     other_vertex_in_edge_neighbour[LDF][2] = RUB;
 
+
     vertex_in_edge_neighbour[RDF].resize(3);
     vertex_in_edge_neighbour[RDF][0] =
       RUB; // Pattern: exactly one letter matches
@@ -2572,6 +2641,7 @@ namespace oomph
     other_vertex_in_edge_neighbour[RDF][0] = LUB; // Pattern: full reflection
     other_vertex_in_edge_neighbour[RDF][1] = LUB;
     other_vertex_in_edge_neighbour[RDF][2] = LUB;
+
 
     vertex_in_edge_neighbour[LUF].resize(3);
     vertex_in_edge_neighbour[LUF][0] =
@@ -2590,6 +2660,7 @@ namespace oomph
     other_vertex_in_edge_neighbour[LUF][1] = RDB;
     other_vertex_in_edge_neighbour[LUF][2] = RDB;
 
+
     vertex_in_edge_neighbour[RUF].resize(3);
     vertex_in_edge_neighbour[RUF][0] =
       RDB; // Pattern: exactly one letter matches
@@ -2606,6 +2677,7 @@ namespace oomph
     other_vertex_in_edge_neighbour[RUF][0] = LDB; // Pattern: full reflection
     other_vertex_in_edge_neighbour[RUF][1] = LDB;
     other_vertex_in_edge_neighbour[RUF][2] = LDB;
+
 
     // Loop over all vertices in the reference element
     for (int vertex = LDB; vertex <= RUF; vertex++)
@@ -2636,6 +2708,7 @@ namespace oomph
             required_rotation[std::make_pair(neigh_vertex,
                                              unrotated_neigh_vertex)];
 
+
           // Loop over all "other" vertices in the neighbour element
           for (int neigh_other_vertex = LDB; neigh_other_vertex <= RUF;
                neigh_other_vertex++)
@@ -2656,6 +2729,7 @@ namespace oomph
               other_vertex_rot.begin(),
               other_vertex_rot.end(),
               inserter(common_rotations, common_rotations.begin()));
+
 
             if (common_rotations.size() > 0)
             {
@@ -2687,6 +2761,7 @@ namespace oomph
     }
   }
 
+
   //================================================================
   /// \short Is the edge neighbour (for edge "edge")  specified via the pointer
   /// also a face neighbour for one of the two adjacent faces?
@@ -2698,6 +2773,7 @@ namespace oomph
     // No paranoid check needed -- the default for the switch statement
     // catches illegal values for edge
 #endif
+
 
     // Catch stupid case: Null doesn't have a face neighbour...
     if (edge_neigh_pt == 0)
@@ -2762,7 +2838,9 @@ namespace oomph
 
         break;
 
+
       case RB:
+
 
         // Get first face neighbour
         face = R;
@@ -2802,6 +2880,7 @@ namespace oomph
         }
 
         break;
+
 
       case DB:
 
@@ -2843,6 +2922,7 @@ namespace oomph
         }
 
         break;
+
 
       case UB:
 
@@ -2888,6 +2968,7 @@ namespace oomph
 
       case LD:
 
+
         // Get first face neighbour
         face = L;
         face_neigh_pt = gteq_face_neighbour(face,
@@ -2928,6 +3009,7 @@ namespace oomph
         break;
 
       case RD:
+
 
         // Get first face neighbour
         face = R;
@@ -3010,6 +3092,7 @@ namespace oomph
 
         break;
 
+
       case RU:
 
         // Get first face neighbour
@@ -3052,7 +3135,9 @@ namespace oomph
 
         break;
 
+
       case LF:
+
 
         // Get first face neighbour
         face = L;
@@ -3136,6 +3221,7 @@ namespace oomph
 
         break;
 
+
       case DF:
 
         // Get first face neighbour
@@ -3156,6 +3242,7 @@ namespace oomph
             return true;
           }
         }
+
 
         // Get second face neighbour
         face = F;
@@ -3178,6 +3265,7 @@ namespace oomph
 
         break;
 
+
       case UF:
 
         // Get first face neighbour
@@ -3198,6 +3286,7 @@ namespace oomph
             return true;
           }
         }
+
 
         // Get second face neighbour
         face = F;
@@ -3236,6 +3325,7 @@ namespace oomph
     // edge neighbour:
     return false;
   }
+
 
   //================================================================
   /// Find (pointer to) `greater-or-equal-sized face neighbour' in
@@ -3624,6 +3714,7 @@ namespace oomph
       // old direction
       int new_dir = direction;
 
+
       // If necessary, rotate things around (the orientation of Up in the
       // neighbour might be be different from that in the present element)
       // If the root of the neighbour is the not same as the one of the present
@@ -3662,15 +3753,18 @@ namespace oomph
                          R);
         vect1 = Direction_to_vector[tmp_dir];
 
+
         tmp_dir = rotate(orig_root_pt->up_equivalent(neighb_pt->Root_pt),
                          orig_root_pt->right_equivalent(neighb_pt->Root_pt),
                          U);
         vect2 = Direction_to_vector[tmp_dir];
 
+
         tmp_dir = rotate(orig_root_pt->up_equivalent(neighb_pt->Root_pt),
                          orig_root_pt->right_equivalent(neighb_pt->Root_pt),
                          F);
         vect3 = Direction_to_vector[tmp_dir];
+
 
         // Setup the inverse rotation matrix
         for (int i = 0; i < 3; i++)
@@ -3712,6 +3806,7 @@ namespace oomph
 
     return return_pt;
   }
+
 
   //==========================================================================
   /// Find `greater-or-equal-sized face neighbour' in given direction
@@ -3884,6 +3979,7 @@ namespace oomph
     return return_el_pt;
   } // End of gteq_face_neighbour
 
+
   //==========================================================================
   /// Find `greater-or-equal-sized edge neighbour' in given direction
   ///  (LB,RB,DB,UB [the back edges],
@@ -3925,6 +4021,7 @@ namespace oomph
                                       OcTreeRoot* orig_root_pt) const
   {
     using namespace OcTreeNames;
+
 
 #ifdef PARANOID
     if ((direction != LB) && (direction != RB) && (direction != DB) &&
@@ -4091,6 +4188,7 @@ namespace oomph
     return return_el_pt;
   } // End of gteq_edge_neighbour
 
+
   //================================================================
   /// Self-test: Check neighbour finding routine. For each element
   /// in the tree and for each vertex, determine the
@@ -4149,8 +4247,7 @@ namespace oomph
     }
 
     double max_error = max_error_face;
-    if (max_error_edge > max_error)
-      max_error = max_error_edge;
+    if (max_error_edge > max_error) max_error = max_error_edge;
 
     if (failed)
     {
@@ -4163,6 +4260,7 @@ namespace oomph
       return 0;
     }
   }
+
 
   //=================================================================
   /// Doc/check all face neighbours of octree (nodes) contained in the
@@ -4194,6 +4292,7 @@ namespace oomph
 
     Vector<double> x_small(3);
     Vector<double> x_large(3);
+
 
     // Initialise error in vertex positions
     max_error = 0.0;
@@ -4337,6 +4436,7 @@ namespace oomph
                               << x_large[2] << "  40 \n";
             }
 
+
             // "North east" vertex in the interfacial face
             //--------------------------------------------
 
@@ -4434,8 +4534,10 @@ namespace oomph
     }
   }
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //=================================================================
   /// Doc/check all true edge neighbours of octree (nodes) contained
@@ -4467,6 +4569,7 @@ namespace oomph
 
     Vector<double> x_small(3);
     Vector<double> x_large(3);
+
 
     // Initialise error in vertex positions
     max_error = 0.0;
@@ -4633,6 +4736,7 @@ namespace oomph
                               << x_large[2] << "  40 \n";
             }
 
+
             // "High" vertex in the edge
             //--------------------------
             // Get coordinates in large (neighbour) element
@@ -4717,6 +4821,7 @@ namespace oomph
               neighbours_file << "-0.05 -0.05 -0.05  0 \n";
               neighbours_file << "-0.05 -0.05 -0.05  0 \n";
 
+
               // Doc edge for which no neighbour exists but only
               // for the smallest elements
               if (el_pt->is_leaf())
@@ -4727,6 +4832,7 @@ namespace oomph
                 s[1] = S_base_edge(1, direction);
                 s[2] = S_base_edge(2, direction);
                 el_pt->object_pt()->get_x(s, x_start);
+
 
                 // Get coordinates in small element
                 s[0] = S_base_edge(0, direction) + S_step_edge(0, direction);
@@ -4752,9 +4858,11 @@ namespace oomph
     }
   }
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //================================================================
   /// Constructor for OcTreeForest:
@@ -4819,6 +4927,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // Number of vertex nodes: 8
     unsigned n_vertex_node = 8;
 
@@ -4837,6 +4946,7 @@ namespace oomph
         tree_assoc_with_vertex_node[nod_pt].insert(i);
       }
     }
+
 
     // For each tree we store a set of potentially neighbouring trees
     // i.e. trees that share at least one node
@@ -4867,6 +4977,7 @@ namespace oomph
         }
       }
     }
+
 
     // Loop over all trees
     for (unsigned i = 0; i < numtrees; i++)
@@ -4927,6 +5038,7 @@ namespace oomph
            (Trees_pt[j]->object_pt()->get_node_number(
               Trees_pt[i]->object_pt()->node_pt(n * n * (n - 1))) != -1));
 
+
         if (is_Down_neighbour)
         {
           is_face_neighbour = true;
@@ -4958,6 +5070,7 @@ namespace oomph
           Trees_pt[i]->neighbour_pt(F) = Trees_pt[j];
         }
 
+
         // If it's not a face neighbour, it may still be an edge
         // neighbour. We check this by checking if the
         // vertex nodes coincide. Note: This test would also
@@ -4979,6 +5092,7 @@ namespace oomph
              (Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt(n * n - 1)) != -1));
 
+
           // is it the down back neighbour ?
           bool is_down_back_neighbour =
             ((Trees_pt[j]->object_pt()->get_node_number(
@@ -4993,12 +5107,14 @@ namespace oomph
              (Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt(n * n - 1)) != -1));
 
+
           // is it the left down neighbour ?
           bool is_left_down_neighbour =
             ((Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt(n * n * (n - 1))) != -1) &&
              (Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt(0)) != -1));
+
 
           // is it the right down neighbour ?
           bool is_right_down_neighbour =
@@ -5008,12 +5124,14 @@ namespace oomph
              (Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt(n - 1)) != -1));
 
+
           // is it the left up neighbour ?
           bool is_left_up_neighbour =
             ((Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt((n * n * n - n))) != -1) &&
              (Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt(n * (n - 1))) != -1));
+
 
           // is it the right up neighbour ?
           bool is_right_up_neighbour =
@@ -5022,12 +5140,14 @@ namespace oomph
              (Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt(n * n - 1)) != -1));
 
+
           // is it the left front neighbour ?
           bool is_left_front_neighbour =
             ((Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt((n * n * n - n))) != -1) &&
              (Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt(n * n * (n - 1))) != -1));
+
 
           // is it the right front neighbour ?
           bool is_right_front_neighbour =
@@ -5037,6 +5157,7 @@ namespace oomph
                 Trees_pt[i]->object_pt()->node_pt((n * n + 1) * (n - 1))) !=
               -1));
 
+
           // is it the down front neighbour ?
           bool is_down_front_neighbour =
             ((Trees_pt[j]->object_pt()->get_node_number(
@@ -5045,12 +5166,14 @@ namespace oomph
                 Trees_pt[i]->object_pt()->node_pt((n * n + 1) * (n - 1))) !=
               -1));
 
+
           // is it the up front neighbour ?
           bool is_up_front_neighbour =
             ((Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt((n * n * n - n))) != -1) &&
              (Trees_pt[j]->object_pt()->get_node_number(
                 Trees_pt[i]->object_pt()->node_pt((n * n * n - 1))) != -1));
+
 
           // Add to storage scheme for edge neighbours (only!)
 
@@ -5075,6 +5198,7 @@ namespace oomph
             octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j], UB);
           }
 
+
           if (is_left_down_neighbour)
           {
             // Trees_pt[i]->neighbour_pt(LD)=Trees_pt[j];
@@ -5095,6 +5219,7 @@ namespace oomph
             // Trees_pt[i]->neighbour_pt(RU)=Trees_pt[j];
             octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j], RU);
           }
+
 
           if (is_left_front_neighbour)
           {
@@ -5120,6 +5245,7 @@ namespace oomph
       }
     }
   }
+
 
   //================================================================
   /// Construct the rotation scheme for the octree forest.
@@ -5198,6 +5324,7 @@ namespace oomph
         }
       }
 
+
       // Find the pointer to the Right neighbour
       //---------------------------------------
       neigh_pt = oc_face_neigh_pt(i, R);
@@ -5249,6 +5376,7 @@ namespace oomph
         }
       }
 
+
       // Find the pointer to the Down neighbour
       //--------------------------------------
       neigh_pt = oc_face_neigh_pt(i, D);
@@ -5299,6 +5427,7 @@ namespace oomph
         }
       }
 
+
       // Find the pointer to the Left neighbour
       //--------------------------------------
       neigh_pt = oc_face_neigh_pt(i, L);
@@ -5348,6 +5477,7 @@ namespace oomph
                               OOMPH_EXCEPTION_LOCATION);
         }
       }
+
 
       // Find the pointer to the Front neighbour
       //---------------------------------------
@@ -5412,6 +5542,7 @@ namespace oomph
         }
       }
 
+
       // Find the pointer to the Back neighbour
       //--------------------------------------
       neigh_pt = oc_face_neigh_pt(i, B);
@@ -5471,6 +5602,7 @@ namespace oomph
         }
       }
 
+
       // EDGE NEIGHBOURS
       //----------------
 
@@ -5496,6 +5628,7 @@ namespace oomph
             unsigned nod1 = OcTree::vertex_to_node_number(vertex, nnode1d);
             unsigned nod2 =
               OcTree::vertex_to_node_number(other_vertex, nnode1d);
+
 
             // Here are the local node numbers (in the neighbouring element)
             // of the start/end nodes of present element's edge:
@@ -5537,6 +5670,7 @@ namespace oomph
       }
     } // end of loop over all trees.
   }
+
 
   //================================================================
   /// Self test: Check neighbour finding routine
@@ -5590,8 +5724,7 @@ namespace oomph
     }
 
     double max_error = max_error_face;
-    if (max_error_edge > max_error)
-      max_error = max_error_edge;
+    if (max_error_edge > max_error) max_error = max_error_edge;
 
     if (failed)
     {
@@ -5604,6 +5737,7 @@ namespace oomph
       return 0;
     }
   }
+
 
   //================================================================
   /// Document and check all the neighbours of all the nodes
@@ -5752,6 +5886,7 @@ namespace oomph
     }
   }
 
+
   //================================================================
   /// Open output files that will stored any hanging nodes that are
   /// created in the mesh refinement process.
@@ -5794,5 +5929,6 @@ namespace oomph
       output_stream[5]->open(fullname.str().c_str());
     }
   }
+
 
 } // namespace oomph

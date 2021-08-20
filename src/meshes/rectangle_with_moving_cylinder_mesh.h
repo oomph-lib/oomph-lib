@@ -3,11 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision: 1162 $
-// LIC//
-// LIC// $LastChangedDate: 2016-04-18 13:27:54 +0100 (Mon, 18 Apr 2016) $
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -36,9 +32,9 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "../generic/domain.h"
-#include "../generic/geom_objects.h"
-#include "../generic/refineable_quad_mesh.h"
+#include "generic/domain.h"
+#include "generic/geom_objects.h"
+#include "generic/refineable_quad_mesh.h"
 
 // Refineable quad mesh headers
 #include "rectangular_quadmesh.h"
@@ -64,8 +60,8 @@ namespace oomph
     /// in anticlockwise direction.
     RectangleWithHoleAndAnnularRegionDomain(GeomObject* cylinder_pt,
                                             const double& annular_region_radius,
-                                            const double& length) :
-      Cylinder_pt(cylinder_pt), Annular_region_radius(annular_region_radius)
+                                            const double& length)
+      : Cylinder_pt(cylinder_pt), Annular_region_radius(annular_region_radius)
     {
       // Vertices of rectangle
       Lower_left.resize(2);
@@ -266,9 +262,9 @@ namespace oomph
   /// applications of boundary conditions in subsequent refinements
   //=============================================================================
   template<class ELEMENT>
-  class RefineableRectangleWithHoleAndAnnularRegionMesh :
-    public RectangleWithHoleAndAnnularRegionMesh<ELEMENT>,
-    public RefineableQuadMesh<ELEMENT>
+  class RefineableRectangleWithHoleAndAnnularRegionMesh
+    : public RectangleWithHoleAndAnnularRegionMesh<ELEMENT>,
+      public RefineableQuadMesh<ELEMENT>
   {
   public:
     /// Constructor. Pass pointer to geometric object that
@@ -281,9 +277,9 @@ namespace oomph
       GeomObject* cylinder_pt,
       const double& annular_region_radius,
       const double& length,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangleWithHoleAndAnnularRegionMesh<ELEMENT>(
-        cylinder_pt, annular_region_radius, length, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangleWithHoleAndAnnularRegionMesh<ELEMENT>(
+          cylinder_pt, annular_region_radius, length, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // Cylinder...<...>. Need to set up adaptive information.
@@ -317,8 +313,8 @@ namespace oomph
   /// My Mesh
   //=============================================================================
   template<class ELEMENT>
-  class RefineableQuadMeshWithMovingCylinder :
-    public virtual RefineableQuadMesh<ELEMENT>
+  class RefineableQuadMeshWithMovingCylinder
+    : public virtual RefineableQuadMesh<ELEMENT>
   {
   public:
     /// Constructor. Pass pointer to geometric object that represents the

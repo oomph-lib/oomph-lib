@@ -128,9 +128,11 @@ namespace oomph
         }
       }
 
+
       // Get body force
       double source;
       this->get_source_axi_adv_diff(ipt, interpolated_x, source);
+
 
       // Get wind
       //--------
@@ -213,6 +215,7 @@ namespace oomph
                  mesh_velocity[1] * interpolated_dudx[1]) *
                 test(l) * r * W * hang_weight;
             }
+
 
             // Calculate the Jacobian
             if (flag)
@@ -309,6 +312,7 @@ namespace oomph
 
     } // End of loop over integration points
   }
+
 
   //====================================================================
   // Force build of templates

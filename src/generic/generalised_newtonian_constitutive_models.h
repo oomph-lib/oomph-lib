@@ -28,8 +28,9 @@
 #ifndef OOMPH_GENERALISED_NEWTONIAN_CONSTITUTIVE_MODELS_HEADER
 #define OOMPH_GENERALISED_NEWTONIAN_CONSTITUTIVE_MODELS_HEADER
 
+
 // Oomph-lib includes
-//#include "../generic.h"
+//#include "generic.h"
 
 namespace oomph
 {
@@ -42,6 +43,7 @@ namespace oomph
   public:
     /// Empty constructor
     GeneralisedNewtonianConstitutiveEquation() {}
+
 
     /// Empty virtual destructor
     virtual ~GeneralisedNewtonianConstitutiveEquation() {}
@@ -65,13 +67,13 @@ namespace oomph
   /// defining a Newtonian fluid
   //===================================================================
   template<unsigned DIM>
-  class NewtonianConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class NewtonianConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   public:
     /// Constructor: specify viscosity ratio (defaults to one)
-    NewtonianConstitutiveEquation(const double& viscosity_ratio = 1.0) :
-      Viscosity_ratio(viscosity_ratio)
+    NewtonianConstitutiveEquation(const double& viscosity_ratio = 1.0)
+      : Viscosity_ratio(viscosity_ratio)
     {
     }
 
@@ -93,14 +95,15 @@ namespace oomph
     double Viscosity_ratio;
   };
 
+
   //===================================================================
   /// A GeneralisedNewtonianConstitutiveEquation class defining a power-law
   /// fluid regularised according to Bercovier and Engelman (1980) to allow for
   /// n < 1
   //==================================================================
   template<unsigned DIM>
-  class PowerLawBerEngRegConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class PowerLawBerEngRegConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   private:
     /// power law index n
@@ -109,12 +112,12 @@ namespace oomph
     /// regularisation parameter e << 1
     double* Regularisation_parameter_pt;
 
+
   public:
-    PowerLawBerEngRegConstitutiveEquation(double* power_pt,
-                                          double* reg_par_pt) :
-      GeneralisedNewtonianConstitutiveEquation<DIM>(),
-      Power_pt(power_pt),
-      Regularisation_parameter_pt(reg_par_pt)
+    PowerLawBerEngRegConstitutiveEquation(double* power_pt, double* reg_par_pt)
+      : GeneralisedNewtonianConstitutiveEquation<DIM>(),
+        Power_pt(power_pt),
+        Regularisation_parameter_pt(reg_par_pt)
     {
     }
 
@@ -145,8 +148,8 @@ namespace oomph
   /// using Bercovier and Engelman's (1980) regularisation
   //==================================================================
   template<unsigned DIM>
-  class HerschelBulkleyBerEngRegConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class HerschelBulkleyBerEngRegConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   private:
     /// yield stress tau_y
@@ -158,15 +161,16 @@ namespace oomph
     /// regularisation parameter e << 1
     double* Regularisation_parameter_pt;
 
+
   public:
     HerschelBulkleyBerEngRegConstitutiveEquation(
       double* yield_stress_pt,
       double* flow_index_pt,
-      double* regularisation_parameter_pt) :
-      GeneralisedNewtonianConstitutiveEquation<DIM>(),
-      Yield_stress_pt(yield_stress_pt),
-      Flow_index_pt(flow_index_pt),
-      Regularisation_parameter_pt(regularisation_parameter_pt)
+      double* regularisation_parameter_pt)
+      : GeneralisedNewtonianConstitutiveEquation<DIM>(),
+        Yield_stress_pt(yield_stress_pt),
+        Flow_index_pt(flow_index_pt),
+        Regularisation_parameter_pt(regularisation_parameter_pt)
     {
     }
 
@@ -227,8 +231,8 @@ namespace oomph
   /// using Tanner and Milthorpe's (1983) regularisation
   //==================================================================
   template<unsigned DIM>
-  class HerschelBulkleyTanMilRegConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class HerschelBulkleyTanMilRegConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   private:
     /// yield stress tau_y
@@ -246,11 +250,11 @@ namespace oomph
     HerschelBulkleyTanMilRegConstitutiveEquation(
       double* yield_stress_pt,
       double* flow_index_pt,
-      double* critical_second_invariant_pt) :
-      GeneralisedNewtonianConstitutiveEquation<DIM>(),
-      Yield_stress_pt(yield_stress_pt),
-      Flow_index_pt(flow_index_pt),
-      Critical_second_invariant_pt(critical_second_invariant_pt)
+      double* critical_second_invariant_pt)
+      : GeneralisedNewtonianConstitutiveEquation<DIM>(),
+        Yield_stress_pt(yield_stress_pt),
+        Flow_index_pt(flow_index_pt),
+        Critical_second_invariant_pt(critical_second_invariant_pt)
     {
       // Calculate the Newtonian cutoff viscosity from the constitutive
       // equation and the cutoff value of the second invariant
@@ -280,6 +284,7 @@ namespace oomph
       cut_off_invariant = *Critical_second_invariant_pt;
       cut_off_viscosity = calculate_cut_off_viscosity();
     }
+
 
     /// Viscosity ratio as a fct of strain rate invariant
     double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
@@ -350,8 +355,8 @@ namespace oomph
   /// with a smooth transition using a quadratic
   //==================================================================
   template<unsigned DIM>
-  class HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   private:
     /// yield stress tau_y
@@ -377,19 +382,20 @@ namespace oomph
     /// constant 0 <= \alpha < 1
     double alpha;
 
+
   public:
     /// "Cutoff regularised" Herschel Bulkley constitutive equation
     HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation(
       double* yield_stress_pt,
       double* flow_index_pt,
-      double* critical_second_invariant_pt) :
-      GeneralisedNewtonianConstitutiveEquation<DIM>(),
-      Yield_stress_pt(yield_stress_pt),
-      Flow_index_pt(flow_index_pt),
-      Critical_second_invariant_pt(critical_second_invariant_pt),
-      a(0.0),
-      b(0.0),
-      c(0.0)
+      double* critical_second_invariant_pt)
+      : GeneralisedNewtonianConstitutiveEquation<DIM>(),
+        Yield_stress_pt(yield_stress_pt),
+        Flow_index_pt(flow_index_pt),
+        Critical_second_invariant_pt(critical_second_invariant_pt),
+        a(0.0),
+        b(0.0),
+        c(0.0)
     {
       /// Blend over one order of magnitude
       alpha = 0.1;
@@ -449,10 +455,10 @@ namespace oomph
     {
       // The maximum of either the viscosity at alpha*cut-off or the cut-off
       // viscosity for a cut-off of zero
-      return max(a * pow(alpha, 2.0) *
-                     pow(fabs(*Critical_second_invariant_pt), 2.0) +
-                   b * alpha * fabs(*Critical_second_invariant_pt) + c,
-                 calculate_cutoff_viscosity());
+      return std::max(a * pow(alpha, 2.0) *
+                          pow(fabs(*Critical_second_invariant_pt), 2.0) +
+                        b * alpha * fabs(*Critical_second_invariant_pt) + c,
+                      calculate_cutoff_viscosity());
     }
 
     /// Report cutoff values
@@ -510,14 +516,15 @@ namespace oomph
     }
   };
 
+
   //===================================================================
   /// A GeneralisedNewtonianConstitutiveEquation class
   /// defining a Herschel-Bulkley fluid
   /// using Papanastasiou's (1987) regularisation
   //==================================================================
   template<unsigned DIM>
-  class HerschelBulkleyPapRegConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class HerschelBulkleyPapRegConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   private:
     /// Yield stress tau_y
@@ -529,15 +536,15 @@ namespace oomph
     /// Regularisation parameter m >> 1
     double* Exponential_parameter_pt;
 
+
   public:
-    HerschelBulkleyPapRegConstitutiveEquation(
-      double* yield_stress_pt,
-      double* flow_index_pt,
-      double* exponential_parameter_pt) :
-      GeneralisedNewtonianConstitutiveEquation<DIM>(),
-      Yield_stress_pt(yield_stress_pt),
-      Flow_index_pt(flow_index_pt),
-      Exponential_parameter_pt(exponential_parameter_pt)
+    HerschelBulkleyPapRegConstitutiveEquation(double* yield_stress_pt,
+                                              double* flow_index_pt,
+                                              double* exponential_parameter_pt)
+      : GeneralisedNewtonianConstitutiveEquation<DIM>(),
+        Yield_stress_pt(yield_stress_pt),
+        Flow_index_pt(flow_index_pt),
+        Exponential_parameter_pt(exponential_parameter_pt)
     {
     }
 
@@ -563,8 +570,8 @@ namespace oomph
   /// using Mendes and Dutra's (2004) regularisation
   //==================================================================
   template<unsigned DIM>
-  class HerschelBulkleyMenDutRegConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class HerschelBulkleyMenDutRegConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   private:
     /// yield stress tau_y
@@ -581,11 +588,11 @@ namespace oomph
     HerschelBulkleyMenDutRegConstitutiveEquation(
       double* yield_stress_pt,
       double* flow_index_pt,
-      double* zero_shear_viscosity_pt) :
-      GeneralisedNewtonianConstitutiveEquation<DIM>(),
-      Yield_stress_pt(yield_stress_pt),
-      Flow_index_pt(flow_index_pt),
-      Zero_shear_viscosity_pt(zero_shear_viscosity_pt)
+      double* zero_shear_viscosity_pt)
+      : GeneralisedNewtonianConstitutiveEquation<DIM>(),
+        Yield_stress_pt(yield_stress_pt),
+        Flow_index_pt(flow_index_pt),
+        Zero_shear_viscosity_pt(zero_shear_viscosity_pt)
     {
     }
 
@@ -673,8 +680,8 @@ namespace oomph
   /// with a smooth transition using a cubic (for n < 1)
   //==================================================================
   template<unsigned DIM>
-  class SiskoTanMilRegWithBlendingConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class SiskoTanMilRegWithBlendingConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   private:
     /// pre-factor alpha
@@ -687,16 +694,17 @@ namespace oomph
     /// constant (Newtonian) viscosity -- assumed to be always positive
     double* Critical_second_invariant_pt;
 
+
   public:
     /// "Cutoff regularised" Sisko constitutive equation
     SiskoTanMilRegWithBlendingConstitutiveEquation(
       double* alpha_pt,
       double* flow_index_pt,
-      double* critical_second_invariant_pt) :
-      GeneralisedNewtonianConstitutiveEquation<DIM>(),
-      Alpha_pt(alpha_pt),
-      Flow_index_pt(flow_index_pt),
-      Critical_second_invariant_pt(critical_second_invariant_pt)
+      double* critical_second_invariant_pt)
+      : GeneralisedNewtonianConstitutiveEquation<DIM>(),
+        Alpha_pt(alpha_pt),
+        Flow_index_pt(flow_index_pt),
+        Critical_second_invariant_pt(critical_second_invariant_pt)
     {
       /// get the cutoff viscosity
       double cut_off_viscosity = calculate_cutoff_viscosity();
@@ -794,6 +802,7 @@ namespace oomph
            pow((*Critical_second_invariant_pt), (*Flow_index_pt) / 2.0 + 2.0));
     }
 
+
     /// Viscosity ratio as a fct of strain rate invariant
     double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
@@ -877,8 +886,8 @@ namespace oomph
   /// with a smooth transition using a cubic
   //==================================================================
   template<unsigned DIM>
-  class CassonTanMilRegWithBlendingConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class CassonTanMilRegWithBlendingConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   private:
     /// Yield stress
@@ -888,13 +897,14 @@ namespace oomph
     /// constant (Newtonian) viscosity -- assumed to be always positive
     double* Critical_second_invariant_pt;
 
+
   public:
     /// "Cutoff regularised" Casson constitutive equation
     CassonTanMilRegWithBlendingConstitutiveEquation(
-      double* yield_stress_pt, double* critical_second_invariant_pt) :
-      GeneralisedNewtonianConstitutiveEquation<DIM>(),
-      Yield_stress_pt(yield_stress_pt),
-      Critical_second_invariant_pt(critical_second_invariant_pt)
+      double* yield_stress_pt, double* critical_second_invariant_pt)
+      : GeneralisedNewtonianConstitutiveEquation<DIM>(),
+        Yield_stress_pt(yield_stress_pt),
+        Critical_second_invariant_pt(critical_second_invariant_pt)
     {
       /// get the cutoff viscosity
       double cut_off_viscosity = calculate_cutoff_viscosity();
@@ -991,6 +1001,7 @@ namespace oomph
              pow(*Critical_second_invariant_pt, 9.0 / 2.0));
     }
 
+
     /// Viscosity ratio as a fct of strain rate invariant
     double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
@@ -1077,8 +1088,8 @@ namespace oomph
   /// defining an arbitrary shear-thinning fluid
   //==================================================================
   template<unsigned DIM>
-  class NicosConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class NicosConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   private:
     /// high shear rate viscosity
@@ -1090,14 +1101,15 @@ namespace oomph
     /// parameter that controls the steepness of the curve
     double* Alpha_pt;
 
+
   public:
     NicosConstitutiveEquation(double* mu_inf_pt,
                               double* mu_0_pt,
-                              double* alpha_pt) :
-      GeneralisedNewtonianConstitutiveEquation<DIM>(),
-      Mu_inf_pt(mu_inf_pt),
-      Mu_0_pt(mu_0_pt),
-      Alpha_pt(alpha_pt)
+                              double* alpha_pt)
+      : GeneralisedNewtonianConstitutiveEquation<DIM>(),
+        Mu_inf_pt(mu_inf_pt),
+        Mu_0_pt(mu_0_pt),
+        Alpha_pt(alpha_pt)
     {
     }
 
@@ -1130,8 +1142,8 @@ namespace oomph
   /// defining a fluid following a tanh-profile
   //==================================================================
   template<unsigned DIM>
-  class TanhProfileConstitutiveEquation :
-    public GeneralisedNewtonianConstitutiveEquation<DIM>
+  class TanhProfileConstitutiveEquation
+    : public GeneralisedNewtonianConstitutiveEquation<DIM>
   {
   private:
     /// high shear rate viscosity
@@ -1152,12 +1164,12 @@ namespace oomph
     TanhProfileConstitutiveEquation(double* mu_inf_pt,
                                     double* mu_0_pt,
                                     double* alpha_pt,
-                                    double* critical_second_invariant_pt) :
-      GeneralisedNewtonianConstitutiveEquation<DIM>(),
-      Mu_inf_pt(mu_inf_pt),
-      Mu_0_pt(mu_0_pt),
-      Alpha_pt(alpha_pt),
-      Critical_second_invariant_pt(critical_second_invariant_pt)
+                                    double* critical_second_invariant_pt)
+      : GeneralisedNewtonianConstitutiveEquation<DIM>(),
+        Mu_inf_pt(mu_inf_pt),
+        Mu_0_pt(mu_0_pt),
+        Alpha_pt(alpha_pt),
+        Critical_second_invariant_pt(critical_second_invariant_pt)
     {
     }
 
@@ -1201,10 +1213,12 @@ namespace oomph
     }
   };
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
 
 } // namespace oomph
+
 
 #endif

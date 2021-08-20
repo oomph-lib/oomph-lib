@@ -123,6 +123,7 @@ namespace oomph
     // rewrite it if things ever go wrong again...)
     Vector<std::string> Flat_packed_unsigneds_string;
 
+
 #endif
 
     /// \short Counter used when processing vector of flat-packed
@@ -166,6 +167,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
     // Functions for location method in multi-domain problems
+
 
     //========================================================================
     /// Send the zeta coordinates from the current process to
@@ -468,6 +470,7 @@ namespace oomph
         MPI_Wait(&request, MPI_STATUS_IGNORE);
       }
 
+
       // And finally the Flat_packed_located_coordinates array
       //------------------------------------------------------
       unsigned send_count_located_coord =
@@ -546,6 +549,7 @@ namespace oomph
       }
     }
 
+
     //========start of add_external_haloed_node_to_storage====================
     /// Helper function to add external haloed nodes, including any masters
     //========================================================================
@@ -563,6 +567,7 @@ namespace oomph
       recursively_add_masters_of_external_haloed_node(
         iproc, nod_pt, problem_pt, external_mesh_pt, n_cont_inter_values);
     }
+
 
     //========================================================================
     /// Recursively add any master nodes (and their master nodes etc) of
@@ -686,6 +691,7 @@ namespace oomph
       }
     }
 
+
     //==========start of add_external_haloed_master_node_helper===============
     /// Helper function to add external haloed node that is a master
     //========================================================================
@@ -737,6 +743,7 @@ namespace oomph
 #endif
       }
     }
+
 
     //========start of get_required_nodal_information_helper==================
     /// Helper function to get the required nodal information from an
@@ -1389,6 +1396,7 @@ namespace oomph
       }
     }
 
+
     //=======start of add_external_halo_node_helper===========================
     /// Helper functiono to add external halo node that is not a master
     //========================================================================
@@ -1434,6 +1442,7 @@ namespace oomph
         new_el_pt->node_pt(node_index) = new_nod_pt;
       }
     }
+
 
     //========start of construct_new_external_halo_node_helper=================
     /// Helper function which constructs a new external halo node (on new
@@ -1780,6 +1789,7 @@ namespace oomph
       }
     }
 
+
     //=====================================================================
     /// Locate zeta for current set of missing coordinates; vector-based version
     //=====================================================================
@@ -2027,6 +2037,7 @@ namespace oomph
 #endif
                 }
 
+
                 // Cast to finite element... this must work because it's
                 // a macroelement no update mesh
                 FiniteElement* source_finite_el_pt =
@@ -2041,6 +2052,7 @@ namespace oomph
                     OOMPH_EXCEPTION_LOCATION);
                 }
 #endif
+
 
                 // Loop over the nodes of the new source element
                 unsigned n_node = source_finite_el_pt->nnode();
@@ -2129,7 +2141,9 @@ namespace oomph
       } // end of loop over flat-packed zeta tuples
     }
 
+
 #endif
+
 
     //=====================================================================
     /// locate zeta for current set of "local" coordinates
@@ -2183,6 +2197,7 @@ namespace oomph
             // Find number of Gauss points and element dimension
             unsigned n_intpt = el_pt->integral_pt()->nweight();
             unsigned el_dim = el_pt->dim();
+
 
 #ifdef PARANOID
             if (el_dim != Dim)
@@ -2318,6 +2333,7 @@ namespace oomph
       } // end of loop over meshes
     }
 
+
     //=====================================================================
     /// Helper function that computes the dimension of the elements within
     /// each of the specified meshes (and checks they are the same).
@@ -2387,6 +2403,7 @@ namespace oomph
       // Set dimension
       Dim = mesh_dim;
     }
+
 
     //=================================================================
     /// Helper function that clears all the information used

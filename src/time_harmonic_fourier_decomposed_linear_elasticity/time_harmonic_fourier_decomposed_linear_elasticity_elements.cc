@@ -28,6 +28,7 @@
 
 #include "time_harmonic_fourier_decomposed_linear_elasticity_elements.h"
 
+
 namespace oomph
 {
   /// Static default value for square of angular frequency: Zero
@@ -43,9 +44,11 @@ namespace oomph
   std::complex<double> TimeHarmonicFourierDecomposedLinearElasticityEquationsBase::
     Default_youngs_modulus_value(1.0, 0.0);
 
+
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Compute norm of the solution
@@ -261,6 +264,7 @@ namespace oomph
     std::complex<double> lambda = youngs_modulus_local * nu_local /
                                   (1.0 + nu_local) / (1.0 - 2.0 * nu_local);
     std::complex<double> mu = youngs_modulus_local / 2.0 / (1.0 + nu_local);
+
 
     // Fourier wavenumber as double
     double n = double(this->fourier_wavenumber());
@@ -601,6 +605,7 @@ namespace oomph
 
           } // End of if not boundary condition for real eqn
 
+
           // Get the IMAG equation number
           local_eqn_imag = this->nodal_local_eqn(l, u_nodal_index[a].imag());
 
@@ -929,6 +934,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //=======================================================================
   /// C-style output:r,z, u_r_real, u_z_real, ..., u_theta_imag
   //=======================================================================
@@ -1065,6 +1071,7 @@ namespace oomph
           W;
       }
 
+
       // Output r,z coordinates
       for (unsigned i = 0; i < 2; i++)
       {
@@ -1100,5 +1107,6 @@ namespace oomph
   template class QTimeHarmonicFourierDecomposedLinearElasticityElement<2>;
   template class QTimeHarmonicFourierDecomposedLinearElasticityElement<3>;
   template class QTimeHarmonicFourierDecomposedLinearElasticityElement<4>;
+
 
 } // namespace oomph

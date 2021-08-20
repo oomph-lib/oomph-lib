@@ -28,6 +28,7 @@
 
 #include "time_harmonic_linear_elasticity_elements.h"
 
+
 namespace oomph
 {
   /// Static default value for square of frequency
@@ -35,6 +36,7 @@ namespace oomph
   double
     TimeHarmonicLinearElasticityEquationsBase<DIM>::Default_omega_sq_value =
       1.0;
+
 
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
@@ -69,6 +71,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -138,6 +141,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Compute the Cauchy stress tensor at local coordinate s for
   /// displacement formulation.
@@ -181,6 +185,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Compute the residuals for the linear elasticity equations in
   /// cartesian coordinates. Flag indicates if we want Jacobian too.
@@ -220,6 +225,7 @@ namespace oomph
     {
       u_nodal_index[i] = this->u_index_time_harmonic_linear_elasticity(i);
     }
+
 
     // Square of non-dimensional frequency
     const double omega_sq_local = this->omega_sq();
@@ -272,6 +278,7 @@ namespace oomph
         {
           // Calculate the Lagrangian coordinates and the accelerations
           interpolated_x[i] += this->raw_nodal_position(l, i) * psi(l);
+
 
           // Get the nodal displacements
           const std::complex<double> u_value = std::complex<double>(
@@ -367,6 +374,7 @@ namespace oomph
             } // End of jacobian calculation
 
           } // End of if not boundary condition for real eqn
+
 
           // Get the IMAG equation number
           local_eqn = this->nodal_local_eqn(l, u_nodal_index[a].imag());
@@ -488,6 +496,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //=======================================================================
   /// Output: x,y,[z],u,v,[w]
   //=======================================================================
@@ -539,6 +548,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //=======================================================================
   /// C-style output: x,y,[z],u,v,[w]
   //=======================================================================
@@ -586,6 +596,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //=======================================================================
   /// Compute norm of the solution
@@ -644,6 +655,7 @@ namespace oomph
     }
   }
 
+
   // Instantiate the required elements
   template class TimeHarmonicLinearElasticityEquationsBase<2>;
   template class TimeHarmonicLinearElasticityEquations<2>;
@@ -651,5 +663,6 @@ namespace oomph
   template class QTimeHarmonicLinearElasticityElement<3, 3>;
   template class TimeHarmonicLinearElasticityEquationsBase<3>;
   template class TimeHarmonicLinearElasticityEquations<3>;
+
 
 } // namespace oomph

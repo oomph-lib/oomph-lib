@@ -26,6 +26,7 @@
 // Non-inline functions for NS elements
 #include "axisym_navier_stokes_elements.h"
 
+
 namespace oomph
 {
   /// Navier--Stokes equations static data
@@ -48,6 +49,7 @@ namespace oomph
   /// Navier-Stokes equations default gravity vector
   Vector<double> AxisymmetricNavierStokesEquations::Default_Gravity_vector(3,
                                                                            0.0);
+
 
   //================================================================
   /// Compute the diagonal of the velocity/pressure mass matrices.
@@ -142,6 +144,7 @@ namespace oomph
       } // End of loop over test functions
     }
   }
+
 
   //======================================================================
   /// Validate against exact velocity solution at given time.
@@ -431,6 +434,7 @@ namespace oomph
     Vector<double> interpolated_x(2);
     Vector<double> interpolated_u(3);
 
+
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
 
@@ -532,6 +536,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //==============================================================
   /// Output function:
   /// r,z,u,v,w,p
@@ -581,6 +586,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //==============================================================
   /// Return integral of dissipation over element
@@ -783,6 +789,7 @@ namespace oomph
       duphidz += nodal_value(l, u_nodal_index[2]) * dpsidx(l, 1);
     }
 
+
     // Assign strain rates without negative powers of the radius
     // and zero those with:
     strainrate(0, 0) = durdr;
@@ -795,6 +802,7 @@ namespace oomph
     strainrate(2, 1) = strainrate(1, 2);
     strainrate(2, 2) = 0.0;
 
+
     // Overwrite the strain rates with negative powers of the radius
     // unless we're at the origin
     if (std::fabs(interpolated_r) > 1.0e-16)
@@ -805,6 +813,7 @@ namespace oomph
       strainrate(2, 2) = inverse_radius * ur;
     }
   }
+
 
   //==============================================================
   ///  \short Get integral of kinetic energy over element:
@@ -1028,6 +1037,7 @@ namespace oomph
         }
       }
 
+
       // Get the user-defined body force terms
       Vector<double> body_force(3);
       get_body_force_axi_nst(time, ipt, s, interpolated_x, body_force);
@@ -1159,6 +1169,7 @@ namespace oomph
                 }
               }
 
+
               // Axial velocity component
               local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
               if (local_unknown >= 0)
@@ -1287,6 +1298,7 @@ namespace oomph
                     scaled_re_st * r * psif[l2] * testf[l] * W;
                 }
 
+
                 // Add in the stress tensor terms
                 // The viscosity ratio needs to go in here to ensure
                 // continuity of normal stress is satisfied even in flows
@@ -1312,6 +1324,7 @@ namespace oomph
                    r * psif[l2] * interpolated_dudx(1, 1) +
                    r * interpolated_u[1] * dpsifdx(l2, 1)) *
                   testf[l] * W;
+
 
                 // Mesh velocity terms
                 if (!ALE_is_disabled)
@@ -1373,6 +1386,7 @@ namespace oomph
             visc_ratio *
             ((interpolated_u[2] / r) - Gamma[0] * interpolated_dudx(2, 0)) *
             testf[l] * W;
+
 
           // Add in the inertial terms
           // du/dt term
@@ -1493,6 +1507,7 @@ namespace oomph
 
       } // End of loop over shape functions
 
+
       // CONTINUITY EQUATION
       //-------------------
 
@@ -1541,6 +1556,7 @@ namespace oomph
       } // End of loop over l
     }
   }
+
 
   //======================================================================
   /// Compute derivatives of elemental residual vector with respect
@@ -2411,6 +2427,7 @@ namespace oomph
 
       } // End of loop over test functions
 
+
       // ===================
       // CONTINUITY EQUATION
       // ===================
@@ -2483,6 +2500,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //==============================================================
   ///  Compute the residuals for the Navier--Stokes
   ///  equations; flag=1(or 0): do (or don't) compute the
@@ -2531,6 +2549,7 @@ namespace oomph
     {
       diff_re_inv_ro = true;
     }
+
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -2650,6 +2669,7 @@ namespace oomph
         }
       }
 
+
       // Get the user-defined body force terms
       // Vector<double> body_force(3);
       // get_body_force(time(),ipt,interpolated_x,body_force);
@@ -2663,6 +2683,7 @@ namespace oomph
 
       // r is the first position component
       double r = interpolated_x[0];
+
 
       // MOMENTUM EQUATIONS
       //------------------
@@ -2963,6 +2984,7 @@ namespace oomph
                   }
                 }
 
+
                 // Add in the stress tensor terms
                 // The viscosity ratio needs to go in here to ensure
                 // continuity of normal stress is satisfied even in flows
@@ -3048,6 +3070,7 @@ namespace oomph
           // residuals[local_eqn] -= visc_ratio*
           // ((interpolated_u[2]/r) -
           // Gamma[0]*interpolated_dudx(2,0))*testf[l]*W;
+
 
           // Add in the inertial terms
           // du/dt term
@@ -3202,6 +3225,7 @@ namespace oomph
 
       } // End of loop over shape functions
 
+
       // CONTINUITY EQUATION NO PARAMETERS
       //-------------------
     }
@@ -3317,6 +3341,7 @@ namespace oomph
       // r is the first position component
       double r = interpolated_x[0];
 
+
       // MOMENTUM EQUATIONS
       //------------------
 
@@ -3365,6 +3390,7 @@ namespace oomph
               jac_y(local_eqn, local_freedom) += temp;
             } // End of derivative wrt radial coordinate
 
+
             // Derivative of jacobian terms with respect to axial velocity
             local_freedom = nodal_local_eqn(l3, u_nodal_index[1]);
             if (local_freedom >= 0)
@@ -3412,6 +3438,7 @@ namespace oomph
           } // End of loop over freedoms
         } // End of RADIAL MOMENTUM EQUATION
 
+
         // SECOND (AXIAL) MOMENTUM EQUATION
         local_eqn = nodal_local_eqn(l, u_nodal_index[1]);
         // If it's not a boundary condition
@@ -3442,6 +3469,7 @@ namespace oomph
 
               // There are no azimithal terms in the axial momentum equation
             } // End of loop over velocity shape functions
+
 
             // Derivative of jacobian terms with respect to axial velocity
             local_freedom = nodal_local_eqn(l3, u_nodal_index[1]);
@@ -3535,11 +3563,13 @@ namespace oomph
               jac_y(local_eqn, local_freedom) += temp;
             }
 
+
             // Derivative of jacobian terms with respect to azimuthal velocity
             local_freedom = nodal_local_eqn(l3, u_nodal_index[2]);
             if (local_freedom >= 0)
             {
               double temp = 0.0;
+
 
               // Loop over the velocity shape functions again
               for (unsigned l2 = 0; l2 < n_node; l2++)
@@ -3592,6 +3622,7 @@ namespace oomph
       }
     }
   }
+
 
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
@@ -3668,6 +3699,7 @@ namespace oomph
     }
   }
 
+
   /// Axisymmetric Crouzeix-Raviart elements
   // Set the data for the number of Variables at each node
   const unsigned AxisymmetricQCrouzeixRaviartElement::Initial_Nvalue[9] = {
@@ -3696,6 +3728,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //============================================================================
   /// Create a list of pairs for all unknowns in this element,
@@ -3745,6 +3778,7 @@ namespace oomph
     }
   }
 
+
   // Axisymmetric Taylor--Hood
   // Set the data for the number of Variables at each node
   const unsigned AxisymmetricQTaylorHoodElement::Initial_Nvalue[9] = {
@@ -3752,6 +3786,7 @@ namespace oomph
 
   // Set the data for the pressure conversion array
   const unsigned AxisymmetricQTaylorHoodElement::Pconv[4] = {0, 2, 6, 8};
+
 
   //========================================================================
   /// Compute traction at local coordinate s for outer unit normal N

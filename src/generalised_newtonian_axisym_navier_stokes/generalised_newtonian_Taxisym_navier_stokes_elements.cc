@@ -27,11 +27,13 @@
 
 #include "generalised_newtonian_Taxisym_navier_stokes_elements.h"
 
+
 namespace oomph
 {
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Unpin all internal pressure dofs.
@@ -47,6 +49,7 @@ namespace oomph
       this->internal_data_pt(P_axi_nst_internal_index)->unpin(l);
     }
   }
+
 
   //=========================================================================
   ///  Add to the set \c paired_load_data pairs containing
@@ -83,6 +86,7 @@ namespace oomph
     identify_pressure_data(paired_load_data);
   }
 
+
   //=========================================================================
   ///  Add to the set \c paired_pressue_data pairs containing
   /// - the pointer to a Data object
@@ -110,6 +114,7 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -122,6 +127,7 @@ namespace oomph
   // Set the data for the pressure conversion array
   const unsigned GeneralisedNewtonianAxisymmetricTTaylorHoodElement::Pconv[3] =
     {0, 1, 2};
+
 
   //========================================================================
   /// Unpin all pressure dofs, incl the mid-face/side ones where
@@ -179,6 +185,7 @@ namespace oomph
       }
     }
   }
+
 
   //=========================================================================
   ///  Add to the set \c paired_load_data pairs containing

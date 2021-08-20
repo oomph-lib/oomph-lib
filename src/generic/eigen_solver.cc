@@ -39,18 +39,19 @@
 #include "linear_solver.h"
 #include "problem.h"
 
+
 namespace oomph
 {
   //===============================================================
   /// Constructor, set default values and set the initial
   /// linear solver to be superlu
   //===============================================================
-  ARPACK::ARPACK() :
-    EigenSolver(),
-    Spectrum(1),
-    NArnoldi(30),
-    Small(true),
-    Compute_eigenvectors(true)
+  ARPACK::ARPACK()
+    : EigenSolver(),
+      Spectrum(1),
+      NArnoldi(30),
+      Small(true),
+      Compute_eigenvectors(true)
   {
     Default_linear_solver_pt = Linear_solver_pt = new SuperLUSolver;
   }
@@ -62,6 +63,7 @@ namespace oomph
   {
     delete Default_linear_solver_pt;
   }
+
 
   //==========================================================================
   /// Use ARPACK to solve an eigen problem that is assembled by elements in
@@ -217,6 +219,7 @@ namespace oomph
     // Allocate storage for the vectors to be used in matrix vector products
     DoubleVector rhs(this->distribution_pt(), 0.0);
     DoubleVector x(this->distribution_pt(), 0.0);
+
 
     bool LOOP_FLAG = true;
     bool First = true;
@@ -529,6 +532,7 @@ namespace oomph
     v = 0;
   }
 
+
   //==========================================================================
   /// Use LAPACK to solve an eigen problem that is assembled by elements in
   /// a mesh in a Problem object.
@@ -694,6 +698,7 @@ namespace oomph
     delete[] A;
     delete[] M;
   }
+
 
   //==========================================================================
   /// Use LAPACK to solve a complex eigen problem specified by the given

@@ -46,6 +46,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// A class for elements that allow the imposition of Robin boundary
   /// conditions for the pressure advection diffusion problem in the
@@ -55,17 +56,17 @@ namespace oomph
   /// a separate equations class
   //======================================================================
   template<class ELEMENT>
-  class RefineableFpPressureAdvDiffRobinBCElement :
-    public virtual FpPressureAdvDiffRobinBCElement<ELEMENT>
+  class RefineableFpPressureAdvDiffRobinBCElement
+    : public virtual FpPressureAdvDiffRobinBCElement<ELEMENT>
   {
   public:
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
     RefineableFpPressureAdvDiffRobinBCElement(FiniteElement* const& element_pt,
-                                              const int& face_index) :
-      FaceGeometry<ELEMENT>(),
-      FaceElement(),
-      FpPressureAdvDiffRobinBCElement<ELEMENT>(element_pt, face_index, true)
+                                              const int& face_index)
+      : FaceGeometry<ELEMENT>(),
+        FaceElement(),
+        FpPressureAdvDiffRobinBCElement<ELEMENT>(element_pt, face_index, true)
     {
     }
 
@@ -75,6 +76,7 @@ namespace oomph
     virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
+
 
   //============================================================================
   /// Get residuals and Jacobian of Robin boundary conditions in pressure
@@ -111,6 +113,7 @@ namespace oomph
 
     // Find out how many pressure dofs there are in the bulk element
     unsigned n_pres = bulk_el_pt->npres_nst();
+
 
     // Which nodal value represents the pressure? (Negative if pressure
     // is not based on nodal interpolation).
@@ -177,8 +180,7 @@ namespace oomph
       }
 
       // Modify bc: If outflow (flux>0) apply Neumann condition instead
-      if (flux > 0.0)
-        flux = 0.0;
+      if (flux > 0.0) flux = 0.0;
 
       // Get pressure
       double interpolated_press = bulk_el_pt->interpolated_p_nst(s_bulk);
@@ -191,6 +193,7 @@ namespace oomph
 
       // Premultiply the weights and the Jacobian
       double W = w * J;
+
 
       // Number of master nodes and storage for the weight of the shape function
       unsigned n_master = 1;
@@ -300,9 +303,11 @@ namespace oomph
     } // End of loop over l
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Refineable version of the Navier--Stokes equations
@@ -310,10 +315,10 @@ namespace oomph
   ///
   //======================================================================
   template<unsigned DIM>
-  class RefineableNavierStokesEquations :
-    public virtual NavierStokesEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableNavierStokesEquations
+    : public virtual NavierStokesEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   protected:
     /// \short Unpin all pressure dofs in the element
@@ -325,12 +330,13 @@ namespace oomph
 
   public:
     /// \short Constructor
-    RefineableNavierStokesEquations() :
-      NavierStokesEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableNavierStokesEquations()
+      : NavierStokesEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// \short  Loop over all elements in Vector (which typically contains
     /// all the elements in a fluid mesh) and pin the nodal pressure degrees
@@ -383,6 +389,7 @@ namespace oomph
       Vector<double>& press_mass_diag,
       Vector<double>& veloc_mass_diag,
       const unsigned& which_one = 0);
+
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -464,6 +471,7 @@ namespace oomph
       // Set the ALE flag
       this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
     }
+
 
     /// \short Compute the derivatives of the i-th component of
     /// velocity at point s with respect
@@ -604,6 +612,7 @@ namespace oomph
       }
     }
 
+
   protected:
     /// \short Add element's contribution to elemental residual vector and/or
     /// Jacobian matrix
@@ -621,6 +630,7 @@ namespace oomph
     void fill_in_generic_pressure_advection_diffusion_contribution_nst(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
+
     /// \short Compute derivatives of elemental residual vector with respect
     /// to nodal coordinates. Overwrites default implementation in
     /// FiniteElement base class.
@@ -629,15 +639,16 @@ namespace oomph
       RankThreeTensor<double>& dresidual_dnodal_coordinates);
   };
 
+
   //======================================================================
   /// Refineable version of Taylor Hood elements. These classes
   /// can be written in total generality.
   //======================================================================
   template<unsigned DIM>
-  class RefineableQTaylorHoodElement :
-    public QTaylorHoodElement<DIM>,
-    public virtual RefineableNavierStokesEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQTaylorHoodElement
+    : public QTaylorHoodElement<DIM>,
+      public virtual RefineableNavierStokesEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   private:
     /// Unpin all pressure dofs
@@ -680,11 +691,11 @@ namespace oomph
 
   public:
     /// \short Constructor
-    RefineableQTaylorHoodElement() :
-      RefineableElement(),
-      RefineableNavierStokesEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QTaylorHoodElement<DIM>()
+    RefineableQTaylorHoodElement()
+      : RefineableElement(),
+        RefineableNavierStokesEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QTaylorHoodElement<DIM>()
     {
     }
 
@@ -784,6 +795,7 @@ namespace oomph
       //(no history is carried in the pressure)
       values[DIM] = this->interpolated_p_nst(s);
     }
+
 
     ///  \short Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. The pressures are stored
@@ -898,6 +910,7 @@ namespace oomph
       }
     }
 
+
     /// \short The number of 1d pressure nodes is 2, the number of 1d velocity
     /// nodes is the same as the number of 1d geometric nodes.
     unsigned ninterpolating_node_1d(const int& value_id)
@@ -942,6 +955,7 @@ namespace oomph
       }
     }
 
+
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
@@ -951,6 +965,7 @@ namespace oomph
         new RefineableFpPressureAdvDiffRobinBCElement<
           RefineableQTaylorHoodElement<DIM>>(this, face_index));
     }
+
 
     /// \short Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
@@ -1050,17 +1065,19 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// \short Face geometry of the RefineableQTaylorHoodElements is the
   /// same as the Face geometry of the QTaylorHoodElements.
   //=======================================================================
   template<unsigned DIM>
-  class FaceGeometry<RefineableQTaylorHoodElement<DIM>> :
-    public virtual FaceGeometry<QTaylorHoodElement<DIM>>
+  class FaceGeometry<RefineableQTaylorHoodElement<DIM>>
+    : public virtual FaceGeometry<QTaylorHoodElement<DIM>>
   {
   public:
     FaceGeometry() : FaceGeometry<QTaylorHoodElement<DIM>>() {}
   };
+
 
   //=======================================================================
   /// \short Face geometry of the face geometry of
@@ -1068,25 +1085,27 @@ namespace oomph
   /// same as the Face geometry of the Face geometry of QTaylorHoodElements.
   //=======================================================================
   template<unsigned DIM>
-  class FaceGeometry<FaceGeometry<RefineableQTaylorHoodElement<DIM>>> :
-    public virtual FaceGeometry<FaceGeometry<QTaylorHoodElement<DIM>>>
+  class FaceGeometry<FaceGeometry<RefineableQTaylorHoodElement<DIM>>>
+    : public virtual FaceGeometry<FaceGeometry<QTaylorHoodElement<DIM>>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<QTaylorHoodElement<DIM>>>() {}
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Refineable version of Crouzeix Raviart elements. Generic class definitions
   //======================================================================
   template<unsigned DIM>
-  class RefineableQCrouzeixRaviartElement :
-    public QCrouzeixRaviartElement<DIM>,
-    public virtual RefineableNavierStokesEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQCrouzeixRaviartElement
+    : public QCrouzeixRaviartElement<DIM>,
+      public virtual RefineableNavierStokesEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   private:
     /// Unpin all internal pressure dofs
@@ -1102,13 +1121,14 @@ namespace oomph
 
   public:
     /// \short Constructor
-    RefineableQCrouzeixRaviartElement() :
-      RefineableElement(),
-      RefineableNavierStokesEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QCrouzeixRaviartElement<DIM>()
+    RefineableQCrouzeixRaviartElement()
+      : RefineableElement(),
+        RefineableNavierStokesEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QCrouzeixRaviartElement<DIM>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQCrouzeixRaviartElement(
@@ -1225,6 +1245,7 @@ namespace oomph
     /// elements. This must be specialised for each dimension.
     inline void further_build();
 
+
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
@@ -1234,6 +1255,7 @@ namespace oomph
         new RefineableFpPressureAdvDiffRobinBCElement<
           RefineableQCrouzeixRaviartElement<DIM>>(this, face_index));
     }
+
 
     /// \short Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
@@ -1294,6 +1316,7 @@ namespace oomph
         }
       }
 
+
       // Loop over the pressure data (can't be hanging!)
       unsigned n_pres = this->npres_nst();
       for (unsigned l = 0; l < n_pres; l++)
@@ -1306,15 +1329,16 @@ namespace oomph
     }
   };
 
+
   //======================================================================
   /// p-refineable version of Crouzeix Raviart elements. Generic class
   /// definitions
   //======================================================================
   template<unsigned DIM>
-  class PRefineableQCrouzeixRaviartElement :
-    public QCrouzeixRaviartElement<DIM>,
-    public virtual RefineableNavierStokesEquations<DIM>,
-    public virtual PRefineableQElement<DIM, 3>
+  class PRefineableQCrouzeixRaviartElement
+    : public QCrouzeixRaviartElement<DIM>,
+      public virtual RefineableNavierStokesEquations<DIM>,
+      public virtual PRefineableQElement<DIM, 3>
   {
   private:
     /// Unpin all internal pressure dofs
@@ -1331,11 +1355,11 @@ namespace oomph
 
   public:
     /// \short Constructor
-    PRefineableQCrouzeixRaviartElement() :
-      RefineableElement(),
-      RefineableNavierStokesEquations<DIM>(),
-      PRefineableQElement<DIM, 3>(),
-      QCrouzeixRaviartElement<DIM>()
+    PRefineableQCrouzeixRaviartElement()
+      : RefineableElement(),
+        RefineableNavierStokesEquations<DIM>(),
+        PRefineableQElement<DIM, 3>(),
+        QCrouzeixRaviartElement<DIM>()
     {
       // Set the p-order
       this->p_order() = 3;
@@ -1366,6 +1390,7 @@ namespace oomph
     {
       delete this->integral_pt();
     }
+
 
     /// Broken copy constructor
     PRefineableQCrouzeixRaviartElement(
@@ -1554,12 +1579,13 @@ namespace oomph
     void further_build();
   };
 
+
   //=======================================================================
   /// Face geometry of the RefineableQuadQCrouzeixRaviartElements
   //=======================================================================
   template<unsigned DIM>
-  class FaceGeometry<RefineableQCrouzeixRaviartElement<DIM>> :
-    public virtual FaceGeometry<QCrouzeixRaviartElement<DIM>>
+  class FaceGeometry<RefineableQCrouzeixRaviartElement<DIM>>
+    : public virtual FaceGeometry<QCrouzeixRaviartElement<DIM>>
   {
   public:
     FaceGeometry() : FaceGeometry<QCrouzeixRaviartElement<DIM>>() {}
@@ -1572,14 +1598,15 @@ namespace oomph
   /// QCrouzeixRaviartElements.
   //=======================================================================
   template<unsigned DIM>
-  class FaceGeometry<FaceGeometry<RefineableQCrouzeixRaviartElement<DIM>>> :
-    public virtual FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<DIM>>>
+  class FaceGeometry<FaceGeometry<RefineableQCrouzeixRaviartElement<DIM>>>
+    : public virtual FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<DIM>>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<DIM>>>()
     {
     }
   };
+
 
   // Inline functions
 
@@ -1617,6 +1644,7 @@ namespace oomph
     // Use the average
     internal_data_pt(this->P_nst_internal_index)->set_value(0, 0.25 * av_press);
 
+
     // Slope in s_0 direction
     //----------------------
 
@@ -1647,9 +1675,11 @@ namespace oomph
                       ->internal_data_pt(this->P_nst_internal_index)
                       ->value(0);
 
+
     // Use the average
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(1, 0.5 * (slope1 + slope2));
+
 
     // Slope in s_1 direction
     //----------------------
@@ -1681,10 +1711,12 @@ namespace oomph
                ->internal_data_pt(this->P_nst_internal_index)
                ->value(0);
 
+
     // Use the average
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(2, 0.5 * (slope1 + slope2));
   }
+
 
   //=================================================================
   /// 3D Rebuild from sons: Reconstruct pressure from the (merged) sons
@@ -1718,6 +1750,7 @@ namespace oomph
     // Use the average
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(0, 0.125 * av_press);
+
 
     // Slope in s_0 direction
     //----------------------
@@ -1771,9 +1804,11 @@ namespace oomph
                       ->internal_data_pt(this->P_nst_internal_index)
                       ->value(0);
 
+
     // Use the average
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(1, 0.25 * (slope1 + slope2 + slope3 + slope4));
+
 
     // Slope in s_1 direction
     //----------------------
@@ -1827,9 +1862,11 @@ namespace oomph
                ->internal_data_pt(this->P_nst_internal_index)
                ->value(0);
 
+
     // Use the average
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(2, 0.25 * (slope1 + slope2 + slope3 + slope4));
+
 
     // Slope in s_2 direction
     //----------------------
@@ -1887,6 +1924,7 @@ namespace oomph
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(3, 0.25 * (slope1 + slope2 + slope3 + slope4));
   }
+
 
   //======================================================================
   /// 2D Further build for Crouzeix_Raviart interpolates the internal
@@ -1959,6 +1997,7 @@ namespace oomph
         ->set_value(i, half_father_slope);
     }
   }
+
 
   //=======================================================================
   /// 3D Further build for Crouzeix_Raviart interpolates the internal

@@ -40,6 +40,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   //========================================================================
   /// MacroElementNodeUpdate nodes are nodes with a positional update
   /// function, based on their element's MacroElement representation.
@@ -52,8 +53,8 @@ namespace oomph
     /// and with initial_nvalue dofs.
     MacroElementNodeUpdateNode(const unsigned& n_dim,
                                const unsigned& n_position_type,
-                               const unsigned& initial_nvalue) :
-      Node(n_dim, n_position_type, initial_nvalue)
+                               const unsigned& initial_nvalue)
+      : Node(n_dim, n_position_type, initial_nvalue)
     {
       // By default, only the nodal position is updated and no auxiliary
       // updates of function values are performed.
@@ -65,8 +66,8 @@ namespace oomph
     MacroElementNodeUpdateNode(TimeStepper* time_stepper_pt,
                                const unsigned& n_dim,
                                const unsigned& n_position_type,
-                               const unsigned& initial_nvalue) :
-      Node(time_stepper_pt, n_dim, n_position_type, initial_nvalue)
+                               const unsigned& initial_nvalue)
+      : Node(time_stepper_pt, n_dim, n_position_type, initial_nvalue)
     {
       // By default, only the nodal position is updated and no auxiliary
       // updates of function values are performed.
@@ -89,6 +90,7 @@ namespace oomph
       BrokenCopy::broken_assign("MacroElementNodeUpdateNode");
       }*/
 
+
     ///\short Destructor (empty)
     virtual ~MacroElementNodeUpdateNode() {}
 
@@ -107,6 +109,7 @@ namespace oomph
     {
       return Node_update_element_pt;
     }
+
 
     /// \short Vector of local coordinates of node with the finite element that
     /// performs the MacroElement-based node update operation
@@ -128,12 +131,14 @@ namespace oomph
       return Geom_object_pt;
     }
 
+
     /// \short Pointer to i-th geometric object involved in
     /// node update function
     GeomObject* geom_object_pt(const unsigned& i)
     {
       return Geom_object_pt[i];
     }
+
 
     /// \short Return vector of geometric objects involved in
     /// node update function
@@ -169,6 +174,7 @@ namespace oomph
       Geom_object_pt = geom_object_pt;
     }
 
+
   private:
     /// \short Pointer to finite element that performs the node update
     /// by referring to its macro-element representation
@@ -183,11 +189,13 @@ namespace oomph
     Vector<GeomObject*> Geom_object_pt;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // MacroElementNodeUpdate elements
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Base class for elements that allow MacroElement-based node update
@@ -240,11 +248,13 @@ namespace oomph
       return Geom_object_pt[i];
     }
 
+
   protected:
     /// \short Vector of geometric objects that are involved
     /// in the node update operation
     Vector<GeomObject*> Geom_object_pt;
   };
+
 
   //========================================================================
   /// MacroElementNodeUpdate elements are elements that can not only be updated
@@ -260,24 +270,25 @@ namespace oomph
   /// Otherwise the element behaves exactly like the templace element.
   //========================================================================
   template<class ELEMENT>
-  class MacroElementNodeUpdateElement :
-    public ElementWithSpecificMovingNodes<ELEMENT, MacroElementNodeUpdateNode>,
-    public MacroElementNodeUpdateElementBase
+  class MacroElementNodeUpdateElement
+    : public ElementWithSpecificMovingNodes<ELEMENT,
+                                            MacroElementNodeUpdateNode>,
+      public MacroElementNodeUpdateElementBase
   {
   public:
     /// Constructor: Call constructor of underlying element
-    MacroElementNodeUpdateElement() :
-      ElementWithSpecificMovingNodes<ELEMENT, MacroElementNodeUpdateNode>(),
-      MacroElementNodeUpdateElementBase()
+    MacroElementNodeUpdateElement()
+      : ElementWithSpecificMovingNodes<ELEMENT, MacroElementNodeUpdateNode>(),
+        MacroElementNodeUpdateElementBase()
     {
     }
 
     /// Constructor used for face elements
     MacroElementNodeUpdateElement(FiniteElement* const& element_pt,
-                                  const int& face_index) :
-      ElementWithSpecificMovingNodes<ELEMENT, MacroElementNodeUpdateNode>(
-        element_pt, face_index),
-      MacroElementNodeUpdateElementBase()
+                                  const int& face_index)
+      : ElementWithSpecificMovingNodes<ELEMENT, MacroElementNodeUpdateNode>(
+          element_pt, face_index),
+        MacroElementNodeUpdateElementBase()
     {
     }
 
@@ -326,6 +337,7 @@ namespace oomph
       }
     }
 
+
     /// \short Rebuild after unrefinement: Reset the node update information
     /// for all nodes so that the nodes get updated by this element.
     /// If we don't do that, some nodes might still want to be updated
@@ -352,6 +364,7 @@ namespace oomph
       }
     }
   };
+
 
   //========================================================================
   /// MacroElementNodeUpdateMeshes contain MacroElementNodeUpdateNodes
@@ -537,9 +550,11 @@ namespace oomph
     Domain* Macro_domain_pt;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Explicit definition of the face geometry of
@@ -547,8 +562,8 @@ namespace oomph
   /// the underlying element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<MacroElementNodeUpdateElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<MacroElementNodeUpdateElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     /// Constructor calls the constructor of the underlying ELEMENT.

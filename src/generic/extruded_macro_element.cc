@@ -142,6 +142,7 @@ namespace oomph
     Extruded_domain_pt->macro_element_boundary(
       t, Macro_element_number, OcTreeNames::F, zeta, face_F);
 
+
     // Get position on the edges of the middle slice
     Vector<double> edge_mid_L(3);
     Vector<double> edge_mid_R(3);

@@ -382,6 +382,7 @@ namespace oomph
     }
   }
 
+
   //===================================================================
   /// Return the value of the intrinsic boundary coordinate interpolated
   /// along the edge (S/W/N/E)
@@ -478,6 +479,7 @@ namespace oomph
         multiplier = n_p;
         break;
 
+
       default:
         std::ostringstream error_stream;
         error_stream << "Wrong edge " << edge << " passed" << std::endl;
@@ -502,6 +504,7 @@ namespace oomph
     // Set the value of the intrinsic coordinate
     zeta[0] = inter_zeta;
   }
+
 
   //===================================================================
   /// If a neighbouring element has already created a node at
@@ -754,6 +757,7 @@ namespace oomph
               (father_el_pt->s_macro_ur(i) - father_el_pt->s_macro_ll(i));
         }
       }
+
 
       // If the father element hasn't been generated yet, we're stuck...
       if (father_el_pt->node_pt(0) == 0)
@@ -1208,6 +1212,7 @@ namespace oomph
                   }
                 } // End of if solid_node_pt
 
+
                 // Next, we Update the boundary lookup schemes
                 // Loop over the boundaries stored in the set
                 for (std::set<unsigned>::iterator it = boundaries.begin();
@@ -1325,6 +1330,7 @@ namespace oomph
 
         } // End of horizontal loop over nodes in element
 
+
         // If the element is a MacroElementNodeUpdateElement, set
         // the update parameters for the current element's nodes --
         // all this needs is the vector of (pointers to the)
@@ -1418,6 +1424,7 @@ namespace oomph
           }
         }
 
+
         // Now do further build (if any)
         further_build();
 
@@ -1460,6 +1467,7 @@ namespace oomph
     s[1] = 1.0;
     get_x(s, corner);
     outfile << corner[0] << " " << corner[1] << " " << Number << std::endl;
+
 
     outfile << "TEXT  CS = GRID, X = " << corner[0] << ",Y = " << corner[1]
             << ", HU = GRID, H = 0.01, AN = MIDCENTER, T =\"" << Number << "\""
@@ -1505,6 +1513,7 @@ namespace oomph
     quad_hang_helper(value_id, W, dummy_hangfile);
     quad_hang_helper(value_id, E, dummy_hangfile);
   }
+
 
   //=================================================================
   /// Internal function to set up the hanging nodes on a particular
@@ -1818,6 +1827,7 @@ namespace oomph
     }
   }
 
+
   //=================================================================
   /// Check inter-element continuity of
   /// - nodal positions
@@ -2007,10 +2017,8 @@ namespace oomph
     }
 
     max_error = max_error_x[0];
-    if (max_error_x[1] > max_error)
-      max_error = max_error_x[1];
-    if (max_error_val > max_error)
-      max_error = max_error_val;
+    if (max_error_x[1] > max_error) max_error = max_error_x[1];
+    if (max_error_val > max_error) max_error = max_error_val;
 
     if (max_error > 1e-9)
     {
@@ -2021,6 +2029,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Static matrix for coincidence between son nodal points and
   /// father boundaries
@@ -2028,9 +2037,11 @@ namespace oomph
   //========================================================================
   std::map<unsigned, DenseMatrix<int>> RefineableQElement<2>::Father_bound;
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// Determine vector of solid (positional) boundary conditions along
@@ -2175,6 +2186,7 @@ namespace oomph
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // Cast to SolidNodes
     SolidNode* left_node_pt = dynamic_cast<SolidNode*>(node_pt(left_node));
     SolidNode* right_node_pt = dynamic_cast<SolidNode*>(node_pt(right_node));
@@ -2194,6 +2206,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Number of coordinate directions
     unsigned n_dim = this->nodal_dimension();

@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "refineable_pml_helmholtz_elements.h"
 
+
 namespace oomph
 {
   //======================================================================
@@ -109,6 +110,7 @@ namespace oomph
       std::complex<double> source(0.0, 0.0);
       this->get_source_helmholtz(ipt, interpolated_x, source);
 
+
       // Declare a vector of complex numbers for pml weights on the Laplace bit
       Vector<std::complex<double>> pml_laplace_factor(DIM);
       // Declare a complex number for pml weights on the mass matrix bit
@@ -129,6 +131,7 @@ namespace oomph
                                this->alpha() * pml_k_squared_factor.imag(),
                              this->alpha() * pml_k_squared_factor.real() +
                                pml_k_squared_factor.imag());
+
 
       //  std::complex<double> alpha_pml_k_squared_factor
       //  if(alpha_pt() == 0)
@@ -278,6 +281,7 @@ namespace oomph
                     // The hang weight is one
                     hang_weight2 = 1.0;
                   }
+
 
                   // If at a non-zero degree of freedom add in the entry
                   if (local_unknown_real >= 0)
@@ -434,6 +438,7 @@ namespace oomph
 
     } // End of loop over integration points
   }
+
 
   //====================================================================
   // Force build of templates

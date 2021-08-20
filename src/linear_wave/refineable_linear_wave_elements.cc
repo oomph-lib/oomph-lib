@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "refineable_linear_wave_elements.h"
 
+
 namespace oomph
 {
   //========================================================================
@@ -110,6 +111,7 @@ namespace oomph
       double source;
       this->get_source_lin_wave(time, ipt, interpolated_x, source);
 
+
       // Assemble residuals and Jacobian
       //================================
 
@@ -123,6 +125,7 @@ namespace oomph
         double hang_weight = 1.0;
         // Local bool (is the node hanging)
         bool is_node_hanging = this->node_pt(l)->is_hanging();
+
 
         // If the node is hanging, get the number of master nodes
         if (is_node_hanging)

@@ -145,6 +145,7 @@ namespace oomph
             << accel[0] << " " << accel[1] << " " << accel[2] << std::endl;
   }
 
+
   //======================================================================
   /// Obtain the external force and torque on the body from specified
   /// function pointers and also from a drag mesh, if there is one
@@ -296,6 +297,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Calculate the contributions to the residuals and the jacobian
   //======================================================================
@@ -371,6 +373,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// \short Constructor: Specify coordinates of a point inside the hole
   /// and a vector of pointers to TriangleMeshPolyLines
@@ -385,11 +388,11 @@ namespace oomph
     const Vector<double>& hole_center,
     const Vector<TriangleMeshCurveSection*>& boundary_polyline_pt,
     TimeStepper* const& time_stepper_pt,
-    Data* const& centre_displacement_data_pt) :
-    TriangleMeshCurve(boundary_polyline_pt),
-    TriangleMeshClosedCurve(boundary_polyline_pt, hole_center),
-    TriangleMeshPolygon(boundary_polyline_pt, hole_center),
-    ImmersedRigidBodyElement(time_stepper_pt, centre_displacement_data_pt)
+    Data* const& centre_displacement_data_pt)
+    : TriangleMeshCurve(boundary_polyline_pt),
+      TriangleMeshClosedCurve(boundary_polyline_pt, hole_center),
+      TriangleMeshPolygon(boundary_polyline_pt, hole_center),
+      ImmersedRigidBodyElement(time_stepper_pt, centre_displacement_data_pt)
   {
     // The underlying geometric object can be used to update the configuration
     // internally before a remesh
@@ -517,6 +520,7 @@ namespace oomph
     //    std::endl; cout << "Y_c              : " << Initial_centre_of_mass[1]
     //    << std::endl; pause("done");
 
+
     // Assign the intrinsic coordinate
     this->assign_zeta();
 
@@ -534,6 +538,7 @@ namespace oomph
     //    }
     // }
   }
+
 
   //===============================================================
   /// \short Update the reference configuration by re-setting the original

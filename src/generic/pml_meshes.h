@@ -34,6 +34,7 @@
 #include "mesh.h"
 #include "../meshes/rectangular_quadmesh.h"
 
+
 namespace oomph
 {
   //=======================================================================
@@ -58,11 +59,11 @@ namespace oomph
   {
   public:
     /// Constructor
-    PMLElementBase() :
-      Pml_is_enabled(false),
-      Pml_direction_active(DIM, false),
-      Pml_inner_boundary(DIM, 0.0),
-      Pml_outer_boundary(DIM, 0.0)
+    PMLElementBase()
+      : Pml_is_enabled(false),
+        Pml_direction_active(DIM, false),
+        Pml_inner_boundary(DIM, 0.0),
+        Pml_outer_boundary(DIM, 0.0)
     {
     }
 
@@ -180,9 +181,8 @@ namespace oomph
   /// PML mesh class. Policy class for 2D PML meshes
   //====================================================================
   template<class ELEMENT>
-  class PMLQuadMeshBase :
-    public RectangularQuadMesh<ELEMENT>,
-    public PMLMeshBase
+  class PMLQuadMeshBase : public RectangularQuadMesh<ELEMENT>,
+                          public PMLMeshBase
   {
   public:
     /// \short Constructor: Create the underlying rectangular quad mesh
@@ -192,14 +192,14 @@ namespace oomph
                     const double& x_pml_end,
                     const double& y_pml_start,
                     const double& y_pml_end,
-                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      RectangularQuadMesh<ELEMENT>(n_pml_x,
-                                   n_pml_y,
-                                   x_pml_start,
-                                   x_pml_end,
-                                   y_pml_start,
-                                   y_pml_end,
-                                   time_stepper_pt)
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : RectangularQuadMesh<ELEMENT>(n_pml_x,
+                                     n_pml_y,
+                                     x_pml_start,
+                                     x_pml_end,
+                                     y_pml_start,
+                                     y_pml_end,
+                                     time_stepper_pt)
     {
     }
 
@@ -446,14 +446,14 @@ namespace oomph
                 const double& x_pml_end,
                 const double& y_pml_start,
                 const double& y_pml_end,
-                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      PMLQuadMeshBase<ELEMENT>(n_pml_x,
-                               n_pml_y,
-                               x_pml_start,
-                               x_pml_end,
-                               y_pml_start,
-                               y_pml_end,
-                               time_stepper_pt)
+                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : PMLQuadMeshBase<ELEMENT>(n_pml_x,
+                                 n_pml_y,
+                                 x_pml_start,
+                                 x_pml_end,
+                                 y_pml_start,
+                                 y_pml_end,
+                                 time_stepper_pt)
     {
       unsigned n_boundary_node = bulk_mesh_pt->nboundary_node(boundary_id);
 
@@ -531,6 +531,7 @@ namespace oomph
 
       /// Last element in mesh (top right)
       unsigned interior_element_nr_helper_1 = n_pml_element - 1;
+
 
       // Connect the elements in the pml mesh to the ones
       // in the triangular mesh at element level
@@ -761,9 +762,11 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// PML mesh, derived from RectangularQuadMesh.
@@ -776,29 +779,28 @@ namespace oomph
     /// and the two existing PML meshes in order to construct the corner
     /// PML mesh in between them based on their element number
     /// and coordinates.
-    PMLCornerQuadMesh(
-      Mesh* PMLQuad_mesh_x_pt,
-      Mesh* PMLQuad_mesh_y_pt,
-      Mesh* bulk_mesh_pt,
-      Node* special_corner_node_pt,
-      const unsigned& parent_boundary_x_id,
-      const unsigned& parent_boundary_y_id,
-      const unsigned& current_boundary_x_id,
-      const unsigned& current_boundary_y_id,
-      const unsigned& n_pml_x,
-      const unsigned& n_pml_y,
-      const double& x_pml_start,
-      const double& x_pml_end,
-      const double& y_pml_start,
-      const double& y_pml_end,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      PMLQuadMeshBase<ELEMENT>(n_pml_x,
-                               n_pml_y,
-                               x_pml_start,
-                               x_pml_end,
-                               y_pml_start,
-                               y_pml_end,
-                               time_stepper_pt)
+    PMLCornerQuadMesh(Mesh* PMLQuad_mesh_x_pt,
+                      Mesh* PMLQuad_mesh_y_pt,
+                      Mesh* bulk_mesh_pt,
+                      Node* special_corner_node_pt,
+                      const unsigned& parent_boundary_x_id,
+                      const unsigned& parent_boundary_y_id,
+                      const unsigned& current_boundary_x_id,
+                      const unsigned& current_boundary_y_id,
+                      const unsigned& n_pml_x,
+                      const unsigned& n_pml_y,
+                      const double& x_pml_start,
+                      const double& x_pml_end,
+                      const double& y_pml_start,
+                      const double& y_pml_end,
+                      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : PMLQuadMeshBase<ELEMENT>(n_pml_x,
+                                 n_pml_y,
+                                 x_pml_start,
+                                 x_pml_end,
+                                 y_pml_start,
+                                 y_pml_end,
+                                 time_stepper_pt)
     {
       unsigned nnode_1d = this->finite_element_pt(0)->nnode_1d();
 
@@ -898,8 +900,7 @@ namespace oomph
                 // If it is one of the ones on the left boundary
                 if (e == 0)
                 {
-                  if (inod == 0)
-                    el_pt->node_pt(inod) = special_corner_node_pt;
+                  if (inod == 0) el_pt->node_pt(inod) = special_corner_node_pt;
                   if ((inod % nnode_1d == 0) && (inod > 0))
                   {
                     // Get the pointer from the triangular mesh
@@ -1521,6 +1522,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////
+
 
   //===================================================================
   /// \short All helper routines for 2D bulk boundary mesh usage in order to

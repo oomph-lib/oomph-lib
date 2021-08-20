@@ -273,6 +273,7 @@ namespace Anasazi
           }
         }
 
+
         MPI_Allreduce(&b,
                       &b2,
                       n_total_val,
@@ -293,6 +294,7 @@ namespace Anasazi
 #endif
     }
 
+
     /*! \brief Compute a vector \c b where the components are the individual
      * dot-products of the \c i-th columns of \c A and \c mv, i.e.\f$b[i] =
      * A[i]^Hmv[i]\f$.
@@ -303,6 +305,7 @@ namespace Anasazi
     {
       mv.dot(A, b);
     }
+
 
     /*! \brief Compute the 2-norm of each individual vector of \c mv.
       Upon return, \c normvec[i] holds the value of \f$||mv_i||_2\f$, the \c
@@ -427,6 +430,7 @@ namespace Anasazi
     //@}
   };
 
+
 } // namespace Anasazi
 
 namespace oomph
@@ -475,6 +479,7 @@ namespace Anasazi
 
 } // namespace Anasazi
 
+
 namespace oomph
 {
   //====================================================================
@@ -498,8 +503,8 @@ namespace oomph
   public:
     ProblemBasedShiftInvertOperator(Problem* const& problem_pt,
                                     LinearSolver* const& linear_solver_pt,
-                                    const double& sigma = 0.0) :
-      Problem_pt(problem_pt), Linear_solver_pt(linear_solver_pt), Sigma(sigma)
+                                    const double& sigma = 0.0)
+      : Problem_pt(problem_pt), Linear_solver_pt(linear_solver_pt), Sigma(sigma)
     {
       // Before we get into the Arnoldi loop solve the shifted matrix problem
       // Allocated Row compressed matrices for the mass matrix and shifted main
@@ -513,6 +518,7 @@ namespace oomph
       // Do not report the time taken
       Linear_solver_pt->disable_doc_time();
     }
+
 
     // Now specify how to apply the operator
     void apply(const DoubleMultiVector& x, DoubleMultiVector& y) const
@@ -557,6 +563,7 @@ namespace oomph
     }
   };
 
+
   //=====================================================================
   /// Class for the Anasazi eigensolver
   //=====================================================================
@@ -598,15 +605,16 @@ namespace oomph
     /// \short Boolean to indicate whether or not to compute the eigenvectors
     bool Compute_eigenvectors;
 
+
   public:
     /// Constructor
-    ANASAZI() :
-      Linear_solver_pt(0),
-      Default_linear_solver_pt(0),
-      Spectrum(0),
-      NArnoldi(10),
-      Sigma(0.0),
-      Compute_eigenvectors(true)
+    ANASAZI()
+      : Linear_solver_pt(0),
+        Default_linear_solver_pt(0),
+        Spectrum(0),
+        NArnoldi(10),
+        Sigma(0.0),
+        Compute_eigenvectors(true)
     {
       Output_manager_pt = new Anasazi::BasicOutputManager<ST>();
       // Set verbosity level
@@ -801,5 +809,6 @@ namespace oomph
   };
 
 } // namespace oomph
+
 
 #endif

@@ -42,10 +42,10 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class ELASTICITY_BULK_ELEMENT, class HELMHOLTZ_BULK_ELEMENT>
-  class TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement :
-    public virtual FaceGeometry<ELASTICITY_BULK_ELEMENT>,
-    public virtual FaceElement,
-    public virtual ElementWithExternalElement
+  class TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement
+    : public virtual FaceGeometry<ELASTICITY_BULK_ELEMENT>,
+      public virtual FaceElement,
+      public virtual ElementWithExternalElement
   {
   protected:
     /// \short Pointer to the ratio, \f$ Q \f$ , of the stress used to
@@ -72,10 +72,10 @@ namespace oomph
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      FaceGeometry<ELASTICITY_BULK_ELEMENT>(),
-      FaceElement(),
-      Q_pt(&Default_Q_Value)
+      FiniteElement* const& element_pt, const int& face_index)
+      : FaceGeometry<ELASTICITY_BULK_ELEMENT>(),
+        FaceElement(),
+        Q_pt(&Default_Q_Value)
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -125,11 +125,13 @@ namespace oomph
       }
     }
 
+
     /// Return the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_helmholtz_traction(residuals);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -158,6 +160,7 @@ namespace oomph
     {
       return Q_pt;
     }
+
 
     /// \short Output function
     void output(std::ostream& outfile)
@@ -250,6 +253,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   //=================================================================
   /// Static default value for the ratio of stress scales
   /// used in the fluid and solid equations (default is 1.0)
@@ -258,6 +262,7 @@ namespace oomph
   double TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
     ELASTICITY_BULK_ELEMENT,
     HELMHOLTZ_BULK_ELEMENT>::Default_Q_Value = 1.0;
+
 
   //=====================================================================
   /// Return the residuals
@@ -425,9 +430,11 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// \short A class for elements that allow the imposition of an
@@ -439,10 +446,10 @@ namespace oomph
   /// policy class.
   //======================================================================
   template<class HELMHOLTZ_BULK_ELEMENT, class ELASTICITY_BULK_ELEMENT>
-  class HelmholtzFluxFromNormalDisplacementBCElement :
-    public virtual FaceGeometry<HELMHOLTZ_BULK_ELEMENT>,
-    public virtual FaceElement,
-    public virtual ElementWithExternalElement
+  class HelmholtzFluxFromNormalDisplacementBCElement
+    : public virtual FaceGeometry<HELMHOLTZ_BULK_ELEMENT>,
+      public virtual FaceElement,
+      public virtual ElementWithExternalElement
   {
   public:
     /// \short Constructor, takes the pointer to the "bulk" element and the
@@ -468,6 +475,7 @@ namespace oomph
       BrokenCopy::broken_assign("HelmholtzFluxFromNormalDisplacementBCElement");
       }*/
 
+
     /// Add the element's contribution to its residual vector
     inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -476,6 +484,7 @@ namespace oomph
       fill_in_generic_residual_contribution_helmholtz_flux_from_displacement(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
+
 
     /// \short Add the element's contribution to its residual vector and its
     /// Jacobian matrix
@@ -559,6 +568,7 @@ namespace oomph
       }
     }
 
+
     /// C-style output function
     void output(FILE* file_pt)
     {
@@ -570,6 +580,7 @@ namespace oomph
     {
       FaceGeometry<HELMHOLTZ_BULK_ELEMENT>::output(file_pt, n_plot);
     }
+
 
   protected:
     /// \short Function to compute the shape and test functions and to return
@@ -595,6 +606,7 @@ namespace oomph
       return J_eulerian(s);
     }
 
+
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
@@ -618,6 +630,7 @@ namespace oomph
       return J_eulerian_at_knot(ipt);
     }
 
+
   private:
     /// \short Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the contribution to the
@@ -638,6 +651,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
 
+
   //===========================================================================
   /// Constructor, takes the pointer to the "bulk" element, and the
   /// face index that identifies the face of the bulk element to which
@@ -647,8 +661,8 @@ namespace oomph
   HelmholtzFluxFromNormalDisplacementBCElement<HELMHOLTZ_BULK_ELEMENT,
                                                ELASTICITY_BULK_ELEMENT>::
     HelmholtzFluxFromNormalDisplacementBCElement(
-      FiniteElement* const& bulk_el_pt, const int& face_index) :
-    FaceGeometry<HELMHOLTZ_BULK_ELEMENT>(), FaceElement()
+      FiniteElement* const& bulk_el_pt, const int& face_index)
+    : FaceGeometry<HELMHOLTZ_BULK_ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
     // to its nodes (by referring to the appropriate nodes in the bulk
@@ -794,6 +808,7 @@ namespace oomph
         break;
     }
   }
+
 
   //===========================================================================
   /// \short Helper function to compute the element's residual vector and

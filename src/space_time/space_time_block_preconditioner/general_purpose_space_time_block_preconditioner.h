@@ -54,8 +54,8 @@ namespace oomph
   /// subsidiary_preconditioner_function_pt().
   //=============================================================================
   template<typename MATRIX>
-  class ExactDGPBlockPreconditioner :
-    public GeneralPurposeBlockPreconditioner<MATRIX>
+  class ExactDGPBlockPreconditioner
+    : public GeneralPurposeBlockPreconditioner<MATRIX>
   {
   public:
     /// Constructor. (By default this preconditioner is upper triangular).
@@ -71,12 +71,14 @@ namespace oomph
       Memory_usage_in_bytes = 0.0;
     } // End of ExactDGPBlockPreconditioner
 
+
     /// Destructor - delete the preconditioner matrices
     virtual ~ExactDGPBlockPreconditioner()
     {
       // Forward the call to a helper clean-up function
       this->clean_up_memory();
     } // End of ~ExactDGPBlockPreconditioner
+
 
     /// Clean up the memory
     virtual void clean_up_memory()
@@ -85,11 +87,13 @@ namespace oomph
       GeneralPurposeBlockPreconditioner<MATRIX>::clean_up_memory();
     } // End of clean_up_memory
 
+
     /// Broken copy constructor
     ExactDGPBlockPreconditioner(const ExactDGPBlockPreconditioner&)
     {
       BrokenCopy::broken_copy("ExactDGPBlockPreconditioner");
     }
+
 
     /// Broken assignment operator
     void operator=(const ExactDGPBlockPreconditioner&)
@@ -97,11 +101,14 @@ namespace oomph
       BrokenCopy::broken_assign("ExactDGPBlockPreconditioner");
     }
 
+
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
+
     /// \short Setup the preconditioner
     void setup();
+
 
     /// Document the memory usage
     void enable_doc_memory_usage()
@@ -110,12 +117,14 @@ namespace oomph
       Compute_memory_statistics = true;
     } // End of enable_doc_memory_usage
 
+
     /// Don't document the memory usage!
     void disable_doc_memory_usage()
     {
       /// Set the appropriate flag to false
       Compute_memory_statistics = false;
     } // End of disable_doc_memory_usage
+
 
     /// Get the memory statistics
     double get_memory_usage_in_bytes()
@@ -193,13 +202,13 @@ namespace oomph
   /// subsidiary_preconditioner_function_pt().
   //=============================================================================
   template<typename MATRIX>
-  class BandedBlockTriangularPreconditioner :
-    public GeneralPurposeBlockPreconditioner<MATRIX>
+  class BandedBlockTriangularPreconditioner
+    : public GeneralPurposeBlockPreconditioner<MATRIX>
   {
   public:
     /// Constructor. (By default this preconditioner is upper triangular).
-    BandedBlockTriangularPreconditioner() :
-      GeneralPurposeBlockPreconditioner<MATRIX>()
+    BandedBlockTriangularPreconditioner()
+      : GeneralPurposeBlockPreconditioner<MATRIX>()
     {
       // Default to upper triangular
       Upper_triangular = true;
@@ -217,12 +226,14 @@ namespace oomph
       Memory_usage_in_bytes = 0.0;
     } // End of BandedBlockTriangularPreconditioner
 
+
     /// Destructor - delete the preconditioner matrices
     virtual ~BandedBlockTriangularPreconditioner()
     {
       // Forward the call to a helper clean-up function
       this->clean_up_memory();
     } // End of ~BandedBlockTriangularPreconditioner
+
 
     /// Clean up the memory
     virtual void clean_up_memory()
@@ -248,6 +259,7 @@ namespace oomph
       GeneralPurposeBlockPreconditioner<MATRIX>::clean_up_memory();
     } // End of clean_up_memory
 
+
     /// Broken copy constructor
     BandedBlockTriangularPreconditioner(
       const BandedBlockTriangularPreconditioner&)
@@ -255,17 +267,21 @@ namespace oomph
       BrokenCopy::broken_copy("BandedBlockTriangularPreconditioner");
     }
 
+
     /// Broken assignment operator
     void operator=(const BandedBlockTriangularPreconditioner&)
     {
       BrokenCopy::broken_assign("BandedBlockTriangularPreconditioner");
     }
 
+
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
+
     /// \short Setup the preconditioner
     void setup();
+
 
     /// Set the block bandwidth of the preconditioner
     void set_block_bandwidth(const int& block_bandwidth)
@@ -274,12 +290,14 @@ namespace oomph
       Block_bandwidth = block_bandwidth;
     } // End of set_block_bandwidth
 
+
     /// Get the block bandwidth of the preconditioner
     int block_bandwidth()
     {
       // Store it
       return Block_bandwidth;
     } // End of block_bandwidth
+
 
     /// Use as an upper triangular preconditioner
     void upper_triangular()
@@ -288,12 +306,14 @@ namespace oomph
       Upper_triangular = true;
     } // End of upper_triangular
 
+
     /// Use as a lower triangular preconditioner
     void lower_triangular()
     {
       // Update the Upper_triangular flag
       Upper_triangular = false;
     } // End of lower_triangular
+
 
     /// Is this being used as an upper triangular preconditioner?
     bool is_upper_triangular()
@@ -302,6 +322,7 @@ namespace oomph
       return Upper_triangular;
     } // End of is_upper_triangular
 
+
     /// Document the memory usage
     void enable_doc_memory_usage()
     {
@@ -309,12 +330,14 @@ namespace oomph
       Compute_memory_statistics = true;
     } // End of enable_doc_memory_usage
 
+
     /// Don't document the memory usage!
     void disable_doc_memory_usage()
     {
       /// Set the appropriate flag to false
       Compute_memory_statistics = false;
     } // End of disable_doc_memory_usage
+
 
     /// Get the memory statistics
     double get_memory_usage_in_bytes()

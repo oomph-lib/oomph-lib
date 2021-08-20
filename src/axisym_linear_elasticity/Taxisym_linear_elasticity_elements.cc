@@ -26,11 +26,13 @@
 // Non-inline functions for Linear elasticity elements
 #include "Taxisym_linear_elasticity_elements.h"
 
+
 namespace oomph
 {
   /////////////////////////////////////////////////////////////////////////
   // TAxisymmetricLinearElasticityElement
   /////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   // Force build of templates
@@ -38,5 +40,6 @@ namespace oomph
   template class TAxisymmetricLinearElasticityElement<2>;
   template class TAxisymmetricLinearElasticityElement<3>;
   template class TAxisymmetricLinearElasticityElement<4>;
+
 
 } // namespace oomph

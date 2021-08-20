@@ -30,6 +30,7 @@
 #include "tet_mesh.h"
 #include "Telements.h"
 
+
 namespace oomph
 {
   //=======================================================================
@@ -39,8 +40,8 @@ namespace oomph
   TetMeshFacetedClosedSurfaceForRemesh::TetMeshFacetedClosedSurfaceForRemesh(
     Vector<Node*> const& vertex_node_pt,
     Vector<Vector<unsigned>> const& facet_connectivity,
-    Vector<unsigned> const& facet_boundary_id) :
-    TetMeshFacetedClosedSurface()
+    Vector<unsigned> const& facet_boundary_id)
+    : TetMeshFacetedClosedSurface()
   {
     // Create the vertices
     unsigned n_vertex = vertex_node_pt.size();
@@ -84,11 +85,13 @@ namespace oomph
     }
   }
 
+
   //================================================================
   /// Global static data that specifies the permitted
   /// error in the setup of the boundary coordinates
   //================================================================
   double TetMeshBase::Tolerance_for_boundary_finding = 1.0e-5;
+
 
   //================================================================
   /// Setup lookup schemes which establish which elements are located
@@ -99,8 +102,7 @@ namespace oomph
     // Should we document the output here
     bool doc = false;
 
-    if (outfile)
-      doc = true;
+    if (outfile) doc = true;
 
     // Number of boundaries
     unsigned nbound = nboundary();
@@ -124,6 +126,7 @@ namespace oomph
     //-------------------
     unsigned nel = nelement();
 
+
     // Get pointer to vector of boundaries that the
     // node lives on
     Vector<std::set<unsigned>*> boundaries_pt(4, 0);
@@ -133,8 +136,7 @@ namespace oomph
       // Get pointer to element
       FiniteElement* fe_pt = finite_element_pt(e);
 
-      if (doc)
-        outfile << "Element: " << e << " " << fe_pt << std::endl;
+      if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
 
       // Only include 3D elements! Some meshes contain interface elements too.
       if (fe_pt->dim() == 3)
@@ -232,6 +234,7 @@ namespace oomph
             boundaries_pt[3]->end(),
             std::insert_iterator<std::set<unsigned>>(face[0], face[0].begin()));
         }
+
 
         // We now know whether any faces lay on the boundaries
         for (unsigned i = 0; i < 4; i++)
@@ -334,6 +337,7 @@ namespace oomph
       }
     }
 
+
     // Doc?
     //-----
     if (doc)
@@ -356,9 +360,11 @@ namespace oomph
       }
     }
 
+
     // Lookup scheme has now been setup yet
     Lookup_for_elements_next_boundary_is_setup = true;
   }
+
 
   //======================================================================
   /// Assess mesh quality: Ratio of max. edge length to min. height,
@@ -394,9 +400,9 @@ namespace oomph
           length += edge[j][i] * edge[j][i];
         }
         length = sqrt(length);
-        if (length > max_length)
-          max_length = length;
+        if (length > max_length) max_length = length;
       }
+
 
       double min_height = DBL_MAX;
       for (unsigned j = 0; j < 4; j++)
@@ -450,8 +456,7 @@ namespace oomph
         double height = fabs(edge[e2][0] * normal[0] + edge[e2][1] * normal[1] +
                              edge[e2][2] * normal[2]);
 
-        if (height < min_height)
-          min_height = height;
+        if (height < min_height) min_height = height;
       }
 
       double aspect_ratio = max_length / min_height;
@@ -468,6 +473,7 @@ namespace oomph
       some_file << "1 2 3 4" << std::endl;
     }
   }
+
 
   //======================================================================
   /// Move the nodes on boundaries with associated Geometric Objects (if any)
@@ -541,6 +547,7 @@ namespace oomph
         do_it = false;
       }
 
+
       // Which facet is associated with this boundary?
       unsigned facet_id_of_boundary = 0;
       TetMeshFacet* f_pt = 0;
@@ -556,6 +563,7 @@ namespace oomph
           }
         }
         f_pt = faceted_surface_pt->facet_pt(facet_id_of_boundary);
+
 
         // Three vertices?
         unsigned nv = f_pt->nvertex();
@@ -575,6 +583,7 @@ namespace oomph
           do_it = false;
         }
       }
+
 
       // Are we ready to go?
       if (!do_it)
@@ -598,6 +607,7 @@ namespace oomph
         double y3 = Triangular_facet_vertex_boundary_coordinate[b][2][1];
 
         double detT = (y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3);
+
 
         // Boundary coordinate (cartesian coordinates inside facet)
         Vector<double> zeta(2);
@@ -633,6 +643,7 @@ namespace oomph
 
           Vector<double> zeta_2(2);
           zeta_2 = f_pt->vertex_pt(2)->zeta_in_geom_object();
+
 
 #ifdef PARANOID
 
@@ -836,8 +847,10 @@ namespace oomph
     }
   }
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
+
 
 } // namespace oomph

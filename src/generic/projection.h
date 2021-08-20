@@ -28,6 +28,7 @@
 #ifndef OOMPH_PROJECTION_HEADER
 #define OOMPH_PROJECTION_HEADER
 
+
 #include "mesh.h"
 #include "problem.h"
 #include "multi_domain.h"
@@ -86,6 +87,7 @@ namespace oomph
     /// equations
     bool Do_projection;
 
+
     /// \short Store number of "external" interactions that were assigned to
     /// the element before doing the projection.
     unsigned Backup_ninteraction;
@@ -95,23 +97,25 @@ namespace oomph
     /// the projection)
     bool Backup_external_geometric_data;
 
+
     /// \short Remember if the element includes external data when used in
     /// non-projection mode (this is temporarily disabled during the
     /// projection)
     bool Backup_external_interaction_data;
 
+
   public:
     /// Constructor: Initialise data so that we don't project but solve
     /// the "normal" equations associated with the element.
-    ProjectableElementBase() :
-      Projected_field(0),
-      Time_level_for_projection(0),
-      Projected_coordinate(0),
-      Projected_lagrangian(0),
-      Projection_type(Value),
-      Do_projection(false),
-      Backup_ninteraction(0),
-      Backup_external_geometric_data(false)
+    ProjectableElementBase()
+      : Projected_field(0),
+        Time_level_for_projection(0),
+        Projected_coordinate(0),
+        Projected_lagrangian(0),
+        Projection_type(Value),
+        Do_projection(false),
+        Backup_ninteraction(0),
+        Backup_external_geometric_data(false)
     {
     }
 
@@ -167,15 +171,15 @@ namespace oomph
                              const Vector<double>& s) = 0;
   };
 
+
   //=====================================================================
   /// Wrapper class for projectable elements. Adds "projectability"
   /// to the underlying ELEMENT.
   //=====================================================================
   template<class ELEMENT>
-  class ProjectableElement :
-    public virtual ELEMENT,
-    public virtual ProjectableElementBase,
-    public virtual ElementWithExternalElement
+  class ProjectableElement : public virtual ELEMENT,
+                             public virtual ProjectableElementBase,
+                             public virtual ElementWithExternalElement
   {
   protected:
     /// Overloaded version of fill_in_contribution_to_residuals
@@ -223,6 +227,7 @@ namespace oomph
         ELEMENT::fill_in_contribution_to_jacobian(residuals, jacobian);
       }
     }
+
 
   public:
     /// \short Constructor [this was only required explicitly
@@ -520,6 +525,7 @@ namespace oomph
 
     } // End of residual_for_projection function
 
+
     /// \short Use Eulerian coordinates for matching in locate_zeta
     /// when doing projection
     double zeta_nodal(const unsigned& n,
@@ -535,6 +541,7 @@ namespace oomph
         return ELEMENT::zeta_nodal(n, k, i);
       }
     }
+
 
     /// \short Backup the element's state and
     /// switch it to projection mode.
@@ -601,6 +608,7 @@ namespace oomph
       Do_projection = false;
     }
 
+
     /// Project (history values of) coordintes
     void set_project_coordinates()
     {
@@ -618,6 +626,7 @@ namespace oomph
     {
       Projection_type = Lagrangian;
     }
+
 
     /// Field that is currently being projected
     unsigned& projected_field()
@@ -645,15 +654,17 @@ namespace oomph
       return Projected_lagrangian;
     }
 
+
   }; // End of class
+
 
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
@@ -830,6 +841,7 @@ namespace oomph
         disable_info_in_newton_solve();
       }
 
+
       if (n_element == 0)
       {
         oomph_info << "Very odd -- no elements in target mesh; "
@@ -883,6 +895,7 @@ namespace oomph
         el_pt->enable_projection();
       }
 
+
       // Set up multi domain interactions so we can locate the
       // values in the base mesh.
       // Note that it's important to switch elements to projection
@@ -899,6 +912,7 @@ namespace oomph
           << TimingHelpers::timer() - t_start << std::endl;
       }
       t_start = TimingHelpers::timer();
+
 
       // Let us first pin every degree of freedom
       // We shall unpin selected dofs for each different projection problem
@@ -953,6 +967,7 @@ namespace oomph
                          << std::endl;
             }
 
+
             if (Problem_is_nonlinear)
             {
               std::ostringstream error_stream;
@@ -971,6 +986,7 @@ namespace oomph
                               OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
             }
+
 
             // Projection and interpolation
             Problem::newton_solve();
@@ -1219,6 +1235,7 @@ namespace oomph
 
         } // End of non-SolidElement case
 
+
       } // end if for projection of coordinates
 
       // Disable projection of coordinates
@@ -1301,6 +1318,7 @@ namespace oomph
         } // End of loop over time levels
 
       } // End of loop over fields
+
 
       // Reset parameters of external storage and interactions
       for (unsigned e = 0; e < n_element; e++)
@@ -1401,14 +1419,14 @@ namespace oomph
       }
     }
 
+
     /// \short Helper function to store positions (the only things that
     /// have been set before doing projection
     void store_positions()
     {
       // No need to do anything if there are no elements (in fact, we
       // probably never get here...)
-      if (Problem::mesh_pt()->nelement() == 0)
-        return;
+      if (Problem::mesh_pt()->nelement() == 0) return;
 
       // Deal with positional dofs if (pseudo-)solid element
       // If we can cast the first element to a SolidFiniteElement then
@@ -1449,8 +1467,7 @@ namespace oomph
     {
       // No need to do anything if there are no elements (in fact, we
       // probably never get here...)
-      if (Problem::mesh_pt()->nelement() == 0)
-        return;
+      if (Problem::mesh_pt()->nelement() == 0) return;
 
       // Deal with positional dofs if (pseudo-)solid element
       // If we can cast the first element to a SolidFiniteElement then
@@ -1487,8 +1504,7 @@ namespace oomph
     {
       // No need to do anything if there are no elements (in fact, we
       // probably never get here...)
-      if (Problem::mesh_pt()->nelement() == 0)
-        return;
+      if (Problem::mesh_pt()->nelement() == 0) return;
 
       // Loop over all the elements
       const unsigned n_element = Problem::mesh_pt()->nelement();
@@ -1552,13 +1568,13 @@ namespace oomph
       }
     }
 
+
     ///\short Unpin all the field values and position unknowns (bit inefficient)
     void unpin_all()
     {
       // No need to do anything if there are no elements (in fact, we
       // probably never get here...)
-      if (Problem::mesh_pt()->nelement() == 0)
-        return;
+      if (Problem::mesh_pt()->nelement() == 0) return;
 
       // Loop over all the elements
       const unsigned n_element = Problem::mesh_pt()->nelement();
@@ -1674,6 +1690,7 @@ namespace oomph
         }
       }
     }
+
 
     /// Helper function to unpin dofs of fld-th field
     void unpin_dofs_of_field(const unsigned& fld)
@@ -1793,6 +1810,7 @@ namespace oomph
     // The preconditioner for the solver
     Preconditioner* Preconditioner_projection_pt;
   };
+
 
 } // namespace oomph
 

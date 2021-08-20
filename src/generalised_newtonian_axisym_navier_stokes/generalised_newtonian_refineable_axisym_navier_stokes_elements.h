@@ -42,10 +42,10 @@ namespace oomph
   //======================================================================
   /// Refineable version of the Axisymmetric Navier--Stokes equations
   //======================================================================
-  class RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations :
-    public virtual GeneralisedNewtonianAxisymmetricNavierStokesEquations,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations
+    : public virtual GeneralisedNewtonianAxisymmetricNavierStokesEquations,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   protected:
     /// \short Pointer to n_p-th pressure node (Default: NULL,
@@ -64,10 +64,10 @@ namespace oomph
 
   public:
     /// \short Empty Constructor
-    RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations() :
-      GeneralisedNewtonianAxisymmetricNavierStokesEquations(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations()
+      : GeneralisedNewtonianAxisymmetricNavierStokesEquations(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
 
@@ -99,6 +99,7 @@ namespace oomph
       }
 #endif
 
+
       // Get strain rate matrix
       DenseMatrix<double> strainrate(DIM);
       this->strain_rate(s, strainrate);
@@ -129,6 +130,7 @@ namespace oomph
     {
       return x[0];
     }
+
 
     ///  Further build: pass the pointers down to the sons
     void further_build()
@@ -304,6 +306,7 @@ namespace oomph
       }
     }
 
+
     /// \short  Loop over all elements in Vector (which typically contains
     /// all the elements in a fluid mesh) and pin the nodal pressure degrees
     /// of freedom that are not being used. Function uses
@@ -400,10 +403,10 @@ namespace oomph
   /// (note that unlike the cartesian version this is not scale-able
   /// to higher dimensions!)
   //======================================================================
-  class RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement :
-    public GeneralisedNewtonianAxisymmetricQTaylorHoodElement,
-    public virtual RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations,
-    public virtual RefineableQElement<2>
+  class RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement
+    : public GeneralisedNewtonianAxisymmetricQTaylorHoodElement,
+      public virtual RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations,
+      public virtual RefineableQElement<2>
   {
   private:
     /// \short Pointer to n_p-th pressure node
@@ -450,11 +453,11 @@ namespace oomph
 
   public:
     /// \short Constructor:
-    RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement() :
-      RefineableElement(),
-      RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations(),
-      RefineableQElement<2>(),
-      GeneralisedNewtonianAxisymmetricQTaylorHoodElement()
+    RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement()
+      : RefineableElement(),
+        RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations(),
+        RefineableQElement<2>(),
+        GeneralisedNewtonianAxisymmetricQTaylorHoodElement()
     {
     }
 
@@ -673,6 +676,7 @@ namespace oomph
       }
     }
 
+
     /// \short The number of 1d pressure nodes is 2, the number of 1d velocity
     /// nodes is the same as the number of 1d geometric nodes.
     unsigned ninterpolating_node_1d(const int& n_value)
@@ -721,6 +725,7 @@ namespace oomph
     }
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -730,43 +735,45 @@ namespace oomph
   //=======================================================================
   template<>
   class FaceGeometry<
-    RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement> :
-    public virtual FaceGeometry<
-      GeneralisedNewtonianAxisymmetricQTaylorHoodElement>
+    RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement>
+    : public virtual FaceGeometry<
+        GeneralisedNewtonianAxisymmetricQTaylorHoodElement>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<GeneralisedNewtonianAxisymmetricQTaylorHoodElement>()
+    FaceGeometry()
+      : FaceGeometry<GeneralisedNewtonianAxisymmetricQTaylorHoodElement>()
     {
     }
   };
+
 
   //=======================================================================
   /// Face geometry of the RefineableQuadQTaylorHoodElements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<
-    RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement>> :
-    public virtual FaceGeometry<
-      FaceGeometry<GeneralisedNewtonianAxisymmetricQTaylorHoodElement>>
+  class FaceGeometry<
+    FaceGeometry<RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement>>
+    : public virtual FaceGeometry<
+        FaceGeometry<GeneralisedNewtonianAxisymmetricQTaylorHoodElement>>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<
-        FaceGeometry<GeneralisedNewtonianAxisymmetricQTaylorHoodElement>>()
+    FaceGeometry()
+      : FaceGeometry<
+          FaceGeometry<GeneralisedNewtonianAxisymmetricQTaylorHoodElement>>()
     {
     }
   };
+
 
   //======================================================================
   /// Refineable version of Axisymmetric Quad Crouzeix Raviart elements
   /// (note that unlike the cartesian version this is not scale-able
   /// to higher dimensions!)
   //======================================================================
-  class RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement :
-    public GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement,
-    public virtual RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations,
-    public virtual RefineableQElement<2>
+  class RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement
+    : public GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement,
+      public virtual RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations,
+      public virtual RefineableQElement<2>
   {
   private:
     /// Unpin all the internal pressure freedoms
@@ -782,11 +789,11 @@ namespace oomph
 
   public:
     /// \short Constructor:
-    RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement() :
-      RefineableElement(),
-      RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations(),
-      RefineableQElement<2>(),
-      GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement()
+    RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement()
+      : RefineableElement(),
+        RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations(),
+        RefineableQElement<2>(),
+        GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement()
     {
     }
 
@@ -824,6 +831,7 @@ namespace oomph
       // Use the average
       internal_data_pt(P_axi_nst_internal_index)->set_value(0, 0.25 * av_press);
 
+
       // Slope in s_0 direction
       //----------------------
 
@@ -854,9 +862,11 @@ namespace oomph
                         ->internal_data_pt(P_axi_nst_internal_index)
                         ->value(0);
 
+
       // Use the average
       internal_data_pt(P_axi_nst_internal_index)
         ->set_value(1, 0.5 * (slope1 + slope2));
+
 
       // Slope in s_1 direction
       //----------------------
@@ -887,6 +897,7 @@ namespace oomph
                  ->object_pt()
                  ->internal_data_pt(P_axi_nst_internal_index)
                  ->value(0);
+
 
       // Use the average
       internal_data_pt(P_axi_nst_internal_index)
@@ -1038,6 +1049,7 @@ namespace oomph
       // Pressure value gets copied straight into internal dof:
       internal_data_pt(P_axi_nst_internal_index)->set_value(0, press);
 
+
       // The slopes get copied from father
       internal_data_pt(P_axi_nst_internal_index)
         ->set_value(
@@ -1053,38 +1065,41 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry of the RefineableQuadQCrouzeixRaviartElements
   //=======================================================================
   template<>
   class FaceGeometry<
-    RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement> :
-    public virtual FaceGeometry<
-      GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>
+    RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>
+    : public virtual FaceGeometry<
+        GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>()
+    FaceGeometry()
+      : FaceGeometry<GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>()
     {
     }
   };
+
 
   //=======================================================================
   /// Face geometry of the RefineableQuadQCrouzeixRaviartElements
   //=======================================================================
   template<>
   class FaceGeometry<FaceGeometry<
-    RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>> :
-    public virtual FaceGeometry<
-      FaceGeometry<GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>>
+    RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>>
+    : public virtual FaceGeometry<
+        FaceGeometry<GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<
-        FaceGeometry<GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>>()
+    FaceGeometry()
+      : FaceGeometry<FaceGeometry<
+          GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement>>()
     {
     }
   };
+
 
 } // namespace oomph
 

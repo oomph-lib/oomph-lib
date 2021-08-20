@@ -66,6 +66,7 @@ namespace oomph
      {{7, 10, 14}, {10, 16, 18}, {14, 18, 19}},
      {{8, 11, 15}, {11, 17, 19}, {15, 19, 20}}}};
 
+
   ///\short Translation scheme for the isotropic elasticity tensor
   const unsigned TimeHarmonicIsotropicElasticityTensor::StaticIndex[21] = {
     1, 0, 2, 3, 0, 1, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 2, 3, 0, 1};

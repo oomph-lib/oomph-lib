@@ -45,8 +45,8 @@ namespace oomph
   /// where we have Fourier-decomposed in the azimuthal direction so that
   /// the theta-dependance is replaced by an azimuthal mode number.
   //=======================================================================
-  class LinearisedAxisymmetricNavierStokesEquations :
-    public virtual FiniteElement
+  class LinearisedAxisymmetricNavierStokesEquations
+    : public virtual FiniteElement
   {
   private:
     /// Static "magic" number that indicates that the pressure is not
@@ -196,8 +196,8 @@ namespace oomph
   public:
     /// \short Constructor: NULL the base flow solution and the
     /// derivatives of the base flow function
-    LinearisedAxisymmetricNavierStokesEquations() :
-      Base_flow_u_fct_pt(0), Base_flow_dudx_fct_pt(0), ALE_is_disabled(false)
+    LinearisedAxisymmetricNavierStokesEquations()
+      : Base_flow_u_fct_pt(0), Base_flow_dudx_fct_pt(0), ALE_is_disabled(false)
     {
       // Set all the physical parameter pointers to the default value of zero
       Re_pt = &Default_Physical_Constant_Value;
@@ -504,18 +504,20 @@ namespace oomph
 
   }; // End of LinearisedAxisymmetricNavierStokesEquations class definition
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Crouzeix-Raviart elements are Navier-Stokes elements with quadratic
   /// interpolation for velocities and positions, but a discontinuous
   /// linear pressure interpolation
   //=======================================================================
-  class LinearisedAxisymmetricQCrouzeixRaviartElement :
-    public virtual QElement<2, 3>,
-    public virtual LinearisedAxisymmetricNavierStokesEquations
+  class LinearisedAxisymmetricQCrouzeixRaviartElement
+    : public virtual QElement<2, 3>,
+      public virtual LinearisedAxisymmetricNavierStokesEquations
   {
   private:
     /// Static array of ints to hold required number of variables at nodes
@@ -561,10 +563,10 @@ namespace oomph
   public:
     /// \short Constructor: there are three internal values for each
     /// of the two pressure components
-    LinearisedAxisymmetricQCrouzeixRaviartElement() :
-      QElement<2, 3>(),
-      LinearisedAxisymmetricNavierStokesEquations(),
-      P_linearised_axi_nst_internal_index(2)
+    LinearisedAxisymmetricQCrouzeixRaviartElement()
+      : QElement<2, 3>(),
+        LinearisedAxisymmetricNavierStokesEquations(),
+        P_linearised_axi_nst_internal_index(2)
     {
       // Loop over the two pressure components
       for (unsigned i = 0; i < 2; i++)
@@ -649,6 +651,7 @@ namespace oomph
     }
 
   }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
+
 
   // Inline functions
   // ----------------
@@ -742,8 +745,8 @@ namespace oomph
   /// Face geometry of the linearised axisym Crouzeix-Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
@@ -755,25 +758,27 @@ namespace oomph
   //=======================================================================
   template<>
   class FaceGeometry<
-    FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>> :
-    public virtual PointElement
+    FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Taylor--Hood elements are Navier--Stokes elements with quadratic
   /// interpolation for velocities and positions and continuous linear
   /// pressure interpolation
   //=======================================================================
-  class LinearisedAxisymmetricQTaylorHoodElement :
-    public virtual QElement<2, 3>,
-    public virtual LinearisedAxisymmetricNavierStokesEquations
+  class LinearisedAxisymmetricQTaylorHoodElement
+    : public virtual QElement<2, 3>,
+      public virtual LinearisedAxisymmetricNavierStokesEquations
   {
   private:
     /// Static array of ints to hold number of variables at node
@@ -816,8 +821,8 @@ namespace oomph
 
   public:
     /// Constructor, no internal data points
-    LinearisedAxisymmetricQTaylorHoodElement() :
-      QElement<2, 3>(), LinearisedAxisymmetricNavierStokesEquations()
+    LinearisedAxisymmetricQTaylorHoodElement()
+      : QElement<2, 3>(), LinearisedAxisymmetricNavierStokesEquations()
     {
     }
 
@@ -901,6 +906,7 @@ namespace oomph
     }
 
   }; // End of LinearisedAxisymmetricQTaylorHoodElement class definition
+
 
   // Inline functions
   // ----------------
@@ -1008,8 +1014,8 @@ namespace oomph
   /// Face geometry of the linearised axisymmetric Taylor Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
@@ -1020,12 +1026,13 @@ namespace oomph
   /// axisymmetric Taylor Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
+
 
 } // namespace oomph
 

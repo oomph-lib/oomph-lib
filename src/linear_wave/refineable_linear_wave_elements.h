@@ -44,19 +44,20 @@ namespace oomph
   /// \short Refineable version of LinearWave equations.
   //======================================================================
   template<unsigned DIM>
-  class RefineableLinearWaveEquations :
-    public virtual LinearWaveEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableLinearWaveEquations
+    : public virtual LinearWaveEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Constructor
-    RefineableLinearWaveEquations() :
-      LinearWaveEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableLinearWaveEquations()
+      : LinearWaveEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// Broken copy constructor
     RefineableLinearWaveEquations(
@@ -83,6 +84,7 @@ namespace oomph
     {
       this->get_flux(s, flux);
     }
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
@@ -116,6 +118,7 @@ namespace oomph
       }
     }
 
+
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
@@ -147,6 +150,7 @@ namespace oomph
       }
     }
 
+
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
@@ -154,6 +158,7 @@ namespace oomph
                               this->father_element_pt())
                               ->source_fct_pt();
     }
+
 
   private:
     /// \short Add element's contribution to elemental residual vector and/or
@@ -164,26 +169,28 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
+
   //======================================================================
   /// Refineable version of 2D QLinearWaveElement elements
   ///
   ///
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQLinearWaveElement :
-    public QLinearWaveElement<DIM, NNODE_1D>,
-    public virtual RefineableLinearWaveEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQLinearWaveElement
+    : public QLinearWaveElement<DIM, NNODE_1D>,
+      public virtual RefineableLinearWaveEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// \short Constructor
-    RefineableQLinearWaveElement() :
-      RefineableElement(),
-      RefineableLinearWaveEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QLinearWaveElement<DIM, NNODE_1D>()
+    RefineableQLinearWaveElement()
+      : RefineableElement(),
+        RefineableLinearWaveEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QLinearWaveElement<DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQLinearWaveElement(
@@ -234,14 +241,15 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the RefineableQuadLinearWaveElement elements: The
   /// spatial dimension of the face elements is one lower than that of the bulk
   /// element but they have the same number of points along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<RefineableQLinearWaveElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<RefineableQLinearWaveElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

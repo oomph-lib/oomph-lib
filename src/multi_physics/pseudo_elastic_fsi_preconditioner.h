@@ -57,15 +57,15 @@ namespace oomph
   /// 4 - y displacement (with lagr mult traction)
   /// 5 - z displacement (with lagr mult traction)
   //============================================================================
-  class PseudoElasticFSIPreconditioner :
-    public BlockPreconditioner<CRDoubleMatrix>
+  class PseudoElasticFSIPreconditioner
+    : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
     /// \short constructor - just set defaults. Specify the spatial
     /// dimension of the fluid and a (non-const) problem pointer needed for
     /// the underlying NavierStokesSchurComplementPreconditioner.
-    PseudoElasticFSIPreconditioner(const unsigned& dim, Problem* problem_pt) :
-      Dim(dim)
+    PseudoElasticFSIPreconditioner(const unsigned& dim, Problem* problem_pt)
+      : Dim(dim)
     {
       Use_navier_stokes_schur_complement_preconditioner = true;
 

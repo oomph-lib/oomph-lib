@@ -47,6 +47,7 @@ namespace oomph
     }
   } // namespace QElement1FaceToBulkCoordinates
 
+
   //=============================================================
   /// Namespace for helper functions that calculate derivatives
   /// of the local coordinates in the bulk elements wrt the
@@ -66,6 +67,7 @@ namespace oomph
       interior_direction = 0;
     }
   } // namespace QElement1BulkCoordinateDerivatives
+
 
   //===================================================================
   /// Namespace for the functions that translate local face coordinates
@@ -102,6 +104,7 @@ namespace oomph
     }
   } // namespace QElement2FaceToBulkCoordinates
 
+
   //=============================================================
   /// Namespace for helper functions that calculate derivatives
   /// of the local coordinates in the bulk elements wrt the
@@ -123,6 +126,7 @@ namespace oomph
       interior_direction = 0;
     }
 
+
     /// Function for the north and south faces, along which s1 is fixed
     void faces1(const Vector<double>& s,
                 DenseMatrix<double>& dsbulk_dsface,
@@ -137,6 +141,7 @@ namespace oomph
       interior_direction = 1;
     }
   } // namespace QElement2BulkCoordinateDerivatives
+
 
   //===================================================================
   /// Namespace for the functions that translate local face coordinates
@@ -193,6 +198,7 @@ namespace oomph
     }
   } // namespace QElement3FaceToBulkCoordinates
 
+
   //=============================================================
   /// Namespace for helper functions that calculate derivatives
   /// of the local coordinates in the bulk elements wrt the
@@ -218,6 +224,7 @@ namespace oomph
       // The interior direction is given by s[0]
       interior_direction = 0;
     }
+
 
     /// Function for the up and down  faces, along which s1 is fixed
     void faces1(const Vector<double>& s,

@@ -38,12 +38,10 @@
 // The scaffold mesh
 #include "mesh.h"
 
-using namespace oomph;
-using namespace std;
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
 
 namespace oomph
 {
@@ -92,9 +90,11 @@ namespace oomph
     int numberofedges;
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// Helper namespace for triangle meshes
@@ -145,9 +145,11 @@ namespace oomph
 
 #endif
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   class TriangleMeshPolyLine;
   class TriangleMeshCurviLine;
@@ -161,16 +163,16 @@ namespace oomph
   {
   public:
     /// Empty constructor. Initialises the curve section as non connected
-    TriangleMeshCurveSection() :
-      Initial_vertex_connected(false),
-      Final_vertex_connected(false),
-      Initial_vertex_connected_suspended(false),
-      Final_vertex_connected_suspended(false),
-      Initial_vertex_connected_to_curviline(false),
-      Final_vertex_connected_to_curviline(false),
-      Refinement_tolerance(0.08),
-      Unrefinement_tolerance(0.04),
-      Maximum_length(-1.0)
+    TriangleMeshCurveSection()
+      : Initial_vertex_connected(false),
+        Final_vertex_connected(false),
+        Initial_vertex_connected_suspended(false),
+        Final_vertex_connected_suspended(false),
+        Initial_vertex_connected_to_curviline(false),
+        Final_vertex_connected_to_curviline(false),
+        Refinement_tolerance(0.08),
+        Unrefinement_tolerance(0.04),
+        Maximum_length(-1.0)
     {
     }
 
@@ -651,6 +653,7 @@ namespace oomph
     double Maximum_length;
   };
 
+
   //=====================================================================
   /// Class definining a curvilinear triangle mesh boundary in terms
   /// of a GeomObject. Curvlinear equivalent of PolyLine.
@@ -673,17 +676,18 @@ namespace oomph
                           const unsigned& nsegment,
                           const unsigned& boundary_id,
                           const bool& space_vertices_evenly_in_arclength = true,
-                          const unsigned& boundary_chunk = 0) :
-      TriangleMeshCurveSection(),
-      Geom_object_pt(geom_object_pt),
-      Zeta_start(zeta_start),
-      Zeta_end(zeta_end),
-      Nsegment(nsegment),
-      Boundary_id(boundary_id),
-      Space_vertices_evenly_in_arclength(space_vertices_evenly_in_arclength),
-      Boundary_chunk(boundary_chunk)
+                          const unsigned& boundary_chunk = 0)
+      : TriangleMeshCurveSection(),
+        Geom_object_pt(geom_object_pt),
+        Zeta_start(zeta_start),
+        Zeta_end(zeta_end),
+        Nsegment(nsegment),
+        Boundary_id(boundary_id),
+        Space_vertices_evenly_in_arclength(space_vertices_evenly_in_arclength),
+        Boundary_chunk(boundary_chunk)
     {
     }
+
 
     /// \short Empty Destuctor
     virtual ~TriangleMeshCurviLine() {}
@@ -856,6 +860,7 @@ namespace oomph
     Vector<double> Connection_points_pt;
   };
 
+
   //=====================================================================
   /// Class defining a polyline for use in Triangle Mesh generation
   //=====================================================================
@@ -867,11 +872,11 @@ namespace oomph
     /// in a mesh generation context. If not specified it defaults to zero.
     TriangleMeshPolyLine(const Vector<Vector<double>>& vertex_coordinate,
                          const unsigned& boundary_id,
-                         const unsigned& boundary_chunk = 0) :
-      TriangleMeshCurveSection(),
-      Vertex_coordinate(vertex_coordinate),
-      Boundary_id(boundary_id),
-      Boundary_chunk(boundary_chunk)
+                         const unsigned& boundary_chunk = 0)
+      : TriangleMeshCurveSection(),
+        Vertex_coordinate(vertex_coordinate),
+        Boundary_id(boundary_id),
+        Boundary_chunk(boundary_chunk)
     {
 #ifdef PARANOID
       unsigned nvert = Vertex_coordinate.size();
@@ -1095,9 +1100,11 @@ namespace oomph
     unsigned Boundary_chunk;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //===================================================================
   /// \short Namespace that allows the specification of a tolerance
@@ -1119,6 +1126,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   //=====================================================================
   // \short Class defining triangle mesh curves. Abstract class for
   /// closed curves and open curves. All TriangleMeshCurves are composed
@@ -1128,11 +1136,10 @@ namespace oomph
   {
   public:
     /// Empty constructor
-    TriangleMeshCurve(
-      const Vector<TriangleMeshCurveSection*>& curve_section_pt) :
-      Curve_section_pt(curve_section_pt),
-      Polyline_refinement_tolerance(0.08),
-      Polyline_unrefinement_tolerance(0.04)
+    TriangleMeshCurve(const Vector<TriangleMeshCurveSection*>& curve_section_pt)
+      : Curve_section_pt(curve_section_pt),
+        Polyline_refinement_tolerance(0.08),
+        Polyline_unrefinement_tolerance(0.04)
     {
     }
 
@@ -1435,6 +1442,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=====================================================================
   /// Class defining a closed polygon for the Triangle mesh generation
@@ -1747,6 +1755,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("UnstructuredTwoDMeshGeometryBase");
     }
+
 
     /// Empty destructor
     ~UnstructuredTwoDMeshGeometryBase() {}
@@ -2452,6 +2461,7 @@ namespace oomph
     template<class ELEMENT>
     void setup_boundary_coordinates(const unsigned& b, std::ofstream& outfile);
 
+
   protected:
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
@@ -2652,6 +2662,7 @@ namespace oomph
     void copy_connection_information_to_sub_polylines(
       TriangleMeshCurveSection* input_curve_pt,
       TriangleMeshCurveSection* output_curve_pt);
+
 
 #ifdef PARANOID
 
@@ -3835,6 +3846,7 @@ namespace oomph
 
 #endif // OOMPH_HAS_TRIANGLE_LIB
   };
+
 
   //======================================================================
   /// Setup boundary coordinate on boundary b. Doc Faces
@@ -5251,8 +5263,7 @@ namespace oomph
           // Re-assign boundary coordinate for the case where boundary
           // is represented by polygon
           unsigned use_old = false;
-          if (n_vertex == 0)
-            use_old = true;
+          if (n_vertex == 0) use_old = true;
 
           // Now scale the coordinates accordingly
           for (std::set<Node*>::iterator it = all_nodes_pt.begin();
@@ -5590,9 +5601,11 @@ namespace oomph
     Boundary_coordinate_exists[b] = true;
   }
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //=================================================
   ///  Helper namespace for BCInfo object used

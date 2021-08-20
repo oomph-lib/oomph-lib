@@ -32,11 +32,13 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/projection.h"
 #include "generic/nodes.h"
 #include "generic/Qelements.h"
 #include "generic/oomph_utilities.h"
+
 
 namespace oomph
 {
@@ -77,6 +79,7 @@ namespace oomph
                                             const Vector<double>& x,
                                             double& u);
 
+
     /// \short Constructor: Initialises the Source_fct_pt to null and
     /// sets flag to use ALE formulation of the equations.
     /// Also set Alpha (thermal inertia) and Beta (thermal conductivity)
@@ -88,6 +91,7 @@ namespace oomph
       Alpha_pt = &Default_alpha_parameter;
       Beta_pt = &Default_beta_parameter;
     }
+
 
     /// Broken copy constructor
     UnsteadyHeatEquations(const UnsteadyHeatEquations& dummy)
@@ -154,6 +158,7 @@ namespace oomph
       ALE_is_disabled = true;
     }
 
+
     /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
     /// when evaluating the time-derivative. Note: By default, ALE is
     /// enabled, at the expense of possibly creating unnecessary work
@@ -173,6 +178,7 @@ namespace oomph
       output(outfile, nplot);
     }
 
+
     /// \short Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot);
@@ -184,14 +190,17 @@ namespace oomph
       output(file_pt, n_plot);
     }
 
+
     /// \short C-style output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot);
+
 
     /// Output exact soln: x,y,u_exact or x,y,z,u_exact at nplot^DIM plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+
 
     /// \short Output exact soln: x,y,u_exact or x,y,z,u_exact at
     /// nplot^DIM plot points (time-dependent version)
@@ -201,11 +210,13 @@ namespace oomph
       const double& time,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
+
     /// Get error against and norm of exact solution
     void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                        double& error,
                        double& norm);
+
 
     /// Get error against and norm of exact solution
     void compute_error(std::ostream& outfile,
@@ -214,17 +225,20 @@ namespace oomph
                        double& error,
                        double& norm);
 
+
     /// Access function: Pointer to source function
     UnsteadyHeatSourceFctPt& source_fct_pt()
     {
       return Source_fct_pt;
     }
 
+
     /// Access function: Pointer to source function. Const version
     UnsteadyHeatSourceFctPt source_fct_pt() const
     {
       return Source_fct_pt;
     }
+
 
     /// \short Get source term at continous time t and (Eulerian) position x.
     /// Virtual so it can be overloaded in derived multiphysics elements.
@@ -256,6 +270,7 @@ namespace oomph
     {
       return Alpha_pt;
     }
+
 
     /// Beta parameter (thermal conductivity)
     const double& beta() const
@@ -302,6 +317,7 @@ namespace oomph
       }
     }
 
+
     /// Compute element residual Vector (wrapper)
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -311,6 +327,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
+
     /// Compute element residual Vector and element Jacobian matrix (wrapper)
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -318,6 +335,7 @@ namespace oomph
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_ust_heat(residuals, jacobian, 1);
     }
+
 
     /// Return FE representation of function value u(s) at local coordinate s
     inline double interpolated_u_ust_heat(const Vector<double>& s) const
@@ -345,6 +363,7 @@ namespace oomph
 
       return (interpolated_u);
     }
+
 
     /// \short Return FE representation of function value u(s) at local
     /// coordinate s at previous time t (t=0: present)
@@ -375,6 +394,7 @@ namespace oomph
       return (interpolated_u);
     }
 
+
     /// Return FE representation of function value du/dt(s) at local coordinate
     /// s
     inline double interpolated_du_dt_ust_heat(const Vector<double>& s) const
@@ -400,8 +420,10 @@ namespace oomph
       return (interpolated_dudt);
     }
 
+
     /// \short Self-test: Return 0 for OK
     unsigned self_test();
+
 
   protected:
     /// \short Shape/test functions and derivs w.r.t. to global coords at
@@ -412,6 +434,7 @@ namespace oomph
       DShape& dpsidx,
       Shape& test,
       DShape& dtestdx) const = 0;
+
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
@@ -451,18 +474,19 @@ namespace oomph
     static double Default_beta_parameter;
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// QUnsteadyHeatElement elements are linear/quadrilateral/brick-shaped
   /// UnsteadyHeat elements with isoparametric interpolation for the function.
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class QUnsteadyHeatElement :
-    public virtual QElement<DIM, NNODE_1D>,
-    public virtual UnsteadyHeatEquations<DIM>
+  class QUnsteadyHeatElement : public virtual QElement<DIM, NNODE_1D>,
+                               public virtual UnsteadyHeatEquations<DIM>
   {
   private:
     /// \short Static array of ints to hold number of variables at
@@ -472,8 +496,8 @@ namespace oomph
   public:
     ///\short  Constructor: Call constructors for QElement and
     /// UnsteadyHeat equations
-    QUnsteadyHeatElement() :
-      QElement<DIM, NNODE_1D>(), UnsteadyHeatEquations<DIM>()
+    QUnsteadyHeatElement()
+      : QElement<DIM, NNODE_1D>(), UnsteadyHeatEquations<DIM>()
     {
     }
 
@@ -503,12 +527,14 @@ namespace oomph
       UnsteadyHeatEquations<DIM>::output(outfile);
     }
 
+
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       UnsteadyHeatEquations<DIM>::output(outfile, n_plot);
     }
+
 
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
@@ -517,12 +543,14 @@ namespace oomph
       UnsteadyHeatEquations<DIM>::output(file_pt);
     }
 
+
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       UnsteadyHeatEquations<DIM>::output(file_pt, n_plot);
     }
+
 
     /// \short Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
@@ -532,6 +560,7 @@ namespace oomph
     {
       UnsteadyHeatEquations<DIM>::output_fct(outfile, n_plot, exact_soln_pt);
     }
+
 
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
@@ -545,6 +574,7 @@ namespace oomph
         outfile, n_plot, time, exact_soln_pt);
     }
 
+
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
@@ -553,6 +583,7 @@ namespace oomph
                                                      DShape& dpsidx,
                                                      Shape& test,
                                                      DShape& dtestdx) const;
+
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
@@ -564,7 +595,9 @@ namespace oomph
       DShape& dtestdx) const;
   };
 
+
   // Inline functions:
+
 
   //======================================================================
   /// Define the shape functions and test functions and derivatives
@@ -598,6 +631,7 @@ namespace oomph
     return J;
   }
 
+
   //======================================================================
   /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
@@ -624,8 +658,10 @@ namespace oomph
     return J;
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the QUnsteadyHeatElement elements: The spatial
@@ -634,8 +670,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<QUnsteadyHeatElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<QUnsteadyHeatElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -647,12 +683,13 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the 1D QUnsteadyHeatElement elements: Point elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<QUnsteadyHeatElement<1, NNODE_1D>> :
-    public virtual PointElement
+  class FaceGeometry<QUnsteadyHeatElement<1, NNODE_1D>>
+    : public virtual PointElement
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -660,16 +697,18 @@ namespace oomph
     FaceGeometry() : PointElement() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //==========================================================
   /// UnsteadyHeat upgraded to become projectable
   //==========================================================
   template<class UNSTEADY_HEAT_ELEMENT>
-  class ProjectableUnsteadyHeatElement :
-    public virtual ProjectableElement<UNSTEADY_HEAT_ELEMENT>
+  class ProjectableUnsteadyHeatElement
+    : public virtual ProjectableElement<UNSTEADY_HEAT_ELEMENT>
   {
   public:
     /// \short Constructor [this was only required explicitly
@@ -765,6 +804,7 @@ namespace oomph
       return J;
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -803,6 +843,7 @@ namespace oomph
       return interpolated_u;
     }
 
+
     /// Return number of values in field fld: One per node
     unsigned nvalue_of_field(const unsigned& fld)
     {
@@ -819,6 +860,7 @@ namespace oomph
 #endif
       return this->nnode();
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -837,6 +879,7 @@ namespace oomph
       const unsigned u_nodal_index = this->u_index_ust_heat();
       return this->nodal_local_eqn(j, u_nodal_index);
     }
+
 
     /// \short Output FE representation of soln: x,y,u or x,y,z,u at
     /// and history values at n_plot^DIM plot points
@@ -863,6 +906,7 @@ namespace oomph
         outfile << this->interpolated_u_ust_heat(s) << " ";
         outfile << this->interpolated_du_dt_ust_heat(s) << " ";
 
+
         // History values of coordinates
         unsigned n_prev =
           this->node_pt(0)->position_time_stepper_pt()->ntstorage();
@@ -883,34 +927,38 @@ namespace oomph
         outfile << std::endl;
       }
 
+
       // Write tecplot footer (e.g. FE connectivity lists)
       this->write_tecplot_zone_footer(outfile, nplot);
     }
   };
+
 
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableUnsteadyHeatElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableUnsteadyHeatElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
   /// that for the underlying wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<FaceGeometry<ProjectableUnsteadyHeatElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  class FaceGeometry<FaceGeometry<ProjectableUnsteadyHeatElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
+
 
 } // namespace oomph
 

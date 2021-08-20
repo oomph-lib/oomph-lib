@@ -34,6 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 //#include "generic.h"
 #include "generalised_newtonian_axisym_navier_stokes_elements.h"
@@ -51,6 +52,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
 
+
   //==========================================================================
   /// GeneralisedNewtonianAxisymmetricTCrouzeix_Raviart elements are
   // Navier--Stokes elements with quadratic
@@ -58,15 +60,16 @@ namespace oomph
   /// bubble function, but a discontinuous linear
   /// pressure interpolation
   //==========================================================================
-  class GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement :
-    public virtual TBubbleEnrichedElement<2, 3>,
-    public virtual GeneralisedNewtonianAxisymmetricNavierStokesEquations,
-    public virtual ElementWithZ2ErrorEstimator
+  class GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement
+    : public virtual TBubbleEnrichedElement<2, 3>,
+      public virtual GeneralisedNewtonianAxisymmetricNavierStokesEquations,
+      public virtual ElementWithZ2ErrorEstimator
   {
   protected:
     /// Internal index that indicates at which internal datum the pressure is
     /// stored
     unsigned P_axi_nst_internal_index;
+
 
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
@@ -129,9 +132,9 @@ namespace oomph
 
   public:
     /// Constructor, there are 3 internal values (for the pressure)
-    GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement() :
-      TBubbleEnrichedElement<2, 3>(),
-      GeneralisedNewtonianAxisymmetricNavierStokesEquations()
+    GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement()
+      : TBubbleEnrichedElement<2, 3>(),
+        GeneralisedNewtonianAxisymmetricNavierStokesEquations()
     {
       // Allocate and a single internal datum with 3 entries for the
       // pressure
@@ -154,11 +157,13 @@ namespace oomph
         "GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement");
     }
 
+
     /// \short Number of values (pinned or dofs) required at local node n.
     inline virtual unsigned required_nvalue(const unsigned& n) const
     {
       return 3;
     }
+
 
     /// \short Return the pressure values at internal dof i_internal
     /// (Discontinous pressure interpolation -- no need to cater for hanging
@@ -225,6 +230,7 @@ namespace oomph
       GeneralisedNewtonianAxisymmetricNavierStokesEquations::output(file_pt,
                                                                     n_plot);
     }
+
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as unenriched shape functions.
@@ -294,6 +300,7 @@ namespace oomph
         }
       }
     }
+
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Velocity and pressure.
@@ -395,6 +402,7 @@ namespace oomph
     return J;
   }
 
+
   //=======================================================================
   /// Derivatives of the shape functions and test functions w.r.t. to global
   /// (Eulerian) coordinates. Return Jacobian of mapping between
@@ -415,6 +423,7 @@ namespace oomph
     // Return the jacobian
     return J;
   }
+
 
   //=======================================================================
   /// Define the shape functions (psi) and test functions (test) and
@@ -447,6 +456,7 @@ namespace oomph
     // Return the jacobian
     return J;
   }
+
 
   //=======================================================================
   /// Pressure shape functions
@@ -496,6 +506,7 @@ namespace oomph
     dppsidx(1, 1) = 0.0;
     dppsidx(2, 1) = 1.0;
 
+
     // Get the values of the shape functions and their local derivatives
     Shape psi(7);
     DShape dpsi(7, 2);
@@ -519,42 +530,46 @@ namespace oomph
     return det;
   }
 
+
   //=======================================================================
   /// Face geometry of the 2D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement> :
-    public virtual TElement<1, 3>
+  class FaceGeometry<GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement>
+    : public virtual TElement<1, 3>
   {
   public:
     FaceGeometry() : TElement<1, 3>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the FaceGeometry of the 2D CrouzeixRaviart elements
   //=======================================================================
   template<>
   class FaceGeometry<
-    FaceGeometry<GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement>> :
-    public virtual PointElement
+    FaceGeometry<GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Taylor--Hood elements are Navier--Stokes elements
   /// with quadratic interpolation for velocities and positions and
   /// continous linear pressure interpolation
   //=======================================================================
-  class GeneralisedNewtonianAxisymmetricTTaylorHoodElement :
-    public virtual TElement<2, 3>,
-    public virtual GeneralisedNewtonianAxisymmetricNavierStokesEquations,
-    public virtual ElementWithZ2ErrorEstimator
+  class GeneralisedNewtonianAxisymmetricTTaylorHoodElement
+    : public virtual TElement<2, 3>,
+      public virtual GeneralisedNewtonianAxisymmetricNavierStokesEquations,
+      public virtual ElementWithZ2ErrorEstimator
 
   {
   private:
@@ -616,12 +631,15 @@ namespace oomph
     ///  Unpin the proper nodal pressure dofs
     void unpin_proper_nodal_pressure_dofs();
 
+
   public:
     /// Constructor, no internal data points
-    GeneralisedNewtonianAxisymmetricTTaylorHoodElement() :
-      TElement<2, 3>(), GeneralisedNewtonianAxisymmetricNavierStokesEquations()
+    GeneralisedNewtonianAxisymmetricTTaylorHoodElement()
+      : TElement<2, 3>(),
+        GeneralisedNewtonianAxisymmetricNavierStokesEquations()
     {
     }
+
 
     /// Broken copy constructor
     GeneralisedNewtonianAxisymmetricTTaylorHoodElement(
@@ -648,6 +666,7 @@ namespace oomph
     /// Test whether the pressure dof p_dof hanging or not?
     // bool pressure_dof_is_hanging(const unsigned& p_dof)
     // {return this->node_pt(Pconv[p_dof])->is_hanging(DIM);}
+
 
     /// Pressure shape functions at local coordinate s
     inline void pshape_axi_nst(const Vector<double>& s, Shape& psi) const;
@@ -765,6 +784,7 @@ namespace oomph
       return node_pt(j);
     }
 
+
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
     {
@@ -869,6 +889,7 @@ namespace oomph
     }
   };
 
+
   // Inline functions
 
   //==========================================================================
@@ -891,6 +912,7 @@ namespace oomph
     // Return the jacobian
     return J;
   }
+
 
   //==========================================================================
   /// Derivatives of the shape functions and test functions w.r.t to
@@ -972,6 +994,7 @@ namespace oomph
     // Allocate memory for the inverse 2x2 jacobian
     DenseMatrix<double> inverse_jacobian(2);
 
+
     // Get the values of the shape functions and their local derivatives
     Shape psi(6);
     DShape dpsi(6, 2);
@@ -991,6 +1014,7 @@ namespace oomph
     // Return the determinant of the jacobian
     return det;
   }
+
 
   //==========================================================================
   /// Pressure shape functions
@@ -1015,17 +1039,19 @@ namespace oomph
     test = psi;
   }
 
+
   //=======================================================================
   /// Face geometry of the GeneralisedNewtonianAxisymmetric Taylor_Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<GeneralisedNewtonianAxisymmetricTTaylorHoodElement> :
-    public virtual TElement<1, 3>
+  class FaceGeometry<GeneralisedNewtonianAxisymmetricTTaylorHoodElement>
+    : public virtual TElement<1, 3>
   {
   public:
     /// Constructor: Call constructor of base
     FaceGeometry() : TElement<1, 3>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the FaceGeometry of the
@@ -1033,12 +1059,13 @@ namespace oomph
   //=======================================================================
   template<>
   class FaceGeometry<
-    FaceGeometry<GeneralisedNewtonianAxisymmetricTTaylorHoodElement>> :
-    public virtual PointElement
+    FaceGeometry<GeneralisedNewtonianAxisymmetricTTaylorHoodElement>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
+
 
 } // namespace oomph
 

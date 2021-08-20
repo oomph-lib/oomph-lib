@@ -35,8 +35,8 @@ namespace oomph
   //===========================================================================
   DoubleVectorHaloScheme::DoubleVectorHaloScheme(
     LinearAlgebraDistribution* const& dist_pt,
-    const Vector<unsigned>& required_global_eqn) :
-    Distribution_pt(dist_pt)
+    const Vector<unsigned>& required_global_eqn)
+    : Distribution_pt(dist_pt)
   {
 #ifdef OOMPH_HAS_MPI
     // Only bother to do anything if the vector is distributed
@@ -261,6 +261,7 @@ namespace oomph
   // Member functions for the DoubleVectorWithHaloEntries
   //-------------------------------------------------------------------
 
+
   //=========================================================================
   /// Synchronise the halo data within the vector. This requires one
   ///"all to all" communnication.
@@ -303,6 +304,7 @@ namespace oomph
                     &Halo_scheme_pt->Halo_displacement[0],
                     MPI_DOUBLE,
                     this->distribution_pt()->communicator_pt()->mpi_comm());
+
 
       // Now I need simply to update my local values
       for (unsigned i = 0; i < n_receive; i++)
@@ -357,6 +359,7 @@ namespace oomph
                     MPI_DOUBLE,
                     this->distribution_pt()->communicator_pt()->mpi_comm());
 
+
       // Now I need simply to update and sum my  local values
       for (unsigned i = 0; i < n_receive; i++)
       {
@@ -368,6 +371,7 @@ namespace oomph
     }
 #endif
   }
+
 
   //===================================================================
   /// Construct the halo scheme and storage for the halo data
@@ -389,5 +393,6 @@ namespace oomph
       this->synchronise();
     }
   }
+
 
 } // namespace oomph

@@ -51,19 +51,20 @@ namespace oomph
   /// are taken into account.
   //======================================================================
   template<unsigned NREAGENT, unsigned DIM>
-  class RefineableAdvectionDiffusionReactionEquations :
-    public virtual AdvectionDiffusionReactionEquations<NREAGENT, DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableAdvectionDiffusionReactionEquations
+    : public virtual AdvectionDiffusionReactionEquations<NREAGENT, DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Empty Constructor
-    RefineableAdvectionDiffusionReactionEquations() :
-      AdvectionDiffusionReactionEquations<NREAGENT, DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableAdvectionDiffusionReactionEquations()
+      : AdvectionDiffusionReactionEquations<NREAGENT, DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// Broken copy constructor
     RefineableAdvectionDiffusionReactionEquations(
@@ -92,6 +93,7 @@ namespace oomph
     {
       this->get_flux(s, flux);
     }
+
 
     /// \short Get the function values c in Vector.
     /// Note: Given the generality of the interface (this function
@@ -163,6 +165,7 @@ namespace oomph
       }
     }
 
+
     ///  Further build: Copy all pointers from the father
     /// element
     void further_build()
@@ -198,26 +201,29 @@ namespace oomph
       unsigned flag);
   };
 
+
   //======================================================================
   /// \short Refineable version of QAdvectionDiffusionReactionElement.
   /// Inherit from the standard QAdvectionDiffusionReactionElement and the
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
   template<unsigned NREAGENT, unsigned DIM, unsigned NNODE_1D>
-  class RefineableQAdvectionDiffusionReactionElement :
-    public QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>,
-    public virtual RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQAdvectionDiffusionReactionElement
+    : public QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>,
+      public virtual RefineableAdvectionDiffusionReactionEquations<NREAGENT,
+                                                                   DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// \short Empty Constructor:
-    RefineableQAdvectionDiffusionReactionElement() :
-      RefineableElement(),
-      RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>(),
-      RefineableQElement<DIM>(),
-      QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>()
+    RefineableQAdvectionDiffusionReactionElement()
+      : RefineableElement(),
+        RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>(),
+        RefineableQElement<DIM>(),
+        QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQAdvectionDiffusionReactionElement(
@@ -278,6 +284,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the RefineableQuadAdvectionDiffusionReactionElement
   /// elements: The spatial dimension of the face elements is one lower than
@@ -286,8 +293,8 @@ namespace oomph
   //=======================================================================
   template<unsigned NREAGENT, unsigned DIM, unsigned NNODE_1D>
   class FaceGeometry<
-    RefineableQAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+    RefineableQAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

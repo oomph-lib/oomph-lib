@@ -62,6 +62,7 @@ namespace oomph
         interpolated_time += raw_nodal_position(l, 0) * psi(l);
       }
 
+
       // Need to multiply by period and the set global time
       this->time_pt()->time() = interpolated_time;
 
@@ -148,6 +149,7 @@ namespace oomph
         interpolated_time += raw_nodal_position(l, 0) * psi(l);
       }
 
+
       // Need to multiply by period and the set global time
       this->time_pt()->time() = interpolated_time / inverse_timescale;
       // Set the weights of the timestepper
@@ -184,6 +186,7 @@ namespace oomph
             residuals[i + offset] += el_residuals[i] * psi(l) * W;
           }
 
+
           // Add the jacobian contributions
           if (flag)
           {
@@ -214,6 +217,7 @@ namespace oomph
                 }
               }
             }
+
 
             // Add the variation of the period
             for (unsigned i = 0; i < n_elem_dof; i++)
@@ -246,6 +250,7 @@ namespace oomph
       base_el_pt->get_non_external_ddofs_dt(du_dt_old);
       // Reset the element's values to the current
       assembly_handler_pt->set_dofs_for_element(elem_pt, all_current_unknowns);
+
 
       // Assemble the inner product
       double sum = 0.0;
@@ -289,5 +294,6 @@ namespace oomph
 
     } // End of loop over time period integration points
   }
+
 
 } // namespace oomph

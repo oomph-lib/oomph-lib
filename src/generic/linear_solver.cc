@@ -40,6 +40,7 @@
 #include "matrices.h"
 #include "problem.h"
 
+
 namespace oomph
 {
   //=============================================================================
@@ -94,6 +95,7 @@ namespace oomph
     }
   }
 
+
   //=============================================================================
   /// Delete the storage that has been allocated for the LU factors, if
   /// the matrix data is not itself being overwritten.
@@ -145,8 +147,7 @@ namespace oomph
       for (unsigned long j = 0; j < n; j++)
       {
         double tmp = std::fabs((*matrix_pt)(i, j));
-        if (tmp > largest_entry)
-          largest_entry = tmp;
+        if (tmp > largest_entry) largest_entry = tmp;
       }
       if (largest_entry == 0.0)
       {
@@ -247,6 +248,7 @@ namespace oomph
       }
 
     } // End of loop over columns
+
 
     // Now multiply all the diagonal terms together to get the determinant
     // Note that we need to use the mantissa, exponent formulation to
@@ -405,6 +407,7 @@ namespace oomph
       result[i] = sum / LU_factors[n * i + i];
     }
   }
+
 
   //=============================================================================
   /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
@@ -628,6 +631,7 @@ namespace oomph
     }
   }
 
+
   //===================================================================
   // Interface to SuperLU wrapper
   //===================================================================
@@ -647,6 +651,7 @@ namespace oomph
                 void*,
                 int*);
   }
+
 
 #ifdef OOMPH_HAS_MPI
   //===================================================================
@@ -703,6 +708,7 @@ namespace oomph
                           int** cc_start);
   }
 #endif
+
 
   //===================================================================
   // Interface to SuperLU wrapper extras
@@ -761,6 +767,7 @@ namespace oomph
     }
   } // End of get_memory_usage_for_lu_factors
 
+
   //=============================================================================
   /// \short How much memory was used in total? In bytes
   /// NOTE: This has been scraped from dQuerySpace(...) in dmemory.c in
@@ -788,11 +795,12 @@ namespace oomph
     }
   } // End of get_total_needed_memory
 
-  //=============================================================================
+
+  //==========================================================================
   /// Solver: Takes pointer to problem and returns the results Vector
   /// which contains the solution of the linear system defined by
   /// the problem's fully assembled Jacobian and residual Vector.
-  //=============================================================================
+  //==========================================================================
   void SuperLUSolver::solve(Problem* const& problem_pt, DoubleVector& result)
   {
     // wipe memory
@@ -1055,6 +1063,7 @@ namespace oomph
     // Pointer used in various places
     CRDoubleMatrix* cr_pt = 0;
 
+
 #ifdef PARANOID
     // check that the rhs vector is setup
     if (!rhs.built())
@@ -1252,6 +1261,7 @@ namespace oomph
       clean_up_memory();
     }
   }
+
 
   //=============================================================================
   /// Solver: Takes pointer to problem and returns the results Vector
@@ -1740,6 +1750,7 @@ namespace oomph
     }
   }
 
+
   //===============================================================
   /// Resolve the (transposed) system for a given RHS
   //===============================================================
@@ -1761,6 +1772,7 @@ namespace oomph
                  << ") [sec]: " << t_end - t_start << std::endl;
     }
   }
+
 
   //===================================================================
   ///\short LU decompose the matrix addressed by matrix_pt by using
@@ -1847,8 +1859,7 @@ namespace oomph
     // Does this evenly divide the processor grid?
     while (nprow > 1)
     {
-      if (nproc % nprow == 0)
-        break;
+      if (nproc % nprow == 0) break;
       nprow -= 1;
     }
 
@@ -2230,6 +2241,7 @@ namespace oomph
         error_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // Set the number of degrees of freedom in the linear system
     Serial_n_dof = n;
   }
@@ -2252,6 +2264,7 @@ namespace oomph
       backsub_serial(rhs, result);
     }
   }
+
 
   //=============================================================================
   /// Do the backsubstitution of the transposed system for SuperLUSolver.

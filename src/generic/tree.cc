@@ -31,6 +31,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib headers
 #include "tree.h"
 
@@ -80,6 +81,7 @@ namespace oomph
     object_pt->set_tree_pt(this);
   };
 
+
   //================================================================
   /// Constructor for Tree: This one has a father
   /// and is a son of a certain type, but has no sons
@@ -89,8 +91,8 @@ namespace oomph
   //=================================================================
   Tree::Tree(RefineableElement* const& object_pt,
              Tree* const& father_pt,
-             const int& son_type) :
-    Object_pt(object_pt)
+             const int& son_type)
+    : Object_pt(object_pt)
   {
     // Set the father node
     Father_pt = father_pt;
@@ -154,6 +156,7 @@ namespace oomph
     }
   }
 
+
   //================================================================
   /// Preorder traverse the tree and execute a void Tree member function
   /// that takes one argument at all nodes.
@@ -172,6 +175,7 @@ namespace oomph
       Son_pt[i]->traverse_all(member_function, mesh_pt);
     }
   }
+
 
   //==================================================================
   /// Preorder traverse the tree and execute a void Tree member function
@@ -194,6 +198,7 @@ namespace oomph
     }
     // If the tree has no sons, the function will not be executed
   }
+
 
   //================================================================
   /// Preorder traverse the tree and execute void Tree member function
@@ -339,6 +344,7 @@ namespace oomph
     object_pt()->deactivate_element();
   }
 
+
   //================================================================
   /// Constructor for TreeForest:
   ///
@@ -391,6 +397,7 @@ namespace oomph
     }
   }
 
+
   //================================================================
   /// Traverse TreeForest: Preorder traverse and stick
   /// pointers to all nodes into Vector
@@ -416,6 +423,7 @@ namespace oomph
       }
     }
   }
+
 
   //====================================================================
   /// Close the hanging node output files and delete storage allocated at

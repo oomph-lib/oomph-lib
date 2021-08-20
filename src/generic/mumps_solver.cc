@@ -30,8 +30,10 @@
 #include "mpi.h"
 #endif
 
+
 #include <iostream>
 #include <vector>
+
 
 // oomph-lib headers
 #include "mumps_solver.h"
@@ -39,17 +41,20 @@
 #include "oomph_utilities.h"
 #include "problem.h"
 
+
 namespace oomph
 {
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
 
+
   //=========================================================================
   /// \short Default factor for workspace -- static so it can be overwritten
   /// globally.
   //=========================================================================
   int MumpsSolver::Default_workspace_scaling_factor = 5;
+
 
   //=========================================================================
   /// Static warning to suppress warnings about incorrect distribution of
@@ -72,6 +77,7 @@ namespace oomph
     Mumps_is_initialised = false;
     Mumps_struc_pt = 0;
   }
+
 
   //=============================================================================
   /// Initialise instance of mumps data structure
@@ -123,6 +129,7 @@ namespace oomph
     Mumps_struc_pt->icntl[20] = 0;
   }
 
+
   //=============================================================================
   /// Shutdown mumps
   //=============================================================================
@@ -149,6 +156,7 @@ namespace oomph
     }
   }
 
+
   //=============================================================================
   /// Destructor: Shutdown mumps
   //=============================================================================
@@ -156,6 +164,7 @@ namespace oomph
   {
     shutdown_mumps();
   }
+
 
   //=============================================================================
   /// LU decompose the matrix addressed by matrix_pt using
@@ -182,6 +191,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
+
 
     // Check that we have a square matrix
 #ifdef PARANOID
@@ -231,6 +241,7 @@ namespace oomph
       shutdown_mumps();
     }
     initialise_mumps();
+
 
     // Doc stats?
     if (Doc_stats)
@@ -340,6 +351,7 @@ namespace oomph
         Mumps_struc_pt->job = 1;
         dmumps_c(Mumps_struc_pt);
 
+
         if ((Doc_time) &&
             (this->distribution_pt()->communicator_pt()->my_rank() == 0))
         {
@@ -348,6 +360,7 @@ namespace oomph
             << "Time for mumps analysis stage in MumpsSolver [sec]       : "
             << t_end_analyse - t_start_analyse << std::endl;
         }
+
 
         int my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
@@ -409,6 +422,7 @@ namespace oomph
           }
         }
 
+
         if ((Doc_time) &&
             (this->distribution_pt()->communicator_pt()->my_rank() == 0))
         {
@@ -439,6 +453,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
+
 
     if ((Doc_time) &&
         (this->distribution_pt()->communicator_pt()->my_rank() == 0))
@@ -544,6 +559,7 @@ namespace oomph
       // const_cast<DoubleVector&>(rhs).redistribute(this->distribution_pt());
     }
 
+
 #ifdef PARANOID
     // if the result vector is setup then check it has the same distribution
     // as the rhs
@@ -561,6 +577,7 @@ namespace oomph
       }
     }
 #endif
+
 
     // Doc stats?
     if (Doc_stats)
@@ -643,6 +660,7 @@ namespace oomph
     shutdown_mumps();
   }
 
+
   //=========================================================================
   /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
   /// vector and returns the solution of the linear system. Problem pointer
@@ -720,6 +738,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // if the matrix is distributable then should have the same distribution
     // as the rhs vector
     DistributableLinearAlgebraObject* ddist_matrix_pt =
@@ -769,6 +788,7 @@ namespace oomph
     }
 
 #endif
+
 
     // set the distribution
     DistributableLinearAlgebraObject* dist_matrix_pt =
@@ -881,6 +901,7 @@ namespace oomph
                  << Jacobian_setup_time << std::endl;
     }
 
+
     // Now call the linear algebra solve, if desired
     if (!Suppress_solve)
     {
@@ -916,6 +937,7 @@ namespace oomph
                  << ") [sec] : " << t_end - t_start << std::endl;
     }
   }
+
 
   //===============================================================
   /// Resolve the system defined by the last assembled jacobian
@@ -980,5 +1002,6 @@ namespace oomph
                  << std::endl;
     }
   }
+
 
 } // namespace oomph

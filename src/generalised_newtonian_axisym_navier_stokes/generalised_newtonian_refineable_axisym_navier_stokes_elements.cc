@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "generalised_newtonian_refineable_axisym_navier_stokes_elements.h"
 
+
 namespace oomph
 {
   //========================================================================
@@ -84,9 +85,11 @@ namespace oomph
       }
     }
 
+
     // Set up memory for the shape and test functions
     Shape psif(n_node), testf(n_node);
     DShape dpsifdx(n_node, DIM), dtestfdx(n_node, DIM);
+
 
     // Set up memory for pressure shape and test functions
     Shape psip(n_pres), testp(n_pres);
@@ -150,6 +153,7 @@ namespace oomph
       {
         interpolated_p += p_axi_nst(l) * psip[l];
       }
+
 
       // Calculate velocities and derivatives
 
@@ -466,6 +470,7 @@ namespace oomph
         }
       }
 
+
       // MOMENTUM EQUATIONS
       //==================
       // Number of master nodes and storage for the weight of the shape function
@@ -670,6 +675,7 @@ namespace oomph
                          ((interpolated_u[2] / r) -
                           Gamma[0] * interpolated_dudx(2, 0)) *
                          testf[l] * W * hang_weight;
+
 
                   // Add in the inertial terms
                   // du/dt term
@@ -1333,6 +1339,7 @@ namespace oomph
                   }
                 } // End of loop over the nodes
 
+
                 // Loop over the pressure shape functions
                 for (unsigned l2 = 0; l2 < n_pres; l2++)
                 {
@@ -1402,6 +1409,7 @@ namespace oomph
           } // End of loop over velocity components
         } // End of loop over master nodes
       } // End of loop over nodes
+
 
       // CONTINUITY EQUATION
       //===================
@@ -1535,7 +1543,9 @@ namespace oomph
 
     } // End of loop over integration points
 
+
   } // End of fill_in_generic_residual_contribution_axi_nst(...)
+
 
   //======================================================================
   /// Compute derivatives of elemental residual vector with respect
@@ -2706,6 +2716,7 @@ namespace oomph
         } // End of loop over master nodes
       } // End of loop over test functions
 
+
       // ===================
       // CONTINUITY EQUATION
       // ===================
@@ -2866,5 +2877,6 @@ namespace oomph
     } // End of loop over integration points
 
   } // End of get_dresidual_dnodal_coordinates(...)
+
 
 } // namespace oomph

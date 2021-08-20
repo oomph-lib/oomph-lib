@@ -34,6 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 #include "generic/element_with_external_element.h"
@@ -79,6 +80,7 @@ namespace oomph
 
   } // namespace AxisymmetricPoroelasticityTractionElementHelper
 
+
   //======================================================================
   /// A class for elements that allow the imposition of an applied combined
   /// traction and pore fluid pressure in the axisym poroelasticity equations.
@@ -87,9 +89,9 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class ELEMENT>
-  class AxisymmetricPoroelasticityTractionElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class AxisymmetricPoroelasticityTractionElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual FaceElement
   {
   protected:
     /// \short Pointer to an imposed traction function. Arguments:
@@ -109,6 +111,7 @@ namespace oomph
                             const Vector<double>& x,
                             const Vector<double>& n,
                             double& result);
+
 
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Eulerrian coordinate and normal vector and return the pressure
@@ -138,6 +141,7 @@ namespace oomph
       Pressure_fct_pt(time, x, n, pressure);
     }
 
+
     /// \short Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
@@ -145,12 +149,13 @@ namespace oomph
     void fill_in_contribution_to_residuals_axisym_poroelasticity_face(
       Vector<double>& residuals);
 
+
   public:
     /// \short Constructor, which takes a "bulk" element and the value of the
     /// index and its limit
     AxisymmetricPoroelasticityTractionElement(FiniteElement* const& element_pt,
-                                              const int& face_index) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+                                              const int& face_index)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
 #ifdef PARANOID
       {
@@ -189,6 +194,7 @@ namespace oomph
         &AxisymmetricPoroelasticityTractionElementHelper::Zero_pressure_fct;
     }
 
+
     /// \short Default constructor
     AxisymmetricPoroelasticityTractionElement() {}
 
@@ -201,6 +207,7 @@ namespace oomph
       return Traction_fct_pt;
     }
 
+
     /// Reference to the pressure function pointer
     void (*&pressure_fct_pt())(const double& time,
                                const Vector<double>& x,
@@ -210,11 +217,13 @@ namespace oomph
       return Pressure_fct_pt;
     }
 
+
     /// Return the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_axisym_poroelasticity_face(residuals);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -242,6 +251,7 @@ namespace oomph
       unsigned n_plot = 5;
       output(outfile, n_plot);
     }
+
 
     /// \short Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
@@ -277,6 +287,7 @@ namespace oomph
         ELEMENT* bulk_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
         s_bulk = local_coordinate_in_bulk(s);
 
+
         // Get Eulerian coordinates
         this->interpolated_x(s, x);
 
@@ -297,6 +308,7 @@ namespace oomph
 
         // Get permeability from the bulk poroelasticity element
         const double permeability = bulk_pt->permeability();
+
 
         // Surface area: S = 2 \pi \int r \sqrt((dr/ds)^2+(dz/ds)^2) ds
         //                 = 2 \pi \int r \sqrt( 1 + ( (dr/ds)/(dz/ds) )^2 )
@@ -328,6 +340,7 @@ namespace oomph
           sqrt(1.0 + (interpolated_t1[0] * interpolated_t1[0]) /
                        (interpolated_t1[1] * interpolated_t1[1])) *
           x[0];
+
 
         // Set the Jacobian of the deformed line element
         double J_def = sqrt(1.0 + (interpolated_T1[0] * interpolated_T1[0]) /
@@ -420,6 +433,7 @@ namespace oomph
       FaceGeometry<ELEMENT>::output(file_pt, n_plot);
     }
 
+
     /// \short Ratio of lengths of line elements (or annular surface areas)
     /// in the undeformed and deformed configuration (needed to translate
     /// normal flux correctly between small displacement formulation used
@@ -484,14 +498,14 @@ namespace oomph
                             interpolated_t1[1] * interpolated_t1[1]) *
                        x[0];
 
+
       // Set the Jacobian of the deformed line element
       double J_def = sqrt(interpolated_T1[0] * interpolated_T1[0] +
                           interpolated_T1[1] * interpolated_T1[1]) *
                      (x[0] + disp[0]);
 
       double return_val = 1.0;
-      if (J_def != 0.0)
-        return_val = J_undef / J_def;
+      if (J_def != 0.0) return_val = J_undef / J_def;
       return return_val;
     }
 
@@ -508,6 +522,7 @@ namespace oomph
     void pressure(const double& time,
                   const Vector<double>& s,
                   double& pressure);
+
 
     /// \short Compute contributions to integrated porous flux over boundary:
     /// q_skeleton = \int \partial u_displ / \partial t \cdot n ds
@@ -679,6 +694,7 @@ namespace oomph
     get_pressure(time, ipt, x, unit_normal, pressure);
   }
 
+
   //=====================================================================
   /// Return the residuals for the AxisymmetricPoroelasticityTractionElement
   /// equations
@@ -708,6 +724,7 @@ namespace oomph
 
     // Find out the dimension of the node
     unsigned n_dim = this->nodal_dimension();
+
 
     // Get bulk element
     ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
@@ -881,10 +898,10 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class POROELASTICITY_BULK_ELEMENT, class NAVIER_STOKES_BULK_ELEMENT>
-  class FSILinearisedAxisymPoroelasticTractionElement :
-    public virtual AxisymmetricPoroelasticityTractionElement<
-      POROELASTICITY_BULK_ELEMENT>,
-    public virtual ElementWithExternalElement
+  class FSILinearisedAxisymPoroelasticTractionElement
+    : public virtual AxisymmetricPoroelasticityTractionElement<
+        POROELASTICITY_BULK_ELEMENT>,
+      public virtual ElementWithExternalElement
   {
   protected:
     /// \short Pointer to the ratio, \f$ Q \f$, of the stress used to
@@ -895,6 +912,7 @@ namespace oomph
     /// \short Static default value for the ratio of stress scales
     /// used in the fluid and poroelasticity equations (default is 1.0)
     static double Default_Q_Value;
+
 
   public:
     /// \short Return the ratio of the stress scales used to non-dimensionalise
@@ -936,6 +954,7 @@ namespace oomph
       Vector<double> traction_nst(3);
       ext_el_pt->traction(s_ext, interpolated_normal, traction_nst);
 
+
 #ifdef PARANOID
       if (!AxisymmetricPoroelasticityTractionElementHelper::Allow_gap_in_FSI)
       {
@@ -970,6 +989,7 @@ namespace oomph
         }
       }
 #endif
+
 
       // Get FSI parameter
       const double q_value = q();
@@ -1020,10 +1040,10 @@ namespace oomph
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     FSILinearisedAxisymPoroelasticTractionElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      AxisymmetricPoroelasticityTractionElement<POROELASTICITY_BULK_ELEMENT>(
-        element_pt, face_index),
-      Q_pt(&Default_Q_Value)
+      FiniteElement* const& element_pt, const int& face_index)
+      : AxisymmetricPoroelasticityTractionElement<POROELASTICITY_BULK_ELEMENT>(
+          element_pt, face_index),
+        Q_pt(&Default_Q_Value)
     {
       // Set source element storage: one interaction with an external
       // element -- the Navier Stokes bulk element that provides the traction
@@ -1093,6 +1113,7 @@ namespace oomph
         double pressure;
         this->get_pressure(time, ipt, x, unit_normal, pressure);
 
+
         // Output the x,y,..
         for (unsigned i = 0; i < n_dim; i++)
         {
@@ -1143,6 +1164,7 @@ namespace oomph
       // Write tecplot footer (e.g. FE connectivity lists)
       this->write_tecplot_zone_footer(outfile, n_plot);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,

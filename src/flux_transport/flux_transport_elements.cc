@@ -166,6 +166,7 @@ namespace oomph
             // Add the time derivatives
             residuals[local_eqn] -= interpolated_dudt[i] * test(l) * W;
 
+
             // Calculate the flux dot product
             double flux_dot = 0.0;
             for (unsigned k = 0; k < DIM; k++)
@@ -375,6 +376,7 @@ namespace oomph
       average_value[i] /= average_value[n_flux];
     }
   }
+
 
   //====================================================================
   /// Output function, print the values of all unknowns

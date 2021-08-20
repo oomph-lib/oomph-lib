@@ -38,6 +38,7 @@
 // sumofmatrices class.
 #include "sum_of_matrices.h"
 
+
 namespace oomph
 {
   //==================================================================
@@ -47,9 +48,11 @@ namespace oomph
   //==================================================================
   IdentityPreconditioner IterativeLinearSolver::Default_preconditioner;
 
+
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// \short Re-solve the system defined by the last assembled Jacobian
@@ -105,6 +108,7 @@ namespace oomph
     DoubleVector f;
     problem_pt->get_jacobian(f, *Matrix_pt);
 
+
     // We've made the matrix, we can delete it...
     Matrix_can_be_deleted = true;
 
@@ -152,9 +156,9 @@ namespace oomph
     }
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve)
-      clean_up_memory();
+    if (!Enable_resolve) clean_up_memory();
   };
+
 
   //==================================================================
   /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector
@@ -277,8 +281,7 @@ namespace oomph
     DoubleVector residual(rhs);
     double residual_norm = residual.norm();
     double rhs_norm = residual_norm;
-    if (rhs_norm == 0.0)
-      rhs_norm = 1.0;
+    if (rhs_norm == 0.0) rhs_norm = 1.0;
     DoubleVector x(rhs.distribution_pt(), 0.0);
 
     // Hat residual by copy operation
@@ -495,6 +498,7 @@ namespace oomph
         }
       }
 
+
       if (normalised_residual_norm < Tolerance)
       {
         if (Doc_time)
@@ -523,6 +527,7 @@ namespace oomph
         return;
       }
 
+
       // Breakdown: Omega has to be >0 for to be able to continue
       if (omega == 0.0)
       {
@@ -549,7 +554,9 @@ namespace oomph
         return;
       }
 
+
     } // end of iteration loop
+
 
     // No convergence
     oomph_info << std::endl;
@@ -581,9 +588,11 @@ namespace oomph
     }
   }
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector
@@ -706,8 +715,7 @@ namespace oomph
     DoubleVector residual(rhs);
     double residual_norm = residual.norm();
     double rhs_norm = residual_norm;
-    if (rhs_norm == 0.0)
-      rhs_norm = 1.0;
+    if (rhs_norm == 0.0) rhs_norm = 1.0;
 
     // Normalised residual
     double normalised_residual_norm = residual_norm / rhs_norm;
@@ -747,6 +755,7 @@ namespace oomph
       return;
     }
 
+
     // Setup preconditioner only if we're not re-solving
     if (!Resolving)
     {
@@ -777,6 +786,7 @@ namespace oomph
                    << std::endl;
       }
     }
+
 
     // Auxiliary vectors
     // Vector<double> z(n_dof),p(n_dof),jacobian_times_p(n_dof,0.0);
@@ -811,6 +821,7 @@ namespace oomph
         }
       }
 
+
       // Matrix vector product
       matrix_pt->multiply(p, jacobian_times_p);
       double pq = p.dot(jacobian_times_p);
@@ -824,11 +835,13 @@ namespace oomph
         residual[i] -= alpha * jacobian_times_p[i];
       }
 
+
       // Calculate the 2norm
       residual_norm = residual.norm();
 
       // Difference between the initial and current 2norm residual
       normalised_residual_norm = residual_norm / rhs_norm;
+
 
       // if required will document convergence history to screen or file (if
       // stream open)
@@ -848,6 +861,7 @@ namespace oomph
       counter = counter + 1;
 
     } // end while
+
 
     if (counter >= Max_iter)
     {
@@ -870,6 +884,7 @@ namespace oomph
         oomph_info << std::endl;
       }
     }
+
 
     // Store number if iterations taken
     Iterations = counter;
@@ -897,6 +912,7 @@ namespace oomph
 
   } // end CG
 
+
   //==================================================================
   /// \short Re-solve the system defined by the last assembled Jacobian
   /// and the rhs vector specified here. Solution is returned in
@@ -923,6 +939,7 @@ namespace oomph
     // Reset re-solving flag
     Resolving = false;
   }
+
 
   //==================================================================
   /// Solver: Takes pointer to problem and returns the results vector
@@ -994,13 +1011,14 @@ namespace oomph
     }
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve)
-      clean_up_memory();
+    if (!Enable_resolve) clean_up_memory();
   };
+
 
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// \short Self-test to be called inside solve_helper to ensure
@@ -1071,9 +1089,11 @@ namespace oomph
     } // if (solution.built())
   } // End of check_validity_of_solve_helper_inputs
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// \short Solver: Takes pointer to problem and returns the results
@@ -1133,8 +1153,7 @@ namespace oomph
     this->solve_helper(Matrix_pt, f, result);
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve)
-      clean_up_memory();
+    if (!Enable_resolve) clean_up_memory();
   } // End of solve
 
   //==================================================================
@@ -1328,9 +1347,11 @@ namespace oomph
     }
   } // End of solve_helper
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// \short Explicit template specialisation of the solver for CR
@@ -1400,8 +1421,7 @@ namespace oomph
     solve_helper(Matrix_pt, f, result);
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve)
-      clean_up_memory();
+    if (!Enable_resolve) clean_up_memory();
   } // End of solve
 
   //==================================================================
@@ -1823,9 +1843,11 @@ namespace oomph
     }
   } // End of solve_helper
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// \short Solver: Takes pointer to problem and returns the results
@@ -1889,8 +1911,7 @@ namespace oomph
     solve_helper(Matrix_pt, f, result);
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve)
-      clean_up_memory();
+    if (!Enable_resolve) clean_up_memory();
   } // End of solve
 
   //==================================================================
@@ -2097,9 +2118,11 @@ namespace oomph
     }
   } // End of solve_helper
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// \Short Re-solve the system defined by the last assembled Jacobian
@@ -2127,6 +2150,7 @@ namespace oomph
     // Reset re-solving flag
     Resolving = false;
   }
+
 
   //==================================================================
   /// Solver: Takes pointer to problem and returns the results vector
@@ -2180,6 +2204,16 @@ namespace oomph
                  << std::endl;
     }
 
+    // If we want to compute the gradient for the globally convergent
+    // Newton method, then do it here
+    if (Compute_gradient)
+    {
+      // Compute it
+      Matrix_pt->multiply_transpose(f, Gradient_for_glob_conv_newton_solve);
+      // Set the flag
+      Gradient_has_been_computed = true;
+    }
+
     // Call linear algebra-style solver
     // If the result distribution is wrong, then redistribute
     // before the solve and return to original distribution
@@ -2199,18 +2233,19 @@ namespace oomph
     }
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve)
-      clean_up_memory();
+    if (!Enable_resolve) clean_up_memory();
   };
 
-  //=============================================================================
+
+  //==========================================================================
   /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector
   /// and returns the solution of the linear system.
   /// based on the algorithm presented in Templates for the
-  /// Solution of Linear Systems: Building Blocks for Iterative Methods,
-  /// Barrett, Berry et al, SIAM, 2006 and the implementation in the IML++
-  /// library : http://math.nist.gov/iml++/
-  //=============================================================================
+  /// Solution of Linear Systems: Building Blocks for Iterative
+  /// Methods, Barrett,
+  /// Berry et al, SIAM, 2006 and the implementation in the IML++ library :
+  /// http://math.nist.gov/iml++/
+  //==========================================================================
   template<typename MATRIX>
   void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const& matrix_pt,
                                    const DoubleVector& rhs,
@@ -2376,8 +2411,7 @@ namespace oomph
     double beta = normb;
 
     // compute initial relative residual
-    if (normb == 0.0)
-      normb = 1;
+    if (normb == 0.0) normb = 1;
     resid = beta / normb;
 
     // if required will document convergence history to screen or file (if
@@ -2416,6 +2450,7 @@ namespace oomph
       }
       return;
     }
+
 
     // initialise vector of orthogonal basis vectors (v) and upper hessenberg
     // matrix H
@@ -2597,8 +2632,7 @@ namespace oomph
       }
 
       // update
-      if (iter_restart > 0)
-        update((iter_restart - 1), H, s, v, solution);
+      if (iter_restart > 0) update((iter_restart - 1), H, s, v, solution);
 
       // solve Mr = (b-Jx) for r
       {
@@ -2685,6 +2719,7 @@ namespace oomph
     oomph_info << "after " << Max_iter << " iterations." << std::endl;
     oomph_info << std::endl;
 
+
     if (Throw_error_after_max_iter)
     {
       std::string err = "Solver failed to converge and you requested an error";
@@ -2697,9 +2732,11 @@ namespace oomph
 
   } // End GMRES
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// Solver: Takes pointer to problem and returns the results vector
@@ -2783,8 +2820,7 @@ namespace oomph
     }
 
     // Kill matrix unless it's still required for resolve
-    if (!Enable_resolve)
-      clean_up_memory();
+    if (!Enable_resolve) clean_up_memory();
   };
 
   //==================================================================
@@ -2813,6 +2849,7 @@ namespace oomph
     // Reset re-solving flag
     Resolving = false;
   }
+
 
   //=============================================================================
   /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector
@@ -3477,6 +3514,7 @@ namespace oomph
 
     return;
   } // End AugmentedProblemGMRES
+
 
   // Ensure build of required objects
   template class BiCGStab<CCDoubleMatrix>;

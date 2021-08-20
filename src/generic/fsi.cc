@@ -59,6 +59,7 @@ namespace oomph
 
   } // namespace FSI_functions
 
+
   //====================================================================
   /// Flag that allows the suppression of warning messages
   //====================================================================
@@ -127,6 +128,7 @@ namespace oomph
     this->set_ninteraction(1);
   }
 
+
   //==================================================================
   /// \short Allow element to be loaded by fluid on both
   /// sides. (Resizes containers for lookup schemes and initialises
@@ -141,6 +143,7 @@ namespace oomph
     // Set source element storage - two interactions
     this->set_ninteraction(2);
   }
+
 
   //==================================================================
   /// Get the contribution to the load vector provided by
@@ -171,8 +174,7 @@ namespace oomph
 
     // Loop over front and back if required: Get number of fluid-loaded faces
     unsigned n_loaded_face = 2;
-    if (Only_front_is_loaded_by_fluid)
-      n_loaded_face = 1;
+    if (Only_front_is_loaded_by_fluid) n_loaded_face = 1;
 
     for (unsigned face = 0; face < n_loaded_face; face++)
     {
@@ -209,8 +211,7 @@ namespace oomph
       // points into the fluid, the normal at the back points away
       // from it.
       double sign = 1.0;
-      if (face == 1)
-        sign = -1.0;
+      if (face == 1) sign = -1.0;
 
       // The load is scaled by the stress-scale ratio Q
       for (unsigned i = 0; i < n_load; i++)
@@ -220,6 +221,7 @@ namespace oomph
 
     } // end of loop over faces
   }
+
 
   //==================================================================
   /// Update the nodal positions in all fluid elements that affect
@@ -235,8 +237,7 @@ namespace oomph
 
     // Loop over front and back if required: Get number of fluid-loaded faces
     unsigned n_loaded_face = 2;
-    if (Only_front_is_loaded_by_fluid)
-      n_loaded_face = 1;
+    if (Only_front_is_loaded_by_fluid) n_loaded_face = 1;
     for (unsigned face = 0; face < n_loaded_face; face++)
     {
       // Loop over all integration points in wall element
@@ -261,11 +262,13 @@ namespace oomph
     }
   }
 
+
   //=================================================================
   /// Static default value for the ratio of stress scales
   /// used in the fluid and solid equations (default is 1.0)
   //=================================================================
   double FSIWallElement::Default_Q_Value = 1.0;
+
 
   //=======================================================================
   /// Overload the function that must return all field data involved
@@ -338,5 +341,6 @@ namespace oomph
       }
     }
   }
+
 
 } // namespace oomph

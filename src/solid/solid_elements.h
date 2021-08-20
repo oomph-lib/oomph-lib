@@ -34,6 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 #include "generic/Telements.h"
@@ -42,6 +43,7 @@
 #include "../constitutive/constitutive_laws.h"
 #include "generic/error_estimator.h"
 #include "generic/projection.h"
+
 
 namespace oomph
 {
@@ -84,14 +86,14 @@ namespace oomph
     /// isotropic growth function. Set physical parameter values to
     /// default values, enable inertia and set body force to zero.
     /// Default evaluation of Jacobian: analytically rather than by FD.
-    PVDEquationsBase() :
-      Isotropic_growth_fct_pt(0),
-      Prestress_fct_pt(0),
-      Constitutive_law_pt(0),
-      Lambda_sq_pt(&Default_lambda_sq_value),
-      Unsteady(true),
-      Body_force_fct_pt(0),
-      Evaluate_jacobian_by_fd(false)
+    PVDEquationsBase()
+      : Isotropic_growth_fct_pt(0),
+        Prestress_fct_pt(0),
+        Constitutive_law_pt(0),
+        Lambda_sq_pt(&Default_lambda_sq_value),
+        Unsteady(true),
+        Body_force_fct_pt(0),
+        Evaluate_jacobian_by_fd(false)
     {
     }
 
@@ -101,17 +103,20 @@ namespace oomph
       return Constitutive_law_pt;
     }
 
+
     /// Access function for timescale ratio (nondim density)
     const double& lambda_sq() const
     {
       return *Lambda_sq_pt;
     }
 
+
     /// Access function for pointer to timescale ratio (nondim density)
     double*& lambda_sq_pt()
     {
       return Lambda_sq_pt;
     }
+
 
     /// Access function: Pointer to isotropic growth function
     IsotropicGrowthFctPt& isotropic_growth_fct_pt()
@@ -183,6 +188,7 @@ namespace oomph
       return Solid_pressure_not_stored_at_node;
     }
 
+
     /// \short Unpin all solid pressure dofs in the element
     virtual void unpin_elemental_solid_pressure_dofs() = 0;
 
@@ -243,12 +249,14 @@ namespace oomph
     void get_deformed_covariant_basis_vectors(
       const Vector<double>& s, DenseMatrix<double>& def_covariant_basis);
 
+
     /// \short Compute principal stress vectors and (scalar) principal stresses
     /// at specified local coordinate. \c  principal_stress_vector(i,j)
     /// is the j-th component of the i-th principal stress vector.
     void get_principal_stress(const Vector<double>& s,
                               DenseMatrix<double>& principal_stress_vector,
                               Vector<double>& principal_stress);
+
 
     /// \short Evaluate isotropic growth function at Lagrangian coordinate xi
     /// and/or local coordinate s.
@@ -272,6 +280,7 @@ namespace oomph
         (*Isotropic_growth_fct_pt)(xi, gamma);
       }
     }
+
 
     /// \short Evaluate body force at Lagrangian coordinate xi at present time
     /// (returns zero vector if no body force function pointer has been set)
@@ -299,6 +308,7 @@ namespace oomph
         (*Body_force_fct_pt)(time, xi, b);
       }
     }
+
 
     /// \short returns the number of DOF types associated with this element.
     unsigned ndof_types() const
@@ -420,6 +430,7 @@ namespace oomph
     bool Evaluate_jacobian_by_fd;
   };
 
+
   //=======================================================================
   /// A class for elements that solve the equations of solid mechanics, based
   /// on the principle of virtual displacements in cartesian coordinates.
@@ -472,6 +483,7 @@ namespace oomph
         return;
       }
 
+
       // Use FD
       if ((this->Evaluate_jacobian_by_fd))
       {
@@ -489,6 +501,7 @@ namespace oomph
       }
     }
 
+
     /// Output: x,y,[z],xi0,xi1,[xi2],gamma
     void output(std::ostream& outfile)
     {
@@ -498,6 +511,7 @@ namespace oomph
 
     /// Output: x,y,[z],xi0,xi1,[xi2],gamma
     void output(std::ostream& outfile, const unsigned& n_plot);
+
 
     /// C-style output: x,y,[z],xi0,xi1,[xi2],gamma
     void output(FILE* file_pt)
@@ -509,9 +523,11 @@ namespace oomph
     /// Output: x,y,[z],xi0,xi1,[xi2],gamma
     void output(FILE* file_pt, const unsigned& n_plot);
 
+
     /// \short Output: x,y,[z],xi0,xi1,[xi2],gamma and the strain and stress
     /// components
     void extended_output(std::ostream& outfile, const unsigned& n_plot);
+
 
   protected:
     /// \short Compute element residual Vector only (if flag=and/or element
@@ -574,10 +590,12 @@ namespace oomph
         g, G, sigma, d_sigma_dG, false);
     }
 
+
   private:
     /// Unpin all solid pressure dofs -- empty as there are no pressures
     void unpin_elemental_solid_pressure_dofs() {}
   };
+
 
   //===========================================================================
   /// An Element that solves the solid mechanics equations, based on
@@ -585,9 +603,8 @@ namespace oomph
   /// using SolidQElements for the interpolation of the variable positions.
   //============================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class QPVDElement :
-    public virtual SolidQElement<DIM, NNODE_1D>,
-    public virtual PVDEquations<DIM>
+  class QPVDElement : public virtual SolidQElement<DIM, NNODE_1D>,
+                      public virtual PVDEquations<DIM>
   {
   public:
     /// Constructor, there are no internal data points
@@ -605,6 +622,7 @@ namespace oomph
       PVDEquations<DIM>::output(outfile, n_plot);
     }
 
+
     /// C-style output function
     void output(FILE* file_pt)
     {
@@ -618,24 +636,26 @@ namespace oomph
     }
   };
 
+
   //============================================================================
   /// FaceGeometry of a 2D QPVDElement element
   //============================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<QPVDElement<2, NNODE_1D>> :
-    public virtual SolidQElement<1, NNODE_1D>
+  class FaceGeometry<QPVDElement<2, NNODE_1D>>
+    : public virtual SolidQElement<1, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
     FaceGeometry() : SolidQElement<1, NNODE_1D>() {}
   };
 
+
   //==============================================================
   /// FaceGeometry of the FaceGeometry of the 2D QPVDElement
   //==============================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<FaceGeometry<QPVDElement<2, NNODE_1D>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<QPVDElement<2, NNODE_1D>>>
+    : public virtual PointElement
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -643,12 +663,13 @@ namespace oomph
     FaceGeometry() : PointElement() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a 3D QPVDElement element
   //============================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<QPVDElement<3, NNODE_1D>> :
-    public virtual SolidQElement<2, NNODE_1D>
+  class FaceGeometry<QPVDElement<3, NNODE_1D>>
+    : public virtual SolidQElement<2, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
@@ -659,8 +680,8 @@ namespace oomph
   /// FaceGeometry of FaceGeometry of a 3D QPVDElement element
   //============================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<FaceGeometry<QPVDElement<3, NNODE_1D>>> :
-    public virtual SolidQElement<1, NNODE_1D>
+  class FaceGeometry<FaceGeometry<QPVDElement<3, NNODE_1D>>>
+    : public virtual SolidQElement<1, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
@@ -672,9 +693,8 @@ namespace oomph
   /// using Hermite interpolation for the variable positions.
   //============================================================================
   template<unsigned DIM>
-  class HermitePVDElement :
-    public virtual SolidQHermiteElement<DIM>,
-    public virtual PVDEquations<DIM>
+  class HermitePVDElement : public virtual SolidQHermiteElement<DIM>,
+                            public virtual PVDEquations<DIM>
   {
   public:
     /// Constructor, there are no internal data points
@@ -705,6 +725,7 @@ namespace oomph
     }
   };
 
+
   //==========================================================
   /// PVDElementWithContinuousPressure upgraded to become projectable
   //==========================================================
@@ -715,6 +736,7 @@ namespace oomph
     /// \short Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectablePVDElement() {}
+
 
     /// \short Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
@@ -777,11 +799,13 @@ namespace oomph
       return 0.0;
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
       return 0;
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -790,33 +814,37 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectablePVDElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectablePVDElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
   /// that for the underlying wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<FaceGeometry<ProjectablePVDElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  class FaceGeometry<FaceGeometry<ProjectablePVDElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// A class for elements that solve the equations of solid mechanics,
@@ -829,9 +857,9 @@ namespace oomph
   /// formulation of the constitutive equations.
   //============================================================================
   template<unsigned DIM>
-  class PVDEquationsWithPressure :
-    public virtual PVDEquationsBase<DIM>,
-    public virtual SolidElementWithDiagonalMassMatrix
+  class PVDEquationsWithPressure
+    : public virtual PVDEquationsBase<DIM>,
+      public virtual SolidElementWithDiagonalMassMatrix
   {
   public:
     /// Constructor, by default the element is NOT incompressible.
@@ -978,6 +1006,7 @@ namespace oomph
       }
     }
 
+
     /// Return the interpolated_solid_pressure
     double interpolated_solid_p(const Vector<double>& s)
     {
@@ -999,6 +1028,7 @@ namespace oomph
       return (interpolated_solid_p);
     }
 
+
     /// Output: x,y,[z],xi0,xi1,[xi2],p,gamma
     void output(std::ostream& outfile)
     {
@@ -1008,6 +1038,7 @@ namespace oomph
 
     /// Output: x,y,[z],xi0,xi1,[xi2],p,gamma
     void output(std::ostream& outfile, const unsigned& n_plot);
+
 
     /// C-style output: x,y,[z],xi0,xi1,[xi2],p,gamma
     void output(FILE* file_pt)
@@ -1022,6 +1053,7 @@ namespace oomph
     /// \short Output: x,y,[z],xi0,xi1,[xi2],gamma and the strain and stress
     /// components
     void extended_output(std::ostream& outfile, const unsigned& n_plot);
+
 
     /// \short Compute the diagonal of the displacement mass matrix for
     /// LSC preconditioner
@@ -1136,6 +1168,7 @@ namespace oomph
         g, G, sigma_dev, Gcontra, gen_dil, inv_kappa);
     }
 
+
     /// \short Return the derivative of the
     /// deviatoric part of the 2nd Piola Kirchhoff stress
     /// tensor, as calculated from the constitutive law in the nearly
@@ -1178,6 +1211,7 @@ namespace oomph
         d_gen_dil_dG,
         false);
     }
+
 
     /// Return the solid pressure shape functions
     virtual void solid_pshape(const Vector<double>& s, Shape& psi) const = 0;
@@ -1280,9 +1314,11 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// An Element that solves the equations of solid mechanics, using the
@@ -1291,9 +1327,8 @@ namespace oomph
   /// analogous to the QCrouzeixRaviartElement element for fluids.
   //============================================================================
   template<unsigned DIM>
-  class QPVDElementWithPressure :
-    public virtual SolidQElement<DIM, 3>,
-    public virtual PVDEquationsWithPressure<DIM>
+  class QPVDElementWithPressure : public virtual SolidQElement<DIM, 3>,
+                                  public virtual PVDEquationsWithPressure<DIM>
   {
     /// \short Unpin all solid pressure dofs in the element
     void unpin_elemental_solid_pressure_dofs()
@@ -1331,8 +1366,8 @@ namespace oomph
     }
 
     /// Constructor, there are DIM+1 internal data points
-    QPVDElementWithPressure() :
-      SolidQElement<DIM, 3>(), PVDEquationsWithPressure<DIM>()
+    QPVDElementWithPressure()
+      : SolidQElement<DIM, 3>(), PVDEquationsWithPressure<DIM>()
     {
       // Allocate and add one Internal data object that stores DIM+1 pressure
       // values
@@ -1376,6 +1411,7 @@ namespace oomph
       PVDEquationsWithPressure<DIM>::output(outfile, n_plot);
     }
 
+
     /// C-style Generic FiniteElement output function
     void output(FILE* file_pt)
     {
@@ -1389,6 +1425,7 @@ namespace oomph
     }
   };
 
+
   //=====================================================================
   /// Pressure shape functions for 2D QPVDElementWithPressure elements
   //=====================================================================
@@ -1400,6 +1437,7 @@ namespace oomph
     psi[1] = s[0];
     psi[2] = s[1];
   }
+
 
   //=====================================================================
   /// Pressure shape functions for 3D QPVDElementWithPressure elements
@@ -1414,24 +1452,26 @@ namespace oomph
     psi[3] = s[2];
   }
 
+
   //======================================================================
   /// FaceGeometry of 2D QPVDElementWithPressure
   //======================================================================
   template<>
-  class FaceGeometry<QPVDElementWithPressure<2>> :
-    public virtual SolidQElement<1, 3>
+  class FaceGeometry<QPVDElementWithPressure<2>>
+    : public virtual SolidQElement<1, 3>
   {
   public:
     /// Constructor must call constructor of underlying solid element
     FaceGeometry() : SolidQElement<1, 3>() {}
   };
 
+
   //======================================================================
   /// FaceGeometry of FaceGeometry of 2D QPVDElementWithPressure
   //======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QPVDElementWithPressure<2>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<QPVDElementWithPressure<2>>>
+    : public virtual PointElement
   {
   public:
     /// Constructor must call constructor of underlying solid element
@@ -1442,29 +1482,32 @@ namespace oomph
   /// FaceGeometry of 3D QPVDElementWithPressure
   //======================================================================
   template<>
-  class FaceGeometry<QPVDElementWithPressure<3>> :
-    public virtual SolidQElement<2, 3>
+  class FaceGeometry<QPVDElementWithPressure<3>>
+    : public virtual SolidQElement<2, 3>
   {
   public:
     /// Constructor must call constructor of underlying solid element
     FaceGeometry() : SolidQElement<2, 3>() {}
   };
 
+
   //======================================================================
   /// FaceGeometry of FaceGeometry of 3D QPVDElementWithPressure
   //======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QPVDElementWithPressure<3>>> :
-    public virtual SolidQElement<1, 3>
+  class FaceGeometry<FaceGeometry<QPVDElementWithPressure<3>>>
+    : public virtual SolidQElement<1, 3>
   {
   public:
     /// Constructor must call constructor of underlying solid element
     FaceGeometry() : SolidQElement<1, 3>() {}
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// An Element that solves the equations of solid mechanics, based on
@@ -1474,9 +1517,9 @@ namespace oomph
   /// to the QTaylorHoodElement fluid element.
   //============================================================================
   template<unsigned DIM>
-  class QPVDElementWithContinuousPressure :
-    public virtual SolidQElement<DIM, 3>,
-    public virtual PVDEquationsWithPressure<DIM>
+  class QPVDElementWithContinuousPressure
+    : public virtual SolidQElement<DIM, 3>,
+      public virtual PVDEquationsWithPressure<DIM>
   {
   private:
     /// Static array of ints to hold number of solid pressure values at each
@@ -1514,8 +1557,8 @@ namespace oomph
 
   public:
     /// Constructor
-    QPVDElementWithContinuousPressure() :
-      SolidQElement<DIM, 3>(), PVDEquationsWithPressure<DIM>()
+    QPVDElementWithContinuousPressure()
+      : SolidQElement<DIM, 3>(), PVDEquationsWithPressure<DIM>()
     {
     }
 
@@ -1570,6 +1613,7 @@ namespace oomph
       PVDEquationsWithPressure<DIM>::output(outfile, n_plot);
     }
 
+
     /// C-style generic FiniteElement output function
     void output(FILE* file_pt)
     {
@@ -1582,6 +1626,7 @@ namespace oomph
       PVDEquationsWithPressure<DIM>::output(file_pt, n_plot);
     }
   };
+
 
   //===============================================================
   /// Pressure shape functions for 2D QPVDElementWithContinuousPressure
@@ -1639,59 +1684,65 @@ namespace oomph
     }
   }
 
+
   //===============================================================
   /// FaceGeometry for 2D QPVDElementWithContinuousPressure element
   //===============================================================
   template<>
-  class FaceGeometry<QPVDElementWithContinuousPressure<2>> :
-    public virtual SolidQElement<1, 3>
+  class FaceGeometry<QPVDElementWithContinuousPressure<2>>
+    : public virtual SolidQElement<1, 3>
   {
   public:
     /// Constructor must call constructor of the underlying Solid element
     FaceGeometry() : SolidQElement<1, 3>() {}
   };
+
 
   //===============================================================
   /// FaceGeometry of FaceGeometry
   /// for 2D QPVDElementWithContinuousPressure element
   //===============================================================
   template<>
-  class FaceGeometry<FaceGeometry<QPVDElementWithContinuousPressure<2>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<QPVDElementWithContinuousPressure<2>>>
+    : public virtual PointElement
   {
   public:
     /// Constructor must call constructor of the underlying Point element
     FaceGeometry() : PointElement() {}
   };
 
+
   //===============================================================
   /// FaceGeometry for 3D QPVDElementWithContinuousPressure element
   //===============================================================
   template<>
-  class FaceGeometry<QPVDElementWithContinuousPressure<3>> :
-    public virtual SolidQElement<2, 3>
+  class FaceGeometry<QPVDElementWithContinuousPressure<3>>
+    : public virtual SolidQElement<2, 3>
   {
   public:
     /// Constructor must call constructor of the underlying Solid element
     FaceGeometry() : SolidQElement<2, 3>() {}
   };
 
+
   //===============================================================
   /// FaceGeometry of FaceGeometry
   /// for 3D QPVDElementWithContinuousPressure element
   //===============================================================
   template<>
-  class FaceGeometry<FaceGeometry<QPVDElementWithContinuousPressure<3>>> :
-    public virtual SolidQElement<1, 3>
+  class FaceGeometry<FaceGeometry<QPVDElementWithContinuousPressure<3>>>
+    : public virtual SolidQElement<1, 3>
   {
   public:
     /// Constructor must call constructor of the underlying element
     FaceGeometry() : SolidQElement<1, 3>() {}
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// An Element that solves the solid mechanics equations, based on
@@ -1699,10 +1750,9 @@ namespace oomph
   /// using SolidTElements for the interpolation of the variable positions.
   //============================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class TPVDElement :
-    public virtual SolidTElement<DIM, NNODE_1D>,
-    public virtual PVDEquations<DIM>,
-    public virtual ElementWithZ2ErrorEstimator
+  class TPVDElement : public virtual SolidTElement<DIM, NNODE_1D>,
+                      public virtual PVDEquations<DIM>,
+                      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// Constructor, there are no internal data points
@@ -1719,6 +1769,7 @@ namespace oomph
     {
       PVDEquations<DIM>::output(outfile, n_plot);
     }
+
 
     /// C-style output function
     void output(FILE* file_pt)
@@ -1811,24 +1862,26 @@ namespace oomph
     }
   };
 
+
   //============================================================================
   /// FaceGeometry of a 2D TPVDElement element
   //============================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<TPVDElement<2, NNODE_1D>> :
-    public virtual SolidTElement<1, NNODE_1D>
+  class FaceGeometry<TPVDElement<2, NNODE_1D>>
+    : public virtual SolidTElement<1, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
     FaceGeometry() : SolidTElement<1, NNODE_1D>() {}
   };
 
+
   //==============================================================
   /// FaceGeometry of the FaceGeometry of the 2D TPVDElement
   //==============================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<FaceGeometry<TPVDElement<2, NNODE_1D>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<TPVDElement<2, NNODE_1D>>>
+    : public virtual PointElement
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -1836,12 +1889,13 @@ namespace oomph
     FaceGeometry() : PointElement() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a 3D TPVDElement element
   //============================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<TPVDElement<3, NNODE_1D>> :
-    public virtual SolidTElement<2, NNODE_1D>
+  class FaceGeometry<TPVDElement<3, NNODE_1D>>
+    : public virtual SolidTElement<2, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
@@ -1852,13 +1906,14 @@ namespace oomph
   /// FaceGeometry of FaceGeometry of a 3D TPVDElement element
   //============================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<FaceGeometry<TPVDElement<3, NNODE_1D>>> :
-    public virtual SolidTElement<1, NNODE_1D>
+  class FaceGeometry<FaceGeometry<TPVDElement<3, NNODE_1D>>>
+    : public virtual SolidTElement<1, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
     FaceGeometry() : SolidTElement<1, NNODE_1D>() {}
   };
+
 
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -1873,15 +1928,15 @@ namespace oomph
   /// elements.
   //============================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class TPVDBubbleEnrichedElement :
-    public virtual SolidTBubbleEnrichedElement<DIM, NNODE_1D>,
-    public virtual PVDEquations<DIM>,
-    public virtual ElementWithZ2ErrorEstimator
+  class TPVDBubbleEnrichedElement
+    : public virtual SolidTBubbleEnrichedElement<DIM, NNODE_1D>,
+      public virtual PVDEquations<DIM>,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// Constructor, there are no internal data points
-    TPVDBubbleEnrichedElement() :
-      SolidTBubbleEnrichedElement<DIM, NNODE_1D>(), PVDEquations<DIM>()
+    TPVDBubbleEnrichedElement()
+      : SolidTBubbleEnrichedElement<DIM, NNODE_1D>(), PVDEquations<DIM>()
     {
     }
 
@@ -1897,6 +1952,7 @@ namespace oomph
       PVDEquations<DIM>::output(outfile, n_plot);
     }
 
+
     /// C-style output function
     void output(FILE* file_pt)
     {
@@ -1908,6 +1964,7 @@ namespace oomph
     {
       PVDEquations<DIM>::output(file_pt, n_plot);
     }
+
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
@@ -1978,24 +2035,26 @@ namespace oomph
     }
   };
 
+
   //============================================================================
   /// FaceGeometry of a 2D TPVDBubbleEnrichedElement element
   //============================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<TPVDBubbleEnrichedElement<2, NNODE_1D>> :
-    public virtual SolidTElement<1, NNODE_1D>
+  class FaceGeometry<TPVDBubbleEnrichedElement<2, NNODE_1D>>
+    : public virtual SolidTElement<1, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
     FaceGeometry() : SolidTElement<1, NNODE_1D>() {}
   };
 
+
   //==============================================================
   /// FaceGeometry of the FaceGeometry of the 2D TPVDBubbleEnrichedElement
   //==============================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<FaceGeometry<TPVDBubbleEnrichedElement<2, NNODE_1D>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<TPVDBubbleEnrichedElement<2, NNODE_1D>>>
+    : public virtual PointElement
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -2003,12 +2062,13 @@ namespace oomph
     FaceGeometry() : PointElement() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a 3D TPVDBubbleEnrichedElement element
   //============================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<TPVDBubbleEnrichedElement<3, NNODE_1D>> :
-    public virtual SolidTBubbleEnrichedElement<2, NNODE_1D>
+  class FaceGeometry<TPVDBubbleEnrichedElement<3, NNODE_1D>>
+    : public virtual SolidTBubbleEnrichedElement<2, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
@@ -2019,13 +2079,14 @@ namespace oomph
   /// FaceGeometry of FaceGeometry of a 3D TPVDElement element
   //============================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<FaceGeometry<TPVDBubbleEnrichedElement<3, NNODE_1D>>> :
-    public virtual SolidTElement<1, NNODE_1D>
+  class FaceGeometry<FaceGeometry<TPVDBubbleEnrichedElement<3, NNODE_1D>>>
+    : public virtual SolidTElement<1, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
     FaceGeometry() : SolidTElement<1, NNODE_1D>() {}
   };
+
 
   //=======================================================================
   /// An Element that solves the solid mechanics equations in an
@@ -2035,10 +2096,10 @@ namespace oomph
   /// TTaylorHoodElement element for fluids.
   //=======================================================================
   template<unsigned DIM>
-  class TPVDElementWithContinuousPressure :
-    public virtual SolidTElement<DIM, 3>,
-    public virtual PVDEquationsWithPressure<DIM>,
-    public virtual ElementWithZ2ErrorEstimator
+  class TPVDElementWithContinuousPressure
+    : public virtual SolidTElement<DIM, 3>,
+      public virtual PVDEquationsWithPressure<DIM>,
+      public virtual ElementWithZ2ErrorEstimator
   {
   private:
     /// Static array of ints to hold number of variables at node
@@ -2075,10 +2136,11 @@ namespace oomph
 
   public:
     /// Constructor
-    TPVDElementWithContinuousPressure() :
-      SolidTElement<DIM, 3>(), PVDEquationsWithPressure<DIM>()
+    TPVDElementWithContinuousPressure()
+      : SolidTElement<DIM, 3>(), PVDEquationsWithPressure<DIM>()
     {
     }
+
 
     /// Broken copy constructor
     TPVDElementWithContinuousPressure(
@@ -2145,6 +2207,7 @@ namespace oomph
     {
       PVDEquationsWithPressure<DIM>::output(outfile, n_plot);
     }
+
 
     /// C-style generic FiniteElement output function
     void output(FILE* file_pt)
@@ -2229,6 +2292,7 @@ namespace oomph
 
   // Inline functions
 
+
   //==========================================================================
   /// 2D :
   /// Number of pressure values
@@ -2248,6 +2312,7 @@ namespace oomph
   {
     return 4;
   }
+
 
   //==========================================================================
   /// 2D :
@@ -2276,12 +2341,13 @@ namespace oomph
     psi[3] = 1.0 - s[0] - s[1] - s[2];
   }
 
+
   //=======================================================================
   /// Face geometry of the 2D Taylor_Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<TPVDElementWithContinuousPressure<2>> :
-    public virtual SolidTElement<1, 3>
+  class FaceGeometry<TPVDElementWithContinuousPressure<2>>
+    : public virtual SolidTElement<1, 3>
   {
   public:
     /// Constructor: Call constructor of base
@@ -2292,17 +2358,19 @@ namespace oomph
   /// Face geometry of the 3D Taylor_Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<TPVDElementWithContinuousPressure<3>> :
-    public virtual SolidTElement<2, 3>
+  class FaceGeometry<TPVDElementWithContinuousPressure<3>>
+    : public virtual SolidTElement<2, 3>
   {
   public:
     /// Constructor: Call constructor of base
     FaceGeometry() : SolidTElement<2, 3>() {}
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// Namespace for solid mechanics helper functions
@@ -2333,6 +2401,7 @@ namespace oomph
                << std::endl;
       neg_file << 0.0 << " " << 0.0 << " " << 0.0 << " " << 0.0 << " "
                << std::endl;
+
 
       Vector<double> s(2);
       Vector<double> x(2);
@@ -2423,17 +2492,19 @@ namespace oomph
 
   }; // namespace SolidHelpers
 
+
   //==========================================================
   /// PVDElementWithContinuousPressure upgraded to become projectable
   //==========================================================
   template<class PVD_ELEMENT>
-  class ProjectablePVDElementWithContinuousPressure :
-    public virtual ProjectableElement<PVD_ELEMENT>
+  class ProjectablePVDElementWithContinuousPressure
+    : public virtual ProjectableElement<PVD_ELEMENT>
   {
   public:
     /// \short Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectablePVDElementWithContinuousPressure() {}
+
 
     /// \short Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
@@ -2501,11 +2572,13 @@ namespace oomph
       return this->interpolated_solid_p(s);
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
       return this->npres_solid();
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -2514,17 +2587,19 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectablePVDElementWithContinuousPressure<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectablePVDElementWithContinuousPressure<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
@@ -2532,12 +2607,13 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   class FaceGeometry<
-    FaceGeometry<ProjectablePVDElementWithContinuousPressure<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+    FaceGeometry<ProjectablePVDElementWithContinuousPressure<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
+
 
 } // namespace oomph
 

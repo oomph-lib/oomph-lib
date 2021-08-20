@@ -26,6 +26,7 @@
 // Non-inline functions for Poisson elements
 #include "poisson_elements.h"
 
+
 namespace oomph
 {
   //======================================================================
@@ -34,6 +35,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   const unsigned QPoissonElement<DIM, NNODE_1D>::Initial_Nvalue = 1;
+
 
   //======================================================================
   /// Compute element residual Vector and/or element Jacobian matrix
@@ -100,6 +102,7 @@ namespace oomph
         }
       }
 
+
       // Get source function
       //-------------------
       double source;
@@ -150,6 +153,7 @@ namespace oomph
 
     } // End of loop over integration points
   }
+
 
   //======================================================================
   /// Compute derivatives of elemental residual vector with respect
@@ -286,6 +290,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -310,6 +315,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// Output function:
@@ -346,6 +352,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// C-style output function:
   ///
@@ -379,6 +386,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution
@@ -430,6 +438,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //=======================================================================
   /// Compute norm of the solution
@@ -557,6 +566,7 @@ namespace oomph
       error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * W;
     }
   }
+
 
   //====================================================================
   // Force build of templates

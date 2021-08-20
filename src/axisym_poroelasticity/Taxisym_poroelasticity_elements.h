@@ -45,9 +45,9 @@ namespace oomph
   /// and internal flux dofs.
   ///=================================================================
   template<unsigned ORDER>
-  class TAxisymmetricPoroelasticityElement :
-    public TElement<2, 3>,
-    public AxisymmetricPoroelasticityEquations
+  class TAxisymmetricPoroelasticityElement
+    : public TElement<2, 3>,
+      public AxisymmetricPoroelasticityEquations
   {
   private:
     /// The number of values stored at each node
@@ -146,6 +146,7 @@ namespace oomph
       return j;
     }
 
+
     /// Return the equation number of the j-th edge (flux) degree of freedom
     int q_edge_local_eqn(const unsigned& j) const
     {
@@ -238,6 +239,7 @@ namespace oomph
 #endif
       return Q_edge_conv[j / (ORDER + 1)];
     }
+
 
     /// Get pointer to node that stores the edge flux dofs for specified edge
     Node* edge_flux_node_pt(const unsigned& edge)
@@ -334,6 +336,7 @@ namespace oomph
     {
       node_pt(q_edge_node_number(j))->set_value(t, q_edge_index(j), value);
     }
+
 
     /// \short Set the values of the j-th internal degree of freedom
     void set_q_internal(const unsigned& j, const double& value)
@@ -614,6 +617,7 @@ namespace oomph
       AxisymmetricPoroelasticityEquations::output(outfile, Nplot);
     }
 
+
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
@@ -710,29 +714,32 @@ namespace oomph
     }
   };
 
+
   //================================================================
   /// Face geometry for TAxisymmetricPoroelasticityElement<0>
   //================================================================
   template<>
-  class FaceGeometry<TAxisymmetricPoroelasticityElement<0>> :
-    public virtual TElement<1, 3>
+  class FaceGeometry<TAxisymmetricPoroelasticityElement<0>>
+    : public virtual TElement<1, 3>
   {
   public:
     /// Constructor: Call constructor of base
     FaceGeometry() : TElement<1, 3>() {}
   };
 
+
   //================================================================
   /// Face geometry for TAxisymmetricPoroelasticityElement<1>
   //================================================================
   template<>
-  class FaceGeometry<TAxisymmetricPoroelasticityElement<1>> :
-    public virtual TElement<1, 3>
+  class FaceGeometry<TAxisymmetricPoroelasticityElement<1>>
+    : public virtual TElement<1, 3>
   {
   public:
     /// Constructor: Call constructor of base class
     FaceGeometry() : TElement<1, 3>() {}
   };
+
 
 } // namespace oomph
 

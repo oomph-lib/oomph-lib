@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "trilinos_solver.h"
 
+
 namespace oomph
 {
   ///////////////////////////////////////////////////////////////////////////////
@@ -32,6 +33,7 @@ namespace oomph
   // functions for TrilinosAztecOOSolver class
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// Function which uses problem_pt's get_jacobian(...) function to
@@ -89,6 +91,7 @@ namespace oomph
                  << Jacobian_setup_time << std::endl;
     }
 
+
     //   MemoryUsage::doc_memory_usage("after get_jacobian() in trilinos
     //   solver"); MemoryUsage::insert_comment_to_continous_top(
     //    "after get_jacobian() in trilinos solver");
@@ -109,6 +112,7 @@ namespace oomph
     // continue solving using matrix based solve function
     solve(Oomph_matrix_pt, residual, solution);
 
+
     //   MemoryUsage::doc_memory_usage("after trilinos solve");
     //   MemoryUsage::insert_comment_to_continous_top("after trilinos solve ");
 
@@ -119,6 +123,7 @@ namespace oomph
     //   MemoryUsage::insert_comment_to_continous_top(
     //    "end of TrilinosAztecOOSolver::solve");
   }
+
 
   //=============================================================================
   /// Function to solve the linear system defined by matrix_pt and rhs.
@@ -268,6 +273,7 @@ namespace oomph
     }
   }
 
+
   //=============================================================================
   /// Helper function for setting up the solver. Converts the oomph-lib
   /// matrices to Epetra matrices, sets up the preconditioner, creates the
@@ -406,6 +412,7 @@ namespace oomph
         trilinos_prec_pt->set_matrix_pt(matrix_pt);
         trilinos_prec_pt->setup(Epetra_matrix_pt);
 
+
         // set the preconditioner
         AztecOO_solver_pt->SetPrecOperator(
           trilinos_prec_pt->epetra_operator_pt());
@@ -521,6 +528,7 @@ namespace oomph
       solution.build(rhs.distribution_pt(), 0.0);
     }
 
+
     // create Epetra version of r
     Epetra_Vector* epetra_r_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(rhs);
@@ -554,6 +562,7 @@ namespace oomph
     }
   }
 
+
   //=============================================================================
   /// Helper function performs the actual solve once the AztecOO
   /// solver is set up (i.e. solver_setup() is called)
@@ -580,6 +589,7 @@ namespace oomph
     // perform solve
     AztecOO_solver_pt->Iterate(Max_iter, Tolerance);
 
+
     // output iterations and final norm
     Iterations = AztecOO_solver_pt->NumIters();
     if (Doc_time)
@@ -590,8 +600,10 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
 } // namespace oomph

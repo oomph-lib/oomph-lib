@@ -33,6 +33,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Telements.h"
 #include "navier_stokes_elements.h"
@@ -48,6 +49,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
 
+
   //==========================================================================
   /// TCrouzeix_Raviart elements are Navier--Stokes elements with quadratic
   /// interpolation for velocities and positions enriched by a single cubic
@@ -55,15 +57,15 @@ namespace oomph
   /// pressure interpolation
   //==========================================================================
   template<unsigned DIM>
-  class TCrouzeixRaviartElement :
-    public virtual TBubbleEnrichedElement<DIM, 3>,
-    public virtual NavierStokesEquations<DIM>,
-    public virtual ElementWithZ2ErrorEstimator
+  class TCrouzeixRaviartElement : public virtual TBubbleEnrichedElement<DIM, 3>,
+                                  public virtual NavierStokesEquations<DIM>,
+                                  public virtual ElementWithZ2ErrorEstimator
   {
   protected:
     /// Internal index that indicates at which internal datum the pressure is
     /// stored
     unsigned P_nst_internal_index;
+
 
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
@@ -125,8 +127,8 @@ namespace oomph
 
   public:
     /// Constructor, there are DIM+1 internal values (for the pressure)
-    TCrouzeixRaviartElement() :
-      TBubbleEnrichedElement<DIM, 3>(), NavierStokesEquations<DIM>()
+    TCrouzeixRaviartElement()
+      : TBubbleEnrichedElement<DIM, 3>(), NavierStokesEquations<DIM>()
     {
       // Allocate and a single internal datum with DIM+1 entries for the
       // pressure
@@ -150,11 +152,13 @@ namespace oomph
       BrokenCopy::broken_assign("TCrouzeixRaviartElement");
       }*/
 
+
     /// \short Number of values (pinned or dofs) required at local node n.
     inline virtual unsigned required_nvalue(const unsigned& n) const
     {
       return DIM;
     }
+
 
     /// \short Return the pressure values at internal dof i_internal
     /// (Discontinous pressure interpolation -- no need to cater for hanging
@@ -237,6 +241,7 @@ namespace oomph
       NavierStokesEquations<DIM>::output(file_pt, n_plot);
     }
 
+
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as unenriched shape functions.
     unsigned nrecovery_order()
@@ -306,6 +311,7 @@ namespace oomph
       }
     }
 
+
     /// \short Full output function:
     /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
     /// in tecplot format. Default number of plot points
@@ -363,6 +369,7 @@ namespace oomph
     return J;
   }
 
+
   //=======================================================================
   /// Derivatives of the shape functions and test functions w.r.t. to global
   /// (Eulerian) coordinates. Return Jacobian of mapping between
@@ -384,6 +391,7 @@ namespace oomph
     // Return the jacobian
     return J;
   }
+
 
   //=======================================================================
   /// 2D
@@ -434,6 +442,7 @@ namespace oomph
     return J;
   }
 
+
   //=======================================================================
   /// 2D :
   /// Pressure shape functions
@@ -461,6 +470,7 @@ namespace oomph
     test = psi;
   }
 
+
   //=======================================================================
   /// 3D :
   /// Pressure shape functions
@@ -475,6 +485,7 @@ namespace oomph
     psi[3] = s[2];
   }
 
+
   //=======================================================================
   /// Pressure shape and test functions
   //=======================================================================
@@ -488,6 +499,7 @@ namespace oomph
     // The test functions are the shape functions
     test = psi;
   }
+
 
   //==========================================================================
   /// 2D :
@@ -515,6 +527,7 @@ namespace oomph
     dppsidx(1, 1) = 0.0;
     dppsidx(2, 1) = 1.0;
 
+
     // Get the values of the shape functions and their local derivatives
     Shape psi(7);
     DShape dpsi(7, 2);
@@ -537,6 +550,7 @@ namespace oomph
     // Return the determinant of the jacobian
     return det;
   }
+
 
   //==========================================================================
   /// 3D :
@@ -572,6 +586,7 @@ namespace oomph
     dppsidx(2, 2) = 0.0;
     dppsidx(3, 2) = 1.0;
 
+
     // Get the values of the shape functions and their local derivatives
     Shape psi(11);
     DShape dpsi(11, 3);
@@ -595,6 +610,7 @@ namespace oomph
     return det;
   }
 
+
   //=======================================================================
   /// Face geometry of the 2D Crouzeix_Raviart elements
   //=======================================================================
@@ -609,34 +625,37 @@ namespace oomph
   /// Face geometry of the 3D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<TCrouzeixRaviartElement<3>> :
-    public virtual TBubbleEnrichedElement<2, 3>
+  class FaceGeometry<TCrouzeixRaviartElement<3>>
+    : public virtual TBubbleEnrichedElement<2, 3>
   {
   public:
     FaceGeometry() : TBubbleEnrichedElement<2, 3>() {}
   };
 
+
   //=======================================================================
   /// Face geometry of the FaceGeometry of the 2D CrouzeixRaviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<TCrouzeixRaviartElement<2>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<TCrouzeixRaviartElement<2>>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   //=======================================================================
   /// Face geometry of the FaceGeometry of the 3D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<TCrouzeixRaviartElement<3>>> :
-    public virtual TElement<1, 3>
+  class FaceGeometry<FaceGeometry<TCrouzeixRaviartElement<3>>>
+    : public virtual TElement<1, 3>
   {
   public:
     FaceGeometry() : TElement<1, 3>() {}
   };
+
 
   //=============================================================================
   /// Create a list of pairs for all unknowns in this element,
@@ -714,16 +733,16 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Taylor--Hood elements are Navier--Stokes elements
   /// with quadratic interpolation for velocities and positions and
   /// continous linear pressure interpolation
   //=======================================================================
   template<unsigned DIM>
-  class TTaylorHoodElement :
-    public virtual TElement<DIM, 3>,
-    public virtual NavierStokesEquations<DIM>,
-    public virtual ElementWithZ2ErrorEstimator
+  class TTaylorHoodElement : public virtual TElement<DIM, 3>,
+                             public virtual NavierStokesEquations<DIM>,
+                             public virtual ElementWithZ2ErrorEstimator
 
   {
   private:
@@ -784,9 +803,11 @@ namespace oomph
     ///  Unpin the proper nodal pressure dofs
     void unpin_proper_nodal_pressure_dofs();
 
+
   public:
     /// Constructor, no internal data points
     TTaylorHoodElement() : TElement<DIM, 3>(), NavierStokesEquations<DIM>() {}
+
 
     /// Broken copy constructor
     TTaylorHoodElement(const TTaylorHoodElement<DIM>& dummy)
@@ -810,6 +831,7 @@ namespace oomph
     /// Test whether the pressure dof p_dof hanging or not?
     // bool pressure_dof_is_hanging(const unsigned& p_dof)
     // {return this->node_pt(Pconv[p_dof])->is_hanging(DIM);}
+
 
     /// Pressure shape functions at local coordinate s
     inline void pshape_nst(const Vector<double>& s, Shape& psi) const;
@@ -864,6 +886,7 @@ namespace oomph
       this->node_pt(Pconv[p_dof])->pin(DIM);
       this->node_pt(Pconv[p_dof])->set_value(DIM, p_value);
     }
+
 
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
@@ -938,6 +961,7 @@ namespace oomph
     {
       return node_pt(j);
     }
+
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -1043,6 +1067,7 @@ namespace oomph
     }
   };
 
+
   // Inline functions
 
   //==========================================================================
@@ -1064,6 +1089,7 @@ namespace oomph
   {
     return 4;
   }
+
 
   //==========================================================================
   /// 2D :
@@ -1087,6 +1113,7 @@ namespace oomph
     // Return the jacobian
     return J;
   }
+
 
   //==========================================================================
   /// Derivatives of the shape functions and test functions w.r.t to
@@ -1139,6 +1166,7 @@ namespace oomph
     // Allocate memory for the inverse 2x2 jacobian
     DenseMatrix<double> inverse_jacobian(2);
 
+
     // Get the values of the shape functions and their local derivatives
     Shape psi(6);
     DShape dpsi(6, 2);
@@ -1158,6 +1186,7 @@ namespace oomph
     // Return the determinant of the jacobian
     return det;
   }
+
 
   //==========================================================================
   /// 3D :
@@ -1193,6 +1222,7 @@ namespace oomph
     dppsidx(3, 1) = -1.0;
     dppsidx(3, 2) = -1.0;
 
+
     // Get the values of the shape functions and their local derivatives
     Shape psi(10);
     DShape dpsi(10, 3);
@@ -1215,6 +1245,7 @@ namespace oomph
     // Return the determinant of the jacobian
     return det;
   }
+
 
   //==========================================================================
   /// 2D :
@@ -1264,6 +1295,7 @@ namespace oomph
     return J;
   }
 
+
   //==========================================================================
   /// 3D :
   /// Define the shape functions (psi) and test functions (test) and
@@ -1312,6 +1344,7 @@ namespace oomph
     return J;
   }
 
+
   //==========================================================================
   /// 2D :
   /// Pressure shape functions
@@ -1339,6 +1372,7 @@ namespace oomph
     psi[3] = 1.0 - s[0] - s[1] - s[2];
   }
 
+
   //==========================================================================
   /// Pressure shape and test functions
   //==========================================================================
@@ -1353,6 +1387,7 @@ namespace oomph
     test = psi;
   }
 
+
   //=======================================================================
   /// Face geometry of the 2D Taylor_Hood elements
   //=======================================================================
@@ -1363,6 +1398,7 @@ namespace oomph
     /// Constructor: Call constructor of base
     FaceGeometry() : TElement<1, 3>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the 3D Taylor_Hood elements
@@ -1375,27 +1411,30 @@ namespace oomph
     FaceGeometry() : TElement<2, 3>() {}
   };
 
+
   //=======================================================================
   /// Face geometry of the FaceGeometry of the 2D TaylorHood elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<TTaylorHoodElement<2>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<TTaylorHoodElement<2>>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   //=======================================================================
   /// Face geometry of the FaceGeometry of the 3D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<TTaylorHoodElement<3>>> :
-    public virtual TElement<1, 3>
+  class FaceGeometry<FaceGeometry<TTaylorHoodElement<3>>>
+    : public virtual TElement<1, 3>
   {
   public:
     FaceGeometry() : TElement<1, 3>() {}
   };
+
 
 } // namespace oomph
 

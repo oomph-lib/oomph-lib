@@ -28,11 +28,13 @@
 
 #include "linear_elasticity_elements.h"
 
+
 namespace oomph
 {
   /// Static default value for timescale ratio (1.0 -- for natural scaling)
   template<unsigned DIM>
   double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value = 1.0;
+
 
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
@@ -67,6 +69,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -133,6 +136,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Compute the Cauchy stress tensor at local coordinate s for
   /// displacement formulation.
@@ -175,6 +179,7 @@ namespace oomph
       }
     }
   }
+
 
   //=======================================================================
   /// Compute the residuals for the linear elasticity equations in
@@ -364,6 +369,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //=======================================================================
   /// Output exact solution x,y,[z],u,v,[w]
   //=======================================================================
@@ -413,6 +419,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //=======================================================================
   /// Output exact solution x,y,[z],u,v,[w] (unsteady version)
@@ -465,6 +472,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //=======================================================================
   /// Output: x,y,[z],u,v,[w]
   //=======================================================================
@@ -510,6 +518,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //=======================================================================
   /// C-style output: x,y,[z],u,v,[w]
   //=======================================================================
@@ -547,6 +556,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// Validate against exact velocity solution
@@ -707,6 +717,7 @@ namespace oomph
     }
   }
 
+
   // Instantiate the required elements
   template class LinearElasticityEquationsBase<2>;
   template class LinearElasticityEquations<2>;
@@ -714,5 +725,6 @@ namespace oomph
   template class QLinearElasticityElement<3, 3>;
   template class LinearElasticityEquationsBase<3>;
   template class LinearElasticityEquations<3>;
+
 
 } // namespace oomph

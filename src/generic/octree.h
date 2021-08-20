@@ -76,6 +76,7 @@ namespace oomph
     };
   } // namespace OcTreeNames
 
+
   // Forward definitions
   class OcTreeRoot;
 
@@ -116,6 +117,7 @@ namespace oomph
     /// objects associated with all non-leaf nodes!
     virtual ~OcTree() {}
 
+
     /// Broken copy constructor
     OcTree(const OcTree& dummy)
     {
@@ -127,6 +129,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("OcTree");
     }
+
 
     /// \short Overload the function construct_son to ensure that the son
     /// is a specific OcTree and not a general Tree.
@@ -257,6 +260,7 @@ namespace oomph
                                      int& edge,
                                      int& diff_level) const;
 
+
     /// \short Self-test: Check all neighbours. Return success (0)
     /// if the max. distance between corresponding points in the
     /// neighbours is less than the tolerance specified in the
@@ -265,6 +269,7 @@ namespace oomph
 
     /// \short Setup the static data, rotation and reflection schemes, etc
     static void setup_static_data();
+
 
     /// \short Doc/check all face neighbours of octree (nodes) contained in the
     /// Vector forest_node_pt. Output into neighbours_file which can
@@ -277,6 +282,7 @@ namespace oomph
                                     std::ofstream& neighbours_file,
                                     std::ofstream& neighbours_txt_file,
                                     double& max_error);
+
 
     /// \short Doc/check all true edge neighbours of octree (nodes) contained
     /// in the Vector forest_node_pt. Output into neighbours_file which can
@@ -307,10 +313,12 @@ namespace oomph
     static unsigned vertex_to_node_number(const int& vertex,
                                           const unsigned& nnode1d);
 
+
     /// \short Return the vertex  [LDB,RDB,...] of local (vertex) node n
     /// in an element with nnode1d nodes in each coordinate direction.
     static int node_number_to_vertex(const unsigned& n,
                                      const unsigned& nnode1d);
+
 
     /// \short If U[p] becomes new_up and R[ight] becomes new_right then the
     /// direction vector \c dir becomes rotate(new_up, new_right, dir)
@@ -318,9 +326,11 @@ namespace oomph
                               const int& new_right,
                               const Vector<int>& dir);
 
+
     /// \short If U[p] becomes new_up and R[ight] becomes new_right
     /// then the direction \c dir becomes \c rotate(new_up, new_right, dir)
     static int rotate(const int& new_up, const int& new_right, const int& dir);
+
 
     /// Translate (enumerated) directions into strings
     static Vector<std::string> Direct_string;
@@ -349,6 +359,7 @@ namespace oomph
     /// E.g : Direction_to_vector[RDB]=(1,-1,-1), Direction_to_vector[U]=(0,1,0)
     static Vector<Vector<int>> Direction_to_vector;
 
+
     /// \short Storage for the up/right-equivalents corresponding to two
     /// pairs of vertices along an element edge:
     /// - The first pair contains
@@ -372,6 +383,7 @@ namespace oomph
                     std::pair<int, int>>
       Up_and_right_equivalent_for_pairs_of_vertices;
 
+
   protected:
     /// Default constructor (empty and broken)
     OcTree()
@@ -389,6 +401,7 @@ namespace oomph
     /// created externally.
     OcTree(RefineableElement* const& object_pt) : Tree(object_pt) {}
 
+
     /// \short Constructor for tree that has a father: Pass it the pointer
     /// to its object, the pointer to its father and tell it what type
     /// of son (LDB,RDB,...) it is.
@@ -397,13 +410,14 @@ namespace oomph
     /// created externally.
     OcTree(RefineableElement* const& object_pt,
            Tree* const& father_pt,
-           const int& son_type) :
-      Tree(object_pt, father_pt, son_type)
+           const int& son_type)
+      : Tree(object_pt, father_pt, son_type)
     {
     }
 
     /// Bool indicating that static member data has been setup
     static bool Static_data_has_been_setup;
+
 
   private:
     /// \short Find `greater-or-equal-sized face neighbour' in given direction
@@ -434,6 +448,7 @@ namespace oomph
                                 bool& in_neighbouring_tree,
                                 int max_level,
                                 OcTreeRoot* orig_root_pt) const;
+
 
     /// \short Find `greater-or-equal-sized edge neighbour' in given direction
     ///  (LB,RB,DB,UB [the back edges],
@@ -477,10 +492,12 @@ namespace oomph
                                 int max_level,
                                 OcTreeRoot* orig_root_pt) const;
 
+
     /// \short Is the edge neighbour (for edge "edge")  specified via the
     /// pointer also a face neighbour for one of the two adjacent faces?
     bool edge_neighbour_is_face_neighbour(const int& edge,
                                           OcTree* edge_neighb_pt) const;
+
 
     /// \short This constructs the rotation matrix of the rotation around the
     /// axis \c axis with an angle of \c angle*90
@@ -498,17 +515,20 @@ namespace oomph
                              const DenseMatrix<int>& mat2,
                              DenseMatrix<int>& mat3);
 
+
     /// \short Returns the vector of the coordinate directions
     /// of vertex node number n in an element with nnode1d element per
     /// dimension.
     static Vector<int> vertex_node_to_vector(const unsigned& n,
                                              const unsigned& nnode1d);
 
+
     /// Entry in rotation matrix: cos(i*90)
     static Vector<int> Cosi;
 
     /// Entry in rotation matrix sin(i*90)
     static Vector<int> Sini;
+
 
     /// \short Array of direction/octant adjacency scheme:
     /// Is_adjacent(direction,octant): Is face/edge \c direction
@@ -587,6 +607,7 @@ namespace oomph
     static DenseMatrix<double> S_direct_edge;
   };
 
+
   //===================================================================
   /// OcTreeRoot is a OcTree that forms the root of a (recursive)
   /// octree. The "root node" is special as it holds additional
@@ -620,11 +641,12 @@ namespace oomph
     /// neighbour, my Right is its Right").
     std::map<TreeRoot*, int> Right_equivalent;
 
+
   public:
     /// \short Constructor for the root octree: Pass pointer to the
     /// RefineableQElement<3> that is represented by the OcTree.
-    OcTreeRoot(RefineableElement* const& object_pt) :
-      Tree(object_pt), OcTree(object_pt), TreeRoot(object_pt)
+    OcTreeRoot(RefineableElement* const& object_pt)
+      : Tree(object_pt), OcTree(object_pt), TreeRoot(object_pt)
     {
 #ifdef PARANOID
       // Check that static member data has been set up
@@ -641,6 +663,7 @@ namespace oomph
 #endif
     }
 
+
     /// Broken copy constructor
     OcTreeRoot(const OcTreeRoot& dummy) : TreeRoot(dummy)
     {
@@ -652,6 +675,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("OcTreeRoot");
     }
+
 
     /// \short Return vector of pointers to the edge-neighbouring TreeRoots
     /// in the (enumerated) (edge) direction.
@@ -676,6 +700,7 @@ namespace oomph
 
       return Edge_neighbour_pt[edge_direction];
     }
+
 
     /// \short Return number of edge-neighbouring OcTreeRoot
     /// in the (enumerated) (edge) direction.
@@ -732,6 +757,7 @@ namespace oomph
       }
     }
 
+
     /// \short Return up equivalent of the neighbours specified by
     /// pointer: When viewed from the current octree's neighbour,
     /// our up direction is the neighbour's Up_equivalent[neighbour_pt]
@@ -754,6 +780,7 @@ namespace oomph
       }
     }
 
+
     /// \short Set up equivalent of the neighbours specified by
     /// pointer: When viewed from the current octree's neighbour,
     /// our up direction is the neighbour's Up_equivalent[neighbour_pt]
@@ -767,6 +794,7 @@ namespace oomph
     {
       Up_equivalent[tree_root_pt] = dir;
     }
+
 
     /// \short The same thing as up_equivalent, but for the right direction:
     /// When viewed from the current octree neighbour, our
@@ -877,6 +905,7 @@ namespace oomph
         return UF;
       }
 
+
       // Search over all edge neighbours
       for (int dir = LB; dir <= UF; dir++)
       {
@@ -891,14 +920,17 @@ namespace oomph
         }
       }
 
+
       // If we get here, it's not a neighbour
       return OMEGA;
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //================================================================
   /// An OcTreeForest consists of a collection of OcTreeRoots.
@@ -936,6 +968,7 @@ namespace oomph
     /// \short Destructor: Delete the constituent octrees (and thus
     /// the associated objects!)
     virtual ~OcTreeForest() {}
+
 
     /// \short Document and check all the neighbours of all the nodes
     /// in the forest. DocInfo object specifies the output directory

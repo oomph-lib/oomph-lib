@@ -38,9 +38,11 @@ namespace oomph
 
   } // namespace BrickFromTetMeshHelper
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //================================================================
   /// Setup lookup schemes which establish which elements are located
@@ -55,8 +57,7 @@ namespace oomph
 
     // If file declared in outfile exists,set doc=true to enable writing to
     // stream
-    if (outfile)
-      doc = true;
+    if (outfile) doc = true;
 
     // Number of boundaries. Gives the value assigned by the function
     // nboundary()
@@ -74,6 +75,7 @@ namespace oomph
     Face_index_at_boundary.clear();
     Boundary_element_pt.resize(nbound);
     Face_index_at_boundary.resize(nbound);
+
 
     // Temporary vector of vectors of pointers to elements on the boundaries:
     // vector_of_boundary_element_pt[i] is the vector of pointers to all
@@ -94,6 +96,7 @@ namespace oomph
     // the matrix to identify each element on boundary
     MapMatrixMixed<unsigned, FiniteElement*, Vector<int>*> boundary_identifier;
 
+
     // Temporary container to store pointers to temporary vectors
     // so they can be deleted. Creating storage to store these
     // temporary vectors of vectors of pointers previously defined
@@ -109,8 +112,7 @@ namespace oomph
       FiniteElement* fe_pt = finite_element_pt(e);
 
       // print out values of all elements to doc
-      if (doc)
-        outfile << "Element: " << e << " " << fe_pt << std::endl;
+      if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
 
       // Loop over the element's nodes and find out which boundaries they're on
       // ----------------------------------------------------------------------
@@ -219,6 +221,7 @@ namespace oomph
       }
     }
 
+
     // Now copy everything across into permanent arrays
     //-------------------------------------------------
 
@@ -267,6 +270,7 @@ namespace oomph
         // need to be located on the boundary domain)
         int indicator = -10;
 
+
         // Loop over coordinates
         for (int ii = 0; ii < 3; ii++)
         {
@@ -311,8 +315,10 @@ namespace oomph
       }
     }
 
+
     // Lookup scheme has now been setup yet
     Lookup_for_elements_next_boundary_is_setup = true;
+
 
     // Cleanup temporary vectors
     unsigned n = tmp_vect_pt.size();
@@ -322,6 +328,7 @@ namespace oomph
     }
 
     return;
+
 
     // Doc?
     /*bool doc=false;
@@ -608,5 +615,6 @@ namespace oomph
       delete tmp_vect_pt[i];
       }*/
   }
+
 
 } // namespace oomph

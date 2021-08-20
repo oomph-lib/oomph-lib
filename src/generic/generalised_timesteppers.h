@@ -60,9 +60,9 @@ namespace oomph
     /// Pass the information directly through to the TimeStepper object
     GeneralisedTimeStepper(const unsigned& n_tstorage,
                            const unsigned& max_deriv,
-                           const unsigned& ndof_storage_entries = 1) :
-      TimeStepper(n_tstorage, max_deriv),
-      Ndof_storage_entries(ndof_storage_entries)
+                           const unsigned& ndof_storage_entries = 1)
+      : TimeStepper(n_tstorage, max_deriv),
+        Ndof_storage_entries(ndof_storage_entries)
     {
       // Dof_storage_index.resize(1,0.0);
     }
@@ -115,14 +115,15 @@ namespace oomph
     /// Constructor for the case when we allow adaptive continuation
     /// It can evaulate up to second derivatives, but doesn't do anything
     /// the time-derivatives evaluate to zero.
-    ContinuationStorageScheme() :
-      GeneralisedTimeStepper(3, 2),
-      Dof_derivative_offset(1),
-      Dof_current_offset(2)
+    ContinuationStorageScheme()
+      : GeneralisedTimeStepper(3, 2),
+        Dof_derivative_offset(1),
+        Dof_current_offset(2)
     {
       Type = "ContinuationStorageScheme";
       Is_steady = true;
     }
+
 
     /// Broken copy constructor
     ContinuationStorageScheme(const ContinuationStorageScheme&)
@@ -152,6 +153,7 @@ namespace oomph
       // Set the weight for the zero-th derivative which is always 1.0
       Weight(0, 0) = 1.0;
     }
+
 
     /// Broken assignment operator
     void operator=(const ContinuationStorageScheme&)

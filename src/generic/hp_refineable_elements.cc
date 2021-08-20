@@ -127,6 +127,7 @@ namespace oomph
     }
   }
 
+
   //==================================================================
   /// Return the node at the specified local coordinate
   //==================================================================
@@ -626,6 +627,7 @@ namespace oomph
 
     } // End of loop over all nodes in element
 
+
     // If the element is a MacroElementNodeUpdateElement, set
     // the update parameters for the current element's nodes --
     // all this needs is the vector of (pointers to the)
@@ -667,6 +669,7 @@ namespace oomph
       // longer exists...
       m_el_pt->set_node_update_info(geom_object_pt);
     }
+
 
     // Loop over all nodes in element again, to re-set the positions
     // This must be done using the new element's macro-element
@@ -1009,6 +1012,7 @@ namespace oomph
     this->node_pt(0) = old_node_pt[0];
     this->node_pt(this->p_order() - 1) = old_node_pt[old_P_order - 1];
 
+
     //=============================================================
     // Below this line is copied from RefineableQSpectralElement<2>
 
@@ -1304,6 +1308,7 @@ namespace oomph
         return 0.0;
     }
   }
+
 
   //==================================================================
   /// Return the node at the specified local coordinate
@@ -1853,6 +1858,7 @@ namespace oomph
         }
       }
 
+
       // If the father element hasn't been generated yet, we're stuck...
       if (father_el_pt->node_pt(0) == 0)
       {
@@ -2276,8 +2282,7 @@ namespace oomph
               // Determine the edge on which the new node will live
               //(cannot be a vertex node)
               int my_bound = Tree::OMEGA;
-              if (s_fraction[0] == 0.0)
-                my_bound = QuadTreeNames::W;
+              if (s_fraction[0] == 0.0) my_bound = QuadTreeNames::W;
               else if (s_fraction[0] == 1.0)
                 my_bound = QuadTreeNames::E;
               else if (s_fraction[1] == 0.0)
@@ -2412,8 +2417,7 @@ namespace oomph
                 // Determine the edge on which the new node will live
                 //(cannot be a vertex node)
                 int my_bound = Tree::OMEGA;
-                if (s_fraction[0] == 0.0)
-                  my_bound = QuadTreeNames::W;
+                if (s_fraction[0] == 0.0) my_bound = QuadTreeNames::W;
                 else if (s_fraction[0] == 1.0)
                   my_bound = QuadTreeNames::E;
                 else if (s_fraction[1] == 0.0)
@@ -2533,8 +2537,7 @@ namespace oomph
           // Determine the edge on which the new node will live
           //(cannot be a vertex node)
           int my_bound = Tree::OMEGA;
-          if (s_fraction[0] == 0.0)
-            my_bound = QuadTreeNames::W;
+          if (s_fraction[0] == 0.0) my_bound = QuadTreeNames::W;
           else if (s_fraction[0] == 1.0)
             my_bound = QuadTreeNames::E;
           else if (s_fraction[1] == 0.0)
@@ -2627,6 +2630,7 @@ namespace oomph
                 }
               }
             } // End of if solid_node_pt
+
 
             // Check if we need to add nodes to the mesh
             if (mesh_pt != 0)
@@ -2757,6 +2761,7 @@ namespace oomph
 
     } // End of horizontal loop over nodes in element
 
+
     // If the element is a MacroElementNodeUpdateElement, set
     // the update parameters for the current element's nodes --
     // all this needs is the vector of (pointers to the)
@@ -2844,6 +2849,7 @@ namespace oomph
       //    std::endl;
       //   }
       // }
+
 
       // Loop over all nodes in element again, to re-set the positions
       // This must be done using the new element's macro-element
@@ -3297,6 +3303,7 @@ namespace oomph
           ->vertex_node_pt(1);
     }
 
+
     // The timestepper should be the same for all nodes and node 0 should
     // never be deleted.
     if (this->node_pt(0) == 0)
@@ -3557,6 +3564,7 @@ namespace oomph
               }
             } // End of if solid_node_pt
 
+
             // Next we update the boundary look-up schemes
             // Loop over the boundaries stored in the set
             for (std::set<unsigned>::iterator it = boundaries.begin();
@@ -3655,6 +3663,7 @@ namespace oomph
         } // End of the case when we build the node ourselves
       }
     } // End of loop over all nodes in element
+
 
     // If the element is a MacroElementNodeUpdateElement, set the update
     // parameters for the current element's nodes. These need to be reset
@@ -3980,10 +3989,8 @@ namespace oomph
     }
 
     max_error = max_error_x[0];
-    if (max_error_x[1] > max_error)
-      max_error = max_error_x[1];
-    if (max_error_val > max_error)
-      max_error = max_error_val;
+    if (max_error_x[1] > max_error) max_error = max_error_x[1];
+    if (max_error_val > max_error) max_error = max_error_val;
 
     if (max_error > 1e-9)
     {
@@ -4127,8 +4134,7 @@ namespace oomph
     {
       // Compute the active coordinate index along the this side of mortar
       unsigned active_coord_index;
-      if (my_edge == N || my_edge == S)
-        active_coord_index = 0;
+      if (my_edge == N || my_edge == S) active_coord_index = 0;
       else if (my_edge == E || my_edge == W)
         active_coord_index = 1;
       else
@@ -5122,6 +5128,7 @@ namespace oomph
       }
     } // End of loop over faces
 
+
     // Loop over the edges on which the node lies
     //------------------------------------------
     for (unsigned j = 0; j < n_edge; j++)
@@ -5526,6 +5533,7 @@ namespace oomph
         }
       }
     } // End of loop over faces
+
 
     // Loop over the edges on which the node lies
     //------------------------------------------
@@ -5999,6 +6007,7 @@ namespace oomph
       //                        father_el_pt->s_macro_ll(i));
       //   }
       // }
+
 
       // If the father element hasn't been generated yet, we're stuck...
       if (father_el_pt->node_pt(0) == 0)
@@ -7161,6 +7170,7 @@ namespace oomph
 
     } // End of horizontal loop over nodes in element (i0)
 
+
     // Loop over all nodes in element again, to re-set the positions
     // This must be done using the new element's macro-element
     // representation, rather than the old version which may be
@@ -7209,6 +7219,7 @@ namespace oomph
         }
       }
     }
+
 
     // If the element is a MacroElementNodeUpdateElement, set
     // the update parameters for the current element's nodes --
@@ -8212,6 +8223,7 @@ namespace oomph
                 }
               } // End of if solid_node_pt
 
+
               // Next we update the boundary look-up schemes
               // Loop over the boundaries stored in the set
               for (std::set<unsigned>::iterator it = boundaries.begin();
@@ -8837,8 +8849,7 @@ namespace oomph
                 master_is_not_edge = true;
             }
 
-            if (master_is_not_edge)
-              break;
+            if (master_is_not_edge) break;
 
             // Set node as master node
             master_node_number.push_back(neighbour_node_number);
@@ -9218,8 +9229,7 @@ namespace oomph
                 bool skip = false;
                 for (unsigned i = 0; i < master_node_zero_weight.size(); i++)
                 {
-                  if (m == master_node_zero_weight[i])
-                    skip = true;
+                  if (m == master_node_zero_weight[i]) skip = true;
                 }
 
                 // Add pointer and weight to hang info
@@ -9579,8 +9589,7 @@ namespace oomph
                 bool skip = false;
                 for (unsigned k = 0; k < master_node_zero_weight.size(); k++)
                 {
-                  if (m == master_node_zero_weight[k])
-                    skip = true;
+                  if (m == master_node_zero_weight[k]) skip = true;
                 }
 
                 // Add pointer and weight to hang info
@@ -10552,6 +10561,7 @@ namespace oomph
                                  ->master_node_pt(mm)
                                  ->x(2)
                             << " " << std::endl;
+
 
                   // Print out hanging scheme
                   std::cout << "Hanging node: " << dependent_node_pt[i]->x(0)

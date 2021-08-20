@@ -55,6 +55,7 @@ namespace oomph
     // initial input and at each step store f(t_{n+1}, y_{n+1}) as a history
     // value for use in the calculatio of the next time step.
 
+
   public:
     /// Constructor, storage for two history derivatives (one for TR and
     /// one for the predictor step), one history value, present value and
@@ -203,6 +204,7 @@ namespace oomph
       Shift_f = false;
     }
 
+
     /// \short This function updates the Data's time history so that
     /// we can advance to the next timestep.
     void shift_time_values(Data* const& data_pt)
@@ -245,6 +247,7 @@ namespace oomph
       }
     }
 
+
     bool Initial_derivative_set;
 
     bool Shift_f;
@@ -255,6 +258,7 @@ namespace oomph
     {
       // do nothing, not implemented for moving nodes
     }
+
 
     /// Function to calculate predicted positions at a node
     void calculate_predicted_positions(Node* const& node_pt)
@@ -306,6 +310,7 @@ namespace oomph
       }
     }
 
+
     /// Compute the error in the position i at a node
     double temporal_error_in_position(Node* const& node_pt, const unsigned& i)
     {
@@ -319,6 +324,7 @@ namespace oomph
       return Error_weight *
              (data_pt->value(i) - data_pt->value(predicted_value_index(), i));
     }
+
 
   private:
     /// Private data for the predictor weights

@@ -33,6 +33,7 @@ namespace oomph
   /// Default value for Peclet number
   double SteadyAxisymAdvectionDiffusionEquations::Default_peclet_number = 0.0;
 
+
   //======================================================================
   /// \short Compute element residual Vector and/or element Jacobian matrix
   ///
@@ -114,6 +115,7 @@ namespace oomph
       double source;
       get_source_axisym_adv_diff(ipt, interpolated_x, source);
 
+
       // Get wind
       //--------
       Vector<double> wind(3);
@@ -174,8 +176,10 @@ namespace oomph
         }
       }
 
+
     } // End of loop over integration points
   }
+
 
   //======================================================================
   /// Self-test:  Return 0 for OK
@@ -201,6 +205,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// \short Output function:
@@ -250,6 +255,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// C-style output function:
@@ -337,6 +343,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// \short Validate against exact solution
   ///
@@ -414,6 +421,7 @@ namespace oomph
       error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * W;
     }
   }
+
 
   //======================================================================
   // Set the data for the number of Variables at each node

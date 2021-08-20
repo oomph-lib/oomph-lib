@@ -51,19 +51,20 @@ namespace oomph
   /// are taken into account.
   //======================================================================
   template<unsigned DIM>
-  class RefineableAdvectionDiffusionEquations :
-    public virtual AdvectionDiffusionEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableAdvectionDiffusionEquations
+    : public virtual AdvectionDiffusionEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Empty Constructor
-    RefineableAdvectionDiffusionEquations() :
-      AdvectionDiffusionEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableAdvectionDiffusionEquations()
+      : AdvectionDiffusionEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// Broken copy constructor
     RefineableAdvectionDiffusionEquations(
@@ -90,6 +91,7 @@ namespace oomph
     {
       this->get_flux(s, flux);
     }
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
@@ -175,6 +177,7 @@ namespace oomph
          get_interpolated_values(s,values);
        }
        }*/
+
 
     ///  Further build: Copy source function pointer from father element
     void further_build()
@@ -331,6 +334,7 @@ namespace oomph
       }
     }
 
+
   protected:
     /// \short Add the element's contribution to the elemental residual vector
     /// and/or Jacobian matrix
@@ -343,26 +347,28 @@ namespace oomph
       unsigned flag);
   };
 
+
   //======================================================================
   /// \short Refineable version of QAdvectionDiffusionElement.
   /// Inherit from the standard QAdvectionDiffusionElement and the
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQAdvectionDiffusionElement :
-    public QAdvectionDiffusionElement<DIM, NNODE_1D>,
-    public virtual RefineableAdvectionDiffusionEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQAdvectionDiffusionElement
+    : public QAdvectionDiffusionElement<DIM, NNODE_1D>,
+      public virtual RefineableAdvectionDiffusionEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// \short Empty Constructor:
-    RefineableQAdvectionDiffusionElement() :
-      RefineableElement(),
-      RefineableAdvectionDiffusionEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QAdvectionDiffusionElement<DIM, NNODE_1D>()
+    RefineableQAdvectionDiffusionElement()
+      : RefineableElement(),
+        RefineableAdvectionDiffusionEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QAdvectionDiffusionElement<DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQAdvectionDiffusionElement(
@@ -414,6 +420,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the RefineableQuadAdvectionDiffusionElement elements:
   /// The spatial dimension of the face elements is one lower than that of the
@@ -421,8 +428,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<RefineableQAdvectionDiffusionElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<RefineableQAdvectionDiffusionElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

@@ -504,6 +504,7 @@ namespace oomph
       lamb_p[2] = l1 / l;
       lamb[2] = 1 - lamb_p[2];
 
+
       Vector<double> dxids0(3, 0.0);
       Vector<double> dxids1(3, 0.0);
 
@@ -2640,6 +2641,7 @@ namespace oomph
       }
     }
 
+
     //=======================================================================
     /// Shape function for specific TElement<2,2>
     //=======================================================================
@@ -2649,6 +2651,7 @@ namespace oomph
       psi[1] = s[1];
       psi[2] = 1.0 - s[0] - s[1];
     }
+
 
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<2,2>
@@ -2667,6 +2670,7 @@ namespace oomph
       dpsids(2, 0) = -1.0;
       dpsids(2, 1) = -1.0;
     }
+
 
     //=======================================================================
     /// Second derivatives of shape functions for specific TElement<2,2>:
@@ -2842,6 +2846,7 @@ namespace oomph
         }
       }
     }
+
 
     //=======================================================================
     /// Derivatives of Geometric interpolation for specific C1CurvedElement<>
@@ -4936,7 +4941,9 @@ namespace oomph
     ///\short  Constructor: Call constructors for FiniteElement
     BellElementBase() : FiniteElement() {}
 
+
     virtual void basis(const Vector<double>& s, Shape& psi) const {}
+
 
     virtual void dbasis_local(const Vector<double>& s,
                               Shape& psi,
@@ -4953,6 +4960,7 @@ namespace oomph
 
     virtual void basis_c0(const Vector<double>& s, Shape& psi) const {}
 
+
     virtual void dbasis_c0_local(const Vector<double>& s,
                                  Shape& psi,
                                  DShape& dpsids) const
@@ -4968,6 +4976,7 @@ namespace oomph
 
     virtual void test(const Vector<double>& s, Shape& phi) const {}
 
+
     virtual void dtest_local(const Vector<double>& s,
                              Shape& phi,
                              DShape& dphids) const
@@ -4980,6 +4989,7 @@ namespace oomph
                               DShape& d2phids) const
     {
     }
+
 
     //=========================================================================
     /// \short Return the C1-basis function stored at the ipt-th integration
@@ -5483,6 +5493,7 @@ namespace oomph
       const unsigned n_dim_node = nodal_dimension();
       const unsigned n_dim_element = dim();
 
+
       // Set up dummy memory for the shape functions
       Shape psi(n_node, n_position_type);
       DShape dpsids(n_node, n_position_type, n_dim_element);
@@ -5647,19 +5658,18 @@ namespace oomph
   /// Empty, just establishes the template parameters
   /////////////////////////////////////////////////////////////////////
   template<unsigned DIM, unsigned NNODE_1D>
-  class BellElement :
-    public virtual BellElementBase<NNODE_1D>,
-    public virtual TElement<DIM, NNODE_1D>,
-    public virtual BellElementShape<DIM>,
-    public virtual LinearTElement<DIM>
+  class BellElement : public virtual BellElementBase<NNODE_1D>,
+                      public virtual TElement<DIM, NNODE_1D>,
+                      public virtual BellElementShape<DIM>,
+                      public virtual LinearTElement<DIM>
   {
   public:
     ///\short  Constructor: Call constructors for BellElement
-    BellElement() :
-      BellElementBase<NNODE_1D>(),
-      TElement<DIM, NNODE_1D>(),
-      BellElementShape<DIM>(),
-      LinearTElement<DIM>()
+    BellElement()
+      : BellElementBase<NNODE_1D>(),
+        TElement<DIM, NNODE_1D>(),
+        BellElementShape<DIM>(),
+        LinearTElement<DIM>()
     {
       // Set the number of types required to interpolate the coordinate
       this->set_nnodal_position_type(6);
@@ -5833,6 +5843,7 @@ namespace oomph
     }
   };
 
+
   //========================================================================
   /// Empty base class for C1Curvedelements (created so that
   /// we can use dynamic_cast<>() to figure out if a an element
@@ -5867,6 +5878,7 @@ namespace oomph
 
     virtual void basis_straight(const Vector<double>& s, Shape& psi) const {}
 
+
     virtual void dbasis_local_straight(const Vector<double>& s,
                                        Shape& psi,
                                        DShape& dpsids) const
@@ -5885,6 +5897,7 @@ namespace oomph
                             Shape& phi) const
     {
     }
+
 
     virtual void dshape_local_geom(const Vector<double>& s,
                                    Shape& psi,
@@ -5906,6 +5919,7 @@ namespace oomph
 
     virtual void basis_curve(const Vector<double>& s, Shape& psi) const {}
 
+
     virtual void dbasis_local_curve(const Vector<double>& s,
                                     Shape& psi,
                                     DShape& dpsids) const
@@ -5921,6 +5935,7 @@ namespace oomph
 
     virtual void basis_c0(const Vector<double>& s, Shape& psi) const {}
 
+
     virtual void dbasis_c0_local(const Vector<double>& s,
                                  Shape& psi,
                                  DShape& dpsids) const
@@ -5934,7 +5949,9 @@ namespace oomph
     {
     }
 
+
     virtual void test(const Vector<double>& s, Shape& phi) const {}
+
 
     virtual void dtest_local(const Vector<double>& s,
                              Shape& phi,
@@ -5948,6 +5965,7 @@ namespace oomph
                               DShape& d2phids) const
     {
     }
+
 
     //=========================================================================
     /// \short Return the c1-shape function associated with a straight-sided
@@ -7187,12 +7205,12 @@ namespace oomph
   /// C1CurvedElement elements, specialised to two spatial dimensions
   //=======================================================================
   template<unsigned NNODE_1D>
-  class C1CurvedElement<2, NNODE_1D> :
-    public virtual C1CurvedElementBase<NNODE_1D>,
-    public virtual TElement<2, NNODE_1D>,
-    public virtual GeometricTElement<2>,
-    public virtual C1CurvedElementShape<2, NNODE_1D>,
-    public virtual BellElementShape<2>
+  class C1CurvedElement<2, NNODE_1D>
+    : public virtual C1CurvedElementBase<NNODE_1D>,
+      public virtual TElement<2, NNODE_1D>,
+      public virtual GeometricTElement<2>,
+      public virtual C1CurvedElementShape<2, NNODE_1D>,
+      public virtual BellElementShape<2>
   {
   private:
     /// Nodal translation scheme for use when generating face elements
@@ -7200,12 +7218,12 @@ namespace oomph
 
   public:
     ///\short  Constructor: Call constructors for C1CurvedElement
-    C1CurvedElement() :
-      C1CurvedElementBase<NNODE_1D>(),
-      TElement<2, NNODE_1D>(),
-      GeometricTElement<2>(),
-      C1CurvedElementShape<2, NNODE_1D>(),
-      BellElementShape<2>()
+    C1CurvedElement()
+      : C1CurvedElementBase<NNODE_1D>(),
+        TElement<2, NNODE_1D>(),
+        GeometricTElement<2>(),
+        C1CurvedElementShape<2, NNODE_1D>(),
+        BellElementShape<2>()
     {
       // Number of nodes
       switch (NNODE_1D)
@@ -7599,14 +7617,15 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<C1CurvedElement<2, NNODE_1D>> :
-    public virtual TElement<1, NNODE_1D>
+  class FaceGeometry<C1CurvedElement<2, NNODE_1D>>
+    : public virtual TElement<1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : TElement<1, NNODE_1D>() {}
   };
+
 
 } // namespace oomph
 #endif

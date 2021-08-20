@@ -597,6 +597,7 @@ namespace oomph
     fprintf(file_pt, "\n");
   }
 
+
   //==============================================================
   /// Full output function:
   /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
@@ -673,6 +674,7 @@ namespace oomph
         }
       }
 
+
       // Get dudt in ALE form (incl mesh veloc)
       for (unsigned i = 0; i < 2; i++)
       {
@@ -682,6 +684,7 @@ namespace oomph
           dudt_ALE[i] -= mesh_veloc[k] * interpolated_dudx(i, k);
         }
       }
+
 
       // Coordinates
       for (unsigned i = 0; i < 2; i++)
@@ -706,6 +709,7 @@ namespace oomph
 
       // Dissipation
       outfile << dissipation(s) << " ";
+
 
       outfile << std::endl;
     }
@@ -1243,6 +1247,7 @@ namespace oomph
                (pow(interpolated_u[1], 2.) / interpolated_x[0])) *
               testf[l] * interpolated_x[0] * Alpha * W;
 
+
             // CALCULATE THE JACOBIAN
             if (flag)
             {
@@ -1504,6 +1509,7 @@ namespace oomph
              (1. / (interpolated_x[0] * Alpha)) * interpolated_dudx(1, 1)) *
             testp[l] * interpolated_x[0] * Alpha * W;
 
+
           /*CALCULATE THE JACOBIAN*/
           if (flag)
           {
@@ -1539,6 +1545,7 @@ namespace oomph
 
         } // End of if not boundary condition
       } // End of loop over l
+
 
     } // End of loop over integration points
 

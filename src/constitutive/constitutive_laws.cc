@@ -106,6 +106,7 @@ namespace oomph
     }
   }
 
+
   //===========================================================================
   /// The function to calculate the contravariant tensor from a covariant one
   //===========================================================================
@@ -161,6 +162,7 @@ namespace oomph
         Gup(0, 0) = 1.0 / Gdown(0, 0);
         break;
 
+
         // Two dimensions
       case 2:
         // Calculate the determinant
@@ -214,6 +216,7 @@ namespace oomph
     return (det);
   }
 
+
   //===========================================================================
   /// The function to calculate the derivatives of the contravariant tensor
   /// and determinant of covariant tensor with respect to the components of
@@ -259,6 +262,7 @@ namespace oomph
         d_detG_dG(0, 0) = 1.0;
         d_Gup_dG(0, 0, 0, 0) = -1.0 / (Gdown(0, 0) * Gdown(0, 0));
         break;
+
 
         // Two dimensions
       case 2:
@@ -333,6 +337,7 @@ namespace oomph
         break;
     }
   }
+
 
   //=========================================================================
   /// \short Calculate the derivatives of the contravariant
@@ -432,6 +437,7 @@ namespace oomph
     }
   }
 
+
   //=========================================================================
   /// \short Calculate the derivatives of the contravariant
   /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
@@ -503,6 +509,7 @@ namespace oomph
         this->calculate_second_piola_kirchhoff_stress(
           g, G_pls, sigma_dev_pls, Gup_pls, detG_pls);
 
+
         // Derivative of determinant of deformed metric tensor
         d_detG_dG(i, j) = (detG_pls - detG) / eps_fd;
 
@@ -545,6 +552,7 @@ namespace oomph
       }
     }
   }
+
 
   //========================================================================
   /// \short Calculate the derivatives of the contravariant
@@ -659,9 +667,11 @@ namespace oomph
     }
   }
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
+
 
   //=====================================================================
   /// \short Calculate the contravariant 2nd Piola Kirchhoff
@@ -869,9 +879,11 @@ namespace oomph
     }
   }
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Calculate the contravariant 2nd Piola Kirchhoff
@@ -945,6 +957,7 @@ namespace oomph
     Vector<double> dWdI(3, 0.0);
     Strain_energy_function_pt->derivatives(I, dWdI);
 
+
     // Only bother to compute the tensor B^{ij} (Green & Zerna notation)
     // if the derivative wrt the second strain invariant is non-zero
     DenseMatrix<double> Bup(dim, dim, 0.0);
@@ -1007,6 +1020,7 @@ namespace oomph
 
     // Find the dimension of the problem
     unsigned dim = g.nrow();
+
 
 #ifdef PARANOID
     if (dim == 1)

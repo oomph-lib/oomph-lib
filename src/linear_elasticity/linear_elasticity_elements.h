@@ -34,6 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 #include "generic/mesh.h"
@@ -150,6 +151,7 @@ namespace oomph
       return (interpolated_u);
     }
 
+
     /// \short Function pointer to function that specifies the body force
     /// as a function of the Cartesian coordinates and time FCT(t,x,b) --
     /// x and b are  Vectors!
@@ -160,11 +162,11 @@ namespace oomph
     /// \short Constructor: Set null pointers for constitutive law and for
     /// isotropic growth function. Set physical parameter values to
     /// default values, switch on inertia and set body force to zero.
-    LinearElasticityEquationsBase() :
-      Elasticity_tensor_pt(0),
-      Lambda_sq_pt(&Default_lambda_sq_value),
-      Unsteady(true),
-      Body_force_fct_pt(0)
+    LinearElasticityEquationsBase()
+      : Elasticity_tensor_pt(0),
+        Lambda_sq_pt(&Default_lambda_sq_value),
+        Unsteady(true),
+        Body_force_fct_pt(0)
     {
     }
 
@@ -206,6 +208,7 @@ namespace oomph
     {
       return Body_force_fct_pt;
     }
+
 
     /// Switch on solid inertia
     void enable_inertia()
@@ -289,6 +292,7 @@ namespace oomph
       }
     }
 
+
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: for now lump them all into one DOF type.
     /// Can be adjusted later
@@ -342,6 +346,7 @@ namespace oomph
       }
     }
 
+
   protected:
     /// Pointer to the elasticity tensor
     ElasticityTensor* Elasticity_tensor_pt;
@@ -359,17 +364,19 @@ namespace oomph
     static double Default_lambda_sq_value;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// A class for elements that solve the equations of linear elasticity
   /// in cartesian coordinates.
   //=======================================================================
   template<unsigned DIM>
-  class LinearElasticityEquations :
-    public virtual LinearElasticityEquationsBase<DIM>
+  class LinearElasticityEquations
+    : public virtual LinearElasticityEquationsBase<DIM>
   {
   public:
     /// \short  Constructor
@@ -404,6 +411,7 @@ namespace oomph
     /// from the elasticity tensor at specified local coordinate
     void get_stress(const Vector<double>& s, DenseMatrix<double>& sigma) const;
 
+
     /// Output exact solution x,y,[z],u,v,[w]
     void output_fct(std::ostream& outfile,
                     const unsigned& nplot,
@@ -424,6 +432,7 @@ namespace oomph
 
     /// Output: x,y,[z],u,v,[w]
     void output(std::ostream& outfile, const unsigned& n_plot);
+
 
     /// C-style output: x,y,[z],u,v,[w]
     void output(FILE* file_pt)
@@ -462,23 +471,24 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// An Element that solves the equations of linear elasticity
   /// in Cartesian coordinates, using QElements for the geometry
   //============================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class QLinearElasticityElement :
-    public virtual QElement<DIM, NNODE_1D>,
-    public virtual LinearElasticityEquations<DIM>
+  class QLinearElasticityElement : public virtual QElement<DIM, NNODE_1D>,
+                                   public virtual LinearElasticityEquations<DIM>
   {
   public:
     /// Constructor
-    QLinearElasticityElement() :
-      QElement<DIM, NNODE_1D>(), LinearElasticityEquations<DIM>()
+    QLinearElasticityElement()
+      : QElement<DIM, NNODE_1D>(), LinearElasticityEquations<DIM>()
     {
     }
 
@@ -502,6 +512,7 @@ namespace oomph
       LinearElasticityEquations<DIM>::output(outfile, n_plot);
     }
 
+
     /// C-style output function
     void output(FILE* file_pt)
     {
@@ -515,48 +526,52 @@ namespace oomph
     }
   };
 
+
   //============================================================================
   /// FaceGeometry of a linear 2D QLinearElasticityElement element
   //============================================================================
   template<>
-  class FaceGeometry<QLinearElasticityElement<2, 2>> :
-    public virtual QElement<1, 2>
+  class FaceGeometry<QLinearElasticityElement<2, 2>>
+    : public virtual QElement<1, 2>
   {
   public:
     /// Constructor must call the constructor of the underlying solid element
     FaceGeometry() : QElement<1, 2>() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a quadratic 2D QLinearElasticityElement element
   //============================================================================
   template<>
-  class FaceGeometry<QLinearElasticityElement<2, 3>> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<QLinearElasticityElement<2, 3>>
+    : public virtual QElement<1, 3>
   {
   public:
     /// Constructor must call the constructor of the underlying element
     FaceGeometry() : QElement<1, 3>() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a cubic 2D QLinearElasticityElement element
   //============================================================================
   template<>
-  class FaceGeometry<QLinearElasticityElement<2, 4>> :
-    public virtual QElement<1, 4>
+  class FaceGeometry<QLinearElasticityElement<2, 4>>
+    : public virtual QElement<1, 4>
   {
   public:
     /// Constructor must call the constructor of the underlying element
     FaceGeometry() : QElement<1, 4>() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a linear 3D QLinearElasticityElement element
   //============================================================================
   template<>
-  class FaceGeometry<QLinearElasticityElement<3, 2>> :
-    public virtual QElement<2, 2>
+  class FaceGeometry<QLinearElasticityElement<3, 2>>
+    : public virtual QElement<2, 2>
   {
   public:
     /// Constructor must call the constructor of the underlying element
@@ -567,20 +582,21 @@ namespace oomph
   /// FaceGeometry of a quadratic 3D QLinearElasticityElement element
   //============================================================================
   template<>
-  class FaceGeometry<QLinearElasticityElement<3, 3>> :
-    public virtual QElement<2, 3>
+  class FaceGeometry<QLinearElasticityElement<3, 3>>
+    : public virtual QElement<2, 3>
   {
   public:
     /// Constructor must call the constructor of the underlying element
     FaceGeometry() : QElement<2, 3>() {}
   };
 
+
   //============================================================================
   /// FaceGeometry of a cubic 3D QLinearElasticityElement element
   //============================================================================
   template<>
-  class FaceGeometry<QLinearElasticityElement<3, 4>> :
-    public virtual QElement<2, 4>
+  class FaceGeometry<QLinearElasticityElement<3, 4>>
+    : public virtual QElement<2, 4>
   {
   public:
     /// Constructor must call the constructor of the underlying element
@@ -591,17 +607,19 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
+
   //==========================================================
   /// Linear elasticity upgraded to become projectable
   //==========================================================
   template<class LINEAR_ELAST_ELEMENT>
-  class ProjectableLinearElasticityElement :
-    public virtual ProjectableElement<LINEAR_ELAST_ELEMENT>
+  class ProjectableLinearElasticityElement
+    : public virtual ProjectableElement<LINEAR_ELAST_ELEMENT>
   {
   public:
     /// \short Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableLinearElasticityElement() {}
+
 
     /// \short Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
@@ -671,6 +689,7 @@ namespace oomph
       return this->dshape_eulerian(s, psi, dpsidx);
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -718,11 +737,13 @@ namespace oomph
       return interpolated_u;
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
       return this->nnode();
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -750,30 +771,32 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableLinearElasticityElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableLinearElasticityElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
   /// that for the underlying wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<
-    FaceGeometry<ProjectableLinearElasticityElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  class FaceGeometry<FaceGeometry<ProjectableLinearElasticityElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
+
 
 } // namespace oomph
 

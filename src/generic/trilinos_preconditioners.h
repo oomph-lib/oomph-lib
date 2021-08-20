@@ -92,6 +92,7 @@ namespace oomph
       BrokenCopy::broken_copy("TrilinosPreconditionerBase");
     }
 
+
     /// Broken assignment operator.
     // Commented out broken assignment operator because this can lead to a
     // conflict warning when used in the virtual inheritence hierarchy.
@@ -148,6 +149,7 @@ namespace oomph
     Epetra_CrsMatrix* Epetra_matrix_pt;
   };
 
+
   //============================================================================
   /// \short An interface to the Trilinos ML class - provides a function
   /// to construct a serial ML object, and functions to modify some
@@ -190,12 +192,14 @@ namespace oomph
       ML_Epetra::SetDefaults("NSSA", ML_parameters);
     }
 
+
     /// \short Set control flags to values for classical smoothed aggregation-
     /// based 2-level domain decomposition
     void set_DD_default_values()
     {
       ML_Epetra::SetDefaults("DD", ML_parameters);
     }
+
 
     /// \short Set control flags to values 3-level algebraic domain
     /// decomposition
@@ -253,6 +257,7 @@ namespace oomph
       ML_parameters.set("output", output);
     }
 
+
     /// \short Default number of V cycles (one to be consistent with
     /// previous default) (It's an int because Trilinos wants it to be!)
     static int Default_n_cycles;
@@ -265,6 +270,7 @@ namespace oomph
     // Parameter list of control flags for the preconditioner
     Teuchos::ParameterList ML_parameters;
   };
+
 
   //============================================================================
   /// \short An interface to the Trilinos IFPACK class- provides a function
@@ -294,6 +300,7 @@ namespace oomph
     {
       BrokenCopy::broken_copy("TrilinosIFPACKPreconditioner");
     }
+
 
     /// Broken assignment operator.
     /*void operator=(const TrilinosIFPACKPreconditioner&)
@@ -343,7 +350,7 @@ namespace oomph
     void setup_trilinos_preconditioner(Epetra_CrsMatrix* epetra_matrix_pt);
 
     /// Type of ILU preconditioner
-    std::string Preconditioner_type;
+    string Preconditioner_type;
 
     /// Level of fill for "ILU"
     int ILU_fill_level;

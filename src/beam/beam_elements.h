@@ -180,6 +180,7 @@ namespace oomph
       Wall_profile_fct_pt = &Unit_profile_fct;
     }
 
+
     /// Reference to the load vector function pointer
     void (*&load_vector_fct_pt())(const Vector<double>& xi,
                                   const Vector<double>& x,
@@ -188,6 +189,7 @@ namespace oomph
     {
       return Load_vector_fct_pt;
     }
+
 
     /// \short Get the load vector: Pass number of integration point (dummy),
     /// Lagr. and Eulerian coordinate and normal vector and return the load
@@ -211,6 +213,7 @@ namespace oomph
       return Wall_profile_fct_pt;
     }
 
+
     /// \short Get the wall profile: Pass Lagrangian & Eulerian coordinate
     /// and return the wall profile (not all of the input arguments will be
     /// required for all specific thickness functions but the list should cover
@@ -221,6 +224,7 @@ namespace oomph
     {
       Wall_profile_fct_pt(xi, x, h_ratio);
     }
+
 
     /// Return the non-dimensional wall thickness
     // i.e. the reference value 'h_0'
@@ -274,6 +278,7 @@ namespace oomph
       get_normal(s, r, N);
     }
 
+
     /// Get position vector to and normal vector on wall
     void get_normal(const Vector<double>& s,
                     Vector<double>& r,
@@ -294,11 +299,13 @@ namespace oomph
       fill_in_contribution_to_residuals_beam(residuals);
     }
 
+
     /// \short Return the residuals for the equations of Kirchhoff-Love beam
     /// theory with linear constitutive equations; if  Solid_ic_pt!=0, we
     /// assign residuals which force the assignement of an initial shape/
     /// veloc/accel to the dofs.
     void fill_in_contribution_to_residuals_beam(Vector<double>& residuals);
+
 
     /// Get FE jacobian and residuals (Jacobian done by finite differences)
     virtual void fill_in_contribution_to_jacobian(
@@ -312,18 +319,18 @@ namespace oomph
     void get_energy(double& stretch, double& bend, double& kin_en);
   };
 
+
   //=========================================================================
   /// \short Hermite Kirchhoff Love beam. Implements KirchhoffLoveBeamEquations
   /// using 2-node Hermite elements as the underlying geometrical elements.
   //=========================================================================
-  class HermiteBeamElement :
-    public virtual SolidQHermiteElement<1>,
-    public KirchhoffLoveBeamEquations
+  class HermiteBeamElement : public virtual SolidQHermiteElement<1>,
+                             public KirchhoffLoveBeamEquations
   {
   public:
     /// Constructor (empty)
-    HermiteBeamElement() :
-      SolidQHermiteElement<1>(), KirchhoffLoveBeamEquations()
+    HermiteBeamElement()
+      : SolidQHermiteElement<1>(), KirchhoffLoveBeamEquations()
     {
       // Set the number of dimensions at each node (2D node on 1D surface)
       set_nodal_dimension(2);
@@ -356,9 +363,8 @@ namespace oomph
   /// Hermite Kirchhoff Love beam "upgraded" to a FSIWallElement (and thus,
   /// by inheritance, a GeomObject), so it can be used in FSI.
   //=========================================================================
-  class FSIHermiteBeamElement :
-    public virtual HermiteBeamElement,
-    public virtual FSIWallElement
+  class FSIHermiteBeamElement : public virtual HermiteBeamElement,
+                                public virtual FSIWallElement
   {
   private:
     // Boolean flag to indicate whether the normal is directed into the fluid
@@ -371,8 +377,8 @@ namespace oomph
     /// points into the fluid. If this is not the case, overwrite this
     /// with the access function
     /// FSIHermiteBeamElement::set_normal_pointing_out_of_fluid()
-    FSIHermiteBeamElement() :
-      HermiteBeamElement(), Normal_points_into_fluid(true)
+    FSIHermiteBeamElement()
+      : HermiteBeamElement(), Normal_points_into_fluid(true)
     {
       unsigned n_lagr = 1;
       unsigned n_dim = 2;
@@ -395,6 +401,7 @@ namespace oomph
     {
       Normal_points_into_fluid = false;
     }
+
 
     /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
     /// Lagrangian coordinates; evaluated at current time.
@@ -465,6 +472,7 @@ namespace oomph
                      Vector<double>& s,
                      const bool& use_coordinate_as_initial_guess = false);
 
+
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Just the solid degrees of freedom themselves.
     unsigned ndof_types() const
@@ -482,9 +490,11 @@ namespace oomph
       std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the HermiteBeam elements: Solid point element
@@ -498,9 +508,11 @@ namespace oomph
     FaceGeometry() {}
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Element that allows the imposition of boundary
@@ -510,9 +522,9 @@ namespace oomph
   /// of the beam is forced to stay on that line and meet
   /// it at a right angle. This is achieved with Lagrange multipliers.
   //======================================================================
-  class ClampedSlidingHermiteBeamBoundaryConditionElement :
-    public virtual FaceGeometry<HermiteBeamElement>,
-    public virtual SolidFaceElement
+  class ClampedSlidingHermiteBeamBoundaryConditionElement
+    : public virtual FaceGeometry<HermiteBeamElement>,
+      public virtual SolidFaceElement
   {
   public:
     /// \short Constructor, takes the pointer to the "bulk" element, the
@@ -531,6 +543,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
+
 
     /// Broken copy constructor
     ClampedSlidingHermiteBeamBoundaryConditionElement(
@@ -552,6 +565,7 @@ namespace oomph
        "ClampedSlidingHermiteBeamBoundaryConditionElement");
        }*/
 
+
     /// \short Set vectors to some point on the symmetry line, and
     /// normal to that line along which the end of the beam is sliding.
     void set_symmetry_line(const Vector<double>& vector_to_symmetry_line,
@@ -563,8 +577,10 @@ namespace oomph
       Normal_to_symmetry_line[1] = normal_to_symmetry_line[1];
     }
 
+
     /// Fill in the element's contribution to its residual vector
     void fill_in_contribution_to_residuals(Vector<double>& residuals);
+
 
     /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
@@ -604,6 +620,7 @@ namespace oomph
     /// end of the beam is sliding
     Vector<double> Normal_to_symmetry_line;
   };
+
 
 } // namespace oomph
 

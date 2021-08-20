@@ -38,8 +38,8 @@ namespace oomph
   /// flux dofs
   //==========================================================================
   template<>
-  TAxisymmetricPoroelasticityElement<0>::TAxisymmetricPoroelasticityElement() :
-    TElement<2, 3>(), AxisymmetricPoroelasticityEquations(), Sign_edge(3, 1)
+  TAxisymmetricPoroelasticityElement<0>::TAxisymmetricPoroelasticityElement()
+    : TElement<2, 3>(), AxisymmetricPoroelasticityEquations(), Sign_edge(3, 1)
   {
     P_internal_data_index = this->add_internal_data(new Data(1));
   }
@@ -141,6 +141,7 @@ namespace oomph
   const unsigned TAxisymmetricPoroelasticityElement<0>::Initial_Nvalue[6] = {
     2, 2, 2, 3, 3, 3};
 
+
   //===========================================================================
   ///  Face index associated with edge flux degree of freedom
   //===========================================================================
@@ -157,12 +158,14 @@ namespace oomph
   const unsigned TAxisymmetricPoroelasticityElement<0>::Q_edge_conv[3] = {
     3, 4, 5};
 
+
   //==========================================================================
   /// The points along each edge where the fluxes are taken to be
   //==========================================================================
   template<>
   const double
     TAxisymmetricPoroelasticityElement<0>::Flux_interpolation_point[1] = {0.5};
+
 
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -175,8 +178,8 @@ namespace oomph
   /// velocity dofs
   //==========================================================================
   template<>
-  TAxisymmetricPoroelasticityElement<1>::TAxisymmetricPoroelasticityElement() :
-    TElement<2, 3>(), AxisymmetricPoroelasticityEquations(), Sign_edge(3, 1)
+  TAxisymmetricPoroelasticityElement<1>::TAxisymmetricPoroelasticityElement()
+    : TElement<2, 3>(), AxisymmetricPoroelasticityEquations(), Sign_edge(3, 1)
   {
     // RT_1 elements have 2 internal degrees of freedom for u, and 3 for p
     Q_internal_data_index = this->add_internal_data(new Data(2));
@@ -339,6 +342,7 @@ namespace oomph
   const unsigned TAxisymmetricPoroelasticityElement<1>::Initial_Nvalue[6] = {
     2, 2, 2, 4, 4, 4};
 
+
   //===========================================================================
   ///  Face index associated with edge flux degree of freedom
   //===========================================================================
@@ -346,6 +350,7 @@ namespace oomph
   const unsigned
     TAxisymmetricPoroelasticityElement<1>::Face_index_of_edge_flux[3] = {
       2, 0, 1};
+
 
   //==========================================================================
   /// Conversion scheme from an edge degree of freedom to the node it's stored
@@ -362,6 +367,7 @@ namespace oomph
   const double
     TAxisymmetricPoroelasticityElement<1>::Flux_interpolation_point[2] = {
       0.5 - std::sqrt(3.0) / 6.0, 0.5 + std::sqrt(3.0) / 6.0};
+
 
   //==========================================================================
   // Force building of templates

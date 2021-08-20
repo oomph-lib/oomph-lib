@@ -129,11 +129,11 @@ namespace oomph
 
   public:
     /// Constructor
-    FluidInterfaceBoundingElement() :
-      Wall_unit_normal_fct_pt(0),
-      Contact_angle_pt(0),
-      Ca_pt(0),
-      Contact_angle_flag(0)
+    FluidInterfaceBoundingElement()
+      : Wall_unit_normal_fct_pt(0),
+        Contact_angle_pt(0),
+        Ca_pt(0),
+        Contact_angle_flag(0)
     {
     }
 
@@ -193,6 +193,7 @@ namespace oomph
 #endif
     }
 
+
     /// Return value of the contact angle
     double& contact_angle()
     {
@@ -222,6 +223,7 @@ namespace oomph
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
       unsigned flag) = 0;
+
 
     /// \short Empty helper function to calculate the additional contributions
     /// arising from the node update strategy to the Jacobian within the
@@ -266,11 +268,12 @@ namespace oomph
     }
   };
 
+
   //==========================================================================
   /// Specialisation of the interface boundary constraint to a point
   //==========================================================================
-  class PointFluidInterfaceBoundingElement :
-    public FluidInterfaceBoundingElement
+  class PointFluidInterfaceBoundingElement
+    : public FluidInterfaceBoundingElement
   {
   protected:
     /// \short Overload the helper function to calculate the residuals and
@@ -285,6 +288,7 @@ namespace oomph
     /// Constructor
     PointFluidInterfaceBoundingElement() : FluidInterfaceBoundingElement() {}
   };
+
 
   //==========================================================================
   /// Specialisation of the interface boundary constraint to a line
@@ -304,6 +308,7 @@ namespace oomph
     /// Constructor
     LineFluidInterfaceBoundingElement() : FluidInterfaceBoundingElement() {}
   };
+
 
   //=======================================================================
   /// Base class establishing common interfaces and functions for all
@@ -326,6 +331,7 @@ namespace oomph
 
     /// Default value for physical constants
     static double Default_Physical_Constant_Value;
+
 
   protected:
     /// Nodal index at which the i-th velocity component is stored.
@@ -461,6 +467,7 @@ namespace oomph
       fill_in_generic_residual_contribution_interface(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
+
 
     /// The value of the Capillary number
     const double& ca() const
@@ -604,6 +611,7 @@ namespace oomph
       External_data_number_of_external_pressure = this->nexternal_data() - 1;
     }
 
+
     /// \short Create a bounding element e.g. to apply a contact angle boundary
     /// condition
     virtual FluidInterfaceBoundingElement* make_bounding_element(
@@ -614,6 +622,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
       return 0;
     }
+
 
     /// \short Hijack the kinematic condition at the node numbers passed in
     /// the vector. The node numbers correspond to the local numbers of
@@ -642,6 +651,7 @@ namespace oomph
     void output(FILE* file_pt, const unsigned& n_plot);
   };
 
+
   //=============================================================
   /// Class that establishes the surface derivative functions for
   /// LineElements. These are defined in a separate class so that
@@ -663,6 +673,7 @@ namespace oomph
       DShape& surface_gradient,
       DShape& surface_divergence);
   };
+
 
   //=============================================================
   /// Class that establishes the surface derivative functions for
@@ -687,6 +698,7 @@ namespace oomph
       DShape& surface_divergence);
   };
 
+
   //=============================================================
   /// Class that establishes the surface derivative functions for
   /// SurfaceInterfaceElements (2D surfaces in 3D space)
@@ -709,6 +721,7 @@ namespace oomph
       DShape& surface_gradient,
       DShape& surface_divergence);
   };
+
 
 } // namespace oomph
 

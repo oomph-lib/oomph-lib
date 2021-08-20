@@ -98,6 +98,7 @@ namespace oomph
       }
     }
 
+
     /// \short Fill in the residuals for the volume constraint
     void fill_in_generic_contribution_to_residuals_volume_constraint(
       Vector<double>& residuals);
@@ -146,6 +147,7 @@ namespace oomph
       return Index_of_traded_pressure_value;
     }
 
+
     /// \short Fill in the residuals for the volume constraint
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -179,6 +181,7 @@ namespace oomph
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Base class for interface elements that allow the application of
@@ -311,6 +314,7 @@ namespace oomph
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// One-dimensional interface elements that allow the application of
   /// a volume constraint on the region bounded by these elements.
@@ -323,8 +327,8 @@ namespace oomph
   /// VolumeConstraintElement, which stores the value of the
   /// target volume.
   //=======================================================================
-  class LineVolumeConstraintBoundingElement :
-    public VolumeConstraintBoundingElement
+  class LineVolumeConstraintBoundingElement
+    : public VolumeConstraintBoundingElement
   {
   protected:
     /// \short Helper function to fill in contributions to residuals
@@ -345,9 +349,11 @@ namespace oomph
     double contribution_to_enclosed_volume();
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// The one-dimensional interface elements that allow imposition of a
@@ -360,16 +366,16 @@ namespace oomph
   /// constraint.
   //=======================================================================
   template<class ELEMENT>
-  class ElasticLineVolumeConstraintBoundingElement :
-    public LineVolumeConstraintBoundingElement,
-    public virtual FaceGeometry<ELEMENT>
+  class ElasticLineVolumeConstraintBoundingElement
+    : public LineVolumeConstraintBoundingElement,
+      public virtual FaceGeometry<ELEMENT>
   {
   public:
     /// \short Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached
     ElasticLineVolumeConstraintBoundingElement(FiniteElement* const& element_pt,
-                                               const int& face_index) :
-      FaceGeometry<ELEMENT>(), LineVolumeConstraintBoundingElement()
+                                               const int& face_index)
+      : FaceGeometry<ELEMENT>(), LineVolumeConstraintBoundingElement()
     {
       // Attach the geometrical information to the element, by
       // making the face element from the bulk element
@@ -412,22 +418,23 @@ namespace oomph
   /// constraint.
   //=======================================================================
   template<class ELEMENT>
-  class SpineLineVolumeConstraintBoundingElement :
-    public LineVolumeConstraintBoundingElement,
-    public virtual SpineElement<FaceGeometry<ELEMENT>>
+  class SpineLineVolumeConstraintBoundingElement
+    : public LineVolumeConstraintBoundingElement,
+      public virtual SpineElement<FaceGeometry<ELEMENT>>
   {
   public:
     /// \short Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached.
     SpineLineVolumeConstraintBoundingElement(FiniteElement* const& element_pt,
-                                             const int& face_index) :
-      SpineElement<FaceGeometry<ELEMENT>>(),
-      LineVolumeConstraintBoundingElement()
+                                             const int& face_index)
+      : SpineElement<FaceGeometry<ELEMENT>>(),
+        LineVolumeConstraintBoundingElement()
     {
       // Attach the geometrical information to the element, by
       // making the face element from the bulk element
       element_pt->build_face_element(face_index, this);
     }
+
 
     /// Fill in contribution to residuals and Jacobian. This is specific
     /// to spine based elements in which the shape derivatives are evaluated
@@ -457,6 +464,7 @@ namespace oomph
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Axisymmetric (one-dimensional) interface elements that
   /// allow the application of
@@ -470,8 +478,8 @@ namespace oomph
   /// VolumeConstraintElement, which stores the value of the
   /// target volume.
   //=======================================================================
-  class AxisymmetricVolumeConstraintBoundingElement :
-    public VolumeConstraintBoundingElement
+  class AxisymmetricVolumeConstraintBoundingElement
+    : public VolumeConstraintBoundingElement
   {
   protected:
     /// \short Helper function to fill in contributions to residuals
@@ -483,8 +491,8 @@ namespace oomph
 
   public:
     /// \short Empty Contructor
-    AxisymmetricVolumeConstraintBoundingElement() :
-      VolumeConstraintBoundingElement()
+    AxisymmetricVolumeConstraintBoundingElement()
+      : VolumeConstraintBoundingElement()
     {
     }
 
@@ -578,6 +586,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// The axisymmetric (one-dimensional) interface elements that allow
   /// imposition of a
@@ -590,16 +599,16 @@ namespace oomph
   /// and then specify the "pressure" value that is traded for the constraint.
   //=======================================================================
   template<class ELEMENT>
-  class ElasticAxisymmetricVolumeConstraintBoundingElement :
-    public AxisymmetricVolumeConstraintBoundingElement,
-    public virtual FaceGeometry<ELEMENT>
+  class ElasticAxisymmetricVolumeConstraintBoundingElement
+    : public AxisymmetricVolumeConstraintBoundingElement,
+      public virtual FaceGeometry<ELEMENT>
   {
   public:
     /// \short Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached
     ElasticAxisymmetricVolumeConstraintBoundingElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      FaceGeometry<ELEMENT>(), AxisymmetricVolumeConstraintBoundingElement()
+      FiniteElement* const& element_pt, const int& face_index)
+      : FaceGeometry<ELEMENT>(), AxisymmetricVolumeConstraintBoundingElement()
     {
       // Attach the geometrical information to the element, by
       // making the face element from the bulk element
@@ -643,22 +652,23 @@ namespace oomph
   /// and then specify the "pressure" value that is traded for the constraint.
   //=======================================================================
   template<class ELEMENT>
-  class SpineAxisymmetricVolumeConstraintBoundingElement :
-    public AxisymmetricVolumeConstraintBoundingElement,
-    public virtual SpineElement<FaceGeometry<ELEMENT>>
+  class SpineAxisymmetricVolumeConstraintBoundingElement
+    : public AxisymmetricVolumeConstraintBoundingElement,
+      public virtual SpineElement<FaceGeometry<ELEMENT>>
   {
   public:
     /// \short Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached.
     SpineAxisymmetricVolumeConstraintBoundingElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      SpineElement<FaceGeometry<ELEMENT>>(),
-      AxisymmetricVolumeConstraintBoundingElement()
+      FiniteElement* const& element_pt, const int& face_index)
+      : SpineElement<FaceGeometry<ELEMENT>>(),
+        AxisymmetricVolumeConstraintBoundingElement()
     {
       // Attach the geometrical information to the element, by
       // making the face element from the bulk element
       element_pt->build_face_element(face_index, this);
     }
+
 
     /// Fill in contribution to residuals and Jacobian. This is specific
     /// to spine based elements in which the shape derivatives are evaluated
@@ -684,9 +694,11 @@ namespace oomph
     }
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Two-dimensional interface elements that allow the application of
@@ -700,8 +712,8 @@ namespace oomph
   /// VolumeConstraintElement, which stores the value of the
   /// target volume.
   //=======================================================================
-  class SurfaceVolumeConstraintBoundingElement :
-    public VolumeConstraintBoundingElement
+  class SurfaceVolumeConstraintBoundingElement
+    : public VolumeConstraintBoundingElement
   {
   protected:
     /// \short Helper function to fill in contributions to residuals
@@ -721,9 +733,11 @@ namespace oomph
     ~SurfaceVolumeConstraintBoundingElement() {}
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// The Two-dimensional interface elements that allow the application of
@@ -736,21 +750,22 @@ namespace oomph
   /// constraint.
   //=======================================================================
   template<class ELEMENT>
-  class ElasticSurfaceVolumeConstraintBoundingElement :
-    public SurfaceVolumeConstraintBoundingElement,
-    public virtual FaceGeometry<ELEMENT>
+  class ElasticSurfaceVolumeConstraintBoundingElement
+    : public SurfaceVolumeConstraintBoundingElement,
+      public virtual FaceGeometry<ELEMENT>
   {
   public:
     /// \short Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached.
     ElasticSurfaceVolumeConstraintBoundingElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      FaceGeometry<ELEMENT>(), SurfaceVolumeConstraintBoundingElement()
+      FiniteElement* const& element_pt, const int& face_index)
+      : FaceGeometry<ELEMENT>(), SurfaceVolumeConstraintBoundingElement()
     {
       // Attach the geometrical information to the element, by
       // making the face element from the bulk element
       element_pt->build_face_element(face_index, this);
     }
+
 
     /// Fill in contribution to residuals and Jacobian. This is specific
     /// to solid-based elements in which derivatives w.r.t. to nodal
@@ -766,6 +781,7 @@ namespace oomph
       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
     }
 
+
     /// \short The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
@@ -777,9 +793,11 @@ namespace oomph
     }
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// The Two-dimensional interface elements that allow the application of
@@ -792,22 +810,23 @@ namespace oomph
   /// constraint.
   //=======================================================================
   template<class ELEMENT>
-  class SpineSurfaceVolumeConstraintBoundingElement :
-    public SurfaceVolumeConstraintBoundingElement,
-    public virtual SpineElement<FaceGeometry<ELEMENT>>
+  class SpineSurfaceVolumeConstraintBoundingElement
+    : public SurfaceVolumeConstraintBoundingElement,
+      public virtual SpineElement<FaceGeometry<ELEMENT>>
   {
   public:
     /// \short Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached.
     SpineSurfaceVolumeConstraintBoundingElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      SpineElement<FaceGeometry<ELEMENT>>(),
-      SurfaceVolumeConstraintBoundingElement()
+      FiniteElement* const& element_pt, const int& face_index)
+      : SpineElement<FaceGeometry<ELEMENT>>(),
+        SurfaceVolumeConstraintBoundingElement()
     {
       // Attach the geometrical information to the element, by
       // making the face element from the bulk element
       element_pt->build_face_element(face_index, this);
     }
+
 
     /// Fill in contribution to residuals and Jacobian. This is specific
     /// to spine based elements in which the shape derivatives are evaluated
@@ -822,6 +841,7 @@ namespace oomph
       this->fill_in_jacobian_from_geometric_data(jacobian);
     }
 
+
     /// \short The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
@@ -832,6 +852,7 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
   };
+
 
 } // namespace oomph
 #endif

@@ -51,6 +51,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   //====================================================================
   /// Helper namespace for generation of brick from tet mesh
   //====================================================================
@@ -61,9 +62,11 @@ namespace oomph
 
   } // namespace BrickFromTetMeshHelper
 
+
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Dummy QElement to interpolate local coordinates -- used in
@@ -92,12 +95,14 @@ namespace oomph
       BrokenCopy::broken_assign("DummyBrickElement");
       }*/
 
+
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return 3;
     }
+
 
     /// \short Compute vector of FE interpolated local coordinate in tet,
     /// s_tet, evaluated at local coordinate s in current element.
@@ -171,6 +176,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
+
   //================================================================
   /// Base class for brick meshes (meshes made of 3D brick elements).
   //================================================================
@@ -179,6 +185,7 @@ namespace oomph
   public:
     /// Constructor (empty)
     BrickMeshBase() {}
+
 
     /// Broken copy constructor
     BrickMeshBase(const BrickMeshBase&)

@@ -32,12 +32,14 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/shape.h"
 #include "generic/elements.h"
 #include "generic/element_with_external_element.h"
 
 #include "axisym_poroelasticity_elements.h"
+
 
 namespace oomph
 {
@@ -54,6 +56,7 @@ namespace oomph
     double Default_inverse_slip_rate_coefficient = 0.0;
   } // namespace LinearisedAxisymPoroelasticBJS_FSIHelper
 
+
   //======================================================================
   /// \short A class for elements that allow the imposition of the linearised
   /// poroelastic FSI
@@ -62,10 +65,10 @@ namespace oomph
   /// from the FaceGeometry<ELEMENT> policy class.
   //======================================================================
   template<class FLUID_BULK_ELEMENT, class POROELASTICITY_BULK_ELEMENT>
-  class LinearisedAxisymPoroelasticBJS_FSIElement :
-    public virtual FaceGeometry<FLUID_BULK_ELEMENT>,
-    public virtual FaceElement,
-    public virtual ElementWithExternalElement
+  class LinearisedAxisymPoroelasticBJS_FSIElement
+    : public virtual FaceGeometry<FLUID_BULK_ELEMENT>,
+      public virtual FaceElement,
+      public virtual ElementWithExternalElement
   {
   public:
     /// \short Constructor, takes the pointer to the "bulk" element and the
@@ -112,11 +115,13 @@ namespace oomph
       return *Inverse_slip_rate_coeff_pt;
     }
 
+
     /// Pointer to inverse slip rate coefficient
     double*& inverse_slip_rate_coefficient_pt()
     {
       return Inverse_slip_rate_coeff_pt;
     }
+
 
     /// Add the element's contribution to its residual vector
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -126,6 +131,7 @@ namespace oomph
       fill_in_generic_residual_contribution_axisym_poroelastic_fsi(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
+
 
     // hieher need to add derivs w.r.t external data (the
     // bulk velocity dofs
@@ -144,6 +150,7 @@ namespace oomph
     /*   fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
      */
     /*  } */
+
 
     /// \short Return this element's contribution to the total volume enclosed
     /// by collection of these elements
@@ -216,6 +223,7 @@ namespace oomph
 
       return vol;
     }
+
 
     /// Output function
     void output(std::ostream& outfile)
@@ -363,6 +371,7 @@ namespace oomph
             total_poro_tangential_component * interpolated_tangent[i];
         }
 
+
         // Call the derivatives of the shape function at the knot point
         this->dshape_local_at_knot(ipt, psi, dpsids);
 
@@ -381,6 +390,7 @@ namespace oomph
         double J = sqrt(1.0 + (interpolated_t1[0] * interpolated_t1[0]) /
                                 (interpolated_t1[1] * interpolated_t1[1])) *
                    x[0];
+
 
         // Default geometry; evaluate everything in deformed (Nst) config.
         double lagrangian_eulerian_translation_factor = 1.0;
@@ -403,6 +413,7 @@ namespace oomph
           lagrangian_eulerian_translation_factor =
             ext_face_el_pt->lagrangian_eulerian_translation_factor(s_ext_face);
         }
+
 
         // Output
         outfile << x_bulk[0] << " " // column 1
@@ -433,6 +444,7 @@ namespace oomph
                 << std::endl;
       }
     }
+
 
     /// \short Compute contributions to integrated porous flux over boundary:
     /// q_skeleton = \int \partial u_displ / \partial t \cdot n ds
@@ -510,6 +522,7 @@ namespace oomph
         x_bulk[0] = ext_el_pt->interpolated_x(s_ext, 0);
         x_bulk[1] = ext_el_pt->interpolated_x(s_ext, 1);
 
+
 #ifdef PARANOID
         if (!AxisymmetricPoroelasticityTractionElementHelper::Allow_gap_in_FSI)
         {
@@ -535,11 +548,13 @@ namespace oomph
         }
 #endif
 
+
         // Default geometry; evaluate everything in deformed (Nst) config.
         double lagrangian_eulerian_translation_factor = 1.0;
 
         // Get the outer unit normal for poro
         Vector<double> poro_normal(interpolated_normal);
+
 
         // Get pointer to associated face element to get geometric information
         // from (if set up)
@@ -619,6 +634,7 @@ namespace oomph
       }
     }
 
+
     /// C-style output function
     void output(FILE* file_pt)
     {
@@ -630,6 +646,7 @@ namespace oomph
     {
       FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt, n_plot);
     }
+
 
   protected:
     /// \short Function to compute the shape and test functions and to return
@@ -654,6 +671,7 @@ namespace oomph
       // Return the value of the jacobian
       return J_eulerian(s);
     }
+
 
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
@@ -707,6 +725,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
 
+
   //===========================================================================
   /// Constructor, takes the pointer to the "bulk" element, and the
   /// face index that identifies the face of the bulk element to which
@@ -720,8 +739,8 @@ namespace oomph
                                             POROELASTICITY_BULK_ELEMENT>::
     LinearisedAxisymPoroelasticBJS_FSIElement(FiniteElement* const& bulk_el_pt,
                                               const int& face_index,
-                                              const unsigned& id) :
-    FaceGeometry<FLUID_BULK_ELEMENT>(), FaceElement()
+                                              const unsigned& id)
+    : FaceGeometry<FLUID_BULK_ELEMENT>(), FaceElement()
   {
     // Set source element storage: one interaction with an external element
     // that provides the velocity of the adjacent linear elasticity
@@ -777,8 +796,7 @@ namespace oomph
           break;
         }
       }
-      if (do_it)
-        add_external_data(cast_bulk_el_pt->node_pt(j));
+      if (do_it) add_external_data(cast_bulk_el_pt->node_pt(j));
     }
 
     // We need Dim+1 additional values for each FaceElement node to store the
@@ -986,6 +1004,7 @@ namespace oomph
         poro_normal[1] = -poro_normal[1];
       }
 
+
       // Get permeability from the bulk poroelasticity element
       const double permeability = ext_el_pt->permeability();
       const double local_permeability_ratio = ext_el_pt->permeability_ratio();
@@ -1138,5 +1157,6 @@ namespace oomph
   }
 
 } // namespace oomph
+
 
 #endif

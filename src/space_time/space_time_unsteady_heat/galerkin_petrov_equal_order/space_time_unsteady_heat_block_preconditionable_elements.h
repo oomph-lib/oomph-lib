@@ -47,15 +47,15 @@ namespace oomph
   /// Block preconditionable version of UnsteadyHeatSpaceTimeElement
   //=========================================================================
   template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
-  class BlockPrecQUnsteadyHeatSpaceTimeElement :
-    public virtual QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>,
-    public virtual BlockPreconditionableSpaceTimeElementBase
+  class BlockPrecQUnsteadyHeatSpaceTimeElement
+    : public virtual QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>,
+      public virtual BlockPreconditionableSpaceTimeElementBase
   {
   public:
     /// Empty constructor
-    BlockPrecQUnsteadyHeatSpaceTimeElement() :
-      QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>(),
-      BlockPreconditionableSpaceTimeElementBase()
+    BlockPrecQUnsteadyHeatSpaceTimeElement()
+      : QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>(),
+        BlockPreconditionableSpaceTimeElementBase()
     {
     }
 
@@ -75,16 +75,16 @@ namespace oomph
   /// Block preconditionable version of UnsteadyHeatSpaceTimeElement
   //=========================================================================
   template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
-  class BlockPrecRefineableQUnsteadyHeatSpaceTimeElement :
-    public virtual RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,
-                                                           NNODE_1D>,
-    public virtual BlockPreconditionableSpaceTimeElementBase
+  class BlockPrecRefineableQUnsteadyHeatSpaceTimeElement
+    : public virtual RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,
+                                                             NNODE_1D>,
+      public virtual BlockPreconditionableSpaceTimeElementBase
   {
   public:
     /// Empty constructor
-    BlockPrecRefineableQUnsteadyHeatSpaceTimeElement() :
-      RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>(),
-      BlockPreconditionableSpaceTimeElementBase()
+    BlockPrecRefineableQUnsteadyHeatSpaceTimeElement()
+      : RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>(),
+        BlockPreconditionableSpaceTimeElementBase()
     {
     }
 

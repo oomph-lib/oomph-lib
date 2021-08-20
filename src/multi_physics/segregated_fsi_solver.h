@@ -26,6 +26,7 @@
 #ifndef OOMPH_SEGREGATED_FSI_SOLVER
 #define OOMPH_SEGREGATED_FSI_SOLVER
 
+
 #include "generic/problem.h"
 #include "generic/geom_objects.h"
 #include "generic/mesh.h"
@@ -39,13 +40,13 @@ namespace oomph
   {
   public:
     /// Constructor initialises all data
-    PicardConvergenceData() :
-      Niter(0),
-      CPU_total(0.0),
-      Essential_cpu_total(0.0),
-      CPU_for_global_residual(0.0),
-      Tol_achieved(0.0),
-      Has_converged(false)
+    PicardConvergenceData()
+      : Niter(0),
+        CPU_total(0.0),
+        Essential_cpu_total(0.0),
+        CPU_for_global_residual(0.0),
+        Tol_achieved(0.0),
+        Has_converged(false)
     {
     }
 
@@ -130,9 +131,11 @@ namespace oomph
     bool Has_converged;
   };
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// A class to handle errors in the Segregated solver
@@ -151,9 +154,11 @@ namespace oomph
     bool Ran_out_of_iterations;
   };
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
+
 
   //===============================================================
   /// Base class for problems that can be solved by segregated
@@ -280,12 +285,14 @@ namespace oomph
     /// vital stats of the iteration.
     PicardConvergenceData steady_segregated_solve();
 
+
     /// \short Unsteady segregated solver, advance time by dt and solve
     /// by the segregated solver. The time values are always shifted by
     /// this function.
     /// Returns PicardConvergenceData object that contains the
     /// vital stats of the iteration.
     PicardConvergenceData unsteady_segregated_solve(const double& dt);
+
 
     /// \short Unsteady segregated solver. Advance time by dt and solve
     /// the system by a segregated method. The boolean flag is used to
@@ -296,6 +303,7 @@ namespace oomph
     /// vital stats of the iteration.
     PicardConvergenceData unsteady_segregated_solve(const double& dt,
                                                     const bool& shift_values);
+
 
     /// \short Assess convergence based on max. residual of coupled system of
     /// eqns. The argument specifies the convergence tolerance.
@@ -351,6 +359,7 @@ namespace oomph
         Problem::Newton_solver_tolerance);
     }
 
+
     /// \short Use pointwise Aitken extrapolation. The argument is used to
     /// specify the Picard iteration after which pointwise Aitken extrapolation
     /// is to be used for the first time.
@@ -404,6 +413,7 @@ namespace oomph
       Assess_convergence_based_on_max_global_residual
     };
 
+
     /// Enumerated flags to indicate which solve is taking place
     enum solve_type
     {
@@ -433,6 +443,7 @@ namespace oomph
       Timer_has_been_halted = false;
     }
 
+
     /// \short (Re-)start timer (e.g. after completing non-essential
     /// parts of the code such as documentation of the iteration's
     /// progress)
@@ -441,6 +452,7 @@ namespace oomph
       T_ref = clock();
       Timer_has_been_halted = false;
     }
+
 
     /// \short Halt timer (e.g. before performing non-essential
     /// parts of the code such as documentation of the iteration's
@@ -454,6 +466,7 @@ namespace oomph
       }
     }
 
+
     /// \short Total elapsed time since start of solve
     double t_spent_on_actual_solve()
     {
@@ -462,6 +475,7 @@ namespace oomph
       restart_timer();
       return time;
     }
+
 
   protected:
     /// Rebuild global mesh for monolithic discretisation
@@ -499,6 +513,7 @@ namespace oomph
 
     /// Restore pinned status of solid dofs
     void restore_solid_dofs();
+
 
     /// Do pointwise Aitken extrapolation for solid
     void pointwise_aitken_extrapolate();
@@ -610,5 +625,6 @@ namespace oomph
   };
 
 } // namespace oomph
+
 
 #endif

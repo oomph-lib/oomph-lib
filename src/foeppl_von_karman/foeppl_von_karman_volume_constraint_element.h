@@ -48,8 +48,8 @@ namespace oomph
   /// element in a problem.
   //=============================================================
   template<class ELEMENT, template<class> class MESH>
-  class FoepplvonKarmanVolumeConstraintElement :
-    public virtual GeneralisedElement
+  class FoepplvonKarmanVolumeConstraintElement
+    : public virtual GeneralisedElement
   {
   public:
     /// \short Constructor. Takes pointer to mesh of Foeppl von Karman
@@ -62,10 +62,10 @@ namespace oomph
     FoepplvonKarmanVolumeConstraintElement(
       MESH<ELEMENT>* bounding_mesh_pt,
       const Vector<unsigned>& contributing_region,
-      const double& pressure = 0.0) :
-      Bounding_mesh_pt(bounding_mesh_pt),
-      Contributing_region(contributing_region),
-      Prescribed_volume_pt(0)
+      const double& pressure = 0.0)
+      : Bounding_mesh_pt(bounding_mesh_pt),
+        Contributing_region(contributing_region),
+        Prescribed_volume_pt(0)
     {
       // Create instance of pressure that is traded for volume constraint
       Volume_control_pressure_pt = new Data(1);
@@ -131,6 +131,7 @@ namespace oomph
       }
     }
 
+
     /// Fill in contribution to elemental residual and Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -140,6 +141,7 @@ namespace oomph
         // Only add contribution to residual; Jacobian (derivs w.r.t. to
         // this element's external data is handled by FvK elements)
         residuals[Volume_control_local_eqn] -= (*Prescribed_volume_pt);
+
 
         /*  // We are in charge... */
         /*  else */
@@ -167,10 +169,12 @@ namespace oomph
         /*       } */
         /*     } */
 
+
         /*    double t_end=TimingHelpers::timer(); */
         /*    oomph_info << "Time for local_external_eqn setup: "  */
         /*               << t_end-t_start << std::endl; */
         /*    t_start=TimingHelpers::timer(); */
+
 
         /*    // Add initial contribution */
         /*    residuals[Volume_control_local_eqn] -= (*Prescribed_volume_pt); */
@@ -205,6 +209,7 @@ namespace oomph
         /*        // Add contribution to bounded volume */
         /*        bounded_volume += el_bounded_volume; */
 
+
         /*        // Add contribution to Jacobian */
         /*        for (std::map<unsigned,double>::iterator it= */
         /*              d_bounded_volume_d_unknown.begin();it!= */
@@ -219,6 +224,7 @@ namespace oomph
         /*     } */
         /*    // Add contribution to residuals */
         /*    residuals[Volume_control_local_eqn]+=bounded_volume; */
+
 
         /*    t_end=TimingHelpers::timer(); */
         /*    oomph_info << "Time for second part (actual work) of

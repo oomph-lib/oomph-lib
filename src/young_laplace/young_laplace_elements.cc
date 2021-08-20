@@ -41,6 +41,7 @@ namespace oomph
   template<>
   const unsigned QYoungLaplaceElement<2>::Initial_Nvalue[4] = {1, 1, 1, 1};
 
+
   //======================================================================
   /// Get exact position vector to meniscus
   //======================================================================
@@ -128,6 +129,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Compute element residual vector. Pure version without hanging nodes
   //======================================================================
@@ -178,6 +180,7 @@ namespace oomph
           interpolated_dudzeta[j] += u(l) * dpsidzeta(l, j);
         }
       }
+
 
       // Allocation and definition of variables necessary for
       // further calculations
@@ -289,6 +292,7 @@ namespace oomph
         }
       }
 
+
       // Assemble residuals
       //-------------------
 
@@ -356,6 +360,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -379,6 +384,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// Output solution at nplot points in each coordinate direction
@@ -441,6 +447,7 @@ namespace oomph
         get_spine(xx, spine, dspine);
       }
 
+
       // Output spine base
       for (unsigned i = 0; i < 3; i++)
       {
@@ -453,6 +460,7 @@ namespace oomph
         outfile << spine[i] << " ";
       }
 
+
       // Output intrinsic coordinates
       for (unsigned i = 0; i < 2; i++)
       {
@@ -462,6 +470,7 @@ namespace oomph
       // Output unknown
       outfile << interpolated_u(s) << " ";
 
+
       // Done
       outfile << std::endl;
     }
@@ -469,6 +478,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution
@@ -520,6 +530,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Validate against exact solution
@@ -600,6 +611,7 @@ namespace oomph
       }
     }
   }
+
 
   //====================================================================
   // Force build of templates

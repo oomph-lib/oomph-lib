@@ -47,9 +47,8 @@ namespace oomph
   /// functions in UnstructuredTwoDMeshGeometryBase need template parameters
   /// and it's much cleaner simply to template the entire class
   //================================================================
-  class TriangleMeshBase :
-    public virtual UnstructuredTwoDMeshGeometryBase,
-    public virtual Mesh
+  class TriangleMeshBase : public virtual UnstructuredTwoDMeshGeometryBase,
+                           public virtual Mesh
   {
   public:
     /// Constructor

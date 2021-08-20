@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "refineable_unsteady_heat_elements.h"
 
+
 namespace oomph
 {
   //========================================================================
@@ -96,6 +97,7 @@ namespace oomph
       Vector<double> interpolated_dudx(DIM, 0.0);
       Vector<double> mesh_velocity(DIM, 0.0);
 
+
       // Calculate function value and derivatives:
       //-----------------------------------------
 
@@ -130,6 +132,7 @@ namespace oomph
       double source;
       this->get_source_ust_heat(time, ipt, interpolated_x, source);
 
+
       // Assemble residuals and Jacobian
       //================================
 
@@ -143,6 +146,7 @@ namespace oomph
         double hang_weight = 1.0;
         // Local bool (is the node hanging)
         bool is_node_hanging = this->node_pt(l)->is_hanging();
+
 
         // If the node is hanging, get the number of master nodes
         if (is_node_hanging)

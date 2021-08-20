@@ -42,6 +42,7 @@
 // hypre's global error flag
 extern int hypre__global_error;
 
+
 namespace oomph
 {
   //==================================================================
@@ -114,6 +115,7 @@ namespace oomph
                                 HYPRE_Solver& euclid_object);
 
   } // namespace HypreHelpers
+
 
   //=====================================================================
   /// An interface class to the suite of Hypre solvers and preconditioners
@@ -494,6 +496,7 @@ namespace oomph
     LinearAlgebraDistribution* Hypre_distribution_pt;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -771,6 +774,7 @@ namespace oomph
       Delete_matrix = false;
     }
 
+
     /// \short Function which uses problem_pt's get_jacobian(...) function to
     /// generate a linear system which is then solved. This function deletes
     /// any existing internal data and then generates a new Hypre solver.
@@ -813,6 +817,7 @@ namespace oomph
     /// flag from false (its default) to true.
     bool Delete_matrix;
   };
+
 
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -900,6 +905,7 @@ namespace oomph
     /// it manually, e.g. after every Newton solve, using
     /// reset_cumulative_solve_times().
     static std::map<std::string, double> Context_based_cumulative_solve_time;
+
 
     /// \short Static unsigned that accumulates the number of preconditioner
     /// solves of all instantiations of this class. Reset
@@ -1245,6 +1251,7 @@ namespace oomph
     /// String can be used to provide context for annotation
     std::string Context_string;
   };
+
 
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////

@@ -41,19 +41,20 @@ namespace oomph
   /// Class for Refineable TimeHarmonicLinearElasticity equations
   //========================================================================
   template<unsigned DIM>
-  class RefineableTimeHarmonicLinearElasticityEquations :
-    public virtual TimeHarmonicLinearElasticityEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableTimeHarmonicLinearElasticityEquations
+    : public virtual TimeHarmonicLinearElasticityEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Constructor
-    RefineableTimeHarmonicLinearElasticityEquations() :
-      TimeHarmonicLinearElasticityEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableTimeHarmonicLinearElasticityEquations()
+      : TimeHarmonicLinearElasticityEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
@@ -177,11 +178,13 @@ namespace oomph
       this->Omega_sq_pt = cast_father_element_pt->omega_sq_pt();
     }
 
+
   private:
     /// Overloaded helper function to take hanging nodes into account
     void fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
+
 
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
@@ -191,18 +194,18 @@ namespace oomph
   /// Class for refineable QTimeHarmonicLinearElasticityElement elements
   //========================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQTimeHarmonicLinearElasticityElement :
-    public virtual QTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>,
-    public virtual RefineableTimeHarmonicLinearElasticityEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQTimeHarmonicLinearElasticityElement
+    : public virtual QTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>,
+      public virtual RefineableTimeHarmonicLinearElasticityEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// Constructor:
-    RefineableQTimeHarmonicLinearElasticityElement() :
-      QTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>(),
-      RefineableElement(),
-      RefineableTimeHarmonicLinearElasticityEquations<DIM>(),
-      RefineableQElement<DIM>()
+    RefineableQTimeHarmonicLinearElasticityElement()
+      : QTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>(),
+        RefineableElement(),
+        RefineableTimeHarmonicLinearElasticityEquations<DIM>(),
+        RefineableQElement<DIM>()
     {
     }
 
@@ -234,14 +237,15 @@ namespace oomph
     void further_setup_hanging_nodes() {}
   };
 
+
   //==============================================================
   /// FaceGeometry of the 2D
   /// RefineableQTimeHarmonicLinearElasticityElement elements
   //==============================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<
-    RefineableQTimeHarmonicLinearElasticityElement<2, NNODE_1D>> :
-    public virtual QElement<1, NNODE_1D>
+    RefineableQTimeHarmonicLinearElasticityElement<2, NNODE_1D>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     // Make sure that we call the constructor of the QElement
@@ -255,8 +259,8 @@ namespace oomph
   //==============================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<
-    FaceGeometry<RefineableQTimeHarmonicLinearElasticityElement<2, NNODE_1D>>> :
-    public virtual PointElement
+    FaceGeometry<RefineableQTimeHarmonicLinearElasticityElement<2, NNODE_1D>>>
+    : public virtual PointElement
   {
   public:
     // Make sure that we call the constructor of the QElement
@@ -264,14 +268,15 @@ namespace oomph
     FaceGeometry() : PointElement() {}
   };
 
+
   //==============================================================
   /// FaceGeometry of the 3D RefineableQTimeHarmonicLinearElasticityElement
   /// elements
   //==============================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<
-    RefineableQTimeHarmonicLinearElasticityElement<3, NNODE_1D>> :
-    public virtual QElement<2, NNODE_1D>
+    RefineableQTimeHarmonicLinearElasticityElement<3, NNODE_1D>>
+    : public virtual QElement<2, NNODE_1D>
   {
   public:
     // Make sure that we call the constructor of the QElement
@@ -285,14 +290,15 @@ namespace oomph
   //==============================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<
-    FaceGeometry<RefineableQTimeHarmonicLinearElasticityElement<3, NNODE_1D>>> :
-    public virtual QElement<1, NNODE_1D>
+    FaceGeometry<RefineableQTimeHarmonicLinearElasticityElement<3, NNODE_1D>>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     // Make sure that we call the constructor of the QElement
     // Only the Intel compiler seems to need this!
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };
+
 
 } // namespace oomph
 

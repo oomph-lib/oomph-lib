@@ -28,8 +28,6 @@
 #include "axisym_displ_based_fvk_elements.h"
 
 
-#include "axisym_displ_based_fvk_elements.h"
-
 namespace oomph
 {
   //======================================================================
@@ -37,6 +35,7 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   const unsigned AxisymFoepplvonKarmanElement<NNODE_1D>::Initial_Nvalue = 3;
+
 
   //======================================================================
   /// Compute contribution to element residual Vector
@@ -152,6 +151,7 @@ namespace oomph
                          nu_local * interpolated_du_rdr);
       }
 
+
       // Assemble residuals and Jacobian:
       //--------------------------------
       // Loop over the test functions
@@ -201,6 +201,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -224,6 +225,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// Compute in-plane stresses. Return boolean to indicate success
@@ -270,6 +272,7 @@ namespace oomph
       double interpolated_du_rdr = 0.0;
 
       double nu_local = nu();
+
 
       // Calculate function values and derivatives:
       //-----------------------------------------
@@ -370,6 +373,7 @@ namespace oomph
     write_tecplot_zone_footer(file_pt, nplot);
   }
 
+
   //======================================================================
   /// Output exact solution
   ///
@@ -417,6 +421,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Validate against exact solution
@@ -549,6 +554,7 @@ namespace oomph
       }
     }
   }
+
 
   //====================================================================
   // Force build of templates

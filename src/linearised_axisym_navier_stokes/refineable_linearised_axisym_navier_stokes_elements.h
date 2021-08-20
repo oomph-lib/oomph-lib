@@ -44,10 +44,10 @@ namespace oomph
   /// \short Refineable version of the linearised axisymmetric
   /// Navier--Stokes equations
   //=======================================================================
-  class RefineableLinearisedAxisymmetricNavierStokesEquations :
-    public virtual LinearisedAxisymmetricNavierStokesEquations,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableLinearisedAxisymmetricNavierStokesEquations
+    : public virtual LinearisedAxisymmetricNavierStokesEquations,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   protected:
     /// \short Pointer to n_p-th pressure node (Default: NULL,
@@ -66,10 +66,10 @@ namespace oomph
 
   public:
     /// \short Empty Constructor
-    RefineableLinearisedAxisymmetricNavierStokesEquations() :
-      LinearisedAxisymmetricNavierStokesEquations(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableLinearisedAxisymmetricNavierStokesEquations()
+      : LinearisedAxisymmetricNavierStokesEquations(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
 
@@ -201,6 +201,7 @@ namespace oomph
       }
     }
 
+
   private:
     /// \short Add element's contribution to the elemental residual vector
     /// and/or Jacobian matrix
@@ -214,18 +215,20 @@ namespace oomph
 
   }; // End of RefineableLinearisedAxisymmetricNavierStokesEquations class defn
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// \short Refineable version of linearised axisymmetric quadratic
   /// Crouzeix-Raviart elements
   //=======================================================================
-  class RefineableLinearisedAxisymmetricQCrouzeixRaviartElement :
-    public LinearisedAxisymmetricQCrouzeixRaviartElement,
-    public virtual RefineableLinearisedAxisymmetricNavierStokesEquations,
-    public virtual RefineableQElement<2>
+  class RefineableLinearisedAxisymmetricQCrouzeixRaviartElement
+    : public LinearisedAxisymmetricQCrouzeixRaviartElement,
+      public virtual RefineableLinearisedAxisymmetricNavierStokesEquations,
+      public virtual RefineableQElement<2>
   {
   private:
     /// Unpin all the internal pressure freedoms
@@ -246,11 +249,11 @@ namespace oomph
 
   public:
     /// Constructor
-    RefineableLinearisedAxisymmetricQCrouzeixRaviartElement() :
-      RefineableElement(),
-      RefineableLinearisedAxisymmetricNavierStokesEquations(),
-      RefineableQElement<2>(),
-      LinearisedAxisymmetricQCrouzeixRaviartElement()
+    RefineableLinearisedAxisymmetricQCrouzeixRaviartElement()
+      : RefineableElement(),
+        RefineableLinearisedAxisymmetricNavierStokesEquations(),
+        RefineableQElement<2>(),
+        LinearisedAxisymmetricQCrouzeixRaviartElement()
     {
     }
 
@@ -550,24 +553,27 @@ namespace oomph
 
   }; // End of RefineableLinearisedAxisymmetricQCrouzeixRaviartElement defn
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// \short Face geometry of the refineable linearised axisym
   /// Crouzeix-Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<RefineableLinearisedAxisymmetricQCrouzeixRaviartElement> :
-    public virtual FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>
+  class FaceGeometry<RefineableLinearisedAxisymmetricQCrouzeixRaviartElement>
+    : public virtual FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>()
+    FaceGeometry()
+      : FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>()
     {
     }
   };
+
 
   //=======================================================================
   /// \short Face geometry of face geometric of the refineable linearised
@@ -575,30 +581,32 @@ namespace oomph
   //=======================================================================
   template<>
   class FaceGeometry<
-    FaceGeometry<RefineableLinearisedAxisymmetricQCrouzeixRaviartElement>> :
-    public virtual FaceGeometry<
-      FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>>
+    FaceGeometry<RefineableLinearisedAxisymmetricQCrouzeixRaviartElement>>
+    : public virtual FaceGeometry<
+        FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<
-        FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>>()
+    FaceGeometry()
+      : FaceGeometry<
+          FaceGeometry<LinearisedAxisymmetricQCrouzeixRaviartElement>>()
     {
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// \short Refineable version of linearised axisymmetric quadratic
   /// Taylor-Hood elements
   //=======================================================================
-  class RefineableLinearisedAxisymmetricQTaylorHoodElement :
-    public LinearisedAxisymmetricQTaylorHoodElement,
-    public virtual RefineableLinearisedAxisymmetricNavierStokesEquations,
-    public virtual RefineableQElement<2>
+  class RefineableLinearisedAxisymmetricQTaylorHoodElement
+    : public LinearisedAxisymmetricQTaylorHoodElement,
+      public virtual RefineableLinearisedAxisymmetricNavierStokesEquations,
+      public virtual RefineableQElement<2>
   {
   private:
     /// Pointer to n_p-th pressure node
@@ -669,11 +677,11 @@ namespace oomph
 
   public:
     /// \short Constructor:
-    RefineableLinearisedAxisymmetricQTaylorHoodElement() :
-      RefineableElement(),
-      RefineableLinearisedAxisymmetricNavierStokesEquations(),
-      RefineableQElement<2>(),
-      LinearisedAxisymmetricQTaylorHoodElement()
+    RefineableLinearisedAxisymmetricQTaylorHoodElement()
+      : RefineableElement(),
+        RefineableLinearisedAxisymmetricNavierStokesEquations(),
+        RefineableQElement<2>(),
+        LinearisedAxisymmetricQTaylorHoodElement()
     {
     }
 
@@ -911,6 +919,7 @@ namespace oomph
       }
     }
 
+
     /// \short The number of 1d pressure nodes is 2, the number of 1d
     /// velocity nodes is the same as the number of 1d geometric nodes.
     unsigned ninterpolating_node_1d(const int& n_value)
@@ -960,21 +969,24 @@ namespace oomph
 
   }; // End of RefineableLinearisedAxisymmetricQTaylorHoodElement class defn
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// \short Face geometry of the refineable linearised axisym
   /// Taylor-Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<RefineableLinearisedAxisymmetricQTaylorHoodElement> :
-    public virtual FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement>
+  class FaceGeometry<RefineableLinearisedAxisymmetricQTaylorHoodElement>
+    : public virtual FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement>
   {
   public:
     FaceGeometry() : FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement>() {}
   };
+
 
   //=======================================================================
   /// \short Face geometry of face geometric of the refineable linearised
@@ -982,16 +994,17 @@ namespace oomph
   //=======================================================================
   template<>
   class FaceGeometry<
-    FaceGeometry<RefineableLinearisedAxisymmetricQTaylorHoodElement>> :
-    public virtual FaceGeometry<
-      FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement>>
+    FaceGeometry<RefineableLinearisedAxisymmetricQTaylorHoodElement>>
+    : public virtual FaceGeometry<
+        FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement>>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement>>()
+    FaceGeometry()
+      : FaceGeometry<FaceGeometry<LinearisedAxisymmetricQTaylorHoodElement>>()
     {
     }
   };
+
 
 } // End of namespace oomph
 

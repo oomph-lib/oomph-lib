@@ -147,6 +147,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //=====================================================================
   /// \short Output FE representation of soln: x,y,q1,q2,div_q,p at
   /// Nplot^DIM plot points
@@ -492,6 +493,7 @@ namespace oomph
       }
     } // End of loop over integration points
   }
+
 
   //=====================================================================
   // Force building of templates

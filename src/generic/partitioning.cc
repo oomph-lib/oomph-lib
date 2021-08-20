@@ -28,7 +28,7 @@
 #include "partitioning.h"
 #include "mesh.h"
 #include "refineable_mesh.h"
-// Include to fill in additional_setup_shared_node_scheme() function
+
 
 namespace oomph
 {
@@ -53,6 +53,7 @@ namespace oomph
     ErrorToWeightFctPt Error_to_weight_fct_pt = &default_error_to_weight_fct;
 
   } // namespace METIS
+
 
   //==================================================================
   /// Partition mesh uniformly by dividing elements
@@ -81,6 +82,7 @@ namespace oomph
     }
 #endif
 
+
     // Uniform partitioning
     unsigned nel_per_domain = int(float(nelem) / float(ndomain));
     for (unsigned ielem = 0; ielem < nelem; ielem++)
@@ -89,6 +91,7 @@ namespace oomph
       element_domain[ielem] = idomain;
     }
   }
+
 
   //==================================================================
   /// Use METIS to assign each element to a domain.
@@ -184,6 +187,7 @@ namespace oomph
       }
     }
 
+
     // Now convert into C-style packed array for interface with METIS
     int* xadj = new int[nelem + 1];
     Vector<int> adjacency_vector;
@@ -225,6 +229,7 @@ namespace oomph
     oomph_info
       << "CPU time for setup of METIS data structures            [nelem="
       << nelem << "]: " << cpu0 << " sec" << std::endl;
+
 
     // Call METIS graph partitioner
     //-----------------------------
@@ -428,6 +433,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
 #ifdef PARANOID
     std::vector<bool> done(nparts, false);
 #endif
@@ -440,6 +446,7 @@ namespace oomph
       done[part[e]] = true;
 #endif
     }
+
 
 #ifdef PARANOID
     // Check
@@ -462,6 +469,7 @@ namespace oomph
     }
 #endif
 
+
     // End timer
     cpu_end = clock();
 
@@ -471,6 +479,7 @@ namespace oomph
       << "CPU time for METIS mesh partitioning                   [nelem="
       << nelem << "]: " << cpu1 << " sec" << std::endl;
 
+
     // Cleanup
     delete[] xadj;
     delete[] part;
@@ -478,7 +487,9 @@ namespace oomph
     delete[] options;
   }
 
+
 #ifdef OOMPH_HAS_MPI
+
 
   //==================================================================
   /// \short Use METIS to assign each element in an already-distributed mesh
@@ -638,6 +649,7 @@ namespace oomph
           root_el_number -= 1;
         }
 
+
         // Get global equation numbers of actual element
         unsigned n_dof = el_pt->ndof();
         for (unsigned i = 0; i < n_dof; i++)
@@ -689,6 +701,7 @@ namespace oomph
                   MPI_INT,
                   comm_pt->mpi_comm());
 
+
     // In the big sequence of concatenated root elements (enumerated
     // individually on the various processors) where do the root elements from a
     // given processor start? Also figure out how many root elements there are
@@ -710,6 +723,7 @@ namespace oomph
       }
     }
 
+
     // How many global equations are held on this processor?
     int n_eqns_on_this_proc =
       eqn_numbers_with_root_elements_on_this_proc.size();
@@ -725,6 +739,7 @@ namespace oomph
                   1,
                   MPI_INT,
                   comm_pt->mpi_comm());
+
 
     // In the big sequence of equation numbers from the root elements
     // (enumerated individually on the various processors) where do the
@@ -745,6 +760,7 @@ namespace oomph
         start_eqns_index[0] = 0;
       }
     }
+
 
     // Big vector that contains the number of dofs for each root element
     // (concatenated in processor-by-processor order)
@@ -776,6 +792,7 @@ namespace oomph
       MPI_UNSIGNED,
       root_processor,
       comm_pt->mpi_comm());
+
 
     // ditto for number of non-halo elements associated with root element
     Vector<unsigned> number_of_non_halo_elements_for_global_root_element(
@@ -809,6 +826,7 @@ namespace oomph
                 root_processor,
                 comm_pt->mpi_comm());
 
+
     // ditto for assembly times elements associated with root element
     Vector<double> total_assembly_time_for_global_root_element(
       total_number_of_root_elements);
@@ -841,6 +859,7 @@ namespace oomph
                 root_processor,
                 comm_pt->mpi_comm());
 
+
     // Big vector to store the long sequence of global equation numbers
     // associated with the long sequence of root elements
     Vector<unsigned> eqn_numbers_with_root_elements(total_n_eqn);
@@ -867,6 +886,7 @@ namespace oomph
     oomph_info
       << "CPU time for global setup of METIS data structures [nroot_elem="
       << total_number_of_root_elements << "]: " << cpu0 << " sec" << std::endl;
+
 
     // Now the root processor has gathered all the data needed to establish
     // the root element connectivity (as in the serial case) so use METIS
@@ -999,6 +1019,7 @@ namespace oomph
                  << total_number_of_root_elements << "]: " << cpu0 << " sec"
                  << std::endl;
 
+
       // Call METIS graph partitioner
       //-----------------------------
 
@@ -1040,6 +1061,7 @@ namespace oomph
       // Adjust flag and provide storage for weights
       wgtflag = 2;
       vwgt = new int[total_number_of_root_elements];
+
 
       // Load balance based on assembly times of all leaf
       // elements associated with root
@@ -1216,6 +1238,7 @@ namespace oomph
                  root_processor,
                  comm_pt->mpi_comm());
 
+
     // Now translate back into target domain for the actual (non-root)
     // elements
     element_domain_on_this_proc.resize(number_of_non_halo_elements);
@@ -1251,6 +1274,7 @@ namespace oomph
       }
     }
 
+
 #ifdef PARANOID
     if (count_non_halo != number_of_non_halo_elements)
     {
@@ -1273,6 +1297,7 @@ namespace oomph
                << total_number_of_root_elements << "]: " << cpu2 << " sec"
                << std::endl;
   }
+
 
 #endif
 

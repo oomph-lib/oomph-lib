@@ -48,9 +48,8 @@ namespace oomph
   /// policy class.
   //======================================================================
   template<class ELEMENT>
-  class LinearWaveFluxElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class LinearWaveFluxElement : public virtual FaceGeometry<ELEMENT>,
+                                public virtual FaceElement
   {
   public:
     /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
@@ -59,9 +58,11 @@ namespace oomph
                                                   const Vector<double>& x,
                                                   double& flux);
 
+
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to be created
     LinearWaveFluxElement(FiniteElement* bulk_el_pt, const int& face_index);
+
 
     ///\short  Broken empty constructor
     LinearWaveFluxElement()
@@ -84,11 +85,13 @@ namespace oomph
       BrokenCopy::broken_assign("LinearWaveFluxElement");
     }
 
+
     /// Access function for the prescribed-flux function pointer
     LinearWavePrescribedFluxFctPt& flux_fct_pt()
     {
       return Flux_fct_pt;
     }
+
 
     /// Compute the element residual vector
     inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -98,6 +101,7 @@ namespace oomph
       fill_in_generic_residual_contribution_lin_wave_flux(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
+
 
     /// Compute the element's residual vector and its Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -134,6 +138,7 @@ namespace oomph
       FiniteElement::output(outfile, n_plot);
     }
 
+
     /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(FILE* file_pt)
@@ -147,6 +152,7 @@ namespace oomph
     {
       FiniteElement::output(file_pt, n_plot);
     }
+
 
   protected:
     /// \short Function to compute the shape and test functions and to return
@@ -172,6 +178,7 @@ namespace oomph
       return J_eulerian(s);
     }
 
+
     /// Function to calculate the prescribed flux at a given spatial
     /// position and at a gien time
     void get_flux(const double& time, const Vector<double>& x, double& flux)
@@ -187,6 +194,7 @@ namespace oomph
         (*Flux_fct_pt)(time, x, flux);
       }
     }
+
 
   private:
     /// \short Compute the element residual vector.
@@ -204,9 +212,11 @@ namespace oomph
     unsigned U_index_lin_wave;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// Constructor, takes the pointer to the "bulk" element and the
@@ -214,8 +224,8 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   LinearWaveFluxElement<ELEMENT>::LinearWaveFluxElement(
-    FiniteElement* bulk_el_pt, const int& face_index) :
-    FaceGeometry<ELEMENT>(), FaceElement()
+    FiniteElement* bulk_el_pt, const int& face_index)
+    : FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
     // to its nodes (by referring to the appropriate nodes in the bulk
@@ -359,6 +369,7 @@ namespace oomph
     }
   }
 
+
   //===========================================================================
   /// Compute the element's residual vector and the (zero) Jacobian matrix.
   //===========================================================================
@@ -450,6 +461,7 @@ namespace oomph
       }
     }
   }
+
 
 } // namespace oomph
 

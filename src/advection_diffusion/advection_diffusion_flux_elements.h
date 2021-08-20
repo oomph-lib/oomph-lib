@@ -42,6 +42,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// \short A class for elements that allow the imposition of an
   /// applied flux on the boundaries of Advection Diffusion elements.
@@ -49,9 +50,8 @@ namespace oomph
   /// policy class.
   //======================================================================
   template<class ELEMENT>
-  class AdvectionDiffusionFluxElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class AdvectionDiffusionFluxElement : public virtual FaceGeometry<ELEMENT>,
+                                        public virtual FaceElement
   {
   public:
     /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
@@ -59,10 +59,12 @@ namespace oomph
     typedef void (*AdvectionDiffusionPrescribedFluxFctPt)(
       const Vector<double>& x, double& flux);
 
+
     /// \short Constructor, takes the pointer to the "bulk" element
     /// and the index of the face to be created
     AdvectionDiffusionFluxElement(FiniteElement* const& bulk_el_pt,
                                   const int& face_index);
+
 
     ///\short  Broken empty constructor
     AdvectionDiffusionFluxElement()
@@ -91,6 +93,7 @@ namespace oomph
       return Flux_fct_pt;
     }
 
+
     /// Add the element's contribution to its residual vector
     inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -99,6 +102,7 @@ namespace oomph
       fill_in_generic_residual_contribution_adv_diff_flux(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
+
 
     /// \short Add the element's contribution to its residual vector and
     /// its Jacobian matrix
@@ -136,6 +140,7 @@ namespace oomph
       FiniteElement::output(outfile, nplot);
     }
 
+
   protected:
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
@@ -160,6 +165,7 @@ namespace oomph
       return J_eulerian(s);
     }
 
+
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
@@ -183,6 +189,7 @@ namespace oomph
       return J_eulerian_at_knot(ipt);
     }
 
+
     /// \short Function to calculate the prescribed flux at a given spatial
     /// position
     void get_flux(const Vector<double>& x, double& flux)
@@ -205,6 +212,7 @@ namespace oomph
     void fill_in_generic_residual_contribution_adv_diff_flux(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
+
     /// Function pointer to the (global) prescribed-flux function
     AdvectionDiffusionPrescribedFluxFctPt Flux_fct_pt;
 
@@ -215,9 +223,11 @@ namespace oomph
     unsigned U_index_adv_diff;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// \short Constructor, takes the pointer to the "bulk" element and the index
@@ -225,8 +235,8 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   AdvectionDiffusionFluxElement<ELEMENT>::AdvectionDiffusionFluxElement(
-    FiniteElement* const& bulk_el_pt, const int& face_index) :
-    FaceGeometry<ELEMENT>(), FaceElement()
+    FiniteElement* const& bulk_el_pt, const int& face_index)
+    : FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
     // to its nodes (by referring to the appropriate nodes in the bulk
@@ -263,6 +273,7 @@ namespace oomph
     // Extract the dimension of the problem from the dimension of
     // the first node
     Dim = this->node_pt(0)->ndim();
+
 
     // Set up U_index_adv_diff. Initialise to zero, which probably won't change
     // in most cases, oh well, the price we pay for generality
@@ -369,6 +380,7 @@ namespace oomph
     }
   }
 
+
   //===========================================================================
   /// Compute the element's residual vector and the (zero) Jacobian matrix.
   //===========================================================================
@@ -395,6 +407,7 @@ namespace oomph
 
     // Locally cache the index at which the variable is stored
     const unsigned u_index_adv_diff = U_index_adv_diff;
+
 
     // Loop over the integration points
     //--------------------------------
@@ -453,6 +466,7 @@ namespace oomph
       }
     }
   }
+
 
 } // namespace oomph
 

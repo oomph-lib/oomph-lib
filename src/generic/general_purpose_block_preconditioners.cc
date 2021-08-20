@@ -245,6 +245,7 @@ namespace oomph
         // this->Subsidiary_preconditioner_pt[i]->preconditioner_solve(block_r[i],
         //     block_z[i]);
 
+
         // See if the i-th subsidiary preconditioner is a block preconditioner
         if (dynamic_cast<BlockPreconditioner<CRDoubleMatrix>*>(
               this->Subsidiary_preconditioner_pt[i]) == 0)
@@ -274,6 +275,7 @@ namespace oomph
           this->get_block_vector(i, block_z_with_size_of_full_z, block_z[i]);
         }
 
+
         if (Doc_time_during_preconditioner_solve)
         {
           oomph_info << "Time for application of " << i
@@ -286,6 +288,7 @@ namespace oomph
     // copy solution in block vectors block_z back to z
     this->return_block_vectors(block_z, z);
   }
+
 
   //============================================================================
   /// setup for the block triangular preconditioner
@@ -520,6 +523,7 @@ namespace oomph
     // copy solution in block vectors block_r back to z
     this->return_block_vectors(block_z, z);
   }
+
 
   //=============================================================================
   /// Setup for the exact block preconditioner

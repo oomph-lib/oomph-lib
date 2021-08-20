@@ -48,6 +48,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
+
   //===================================================
   /// Triangular Face class
   //===================================================
@@ -82,6 +83,7 @@ namespace oomph
       it++;
     }
 
+
     /// Access to the first vertex node
     Node* node1_pt() const
     {
@@ -113,6 +115,7 @@ namespace oomph
         return false;
       }
     }
+
 
     /// Less-than operator
     bool operator<(const TFace& other) const
@@ -149,6 +152,7 @@ namespace oomph
       }
     }
 
+
     /// \short Test whether the face lies on a boundary. Relatively simple
     /// test, based on all vertices lying on (some) boundary.
     bool is_on_boundary() const
@@ -156,6 +160,7 @@ namespace oomph
       return (Node1_pt->is_on_boundary() && Node2_pt->is_on_boundary() &&
               Node3_pt->is_on_boundary());
     }
+
 
     /// \short Test whether the face is a boundary face, i.e. does it
     /// connnect three boundary nodes?
@@ -194,6 +199,7 @@ namespace oomph
                        inserter((*boundaries_pt), (*boundaries_pt).begin()));
     }
 
+
   private:
     /// First vertex node
     Node* Node1_pt;
@@ -205,9 +211,11 @@ namespace oomph
     Node* Node3_pt;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// A class for those member functions that must be fully specialised
@@ -256,6 +264,7 @@ namespace oomph
       }
     }
 
+
     //=======================================================================
     /// Shape function for specific TElement<1,2>
     //=======================================================================
@@ -264,6 +273,7 @@ namespace oomph
       psi[0] = 1.0 - s[0];
       psi[1] = s[0];
     }
+
 
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<2,2>
@@ -276,6 +286,7 @@ namespace oomph
       dpsids(0, 0) = -1.0;
       dpsids(1, 0) = 1.0;
     }
+
 
     //=======================================================================
     /// Second derivatives of shape functions for specific TElement<1,2>:
@@ -292,6 +303,7 @@ namespace oomph
       d2psids(1, 0) = 0.0;
     }
   };
+
 
   template<>
   class TElementShape<1, 3>
@@ -329,6 +341,7 @@ namespace oomph
       }
     }
 
+
     //=======================================================================
     /// Shape function for specific TElement<1,3>
     //=======================================================================
@@ -338,6 +351,7 @@ namespace oomph
       psi[1] = 4.0 * (1.0 - s[0]) * s[0];
       psi[2] = 2.0 * (s[0] - 0.5) * s[0];
     }
+
 
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<1,3>
@@ -351,6 +365,7 @@ namespace oomph
       dpsids(1, 0) = 4.0 - 8.0 * s[0];
       dpsids(2, 0) = 4.0 * s[0] - 1.0;
     }
+
 
     //=======================================================================
     /// Second derivatives of shape functions for specific TElement<1,3>:
@@ -410,6 +425,7 @@ namespace oomph
       }
     }
 
+
     //=======================================================================
     /// Shape function for specific TElement<1,4>
     //=======================================================================
@@ -457,6 +473,7 @@ namespace oomph
     }
   };
 
+
   template<>
   class TElementShape<2, 2>
   {
@@ -497,6 +514,7 @@ namespace oomph
       }
     }
 
+
     //=======================================================================
     /// Shape function for specific TElement<2,2>
     //=======================================================================
@@ -506,6 +524,7 @@ namespace oomph
       psi[1] = s[1];
       psi[2] = 1.0 - s[0] - s[1];
     }
+
 
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<2,2>
@@ -522,6 +541,7 @@ namespace oomph
       dpsids(2, 0) = -1.0;
       dpsids(2, 1) = -1.0;
     }
+
 
     //=======================================================================
     /// Second derivatives of shape functions for specific TElement<2,2>:
@@ -600,6 +620,7 @@ namespace oomph
       }
     }
 
+
     //=======================================================================
     /// Shape function for specific TElement<2,3>
     //=======================================================================
@@ -618,6 +639,7 @@ namespace oomph
       psi[4] = 4.0 * s[1] * s_2;
       psi[5] = 4.0 * s_2 * s[0];
     }
+
 
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<2,3>
@@ -640,6 +662,7 @@ namespace oomph
       dpsids(5, 0) = 4.0 * (1.0 - 2.0 * s[0] - s[1]);
       dpsids(5, 1) = -4.0 * s[0];
     }
+
 
     //=======================================================================
     /// Second derivatives of shape functions for specific TElement<2,3>:
@@ -756,6 +779,7 @@ namespace oomph
       }
     }
 
+
     //=======================================================================
     /// Shape function for specific TElement<2,4>
     //=======================================================================
@@ -863,6 +887,7 @@ namespace oomph
     }
   };
 
+
   //========================================================================
   /// A class for those member functions that must be fully specialised
   /// for Telements that are enriched by bubbble functions.
@@ -875,6 +900,7 @@ namespace oomph
   class TBubbleEnrichedElementShape
   {
   };
+
 
   ///////////////////////////////////////////////////////////////////////
   /// Specific Enriched TElementShape inline functions
@@ -954,6 +980,7 @@ namespace oomph
       }
     }
 
+
     //=======================================================================
     /// Shape function for specific TBubbleEnrichedElement<2,3>
     //=======================================================================
@@ -980,6 +1007,7 @@ namespace oomph
       // The bubble function scaled to have magnitude one at (1/3,1/3)
       psi[6] = 27.0 * cubic_bubble;
     }
+
 
     //=======================================================================
     /// Derivatives of shape functions for specific TBubbleElement<2,3>
@@ -1009,6 +1037,7 @@ namespace oomph
       dpsids(6, 0) = 27.0 * d_bubble_ds0;
       dpsids(6, 1) = 27.0 * d_bubble_ds1;
     }
+
 
     //=======================================================================
     /// Second derivatives of shape functions for specific
@@ -1093,6 +1122,7 @@ namespace oomph
       }*/
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
@@ -1162,8 +1192,7 @@ namespace oomph
       for (unsigned i = 0; i < ncoord; i++)
       {
         // Each coordinate must be positive individually
-        if (s[i] < 0.0)
-          s[i] = 0.0;
+        if (s[i] < 0.0) s[i] = 0.0;
         sum += s[i];
       }
 
@@ -1191,6 +1220,7 @@ namespace oomph
   {
   };
 
+
   //=======================================================================
   /// General TElement class specialised to one spatial dimensions
   /// Ordering of nodes is 0 at local coordinate s[0] = 0, 1 at local
@@ -1198,9 +1228,8 @@ namespace oomph
   /// from s[0]=0 to 1.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class TElement<1, NNODE_1D> :
-    public virtual TElementBase,
-    public TElementShape<1, NNODE_1D>
+  class TElement<1, NNODE_1D> : public virtual TElementBase,
+                                public TElementShape<1, NNODE_1D>
   {
   private:
     /// \short Default integration rule: Gaussian integration of same 'order' as
@@ -1242,6 +1271,7 @@ namespace oomph
       set_integration_scheme(&Default_integration_scheme);
     }
 
+
     /// Broken copy constructor
     TElement(const TElement&)
     {
@@ -1254,6 +1284,7 @@ namespace oomph
       BrokenCopy::broken_assign("TElement");
       }*/
 
+
     /// Destructor
     ~TElement() {}
 
@@ -1262,6 +1293,7 @@ namespace oomph
     {
       return NNODE_1D;
     }
+
 
     /// \short Number of vertex nodes in the element: One more
     /// than spatial dimension
@@ -1478,6 +1510,7 @@ namespace oomph
                             FaceElement* face_element_pt);
   };
 
+
   //=======================================================================
   /// General TElement class specialised to two spatial dimensions
   /// Ordering of nodes as in Zienkiwizc sketches: vertex nodes
@@ -1485,9 +1518,8 @@ namespace oomph
   /// along the consecutive edges. Central node(s) come(s) last.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class TElement<2, NNODE_1D> :
-    public virtual TElementBase,
-    public TElementShape<2, NNODE_1D>
+  class TElement<2, NNODE_1D> : public virtual TElementBase,
+                                public TElementShape<2, NNODE_1D>
   {
   private:
     /// Nodal translation scheme for use when generating face elements
@@ -1499,6 +1531,7 @@ namespace oomph
     // for the shape functions. Can overwrite this in specific element
     // defintion.
     static TGauss<2, NNODE_1D> Default_integration_scheme;
+
 
   public:
     /// Constructor
@@ -1555,6 +1588,7 @@ namespace oomph
       }
     }
 
+
     /// Broken copy constructor
     TElement(const TElement&)
     {
@@ -1566,6 +1600,7 @@ namespace oomph
      {
       BrokenCopy::broken_assign("TElement");
       }*/
+
 
     /// Destructor
     ~TElement() {}
@@ -1895,6 +1930,7 @@ namespace oomph
       return np;
     }
 
+
     /// \short Build the lower-dimensional FaceElement (an element of type
     /// TElement<1,NNODE_1D>). The face index takes three possible values:
     /// 0 (Left)         s[0] = 0.0
@@ -1904,9 +1940,11 @@ namespace oomph
                             FaceElement* face_element_pt);
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Return local coordinates of node j
@@ -1957,6 +1995,7 @@ namespace oomph
       }
     }
 
+
     //=======================================================================
     /// Shape function for specific TElement<3,2>
     //=======================================================================
@@ -1967,6 +2006,7 @@ namespace oomph
       psi[2] = s[2];
       psi[3] = 1.0 - s[0] - s[1] - s[2];
     }
+
 
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<3,2>
@@ -1993,6 +2033,7 @@ namespace oomph
       dpsids(3, 1) = -1.0;
       dpsids(3, 2) = -1.0;
     }
+
 
     //=======================================================================
     /// Second derivatives of shape functions for specific TElement<3,2>:
@@ -2022,6 +2063,7 @@ namespace oomph
       }
     }
   };
+
 
   //=======================================================================
   /// Return local coordinates of node j
@@ -2108,6 +2150,7 @@ namespace oomph
       }
     }
 
+
     //=======================================================================
     /// Shape function for specific TElement<3,3>
     //=======================================================================
@@ -2125,6 +2168,7 @@ namespace oomph
       psi[8] = 4.0 * s[2] * s3;
       psi[9] = 4.0 * s[1] * s3;
     }
+
 
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<3,3>
@@ -2178,6 +2222,7 @@ namespace oomph
       dpsids(9, 2) = -4.0 * s[1];
     }
 
+
     //=======================================================================
     /// Second derivatives of shape functions for specific TElement<3,3>:
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
@@ -2205,6 +2250,7 @@ namespace oomph
       d2psids(0, 3) = 0.0;
       d2psids(0, 4) = 0.0;
       d2psids(0, 5) = 0.0;
+
 
       d2psids(1, 0) = 0.0;
       d2psids(1, 1) = 4.0;
@@ -2396,6 +2442,7 @@ namespace oomph
           s[2] = 0.25;
           break;
 
+
         default:
           std::ostringstream error_message;
           error_message
@@ -2407,6 +2454,7 @@ namespace oomph
                               OOMPH_EXCEPTION_LOCATION);
       }
     }
+
 
     //=======================================================================
     /// Shape function for specific TBubbleEnrichedElement<3,3>
@@ -2463,6 +2511,7 @@ namespace oomph
       psi[14] = 256.0 * quartic_bubble;
     }
 
+
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<3,3>
     //=======================================================================
@@ -2497,6 +2546,7 @@ namespace oomph
       const double d_cubic_bubble123_ds0 = -s[1] * s[2];
       const double d_cubic_bubble123_ds1 = s[2] * (s3 - s[1]);
       const double d_cubic_bubble123_ds2 = s[1] * (s3 - s[2]);
+
 
       // Add the appropriate dervatives of the bubble function to the
       // shape function derivatives
@@ -2650,6 +2700,7 @@ namespace oomph
       dpsids(14, 2) = 256.0 * d_quartic_bubble_ds2;
     }
 
+
     //=======================================================================
     /// Second derivatives of shape functions for specific TElement<3,3>:
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
@@ -2674,6 +2725,7 @@ namespace oomph
       //(.,3) for mixed derivative s[0]-s[1]
       //(.,4) for mixed derivative s[0]-s[2]
       //(.,5) for mixed derivative s[1]-s[2]
+
 
       const double d2_quartic_bubble_ds0 = -2.0 * s[1] * s[2];
       const double d2_quartic_bubble_ds1 = -2.0 * s[0] * s[2];
@@ -2713,6 +2765,7 @@ namespace oomph
       const double d2_cubic_bubble123_ds4 = -s[1];
       const double d2_cubic_bubble123_ds5 = s3 - s[1] - s[2];
 
+
       d2psids(0, 0) = 4.0 +
                       3.0 * (d2_cubic_bubble012_ds0 + d2_cubic_bubble013_ds0 +
                              d2_cubic_bubble023_ds0) -
@@ -2737,6 +2790,7 @@ namespace oomph
                       3.0 * (d2_cubic_bubble012_ds5 + d2_cubic_bubble013_ds5 +
                              d2_cubic_bubble023_ds5) -
                       4.0 * d2_quartic_bubble_ds5;
+
 
       d2psids(1, 0) = 0.0 +
                       3.0 * (d2_cubic_bubble012_ds0 + d2_cubic_bubble013_ds0 +
@@ -2763,6 +2817,7 @@ namespace oomph
                              d2_cubic_bubble123_ds5) -
                       4.0 * d2_quartic_bubble_ds5;
 
+
       d2psids(2, 0) = 0.0 +
                       3.0 * (d2_cubic_bubble012_ds0 + d2_cubic_bubble023_ds0 +
                              d2_cubic_bubble123_ds0) -
@@ -2787,6 +2842,7 @@ namespace oomph
                       3.0 * (d2_cubic_bubble012_ds5 + d2_cubic_bubble023_ds5 +
                              d2_cubic_bubble123_ds5) -
                       4.0 * d2_quartic_bubble_ds5;
+
 
       d2psids(3, 0) = 4.0 +
                       3.0 * (d2_cubic_bubble013_ds0 + d2_cubic_bubble023_ds0 +
@@ -2813,6 +2869,7 @@ namespace oomph
                              d2_cubic_bubble123_ds5) -
                       4.0 * d2_quartic_bubble_ds5;
 
+
       d2psids(4, 0) = 0.0 -
                       12.0 * (d2_cubic_bubble012_ds0 + d2_cubic_bubble013_ds0) +
                       32.0 * d2_quartic_bubble_ds0;
@@ -2832,6 +2889,7 @@ namespace oomph
                       12.0 * (d2_cubic_bubble012_ds5 + d2_cubic_bubble013_ds5) +
                       32.0 * d2_quartic_bubble_ds5;
 
+
       d2psids(5, 0) = 0.0 -
                       12.0 * (d2_cubic_bubble012_ds0 + d2_cubic_bubble023_ds0) +
                       32.0 * d2_quartic_bubble_ds0;
@@ -2850,6 +2908,7 @@ namespace oomph
       d2psids(5, 5) = 0.0 -
                       12.0 * (d2_cubic_bubble012_ds5 + d2_cubic_bubble023_ds5) +
                       32.0 * d2_quartic_bubble_ds5;
+
 
       d2psids(6, 0) = -8.0 -
                       12.0 * (d2_cubic_bubble013_ds0 + d2_cubic_bubble023_ds0) +
@@ -2993,6 +3052,7 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// General TElement class specialised to three spatial dimensions (tet)
   /// Ordering of nodes inverted from Zienkiewizc sketches: When looking into
@@ -3001,9 +3061,8 @@ namespace oomph
   /// the face ones, then the internal ones.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class TElement<3, NNODE_1D> :
-    public virtual TElementBase,
-    public TElementShape<3, NNODE_1D>
+  class TElement<3, NNODE_1D> : public virtual TElementBase,
+                                public TElementShape<3, NNODE_1D>
   {
   private:
     /// Nodal translation scheme for use when generating face elements
@@ -3039,6 +3098,7 @@ namespace oomph
             error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 
+
       // Set the number of nodes
       unsigned n_node =
         (NNODE_1D * (NNODE_1D + 1)) / 2 + 1 + 3 * (NNODE_1D - 2);
@@ -3050,6 +3110,7 @@ namespace oomph
       // Assign default (full) spatial integration scheme
       set_integration_scheme(&Default_integration_scheme);
     }
+
 
     /// Broken copy constructor
     TElement(const TElement&)
@@ -3063,6 +3124,7 @@ namespace oomph
       BrokenCopy::broken_assign("TElement");
       }*/
 
+
     /// Destructor
     ~TElement() {}
 
@@ -3071,6 +3133,7 @@ namespace oomph
     {
       return NNODE_1D;
     }
+
 
     /// \short Number of vertex nodes in the element: One more
     /// than spatial dimension
@@ -3453,6 +3516,7 @@ namespace oomph
       }
     } // end of write tecplot...
 
+
     /// \short Add tecplot zone "footer" to C-style output. (when plotting
     /// nplot points in each "coordinate direction).
     /// Empty by default -- can be used, e.g., to add FE connectivity
@@ -3519,9 +3583,11 @@ namespace oomph
                             FaceElement* face_element_pt);
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// TElement class for which the shape functions have been enriched
@@ -3569,6 +3635,7 @@ namespace oomph
     TBubbleEnrichedGauss() : TGauss<3, 5>() {}
   };
 
+
   //=======================================================================
   /// Enriched TElement class specialised to two spatial dimensions
   /// and three nodes per side (quadratic element)
@@ -3581,9 +3648,9 @@ namespace oomph
   /// enriched element.
   //=======================================================================
   template<unsigned DIM>
-  class TBubbleEnrichedElement<DIM, 3> :
-    public virtual TElement<DIM, 3>,
-    public TBubbleEnrichedElementShape<DIM, 3>
+  class TBubbleEnrichedElement<DIM, 3>
+    : public virtual TElement<DIM, 3>,
+      public TBubbleEnrichedElementShape<DIM, 3>
   {
   private:
     // Static storage for a new integration scheme
@@ -3594,8 +3661,8 @@ namespace oomph
 
   public:
     /// Constructor
-    TBubbleEnrichedElement() :
-      TElement<DIM, 3>(), TBubbleEnrichedElementShape<DIM, 3>()
+    TBubbleEnrichedElement()
+      : TElement<DIM, 3>(), TBubbleEnrichedElementShape<DIM, 3>()
     {
       // Add the additional enrichment nodes
       unsigned n_node = this->nnode();
@@ -3635,6 +3702,7 @@ namespace oomph
       TBubbleEnrichedElementShape<DIM, 3>::dshape_local(s, psi, dpsids);
     }
 
+
     /// \short Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
@@ -3661,12 +3729,12 @@ namespace oomph
                             FaceElement* face_element_pt);
   };
 
+
   //========================================================================
   /// Base class for Solid Telements
   //========================================================================
-  class TSolidElementBase :
-    public virtual TElementBase,
-    public virtual SolidFiniteElement
+  class TSolidElementBase : public virtual TElementBase,
+                            public virtual SolidFiniteElement
   {
   public:
     /// Constructor: Empty
@@ -3685,9 +3753,11 @@ namespace oomph
       }*/
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// SolidTElement elements are triangular/tet elements whose
@@ -3700,13 +3770,13 @@ namespace oomph
   {
   };
 
+
   //=======================================================================
   /// SolidTElement elements, specialised to one spatial dimension
   //=======================================================================
   template<unsigned NNODE_1D>
-  class SolidTElement<1, NNODE_1D> :
-    public virtual TElement<1, NNODE_1D>,
-    public virtual TSolidElementBase
+  class SolidTElement<1, NNODE_1D> : public virtual TElement<1, NNODE_1D>,
+                                     public virtual TSolidElementBase
   {
   public:
     /// Constructor
@@ -3737,15 +3807,18 @@ namespace oomph
                                    FaceElement* face_element_pt);
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   // SolidTElements
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
+
   ///////////////////////////////////////////////////////////////////////////
   // 1D SolidTElements
   ///////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================
   /// Function to setup geometrical information for lower-dimensional
@@ -3764,21 +3837,21 @@ namespace oomph
         static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
+
   //=======================================================================
   /// SolidTElement elements, specialised to two spatial dimensions
   //=======================================================================
   template<unsigned NNODE_1D>
-  class SolidTElement<2, NNODE_1D> :
-    public virtual TElement<2, NNODE_1D>,
-    public virtual TSolidElementBase
+  class SolidTElement<2, NNODE_1D> : public virtual TElement<2, NNODE_1D>,
+                                     public virtual TSolidElementBase
   {
   public:
     /// Constructor
-    SolidTElement() :
-      TElementBase(),
-      TElement<2, NNODE_1D>(),
-      SolidFiniteElement(),
-      TSolidElementBase()
+    SolidTElement()
+      : TElementBase(),
+        TElement<2, NNODE_1D>(),
+        SolidFiniteElement(),
+        TSolidElementBase()
     {
       // Set the Lagrangian dimension of the element
       set_lagrangian_dimension(2);
@@ -3805,11 +3878,13 @@ namespace oomph
                                    FaceElement* face_element_pt);
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   // 2D SolidTElements
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================
   /// Function to setup geometrical information for lower-dimensional
@@ -3828,21 +3903,21 @@ namespace oomph
         static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
+
   //=======================================================================
   /// SolidTElement elements, specialised to three spatial dimensions
   //=======================================================================
   template<unsigned NNODE_1D>
-  class SolidTElement<3, NNODE_1D> :
-    public virtual TElement<3, NNODE_1D>,
-    public virtual TSolidElementBase
+  class SolidTElement<3, NNODE_1D> : public virtual TElement<3, NNODE_1D>,
+                                     public virtual TSolidElementBase
   {
   public:
     /// Constructor
-    SolidTElement() :
-      TElementBase(),
-      TElement<3, NNODE_1D>(),
-      SolidFiniteElement(),
-      TSolidElementBase()
+    SolidTElement()
+      : TElementBase(),
+        TElement<3, NNODE_1D>(),
+        SolidFiniteElement(),
+        TSolidElementBase()
     {
       // Set the Lagrangian dimension of the element
       set_lagrangian_dimension(3);
@@ -3860,6 +3935,7 @@ namespace oomph
       BrokenCopy::broken_assign("SolidTElement");
       }*/
 
+
     /// \short Build the lower-dimensional FaceElement (an element of type
     /// SolidTElement<2,NNODE_1D>). The face index can take one of four values
     /// corresponding to the four possible faces:
@@ -3871,9 +3947,11 @@ namespace oomph
                                    FaceElement* face_element_pt);
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   // 3D SolidTElements
   ///////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================
   /// Function to setup geometrical information for lower-dimensional
@@ -3891,6 +3969,7 @@ namespace oomph
       ->set_lagrangian_dimension(
         static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
+
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
@@ -3912,14 +3991,14 @@ namespace oomph
   /// quadratic triangle
   //===================================================================
   template<unsigned DIM>
-  class SolidTBubbleEnrichedElement<DIM, 3> :
-    public virtual SolidTElement<DIM, 3>,
-    public virtual TBubbleEnrichedElement<DIM, 3>
+  class SolidTBubbleEnrichedElement<DIM, 3>
+    : public virtual SolidTElement<DIM, 3>,
+      public virtual TBubbleEnrichedElement<DIM, 3>
   {
   public:
     /// Constructor
-    SolidTBubbleEnrichedElement() :
-      SolidTElement<DIM, 3>(), TBubbleEnrichedElement<DIM, 3>()
+    SolidTBubbleEnrichedElement()
+      : SolidTElement<DIM, 3>(), TBubbleEnrichedElement<DIM, 3>()
     {
     }
 
@@ -3944,6 +4023,7 @@ namespace oomph
                             FaceElement* face_element_pt);
   };
 
+
   //=======================================================================
   /// Face geometry for the TElement elements: The spatial
   /// dimension of the face elements is one lower than that of the
@@ -3951,14 +4031,15 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<TElement<DIM, NNODE_1D>> :
-    public virtual TElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<TElement<DIM, NNODE_1D>>
+    : public virtual TElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : TElement<DIM - 1, NNODE_1D>() {}
   };
+
 
   //=======================================================================
   /// Face geometry for the 1D TElement elements: Point elements
@@ -3972,9 +4053,11 @@ namespace oomph
     FaceGeometry() : PointElement() {}
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the 2D TBubbleEnrichedElement elements is exactly
@@ -3984,14 +4067,15 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<TBubbleEnrichedElement<2, NNODE_1D>> :
-    public virtual TElement<1, NNODE_1D>
+  class FaceGeometry<TBubbleEnrichedElement<2, NNODE_1D>>
+    : public virtual TElement<1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : TElement<1, NNODE_1D>() {}
   };
+
 
   //=======================================================================
   /// Face geometry for the 3D TBubbleEnrichedElement elements is the
@@ -4001,8 +4085,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<TBubbleEnrichedElement<3, NNODE_1D>> :
-    public virtual TBubbleEnrichedElement<2, NNODE_1D>
+  class FaceGeometry<TBubbleEnrichedElement<3, NNODE_1D>>
+    : public virtual TBubbleEnrichedElement<2, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -4010,9 +4094,11 @@ namespace oomph
     FaceGeometry() : TBubbleEnrichedElement<2, NNODE_1D>() {}
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the TElement elements: The spatial
@@ -4021,8 +4107,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<SolidTElement<DIM, NNODE_1D>> :
-    public virtual SolidTElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<SolidTElement<DIM, NNODE_1D>>
+    : public virtual SolidTElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -4030,12 +4116,13 @@ namespace oomph
     FaceGeometry() : SolidTElement<DIM - 1, NNODE_1D>() {}
   };
 
+
   //=======================================================================
   /// Face geometry for the 1D TElement elements: Point elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<SolidTElement<1, NNODE_1D>> :
-    public virtual SolidPointElement
+  class FaceGeometry<SolidTElement<1, NNODE_1D>>
+    : public virtual SolidPointElement
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -4043,9 +4130,11 @@ namespace oomph
     FaceGeometry() : SolidPointElement() {}
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the 2D SolidTBubbleEnrichedElement elements is exactly
@@ -4055,14 +4144,15 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<SolidTBubbleEnrichedElement<2, NNODE_1D>> :
-    public virtual SolidTElement<1, NNODE_1D>
+  class FaceGeometry<SolidTBubbleEnrichedElement<2, NNODE_1D>>
+    : public virtual SolidTElement<1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : SolidTElement<1, NNODE_1D>() {}
   };
+
 
   //=======================================================================
   /// Face geometry for the 3D SolidTBubbleEnrichedElement elements is
@@ -4072,8 +4162,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<SolidTBubbleEnrichedElement<3, NNODE_1D>> :
-    public virtual SolidTBubbleEnrichedElement<2, NNODE_1D>
+  class FaceGeometry<SolidTBubbleEnrichedElement<3, NNODE_1D>>
+    : public virtual SolidTBubbleEnrichedElement<2, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -4082,5 +4172,6 @@ namespace oomph
   };
 
 } // namespace oomph
+
 
 #endif

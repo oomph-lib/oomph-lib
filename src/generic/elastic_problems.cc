@@ -28,11 +28,13 @@
 #include "fsi.h"
 #include "elastic_problems.h"
 
+
 namespace oomph
 {
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Setup IC problem by:
@@ -101,6 +103,7 @@ namespace oomph
       }
     }
 
+
     // Loop over the elements
     unsigned Nelement = mesh_pt()->nelement();
     for (unsigned i = 0; i < Nelement; i++)
@@ -117,6 +120,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 #endif
+
 
       // Set flag for setting initial condition
       elem_pt->solid_ic_pt() = IC_pt;
@@ -179,6 +183,7 @@ namespace oomph
                << std::endl;
   }
 
+
   //======================================================================
   /// Backup pinned status of all data associated with the mesh.
   /// Also backup the (pointers to the) elements' external data.
@@ -227,6 +232,7 @@ namespace oomph
 #endif
 
       unsigned ntype = elem_pt->nnodal_position_type();
+
 
       // Loop over coordinate directions
       for (unsigned i = 0; i < ndim; i++)
@@ -296,6 +302,7 @@ namespace oomph
         }
       }
 
+
 #ifdef PARANOID
       // If there is internal solid data, complain
       if (elem_pt->has_internal_solid_data())
@@ -327,6 +334,7 @@ namespace oomph
     // oomph_info << "Number of backed up values " << Backup_pinned.size() <<
     // std::endl;
   }
+
 
   //======================================================================
   /// Reset pinned status of all data and re-instate the pointers
@@ -400,6 +408,7 @@ namespace oomph
       }
     }
 
+
     // Loop over the elements
     unsigned Nelement = mesh_pt()->nelement();
     for (unsigned i = 0; i < Nelement; i++)
@@ -463,6 +472,7 @@ namespace oomph
         }
       }
 
+
 #ifdef PARANOID
       // If there is internal solid data, complain
       if (elem_pt->has_internal_solid_data())
@@ -504,6 +514,7 @@ namespace oomph
     Backup_ext_data.clear();
   }
 
+
   //======================================================================
   /// IC problem for wall: Deform wall into the static initial shape
   /// described by the IC object at given time.
@@ -525,6 +536,7 @@ namespace oomph
     delete Communicator_pt;
     Communicator_pt = new OomphCommunicator(problem_pt->communicator_pt());
 #endif
+
 
     // Backup value of time
     double backup_time = 0.0;

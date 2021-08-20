@@ -48,19 +48,20 @@ namespace oomph
   /// Refineable version of Unsteady Heat equations
   //======================================================================
   template<unsigned SPATIAL_DIM>
-  class RefineableSpaceTimeUnsteadyHeatEquations :
-    public virtual SpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableSpaceTimeUnsteadyHeatEquations
+    : public virtual SpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// Constructor
-    RefineableSpaceTimeUnsteadyHeatEquations() :
-      SpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableSpaceTimeUnsteadyHeatEquations()
+      : SpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// Broken copy constructor
     RefineableSpaceTimeUnsteadyHeatEquations(
@@ -69,12 +70,14 @@ namespace oomph
       BrokenCopy::broken_copy("RefineableSpaceTimeUnsteadyHeatEquations");
     }
 
+
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
     {
       // The flux terms are associated with spatial AND temporal derivatives
       return SPATIAL_DIM + 1;
     } // End of num_Z2_flux_terms
+
 
     /// \short Get 'flux' for Z2 error recovery:
     /// Different to the get_flux function in the base class as we also
@@ -115,6 +118,7 @@ namespace oomph
       } // for (unsigned l=0;l<n_node;l++)
     } // End of get_Z2_flux
 
+
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function is usually
     /// called from black-box documentation or interpolation routines), the
@@ -147,6 +151,7 @@ namespace oomph
         values[0] += this->nodal_value(l, u_nodal_index) * psi[l];
       }
     } // End of get_interpolated_values
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function is usually
@@ -182,6 +187,7 @@ namespace oomph
       }
     } // End of get_interpolated_values
 
+
     /// Further build: Copy source function pointer from father element
     void further_build()
     {
@@ -209,24 +215,26 @@ namespace oomph
       const unsigned& flag);
   }; // End of RefineableSpaceTimeUnsteadyHeatEquations class
 
+
   //======================================================================
   /// Refineable version of 2D QUnsteadyHeatSpaceTimeElement elements
   //======================================================================
   template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
-  class RefineableQUnsteadyHeatSpaceTimeElement :
-    public QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>,
-    public virtual RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>,
-    public virtual RefineableQElement<SPATIAL_DIM + 1>
+  class RefineableQUnsteadyHeatSpaceTimeElement
+    : public QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>,
+      public virtual RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>,
+      public virtual RefineableQElement<SPATIAL_DIM + 1>
   {
   public:
     /// \short Constructor
-    RefineableQUnsteadyHeatSpaceTimeElement() :
-      RefineableElement(),
-      RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>(),
-      RefineableQElement<SPATIAL_DIM + 1>(),
-      QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>()
+    RefineableQUnsteadyHeatSpaceTimeElement()
+      : RefineableElement(),
+        RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>(),
+        RefineableQElement<SPATIAL_DIM + 1>(),
+        QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQUnsteadyHeatSpaceTimeElement(
@@ -237,12 +245,15 @@ namespace oomph
       BrokenCopy::broken_copy("RefineableQuadUnsteadyHeatSpaceTimeElement");
     } // End of RefineableQUnsteadyHeatSpaceTimeElement
 
+
     /// Rebuild from sons (empty)
     void rebuild_from_sons(Mesh*& mesh_pt) {}
+
 
     /// \short Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes (empty).
     void further_setup_hanging_nodes() {}
+
 
     /// Number of continuously interpolated values: 1
     unsigned ncont_interpolated_values() const
@@ -250,6 +261,7 @@ namespace oomph
       // Return the appropriate value
       return 1;
     } // End of ncont_interpolated_values
+
 
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
@@ -259,6 +271,7 @@ namespace oomph
                                            NNODE_1D>::nvertex_node();
     } // End of nvertex_node
 
+
     /// \short Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
@@ -266,6 +279,7 @@ namespace oomph
       return QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM,
                                            NNODE_1D>::vertex_node_pt(j);
     } // End of vertex_node_pt
+
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
@@ -276,9 +290,11 @@ namespace oomph
     } // End of nrecovery_order
   }; // End of RefineableQUnsteadyHeatSpaceTimeElement class
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the RefineableQuadUnsteadyHeatSpaceTimeElement elements:
@@ -289,8 +305,8 @@ namespace oomph
   //=======================================================================
   template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
   class FaceGeometry<
-    RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>> :
-    public virtual QElement<SPATIAL_DIM, NNODE_1D>
+    RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>>
+    : public virtual QElement<SPATIAL_DIM, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

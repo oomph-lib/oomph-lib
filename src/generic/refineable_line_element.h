@@ -61,9 +61,8 @@ namespace oomph
   /// build operations.
   //=======================================================================
   template<>
-  class RefineableQElement<1> :
-    public virtual RefineableElement,
-    public virtual LineElementBase
+  class RefineableQElement<1> : public virtual RefineableElement,
+                                public virtual LineElementBase
   {
   public:
     /// \short Shorthand for pointer to an argument-free void member
@@ -182,19 +181,19 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Refineable version of Solid line elements
   //=======================================================================
   template<>
-  class RefineableSolidQElement<1> :
-    public virtual RefineableQElement<1>,
-    public virtual RefineableSolidElement,
-    public virtual QSolidElementBase
+  class RefineableSolidQElement<1> : public virtual RefineableQElement<1>,
+                                     public virtual RefineableSolidElement,
+                                     public virtual QSolidElementBase
   {
   public:
     /// Constructor, just call the constructor of the RefineableQElement<1>
-    RefineableSolidQElement() :
-      RefineableQElement<1>(), RefineableSolidElement()
+    RefineableSolidQElement()
+      : RefineableQElement<1>(), RefineableSolidElement()
     {
       // Issue a warning about this class
       std::string warning_message =
@@ -224,6 +223,7 @@ namespace oomph
 
     /// Virtual Destructor
     virtual ~RefineableSolidQElement() {}
+
 
     /// \short Final over-ride: Use version in QSolidElementBase
     void set_macro_elem_pt(MacroElement* macro_elem_pt)

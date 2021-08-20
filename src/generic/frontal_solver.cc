@@ -72,6 +72,7 @@ namespace oomph
     AssemblyHandler* const assembly_handler_pt =
       problem_pt->assembly_handler_pt();
 
+
     // Do the assembly
     for (unsigned long e = 0; e < n_el; e++)
     {
@@ -139,6 +140,7 @@ namespace oomph
     }
 #endif
 
+
     // Find the number of elements
     unsigned long n_el = problem_pt->mesh_pt()->nelement();
 
@@ -192,6 +194,7 @@ namespace oomph
     // Provide storage
     int lenbuf[3];
 
+
     // Provide storage for exact values required for lenfle array
     int exact_lenfle[3] = {0, 0, 0};
     bool exact_lenfle_available = false;
@@ -205,10 +208,12 @@ namespace oomph
     // Provide storage
     int lenfle[3];
 
+
     // Storage for recommendations for front size so we can check how
     // close our factors are
     double front0_recommendation = 0;
     double front1_recommendation = 0;
+
 
     // Flag to indicate if exact, required values for nfront are available
     // from previous unsucessful solve
@@ -221,6 +226,7 @@ namespace oomph
     AssemblyHandler* const assembly_handler_pt =
       problem_pt->assembly_handler_pt();
 
+
     // Loop over size allocation/solver until we've made all the arrays
     //=================================================================
     // big enough...
@@ -231,6 +237,7 @@ namespace oomph
       // Initialise frontal solver
       //=========================
       MA42ID(Icntl, cntl, Isave);
+
 
       // Loop over the elements to setup variables associated with elements
       //==================================================================
@@ -244,6 +251,7 @@ namespace oomph
 
         // Get number of variables in element
         int nvar = assembly_handler_pt->ndof(elem_pt);
+
 
         // Multiple equations
         //-------------------
@@ -287,6 +295,7 @@ namespace oomph
           nvar = 2;
         }
 
+
         // Now call the frontal routine
         // GB: added check to exclude case with no dofs
         if (nvar)
@@ -303,6 +312,7 @@ namespace oomph
         delete[] ivar;
         ivar = 0;
       }
+
 
       // Loop over the elements again for symbolic factorisation
       //=======================================================
@@ -377,6 +387,7 @@ namespace oomph
 
       } // end of symbolic factorisation
 
+
       // Front sizes: "Somewhat larger than..."
       //---------------------------------------
       front0_recommendation = ifsize[0];
@@ -386,12 +397,11 @@ namespace oomph
         nfront[0] = int(ceil(Front_factor * double(front0_recommendation)));
         nfront[1] = int(ceil(Front_factor * double(front1_recommendation)));
 
-        if (n_dof < nfront[0])
-          nfront[0] = n_dof;
-        if (n_dof < nfront[1])
-          nfront[1] = n_dof;
+        if (n_dof < nfront[0]) nfront[0] = n_dof;
+        if (n_dof < nfront[1]) nfront[1] = n_dof;
       }
       // We have a problem if the front size is cocked
+
 
       // Sizes for lenbuf[]: "Somewhat larger than..."
       //----------------------------------------------
@@ -408,6 +418,7 @@ namespace oomph
         lenbuf1_recommendation = 0;
       }
       lenbuf2_recommendation = ifsize[4];
+
 
       // Enable use of direct access files?
       //----------------------------------
@@ -448,6 +459,7 @@ namespace oomph
           lenbuf[1] = 0;
         }
         lenbuf[2] = int(ceil(factor * double(10 * (2 * nfront[0] + 5))));
+
 
         // Initial size allocation: Need memory "somewhat larger" than ...
         if (exact_lenfle_available)
@@ -503,11 +515,13 @@ namespace oomph
         }
       }
 
+
       if (Doc_stats)
       {
         oomph_info << "\n FRONT SIZE (min and actual): " << ifsize[0] << " "
                    << nfront[0] << std::endl;
       }
+
 
       // Initialise success
       bool success = true;
@@ -534,8 +548,7 @@ namespace oomph
         // Set the new value of Lw (member data)
         Lw = lw;
         // Delete the previously allocated storage
-        if (W)
-          delete[] W;
+        if (W) delete[] W;
         // Now allocate new storage
         W = new (std::nothrow) double[Lw];
         if (!W)
@@ -573,6 +586,7 @@ namespace oomph
                       (1024.0 * 1024.0);
         oomph_info << "\n ESTIMATED MEMORY USAGE " << temp << "Mb" << std::endl;
       }
+
 
       // Now do the actual frontal assembly and solve loop
       //=================================================
@@ -655,6 +669,7 @@ namespace oomph
           nvar = 2;
         }
 
+
         // GB: added check to exclude case with no dofs
         if (nvar)
         {
@@ -671,6 +686,7 @@ namespace oomph
           }
           double** rhs = new double*[1];
           rhs[0] = new double[nmaxe];
+
 
           for (int i = 0; i < nmaxe; i++)
           {
@@ -705,6 +721,7 @@ namespace oomph
                  Isave,
                  Info,
                  rinfo);
+
 
           // Error check:
           if (Info[0] < 0)
@@ -945,6 +962,7 @@ namespace oomph
     delete b;
   }
 
+
   //=========================================================================
   /// Function to reorder the elements according to Sloan's algorithm
   //=========================================================================
@@ -963,6 +981,7 @@ namespace oomph
     int liw, lw, *perm = 0;
     double wt[3], rinfo[6];
 
+
     // Direct ordering: 1
     direct = 1;
 
@@ -973,6 +992,7 @@ namespace oomph
 
     // Initialise things here
     MC63ID(icntl);
+
 
     // Suppress printing of error and warning messages?
     if (!Doc_stats)
@@ -1093,6 +1113,7 @@ namespace oomph
 
     } while (info[0] < 0);
 
+
     if (Doc_stats)
     {
       oomph_info << "\n Initial wavefront details  :\n      max " << rinfo[0]
@@ -1105,6 +1126,7 @@ namespace oomph
     // Free the memory allocated
     delete[] w;
     delete[] iw;
+
 
     // Store re-ordered elements in temporary vector
     Vector<GeneralisedElement*> tmp_element_pt(n_el);

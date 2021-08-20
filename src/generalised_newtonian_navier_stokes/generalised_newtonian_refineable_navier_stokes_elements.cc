@@ -104,6 +104,7 @@ namespace oomph
       }
     }
 
+
     // Number of integration points
     unsigned n_intpt = integral_pt()->nweight();
 
@@ -128,11 +129,13 @@ namespace oomph
       // Premultiply weights and Jacobian
       double W = w * J;
 
+
       // Do we want the velocity one?
       if ((which_one == 0) || (which_one == 2))
       {
         // Get the velocity shape functions
         shape_at_knot(ipt, psi);
+
 
         // Number of master nodes and storage for the weight of the shape
         // function
@@ -201,6 +204,7 @@ namespace oomph
                 //           if(local_eqn >= 0)
                 //            {
 
+
                 // Add the contribution
                 veloc_mass_diag[local_eqn] += pow(psi[l] * hang_weight, 2) * W;
               }
@@ -266,6 +270,7 @@ namespace oomph
               //         if(local_eqn >= 0)
               //          {
 
+
               // Add the contribution
               press_mass_diag[local_eqn] += pow(psi_p[l] * hang_weight, 2) * W;
             }
@@ -274,6 +279,7 @@ namespace oomph
       }
     }
   }
+
 
   //========================================================================
   /// Add element's contribution to the elemental
@@ -332,6 +338,7 @@ namespace oomph
     // Set up memory for the shape and test functions
     Shape psif(n_node), testf(n_node);
     DShape dpsifdx(n_node, DIM), dtestfdx(n_node, DIM);
+
 
     // Set up memory for pressure shape and test functions
     Shape psip(n_pres), testp(n_pres);
@@ -395,6 +402,7 @@ namespace oomph
       {
         interpolated_p += this->p_nst(l) * psip[l];
       }
+
 
       // Calculate velocities and derivatives
 
@@ -564,6 +572,7 @@ namespace oomph
           }
         }
       }
+
 
       // MOMENTUM EQUATIONS
       //==================
@@ -863,6 +872,7 @@ namespace oomph
 
       } // End of loop over nodes for equations
 
+
       // CONTINUITY EQUATION
       //===================
 
@@ -1002,6 +1012,7 @@ namespace oomph
 
     } // End of loop over integration points
   }
+
 
   //======================================================================
   /// Compute derivatives of elemental residual vector with respect
@@ -1293,6 +1304,7 @@ namespace oomph
       Vector<double> source_gradient(DIM, 0.0);
       this->get_source_gradient_nst(time, ipt, interpolated_x, source_gradient);
 
+
       // Assemble shape derivatives
       //---------------------------
 
@@ -1447,6 +1459,7 @@ namespace oomph
                 } // End of loop over shape controlling nodes q
               } // End of loop over coordinate directions p
 
+
               // Derivs w.r.t. to nodal velocities
               // ---------------------------------
               if (element_has_node_with_aux_node_update_fct)
@@ -1524,10 +1537,12 @@ namespace oomph
                 } // End of loop over local nodes
               } // End of if(element_has_node_with_aux_node_update_fct)
 
+
             } // local_eqn>=0
           }
         }
       } // End of loop over test functions
+
 
       // CONTINUITY EQUATION
       // -------------------
@@ -1595,6 +1610,7 @@ namespace oomph
                 dresidual_dnodal_coordinates(local_eqn, p, q) +=
                   aux * dJ_dX(p, q) * testp[l] * w * hang_weight;
 
+
                 // Derivative of residual x Jacobian
                 // ---------------------------------
 
@@ -1609,6 +1625,7 @@ namespace oomph
                   aux * testp[l] * J * w * hang_weight;
               }
             }
+
 
             // Derivs w.r.t. to nodal velocities
             // ---------------------------------
@@ -1837,6 +1854,7 @@ namespace oomph
 
         Vector<double> s_father(3);
 
+
         // Son midpoint is located at the following coordinates in father
         // element:
         for (unsigned i = 0; i < 3; i++)
@@ -1872,6 +1890,7 @@ namespace oomph
       } // Otherwise this is called after p-refinement
     }
   }
+
 
   //====================================================================
   //// Force build of templates

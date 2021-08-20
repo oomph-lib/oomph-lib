@@ -41,19 +41,20 @@ namespace oomph
   /// Class for Refineable LinearElasticity equations
   //========================================================================
   template<unsigned DIM>
-  class RefineableLinearElasticityEquations :
-    public virtual LinearElasticityEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableLinearElasticityEquations
+    : public virtual LinearElasticityEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Constructor
-    RefineableLinearElasticityEquations() :
-      LinearElasticityEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableLinearElasticityEquations()
+      : LinearElasticityEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
@@ -173,11 +174,13 @@ namespace oomph
       this->Unsteady = cast_father_element_pt->is_inertia_enabled();
     }
 
+
   private:
     /// Overloaded helper function to take hanging nodes into account
     void fill_in_generic_contribution_to_residuals_linear_elasticity(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
+
 
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
@@ -187,18 +190,18 @@ namespace oomph
   /// Class for refineable QLinearElasticityElement elements
   //========================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQLinearElasticityElement :
-    public virtual QLinearElasticityElement<DIM, NNODE_1D>,
-    public virtual RefineableLinearElasticityEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQLinearElasticityElement
+    : public virtual QLinearElasticityElement<DIM, NNODE_1D>,
+      public virtual RefineableLinearElasticityEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// Constructor:
-    RefineableQLinearElasticityElement() :
-      QLinearElasticityElement<DIM, NNODE_1D>(),
-      RefineableElement(),
-      RefineableLinearElasticityEquations<DIM>(),
-      RefineableQElement<DIM>()
+    RefineableQLinearElasticityElement()
+      : QLinearElasticityElement<DIM, NNODE_1D>(),
+        RefineableElement(),
+        RefineableLinearElasticityEquations<DIM>(),
+        RefineableQElement<DIM>()
     {
     }
 
@@ -228,22 +231,23 @@ namespace oomph
     void further_setup_hanging_nodes() {}
   };
 
+
   //======================================================================
   /// p-refineable version of 2D QLinearElasticityElement elements
   //======================================================================
   template<unsigned DIM>
-  class PRefineableQLinearElasticityElement :
-    public QLinearElasticityElement<DIM, 2>,
-    public virtual RefineableLinearElasticityEquations<DIM>,
-    public virtual PRefineableQElement<DIM>
+  class PRefineableQLinearElasticityElement
+    : public QLinearElasticityElement<DIM, 2>,
+      public virtual RefineableLinearElasticityEquations<DIM>,
+      public virtual PRefineableQElement<DIM>
   {
   public:
     /// \short Constructor, simply call the other constructors
-    PRefineableQLinearElasticityElement() :
-      RefineableElement(),
-      RefineableLinearElasticityEquations<DIM>(),
-      PRefineableQElement<DIM>(),
-      QLinearElasticityElement<DIM, 2>()
+    PRefineableQLinearElasticityElement()
+      : RefineableElement(),
+        RefineableLinearElasticityEquations<DIM>(),
+        PRefineableQElement<DIM>(),
+        QLinearElasticityElement<DIM, 2>()
     {
       // Set integration scheme
       // (To avoid memory leaks in pre-build and p-refine where new
@@ -256,6 +260,7 @@ namespace oomph
     {
       delete this->integral_pt();
     }
+
 
     /// Broken copy constructor
     PRefineableQLinearElasticityElement(
@@ -311,12 +316,13 @@ namespace oomph
       double& norm);
   };
 
+
   //==============================================================
   /// FaceGeometry of the 2D RefineableQLinearElasticityElement elements
   //==============================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<RefineableQLinearElasticityElement<2, NNODE_1D>> :
-    public virtual QElement<1, NNODE_1D>
+  class FaceGeometry<RefineableQLinearElasticityElement<2, NNODE_1D>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     // Make sure that we call the constructor of the QElement
@@ -330,8 +336,8 @@ namespace oomph
   //==============================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<
-    FaceGeometry<RefineableQLinearElasticityElement<2, NNODE_1D>>> :
-    public virtual PointElement
+    FaceGeometry<RefineableQLinearElasticityElement<2, NNODE_1D>>>
+    : public virtual PointElement
   {
   public:
     // Make sure that we call the constructor of the QElement
@@ -339,12 +345,13 @@ namespace oomph
     FaceGeometry() : PointElement() {}
   };
 
+
   //==============================================================
   /// FaceGeometry of the 3D RefineableQLinearElasticityElement elements
   //==============================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<RefineableQLinearElasticityElement<3, NNODE_1D>> :
-    public virtual QElement<2, NNODE_1D>
+  class FaceGeometry<RefineableQLinearElasticityElement<3, NNODE_1D>>
+    : public virtual QElement<2, NNODE_1D>
   {
   public:
     // Make sure that we call the constructor of the QElement
@@ -358,14 +365,15 @@ namespace oomph
   //==============================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<
-    FaceGeometry<RefineableQLinearElasticityElement<3, NNODE_1D>>> :
-    public virtual QElement<1, NNODE_1D>
+    FaceGeometry<RefineableQLinearElasticityElement<3, NNODE_1D>>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     // Make sure that we call the constructor of the QElement
     // Only the Intel compiler seems to need this!
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };
+
 
 } // namespace oomph
 

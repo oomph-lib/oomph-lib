@@ -108,6 +108,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
+
     /// \short Complete LU solve (replaces matrix by its LU decomposition
     /// and overwrites RHS with solution). The default should not need
     /// to be over-written
@@ -149,14 +150,14 @@ namespace oomph
                                     Vector<std::complex<double>>& soln) = 0;
   };
 
+
   //=================================================================
   /// \short Class of matrices containing double complex, and stored as a
   /// DenseMatrix<complex<double> >, but with solving functionality inherited
   /// from the abstract ComplexMatrix class.
   //=================================================================
-  class DenseComplexMatrix :
-    public ComplexMatrixBase,
-    public DenseMatrix<std::complex<double>>
+  class DenseComplexMatrix : public ComplexMatrixBase,
+                             public DenseMatrix<std::complex<double>>
   {
   private:
     /// Pointer to storage for the index of permutations in the LU solve
@@ -175,29 +176,29 @@ namespace oomph
 
   public:
     /// Empty constructor, simply assign the lengths N and M to 0
-    DenseComplexMatrix() :
-      DenseMatrix<std::complex<double>>(),
-      Index(0),
-      LU_factors(0),
-      Overwrite_matrix_storage(false)
+    DenseComplexMatrix()
+      : DenseMatrix<std::complex<double>>(),
+        Index(0),
+        LU_factors(0),
+        Overwrite_matrix_storage(false)
     {
     }
 
     /// Constructor to build a square n by n matrix.
-    DenseComplexMatrix(const unsigned long& n) :
-      DenseMatrix<std::complex<double>>(n),
-      Index(0),
-      LU_factors(0),
-      Overwrite_matrix_storage(false)
+    DenseComplexMatrix(const unsigned long& n)
+      : DenseMatrix<std::complex<double>>(n),
+        Index(0),
+        LU_factors(0),
+        Overwrite_matrix_storage(false)
     {
     }
 
     /// Constructor to build a matrix with n rows and m columns.
-    DenseComplexMatrix(const unsigned long& n, const unsigned long& m) :
-      DenseMatrix<std::complex<double>>(n, m),
-      Index(0),
-      LU_factors(0),
-      Overwrite_matrix_storage(false)
+    DenseComplexMatrix(const unsigned long& n, const unsigned long& m)
+      : DenseMatrix<std::complex<double>>(n, m),
+        Index(0),
+        LU_factors(0),
+        Overwrite_matrix_storage(false)
     {
     }
 
@@ -205,13 +206,14 @@ namespace oomph
     /// with initial value initial_val
     DenseComplexMatrix(const unsigned long& n,
                        const unsigned long& m,
-                       const std::complex<double>& initial_val) :
-      DenseMatrix<std::complex<double>>(n, m, initial_val),
-      Index(0),
-      LU_factors(0),
-      Overwrite_matrix_storage(false)
+                       const std::complex<double>& initial_val)
+      : DenseMatrix<std::complex<double>>(n, m, initial_val),
+        Index(0),
+        LU_factors(0),
+        Overwrite_matrix_storage(false)
     {
     }
+
 
     /// Broken copy constructor
     DenseComplexMatrix(const DenseComplexMatrix& matrix)
@@ -224,6 +226,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("DenseComplexMatrix");
     }
+
 
     /// Return the number of rows of the matrix
     inline unsigned long nrow() const
@@ -280,12 +283,12 @@ namespace oomph
                             Vector<std::complex<double>>& soln);
   };
 
+
   //=================================================================
   /// \short A class for compressed row matrices
   //=================================================================
-  class CRComplexMatrix :
-    public CRMatrix<std::complex<double>>,
-    public ComplexMatrixBase
+  class CRComplexMatrix : public CRMatrix<std::complex<double>>,
+                          public ComplexMatrixBase
   {
   private:
     /// \short Storage for the LU factors as required by SuperLU
@@ -309,20 +312,22 @@ namespace oomph
                     const Vector<int>& column_index,
                     const Vector<int>& row_start,
                     const unsigned long& n,
-                    const unsigned long& m) :
-      CRMatrix<std::complex<double>>(value, column_index, row_start, n, m),
-      F_factors(0),
-      Info(0)
+                    const unsigned long& m)
+      : CRMatrix<std::complex<double>>(value, column_index, row_start, n, m),
+        F_factors(0),
+        Info(0)
     {
       // By default SuperLU solves linear systems quietly
       Doc_stats_during_solve = false;
     }
+
 
     /// Broken copy constructor
     CRComplexMatrix(const CRComplexMatrix& matrix)
     {
       BrokenCopy::broken_copy("CRComplexMatrix");
     }
+
 
     /// Broken assignment operator
     void operator=(const CRComplexMatrix&)
@@ -387,6 +392,7 @@ namespace oomph
     void multiply(const Vector<std::complex<double>>& x,
                   Vector<std::complex<double>>& soln);
 
+
     /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
     void multiply_transpose(const Vector<std::complex<double>>& x,
                             Vector<std::complex<double>>& soln);
@@ -397,12 +403,12 @@ namespace oomph
     bool Doc_stats_during_solve;
   };
 
+
   //=================================================================
   /// \short A class for compressed column matrices that store doubles
   //=================================================================
-  class CCComplexMatrix :
-    public ComplexMatrixBase,
-    public CCMatrix<std::complex<double>>
+  class CCComplexMatrix : public ComplexMatrixBase,
+                          public CCMatrix<std::complex<double>>
   {
   private:
     /// \short Storage for the LU factors as required by SuperLU
@@ -433,10 +439,10 @@ namespace oomph
                     const Vector<int>& row_index,
                     const Vector<int>& column_start,
                     const unsigned long& n,
-                    const unsigned long& m) :
-      CCMatrix<std::complex<double>>(value, row_index, column_start, n, m),
-      F_factors(0),
-      Info(0)
+                    const unsigned long& m)
+      : CCMatrix<std::complex<double>>(value, row_index, column_start, n, m),
+        F_factors(0),
+        Info(0)
     {
       // By default SuperLU solves linear systems quietly
       Doc_stats_during_solve = false;
@@ -508,9 +514,11 @@ namespace oomph
                   const Vector<std::complex<double>>& b,
                   Vector<std::complex<double>>& residual);
 
+
     /// \short Multiply the matrix by the vector x: soln=Ax
     void multiply(const Vector<std::complex<double>>& x,
                   Vector<std::complex<double>>& soln);
+
 
     /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
     void multiply_transpose(const Vector<std::complex<double>>& x,

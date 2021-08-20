@@ -35,6 +35,7 @@ namespace oomph
 
   /// 2D Advection Diffusion elements
 
+
   /// Default value for Peclet number
   template<unsigned NREAGENT, unsigned DIM>
   Vector<double> AdvectionDiffusionReactionEquations<NREAGENT, DIM>::
@@ -112,6 +113,7 @@ namespace oomph
       DenseMatrix<double> interpolated_dcdx(NREAGENT, DIM, 0.0);
       Vector<double> mesh_velocity(DIM, 0.0);
 
+
       // Calculate function value and derivatives:
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
@@ -152,9 +154,11 @@ namespace oomph
         }
       }
 
+
       // Get source function
       Vector<double> source(NREAGENT);
       get_source_adv_diff_react(ipt, interpolated_x, source);
+
 
       // Get wind
       Vector<double> wind(DIM);
@@ -170,6 +174,7 @@ namespace oomph
       {
         get_reaction_deriv_adv_diff_react(ipt, interpolated_c, dRdC);
       }
+
 
       // Assemble residuals and Jacobian
       //--------------------------------
@@ -242,8 +247,7 @@ namespace oomph
                       {
                         // Temporary term used in assembly
                         double tmp = wind[i];
-                        if (!ALE_is_disabled)
-                          tmp -= T[r] * mesh_velocity[i];
+                        if (!ALE_is_disabled) tmp -= T[r] * mesh_velocity[i];
                         // Now assemble Jacobian term
                         jacobian(local_eqn, local_unknown) -=
                           dpsidx(l2, i) *
@@ -264,6 +268,7 @@ namespace oomph
       } // End of loop over nodes
     } // End of loop over integration points
   }
+
 
   //=======================================================================
   /// Compute norm of the solution: sum of squares of L2 norms for reagents
@@ -318,6 +323,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -342,6 +348,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //=========================================================================
   /// Integrate the reagent concentrations over the element
@@ -405,6 +412,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //======================================================================
   /// \short Output function:
   ///
@@ -418,6 +426,7 @@ namespace oomph
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
+
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -458,6 +467,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// C-style output function:
   ///
@@ -495,6 +505,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// \short  Output exact solution
@@ -546,6 +557,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// \short Validate against exact solution

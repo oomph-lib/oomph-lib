@@ -37,6 +37,7 @@
 #include "quadtree.h"
 #include "refineable_quad_element.h"
 
+
 namespace oomph
 {
   //========================================================================
@@ -110,6 +111,7 @@ namespace oomph
   //==========================================================================
   DenseMatrix<int> QuadTree::S_direct;
 
+
   //====================================================================
   /// Setup the static data stored in the QuadTree -- this needs to be
   /// called before QuadTrees can be used. Automatically called
@@ -118,6 +120,7 @@ namespace oomph
   void QuadTree::setup_static_data()
   {
     using namespace QuadTreeNames;
+
 
 #ifdef PARANOID
     if (Tree::OMEGA != QuadTree::OMEGA)
@@ -130,6 +133,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Set flag to indicate that static data has been setup
     Static_data_has_been_setup = true;
@@ -219,6 +223,7 @@ namespace oomph
     Is_adjacent(NE, SW) = false;
     Is_adjacent(SW, SW) = true;
     Is_adjacent(SE, SW) = false;
+
 
     Is_adjacent(N, SE) = false;
     Is_adjacent(E, SE) = true;
@@ -843,6 +848,7 @@ namespace oomph
     }
   }
 
+
   //================================================================
   /// Constructor for QuadTreeForest:
   ///
@@ -854,8 +860,8 @@ namespace oomph
   /// been allocated before the constructor is called, otherwise the
   /// relative rotation scheme will not be constructed correctly.
   //=================================================================
-  QuadTreeForest::QuadTreeForest(Vector<TreeRoot*>& trees_pt) :
-    TreeForest(trees_pt)
+  QuadTreeForest::QuadTreeForest(Vector<TreeRoot*>& trees_pt)
+    : TreeForest(trees_pt)
   {
 #ifdef LEAK_CHECK
     LeakCheckNames::QuadTreeForest_build += 1;
@@ -876,6 +882,7 @@ namespace oomph
     // be set before the constructor is called
     construct_north_equivalents();
   }
+
 
   //================================================================
   /// Setup the neighbour lookup schemes for all constituent
@@ -918,6 +925,7 @@ namespace oomph
       }
     }
 
+
     // For each tree we store a set of potentially neighbouring trees
     // i.e. trees that share at least one node
     Vector<std::set<unsigned>> potentially_neighb_tree(numtrees);
@@ -948,6 +956,7 @@ namespace oomph
       }
     }
 
+
     // Loop over all trees
     for (unsigned i = 0; i < numtrees; i++)
     {
@@ -965,12 +974,14 @@ namespace oomph
            (Trees_pt[j]->object_pt()->get_node_number(
               Trees_pt[i]->object_pt()->node_pt(n * n - 1)) != -1));
 
+
         // is it the Southern neighbour ?
         bool is_S_neighbour =
           ((Trees_pt[j]->object_pt()->get_node_number(
               Trees_pt[i]->object_pt()->node_pt(0)) != -1) &&
            (Trees_pt[j]->object_pt()->get_node_number(
               Trees_pt[i]->object_pt()->node_pt(n - 1)) != -1));
+
 
         // is it the Eastern neighbour ?
         bool is_E_neighbour =
@@ -986,16 +997,14 @@ namespace oomph
            (Trees_pt[j]->object_pt()->get_node_number(
               Trees_pt[i]->object_pt()->node_pt(n * (n - 1))) != -1));
 
-        if (is_N_neighbour)
-          Trees_pt[i]->neighbour_pt(N) = Trees_pt[j];
-        if (is_S_neighbour)
-          Trees_pt[i]->neighbour_pt(S) = Trees_pt[j];
-        if (is_E_neighbour)
-          Trees_pt[i]->neighbour_pt(E) = Trees_pt[j];
-        if (is_W_neighbour)
-          Trees_pt[i]->neighbour_pt(W) = Trees_pt[j];
+
+        if (is_N_neighbour) Trees_pt[i]->neighbour_pt(N) = Trees_pt[j];
+        if (is_S_neighbour) Trees_pt[i]->neighbour_pt(S) = Trees_pt[j];
+        if (is_E_neighbour) Trees_pt[i]->neighbour_pt(E) = Trees_pt[j];
+        if (is_W_neighbour) Trees_pt[i]->neighbour_pt(W) = Trees_pt[j];
       }
     }
+
 
     // Old hacky version with horrendous scaling
     if (false)
@@ -1015,12 +1024,14 @@ namespace oomph
                (Trees_pt[j]->object_pt()->get_node_number(
                   Trees_pt[i]->object_pt()->node_pt(n * n - 1)) != -1));
 
+
             // is it the Southern neighbour ?
             bool is_S_neighbour =
               ((Trees_pt[j]->object_pt()->get_node_number(
                   Trees_pt[i]->object_pt()->node_pt(0)) != -1) &&
                (Trees_pt[j]->object_pt()->get_node_number(
                   Trees_pt[i]->object_pt()->node_pt(n - 1)) != -1));
+
 
             // is it the Eastern neighbour ?
             bool is_E_neighbour =
@@ -1036,19 +1047,17 @@ namespace oomph
                (Trees_pt[j]->object_pt()->get_node_number(
                   Trees_pt[i]->object_pt()->node_pt(n * (n - 1))) != -1));
 
-            if (is_N_neighbour)
-              Trees_pt[i]->neighbour_pt(N) = Trees_pt[j];
-            if (is_S_neighbour)
-              Trees_pt[i]->neighbour_pt(S) = Trees_pt[j];
-            if (is_E_neighbour)
-              Trees_pt[i]->neighbour_pt(E) = Trees_pt[j];
-            if (is_W_neighbour)
-              Trees_pt[i]->neighbour_pt(W) = Trees_pt[j];
+
+            if (is_N_neighbour) Trees_pt[i]->neighbour_pt(N) = Trees_pt[j];
+            if (is_S_neighbour) Trees_pt[i]->neighbour_pt(S) = Trees_pt[j];
+            if (is_E_neighbour) Trees_pt[i]->neighbour_pt(E) = Trees_pt[j];
+            if (is_W_neighbour) Trees_pt[i]->neighbour_pt(W) = Trees_pt[j];
           }
         }
       }
     }
   }
+
 
   //================================================================
   /// Construct the rotation scheme for the quadtree forest.
@@ -1416,6 +1425,7 @@ namespace oomph
     // Initialise error in vertex positions
     max_error = 0.0;
 
+
     // Loop over all elements to assign numbers for plotting
     // -----------------------------------------------------
     unsigned long num_nodes = forest_nodes_pt.size();
@@ -1506,6 +1516,7 @@ namespace oomph
               s[0] = S_base(0, direction);
               s[1] = S_base(1, direction);
               el_pt->object_pt()->get_x(s, x_small);
+
 
               // Need to exclude periodic nodes from this check
               // There can only be periodic nodes if we have moved into the

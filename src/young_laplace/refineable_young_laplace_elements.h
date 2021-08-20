@@ -32,35 +32,39 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib headers
 #include "generic/refineable_quad_element.h"
 #include "generic/error_estimator.h"
 #include "young_laplace_elements.h"
+
 
 namespace oomph
 {
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// Refineable version of YoungLaplace equations
   ///
   ///
   //======================================================================
-  class RefineableYoungLaplaceEquations :
-    public virtual YoungLaplaceEquations,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableYoungLaplaceEquations
+    : public virtual YoungLaplaceEquations,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Constructor: Pass refinement level to refineable element
     /// (default 0 = root)
-    RefineableYoungLaplaceEquations(const int& refine_level = 0) :
-      YoungLaplaceEquations(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableYoungLaplaceEquations(const int& refine_level = 0)
+      : YoungLaplaceEquations(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// Broken copy constructor
     RefineableYoungLaplaceEquations(
@@ -120,6 +124,7 @@ namespace oomph
       }
     }
 
+
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
@@ -139,6 +144,7 @@ namespace oomph
         get_interpolated_values(s, values);
       }
     }
+
 
     /// \short Further build: Copy function pointers to spine and spine base
     /// functions from father. Kappa is passed across with set_kappa(...)
@@ -162,25 +168,26 @@ namespace oomph
     }
   };
 
+
   //======================================================================
   /// Refineable version of 2D QYoungLaplaceElement elements
   ///
   ///
   //======================================================================
   template<unsigned NNODE_1D>
-  class RefineableQYoungLaplaceElement :
-    public QYoungLaplaceElement<NNODE_1D>,
-    public virtual RefineableYoungLaplaceEquations,
-    public virtual RefineableQElement<2>
+  class RefineableQYoungLaplaceElement
+    : public QYoungLaplaceElement<NNODE_1D>,
+      public virtual RefineableYoungLaplaceEquations,
+      public virtual RefineableQElement<2>
   {
   public:
     /// \short Constructor: Pass refinement level to refineable quad element
     /// (default 0 = root)
-    RefineableQYoungLaplaceElement() :
-      RefineableElement(),
-      RefineableYoungLaplaceEquations(),
-      RefineableQElement<2>(),
-      QYoungLaplaceElement<NNODE_1D>()
+    RefineableQYoungLaplaceElement()
+      : RefineableElement(),
+        RefineableYoungLaplaceEquations(),
+        RefineableQElement<2>(),
+        QYoungLaplaceElement<NNODE_1D>()
     {
     }
 
@@ -234,20 +241,22 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the RefineableQuadYoungLaplaceElement elements: The
   /// spatial dimension of the face elements is one lower than that of the bulk
   /// element but they have the same number of points along their 1D edges.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<RefineableQYoungLaplaceElement<NNODE_1D>> :
-    public virtual QElement<1, NNODE_1D>
+  class FaceGeometry<RefineableQYoungLaplaceElement<NNODE_1D>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };
+
 
 } // namespace oomph
 

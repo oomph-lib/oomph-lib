@@ -31,6 +31,7 @@
 #include "nodes.h"
 #include "timesteppers.h"
 
+
 namespace oomph
 {
   ///////////////////////////////////////////////////////////////////
@@ -66,6 +67,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
   }
+
 
   //====================================================================
   /// Add the pointer data_pt to the internal storage used to keep track
@@ -228,19 +230,20 @@ namespace oomph
   /// segregated solve.
   long Data::Is_segregated_solve_pinned = -3;
 
+
   //================================================================
   /// Default constructor.
   //================================================================
-  Data::Data() :
-    Value(0),
-    Eqn_number(0),
-    Time_stepper_pt(Data::Default_static_time_stepper_pt),
-    Copy_of_data_pt(0),
-    Ncopies(0),
-    Nvalue(0)
+  Data::Data()
+    : Value(0),
+      Eqn_number(0),
+      Time_stepper_pt(Data::Default_static_time_stepper_pt),
+      Copy_of_data_pt(0),
+      Ncopies(0),
+      Nvalue(0)
 #ifdef OOMPH_HAS_MPI
-    ,
-    Non_halo_proc_ID(-1)
+      ,
+      Non_halo_proc_ID(-1)
 #endif
 
   {
@@ -250,16 +253,16 @@ namespace oomph
   /// Default constructor for steady problems. Memory is assigned for a given
   /// number of values, which are assumed to be free (not pinned)
   //================================================================
-  Data::Data(const unsigned& initial_n_value) :
-    Value(0),
-    Eqn_number(0),
-    Time_stepper_pt(Data::Default_static_time_stepper_pt),
-    Copy_of_data_pt(0),
-    Ncopies(0),
-    Nvalue(initial_n_value)
+  Data::Data(const unsigned& initial_n_value)
+    : Value(0),
+      Eqn_number(0),
+      Time_stepper_pt(Data::Default_static_time_stepper_pt),
+      Copy_of_data_pt(0),
+      Ncopies(0),
+      Nvalue(initial_n_value)
 #ifdef OOMPH_HAS_MPI
-    ,
-    Non_halo_proc_ID(-1)
+      ,
+      Non_halo_proc_ID(-1)
 #endif
   {
     // Only bother to do something if there are values
@@ -295,16 +298,16 @@ namespace oomph
   //================================================================
   Data::Data(TimeStepper* const& time_stepper_pt_,
              const unsigned& initial_n_value,
-             const bool& allocate_storage) :
-    Value(0),
-    Eqn_number(0),
-    Time_stepper_pt(time_stepper_pt_),
-    Copy_of_data_pt(0),
-    Ncopies(0),
-    Nvalue(initial_n_value)
+             const bool& allocate_storage)
+    : Value(0),
+      Eqn_number(0),
+      Time_stepper_pt(time_stepper_pt_),
+      Copy_of_data_pt(0),
+      Ncopies(0),
+      Nvalue(initial_n_value)
 #ifdef OOMPH_HAS_MPI
-    ,
-    Non_halo_proc_ID(-1)
+      ,
+      Non_halo_proc_ID(-1)
 #endif
   {
     // If we are in charge of allocating the storage,
@@ -361,6 +364,7 @@ namespace oomph
     }
     out << "]" << std::endl;
 
+
     return out;
   }
 
@@ -391,6 +395,7 @@ namespace oomph
     out << dynamic_cast<const Data&>(nd);
     return out;
   }
+
 
   //================================================================
   /// Set a new TimeStepper be resizing the appropriate storage.
@@ -491,6 +496,7 @@ namespace oomph
     delete_value_storage();
   }
 
+
   //==================================================================
   /// Compute Vector of values (dofs or pinned) at this Data object
   //==================================================================
@@ -517,6 +523,7 @@ namespace oomph
       values[i] = value(t, i);
     }
   }
+
 
   //================================================================
   /// Assign (global) equation number. Overloaded version for nodes.
@@ -553,6 +560,7 @@ namespace oomph
     Data::assign_eqn_numbers(global_number, dof_pt);
   }
 
+
   //=====================================================================
   /// If pointer parameter_pt addresses internal data values then return
   /// return true, otherwise return false
@@ -585,6 +593,7 @@ namespace oomph
     // If we get to here we haven't found the data
     return false;
   }
+
 
   //================================================================
   /// Copy Data values from specified Data object
@@ -628,6 +637,7 @@ namespace oomph
       }
     }
   }
+
 
   //================================================================
   /// Dump data object to a file
@@ -860,6 +870,7 @@ namespace oomph
     }
   }
 
+
   //===================================================================
   /// Return the total number of doubles stored per value to record
   /// the time history of ecah value. The information is read from the
@@ -944,6 +955,7 @@ namespace oomph
       }
     }
   }
+
 
   //================================================================
   ///  Self-test: Have all values been classified as pinned/unpinned?
@@ -1057,8 +1069,7 @@ namespace oomph
     Nvalue = n_value_new;
 
     // Now delete the old storage and set the new pointers
-    if (n_value_old != 0)
-      delete[] Value[0];
+    if (n_value_old != 0) delete[] Value[0];
     delete[] Value;
     Value = value_new_pt;
     delete[] Eqn_number;
@@ -1286,6 +1297,7 @@ namespace oomph
 
 #endif
 
+
   //================================================================
   /// Reset the pointers to the copied data
   //===============================================================
@@ -1298,6 +1310,7 @@ namespace oomph
     // Copy the pointer to the equation number
     Eqn_number = &Copied_data_pt->Eqn_number[Copied_index];
   }
+
 
   //===============================================================
   /// Clear the pointers to the copied data
@@ -1316,11 +1329,10 @@ namespace oomph
   /// distinguish this case from that of copying all data values, except one
   /// independent value.
   //================================================================
-  HijackedData::HijackedData(const unsigned& copied_index,
-                             Data* const& data_pt) :
-    Data(data_pt->time_stepper_pt(), 1, false),
-    Copied_data_pt(data_pt),
-    Copied_index(copied_index)
+  HijackedData::HijackedData(const unsigned& copied_index, Data* const& data_pt)
+    : Data(data_pt->time_stepper_pt(), 1, false),
+      Copied_data_pt(data_pt),
+      Copied_index(copied_index)
   {
     // Don't allow copying of a copy
     if (data_pt->is_a_copy(copied_index))
@@ -1355,11 +1367,13 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   // Functions for the CopiedData class
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //================================================================
   /// Reset the pointers to the copied data
@@ -1377,6 +1391,7 @@ namespace oomph
     Eqn_number = Copied_data_pt->Eqn_number;
   }
 
+
   //===============================================================
   /// Clear ther pointers to the copied data
   //===============================================================
@@ -1391,9 +1406,9 @@ namespace oomph
   /// Constructor, creates a CopiedData object with all values
   /// copied from another Data object.
   //================================================================
-  CopiedData::CopiedData(Data* const& data_pt) :
-    Data(data_pt->time_stepper_pt(), data_pt->nvalue(), false),
-    Copied_data_pt(data_pt)
+  CopiedData::CopiedData(Data* const& data_pt)
+    : Data(data_pt->time_stepper_pt(), data_pt->nvalue(), false),
+      Copied_data_pt(data_pt)
   {
     // Don't allow copying of a copy
     if (data_pt->is_a_copy())
@@ -1427,6 +1442,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   // Functions for the HangInfo class
@@ -1450,6 +1466,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
   }
+
 
   //=====================================================================
   /// Set the pointer to the i-th master node and its weight
@@ -1554,14 +1571,14 @@ namespace oomph
   //========================================================================
   /// Default constructor.
   //========================================================================
-  Node::Node() :
-    Data(),
-    Position_time_stepper_pt(Data::Default_static_time_stepper_pt),
-    Hanging_pt(0),
-    Ndim(0),
-    Nposition_type(0),
-    Obsolete(false),
-    Aux_node_update_fct_pt(0)
+  Node::Node()
+    : Data(),
+      Position_time_stepper_pt(Data::Default_static_time_stepper_pt),
+      Hanging_pt(0),
+      Ndim(0),
+      Nposition_type(0),
+      Obsolete(false),
+      Aux_node_update_fct_pt(0)
   {
 #ifdef LEAK_CHECK
     LeakCheckNames::Node_build += 1;
@@ -1578,15 +1595,15 @@ namespace oomph
   Node::Node(const unsigned& n_dim,
              const unsigned& n_position_type,
              const unsigned& initial_n_value,
-             const bool& allocate_x_position) :
-    Data(initial_n_value),
-    X_position(0),
-    Position_time_stepper_pt(Data::Default_static_time_stepper_pt),
-    Hanging_pt(0),
-    Ndim(n_dim),
-    Nposition_type(n_position_type),
-    Obsolete(false),
-    Aux_node_update_fct_pt(0)
+             const bool& allocate_x_position)
+    : Data(initial_n_value),
+      X_position(0),
+      Position_time_stepper_pt(Data::Default_static_time_stepper_pt),
+      Hanging_pt(0),
+      Ndim(n_dim),
+      Nposition_type(n_position_type),
+      Obsolete(false),
+      Aux_node_update_fct_pt(0)
   {
 #ifdef LEAK_CHECK
     LeakCheckNames::Node_build += 1;
@@ -1628,15 +1645,15 @@ namespace oomph
              const unsigned& n_dim,
              const unsigned& n_position_type,
              const unsigned& initial_n_value,
-             const bool& allocate_x_position) :
-    Data(time_stepper_pt_, initial_n_value),
-    X_position(0),
-    Position_time_stepper_pt(time_stepper_pt_),
-    Hanging_pt(0),
-    Ndim(n_dim),
-    Nposition_type(n_position_type),
-    Obsolete(false),
-    Aux_node_update_fct_pt(0)
+             const bool& allocate_x_position)
+    : Data(time_stepper_pt_, initial_n_value),
+      X_position(0),
+      Position_time_stepper_pt(time_stepper_pt_),
+      Hanging_pt(0),
+      Ndim(n_dim),
+      Nposition_type(n_position_type),
+      Obsolete(false),
+      Aux_node_update_fct_pt(0)
   {
 #ifdef LEAK_CHECK
     LeakCheckNames::Node_build += 1;
@@ -1670,6 +1687,7 @@ namespace oomph
       }
     }
   }
+
 
   //========================================================================
   /// Destructor to clean up the memory allocated for nodal position
@@ -1792,6 +1810,7 @@ namespace oomph
     }
   }
 
+
   //================================================================
   ///  Return the i-th component of nodal velocity: dx/dt
   //================================================================
@@ -1890,6 +1909,7 @@ namespace oomph
     return dxdt;
   }
 
+
   //================================================================
   /// Copy all nodal data from specified Node object
   //================================================================
@@ -1941,6 +1961,7 @@ namespace oomph
     //  Read associated data
     Data::copy(orig_node_pt);
   }
+
 
   //================================================================
   /// Dump nodal positions and associated data to file for restart
@@ -2169,6 +2190,7 @@ namespace oomph
     // Call the resize function for the underlying Data object
     Data::resize(n_value);
 
+
     // Now deal with the hanging Data (if any)
     if (backup_hanging_pt != 0)
     {
@@ -2227,6 +2249,7 @@ namespace oomph
     }
   }
 
+
   //=====================================================================
   /// Make the node periodic by copying values from node_pt.
   /// Broken virtual (only implemented in BoundaryNodes)
@@ -2250,6 +2273,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
+
 
   //====================================================================
   /// Label node as non-hanging node by removing all hanging node data.
@@ -2289,6 +2313,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Interface for function to report if boundary coordinates have been
   /// set up for this node
@@ -2316,6 +2341,7 @@ namespace oomph
       ss.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //=======================================================================
   /// Interface for function to remove the node from the mesh boundary b.
   /// Broken here in order to report run-time erorrs. Must be overloaded
@@ -2327,6 +2353,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
+
 
   //=========================================================================
   ///  Interface to get the number of boundary coordinates on mesh boundary b.
@@ -2341,6 +2368,7 @@ namespace oomph
     // dummy return
     return 0;
   }
+
 
   //=========================================================================
   /// Interface for function to get the k-th generalised boundary coordinate
@@ -2357,6 +2385,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //=========================================================================
   /// Interface for function to set the k-th generalised boundary coordinate
   ///  of the node on boundary b. Broken here to provide
@@ -2370,6 +2399,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
+
 
   //=================================================================
   /// Return i-th value (free or pinned) at this node
@@ -2460,6 +2490,7 @@ namespace oomph
       values[i] = value(t, i);
     }
   }
+
 
   //============================================================
   /// Compute Vector of nodal positions
@@ -2722,6 +2753,7 @@ namespace oomph
     return dxdt;
   }
 
+
   //========================================================================
   /// Output nodal coordinates
   //========================================================================
@@ -2735,6 +2767,7 @@ namespace oomph
     }
     outfile << std::endl;
   }
+
 
 #ifdef OOMPH_HAS_MPI
   //==================================================================
@@ -2772,6 +2805,7 @@ namespace oomph
     vector_of_values[index++] = n_storage;
     vector_of_values[index++] = n_tstorage;
 #endif
+
 
     // Pointer to the first entry in the data array
     double* data_pt = X_position[0];
@@ -2845,6 +2879,7 @@ namespace oomph
 
 #endif
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   // Functions for the BoundaryNodeBase class
@@ -2906,6 +2941,7 @@ namespace oomph
       }
     }
   }
+
 
   //====================================================================
   /// Helper function that is used to turn BoundaryNodes into
@@ -2985,6 +3021,7 @@ namespace oomph
     Index_of_first_value_assigned_by_face_element_pt = 0;
   }
 
+
   //=======================================================================
   /// Add the node to the mesh boundary b
   //=======================================================================
@@ -3017,6 +3054,7 @@ namespace oomph
 
     //   }
   }
+
 
   //=======================================================================
   /// Remove the node from the mesh boundary b
@@ -3074,6 +3112,7 @@ namespace oomph
     return false;
   }
 
+
   //=========================================================================
   /// Get the number of boundary coordinates on mesh boundary b
   //=========================================================================
@@ -3087,6 +3126,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
+
 
     // Does the node lie on the mesh boundary b
     if (!is_on_boundary(b))
@@ -3117,6 +3157,7 @@ namespace oomph
     return (*Boundary_coordinates_pt)[b]->nrow();
   }
 
+
   //=========================================================================
   /// Given the mesh boundary b, return the k-th generalised boundary
   /// coordinates of the node in the vector boundary_zeta
@@ -3144,6 +3185,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
 #ifdef PARANOID
     // Check that the boundary coordinates have been set
     if (Boundary_coordinates_pt == 0)
@@ -3159,6 +3201,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Find out how may coordinates there are from the map
     const unsigned nboundary_coord = (*Boundary_coordinates_pt)[b]->nrow();
@@ -3184,6 +3227,7 @@ namespace oomph
       boundary_zeta[i] = (*(*Boundary_coordinates_pt)[b])(i, k);
     }
   }
+
 
   //=========================================================================
   /// Given the mesh boundary b, set the k-th generalised boundary
@@ -3217,6 +3261,7 @@ namespace oomph
     {
       Boundary_coordinates_pt = new std::map<unsigned, DenseMatrix<double>*>;
     }
+
 
     // Find the number of boundary coordinates
     const unsigned nboundary_coord = boundary_zeta.size();
@@ -3252,11 +3297,13 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   // Functions for the SolidNode class
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //=================================================================
   /// Private function to check that the argument is within the
@@ -3287,6 +3334,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   ///  Steady constructor. The node has NLgrangian Lagrangian
   /// coordinates of n_lagrangian_type types (1 for Lagrange elements,
@@ -3301,10 +3349,10 @@ namespace oomph
                        const unsigned& n_lagrangian_type,
                        const unsigned& n_dim,
                        const unsigned& n_position_type,
-                       const unsigned& initial_n_value) :
-    Node(n_dim, n_position_type, initial_n_value, false),
-    Nlagrangian(n_lagrangian),
-    Nlagrangian_type(n_lagrangian_type)
+                       const unsigned& initial_n_value)
+    : Node(n_dim, n_position_type, initial_n_value, false),
+      Nlagrangian(n_lagrangian),
+      Nlagrangian_type(n_lagrangian_type)
   {
     // Calculate the total storage required for positions
     const unsigned n_storage = Ndim * Nposition_type;
@@ -3338,10 +3386,10 @@ namespace oomph
                        const unsigned& n_lagrangian_type,
                        const unsigned& n_dim,
                        const unsigned& n_position_type,
-                       const unsigned& initial_n_value) :
-    Node(time_stepper_pt_, n_dim, n_position_type, initial_n_value, false),
-    Nlagrangian(n_lagrangian),
-    Nlagrangian_type(n_lagrangian_type)
+                       const unsigned& initial_n_value)
+    : Node(time_stepper_pt_, n_dim, n_position_type, initial_n_value, false),
+      Nlagrangian(n_lagrangian),
+      Nlagrangian_type(n_lagrangian_type)
   {
     // Calculate the total storage required for positions
     const unsigned n_storage = n_dim * n_position_type;
@@ -3376,6 +3424,7 @@ namespace oomph
     delete[] Xi_position;
     Xi_position = 0;
   }
+
 
   //================================================================
   /// Copy nodal positions and associated data from specified
@@ -3413,6 +3462,7 @@ namespace oomph
     // Copy the associated data
     Data::copy(orig_node_pt);
   }
+
 
   //================================================================
   /// Dump nodal positions and associated data to file for restart
@@ -3489,6 +3539,7 @@ namespace oomph
     X_position = Variable_position_pt->Value;
   }
 
+
   //================================================================
   /// Set a new position TimeStepper be resizing the appropriate storage.
   /// The current (zero) values will be unaffected, but all other entries
@@ -3515,6 +3566,7 @@ namespace oomph
     X_position = this->Variable_position_pt->Value;
   }
 
+
   //====================================================================
   /// Check whether the pointer parameter_pt refers to positional data
   //====================================================================
@@ -3525,6 +3577,7 @@ namespace oomph
     return (this->Variable_position_pt->does_pointer_correspond_to_value(
       parameter_pt));
   }
+
 
   //=======================================================================
   /// Return lagrangian coordinate
@@ -3646,6 +3699,7 @@ namespace oomph
     Data::add_value_pt_to_map(map_of_value_pt);
   }
 
+
 #ifdef OOMPH_HAS_MPI
   //==================================================================
   /// Add Lagrangian coordinates to the vector after positional data
@@ -3765,5 +3819,6 @@ namespace oomph
   }
 
 #endif
+
 
 } // namespace oomph

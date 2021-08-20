@@ -104,8 +104,8 @@ namespace oomph
       QuadMeshBase* quad_mesh_pt,
       const unsigned& nz,
       const double& lz,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Nz(nz), Zmin(0.0), Zmax(lz)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Nz(nz), Zmin(0.0), Zmax(lz)
     {
       // Call the generic build function
       build_mesh(quad_mesh_pt, time_stepper_pt);
@@ -120,8 +120,8 @@ namespace oomph
       const unsigned& nz,
       const double& zmin,
       const double& zmax,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      Nz(nz), Zmin(zmin), Zmax(zmax)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Nz(nz), Zmin(zmin), Zmax(zmax)
     {
       // Call the generic mesh constructor
       build_mesh(quad_mesh_pt, time_stepper_pt);
@@ -210,9 +210,9 @@ namespace oomph
   /// also makes the resulting mesh refineable.
   //=======================================================================
   template<class ELEMENT>
-  class RefineableExtrudedCubeMeshFromQuadMesh :
-    public virtual ExtrudedCubeMeshFromQuadMesh<ELEMENT>,
-    public virtual RefineableBrickMesh<ELEMENT>
+  class RefineableExtrudedCubeMeshFromQuadMesh
+    : public virtual ExtrudedCubeMeshFromQuadMesh<ELEMENT>,
+      public virtual RefineableBrickMesh<ELEMENT>
   {
   public:
     /// \short Constructor: Pass a mesh consisting of quad elements,
@@ -224,9 +224,9 @@ namespace oomph
       QuadMeshBase* quad_mesh_pt,
       const unsigned& nz,
       const double& lz,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      ExtrudedCubeMeshFromQuadMesh<ELEMENT>(
-        quad_mesh_pt, nz, lz, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : ExtrudedCubeMeshFromQuadMesh<ELEMENT>(
+          quad_mesh_pt, nz, lz, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // base class Only need to setup octree forest
@@ -242,9 +242,9 @@ namespace oomph
       const unsigned& nz,
       const double& zmin,
       const double& zmax,
-      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
-      ExtrudedCubeMeshFromQuadMesh<ELEMENT>(
-        quad_mesh_pt, nz, zmin, zmax, time_stepper_pt)
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : ExtrudedCubeMeshFromQuadMesh<ELEMENT>(
+          quad_mesh_pt, nz, zmin, zmax, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // base class Only need to setup octree forest

@@ -25,6 +25,7 @@
 // LIC//====================================================================
 /*cfortran.h headers for the mumps routines*/
 
+
 PROTOCCALLSFSUB1(MUMPS_SETUP_SOLVER_POOL, mumps_setup_solver_pool, INT)
 #define mumps_setup_solver_pool(N_POOL) \
   CCALLSFSUB1(MUMPS_SETUP_SOLVER_POOL, mumps_setup_solver_pool, INT, N_POOL)
@@ -32,6 +33,7 @@ PROTOCCALLSFSUB1(MUMPS_SETUP_SOLVER_POOL, mumps_setup_solver_pool, INT)
 PROTOCCALLSFSUB2(MUMPS_SETUP, mumps_setup, INT, INT)
 #define mumps_setup(I_POOL, S) \
   CCALLSFSUB2(MUMPS_SETUP, mumps_setup, INT, INT, I_POOL, S)
+
 
 PROTOCCALLSFSUB2(MUMPS_SET_WORKSPACE_SCALING_FACTOR,
                  mumps_set_workspace_scaling_factor,
@@ -45,13 +47,16 @@ PROTOCCALLSFSUB2(MUMPS_SET_WORKSPACE_SCALING_FACTOR,
               I_POOL, \
               S)
 
+
 PROTOCCALLSFSUB1(MUMPS_SWITCH_ON_DOC, mumps_switch_on_doc, INT)
 #define mumps_switch_on_doc(I_POOL) \
   CCALLSFSUB1(MUMPS_SWITCH_ON_DOC, mumps_switch_on_doc, INT, I_POOL)
 
+
 PROTOCCALLSFSUB1(MUMPS_SWITCH_OFF_DOC, mumps_switch_off_doc, INT)
 #define mumps_switch_off_doc(I_POOL) \
   CCALLSFSUB1(MUMPS_SWITCH_OFF_DOC, mumps_switch_off_doc, INT, I_POOL)
+
 
 PROTOCCALLSFSUB6(
   MUMPS_FACTORISE, mumps_factorise, INT, INT, INT, INTV, INTV, DOUBLEV)
@@ -91,13 +96,16 @@ PROTOCCALLSFSUB7(
               A_LOC, \
               RHS)
 
+
 PROTOCCALLSFSUB3(MUMPS_BACKSUB, mumps_backsub, INT, INT, DOUBLEV)
 #define mumps_backsub(I_POOL, N, RHS) \
   CCALLSFSUB3(MUMPS_BACKSUB, mumps_backsub, INT, INT, DOUBLEV, I_POOL, N, RHS)
 
+
 PROTOCCALLSFSUB1(MUMPS_CLEANUP_MEMORY, mumps_cleanup_memory, INT)
 #define mumps_cleanup_memory(I_POOL) \
   CCALLSFSUB1(MUMPS_CLEANUP_MEMORY, mumps_cleanup_memory, INT, I_POOL)
+
 
 PROTOCCALLSFSUB1(MUMPS_SHUTDOWN, mumps_shutdown, INT)
 #define mumps_shutdown(I_POOL) \

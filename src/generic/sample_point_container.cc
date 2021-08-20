@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "sample_point_container.h"
 
+
 namespace oomph
 {
   //////////////////////////////////////////////////////////////////////////////
@@ -57,6 +58,7 @@ namespace oomph
     }
   }
 
+
   //==============================================================================
   /// Compute total number of sample points recursively
   //==============================================================================
@@ -80,6 +82,7 @@ namespace oomph
     }
     return count;
   }
+
 
   //==============================================================================
   /// Function called for making a sub bin array in a given RefineableBin.
@@ -111,6 +114,7 @@ namespace oomph
         ->disable_use_eulerian_coordinates_during_setup();
     }
 
+
 #ifdef OOMPH_HAS_MPI
 
     // How do we handle halo elements?
@@ -130,6 +134,7 @@ namespace oomph
     // "Measure of" number of sample points per element
     ref_bin_array_parameters_pt->nsample_points_generated_per_element() =
       Bin_array_pt->nsample_points_generated_per_element();
+
 
     // Is it recursive?
     if (Bin_array_pt->bin_array_is_recursive())
@@ -168,6 +173,7 @@ namespace oomph
     delete Sample_point_pt;
     Sample_point_pt = 0;
   }
+
 
   //============================================================================
   /// Output bin; x,[y,[z]],n_sample_points.
@@ -224,6 +230,7 @@ namespace oomph
 
         case 3:
 
+
           outfile << "ZONE I=2, J=2, K=2\n"
                   << min_and_max_coordinates[0].first << " "
                   << min_and_max_coordinates[1].first << " "
@@ -276,6 +283,7 @@ namespace oomph
       }
     }
   }
+
 
   //============================================================================
   /// Output bin; x,[y,[z]]
@@ -323,6 +331,7 @@ namespace oomph
 
         case 3:
 
+
           outfile << "ZONE I=2, J=2, K=2\n"
                   << min_and_max_coordinates[0].first << " "
                   << min_and_max_coordinates[1].first << " "
@@ -376,6 +385,7 @@ namespace oomph
     }
   }
 
+
   //==============================================================================
   /// Add a SamplePoint* to a RefineableBin object.
   //==============================================================================
@@ -418,6 +428,7 @@ namespace oomph
                                                zeta_coordinates);
     }
   }
+
 
   //==============================================================================
   /// Find sub-GeomObject (finite element) and the local coordinate
@@ -501,6 +512,7 @@ namespace oomph
         return;
       }
 
+
       // Now search through (at most) all the sample points in this bin
       unsigned n_sample_point = Sample_point_pt->size();
       unsigned i = 0;
@@ -532,6 +544,7 @@ namespace oomph
             s,
             use_equally_spaced_interior_sample_points);
 
+
           // History of sample points visited
           if (BinArray::Visited_sample_points_file.is_open())
           {
@@ -557,6 +570,7 @@ namespace oomph
                    ->total_number_of_sample_points_visited_during_locate_zeta_from_top_level()
               << " " << sqrt(dist) << std::endl;
           }
+
 
           // Bump counter
           Bin_array_pt->root_bin_array_pt()
@@ -613,6 +627,7 @@ namespace oomph
     }
   }
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
@@ -637,6 +652,7 @@ namespace oomph
   /// Offset of sample point container boundaries beyond max/min coords
   double SamplePointContainer::Percentage_offset = 5.0;
 
+
   //==============================================================================
   /// Max. bin dimension (number of bins in coordinate directions)
   //==============================================================================
@@ -660,6 +676,7 @@ namespace oomph
     }
     return n_max_level;
   }
+
 
   //========================================================================
   /// Setup the min and max coordinates for the mesh, in each dimension
@@ -809,6 +826,7 @@ namespace oomph
     }
   }
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
@@ -821,27 +839,27 @@ namespace oomph
   /// Constructor
   //==============================================================================
   RefineableBinArray::RefineableBinArray(
-    SamplePointContainerParameters* sample_point_container_parameters_pt) :
-    SamplePointContainer(
-      sample_point_container_parameters_pt->mesh_pt(),
-      sample_point_container_parameters_pt->min_and_max_coordinates(),
-      sample_point_container_parameters_pt
-        ->use_eulerian_coordinates_during_setup(),
-      sample_point_container_parameters_pt
-        ->ignore_halo_elements_during_locate_zeta_search(),
-      sample_point_container_parameters_pt
-        ->nsample_points_generated_per_element()),
-    BinArray(
-      sample_point_container_parameters_pt->mesh_pt(),
-      sample_point_container_parameters_pt->min_and_max_coordinates(),
-      dynamic_cast<BinArrayParameters*>(sample_point_container_parameters_pt)
-        ->dimensions_of_bin_array(),
-      sample_point_container_parameters_pt
-        ->use_eulerian_coordinates_during_setup(),
-      sample_point_container_parameters_pt
-        ->ignore_halo_elements_during_locate_zeta_search(),
-      sample_point_container_parameters_pt
-        ->nsample_points_generated_per_element())
+    SamplePointContainerParameters* sample_point_container_parameters_pt)
+    : SamplePointContainer(
+        sample_point_container_parameters_pt->mesh_pt(),
+        sample_point_container_parameters_pt->min_and_max_coordinates(),
+        sample_point_container_parameters_pt
+          ->use_eulerian_coordinates_during_setup(),
+        sample_point_container_parameters_pt
+          ->ignore_halo_elements_during_locate_zeta_search(),
+        sample_point_container_parameters_pt
+          ->nsample_points_generated_per_element()),
+      BinArray(
+        sample_point_container_parameters_pt->mesh_pt(),
+        sample_point_container_parameters_pt->min_and_max_coordinates(),
+        dynamic_cast<BinArrayParameters*>(sample_point_container_parameters_pt)
+          ->dimensions_of_bin_array(),
+        sample_point_container_parameters_pt
+          ->use_eulerian_coordinates_during_setup(),
+        sample_point_container_parameters_pt
+          ->ignore_halo_elements_during_locate_zeta_search(),
+        sample_point_container_parameters_pt
+          ->nsample_points_generated_per_element())
   {
     RefineableBinArrayParameters* ref_bin_array_parameters_pt =
       dynamic_cast<RefineableBinArrayParameters*>(
@@ -969,6 +987,7 @@ namespace oomph
     }
   }
 
+
   //==============================================================================
   /// Boundaries of specified bin in each coordinate direction.
   /// *.first = min; *.second = max.
@@ -1001,6 +1020,7 @@ namespace oomph
     }
   }
 
+
   //==============================================================================
   /// Output neighbouring bins up to given "radius" of the specified bin
   //==============================================================================
@@ -1016,6 +1036,7 @@ namespace oomph
       }
     }
   }
+
 
   //==============================================================================
   /// Output neighbouring bins up to given "radius" of the specified bin
@@ -1198,6 +1219,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Profiling function to compare performance of two different
   /// versions of the get_neighbouring_bins_helper(...) function
@@ -1313,11 +1335,13 @@ namespace oomph
       radius++;
     }
 
+
     oomph_info << "Number of times old/new version was faster: " << old_faster
                << " " << new_faster << std::endl
                << "Total old/new time: " << t_total_old << " " << t_total_new
                << " " << std::endl;
   }
+
 
   //==============================================================================
   /// Helper function for computing the bin indices of neighbouring bins
@@ -1647,6 +1671,7 @@ namespace oomph
         // to have the correct unsigned corresponding to the bin index.
         Vector<int> vector_of_coef(3);
 
+
         // First initializing this MyArrays for the active dimensions
         unsigned coef = 1;
         for (unsigned u = 0; u < dim; u++)
@@ -1787,6 +1812,7 @@ namespace oomph
     } // end new version
   }
 
+
   //==============================================================================
   /// Compute total number of sample points recursively
   //==============================================================================
@@ -1805,6 +1831,7 @@ namespace oomph
     }
     return count;
   }
+
 
   //============================================================
   /// Get (linearly enumerated) bin index of bin that
@@ -1919,6 +1946,7 @@ namespace oomph
 
 #endif
 
+
         // Finding the correct bin to put the sample point
         unsigned bin_index = coords_to_bin_index(zeta);
 
@@ -1933,6 +1961,7 @@ namespace oomph
       }
     }
   }
+
 
   //==================================================================
   /// Get "coordinates" of bin that contains specified zeta
@@ -1963,6 +1992,7 @@ namespace oomph
       }
     }
   }
+
 
   //==============================================================================
   /// Find sub-GeomObject (finite element) and the local coordinate
@@ -2094,6 +2124,7 @@ namespace oomph
       }
     }
 
+
 #ifdef PARANOID
 
     // If we still haven't found the point, check that we've at least visited
@@ -2126,35 +2157,37 @@ namespace oomph
   /// Default number of bins (in each coordinate direction)
   unsigned RefineableBinArray::Default_n_bin_1d = 5;
 
+
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Constructor
   //======================================================================
   NonRefineableBinArray::NonRefineableBinArray(
-    SamplePointContainerParameters* sample_point_container_parameters_pt) :
-    SamplePointContainer(
-      sample_point_container_parameters_pt->mesh_pt(),
-      sample_point_container_parameters_pt->min_and_max_coordinates(),
-      sample_point_container_parameters_pt
-        ->use_eulerian_coordinates_during_setup(),
-      sample_point_container_parameters_pt
-        ->ignore_halo_elements_during_locate_zeta_search(),
-      sample_point_container_parameters_pt
-        ->nsample_points_generated_per_element()),
-    BinArray(
-      sample_point_container_parameters_pt->mesh_pt(),
-      sample_point_container_parameters_pt->min_and_max_coordinates(),
-      dynamic_cast<BinArrayParameters*>(sample_point_container_parameters_pt)
-        ->dimensions_of_bin_array(),
-      sample_point_container_parameters_pt
-        ->use_eulerian_coordinates_during_setup(),
-      sample_point_container_parameters_pt
-        ->ignore_halo_elements_during_locate_zeta_search(),
-      sample_point_container_parameters_pt
-        ->nsample_points_generated_per_element())
+    SamplePointContainerParameters* sample_point_container_parameters_pt)
+    : SamplePointContainer(
+        sample_point_container_parameters_pt->mesh_pt(),
+        sample_point_container_parameters_pt->min_and_max_coordinates(),
+        sample_point_container_parameters_pt
+          ->use_eulerian_coordinates_during_setup(),
+        sample_point_container_parameters_pt
+          ->ignore_halo_elements_during_locate_zeta_search(),
+        sample_point_container_parameters_pt
+          ->nsample_points_generated_per_element()),
+      BinArray(
+        sample_point_container_parameters_pt->mesh_pt(),
+        sample_point_container_parameters_pt->min_and_max_coordinates(),
+        dynamic_cast<BinArrayParameters*>(sample_point_container_parameters_pt)
+          ->dimensions_of_bin_array(),
+        sample_point_container_parameters_pt
+          ->use_eulerian_coordinates_during_setup(),
+        sample_point_container_parameters_pt
+          ->ignore_halo_elements_during_locate_zeta_search(),
+        sample_point_container_parameters_pt
+          ->nsample_points_generated_per_element())
   {
     // Set default size of bin array (and spatial dimension!)
     if (Dimensions_of_bin_array.size() == 0)
@@ -2164,6 +2197,7 @@ namespace oomph
       {
         dim = Mesh_pt->finite_element_pt(0)->dim();
       }
+
 
       // Need to do an Allreduce to ensure that the dimension is consistent
       // even when no elements are assigned to a certain processor
@@ -2242,6 +2276,7 @@ namespace oomph
     }
   }
 
+
   //==============================================================================
   /// Compute total number of sample points recursively
   //==============================================================================
@@ -2266,6 +2301,7 @@ namespace oomph
     return count;
   }
 
+
   //========================================================================
   /// Output bins
   //========================================================================
@@ -2276,11 +2312,9 @@ namespace oomph
 
     unsigned nbin_x = Dimensions_of_bin_array[0];
     unsigned nbin_y = 1;
-    if (n_lagrangian > 1)
-      nbin_y = Dimensions_of_bin_array[1];
+    if (n_lagrangian > 1) nbin_y = Dimensions_of_bin_array[1];
     unsigned nbin_z = 1;
-    if (n_lagrangian > 2)
-      nbin_z = Dimensions_of_bin_array[2];
+    if (n_lagrangian > 2) nbin_z = Dimensions_of_bin_array[2];
 
     unsigned b = 0;
     for (unsigned iz = 0; iz < nbin_z; iz++)
@@ -2316,6 +2350,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Output bin vertices (allowing display of bins as zones).
   //========================================================================
@@ -2325,10 +2360,8 @@ namespace oomph
     const unsigned n_lagrangian = this->ndim_zeta();
 
     unsigned nbin = Dimensions_of_bin_array[0];
-    if (n_lagrangian > 1)
-      nbin *= Dimensions_of_bin_array[1];
-    if (n_lagrangian > 2)
-      nbin *= Dimensions_of_bin_array[2];
+    if (n_lagrangian > 1) nbin *= Dimensions_of_bin_array[1];
+    if (n_lagrangian > 2) nbin *= Dimensions_of_bin_array[2];
 
     for (unsigned i_bin = 0; i_bin < nbin; i_bin++)
     {
@@ -2362,6 +2395,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Fill the bin array with sample points from FiniteElements stored in mesh
   //========================================================================
@@ -2382,6 +2416,7 @@ namespace oomph
 
     // Initialise the structure that keep tracks of the occupided bins
     Bin_object_coord_pairs.initialise(ntotalbin);
+
 
     // Issue warning about small number of bins
     if (!Suppress_warning_about_small_number_of_bins)
@@ -2427,8 +2462,10 @@ namespace oomph
       }
     }
 
+
     // Increase overall counter
     Total_nbin_cells_counter += ntotalbin;
+
 
     // Issue warning?
     if (!Suppress_warning_about_large_total_number_of_bins)
@@ -2585,6 +2622,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Provide some stats on the fill level of the associated bin
   //========================================================================
@@ -2614,13 +2652,12 @@ namespace oomph
     for (IT it = map_pt->begin(); it != map_pt->end(); it++)
     {
       unsigned nentry = (*it).second.size();
-      if (nentry > max_n_entry)
-        max_n_entry = nentry;
-      if (nentry < min_n_entry)
-        min_n_entry = nentry;
+      if (nentry > max_n_entry) max_n_entry = nentry;
+      if (nentry < min_n_entry) min_n_entry = nentry;
       tot_n_entry += nentry;
     }
   }
+
 
   //========================================================================
   /// Fill bin by diffusion, populating each empty bin with the same content
@@ -2728,6 +2765,7 @@ namespace oomph
       }
     }
 
+
 #ifdef PARANOID
     // Loop over all bins to check if they're empty
     n_bin = nbin();
@@ -2746,6 +2784,7 @@ namespace oomph
 
 #endif
   }
+
 
   //=================================================================
   /// Get the number of the bin containing the specified coordinate.
@@ -2807,6 +2846,7 @@ namespace oomph
       multiplier *= Dimensions_of_bin_array[i];
     }
 
+
 #ifdef PARANOID
 
     // Tolerance for "out of bin" test
@@ -2862,6 +2902,7 @@ namespace oomph
     }
 #endif
   }
+
 
   //========================================================================
   /// Get vector of vectors containing the coordinates of the
@@ -3008,6 +3049,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Compute the minimum distance of any vertex in the specified bin
   /// from the specified Lagrangian coordinate zeta.
@@ -3031,11 +3073,11 @@ namespace oomph
         dist += pow(bin_vertex[v][i] - zeta[i], 2);
       }
       dist = sqrt(dist);
-      if (dist < min_dist)
-        min_dist = dist;
+      if (dist < min_dist) min_dist = dist;
     }
     return min_dist;
   }
+
 
   //==============================================================================
   /// \short Find the sub geometric object and local coordinate therein that
@@ -3178,6 +3220,7 @@ namespace oomph
       //   }
       // }
 
+
       // Set bool for finding zeta
       bool found_zeta = false;
       for (unsigned i_nbr = 0; i_nbr < n_nbr_bin; i_nbr++)
@@ -3243,6 +3286,7 @@ namespace oomph
               el_pt->locate_zeta(
                 zeta, sub_geom_object_pt, s, use_coordinate_as_initial_guess);
 
+
               Total_number_of_sample_points_visited_during_locate_zeta_from_top_level++;
 
               // Always fail? (Used for debugging, e.g. to trace out
@@ -3251,6 +3295,7 @@ namespace oomph
               {
                 sub_geom_object_pt = 0;
               }
+
 
 #ifdef OOMPH_HAS_MPI
               // Ignore halos?
@@ -3279,6 +3324,7 @@ namespace oomph
             } // end loop over sample points
           }
 
+
           if (found_zeta)
           {
             return; // break;
@@ -3288,6 +3334,7 @@ namespace oomph
       } // end loop over bins at this level
     } // End of loop over levels
   }
+
 
   /// Default number of bins (in each coordinate direction)
   unsigned NonRefineableBinArray::Default_n_bin_1d = 100;
@@ -3329,26 +3376,28 @@ namespace oomph
   bool NonRefineableBinArray::Already_warned_about_small_number_of_bin_cells =
     false;
 
+
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
 #ifdef OOMPH_HAS_CGAL
 
+
   //====================================================================
   /// Constructor
   //====================================================================
   CGALSamplePointContainer::CGALSamplePointContainer(
-    SamplePointContainerParameters* sample_point_container_parameters_pt) :
-    SamplePointContainer(
-      sample_point_container_parameters_pt->mesh_pt(),
-      sample_point_container_parameters_pt->min_and_max_coordinates(),
-      sample_point_container_parameters_pt
-        ->use_eulerian_coordinates_during_setup(),
-      sample_point_container_parameters_pt
-        ->ignore_halo_elements_during_locate_zeta_search(),
-      sample_point_container_parameters_pt
-        ->nsample_points_generated_per_element())
+    SamplePointContainerParameters* sample_point_container_parameters_pt)
+    : SamplePointContainer(
+        sample_point_container_parameters_pt->mesh_pt(),
+        sample_point_container_parameters_pt->min_and_max_coordinates(),
+        sample_point_container_parameters_pt
+          ->use_eulerian_coordinates_during_setup(),
+        sample_point_container_parameters_pt
+          ->ignore_halo_elements_during_locate_zeta_search(),
+        sample_point_container_parameters_pt
+          ->nsample_points_generated_per_element())
   {
     // Get the spatial dimension (int because of mpi below)
     int dim = 0;
@@ -3390,6 +3439,7 @@ namespace oomph
     {
       setup_min_and_max_coordinates();
     }
+
 
     // Time it
     double t_start = 0.0;
@@ -3536,6 +3586,7 @@ namespace oomph
     return CGAL_setup_time;
   }
 
+
   //==============================================================================
   /// Compute total number of sample points in sample point container
   //==============================================================================
@@ -3544,6 +3595,7 @@ namespace oomph
   {
     return Sample_point_pt.size();
   }
+
 
   //==============================================================================
   /// \short Find the sub geometric object and local coordinate therein that
@@ -3634,6 +3686,7 @@ namespace oomph
           // Get the element
           FiniteElement* el_pt = Mesh_pt->finite_element_pt(
             sample_point_pt->element_index_in_mesh());
+
 
 #ifdef OOMPH_HAS_MPI
           // We only look at the sample point if it isn't halo
@@ -3758,6 +3811,7 @@ namespace oomph
     } // while loop to increase number of nearest neighbours
   }
 
+
   //==============================================================================
   /// \short Find the sub geometric object and local coordinate therein that
   /// corresponds to the intrinsic coordinate zeta, using up to the specified
@@ -3801,6 +3855,7 @@ namespace oomph
       // Get the element
       FiniteElement* el_pt =
         Mesh_pt->finite_element_pt(sample_point_pt->element_index_in_mesh());
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -3925,6 +3980,7 @@ namespace oomph
 
     sub_geom_object_pt = el_pt;
   }
+
 
 #endif // cgal
 

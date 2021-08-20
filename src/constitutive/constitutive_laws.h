@@ -53,6 +53,7 @@ namespace oomph
     /// Empty virtual destructor
     virtual ~StrainEnergyFunction() {}
 
+
     /// Return the strain energy in terms of the strain tensor
     virtual double W(const DenseMatrix<double>& gamma)
     {
@@ -65,6 +66,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       return 0.0;
     }
+
 
     /// Return the strain energy in terms of the strain invariants
     virtual double W(const Vector<double>& I)
@@ -80,6 +82,7 @@ namespace oomph
       return 0.0;
     }
 
+
     /// \short Return the derivatives of the strain energy function with
     /// respect to the components of the strain tensor (default is to use
     /// finite differences).
@@ -91,6 +94,7 @@ namespace oomph
         OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
     }
+
 
     /// \short Return the derivatives of the strain energy function with
     /// respect to the strain invariants. Default version is to use finite
@@ -125,9 +129,11 @@ namespace oomph
     virtual bool requires_incompressibility_constraint() = 0;
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //=====================================================================
   /// \short MooneyRivlin strain-energy function.
@@ -141,8 +147,8 @@ namespace oomph
   {
   public:
     /// Constructor takes the pointer to the value of the constants
-    MooneyRivlin(double* c1_pt, double* c2_pt) :
-      StrainEnergyFunction(), C1_pt(c1_pt), C2_pt(c2_pt)
+    MooneyRivlin(double* c1_pt, double* c2_pt)
+      : StrainEnergyFunction(), C1_pt(c1_pt), C2_pt(c2_pt)
     {
     }
 
@@ -160,6 +166,7 @@ namespace oomph
     {
       return (*C1_pt) * (I[0] - 3.0) + (*C2_pt) * (I[1] - 3.0);
     }
+
 
     /// \short Return the derivatives of the strain energy function with
     /// respect to the strain invariants
@@ -179,6 +186,7 @@ namespace oomph
       return true;
     }
 
+
   private:
     /// Pointer to first Mooney Rivlin constant
     double* C1_pt;
@@ -187,9 +195,11 @@ namespace oomph
     double* C2_pt;
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //=====================================================================
   /// \short Generalisation of Mooney Rivlin constitutive law to compressible
@@ -209,31 +219,31 @@ namespace oomph
     /// \short Constructor takes the pointers to the constitutive parameters:
     /// Poisson's ratio, the Mooney-Rivlin parameter. Young's modulus is set
     /// to 1, implying that it has been used to scale the stresses
-    GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt) :
-      StrainEnergyFunction(),
-      Nu_pt(nu_pt),
-      C1_pt(c1_pt),
-      E_pt(new double(1.0)),
-      Must_delete_e(true)
+    GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt)
+      : StrainEnergyFunction(),
+        Nu_pt(nu_pt),
+        C1_pt(c1_pt),
+        E_pt(new double(1.0)),
+        Must_delete_e(true)
     {
     }
 
     /// \short Constructor takes the pointers to the constitutive parameters:
     /// Poisson's ratio, the Mooney-Rivlin parameter and Young's modulus
-    GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt, double* e_pt) :
-      StrainEnergyFunction(),
-      Nu_pt(nu_pt),
-      C1_pt(c1_pt),
-      E_pt(e_pt),
-      Must_delete_e(false)
+    GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt, double* e_pt)
+      : StrainEnergyFunction(),
+        Nu_pt(nu_pt),
+        C1_pt(c1_pt),
+        E_pt(e_pt),
+        Must_delete_e(false)
     {
     }
+
 
     /// Virtual destructor
     virtual ~GeneralisedMooneyRivlin()
     {
-      if (Must_delete_e)
-        delete E_pt;
+      if (Must_delete_e) delete E_pt;
     }
 
     /// Return the strain energy in terms of strain tensor
@@ -241,6 +251,7 @@ namespace oomph
     {
       return StrainEnergyFunction::W(gamma);
     }
+
 
     /// Return the strain energy in terms of the strain invariants
     double W(const Vector<double>& I)
@@ -251,6 +262,7 @@ namespace oomph
                     (1.0 - (*Nu_pt)) * G * (I[2] - 1.0) * (I[2] - 1.0) /
                       (2.0 * (1.0 - 2.0 * (*Nu_pt))));
     }
+
 
     /// \short Return the derivatives of the strain energy function with
     /// respect to the strain invariants
@@ -263,6 +275,7 @@ namespace oomph
                        2.0 * (1.0 - (*Nu_pt)) * G * (I[2] - 1.0) /
                          (2.0 * (1.0 - 2.0 * (*Nu_pt))));
     }
+
 
     /// \short Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
@@ -288,9 +301,11 @@ namespace oomph
     bool Must_delete_e;
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// A class for constitutive laws for elements that solve
@@ -498,12 +513,15 @@ namespace oomph
                                       RankFourTensor<double>& dGcontra_dG,
                                       DenseMatrix<double>& d_detG_dG);
 
+
   public:
     /// Empty constructor
     ConstitutiveLaw() {}
 
+
     /// Empty virtual destructor
     virtual ~ConstitutiveLaw() {}
+
 
     /// \short Calculate the contravariant 2nd Piola Kirchhoff
     /// stress tensor. Arguments are the
@@ -532,6 +550,7 @@ namespace oomph
       const DenseMatrix<double>& sigma,
       RankFourTensor<double>& d_sigma_dG,
       const bool& symmetrize_tensor = true);
+
 
     /// \short Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
@@ -579,6 +598,7 @@ namespace oomph
       DenseMatrix<double>& d_detG_dG,
       const bool& symmetrize_tensor = true);
 
+
     /// \short Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
     /// deformed metric tensor, the generalised dilatation, \f$ d, \f$ and
@@ -622,6 +642,7 @@ namespace oomph
       DenseMatrix<double>& d_gen_dil_dG,
       const bool& symmetrize_tensor = true);
 
+
     /// \short Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
@@ -629,9 +650,11 @@ namespace oomph
     virtual bool requires_incompressibility_constraint() = 0;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Class for a "non-rational" extension of classical linear elasticity
@@ -698,8 +721,8 @@ namespace oomph
   public:
     /// The constructor takes the pointers to values of material parameters:
     /// Poisson's ratio and Young's modulus.
-    GeneralisedHookean(double* nu_pt, double* e_pt) :
-      ConstitutiveLaw(), Nu_pt(nu_pt), E_pt(e_pt), Must_delete_e(false)
+    GeneralisedHookean(double* nu_pt, double* e_pt)
+      : ConstitutiveLaw(), Nu_pt(nu_pt), E_pt(e_pt), Must_delete_e(false)
     {
     }
 
@@ -707,19 +730,19 @@ namespace oomph
     /// Poisson's ratio . Young's modulus is set to E=1.0,
     /// implying that all stresses have been non-dimensionalised
     /// on on it.
-    GeneralisedHookean(double* nu_pt) :
-      ConstitutiveLaw(),
-      Nu_pt(nu_pt),
-      E_pt(new double(1.0)),
-      Must_delete_e(true)
+    GeneralisedHookean(double* nu_pt)
+      : ConstitutiveLaw(),
+        Nu_pt(nu_pt),
+        E_pt(new double(1.0)),
+        Must_delete_e(true)
     {
     }
+
 
     /// Virtual destructor
     virtual ~GeneralisedHookean()
     {
-      if (Must_delete_e)
-        delete E_pt;
+      if (Must_delete_e) delete E_pt;
     }
 
     /// \short Calculate the contravariant 2nd Piola Kirchhoff
@@ -729,6 +752,7 @@ namespace oomph
     void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
                                                  const DenseMatrix<double>& G,
                                                  DenseMatrix<double>& sigma);
+
 
     /// \short Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
@@ -746,6 +770,7 @@ namespace oomph
                                                  DenseMatrix<double>& G_contra,
                                                  double& Gdet);
 
+
     /// \short Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
     /// deformed metric tensor, the generalised dilatation, \f$ d, \f$ and
@@ -760,6 +785,7 @@ namespace oomph
                                                  DenseMatrix<double>& Gcontra,
                                                  double& gen_dil,
                                                  double& inv_kappa);
+
 
     /// \short Pure virtual function in which the writer must declare if the
     /// constitutive equation requires an incompressible formulation
@@ -782,9 +808,11 @@ namespace oomph
     bool Must_delete_e;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //=====================================================================
   /// A class for constitutive laws derived from strain-energy functions.
@@ -799,8 +827,8 @@ namespace oomph
   public:
     /// Constructor takes a pointer to the strain energy function
     IsotropicStrainEnergyFunctionConstitutiveLaw(
-      StrainEnergyFunction* const& strain_energy_function_pt) :
-      ConstitutiveLaw(), Strain_energy_function_pt(strain_energy_function_pt)
+      StrainEnergyFunction* const& strain_energy_function_pt)
+      : ConstitutiveLaw(), Strain_energy_function_pt(strain_energy_function_pt)
     {
     }
 
@@ -812,6 +840,7 @@ namespace oomph
     void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
                                                  const DenseMatrix<double>& G,
                                                  DenseMatrix<double>& sigma);
+
 
     /// \short Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
@@ -829,6 +858,7 @@ namespace oomph
                                                  DenseMatrix<double>& G_contra,
                                                  double& Gdet);
 
+
     /// \short Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
     /// deformed metric tensor, the generalised dilatation, \f$ d, \f$ and
@@ -843,6 +873,7 @@ namespace oomph
                                                  DenseMatrix<double>& Gcontra,
                                                  double& gen_dil,
                                                  double& inv_kappa);
+
 
     /// \short State if the constitutive equation requires an incompressible
     /// formulation in which the volume constraint is enforced explicitly.

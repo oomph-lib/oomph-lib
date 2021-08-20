@@ -482,6 +482,7 @@ namespace oomph
     return_block_vector(0, temp_vec, z);
   } // End of preconditioner_solve
 
+
   //============================================================================
   /// Setup for the GMRES block preconditioner
   //============================================================================
@@ -1147,6 +1148,7 @@ namespace oomph
         return;
       }
     }
+
 
     // otherwise GMRES failed convergence
     oomph_info << "\nGMRES block preconditioner did not converge to required "

@@ -61,6 +61,7 @@ namespace oomph
 
 #endif
 
+
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
 
@@ -113,6 +114,7 @@ namespace oomph
 
       // Setup memory for accelerations (initialised to zero)
       // hierher Vector<double> accel(DIM,0.0);
+
 
       // Calculate displacements and derivatives
       for (unsigned l = 0; l < n_node; l++)
@@ -388,6 +390,7 @@ namespace oomph
     // Now do the PRefineableQElement further_build()
     // PRefineableQElement<DIM>::further_build();
   }
+
 
   //====================================================================
   /// Force building of required templates

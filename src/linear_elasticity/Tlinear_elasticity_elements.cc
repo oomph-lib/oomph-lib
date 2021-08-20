@@ -26,11 +26,13 @@
 // Non-inline functions for Linear elasticity elements
 #include "Tlinear_elasticity_elements.h"
 
+
 namespace oomph
 {
   /////////////////////////////////////////////////////////////////////////
   // TLinearElasticityElement
   /////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   // Force build of templates

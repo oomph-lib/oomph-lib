@@ -47,10 +47,10 @@ namespace oomph
   /// Generic class definitions
   //======================================================================
   template<unsigned INITIAL_NNODE_1D>
-  class PRefineableQElement<1, INITIAL_NNODE_1D> :
-    public RefineableQElement<1>,
-    public virtual QElement<1, INITIAL_NNODE_1D>,
-    public virtual PRefineableElement
+  class PRefineableQElement<1, INITIAL_NNODE_1D>
+    : public RefineableQElement<1>,
+      public virtual QElement<1, INITIAL_NNODE_1D>,
+      public virtual PRefineableElement
   {
   public:
     /// Constructor
@@ -139,10 +139,10 @@ namespace oomph
   /// p-refineable version of RefineableQElement<2,INITIAL_NNODE_1D>.
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
-  class PRefineableQElement<2, INITIAL_NNODE_1D> :
-    public RefineableQElement<2>,
-    public virtual QElement<2, INITIAL_NNODE_1D>,
-    public virtual PRefineableElement
+  class PRefineableQElement<2, INITIAL_NNODE_1D>
+    : public RefineableQElement<2>,
+      public virtual QElement<2, INITIAL_NNODE_1D>,
+      public virtual PRefineableElement
   {
   public:
     /// Constructor
@@ -240,10 +240,10 @@ namespace oomph
   /// p-refineable version of RefineableQElement<3,INITIAL_NNODE_1D>.
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
-  class PRefineableQElement<3, INITIAL_NNODE_1D> :
-    public RefineableQElement<3>,
-    public virtual QElement<3, INITIAL_NNODE_1D>,
-    public virtual PRefineableElement
+  class PRefineableQElement<3, INITIAL_NNODE_1D>
+    : public RefineableQElement<3>,
+      public virtual QElement<3, INITIAL_NNODE_1D>,
+      public virtual PRefineableElement
   {
   public:
     /// Constructor

@@ -34,7 +34,6 @@
 #include <limits>
 
 #include "refineable_mesh.h"
-// Include to fill in additional_synchronise_hanging_nodes() function
 
 namespace oomph
 {
@@ -59,8 +58,7 @@ namespace oomph
     for (unsigned e = 0; e < nnodes; e++)
     {
       unsigned level = all_tree_nodes_pt[e]->level();
-      if (level > max_level)
-        max_level = level;
+      if (level > max_level) max_level = level;
     }
 
     // Assign storage for refinement pattern
@@ -169,6 +167,7 @@ namespace oomph
       global_max_level = my_max_level;
     }
 
+
     for (unsigned i = 0; i < global_max; i++)
     {
       unrefine_uniformly();
@@ -179,8 +178,7 @@ namespace oomph
     {
       // Loop over elements that need to be refined at this level
       unsigned n_to_be_refined = 0;
-      if (l < my_max_level)
-        n_to_be_refined = to_be_refined[l].size();
+      if (l < my_max_level) n_to_be_refined = to_be_refined[l].size();
 
       // Select relevant elements to be refined
       for (unsigned i = 0; i < n_to_be_refined; i++)
@@ -193,6 +191,7 @@ namespace oomph
       adapt_mesh();
     }
   }
+
 
   //========================================================================
   /// Refine base mesh according to refinement pattern in restart file
@@ -208,6 +207,7 @@ namespace oomph
     // Refine
     refine_base_mesh(to_be_refined);
   }
+
 
   //========================================================================
   /// Dump refinement pattern to allow for rebuild
@@ -240,6 +240,7 @@ namespace oomph
       }
     }
   }
+
 
   //========================================================================
   /// Read refinement pattern to allow for rebuild
@@ -289,6 +290,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Do adaptive refinement for mesh.
   /// - Pass Vector of error estimates for all elements.
@@ -319,6 +321,7 @@ namespace oomph
       local_doc_info = doc_info();
     }
 
+
     // Check that the errors make sense
     if (refine_tol <= unrefine_tol)
     {
@@ -332,6 +335,7 @@ namespace oomph
       throw OomphLibError(
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
+
 
     // Select elements for refinement and unrefinement
     //================================================
@@ -476,6 +480,7 @@ namespace oomph
                << std::endl
                << std::endl;
 
+
     // Now do the actual mesh adaptation
     //---------------------------------
 
@@ -547,6 +552,7 @@ namespace oomph
     {
 #ifdef PARANOID
 #ifdef OOMPH_HAS_MPI
+
 
       // Sanity check: Each processor checks if the enforced unrefinement of
       // its haloed element is matched by enforced unrefinement of the
@@ -659,6 +665,7 @@ namespace oomph
             }
           }
         }
+
 
         // Loop over processes: Each processor sends refinement pattern
         // for halo elements with processor d to processor d where it's
@@ -840,13 +847,12 @@ namespace oomph
         unsigned level = dynamic_cast<RefineableElement*>(this->element_pt(e))
                            ->refinement_level();
 
-        if (level > max_refinement_level)
-          max_refinement_level = level;
-        if (level < min_refinement_level)
-          min_refinement_level = level;
+        if (level > max_refinement_level) max_refinement_level = level;
+        if (level < min_refinement_level) min_refinement_level = level;
       }
     }
   }
+
 
   //================================================================
   /// Adapt mesh, which exists in two representations,
@@ -941,6 +947,7 @@ namespace oomph
       // This function encapsulates the template parameter
       this->split_elements_if_required();
 
+
       if (Global_timings::Doc_comprehensive_timings)
       {
         double t_end = TimingHelpers::timer();
@@ -954,6 +961,7 @@ namespace oomph
       // Firstly put all the elements into a vector
       Vector<Tree*> leaf_nodes_pt;
       Forest_pt->stick_leaves_into_vector(leaf_nodes_pt);
+
 
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -973,6 +981,7 @@ namespace oomph
         new_nodes_file.open(fullname.str().c_str());
       }
 
+
       // Build all elements and store vector of pointers to new nodes
       // (Note: build() checks if the element has been built
       // already, i.e. if it's not a new element).
@@ -990,6 +999,7 @@ namespace oomph
         leaf_nodes_pt[e]->object_pt()->build(
           mesh_pt, new_node_pt, was_already_built, new_nodes_file);
       }
+
 
       double t_end = 0.0;
       if (Global_timings::Doc_comprehensive_timings)
@@ -1084,6 +1094,7 @@ namespace oomph
             bool update_all_time_levels = true;
             alg_node_pt->node_update(update_all_time_levels);
           }
+
 
           // If it's a Solid node, update Lagrangian coordinates
           // from its hanging node representation
@@ -1190,6 +1201,7 @@ namespace oomph
         }
       }
 
+
       if (Global_timings::Doc_comprehensive_timings)
       {
         t_end = TimingHelpers::timer();
@@ -1224,6 +1236,7 @@ namespace oomph
       // Close the hanging node files and delete the memory allocated
       // for the streams
       Forest_pt->close_hanging_node_files(doc_info, hanging_output_files);
+
 
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -1337,6 +1350,7 @@ namespace oomph
           << RefineableElement::max_integrity_tolerance() << "\n"
           << std::endl;
       }
+
 
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -1533,6 +1547,7 @@ namespace oomph
         }
       } // End of case when we have fixed nodal positions
 
+
       // Final doc
       //-----------
       if (doc_info.is_doc_enabled())
@@ -1625,6 +1640,7 @@ namespace oomph
         }
 
         all_nodes_file.close();
+
 
         // Doc all hanging nodes:
         //-----------------------
@@ -1734,6 +1750,7 @@ namespace oomph
       } // End of documentation
     } // End if (this->nelement()>0)
 
+
 #ifdef OOMPH_HAS_MPI
 
     // Now (re-)classify halo and haloed nodes and synchronise hanging
@@ -1745,6 +1762,7 @@ namespace oomph
 
 #endif
   }
+
 
   //========================================================================
   /// Refine mesh uniformly
@@ -1762,6 +1780,7 @@ namespace oomph
     // Do the actual mesh adaptation
     adapt_mesh(doc_info);
   }
+
 
   //========================================================================
   /// p-refine mesh uniformly
@@ -1786,6 +1805,7 @@ namespace oomph
     // Do the actual mesh adaptation
     p_adapt_mesh(doc_info);
   }
+
 
   //========================================================================
   /// Refine mesh by splitting the elements identified
@@ -1822,6 +1842,7 @@ namespace oomph
     adapt_mesh();
   }
 
+
   //========================================================================
   /// Refine mesh by splitting the elements identified
   /// by their pointers
@@ -1855,6 +1876,7 @@ namespace oomph
     adapt_mesh();
   }
 
+
   //========================================================================
   /// \short Refine to same degree as the reference mesh.
   //========================================================================
@@ -1870,6 +1892,7 @@ namespace oomph
     // Refine mesh according to given refinement pattern
     refine_base_mesh(to_be_refined);
   }
+
 
   //========================================================================
   /// \short Refine to same degree as the reference mesh minus one. Useful
@@ -1911,6 +1934,7 @@ namespace oomph
       return true;
     }
   }
+
 
   //========================================================================
   /// Refine mesh once so that its topology etc becomes that of the
@@ -1985,8 +2009,7 @@ namespace oomph
         for (unsigned i = 0; i < n_sons; i++)
         {
           // If (at least) one of the sons is not a leaf, we can't unrefine
-          if (!father_pt->son_pt(i)->is_leaf())
-            can_unrefine = false;
+          if (!father_pt->son_pt(i)->is_leaf()) can_unrefine = false;
         }
 
         // If we can unrefine, the father element will be
@@ -2009,6 +2032,7 @@ namespace oomph
 
     // Number of elements in ref mesh if it was unrefined uniformly:
     unsigned nel_coarse = coarse_elements_pt.size();
+
 
 #ifdef PARANOID
     bool stop_it = false;
@@ -2037,6 +2061,7 @@ namespace oomph
       }
     }
 
+
 #ifdef PARANOID
     // Doc troublesome meshes:
     if (stop_it)
@@ -2050,8 +2075,10 @@ namespace oomph
     }
 #endif
 
+
     // Now refine precisely these elements in "this" mesh.
     refine_selected_elements(elements_to_be_refined);
+
 
 #ifdef PARANOID
 
@@ -2111,6 +2138,7 @@ namespace oomph
 
 #endif
   }
+
 
   //========================================================================
   /// Unrefine mesh uniformly. Return 0 for success,
@@ -2229,6 +2257,7 @@ namespace oomph
       hang_weights.push_back(1.0);
     }
   }
+
 
   //==================================================================
   /// Complete the hanging node scheme recursively.
@@ -2467,6 +2496,7 @@ namespace oomph
               }
             }
 
+
             // Send the information to the relevant process
             unsigned count_halo = local_halo_hanging.size();
 
@@ -2498,6 +2528,7 @@ namespace oomph
       t_start = TimingHelpers::timer();
     }
 
+
     // Now compare equivalent halo and haloed vectors to find discrepancies.
     // It is possible that a master node may not be on either process involved
     // in the halo-haloed scheme; to work round this, we use the shared_node
@@ -2519,6 +2550,7 @@ namespace oomph
         shared_node_map[d][Shared_node_pt[d][jj]] = jj;
       }
     }
+
 
     // Loop over domains: Each processor checks consistency of hang status
     // of its haloed nodes with proc d against the halo counterpart. Haloed
@@ -2586,6 +2618,7 @@ namespace oomph
                 // Get mth master node
                 Node* master_nod_pt = hang_pt->master_node_pt(m);
 
+
                 //              //------------------------------------------
                 //              // Old direct search is much slower!
                 //              // Keep this code alive to allow comparisons
@@ -2620,6 +2653,7 @@ namespace oomph
                 //
                 //              // end direct search demo
                 //              //-----------------------
+
 
                 // This node will be shared: find it!
                 bool found = false;
@@ -2916,7 +2950,9 @@ namespace oomph
                   break;
                 }
 
+
               } // loop over master nodes
+
 
               // Check if we need to send the data
               if (found_all_masters)
@@ -3176,6 +3212,7 @@ namespace oomph
       }
     } // end loop over all processors
 
+
     if (Global_timings::Doc_comprehensive_timings)
     {
       t_end = TimingHelpers::timer();
@@ -3183,6 +3220,7 @@ namespace oomph
                  << t_end - t_start << std::endl;
       t_start = TimingHelpers::timer();
     }
+
 
     // Now identify master nodes by translating index in shared
     // node lookup scheme from the lookup scheme with the sending
@@ -3262,6 +3300,7 @@ namespace oomph
           // Find the number of data added to the vector
           send_n[rank] = send_data.size() - send_displacement[rank];
         }
+
 
         // Storage for the number of data to be received from each processor
         Vector<int> receive_n(n_proc, 0);
@@ -3386,6 +3425,7 @@ namespace oomph
       } // end of sending stuff to intermediate processor that holds
         // non halo version of missing master node
 
+
       if (Global_timings::Doc_comprehensive_timings)
       {
         t_end = TimingHelpers::timer();
@@ -3394,6 +3434,7 @@ namespace oomph
           << t_end - t_start << std::endl;
         t_start = TimingHelpers::timer();
       }
+
 
       // Send information back to processor that needs to identify
       // missing master node via shared node lookup scheme with
@@ -3430,6 +3471,7 @@ namespace oomph
           // Find the number of data added to the vector
           send_n[rank] = send_data.size() - send_displacement[rank];
         }
+
 
         // Storage for the number of data to be received from each processor
         Vector<int> receive_n(n_proc, 0);
@@ -3541,6 +3583,7 @@ namespace oomph
 
       } // end of completing hang info for missing master nodes
 
+
       if (Global_timings::Doc_comprehensive_timings)
       {
         t_end = TimingHelpers::timer();
@@ -3549,6 +3592,7 @@ namespace oomph
           << t_end - t_start << std::endl;
       }
     } // end  of reconciliation required
+
 
     // Get global number of nodes still requiring synchronisation due to
     // missing master nodes
@@ -3889,9 +3933,11 @@ namespace oomph
 
 #endif
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Do adaptive p-refinement for mesh.
@@ -3920,6 +3966,7 @@ namespace oomph
       local_doc_info = this->doc_info();
     }
 
+
     // Check that the errors make sense
     if (refine_tol <= unrefine_tol)
     {
@@ -3933,6 +3980,7 @@ namespace oomph
       throw OomphLibError(
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
+
 
     // Select elements for refinement and unrefinement
     //==============================================
@@ -4012,6 +4060,7 @@ namespace oomph
     oomph_info << " \n Number of elements to be unrefined : " << n_unrefine
                << std::endl
                << std::endl;
+
 
     // Now do the actual mesh adaptation
     //---------------------------------
@@ -4180,6 +4229,7 @@ namespace oomph
           }
         }
 
+
         // Loop over all other domains/processors
         for (int d = 0; d < n_proc; d++)
         {
@@ -4318,6 +4368,7 @@ namespace oomph
       this->Nrefined = 0;
     }
   }
+
 
   //================================================================
   /// p-adapt mesh, which exists in two representations,
@@ -4486,6 +4537,7 @@ namespace oomph
             alg_node_pt->node_update(update_all_time_levels);
           }
 
+
           // If it's a Solid node, update Lagrangian coordinates
           // from its hanging node representation
           SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
@@ -4597,6 +4649,7 @@ namespace oomph
       this->forest_pt()->close_hanging_node_files(doc_info,
                                                   hanging_output_files);
 
+
       if (Global_timings::Doc_comprehensive_timings)
       {
         t_end = TimingHelpers::timer();
@@ -4615,6 +4668,7 @@ namespace oomph
       // Complete the hanging nodes schemes by dealing with the
       // recursively hanging nodes
       this->complete_hanging_nodes(ncont_interpolated_values);
+
 
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -4738,6 +4792,7 @@ namespace oomph
           << RefineableElement::max_integrity_tolerance() << "\n"
           << std::endl;
       }
+
 
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -5024,6 +5079,7 @@ namespace oomph
         }
 
         all_nodes_file.close();
+
 
         // Doc all hanging nodes:
         //-----------------------

@@ -80,6 +80,7 @@ namespace oomph
     }
   }
 
+
   //============================================================================
   /// Rebuild global mesh for monolithic problem
   //============================================================================
@@ -98,6 +99,7 @@ namespace oomph
     // Rebuild global mesh
     rebuild_global_mesh();
   }
+
 
   //============================================================================
   /// Only include solid elements in the Problem's mesh. This is
@@ -121,6 +123,7 @@ namespace oomph
     }
   }
 
+
   //============================================================================
   /// Only include fluid elements in the Problem's mesh. This is
   /// called before the segregated fluid solve. The fluid elements are
@@ -143,6 +146,7 @@ namespace oomph
     }
   }
 
+
   //============================================================================
   /// Pin all fluid dofs
   //============================================================================
@@ -164,6 +168,7 @@ namespace oomph
       }
     }
   }
+
 
   //============================================================================
   /// Restore the pinned status of all fluid dofs
@@ -194,6 +199,7 @@ namespace oomph
     }
   }
 
+
   //============================================================================
   /// Pin all solid dofs
   //============================================================================
@@ -215,6 +221,7 @@ namespace oomph
       }
     }
   }
+
 
   //============================================================================
   /// Restore the pinned status of all solid dofs
@@ -244,6 +251,7 @@ namespace oomph
       }
     }
   }
+
 
   //============================================================================
   /// Store the current solid values as reference values for future
@@ -285,6 +293,7 @@ namespace oomph
     Pointwise_aitken_counter++;
   }
 
+
   //============================================================================
   /// Get rms of change in the solid dofs; the max. change of the
   /// solid dofs and the rms norm of the solid dofs themselves.
@@ -320,8 +329,7 @@ namespace oomph
           Previous_solid_value[value_count] - Solid_data_pt[i]->value(k);
 
         // Max change?
-        if (std::fabs(change) > max_change)
-          max_change = std::fabs(change);
+        if (std::fabs(change) > max_change) max_change = std::fabs(change);
 
         // Add square of change relative to previous value
         rms_change += pow(change, 2);
@@ -338,6 +346,7 @@ namespace oomph
     rms_change = sqrt(rms_change / double(value_count));
     rms_norm = sqrt(rms_norm / double(value_count));
   }
+
 
   //============================================================================
   /// Under-relax solid, either by classical relaxation or by Irons & Tuck.
@@ -440,8 +449,7 @@ namespace oomph
     else
     {
       // No relaxation: Can return immediately
-      if (Omega_relax == 1.0)
-        return;
+      if (Omega_relax == 1.0) return;
 
       // Counter for the number of values:
       unsigned value_count = 0;
@@ -520,6 +528,7 @@ namespace oomph
     // iterates to be computed).
     Pointwise_aitken_counter = -1;
   }
+
 
   //============================================================================
   /// Segregated fixed point solver with optional pointwise Aitken acceleration
@@ -691,6 +700,7 @@ namespace oomph
         double max_res = 0.0;
         get_solid_change(rms_change, max_change, rms_norm);
 
+
         // If we are computing the maximum global residual, do so
         if (get_max_global_residual)
         {
@@ -751,6 +761,7 @@ namespace oomph
               converged = true;
             }
             break;
+
 
           case Assess_convergence_based_on_relative_solid_change:
             tol_achieved = std::fabs(rms_change / rms_norm);
@@ -836,6 +847,7 @@ namespace oomph
 
     } // End of loop over iterations
 
+
     // Jump address for converged or diverged iteration
   jump_out_of_picard:
 
@@ -894,6 +906,7 @@ namespace oomph
           }
           break;
 
+
         case Assess_convergence_based_on_relative_solid_change:
           oomph_info
             << "\n\n\n///////////////////////////////////////////////////////"
@@ -941,6 +954,7 @@ namespace oomph
 
     return conv_data;
   }
+
 
   //============================================================================
   /// Segregated fixed point solver with optional pointwise Aitken acceleration
@@ -1009,6 +1023,7 @@ namespace oomph
     // Return the convergence data
     return conv_data;
   }
+
 
   //============================================================================
   /// Segregated fixed point solver with optional pointwise Aitken acceleration
@@ -1087,6 +1102,7 @@ namespace oomph
     return conv_data;
   }
 
+
   //============================================================================
   /// Setup segregated solver, using the information provided by the user
   /// in his/her implementation of the pure virtual function
@@ -1122,6 +1138,7 @@ namespace oomph
           << std::endl
           << std::endl;
       }
+
 
       if (Solid_mesh_pt == 0)
       {
@@ -1186,6 +1203,7 @@ namespace oomph
         }
       }
 
+
       // Solid
       //------
 
@@ -1195,6 +1213,7 @@ namespace oomph
       Previous_solid_value.clear();
       Pointwise_aitken_solid_value.clear();
       Del_irons_and_tuck.clear();
+
 
       unsigned n_solid_data = solid_data_pt.size();
 
@@ -1246,6 +1265,7 @@ namespace oomph
       }
 
     } // End of full setup
+
 
     // Initialise Irons and Tuck relaxation factor
     R_irons_and_tuck = 1.0 - Omega_relax;

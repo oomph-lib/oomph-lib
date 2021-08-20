@@ -26,11 +26,13 @@
 // Non-inline functions for Helmholtz elements
 #include "Thelmholtz_elements.h"
 
+
 namespace oomph
 {
   /////////////////////////////////////////////////////////////////////////
   // THelmholtzElement
   /////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   // Set the data for the number of Variables at each node, always two

@@ -120,6 +120,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// The output function for general 1D QHermiteElements
   //=======================================================================
@@ -194,6 +195,7 @@ namespace oomph
     outfile << std::endl;
   }
 
+
   //=======================================================================
   /// The C-style output function for general 1D QHermiteElements
   //=======================================================================
@@ -238,6 +240,7 @@ namespace oomph
     fprintf(file_pt, "\n");
   }
 
+
   //=======================================================================
   /// The C-style output function for n_plot points in each coordinate direction
   //=======================================================================
@@ -265,6 +268,7 @@ namespace oomph
       fprintf(file_pt, "\n");
     }
   }
+
 
   //===========================================================
   /// Function to setup geometrical information for lower-dimensional
@@ -359,6 +363,7 @@ namespace oomph
   //       2D Hermite elements
   ////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Shape function for specific QHermiteElement<2>
   //=======================================================================
@@ -430,6 +435,7 @@ namespace oomph
     OneDimHermite::shape(s[1], Psi[1]);
     OneDimHermite::dshape(s[0], DPsi[0]);
     OneDimHermite::dshape(s[1], DPsi[1]);
+
 
     // Set up the two dimensional shape functions
     // Set up the functions at corner 0
@@ -731,6 +737,7 @@ namespace oomph
     d2psids(3, 3, 2) = DPsi[0][1][1] * DPsi[1][1][1];
   }
 
+
   //===========================================================
   /// The output function for QHermiteElement<2,ORDER>
   //===========================================================
@@ -814,6 +821,7 @@ namespace oomph
     outfile << std::endl;
   }
 
+
   //===========================================================
   /// The C-style output function for QHermiteElement<2,ORDER>
   //===========================================================
@@ -895,6 +903,7 @@ namespace oomph
     }
     fprintf(file_pt, "\n");
   }
+
 
   //=======================================================================
   /// Function to setup geometrical information for lower-dimensional
@@ -1055,6 +1064,7 @@ namespace oomph
   //     1D SolidQHermiteElements
   //////////////////////////////////////////////////////////////////////
 
+
   //=====================================================================
   /// Overload the output function
   //====================================================================
@@ -1063,6 +1073,7 @@ namespace oomph
   {
     QHermiteElement<DIM>::output(outfile);
   }
+
 
   //=======================================================================
   /// The output function for n_plot points in each coordinate direction
@@ -1104,6 +1115,7 @@ namespace oomph
     }
   }
 
+
   //=====================================================================
   /// Overload the C-style output function
   //====================================================================
@@ -1112,6 +1124,7 @@ namespace oomph
   {
     QHermiteElement<DIM>::output(file_pt);
   }
+
 
   //=======================================================================
   /// The C-style output function for n_plot points in each coordinate direction
@@ -1152,9 +1165,11 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////
   //   2D SolidQHermiteElements
   //////////////////////////////////////////////////////////////////////////
+
 
   //=====================================================================
   /// The output function for any number of points per element
@@ -1200,6 +1215,7 @@ namespace oomph
     outfile << std::endl;
   }
 
+
   //=====================================================================
   /// The C-style output function for any number of points per element
   //=====================================================================
@@ -1243,6 +1259,7 @@ namespace oomph
     fprintf(file_pt, "\n");
   }
 
+
   //=======================================================================
   /// Function to setup geometrical information for lower-dimensional
   /// FaceElements for the solid hermite elements. We need to
@@ -1269,6 +1286,7 @@ namespace oomph
   template class QHermiteElement<2>;
   template class DiagQHermiteElement<1>;
   template class DiagQHermiteElement<2>;
+
 
   template class SolidQHermiteElement<1>;
   template class SolidQHermiteElement<2>;

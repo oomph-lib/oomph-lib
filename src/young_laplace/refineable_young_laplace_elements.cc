@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "refineable_young_laplace_elements.h"
 
+
 namespace oomph
 {
   //======================================================================
@@ -186,6 +187,7 @@ namespace oomph
           r[j] = spine_base[j] + interpolated_u * spine[j];
         }
       }
+
 
       // Assemble residuals
       //-------------------

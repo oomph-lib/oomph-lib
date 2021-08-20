@@ -65,6 +65,7 @@ namespace oomph
       return 0.0;
     }
 
+
     ///\short Helper range checking function
     /// (Note that this only captures over-runs in 3D but
     /// errors are likely to be caught in evaluation of the
@@ -107,6 +108,7 @@ namespace oomph
       }
     }
 
+
     /// Empty Constructor
     TimeHarmonicElasticityTensor() {}
 
@@ -130,6 +132,7 @@ namespace oomph
     }
   };
 
+
   //===================================================================
   /// An isotropic elasticity tensor defined in terms of Young's modulus
   /// and Poisson's ratio. The elasticity tensor is assumed to be
@@ -139,8 +142,8 @@ namespace oomph
   /// Young's modulus used to non-dimensionalise the stresses/tractions
   /// in the governing equations.
   //===================================================================
-  class TimeHarmonicIsotropicElasticityTensor :
-    public TimeHarmonicElasticityTensor
+  class TimeHarmonicIsotropicElasticityTensor
+    : public TimeHarmonicElasticityTensor
   {
     // Storage for the independent components of the elasticity tensor
     double C[4];
@@ -155,8 +158,8 @@ namespace oomph
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
     /// equations).
-    TimeHarmonicIsotropicElasticityTensor(const double& nu, const double& E) :
-      TimeHarmonicElasticityTensor()
+    TimeHarmonicIsotropicElasticityTensor(const double& nu, const double& E)
+      : TimeHarmonicElasticityTensor()
     {
       // Set the three indepdent components
       C[0] = 0.0;
@@ -168,8 +171,8 @@ namespace oomph
     /// \short Constructor. Passing in the value of the Poisson's ratio.
     /// Stresses and tractions in the governing equations are assumed
     /// to have been non-dimensionalised on Young's modulus.
-    TimeHarmonicIsotropicElasticityTensor(const double& nu) :
-      TimeHarmonicElasticityTensor()
+    TimeHarmonicIsotropicElasticityTensor(const double& nu)
+      : TimeHarmonicElasticityTensor()
     {
       // Set the three indepdent components
       C[0] = 0.0;
@@ -195,11 +198,13 @@ namespace oomph
       this->set_lame_coefficients(lambda, mu);
     }
 
+
     /// Overload the independent coefficient function
     inline double independent_component(const unsigned& i) const
     {
       return C[StaticIndex[i]];
     }
+
 
   private:
     // Set the values of the lame coefficients

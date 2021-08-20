@@ -27,6 +27,7 @@
 #include "young_laplace_elements.h"
 #include "refineable_young_laplace_elements.h"
 
+
 namespace oomph
 {
   //===========================================================================
@@ -35,8 +36,8 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   YoungLaplaceContactAngleElement<ELEMENT>::YoungLaplaceContactAngleElement(
-    FiniteElement* const& bulk_el_pt, const int& face_index) :
-    FaceGeometry<ELEMENT>(), FaceElement()
+    FiniteElement* const& bulk_el_pt, const int& face_index)
+    : FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
     // to its nodes (by referring to the appropriate nodes in the bulk
@@ -59,6 +60,7 @@ namespace oomph
     }
 #endif
   }
+
 
   //================================================================
   /// Compute the element's contribution to the residual vector
@@ -127,6 +129,7 @@ namespace oomph
       double beta =
         ELEMENT::scalar_product(spine, normal_to_contact_line_parallel_to_wall);
 
+
       // Now add to the appropriate equations
 
       // Loop over the test functions
@@ -142,6 +145,7 @@ namespace oomph
       }
     }
   }
+
 
   //========================================================================
   /// Get the actual contact angle
@@ -198,6 +202,7 @@ namespace oomph
       // Number of nodes in bulk element
       unsigned nnode_bulk = bulk_elem_pt->nnode();
 
+
 #ifdef PARANOID
       // Dimension of (= number of local coordinates in) bulk element
       unsigned dim_bulk = bulk_elem_pt->dim();
@@ -248,6 +253,7 @@ namespace oomph
 
     return cos_gamma;
   }
+
 
   //========================================================================
   /// Get unit tangent and normal to contact line and the spine itself (this
@@ -307,6 +313,7 @@ namespace oomph
     // Global intrinsic coordinates of current point for evaluation of
     // spine and spine base
     Vector<double> interpolated_zeta(dim_bulk, 0.0);
+
 
     // Derivatives of zeta (in bulk) w.r.t. to tangent and pseudo-normal
     // local coordinate
@@ -405,6 +412,7 @@ namespace oomph
                      interpolated_u * dspine_ds_tangent[i];
         tang_norm += tangent[i] * tangent[i];
 
+
         aux_vector[i] = dspine_base_ds_pseudo_normal[i] +
                         interpolated_du_ds_pseudo_normal * spine[i] +
                         interpolated_u * dspine_ds_pseudo_normal[i];
@@ -441,6 +449,7 @@ namespace oomph
       aux_vector[i] *= aux_norm_fact;
     }
 
+
     // Normal to meniscus is the cross product between the
     // two contact line vectors:
     Vector<double> meniscus_normal(3);
@@ -464,6 +473,7 @@ namespace oomph
     // by another cross product
     ELEMENT::cross_product(meniscus_normal, tangent, normal);
   }
+
 
   //============================================================
   // Build the required elements

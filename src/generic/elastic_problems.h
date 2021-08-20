@@ -31,6 +31,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib headers
 #include "geom_objects.h"
 #include "timesteppers.h"
@@ -43,6 +44,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// \short Dummy mesh that can be created and deleted in
@@ -58,6 +60,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// \short IC problem for an elastic body discretised on a given (sub)-mesh.
@@ -96,6 +99,7 @@ namespace oomph
       // Default value for checking of consistent assignment of Newmark IC
       Max_residual_after_consistent_newton_ic = 1.0e-12;
     }
+
 
     /// Broken copy constructor
     SolidICProblem(const SolidICProblem&)
@@ -144,6 +148,7 @@ namespace oomph
                                                 SolidInitialCondition* ic_pt,
                                                 const double& dt);
 
+
     /// \short Setup initial condition for time-integration
     /// with Newmark's method. Past displacements and velocities are assigned
     /// directly (consistent with the idea that a second order ODE
@@ -166,6 +171,7 @@ namespace oomph
       const double& dt,
       SolidFiniteElement::MultiplierFctPt multiplier_fct_pt = 0);
 
+
     /// \short Max. tolerated residual after application of consistent
     /// Newmark IC. Used to check if we have specified the correct
     /// timescale ratio (non-dim density).
@@ -173,6 +179,7 @@ namespace oomph
     {
       return Max_residual_after_consistent_newton_ic;
     }
+
 
   private:
     /// Backup original state of all data associated with mesh
@@ -199,6 +206,7 @@ namespace oomph
     /// timescale ratio (non-dim density).
     double Max_residual_after_consistent_newton_ic;
   };
+
 
   //======================================================================
   /// \short Setup initial condition for time-integration
@@ -254,6 +262,7 @@ namespace oomph
     // scheme
     setup_problem();
 
+
     // Store times at which we need to assign ic:
     double current_time = timestepper_pt->time_pt()->time();
     double previous_time = timestepper_pt->time_pt()->time(1);
@@ -287,6 +296,7 @@ namespace oomph
             ->variable_position_pt());
       }
     }
+
 
     // Stage 2: Now get position at previous time and adjust previous
     //---------------------------------------------------------------
@@ -331,6 +341,7 @@ namespace oomph
     oomph_info << "Number of equations in big problem: "
                << problem_pt->assign_eqn_numbers() << std::endl;
   }
+
 
   //======================================================================
   /// \short Setup initial condition for time-integration
@@ -495,6 +506,7 @@ namespace oomph
       }
     }
 
+
     // Set values at current time
     //---------------------------
 
@@ -509,6 +521,7 @@ namespace oomph
 
     // Solve the problem for initial shape
     newton_solve();
+
 
     // Now solve for the correction to the Newmark accelerations
     //----------------------------------------------------------
@@ -580,6 +593,7 @@ namespace oomph
         *(position_data_pt->value_pt(ntstorage - 1, ival)) -= correction[ieqn];
       }
     }
+
 
 #ifdef PARANOID
     // Check the residual

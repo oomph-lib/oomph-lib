@@ -54,6 +54,7 @@ namespace oomph
     LinearisedAxisymmetricNavierStokesEquations::Default_Physical_Ratio_Value =
       1.0;
 
+
   //=======================================================================
   /// Output function in tecplot format: Velocities only
   /// r, z, U^C, U^S, V^C, V^S, W^C, W^S
@@ -139,6 +140,7 @@ namespace oomph
 
   } // End of output_veloc
 
+
   //=======================================================================
   /// Output function in tecplot format:
   /// r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
@@ -190,6 +192,7 @@ namespace oomph
 
   } // End of output
 
+
   //=======================================================================
   /// Output function in tecplot format:
   /// r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
@@ -240,6 +243,7 @@ namespace oomph
     write_tecplot_zone_footer(file_pt, nplot);
 
   } // End of output
+
 
   //=======================================================================
   /// Get strain-rate tensor: \f$ e_{ij} \f$  where
@@ -378,6 +382,7 @@ namespace oomph
     }
 
   } // End of strain_rate
+
 
   //=======================================================================
   /// Compute the residuals for the linearised axisymmetric Navier--Stokes
@@ -1083,6 +1088,7 @@ namespace oomph
                    interpolated_uz * dpsifdz) *
                   testf_ * W;
 
+
                 // Mesh velocity terms
                 if (!ALE_is_disabled)
                 {
@@ -1257,6 +1263,7 @@ namespace oomph
                   (interpolated_ur * dpsifdr + psif_ * interpolated_duzdz +
                    interpolated_uz * dpsifdz) *
                   testf_ * W;
+
 
                 // Mesh velocity terms
                 if (!ALE_is_disabled)
@@ -1679,6 +1686,7 @@ namespace oomph
 
       } // End of loop over shape functions
 
+
       // ====================
       // CONTINUITY EQUATIONS
       // ====================
@@ -1832,12 +1840,15 @@ namespace oomph
 
   } // End of fill_in_generic_residual_contribution_linearised_axi_nst
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
+
   /// Linearised axisymmetric Crouzeix-Raviart elements
   /// -------------------------------------------------
+
 
   //=======================================================================
   /// Set the data for the number of variables at each node
@@ -1845,6 +1856,7 @@ namespace oomph
   const unsigned
     LinearisedAxisymmetricQCrouzeixRaviartElement::Initial_Nvalue[9] = {
       6, 6, 6, 6, 6, 6, 6, 6, 6};
+
 
   //========================================================================
   /// Number of values (pinned or dofs) required at node n
@@ -1855,12 +1867,15 @@ namespace oomph
     return Initial_Nvalue[n];
   }
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
+
   /// Linearised axisymmetric Taylor-Hood elements
   /// --------------------------------------------
+
 
   //=======================================================================
   /// Set the data for the number of variables at each node
@@ -1868,10 +1883,12 @@ namespace oomph
   const unsigned LinearisedAxisymmetricQTaylorHoodElement::Initial_Nvalue[9] = {
     8, 6, 8, 6, 6, 6, 8, 6, 8};
 
+
   //=======================================================================
   /// Set the data for the pressure conversion array
   //=======================================================================
   const unsigned LinearisedAxisymmetricQTaylorHoodElement::Pconv[4] = {
     0, 2, 6, 8};
+
 
 } // namespace oomph

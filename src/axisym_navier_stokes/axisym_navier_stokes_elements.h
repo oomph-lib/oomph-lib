@@ -212,9 +212,9 @@ namespace oomph
   /// parameters (By default, \f$ R_\rho  = R_\mu = 1 \f$; other values
   /// tend to be used in problems involving multiple fluids).
   //======================================================================
-  class AxisymmetricNavierStokesEquations :
-    public virtual FiniteElement,
-    public virtual NavierStokesElementWithDiagonalMassMatrices
+  class AxisymmetricNavierStokesEquations
+    : public virtual FiniteElement,
+      public virtual NavierStokesElementWithDiagonalMassMatrices
   {
   private:
     /// \short Static "magic" number that indicates that the pressure is
@@ -475,8 +475,8 @@ namespace oomph
 
   public:
     /// \short Constructor: NULL the body force and source function
-    AxisymmetricNavierStokesEquations() :
-      Body_force_fct_pt(0), Source_fct_pt(0), ALE_is_disabled(false)
+    AxisymmetricNavierStokesEquations()
+      : Body_force_fct_pt(0), Source_fct_pt(0), ALE_is_disabled(false)
     {
       // Set all the Physical parameter pointers to the default value zero
       Re_pt = &Default_Physical_Constant_Value;
@@ -627,6 +627,7 @@ namespace oomph
     {
       return 3;
     }
+
 
     /// \short i-th component of du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
@@ -812,6 +813,7 @@ namespace oomph
       data.push_back(interpolated_p_axi_nst(s));
     }
 
+
     /// \short Output function: x,y,[z],u,v,[w],p
     /// in tecplot format. Default number of plot points
     void output(std::ostream& outfile)
@@ -823,6 +825,7 @@ namespace oomph
     /// \short Output function: x,y,[z],u,v,[w],p
     /// in tecplot format. nplot points in each coordinate direction
     void output(std::ostream& outfile, const unsigned& nplot);
+
 
     /// \short Output function: x,y,[z],u,v,[w],p
     /// in tecplot format. Default number of plot points
@@ -961,6 +964,7 @@ namespace oomph
         parameter_pt, dres_dparam, djac_dparam, dmass_matrix_dparam, 2);
     }
 
+
     /// Compute vector of FE interpolated velocity u at local coordinate s
     void interpolated_u_axi_nst(const Vector<double>& s,
                                 Vector<double>& veloc) const
@@ -1011,6 +1015,7 @@ namespace oomph
       return (interpolated_u);
     }
 
+
     /// Return FE interpolated velocity u[i] at local coordinate s
     // at time level t (t=0: present, t>0: history)
     double interpolated_u_axi_nst(const unsigned& t,
@@ -1037,6 +1042,7 @@ namespace oomph
 
       return (interpolated_u);
     }
+
 
     /// \short Compute the derivatives of the i-th component of
     /// velocity at point s with respect
@@ -1093,6 +1099,7 @@ namespace oomph
         }
       }
     }
+
 
     /// Return FE interpolated pressure at local coordinate s
     double interpolated_p_axi_nst(const Vector<double>& s) const
@@ -1319,14 +1326,15 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
 
+
   //==========================================================================
   /// Crouzeix_Raviart elements are Navier--Stokes elements with quadratic
   /// interpolation for velocities and positions, but a discontinuous linear
   /// pressure interpolation
   //==========================================================================
-  class AxisymmetricQCrouzeixRaviartElement :
-    public virtual QElement<2, 3>,
-    public virtual AxisymmetricNavierStokesEquations
+  class AxisymmetricQCrouzeixRaviartElement
+    : public virtual QElement<2, 3>,
+      public virtual AxisymmetricNavierStokesEquations
   {
   private:
     /// Static array of ints to hold required number of variables at nodes
@@ -1369,6 +1377,7 @@ namespace oomph
       RankFourTensor<double>& d_dtestdx_dX,
       DenseMatrix<double>& djacobian_dX) const;
 
+
     /// Pressure shape functions at local coordinate s
     inline void pshape_axi_nst(const Vector<double>& s, Shape& psi) const;
 
@@ -1377,10 +1386,11 @@ namespace oomph
                                Shape& psi,
                                Shape& test) const;
 
+
   public:
     /// Constructor, there are three internal values (for the pressure)
-    AxisymmetricQCrouzeixRaviartElement() :
-      QElement<2, 3>(), AxisymmetricNavierStokesEquations()
+    AxisymmetricQCrouzeixRaviartElement()
+      : QElement<2, 3>(), AxisymmetricNavierStokesEquations()
     {
       // Allocate and add one Internal data object that stores the three
       // pressure values
@@ -1434,6 +1444,7 @@ namespace oomph
     {
       AxisymmetricNavierStokesEquations::output(outfile, n_plot);
     }
+
 
     /// Redirect output to NavierStokesEquations output
     void output(FILE* file_pt)
@@ -1586,12 +1597,13 @@ namespace oomph
     for (unsigned i = 0; i < 3; i++) test[i] = psi[i];
   }
 
+
   //=======================================================================
   /// Face geometry of the Axisymmetric Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<AxisymmetricQCrouzeixRaviartElement> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<AxisymmetricQCrouzeixRaviartElement>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
@@ -1602,12 +1614,13 @@ namespace oomph
   /// elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<AxisymmetricQCrouzeixRaviartElement>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<AxisymmetricQCrouzeixRaviartElement>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
+
 
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
@@ -1617,9 +1630,9 @@ namespace oomph
   /// with quadratic interpolation for velocities and positions and
   /// continous linear pressure interpolation
   //=======================================================================
-  class AxisymmetricQTaylorHoodElement :
-    public virtual QElement<2, 3>,
-    public virtual AxisymmetricNavierStokesEquations
+  class AxisymmetricQTaylorHoodElement
+    : public virtual QElement<2, 3>,
+      public virtual AxisymmetricNavierStokesEquations
   {
   private:
     /// Static array of ints to hold number of variables at node
@@ -1672,8 +1685,8 @@ namespace oomph
 
   public:
     /// Constructor, no internal data points
-    AxisymmetricQTaylorHoodElement() :
-      QElement<2, 3>(), AxisymmetricNavierStokesEquations()
+    AxisymmetricQTaylorHoodElement()
+      : QElement<2, 3>(), AxisymmetricNavierStokesEquations()
     {
     }
 
@@ -1905,8 +1918,8 @@ namespace oomph
   /// Face geometry of the Axisymmetric Taylor_Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<AxisymmetricQTaylorHoodElement> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<AxisymmetricQTaylorHoodElement>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
@@ -1917,19 +1930,20 @@ namespace oomph
   /// elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<AxisymmetricQTaylorHoodElement>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<AxisymmetricQTaylorHoodElement>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   //==========================================================
   /// Axisymmetric Taylor Hood upgraded to become projectable
   //==========================================================
   template<class TAYLOR_HOOD_ELEMENT>
-  class ProjectableAxisymmetricTaylorHoodElement :
-    public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
+  class ProjectableAxisymmetricTaylorHoodElement
+    : public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
   {
   public:
     /// \short Specify the values associated with field fld.
@@ -2035,6 +2049,7 @@ namespace oomph
       }
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -2072,6 +2087,7 @@ namespace oomph
       }
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
@@ -2084,6 +2100,7 @@ namespace oomph
         return this->nnode();
       }
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -2100,17 +2117,19 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableAxisymmetricTaylorHoodElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableAxisymmetricTaylorHoodElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
@@ -2118,19 +2137,20 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   class FaceGeometry<
-    FaceGeometry<ProjectableAxisymmetricTaylorHoodElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+    FaceGeometry<ProjectableAxisymmetricTaylorHoodElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
 
+
   //==========================================================
   /// Crouzeix Raviart upgraded to become projectable
   //==========================================================
   template<class CROUZEIX_RAVIART_ELEMENT>
-  class ProjectableAxisymmetricCrouzeixRaviartElement :
-    public virtual ProjectableElement<CROUZEIX_RAVIART_ELEMENT>
+  class ProjectableAxisymmetricCrouzeixRaviartElement
+    : public virtual ProjectableElement<CROUZEIX_RAVIART_ELEMENT>
   {
   public:
     /// \short Specify the values associated with field fld.
@@ -2235,6 +2255,7 @@ namespace oomph
       }
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -2256,6 +2277,7 @@ namespace oomph
       }
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
@@ -2268,6 +2290,7 @@ namespace oomph
         return this->nnode();
       }
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -2284,17 +2307,19 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableAxisymmetricCrouzeixRaviartElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableAxisymmetricCrouzeixRaviartElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
@@ -2302,12 +2327,13 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   class FaceGeometry<
-    FaceGeometry<ProjectableAxisymmetricCrouzeixRaviartElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+    FaceGeometry<ProjectableAxisymmetricCrouzeixRaviartElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
+
 
 } // namespace oomph
 

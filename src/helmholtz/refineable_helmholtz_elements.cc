@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "refineable_helmholtz_elements.h"
 
+
 namespace oomph
 {
   //========================================================================
@@ -103,6 +104,7 @@ namespace oomph
       // Get body force
       std::complex<double> source(0.0, 0.0);
       this->get_source_helmholtz(ipt, interpolated_x, source);
+
 
       // Assemble residuals and Jacobian
 
@@ -248,6 +250,7 @@ namespace oomph
             } // End of Jacobian calculation
           } // End of case when residual equation is not pinned
 
+
           if (local_eqn_imag >= 0)
           {
             // Add body force/source term here and Helmholtz bit
@@ -339,6 +342,7 @@ namespace oomph
 
     } // End of loop over integration points
   }
+
 
   //====================================================================
   // Force build of templates

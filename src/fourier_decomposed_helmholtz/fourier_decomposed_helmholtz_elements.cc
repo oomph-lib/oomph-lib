@@ -26,6 +26,7 @@
 // Non-inline functions for Helmholtz elements
 #include "fourier_decomposed_helmholtz_elements.h"
 
+
 namespace oomph
 {
   //========================================================================
@@ -38,10 +39,10 @@ namespace oomph
     //========================================================================
     double factorial(const unsigned& l)
     {
-      if (l == 0)
-        return 1.0;
+      if (l == 0) return 1.0;
       return double(l * factorial(l - 1));
     }
+
 
     //========================================================================
     /// Legendre polynomials depending on one parameter
@@ -89,6 +90,7 @@ namespace oomph
 
     } // end of plgndr1
 
+
     //========================================================================
     // Legendre polynomials depending on two parameters
     //========================================================================
@@ -128,8 +130,7 @@ namespace oomph
           fact += 2.0;
         }
       }
-      if (l == m)
-        return pmm;
+      if (l == m) return pmm;
 
       // Compute pmmp1 : if l=m+1 it's finished
       else
@@ -155,9 +156,11 @@ namespace oomph
 
   } // namespace Legendre_functions_helper
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Set the data for the number of Variables at each node, always two
@@ -166,6 +169,7 @@ namespace oomph
   template<unsigned NNODE_1D>
   const unsigned QFourierDecomposedHelmholtzElement<NNODE_1D>::Initial_Nvalue =
     2;
+
 
   //======================================================================
   /// Compute element residual Vector and/or element Jacobian matrix
@@ -362,6 +366,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -385,6 +390,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// Output function:
@@ -419,6 +425,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Output function for real part of full time-dependent solution
@@ -458,6 +465,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// C-style output function:
@@ -499,6 +507,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution
@@ -549,6 +558,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Output function for real part of full time-dependent fct
@@ -604,6 +614,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Validate against exact solution
@@ -688,6 +699,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Compute norm of fe solution
   //======================================================================
@@ -736,6 +748,7 @@ namespace oomph
       norm += (u_fe.real() * u_fe.real() + u_fe.imag() * u_fe.imag()) * W;
     }
   }
+
 
   //====================================================================
   // Force build of templates

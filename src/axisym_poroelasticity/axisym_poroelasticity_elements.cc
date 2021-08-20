@@ -54,6 +54,7 @@ namespace oomph
   //===================================================================
   double AxisymmetricPoroelasticityEquations::Default_permeability_value = 1.0;
 
+
   //===================================================================
   /// \short Static default value for ratio of the material's actual
   /// permeability to the permeability used in the non-dimensionalisastion
@@ -135,6 +136,7 @@ namespace oomph
 
     return det;
   }
+
 
   //========================================================================
   /// \short Output FE representation of soln:
@@ -871,6 +873,7 @@ namespace oomph
         } // End of loop over dimensions
       } // End of loop over u test functions
 
+
       // Darcy:
       //-------
 
@@ -1048,5 +1051,6 @@ namespace oomph
       } // End of loop over p test functions
     } // End of loop over integration points
   }
+
 
 } // namespace oomph

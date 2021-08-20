@@ -58,14 +58,8 @@
 
 namespace oomph
 {
-  // Forward declarations
-  template<class ELEMENT>
-  class FaceElementAsGeomObject;
-
-  template<class ELEMENT>
-  class CompareBoundaryCoordinate;
-
   //// Templated helper functions for multi-domain methods using locate_zeta
+
 
   //============================================================================
   /// Identify the \c FaceElements (stored in the mesh pointed to by
@@ -171,6 +165,7 @@ namespace oomph
                 CompareBoundaryCoordinate<BULK_ELEMENT>());
     } // end of loop over meshes
 
+
     // Setup the interactions for this problem using the surface mesh
     // on the fluid mesh.  The interaction parameter in this instance is
     // given by the "face" parameter.
@@ -178,6 +173,7 @@ namespace oomph
       BULK_ELEMENT,
       FaceElementAsGeomObject<BULK_ELEMENT>>(
       problem_pt, face_mesh_pt, bulk_mesh_pt, bulk_face_mesh_pt, interaction);
+
 
     // Loop over all meshes to clean up
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
@@ -201,6 +197,7 @@ namespace oomph
 
     } // end of loop over meshes
   }
+
 
   //========================================================================
   /// Identify the \c FaceElements (stored in the mesh pointed to by
@@ -232,6 +229,7 @@ namespace oomph
       face_mesh_pt_vect,
       interaction);
   }
+
 
   //========================================================================
   /// Set up the two-way multi-domain interactions for the
@@ -265,6 +263,7 @@ namespace oomph
     setup_multi_domain_interaction<ELEMENT_0>(
       problem_pt, second_mesh_pt, first_mesh_pt, second_interaction);
   }
+
 
   //========================================================================
   ///  Function to set up the one-way multi-domain interaction for
@@ -310,6 +309,7 @@ namespace oomph
     aux_setup_multi_domain_interaction<EXT_ELEMENT, EXT_ELEMENT>(
       problem_pt, mesh_pt, external_mesh_pt, interaction_index);
   }
+
 
   //========================================================================
   /// Function to set up the one-way multi-domain interaction for
@@ -371,6 +371,7 @@ namespace oomph
       external_face_mesh_pt);
   }
 
+
   //========================================================================
   /// Function to set up the one-way multi-domain interaction for
   /// FSI-like problems.
@@ -423,8 +424,7 @@ namespace oomph
 #endif
 
     // Bail out?
-    if (n_mesh == 0)
-      return;
+    if (n_mesh == 0) return;
 
     // Bulk elements must be external elements in this case
     Use_bulk_element_as_external = true;
@@ -432,6 +432,7 @@ namespace oomph
     // Call the auxiliary routine with GEOM_OBJECT=FACE_ELEMENT_GEOM_OBJECT
     // and EL_DIM_LAG=Dim, EL_DIM_EUL=Dim+1. Use first mesh only.
     get_dim_helper(problem_pt, mesh_pt[0], external_face_mesh_pt[0]);
+
 
 #ifdef PARANOID
     // Check consitency
@@ -472,6 +473,7 @@ namespace oomph
       external_face_mesh_pt);
   }
 
+
   //========================================================================
   /// This routine calls the locate_zeta routine (simultaneously on each
   /// processor for each individual processor's element set if necessary)
@@ -506,6 +508,7 @@ namespace oomph
       external_face_mesh_pt_vector);
 
   } // end of aux_setup_multi_domain_interaction
+
 
   //========================================================================
   /// This routine calls the locate_zeta routine (simultaneously on each
@@ -545,8 +548,7 @@ namespace oomph
 #endif
 
     // Bail out?
-    if (n_mesh == 0)
-      return;
+    if (n_mesh == 0) return;
 
       // Multi-domain setup will not work for elements with
       // nonuniformly spaced nodes
@@ -594,6 +596,7 @@ namespace oomph
     } // end over initial loop over meshes
 
 #endif
+
 
 #ifdef OOMPH_HAS_MPI
     // Storage for number of processors and my rank
@@ -687,6 +690,7 @@ namespace oomph
         }
       }
 #endif
+
 
     } // end of loop over meshes
 
@@ -802,6 +806,7 @@ namespace oomph
           max_n_sample_points_of_sample_point_containers = nsp;
         }
 
+
 #ifdef OOMPH_HAS_MPI
         // If the mesh has been distributed we want the max. number
         // of sample points across all processors
@@ -863,6 +868,7 @@ namespace oomph
           max_n_sample_points_of_sample_point_containers = nsp;
         }
 
+
 #ifdef OOMPH_HAS_MPI
         // If the mesh has been distributed we want the max. number
         // of sample points across all processors
@@ -883,6 +889,7 @@ namespace oomph
       }
 #endif // cgal
     }
+
 
     // Storage for info about coordinate location
     Vector<double> percentage_coords_located_locally;
@@ -935,6 +942,7 @@ namespace oomph
         }
       }
 
+
       // Now test whether anything needs to be broadcast elsewhere
       // (i.e. were there any failures in the locate method above?)
       // If there are, then the zetas for these failures need to be
@@ -953,6 +961,7 @@ namespace oomph
                    << "Number of missing zetas: " << n_zeta_not_found
                    << std::endl;
       }
+
 
 #ifdef OOMPH_HAS_MPI
       // Only perform the reduction operation if there's more than one process
@@ -1069,6 +1078,7 @@ namespace oomph
           n_zeta_not_found =
             Flat_packed_zetas_not_found_locally.size() - Dim * n_mesh;
 
+
 #ifdef OOMPH_HAS_MPI
           if (problem_pt->communicator_pt()->nproc() > 1)
           {
@@ -1095,6 +1105,7 @@ namespace oomph
             break;
           }
         }
+
 
         // Doc timings
         if (Doc_timings)
@@ -1127,6 +1138,7 @@ namespace oomph
       } // end if for missing zetas on any process
 #endif
 
+
       // Store information about location of elements for integration points
       if (Doc_stats)
       {
@@ -1140,6 +1152,7 @@ namespace oomph
             count_locates += External_element_located[e][ipt];
           }
         }
+
 
         // Store total percentage of locates so far.
         // Only assign if we had anything to allocte, otherwise 100%
@@ -1163,6 +1176,7 @@ namespace oomph
       // by DIM times DBL_MAX entries for each mesh]
       n_zeta_not_found =
         Flat_packed_zetas_not_found_locally.size() - Dim * n_mesh;
+
 
 #ifdef OOMPH_HAS_MPI
       if (problem_pt->communicator_pt()->nproc() > 1)
@@ -1305,6 +1319,7 @@ namespace oomph
 #endif // cgal
     } // end of "spirals" loop
 
+
     // If we haven't found all zetas we're dead now...
     //-------------------------------------------------
     if (n_zeta_not_found != 0)
@@ -1373,8 +1388,8 @@ namespace oomph
           unsigned nel = mesh_pt[i_mesh]->nelement();
           for (unsigned e = 0; e < nel; e++)
           {
-            mesh_pt[i_mesh]->finite_element_pt(e)->FiniteElement::output(
-              outfile);
+            mesh_pt[i_mesh]->finite_element_pt(e)->output(outfile);
+            // FiniteElement::output(outfile);
           }
           outfile.close();
 
@@ -1384,8 +1399,8 @@ namespace oomph
           nel = external_mesh_pt->nelement();
           for (unsigned e = 0; e < nel; e++)
           {
-            external_mesh_pt->finite_element_pt(e)->FiniteElement::output(
-              outfile);
+            external_mesh_pt->finite_element_pt(e)->output(outfile);
+            // FiniteElement::output(outfile);
           }
           outfile.close();
 
@@ -1467,6 +1482,7 @@ namespace oomph
       }
     }
 
+
     // Doc timings if required
     if (Doc_timings)
     {
@@ -1511,6 +1527,7 @@ namespace oomph
         }
       }
       oomph_info << "-------------------------------------------" << std::endl;
+
 
       // No need for any of this malaki if we're not running in parallel
       if (problem_pt->communicator_pt()->nproc() > 1)
@@ -1789,6 +1806,7 @@ namespace oomph
                       macro_mesh_pt->macro_domain_pt()->macro_element_pt(
                         macro_el_num));
 
+
                     // We need to receive the lower left
                     // and upper right coordinates of the macro element
                     QElementBase* q_el_pt =
@@ -1901,6 +1919,7 @@ namespace oomph
     } // end loop over meshes
   }
 
+
   //============start of add_external_halo_node_to_storage===============
   /// Helper function to add external halo nodes, including any masters,
   /// based on information received from the haloed process
@@ -1934,6 +1953,7 @@ namespace oomph
       n_cont_inter_values,
       problem_pt);
   }
+
 
   //========================================================================
   /// Recursively add masters of external halo nodes (and their masters, etc)
@@ -2187,6 +2207,7 @@ namespace oomph
           external_mesh_pt->add_boundary_node(i_bnd, new_master_nod_pt);
         }
 
+
         // Do we have additional values created by face elements?
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
         oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds << " "
@@ -2378,6 +2399,7 @@ namespace oomph
           new_master_nod_pt = new BoundaryNode<MacroElementNodeUpdateNode>(
             n_dim, n_position_type, n_value);
         }
+
 
         // How many boundaries does the macro element master node live on?
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
@@ -2667,6 +2689,7 @@ namespace oomph
             n_lag_dim, n_lag_type, n_dim, n_position_type, n_value);
         }
 
+
         // How many boundaries does the macro element master node live on?
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
         oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
@@ -2844,6 +2867,7 @@ namespace oomph
           external_mesh_pt->add_boundary_node(i_bnd, new_master_nod_pt);
         }
 
+
         // Do we have additional values created by face elements?
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
         oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
@@ -2956,7 +2980,9 @@ namespace oomph
     }
   }
 
+
 #endif
+
 
 } // namespace oomph
 

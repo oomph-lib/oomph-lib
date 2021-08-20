@@ -30,6 +30,7 @@
 #include "macro_element_node_update_element.h"
 #include "refineable_brick_element.h"
 
+
 namespace oomph
 {
   //========================================================================
@@ -74,6 +75,7 @@ namespace oomph
 
     // next face
 
+
     s[0] = 1.0;
     s[1] = -1.0;
     s[2] = -1.0;
@@ -101,12 +103,14 @@ namespace oomph
     get_x(s, corner);
     outfile << corner[0] << " " << corner[1] << " " << corner[2] << " "
             << Number << std::endl;
+
 
     //  outfile << "TEXT  CS = GRID, X = " << corner[0] <<
     //   ",Y = " << corner[1] << ",Z = " << corner[2] <<
     //   ", HU = GRID, H = 0.01, AN = MIDCENTER, T =\""
     //          << Number << "\"" << std::endl;
   }
+
 
   //==================================================================
   /// Setup static matrix for coincidence between son nodal points and
@@ -213,6 +217,7 @@ namespace oomph
 
   } // setup_father_bounds()
 
+
   //==================================================================
   /// Determine Vector of boundary conditions along the element's boundary
   /// bound.
@@ -304,6 +309,7 @@ namespace oomph
         get_face_bcs(OcTree::Vector_to_direction[vect1], bound_cons1);
         get_face_bcs(OcTree::Vector_to_direction[vect2], bound_cons2);
         get_face_bcs(OcTree::Vector_to_direction[vect3], bound_cons3);
+
 
         // set the bcs to the most restrictive ones
         for (unsigned k = 0; k < nvalue; k++)
@@ -404,6 +410,7 @@ namespace oomph
         node_pt(node3)->is_pinned(k) * node_pt(node4)->is_pinned(k);
     }
   }
+
 
   //==================================================================
   /// Given an element edge/vertex, return a Vector which contains
@@ -526,6 +533,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // Empty boundary set: Edge does not live on any boundary
     boundary.clear();
 
@@ -537,6 +545,7 @@ namespace oomph
     {
       node_pt(node[i])->get_boundaries_pt(node_boundaries_pt[i]);
     }
+
 
     // Now work out the intersections
     Vector<std::set<unsigned>> boundary_aux(2);
@@ -564,6 +573,7 @@ namespace oomph
                      boundary_aux[1].end(),
                      inserter(boundary, boundary.begin()));
   }
+
 
   //===================================================================
   /// Return the value of the intrinsic boundary coordinate interpolated
@@ -1251,6 +1261,7 @@ namespace oomph
     return 0;
   }
 
+
   //==================================================================
   /// Build the element by doing the following:
   /// - Give it nodal positions (by establishing the pointers to its
@@ -1385,6 +1396,7 @@ namespace oomph
         }
       }
 
+
       // If the father element hasn't been generated yet, we're stuck...
       if (father_el_pt->node_pt(0) == 0)
       {
@@ -1418,6 +1430,7 @@ namespace oomph
               // Get the fractional position of the node in the direction of
               // s[2]
               s_fraction[2] = local_one_d_fraction_of_node(i2, 2);
+
               // Local coordinate in father element
               s[2] = s_lo[2] + (s_hi[2] - s_lo[2]) * s_fraction[2];
 
@@ -1885,6 +1898,7 @@ namespace oomph
                 // ONCE THEY HAVE BEEN GIVEN POSITIONS) BUT WILL
                 // NOT ASSIGN SENSIBLE INITIAL POSITONS!
 
+
                 // Have we created a new node?
                 if (!node_done)
                 {
@@ -2049,6 +2063,7 @@ namespace oomph
             aux_el_pt
               ->enable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
           }
+
 
           aux_el_pt->method_for_shape_derivs() =
             aux_father_el_pt->method_for_shape_derivs();
@@ -2485,6 +2500,7 @@ namespace oomph
     }
   }
 
+
   //=================================================================
   /// Check inter-element continuity of
   /// - nodal positions
@@ -2613,6 +2629,7 @@ namespace oomph
                   break;
               }
 
+
               // We have to check if the hi and lo directions along the
               // face are inverted or not
               Vector<double> s_in_neighb(3);
@@ -2623,6 +2640,7 @@ namespace oomph
                   s_lo_neigh[i] +
                   s_fraction[translate_s[i]] * (s_hi_neigh[i] - s_lo_neigh[i]);
               }
+
 
               // Loop over timesteps
               for (unsigned t = 0; t < n_time; t++)
@@ -2709,12 +2727,9 @@ namespace oomph
     }
 
     max_error = max_error_x[0];
-    if (max_error_x[1] > max_error)
-      max_error = max_error_x[1];
-    if (max_error_x[2] > max_error)
-      max_error = max_error_x[2];
-    if (max_error_val > max_error)
-      max_error = max_error_val;
+    if (max_error_x[1] > max_error) max_error = max_error_x[1];
+    if (max_error_x[2] > max_error) max_error = max_error_x[2];
+    if (max_error_val > max_error) max_error = max_error_val;
 
     if (max_error > 1e-9)
     {
@@ -2726,6 +2741,7 @@ namespace oomph
 
     // error_file.close();
   }
+
 
   //==================================================================
   /// Determine vector of solid (positional) boundary conditions along
@@ -2820,6 +2836,7 @@ namespace oomph
         get_face_solid_bcs(OcTree::Vector_to_direction[vect1], bound_cons1);
         get_face_solid_bcs(OcTree::Vector_to_direction[vect2], bound_cons2);
         get_face_solid_bcs(OcTree::Vector_to_direction[vect3], bound_cons3);
+
 
         // set the bcs to the most restrictive ones
         for (unsigned k = 0; k < n_dim; k++)
@@ -2965,11 +2982,13 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Static matrix for coincidence between son nodal points and
   /// father boundaries
   ///
   //========================================================================
   std::map<unsigned, DenseMatrix<int>> RefineableQElement<3>::Father_bound;
+
 
 } // namespace oomph

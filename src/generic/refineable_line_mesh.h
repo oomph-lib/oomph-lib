@@ -23,14 +23,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef LMESH2OOMPH_D_HEADER
-#define LMESH2OOMPH_D_HEADER
+#ifndef OOMPH_REFINEABLE_LINE_MESH_HEADER
+#define OOMPH_REFINEABLE_LINE_MESH_HEADER
 
 #include "line_mesh.h"
 #include "refineable_mesh.h"
 #include "refineable_line_element.h"
-// Include to fill in additional_setup_shared_node_scheme() function
-#include "refineable_mesh.h"
 
 namespace oomph
 {
@@ -45,9 +43,8 @@ namespace oomph
   /// BinaryTreeForest representation of the initial (coarse) mesh.
   //===========================================================================
   template<class ELEMENT>
-  class RefineableLineMesh :
-    public virtual TreeBasedRefineableMesh<ELEMENT>,
-    public virtual LineMeshBase
+  class RefineableLineMesh : public virtual TreeBasedRefineableMesh<ELEMENT>,
+                             public virtual LineMeshBase
   {
   public:
     /// Constructor: Set up static binary tree data
@@ -86,8 +83,7 @@ namespace oomph
     {
       // This wipes all elements/binary trees in the tree representation
       // but leaves the leaf elements alone
-      if (this->Forest_pt != 0)
-        delete this->Forest_pt;
+      if (this->Forest_pt != 0) delete this->Forest_pt;
 
       // Each finite element in the coarse base mesh gets associated with
       // (the root of) a BinaryTree. Store BinaryTreeRoots in vector:

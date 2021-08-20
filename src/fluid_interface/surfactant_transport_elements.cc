@@ -185,6 +185,7 @@ namespace oomph
         (interpolated_u[i] - mesh_velocity[i]) * interpolated_grad_C[i];
     }
 
+
     // Now we add the flux term to the appropriate residuals
     for (unsigned l = 0; l < n_node; l++)
     {
@@ -242,11 +243,13 @@ namespace oomph
               }
             }
 
+
             // Loop over the velocity components
             for (unsigned i2 = 0; i2 < n_dim; i2++)
             {
               // Get the unknown
               local_unknown = this->nodal_local_eqn(l2, u_index[i2]);
+
 
               // If not a boundary condition
               if (local_unknown >= 0)
@@ -305,6 +308,7 @@ namespace oomph
     Vector<double> s(el_dim);
     Vector<double> n(n_dim);
     Vector<double> u(n_velocity);
+
 
     outfile << this->tecplot_zone_string(n_plot);
 
@@ -420,5 +424,6 @@ namespace oomph
     }
     return mass;
   }
+
 
 } // namespace oomph

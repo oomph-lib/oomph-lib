@@ -43,6 +43,7 @@
 #include "communicator.h"
 #include "oomph_utilities.h"
 
+
 namespace oomph
 {
   //=============================================================================
@@ -72,8 +73,8 @@ namespace oomph
     LinearAlgebraDistribution(const OomphCommunicator& comm,
                               const unsigned& first_row_,
                               const unsigned& n_row_local,
-                              const unsigned& n_row = 0) :
-      Comm_pt(0)
+                              const unsigned& n_row = 0)
+      : Comm_pt(0)
     {
       this->build(&comm, first_row_, n_row_local, n_row);
     };
@@ -83,8 +84,8 @@ namespace oomph
     /// if distributed = false then every row is duplicated on every processor
     LinearAlgebraDistribution(const OomphCommunicator& comm,
                               const unsigned& n_row,
-                              const bool& distributed_ = true) :
-      Comm_pt(0)
+                              const bool& distributed_ = true)
+      : Comm_pt(0)
     {
       this->build(&comm, n_row, distributed_);
     };
@@ -95,8 +96,8 @@ namespace oomph
     LinearAlgebraDistribution(const OomphCommunicator* const comm_pt,
                               const unsigned& first_row_,
                               const unsigned& n_row_local,
-                              const unsigned& n_row = 0) :
-      Comm_pt(0)
+                              const unsigned& n_row = 0)
+      : Comm_pt(0)
     {
       this->build(comm_pt, first_row_, n_row_local, n_row);
     };
@@ -106,22 +107,22 @@ namespace oomph
     /// if distributed = false then every row is duplicated on every processor
     LinearAlgebraDistribution(const OomphCommunicator* const comm_pt,
                               const unsigned& n_row,
-                              const bool& distributed_ = true) :
-      Comm_pt(0)
+                              const bool& distributed_ = true)
+      : Comm_pt(0)
     {
       this->build(comm_pt, n_row, distributed_);
     };
 
     /// \short Copy Constructor.
-    LinearAlgebraDistribution(const LinearAlgebraDistribution& old_dist) :
-      Comm_pt(0)
+    LinearAlgebraDistribution(const LinearAlgebraDistribution& old_dist)
+      : Comm_pt(0)
     {
       this->build(old_dist);
     }
 
     /// \short pointer based copy constructor
-    LinearAlgebraDistribution(const LinearAlgebraDistribution* old_dist_pt) :
-      Comm_pt(0)
+    LinearAlgebraDistribution(const LinearAlgebraDistribution* old_dist_pt)
+      : Comm_pt(0)
     {
       this->build(old_dist_pt);
     }
@@ -423,6 +424,7 @@ namespace oomph
     /// the pointer to the MPI communicator object in this distribution
     OomphCommunicator* Comm_pt;
   }; // end of LinearAlgebraDistribution
+
 
   //=============================================================================
   /// \short Base class for any linear algebra object that is distributable.

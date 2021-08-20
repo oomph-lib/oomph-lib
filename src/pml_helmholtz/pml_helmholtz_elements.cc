@@ -26,6 +26,7 @@
 // Non-inline functions for gen Helmholtz elements
 #include "pml_helmholtz_elements.h"
 
+
 namespace oomph
 {
   //======================================================================
@@ -121,6 +122,7 @@ namespace oomph
       std::complex<double> source(0.0, 0.0);
       get_source_helmholtz(ipt, interpolated_x, source);
 
+
       // Declare a vector of complex numbers for pml weights on the Laplace bit
       Vector<std::complex<double>> pml_laplace_factor(DIM);
       // Declare a complex number for pml weights on the mass matrix bit
@@ -139,6 +141,7 @@ namespace oomph
       std::complex<double> alpha_pml_k_squared_factor = std::complex<double>(
         pml_k_squared_factor.real() - alpha() * pml_k_squared_factor.imag(),
         alpha() * pml_k_squared_factor.real() + pml_k_squared_factor.imag());
+
 
       //  std::complex<double> alpha_pml_k_squared_factor
       //  if(alpha_pt() == 0)
@@ -303,6 +306,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -327,6 +331,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// Output function:
@@ -362,6 +367,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Output function for real part of full time-dependent solution
@@ -503,6 +509,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// C-style output function:
   ///
@@ -543,6 +550,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution
@@ -594,6 +602,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Output function for real part of full time-dependent fct
@@ -707,6 +716,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// Validate against exact solution
   ///
@@ -789,6 +799,7 @@ namespace oomph
                W;
     }
   }
+
 
   //======================================================================
   /// Compute norm of fe solution

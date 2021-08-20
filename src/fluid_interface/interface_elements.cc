@@ -29,11 +29,13 @@
 #include "interface_elements.h"
 #include "generic/integral.h"
 
+
 namespace oomph
 {
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// \short Set a pointer to the desired contact angle. Optional boolean
@@ -71,9 +73,11 @@ namespace oomph
     }
   }
 
+
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// Add contribution to element's residual vector and Jacobian
@@ -207,9 +211,11 @@ namespace oomph
       residuals, jacobian, flag, psif, dpsifds, interpolated_n, W);
   }
 
+
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// Add contribution to element's residual vector and Jacobian
@@ -375,6 +381,7 @@ namespace oomph
         }
       } // End of the line integral terms
 
+
       // If we are imposing the contact angle strongly (by hijacking)
       // overwrite the kinematic equation
       if (Contact_angle_flag == 1)
@@ -417,14 +424,17 @@ namespace oomph
     }
   }
 
+
   /////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
+
 
   //============================================================
   /// Default value for physical constant (static)
   //============================================================
   double FluidInterfaceElement::Default_Physical_Constant_Value = 1.0;
+
 
   //================================================================
   /// Calculate the i-th velocity component at local coordinate s
@@ -549,6 +559,7 @@ namespace oomph
         }
       }
 
+
       // Calculate the surface gradient and divergence
       double J = this->compute_surface_derivatives(
         psif, dpsifds, interpolated_t, interpolated_x, dpsifdS, dpsifdS_div);
@@ -599,6 +610,7 @@ namespace oomph
           }
         } // End of contribution to momentum equation
 
+
         // Kinematic BC
         local_eqn = kinematic_local_eqn(l);
         if (local_eqn >= 0)
@@ -634,6 +646,7 @@ namespace oomph
           } // End of Jacobian contribution
         }
       } // End of loop over shape functions
+
 
       // Add additional contribution required from the implementation
       // of the node update (e.g. Lagrange multpliers etc)
@@ -690,6 +703,7 @@ namespace oomph
     outfile << "\n";
   }
 
+
   //===========================================================================
   /// Overload the output function
   //===========================================================================
@@ -732,6 +746,7 @@ namespace oomph
     write_tecplot_zone_footer(file_pt, n_plot);
   }
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
@@ -771,6 +786,7 @@ namespace oomph
     // Return the jacobian
     return sqrt(a11);
   }
+
 
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -820,6 +836,7 @@ namespace oomph
     return r * sqrt(a11);
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -863,6 +880,7 @@ namespace oomph
     aup[0][1] = -amet[0][1] / det_a;
     aup[1][0] = -amet[1][0] / det_a;
     aup[1][1] = amet[0][0] / det_a;
+
 
     // Now construct the surface gradient terms
     for (unsigned l = 0; l < n_shape; l++)

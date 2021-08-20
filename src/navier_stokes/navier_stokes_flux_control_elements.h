@@ -42,6 +42,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// A template free base class for an element to imposes an applied
   /// boundary pressure to the Navier-Stokes equations in order to
@@ -49,8 +50,8 @@ namespace oomph
   /// NetFluxControlElement or
   /// NetFluxControlElementForWomersleyPressureControl).
   //======================================================================
-  class TemplateFreeNavierStokesFluxControlElementBase :
-    public virtual GeneralisedElement
+  class TemplateFreeNavierStokesFluxControlElementBase
+    : public virtual GeneralisedElement
   {
   public:
     /// Empty constructor
@@ -83,9 +84,11 @@ namespace oomph
     unsigned Pressure_data_id;
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for an element that controls the net fluid flux across a
@@ -105,9 +108,9 @@ namespace oomph
     /// that impose the pressure to control the flux, plus a pointer to
     /// the double which contains the desired flux value
     NetFluxControlElement(Mesh* flux_control_mesh_pt,
-                          double* prescribed_flux_value_pt) :
-      Flux_control_mesh_pt(flux_control_mesh_pt),
-      Prescribed_flux_value_pt(prescribed_flux_value_pt)
+                          double* prescribed_flux_value_pt)
+      : Flux_control_mesh_pt(flux_control_mesh_pt),
+        Prescribed_flux_value_pt(prescribed_flux_value_pt)
     {
       // Construct Pressure_data_pt
       Pressure_data_pt = new Data(1);
@@ -140,6 +143,7 @@ namespace oomph
       Dof_number_for_unknown = UINT_MAX;
     }
 
+
     /// Empty Destructor - Data gets deleted automatically
     ~NetFluxControlElement() {}
 
@@ -148,6 +152,7 @@ namespace oomph
     {
       BrokenCopy::broken_copy("NetFluxControlElement");
     }
+
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -174,6 +179,7 @@ namespace oomph
       return Pressure_data_pt;
     }
 
+
     /// \short Add the element's contribution to its residual vector:
     /// i.e. the flux constraint.
     inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -192,6 +198,7 @@ namespace oomph
       // Call the generic routine
       fill_in_generic_residual_contribution_flux_control(residuals);
     }
+
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into - it's set to Dof_number_for_unknown+1
@@ -305,6 +312,7 @@ namespace oomph
       residuals[0] += *Prescribed_flux_value_pt - volume_flux;
     }
 
+
   private:
     /// \short Data object whose single value is the pressure
     /// applied by the elements in the Flux_control_mesh_pt
@@ -328,9 +336,11 @@ namespace oomph
     unsigned Dim;
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class of element to impose an applied boundary pressure to
@@ -342,17 +352,17 @@ namespace oomph
   /// and also for the NetFluxControlElement with respect to its unknowns.
   //======================================================================
   template<class ELEMENT>
-  class NavierStokesFluxControlElement :
-    public virtual TemplateFreeNavierStokesFluxControlElementBase,
-    public virtual NavierStokesSurfacePowerElement<ELEMENT>
+  class NavierStokesFluxControlElement
+    : public virtual TemplateFreeNavierStokesFluxControlElementBase,
+      public virtual NavierStokesSurfacePowerElement<ELEMENT>
   {
   public:
     /// Constructor, which takes a "bulk" element and face index
     NavierStokesFluxControlElement(
       FiniteElement* const& element_pt,
       const int& face_index,
-      const bool& called_from_refineable_constructor = false) :
-      NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index)
+      const bool& called_from_refineable_constructor = false)
+      : NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index)
     {
 #ifdef PARANOID
       {
@@ -444,6 +454,7 @@ namespace oomph
       // Return the value of the jacobian
       return this->J_eulerian_at_knot(ipt);
     }
+
 
     ///\short This function returns the residuals for the traction function
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
@@ -538,9 +549,11 @@ namespace oomph
     unsigned Dim;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class of element to impose an applied boundary pressure to
@@ -554,22 +567,23 @@ namespace oomph
   /// THIS IS THE REFINEABLE VERSION.
   //======================================================================
   template<class ELEMENT>
-  class RefineableNavierStokesFluxControlElement :
-    public virtual NavierStokesFluxControlElement<ELEMENT>,
-    public virtual NonRefineableElementWithHangingNodes
+  class RefineableNavierStokesFluxControlElement
+    : public virtual NavierStokesFluxControlElement<ELEMENT>,
+      public virtual NonRefineableElementWithHangingNodes
   {
   public:
     /// Constructor, which takes a "bulk" element and the face index
     RefineableNavierStokesFluxControlElement(FiniteElement* const& element_pt,
-                                             const int& face_index) :
-      NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index),
-      // we're calling this from the constructor of the refineable version.
-      NavierStokesFluxControlElement<ELEMENT>(element_pt, face_index, true)
+                                             const int& face_index)
+      : NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index),
+        // we're calling this from the constructor of the refineable version.
+        NavierStokesFluxControlElement<ELEMENT>(element_pt, face_index, true)
     {
     }
 
     /// Destructor should not delete anything
     ~RefineableNavierStokesFluxControlElement() {}
+
 
     /// \short Number of continuously interpolated values are the
     /// same as those in the bulk element.
@@ -657,6 +671,7 @@ namespace oomph
         {
           traction[i] = -pressure * unit_normal[i];
         }
+
 
         // Number of master nodes and storage for the weight of the shape
         // function
@@ -747,6 +762,7 @@ namespace oomph
       }
     }
   };
+
 
 } // namespace oomph
 

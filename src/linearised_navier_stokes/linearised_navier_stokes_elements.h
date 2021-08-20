@@ -43,6 +43,7 @@ namespace oomph
 {
 #define DIM 2
 
+
   //=======================================================================
   /// \short A class for elements that solve the linearised version of the
   /// unsteady Navier--Stokes equations in cylindrical polar coordinates,
@@ -90,6 +91,7 @@ namespace oomph
     /// Pointer to the normalisation element
     LinearisedNavierStokesEigenfunctionNormalisationElement*
       Normalisation_element_pt;
+
 
     /// Index of datum where eigenvalue is stored
     unsigned Data_number_of_eigenvalue;
@@ -197,11 +199,13 @@ namespace oomph
       }
     }
 
+
     inline int eigenvalue_local_eqn(const unsigned& i)
     {
       return this->external_local_eqn(this->Data_number_of_eigenvalue,
                                       this->Index_of_eigenvalue + i);
     }
+
 
     /// \short Compute the residuals for the Navier-Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
@@ -214,8 +218,8 @@ namespace oomph
   public:
     /// \short Constructor: NULL the base flow solution and the
     /// derivatives of the base flow function
-    LinearisedNavierStokesEquations() :
-      Base_flow_u_fct_pt(0), Base_flow_dudx_fct_pt(0), ALE_is_disabled(false)
+    LinearisedNavierStokesEquations()
+      : Base_flow_u_fct_pt(0), Base_flow_dudx_fct_pt(0), ALE_is_disabled(false)
     {
       // Set all the physical parameter pointers to the default value of zero
       Re_pt = &Default_Physical_Constant_Value;
@@ -318,6 +322,7 @@ namespace oomph
       Omega_pt = normalisation_el_pt->eigenvalue_data_pt()->value_pt(
         Index_of_eigenvalue + 1);
     }
+
 
     /// \short Viscosity ratio for element: element's viscosity relative
     /// to the viscosity used in the definition of the Reynolds number
@@ -575,18 +580,20 @@ namespace oomph
 
   }; // End of LinearisedNavierStokesEquations class definition
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Crouzeix-Raviart elements are Navier-Stokes elements with quadratic
   /// interpolation for velocities and positions, but a discontinuous
   /// linear pressure interpolation
   //=======================================================================
-  class LinearisedQCrouzeixRaviartElement :
-    public virtual QElement<2, 3>,
-    public virtual LinearisedNavierStokesEquations
+  class LinearisedQCrouzeixRaviartElement
+    : public virtual QElement<2, 3>,
+      public virtual LinearisedNavierStokesEquations
   {
   private:
     /// Static array of ints to hold required number of variables at nodes
@@ -632,10 +639,10 @@ namespace oomph
   public:
     /// \short Constructor: there are three internal values for each
     /// of the two pressure components
-    LinearisedQCrouzeixRaviartElement() :
-      QElement<2, 3>(),
-      LinearisedNavierStokesEquations(),
-      P_linearised_nst_internal_index(2)
+    LinearisedQCrouzeixRaviartElement()
+      : QElement<2, 3>(),
+        LinearisedNavierStokesEquations(),
+        P_linearised_nst_internal_index(2)
     {
       // Loop over the two pressure components
       // and two normalisation constraints
@@ -744,6 +751,7 @@ namespace oomph
       }
     }
 
+
     /// \short Return number of pressure values corresponding to a
     /// single pressure component
     unsigned npres_linearised_nst() const
@@ -803,6 +811,7 @@ namespace oomph
     }
 
   }; // End of LinearisedQCrouzeixRaviartElement class definition
+
 
   // Inline functions
   // ----------------
@@ -882,8 +891,8 @@ namespace oomph
   /// Face geometry of the linearised axisym Crouzeix-Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<LinearisedQCrouzeixRaviartElement> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<LinearisedQCrouzeixRaviartElement>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
@@ -894,25 +903,27 @@ namespace oomph
   /// Crouzeix Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<LinearisedQCrouzeixRaviartElement>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<LinearisedQCrouzeixRaviartElement>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Taylor--Hood elements are Navier--Stokes elements with quadratic
   /// interpolation for velocities and positions and continuous linear
   /// pressure interpolation
   //=======================================================================
-  class LinearisedQTaylorHoodElement :
-    public virtual QElement<2, 3>,
-    public virtual LinearisedNavierStokesEquations
+  class LinearisedQTaylorHoodElement
+    : public virtual QElement<2, 3>,
+      public virtual LinearisedNavierStokesEquations
   {
   private:
     /// Static array of ints to hold number of variables at node
@@ -955,8 +966,8 @@ namespace oomph
 
   public:
     /// Constructor, no internal data points
-    LinearisedQTaylorHoodElement() :
-      QElement<2, 3>(), LinearisedNavierStokesEquations()
+    LinearisedQTaylorHoodElement()
+      : QElement<2, 3>(), LinearisedNavierStokesEquations()
     {
     }
 
@@ -989,6 +1000,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
+
     virtual void pin_real_or_imag(const unsigned& real)
     {
       throw OomphLibError("This is not implemented yet\n",
@@ -1002,6 +1014,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
+
 
     /// \short Return number of pressure values corresponding to a
     /// single pressure component
@@ -1061,6 +1074,7 @@ namespace oomph
     }
 
   }; // End of LinearisedQTaylorHoodElement class definition
+
 
   // Inline functions
   // ----------------
@@ -1154,8 +1168,8 @@ namespace oomph
   /// Face geometry of the linearised axisymmetric Taylor Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<LinearisedQTaylorHoodElement> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<LinearisedQTaylorHoodElement>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
@@ -1166,12 +1180,13 @@ namespace oomph
   /// axisymmetric Taylor Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<LinearisedQTaylorHoodElement>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<LinearisedQTaylorHoodElement>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
+
 
 } // namespace oomph
 

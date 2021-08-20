@@ -37,6 +37,7 @@
 #include <fstream>
 #include <iostream>
 
+
 namespace oomph
 {
   //====================================================================
@@ -58,12 +59,14 @@ namespace oomph
     /// the setup can take forever.
     LineVisualiser(Mesh* mesh_pt,
                    const Vector<Vector<double>>& coord_vec,
-                   const double& max_search_radius = DBL_MAX) :
-      Max_search_radius(max_search_radius), Comm_pt(mesh_pt->communicator_pt())
+                   const double& max_search_radius = DBL_MAX)
+      : Max_search_radius(max_search_radius),
+        Comm_pt(mesh_pt->communicator_pt())
     {
       // Do the actual work
       setup(mesh_pt, coord_vec);
     }
+
 
     /// \short Constructor reading centerline file
     /// - Open "file_name" and extract 3 first doubles of each line
@@ -71,11 +74,12 @@ namespace oomph
     /// factor allows points defined in input file to be scaled.
     LineVisualiser(Mesh* mesh_pt,
                    const std::string file_name,
-                   const double& scale = 1.0) :
-      Max_search_radius(DBL_MAX), Comm_pt(mesh_pt->communicator_pt())
+                   const double& scale = 1.0)
+      : Max_search_radius(DBL_MAX), Comm_pt(mesh_pt->communicator_pt())
     {
       setup_from_file(mesh_pt, file_name, scale);
     }
+
 
     /// \short Constructor reading centerline file
     /// - Open "file_name" and extract 3 first doubles of each line
@@ -89,11 +93,13 @@ namespace oomph
     LineVisualiser(Mesh* mesh_pt,
                    const double& max_search_radius,
                    const std::string file_name,
-                   const double& scale = 1.0) :
-      Max_search_radius(max_search_radius), Comm_pt(mesh_pt->communicator_pt())
+                   const double& scale = 1.0)
+      : Max_search_radius(max_search_radius),
+        Comm_pt(mesh_pt->communicator_pt())
     {
       setup_from_file(mesh_pt, file_name, scale);
     }
+
 
     /// \short Output function: output each plot point.
     /// NOTE: in a distributed problem, output is only done
@@ -103,6 +109,7 @@ namespace oomph
       // Get data in array
       Vector<Vector<double>> data(Nplot_points);
       get_output_data(data);
+
 
       // Loop over the points
       for (unsigned i = 0; i < Nplot_points; i++)
@@ -144,6 +151,7 @@ namespace oomph
           int tag = 0;
           int my_rank = Comm_pt->my_rank();
 
+
           // Buffer
           unsigned buff_size;
 
@@ -167,6 +175,7 @@ namespace oomph
               }
             }
           }
+
 
           // Analyse which plot points have been found
           // locally and concatenate the data:
@@ -217,6 +226,7 @@ namespace oomph
                      MPI_MAX,
                      0,
                      Comm_pt->mpi_comm());
+
 
           // Main process write data
           if (my_rank == 0)
@@ -309,8 +319,7 @@ namespace oomph
             MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag, Comm_pt->mpi_comm());
 
             // Send the sizes of fields to the main process
-            if (buff_size == 0)
-              size_values.resize(1);
+            if (buff_size == 0) size_values.resize(1);
             MPI_Send(&size_values[0],
                      buff_size,
                      MPI_UNSIGNED,
@@ -323,8 +332,7 @@ namespace oomph
             MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag, Comm_pt->mpi_comm());
 
             // Send the data to the main process
-            if (buff_size == 0)
-              local_values.resize(1);
+            if (buff_size == 0) local_values.resize(1);
             MPI_Send(&local_values[0],
                      buff_size,
                      MPI_DOUBLE,
@@ -356,6 +364,7 @@ namespace oomph
       }
     }
 
+
     /// \short Update plot points coordinates (in preparation of remesh,
     /// say).
     void update_plot_points_coordinates(Vector<Vector<double>>& coord_vec)
@@ -376,6 +385,7 @@ namespace oomph
           MPI_Status stat;
           int tag; // cgj: tag should be initialised before use
           int my_rank = Comm_pt->my_rank();
+
 
           // Buffer
           unsigned buff_size;
@@ -401,6 +411,7 @@ namespace oomph
               }
             }
           }
+
 
           // Analyse which plot points have been found
           // locally and concatenate the data:
@@ -431,6 +442,7 @@ namespace oomph
 
               // Update found vector
               tmp_proc_point_found_plus_one[i] = my_rank + 1;
+
 
               // Store values
               for (unsigned j = 0; j < ndata; j++)
@@ -544,8 +556,7 @@ namespace oomph
             MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag, Comm_pt->mpi_comm());
 
             // Send the sizes of fields to the main process
-            if (buff_size == 0)
-              size_values.resize(1);
+            if (buff_size == 0) size_values.resize(1);
             MPI_Send(&size_values[0],
                      buff_size,
                      MPI_UNSIGNED,
@@ -558,8 +569,7 @@ namespace oomph
             MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag, Comm_pt->mpi_comm());
 
             // Send the data to the main process
-            if (buff_size == 0)
-              local_values.resize(1);
+            if (buff_size == 0) local_values.resize(1);
             MPI_Send(&local_values[0],
                      buff_size,
                      MPI_DOUBLE,
@@ -653,14 +663,14 @@ namespace oomph
       setup(mesh_pt, coord_vec_tmp);
     }
 
+
     /// \short Helper function to setup the output structures
     void setup(Mesh* mesh_pt, const Vector<Vector<double>>& coord_vec)
     {
       // Read out number of plot points
       Nplot_points = coord_vec.size();
 
-      if (Nplot_points == 0)
-        return;
+      if (Nplot_points == 0) return;
 
       // Keep track of unlocated plot points
       unsigned count_not_found_local = 0;
@@ -713,6 +723,7 @@ namespace oomph
         Plot_point[i] = std::pair<FiniteElement*, Vector<double>>(fe_pt, s);
       }
 
+
       oomph_info << "Number of points not found locally: "
                  << count_not_found_local << std::endl;
 
@@ -757,6 +768,7 @@ namespace oomph
                      MPI_MAX,
                      0,
                      Comm_pt->mpi_comm());
+
 
           // Main process analyses data
           if (my_rank == 0)
@@ -805,6 +817,7 @@ namespace oomph
         }
       }
     }
+
 
     /// \short Vector of pairs containing points to finite elements and
     /// local coordinates

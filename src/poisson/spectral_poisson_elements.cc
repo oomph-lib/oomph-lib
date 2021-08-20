@@ -26,6 +26,7 @@
 // Non-inline functions and static data for spectral poisson elements
 #include "spectral_poisson_elements.h"
 
+
 namespace oomph
 {
   //==========================================================================
@@ -50,6 +51,7 @@ namespace oomph
   template class QSpectralPoissonElement<2, 6>;
   template class QSpectralPoissonElement<2, 7>;
   template class QSpectralPoissonElement<2, 8>;
+
 
   template class QSpectralPoissonElement<3, 2>;
   template class QSpectralPoissonElement<3, 3>;

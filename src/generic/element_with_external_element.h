@@ -57,23 +57,23 @@ namespace oomph
   public:
     /// \short Constructor. Initialise member data and pointers to data
     /// associated with the external elements to zero.
-    ElementWithExternalElement() :
-      FiniteElement(),
-      Add_external_interaction_data(true),
-      Add_external_geometric_data(true),
-      External_interaction_field_data_pt(0),
-      External_interaction_geometric_data_pt(0),
-      Ninteraction(0),
-      Nintpt(0),
-      Nexternal_element_storage(0),
-      Nexternal_interaction_field_data(0),
-      Nexternal_interaction_geometric_data(0),
-      External_element_pt(0),
-      External_element_local_coord(0),
-      External_interaction_field_data_index(0),
-      External_interaction_field_data_local_eqn(0),
-      External_interaction_geometric_data_index(0),
-      External_interaction_geometric_data_local_eqn(0)
+    ElementWithExternalElement()
+      : FiniteElement(),
+        Add_external_interaction_data(true),
+        Add_external_geometric_data(true),
+        External_interaction_field_data_pt(0),
+        External_interaction_geometric_data_pt(0),
+        Ninteraction(0),
+        Nintpt(0),
+        Nexternal_element_storage(0),
+        Nexternal_interaction_field_data(0),
+        Nexternal_interaction_geometric_data(0),
+        External_element_pt(0),
+        External_element_local_coord(0),
+        External_interaction_field_data_index(0),
+        External_interaction_field_data_local_eqn(0),
+        External_interaction_geometric_data_index(0),
+        External_interaction_geometric_data_local_eqn(0)
     {
     }
 
@@ -91,6 +91,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("ElementWithExternalElement");
     }
+
 
     /// \short Helper function to check if storage has actually been allocated
     bool storage_has_been_allocated() const
@@ -164,6 +165,7 @@ namespace oomph
       return External_element_local_coord[Nintpt * interaction_index + ipt];
     }
 
+
     /// \short Output by plotting vector from integration point to
     /// corresponding point in external element for specified interaction
     /// index
@@ -228,6 +230,7 @@ namespace oomph
       // Return the temporary data
       return temp_data;
     }
+
 
     /// \short Return the number of geometric Data items that affect the
     /// external interactions in this element: i.e. any geometric Data
@@ -340,6 +343,7 @@ namespace oomph
     void assign_external_interaction_data_local_eqn_numbers(
       const bool& store_local_dof_pt);
 
+
     /// \short Calculate the contributions to the jacobian from all external
     /// interaction degrees of freedom (geometric and field data) in
     /// the external element using finite differences.
@@ -371,6 +375,7 @@ namespace oomph
       // Call the jacobian calculation
       fill_in_jacobian_from_external_interaction_by_fd(residuals, jacobian);
     }
+
 
     /// \short Calculate the contributions to the jacobian from the external
     /// interaction degrees of freedom associated with fields interpolated by
@@ -444,6 +449,7 @@ namespace oomph
                                                        jacobian);
     }
 
+
     /// \short Function that is called before the finite differencing of
     /// any external interaction data associated with external fields.
     /// This may be overloaded to update any dependent
@@ -473,6 +479,7 @@ namespace oomph
     {
       update_in_external_interaction_field_fd(i);
     }
+
 
     /// \short Function that is called before the finite differencing of
     /// any external interaction data associated with external geometry.
@@ -567,6 +574,7 @@ namespace oomph
         range_error = true;
       }
 
+
       // If there has been a range error report it
       if (range_error)
       {
@@ -591,6 +599,7 @@ namespace oomph
 
     /// Number of external interaction geometric data
     unsigned Nexternal_interaction_geometric_data;
+
 
     /// \short Storage for pointers to elements that provide contributions
     /// to the residuals of the current element. Potentially a different

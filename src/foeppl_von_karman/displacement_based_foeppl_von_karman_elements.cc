@@ -41,6 +41,7 @@ namespace oomph
     DisplacementBasedFoepplvonKarmanEquations::Default_Physical_Constant_Value =
       0.0;
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -128,6 +129,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// C-style output function:
   ///
@@ -161,6 +163,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution
@@ -214,6 +217,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Validate against exact solution

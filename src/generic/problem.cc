@@ -46,8 +46,6 @@
 #include "partitioning.h"
 #include "spines.h"
 
-// Include to fill in additional_setup_shared_node_scheme() function
-#include "refineable_mesh.h"
 
 namespace oomph
 {
@@ -65,76 +63,76 @@ namespace oomph
   /// and set all pointers to NULL and set defaults for all
   /// parameters.
   //===============================================================
-  Problem::Problem() :
-    Mesh_pt(0),
-    Time_pt(0),
-    Explicit_time_stepper_pt(0),
-    Saved_dof_pt(0),
-    Default_set_initial_condition_called(false),
-    Use_globally_convergent_newton_method(false),
-    Empty_actions_before_read_unstructured_meshes_has_been_called(false),
-    Empty_actions_after_read_unstructured_meshes_has_been_called(false),
-    Store_local_dof_pt_in_elements(false),
-    Calculate_hessian_products_analytic(false),
+  Problem::Problem()
+    : Mesh_pt(0),
+      Time_pt(0),
+      Explicit_time_stepper_pt(0),
+      Saved_dof_pt(0),
+      Default_set_initial_condition_called(false),
+      Use_globally_convergent_newton_method(false),
+      Empty_actions_before_read_unstructured_meshes_has_been_called(false),
+      Empty_actions_after_read_unstructured_meshes_has_been_called(false),
+      Store_local_dof_pt_in_elements(false),
+      Calculate_hessian_products_analytic(false),
 #ifdef OOMPH_HAS_MPI
-    Doc_imbalance_in_parallel_assembly(false),
-    Use_default_partition_in_load_balance(false),
-    Must_recompute_load_balance_for_assembly(true),
-    Halo_scheme_pt(0),
+      Doc_imbalance_in_parallel_assembly(false),
+      Use_default_partition_in_load_balance(false),
+      Must_recompute_load_balance_for_assembly(true),
+      Halo_scheme_pt(0),
 #endif
-    Relaxation_factor(1.0),
-    Newton_solver_tolerance(1.0e-8),
-    Max_newton_iterations(10),
-    Nnewton_iter_taken(0),
-    Max_residuals(10.0),
-    Time_adaptive_newton_crash_on_solve_fail(false),
-    Jacobian_reuse_is_enabled(false),
-    Jacobian_has_been_computed(false),
-    Problem_is_nonlinear(true),
-    Pause_at_end_of_sparse_assembly(false),
-    Doc_time_in_distribute(false),
-    Sparse_assembly_method(Perform_assembly_using_vectors_of_pairs),
-    Sparse_assemble_with_arrays_initial_allocation(400),
-    Sparse_assemble_with_arrays_allocation_increment(150),
-    Numerical_zero_for_sparse_assembly(0.0),
-    FD_step_used_in_get_hessian_vector_products(1.0e-8),
-    Mass_matrix_reuse_is_enabled(false),
-    Mass_matrix_has_been_computed(false),
-    Discontinuous_element_formulation(false),
-    Minimum_dt(1.0e-12),
-    Maximum_dt(1.0e12),
-    DTSF_max_increase(4.0),
-    DTSF_min_decrease(0.8),
-    Minimum_dt_but_still_proceed(-1.0),
-    Scale_arc_length(true),
-    Desired_proportion_of_arc_length(0.5),
-    Theta_squared(1.0),
-    Sign_of_jacobian(0),
-    Continuation_direction(1.0),
-    Parameter_derivative(1.0),
-    Parameter_current(0.0),
-    Use_continuation_timestepper(false),
-    Dof_derivative_offset(1),
-    Dof_current_offset(2),
-    Ds_current(0.0),
-    Desired_newton_iterations_ds(5),
-    Minimum_ds(1.0e-10),
-    Bifurcation_detection(false),
-    Bisect_to_find_bifurcation(false),
-    First_jacobian_sign_change(false),
-    Arc_length_step_taken(false),
-    Use_finite_differences_for_continuation_derivatives(false),
+      Relaxation_factor(1.0),
+      Newton_solver_tolerance(1.0e-8),
+      Max_newton_iterations(10),
+      Nnewton_iter_taken(0),
+      Max_residuals(10.0),
+      Time_adaptive_newton_crash_on_solve_fail(false),
+      Jacobian_reuse_is_enabled(false),
+      Jacobian_has_been_computed(false),
+      Problem_is_nonlinear(true),
+      Pause_at_end_of_sparse_assembly(false),
+      Doc_time_in_distribute(false),
+      Sparse_assembly_method(Perform_assembly_using_vectors_of_pairs),
+      Sparse_assemble_with_arrays_initial_allocation(400),
+      Sparse_assemble_with_arrays_allocation_increment(150),
+      Numerical_zero_for_sparse_assembly(0.0),
+      FD_step_used_in_get_hessian_vector_products(1.0e-8),
+      Mass_matrix_reuse_is_enabled(false),
+      Mass_matrix_has_been_computed(false),
+      Discontinuous_element_formulation(false),
+      Minimum_dt(1.0e-12),
+      Maximum_dt(1.0e12),
+      DTSF_max_increase(4.0),
+      DTSF_min_decrease(0.8),
+      Minimum_dt_but_still_proceed(-1.0),
+      Scale_arc_length(true),
+      Desired_proportion_of_arc_length(0.5),
+      Theta_squared(1.0),
+      Sign_of_jacobian(0),
+      Continuation_direction(1.0),
+      Parameter_derivative(1.0),
+      Parameter_current(0.0),
+      Use_continuation_timestepper(false),
+      Dof_derivative_offset(1),
+      Dof_current_offset(2),
+      Ds_current(0.0),
+      Desired_newton_iterations_ds(5),
+      Minimum_ds(1.0e-10),
+      Bifurcation_detection(false),
+      Bisect_to_find_bifurcation(false),
+      First_jacobian_sign_change(false),
+      Arc_length_step_taken(false),
+      Use_finite_differences_for_continuation_derivatives(false),
 #ifdef OOMPH_HAS_MPI
-    Dist_problem_matrix_distribution(Uniform_matrix_distribution),
-    Parallel_sparse_assemble_previous_allocation(0),
-    Problem_has_been_distributed(false),
-    Bypass_increase_in_dof_check_during_pruning(false),
-    Max_permitted_error_for_halo_check(1.0e-14),
+      Dist_problem_matrix_distribution(Uniform_matrix_distribution),
+      Parallel_sparse_assemble_previous_allocation(0),
+      Problem_has_been_distributed(false),
+      Bypass_increase_in_dof_check_during_pruning(false),
+      Max_permitted_error_for_halo_check(1.0e-14),
 #endif
-    Shut_up_in_newton_solve(false),
-    Always_take_one_newton_step(false),
-    Timestep_reduction_factor_after_nonconvergence(0.5),
-    Keep_temporal_error_below_tolerance(true)
+      Shut_up_in_newton_solve(false),
+      Always_take_one_newton_step(false),
+      Timestep_reduction_factor_after_nonconvergence(0.5),
+      Keep_temporal_error_below_tolerance(true)
   {
     Use_predictor_values_as_initial_guess = false;
 
@@ -289,6 +287,7 @@ namespace oomph
 
     return Nelement;
   }
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -519,6 +518,7 @@ namespace oomph
           t_start = TimingHelpers::timer();
         }
 
+
 #ifdef PARANOID
         unsigned old_ndof = ndof();
 #endif
@@ -545,8 +545,7 @@ namespace oomph
         for (unsigned e = 0; e < n_part; e++)
         {
           // ... another one for me.
-          if (int(element_partition[e]) == my_rank)
-            n_my_elements++;
+          if (int(element_partition[e]) == my_rank) n_my_elements++;
 
           sum_element_partition += element_partition[e];
         }
@@ -605,6 +604,7 @@ namespace oomph
         // Number of submeshes (NB: some may have been deleted in
         //                          actions_after_distribute())
         n_mesh = nsub_mesh();
+
 
         // Prepare vector of vectors for submesh element domains
         Vector<Vector<unsigned>> submesh_element_domain(n_mesh);
@@ -757,6 +757,7 @@ namespace oomph
           overrule_keep_as_halo_element_status = true;
         }
 
+
         // Distribute the (sub)meshes (i.e. sort out their halo lookup schemes)
         Vector<GeneralisedElement*> deleted_element_pt;
         if (n_mesh == 0)
@@ -833,6 +834,7 @@ namespace oomph
                      << t_end - t_start << std::endl;
         }
 
+
 #ifdef PARANOID
         if (n_dof != old_ndof)
         {
@@ -853,6 +855,7 @@ namespace oomph
       } // end if to check for uniformly refined mesh(es)
 
     } // end if to check number of processors vs. number of elements etc.
+
 
     // Force re-analysis of time spent on assembly each
     // elemental Jacobian
@@ -1135,6 +1138,7 @@ namespace oomph
           }
         }
 
+
         if (Global_timings::Doc_comprehensive_timings)
         {
           t_end = TimingHelpers::timer();
@@ -1144,8 +1148,10 @@ namespace oomph
           t_start = TimingHelpers::timer();
         }
 
+
         // Now remember the old number of base elements
         unsigned nel_base_old = nel;
+
 
         // Prune the halo elements and nodes of the mesh(es)
         Vector<GeneralisedElement*> deleted_element_pt;
@@ -1319,6 +1325,7 @@ namespace oomph
                       MPI_MAX,
                       this->communicator_pt()->mpi_comm());
 
+
         if (Global_timings::Doc_comprehensive_timings)
         {
           t_end = TimingHelpers::timer();
@@ -1404,6 +1411,7 @@ namespace oomph
         // (used in the load_balance() routines)
         setup_base_mesh_info_after_pruning();
 
+
         if (Global_timings::Doc_comprehensive_timings)
         {
           t_end = TimingHelpers::timer();
@@ -1413,8 +1421,10 @@ namespace oomph
           t_start = TimingHelpers::timer();
         }
 
+
         // Call actions after distribute
         actions_after_distribute();
+
 
         if (Global_timings::Doc_comprehensive_timings)
         {
@@ -1425,12 +1435,14 @@ namespace oomph
           t_start = TimingHelpers::timer();
         }
 
+
         // Re-assign the equation numbers (incl synchronisation if reqd)
 #ifdef PARANOID
         unsigned n_dof = assign_eqn_numbers();
 #else
         assign_eqn_numbers();
 #endif
+
 
         if (Global_timings::Doc_comprehensive_timings)
         {
@@ -1440,6 +1452,7 @@ namespace oomph
                      << t_end - t_start << std::endl;
           t_start = TimingHelpers::timer();
         }
+
 
 #ifdef PARANOID
         if (!Bypass_increase_in_dof_check_during_pruning)
@@ -1465,7 +1478,9 @@ namespace oomph
     }
   }
 
+
 #endif
+
 
   //===================================================================
   /// Build a single (global) mesh from a number
@@ -1517,6 +1532,7 @@ namespace oomph
     // Use the function in mesh to merge the submeshes into this one
     Mesh_pt->merge_meshes(Sub_mesh_pt);
   }
+
 
   //================================================================
   ///  Add a timestepper to the problem. The function will automatically
@@ -1584,6 +1600,7 @@ namespace oomph
     }
   }
 
+
 #ifdef OOMPH_HAS_MPI
 
   //================================================================
@@ -1625,8 +1642,7 @@ namespace oomph
         First_el_for_assembly[p] = p * range;
 
         unsigned last_el_plus_one = (p + 1) * range;
-        if (last_el_plus_one > n_elements)
-          last_el_plus_one = n_elements;
+        if (last_el_plus_one > n_elements) last_el_plus_one = n_elements;
         Last_el_plus_one_for_assembly[p] = last_el_plus_one;
       }
 
@@ -1660,6 +1676,7 @@ namespace oomph
       }
     }
   }
+
 
   //=======================================================================
   /// Helper function to re-assign the first and last elements to be
@@ -1792,8 +1809,10 @@ namespace oomph
         } // end of test for "total exceeds target"
       }
 
+
       // Last element for last processor
       first_and_last_element[n_proc - 1][1] = n_elements - 1;
+
 
       // The following block should probably be paranoidified away
       // but we've screwed the logic up so many times that I feel
@@ -1825,6 +1844,7 @@ namespace oomph
         throw OomphLibError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
+
 
       // THIS TIDY UP SHOULD NO LONGER BE REQUIRED AND CAN GO AT SOME POINT
 
@@ -1884,7 +1904,9 @@ namespace oomph
       //   first_and_last_element[n_proc-1][1]=n_elements-1;
       //  }
 
+
       // END PRESUMED-TO-BE-UNNECESSARY BLOCK...
+
 
       // Now communicate the information
 
@@ -1909,6 +1931,7 @@ namespace oomph
                  p,
                  0,
                  this->communicator_pt()->mpi_comm());
+
 
         if (!Shut_up_in_newton_solve)
         {
@@ -2000,6 +2023,7 @@ namespace oomph
     // Storage for number of processors
     int n_proc = this->communicator_pt()->nproc();
 
+
     if (n_proc > 1)
     {
       // Force re-analysis of time spent on assembly each
@@ -2022,6 +2046,7 @@ namespace oomph
     }
 
 #endif
+
 
     double t_start = 0.0;
     if (Global_timings::Doc_comprehensive_timings)
@@ -2057,6 +2082,7 @@ namespace oomph
     }
 #endif
 
+
     double t_end = 0.0;
     if (Global_timings::Doc_comprehensive_timings)
     {
@@ -2065,6 +2091,7 @@ namespace oomph
         << "Time for complete setup of dependencies in assign_eqn_numbers: "
         << t_end - t_start << std::endl;
     }
+
 
     // Initialise number of dofs for reserve below
     unsigned n_dof = 0;
@@ -2132,6 +2159,7 @@ namespace oomph
         t_start = TimingHelpers::timer();
       }
 
+
 #ifdef OOMPH_HAS_MPI
 
       // reset previous allocation
@@ -2164,7 +2192,9 @@ namespace oomph
                    << std::endl;
       }
 
+
 #ifdef OOMPH_HAS_MPI
+
 
       // Now remove duplicate data in external halo elements
       if (Problem_has_been_distributed)
@@ -2197,6 +2227,7 @@ namespace oomph
           }
         }
 
+
         if (Global_timings::Doc_comprehensive_timings)
         {
           t_end = TimingHelpers::timer();
@@ -2215,8 +2246,7 @@ namespace oomph
 
         // Break out of the loop if we haven't done anything here.
         unsigned status = 0;
-        if (actually_removed_some_data)
-          status = 1;
+        if (actually_removed_some_data) status = 1;
 
         // Allreduce to check if anyone has removed any data
         unsigned overall_status = 0;
@@ -2226,6 +2256,7 @@ namespace oomph
                       MPI_UNSIGNED,
                       MPI_MAX,
                       this->communicator_pt()->mpi_comm());
+
 
         if (Global_timings::Doc_comprehensive_timings)
         {
@@ -2276,8 +2307,10 @@ namespace oomph
     } // end of loop over fcts that need to be re-executed if
     // we've removed duplicate external data
 
+
     // Resize the sparse assemble with arrays previous allocation
     Sparse_assemble_with_arrays_previous_allocation.resize(0);
+
 
     if (Global_timings::Doc_comprehensive_timings)
     {
@@ -2308,6 +2341,7 @@ namespace oomph
                  << "Problem::assign_eqn_numbers: " << t_end - t_start
                  << std::endl;
     }
+
 
     // and return the total number of DOFs
     return n_dof;
@@ -2408,6 +2442,7 @@ namespace oomph
       } // end for.
     } // end else.
 
+
     out << std::string(80, '\\') << std::endl;
     out << std::string(80, '\\') << std::endl;
     out << std::string(80, '\\') << std::endl;
@@ -2432,6 +2467,7 @@ namespace oomph
       } // End for
     } // End else
   } // End problem::describe_dofs(...)
+
 
   //================================================================
   /// Get the vector of dofs, i.e. a vector containing the current
@@ -2516,6 +2552,7 @@ namespace oomph
       }
     }
   }
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -2625,6 +2662,7 @@ namespace oomph
               global_node_pt[first_non_negative_eqn_number_plus_one - 1] =
                 nod_pt;
             }
+
 
             // Take into account master nodes too
             if (dynamic_cast<RefineableElement*>(el_pt) != 0)
@@ -2822,6 +2860,7 @@ namespace oomph
                                                      duplicated_node_pt);
                   }
 
+
                   // Note: For now we're leaving the "dangling" (no longer
                   // accessed masters where they are; they get cleaned
                   // up next time we delete all the external storage
@@ -2920,6 +2959,7 @@ namespace oomph
                           }
                         }
 
+
                         throw OomphLibError(error_stream.str(),
                                             OOMPH_CURRENT_FUNCTION,
                                             OOMPH_EXCEPTION_LOCATION);
@@ -2938,6 +2978,7 @@ namespace oomph
                   node_done[nod_pt] = true;
                 }
               }
+
 
               // Do the same for any master nodes of that (possibly replaced)
               // node
@@ -3042,6 +3083,7 @@ namespace oomph
                           // Weight of the original node
                           double m_weight = hang_pt->master_weight(m);
 
+
 #ifdef PARANOID
                           // Sanity check: setting replacement master
                           // node for non-hanging node? Sign of really
@@ -3073,6 +3115,7 @@ namespace oomph
                           }
 #endif
 
+
                           // And re-set master
                           finite_ext_el_pt->node_pt(j)
                             ->hanging_pt(i_cont)
@@ -3100,6 +3143,7 @@ namespace oomph
       }
     } // end loop over processors
 
+
     // Now kill all the deleted nodes
     for (std::set<Node*>::iterator it = killed_nodes.begin();
          it != killed_nodes.end();
@@ -3107,6 +3151,7 @@ namespace oomph
     {
       delete (*it);
     }
+
 
     //   oomph_info << "Number of nonzero entries in global_node_pt: "
     //              << global_node_pt.size() << std::endl;
@@ -3121,6 +3166,7 @@ namespace oomph
     //       << t_end-t_start << std::endl;
     //     }
   }
+
 
   //========================================================================
   /// Consolidate external halo node storage by removing nulled out
@@ -3239,6 +3285,7 @@ namespace oomph
                  MPI_INT,
                  this->communicator_pt()->mpi_comm());
 
+
     // We now prepare the data to be received
     // by working out the displacements from the received data
     Vector<int> receive_displacement(n_proc, 0);
@@ -3354,6 +3401,7 @@ namespace oomph
 
 #endif
 
+
   //=======================================================================
   /// Function that sets the values of the dofs in the object
   //======================================================================
@@ -3440,6 +3488,7 @@ namespace oomph
     }
   }
 
+
   /// Set history values of dofs from the type of vector stored in
   /// problem::Dof_pt.
   void Problem::set_dofs(const unsigned& t, Vector<double*>& dof_pt)
@@ -3505,6 +3554,7 @@ namespace oomph
     }
   }
 
+
   //===================================================================
   /// Function that adds the values to the dofs
   //==================================================================
@@ -3517,6 +3567,7 @@ namespace oomph
       *Dof_pt[l] += lambda * increment_dofs[l];
     }
   }
+
 
   //=========================================================================
   /// Return the residual vector multiplied by the inverse mass matrix
@@ -3652,6 +3703,7 @@ namespace oomph
       }
     }
   }
+
 
   //================================================================
   /// Get the total residuals Vector for the problem
@@ -3998,6 +4050,7 @@ namespace oomph
     }
 #endif
 
+
     // Allocate generalised storage format for passing to sparse_assemble()
     Vector<double*> res(1);
 
@@ -4068,6 +4121,7 @@ namespace oomph
       dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
 #endif
     }
+
 
     // The matrix is in compressed row format
     bool compressed_row_flag = true;
@@ -4237,6 +4291,7 @@ namespace oomph
     delete dist_pt;
   }
 
+
   //===================================================================
   /// \short Set all pinned values to zero.
   /// Used to set boundary conditions to be homogeneous in the copy
@@ -4403,6 +4458,7 @@ namespace oomph
     }
   }
 
+
   //=====================================================================
   /// This is a (private) helper function that is used to assemble system
   /// matrices in compressed row or column format
@@ -4505,6 +4561,7 @@ namespace oomph
     }
   }
 
+
   //=====================================================================
   /// This is a (private) helper function that is used to assemble system
   /// matrices in compressed row or column format
@@ -4600,6 +4657,7 @@ namespace oomph
     }
 #endif
 
+
     // The idea behind this sparse assembly routine is to use a vector of
     // maps for the entries in each row or column of the complete matrix.
     // The key for each map is the global row or column number and
@@ -4610,6 +4668,7 @@ namespace oomph
     // cheap operation. Hash maps can be used to increase the speed, but then
     // the ordering is lost and we would have to sort anyway. The solution if
     // speed is required is to use lists, see below.
+
 
     // Set up a vector of vectors of maps of entries of each  matrix,
     // indexed by either the column or row. The entries of the vector for
@@ -4635,7 +4694,9 @@ namespace oomph
       }
     }
 
+
 #ifdef OOMPH_HAS_MPI
+
 
     // Storage for assembly time for elements
     double t_assemble_start = 0.0;
@@ -4748,6 +4809,7 @@ namespace oomph
         } // endif halo element
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
         // Time it?
         if ((!doing_residuals) && Must_recompute_load_balance_for_assembly)
@@ -4760,6 +4822,7 @@ namespace oomph
       } // End of loop over the elements
 
     } // End of map assembly
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -4780,6 +4843,7 @@ namespace oomph
     }
 
 #endif
+
 
     //-----------Finally we need to convert the beautiful map storage scheme
     //------------------------to the containers required by SuperLU
@@ -4842,6 +4906,7 @@ namespace oomph
       pause("Check memory usage now.");
     }
   }
+
 
   //=====================================================================
   /// This is a (private) helper function that is used to assemble system
@@ -4975,6 +5040,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
+
     // Storage for assembly time for elements
     double t_assemble_start = 0.0;
 
@@ -4994,6 +5060,7 @@ namespace oomph
       // This means that the stored is only allocated (and deleted) once
       Vector<Vector<double>> el_residuals(n_vector);
       Vector<DenseMatrix<double>> el_jacobian(n_matrix);
+
 
       // Pointer to a single list to be used during the assembly
       std::list<std::pair<unsigned, double>>* list_pt;
@@ -5097,6 +5164,7 @@ namespace oomph
         } // endif halo element
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
         // Time it?
         if ((!doing_residuals) && Must_recompute_load_balance_for_assembly)
@@ -5109,6 +5177,7 @@ namespace oomph
       } // End of loop over the elements
 
     } // list_pt goes out of scope
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -5129,6 +5198,7 @@ namespace oomph
     }
 
 #endif
+
 
     //----Finally we need to convert the beautiful list storage scheme---
     //----------to the containers required by SuperLU--------------------
@@ -5252,6 +5322,7 @@ namespace oomph
     }
   }
 
+
   //=====================================================================
   /// This is a (private) helper function that is used to assemble system
   /// matrices in compressed row or column format
@@ -5344,6 +5415,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // The idea behind this sparse assembly routine is to use a Vector of
     // Vectors of pairs for each complete matrix.
@@ -5513,6 +5585,7 @@ namespace oomph
         } // endif halo element
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
         // Time it?
         if ((!doing_residuals) && Must_recompute_load_balance_for_assembly)
@@ -5524,7 +5597,9 @@ namespace oomph
 
       } // End of loop over the elements
 
+
     } // End of vector assembly
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -5545,6 +5620,7 @@ namespace oomph
     }
 
 #endif
+
 
     //-----------Finally we need to convert this vector storage scheme
     //------------------------to the containers required by SuperLU
@@ -5599,6 +5675,7 @@ namespace oomph
     }
   }
 
+
   //=====================================================================
   /// This is a (private) helper function that is used to assemble system
   /// matrices in compressed row or column format
@@ -5629,6 +5706,7 @@ namespace oomph
     // Default range of elements for distributed problems
     unsigned long el_lo = 0;
     unsigned long el_hi = n_elements - 1;
+
 
 #ifdef OOMPH_HAS_MPI
     // Otherwise just loop over a fraction of the elements
@@ -5734,6 +5812,7 @@ namespace oomph
     }
 
 #endif
+
 
     //----------------Assemble and populate the vector storage scheme-------
     {
@@ -5871,6 +5950,7 @@ namespace oomph
         } // endif halo element
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
         // Time it?
         if ((!doing_residuals) && Must_recompute_load_balance_for_assembly)
@@ -5883,6 +5963,7 @@ namespace oomph
       } // End of loop over the elements
 
     } // End of vector assembly
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -5957,6 +6038,7 @@ namespace oomph
     }
   }
 
+
   //=====================================================================
   /// This is a (private) helper function that is used to assemble system
   /// matrices in compressed row or column format
@@ -5987,6 +6069,7 @@ namespace oomph
     // Default range of elements for distributed problems
     unsigned long el_lo = 0;
     unsigned long el_hi = n_elements - 1;
+
 
 #ifdef OOMPH_HAS_MPI
     // Otherwise just loop over a fraction of the elements
@@ -6317,6 +6400,7 @@ namespace oomph
         } // endif halo element
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
         // Time it?
         if ((!doing_residuals) && Must_recompute_load_balance_for_assembly)
@@ -6329,6 +6413,7 @@ namespace oomph
       } // End of loop over the elements
 
     } // End of vector assembly
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -6411,6 +6496,7 @@ namespace oomph
     }
   }
 
+
 #ifdef OOMPH_HAS_MPI
   //=======================================================================
   ///\short Helper method that returns the global equations to which
@@ -6459,6 +6545,7 @@ namespace oomph
     my_eqns.resize(it - my_eqns.begin());
   }
 
+
   //=============================================================================
   /// \short Helper method to assemble CRDoubleMatrices from distributed
   /// on multiple processors.
@@ -6497,6 +6584,7 @@ namespace oomph
                       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Default range of elements for distributed problems.
     unsigned long el_lo = 0;
@@ -6556,6 +6644,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // start by assembling the sorted set of equations to which this processor
     // contributes. Essentially this is every global equation that features in
@@ -6637,6 +6726,7 @@ namespace oomph
         Sparse_assemble_with_arrays_previous_allocation[m].resize(my_n_eqn, 0);
       }
     }
+
 
     // assemble and populate an array based storage scheme
     {
@@ -6729,8 +6819,7 @@ namespace oomph
                       broken = true;
                       break;
                     }
-                    if (broken)
-                      break;
+                    if (broken) break;
                   }
                 }
 
@@ -6874,6 +6963,7 @@ namespace oomph
       } // End of loop over the elements
     } // End of vector assembly
 
+
     // Doc?
     double t_end = 0.0;
     double t_local = 0.0;
@@ -6921,6 +7011,7 @@ namespace oomph
       t_start = TimingHelpers::timer();
     }
 
+
     // Adjust number of coefficients in each row
     for (unsigned m = 0; m < n_matrix; m++)
     {
@@ -6932,10 +7023,8 @@ namespace oomph
       {
         sum += ncoef[m][e];
         sum_total += Sparse_assemble_with_arrays_previous_allocation[m][e];
-        if (ncoef[m][e] > max)
-          max = ncoef[m][e];
-        if (ncoef[m][e] < min)
-          min = ncoef[m][e];
+        if (ncoef[m][e] > max) max = ncoef[m][e];
+        if (ncoef[m][e] < min) min = ncoef[m][e];
 
         // Now shrink the storage to what we actually need
         unsigned new_allocation = ncoef[m][e];
@@ -6954,6 +7043,7 @@ namespace oomph
       }
     }
 
+
     // Postprocess timing information and re-allocate distribution of
     // elements during subsequent assemblies.
     if ((!doing_residuals) && (!Problem_has_been_distributed) &&
@@ -6969,6 +7059,7 @@ namespace oomph
     {
       Must_recompute_load_balance_for_assembly = false;
     }
+
 
     // next we compute the number of equations and number of non-zeros to be
     // sent to each processor, and send/recv that information
@@ -7242,6 +7333,7 @@ namespace oomph
             MPI_Type_commit(&types[pt]);
             pt++;
 
+
             // column indices
             count[pt] = 1;
             MPI_Get_address(column_indices_from_proc(p, m), &offsets[pt]);
@@ -7313,6 +7405,7 @@ namespace oomph
               n_eqn_for_proc[p] + 1, MPI_UNSIGNED, &types[pt]);
             MPI_Type_commit(&types[pt]);
             pt++;
+
 
             // column indices
             count[pt] = 1;
@@ -7720,6 +7813,7 @@ namespace oomph
 
 #endif
 
+
   //================================================================
   /// \short Get the full Jacobian by finite differencing
   //================================================================
@@ -7735,6 +7829,7 @@ namespace oomph
                       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Find number of dofs
     const unsigned long n_dof = ndof();
@@ -7872,6 +7967,7 @@ namespace oomph
       actions_after_change_in_global_parameter(parameter_pt);
     }
   }
+
 
   //======================================================================
   /// Return the product of the global hessian (derivative of Jacobian
@@ -8054,6 +8150,7 @@ namespace oomph
         C_mult[i] *= FD_step;
       }
 
+
       // Dummy vector to stand in the place of the residuals
       Vector<double> dummy_res;
 
@@ -8146,6 +8243,7 @@ namespace oomph
     }
 #endif
   }
+
 
   //================================================================
   /// \short Get derivative of an element in the problem wrt a global
@@ -8258,6 +8356,7 @@ namespace oomph
     }
   }
 
+
   //===================================================================
   /// Get the matrices required to solve an eigenproblem
   /// WARNING: temporarily this method only works with non-distributed
@@ -8271,6 +8370,7 @@ namespace oomph
     // 1) Compiled with MPI, but run in serial
     // 2) Compiled with MPI, but MPI not initialised in driver
     // 3) Serial version
+
 
 #ifdef PARANOID
     if (mass_matrix.distribution_built() && main_matrix.distribution_built())
@@ -8399,6 +8499,7 @@ namespace oomph
 #endif
     }
 
+
     // The matrix is in compressed row format
     bool compressed_row_flag = true;
 
@@ -8496,6 +8597,7 @@ namespace oomph
     Assembly_handler_pt = old_assembly_handler_pt;
   }
 
+
   //=======================================================================
   /// Stored the current values of the dofs
   //=======================================================================
@@ -8555,6 +8657,7 @@ namespace oomph
         OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
     }
+
 
 #ifdef OOMPH_HAS_MPI
     // If the problem is distributed I have to do something different
@@ -8633,6 +8736,7 @@ namespace oomph
 #endif
   }
 
+
   //======================================================================
   /// Add the eigenvector passed to the function to the dofs with
   /// magnitude epsilon
@@ -8664,6 +8768,7 @@ namespace oomph
     this->synchronise_all_dofs();
 #endif
   }
+
 
   //================================================================
   /// General Newton solver. Requires only a convergence tolerance.
@@ -8735,6 +8840,7 @@ namespace oomph
 
       // Do any updates that are required
       actions_before_newton_step();
+
 
       // No degrees of freedom? What are you solving for?
       if (n_dofs == 0)
@@ -8829,6 +8935,7 @@ namespace oomph
         }
       }
 
+
       // Increment number of Newton iterations taken
       Nnewton_iter_taken++;
 
@@ -8846,8 +8953,7 @@ namespace oomph
         // If we're doing the first iteration and the problem is nonlinear,
         // the residuals have already been computed above during the
         // initial convergence check. Otherwise compute them here.
-        if ((count != 1) || (!Problem_is_nonlinear))
-          get_residuals(dx);
+        if ((count != 1) || (!Problem_is_nonlinear)) get_residuals(dx);
 
         // Backup residuals
         DoubleVector resid(dx);
@@ -8951,7 +9057,8 @@ namespace oomph
         if (!Shut_up_in_newton_solve)
         {
           oomph_info << "Newton Step " << count << ": Maximum residuals "
-                     << maxres << std::endl;
+                     << maxres << std::endl
+                     << std::endl;
         }
       }
 
@@ -9022,8 +9129,7 @@ namespace oomph
                    << "[too fast]" << std::endl;
       }
     }
-    if (!Shut_up_in_newton_solve)
-      oomph_info << std::endl;
+    if (!Shut_up_in_newton_solve) oomph_info << std::endl;
   }
 
   //========================================================================
@@ -9076,8 +9182,7 @@ namespace oomph
     {
       double temp =
         std::fabs(newton_dir[i]) / std::max(std::fabs(x_old[i]), 1.0);
-      if (temp > test)
-        test = temp;
+      if (temp > test) test = temp;
     }
     double lambda_min = convergence_tol_on_x / test;
     double lambda = 1.0;
@@ -9112,6 +9217,8 @@ namespace oomph
       else if (half_residual_squared <=
                half_residual_squared_old + min_fct_decrease * lambda * slope)
       {
+        oomph_info << "Returning from linesearch with lambda=" << lambda
+                   << std::endl;
         return;
       }
       else
@@ -9164,6 +9271,7 @@ namespace oomph
       lambda = std::max(proposed_lambda, 0.1 * lambda);
     }
   }
+
 
   //========================================================================
   /// Solve a steady problem, in the context of an overall unsteady problem.
@@ -9232,6 +9340,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // Reset the is_steady status of all timesteppers that
     // weren't already steady when we came in here and reset their
     // weights
@@ -9266,6 +9375,7 @@ namespace oomph
     // Call the solver
     return newton_solve_continuation(parameter_pt, z);
   }
+
 
   //===================================================================
   /// This function performs a basic continuation step using the Newton method.
@@ -9639,6 +9749,7 @@ namespace oomph
       // Get the vector dresiduals/dparameter
       get_derivative_wrt_global_parameter(parameter_pt, z);
 
+
       // Copy rhs vector into local storage so it doesn't get overwritten
       // if the linear solver decides to initialise the solution vector, say,
       // which it's quite entitled to do!
@@ -9779,6 +9890,7 @@ namespace oomph
     // false
     return false;
   }
+
 
   //=======================================================================
   /// A private helper function to
@@ -9928,6 +10040,7 @@ namespace oomph
     Parameter_derivative = Z / length;
   }
 
+
   /// \short Virtual function that is used to symmetrise the problem so that
   /// the current solution exactly satisfies any symmetries within the system.
   /// Used when adpativly solving pitchfork detection problems when small
@@ -10027,6 +10140,7 @@ namespace oomph
     }
   }
 
+
   //===============================================================
   /// Activate the generic bifurcation ///tracking system by changing the
   /// assembly handler and initialising it using the parameter addressed by
@@ -10055,6 +10169,7 @@ namespace oomph
       Linear_solver_pt = new AugmentedBlockFoldLinearSolver(Linear_solver_pt);
     }
   }
+
 
   //==================================================================
   /// Activate the pitchfork tracking system by changing the assembly
@@ -10086,6 +10201,7 @@ namespace oomph
     }
   }
 
+
   //============================================================
   /// Activate the hopf tracking system by changing the assembly
   /// handler and initialising it using the parameter addressed
@@ -10111,6 +10227,7 @@ namespace oomph
       Linear_solver_pt = new BlockHopfLinearSolver(Linear_solver_pt);
     }
   }
+
 
   //============================================================
   /// Activate the hopf tracking system by changing the assembly
@@ -10142,6 +10259,7 @@ namespace oomph
       Linear_solver_pt = new BlockHopfLinearSolver(Linear_solver_pt);
     }
   }
+
 
   //===============================================================
   /// Reset the assembly handler to default
@@ -10197,6 +10315,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // If we are using the continuation timestepper
     if (Use_continuation_timestepper)
     {
@@ -10224,6 +10343,7 @@ namespace oomph
 
       // Backup the current timesteppers for each mesh!
 
+
       // If an arc length step has not been taken then set the timestepper
       if (!Arc_length_step_taken)
       {
@@ -10235,9 +10355,11 @@ namespace oomph
 
     } // End of continuation time stepper case
 
+
     // Just call the helper function (parameter is not from data)
     return arc_length_step_solve_helper(parameter_pt, ds, max_adapt);
   }
+
 
   //===================================================================
   /// This function takes one step of length ds in pseudo-arclength.The
@@ -10272,6 +10394,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // If we are using the continuation timestepper
     if (Use_continuation_timestepper)
     {
@@ -10297,7 +10420,9 @@ namespace oomph
       // Need to treat case of eigenproblems and bifurcation detection/tracking
       // here
 
+
       // Backup the current timesteppers for each mesh!
+
 
       // If an arc length step has not been taken then set the timestepper
       if (!Arc_length_step_taken)
@@ -10308,7 +10433,9 @@ namespace oomph
                    << " equation numbers allocated for continuation\n";
       }
 
+
     } // End of continuation time stepper case
+
 
     // Now make a pointer to the (newly allocated) data object
     double* parameter_pt = data_pt->value_pt(data_index);
@@ -10369,6 +10496,7 @@ namespace oomph
     }
   }
 
+
   //===================================================================
   /// This function takes one step of length ds in pseudo-arclength.The
   /// argument parameter_pt is a pointer to the parameter (global variable)
@@ -10395,10 +10523,12 @@ namespace oomph
       time_stepper_pt(i)->make_steady();
     }
 
+
     // Max number of solves
     unsigned max_solve = max_adapt + 1;
     // Storage for newton steps in each adaptation
     unsigned max_count_in_adapt_loop = 0;
+
 
     //----SET UP MEMORY FOR QUANTITIES THAT ARE REQUIRED OUTSIDE THE LOOP----
 
@@ -10407,6 +10537,7 @@ namespace oomph
     // one linear solve when calculating the derivatives wrt the arc-length
     DoubleVector z;
 
+
     // Store sign of the Jacobian, used for bifurcation detection
     // If this is the first time that we are calling the arc-length solver,
     // this should not be used.
@@ -10414,6 +10545,7 @@ namespace oomph
 
     // Flag to indicate a sign change
     bool SIGN_CHANGE = false;
+
 
     // Adaptation loop
     for (unsigned isolve = 0; isolve < max_solve; ++isolve)
@@ -10458,6 +10590,7 @@ namespace oomph
 #else
                    << ".\n";
 #endif
+
 
         // Check convergence of adaptation cycle
         if ((n_refined == 0) && (n_unrefined == 0))
@@ -10513,6 +10646,7 @@ namespace oomph
 
       // Flag to indicate a successful step
       bool STEP_REJECTED = false;
+
 
       // Set the appropriate initial conditions for the pinned data
       if (Use_continuation_timestepper)
@@ -10769,6 +10903,7 @@ namespace oomph
     return Ds_current;
   }
 
+
   //=======================================================================
   /// Take an explicit timestep of size dt
   //======================================================================
@@ -10797,6 +10932,7 @@ namespace oomph
     // Take the explicit step
     this->explicit_time_stepper_pt()->timestep(this, dt);
   }
+
 
   //========================================================================
   /// Do one timestep of size dt using Newton's method with the specified
@@ -10897,6 +11033,7 @@ namespace oomph
       time_stepper_pt(i)->actions_after_timestep(this);
     }
 
+
     // Now update anything that needs updating after the timestep
     actions_after_implicit_timestep();
     actions_after_implicit_timestep_and_error_estimation();
@@ -10914,6 +11051,7 @@ namespace oomph
     // We always want to shift the time values
     return adaptive_unsteady_newton_solve(dt_desired, epsilon, true);
   }
+
 
   //=======================================================================
   /// Attempt to take  one timestep forward using the dt_desired.
@@ -11075,6 +11213,7 @@ namespace oomph
                    << std::endl;
         oomph_info << "Estimated timestepping error is " << error << std::endl;
 
+
         // Do we have to do it again?
         if (error > epsilon)
         {
@@ -11097,7 +11236,9 @@ namespace oomph
             << "    Problem::Keep_temporal_error_below_tolerance" << std::endl;
         }
 
+
       } // End of if adaptive flag
+
 
       // Calculate the next time step size and check it's ok
       // ============================================================
@@ -11170,7 +11311,9 @@ namespace oomph
         dt_actual = new_dt_candidate;
       }
 
+
       actions_after_implicit_timestep_and_error_estimation();
+
 
       // If we are rejecting this attempt then revert the dofs etc.
       if (reject_timestep)
@@ -11207,6 +11350,7 @@ namespace oomph
     return dt_actual;
   }
 
+
   //=======================================================================
   /// Private helper function to perform
   /// unsteady "doubly" adaptive Newton solve: Does temporal
@@ -11242,6 +11386,7 @@ namespace oomph
     oomph_info << "Accepted solution taken with timestep: " << dt_taken
                << std::endl;
 
+
     // Bail out straightaway if no spatial adaptation allowed
     if (max_adapt == 0)
     {
@@ -11259,6 +11404,7 @@ namespace oomph
     total_ref_count[0] = n_refined;
     total_ref_count[1] = n_unrefined;
 
+
 #ifdef OOMPH_HAS_MPI
     if (Problem_has_been_distributed)
     {
@@ -11274,6 +11420,7 @@ namespace oomph
                     communicator_pt()->mpi_comm());
     }
 #endif
+
 
     // Re-solve the problem if the adaptation has changed anything
     if ((total_ref_count[0] != 0) || (total_ref_count[1] != 0))
@@ -11334,6 +11481,7 @@ namespace oomph
     return new_dt;
   }
 
+
   //========================================================================
   /// \short Initialise the previous values of the variables for time stepping
   /// corresponding to an impulsive start. Previous history for all data
@@ -11354,6 +11502,7 @@ namespace oomph
         ->assign_initial_values_impulsive(Global_data_pt[iglobal]);
     }
   }
+
 
   //=======================================================================
   /// Assign the values for an impulsive start and also set the initial
@@ -11402,6 +11551,7 @@ namespace oomph
       return Time_pt->time();
     }
   }
+
 
   //=======================================================================
   /// Set all problem data to have the same timestepper (timestepper_pt).
@@ -11469,6 +11619,7 @@ namespace oomph
     return (this->assign_eqn_numbers());
   }
 
+
   //========================================================================
   /// Shift all time-dependent data along for next timestep.
   //========================================================================
@@ -11489,6 +11640,7 @@ namespace oomph
         Global_data_pt[iglobal]);
     }
   }
+
 
   //========================================================================
   /// Calculate the predictions of all variables in problem
@@ -11516,6 +11668,7 @@ namespace oomph
       }
     }
 #endif
+
 
     // Predict using an explicit timestepper (don't do it if adaptive = false
     // because pointers probably aren't set up).
@@ -11689,6 +11842,7 @@ namespace oomph
     }
   }
 
+
   //=========================================================================
   /// Copy Data values, nodal positions etc from specified problem.
   /// Note: This is not a copy constructor. We assume that the current
@@ -11737,8 +11891,7 @@ namespace oomph
 
     // Loop over submeshes:
     unsigned nmesh = nsub_mesh();
-    if (nmesh == 0)
-      nmesh = 1;
+    if (nmesh == 0) nmesh = 1;
     for (unsigned m = 0; m < nmesh; m++)
     {
       // Find number of nodes in present mesh
@@ -11777,6 +11930,7 @@ namespace oomph
       }
     }
 
+
     // Copy global data:
     //------------------
 
@@ -11800,6 +11954,7 @@ namespace oomph
     {
       Global_data_pt[iglobal]->copy(orig_problem_pt->global_data_pt(iglobal));
     }
+
 
     // Copy internal data of elements:
     //--------------------------------
@@ -11857,6 +12012,7 @@ namespace oomph
     throw OomphLibError(
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
+
 
   //=========================================================================
   /// Dump refinement pattern of all refineable meshes and all  generic
@@ -11931,6 +12087,7 @@ namespace oomph
       }
     }
 
+
     // Get target for all base elements by reduction
     if (Problem_has_been_distributed)
     {
@@ -11953,6 +12110,7 @@ namespace oomph
       // All the same...
       base_element_processor = local_base_element_processor;
     }
+
 
     dump_file << n << " # Number of base elements; partitioning follows.\n";
     for (unsigned e = 0; e < n; e++)
@@ -12026,6 +12184,7 @@ namespace oomph
       } // End of loop over submeshes
     }
 
+
     // Dump time
     // ---------
 
@@ -12057,8 +12216,7 @@ namespace oomph
 
     // Loop over submeshes and dump their data
     unsigned nmesh = nsub_mesh();
-    if (nmesh == 0)
-      nmesh = 1;
+    if (nmesh == 0) nmesh = 1;
     for (unsigned m = 0; m < nmesh; m++)
     {
       mesh_pt(m)->dump(dump_file);
@@ -12138,6 +12296,7 @@ namespace oomph
     n_submesh_read++;
     n_submesh_read--;
 #endif
+
 
     // Read levels of refinement before pruning
 #ifdef OOMPH_HAS_MPI
@@ -12226,6 +12385,7 @@ namespace oomph
       }
 #endif
     }
+
 
     // Reconcile overall need to refine and prune (even empty
     // processors have to participate in some communication!)
@@ -12326,6 +12486,7 @@ namespace oomph
     tmp++;
     tmp--;
 #endif
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -12449,6 +12610,7 @@ namespace oomph
       // Check flag that indicates that we've read the final data
       tmp = std::atoi(input_string.c_str());
 
+
 #ifdef PARANOID
       if (restart_file_is_open)
       {
@@ -12567,6 +12729,7 @@ namespace oomph
       }
     } // End of read in base element information
 #endif
+
 
     // Boolean to record if any unstructured bulk meshes have
     // been read in (and therefore completely re-generated, with new
@@ -12704,6 +12867,7 @@ namespace oomph
 #endif
       } // End of loop over submeshes
 
+
       // Rebuild the global mesh
       rebuild_global_mesh();
     }
@@ -12715,6 +12879,7 @@ namespace oomph
     // following the total re-generation of the unstructured meshes
     Empty_actions_after_read_unstructured_meshes_has_been_called = false;
     actions_after_read_unstructured_meshes();
+
 
     // Issue warning:
     if (!Suppress_warning_about_actions_before_read_unstructured_meshes)
@@ -12828,6 +12993,7 @@ namespace oomph
 #endif
     }
 
+
     // No prepare global values, possibly via sync
     Vector<double> dt;
 
@@ -12851,6 +13017,7 @@ namespace oomph
     if (sync_needed_flag == 1)
     {
 #ifdef OOMPH_HAS_MPI
+
 
 #ifdef PARANOID
       if (!Problem_has_been_distributed)
@@ -12946,13 +13113,11 @@ namespace oomph
 
     // Initialise timestep -- also sets the weights for all timesteppers
     // in the problem.
-    if (unsteady_restart)
-      initialise_dt(dt);
+    if (unsteady_restart) initialise_dt(dt);
 
     // Loop over submeshes:
     unsigned nmesh = nsub_mesh();
-    if (nmesh == 0)
-      nmesh = 1;
+    if (nmesh == 0) nmesh = 1;
     for (unsigned m = 0; m < nmesh; m++)
     {
       //    //---------------------------------------------------------
@@ -13028,6 +13193,7 @@ namespace oomph
 
     // Check # of nodes:
     unsigned long check_nglobal = atoi(input_string.c_str());
+
 
     if (restart_file_is_open)
     {
@@ -13132,6 +13298,7 @@ namespace oomph
       }
     }
 
+
     // Check global data
     unsigned Nglobal = Global_data_pt.size();
     for (unsigned iglobal = 0; iglobal < Nglobal; iglobal++)
@@ -13144,6 +13311,7 @@ namespace oomph
           << iglobal << std::endl;
       }
     }
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -13318,6 +13486,7 @@ namespace oomph
       }
     } // End of creation of copies
 
+
     // Now check some numbers
     for (unsigned c = 0; c < n_copies; c++)
     {
@@ -13459,6 +13628,7 @@ namespace oomph
     }
   }
 
+
   //====================================================================
   /// A function that is used to document the errors when
   /// adapting a bifurcation-tracking
@@ -13474,6 +13644,7 @@ namespace oomph
     // Just call the bifurcation helper without actually adapting
     bifurcation_adapt_helper(n_refined, n_unrefined, bifurcation_type, false);
   }
+
 
   //========================================================================
   /// Adapt problem:
@@ -13597,6 +13768,7 @@ namespace oomph
                 tmesh_pt->remesh_from_triangulateio(tri_read);
                 tri_read.close();
 
+
                 // Set the nodes to be at the same positions
                 // as the original just in case the
                 // triangulatio is out of sync with the real data
@@ -13719,6 +13891,7 @@ namespace oomph
                            << std::endl;
               }
             }
+
 
             // Must call actions after adapt
             Copy_of_problem_pt[c]->actions_after_adapt();
@@ -13871,6 +14044,7 @@ namespace oomph
                      << mmesh_pt->min_error() << std::endl
                      << std::endl;
 
+
           if (Global_timings::Doc_comprehensive_timings)
           {
             t_end = TimingHelpers::timer();
@@ -13964,6 +14138,7 @@ namespace oomph
             oomph_info << "\n Max/min error: " << mmesh_pt->max_error() << " "
                        << mmesh_pt->min_error() << std::endl;
 
+
             if (Global_timings::Doc_comprehensive_timings)
             {
               t_end = TimingHelpers::timer();
@@ -13978,6 +14153,7 @@ namespace oomph
             // Add to counters
             n_refined += mmesh_pt->nrefined();
             n_unrefined += mmesh_pt->nunrefined();
+
 
             if (Global_timings::Doc_comprehensive_timings)
             {
@@ -14005,6 +14181,7 @@ namespace oomph
       rebuild_global_mesh();
     }
 
+
     if (Global_timings::Doc_comprehensive_timings)
     {
       t_end = TimingHelpers::timer();
@@ -14016,6 +14193,7 @@ namespace oomph
 
     // Any actions after adapt
     actions_after_adapt();
+
 
     if (Global_timings::Doc_comprehensive_timings)
     {
@@ -14032,6 +14210,7 @@ namespace oomph
     // Attach the boundary conditions to the mesh
     oomph_info << "\nNumber of equations: " << assign_eqn_numbers() << std::endl
                << std::endl;
+
 
     if (Global_timings::Doc_comprehensive_timings)
     {
@@ -14150,6 +14329,7 @@ namespace oomph
                      << mmesh_pt->min_error() << std::endl
                      << std::endl;
 
+
           if (Global_timings::Doc_comprehensive_timings)
           {
             t_end = TimingHelpers::timer();
@@ -14243,6 +14423,7 @@ namespace oomph
             oomph_info << "\n Max/min error: " << mmesh_pt->max_error() << " "
                        << mmesh_pt->min_error() << std::endl;
 
+
             if (Global_timings::Doc_comprehensive_timings)
             {
               t_end = TimingHelpers::timer();
@@ -14257,6 +14438,7 @@ namespace oomph
             // Add to counters
             n_refined += mmesh_pt->nrefined();
             n_unrefined += mmesh_pt->nunrefined();
+
 
             if (Global_timings::Doc_comprehensive_timings)
             {
@@ -14284,6 +14466,7 @@ namespace oomph
       rebuild_global_mesh();
     }
 
+
     if (Global_timings::Doc_comprehensive_timings)
     {
       t_end = TimingHelpers::timer();
@@ -14295,6 +14478,7 @@ namespace oomph
 
     // Any actions after adapt
     actions_after_adapt();
+
 
     if (Global_timings::Doc_comprehensive_timings)
     {
@@ -14311,6 +14495,7 @@ namespace oomph
     // Attach the boundary conditions to the mesh
     oomph_info << "\nNumber of equations: " << assign_eqn_numbers() << std::endl
                << std::endl;
+
 
     if (Global_timings::Doc_comprehensive_timings)
     {
@@ -14424,6 +14609,7 @@ namespace oomph
     oomph_info << "\nNumber of equations: " << assign_eqn_numbers() << std::endl
                << std::endl;
   }
+
 
   //========================================================================
   /// Return the error estimates computed by (all) refineable
@@ -14835,6 +15021,7 @@ namespace oomph
     oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
   }
 
+
   //========================================================================
   /// Refine specified submesh by splitting the elements identified
   /// by their pointers, then rebuild the problem.
@@ -15102,6 +15289,7 @@ namespace oomph
     oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
   }
 
+
   //========================================================================
   /// p-refine specified submesh by refining the elements identified
   /// by their pointers, then rebuild the problem.
@@ -15238,6 +15426,7 @@ namespace oomph
     oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
   }
 
+
   //========================================================================
   /// Helper function to do compund refinement of (all) refineable
   /// (sub)mesh(es) uniformly as many times as specified in vector and
@@ -15327,6 +15516,7 @@ namespace oomph
     // Any actions after the adaptation phase
     actions_after_adapt();
 
+
     if (Global_timings::Doc_comprehensive_timings)
     {
       t_end = TimingHelpers::timer();
@@ -15335,6 +15525,7 @@ namespace oomph
         << t_end - t_start << std::endl;
       t_start = TimingHelpers::timer();
     }
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -15381,6 +15572,7 @@ namespace oomph
       }
     }
   }
+
 
   //========================================================================
   /// Helper function to do compund p-refinement of (all) p-refineable
@@ -15476,6 +15668,7 @@ namespace oomph
     // Any actions after the adaptation phase
     actions_after_adapt();
 
+
     if (Global_timings::Doc_comprehensive_timings)
     {
       t_end = TimingHelpers::timer();
@@ -15484,6 +15677,7 @@ namespace oomph
         << t_end - t_start << std::endl;
       t_start = TimingHelpers::timer();
     }
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -15619,6 +15813,7 @@ namespace oomph
     oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
   }
 
+
   //========================================================================
   /// Unrefine (all) refineable (sub)mesh(es) uniformly and rebuild problem.
   /// Return 0 for success,
@@ -15749,6 +15944,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// p-unrefine (all) p-refineable (sub)mesh(es) uniformly and rebuild problem;
   /// doc refinement process.
@@ -15852,6 +16048,7 @@ namespace oomph
     oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
   }
 
+
   //========================================================================
   /// Do one timestep, dt, forward  using Newton's method with specified
   /// tolerance and linear solver specified via member data.
@@ -15892,6 +16089,7 @@ namespace oomph
       oomph_info
         << "\n===========================================================\n\n";
     }
+
 
     // Find the initial time
     double initial_time = time_pt()->time();
@@ -16005,6 +16203,7 @@ namespace oomph
     } // End of adaptation loop
   }
 
+
   //========================================================================
   /// \short Adaptive Newton solver.
   /// The linear solver takes a pointer to the problem (which defines
@@ -16063,6 +16262,7 @@ namespace oomph
                    << ".\n";
 #endif
 
+
         // Check convergence of adaptation cycle
         if ((n_refined == 0) && (n_unrefined == 0))
         {
@@ -16071,6 +16271,7 @@ namespace oomph
           break;
         }
       }
+
 
       // Do actual solve
       //----------------
@@ -16118,6 +16319,7 @@ namespace oomph
 
       } // End of solve block
 
+
       if (isolve == max_solve - 1)
       {
         oomph_info
@@ -16157,6 +16359,7 @@ namespace oomph
     }
   }
 
+
 #ifdef OOMPH_HAS_MPI
 
   //====================================================================
@@ -16184,6 +16387,7 @@ namespace oomph
       }
     }
   }
+
 
   //========================================================================
   /// Check the halo/haloed/shared node/element schemes.
@@ -16219,6 +16423,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Synchronise all dofs by calling the appropriate synchronisation
   /// routines for all meshes and the assembly handler
@@ -16230,6 +16435,7 @@ namespace oomph
     bool do_external_halos = false;
     this->synchronise_dofs(do_halos, do_external_halos);
 
+
     do_halos = false;
     do_external_halos = true;
     this->synchronise_dofs(do_halos, do_external_halos);
@@ -16237,6 +16443,7 @@ namespace oomph
     // Now perform any synchronisation required by the assembly handler
     this->assembly_handler_pt()->synchronise();
   }
+
 
   //========================================================================
   /// Synchronise the degrees of freedom by overwriting
@@ -16350,6 +16557,7 @@ namespace oomph
       // Find the number of data added to the vector
       send_n[rank] = send_data.size() - send_displacement[rank];
     }
+
 
     // Storage for the number of data to be received from each processor
     Vector<int> receive_n(n_proc, 0);
@@ -16480,6 +16688,7 @@ namespace oomph
       }
     } // End of data is received
   } // End of synchronise
+
 
   //========================================================================
   ///  Synchronise equation numbers and return the total
@@ -16641,6 +16850,7 @@ namespace oomph
       t_start = TimingHelpers::timer();
     }
 
+
     // Now copy the haloed eqn numbers across
     // This has to include the internal data equation numbers as well
     // as the solid node equation numbers
@@ -16722,6 +16932,7 @@ namespace oomph
     return (long)Dof_distribution_pt->nrow();
   }
 
+
   //=======================================================================
   /// A private helper function to
   /// copy the haloed equation numbers into the halo equation numbers,
@@ -16756,6 +16967,7 @@ namespace oomph
     Vector<long> send_data;
     // Start location within send_data for data to be sent to each processor
     Vector<int> send_displacement(n_proc, 0);
+
 
     // Loop over all processors whose eqn numbers are to be updated
     for (int rank = 0; rank < n_proc; rank++)
@@ -16881,6 +17093,7 @@ namespace oomph
                   &receive_displacement[0],
                   MPI_LONG,
                   this->communicator_pt()->mpi_comm());
+
 
     // Loop over all other processors to receive their
     // eqn numbers
@@ -17018,6 +17231,7 @@ namespace oomph
         t_start = TimingHelpers::timer();
       }
 
+
 #ifdef PARANOID
       unsigned old_ndof = ndof();
 #endif
@@ -17043,6 +17257,7 @@ namespace oomph
           old_mesh_pt[i_mesh] = mesh_pt(i_mesh);
         }
       }
+
 
       // Partition the global mesh in its current state
       //-----------------------------------------------
@@ -17371,6 +17586,7 @@ namespace oomph
                    << t_partition - t_metis << std::endl;
       }
 
+
       // Flush and delete old submeshes and null the global mesh
       //--------------------------------------------------------
       // and rebuild the new (not yet distributed, refined etc.) mesh
@@ -17447,8 +17663,7 @@ namespace oomph
       unsigned n = pruned_refinement_level.size();
       for (unsigned i = 0; i < n; i++)
       {
-        if (pruned_refinement_level[i] > 0)
-          some_mesh_has_been_pruned = true;
+        if (pruned_refinement_level[i] > 0) some_mesh_has_been_pruned = true;
       }
 
       // (Re-)build the new mesh(es) -- this must get the problem into the
@@ -17566,6 +17781,7 @@ namespace oomph
         // disappeared.
         n_mesh = nsub_mesh();
       } // if (some_mesh_has_been_pruned)
+
 
       // Perform any actions before distribution but now for the new mesh
       // NOTE: This does NOT replicate the actions_before_distribute()
@@ -17890,6 +18106,7 @@ namespace oomph
                    << t_distribute - t_partition << std::endl;
       }
 
+
       // Send refinement info to other processors
       //-----------------------------------------
 
@@ -17901,6 +18118,7 @@ namespace oomph
       // refined to the level-th level) is to be refined during the next
       // refinement; it's 1 if it's not to be refined.
       Vector<Vector<Vector<unsigned>>> refinement_info_for_root_elements;
+
 
       // Send refinement information between processors, using flat-packed
       // information accumulated earlier
@@ -18094,6 +18312,7 @@ namespace oomph
     oomph_info << "Time for load_balance() [sec]    : " << end_t - start_t
                << std::endl;
   }
+
 
   //==========================================================================
   /// Send refinement information between processors
@@ -18310,6 +18529,7 @@ namespace oomph
       }
     }
 
+
     // Now do the actual send/receive
     //-------------------------------
 
@@ -18396,6 +18616,7 @@ namespace oomph
                   &receive_displacement[0],
                   MPI_UNSIGNED,
                   this->communicator_pt()->mpi_comm());
+
 
     // Now use the received data to update
     //-----------------------------------
@@ -18517,6 +18738,7 @@ namespace oomph
       }
     }
 
+
     // Now send the fully assembled refinement info to halo elements
     //---------------------------------------------------------------
     {
@@ -18572,6 +18794,7 @@ namespace oomph
           }
         }
       }
+
 
       // Do the actual send
       //-------------------
@@ -18658,6 +18881,7 @@ namespace oomph
                     &receive_displacement[0],
                     MPI_UNSIGNED,
                     this->communicator_pt()->mpi_comm());
+
 
       // Now use the received data
       //------------------------
@@ -18883,6 +19107,7 @@ namespace oomph
                 {
                   node_done[send_rank][nod_pt] = true;
 
+
                   // Read number of values (as double) to allow for resizing
                   // before read (req'd in case we store data that
                   // got introduced by attaching FaceElements to bulk)
@@ -18903,6 +19128,7 @@ namespace oomph
                                         OOMPH_EXCEPTION_LOCATION);
                   }
 #endif
+
 
 #ifdef PARANOID
                   // Check if it's been sent as a boundary node
@@ -19023,6 +19249,7 @@ namespace oomph
       rebuild_global_mesh();
     }
   }
+
 
   //==========================================================================
   /// Load balance helper routine: Get data to be sent to other
@@ -19396,6 +19623,7 @@ namespace oomph
       new_domain_for_base_element[j] = tmp_new_domain_for_base_element[j];
     }
 
+
     // Loop over all processors and accumulate data to be sent
     //--------------------------------------------------------
     send_data.clear();
@@ -19481,6 +19709,7 @@ namespace oomph
                 }
               }
 
+
               // Has the node already been done for current rank?
               if (!node_done[rank][nod_pt])
               {
@@ -19553,6 +19782,7 @@ namespace oomph
         }
       }
 
+
 #ifdef PARANOID
       // Check that total number of elements matches the total of those
       // in batches
@@ -19573,6 +19803,7 @@ namespace oomph
       send_n[rank] = send_data.size() - send_displacement[rank];
     }
   }
+
 
   //==========================================================================
   /// Get flat-packed refinement pattern for each root element in current
@@ -19855,6 +20086,7 @@ namespace oomph
     }
   }
 
+
   //====================================================================
   /// Helper function to re-setup the Base_mesh enumeration
   /// (used during load balancing) after pruning.
@@ -20010,5 +20242,6 @@ namespace oomph
   /// messages re reading in unstructured meshes during restart.
   bool Problem::Suppress_warning_about_actions_before_read_unstructured_meshes =
     false;
+
 
 } // namespace oomph

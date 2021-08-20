@@ -29,6 +29,7 @@
 #ifndef OOMPH_HIJACKED_ELEMENTS_HEADER
 #define OOMPH_HIJACKED_ELEMENTS_HEADER
 
+
 // oomph-lib header
 #include "elements.h"
 #include "spines.h"
@@ -45,8 +46,8 @@ namespace oomph
   public:
     /// \short Constructor, initialise the pointer to the equation numbers
     /// for the storage to zero
-    HijackedElementBase() :
-      Hijacked_global_eqn_number_pt(0), Hijacked_local_eqn_number_pt(0)
+    HijackedElementBase()
+      : Hijacked_global_eqn_number_pt(0), Hijacked_local_eqn_number_pt(0)
     {
       // Set the default value of the pointer to the residuals multiplier.
       // The default value is zero, so that the element is "completely hijacked"
@@ -109,6 +110,7 @@ namespace oomph
     void unhijack_global_eqn(long* const& global_eqn_pt);
   };
 
+
   //========================================================================
   /// \short Hijacked elements are elements in which one or more
   /// Data values that affect the element's residuals, are determined
@@ -133,19 +135,21 @@ namespace oomph
     Hijacked() : ELEMENT(), HijackedElementBase() {}
 
     /// Constructor used for hijacking face elements
-    Hijacked(FiniteElement* const& element_pt, const int& face_index) :
-      ELEMENT(element_pt, face_index), HijackedElementBase()
+    Hijacked(FiniteElement* const& element_pt, const int& face_index)
+      : ELEMENT(element_pt, face_index), HijackedElementBase()
     {
     }
+
 
     /// \short Constructor used for hijacking face elements with specification
     /// of ID of additional variables
     Hijacked(FiniteElement* const& element_pt,
              const int& face_index,
-             const unsigned& id = 0) :
-      ELEMENT(element_pt, face_index, id), HijackedElementBase()
+             const unsigned& id = 0)
+      : ELEMENT(element_pt, face_index, id), HijackedElementBase()
     {
     }
+
 
     /// \short Hijack the i-th value stored at internal data n.
     /// Optionally return a custom-made (copied) data object that contains only
@@ -174,6 +178,7 @@ namespace oomph
       // Return the pointer to the data
       return temp_data_pt;
     }
+
 
     /// \short Hijack the i-th value stored at external data n.
     /// Optionally return a custom-made (copied) data object that contains only
@@ -305,6 +310,7 @@ namespace oomph
       return temp_data_pt;
     }
 
+
     /// \short Set up the local equation numbers for the underlying element,
     /// then set up the local arrays to hold the hijacked variables.
     /// If the boolean argument is true then pointers to the associated degrees
@@ -324,6 +330,7 @@ namespace oomph
       {
         Hijacked_local_eqn_number_pt = new Vector<int>;
       }
+
 
       // Call the hijacked element's assign_local_eqn_numbers
       ELEMENT::assign_local_eqn_numbers(store_local_dof_pt);
@@ -380,6 +387,7 @@ namespace oomph
       }
     }
 
+
     /// \short Get the residuals and Jacobian matrix from the underlying
     /// element, but then wipe the entries in the residual vector and the
     /// rows in the Jacobian matrix that correspond to hijacked
@@ -407,6 +415,7 @@ namespace oomph
     }
   };
 
+
   //============================================================================
   ///\short Explicit definition of the face geometry of hijacked elements:
   /// the same as the face geometry of the underlying element
@@ -426,8 +435,8 @@ namespace oomph
   /// the same as the face geometry of the underlying element
   //============================================================================
   template<class ELEMENT>
-  class FaceGeometry<FaceGeometry<Hijacked<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  class FaceGeometry<FaceGeometry<Hijacked<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     /// Constructor
@@ -441,8 +450,8 @@ namespace oomph
   /// the same as the face geometry of the underlying element
   //============================================================================
   template<class ELEMENT>
-  class FaceGeometry<Hijacked<FaceGeometry<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  class FaceGeometry<Hijacked<FaceGeometry<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     /// Constructor
@@ -450,6 +459,7 @@ namespace oomph
 
   protected:
   };
+
 
 } // namespace oomph
 

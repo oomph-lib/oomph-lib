@@ -43,7 +43,11 @@ done
 if [ -z "$FMT" ]; then
     echo "Failed to find clang-format"
     exit 1
+else
+    echo "Reformatting with clang format command: $FMT"
+    echo "Version info: " `$FMT --version`
 fi
+
 
 # Check all of the arguments first to make sure they're all directories
 for dir in "$@"; do
@@ -77,9 +81,9 @@ for dir in "$@"; do
         -o -name '*.cpp' \
         -o -name '*.h' \
         -o -name '*.hpp' \
-        -o -name '*.tpp' \
-        ! -name 'cfortran.h' \
-        ! -name 'lapack_qz.h' \) \
+        -o -name '*.tpp' \) \
+         ! -name 'cfortran.h'  \
+         ! -name 'lapack_qz.h' \
         -exec "${FMT}" -i '{}' \;
     popd &>/dev/null
 done

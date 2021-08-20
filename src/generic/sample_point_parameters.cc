@@ -26,6 +26,7 @@
 
 #include "sample_point_parameters.h"
 
+
 namespace oomph
 {
   /// Default for "measure of" number of sample points per element

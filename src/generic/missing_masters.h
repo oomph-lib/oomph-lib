@@ -52,6 +52,7 @@
 #include "Qelements.h"
 #include "element_with_external_element.h"
 
+
 namespace oomph
 {
   //======================================================================
@@ -81,10 +82,12 @@ namespace oomph
     ///        during setup_multi_domain_interaction() routines
     extern bool Doc_full_stats;
 
+
     // Functions for multi-domain method
 
 #ifdef OOMPH_HAS_MPI
     // Helper functions for external haloed node identification
+
 
     /// \short Helper function to add external haloed nodes, inc. masters
     /// of external haloed nodes
@@ -95,6 +98,7 @@ namespace oomph
                                              Vector<unsigned>& send_unsigneds,
                                              Vector<double>& send_doubles);
 
+
     /// \short Recursively add any master nodes (and their master nodes etc)
     /// of external haloed nodes
     void recursively_add_masters_of_external_haloed_node(
@@ -104,6 +108,7 @@ namespace oomph
       int& n_cont_inter_values,
       Vector<unsigned>& send_unsigneds,
       Vector<double>& send_doubles);
+
 
     /// \short Helper function to add external haloed node that is not a master
     void add_external_haloed_node_helper(int& iproc,
@@ -173,6 +178,7 @@ namespace oomph
       unsigned& counter_for_recv_doubles,
       Vector<double>& recv_doubles);
 
+
     /// \short Helper function to add external halo node that is not a master
     void add_external_halo_node_helper(Node*& new_nod_pt,
                                        Mesh* const& mesh_pt,
@@ -197,6 +203,7 @@ namespace oomph
       Vector<unsigned>& recv_unsigneds,
       unsigned& counter_for_recv_doubles,
       Vector<double>& recv_doubles);
+
 
     /// \short Helper function which constructs a new external halo node
     /// (on an element) with the information sent from the haloed process
@@ -227,6 +234,7 @@ namespace oomph
 #endif
 
   } // namespace Missing_masters_functions
+
 
 } // namespace oomph
 

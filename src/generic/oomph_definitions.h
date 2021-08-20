@@ -43,6 +43,7 @@
 #include <string>
 #include <vector>
 
+
 namespace oomph
 {
 // Pre-processor magic for error reporting
@@ -86,9 +87,11 @@ namespace oomph
 
 #endif
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   ///=====================================================================
   /// Namespace to control level of comprehensive timings
@@ -101,6 +104,7 @@ namespace oomph
     extern bool Doc_comprehensive_timings;
 
   }; // namespace Global_timings
+
 
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
@@ -137,6 +141,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   ///=====================================================================
   /// A class for handling oomph-lib run-time exceptions quietly.
   //======================================================================
@@ -153,6 +158,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   ///=====================================================================
   /// A Base class for oomph-lib run-time exception (error and warning)
@@ -226,14 +232,14 @@ namespace oomph
     /// OOMPH_EXCEPTION_LOCATION macro
     OomphLibError(const std::string& error_description,
                   const std::string& function_name,
-                  const char* location) :
-      OomphLibException(error_description,
-                        function_name,
-                        location,
-                        "ERROR",
-                        *Stream_pt,
-                        Output_width,
-                        true)
+                  const char* location)
+      : OomphLibException(error_description,
+                          function_name,
+                          location,
+                          "ERROR",
+                          *Stream_pt,
+                          Output_width,
+                          true)
     {
     }
 
@@ -270,14 +276,14 @@ namespace oomph
     /// in which the warning occurred.
     OomphLibWarning(const std::string& warning_description,
                     const std::string& function_name,
-                    const char* location) :
-      OomphLibException(warning_description,
-                        function_name,
-                        location,
-                        "WARNING",
-                        *Stream_pt,
-                        Output_width,
-                        false)
+                    const char* location)
+      : OomphLibException(warning_description,
+                          function_name,
+                          location,
+                          "WARNING",
+                          *Stream_pt,
+                          Output_width,
+                          false)
     {
     }
 
@@ -296,9 +302,11 @@ namespace oomph
     }
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=====================================================================
   /// A small nullstream class that throws away everything sent to it.
@@ -310,14 +318,17 @@ namespace oomph
     Nullstream() : std::ios(0), std::ostream(0) {}
   };
 
+
   //========================================================================
   /// Single (global) instantiation of the Nullstream
   //========================================================================
   extern Nullstream oomph_nullstream;
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// A base class that contains a single virtual member function:
@@ -342,14 +353,17 @@ namespace oomph
     }
   };
 
+
   //========================================================================
   /// Single global instatiation of the default output modifier.
   //========================================================================
   extern OutputModifier default_output_modifier;
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Namespace containing an output stream that can be used for
@@ -362,9 +376,11 @@ namespace oomph
 
   } // namespace Global_output_stream
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Namespace containing a number that can be used to annotate things for
@@ -377,9 +393,11 @@ namespace oomph
 
   } // namespace Global_unsigned
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Namespace containing a vector of strings that can be used to
@@ -397,9 +415,11 @@ namespace oomph
     extern std::vector<std::string> String;
   } // namespace Global_string_for_annotation
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// This class is a wrapper to a stream and an output modifier that is
@@ -418,8 +438,8 @@ namespace oomph
   public:
     ///\short Set default values for the output stream (cout)
     /// and modifier (no modification)
-    OomphInfo() :
-      Stream_pt(&std::cout), Output_modifier_pt(&default_output_modifier)
+    OomphInfo()
+      : Stream_pt(&std::cout), Output_modifier_pt(&default_output_modifier)
     {
     }
 
@@ -459,11 +479,13 @@ namespace oomph
     }
   };
 
+
   //========================================================================
   /// Single (global) instantiation of the OomphInfo object -- this
   /// is used throughout the library as a "replacement" for std::cout
   //========================================================================
   extern OomphInfo oomph_info;
+
 
 } // namespace oomph
 

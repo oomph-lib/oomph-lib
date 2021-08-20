@@ -64,8 +64,8 @@ namespace oomph
     }
 
     /// Constructor
-    OneDLegendreShapeParam(const unsigned& order, const double& s) :
-      Shape(order)
+    OneDLegendreShapeParam(const unsigned& order, const double& s)
+      : Shape(order)
     {
       using namespace Orthpoly;
 
@@ -89,12 +89,13 @@ namespace oomph
     }
   };
 
+
   class OneDLegendreDShapeParam : public Shape
   {
   public:
     // Constructor
-    OneDLegendreDShapeParam(const unsigned& order, const double& s) :
-      Shape(order)
+    OneDLegendreDShapeParam(const unsigned& order, const double& s)
+      : Shape(order)
     {
       unsigned p = order - 1;
       Vector<double> z = OneDLegendreShapeParam::z[order];
@@ -144,6 +145,7 @@ namespace oomph
     }
   };
 
+
   //========================================================================
   // A Base class for Spectral elements
   //========================================================================
@@ -173,6 +175,7 @@ namespace oomph
         Spectral_data_pt = 0;
       }
     }
+
 
     ///\short Return the i-th data object associated with the polynomials
     /// of order p. Note that i <= p.
@@ -349,6 +352,7 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// General QLegendreElement class
   ///
@@ -359,13 +363,13 @@ namespace oomph
   {
   };
 
+
   //=======================================================================
   /// General QSpectralElement class specialised to one spatial dimension
   //=======================================================================
   template<unsigned NNODE_1D>
-  class QSpectralElement<1, NNODE_1D> :
-    public virtual SpectralElement,
-    public virtual LineElementBase
+  class QSpectralElement<1, NNODE_1D> : public virtual SpectralElement,
+                                        public virtual LineElementBase
   {
   private:
     /// \short Default integration rule: Gaussian integration of same 'order'
@@ -483,6 +487,7 @@ namespace oomph
       return FiniteElement::invert_jacobian<1>(jacobian, inverse_jacobian);
     }
 
+
     /// Number of nodes along each element edge
     unsigned nnode_1d() const
     {
@@ -563,6 +568,7 @@ namespace oomph
                             FaceElement* face_element_pt);
   };
 
+
   //=======================================================================
   /// Shape function for specific QSpectralElement<1,..>
   //=======================================================================
@@ -635,13 +641,13 @@ namespace oomph
     /*   } */
   }
 
+
   //=======================================================================
   /// General QSpectralElement class specialised to two spatial dimensions
   //=======================================================================
   template<unsigned NNODE_1D>
-  class QSpectralElement<2, NNODE_1D> :
-    public virtual SpectralElement,
-    public virtual QuadElementBase
+  class QSpectralElement<2, NNODE_1D> : public virtual SpectralElement,
+                                        public virtual QuadElementBase
   {
   private:
     /// \short Default integration rule: Gaussian integration of same 'order'
@@ -717,6 +723,7 @@ namespace oomph
       return nod_pt;
     }
 
+
     /// Get local coordinates of node j in the element; vector sets its own size
     void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
     {
@@ -770,6 +777,7 @@ namespace oomph
     {
       return FiniteElement::invert_jacobian<2>(jacobian, inverse_jacobian);
     }
+
 
     /// Number of nodes along each element edge
     unsigned nnode_1d() const
@@ -826,6 +834,7 @@ namespace oomph
       }
     }
 
+
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
@@ -858,6 +867,7 @@ namespace oomph
     void build_face_element(const int& face_index,
                             FaceElement* face_element_pt);
   };
+
 
   //=======================================================================
   /// Shape function for specific QSpectralElement<2,..>
@@ -913,6 +923,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Second derivatives of shape functions for specific  QSpectralElement<2,..>
   /// d2psids(i,0) = \f$ \partial ^2 \psi_j / \partial s_0^2 \f$
@@ -945,13 +956,13 @@ namespace oomph
     /*   } */
   }
 
+
   //=======================================================================
   /// General QSpectralElement class specialised to three spatial dimensions
   //=======================================================================
   template<unsigned NNODE_1D>
-  class QSpectralElement<3, NNODE_1D> :
-    public virtual SpectralElement,
-    public virtual BrickElementBase
+  class QSpectralElement<3, NNODE_1D> : public virtual SpectralElement,
+                                        public virtual BrickElementBase
   {
   private:
     /// \short Default integration rule: Gaussian integration of same 'order'
@@ -1040,6 +1051,7 @@ namespace oomph
       return nod_pt;
     }
 
+
     /// Get local coordinates of node j in the element; vector sets its own size
     void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
     {
@@ -1090,6 +1102,7 @@ namespace oomph
                               Shape& psi,
                               DShape& dpsids,
                               DShape& d2psids) const;
+
 
     /// \short Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one-dimensional element, so
@@ -1160,6 +1173,7 @@ namespace oomph
       }
     }
 
+
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
@@ -1195,6 +1209,7 @@ namespace oomph
     void build_face_element(const int& face_index,
                             FaceElement* face_element_pt);
   };
+
 
   //=======================================================================
   /// Shape function for specific QSpectralElement<3,..>
@@ -1240,6 +1255,7 @@ namespace oomph
     OneDimensionalLegendreDShape<NNODE_1D> dpsi1ds(s[0]), dpsi2ds(s[1]),
       dpsi3ds(s[2]);
 
+
     // Index for the shape functions
     unsigned index = 0;
 
@@ -1261,6 +1277,7 @@ namespace oomph
       }
     }
   }
+
 
   //=======================================================================
   /// Second derivatives of shape functions for specific QSpectralElement<3,..>

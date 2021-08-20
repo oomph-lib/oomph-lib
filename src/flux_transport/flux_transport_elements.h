@@ -35,6 +35,7 @@
 
 #include "generic/elements.h"
 
+
 namespace oomph
 {
   //==================================================================
@@ -101,6 +102,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
+
   public:
     /// Constructor
     FluxTransportEquations() : FiniteElement() {}
@@ -149,6 +151,7 @@ namespace oomph
       fill_in_generic_residual_contribution_flux_transport(
         residuals, GeneralisedElement::Dummy_matrix, mass_matrix, 3);
     }
+
 
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.

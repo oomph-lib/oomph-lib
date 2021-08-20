@@ -259,6 +259,7 @@ namespace oomph
                  (pow(interpolated_u[1], 2.) / interpolated_x[0])) *
                 testf[l] * interpolated_x[0] * Alpha * W * hang_weight;
 
+
               // CALCULATE THE JACOBIAN
               if (flag)
               {
@@ -714,6 +715,7 @@ namespace oomph
                       hang_weight2 = 1.0;
                     }
 
+
                     /*If we are at a non-zero degree of freedom in the entry*/
                     if (local_unknown >= 0)
                     {
@@ -735,6 +737,7 @@ namespace oomph
 
         } // End of loop over master nodes m
       } // End of loop over shape functions
+
 
       // CONTINUITY EQUATION
       //-------------------
@@ -878,5 +881,6 @@ namespace oomph
     } // End of loop over integration points
 
   } // End of add_generic_residual_contribution
+
 
 } // End of namespace oomph

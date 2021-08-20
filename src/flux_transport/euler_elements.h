@@ -72,8 +72,10 @@ namespace oomph
 
   public:
     /// Constructor
-    EulerEquations() :
-      FluxTransportEquations<DIM>(), Average_prim_value(0), Average_gradient(0)
+    EulerEquations()
+      : FluxTransportEquations<DIM>(),
+        Average_prim_value(0),
+        Average_gradient(0)
     {
       // Set the default value of gamma
       Gamma_pt = &Default_Gamma_Value;
@@ -195,6 +197,7 @@ namespace oomph
       }
     }
 
+
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
@@ -248,16 +251,16 @@ namespace oomph
     }
   };
 
+
   template<unsigned DIM, unsigned NNODE_1D>
-  class QSpectralEulerElement :
-    public virtual QSpectralElement<DIM, NNODE_1D>,
-    public virtual EulerEquations<DIM>
+  class QSpectralEulerElement : public virtual QSpectralElement<DIM, NNODE_1D>,
+                                public virtual EulerEquations<DIM>
   {
   public:
     ///\short  Constructor: Call constructors for QElement and
     /// Advection Diffusion equations
-    QSpectralEulerElement() :
-      QSpectralElement<DIM, NNODE_1D>(), EulerEquations<DIM>()
+    QSpectralEulerElement()
+      : QSpectralElement<DIM, NNODE_1D>(), EulerEquations<DIM>()
     {
     }
 
@@ -279,6 +282,7 @@ namespace oomph
       BrokenCopy::broken_assign("QSpectralEulerElement");
       }*/
 
+
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
@@ -292,6 +296,7 @@ namespace oomph
     {
       EulerEquations<DIM>::output(outfile, n_plot);
     }
+
 
     /*/// \short C-style output function:
    ///  x,y,u   or    x,y,z,u
@@ -329,6 +334,7 @@ namespace oomph
       output_fct(outfile,n_plot,time,exact_soln_pt);
       }*/
 
+
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
@@ -350,6 +356,7 @@ namespace oomph
   };
 
   // Inline functions:
+
 
   //======================================================================
   /// \short Define the shape functions and test functions and derivatives
@@ -383,6 +390,7 @@ namespace oomph
     return J;
   }
 
+
   //======================================================================
   /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
@@ -408,9 +416,11 @@ namespace oomph
     return J;
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// \short Face geometry for the QEulerElement elements:
@@ -419,8 +429,8 @@ namespace oomph
   /// their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<QSpectralEulerElement<DIM, NNODE_1D>> :
-    public virtual QSpectralElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<QSpectralEulerElement<DIM, NNODE_1D>>
+    : public virtual QSpectralElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -428,13 +438,13 @@ namespace oomph
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };
 
+
   //======================================================================
   /// FaceElement for Discontinuous Galerkin Problems
   //======================================================================
   template<class ELEMENT>
-  class DGEulerFaceElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual DGFaceElement
+  class DGEulerFaceElement : public virtual FaceGeometry<ELEMENT>,
+                             public virtual DGFaceElement
   {
     unsigned Nflux;
 
@@ -442,9 +452,8 @@ namespace oomph
 
   public:
     /// Constructor
-    DGEulerFaceElement(FiniteElement* const& element_pt,
-                       const int& face_index) :
-      FaceGeometry<ELEMENT>(), DGFaceElement()
+    DGEulerFaceElement(FiniteElement* const& element_pt, const int& face_index)
+      : FaceGeometry<ELEMENT>(), DGFaceElement()
     {
       // Attach geometric information to the element
       // N.B. This function also assigns nbulk_value from required_nvalue
@@ -471,6 +480,7 @@ namespace oomph
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
+
 
     // There is a single required n_flux
     unsigned required_nflux()
@@ -546,6 +556,7 @@ namespace oomph
       {
         jump[2 + j] = velocity_jump * n_out[j];
       }
+
 
       // Let's find the Roe average
       /*   Vector<double> u_average(n_flux);
@@ -651,6 +662,7 @@ namespace oomph
         }
       }
 
+
       // Find the magnitude of the external velocity
       /*double vel_mag = 0.0;
       for(unsigned j=0;j<dim;j++) {vel_mag += u_ext[2+j]*u_ext[2+j];}
@@ -680,22 +692,22 @@ namespace oomph
     }
   };
 
+
   //======================================================================
   /// \short FaceElement for Discontinuous Galerkin Problems with reflection
   /// boundary conditions
   //======================================================================
   template<class ELEMENT>
-  class DGEulerFaceReflectionElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual DGFaceElement
+  class DGEulerFaceReflectionElement : public virtual FaceGeometry<ELEMENT>,
+                                       public virtual DGFaceElement
   {
     unsigned Nflux;
 
   public:
     /// Constructor
     DGEulerFaceReflectionElement(FiniteElement* const& element_pt,
-                                 const int& face_index) :
-      FaceGeometry<ELEMENT>(), DGFaceElement()
+                                 const int& face_index)
+      : FaceGeometry<ELEMENT>(), DGFaceElement()
     {
       // Attach geometric information to the element
       // N.B. This function also assigns nbulk_value from required_nvalue
@@ -704,6 +716,7 @@ namespace oomph
       // Set the value of the flux
       Nflux = 2 + element_pt->dim();
     }
+
 
     /// Specify the value of nodal zeta from the face geometry
     /// \short The "global" intrinsic coordinate of the element when
@@ -749,6 +762,7 @@ namespace oomph
     }
   };
 
+
   //=================================================================
   /// General DGEulerClass. Establish the template parameters
   //===================================================================
@@ -757,13 +771,13 @@ namespace oomph
   {
   };
 
+
   //==================================================================
   // Specialization for 1D DG Advection element
   //==================================================================
   template<unsigned NNODE_1D>
-  class DGSpectralEulerElement<1, NNODE_1D> :
-    public QSpectralEulerElement<1, NNODE_1D>,
-    public DGElement
+  class DGSpectralEulerElement<1, NNODE_1D>
+    : public QSpectralEulerElement<1, NNODE_1D>, public DGElement
   {
     friend class DGEulerFaceElement<DGSpectralEulerElement<1, NNODE_1D>>;
 
@@ -782,6 +796,7 @@ namespace oomph
       FluxTransportEquations<1>::calculate_element_averages(average_value);
     }
 
+
     // Constructor
     DGSpectralEulerElement() : QSpectralEulerElement<1, NNODE_1D>(), DGElement()
     {
@@ -795,6 +810,7 @@ namespace oomph
     {
       return 0;
     }
+
 
     ~DGSpectralEulerElement() {}
 
@@ -810,6 +826,7 @@ namespace oomph
         new DGEulerFaceElement<DGSpectralEulerElement<1, NNODE_1D>>(this, +1);
     }
 
+
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
@@ -824,6 +841,7 @@ namespace oomph
 
       this->add_flux_contributions_to_residuals(residuals, jacobian, flag);
     }
+
 
     //============================================================================
     /// Function that returns the current value of the residuals
@@ -869,24 +887,25 @@ namespace oomph
     }*/
   };
 
+
   //=======================================================================
   /// Face geometry of the 1D  DG elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<DGSpectralEulerElement<1, NNODE_1D>> :
-    public virtual PointElement
+  class FaceGeometry<DGSpectralEulerElement<1, NNODE_1D>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   //==================================================================
   /// Specialisation for 2D DG Elements
   //==================================================================
   template<unsigned NNODE_1D>
-  class DGSpectralEulerElement<2, NNODE_1D> :
-    public QSpectralEulerElement<2, NNODE_1D>,
-    public DGElement
+  class DGSpectralEulerElement<2, NNODE_1D>
+    : public QSpectralEulerElement<2, NNODE_1D>, public DGElement
   {
     friend class DGEulerFaceElement<DGSpectralEulerElement<2, NNODE_1D>>;
 
@@ -934,6 +953,7 @@ namespace oomph
         new DGEulerFaceElement<DGSpectralEulerElement<2, NNODE_1D>>(this, -1);
     }
 
+
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
@@ -950,16 +970,18 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry of the DG elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<DGSpectralEulerElement<2, NNODE_1D>> :
-    public virtual QSpectralElement<1, NNODE_1D>
+  class FaceGeometry<DGSpectralEulerElement<2, NNODE_1D>>
+    : public virtual QSpectralElement<1, NNODE_1D>
   {
   public:
     FaceGeometry() : QSpectralElement<1, NNODE_1D>() {}
   };
+
 
 } // namespace oomph
 

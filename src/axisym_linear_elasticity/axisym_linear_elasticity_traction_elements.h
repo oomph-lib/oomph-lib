@@ -34,9 +34,12 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
-#include "generic/Qelements.h"
-#include "generic/element_with_external_element.h"
+//#include "generic/Qelements.h"
+#include "sgeneric/Qelements.h"
+#include "sgeneric/element_with_external_element.h"
+
 
 namespace oomph
 {
@@ -63,6 +66,7 @@ namespace oomph
 
   } // namespace AxisymmetricLinearElasticityTractionElementHelper
 
+
   //======================================================================
   /// A class for elements that allow the imposition of an applied traction
   /// in the equations of axisymmetric linear elasticity.
@@ -71,9 +75,9 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class ELEMENT>
-  class AxisymmetricLinearElasticityTractionElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class AxisymmetricLinearElasticityTractionElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual FaceElement
   {
   protected:
     /// Index at which the i-th displacement component is stored
@@ -89,6 +93,7 @@ namespace oomph
                             const Vector<double>& n,
                             Vector<double>& result);
 
+
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Eulerian coordinate and normal vector and return the load
     /// vector (not all of the input arguments will be required for all specific
@@ -103,6 +108,7 @@ namespace oomph
       Traction_fct_pt(time, x, n, traction);
     }
 
+
     /// \short Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
@@ -110,12 +116,13 @@ namespace oomph
     void fill_in_contribution_to_residuals_axisymmetric_linear_elasticity_traction(
       Vector<double>& residuals);
 
+
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     AxisymmetricLinearElasticityTractionElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+      FiniteElement* const& element_pt, const int& face_index)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -138,6 +145,7 @@ namespace oomph
         &AxisymmetricLinearElasticityTractionElementHelper::Zero_traction_fct;
     }
 
+
     /// Reference to the traction function pointer
     void (*&traction_fct_pt())(const double& time,
                                const Vector<double>& x,
@@ -147,12 +155,14 @@ namespace oomph
       return Traction_fct_pt;
     }
 
+
     /// Return the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_axisymmetric_linear_elasticity_traction(
         residuals);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -275,6 +285,7 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
+
     /// \short Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
@@ -312,6 +323,7 @@ namespace oomph
     // Traction vector
     get_traction(time, ipt, x, unit_normal, traction);
   }
+
 
   //=====================================================================
   /// Return the residuals for the
@@ -463,9 +475,11 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for elements that allow the imposition of an applied traction
@@ -476,10 +490,10 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class ELASTICITY_BULK_ELEMENT, class NAVIER_STOKES_BULK_ELEMENT>
-  class FSIAxisymmetricLinearElasticityTractionElement :
-    public virtual FaceGeometry<ELASTICITY_BULK_ELEMENT>,
-    public virtual FaceElement,
-    public virtual ElementWithExternalElement
+  class FSIAxisymmetricLinearElasticityTractionElement
+    : public virtual FaceGeometry<ELASTICITY_BULK_ELEMENT>,
+      public virtual FaceElement,
+      public virtual ElementWithExternalElement
   {
   protected:
     /// \short Pointer to the ratio, \f$ Q \f$ , of the stress used to
@@ -505,10 +519,10 @@ namespace oomph
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     FSIAxisymmetricLinearElasticityTractionElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      FaceGeometry<ELASTICITY_BULK_ELEMENT>(),
-      FaceElement(),
-      Q_pt(&Default_Q_Value)
+      FiniteElement* const& element_pt, const int& face_index)
+      : FaceGeometry<ELASTICITY_BULK_ELEMENT>(),
+        FaceElement(),
+        Q_pt(&Default_Q_Value)
     {
       // Set source element storage: one interaction with an external
       // element -- the Navier Stokes bulk element that provides the traction
@@ -532,11 +546,13 @@ namespace oomph
       }
     }
 
+
     /// Return the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_axisym_fsi_traction(residuals);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -565,6 +581,7 @@ namespace oomph
     {
       return Q_pt;
     }
+
 
     /// \short Output function
     void output(std::ostream& outfile)
@@ -640,6 +657,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   //=================================================================
   /// Static default value for the ratio of stress scales
   /// used in the fluid and solid equations (default is 1.0)
@@ -648,6 +666,7 @@ namespace oomph
   double FSIAxisymmetricLinearElasticityTractionElement<
     ELASTICITY_BULK_ELEMENT,
     NAVIER_STOKES_BULK_ELEMENT>::Default_Q_Value = 1.0;
+
 
   //=====================================================================
   /// Return the residuals
@@ -807,9 +826,11 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
 } // namespace oomph
 

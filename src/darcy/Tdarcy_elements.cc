@@ -33,13 +33,14 @@ namespace oomph
   //////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////
 
+
   //===========================================================================
   /// \short Constructor. Order 0 elements have 1 pressure dof and no internal
   /// velocity dofs
   //===========================================================================
   template<>
-  TRaviartThomasDarcyElement<0>::TRaviartThomasDarcyElement() :
-    TElement<2, 3>(), DarcyEquations<2>(), Sign_edge(3, 1)
+  TRaviartThomasDarcyElement<0>::TRaviartThomasDarcyElement()
+    : TElement<2, 3>(), DarcyEquations<2>(), Sign_edge(3, 1)
   {
     P_internal_data_index = this->add_internal_data(new Data(1));
   }
@@ -52,6 +53,7 @@ namespace oomph
   {
   }
 
+
   //===========================================================================
   /// Return the number of edge basis functions for q
   //===========================================================================
@@ -60,6 +62,7 @@ namespace oomph
   {
     return 3;
   }
+
 
   //===========================================================================
   /// Return the number of internal basis functions for q
@@ -152,6 +155,7 @@ namespace oomph
     p_basis(0) = 1.0;
   }
 
+
   //===========================================================================
   /// Recovery order for Z2 error estimator
   //===========================================================================
@@ -169,12 +173,14 @@ namespace oomph
   const unsigned TRaviartThomasDarcyElement<0>::Initial_Nvalue[6] = {
     0, 0, 0, 1, 1, 1};
 
+
   //===========================================================================
   ///  Face index associated with edge flux degree of freedom
   //===========================================================================
   template<>
   const unsigned TRaviartThomasDarcyElement<0>::Face_index_of_edge_flux[3] = {
     2, 0, 1};
+
 
   //===========================================================================
   /// Conversion scheme from an edge degree of freedom to the node it's stored
@@ -184,6 +190,7 @@ namespace oomph
   template<>
   const unsigned TRaviartThomasDarcyElement<0>::Q_edge_conv[3] = {3, 4, 5};
 
+
   //===========================================================================
   /// The points along each edge where the fluxes are taken to be
   // hierher explain please
@@ -192,19 +199,21 @@ namespace oomph
   const double TRaviartThomasDarcyElement<0>::Flux_interpolation_point[1] = {
     0.5};
 
+
   //////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////
   /// Second-order Raviart-Thomas based Darcy equation element
   //////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////
 
+
   //===========================================================================
   /// \short Constructor. Order 1 elements have 3 pressure dofs and 2 internal
   /// velocity dofs
   //===========================================================================
   template<>
-  TRaviartThomasDarcyElement<1>::TRaviartThomasDarcyElement() :
-    TElement<2, 3>(), DarcyEquations<2>(), Sign_edge(3, 1)
+  TRaviartThomasDarcyElement<1>::TRaviartThomasDarcyElement()
+    : TElement<2, 3>(), DarcyEquations<2>(), Sign_edge(3, 1)
   {
     // RT_1 elements have 2 internal degrees of freedom for q, and 3 for p
     Q_internal_data_index = this->add_internal_data(new Data(2));
@@ -219,6 +228,7 @@ namespace oomph
   {
   }
 
+
   //===========================================================================
   /// Return the number of edge basis functions for q
   //===========================================================================
@@ -227,6 +237,7 @@ namespace oomph
   {
     return 6;
   }
+
 
   //===========================================================================
   /// Return the number of internal basis functions for q
@@ -260,6 +271,7 @@ namespace oomph
     q_basis(1, 1) =
       Sign_edge[0] * std::sqrt(2.0) * s[1] * (s[1] - g1) / (g2 - g1);
 
+
     g1_vect = edge_flux_interpolation_point(1, 0);
     g2_vect = edge_flux_interpolation_point(1, 1);
     g1 = g1_vect[0];
@@ -269,6 +281,7 @@ namespace oomph
 
     q_basis(3, 0) = Sign_edge[1] * (s[0] - 1.0) * (s[1] - g2) / (g1 - g2);
     q_basis(3, 1) = Sign_edge[1] * s[1] * (s[1] - g2) / (g1 - g2);
+
 
     g1_vect = edge_flux_interpolation_point(2, 0);
     g2_vect = edge_flux_interpolation_point(2, 1);
@@ -287,6 +300,7 @@ namespace oomph
     q_basis(7, 1) = s[0] * s[1];
   }
 
+
   //===========================================================================
   /// Compute the local form of the q basis and dbasis/ds at local coordinate s
   //===========================================================================
@@ -303,12 +317,14 @@ namespace oomph
     div_q_basis_ds(1) =
       Sign_edge[0] * std::sqrt(2.0) * (2.0 * g1 - 3.0 * s[1]) / (g1 - g2);
 
+
     g1_vect = edge_flux_interpolation_point(1, 0);
     g2_vect = edge_flux_interpolation_point(1, 1);
     g1 = g1_vect[0];
     g2 = g2_vect[0];
     div_q_basis_ds(2) = Sign_edge[1] * (2.0 * g1 - 3.0 * s[1]) / (g1 - g2);
     div_q_basis_ds(3) = Sign_edge[1] * (3.0 * s[1] - 2.0 * g2) / (g1 - g2);
+
 
     g1_vect = edge_flux_interpolation_point(2, 0);
     g2_vect = edge_flux_interpolation_point(2, 1);
@@ -374,6 +390,7 @@ namespace oomph
     p_basis(2) = s[1];
   }
 
+
   //===========================================================================
   /// Recovery order for Z2 error estimator
   //===========================================================================
@@ -391,6 +408,7 @@ namespace oomph
   const unsigned TRaviartThomasDarcyElement<1>::Initial_Nvalue[6] = {
     0, 0, 0, 2, 2, 2};
 
+
   //===========================================================================
   ///  Face index associated with edge flux degree of freedom
   //===========================================================================
@@ -406,12 +424,14 @@ namespace oomph
   template<>
   const unsigned TRaviartThomasDarcyElement<1>::Q_edge_conv[3] = {3, 4, 5};
 
+
   //===========================================================================
   /// The points along each edge where the fluxes are taken to be
   //===========================================================================
   template<>
   const double TRaviartThomasDarcyElement<1>::Flux_interpolation_point[2] = {
     0.5 - std::sqrt(3.0) / 6.0, 0.5 + std::sqrt(3.0) / 6.0};
+
 
   //===========================================================================
   // Force building of templates

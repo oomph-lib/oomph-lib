@@ -155,6 +155,7 @@ namespace oomph
     /// n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
+
     /// Output with default number of plot points
     void output(FILE* file_pt)
     {
@@ -204,6 +205,7 @@ namespace oomph
       return Source_fct_pt;
     }
 
+
     /// \short Get source term at continous time t and (Eulerian) position x.
     /// Virtual so it can be overloaded in derived multiphysics elements.
     inline void get_source_lin_wave(const double& t,
@@ -222,6 +224,7 @@ namespace oomph
         (*Source_fct_pt)(t, x, source);
       }
     }
+
 
     /// Get flux: flux[i] = du/dx_i
     void get_flux(const Vector<double>& s, Vector<double>& flux) const
@@ -256,6 +259,7 @@ namespace oomph
       }
     }
 
+
     /// Compute element residual Vector (wrapper)
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -265,6 +269,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
+
     /// Compute element residual Vector and element Jacobian matrix (wrapper)
     virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                   DenseMatrix<double>& jacobian)
@@ -272,6 +277,7 @@ namespace oomph
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_lin_wave(residuals, jacobian, 1);
     }
+
 
     /// Return FE representation of function value u(s) at local coordinate s
     inline double interpolated_u_lin_wave(const Vector<double>& s) const
@@ -299,6 +305,7 @@ namespace oomph
 
       return (interpolated_u);
     }
+
 
     /// Return FE representation of function value u(s) at local coordinate s
     inline double interpolated_du_dt_lin_wave(const Vector<double>& s) const
@@ -348,8 +355,10 @@ namespace oomph
       return (interpolated_d2u_dt2);
     }
 
+
     /// \short Self-test: Return 0 for OK
     unsigned self_test();
+
 
   protected:
     /// \short Shape/test functions and derivs w.r.t. to global coords at
@@ -375,13 +384,16 @@ namespace oomph
     virtual void fill_in_generic_residual_contribution_lin_wave(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
+
     /// Pointer to source function:
     LinearWaveSourceFctPt Source_fct_pt;
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// QLinearWaveElement elements are linear/quadrilateral/brick-shaped
@@ -392,14 +404,14 @@ namespace oomph
   ///
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class QLinearWaveElement :
-    public virtual QElement<DIM, NNODE_1D>,
-    public virtual LinearWaveEquations<DIM>
+  class QLinearWaveElement : public virtual QElement<DIM, NNODE_1D>,
+                             public virtual LinearWaveEquations<DIM>
   {
   private:
     /// \short Static array of ints to hold number of variables at
     /// nodes: Initial_Nvalue[n]
     static const unsigned Initial_Nvalue[];
+
 
   public:
     ///\short  Constructor: Call constructors for QElement and
@@ -413,6 +425,7 @@ namespace oomph
     {
       BrokenCopy::broken_copy("QLinearWaveElement");
     }
+
 
     /// Broken assignment operator
     void operator=(const QLinearWaveElement<DIM, NNODE_1D>&)
@@ -455,6 +468,7 @@ namespace oomph
       LinearWaveEquations<DIM>::output(file_pt, n_plot);
     }
 
+
     /// \short Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     void output_fct(std::ostream& outfile,
@@ -463,6 +477,7 @@ namespace oomph
     {
       LinearWaveEquations<DIM>::output_fct(outfile, n_plot, exact_soln_pt);
     }
+
 
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
@@ -476,6 +491,7 @@ namespace oomph
         outfile, n_plot, time, exact_soln_pt);
     }
 
+
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
@@ -484,6 +500,7 @@ namespace oomph
                                                      DShape& dpsidx,
                                                      Shape& test,
                                                      DShape& dtestdx) const;
+
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
@@ -496,6 +513,7 @@ namespace oomph
   };
 
   // Inline functions:
+
 
   //======================================================================
   /// Define the shape functions and test functions and derivatives
@@ -555,9 +573,11 @@ namespace oomph
     return J;
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the QLinearWaveElement elements: The spatial
@@ -566,8 +586,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<QLinearWaveElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<QLinearWaveElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -579,12 +599,13 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the 1D QLinearWaveElement elements: Point elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<QLinearWaveElement<1, NNODE_1D>> :
-    public virtual PointElement
+  class FaceGeometry<QLinearWaveElement<1, NNODE_1D>>
+    : public virtual PointElement
   {
   public:
     /// \short Constructor: Call the constructor for the

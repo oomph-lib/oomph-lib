@@ -42,6 +42,7 @@
 // oomph headers
 #include "linear_algebra_distribution.h"
 
+
 namespace oomph
 {
   class CRDoubleMatrix;
@@ -63,8 +64,8 @@ namespace oomph
     /// distribution. Additionally every entry can be set (with argument v -
     /// defaults to 0).
     DoubleVector(const LinearAlgebraDistribution* const& dist_pt,
-                 const double& v = 0.0) :
-      Values_pt(0), Internal_values(true), Built(false)
+                 const double& v = 0.0)
+      : Values_pt(0), Internal_values(true), Built(false)
     {
       this->build(dist_pt, v);
     }
@@ -72,8 +73,8 @@ namespace oomph
     /// \short Constructor. Assembles a DoubleVector with a prescribed
     /// distribution. Additionally every entry can be set (with argument v -
     /// defaults to 0).
-    DoubleVector(const LinearAlgebraDistribution& dist, const double& v = 0.0) :
-      Values_pt(0), Internal_values(true), Built(false)
+    DoubleVector(const LinearAlgebraDistribution& dist, const double& v = 0.0)
+      : Values_pt(0), Internal_values(true), Built(false)
     {
       this->build(dist, v);
     }
@@ -86,11 +87,11 @@ namespace oomph
     }
 
     /// Copy constructor
-    DoubleVector(const DoubleVector& new_vector) :
-      DistributableLinearAlgebraObject(),
-      Values_pt(0),
-      Internal_values(true),
-      Built(false)
+    DoubleVector(const DoubleVector& new_vector)
+      : DistributableLinearAlgebraObject(),
+        Values_pt(0),
+        Internal_values(true),
+        Built(false)
     {
       this->build(new_vector);
     }

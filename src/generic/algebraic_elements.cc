@@ -27,6 +27,7 @@
 #include "algebraic_elements.h"
 #include "refineable_quad_element.h"
 
+
 namespace oomph
 {
   ///////////////////////////////////////////////////////////////////////
@@ -34,6 +35,7 @@ namespace oomph
   // Base class for Algebraic Elements
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Set up node update info for (newly created) algebraic node: Work out its
@@ -82,6 +84,7 @@ namespace oomph
         shared_ids.push_back(it->first);
       }
     }
+
 
     // How many update functions we have?
     unsigned n_update_id = shared_ids.size();
@@ -145,6 +148,7 @@ namespace oomph
         // Get mesh that implements the update operation
         AlgebraicMesh* mesh_pt = father_node_pt->mesh_pt(id);
 
+
         // Setup node update info for node
         alg_node_pt->add_node_update_info(id, // id
                                           mesh_pt, // mesh
@@ -163,11 +167,13 @@ namespace oomph
     alg_node_pt->node_update(update_all_time_levels_for_new_node);
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // Algebraic nodes
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Assign default value for test if different
@@ -176,11 +182,13 @@ namespace oomph
   double AlgebraicNode::Max_allowed_difference_between_node_update_fcts =
     1.0e-10;
 
+
   //========================================================================
   /// Default (negative!) remesh fct id for nodes for which no remesh
   /// fct is defined
   //========================================================================
   int AlgebraicNode::Dummy_node_update_fct_id = -100;
+
 
   //======================================================================
   /// Set the dummy mesh
@@ -193,6 +201,7 @@ namespace oomph
   //========================================================================
   AlgebraicMesh* AlgebraicNode::Dummy_mesh_pt = &AlgebraicNode::Dummy_mesh;
 
+
   //========================================================================
   /// Zero-sized default dummy vector of geom objects to point to for nodes
   /// for which no remesh fct is defined
@@ -204,6 +213,7 @@ namespace oomph
   /// to point to for nodes  for which no remesh fct is defined
   //========================================================================
   Vector<double> AlgebraicNode::Dummy_ref_value;
+
 
   //========================================================================
   /// Excute the node update function: Update the current (and if
@@ -278,6 +288,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Perform self test: If the node has multiple update functions,
   /// check that all update functions give the same result (with a tolerance of
@@ -318,6 +329,7 @@ namespace oomph
       Vector<int> id;
       node_update_fct_id(id);
 
+
       // Quick consistency check
 #ifdef PARANOID
       if (id.size() != nnode_update)
@@ -329,6 +341,7 @@ namespace oomph
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 #endif
+
 
       // Update with first update function
 
@@ -343,6 +356,7 @@ namespace oomph
       {
         x_0[i] = x(i);
       }
+
 
       // Loop over all other update functions
       for (unsigned iupdate = 1; iupdate < nnode_update; iupdate++)
@@ -381,6 +395,7 @@ namespace oomph
           passed = false;
         }
       }
+
 
       // Update again with first update function to reset
 

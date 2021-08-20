@@ -127,6 +127,7 @@ namespace oomph
                                              DenseMatrix<double> const& C,
                                              DenseMatrix<double>& product);
 
+
     /// \short Return an unsigned integer to indicate whether the
     /// handler is a bifurcation tracking handler. The default
     /// is zero (not)
@@ -167,6 +168,7 @@ namespace oomph
     /// \short Empty virtual destructor
     virtual ~AssemblyHandler() {}
   };
+
 
   //=============================================================
   /// \short A class that is used to define the functions used to
@@ -209,6 +211,7 @@ namespace oomph
     /// \short Empty virtual destructor
     ~ExplicitTimeStepHandler() {}
   };
+
 
   //=============================================================
   /// \short A class that is used to define the functions used to
@@ -254,6 +257,7 @@ namespace oomph
     ~EigenProblemHandler() {}
   };
 
+
   //=============================================================
   /// \short A class that is used to assemble the residuals in
   /// parallel by overloading the get_all_vectors_and_matrices,
@@ -268,8 +272,8 @@ namespace oomph
 
   public:
     /// Constructor, set the original assembly handler
-    ParallelResidualsHandler(AssemblyHandler* const& assembly_handler_pt) :
-      Assembly_handler_pt(assembly_handler_pt)
+    ParallelResidualsHandler(AssemblyHandler* const& assembly_handler_pt)
+      : Assembly_handler_pt(assembly_handler_pt)
     {
     }
 
@@ -296,6 +300,7 @@ namespace oomph
       Assembly_handler_pt->get_residuals(elem_pt, residuals);
     }
 
+
     /// \short Use underlying AssemblyHandler to
     /// Calculate the elemental Jacobian matrix "d equation
     /// / d variable" for elem_pt.
@@ -305,6 +310,7 @@ namespace oomph
     {
       Assembly_handler_pt->get_jacobian(elem_pt, residuals, jacobian);
     }
+
 
     /// \short Calculate all desired vectors and matrices
     /// provided by the element elem_pt
@@ -320,6 +326,7 @@ namespace oomph
     /// \short Empty virtual destructor
     ~ParallelResidualsHandler() {}
   };
+
 
   //==========================================================================
   /// \short A class that is used to define the functions used when assembling
@@ -339,8 +346,8 @@ namespace oomph
   public:
     /// Store the original assembly handler and parameter
     ParameterDerivativeHandler(AssemblyHandler* const& assembly_handler_pt,
-                               double* const& parameter_pt) :
-      Parameter_pt(parameter_pt), Assembly_handler_pt(assembly_handler_pt)
+                               double* const& parameter_pt)
+      : Parameter_pt(parameter_pt), Assembly_handler_pt(assembly_handler_pt)
     {
     }
 
@@ -368,6 +375,7 @@ namespace oomph
         elem_pt, Parameter_pt, residuals);
     }
 
+
     /// \short Calculate the elemental Jacobian matrix "d equation
     /// / d variable" for elem_pt.
     /// Overloaded to return the derivatives wrt the parameter
@@ -379,6 +387,7 @@ namespace oomph
         elem_pt, Parameter_pt, residuals, jacobian);
     }
   };
+
 
   //========================================================================
   /// A custom linear solver class that is used to solve a block-factorised
@@ -400,8 +409,8 @@ namespace oomph
 
   public:
     /// Constructor, inherits the original linear solver
-    AugmentedBlockFoldLinearSolver(LinearSolver* const linear_solver_pt) :
-      Linear_solver_pt(linear_solver_pt), Problem_pt(0), Alpha_pt(0), E_pt(0)
+    AugmentedBlockFoldLinearSolver(LinearSolver* const linear_solver_pt)
+      : Linear_solver_pt(linear_solver_pt), Problem_pt(0), Alpha_pt(0), E_pt(0)
     {
     }
 
@@ -444,6 +453,7 @@ namespace oomph
       return Linear_solver_pt;
     }
   };
+
 
   //===================================================================
   /// A class that is used to assemble the augmented system that defines
@@ -508,6 +518,7 @@ namespace oomph
     /// fold handler must be constructed
     FoldHandler(Problem* const& problem_pt, double* const& parameter_pt);
 
+
     /// Constructor in which initial eigenvector can be passed
     FoldHandler(Problem* const& problem_pt,
                 double* const& parameter_pt,
@@ -519,6 +530,7 @@ namespace oomph
                 double* const& parameter_pt,
                 const DoubleVector& eigenvector,
                 const DoubleVector& normalisation);
+
 
     /// \short Destructor, return the problem to its original state
     /// before the augmented system was added
@@ -588,6 +600,7 @@ namespace oomph
     void solve_full_system();
   };
 
+
   //========================================================================
   /// A custom linear solver class that is used to solve a block-factorised
   /// version of the PitchFork bifurcation detection problem.
@@ -615,13 +628,13 @@ namespace oomph
 
   public:
     /// Constructor, inherits the original linear solver
-    BlockPitchForkLinearSolver(LinearSolver* const linear_solver_pt) :
-      Linear_solver_pt(linear_solver_pt),
-      Problem_pt(0),
-      B_pt(0),
-      C_pt(0),
-      D_pt(0),
-      dJy_dparam_pt(0)
+    BlockPitchForkLinearSolver(LinearSolver* const linear_solver_pt)
+      : Linear_solver_pt(linear_solver_pt),
+        Problem_pt(0),
+        B_pt(0),
+        C_pt(0),
+        D_pt(0),
+        dJy_dparam_pt(0)
     {
     }
 
@@ -655,6 +668,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
+
     /// The resolve function also uses the block factorisation
     void resolve(const DoubleVector& rhs, DoubleVector& result);
 
@@ -664,6 +678,7 @@ namespace oomph
       return Linear_solver_pt;
     }
   };
+
 
   //========================================================================
   /// A custom linear solver class that is used to solve a block-factorised
@@ -685,8 +700,8 @@ namespace oomph
 
   public:
     /// Constructor, inherits the original linear solver
-    AugmentedBlockPitchForkLinearSolver(LinearSolver* const linear_solver_pt) :
-      Linear_solver_pt(linear_solver_pt), Problem_pt(0), Alpha_pt(0), E_pt(0)
+    AugmentedBlockPitchForkLinearSolver(LinearSolver* const linear_solver_pt)
+      : Linear_solver_pt(linear_solver_pt), Problem_pt(0), Alpha_pt(0), E_pt(0)
     {
     }
 
@@ -719,6 +734,7 @@ namespace oomph
         OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
     }
+
 
     /// The resolve function also uses the block factorisation
     void resolve(const DoubleVector& rhs, DoubleVector& result);
@@ -895,6 +911,7 @@ namespace oomph
                                      DenseMatrix<double> const& C,
                                      DenseMatrix<double>& product);
 
+
     ///\short Indicate that we are tracking a pitchfork
     /// bifurcation by returning 2
     int bifurcation_type() const
@@ -918,6 +935,7 @@ namespace oomph
     /// required during the solution
     void synchronise();
 #endif
+
 
     /// \short Set to solve the augmented block system
     void solve_augmented_block_system();
@@ -952,12 +970,12 @@ namespace oomph
 
   public:
     /// Constructor, inherits the original linear solver
-    BlockHopfLinearSolver(LinearSolver* const linear_solver_pt) :
-      Linear_solver_pt(linear_solver_pt),
-      Problem_pt(0),
-      A_pt(0),
-      E_pt(0),
-      G_pt(0)
+    BlockHopfLinearSolver(LinearSolver* const linear_solver_pt)
+      : Linear_solver_pt(linear_solver_pt),
+        Problem_pt(0),
+        A_pt(0),
+        E_pt(0),
+        G_pt(0)
     {
     }
 
@@ -997,6 +1015,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
+
     /// The resolve function also uses the block factorisation
     void resolve(const DoubleVector& rhs, DoubleVector& result);
 
@@ -1006,6 +1025,7 @@ namespace oomph
       return Linear_solver_pt;
     }
   };
+
 
   //===============================================================
   /// A class that is used to assemble the augmented system that defines
@@ -1151,6 +1171,7 @@ namespace oomph
     /// \short Solve non-block system
     void solve_full_system();
   };
+
 
 } // namespace oomph
 #endif

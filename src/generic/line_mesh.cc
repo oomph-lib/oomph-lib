@@ -235,6 +235,7 @@ namespace oomph
       }
     } // End of if(doc)
 
+
     // Lookup scheme has now been set up
     Lookup_for_elements_next_boundary_is_setup = true;
 

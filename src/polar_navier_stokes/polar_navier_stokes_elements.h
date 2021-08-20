@@ -96,6 +96,7 @@
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 
+
 namespace oomph
 {
   //=====================================================================
@@ -200,6 +201,7 @@ namespace oomph
     virtual void pshape_pnst(const Vector<double>& s,
                              Shape& psi,
                              Shape& test) const = 0;
+
 
     /// Calculate the body force at a given time and Eulerian position
     void get_body_force(double time,
@@ -476,6 +478,7 @@ namespace oomph
       get_traction(s, N, load);
     }
 
+
     /// \short Output functionget_vels(const Vector<double>& x_to_get,
     /// Vector<double>& vels): x,y,[z],u,v,[w],p in tecplot format. Default
     /// number of plot points
@@ -514,6 +517,7 @@ namespace oomph
     /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
     /// in tecplot format. nplot points in each coordinate direction
     void full_output(std::ostream& outfile, const unsigned& nplot);
+
 
     /// \short Output function: x,y,[z],u,v,[w] in tecplot format.
     /// nplot points in each coordinate direction at timestep t
@@ -757,14 +761,14 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
 
+
   //==========================================================================
   /// Crouzeix_Raviart elements are Navier--Stokes elements with quadratic
   /// interpolation for velocities and positions, but a discontinuous linear
   /// pressure interpolation
   //==========================================================================
-  class PolarCrouzeixRaviartElement :
-    public virtual QElement<2, 3>,
-    public virtual PolarNavierStokesEquations
+  class PolarCrouzeixRaviartElement : public virtual QElement<2, 3>,
+                                      public virtual PolarNavierStokesEquations
   {
   private:
     /// Static array of ints to hold required number of variables at nodes
@@ -809,8 +813,8 @@ namespace oomph
 
   public:
     /// Constructor, there are DIM+1 internal values (for the pressure)
-    PolarCrouzeixRaviartElement() :
-      QElement<2, 3>(), PolarNavierStokesEquations()
+    PolarCrouzeixRaviartElement()
+      : QElement<2, 3>(), PolarNavierStokesEquations()
     {
       // Allocate and add one Internal data object that stores 3 pressure
       // values;
@@ -875,6 +879,7 @@ namespace oomph
       PolarNavierStokesEquations::output(outfile, Nplot);
     }
 
+
     /// Redirect output to NavierStokesEquations output
     void output(FILE* file_pt)
     {
@@ -886,6 +891,7 @@ namespace oomph
     {
       PolarNavierStokesEquations::output(file_pt, Nplot);
     }
+
 
     /// \short Full output function:
     /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
@@ -932,6 +938,7 @@ namespace oomph
     // Return the jacobian
     return J;
   }
+
 
   //=======================================================================
   /// 2D
@@ -987,8 +994,8 @@ namespace oomph
   /// Face geometry of the 2D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<PolarCrouzeixRaviartElement> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<PolarCrouzeixRaviartElement>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
@@ -1002,9 +1009,8 @@ namespace oomph
   /// with quadratic interpolation for velocities and positions and
   /// continous linear pressure interpolation
   //=======================================================================
-  class PolarTaylorHoodElement :
-    public virtual QElement<2, 3>,
-    public virtual PolarNavierStokesEquations
+  class PolarTaylorHoodElement : public virtual QElement<2, 3>,
+                                 public virtual PolarNavierStokesEquations
   {
   private:
     /// Static array of ints to hold number of variables at node
@@ -1107,6 +1113,7 @@ namespace oomph
         p_value;
     }
 
+
     /// \short Add to the set paired_load_data
     /// pairs of pointers to data objects and unsigned integers that
     /// index the values in the data object that affect the load (traction),
@@ -1167,6 +1174,7 @@ namespace oomph
     return J;
   }
 
+
   //==========================================================================
   /// 2D :
   /// Derivatives of the shape functions and test functions w.r.t to
@@ -1194,6 +1202,7 @@ namespace oomph
     return J;
   }
 
+
   //==========================================================================
   /// 2D :
   /// Pressure shape functions
@@ -1219,6 +1228,7 @@ namespace oomph
       }
     }
   }
+
 
   //==========================================================================
   /// 2D :

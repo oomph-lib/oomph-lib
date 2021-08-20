@@ -113,6 +113,7 @@ namespace oomph
 #ifdef PARANOID
     // paranoid check that the distribution works
 
+
     // check that none of the processors partition overlap
     for (int p = 0; p < nproc; p++)
     {
@@ -259,6 +260,7 @@ namespace oomph
       Nrow = new_dist.nrow();
     }
   }
+
 
   //============================================================================
   /// operator==

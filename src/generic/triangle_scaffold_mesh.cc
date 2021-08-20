@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "triangle_scaffold_mesh.h"
 
+
 namespace oomph
 {
   //=====================================================================
@@ -299,6 +300,7 @@ namespace oomph
       }
     } // end
 
+
     // Determine highest boundary index
     // --------------------------------
     unsigned n_bound = 0;
@@ -341,6 +343,7 @@ namespace oomph
 
     // Boundary markers flag
     poly_file >> boundary_markers_flag;
+
 
     // Ignore node information: Note: No, we can't extract the
     // actual nodes themselves from here!
@@ -469,6 +472,7 @@ namespace oomph
     {
       this->set_nboundary(n_bound);
     }
+
 
     // Create the elements
     //--------------------
@@ -773,6 +777,7 @@ namespace oomph
       }
     }
 
+
     // Now extract the segment information
     //------------------------------------
 
@@ -841,6 +846,7 @@ namespace oomph
     {
       set_nboundary(n_bound);
     }
+
 
     // Create the elements
     //--------------------
@@ -954,6 +960,7 @@ namespace oomph
             OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
         }
+
 
         // If the element's edge is not already allocated, the intersection
         // will be empty

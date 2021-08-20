@@ -36,6 +36,7 @@
 #include "generic/error_estimator.h"
 #include "generic/projection.h"
 
+
 namespace oomph
 {
   //=========================================================================
@@ -44,9 +45,9 @@ namespace oomph
   /// equations (using Raviart-Thomas elements with both edge and internal
   /// degrees of freedom) including inertia in both.
   //=========================================================================
-  class AxisymmetricPoroelasticityEquations :
-    public virtual FiniteElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class AxisymmetricPoroelasticityEquations
+    : public virtual FiniteElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// Source function pointer typedef
@@ -60,19 +61,19 @@ namespace oomph
                                     double& f);
 
     /// Constructor
-    AxisymmetricPoroelasticityEquations() :
-      Solid_body_force_fct_pt(0),
-      Fluid_body_force_fct_pt(0),
-      Mass_source_fct_pt(0),
-      Youngs_modulus_pt(&Default_youngs_modulus_value),
-      Nu_pt(0),
-      Lambda_sq_pt(&Default_lambda_sq_value),
-      Density_ratio_pt(&Default_density_ratio_value),
-      Permeability_pt(&Default_permeability_value),
-      Permeability_ratio_pt(&Default_permeability_ratio_value),
-      Alpha_pt(&Default_alpha_value),
-      Porosity_pt(&Default_porosity_value),
-      Darcy_is_switched_off(false)
+    AxisymmetricPoroelasticityEquations()
+      : Solid_body_force_fct_pt(0),
+        Fluid_body_force_fct_pt(0),
+        Mass_source_fct_pt(0),
+        Youngs_modulus_pt(&Default_youngs_modulus_value),
+        Nu_pt(0),
+        Lambda_sq_pt(&Default_lambda_sq_value),
+        Density_ratio_pt(&Default_density_ratio_value),
+        Permeability_pt(&Default_permeability_value),
+        Permeability_ratio_pt(&Default_permeability_ratio_value),
+        Alpha_pt(&Default_alpha_value),
+        Porosity_pt(&Default_porosity_value),
+        Darcy_is_switched_off(false)
     {
     }
 
@@ -148,6 +149,7 @@ namespace oomph
     {
       return Permeability_pt;
     }
+
 
     /// \short Access function for the ratio of the material's actual
     /// permeability to the permeability used in the non-dimensionalisation of
@@ -470,6 +472,7 @@ namespace oomph
       this->fill_in_generic_residual_contribution(residuals, jacobian, 1);
     }
 
+
     /// Calculate the FE representation of the divergence of the
     /// skeleton velocity, div(du/dt), and its
     /// components: 1/r diff(r*du_r/dt,r) and diff(du_z/dt,z).
@@ -516,6 +519,7 @@ namespace oomph
       // Return sum
       return div_dudt_components[0] + div_dudt_components[1];
     }
+
 
     /// Calculate the FE representation of the divergence of the
     /// skeleton displ, div(u), and its
@@ -566,6 +570,7 @@ namespace oomph
       // Return sum
       return div_u_components[0] + div_u_components[1];
     }
+
 
     /// Calculate the FE representation of u
     void interpolated_u(const Vector<double>& s, Vector<double>& disp) const
@@ -622,6 +627,7 @@ namespace oomph
       return (interpolated_u);
     }
 
+
     /// \short Calculate the FE representation of the i-th component of u
     /// at time level t (t=0: current)
     double interpolated_u(const unsigned& t,
@@ -651,6 +657,7 @@ namespace oomph
 
       return (interpolated_u);
     }
+
 
     /// Calculate the FE representation of du_dt
     void interpolated_du_dt(const Vector<double>& s,
@@ -770,6 +777,7 @@ namespace oomph
       return q_i;
     }
 
+
     /// Calculate the FE representation of div u
     void interpolated_div_q(const Vector<double>& s, double& div_q) const
     {
@@ -820,6 +828,7 @@ namespace oomph
         div_q += interpolated_q(s, 0) / interpolated_x(s, 0);
       }
     }
+
 
     /// Calculate the FE representation of div q and return it
     double interpolated_div_q(const Vector<double>& s) const
@@ -994,11 +1003,13 @@ namespace oomph
       this->internal_data_pt(q_index)->set_time_stepper(time_stepper_pt, false);
     }
 
+
     /// Is Darcy flow switched off?
     bool darcy_is_switched_off()
     {
       return Darcy_is_switched_off;
     }
+
 
     /// Switch off Darcy flow
     void switch_off_darcy()
@@ -1034,6 +1045,7 @@ namespace oomph
     {
       return 0;
     }
+
 
     /// \short Number of scalars/fields output by this element. Reimplements
     /// broken virtual function in base class.
@@ -1204,6 +1216,7 @@ namespace oomph
       data.push_back(div_u_components[1]);
     }
 
+
     /// Output with default number of plot points
     void output(std::ostream& outfile)
     {
@@ -1248,6 +1261,7 @@ namespace oomph
                        const double& time,
                        Vector<double>& error,
                        Vector<double>& norm);
+
 
     // Z2 stuff -- currently based on Darcy flux
 
@@ -1369,17 +1383,19 @@ namespace oomph
     static double Default_porosity_value;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //==========================================================
   /// Axisymmetric poro elasticity upgraded to become projectable
   //==========================================================
   template<class AXISYMMETRIC_POROELASTICITY_ELEMENT>
-  class ProjectableAxisymmetricPoroelasticityElement :
-    public virtual ProjectableElement<AXISYMMETRIC_POROELASTICITY_ELEMENT>,
-    public virtual ProjectableElementBase
+  class ProjectableAxisymmetricPoroelasticityElement
+    : public virtual ProjectableElement<AXISYMMETRIC_POROELASTICITY_ELEMENT>,
+      public virtual ProjectableElementBase
   {
   public:
     /// \short Constructor [this was only required explicitly
@@ -1405,6 +1421,7 @@ namespace oomph
 
       // Create the vector
       Vector<std::pair<Data*, unsigned>> data_values;
+
 
       // Pressure
       //---------
@@ -1487,8 +1504,7 @@ namespace oomph
       unsigned return_value = this->node_pt(0)->ntstorage();
 
       // Pressure: No history values (just present one!)
-      if (fld == 2)
-        return_value = 1;
+      if (fld == 2) return_value = 1;
 
       // Flux: infer from first midside node
       if (fld == 3)
@@ -1522,6 +1538,7 @@ namespace oomph
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 #endif
+
 
       // Get the number of geometric nodes, total number of basis functions,
       // and number of edges basis functions
@@ -1587,6 +1604,7 @@ namespace oomph
       return J;
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -1638,6 +1656,7 @@ namespace oomph
       return return_value;
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
@@ -1672,6 +1691,7 @@ namespace oomph
 
       return return_value;
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -1718,11 +1738,13 @@ namespace oomph
       return return_value;
     }
 
+
     /// \short Output FE representation of soln as in underlying element
     void output(std::ostream& outfile, const unsigned& nplot)
     {
       AXISYMMETRIC_POROELASTICITY_ELEMENT::output(outfile, nplot);
     }
+
 
     /// \short Residual for the projection step. Flag indicates if we
     /// want the Jacobian (1) or not (0). Virtual so it can be
@@ -2069,6 +2091,7 @@ namespace oomph
                 OOMPH_EXCEPTION_LOCATION);
             }
 
+
             break;
 
             default:
@@ -2084,21 +2107,24 @@ namespace oomph
     } // End of residual_for_projection function
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableAxisymmetricPoroelasticityElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableAxisymmetricPoroelasticityElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
 } // namespace oomph
 

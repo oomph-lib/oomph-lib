@@ -83,6 +83,7 @@ namespace oomph
           master_node_pt = hang_info_pt->master_node_pt(imaster);
         }
 
+
         // Find the number of data
         const unsigned n_geom_data = master_node_pt->ngeom_data();
         // If there are geometric data add them to the set
@@ -187,6 +188,7 @@ namespace oomph
       data_pt->describe_dofs(out, in);
     }
   }
+
 
   //==================================================================
   /// Assign local equation numbers for the geometric data associated
@@ -310,6 +312,7 @@ namespace oomph
     }
   }
 
+
   //==================================================================
   /// Calculate the node-update--related entries in the
   /// Jacobian. The vector passed
@@ -326,8 +329,7 @@ namespace oomph
       const unsigned n_geometric_data = ngeom_data();
 
       // If there is nothing to be done, then leave
-      if (n_geometric_data == 0)
-        return;
+      if (n_geometric_data == 0) return;
 
       // Number of dofs
       const unsigned n_dof = this->ndof();
@@ -336,8 +338,7 @@ namespace oomph
       unsigned n_nod = this->nnode();
 
       // If there are no dofs, return
-      if (n_nod == 0)
-        return;
+      if (n_nod == 0) return;
 
       // Get nodal dimension from first node
       const unsigned dim_nod = node_pt(0)->ndim();
@@ -527,6 +528,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// \short Compute derivatives of the nodal coordinates w.r.t.
   /// to the geometric dofs. Default implementation by FD can be overwritten
@@ -549,8 +551,7 @@ namespace oomph
     const unsigned n_nod = nnode();
 
     // If the element has no nodes (why??!!) return straightaway
-    if (n_nod == 0)
-      return;
+    if (n_nod == 0) return;
 
     // Get dimension from first node
     unsigned dim_nod = node_pt(0)->ndim();
@@ -607,6 +608,7 @@ namespace oomph
         pos(i, node_number) = nod_pt->position(i);
       }
     }
+
 
     // Integer storage for the local unknown
     int local_unknown = 0;

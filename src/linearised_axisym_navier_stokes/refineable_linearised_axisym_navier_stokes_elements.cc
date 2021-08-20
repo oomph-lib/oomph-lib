@@ -1064,6 +1064,7 @@ namespace oomph
                                    interpolated_uz * dpsifdz) *
                                   testf_ * W * hang_weight * hang_weight2;
 
+
                                 // Mesh velocity terms
                                 if (!ALE_is_disabled)
                                 {
@@ -1192,6 +1193,7 @@ namespace oomph
                                    psif_ * interpolated_duzdz +
                                    interpolated_uz * dpsifdz) *
                                   testf_ * W * hang_weight * hang_weight2;
+
 
                                 // Mesh velocity terms
                                 if (!ALE_is_disabled)
@@ -1500,6 +1502,7 @@ namespace oomph
                     } // End of loop over velocity components
                   } // End of loop over master (m2) nodes
                 } // End of loop over the velocity nodes (l2)
+
 
                 // Loop over the pressure shape functions
                 for (unsigned l2 = 0; l2 < n_pres; l2++)

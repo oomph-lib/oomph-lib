@@ -27,6 +27,6 @@ EXTRA_DIST += linearised_axisym_navier_stokes_elements.h \
  linearised_axisymmetric_fluid_interface_elements.cc \
  multi_domain_linearised_axisym_navier_stokes_elements.h \
  perturbed_spines.h perturbed_spines.cc \
- two_layer_perturbed_spine_mesh.template.h \
- two_layer_perturbed_spine_mesh.template.cc 
+ two_layer_perturbed_spine_mesh.h \
+ two_layer_perturbed_spine_mesh.tpp 
 

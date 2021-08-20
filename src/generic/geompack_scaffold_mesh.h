@@ -51,6 +51,7 @@ namespace oomph
       BrokenCopy::broken_copy("GeompackQuadScaffoldMesh");
     }
 
+
     /// Broken assignment operator
     void operator=(const GeompackQuadScaffoldMesh&)
     {
@@ -59,6 +60,7 @@ namespace oomph
 
     /// Empty destructor
     ~GeompackQuadScaffoldMesh() {}
+
 
   }; // end class
 

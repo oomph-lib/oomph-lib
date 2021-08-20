@@ -40,9 +40,8 @@ namespace oomph
   /// boundaries where we would like to impose impenetrability.
   //========================================================================
   template<class ELEMENT>
-  class ImposeImpenetrabilityElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class ImposeImpenetrabilityElement : public virtual FaceGeometry<ELEMENT>,
+                                       public virtual FaceElement
   {
   private:
     /// Lagrange Id
@@ -55,8 +54,8 @@ namespace oomph
     /// to be attached to, and the face element ID
     ImposeImpenetrabilityElement(FiniteElement* const& element_pt,
                                  const int& face_index,
-                                 const unsigned& id = 0) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+                                 const unsigned& id = 0)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       //  set the Id
       Id = id;
@@ -72,6 +71,7 @@ namespace oomph
       // additional values.
       add_additional_values(n_additional_values, id);
     }
+
 
     /// Fill in the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -283,6 +283,7 @@ namespace oomph
       }
     }
 
+
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Just the solid degrees of freedom themselves.
     unsigned ndof_types() const
@@ -293,6 +294,7 @@ namespace oomph
 
       return (1 + additional_ndof_types());
     }
+
 
     unsigned additional_ndof_types() const
     {

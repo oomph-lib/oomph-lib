@@ -27,6 +27,7 @@
 #include "map_matrix.h"
 #include "quad_mesh.h"
 
+
 namespace oomph
 {
   //================================================================
@@ -36,8 +37,7 @@ namespace oomph
   void QuadMeshBase::setup_boundary_element_info(std::ostream& outfile)
   {
     bool doc = false;
-    if (outfile)
-      doc = true;
+    if (outfile) doc = true;
 
     // Number of boundaries
     unsigned nbound = nboundary();
@@ -56,6 +56,7 @@ namespace oomph
     // Matrix map for working out the fixed local coord for elements on boundary
     MapMatrixMixed<unsigned, FiniteElement*, Vector<int>*> boundary_identifier;
 
+
     // Loop over elements
     //-------------------
     unsigned nel = nelement();
@@ -64,8 +65,7 @@ namespace oomph
       // Get pointer to element
       FiniteElement* fe_pt = finite_element_pt(e);
 
-      if (doc)
-        outfile << "Element: " << e << " " << fe_pt << std::endl;
+      if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
 
       // Only include 2D elements! Some meshes contain interface elements too.
       if (fe_pt->dim() == 2)
@@ -301,6 +301,7 @@ namespace oomph
       }
     }
 
+
     // Doc?
     //-----
     if (doc)
@@ -322,6 +323,7 @@ namespace oomph
         }
       }
     }
+
 
     // Lookup scheme has now been setup
     Lookup_for_elements_next_boundary_is_setup = true;

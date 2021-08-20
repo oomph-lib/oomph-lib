@@ -47,6 +47,7 @@
 #include "biharmonic_elements.h"
 #include "biharmonic_flux_elements.h"
 
+
 namespace oomph
 {
   //=============================================================================
@@ -69,6 +70,7 @@ namespace oomph
     /// scheme and returns the value of the boundary condition at that point
     /// (u).
     typedef void (*DirichletBCFctPt)(const double& s, double& u);
+
 
     /// \short Definition of the Source Function.
     typedef void (*BiharmonicSourceFctPt)(const Vector<double>& x, double& f);
@@ -142,6 +144,7 @@ namespace oomph
       //   build_global_mesh();
     }
 
+
     /// \short
     void build_global_mesh_and_assign_eqn_numbers()
     {
@@ -200,6 +203,7 @@ namespace oomph
     Mesh* Face_element_mesh_pt;
   };
 
+
   //=============================================================================
   /// \short Biharmonic Fluid Problem Class - describes stokes flow in 2D.
   /// Developed for the topologically rectangular Hermite Element Mesh. Contains
@@ -226,12 +230,14 @@ namespace oomph
     /// (u[1]).
     typedef void (*FluidBCFctPt)(const double& s, Vector<double>& u);
 
+
     /// constructor
     BiharmonicFluidProblem()
     {
       // initialise the number of non bulk elements
       Npoint_element = 0;
     }
+
 
     /// actions before solve, performs self test
     void actions_before_newton_solve()
@@ -248,14 +254,17 @@ namespace oomph
 #endif
     }
 
+
     /// action after solve
     void actions_after_newton_solve() {}
+
 
     /// \short documents the solution, and if an exact solution is provided,
     /// then the error between the numerical and exact solution is presented
     void doc_solution(
       DocInfo& doc_info,
       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt = 0);
+
 
   protected:
     /// \short Imposes a solid boundary on boundary b - no flow into boundary
@@ -274,16 +283,19 @@ namespace oomph
     /// BiharmonicFluidBoundaryElement
     void impose_traction_free_edge(const unsigned& b);
 
+
     /// \short Impose a prescribed fluid flow comprising the velocity normal to
     /// the boundary (u_imposed_fn[0]) and the velocity tangential to the
     /// boundary (u_imposed_fn[1])
     void impose_fluid_flow_on_edge(const unsigned& b,
                                    FluidBCFctPt u_imposed_fn);
 
+
   private:
     // number of non-bulk elements - i.e. biharmonic fluid boundary elements
     unsigned Npoint_element;
   };
+
 
   //=============================================================================
   /// \short Point equation element used to impose the traction free edge (i.e.
@@ -311,17 +323,22 @@ namespace oomph
     /// Output function -- does nothing
     void output(std::ostream& outfile) {}
 
+
     /// \short Output function -- does nothing
     void output(std::ostream& outfile, const unsigned& n_plot) {}
+
 
     /// \short Output function -- does nothing
     void output_fluid_velocity(std::ostream& outfile, const unsigned& n_plot) {}
 
+
     /// C-style output function -- does nothing
     void output(FILE* file_pt) {}
 
+
     /// \short C-style output function -- does nothing
     void output(FILE* file_pt, const unsigned& n_plot) {}
+
 
     /// compute_error -- does nothing
     void compute_error(std::ostream& outfile,
@@ -330,6 +347,7 @@ namespace oomph
                        double& norm)
     {
     }
+
 
     /// \short Compute the elemental residual vector - wrapper function called
     /// by get_residuals in GeneralisedElement
@@ -343,6 +361,7 @@ namespace oomph
         residuals, dummy, 0);
     }
 
+
     /// \short Compute the elemental residual vector and jacobian matrix -
     /// wrapper function called by get_jacobian in GeneralisedElement
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -352,6 +371,7 @@ namespace oomph
       fill_in_generic_residual_contribution_biharmonic_boundary(
         residuals, jacobian, 1);
     }
+
 
     /// \short Computes the elemental residual vector and the elemental jacobian
     /// matrix if JFLAG = 0
@@ -363,6 +383,7 @@ namespace oomph
     // fixed local coordinate index on boundary
     unsigned S_fixed_index;
   };
+
 
 } // namespace oomph
 #endif

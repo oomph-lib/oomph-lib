@@ -37,6 +37,7 @@ namespace oomph
   /// Default Diffusion coefficient
   double AxisymAdvectionDiffusionEquations::Default_diffusion_parameter = 1.0;
 
+
   //======================================================================
   /// \short Compute element residual Vector and/or element Jacobian matrix
   ///
@@ -130,10 +131,12 @@ namespace oomph
         }
       }
 
+
       // Get source function
       //-------------------
       double source;
       get_source_axi_adv_diff(ipt, interpolated_x, source);
+
 
       // Get wind three potential components
       //---------------------------------------
@@ -230,8 +233,10 @@ namespace oomph
         }
       }
 
+
     } // End of loop over integration points
   }
+
 
   //======================================================================
   /// Self-test:  Return 0 for OK
@@ -257,6 +262,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// \short Output function:
@@ -308,6 +314,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// C-style output function:
@@ -396,6 +403,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// \short Validate against exact solution
   ///
@@ -474,6 +482,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   // Set the data for the number of Variables at each node
   //======================================================================
@@ -487,5 +496,6 @@ namespace oomph
   template class QAxisymAdvectionDiffusionElement<2>;
   template class QAxisymAdvectionDiffusionElement<3>;
   template class QAxisymAdvectionDiffusionElement<4>;
+
 
 } // namespace oomph

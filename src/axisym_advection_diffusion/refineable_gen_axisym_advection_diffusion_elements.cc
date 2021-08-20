@@ -128,9 +128,11 @@ namespace oomph
         }
       }
 
+
       // Get body force
       double source;
       this->get_source_cons_axisym_adv_diff(ipt, interpolated_x, source);
+
 
       // Get wind
       //--------
@@ -327,6 +329,7 @@ namespace oomph
 
     } // End of loop over integration points
   }
+
 
   //====================================================================
   // Force build of templates

@@ -41,6 +41,7 @@ namespace oomph
   template<>
   double EulerEquations<3>::Default_Gamma_Value = 1.4;
 
+
   //======================================================
   /// Calculate the pressure value from the unknowns
   //=====================================================
@@ -64,6 +65,7 @@ namespace oomph
     // return the pressure
     return p;
   }
+
 
   //=========================================================
   /// \short Return the flux as a function of the unknowns
@@ -101,6 +103,7 @@ namespace oomph
       f(2 + i, i) += p;
     }
   }
+
 
   //====================================================================
   /// Output function, print the values of all unknowns
@@ -155,6 +158,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// \short Return the flux derivatives as a function of the unknowns

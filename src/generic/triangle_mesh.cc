@@ -79,6 +79,7 @@ namespace oomph
 #endif // #ifdef OOMPH_HAS_MPI
   }
 
+
   //==============================================================
   /// Regenerate the mesh from a dumped triangulateio file
   /// and dumped boundary coordinates of boundary nodes
@@ -122,6 +123,7 @@ namespace oomph
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 #endif
+
 
       // Loop over all boundary nodes and read boundary coordinates
       // if they exist
@@ -208,6 +210,7 @@ namespace oomph
 #endif // #ifdef OOMPH_HAS_MPI
   }
 
+
   //==============================================================
   /// Write a Triangulateio_object file of the TriangulateIO object
   /// String s is add to assign a different value for
@@ -280,6 +283,7 @@ namespace oomph
                << triangle.pointlist[j + 1] << std::endl;
     }
     nodefile.close();
+
 
     // Write segments edge elements
     if (triangle.numberofsegments != 0)
@@ -398,8 +402,7 @@ namespace oomph
     // Should we document the output here
     bool doc = false;
 
-    if (outfile)
-      doc = true;
+    if (outfile) doc = true;
 
     // Number of boundaries
     unsigned nbound = nboundary();
@@ -575,6 +578,7 @@ namespace oomph
           }
         }
 
+
 #ifdef PARANOID
 
         // Check if edge is associated with multiple boundaries
@@ -671,6 +675,7 @@ namespace oomph
       }
 
     } // End of "adding-boundaries"-loop
+
 
     // Now copy everything across into permanent arrays
     //-------------------------------------------------

@@ -40,6 +40,7 @@ namespace oomph
   template<unsigned NNODE_1D>
   Gauss<1, NNODE_1D> QElement<1, NNODE_1D>::Default_integration_scheme;
 
+
   //==================================================================
   /// Return the node at the specified local coordinate
   //==================================================================
@@ -92,6 +93,7 @@ namespace oomph
     // If we've got here we have a node, so let's return a pointer to it
     return node_pt(index[0]);
   }
+
 
   //=======================================================================
   /// Shape function for specific QElement<1,..>
@@ -202,6 +204,7 @@ namespace oomph
     outfile << std::endl;
   }
 
+
   //=======================================================================
   /// C style output function for general 1D QElements
   //=======================================================================
@@ -245,6 +248,7 @@ namespace oomph
     fprintf(file_pt, "\n");
   }
 
+
   ////////////////////////////////////////////////////////////////
   //       2D Qelements
   ////////////////////////////////////////////////////////////////
@@ -252,6 +256,7 @@ namespace oomph
   /// Assign the spatial integration scheme
   template<unsigned NNODE_1D>
   Gauss<2, NNODE_1D> QElement<2, NNODE_1D>::Default_integration_scheme;
+
 
   //==================================================================
   /// Return the node at the specified local coordinate
@@ -305,6 +310,7 @@ namespace oomph
     // If we've got here we have a node, so let's return a pointer to it
     return node_pt(index[0] + NNODE_1D * index[1]);
   }
+
 
   //=======================================================================
   /// Shape function for specific QElement<2,..>
@@ -369,6 +375,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Second derivatives of shape functions for specific  QElement<2,..>:
   /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
@@ -417,6 +424,7 @@ namespace oomph
     }
   }
 
+
   //===========================================================
   /// The output function for QElement<2,NNODE_1D>
   //===========================================================
@@ -460,6 +468,7 @@ namespace oomph
     }
     outfile << std::endl;
   }
+
 
   //===========================================================
   /// C-style output function for QElement<2,NNODE_1D>
@@ -507,6 +516,7 @@ namespace oomph
     // outfile << std::endl;
     fprintf(file_pt, "\n");
   }
+
 
   ////////////////////////////////////////////////////////////////
   //       3D Qelements
@@ -569,6 +579,7 @@ namespace oomph
                    NNODE_1D * NNODE_1D * index[2]);
   }
 
+
   //=======================================================================
   /// Shape function for specific QElement<3,..>
   //=======================================================================
@@ -624,6 +635,7 @@ namespace oomph
     OneDimLagrange::dshape<NNODE_1D>(s[0], DPsi[0]);
     OneDimLagrange::dshape<NNODE_1D>(s[1], DPsi[1]);
     OneDimLagrange::dshape<NNODE_1D>(s[2], DPsi[2]);
+
 
     // Loop over shape functions in element
     for (unsigned i = 0; i < NNODE_1D; i++)
@@ -757,6 +769,7 @@ namespace oomph
     outfile << std::endl;
   }
 
+
   //===========================================================
   /// C-style output function for QElement<3,NNODE_1D>
   //===========================================================
@@ -803,6 +816,7 @@ namespace oomph
     }
     fprintf(file_pt, "\n");
   }
+
 
   //===================================================================
   // Build required templates

@@ -27,11 +27,13 @@
 // Non-inline functions for Womersley elements
 #include "womersley_elements.h"
 
+
 namespace oomph
 {
   /// Default Womersley number
   template<unsigned DIM>
   double WomersleyEquations<DIM>::Default_ReSt_value = 0.0;
+
 
   //========================================================================
   /// Instantiation of static bool to suppress warning; initialise to false.
@@ -39,16 +41,19 @@ namespace oomph
   bool TemplateFreeWomersleyMeshBase::Suppress_warning_about_unpinned_nst_dofs =
     false;
 
+
   //========================================================================
   /// Zero!
   //========================================================================
   double TemplateFreeWomersleyImpedanceTubeBase::Zero = 0.0;
+
 
   //======================================================================
   // Set the data for the number of Variables at each node
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   const unsigned QWomersleyElement<DIM, NNODE_1D>::Initial_Nvalue = 1;
+
 
   //======================================================================
   /// Compute element residual Vector and/or element Jacobian matrix
@@ -134,6 +139,7 @@ namespace oomph
         dpdz = Pressure_gradient_data_pt->value(0);
       }
 
+
       // Assemble residuals and Jacobian
       //--------------------------------
 
@@ -152,6 +158,7 @@ namespace oomph
           {
             residuals[local_eqn] += interpolated_dudx[k] * dtestdx(l, k) * W;
           }
+
 
           // Calculate the jacobian
           //-----------------------
@@ -200,8 +207,10 @@ namespace oomph
         }
       }
 
+
     } // End of loop over integration points
   }
+
 
   //======================================================================
   /// Compute volume flux through element
@@ -264,6 +273,7 @@ namespace oomph
     return flux;
   }
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -288,6 +298,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// Output function:  x,y,z_out,0,0,u,0 to allow comparison
@@ -359,6 +370,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// C-style output function:
   ///
@@ -392,6 +404,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution
@@ -444,6 +457,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// Output exact solution at time t
   ///
@@ -465,6 +479,7 @@ namespace oomph
 
     // Vector for coordintes
     Vector<double> x(DIM);
+
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -496,6 +511,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Validate against exact solution
@@ -575,6 +591,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Validate against exact solution at time t.
   ///
@@ -600,6 +617,7 @@ namespace oomph
 
     // Vector for coordintes
     Vector<double> x(DIM);
+
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -654,6 +672,7 @@ namespace oomph
       error += (exact_soln[0] - u_fe) * (exact_soln[0] - u_fe) * W;
     }
   }
+
 
   //====================================================================
   // Force build of templates

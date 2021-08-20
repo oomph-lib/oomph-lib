@@ -34,12 +34,12 @@ namespace oomph
   //=================================================================
   ExtrudedDomain::ExtrudedDomain(Domain* domain_pt,
                                  const unsigned& n_extruded_element,
-                                 const double& extrusion_length) :
-    Domain(),
-    Domain_pt(domain_pt),
-    N_extruded_element(n_extruded_element),
-    T_min(0.0),
-    T_max(extrusion_length)
+                                 const double& extrusion_length)
+    : Domain(),
+      Domain_pt(domain_pt),
+      N_extruded_element(n_extruded_element),
+      T_min(0.0),
+      T_max(extrusion_length)
   {
     // The number of macro elements to create in the extruded domain
     unsigned n_macro_element =
@@ -62,12 +62,12 @@ namespace oomph
   ExtrudedDomain::ExtrudedDomain(Domain* domain_pt,
                                  const unsigned& n_extruded_element,
                                  const double& t_min,
-                                 const double& t_max) :
-    Domain(),
-    Domain_pt(domain_pt),
-    N_extruded_element(n_extruded_element),
-    T_min(t_min),
-    T_max(t_max)
+                                 const double& t_max)
+    : Domain(),
+      Domain_pt(domain_pt),
+      N_extruded_element(n_extruded_element),
+      T_min(t_min),
+      T_max(t_max)
   {
     // The number of macro elements to create in the extruded domain
     unsigned n_macro_element =

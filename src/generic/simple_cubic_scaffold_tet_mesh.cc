@@ -26,6 +26,7 @@
 #include "Telements.h"
 #include "simple_cubic_scaffold_tet_mesh.h"
 
+
 namespace oomph
 {
   //===========================================================
@@ -70,6 +71,7 @@ namespace oomph
 
     // Six boundaries
     set_nboundary(6);
+
 
     // Generate the vertex nodes of all cells
     //=======================================
@@ -142,6 +144,7 @@ namespace oomph
       }
     }
 
+
     // Generate the face nodes of all cells
     //=====================================
     for (unsigned k = 0; k < n_z + 1; k++)
@@ -162,6 +165,7 @@ namespace oomph
             node_pt = new Node(3, 1, 0);
           }
           front_face_node_pt(i, j, k) = node_pt;
+
 
           // Coordinates
           node_pt->x(0) = x_0 + 0.5 * dx + double(i) * dx;
@@ -204,6 +208,7 @@ namespace oomph
           node_pt->x(1) = y_0 + 0.5 * dy + double(j) * dy;
           node_pt->x(2) = z_0 + 0.5 * dz + double(k) * dz;
 
+
           // Real node?
           if ((j < n_y) && (k < n_z))
           {
@@ -239,6 +244,7 @@ namespace oomph
           node_pt->x(1) = y_0 + 0.5 * dy + double(j) * dy;
           node_pt->x(2) = z_0 + double(k) * dz;
 
+
           // Real node?
           if ((i < n_x) && (j < n_y))
           {
@@ -260,6 +266,7 @@ namespace oomph
       }
     }
 
+
     // Central nodes for all cells
     for (unsigned k = 0; k < n_z; k++)
     {
@@ -276,6 +283,7 @@ namespace oomph
         }
       }
     }
+
 
     // Loop over blocks and create elements
     TElement<3, 2>* el_pt = 0;
@@ -306,6 +314,7 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Down element on front face
           //---------------------------
           el_pt = new TElement<3, 2>;
@@ -323,6 +332,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // Right element on front face
           //---------------------------
@@ -342,6 +352,7 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Up element on front face
           //---------------------------
           el_pt = new TElement<3, 2>;
@@ -359,6 +370,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // RIGHT FACE
           //===========
@@ -381,6 +393,7 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Down element on right face
           //---------------------------
           el_pt = new TElement<3, 2>;
@@ -398,6 +411,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // Back element on right face
           //---------------------------
@@ -417,6 +431,7 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Up element on right face
           //---------------------------
           el_pt = new TElement<3, 2>;
@@ -434,6 +449,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // UP FACE
           //===========
@@ -456,6 +472,7 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Front element on up face
           //---------------------------
           el_pt = new TElement<3, 2>;
@@ -473,6 +490,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // Back element on up face
           //---------------------------
@@ -492,9 +510,11 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Left element on up face
           //---------------------------
           el_pt = new TElement<3, 2>;
+
 
           // LBU
           el_pt->node_pt(0) = vertex_node_pt(i, j + 1, k + 1);
@@ -509,6 +529,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // DOWN FACE
           //===========
@@ -531,6 +552,7 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Front element on down face
           //---------------------------
           el_pt = new TElement<3, 2>;
@@ -548,6 +570,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // Back element on down face
           //---------------------------
@@ -567,9 +590,11 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Left element on down face
           //---------------------------
           el_pt = new TElement<3, 2>;
+
 
           // LBD
           el_pt->node_pt(0) = vertex_node_pt(i, j + 1, k);
@@ -584,6 +609,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // BACK FACE
           //===========
@@ -606,6 +632,7 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Down element on back face
           //---------------------------
           el_pt = new TElement<3, 2>;
@@ -623,6 +650,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // Right element on back face
           //---------------------------
@@ -642,6 +670,7 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Up element on back face
           //---------------------------
           el_pt = new TElement<3, 2>;
@@ -659,6 +688,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // LEFT FACE
           //===========
@@ -681,6 +711,7 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Down element on left face
           //---------------------------
           el_pt = new TElement<3, 2>;
@@ -699,6 +730,7 @@ namespace oomph
 
           Element_pt.push_back(el_pt);
 
+
           // Back element on left face
           //---------------------------
           el_pt = new TElement<3, 2>;
@@ -716,6 +748,7 @@ namespace oomph
           el_pt->node_pt(3) = central_node_pt(i, j, k);
 
           Element_pt.push_back(el_pt);
+
 
           // Up element on left face
           //---------------------------
@@ -750,6 +783,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     if (Element_pt.size() != nelem)
     {
       std::ostringstream error_stream;
@@ -772,5 +806,6 @@ namespace oomph
     //    finite_element_pt(e)->node_pt(1)=node_pt;
     //   }
   }
+
 
 } // namespace oomph

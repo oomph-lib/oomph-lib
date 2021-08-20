@@ -34,6 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 
@@ -73,6 +74,7 @@ namespace oomph
 
   } // namespace PoroelasticityFaceElementHelper
 
+
   //======================================================================
   /// A class for elements that allow the imposition of an applied pressure
   /// in the Darcy equations.
@@ -81,9 +83,8 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class ELEMENT>
-  class PoroelasticityFaceElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class PoroelasticityFaceElement : public virtual FaceGeometry<ELEMENT>,
+                                    public virtual FaceElement
   {
   protected:
     /// pointer to the bulk element this face element is attached to
@@ -106,6 +107,7 @@ namespace oomph
                             const Vector<double>& x,
                             const Vector<double>& n,
                             double& result);
+
 
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Eulerlian coordinate and normal vector and return the pressure
@@ -135,6 +137,7 @@ namespace oomph
       Pressure_fct_pt(time, x, n, pressure);
     }
 
+
     /// \short Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
@@ -142,12 +145,13 @@ namespace oomph
     void fill_in_contribution_to_residuals_darcy_face(
       Vector<double>& residuals);
 
+
   public:
     /// \short Constructor, which takes a "bulk" element and the value of the
     /// index and its limit
     PoroelasticityFaceElement(FiniteElement* const& element_pt,
-                              const int& face_index) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+                              const int& face_index)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
 #ifdef PARANOID
       {
@@ -183,6 +187,7 @@ namespace oomph
       Pressure_fct_pt = &PoroelasticityFaceElementHelper::Zero_pressure_fct;
     }
 
+
     /// Reference to the traction function pointer
     void (*&traction_fct_pt())(const double& time,
                                const Vector<double>& x,
@@ -201,11 +206,13 @@ namespace oomph
       return Pressure_fct_pt;
     }
 
+
     /// Return the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_darcy_face(residuals);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -250,6 +257,7 @@ namespace oomph
     {
       FiniteElement::output(file_pt, n_plot);
     }
+
 
     /// \short Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
@@ -322,6 +330,7 @@ namespace oomph
     // Pressure value
     get_pressure(time, ipt, x, unit_normal, pressure);
   }
+
 
   //=====================================================================
   /// Return the residuals for the PoroelasticityFaceElement equations

@@ -29,6 +29,7 @@
 #ifndef OOMPH_SPINES_HEADER
 #define OOMPH_SPINES_HEADER
 
+
 #include <string>
 
 // oomph-lib headers
@@ -113,8 +114,8 @@ namespace oomph
     /// for this Spine
     Spine(const double& height,
           const Vector<Data*>& geom_data_pt,
-          const Vector<GeomObject*>& geom_object_pt) :
-      Geom_object_pt(geom_object_pt)
+          const Vector<GeomObject*>& geom_object_pt)
+      : Geom_object_pt(geom_object_pt)
     {
       // Find the number of geometric data passed
       const unsigned n_geom_data = geom_data_pt.size();
@@ -133,6 +134,7 @@ namespace oomph
       }
     }
 
+
     /// \short Destructor: Wipe Data object that stores the
     /// Spine height. All other objects (geometric Data and
     /// geometric objects) were created outside the Spine
@@ -142,6 +144,7 @@ namespace oomph
       // Kill spine height
       delete Geom_data_pt[0];
     }
+
 
     /// Access function to spine height
     double& height()
@@ -161,6 +164,7 @@ namespace oomph
     {
       return Geom_data_pt[0];
     }
+
 
     /// \short Number of geometric Data that is involved in the
     /// node update operations for this Spine
@@ -292,6 +296,7 @@ namespace oomph
       return Geom_parameter[i];
     }
 
+
   private:
     /// Data that stores the spine height
     // Data* Spine_height_pt;
@@ -307,8 +312,10 @@ namespace oomph
     Vector<double> Geom_parameter;
   };
 
+
   // Forward declaration
   class SpineMesh;
+
 
   //=====================================================================
   /// Class for nodes that live on spines. The assumption is that each Node
@@ -334,16 +341,17 @@ namespace oomph
     /// are multiple node update functions, e.g. in two-layer problems.
     unsigned Node_update_fct_id;
 
+
   public:
     /// Steady Constructor, initialise pointers to zero
     SpineNode(const unsigned& n_dim,
               const unsigned& n_position_type,
-              const unsigned& initial_nvalue) :
-      Node(n_dim, n_position_type, initial_nvalue),
-      Spine_pt(0),
-      Fraction(0),
-      Spine_mesh_pt(0),
-      Node_update_fct_id(0)
+              const unsigned& initial_nvalue)
+      : Node(n_dim, n_position_type, initial_nvalue),
+        Spine_pt(0),
+        Fraction(0),
+        Spine_mesh_pt(0),
+        Node_update_fct_id(0)
     {
     }
 
@@ -351,12 +359,12 @@ namespace oomph
     SpineNode(TimeStepper* const& time_stepper_pt,
               const unsigned& n_dim,
               const unsigned& n_position_type,
-              const unsigned& initial_nvalue) :
-      Node(time_stepper_pt, n_dim, n_position_type, initial_nvalue),
-      Spine_pt(0),
-      Fraction(0),
-      Spine_mesh_pt(0),
-      Node_update_fct_id(0)
+              const unsigned& initial_nvalue)
+      : Node(time_stepper_pt, n_dim, n_position_type, initial_nvalue),
+        Spine_pt(0),
+        Fraction(0),
+        Spine_mesh_pt(0),
+        Node_update_fct_id(0)
     {
     }
 
@@ -434,9 +442,11 @@ namespace oomph
     }
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// \short A policy class that serves only to establish the interface for
@@ -452,6 +462,7 @@ namespace oomph
     virtual ~SpineFiniteElement() {}
   };
 
+
   //========================================================================
   /// \short The SpineElement<ELEMENT> class takes an existing element as a
   /// template parameter and adds the necessary additional functionality to
@@ -460,9 +471,9 @@ namespace oomph
   /// numbers associated with the spines are added to the element.
   //========================================================================
   template<class ELEMENT>
-  class SpineElement :
-    public ElementWithSpecificMovingNodes<ELEMENT, SpineNode>,
-    public SpineFiniteElement
+  class SpineElement
+    : public ElementWithSpecificMovingNodes<ELEMENT, SpineNode>,
+      public SpineFiniteElement
   {
   private:
     /// \short Array to hold the index of the geometric data associated with
@@ -477,21 +488,22 @@ namespace oomph
     /// are accounted for.
     void complete_setup_of_dependencies();
 
+
   public:
     /// Constructor, call the constructor of the base element
-    SpineElement() :
-      ElementWithSpecificMovingNodes<ELEMENT, SpineNode>(),
-      SpineFiniteElement(),
-      Spine_geometric_index(0)
+    SpineElement()
+      : ElementWithSpecificMovingNodes<ELEMENT, SpineNode>(),
+        SpineFiniteElement(),
+        Spine_geometric_index(0)
     {
     }
 
     /// Constructor used for spine face elements
-    SpineElement(FiniteElement* const& element_pt, const int& face_index) :
-      ElementWithSpecificMovingNodes<ELEMENT, SpineNode>(element_pt,
-                                                         face_index),
-      SpineFiniteElement(),
-      Spine_geometric_index(0)
+    SpineElement(FiniteElement* const& element_pt, const int& face_index)
+      : ElementWithSpecificMovingNodes<ELEMENT, SpineNode>(element_pt,
+                                                           face_index),
+        SpineFiniteElement(),
+        Spine_geometric_index(0)
     {
     }
 
@@ -544,8 +556,8 @@ namespace oomph
   /// The same as the face geometry of the underlying element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<SpineElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<SpineElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     /// Constructor
@@ -559,8 +571,8 @@ namespace oomph
   /// The same as the face geometry of the underlying element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<FaceGeometry<SpineElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  class FaceGeometry<FaceGeometry<SpineElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     /// Constructor
@@ -574,8 +586,8 @@ namespace oomph
   /// The same as the face geometry of the underlying element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<SpineElement<FaceGeometry<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  class FaceGeometry<SpineElement<FaceGeometry<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     /// Constructor
@@ -584,9 +596,11 @@ namespace oomph
   protected:
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// General SpineMesh class.
@@ -720,6 +734,7 @@ namespace oomph
     void set_consistent_pinned_spine_values_for_continuation(
       ContinuationStorageScheme* const& continuation_stepper_pt);
 
+
     /// \short Check whether the pointer parameter_pt addresses data stored
     /// in the spines
     bool does_pointer_correspond_to_spine_data(double* const& parameter_pt);
@@ -751,11 +766,13 @@ namespace oomph
     void read(std::ifstream& restart_file);
   };
 
+
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   // Functions for the SpineElement class
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+
 
   //=================================================================
   /// Construct and fill the node_update_data vector

@@ -34,6 +34,7 @@ namespace oomph
   /// Default value for Peclet number
   double SphericalAdvectionDiffusionEquations::Default_peclet_number = 0.0;
 
+
   //======================================================================
   /// \short Compute element residual Vector and/or element Jacobian matrix
   ///
@@ -120,6 +121,7 @@ namespace oomph
       double source;
       get_source_spherical_adv_diff(ipt, interpolated_x, source);
 
+
       // Get wind
       //--------
       Vector<double> wind(3);
@@ -158,6 +160,7 @@ namespace oomph
              (sin_th * interpolated_dudx[1] *
               (r * scaled_peclet * wind[1] * test(l) + dtestdx(l, 1)))) *
             W;
+
 
           // Calculate the jacobian
           //-----------------------
@@ -199,8 +202,10 @@ namespace oomph
         }
       }
 
+
     } // End of loop over integration points
   }
+
 
   //======================================================================
   /// Self-test:  Return 0 for OK
@@ -226,6 +231,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// \short Output function:
@@ -279,6 +285,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// C-style output function:
@@ -371,6 +378,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// \short Validate against exact solution
   ///
@@ -449,6 +457,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   // Set the data for the number of Variables at each node
   //======================================================================
@@ -463,5 +472,6 @@ namespace oomph
   template class QSphericalAdvectionDiffusionElement<2>;
   template class QSphericalAdvectionDiffusionElement<3>;
   template class QSphericalAdvectionDiffusionElement<4>;
+
 
 } // namespace oomph

@@ -46,9 +46,9 @@ namespace oomph
   /// therefore, not optimal for higher dimensions.
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class QSpectralPoissonElement :
-    public virtual QSpectralElement<DIM, NNODE_1D>,
-    public virtual PoissonEquations<DIM>
+  class QSpectralPoissonElement
+    : public virtual QSpectralElement<DIM, NNODE_1D>,
+      public virtual PoissonEquations<DIM>
   {
   private:
     /// \short Static array of ints to hold number of variables at
@@ -58,8 +58,8 @@ namespace oomph
   public:
     ///\short  Constructor: Call constructors for QSpectralElement and
     /// Poisson equations
-    QSpectralPoissonElement() :
-      QSpectralElement<DIM, NNODE_1D>(), PoissonEquations<DIM>()
+    QSpectralPoissonElement()
+      : QSpectralElement<DIM, NNODE_1D>(), PoissonEquations<DIM>()
     {
     }
 
@@ -101,6 +101,7 @@ namespace oomph
       PoissonEquations<DIM>::output(outfile, n_plot);
     }
 
+
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
     void output(FILE* file_pt)
@@ -108,12 +109,14 @@ namespace oomph
       PoissonEquations<DIM>::output(file_pt);
     }
 
+
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       PoissonEquations<DIM>::output(file_pt, n_plot);
     }
+
 
     /// \short Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
@@ -123,6 +126,7 @@ namespace oomph
     {
       PoissonEquations<DIM>::output_fct(outfile, n_plot, exact_soln_pt);
     }
+
 
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
@@ -135,6 +139,7 @@ namespace oomph
       PoissonEquations<DIM>::output_fct(outfile, n_plot, time, exact_soln_pt);
     }
 
+
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
@@ -143,6 +148,7 @@ namespace oomph
                                                     DShape& dpsidx,
                                                     Shape& test,
                                                     DShape& dtestdx) const;
+
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
@@ -167,7 +173,9 @@ namespace oomph
       DenseMatrix<double>& djacobian_dX) const;
   };
 
+
   // Inline functions:
+
 
   //======================================================================
   /// Define the shape functions and test functions and derivatives
@@ -264,6 +272,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the QSpectralPoissonElement elements: The spatial
   /// dimension of the face elements is one lower than that of the
@@ -271,8 +280,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<QSpectralPoissonElement<DIM, NNODE_1D>> :
-    public virtual QSpectralElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<QSpectralPoissonElement<DIM, NNODE_1D>>
+    : public virtual QSpectralElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -280,12 +289,13 @@ namespace oomph
     FaceGeometry() : QSpectralElement<DIM - 1, NNODE_1D>() {}
   };
 
+
   //=======================================================================
   /// Face geometry for the 1D QPoissonElement elements: Point elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<QSpectralPoissonElement<1, NNODE_1D>> :
-    public virtual PointElement
+  class FaceGeometry<QSpectralPoissonElement<1, NNODE_1D>>
+    : public virtual PointElement
   {
   public:
     /// \short Constructor: Call the constructor for the

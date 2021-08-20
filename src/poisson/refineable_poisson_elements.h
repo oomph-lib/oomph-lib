@@ -33,6 +33,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib headers
 #include "generic/refineable_quad_element.h"
 #include "generic/refineable_brick_element.h"
@@ -45,23 +46,23 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// Refineable version of Poisson equations
   ///
   ///
   //======================================================================
   template<unsigned DIM>
-  class RefineablePoissonEquations :
-    public virtual PoissonEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineablePoissonEquations : public virtual PoissonEquations<DIM>,
+                                     public virtual RefineableElement,
+                                     public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Constructor, simply call other constructors
-    RefineablePoissonEquations() :
-      PoissonEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineablePoissonEquations()
+      : PoissonEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
 
@@ -128,6 +129,7 @@ namespace oomph
       }
     }
 
+
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
@@ -154,6 +156,7 @@ namespace oomph
       }
     }
 
+
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
@@ -161,6 +164,7 @@ namespace oomph
                               this->father_element_pt())
                               ->source_fct_pt();
     }
+
 
   private:
     /// \short Add element's contribution to elemental residual vector and/or
@@ -180,26 +184,28 @@ namespace oomph
       RankThreeTensor<double>& dresidual_dnodal_coordinates);
   };
 
+
   //======================================================================
   /// Refineable version of 2D QPoissonElement elements
   ///
   ///
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQPoissonElement :
-    public QPoissonElement<DIM, NNODE_1D>,
-    public virtual RefineablePoissonEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQPoissonElement
+    : public QPoissonElement<DIM, NNODE_1D>,
+      public virtual RefineablePoissonEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// \short Constructor, simply call the other constructors
-    RefineableQPoissonElement() :
-      RefineableElement(),
-      RefineablePoissonEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QPoissonElement<DIM, NNODE_1D>()
+    RefineableQPoissonElement()
+      : RefineableElement(),
+        RefineablePoissonEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QPoissonElement<DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQPoissonElement(
@@ -247,22 +253,23 @@ namespace oomph
     void further_setup_hanging_nodes() {}
   };
 
+
   //======================================================================
   /// p-refineable version of 2D QPoissonElement elements
   //======================================================================
   template<unsigned DIM>
-  class PRefineableQPoissonElement :
-    public QPoissonElement<DIM, 2>,
-    public virtual RefineablePoissonEquations<DIM>,
-    public virtual PRefineableQElement<DIM>
+  class PRefineableQPoissonElement
+    : public QPoissonElement<DIM, 2>,
+      public virtual RefineablePoissonEquations<DIM>,
+      public virtual PRefineableQElement<DIM>
   {
   public:
     /// \short Constructor, simply call the other constructors
-    PRefineableQPoissonElement() :
-      RefineableElement(),
-      RefineablePoissonEquations<DIM>(),
-      PRefineableQElement<DIM>(),
-      QPoissonElement<DIM, 2>()
+    PRefineableQPoissonElement()
+      : RefineableElement(),
+        RefineablePoissonEquations<DIM>(),
+        PRefineableQElement<DIM>(),
+        QPoissonElement<DIM, 2>()
     {
       // Set integration scheme
       // (To avoid memory leaks in pre-build and p-refine where new
@@ -275,6 +282,7 @@ namespace oomph
     {
       delete this->integral_pt();
     }
+
 
     /// Broken copy constructor
     PRefineableQPoissonElement(const PRefineableQPoissonElement<DIM>& dummy)
@@ -329,9 +337,11 @@ namespace oomph
       double& norm);
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the RefineableQuadPoissonElement elements: The spatial
@@ -340,8 +350,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<RefineableQPoissonElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<RefineableQPoissonElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

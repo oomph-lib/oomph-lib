@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "refineable_spherical_navier_stokes_elements.h"
 
+
 namespace oomph
 {
   //========================================================================
@@ -80,6 +81,7 @@ namespace oomph
         pressure_dof_is_hanging[l] = false;
       }
     }
+
 
     // Set up memory for the shape and test functions
     Shape psif(n_node), testf(n_node);
@@ -388,6 +390,7 @@ namespace oomph
                          (cos_theta * u_theta + sin_theta * u_r) * r2 *
                          sin_theta * testf(l);
 
+
                   // r-derivative test function component of stress tensor
                   sum += (r2 * interpolated_dudx(2, 0) - r * u_phi) *
                          dtestfdx(l, 0) * sin_theta;
@@ -498,6 +501,7 @@ namespace oomph
                                      scaled_re * jac_conv * r) *
                                     testf(l);
 
+
                                   // Contribution from the r-derivative test
                                   // function
                                   // part of stress tensor
@@ -507,6 +511,7 @@ namespace oomph
                                   // Contribution from the theta-derivative
                                   // test function part  of stress tensor
                                   jac_sum += dpsifdx(l2, 1) * dtestfdx(l, 1);
+
 
                                   // Contribution from the undifferentiated
                                   // test function part
@@ -626,6 +631,7 @@ namespace oomph
                                     r2 * sin_theta * hang_weight * hang_weight2;
                                 }
 
+
                                 {
                                   // Contribution from the convective terms
                                   double jac_conv =
@@ -642,6 +648,7 @@ namespace oomph
                                        psif(l2) * r2 +
                                      scaled_re * r * jac_conv) *
                                     testf(l) * sin_theta;
+
 
                                   // Contribution from the r-derivative test
                                   // function
@@ -768,6 +775,7 @@ namespace oomph
                                      scaled_re * r * jac_conv) *
                                     testf(l);
 
+
                                   // Contribution from the r-derivative test
                                   // function
                                   // part of stress tensor
@@ -804,6 +812,7 @@ namespace oomph
                     }
                   }
                 } // End of loop over the nodes
+
 
                 // Loop over the pressure shape functions
                 for (unsigned l2 = 0; l2 < n_pres; l2++)
@@ -855,6 +864,7 @@ namespace oomph
                             (r2 * dtestfdx(l, 0) + 2.0 * r * testf[l]) * W *
                             sin_theta * hang_weight * hang_weight2;
 
+
                           break;
 
                           // AXIAL MOMENTUM EQUATION
@@ -879,6 +889,7 @@ namespace oomph
           } // End of loop over velocity components
         } // End of loop over master nodes
       } // End of loop over nodes
+
 
       // CONTINUITY EQUATION
       //===================
@@ -986,6 +997,7 @@ namespace oomph
                             sin_theta * testp(l) * W * hang_weight *
                             hang_weight2;
 
+
                           break;
 
                           // axial component
@@ -995,6 +1007,7 @@ namespace oomph
                             (dpsifdx(l2, 1) * sin_theta +
                              psif(l2) * cos_theta) *
                             testp(l) * W * hang_weight * hang_weight2;
+
 
                           break;
 

@@ -29,7 +29,4 @@ cmake-format:
 clang-format:
 	echo "Now starting clang-format run on src/ and demo_drivers/ folder..."
 	./scripts/run_clang_format_on_all.sh ./src
-	./scripts/run_clang_format_on_all.sh ./demo_drivers
-	./scripts/run_clang_format_on_all.sh ./user_drivers
-	./scripts/run_clang_format_on_all.sh ./user_src
 	echo "Finished running clang-format."

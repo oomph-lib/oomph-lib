@@ -52,6 +52,7 @@
 #include "Qelements.h"
 #include "element_with_external_element.h"
 
+
 namespace oomph
 {
   //======================================================================
@@ -184,6 +185,7 @@ namespace oomph
     /// setup_bulk_elements_adjacent_to_face_mesh(...)
     extern std::ofstream Doc_boundary_coordinate_file;
 
+
     // Functions for multi-domain method
 
     /// \short Identify the \c FaceElements (stored in the mesh pointed to by
@@ -202,6 +204,7 @@ namespace oomph
       Mesh* const& bulk_mesh_pt,
       Vector<Mesh*>& face_mesh_pt,
       const unsigned& interaction = 0);
+
 
     /// \short Identify the \c FaceElements (stored in the mesh pointed to by
     /// \c face_mesh_pt) that are adjacent to the bulk elements next to the
@@ -286,6 +289,7 @@ namespace oomph
                                         Mesh* const& external_face_mesh_pt,
                                         const unsigned& interaction_index = 0);
 
+
     /// \short Function to set up the one-way multi-domain interaction for
     /// FSI-like problems.
     /// - \c mesh_pt points to the mesh of \c ElemenWithExternalElements for
@@ -321,6 +325,7 @@ namespace oomph
       const Vector<Mesh*>& external_face_mesh_pt,
       const unsigned& interaction_index = 0);
 
+
     /// Auxiliary helper function
     template<class EXT_ELEMENT, class GEOM_OBJECT>
     void aux_setup_multi_domain_interaction(
@@ -348,6 +353,7 @@ namespace oomph
       Vector<MeshAsGeomObject*>& mesh_geom_obj_pt,
       const unsigned& interaction_index);
 
+
 #ifdef OOMPH_HAS_MPI
 
     /// \short Helper function to send any "missing" zeta coordinates to
@@ -362,6 +368,7 @@ namespace oomph
       Mesh* const& external_mesh_pt,
       Problem* problem_pt,
       Vector<MeshAsGeomObject*>& mesh_geom_obj_pt);
+
 
     /// \short Helper function to send back any located information
     void send_and_receive_located_info(int& iproc,
@@ -389,6 +396,7 @@ namespace oomph
                                              Mesh* const& external_mesh_pt,
                                              int& n_cont_inter_values);
 
+
     /// \short Recursively add any master nodes (and their master nodes etc)
     /// of external haloed nodes
     void recursively_add_masters_of_external_haloed_node(
@@ -397,6 +405,7 @@ namespace oomph
       Problem* problem_pt,
       Mesh* const& external_mesh_pt,
       int& n_cont_inter_values);
+
 
     /// \short Helper function to add external haloed node that is not a master
     void add_external_haloed_node_helper(int& iproc,
@@ -456,6 +465,7 @@ namespace oomph
       int& n_cont_inter_values,
       Problem* problem_pt);
 
+
     /// \short Helper function to add external halo node that is not a master
     void add_external_halo_node_helper(Node*& new_nod_pt,
                                        Mesh* const& external_mesh_pt,
@@ -473,6 +483,7 @@ namespace oomph
                                               unsigned& loc_p,
                                               int& n_cont_inter_values,
                                               Problem* problem_pt);
+
 
     /// \short Helper function which constructs a new external halo node
     /// (on an element) with the information sent from the haloed process
@@ -508,6 +519,7 @@ namespace oomph
     void clean_up();
 
   } // namespace Multi_domain_functions
+
 
 } // namespace oomph
 

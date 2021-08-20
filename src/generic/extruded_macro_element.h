@@ -66,14 +66,15 @@ namespace oomph
     /// To avoid a compiler error a null pointer is passed to the base class
     /// MacroElement.
     ExtrudedMacroElement(ExtrudedDomain* extruded_domain_pt,
-                         unsigned macro_element_number) :
-      MacroElement(0, macro_element_number),
-      Extruded_domain_pt(extruded_domain_pt)
+                         unsigned macro_element_number)
+      : MacroElement(0, macro_element_number),
+        Extruded_domain_pt(extruded_domain_pt)
     {
 #ifdef LEAK_CHECK
       LeakCheckNames::ExtrudedMacroElement_build += 1;
 #endif
     } // End of ExtrudedMacroElement
+
 
     /// Default constructor (empty and broken)
     ExtrudedMacroElement()
@@ -85,17 +86,20 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     } // End of ExtrudedMacroElement
 
+
     /// Broken copy constructor
     ExtrudedMacroElement(const ExtrudedMacroElement& dummy)
     {
       BrokenCopy::broken_copy("ExtrudedMacroElement");
     } // End of ExtrudedMacroElement
 
+
     /// Broken assignment operator
     void operator=(const ExtrudedMacroElement&)
     {
       BrokenCopy::broken_assign("ExtrudedMacroElement");
     } // End of ExtrudedMacroElement
+
 
     /// Empty destructor
     virtual ~ExtrudedMacroElement()
@@ -104,6 +108,7 @@ namespace oomph
       LeakCheckNames::ExtrudedMacroElement_build -= 1;
 #endif
     } // End of ~ExtrudedMacroElement
+
 
     /// \short Access function to the ExtrudedDomain
     ExtrudedDomain*& extruded_domain_pt()
@@ -150,9 +155,9 @@ namespace oomph
     /// \short Constructor: Pass the pointer to the domain and the ID
     /// number of this extruded macro element
     QExtrudedMacroElement(ExtrudedDomain* domain_pt,
-                          const unsigned& macro_element_number) :
-      MacroElement(0, macro_element_number),
-      ExtrudedMacroElement(domain_pt, macro_element_number)
+                          const unsigned& macro_element_number)
+      : MacroElement(0, macro_element_number),
+        ExtrudedMacroElement(domain_pt, macro_element_number)
     {
     }
 
@@ -168,11 +173,13 @@ namespace oomph
         error, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     } // End of QExtrudedMacroElement
 
+
     /// Broken copy constructor
     QExtrudedMacroElement(const QExtrudedMacroElement& dummy)
     {
       BrokenCopy::broken_copy("QExtrudedMacroElement");
     } // End of QExtrudedMacroElement
+
 
     /// Broken assignment operator
     void operator=(const QExtrudedMacroElement&)
@@ -180,8 +187,10 @@ namespace oomph
       BrokenCopy::broken_assign("QExtrudedMacroElement");
     } // End of operator=
 
+
     /// Empty destructor
     virtual ~QExtrudedMacroElement(){};
+
 
     /// \short Plot: x,y,t in tecplot format
     void output(const unsigned& t, std::ostream& outfile, const unsigned& nplot)
@@ -248,10 +257,12 @@ namespace oomph
       } // for (unsigned i=0;i<nplot;i++)
     } // End of output
 
+
     /// Get the global position r(s) at the continuous time, t
     void macro_map(const unsigned& t,
                    const Vector<double>& s,
                    Vector<double>& r);
+
 
     /// \short Output all macro element boundaries as tecplot zones
     void output_macro_element_boundaries(std::ostream& outfile,

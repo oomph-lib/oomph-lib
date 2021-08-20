@@ -51,19 +51,20 @@ namespace oomph
   /// from hanging nodes (or alternatively in-compatible function values)
   /// are taken into account.
   //======================================================================
-  class RefineableSphericalAdvectionDiffusionEquations :
-    public virtual SphericalAdvectionDiffusionEquations,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableSphericalAdvectionDiffusionEquations
+    : public virtual SphericalAdvectionDiffusionEquations,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Empty Constructor
-    RefineableSphericalAdvectionDiffusionEquations() :
-      SphericalAdvectionDiffusionEquations(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableSphericalAdvectionDiffusionEquations()
+      : SphericalAdvectionDiffusionEquations(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// Broken copy constructor
     RefineableSphericalAdvectionDiffusionEquations(
@@ -91,6 +92,7 @@ namespace oomph
     {
       this->get_flux(s, flux);
     }
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
@@ -337,6 +339,7 @@ namespace oomph
       }
     }
 
+
   protected:
     /// \short Add the element's contribution to the elemental residual vector
     /// and/or Jacobian matrix
@@ -349,26 +352,28 @@ namespace oomph
       unsigned flag);
   };
 
+
   //======================================================================
   /// \short Refineable version of QSphericalAdvectionDiffusionElement.
   /// Inherit from the standard QSphericalAdvectionDiffusionElement and the
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
   template<unsigned NNODE_1D>
-  class RefineableQSphericalAdvectionDiffusionElement :
-    public QSphericalAdvectionDiffusionElement<NNODE_1D>,
-    public virtual RefineableSphericalAdvectionDiffusionEquations,
-    public virtual RefineableQElement<2>
+  class RefineableQSphericalAdvectionDiffusionElement
+    : public QSphericalAdvectionDiffusionElement<NNODE_1D>,
+      public virtual RefineableSphericalAdvectionDiffusionEquations,
+      public virtual RefineableQElement<2>
   {
   public:
     /// \short Empty Constructor:
-    RefineableQSphericalAdvectionDiffusionElement() :
-      RefineableElement(),
-      RefineableSphericalAdvectionDiffusionEquations(),
-      RefineableQElement<2>(),
-      QSphericalAdvectionDiffusionElement<NNODE_1D>()
+    RefineableQSphericalAdvectionDiffusionElement()
+      : RefineableElement(),
+        RefineableSphericalAdvectionDiffusionEquations(),
+        RefineableQElement<2>(),
+        QSphericalAdvectionDiffusionElement<NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQSphericalAdvectionDiffusionElement(
@@ -422,6 +427,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the RefineableQSphericalAdvectionDiffusionElement
   /// elements: The spatial
@@ -430,8 +436,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<RefineableQSphericalAdvectionDiffusionElement<NNODE_1D>> :
-    public virtual QElement<1, NNODE_1D>
+  class FaceGeometry<RefineableQSphericalAdvectionDiffusionElement<NNODE_1D>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

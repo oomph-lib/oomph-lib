@@ -33,16 +33,19 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib headers
 #include "generic/refineable_quad_element.h"
 #include "generic/refineable_brick_element.h"
 #include "generic/error_estimator.h"
 #include "unsteady_heat_elements.h"
 
+
 namespace oomph
 {
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Refineable version of Unsteady HEat equations
@@ -50,19 +53,20 @@ namespace oomph
   ///
   //======================================================================
   template<unsigned DIM>
-  class RefineableUnsteadyHeatEquations :
-    public virtual UnsteadyHeatEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableUnsteadyHeatEquations
+    : public virtual UnsteadyHeatEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Constructor
-    RefineableUnsteadyHeatEquations() :
-      UnsteadyHeatEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableUnsteadyHeatEquations()
+      : UnsteadyHeatEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// Broken copy constructor
     RefineableUnsteadyHeatEquations(
@@ -127,6 +131,7 @@ namespace oomph
       }
     }
 
+
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
@@ -158,6 +163,7 @@ namespace oomph
       }
     }
 
+
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
@@ -173,6 +179,7 @@ namespace oomph
       this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
     }
 
+
   private:
     /// \short Add element's contribution to elemental residual vector and/or
     /// Jacobian matrix
@@ -182,26 +189,28 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
+
   //======================================================================
   /// Refineable version of 2D QUnsteadyHeatElement elements
   ///
   ///
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQUnsteadyHeatElement :
-    public QUnsteadyHeatElement<DIM, NNODE_1D>,
-    public virtual RefineableUnsteadyHeatEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQUnsteadyHeatElement
+    : public QUnsteadyHeatElement<DIM, NNODE_1D>,
+      public virtual RefineableUnsteadyHeatEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// \short Constructor
-    RefineableQUnsteadyHeatElement() :
-      RefineableElement(),
-      RefineableUnsteadyHeatEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QUnsteadyHeatElement<DIM, NNODE_1D>()
+    RefineableQUnsteadyHeatElement()
+      : RefineableElement(),
+        RefineableUnsteadyHeatEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QUnsteadyHeatElement<DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQUnsteadyHeatElement(
@@ -252,6 +261,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the RefineableQuadUnsteadyHeatElement elements:
   /// The spatial
@@ -260,8 +270,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<RefineableQUnsteadyHeatElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<RefineableQUnsteadyHeatElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

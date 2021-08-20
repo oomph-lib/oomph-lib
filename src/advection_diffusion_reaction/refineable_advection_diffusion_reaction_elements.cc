@@ -101,6 +101,7 @@ namespace oomph
       DenseMatrix<double> interpolated_dcdx(NREAGENT, DIM, 0.0);
       Vector<double> mesh_velocity(DIM, 0.0);
 
+
       // Calculate function value and derivatives:
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
@@ -144,6 +145,7 @@ namespace oomph
       // Get source function
       Vector<double> source(NREAGENT);
       this->get_source_adv_diff_react(ipt, interpolated_x, source);
+
 
       // Get wind
       Vector<double> wind(DIM);
@@ -339,6 +341,7 @@ namespace oomph
 
     } // End of loop over integration points
   }
+
 
   //====================================================================
   // Force build of templates

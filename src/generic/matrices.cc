@@ -40,6 +40,7 @@
 #include "matrices.h"
 #include "linear_solver.h"
 
+
 namespace oomph
 {
   //============================================================================
@@ -126,6 +127,7 @@ namespace oomph
     Linear_solver_pt->solve(this, rhs, soln);
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -143,19 +145,20 @@ namespace oomph
   /// Constructor to build a square n by n matrix.
   /// Set the default linear solver to be DenseLU
   //==============================================================
-  DenseDoubleMatrix::DenseDoubleMatrix(const unsigned long& n) :
-    DenseMatrix<double>(n)
+  DenseDoubleMatrix::DenseDoubleMatrix(const unsigned long& n)
+    : DenseMatrix<double>(n)
   {
     Linear_solver_pt = Default_linear_solver_pt = new DenseLU;
   }
+
 
   //=================================================================
   /// Constructor to build a matrix with n rows and m columns.
   /// Set the default linear solver to be DenseLU
   //=================================================================
   DenseDoubleMatrix::DenseDoubleMatrix(const unsigned long& n,
-                                       const unsigned long& m) :
-    DenseMatrix<double>(n, m)
+                                       const unsigned long& m)
+    : DenseMatrix<double>(n, m)
   {
     Linear_solver_pt = Default_linear_solver_pt = new DenseLU;
   }
@@ -167,8 +170,8 @@ namespace oomph
   //=====================================================================
   DenseDoubleMatrix::DenseDoubleMatrix(const unsigned long& n,
                                        const unsigned long& m,
-                                       const double& initial_val) :
-    DenseMatrix<double>(n, m, initial_val)
+                                       const double& initial_val)
+    : DenseMatrix<double>(n, m, initial_val)
   {
     Linear_solver_pt = Default_linear_solver_pt = new DenseLU;
   }
@@ -192,6 +195,7 @@ namespace oomph
     static_cast<DenseLU*>(Default_linear_solver_pt)->factorise(this);
   }
 
+
   //============================================================================
   ///  Back substitute an LU decomposed matrix.
   //============================================================================
@@ -209,6 +213,7 @@ namespace oomph
     // Use the default (DenseLU) solver to perform the backsubstitution
     static_cast<DenseLU*>(Default_linear_solver_pt)->backsub(rhs, rhs);
   }
+
 
   //============================================================================
   ///  Determine eigenvalues and eigenvectors, using
@@ -281,6 +286,7 @@ namespace oomph
       }
     }
   }
+
 
   //============================================================================
   ///  Multiply the matrix by the vector x: soln=Ax
@@ -371,6 +377,7 @@ namespace oomph
       }
     }
   }
+
 
   //=================================================================
   /// Multiply the transposed matrix by the vector x: soln=A^T x
@@ -463,6 +470,7 @@ namespace oomph
     }
   }
 
+
   //=================================================================
   /// For every row, find the maximum absolute value of the
   /// entries in this row. Set all values that are less than alpha times
@@ -505,6 +513,7 @@ namespace oomph
       }
     }
   }
+
 
   //=============================================================================
   /// Function to multiply this matrix by the DenseDoubleMatrix  matrix_in.
@@ -550,9 +559,11 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// \short Default constructor, set the default linear solver and
@@ -575,8 +586,8 @@ namespace oomph
                                  const Vector<int>& row_index,
                                  const Vector<int>& column_start,
                                  const unsigned long& n,
-                                 const unsigned long& m) :
-    CCMatrix<double>(value, row_index, column_start, n, m)
+                                 const unsigned long& m)
+    : CCMatrix<double>(value, row_index, column_start, n, m)
   {
     Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
     Matrix_matrix_multiply_method = 2;
@@ -587,6 +598,7 @@ namespace oomph
   {
     delete Default_linear_solver_pt;
   }
+
 
   //===================================================================
   /// Perform LU decomposition. Return the sign of the determinant
@@ -696,6 +708,7 @@ namespace oomph
     }
   }
 
+
   //=================================================================
   /// Multiply the  transposed matrix by the vector x: soln=A^T x
   //=================================================================
@@ -788,6 +801,7 @@ namespace oomph
       }
     }
   }
+
 
   //===========================================================================
   /// Function to multiply this matrix by the CCDoubleMatrix matrix_in
@@ -1124,6 +1138,7 @@ namespace oomph
     result.build_without_copy(Value, Row_index, Column_start, Nnz, N, M);
   }
 
+
   //=================================================================
   /// For every row, find the maximum absolute value of the
   /// entries in this row. Set all values that are less than alpha times
@@ -1143,6 +1158,7 @@ namespace oomph
     Vector<int> B_row_start(1);
     Vector<int> B_column_index;
     Vector<double> B_value;
+
 
     // k is counter for the number of entries in the reduced matrix
     unsigned k = 0;
@@ -1181,10 +1197,12 @@ namespace oomph
       B_row_start.push_back(k);
     }
 
+
     // Build the matrix from the compressed format
     dynamic_cast<CCDoubleMatrix&>(reduced_matrix)
       .build(B_value, B_column_index, B_row_start, nrow(), ncol());
   }
+
 
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
@@ -1240,6 +1258,7 @@ namespace oomph
     std::copy(column_indices, column_indices + nnz, my_column_indices);
     std::copy(row_start, row_start + nrow_local + 1, my_row_start);
 
+
     // Build without copy since we have made a deep copy of the data structure.
     this->build_without_copy(
       other_matrix.ncol(), nnz, my_values_pt, my_column_indices, my_row_start);
@@ -1258,6 +1277,7 @@ namespace oomph
     Serial_matrix_matrix_multiply_method = 2;
 #endif
   }
+
 
   //=============================================================================
   /// Constructor: just stores the distribution but does not build the
@@ -1315,6 +1335,7 @@ namespace oomph
     // matrix has been built
     Built = true;
   }
+
 
   //=============================================================================
   /// Destructor
@@ -2332,6 +2353,7 @@ namespace oomph
 #endif
     }
   }
+
 
   //=================================================================
   /// For every row, find the maximum absolute value of the
@@ -3383,6 +3405,7 @@ namespace oomph
 
   } // End of the function
 
+
   //=============================================================================
   /// Compute infinity (maximum) norm of matrix
   //=============================================================================
@@ -3584,6 +3607,7 @@ namespace oomph
     const double* this_values = this->value();
     const double* in_values = matrix_in.value();
 
+
     // The first entry in row_start is always zero.
     res_row_start.push_back(0);
 
@@ -3721,6 +3745,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 
+
       // Check that all matrix_pt pointers are not null
       // and the matrices are built.
       for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++)
@@ -3757,6 +3782,7 @@ namespace oomph
         matrix_pt(0, 0)->distribution_pt()->communicator_pt();
 
 #ifdef PARANOID
+
 
       // Check that all communicators are the same
       for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++)
@@ -3992,6 +4018,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 
+
       // Check that all matrix_pt pointers are not null
       // and the matrices are built.
       for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++)
@@ -4020,6 +4047,7 @@ namespace oomph
         }
       }
 #endif
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -4539,6 +4567,7 @@ namespace oomph
       }
 #endif
 
+
       // Get the number of columns up to each block for offset
       // in calculating the result column indices.
       // Since the number of columns in each block column is the same,
@@ -4799,8 +4828,7 @@ namespace oomph
         Vector<int> send_displacement(nproc, 0);
 
         double t_total_ndata_start;
-        if (enable_timing)
-          t_total_ndata_start = TimingHelpers::timer();
+        if (enable_timing) t_total_ndata_start = TimingHelpers::timer();
 
         // Get the total amount of data which needs to be sent, so we can
         // reserve space for it.
@@ -4823,8 +4851,7 @@ namespace oomph
         }
 
         double t_flat_pack_start;
-        if (enable_timing)
-          t_flat_pack_start = TimingHelpers::timer();
+        if (enable_timing) t_flat_pack_start = TimingHelpers::timer();
 
         // Now we don't have to re-allocate data/memory when push_back is
         // called. Nb. Using push_back without reserving memory may cause
@@ -4867,8 +4894,7 @@ namespace oomph
         }
 
         double t_sendn_start;
-        if (enable_timing)
-          t_sendn_start = TimingHelpers::timer();
+        if (enable_timing) t_sendn_start = TimingHelpers::timer();
 
         // Strorage for the number of data to be received from each processor
         Vector<int> receive_n(nproc, 0);
@@ -4887,6 +4913,7 @@ namespace oomph
           double t_sendn_time = t_sendn_finish - t_sendn_start;
           oomph_info << "t_sendn_time: " << t_sendn_time << std::endl;
         }
+
 
         // Prepare the data to be received
         // by working out the displacement from the received data
@@ -4916,8 +4943,7 @@ namespace oomph
         }
 
         double t_send_data_start;
-        if (enable_timing)
-          t_send_data_start = TimingHelpers::timer();
+        if (enable_timing) t_send_data_start = TimingHelpers::timer();
 
         // Now send the data between all processors
         MPI_Alltoallv(&send_values_data[0],
@@ -4974,8 +5000,7 @@ namespace oomph
         unsigned long res_nnz_local = 0;
 
         double t_locations_start;
-        if (enable_timing)
-          t_locations_start = TimingHelpers::timer();
+        if (enable_timing) t_locations_start = TimingHelpers::timer();
 
         // Loop through the data currently on this processor.
         unsigned location_i = 0;
@@ -5054,8 +5079,7 @@ namespace oomph
         }
 
         double t_fillvecs_start;
-        if (enable_timing)
-          t_fillvecs_start = TimingHelpers::timer();
+        if (enable_timing) t_fillvecs_start = TimingHelpers::timer();
 
         // Now loop through the locations and store the values
         // the column indices in the correct order.
@@ -5129,8 +5153,7 @@ namespace oomph
         }
 
         double t_buildres_start;
-        if (enable_timing)
-          t_buildres_start = TimingHelpers::timer();
+        if (enable_timing) t_buildres_start = TimingHelpers::timer();
 
         // build the matrix.
         result_matrix.build(
@@ -5233,6 +5256,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
       }
+
 
       // The distribution for each block row is stored in row_distribution_pt.
       // So the number of distributions in row_distribution_pt must be the
@@ -5751,6 +5775,7 @@ namespace oomph
       //      myrankstream << "THISDOESNOTHINGnp" << my_rank << std::endl;
       //      std::string myrankstring = myrankstream.str();
 
+
       // CALLGRIND_ZERO_STATS;
       // CALLGRIND_START_INSTRUMENTATION;
 
@@ -5836,6 +5861,7 @@ namespace oomph
       // CALLGRIND_STOP_INSTRUMENTATION;
       // CALLGRIND_DUMP_STATS_AT(myrankstring.c_str());
 
+
       // Get the number of columns of the result matrix.
       unsigned res_ncol = 0;
       for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
@@ -5847,6 +5873,7 @@ namespace oomph
       result_matrix.build_without_copy(
         res_ncol, res_nnz, res_value, res_column_index, res_row_start);
     }
+
 
     //============================================================================
     /// \short Concatenate CRDoubleMatrix matrices.

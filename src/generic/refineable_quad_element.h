@@ -31,6 +31,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib headers
 #include "quadtree.h"
 #include "macro_element.h"
@@ -65,9 +66,8 @@ namespace oomph
   ///
   //=======================================================================
   template<>
-  class RefineableQElement<2> :
-    public virtual RefineableElement,
-    public virtual QuadElementBase
+  class RefineableQElement<2> : public virtual RefineableElement,
+                                public virtual QuadElementBase
   {
   public:
     /// \short Shorthand for pointer to an argument-free void member
@@ -81,6 +81,7 @@ namespace oomph
       LeakCheckNames::RefineableQElement<2> _build += 1;
 #endif
     }
+
 
     /// Broken copy constructor
     RefineableQElement(const RefineableQElement<2>& dummy)
@@ -216,21 +217,22 @@ namespace oomph
                                   std::ofstream& output_hangfile);
   };
 
+
   //========================================================================
   /// Refineable version of Solid quad elements
   //========================================================================
   template<>
-  class RefineableSolidQElement<2> :
-    public virtual RefineableQElement<2>,
-    public virtual RefineableSolidElement,
-    public virtual QSolidElementBase
+  class RefineableSolidQElement<2> : public virtual RefineableQElement<2>,
+                                     public virtual RefineableSolidElement,
+                                     public virtual QSolidElementBase
   {
   public:
     /// Constructor, just call the constructor of the RefineableQElement<2>
-    RefineableSolidQElement() :
-      RefineableQElement<2>(), RefineableSolidElement()
+    RefineableSolidQElement()
+      : RefineableQElement<2>(), RefineableSolidElement()
     {
     }
+
 
     /// Broken copy constructor
     RefineableSolidQElement(const RefineableSolidQElement<2>& dummy)
@@ -246,6 +248,7 @@ namespace oomph
 
     /// Virtual Destructor
     virtual ~RefineableSolidQElement() {}
+
 
     /// \short Final over-ride: Use version in QSolidElementBase
     void set_macro_elem_pt(MacroElement* macro_elem_pt)
@@ -280,6 +283,7 @@ namespace oomph
     /// is pinned and 0 if it's free.
     void get_solid_bcs(int bound, Vector<int>& solid_bound_cons) const;
 
+
     /// \short Build the element, i.e. give it nodal positions, apply BCs, etc.
     /// Incl. documention into new_nodes_file
     // NOTE: FOR SOME REASON THIS NEEDS TO LIVE IN *.H TO WORK ON INTEL
@@ -295,8 +299,7 @@ namespace oomph
         mesh_pt, new_node_pt, was_already_built, new_nodes_file);
 
       // Are we done?
-      if (was_already_built)
-        return;
+      if (was_already_built) return;
 
       // Now need to loop over the nodes again and set solid variables
 
@@ -308,6 +311,7 @@ namespace oomph
       RefineableSolidQElement<2>* father_el_pt =
         dynamic_cast<RefineableSolidQElement<2>*>(
           Tree_pt->father_pt()->object_pt());
+
 
 #ifdef PARANOID
       // Currently we can't handle the case of generalised coordinates
@@ -438,6 +442,7 @@ namespace oomph
               elastic_node_pt->xi(i) = xi_fe[i];
             }
           }
+
 
           // Are there any history values to be dealt with?
           TimeStepper* time_stepper_pt =

@@ -120,6 +120,7 @@ namespace oomph
       }
     }
 
+
     /// \short Set vector of pointers to sons, indexed by the
     /// appropriate enum that identies son types.
     /// (To aid code readability specific enums have been defined for
@@ -185,6 +186,7 @@ namespace oomph
     /// Function pointer to a void Tree member function that takes a
     /// pointer to a mesh as its argument
     typedef void (Tree::*VoidMeshPtArgumentMemberFctPt)(Mesh*& mesh_pt);
+
 
     /// \short Traverse the tree and execute void Tree member function
     /// member_function() at all its "nodes"
@@ -317,6 +319,7 @@ namespace oomph
     static double Max_neighbour_finding_tolerance;
   };
 
+
   //===================================================================
   /// TreeRoot is a Tree that forms the root of a (recursive)
   /// tree. The "root node" is special as it holds additional
@@ -332,6 +335,7 @@ namespace oomph
     /// Returns NULL if there's no neighbour in this direction.
     std::map<int, TreeRoot*> Neighbour_pt;
 
+
     /// \short Map of booleans used for periodic boundaries:
     /// Neighbour_periodic_direction[directon] returns true if the
     /// neighbour in that direction is actually a periodic neighbour
@@ -346,6 +350,7 @@ namespace oomph
       // TreeRoot is the Root
       Root_pt = this;
     }
+
 
     /// Broken copy constructor
     TreeRoot(const TreeRoot& dummy)
@@ -403,6 +408,7 @@ namespace oomph
       return count;
     }
   };
+
 
   //================================================================
   /// A TreeForest consists of a collection of TreeRoots.

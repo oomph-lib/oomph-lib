@@ -25,6 +25,7 @@
 // LIC//====================================================================
 #include "refineable_poisson_elements.h"
 
+
 namespace oomph
 {
   //========================================================================
@@ -127,6 +128,7 @@ namespace oomph
     } // End of loop over the integration points
   }
 
+
   //========================================================================
   /// Add element's contribution to the elemental
   /// residual vector and/or Jacobian matrix.
@@ -196,6 +198,7 @@ namespace oomph
       // Get body force
       double source;
       this->get_source_poisson(ipt, interpolated_x, source);
+
 
       // Assemble residuals and Jacobian
 
@@ -330,6 +333,7 @@ namespace oomph
 
     } // End of loop over integration points
   }
+
 
   //======================================================================
   /// Compute derivatives of elemental residual vector with respect
@@ -618,6 +622,7 @@ namespace oomph
     // Now do the PRefineableQElement further_build()
     PRefineableQElement<DIM>::further_build();
   }
+
 
   //====================================================================
   // Force build of templates

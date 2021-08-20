@@ -193,9 +193,11 @@ namespace oomph
     }
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// \short Base class for time-stepping schemes.
@@ -280,12 +282,12 @@ namespace oomph
     /// \short Constructor. Pass the amount of storage required by
     /// timestepper (present value + history values) and the
     /// order of highest time-derivative.
-    TimeStepper(const unsigned& tstorage, const unsigned& max_deriv) :
-      Time_pt(0),
-      Adaptive_Flag(false),
-      Is_steady(false),
-      Shut_up_in_assign_initial_data_values(false),
-      Predict_by_explicit_step(false)
+    TimeStepper(const unsigned& tstorage, const unsigned& max_deriv)
+      : Time_pt(0),
+        Adaptive_Flag(false),
+        Is_steady(false),
+        Shut_up_in_assign_initial_data_values(false),
+        Predict_by_explicit_step(false)
     {
       // Resize Weights matrix and initialise each weight to zero
       Weight.resize(max_deriv + 1, tstorage, 0.0);
@@ -577,6 +579,7 @@ namespace oomph
       return deriv;
     }
 
+
     /// Access function for the pointer to time (const version)
     Time* const& time_pt() const
     {
@@ -675,9 +678,11 @@ namespace oomph
     virtual void actions_after_timestep(Problem* problem_pt) {}
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// Faux time-stepper for steady problems. Allows storage
@@ -700,6 +705,7 @@ namespace oomph
       // actually is steady all the time.
       Is_steady = true;
     }
+
 
     /// Broken copy constructor
     Steady(const Steady&)
@@ -765,6 +771,7 @@ namespace oomph
         }
       }
     }
+
 
     /// \short Typedef for function that returns the (scalar) initial
     /// value at a given value of the continuous time t.
@@ -899,9 +906,11 @@ namespace oomph
     static Time Dummy_time;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// \short Newmark scheme for second time deriv. Stored data represents
@@ -944,6 +953,7 @@ namespace oomph
       BrokenCopy::broken_assign("Newmark");
     }
 
+
     /// The actual order (accuracy of the scheme)
     unsigned order() const
     {
@@ -976,6 +986,7 @@ namespace oomph
       Vector<InitialConditionFctPt> initial_value_fct,
       Vector<InitialConditionFctPt> initial_veloc_fct,
       Vector<InitialConditionFctPt> initial_accel_fct);
+
 
     /// \short Typedef for function that returns the (scalar) initial
     /// value at a given value of the continuous time t and the spatial
@@ -1029,6 +1040,7 @@ namespace oomph
     /// are represented exactly by the Newmark scheme.
     void assign_initial_data_values_stage2(Data* const& data_pt);
 
+
     /// \short This function updates the Data's time history so that
     /// we can advance to the next timestep.
     void shift_time_values(Data* const& data_pt);
@@ -1052,6 +1064,7 @@ namespace oomph
       return NSTEPS;
     }
 
+
   protected:
     /// First Newmark parameter (usually 0.5)
     double Beta1;
@@ -1060,9 +1073,11 @@ namespace oomph
     double Beta2;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// \short Newmark scheme for second time deriv with first derivatives
@@ -1122,6 +1137,7 @@ namespace oomph
       Degrade_to_bdf1_for_first_derivs = true;
     }
 
+
     /// \short Disable degradation to first order BDF.
     void disable_degrade_first_derivatives_to_bdf1()
     {
@@ -1159,9 +1175,11 @@ namespace oomph
     Vector<double> Newmark_veloc_weight;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// \short Templated class for BDF-type time-steppers with fixed or
@@ -1227,6 +1245,7 @@ namespace oomph
       // Set the weight for the zero-th derivative
       Weight(0, 0) = 1.0;
     }
+
 
     /// Broken copy constructor
     BDF(const BDF&)
@@ -1312,6 +1331,7 @@ namespace oomph
         }
       }
     }
+
 
     /// \short Typedef for function that returns the (scalar) initial
     /// value at a given value of the continuous time t.

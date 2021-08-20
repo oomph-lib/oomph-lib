@@ -105,6 +105,7 @@ namespace oomph
     }
   }
 
+
   /// Dummy - just check that the values that
   /// problem::calculate_predicted_values() has been called right.
   void IMRBase::calculate_predicted_values(Data* const& data_pt)
@@ -116,6 +117,7 @@ namespace oomph
       check_predicted_values_up_to_date();
     }
   }
+
 
   double IMRBase::temporal_error_in_value(Data* const& data_pt,
                                           const unsigned& i)
@@ -155,6 +157,7 @@ namespace oomph
 
     // Set the weights again because we just changed the step size
     set_weights();
+
 
     if (problem_pt->use_predictor_values_as_initial_guess())
     {

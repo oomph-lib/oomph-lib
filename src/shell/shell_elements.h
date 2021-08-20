@@ -96,9 +96,11 @@ namespace oomph
                                const Vector<double>& N,
                                Vector<double>& load);
 
+
     /// \short Pointer to the GeomObject that specifies the undeformed midplane
     /// of the shell
     GeomObject* Undeformed_midplane_pt;
+
 
     /// short Helper function to Return the residuals for
     /// the equations of KL shell theory. This is used to prevent
@@ -127,6 +129,7 @@ namespace oomph
     {
       load_vector(intpt, xi, x, N, load);
     }
+
 
   public:
     /// Constructor: Initialise physical parameter values to defaults
@@ -174,6 +177,7 @@ namespace oomph
     {
       Load_vector_fct_pt(xi, x, N, load);
     }
+
 
     /// \short Set pointer to (i,j)-th component of second Piola Kirchhoff
     /// membrane prestress to specified value (automatically imposes
@@ -265,12 +269,14 @@ namespace oomph
     /// \short Get potential (strain) and kinetic energy of the element
     void get_energy(double& pot_en, double& kin_en);
 
+
     /// \short Get strain and bending tensors; returns pair comprising the
     /// determinant of the undeformed (*.first) and deformed (*.second)
     /// midplane metric tensor.
     std::pair<double, double> get_strain_and_bend(const Vector<double>& s,
                                                   DenseDoubleMatrix& strain,
                                                   DenseDoubleMatrix& bend);
+
 
     /// \short Get integral of instantaneous rate of work done on
     /// the wall due to the load returned by the virtual
@@ -308,6 +314,7 @@ namespace oomph
     }
   };
 
+
   //==================================================================
   /// Matrix inversion for 2 dimensions
   //==================================================================
@@ -327,6 +334,7 @@ namespace oomph
     return (det);
   }
 
+
   //=======================================================================
   /// An element that solves the Kirchhoff-Love shell theory equations
   /// using Hermite interpolation (displacements
@@ -334,14 +342,13 @@ namespace oomph
   /// (Lagrangian) coordinates  are not assumed to be aligned.
   /// N.B. It will be DOG SLOW.
   //=======================================================================
-  class HermiteShellElement :
-    public virtual SolidQHermiteElement<2>,
-    public KirchhoffLoveShellEquations
+  class HermiteShellElement : public virtual SolidQHermiteElement<2>,
+                              public KirchhoffLoveShellEquations
   {
   public:
     /// Constructor, there are no internal data points
-    HermiteShellElement() :
-      SolidQHermiteElement<2>(), KirchhoffLoveShellEquations()
+    HermiteShellElement()
+      : SolidQHermiteElement<2>(), KirchhoffLoveShellEquations()
     {
       // Set the number of dimensions at each node (3D nodes on 2D surface)
       set_nodal_dimension(3);
@@ -370,6 +377,7 @@ namespace oomph
     void output(FILE* file_pt, const unsigned& n_plot);
   };
 
+
   //=========================================================================
   /// An element that solves the Kirchhoff-Love shell theory equations
   /// using Hermite interpolation (displacements
@@ -379,28 +387,29 @@ namespace oomph
   /// This significantly simplifies (and speeds up) the computation of the
   /// derivatives of the shape functions.
   //=========================================================================
-  class DiagHermiteShellElement :
-    public HermiteShellElement,
-    public SolidDiagQHermiteElement<2>
+  class DiagHermiteShellElement : public HermiteShellElement,
+                                  public SolidDiagQHermiteElement<2>
   {
   public:
     /// Constructor, there are no internal data points
-    DiagHermiteShellElement() :
-      HermiteShellElement(), SolidDiagQHermiteElement<2>()
+    DiagHermiteShellElement()
+      : HermiteShellElement(), SolidDiagQHermiteElement<2>()
     {
     }
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the HermiteShell elements: 1D SolidQHermiteElement
   //=======================================================================
   template<>
-  class FaceGeometry<HermiteShellElement> :
-    public virtual SolidQHermiteElement<1>
+  class FaceGeometry<HermiteShellElement>
+    : public virtual SolidQHermiteElement<1>
   {
   public:
     /// \short Constructor [this was only required explicitly
@@ -408,17 +417,18 @@ namespace oomph
     FaceGeometry() : SolidQHermiteElement<1>() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// Diag Hermite Kirchhoff Love shell "upgraded" to a FSIWallElement
   /// (and thus, by inheritance, a GeomObject), so it can be used in FSI.
   //=========================================================================
-  class FSIDiagHermiteShellElement :
-    public virtual DiagHermiteShellElement,
-    public virtual FSIWallElement
+  class FSIDiagHermiteShellElement : public virtual DiagHermiteShellElement,
+                                     public virtual FSIWallElement
   {
   private:
     /// \short Get the load vector for the computation of the rate of work
@@ -463,10 +473,10 @@ namespace oomph
     /// points into the fluid.
     /// If this is not the case, call the access function
     /// FSIDiagHermiteShellElement::set_normal_pointing_out_of_fluid()
-    FSIDiagHermiteShellElement() :
-      DiagHermiteShellElement(),
-      Normal_points_into_fluid(true),
-      Compute_rate_of_work_by_load_with_fluid_load_only(false)
+    FSIDiagHermiteShellElement()
+      : DiagHermiteShellElement(),
+        Normal_points_into_fluid(true),
+        Compute_rate_of_work_by_load_with_fluid_load_only(false)
     {
       unsigned n_lagr = 2;
       unsigned n_dim = 3;
@@ -490,10 +500,12 @@ namespace oomph
       Normal_points_into_fluid = false;
     }
 
+
     /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
     /// Lagrangian coordinates; evaluated at current time.
     void dposition_dlagrangian_at_local_coordinate(
       const Vector<double>& s, DenseMatrix<double>& drdxi) const;
+
 
     /// \short Get integral of instantaneous rate of work done on
     /// the wall due to the fluid load returned by the function
@@ -505,6 +517,7 @@ namespace oomph
       Compute_rate_of_work_by_load_with_fluid_load_only = false;
       return tmp;
     }
+
 
     /// \short Get the load vector: Pass number of the integration point,
     /// Lagr. coordinate, Eulerian coordinate and normal vector
@@ -558,6 +571,7 @@ namespace oomph
       this->fill_in_jacobian_from_external_interaction_by_fd(jacobian);
     }
 
+
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Just the solid degrees of freedom themselves.
     unsigned ndof_types() const
@@ -575,9 +589,11 @@ namespace oomph
       std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Element that allows the imposition of boundary
@@ -610,15 +626,16 @@ namespace oomph
   /// associated with the spurious positional dofs to zero. This is a bit
   /// hacky but the only way (?) this can be done...
   //======================================================================
-  class ClampedHermiteShellBoundaryConditionElement :
-    public virtual FaceGeometry<HermiteShellElement>,
-    public virtual SolidFaceElement
+  class ClampedHermiteShellBoundaryConditionElement
+    : public virtual FaceGeometry<HermiteShellElement>,
+      public virtual SolidFaceElement
   {
   public:
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// face index.
     ClampedHermiteShellBoundaryConditionElement(
       FiniteElement* const& bulk_el_pt, const int& face_index);
+
 
     ///\short  Broken empty constructor
     ClampedHermiteShellBoundaryConditionElement()
@@ -653,10 +670,12 @@ namespace oomph
     /// Fill in the element's contribution to its residual vector
     void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
+
     //////////////////////////////////////////////////////////////////
     // Note: We should also overload all other versions of shape(...)
     // and dshape(...) but these are the only ones that are used.
     //////////////////////////////////////////////////////////////////
+
 
     /// \short Calculate the geometric shape functions
     /// at local coordinate s. Set any "superfluous" shape functions to zero.
@@ -674,6 +693,7 @@ namespace oomph
       }
       FaceGeometry<HermiteShellElement>::shape(s, psi);
     }
+
 
     /// \short Calculate the geometric shape functions
     /// at local coordinate s. Set any "superfluous" shape functions to zero.
@@ -746,10 +766,12 @@ namespace oomph
     void get_dof_numbers_for_unknowns(
       std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
 
+
   private:
     /// \short Normal vector to the clamping plane
     Vector<double> Normal_to_clamping_plane;
   };
+
 
 } // namespace oomph
 

@@ -244,6 +244,7 @@ namespace oomph
                           const Vector<double>& zeta,
                           Vector<double>& r);
 
+
     /// Length of the domain to the right of the leaflet
     double Lright;
 
@@ -275,6 +276,7 @@ namespace oomph
     /// Pointer to leaflet
     GeomObject* Leaflet_pt;
   };
+
 
   //===================================================================
   /// Parametrisation of macro element boundaries
@@ -398,11 +400,15 @@ namespace oomph
     }
   }
 
+  // Number of the line and of the colum in the part considered
+  unsigned i, j;
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   // Helper functions for region I (lower left region)
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
+
 
   //=====================================================================
   /// Helper function for eastern boundary in lower left region
@@ -457,31 +463,47 @@ namespace oomph
   {
     // Find x,y on the wall corresponding to the position of the macro element
 
-    // xi_wall varies from xi0 to xi1 on the wall
-    double xi0, xi1;
-    xi0 = double(i) * Hleaflet / double(Ny1);
-    xi1 = double(i + 1) * Hleaflet / double(Ny1);
+    //=====================================================================
+    /// Helper function for western boundary in lower left region
+    //=====================================================================
+    void ChannelWithLeafletDomain::macro_bound_I_W(const unsigned& t,
+                                                   const Vector<double>& zeta,
+                                                   Vector<double>& r,
+                                                   const unsigned& i,
+                                                   const unsigned& j)
+    {
+      // Find x,y on the wall corresponding to the position of the macro element
 
-    Vector<double> xi_wall(1);
-    xi_wall[0] = xi0 + (1.0 + zeta[0]) / 2.0 * (xi1 - xi0);
+      // xi_wall varies from xi0 to xi1 on the wall
+      double xi0, xi1;
+      xi0 = double(i) * Hleaflet / double(Ny1);
+      xi1 = double(i + 1) * Hleaflet / double(Ny1);
 
-    Vector<double> r_wall(2);
-    Leaflet_pt->position(t, xi_wall, r_wall);
+      Vector<double> xi_wall(1);
+      xi_wall[0] = xi0 + (1.0 + zeta[0]) / 2.0 * (xi1 - xi0);
 
-    // Find x,y on a vertical line corresponding
-    // to the position of the macro element
+      Vector<double> r_wall(2);
+      Leaflet_pt->position(t, xi_wall, r_wall);
 
-    // the vertical line goes from y0 to y1
-    double y0, y1;
-    y0 = double(i) * Hleaflet / double(Ny1);
-    y1 = double(i + 1) * Hleaflet / double(Ny1);
+      // Find x,y on a vertical line corresponding
+      // to the position of the macro element
 
-    Vector<double> r_vert(2);
-    r_vert[0] = -Lleft + X_0;
-    r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
+      // the vertical line goes from y0 to y1
+      double y0, y1;
+      y0 = double(i) * Hleaflet / double(Ny1);
+      y1 = double(i + 1) * Hleaflet / double(Ny1);
 
-    // Parameter with value 0 in -Lleft and value 1 on the wall.
-    double s = double(j) / double(Nleft);
+      Vector<double> r_vert(2);
+      r_vert[0] = -Lleft + X_0;
+      r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
+
+      // Parameter with value 0 in -Lleft and value 1 on the wall.
+      double s = double(j) / double(Nleft);
+
+      /// Final expression of r
+      r[0] = r_vert[0] + s * (r_wall[0] - r_vert[0]);
+      r[1] = r_vert[1] + s * (r_wall[1] - r_vert[1]);
+    }
 
     /// Final expression of r
     r[0] = r_vert[0] + s * (r_wall[0] - r_vert[0]);
@@ -532,11 +554,13 @@ namespace oomph
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   // Helper functions for region II (lower right region)
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
+
 
   //=====================================================================
   /// Helper function for eastern boundary in lower right region
@@ -580,6 +604,7 @@ namespace oomph
     r[0] = r_vert[0] + s * (r_wall[0] - r_vert[0]);
     r[1] = r_vert[1] + s * (r_wall[1] - r_vert[1]);
   }
+
 
   //=====================================================================
   /// Helper function for western boundary in lower right region
@@ -625,6 +650,8 @@ namespace oomph
     r[1] = r_vert[1] + s * (r_wall[1] - r_vert[1]);
   }
 
+  Leaflet_pt->position(t, xi, r_join);
+
   //=====================================================================
   /// Helper function for northern boundary in lower right region
   //=====================================================================
@@ -646,6 +673,7 @@ namespace oomph
     r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
+
 
   //=====================================================================
   /// Helper function for southern boundary in lower right region
@@ -669,11 +697,13 @@ namespace oomph
     r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
   }
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   // Helper functions for region III (upper left region)
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
+
 
   //=====================================================================
   /// Describe the line between the boundary north of the domain (at x=X_0)
@@ -697,50 +727,6 @@ namespace oomph
   }
 
   //=====================================================================
-  /// Helper function for eastern boundary in upper left region
-  //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_III_E(const unsigned& t,
-                                                   const Vector<double>& zeta,
-                                                   Vector<double>& r,
-                                                   const unsigned& i,
-                                                   const unsigned& j)
-  {
-    // Find x,y on the slanted straight line (SSL) corresponding to
-    // the position of the macro element
-
-    // xi_line varies from xi0 to xi1 on the SSL
-    double xi0, xi1;
-    xi0 = double(i) / double(Ny2);
-    xi1 = double(i + 1) / double(Ny2);
-
-    Vector<double> xi_line(1);
-    xi_line[0] = xi0 + (1.0 + zeta[0]) / 2.0 * (xi1 - xi0);
-
-    Vector<double> r_line(2);
-    slanted_bound_up(t, xi_line, r_line);
-
-    // Find x,y on a vertical line corresponding
-    // to the position of the macro element
-
-    // the vertical line goes from y0 to y1
-    double y0, y1;
-    y0 = double(i) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
-    y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
-    ;
-
-    Vector<double> r_vert(2);
-    r_vert[0] = -Lleft + X_0;
-    r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
-
-    // Parameter with value 0 in Lright and value 1 on the wall.
-    double s = double(j + 1) / double(Nleft); /***Change****/
-
-    /// Final expression of r
-    r[0] = r_vert[0] + s * (r_line[0] - r_vert[0]);
-    r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
-  }
-
-  //=====================================================================
   /// Helper function for western boundary in upper left region
   //=====================================================================
   void ChannelWithLeafletDomain::macro_bound_III_W(const unsigned& t,
@@ -752,220 +738,281 @@ namespace oomph
     // Find x,y on the slanted straight line (SSL) corresponding to
     // the position of the macro element
 
-    // xi_line varies from xi0 to xi1 on the SSL
-    double xi0, xi1;
-    xi0 = double(i) / double(Ny2);
-    xi1 = double(i + 1) / double(Ny2);
+    //=====================================================================
+    /// Helper function for eastern boundary in upper left region
+    //=====================================================================
+    void ChannelWithLeafletDomain::macro_bound_III_E(const unsigned& t,
+                                                     const Vector<double>& zeta,
+                                                     Vector<double>& r,
+                                                     const unsigned& i,
+                                                     const unsigned& j)
+    {
+      // Find x,y on the slanted straight line (SSL) corresponding to
+      // the position of the macro element
 
-    Vector<double> xi_line(1);
-    xi_line[0] = xi0 + (1.0 + zeta[0]) / 2.0 * (xi1 - xi0);
+      // xi_line varies from xi0 to xi1 on the SSL
+      double xi0, xi1;
+      xi0 = double(i) / double(Ny2);
+      xi1 = double(i + 1) / double(Ny2);
 
-    Vector<double> r_line(2);
-    slanted_bound_up(t, xi_line, r_line);
+      Vector<double> xi_line(1);
+      xi_line[0] = xi0 + (1.0 + zeta[0]) / 2.0 * (xi1 - xi0);
 
-    // Find x,y on a vertical line corresponding
-    // to the position of the macro element
+      Vector<double> r_line(2);
+      slanted_bound_up(t, xi_line, r_line);
 
-    // the vertical line goes from y0 to y1
-    double y0, y1;
-    y0 = double(i) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
-    y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
-    ;
+      // Find x,y on a vertical line corresponding
+      // to the position of the macro element
 
-    Vector<double> r_vert(2);
-    r_vert[0] = -Lleft + X_0;
-    r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
+      // the vertical line goes from y0 to y1
+      double y0, y1;
+      y0 = double(i) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
+      y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
+      ;
 
-    // Parameter with value 0 in Lright and value 1 on the wall.
-    double s = double(j) / double(Nleft); /***Change****/
+      Vector<double> r_vert(2);
+      r_vert[0] = -Lleft + X_0;
+      r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 
-    // Final expression of r
-    r[0] = r_vert[0] + s * (r_line[0] - r_vert[0]);
-    r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
-  }
+      // Parameter with value 0 in Lright and value 1 on the wall.
+      double s = double(j + 1) / double(Nleft); /***Change****/
 
-  //=====================================================================
-  /// Helper function for northern boundary in upper left region
-  //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_III_N(const unsigned& t,
-                                                   const Vector<double>& zeta,
-                                                   Vector<double>& r,
-                                                   const unsigned& i,
-                                                   const unsigned& j)
-  {
-    // Find the coordinates of the two corners of the north boundary
-    Vector<double> xi(1);
-    Vector<double> r_left(2);
-    Vector<double> r_right(2);
-    xi[0] = 1;
-    macro_bound_III_W(t, xi, r_left, i, j);
-    macro_bound_III_E(t, xi, r_right, i, j);
+      /// Final expression of r
+      r[0] = r_vert[0] + s * (r_line[0] - r_vert[0]);
+      r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
+    }
 
-    // Connect those two points with a straight line
-    r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
-    r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
-  }
 
-  //=====================================================================
-  /// Helper function for southern boundary in upper left region
-  //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_III_S(const unsigned& t,
-                                                   const Vector<double>& zeta,
-                                                   Vector<double>& r,
-                                                   const unsigned& i,
-                                                   const unsigned& j)
-  {
-    // Find the coordinates of the two corners of the south boundary
-    Vector<double> xi(1);
-    Vector<double> r_left(2);
-    Vector<double> r_right(2);
-    xi[0] = -1;
-    macro_bound_III_W(t, xi, r_left, i, j);
-    macro_bound_III_E(t, xi, r_right, i, j);
+    //=====================================================================
+    /// Helper function for western boundary in upper left region
+    //=====================================================================
+    void ChannelWithLeafletDomain::macro_bound_III_W(const unsigned& t,
+                                                     const Vector<double>& zeta,
+                                                     Vector<double>& r,
+                                                     const unsigned& i,
+                                                     const unsigned& j)
+    {
+      // Find x,y on the slanted straight line (SSL) corresponding to
+      // the position of the macro element
 
-    // Connect those two points with a straight line
-    r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
-    r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
-  }
+      // xi_line varies from xi0 to xi1 on the SSL
+      double xi0, xi1;
+      xi0 = double(i) / double(Ny2);
+      xi1 = double(i + 1) / double(Ny2);
 
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-  // Helper functions for region IV (upper right region)
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
+      Vector<double> xi_line(1);
+      xi_line[0] = xi0 + (1.0 + zeta[0]) / 2.0 * (xi1 - xi0);
 
-  //=====================================================================
-  /// Helper function for eastern boundary in upper right region
-  //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_IV_E(const unsigned& t,
-                                                  const Vector<double>& zeta,
-                                                  Vector<double>& r,
-                                                  const unsigned& i,
-                                                  const unsigned& j)
-  {
-    // Find x,y on the slanted straight line (SSL) corresponding to
-    // the position of the macro element
+      Vector<double> r_line(2);
+      slanted_bound_up(t, xi_line, r_line);
 
-    // xi_line varies from xi0 to xi1 on the SSL
-    double xi0, xi1;
-    xi0 = double(i) / double(Ny2);
-    xi1 = double(i + 1) / double(Ny2);
+      // Find x,y on a vertical line corresponding
+      // to the position of the macro element
 
-    Vector<double> xi_line(1);
-    xi_line[0] = xi0 + (1.0 + zeta[0]) / 2.0 * (xi1 - xi0);
+      // the vertical line goes from y0 to y1
+      double y0, y1;
+      y0 = double(i) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
+      y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
+      ;
 
-    Vector<double> r_line(2);
-    slanted_bound_up(t, xi_line, r_line);
+      Vector<double> r_vert(2);
+      r_vert[0] = -Lleft + X_0;
+      r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 
-    // Find x,y on a vertical line corresponding
-    // to the position of the macro element
+      // Parameter with value 0 in Lright and value 1 on the wall.
+      double s = double(j) / double(Nleft); /***Change****/
 
-    // the vertical line goes from y0 to y1
-    double y0, y1;
-    y0 = double(i) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
-    y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
-    ;
+      // Final expression of r
+      r[0] = r_vert[0] + s * (r_line[0] - r_vert[0]);
+      r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
+    }
 
-    Vector<double> r_vert(2);
-    r_vert[0] = Lright + X_0;
-    r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
+    //=====================================================================
+    /// Helper function for northern boundary in upper left region
+    //=====================================================================
+    void ChannelWithLeafletDomain::macro_bound_III_N(const unsigned& t,
+                                                     const Vector<double>& zeta,
+                                                     Vector<double>& r,
+                                                     const unsigned& i,
+                                                     const unsigned& j)
+    {
+      // Find the coordinates of the two corners of the north boundary
+      Vector<double> xi(1);
+      Vector<double> r_left(2);
+      Vector<double> r_right(2);
+      xi[0] = 1;
+      macro_bound_III_W(t, xi, r_left, i, j);
+      macro_bound_III_E(t, xi, r_right, i, j);
 
-    // Parameter with value 0 in Lright and value 1 on the wall.
-    double s = double(Nright - j - 1) / double(Nright); /***Change****/
+      // Connect those two points with a straight line
+      r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
+      r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
+    }
 
-    // Final expression of r
-    r[0] = r_vert[0] + s * (r_line[0] - r_vert[0]);
-    r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
-  }
+    //=====================================================================
+    /// Helper function for southern boundary in upper left region
+    //=====================================================================
+    void ChannelWithLeafletDomain::macro_bound_III_S(const unsigned& t,
+                                                     const Vector<double>& zeta,
+                                                     Vector<double>& r,
+                                                     const unsigned& i,
+                                                     const unsigned& j)
+    {
+      // Find the coordinates of the two corners of the south boundary
+      Vector<double> xi(1);
+      Vector<double> r_left(2);
+      Vector<double> r_right(2);
+      xi[0] = -1;
+      macro_bound_III_W(t, xi, r_left, i, j);
+      macro_bound_III_E(t, xi, r_right, i, j);
 
-  //=====================================================================
-  /// Helper function for western boundary in upper right region
-  //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_IV_W(const unsigned& t,
-                                                  const Vector<double>& zeta,
-                                                  Vector<double>& r,
-                                                  const unsigned& i,
-                                                  const unsigned& j)
-  {
-    // Find x,y on the slanted straight line (SSL) corresponding to
-    // the position of the macro element
+      // Connect those two points with a straight line
+      r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
+      r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
+    }
 
-    // xi_line varies from xi0 to xi1 on the SSL
-    double xi0, xi1;
-    xi0 = double(i) / double(Ny2);
-    xi1 = double(i + 1) / double(Ny2);
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    // Helper functions for region IV (upper right region)
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
 
-    Vector<double> xi_line(1);
-    xi_line[0] = xi0 + (1.0 + zeta[0]) / 2.0 * (xi1 - xi0);
 
-    Vector<double> r_line(2);
-    slanted_bound_up(t, xi_line, r_line);
+    //=====================================================================
+    /// Helper function for eastern boundary in upper right region
+    //=====================================================================
+    void ChannelWithLeafletDomain::macro_bound_IV_E(const unsigned& t,
+                                                    const Vector<double>& zeta,
+                                                    Vector<double>& r,
+                                                    const unsigned& i,
+                                                    const unsigned& j)
+    {
+      // Find x,y on the slanted straight line (SSL) corresponding to
+      // the position of the macro element
 
-    // Find x,y on a vertical line corresponding
-    // to the position of the macro element
+      // xi_line varies from xi0 to xi1 on the SSL
+      double xi0, xi1;
+      xi0 = double(i) / double(Ny2);
+      xi1 = double(i + 1) / double(Ny2);
 
-    // The vertical line goes from y0 to y1
-    double y0, y1;
-    y0 = double(i) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
-    y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
-    ;
+      Vector<double> xi_line(1);
+      xi_line[0] = xi0 + (1.0 + zeta[0]) / 2.0 * (xi1 - xi0);
 
-    Vector<double> r_vert(2);
-    r_vert[0] = Lright + X_0;
-    r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
+      Vector<double> r_line(2);
+      slanted_bound_up(t, xi_line, r_line);
 
-    // Parameter with value 0 in Lright and value 1 on the wall.
-    double s = double(Nright - j) / double(Nright); /***Change****/
+      // Find x,y on a vertical line corresponding
+      // to the position of the macro element
 
-    // Final expression of r
-    r[0] = r_vert[0] + s * (r_line[0] - r_vert[0]);
-    r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
-  }
+      // the vertical line goes from y0 to y1
+      double y0, y1;
+      y0 = double(i) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
+      y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
+      ;
 
-  //=====================================================================
-  /// Helper function for northern boundary in upper right region
-  //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_IV_N(const unsigned& t,
-                                                  const Vector<double>& zeta,
-                                                  Vector<double>& r,
-                                                  const unsigned& i,
-                                                  const unsigned& j)
-  {
-    // Find the coordinates of the two corners of the north boundary
-    Vector<double> xi(1);
-    Vector<double> r_left(2);
-    Vector<double> r_right(2);
-    xi[0] = 1;
-    macro_bound_IV_W(t, xi, r_left, i, j);
-    macro_bound_IV_E(t, xi, r_right, i, j);
+      Vector<double> r_vert(2);
+      r_vert[0] = Lright + X_0;
+      r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
 
-    // Connect those two points with a straight line
-    r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
-    r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
-  }
+      // Parameter with value 0 in Lright and value 1 on the wall.
+      double s = double(Nright - j - 1) / double(Nright); /***Change****/
 
-  //=====================================================================
-  /// Helper function for southern boundary in upper right region
-  //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_IV_S(const unsigned& t,
-                                                  const Vector<double>& zeta,
-                                                  Vector<double>& r,
-                                                  const unsigned& i,
-                                                  const unsigned& j)
-  {
-    // Find the coordinates of the two corners of the south boundary
-    Vector<double> xi(1);
-    Vector<double> r_left(2);
-    Vector<double> r_right(2);
-    xi[0] = -1;
-    macro_bound_IV_W(t, xi, r_left, i, j);
-    macro_bound_IV_E(t, xi, r_right, i, j);
+      // Final expression of r
+      r[0] = r_vert[0] + s * (r_line[0] - r_vert[0]);
+      r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
+    }
 
-    // Connect those two points with a straight line
-    r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
-    r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
-  }
 
-} // namespace oomph
+    //=====================================================================
+    /// Helper function for western boundary in upper right region
+    //=====================================================================
+    void ChannelWithLeafletDomain::macro_bound_IV_W(const unsigned& t,
+                                                    const Vector<double>& zeta,
+                                                    Vector<double>& r,
+                                                    const unsigned& i,
+                                                    const unsigned& j)
+    {
+      // Find x,y on the slanted straight line (SSL) corresponding to
+      // the position of the macro element
+
+      // xi_line varies from xi0 to xi1 on the SSL
+      double xi0, xi1;
+      xi0 = double(i) / double(Ny2);
+      xi1 = double(i + 1) / double(Ny2);
+
+      Vector<double> xi_line(1);
+      xi_line[0] = xi0 + (1.0 + zeta[0]) / 2.0 * (xi1 - xi0);
+
+      Vector<double> r_line(2);
+      slanted_bound_up(t, xi_line, r_line);
+
+      // Find x,y on a vertical line corresponding
+      // to the position of the macro element
+
+      // The vertical line goes from y0 to y1
+      double y0, y1;
+      y0 = double(i) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
+      y1 = double(i + 1) * (Htot - Hleaflet) / double(Ny2) + Hleaflet;
+      ;
+
+      Vector<double> r_vert(2);
+      r_vert[0] = Lright + X_0;
+      r_vert[1] = y0 + (1.0 + zeta[0]) / 2.0 * (y1 - y0);
+
+      // Parameter with value 0 in Lright and value 1 on the wall.
+      double s = double(Nright - j) / double(Nright); /***Change****/
+
+      // Final expression of r
+      r[0] = r_vert[0] + s * (r_line[0] - r_vert[0]);
+      r[1] = r_vert[1] + s * (r_line[1] - r_vert[1]);
+    }
+
+    //=====================================================================
+    /// Helper function for northern boundary in upper right region
+    //=====================================================================
+    void ChannelWithLeafletDomain::macro_bound_IV_N(const unsigned& t,
+                                                    const Vector<double>& zeta,
+                                                    Vector<double>& r,
+                                                    const unsigned& i,
+                                                    const unsigned& j)
+    {
+      // Find the coordinates of the two corners of the north boundary
+      Vector<double> xi(1);
+      Vector<double> r_left(2);
+      Vector<double> r_right(2);
+      xi[0] = 1;
+      macro_bound_IV_W(t, xi, r_left, i, j);
+      macro_bound_IV_E(t, xi, r_right, i, j);
+
+      // Connect those two points with a straight line
+      r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
+      r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
+    }
+
+    //=====================================================================
+    /// Helper function for southern boundary in upper right region
+    //=====================================================================
+    void ChannelWithLeafletDomain::macro_bound_IV_S(const unsigned& t,
+                                                    const Vector<double>& zeta,
+                                                    Vector<double>& r,
+                                                    const unsigned& i,
+                                                    const unsigned& j)
+    {
+      // Find the coordinates of the two corners of the south boundary
+      Vector<double> xi(1);
+      Vector<double> r_left(2);
+      Vector<double> r_right(2);
+      xi[0] = -1;
+      macro_bound_IV_W(t, xi, r_left, i, j);
+      macro_bound_IV_E(t, xi, r_right, i, j);
+
+      // Connect those two points with a straight line
+      r[0] = r_left[0] + (1.0 + zeta[0]) / 2.0 * (r_right[0] - r_left[0]);
+      r[1] = r_left[1] + (1.0 + zeta[0]) / 2.0 * (r_right[1] - r_left[1]);
+    }
+
+
+  } // namespace oomph
+
 
 #endif

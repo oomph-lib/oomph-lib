@@ -27,11 +27,13 @@
 
 #include "navier_stokes_elements.h"
 
+
 namespace oomph
 {
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   /// Navier--Stokes equations static data
   template<unsigned DIM>
@@ -56,6 +58,7 @@ namespace oomph
   /// Navier-Stokes equations default gravity vector
   template<unsigned DIM>
   Vector<double> NavierStokesEquations<DIM>::Default_Gravity_vector(DIM, 0.0);
+
 
   //===================================================================
   /// Compute the diagonal of the velocity/pressure mass matrices.
@@ -127,6 +130,7 @@ namespace oomph
       // Premultiply weights and Jacobian
       double W = w * J;
 
+
       // Do we want the velocity one?
       if ((which_one == 0) || (which_one == 2))
       {
@@ -173,6 +177,7 @@ namespace oomph
       }
     }
   }
+
 
   //=======================================================================
   /// Compute norm of the solution
@@ -226,6 +231,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Compute the vector norm of FEM solution
   //======================================================================
@@ -271,6 +277,7 @@ namespace oomph
       norm[DIM] += std::pow(interpolated_p_nst(s), 2) * W;
     } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
   } // End of compute_norm
+
 
   //======================================================================
   /// Validate against exact velocity solution at given time.
@@ -376,6 +383,7 @@ namespace oomph
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
 
+
     outfile << "ZONE" << std::endl;
 
     // Exact solution Vector (u,v,[w],p)
@@ -427,6 +435,7 @@ namespace oomph
       outfile << std::endl;
     }
   }
+
 
   //======================================================================
   /// Validate against exact velocity solution at given time.
@@ -488,6 +497,7 @@ namespace oomph
       }
     }
   } // End of compute_error
+
 
   //======================================================================
   /// Validate against exact velocity solution Solution is provided via a
@@ -551,6 +561,7 @@ namespace oomph
       }
     } // for(unsigned ipt=0;ipt<n_intpt;ipt++)
   } // End of compute_error
+
 
   //======================================================================
   /// Output "exact" solution
@@ -781,6 +792,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //==============================================================
   /// C-style output function:
   /// x,y,[z],u,v,[w],p
@@ -823,6 +835,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //==============================================================
   /// Full output function:
@@ -883,6 +896,7 @@ namespace oomph
 
       // Calculate velocities and derivatives
 
+
       // Loop over directions
       for (unsigned i = 0; i < DIM; i++)
       {
@@ -903,6 +917,7 @@ namespace oomph
         }
       }
 
+
       // Get dudt in ALE form (incl mesh veloc)
       for (unsigned i = 0; i < DIM; i++)
       {
@@ -912,6 +927,7 @@ namespace oomph
           dudt_ALE[i] -= mesh_veloc[k] * interpolated_dudx(i, k);
         }
       }
+
 
       // Coordinates
       for (unsigned i = 0; i < DIM; i++)
@@ -943,12 +959,14 @@ namespace oomph
       // Dissipation
       outfile << dissipation(s) << " ";
 
+
       outfile << std::endl;
     }
 
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //==============================================================
   /// Output function for vorticity.
@@ -1019,6 +1037,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //==============================================================
   /// Return integral of dissipation over element
@@ -1228,6 +1247,7 @@ namespace oomph
     }
   }
 
+
   //==============================================================
   /// Compute 2D vorticity vector at local coordinate s (return in
   /// one and only component of vorticity vector
@@ -1295,6 +1315,7 @@ namespace oomph
     vorticity[0] = dudx(1, 0) - dudx(0, 1);
   }
 
+
   //==================================================================
   /// Compute vorticity vector at local coordinate s and return the
   /// one and only component of vorticity vector (only makes sense
@@ -1313,6 +1334,7 @@ namespace oomph
     // Assign the vorticity
     vorticity = vort[0];
   }
+
 
   //==============================================================
   /// Compute 3D vorticity vector at local coordinate s
@@ -1381,6 +1403,7 @@ namespace oomph
     vorticity[2] = dudx(1, 0) - dudx(0, 1);
   }
 
+
   //==============================================================
   ///  \short Get integral of kinetic energy over element:
   /// Note that this is the "raw" kinetic energy in the sense
@@ -1428,6 +1451,7 @@ namespace oomph
 
     return kin_en;
   }
+
 
   //==========================================================================
   ///  \short Get integral of time derivative of kinetic energy over element:
@@ -1512,6 +1536,7 @@ namespace oomph
         }
       }
 
+
       // Loop over directions and add up u du/dt  terms
       double sum = 0.0;
       for (unsigned i = 0; i < DIM; i++)
@@ -1524,6 +1549,7 @@ namespace oomph
 
     return d_kin_en_dt;
   }
+
 
   //==============================================================
   /// Return pressure integrated over the element
@@ -1568,6 +1594,7 @@ namespace oomph
     return press_int;
   }
 
+
   //==============================================================
   /// Compute the residuals for the associated pressure advection
   /// diffusion problem. Used by the Fp preconditioner.
@@ -1579,8 +1606,7 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Return immediately if there are no dofs
-    if (ndof() == 0)
-      return;
+    if (ndof() == 0) return;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -1738,6 +1764,7 @@ namespace oomph
     }
   }
 
+
   //==============================================================
   ///  Compute the residuals for the Navier--Stokes
   ///  equations; flag=1(or 0): do (or don't) compute the
@@ -1751,8 +1778,7 @@ namespace oomph
     unsigned flag)
   {
     // Return immediately if there are no dofs
-    if (ndof() == 0)
-      return;
+    if (ndof() == 0) return;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -1867,6 +1893,7 @@ namespace oomph
       // Get the user-defined source function
       double source = get_source_nst(time, ipt, interpolated_x);
 
+
       // MOMENTUM EQUATIONS
       //------------------
 
@@ -1905,12 +1932,12 @@ namespace oomph
             // du/dt term
             residuals[local_eqn] -= scaled_re_st * dudt[i] * testf[l] * W;
 
+
             // Convective terms, including mesh velocity
             for (unsigned k = 0; k < DIM; k++)
             {
               double tmp = scaled_re * interpolated_u[k];
-              if (!ALE_is_disabled)
-                tmp -= scaled_re_st * mesh_velocity[k];
+              if (!ALE_is_disabled) tmp -= scaled_re_st * mesh_velocity[k];
               residuals[local_eqn] -=
                 tmp * interpolated_dudx(i, k) * testf[l] * W;
             }
@@ -2001,6 +2028,7 @@ namespace oomph
         } // End of loop over dimension
       } // End of loop over shape functions
 
+
       // CONTINUITY EQUATION
       //-------------------
 
@@ -2083,6 +2111,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
+
 
   //======================================================================
   /// Compute derivatives of elemental residual vector with respect
@@ -2327,6 +2356,7 @@ namespace oomph
       Vector<double> source_gradient(DIM, 0.0);
       get_source_gradient_nst(time, ipt, interpolated_x, source_gradient);
 
+
       // Assemble shape derivatives
       // --------------------------
 
@@ -2463,6 +2493,7 @@ namespace oomph
         }
       } // End of loop over test functions
 
+
       // CONTINUITY EQUATION
       // -------------------
 
@@ -2524,6 +2555,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
@@ -2541,6 +2573,7 @@ namespace oomph
     3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
     3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
 
+
   //========================================================================
   /// Number of values (pinned or dofs) required at node n.
   //========================================================================
@@ -2550,6 +2583,7 @@ namespace oomph
   {
     return Initial_Nvalue[n];
   }
+
 
   //=========================================================================
   ///  Add to the set \c paired_load_data pairs containing
@@ -2587,6 +2621,7 @@ namespace oomph
     identify_pressure_data(paired_load_data);
   }
 
+
   //=========================================================================
   ///  Add to the set \c paired_pressue_data pairs containing
   /// - the pointer to a Data object
@@ -2613,6 +2648,7 @@ namespace oomph
       }
     }
   }
+
 
   //=============================================================================
   /// Create a list of pairs for all unknowns in this element,
@@ -2686,9 +2722,11 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   // 2D Taylor--Hood
   // Set the data for the number of Variables at each node
@@ -2774,6 +2812,7 @@ namespace oomph
     }
   }
 
+
   //============================================================================
   /// Create a list of pairs for all unknowns in this element,
   /// so the first entry in each pair contains the global equation
@@ -2825,6 +2864,7 @@ namespace oomph
       }
     }
   }
+
 
   //====================================================================
   //// Force build of templates

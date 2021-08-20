@@ -304,6 +304,7 @@ namespace oomph
 
     } // End of loop over integration points
 
+
     // Finally: My contribution to the volume constraint equation
     // (if any). Note this must call get_bounded_volume since the
     // definition of the bounded volume can be overloaded in derived
@@ -341,6 +342,7 @@ namespace oomph
   }
   */
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -364,6 +366,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// Compute in-plane stresses
@@ -412,6 +415,7 @@ namespace oomph
     sigma_xy = -interpolated_continuous_d2phidxdy;
   }
 
+
   //======================================================================
   /// Output function:
   ///
@@ -446,6 +450,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// C-style output function:
   ///
@@ -478,6 +483,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution
@@ -529,6 +535,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Validate against exact solution
@@ -607,6 +614,7 @@ namespace oomph
       error += (exact_soln[0] - w_fe) * (exact_soln[0] - w_fe) * W;
     }
   }
+
 
   //====================================================================
   // Force build of templates

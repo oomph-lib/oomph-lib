@@ -60,6 +60,7 @@ namespace oomph
       return hypre_preconditioner_pt;
     }
 
+
     /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
     /// systems -- calls Hypre version to stay consistent with previous default
     Preconditioner* get_elastic_preconditioner()
@@ -101,9 +102,11 @@ namespace oomph
 #endif
   } // namespace Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   // Setup method for the PseudoElasticPreconditioner.
@@ -307,6 +310,7 @@ namespace oomph
       } // for nrow_local
     } // for Dim
 
+
     // setup the solid subsidiary preconditioner
     // //////////////////////////////// this preconditioner uses the full S
     // matrix
@@ -400,6 +404,7 @@ namespace oomph
         }
         break;
       }
+
 
       // Add mesh (not actually used since this only acts as a subsidiary
       // preconditioner...
@@ -644,6 +649,7 @@ namespace oomph
       Scaling = 1.0;
     }
 
+
     // setup the solid subsidiary preconditioner
     // //////////////////////////////// this preconditioner uses the full S
     // matrix
@@ -749,6 +755,7 @@ namespace oomph
     Elastic_preconditioner_pt->preconditioner_solve(r, z);
   }
 
+
   //=============================================================================
   /// \short Apply the lagrange multiplier subsidiary preconditioner.
   //=============================================================================
@@ -794,9 +801,11 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// \short Setup the preconditioner
@@ -894,9 +903,11 @@ namespace oomph
     this->return_block_ordered_preconditioner_vector(y, z);
   }
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// clean up the memory

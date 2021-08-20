@@ -35,6 +35,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 #include "generic/Telements.h"
@@ -49,9 +50,8 @@ namespace oomph
   /// a separate equations class
   //======================================================================
   template<class ELEMENT>
-  class NavierStokesTractionElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class NavierStokesTractionElement : public virtual FaceGeometry<ELEMENT>,
+                                      public virtual FaceElement
   {
   private:
     /// Pointer to an imposed traction function
@@ -100,6 +100,7 @@ namespace oomph
       return J_eulerian_at_knot(ipt);
     }
 
+
     /// Function to calculate the traction applied to the fluid
     void get_traction(const double& time,
                       const Vector<double>& x,
@@ -122,6 +123,7 @@ namespace oomph
       }
     }
 
+
     ///\short This function returns the residuals for the
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
@@ -137,8 +139,8 @@ namespace oomph
     NavierStokesTractionElement(
       FiniteElement* const& element_pt,
       const int& face_index,
-      const bool& called_from_refineable_constructor = false) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+      const bool& called_from_refineable_constructor = false)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -220,9 +222,11 @@ namespace oomph
     }
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //============================================================================
   /// Function that returns the residuals for the imposed traction Navier_Stokes
@@ -312,9 +316,11 @@ namespace oomph
     }
   }
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for elements that allow the imposition of an applied traction
@@ -326,21 +332,22 @@ namespace oomph
   /// THIS IS THE REFINEABLE VERSION.
   //======================================================================
   template<class ELEMENT>
-  class RefineableNavierStokesTractionElement :
-    public virtual NavierStokesTractionElement<ELEMENT>,
-    public virtual NonRefineableElementWithHangingNodes
+  class RefineableNavierStokesTractionElement
+    : public virtual NavierStokesTractionElement<ELEMENT>,
+      public virtual NonRefineableElementWithHangingNodes
   {
   public:
     /// Constructor, which takes a "bulk" element and the face index
     RefineableNavierStokesTractionElement(FiniteElement* const& element_pt,
-                                          const int& face_index) :
-      // we're calling this from the constructor of the refineable version.
-      NavierStokesTractionElement<ELEMENT>(element_pt, face_index, true)
+                                          const int& face_index)
+      : // we're calling this from the constructor of the refineable version.
+        NavierStokesTractionElement<ELEMENT>(element_pt, face_index, true)
     {
     }
 
     /// Destructor should not delete anything
     ~RefineableNavierStokesTractionElement() {}
+
 
     /// \short Number of continuously interpolated values are the
     /// same as those in the bulk element.
@@ -367,6 +374,7 @@ namespace oomph
         residuals, jacobian, 1);
     }
 
+
   protected:
     ///\short This function returns the residuals for the
     /// traction function.
@@ -375,9 +383,11 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //============================================================================
   /// Function that returns the residuals for the imposed traction Navier_Stokes
@@ -521,6 +531,7 @@ namespace oomph
               /*        if(local_eqn >= 0) */
               /*         { */
 
+
               // Add the user-defined traction terms
               residuals[local_eqn] += traction[i] * testf[l] * W * hang_weight;
 
@@ -533,6 +544,7 @@ namespace oomph
       } // End of loop over shape functions
     }
   }
+
 
 } // namespace oomph
 

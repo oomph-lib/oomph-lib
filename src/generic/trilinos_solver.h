@@ -52,13 +52,11 @@ namespace oomph
     OomphLibPreconditionerEpetraOperator(Preconditioner* preconditioner_pt,
                                          bool use_epetra_values = false)
 #ifdef OOMPH_HAS_MPI
-      :
-      Operator_comm(
-        preconditioner_pt->distribution_pt()->communicator_pt()->mpi_comm()),
-      Use_epetra_values(use_epetra_values)
+      : Operator_comm(
+          preconditioner_pt->distribution_pt()->communicator_pt()->mpi_comm()),
+        Use_epetra_values(use_epetra_values)
 #else
-      :
-      Operator_comm(), Use_epetra_values(use_epetra_values)
+      : Operator_comm(), Use_epetra_values(use_epetra_values)
 #endif
     {
       // set the ooomph-lib preconditioner
@@ -84,11 +82,9 @@ namespace oomph
     OomphLibPreconditionerEpetraOperator(
       const OomphLibPreconditionerEpetraOperator&)
 #ifdef OOMPH_HAS_MPI
-      :
-      Operator_comm(MPI_Helpers::communicator_pt()->mpi_comm())
+      : Operator_comm(MPI_Helpers::communicator_pt()->mpi_comm())
 #else
-      :
-      Operator_comm()
+      : Operator_comm()
 #endif
     {
       BrokenCopy::broken_copy("OomphLibPreconditionerEpetraOperator");
@@ -120,6 +116,7 @@ namespace oomph
       throw OomphLibError(
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
+
 
     /// \short applies the oomph-lib preconditioner. Converts the Epetra vector
     /// applys the preconditioner by calling the oomph-lib preconditioner's
@@ -239,6 +236,7 @@ namespace oomph
       return *Operator_map_pt;
     }
 
+
   private:
     /// A pointer to the oomph-lib preconditioner
     Preconditioner* Oomph_lib_preconditioner_pt;
@@ -265,6 +263,7 @@ namespace oomph
     /// a label for the preconditioner ( for Epetra_Operator::Label() )
     std::string Preconditioner_label;
   };
+
 
   //=============================================================================
   /// \short An interface to the Trilinos AztecOO classes allowing it to be used
@@ -388,6 +387,7 @@ namespace oomph
       {
         this->preconditioner_pt()->clean_up_memory();
       }
+
 
       // delete the matrices
       // This must now happen after the preconditioner delete because the

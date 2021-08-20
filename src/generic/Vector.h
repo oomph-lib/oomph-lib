@@ -42,6 +42,7 @@
 // Oomph-lib error handler
 #include "oomph_definitions.h"
 
+
 namespace oomph
 {
   //===========================================================================
@@ -204,6 +205,7 @@ namespace oomph
     /// Typedef to make the constructors look a bit cleaner
     typedef size_t size_type;
 
+
     /// \short Dummy constructor to avoid compiler from warning about
     /// only-private constructors
     Vector(const double& dont_call_this_constructor)
@@ -245,6 +247,7 @@ namespace oomph
     }
   };
 
+
   //=================================================================
   /// Namespace for helper functions for Vector<double>
   //=================================================================
@@ -267,6 +270,7 @@ namespace oomph
       }
 #endif
     }
+
 
     /// \short Probably not always best/fastest because not optimised for
     /// dimension but useful...
@@ -294,6 +298,7 @@ namespace oomph
       // call to magnitude(...)
       return std::acos(dot(a, b) / std::sqrt(dot(a, a) * dot(b, b)));
     }
+
 
     /// \short Cross product using "proper" output (move semantics means this is
     /// ok nowadays).
@@ -333,6 +338,8 @@ namespace oomph
 
   } // namespace VectorHelpers
 
+
 } // namespace oomph
+
 
 #endif

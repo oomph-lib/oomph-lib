@@ -65,6 +65,7 @@ namespace oomph
       return 0.0;
     }
 
+
     ///\short Helper range checking function
     /// (Note that this only captures over-runs in 3D but
     /// errors are likely to be caught in evaluation of the
@@ -107,6 +108,7 @@ namespace oomph
       }
     }
 
+
     /// Empty Constructor
     ElasticityTensor() {}
 
@@ -129,6 +131,7 @@ namespace oomph
       return independent_component(Index[i][j][k][l]);
     }
   };
+
 
   //===================================================================
   /// An isotropic elasticity tensor defined in terms of Young's modulus
@@ -154,8 +157,8 @@ namespace oomph
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
     /// equations).
-    IsotropicElasticityTensor(const double& nu, const double& E) :
-      ElasticityTensor()
+    IsotropicElasticityTensor(const double& nu, const double& E)
+      : ElasticityTensor()
     {
       // Set the three independent components
       C[0] = 0.0;
@@ -189,11 +192,13 @@ namespace oomph
       this->set_lame_coefficients(lame[0], lame[1]);
     }
 
+
     /// Overload the independent coefficient function
     inline double independent_component(const unsigned& i) const
     {
       return C[StaticIndex[i]];
     }
+
 
   private:
     // Set the values of the lame coefficients
@@ -204,6 +209,7 @@ namespace oomph
       C[3] = mu;
     }
   };
+
 
   //===================================================================
   /// An isotropic elasticity tensor defined in terms of Young's modulus
@@ -248,8 +254,8 @@ namespace oomph
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
     /// equations).
-    DeviatoricIsotropicElasticityTensor(const double& nu, const double& E) :
-      ElasticityTensor()
+    DeviatoricIsotropicElasticityTensor(const double& nu, const double& E)
+      : ElasticityTensor()
     {
       // Set the three independent components
       C[0] = 0.0;
@@ -282,6 +288,7 @@ namespace oomph
       C[0] = 0.0;
       this->set_lame_coefficients(lame[0], lame[1]);
     }
+
 
     /// Overload the independent coefficient function
     inline double independent_component(const unsigned& i) const

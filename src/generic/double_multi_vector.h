@@ -56,8 +56,8 @@ namespace oomph
   {
   public:
     /// \short Constructor for an uninitialized DoubleMultiVector
-    DoubleMultiVector() :
-      Values(0), Nvector(0), Internal_values(true), Built(false)
+    DoubleMultiVector()
+      : Values(0), Nvector(0), Internal_values(true), Built(false)
     {
     }
 
@@ -67,8 +67,8 @@ namespace oomph
     /// defaults to 0).
     DoubleMultiVector(const unsigned& n_vector,
                       const LinearAlgebraDistribution* const& dist_pt,
-                      const double& v = 0.0) :
-      Values(0), Nvector(n_vector), Internal_values(true), Built(false)
+                      const double& v = 0.0)
+      : Values(0), Nvector(n_vector), Internal_values(true), Built(false)
     {
       this->build(n_vector, dist_pt, v);
       this->setup_doublevector_representation();
@@ -80,8 +80,8 @@ namespace oomph
     /// defaults to 0).
     DoubleMultiVector(const unsigned& n_vector,
                       const LinearAlgebraDistribution& dist,
-                      const double& v = 0.0) :
-      Values(0), Nvector(n_vector), Internal_values(true), Built(false)
+                      const double& v = 0.0)
+      : Values(0), Nvector(n_vector), Internal_values(true), Built(false)
     {
       this->build(n_vector, dist, v);
       this->setup_doublevector_representation();
@@ -92,8 +92,8 @@ namespace oomph
     /// v
     DoubleMultiVector(const unsigned& n_vector,
                       const DoubleMultiVector& old_vector,
-                      const double& initial_value = 0.0) :
-      Values(0), Nvector(n_vector), Internal_values(true), Built(false)
+                      const double& initial_value = 0.0)
+      : Values(0), Nvector(n_vector), Internal_values(true), Built(false)
     {
       this->build(n_vector, old_vector.distribution_pt(), initial_value);
       this->setup_doublevector_representation();
@@ -104,8 +104,8 @@ namespace oomph
     /// shallow or deep copy (default deep)
     DoubleMultiVector(const DoubleMultiVector& old_vector,
                       const std::vector<int>& index,
-                      const bool& deep_copy = true) :
-      Values(0), Nvector(0), Internal_values(deep_copy), Built(false)
+                      const bool& deep_copy = true)
+      : Values(0), Nvector(0), Internal_values(deep_copy), Built(false)
     {
       // Build the storage based on the size of index
       unsigned n_vector = index.size();
@@ -143,8 +143,8 @@ namespace oomph
     /// is that it is a deep copy.
     DoubleMultiVector(const DoubleMultiVector& old_vector,
                       const Teuchos::Range1D& index,
-                      const bool& deep_copy = true) :
-      Values(0), Nvector(0), Internal_values(deep_copy), Built(false)
+                      const bool& deep_copy = true)
+      : Values(0), Nvector(0), Internal_values(deep_copy), Built(false)
     {
       // Build the storage based on the size of index
       unsigned n_vector = index.size();
@@ -181,16 +181,17 @@ namespace oomph
 #endif
 
     /// Copy constructor
-    DoubleMultiVector(const DoubleMultiVector& new_vector) :
-      DistributableLinearAlgebraObject(),
-      Values(0),
-      Nvector(0),
-      Internal_values(true),
-      Built(false)
+    DoubleMultiVector(const DoubleMultiVector& new_vector)
+      : DistributableLinearAlgebraObject(),
+        Values(0),
+        Nvector(0),
+        Internal_values(true),
+        Built(false)
     {
       this->build(new_vector);
       this->setup_doublevector_representation();
     }
+
 
     /// Destructor - just calls this->clear() to delete the distribution and
     /// data
@@ -245,6 +246,7 @@ namespace oomph
       this->shallow_build(n_vector, &dist);
     }
 
+
     /// \short Build the storage for pointers to vectors with a given
     /// distribution, but do not populate the pointers
     void shallow_build(const unsigned& n_vector,
@@ -273,6 +275,7 @@ namespace oomph
         Built = false;
       }
     }
+
 
     /// \short Provides a (deep) copy of the old_vector
     void build(const DoubleMultiVector& old_vector)
@@ -576,6 +579,7 @@ namespace oomph
       }
 #endif //
 
+
       double** v_values = vec.values();
       const unsigned n_vector = this->nvector();
       const unsigned n_row_local = this->nrow_local();
@@ -658,6 +662,7 @@ namespace oomph
         }
       }
     }
+
 
     /// access function to the underlying values
     double** values()
@@ -798,6 +803,7 @@ namespace oomph
       output(some_file);
       some_file.close();
     }
+
 
     /// compute the 2 norm of this vector
     void dot(const DoubleMultiVector& vec, std::vector<double>& result) const
@@ -1011,5 +1017,6 @@ namespace oomph
   }; // end of DoubleVector
 
 } // namespace oomph
+
 
 #endif

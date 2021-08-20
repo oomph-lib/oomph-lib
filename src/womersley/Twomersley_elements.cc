@@ -26,17 +26,20 @@
 // Non-inline functions for Womersley elements
 #include "Twomersley_elements.h"
 
+
 namespace oomph
 {
   /////////////////////////////////////////////////////////////////////////
   // TWomersleyElement
   /////////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   // Set the data for the number of Variables at each node, always 1
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   const unsigned TWomersleyElement<DIM, NNODE_1D>::Initial_Nvalue = 1;
+
 
   //====================================================================
   // Force build of templates

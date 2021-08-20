@@ -113,19 +113,19 @@ namespace oomph
 
     /// \short Constructor: Set up default values for number of V-cycles
     /// and pre- and post-smoothing steps.
-    MGSolver(MGProblem* mg_problem_pt) :
-      Nvcycle(200),
-      Mg_problem_pt(mg_problem_pt),
-      Suppress_v_cycle_output(false),
-      Suppress_all_output(false),
-      Stream_pt(0),
-      Pre_smoother_factory_function_pt(0),
-      Post_smoother_factory_function_pt(0),
-      Npre_smooth(2),
-      Npost_smooth(2),
-      Doc_everything(false),
-      Has_been_setup(false),
-      Has_been_solved(false)
+    MGSolver(MGProblem* mg_problem_pt)
+      : Nvcycle(200),
+        Mg_problem_pt(mg_problem_pt),
+        Suppress_v_cycle_output(false),
+        Suppress_all_output(false),
+        Stream_pt(0),
+        Pre_smoother_factory_function_pt(0),
+        Post_smoother_factory_function_pt(0),
+        Npre_smooth(2),
+        Npost_smooth(2),
+        Doc_everything(false),
+        Has_been_setup(false),
+        Has_been_solved(false)
     {
       // Set the tolerance in the base class
       this->Tolerance = 1.0e-09;

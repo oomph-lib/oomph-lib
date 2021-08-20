@@ -46,16 +46,17 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// Refineable version of the Navier--Stokes equations
   ///
   ///
   //======================================================================
   template<unsigned DIM>
-  class RefineableGeneralisedNewtonianNavierStokesEquations :
-    public virtual GeneralisedNewtonianNavierStokesEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableGeneralisedNewtonianNavierStokesEquations
+    : public virtual GeneralisedNewtonianNavierStokesEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   protected:
     /// \short Unpin all pressure dofs in the element
@@ -67,12 +68,13 @@ namespace oomph
 
   public:
     /// \short Constructor
-    RefineableGeneralisedNewtonianNavierStokesEquations() :
-      GeneralisedNewtonianNavierStokesEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableGeneralisedNewtonianNavierStokesEquations()
+      : GeneralisedNewtonianNavierStokesEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// \short  Loop over all elements in Vector (which typically contains
     /// all the elements in a fluid mesh) and pin the nodal pressure degrees
@@ -127,6 +129,7 @@ namespace oomph
       Vector<double>& press_mass_diag,
       Vector<double>& veloc_mass_diag,
       const unsigned& which_one = 0);
+
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -209,6 +212,7 @@ namespace oomph
       // Set the ALE flag
       this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
     }
+
 
     /// \short Compute the derivatives of the i-th component of
     /// velocity at point s with respect
@@ -349,6 +353,7 @@ namespace oomph
       }
     }
 
+
   protected:
     /// \short Add element's contribution to elemental residual vector and/or
     /// Jacobian matrix
@@ -368,15 +373,16 @@ namespace oomph
       RankThreeTensor<double>& dresidual_dnodal_coordinates);
   };
 
+
   //======================================================================
   /// Refineable version of Taylor Hood elements. These classes
   /// can be written in total generality.
   //======================================================================
   template<unsigned DIM>
-  class RefineableGeneralisedNewtonianQTaylorHoodElement :
-    public GeneralisedNewtonianQTaylorHoodElement<DIM>,
-    public virtual RefineableGeneralisedNewtonianNavierStokesEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableGeneralisedNewtonianQTaylorHoodElement
+    : public GeneralisedNewtonianQTaylorHoodElement<DIM>,
+      public virtual RefineableGeneralisedNewtonianNavierStokesEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   private:
     /// Unpin all pressure dofs
@@ -419,11 +425,11 @@ namespace oomph
 
   public:
     /// \short Constructor
-    RefineableGeneralisedNewtonianQTaylorHoodElement() :
-      RefineableElement(),
-      RefineableGeneralisedNewtonianNavierStokesEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      GeneralisedNewtonianQTaylorHoodElement<DIM>()
+    RefineableGeneralisedNewtonianQTaylorHoodElement()
+      : RefineableElement(),
+        RefineableGeneralisedNewtonianNavierStokesEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        GeneralisedNewtonianQTaylorHoodElement<DIM>()
     {
     }
 
@@ -523,6 +529,7 @@ namespace oomph
       //(no history is carried in the pressure)
       values[DIM] = this->interpolated_p_nst(s);
     }
+
 
     ///  \short Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. The pressures are stored
@@ -637,6 +644,7 @@ namespace oomph
       }
     }
 
+
     /// \short The number of 1d pressure nodes is 2, the number of 1d velocity
     /// nodes is the same as the number of 1d geometric nodes.
     unsigned ninterpolating_node_1d(const int& value_id)
@@ -680,6 +688,7 @@ namespace oomph
         return this->shape(s, psi);
       }
     }
+
 
     /// \short Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
@@ -779,19 +788,21 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// \short Face geometry of the RefineableQTaylorHoodElements is the
   /// same as the Face geometry of the QTaylorHoodElements.
   //=======================================================================
   template<unsigned DIM>
-  class FaceGeometry<RefineableGeneralisedNewtonianQTaylorHoodElement<DIM>> :
-    public virtual FaceGeometry<GeneralisedNewtonianQTaylorHoodElement<DIM>>
+  class FaceGeometry<RefineableGeneralisedNewtonianQTaylorHoodElement<DIM>>
+    : public virtual FaceGeometry<GeneralisedNewtonianQTaylorHoodElement<DIM>>
   {
   public:
     FaceGeometry() : FaceGeometry<GeneralisedNewtonianQTaylorHoodElement<DIM>>()
     {
     }
   };
+
 
   //=======================================================================
   /// \short Face geometry of the face geometry of
@@ -800,29 +811,32 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   class FaceGeometry<
-    FaceGeometry<RefineableGeneralisedNewtonianQTaylorHoodElement<DIM>>> :
-    public virtual FaceGeometry<
-      FaceGeometry<GeneralisedNewtonianQTaylorHoodElement<DIM>>>
+    FaceGeometry<RefineableGeneralisedNewtonianQTaylorHoodElement<DIM>>>
+    : public virtual FaceGeometry<
+        FaceGeometry<GeneralisedNewtonianQTaylorHoodElement<DIM>>>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<FaceGeometry<GeneralisedNewtonianQTaylorHoodElement<DIM>>>()
+    FaceGeometry()
+      : FaceGeometry<
+          FaceGeometry<GeneralisedNewtonianQTaylorHoodElement<DIM>>>()
     {
     }
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Refineable version of Crouzeix Raviart elements. Generic class definitions
   //======================================================================
   template<unsigned DIM>
-  class RefineableGeneralisedNewtonianQCrouzeixRaviartElement :
-    public GeneralisedNewtonianQCrouzeixRaviartElement<DIM>,
-    public virtual RefineableGeneralisedNewtonianNavierStokesEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableGeneralisedNewtonianQCrouzeixRaviartElement
+    : public GeneralisedNewtonianQCrouzeixRaviartElement<DIM>,
+      public virtual RefineableGeneralisedNewtonianNavierStokesEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   private:
     /// Unpin all internal pressure dofs
@@ -838,13 +852,14 @@ namespace oomph
 
   public:
     /// \short Constructor
-    RefineableGeneralisedNewtonianQCrouzeixRaviartElement() :
-      RefineableElement(),
-      RefineableGeneralisedNewtonianNavierStokesEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      GeneralisedNewtonianQCrouzeixRaviartElement<DIM>()
+    RefineableGeneralisedNewtonianQCrouzeixRaviartElement()
+      : RefineableElement(),
+        RefineableGeneralisedNewtonianNavierStokesEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        GeneralisedNewtonianQCrouzeixRaviartElement<DIM>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableGeneralisedNewtonianQCrouzeixRaviartElement(
@@ -965,6 +980,7 @@ namespace oomph
     /// elements. This must be specialised for each dimension.
     inline void further_build();
 
+
     /// \short Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
     /// and
@@ -1024,6 +1040,7 @@ namespace oomph
         }
       }
 
+
       // Loop over the pressure data (can't be hanging!)
       unsigned n_pres = this->npres_nst();
       for (unsigned l = 0; l < n_pres; l++)
@@ -1036,15 +1053,16 @@ namespace oomph
     }
   };
 
+
   //======================================================================
   /// p-refineable version of Crouzeix Raviart elements. Generic class
   /// definitions
   //======================================================================
   template<unsigned DIM>
-  class PRefineableGeneralisedNewtonianQCrouzeixRaviartElement :
-    public GeneralisedNewtonianQCrouzeixRaviartElement<DIM>,
-    public virtual RefineableGeneralisedNewtonianNavierStokesEquations<DIM>,
-    public virtual PRefineableQElement<DIM, 3>
+  class PRefineableGeneralisedNewtonianQCrouzeixRaviartElement
+    : public GeneralisedNewtonianQCrouzeixRaviartElement<DIM>,
+      public virtual RefineableGeneralisedNewtonianNavierStokesEquations<DIM>,
+      public virtual PRefineableQElement<DIM, 3>
   {
   private:
     /// Unpin all internal pressure dofs
@@ -1061,11 +1079,11 @@ namespace oomph
 
   public:
     /// \short Constructor
-    PRefineableGeneralisedNewtonianQCrouzeixRaviartElement() :
-      RefineableElement(),
-      RefineableGeneralisedNewtonianNavierStokesEquations<DIM>(),
-      PRefineableQElement<DIM, 3>(),
-      GeneralisedNewtonianQCrouzeixRaviartElement<DIM>()
+    PRefineableGeneralisedNewtonianQCrouzeixRaviartElement()
+      : RefineableElement(),
+        RefineableGeneralisedNewtonianNavierStokesEquations<DIM>(),
+        PRefineableQElement<DIM, 3>(),
+        GeneralisedNewtonianQCrouzeixRaviartElement<DIM>()
     {
       // Set the p-order
       this->p_order() = 3;
@@ -1096,6 +1114,7 @@ namespace oomph
     {
       delete this->integral_pt();
     }
+
 
     /// Broken copy constructor
     PRefineableGeneralisedNewtonianQCrouzeixRaviartElement(
@@ -1288,18 +1307,18 @@ namespace oomph
     void further_build();
   };
 
+
   //=======================================================================
   /// Face geometry of the RefineableQuadQCrouzeixRaviartElements
   //=======================================================================
   template<unsigned DIM>
-  class FaceGeometry<
-    RefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>> :
-    public virtual FaceGeometry<
-      GeneralisedNewtonianQCrouzeixRaviartElement<DIM>>
+  class FaceGeometry<RefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>>
+    : public virtual FaceGeometry<
+        GeneralisedNewtonianQCrouzeixRaviartElement<DIM>>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<GeneralisedNewtonianQCrouzeixRaviartElement<DIM>>()
+    FaceGeometry()
+      : FaceGeometry<GeneralisedNewtonianQCrouzeixRaviartElement<DIM>>()
     {
     }
   };
@@ -1312,17 +1331,18 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   class FaceGeometry<
-    FaceGeometry<RefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>>> :
-    public virtual FaceGeometry<
-      FaceGeometry<GeneralisedNewtonianQCrouzeixRaviartElement<DIM>>>
+    FaceGeometry<RefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>>>
+    : public virtual FaceGeometry<
+        FaceGeometry<GeneralisedNewtonianQCrouzeixRaviartElement<DIM>>>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<
-        FaceGeometry<GeneralisedNewtonianQCrouzeixRaviartElement<DIM>>>()
+    FaceGeometry()
+      : FaceGeometry<
+          FaceGeometry<GeneralisedNewtonianQCrouzeixRaviartElement<DIM>>>()
     {
     }
   };
+
 
   // Inline functions
 
@@ -1360,6 +1380,7 @@ namespace oomph
     // Use the average
     internal_data_pt(this->P_nst_internal_index)->set_value(0, 0.25 * av_press);
 
+
     // Slope in s_0 direction
     //----------------------
 
@@ -1390,9 +1411,11 @@ namespace oomph
                       ->internal_data_pt(this->P_nst_internal_index)
                       ->value(0);
 
+
     // Use the average
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(1, 0.5 * (slope1 + slope2));
+
 
     // Slope in s_1 direction
     //----------------------
@@ -1424,10 +1447,12 @@ namespace oomph
                ->internal_data_pt(this->P_nst_internal_index)
                ->value(0);
 
+
     // Use the average
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(2, 0.5 * (slope1 + slope2));
   }
+
 
   //=================================================================
   /// 3D Rebuild from sons: Reconstruct pressure from the (merged) sons
@@ -1461,6 +1486,7 @@ namespace oomph
     // Use the average
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(0, 0.125 * av_press);
+
 
     // Slope in s_0 direction
     //----------------------
@@ -1514,9 +1540,11 @@ namespace oomph
                       ->internal_data_pt(this->P_nst_internal_index)
                       ->value(0);
 
+
     // Use the average
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(1, 0.25 * (slope1 + slope2 + slope3 + slope4));
+
 
     // Slope in s_1 direction
     //----------------------
@@ -1570,9 +1598,11 @@ namespace oomph
                ->internal_data_pt(this->P_nst_internal_index)
                ->value(0);
 
+
     // Use the average
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(2, 0.25 * (slope1 + slope2 + slope3 + slope4));
+
 
     // Slope in s_2 direction
     //----------------------
@@ -1630,6 +1660,7 @@ namespace oomph
     internal_data_pt(this->P_nst_internal_index)
       ->set_value(3, 0.25 * (slope1 + slope2 + slope3 + slope4));
   }
+
 
   //======================================================================
   /// 2D Further build for Crouzeix_Raviart interpolates the internal
@@ -1705,6 +1736,7 @@ namespace oomph
         ->set_value(i, half_father_slope);
     }
   }
+
 
   //=======================================================================
   /// 3D Further build for Crouzeix_Raviart interpolates the internal

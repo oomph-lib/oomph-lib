@@ -28,11 +28,13 @@
 
 #include "solid_elements.h"
 
+
 namespace oomph
 {
   /// Static default value for timescale ratio (1.0 -- for natural scaling)
   template<unsigned DIM>
   double PVDEquationsBase<DIM>::Default_lambda_sq_value = 1.0;
+
 
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
@@ -133,6 +135,7 @@ namespace oomph
         }
       }
     }
+
 
     // Declare and calculate the deformed metric tensor
     DenseMatrix<double> G(DIM);
@@ -294,6 +297,7 @@ namespace oomph
       // Get isotropic growth factor
       double gamma = 1.0;
       this->get_isotropic_growth(ipt, s, interpolated_xi, gamma);
+
 
       // Get body force at current time
       Vector<double> b(DIM);
@@ -479,8 +483,7 @@ namespace oomph
                           for (unsigned b = a; b < DIM; b++)
                           {
                             double factor = d_G_dX.raw_direct_access(count1);
-                            if (a == b)
-                              factor *= 0.5;
+                            if (a == b) factor *= 0.5;
 
                             // Offset for faster access
                             unsigned offset3 = d_stress_dG.offset(a, b);
@@ -564,6 +567,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //=======================================================================
   /// Output: x,y,[z],xi0,xi1,[xi2],gamma
   //=======================================================================
@@ -611,10 +615,12 @@ namespace oomph
       outfile << std::endl;
     }
 
+
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(outfile, n_plot);
     outfile << std::endl;
   }
+
 
   //=======================================================================
   /// C-style output: x,y,[z],xi0,xi1,[xi2],gamma
@@ -737,6 +743,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Output: x,y,[z],xi0,xi1,[xi2],gamma strain and stress components
   //=======================================================================
@@ -804,13 +811,16 @@ namespace oomph
         }
       }
 
+
       outfile << std::endl;
     }
+
 
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(outfile, n_plot);
     outfile << std::endl;
   }
+
 
   //=======================================================================
   /// Get potential (strain) and kinetic energy
@@ -927,6 +937,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Compute the contravariant second Piola Kirchoff stress at a given local
   /// coordinate. Note: this replicates a lot of code that is already
@@ -982,6 +993,7 @@ namespace oomph
         }
       }
     }
+
 
     // Calculate interpolated values of the derivative of global position
     // wrt lagrangian coordinates
@@ -1044,9 +1056,11 @@ namespace oomph
     get_stress(g, G, sigma);
   }
 
+
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Compute principal stress vectors and (scalar) principal stresses
@@ -1160,6 +1174,7 @@ namespace oomph
       norm[i] = sqrt(norm[i]);
     }
 
+
     // Scaling and then multiplying by eigenvalue gives the principal stress
     // vectors
     for (unsigned i = 0; i < DIM; i++)
@@ -1171,6 +1186,7 @@ namespace oomph
       }
     }
   }
+
 
   //=======================================================================
   /// Return the deformed covariant basis vectors
@@ -1191,8 +1207,10 @@ namespace oomph
     Shape psi(n_node, n_position_type);
     DShape dpsidxi(n_node, n_position_type, DIM);
 
+
     // Call the derivatives of the shape functions (ignore Jacobian)
     (void)dshape_lagrangian(s, psi, dpsidxi);
+
 
     // Initialise to zero
     for (unsigned i = 0; i < DIM; i++)
@@ -1223,6 +1241,7 @@ namespace oomph
     }
   }
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
@@ -1234,6 +1253,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   int PVDEquationsBase<DIM>::Solid_pressure_not_stored_at_node = -100;
+
 
   //=======================================================================
   /// Fill in element's contribution to the elemental
@@ -1267,6 +1287,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Simply set up initial condition?
     if (this->Solid_ic_pt != 0)
@@ -1418,6 +1439,7 @@ namespace oomph
         interpolated_solid_p += solid_p(l) * psisp[l];
       }
 
+
       // Declare and calculate the deformed metric tensor
       DenseMatrix<double> G(DIM);
 
@@ -1487,6 +1509,7 @@ namespace oomph
           }
         }
       }
+
 
       // Incompressible: Compute the deviatoric part of the stress tensor, the
       // contravariant deformed metric tensor and the determinant
@@ -1654,8 +1677,7 @@ namespace oomph
                           for (unsigned b = a; b < DIM; b++)
                           {
                             double factor = d_G_dX.raw_direct_access(count1);
-                            if (a == b)
-                              factor *= 0.5;
+                            if (a == b) factor *= 0.5;
 
                             // Offset for faster access
                             unsigned offset3 = d_stress_dG.offset(a, b);
@@ -1778,6 +1800,7 @@ namespace oomph
           if (Incompressible)
           {
             residuals[local_eqn] += (detG - gamma) * psisp[l] * W;
+
 
             // Get Jacobian too?
             if ((flag == 1) || (flag == 3))
@@ -1903,6 +1926,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //=======================================================================
   /// Output: x,y,[z],xi0,xi1,[xi2],p,gamma
   //=======================================================================
@@ -1957,6 +1981,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(outfile, n_plot);
   }
+
 
   //=======================================================================
   /// C-stsyle output: x,y,[z],xi0,xi1,[xi2],p,gamma
@@ -2083,6 +2108,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Output: x,y,[z],xi0,xi1,[xi2],gamma strain and stress components
   //=======================================================================
@@ -2153,13 +2179,16 @@ namespace oomph
         }
       }
 
+
       outfile << std::endl;
     }
+
 
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(outfile, n_plot);
     outfile << std::endl;
   }
+
 
   //=======================================================================
   /// Compute the diagonal of the velocity mass matrix for LSC
@@ -2223,6 +2252,7 @@ namespace oomph
       } // End of loop over basis functions
     }
   }
+
 
   //=======================================================================
   /// Compute the contravariant second Piola Kirchoff stress at a given local
@@ -2289,6 +2319,7 @@ namespace oomph
       }
     }
 
+
     // Calculate interpolated values of the derivative of global position
     // wrt lagrangian coordinates
     DenseMatrix<double> interpolated_G(DIM);
@@ -2347,6 +2378,7 @@ namespace oomph
       }
     }
 
+
     // Calculate the interpolated solid pressure
     double interpolated_solid_p = 0.0;
     for (unsigned l = 0; l < n_solid_pres; l++)
@@ -2387,9 +2419,11 @@ namespace oomph
     }
   }
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// Data for the number of Variables at each node
@@ -2418,6 +2452,7 @@ namespace oomph
   template<>
   const unsigned QPVDElementWithContinuousPressure<3>::Pconv[8] = {
     0, 2, 6, 8, 18, 20, 24, 26};
+
 
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -2448,6 +2483,7 @@ namespace oomph
   //=======================================================================
   template<>
   const unsigned TPVDElementWithContinuousPressure<3>::Pconv[4] = {0, 1, 2, 3};
+
 
   // Instantiate the required elements
   template class QPVDElementWithPressure<2>;

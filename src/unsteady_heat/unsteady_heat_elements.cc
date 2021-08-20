@@ -26,9 +26,11 @@
 // Non-inline functions for UnsteadyHeat elements
 #include "unsteady_heat_elements.h"
 
+
 namespace oomph
 {
   /// 2D UnsteadyHeat elements
+
 
   /// Default value for Alpha parameter (thermal inertia)
   template<unsigned DIM>
@@ -37,6 +39,7 @@ namespace oomph
   /// Default value for Beta parameter (thermal conductivity)
   template<unsigned DIM>
   double UnsteadyHeatEquations<DIM>::Default_beta_parameter = 1.0;
+
 
   //======================================================================
   // Set the data for the number of Variables at each node
@@ -169,6 +172,7 @@ namespace oomph
               beta_local * interpolated_dudx[k] * dtestdx(l, k) * W;
           }
 
+
           // Calculate the jacobian
           //-----------------------
           if (flag)
@@ -199,8 +203,10 @@ namespace oomph
         }
       }
 
+
     } // End of loop over integration points
   }
+
 
   //======================================================================
   /// Compute norm of fe solution
@@ -276,6 +282,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Output function:
   ///
@@ -311,6 +318,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// C-style output function:
   ///
@@ -344,6 +352,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution
@@ -396,6 +405,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// Output exact solution at time t
   ///
@@ -417,6 +427,7 @@ namespace oomph
 
     // Vector for coordintes
     Vector<double> x(DIM);
+
 
     // Tecplot header info
     outfile << tecplot_zone_string(nplot);
@@ -448,6 +459,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Validate against exact solution
@@ -527,6 +539,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Validate against exact solution at time t.
   ///
@@ -552,6 +565,7 @@ namespace oomph
 
     // Vector for coordintes
     Vector<double> x(DIM);
+
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -607,6 +621,7 @@ namespace oomph
     }
   }
 
+
   //====================================================================
   // Force build of templates
   //====================================================================
@@ -621,5 +636,6 @@ namespace oomph
   template class QUnsteadyHeatElement<3, 2>;
   template class QUnsteadyHeatElement<3, 3>;
   template class QUnsteadyHeatElement<3, 4>;
+
 
 } // namespace oomph

@@ -27,6 +27,7 @@
 
 #include "spherical_navier_stokes_elements.h"
 
+
 namespace oomph
 {
   /// Navier--Stokes equations static data
@@ -47,6 +48,7 @@ namespace oomph
 
   /// Navier-Stokes equations default gravity vector
   Vector<double> SphericalNavierStokesEquations::Default_Gravity_vector(3, 0.0);
+
 
   //================================================================
   /// Compute the diagonal of the velocity/pressure mass matrices.
@@ -144,6 +146,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Validate against exact velocity solution at given time.
   /// Solution is provided via function pointer.
@@ -222,6 +225,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Validate against exact velocity solution
   /// Solution is provided via function pointer.
@@ -245,6 +249,7 @@ namespace oomph
 
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
+
 
     outfile << "ZONE" << std::endl;
 
@@ -328,11 +333,13 @@ namespace oomph
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
 
+
     /// Exact solution Vectors (u,v,[w],p) -
     /// - need two extras to deal with the derivatives in the energy norm
     Vector<double> exact_soln(4);
     Vector<double> exact_soln_dr(4);
     Vector<double> exact_soln_dth(4);
+
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -364,10 +371,12 @@ namespace oomph
       // exact_soln_dr = actual_dr(x);
       // exact_soln_dth = actual_dth(x);
 
+
       double r = x[0];
       double theta = x[1];
 
       W *= r * r * sin(theta);
+
 
       // Velocity error in energy norm
       // Owing to the additional terms arising from the phi-components, we can't
@@ -400,6 +409,7 @@ namespace oomph
       // No contribution
       //-----------------------------------------------
       // End of norm calculation
+
 
       // Error calculation involves the summation of 9 squared components,
       // stated separately here for clarity
@@ -461,6 +471,7 @@ namespace oomph
       p_error += (exact_soln[3] - interpolated_p_spherical_nst(s)) *
                  (exact_soln[3] - interpolated_p_spherical_nst(s)) * W;
 
+
       // Output r and theta coordinates
       for (unsigned i = 0; i < 2; i++)
       {
@@ -476,6 +487,7 @@ namespace oomph
     } // End loop over integration points
 
   } // End of function statement
+
 
   //======================================================================
   // Output the shear stress at the outer wall of a rotating chamber.
@@ -495,11 +507,13 @@ namespace oomph
     // Declaration of the shear stress variable
     double shear = 0.0;
 
+
     // Assign values of s
     for (unsigned i = 0; i < Npts; i++)
     {
       s[0] = 1.0;
       s[1] = -1 + 2.0 * i / (Npts - 1);
+
 
       // Get position as global coordinate
       interpolated_x(s, x);
@@ -518,6 +532,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   // Output given velocity values and shear stress along a specific
   // section of a rotating chamber.
@@ -533,11 +548,13 @@ namespace oomph
     // Number of plot points
     unsigned Npts = 3;
 
+
     // Assign values of s
     for (unsigned i = 0; i < Npts; i++)
     {
       s[1] = 1.0;
       s[0] = -1 + 2.0 * i / (Npts - 1);
+
 
       // Get position as global coordinate
       interpolated_x(s, x);
@@ -603,6 +620,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Output "exact" solution
   /// Solution is provided via function pointer.
@@ -625,6 +643,7 @@ namespace oomph
 
     // Exact solution Vector
     Vector<double> exact_soln;
+
 
     // Loop over plot points
     unsigned num_plot_points = nplot_points(nplot);
@@ -846,6 +865,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //==============================================================
   /// C-style output function:
   /// x,y,[z],u,v,[w],p
@@ -888,6 +908,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //==============================================================
   /// Full output function:
@@ -950,6 +971,7 @@ namespace oomph
 
       // Calculate velocities and derivatives
 
+
       // Loop over directions
       for (unsigned i = 0; i < 3; i++)
       {
@@ -970,6 +992,7 @@ namespace oomph
         }
       }
 
+
       // Get dudt in ALE form (incl mesh veloc)
       for (unsigned i = 0; i < 3; i++)
       {
@@ -979,6 +1002,7 @@ namespace oomph
           dudt_ALE[i] -= mesh_veloc[k] * interpolated_dudx(i, k);
         }
       }
+
 
       // Coordinates
       for (unsigned i = 0; i < 2; i++)
@@ -1004,12 +1028,14 @@ namespace oomph
       // Dissipation
       outfile << dissipation(s) << " ";
 
+
       outfile << std::endl;
     }
 
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //==============================================================
   /// Output function for vorticity.
@@ -1052,6 +1078,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //==============================================================
   /// Return integral of dissipation over element
@@ -1178,6 +1205,7 @@ namespace oomph
     // Velocity gradient matrix
     DenseMatrix<double> dudx(3, 2, 0.0);
 
+
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
 
@@ -1194,6 +1222,7 @@ namespace oomph
       interpolated_r += this->nodal_position(l, 0) * psi(l);
       interpolated_theta += this->nodal_position(l, 1) * psi(l);
     }
+
 
     // Loop over velocity components
     for (unsigned i = 0; i < 3; i++)
@@ -1223,6 +1252,7 @@ namespace oomph
     strainrate(1, 1) = 0.0;
     strainrate(1, 2) = 0.0;
     strainrate(2, 2) = 0.0;
+
 
     // Add the negative powers of the radius, unless we are
     // at the origin
@@ -1261,6 +1291,7 @@ namespace oomph
     strainrate(2, 0) = strainrate(0, 2);
     strainrate(2, 1) = strainrate(1, 2);
   }
+
 
   //==============================================================
   /// Compute 2D vorticity vector at local coordinate s (return in
@@ -1332,6 +1363,7 @@ namespace oomph
     vorticity[0] = dudx(1, 0) - dudx(0, 1);
   }
 
+
   //==============================================================
   ///  \short Get integral of kinetic energy over element:
   //==============================================================
@@ -1375,6 +1407,7 @@ namespace oomph
     return kin_en;
   }
 
+
   //==========================================================================
   ///  \short Get integral of time derivative of kinetic energy over element:
   //==========================================================================
@@ -1383,6 +1416,7 @@ namespace oomph
     throw OomphLibError("Not tested for spherical Navier-Stokes elements",
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
+
 
     // Initialise
     double d_kin_en_dt = 0.0;
@@ -1466,6 +1500,7 @@ namespace oomph
         }
       }
 
+
       // Loop over directions and add up u du/dt  terms
       double sum = 0.0;
       for (unsigned i = 0; i < 3; i++)
@@ -1478,6 +1513,7 @@ namespace oomph
 
     return d_kin_en_dt;
   }
+
 
   //==============================================================
   /// Return pressure integrated over the element
@@ -1534,8 +1570,7 @@ namespace oomph
       unsigned flag)
   {
     // Return immediately if there are no dofs
-    if (ndof() == 0)
-      return;
+    if (ndof() == 0) return;
 
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -1611,6 +1646,7 @@ namespace oomph
         interpolated_p += p_spherical_nst(l) * psip(l);
       }
 
+
       // Calculate velocities and derivatives:
 
       // Loop over nodes
@@ -1662,6 +1698,7 @@ namespace oomph
 
       // Get the user-defined source function
       // double source = get_source_spherical_nst(time(),ipt,interpolated_x);
+
 
       // MOMENTUM EQUATIONS
       //------------------
@@ -1776,6 +1813,7 @@ namespace oomph
                              r * sin_theta * testf(l);
                 }
 
+
                 // Contribution from the r-derivative test function part
                 // of stress tensor
                 jac_sum += 2.0 * dpsifdx(l2, 0) * dtestfdx(l, 0) * r2;
@@ -1783,6 +1821,7 @@ namespace oomph
                 // Contribution from the theta-derivative test function part
                 // of stress tensor
                 jac_sum += dpsifdx(l2, 1) * dtestfdx(l, 1);
+
 
                 // Contribution from the undifferentiated test function part
                 // of stress tensor
@@ -1800,6 +1839,7 @@ namespace oomph
                 }
               }
               // End of i2=0 section
+
 
               i2 = 1;
 
@@ -1836,6 +1876,7 @@ namespace oomph
                 jacobian(local_eqn, local_unknown) -= jac_sum * W;
 
               } // End of i2=1 section
+
 
               i2 = 2;
 
@@ -1874,6 +1915,7 @@ namespace oomph
 
         } // End of if not boundary condition statement
           // End of r-component momentum equation
+
 
         // SECOND: theta-component momentum equation
 
@@ -1978,6 +2020,7 @@ namespace oomph
               }
               // End of i2=0 section
 
+
               i2 = 1;
 
               // If at a non-zero degree of freedom add in the entry
@@ -1996,6 +2039,7 @@ namespace oomph
                      psif(l2) * r2 +
                    scaled_re * r * jac_conv) *
                   testf(l) * sin_theta;
+
 
                 // Mesh velocity terms
                 if (!ALE_is_disabled)
@@ -2032,6 +2076,7 @@ namespace oomph
                 }
               }
               // End of i2=1 section
+
 
               i2 = 2;
 
@@ -2070,6 +2115,7 @@ namespace oomph
 
         } // End of if not boundary condition statement
           // End of theta-component of momentum
+
 
         // THIRD: phi-component momentum equation
 
@@ -2123,6 +2169,7 @@ namespace oomph
           // Add the sum to the residuals
           residuals[local_eqn] -= sum * W;
 
+
           // CALCULATE THE JACOBIAN
           if (flag)
           {
@@ -2162,12 +2209,14 @@ namespace oomph
                   (interpolated_dudx(2, 1) * sin_theta + u_phi * cos_theta) *
                   r * psif(l2) * testf(l) * W;
 
+
                 // Coriolis term
                 jacobian(local_eqn, local_unknown) -=
                   2.0 * scaled_re_inv_ro * cos_theta * psif(l2) * r2 *
                   sin_theta * testf[l] * W;
               }
               // End of i2=1 section
+
 
               i2 = 2;
 
@@ -2190,6 +2239,7 @@ namespace oomph
                      psif(l2) * r2 * sin_theta +
                    scaled_re * r * jac_conv) *
                   testf(l);
+
 
                 // Mesh velocity terms
                 if (!ALE_is_disabled)
@@ -2241,6 +2291,7 @@ namespace oomph
 
       } // End of loop over shape functions
 
+
       // CONTINUITY EQUATION
       //-------------------
 
@@ -2279,6 +2330,7 @@ namespace oomph
               }
               // End of contribution from r-component
 
+
               // Contribution from the theta-component
               i2 = 1;
               /*If we're at a non-zero degree of freedom add it in*/
@@ -2303,6 +2355,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   ///  Add to the set \c paired_load_data pairs containing
@@ -2436,6 +2489,7 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -2510,6 +2564,7 @@ namespace oomph
     }
   }
 
+
   //============================================================================
   /// Create a list of pairs for all unknowns in this element,
   /// so the first entry in each pair contains the global equation
@@ -2560,5 +2615,6 @@ namespace oomph
       }
     }
   }
+
 
 } // namespace oomph

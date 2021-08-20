@@ -110,6 +110,7 @@ namespace oomph
     }
   };
 
+
   //======================================================================
   /// \short Specific policy class for the FluidInterfaceElemetnts,
   /// which do not require any additional values at the nodes.
@@ -137,6 +138,7 @@ namespace oomph
     }
   };
 
+
   //-------------SPINE NODE UPDATE CLASSES-------------------------------
   //---------------------------------------------------------------------
 
@@ -147,10 +149,10 @@ namespace oomph
   /// a concrete implementation of any surface element that uses spines.
   //======================================================================
   template<class EQUATION_CLASS, class DERIVATIVE_CLASS, class ELEMENT>
-  class SpineUpdateFluidInterfaceElement :
-    public virtual Hijacked<SpineElement<FaceGeometry<ELEMENT>>>,
-    public virtual EQUATION_CLASS,
-    public DERIVATIVE_CLASS
+  class SpineUpdateFluidInterfaceElement
+    : public virtual Hijacked<SpineElement<FaceGeometry<ELEMENT>>>,
+      public virtual EQUATION_CLASS,
+      public DERIVATIVE_CLASS
   {
   private:
     /// \short In spine elements, the kinematic condition is the equation
@@ -194,15 +196,16 @@ namespace oomph
                                                            surface_divergence);
     }
 
+
   public:
     /// \short Constructor, the arguments are a pointer to the  "bulk" element
     /// and the index of the face to be created
     SpineUpdateFluidInterfaceElement(FiniteElement* const& element_pt,
                                      const int& face_index,
-                                     const unsigned& id = 0) :
-      Hijacked<SpineElement<FaceGeometry<ELEMENT>>>(),
-      EQUATION_CLASS(),
-      DERIVATIVE_CLASS()
+                                     const unsigned& id = 0)
+      : Hijacked<SpineElement<FaceGeometry<ELEMENT>>>(),
+        EQUATION_CLASS(),
+        DERIVATIVE_CLASS()
     {
       // Attach the geometrical information to the element, by
       // making the face element from the bulk element
@@ -340,6 +343,7 @@ namespace oomph
       EQUATION_CLASS::output(file_pt, n_plot);
     }
 
+
     /// \short Create an "bounding" element of the type
     /// specified by the BoundingElementType policy class
     /// Here, this allows
@@ -409,20 +413,21 @@ namespace oomph
     }
   };
 
+
   //=====================================================================
   /// Spine version of the PointFluidInterfaceBoundingElement
   //=====================================================================
   template<class ELEMENT>
-  class SpinePointFluidInterfaceBoundingElement :
-    public Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>,
-    public PointFluidInterfaceBoundingElement
+  class SpinePointFluidInterfaceBoundingElement
+    : public Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>,
+      public PointFluidInterfaceBoundingElement
 
   {
   public:
     /// Constructor
-    SpinePointFluidInterfaceBoundingElement() :
-      Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>(),
-      PointFluidInterfaceBoundingElement()
+    SpinePointFluidInterfaceBoundingElement()
+      : Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>(),
+        PointFluidInterfaceBoundingElement()
     {
     }
 
@@ -472,20 +477,21 @@ namespace oomph
     }
   };
 
+
   //=========================================================================
   /// Spine version of the LineFluidInterfaceBoundingElement
   //========================================================================
   template<class ELEMENT>
-  class SpineLineFluidInterfaceBoundingElement :
-    public Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>,
-    public LineFluidInterfaceBoundingElement
+  class SpineLineFluidInterfaceBoundingElement
+    : public Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>,
+      public LineFluidInterfaceBoundingElement
 
   {
   public:
     /// Constructor
-    SpineLineFluidInterfaceBoundingElement() :
-      Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>(),
-      LineFluidInterfaceBoundingElement()
+    SpineLineFluidInterfaceBoundingElement()
+      : Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT>>>>(),
+        LineFluidInterfaceBoundingElement()
     {
     }
 
@@ -513,6 +519,7 @@ namespace oomph
       FluidInterfaceBoundingElement::output(file_pt, n_plot);
     }
 
+
     /// Calculate the jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -527,6 +534,7 @@ namespace oomph
       this->fill_in_jacobian_from_geometric_data(jacobian);
     }
 
+
     /// Local eqn number of the kinematic bc associated with local node n
     int kinematic_local_eqn(const unsigned& n)
     {
@@ -535,55 +543,59 @@ namespace oomph
     }
   };
 
+
   //============GEOMETRIC SPECIALISATIONS============================
+
 
   // Specialise the spine update template class to concrete 1D case
   template<class ELEMENT>
-  class SpineLineFluidInterfaceElement :
-    public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                            LineDerivatives,
-                                            ELEMENT>
+  class SpineLineFluidInterfaceElement
+    : public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                              LineDerivatives,
+                                              ELEMENT>
   {
   public:
     SpineLineFluidInterfaceElement(FiniteElement* const& element_pt,
-                                   const int& face_index) :
-      SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                       LineDerivatives,
-                                       ELEMENT>(element_pt, face_index)
+                                   const int& face_index)
+      : SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                         LineDerivatives,
+                                         ELEMENT>(element_pt, face_index)
     {
     }
   };
+
 
   // Define the BoundingElement type associated with the 1D surface element
   template<class ELEMENT>
   class BoundingElementType<
     SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
                                      LineDerivatives,
-                                     ELEMENT>> :
-    public SpinePointFluidInterfaceBoundingElement<ELEMENT>
+                                     ELEMENT>>
+    : public SpinePointFluidInterfaceBoundingElement<ELEMENT>
   {
   public:
     BoundingElementType<SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
                                                          LineDerivatives,
-                                                         ELEMENT>>() :
-      SpinePointFluidInterfaceBoundingElement<ELEMENT>()
+                                                         ELEMENT>>()
+      : SpinePointFluidInterfaceBoundingElement<ELEMENT>()
     {
     }
   };
 
+
   // Specialise Spine update case to concrete axisymmetric case
   template<class ELEMENT>
-  class SpineAxisymmetricFluidInterfaceElement :
-    public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                            AxisymmetricDerivatives,
-                                            ELEMENT>
+  class SpineAxisymmetricFluidInterfaceElement
+    : public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                              AxisymmetricDerivatives,
+                                              ELEMENT>
   {
   public:
     SpineAxisymmetricFluidInterfaceElement(FiniteElement* const& element_pt,
-                                           const int& face_index) :
-      SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                       AxisymmetricDerivatives,
-                                       ELEMENT>(element_pt, face_index)
+                                           const int& face_index)
+      : SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                         AxisymmetricDerivatives,
+                                         ELEMENT>(element_pt, face_index)
     {
     }
   };
@@ -594,32 +606,32 @@ namespace oomph
   class BoundingElementType<
     SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
                                      AxisymmetricDerivatives,
-                                     ELEMENT>> :
-    public SpinePointFluidInterfaceBoundingElement<ELEMENT>
+                                     ELEMENT>>
+    : public SpinePointFluidInterfaceBoundingElement<ELEMENT>
   {
   public:
     BoundingElementType<
       SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
                                        AxisymmetricDerivatives,
-                                       ELEMENT>>() :
-      SpinePointFluidInterfaceBoundingElement<ELEMENT>()
+                                       ELEMENT>>()
+      : SpinePointFluidInterfaceBoundingElement<ELEMENT>()
     {
     }
   };
 
   // Specialise Spine update case to concrete 2D case
   template<class ELEMENT>
-  class SpineSurfaceFluidInterfaceElement :
-    public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                            SurfaceDerivatives,
-                                            ELEMENT>
+  class SpineSurfaceFluidInterfaceElement
+    : public SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                              SurfaceDerivatives,
+                                              ELEMENT>
   {
   public:
     SpineSurfaceFluidInterfaceElement(FiniteElement* const& element_pt,
-                                      const int& face_index) :
-      SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                       SurfaceDerivatives,
-                                       ELEMENT>(element_pt, face_index)
+                                      const int& face_index)
+      : SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                         SurfaceDerivatives,
+                                         ELEMENT>(element_pt, face_index)
     {
     }
   };
@@ -629,17 +641,18 @@ namespace oomph
   class BoundingElementType<
     SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
                                      SurfaceDerivatives,
-                                     ELEMENT>> :
-    public SpineLineFluidInterfaceBoundingElement<ELEMENT>
+                                     ELEMENT>>
+    : public SpineLineFluidInterfaceBoundingElement<ELEMENT>
   {
   public:
     BoundingElementType<SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
                                                          SurfaceDerivatives,
-                                                         ELEMENT>>() :
-      SpineLineFluidInterfaceBoundingElement<ELEMENT>()
+                                                         ELEMENT>>()
+      : SpineLineFluidInterfaceBoundingElement<ELEMENT>()
     {
     }
   };
+
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
@@ -648,6 +661,7 @@ namespace oomph
   //-------------ELASTIC NODE UPDATE CLASSES-------------------------------
   //---------------------------------------------------------------------
 
+
   //=======================================================================
   /// \short Generic Elastic node update interface template class that can
   /// be combined with a given surface equations class and surface derivative
@@ -655,10 +669,10 @@ namespace oomph
   /// that uses elastic node updates.
   //======================================================================
   template<class EQUATION_CLASS, class DERIVATIVE_CLASS, class ELEMENT>
-  class ElasticUpdateFluidInterfaceElement :
-    public virtual Hijacked<FaceGeometry<ELEMENT>>,
-    public EQUATION_CLASS,
-    public DERIVATIVE_CLASS
+  class ElasticUpdateFluidInterfaceElement
+    : public virtual Hijacked<FaceGeometry<ELEMENT>>,
+      public EQUATION_CLASS,
+      public DERIVATIVE_CLASS
   {
   private:
     /// \short Storage for the location of the Lagrange multiplier
@@ -715,6 +729,7 @@ namespace oomph
                                                            surface_divergence);
     }
 
+
   public:
     /// \short Constructor, pass a pointer to the bulk element and the face
     /// index of the bulk element to which the element is to be attached to.
@@ -723,8 +738,8 @@ namespace oomph
     /// this element from those created by other FaceElements.
     ElasticUpdateFluidInterfaceElement(FiniteElement* const& element_pt,
                                        const int& face_index,
-                                       const unsigned& id = 0) :
-      FaceGeometry<ELEMENT>(), EQUATION_CLASS(), DERIVATIVE_CLASS()
+                                       const unsigned& id = 0)
+      : FaceGeometry<ELEMENT>(), EQUATION_CLASS(), DERIVATIVE_CLASS()
     {
       // Attach the geometrical information to the element
       // This function also assigned nbulk_value from required_nvalue of the
@@ -817,6 +832,7 @@ namespace oomph
       return *this->node_pt(n)->value_pt(this->lagrange_index(n));
     }
 
+
     /// Fill in contribution to residuals and Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -852,6 +868,7 @@ namespace oomph
     {
       EQUATION_CLASS::output(file_pt, n_plot);
     }
+
 
     /// \short Helper function to calculate the additional contributions
     /// to be added at each integration point. This deals with
@@ -935,6 +952,7 @@ namespace oomph
       }
     }
 
+
     /// \short Create an "bounding" element (here actually a 2D line element
     /// of type ElasticLineFluidInterfaceBoundingElement<ELEMENT> that allows
     /// the application of a contact angle boundary condition on the
@@ -1005,19 +1023,21 @@ namespace oomph
         face_el_pt->add_external_data((*it)->variable_position_pt());
       }
 
+
       // Return the value of the pointer
       return face_el_pt;
     }
   };
 
+
   //=========================================================================
   /// Pseudo-elasticity version of the PointFluidInterfaceBoundingElement
   //========================================================================
   template<class ELEMENT>
-  class ElasticPointFluidInterfaceBoundingElement :
-    public FaceGeometry<FaceGeometry<ELEMENT>>,
-    public PointFluidInterfaceBoundingElement,
-    public virtual SolidFiniteElement
+  class ElasticPointFluidInterfaceBoundingElement
+    : public FaceGeometry<FaceGeometry<ELEMENT>>,
+      public PointFluidInterfaceBoundingElement,
+      public virtual SolidFiniteElement
 
   {
   private:
@@ -1032,6 +1052,7 @@ namespace oomph
       Lagrange_index = lagrange_index;
     }
 
+
     /// \short Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
@@ -1043,10 +1064,11 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
+
     /// Constructor
-    ElasticPointFluidInterfaceBoundingElement() :
-      FaceGeometry<FaceGeometry<ELEMENT>>(),
-      PointFluidInterfaceBoundingElement()
+    ElasticPointFluidInterfaceBoundingElement()
+      : FaceGeometry<FaceGeometry<ELEMENT>>(),
+        PointFluidInterfaceBoundingElement()
     {
     }
 
@@ -1096,14 +1118,15 @@ namespace oomph
     }
   };
 
+
   //=========================================================================
   /// Pseudo-elasticity version of the LineFluidInterfaceBoundingElement
   //========================================================================
   template<class ELEMENT>
-  class ElasticLineFluidInterfaceBoundingElement :
-    public FaceGeometry<FaceGeometry<ELEMENT>>,
-    public LineFluidInterfaceBoundingElement,
-    public virtual SolidFiniteElement
+  class ElasticLineFluidInterfaceBoundingElement
+    : public FaceGeometry<FaceGeometry<ELEMENT>>,
+      public LineFluidInterfaceBoundingElement,
+      public virtual SolidFiniteElement
 
   {
     /// Short Storage for the index of Lagrange multiplier
@@ -1117,8 +1140,9 @@ namespace oomph
     }
 
     /// Constructor
-    ElasticLineFluidInterfaceBoundingElement() :
-      FaceGeometry<FaceGeometry<ELEMENT>>(), LineFluidInterfaceBoundingElement()
+    ElasticLineFluidInterfaceBoundingElement()
+      : FaceGeometry<FaceGeometry<ELEMENT>>(),
+        LineFluidInterfaceBoundingElement()
     {
     }
 
@@ -1132,6 +1156,7 @@ namespace oomph
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
+
 
     /// Overload the output function
     void output(std::ostream& outfile)
@@ -1182,22 +1207,24 @@ namespace oomph
     }
   };
 
+
   //==================GEOMETRIC SPECIALISATIONS==========================
+
 
   /// Specialise the elastic update template class to concrete 1D case
   template<class ELEMENT>
-  class ElasticLineFluidInterfaceElement :
-    public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                              LineDerivatives,
-                                              ELEMENT>
+  class ElasticLineFluidInterfaceElement
+    : public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                                LineDerivatives,
+                                                ELEMENT>
   {
   public:
     ElasticLineFluidInterfaceElement(FiniteElement* const& element_pt,
                                      const int& face_index,
-                                     const unsigned& id = 0) :
-      ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                         LineDerivatives,
-                                         ELEMENT>(element_pt, face_index, id)
+                                     const unsigned& id = 0)
+      : ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                           LineDerivatives,
+                                           ELEMENT>(element_pt, face_index, id)
     {
     }
   };
@@ -1207,33 +1234,34 @@ namespace oomph
   class BoundingElementType<
     ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
                                        LineDerivatives,
-                                       ELEMENT>> :
-    public ElasticPointFluidInterfaceBoundingElement<ELEMENT>
+                                       ELEMENT>>
+    : public ElasticPointFluidInterfaceBoundingElement<ELEMENT>
   {
   public:
     BoundingElementType<
       ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
                                          LineDerivatives,
-                                         ELEMENT>>() :
-      ElasticPointFluidInterfaceBoundingElement<ELEMENT>()
+                                         ELEMENT>>()
+      : ElasticPointFluidInterfaceBoundingElement<ELEMENT>()
     {
     }
   };
 
+
   /// Specialise the Elastic update case to axisymmetric equations
   template<class ELEMENT>
-  class ElasticAxisymmetricFluidInterfaceElement :
-    public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                              AxisymmetricDerivatives,
-                                              ELEMENT>
+  class ElasticAxisymmetricFluidInterfaceElement
+    : public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                                AxisymmetricDerivatives,
+                                                ELEMENT>
   {
   public:
     ElasticAxisymmetricFluidInterfaceElement(FiniteElement* const& element_pt,
                                              const int& face_index,
-                                             const unsigned& id = 0) :
-      ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                         AxisymmetricDerivatives,
-                                         ELEMENT>(element_pt, face_index, id)
+                                             const unsigned& id = 0)
+      : ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                           AxisymmetricDerivatives,
+                                           ELEMENT>(element_pt, face_index, id)
     {
     }
   };
@@ -1244,54 +1272,57 @@ namespace oomph
   class BoundingElementType<
     ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
                                        AxisymmetricDerivatives,
-                                       ELEMENT>> :
-    public ElasticPointFluidInterfaceBoundingElement<ELEMENT>
+                                       ELEMENT>>
+    : public ElasticPointFluidInterfaceBoundingElement<ELEMENT>
   {
   public:
     BoundingElementType<
       ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
                                          AxisymmetricDerivatives,
-                                         ELEMENT>>() :
-      ElasticPointFluidInterfaceBoundingElement<ELEMENT>()
+                                         ELEMENT>>()
+      : ElasticPointFluidInterfaceBoundingElement<ELEMENT>()
     {
     }
   };
 
+
   /// Specialise Elastic update case to the concrete 2D case
   template<class ELEMENT>
-  class ElasticSurfaceFluidInterfaceElement :
-    public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                              SurfaceDerivatives,
-                                              ELEMENT>
+  class ElasticSurfaceFluidInterfaceElement
+    : public ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                                SurfaceDerivatives,
+                                                ELEMENT>
   {
   public:
     ElasticSurfaceFluidInterfaceElement(FiniteElement* const& element_pt,
                                         const int& face_index,
-                                        const unsigned& id = 0) :
-      ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
-                                         SurfaceDerivatives,
-                                         ELEMENT>(element_pt, face_index, id)
+                                        const unsigned& id = 0)
+      : ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
+                                           SurfaceDerivatives,
+                                           ELEMENT>(element_pt, face_index, id)
     {
     }
   };
+
 
   // Define the bounding element associated with the 2D surface elements
   template<class ELEMENT>
   class BoundingElementType<
     ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
                                        SurfaceDerivatives,
-                                       ELEMENT>> :
-    public ElasticLineFluidInterfaceBoundingElement<ELEMENT>
+                                       ELEMENT>>
+    : public ElasticLineFluidInterfaceBoundingElement<ELEMENT>
   {
   public:
     BoundingElementType<
       ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
                                          SurfaceDerivatives,
-                                         ELEMENT>>() :
-      ElasticLineFluidInterfaceBoundingElement<ELEMENT>()
+                                         ELEMENT>>()
+      : ElasticLineFluidInterfaceBoundingElement<ELEMENT>()
     {
     }
   };
+
 
 } // namespace oomph
 

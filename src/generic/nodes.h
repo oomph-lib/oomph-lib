@@ -480,6 +480,7 @@ namespace oomph
       return (Eqn_number[i] == Is_constrained);
     }
 
+
     /// \short Self-test: Have all values been classified as pinned/unpinned?
     /// Return 0 if OK.
     unsigned self_test();
@@ -556,6 +557,7 @@ namespace oomph
     virtual void read_values_from_vector(const Vector<double>& vector_of_values,
                                          unsigned& index);
 
+
     /// \short Add all equation numbers to the vector in
     /// the internal storage order
     virtual void add_eqn_numbers_to_vector(Vector<long>& vector_of_eqn_numbers);
@@ -565,6 +567,7 @@ namespace oomph
     /// set to the value at the end of the data that has been read in
     virtual void read_eqn_numbers_from_vector(
       const Vector<long>& vector_of_eqn_numbers, unsigned& index);
+
 
 #endif
   };
@@ -642,10 +645,12 @@ namespace oomph
       return;
     }
 
+
     /// \short We cannot resize HijackedData, so the resize function
     /// throws a warning.
     void resize(const unsigned& n_value);
   };
+
 
   //=========================================================================
   /// \short Custom Data class that is used when making a shallow copy
@@ -717,13 +722,16 @@ namespace oomph
       return;
     }
 
+
     /// \short We cannot resize CopiedData, so the resize function
     /// throws a warning.
     void resize(const unsigned& n_value);
   };
 
+
   // Nodes are required in the HangInfo class, so we need a forward reference
   class Node;
+
 
   //=====================================================================
   ///\short Class that contains data for hanging nodes.
@@ -858,6 +866,7 @@ namespace oomph
   // Geometric objects are (now) required in the Node class, so we
   // put a forward reference here
   class GeomObject;
+
 
   //=====================================================================
   /// \short Nodes are derived from Data, but, in addition, have a
@@ -1184,6 +1193,7 @@ namespace oomph
     /// generalised position, dx(k,i)/dt. `Type': k; Coordinate direction: i.
     double dx_gen_dt(const unsigned& k, const unsigned& i) const;
 
+
     /// \short  i-th component of j-th time derivative (velocity) of the
     /// generalised position, d^jx(k,i)/dt^j. `Type': k; Coordinate direction:
     /// i.
@@ -1221,6 +1231,7 @@ namespace oomph
       Data::unpin_all();
     }
 
+
     /// \short Code that encapsulates the hanging status of the node (incl. the
     /// geometric hanging status) as
     /// \f$  \sum_{i=-1}{nval-1} Node::is_hanging(i) 2^{i+1} \f$
@@ -1235,6 +1246,7 @@ namespace oomph
       }
       return hang_code;
     }
+
 
     /// \short Return pointer to hanging node data (this refers to the geometric
     /// hanging node status) (const version).
@@ -1444,6 +1456,7 @@ namespace oomph
       set_coordinates_on_boundary(b, 0, boundary_zeta);
     }
 
+
     /// Mark node as obsolete
     void set_obsolete()
     {
@@ -1579,6 +1592,7 @@ namespace oomph
     /// This function uses the hanging node representation if necessary.
     double dposition_gen_dt(const unsigned& k, const unsigned& i) const;
 
+
     /// \short  i-th component of j-th time derivative (velocity) of the
     /// generalised position, d^jx(k,i)/dt^j. `Type': k; Coordinate direction:
     /// i. This function uses the hanging node representation if necessary
@@ -1599,6 +1613,7 @@ namespace oomph
     {
     }
 
+
     /// \short Set pointer to auxiliary update function -- this
     /// can be used to update any nodal values following the update
     /// of the nodal position. This is needed e.g. to update the no-slip
@@ -1609,6 +1624,7 @@ namespace oomph
       // Set pointer (by default it's set to NULL)
       Aux_node_update_fct_pt = aux_node_update_fct_pt;
     }
+
 
     /// \short Boolean to indicate if node has a pointer to
     /// and auxiliary update function.
@@ -1660,6 +1676,7 @@ namespace oomph
 
     /// Output nodal position
     void output(std::ostream& outfile);
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -1971,6 +1988,7 @@ namespace oomph
     void read_values_from_vector(const Vector<double>& vector_of_values,
                                  unsigned& index);
 
+
     /// \short Add all equation numbers to the vector in
     /// the internal storage order. Overload to add equation numbers
     /// associated with the positional dofs
@@ -1986,6 +2004,7 @@ namespace oomph
 
 #endif
 
+
     /// \short Overload node update function: Since the position
     /// of SolidNodes is determined by unknowns, there's nothing
     /// to be done apart from performing the auxiliary node
@@ -1995,6 +2014,7 @@ namespace oomph
       perform_auxiliary_node_update_fct();
     }
   };
+
 
   //======================================================================
   /// \short A class that contains the information required by Nodes that
@@ -2090,6 +2110,7 @@ namespace oomph
       return (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
     }
 
+
     /// \short Return the index of the first value associated with
     /// the i-th face element value. If no argument id is specified
     /// we return the index associated with the first (and assumed to be only)
@@ -2159,11 +2180,11 @@ namespace oomph
       const unsigned& face_id = 0) const = 0;
 
     /// \short Default constructor, set the pointers to the storage to NULL
-    BoundaryNodeBase() :
-      Boundary_coordinates_pt(0),
-      Boundaries_pt(0),
-      Index_of_first_value_assigned_by_face_element_pt(0),
-      Copied_node_pt(0)
+    BoundaryNodeBase()
+      : Boundary_coordinates_pt(0),
+        Boundaries_pt(0),
+        Index_of_first_value_assigned_by_face_element_pt(0),
+        Copied_node_pt(0)
     {
     }
 
@@ -2221,6 +2242,7 @@ namespace oomph
       get_coordinates_on_boundary(b, 0, boundary_zeta);
     }
 
+
     /// \short Set the vector of boundary coordinates on mesh boundary b
     void set_coordinates_on_boundary(const unsigned& b,
                                      const Vector<double>& boundary_zeta)
@@ -2241,6 +2263,7 @@ namespace oomph
                                      const unsigned& k,
                                      const Vector<double>& boundary_zeta);
   };
+
 
   //====================================================================
   /// \short A template Class for BoundaryNodes; that is Nodes that MAY live
@@ -2391,6 +2414,7 @@ namespace oomph
       Copied_node_pt = 0;
     }
 
+
     /// \short Default Constructor
     BoundaryNode() : NODE_TYPE(), BoundaryNodeBase() {}
 
@@ -2403,8 +2427,8 @@ namespace oomph
     /// 2D Hermite elements, etc).
     BoundaryNode(const unsigned& n_dim,
                  const unsigned& n_position_type,
-                 const unsigned& initial_n_value) :
-      NODE_TYPE(n_dim, n_position_type, initial_n_value), BoundaryNodeBase()
+                 const unsigned& initial_n_value)
+      : NODE_TYPE(n_dim, n_position_type, initial_n_value), BoundaryNodeBase()
     {
     }
 
@@ -2420,9 +2444,9 @@ namespace oomph
     BoundaryNode(TimeStepper* const& time_stepper_pt,
                  const unsigned& n_dim,
                  const unsigned& n_position_type,
-                 const unsigned& initial_n_value) :
-      NODE_TYPE(time_stepper_pt, n_dim, n_position_type, initial_n_value),
-      BoundaryNodeBase()
+                 const unsigned& initial_n_value)
+      : NODE_TYPE(time_stepper_pt, n_dim, n_position_type, initial_n_value),
+        BoundaryNodeBase()
     {
     }
 
@@ -2438,13 +2462,13 @@ namespace oomph
                  const unsigned& n_lagrangian_type,
                  const unsigned& n_dim,
                  const unsigned& n_position_type,
-                 const unsigned& initial_n_value) :
-      NODE_TYPE(n_lagrangian,
-                n_lagrangian_type,
-                n_dim,
-                n_position_type,
-                initial_n_value),
-      BoundaryNodeBase()
+                 const unsigned& initial_n_value)
+      : NODE_TYPE(n_lagrangian,
+                  n_lagrangian_type,
+                  n_dim,
+                  n_position_type,
+                  initial_n_value),
+        BoundaryNodeBase()
     {
     }
 
@@ -2460,14 +2484,14 @@ namespace oomph
                  const unsigned& n_lagrangian_type,
                  const unsigned& n_dim,
                  const unsigned& n_position_type,
-                 const unsigned& initial_n_value) :
-      NODE_TYPE(time_stepper_pt,
-                n_lagrangian,
-                n_lagrangian_type,
-                n_dim,
-                n_position_type,
-                initial_n_value),
-      BoundaryNodeBase()
+                 const unsigned& initial_n_value)
+      : NODE_TYPE(time_stepper_pt,
+                  n_lagrangian,
+                  n_lagrangian_type,
+                  n_dim,
+                  n_position_type,
+                  initial_n_value),
+        BoundaryNodeBase()
     {
     }
 
@@ -2572,11 +2596,13 @@ namespace oomph
       BoundaryNodeBase::remove_from_boundary(b);
     }
 
+
     /// \short Get the number of boundary coordinates on mesh boundary b.
     unsigned ncoordinates_on_boundary(const unsigned& b)
     {
       return BoundaryNodeBase::ncoordinates_on_boundary(b);
     }
+
 
     /// \short Return the vector of coordinates on mesh boundary b
     /// Final overload
@@ -2593,6 +2619,7 @@ namespace oomph
     {
       BoundaryNodeBase::set_coordinates_on_boundary(b, boundary_zeta);
     }
+
 
     /// \short Return the vector of k-th generalised boundary coordinates
     /// on mesh boundary b Final overload
@@ -2611,6 +2638,7 @@ namespace oomph
     {
       BoundaryNodeBase::set_coordinates_on_boundary(b, k, boundary_zeta);
     }
+
 
     /// \short Return the number of values associated with
     /// the i-th face element field. If no argument is specified
@@ -2680,6 +2708,7 @@ namespace oomph
         return next_first_index - my_first_index;
       }
     }
+
 
     //=====================================================================
     /// Member function to allocates storage for a given
@@ -2787,6 +2816,7 @@ namespace oomph
       this->resize(n_value + n_additional_value);
     }
 
+
     /// \short Make the node periodic
     void make_periodic(Node* const& node_pt)
     {
@@ -2829,6 +2859,7 @@ namespace oomph
       }
     }
 
+
     /// \short Return pointer to copied node (null if the
     /// current node is not a copy)
     Node* copied_node_pt() const
@@ -2861,6 +2892,7 @@ namespace oomph
       }
     }
 
+
     /// \short Resize the number of equations
     void resize(const unsigned& n_value)
     {
@@ -2890,6 +2922,7 @@ namespace oomph
     }
   };
 
+
   /// \short Make the node periodic
   template<>
   inline void BoundaryNode<SolidNode>::make_periodic(Node* const& node_pt)
@@ -2917,6 +2950,7 @@ namespace oomph
 
     BoundaryNodeBase::make_node_periodic(this, node_pt);
   }
+
 
 } // namespace oomph
 

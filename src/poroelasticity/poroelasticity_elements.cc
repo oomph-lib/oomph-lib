@@ -79,6 +79,7 @@ namespace oomph
     */
 #endif
 
+
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
 
@@ -144,6 +145,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Compute the Cauchy stress tensor at local coordinate s for
   /// displacement formulation.
@@ -186,6 +188,7 @@ namespace oomph
       }
     }
   }
+
 
   /// \short Performs a div-conserving transformation of the vector basis
   /// functions from the reference element to the actual element
@@ -947,6 +950,7 @@ namespace oomph
           } // End of if not boundary condition
         } // End of loop over dimensions
       } // End of loop over u test functions
+
 
       // Darcy:
       // Loop over the test functions

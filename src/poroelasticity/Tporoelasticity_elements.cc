@@ -32,8 +32,8 @@ namespace oomph
   /// \short Constructor. Order 0 elements have 1 pressure dof and no internal
   /// velocity dofs
   template<>
-  TPoroelasticityElement<0>::TPoroelasticityElement() :
-    TElement<2, 3>(), PoroelasticityEquations<2>(), Sign_edge(3, 1)
+  TPoroelasticityElement<0>::TPoroelasticityElement()
+    : TElement<2, 3>(), PoroelasticityEquations<2>(), Sign_edge(3, 1)
   {
     P_internal_data_index = this->add_internal_data(new Data(1));
   }
@@ -130,8 +130,8 @@ namespace oomph
   /// \short Constructor. Order 1 elements have 3 pressure dofs and 2 internal
   /// velocity dofs
   template<>
-  TPoroelasticityElement<1>::TPoroelasticityElement() :
-    TElement<2, 3>(), PoroelasticityEquations<2>(), Sign_edge(3, 1)
+  TPoroelasticityElement<1>::TPoroelasticityElement()
+    : TElement<2, 3>(), PoroelasticityEquations<2>(), Sign_edge(3, 1)
   {
     // RT_1 elements have 2 internal degrees of freedom for u, and 3 for p
     Q_internal_data_index = this->add_internal_data(new Data(2));

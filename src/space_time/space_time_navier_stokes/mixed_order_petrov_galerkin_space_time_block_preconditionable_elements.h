@@ -46,15 +46,15 @@ namespace oomph
   /// Block preconditionable version of the
   /// QTaylorHoodMixedOrderSpaceTimeElement
   //=============================================================================
-  class BlockPrecQTaylorHoodMixedOrderSpaceTimeElement :
-    public virtual QTaylorHoodMixedOrderSpaceTimeElement<2>,
-    public virtual BlockPreconditionableSpaceTimeElementBase
+  class BlockPrecQTaylorHoodMixedOrderSpaceTimeElement
+    : public virtual QTaylorHoodMixedOrderSpaceTimeElement<2>,
+      public virtual BlockPreconditionableSpaceTimeElementBase
   {
   public:
     /// Empty constructor
-    BlockPrecQTaylorHoodMixedOrderSpaceTimeElement() :
-      QTaylorHoodMixedOrderSpaceTimeElement<2>(),
-      BlockPreconditionableSpaceTimeElementBase()
+    BlockPrecQTaylorHoodMixedOrderSpaceTimeElement()
+      : QTaylorHoodMixedOrderSpaceTimeElement<2>(),
+        BlockPreconditionableSpaceTimeElementBase()
     {
     }
 

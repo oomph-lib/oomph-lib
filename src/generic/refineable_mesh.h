@@ -87,6 +87,7 @@ namespace oomph
       Nrefinement_overruled = 0;
     };
 
+
     /// Broken copy constructor
     RefineableMeshBase(const RefineableMeshBase& dummy)
     {
@@ -142,6 +143,7 @@ namespace oomph
               << " elements need unrefinement." << std::endl;
       outfile << std::endl;
     }
+
 
     /// Access to spatial error estimator
     ErrorEstimator*& spatial_error_estimator_pt()
@@ -367,9 +369,11 @@ namespace oomph
     unsigned Nrefinement_overruled;
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Base class for tree-based refineable meshes.
@@ -401,6 +405,7 @@ namespace oomph
       // Mesh hasn't been pruned yet
       Uniform_refinement_level_when_pruned = 0;
     }
+
 
     /// Broken copy constructor
     TreeBasedRefineableMeshBase(const TreeBasedRefineableMeshBase& dummy)
@@ -467,6 +472,7 @@ namespace oomph
     {
       return Forest_pt;
     }
+
 
     /// Doc the targets for mesh adaptation
     void doc_adaptivity_targets(std::ostream& outfile)
@@ -565,6 +571,7 @@ namespace oomph
     void p_refine_selected_elements(
       const Vector<PRefineableElement*>& elements_to_be_refined_pt);
 
+
     /// \short Refine base mesh to same degree as reference mesh (relative
     /// to original unrefined mesh).
     virtual void refine_base_mesh_as_in_reference_mesh(
@@ -616,12 +623,14 @@ namespace oomph
     virtual void read_refinement(std::ifstream& restart_file,
                                  Vector<Vector<unsigned>>& to_be_refined);
 
+
     /// \short Level to which the mesh was uniformly refined when it was pruned
     /// (const version)
     unsigned uniform_refinement_level_when_pruned() const
     {
       return Uniform_refinement_level_when_pruned;
     }
+
 
     /// \short Level to which the mesh was uniformly refined when it was pruned
     unsigned& uniform_refinement_level_when_pruned()
@@ -696,6 +705,7 @@ namespace oomph
       }
     }
 
+
     /// Classify the halo and haloed nodes in the mesh.
     void classify_halo_and_haloed_nodes(const bool& report_stats = false)
     {
@@ -743,6 +753,7 @@ namespace oomph
     /// \short Complete the hanging node scheme recursively
     void complete_hanging_nodes(const int& ncont_interpolated_values);
 
+
     /// Auxiliary routine for recursive hanging node completion
     void complete_hanging_nodes_recursively(Node*& nod_pt,
                                             Vector<Node*>& master_nodes,
@@ -789,9 +800,11 @@ namespace oomph
 #endif
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Templated base class for refineable meshes. The use of the template
@@ -869,9 +882,11 @@ namespace oomph
     virtual ~TreeBasedRefineableMesh() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Base class for refineable tet meshes
@@ -897,6 +912,7 @@ namespace oomph
       return Max_permitted_edge_ratio;
     }
 
+
     /// Doc the targets for mesh adaptation
     void doc_adaptivity_targets(std::ostream& outfile)
     {
@@ -913,6 +929,7 @@ namespace oomph
               << " elements need unrefinement." << std::endl;
       outfile << std::endl;
     }
+
 
     /// \short Compute target volume based on the elements' error and the
     /// error target; return max edge ratio
@@ -1048,6 +1065,7 @@ namespace oomph
     /// Max edge ratio before remesh gets triggered
     double Max_permitted_edge_ratio;
   };
+
 
 } // namespace oomph
 

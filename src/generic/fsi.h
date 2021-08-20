@@ -46,11 +46,13 @@ namespace oomph
 {
   class AlgebraicNode;
 
+
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
   // FSIFluidElement
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// \short The FSIFluidElement class is a base class for all
@@ -62,6 +64,7 @@ namespace oomph
   public:
     /// Constructor
     FSIFluidElement() : FiniteElement() {}
+
 
     /// Broken copy constructor
     FSIFluidElement(const FSIFluidElement&)
@@ -81,6 +84,7 @@ namespace oomph
     virtual void get_load(const Vector<double>& s,
                           const Vector<double>& N,
                           Vector<double>& load) = 0;
+
 
     /// \short Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
@@ -103,9 +107,11 @@ namespace oomph
       std::set<std::pair<Data*, unsigned>>& paired_pressure_data) = 0;
   };
 
+
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// \short This is a base class for all SolidFiniteElements
@@ -189,9 +195,8 @@ namespace oomph
   /// but this may be overwritten with the
   /// access function FSIWallElement::q_pt().
   //=========================================================================
-  class FSIWallElement :
-    public virtual SolidFiniteElement,
-    public virtual ElementWithExternalElement
+  class FSIWallElement : public virtual SolidFiniteElement,
+                         public virtual ElementWithExternalElement
   {
   public:
     /// \short Function to describe the local dofs of the element. The ostream
@@ -210,10 +215,10 @@ namespace oomph
 
     /// \short Constructor. Note that element is not fully-functional
     /// until its setup_fsi_wall_element() function has been called!
-    FSIWallElement() :
-      Only_front_is_loaded_by_fluid(true),
-      Q_pt(&Default_Q_Value),
-      Ignore_shear_stress_in_jacobian(false)
+    FSIWallElement()
+      : Only_front_is_loaded_by_fluid(true),
+        Q_pt(&Default_Q_Value),
+        Ignore_shear_stress_in_jacobian(false)
     {
     }
 
@@ -257,11 +262,13 @@ namespace oomph
       return Q_pt;
     }
 
+
     /// \short Allow element to be loaded by fluid on both
     /// sides. (Resizes containers for lookup schemes and initialises
     /// data associated with elements at the "back" of the FSIWallElement
     /// to NULL.
     void enable_fluid_loading_on_both_sides();
+
 
     /// \short Is the element exposed to (and hence loaded by)
     /// fluid only on its "front"? True by default. This flag is set to
@@ -276,6 +283,7 @@ namespace oomph
       return Only_front_is_loaded_by_fluid;
     }
 
+
     /// \short Do not include any external data that affects the load
     /// in the computation of element's Jacobian matrix. This
     /// functionality is provided to allow the  "user" to deem the coupling
@@ -287,6 +295,7 @@ namespace oomph
     {
       Add_external_interaction_data = false;
     }
+
 
     /// \short Include all external fluid data that affects the load in the
     /// computation of the element's Jacobian matrix
@@ -318,6 +327,7 @@ namespace oomph
     /// \short Update the nodal positions in all fluid elements that affect
     /// the traction on this FSIWallElement
     void node_update_adjacent_fluid_elements();
+
 
     /// Fill in the element's contribution to the Jacobian matrix
     /// and the residual vector: Done by finite differencing the
@@ -371,6 +381,7 @@ namespace oomph
       }
     }
 
+
     /// \short After an external data change, update the nodal positions
     inline void update_in_external_fd(const unsigned& i)
     {
@@ -391,6 +402,7 @@ namespace oomph
         node_update_adjacent_fluid_elements();
       }
     }
+
 
     /// \short After a nodal data change, update the nodal positions
     inline void update_in_nodal_fd(const unsigned& i)
@@ -434,6 +446,7 @@ namespace oomph
       }
     }
 
+
     /// \short After an external geometric data change, update the nodal
     /// positions
     inline void update_in_external_interaction_geometric_fd(const unsigned& i)
@@ -456,6 +469,7 @@ namespace oomph
       }
     }
 
+
     /// \short After an internal data change, update the nodal positions
     inline void update_in_solid_position_fd(const unsigned& i)
     {
@@ -477,6 +491,7 @@ namespace oomph
       }
     }
 
+
     /// \short Get FE Jacobian by systematic finite differencing w.r.t.
     /// nodal positition Data, internal and external Data and any
     /// load Data that is not included in the previous categories.
@@ -491,6 +506,7 @@ namespace oomph
     // void fill_in_jacobian_from_solid_position_and_external_by_fd(
     // DenseMatrix<double>& jacobian);
 
+
     /// \short  Get the contribution to the load vector provided by
     /// the adjacent fluid element: Pass number of integration point
     /// in solid element, and the unit normal vector (pointing into the fluid!)
@@ -502,6 +518,7 @@ namespace oomph
     void fluid_load_vector(const unsigned& intpt,
                            const Vector<double>& N,
                            Vector<double>& load);
+
 
   private:
     /// \short Overload the function that must return all field data involved
@@ -542,9 +559,11 @@ namespace oomph
     bool Ignore_shear_stress_in_jacobian;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   // Namespace for "global" FSI functions
@@ -562,11 +581,13 @@ namespace oomph
     //============================================================================
     extern void apply_no_slip_on_moving_wall(Node* node_pt);
 
+
     //============================================================================
     /// \short Strouhal number St = a/(UT) for application of no slip condition.
     /// Initialised to 1.0.
     //============================================================================
     extern double Strouhal_for_no_slip;
+
 
     //============================================================================
     /// \short Set up the information that the FSIWallElements
@@ -634,6 +655,7 @@ namespace oomph
         problem_pt, boundary_in_fluid_mesh, fluid_mesh_pt, solid_mesh_pt, face);
     }
 
+
     //============================================================================
     /// \short Setup multi-domain interaction required for imposition
     /// of solid displacements onto the pseudo-solid fluid mesh by
@@ -665,6 +687,7 @@ namespace oomph
         problem_pt, b_solid_fsi, solid_mesh_pt, lagrange_multiplier_mesh_pt, 0);
     }
 
+
     //============================================================================
     /// \short Setup multi-domain interaction required for imposition
     /// of solid displacements onto the pseudo-solid fluid mesh by
@@ -690,6 +713,7 @@ namespace oomph
         DIM_SOLID>(
         problem_pt, b_solid_fsi, solid_mesh_pt, lagrange_multiplier_mesh_pt, 0);
     }
+
 
     //============================================================================
     /// Doc FSI:
@@ -737,6 +761,7 @@ namespace oomph
       fluid_mesh_pt->output(some_file, npts);
       some_file.close();
 
+
       // Setup map that links the positional Data of SolidNodes with
       //------------------------------------------------------------
       // the nodes
@@ -748,6 +773,7 @@ namespace oomph
         solid_node_pt[wall_mesh_pt->node_pt(j)->variable_position_pt()] =
           wall_mesh_pt->node_pt(j);
       }
+
 
       // Setup map that links the internal (pressure) Data of fluid elements
       // with
@@ -766,6 +792,7 @@ namespace oomph
             fluid_mesh_pt->finite_element_pt(e);
         }
       }
+
 
 #ifdef OOMPH_HAS_MPI
       // External halo elements must also be included in this check
@@ -789,6 +816,7 @@ namespace oomph
         }
       }
 #endif
+
 
       // Loop over all wall elements
       //----------------------------
@@ -819,6 +847,7 @@ namespace oomph
           unsigned ndim_eulerian = el_pt->nodal_dimension();
           Vector<double> x(ndim_eulerian);
 
+
           // Map to indicate if the internal Data for a given
           // fluid element has been plotted already
           std::map<FiniteElement*, bool> element_internal_data_has_been_plotted;
@@ -841,6 +870,7 @@ namespace oomph
             some_file << i << std::endl;
           }
 
+
           // Loop over Gauss points again to find corresponding points in fluid
           //--------------------------------------------------------------------
           // elements
@@ -849,8 +879,7 @@ namespace oomph
           // Loop over front and back if required: Get number of fluid-loaded
           // faces
           unsigned n_loaded_face = 2;
-          if (el_pt->only_front_is_loaded_by_fluid())
-            n_loaded_face = 1;
+          if (el_pt->only_front_is_loaded_by_fluid()) n_loaded_face = 1;
 
           for (unsigned face = 0; face < n_loaded_face; face++)
           {
@@ -874,6 +903,7 @@ namespace oomph
               some_file << i << std::endl;
             }
           }
+
 
           // Get the multiplicity of data that affects the load on this wall
           // element
@@ -1023,6 +1053,7 @@ namespace oomph
       // Part 2: Doc which dofs affect the node update functions
       //========================================================
 
+
       // Counter for the number of nodes that are actually
       // affected by wall motion
       unsigned count = 0;
@@ -1050,6 +1081,7 @@ namespace oomph
 
         // Extract geom objects that affect the nodal position
         Vector<GeomObject*> geom_obj_pt(node_pt->vector_geom_object_pt());
+
 
         // Get the multiplicity of data that affects this node
         //----------------------------------------------------
@@ -1108,12 +1140,12 @@ namespace oomph
           }
         }
 
+
         some_file.close();
 
         // If we've written something for the last node, bump up
         // counter for file so we don't overwrite
-        if (written_something)
-          count++;
+        if (written_something) count++;
       }
 
     } // end_of_doc_fsi

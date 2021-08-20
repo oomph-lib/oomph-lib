@@ -33,6 +33,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 #include "generic/fsi.h"
@@ -66,9 +67,11 @@ namespace oomph
       unsigned flag) = 0;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for elements that allow the imposition of Robin boundary
@@ -79,10 +82,10 @@ namespace oomph
   /// a separate equations class
   //======================================================================
   template<class ELEMENT>
-  class FpPressureAdvDiffRobinBCElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement,
-    public virtual FpPressureAdvDiffRobinBCElementBase
+  class FpPressureAdvDiffRobinBCElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual FaceElement,
+      public virtual FpPressureAdvDiffRobinBCElementBase
   {
   public:
     /// Constructor, which takes a "bulk" element and the value of the index
@@ -91,8 +94,8 @@ namespace oomph
     FpPressureAdvDiffRobinBCElement(
       FiniteElement* const& element_pt,
       const int& face_index,
-      const bool& called_from_refineable_constructor = false) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+      const bool& called_from_refineable_constructor = false)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -133,6 +136,7 @@ namespace oomph
     /// Jacobian as well.
     virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
+
 
     /// This function returns just the residuals
     inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -175,6 +179,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //============================================================================
   /// Get residuals and Jacobian of Robin boundary conditions in pressure
@@ -242,8 +247,7 @@ namespace oomph
       }
 
       // Modify bc: If outflow (flux>0) apply Neumann condition instead
-      if (flux > 0.0)
-        flux = 0.0;
+      if (flux > 0.0) flux = 0.0;
 
       // Get pressure
       double interpolated_press = bulk_el_pt->interpolated_p_nst(s_bulk);
@@ -293,13 +297,14 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// Template-free base class for Navier-Stokes equations to avoid
   /// casting problems
   //======================================================================
-  class TemplateFreeNavierStokesEquationsBase :
-    public virtual NavierStokesElementWithDiagonalMassMatrices,
-    public virtual FiniteElement
+  class TemplateFreeNavierStokesEquationsBase
+    : public virtual NavierStokesElementWithDiagonalMassMatrices,
+      public virtual FiniteElement
   {
   public:
     /// Constructor (empty)
@@ -332,6 +337,7 @@ namespace oomph
     /// adv diff problem
     virtual int& pinned_fp_pressure_eqn() = 0;
 
+
     /// \short Pin all non-pressure dofs and backup eqn numbers of all Data
     virtual void pin_all_non_pressure_dofs(
       std::map<Data*, std::vector<int>>& eqn_number_backup) = 0;
@@ -347,6 +353,7 @@ namespace oomph
     /// Fp preconditioner
     virtual void delete_pressure_advection_diffusion_robin_elements() = 0;
 
+
     /// \short Compute the diagonal of the velocity/pressure mass matrices.
     /// If which one=0, both are computed, otherwise only the pressure
     /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
@@ -357,9 +364,11 @@ namespace oomph
       const unsigned& which_one = 0) = 0;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for elements that solve the cartesian Navier--Stokes equations,
@@ -386,9 +395,9 @@ namespace oomph
   /// class.
   //======================================================================
   template<unsigned DIM>
-  class NavierStokesEquations :
-    public virtual FSIFluidElement,
-    public virtual TemplateFreeNavierStokesEquationsBase
+  class NavierStokesEquations
+    : public virtual FSIFluidElement,
+      public virtual TemplateFreeNavierStokesEquationsBase
   {
   public:
     /// \short Function pointer to body force function fct(t,x,f(x))
@@ -401,6 +410,7 @@ namespace oomph
     /// x is a Vector!
     typedef double (*NavierStokesSourceFctPt)(const double& time,
                                               const Vector<double>& x);
+
 
     /// \short Function pointer to source function fct(x) for the
     /// pressure advection diffusion equation (only used during
@@ -575,6 +585,7 @@ namespace oomph
       /*     } */
     }
 
+
     /// \short Calculate the source fct at given time and
     /// Eulerian position
     virtual double get_source_nst(const double& time,
@@ -592,6 +603,7 @@ namespace oomph
         return (*Source_fct_pt)(time, x);
       }
     }
+
 
     /// Get gradient of source term at (Eulerian) position x. This function is
     /// virtual to allow overloading in multi-physics problems where
@@ -629,6 +641,7 @@ namespace oomph
       /*     } */
     }
 
+
     ///\short Compute the residuals for the Navier--Stokes equations.
     /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
     /// Flag=2: Fill in mass matrix too.
@@ -637,6 +650,7 @@ namespace oomph
       DenseMatrix<double>& jacobian,
       DenseMatrix<double>& mass_matrix,
       unsigned flag);
+
 
     /// \short Compute the residuals for the associated pressure advection
     /// diffusion problem. Used by the Fp preconditioner.
@@ -662,15 +676,16 @@ namespace oomph
       DenseMatrix<double> const& C,
       DenseMatrix<double>& product);
 
+
   public:
     /// \short Constructor: NULL the body force and source function
     /// and make sure the ALE terms are included by default.
-    NavierStokesEquations() :
-      Body_force_fct_pt(0),
-      Source_fct_pt(0),
-      Press_adv_diff_source_fct_pt(0),
-      ALE_is_disabled(false),
-      Pinned_fp_pressure_eqn(-1)
+    NavierStokesEquations()
+      : Body_force_fct_pt(0),
+        Source_fct_pt(0),
+        Press_adv_diff_source_fct_pt(0),
+        ALE_is_disabled(false),
+        Pinned_fp_pressure_eqn(-1)
     {
       // Set all the Physical parameter pointers to the default value zero
       Re_pt = &Default_Physical_Constant_Value;
@@ -1016,6 +1031,7 @@ namespace oomph
       // Vector of local coordinates
       Vector<double> s(DIM);
 
+
       // Loop over plot points
       unsigned num_plot_points = nplot_points_paraview(nplot);
       for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
@@ -1050,6 +1066,7 @@ namespace oomph
         }
       }
     }
+
 
     /// \short Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
@@ -1108,6 +1125,7 @@ namespace oomph
         file_out << exact_soln[i] << std::endl;
       } // for (unsigned iplot=0;iplot<num_plot_points;iplot++)
     } // End of scalar_value_fct_paraview
+
 
     /// \short Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
@@ -1176,12 +1194,14 @@ namespace oomph
     /// in tecplot format. nplot points in each coordinate direction
     void full_output(std::ostream& outfile, const unsigned& nplot);
 
+
     /// \short Output function: x,y,[z],u,v,[w] in tecplot format.
     /// nplot points in each coordinate direction at timestep t
     /// (t=0: present; t>0: previous timestep)
     void output_veloc(std::ostream& outfile,
                       const unsigned& nplot,
                       const unsigned& t);
+
 
     /// \short Output function: x,y,[z], [omega_x,omega_y,[and/or omega_z]]
     /// in tecplot format. nplot points in each coordinate direction
@@ -1319,6 +1339,7 @@ namespace oomph
         parameter_pt, dres_dparam, djac_dparam, dmass_matrix_dparam, 2);
     }
 
+
     /// \short Compute the residuals for the associated pressure advection
     /// diffusion problem. Used by the Fp preconditioner.
     void fill_in_pressure_advection_diffusion_residuals(
@@ -1336,6 +1357,7 @@ namespace oomph
       fill_in_generic_pressure_advection_diffusion_contribution_nst(
         residuals, jacobian, 1);
     }
+
 
     /// \short Pin all non-pressure dofs and backup eqn numbers
     void pin_all_non_pressure_dofs(
@@ -1395,6 +1417,7 @@ namespace oomph
             }
           }
 
+
           // If it's a solid node deal with its positional data too
           SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
           if (solid_nod_pt != 0)
@@ -1418,6 +1441,7 @@ namespace oomph
         }
       }
     }
+
 
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
@@ -1481,6 +1505,7 @@ namespace oomph
     /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
     virtual void get_dresidual_dnodal_coordinates(
       RankThreeTensor<double>& dresidual_dnodal_coordinates);
+
 
     /// Compute vector of FE interpolated velocity u at local coordinate s
     void interpolated_u_nst(const Vector<double>& s,
@@ -1615,6 +1640,7 @@ namespace oomph
       }
     }
 
+
     /// Return FE interpolated pressure at local coordinate s
     virtual double interpolated_p_nst(const Vector<double>& s) const
     {
@@ -1636,6 +1662,7 @@ namespace oomph
       return (interpolated_p);
     }
 
+
     /// Return FE interpolated pressure at local coordinate s at time level t
     double interpolated_p_nst(const unsigned& t, const Vector<double>& s) const
     {
@@ -1656,6 +1683,7 @@ namespace oomph
 
       return (interpolated_p);
     }
+
 
     /// Return FE interpolated derivatives of velocity component u[i]
     /// w.r.t spatial global coordinate direction x[j] at local coordinate s
@@ -1689,6 +1717,7 @@ namespace oomph
       return (interpolated_dudx);
     }
 
+
     /// \short Output solution in data vector at local cordinates s:
     /// x,y [,z], u,v,[w], p
     void point_output_data(const Vector<double>& s, Vector<double>& data)
@@ -1713,6 +1742,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
 
+
   //==========================================================================
   /// Crouzeix_Raviart elements are Navier--Stokes elements with quadratic
   /// interpolation for velocities and positions, but a discontinuous linear
@@ -1720,9 +1750,8 @@ namespace oomph
   /// block preconditioning framework.
   //==========================================================================
   template<unsigned DIM>
-  class QCrouzeixRaviartElement :
-    public virtual QElement<DIM, 3>,
-    public virtual NavierStokesEquations<DIM>
+  class QCrouzeixRaviartElement : public virtual QElement<DIM, 3>,
+                                  public virtual NavierStokesEquations<DIM>
   {
   private:
     /// Static array of ints to hold required number of variables at nodes
@@ -1732,6 +1761,7 @@ namespace oomph
     /// Internal index that indicates at which internal data the pressure
     /// is stored
     unsigned P_nst_internal_index;
+
 
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
@@ -1764,6 +1794,7 @@ namespace oomph
       RankFourTensor<double>& d_dtestdx_dX,
       DenseMatrix<double>& djacobian_dX) const;
 
+
   public:
     /// Constructor, there are DIM+1 internal values (for the pressure)
     QCrouzeixRaviartElement() : QElement<DIM, 3>(), NavierStokesEquations<DIM>()
@@ -1775,6 +1806,7 @@ namespace oomph
 
     /// \short Number of values (pinned or dofs) required at local node n.
     virtual unsigned required_nvalue(const unsigned& n) const;
+
 
     /// Pressure shape functions at local coordinate s
     inline void pshape_nst(const Vector<double>& s, Shape& psi) const;
@@ -1828,6 +1860,7 @@ namespace oomph
       this->internal_data_pt(P_nst_internal_index)->set_value(p_dof, p_value);
     }
 
+
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
@@ -1859,6 +1892,7 @@ namespace oomph
     void identify_pressure_data(
       std::set<std::pair<Data*, unsigned>>& paired_pressure_data);
 
+
     /// Redirect output to NavierStokesEquations output
     void output(std::ostream& outfile)
     {
@@ -1871,6 +1905,7 @@ namespace oomph
       NavierStokesEquations<DIM>::output(outfile, nplot);
     }
 
+
     /// Redirect output to NavierStokesEquations output
     void output(FILE* file_pt)
     {
@@ -1882,6 +1917,7 @@ namespace oomph
     {
       NavierStokesEquations<DIM>::output(file_pt, nplot);
     }
+
 
     /// \short Full output function:
     /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
@@ -1898,6 +1934,7 @@ namespace oomph
     {
       NavierStokesEquations<DIM>::full_output(outfile, nplot);
     }
+
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Velocity and pressure.
@@ -1962,6 +1999,7 @@ namespace oomph
     return J;
   }
 
+
   //=======================================================================
   /// 2D
   /// Define the shape functions (psi) and test functions (test) and
@@ -2010,6 +2048,7 @@ namespace oomph
     // Return the jacobian
     return J;
   }
+
 
   //=======================================================================
   /// 3D
@@ -2060,6 +2099,7 @@ namespace oomph
     return J;
   }
 
+
   //=======================================================================
   /// 2D :
   /// Pressure shape functions
@@ -2072,6 +2112,7 @@ namespace oomph
     psi[1] = s[0];
     psi[2] = s[1];
   }
+
 
   //==========================================================================
   /// 2D :
@@ -2099,6 +2140,7 @@ namespace oomph
     dppsidx(1, 1) = 0.0;
     dppsidx(2, 1) = 1.0;
 
+
     // Get the values of the shape functions and their local derivatives
     Shape psi(9);
     DShape dpsi(9, 2);
@@ -2122,6 +2164,7 @@ namespace oomph
     return det;
   }
 
+
   //=======================================================================
   /// Ppressure shape and test functions
   //=======================================================================
@@ -2136,6 +2179,7 @@ namespace oomph
     test = psi;
   }
 
+
   //=======================================================================
   /// 3D :
   /// Pressure shape functions
@@ -2149,6 +2193,7 @@ namespace oomph
     psi[2] = s[1];
     psi[3] = s[2];
   }
+
 
   //==========================================================================
   /// 3D :
@@ -2184,6 +2229,7 @@ namespace oomph
     dppsidx(2, 2) = 0.0;
     dppsidx(3, 2) = 1.0;
 
+
     // Get the values of the shape functions and their local derivatives
     Shape psi(27);
     DShape dpsi(27, 3);
@@ -2206,6 +2252,7 @@ namespace oomph
     // Return the determinant of the jacobian
     return det;
   }
+
 
   //=======================================================================
   /// Face geometry of the 2D Crouzeix_Raviart elements
@@ -2231,26 +2278,29 @@ namespace oomph
   /// Face geometry of the FaceGeometry of the 2D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<2>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<2>>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   //=======================================================================
   /// Face geometry of the FaceGeometry of the 3D Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<3>>> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<3>>>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Taylor--Hood elements are Navier--Stokes elements
@@ -2259,9 +2309,8 @@ namespace oomph
   /// within oomph-lib's block-preconditioning framework.
   //=======================================================================
   template<unsigned DIM>
-  class QTaylorHoodElement :
-    public virtual QElement<DIM, 3>,
-    public virtual NavierStokesEquations<DIM>
+  class QTaylorHoodElement : public virtual QElement<DIM, 3>,
+                             public virtual NavierStokesEquations<DIM>
   {
   private:
     /// Static array of ints to hold number of variables at node
@@ -2314,6 +2363,7 @@ namespace oomph
       return Initial_Nvalue[n];
     }
 
+
     /// Pressure shape functions at local coordinate s
     inline void pshape_nst(const Vector<double>& s, Shape& psi) const;
 
@@ -2363,6 +2413,7 @@ namespace oomph
       return static_cast<unsigned>(pow(2.0, static_cast<int>(DIM)));
     }
 
+
     /// Deduce whether or not the provided node is a pressure node
     bool is_pressure_node(const unsigned& n) const
     {
@@ -2373,6 +2424,7 @@ namespace oomph
       return std::find(this->Pconv, this->Pconv + n_p, n) != this->Pconv + n_p;
     } // End of is_pressure_node
 
+
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
     void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
@@ -2380,6 +2432,7 @@ namespace oomph
       this->node_pt(Pconv[p_dof])
         ->set_value(this->p_nodal_index_nst(), p_value);
     }
+
 
     /// \short Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
@@ -2391,6 +2444,7 @@ namespace oomph
           this, face_index));
     }
 
+
     /// \short  Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
     /// and
@@ -2400,6 +2454,7 @@ namespace oomph
     /// load computed in the \c get_load(...) function.
     void identify_load_data(
       std::set<std::pair<Data*, unsigned>>& paired_load_data);
+
 
     /// \short  Add to the set \c paired_pressure_data pairs
     /// containing
@@ -2411,6 +2466,7 @@ namespace oomph
     /// load computed in the \c get_load(...) function.
     void identify_pressure_data(
       std::set<std::pair<Data*, unsigned>>& paired_pressure_data);
+
 
     /// Redirect output to NavierStokesEquations output
     void output(std::ostream& outfile)
@@ -2435,6 +2491,7 @@ namespace oomph
     {
       NavierStokesEquations<DIM>::output(file_pt, nplot);
     }
+
 
     /// \short Returns the number of "DOF types" that degrees of freedom
     /// in this element are sub-divided into: Velocity and pressure.
@@ -2479,6 +2536,7 @@ namespace oomph
     return J;
   }
 
+
   //==========================================================================
   /// Derivatives of the shape functions and test functions w.r.t to
   /// global (Eulerian) coordinates. Return Jacobian of mapping between
@@ -2502,6 +2560,7 @@ namespace oomph
     // Return the jacobian
     return J;
   }
+
 
   //==========================================================================
   /// 2D :
@@ -2539,6 +2598,7 @@ namespace oomph
       }
     }
 
+
     // Get the values of the shape functions and their local derivatives
     Shape psi(9);
     DShape dpsi(9, 2);
@@ -2561,6 +2621,7 @@ namespace oomph
     // Return the determinant of the jacobian
     return det;
   }
+
 
   //==========================================================================
   /// 2D :
@@ -2610,6 +2671,7 @@ namespace oomph
     return J;
   }
 
+
   //==========================================================================
   /// 3D :
   /// Define the shape functions (psi) and test functions (test) and
@@ -2658,6 +2720,7 @@ namespace oomph
     return J;
   }
 
+
   //==========================================================================
   /// 2D :
   /// Pressure shape functions
@@ -2683,6 +2746,7 @@ namespace oomph
       }
     }
   }
+
 
   //==========================================================================
   /// 3D :
@@ -2725,6 +2789,7 @@ namespace oomph
         }
       }
     }
+
 
     // Get the values of the shape functions and their local derivatives
     Shape psi(27);
@@ -2780,6 +2845,7 @@ namespace oomph
     }
   }
 
+
   //==========================================================================
   /// Pressure shape and test functions
   //==========================================================================
@@ -2793,6 +2859,7 @@ namespace oomph
     // Test functions are shape functions
     test = psi;
   }
+
 
   //=======================================================================
   /// Face geometry of the 2D Taylor_Hood elements
@@ -2814,43 +2881,48 @@ namespace oomph
     FaceGeometry() : QElement<2, 3>() {}
   };
 
+
   //=======================================================================
   /// Face geometry of the FaceGeometry of the 2D Taylor Hoodelements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QTaylorHoodElement<2>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<QTaylorHoodElement<2>>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   //=======================================================================
   /// Face geometry of the FaceGeometry of the 3D Taylor_Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QTaylorHoodElement<3>>> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<FaceGeometry<QTaylorHoodElement<3>>>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //==========================================================
   /// Taylor Hood upgraded to become projectable
   //==========================================================
   template<class TAYLOR_HOOD_ELEMENT>
-  class ProjectableTaylorHoodElement :
-    public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
+  class ProjectableTaylorHoodElement
+    : public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
   {
   public:
     /// \short Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableTaylorHoodElement() {}
+
 
     /// \short Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
@@ -2957,6 +3029,7 @@ namespace oomph
       }
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -2995,6 +3068,7 @@ namespace oomph
       }
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
@@ -3007,6 +3081,7 @@ namespace oomph
         return this->nnode();
       }
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -3023,36 +3098,39 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableTaylorHoodElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableTaylorHoodElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
   /// that for the underlying wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<FaceGeometry<ProjectableTaylorHoodElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  class FaceGeometry<FaceGeometry<ProjectableTaylorHoodElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
 
+
   //==========================================================
   /// Crouzeix Raviart upgraded to become projectable
   //==========================================================
   template<class CROUZEIX_RAVIART_ELEMENT>
-  class ProjectableCrouzeixRaviartElement :
-    public virtual ProjectableElement<CROUZEIX_RAVIART_ELEMENT>
+  class ProjectableCrouzeixRaviartElement
+    : public virtual ProjectableElement<CROUZEIX_RAVIART_ELEMENT>
   {
   public:
     /// \short Constructor [this was only required explicitly
@@ -3163,6 +3241,7 @@ namespace oomph
       }
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -3183,6 +3262,7 @@ namespace oomph
       }
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
@@ -3195,6 +3275,7 @@ namespace oomph
         return this->nnode();
       }
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -3211,29 +3292,32 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableCrouzeixRaviartElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableCrouzeixRaviartElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
   /// that for the underlying wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<FaceGeometry<ProjectableCrouzeixRaviartElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  class FaceGeometry<FaceGeometry<ProjectableCrouzeixRaviartElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
+
 
 } // namespace oomph
 

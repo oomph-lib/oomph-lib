@@ -29,6 +29,7 @@
 #include "shape.h"
 #include "integral.h"
 
+
 namespace oomph
 {
   ///////////////////////////////////////////////////////////////////////////
@@ -36,6 +37,7 @@ namespace oomph
   //  Functions for finite elements
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// Delete all the objects stored in the vectors:
@@ -47,6 +49,7 @@ namespace oomph
     delete_dshape_local_stored();
     delete_d2shape_local_stored();
   }
+
 
   //=========================================================================
   /// Delete stored shape functions
@@ -72,6 +75,7 @@ namespace oomph
     Shape_stored_pt = 0;
   }
 
+
   //=========================================================================
   /// Delete stored derivatives of shape functions w.r.t. to local
   /// coordinates
@@ -94,6 +98,7 @@ namespace oomph
     DShape_local_stored_pt = 0;
   }
 
+
   //=========================================================================
   /// Delete stored second derivatives of shape functions w.r.t. to local
   /// coordinates
@@ -115,6 +120,7 @@ namespace oomph
     // Reset the pointer to zero, must do it, even if copied
     D2Shape_local_stored_pt = 0;
   }
+
 
   //=========================================================================
   /// Delete all stored quantities related to derivatives of shape
@@ -150,6 +156,7 @@ namespace oomph
     DShape_eulerian_stored_pt = 0;
   }
 
+
   //=========================================================================
   /// Delete stored 2nd derivatives w.r.t. Eulerian coordinates
   //========================================================================
@@ -173,6 +180,7 @@ namespace oomph
     D2Shape_eulerian_stored_pt = 0;
   }
 
+
   //=========================================================================
   /// Delete stored Jacobian of mapping between local and global Eulerian
   /// coordinates
@@ -188,6 +196,7 @@ namespace oomph
     // Reset the pointer to zero, even if copied
     Jacobian_eulerian_stored_pt = 0;
   }
+
 
   //======================================================================
   /// \short The destructor cleans up the memory allocated
@@ -675,6 +684,7 @@ namespace oomph
     }
   }
 
+
   //=========================================================================
   /// \short Return the shape function and its derivatives w.r.t. the local
   /// coordinates at the ipt-th integration point.
@@ -720,6 +730,7 @@ namespace oomph
       d2psids = (*D2Shape_local_stored_pt)[ipt];
     }
   }
+
 
   //==========================================================================
   /// \short Compute the geometric shape functions, and
@@ -858,6 +869,7 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   //  Functions for solid elements with stored shape functions
@@ -874,6 +886,7 @@ namespace oomph
     delete_d2shape_lagrangian_stored();
     delete_J_lagrangian_stored();
   }
+
 
   //=========================================================================
   /// Delete all the objects stored in the vectors:
@@ -898,6 +911,7 @@ namespace oomph
     // Reset the pointer to zero
     DShape_lagrangian_stored_pt = 0;
   }
+
 
   //=========================================================================
   /// Delete all the objects stored in the vectors:
@@ -1096,6 +1110,7 @@ namespace oomph
     } // End of loop over the shape functions
   }
 
+
   //==========================================================================
   /// \short Compute the geometric shape functions, and
   /// derivatives w.r.t Lagrangian coordinates at the ipt-th integration point.
@@ -1146,6 +1161,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Set the stored derivatives of shape functions w.r.t Lagrangian coordinates
   /// to be
@@ -1177,5 +1193,6 @@ namespace oomph
         element_pt->jacobian_lagrangian_stored_pt();
     }
   }
+
 
 } // namespace oomph

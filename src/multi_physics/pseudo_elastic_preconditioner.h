@@ -73,9 +73,11 @@ namespace oomph
 #endif
   } // namespace Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// \short A subsidiary preconditioner for the pseudo-elastic FSI
@@ -284,6 +286,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
 
+
   //=============================================================================
   /// \short A subsidiary preconditioner for the pseudo-elastic FSI
   /// preconditioner. Also a stand-alone preconditioner for the problem of
@@ -301,8 +304,8 @@ namespace oomph
   /// 5 - y displacement (with lagr mult traction)
   /// 6 - z displacement (with lagr mult traction)
   //=============================================================================
-  class PseudoElasticPreconditionerOld :
-    public BlockPreconditioner<CRDoubleMatrix>
+  class PseudoElasticPreconditionerOld
+    : public BlockPreconditioner<CRDoubleMatrix>
   {
     /// \short PseudoElasticFSIPreconditioner is a friend to access the private
     /// *_preconditioner_solve(...) method
@@ -483,9 +486,11 @@ namespace oomph
     Mesh* Lagrange_multiplier_mesh_pt;
   };
 
+
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// Subsidiary helper preconditioner for the PseudoElasticPreconditioner.
@@ -499,8 +504,8 @@ namespace oomph
   /// with lagrange multiplier tractions applied.
   /// 3. By default this preconditioner uses a superlu preconditioner.
   //=============================================================================
-  class PseudoElasticPreconditionerSubsidiaryPreconditionerOld :
-    public BlockPreconditioner<CRDoubleMatrix>
+  class PseudoElasticPreconditionerSubsidiaryPreconditionerOld
+    : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
     /// \short typedef for a function that allows other preconditioners to be
@@ -578,9 +583,11 @@ namespace oomph
     SubsidiaryPreconditionerFctPt Subsidiary_preconditioner_function_pt;
   }; // end of PseudoElasticPreconditionerSubsidiaryPreconditionerOld
 
+
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// Subsidiary helper preconditioner for the PseudoElasticPreconditioner.
@@ -594,8 +601,8 @@ namespace oomph
   /// with lagrange multiplier tractions applied.
   /// 3. By default this preconditioner uses a superlu preconditioner.
   //=============================================================================
-  class PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld :
-    public BlockPreconditioner<CRDoubleMatrix>
+  class PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld
+    : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
     /// \short This preconditioner includes the option to use subsidiary
@@ -606,8 +613,8 @@ namespace oomph
     typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
     /// Constructor. (By default this preconditioner is upper triangular).
-    PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld() :
-      BlockPreconditioner<CRDoubleMatrix>()
+    PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld()
+      : BlockPreconditioner<CRDoubleMatrix>()
     {
       // null the subsidiary preconditioner function pointer
       Subsidiary_preconditioner_function_pt = 0;
@@ -704,9 +711,11 @@ namespace oomph
     double Scaling;
   };
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   // /*
   //=============================================================================
@@ -714,8 +723,8 @@ namespace oomph
   ///  Note that this is NOT actually a functioning preconditioner.
   /// We simply derive from this class to get access to the blocks.
   //=============================================================================
-  class PseudoElasticPreconditionerScalingHelperOld :
-    public BlockPreconditioner<CRDoubleMatrix>
+  class PseudoElasticPreconditionerScalingHelperOld
+    : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
     /// The constructor.
@@ -805,6 +814,7 @@ namespace oomph
       throw OomphLibError(
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
+
 
   }; // end of PseudoElasticPreconditionerScalingHelperOld
   // */

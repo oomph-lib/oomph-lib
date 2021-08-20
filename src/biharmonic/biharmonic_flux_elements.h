@@ -46,6 +46,7 @@
 #include "generic/hermite_elements.h"
 #include "biharmonic_elements.h"
 
+
 // oomph namespace
 namespace oomph
 {
@@ -54,8 +55,8 @@ namespace oomph
   /// indicates dimension of problem (i.e. bulk element),  not the face elements
   //============================================================================
   template<unsigned DIM>
-  class FaceGeometry<BiharmonicElement<DIM>> :
-    public virtual QHermiteElement<DIM - 1>
+  class FaceGeometry<BiharmonicElement<DIM>>
+    : public virtual QHermiteElement<DIM - 1>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -72,13 +73,14 @@ namespace oomph
     FaceGeometry() : PointElement() {}
   };
 
+
   //=============================================================================
   /// Biharmonic Flux Element
   //=============================================================================
   template<unsigned DIM>
-  class BiharmonicFluxElement :
-    public virtual FaceGeometry<BiharmonicElement<2>>,
-    public virtual FaceElement
+  class BiharmonicFluxElement
+    : public virtual FaceGeometry<BiharmonicElement<2>>,
+      public virtual FaceElement
   {
   public:
     /// definition of flux function pointer, flux must be parametised in terms
@@ -90,6 +92,7 @@ namespace oomph
                           const int& face_index,
                           const unsigned& b);
 
+
     ///\short  Broken empty constructor
     BiharmonicFluxElement()
     {
@@ -98,11 +101,13 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
+
     /// Broken copy constructor
     BiharmonicFluxElement(const BiharmonicFluxElement& dummy)
     {
       BrokenCopy::broken_copy("BiharmonicFluxElement<DIM>");
     }
+
 
     /// Broken assignment operator
     void operator=(const BiharmonicFluxElement&)
@@ -129,6 +134,7 @@ namespace oomph
       fill_in_generic_residual_contribution_biharmonic_flux(residuals);
     }
 
+
     /// \short Add the element's contribution to its residual vector and its
     /// Jacobian matrix (note - no contributions are made to the jacobian)
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -137,6 +143,7 @@ namespace oomph
       // Call the generic residuals routine
       fill_in_generic_residual_contribution_biharmonic_flux(residuals);
     }
+
 
     /// \short Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
@@ -150,17 +157,22 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
+
     /// Output function -- does nothing
     void output(std::ostream& outfile) {}
+
 
     /// \short Output function -- does nothing
     void output(std::ostream& outfile, const unsigned& n_plot) {}
 
+
     /// C-style output function -- does nothing
     void output(FILE* file_pt) {}
 
+
     /// \short C-style output function -- does nothing
     void output(FILE* file_pt, const unsigned& n_plot) {}
+
 
     /// compute_error -- does nothing
     void compute_error(std::ostream& outfile,
@@ -169,6 +181,7 @@ namespace oomph
                        double& norm)
     {
     }
+
 
     virtual void output_fct(
       std::ostream& outfile,
@@ -232,6 +245,7 @@ namespace oomph
     /// \short
     unsigned Boundary;
   };
+
 
 } // namespace oomph
 #endif

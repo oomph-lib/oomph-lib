@@ -33,14 +33,16 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
 #endif
 
 // OOMPH-LIB headers
-#include "generic/Qelements.h"
-#include "generic/Telements.h"
-#include "generic/projection.h"
+#include "src/generic/Qelements.h"
+#include "src/generic/Telements.h"
+#include "src/generic/projection.h"
+
 
 namespace oomph
 {
@@ -92,6 +94,7 @@ namespace oomph
 
       return d2u_dt2;
     }
+
 
     /// du/dt at local node n
     double du_dt_axisymmetric_linear_elasticity(const unsigned& n,
@@ -186,6 +189,7 @@ namespace oomph
       return (interpolated_u);
     }
 
+
     /// Compute vector of FE interpolated velocity du/dt at local coordinate s
     void interpolated_du_dt_axisymmetric_linear_elasticity(
       const Vector<double>& s, Vector<double>& du_dt) const
@@ -250,11 +254,11 @@ namespace oomph
     /// \short Constructor: Set null pointers for constitutive law.
     /// Set physical parameter values to
     /// default values, and set body force to zero.
-    AxisymmetricLinearElasticityEquationsBase() :
-      Youngs_modulus_pt(&Default_youngs_modulus_value),
-      Nu_pt(0),
-      Lambda_sq_pt(&Default_lambda_sq_value),
-      Body_force_fct_pt(0)
+    AxisymmetricLinearElasticityEquationsBase()
+      : Youngs_modulus_pt(&Default_youngs_modulus_value),
+        Nu_pt(0),
+        Lambda_sq_pt(&Default_lambda_sq_value),
+        Body_force_fct_pt(0)
     {
     }
 
@@ -389,6 +393,7 @@ namespace oomph
       }
     }
 
+
   protected:
     /// Pointer to the Young's modulus
     double* Youngs_modulus_pt;
@@ -414,16 +419,18 @@ namespace oomph
     static double Default_lambda_sq_value;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// A class for elements that solve the axisymmetric (in cylindrical
   /// polars) equations of linear elasticity
   //=======================================================================
-  class AxisymmetricLinearElasticityEquations :
-    public AxisymmetricLinearElasticityEquationsBase
+  class AxisymmetricLinearElasticityEquations
+    : public AxisymmetricLinearElasticityEquationsBase
   {
   public:
     /// \short  Constructor
@@ -443,6 +450,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
+
     /// The jacobian is calculated by finite differences by default,
     /// We need only to take finite differences w.r.t. positional variables
     /// For this element
@@ -454,6 +462,7 @@ namespace oomph
         ->fill_in_generic_contribution_to_residuals_axisymmetric_linear_elasticity(
           residuals, jacobian, 1);
     }
+
 
     /// Get strain (3x3 entries; r, z, phi)
     void get_strain(const Vector<double>& s, DenseMatrix<double>& strain);
@@ -507,6 +516,7 @@ namespace oomph
                        double& error,
                        double& norm);
 
+
   protected:
     /// \short Private helper function to compute residuals and (if requested
     /// via flag) also the Jacobian matrix.
@@ -514,23 +524,25 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// An Element that solves the equations of axisymmetric (in cylindrical
   /// polars) linear elasticity, using QElements for the geometry.
   //============================================================================
   template<unsigned NNODE_1D>
-  class QAxisymmetricLinearElasticityElement :
-    public virtual QElement<2, NNODE_1D>,
-    public virtual AxisymmetricLinearElasticityEquations
+  class QAxisymmetricLinearElasticityElement
+    : public virtual QElement<2, NNODE_1D>,
+      public virtual AxisymmetricLinearElasticityEquations
   {
   public:
     /// Constructor
-    QAxisymmetricLinearElasticityElement() :
-      QElement<2, NNODE_1D>(), AxisymmetricLinearElasticityEquations()
+    QAxisymmetricLinearElasticityElement()
+      : QElement<2, NNODE_1D>(), AxisymmetricLinearElasticityEquations()
     {
     }
 
@@ -546,6 +558,7 @@ namespace oomph
       AxisymmetricLinearElasticityEquations::output(outfile, n_plot);
     }
 
+
     /// C-style output function
     void output(FILE* file_pt)
     {
@@ -559,22 +572,25 @@ namespace oomph
     }
   };
 
+
   //============================================================================
   /// FaceGeometry of a linear
   /// QAxisymmetricLinearElasticityElement element
   //============================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<QAxisymmetricLinearElasticityElement<NNODE_1D>> :
-    public virtual QElement<1, NNODE_1D>
+  class FaceGeometry<QAxisymmetricLinearElasticityElement<NNODE_1D>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying element
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };
 
+
   /* //////////////////////////////////////////////////////////////////////// */
   /* //////////////////////////////////////////////////////////////////////// */
   /* //////////////////////////////////////////////////////////////////////// */
+
 
   /* //===========================================================================
    */
@@ -614,6 +630,7 @@ namespace oomph
 
   /*   }; */
 
+
   /* //============================================================================
    */
   /* /// FaceGeometry of a linear  */
@@ -629,21 +646,24 @@ namespace oomph
   /*     FaceGeometry() : TElement<1,NNODE_1D>() {} */
   /*   }; */
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //==========================================================
   /// Axisym linear elasticity upgraded to become projectable
   //==========================================================
   template<class AXISYM_LINEAR_ELAST_ELEMENT>
-  class ProjectableAxisymLinearElasticityElement :
-    public virtual ProjectableElement<AXISYM_LINEAR_ELAST_ELEMENT>
+  class ProjectableAxisymLinearElasticityElement
+    : public virtual ProjectableElement<AXISYM_LINEAR_ELAST_ELEMENT>
   {
   public:
     /// \short Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableAxisymLinearElasticityElement() {}
+
 
     /// \short Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
@@ -713,6 +733,7 @@ namespace oomph
       return this->dshape_eulerian(s, psi, dpsidx);
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -738,11 +759,13 @@ namespace oomph
       return interpolated_u;
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
       return this->nnode();
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -751,17 +774,19 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableAxisymLinearElasticityElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableAxisymLinearElasticityElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
@@ -769,13 +794,15 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   class FaceGeometry<
-    FaceGeometry<ProjectableAxisymLinearElasticityElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+    FaceGeometry<ProjectableAxisymLinearElasticityElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
 
+
 } // namespace oomph
+
 
 #endif

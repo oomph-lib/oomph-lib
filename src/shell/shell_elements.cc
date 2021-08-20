@@ -26,6 +26,7 @@
 // Non-inline functions for Kirchhoff Love shell elements
 #include "shell_elements.h"
 
+
 namespace oomph
 {
   //====================================================================
@@ -58,10 +59,12 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Static default for prestress (set to zero)
   //=======================================================================
   double KirchhoffLoveShellEquations::Zero_prestress = 0.0;
+
 
   //======================================================================
   /// Get normal to the shell
@@ -87,6 +90,7 @@ namespace oomph
 
     // Could/Should we make this more general?
     DShape d2psidxi(n_node, n_position_type, 3);
+
 
     // Call the derivatives of the shape functions:
     // d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial^2 \xi_0^2 \f$
@@ -143,6 +147,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Get strain and bending tensors
   //=====================================================================
@@ -167,6 +172,7 @@ namespace oomph
 
     // Could/Should we make this more general?
     DShape d2psidxi(n_node, n_position_type, 3);
+
 
     // Call the derivatives of the shape functions:
     // d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial^2 \xi_0^2 \f$
@@ -303,6 +309,7 @@ namespace oomph
             interpolated_A(0, 1) * interpolated_A(1, 0)) /
            sqrt_Adet;
 
+
     // Calculate the curvature tensors
     double b[2][2], B[2][2];
 
@@ -342,6 +349,7 @@ namespace oomph
     // tensor
     return std::make_pair(adet, Adet);
   }
+
 
   //====================================================================
   /// Return the residuals for the equations of KL shell theory
@@ -526,6 +534,7 @@ namespace oomph
       N[2] = (interpolated_A(0, 0) * interpolated_A(1, 1) -
               interpolated_A(0, 1) * interpolated_A(1, 0)) /
              sqrt_Adet;
+
 
       // Calculate the curvature tensors
       double b[2][2], B[2][2];
@@ -964,6 +973,7 @@ namespace oomph
               interpolated_A(0, 1) * interpolated_A(1, 0)) /
              sqrt_Adet;
 
+
       // Calculate the curvature tensors
       double b[2][2], B[2][2];
 
@@ -1054,6 +1064,7 @@ namespace oomph
 
     } // End of loop over the integration points
   }
+
 
   //===================================================================
   /// Get integral of instantaneous rate of work done on
@@ -1215,6 +1226,7 @@ namespace oomph
     return rate_of_work_integral;
   }
 
+
   //===================================================================
   /// The output function: position, veloc and accel.
   //===================================================================
@@ -1248,6 +1260,7 @@ namespace oomph
     outfile << std::endl;
   }
 
+
   //===================================================================
   /// The output function
   //===================================================================
@@ -1277,6 +1290,7 @@ namespace oomph
     }
     outfile << std::endl;
   }
+
 
   //===================================================================
   /// The output function
@@ -1309,6 +1323,7 @@ namespace oomph
     }
     fprintf(file_pt, "\n");
   }
+
 
   //=========================================================================
   /// Define the dposition function. This is used to set no-slip boundary
@@ -1370,6 +1385,7 @@ namespace oomph
     }
   }
 
+
   //=============================================================================
   /// Create a list of pairs for all unknowns in this element,
   /// so that the first entry in each pair contains the global equation
@@ -1423,9 +1439,11 @@ namespace oomph
     }
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// Constructor, takes the pointer to the "bulk" element, the
@@ -1436,8 +1454,8 @@ namespace oomph
   //===========================================================================
   ClampedHermiteShellBoundaryConditionElement::
     ClampedHermiteShellBoundaryConditionElement(
-      FiniteElement* const& bulk_el_pt, const int& face_index) :
-    FaceGeometry<HermiteShellElement>(), FaceElement()
+      FiniteElement* const& bulk_el_pt, const int& face_index)
+    : FaceGeometry<HermiteShellElement>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
     // to its nodes (by referring to the appropriate nodes in the bulk
@@ -1452,6 +1470,7 @@ namespace oomph
     // 4 (types of positional dofs) = 12 dofs associated with each node in the
     // shell element. But keep reading...
     set_nnodal_position_type(4);
+
 
     // The trouble with the above is that the parametrisation of the
     // element geometry (used in J_eulerian and elsewhere)
@@ -1492,6 +1511,7 @@ namespace oomph
     nadditional_data_values[1] = 2;
     resize_nodes(nadditional_data_values);
   }
+
 
   //===========================================================================
   /// Add the element's contribution to its residual vector
@@ -1573,6 +1593,7 @@ namespace oomph
         shell_normal[1] * Normal_to_clamping_plane[1] +
         shell_normal[2] * Normal_to_clamping_plane[2];
 
+
       // Assemble residual for Lagrange multiplier:
       //-------------------------------------------
 
@@ -1592,6 +1613,7 @@ namespace oomph
           }
         }
       }
+
 
       // Add Lagrange multiplier contribution to bulk equations
       //-------------------------------------------------------
@@ -1648,6 +1670,7 @@ namespace oomph
 
     // Loop over integration points
   }
+
 
   //===========================================================================
   /// Output function
@@ -1720,6 +1743,7 @@ namespace oomph
               << std::endl;
     }
 
+
     // Initialise error
     const bool check_error = false;
     if (check_error)
@@ -1742,8 +1766,7 @@ namespace oomph
         double J_via_ipt = J_eulerian_at_knot(ipt);
 
         double error = std::fabs(J_via_s - J_via_ipt);
-        if (error > max_error)
-          max_error = error;
+        if (error > max_error) max_error = error;
       }
       if (max_error > 1.0e-14)
       {
@@ -1828,5 +1851,6 @@ namespace oomph
       }
     }
   }
+
 
 } // namespace oomph

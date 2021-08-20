@@ -58,6 +58,7 @@ namespace oomph
     virtual void complex_smoother_solve(const Vector<DoubleVector>& rhs,
                                         Vector<DoubleVector>& result) = 0;
 
+
     /// Setup the smoother for the matrix specified by the pointer
     virtual void complex_smoother_setup(Vector<CRDoubleMatrix*> matrix_pt) = 0;
 
@@ -265,9 +266,11 @@ namespace oomph
     } // for (unsigned dof_type=0;dof_type<n_dof_types;dof_type)
   } // End of check_validity_of_solve_helper_inputs
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// Damped Jacobi "solver" templated by matrix type. The "solver"
@@ -279,11 +282,11 @@ namespace oomph
   {
   public:
     /// Constructor (empty)
-    ComplexDampedJacobi(const double& omega = 0.5) :
-      Matrix_can_be_deleted(true),
-      Matrix_real_pt(0),
-      Matrix_imag_pt(0),
-      Omega(omega){};
+    ComplexDampedJacobi(const double& omega = 0.5)
+      : Matrix_can_be_deleted(true),
+        Matrix_real_pt(0),
+        Matrix_imag_pt(0),
+        Omega(omega){};
 
     /// Empty destructor
     ~ComplexDampedJacobi()
@@ -862,11 +865,11 @@ namespace oomph
   {
   public:
     /// Constructor
-    ComplexGMRES() :
-      Iterations(0),
-      Matrices_storage_pt(0),
-      Resolving(false),
-      Matrix_can_be_deleted(true)
+    ComplexGMRES()
+      : Iterations(0),
+        Matrices_storage_pt(0),
+        Resolving(false),
+        Matrix_can_be_deleted(true)
     {
     } // End of ComplexGMRES constructor
 
@@ -1766,25 +1769,26 @@ namespace oomph
     return;
   } // End of complex_solve_helper
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// \short The GMRES method for the Helmholtz solver.
   //======================================================================
   template<typename MATRIX>
-  class HelmholtzGMRESMG :
-    public IterativeLinearSolver,
-    public BlockPreconditioner<MATRIX>
+  class HelmholtzGMRESMG : public IterativeLinearSolver,
+                           public BlockPreconditioner<MATRIX>
   {
   public:
     /// Constructor
-    HelmholtzGMRESMG() :
-      BlockPreconditioner<CRDoubleMatrix>(),
-      Iterations(0),
-      Resolving(false),
-      Matrix_can_be_deleted(true)
+    HelmholtzGMRESMG()
+      : BlockPreconditioner<CRDoubleMatrix>(),
+        Iterations(0),
+        Resolving(false),
+        Matrix_can_be_deleted(true)
     {
       Preconditioner_LHS = true;
     }
@@ -2027,6 +2031,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
+
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
@@ -3304,9 +3309,11 @@ namespace oomph
     return;
   } // End of solve_helper
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// \short The FGMRES method, i.e. the flexible variant of the GMRES
@@ -3618,9 +3625,11 @@ namespace oomph
     } // End of update
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector

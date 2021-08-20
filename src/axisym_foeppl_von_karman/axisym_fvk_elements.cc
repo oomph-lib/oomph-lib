@@ -35,10 +35,12 @@ namespace oomph
   template<unsigned NNODE_1D>
   const unsigned AxisymFoepplvonKarmanElement<NNODE_1D>::Initial_Nvalue = 6;
 
+
   //======================================================================
   /// Default value physical constants
   //======================================================================
   double AxisymFoepplvonKarmanEquations::Default_Physical_Constant_Value = 0.0;
+
 
   //======================================================================
   /// Compute contribution to element residual Vector
@@ -141,6 +143,7 @@ namespace oomph
         }
       } // End of loop over the nodes
 
+
       // Premultiply the weights and the Jacobian
       double W = w * interpolated_r * J;
 
@@ -151,6 +154,7 @@ namespace oomph
 
       double airy_forcing;
       get_airy_forcing_fvk(ipt, interpolated_r, airy_forcing);
+
 
       // Assemble residuals and Jacobian
       //--------------------------------
@@ -240,6 +244,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -263,6 +268,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// Compute in-plane stresses. Return boolean to indicate success
@@ -310,6 +316,7 @@ namespace oomph
       double interpolated_dphi_dr = 0;
       double interpolated_continuous_d2phi_dr2 = 0;
 
+
       // Calculate function values and derivatives:
       //-----------------------------------------
       // Loop over nodes
@@ -333,6 +340,7 @@ namespace oomph
     } // End if
 
   } // End of interpolated_stress function
+
 
   //======================================================================
   /// Output function:
@@ -367,6 +375,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// C-style output function:
   ///   r,w
@@ -395,6 +404,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution
@@ -443,6 +453,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Validate against exact solution
@@ -575,6 +586,7 @@ namespace oomph
       }
     }
   }
+
 
   //====================================================================
   // Force build of templates

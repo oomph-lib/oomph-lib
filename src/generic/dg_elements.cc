@@ -59,6 +59,7 @@ namespace oomph
       Neighbour_external_data.resize(n_intpt);
     }
 
+
     // Get the dimension of the present element
     const unsigned el_dim = this->dim();
     // Local coordinate in the face element
@@ -113,6 +114,7 @@ namespace oomph
       }
     }
   }
+
 
   //======================================================================
   // Report the global coordinates corresponding to the integration points
@@ -186,6 +188,7 @@ namespace oomph
       oomph_info << std::endl;
     }
   }
+
 
   //=====================================================================
   /// Return the interpolated values of the unknown fluxes
@@ -405,6 +408,7 @@ namespace oomph
     }
   }
 
+
   //===================================================================
   /// Calculate the integrated (numerical) flux out of the face and add
   /// it to the residuals vector
@@ -431,6 +435,7 @@ namespace oomph
       }
     }
 #endif
+
 
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -599,6 +604,7 @@ namespace oomph
     Mass_matrix_has_been_computed = true;
   }
 
+
   //============================================================================
   /// Function that returns the current value of the residuals
   /// multiplied by the inverse mass matrix (virtual so that it can be
@@ -665,6 +671,7 @@ namespace oomph
     M_pt->lubksub(minv_res);
   }
 
+
   void DGElement::get_neighbouring_face_and_local_coordinate(
     const int& face_index,
     const Vector<double>& s,
@@ -673,6 +680,7 @@ namespace oomph
   {
     DG_mesh_pt->neighbour_finder(this, face_index, s, face_element_pt, s_face);
   }
+
 
   /// Limit the slope within an element
   void DGElement::slope_limit(SlopeLimiter* const& slope_limiter_pt)
@@ -724,6 +732,7 @@ namespace oomph
   }
 
   double DGMesh::FaceTolerance = 1.0e-10;
+
 
   //====================================================
   /// Helper minmod function
@@ -785,6 +794,7 @@ namespace oomph
     // Make sure to return the sign multiplied by the minimum value
     return sign * min;
   }
+
 
   /// Modified minmod limiter to fix behaviour in smooth regions
   double MinModLimiter::minmodB(Vector<double>& args, const double& h)

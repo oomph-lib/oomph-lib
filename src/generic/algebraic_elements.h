@@ -39,11 +39,13 @@ namespace oomph
   class AlgebraicElementBase;
   class DummyAlgebraicMesh;
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // Algebraic nodes
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Algebraic nodes are nodes with an algebraic positional update
@@ -60,8 +62,8 @@ namespace oomph
     /// and with initial_nvalue dofs.
     AlgebraicNode(const unsigned& n_dim,
                   const unsigned& n_position_type,
-                  const unsigned& initial_nvalue) :
-      Node(n_dim, n_position_type, initial_nvalue)
+                  const unsigned& initial_nvalue)
+      : Node(n_dim, n_position_type, initial_nvalue)
     {
 #ifdef LEAK_CHECK
       LeakCheckNames::AlgebraicNode_build += 1;
@@ -76,14 +78,15 @@ namespace oomph
                                   // constructor
     }
 
+
     ///\short Constructor for bog-standard algebraic node of spatial
     /// dimension n_dim, with n_position_type generalised coordinates,
     /// with initial_nvalue dofs and with time dependence.
     AlgebraicNode(TimeStepper* time_stepper_pt,
                   const unsigned& n_dim,
                   const unsigned& n_position_type,
-                  const unsigned& initial_nvalue) :
-      Node(time_stepper_pt, n_dim, n_position_type, initial_nvalue)
+                  const unsigned& initial_nvalue)
+      : Node(time_stepper_pt, n_dim, n_position_type, initial_nvalue)
     {
 #ifdef LEAK_CHECK
       LeakCheckNames::AlgebraicNode_build += 1;
@@ -123,6 +126,7 @@ namespace oomph
       BrokenCopy::broken_assign("AlgebraicNode");
       }*/
 
+
     /// \short Update the current nodal position, using the first
     /// (default) update function if there are multiple ones. If
     /// required perform the auxiliary update of nodal values.
@@ -133,6 +137,7 @@ namespace oomph
     /// AlgebraicElementBase::setup_algebraic_node_update(...)
     void node_update(const bool& update_all_time_levels_for_new_node = false);
 
+
     /// Number of node update fcts
     unsigned nnode_update_fcts()
     {
@@ -141,6 +146,7 @@ namespace oomph
       // different node update functions...
       return Mesh_pt.size();
     }
+
 
     /// Default (usually first if there are multiple ones) node update fct id
     int node_update_fct_id()
@@ -165,11 +171,13 @@ namespace oomph
       }
     }
 
+
     /// \short Default (usually first) mesh that implements update function
     AlgebraicMesh* mesh_pt()
     {
       return Default_it_mesh_pt->second;
     }
+
 
     /// \short Mesh that implements the id-th node update function
     AlgebraicMesh* mesh_pt(const int& id)
@@ -177,11 +185,13 @@ namespace oomph
       return Mesh_pt[id];
     }
 
+
     /// \short Number of geometric objects involved in id-th update function
     unsigned ngeom_object(const int& id)
     {
       return Geom_object_pt[id].size();
     }
+
 
     /// \short Number of geometric objects involved in default (usually first)
     /// update function
@@ -190,6 +200,7 @@ namespace oomph
       return Default_it_geom_object_pt->second.size();
     }
 
+
     /// \short Return vector of geometric objects involved in
     /// id-th update function
     Vector<GeomObject*>& vector_geom_object_pt(const int& id)
@@ -197,12 +208,14 @@ namespace oomph
       return Geom_object_pt[id];
     }
 
+
     /// \short Return vector of geometric objects involved in
     /// default (usually first) update function
     Vector<GeomObject*>& vector_geom_object_pt()
     {
       return Default_it_geom_object_pt->second;
     }
+
 
     /// \short Return the vector of all geometric objects
     GeomObject** all_geom_object_pt()
@@ -230,12 +243,14 @@ namespace oomph
       return Ref_value[id].size();
     }
 
+
     /// \short Number of reference values involved in default
     /// (usually first) update function
     unsigned nref_value()
     {
       return Default_it_ref_value->second.size();
     }
+
 
     /// \short Return vector of reference values involved in
     /// default (usually first) update function
@@ -244,12 +259,14 @@ namespace oomph
       return Default_it_ref_value->second;
     }
 
+
     /// \short Return vector of reference values involved in
     /// id-th update function
     Vector<double>& vector_ref_value(const int& id)
     {
       return Ref_value[id];
     }
+
 
     /// \short Return i-th reference value involved in
     /// default (usually first) update function
@@ -310,6 +327,7 @@ namespace oomph
       set_default_node_update(Mesh_pt.begin()->first);
     }
 
+
     /// \short Add algebraic update information for node:
     /// Which Mesh implements the update operation? Also,
     /// pass the vector of geometric objects and
@@ -347,6 +365,7 @@ namespace oomph
       set_default_node_update(Mesh_pt.begin()->first);
     }
 
+
     /// \short Erase algebraic node update information for id-th
     /// node update function. Id defaults to 0.
     void kill_node_update_info(const int& id = 0)
@@ -356,6 +375,7 @@ namespace oomph
       Ref_value.erase(Ref_value.find(id));
     }
 
+
     /// \short Perform self test: If the node has multiple node
     /// update functions, check that they all give the same result.
     /// Return 1/0 for failure/success. (Failure if
@@ -364,12 +384,14 @@ namespace oomph
     /// AlgebraicNode::Max_allowed_difference_between_node_update_fcts
     unsigned self_test();
 
+
   private:
     /// Make id-th node update function the default
     void set_default_node_update(const int& id)
     {
       // Set default node update fct id
       Default_node_update_fct_id = id;
+
 
       // Set iterators for default entry
 
@@ -474,11 +496,13 @@ namespace oomph
     static Vector<double> Dummy_ref_value;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // Algebraic elements
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Base class for algebraic elements.
@@ -511,6 +535,7 @@ namespace oomph
                                      FiniteElement* father_el_pt) const;
   };
 
+
   //========================================================================
   /// Algebraic elements are elements that have AlgebraicNodes whose
   /// position is determined by the geometric Data in the GeomObjects
@@ -521,24 +546,24 @@ namespace oomph
   /// element.
   //========================================================================
   template<class ELEMENT>
-  class AlgebraicElement :
-    public ElementWithSpecificMovingNodes<ELEMENT, AlgebraicNode>,
-    public AlgebraicElementBase
+  class AlgebraicElement
+    : public ElementWithSpecificMovingNodes<ELEMENT, AlgebraicNode>,
+      public AlgebraicElementBase
   {
   public:
     /// \short Constructor -- simply calls the constructor of the
     /// underlying ELEMENT.
-    AlgebraicElement() :
-      ElementWithSpecificMovingNodes<ELEMENT, AlgebraicNode>(),
-      AlgebraicElementBase()
+    AlgebraicElement()
+      : ElementWithSpecificMovingNodes<ELEMENT, AlgebraicNode>(),
+        AlgebraicElementBase()
     {
     }
 
     /// Constructor for face elements
-    AlgebraicElement(FiniteElement* const& element_pt, const int& face_index) :
-      ElementWithSpecificMovingNodes<ELEMENT, AlgebraicNode>(element_pt,
-                                                             face_index),
-      AlgebraicElementBase()
+    AlgebraicElement(FiniteElement* const& element_pt, const int& face_index)
+      : ElementWithSpecificMovingNodes<ELEMENT, AlgebraicNode>(element_pt,
+                                                               face_index),
+        AlgebraicElementBase()
     {
     }
 
@@ -554,17 +579,19 @@ namespace oomph
       BrokenCopy::broken_assign("AlgebraicElement");
       }*/
 
+
     /// Empty Destructor must clean up the allocated memory
     ~AlgebraicElement() {}
   };
+
 
   //=======================================================================
   /// \short Explicit definition of the face geometry of algebraic elements:
   /// the same as the face geometry of the underlying element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<AlgebraicElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<AlgebraicElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     /// Constructor
@@ -573,11 +600,13 @@ namespace oomph
   protected:
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // Algebraic meshes
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Algebraic meshes contain AlgebraicElements and AlgebraicNodes.
@@ -629,6 +658,7 @@ namespace oomph
       return (dynamic_cast<AlgebraicNode*>(Node_pt[n]));
     }
 
+
     /// \short Update the nodal position posn at time level t (t=0: present;
     /// t>0: previous). Must be implemented for every specific algebraic mesh.
     virtual void algebraic_node_update(const unsigned& t,
@@ -638,6 +668,7 @@ namespace oomph
     /// mesh adaptation. Must be implemented for every specific algebraic
     /// mesh, though it may, of course, be left empty.
     virtual void update_node_update(AlgebraicNode*& node_pt) = 0;
+
 
     /// \short Update all nodal positions via algebraic node update functions
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
@@ -837,11 +868,13 @@ namespace oomph
     Vector<GeomObject*> Geom_object_list_pt;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // Dummy algebraic mesh
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Dummy algebraic mesh -- used for default assignements
@@ -871,6 +904,7 @@ namespace oomph
     {
     }
 
+
     /// \short Update the node update info for given node, following
     /// mesh adaptation. Must be implemented for every specific algebraic
     /// mesh, though it may, of course, be left empty which is exactly
@@ -881,6 +915,7 @@ namespace oomph
     /// do nothing in this dummy version
     virtual void setup_algebraic_node_update(AlgebraicNode*& nod_pt) {}
   };
+
 
 } // namespace oomph
 

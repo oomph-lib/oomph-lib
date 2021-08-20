@@ -26,6 +26,7 @@
 #ifndef SAMPLE_POINT_PARAMETERS_HEADER
 #define SAMPLE_POINT_PARAMETERS_HEADER
 
+
 // oomph-lib includes
 #include "elements.h"
 #include "mesh.h"
@@ -45,17 +46,21 @@ namespace oomph
 #endif
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   // Forward references
   class RefineableBinArray;
   class NonRefineableBinArray;
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// \short Helper object for dealing with the parameters used for the
@@ -84,6 +89,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("SamplePointContainerParameters");
     }
+
 
     /// Empty destructor
     virtual ~SamplePointContainerParameters() {}
@@ -192,16 +198,17 @@ namespace oomph
     /// of this flag allows easy return to previous implementation.
     bool Ignore_halo_elements_during_locate_zeta_search;
 
+
   private:
     /// \short Constructor: Pass mesh.
     /// Constructor is private and can only be called
     /// by the derived friends.
-    SamplePointContainerParameters(Mesh* mesh_pt) :
-      Mesh_pt(mesh_pt),
-      Nsample_points_generated_per_element(
-        Default_nsample_points_generated_per_element),
-      Use_eulerian_coordinates_during_setup(false),
-      Ignore_halo_elements_during_locate_zeta_search(false)
+    SamplePointContainerParameters(Mesh* mesh_pt)
+      : Mesh_pt(mesh_pt),
+        Nsample_points_generated_per_element(
+          Default_nsample_points_generated_per_element),
+        Use_eulerian_coordinates_during_setup(false),
+        Ignore_halo_elements_during_locate_zeta_search(false)
     {
     }
 
@@ -216,6 +223,7 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
@@ -226,15 +234,16 @@ namespace oomph
   /// \short Helper object for dealing with the parameters used for the
   /// CGALSamplePointContainer objects
   //=========================================================================
-  class CGALSamplePointContainerParameters :
-    public virtual SamplePointContainerParameters
+  class CGALSamplePointContainerParameters
+    : public virtual SamplePointContainerParameters
   {
   public:
     /// Constructor: Pass mesh.
-    CGALSamplePointContainerParameters(Mesh* mesh_pt) :
-      SamplePointContainerParameters(mesh_pt)
+    CGALSamplePointContainerParameters(Mesh* mesh_pt)
+      : SamplePointContainerParameters(mesh_pt)
     {
     }
+
 
     /// \short Broken copy constructor.
     CGALSamplePointContainerParameters(
@@ -255,6 +264,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// \short Helper object for dealing with the parameters used for the
@@ -316,9 +326,11 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// \short Helper object for dealing with the parameters used for the
@@ -328,15 +340,15 @@ namespace oomph
   {
   public:
     /// Constructor: Pass mesh
-    RefineableBinArrayParameters(Mesh* mesh_pt) :
-      SamplePointContainerParameters(mesh_pt),
-      BinArrayParameters(mesh_pt),
-      Bin_array_is_recursive(true),
-      Depth(0),
-      Max_depth(Default_max_depth),
-      Max_number_of_sample_point_per_bin(
-        Default_max_number_of_sample_point_per_bin),
-      Root_bin_array_pt(0)
+    RefineableBinArrayParameters(Mesh* mesh_pt)
+      : SamplePointContainerParameters(mesh_pt),
+        BinArrayParameters(mesh_pt),
+        Bin_array_is_recursive(true),
+        Depth(0),
+        Max_depth(Default_max_depth),
+        Max_number_of_sample_point_per_bin(
+          Default_max_number_of_sample_point_per_bin),
+        Root_bin_array_pt(0)
     {
     }
 
@@ -354,6 +366,7 @@ namespace oomph
 
     /// Empty destructor
     virtual ~RefineableBinArrayParameters() {}
+
 
     /// Is bin recursive?
     bool bin_array_is_recursive() const
@@ -452,9 +465,11 @@ namespace oomph
     RefineableBinArray* Root_bin_array_pt;
   };
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// \short Helper object for dealing with the parameters used for the
@@ -464,10 +479,10 @@ namespace oomph
   {
   public:
     /// Constructor: Pass mesh
-    NonRefineableBinArrayParameters(Mesh* mesh_pt) :
-      SamplePointContainerParameters(mesh_pt),
-      BinArrayParameters(mesh_pt),
-      Nspiral_chunk(Default_nspiral_chunk)
+    NonRefineableBinArrayParameters(Mesh* mesh_pt)
+      : SamplePointContainerParameters(mesh_pt),
+        BinArrayParameters(mesh_pt),
+        Nspiral_chunk(Default_nspiral_chunk)
     {
     }
 

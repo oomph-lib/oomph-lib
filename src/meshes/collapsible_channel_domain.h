@@ -52,10 +52,10 @@ namespace oomph
                              const double& lcollapsible,
                              const double& ldown,
                              const double& ly,
-                             GeomObject* wall_pt) :
-      BL_squash_fct_pt(&default_BL_squash_fct),
-      Axial_spacing_fct_pt(&default_axial_spacing_fct),
-      Rotate_domain(false)
+                             GeomObject* wall_pt)
+      : BL_squash_fct_pt(&default_BL_squash_fct),
+        Axial_spacing_fct_pt(&default_axial_spacing_fct),
+        Rotate_domain(false)
     {
       Nup = nup;
       Ncollapsible = ncollapsible;
@@ -78,8 +78,10 @@ namespace oomph
       }
     }
 
+
     /// Destructor: emtpy; cleanup done in base class
     ~CollapsibleChannelDomain() {}
+
 
     /// Number of vertical columns of macro elements the upstream section
     unsigned nup()
@@ -136,6 +138,7 @@ namespace oomph
       return Wall_pt;
     }
 
+
     /// \short Access to pointer to the geometric object that parametrises
     /// the collapsible wall (const version)
     GeomObject* wall_pt() const
@@ -147,6 +150,7 @@ namespace oomph
     /// the macro elements near the wall to help resolution of any
     /// wall boundary layers.
     typedef double (*BLSquashFctPt)(const double& s);
+
 
     /// \short Default for function that squashes
     /// the macro elements near the walls. Identity.
@@ -191,6 +195,9 @@ namespace oomph
       return Axial_spacing_fct_pt(xi);
     }
 
+    /// x-length in the "collapsible" part of the channel
+    double Lcollapsible;
+
     /// \short Vector representation of the  imacro-th macro element
     /// boundary idirect (N/S/W/E) at time level t
     /// (t=0: present; t>0: previous): \f$ {\bf r}({\bf zeta}) \f$
@@ -204,6 +211,8 @@ namespace oomph
                                 const Vector<double>& zeta,
                                 Vector<double>& r);
 
+
+    /// Rotate the domain (for axisymmetric problems)
     void enable_rotate_domain()
     {
       Rotate_domain = true;
@@ -215,7 +224,10 @@ namespace oomph
       Rotate_domain = false;
     }
 
+
   private:
+    /// \short Northern boundary of the macro element imacro in the
+    /// upstream (part=0) or downstream (part=1) sections
     void r_N_straight(const Vector<double>& zeta,
                       Vector<double>& r,
                       const unsigned& imacro,
@@ -270,6 +282,7 @@ namespace oomph
                          Vector<double>& r,
                          const unsigned& imacro);
 
+
     /// \short Function pointer for function that squashes
     /// the macro elements near the walls
     BLSquashFctPt BL_squash_fct_pt;
@@ -284,6 +297,7 @@ namespace oomph
     {
       return xi;
     }
+
 
     /// Number of vertical element columns in upstream section
     unsigned Nup;
@@ -315,6 +329,7 @@ namespace oomph
     /// Rotate domain (for axisymmetric problems, say)
     bool Rotate_domain;
   };
+
 
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
@@ -591,226 +606,253 @@ namespace oomph
     {
       case 0: // in the upstream part of the channel
 
-        // Parametrizes the boundary
-        r[0] = axial_spacing_fct((double(x) + (0.5 * (1.0 + zeta[0]))) *
-                                 (Lup / double(Nup)));
-        r[1] = (double(y) + 1.0) * (Ly / double(Ny));
+        // Where are we?
+        switch (part)
+        {
+          case 0: // in the upstream part of the channel
 
-        // Map it via squash fct
-        r[1] = Ly * s_squash(r[1] / Ly);
+            // Parametrizes the boundary
+            r[0] = axial_spacing_fct((double(x) + (0.5 * (1.0 + zeta[0]))) *
+                                     (Lup / double(Nup)));
+            r[1] = (double(y) + 1.0) * (Ly / double(Ny));
 
-        break;
+            // Map it via squash fct
+            r[1] = Ly * s_squash(r[1] / Ly);
 
-      case 1: // in the downstream part of the channel
+            break;
 
-        // Parametrizes the boundary
-        r[0] = axial_spacing_fct(
-          (double(x - Nup - Ncollapsible) + (0.5 * (1.0 + zeta[0]))) *
-            (Ldown / double(Ndown)) +
-          Lup + Lcollapsible);
-        r[1] = (double(y) + 1.0) * (Ly / double(Ny));
+          case 1: // in the downstream part of the channel
 
-        // Map it via squash fct
-        r[1] = Ly * s_squash(r[1] / Ly);
+            // Parametrizes the boundary
+            r[0] = axial_spacing_fct(
+              (double(x - Nup - Ncollapsible) + (0.5 * (1.0 + zeta[0]))) *
+                (Ldown / double(Ndown)) +
+              Lup + Lcollapsible);
+            r[1] = (double(y) + 1.0) * (Ly / double(Ny));
 
-        break;
+            // Map it via squash fct
+            r[1] = Ly * s_squash(r[1] / Ly);
 
-      default:
+            break;
 
-        std::ostringstream error_stream;
-        error_stream << "Never get here! part=" << part << std::endl;
+          default:
 
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+            std::ostringstream error_stream;
+            error_stream << "Never get here! part=" << part << std::endl;
+
+            throw OomphLibError(error_stream.str(),
+                                OOMPH_CURRENT_FUNCTION,
+                                OOMPH_EXCEPTION_LOCATION);
+        }
     }
-  }
 
-  //=========================================================================
-  /// \short Southern  edge of the  macro element in the straight parts of
-  /// the channel; \f$ \zeta \in [-1,1] \f$
-  /// part=0 in the left part, part=1 in the right part
-  //=========================================================================
-  void CollapsibleChannelDomain::r_S_straight(const Vector<double>& zeta,
-                                              Vector<double>& r,
-                                              const unsigned& imacro,
-                                              const unsigned& part)
-  {
-    // Determines the "coordinates" of the macro-element
-    unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
-    unsigned y = unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
-
-    // Where are we?
-    switch (part)
+    //=========================================================================
+    /// \short Southern  edge of the  macro element in the straight parts of
+    /// the channel; \f$ \zeta \in [-1,1] \f$
+    /// part=0 in the left part, part=1 in the right part
+    //=========================================================================
+    void CollapsibleChannelDomain::r_S_straight(const Vector<double>& zeta,
+                                                Vector<double>& r,
+                                                const unsigned& imacro,
+                                                const unsigned& part)
     {
-      case 0: // in the upstream bit
+      // Determines the "coordinates" of the macro-element
+      unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
+      unsigned y =
+        unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
 
-        // Parametrizes the boundary
-        r[0] = axial_spacing_fct((double(x) + (0.5 * (1 + zeta[0]))) *
-                                 (Lup / double(Nup)));
-        r[1] = double(y) * (Ly / double(Ny));
+      // Where are we?
+      switch (part)
+      {
+        case 0: // in the upstream bit
 
-        // Map it via squash fct
-        r[1] = Ly * s_squash(r[1] / Ly);
+          // Parametrizes the boundary
+          r[0] = axial_spacing_fct((double(x) + (0.5 * (1 + zeta[0]))) *
+                                   (Lup / double(Nup)));
+          r[1] = double(y) * (Ly / double(Ny));
 
-        break;
+          // Map it via squash fct
+          r[1] = Ly * s_squash(r[1] / Ly);
 
-      case 1: // in the downstream bit
+          break;
 
-        // Parametrizes the boundary
-        r[0] = axial_spacing_fct(
-          (double(x - Nup - Ncollapsible) + (0.5 * (1 + zeta[0]))) *
-            (Ldown / double(Ndown)) +
-          Lup + Lcollapsible);
-        r[1] = double(y) * (Ly / double(Ny));
+        case 1: // in the downstream bit
 
-        // Map it via squash fct
-        r[1] = Ly * s_squash(r[1] / Ly);
+          // Parametrizes the boundary
+          r[0] = axial_spacing_fct(
+            (double(x - Nup - Ncollapsible) + (0.5 * (1 + zeta[0]))) *
+              (Ldown / double(Ndown)) +
+            Lup + Lcollapsible);
+          r[1] = double(y) * (Ly / double(Ny));
 
-        break;
+          // Map it via squash fct
+          r[1] = Ly * s_squash(r[1] / Ly);
 
-      default:
+          break;
 
-        std::ostringstream error_stream;
-        error_stream << "Never get here! part=" << part << std::endl;
+        default:
 
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+          // Map it via squash fct
+          r[1] = Ly * s_squash(r[1] / Ly);
+
+          std::ostringstream error_stream;
+          error_stream << "Never get here! part=" << part << std::endl;
+
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+      }
     }
-  }
 
-  //========================================================================
-  /// Western edge of the  macro element in the collapsible part of the
-  /// channel; \f$ \zeta \in [-1,1] \f$.
-  //========================================================================
-  void CollapsibleChannelDomain::r_W_collapsible(const unsigned& t,
-                                                 const Vector<double>& zeta,
-                                                 Vector<double>& r,
-                                                 const unsigned& imacro)
-  {
-    // Determines the "coordinates" of the macro-element
-    unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
-    unsigned y = unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
 
-    // Vector of Lagrangian coordinates
-    Vector<double> xi(1);
-    xi[0] = double(x - Nup) * (Lcollapsible / double(Ncollapsible));
+    //========================================================================
+    /// Western edge of the  macro element in the collapsible part of the
+    /// channel; \f$ \zeta \in [-1,1] \f$.
+    //========================================================================
+    void CollapsibleChannelDomain::r_W_collapsible(const unsigned& t,
+                                                   const Vector<double>& zeta,
+                                                   Vector<double>& r,
+                                                   const unsigned& imacro)
+    {
+      // Determines the "coordinates" of the macro-element
+      unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
+      unsigned y =
+        unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
 
-    // Position vector on upper wall:
-    Vector<double> r_wall(2);
-    Wall_pt->position(t, xi, r_wall);
+      // Vector of Lagrangian coordinates
+      Vector<double> xi(1);
+      xi[0] = double(x - Nup) * (Lcollapsible / double(Ncollapsible));
 
-    // Point will be located on straight line from bottom to top wall
-    double fract = (double(y) + (0.5 * (1.0 + zeta[0]))) / double(Ny);
+      // Position vector on upper wall:
+      Vector<double> r_wall(2);
+      Wall_pt->position(t, xi, r_wall);
 
-    // Map it via squash fct
-    fract = s_squash(fract);
+      // Point will be located on straight line from bottom to top wall
+      double fract = (double(y) + (0.5 * (1.0 + zeta[0]))) / double(Ny);
 
-    // x-cooordinate -- straight line from fixed position on the bottom
-    // wall to moving position on the top wall
-    r[0] = Lup + xi[0] + (r_wall[0] - (xi[0] + Lup)) * fract;
+      // Map it via squash fct
+      fract = s_squash(fract);
 
-    // y-coordinate
-    r[1] = r_wall[1] * fract;
-  }
+      // x-cooordinate -- straight line from fixed position on the bottom
+      // wall to moving position on the top wall
+      r[0] = Lup + xi[0] + (r_wall[0] - (xi[0] + Lup)) * fract;
 
-  //=========================================================================
-  /// Eastern  edge of the  macro element in the collapsible part of the
-  /// channel; \f$ \zeta \in [-1,1] \f$
-  //=========================================================================
-  void CollapsibleChannelDomain::r_E_collapsible(const unsigned& t,
-                                                 const Vector<double>& zeta,
-                                                 Vector<double>& r,
-                                                 const unsigned& imacro)
-  {
-    // Determines the "coordinates" of the macro-element
-    unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
-    unsigned y = unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
+      // y-coordinate
+      r[1] = r_wall[1] * fract;
+    }
 
-    // Vector of Lagrangian coordinates
-    Vector<double> xi(1);
-    xi[0] = (double(x - Nup) + 1.0) * (Lcollapsible / double(Ncollapsible));
 
-    // Position vector on upper wall:
-    Vector<double> r_wall(2);
-    Wall_pt->position(t, xi, r_wall);
+    //=========================================================================
+    /// Eastern  edge of the  macro element in the collapsible part of the
+    /// channel; \f$ \zeta \in [-1,1] \f$
+    //=========================================================================
+    void CollapsibleChannelDomain::r_E_collapsible(const unsigned& t,
+                                                   const Vector<double>& zeta,
+                                                   Vector<double>& r,
+                                                   const unsigned& imacro)
+    {
+      // Determines the "coordinates" of the macro-element
+      unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
+      unsigned y =
+        unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
 
-    // Point will be located on straight line from bottom to top wall
-    double fract = (double(y) + (0.5 * (1.0 + zeta[0]))) / double(Ny);
+      // Vector of Lagrangian coordinates
+      Vector<double> xi(1);
+      xi[0] = (double(x - Nup) + 1.0) * (Lcollapsible / double(Ncollapsible));
 
-    // Map it via squash fct
-    fract = s_squash(fract);
+      // Position vector on upper wall:
+      Vector<double> r_wall(2);
+      Wall_pt->position(t, xi, r_wall);
 
-    // x-cooordinate -- straight line from fixed position on the bottom
-    // wall to moving position on the top wall
-    r[0] = Lup + xi[0] + (r_wall[0] - (xi[0] + Lup)) * fract;
+      // Point will be located on straight line from bottom to top wall
+      double fract = (double(y) + (0.5 * (1.0 + zeta[0]))) / double(Ny);
 
-    // y-coordinate
-    r[1] = r_wall[1] * fract;
-  }
+      // Map it via squash fct
+      fract = s_squash(fract);
 
-  //==========================================================================
-  /// Northern edge of the  macro element in the collapsible part of the
-  /// channel; \f$ \zeta \in [-1,1] \f$
-  //==========================================================================
-  void CollapsibleChannelDomain::r_N_collapsible(const unsigned& t,
-                                                 const Vector<double>& zeta,
-                                                 Vector<double>& r,
-                                                 const unsigned& imacro)
-  {
-    // Determines the "coordinates" of the macro-element
-    unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
-    unsigned y = unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
+      // x-cooordinate -- straight line from fixed position on the bottom
+      // wall to moving position on the top wall
+      r[0] = Lup + xi[0] + (r_wall[0] - (xi[0] + Lup)) * fract;
 
-    // Vector of Lagrangian coordinates
-    Vector<double> xi(1);
-    xi[0] = (double(x - Nup) + (0.5 * (1.0 + zeta[0]))) *
-            (Lcollapsible / double(Ncollapsible));
+      // y-coordinate
+      r[1] = r_wall[1] * fract;
+    }
 
-    // Position vector on upper wall:
-    Vector<double> r_wall(2);
-    Wall_pt->position(t, xi, r_wall);
 
-    // Point will be located on straight line from bottom to top wall
-    double fract = (double(y) + 1.0) / double(Ny);
+    //==========================================================================
+    /// Northern edge of the  macro element in the collapsible part of the
+    /// channel; \f$ \zeta \in [-1,1] \f$
+    //==========================================================================
+    void CollapsibleChannelDomain::r_N_collapsible(const unsigned& t,
+                                                   const Vector<double>& zeta,
+                                                   Vector<double>& r,
+                                                   const unsigned& imacro)
+    {
+      // Determines the "coordinates" of the macro-element
+      unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
+      unsigned y =
+        unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
 
-    // Map it via squash fct
-    fract = s_squash(fract);
+      // Vector of Lagrangian coordinates
+      Vector<double> xi(1);
+      xi[0] = (double(x - Nup) + (0.5 * (1.0 + zeta[0]))) *
+              (Lcollapsible / double(Ncollapsible));
 
-    // x-cooordinate -- straight line from fixed position on the bottom
-    // wall to moving position on the top wall
-    r[0] = Lup + xi[0] + (r_wall[0] - (xi[0] + Lup)) * fract;
+      // Position vector on upper wall:
+      Vector<double> r_wall(2);
+      Wall_pt->position(t, xi, r_wall);
 
-    // y-coordinate
-    r[1] = r_wall[1] * fract;
-  }
+      // Point will be located on straight line from bottom to top wall
+      double fract = (double(y) + 1.0) / double(Ny);
 
-  //========================================================================
-  /// Southern  edge of the  macro element in the collapsible part of the
-  /// channel; \f$ \zeta \in [-1,1] \f$
-  //========================================================================
-  void CollapsibleChannelDomain::r_S_collapsible(const unsigned& t,
-                                                 const Vector<double>& zeta,
-                                                 Vector<double>& r,
-                                                 const unsigned& imacro)
-  {
-    // Determines the "coordinates" of the macro-element
-    unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
-    unsigned y = unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
+      // Map it via squash fct
+      fract = s_squash(fract);
 
-    // Vector of Lagrangian coordinates
-    Vector<double> xi(1);
-    xi[0] = (double(x - Nup) + (0.5 * (1.0 + zeta[0]))) *
-            (Lcollapsible / double(Ncollapsible));
+      // x-cooordinate -- straight line from fixed position on the bottom
+      // wall to moving position on the top wall
+      r[0] = Lup + xi[0] + (r_wall[0] - (xi[0] + Lup)) * fract;
 
-    // Position vector on upper wall:
-    Vector<double> r_wall(2);
-    Wall_pt->position(t, xi, r_wall);
+      // y-coordinate
+      r[1] = r_wall[1] * fract;
+    }
 
-    // Point will be located on straight line from bottom to top wall
-    double fract = double(y) / double(Ny);
 
-    // Map it via squash fct
-    fract = s_squash(fract);
+    //========================================================================
+    /// Southern  edge of the  macro element in the collapsible part of the
+    /// channel; \f$ \zeta \in [-1,1] \f$
+    //========================================================================
+    void CollapsibleChannelDomain::r_S_collapsible(const unsigned& t,
+                                                   const Vector<double>& zeta,
+                                                   Vector<double>& r,
+                                                   const unsigned& imacro)
+    {
+      // Determines the "coordinates" of the macro-element
+      unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
+      unsigned y =
+        unsigned(double(imacro) / double(Nup + Ncollapsible + Ndown));
+
+      // Vector of Lagrangian coordinates
+      Vector<double> xi(1);
+      xi[0] = (double(x - Nup) + (0.5 * (1.0 + zeta[0]))) *
+              (Lcollapsible / double(Ncollapsible));
+
+      // Position vector on upper wall:
+      Vector<double> r_wall(2);
+      Wall_pt->position(t, xi, r_wall);
+
+      // Point will be located on straight line from bottom to top wall
+      double fract = double(y) / double(Ny);
+
+      // Map it via squash fct
+      fract = s_squash(fract);
+
+      // x-cooordinate -- straight line from fixed position on the bottom
+      // wall to moving position on the top wall
+      r[0] = Lup + xi[0] + (r_wall[0] - (xi[0] + Lup)) * fract;
+
+      // y-coordinate
+      r[1] = r_wall[1] * fract;
+    }
 
     // x-cooordinate -- straight line from fixed position on the bottom
     // wall to moving position on the top wall

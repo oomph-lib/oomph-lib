@@ -207,6 +207,7 @@ namespace oomph
                   (interpolated_X[0] * sin(interpolated_xi[1]) +
                    interpolated_X[1] * cos(interpolated_xi[1]));
 
+
         // Now calculate the stress tensor from the constitutive law
         DenseMatrix<double> sigma(3);
         get_stress(g, G, sigma);
@@ -401,6 +402,7 @@ namespace oomph
       fill_in_jacobian_from_solid_position_by_fd(jacobian);
     }
 
+
     /// Overload the output function
     void output(std::ostream& outfile)
     {
@@ -441,11 +443,13 @@ namespace oomph
       outfile << std::endl;
     }
 
+
     /// Overload the output function
     void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
+
 
     /// Output function
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -487,13 +491,13 @@ namespace oomph
     }
   };
 
+
   //===========================================================================
   /// An element that solved the AxisymmetricPVDEquations with
   /// quadratic interpolation for the positions.
   //===========================================================================
-  class AxisymQPVDElement :
-    public SolidQElement<2, 3>,
-    public AxisymmetricPVDEquations
+  class AxisymQPVDElement : public SolidQElement<2, 3>,
+                            public AxisymmetricPVDEquations
   {
   public:
     /// Constructor, there are no internal data points
@@ -537,14 +541,13 @@ namespace oomph
   /// (diagonal) Hermite interpolation for the positions -- the
   /// local and global (Lagrangian) coordinates are assumed to be aligned!
   //===========================================================================
-  class AxisymDiagHermitePVDElement :
-    public SolidDiagQHermiteElement<2>,
-    public AxisymmetricPVDEquations
+  class AxisymDiagHermitePVDElement : public SolidDiagQHermiteElement<2>,
+                                      public AxisymmetricPVDEquations
   {
   public:
     /// Constructor, there are no internal data points
-    AxisymDiagHermitePVDElement() :
-      SolidDiagQHermiteElement<2>(), AxisymmetricPVDEquations()
+    AxisymDiagHermitePVDElement()
+      : SolidDiagQHermiteElement<2>(), AxisymmetricPVDEquations()
     {
     }
 
@@ -588,11 +591,13 @@ namespace oomph
       outfile << std::endl;
     }
 
+
     /// Overload the output function
     void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
+
 
     /// Output function
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -634,15 +639,17 @@ namespace oomph
     }
   };
 
+
   /// Explicit definition of the face geometry for the
   // AxisymDiagHermitePVDElement element
   template<>
-  class FaceGeometry<AxisymDiagHermitePVDElement> :
-    public virtual SolidDiagQHermiteElement<1>
+  class FaceGeometry<AxisymDiagHermitePVDElement>
+    : public virtual SolidDiagQHermiteElement<1>
   {
   public:
     FaceGeometry() : SolidDiagQHermiteElement<1>() {}
   };
+
 
   //=========================================================================
   /// A class for elements that solve the equations of solid mechanics,
@@ -672,8 +679,8 @@ namespace oomph
 
   public:
     /// Constructor, by default the element is not incompressible
-    AxisymmetricPVDEquationsWithPressure() :
-      Constitutive_law_pt(0), Incompressible(false)
+    AxisymmetricPVDEquationsWithPressure()
+      : Constitutive_law_pt(0), Incompressible(false)
     {
     }
 
@@ -916,6 +923,7 @@ namespace oomph
                   (interpolated_X[0] * sin(interpolated_xi[1]) +
                    interpolated_X[1] * cos(interpolated_xi[1]));
 
+
         // Now calculate the stress tensor from the constitutive law
         DenseMatrix<double> sigma(3), Gup(3);
         double detG = 0.0, pressure_stress = 0.0, kappa = 0.0;
@@ -929,6 +937,7 @@ namespace oomph
         {
           get_stress(g, G, sigma, Gup, pressure_stress, kappa);
         }
+
 
         //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL
         // DISPLACEMENTS========
@@ -1066,7 +1075,9 @@ namespace oomph
           } // End of loop over type of dof
         } // End of loop over shape functions
 
+
         //======================CONSTRAINT EQUATIONS FOR THE PRESSURE===========
+
 
         // Now loop over the pressure degrees of freedom
         for (unsigned l = 0; l < n_solid_pres; l++)
@@ -1289,6 +1300,7 @@ namespace oomph
       FiniteElement::output(file_pt);
     }
 
+
     /// Output function
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -1333,9 +1345,9 @@ namespace oomph
   /// An Element that solves the Axisymmetric principle of virtual displacements
   /// with separately interpolated pressure, discontinuous interpolation.
   //=========================================================================
-  class AxisymQPVDElementWithPressure :
-    public SolidQElement<2, 3>,
-    public AxisymmetricPVDEquationsWithPressure
+  class AxisymQPVDElementWithPressure
+    : public SolidQElement<2, 3>,
+      public AxisymmetricPVDEquationsWithPressure
   {
     /// \short Internal index that indicates at which internal data value the
     /// solid pressure is stored
@@ -1359,8 +1371,8 @@ namespace oomph
     }
 
     /// Constructor, there are 3 internal data items
-    AxisymQPVDElementWithPressure() :
-      SolidQElement<2, 3>(), AxisymmetricPVDEquationsWithPressure()
+    AxisymQPVDElementWithPressure()
+      : SolidQElement<2, 3>(), AxisymmetricPVDEquationsWithPressure()
     {
       // Allocate and add one Internal data object that stores 3 pressure
       // values
@@ -1398,6 +1410,7 @@ namespace oomph
       AxisymmetricPVDEquationsWithPressure::output(outfile, n_plot);
     }
 
+
     /// Overload the output function
     void output(FILE* file_pt)
     {
@@ -1422,8 +1435,8 @@ namespace oomph
 
   // Explicit definition of the face geometry for the AxisymQPVDElement element
   template<>
-  class FaceGeometry<AxisymQPVDElementWithPressure> :
-    public virtual SolidQElement<1, 3>
+  class FaceGeometry<AxisymQPVDElementWithPressure>
+    : public virtual SolidQElement<1, 3>
   {
   public:
     FaceGeometry() : SolidQElement<1, 3>() {}

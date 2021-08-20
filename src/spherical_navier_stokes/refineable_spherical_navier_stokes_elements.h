@@ -42,10 +42,10 @@ namespace oomph
   //======================================================================
   /// Refineable version of the Spherical Navier--Stokes equations
   //======================================================================
-  class RefineableSphericalNavierStokesEquations :
-    public virtual SphericalNavierStokesEquations,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableSphericalNavierStokesEquations
+    : public virtual SphericalNavierStokesEquations,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   protected:
     /// \short Pointer to n_p-th pressure node (Default: NULL,
@@ -64,10 +64,10 @@ namespace oomph
 
   public:
     /// \short Empty Constructor
-    RefineableSphericalNavierStokesEquations() :
-      SphericalNavierStokesEquations(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableSphericalNavierStokesEquations()
+      : SphericalNavierStokesEquations(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
 
@@ -126,6 +126,7 @@ namespace oomph
     {
       return x[0] * x[0] * sin(x[1]);
     }
+
 
     ///  Further build: pass the pointers down to the sons
     void further_build()
@@ -197,6 +198,7 @@ namespace oomph
       }
     }
 
+
   private:
     /// \short Add element's contribution to the elemental residual vector
     /// and/or Jacobian matrix
@@ -214,10 +216,10 @@ namespace oomph
   /// (note that unlike the cartesian version this is not scale-able
   /// to higher dimensions!)
   //======================================================================
-  class RefineableQSphericalTaylorHoodElement :
-    public QSphericalTaylorHoodElement,
-    public virtual RefineableSphericalNavierStokesEquations,
-    public virtual RefineableQElement<2>
+  class RefineableQSphericalTaylorHoodElement
+    : public QSphericalTaylorHoodElement,
+      public virtual RefineableSphericalNavierStokesEquations,
+      public virtual RefineableQElement<2>
   {
   private:
     /// \short Pointer to n_p-th pressure node
@@ -264,11 +266,11 @@ namespace oomph
 
   public:
     /// \short Constructor:
-    RefineableQSphericalTaylorHoodElement() :
-      RefineableElement(),
-      RefineableSphericalNavierStokesEquations(),
-      RefineableQElement<2>(),
-      QSphericalTaylorHoodElement()
+    RefineableQSphericalTaylorHoodElement()
+      : RefineableElement(),
+        RefineableSphericalNavierStokesEquations(),
+        RefineableQElement<2>(),
+        QSphericalTaylorHoodElement()
     {
     }
 
@@ -477,6 +479,7 @@ namespace oomph
       }
     }
 
+
     /// \short The number of 1d pressure nodes is 2, the number of 1d velocity
     /// nodes is the same as the number of 1d geometric nodes.
     unsigned ninterpolating_node_1d(const int& n_value)
@@ -522,6 +525,7 @@ namespace oomph
     }
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -530,19 +534,20 @@ namespace oomph
   /// Face geometry of the RefineableQuadQTaylorHoodElements
   //=======================================================================
   template<>
-  class FaceGeometry<RefineableQSphericalTaylorHoodElement> :
-    public virtual FaceGeometry<QSphericalTaylorHoodElement>
+  class FaceGeometry<RefineableQSphericalTaylorHoodElement>
+    : public virtual FaceGeometry<QSphericalTaylorHoodElement>
   {
   public:
     FaceGeometry() : FaceGeometry<QSphericalTaylorHoodElement>() {}
   };
 
+
   //=======================================================================
   /// Face geometry of the RefineableQuadQTaylorHoodElements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<RefineableQSphericalTaylorHoodElement>> :
-    public virtual FaceGeometry<FaceGeometry<QSphericalTaylorHoodElement>>
+  class FaceGeometry<FaceGeometry<RefineableQSphericalTaylorHoodElement>>
+    : public virtual FaceGeometry<FaceGeometry<QSphericalTaylorHoodElement>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<QSphericalTaylorHoodElement>>()
@@ -550,15 +555,16 @@ namespace oomph
     }
   };
 
+
   //======================================================================
   /// Refineable version of Spherical Quad Crouzeix Raviart elements
   /// (note that unlike the cartesian version this is not scale-able
   /// to higher dimensions!)
   //======================================================================
-  class RefineableQSphericalCrouzeixRaviartElement :
-    public QSphericalCrouzeixRaviartElement,
-    public virtual RefineableSphericalNavierStokesEquations,
-    public virtual RefineableQElement<2>
+  class RefineableQSphericalCrouzeixRaviartElement
+    : public QSphericalCrouzeixRaviartElement,
+      public virtual RefineableSphericalNavierStokesEquations,
+      public virtual RefineableQElement<2>
   {
   private:
     /// Unpin all the internal pressure freedoms
@@ -574,11 +580,11 @@ namespace oomph
 
   public:
     /// \short Constructor:
-    RefineableQSphericalCrouzeixRaviartElement() :
-      RefineableElement(),
-      RefineableSphericalNavierStokesEquations(),
-      RefineableQElement<2>(),
-      QSphericalCrouzeixRaviartElement()
+    RefineableQSphericalCrouzeixRaviartElement()
+      : RefineableElement(),
+        RefineableSphericalNavierStokesEquations(),
+        RefineableQElement<2>(),
+        QSphericalCrouzeixRaviartElement()
     {
     }
 
@@ -617,6 +623,7 @@ namespace oomph
       internal_data_pt(P_spherical_nst_internal_index)
         ->set_value(0, 0.25 * av_press);
 
+
       // Slope in s_0 direction
       //----------------------
 
@@ -647,9 +654,11 @@ namespace oomph
                         ->internal_data_pt(P_spherical_nst_internal_index)
                         ->value(0);
 
+
       // Use the average
       internal_data_pt(P_spherical_nst_internal_index)
         ->set_value(1, 0.5 * (slope1 + slope2));
+
 
       // Slope in s_1 direction
       //----------------------
@@ -680,6 +689,7 @@ namespace oomph
                  ->object_pt()
                  ->internal_data_pt(P_spherical_nst_internal_index)
                  ->value(0);
+
 
       // Use the average
       internal_data_pt(P_spherical_nst_internal_index)
@@ -822,6 +832,7 @@ namespace oomph
       // Pressure value gets copied straight into internal dof:
       internal_data_pt(P_spherical_nst_internal_index)->set_value(0, press);
 
+
       // The slopes get copied from father
       internal_data_pt(P_spherical_nst_internal_index)
         ->set_value(1,
@@ -837,30 +848,34 @@ namespace oomph
     }
   };
 
-  //=======================================================================
-  /// Face geometry of the RefineableQuadQCrouzeixRaviartElements
-  //=======================================================================
-  template<>
-  class FaceGeometry<RefineableQSphericalCrouzeixRaviartElement> :
-    public virtual FaceGeometry<QSphericalCrouzeixRaviartElement>
-  {
-  public:
-    FaceGeometry() : FaceGeometry<QSphericalCrouzeixRaviartElement>() {}
-  };
 
   //=======================================================================
   /// Face geometry of the RefineableQuadQCrouzeixRaviartElements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<RefineableQSphericalCrouzeixRaviartElement>> :
-    public virtual FaceGeometry<FaceGeometry<QSphericalCrouzeixRaviartElement>>
+  class FaceGeometry<RefineableQSphericalCrouzeixRaviartElement>
+    : public virtual FaceGeometry<QSphericalCrouzeixRaviartElement>
   {
   public:
-    FaceGeometry() :
-      FaceGeometry<FaceGeometry<QSphericalCrouzeixRaviartElement>>()
+    FaceGeometry() : FaceGeometry<QSphericalCrouzeixRaviartElement>() {}
+  };
+
+
+  //=======================================================================
+  /// Face geometry of the RefineableQuadQCrouzeixRaviartElements
+  //=======================================================================
+  template<>
+  class FaceGeometry<FaceGeometry<RefineableQSphericalCrouzeixRaviartElement>>
+    : public virtual FaceGeometry<
+        FaceGeometry<QSphericalCrouzeixRaviartElement>>
+  {
+  public:
+    FaceGeometry()
+      : FaceGeometry<FaceGeometry<QSphericalCrouzeixRaviartElement>>()
     {
     }
   };
+
 
 } // namespace oomph
 

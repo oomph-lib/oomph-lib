@@ -42,9 +42,11 @@ namespace oomph
   bool GeneralisedElement::Suppress_warning_about_repeated_internal_data =
     false;
 
+
   /// Static boolean to suppress warnings about repeated external
   /// data. Defaults to true
   bool GeneralisedElement::Suppress_warning_about_repeated_external_data = true;
+
 
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -190,6 +192,7 @@ namespace oomph
       ++index;
     }
 
+
     // If a non-empty dof deque has been passed then do stuff
     const unsigned n_additional_dof_pt = global_dof_pt.size();
     if (n_additional_dof_pt > 0)
@@ -258,6 +261,7 @@ namespace oomph
   //========================================================================
   std::deque<double*> GeneralisedElement::Dof_pt_deque;
 
+
   //=========================================================================
   /// Default value used as the increment for finite difference calculations
   /// of the jacobian matrices
@@ -293,6 +297,7 @@ namespace oomph
     // Delete the storage for the global equation numbers
     delete[] Eqn_number;
   }
+
 
   //=======================================================================
   /// Add a (pointer to an) external data object to the element and
@@ -416,6 +421,7 @@ namespace oomph
     }
   }
 
+
   //=========================================================================
   /// Remove the object addressed by data_pt from the external data array
   /// Note that this could mess up the numbering of other external data
@@ -508,6 +514,7 @@ namespace oomph
     }
   }
 
+
   //==========================================================================
   /// This function loops over the internal data of the element and assigns
   /// GLOBAL equation numbers to the data objects.
@@ -529,6 +536,7 @@ namespace oomph
       internal_data_pt(i)->assign_eqn_numbers(global_number, Dof_pt);
     }
   }
+
 
   //==========================================================================
   /// \short Function to describe the dofs of the Element. The ostream
@@ -581,6 +589,7 @@ namespace oomph
       data_pt->describe_dofs(out, in);
     }
 
+
     // Now loop over the external data and assign local equation numbers
     for (unsigned i = 0; i < n_external_data; i++)
     {
@@ -609,6 +618,7 @@ namespace oomph
       internal_data_pt(i)->add_value_pt_to_map(map_of_value_pt);
     }
   }
+
 
 #ifdef OOMPH_HAS_MPI
   //=========================================================================
@@ -669,6 +679,7 @@ namespace oomph
 
 #endif
 
+
   //====================================================================
   /// Setup the arrays of local equation numbers for the element.
   /// In general, this function should not need to be overloaded. Instead
@@ -710,8 +721,7 @@ namespace oomph
     {
 #ifdef OOMPH_HAS_MPI
       error_stream << "Element is ";
-      if (!is_halo())
-        error_stream << "not ";
+      if (!is_halo()) error_stream << "not ";
       error_stream << "a halo element\n\n";
 #endif
       error_stream << "\nLocal/lobal equation numbers: " << std::endl;
@@ -770,6 +780,7 @@ namespace oomph
         }
       }
 
+
       // If it's an element with external element check the associated
       // Data
       ElementWithExternalElement* e_el_pt =
@@ -807,6 +818,7 @@ namespace oomph
             }
           }
         }
+
 
         // Check if the repeated dofs are among the external geom Data values
         {
@@ -907,11 +919,13 @@ namespace oomph
         }
       }
 
+
       throw OomphLibError(
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
   }
+
 
   //==========================================================================
   /// This function loops over the internal and external data of the element,
@@ -1025,6 +1039,7 @@ namespace oomph
         }
       } // End of loop over internal data
 
+
       // Now loop over the external data and assign local equation numbers
       for (unsigned i = 0; i < n_external_data; i++)
       {
@@ -1071,6 +1086,7 @@ namespace oomph
       }
     }
   }
+
 
   //============================================================================
   /// This function calculates the entries of Jacobian matrix, used in
@@ -1331,6 +1347,7 @@ namespace oomph
       OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //=====================================================================
   /// Add the elemental contribution to the derivatives of
   /// the residuals with respect to a parameter. This function should
@@ -1414,11 +1431,13 @@ namespace oomph
     error_message +=
       "Problem::set_analytic_dparameter() has been called in the driver code\n";
 
+
     throw OomphLibError(
       error_message,
       "GeneralisedElement::fill_in_contribution_to_djacobian_dparameter()",
       OOMPH_EXCEPTION_LOCATION);
   }
+
 
   //=====================================================================
   /// \short Add the elemental contribution to the derivative of the
@@ -1454,6 +1473,7 @@ namespace oomph
                      "initialise the\n";
     error_message += "entries of the returned vector and  matrices to zero.\n";
 
+
     error_message +=
       "This function is intended for use instead of the default (global) \n";
     error_message +=
@@ -1463,11 +1483,13 @@ namespace oomph
     error_message +=
       "Problem::set_analytic_dparameter() has been called in the driver code\n";
 
+
     throw OomphLibError(error_message,
                         "GeneralisedElement::fill_in_contribution_to_djacobian_"
                         "and_dmass_matrix_dparameter()",
                         OOMPH_EXCEPTION_LOCATION);
   }
+
 
   //========================================================================
   /// Fill in contribution to the product of the Hessian
@@ -1573,6 +1595,7 @@ namespace oomph
       error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //==========================================================================
   /// Self-test: Have all internal values been classified as
   /// pinned/unpinned? Return 0 if OK.
@@ -1617,6 +1640,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Helper namespace for tolerances, number of iterations, etc
   /// used in the locate_zeta function in FiniteElement
@@ -1640,6 +1664,7 @@ namespace oomph
     /// as the initial guess in the Newton method when locating coordinate)
     unsigned N_local_points = 5;
   } // namespace Locate_zeta_helpers
+
 
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
@@ -1669,6 +1694,7 @@ namespace oomph
     // oomph_info << "tmp: "<< tmp << std::endl;
     return node_pt(n)->x(i);
   }
+
 
   //======================================================================
   /// \short Function to describe the local dofs of the element. The ostream
@@ -1790,6 +1816,7 @@ namespace oomph
       }
     }
 
+
     // Now check for negative jacobians, if we're not allowing them (default)
     if ((Accept_negative_jacobian == false) && (jacobian < 0.0))
     {
@@ -1902,6 +1929,7 @@ namespace oomph
     }
 #endif
 
+
     // Loop over the rows of the jacobian
     for (unsigned i = 0; i < el_dim; i++)
     {
@@ -2008,6 +2036,7 @@ namespace oomph
     }
   }
 
+
   //============================================================================
   /// Zero-d specialisation of function to calculate inverse of jacobian mapping
   //============================================================================
@@ -2026,6 +2055,7 @@ namespace oomph
     // Dummy return
     return (1.0);
   }
+
 
   //===========================================================================
   /// One-d specialisation of function to calculate inverse of jacobian mapping
@@ -2531,6 +2561,7 @@ namespace oomph
   //======================================================================
   bool FiniteElement::Accept_negative_jacobian = false;
 
+
   //======================================================================
   ///  Set default for static boolean to suppress output while checking
   /// for inverted elements
@@ -3021,6 +3052,7 @@ namespace oomph
     transform_derivatives(inverse_jacobian, dbasis);
   }
 
+
   //=======================================================================
   /// Convert derivatives and second derivatives w.r.t local coordinates to
   /// derivatives w.r.t. the coordinates used to assemble the jacobian,
@@ -3039,6 +3071,7 @@ namespace oomph
     FiniteElement::transform_second_derivatives_template<1>(
       jacobian, inverse_jacobian, jacobian2, dbasis, d2basis);
   }
+
 
   //=========================================================================
   /// Convert second derivatives w.r.t. local coordinates to
@@ -3080,9 +3113,11 @@ namespace oomph
       }
     }
 
+
     // Assemble the first derivatives
     transform_derivatives_diagonal(inverse_jacobian, dbasis);
   }
+
 
   //=============================================================================
   /// \short Convert derivatives and second derivatives w.r.t. local coordiantes
@@ -3132,6 +3167,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// \short The destructor cleans up the memory allocated
   /// for storage of pointers to nodes. Internal and external data get
@@ -3150,6 +3186,7 @@ namespace oomph
       delete[] Nodal_local_eqn;
     }
   }
+
 
   //==============================================================
   /// Get the local fraction of the node j in the element;
@@ -3311,6 +3348,7 @@ namespace oomph
     return det;
   }
 
+
   //========================================================================
   /// \short Compute the geometric shape functions (psi) at integration point
   /// ipt. Return the determinant of the jacobian of the mapping (detJ).
@@ -3343,6 +3381,7 @@ namespace oomph
     // Return the determinant of the jacobian
     return det;
   }
+
 
   //========================================================================
   /// \short Compute the geometric shape functions (psi) and first
@@ -3389,6 +3428,7 @@ namespace oomph
     // Return the determinant of the jacobian
     return det;
   }
+
 
   //===========================================================================
   /// \short Compute the geometric shape functions and also first
@@ -3496,6 +3536,7 @@ namespace oomph
     return det;
   }
 
+
   //==========================================================================
   /// This function loops over the nodal data of the element, adds the
   /// GLOBAL equation numbers to the local-to-global look-up scheme and
@@ -3561,6 +3602,7 @@ namespace oomph
         Nodal_local_eqn[n] += Node_pt[n - 1]->nvalue();
       }
 
+
       // A local queue to store the global equation numbers
       std::deque<unsigned long> global_eqn_number_queue;
 
@@ -3611,6 +3653,7 @@ namespace oomph
       }
     }
   }
+
 
   //============================================================================
   /// This function calculates the entries of Jacobian matrix, used in
@@ -3695,6 +3738,7 @@ namespace oomph
     reset_after_nodal_fd();
   }
 
+
   //=======================================================================
   /// Compute derivatives of elemental residual vector with respect
   /// to nodal coordinates. Default implementation by FD can be overwritten
@@ -3708,8 +3752,7 @@ namespace oomph
     unsigned n_nod = nnode();
 
     // If the element has no nodes (why??!!) return straightaway
-    if (n_nod == 0)
-      return;
+    if (n_nod == 0) return;
 
     // Get dimension from first node
     unsigned dim_nod = node_pt(0)->ndim();
@@ -3766,6 +3809,7 @@ namespace oomph
       }
     }
   }
+
 
   //===============================================================
   /// Return the number of the node located at *node_pt
@@ -3831,6 +3875,7 @@ namespace oomph
     // Return the node number
     return number;
   }
+
 
   //==========================================================================
   /// \short If there is a node at the local coordinate, s, return the pointer
@@ -3910,8 +3955,7 @@ namespace oomph
         dist_squared +=
           (cog[i] - zeta_nodal(j, 0, i)) * (cog[i] - zeta_nodal(j, 0, i));
       }
-      if (dist_squared > max_radius)
-        max_radius = dist_squared;
+      if (dist_squared > max_radius) max_radius = dist_squared;
     }
     max_radius = sqrt(max_radius);
   }
@@ -4442,6 +4486,7 @@ namespace oomph
       // Jacobian
       double jacobian;
 
+
       // Two ways of testing for negative Jacobian for non-FaceElements
       unsigned ntest = 1;
 
@@ -4466,6 +4511,7 @@ namespace oomph
         {
           s[i] = integral_pt()->knot(ipt, i);
         }
+
 
         // Do tests
         for (unsigned test = 0; test < ntest; test++)
@@ -4495,6 +4541,7 @@ namespace oomph
                                   OOMPH_CURRENT_FUNCTION,
                                   OOMPH_EXCEPTION_LOCATION);
           }
+
 
           // Check for a singular jacobian
           if (std::fabs(jacobian) < 1.0e-16)
@@ -4544,6 +4591,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Return the t-th time-derivative of the
   /// i-th FE-interpolated Eulerian coordinate at
@@ -4575,6 +4623,7 @@ namespace oomph
     }
     return drdt;
   }
+
 
   //=======================================================================
   /// Compute t-th time-derivative of the
@@ -5019,6 +5068,7 @@ namespace oomph
     geom_object_pt = this;
   }
 
+
   //=======================================================================
   /// Loop over all nodes in the element and update their positions
   /// using each node's (algebraic) update function
@@ -5147,6 +5197,7 @@ namespace oomph
   // Do not ignore warning for discontinuous tangent vectors.
   bool FaceElement::Ignore_discontinuous_tangent_warning = false;
 
+
   //========================================================================
   /// Output boundary coordinate zeta
   //========================================================================
@@ -5186,6 +5237,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //========================================================================
   /// \short Calculate the determinant of the
   /// Jacobian of the mapping between local and global
@@ -5198,8 +5250,7 @@ namespace oomph
 
     // Bail out if we're in a point element -- not sure what
     // J_eulerian actually is, but this is harmless
-    if (n_dim_el == 0)
-      return 1.0;
+    if (n_dim_el == 0) return 1.0;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -5271,6 +5322,7 @@ namespace oomph
     // Return
     return sqrt(Adet);
   }
+
 
   //========================================================================
   /// \short Compute the Jacobian of the mapping between the local and global
@@ -5378,6 +5430,7 @@ namespace oomph
     Shape psi(n_node, n_position_type);
     DShape dpsids(n_node, n_position_type, n_dim_el);
 
+
     unsigned nintpt = integral_pt()->nweight();
     for (unsigned ipt = 0; ipt < nintpt; ipt++)
     {
@@ -5440,6 +5493,7 @@ namespace oomph
                               "FaceElement::J_eulerian_at_knot()",
                               OOMPH_EXCEPTION_LOCATION);
       }
+
 
       // Are we dead yet?
       if (Adet <= 0.0)
@@ -5510,6 +5564,7 @@ namespace oomph
       throw OomphLibError(
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
+
 
     // The number of tangent vectors.
     unsigned ntangent_vec = tang_vec.size();
@@ -5596,6 +5651,7 @@ namespace oomph
     }
 
 #endif
+
 
     // Now let's consider the different element dimensions
     switch (element_dim)
@@ -6293,6 +6349,7 @@ namespace oomph
     outer_unit_normal(s, unit_normal);
   }
 
+
   //=======================================================================
   /// Return vector of local coordinates in bulk element,
   /// given the local coordinates in this FaceElement
@@ -6323,6 +6380,7 @@ namespace oomph
     return s_bulk;
   }
 
+
   //=======================================================================
   /// Calculate the  vector of local coordinates in bulk element,
   /// given the local coordinates in this FaceElement
@@ -6344,6 +6402,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
   }
+
 
   //=======================================================================
   ///  Calculate the derivatives of the local coordinates in the
@@ -6372,11 +6431,13 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   //  Functions for elastic general elements
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //==================================================================
   /// Calculate the L2 norm of the displacement u=R-r to overload the
@@ -6443,6 +6504,7 @@ namespace oomph
     }
   } // End of compute_norm(...)
 
+
   //=========================================================================
   /// \short Function to describe the local dofs of the element. The ostream
   /// specifies the output stream to which the description
@@ -6460,6 +6522,7 @@ namespace oomph
     FiniteElement::describe_local_dofs(out, current_string);
     describe_solid_local_dofs(out, current_string);
   }
+
 
   //=========================================================================
   /// Internal function that is used to assemble the jacobian of the mapping
@@ -6572,6 +6635,7 @@ namespace oomph
     // Delete the storage allocated for the positional local equations
     delete[] Position_local_eqn;
   }
+
 
   //==========================================================================
   /// Calculate the mapping from local to lagrangian coordinates
@@ -6915,6 +6979,7 @@ namespace oomph
     } // End of the case when there are nodes
   }
 
+
   //============================================================================
   /// This function calculates the entries of Jacobian matrix, used in
   /// the Newton method, associated with the elastic problem in which the
@@ -7020,6 +7085,7 @@ namespace oomph
             // Reset the (generalised) Eulerian nodal position
             *value_pt = old_var;
 
+
             // Perform any auxialiary node updates
             node_pt(n)->perform_auxiliary_node_update_fct();
 
@@ -7109,6 +7175,7 @@ namespace oomph
       }
     }
   }
+
 
   //============================================================================
   /// Compute derivatives of FE-interpolated Lagrangian coordinates xi
@@ -7298,6 +7365,7 @@ namespace oomph
     } // End of loop over the integration points
   }
 
+
   //=======================================================================
   /// Helper function to fill in the residuals and (if flag==1) the Jacobian
   /// for the setup of an initial condition. The global equations are:
@@ -7409,6 +7477,7 @@ namespace oomph
               residuals[local_eqn] +=
                 (interpolated_x(s, i) - drdt_ic[i]) * psi(l, k) * w;
 
+
               // Do Jacobian too?
               if (flag == 1)
               {
@@ -7462,6 +7531,7 @@ namespace oomph
     } // End of loop over the integration points
   }
 
+
   //===============================================================
   /// Return the geometric shape function at the local coordinate s
   //===============================================================
@@ -7475,5 +7545,6 @@ namespace oomph
   /// Assign the static Default_integration_scheme
   //=======================================================================
   PointIntegral PointElement::Default_integration_scheme;
+
 
 } // namespace oomph

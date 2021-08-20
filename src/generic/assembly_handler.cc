@@ -74,6 +74,7 @@ namespace oomph
     return *(problem_pt->dof_pt(i) + t);
   }
 
+
   //==================================================================
   /// Get the global equation number of the local unknown. Direct call
   /// to the function in the element.
@@ -129,6 +130,7 @@ namespace oomph
     elem_pt->get_dresiduals_dparameter(parameter_pt, dres_dparam);
   }
 
+
   //=====================================================================
   /// \short Calculate the derivative of the residuals and jacobian
   /// with respect to a parameter by calling the elemental function
@@ -157,6 +159,7 @@ namespace oomph
     elem_pt->get_hessian_vector_products(Y, C, product);
   }
 
+
   //=======================================================================
   /// Return the eigenfunction(s) associated with the bifurcation that
   /// has been detected in bifurcation tracking problems. Default
@@ -175,6 +178,7 @@ namespace oomph
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     return 0;
   }
+
 
   //=======================================================================
   /// Return the eigenfunction(s) associated with the bifurcation that
@@ -222,9 +226,11 @@ namespace oomph
     elem_pt->get_inner_product_vectors(history_index, inner_product_vector);
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   // Non-inline functions for the ExplicitTimeStepHandler class
   //////////////////////////////////////////////////////////////////////
+
 
   //===================================================================
   /// Get the number of elemental degrees of freedom. Direct call
@@ -264,6 +270,7 @@ namespace oomph
     elem_pt->get_mass_matrix(residuals, jacobian);
   }
 
+
   //=======================================================================
   /// Calculate all desired vectors and matrices that are required by
   /// the problem  by calling those of the underlying element.
@@ -286,9 +293,11 @@ namespace oomph
     elem_pt->get_mass_matrix(vec[0], matrix[0]);
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   // Non-inline functions for the EigenProblemHandler class
   //////////////////////////////////////////////////////////////////////
+
 
   //===================================================================
   /// Get the number of elemental degrees of freedom. Direct call
@@ -333,6 +342,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //=======================================================================
   /// Calculate all desired vectors and matrices that are required by
   /// the problem  by calling those of the underlying element.
@@ -371,6 +381,7 @@ namespace oomph
       }
     }
   }
+
 
   //======================================================================
   /// Clean up the memory that may have been allocated by the solver
@@ -659,6 +670,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   // Hack the re-solve to use the block factorisation
   //======================================================================
@@ -838,9 +850,11 @@ namespace oomph
     handler_pt->solve_full_system();
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   // Non-inline functions for the FoldHandler class
   //////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Constructor: Initialise the fold handler,
@@ -848,8 +862,8 @@ namespace oomph
   /// If the system changes, a new  handler must be constructed.
   //========================================================================
   FoldHandler::FoldHandler(Problem* const& problem_pt,
-                           double* const& parameter_pt) :
-    Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
+                           double* const& parameter_pt)
+    : Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
   {
     // Set the problem pointer
     Problem_pt = problem_pt;
@@ -924,6 +938,7 @@ namespace oomph
     // Add the global parameter as an unknown to the problem
     problem_pt->Dof_pt.push_back(parameter_pt);
 
+
     // Normalise the initial guesses for phi
     double length = 0.0;
     for (unsigned n = 0; n < Ndof; n++)
@@ -949,12 +964,13 @@ namespace oomph
     delete dist_pt;
   }
 
+
   /// Constructor in which the eigenvector is passed as an initial
   /// guess
   FoldHandler::FoldHandler(Problem* const& problem_pt,
                            double* const& parameter_pt,
-                           const DoubleVector& eigenvector) :
-    Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
+                           const DoubleVector& eigenvector)
+    : Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
   {
     // Set the problem pointer
     Problem_pt = problem_pt;
@@ -987,6 +1003,7 @@ namespace oomph
 
     // Add the global parameter as an unknown to the problem
     problem_pt->Dof_pt.push_back(parameter_pt);
+
 
     // Normalise the initial guesses for the eigenvecor
     double length = 0.0;
@@ -1013,13 +1030,14 @@ namespace oomph
     delete dist_pt;
   }
 
+
   /// Constructor in which the eigenvector and normalisation
   /// vector are  passed as an initial guess
   FoldHandler::FoldHandler(Problem* const& problem_pt,
                            double* const& parameter_pt,
                            const DoubleVector& eigenvector,
-                           const DoubleVector& normalisation) :
-    Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
+                           const DoubleVector& normalisation)
+    : Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
   {
     // Set the problem pointer
     Problem_pt = problem_pt;
@@ -1053,6 +1071,7 @@ namespace oomph
     // Add the global parameter as an unknown to the problem
     problem_pt->Dof_pt.push_back(parameter_pt);
 
+
     // Normalise the initial guesses for the eigenvecor
     double length = 0.0;
     for (unsigned n = 0; n < Ndof; n++)
@@ -1078,6 +1097,7 @@ namespace oomph
 
     delete dist_pt;
   }
+
 
   //=================================================================
   /// The number of unknowns is 2n+1
@@ -1215,6 +1235,7 @@ namespace oomph
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
   }
+
 
   //=================================================================
   /// Calculate the elemental Jacobian matrix "d equation
@@ -1413,6 +1434,7 @@ namespace oomph
     }
   }
 
+
   //====================================================================
   /// Formulate the derivatives of the augmented system with respect
   /// to a parameter
@@ -1481,6 +1503,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Overload the derivative of the residuals and jacobian
   /// with respect to a parameter so that it breaks because it should not
@@ -1501,6 +1524,7 @@ namespace oomph
     throw OomphLibError(
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
+
 
   //=====================================================================
   /// Overload the hessian vector product function so that
@@ -1523,6 +1547,7 @@ namespace oomph
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //==========================================================================
   /// Return the eigenfunction(s) associated with the bifurcation that
   /// has been detected in bifurcation tracking problems
@@ -1540,6 +1565,7 @@ namespace oomph
       eigenfunction[0][n] = Y[n];
     }
   }
+
 
   //=======================================================================
   /// Destructor return the problem to its original (non-augmented) state
@@ -1595,6 +1621,7 @@ namespace oomph
     }
   }
 
+
   //====================================================================
   /// Set to solve the block system. The boolean flag specifies
   /// whether the block decomposition should use exactly the same jacobian
@@ -1646,6 +1673,7 @@ namespace oomph
       Solve_which_system = Full_augmented;
     }
   }
+
 
   //======================================================================
   /// Clean up the memory that may have been allocated by the solver
@@ -1868,6 +1896,7 @@ namespace oomph
       Jprod_D_and_X1[0][n] -= Psi * dRdparam[n_dof_local + offset + n];
     }
 
+
     // Then redistribute back to the linear solver distribution
     G.redistribute(Linear_solver_pt->distribution_pt());
     Jprod_D_and_X1[0].redistribute(Linear_solver_pt->distribution_pt());
@@ -1898,6 +1927,7 @@ namespace oomph
                 problem_pt->communicator_pt()->mpi_comm());
     }
 #endif
+
 
     const double delta_sigma = (l_x3 - sigma_residual) / l_b;
     const double delta_lambda = x2 - delta_sigma * Psi;
@@ -1936,6 +1966,7 @@ namespace oomph
       result[2 * n_dof_local + 1] = delta_sigma;
     }
 
+
     // The sign of the determinant is given by the sign of
     // the product psi_c and l_b
     // NOT CHECKED YET!
@@ -1969,6 +2000,7 @@ namespace oomph
     }
   }
 
+
   //==============================================================
   // Hack the re-solve to use the block factorisation
   //==============================================================
@@ -1983,6 +2015,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
+
 
     // Cache pointer to the problem
     Problem* const problem_pt = Problem_pt;
@@ -2015,6 +2048,7 @@ namespace oomph
       result.redistribute(&aug_dist);
     }
 
+
     // Locally cache a pointer to the parameter
     // double* const parameter_pt = handler_pt->Parameter_pt;
 
@@ -2034,6 +2068,7 @@ namespace oomph
     // {
     //  result.build(this->distribution_pt(),0.0);
     // }
+
 
     // Copy the rhs into local storage
     DoubleVector rhs_local = rhs;
@@ -2214,7 +2249,9 @@ namespace oomph
     handler_pt->solve_full_system();
   }
 
+
   //--------------------------------------------------------------
+
 
   //======================================================================
   /// Clean up the memory that may have been allocated by the solver
@@ -2251,6 +2288,7 @@ namespace oomph
       }
     }
 #endif
+
 
     // Locally cache the pointer to the handler.
     PitchForkHandler* handler_pt =
@@ -2413,6 +2451,7 @@ namespace oomph
     }
     b[n_dof - 1] = result[2 * n_dof - 1];
 
+
     // Allocate storage for E which can be used in the resolve
     if (E_pt != 0)
     {
@@ -2443,6 +2482,7 @@ namespace oomph
     problem_pt->sign_of_jacobian() =
       static_cast<int>(std::fabs(e_final) / e_final);
 
+
     // Switch things to our block solver
     handler_pt->solve_full_system();
 
@@ -2462,6 +2502,7 @@ namespace oomph
       Problem_pt = problem_pt;
     }
   }
+
 
   //==============================================================
   // Hack the re-solve to use the block factorisation
@@ -2499,6 +2540,7 @@ namespace oomph
     {
       result.build(this->distribution_pt(), 0.0);
     }
+
 
     // Setup storage
     DoubleVector a(this->distribution_pt(), 0.0),
@@ -2636,8 +2678,8 @@ namespace oomph
     Problem* const& problem_pt,
     AssemblyHandler* const& assembly_handler_pt,
     double* const& parameter_pt,
-    const DoubleVector& symmetry_vector) :
-    Solve_which_system(Full_augmented), Sigma(0.0), Parameter_pt(parameter_pt)
+    const DoubleVector& symmetry_vector)
+    : Solve_which_system(Full_augmented), Sigma(0.0), Parameter_pt(parameter_pt)
   {
     // Set the problem pointer
     Problem_pt = problem_pt;
@@ -2662,6 +2704,7 @@ namespace oomph
     Problem_pt->setup_dof_halo_scheme();
 
 #endif
+
 
     // Now use the dof distribution for all double vectors
     Psi.build(Dof_distribution_pt);
@@ -2758,11 +2801,13 @@ namespace oomph
       Psi[n] = Y[n] = C[n] = symmetry_vector[n] / length;
     }
 
+
 #ifdef OOMPH_HAS_MPI
     // Set up the required halo schemes (which also synchronises)
     Psi.build_halo_scheme(Problem_pt->Halo_scheme_pt);
     Y.build_halo_scheme(Problem_pt->Halo_scheme_pt);
     C.build_halo_scheme(Problem_pt->Halo_scheme_pt);
+
 
     if ((!Distributed) || (my_rank == 0))
 #endif
@@ -3264,6 +3309,7 @@ namespace oomph
     Problem_pt->actions_after_change_in_bifurcation_parameter();
   }
 
+
   //==============================================================
   /// Get the derivatives of the residuals with respect to a parameter
   //==============================================================
@@ -3339,6 +3385,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Overload the derivative of the residuals and jacobian
   /// with respect to a parameter so that it breaks because it should not
@@ -3361,6 +3408,7 @@ namespace oomph
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //=====================================================================
   /// Overload the hessian vector product function so that
   /// it calls the underlying element's hessian function.
@@ -3373,6 +3421,7 @@ namespace oomph
   {
     elem_pt->get_hessian_vector_products(Y, C, product);
   }
+
 
   //==========================================================================
   /// Return the eigenfunction(s) associated with the bifurcation that
@@ -3454,6 +3503,7 @@ namespace oomph
     }
   }
 
+
   //==============================================================
   /// Set to solve the block system. The boolean flag is used
   /// to specify whether the block decomposition should use exactly
@@ -3510,6 +3560,7 @@ namespace oomph
         Problem_pt->Dof_pt.push_back(&Y[n]);
       }
 
+
 #ifdef OOMPH_HAS_MPI
       if ((!Distributed) || (my_rank == 0))
 #endif
@@ -3518,6 +3569,7 @@ namespace oomph
       {
         Problem_pt->Dof_pt.push_back(&Sigma);
       }
+
 
       // Delete the distribtion created in the augmented block solve
       if (Problem_pt->Dof_distribution_pt != this->Dof_distribution_pt)
@@ -3537,9 +3589,11 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   // Non-inline functions for the BlockHopfLinearSolver class
   //////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// Clean up the memory that may have been allocated by the solver
@@ -4082,6 +4136,7 @@ namespace oomph
       }
     }
 
+
     double a_mult = dof_length / a_length;
     double y1_mult = dof_length / y1_length;
     double y1_resolve_mult = dof_length / y1_resolve_length;
@@ -4249,6 +4304,7 @@ namespace oomph
     }
     Linear_solver_pt->resolve(temp_rhs, y2_resolve);
 
+
     // We can now calculate the final corrections
     // We need to work out a large number of dot products
     double dot_c = 0.0, dot_d = 0.0, dot_e = 0.0, dot_f = 0.0, dot_g = 0.0;
@@ -4291,6 +4347,7 @@ namespace oomph
     const double delta_w_resolve =
       -((R32_resolve - dot_d_resolve) + dot_f * delta_param_resolve) / (dot_h);
 
+
     // Load into the result vector
     result[3 * n_dof] = delta_param;
     result[3 * n_dof + 1] = delta_w;
@@ -4325,6 +4382,7 @@ namespace oomph
       result2[n] = y1_resolve[n] - (*A_pt)[n] * delta_param_resolve;
     }
 
+
     // The sign of the jacobian is the previous signs multiplied by the
     // sign of the denominator
     problem_pt->sign_of_jacobian() =
@@ -4352,6 +4410,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   // Hack the re-solve to use the block factorisation
   //======================================================================
@@ -4363,6 +4422,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   // Non-inline functions for the HopfHandler class
   //////////////////////////////////////////////////////////////////////
@@ -4373,8 +4433,8 @@ namespace oomph
   /// If the system changes, a new  handler must be constructed.
   //===================================================================
   HopfHandler::HopfHandler(Problem* const& problem_pt,
-                           double* const& parameter_pt) :
-    Solve_which_system(0), Parameter_pt(parameter_pt), Omega(0.0)
+                           double* const& parameter_pt)
+    : Solve_which_system(0), Parameter_pt(parameter_pt), Omega(0.0)
   {
     // Set the problem pointer
     Problem_pt = problem_pt;
@@ -4510,8 +4570,8 @@ namespace oomph
                            double* const& parameter_pt,
                            const double& omega,
                            const DoubleVector& phi,
-                           const DoubleVector& psi) :
-    Solve_which_system(0), Parameter_pt(parameter_pt), Omega(omega)
+                           const DoubleVector& psi)
+    : Solve_which_system(0), Parameter_pt(parameter_pt), Omega(omega)
   {
     // Set the problem pointer
     Problem_pt = problem_pt;
@@ -4573,6 +4633,7 @@ namespace oomph
     Problem_pt->Sparse_assemble_with_arrays_previous_allocation.resize(0);
   }
 
+
   //=======================================================================
   /// Destructor return the problem to its original (non-augmented) state
   //=======================================================================
@@ -4596,6 +4657,7 @@ namespace oomph
     // Remove all previous sparse storage used during Jacobian assembly
     Problem_pt->Sparse_assemble_with_arrays_previous_allocation.resize(0);
   }
+
 
   //=============================================================
   /// Get the number of elemental degrees of freedom
@@ -4711,6 +4773,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
   }
+
 
   //===============================================================
   /// \short Calculate the elemental Jacobian matrix "d equation
@@ -4866,6 +4929,7 @@ namespace oomph
     }
   }
 
+
   //==================================================================
   /// Get the derivatives of the augmented residuals with respect to
   /// a parameter
@@ -4918,6 +4982,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Overload the derivative of the residuals and jacobian
   /// with respect to a parameter so that it breaks because it should not
@@ -4938,6 +5003,7 @@ namespace oomph
     throw OomphLibError(
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
+
 
   //=====================================================================
   /// Overload the hessian vector product function so that
@@ -4960,6 +5026,7 @@ namespace oomph
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //==========================================================================
   /// Return the eigenfunction(s) associated with the bifurcation that
   /// has been detected in bifurcation tracking problems
@@ -4979,6 +5046,7 @@ namespace oomph
       eigenfunction[1][n] = Psi[n];
     }
   }
+
 
   //====================================================================
   /// Set to solve the standard (underlying jacobian)  system
@@ -5021,6 +5089,7 @@ namespace oomph
       Problem_pt->Sparse_assemble_with_arrays_previous_allocation.resize(0);
     }
   }
+
 
   //=================================================================
   /// Set to Solve full system system

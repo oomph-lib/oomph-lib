@@ -141,6 +141,7 @@ namespace oomph
     Nexternal_element_storage = 0;
   }
 
+
   //================================================================
   /// \short Function that must return all the data involved
   /// in the desired interactions from the external element
@@ -397,6 +398,7 @@ namespace oomph
           }
         }
 
+
         // Only bother to add geometric data if we're told to
         if (Add_external_geometric_data)
         {
@@ -451,6 +453,7 @@ namespace oomph
               external_geometric_data_pt.erase(pos_data_pt);
             }
           }
+
 
           // Next allocate storage for the geometric field data
           // Find out how many individual data we have
@@ -705,6 +708,7 @@ namespace oomph
     reset_after_external_interaction_field_fd();
   }
 
+
   //============================================================================
   /// This function calculates the entries of Jacobian matrix, used in
   /// the Newton method, associated with the external interaction
@@ -785,6 +789,7 @@ namespace oomph
     reset_after_external_interaction_geometric_fd();
   }
 
+
   //============================================================================
   /// Output by plotting vector from integration point to
   /// corresponding point in external element for specified interaction
@@ -837,5 +842,6 @@ namespace oomph
       outfile << std::endl;
     }
   }
+
 
 } // namespace oomph

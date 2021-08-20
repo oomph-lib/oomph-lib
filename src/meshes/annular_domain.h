@@ -47,13 +47,13 @@ namespace oomph
                   const unsigned& nr,
                   const double& a,
                   const double& h,
-                  const double& phi) :
-      Azimuthal_fraction(azimuthal_fraction),
-      Inner_radius(a),
-      Thickness(h),
-      Ntheta(ntheta),
-      Nr(nr),
-      Phi(phi)
+                  const double& phi)
+      : Azimuthal_fraction(azimuthal_fraction),
+        Inner_radius(a),
+        Thickness(h),
+        Ntheta(ntheta),
+        Nr(nr),
+        Phi(phi)
     {
       const unsigned n_macro = ntheta * nr;
       Macro_element_pt.resize(n_macro);
@@ -77,8 +77,10 @@ namespace oomph
       BrokenCopy::broken_assign("AnnularDomain");
     }
 
+
     /// Destructor: Empty; cleanup done in base class
     ~AnnularDomain() {}
+
 
     /// \short Vector representation of the  i_macro-th macro element
     /// boundary i_direct (N/S/W/E) at time level t

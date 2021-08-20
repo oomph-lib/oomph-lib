@@ -33,11 +33,13 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
 #endif
 
 #include <complex>
+
 
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
@@ -45,14 +47,15 @@
 #include "generic/projection.h"
 #include "generic/error_estimator.h"
 
+
 namespace oomph
 {
   //=======================================================================
   /// A base class for elements that solve the Fourier decomposed (in
   /// cylindrical polars) equations of time-harmonic linear elasticity.
   //=======================================================================
-  class TimeHarmonicFourierDecomposedLinearElasticityEquationsBase :
-    public virtual FiniteElement
+  class TimeHarmonicFourierDecomposedLinearElasticityEquationsBase
+    : public virtual FiniteElement
   {
   public:
     /// \short Return the index at which the i-th (i=0: r, i=1: z; i=2: theta)
@@ -133,6 +136,7 @@ namespace oomph
       return (interpolated_u);
     }
 
+
     /// \short Function pointer to function that specifies the body force
     /// as a function of the Cartesian coordinates and time FCT(x,b) --
     /// x and b are  Vectors!
@@ -142,12 +146,12 @@ namespace oomph
     /// \short Constructor: Set null pointers for constitutive law.
     /// Set physical parameter values to
     /// default values, and set body force to zero.
-    TimeHarmonicFourierDecomposedLinearElasticityEquationsBase() :
-      Omega_sq_pt(&Default_omega_sq_value),
-      Youngs_modulus_pt(&Default_youngs_modulus_value),
-      Nu_pt(0),
-      Fourier_wavenumber_pt(0),
-      Body_force_fct_pt(0)
+    TimeHarmonicFourierDecomposedLinearElasticityEquationsBase()
+      : Omega_sq_pt(&Default_omega_sq_value),
+        Youngs_modulus_pt(&Default_youngs_modulus_value),
+        Nu_pt(0),
+        Fourier_wavenumber_pt(0),
+        Body_force_fct_pt(0)
     {
     }
 
@@ -304,6 +308,7 @@ namespace oomph
       }
     }
 
+
   protected:
     /// Square of nondim frequency
     std::complex<double>* Omega_sq_pt;
@@ -332,16 +337,18 @@ namespace oomph
     static std::complex<double> Default_youngs_modulus_value;
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// A class for elements that solve the Fourier decomposed (in cylindrical
   /// polars) equations of time-harmonic linear elasticity
   //=======================================================================
-  class TimeHarmonicFourierDecomposedLinearElasticityEquations :
-    public TimeHarmonicFourierDecomposedLinearElasticityEquationsBase
+  class TimeHarmonicFourierDecomposedLinearElasticityEquations
+    : public TimeHarmonicFourierDecomposedLinearElasticityEquationsBase
   {
   public:
     /// \short  Constructor
@@ -361,6 +368,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
+
     /// The jacobian is calculated by finite differences by default,
     /// We need only to take finite differences w.r.t. positional variables
     /// For this element
@@ -372,6 +380,7 @@ namespace oomph
         ->fill_in_generic_contribution_to_residuals_fourier_decomp_time_harmonic_linear_elasticity(
           residuals, jacobian, 1);
     }
+
 
     /// Get strain tensor
     void get_strain(const Vector<double>& s,
@@ -414,6 +423,7 @@ namespace oomph
                        double& error,
                        double& norm);
 
+
   private:
     /// \short Private helper function to compute residuals and (if requested
     /// via flag) also the Jacobian matrix.
@@ -421,24 +431,26 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// An Element that solves the equations of Fourier decomposed (in cylindrical
   /// polars) time-harmonic linear elasticity, using QElements for the geometry.
   //============================================================================
   template<unsigned NNODE_1D>
-  class QTimeHarmonicFourierDecomposedLinearElasticityElement :
-    public virtual QElement<2, NNODE_1D>,
-    public virtual TimeHarmonicFourierDecomposedLinearElasticityEquations
+  class QTimeHarmonicFourierDecomposedLinearElasticityElement
+    : public virtual QElement<2, NNODE_1D>,
+      public virtual TimeHarmonicFourierDecomposedLinearElasticityEquations
   {
   public:
     /// Constructor
-    QTimeHarmonicFourierDecomposedLinearElasticityElement() :
-      QElement<2, NNODE_1D>(),
-      TimeHarmonicFourierDecomposedLinearElasticityEquations()
+    QTimeHarmonicFourierDecomposedLinearElasticityElement()
+      : QElement<2, NNODE_1D>(),
+        TimeHarmonicFourierDecomposedLinearElasticityEquations()
     {
     }
 
@@ -455,6 +467,7 @@ namespace oomph
                                                                      n_plot);
     }
 
+
     /// C-style output function
     void output(FILE* file_pt)
     {
@@ -468,6 +481,7 @@ namespace oomph
                                                                      n_plot);
     }
   };
+
 
   //============================================================================
   /// FaceGeometry of a linear
@@ -475,33 +489,35 @@ namespace oomph
   //============================================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<
-    QTimeHarmonicFourierDecomposedLinearElasticityElement<NNODE_1D>> :
-    public virtual QElement<1, NNODE_1D>
+    QTimeHarmonicFourierDecomposedLinearElasticityElement<NNODE_1D>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying element
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// An Element that solves the equations of Fourier decomposed (in cylindrical
   /// polars) time-harmonic linear elasticity, using TElements for the geometry.
   //============================================================================
   template<unsigned NNODE_1D>
-  class TTimeHarmonicFourierDecomposedLinearElasticityElement :
-    public virtual TElement<2, NNODE_1D>,
-    public virtual TimeHarmonicFourierDecomposedLinearElasticityEquations,
-    public virtual ElementWithZ2ErrorEstimator
+  class TTimeHarmonicFourierDecomposedLinearElasticityElement
+    : public virtual TElement<2, NNODE_1D>,
+      public virtual TimeHarmonicFourierDecomposedLinearElasticityEquations,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// Constructor
-    TTimeHarmonicFourierDecomposedLinearElasticityElement() :
-      TElement<2, NNODE_1D>(),
-      TimeHarmonicFourierDecomposedLinearElasticityEquations()
+    TTimeHarmonicFourierDecomposedLinearElasticityElement()
+      : TElement<2, NNODE_1D>(),
+        TimeHarmonicFourierDecomposedLinearElasticityEquations()
     {
     }
 
@@ -530,6 +546,7 @@ namespace oomph
       TimeHarmonicFourierDecomposedLinearElasticityEquations::output(file_pt,
                                                                      n_plot);
     }
+
 
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
@@ -605,31 +622,34 @@ namespace oomph
     }
   };
 
+
   //============================================================================
   /// FaceGeometry of a linear
   /// TTimeHarmonicFourierDecomposedLinearElasticityElement element
   //============================================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<
-    TTimeHarmonicFourierDecomposedLinearElasticityElement<NNODE_1D>> :
-    public virtual TElement<1, NNODE_1D>
+    TTimeHarmonicFourierDecomposedLinearElasticityElement<NNODE_1D>>
+    : public virtual TElement<1, NNODE_1D>
   {
   public:
     /// Constructor must call the constructor of the underlying element
     FaceGeometry() : TElement<1, NNODE_1D>() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //==========================================================
   /// Fourier-decomposed time-harmonic linear elasticity
   /// upgraded to become projectable
   //==========================================================
   template<class TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
-  class ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement :
-    public virtual ProjectableElement<TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
+  class ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement
+    : public virtual ProjectableElement<TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
   {
   public:
     /// \short Constructor [this was only required explicitly
@@ -706,6 +726,7 @@ namespace oomph
       return this->dshape_eulerian(s, psi, dpsidx);
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -749,11 +770,13 @@ namespace oomph
       return interpolated_u;
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
       return this->nnode();
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -776,18 +799,20 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
   class FaceGeometry<
-    ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+    ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
+
 
   //=======================================================================
   /// Face geometry of the Face Geometry for element is the same as
@@ -795,13 +820,15 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   class FaceGeometry<FaceGeometry<
-    ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement<ELEMENT>>> :
-    public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+    ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
   {
   public:
     FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
   };
 
+
 } // namespace oomph
+
 
 #endif

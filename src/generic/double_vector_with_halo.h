@@ -83,6 +83,7 @@ namespace oomph
     /// receive buffer
     Vector<int> Halo_displacement;
 
+
     /// \short Store the distribution that was used to setup the halo scheme
     LinearAlgebraDistribution* Distribution_pt;
 
@@ -112,6 +113,7 @@ namespace oomph
     void setup_halo_dofs(const std::map<unsigned, double*>& halo_data_pt,
                          Vector<double*>& halo_dof_pt);
 
+
     ///\short Return the local index associated with the global equation
     inline unsigned local_index(const unsigned& global_eqn)
     {
@@ -134,6 +136,7 @@ namespace oomph
       }
     }
   };
+
 
   ///=====================================================================
   /// An extension of DoubleVector that allows access to certain
@@ -163,8 +166,8 @@ namespace oomph
     DoubleVectorWithHaloEntries(
       const LinearAlgebraDistribution* const& dist_pt,
       DoubleVectorHaloScheme* const& halo_scheme_pt = 0,
-      const double& v = 0.0) :
-      DoubleVector(dist_pt, v)
+      const double& v = 0.0)
+      : DoubleVector(dist_pt, v)
     {
       // construct the halo scheme
       this->build_halo_scheme(halo_scheme_pt);
@@ -177,8 +180,8 @@ namespace oomph
     DoubleVectorWithHaloEntries(
       const LinearAlgebraDistribution& dist,
       DoubleVectorHaloScheme* const& halo_scheme_pt = 0,
-      const double& v = 0.0) :
-      DoubleVector(dist, v)
+      const double& v = 0.0)
+      : DoubleVector(dist, v)
     {
       // construct the halo scheme
       this->build_halo_scheme(halo_scheme_pt);
@@ -187,9 +190,10 @@ namespace oomph
     /// Destructor
     ~DoubleVectorWithHaloEntries() {}
 
+
     /// Copy constructor from any DoubleVector
-    DoubleVectorWithHaloEntries(const DoubleVectorWithHaloEntries& new_vector) :
-      DoubleVector(new_vector)
+    DoubleVectorWithHaloEntries(const DoubleVectorWithHaloEntries& new_vector)
+      : DoubleVector(new_vector)
     {
       // Build the appropriate halo scheme
       this->build_halo_scheme(new_vector.halo_scheme_pt());
@@ -198,8 +202,8 @@ namespace oomph
     /// Copy constructor from any DoubleVector
     DoubleVectorWithHaloEntries(
       const DoubleVector& new_vector,
-      DoubleVectorHaloScheme* const& halo_scheme_pt = 0) :
-      DoubleVector(new_vector)
+      DoubleVectorHaloScheme* const& halo_scheme_pt = 0)
+      : DoubleVector(new_vector)
     {
       // Construct the halo scheme
       this->build_halo_scheme(halo_scheme_pt);
@@ -307,6 +311,7 @@ namespace oomph
       }
     }
 
+
     /// Synchronise the halo data
     void synchronise();
 
@@ -325,6 +330,7 @@ namespace oomph
     {
       return Halo_scheme_pt;
     }
+
 
     ///\short Construct the halo scheme and storage for the halo
     /// data

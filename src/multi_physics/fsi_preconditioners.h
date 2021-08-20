@@ -26,6 +26,7 @@
 #ifndef OOMPH_FSI_PRECONDITIONERS_HEADER
 #define OOMPH_FSI_PRECONDITIONERS_HEADER
 
+
 #include "../navier_stokes/navier_stokes_preconditioners.h"
 
 namespace oomph
@@ -33,6 +34,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   //============================================================================
   /// \short FSI preconditioner. This extracts upper/lower triangular
@@ -86,6 +88,7 @@ namespace oomph
       Doc_time = false;
     }
 
+
     /// Destructor: Clean up.
     ~FSIPreconditioner()
     {
@@ -100,11 +103,13 @@ namespace oomph
       delete Matrix_vector_product_1_0_pt;
     }
 
+
     /// Broken copy constructor
     FSIPreconditioner(const FSIPreconditioner&)
     {
       BrokenCopy::broken_copy("FSIPreconditioner");
     }
+
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -133,6 +138,7 @@ namespace oomph
     {
       return Solid_preconditioner_pt;
     }
+
 
     /// Switch to block-diagonal preconditioner
     void use_block_diagonal_version()
@@ -212,6 +218,7 @@ namespace oomph
       Doc_time = false;
     }
 
+
   private:
     /// Pointer the Navier Stokes preconditioner (inexact solver)
     NavierStokesSchurComplementPreconditioner* Navier_stokes_preconditioner_pt;
@@ -253,11 +260,13 @@ namespace oomph
     bool Allow_multiple_element_type_in_wall_mesh;
   };
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   // FSI preconditioner member functions
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// Setup the preconditioner. Note: Matrix must be a CRDoubleMatrix.
@@ -362,6 +371,7 @@ namespace oomph
     Preconditioner_has_been_setup = true;
   }
 
+
   //======================================================================
   /// Apply preconditioner to Vector r
   //======================================================================
@@ -376,6 +386,7 @@ namespace oomph
 
     // Make copy of residual vector (to overcome const-ness
     DoubleVector res(r);
+
 
     // Retain off-diagonals that represent effect of solid on fluid
     //-------------------------------------------------------------
@@ -412,6 +423,7 @@ namespace oomph
       // now apply the navier stokes lsc preconditioner
       Navier_stokes_preconditioner_pt->preconditioner_solve(res, z);
     }
+
 
     // Retain off-diagonals that represent effect of fluid on solid
     //-------------------------------------------------------------
@@ -457,9 +469,11 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //============================================================================
   /// \short FSI preconditioner. This extracts upper/lower triangular
@@ -496,6 +510,7 @@ namespace oomph
       Allow_multiple_element_type_in_wall_mesh = false;
     }
 
+
     /// Destructor: Clean up
     ~SimpleFSIPreconditioner()
     {
@@ -508,11 +523,13 @@ namespace oomph
       }
     }
 
+
     /// Broken copy constructor
     SimpleFSIPreconditioner(const SimpleFSIPreconditioner&)
     {
       BrokenCopy::broken_copy("SimpleFSIPreconditioner");
     }
+
 
     /// Broken assignment operator
     /*void operator=(const SimpleFSIPreconditioner&)
@@ -608,11 +625,13 @@ namespace oomph
     bool Allow_multiple_element_type_in_wall_mesh;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   // FSI preconditioner member functions
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// Identify the required blocks: Here we only need
@@ -664,6 +683,7 @@ namespace oomph
       }
     }
   }
+
 
   //=============================================================================
   /// Setup the preconditioner: Copy the upper/lower triangular
@@ -748,6 +768,7 @@ namespace oomph
     Preconditioner_pt->setup(&P_matrix);
   }
 
+
   //======================================================================
   /// Apply preconditioner to Vector r
   //======================================================================
@@ -768,9 +789,11 @@ namespace oomph
     this->return_block_ordered_preconditioner_vector(temp_vec, z);
   }
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
 } // namespace oomph
 

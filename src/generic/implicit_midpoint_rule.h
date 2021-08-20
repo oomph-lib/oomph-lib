@@ -38,13 +38,14 @@ namespace oomph
   // Forward decl. so that we can have function of Problem*
   class Problem;
 
+
   /// Implicit midpoint rule base class for the two implementations.
   class IMRBase : public TimeStepper
   {
   public:
     /// Constructor with initialisation
-    IMRBase(const bool& adaptive = false) :
-      TimeStepper(2, 1) // initialise weights later
+    IMRBase(const bool& adaptive = false)
+      : TimeStepper(2, 1) // initialise weights later
     {
       Adaptive_Flag = adaptive;
       Is_steady = false;
@@ -57,6 +58,7 @@ namespace oomph
       {
         Predictor_storage_index = 4;
       }
+
 
       // Storage for weights needs to be 2x(2 + 0/2) (the +2 is extra history
       // for ebdf3 predictor if adaptive). This means we provide ways to
@@ -133,6 +135,7 @@ namespace oomph
         err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     void calculate_predicted_positions(Node* const& node_pt)
     {
       std::string err = "Not implemented";
@@ -167,6 +170,7 @@ namespace oomph
     /// * Didn't include the d_u_evaltime_by_du_np1 term in the Jacobian.
     /// * Didn't properly interpolate time/values/x/derivatives in
     ///   jacobian/residual (all of these MUST be evaluated at the midpoint).
+
 
     /// Constructor with initialisation
     IMR(const bool& adaptive = false) : IMRBase(adaptive) {}
@@ -203,6 +207,7 @@ namespace oomph
     /// Inaccessible assignment operator.
     void operator=(const IMR& dummy) {}
   };
+
 
   /// Implementation of implicit midpoint rule by taking half a step of bdf1
   /// then applying an update to all dofs. This implementation *should* work

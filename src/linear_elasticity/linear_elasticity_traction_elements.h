@@ -34,6 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 
@@ -62,6 +63,7 @@ namespace oomph
 
   } // namespace LinearElasticityTractionElementHelper
 
+
   //======================================================================
   /// A class for elements that allow the imposition of an applied traction
   /// in the equations of linear elasticity.
@@ -70,9 +72,8 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class ELEMENT>
-  class LinearElasticityTractionElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class LinearElasticityTractionElement : public virtual FaceGeometry<ELEMENT>,
+                                          public virtual FaceElement
   {
   protected:
     /// Index at which the i-th displacement component is stored
@@ -88,6 +89,7 @@ namespace oomph
                             const Vector<double>& n,
                             Vector<double>& result);
 
+
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Eulerlian coordinate and normal vector and return the load
     /// vector (not all of the input arguments will be required for all specific
@@ -102,6 +104,7 @@ namespace oomph
       Traction_fct_pt(time, x, n, traction);
     }
 
+
     /// \short Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
@@ -109,12 +112,13 @@ namespace oomph
     void fill_in_contribution_to_residuals_linear_elasticity_traction(
       Vector<double>& residuals);
 
+
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     LinearElasticityTractionElement(FiniteElement* const& element_pt,
-                                    const int& face_index) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+                                    const int& face_index)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -161,6 +165,7 @@ namespace oomph
         &LinearElasticityTractionElementHelper::Zero_traction_fct;
     }
 
+
     /// Reference to the traction function pointer
     void (*&traction_fct_pt())(const double& time,
                                const Vector<double>& x,
@@ -170,11 +175,13 @@ namespace oomph
       return Traction_fct_pt;
     }
 
+
     /// Return the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_linear_elasticity_traction(residuals);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -220,6 +227,7 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
+
     /// \short Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
@@ -257,6 +265,7 @@ namespace oomph
     // Traction vector
     get_traction(time, ipt, x, unit_normal, traction);
   }
+
 
   //=====================================================================
   /// Return the residuals for the LinearElasticityTractionElement equations
@@ -403,6 +412,7 @@ namespace oomph
       } // End of loop over shape functions
     } // End of loop over integration points
   }
+
 
 } // namespace oomph
 

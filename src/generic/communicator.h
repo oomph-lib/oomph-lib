@@ -59,8 +59,8 @@ namespace oomph
     /// for the destruction of the mpi_communicator. The mpi comm will be freed
     /// when the destructor is called.
     OomphCommunicator(const MPI_Comm mpi_communicator,
-                      const bool& owns_mpi_comm = false) :
-      Serial_communicator(false)
+                      const bool& owns_mpi_comm = false)
+      : Serial_communicator(false)
     {
       // store a pointer to the communicator
       Comm = mpi_communicator;
@@ -73,8 +73,7 @@ namespace oomph
     /// Serial constructor
     OomphCommunicator()
 #ifdef OOMPH_HAS_MPI
-      :
-      Owns_mpi_comm(false), Serial_communicator(true)
+      : Owns_mpi_comm(false), Serial_communicator(true)
 #endif
     {
     }
@@ -82,8 +81,7 @@ namespace oomph
     /// Copy constructor.
     OomphCommunicator(const OomphCommunicator& communicator)
 #ifdef OOMPH_HAS_MPI
-      :
-      Owns_mpi_comm(false)
+      : Owns_mpi_comm(false)
     {
       if (communicator.serial_communicator())
       {
@@ -103,8 +101,7 @@ namespace oomph
     /// Pointer (copy) constructor.
     OomphCommunicator(const OomphCommunicator* communicator_pt)
 #ifdef OOMPH_HAS_MPI
-      :
-      Owns_mpi_comm(false)
+      : Owns_mpi_comm(false)
     {
       if (communicator_pt->serial_communicator())
       {
@@ -264,6 +261,7 @@ namespace oomph
     }
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
     /// access function to the underlying MPI_Comm object
     MPI_Comm mpi_comm() const
@@ -281,6 +279,7 @@ namespace oomph
 #endif
       return Comm;
     }
+
 
     /// Access function (read only) to the serial communicator flag
     bool serial_communicator() const

@@ -26,12 +26,14 @@
 #ifndef OOMPH_SUM_OF_MATRICES_H
 #define OOMPH_SUM_OF_MATRICES_H
 
+
 #include "mesh.h"
 #include "matrices.h"
 #include "Vector.h"
 #include "oomph_utilities.h"
 
 #include <map>
+
 
 namespace oomph
 {
@@ -174,6 +176,7 @@ namespace oomph
       construct_reverse_mapping();
     }
 
+
     // Access functions
     // ============================================================
 
@@ -250,6 +253,7 @@ namespace oomph
     }
   };
 
+
   //======================================================================
   /// Class for a matrix of the form M = S + G + H + ... where S is the main
   /// matrix and G,H etc. are matrices of size S or smaller.  This may be useful
@@ -259,9 +263,8 @@ namespace oomph
   /// Maps mut be provided which gives a map from the rows/cols of the main
   /// matrix to the rows/cols of each of the added matrices.
   //======================================================================
-  class SumOfMatrices :
-    public DoubleMatrixBase,
-    public Matrix<double, SumOfMatrices>
+  class SumOfMatrices : public DoubleMatrixBase,
+                        public Matrix<double, SumOfMatrices>
   {
   private:
     /// Pointer to the matrix which we are adding the others to
@@ -287,24 +290,24 @@ namespace oomph
 
   public:
     /// Default constructor
-    SumOfMatrices() :
-      Main_matrix_pt(0),
-      Added_matrix_pt(0),
-      Row_map_pt(0),
-      Col_map_pt(0),
-      Should_delete_added_matrix(0),
-      Should_delete_main_matrix(0)
+    SumOfMatrices()
+      : Main_matrix_pt(0),
+        Added_matrix_pt(0),
+        Row_map_pt(0),
+        Col_map_pt(0),
+        Should_delete_added_matrix(0),
+        Should_delete_main_matrix(0)
     {
     }
 
     /// Constructor taking a pointer to the main matrix as input.
-    SumOfMatrices(DoubleMatrixBase* main_matrix_pt) :
-      Main_matrix_pt(main_matrix_pt),
-      Added_matrix_pt(0),
-      Row_map_pt(0),
-      Col_map_pt(0),
-      Should_delete_added_matrix(0),
-      Should_delete_main_matrix(0)
+    SumOfMatrices(DoubleMatrixBase* main_matrix_pt)
+      : Main_matrix_pt(main_matrix_pt),
+        Added_matrix_pt(0),
+        Row_map_pt(0),
+        Col_map_pt(0),
+        Should_delete_added_matrix(0),
+        Should_delete_main_matrix(0)
     {
     }
 
@@ -355,6 +358,7 @@ namespace oomph
       Should_delete_main_matrix = true;
     }
 
+
     /// \short Output the "bottom right" entry regardless of it being
     /// zero or not (this allows automatic detection of matrix size in
     /// e.g. matlab, python).
@@ -370,6 +374,7 @@ namespace oomph
         outfile << last_row << " " << last_col << " " << 0.0 << std::endl;
       }
     }
+
 
     /// \short Output the matrix in sparse format. Note that this is going to be
     /// slow because we have to check every entry of every matrix for non-zeros.
@@ -388,6 +393,7 @@ namespace oomph
         }
       }
     }
+
 
     /// \short Get a list of row/col indices and total entry for non-zeros in
     /// the matrix. e.g. for use as input to other matrix classes. Warning this
@@ -589,6 +595,7 @@ namespace oomph
       // - do something funny with switching row and column maps?
     }
   };
+
 
 } // namespace oomph
 #endif

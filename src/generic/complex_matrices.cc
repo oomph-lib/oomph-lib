@@ -63,6 +63,7 @@ namespace oomph
     lubksub(rhs);
   }
 
+
   //============================================================================
   /// Complete LU solve (Nothing gets overwritten!). This generic
   /// version should never need to be overwritten
@@ -77,6 +78,7 @@ namespace oomph
     // Overwrite the solution vector (rhs is unchanged)
     solve(soln);
   }
+
 
   //=======================================================================
   /// Delete the storage that has been allocated for the LU factors, if
@@ -94,6 +96,7 @@ namespace oomph
       LU_factors = 0;
     }
   }
+
 
   //=======================================================================
   /// Destructor clean up the LU factors that have been allocated
@@ -155,8 +158,7 @@ namespace oomph
       for (unsigned long j = 0; j < M; j++)
       {
         double tmp = std::abs((*this)(i, j));
-        if (tmp > big)
-          big = tmp;
+        if (tmp > big) big = tmp;
       }
       if (big == 0.0)
       {
@@ -260,6 +262,7 @@ namespace oomph
       }
 
     } // End of loop over columns
+
 
     // Now multiply all the diagonal terms together to get the determinant
     // Note that we need to use the mantissa, exponent formulation to
@@ -497,6 +500,7 @@ namespace oomph
     }
   }
 
+
   //============================================================================
   ///  Multiply the matrix by the vector x: soln=Ax
   //============================================================================
@@ -534,6 +538,7 @@ namespace oomph
     }
   }
 
+
   //=================================================================
   /// Multiply the  transposed matrix by the vector x: soln=A^T x
   //=================================================================
@@ -566,6 +571,7 @@ namespace oomph
       soln[i] = 0.0;
     }
 
+
     // Matrix vector product
     for (unsigned long i = 0; i < N; i++)
     {
@@ -579,6 +585,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //===================================================================
   // Interface to SuperLU wrapper
@@ -599,6 +606,7 @@ namespace oomph
                         void*,
                         int*);
   }
+
 
   //===================================================================
   /// Perform LU decomposition. Return the sign of the determinant
@@ -624,8 +632,7 @@ namespace oomph
 
     // Doc (0/1) = (false/true)
     int doc = 0;
-    if (Doc_stats_during_solve)
-      doc = 1;
+    if (Doc_stats_during_solve) doc = 1;
 
     // Cast to integers for stupid SuperLU
     int n_aux = (int)N;
@@ -653,6 +660,7 @@ namespace oomph
     // Return the sign of the determinant
     return sign;
   }
+
 
   //===================================================================
   /// Do the backsubstitution
@@ -698,11 +706,11 @@ namespace oomph
 
     // Doc (0/1) = (false/true)
     int doc = 0;
-    if (Doc_stats_during_solve)
-      doc = 1;
+    if (Doc_stats_during_solve) doc = 1;
 
     // Number of RHSs
     int nrhs = 1;
+
 
     // Cast to integers for stupid SuperLU
     int n_aux = (int)N;
@@ -735,6 +743,7 @@ namespace oomph
     delete[] b;
   }
 
+
   //===================================================================
   /// Cleanup storage
   //===================================================================
@@ -749,8 +758,8 @@ namespace oomph
 
       // Doc (0/1) = (false/true)
       int doc = 0;
-      if (Doc_stats_during_solve)
-        doc = 1;
+      if (Doc_stats_during_solve) doc = 1;
+
 
       // Cast to integers for stupid SuperLU
       int n_aux = (int)N;
@@ -774,6 +783,7 @@ namespace oomph
                       &Info);
     }
   }
+
 
   //===================================================================
   /// Work out residual vector r = b-Ax for candidate solution x
@@ -879,6 +889,7 @@ namespace oomph
     }
   }
 
+
   //=================================================================
   /// Multiply the  transposed matrix by the vector x: soln=A^T x
   //=================================================================
@@ -923,9 +934,11 @@ namespace oomph
     }
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //===================================================================
   /// Do LU decomposition and return sign of determinant
@@ -951,8 +964,7 @@ namespace oomph
 
     // Doc (0/1) = (false/true)
     int doc = 0;
-    if (Doc_stats_during_solve)
-      doc = 1;
+    if (Doc_stats_during_solve) doc = 1;
 
     // Copies so that const-ness is maintained
     int n_aux = int(N);
@@ -979,6 +991,7 @@ namespace oomph
     // Return sign of determinant
     return sign;
   }
+
 
   //===================================================================
   /// Do back-substitution
@@ -1024,8 +1037,7 @@ namespace oomph
 
     // Doc (0/1) = (false/true)
     int doc = 0;
-    if (Doc_stats_during_solve)
-      doc = 1;
+    if (Doc_stats_during_solve) doc = 1;
 
     // Number of RHSs
     int nrhs = 1;
@@ -1061,6 +1073,7 @@ namespace oomph
     delete[] b;
   }
 
+
   //===================================================================
   /// Cleanup memory
   //===================================================================
@@ -1075,8 +1088,7 @@ namespace oomph
 
       // Doc (0/1) = (false/true)
       int doc = 0;
-      if (Doc_stats_during_solve)
-        doc = 1;
+      if (Doc_stats_during_solve) doc = 1;
 
       // Copies so that const-ness is maintained
       int n_aux = int(N);
@@ -1100,6 +1112,7 @@ namespace oomph
                       &Info);
     }
   }
+
 
   //=================================================================
   ///  Find the residulal to x of Ax=b, ie r=b-Ax
@@ -1186,6 +1199,7 @@ namespace oomph
       }
     }
   }
+
 
   //=================================================================
   /// Multiply the  transposed matrix by the vector x: soln=A^T x

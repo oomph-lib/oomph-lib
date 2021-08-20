@@ -68,12 +68,14 @@ namespace oomph
       get_element_errors(mesh_pt, elemental_error, doc_info);
     }
 
+
     /// \short Compute the elemental error measures for a given mesh
     /// and store them in a vector. Doc errors etc.
     virtual void get_element_errors(Mesh*& mesh_pt,
                                     Vector<double>& elemental_error,
                                     DocInfo& doc_info) = 0;
   };
+
 
   //========================================================================
   /// \short Base class for finite elements that can compute the
@@ -154,6 +156,7 @@ namespace oomph
       return 1.0;
     }
   };
+
 
   //========================================================================
   /// Z2-error-estimator:  Elements that can
@@ -298,22 +301,23 @@ namespace oomph
     typedef double (*CombinedErrorEstimateFctPt)(const Vector<double>& errors);
 
     /// Constructor: Set order of recovery shape functions
-    Z2ErrorEstimator(const unsigned& recovery_order) :
-      Recovery_order(recovery_order),
-      Recovery_order_from_first_element(false),
-      Reference_flux_norm(0.0),
-      Combined_error_fct_pt(0)
+    Z2ErrorEstimator(const unsigned& recovery_order)
+      : Recovery_order(recovery_order),
+        Recovery_order_from_first_element(false),
+        Reference_flux_norm(0.0),
+        Combined_error_fct_pt(0)
     {
     }
+
 
     /// \short Constructor: Leave order of recovery shape functions open
     /// for now -- they will be read out from first element of the mesh
     /// when the error estimator is applied
-    Z2ErrorEstimator() :
-      Recovery_order(0),
-      Recovery_order_from_first_element(true),
-      Reference_flux_norm(0.0),
-      Combined_error_fct_pt(0)
+    Z2ErrorEstimator()
+      : Recovery_order(0),
+        Recovery_order_from_first_element(true),
+        Reference_flux_norm(0.0),
+        Combined_error_fct_pt(0)
     {
     }
 
@@ -413,10 +417,12 @@ namespace oomph
       const unsigned& dim,
       DenseMatrix<double>*& recovered_flux_coefficient_pt);
 
+
     /// \short Return number of coefficients for expansion of recovered fluxes
     /// for given spatial dimension of elements.
     /// (We use complete polynomials of the specified given order.)
     unsigned nrecovery_terms(const unsigned& dim);
+
 
     /// \short Recovery shape functions as functions of the global, Eulerian
     /// coordinate x of dimension dim.
@@ -452,9 +458,11 @@ namespace oomph
     CombinedErrorEstimateFctPt Combined_error_fct_pt;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Dummy error estimator, allows manual specification of refinement
@@ -475,9 +483,9 @@ namespace oomph
     DummyErrorEstimator(Mesh* mesh_pt,
                         const Vector<unsigned>& elements_to_refine,
                         const unsigned& central_node_number,
-                        const bool& use_lagrangian_coordinates = false) :
-      Use_lagrangian_coordinates(use_lagrangian_coordinates),
-      Central_node_number(central_node_number)
+                        const bool& use_lagrangian_coordinates = false)
+      : Use_lagrangian_coordinates(use_lagrangian_coordinates),
+        Central_node_number(central_node_number)
     {
 #ifdef PARANOID
 #ifdef OOMPH_HAS_MPI
@@ -548,6 +556,7 @@ namespace oomph
       }
     }
 
+
     /// \short Constructor. Provide vectors to "lower left" and "upper right"
     /// vertices of refinement region
     /// Also specify the node number of a central node
@@ -560,9 +569,9 @@ namespace oomph
                         const Vector<double>& lower_left,
                         const Vector<double>& upper_right,
                         const unsigned& central_node_number,
-                        const bool& use_lagrangian_coordinates = false) :
-      Use_lagrangian_coordinates(use_lagrangian_coordinates),
-      Central_node_number(central_node_number)
+                        const bool& use_lagrangian_coordinates = false)
+      : Use_lagrangian_coordinates(use_lagrangian_coordinates),
+        Central_node_number(central_node_number)
     {
 #ifdef PARANOID
       if (mesh_pt->nelement() == 0)
@@ -581,11 +590,13 @@ namespace oomph
       Region_upp_bound[0] = upper_right;
     }
 
+
     /// Broken copy constructor
     DummyErrorEstimator(const DummyErrorEstimator&)
     {
       BrokenCopy::broken_copy("DummyErrorEstimator");
     }
+
 
     /// Broken assignment operator
     void operator=(const DummyErrorEstimator&)
@@ -593,8 +604,10 @@ namespace oomph
       BrokenCopy::broken_assign("DummyErrorEstimator");
     }
 
+
     /// Empty virtual destructor
     virtual ~DummyErrorEstimator() {}
+
 
     /// \short Compute the elemental error measures for a given mesh
     /// and store them in a vector. Doc errors etc.
@@ -674,6 +687,7 @@ namespace oomph
     /// Lower bounds for the coordinates of the refinement regions
     Vector<Vector<double>> Region_low_bound;
   };
+
 
 } // namespace oomph
 

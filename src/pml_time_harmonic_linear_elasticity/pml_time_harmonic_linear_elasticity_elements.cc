@@ -28,6 +28,7 @@
 
 #include "pml_time_harmonic_linear_elasticity_elements.h"
 
+
 namespace oomph
 {
   /// Static default value for square of frequency
@@ -35,6 +36,7 @@ namespace oomph
   double
     PMLTimeHarmonicLinearElasticityEquationsBase<DIM>::Default_omega_sq_value =
       1.0;
+
 
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
@@ -71,6 +73,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -140,6 +143,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Compute the Cauchy stress tensor at local coordinate s for
   /// displacement formulation.
@@ -183,6 +187,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Compute the residuals for the linear elasticity equations in
   /// cartesian coordinates. Flag indicates if we want Jacobian too.
@@ -224,6 +229,7 @@ namespace oomph
     {
       u_nodal_index[i] = this->u_index_time_harmonic_linear_elasticity(i);
     }
+
 
     // Square of non-dimensional frequency
     const double omega_sq_local = this->omega_sq();
@@ -278,6 +284,7 @@ namespace oomph
           // Calculate the Lagrangian coordinates and the accelerations
           interpolated_x[i] += this->raw_nodal_position(l, i) * psi(l);
 
+
           // Get the nodal displacements
           const std::complex<double> u_value = std::complex<double>(
             this->raw_nodal_value(l, u_nodal_index[i].real()),
@@ -299,6 +306,7 @@ namespace oomph
 
       // Premultiply the weights and the Jacobian
       double W = w * J;
+
 
       /// \short All the PML weights that participate in the assemby process
       /// are computed here. pml_inverse_jacobian_diagonals are are used to
@@ -437,6 +445,7 @@ namespace oomph
 
           } // End of if not boundary condition for real eqn
 
+
           /*IF it's not a boundary condition*/
           if (local_eqn_imag >= 0)
           {
@@ -572,6 +581,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //=======================================================================
   /// Output: x,y,[z],u,v,[w]
   //=======================================================================
@@ -622,6 +632,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Output function for real part of full time-dependent solution
@@ -795,6 +806,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //=======================================================================
   /// C-style output: x,y,[z],u,v,[w]
   //=======================================================================
@@ -842,6 +854,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //=======================================================================
   /// Compute norm of the solution
@@ -980,6 +993,7 @@ namespace oomph
     }
   }
 
+
   // Instantiate the required elements
   template class PMLTimeHarmonicLinearElasticityEquationsBase<2>;
   template class PMLTimeHarmonicLinearElasticityEquations<2>;
@@ -991,5 +1005,6 @@ namespace oomph
   template<unsigned DIM>
   ContinuousBermudezPMLMapping
     PMLTimeHarmonicLinearElasticityEquationsBase<DIM>::Default_pml_mapping;
+
 
 } // namespace oomph

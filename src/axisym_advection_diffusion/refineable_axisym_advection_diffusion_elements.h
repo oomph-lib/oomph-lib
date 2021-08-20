@@ -51,19 +51,20 @@ namespace oomph
   /// from hanging nodes (or alternatively in-compatible function values)
   /// are taken into account.
   //======================================================================
-  class RefineableAxisymAdvectionDiffusionEquations :
-    public virtual AxisymAdvectionDiffusionEquations,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableAxisymAdvectionDiffusionEquations
+    : public virtual AxisymAdvectionDiffusionEquations,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Empty Constructor
-    RefineableAxisymAdvectionDiffusionEquations() :
-      AxisymAdvectionDiffusionEquations(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableAxisymAdvectionDiffusionEquations()
+      : AxisymAdvectionDiffusionEquations(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// Broken copy constructor
     RefineableAxisymAdvectionDiffusionEquations(
@@ -95,6 +96,7 @@ namespace oomph
     {
       this->get_flux(s, flux);
     }
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
@@ -341,6 +343,7 @@ namespace oomph
       }
     }
 
+
   protected:
     /// \short Add the element's contribution to the elemental residual vector
     /// and/or Jacobian matrix
@@ -353,26 +356,28 @@ namespace oomph
       unsigned flag);
   };
 
+
   //======================================================================
   /// \short Refineable version of QAxisymAdvectionDiffusionElement.
   /// Inherit from the standard QAxisymAdvectionDiffusionElement and the
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
   template<unsigned NNODE_1D>
-  class RefineableQAxisymAdvectionDiffusionElement :
-    public QAxisymAdvectionDiffusionElement<NNODE_1D>,
-    public virtual RefineableAxisymAdvectionDiffusionEquations,
-    public virtual RefineableQElement<2>
+  class RefineableQAxisymAdvectionDiffusionElement
+    : public QAxisymAdvectionDiffusionElement<NNODE_1D>,
+      public virtual RefineableAxisymAdvectionDiffusionEquations,
+      public virtual RefineableQElement<2>
   {
   public:
     /// \short Empty Constructor:
-    RefineableQAxisymAdvectionDiffusionElement() :
-      RefineableElement(),
-      RefineableAxisymAdvectionDiffusionEquations(),
-      RefineableQElement<2>(),
-      QAxisymAdvectionDiffusionElement<NNODE_1D>()
+    RefineableQAxisymAdvectionDiffusionElement()
+      : RefineableElement(),
+        RefineableAxisymAdvectionDiffusionEquations(),
+        RefineableQElement<2>(),
+        QAxisymAdvectionDiffusionElement<NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQAxisymAdvectionDiffusionElement(
@@ -425,6 +430,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the RefineableQAxisymAdvectionDiffusionElement
   /// elements: The spatial
@@ -433,8 +439,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<RefineableQAxisymAdvectionDiffusionElement<NNODE_1D>> :
-    public virtual QElement<1, NNODE_1D>
+  class FaceGeometry<RefineableQAxisymAdvectionDiffusionElement<NNODE_1D>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

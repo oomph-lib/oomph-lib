@@ -33,6 +33,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // oomph-lib headers
 #include "generic/refineable_quad_element.h"
 #include "generic/refineable_brick_element.h"
@@ -46,23 +47,24 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// Refineable version of Helmholtz equations
   ///
   ///
   //======================================================================
   template<unsigned DIM>
-  class RefineableHelmholtzEquations :
-    public virtual HelmholtzEquations<DIM>,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableHelmholtzEquations
+    : public virtual HelmholtzEquations<DIM>,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Constructor, simply call other constructors
-    RefineableHelmholtzEquations() :
-      HelmholtzEquations<DIM>(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableHelmholtzEquations()
+      : HelmholtzEquations<DIM>(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
 
@@ -133,6 +135,7 @@ namespace oomph
       }
     }
 
+
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
@@ -159,6 +162,7 @@ namespace oomph
       }
     }
 
+
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
@@ -171,6 +175,7 @@ namespace oomph
                              ->k_squared_pt();
     }
 
+
   private:
     /// \short Add element's contribution to elemental residual vector and/or
     /// Jacobian matrix
@@ -182,26 +187,28 @@ namespace oomph
       const unsigned& flag);
   };
 
+
   //======================================================================
   /// Refineable version of 2D QHelmholtzElement elements
   ///
   ///
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQHelmholtzElement :
-    public QHelmholtzElement<DIM, NNODE_1D>,
-    public virtual RefineableHelmholtzEquations<DIM>,
-    public virtual RefineableQElement<DIM>
+  class RefineableQHelmholtzElement
+    : public QHelmholtzElement<DIM, NNODE_1D>,
+      public virtual RefineableHelmholtzEquations<DIM>,
+      public virtual RefineableQElement<DIM>
   {
   public:
     /// \short Constructor, simply call the other constructors
-    RefineableQHelmholtzElement() :
-      RefineableElement(),
-      RefineableHelmholtzEquations<DIM>(),
-      RefineableQElement<DIM>(),
-      QHelmholtzElement<DIM, NNODE_1D>()
+    RefineableQHelmholtzElement()
+      : RefineableElement(),
+        RefineableHelmholtzEquations<DIM>(),
+        RefineableQElement<DIM>(),
+        QHelmholtzElement<DIM, NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQHelmholtzElement(
@@ -253,6 +260,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the RefineableQuadHelmholtzElement elements: The spatial
   /// dimension of the face elements is one lower than that of the
@@ -260,8 +268,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<RefineableQHelmholtzElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<RefineableQHelmholtzElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

@@ -122,6 +122,7 @@ namespace oomph
     static void check_value_id(const int& n_continuously_interpolated_values,
                                const int& value_id);
 
+
     /// \short Assemble the jacobian matrix for the mapping from local
     /// to Eulerian coordinates, given the derivatives of the shape function
     /// w.r.t the local coordinates.
@@ -184,15 +185,15 @@ namespace oomph
   public:
     /// \short Constructor, calls the FiniteElement constructor and initialises
     /// the member data
-    RefineableElement() :
-      FiniteElement(),
-      Tree_pt(0),
-      Refine_level(0),
-      To_be_refined(false),
-      Refinement_is_enabled(true),
-      Sons_to_be_unrefined(false),
-      Number(-1),
-      Local_hang_eqn(0)
+    RefineableElement()
+      : FiniteElement(),
+        Tree_pt(0),
+        Refine_level(0),
+        To_be_refined(false),
+        Refinement_is_enabled(true),
+        Sons_to_be_unrefined(false),
+        Number(-1),
+        Local_hang_eqn(0)
     {
     }
 
@@ -230,6 +231,7 @@ namespace oomph
     {
       return 0;
     }
+
 
     /// Flag to indicate suppression of any refinement
     bool refinement_is_enabled()
@@ -273,6 +275,7 @@ namespace oomph
         son_pt[i]->set_refinement_level(son_refine_level);
       }
     }
+
 
     /// \short Access function that returns the local equation number for the
     /// hanging node variables (values stored at master nodes). The local
@@ -463,6 +466,7 @@ namespace oomph
       return get_node_at_local_coordinate(s);
     }
 
+
     /// \short Return the number of nodes that are used to interpolate the
     /// value_id-th unknown. Default is to assume isoparametric elements.
     virtual unsigned ninterpolating_node(const int& value_id)
@@ -505,6 +509,7 @@ namespace oomph
     /// correctly
     void identify_field_data_for_interactions(
       std::set<std::pair<Data*, unsigned>>& paired_field_data);
+
 
     /// \short Overload the function that assigns local equation numbers
     /// for the Data stored at the nodes so that hanging data is taken
@@ -621,6 +626,7 @@ namespace oomph
     void get_dresidual_dnodal_coordinates(
       RankThreeTensor<double>& dresidual_dnodal_coordinates);
 
+
     /// \short Number of shape-controlling nodes = the number
     /// of non-hanging nodes plus the number of master nodes associated
     /// with hanging nodes.
@@ -639,9 +645,11 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// p-refineable version of RefineableElement
@@ -663,12 +671,12 @@ namespace oomph
 
   public:
     /// \short Constructor, calls the RefineableElement constructor
-    PRefineableElement() :
-      RefineableElement(),
-      P_order(2),
-      To_be_p_refined(false),
-      P_refinement_is_enabled(true),
-      To_be_p_unrefined(false)
+    PRefineableElement()
+      : RefineableElement(),
+        P_order(2),
+        To_be_p_refined(false),
+        P_refinement_is_enabled(true),
+        To_be_p_unrefined(false)
     {
     }
 
@@ -686,6 +694,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("PRefineableElement");
     }
+
 
     /// Flag to indicate suppression of any refinement
     bool p_refinement_is_enabled()
@@ -783,9 +792,11 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// A base class for elements that can have hanging nodes
@@ -812,6 +823,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     /// \short Broken function -- this shouldn't really be needed.
     void get_interpolated_values(const Vector<double>& s,
                                  Vector<double>& values)
@@ -835,6 +847,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+
     /// Broken function -- this shouldn't really be needed.
     void check_integrity(double& max_error)
     {
@@ -856,9 +869,11 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// RefineableSolidElements are SolidFiniteElements that may
@@ -867,9 +882,8 @@ namespace oomph
   /// separation between problems that alter nodal positions and others.
   /// A number of procedures are generic and are included in this class.
   //======================================================================
-  class RefineableSolidElement :
-    public virtual RefineableElement,
-    public virtual SolidFiniteElement
+  class RefineableSolidElement : public virtual RefineableElement,
+                                 public virtual SolidFiniteElement
   {
   private:
     /// \short Storage for local equation numbers of
@@ -878,9 +892,11 @@ namespace oomph
     /// Local_position_hang_eqn(master_node_pt,ival)
     std::map<Node*, DenseMatrix<int>> Local_position_hang_eqn;
 
+
     /// \short Assign local equation numbers to the hanging values associated
     /// with positions or additional solid values.
     void assign_solid_hanging_local_eqn_numbers(const bool& store_local_dof_pt);
+
 
   protected:
     /// \short Flag deciding if the Lagrangian coordinates of newly-created
@@ -922,10 +938,10 @@ namespace oomph
 
   public:
     /// Constructor
-    RefineableSolidElement() :
-      RefineableElement(),
-      SolidFiniteElement(),
-      Use_undeformed_macro_element_for_new_lagrangian_coords(false)
+    RefineableSolidElement()
+      : RefineableElement(),
+        SolidFiniteElement(),
+        Use_undeformed_macro_element_for_new_lagrangian_coords(false)
     {
     }
 
@@ -1018,9 +1034,11 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// A base class for SolidElements that can have hanging nodes
@@ -1031,15 +1049,17 @@ namespace oomph
   /// itself). We therefore simply break the pure virtual functions
   /// that don't make any sense for such elements
   //======================================================================
-  class NonRefineableSolidElementWithHangingNodes :
-    public virtual NonRefineableElementWithHangingNodes,
-    public virtual RefineableSolidElement
+  class NonRefineableSolidElementWithHangingNodes
+    : public virtual NonRefineableElementWithHangingNodes,
+      public virtual RefineableSolidElement
   {
   };
+
 
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
 } // namespace oomph
 

@@ -36,6 +36,7 @@
 #include "generic/error_estimator.h"
 #include "generic/projection.h"
 
+
 namespace oomph
 {
   //===========================================================================
@@ -43,9 +44,8 @@ namespace oomph
   /// Raviart-Thomas elements with both edge and internal degrees of freedom
   //===========================================================================
   template<unsigned DIM>
-  class DarcyEquations :
-    public virtual FiniteElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class DarcyEquations : public virtual FiniteElement,
+                         public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// Source function pointer typedef
@@ -208,6 +208,7 @@ namespace oomph
     /// point associated with the j-th edge-based q basis fct
     virtual void edge_flux_interpolation_point_global(
       const unsigned& j, Vector<double>& x) const = 0;
+
 
     /// Returns the local coordinate of nth flux interpolation point along an
     /// edge
@@ -405,10 +406,12 @@ namespace oomph
       return p;
     }
 
+
     /// \short Helper function to pin superfluous dofs (empty; can be overloaded
     /// in projectable elements where we introduce at least one
     /// dof per node to allow projection during unstructured refinement)
     virtual void pin_superfluous_darcy_dofs() {}
+
 
     /// Self test -- empty for now.
     unsigned self_test()
@@ -427,11 +430,13 @@ namespace oomph
     /// Nplot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
+
     /// \short Output incl. projection of fluxes into direction of
     /// the specified unit vector
     void output_with_projected_flux(std::ostream& outfile,
                                     const unsigned& nplot,
                                     const Vector<double> unit_normal);
+
 
     /// \short Output FE representation of exact soln: x,y,q1,q2,div_q,p at
     /// Nplot^DIM plot points
@@ -446,7 +451,9 @@ namespace oomph
                        Vector<double>& error,
                        Vector<double>& norm);
 
+
     // Z2 stuff:
+
 
     /// Number off flux terms for Z2 error estimator (use actual flux)
     unsigned num_Z2_flux_terms()
@@ -459,6 +466,7 @@ namespace oomph
     {
       interpolated_q(s, flux);
     }
+
 
   protected:
     /// \short Returns the geometric basis, and the q, p and divergence basis
@@ -496,17 +504,19 @@ namespace oomph
     MassSourceFctPt Mass_source_fct_pt;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //==========================================================
   /// Darcy upgraded to become projectable
   //==========================================================
   template<class DARCY_ELEMENT>
-  class ProjectableDarcyElement :
-    public virtual ProjectableElement<DARCY_ELEMENT>,
-    public virtual ProjectableElementBase
+  class ProjectableDarcyElement
+    : public virtual ProjectableElement<DARCY_ELEMENT>,
+      public virtual ProjectableElementBase
   {
   public:
     /// \short Constructor [this was only required explicitly
@@ -616,6 +626,7 @@ namespace oomph
       }
 #endif
 
+
       // Get the number of geometric nodes, total number of basis functions,
       // and number of edges basis functions
       const unsigned n_dim = this->dim();
@@ -662,6 +673,7 @@ namespace oomph
       return J;
     }
 
+
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
@@ -696,6 +708,7 @@ namespace oomph
       return return_value;
     }
 
+
     /// Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
@@ -722,6 +735,7 @@ namespace oomph
 
       return return_value;
     }
+
 
     /// Return local equation number of value j in field fld.
     int local_equation(const unsigned& fld, const unsigned& j)
@@ -770,6 +784,7 @@ namespace oomph
     {
       return std::max(this->Initial_Nvalue[n], unsigned(1));
     }
+
 
     /// \short Helper function to pin superfluous dofs; required because
     /// we introduce at least one dof per node to allow projection
@@ -1135,6 +1150,7 @@ namespace oomph
                 OOMPH_EXCEPTION_LOCATION);
             }
 
+
             break;
 
             default:
@@ -1150,21 +1166,24 @@ namespace oomph
     } // End of residual_for_projection function
   };
 
+
   //=======================================================================
   /// Face geometry for element is the same as that for the underlying
   /// wrapped element
   //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableDarcyElement<ELEMENT>> :
-    public virtual FaceGeometry<ELEMENT>
+  class FaceGeometry<ProjectableDarcyElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
   {
   public:
     FaceGeometry() : FaceGeometry<ELEMENT>() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
 } // namespace oomph
 

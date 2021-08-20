@@ -38,6 +38,7 @@
 #include "matrices.h"
 #include "preconditioner.h"
 
+
 // Preconditioner array is only really possible and useful if we have MPI
 // (and it uses a lot of MPI functions in the .cc file so changing that
 // would be hard). So if we don't have MPI just define a dummy
@@ -72,6 +73,7 @@ namespace oomph
 
 #include "mpi.h"
 
+
 namespace oomph
 {
   //=============================================================================
@@ -100,8 +102,10 @@ namespace oomph
   {
   public:
     /// Constructor (empty)
-    PreconditionerArray() :
-      Preconditioner_pt(0), Global_communicator_pt(0), Local_communicator_pt(0)
+    PreconditionerArray()
+      : Preconditioner_pt(0),
+        Global_communicator_pt(0),
+        Local_communicator_pt(0)
     {
       Method = 0;
       Nprec = 0;

@@ -45,6 +45,7 @@
 #include "generic/elements.h"
 #include "generic/hermite_elements.h"
 
+
 namespace oomph
 {
   //=============================================================================
@@ -57,14 +58,17 @@ namespace oomph
     /// source function type definition
     typedef void (*SourceFctPt)(const Vector<double>& x, double& u);
 
+
     /// Constructor (must initialise the Source_fct_pt to null)
     BiharmonicEquations() : Source_fct_pt(0) {}
+
 
     ~BiharmonicEquations(){};
 
     /// Access function: Nodal function value at local node n
     /// Uses suitably interpolated value for hanging nodes.
     virtual double u(const unsigned& n, const unsigned& k) const = 0;
+
 
     /// gets source strength
     virtual void get_source(const unsigned& ipt,
@@ -84,6 +88,7 @@ namespace oomph
       }
     }
 
+
     /// wrapper function, adds contribution to residual
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -94,6 +99,7 @@ namespace oomph
       fill_in_generic_residual_contribution_biharmonic(residuals, dummy, 0);
     }
 
+
     /// wrapper function, adds contribution to residual and generic
     void fill_in_contribution_to_jacobian(Vector<double>& residual,
                                           DenseMatrix<double>& jacobian)
@@ -101,6 +107,7 @@ namespace oomph
       // call generic routine with flag set to 1
       fill_in_generic_residual_contribution_biharmonic(residual, jacobian, 1);
     }
+
 
     /// output with nplot points
     void output(std::ostream& outfile, const unsigned& nplot)
@@ -130,6 +137,7 @@ namespace oomph
       this->write_tecplot_zone_footer(outfile, nplot);
     }
 
+
     /// Output at default number of plot points
     void output(std::ostream& outfile)
     {
@@ -147,6 +155,7 @@ namespace oomph
     {
       FiniteElement::output(file_pt, n_plot);
     }
+
 
     /// output fluid velocity field
     void output_fluid_velocity(std::ostream& outfile, const unsigned& nplot)
@@ -178,6 +187,7 @@ namespace oomph
       // Write tecplot footer (e.g. FE connectivity lists)
       this->write_tecplot_zone_footer(outfile, nplot);
     }
+
 
     /// output with nplot points
     void interpolated_dudx(const Vector<double>& s, Vector<double>& dudx)
@@ -212,6 +222,7 @@ namespace oomph
         }
       }
     }
+
 
     /// output analytic solution
     void output_fct(std::ostream& outfile,
@@ -266,6 +277,7 @@ namespace oomph
     {
       FiniteElement::output_fct(outfile, nplot, time, exact_soln_pt);
     }
+
 
     /// computes the error
     void compute_error(std::ostream& outfile,
@@ -343,6 +355,7 @@ namespace oomph
       this->write_tecplot_zone_footer(outfile, 3);
     }
 
+
     /// \short Plot the error when compared
     /// against a given time-dependent exact solution \f$ {\bf f}(t,{\bf x})
     /// \f$. Also calculates the norm of the error and that of the exact
@@ -387,6 +400,7 @@ namespace oomph
       return uu;
     }
 
+
     /// self test wrapper
     unsigned self_test()
     {
@@ -409,11 +423,13 @@ namespace oomph
       }
     }
 
+
     /// return number of second derivate degrees of freedom
     unsigned get_d2_dof()
     {
       return d2_dof[DIM - 1];
     }
+
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into (for block preconditioning)
@@ -421,6 +437,7 @@ namespace oomph
     {
       return this->required_nvalue(1);
     }
+
 
     /// \short Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
@@ -463,6 +480,7 @@ namespace oomph
       }
     }
 
+
     /// Access functions for the source function pointer
     SourceFctPt& source_fct_pt()
     {
@@ -475,14 +493,17 @@ namespace oomph
       return Source_fct_pt;
     }
 
+
   protected:
     /// \short Compute element residual Vector only (if JFLAG=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_residual_contribution_biharmonic(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned JFLAG);
 
+
     /// Pointer to source function:
     SourceFctPt Source_fct_pt;
+
 
     /// Array to hold local eqn numbers: Local_eqn[n] (=-1 for BC)
     Vector<int> Local_eqn;
@@ -492,17 +513,18 @@ namespace oomph
     static const unsigned d2_dof[];
   };
 
+
   // declares number of degrees of freedom of second derivative
   template<unsigned DIM>
   const unsigned BiharmonicEquations<DIM>::d2_dof[3] = {1, 3, 6};
+
 
   //=============================================================================
   ///  biharmonic element class
   //=============================================================================
   template<unsigned DIM>
-  class BiharmonicElement :
-    public virtual QHermiteElement<DIM>,
-    public virtual BiharmonicEquations<DIM>
+  class BiharmonicElement : public virtual QHermiteElement<DIM>,
+                            public virtual BiharmonicEquations<DIM>
   {
   public:
     /// access function for value, kth dof of node n
@@ -511,11 +533,14 @@ namespace oomph
       return this->node_pt(n)->value(k);
     }
 
+
     ///\short  Constructor: Call constructors for QElement and
     /// Poisson equations
     BiharmonicElement() : QHermiteElement<DIM>(), BiharmonicEquations<DIM>() {}
 
+
     ~BiharmonicElement(){};
+
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
@@ -523,6 +548,7 @@ namespace oomph
     {
       return DIM * 2;
     }
+
 
     /// Output
     void output(std::ostream& outfile)
@@ -548,6 +574,7 @@ namespace oomph
       BiharmonicEquations<DIM>::output(file_pt, n_plot);
     }
 
+
     /// analytic solution wrapper
     void output_fct(std::ostream& outfile,
                     const unsigned& nplot,
@@ -555,6 +582,7 @@ namespace oomph
     {
       BiharmonicEquations<DIM>::output_fct(outfile, nplot, exact_soln_pt);
     }
+
 
     /// Final override
     void output_fct(std::ostream& outfile,
@@ -564,6 +592,7 @@ namespace oomph
     {
       BiharmonicEquations<DIM>::output_fct(outfile, nplot, time, exact_soln_pt);
     }
+
 
     /// computes error
     void compute_error(std::ostream& outfile,
@@ -586,6 +615,7 @@ namespace oomph
         outfile, exact_soln_pt, time, error, norm);
     }
   };
+
 
 } // namespace oomph
 #endif

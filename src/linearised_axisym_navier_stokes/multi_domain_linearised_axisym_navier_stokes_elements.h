@@ -36,9 +36,11 @@
 // Use the oomph namespace
 using namespace oomph;
 
+
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
+
 
 //======================================================================
 /// Build a LinearisedAxisymmetricQTaylorHood element that inherits from
@@ -46,14 +48,14 @@ using namespace oomph;
 /// axisymmetric Navier-Stokes element that provides the base flow
 /// velocities and their derivatives w.r.t. global coordinates (r and z)
 //======================================================================
-class LinearisedAxisymmetricQTaylorHoodMultiDomainElement :
-  public virtual LinearisedAxisymmetricQTaylorHoodElement,
-  public virtual ElementWithExternalElement
+class LinearisedAxisymmetricQTaylorHoodMultiDomainElement
+  : public virtual LinearisedAxisymmetricQTaylorHoodElement,
+    public virtual ElementWithExternalElement
 {
 public:
   /// Constructor: call the underlying constructors
-  LinearisedAxisymmetricQTaylorHoodMultiDomainElement() :
-    LinearisedAxisymmetricQTaylorHoodElement(), ElementWithExternalElement()
+  LinearisedAxisymmetricQTaylorHoodMultiDomainElement()
+    : LinearisedAxisymmetricQTaylorHoodElement(), ElementWithExternalElement()
   {
     // There are two interactions: the base flow velocities and their
     // derivatives w.r.t. global coordinates
@@ -138,6 +140,7 @@ public:
     }
 
   } // End of overloaded get_base_flow_dudx function
+
 
   /// \short Compute the element's residual vector and the Jacobian matrix
   void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -152,9 +155,11 @@ public:
   }
 };
 
+
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
+
 
 //======================================================================
 /// Build a LinearisedAxisymmetricQCrouzeixRaviart element that inherits
@@ -162,15 +167,15 @@ public:
 /// axisymmetric Navier-Stokes element that provides the base flow
 /// velocities and their derivatives w.r.t. global coordinates (r and z)
 //======================================================================
-class LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement :
-  public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
-  public virtual ElementWithExternalElement
+class LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement
+  : public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
+    public virtual ElementWithExternalElement
 {
 public:
   /// Constructor: call the underlying constructors
-  LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement() :
-    LinearisedAxisymmetricQCrouzeixRaviartElement(),
-    ElementWithExternalElement()
+  LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement()
+    : LinearisedAxisymmetricQCrouzeixRaviartElement(),
+      ElementWithExternalElement()
   {
     // There are two interactions: the base flow velocities and their
     // derivatives w.r.t. global coordinates
@@ -255,6 +260,7 @@ public:
     }
 
   } // End of overloaded get_base_flow_dudx function
+
 
   /// \short Compute the element's residual vector and the Jacobian matrix
   void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -269,9 +275,11 @@ public:
   }
 };
 
+
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
+
 
 //======================================================================
 /// \short Build a RefineableLinearisedAxisymmetricQTaylorHood element
@@ -280,15 +288,15 @@ public:
 /// provides the base flow velocities and their derivatives w.r.t.
 /// global coordinates (r and z)
 //======================================================================
-class RefineableLinearisedAxisymmetricQTaylorHoodMultiDomainElement :
-  public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
-  public virtual ElementWithExternalElement
+class RefineableLinearisedAxisymmetricQTaylorHoodMultiDomainElement
+  : public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
+    public virtual ElementWithExternalElement
 {
 public:
   /// Constructor: call the underlying constructors
-  RefineableLinearisedAxisymmetricQTaylorHoodMultiDomainElement() :
-    RefineableLinearisedAxisymmetricQTaylorHoodElement(),
-    ElementWithExternalElement()
+  RefineableLinearisedAxisymmetricQTaylorHoodMultiDomainElement()
+    : RefineableLinearisedAxisymmetricQTaylorHoodElement(),
+      ElementWithExternalElement()
   {
     // There are two interactions: the base flow velocities and their
     // derivatives w.r.t. global coordinates
@@ -373,6 +381,7 @@ public:
     }
 
   } // End of overloaded get_base_flow_dudx function
+
 
   /// \short Compute the element's residual vector and the Jacobian matrix
   void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -387,9 +396,11 @@ public:
   }
 };
 
+
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
+
 
 //======================================================================
 /// \short Build a RefineableLinearisedAxisymmetricQCrouzeixRaviart element
@@ -398,15 +409,15 @@ public:
 /// provides the base flow velocities and their derivatives w.r.t.
 /// global coordinates (r and z)
 //======================================================================
-class RefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement :
-  public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
-  public virtual ElementWithExternalElement
+class RefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement
+  : public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
+    public virtual ElementWithExternalElement
 {
 public:
   /// Constructor: call the underlying constructors
-  RefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement() :
-    RefineableLinearisedAxisymmetricQCrouzeixRaviartElement(),
-    ElementWithExternalElement()
+  RefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement()
+    : RefineableLinearisedAxisymmetricQCrouzeixRaviartElement(),
+      ElementWithExternalElement()
   {
     // There are two interactions: the base flow velocities and their
     // derivatives w.r.t. global coordinates
@@ -491,6 +502,7 @@ public:
     }
 
   } // End of overloaded get_base_flow_dudx function
+
 
   /// \short Compute the element's residual vector and the Jacobian matrix
   void fill_in_contribution_to_jacobian(Vector<double>& residuals,

@@ -41,18 +41,17 @@ namespace oomph
   /// Class for Refineable PVD equations
   //========================================================================
   template<unsigned DIM>
-  class RefineablePVDEquations :
-    public virtual PVDEquations<DIM>,
-    public virtual RefineableSolidElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineablePVDEquations : public virtual PVDEquations<DIM>,
+                                 public virtual RefineableSolidElement,
+                                 public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Constructor
-    RefineablePVDEquations() :
-      PVDEquations<DIM>(),
-      RefineableElement(),
-      RefineableSolidElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineablePVDEquations()
+      : PVDEquations<DIM>(),
+        RefineableElement(),
+        RefineableSolidElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
 
@@ -176,19 +175,18 @@ namespace oomph
   /// Class for refineable QPVDElement elements
   //========================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class RefineableQPVDElement :
-    public virtual QPVDElement<DIM, NNODE_1D>,
-    public virtual RefineablePVDEquations<DIM>,
-    public virtual RefineableSolidQElement<DIM>
+  class RefineableQPVDElement : public virtual QPVDElement<DIM, NNODE_1D>,
+                                public virtual RefineablePVDEquations<DIM>,
+                                public virtual RefineableSolidQElement<DIM>
   {
   public:
     /// \short Constructor:
-    RefineableQPVDElement() :
-      QPVDElement<DIM, NNODE_1D>(),
-      RefineableElement(),
-      RefineableSolidElement(),
-      RefineablePVDEquations<DIM>(),
-      RefineableSolidQElement<DIM>()
+    RefineableQPVDElement()
+      : QPVDElement<DIM, NNODE_1D>(),
+        RefineableElement(),
+        RefineableSolidElement(),
+        RefineablePVDEquations<DIM>(),
+        RefineableSolidQElement<DIM>()
     {
     }
 
@@ -223,8 +221,8 @@ namespace oomph
   /// FaceGeometry of the 2D RefineableQPVDElement elements
   //==============================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<RefineableQPVDElement<2, NNODE_1D>> :
-    public virtual SolidQElement<1, NNODE_1D>
+  class FaceGeometry<RefineableQPVDElement<2, NNODE_1D>>
+    : public virtual SolidQElement<1, NNODE_1D>
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -236,8 +234,8 @@ namespace oomph
   /// FaceGeometry of the FaceGeometry of the 2D RefineableQPVDElement
   //==============================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<FaceGeometry<RefineableQPVDElement<2, NNODE_1D>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<RefineableQPVDElement<2, NNODE_1D>>>
+    : public virtual PointElement
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -245,12 +243,13 @@ namespace oomph
     FaceGeometry() : PointElement() {}
   };
 
+
   //==============================================================
   /// FaceGeometry of the 3D RefineableQPVDElement elements
   //==============================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<RefineableQPVDElement<3, NNODE_1D>> :
-    public virtual SolidQElement<2, NNODE_1D>
+  class FaceGeometry<RefineableQPVDElement<3, NNODE_1D>>
+    : public virtual SolidQElement<2, NNODE_1D>
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -262,8 +261,8 @@ namespace oomph
   /// FaceGeometry of the FaceGeometry of the 3D RefineableQPVDElement
   //==============================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<FaceGeometry<RefineableQPVDElement<3, NNODE_1D>>> :
-    public virtual SolidQElement<1, NNODE_1D>
+  class FaceGeometry<FaceGeometry<RefineableQPVDElement<3, NNODE_1D>>>
+    : public virtual SolidQElement<1, NNODE_1D>
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -271,24 +270,25 @@ namespace oomph
     FaceGeometry() : SolidQElement<1, NNODE_1D>() {}
   };
 
+
   //===========================================================================
   /// Class for Refineable solid mechanics elements in near-incompressible/
   /// incompressible formulation, so a pressure is included! In this case,
   /// the pressure interpolation is discontinuous, a la Crouzeix Raviart
   //===========================================================================
   template<unsigned DIM>
-  class RefineablePVDEquationsWithPressure :
-    public virtual PVDEquationsWithPressure<DIM>,
-    public virtual RefineableSolidElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineablePVDEquationsWithPressure
+    : public virtual PVDEquationsWithPressure<DIM>,
+      public virtual RefineableSolidElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Constructor:
-    RefineablePVDEquationsWithPressure() :
-      PVDEquationsWithPressure<DIM>(),
-      RefineableElement(),
-      RefineableSolidElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineablePVDEquationsWithPressure()
+      : PVDEquationsWithPressure<DIM>(),
+        RefineableElement(),
+        RefineableSolidElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
 
@@ -381,6 +381,7 @@ namespace oomph
       return 0;
     }
 
+
     /// Pass the generic stuff down to the sons
     void further_build()
     {
@@ -415,6 +416,7 @@ namespace oomph
         cast_father_element_pt->is_jacobian_evaluated_by_fd();
     }
 
+
     /// \short Compute the diagonal of the displacement mass matrix for
     /// LSC preconditioner
     void get_mass_matrix_diagonal(Vector<double>& mass_diag);
@@ -427,10 +429,10 @@ namespace oomph
   /// and the displacement is always quadratic.
   //===========================================================================
   template<unsigned DIM>
-  class RefineableQPVDElementWithPressure :
-    public virtual QPVDElementWithPressure<DIM>,
-    public virtual RefineablePVDEquationsWithPressure<DIM>,
-    public virtual RefineableSolidQElement<DIM>
+  class RefineableQPVDElementWithPressure
+    : public virtual QPVDElementWithPressure<DIM>,
+      public virtual RefineablePVDEquationsWithPressure<DIM>,
+      public virtual RefineableSolidQElement<DIM>
   {
   private:
     /// Unpin all solid pressure dofs
@@ -446,14 +448,15 @@ namespace oomph
 
   public:
     /// \short Constructor:
-    RefineableQPVDElementWithPressure() :
-      QPVDElementWithPressure<DIM>(),
-      RefineableElement(),
-      RefineableSolidElement(),
-      RefineablePVDEquationsWithPressure<DIM>(),
-      RefineableSolidQElement<DIM>()
+    RefineableQPVDElementWithPressure()
+      : QPVDElementWithPressure<DIM>(),
+        RefineableElement(),
+        RefineableSolidElement(),
+        RefineablePVDEquationsWithPressure<DIM>(),
+        RefineableSolidQElement<DIM>()
     {
     }
+
 
     /// \short Reconstruct the pressure from the sons
     /// Must be specialized for each dimension
@@ -486,6 +489,7 @@ namespace oomph
     /// Again this must be specialised for each dimension
     inline void further_build();
 
+
     /// Number of continuously interpolated values: 0 (pure solid problem)
     unsigned ncont_interpolated_values() const
     {
@@ -497,8 +501,8 @@ namespace oomph
   /// FaceGeometry of the 2D RefineableQPVDElementWithPressure
   //=======================================================================
   template<>
-  class FaceGeometry<RefineableQPVDElementWithPressure<2>> :
-    public virtual SolidQElement<1, 3>
+  class FaceGeometry<RefineableQPVDElementWithPressure<2>>
+    : public virtual SolidQElement<1, 3>
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -506,13 +510,14 @@ namespace oomph
     FaceGeometry() : SolidQElement<1, 3>() {}
   };
 
+
   //===========================================================================
   /// FaceGeometry of the FaceGeometry of the 2D
   /// RefineableQPVDElementWithPressure
   //============================================================================
   template<>
-  class FaceGeometry<FaceGeometry<RefineableQPVDElementWithPressure<2>>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<RefineableQPVDElementWithPressure<2>>>
+    : public virtual PointElement
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -548,6 +553,7 @@ namespace oomph
     // Actually set the pressure
     set_solid_p(0, p_value);
 
+
     // Slope in s_0 direction
     //----------------------
 
@@ -557,6 +563,7 @@ namespace oomph
     // pressure derivatives]
     double slope1 = centre_solid_p[SE] - centre_solid_p[SW];
     double slope2 = centre_solid_p[NE] - centre_solid_p[NW];
+
 
     // Use the average value
     p_value = 0.5 * (slope1 + slope2);
@@ -577,6 +584,7 @@ namespace oomph
     p_value = 0.5 * (slope1 + slope2);
     set_solid_p(2, p_value);
   }
+
 
   //==============================================================
   /// 2D further build interpolates the internal solid pressure
@@ -638,6 +646,7 @@ namespace oomph
     set_solid_p(2, 0.5 * cast_father_element_pt->solid_p(2));
   }
 
+
   //===============================================================
   /// 3D rebuild from sons: reconstruct the pressure
   //===============================================================
@@ -678,6 +687,7 @@ namespace oomph
     internal_data_pt(this->P_solid_internal_index)
       ->set_value(0, 0.125 * av_press);
 
+
     // Slope in s_0 direction
     //----------------------
 
@@ -695,6 +705,7 @@ namespace oomph
     internal_data_pt(this->P_solid_internal_index)
       ->set_value(1, 0.25 * (slope1 + slope2 + slope3 + slope4));
 
+
     // Slope in s_1 direction
     //----------------------
 
@@ -710,6 +721,7 @@ namespace oomph
     // Use the average
     internal_data_pt(this->P_solid_internal_index)
       ->set_value(2, 0.25 * (slope1 + slope2 + slope3 + slope4));
+
 
     // Slope in s_2 direction
     //----------------------
@@ -727,6 +739,7 @@ namespace oomph
     internal_data_pt(this->P_solid_internal_index)
       ->set_value(3, 0.25 * (slope1 + slope2 + slope3 + slope4));
   }
+
 
   //================================================================
   ///  3D Further build: Interpolate the solid pressure values
@@ -760,6 +773,7 @@ namespace oomph
 
     double press = cast_father_element_pt->interpolated_solid_p(s_father);
 
+
     // Pressure  value gets copied straight into internal dof:
     set_solid_p(0, press);
 
@@ -774,8 +788,8 @@ namespace oomph
   /// FaceGeometry of the 3D RefineableQPVDElementWithPressure
   //========================================================================
   template<>
-  class FaceGeometry<RefineableQPVDElementWithPressure<3>> :
-    public virtual SolidQElement<2, 3>
+  class FaceGeometry<RefineableQPVDElementWithPressure<3>>
+    : public virtual SolidQElement<2, 3>
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -783,13 +797,14 @@ namespace oomph
     FaceGeometry() : SolidQElement<2, 3>() {}
   };
 
+
   //========================================================================
   /// FaceGeometry of the FaceGeometry of the 3D
   /// RefineableQPVDElementWithPressure
   //==========================================================================
   template<>
-  class FaceGeometry<FaceGeometry<RefineableQPVDElementWithPressure<3>>> :
-    public virtual SolidQElement<1, 3>
+  class FaceGeometry<FaceGeometry<RefineableQPVDElementWithPressure<3>>>
+    : public virtual SolidQElement<1, 3>
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -797,27 +812,29 @@ namespace oomph
     FaceGeometry() : SolidQElement<1, 3>() {}
   };
 
+
   //===========================================================================
   /// Class for refineable solid mechanics elements in near-incompressible/
   /// incompressible formulation, so a pressure is included! These elements
   /// include a continuously interpolated pressure a la Taylor Hood/
   //===========================================================================
   template<unsigned DIM>
-  class RefineableQPVDElementWithContinuousPressure :
-    public virtual QPVDElementWithContinuousPressure<DIM>,
-    public virtual RefineablePVDEquationsWithPressure<DIM>,
-    public virtual RefineableSolidQElement<DIM>
+  class RefineableQPVDElementWithContinuousPressure
+    : public virtual QPVDElementWithContinuousPressure<DIM>,
+      public virtual RefineablePVDEquationsWithPressure<DIM>,
+      public virtual RefineableSolidQElement<DIM>
   {
   public:
     /// \short Constructor:
-    RefineableQPVDElementWithContinuousPressure() :
-      QPVDElementWithContinuousPressure<DIM>(),
-      RefineableElement(),
-      RefineableSolidElement(),
-      RefineablePVDEquationsWithPressure<DIM>(),
-      RefineableSolidQElement<DIM>()
+    RefineableQPVDElementWithContinuousPressure()
+      : QPVDElementWithContinuousPressure<DIM>(),
+        RefineableElement(),
+        RefineableSolidElement(),
+        RefineablePVDEquationsWithPressure<DIM>(),
+        RefineableSolidQElement<DIM>()
     {
     }
+
 
     /// \short Overload the number of additional solid dofs at each node, we
     /// shall always assign 1, otherwise it's a real pain
@@ -857,6 +874,7 @@ namespace oomph
       values[0] = this->interpolated_solid_p(s);
     }
 
+
     /// Unpin all pressure dofs
     void unpin_elemental_solid_pressure_dofs()
     {
@@ -869,6 +887,7 @@ namespace oomph
         this->node_pt(n)->unpin(solid_p_index);
       }
     }
+
 
     /// Pin the redundant solid pressure
     void pin_elemental_redundant_nodal_solid_pressures()
@@ -896,6 +915,7 @@ namespace oomph
       }
     }
 
+
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
@@ -914,6 +934,7 @@ namespace oomph
     {
       return 2;
     } // NNODE_1D-1;}
+
 
     /// \short The pressure "nodes" are a
     /// subset of the nodes, so when value_id==0, the n-th pressure
@@ -1024,6 +1045,7 @@ namespace oomph
       }
     }
 
+
     /// \short The number of 1d pressure nodes is 2, otherwise we have
     /// the positional nodes
     unsigned ninterpolating_node_1d(const int& value_id)
@@ -1080,6 +1102,7 @@ namespace oomph
       }
     }
 
+
     ///  \short Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes.
     void further_setup_hanging_nodes()
@@ -1094,13 +1117,14 @@ namespace oomph
     }
   };
 
+
   //=========================================================================
   /// FaceGeometry of the 2D RefineableQPVDElementWithContinuousPressure
   /// elements
   //=========================================================================
   template<>
-  class FaceGeometry<RefineableQPVDElementWithContinuousPressure<2>> :
-    public virtual SolidQElement<1, 3>
+  class FaceGeometry<RefineableQPVDElementWithContinuousPressure<2>>
+    : public virtual SolidQElement<1, 3>
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -1114,8 +1138,8 @@ namespace oomph
   //=========================================================================
   template<>
   class FaceGeometry<
-    FaceGeometry<RefineableQPVDElementWithContinuousPressure<2>>> :
-    public virtual PointElement
+    FaceGeometry<RefineableQPVDElementWithContinuousPressure<2>>>
+    : public virtual PointElement
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -1127,8 +1151,8 @@ namespace oomph
   /// FaceGeometry of the 3D RefineableQPVDElementWithContinuousPressure
   //=========================================================================
   template<>
-  class FaceGeometry<RefineableQPVDElementWithContinuousPressure<3>> :
-    public virtual SolidQElement<2, 3>
+  class FaceGeometry<RefineableQPVDElementWithContinuousPressure<3>>
+    : public virtual SolidQElement<2, 3>
   {
   public:
     // Make sure that we call the constructor of the SolidQElement
@@ -1142,8 +1166,8 @@ namespace oomph
   //=========================================================================
   template<>
   class FaceGeometry<
-    FaceGeometry<RefineableQPVDElementWithContinuousPressure<3>>> :
-    public virtual SolidQElement<1, 3>
+    FaceGeometry<RefineableQPVDElementWithContinuousPressure<3>>>
+    : public virtual SolidQElement<1, 3>
   {
   public:
     // Make sure that we call the constructor of the SolidQElement

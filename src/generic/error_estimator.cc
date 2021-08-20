@@ -27,6 +27,7 @@
 #include "mpi.h"
 #endif
 
+
 #include "refineable_quad_element.h"
 #include "error_estimator.h"
 #include "shape.h"
@@ -214,6 +215,7 @@ namespace oomph
                                 OOMPH_CURRENT_FUNCTION,
                                 OOMPH_EXCEPTION_LOCATION);
         }
+
 
         break;
 
@@ -427,6 +429,7 @@ namespace oomph
                                 OOMPH_EXCEPTION_LOCATION);
         }
 
+
         break;
 
       default:
@@ -443,6 +446,7 @@ namespace oomph
     // Dummy return (never get here)
     return 0;
   }
+
 
   //==========================================================================
   /// Return a combined error estimate from all compound flux errors
@@ -474,6 +478,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Initialise the maxmimum to the first compound error
     double max_error = compound_error[0];
@@ -650,6 +655,7 @@ namespace oomph
     }
   }
 
+
   //======================================================================
   /// Given the vector of elements that make up a patch,
   /// the number of recovery and flux terms, and the
@@ -677,6 +683,7 @@ namespace oomph
         rhs[irhs][j] = 0.0;
       }
     }
+
 
     // Create a new integration scheme based on the recovery order
     // in the elements
@@ -726,6 +733,7 @@ namespace oomph
         Vector<double> x(dim);
         el_pt->interpolated_x(s, x);
 
+
         // Premultiply the weights and the Jacobian
         // and the geometric jacobian weight (used in axisymmetric
         // and spherical coordinate systems)
@@ -750,6 +758,7 @@ namespace oomph
             rhs[i][l] += fe_flux[i] * psi_r[l] * W;
           }
         }
+
 
         // Loop over the nodes for the test functions
         for (unsigned l = 0; l < num_recovery_terms; l++)
@@ -793,6 +802,7 @@ namespace oomph
       }
     }
   }
+
 
   //==================================================================
   /// Number of coefficients for expansion of recovered fluxes
@@ -875,6 +885,7 @@ namespace oomph
         }
         break;
 
+
       case 3:
 
         // Cubic recovery shape functions
@@ -910,6 +921,7 @@ namespace oomph
         }
         break;
 
+
       default:
 
         // Any other recovery order?
@@ -923,6 +935,7 @@ namespace oomph
 
     return num_recovery_terms;
   }
+
 
   //======================================================================
   /// Get Vector of Z2-based error estimates for all elements in mesh.
@@ -1065,6 +1078,7 @@ namespace oomph
     // Determine number of coefficients for expansion of recovered fluxes
     // Use complete polynomial of given order for recovery
     unsigned num_recovery_terms = nrecovery_terms(dim);
+
 
     // Setup patches (also returns Vector of vertex nodes)
     //====================================================
@@ -1313,6 +1327,7 @@ namespace oomph
         }
 
       } // End loop over patches on current processor
+
 
 #ifdef OOMPH_HAS_MPI
     } // End if(is_mesh_distributed)
@@ -1651,6 +1666,7 @@ namespace oomph
                 // Vector for elemental errors
                 Vector<double> halo_elem_error(n_elem_error_halo);
 
+
                 // Receive the errors from processor send_rank
                 MPI_Recv(&halo_elem_error[0],
                          n_elem_error_halo,
@@ -1779,6 +1795,7 @@ namespace oomph
     }
   }
 
+
   //==================================================================
   /// Doc FE and recovered flux
   //==================================================================
@@ -1881,6 +1898,7 @@ namespace oomph
           }
           some_file << elemental_error[e] << " " << std::endl;
 
+
           for (unsigned i = 0; i < dim; i++)
           {
             feflux_file << x[i] << " ";
@@ -1893,6 +1911,7 @@ namespace oomph
         }
       }
 
+
       // Write tecplot footer (e.g. FE connectivity lists)
       // using the first element's output info.
       FiniteElement* first_el_pt = mesh_pt->finite_element_pt(0);
@@ -1903,5 +1922,6 @@ namespace oomph
     some_file.close();
     feflux_file.close();
   }
+
 
 } // namespace oomph

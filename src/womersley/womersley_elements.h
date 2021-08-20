@@ -34,6 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/nodes.h"
 #include "generic/Qelements.h"
@@ -42,11 +43,13 @@
 #include "generic/oomph_utilities.h"
 #include "../navier_stokes/navier_stokes_flux_control_elements.h"
 
+
 namespace oomph
 {
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //===============================================================
   /// Template-free base class for Impedance Tube -- to faciliate
@@ -77,9 +80,11 @@ namespace oomph
     static double Zero;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A  base class for elements that allow the imposition of an impedance
@@ -120,6 +125,7 @@ namespace oomph
     virtual void set_impedance_tube_pt(
       TemplateFreeWomersleyImpedanceTubeBase* impedance_tube_pt) = 0;
 
+
     /// \short Pass the pointer to the mesh containing all
     ///  NavierStokesImpedanceTractionElements that contribute
     /// to the volume flux into the downstream "impedance tube"
@@ -137,9 +143,11 @@ namespace oomph
     Mesh* Navier_stokes_outflow_mesh_pt;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================
   /// A class for all isoparametric elements that solve the
@@ -186,17 +194,20 @@ namespace oomph
       ReSt_pt = &Default_ReSt_value;
     }
 
+
     /// Broken copy constructor
     WomersleyEquations(const WomersleyEquations& dummy)
     {
       BrokenCopy::broken_copy("WomersleyEquations");
     }
 
+
     /// Broken assignment operator
     void operator=(const WomersleyEquations&)
     {
       BrokenCopy::broken_assign("WomersleyEquations");
     }
+
 
     /// Set pointer to pressure gradient (single-valued Data)
     void set_pressure_gradient_pt(Data*& pressure_gradient_data_pt)
@@ -213,11 +224,13 @@ namespace oomph
       Pressure_gradient_data_pt = pressure_gradient_data_pt;
     }
 
+
     /// Read-only access to pointer to pressure gradient
     Data* set_pressure_gradient_pt() const
     {
       return Pressure_gradient_data_pt;
     }
+
 
     /// Product of Reynolds and Strouhal number (=Womersley number)
     const double& re_st() const
@@ -225,11 +238,13 @@ namespace oomph
       return *ReSt_pt;
     }
 
+
     /// Pointer to product of Reynolds and Strouhal number (=Womersley number)
     double*& re_st_pt()
     {
       return ReSt_pt;
     }
+
 
     /// \short Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
@@ -242,6 +257,7 @@ namespace oomph
     {
       return 0;
     }
+
 
     /// \short du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
@@ -272,6 +288,7 @@ namespace oomph
       return dudt;
     }
 
+
     /// Output with default number of plot points
     void output(std::ostream& outfile)
     {
@@ -289,6 +306,7 @@ namespace oomph
     /// n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
+
     /// C_style output with default number of plot points
     void output(FILE* file_pt)
     {
@@ -296,14 +314,17 @@ namespace oomph
       output(file_pt, n_plot);
     }
 
+
     /// \short C-style output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot);
+
 
     /// Output exact soln: x,y,u_exact or x,y,z,u_exact at nplot^DIM plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+
 
     /// \short Output exact soln: x,y,u_exact or x,y,z,u_exact at
     /// nplot^DIM plot points (time-dependent version)
@@ -313,11 +334,13 @@ namespace oomph
       const double& time,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
+
     /// Get error against and norm of exact solution
     void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                        double& error,
                        double& norm);
+
 
     /// Get error against and norm of exact solution
     void compute_error(std::ostream& outfile,
@@ -359,6 +382,7 @@ namespace oomph
       }
     }
 
+
     /// Compute element residual Vector (wrapper)
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -368,6 +392,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
+
     /// Compute element residual Vector and element Jacobian matrix (wrapper)
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -375,6 +400,7 @@ namespace oomph
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_womersley(residuals, jacobian, 1);
     }
+
 
     /// Return FE representation of function value u(s) at local coordinate s
     inline double interpolated_u_womersley(const Vector<double>& s) const
@@ -418,6 +444,7 @@ namespace oomph
       DShape& dpsidx,
       Shape& test,
       DShape& dtestdx) const = 0;
+
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
@@ -467,9 +494,11 @@ namespace oomph
     }
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// \short Element to impose volume flux through collection of Womersley
@@ -490,8 +519,8 @@ namespace oomph
     /// double that contains the instantaneous value of the
     /// prescribed flux
     ImposeFluxForWomersleyElement(Mesh* womersley_mesh_pt,
-                                  double* prescribed_flux_pt) :
-      Prescribed_flux_pt(prescribed_flux_pt)
+                                  double* prescribed_flux_pt)
+      : Prescribed_flux_pt(prescribed_flux_pt)
     {
       // Store the mesh of the flux-controlled Womerersley elements
       Womersley_mesh_pt = womersley_mesh_pt;
@@ -530,6 +559,7 @@ namespace oomph
       return Pressure_gradient_data_pt;
     }
 
+
     /// Get volume flux through all Womersley elements
     double total_volume_flux()
     {
@@ -542,13 +572,13 @@ namespace oomph
       {
         WomersleyEquations<DIM>* el_pt = dynamic_cast<WomersleyEquations<DIM>*>(
           Womersley_mesh_pt->element_pt(e));
-        if (el_pt != 0)
-          flux += el_pt->get_volume_flux();
+        if (el_pt != 0) flux += el_pt->get_volume_flux();
       }
 
       // Return total volume flux
       return flux;
     }
+
 
     /// \short Compute residual vector: the volume flux constraint
     /// determines this element's one-and-only internal Data which represents
@@ -563,6 +593,7 @@ namespace oomph
         residuals[local_eqn] += total_volume_flux() - (*Prescribed_flux_pt);
       }
     }
+
 
     /// \short Compute element residual Vector and element Jacobian matrix
     /// Note: Jacobian is zero because the derivatives w.r.t. to
@@ -596,18 +627,19 @@ namespace oomph
     double* Prescribed_flux_pt;
   };
 
+
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// QWomersleyElement elements are linear/quadrilateral/brick-shaped
   /// Womersley elements with isoparametric interpolation for the function.
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class QWomersleyElement :
-    public virtual QElement<DIM, NNODE_1D>,
-    public virtual WomersleyEquations<DIM>
+  class QWomersleyElement : public virtual QElement<DIM, NNODE_1D>,
+                            public virtual WomersleyEquations<DIM>
   {
   private:
     /// \short Static array of ints to hold number of variables at
@@ -647,12 +679,14 @@ namespace oomph
       WomersleyEquations<DIM>::output(outfile);
     }
 
+
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       WomersleyEquations<DIM>::output(outfile, n_plot);
     }
+
 
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
@@ -661,12 +695,14 @@ namespace oomph
       WomersleyEquations<DIM>::output(file_pt);
     }
 
+
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       WomersleyEquations<DIM>::output(file_pt, n_plot);
     }
+
 
     /// \short Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
@@ -676,6 +712,7 @@ namespace oomph
     {
       WomersleyEquations<DIM>::output_fct(outfile, n_plot, exact_soln_pt);
     }
+
 
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
@@ -688,6 +725,7 @@ namespace oomph
       WomersleyEquations<DIM>::output_fct(outfile, n_plot, time, exact_soln_pt);
     }
 
+
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
@@ -696,6 +734,7 @@ namespace oomph
                                                       DShape& dpsidx,
                                                       Shape& test,
                                                       DShape& dtestdx) const;
+
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
@@ -707,9 +746,11 @@ namespace oomph
       DShape& dtestdx) const;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=====start_of_problem_class=========================================
   /// Womersley problem
@@ -721,6 +762,7 @@ namespace oomph
     /// \short Function pointer to fct that prescribes pressure gradient
     /// g=fct(t)
     typedef double (*PrescribedPressureGradientFctPt)(const double& time);
+
 
     /// \short Constructor: Pass pointer to Womersley number, pointer to the
     /// double that stores the currently imposed flow rate, the pointer
@@ -734,6 +776,7 @@ namespace oomph
                      double* prescribed_volume_flux_pt,
                      TimeStepper* time_stepper_pt,
                      Mesh* womersley_mesh_pt);
+
 
     /// \short Constructor: Pass pointer to Womersley number, pointer to the
     /// function that returns the imposed pressure gradient, the pointer
@@ -755,6 +798,7 @@ namespace oomph
 
     /// \short Update the problem specs before solve (empty)
     void actions_before_newton_solve() {}
+
 
     /// \short Update the problem specs before next timestep:
     /// Update time-varying pressure gradient (if prescribed)
@@ -788,6 +832,7 @@ namespace oomph
       return Pressure_gradient_data_pt;
     }
 
+
   private:
     /// Pointer to currently prescribed volume flux
     double* Prescribed_volume_flux_pt;
@@ -804,6 +849,7 @@ namespace oomph
 
   }; // end of problem class
 
+
   //========start_of_constructor============================================
   /// Constructor: Pass pointer to Womersley number, fct pointer to the
   /// function that returns the prescribed pressure gradient, the pointer
@@ -819,10 +865,10 @@ namespace oomph
     double* re_st_pt,
     PrescribedPressureGradientFctPt pressure_gradient_fct_pt,
     TimeStepper* time_stepper_pt,
-    Mesh* womersley_mesh_pt) :
-    Prescribed_volume_flux_pt(0),
-    Flux_el_pt(0),
-    Prescribed_pressure_gradient_fct_pt(pressure_gradient_fct_pt)
+    Mesh* womersley_mesh_pt)
+    : Prescribed_volume_flux_pt(0),
+      Flux_el_pt(0),
+      Prescribed_pressure_gradient_fct_pt(pressure_gradient_fct_pt)
   {
     // Problem is linear: Skip convergence check in Newton solver
     Problem_is_nonlinear = false;
@@ -865,11 +911,13 @@ namespace oomph
       }
     }
 
+
     // Do equation numbering
     oomph_info << "Number of equations in WomersleyProblem: "
                << assign_eqn_numbers() << std::endl;
 
   } // end of constructor
+
 
   //========start_of_constructor============================================
   /// Constructor: Pass pointer to Womersley number,  pointer to the
@@ -885,10 +933,10 @@ namespace oomph
     double* re_st_pt,
     double* prescribed_volume_flux_pt,
     TimeStepper* time_stepper_pt,
-    Mesh* womersley_mesh_pt) :
-    Prescribed_volume_flux_pt(prescribed_volume_flux_pt),
-    Flux_el_pt(0),
-    Prescribed_pressure_gradient_fct_pt(0)
+    Mesh* womersley_mesh_pt)
+    : Prescribed_volume_flux_pt(prescribed_volume_flux_pt),
+      Flux_el_pt(0),
+      Prescribed_pressure_gradient_fct_pt(0)
   {
     // Problem is linear: Skip convergence check in Newton solver
     Problem_is_nonlinear = false;
@@ -898,6 +946,7 @@ namespace oomph
 
     // Set the mesh (bcs have already been allocated!)
     mesh_pt() = womersley_mesh_pt;
+
 
     // Complete the build of all elements so they are fully functional
     //----------------------------------------------------------------
@@ -937,6 +986,7 @@ namespace oomph
 
   } // end of constructor
 
+
   //======start_of_destructor===============================================
   /// Destructor for Womersley problem
   //========================================================================
@@ -948,6 +998,7 @@ namespace oomph
     // Mesh gets killed in general problem destructor
 
   } // end of destructor
+
 
   //=======start_of_doc_solution============================================
   /// Doc the solution
@@ -964,6 +1015,7 @@ namespace oomph
     // Number of plot points
     unsigned npts;
     npts = 5;
+
 
     // Compute total volume flux directly
     double flux = 0.0;
@@ -1000,6 +1052,7 @@ namespace oomph
       prescribed_g = Prescribed_pressure_gradient_fct_pt(time_pt()->time());
     }
 
+
     double prescribed_q = 0.0;
     if (Prescribed_volume_flux_pt != 0)
     {
@@ -1015,9 +1068,11 @@ namespace oomph
 
   } // end of doc_solution
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// Base class for Womersley impedance tube. Allows the computation
@@ -1028,23 +1083,24 @@ namespace oomph
   /// outlet boundary conditions in a Navier-Stokes computation.
   //====================================================================
   template<class ELEMENT, unsigned DIM>
-  class WomersleyImpedanceTubeBase :
-    public virtual TemplateFreeWomersleyImpedanceTubeBase
+  class WomersleyImpedanceTubeBase
+    : public virtual TemplateFreeWomersleyImpedanceTubeBase
   {
   public:
     /// \short Function pointer to fct that prescribes volume flux
     /// q=fct(t)  -- mainly used for validation purposes.
     typedef double (*PrescribedVolumeFluxFctPt)(const double& time);
 
+
     /// \short Constructor: Specify length of tube and pointer to function that
     /// specifies the prescribed volume flux. Outlet pressure is set to zero.
     WomersleyImpedanceTubeBase(
       const double& length,
-      PrescribedVolumeFluxFctPt prescribed_volume_flux_fct_pt) :
-      Length(length),
-      P_out(0.0),
-      Prescribed_volume_flux_fct_pt(prescribed_volume_flux_fct_pt),
-      Navier_stokes_outflow_mesh_pt(0)
+      PrescribedVolumeFluxFctPt prescribed_volume_flux_fct_pt)
+      : Length(length),
+        P_out(0.0),
+        Prescribed_volume_flux_fct_pt(prescribed_volume_flux_fct_pt),
+        Navier_stokes_outflow_mesh_pt(0)
     {
       // Initialise currently prescribed flux
       Current_volume_flux_pt = new double(0.0);
@@ -1054,6 +1110,7 @@ namespace oomph
       Aux_integral_pt = 0;
     }
 
+
     /// \short Constructor: Specify length of tube and the pointer to the
     /// mesh of either NavierStokesImpedanceTractionElements or
     /// NavierStokesFluxControlElements that are attached
@@ -1061,11 +1118,11 @@ namespace oomph
     /// Navier Stokes mesh and provide the inflow into the ImpedanceTube.
     /// Outlet pressure is set to zero.
     WomersleyImpedanceTubeBase(const double& length,
-                               Mesh* navier_stokes_outflow_mesh_pt) :
-      Length(length),
-      P_out(0.0),
-      Prescribed_volume_flux_fct_pt(0),
-      Navier_stokes_outflow_mesh_pt(navier_stokes_outflow_mesh_pt)
+                               Mesh* navier_stokes_outflow_mesh_pt)
+      : Length(length),
+        P_out(0.0),
+        Prescribed_volume_flux_fct_pt(0),
+        Navier_stokes_outflow_mesh_pt(navier_stokes_outflow_mesh_pt)
     {
       // Initialise currently prescribed flux
       Current_volume_flux_pt = new double(0.0);
@@ -1140,6 +1197,7 @@ namespace oomph
     virtual Mesh* build_mesh_and_apply_boundary_conditions(
       TimeStepper* time_stepper_pt) = 0;
 
+
     /// \short Set up the Womersley tubes so that a subsequent call
     /// to get_response(...) computes the inlet pressure for the currently
     /// prescribed instantaneous flow rate. Steady version!
@@ -1152,6 +1210,7 @@ namespace oomph
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper;
       setup(re_st_pt, dt, q_initial, time_stepper_pt);
     }
+
 
     /// \short Set up the Womersley tubes so that a subsequent call
     /// to get_response(...) computes the inlet pressure for the currently
@@ -1228,6 +1287,7 @@ namespace oomph
                                                         dx);
       }
 
+
       // Pre-compute derivative of p_in w.r.t. q
 
       // Setup vector of derivatives of residuals & unknowns w.r.t. Q
@@ -1254,11 +1314,13 @@ namespace oomph
       Dp_in_dq = dxdq[g_eqn] * Length;
     }
 
+
     /// Access to underlying Womersley problem
     WomersleyProblem<ELEMENT, DIM>* womersley_problem_pt()
     {
       return Womersley_problem_pt;
     }
+
 
     /// \short Shift history values to allow coputation of next timestep.
     /// Note: When used with a full Navier-Stokes problem this function
@@ -1281,6 +1343,7 @@ namespace oomph
         Womersley_problem_pt->time_stepper_pt(i)->set_weights();
       }
     }
+
 
     /// \short Compute total current volume flux into the "impedance tube" that
     /// provides the flow resistance (flux is either obtained from
@@ -1321,6 +1384,7 @@ namespace oomph
       }
     }
 
+
     /// \short Compute inlet pressure, p_in, required to achieve the currently
     /// imposed, instantaneous volume flux q prescribed by
     /// total_volume_flux_into_impedance_tube(), and its
@@ -1343,6 +1407,7 @@ namespace oomph
       // Return pre-computed value  for dp_in/dq
       dp_in_dq = Dp_in_dq;
     }
+
 
   protected:
     /// \short Precompute auxiliary integrals required for the computation of
@@ -1425,6 +1490,7 @@ namespace oomph
 
   // Inline functions:
 
+
   //======================================================================
   /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
@@ -1457,6 +1523,7 @@ namespace oomph
     return J;
   }
 
+
   //======================================================================
   /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
@@ -1483,8 +1550,10 @@ namespace oomph
     return J;
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the QWomersleyElement elements: The spatial
@@ -1493,8 +1562,8 @@ namespace oomph
   /// along their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<QWomersleyElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<QWomersleyElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -1502,16 +1571,18 @@ namespace oomph
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Face geometry for the 1D QWomersleyElement elements: Point elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<QWomersleyElement<1, NNODE_1D>> :
-    public virtual PointElement
+  class FaceGeometry<QWomersleyElement<1, NNODE_1D>>
+    : public virtual PointElement
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -1519,9 +1590,11 @@ namespace oomph
     FaceGeometry() : PointElement() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// Template-free base class
@@ -1533,9 +1606,11 @@ namespace oomph
     static bool Suppress_warning_about_unpinned_nst_dofs;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// Mesh of Womersley elements whose topology, nodal position etc.
@@ -1543,9 +1618,8 @@ namespace oomph
   /// cross-section of a full Navier-Stokes mesh.
   //====================================================================
   template<class WOMERSLEY_ELEMENT>
-  class WomersleyMesh :
-    public virtual Mesh,
-    public virtual TemplateFreeWomersleyMeshBase
+  class WomersleyMesh : public virtual Mesh,
+                        public virtual TemplateFreeWomersleyMeshBase
   {
   public:
     /// \short Constructor: Pass pointer to  mesh of face elements in the
@@ -1622,6 +1696,7 @@ namespace oomph
       // Initialise count of newly created nodes
       unsigned node_count = 0;
 
+
       // This is awkward do diagnose: We're assuming that
       // the boundary conditions have been applied for the
       // underlying Navier-Stokes problem before calling
@@ -1652,6 +1727,7 @@ namespace oomph
             // Add newly created node
             Node_pt[node_count] = new_node_pt;
             node_count++;
+
 
             // Set coordinates
             unsigned dim = n_st_node_pt->ndim();
@@ -1720,6 +1796,7 @@ namespace oomph
         }
       }
 
+
 #ifdef PARANOID
       if (!Suppress_warning_about_unpinned_nst_dofs)
       {
@@ -1752,17 +1829,19 @@ namespace oomph
     }
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// WomersleyImpedanceTube that attaches itself to the outflow
   /// of a Navier-Stokes mesh.
   //====================================================================
   template<class ELEMENT, unsigned DIM>
-  class WomersleyOutflowImpedanceTube :
-    public WomersleyImpedanceTubeBase<ELEMENT, DIM>
+  class WomersleyOutflowImpedanceTube
+    : public WomersleyImpedanceTubeBase<ELEMENT, DIM>
   {
   public:
     /// \short Constructor: Pass length and mesh of face elements that
@@ -1777,11 +1856,11 @@ namespace oomph
     WomersleyOutflowImpedanceTube(const double& length,
                                   Mesh* navier_stokes_outflow_mesh_pt,
                                   const unsigned& fixed_coordinate,
-                                  const unsigned& w_index) :
-      WomersleyImpedanceTubeBase<ELEMENT, DIM>(length,
-                                               navier_stokes_outflow_mesh_pt),
-      Fixed_coordinate(fixed_coordinate),
-      W_index(w_index)
+                                  const unsigned& w_index)
+      : WomersleyImpedanceTubeBase<ELEMENT, DIM>(length,
+                                                 navier_stokes_outflow_mesh_pt),
+        Fixed_coordinate(fixed_coordinate),
+        W_index(w_index)
     {
     }
 
@@ -1818,6 +1897,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   /* //==================================================================== */
   /* /// WomersleyImpedanceTube that attaches itself to the outflow */
@@ -1887,11 +1967,14 @@ namespace oomph
   /*  /// the boundary conditions for the Womersley problem. */
   /*  unsigned W_index; */
 
+
   /* }; */
+
 
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for elements that allow the imposition of an impedance type
@@ -1906,10 +1989,10 @@ namespace oomph
   template<class BULK_NAVIER_STOKES_ELEMENT,
            class WOMERSLEY_ELEMENT,
            unsigned DIM>
-  class NavierStokesImpedanceTractionElement :
-    public virtual FaceGeometry<BULK_NAVIER_STOKES_ELEMENT>,
-    public virtual FaceElement,
-    public virtual NavierStokesImpedanceTractionElementBase
+  class NavierStokesImpedanceTractionElement
+    : public virtual FaceGeometry<BULK_NAVIER_STOKES_ELEMENT>,
+      public virtual FaceElement,
+      public virtual NavierStokesImpedanceTractionElementBase
   {
   private:
     /// \short Pointer to auxiliary integral, containing
@@ -1920,6 +2003,7 @@ namespace oomph
 
     /// Pointer to ImpedanceTubeProblem that computes the flow resistance
     WomersleyImpedanceTubeBase<WOMERSLEY_ELEMENT, DIM>* Impedance_tube_pt;
+
 
   protected:
     /// \short Access function that returns the local equation numbers
@@ -1954,18 +2038,20 @@ namespace oomph
       return J_eulerian_at_knot(ipt);
     }
 
+
     ///\short This function returns the residuals for the
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_fluid_traction(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
+
   public:
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
     NavierStokesImpedanceTractionElement(FiniteElement* const& element_pt,
-                                         const int& face_index) :
-      FaceGeometry<BULK_NAVIER_STOKES_ELEMENT>(), FaceElement()
+                                         const int& face_index)
+      : FaceGeometry<BULK_NAVIER_STOKES_ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -2011,6 +2097,7 @@ namespace oomph
       }
 #endif
     }
+
 
     /// Destructor should not delete anything
     ~NavierStokesImpedanceTractionElement() {}
@@ -2067,6 +2154,7 @@ namespace oomph
         // Premultiply the weights and the Jacobian
         double W = w * J;
 
+
 #ifdef PARANOID
 
         // Get x position as Vector
@@ -2116,6 +2204,7 @@ namespace oomph
       return volume_flux_integral;
     }
 
+
     /// \short NavierStokesImpedanceTractionElements that contribute
     /// to the volume flux into the downstream "impedance tube"
     /// to the element and classify all nodes in that mesh
@@ -2159,6 +2248,7 @@ namespace oomph
       }
     }
 
+
     /// \short Set pointer to the precomputed auxiliary integral that contains
     /// the derivative of the total volume flux through the
     /// outflow boundary of the (higher-dimensional) Navier-Stokes mesh w.r.t.
@@ -2167,6 +2257,7 @@ namespace oomph
     {
       Aux_integral_pt = aux_integral_pt;
     }
+
 
     /// \short Compute total volume flux into the "downstream tube" that
     /// provides the impedance (computed by adding up the flux
@@ -2186,6 +2277,7 @@ namespace oomph
       }
 #endif
 
+
       double total_flux = 0.0;
       unsigned nelem = Navier_stokes_outflow_mesh_pt->nelement();
       for (unsigned e = 0; e < nelem; e++)
@@ -2203,6 +2295,7 @@ namespace oomph
       return total_flux;
     }
 
+
     /// \short Set pointer to "impedance tube" that provides the flow
     /// resistance
     void set_impedance_tube_pt(
@@ -2212,6 +2305,7 @@ namespace oomph
         dynamic_cast<WomersleyImpedanceTubeBase<WOMERSLEY_ELEMENT, DIM>*>(
           impedance_tube_pt);
     }
+
 
     /// Add the element's contribution to the auxiliary integral
     /// that contains the derivative of the total volume flux through the
@@ -2281,6 +2375,7 @@ namespace oomph
       }
     }
 
+
     /// Fill in the element's contribution to the element's residual vector
     inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -2289,6 +2384,7 @@ namespace oomph
       fill_in_generic_residual_contribution_fluid_traction(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
+
 
     /// \short Fill in the element's contribution to the element's residual
     /// vector and Jacobian matrix
@@ -2299,6 +2395,7 @@ namespace oomph
       fill_in_generic_residual_contribution_fluid_traction(
         residuals, jacobian, 1);
     }
+
 
     /// Specify the value of nodal zeta from the face geometry
     /// \short The "global" intrinsic coordinate of the element when
@@ -2311,6 +2408,7 @@ namespace oomph
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
+
 
     /// Overload the output function
     void output(std::ostream& outfile)
@@ -2325,9 +2423,11 @@ namespace oomph
     }
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //============================================================================
   /// Function that returns the residuals for the imposed traction Navier_Stokes
@@ -2393,6 +2493,7 @@ namespace oomph
         traction[i] = -unit_normal[i] * p_in;
       }
 
+
       // Loop over the test functions
       for (unsigned l = 0; l < n_node; l++)
       {
@@ -2434,6 +2535,7 @@ namespace oomph
                 }
               }
 
+
               // Loop over external dofs for unknowns
               unsigned n_ext = nexternal_data();
               for (unsigned j = 0; j < n_ext; j++)
@@ -2471,6 +2573,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
 
+
   //======================================================================
   /// An element to impose a fluid pressure obtained from a Womersley
   /// impedance tube at a boundary. This element is used in conjunction with a
@@ -2487,15 +2590,15 @@ namespace oomph
   /// the unknowns in this (NavierStokesWomersleyPressureControlElement)
   /// element.
   //======================================================================
-  class NavierStokesWomersleyPressureControlElement :
-    public virtual GeneralisedElement
+  class NavierStokesWomersleyPressureControlElement
+    : public virtual GeneralisedElement
   {
   public:
     /// \short Constructor takes a pointer to a suitable Womersley
     /// impedance tube which defines the pressure via get_response(...)
     NavierStokesWomersleyPressureControlElement(
-      TemplateFreeWomersleyImpedanceTubeBase* womersley_tube_pt) :
-      Womersley_tube_pt(womersley_tube_pt)
+      TemplateFreeWomersleyImpedanceTubeBase* womersley_tube_pt)
+      : Womersley_tube_pt(womersley_tube_pt)
     {
       // Create the new Data which contains the volume flux.
       Volume_flux_data_pt = new Data(1);
@@ -2623,9 +2726,11 @@ namespace oomph
     unsigned Volume_flux_data_id;
   };
 
+
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for an element to control net fluid flux across a boundary
@@ -2640,8 +2745,8 @@ namespace oomph
   /// NavierStokesWomersleyPressureControlElement::
   /// fill_in_contribution_to_jacobian(...)
   //======================================================================
-  class NetFluxControlElementForWomersleyPressureControl :
-    public virtual NetFluxControlElement
+  class NetFluxControlElementForWomersleyPressureControl
+    : public virtual NetFluxControlElement
   {
   public:
     /// \short Constructor takes the mesh of
@@ -2651,11 +2756,10 @@ namespace oomph
     /// flux.
     NetFluxControlElementForWomersleyPressureControl(
       Mesh* flux_control_mesh_pt,
-      NavierStokesWomersleyPressureControlElement*
-        pressure_control_element_pt) :
-      NetFluxControlElement(
-        flux_control_mesh_pt,
-        pressure_control_element_pt->volume_flux_data_pt()->value_pt(0))
+      NavierStokesWomersleyPressureControlElement* pressure_control_element_pt)
+      : NetFluxControlElement(
+          flux_control_mesh_pt,
+          pressure_control_element_pt->volume_flux_data_pt()->value_pt(0))
     {
       // There's no need to add external data to this element since
       // this element's Jacobian contributions are calculated by the
@@ -2672,12 +2776,13 @@ namespace oomph
 
     /// Broken copy constructor
     NetFluxControlElementForWomersleyPressureControl(
-      const NetFluxControlElementForWomersleyPressureControl& dummy) :
-      NetFluxControlElement(dummy)
+      const NetFluxControlElementForWomersleyPressureControl& dummy)
+      : NetFluxControlElement(dummy)
     {
       BrokenCopy::broken_copy(
         "NetFluxControlElementForWomersleyPressureControl");
     }
+
 
     /// Broken assignment operator
     void operator=(const NetFluxControlElementForWomersleyPressureControl&)
@@ -2685,6 +2790,7 @@ namespace oomph
       BrokenCopy::broken_assign(
         "NetFluxControlElementForWomersleyPressureControl");
     }
+
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into - set to 1

@@ -30,13 +30,13 @@
 #include "stacktrace.h"
 #endif
 #include "oomph_definitions.h"
-#include <sstream>
 
 namespace oomph
 {
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   ///=====================================================================
   /// Namespace to control level of comprehensive timings
@@ -62,8 +62,7 @@ namespace oomph
     /// Setup terminate helper
     void setup()
     {
-      if (Exception_stringstream_pt != 0)
-        delete Exception_stringstream_pt;
+      if (Exception_stringstream_pt != 0) delete Exception_stringstream_pt;
       Exception_stringstream_pt = new std::stringstream;
       std::set_terminate(spawn_errors_from_uncaught_errors);
     }
@@ -108,14 +107,17 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   ///=====================================================================
   /// A class for handling oomph-lib run-time exceptions quietly.
   //======================================================================
   OomphLibQuietException::OomphLibQuietException() : std::runtime_error("") {}
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// The OomphLibException destructor actually spawns the error message
@@ -145,8 +147,8 @@ namespace oomph
                                        const std::string& exception_type,
                                        std::ostream& exception_stream,
                                        const unsigned& output_width,
-                                       bool list_trace_back) :
-    std::runtime_error("OomphException")
+                                       bool list_trace_back)
+    : std::runtime_error("OomphException")
   {
     // By default we shout
     Suppress_error_message = false;
@@ -234,9 +236,11 @@ namespace oomph
   //=======================================================================
   unsigned OomphLibWarning::Output_width = 70;
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Namespace containing an output stream that can be used for
@@ -249,9 +253,11 @@ namespace oomph
 
   } // namespace Global_output_stream
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Namespace containing a number that can be used to annotate things for
@@ -266,6 +272,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Namespace containing a vector of strings that can be used to
@@ -294,9 +301,11 @@ namespace oomph
 
   } // namespace Global_string_for_annotation
 
+
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Single (global) instantiation of the Nullstream
@@ -308,6 +317,7 @@ namespace oomph
   /// is used throughout the library as a "replacement" for std::cout
   //========================================================================
   OomphInfo oomph_info;
+
 
   //========================================================================
   /// Single global instatiation of the default output modifier.

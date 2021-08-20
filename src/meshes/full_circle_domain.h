@@ -76,10 +76,10 @@ namespace oomph
     /// radius at which the central box is to be placed.
     FullCircleDomain(GeomObject* area_geom_object_pt,
                      const Vector<double>& theta_positions,
-                     const Vector<double>& radius_box) :
-      Theta_positions(theta_positions),
-      Radius_box(radius_box),
-      Area_pt(area_geom_object_pt)
+                     const Vector<double>& radius_box)
+      : Theta_positions(theta_positions),
+        Radius_box(radius_box),
+        Area_pt(area_geom_object_pt)
     {
       // There are five macro elements
       const unsigned n_macro = 5;
@@ -104,8 +104,10 @@ namespace oomph
       BrokenCopy::broken_assign("FullCircleDomain");
     }
 
+
     /// Destructor: Empty; cleanup done in base class
     ~FullCircleDomain() {}
+
 
     /// \short Vector representation of the  i_macro-th macro element
     /// boundary i_direct (N/S/W/E) at time level t

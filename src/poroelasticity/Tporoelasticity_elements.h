@@ -38,9 +38,8 @@ namespace oomph
 {
   /// Element which solves the Darcy equations using TElements
   template<unsigned ORDER>
-  class TPoroelasticityElement :
-    public TElement<2, 3>,
-    public PoroelasticityEquations<2>
+  class TPoroelasticityElement : public TElement<2, 3>,
+                                 public PoroelasticityEquations<2>
   {
   private:
     /// The number of values stored at each node

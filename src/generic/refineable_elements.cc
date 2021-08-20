@@ -204,6 +204,7 @@ namespace oomph
     }
   }
 
+
   //==========================================================================
   /// Calculate the mapping from local to eulerian coordinates
   /// assuming that the coordinates are aligned in the direction of the local
@@ -455,12 +456,14 @@ namespace oomph
         std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
       }
 
+
       // If there are no hanging_eqn_numbers delete the (empty) stored maps
       if (!hanging_eqn_numbers)
       {
         delete[] Local_hang_eqn;
         Local_hang_eqn = 0;
       }
+
 
       // Setup map that associates a unique number with any of the nodes
       // that actively control the shape of the element (i.e. they are
@@ -579,6 +582,7 @@ namespace oomph
     }
   }
 
+
   //==========================================================================
   /// Compute derivatives of elemental residual vector with respect
   /// to nodal coordinates. Default implementation by FD can be overwritten
@@ -597,8 +601,7 @@ namespace oomph
     unsigned n_nod = nnode();
 
     // If the element has no nodes (why??!!) return straightaway
-    if (n_nod == 0)
-      return;
+    if (n_nod == 0) return;
 
     // Get dimension from first node
     unsigned dim_nod = node_pt(0)->ndim();
@@ -661,6 +664,7 @@ namespace oomph
       }
     }
   }
+
 
   //============================================================================
   /// This function calculates the entries of Jacobian matrix, used in
@@ -842,6 +846,7 @@ namespace oomph
     reset_after_nodal_fd();
   }
 
+
   //=========================================================================
   /// Internal function that is used to assemble the jacobian of the mapping
   /// from local coordinates (s) to the lagrangian coordinates (xi), given the
@@ -988,6 +993,7 @@ namespace oomph
     return (det);
   }
 
+
   //========================================================================
   /// The number of geometric data affecting a
   /// RefineableSolidFiniteElement is the positional Data of all
@@ -1039,6 +1045,7 @@ namespace oomph
     // How many are there?
     return all_position_data_pt.size();
   }
+
 
   //========================================================================
   /// \short Return pointer to the j-th Data item that the object's
@@ -1115,9 +1122,11 @@ namespace oomph
 
     } // End of loop over nodes
 
+
     // Return j-th entry
     return all_position_data_vector_pt[j];
   }
+
 
   //========================================================================
   /// \short Specify Data that affects the geometry of the element
@@ -1312,6 +1321,7 @@ namespace oomph
         std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
       }
 
+
     } // End of if nodes
   }
 
@@ -1389,6 +1399,7 @@ namespace oomph
 
               // Update any other dependent variables
               update_in_solid_position_fd(l);
+
 
               // Calculate the new residuals
               get_residuals(newres);

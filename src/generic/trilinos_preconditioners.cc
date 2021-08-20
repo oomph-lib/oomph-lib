@@ -33,12 +33,14 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
 
+
   //=============================================================================
   /// \short Static double that accumulates the preconditioner
   /// solve time of all instantiations of this class. Reset
   /// it manually, e.g. after every Newton solve.
   //=============================================================================
   double TrilinosPreconditionerBase::Cumulative_preconditioner_solve_time = 0.0;
+
 
   //=============================================================================
   /// \short Function to set up a preconditioner for the linear system
@@ -65,6 +67,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // get a pointer to the cr double matrix
     CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
@@ -113,6 +116,7 @@ namespace oomph
     // setup the specific preconditioner
     setup_trilinos_preconditioner(epetra_matrix_pt);
   }
+
 
   //=============================================================================
   /// \short preconditioner_solve - applies the preconditioner to the vector r
@@ -166,16 +170,19 @@ namespace oomph
     delete epetra_r_pt;
     delete epetra_z_pt;
 
+
     // Add to cumulative solve time
     double t_end = TimingHelpers::timer();
     Cumulative_preconditioner_solve_time += (t_end - t_start);
   }
+
 
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   // function for the TrilinosML class
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// (Static) default number of V cycles (one to be consistent
@@ -192,6 +199,7 @@ namespace oomph
     // doc setup time
     oomph_info << "Setting up TrilinosML, ";
     double t_start = TimingHelpers::timer();
+
 
     // create the preconditioner
     Epetra_preconditioner_pt = new ML_Epetra::MultiLevelPreconditioner(
@@ -215,11 +223,13 @@ namespace oomph
     //  }
   }
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   // function for the TrilinosIFPACK
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   // Function to set up the IFPACK preconditioner.
@@ -247,8 +257,10 @@ namespace oomph
     Epetra_preconditioner_pt = tmp_pt;
   }
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
 } // namespace oomph

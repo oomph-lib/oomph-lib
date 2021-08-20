@@ -37,7 +37,8 @@
 // templated sources)
 #include "meshes/simple_rectangular_quadmesh.h"
 
-using namespace oomph;
-
-// Force build of specific mesh
-template class SimpleRectangularQuadMesh<QPoissonElement<2, 3>>;
+namespace oomph
+{
+  // Force build of specific mesh
+  template class SimpleRectangularQuadMesh<QPoissonElement<2, 3>>;
+} // namespace oomph

@@ -45,6 +45,7 @@
 #include "elements.h"
 #include "Qelements.h"
 
+
 namespace oomph
 {
   //========================================================================
@@ -71,9 +72,11 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// General QHermiteElement class. Local coordinates are not assumed
@@ -112,6 +115,7 @@ namespace oomph
       this->set_integration_scheme(&Default_integration_scheme);
     }
 
+
     /// Broken copy constructor
     QHermiteElement(const QHermiteElement& dummy)
     {
@@ -123,6 +127,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("QHermiteElement");
     }
+
 
     /// Check whether the local coordinate are valid or not
     bool local_coord_is_valid(const Vector<double>& s)
@@ -147,10 +152,8 @@ namespace oomph
       for (unsigned i = 0; i < ncoord; i++)
       {
         // Adjust to move it onto the boundary
-        if (s[i] > s_max())
-          s[i] = s_max();
-        if (s[i] < s_min())
-          s[i] = s_min();
+        if (s[i] > s_max()) s[i] = s_max();
+        if (s[i] < s_min()) s[i] = s_min();
       }
     }
 
@@ -186,6 +189,7 @@ namespace oomph
                        DShape& dpsids,
                        DShape& d2psids) const;
 
+
     /// \short Overload the template-free interface for the calculation of
     /// the inverse jacobian. The element dimension must be passed to
     /// the function
@@ -220,6 +224,7 @@ namespace oomph
     {
       return 1.0;
     }
+
 
     /// Get local coordinates of node j in the element; vector sets its own size
     void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
@@ -373,6 +378,7 @@ namespace oomph
     return nplot;
   }
 
+
   //=======================================================================
   /// Get cector of local coordinates of plot point i (when plotting nplot
   /// points in each "coordinate direction).
@@ -482,6 +488,7 @@ namespace oomph
         jacobian, inverse_jacobian, jacobian2, dbasis, d2basis);
     }
 
+
   public:
     /// Constructor
     DiagQHermiteElement() : QHermiteElement<DIM>() {}
@@ -502,6 +509,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// SolidQHermiteElement elements are Hermite elements whose Jacobian
   /// matrices include derivatives w.r.t. the Eulerian positions
@@ -510,9 +518,8 @@ namespace oomph
   /// coordinates.
   //=======================================================================
   template<unsigned DIM>
-  class SolidQHermiteElement :
-    public virtual QHermiteElement<DIM>,
-    public virtual SolidFiniteElement
+  class SolidQHermiteElement : public virtual QHermiteElement<DIM>,
+                               public virtual SolidFiniteElement
   {
   public:
     /// Constructor
@@ -583,14 +590,13 @@ namespace oomph
   /// much cheaper.
   //============================================================================
   template<unsigned DIM>
-  class SolidDiagQHermiteElement :
-    public virtual DiagQHermiteElement<DIM>,
-    public virtual SolidQHermiteElement<DIM>
+  class SolidDiagQHermiteElement : public virtual DiagQHermiteElement<DIM>,
+                                   public virtual SolidQHermiteElement<DIM>
   {
   public:
     /// Constructor
-    SolidDiagQHermiteElement() :
-      DiagQHermiteElement<DIM>(), SolidQHermiteElement<DIM>()
+    SolidDiagQHermiteElement()
+      : DiagQHermiteElement<DIM>(), SolidQHermiteElement<DIM>()
     {
     }
 

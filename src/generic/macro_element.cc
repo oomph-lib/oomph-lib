@@ -74,6 +74,7 @@ namespace oomph
     Domain_pt->macro_element_boundary(
       t, Macro_element_number, QuadTreeNames::N, zeta, corner_NW);
 
+
     // Get the position on the N/S/W/E edges
     zeta[0] = s[0];
     Domain_pt->macro_element_boundary(
@@ -87,6 +88,7 @@ namespace oomph
     zeta[0] = s[1];
     Domain_pt->macro_element_boundary(
       t, Macro_element_number, QuadTreeNames::E, zeta, bound_E);
+
 
     for (int i = 0; i < 2; i++)
     {
@@ -160,6 +162,7 @@ namespace oomph
     Domain_pt->macro_element_boundary(
       t, Macro_element_number, QuadTreeNames::N, zeta, corner_NW);
 
+
     // Get the position on the N/S/W/E edges
     zeta[0] = S[0];
     Domain_pt->macro_element_boundary(
@@ -173,6 +176,7 @@ namespace oomph
     zeta[0] = S[1];
     Domain_pt->macro_element_boundary(
       t, Macro_element_number, QuadTreeNames::E, zeta, bound_E);
+
 
     for (int i = 0; i < 2; i++)
     {
@@ -200,6 +204,7 @@ namespace oomph
     }
   }
 
+
   //=================================================================
   /// \short Output all macro element boundaries as tecplot zones
   //=================================================================
@@ -224,6 +229,7 @@ namespace oomph
       }
     }
   }
+
 
   //=============================================================================
   /// \short Assembles the jacobian of the mapping from the macro coordinates to
@@ -251,6 +257,7 @@ namespace oomph
 
     Vector<double> zeta(1);
 
+
     // Determine Vectors to corners
     zeta[0] = 1.0;
     Domain_pt->macro_element_boundary(
@@ -264,6 +271,7 @@ namespace oomph
     zeta[0] = -1.0;
     Domain_pt->macro_element_boundary(
       t, Macro_element_number, QuadTreeNames::N, zeta, corner_NW);
+
 
     // Get the position and first derivativeson the N/S/W/E edges
     zeta[0] = S[0];
@@ -286,6 +294,7 @@ namespace oomph
       t, Macro_element_number, QuadTreeNames::E, zeta, bound_E);
     Domain_pt->dmacro_element_boundary(
       t, Macro_element_number, QuadTreeNames::E, zeta, dbound_E);
+
 
     // dr0/dm0
     jacobian(0, 0) =
@@ -316,6 +325,7 @@ namespace oomph
       0.5 * (-bound_S[1] + bound_N[1] + dbound_W[1] + dbound_E[1] -
              dbound_W[1] * S[0] + dbound_E[1] * S[0]);
   }
+
 
   //=============================================================================
   /// \short Assembles the second derivative jacobian of the mapping from the
@@ -348,6 +358,7 @@ namespace oomph
 
     Vector<double> zeta(1);
 
+
     // Determine Vectors to corners
     zeta[0] = 1.0;
     Domain_pt->macro_element_boundary(
@@ -361,6 +372,7 @@ namespace oomph
     zeta[0] = -1.0;
     Domain_pt->macro_element_boundary(
       t, Macro_element_number, QuadTreeNames::N, zeta, corner_NW);
+
 
     // Get the position and first derivativeson the N/S/W/E edges
     zeta[0] = S[0];
@@ -392,6 +404,7 @@ namespace oomph
     Domain_pt->d2macro_element_boundary(
       t, Macro_element_number, QuadTreeNames::E, zeta, d2bound_E);
 
+
     // d2x0/dm0^2
     jacobian2(0, 0) = 0.5 * (d2bound_S[0] + d2bound_N[0] - d2bound_S[0] * S[1] +
                              d2bound_N[0] * S[1]);
@@ -414,9 +427,11 @@ namespace oomph
       0.5 * (-dbound_W[1] + dbound_E[1] - dbound_S[1] + dbound_N[1]);
   }
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //=================================================================
   /// \short Get global position r(S) at discrete time level t.
@@ -458,6 +473,7 @@ namespace oomph
     Domain_pt->macro_element_boundary(
       t, Macro_element_number, OcTreeNames::R, zeta, corner_RUF);
 
+
     // get the position of the 4 corners of the center slice
     Vector<double> corner_LD(3);
     Vector<double> corner_RD(3);
@@ -486,6 +502,7 @@ namespace oomph
       t, Macro_element_number, OcTreeNames::B, zeta, face_B);
     Domain_pt->macro_element_boundary(
       t, Macro_element_number, OcTreeNames::F, zeta, face_F);
+
 
     // get position on the edges of the middle slice
     Vector<double> edge_mid_L(3);
@@ -547,6 +564,7 @@ namespace oomph
     Domain_pt->macro_element_boundary(
       t, Macro_element_number, OcTreeNames::R, zeta, edge_front_R);
 
+
     for (unsigned i = 0; i < 3; i++)
     {
       // Position on the middle slice
@@ -571,6 +589,7 @@ namespace oomph
       slice_mid +=
         diff_L * (1.0 - 0.5 * (S[0] + 1.0)) + diff_R * 0.5 * (S[0] + 1.0) +
         diff_D * (1.0 - 0.5 * (S[1] + 1.0)) + diff_U * 0.5 * (S[1] + 1.0);
+
 
       // Position on the back slice
       //===========================
@@ -632,6 +651,7 @@ namespace oomph
              0.5 * (1 - S[2]) * diff_back;
     }
   }
+
 
   //=================================================================
   /// \short Output all macro element boundaries as tecplot zones

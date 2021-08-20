@@ -70,6 +70,7 @@ namespace oomph
     h_ratio = 1.0;
   }
 
+
   //=======================================================================
   /// Get position vector to and normal vector on wall
   //=======================================================================
@@ -176,6 +177,7 @@ namespace oomph
     N[1] = interpolated_A(0, 0) / sqrt(length);
   }
 
+
   //=======================================================================
   /// Get position vector to and non-unit tangent vector on wall: dr/ds
   //=======================================================================
@@ -262,6 +264,7 @@ namespace oomph
       }
     }
   }
+
 
   //=======================================================================
   /// Return the residuals for the equations of Kirchhoff-Love beam
@@ -524,6 +527,7 @@ namespace oomph
     } // End of loop over the integration points
   }
 
+
   //=======================================================================
   /// Get FE jacobian and residuals (Jacobian done by finite differences)
   //=======================================================================
@@ -556,6 +560,7 @@ namespace oomph
                                                              jacobian);
   }
 
+
   //=======================================================================
   /// Compute the potential (strain) and kinetic energy of the
   /// element (wrapper function).
@@ -573,6 +578,7 @@ namespace oomph
     // Sum components of potential energy
     pot_en = stretch + bend;
   }
+
 
   //=======================================================================
   /// Compute the potential (strain) and kinetic energy of the
@@ -812,6 +818,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Output function
   //=======================================================================
@@ -861,6 +868,7 @@ namespace oomph
         veloc[i] = 0.0;
         posn[i] = 0.0;
       }
+
 
       // Calculate displacements, accelerations and spatial derivatives
       for (unsigned l = 0; l < n_node; l++)
@@ -914,6 +922,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// Output function
   //=======================================================================
@@ -922,6 +931,7 @@ namespace oomph
     unsigned n_plot = 5;
     output(outfile, n_plot);
   }
+
 
   //=======================================================================
   /// C-style output position at previous time (t=0: present; t>0: previous)
@@ -964,6 +974,7 @@ namespace oomph
       fprintf(file_pt, "\n");
     }
   }
+
 
   //=======================================================================
   /// Output function
@@ -1015,6 +1026,7 @@ namespace oomph
         veloc[i] = 0.0;
         posn[i] = 0.0;
       }
+
 
       // Calculate displacements, accelerations and spatial derivatives
       for (unsigned l = 0; l < n_node; l++)
@@ -1076,6 +1088,7 @@ namespace oomph
     }
   }
 
+
   //=======================================================================
   /// C-style output function
   //=======================================================================
@@ -1088,6 +1101,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Function used to find the local coordinate s that corresponds to the
@@ -1135,6 +1149,7 @@ namespace oomph
     // The GeomObject that contains the zeta coordinate is "this":
     geom_object_pt = this;
 
+
     // Find the fraction along the element
     double zeta_fraction =
       (zeta[0] - raw_lagrangian_position(lo, 0)) /
@@ -1164,6 +1179,7 @@ namespace oomph
     }
 #endif
 
+
     // Check for rounding error
     if (s[0] > 1.0)
     {
@@ -1174,6 +1190,7 @@ namespace oomph
       s[0] = -1.0;
     }
   }
+
 
   //=========================================================================
   /// Define the dposition function. This is used to set no-slip boundary
@@ -1285,9 +1302,11 @@ namespace oomph
     }
   }
 
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
+
 
   //===========================================================================
   /// Constructor, takes the pointer to the "bulk" element, the
@@ -1298,8 +1317,8 @@ namespace oomph
   //===========================================================================
   ClampedSlidingHermiteBeamBoundaryConditionElement::
     ClampedSlidingHermiteBeamBoundaryConditionElement(
-      FiniteElement* const& bulk_el_pt, const int& face_index) :
-    FaceGeometry<HermiteBeamElement>(), FaceElement()
+      FiniteElement* const& bulk_el_pt, const int& face_index)
+    : FaceGeometry<HermiteBeamElement>(), FaceElement()
   {
     // Number of nodal position types: 2
     set_nnodal_position_type(2);
@@ -1329,6 +1348,7 @@ namespace oomph
     nadditional_data_values[0] = 2;
     resize_nodes(nadditional_data_values);
   }
+
 
   //===========================================================================
   /// Add the element's contribution to its residual vector
@@ -1425,5 +1445,6 @@ namespace oomph
       }
     }
   }
+
 
 } // namespace oomph

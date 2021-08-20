@@ -195,16 +195,17 @@ namespace oomph
     }
   };
 
+
   template<unsigned DIM, unsigned NNODE_1D>
-  class QSpectralScalarAdvectionElement :
-    public virtual QSpectralElement<DIM, NNODE_1D>,
-    public virtual ScalarAdvectionEquations<DIM>
+  class QSpectralScalarAdvectionElement
+    : public virtual QSpectralElement<DIM, NNODE_1D>,
+      public virtual ScalarAdvectionEquations<DIM>
   {
   public:
     ///\short  Constructor: Call constructors for QElement and
     /// Advection Diffusion equations
-    QSpectralScalarAdvectionElement() :
-      QSpectralElement<DIM, NNODE_1D>(), ScalarAdvectionEquations<DIM>()
+    QSpectralScalarAdvectionElement()
+      : QSpectralElement<DIM, NNODE_1D>(), ScalarAdvectionEquations<DIM>()
     {
     }
 
@@ -248,6 +249,7 @@ namespace oomph
       ScalarAdvectionEquations<DIM>::output(outfile, n_plot);
     }
 
+
     /*/// \short C-style output function:
    ///  x,y,u   or    x,y,z,u
    void output(FILE* file_pt)
@@ -284,6 +286,7 @@ namespace oomph
       output_fct(outfile,n_plot,time,exact_soln_pt);
       }*/
 
+
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
@@ -305,6 +308,7 @@ namespace oomph
   };
 
   // Inline functions:
+
 
   //======================================================================
   /// \short Define the shape functions and test functions and derivatives
@@ -338,6 +342,7 @@ namespace oomph
     return J;
   }
 
+
   //======================================================================
   /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
@@ -363,9 +368,11 @@ namespace oomph
     return J;
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// \short Face geometry for the QScalarAdvectionElement elements:
@@ -374,8 +381,8 @@ namespace oomph
   /// their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<QSpectralScalarAdvectionElement<DIM, NNODE_1D>> :
-    public virtual QSpectralElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<QSpectralScalarAdvectionElement<DIM, NNODE_1D>>
+    : public virtual QSpectralElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
@@ -383,25 +390,26 @@ namespace oomph
     FaceGeometry() : QSpectralElement<DIM - 1, NNODE_1D>() {}
   };
 
+
   //======================================================================
   /// FaceElement for Discontinuous Galerkin Problems
   //======================================================================
   template<class ELEMENT>
-  class DGScalarAdvectionFaceElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual DGFaceElement
+  class DGScalarAdvectionFaceElement : public virtual FaceGeometry<ELEMENT>,
+                                       public virtual DGFaceElement
   {
   public:
     /// Constructor
     DGScalarAdvectionFaceElement(FiniteElement* const& element_pt,
-                                 const int& face_index) :
-      FaceGeometry<ELEMENT>(), DGFaceElement()
+                                 const int& face_index)
+      : FaceGeometry<ELEMENT>(), DGFaceElement()
     {
       // Attach geometric information to the element
       // N.B. This function also assigns nbulk_value from required_nvalue
       // of the bulk element.
       element_pt->build_face_element(face_index, this);
     }
+
 
     // There is a single required n_flux
     unsigned required_nflux()
@@ -459,13 +467,13 @@ namespace oomph
   {
   };
 
+
   //==================================================================
   // Specialization for 1D DG Advection element
   //==================================================================
   template<unsigned NNODE_1D>
-  class DGSpectralScalarAdvectionElement<1, NNODE_1D> :
-    public QSpectralScalarAdvectionElement<1, NNODE_1D>,
-    public DGElement
+  class DGSpectralScalarAdvectionElement<1, NNODE_1D>
+    : public QSpectralScalarAdvectionElement<1, NNODE_1D>, public DGElement
   {
     friend class DGScalarAdvectionFaceElement<
       DGSpectralScalarAdvectionElement<1, NNODE_1D>>;
@@ -486,8 +494,8 @@ namespace oomph
     }
 
     // Constructor
-    DGSpectralScalarAdvectionElement() :
-      QSpectralScalarAdvectionElement<1, NNODE_1D>(), DGElement()
+    DGSpectralScalarAdvectionElement()
+      : QSpectralScalarAdvectionElement<1, NNODE_1D>(), DGElement()
     {
     }
 
@@ -505,6 +513,7 @@ namespace oomph
         DGSpectralScalarAdvectionElement<1, NNODE_1D>>(this, +1);
     }
 
+
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
@@ -519,6 +528,7 @@ namespace oomph
 
       this->add_flux_contributions_to_residuals(residuals, jacobian, flag);
     }
+
 
     //============================================================================
     /// Function that returns the current value of the residuals
@@ -540,6 +550,7 @@ namespace oomph
         throw OomphLibError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
+
 
       // Now let's assemble stuff
       const unsigned n_dof = this->ndof();
@@ -584,24 +595,25 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry of the 1D  DG elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<DGSpectralScalarAdvectionElement<1, NNODE_1D>> :
-    public virtual PointElement
+  class FaceGeometry<DGSpectralScalarAdvectionElement<1, NNODE_1D>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   //==================================================================
   /// Specialisation for 2D DG Elements
   //==================================================================
   template<unsigned NNODE_1D>
-  class DGSpectralScalarAdvectionElement<2, NNODE_1D> :
-    public QSpectralScalarAdvectionElement<2, NNODE_1D>,
-    public DGElement
+  class DGSpectralScalarAdvectionElement<2, NNODE_1D>
+    : public QSpectralScalarAdvectionElement<2, NNODE_1D>, public DGElement
   {
     friend class DGScalarAdvectionFaceElement<
       DGSpectralScalarAdvectionElement<2, NNODE_1D>>;
@@ -620,8 +632,8 @@ namespace oomph
     }
 
     // Constructor
-    DGSpectralScalarAdvectionElement() :
-      QSpectralScalarAdvectionElement<2, NNODE_1D>(), DGElement()
+    DGSpectralScalarAdvectionElement()
+      : QSpectralScalarAdvectionElement<2, NNODE_1D>(), DGElement()
     {
     }
 
@@ -640,6 +652,7 @@ namespace oomph
         DGSpectralScalarAdvectionElement<2, NNODE_1D>>(this, -1);
     }
 
+
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
@@ -656,30 +669,31 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry of the DG elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<DGSpectralScalarAdvectionElement<2, NNODE_1D>> :
-    public virtual QSpectralElement<1, NNODE_1D>
+  class FaceGeometry<DGSpectralScalarAdvectionElement<2, NNODE_1D>>
+    : public virtual QSpectralElement<1, NNODE_1D>
   {
   public:
     FaceGeometry() : QSpectralElement<1, NNODE_1D>() {}
   };
 
+
   //=============================================================
   /// Non-spectral version of the classes
   //============================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class QScalarAdvectionElement :
-    public virtual QElement<DIM, NNODE_1D>,
-    public virtual ScalarAdvectionEquations<DIM>
+  class QScalarAdvectionElement : public virtual QElement<DIM, NNODE_1D>,
+                                  public virtual ScalarAdvectionEquations<DIM>
   {
   public:
     ///\short  Constructor: Call constructors for QElement and
     /// Advection Diffusion equations
-    QScalarAdvectionElement() :
-      QElement<DIM, NNODE_1D>(), ScalarAdvectionEquations<DIM>()
+    QScalarAdvectionElement()
+      : QElement<DIM, NNODE_1D>(), ScalarAdvectionEquations<DIM>()
     {
     }
 
@@ -717,6 +731,7 @@ namespace oomph
       ScalarAdvectionEquations<DIM>::output(outfile, n_plot);
     }
 
+
     /*/// \short C-style output function:
    ///  x,y,u   or    x,y,z,u
    void output(FILE* file_pt)
@@ -753,6 +768,7 @@ namespace oomph
       output_fct(outfile,n_plot,time,exact_soln_pt);
       }*/
 
+
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
@@ -774,6 +790,7 @@ namespace oomph
   };
 
   // Inline functions:
+
 
   //======================================================================
   /// \short Define the shape functions and test functions and derivatives
@@ -807,6 +824,7 @@ namespace oomph
     return J;
   }
 
+
   //======================================================================
   /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
@@ -832,9 +850,11 @@ namespace oomph
     return J;
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// \short Face geometry for the QScalarAdvectionElement elements:
@@ -843,14 +863,15 @@ namespace oomph
   /// their 1D edges.
   //=======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  class FaceGeometry<QScalarAdvectionElement<DIM, NNODE_1D>> :
-    public virtual QElement<DIM - 1, NNODE_1D>
+  class FaceGeometry<QScalarAdvectionElement<DIM, NNODE_1D>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };
+
 
   //=================================================================
   /// General DGScalarAdvectionClass. Establish the template parameters
@@ -860,13 +881,13 @@ namespace oomph
   {
   };
 
+
   //==================================================================
   // Specialization for 1D DG Advection element
   //==================================================================
   template<unsigned NNODE_1D>
-  class DGScalarAdvectionElement<1, NNODE_1D> :
-    public QScalarAdvectionElement<1, NNODE_1D>,
-    public DGElement
+  class DGScalarAdvectionElement<1, NNODE_1D>
+    : public QScalarAdvectionElement<1, NNODE_1D>, public DGElement
   {
     friend class DGScalarAdvectionFaceElement<
       DGScalarAdvectionElement<1, NNODE_1D>>;
@@ -885,8 +906,8 @@ namespace oomph
     }
 
     // Constructor
-    DGScalarAdvectionElement() :
-      QScalarAdvectionElement<1, NNODE_1D>(), DGElement()
+    DGScalarAdvectionElement()
+      : QScalarAdvectionElement<1, NNODE_1D>(), DGElement()
     {
     }
 
@@ -906,6 +927,7 @@ namespace oomph
           this, +1);
     }
 
+
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
@@ -922,24 +944,25 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry of the 1D  DG elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<DGScalarAdvectionElement<1, NNODE_1D>> :
-    public virtual PointElement
+  class FaceGeometry<DGScalarAdvectionElement<1, NNODE_1D>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   //==================================================================
   /// Specialisation for 2D DG Elements
   //==================================================================
   template<unsigned NNODE_1D>
-  class DGScalarAdvectionElement<2, NNODE_1D> :
-    public QScalarAdvectionElement<2, NNODE_1D>,
-    public DGElement
+  class DGScalarAdvectionElement<2, NNODE_1D>
+    : public QScalarAdvectionElement<2, NNODE_1D>, public DGElement
   {
     friend class DGScalarAdvectionFaceElement<
       DGScalarAdvectionElement<2, NNODE_1D>>;
@@ -958,8 +981,8 @@ namespace oomph
     }
 
     // Constructor
-    DGScalarAdvectionElement() :
-      QScalarAdvectionElement<2, NNODE_1D>(), DGElement()
+    DGScalarAdvectionElement()
+      : QScalarAdvectionElement<2, NNODE_1D>(), DGElement()
     {
     }
 
@@ -982,6 +1005,7 @@ namespace oomph
           this, -1);
     }
 
+
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
@@ -998,16 +1022,18 @@ namespace oomph
     }
   };
 
+
   //=======================================================================
   /// Face geometry of the DG elements
   //=======================================================================
   template<unsigned NNODE_1D>
-  class FaceGeometry<DGScalarAdvectionElement<2, NNODE_1D>> :
-    public virtual QElement<1, NNODE_1D>
+  class FaceGeometry<DGScalarAdvectionElement<2, NNODE_1D>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };
+
 
 } // namespace oomph
 

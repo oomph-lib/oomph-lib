@@ -100,6 +100,7 @@ namespace oomph
       }
     }
 
+
     // Calculates the Gauss Legendre abscissas of degree p=Nnode-1
     void gl_nodes(const unsigned& Nnode, Vector<double>& x)
     {

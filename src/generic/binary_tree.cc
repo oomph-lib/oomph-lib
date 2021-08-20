@@ -427,6 +427,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Constructor for BinaryTreeForest:
   ///
@@ -434,8 +435,8 @@ namespace oomph
   ///  - trees_pt[], the Vector of pointers to the constituent trees
   ///    (BinaryTreeRoot objects)
   //========================================================================
-  BinaryTreeForest::BinaryTreeForest(Vector<TreeRoot*>& trees_pt) :
-    TreeForest(trees_pt)
+  BinaryTreeForest::BinaryTreeForest(Vector<TreeRoot*>& trees_pt)
+    : TreeForest(trees_pt)
   {
 #ifdef LEAK_CHECK
     LeakCheckNames::BinaryTreeForest_build += 1;
@@ -535,10 +536,8 @@ namespace oomph
         bool is_R_neighbour = Trees_pt[j]->object_pt()->get_node_number(
                                 Trees_pt[i]->object_pt()->node_pt(n - 1)) != -1;
 
-        if (is_L_neighbour)
-          Trees_pt[i]->neighbour_pt(L) = Trees_pt[j];
-        if (is_R_neighbour)
-          Trees_pt[i]->neighbour_pt(R) = Trees_pt[j];
+        if (is_L_neighbour) Trees_pt[i]->neighbour_pt(L) = Trees_pt[j];
+        if (is_R_neighbour) Trees_pt[i]->neighbour_pt(R) = Trees_pt[j];
       }
     } // End of loop over all trees
   }

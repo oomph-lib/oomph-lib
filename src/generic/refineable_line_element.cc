@@ -541,6 +541,7 @@ namespace oomph
           }
         } // End of loop over all nodes in element
 
+
         // If the element is a MacroElementNodeUpdateElement, set the update
         // parameters for the current element's nodes -- all this needs is
         // the vector of (pointers to the) geometric objects that affect the
@@ -632,6 +633,7 @@ namespace oomph
             aux_el_pt->enable_bypass_fill_in_jacobian_from_geometric_data();
           }
         }
+
 
         // Now do further build (if any)
         further_build();

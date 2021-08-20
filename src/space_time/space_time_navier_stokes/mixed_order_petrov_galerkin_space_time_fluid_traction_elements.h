@@ -48,9 +48,9 @@ namespace oomph
   /// a separate equations class
   //======================================================================
   template<class ELEMENT>
-  class NavierStokesMixedOrderSpaceTimeTractionElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class NavierStokesMixedOrderSpaceTimeTractionElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual FaceElement
   {
   private:
     /// Pointer to an imposed traction function
@@ -65,8 +65,8 @@ namespace oomph
     NavierStokesMixedOrderSpaceTimeTractionElement(
       FiniteElement* const& element_pt,
       const int& face_index,
-      const bool& called_from_refineable_constructor = false) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+      const bool& called_from_refineable_constructor = false)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -116,8 +116,10 @@ namespace oomph
       Dim = this->node_pt(0)->ndim();
     } // End of NavierStokesMixedOrderSpaceTimeTractionElement
 
+
     /// Destructor should not delete anything
     ~NavierStokesMixedOrderSpaceTimeTractionElement() {}
+
 
     /// Access function for the imposed traction pointer
     void (*&traction_fct_pt())(const double& t,
@@ -129,6 +131,7 @@ namespace oomph
       return Traction_fct_pt;
     } // End of traction_fct_pt
 
+
     /// This function returns just the residuals
     inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -137,6 +140,7 @@ namespace oomph
       fill_in_generic_residual_contribution_fluid_traction(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
+
 
     /// This function returns the residuals and the jacobian
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -147,11 +151,13 @@ namespace oomph
         residuals, jacobian, 1);
     }
 
+
     /// Overload the output function
     void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
+
 
     /// Output function: x,y,[z],u,v,[w],p in tecplot format
     void output(std::ostream& outfile, const unsigned& nplot)
@@ -167,6 +173,7 @@ namespace oomph
       DenseMatrix<double>& jacobian,
       const unsigned& flag);
 
+
     /// \short The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceSpaceTimeElement representation, by default
@@ -176,6 +183,7 @@ namespace oomph
     {
       return FaceElement::zeta_nodal(n, k, i);
     } // End of zeta_nodal
+
 
     /// \short Access function that returns the local equation numbers
     /// for velocity components.
@@ -289,6 +297,7 @@ namespace oomph
       return J_eulerian_at_knot(ipt);
     } // End of shape_and_test_at_knot
 
+
     /// Function to calculate the traction applied to the fluid
     void get_traction(const double& time,
                       const Vector<double>& x,
@@ -312,6 +321,7 @@ namespace oomph
         (*Traction_fct_pt)(time, x, n, result);
       } // if (Traction_fct_pt==0)
     } // End of get_traction
+
 
     /// The highest dimension of the problem
     unsigned Dim;
@@ -463,22 +473,24 @@ namespace oomph
   /// THIS IS THE REFINEABLE VERSION.
   //======================================================================
   template<class ELEMENT>
-  class RefineableNavierStokesMixedOrderSpaceTimeTractionElement :
-    public virtual NavierStokesMixedOrderSpaceTimeTractionElement<ELEMENT>,
-    public virtual NonRefineableElementWithHangingNodes
+  class RefineableNavierStokesMixedOrderSpaceTimeTractionElement
+    : public virtual NavierStokesMixedOrderSpaceTimeTractionElement<ELEMENT>,
+      public virtual NonRefineableElementWithHangingNodes
   {
   public:
     /// Constructor, which takes a "bulk" element and the face index
     RefineableNavierStokesMixedOrderSpaceTimeTractionElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      // we're calling this from the constructor of the refineable version.
-      NavierStokesMixedOrderSpaceTimeTractionElement<ELEMENT>(
-        element_pt, face_index, true)
+      FiniteElement* const& element_pt, const int& face_index)
+      : // we're calling this from the constructor of the refineable version.
+        NavierStokesMixedOrderSpaceTimeTractionElement<ELEMENT>(
+          element_pt, face_index, true)
     {
     }
 
+
     /// Destructor should not delete anything
     ~RefineableNavierStokesMixedOrderSpaceTimeTractionElement() {}
+
 
     /// \short Number of continuously interpolated values are the
     /// same as those in the bulk element.
@@ -504,6 +516,7 @@ namespace oomph
       refineable_fill_in_generic_residual_contribution_fluid_traction(
         residuals, jacobian, 1);
     }
+
 
   protected:
     /// \short This function returns the residuals for the traction function.

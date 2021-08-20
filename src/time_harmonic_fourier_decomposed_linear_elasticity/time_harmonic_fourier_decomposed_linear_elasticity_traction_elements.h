@@ -34,8 +34,10 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
-#include "generic/Qelements.h"
+//#include "generic/Qelements.h"
+#include "sgeneric/Qelements.h"
 
 namespace oomph
 {
@@ -62,6 +64,7 @@ namespace oomph
   } // namespace
     // TimeHarmonicFourierDecomposedLinearElasticityTractionElementHelper
 
+
   //======================================================================
   /// A class for elements that allow the imposition of an applied traction
   /// in the equations of time-harmonic Fourier decomposed linear elasticity.
@@ -70,9 +73,9 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class ELEMENT>
-  class TimeHarmonicFourierDecomposedLinearElasticityTractionElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class TimeHarmonicFourierDecomposedLinearElasticityTractionElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual FaceElement
   {
   protected:
     /// Index at which the i-th displacement component is stored
@@ -88,6 +91,7 @@ namespace oomph
                             const Vector<double>& n,
                             Vector<std::complex<double>>& result);
 
+
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Eulerian coordinate and normal vector and return the load
     /// vector (not all of the input arguments will be required for all specific
@@ -101,6 +105,7 @@ namespace oomph
       Traction_fct_pt(x, n, traction);
     }
 
+
     /// \short Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
@@ -108,12 +113,13 @@ namespace oomph
     void fill_in_contribution_to_residuals_time_harmonic_fourier_decomposed_linear_elasticity_traction(
       Vector<double>& residuals);
 
+
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     TimeHarmonicFourierDecomposedLinearElasticityTractionElement(
-      FiniteElement* const& element_pt, const int& face_index) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+      FiniteElement* const& element_pt, const int& face_index)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -151,6 +157,7 @@ namespace oomph
           Zero_traction_fct;
     }
 
+
     /// Reference to the traction function pointer
     void (*&traction_fct_pt())(const Vector<double>& x,
                                const Vector<double>& n,
@@ -159,12 +166,14 @@ namespace oomph
       return Traction_fct_pt;
     }
 
+
     /// Return the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_time_harmonic_fourier_decomposed_linear_elasticity_traction(
         residuals);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -211,6 +220,7 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
+
     /// \short Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
@@ -248,6 +258,7 @@ namespace oomph
     // Traction vector
     get_traction(ipt, x, unit_normal, traction);
   }
+
 
   //=====================================================================
   /// Return the residuals for the
@@ -416,6 +427,7 @@ namespace oomph
       } // End of loop over shape functions
     } // End of loop over integration points
   }
+
 
 } // namespace oomph
 

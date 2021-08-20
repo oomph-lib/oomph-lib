@@ -36,8 +36,10 @@
 #include "mpi.h"
 #endif
 
+
 #include "triangle_mesh.h"
 #include "Telements.h"
+
 
 namespace oomph
 {
@@ -74,6 +76,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("TriangleScaffoldMesh");
     }
+
 
     /// Empty destructor
     ~TriangleScaffoldMesh() {}

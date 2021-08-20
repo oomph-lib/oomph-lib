@@ -92,6 +92,7 @@ namespace oomph
       }
     }
 
+
     /// \short Set intrinisic coordinates in GeomObject
     void set_zeta_in_geom_object(const Vector<double>& zeta)
     {
@@ -157,6 +158,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Facet for Tet mesh generation. Can lie on boundary
   /// (identified via one-based enumeration!) and can have
@@ -166,9 +168,10 @@ namespace oomph
   {
   public:
     /// Constructor: Specify number of vertices
-    TetMeshFacet(const unsigned& nvertex) :
-      One_based_boundary_id(0), // Initialision implies not on any boundary
-      One_based_region_id_that_facet_is_embedded_in(0) // Initialisation implies
+    TetMeshFacet(const unsigned& nvertex)
+      : One_based_boundary_id(0), // Initialision implies not on any boundary
+        One_based_region_id_that_facet_is_embedded_in(
+          0) // Initialisation implies
     // not embedded in any region
     {
       Vertex_pt.resize(nvertex, 0);
@@ -283,14 +286,17 @@ namespace oomph
     /// it's zero.
     std::set<unsigned> One_based_adjacent_region_id;
 
+
     /// \short Facet is to be embedded in specified one-based region.
     /// Defaults to zero, indicating that its not embedded.
     unsigned One_based_region_id_that_facet_is_embedded_in;
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Base class for tet mesh boundary defined by polygonal
@@ -300,8 +306,9 @@ namespace oomph
   {
   public:
     ///\short Constructor:
-    TetMeshFacetedSurface() :
-      Boundaries_can_be_split_in_tetgen(true), Geom_object_with_boundaries_pt(0)
+    TetMeshFacetedSurface()
+      : Boundaries_can_be_split_in_tetgen(true),
+        Geom_object_with_boundaries_pt(0)
     {
     }
 
@@ -391,6 +398,7 @@ namespace oomph
       }
     }
 
+
     /// Output
     void output(const std::string& filename) const
     {
@@ -457,6 +465,7 @@ namespace oomph
                 (zeta_vertex[1][1] - zeta_vertex[0][1]) * zeta_boundary;
     }
 
+
     /// \short Facet connectivity: vertex_index[j] is the index of the
     /// j-th vertex (in the Vertex_pt vector) in facet f. Bit of an obscure
     /// functionality that's only needed for setup tetgen_io.
@@ -487,6 +496,7 @@ namespace oomph
     /// \short GeomObject with boundaries associated with this surface
     DiskLikeGeomObjectWithBoundaries* Geom_object_with_boundaries_pt;
 
+
   private:
     /// Setup facet connectivity for tetgen
     void setup_facet_connectivity_for_tetgen()
@@ -514,9 +524,11 @@ namespace oomph
     }
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// Base class for closed tet mesh boundary bounded by polygonal
@@ -526,8 +538,8 @@ namespace oomph
   {
   public:
     ///\short Constructor:
-    TetMeshFacetedClosedSurface() :
-      TetMeshFacetedSurface(), Faceted_volume_represents_hole_for_gmsh(false)
+    TetMeshFacetedClosedSurface()
+      : TetMeshFacetedSurface(), Faceted_volume_represents_hole_for_gmsh(false)
     {
     }
 
@@ -588,6 +600,7 @@ namespace oomph
       return Internal_point_for_tetgen[j].second;
     }
 
+
     /// Is j-th internal point for tetgen associated with a hole?
     bool internal_point_identifies_hole_for_tetgen(const unsigned& j)
     {
@@ -599,6 +612,7 @@ namespace oomph
     {
       return (Internal_point_for_tetgen[j].second >= 0);
     }
+
 
   private:
     /// Storage for internal points for tetgen. Stores pair of:
@@ -614,8 +628,9 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 
-  class TetMeshFacetedClosedSurfaceForRemesh :
-    public TetMeshFacetedClosedSurface
+
+  class TetMeshFacetedClosedSurfaceForRemesh
+    : public TetMeshFacetedClosedSurface
   {
   public:
     // Constructor, which requires node, connectivity and boundary information
@@ -628,13 +643,16 @@ namespace oomph
     virtual ~TetMeshFacetedClosedSurfaceForRemesh();
   };
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+
 
   //================================================================
   /// Base class for tet meshes (meshes made of 3D tet elements).
@@ -727,6 +745,7 @@ namespace oomph
       this->setup_boundary_coordinates<ELEMENT>(b, switch_normal, some_file);
     }
 
+
     /// \short Setup boundary coordinate on boundary b which is
     /// assumed to be planar. Boundary coordinates are the
     /// x-y coordinates in the plane of that boundary, with the
@@ -778,6 +797,7 @@ namespace oomph
       bool switch_normal = false;
       this->setup_boundary_coordinates<ELEMENT>(b, switch_normal, outfile);
     }
+
 
     /// Return the number of elements adjacent to boundary b in region r
     inline unsigned nboundary_element_in_region(const unsigned& b,
@@ -840,6 +860,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
     }
+
 
     /// Return the number of regions specified by attributes
     unsigned nregion()
@@ -978,12 +999,14 @@ namespace oomph
     /// that the boundary coordinates are set up consistently.
     void snap_nodes_onto_geometric_objects();
 
+
     /// \short Non-Delaunay split elements that have three faces on a boundary
     /// into sons. Timestepper species timestepper for new nodes; defaults
     /// to to steady timestepper.
     template<class ELEMENT>
     void split_elements_in_corners(
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
+
 
     /// Setup lookup schemes which establish which elements are located
     /// next to mesh's boundaries (wrapper to suppress doc).
@@ -993,9 +1016,11 @@ namespace oomph
       this->setup_boundary_element_info(outfile);
     }
 
+
     /// \short Setup lookup schemes which establish which elements are located
     /// next to mesh's boundaries. Doc in outfile (if it's open).
     void setup_boundary_element_info(std::ostream& outfile);
+
 
   protected:
     /// \short Vectors of vectors of elements in each region (note: this just
@@ -1038,13 +1063,16 @@ namespace oomph
     TimeStepper* Time_stepper_pt;
   };
 
+
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
 
+
   //###########################################################################
   // Templated member functions
   //###########################################################################
+
 
   //======================================================================
   /// Setup boundary coordinate on boundary b which is
@@ -1079,6 +1107,7 @@ namespace oomph
 
     // ...and a vector normal to it
     Vector<double> b1(3);
+
 
     // Facet?
     TetMeshFacet* f_pt = 0;
@@ -1200,6 +1229,7 @@ namespace oomph
                   << lower_left_node_pt->x(1) << " "
                   << lower_left_node_pt->x(2) << "\n ";*/
 
+
         // Unit vector connecting lower left and upper right nodes
         b0[0] = upper_right_node_pt->x(0) - lower_left_node_pt->x(0);
         b0[1] = upper_right_node_pt->x(1) - lower_left_node_pt->x(1);
@@ -1259,6 +1289,7 @@ namespace oomph
         // std::cout << normal[0] << " " << normal[1] << " " << normal[2] <<
         // "\n";
 
+
         // Check that all elements have the same normal
         for (unsigned e = 0; e < nel; e++)
         {
@@ -1270,6 +1301,7 @@ namespace oomph
           // Dot product should be one!
           double dot_prod = normal[0] * my_normal[0] +
                             normal[1] * my_normal[1] + normal[2] * my_normal[2];
+
 
           double error = abs(dot_prod) - 1.0;
           if (abs(error) > Tolerance_for_boundary_finding)
@@ -1288,6 +1320,7 @@ namespace oomph
 
           // std::cout << "B1 ";
           // std::cout << b1[0] << " " << b1[1] << " " << b1[2] << "\n";
+
 
           // Assign boundary coordinates: projection onto the axes
           for (unsigned j = 0; j < nnod; j++)
@@ -1358,6 +1391,7 @@ namespace oomph
         } // End of if vertices are in the same plane
       }
 
+
       // Indicate that boundary coordinate has been set up
       if (do_for_real == 1)
       {
@@ -1412,6 +1446,7 @@ namespace oomph
       }
     }
   }
+
 
   //======================================================================
   /// Snap boundaries specified by the IDs listed in boundary_id to
@@ -1479,6 +1514,7 @@ namespace oomph
       face_el_pt.push_back(new FreeStandingFaceElement<ELEMENT>);
     }
 
+
     // Now build nodes
     unsigned n_dim = 3;
     unsigned n_position_type = 1;
@@ -1498,6 +1534,7 @@ namespace oomph
       node_number[node_nmbr] = j;
     }
 
+
     // Now assign nodes to elements -- each element represents
     // distinct boundary; assign enumeration as specified by
     // boundary_id.
@@ -1514,6 +1551,7 @@ namespace oomph
       face_el_pt[e]->set_boundary_number_in_bulk_mesh(boundary_id[e]);
       face_el_pt[e]->set_nodal_dimension(3);
     }
+
 
     // Setup boundary coordinates for each facet, using
     // the same strategy as for the simplex boundaries
@@ -1727,6 +1765,7 @@ namespace oomph
                                                              zeta);
     }
 
+
     // Loop over elements/facets = boundaries to snap
     bool success = true;
     for (unsigned b = 0; b < nel; b++)
@@ -1791,6 +1830,7 @@ namespace oomph
         //                << this->nboundary_element(boundary_id[b])
         //                << " element[s] " << std::endl;
       }
+
 
       // Loop over bulk elements that are adjacent to quadratic boundary
       Vector<double> boundary_zeta(2);
@@ -1906,6 +1946,7 @@ namespace oomph
       delete nod_pt[j];
     }
   }
+
 
   //========================================================================
   /// Non-delaunay split elements that have three faces on a boundary
@@ -2057,6 +2098,7 @@ namespace oomph
           node4_pt = el1_pt->construct_boundary_node(8, time_stepper_pt);
         }
 
+
         // Create second new element
         FiniteElement* el2_pt = new ELEMENT;
 
@@ -2126,6 +2168,7 @@ namespace oomph
           el3_pt->node_pt(13) = el_pt->node_pt(13);
         }
 
+
         // Create fourth new element
         FiniteElement* el4_pt = new ELEMENT;
 
@@ -2158,6 +2201,7 @@ namespace oomph
           el4_pt->node_pt(13) = node7_pt;
           ;
         }
+
 
         // Add new elements and nodes
         new_or_retained_el_pt.push_back(el1_pt);
@@ -2212,6 +2256,7 @@ namespace oomph
             node4_pt->x(i) = 0.5 * (el_pt->node_pt(3)->x(i) + node0_pt->x(i));
           }
         }
+
 
         // Construct the four interior nodes if needed
         // and add to the list

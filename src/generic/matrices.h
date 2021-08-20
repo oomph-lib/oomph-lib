@@ -39,6 +39,7 @@
 #include "mpi.h"
 #endif
 
+
 // Needed for g++ in some cases
 #include <iomanip>
 
@@ -47,6 +48,7 @@
 #include "oomph_utilities.h"
 #include "linear_algebra_distribution.h"
 #include "double_vector.h"
+
 
 #ifdef OOMPH_HAS_TRILINOS
 #include "trilinos_helpers.h"
@@ -96,6 +98,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
     }
+
 
   public:
     /// (Empty) constructor
@@ -175,6 +178,7 @@ namespace oomph
     /// as i,j,a(i,j) for a(i,j)!=0 only.
     virtual void sparse_indexed_output_helper(std::ostream& outfile) const = 0;
 
+
     /// \short Indexed output function to print a matrix to the stream outfile
     /// as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if
     /// precision=0 then nothing is changed). If optional boolean flag is set
@@ -245,9 +249,11 @@ namespace oomph
     }
   };
 
+
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
+
 
   // Forward definition of the linear solver class
   class LinearSolver;
@@ -296,6 +302,7 @@ namespace oomph
     /// access since not all matrix formats allow efficient direct access!)
     virtual double operator()(const unsigned long& i,
                               const unsigned long& j) const = 0;
+
 
     /// Return a pointer to the linear solver object
     LinearSolver*& linear_solver_pt()
@@ -373,9 +380,11 @@ namespace oomph
     //                              DoubleMatrixBase& reduced_matrix)=0;
   };
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// \short Class for dense matrices, storing all the values of the
@@ -547,9 +556,11 @@ namespace oomph
     void sparse_indexed_output_helper(std::ostream& outfile) const;
   };
 
+
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+
 
   //================================================================
   /// Class for sparse matrices, that store only the non-zero values
@@ -674,6 +685,7 @@ namespace oomph
     }
   };
 
+
   //======================================================================
   /// \short A class for compressed row matrices, a sparse storage format
   /// Once again the recursive template trick is used to inform that base
@@ -691,6 +703,7 @@ namespace oomph
       Row_start = 0;
     }
 
+
     /// \short Constructor: Pass vector of values, vector of column indices,
     /// vector of row starts and number of rows and columns
     /// Number of nonzero entries is read
@@ -700,8 +713,8 @@ namespace oomph
              const Vector<int>& column_index_,
              const Vector<int>& row_start_,
              const unsigned long& n,
-             const unsigned long& m) :
-      SparseMatrix<T, CRMatrix<T>>()
+             const unsigned long& m)
+      : SparseMatrix<T, CRMatrix<T>>()
     {
       Column_index = 0;
       Row_start = 0;
@@ -709,8 +722,8 @@ namespace oomph
     }
 
     /// \short Copy constructor
-    CRMatrix(const CRMatrix& source_matrix) :
-      SparseMatrix<T, CRMatrix<T>>(source_matrix)
+    CRMatrix(const CRMatrix& source_matrix)
+      : SparseMatrix<T, CRMatrix<T>>(source_matrix)
     {
       // NNz, N and M are set the the copy constructor of the SparseMatrix
       // called above
@@ -856,6 +869,7 @@ namespace oomph
                const unsigned long& n,
                const unsigned long& m);
 
+
     /// \short Function to build matrix from pointers to arrays
     /// which hold the row starts, column indices and non-zero values.
     /// The final two arguments are the number of rows and columns.
@@ -868,6 +882,7 @@ namespace oomph
                             const unsigned long& n,
                             const unsigned long& m);
 
+
   protected:
     /// Column index
     int* Column_index;
@@ -876,17 +891,18 @@ namespace oomph
     int* Row_start;
   };
 
+
   // Forward definition for the superlu solver
   class SuperLUSolver;
+
 
   //=============================================================================
   /// \short A class for compressed row matrices. This is a distributable
   /// object.
   //=============================================================================
-  class CRDoubleMatrix :
-    public Matrix<double, CRDoubleMatrix>,
-    public DoubleMatrixBase,
-    public DistributableLinearAlgebraObject
+  class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix>,
+                         public DoubleMatrixBase,
+                         public DistributableLinearAlgebraObject
   {
   public:
     /// Default constructor
@@ -1258,9 +1274,11 @@ namespace oomph
     bool Built;
   };
 
+
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
+
 
   // Forward definition of the DenseLU class
   class DenseLU;
@@ -1289,8 +1307,8 @@ namespace oomph
                       const double& initial_val);
 
     /// Broken copy constructor
-    DenseDoubleMatrix(const DenseDoubleMatrix& matrix) :
-      DoubleMatrixBase(), DenseMatrix<double>()
+    DenseDoubleMatrix(const DenseDoubleMatrix& matrix)
+      : DoubleMatrixBase(), DenseMatrix<double>()
     {
       BrokenCopy::broken_copy("DenseDoubleMatrix");
     }
@@ -1300,6 +1318,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("DenseDoubleMatrix");
     }
+
 
     /// Return the number of rows of the matrix
     inline unsigned long nrow() const
@@ -1371,6 +1390,7 @@ namespace oomph
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
 
+
   //=================================================================
   /// A Rank 3 Tensor class
   //=================================================================
@@ -1427,6 +1447,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
     }
+
 
   public:
     /// Empty constructor
@@ -1486,6 +1507,7 @@ namespace oomph
       return *this;
     }
 
+
     /// One parameter constructor produces a cubic nxnxn tensor
     RankThreeTensor(const unsigned long& n)
     {
@@ -1517,6 +1539,7 @@ namespace oomph
       initialise(T(0));
 #endif
     }
+
 
     /// Three parameter constructor, general non-square tensor
     RankThreeTensor(const unsigned long& n_index1,
@@ -1698,6 +1721,7 @@ namespace oomph
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
 
+
   //=================================================================
   /// A Rank 4 Tensor class
   //=================================================================
@@ -1838,6 +1862,7 @@ namespace oomph
       return *this;
     }
 
+
     /// One parameter constructor produces a  nxnxnxn tensor
     RankFourTensor(const unsigned long& n)
     {
@@ -1872,6 +1897,7 @@ namespace oomph
       initialise(T(0));
 #endif
     }
+
 
     /// Four parameter constructor, general non-square tensor
     RankFourTensor(const unsigned long& n_index1,
@@ -2102,9 +2128,11 @@ namespace oomph
     }
   };
 
+
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+
 
   //=================================================================
   /// A Rank 5 Tensor class
@@ -2268,6 +2296,7 @@ namespace oomph
       return *this;
     }
 
+
     /// One parameter constructor produces a  nxnxnxnxn tensor
     RankFiveTensor(const unsigned long& n)
     {
@@ -2305,6 +2334,7 @@ namespace oomph
       initialise(T(0));
 #endif
     }
+
 
     /// Four parameter constructor, general non-square tensor
     RankFiveTensor(const unsigned long& n_index1,
@@ -2546,6 +2576,7 @@ namespace oomph
       return Tensordata[i];
     }
 
+
     /// \short Direct access to internal storage of data in flat-packed C-style
     /// column-major format. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
@@ -2566,6 +2597,7 @@ namespace oomph
       return (R * (Q * (P * (M * i + j) + k) + 0) + 0);
     }
   };
+
 
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
@@ -2588,6 +2620,7 @@ namespace oomph
       Column_start = 0;
     }
 
+
     /// \short Constructor: Pass vector of values, vector of row indices,
     /// vector of column starts and number of rows (can be suppressed
     /// for square matrices). Number of nonzero entries is read
@@ -2597,17 +2630,18 @@ namespace oomph
              const Vector<int>& row_index_,
              const Vector<int>& column_start_,
              const unsigned long& n,
-             const unsigned long& m) :
-      SparseMatrix<T, CCMatrix<T>>()
+             const unsigned long& m)
+      : SparseMatrix<T, CCMatrix<T>>()
     {
       Row_index = 0;
       Column_start = 0;
       build(value, row_index_, column_start_, n, m);
     }
 
+
     /// \short Copy constructor
-    CCMatrix(const CCMatrix& source_matrix) :
-      SparseMatrix<T, CCMatrix<T>>(source_matrix)
+    CCMatrix(const CCMatrix& source_matrix)
+      : SparseMatrix<T, CCMatrix<T>>(source_matrix)
     {
       // NNz, N and M are set the the copy constructor of the SparseMatrix
       // called above
@@ -2636,6 +2670,7 @@ namespace oomph
     {
       BrokenCopy::broken_assign("CCMatrix");
     }
+
 
     /// Destructor, delete any allocated memory
     virtual ~CCMatrix()
@@ -2744,6 +2779,7 @@ namespace oomph
     /// Wipe matrix data and set all values to 0.
     void clean_up_memory();
 
+
     /// \short Build matrix from compressed representation.
     /// Number of nonzero entries is read
     /// off from value, so make sure the vector has been shrunk
@@ -2766,6 +2802,7 @@ namespace oomph
                             const unsigned long& n,
                             const unsigned long& m);
 
+
   protected:
     /// Row index
     int* Row_index;
@@ -2777,6 +2814,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+
 
   //=================================================================
   /// \short A class for compressed column matrices that store doubles
@@ -2799,8 +2837,8 @@ namespace oomph
                    const unsigned long& m);
 
     /// Broken copy constructor
-    CCDoubleMatrix(const CCDoubleMatrix& matrix) :
-      DoubleMatrixBase(), CCMatrix<double>()
+    CCDoubleMatrix(const CCDoubleMatrix& matrix)
+      : DoubleMatrixBase(), CCMatrix<double>()
     {
       BrokenCopy::broken_copy("CCDoubleMatrix");
     }
@@ -2846,6 +2884,7 @@ namespace oomph
     /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
     void multiply_transpose(const DoubleVector& x, DoubleVector& soln) const;
 
+
     /// \short Function to multiply this matrix by the CCDoubleMatrix matrix_in
     /// The multiplication method used can be selected using the flag
     /// Matrix_matrix_multiply_method. By default Method 2 is used.
@@ -2861,6 +2900,7 @@ namespace oomph
     ///           fly' using a vector of vectors. Not particularly impressive
     ///           on the platforms we tried...
     void multiply(const CCDoubleMatrix& matrix_in, CCDoubleMatrix& result);
+
 
     /// \short For every row, find the maximum absolute value of the
     /// entries in this row. Set all values that are less than alpha times
@@ -2892,9 +2932,11 @@ namespace oomph
     unsigned Matrix_matrix_multiply_method;
   };
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //============================================================================
   /// Constructor to build a square n by n matrix
@@ -2912,6 +2954,7 @@ namespace oomph
     initialise(T(0));
 #endif
   }
+
 
   //============================================================================
   /// Constructor to build a matrix with n rows and m columns
@@ -2945,6 +2988,7 @@ namespace oomph
     Matrixdata = new T[n * m];
     initialise(initial_val);
   }
+
 
   //============================================================================
   /// \short Resize to a non-square n_row x m_col matrix,
@@ -2994,6 +3038,7 @@ namespace oomph
     delete[] temp_matrix;
   }
 
+
   //============================================================================
   /// \short Resize to a non-square n_row x m_col matrix and initialize the
   /// new entries to specified value.
@@ -3040,6 +3085,7 @@ namespace oomph
     delete[] temp_matrix;
   }
 
+
   //============================================================================
   /// Output function to print a matrix row-by-row to the stream outfile
   //============================================================================
@@ -3059,6 +3105,7 @@ namespace oomph
     }
   }
 
+
   //============================================================================
   /// Output function to print a matrix row-by-row to a file. Specify filename.
   //============================================================================
@@ -3072,6 +3119,7 @@ namespace oomph
     output(some_file);
     some_file.close();
   }
+
 
   //============================================================================
   /// Indexed output as i,j,a(i,j)
@@ -3090,6 +3138,7 @@ namespace oomph
     }
   }
 
+
   //============================================================================
   /// \short Indexed output function to print a matrix to a
   /// file as i,j,a(i,j). Specify filename.
@@ -3103,6 +3152,7 @@ namespace oomph
     indexed_output(some_file);
     some_file.close();
   }
+
 
   //============================================================================
   /// Output the "bottom right" entry regardless of it being
@@ -3145,9 +3195,11 @@ namespace oomph
     }
   }
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// Wipe matrix data and set all values to 0.
@@ -3175,6 +3227,7 @@ namespace oomph
     this->N = 0;
     this->M = 0;
   }
+
 
   //=============================================================================
   /// Build matrix from compressed representation.
@@ -3221,6 +3274,7 @@ namespace oomph
     // set Column_start
     this->Column_start = column_start;
   }
+
 
   //===================================================================
   /// Build matrix from compressed representation.
@@ -3300,6 +3354,7 @@ namespace oomph
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
 
+
   //=============================================================================
   /// Wipe matrix data and set all values to 0.
   //=============================================================================
@@ -3326,6 +3381,7 @@ namespace oomph
     this->N = 0;
     this->M = 0;
   }
+
 
   //=============================================================================
   /// Function to build a CRMatrix from pointers to arrays which hold the
@@ -3373,6 +3429,7 @@ namespace oomph
     // set Row_start
     this->Row_start = row_start_;
   }
+
 
   //=================================================================
   /// Build matrix from compressed representation.
@@ -3449,11 +3506,13 @@ namespace oomph
     }
   }
 
+
   //=================================================================
   /// \short Dummy zero
   //=================================================================
   template<class T, class MATRIX_TYPE>
   T SparseMatrix<T, MATRIX_TYPE>::Zero = T(0);
+
 
   namespace RRR
   {
@@ -3508,6 +3567,7 @@ namespace oomph
       out_matrix.distributed_matrix_matrix_multiply_method() =
         in_matrix_pt->distributed_matrix_matrix_multiply_method();
 
+
       // The local nrow and nnz of the in matrix
       const unsigned in_nrow_local = in_matrix_pt->nrow_local();
       const unsigned long in_nnz = in_matrix_pt->nnz();
@@ -3559,6 +3619,7 @@ namespace oomph
       const Vector<int>& column_indicies,
       const Vector<int>& row_start,
       CRDoubleMatrix& mat_out);
+
 
     /// \short Calculates the infinity (maximum) norm of a DenseMartrix of
     /// CRDoubleMatrices as if it was one large matrix.

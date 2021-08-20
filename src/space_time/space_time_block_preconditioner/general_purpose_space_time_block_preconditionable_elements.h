@@ -46,8 +46,8 @@ namespace oomph
   /// NOTE: It has to derive from GeneralisedElement so that it can overload
   /// the implementation of ndof_types() in GeneralisedElement.
   //=============================================================================
-  class BlockPreconditionableSpaceTimeElementBase :
-    public virtual GeneralisedElement
+  class BlockPreconditionableSpaceTimeElementBase
+    : public virtual GeneralisedElement
   {
   public:
     /// Constructor (empty)
@@ -76,6 +76,7 @@ namespace oomph
       Time_slab_id = time_slice_id;
     } // End of set_time_slab_id
 
+
     /// \short Access function to assign the number of dof types in the mesh
     /// NOTE: We have an access function for this as N_dof_types relies
     /// on the number of time slices in the mesh which isn't something one
@@ -86,6 +87,7 @@ namespace oomph
       N_dof_types = n_dof_types;
     } // End of set_ndof_types
 
+
     /// \short Return the number of "DOF types" that the degrees of freedom in
     /// this element are sub-divided into
     unsigned ndof_types() const
@@ -93,6 +95,7 @@ namespace oomph
       // Return the number of dof types being used in the mesh
       return this->N_dof_types;
     } // End of ndof_types
+
 
     /// \short Pure virtual function to be implemented in a derived class.
     /// Create a list of pairs for all unknowns in this element,

@@ -55,6 +55,7 @@ namespace oomph
     }
 #endif
 
+
     // Read in number of elements
     unsigned n_element;
     element_file >> n_element;
@@ -142,6 +143,7 @@ namespace oomph
         error_msg, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Read in the number of nodes
     unsigned n_node;
@@ -406,11 +408,13 @@ namespace oomph
       }
     }
 
+
     // Resize the "matrix" that stores the boundary id for each
     // face in each element.
     Face_boundary.resize(n_element);
     Face_index.resize(n_element);
     Edge_index.resize(n_element);
+
 
     // 0-based index scheme used to construct a global lookup for
     // each face that will be used to uniquely construct interior
@@ -560,6 +564,7 @@ namespace oomph
         }
       } // end of loop over the faces
 
+
       // Loop over the element edges and assign global edge numbers
       for (unsigned i = 0; i < 6; ++i)
       {
@@ -609,6 +614,7 @@ namespace oomph
       }
 
     } // end for e
+
 
     // Now determine whether any edges lie on boundaries by using the
     // face boundary scheme and
@@ -702,7 +708,9 @@ namespace oomph
       }
     }
 
+
   } // end of constructor
+
 
   //======================================================================
   /// Constructor: Pass a tetgenio data structure that represents
@@ -822,6 +830,7 @@ namespace oomph
       }
     }
 
+
     // Determine highest boundary index
     //------------------------------------
     unsigned n_bound = 0;
@@ -904,6 +913,7 @@ namespace oomph
      {
       Hole_centre.resize(0);
       }*/
+
 
     // Set number of boundaries
     if (n_bound > 0)
@@ -991,11 +1001,13 @@ namespace oomph
       }
     }
 
+
     // Resize the "matrix" that stores the boundary id for each
     // face in each element.
     Face_boundary.resize(n_element);
     Face_index.resize(n_element);
     Edge_index.resize(n_element);
+
 
     // 0-based index scheme used to construct a global lookup for
     // each face that will be used to uniquely construct interior
@@ -1145,6 +1157,7 @@ namespace oomph
         }
       } // end of loop over the faces
 
+
       // Loop over the element edges and assign global edge numbers
       for (unsigned i = 0; i < 6; ++i)
       {
@@ -1194,6 +1207,7 @@ namespace oomph
       }
 
     } // end for e
+
 
     // Now determine whether any edges lie on boundaries by using the
     // face boundary scheme and
@@ -1287,5 +1301,8 @@ namespace oomph
       }
     }
 
+
   } // end of constructor
+
+
 } // namespace oomph

@@ -63,9 +63,8 @@ namespace oomph
   ///
   //=======================================================================
   template<>
-  class RefineableQElement<3> :
-    public virtual RefineableElement,
-    public virtual BrickElementBase
+  class RefineableQElement<3> : public virtual RefineableElement,
+                                public virtual BrickElementBase
   {
   public:
     /// \short Shorthand for pointer to an argument-free void member
@@ -235,21 +234,22 @@ namespace oomph
                                 std::ofstream& output_hangfile);
   };
 
+
   //========================================================================
   /// Refineable version of Solid brick elements
   //========================================================================
   template<>
-  class RefineableSolidQElement<3> :
-    public virtual RefineableQElement<3>,
-    public virtual RefineableSolidElement,
-    public virtual QSolidElementBase
+  class RefineableSolidQElement<3> : public virtual RefineableQElement<3>,
+                                     public virtual RefineableSolidElement,
+                                     public virtual QSolidElementBase
   {
   public:
     /// Constructor, just call the constructor of the RefineableQElement<2>
-    RefineableSolidQElement() :
-      RefineableQElement<3>(), RefineableSolidElement()
+    RefineableSolidQElement()
+      : RefineableQElement<3>(), RefineableSolidElement()
     {
     }
+
 
     /// Broken copy constructor
     RefineableSolidQElement(const RefineableSolidQElement<3>& dummy)
@@ -265,6 +265,7 @@ namespace oomph
 
     /// Virtual Destructor
     virtual ~RefineableSolidQElement() {}
+
 
     /// \short Final over-ride: Use version in QSolidElementBase
     void set_macro_elem_pt(MacroElement* macro_elem_pt)
@@ -314,8 +315,7 @@ namespace oomph
         mesh_pt, new_node_pt, was_already_built, new_nodes_file);
 
       // Are we done?
-      if (was_already_built)
-        return;
+      if (was_already_built) return;
 
       // Now need to loop over the nodes again and set solid variables
 
@@ -327,6 +327,7 @@ namespace oomph
       RefineableSolidQElement<3>* father_el_pt =
         dynamic_cast<RefineableSolidQElement<3>*>(
           Tree_pt->father_pt()->object_pt());
+
 
 #ifdef PARANOID
       // Currently we can't handle the case of generalised coordinates
@@ -342,6 +343,7 @@ namespace oomph
       }
 #endif
 
+
       // Now get coordinates and stuff
       Vector<int> s_lo(3);
       Vector<int> s_hi(3);
@@ -353,6 +355,7 @@ namespace oomph
 
       // Get the number of 1d nodes
       unsigned n_p = nnode_1d();
+
 
       // Setup vertex coordinates in father element:
       //--------------------------------------------
@@ -391,11 +394,13 @@ namespace oomph
         }
       }
 
+
       unsigned jnod = 0;
       Vector<double> x_small(3);
       Vector<double> x_large(3);
 
       Vector<double> s_fraction(3);
+
 
       // Loop over nodes in element
       for (unsigned i0 = 0; i0 < n_p; i0++)
@@ -487,6 +492,7 @@ namespace oomph
       } // End of horizontal loop over nodes in element
     }
   };
+
 
 } // namespace oomph
 

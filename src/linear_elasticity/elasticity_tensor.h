@@ -146,6 +146,7 @@ namespace oomph
     }
   };
 
+
   //===================================================================
   /// An isotropic elasticity tensor defined in terms of Young's modulus
   /// and Poisson's ratio. The elasticity tensor is assumed to be
@@ -170,8 +171,8 @@ namespace oomph
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
     /// equations).
-    IsotropicElasticityTensor(const double& nu, const double& E) :
-      ElasticityTensor()
+    IsotropicElasticityTensor(const double& nu, const double& E)
+      : ElasticityTensor()
     {
       // Set the three indepdent components
       C[0] = 0.0;
@@ -219,11 +220,13 @@ namespace oomph
       this->set_lame_coefficients(lambda, mu);
     }
 
+
     /// Overload the independent coefficient function
     inline double independent_component(const unsigned& i) const
     {
       return C[StaticIndex[i]];
     }
+
 
   private:
     // Set the values of the lame coefficients
@@ -234,6 +237,7 @@ namespace oomph
       C[3] = mu;
     }
   };
+
 
   //========================================================================
   /// A general elasticity tensor that provides storage for all 21 independent
@@ -271,6 +275,7 @@ namespace oomph
       C[this->Index[i][j][k][l]] = value;
     }
   };
+
 
 } // namespace oomph
 #endif

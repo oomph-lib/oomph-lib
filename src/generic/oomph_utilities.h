@@ -34,6 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 #ifdef OOMPH_HAS_MPI
 // mpi headers
 #include "mpi.h"
@@ -131,6 +132,7 @@ namespace oomph
 
   } // namespace SecondInvariantHelper
 
+
   //==============================================
   /// Namespace for error messages for broken
   /// copy constructors and assignment operators
@@ -158,6 +160,7 @@ namespace oomph
     const std::complex<double> I(0.0, 1.0);
   } // namespace MathematicalConstants
 
+
   //================================================================
   /// Function-type-object to perform absolute comparison of objects.
   /// Apparently this inlines better
@@ -172,6 +175,7 @@ namespace oomph
       return std::abs(x) < std::abs(y);
     }
   };
+
 
   // =================================================================
   /// Conversion functions for easily making strings (e.g. for filenames - to
@@ -211,6 +215,7 @@ namespace oomph
     Vector<std::string> split_string(const std::string& s, char delim);
 
   } // namespace StringConversion
+
 
   namespace TypeNames
   {
@@ -256,6 +261,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
 
+
   //====================================================================
   /// Namespace for global (cumulative) timings
   //====================================================================
@@ -286,6 +292,7 @@ namespace oomph
     extern Vector<clock_t> Start_time;
 
   } // namespace CumulativeTimings
+
 
   // ============================================================
   // Automatically checked casting functions (from boost)
@@ -403,61 +410,6 @@ namespace oomph
     Vector<clock_t> Start_time;
   };
 
-  //////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////
-
-  //======================================================================
-  // Namespace for black-box FD Newton solver.
-  //======================================================================
-  namespace BlackBoxFDNewtonSolver
-  {
-    // Function pointer for function that specifies residuals: The arguments
-    // are: Parameters, unknowns, residuals
-    typedef void (*ResidualFctPt)(const Vector<double>& parameters,
-                                  const Vector<double>& unknowns,
-                                  Vector<double>& residuals);
-
-    // Maximum number of Newton iterations
-    extern unsigned Max_iter;
-
-    // Number of Newton iterations taken in most recent invocation
-    extern unsigned N_iter_taken;
-
-    // Flag to indicate if progress of Newton iteration is to be documented
-    // (defaults to false)
-    extern bool Doc_Progress;
-
-    // Size of increment used in finite-difference calculations
-    extern double FD_step;
-
-    // Tolerance (maximum allowed value of an single residual at convergence)
-    extern double Tol;
-
-    // Use steplength control do make globally convergent (default false)
-    extern bool Use_step_length_control;
-
-    // Black-box FD Newton solver:
-    // Calling sequence for residual function is
-    // \code residual_fct(parameters,unknowns,residuals) \endcode
-    // where all arguments are double Vectors.
-    // unknowns.size() = residuals.size()
-    extern void black_box_fd_newton_solve(ResidualFctPt residual_fct,
-                                          const Vector<double>& params,
-                                          Vector<double>& unknowns);
-
-    // Line search helper for globally convergent Newton method
-    extern void line_search(const Vector<double>& x_old,
-                            const double half_residual_squared_old,
-                            const Vector<double>& gradient,
-                            ResidualFctPt residual_fct,
-                            const Vector<double>& params,
-                            Vector<double>& newton_dir,
-                            Vector<double>& x,
-                            double& half_residual_squared,
-                            const double& stpmax);
-
-  } // namespace BlackBoxFDNewtonSolver
 
   //====================================================================
   /// \short Collection of data structures for storing information about
@@ -549,22 +501,22 @@ namespace oomph
     /// \short Constructor. Default settings: Current directory, step `0',
     /// label="", full documentation enabled and output directory is not
     /// required to exist when set_directory() is called.
-    DocInfo() :
-      Directory("."),
-      Doc_flag(true),
-      Number(0),
-      Label(""),
-      Directory_must_exist(false)
+    DocInfo()
+      : Directory("."),
+        Doc_flag(true),
+        Number(0),
+        Label(""),
+        Directory_must_exist(false)
     {
     }
 
     /// \short Constructor with specific directory.
-    DocInfo(const std::string& directory) :
-      Directory(directory),
-      Doc_flag(true),
-      Number(0),
-      Label(""),
-      Directory_must_exist(false)
+    DocInfo(const std::string& directory)
+      : Directory(directory),
+        Doc_flag(true),
+        Number(0),
+        Label(""),
+        Directory_must_exist(false)
     {
     }
 
@@ -659,6 +611,7 @@ namespace oomph
     /// just issuing a warning.
     bool Directory_must_exist;
   };
+
 
   //====================================================================
   // Namespace for command line arguments
@@ -842,6 +795,7 @@ namespace oomph
       Output_rank = output_rank;
     }
 
+
     /// Switch to ensure output is only produced from a single
     /// processor (default: Master node, i.e. rank 0)
     void allow_output_from_all_processors()
@@ -849,6 +803,7 @@ namespace oomph
       Output_from_single_processor = false;
     }
   };
+
 
   //========================================================================
   /// Single (global) instantiation of the mpi output modifier
@@ -863,6 +818,7 @@ namespace oomph
   // class OomphCommunicator;
 
 #endif
+
 
   //======================================================================
   /// \short MPI_Helpers class contains static helper methods to support MPI
@@ -913,6 +869,7 @@ namespace oomph
     static OomphCommunicator* Communicator_pt;
   };
 
+
   //====================================================================
   // Namespace for flagging up obsolete parts of the code
   //====================================================================
@@ -941,6 +898,7 @@ namespace oomph
     extern void setup();
 
   } // namespace TecplotNames
+
 
 #ifdef LEAK_CHECK
 
@@ -985,6 +943,7 @@ namespace oomph
   /// Pause and dump out message
   void pause(std::string message);
 
+
   //=============================================================================
   /// Helper for recording execution time.
   //=============================================================================
@@ -995,9 +954,11 @@ namespace oomph
 
   } // end of namespace TimingHelpers
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //===============================================================
   /// Namespace with helper functions to assess total memory usage
@@ -1123,6 +1084,7 @@ namespace oomph
 
   } // end of namespace MemoryUsage
 
+
   ////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////
@@ -1188,6 +1150,7 @@ namespace oomph
     /// Overload to grab data from the problem.
     virtual void initialise_from_problem(const Problem* problem_pt) {}
   };
+
 
   /// Function class for a simple function with no external parameters (just
   /// stores a function pointer, only needed for compatability).
@@ -1271,6 +1234,7 @@ namespace oomph
     /// Storage for derivative
     TimeSpaceValueToDoubleVectFctPt Derivative_fpt;
   };
+
 
 } // namespace oomph
 #endif

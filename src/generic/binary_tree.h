@@ -190,8 +190,8 @@ namespace oomph
     /// created externally.
     BinaryTree(RefineableElement* const& object_pt,
                Tree* const& father_pt,
-               const int& son_type) :
-      Tree(object_pt, father_pt, son_type)
+               const int& son_type)
+      : Tree(object_pt, father_pt, son_type)
     {
     }
 
@@ -227,6 +227,7 @@ namespace oomph
     static DenseMatrix<int> Reflect;
   };
 
+
   //======================================================================
   /// BinaryTreeRoot is a BinaryTree that forms the root of a (recursive)
   /// binary tree. The "root node" is special as it holds additional
@@ -237,8 +238,8 @@ namespace oomph
   public:
     /// Constructor for the (empty) root binary tree: Pass pointer to
     /// associated object, a RefineableQElement<1>.
-    BinaryTreeRoot(RefineableElement* const& object_pt) :
-      Tree(object_pt), BinaryTree(object_pt), TreeRoot(object_pt)
+    BinaryTreeRoot(RefineableElement* const& object_pt)
+      : Tree(object_pt), BinaryTree(object_pt), TreeRoot(object_pt)
     {
 #ifdef PARANOID
       // Check that static member data has been setup
@@ -287,6 +288,7 @@ namespace oomph
       return OMEGA;
     }
   };
+
 
   //======================================================================
   /// A BinaryTreeForest consists of a collection of BinaryTreeRoots.

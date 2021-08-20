@@ -51,19 +51,20 @@ namespace oomph
   /// from hanging nodes (or alternatively in-compatible function values)
   /// are taken into account.
   //======================================================================
-  class RefineableGeneralisedAxisymAdvectionDiffusionEquations :
-    public virtual GeneralisedAxisymAdvectionDiffusionEquations,
-    public virtual RefineableElement,
-    public virtual ElementWithZ2ErrorEstimator
+  class RefineableGeneralisedAxisymAdvectionDiffusionEquations
+    : public virtual GeneralisedAxisymAdvectionDiffusionEquations,
+      public virtual RefineableElement,
+      public virtual ElementWithZ2ErrorEstimator
   {
   public:
     /// \short Empty Constructor
-    RefineableGeneralisedAxisymAdvectionDiffusionEquations() :
-      GeneralisedAxisymAdvectionDiffusionEquations(),
-      RefineableElement(),
-      ElementWithZ2ErrorEstimator()
+    RefineableGeneralisedAxisymAdvectionDiffusionEquations()
+      : GeneralisedAxisymAdvectionDiffusionEquations(),
+        RefineableElement(),
+        ElementWithZ2ErrorEstimator()
     {
     }
+
 
     /// Broken copy constructor
     RefineableGeneralisedAxisymAdvectionDiffusionEquations(
@@ -98,6 +99,7 @@ namespace oomph
     {
       this->get_flux(s, flux);
     }
+
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
@@ -170,6 +172,7 @@ namespace oomph
       return x[0];
     }
 
+
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
@@ -203,6 +206,7 @@ namespace oomph
       unsigned flag);
   };
 
+
   //======================================================================
   /// \short Refineable version of QGeneralisedAxisymAdvectionDiffusionElement.
   /// Inherit from the standard QGeneralisedAxisymAdvectionDiffusionElement
@@ -210,20 +214,21 @@ namespace oomph
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
   template<unsigned NNODE_1D>
-  class RefineableQGeneralisedAxisymAdvectionDiffusionElement :
-    public QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>,
-    public virtual RefineableGeneralisedAxisymAdvectionDiffusionEquations,
-    public virtual RefineableQElement<2>
+  class RefineableQGeneralisedAxisymAdvectionDiffusionElement
+    : public QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>,
+      public virtual RefineableGeneralisedAxisymAdvectionDiffusionEquations,
+      public virtual RefineableQElement<2>
   {
   public:
     /// \short Empty Constructor:
-    RefineableQGeneralisedAxisymAdvectionDiffusionElement() :
-      RefineableElement(),
-      RefineableGeneralisedAxisymAdvectionDiffusionEquations(),
-      RefineableQElement<2>(),
-      QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>()
+    RefineableQGeneralisedAxisymAdvectionDiffusionElement()
+      : RefineableElement(),
+        RefineableGeneralisedAxisymAdvectionDiffusionEquations(),
+        RefineableQElement<2>(),
+        QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>()
     {
     }
+
 
     /// Broken copy constructor
     RefineableQGeneralisedAxisymAdvectionDiffusionElement(
@@ -281,6 +286,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+
   //=======================================================================
   /// Face geometry for the
   /// RefineableQuadGeneralisedAxisymAdvectionDiffusionElement elements:
@@ -291,8 +297,8 @@ namespace oomph
   //=======================================================================
   template<unsigned NNODE_1D>
   class FaceGeometry<
-    RefineableQGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>> :
-    public virtual QElement<1, NNODE_1D>
+    RefineableQGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>>
+    : public virtual QElement<1, NNODE_1D>
   {
   public:
     /// \short Constructor: Call the constructor for the

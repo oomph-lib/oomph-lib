@@ -276,6 +276,7 @@ namespace oomph
     } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
   } // End of get_pressure_and_velocity_mass_matrix_diagonal
 
+
   //==============================================================
   /// Compute the residuals for the associated pressure advection
   /// diffusion problem. Used by the Fp preconditioner.
@@ -293,8 +294,7 @@ namespace oomph
                     OOMPH_EXCEPTION_LOCATION);
 
     // Return immediately if there are no dofs
-    if (ndof() == 0)
-      return;
+    if (ndof() == 0) return;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -308,6 +308,7 @@ namespace oomph
     {
       u_nodal_index[i] = this->u_index_nst(i);
     }
+
 
     // Which nodal value represents the pressure? (Negative if pressure
     // is not based on nodal interpolation).
@@ -422,9 +423,11 @@ namespace oomph
         source = this->Press_adv_diff_source_fct_pt(interpolated_x);
       }
 
+
       // Number of master nodes and storage for the weight of the shape function
       unsigned n_master = 1;
       double hang_weight = 1.0;
+
 
       // Loop over the pressure shape functions
       for (unsigned l = 0; l < n_pres; l++)
@@ -567,6 +570,7 @@ namespace oomph
     }
   }
 
+
   //========================================================================
   /// Add element's contribution to the elemental
   /// residual vector and/or Jacobian matrix.
@@ -581,8 +585,7 @@ namespace oomph
                                               const unsigned& flag)
   {
     // Return immediately if there are no dofs
-    if (ndof() == 0)
-      return;
+    if (ndof() == 0) return;
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -1280,6 +1283,7 @@ namespace oomph
     } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
   } // End of fill_in_generic_residual_contribution_nst
 
+
   //======================================================================
   /// Compute derivatives of elemental residual vector with respect
   /// to nodal coordinates.
@@ -1296,6 +1300,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   } // End of
+
 
   //====================================================================
   /// Force build of templates

@@ -44,9 +44,8 @@ namespace oomph
   /// and internal flux dofs.
   //================================================================
   template<unsigned ORDER>
-  class TRaviartThomasDarcyElement :
-    public TElement<2, 3>,
-    public DarcyEquations<2>
+  class TRaviartThomasDarcyElement : public TElement<2, 3>,
+                                     public DarcyEquations<2>
   {
   private:
     ///  Face index associated with edge flux degree of freedom
@@ -233,6 +232,7 @@ namespace oomph
       return coord;
     }
 
+
     /// \short Compute the global coordinates of the flux interpolation
     /// point associated with the j-th edge-based q basis fct
     void edge_flux_interpolation_point_global(const unsigned& j,
@@ -242,6 +242,7 @@ namespace oomph
       unsigned edge = (j - n) / nedge_flux_interpolation_point();
       edge_flux_interpolation_point_global(edge, n, x);
     }
+
 
     /// \short Compute the global coordinates of the nth flux interpolation
     /// point along an edge
@@ -398,6 +399,7 @@ namespace oomph
       return TElement<2, 3>::vertex_node_pt(j);
     }
 
+
     /// Recovery order for Z2 error estimator
     unsigned nrecovery_order();
 
@@ -460,29 +462,32 @@ namespace oomph
     static const unsigned Initial_Nvalue[];
   };
 
+
   //============================================================
   /// Face geometry for TRaviartThomasDarcyElement<0>
   //============================================================
   template<>
-  class FaceGeometry<TRaviartThomasDarcyElement<0>> :
-    public virtual TElement<1, 3>
+  class FaceGeometry<TRaviartThomasDarcyElement<0>>
+    : public virtual TElement<1, 3>
   {
   public:
     /// Constructor: Call constructor of base
     FaceGeometry() : TElement<1, 3>() {}
   };
 
+
   //============================================================
   /// Face geometry for TRaviartThomasDarcyElement<1>
   //============================================================
   template<>
-  class FaceGeometry<TRaviartThomasDarcyElement<1>> :
-    public virtual TElement<1, 3>
+  class FaceGeometry<TRaviartThomasDarcyElement<1>>
+    : public virtual TElement<1, 3>
   {
   public:
     /// Constructor: Call constructor of base class
     FaceGeometry() : TElement<1, 3>() {}
   };
+
 
 } // namespace oomph
 

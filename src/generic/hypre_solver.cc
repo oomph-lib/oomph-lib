@@ -28,6 +28,7 @@
 // For problem->get_jacobian(...)
 #include "problem.h"
 
+
 namespace oomph
 {
   ////////////////////////////////////////////////////////////////////////
@@ -65,6 +66,7 @@ namespace oomph
       hypre_preconditioner_pt->amg_coarsening() = 0;
     }
 
+
     /// \short Set default parameters for use as preconditioner in
     /// 3D Poisson-type problem.
     void set_defaults_for_3D_poisson_problem(
@@ -76,6 +78,7 @@ namespace oomph
       // Change strength parameter for amg
       hypre_preconditioner_pt->amg_strength() = 0.7;
     }
+
 
     /// \short Set default parameters for use as preconditioner in
     /// for momentum block in Navier-Stokes problem
@@ -98,6 +101,7 @@ namespace oomph
     }
 
   } // namespace Hypre_default_settings
+
 
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -128,6 +132,7 @@ namespace oomph
     ///  11= One pass RS on each processor (not recommended)
     //========================================================================
     unsigned AMG_coarsening = 6;
+
 
     //========================================================================
     /// AMG interpolation truncation factor
@@ -160,6 +165,7 @@ namespace oomph
 
       return err;
     }
+
 
     //========================================================================
     /// Helper function to create a HYPRE_IJVector and HYPRE_ParVector.
@@ -222,6 +228,7 @@ namespace oomph
       delete[] values;
     }
 
+
     //========================================================================
     /// Helper function to create a HYPRE_IJVector and HYPRE_ParVector.
     /// + If no MPI then serial vectors are created
@@ -252,6 +259,7 @@ namespace oomph
       HYPRE_IJVectorAssemble(hypre_ij_vector);
       HYPRE_IJVectorGetObject(hypre_ij_vector, (void**)&hypre_par_vector);
     }
+
 
     //========================================================================
     /// Helper function to create a serial HYPRE_IJMatrix and
@@ -377,6 +385,7 @@ namespace oomph
         local_start += matrix_row_start[hypre_first_row];
       }
 
+
       HYPRE_IJMatrixSetValues(hypre_ij_matrix,
                               hypre_nrow_local,
                               ncols_per_row,
@@ -488,11 +497,13 @@ namespace oomph
 
   } // namespace HypreHelpers
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // functions for HypreInterface class
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// Helper function which creates a Hypre matrix from a CRDoubleMatrix
@@ -538,6 +549,7 @@ namespace oomph
     }
   }
 
+
   //=============================================================================
   /// Sets up the solver data required for use in an oomph-lib
   /// LinearSolver or Preconditioner, once the Hypre matrix has been
@@ -548,6 +560,7 @@ namespace oomph
     // Store time
     double t_start = TimingHelpers::timer();
     double t_end = 0;
+
 
     // reset Hypre's global error flag
     hypre__global_error = 0;
@@ -673,6 +686,7 @@ namespace oomph
         }
       }
     } // end of setting up internal preconditioner
+
 
     // set up solver
     // -------------
@@ -873,10 +887,12 @@ namespace oomph
         }
       }
 
+
       HYPRE_PCGSetup(Solver,
                      (HYPRE_Matrix)Matrix_par,
                      (HYPRE_Vector)dummy_rhs_par,
                      (HYPRE_Vector)dummy_sol_par);
+
 
       Existing_solver = CG;
     }
@@ -1061,6 +1077,7 @@ namespace oomph
       oomph_info << "time for setup [s] : " << solver_setup_time << std::endl;
     }
   }
+
 
   //===================================================================
   /// Helper function performs a solve if solver data has been set
@@ -1276,6 +1293,7 @@ namespace oomph
     }
   }
 
+
   //===================================================================
   /// hypre_clean_up_memory() deletes any existing Hypre solver and
   /// Hypre matrix
@@ -1345,11 +1363,13 @@ namespace oomph
     }
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // functions for HypreSolver class
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //===================================================================
   /// Problem-based solve function to generate the Jacobian matrix and
@@ -1402,6 +1422,7 @@ namespace oomph
       clean_up_memory();
     }
   }
+
 
   //===================================================================
   /// Uses HypreInterface::hypre_solve(...) to solve the linear system
@@ -1503,6 +1524,7 @@ namespace oomph
     }
   }
 
+
   //===================================================================
   /// Resolve performs a linear solve using current solver data (if
   /// such data exists).
@@ -1557,6 +1579,7 @@ namespace oomph
     // called repeatedly.
   }
 
+
   //===================================================================
   /// clean_up_memory() deletes any existing solver data
   //====================================================================
@@ -1565,11 +1588,13 @@ namespace oomph
     hypre_clean_up_memory();
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   // functions for HyprePreconditioner class
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=============================================================================
   /// \short Static double that accumulates the preconditioner
@@ -1679,6 +1704,7 @@ namespace oomph
     Context_based_cumulative_npreconditioner_solve.clear();
     Context_based_nrow.clear();
   }
+
 
   //=============================================================================
   /// An interface to allow HypreSolver to be used as a Preconditioner
@@ -1807,6 +1833,7 @@ namespace oomph
       Context_based_cumulative_npreconditioner_solve[Context_string]++;
     }
   }
+
 
   //===================================================================
   /// clean_up_memory() deletes any existing Hypre solver and

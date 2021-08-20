@@ -33,6 +33,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 #include "generic/fsi.h"
@@ -50,9 +51,9 @@ namespace oomph
   /// in FSI problems, by deriving it from the FSIFluidElement base
   /// class.
   //======================================================================
-  class SphericalNavierStokesEquations :
-    public virtual FSIFluidElement,
-    public virtual NavierStokesElementWithDiagonalMassMatrices
+  class SphericalNavierStokesEquations
+    : public virtual FSIFluidElement,
+      public virtual NavierStokesElementWithDiagonalMassMatrices
   {
   public:
     /// \short Function pointer to body force function fct(t,x,f(x))
@@ -157,6 +158,7 @@ namespace oomph
                                       Shape& psi,
                                       Shape& test) const = 0;
 
+
     /// \short Calculate the body force at a given time and local and/or
     /// Eulerian position. This function is virtual so that it can be
     /// overloaded in multi-physics elements where the body force might
@@ -209,6 +211,7 @@ namespace oomph
       DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
+
   public:
     /// Include a cot function to simplify the
     /// NS momentum and jacobian expressions
@@ -217,10 +220,11 @@ namespace oomph
       return (1 / tan(th));
     }
 
+
     /// \short Constructor: NULL the body force and source function
     /// and make sure the ALE terms are included by default.
-    SphericalNavierStokesEquations() :
-      Body_force_fct_pt(0), Source_fct_pt(0), ALE_is_disabled(false)
+    SphericalNavierStokesEquations()
+      : Body_force_fct_pt(0), Source_fct_pt(0), ALE_is_disabled(false)
     {
       // Set all the Physical parameter pointers to the default value zero
       Re_pt = &Default_Physical_Constant_Value;
@@ -385,6 +389,7 @@ namespace oomph
       return i;
     }
 
+
     /// \short i-th component of du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
     double du_dt_spherical_nst(const unsigned& n, const unsigned& i) const
@@ -475,6 +480,7 @@ namespace oomph
                       const Vector<double>& N,
                       Vector<double>& traction);
 
+
     /// \short This implements a pure virtual function defined
     /// in the FSIFluidElement class. The function computes
     /// the traction (on the viscous scale), at the element's local
@@ -504,6 +510,7 @@ namespace oomph
       Vector<double>& press_mass_diag,
       Vector<double>& veloc_mass_diag,
       const unsigned& which_one = 0);
+
 
     /// \short Output function: x,y,[z],u,v,[w],p
     /// in tecplot format. Default number of plot points
@@ -543,12 +550,14 @@ namespace oomph
     /// in tecplot format. nplot points in each coordinate direction
     void full_output(std::ostream& outfile, const unsigned& nplot);
 
+
     /// \short Output function: x,y,[z],u,v,[w] in tecplot format.
     /// nplot points in each coordinate direction at timestep t
     /// (t=0: present; t>0: previous timestep)
     void output_veloc(std::ostream& outfile,
                       const unsigned& nplot,
                       const unsigned& t);
+
 
     /// \short Output function: x,y,[z], [omega_x,omega_y,[and/or omega_z]]
     /// in tecplot format. nplot points in each coordinate direction
@@ -793,15 +802,16 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
 
+
   //==========================================================================
   /// Crouzeix_Raviart elements are Navier--Stokes elements with quadratic
   /// interpolation for velocities and positions, but a discontinuous linear
   /// pressure interpolation. They can be used within oomph-lib's
   /// block preconditioning framework.
   //==========================================================================
-  class QSphericalCrouzeixRaviartElement :
-    public virtual QElement<2, 3>,
-    public virtual SphericalNavierStokesEquations
+  class QSphericalCrouzeixRaviartElement
+    : public virtual QElement<2, 3>,
+      public virtual SphericalNavierStokesEquations
   {
   private:
     /// Static array of ints to hold required number of variables at nodes
@@ -811,6 +821,7 @@ namespace oomph
     /// Internal index that indicates at which internal data the pressure
     /// is stored
     unsigned P_spherical_nst_internal_index;
+
 
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
@@ -848,8 +859,8 @@ namespace oomph
 
   public:
     /// Constructor, there are 3 internal values (for the pressure)
-    QSphericalCrouzeixRaviartElement() :
-      QElement<2, 3>(), SphericalNavierStokesEquations()
+    QSphericalCrouzeixRaviartElement()
+      : QElement<2, 3>(), SphericalNavierStokesEquations()
     {
       // Allocate and add one Internal data object that stored 2+1 pressure
       // values;
@@ -861,6 +872,7 @@ namespace oomph
     {
       return 3;
     }
+
 
     /// \short Return the i-th pressure value
     /// (Discontinous pressure interpolation -- no need to cater for hanging
@@ -916,6 +928,7 @@ namespace oomph
       SphericalNavierStokesEquations::output(outfile, nplot);
     }
 
+
     /// Redirect output to SphericalNavierStokesEquations output
     void output(FILE* file_pt)
     {
@@ -927,6 +940,7 @@ namespace oomph
     {
       SphericalNavierStokesEquations::output(file_pt, nplot);
     }
+
 
     /// \short Full output function:
     /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
@@ -943,6 +957,7 @@ namespace oomph
     {
       SphericalNavierStokesEquations::full_output(outfile, nplot);
     }
+
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Velocity (three comp) and pressure.
@@ -1015,6 +1030,7 @@ namespace oomph
     return J;
   }
 
+
   //=======================================================================
   /// Pressure shape functions
   //=======================================================================
@@ -1040,8 +1056,8 @@ namespace oomph
   /// Face geometry of the Spherical Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<QSphericalCrouzeixRaviartElement> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<QSphericalCrouzeixRaviartElement>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
@@ -1052,15 +1068,17 @@ namespace oomph
   /// Crouzeix_Raviart elements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QSphericalCrouzeixRaviartElement>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<QSphericalCrouzeixRaviartElement>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Taylor--Hood elements are Navier--Stokes elements
@@ -1068,9 +1086,9 @@ namespace oomph
   /// continous linear pressure interpolation. They can be used
   /// within oomph-lib's block-preconditioning framework.
   //=======================================================================
-  class QSphericalTaylorHoodElement :
-    public virtual QElement<2, 3>,
-    public virtual SphericalNavierStokesEquations
+  class QSphericalTaylorHoodElement
+    : public virtual QElement<2, 3>,
+      public virtual SphericalNavierStokesEquations
   {
   private:
     /// Static array of ints to hold number of variables at node
@@ -1117,8 +1135,8 @@ namespace oomph
 
   public:
     /// Constructor, no internal data points
-    QSphericalTaylorHoodElement() :
-      QElement<2, 3>(), SphericalNavierStokesEquations()
+    QSphericalTaylorHoodElement()
+      : QElement<2, 3>(), SphericalNavierStokesEquations()
     {
     }
 
@@ -1157,6 +1175,7 @@ namespace oomph
         ->set_value(this->p_nodal_index_spherical_nst(), p_value);
     }
 
+
     /// \short  Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
     /// and
@@ -1166,6 +1185,7 @@ namespace oomph
     /// load computed in the \c get_load(...) function.
     void identify_load_data(
       std::set<std::pair<Data*, unsigned>>& paired_load_data);
+
 
     /// \short  Add to the set \c paired_pressure_data pairs containing
     /// - the pointer to a Data object
@@ -1200,6 +1220,7 @@ namespace oomph
     {
       SphericalNavierStokesEquations::output(file_pt, nplot);
     }
+
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Velocity (3 components) and pressure.
@@ -1246,6 +1267,7 @@ namespace oomph
     // Return the jacobian
     return J;
   }
+
 
   //==========================================================================
   /// Derivatives of the shape functions and test functions w.r.t to
@@ -1297,6 +1319,7 @@ namespace oomph
     }
   }
 
+
   //==========================================================================
   /// Pressure shape and test functions
   //==========================================================================
@@ -1309,12 +1332,13 @@ namespace oomph
     for (unsigned i = 0; i < 4; i++) test[i] = psi[i];
   }
 
+
   //=======================================================================
   /// Face geometry of the Spherical Taylor_Hood elements
   //=======================================================================
   template<>
-  class FaceGeometry<QSphericalTaylorHoodElement> :
-    public virtual QElement<1, 3>
+  class FaceGeometry<QSphericalTaylorHoodElement>
+    : public virtual QElement<1, 3>
   {
   public:
     FaceGeometry() : QElement<1, 3>() {}
@@ -1324,12 +1348,13 @@ namespace oomph
   /// Face geometry of the FaceGeometry of the 2D Taylor Hoodelements
   //=======================================================================
   template<>
-  class FaceGeometry<FaceGeometry<QSphericalTaylorHoodElement>> :
-    public virtual PointElement
+  class FaceGeometry<FaceGeometry<QSphericalTaylorHoodElement>>
+    : public virtual PointElement
   {
   public:
     FaceGeometry() : PointElement() {}
   };
+
 
 } // namespace oomph
 

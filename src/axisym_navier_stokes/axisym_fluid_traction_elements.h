@@ -34,10 +34,12 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/shape.h"
 #include "generic/elements.h"
 #include "generic/element_with_external_element.h"
+
 
 namespace oomph
 {
@@ -57,6 +59,7 @@ namespace oomph
 
   } // namespace AxisymmetricNavierStokesTractionElementHelper
 
+
   //======================================================================
   /// A class for elements that allow the imposition of an applied traction
   /// in the axisym Navier Stokes eqns.
@@ -65,9 +68,9 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class ELEMENT>
-  class AxisymmetricNavierStokesTractionElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual FaceElement
+  class AxisymmetricNavierStokesTractionElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual FaceElement
   {
   protected:
     /// Index at which the i-th velocity component is stored
@@ -83,6 +86,7 @@ namespace oomph
                             const Vector<double>& n,
                             Vector<double>& result);
 
+
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Eulerian coordinate and normal vector and return the load
     /// vector (not all of the input arguments will be required for all specific
@@ -97,6 +101,7 @@ namespace oomph
       Traction_fct_pt(time, x, n, traction);
     }
 
+
     /// \short Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
@@ -104,12 +109,13 @@ namespace oomph
     void fill_in_contribution_to_residuals_axisymmetric_nst_traction(
       Vector<double>& residuals);
 
+
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     AxisymmetricNavierStokesTractionElement(FiniteElement* const& element_pt,
-                                            const int& face_index) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+                                            const int& face_index)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -132,6 +138,7 @@ namespace oomph
         &AxisymmetricNavierStokesTractionElementHelper::Zero_traction_fct;
     }
 
+
     /// Reference to the traction function pointer
     void (*&traction_fct_pt())(const double& time,
                                const Vector<double>& x,
@@ -141,11 +148,13 @@ namespace oomph
       return Traction_fct_pt;
     }
 
+
     /// Return the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_axisymmetric_nst_traction(residuals);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -389,6 +398,7 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
+
     /// \short Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
@@ -426,6 +436,7 @@ namespace oomph
     // Traction vector
     get_traction(time, ipt, x, unit_normal, traction);
   }
+
 
   //=====================================================================
   /// Return the residuals for the
@@ -576,9 +587,11 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// Namespace containing the default Strouhal number of axisymmetric
@@ -591,6 +604,7 @@ namespace oomph
 
   } // namespace LinearisedFSIAxisymmetricNStNoSlipBCHelper
 
+
   //======================================================================
   /// \short A class for elements that allow the imposition of the linearised
   /// FSI no slip condition from an adjacent linearly elastic axisymmetric
@@ -598,10 +612,10 @@ namespace oomph
   /// policy class.
   //======================================================================
   template<class FLUID_BULK_ELEMENT, class SOLID_BULK_ELEMENT>
-  class LinearisedFSIAxisymmetricNStNoSlipBCElementElement :
-    public virtual FaceGeometry<FLUID_BULK_ELEMENT>,
-    public virtual FaceElement,
-    public virtual ElementWithExternalElement
+  class LinearisedFSIAxisymmetricNStNoSlipBCElementElement
+    : public virtual FaceGeometry<FLUID_BULK_ELEMENT>,
+      public virtual FaceElement,
+      public virtual ElementWithExternalElement
   {
   public:
     /// \short Constructor, takes the pointer to the "bulk" element and the
@@ -634,6 +648,7 @@ namespace oomph
        "LinearisedFSIAxisymmetricNStNoSlipBCElementElement");
        }*/
 
+
     /// \short Access function for the pointer to the fluid Strouhal number
     /// (if not set, St defaults to 1)
     double*& st_pt()
@@ -655,6 +670,7 @@ namespace oomph
       fill_in_generic_residual_contribution_fsi_no_slip_axisym(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
+
 
     /// \short Add the element's contribution to its residual vector and its
     /// Jacobian matrix
@@ -716,6 +732,7 @@ namespace oomph
       }
     }
 
+
     /// C-style output function
     void output(FILE* file_pt)
     {
@@ -727,6 +744,7 @@ namespace oomph
     {
       FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt, n_plot);
     }
+
 
   protected:
     /// \short Function to compute the shape and test functions and to return
@@ -752,6 +770,7 @@ namespace oomph
       return J_eulerian(s);
     }
 
+
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
@@ -774,6 +793,7 @@ namespace oomph
       // Return the value of the jacobian
       return J_eulerian_at_knot(ipt);
     }
+
 
   private:
     /// \short Add the element's contribution to its residual vector.
@@ -801,6 +821,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
 
+
   //===========================================================================
   /// Constructor, takes the pointer to the "bulk" element, and the
   /// face index that identifies the face of the bulk element to which
@@ -815,8 +836,8 @@ namespace oomph
     LinearisedFSIAxisymmetricNStNoSlipBCElementElement(
       FiniteElement* const& bulk_el_pt,
       const int& face_index,
-      const unsigned& id) :
-    FaceGeometry<FLUID_BULK_ELEMENT>(), FaceElement()
+      const unsigned& id)
+    : FaceGeometry<FLUID_BULK_ELEMENT>(), FaceElement()
   {
     // Set source element storage: one interaction with an external element
     // that provides the velocity of the adjacent linear elasticity
@@ -857,6 +878,7 @@ namespace oomph
     // additional values.
     add_additional_values(n_additional_values, id);
   }
+
 
   //===========================================================================
   /// \short Helper function to compute the element's residual vector and
@@ -941,6 +963,7 @@ namespace oomph
       Vector<double> dudt(3);
       ext_el_pt->interpolated_du_dt_axisymmetric_linear_elasticity(s_ext, dudt);
 
+
       // Now add to the appropriate equations
 
       // Loop over the test functions
@@ -960,6 +983,7 @@ namespace oomph
           {
             // Add the Lagrange multiplier "traction" to the bulk
             residuals[local_eqn] -= lambda[i] * testf[l] * W;
+
 
             // Jacobian entries
             if (flag)
@@ -1026,5 +1050,6 @@ namespace oomph
   }
 
 } // namespace oomph
+
 
 #endif

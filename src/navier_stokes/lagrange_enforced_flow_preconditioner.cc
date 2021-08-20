@@ -78,12 +78,14 @@ namespace oomph
       // Strength of dependence = 0.25
       hypre_preconditioner_pt->amg_strength() = 0.25;
 
+
       // Set the smoothers
       //   1 = Gauss-Seidel, sequential (very slow in parallel!)
       hypre_preconditioner_pt->amg_simple_smoother() = 1;
 
       // Set smoother damping (not required, so set to -1)
       hypre_preconditioner_pt->amg_damping() = -1;
+
 
       // Set number of cycles to 1xV(2,2)
       hypre_preconditioner_pt->set_amg_iterations(1);
@@ -116,12 +118,14 @@ namespace oomph
       // Strength of dependence = 0.668
       hypre_preconditioner_pt->amg_strength() = 0.668;
 
+
       // Set the smoothers
       //   1 = Gauss-Seidel, sequential (very slow in parallel!)
       hypre_preconditioner_pt->amg_simple_smoother() = 1;
 
       // Set smoother damping (not required, so set to -1)
       hypre_preconditioner_pt->amg_damping() = -1;
+
 
       // Set number of cycles to 1xV(2,2)
       hypre_preconditioner_pt->set_amg_iterations(1);
@@ -153,12 +157,14 @@ namespace oomph
       // Strength of dependence = 0.668
       hypre_preconditioner_pt->amg_strength() = 0.8;
 
+
       // Set the smoothers
       //   1 = Gauss-Seidel, sequential (very slow in parallel!)
       hypre_preconditioner_pt->amg_simple_smoother() = 1;
 
       // Set smoother damping (not required, so set to -1)
       hypre_preconditioner_pt->amg_damping() = -1;
+
 
       // Set number of cycles to 1xV(2,2)
       hypre_preconditioner_pt->set_amg_iterations(1);
@@ -190,12 +196,14 @@ namespace oomph
       // Strength of dependence = 0.668
       hypre_preconditioner_pt->amg_strength() = 0.8;
 
+
       // Set the smoothers
       //   1 = Gauss-Seidel, sequential (very slow in parallel!)
       hypre_preconditioner_pt->amg_simple_smoother() = 1;
 
       // Set smoother damping (not required, so set to -1)
       hypre_preconditioner_pt->amg_damping() = -1;
+
 
       // Set number of cycles to 1xV(2,2)
       hypre_preconditioner_pt->set_amg_iterations(2);
@@ -210,6 +218,7 @@ namespace oomph
         err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
 #endif
     } // function boomer_amg_for_3D_momentum
+
 
     /// \short Hypre Boomer AMG setting for the 2D Poisson problem
     /// (for serial code).
@@ -227,12 +236,14 @@ namespace oomph
       // Strength of dependence = 0.25
       hypre_preconditioner_pt->amg_strength() = 0.25;
 
+
       // Set the smoothers
       //   0 = Jacobi
       hypre_preconditioner_pt->amg_simple_smoother() = 0;
 
       // Set Jacobi damping = 2/3
       hypre_preconditioner_pt->amg_damping() = 0.668;
+
 
       // Set number of cycles to 1xV(2,2)
       hypre_preconditioner_pt->set_amg_iterations(2);
@@ -264,12 +275,14 @@ namespace oomph
       // Strength of dependence = 0.7
       hypre_preconditioner_pt->amg_strength() = 0.7;
 
+
       // Set the smoothers
       //   0 = Jacobi
       hypre_preconditioner_pt->amg_simple_smoother() = 0;
 
       // Set smoother damping = 2/3
       hypre_preconditioner_pt->amg_damping() = 0.668;
+
 
       // Set number of cycles to 2xV(1,1)
       hypre_preconditioner_pt->set_amg_iterations(2);
@@ -330,6 +343,7 @@ namespace oomph
     DoubleVector temp_vec;
     DoubleVector another_temp_vec;
     DoubleVector yet_another_temp_vec;
+
 
     // -----------------------------------------------------------------------
     // Step 1 - apply approximate W block inverse to Lagrange multiplier
@@ -481,6 +495,7 @@ namespace oomph
     My_mesh_pt = mesh_pt;
     My_nmesh = nmesh;
   } // function set_meshes
+
 
   //==========================================================================
   /// Setup the Lagrange enforced flow preconditioner. This
@@ -713,6 +728,7 @@ namespace oomph
     // Call the block setup
     this->block_setup(dof_to_block_map);
 
+
     // -----------------------------------------------------------------------
     // Step 2 - Get the infinite norm of Navier-Stokes F block.
     // -----------------------------------------------------------------------
@@ -921,6 +937,7 @@ namespace oomph
 
       Inv_w_diag_values.push_back(invw_i_diag_values);
 
+
       // Step 3.3: Perform the augmentation: v_aug + m_i * inv(w_i) * m_j
 
       ////////////////////////////////////////////////////////////////////////
@@ -1087,6 +1104,7 @@ namespace oomph
 
       // Push back the pressure DOF type
       dof_number_in_master_map.push_back(spatial_dim);
+
 
       // Step 5.2 DOF type coarsening.
 

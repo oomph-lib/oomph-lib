@@ -297,6 +297,7 @@ namespace oomph
 
             } // End of if not boundary condition
 
+
             // Imag
             //-----
 
@@ -418,11 +419,13 @@ namespace oomph
 
             } // End of if not boundary condition
 
+
           } // End of loop over coordinate directions
         }
       } // End of loop over shape functions
     } // End of loop over integration points
   }
+
 
   //====================================================================
   /// Force building of required templates

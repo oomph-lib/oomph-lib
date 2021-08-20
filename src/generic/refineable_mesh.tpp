@@ -68,6 +68,7 @@ namespace oomph
     // reconstruct the missing halo master nodes on this processor
     using namespace Missing_masters_functions;
 
+
     double t_start = 0.0;
     double t_end = 0.0;
     if (Global_timings::Doc_comprehensive_timings)
@@ -79,6 +80,7 @@ namespace oomph
     MPI_Status status;
     int n_proc = Comm_pt->nproc();
     int my_rank = Comm_pt->my_rank();
+
 
 #ifdef PARANOID
     // Paranoid check to make sure nothing else is using the
@@ -143,6 +145,7 @@ namespace oomph
         err_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Compare the halo and haloed nodes for discrepancies in hanging status
 
@@ -263,6 +266,7 @@ namespace oomph
               }
             }
 
+
             // Send the information to the relevant process
             unsigned count_halo = local_halo_hanging.size();
 
@@ -295,11 +299,13 @@ namespace oomph
       t_start = TimingHelpers::timer();
     }
 
+
     // Now compare equivalent halo and haloed vectors to find discrepancies.
     // It is possible that a master node may not be on either process involved
     // in the halo-haloed scheme; to work round this, we use the shared_node
     // storage scheme, which stores all nodes that are on each pair of
     // processors in the same order on each of the two processors
+
 
     // Loop over domains: Each processor checks consistency of hang status
     // of its haloed nodes with proc d against the halo counterpart. Haloed
@@ -341,6 +347,7 @@ namespace oomph
         } // end of loop over haloed nodes
       }
     } // end loop over all processors
+
 
     // Populate external halo(ed) node storage with master nodes of halo(ed)
     // nodes
@@ -593,6 +600,7 @@ namespace oomph
       }
     } // end loop over all processors
 
+
     if (Global_timings::Doc_comprehensive_timings)
     {
       t_end = TimingHelpers::timer();
@@ -709,6 +717,7 @@ namespace oomph
 
     } // end loop over processes
 
+
     // Say how many external halo/haloed nodes were added
     oomph_info << "INFO: " << external_halo_count << " external halo nodes and"
                << std::endl;
@@ -741,6 +750,7 @@ namespace oomph
       throw OomphLibError(
         err_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
+
 
     if (Global_timings::Doc_comprehensive_timings)
     {

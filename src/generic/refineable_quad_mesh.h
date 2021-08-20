@@ -23,16 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef QMESH2OOMPH_D_HEADER
-#define QMESH2OOMPH_D_HEADER
+#ifndef OOMPH_REFINEABLE_QUAD_MESH_HEADER
+#define OOMPH_REFINEABLE_QUAD_MESH_HEADER
 
 #include <limits.h>
 
 #include "quad_mesh.h"
 #include "refineable_mesh.h"
 #include "refineable_quad_element.h"
-// Include to fill in additional_setup_shared_node_scheme() function
-#include "refineable_mesh.h"
 
 namespace oomph
 {
@@ -48,9 +46,8 @@ namespace oomph
   /// provide a QuadTreeForest representation of the initial (coarse) mesh.
   //=======================================================================
   template<class ELEMENT>
-  class RefineableQuadMesh :
-    public virtual TreeBasedRefineableMesh<ELEMENT>,
-    public virtual QuadMeshBase
+  class RefineableQuadMesh : public virtual TreeBasedRefineableMesh<ELEMENT>,
+                             public virtual QuadMeshBase
   {
   public:
     /// Constructor: Setup static quadtree data
@@ -80,6 +77,7 @@ namespace oomph
 
     /// Destructor:
     virtual ~RefineableQuadMesh() {}
+
 
     /// \short Set up the tree forest associated with the Mesh.
     /// Forwards call to setup_quadtree_forest()

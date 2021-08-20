@@ -34,6 +34,7 @@
 #include "../constitutive/constitutive_laws.h"
 #include "../solid/solid_traction_elements.h"
 
+
 namespace oomph
 {
   //======================================================================
@@ -65,6 +66,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// Auxiliary Problem to smooth a SolidMesh by adjusting the internal
@@ -122,6 +124,7 @@ namespace oomph
                                                max_steps);
     }
 
+
     /// \short Functor to update the nodal positions in SolidMesh pointed to by
     /// orig_mesh_pt in response to the displacement of some of its
     /// nodes relative to their original position which must still be indicated
@@ -175,6 +178,7 @@ namespace oomph
       // GeomObject incarnations
       Vector<MeshAsGeomObject*> quadratic_surface_geom_obj_pt(nbound);
 
+
       // Create FaceElements on original mesh to define
       //-------------------------------------------------
       // the desired boundary shape
@@ -217,6 +221,7 @@ namespace oomph
         quadratic_surface_geom_obj_pt[b] =
           new MeshAsGeomObject(quadratic_surface_mesh_pt[b]);
       }
+
 
       // Now create Lagrange multiplier elements on dummy mesh
       //-------------------------------------------------------
@@ -262,11 +267,13 @@ namespace oomph
         add_sub_mesh(dummy_lagrange_multiplier_mesh_pt[i]);
       }
 
+
       // Combine the lot
       build_global_mesh();
 
       oomph_info << "Number of equations for nonlinear smoothing problem: "
                  << assign_eqn_numbers() << std::endl;
+
 
       // Complete the build of the elements so they are fully functional
       //----------------------------------------------------------------
@@ -282,6 +289,7 @@ namespace oomph
 
       } // end loop over elements
 
+
       // Output initial configuration
       doc_solution(doc_info);
       doc_info.number()++;
@@ -289,6 +297,7 @@ namespace oomph
       // Initial scale
       Helper_namespace_for_mesh_smoothing::Scale = 0.0;
       Helper_namespace_for_mesh_smoothing::Scale_increment = 0.1;
+
 
       // Increase scale of deformation until full range is reached
       //----------------------------------------------------------
@@ -333,8 +342,7 @@ namespace oomph
           count++;
           doc_solution(doc_info);
           doc_info.number()++;
-          if (Helper_namespace_for_mesh_smoothing::Scale >= 1.0)
-            done = true;
+          if (Helper_namespace_for_mesh_smoothing::Scale >= 1.0) done = true;
           if (count == max_steps)
           {
             oomph_info << "Bailing out after " << count << " steps.\n";
@@ -381,6 +389,7 @@ namespace oomph
     /// Destructor (empty)
     ~NonLinearElasticitySmoothMesh() {}
 
+
     /// \short Update nodal positions in main mesh -- also moves the
     /// nodes of the FaceElements that impose the new position
     void actions_before_newton_solve()
@@ -401,6 +410,7 @@ namespace oomph
       }
     }
 
+
     /// \short Backup nodal positions in dummy mesh to allow for reset
     /// after non-convergence of Newton method
     void backup()
@@ -418,6 +428,7 @@ namespace oomph
         }
       }
     }
+
 
     /// Reset nodal positions in dummy mesh to allow for restart of
     /// Newton method with reduced increment in Scale
@@ -439,8 +450,7 @@ namespace oomph
     void doc_solution(DocInfo& doc_info)
     {
       // Bail out
-      if (!doc_info.is_doc_enabled())
-        return;
+      if (!doc_info.is_doc_enabled()) return;
 
       std::ofstream some_file;
       std::ostringstream filename;
@@ -467,8 +477,7 @@ namespace oomph
                                              some_file);
       some_file.close();
       oomph_info << "Dummy mesh does ";
-      if (!mesh_has_inverted_elements)
-        oomph_info << "not ";
+      if (!mesh_has_inverted_elements) oomph_info << "not ";
       oomph_info << "have inverted elements. \n";
     }
 
@@ -486,9 +495,11 @@ namespace oomph
     SolidMesh* Dummy_mesh_pt;
   };
 
+
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// Auxiliary Problem to smooth a SolidMesh by adjusting the internal
@@ -590,6 +601,7 @@ namespace oomph
       oomph_info << "Number of equations for smoothing problem: "
                  << assign_eqn_numbers() << std::endl;
 
+
       // Solve
       newton_solve();
 
@@ -619,9 +631,11 @@ namespace oomph
     ~LinearElasticitySmoothMesh() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //====================================================================
   /// Functor to smooth a SolidMesh by adjusting the internal
@@ -695,6 +709,7 @@ namespace oomph
         }
       }
 
+
       // Loop over pinned nodes
       for (std::set<Node*>::iterator it = pinned_nodes.begin();
            it != pinned_nodes.end();
@@ -743,6 +758,7 @@ namespace oomph
       delete mesh_pt();
     }
   };
+
 
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////

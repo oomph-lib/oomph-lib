@@ -23,35 +23,6 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-// LIC// ====================================================================
-// LIC// This file forms part of oomph-lib, the object-oriented,
-// LIC// multi-physics finite-element library, available
-// LIC// at http://www.oomph-lib.org.
-// LIC//
-// LIC//    Version 1.0; svn revision $LastChangedRevision$
-// LIC//
-// LIC// $LastChangedDate$
-// LIC//
-// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
-// LIC//
-// LIC// This library is free software; you can redistribute it and/or
-// LIC// modify it under the terms of the GNU Lesser General Public
-// LIC// License as published by the Free Software Foundation; either
-// LIC// version 2.1 of the License, or (at your option) any later version.
-// LIC//
-// LIC// This library is distributed in the hope that it will be useful,
-// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// LIC// Lesser General Public License for more details.
-// LIC//
-// LIC// You should have received a copy of the GNU Lesser General Public
-// LIC// License along with this library; if not, write to the Free Software
-// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-// LIC// 02110-1301  USA.
-// LIC//
-// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-// LIC//
-// LIC//====================================================================
 // Header file for a class that is used to represent a mesh
 // as a geometric object
 
@@ -72,6 +43,7 @@
 
 // Sample point container
 #include "sample_point_container.h"
+
 
 #include "sample_point_parameters.h"
 
@@ -99,9 +71,11 @@ namespace oomph
 
   } // namespace MeshAsGeomObject_Helper
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //========================================================================
   /// This class provides a GeomObject representation of a given
@@ -153,6 +127,7 @@ namespace oomph
       Communicator_pt = Mesh_pt->communicator_pt();
 
 #endif
+
 
       // Storage for the Lagrangian and Eulerian dimension
       int dim[2] = {0, 0};
@@ -284,6 +259,7 @@ namespace oomph
       }
     }
 
+
     /// \short Vector of pointers to Data items that affects the object's shape
     Vector<Data*> Geom_data_pt;
 
@@ -320,6 +296,7 @@ namespace oomph
       return Sub_geom_object_pt[e];
     }
 
+
     /// \short Which sample point container is used in locate zeta? (uses enum
     /// Sample_Point_Container_Type)
     unsigned sample_point_container_version() const
@@ -346,10 +323,11 @@ namespace oomph
       delete sample_point_container_parameters_pt;
     }
 
+
     ///\short Constructor
     MeshAsGeomObject(
-      SamplePointContainerParameters* sample_point_container_parameters_pt) :
-      GeomObject()
+      SamplePointContainerParameters* sample_point_container_parameters_pt)
+      : GeomObject()
     {
       build_it(sample_point_container_parameters_pt);
     }
@@ -412,6 +390,7 @@ namespace oomph
           OOMPH_EXCEPTION_LOCATION);
       }
 #endif
+
 
       // Do locate in sample point container
       Sample_point_container_pt->locate_zeta(zeta, sub_geom_object_pt, s);

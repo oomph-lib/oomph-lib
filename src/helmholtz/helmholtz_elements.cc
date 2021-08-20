@@ -26,6 +26,7 @@
 // Non-inline functions for Helmholtz elements
 #include "helmholtz_elements.h"
 
+
 namespace oomph
 {
   //======================================================================
@@ -34,6 +35,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   const unsigned QHelmholtzElement<DIM, NNODE_1D>::Initial_Nvalue = 2;
+
 
   //======================================================================
   /// Compute element residual Vector and/or element Jacobian matrix
@@ -214,6 +216,7 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   //======================================================================
   /// Self-test:  Return 0 for OK
   //======================================================================
@@ -238,6 +241,7 @@ namespace oomph
       return 1;
     }
   }
+
 
   //======================================================================
   /// Output function:
@@ -273,6 +277,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Output function for real part of full time-dependent solution
@@ -314,6 +319,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //======================================================================
   /// C-style output function:
   ///
@@ -354,6 +360,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(file_pt, nplot);
   }
+
 
   //======================================================================
   /// Output exact solution
@@ -405,6 +412,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Output function for real part of full time-dependent fct
@@ -461,6 +469,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //======================================================================
   /// Validate against exact solution
@@ -544,6 +553,7 @@ namespace oomph
                W;
     }
   }
+
 
   //====================================================================
   // Force build of templates

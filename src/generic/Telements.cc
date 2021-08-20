@@ -29,6 +29,7 @@
 // oomph-lib headers
 #include "Telements.h"
 
+
 namespace oomph
 {
   //=======================================================================
@@ -83,6 +84,7 @@ namespace oomph
     }
     outfile << std::endl;
   }
+
 
   //=======================================================================
   /// C style output function for general 1D TElements
@@ -145,6 +147,7 @@ namespace oomph
       s_bulk[0] = 1.0;
     }
   } // namespace TElement1FaceToBulkCoordinates
+
 
   //=============================================================
   /// Namespace for helper functions that calculate derivatives
@@ -241,6 +244,7 @@ namespace oomph
         face_element_pt->bulk_coordinate_derivatives_fct_pt() =
           &TElement1BulkCoordinateDerivatives::faces0;
 
+
         // Set the number of values stored when the node is part of the "bulk"
         // element.
         face_element_pt->nbulk_value(0) = required_nvalue(NNODE_1D - 1);
@@ -258,6 +262,7 @@ namespace oomph
     }
   }
 
+
   ////////////////////////////////////////////////////////////////
   //       2D Telements
   ////////////////////////////////////////////////////////////////
@@ -273,6 +278,7 @@ namespace oomph
   template<>
   const unsigned TElement<2, 4>::Node_on_face[3][4] = {
     {2, 6, 5, 1}, {2, 7, 8, 0}, {0, 3, 4, 1}};
+
 
   //===================================================================
   /// Namespace for the functions that translate local face coordinates
@@ -302,6 +308,7 @@ namespace oomph
     }
   } // namespace TElement2FaceToBulkCoordinates
 
+
   //=============================================================
   /// Namespace for helper functions that calculate derivatives
   /// of the local coordinates in the bulk elements wrt the
@@ -322,6 +329,7 @@ namespace oomph
       // The interior direction is given by s[0]
       interior_direction = 0;
     }
+
 
     /// Function for the "bottom" face along which s1 is fixed
     void face1(const Vector<double>& s,
@@ -352,6 +360,7 @@ namespace oomph
     }
 
   } // namespace TElement2BulkCoordinateDerivatives
+
 
   //=======================================================================
   /// Function to setup geometrical information for lower-dimensional
@@ -476,6 +485,7 @@ namespace oomph
     } // end switch
   }
 
+
   //=======================================================================
   /// The output function for TElement<2,NNODE_1D>
   //=======================================================================
@@ -485,6 +495,7 @@ namespace oomph
     // QUEHACERES want to perform same output, but at each node
     output(outfile, NNODE_1D);
   }
+
 
   //=======================================================================
   /// The output function for TElement<2,NNODE_1D>
@@ -529,6 +540,7 @@ namespace oomph
     output(file_pt, NNODE_1D);
   }
 
+
   //=======================================================================
   /// The C-style output function for TElement<2,NNODE_1D>
   //=======================================================================
@@ -564,9 +576,11 @@ namespace oomph
     write_tecplot_zone_footer(file_pt, nplot);
   }
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //=======================================================================
   /// The output function for TElement<3,NNODE_1D>
@@ -576,6 +590,7 @@ namespace oomph
   {
     output(outfile, NNODE_1D);
   }
+
 
   //=======================================================================
   /// The output function for TElement<3,NNODE_1D>
@@ -611,6 +626,7 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+
   //=======================================================================
   /// The C-style output function for TElement<3,NNODE_1D>
   //=======================================================================
@@ -619,6 +635,7 @@ namespace oomph
   {
     output(file_pt, NNODE_1D);
   }
+
 
   //=======================================================================
   /// The C-style output function for TElement<3,NNODE_1D>
@@ -706,6 +723,7 @@ namespace oomph
                                                        {0, 2, 3, 5, 8, 6},
                                                        {0, 1, 3, 4, 9, 6},
                                                        {1, 2, 0, 7, 5, 4}};
+
 
   //=======================================================================
   /// Function to setup geometrical information for lower-dimensional
@@ -818,6 +836,7 @@ namespace oomph
 
         break;
 
+
       default:
 
         std::ostringstream error_message;
@@ -830,6 +849,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
     } // end switch
   }
+
 
   //==================================================================
   // Default integration scheme for the TBubbleEnrichedElement<2,3>
@@ -845,6 +865,7 @@ namespace oomph
   const unsigned TBubbleEnrichedElement<2, 3>::Central_node_on_face[3] = {
     4, 5, 3};
 
+
   //================================================================
   /// The face element for is the same in the two-dimesional case
   //================================================================
@@ -855,12 +876,14 @@ namespace oomph
     TElement<2, 3>::build_face_element(face_index, face_element_pt);
   }
 
+
   //===================================================================
   // Central node on the face of the TBubbleEnrichedelement<3,3>
   //===================================================================
   template<>
   const unsigned TBubbleEnrichedElement<3, 3>::Central_node_on_face[4] = {
     13, 12, 10, 11};
+
 
   //=======================================================================
   /// Function to setup geometrical information for lower-dimensional
@@ -922,6 +945,7 @@ namespace oomph
         static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
+
   //===========================================================
   /// Final override for
   /// function to setup geometrical information for lower-dimensional
@@ -940,6 +964,7 @@ namespace oomph
       ->set_lagrangian_dimension(
         static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
+
 
   //===================================================================
   // Build required templates

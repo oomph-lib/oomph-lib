@@ -58,6 +58,7 @@ namespace oomph
     void face1(const Vector<double>& s, Vector<double>& s_bulk);
   } // namespace QElement1FaceToBulkCoordinates
 
+
   //=============================================================
   /// Namespace for helper functions that calculate derivatives
   /// of the local coordinates in the bulk elements wrt the
@@ -70,6 +71,7 @@ namespace oomph
                 DenseMatrix<double>& dsbulk_dsface,
                 unsigned& interior_direction);
   } // namespace QElement1BulkCoordinateDerivatives
+
 
   //===================================================================
   /// Namespace for the functions that translate local face coordinates
@@ -90,6 +92,7 @@ namespace oomph
     void face3(const Vector<double>& s, Vector<double>& s_bulk);
   } // namespace QElement2FaceToBulkCoordinates
 
+
   //=============================================================
   /// Namespace for helper functions that calculate derivatives
   /// of the local coordinates in the bulk elements wrt the
@@ -107,6 +110,7 @@ namespace oomph
                 DenseMatrix<double>& dsbulk_dsface,
                 unsigned& interior_direction);
   } // namespace QElement2BulkCoordinateDerivatives
+
 
   //===================================================================
   /// Namespace for the functions that translate local face coordinates
@@ -132,6 +136,7 @@ namespace oomph
     /// The translation scheme for the front face (s2 = 1.0)
     void face5(const Vector<double>& s, Vector<double>& s_bulk);
   } // namespace QElement3FaceToBulkCoordinates
+
 
   //=============================================================
   /// Namespace for helper functions that calculate derivatives

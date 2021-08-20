@@ -44,6 +44,7 @@ namespace oomph
 
   } // namespace PseudoSolidHelper
 
+
   //==========================================================================
   /// A templated class that permits combination two different element types,
   /// for the solution of problems in deforming domains. The first template
@@ -51,9 +52,8 @@ namespace oomph
   /// the equations that are used to control the mesh deformation.
   //==========================================================================
   template<class BASIC, class SOLID>
-  class PseudoSolidNodeUpdateElement :
-    public virtual BASIC,
-    public virtual SOLID
+  class PseudoSolidNodeUpdateElement : public virtual BASIC,
+                                       public virtual SOLID
 
   {
     /// Boolean flag to indicate shape derivative method
@@ -62,8 +62,8 @@ namespace oomph
   public:
     /// \short Constructor, call the BASIC and SOLID elements' constructors and
     /// set the "density" parameter for solid element to zero
-    PseudoSolidNodeUpdateElement() :
-      BASIC(), SOLID(), Shape_derivs_by_direct_fd(true)
+    PseudoSolidNodeUpdateElement()
+      : BASIC(), SOLID(), Shape_derivs_by_direct_fd(true)
     {
       SOLID::lambda_sq_pt() = &PseudoSolidHelper::Zero;
     }
@@ -156,6 +156,7 @@ namespace oomph
       fill_in_shape_derivatives(jacobian);
     }
 
+
     /// Evaluate shape derivatives by direct finite differencing
     void evaluate_shape_derivs_by_direct_fd()
     {
@@ -167,6 +168,7 @@ namespace oomph
     {
       Shape_derivs_by_direct_fd = false;
     }
+
 
     /// \short Fill in the shape derivatives of the BASIC equations
     /// w.r.t. the solid position dofs
@@ -237,6 +239,7 @@ namespace oomph
         }
       }
     }
+
 
     /// \short Fill in the derivatives of the BASIC equations
     /// w.r.t. the solid position dofs
@@ -313,6 +316,7 @@ namespace oomph
           dof_is_solid[local_dof] = true;
         }
       }
+
 
       // Integer storage for local unknown
       int local_unknown = 0;
@@ -403,6 +407,7 @@ namespace oomph
       this->reset_after_solid_position_fd();
     }
 
+
     /// \short Specify Data that affects the geometry of the element
     /// by adding the position Data to the set that's passed in.
     /// (This functionality is required in FSI problems; set is used to
@@ -417,6 +422,7 @@ namespace oomph
           dynamic_cast<SolidNode*>(this->node_pt(j))->variable_position_pt());
       }
     }
+
 
     /// Overload the output function: Call that of the basic element
     void output(std::ostream& outfile)
@@ -449,6 +455,7 @@ namespace oomph
     {
       return BASIC::num_Z2_flux_terms();
     }
+
 
     /// \short Plot the error when compared against a given exact flux.
     /// Also calculates the norm of the error and that of the exact flux.
@@ -487,6 +494,7 @@ namespace oomph
     {
       return BASIC::nrecovery_order();
     }
+
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into.
@@ -545,8 +553,8 @@ namespace oomph
 
   /// Explicit definition of the face geometry of these elements
   template<class BASIC, class SOLID>
-  class FaceGeometry<PseudoSolidNodeUpdateElement<BASIC, SOLID>> :
-    public virtual FaceGeometry<SOLID>
+  class FaceGeometry<PseudoSolidNodeUpdateElement<BASIC, SOLID>>
+    : public virtual FaceGeometry<SOLID>
   {
   public:
     /// \short Constuctor calls the constructor of the SolidQElement
@@ -556,8 +564,8 @@ namespace oomph
 
   /// Explicit definition of the face geometry of these elements
   template<class BASIC, class SOLID>
-  class FaceGeometry<FaceGeometry<PseudoSolidNodeUpdateElement<BASIC, SOLID>>> :
-    public virtual FaceGeometry<FaceGeometry<SOLID>>
+  class FaceGeometry<FaceGeometry<PseudoSolidNodeUpdateElement<BASIC, SOLID>>>
+    : public virtual FaceGeometry<FaceGeometry<SOLID>>
   {
   public:
     /// \short Constuctor calls the constructor of the SolidQElement
@@ -567,19 +575,19 @@ namespace oomph
   protected:
   };
 
+
   //===================================================================
   /// Refineable version of the PseudoSolidNodeUpdateELement
   //===================================================================
   template<class BASIC, class SOLID>
-  class RefineablePseudoSolidNodeUpdateElement :
-    public virtual BASIC,
-    public virtual SOLID
+  class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
+                                                 public virtual SOLID
   {
   public:
     /// \short Constructor, call the BASIC and SOLID elements' constructors and
     /// set the "density" parameter for solid element to zero
-    RefineablePseudoSolidNodeUpdateElement() :
-      RefineableElement(), BASIC(), SOLID()
+    RefineablePseudoSolidNodeUpdateElement()
+      : RefineableElement(), BASIC(), SOLID()
     {
       SOLID::lambda_sq_pt() = &PseudoSolidHelper::Zero;
     }
@@ -675,6 +683,7 @@ namespace oomph
       // Now fill in the off-diagonal entries (the shape derivatives),
       fill_in_shape_derivatives_by_fd(jacobian);
     }
+
 
     /// \short Fill in the derivatives of the BASIC equations
     /// w.r.t. to the solid position dofs, taking hanging nodes
@@ -840,6 +849,7 @@ namespace oomph
         }
       } // end of loop over solid pressure dofs
 
+
       // Used default value defined in GeneralisedElement
       const double fd_step = this->Default_fd_jacobian_step;
 
@@ -887,6 +897,7 @@ namespace oomph
                   newres[m] = 0.0;
                 }
                 BASIC::fill_in_contribution_to_residuals(newres);
+
 
                 //           if (use_first_order_fd)
                 {
@@ -1035,6 +1046,7 @@ namespace oomph
       this->reset_after_solid_position_fd();
     }
 
+
     /// \short Specify Data that affects the geometry of the element
     /// by adding the position Data to the set that's passed in.
     /// (This functionality is required in FSI problems; set is used to
@@ -1074,6 +1086,7 @@ namespace oomph
         }
       }
     }
+
 
     /// \short Final override for the assign__additional_local_eqn_numbers():
     ///  Call the version for the BASIC element
@@ -1116,6 +1129,7 @@ namespace oomph
         values.push_back(*it);
       }
     }
+
 
     /// Call get_interpolated_values(...) for both of the underlying element
     /// types
@@ -1184,6 +1198,7 @@ namespace oomph
           n1d, i, (value_id - n_basic_values));
       }
     }
+
 
     /// \short The velocity nodes are the same as the geometric nodes. The
     /// pressure nodes must be calculated by using the same methods as
@@ -1267,6 +1282,7 @@ namespace oomph
       }
     }
 
+
     /// \short Number of 'flux' terms for Z2 error estimation: Error estimation
     /// is based on error in BASIC element
     unsigned num_Z2_flux_terms()
@@ -1290,6 +1306,7 @@ namespace oomph
       SOLID::further_setup_hanging_nodes();
     }
 
+
     /// \short Build function: Call the one for the SOLID element since it
     /// calls the one basic build function automatically.
     void build(Mesh*& mesh_pt,
@@ -1299,6 +1316,7 @@ namespace oomph
     {
       SOLID::build(mesh_pt, new_node_pt, was_already_built, new_nodes_file);
     }
+
 
     /// \short Build function: Call the one for the SOLID element since it
     /// calls the one basic build function automatically.
@@ -1316,6 +1334,7 @@ namespace oomph
       BASIC::further_build();
       SOLID::further_build();
     }
+
 
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
@@ -1433,10 +1452,11 @@ namespace oomph
     }
   };
 
+
   /// Explicit definition of the face geometry of these elements
   template<class BASIC, class SOLID>
-  class FaceGeometry<RefineablePseudoSolidNodeUpdateElement<BASIC, SOLID>> :
-    public virtual FaceGeometry<SOLID>
+  class FaceGeometry<RefineablePseudoSolidNodeUpdateElement<BASIC, SOLID>>
+    : public virtual FaceGeometry<SOLID>
   {
   public:
     /// \short Constructor calls the constructor of the SolidQElement
@@ -1449,8 +1469,8 @@ namespace oomph
   /// Explicit definition of the face geometry of these elements
   template<class BASIC, class SOLID>
   class FaceGeometry<
-    FaceGeometry<RefineablePseudoSolidNodeUpdateElement<BASIC, SOLID>>> :
-    public virtual FaceGeometry<FaceGeometry<SOLID>>
+    FaceGeometry<RefineablePseudoSolidNodeUpdateElement<BASIC, SOLID>>>
+    : public virtual FaceGeometry<FaceGeometry<SOLID>>
   {
   public:
     /// \short Constuctor calls the constructor of the SolidQElement
@@ -1459,6 +1479,7 @@ namespace oomph
 
   protected:
   };
+
 
 } // namespace oomph
 

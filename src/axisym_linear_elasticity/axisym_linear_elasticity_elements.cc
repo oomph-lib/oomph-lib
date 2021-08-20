@@ -28,6 +28,7 @@
 
 #include "axisym_linear_elasticity_elements.h"
 
+
 namespace oomph
 {
   /// \short Static default value for Young's modulus (1.0 -- for natural
@@ -56,6 +57,7 @@ namespace oomph
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
+
 
 #ifdef PARANOID
     // Find out how many positional dofs there are
@@ -93,6 +95,7 @@ namespace oomph
     // Eulerian coordinates
     DenseMatrix<double> interpolated_dudx(3, 2, 0.0);
 
+
     // Calculate displacements and derivatives
     for (unsigned l = 0; l < n_node; l++)
     {
@@ -116,6 +119,7 @@ namespace oomph
       }
     }
 
+
     // define shorthand notation for regularly-occurring terms
     double r = interpolated_x[0];
 
@@ -133,19 +137,20 @@ namespace oomph
     double duthdr = interpolated_dudx(2, 0);
     double duthdz = interpolated_dudx(2, 1);
 
+
     // e_rr
     strain(0, 0) = durdr;
     // e_rz
-    strain(0, 1) = durdz + duzdr;
-    strain(1, 0) = durdz + duzdr;
+    strain(0, 1) = 0.5 * (durdz + duzdr);
+    strain(1, 0) = 0.5 * (durdz + duzdr);
     // e_rphi
-    strain(0, 2) = duthdr - uth / r;
-    strain(2, 0) = duthdr - uth / r;
+    strain(0, 2) = 0.5 * (duthdr - uth / r);
+    strain(2, 0) = 0.5 * (duthdr - uth / r);
     // e_zz
     strain(1, 1) = duzdz;
     // e_zphi
-    strain(1, 2) = duthdz;
-    strain(2, 1) = duthdz;
+    strain(1, 2) = 0.5 * duthdz;
+    strain(2, 1) = 0.5 * duthdz;
     // e_phiphi
     strain(2, 2) = ur / r;
   }
@@ -192,6 +197,7 @@ namespace oomph
     double lambda = youngs_modulus_local * nu_local / (1.0 + nu_local) /
                     (1.0 - 2.0 * nu_local);
     double mu = youngs_modulus_local / 2.0 / (1.0 + nu_local);
+
 
     // Lambda squared --- time scaling, NOT sqaure of Lame parameter lambda
     const double lambda_sq = this->lambda_sq();
@@ -559,6 +565,7 @@ namespace oomph
     Vector<double> du_dt(3);
     Vector<double> d2u_dt2(3);
 
+
     // Tecplot header info
     outfile << this->tecplot_zone_string(nplot);
 
@@ -605,6 +612,7 @@ namespace oomph
     // Write tecplot footer (e.g. FE connectivity lists)
     this->write_tecplot_zone_footer(outfile, nplot);
   }
+
 
   //=======================================================================
   /// C-style output:r,z, u_r, u_z, u_theta
@@ -709,6 +717,7 @@ namespace oomph
                  W;
       }
 
+
       // Output r,z coordinates
       for (unsigned i = 0; i < 2; i++)
       {
@@ -791,6 +800,7 @@ namespace oomph
                  W;
       }
 
+
       // Output r,z coordinates
       for (unsigned i = 0; i < 2; i++)
       {
@@ -812,5 +822,6 @@ namespace oomph
   template class QAxisymmetricLinearElasticityElement<2>;
   template class QAxisymmetricLinearElasticityElement<3>;
   template class QAxisymmetricLinearElasticityElement<4>;
+
 
 } // namespace oomph

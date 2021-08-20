@@ -30,6 +30,7 @@ namespace oomph
   // VECTOR METHODS
   // =============================================================
 
+
   //=============================================================================
   /// \short create an Epetra_Vector from an oomph-lib DoubleVector.
   /// If oomph_vec is NOT distributed (i.e. locally replicated) and
@@ -274,6 +275,7 @@ namespace oomph
   // MATRIX METHODS
   // =============================================================
 
+
   //=============================================================================
   /// \short create an Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
   /// If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and
@@ -421,6 +423,7 @@ namespace oomph
     return epetra_matrix_pt;
   }
 
+
   //=============================================================================
   /// Class to allow sorting of column indices in conversion to epetra matrix
   //=============================================================================
@@ -428,8 +431,8 @@ namespace oomph
   {
   public:
     /// Constructor: Pass number of first column and the number of local columns
-    DistributionPredicate(const int& first_col, const int& ncol_local) :
-      First_col(first_col), Last_col(first_col + ncol_local - 1)
+    DistributionPredicate(const int& first_col, const int& ncol_local)
+      : First_col(first_col), Last_col(first_col + ncol_local - 1)
     {
     }
 
@@ -454,6 +457,7 @@ namespace oomph
     /// Last colum held locally
     int Last_col;
   };
+
 
   //=============================================================================
   /// \short create and Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
@@ -638,7 +642,9 @@ namespace oomph
     return epetra_matrix_pt;
   }
 
+
   // MATRIX OPERATION METHODS ==================================================
+
 
   //============================================================================
   /// \short  Function to perform a matrix-vector multiplication on a
@@ -960,8 +966,10 @@ namespace oomph
       matrix_2.ncol(), nnz_local, value, column_index, row_start);
   }
 
+
   // HELPER METHODS
   // =============================================================
+
 
   //=============================================================================
   /// create an Epetra_Map corresponding to the LinearAlgebraDistribution

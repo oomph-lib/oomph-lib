@@ -34,6 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+
 // OOMPH-LIB headers
 #include "generic/Qelements.h"
 #include "generic/hermite_elements.h"
@@ -63,6 +64,7 @@ namespace oomph
 
   } // namespace SolidTractionElementHelper
 
+
   //======================================================================
   /// A class for elements that allow the imposition of an applied traction
   /// in the principle of virtual displacements.
@@ -71,9 +73,8 @@ namespace oomph
   /// a separate equations class.
   //======================================================================
   template<class ELEMENT>
-  class SolidTractionElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual SolidFaceElement
+  class SolidTractionElement : public virtual FaceGeometry<ELEMENT>,
+                               public virtual SolidFaceElement
   {
   protected:
     /// \short Pointer to an imposed traction function. Arguments:
@@ -85,6 +86,7 @@ namespace oomph
                             const Vector<double>& x,
                             const Vector<double>& n,
                             Vector<double>& result);
+
 
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Lagr. coordinate and normal vector and return the load vector
@@ -101,6 +103,7 @@ namespace oomph
       Traction_fct_pt(xi, x, n, traction);
     }
 
+
     /// \short Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
@@ -108,14 +111,14 @@ namespace oomph
     void fill_in_contribution_to_residuals_solid_traction(
       Vector<double>& residuals);
 
+
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
-    SolidTractionElement(
-      FiniteElement* const& element_pt,
-      const int& face_index,
-      const bool& called_from_refineable_constructor = false) :
-      FaceGeometry<ELEMENT>(), FaceElement()
+    SolidTractionElement(FiniteElement* const& element_pt,
+                         const int& face_index,
+                         const bool& called_from_refineable_constructor = false)
+      : FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -151,6 +154,7 @@ namespace oomph
 #endif
     }
 
+
     /// Reference to the traction function pointer
     void (*&traction_fct_pt())(const Vector<double>& xi,
                                const Vector<double>& x,
@@ -160,11 +164,13 @@ namespace oomph
       return Traction_fct_pt;
     }
 
+
     /// Return the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_solid_traction(residuals);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -187,6 +193,7 @@ namespace oomph
       unsigned n_plot = 5;
       output(outfile, n_plot);
     }
+
 
     /// \short Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
@@ -259,6 +266,7 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
+
     /// \short Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
@@ -284,6 +292,7 @@ namespace oomph
     Vector<double> x(n_dim);
     interpolated_x(s, x);
 
+
     // Lagrangian coordinate
     Vector<double> xi(n_dim);
     this->interpolated_xi(s, xi);
@@ -298,6 +307,7 @@ namespace oomph
     // Traction vector
     get_traction(ipt, xi, x, unit_normal, traction);
   }
+
 
   //=====================================================================
   /// Return the residuals for the SolidTractionElement equations
@@ -442,9 +452,11 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   ///  A class for elements that allow the imposition of an applied traction
@@ -456,16 +468,16 @@ namespace oomph
   /// THIS IS THE REFINEABLE VERSION.
   //======================================================================
   template<class ELEMENT>
-  class RefineableSolidTractionElement :
-    public virtual SolidTractionElement<ELEMENT>,
-    public virtual NonRefineableSolidElementWithHangingNodes
+  class RefineableSolidTractionElement
+    : public virtual SolidTractionElement<ELEMENT>,
+      public virtual NonRefineableSolidElementWithHangingNodes
   {
   public:
     /// Constructor, which takes a "bulk" element and the face index
     RefineableSolidTractionElement(FiniteElement* const& element_pt,
-                                   const int& face_index) :
-      // we're calling this from the constructor of the refineable version.
-      SolidTractionElement<ELEMENT>(element_pt, face_index, true)
+                                   const int& face_index)
+      : // we're calling this from the constructor of the refineable version.
+        SolidTractionElement<ELEMENT>(element_pt, face_index, true)
     {
     }
 
@@ -487,6 +499,7 @@ namespace oomph
       refineable_fill_in_contribution_to_residuals_solid_traction(residuals);
     }
 
+
     ///\short This function returns the residuals and the Jacobian
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -503,6 +516,7 @@ namespace oomph
       this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
     }
 
+
   protected:
     /// \short This function returns the residuals for the
     /// traction function.
@@ -510,9 +524,11 @@ namespace oomph
       Vector<double>& residuals);
   };
 
+
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
+
 
   //============================================================================
   /// Function that returns the residuals for the imposed traction solid
@@ -529,6 +545,7 @@ namespace oomph
     // Find out how many positional dofs there are
     unsigned n_position_type = this->nnodal_position_type();
 
+
 #ifdef PARANOID
     if (n_position_type != 1)
     {
@@ -538,6 +555,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
 
     // Find out the dimension of the node
     unsigned n_dim = this->nodal_dimension();
@@ -671,6 +689,7 @@ namespace oomph
           n_master = 1;
         }
 
+
         // Storage for local equation numbers at node indexed by
         // type and direction
         DenseMatrix<int> position_local_eqn_at_node(n_position_type, n_dim);
@@ -730,6 +749,7 @@ namespace oomph
                 /*          if(local_eqn >= 0) */
                 /*           { */
 
+
                 // Add the loading terms to the residuals
                 residuals[local_eqn] -=
                   traction[i] * psi(l, k) * W * hang_weight;
@@ -742,9 +762,11 @@ namespace oomph
     } // End of loop over integration points
   }
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// SolidTractionElement "upgraded" to a FSIWallElement (and thus,
@@ -753,9 +775,8 @@ namespace oomph
   /// the spatial (Eulerian) dimension of the bulk element.
   //=========================================================================
   template<class ELEMENT, unsigned DIM>
-  class FSISolidTractionElement :
-    public virtual SolidTractionElement<ELEMENT>,
-    public virtual FSIWallElement
+  class FSISolidTractionElement : public virtual SolidTractionElement<ELEMENT>,
+                                  public virtual FSIWallElement
   {
   private:
     /// Boolean flag to indicate whether the normal is directed into the fluid
@@ -774,10 +795,10 @@ namespace oomph
     FSISolidTractionElement(
       FiniteElement* const& element_pt,
       const int& face_index,
-      const bool& called_from_refineable_constructor = false) :
-      SolidTractionElement<ELEMENT>(
-        element_pt, face_index, called_from_refineable_constructor),
-      Normal_points_into_fluid(true)
+      const bool& called_from_refineable_constructor = false)
+      : SolidTractionElement<ELEMENT>(
+          element_pt, face_index, called_from_refineable_constructor),
+        Normal_points_into_fluid(true)
     {
       unsigned n_lagr = DIM - 1;
       unsigned n_dim = DIM;
@@ -786,6 +807,7 @@ namespace oomph
 
     /// \short Destructor: empty
     ~FSISolidTractionElement() {}
+
 
     /// \short Set the normal computed by underlying FaceElement
     /// to point into the fluid
@@ -811,6 +833,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
+
     /// \short Final overload... Forwards to the version in the FSIWallElement
     virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                   DenseMatrix<double>& jacobian)
@@ -821,6 +844,7 @@ namespace oomph
       // Add the contribution of the external load data by finite differences
       this->fill_in_jacobian_from_external_interaction_by_fd(jacobian);
     }
+
 
     /// \short Get the load vector: Pass number of the integration point,
     /// Lagr. coordinate, Eulerian coordinate (neither of the last two
@@ -847,6 +871,7 @@ namespace oomph
       }
 
     } // end of get_traction
+
 
     /// \short Output function: Note we can only output the traction
     /// at Gauss points so n_plot is actually ignored.
@@ -895,6 +920,7 @@ namespace oomph
         {
           get_traction(ipt, xi, r, unit_normal, traction);
         }
+
 
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -945,6 +971,7 @@ namespace oomph
     void get_dof_numbers_for_unknowns(
       std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
   };
+
 
   //=============================================================================
   /// Create a list of pairs for all unknowns in this element,
@@ -999,9 +1026,11 @@ namespace oomph
     }
   }
 
+
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// RefineableSolidTractionElement "upgraded" to a FSIWallElement (and thus,
@@ -1010,10 +1039,10 @@ namespace oomph
   /// the spatial (Eulerian) dimension of the bulk element.
   //=========================================================================
   template<class ELEMENT, unsigned DIM>
-  class RefineableFSISolidTractionElement :
-    public virtual RefineableSolidTractionElement<ELEMENT>,
-    public virtual FSISolidTractionElement<ELEMENT, DIM>,
-    public virtual FSIWallElement
+  class RefineableFSISolidTractionElement
+    : public virtual RefineableSolidTractionElement<ELEMENT>,
+      public virtual FSISolidTractionElement<ELEMENT, DIM>,
+      public virtual FSIWallElement
   {
   public:
     /// \short Constructor: Create element as FSIWallElement (and thus,
@@ -1026,15 +1055,16 @@ namespace oomph
     /// Constructor for GeomObject is called explicitly because
     /// of virtual inheritance!
     RefineableFSISolidTractionElement(FiniteElement* const& element_pt,
-                                      const int& face_index) :
-      SolidTractionElement<ELEMENT>(element_pt, face_index, true),
-      RefineableSolidTractionElement<ELEMENT>(element_pt, face_index),
-      FSISolidTractionElement<ELEMENT, DIM>(element_pt, face_index, true)
+                                      const int& face_index)
+      : SolidTractionElement<ELEMENT>(element_pt, face_index, true),
+        RefineableSolidTractionElement<ELEMENT>(element_pt, face_index),
+        FSISolidTractionElement<ELEMENT, DIM>(element_pt, face_index, true)
     {
     }
 
     /// \short Destructor: empty
     ~RefineableFSISolidTractionElement() {}
+
 
     /// \short Final overload. Get contributions from refineable solid
     /// traction element and derivatives from external data
@@ -1049,9 +1079,11 @@ namespace oomph
     }
   };
 
+
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for elements that allow the imposition of a displacement
@@ -1069,9 +1101,9 @@ namespace oomph
   /// bulk element.
   //======================================================================
   template<class ELEMENT>
-  class ImposeDisplacementByLagrangeMultiplierElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual SolidFaceElement
+  class ImposeDisplacementByLagrangeMultiplierElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual SolidFaceElement
   {
   public:
     /// \short Constructor takes a "bulk" element and the
@@ -1083,8 +1115,8 @@ namespace oomph
       FiniteElement* const& element_pt,
       const int& face_index,
       const unsigned& id = 0,
-      const bool& called_from_refineable_constructor = false) :
-      FaceGeometry<ELEMENT>(), FaceElement(), Boundary_shape_geom_object_pt(0)
+      const bool& called_from_refineable_constructor = false)
+      : FaceGeometry<ELEMENT>(), FaceElement(), Boundary_shape_geom_object_pt(0)
     {
       //  Store the ID of the FaceElement -- this is used to distinguish
       // it from any others
@@ -1154,6 +1186,7 @@ namespace oomph
       add_additional_values(n_additional_values, id);
     }
 
+
     /// \short Access to GeomObject that specifies the prescribed
     /// boundary displacement; GeomObject is assumed to be
     /// parametrised by the same coordinate that is used as
@@ -1163,6 +1196,7 @@ namespace oomph
     {
       return Boundary_shape_geom_object_pt;
     }
+
 
     /// \short Set GeomObject that specifies the prescribed
     /// boundary displacement; GeomObject is assumed to be
@@ -1182,9 +1216,11 @@ namespace oomph
 #endif
       Boundary_number_in_bulk_mesh = boundary_number_in_bulk_mesh;
 
+
       // Store (possibly compound) GeomObject that specifies the
       // the desired  boundary shape.
       Boundary_shape_geom_object_pt = boundary_shape_geom_object_pt;
+
 
       // Don't sparsify: Use all the geometric Data associated with
       // the (possibly compound) GeomObject that specifies the
@@ -1239,6 +1275,7 @@ namespace oomph
 
         // Set up memory for the shape functions
         Shape psi(n_node);
+
 
 #ifdef PARANOID
         if ((this->nexternal_data() > 0) &&
@@ -1322,6 +1359,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
+
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -1334,6 +1372,7 @@ namespace oomph
       // the pre-computed residual vector
       fill_in_jacobian_from_external_by_fd(residuals, jacobian);
     }
+
 
     /// \short Fill in contribution to Mass matrix and
     /// Jacobian. There is no contributiont to mass matrix
@@ -1360,6 +1399,7 @@ namespace oomph
       }
     }
 
+
     /// \short Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -1379,6 +1419,7 @@ namespace oomph
           OOMPH_EXCEPTION_LOCATION);
       }
 #endif
+
 
       // Local coord
       Vector<double> s(dim_el);
@@ -1462,12 +1503,14 @@ namespace oomph
       }
     }
 
+
     /// \short Output function
     void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       output(outfile, n_plot);
     }
+
 
     /// \short Compute square of L2 norm of error between
     /// prescribed and actual displacement
@@ -1499,6 +1542,7 @@ namespace oomph
 
       // Set the value of n_intpt
       unsigned n_intpt = integral_pt()->nweight();
+
 
       // Initialise error
       double squared_error = 0.0;
@@ -1556,8 +1600,8 @@ namespace oomph
           }
         }
 
-        if (Sparsify)
-          zeta = Zeta_sub_geom_object[ipt];
+        if (Sparsify) zeta = Zeta_sub_geom_object[ipt];
+
 
         // Now find the local undeformed metric tensor from the tangent Vectors
         DenseMatrix<double> a(dim_el);
@@ -1574,6 +1618,7 @@ namespace oomph
             }
           }
         }
+
 
         // Find the determinant of the metric tensor
         double adet = 0.0;
@@ -1623,6 +1668,7 @@ namespace oomph
 
       return squared_error;
     }
+
 
   protected:
     /// \short Helper function to compute the residuals and, if flag==1, the
@@ -1712,8 +1758,8 @@ namespace oomph
           }
         }
 
-        if (Sparsify)
-          zeta = Zeta_sub_geom_object[ipt];
+        if (Sparsify) zeta = Zeta_sub_geom_object[ipt];
+
 
         // Now find the local undeformed metric tensor from the tangent Vectors
         DenseMatrix<double> a(dim_el);
@@ -1730,6 +1776,7 @@ namespace oomph
             }
           }
         }
+
 
         // Find the determinant of the metric tensor
         double adet = 0.0;
@@ -1786,6 +1833,7 @@ namespace oomph
               j,
               bnod_pt->index_of_first_value_assigned_by_face_element(Id) + i);
 
+
             if (local_eqn >= 0)
             {
               residuals[local_eqn] += (x[i] - r_prescribed[i]) * psi(j) * W;
@@ -1805,6 +1853,7 @@ namespace oomph
                 }
               }
             }
+
 
             // Add Lagrange multiplier contribution to bulk equations
 
@@ -1841,8 +1890,10 @@ namespace oomph
           }
         }
 
+
       } // End of loop over the integration points
     }
+
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: We only label the
@@ -1851,6 +1902,7 @@ namespace oomph
     {
       return this->dim() + 1;
     }
+
 
     /// \short Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
@@ -1895,8 +1947,10 @@ namespace oomph
       }
     }
 
+
     /// Lagrange Id
     unsigned Id;
+
 
 #ifdef PARANOID
 
@@ -1928,9 +1982,11 @@ namespace oomph
     bool Sparsify;
   };
 
+
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for elements that allow the imposition of a displacement
@@ -1950,9 +2006,9 @@ namespace oomph
   /// REFINEABLE VERSION
   //======================================================================
   template<class ELEMENT>
-  class RefineableImposeDisplacementByLagrangeMultiplierElement :
-    public virtual ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>,
-    public virtual NonRefineableSolidElementWithHangingNodes
+  class RefineableImposeDisplacementByLagrangeMultiplierElement
+    : public virtual ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>,
+      public virtual NonRefineableSolidElementWithHangingNodes
 
   {
   public:
@@ -1964,11 +2020,12 @@ namespace oomph
     RefineableImposeDisplacementByLagrangeMultiplierElement(
       FiniteElement* const& element_pt,
       const int& face_index,
-      const unsigned& id = 0) :
-      ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
-        element_pt, face_index, id, true)
+      const unsigned& id = 0)
+      : ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
+          element_pt, face_index, id, true)
     {
     }
+
 
     /// \short Number of continuously interpolated values: Same for
     /// all nodes since it's a refineable element
@@ -1985,6 +2042,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
+
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -1997,6 +2055,7 @@ namespace oomph
       // the pre-computed residual vector
       this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
     }
+
 
   protected:
     /// \short Helper function to compute the residuals and, if flag==1, the
@@ -2036,6 +2095,7 @@ namespace oomph
 
       // Set the value of n_intpt
       unsigned n_intpt = this->integral_pt()->nweight();
+
 
       // Integers to store local equation number
       int local_eqn = 0;
@@ -2095,8 +2155,8 @@ namespace oomph
           }
         }
 
-        if (this->Sparsify)
-          zeta = this->Zeta_sub_geom_object[ipt];
+        if (this->Sparsify) zeta = this->Zeta_sub_geom_object[ipt];
+
 
         // Now find the local undeformed metric tensor from the tangent Vectors
         DenseMatrix<double> a(dim_el);
@@ -2113,6 +2173,7 @@ namespace oomph
             }
           }
         }
+
 
         // Find the determinant of the metric tensor
         double adet = 0.0;
@@ -2154,6 +2215,7 @@ namespace oomph
 
         // Assemble residuals and jacobian
 
+
         // Number of master nodes and storage for the weight of the shape
         // function
         unsigned n_master = 1;
@@ -2164,6 +2226,7 @@ namespace oomph
         // Pointer to hang info object
         HangInfo* hang_info_pt = 0;
         HangInfo* hang_info2_pt = 0;
+
 
         // Loop over nodes
         for (unsigned j = 0; j < n_node; j++)
@@ -2315,7 +2378,9 @@ namespace oomph
                   }
                 }
 
+
                 // Add Lagrange multiplier contribution to bulk equations
+
 
                 // Storage for local equation numbers at node indexed by
                 // type and direction
@@ -2442,9 +2507,11 @@ namespace oomph
     }
   };
 
+
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for elements that allow the imposition of a displacement
@@ -2464,10 +2531,10 @@ namespace oomph
   /// bulk element.
   //======================================================================
   template<class ELEMENT>
-  class FSIImposeDisplacementByLagrangeMultiplierElement :
-    public virtual FaceGeometry<ELEMENT>,
-    public virtual SolidFaceElement,
-    public virtual ElementWithExternalElement
+  class FSIImposeDisplacementByLagrangeMultiplierElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual SolidFaceElement,
+      public virtual ElementWithExternalElement
   {
   public:
     /// \short Function to describe the local dofs of the elements. The ostream
@@ -2494,8 +2561,8 @@ namespace oomph
       FiniteElement* const& element_pt,
       const int& face_index,
       const unsigned& id = 0,
-      const bool& called_from_refineable_constructor = false) :
-      FaceGeometry<ELEMENT>(), FaceElement(), ElementWithExternalElement()
+      const bool& called_from_refineable_constructor = false)
+      : FaceGeometry<ELEMENT>(), FaceElement(), ElementWithExternalElement()
     {
       // Set external element storage - one interaction
       this->set_ninteraction(1);
@@ -2559,6 +2626,7 @@ namespace oomph
       add_additional_values(n_additional_values, id);
     }
 
+
     /// Fill in the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -2566,6 +2634,7 @@ namespace oomph
       fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
+
 
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -2604,6 +2673,7 @@ namespace oomph
       }
     }
 
+
     /// \short Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -2623,6 +2693,7 @@ namespace oomph
           OOMPH_EXCEPTION_LOCATION);
       }
 #endif
+
 
       // Local coord
       Vector<double> s(dim_el);
@@ -2694,12 +2765,14 @@ namespace oomph
       }
     }
 
+
     /// \short Output function
     void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       output(outfile, n_plot);
     }
+
 
   protected:
     /// \short Helper function to compute the residuals and, if flag==1, the
@@ -2794,6 +2867,7 @@ namespace oomph
           }
         }
 
+
         // Find the determinant of the metric tensor
         double adet = 0.0;
         switch (dim_el + 1)
@@ -2849,6 +2923,7 @@ namespace oomph
               j,
               bnod_pt->index_of_first_value_assigned_by_face_element(Id) + i);
 
+
             if (local_eqn >= 0)
             {
               residuals[local_eqn] += (x[i] - r_prescribed[i]) * psi(j) * W;
@@ -2868,6 +2943,7 @@ namespace oomph
                 }
               }
             }
+
 
             // Add Lagrange multiplier contribution to bulk equations
 
@@ -2904,8 +2980,10 @@ namespace oomph
           }
         }
 
+
       } // End of loop over the integration points
     }
+
 
     /// \short The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Just the solid degrees of freedom themselves.
@@ -2913,6 +2991,7 @@ namespace oomph
     {
       return this->dim() + 1;
     };
+
 
     /// \short Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
@@ -2961,9 +3040,11 @@ namespace oomph
     unsigned Id;
   };
 
+
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
+
 
   //======================================================================
   /// A class for elements that allow the imposition of a displacement
@@ -2985,9 +3066,9 @@ namespace oomph
   /// REFINEABLE VERSION
   //======================================================================
   template<class ELEMENT>
-  class RefineableFSIImposeDisplacementByLagrangeMultiplierElement :
-    public virtual FSIImposeDisplacementByLagrangeMultiplierElement<ELEMENT>,
-    public virtual NonRefineableSolidElementWithHangingNodes
+  class RefineableFSIImposeDisplacementByLagrangeMultiplierElement
+    : public virtual FSIImposeDisplacementByLagrangeMultiplierElement<ELEMENT>,
+      public virtual NonRefineableSolidElementWithHangingNodes
 
   {
   public:
@@ -3010,11 +3091,12 @@ namespace oomph
     RefineableFSIImposeDisplacementByLagrangeMultiplierElement(
       FiniteElement* const& element_pt,
       const int& face_index,
-      const unsigned& id = 0) :
-      FSIImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
-        element_pt, face_index, id, true)
+      const unsigned& id = 0)
+      : FSIImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
+          element_pt, face_index, id, true)
     {
     }
+
 
     /// \short Number of continuously interpolated values: Same for
     /// all nodes since it's a refineable element
@@ -3031,6 +3113,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
+
     /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -3042,6 +3125,7 @@ namespace oomph
       // Add the contribution of the external interaction by finite differences
       this->fill_in_jacobian_from_external_interaction_by_fd(jacobian);
     }
+
 
   protected:
     /// \short Helper function to compute the residuals and, if flag==1, the
@@ -3081,6 +3165,7 @@ namespace oomph
 
       // Set the value of n_intpt
       unsigned n_intpt = this->integral_pt()->nweight();
+
 
       // Integers to store local equation number
       int local_eqn = 0;
@@ -3129,6 +3214,7 @@ namespace oomph
           }
         }
 
+
         // Now find the local undeformed metric tensor from the tangent Vectors
         DenseMatrix<double> a(dim_el);
         for (unsigned i = 0; i < dim_el; i++)
@@ -3144,6 +3230,7 @@ namespace oomph
             }
           }
         }
+
 
         // Find the determinant of the metric tensor
         double adet = 0.0;
@@ -3179,11 +3266,13 @@ namespace oomph
         FiniteElement* bulk_el_pt = this->external_element_pt(0, ipt);
         bulk_el_pt->interpolated_x(s_adjacent, r_prescribed);
 
+
         // Premultiply the weights and the square-root of the determinant of
         // the metric tensor
         double W = w * sqrt(adet);
 
         // Assemble residuals and jacobian
+
 
         // Number of master nodes and storage for the weight of the shape
         // function
@@ -3195,6 +3284,7 @@ namespace oomph
         // Pointer to hang info object
         HangInfo* hang_info_pt = 0;
         HangInfo* hang_info2_pt = 0;
+
 
         // Loop over nodes
         for (unsigned j = 0; j < n_node; j++)
@@ -3346,7 +3436,9 @@ namespace oomph
                   }
                 }
 
+
                 // Add Lagrange multiplier contribution to bulk equations
+
 
                 // Storage for local equation numbers at node indexed by
                 // type and direction
@@ -3473,9 +3565,11 @@ namespace oomph
     }
   };
 
+
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
+
 
 } // namespace oomph
 

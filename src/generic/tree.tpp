@@ -124,6 +124,7 @@ namespace oomph
     }
   }
 
+
   //================================================================
   /// If required, p-refine/unrefine the leaf element
   ///
@@ -198,6 +199,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
+
     // Create a temporary clone of the element to be refined.
     // This is required so that the element can read data from "itself"
     // while it rebuilds itself with a new p-order. Only the information
@@ -216,6 +218,7 @@ namespace oomph
       clone_pt->node_pt(j) = p_ref_obj_pt->node_pt(j);
     }
 
+
     // Check if refinement is required
     if (p_ref_obj_pt->to_be_p_refined())
     {
@@ -231,9 +234,11 @@ namespace oomph
       p_ref_obj_pt->p_refine(-1, mesh_pt, clone_pt);
     }
 
+
     // Delete the temporary copy of the element
     delete clone_pt;
   }
+
 
 } // namespace oomph
 

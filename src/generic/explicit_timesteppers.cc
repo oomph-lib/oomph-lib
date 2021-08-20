@@ -49,6 +49,7 @@ namespace oomph
       << "NOTE: It is the responsibility of the object to set the size \n"
       << "      of the vector x\n";
 
+
     throw OomphLibError(
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
@@ -103,6 +104,7 @@ namespace oomph
       error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 
+
   //====================================================================
   /// Function that adds the lambda multiplied by the increment_dofs
   /// vector to the dofs in the object
@@ -154,6 +156,7 @@ namespace oomph
     return 0;
   }
 
+
   //================================================================
   /// Euler timestepping x^{t+1} = x^{t} + dt M^{-1} L(x^{t})
   //=================================================================
@@ -178,6 +181,7 @@ namespace oomph
     object_pt->actions_after_explicit_stage();
     object_pt->actions_after_explicit_timestep();
   }
+
 
   //====================================================================
   // Broken default timestep function for RungeKutta schemes
@@ -218,6 +222,7 @@ namespace oomph
     // Increment the time
     object_pt->time() += 0.5 * dt;
     object_pt->actions_after_explicit_stage();
+
 
     // Stage 2
     // ============================================================
@@ -294,6 +299,7 @@ namespace oomph
 
     object_pt->actions_after_explicit_stage();
 
+
     // Stage 2
     // ============================================================
     object_pt->actions_before_explicit_stage();
@@ -312,6 +318,7 @@ namespace oomph
     // Done, do actions
     object_pt->actions_after_explicit_timestep();
   }
+
 
   //=================================================================
   // General constructor for LowOrder RK schemes
@@ -364,6 +371,7 @@ namespace oomph
     C[3] = 2802321613138.0 / 2924317926251.0;
     C[4] = 1.0;
   }
+
 
   // Explicit specialisation for fourth-order RK scheme
   template<>
@@ -466,6 +474,7 @@ namespace oomph
     object_pt->get_dofs(tnm2, ynm2);
     ynm2 *= Ynm2_weight;
 
+
     // Add everything together
     ynp1 = yn;
     ynp1 += ynm1;
@@ -524,6 +533,7 @@ namespace oomph
         dtn * pow(dtnm1, 2) * pow(dtnm2, 3)) /
       denom;
   }
+
 
   // Force build of templates
   template class RungeKutta<4>;
