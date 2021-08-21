@@ -127,19 +127,19 @@ This involves the following steps:
    ```
 
 
-2. Make a new branch to do some work (here `feature/add-new-important-headers`) and switch to it at the same time:
+2. Make a new branch to do some work (here `feature-add-new-important-headers`) and switch to it at the same time:
    ```bash
-   >>> git checkout -b feature/add-new-important-headers
-   Switched to a new branch 'feature/add-new-important-headers'
+   >>> git checkout -b feature-add-new-important-headers
+   Switched to a new branch 'feature-add-new-important-headers'
    ```
-   (This combines the two separate commands `git branch feature/add-new-important-headers` and `git checkout feature/add-new-important-headers`.)
+   (This combines the two separate commands `git branch feature-add-new-important-headers` and `git checkout feature-add-new-important-headers`.)
 
-   **Note:** the "/" is just part of the branch name and doesn't play a special role; it could in principle be replaced by any other character like another hyphen. There's also no need to prefix the branch with "feature", though this is common practice. Using a "/" has the advantage that it can be perceived as a creating a hierarchical subset of branches (so `upstream/feature/*` refers to all the feature branches at `upstream`).
+   **Note:** it is important that you do **not** adopt the convention of placing "/" in a branch name (e.g. `feature/add-new-important-headers`), as it will break the relative links used in the main `README.md`; you should try to use hyphens only. There's also no need to prefix the branch with "feature", though this is common practice.
 
    Now check (if you don't believe it) that you're really on the new branch:
    ```bash
    >>> git status
-   On branch feature/add-new-important-headers
+   On branch feature-add-new-important-headers
    nothing to commit, working tree clean
    ```
 
@@ -148,7 +148,7 @@ This involves the following steps:
    # ...do some work...
 
    >>> git status
-   On branch feature/add-new-important-headers
+   On branch feature-add-new-important-headers
    Untracked files:
    (use "git add <file>..." to include in what will be committed)
          new-file1.h
@@ -162,7 +162,7 @@ This involves the following steps:
    >>> git add new-file1.h new-file2.h
 
    >>> git status
-   On branch feature/add-new-important-headers
+   On branch feature-add-new-important-headers
    Changes to be committed:
    (use "git restore --staged <file>..." to unstage)
          new file:   new-file1.h
@@ -187,7 +187,7 @@ This involves the following steps:
    https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet.
    ```bash
    >>> git commit -m "Add new-file1.h and new-file2.h to repository."
-   [feature/add-new-important-headers 688ef2cfe8] Add new-file1.h and new-file2.h to repository.
+   [feature-add-new-important-headers 688ef2cfe8] Add new-file1.h and new-file2.h to repository.
    2 files changed, 0 insertions(+), 0 deletions(-)
    create mode 100644 new-file1.h
    create mode 100644 new-file2.h
@@ -197,7 +197,7 @@ This involves the following steps:
    in your local repository) but if you have not committed your work, the changes will automatically be moved across to the
    branch you are switching to. This is unlikely to be the desired outcome as we are specifically working on a separate
    branch to keep our new work isolated from the rest of the code. If you accidentally ended up moving changed files onto another branch
-   you can simply switch back to the branch you were just on (i.e. do  `git checkoutfeature/add-new-important-headers`) and commit your changes there.
+   you can simply switch back to the branch you were just on (i.e. do  `git checkoutfeature-add-new-important-headers`) and commit your changes there.
    When you then switch back to the `main` branch, these changes will no longer follow you.
 
    If your work is not quite ready to be committed, you can save your changes for later by first running
@@ -214,26 +214,26 @@ This involves the following steps:
 
    The first time you do this you have to this explicitly state that you want the branch to be added to the `origin` repository, using the `--set-upstream` flag (which can be abbreviated to `-u`)
    ```bash
-   >>> git push --set-upstream origin feature/add-new-important-headers
+   >>> git push --set-upstream origin feature-add-new-important-headers
    ```
 
    Subsequent pushes will no longer require the `--set-upstream` flag, so you can just do
    ```bash
-   >>> git push origin feature/add-new-important-headers
+   >>> git push origin feature-add-new-important-headers
    ```
-   
-   **IMPORTANT:** During subsequent pushes you may encounter an error from GitHub 
+
+   **IMPORTANT:** During subsequent pushes you may encounter an error from GitHub
    telling you that your push request was rejected because a file that you want to push
-   was changed in the remote forked repository. This may come as a surprise since you're 
-   (typically) the only person working with this repository and you'd surely remember if you'd 
+   was changed in the remote forked repository. This may come as a surprise since you're
+   (typically) the only person working with this repository and you'd surely remember if you'd
    pushed any changes in between, so you're not expecting any conflicts. If so, this is almost
    certainly because of the automatic code formatting we use (see
    [Clang-format](#clang-format)). Once you push a file to the remote repository it is
-   automatically formatted, and if this produces any changes they are then committed 
-   automatically, meaning that the remote forked repository is "ahead" of your local cloned 
+   automatically formatted, and if this produces any changes they are then committed
+   automatically, meaning that the remote forked repository is "ahead" of your local cloned
    version. Running
    ```bash
-   >>> git pull origin feature/add-new-important-headers
+   >>> git pull origin feature-add-new-important-headers
    ```
    will pull these formatting changes back into your local repository. To avoid merge conflicts
    it's a good habit to do this a few minutes after pushing anything to your remote repository.
@@ -243,7 +243,7 @@ This involves the following steps:
 
     ![](doc/README/main_button.png)
 
-    then click on the `feature/add-new-important-headers` branch in the drop-down menu that appears. When you reach the new page, click the green "Compare & pull request" button.
+    then click on the `feature-add-new-important-headers` branch in the drop-down menu that appears. When you reach the new page, click the green "Compare & pull request" button.
 
     ![](doc/README/compare_and_pull_request_button.png)
 
@@ -282,11 +282,11 @@ This involves the following steps:
      The "Fetch upstream" button allows a comparison ("Compare") and "Fetch and merge". Go for the latter when happy. GitHub will now announce that "This branch is even with `oomph-lib:development`".
 
 8. Now the `development` branch on your computer (cloned from the forked
-   remote repository) is out of sync with the updated version at GitHub. (And if you do `git difftool feature/add-new-important-headers..development` you'll see that the `development` branch obviously(!) does not yet contain the changes we've made in the local forked `feature/add-new-important-headers` branch.) So pull the updated
+   remote repository) is out of sync with the updated version at GitHub. (And if you do `git difftool feature-add-new-important-headers..development` you'll see that the `development` branch obviously(!) does not yet contain the changes we've made in the local forked `feature-add-new-important-headers` branch.) So pull the updated
    `development` branch from the `origin` repository, as follows:
 
    First go back to `development` branch (assuming we're still on the
-   `feature/add-new-important-headers` one)
+   `feature-add-new-important-headers` one)
 
    ```bash
    >>> git checkout development
@@ -301,23 +301,23 @@ This involves the following steps:
 
    Assuming this pull doesn't conflict with any other changes made to your
    `development` branch, the local forked `development` and
-   `feature/add-new-important-headers` branches should now agree. Check by
+   `feature-add-new-important-headers` branches should now agree. Check by
    running
 
    ```bash
-   >>> git diff feature/add-new-important-headers..development
+   >>> git diff feature-add-new-important-headers..development
    ```
 
    The above command should not produce an output. We can then get rid of the branch on which we did the work, both locally,
 
    ```bash
-   >>> git branch -d feature/add-new-important-headers
+   >>> git branch -d feature-add-new-important-headers
    ```
 
    and remotely on the remote forked repository (`origin`),
 
    ```bash
-   >>> git push origin --delete feature/add-new-important-headers
+   >>> git push origin --delete feature-add-new-important-headers
    ```
 ## Advanced: pulling in upstream changes from the command-line
 
