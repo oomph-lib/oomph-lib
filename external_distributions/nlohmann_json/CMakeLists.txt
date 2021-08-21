@@ -8,12 +8,12 @@ message(STATUS "Entered nlohmann_json subdirectory")
 set(JSON_BuildTests OFF)
 
 # Download and populate the nlohmann JSON library
-fetchcontent_declare(
+FetchContent_Declare(
   nlohmann_json
   GIT_REPOSITORY https://github.com/nlohmann/json.git
   GIT_SHALLOW TRUE
   GIT_TAG v3.9.1)
-fetchcontent_makeavailable(nlohmann_json)
+FetchContent_MakeAvailable(nlohmann_json)
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables

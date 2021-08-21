@@ -73,14 +73,14 @@ foreach(TRILINOS_LIBRARY IN LISTS TRILINOS_LIBRARIES)
 endforeach()
 
 # The recipe for building the actual library
-externalproject_add(
+ExternalProject_Add(
   oomph_trilinos_project
   INSTALL_DIR "${TRILINOS_INSTALL_DIR}"
   URL "${CMAKE_CURRENT_LIST_DIR}/trilinos-11.8.1-Source.tar.gz"
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR> ${OOMPH_TRILINOS_FLAGS}
   BUILD_BYPRODUCTS ${TRILINOS_LIBRARIES_WITH_PATHS}
   DEPENDS oomph::oomph_blas oomph::oomph_lapack)
-externalproject_get_property(oomph_trilinos_project INSTALL_DIR)
+ExternalProject_Get_Property(oomph_trilinos_project INSTALL_DIR)
 
 # Build it as a static/shared library depending on how oomph-lib is being built
 set(LIBTYPE STATIC)
