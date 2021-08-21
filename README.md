@@ -8,8 +8,8 @@
   <a href="./LICENCE">
     <img alt="License: LGPL v2.1" src="https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg">
   </a>
-  <a href="../../../actions/workflows/build-and-publish-docs.yaml">
-    <img alt="Documentation" src="../../../actions/workflows/build-and-publish-docs.yaml/badge.svg?branch=main">
+  <a href="../../actions/workflows/build-and-publish-docs.yaml">
+    <img alt="Documentation" src="../../actions/workflows/build-and-publish-docs.yaml/badge.svg?branch=main">
   </a>
 </div>
 
@@ -19,32 +19,32 @@
     <table style="width:55%">
     <tr>
         <th>Test platform</th>
-        <th><a href="../../../tree/main"><code>main</code></a></th>
-        <th><a href="../../../tree/development"><code>development</code></a></th>
+        <th><a href="../../tree/main"><code>main</code></a></th>
+        <th><a href="../../tree/development"><code>development</code></a></th>
     </tr>
     <tr>
         <td>Ubuntu</td>
         <td>
-            <a href="../../../actions/workflows/self-tests-ubuntu.yaml">
-                <img alt="Ubuntu" src="../../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=main">
+            <a href="../../actions/workflows/self-tests-ubuntu.yaml">
+                <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=main">
             </a>
         </td>
         <td>
-            <a href="../../../actions/workflows/self-tests-ubuntu.yaml">
-                <img alt="Ubuntu" src="../../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=development">
+            <a href="../../actions/workflows/self-tests-ubuntu.yaml">
+                <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=development">
             </a>
         </td>
     </tr>
     <tr>
         <td>macOS</td>
         <td>
-            <a href="../../../actions/workflows/self-tests-macos.yaml">
-                <img alt="macOS" src="../../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=main">
+            <a href="../../actions/workflows/self-tests-macos.yaml">
+                <img alt="macOS" src="../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=main">
             </a>
         </td>
         <td>
-            <a href="../../../actions/workflows/self-tests-macos.yaml">
-                <img alt="macOS" src="../../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=development">
+            <a href="../../actions/workflows/self-tests-macos.yaml">
+                <img alt="macOS" src="../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=development">
             </a>
         </td>
     </tr>
