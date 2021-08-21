@@ -23,7 +23,7 @@ check:
 
 cmake-format:
 	set -f
-	find . \( -name '*.cmake' -o -name 'CMakeLists.txt' \) -exec cmake-format -c .cmake-format.json -i {} \;
+	find . \( -name '*.cmake' -o -name 'CMakeLists.txt' \) -exec cmake-format -c .cmake-format.py -i {} \;
 	set +f
 
 clang-format:

@@ -5,11 +5,6 @@ with section("parse"):
 
     # Specify structure for custom cmake functions
     additional_commands = {
-        #
-        'check_fortran_compiler_flag': {
-            'flags': [],
-            'kwargs': {}
-        },
         'oomph_add_executable': {
             'flags': [
                 'SILENCE_NO_LIBS_SUPPLIED_WARNING'
