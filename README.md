@@ -1,9 +1,55 @@
-[![oomph-lib](doc/figures/oomph_logo.png)](http://oomph-lib.maths.man.ac.uk)
+<div align="center">
+  <a href="http://oomph-lib.maths.man.ac.uk">
+    <img alt="reviewdog" src="./doc/figures/oomph_logo.png">
+  </a>
+</div>
 
-[![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)
-[![Ubuntu tests status](../../../actions/workflows/self-tests-ubuntu.yaml/badge.svg)](../../../actions/workflows/self-tests-ubuntu.yaml)
-[![macOS tests status](../../../actions/workflows/self-tests-macos.yaml/badge.svg)](../../../actions/workflows/self-tests-macos.yaml)
-[![Documentation](../../../actions/workflows/build-and-publish-docs.yaml/badge.svg)](../../../actions/workflows/build-and-publish-docs.yaml)
+<div align="center">
+  <a href="./LICENCE">
+    <img alt="License: LGPL v2.1" src="https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg">
+  </a>
+  <a href="../../../actions/workflows/build-and-publish-docs.yaml">
+    <img alt="Documentation" src="../../../actions/workflows/build-and-publish-docs.yaml/badge.svg?branch=main">
+  </a>
+</div>
+
+<br>
+
+<div align="center">
+    <table style="width:55%">
+    <tr>
+        <th>Test platform</th>
+        <th><a href="../../../tree/main"><code>main</code></a></th>
+        <th><a href="../../../tree/development"><code>development</code></a></th>
+    </tr>
+    <tr>
+        <td>Ubuntu</td>
+        <td>
+            <a href="../../../actions/workflows/self-tests-ubuntu.yaml">
+                <img alt="Ubuntu" src="../../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=main">
+            </a>
+        </td>
+        <td>
+            <a href="../../../actions/workflows/self-tests-ubuntu.yaml">
+                <img alt="Ubuntu" src="../../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=development">
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>macOS</td>
+        <td>
+            <a href="../../../actions/workflows/self-tests-macos.yaml">
+                <img alt="macOS" src="../../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=main">
+            </a>
+        </td>
+        <td>
+            <a href="../../../actions/workflows/self-tests-macos.yaml">
+                <img alt="macOS" src="../../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=development">
+            </a>
+        </td>
+    </tr>
+    </table>
+</div>
 
 ## Description
 
