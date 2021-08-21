@@ -180,7 +180,7 @@ a separate function so it can be called from additional
 mesh constructors that are not discussed here.) The destructor
 remains empty.
 
-\until virtual ~AlgebraicCollapsibleChannelMesh(){}
+\until virtual ~AlgebraicCollapsibleChannelMesh()
 
 The function \c algebraic_node_update(...) is defined as a pure virtual
 function in the \c AlgebraicMesh base class and therefore must be 
@@ -214,7 +214,7 @@ non-FSI example</A> for details.)
 
 \dontinclude collapsible_channel_mesh.template.cc
 \skipline start_setup
-\until x<=(l_up+l_collapsible)  
+\until x <= (l_up + l_collapsible)  
 
 Assuming that the wall is in its undeformed position (we'll check
 this in a second...), we determine the intrinsic coordinate 
@@ -236,7 +236,7 @@ AlgebraicNode. The node update function involves a single \c
 GeomObject: The (sub-)\c GeomObject within which the reference
 point on the upper wall is located.
 
-\until geom_object_pt[0]=
+\until geom_object_pt[0] =
 
 As in the mesh used in the 
 <A HREF="../../../navier_stokes/algebraic_collapsible_channel/html/index.html">

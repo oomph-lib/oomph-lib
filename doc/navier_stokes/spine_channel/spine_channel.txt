@@ -354,7 +354,7 @@ from \c RectangularQuadMesh<ELEMENT> and \c SpineMesh. The latter adds
 the functionality needed for using Spines.
 
 \dontinclude channel_spine_mesh.template.h
-\skipline template <
+\skipline template<
 \until public SpineMesh
 
 All SpineMeshs must include a function \c spine_node_update(SpineNode*
@@ -413,7 +413,7 @@ each region.
 
 Now we allocate storage for the parameters used to build the spines.
 
-\until n_prev_elements=0;
+\until n_prev_elements = 0;
 
 Now we create the first Spine with unit length, pin the height (since
 it is not a degree of freedom in this mesh) and push the spine back
@@ -429,7 +429,7 @@ part of this mesh.
 
 We then mark the node as part of the left (0) region.
 
-\until node_update_fct_id()=0;
+\until node_update_fct_id() = 0;
 
 When we built the Spine, we set its height to 1.0. We now need to
 assign its height from the \c Straight_wall_pt and assign all the
