@@ -60,26 +60,7 @@
   Mathematics</a> at <a href="http://www.manchester.ac.uk/">The
   University of Manchester</a>, along with many <a href=
   "../people/html/index.html">other contributors</a>.</p>
-  <p>The latest version of the library is 1.0, 
-  <script>
-        // This odd/hacky construction extracts the svn information automatically
-         var revString = "$LastChangedRevision$";
-         var dateString = "$LastChangedDate$";
-         
-         //Revision number should never be more than 5 digits
-         revString = revString.substr(revString.indexOf(":")+1,5).trim();
-         
-         // The string should always be the same length
-         var timeString = dateString.substr(28,8);
-         
-         dateString = dateString.substr(dateString.indexOf("(")+1, dateString.indexOf(")") - dateString.indexOf("(")-1);
-         
-         document.write("revision number ");
-         document.write(revString);
-         document.write(" and was committed on ");
-         document.write(dateString);
-         document.write(".");
-  </script> See the <a href="../change_log/html/index.html">change
+  <p> See the <a href="../change_log/html/index.html">change
   log page</a> for an overview of the changes made since the previous
   release.</p>
   <h2>What is it [and what is it not]?</h2>
@@ -242,45 +223,20 @@
   
   
   <article class="tab-pane" id="get">
-  <h1>How do I get the code?</h1>
-  <p>The latest version of the library is 1.0, 
-  <script>
-        // This odd/hacky construction extracts the svn information automatically
-         var revString = "$LastChangedRevision$";
-         var dateString = "$LastChangedDate$";
-         
-         //Revision number should never be more than 5 digits
-         revString = revString.substr(revString.indexOf(":")+1,5).trim();
-         
-         // The string should always be the same length
-         var timeString = dateString.substr(28,8);
-         
-         dateString = dateString.substr(dateString.indexOf("(")+1, dateString.indexOf(")") - dateString.indexOf("(")-1);
-         
-         document.write("revision number ");
-         document.write(revString);
-         document.write(" and was committed on ");
-         document.write(dateString);
-         document.write(".");
-  </script> See the <a href="../change_log/html/index.html">change
-  log page</a> for an overview of the changes made since the previous
-  release.</p>
+  <h1>How do I get/install the code?</h1>
   <h2>Downloads</h2>
-  <p>We provide <a href="../the_distribution/html/index.html">gzipped
-  tar files</a> of the library. We also provide read-only access to
-  the <a href="../subversion/html/index.html">subversion
-  repository</a> of the oomph-lib project. For more information see
+  <p><code>oomph-lib</code> is hosted on and distributed via GitHub at
+  <center><a href="https://github.com/oomph-lib/oomph-lib">
+  https://github.com/oomph-lib/oomph-lib</a>.</center><br>
+  For more information on how to download and install the library see
   the <a href="../the_distribution/html/index.html">installation
-  guide</a>. Note that the <a href=
-  "../the_distribution/html/index.html">gzipped tar files</a> , the
-  latest version of the library available via the public repository
-  and the webpage at <a href=
-  "http://www.oomph-lib.org">http://www.oomph-lib.org</a> are
-  automatically synchronised.</p>
+  guide</a>. </p>
   <h2>Prerequisites</h2>
   <p><code>oomph-lib</code> has been/is primarily being developed in
   Linux so it is well tested there. However several people
-  successfully run it on Windows and Mac OS X. In order to minimise
+  successfully run it on Windows and Mac OS X. Our continuous
+  integration on GitHub currently checks Linux and Mac OS X builds.
+  In order to minimise
   the dependence on external libraries we include "frozen" versions
   of certain external libraries (<a href=
   "http://www-users.cs.umn.edu/~karypis/metis/">METIS</a>, <a href=
@@ -297,10 +253,13 @@
   "http://www.cygwin.com/">cygwin</a>, though we haven't tried this
   for a long time.]</li>
   <li>Compilers for C++, C and Fortran77. The open-source <a href=
-  "http://gcc.gnu.org/">GNU gcc compiler suite</a> version 4.8.4 or
+  "http://gcc.gnu.org/">GNU gcc compiler suite</a> version 9.3.0. or
   later is fine. [ <b>Note:</b> The Fortran77 and C compilers are
   only required to compile some external libraries --
-  <code>oomph-lib</code> itself is written entirely in C++.]</li>
+  <code>oomph-lib</code> itself is written entirely in C++. We assume
+  that your C++ compiler can handle the C++11 standard. If it doesn't
+  you may have to add the <code>-std=c++11</code> option to the
+  <code>CXXFLAGS</code> during the configure stage.]</li>
   </ul>
   The following programs are helpful but not essential:
   <ul>
@@ -312,10 +271,10 @@
   <code>oomph-lib</code>; see <a href=
   "../the_distribution/html/index.html">the <code>oomph-lib</code>
   download page</a> for more details.</li>
-  <li><a href="http://www.python.org/download/">python</a> is needed
+  <li><a href="http://www.python.org/download/">python3</a> is needed
   to analyse the results of the extensive self-tests that may be
   performed at the end of the installation to verify that the build
-  process was completed successfully. If python is not available, the
+  process was completed successfully. If python3 is not available, the
   self-test will compile and run all test codes but it will not be
   possible to verify the correctness of the results.</li>
   <li><a href="http://www.doxygen.org">doxygen</a> is needed to build
@@ -349,18 +308,11 @@
   that, we have successfully installed and tested our installation on
   the following platforms:
   <ul>
-  <li>Ubuntu (version 14.04) with gcc compilers (version 4.8.4). The
+  <li>Ubuntu (version 16.04) with gcc compilers (version 5.4.0). The
   tests included the MPI part of the library, which we compiled with
   <a href="https://www.open-mpi.org/">OpenMPI</a> (version
-  1.6.5).</li>
-  <li>Redhat (version 4.4.7-3) with gcc compilers (version 4.4.7) The
-  tests included the MPI part of the library, which we compiled with
-  <a href="https://www.open-mpi.org/">OpenMPI</a> (version
-  1.5.4).</li>
-  <li> Ubuntu (version 14.04) with Clang compilers (version 3.5) </li>
-  <li> Arch Linux (05-2016) with gcc compilers (version 6.1.1) </li>
-  <li> Ubuntu (version 16.04) with gcc compilers (version 5.3.1) </li>       
-  <li> Debian Jessie (gcc 4.9)</li>
+  1.10.2).</li>
+  <li> ... </li>
  </ul>
 
   <h2>Preparing a ubuntu box for <code>oomph-lib</code></h2>
@@ -371,7 +323,7 @@
   <br>
   <br>
   <tt>
-apt-get install subversion
+apt-get install git
   </tt>
   <br>
   <tt>
@@ -403,13 +355,22 @@ apt-get install g++
   </tt>
   <br>
   <br>
-  ...or, if you want it all in one go (particularly useful if you have
+Building the pdf version of the tutorials also requires a comprehensive latex
+  installation:
+  <br>
+  <br>
+  <tt>
+apt-get install texlive texlive-latex-extra texlive-font-utils
+  </tt>
+  <br>
+  <br>
+  If you want it all in one go (particularly useful if you have
   to prefix the apt-get with sudo): 
   <br>
   <br>
   <tt>
-apt-get install subversion make automake libtool autoconf doxygen
-  gfortran g++
+apt-get install git make automake libtool autoconf doxygen
+  gfortran g++ texlive texlive-latex-extra texlive-font-utils
   </tt>
   </article>
   

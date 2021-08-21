@@ -1,40 +1,10 @@
 \mainpage Download/installation instructions
 
 
-\htmlonly
-<p>The latest version of the library is 1.0,
-<script>
-      // This odd/hacky construction extracts the svn information automatically
-       var revString = "$LastChangedRevision$";
-       var dateString = "$LastChangedDate$";
-
-       //Revision number should never be more than 5 digits
-       revString = revString.substr(revString.indexOf(":")+1,5).trim();
-
-       // The string should always be the same length
-       var timeString = dateString.substr(28,8);
-
-       dateString = dateString.substr(dateString.indexOf("(")+1, dateString.indexOf(")") - dateString.indexOf("(")-1);
-
-       document.write("revision number ");
-       document.write(revString);
-       document.write(" and was committed on ");
-       document.write(dateString);
-       document.write(".");
-</script>
-</p>
-\endhtmlonly
-
-See the <a href="../../change_log/html/index.html">change log page</a> for an overview of the changes made since the previous release.</p>
-
 
 \section instructions The download/install process, step by step
 -# \ref download
-  -# \ref tar_file
-  -# \ref subversion
-  .
 -# \ref install
-  -# \ref manual_install
   -# \ref standard_install
   -# \ref custom_install
   .
@@ -64,45 +34,33 @@ See the <a href="../../change_log/html/index.html">change log page</a> for an ov
 
 \section download Get the distribution
 
-\subsection tar_file Option 1: Get a tar file
+<code>oomph-lib</code> is hosted on and distributed via GitHub at
+<center><a href="https://github.com/oomph-lib/oomph-lib">
+https://github.com/oomph-lib/oomph-lib</a>.</center><br>
 
-
-You can download a tar file of the latest distribution
-from the <A HREF="../../download/html/index.html">oomph-lib download
-page</A>.
-
-Once you have downloaded the tar file unpack it:
-
+You should clone the repository onto your own computer, using
+<br>
 \code
-tar xvfz oomph-lib-*.tar.gz
+git clone git@github.com:oomph-lib/oomph-lib.git
 \endcode
+<br>
+This will check out all the sources into a new directory \c oomph-lib.
 
-The entire distribution will now be contained in the sub-directory
-<code>oomph-lib-*</code> where the "*" indicates the version/revision
-number (the same as in the tar file).
-
-\subsection subversion Option 2: Get the distribution from the subversion repository
-
-You can also get hold of the library from our
-<a href="http://www.subversion.tigris.org">subversion</a>-based
-repository. The procedure for checking out from the repository is
-explained in <a href="../../subversion/html/index.html">another
-tutorial.</a> When checking out from the repository, you can specify
-where the distribution is placed. By default subversion will place it
-into a directory called <code>trunk</code>.
-
-
+If you anticipate making contributions to \c oomph-lib, follow the instructions in
+our
+<a href="https://github.com/oomph-lib/oomph-lib/blob/main/CONTRIBUTING.md">guide
+for contributors.</a>
 <HR>
 
 \section install Install the distribution
 
-\subsection standard_install Option 1: Standard installation
+\subsection standard_install Installation with \c autogen.sh
 
 Change into the \c oomph-lib directory and run the \c autogen.sh
 build script:
 
 \code
-cd oomph-lib-*
+cd oomph-lib
 ./autogen.sh
 \endcode
 
@@ -144,57 +102,6 @@ The self-tests can be initiated outside of `autogen.sh` using
 the demo codes and verify their output. This is an optional step and can be
 very time consuming, especially if run on a small number of cores.
 
-\subsection manual_install Manual installation
-
-If you're an experienced linux/unix user, you may prefer to control the
-build/install process manually, using the standard \c configure; \c make;
-\c make \c install; \c make \c check; sequence. Note that this will *only*
-work when building the tar file version (i.e. not the version from svn
-which still requires the configure script to be generated). In this case,
-the library will be compiled with GNU's default compiler options ("-O3 -g")
-and the libraries and include files will be installed in \c /usr/local/
-unless you specify a different directory with the \c --prefix argument to
-the \c configure command. Here's an example of a manual installation
-
-- Unpack the distribution (you may have to replace the "*" with the
-  actual revision number)
-  \code
-  tar xvfz oomph-lib-*.tar.gz
-  \endcode
-- Change into the oomph-lib home directory (again, you may have to
-  replace the "*" with the actual revision information)
-  \code
-  cd oomph-lib-*
-  \endcode
-- Store the oomph-lib home directory in shell variable -- in a bash
-  shell this is done like this:
-  \code
-  OOMPH_HOME=`pwd`
-  \endcode
-- Create the build directory -- specify your own here!
-  \code
-  mkdir $OOMPH_HOME/build
-  \endcode
-- Configure the distribution -- prefix specifies the build directory
-  \code
-  ./configure --prefix $OOMPH_HOME/build
-  \endcode
-- Make and install the library
-  \code
-  make; make install
-  \endcode
-- Done! Check if we can make and run the user codes
-  \code
-  cd $OOMPH_HOME/user_drivers/joe_cool
-  make
-  ./joes_poisson_code
-  \endcode
-- Run the self-tests
-  \code
-  cd $OOMPH_HOME
-  make check -k
-  \endcode
-.
 
 \subsection custom_install Configuration options
 
@@ -223,7 +130,7 @@ To achieve this, specify the configure option
 
     --enable-suppress-doc
 
-\subsubsection no_doc Suppressing the build of the pdf version of the documentation:
+\subsubsection no_pdf Suppressing the build of the pdf version of the documentation:
 By default the tutorials are built as html files (which are best accessed by
 starting from the local copy of the \c oomph-lib homepage, which is in
 `doc/html/index.html`) and as pdf files

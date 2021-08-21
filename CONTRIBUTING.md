@@ -200,7 +200,7 @@ This involves the following steps:
    you can simply switch back to the branch you were just on (i.e. do  `git checkoutfeature/add-new-important-headers`) and commit your changes there.
    When you then switch back to the `main` branch, these changes will no longer follow you.
 
-   If your work is not quite ready to be committed, you use can save your changes for later by first running
+   If your work is not quite ready to be committed, you can save your changes for later by first running
    ```bash
    >>> git stash
    ```
