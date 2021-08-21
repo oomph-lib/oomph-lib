@@ -85,7 +85,7 @@ The official (`upstream`) repository has two key branches: `main` and `developme
   development
   main
 ```
-If the `development` branch did not make it onto your computer (i.e. it is not listed when running `git branch`), you can switch to it by using:
+If the `development` branch is not listed when running `git branch`, you can switch to it by using:
 ```bash
 >>> git checkout development
 Branch 'development' set up to track remote branch 'development' from 'origin'.
