@@ -11,7 +11,6 @@ intro \
 FAQ \
 meshes \
 tar_files \
-download \
 the_distribution \
 example_code_list \
 the_data_structure \
@@ -35,7 +34,6 @@ hijacking \
 change_log \
 bugs \
 linear_solvers \
-subversion \
 paraview \
 preconditioners \
 to_be_written \

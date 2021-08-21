@@ -7,6 +7,7 @@ with any problems.
 
 - \ref installation \n\n
   - \ref comp_opt \n\n
+  - \ref cpp11 \n\n
   - \ref other_compilers \n\n
   - \ref cygwin \n\n
   - \ref apple \n\n
@@ -52,7 +53,7 @@ with any problems.
 -# <B>Compiler flags/options for the compilation of the library</B> \n\n
    By default, \c oomph-lib's installation is performed with the 
    <A HREF="http://gcc.gnu.org/">gcc compiler suite</A>, using full 
-   optimisation and warning (\c -O6 \c -Wall ). 
+   optimisation and warning (\c -O3 \c -Wall ). 
    \n\n
    If you install the library with the \c autogen.sh script you are 
    given the option to overwrite the default compilation flags,
@@ -86,6 +87,32 @@ with any problems.
    framework, you can, of course, use whatever technique you
    prefer to customise the compilation of your driver code.
 .
+
+
+
+########################################################################
+<HR>
+
+\subsection cpp11 My compiler doesn't support C++11 by default
+
+\c oomph-lib uses the C++11 standard and assumes that your compiler supports
+this. If you have an older version of the gcc compiler you can add
+the flag \c -std=c++11 to the \c g++ configure options by adding it to
+the \c CXXFLAGS in your configure options file. The one that's used
+to build \c oomph-lib is
+<center>
+\c config/configure_options/current.
+</center>
+<br>
+Note that the directory \c config/configure_options also contains many
+other, generally sensibly named files that specify configure options
+for other configurations and compilers. You can choose from these when running
+\c autogen.sh or you can explore them yourself for further options.
+
+If you are using a different compiler check its man pages to find out
+what flag is needed to enable C++11.
+
+
 
 ########################################################################
 <HR>
@@ -171,7 +198,7 @@ pointed to above) is in the installing user's path.
 -# Follow the  <A HREF="../../the_distribution/html/index.html">
 oomph-lib install procedure</A> as normal.
 \n\n
--# For associated Unix-goodness (doxygen, gnuplot, subversion etc),
+-# For associated Unix-goodness (doxygen, gnuplot, git, etc),
 I would recommend using a ports mechanism to install any additional
 unix tools painlessly:
 \n\n
@@ -1104,12 +1131,12 @@ make sure you follow these steps:
    with a bug fix! \n\n
 -# If you can't fix the problem yourself, get in touch
    <A HREF="../../contact/html/index.html">either directly</A>,
-   or via our bugzilla-based
-   bug-and-feature-tracking system, accessible online at
+   or via our GitHub-based
+   bug tracking system, accessible online at
    \n\n
    <CENTER> 
-   <a href="http://oomph-lib.maths.man.ac.uk/bugzilla">
-   http://oomph-lib.maths.man.ac.uk/bugzilla</a>
+   <a href="https://github.com/oomph-lib/oomph-lib/issues">
+   https://github.com/oomph-lib/oomph-lib/issues</a>
    </CENTER> 
    \n
    and provide as much information as possible (clear description
