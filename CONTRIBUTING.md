@@ -53,7 +53,7 @@ Contributing to `oomph-lib` involves three separate repositories:
     ```
     This command will create a new directory, `oomph-lib` which contains all the code and the relevant Git information.
 
-    If you haven't connected to GitHub via SSH before, you might encounter the error:
+    If you haven't connected to GitHub via SSH before, you might encounter the following error:
     ```bash
     Cloning into 'oomph-lib'...
     git@github.com: Permission denied (publickey).
@@ -62,16 +62,24 @@ Contributing to `oomph-lib` involves three separate repositories:
     Please make sure you have the correct access rights
     and the repository exists.
     ```
-    To solve this:
-    1.  Generate a new SSH key if you don't have one.
-    2.  Add the new SSH key to the ssh-agent.
-    3.  Add the new SSH key to your GitHub account.  
+    To address this issue complete the following steps (links to the relevant GitHub resources have been provided):
+    1. [Generate a new SSH key if you don't have one.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key) 
+    2. [Add the new SSH key to the ssh-agent.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent) 
+    3. [Add the new SSH key to your GitHub account.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
     
-    This process, including how to check for existing SSH keys, is described on GitHub at https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh.  
-    For consistency, this document will use SSH.
-    If you would prefer to use HTTPS, reformat all github.com URLs from `git@github.com:JoeCoolDummy/oomph-lib.git` to `https://github.com/JoeCoolDummy/oomph-lib`.
-    HTTPS requires a username and personal access token (PAC) to be provided (note: password-based authentication deprecated). Instructions for creating a PAC can be found on GitHub at: https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token.     
-    &nbsp;
+    More details, if required, can be found on [Connecting to GitHub with SSH](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
+    
+    
+    For consistency, we will use SSH commands in this document wherever possible.
+    If you would prefer to use the HTTPS-based equivalents instead, replace all occurrences of 
+    ```bash
+    git@github.com:JoeCoolDummy/oomph-lib.git
+    ``` 
+    with 
+    ```bash
+    https://github.com/JoeCoolDummy/oomph-lib
+    ```
+    **NOTE:** Prior to August 13, 2021, HTTPS-based commands required you to provide a username and a password. [Password-based authentication has now been deprecated by GitHub, and replaced by "token-based authentication"](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/). Therefore, you will need to generate your own PAT. Instructions on how to do this can be found on [Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
     Once cloning is complete, have a look around:
     ```bash
