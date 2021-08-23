@@ -79,7 +79,7 @@ Contributing to `oomph-lib` involves three separate repositories:
     ```bash
     https://github.com/JoeCoolDummy/oomph-lib
     ```
-    **NOTE:** Prior to August 13, 2021, HTTPS-based commands required you to provide a username and a password. [Password-based authentication has now been deprecated by GitHub, and replaced by "token-based authentication"](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/). Therefore, you will need to generate your own PAT. Instructions on how to do this can be found on [Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+    **NOTE:** It used to be possible to interact with GitHub via an alternative, HTTPS-based protocol that required you to provide a username and a password. [Password-based authentication has now been deprecated by GitHub, and replaced by "token-based authentication"](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/). Therefore, if you wish to (continue to) operate in this mode you will need to generate your own PAT. Instructions on how to do this can be found on [Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
     Once cloning is complete, have a look around:
     ```bash
