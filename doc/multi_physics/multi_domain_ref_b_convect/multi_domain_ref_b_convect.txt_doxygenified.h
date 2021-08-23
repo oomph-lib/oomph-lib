@@ -355,7 +355,8 @@ element that determines the temperature distribution.
 
 We provide access functions to the Rayleigh number
 
-\until return Ra_pt;}
+\until }
+
 
 and, given that we are dealing with a refineable element, 
 make sure that the pointer to the Rayleigh number is passed to the
@@ -395,7 +396,7 @@ freedom, as implemented in
 
 \dontinclude multi_domain_boussinesq_elements.h
 \skipline Compute the element's residual vector and 
-\until fill_in_contribution_to_jacobian(residuals,jacobian);
+\until fill_in_contribution_to_jacobian(residuals, jacobian);
 
 and then fill in the derivatives with respect to 
 the degrees of freedom associated with the "external
@@ -445,7 +446,7 @@ the "external element":
 
 \dontinclude multi_domain_boussinesq_elements.h
 \skipline  Overload the wind
-\until }  //end of get_wind_adv_diff
+\until } // end of get_wind_adv_diff
 
 Again, there is only one external interaction so the interaction index
 is set to zero and the external element

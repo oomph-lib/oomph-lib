@@ -276,6 +276,10 @@ We over-\/write the first (and, in fact, only) entry in the vector of {\ttfamily
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{    \textcolor{comment}{// Update the pointer to the (sub-\/)GeomObject within which the}}
+\DoxyCodeLine{    \textcolor{comment}{// reference point is located. (If the wall is simple GeomObject}}
+\DoxyCodeLine{    \textcolor{comment}{// this is the same as Wall\_pt; if it's a compound GeomObject}}
+\DoxyCodeLine{    \textcolor{comment}{// this points to the sub-\/object)}}
+\DoxyCodeLine{    geom\_object\_pt[0] = geom\_obj\_pt;}
 
 \end{DoxyCodeInclude}
 
@@ -284,6 +288,10 @@ Similarly, we over-\/write the third reference value with the local coordinate o
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{    \textcolor{comment}{// Update third reference value: Reference local coordinate}}
+\DoxyCodeLine{    \textcolor{comment}{// in wall element (local coordinate in FE if we're dealing}}
+\DoxyCodeLine{    \textcolor{comment}{// with a wall mesh)}}
+\DoxyCodeLine{    ref\_value[2] = \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_abe1a872647b7cfc1c732b57adef7d1b9}{s}}[0];}
 
 \end{DoxyCodeInclude}
 
@@ -292,6 +300,14 @@ The incorrect entries in the two vectors {\ttfamily geom\+\_\+object\+\_\+pt} an
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{    \textcolor{comment}{// Kill the existing node update info}}
+\DoxyCodeLine{    node\_pt-\/>kill\_node\_update\_info();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Setup algebraic update for node: Pass update information}}
+\DoxyCodeLine{    node\_pt-\/>add\_node\_update\_info(\textcolor{keyword}{this}, \textcolor{comment}{// mesh}}
+\DoxyCodeLine{                                  geom\_object\_pt, \textcolor{comment}{// vector of geom objects}}
+\DoxyCodeLine{                                  ref\_value); \textcolor{comment}{// vector of ref. values}}
+\DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
 

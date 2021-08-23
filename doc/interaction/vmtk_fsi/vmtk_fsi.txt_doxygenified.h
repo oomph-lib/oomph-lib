@@ -234,7 +234,7 @@ the element's private member data.
 \skipline Constructor takes a "bulk"
 \until FaceElement()
 \skipline {
-\until Id=
+\until Id =
 
 
 [We omit a few lines of code that are irrelevant for the

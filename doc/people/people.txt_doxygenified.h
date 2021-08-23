@@ -11,12 +11,33 @@ The \c oomph-lib "architects" are (in no particular order)
 collaborators who made 
 (or are still making) significant contributions to the development of
 the library (listed in reverse chronological order):
+- \b Patrick \b Keuchel worked on forced oscillations and resonances
+  in axisymmetric fluid-conveying tubes.
+- \b Ben \b Gavan worked on mesh adaptation procedures using gmsh.
+- \b Rupinder \b Matharu worked on the simulation of creep processes
+  during the annealing of HDPE materials.
+- \b Aidan \b Retallick works on the simulation of graphene-based
+  pressure transducers.
+- \b Christian \b Vaquero-Stainer did his Masters project on modelling
+  fingering in Hele-Shaw cells with time-dependent gap-widths, and then
+  moved on to this PhD on the subtraction of singularities in the flow
+  past arbitrarily-shaped disk-like objects in Stokes flow.
+- \b David \b Robinson developed and implemented C1 continuous
+  triangular elements for the solution of fourth-order PDES. He used
+  them for the implementation of the Foeppl-von-Karman and Koiter-Steigman
+  plate theories.
+- <b>Thomas Brion, Simon Finney and Hannah Chamberlain</b> all worked
+  on Foeppl-von-Karman based models of graphene-based microphones.
+- \b Louis \b Calot-Plaetevoet improved the methodology used to
+  transfer solutions between different meshes.
 - \b Thierry \b Gonon implemented the methodology to subtract
   singular (or non-singular) functions off solutions to the Poisson
   and Navier-Stokes equations. 
 - \b Chris \b Johnson has provided many bug fixes. 
 - \b Puneet \b Matharu works on the implementation of geometric
-  multigrid solvers, particularly for Helmholtz equations. 
+  multigrid solvers, particularly for Helmholtz equations. He then did
+  his PhD on exotic wakes in the flow past circular cylinders and has
+  become one of the maintainers of oomph-lib,
 - \b Chihebeddine \b Hammami worked on the implementation of 
   Yulii Shikhmurzaev's interface formation theory. 
 - \b Narjes \b Akriche worked on pseudo-resonances in acoustic 
@@ -30,7 +51,8 @@ the library (listed in reverse chronological order):
   the axisymmetric Foeppl von Karman equations.
 - \b Jonathan \b Deakin worked on a glaciology-related melt problem
   (and has since returned as PhD student to work on the numerical
-  solution of acoustic fluid-structure interaction problems).
+  solution of acoustic fluid-structure interaction problems and
+  optimal PML methods. He has since become one of the maintainers of oomph-lib.
 - \b Draga \b Pihler-Puzovic worked on the the coupled solution of the
    Foeppl von Karman equations and the Reynolds lubrication equation
    to model wrinkling/fingering in elastic-walled Hele-Shaw cells.
@@ -70,9 +92,10 @@ the library (listed in reverse chronological order):
 - \b David \b Shepherd works on the numerical solution of
   micromagnetic problems.
 - \b Ray \b White is working on block preconditioners.
-- \b Nico \b Bergemann made (and continues to make) significant
+- \b Nico \b Bergemann made significant
   contributions to the adaptive unstructured mesh (re-)generation
-  capabilities for free-surface problems.
+  capabilities for free-surface problems. He then did his PhD on
+  the simulation of viscous and visco-plastic free surface flows. 
 - \b Ben \b Saxby works on hp adaptivity and XFEM.
 - \b Michael \b Crabb worked on Discontinuous Galerkin (DG) methods.
 - \b Peter \b Ashcroft worked on eigenvalue problems. 

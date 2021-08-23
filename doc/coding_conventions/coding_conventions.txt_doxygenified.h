@@ -7,7 +7,18 @@ are used throughout \c oomph-lib. Knowledge of these conventions
 will greatly facilitate the use of the library. Contributors
 to the library are expected to adhere to these standards. 
 
-
+<br>
+Note that following our move to GitHub we have started to use
+<a href="https://clang.llvm.org/docs/ClangFormat.html">clang-format</a>
+to automatically format our sources (but only those in the
+<code>src</code> directory). The formatting rules are contained in the
+<code>.clang-format</code> file in the <code>oomph-lib</code> home
+directory. To run this on your own sources you need at least version
+10.0.0 of <code>clang-format.</code> Note that some of the code shown
+below would be changed slightly by <code>clang-format</code> but this
+concerns mainly minor whitespace adjustments and the beauty of
+automatic formatting means that you don't have to worry about these
+too much.
 <HR>
 <HR>
 
@@ -463,8 +474,8 @@ guards and library includes.
   /// \short Return FE interpolated coordinate x[i] at local coordinate s
   /// at previous timestep t (t=0: present; t>0: previous timestep)
   virtual double interpolated_x(const unsigned& t, 
-                                const Vector<double> &s,
-                                const unsigned &i) const;
+                                const Vector<double>& s,
+                                const unsigned& i) const;
   \endcode
 
 \subsection brackets Access to elements in containers
@@ -482,13 +493,18 @@ guards and library includes.
    function that returns a bool . For example
    \code
     private:
+
       /// Boolean to indicate whether documentation should be on or off
       bool Doc_flag;
+
     public:
+    
       /// Enable documentation
       void enable_doc() {Doc_flag=true;}
+      
       /// Disable documentation
       void disable_doc() {Doc_flag=false;}
+
       /// Test whether documentation is on or off
       bool is_doc_enabled() const {return Doc_flag;}
    \endcode

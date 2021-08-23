@@ -1,6 +1,7 @@
 This document provides an overview of the general coding conventions that are used throughout {\ttfamily oomph-\/lib}. Knowledge of these conventions will greatly facilitate the use of the library. Contributors to the library are expected to adhere to these standards.
 
-\DoxyHorRuler{0}
+~\newline
+ Note that following our move to Git\+Hub we have started to use \href{https://clang.llvm.org/docs/ClangFormat.html}{\texttt{ clang-\/format}} to automatically format our sources (but only those in the {\ttfamily src} directory). The formatting rules are contained in the {\ttfamily .clang-\/format} file in the {\ttfamily oomph-\/lib} home directory. To run this on your own sources you need at least version 10.\+0.\+0 of {\ttfamily clang-\/format.} Note that some of the code shown below would be changed slightly by {\ttfamily clang-\/format} but this concerns mainly minor whitespace adjustments and the beauty of automatic formatting means that you don\textquotesingle{}t have to worry about these too much. \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_naming}{}\doxysection{Naming conventions}\label{index_naming}
 \hypertarget{index_filenames}{}\doxysubsection{File names}\label{index_filenames}
@@ -21,7 +22,7 @@ All C++ source files end with the standard extensions $\ast$.h and $\ast$.cc.
 \item General variables are all lowercase
 \item Variables that contain multiple words contain underscores to separate them, e.\+g. 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{FiniteElement* \mbox{\hyperlink{coding__conventions_8txt_abdf54a843c828adc77dc76b43eed4a00}{surface\_element\_pt}}; }
+\DoxyCodeLine{FiniteElement* surface\_element\_pt; }
 \end{DoxyCode}
 
 \end{DoxyItemize}\hypertarget{index_classes}{}\doxysubsection{Classes}\label{index_classes}
@@ -53,10 +54,10 @@ Use a capital first letter for private data, and the all-\/lowercase equivalent 
 \DoxyCodeLine{\textcolor{keyword}{public}: }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access to boundary node (const version)}}
-\DoxyCodeLine{\textcolor{comment}{} Node* \mbox{\hyperlink{coding__conventions_8txt_ae2354be5cf2b6fd97ded218f0282e485}{boundary\_node\_pt}}()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} Boundary\_node\_pt;\}}
+\DoxyCodeLine{\textcolor{comment}{} Node* boundary\_node\_pt()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} Boundary\_node\_pt;\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access to boundary node}}
-\DoxyCodeLine{\textcolor{comment}{} Node*\& \mbox{\hyperlink{coding__conventions_8txt_ae2354be5cf2b6fd97ded218f0282e485}{boundary\_node\_pt}}() \{\textcolor{keywordflow}{return} Boundary\_node\_pt;\}}
+\DoxyCodeLine{\textcolor{comment}{} Node*\& boundary\_node\_pt() \{\textcolor{keywordflow}{return} Boundary\_node\_pt;\}}
 \end{DoxyCode}
 
 \end{DoxyItemize}
@@ -72,13 +73,13 @@ Many classes have member functions that provide access to data in private contai
 \item Use singular for the access function to the container, i.\+e. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Return pointer to e-\/th element}}
-\DoxyCodeLine{\textcolor{comment}{}FiniteElement* \mbox{\hyperlink{coding__conventions_8txt_ae11c23d019f158839e6002c47913bb4a}{element\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& e);}
+\DoxyCodeLine{\textcolor{comment}{}FiniteElement* element\_pt(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& e);}
 \end{DoxyCode}
- rather than {\ttfamily \mbox{\hyperlink{coding__conventions_8txt_ab59e60957ba7a4692ded05fe49a956d6}{elements\+\_\+pt(...)}}} 
+ rather than {\ttfamily elements\+\_\+pt(...)} 
 \item Use a prefix `{\ttfamily n'} for the access function for the number of entries in the container, i.\+e. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Total number of elements }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{coding__conventions_8txt_a7b8627ed669d599b2fcbf99832ef334f}{nelement}}();}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{unsigned} nelement();}
 \end{DoxyCode}
  {\bfseries{Notes\+:}} (i) No underscore between the \char`\"{}n\char`\"{} and the container\textquotesingle{}s name. (ii) No trailing {\ttfamily \+\_\+pt} in the function that returns the number of objects in the container.
 \end{DoxyItemize}\hypertarget{index_template}{}\doxysubsection{Template parameters}\label{index_template}
@@ -87,7 +88,7 @@ Many classes have member functions that provide access to data in private contai
 \item Template parameters are all caps, e.\+g. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
-\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classNavierStokesEquations}{NavierStokesEquations}}}
+\DoxyCodeLine{\textcolor{keyword}{class }NavierStokesEquations}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{  \textcolor{keyword}{public}:}
 \DoxyCodeLine{  [...]}
@@ -369,8 +370,8 @@ Here is an example of a complete header file, including include guards and libra
 \DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Return FE interpolated coordinate x[i] at local coordinate s}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// at previous timestep t (t=0: present; t>0: previous timestep)}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{virtual} \textcolor{keywordtype}{double} interpolated\_x(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, }
-\DoxyCodeLine{                              \textcolor{keyword}{const} Vector<double> \&s,}
-\DoxyCodeLine{                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&i) \textcolor{keyword}{const};}
+\DoxyCodeLine{                              \textcolor{keyword}{const} Vector<double>\& s,}
+\DoxyCodeLine{                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i) \textcolor{keyword}{const};}
 \end{DoxyCode}
 
 \end{DoxyItemize}\hypertarget{index_brackets}{}\doxysubsection{Access to elements in containers}\label{index_brackets}
@@ -382,14 +383,19 @@ Here is an example of a complete header file, including include guards and libra
 \begin{DoxyItemize}
 \item Avoid access to boolean member data via trivial wrapper functions that return references. These constructions lead to somewhat ugly driver codes and can lead to code that appears to set a boolean, when it does not. Instead the status of the boolean should be modified by two set/unset or enable/disable subroutines (i.\+e. returning void) and tested using a (const) has\+\_\+ or is\+\_\+ function that returns a bool . For example 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{  /// Boolean to indicate whether documentation should be on or off}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{bool} Doc\_flag;}
-\DoxyCodeLine{\textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{  /// Enable documentation}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} enable\_doc() \{Doc\_flag=\textcolor{keyword}{true};\}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} enable\_doc() \{Doc\_flag=\textcolor{keyword}{true};\}}
+\DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{  /// Disable documentation}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} disable\_doc() \{Doc\_flag=\textcolor{keyword}{false};\}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} disable\_doc() \{Doc\_flag=\textcolor{keyword}{false};\}}
+\DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{  /// Test whether documentation is on or off}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{bool} is\_doc\_enabled()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} Doc\_flag;\}}
 \end{DoxyCode}

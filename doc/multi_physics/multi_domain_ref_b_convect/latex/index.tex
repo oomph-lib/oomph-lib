@@ -216,6 +216,12 @@ We provide access functions to the Rayleigh number
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// Access function for the Rayleigh number (const version)}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& ra()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keyword}{    }\{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} *Ra\_pt;}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -224,6 +230,12 @@ and, given that we are dealing with a refineable element, make sure that the poi
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// Access function for the pointer to the Rayleigh number}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{double}*\& ra\_pt()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} Ra\_pt;}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 
@@ -278,6 +290,11 @@ Finally, we have to compute the element\textquotesingle{}s Jacobian matrix. The 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Compute the element's residual vector and the Jacobian matrix.}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double>\& residuals,}
+\DoxyCodeLine{                                          DenseMatrix<double>\& jacobian)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// Get the analytical contribution from the basic Navier-\/Stokes element}}
+\DoxyCodeLine{      NST\_ELEMENT::fill\_in\_contribution\_to\_jacobian(residuals, jacobian);}
 
 \end{DoxyCodeInclude}
 
@@ -287,6 +304,14 @@ elements\char`\"{} by finite differencing\+:
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef USE\_FD\_FOR\_DERIVATIVES\_WRT\_EXTERNAL\_DATA\_IN\_MULTI\_DOMAIN\_BOUSSINESQ}}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Get the off-\/diagonal terms by finite differencing}}
+\DoxyCodeLine{      this-\/>fill\_in\_jacobian\_from\_external\_interaction\_by\_fd(residuals,}
+\DoxyCodeLine{                                                             jacobian);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 
 \end{DoxyCodeInclude}
 
@@ -295,6 +320,12 @@ If this is deemed to be too inefficient, we can provide a function that computes
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Get the off-\/diagonal terms analytically}}
+\DoxyCodeLine{      this-\/>fill\_in\_off\_diagonal\_block\_analytic(residuals, jacobian);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\textcolor{preprocessor}{    \}}}
 
 \end{DoxyCodeInclude}
 
@@ -339,6 +370,26 @@ We overload the function that computes the \char`\"{}wind\char`\"{} for the adve
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Overload the wind function in the advection-\/diffusion equations.}}
+\DoxyCodeLine{\textcolor{comment}{    /// This provides the coupling from the Navier-\/-\/Stokes equations to the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// advection-\/diffusion equations because the wind is the fluid velocity,}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// obtained from the "external" element}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_wind\_adv\_diff(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} Vector<double>\& s,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} Vector<double>\& x,}
+\DoxyCodeLine{                           Vector<double>\& wind)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keyword}{    }\{}
+\DoxyCodeLine{      \textcolor{comment}{// There is only one interaction}}
+\DoxyCodeLine{      \textcolor{keywordtype}{unsigned} interaction = 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Dynamic cast "external" element to Navier Stokes element}}
+\DoxyCodeLine{      NST\_ELEMENT* nst\_el\_pt =}
+\DoxyCodeLine{        \textcolor{keyword}{dynamic\_cast<}NST\_ELEMENT*\textcolor{keyword}{>}(external\_element\_pt(interaction, ipt));}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Wind is given by the velocity in the Navier Stokes element}}
+\DoxyCodeLine{      nst\_el\_pt-\/>interpolated\_u\_nst(}
+\DoxyCodeLine{        external\_element\_local\_coord(interaction, ipt), wind);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \} \textcolor{comment}{// end of get\_wind\_adv\_diff}}
 
 \end{DoxyCodeInclude}
 
@@ -349,6 +400,26 @@ The element\textquotesingle{}s Jacobian matrix can be computed by the same metho
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{    \textcolor{comment}{///\(\backslash\)short Compute the element's residual vector and the Jacobian matrix.}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double>\& residuals,}
+\DoxyCodeLine{                                          DenseMatrix<double>\& jacobian)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{// Get the contribution from the basic advection diffusion element}}
+\DoxyCodeLine{      AD\_ELEMENT::fill\_in\_contribution\_to\_jacobian(residuals, jacobian);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef USE\_FD\_FOR\_DERIVATIVES\_WRT\_EXTERNAL\_DATA\_IN\_MULTI\_DOMAIN\_BOUSSINESQ}}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Get the off-\/diagonal terms by finite differencing}}
+\DoxyCodeLine{      this-\/>fill\_in\_jacobian\_from\_external\_interaction\_by\_fd(residuals,}
+\DoxyCodeLine{                                                             jacobian);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Get the off-\/diagonal terms analytically}}
+\DoxyCodeLine{      this-\/>fill\_in\_off\_diagonal\_block\_analytic(residuals, jacobian);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\textcolor{preprocessor}{    \}}}
 
 \end{DoxyCodeInclude}
 

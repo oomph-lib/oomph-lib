@@ -71,11 +71,9 @@
           <li><a href="../../doc/FAQ/html/index.html">FAQ</a></li>
         </ul>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installation<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="../../doc/the_distribution/html/index.html">Installation guide</a></li>
-            <li><a href="../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
-            <li><a href="../../doc/download/html/index.html">Get code as tar file</a></li>
             <li><a href="../../doc/copyright/html/index.html">Copyright</a></li>
           </ul>
         </li>
@@ -180,446 +178,407 @@
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">  Mathematics&lt;/a&gt; at &lt;a href=&quot;http://www.manchester.ac.uk/&quot;&gt;The</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">  University of Manchester&lt;/a&gt;, along with many &lt;a href=</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">  &quot;../people/html/index.html&quot;&gt;other contributors&lt;/a&gt;.&lt;/p&gt;</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">  &lt;p&gt;The latest version of the library is 1.0, </span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">  &lt;script&gt;</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">        // This odd/hacky construction extracts the svn information automatically</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">         var revString = &quot;$LastChangedRevision$&quot;;</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">         var dateString = &quot;$LastChangedDate$&quot;;</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">         </span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">         //Revision number should never be more than 5 digits</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">         revString = revString.substr(revString.indexOf(&quot;:&quot;)+1,5).trim();</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">         </span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">         // The string should always be the same length</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">         var timeString = dateString.substr(28,8);</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">         </span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">         dateString = dateString.substr(dateString.indexOf(&quot;(&quot;)+1, dateString.indexOf(&quot;)&quot;) - dateString.indexOf(&quot;(&quot;)-1);</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">         </span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">         document.write(&quot;revision number &quot;);</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">         document.write(revString);</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">         document.write(&quot; and was committed on &quot;);</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">         document.write(dateString);</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">         document.write(&quot;.&quot;);</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">  &lt;/script&gt; See the &lt;a href=&quot;../change_log/html/index.html&quot;&gt;change</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">  log page&lt;/a&gt; for an overview of the changes made since the previous</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">  release.&lt;/p&gt;</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">  &lt;h2&gt;What is it [and what is it not]?&lt;/h2&gt;</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; &lt;b&gt;is&lt;/b&gt;:</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">  &lt;li&gt;an object-oriented, open-source finite-element library for the</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">  simulation of multi-physics problems.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; &lt;b&gt;is not&lt;/b&gt;:</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">  &lt;li&gt;a GUI-based, mouse-driven &quot;package&quot;.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">  You must write your own C++ driver codes to specify your problem,</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">  using &lt;code&gt;oomph-lib&lt;/code&gt;&#39;s high-level objects. Once the problem</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">  is formulated, the &lt;code&gt;main&lt;/code&gt; function can be as simple as</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">  this:</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">  &lt;div class=&quot;fragment&quot;&gt;</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;   main()&lt;/div&gt;</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;   {&lt;/div&gt;</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;     &lt;span class=&quot;comment&quot;&gt;// Create the problem object&lt;/span&gt;&lt;/div&gt;</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;     &lt;span class=&quot;keywordtype&quot;&gt;MyProblem&lt;/span&gt; problem;&lt;/div&gt;</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;     &lt;/div&gt;</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;     &lt;span class=&quot;comment&quot;&gt;// Solve the problem, using oomph-lib&amp;#39;s default Newton solver&lt;/span&gt;&lt;/div&gt;</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;     problem.newton_solve();&lt;/div&gt;</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;   }&lt;/div&gt;</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">  &lt;/div&gt;</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; provides the state of the art infrastructure</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">  for the problem formulation and solution. The library contains a</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">  large number of elements, meshes, timesteppers, solvers, etc. which</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">  can be combined to solve any problem.</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">  &lt;p&gt;The library is supplied with extensive on-line documentation</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">  which includes:&lt;/p&gt;</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">  &lt;li&gt;</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">  &lt;h4&gt;&lt;a href=&quot;../intro/html/index.html&quot;&gt;&lt;b&gt;Theory: Finite Elements</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">  -- from procedural to object-oriented&lt;/b&gt;&lt;/a&gt;&lt;/h4&gt;</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">  This provides a relatively brief, constructive &quot;top-down&quot;</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">  introduction to the maths of the finite element method, and</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">  explains its object-oriented implementation in</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt;.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">  &lt;li&gt;</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">  &lt;h4&gt;&lt;a href=&quot;../the_data_structure/html/index.html&quot;&gt;&lt;b&gt;The Data</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">  Structure&lt;/b&gt;&lt;/a&gt;&lt;/h4&gt;</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">  A bottom-up discussion of &lt;code&gt;oomph-lib&#39;s&lt;/code&gt; overall data</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">  structure, including a complete, cross-referenced index of all</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&#39;s&lt;/code&gt; classes (generated by Doxygen).&lt;/li&gt;</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">  &lt;li&gt;</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">  &lt;h4&gt;&lt;a href=&quot;../quick_guide/html/index.html&quot;&gt;&lt;b&gt;(Not-So-)Quick</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">  Guide&lt;/b&gt;&lt;/a&gt;&lt;/h4&gt;</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">  The &lt;a href=&quot;../quick_guide/html/index.html&quot;&gt;(Not-So-)Quick</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">  Guide&lt;/a&gt; provides a &quot;quick&quot; introduction on how to create new</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">  instances of &lt;code&gt;oomph-lib&#39;s&lt;/code&gt; fundamental objects:</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">  &lt;code&gt;Problems&lt;/code&gt;, &lt;code&gt;Meshes&lt;/code&gt;, and</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">  &lt;code&gt;Elements&lt;/code&gt;.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">  &lt;li&gt;</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">  &lt;h4&gt;&lt;a href=&quot;../example_code_list/html/index.html&quot;&gt;&lt;b&gt;Example</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">  Codes/Tutorials&lt;/b&gt;&lt;/a&gt;&lt;/h4&gt;</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">  We provide a large number of verified and documented example</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">  problems.</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">  &lt;li style=&quot;margin-top:10px;&quot;&gt;The example problems are arranged in</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">  order of increasing complexity and can be used as chapters in a</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">  self-study course. Comments and exercises are provided to encourage</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">  further exploration of &lt;code&gt;oomph-lib&#39;s&lt;/code&gt; capabilities.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">  &lt;li style=&quot;margin-top:10px;&quot;&gt;The individual examples are as</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">  self-contained as possible and can be used as quick guides to</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">  particular features of &lt;code&gt;oomph-lib&lt;/code&gt;. (&quot;How do I solve</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">  time-dependent problems?&quot;; &quot;How do I enable spatial adaptivity?&quot;;</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">  &quot;How do I write my own meshes?&quot;; etc.)&lt;/li&gt;</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">  &lt;li style=&quot;margin-top:10px;&quot;&gt;The examples codes should be regarded</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">  as templates for your own driver codes: Examine the &lt;a href=</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">  &quot;../example_code_list/html/index.html&quot;&gt;list of examples&lt;/a&gt; and try</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">  to find one that resembles the problem that you wish to solve. For</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">  most &quot;classical&quot; problems (e.g. the solution of the Navier-Stokes</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">  equations with standard boundary conditions), very few</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">  modifications are required (e.g. adjusting the mesh to a different</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">  domain, changing the boundary and/or initial conditions, etc). If</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">  you wish to solve a non-standard problem, or one for which</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; does not (yet) provide elements or meshes,</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">  it is easy to write your own, following the detailed instructions</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">  provided in the documentation.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">  &lt;/li&gt;</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">  &lt;/article&gt;</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">  </span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">  </span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">  </span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">  &lt;article class=&quot;tab-pane&quot; id=&quot;features&quot;&gt;  </span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">    &lt;h1&gt;Features&lt;/h1&gt;</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">    &lt;ul&gt;</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">    &lt;li&gt;Large number of fully-developed and carefully-validated element</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">    types for the solution of:</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">    &lt;ul&gt;</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">    &lt;li&gt;The Poisson equation&lt;/li&gt;</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">    &lt;li&gt;The unsteady heat equation&lt;/li&gt;</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">    &lt;li&gt;The linear wave equation&lt;/li&gt;</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">    &lt;li&gt;The advection-diffusion equation&lt;/li&gt;</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">    &lt;li&gt;The Navier-Stokes equations, incl. free-surfaces, in Cartesian</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">    and axisymmetric co-ordinates.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">    &lt;li&gt;The equations of large-displacement solid mechanics, based on</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">    the principle of virtual displacements in cartesian and</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">    axisymmetric geometries; with arbitrary constitutive</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">    equations.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">    &lt;li&gt;Shell and beam elements, based on a geometrically non-linear</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">    formulation.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">    &lt;li&gt;...and many others.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">    &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">    [&lt;b&gt;Note:&lt;/b&gt; Most elements are implemented in a</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">    dimension-independent formulation]&lt;/li&gt;</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">    &lt;li&gt;It is easy to formulate new elements for problems that are not</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">    included in the above list.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">    &lt;li&gt;It is easy to combine any of the above elements to</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">    &quot;multi-physics&quot; elements, allowing e.g.</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">    &lt;ul&gt;</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">    &lt;li&gt;the solution of fluid-structure interaction problems&lt;/li&gt;</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">    &lt;li&gt;the simulation of unsteady heat conduction in an elastic body</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">    that undergoes large displacements&lt;/li&gt;</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">    &lt;li&gt;free-surface problems&lt;/li&gt;</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">    &lt;li&gt;etc.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">    &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">    &lt;/li&gt;</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">    &lt;li&gt;Parallel processing capabilities.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">    &lt;li&gt;Full spatial and temporal adaptivity. All elements listed above</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">    support quad-tree/octree-based mesh refinement procedures and</span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">    adaptive timestepping.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">    &lt;li&gt;A wide range of meshes; new meshes can easily be added to the</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">    library. &lt;code&gt;oomph-lib&lt;/code&gt; can also use meshes that are</span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">    generated by third-party (commercial) mesh generators.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">    &lt;li&gt;The ability to solve problems in domains with time-dependent,</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">    curvilinear boundaries.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">    &lt;li&gt;&lt;code&gt;oomph-lib&lt;/code&gt; treats all problems as non-linear</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">    problems and uses Newton&#39;s method as the default non-linear solver.</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">    Within this framework, linear problems are special cases for which</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">    the Newton iteration converges in one step. The linear systems</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">    arising during the Newton iteration can be solved with a variety of</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">    direct and iterative solvers. Continuation methods (Keller&#39;s</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">    arclength method and displacement-control for solid mechanics</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">    problems) are implemented.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">    &lt;li&gt;A large number of &lt;a href=</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">    &quot;../example_code_list/html/index.html&quot;&gt;fully documented example</span></div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">    codes.&lt;/a&gt; All examples include an introduction to the</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">    mathematical/physical problem, a detailed discussion of the driver</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">    code, a discussion of the results (incl. comparisons against</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">    analytical solutions where appropriate) and exercises and</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">    comments.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">    &lt;li&gt;The library has extensive self-test facilities. It can be</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">    compiled with a PARANOID flag switched on or off. If the flag is</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">    set during compilation, the code performs a large number of</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">    self-tests during its execution. If things go wrong, code execution</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">    terminates gracefully and diagnostic output is generated to help</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">    pinpoint the problem. Of course, the tests introduce an additional</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">    run-time overhead, so can be switched off in production runs.</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">    During development, range checking on all array-based objects,</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">    (vectors, matrices, tensors, etc) can be enabled separately by</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">    using the RANGE_CHECKING flag, but introduces considerable run-time</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">    overhead.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">    &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">  &lt;/article&gt;</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">  </span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">  </span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">  &lt;article class=&quot;tab-pane&quot; id=&quot;get&quot;&gt;</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">  &lt;h1&gt;How do I get the code?&lt;/h1&gt;</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">  &lt;p&gt;The latest version of the library is 1.0, </span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">  &lt;script&gt;</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">        // This odd/hacky construction extracts the svn information automatically</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">         var revString = &quot;$LastChangedRevision$&quot;;</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">         var dateString = &quot;$LastChangedDate$&quot;;</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">         </span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">         //Revision number should never be more than 5 digits</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">         revString = revString.substr(revString.indexOf(&quot;:&quot;)+1,5).trim();</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">         </span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">         // The string should always be the same length</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">         var timeString = dateString.substr(28,8);</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">         </span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">         dateString = dateString.substr(dateString.indexOf(&quot;(&quot;)+1, dateString.indexOf(&quot;)&quot;) - dateString.indexOf(&quot;(&quot;)-1);</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">         </span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">         document.write(&quot;revision number &quot;);</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">         document.write(revString);</span></div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">         document.write(&quot; and was committed on &quot;);</span></div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">         document.write(dateString);</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">         document.write(&quot;.&quot;);</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">  &lt;/script&gt; See the &lt;a href=&quot;../change_log/html/index.html&quot;&gt;change</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">  log page&lt;/a&gt; for an overview of the changes made since the previous</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">  release.&lt;/p&gt;</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">  &lt;h2&gt;Downloads&lt;/h2&gt;</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">  &lt;p&gt;We provide &lt;a href=&quot;../the_distribution/html/index.html&quot;&gt;gzipped</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">  tar files&lt;/a&gt; of the library. We also provide read-only access to</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">  the &lt;a href=&quot;../subversion/html/index.html&quot;&gt;subversion</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">  repository&lt;/a&gt; of the oomph-lib project. For more information see</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">  the &lt;a href=&quot;../the_distribution/html/index.html&quot;&gt;installation</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">  guide&lt;/a&gt;. Note that the &lt;a href=</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">  &quot;../the_distribution/html/index.html&quot;&gt;gzipped tar files&lt;/a&gt; , the</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">  latest version of the library available via the public repository</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">  and the webpage at &lt;a href=</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">  &quot;http://www.oomph-lib.org&quot;&gt;http://www.oomph-lib.org&lt;/a&gt; are</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">  automatically synchronised.&lt;/p&gt;</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">  &lt;h2&gt;Prerequisites&lt;/h2&gt;</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">  &lt;p&gt;&lt;code&gt;oomph-lib&lt;/code&gt; has been/is primarily being developed in</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">  Linux so it is well tested there. However several people</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">  successfully run it on Windows and Mac OS X. In order to minimise</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">  the dependence on external libraries we include &quot;frozen&quot; versions</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">  of certain external libraries (&lt;a href=</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">  &quot;http://www-users.cs.umn.edu/~karypis/metis/&quot;&gt;METIS&lt;/a&gt;, &lt;a href=</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">  &quot;http://crd.lbl.gov/~xiaoye/SuperLU&quot;&gt;SuperLU&lt;/a&gt;, ...) with our</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">  distribution. The idea is that you should only have to unpack,</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">  build and install one distribution to produce the fully compiled</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">  library, the html-based documentation and working example</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">  codes.&lt;/p&gt;</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">  For this purpose you &lt;b&gt;must have&lt;/b&gt;:</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">  &lt;li&gt;A computer with a linux (or unix) operating system. [&lt;b&gt;Note</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">  for windows users:&lt;/b&gt; We believe that &lt;code&gt;oomph-lib&lt;/code&gt; can</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">  be installed in a windows environment, using &lt;a href=</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">  &quot;http://www.cygwin.com/&quot;&gt;cygwin&lt;/a&gt;, though we haven&#39;t tried this</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">  for a long time.]&lt;/li&gt;</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">  &lt;li&gt;Compilers for C++, C and Fortran77. The open-source &lt;a href=</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">  &quot;http://gcc.gnu.org/&quot;&gt;GNU gcc compiler suite&lt;/a&gt; version 4.8.4 or</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">  later is fine. [ &lt;b&gt;Note:&lt;/b&gt; The Fortran77 and C compilers are</span></div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">  only required to compile some external libraries --</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; itself is written entirely in C++.]&lt;/li&gt;</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">  The following programs are helpful but not essential:</span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">  &lt;li&gt;GNU&#39;s &lt;a href=</span></div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/autoconf/&quot;&gt;autoconf&lt;/a&gt;, &lt;a href=</span></div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/automake/&quot;&gt;automake&lt;/a&gt; and &lt;a href=</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/libtool/&quot;&gt;libtool&lt;/a&gt; are required if</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">  you wish to add additional features to your local copy of</span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt;; see &lt;a href=</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">  &quot;../the_distribution/html/index.html&quot;&gt;the &lt;code&gt;oomph-lib&lt;/code&gt;</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">  download page&lt;/a&gt; for more details.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">  &lt;li&gt;&lt;a href=&quot;http://www.python.org/download/&quot;&gt;python&lt;/a&gt; is needed</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">  to analyse the results of the extensive self-tests that may be</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">  performed at the end of the installation to verify that the build</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">  process was completed successfully. If python is not available, the</span></div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">  self-test will compile and run all test codes but it will not be</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">  possible to verify the correctness of the results.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">  &lt;li&gt;&lt;a href=&quot;http://www.doxygen.org&quot;&gt;doxygen&lt;/a&gt; is needed to build</span></div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">  a local copy of &lt;code&gt;oomph-lib&lt;/code&gt;&#39;s extensive online</span></div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">  documentation. If doxygen is not installed on your system you can</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">  consult the latest version of the online documentation on &lt;a href=</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">  &quot;http://www.oomph-lib.org&quot;&gt;the &lt;code&gt;oomph-lib&lt;/code&gt;</span></div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">  homepage.&lt;/a&gt;&lt;/li&gt;</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">  The &lt;code&gt;oomph-lib&lt;/code&gt; distribution is built under &lt;a href=</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/autoconf/&quot;&gt;autoconf&lt;/a&gt; / &lt;a href=</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/automake/&quot;&gt;automake&lt;/a&gt; control,</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">  making the installation completely straightforward. We provide two</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">  main installation mechanisms:</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">  &lt;li&gt;&lt;code&gt;oomph-lib&lt;/code&gt; can be built/installed/tested with GNU&#39;s</span></div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">  standard &lt;code&gt;configure; make; make install; make check&lt;/code&gt;</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">  procedure.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">  &lt;li&gt;We also provide a customised build script,</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">  &lt;code&gt;autogen.sh&lt;/code&gt;, that guides the &quot;non-expert&quot; user through</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">  the installation. The script facilitates the specification of</span></div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">  various build options, such as optimisation levels etc.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">  Subject to the minimum requirements, listed above, you should be</span></div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">  able to install and use our libraries &quot;anywhere&quot;. However, as</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">  anybody who has ever ported any code to a different platform knows,</span></div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">  things are rarely that simple -- even with &lt;a href=</span></div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/autoconf/&quot;&gt;autoconf&lt;/a&gt;, &lt;a href=</span></div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/automake/&quot;&gt;automake&lt;/a&gt; and &lt;a href=</span></div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/libtool/&quot;&gt;libtool&lt;/a&gt;... Having said</span></div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">  that, we have successfully installed and tested our installation on</span></div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">  the following platforms:</span></div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">  &lt;li&gt;Ubuntu (version 14.04) with gcc compilers (version 4.8.4). The</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">  tests included the MPI part of the library, which we compiled with</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">  &lt;a href=&quot;https://www.open-mpi.org/&quot;&gt;OpenMPI&lt;/a&gt; (version</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">  1.6.5).&lt;/li&gt;</span></div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">  &lt;li&gt;Redhat (version 4.4.7-3) with gcc compilers (version 4.4.7) The</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">  tests included the MPI part of the library, which we compiled with</span></div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">  &lt;a href=&quot;https://www.open-mpi.org/&quot;&gt;OpenMPI&lt;/a&gt; (version</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">  1.5.4).&lt;/li&gt;</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">  &lt;li&gt; Ubuntu (version 14.04) with Clang compilers (version 3.5) &lt;/li&gt;</span></div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">  &lt;li&gt; Arch Linux (05-2016) with gcc compilers (version 6.1.1) &lt;/li&gt;</span></div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment">  &lt;li&gt; Ubuntu (version 16.04) with gcc compilers (version 5.3.1) &lt;/li&gt;       </span></div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment">  &lt;li&gt; Debian Jessie (gcc 4.9)&lt;/li&gt;</span></div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment"> &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">  &lt;h2&gt;Preparing a ubuntu box for &lt;code&gt;oomph-lib&lt;/code&gt;&lt;/h2&gt;</span></div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">  Typically, when we install &lt;code&gt;oomph-lib&lt;/code&gt; on a machine with</span></div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment">  a new (default) installation of ubuntu, we install at least the</span></div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment">  following additional packages (here listed with full apt-get syntax,</span></div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">  so you can cut and paste):</span></div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment">apt-get install subversion</span></div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment">apt-get install make</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">apt-get install automake</span></div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">apt-get install libtool</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">apt-get install autoconf</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">apt-get install doxygen</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">apt-get install gfortran</span></div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">apt-get install g++</span></div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">  ...or, if you want it all in one go (particularly useful if you have</span></div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">  to prefix the apt-get with sudo): </span></div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">apt-get install subversion make automake libtool autoconf doxygen</span></div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">  gfortran g++</span></div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">  &lt;/article&gt;</span></div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">  </span></div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">  </span></div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">  </span></div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">  &lt;article class=&quot;tab-pane&quot; id=&quot;use&quot;&gt;</span></div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">  &lt;h1&gt;How do I get started?&lt;/h1&gt;</span></div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; contains a lot of code and a lot of</span></div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">  documentation. How to get started obviously depends on your</span></div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">  background: Are you familiar with the finite element method? How</span></div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">  good is your knowledge of C++? Etc. Here are some possible</span></div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">  &quot;routemaps&quot; around the library:</span></div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">  &lt;li&gt;&lt;b&gt;You are familiar with the finite element method and have a</span></div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">  fairly good knowledge of C++&lt;/b&gt;</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">  &lt;p&gt; See the &lt;a href=&quot;../change_log/html/index.html&quot;&gt;change</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">  log page&lt;/a&gt; for an overview of the changes made since the previous</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">  release.&lt;/p&gt;</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">  &lt;h2&gt;What is it [and what is it not]?&lt;/h2&gt;</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; &lt;b&gt;is&lt;/b&gt;:</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">  &lt;li&gt;an object-oriented, open-source finite-element library for the</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">  simulation of multi-physics problems.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; &lt;b&gt;is not&lt;/b&gt;:</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">  &lt;li&gt;a GUI-based, mouse-driven &quot;package&quot;.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">  You must write your own C++ driver codes to specify your problem,</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">  using &lt;code&gt;oomph-lib&lt;/code&gt;&#39;s high-level objects. Once the problem</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">  is formulated, the &lt;code&gt;main&lt;/code&gt; function can be as simple as</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">  this:</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">  &lt;div class=&quot;fragment&quot;&gt;</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;   main()&lt;/div&gt;</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;   {&lt;/div&gt;</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;     &lt;span class=&quot;comment&quot;&gt;// Create the problem object&lt;/span&gt;&lt;/div&gt;</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;     &lt;span class=&quot;keywordtype&quot;&gt;MyProblem&lt;/span&gt; problem;&lt;/div&gt;</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;     &lt;/div&gt;</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;     &lt;span class=&quot;comment&quot;&gt;// Solve the problem, using oomph-lib&amp;#39;s default Newton solver&lt;/span&gt;&lt;/div&gt;</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;     problem.newton_solve();&lt;/div&gt;</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">  &lt;div class=&quot;line&quot;&gt;   }&lt;/div&gt;</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">  &lt;/div&gt;</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; provides the state of the art infrastructure</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">  for the problem formulation and solution. The library contains a</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">  large number of elements, meshes, timesteppers, solvers, etc. which</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">  can be combined to solve any problem.</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">  &lt;p&gt;The library is supplied with extensive on-line documentation</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">  which includes:&lt;/p&gt;</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">  &lt;li&gt;</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">  &lt;h4&gt;&lt;a href=&quot;../intro/html/index.html&quot;&gt;&lt;b&gt;Theory: Finite Elements</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">  -- from procedural to object-oriented&lt;/b&gt;&lt;/a&gt;&lt;/h4&gt;</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">  This provides a relatively brief, constructive &quot;top-down&quot;</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">  introduction to the maths of the finite element method, and</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">  explains its object-oriented implementation in</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt;.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">  &lt;li&gt;</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">  &lt;h4&gt;&lt;a href=&quot;../the_data_structure/html/index.html&quot;&gt;&lt;b&gt;The Data</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">  Structure&lt;/b&gt;&lt;/a&gt;&lt;/h4&gt;</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">  A bottom-up discussion of &lt;code&gt;oomph-lib&#39;s&lt;/code&gt; overall data</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">  structure, including a complete, cross-referenced index of all</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&#39;s&lt;/code&gt; classes (generated by Doxygen).&lt;/li&gt;</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">  &lt;li&gt;</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">  &lt;h4&gt;&lt;a href=&quot;../quick_guide/html/index.html&quot;&gt;&lt;b&gt;(Not-So-)Quick</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">  Guide&lt;/b&gt;&lt;/a&gt;&lt;/h4&gt;</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">  The &lt;a href=&quot;../quick_guide/html/index.html&quot;&gt;(Not-So-)Quick</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">  Guide&lt;/a&gt; provides a &quot;quick&quot; introduction on how to create new</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">  instances of &lt;code&gt;oomph-lib&#39;s&lt;/code&gt; fundamental objects:</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">  &lt;code&gt;Problems&lt;/code&gt;, &lt;code&gt;Meshes&lt;/code&gt;, and</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">  &lt;code&gt;Elements&lt;/code&gt;.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">  &lt;li&gt;</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">  &lt;h4&gt;&lt;a href=&quot;../example_code_list/html/index.html&quot;&gt;&lt;b&gt;Example</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">  Codes/Tutorials&lt;/b&gt;&lt;/a&gt;&lt;/h4&gt;</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">  We provide a large number of verified and documented example</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">  problems.</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">  &lt;li style=&quot;margin-top:10px;&quot;&gt;The example problems are arranged in</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">  order of increasing complexity and can be used as chapters in a</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">  self-study course. Comments and exercises are provided to encourage</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">  further exploration of &lt;code&gt;oomph-lib&#39;s&lt;/code&gt; capabilities.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">  &lt;li style=&quot;margin-top:10px;&quot;&gt;The individual examples are as</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">  self-contained as possible and can be used as quick guides to</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">  particular features of &lt;code&gt;oomph-lib&lt;/code&gt;. (&quot;How do I solve</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">  time-dependent problems?&quot;; &quot;How do I enable spatial adaptivity?&quot;;</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">  &quot;How do I write my own meshes?&quot;; etc.)&lt;/li&gt;</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">  &lt;li style=&quot;margin-top:10px;&quot;&gt;The examples codes should be regarded</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">  as templates for your own driver codes: Examine the &lt;a href=</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">  &quot;../example_code_list/html/index.html&quot;&gt;list of examples&lt;/a&gt; and try</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">  to find one that resembles the problem that you wish to solve. For</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">  most &quot;classical&quot; problems (e.g. the solution of the Navier-Stokes</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">  equations with standard boundary conditions), very few</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">  modifications are required (e.g. adjusting the mesh to a different</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">  domain, changing the boundary and/or initial conditions, etc). If</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">  you wish to solve a non-standard problem, or one for which</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; does not (yet) provide elements or meshes,</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">  it is easy to write your own, following the detailed instructions</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">  provided in the documentation.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">  &lt;/li&gt;</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">  &lt;/article&gt;</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">  &lt;article class=&quot;tab-pane&quot; id=&quot;features&quot;&gt;  </span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">    &lt;h1&gt;Features&lt;/h1&gt;</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">    &lt;ul&gt;</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">    &lt;li&gt;Large number of fully-developed and carefully-validated element</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">    types for the solution of:</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">    &lt;ul&gt;</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">    &lt;li&gt;The Poisson equation&lt;/li&gt;</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">    &lt;li&gt;The unsteady heat equation&lt;/li&gt;</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">    &lt;li&gt;The linear wave equation&lt;/li&gt;</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">    &lt;li&gt;The advection-diffusion equation&lt;/li&gt;</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">    &lt;li&gt;The Navier-Stokes equations, incl. free-surfaces, in Cartesian</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">    and axisymmetric co-ordinates.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">    &lt;li&gt;The equations of large-displacement solid mechanics, based on</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">    the principle of virtual displacements in cartesian and</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">    axisymmetric geometries; with arbitrary constitutive</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">    equations.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">    &lt;li&gt;Shell and beam elements, based on a geometrically non-linear</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">    formulation.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">    &lt;li&gt;...and many others.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">    &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">    [&lt;b&gt;Note:&lt;/b&gt; Most elements are implemented in a</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">    dimension-independent formulation]&lt;/li&gt;</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">    &lt;li&gt;It is easy to formulate new elements for problems that are not</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">    included in the above list.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">    &lt;li&gt;It is easy to combine any of the above elements to</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">    &quot;multi-physics&quot; elements, allowing e.g.</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">    &lt;ul&gt;</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">    &lt;li&gt;the solution of fluid-structure interaction problems&lt;/li&gt;</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">    &lt;li&gt;the simulation of unsteady heat conduction in an elastic body</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">    that undergoes large displacements&lt;/li&gt;</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">    &lt;li&gt;free-surface problems&lt;/li&gt;</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">    &lt;li&gt;etc.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">    &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">    &lt;/li&gt;</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">    &lt;li&gt;Parallel processing capabilities.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">    &lt;li&gt;Full spatial and temporal adaptivity. All elements listed above</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">    support quad-tree/octree-based mesh refinement procedures and</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">    adaptive timestepping.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">    &lt;li&gt;A wide range of meshes; new meshes can easily be added to the</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">    library. &lt;code&gt;oomph-lib&lt;/code&gt; can also use meshes that are</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">    generated by third-party (commercial) mesh generators.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">    &lt;li&gt;The ability to solve problems in domains with time-dependent,</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">    curvilinear boundaries.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">    &lt;li&gt;&lt;code&gt;oomph-lib&lt;/code&gt; treats all problems as non-linear</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">    problems and uses Newton&#39;s method as the default non-linear solver.</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">    Within this framework, linear problems are special cases for which</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">    the Newton iteration converges in one step. The linear systems</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">    arising during the Newton iteration can be solved with a variety of</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">    direct and iterative solvers. Continuation methods (Keller&#39;s</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">    arclength method and displacement-control for solid mechanics</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">    problems) are implemented.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">    &lt;li&gt;A large number of &lt;a href=</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">    &quot;../example_code_list/html/index.html&quot;&gt;fully documented example</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">    codes.&lt;/a&gt; All examples include an introduction to the</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">    mathematical/physical problem, a detailed discussion of the driver</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">    code, a discussion of the results (incl. comparisons against</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">    analytical solutions where appropriate) and exercises and</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">    comments.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">    &lt;li&gt;The library has extensive self-test facilities. It can be</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">    compiled with a PARANOID flag switched on or off. If the flag is</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">    set during compilation, the code performs a large number of</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">    self-tests during its execution. If things go wrong, code execution</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">    terminates gracefully and diagnostic output is generated to help</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">    pinpoint the problem. Of course, the tests introduce an additional</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">    run-time overhead, so can be switched off in production runs.</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">    During development, range checking on all array-based objects,</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">    (vectors, matrices, tensors, etc) can be enabled separately by</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">    using the RANGE_CHECKING flag, but introduces considerable run-time</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">    overhead.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">    &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">  &lt;/article&gt;</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">  &lt;article class=&quot;tab-pane&quot; id=&quot;get&quot;&gt;</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">  &lt;h1&gt;How do I get/install the code?&lt;/h1&gt;</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">  &lt;h2&gt;Downloads&lt;/h2&gt;</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">  &lt;p&gt;&lt;code&gt;oomph-lib&lt;/code&gt; is hosted on and distributed via GitHub at</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">  &lt;center&gt;&lt;a href=&quot;https://github.com/oomph-lib/oomph-lib&quot;&gt;</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">  https://github.com/oomph-lib/oomph-lib&lt;/a&gt;.&lt;/center&gt;&lt;br&gt;</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">  For more information on how to download and install the library see</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">  the &lt;a href=&quot;../the_distribution/html/index.html&quot;&gt;installation</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">  guide&lt;/a&gt;. &lt;/p&gt;</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">  &lt;h2&gt;Prerequisites&lt;/h2&gt;</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">  &lt;p&gt;&lt;code&gt;oomph-lib&lt;/code&gt; has been/is primarily being developed in</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">  Linux so it is well tested there. However several people</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">  successfully run it on Windows and Mac OS X. Our continuous</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">  integration on GitHub currently checks Linux and Mac OS X builds.</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">  In order to minimise</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">  the dependence on external libraries we include &quot;frozen&quot; versions</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">  of certain external libraries (&lt;a href=</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">  &quot;http://www-users.cs.umn.edu/~karypis/metis/&quot;&gt;METIS&lt;/a&gt;, &lt;a href=</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">  &quot;http://crd.lbl.gov/~xiaoye/SuperLU&quot;&gt;SuperLU&lt;/a&gt;, ...) with our</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">  distribution. The idea is that you should only have to unpack,</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">  build and install one distribution to produce the fully compiled</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">  library, the html-based documentation and working example</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">  codes.&lt;/p&gt;</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">  For this purpose you &lt;b&gt;must have&lt;/b&gt;:</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">  &lt;li&gt;A computer with a linux (or unix) operating system. [&lt;b&gt;Note</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">  for windows users:&lt;/b&gt; We believe that &lt;code&gt;oomph-lib&lt;/code&gt; can</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">  be installed in a windows environment, using &lt;a href=</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">  &quot;http://www.cygwin.com/&quot;&gt;cygwin&lt;/a&gt;, though we haven&#39;t tried this</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">  for a long time.]&lt;/li&gt;</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">  &lt;li&gt;Compilers for C++, C and Fortran77. The open-source &lt;a href=</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">  &quot;http://gcc.gnu.org/&quot;&gt;GNU gcc compiler suite&lt;/a&gt; version 9.3.0. or</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">  later is fine. [ &lt;b&gt;Note:&lt;/b&gt; The Fortran77 and C compilers are</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">  only required to compile some external libraries --</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; itself is written entirely in C++. We assume</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">  that your C++ compiler can handle the C++11 standard. If it doesn&#39;t</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">  you may have to add the &lt;code&gt;-std=c++11&lt;/code&gt; option to the</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">  &lt;code&gt;CXXFLAGS&lt;/code&gt; during the configure stage.]&lt;/li&gt;</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">  The following programs are helpful but not essential:</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">  &lt;li&gt;GNU&#39;s &lt;a href=</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/autoconf/&quot;&gt;autoconf&lt;/a&gt;, &lt;a href=</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/automake/&quot;&gt;automake&lt;/a&gt; and &lt;a href=</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/libtool/&quot;&gt;libtool&lt;/a&gt; are required if</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">  you wish to add additional features to your local copy of</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt;; see &lt;a href=</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">  &quot;../the_distribution/html/index.html&quot;&gt;the &lt;code&gt;oomph-lib&lt;/code&gt;</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">  download page&lt;/a&gt; for more details.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">  &lt;li&gt;&lt;a href=&quot;http://www.python.org/download/&quot;&gt;python3&lt;/a&gt; is needed</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">  to analyse the results of the extensive self-tests that may be</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">  performed at the end of the installation to verify that the build</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">  process was completed successfully. If python3 is not available, the</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">  self-test will compile and run all test codes but it will not be</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">  possible to verify the correctness of the results.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">  &lt;li&gt;&lt;a href=&quot;http://www.doxygen.org&quot;&gt;doxygen&lt;/a&gt; is needed to build</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">  a local copy of &lt;code&gt;oomph-lib&lt;/code&gt;&#39;s extensive online</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">  documentation. If doxygen is not installed on your system you can</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">  consult the latest version of the online documentation on &lt;a href=</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">  &quot;http://www.oomph-lib.org&quot;&gt;the &lt;code&gt;oomph-lib&lt;/code&gt;</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">  homepage.&lt;/a&gt;&lt;/li&gt;</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">  The &lt;code&gt;oomph-lib&lt;/code&gt; distribution is built under &lt;a href=</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/autoconf/&quot;&gt;autoconf&lt;/a&gt; / &lt;a href=</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/automake/&quot;&gt;automake&lt;/a&gt; control,</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">  making the installation completely straightforward. We provide two</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">  main installation mechanisms:</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">  &lt;li&gt;&lt;code&gt;oomph-lib&lt;/code&gt; can be built/installed/tested with GNU&#39;s</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">  standard &lt;code&gt;configure; make; make install; make check&lt;/code&gt;</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">  procedure.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">  &lt;li&gt;We also provide a customised build script,</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">  &lt;code&gt;autogen.sh&lt;/code&gt;, that guides the &quot;non-expert&quot; user through</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">  the installation. The script facilitates the specification of</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">  various build options, such as optimisation levels etc.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">  Subject to the minimum requirements, listed above, you should be</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">  able to install and use our libraries &quot;anywhere&quot;. However, as</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">  anybody who has ever ported any code to a different platform knows,</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">  things are rarely that simple -- even with &lt;a href=</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/autoconf/&quot;&gt;autoconf&lt;/a&gt;, &lt;a href=</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/automake/&quot;&gt;automake&lt;/a&gt; and &lt;a href=</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">  &quot;http://www.gnu.org/software/libtool/&quot;&gt;libtool&lt;/a&gt;... Having said</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">  that, we have successfully installed and tested our installation on</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">  the following platforms:</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">  &lt;li&gt;Ubuntu (version 16.04) with gcc compilers (version 5.4.0). The</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">  tests included the MPI part of the library, which we compiled with</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">  &lt;a href=&quot;https://www.open-mpi.org/&quot;&gt;OpenMPI&lt;/a&gt; (version</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">  1.10.2).&lt;/li&gt;</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">  &lt;li&gt; ... &lt;/li&gt;</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment"> &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">  &lt;h2&gt;Preparing a ubuntu box for &lt;code&gt;oomph-lib&lt;/code&gt;&lt;/h2&gt;</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">  Typically, when we install &lt;code&gt;oomph-lib&lt;/code&gt; on a machine with</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">  a new (default) installation of ubuntu, we install at least the</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">  following additional packages (here listed with full apt-get syntax,</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">  so you can cut and paste):</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">apt-get install git</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">apt-get install make</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">apt-get install automake</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">apt-get install libtool</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">apt-get install autoconf</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">apt-get install doxygen</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">apt-get install gfortran</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">apt-get install g++</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">Building the pdf version of the tutorials also requires a comprehensive latex</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">  installation:</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment">apt-get install texlive texlive-latex-extra texlive-font-utils</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">  If you want it all in one go (particularly useful if you have</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment">  to prefix the apt-get with sudo): </span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">  &lt;br&gt;</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment">  &lt;tt&gt;</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment">apt-get install git make automake libtool autoconf doxygen</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment">  gfortran g++ texlive texlive-latex-extra texlive-font-utils</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment">  &lt;/tt&gt;</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment">  &lt;/article&gt;</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">  &lt;article class=&quot;tab-pane&quot; id=&quot;use&quot;&gt;</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">  &lt;h1&gt;How do I get started?&lt;/h1&gt;</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">  &lt;code&gt;oomph-lib&lt;/code&gt; contains a lot of code and a lot of</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">  documentation. How to get started obviously depends on your</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">  background: Are you familiar with the finite element method? How</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">  good is your knowledge of C++? Etc. Here are some possible</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">  &quot;routemaps&quot; around the library:</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">  &lt;li&gt;&lt;b&gt;You are familiar with the finite element method and have a</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">  fairly good knowledge of C++&lt;/b&gt;</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">  &lt;li&gt;Have a look through the &lt;a href=</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">  &quot;../example_code_list/html/index.html&quot;&gt;list of example codes&lt;/a&gt; to</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">  get a feeling for &lt;code&gt;oomph-lib&lt;/code&gt;&#39;s capabilities. Pick a</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">  problem that interests you and study the associated tutorial. Copy</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">  the driver code into your own directory and play with it.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">  &lt;li&gt;Once you have played with a few example codes, you may wish to</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">  to learn more about &lt;code&gt;oomph-lib&lt;/code&gt;&#39;s &lt;a href=</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">  &quot;../the_data_structure/html/index.html&quot;&gt;overall data structure,&lt;/a&gt;</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">  or find out &lt;a href=&quot;../optimisation/html/index.html&quot;&gt;how to</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">  optimise the library&lt;/a&gt; for your particular application.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">  &lt;/li&gt;</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">  &lt;li&gt;&lt;b&gt;You have never used finite element methods but have a fairly</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">  good knowledge of C++&lt;/b&gt;</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">  &lt;li&gt;Study the &lt;a href=&quot;../intro/html/index.html&quot;&gt;&quot;Top Down&quot;</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">  introduction&lt;/a&gt;. This document includes a &quot;low tech&quot; overview of</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">  the mathematical/theoretical background and contrasts procedural</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">  implementations of the finite element method with the</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">  object-oriented approach adopted in &lt;code&gt;oomph-lib&lt;/code&gt;.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">  &lt;li&gt;Consult the &lt;a href=</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">  &quot;../quick_guide/html/index.html&quot;&gt;(Not-So-)Quick-Guide&lt;/a&gt; to learn</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">  how to construct basic &lt;code&gt;oomph-lib&lt;/code&gt; objects for your</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">  problem: &lt;code&gt;Problems&lt;/code&gt;, &lt;code&gt;Meshes&lt;/code&gt;,</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">  &lt;code&gt;FiniteElements&lt;/code&gt;, etc.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">  &lt;li&gt;Continue with the steps suggested above.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">  &lt;/li&gt;</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">  &lt;li&gt;&lt;b&gt;You have never used finite element methods and are a</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">  newcomer to C++&lt;/b&gt;</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">  &lt;li&gt;Buy &lt;a href=&quot;http://www.math.wayne.edu/~yang/&quot;&gt;Daoqi Yang&lt;/a&gt;</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">  brilliant book &lt;a href=</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">  &quot;http://www.springeronline.com/sgw/cda/frontpage/0,11855,4-40007-22-2105335-0,00.html?changeHeader=true&quot;&gt;</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">  C++ and Object-Oriented Numeric Computing for Scientists and</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">  Engineers.&lt;/a&gt; Read it! Pretty much everything in this book is</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">  relevant for some parts of &lt;code&gt;oomph-lib&lt;/code&gt;. You should at</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">  least understand:</span></div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">  &lt;li&gt;Have a look through the &lt;a href=</span></div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">  &quot;../example_code_list/html/index.html&quot;&gt;list of example codes&lt;/a&gt; to</span></div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">  get a feeling for &lt;code&gt;oomph-lib&lt;/code&gt;&#39;s capabilities. Pick a</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">  problem that interests you and study the associated tutorial. Copy</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">  the driver code into your own directory and play with it.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">  &lt;li&gt;Once you have played with a few example codes, you may wish to</span></div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">  to learn more about &lt;code&gt;oomph-lib&lt;/code&gt;&#39;s &lt;a href=</span></div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">  &quot;../the_data_structure/html/index.html&quot;&gt;overall data structure,&lt;/a&gt;</span></div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">  or find out &lt;a href=&quot;../optimisation/html/index.html&quot;&gt;how to</span></div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">  optimise the library&lt;/a&gt; for your particular application.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">  &lt;/li&gt;</span></div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">  &lt;li&gt;&lt;b&gt;You have never used finite element methods but have a fairly</span></div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">  good knowledge of C++&lt;/b&gt;</span></div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">  &lt;li&gt;Study the &lt;a href=&quot;../intro/html/index.html&quot;&gt;&quot;Top Down&quot;</span></div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">  introduction&lt;/a&gt;. This document includes a &quot;low tech&quot; overview of</span></div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">  the mathematical/theoretical background and contrasts procedural</span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">  implementations of the finite element method with the</span></div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">  object-oriented approach adopted in &lt;code&gt;oomph-lib&lt;/code&gt;.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">  &lt;li&gt;Consult the &lt;a href=</span></div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment">  &quot;../quick_guide/html/index.html&quot;&gt;(Not-So-)Quick-Guide&lt;/a&gt; to learn</span></div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">  how to construct basic &lt;code&gt;oomph-lib&lt;/code&gt; objects for your</span></div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">  problem: &lt;code&gt;Problems&lt;/code&gt;, &lt;code&gt;Meshes&lt;/code&gt;,</span></div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">  &lt;code&gt;FiniteElements&lt;/code&gt;, etc.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">  &lt;li&gt;Continue with the steps suggested above.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment">  &lt;/li&gt;</span></div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment">  &lt;li&gt;&lt;b&gt;You have never used finite element methods and are a</span></div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment">  newcomer to C++&lt;/b&gt;</span></div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment">  &lt;li&gt;Buy &lt;a href=&quot;http://www.math.wayne.edu/~yang/&quot;&gt;Daoqi Yang&lt;/a&gt;</span></div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">  brilliant book &lt;a href=</span></div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="comment">  &quot;http://www.springeronline.com/sgw/cda/frontpage/0,11855,4-40007-22-2105335-0,00.html?changeHeader=true&quot;&gt;</span></div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="comment">  C++ and Object-Oriented Numeric Computing for Scientists and</span></div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="comment">  Engineers.&lt;/a&gt; Read it! Pretty much everything in this book is</span></div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="comment">  relevant for some parts of &lt;code&gt;oomph-lib&lt;/code&gt;. You should at</span></div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="comment">  least understand:</span></div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="comment">  &lt;ul&gt;</span></div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="comment">  &lt;li&gt;The procedural aspects of C++ (basic types, functions and</span></div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="comment">  control structures).&lt;/li&gt;</span></div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="comment">  &lt;li&gt;Namespaces.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment">  &lt;li&gt;Classes (private, protected and public members; inheritance and</span></div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="comment">  multiple inheritance; virtual and pure virtual functions; base</span></div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="comment">  classes and derived classes; static and dynamic casts).&lt;/li&gt;</span></div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="comment">  &lt;li&gt;Templates and template instantiations.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment">  &lt;li&gt;The standard template library (STL).&lt;/li&gt;</span></div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment">  &lt;/li&gt;</span></div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="comment">  &lt;li&gt;Continue with the steps suggested above.&lt;/li&gt;</span></div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="comment">  &lt;/li&gt;</span></div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="comment">  &lt;/article&gt;</span></div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="comment">  </span></div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="comment">  &lt;/section&gt;</span></div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="comment">&lt;/div&gt;</span></div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment">&lt;!-- remove carousel from contents to allow it to span whole document --&gt;</span></div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment">&lt;!-- &lt;script type=&quot;text/javascript&quot;&gt;</span></div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment">$(&quot;.contents&quot;).removeClass(&quot;contents&quot;);</span></div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment">&lt;/script&gt; --&gt;</span></div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="comment">\endhtmlonly</span></div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="comment">\section pdf PDF file</span></div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160; </div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">  &lt;li&gt;The procedural aspects of C++ (basic types, functions and</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">  control structures).&lt;/li&gt;</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">  &lt;li&gt;Namespaces.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">  &lt;li&gt;Classes (private, protected and public members; inheritance and</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">  multiple inheritance; virtual and pure virtual functions; base</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">  classes and derived classes; static and dynamic casts).&lt;/li&gt;</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">  &lt;li&gt;Templates and template instantiations.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">  &lt;li&gt;The standard template library (STL).&lt;/li&gt;</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">  &lt;/li&gt;</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">  &lt;li&gt;Continue with the steps suggested above.&lt;/li&gt;</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">  &lt;/li&gt;</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">  &lt;/ul&gt;</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">  &lt;/article&gt;</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">  </span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">  &lt;/section&gt;</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">&lt;/div&gt;</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">&lt;!-- remove carousel from contents to allow it to span whole document --&gt;</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">&lt;!-- &lt;script type=&quot;text/javascript&quot;&gt;</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment">$(&quot;.contents&quot;).removeClass(&quot;contents&quot;);</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">&lt;/script&gt; --&gt;</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">\endhtmlonly</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment">\section pdf PDF file</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="adoc_8txt_html_aa14cd69c3b6e00171ef365f5f47de457"><div class="ttname"><a href="doc_8txt.html#aa14cd69c3b6e00171ef365f5f47de457">oriented</a></div><div class="ttdeci">mainpage htmlonly&lt; div id=&quot;carousel-example-generic&quot; class=&quot;carousel slide&quot; data-ride=&quot;carousel&quot; &gt;&lt;!-- Indicators --&gt;&lt;!--&lt; ol class=&quot;carousel-indicators&quot;&gt;&lt; li data-target=&quot;#carousel-example-generic&quot; data-slide-to=&quot;0&quot; class=&quot;active&quot;&gt;&lt;/li &gt;&lt; li data-target=&quot;#carousel-example-generic&quot; data-slide-to=&quot;1&quot;&gt;&lt;/li &gt;&lt; li data-target=&quot;#carousel-example-generic&quot; data-slide-to=&quot;2&quot;&gt;&lt;/li &gt;&lt;/ol &gt;&lt;!-- Wrapper for slides --&gt;&lt; div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;&lt; div class=&quot;item active&quot;&gt;&lt; img class=&quot;img-rounded&quot; src=&quot;../figures/slide1.jpg&quot; alt=&quot;&quot;&gt;&lt;/div &gt;&lt; div class=&quot;item&quot;&gt;&lt; img class=&quot;img-rounded&quot; src=&quot;../figures/slide2.png&quot; alt=&quot;&quot;&gt;&lt;/div &gt;&lt; div class=&quot;item&quot;&gt;&lt; img class=&quot;img-rounded&quot; src=&quot;../figures/slide3.png&quot; alt=&quot;&quot;&gt;&lt;/div &gt;&lt;/div &gt;&lt;!-- Controls --&gt;&lt; a class=&quot;left carousel-control&quot; href=&quot;#carousel-example-generic&quot; role=&quot;button&quot; data-slide=&quot;prev&quot;&gt;&lt; span class=&quot;icon-prev&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span &gt;&lt; span class=&quot;sr-only&quot;&gt; Previous&lt;/span &gt;&lt;/a &gt;&lt; a class=&quot;right carousel-control&quot; href=&quot;#carousel-example-generic&quot; role=&quot;button&quot; data-slide=&quot;next&quot;&gt;&lt; span class=&quot;icon-next&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span &gt;&lt; span class=&quot;sr-only&quot;&gt; Next&lt;/span &gt;&lt;/a &gt;&lt;/div &gt;&lt; div style=&quot;min-height:800px;&quot;&gt;&lt; ul class=&quot;nav nav-tabs&quot;&gt;&lt; li class=&quot;active&quot;&gt;&lt; a href=&quot;#about&quot; data-toggle=&quot;tab&quot;&gt; What is it&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a href=&quot;#features&quot; data-toggle=&quot;tab&quot;&gt; Features&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a href=&quot;#get&quot; data-toggle=&quot;tab&quot;&gt; Get it&lt;/a &gt;&lt;/li &gt;&lt; li &gt;&lt; a href=&quot;#use&quot; data-toggle=&quot;tab&quot;&gt; Get Started&lt;/a &gt;&lt;/li &gt;&lt;/ul &gt;&lt; section class=&quot;tab-content&quot; style=&quot;border:1px solid #ddd; border-top:none; padding:20px; margin-bottom:100px;&quot;&gt;&lt; article class=&quot;tab-pane active&quot; id=&quot;about&quot;&gt;&lt; h1 &gt; Welcome to the oomph lib homepage&lt;/h1 &gt;&lt; p &gt;&lt; code &gt; oomph lib&lt;/code &gt; is an object oriented</div><div class="ttdef"><b>Definition:</b> <a href="doc_8txt_source.html#l00054">doc.txt:54</a></div></div>
 
@@ -649,7 +608,7 @@
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:18:23
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Mon Aug 23 2021 17:58:58
         </div>
       </div>
     </footer>

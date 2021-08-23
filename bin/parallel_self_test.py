@@ -287,6 +287,7 @@ def make_check_in_dir(directory, just_build=False):
             test_result = 0
 
     final_tracefile_path = pjoin(directory, "Validation", "make_check_output")
+    tracefile_name = tracefile_path
 
     # Validation dir should exist now. Move the output file there if so,
     # otherwise issue a warning.
@@ -296,12 +297,13 @@ def make_check_in_dir(directory, just_build=False):
         sys.stderr.flush()
     else:
         os.rename(tracefile_path, final_tracefile_path)
+        tracefile_name = final_tracefile_path
 
     if test_result == 0:
         check_success_message(directory)
         return
     else:
-        with open(tracefile_path, 'r') as tracefile:
+        with open(tracefile_name, 'r') as tracefile:
             print(tracefile.read())
         check_fail_message(directory)
         return

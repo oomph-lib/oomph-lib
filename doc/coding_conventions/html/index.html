@@ -71,11 +71,9 @@
           <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
         </ul>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installation<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
-            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
-            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
             <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
           </ul>
         </li>
@@ -117,7 +115,8 @@
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This document provides an overview of the general coding conventions that are used throughout <code>oomph-lib</code>. Knowledge of these conventions will greatly facilitate the use of the library. Contributors to the library are expected to adhere to these standards.</p>
-<hr  />
+<p><br  />
+ Note that following our move to GitHub we have started to use <a href="https://clang.llvm.org/docs/ClangFormat.html">clang-format</a> to automatically format our sources (but only those in the <code>src</code> directory). The formatting rules are contained in the <code>.clang-format</code> file in the <code>oomph-lib</code> home directory. To run this on your own sources you need at least version 10.0.0 of <code>clang-format.</code> Note that some of the code shown below would be changed slightly by <code>clang-format</code> but this concerns mainly minor whitespace adjustments and the beauty of automatic formatting means that you don't have to worry about these too much. </p><hr  />
  <hr  />
 <h1><a class="anchor" id="naming"></a>
 Naming conventions</h1>
@@ -137,7 +136,7 @@ File names</h2>
 General variables</h2>
 <ul>
 <li>General variables are all lowercase</li>
-<li>Variables that contain multiple words contain underscores to separate them, e.g. <div class="fragment"><div class="line">FiniteElement* <a class="code" href="coding__conventions_8txt.html#abdf54a843c828adc77dc76b43eed4a00">surface_element_pt</a>; </div>
+<li>Variables that contain multiple words contain underscores to separate them, e.g. <div class="fragment"><div class="line">FiniteElement* surface_element_pt; </div>
 </div><!-- fragment --></li>
 </ul>
 <h2><a class="anchor" id="classes"></a>
@@ -159,10 +158,10 @@ Private data and access functions to  private data</h2>
 <li>Here are two public access functions to the private data member: <div class="fragment"><div class="line"><span class="keyword">public</span>: </div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment"> /// Access to boundary node (const version)</span></div>
-<div class="line"><span class="comment"></span> Node* <a class="code" href="coding__conventions_8txt.html#ae2354be5cf2b6fd97ded218f0282e485">boundary_node_pt</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> Boundary_node_pt;}</div>
+<div class="line"><span class="comment"></span> Node* boundary_node_pt()<span class="keyword"> const </span>{<span class="keywordflow">return</span> Boundary_node_pt;}</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment"> /// Access to boundary node</span></div>
-<div class="line"><span class="comment"></span> Node*&amp; <a class="code" href="coding__conventions_8txt.html#ae2354be5cf2b6fd97ded218f0282e485">boundary_node_pt</a>() {<span class="keywordflow">return</span> Boundary_node_pt;}</div>
+<div class="line"><span class="comment"></span> Node*&amp; boundary_node_pt() {<span class="keywordflow">return</span> Boundary_node_pt;}</div>
 </div><!-- fragment --></li>
 </ul>
 <p><b>Note:</b> Do <b>not</b> use public data &ndash; ever! Make it private and and provide an access function &ndash; even if it seems "perfectly
@@ -176,17 +175,17 @@ Pointers</h2>
 Access functions to containers</h2>
 <p>Many classes have member functions that provide access to data in private containers (e.g. vectors); they are usually accompanied by a member function that returns the number of entries in that container. Naming conventions:</p><ul>
 <li>Use singular for the access function to the container, i.e. <div class="fragment"><div class="line"><span class="comment">/// Return pointer to e-th element</span></div>
-<div class="line"><span class="comment"></span>FiniteElement* <a class="code" href="coding__conventions_8txt.html#ae11c23d019f158839e6002c47913bb4a">element_pt</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; e);</div>
-</div><!-- fragment --> rather than <code><a class="el" href="coding__conventions_8txt.html#ab59e60957ba7a4692ded05fe49a956d6">elements_pt(...)</a></code> </li>
+<div class="line"><span class="comment"></span>FiniteElement* element_pt(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; e);</div>
+</div><!-- fragment --> rather than <code>elements_pt(...)</code> </li>
 <li>Use a prefix &lsquo;<code>n&rsquo;</code> for the access function for the number of entries in the container, i.e. <div class="fragment"><div class="line"><span class="comment">/// Total number of elements </span></div>
-<div class="line"><span class="comment"></span><span class="keywordtype">unsigned</span> <a class="code" href="coding__conventions_8txt.html#a7b8627ed669d599b2fcbf99832ef334f">nelement</a>();</div>
+<div class="line"><span class="comment"></span><span class="keywordtype">unsigned</span> nelement();</div>
 </div><!-- fragment --> <b>Notes:</b> (i) No underscore between the "n" and the container's name. (ii) No trailing <code>_pt</code> in the function that returns the number of objects in the container.</li>
 </ul>
 <h2><a class="anchor" id="template"></a>
 Template parameters</h2>
 <ul>
 <li>Template parameters are all caps, e.g. <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">unsigned</span> DIM&gt;</div>
-<div class="line"><span class="keyword">class </span><a class="code" href="classNavierStokesEquations.html">NavierStokesEquations</a></div>
+<div class="line"><span class="keyword">class </span>NavierStokesEquations</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">public</span>:</div>
 <div class="line">  [...]</div>
@@ -437,8 +436,8 @@ Order of arguments</h2>
 <li>"Time" arguments always come first, e.g. <div class="fragment"><div class="line"><span class="comment">/// \short Return FE interpolated coordinate x[i] at local coordinate s</span></div>
 <div class="line"><span class="comment"></span><span class="comment">/// at previous timestep t (t=0: present; t&gt;0: previous timestep)</span></div>
 <div class="line"><span class="comment"></span><span class="keyword">virtual</span> <span class="keywordtype">double</span> interpolated_x(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, </div>
-<div class="line">                              <span class="keyword">const</span> Vector&lt;double&gt; &amp;s,</div>
-<div class="line">                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;i) <span class="keyword">const</span>;</div>
+<div class="line">                              <span class="keyword">const</span> Vector&lt;double&gt;&amp; s,</div>
+<div class="line">                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; i) <span class="keyword">const</span>;</div>
 </div><!-- fragment --></li>
 </ul>
 <h2><a class="anchor" id="brackets"></a>
@@ -449,14 +448,19 @@ Access to elements in containers</h2>
 <h2><a class="anchor" id="boolean"></a>
 Boolean member data</h2>
 <ul>
-<li>Avoid access to boolean member data via trivial wrapper functions that return references. These constructions lead to somewhat ugly driver codes and can lead to code that appears to set a boolean, when it does not. Instead the status of the boolean should be modified by two set/unset or enable/disable subroutines (i.e. returning void) and tested using a (const) has_ or is_ function that returns a bool . For example <div class="fragment"><div class="line"><span class="keyword">private</span>:<span class="comment"></span></div>
+<li>Avoid access to boolean member data via trivial wrapper functions that return references. These constructions lead to somewhat ugly driver codes and can lead to code that appears to set a boolean, when it does not. Instead the status of the boolean should be modified by two set/unset or enable/disable subroutines (i.e. returning void) and tested using a (const) has_ or is_ function that returns a bool . For example <div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /// Boolean to indicate whether documentation should be on or off</span></div>
 <div class="line"><span class="comment"></span>  <span class="keywordtype">bool</span> Doc_flag;</div>
-<div class="line"><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /// Enable documentation</span></div>
-<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> enable_doc() {Doc_flag=<span class="keyword">true</span>;}<span class="comment"></span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> enable_doc() {Doc_flag=<span class="keyword">true</span>;}</div>
+<div class="line">  <span class="comment"></span></div>
 <div class="line"><span class="comment">  /// Disable documentation</span></div>
-<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> disable_doc() {Doc_flag=<span class="keyword">false</span>;}<span class="comment"></span></div>
+<div class="line"><span class="comment"></span>  <span class="keywordtype">void</span> disable_doc() {Doc_flag=<span class="keyword">false</span>;}</div>
+<div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">  /// Test whether documentation is on or off</span></div>
 <div class="line"><span class="comment"></span>  <span class="keywordtype">bool</span> is_doc_enabled()<span class="keyword"> const </span>{<span class="keywordflow">return</span> Doc_flag;}</div>
 </div><!-- fragment --></li>
@@ -479,11 +483,6 @@ PDF file</h1>
 <p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
-<div class="ttc" id="aclassNavierStokesEquations_html"><div class="ttname"><a href="classNavierStokesEquations.html">NavierStokesEquations</a></div><div class="ttdef"><b>Definition:</b> <a href="coding__conventions_8txt_source.html#l00116">coding_conventions.txt:116</a></div></div>
-<div class="ttc" id="acoding__conventions_8txt_html_ae11c23d019f158839e6002c47913bb4a"><div class="ttname"><a href="coding__conventions_8txt.html#ae11c23d019f158839e6002c47913bb4a">element_pt</a></div><div class="ttdeci">they are usually accompanied by a member function that returns the number of entries in that container Naming i e code FiniteElement * element_pt(const unsigned &amp;e)</div><div class="ttdoc">Return pointer to e-th element.</div></div>
-<div class="ttc" id="acoding__conventions_8txt_html_ae2354be5cf2b6fd97ded218f0282e485"><div class="ttname"><a href="coding__conventions_8txt.html#ae2354be5cf2b6fd97ded218f0282e485">boundary_node_pt</a></div><div class="ttdeci">Node *&amp; boundary_node_pt()</div><div class="ttdoc">Access to boundary node.</div><div class="ttdef"><b>Definition:</b> <a href="coding__conventions_8txt_source.html#l00076">coding_conventions.txt:76</a></div></div>
-<div class="ttc" id="acoding__conventions_8txt_html_a7b8627ed669d599b2fcbf99832ef334f"><div class="ttname"><a href="coding__conventions_8txt.html#a7b8627ed669d599b2fcbf99832ef334f">nelement</a></div><div class="ttdeci">endcode rather than c i e code unsigned nelement()</div><div class="ttdoc">Total number of elements.</div></div>
-<div class="ttc" id="acoding__conventions_8txt_html_abdf54a843c828adc77dc76b43eed4a00"><div class="ttname"><a href="coding__conventions_8txt.html#abdf54a843c828adc77dc76b43eed4a00">surface_element_pt</a></div><div class="ttdeci">mainpage Coding conventions and C style This document provides an overview of the general coding conventions that are used throughout c oomph lib Knowledge of these conventions will greatly facilitate the use of the library Contributors to the library are expected to adhere to these standards&lt; HR &gt;&lt; HR &gt; section naming Naming conventions subsection filenames File names All C source files end with the standard extensions *h and *cc c and c *template most specific c Mesh classes are templated by the element type and the mesh writer can obviously not predict which element types his her specific mesh is going to be used with subsection variables General variables General variables are all lowercase Variables that contain multiple words contain underscores to separate e g code FiniteElement * surface_element_pt</div><div class="ttdef"><b>Definition:</b> <a href="coding__conventions_8txt_source.html#l00043">coding_conventions.txt:43</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
     <script src="../../js/jquery-1.12.0.min.js"></script>
@@ -511,7 +510,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:30:16
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Mon Aug 23 2021 17:07:59
         </div>
       </div>
     </footer>

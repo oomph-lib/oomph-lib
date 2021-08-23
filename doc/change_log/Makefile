@@ -309,7 +309,8 @@ top_srcdir = ../..
 #To create the documentation, we need to create the html directory with its
 # index file
 noinst_SCRIPTS = html/index.html
-EXTRA_DIST = Doxyfile $(docfile).txt figures final_svn_log.txt
+EXTRA_DIST = Doxyfile $(docfile).txt figures final_svn_log.txt \
+	final_svn_log_before_move_to_git.txt
 
 # Doxygenified version of .txt file is created by
 # bin/txt2h.bash

@@ -113,6 +113,9 @@ To illustrate this, the code extract shown below provides a (partial) listing of
 \DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& called\_from\_refineable\_constructor = \textcolor{keyword}{false})}
 \DoxyCodeLine{      : FaceGeometry<ELEMENT>(), FaceElement(), Boundary\_shape\_geom\_object\_pt(0)}
 \DoxyCodeLine{    \{}
+\DoxyCodeLine{      \textcolor{comment}{//  Store the ID of the FaceElement -\/-\/ this is used to distinguish}}
+\DoxyCodeLine{      \textcolor{comment}{// it from any others}}
+\DoxyCodeLine{      Id = id;}
 
 \end{DoxyCodeInclude}
 
@@ -121,6 +124,12 @@ To illustrate this, the code extract shown below provides a (partial) listing of
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{      \textcolor{comment}{// Dimension of the bulk element}}
+\DoxyCodeLine{      \textcolor{keywordtype}{unsigned} dim = element\_pt-\/>dim();}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// We need dim additional values for each FaceElement node}}
+\DoxyCodeLine{      \textcolor{comment}{// to store the dim Lagrange multipliers.}}
+\DoxyCodeLine{      Vector<unsigned> n\_additional\_values(nnode(), dim);}
 
 \end{DoxyCodeInclude}
 
@@ -129,6 +138,12 @@ Finally, we pass this vector, together with ID that identifies the type of the {
 
 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{comment}{// Now add storage for Lagrange multipliers and set the map containing}}
+\DoxyCodeLine{      \textcolor{comment}{// the position of the first entry of this face element's}}
+\DoxyCodeLine{      \textcolor{comment}{// additional values.}}
+\DoxyCodeLine{      add\_additional\_values(n\_additional\_values, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
 

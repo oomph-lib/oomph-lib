@@ -37,7 +37,7 @@ LinearSolver</CODE></a> which contains a single pure virtual function
 
 
 \dontinclude linear_solver.h
-\skipline virtual void solve(Problem* const &problem_pt, DoubleVector &result)=0;
+\skipline virtual void solve(Problem* const& problem_pt, DoubleVector& result) = 0;
 
 whose task it is to compute the solution \f$ \delta {\bf x} \f$ (returned
 in the vector \c result) of the linear system

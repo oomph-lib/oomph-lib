@@ -71,11 +71,9 @@
           <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
         </ul>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installation<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="../../../../doc/the_distribution/html/index.html">Installation guide</a></li>
-            <li><a href="../../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
-            <li><a href="../../../../doc/download/html/index.html">Get code as tar file</a></li>
             <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
           </ul>
         </li>
@@ -239,8 +237,20 @@ Upgrading the Navier-Stokes element to an ElementWithExternalElement</h2>
 <div class="line">      this-&gt;set_ninteraction(1);</div>
 <div class="line">    }</div>
 </div><!-- fragment --><p>We provide access functions to the Rayleigh number</p>
-<div class="fragment"></div><!-- fragment --><p>and, given that we are dealing with a refineable element, make sure that the pointer to the Rayleigh number is passed to the "son" elements when the element is refined. Furthermore, if the external geometric data could safely be ignored in the "father" elements we assume that the same is true for the "sons":</p>
-<div class="fragment"></div><!-- fragment --><p>The most important step is to overload the function that computes the body force in the Navier-Stokes equations so that it depends on the temperature at the <code>ipt</code> -th integration point, as computed by the "external element":</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Access function for the Rayleigh number (const version)</span></div>
+<div class="line"><span class="comment"></span>    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ra()<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">      <span class="keywordflow">return</span> *Ra_pt;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>and, given that we are dealing with a refineable element, make sure that the pointer to the Rayleigh number is passed to the "son" elements when the element is refined. Furthermore, if the external geometric data could safely be ignored in the "father" elements we assume that the same is true for the "sons":</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">    /// Access function for the pointer to the Rayleigh number</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">double</span>*&amp; ra_pt()</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keywordflow">return</span> Ra_pt;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The most important step is to overload the function that computes the body force in the Navier-Stokes equations so that it depends on the temperature at the <code>ipt</code> -th integration point, as computed by the "external element":</p>
  <div class="fragment"><div class="line">    <span class="comment">/// \short Overload get_body_force_nst() to return the temperature-dependent</span></div>
 <div class="line"><span class="comment">    /// buoyancy force, using the temperature computed by the</span></div>
 <div class="line"><span class="comment"></span><span class="comment">    /// &quot;external&quot; advection diffusion element associated with</span></div>
@@ -279,10 +289,29 @@ Upgrading the Navier-Stokes element to an ElementWithExternalElement</h2>
 <p>Finally, we have to compute the element's Jacobian matrix. The easiest (although potentially inefficient) way to do this is to recycle the analytical computation of the derivatives of the Navier-Stokes residuals with respect to the fluid degrees of freedom, as implemented in <br  />
  <code>NST_ELEMENT::fill_in_contribution_to_jacobian(...)</code>,</p>
  <div class="fragment"><div class="line">    <span class="comment">/// \short Compute the element&#39;s residual vector and the Jacobian matrix.</span></div>
+<div class="line">    <span class="keywordtype">void</span> fill_in_contribution_to_jacobian(Vector&lt;double&gt;&amp; residuals,</div>
+<div class="line">                                          DenseMatrix&lt;double&gt;&amp; jacobian)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Get the analytical contribution from the basic Navier-Stokes element</span></div>
+<div class="line">      NST_ELEMENT::fill_in_contribution_to_jacobian(residuals, jacobian);</div>
 </div><!-- fragment --><p>and then fill in the derivatives with respect to the degrees of freedom associated with the "external
 elements" by finite differencing:</p>
-<div class="fragment"></div><!-- fragment --><p>If this is deemed to be too inefficient, we can provide a function that computes the required entries in the Jacobian analytically:</p>
-<div class="fragment"></div><!-- fragment --><p>(The code illustrates both approaches and employs the macro <code>USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ</code> to choose which one to use.)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ</span></div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Get the off-diagonal terms by finite differencing</span></div>
+<div class="line">      this-&gt;fill_in_jacobian_from_external_interaction_by_fd(residuals,</div>
+<div class="line">                                                             jacobian);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+</div><!-- fragment --><p>If this is deemed to be too inefficient, we can provide a function that computes the required entries in the Jacobian analytically:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">      <span class="comment">// Get the off-diagonal terms analytically</span></div>
+<div class="line">      this-&gt;fill_in_off_diagonal_block_analytic(residuals, jacobian);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="preprocessor">    }</span></div>
+</div><!-- fragment --><p>(The code illustrates both approaches and employs the macro <code>USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ</code> to choose which one to use.)</p>
 <p>We refer to <a href="#optimise"><b>Part IV</b></a> for a discussion of how to implement the fully-analytic computation of the Jacobian matrix in the function <code>fill_in_off_diagonal_block_analytic(...)</code>.</p>
 <hr  />
 <hr  />
@@ -309,9 +338,49 @@ Upgrading the advection-diffusion element to an ElementWithExternalElement</h2>
 <div class="line">    }</div>
 </div><!-- fragment --><p>We overload the function that computes the "wind" for the advection diffusion equations so that it is given by the fluid velocity at the <code>ipt</code> -th integration point, as computed by the "external element":</p>
  <div class="fragment"><div class="line">    <span class="comment">/// \short Overload the wind function in the advection-diffusion equations.</span></div>
+<div class="line"><span class="comment">    /// This provides the coupling from the Navier--Stokes equations to the</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// advection-diffusion equations because the wind is the fluid velocity,</span></div>
+<div class="line"><span class="comment"></span><span class="comment">    /// obtained from the &quot;external&quot; element</span></div>
+<div class="line"><span class="comment"></span>    <span class="keywordtype">void</span> get_wind_adv_diff(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ipt,</div>
+<div class="line">                           <span class="keyword">const</span> Vector&lt;double&gt;&amp; s,</div>
+<div class="line">                           <span class="keyword">const</span> Vector&lt;double&gt;&amp; x,</div>
+<div class="line">                           Vector&lt;double&gt;&amp; wind)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">      <span class="comment">// There is only one interaction</span></div>
+<div class="line">      <span class="keywordtype">unsigned</span> interaction = 0;</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Dynamic cast &quot;external&quot; element to Navier Stokes element</span></div>
+<div class="line">      NST_ELEMENT* nst_el_pt =</div>
+<div class="line">        <span class="keyword">dynamic_cast&lt;</span>NST_ELEMENT*<span class="keyword">&gt;</span>(external_element_pt(interaction, ipt));</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Wind is given by the velocity in the Navier Stokes element</span></div>
+<div class="line">      nst_el_pt-&gt;interpolated_u_nst(</div>
+<div class="line">        external_element_local_coord(interaction, ipt), wind);</div>
+<div class="line"> </div>
+<div class="line">    } <span class="comment">// end of get_wind_adv_diff</span></div>
 </div><!-- fragment --><p>Again, there is only one external interaction so the interaction index is set to zero and the external element must be cast to a Navier-Stokes element so that the interpolated velocity field can be found. The code is similar to that used in the <a href="../../b_convection/html/index.html">multi-field implementation</a>, which uses internal, rather than external, interaction.</p>
 <p>The element's Jacobian matrix can be computed by the same methods discussed for the Navier-Stokes elements:</p>
-<div class="fragment"></div><!-- fragment --><hr  />
+<div class="fragment"><div class="line">    <span class="comment">///\short Compute the element&#39;s residual vector and the Jacobian matrix.</span></div>
+<div class="line">    <span class="keywordtype">void</span> fill_in_contribution_to_jacobian(Vector&lt;double&gt;&amp; residuals,</div>
+<div class="line">                                          DenseMatrix&lt;double&gt;&amp; jacobian)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Get the contribution from the basic advection diffusion element</span></div>
+<div class="line">      AD_ELEMENT::fill_in_contribution_to_jacobian(residuals, jacobian);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ</span></div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Get the off-diagonal terms by finite differencing</span></div>
+<div class="line">      this-&gt;fill_in_jacobian_from_external_interaction_by_fd(residuals,</div>
+<div class="line">                                                             jacobian);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Get the off-diagonal terms analytically</span></div>
+<div class="line">      this-&gt;fill_in_off_diagonal_block_analytic(residuals, jacobian);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="preprocessor">    }</span></div>
+</div><!-- fragment --><hr  />
  <hr  />
 <h1><a class="anchor" id="multi_domain_boussinesq"></a>
 Part III: The driver code for the multi-domain Boussinesq problem</h1>
@@ -801,7 +870,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 18:03:36
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Mon Aug 23 2021 17:43:35
         </div>
       </div>
     </footer>

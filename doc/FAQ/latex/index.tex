@@ -9,6 +9,9 @@ Here are some frequently asked questions (with assorted frequently given answers
 \item \mbox{\hyperlink{index_comp_opt}{How do I specify different levels of optimisation and/or non-\/standard compiler options?}} ~\newline
 ~\newline
 
+\item \mbox{\hyperlink{index_cpp11}{My compiler doesn\textquotesingle{}t support C++11 by default}} ~\newline
+~\newline
+
 \item \mbox{\hyperlink{index_other_compilers}{The compilation fails when I use my xxx \mbox{[}non gcc\mbox{]} compiler}} ~\newline
 ~\newline
 
@@ -105,7 +108,7 @@ Here are some frequently asked questions (with assorted frequently given answers
 \begin{DoxyEnumerate}
 \item {\bfseries{Compiler flags/options for the compilation of the library}} ~\newline
 ~\newline
- By default, {\ttfamily oomph-\/lib\textquotesingle{}s} installation is performed with the \href{http://gcc.gnu.org/}{\texttt{ gcc compiler suite}}, using full optimisation and warning ({\ttfamily -\/O6} {\ttfamily -\/Wall} ). ~\newline
+ By default, {\ttfamily oomph-\/lib\textquotesingle{}s} installation is performed with the \href{http://gcc.gnu.org/}{\texttt{ gcc compiler suite}}, using full optimisation and warning ({\ttfamily -\/O3} {\ttfamily -\/Wall} ). ~\newline
 ~\newline
  If you install the library with the {\ttfamily autogen.\+sh} script you are given the option to overwrite the default compilation flags, either by specifying alternative flags on the command line, or by recycling any of the previously used combinations of flags, stored in the directory \href{../../../config/configure_options/}{\texttt{ config/configure\+\_\+options}}. The files in this directory also contain more details on available flags and options. ~\newline
 ~\newline
@@ -121,7 +124,16 @@ Here are some frequently asked questions (with assorted frequently given answers
  to the appropriate {\ttfamily Makefile}.{\ttfamily am}. The C++ section of the \href{http://www.gnu.org/software/automake/manual/automake.html}{\texttt{ automake manual}} provides more detail on other {\ttfamily automake} variables. ~\newline
 ~\newline
  If you link against {\ttfamily oomph-\/lib} from outside the {\ttfamily autotools} framework, you can, of course, use whatever technique you prefer to customise the compilation of your driver code.
-\end{DoxyEnumerate}\DoxyHorRuler{0}
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{index_cpp11}{}\doxysubsection{My compiler doesn\textquotesingle{}t support C++11 by default}\label{index_cpp11}
+{\ttfamily oomph-\/lib} uses the C++11 standard and assumes that your compiler supports this. If you have an older version of the gcc compiler you can add the flag {\ttfamily -\/std=c++11} to the {\ttfamily g++} configure options by adding it to the {\ttfamily C\+X\+X\+F\+L\+A\+GS} in your configure options file. The one that\textquotesingle{}s used to build {\ttfamily oomph-\/lib} is \begin{center} {\ttfamily config/configure\+\_\+options/current}. \end{center}  ~\newline
+ Note that the directory {\ttfamily config/configure\+\_\+options} also contains many other, generally sensibly named files that specify configure options for other configurations and compilers. You can choose from these when running {\ttfamily autogen.\+sh} or you can explore them yourself for further options.
+
+If you are using a different compiler check its man pages to find out what flag is needed to enable C++11.
+
+\DoxyHorRuler{0}
 \hypertarget{index_other_compilers}{}\doxysubsection{The compilation fails when I use my xxx \mbox{[}non gcc\mbox{]} compiler}\label{index_other_compilers}
 {\ttfamily oomph-\/lib} is developed in a G\+NU Linux environment, using the \href{http://gcc.gnu.org/}{\texttt{ gcc compiler suite}}. We believe (!) the source code complies with the ~\newline
  \href{http://www.open-std.org/jtc1/sc22/wg21/}{\texttt{ C++ standard}} and it compiles cleanly under the \href{http://gcc.gnu.org/}{\texttt{ gcc compilers}} that we have access to (version 3.\+2.\+3 and later). Some warning messages tend to be issued during the compilation of the third-\/party libraries distributed with {\ttfamily oomph-\/lib}, but these are not our responsibility!
@@ -164,7 +176,7 @@ You do not need to use the Xcode I\+DE, but we do need the associated developmen
 \item Follow the \href{../../the_distribution/html/index.html}{\texttt{ oomph-\/lib install procedure}} as normal. ~\newline
 ~\newline
 
-\item For associated Unix-\/goodness (doxygen, gnuplot, subversion etc), I would recommend using a ports mechanism to install any additional unix tools painlessly\+: ~\newline
+\item For associated Unix-\/goodness (doxygen, gnuplot, git, etc), I would recommend using a ports mechanism to install any additional unix tools painlessly\+: ~\newline
 ~\newline
 \begin{center} \href{https://www.macports.org/}{\texttt{ https\+://www.\+macports.\+org/}} \end{center}  ~\newline
 For example\+: \char`\"{}sudo port install gnuplot\char`\"{} etc.
@@ -875,9 +887,9 @@ If all else fails and you think you have found a bug in the library, make sure y
 \item If the above steps identify the problem, \href{../../contact/html/index.html}{\texttt{ let us know}}, ideally with a bug fix! ~\newline
 ~\newline
 
-\item If you can\textquotesingle{}t fix the problem yourself, get in touch \href{../../contact/html/index.html}{\texttt{ either directly}}, or via our bugzilla-\/based bug-\/and-\/feature-\/tracking system, accessible online at ~\newline
+\item If you can\textquotesingle{}t fix the problem yourself, get in touch \href{../../contact/html/index.html}{\texttt{ either directly}}, or via our Git\+Hub-\/based bug tracking system, accessible online at ~\newline
 ~\newline
- \begin{center} \href{http://oomph-lib.maths.man.ac.uk/bugzilla}{\texttt{ http\+://oomph-\/lib.\+maths.\+man.\+ac.\+uk/bugzilla}} \end{center}  ~\newline
+ \begin{center} \href{https://github.com/oomph-lib/oomph-lib/issues}{\texttt{ https\+://github.\+com/oomph-\/lib/oomph-\/lib/issues}} \end{center}  ~\newline
  and provide as much information as possible (clear description of the problem; the source code; the Makefile; details of the compiler and compilation flags used; any warning/error messages that are displayed during the compilation of the library or the driver code itself; etc.) ~\newline
 ~\newline
 

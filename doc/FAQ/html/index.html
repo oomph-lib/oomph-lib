@@ -71,11 +71,9 @@
           <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
         </ul>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installation<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
-            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
-            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
             <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
           </ul>
         </li>
@@ -122,6 +120,9 @@
 <br  />
 <ul>
 <li><a class="el" href="index.html#comp_opt">How do I specify different levels of optimisation and/or non-standard compiler options?</a> <br  />
+<br  />
+</li>
+<li><a class="el" href="index.html#cpp11">My compiler doesn't support C++11 by default</a> <br  />
 <br  />
 </li>
 <li><a class="el" href="index.html#other_compilers">The compilation fails when I use my xxx [non gcc] compiler</a> <br  />
@@ -221,7 +222,7 @@ How do I specify different levels of optimisation and/or non-standard compiler o
 <ol type="1">
 <li><b>Compiler flags/options for the compilation of the library</b> <br  />
 <br  />
- By default, <code>oomph-lib's</code> installation is performed with the <a href="http://gcc.gnu.org/">gcc compiler suite</a>, using full optimisation and warning (<code>-O6</code> <code>-Wall</code> ). <br  />
+ By default, <code>oomph-lib's</code> installation is performed with the <a href="http://gcc.gnu.org/">gcc compiler suite</a>, using full optimisation and warning (<code>-O3</code> <code>-Wall</code> ). <br  />
 <br  />
  If you install the library with the <code>autogen.sh</code> script you are given the option to overwrite the default compilation flags, either by specifying alternative flags on the command line, or by recycling any of the previously used combinations of flags, stored in the directory <a href="../../../config/configure_options/">config/configure_options</a>. The files in this directory also contain more details on available flags and options. <br  />
 <br  />
@@ -235,6 +236,12 @@ How do I specify different levels of optimisation and/or non-standard compiler o
 <br  />
  If you link against <code>oomph-lib</code> from outside the <code>autotools</code> framework, you can, of course, use whatever technique you prefer to customise the compilation of your driver code.</li>
 </ol>
+<hr  />
+<h2><a class="anchor" id="cpp11"></a>
+My compiler doesn't support C++11 by default</h2>
+<p><code>oomph-lib</code> uses the C++11 standard and assumes that your compiler supports this. If you have an older version of the gcc compiler you can add the flag <code>-std=c++11</code> to the <code>g++</code> configure options by adding it to the <code>CXXFLAGS</code> in your configure options file. The one that's used to build <code>oomph-lib</code> is </p><center> <code>config/configure_options/current</code>. </center><p> <br  />
+ Note that the directory <code>config/configure_options</code> also contains many other, generally sensibly named files that specify configure options for other configurations and compilers. You can choose from these when running <code>autogen.sh</code> or you can explore them yourself for further options.</p>
+<p>If you are using a different compiler check its man pages to find out what flag is needed to enable C++11.</p>
 <hr  />
 <h2><a class="anchor" id="other_compilers"></a>
 The compilation fails when I use my xxx [non gcc] compiler</h2>
@@ -275,7 +282,7 @@ You do not need to use the Xcode IDE, but we do need the associated development 
 <li>Follow the <a href="../../the_distribution/html/index.html">oomph-lib install procedure</a> as normal. <br  />
 <br  />
 </li>
-<li>For associated Unix-goodness (doxygen, gnuplot, subversion etc), I would recommend using a ports mechanism to install any additional unix tools painlessly: <br  />
+<li>For associated Unix-goodness (doxygen, gnuplot, git, etc), I would recommend using a ports mechanism to install any additional unix tools painlessly: <br  />
 <br  />
 <center> <a href="https://www.macports.org/">https://www.macports.org/</a> </center> <br  />
 For example: "sudo port install gnuplot" etc.</li>
@@ -842,9 +849,9 @@ How to report problems/bugs</h2>
 <li>If the above steps identify the problem, <a href="../../contact/html/index.html">let us know</a>, ideally with a bug fix! <br  />
 <br  />
 </li>
-<li>If you can't fix the problem yourself, get in touch <a href="../../contact/html/index.html">either directly</a>, or via our bugzilla-based bug-and-feature-tracking system, accessible online at <br  />
+<li>If you can't fix the problem yourself, get in touch <a href="../../contact/html/index.html">either directly</a>, or via our GitHub-based bug tracking system, accessible online at <br  />
 <br  />
- <center> <a href="http://oomph-lib.maths.man.ac.uk/bugzilla">http://oomph-lib.maths.man.ac.uk/bugzilla</a> </center> <br  />
+ <center> <a href="https://github.com/oomph-lib/oomph-lib/issues">https://github.com/oomph-lib/oomph-lib/issues</a> </center> <br  />
  and provide as much information as possible (clear description of the problem; the source code; the Makefile; details of the compiler and compilation flags used; any warning/error messages that are displayed during the compilation of the library or the driver code itself; etc.) <br  />
 <br  />
 </li>
@@ -883,7 +890,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:31:51
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Mon Aug 23 2021 17:09:47
         </div>
       </div>
     </footer>

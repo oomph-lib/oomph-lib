@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: final_svn_log_before_move_to_git.txt File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installation<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.8.17 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">final_svn_log_before_move_to_git.txt File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aed21b423b8f2797274d00b287818d95c"><td class="memItemLeft" align="right" valign="top">Overloaded RefineableMeshTetgenMesh constructor which takes pointers to the outer boundary object and a vector of internal surfaces now has an additional optional const <a class="el" href="final__svn__log__before__move__to__git_8txt.html#af53d6799b6e51ca01f1ba73d5ab52b31">argument</a> bool &amp;split_corner_elements which defaults to&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#aed21b423b8f2797274d00b287818d95c">false</a> (and the call to this constructor <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> RefineableTetgenMesh&lt; ELEMENT &gt;::adapt() has been updated)</td></tr>
+<tr class="separator:aed21b423b8f2797274d00b287818d95c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af53d6799b6e51ca01f1ba73d5ab52b31"><td class="memItemLeft" align="right" valign="top">the constructor to the non refinable TetgenMesh now includes the same default&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#af53d6799b6e51ca01f1ba73d5ab52b31">argument</a> (const bool &amp;split_corner_elements=<a class="el" href="final__svn__log__before__move__to__git_8txt.html#aed21b423b8f2797274d00b287818d95c">false</a>) as the refineable version</td></tr>
+<tr class="separator:af53d6799b6e51ca01f1ba73d5ab52b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a2f5c5e42a4160b3c7c0b2ab16088c810"><td class="memItemLeft" align="right" valign="top">r1367&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#a2f5c5e42a4160b3c7c0b2ab16088c810">mheil</a></td></tr>
+<tr class="separator:a2f5c5e42a4160b3c7c0b2ab16088c810"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada6c539c6e3d4d5d8647389a57994281"><td class="memItemLeft" align="right" valign="top">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> oomph_utilities if the Doc_Progress flag is set to true r1366&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#ada6c539c6e3d4d5d8647389a57994281">ahazel</a></td></tr>
+<tr class="separator:ada6c539c6e3d4d5d8647389a57994281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e0e818bbe039fe5b39731a6be62885f"><td class="memItemLeft" align="right" valign="top">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> oomph_utilities if the Doc_Progress flag is set to true r1366 Jun lines Added functions to allow updating a faceted surface mesh to allow unstructured remeshing of three dimensional free surface problems This is not yet complete by any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#a4e0e818bbe039fe5b39731a6be62885f">means</a></td></tr>
+<tr class="separator:a4e0e818bbe039fe5b39731a6be62885f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a793bec2167335097b0f9d3b852e37ccf"><td class="memItemLeft" align="right" valign="top">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> oomph_utilities if the Doc_Progress flag is set to true r1366 Jun lines Added functions to allow updating a faceted surface mesh to allow unstructured remeshing of three dimensional free surface problems This is not yet complete by any but part of the plan to include this functionality The next step <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> the process is to change the way the surface <a class="el" href="change__log_8txt.html#ae6d82961ee38c7789536f16da83236e5">coordinates</a> are calculated to use only the vertex nodes(and not all nodes) when computing the extreme values of coordinate. ------------------------------------------------------------------------ r1364|bergemann|2021-06-18 09 how things were originally done To switch to a dynamic&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#a793bec2167335097b0f9d3b852e37ccf">build</a></td></tr>
+<tr class="separator:a793bec2167335097b0f9d3b852e37ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3af73fc3fd41d5f82fb2285853a64b3d"><td class="memItemLeft" align="right" valign="top">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> oomph_utilities if the Doc_Progress flag is set to true r1366 Jun lines Added functions to allow updating a faceted surface mesh to allow unstructured remeshing of three dimensional free surface problems This is not yet complete by any but part of the plan to include this functionality The next step <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> the process is to change the way the surface <a class="el" href="change__log_8txt.html#ae6d82961ee38c7789536f16da83236e5">coordinates</a> are calculated to use only the vertex nodes(and not all nodes) when computing the extreme values of coordinate. ------------------------------------------------------------------------ r1364|bergemann|2021-06-18 09 how things were originally done To switch to a dynamic the user needs to provide the flag enable dynamic linking for trilinos <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> their config file For the shared library <a class="el" href="final__svn__log__before__move__to__git_8txt.html#a793bec2167335097b0f9d3b852e37ccf">build</a> to&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#a3af73fc3fd41d5f82fb2285853a64b3d">work</a></td></tr>
+<tr class="separator:a3af73fc3fd41d5f82fb2285853a64b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd2287d6db7d57a3f89dbcc77fd39177"><td class="memItemLeft" align="right" valign="top">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> oomph_utilities if the Doc_Progress flag is set to true r1366 Jun lines Added functions to allow updating a faceted surface mesh to allow unstructured remeshing of three dimensional free surface problems This is not yet complete by any but part of the plan to include this functionality The next step <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> the process is to change the way the surface <a class="el" href="change__log_8txt.html#ae6d82961ee38c7789536f16da83236e5">coordinates</a> are calculated to use only the vertex nodes(and not all nodes) when computing the extreme values of coordinate. ------------------------------------------------------------------------ r1364|bergemann|2021-06-18 09 how things were originally done To switch to a dynamic the user needs to provide the flag enable dynamic linking for trilinos <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> their config file For the shared library <a class="el" href="final__svn__log__before__move__to__git_8txt.html#a793bec2167335097b0f9d3b852e37ccf">build</a> to three things need to&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#acd2287d6db7d57a3f89dbcc77fd39177">happen</a></td></tr>
+<tr class="separator:acd2287d6db7d57a3f89dbcc77fd39177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a657dfc2e6093760cf42e68ba8d2b6356"><td class="memItemLeft" align="right" valign="top">the latter is required to ensure we use code enclosed by directives&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#a657dfc2e6093760cf42e68ba8d2b6356">However</a></td></tr>
+<tr class="separator:a657dfc2e6093760cf42e68ba8d2b6356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a618fd00804c45fe1a1a34e7d63394e0f"><td class="memItemLeft" align="right" valign="top">the latter is required to ensure we use code enclosed by directives the user shouldn t have to deal with this&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#a618fd00804c45fe1a1a34e7d63394e0f">themselves</a></td></tr>
+<tr class="separator:a618fd00804c45fe1a1a34e7d63394e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a021c5b1a706db7d3ea03e28b95277a33"><td class="memItemLeft" align="right" valign="top">Overloaded RefineableMeshTetgenMesh constructor which takes pointers to the outer boundary object and a vector of internal surfaces now has an additional optional const <a class="el" href="final__svn__log__before__move__to__git_8txt.html#af53d6799b6e51ca01f1ba73d5ab52b31">argument</a> bool &amp;split_corner_elements which defaults to and this constructor now updates the new private boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="final__svn__log__before__move__to__git_8txt.html#a021c5b1a706db7d3ea03e28b95277a33">Corner_elements_must_be_split</a></td></tr>
+<tr class="separator:a021c5b1a706db7d3ea03e28b95277a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="af53d6799b6e51ca01f1ba73d5ab52b31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af53d6799b6e51ca01f1ba73d5ab52b31">&#9670;&nbsp;</a></span>argument()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the constructor to the non refinable TetgenMesh now includes the same default argument </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>split_corner_elements</em> = <code><a class="el" href="final__svn__log__before__move__to__git_8txt.html#aed21b423b8f2797274d00b287818d95c">false</a></code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed21b423b8f2797274d00b287818d95c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed21b423b8f2797274d00b287818d95c">&#9670;&nbsp;</a></span>false()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Overloaded RefineableMeshTetgenMesh constructor which takes pointers to the outer boundary object and a vector of internal surfaces now has an additional optional const <a class="el" href="final__svn__log__before__move__to__git_8txt.html#af53d6799b6e51ca01f1ba73d5ab52b31">argument</a> bool&amp; split_corner_elements which defaults to false </td>
+          <td>(</td>
+          <td class="paramtype">and the call to this constructor <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> RefineableTetgenMesh&lt; ELEMENT &gt;::adapt() has been&#160;</td>
+          <td class="paramname"><em>updated</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ada6c539c6e3d4d5d8647389a57994281"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada6c539c6e3d4d5d8647389a57994281">&#9670;&nbsp;</a></span>ahazel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> oomph_utilities if the Doc_Progress flag is set to true r1366 ahazel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html#l00008">8</a> of file <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html">final_svn_log_before_move_to_git.txt</a>.</p>
+
+</div>
+</div>
+<a id="a793bec2167335097b0f9d3b852e37ccf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a793bec2167335097b0f9d3b852e37ccf">&#9670;&nbsp;</a></span>build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> oomph_utilities if the Doc_Progress flag is set to true r1366 Jun lines Added functions to allow updating a faceted surface mesh to allow unstructured remeshing of three dimensional free surface problems This is not yet complete by any but part of the plan to include this functionality The next step <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> the process is to change the way the surface <a class="el" href="change__log_8txt.html#ae6d82961ee38c7789536f16da83236e5">coordinates</a> are calculated to use only the vertex nodes (and not all nodes) when computing the extreme values of coordinate. ------------------------------------------------------------------------ r1364 | bergemann | 2021-06-18 09 how things were originally done To switch to a dynamic build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html#l00015">15</a> of file <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html">final_svn_log_before_move_to_git.txt</a>.</p>
+
+</div>
+</div>
+<a id="a021c5b1a706db7d3ea03e28b95277a33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a021c5b1a706db7d3ea03e28b95277a33">&#9670;&nbsp;</a></span>Corner_elements_must_be_split</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Overloaded RefineableMeshTetgenMesh constructor which takes pointers to the outer boundary object and a vector of internal surfaces now has an additional optional const <a class="el" href="final__svn__log__before__move__to__git_8txt.html#af53d6799b6e51ca01f1ba73d5ab52b31">argument</a> bool&amp; split_corner_elements which defaults to and this constructor now updates the new private boolean Corner_elements_must_be_split</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html#l00567">567</a> of file <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html">final_svn_log_before_move_to_git.txt</a>.</p>
+
+</div>
+</div>
+<a id="acd2287d6db7d57a3f89dbcc77fd39177"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd2287d6db7d57a3f89dbcc77fd39177">&#9670;&nbsp;</a></span>happen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> oomph_utilities if the Doc_Progress flag is set to true r1366 Jun lines Added functions to allow updating a faceted surface mesh to allow unstructured remeshing of three dimensional free surface problems This is not yet complete by any but part of the plan to include this functionality The next step <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> the process is to change the way the surface <a class="el" href="change__log_8txt.html#ae6d82961ee38c7789536f16da83236e5">coordinates</a> are calculated to use only the vertex nodes (and not all nodes) when computing the extreme values of coordinate. ------------------------------------------------------------------------ r1364 | bergemann | 2021-06-18 09 how things were originally done To switch to a dynamic the user needs to provide the flag enable dynamic linking for trilinos <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> their config file For the shared library <a class="el" href="final__svn__log__before__move__to__git_8txt.html#a793bec2167335097b0f9d3b852e37ccf">build</a> to three things need to happen</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html#l00465">465</a> of file <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html">final_svn_log_before_move_to_git.txt</a>.</p>
+
+</div>
+</div>
+<a id="a657dfc2e6093760cf42e68ba8d2b6356"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a657dfc2e6093760cf42e68ba8d2b6356">&#9670;&nbsp;</a></span>However</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the latter is required to ensure we use code enclosed by directives However</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html#l00472">472</a> of file <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html">final_svn_log_before_move_to_git.txt</a>.</p>
+
+</div>
+</div>
+<a id="a4e0e818bbe039fe5b39731a6be62885f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e0e818bbe039fe5b39731a6be62885f">&#9670;&nbsp;</a></span>means</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> oomph_utilities if the Doc_Progress flag is set to true r1366 Jun lines Added functions to allow updating a faceted surface mesh to allow unstructured remeshing of three dimensional free surface problems This is not yet complete by any means</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html#l00011">11</a> of file <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html">final_svn_log_before_move_to_git.txt</a>.</p>
+
+</div>
+</div>
+<a id="a2f5c5e42a4160b3c7c0b2ab16088c810"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f5c5e42a4160b3c7c0b2ab16088c810">&#9670;&nbsp;</a></span>mheil</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">r1367 mheil</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html#l00002">2</a> of file <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html">final_svn_log_before_move_to_git.txt</a>.</p>
+
+</div>
+</div>
+<a id="a618fd00804c45fe1a1a34e7d63394e0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a618fd00804c45fe1a1a34e7d63394e0f">&#9670;&nbsp;</a></span>themselves</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">the latter is required to ensure we use code enclosed by directives the user shouldn t have to deal with this themselves</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html#l00473">473</a> of file <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html">final_svn_log_before_move_to_git.txt</a>.</p>
+
+</div>
+</div>
+<a id="a3af73fc3fd41d5f82fb2285853a64b3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3af73fc3fd41d5f82fb2285853a64b3d">&#9670;&nbsp;</a></span>work</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> oomph_utilities if the Doc_Progress flag is set to true r1366 Jun lines Added functions to allow updating a faceted surface mesh to allow unstructured remeshing of three dimensional free surface problems This is not yet complete by any but part of the plan to include this functionality The next step <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> the process is to change the way the surface <a class="el" href="change__log_8txt.html#ae6d82961ee38c7789536f16da83236e5">coordinates</a> are calculated to use only the vertex nodes (and not all nodes) when computing the extreme values of coordinate. ------------------------------------------------------------------------ r1364 | bergemann | 2021-06-18 09 how things were originally done To switch to a dynamic the user needs to provide the flag enable dynamic linking for trilinos <a class="el" href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a> their config file For the shared library <a class="el" href="final__svn__log__before__move__to__git_8txt.html#a793bec2167335097b0f9d3b852e37ccf">build</a> to work</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html#l00462">462</a> of file <a class="el" href="final__svn__log__before__move__to__git_8txt_source.html">final_svn_log_before_move_to_git.txt</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Mon Aug 23 2021 17:44:30
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

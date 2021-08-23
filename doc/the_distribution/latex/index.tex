@@ -1,17 +1,10 @@
-
-
-See the \href{../../change_log/html/index.html}{\texttt{ change log page}} for an overview of the changes made since the previous release.\hypertarget{index_instructions}{}\doxysection{The download/install process, step by step}\label{index_instructions}
+\hypertarget{index_instructions}{}\doxysection{The download/install process, step by step}\label{index_instructions}
 
 \begin{DoxyEnumerate}
 \item \mbox{\hyperlink{index_download}{Get the distribution}}
-\begin{DoxyEnumerate}
-\item \mbox{\hyperlink{index_tar_file}{Option 1\+: Get a tar file}}
-\item \mbox{\hyperlink{index_subversion}{Option 2\+: Get the distribution from the subversion repository}}
-\end{DoxyEnumerate}
 \item \mbox{\hyperlink{index_install}{Install the distribution}}
 \begin{DoxyEnumerate}
-\item \mbox{\hyperlink{index_manual_install}{Manual installation}}
-\item \mbox{\hyperlink{index_standard_install}{Option 1\+: Standard installation}}
+\item \mbox{\hyperlink{index_standard_install}{Installation with {\ttfamily autogen.\+sh} }}
 \item \mbox{\hyperlink{index_custom_install}{Configuration options}}
 \end{DoxyEnumerate}
 \item \mbox{\hyperlink{index_nav}{Finding your way through the distribution}}
@@ -42,28 +35,25 @@ See the \href{../../change_log/html/index.html}{\texttt{ change log page}} for a
 \end{DoxyEnumerate}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_download}{}\doxysection{Get the distribution}\label{index_download}
-\hypertarget{index_tar_file}{}\doxysubsection{Option 1\+: Get a tar file}\label{index_tar_file}
-You can download a tar file of the latest distribution from the \href{../../download/html/index.html}{\texttt{ oomph-\/lib download page}}.
-
-Once you have downloaded the tar file unpack it\+:
+{\ttfamily oomph-\/lib} is hosted on and distributed via Git\+Hub at \begin{center}\href{https://github.com/oomph-lib/oomph-lib}{\texttt{ https\+://github.\+com/oomph-\/lib/oomph-\/lib}}.\end{center} ~\newline
 
 
+You should clone the repository onto your own computer, using ~\newline
+ 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{tar xvfz oomph-\/lib-\/*.tar.gz}
+\DoxyCodeLine{git clone git@github.com:oomph-\/lib/oomph-\/lib.git}
 \end{DoxyCode}
+ ~\newline
+ This will check out all the sources into a new directory {\ttfamily oomph-\/lib}.
 
-
-The entire distribution will now be contained in the sub-\/directory {\ttfamily oomph-\/lib-\/$\ast$} where the \char`\"{}$\ast$\char`\"{} indicates the version/revision number (the same as in the tar file).\hypertarget{index_subversion}{}\doxysubsection{Option 2\+: Get the distribution from the subversion repository}\label{index_subversion}
-You can also get hold of the library from our \href{http://www.subversion.tigris.org}{\texttt{ subversion}}-\/based repository. The procedure for checking out from the repository is explained in \href{../../subversion/html/index.html}{\texttt{ another tutorial.}} When checking out from the repository, you can specify where the distribution is placed. By default subversion will place it into a directory called {\ttfamily trunk}.
-
-\DoxyHorRuler{0}
+If you anticipate making contributions to {\ttfamily oomph-\/lib}, follow the instructions in our \href{https://github.com/oomph-lib/oomph-lib/blob/main/CONTRIBUTING.md}{\texttt{ guide for contributors.}} \DoxyHorRuler{0}
 \hypertarget{index_install}{}\doxysection{Install the distribution}\label{index_install}
-\hypertarget{index_standard_install}{}\doxysubsection{Option 1\+: Standard installation}\label{index_standard_install}
+\hypertarget{index_standard_install}{}\doxysubsection{Installation with \textbackslash{}c autogen.\+sh}\label{index_standard_install}
 Change into the {\ttfamily oomph-\/lib} directory and run the {\ttfamily autogen.\+sh} build script\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{cd oomph-\/lib-\/*}
+\DoxyCodeLine{cd oomph-\/lib}
 \DoxyCodeLine{./autogen.sh}
 \end{DoxyCode}
 
@@ -82,55 +72,7 @@ The following flags for {\ttfamily autogen.\+sh} may be of interest\+:
 
 Under the hood {\ttfamily autogen.\+sh} simply collects settings in a question and answer manner then calls a non-\/interactive script {\ttfamily non\+\_\+interactive\+\_\+autogen.\+sh} (yes, really!) with the appropriate flags. If you prefer you can simply call {\ttfamily non\+\_\+interactive\+\_\+autogen.\+sh} directly.
 
-The self-\/tests can be initiated outside of {\ttfamily autogen.\+sh} using {\ttfamily make check -\/k} (to run on a single core) or {\ttfamily ./bin/parallel\+\_\+self\+\_\+test.py} (to run on all available cores). These commands will compile and run all the demo codes and verify their output. This is an optional step and can be very time consuming, especially if run on a small number of cores.\hypertarget{index_manual_install}{}\doxysubsection{Manual installation}\label{index_manual_install}
-If you\textquotesingle{}re an experienced linux/unix user, you may prefer to control the build/install process manually, using the standard {\ttfamily configure}; {\ttfamily make}; {\ttfamily make} {\ttfamily install}; {\ttfamily make} {\ttfamily check}; sequence. Note that this will {\itshape only} work when building the tar file version (i.\+e. not the version from svn which still requires the configure script to be generated). In this case, the library will be compiled with G\+NU\textquotesingle{}s default compiler options (\char`\"{}-\/\+O3 -\/g\char`\"{}) and the libraries and include files will be installed in {\ttfamily /usr/local/} unless you specify a different directory with the {\ttfamily --prefix} argument to the {\ttfamily configure} command. Here\textquotesingle{}s an example of a manual installation
-
-
-\begin{DoxyItemize}
-\item Unpack the distribution (you may have to replace the \char`\"{}$\ast$\char`\"{} with the actual revision number) 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{tar xvfz oomph-\/lib-\/*.tar.gz}
-\end{DoxyCode}
-
-\item Change into the oomph-\/lib home directory (again, you may have to replace the \char`\"{}$\ast$\char`\"{} with the actual revision information) 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{cd oomph-\/lib-\/*}
-\end{DoxyCode}
-
-\item Store the oomph-\/lib home directory in shell variable -- in a bash shell this is done like this\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{OOMPH\_HOME=`pwd`}
-\end{DoxyCode}
-
-\item Create the build directory -- specify your own here! 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{mkdir \$OOMPH\_HOME/build}
-\end{DoxyCode}
-
-\item Configure the distribution -- prefix specifies the build directory 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{./configure -\/-\/prefix \$OOMPH\_HOME/build}
-\end{DoxyCode}
-
-\item Make and install the library 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}}; \mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}} \mbox{\hyperlink{the__distribution_8txt_a450df5a275b46b68f1cc00515f04aefa}{install}}}
-\end{DoxyCode}
-
-\item Done! Check if we can make and run the user codes 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{cd \$OOMPH\_HOME/user\_drivers/joe\_cool}
-\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}}}
-\DoxyCodeLine{./joes\_poisson\_code}
-\end{DoxyCode}
-
-\item Run the self-\/tests 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{cd \$OOMPH\_HOME}
-\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}} \mbox{\hyperlink{the__distribution_8txt_ae663bd6cf76ba6ed02e28b120477cf7c}{check}} -\/k}
-\end{DoxyCode}
-
-\end{DoxyItemize}\hypertarget{index_custom_install}{}\doxysubsection{Configuration options}\label{index_custom_install}
+The self-\/tests can be initiated outside of {\ttfamily autogen.\+sh} using {\ttfamily make check -\/k} (to run on a single core) or {\ttfamily ./bin/parallel\+\_\+self\+\_\+test.py} (to run on all available cores). These commands will compile and run all the demo codes and verify their output. This is an optional step and can be very time consuming, especially if run on a small number of cores.\hypertarget{index_custom_install}{}\doxysubsection{Configuration options}\label{index_custom_install}
 The build scripts allow you to specify a file of configure options. For instance, you may wish to specify another compiler, change the optimisation level, allow for debugging or range checking, etc. Previously used sets of options are stored in various files in the sub-\/directory {\ttfamily config/configure\+\_\+options/}. The default settings are in {\ttfamily default}; the currently used ones are in {\ttfamily current}.
 
 What options are there? You can get a complete list by typing \begin{DoxyVerb}./configure --help
@@ -140,7 +82,7 @@ What options are there? You can get a complete list by typing \begin{DoxyVerb}./
 in {\ttfamily oomph-\/lib}\textquotesingle{}s top level directory. Here are some options that we use frequently\+:\hypertarget{index_no_doc}{}\doxysubsubsection{Suppressing the build of the documentation\+:}\label{index_no_doc}
 Building the online documentation locally is time consuming and requires a significant amount of disk space. Since the documentation is also available from the \href{http://www.oomph-lib.org}{\texttt{ oomph-\/lib homepage}} you may wish to suppress this step. To achieve this, specify the configure option \begin{DoxyVerb}--enable-suppress-doc
 \end{DoxyVerb}
-\hypertarget{index_no_doc}{}\doxysubsubsection{Suppressing the build of the documentation\+:}\label{index_no_doc}
+\hypertarget{index_no_pdf}{}\doxysubsubsection{Suppressing the build of the pdf version of the documentation\+:}\label{index_no_pdf}
 By default the tutorials are built as html files (which are best accessed by starting from the local copy of the {\ttfamily oomph-\/lib} homepage, which is in {\ttfamily doc/html/index.\+html}) and as pdf files (which are accessible via a link at the bottom of the relevant html-\/based tutorial). In the past we have sometimes had problems with {\ttfamily doxygen} (and hence the entire build process!) hanging while the pdf files are generated. To avoid this (by not even attempting to create the pdf files) specify the configure option \begin{DoxyVerb}--enable-suppress-pdf-doc
 \end{DoxyVerb}
 
@@ -348,7 +290,7 @@ You can also download both files from our own website\+: \begin{center} \href{..
 
 Note that the configure option 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{-\/-\/with-\/mpi-\/include-\/\mbox{\hyperlink{the__distribution_8txt_ad3083ce9e1c95654db5f3fef75b58f52}{directory}}=/usr/lib/openmpi/include}
+\DoxyCodeLine{-\/-\/with-\/mpi-\/include-\/directory=/usr/lib/openmpi/include}
 \end{DoxyCode}
  {\bfseries{ must }} be specified in order to build {\ttfamily M\+U\+M\+PS}, where {\ttfamily /usr/lib/openmpi/include} is the directory that contains the file {\ttfamily mpi.\+h}. \mbox{[}You can use {\ttfamily locate mpi.\+h}, to, well, locate that directory.\mbox{]}
 
@@ -379,7 +321,7 @@ Let\textquotesingle{}s start with the straightforward case\+: You want to use {\
 \item You may now return to your own directory in {\ttfamily user\+\_\+drivers} and make your own driver code\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{cd user\_drivers/josephine\_cool}
-\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}}}
+\DoxyCodeLine{make}
 \end{DoxyCode}
  This will create the required executable. ~\newline
 ~\newline
@@ -483,8 +425,8 @@ The steps required to include your own library into the {\ttfamily oomph-\/lib} 
 \item You may now return to your own directory in {\ttfamily user\+\_\+src} and make and install our own library 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{cd user\_src/jacqueline\_cool}
-\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}}}
-\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}} \mbox{\hyperlink{the__distribution_8txt_a450df5a275b46b68f1cc00515f04aefa}{install}}}
+\DoxyCodeLine{make}
+\DoxyCodeLine{make install}
 \end{DoxyCode}
  This will create the library and install it in {\ttfamily build/lib} ~\newline
 ~\newline
@@ -662,7 +604,7 @@ The good news is that {\ttfamily oomph-\/lib\textquotesingle{}s} installation pr
 
 The version that is generated during the build process on your machine provides template for your own customised Makefiles. When modifying the sample to different driver codes, you should not (have to) edit any of the \char`\"{}installation specific\char`\"{} variables. Simply specify the {\ttfamily oomph-\/lib} (sub-\/)libraries that you wish to link against in the {\ttfamily O\+O\+M\+P\+H\+\_\+\+L\+I\+B-\/\+L\+I\+BS} variable (in the example shown above, we are linking against the {\ttfamily generic} and {\ttfamily poisson} libraries), and specify the dependencies for your own driver code, following the usual {\ttfamily Makefile} syntax. The executable may then be created by the usual 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{the__distribution_8txt_ae0e613792058a55170dfbb1e9e4831ec}{make}} -\/f makefile.sample my\_demo\_code}
+\DoxyCodeLine{make -\/f makefile.sample my\_demo\_code}
 \end{DoxyCode}
 
 

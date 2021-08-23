@@ -71,11 +71,9 @@
           <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
         </ul>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installation<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
-            <li><a href="../../../doc/subversion/html/index.html">Get code from subversion repository</a></li>
-            <li><a href="../../../doc/download/html/index.html">Get code as tar file</a></li>
             <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
           </ul>
         </li>
@@ -116,41 +114,12 @@
 <div class="title">Download/installation instructions </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p> 
-<p>The latest version of the library is 1.0, 
-<script>
-      // This odd/hacky construction extracts the svn information automatically
-       var revString = "$LastChangedRevision$";
-       var dateString = "$LastChangedDate$";
-       
-       //Revision number should never be more than 5 digits
-       revString = revString.substr(revString.indexOf(":")+1,5).trim();
-       
-       // The string should always be the same length
-       var timeString = dateString.substr(28,8);
-       
-       dateString = dateString.substr(dateString.indexOf("(")+1, dateString.indexOf(")") - dateString.indexOf("(")-1);
-       
-       document.write("revision number ");
-       document.write(revString);
-       document.write(" and was committed on ");
-       document.write(dateString);
-       document.write(".");
-</script> 
-</p>
-</p>
-<p>See the <a href="../../change_log/html/index.html">change log page</a> for an overview of the changes made since the previous release.</p>
-<h1><a class="anchor" id="instructions"></a>
+<div class="textblock"><h1><a class="anchor" id="instructions"></a>
 The download/install process, step by step</h1>
 <ol type="1">
-<li><a class="el" href="index.html#download">Get the distribution</a><ol type="a">
-<li><a class="el" href="index.html#tar_file">Option 1: Get a tar file</a></li>
-<li><a class="el" href="index.html#subversion">Option 2: Get the distribution from the subversion repository</a></li>
-</ol>
-</li>
+<li><a class="el" href="index.html#download">Get the distribution</a></li>
 <li><a class="el" href="index.html#install">Install the distribution</a><ol type="a">
-<li><a class="el" href="index.html#manual_install">Manual installation</a></li>
-<li><a class="el" href="index.html#standard_install">Option 1: Standard installation</a></li>
+<li><a class="el" href="index.html#standard_install">Installation with <code>autogen.sh</code> </a></li>
 <li><a class="el" href="index.html#custom_install">Configuration options</a></li>
 </ol>
 </li>
@@ -184,22 +153,19 @@ The download/install process, step by step</h1>
  <hr  />
 <h1><a class="anchor" id="download"></a>
 Get the distribution</h1>
-<h2><a class="anchor" id="tar_file"></a>
-Option 1: Get a tar file</h2>
-<p>You can download a tar file of the latest distribution from the <a href="../../download/html/index.html">oomph-lib download page</a>.</p>
-<p>Once you have downloaded the tar file unpack it:</p>
-<div class="fragment"><div class="line">tar xvfz oomph-lib-*.tar.gz</div>
-</div><!-- fragment --><p>The entire distribution will now be contained in the sub-directory <code>oomph-lib-*</code> where the "*" indicates the version/revision number (the same as in the tar file).</p>
-<h2><a class="anchor" id="subversion"></a>
-Option 2: Get the distribution from the subversion repository</h2>
-<p>You can also get hold of the library from our <a href="http://www.subversion.tigris.org">subversion</a>-based repository. The procedure for checking out from the repository is explained in <a href="../../subversion/html/index.html">another tutorial.</a> When checking out from the repository, you can specify where the distribution is placed. By default subversion will place it into a directory called <code>trunk</code>.</p>
-<hr  />
+<p><code>oomph-lib</code> is hosted on and distributed via GitHub at </p><center><a href="https://github.com/oomph-lib/oomph-lib">https://github.com/oomph-lib/oomph-lib</a>.</center><p><br  />
+</p>
+<p>You should clone the repository onto your own computer, using <br  />
+ </p><div class="fragment"><div class="line">git clone git@github.com:oomph-lib/oomph-lib.git</div>
+</div><!-- fragment --><p> <br  />
+ This will check out all the sources into a new directory <code>oomph-lib</code>.</p>
+<p>If you anticipate making contributions to <code>oomph-lib</code>, follow the instructions in our <a href="https://github.com/oomph-lib/oomph-lib/blob/main/CONTRIBUTING.md">guide for contributors.</a> </p><hr  />
 <h1><a class="anchor" id="install"></a>
 Install the distribution</h1>
 <h2><a class="anchor" id="standard_install"></a>
-Option 1: Standard installation</h2>
+Installation with \c autogen.sh</h2>
 <p>Change into the <code>oomph-lib</code> directory and run the <code>autogen.sh</code> build script:</p>
-<div class="fragment"><div class="line">cd oomph-lib-*</div>
+<div class="fragment"><div class="line">cd oomph-lib</div>
 <div class="line">./autogen.sh</div>
 </div><!-- fragment --><p>This build script will ask a few questions, e.g. to verify that the default build directory (<code>build </code>, relative to the oomph-lib home directory) is appropriate before starting the build.</p>
 <p>By default, <code>autogen</code>.<code>sh</code> will build the library and the demo codes with certain default settings (using the gcc compilers with full optimisation, no debugging, no PARANOIA, and fully installed header files rather than symbolic links). These are appropriate if you wish to install the library once-and-for-all and do not anticipate any changes to their sources. The section <a class="el" href="index.html#custom_install">Configuration options</a> provides more details on the various options). <code>autogen.sh</code> will display the configure options and ask for confirmation that they are appropriate. If you are unsure if they are, simply hit return &ndash; the default will be fine.</p>
@@ -210,30 +176,6 @@ Option 1: Standard installation</h2>
 </ul>
 <p>Under the hood <code>autogen.sh</code> simply collects settings in a question and answer manner then calls a non-interactive script <code>non_interactive_autogen.sh</code> (yes, really!) with the appropriate flags. If you prefer you can simply call <code>non_interactive_autogen.sh</code> directly.</p>
 <p>The self-tests can be initiated outside of <code>autogen.sh</code> using <code>make check -k</code> (to run on a single core) or <code>./bin/parallel_self_test.py</code> (to run on all available cores). These commands will compile and run all the demo codes and verify their output. This is an optional step and can be very time consuming, especially if run on a small number of cores.</p>
-<h2><a class="anchor" id="manual_install"></a>
-Manual installation</h2>
-<p>If you're an experienced linux/unix user, you may prefer to control the build/install process manually, using the standard <code>configure</code>; <code>make</code>; <code>make</code> <code>install</code>; <code>make</code> <code>check</code>; sequence. Note that this will <em>only</em> work when building the tar file version (i.e. not the version from svn which still requires the configure script to be generated). In this case, the library will be compiled with GNU's default compiler options ("-O3 -g") and the libraries and include files will be installed in <code>/usr/local/</code> unless you specify a different directory with the <code>&ndash;prefix</code> argument to the <code>configure</code> command. Here's an example of a manual installation</p>
-<ul>
-<li>Unpack the distribution (you may have to replace the "*" with the actual revision number) <div class="fragment"><div class="line">tar xvfz oomph-lib-*.tar.gz</div>
-</div><!-- fragment --></li>
-<li>Change into the oomph-lib home directory (again, you may have to replace the "*" with the actual revision information) <div class="fragment"><div class="line">cd oomph-lib-*</div>
-</div><!-- fragment --></li>
-<li>Store the oomph-lib home directory in shell variable &ndash; in a bash shell this is done like this: <div class="fragment"><div class="line">OOMPH_HOME=`pwd`</div>
-</div><!-- fragment --></li>
-<li>Create the build directory &ndash; specify your own here! <div class="fragment"><div class="line">mkdir $OOMPH_HOME/build</div>
-</div><!-- fragment --></li>
-<li>Configure the distribution &ndash; prefix specifies the build directory <div class="fragment"><div class="line">./configure --prefix $OOMPH_HOME/build</div>
-</div><!-- fragment --></li>
-<li>Make and install the library <div class="fragment"><div class="line"><a class="code" href="the__distribution_8txt.html#ae0e613792058a55170dfbb1e9e4831ec">make</a>; <a class="code" href="the__distribution_8txt.html#ae0e613792058a55170dfbb1e9e4831ec">make</a> <a class="code" href="the__distribution_8txt.html#a450df5a275b46b68f1cc00515f04aefa">install</a></div>
-</div><!-- fragment --></li>
-<li>Done! Check if we can make and run the user codes <div class="fragment"><div class="line">cd $OOMPH_HOME/user_drivers/joe_cool</div>
-<div class="line"><a class="code" href="the__distribution_8txt.html#ae0e613792058a55170dfbb1e9e4831ec">make</a></div>
-<div class="line">./joes_poisson_code</div>
-</div><!-- fragment --></li>
-<li>Run the self-tests <div class="fragment"><div class="line">cd $OOMPH_HOME</div>
-<div class="line"><a class="code" href="the__distribution_8txt.html#ae0e613792058a55170dfbb1e9e4831ec">make</a> <a class="code" href="the__distribution_8txt.html#ae663bd6cf76ba6ed02e28b120477cf7c">check</a> -k</div>
-</div><!-- fragment --></li>
-</ul>
 <h2><a class="anchor" id="custom_install"></a>
 Configuration options</h2>
 <p>The build scripts allow you to specify a file of configure options. For instance, you may wish to specify another compiler, change the optimisation level, allow for debugging or range checking, etc. Previously used sets of options are stored in various files in the sub-directory <code>config/configure_options/</code>. The default settings are in <code>default</code>; the currently used ones are in <code>current</code>.</p>
@@ -242,8 +184,8 @@ Configuration options</h2>
 <h3><a class="anchor" id="no_doc"></a>
 Suppressing the build of the documentation:</h3>
 <p>Building the online documentation locally is time consuming and requires a significant amount of disk space. Since the documentation is also available from the <a href="http://www.oomph-lib.org">oomph-lib homepage</a> you may wish to suppress this step. To achieve this, specify the configure option </p><pre class="fragment">--enable-suppress-doc
-</pre><h3><a class="anchor" id="no_doc"></a>
-Suppressing the build of the documentation:</h3>
+</pre><h3><a class="anchor" id="no_pdf"></a>
+Suppressing the build of the pdf version of the documentation:</h3>
 <p>By default the tutorials are built as html files (which are best accessed by starting from the local copy of the <code>oomph-lib</code> homepage, which is in <code>doc/html/index.html</code>) and as pdf files (which are accessible via a link at the bottom of the relevant html-based tutorial). In the past we have sometimes had problems with <code>doxygen</code> (and hence the entire build process!) hanging while the pdf files are generated. To avoid this (by not even attempting to create the pdf files) specify the configure option </p><pre class="fragment">--enable-suppress-pdf-doc
 </pre><p>(or better: update to a more recent version of <code>doxygen</code> &ndash; for instance version 1.8.6 works).</p>
 <h3><a class="anchor" id="sym_links"></a>
@@ -384,7 +326,7 @@ MUMPS and ScaLAPACK</h3>
 </div><!-- fragment --><p> i.e. these directories contain the <code>lib</code> and <code>include</code> directories that result from successful installations of <code>MUMPS</code> and <code>ScaLAPACK</code>, respectively.</p>
 <p>If you do not have <code>MUMPS</code> available you can download the latest version <a href="http://graal.ens-lyon.fr/MUMPS/index.php?page=dwnld">here. </a> You can build and install the library yourself, or get <code>oomph-lib</code> to build it during part of its own build process. Simply place a copy of the tar file <code>MUMPS_4.10.0.tar.gz</code> in the directory </p><div class="fragment"><div class="line">external_distributions/mumps_and_scalapack</div>
 </div><!-- fragment --><p> You will also need to download the <code>scalapack_installer.tgz</code> from <a href="http://www.netlib.org/scalapack/#_scalapack_installer_for_linux">here, </a> and place a copy in the same directory </p><div class="fragment"><div class="line">external_distributions/mumps_and_scalapack</div>
-</div><!-- fragment --><p>You can also download both files from our own website: </p><center> <a href="../../../../oomph-lib_external_distfiles/MUMPS_4.10.0.tar.gz">MUMPS_4.10.0.tar.gz</a> </center> <center> <a href="../../../../oomph-lib_external_distfiles/scalapack_installer.tgz">scalapack_installer.tgz</a> </center><p>Note that the configure option </p><div class="fragment"><div class="line">--with-mpi-include-<a class="code" href="the__distribution_8txt.html#ad3083ce9e1c95654db5f3fef75b58f52">directory</a>=/usr/lib/openmpi/include</div>
+</div><!-- fragment --><p>You can also download both files from our own website: </p><center> <a href="../../../../oomph-lib_external_distfiles/MUMPS_4.10.0.tar.gz">MUMPS_4.10.0.tar.gz</a> </center> <center> <a href="../../../../oomph-lib_external_distfiles/scalapack_installer.tgz">scalapack_installer.tgz</a> </center><p>Note that the configure option </p><div class="fragment"><div class="line">--with-mpi-include-directory=/usr/lib/openmpi/include</div>
 </div><!-- fragment --><p> <b> must </b> be specified in order to build <code>MUMPS</code>, where <code>/usr/lib/openmpi/include</code> is the directory that contains the file <code>mpi.h</code>. [You can use <code>locate mpi.h</code>, to, well, locate that directory.]</p>
 <p>Once the files have been placed in the <code>external_distributions/mumps_and_scalapack</code> directory, simply (re-)run <code>autogen.sh</code>, which will detect and build the libraries and install then in directory </p><div class="fragment"><div class="line">external_distributions/mumps_and_scalapack/mumps_and_scalapack_default_installation</div>
 </div><!-- fragment --><p>Note that the installation of <code>ScaLAPACK</code> requires an active Internet connection because it automatically downloads additional files.</p>
@@ -404,7 +346,7 @@ Adding your own driver codes</h3>
 <li>Copy the <code>Makefile.am</code> and the driver code <code>joes_poisson_code.cc</code> from <code>user_drivers/joe_cool</code> to <code>user_drivers/josephine_cool</code>.</li>
 <li>Return to <code>oomph-lib's</code> top-level directory and re-run <code>./autogen.sh</code> to generate the required Makefile etc. in your own directory.</li>
 <li>You may now return to your own directory in <code>user_drivers</code> and make your own driver code: <div class="fragment"><div class="line">cd user_drivers/josephine_cool</div>
-<div class="line"><a class="code" href="the__distribution_8txt.html#ae0e613792058a55170dfbb1e9e4831ec">make</a></div>
+<div class="line">make</div>
 </div><!-- fragment --> This will create the required executable. <br  />
 <br  />
 </li>
@@ -499,8 +441,8 @@ Adding new libraries and linking against them from driver codes</h3>
 </li>
 <li>Return to the top-level <code>oomph-lib</code> directory and re-run <code>autogen.sh</code>.</li>
 <li>You may now return to your own directory in <code>user_src</code> and make and install our own library <div class="fragment"><div class="line">cd user_src/jacqueline_cool</div>
-<div class="line"><a class="code" href="the__distribution_8txt.html#ae0e613792058a55170dfbb1e9e4831ec">make</a></div>
-<div class="line"><a class="code" href="the__distribution_8txt.html#ae0e613792058a55170dfbb1e9e4831ec">make</a> <a class="code" href="the__distribution_8txt.html#a450df5a275b46b68f1cc00515f04aefa">install</a></div>
+<div class="line">make</div>
+<div class="line">make install</div>
 </div><!-- fragment --> This will create the library and install it in <code>build/lib</code> <br  />
 <br  />
  The <code>Makefile</code>.<code>am</code> for libraries is slightly more complicated (though reasonably well documented) so &ndash; for now &ndash; we'll just list it here and hope that the changes required to include additional sources are obvious. If you really can't figure it out, send us an email and prompt us to complete this bit of the documentation.... <br  />
@@ -663,7 +605,7 @@ Writing/linking user code without autotools</h2>
 <div class="line">         mpic++ $(SHARED_LIBRARY_FLAGS) $&lt; -o $@ \</div>
 <div class="line">               -L$(OOMPH-LIB_LIB_DIR) $(EXTERNAL_DIST_LIBRARIES) $(OOMPH-LIB_LIBS) \</div>
 <div class="line">                $(OOMPH-LIB_EXTERNAL_LIBS) $(FLIBS)</div>
-</div><!-- fragment --><p>The version that is generated during the build process on your machine provides template for your own customised Makefiles. When modifying the sample to different driver codes, you should not (have to) edit any of the "installation specific" variables. Simply specify the <code>oomph-lib</code> (sub-)libraries that you wish to link against in the <code>OOMPH_LIB-LIBS</code> variable (in the example shown above, we are linking against the <code>generic</code> and <code>poisson</code> libraries), and specify the dependencies for your own driver code, following the usual <code>Makefile</code> syntax. The executable may then be created by the usual </p><div class="fragment"><div class="line"><a class="code" href="the__distribution_8txt.html#ae0e613792058a55170dfbb1e9e4831ec">make</a> -f makefile.sample my_demo_code</div>
+</div><!-- fragment --><p>The version that is generated during the build process on your machine provides template for your own customised Makefiles. When modifying the sample to different driver codes, you should not (have to) edit any of the "installation specific" variables. Simply specify the <code>oomph-lib</code> (sub-)libraries that you wish to link against in the <code>OOMPH_LIB-LIBS</code> variable (in the example shown above, we are linking against the <code>generic</code> and <code>poisson</code> libraries), and specify the dependencies for your own driver code, following the usual <code>Makefile</code> syntax. The executable may then be created by the usual </p><div class="fragment"><div class="line">make -f makefile.sample my_demo_code</div>
 </div><!-- fragment --><p><a class="anchor" id="apple_linking"></a> <b>Note/Disclaimer:</b> The sample <code>Makefile</code> generated during <code>oomph-lib's</code> installation should work for most (if not all) linux machines, though it may require slight tweaks for Darwin (the BSD-derived UNIX core of Apple's OSX operating system). Problems are most likely to arise from the <code>SHARED_LIBRARY_FLAGS</code> variable. As mentioned in the comment in the sample <code>Makefile</code>, on such machines the fragment <code>-Wl,&ndash;rpath -Wl,</code> should be deleted from the <code>SHARED_LIBRARY_FLAGS</code> variable.</p>
 <hr  />
  <hr  />
@@ -672,10 +614,6 @@ PDF file</h1>
 <p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
-<div class="ttc" id="athe__distribution_8txt_html_ae663bd6cf76ba6ed02e28b120477cf7c"><div class="ttname"><a href="the__distribution_8txt.html#ae663bd6cf76ba6ed02e28b120477cf7c">check</a></div><div class="ttdeci">c make c check</div><div class="ttdef"><b>Definition:</b> <a href="the__distribution_8txt_source.html#l00151">the_distribution.txt:151</a></div></div>
-<div class="ttc" id="athe__distribution_8txt_html_ad3083ce9e1c95654db5f3fef75b58f52"><div class="ttname"><a href="the__distribution_8txt.html#ad3083ce9e1c95654db5f3fef75b58f52">directory</a></div><div class="ttdeci">&lt;/script &gt;&lt;/p &gt; endhtmlonly See the&lt; a href=&quot;../../change_log/html/index.html&quot;&gt; change log page&lt;/a &gt; for an overview of the changes made since the previous release&lt;/p &gt; section instructions The download install step by step&lt; HR &gt;&lt; HR &gt; section download Get the distribution subsection tar_file you can specify where the distribution is placed By default subversion will place it into a directory called&lt; code &gt; trunk&lt;/code &gt;&lt; HR &gt; section install Install the distribution subsection standard_install e g to verify that the default build directory(&lt; code &gt;build&lt;/code &gt;, relative to the oomph-lib home directory) is appropriate before starting the build. By default</div></div>
-<div class="ttc" id="athe__distribution_8txt_html_a450df5a275b46b68f1cc00515f04aefa"><div class="ttname"><a href="the__distribution_8txt.html#a450df5a275b46b68f1cc00515f04aefa">install</a></div><div class="ttdeci">c make c install</div><div class="ttdef"><b>Definition:</b> <a href="the__distribution_8txt_source.html#l00151">the_distribution.txt:151</a></div></div>
-<div class="ttc" id="athe__distribution_8txt_html_ae0e613792058a55170dfbb1e9e4831ec"><div class="ttname"><a href="the__distribution_8txt.html#ae0e613792058a55170dfbb1e9e4831ec">make</a></div><div class="ttdeci">c make</div><div class="ttdef"><b>Definition:</b> <a href="the__distribution_8txt_source.html#l00150">the_distribution.txt:150</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
     <script src="../../js/jquery-1.12.0.min.js"></script>
@@ -703,7 +641,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 18 2021 17:36:16
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Mon Aug 23 2021 17:14:18
         </div>
       </div>
     </footer>
