@@ -21,46 +21,82 @@ _Notation:_ We prefix any command line input with "`>>>`" and generally show the
 We assume that you have created a GitHub account, and for the purpose of this document assume that your GitHub home page is https://github.com/JoeCoolDummy. Unless your name is Joe Cool Dummy, you'll have to change the name to your own.
 
 Contributing to `oomph-lib` involves three separate repositories:
-- The official repository, https://github.com/oomph-lib/oomph-lib.
+-   The official repository, https://github.com/oomph-lib/oomph-lib.
 
-     This is a remote repository, hosted on GitHub. In Git terminology this repository is known as `upstream`.
+    This is a remote repository, hosted on GitHub. In Git terminology this repository is known as `upstream`.
 
-- Your remote forked version of the official repository, https://github.com/JoeCoolDummy/oomph-lib.
+-   Your remote forked version of the official repository, https://github.com/JoeCoolDummy/oomph-lib.
 
-     This is a remote repository, hosted on GitHub. In Git terminology this repository is known as `origin` because it is the repository that you clone (as described in the next step) onto your local computer. You create the remote forked repository by going to the GitHub page for the official repository, https://github.com/oomph-lib/oomph-lib, and clicking on the fork button in the top right corner of that page.
+    This is a remote repository, hosted on GitHub. In Git terminology this repository is known as `origin` because it is the repository that you clone (as described in the next step) onto your local computer. You create the remote forked repository by going to the GitHub page for the official repository, https://github.com/oomph-lib/oomph-lib, and clicking on the fork button in the top right corner of that page.
 
     ![](doc/README/fork_button.png)
 
-     Pressing that button will create a deep copy of the repository in your own account.
+    Pressing that button will create a deep copy of the repository in your own account.
 
-     Make sure you enable the Actions. These ensure that, once you have committed any changes to your remote forked repository, the self-tests are run automatically on a variety of operating systems. These tests must pass before you can issue a pull request to merge your changes into the official repository. By default the Actions are disabled, so click on the Actions button
+    Make sure you enable the Actions. These ensure that, once you have committed any changes to your remote forked repository, the self-tests are run automatically on a variety of operating systems. These tests must pass before you can issue a pull request to merge your changes into the official repository. By default the Actions are disabled, so click on the Actions button
 
-     ![](doc/README/actions_button.png)
+    ![](doc/README/actions_button.png)
 
-     and enable the workflows:
+    and enable the workflows:
 
-     ![](doc/README/enable_workflows.png)
+    ![](doc/README/enable_workflows.png)
 
 
-- The cloned repository on your computer (obtained by cloning your forked repository).
+-   The cloned repository on your computer (obtained by cloning your forked repository).
 
     This repository is local to your computer and is cloned from your remote forked repository. It is where you do all your work before ultimately commiting it, via the procedure described below, to the GitHub-hosted remote repositories.
 
     You create this repository from the command line on your computer, using
-   ```bash
-   >>> git clone git@github.com:JoeCoolDummy/oomph-lib.git
-   ```
-   This command will create a new directory, `oomph-lib` which contains all the code and the relevant Git information. Have a look around:
-   ```bash
-   >>> cd oomph-lib
-   >>> ls -l
-   ```
+    ```bash
+    >>> git clone git@github.com:JoeCoolDummy/oomph-lib.git
+    ```
+    This command will create a new directory, `oomph-lib` which contains all the code and the relevant Git information.
 
-The official (`upstream`) repository has two key branches: `main` and `development`. These have now made it onto your computer. You can list the branches as follows:
+    If you haven't connected to GitHub via SSH before, you might encounter the following error:
+    ```bash
+    Cloning into 'oomph-lib'...
+    git@github.com: Permission denied (publickey).
+    fatal: Could not read from remote repository.
+
+    Please make sure you have the correct access rights
+    and the repository exists.
+    ```
+    To address this issue complete the following steps (links to the relevant GitHub resources have been provided):
+    1. [Generate a new SSH key if you don't have one.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key) 
+    2. [Add the new SSH key to the ssh-agent.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent) 
+    3. [Add the new SSH key to your GitHub account.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+    
+    More details, if required, can be found on [Connecting to GitHub with SSH](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
+    
+    
+    For consistency, we will use SSH commands in this document wherever possible.
+    If you would prefer to use the HTTPS-based equivalents instead, replace all occurrences of 
+    ```bash
+    git@github.com:JoeCoolDummy/oomph-lib.git
+    ``` 
+    with 
+    ```bash
+    https://github.com/JoeCoolDummy/oomph-lib
+    ```
+    **NOTE:** It used to be possible to interact with GitHub via an alternative, HTTPS-based protocol that required you to provide a username and a password. [Password-based authentication has now been deprecated by GitHub, and replaced by "token-based authentication"](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/). Therefore, if you wish to (continue to) operate in this mode you will need to generate your own PAT. Instructions on how to do this can be found on [Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+
+    Once cloning is complete, have a look around:
+    ```bash
+    >>> cd oomph-lib
+    >>> ls -l
+    ```
+
+The official (`upstream`) repository has two key branches: `main` and `development`. These have now made it onto your computer. You can list the local branches as follows:
 ```bash
 >>> git branch
   development
   main
+```
+If the `development` branch is not listed when running `git branch`, you can switch to it by using:
+```bash
+>>> git checkout development
+Branch 'development' set up to track remote branch 'development' from 'origin'.
+Switched to a new branch 'development'
 ```
 You should only ever interact with the `development` branch. The `main` branch is only updated (and never by you!) when a new stable version with significant new features is available and needs to be shared with the whole wide world.
 
@@ -330,7 +366,7 @@ Described below is an alternative way to pull changes from the official reposito
 
 2. If you haven't done this already, add the upstream repository as a new remote repository named `upstream`
    ```bash
-   >>> git remote add upstream https://github.com/oomph-lib/oomph-lib
+   >>> git remote add upstream git@github.com:oomph-lib/oomph-lib.git
    ```
 
 3. Confirm that a remote named `upstream` has been added to your list of remotes
