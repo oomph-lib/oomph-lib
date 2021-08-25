@@ -233,7 +233,7 @@ This involves the following steps:
    in your local repository) but if you have not committed your work, the changes will automatically be moved across to the
    branch you are switching to. This is unlikely to be the desired outcome as we are specifically working on a separate
    branch to keep our new work isolated from the rest of the code. If you accidentally ended up moving changed files onto another branch
-   you can simply switch back to the branch you were just on (i.e. do  `git checkoutfeature-add-new-important-headers`) and commit your changes there.
+   you can simply switch back to the branch you were just on (i.e. do  `git checkout feature-add-new-important-headers`) and commit your changes there.
    When you then switch back to the `main` branch, these changes will no longer follow you.
 
    If your work is not quite ready to be committed, you can save your changes for later by first running
