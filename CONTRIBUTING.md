@@ -298,6 +298,8 @@ This involves the following steps:
      GitHub will show you that "This branch is n commits behind `oomph-lib:development`."
      The "Fetch upstream" button allows a comparison ("Compare") and "Fetch and merge". Go for the latter when happy. GitHub will now announce that "This branch is even with `oomph-lib:development`".
 
+   **Note: It is a good idea to do this regularly to make sure that you have the latest changes.**
+
 8. Now the `development` branch on your computer (cloned from the forked
    remote repository) is out of sync with the updated version at GitHub. (And if you do `git difftool feature-add-new-important-headers..development` you'll see that the `development` branch obviously(!) does not yet contain the changes we've made in the local forked `feature-add-new-important-headers` branch.) So pull the updated
    `development` branch from the `origin` repository, as follows:
