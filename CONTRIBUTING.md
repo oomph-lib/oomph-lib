@@ -62,19 +62,19 @@ Contributing to `oomph-lib` involves three separate repositories:
     and the repository exists.
     ```
     To address this issue complete the following steps (links to the relevant GitHub resources have been provided):
-    1. [Generate a new SSH key if you don't have one.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key) 
-    2. [Add the new SSH key to the ssh-agent.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent) 
+    1. [Generate a new SSH key if you don't have one.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key)
+    2. [Add the new SSH key to the ssh-agent.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
     3. [Add the new SSH key to your GitHub account.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
-    
+
     More details, if required, can be found on [Connecting to GitHub with SSH](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
-    
-    
+
+
     For consistency, we will use SSH commands in this document wherever possible.
-    If you would prefer to use the HTTPS-based equivalents instead, replace all occurrences of 
+    If you would prefer to use the HTTPS-based equivalents instead, replace all occurrences of
     ```bash
     git@github.com:JoeCoolDummy/oomph-lib.git
-    ``` 
-    with 
+    ```
+    with
     ```bash
     https://github.com/JoeCoolDummy/oomph-lib
     ```
@@ -409,6 +409,24 @@ directly anyway!) After formatting your code it will create an extra commit
 containing any changes that were made. If your code did not require any changes,
 an additional commit will not be created.
 
+To manually format specific files containing C++ code with `clang-format`, you
+will need to pass their names to the `clang-format` command and also specify the
+`-i` and `--style=file` flags. These flags specify that the formatting should be
+performed "in-place" and using the style specification provided in the
+`.clang-format` file, respectively. For example, to format two files named
+`file1.cc` and `file2.cc`, use the following:
+```bash
+>>> clang-format -i --style=file file1.cc file2.cc
+```
+Any number of files can be supplied to this command so if, instead, you
+want to format all `.h` and `.cc` files in a folder, use the following:
+```bash
+>>> clang-format -i --style=file *.{h,cc}
+```
+Be warned, you should not use the latter command in the `src/generic` folder as
+some of the files in this folder contain C code that we purposely avoid formatting.
+
+_For the above to work, you will need at least version 10.0.0 of `clang-format`._
 ## Pre-commit hooks (optional)
 
 A pre-commit hook is something that automatically runs on your local computer
