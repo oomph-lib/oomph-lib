@@ -100,25 +100,6 @@ Switched to a new branch 'development'
 ```
 You should only ever interact with the `development` branch. The `main` branch is only updated (and never by you!) when a new stable version with significant new features is available and needs to be shared with the whole wide world.
 
-Your local forked repository is automatically aware of the GitHub-hosted remote counterpart it was cloned from (i.e. your forked one). The `git remote` command lists the URLs associated with the `origin` repository:
-```bash
->>> git remote -v
-origin	git@github.com:JoeCoolDummy/oomph-lib.git (fetch)
-origin	git@github.com:JoeCoolDummy/oomph-lib.git (push)
-```
-You can therefore use `origin` as a shorthand for the full URL. It is useful to add a similar shorthand for the official `oomph-lib` repository (the `upstream` one):
-```bash
->>> git remote add upstream git@github.com:oomph-lib/oomph-lib.git
-```
-You can check that this is now known within your local forked repository:
-```bash
->>> git remote -v
-origin	git@github.com:JoeCoolDummy/oomph-lib.git (fetch)
-origin	git@github.com:JoeCoolDummy/oomph-lib.git (push)
-upstream	git@github.com:oomph-lib/oomph-lib.git (fetch)
-upstream	git@github.com:oomph-lib/oomph-lib.git (push)
-```
-
 ## The workflow
 We will assume that you have updated your remote forked repository from the official one, and have updated the `development` branch on your computer before doing any new
 work. (We show below how this is done as part of the overall workflow but want
@@ -371,18 +352,21 @@ Described below is an alternative way to pull changes from the official reposito
 
 3. Confirm that a remote named `upstream` has been added to your list of remotes
    ```bash
-   >>> git remote
+   >>> git remote -v
+   origin	git@github.com:JoeCoolDummy/oomph-lib.git (fetch)
+   origin	git@github.com:JoeCoolDummy/oomph-lib.git (push)
+   upstream	git@github.com:oomph-lib/oomph-lib.git (fetch)
+   upstream	git@github.com:oomph-lib/oomph-lib.git (push)
    ```
-
 4. Fetch the upstream copy of the `development` branch and immediately merge it into your local copy
    ```bash
-   >>> git pull upstream
+   >>> git pull upstream development
    ```
 
 5. Resolve any merge conflicts you may have. Strictly speaking, you
    should only be using the `development` branch to stay in sync with the upstream repository i.e. you shouldn't be adding changes to it directly yourself, so there should never be any merge conflicts.
 
-7. Now push the changes in your local forked repository up to your remote forked
+6. Now push the changes in your local forked repository up to your remote forked
    repository (`origin`)
    ```bash
    >>> git push origin development
