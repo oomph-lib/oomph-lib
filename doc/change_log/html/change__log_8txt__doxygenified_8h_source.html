@@ -271,548 +271,588 @@
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">\subsection one_point_zero_to_two_point_zero Changes between version 1.0 and 2.0.*</span></div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">\subsubsection new_functionality_two_point_zero Major new functionality</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">\subsubsection new_functionality_two_point_zero Major new functionality/changes</span></div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">- bla</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">- bla</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">- and bla</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">.</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">\subsection zero_point_nine_to_one_point_zero Changes between version 0.9 and 1.0.*</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">\subsubsection new_functionality_one_point_zero Major new functionality</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">- Provided the capability to solve the Helmholtz equation (with</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">  various ways of implementing the</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">  Sommerfeld radiation condition), the time-harmonic equations of linear</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">  elasticity, and the interaction between these two systems of</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">  equations in time-harmonic acoustic fluid structure</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">  interaction problems. All equations are implemented in cartesian and</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">  cylindrical polar coordinates (in the latter case, using an azimuthal Fourier </span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">  decomposition for the solution).</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">- Provided block preconditioners for the solution of</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">  large-displacement fluid-structure interaction problems, based the </span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">  coupling of full</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">  nonlinear 2D/3D elasticity and the Navier-Stokes equations.</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">- Implemented the linearised Navier-Stokes equations (with the option to study</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">  their solutions as perturbations relative to a base state that is itself</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">  governed by the full Navier-Stokes equations).</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">- Moved to C++11 standard and now use automatic formatting of code in</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">  the \c src directory, using \c clang-format.</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">- Upgraded all python scripts to python3.</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">- Included \c CGAL, \c GMG, \c MPFR and \c Boost into the third-party libraries</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">  that are shipped and automatically installed with \c</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">  oomph-lib. Existing installations can be used instead (via suitable</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">  flags in the configure options), but \c oomph-lib</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">  is only guaranteed to work with the versions provided. This functionality</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">  does not work on macOS so macOS users must add </span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">  the \c --enable-suppress-cgal-build flag to their configuration options </span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">  to ensure that this doesn&#39;t break their build.</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">  They are used for more efficient implementations of \c</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">  locate_zeta(...) functionality.</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">  \n\n </span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">- Generalised unstructured 3D (tet-)mesh generation procedures so it can use \c</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">  tetgen and \c gmsh.</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">  \n\n </span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">- Provided scripts that (i) download the third-party tar files (for \c MUMPS,</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">  \c trilinos and \c hypre) and (ii) move the built installations to</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">  permanent locations.</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">- Provided space-time discretisations for time-periodic unsteady-heat and</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">  Navier-Stokes equations.</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">- Implemented a geometric multigrid solver for scalar PDEs (tested</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">  for the Poisson and Helmholtz equations).</span></div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">- Provided elements for the solution of the axisymmetric equations of </span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">  linear elasticity. \n\n</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">- Finished what is hopefully the final rewrite of the (parallel) block</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">  preconditioning framework and its extensive tutorial.</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">- Provided elements for the solution of the Foeppl-von-Karman</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">  equations in various formulations (using either an Airy-stress </span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">  function or the in-plane displacements) and in various coordinate</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">  systems.</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">- Implemented the \c QuadFromTriangleMesh to construct quad-based meshes</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">  from triangle meshes.</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">- Provided functionality to impose periodicity for three-dimensional</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">  brick meshes.</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">- Provided machinery to create three-dimensional meshes based on the</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">  &quot;extrusion&quot; of a two-dimensional mesh; takes time-dependent</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">  macro-element behaviour into account.</span></div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">- Provided elements for Darcy porous media flow and Biot-type</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">  poro-elasticity, including the ability to use the latter elements</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">  in fluid-structure interaction problems which are governed by the equations</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">  of poro-elasticity coupled to the Navier-Stokes equations.</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">- Implemented the ability adapt unstructured meshes in 2D</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">  (in serial and in parallel) and (in a parallel setting) to </span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">  distribute such meshes over multiple processors, and to perform</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">  load balancing in spatially adaptive simulations.</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">- Provided elements for the solution of elements for the solution</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">  of the Navier-Stokes equations with generalised Newtonian</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">  constitutive equations (i.e. non-Newtonian behaviour in which</span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">  the viscosity depends on the invariants of the rate-of-strain </span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">  tensor).\n\n</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">- Provided machinery to output paraview (vtu and vtp) files directly</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">  (implemented for selected elements; broken virtual functions</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">  in base classes provide instructions what to do for others). \n\n</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">- Provided machinery to establish what the equations/unknowns in </span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">  a fully-built problem represent. Calling &lt;code&gt;Problem::describe_dofs()&lt;/code&gt;</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">  trawls recursively through the oomph-lib object hierarchy to</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">  describe what each degree of freedom represents (from the Problem&#39;s,</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">  Meshes&#39; and Nodes&#39; point of view). Very useful for debugging (e.g. </span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">  &quot;Why are all the entries in the n-th row/column in the Jacobian </span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">   zero?&quot; or &quot;The n-th residual is enormous -- which equation does it</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">   correspond to?&quot;, etc.)</span></div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">- Provided machinery for hp adaptivity and p-type spectral elements</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">  with mortar constraints in 2D and 3D.\n\n</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">- Added interfaces to the Trilinos ANASAZI eigensolver to allow</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">  parallel solution of eigenproblems. \n\n</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">- Basic implementation of discontinuous Galerkin methods for general</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">  flux transport problems.\n\n</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">- Many new detailed tutorials explaining:\n\n</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">  - How to use \t oomph-lib in parallel and how to (optionally) distribute </span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">    problems over multiple processors and to perform load balancing when</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">    performing spatially-adaptive, distributed simulations. </span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">    \n\n</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">  - How to use oomph-lib&#39;s block preconditioning framework. </span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">    \n\n</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">  - How to solve large-displacement fluid-structure interaction</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">    problems, based the coupling of full nonlinear 2D/3D elasticity </span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">    and the Navier-Stokes equations, incl. the use of preconditioners</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">    and spatial adaptivity. \n\n</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">  - How to generate unstructured 2D meshes whose curvlinear boundaries are</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">    described my \c GeomObjects; these boundaries are respected under</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">    mesh refinement, i.e. the mesh converges to the exact domain geometry, </span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">    rather than using the geometry defined by the initial, coarse</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">    discretisation. \n\n</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">  - How to simulate steady and unsteady free-surface flows in various </span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">    geometries. \n\n</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">  - How to simulate the transport of immersed solid particles in</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">    viscous flow. \n\n</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">  - How to implement and solve surface transport equations, such</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">    as insoluble and soluble surfactant problems. \n\n</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">  - How to solve the Helmholtz equations in a variety of coordinate</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">    systems and how to apply the Sommerfeld radiation condition by</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">    ABCs, DTNs, or PMLs. \n\n</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">  - How to solve time-harmonic acoustic fluid-structure interaction</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">    problems in a variety of coordinate systems. \n\n</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">  - ...\n\n</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">. </span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">Have a look through the &lt;a href=&quot;../../example_code_list/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">extensive list of example codes&lt;/a&gt; to see what else is available.</span></div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">.   </span></div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">\subsection zero_point_eight_five_to_zero_point_nine Changes between version 0.85 and 0.9</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">\subsubsection new_functionality_zero_point_nine Major new functionality</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">- Significantly extended \c oomph-lib&#39;s parallel processing</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">  capabilities. The library&#39;s solver and (block) preconditioning framework is</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">  now fully parallelised; the parallel assembly of the Jacobian</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">  and residual vector has been optimised, and problems can be </span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">  now distributed by domain decomposition techniques. </span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">  &lt;a href=&quot;../../mpi/general_mpi/html/index.html&quot;&gt;A new tutorial&lt;/a&gt;</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">  and various &lt;a href=&quot;../../example_code_list/html/index.html#parallel&quot;&gt;</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">  new demo driver codes&lt;/a&gt; demo driver codes </span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">  provide an overview of these capabilities.</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">- Completed the documentation of \c oomph-lib&#39;s solid</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">  mechanics (large-displacement elasticity) capabilities. We provide </span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">  an overview of the</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">  &lt;a href=&quot;../../solid/solid_theory/html/index.html&quot;&gt;theory and </span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">  implementation&lt;/a&gt;, as well as</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">  &lt;a href=&quot;../../example_code_list/html/index.html#solid&quot;&gt;numerous </span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">  tutorials&lt;/a&gt; discussing the solution of steady and unsteady, </span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">  2D and 3D problems with compressible and incompressible</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">  materials on structured and unstructured meshes.</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">- Developed a &lt;a href=&quot;../../meshes/mesh_from_vmtk/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">  tutorial&lt;/a&gt; that shows how to use the </span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">  &lt;a href=&quot;http://www.vmtk.org&quot;&gt;Vascular </span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">  Modeling Toolkit (VMTK)&lt;/a&gt; to generate \c oomph-lib meshes</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">  from medical images. The methodology is used in the following driver codes:</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">  - &lt;a href=&quot;../../solid/vmtk_solid/html/index.html&quot;&gt;The inflation of a </span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">    blood vessel.&lt;/a&gt;</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">    \n\n</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">  - &lt;a href=&quot;../../navier_stokes/vmtk_fluid/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">    Finite Reynolds number flow through a (rigid) iliac bifurcation.&lt;/a&gt;</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">    \n\n</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">  - &lt;a href=&quot;../../interaction/vmtk_fsi/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">    Finite Reynolds number flow through an elastic iliac bifurcation.&lt;/a&gt;</span></div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">  .</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">- Extended FSI capabilities so that such problems can be solved</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">  on unstructured meshes. We provide new tutorials</span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">  that demonstrate this capability for </span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">  &lt;a href=&quot;../../interaction/unstructured_fsi/html/index.html&quot;&gt;2D&lt;/a&gt; and</span></div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">  &lt;a href=&quot;../../interaction/unstructured_three_d_fsi/html/index.html&quot;&gt;3D&lt;/a&gt; </span></div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">  problems.</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">- Introduced \c ElementWithExternalElement as base class for </span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">  multi-physics elements in which elements in different meshes/</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">  domains interact via source/load functions (e.g. in </span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">  fluid-structure interaction or thermal convection problems).</span></div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">  See the new tutorials discussing the </span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">  &lt;a href=&quot;../../multi_physics/multi_domain_ref_b_convect/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">  serial&lt;/a&gt; and</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">  &lt;a href=&quot;../../mpi/boussinesq_convection/html/index.html&quot;&gt;parallel&lt;/a&gt;</span></div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">  solution of multi-physics problems by multi-domain approaches.</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">- Parallelised and optimised the \c MeshAsGeomObject class to use</span></div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">  bin structures to accelerate the search in \c locate_zeta(...).</span></div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">- \c FiniteElements are now \c GeomObjects within which their local</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">  coordinates act as their intrinsic coordinates.</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">- Implemented a Krylov-subspace solver for the solution of</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">  single-equation-augmented linear systems (\c AugmentedGMRES ).</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">\subsection zero_point_nine_to_one_point_zero Changes between version 0.9 and 1.0.*</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">\subsubsection new_functionality_one_point_zero Major new functionality</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">- Provided the capability to solve the Helmholtz equation (with</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">  various ways of implementing the</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">  Sommerfeld radiation condition), the time-harmonic equations of linear</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">  elasticity, and the interaction between these two systems of</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">  equations in time-harmonic acoustic fluid structure</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">  interaction problems. All equations are implemented in cartesian and</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">  cylindrical polar coordinates (in the latter case, using an azimuthal Fourier </span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">  decomposition for the solution).</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">- Provided block preconditioners for the solution of</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">  large-displacement fluid-structure interaction problems, based the </span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">  coupling of full</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">  nonlinear 2D/3D elasticity and the Navier-Stokes equations.</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">- Implemented the linearised Navier-Stokes equations (with the option to study</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">  their solutions as perturbations relative to a base state that is itself</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">  governed by the full Navier-Stokes equations).</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">- Provided elements for the solution of the axisymmetric equations of </span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">  linear elasticity. \n\n</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">- Finished what is hopefully the final rewrite of the (parallel) block</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">  preconditioning framework and its extensive tutorial.</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">- Provided elements for the solution of the Foeppl-von-Karman</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">  equations in various formulations (using either an Airy-stress </span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">  function or the in-plane displacements) and in various coordinate</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">  systems.</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">- Provided elements for Darcy porous media flow and Biot-type</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">  poro-elasticity, including the ability to use the latter elements</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">  in fluid-structure interaction problems which are governed by the equations</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">  of poro-elasticity coupled to the Navier-Stokes equations.</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">- Implemented the ability adapt unstructured meshes in 2D</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">  (in serial and in parallel) and (in a parallel setting) to </span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">  distribute such meshes over multiple processors, and to perform</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">  load balancing in spatially adaptive simulations.</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">- Provided elements for the solution of elements for the solution</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">  of the Navier-Stokes equations with generalised Newtonian</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">  constitutive equations (i.e. non-Newtonian behaviour in which</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">  the viscosity depends on the invariants of the rate-of-strain </span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">  tensor).\n\n</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">- Provided machinery to output paraview (vtu and vtp) files directly</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">  (implemented for selected elements; broken virtual functions</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">  in base classes provide instructions what to do for others). \n\n</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">- Provided machinery to establish what the equations/unknowns in </span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">  a fully-built problem represent. Calling &lt;code&gt;Problem::describe_dofs()&lt;/code&gt;</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">  trawls recursively through the oomph-lib object hierarchy to</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">  describe what each degree of freedom represents (from the Problem&#39;s,</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">  Meshes&#39; and Nodes&#39; point of view). Very useful for debugging (e.g. </span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">  &quot;Why are all the entries in the n-th row/column in the Jacobian </span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">   zero?&quot; or &quot;The n-th residual is enormous -- which equation does it</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">   correspond to?&quot;, etc.)</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">- Provided machinery for hp adaptivity and p-type spectral elements</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">  with mortar constraints in 2D and 3D.\n\n</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">- Added interfaces to the Trilinos ANASAZI eigensolver to allow</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">  parallel solution of eigenproblems. \n\n</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">- Basic implementation of discontinuous Galerkin methods for general</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">  flux transport problems.\n\n</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">- Many new detailed tutorials explaining:\n\n</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">  - How to use \t oomph-lib in parallel and how to (optionally) distribute </span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">    problems over multiple processors and to perform load balancing when</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">    performing spatially-adaptive, distributed simulations. </span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">    \n\n</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">  - How to use oomph-lib&#39;s block preconditioning framework. </span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">    \n\n</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">  - How to solve large-displacement fluid-structure interaction</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">    problems, based the coupling of full nonlinear 2D/3D elasticity </span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">    and the Navier-Stokes equations, incl. the use of preconditioners</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">    and spatial adaptivity. \n\n</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">  - How to generate unstructured 2D meshes whose curvlinear boundaries are</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">    described my \c GeomObjects; these boundaries are respected under</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">    mesh refinement, i.e. the mesh converges to the exact domain geometry, </span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment">    rather than using the geometry defined by the initial, coarse</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">    discretisation. \n\n</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">  - How to simulate steady and unsteady free-surface flows in various </span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">    geometries. \n\n</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">  - How to simulate the transport of immersed solid particles in</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">    viscous flow. \n\n</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">  - How to implement and solve surface transport equations, such</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">    as insoluble and soluble surfactant problems. \n\n</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">  - How to solve the Helmholtz equations in a variety of coordinate</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">    systems and how to apply the Sommerfeld radiation condition by</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">    ABCs, DTNs, or PMLs. \n\n</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">  - How to solve time-harmonic acoustic fluid-structure interaction</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">    problems in a variety of coordinate systems. \n\n</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">  - ...\n\n</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">. </span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">Have a look through the &lt;a href=&quot;../../example_code_list/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">extensive list of example codes&lt;/a&gt; to see what else is available.</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">.   </span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">\subsection zero_point_eight_five_to_zero_point_nine Changes between version 0.85 and 0.9</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">\subsubsection new_functionality_zero_point_nine Major new functionality</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">- Significantly extended \c oomph-lib&#39;s parallel processing</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">  capabilities. The library&#39;s solver and (block) preconditioning framework is</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">  now fully parallelised; the parallel assembly of the Jacobian</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">  and residual vector has been optimised, and problems can be </span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">  now distributed by domain decomposition techniques. </span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">  &lt;a href=&quot;../../mpi/general_mpi/html/index.html&quot;&gt;A new tutorial&lt;/a&gt;</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">  and various &lt;a href=&quot;../../example_code_list/html/index.html#parallel&quot;&gt;</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">  new demo driver codes&lt;/a&gt; demo driver codes </span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">  provide an overview of these capabilities.</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">- Completed the documentation of \c oomph-lib&#39;s solid</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">  mechanics (large-displacement elasticity) capabilities. We provide </span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">  an overview of the</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">  &lt;a href=&quot;../../solid/solid_theory/html/index.html&quot;&gt;theory and </span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">  implementation&lt;/a&gt;, as well as</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">  &lt;a href=&quot;../../example_code_list/html/index.html#solid&quot;&gt;numerous </span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">  tutorials&lt;/a&gt; discussing the solution of steady and unsteady, </span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment">  2D and 3D problems with compressible and incompressible</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">  materials on structured and unstructured meshes.</span></div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">- Extended the \c Z2ErrorEstimator so that the elemental error estimate can be</span></div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">  based on the maximum of various distinct fluxes -- useful for</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">  multi-field problems such as Boussinesq convection. See the</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">  &lt;a href=&quot;../../multi_physics/refine_b_convect/html/index.html#comments&quot;&gt;</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">  tutorial&lt;/a&gt; for details.</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">- Developed a &lt;a href=&quot;../../meshes/mesh_from_vmtk/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">  tutorial&lt;/a&gt; that shows how to use the </span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">  &lt;a href=&quot;http://www.vmtk.org&quot;&gt;Vascular </span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">  Modeling Toolkit (VMTK)&lt;/a&gt; to generate \c oomph-lib meshes</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">  from medical images. The methodology is used in the following driver codes:</span></div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">- Added a structured, domain-based mesh for the discretisation of </span></div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">  tube-like domains. See the &lt;a href=&quot;../../meshes/mesh_list/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">  list of structured meshes&lt;/a&gt; for details. </span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">- Provided a new Lagrange-multiplier-based element, that allows the</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">  imposition of parallel in- or outflow from boundaries that are not</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">  aligned with coordinate planes. This is discussed in a</span></div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">  &lt;a href=&quot;../../navier_stokes/vmtk_fluid/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">  separate tutorial.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="comment">  - &lt;a href=&quot;../../solid/vmtk_solid/html/index.html&quot;&gt;The inflation of a </span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">    blood vessel.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">    \n\n</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">  - &lt;a href=&quot;../../navier_stokes/vmtk_fluid/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">    Finite Reynolds number flow through a (rigid) iliac bifurcation.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">    \n\n</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">  - &lt;a href=&quot;../../interaction/vmtk_fsi/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">    Finite Reynolds number flow through an elastic iliac bifurcation.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">  .</span></div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">- Provided a new mechanism that allows multiple \c FaceElements to be</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">  attached to same node, while providing the ability to distinguish</span></div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">  between different Lagrange multipliers stored at the same node. </span></div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">  This is discussed</span></div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">  in a &lt;a href=&quot;../../interaction/vmtk_fsi/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">  separate tutorial.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">- Extended FSI capabilities so that such problems can be solved</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">  on unstructured meshes. We provide new tutorials</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">  that demonstrate this capability for </span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">  &lt;a href=&quot;../../interaction/unstructured_fsi/html/index.html&quot;&gt;2D&lt;/a&gt; and</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">  &lt;a href=&quot;../../interaction/unstructured_three_d_fsi/html/index.html&quot;&gt;3D&lt;/a&gt; </span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">  problems.</span></div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">- Significantly extended oomph-lib&#39;s bifurcation tracking routines</span></div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">  (no tutorials yet, though).</span></div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">- Provided general framework and driver codes for discontinuous</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">  Galerkin methods and explicit timesteppers (no tutorials yet, though).</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">.</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">\subsubsection major_interface_changes_zero_point_nine Major interface changes</span></div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment">- \code SolidFiniteElement::add_jacobian_for_solid_ic() \endcode becomes </span></div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">  \code SolidFiniteElement::fill_in_jacobian_for_solid_ic()\endcode </span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">- Introduced \c ElementWithExternalElement as base class for </span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">  multi-physics elements in which elements in different meshes/</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">  domains interact via source/load functions (e.g. in </span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">  fluid-structure interaction or thermal convection problems).</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">  See the new tutorials discussing the </span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">  &lt;a href=&quot;../../multi_physics/multi_domain_ref_b_convect/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">  serial&lt;/a&gt; and</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">  &lt;a href=&quot;../../mpi/boussinesq_convection/html/index.html&quot;&gt;parallel&lt;/a&gt;</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">  solution of multi-physics problems by multi-domain approaches.</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">- Parallelised and optimised the \c MeshAsGeomObject class to use</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">  bin structures to accelerate the search in \c locate_zeta(...).</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment">- \c FiniteElements are now \c GeomObjects within which their local</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment">  coordinates act as their intrinsic coordinates.</span></div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">- \code SolidFiniteElement::add_residuals_for_ic()\endcode  becomes </span></div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">  \code SolidFiniteElement::fill_in_residuals_for_solid_ic()\endcode </span></div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment">- \code SolidFiniteElement::get_residuals_for_ic()\endcode  becomes </span></div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">  \code SolidFiniteElement::fill_in_residuals_for_solid_ic()\endcode </span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">- Extended the \c Z2ErrorEstimator so that the elemental error estimate can be</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment">  based on the maximum of various distinct fluxes -- useful for</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment">  multi-field problems such as Boussinesq convection. See the</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment">  &lt;a href=&quot;../../multi_physics/refine_b_convect/html/index.html#comments&quot;&gt;</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">  tutorial&lt;/a&gt; for details.</span></div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment">- Changed order of arguments in \c PVDEquationsBase::BodyForceFctPt </span></div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment">  so that time goes first (as it should!).</span></div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment">- Not exactly an interface change but important: </span></div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">  \c AlgebraicMeshes and  \c MacroElementNodeUpdateMeshes \b should now </span></div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">  specify the \c GeomObjects involved in their node update functions. </span></div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment">  (This \b must be done if such meshes are to be used in parallel </span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">  computations involving domain decomposition). The declaration of</span></div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">  the \c GeomObjects should use the functions</span></div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">  \c  AlgebraicMesh::add_geom_object_list_pt(...) and</span></div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">  \c MacroElementNodeUpdateMesh::set_geom_object_vector_pt(...),</span></div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">  respectively.</span></div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">- Added integration point arguments to all get_source-type functions in</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">  elements to allow for overloading in multi-domain calculations.</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">  For example, </span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="comment">- Added a structured, domain-based mesh for the discretisation of </span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="comment">  tube-like domains. See the &lt;a href=&quot;../../meshes/mesh_list/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="comment">  list of structured meshes&lt;/a&gt; for details. </span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="comment">- Provided a new Lagrange-multiplier-based element, that allows the</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="comment">  imposition of parallel in- or outflow from boundaries that are not</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="comment">  aligned with coordinate planes. This is discussed in a</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="comment">  &lt;a href=&quot;../../navier_stokes/vmtk_fluid/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="comment">  separate tutorial.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="comment">- Provided a new mechanism that allows multiple \c FaceElements to be</span></div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">  attached to same node, while providing the ability to distinguish</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment">  between different Lagrange multipliers stored at the same node. </span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment">  This is discussed</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment">  in a &lt;a href=&quot;../../interaction/vmtk_fsi/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">  separate tutorial.&lt;/a&gt;</span></div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">  NavierStokesEquations&lt;DIM&gt;::get_body_force_nst(const double&amp; time,</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">                                                 const Vector&lt;double&gt; &amp;s,</span></div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">                                                 const Vector&lt;double&gt; &amp;x,</span></div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">                                                 Vector&lt;double&gt; &amp;result)</span></div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">  \endcode                                                  </span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment">  has been changed to</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">  \code </span></div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment">  NavierStokesEquations&lt;DIM&gt;::get_body_force_nst(const double&amp; time,</span></div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">                                                 const unsigned&amp; ipt,</span></div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment">                                                 const Vector&lt;double&gt; &amp;s,</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">                                                 const Vector&lt;double&gt; &amp;x,</span></div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">                                                 Vector&lt;double&gt; &amp;result)</span></div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">- \c GeomObject::drdt(...) is now \c GeomObject::dposition_dt(...)</span></div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">  to make it consistent with all other functions of that type. </span></div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">- \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) now</span></div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">  requires a pointer to the \c Problem to be specified as the first argument. </span></div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">- Specification of wall and fluid meshes in \c FSIPreconditioner</span></div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">  changed from read/write access functions </span></div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">  \c FSIPreconditioner::navier_stokes_mesh_pt() and </span></div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">  \c FSIPreconditioner::wall_mesh_pt() to</span></div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">  \c FSIPreconditioner::set_navier_stokes_mesh(...) and </span></div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">  \c FSIPreconditioner::set_wall_mesh(...), respectively.</span></div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">- Specification of fluid mesh in \c NavierStokesLSCPreconditioner</span></div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">  changed from read/write access function </span></div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">  \c FSIPreconditioner::navier_stokes_mesh_pt()</span></div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">  to </span></div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">  \c FSIPreconditioner::set_navier_stokes_mesh(...).</span></div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">- Removed all explicit references to \c MPI_COMM_WORLD and the parameters</span></div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">  \c MPI_Helpers::Nproc \c MPI_Helpers::My_rank. The total number of</span></div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">  processors and the rank of each processor should be obtained from </span></div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">  the appropriate \c OomphCommunicator.</span></div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">- Replaced \c MPI_Helpers::setup(...) with \c MPI_Helpers::init(...)</span></div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">  and added \c MPI_Helpers::finalize(). These should be called instead</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">  of MPI&#39;s own \c init() and \c finalize() functions. </span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">- Introduced \c DoubleVector -- a distributable vector storing double</span></div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">  precision numbers.</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment">- Significantly extended oomph-lib&#39;s bifurcation tracking routines</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment">  (no tutorials yet, though).</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment">- Provided general framework and driver codes for discontinuous</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="comment">  Galerkin methods and explicit timesteppers (no tutorials yet, though).</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="comment">\subsubsection major_interface_changes_zero_point_nine Major interface changes</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">- \code SolidFiniteElement::add_jacobian_for_solid_ic() \endcode becomes </span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="comment">  \code SolidFiniteElement::fill_in_jacobian_for_solid_ic()\endcode </span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">- \code SolidFiniteElement::add_residuals_for_ic()\endcode  becomes </span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">  \code SolidFiniteElement::fill_in_residuals_for_solid_ic()\endcode </span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">- \code SolidFiniteElement::get_residuals_for_ic()\endcode  becomes </span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">  \code SolidFiniteElement::fill_in_residuals_for_solid_ic()\endcode </span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">- Changed order of arguments in \c PVDEquationsBase::BodyForceFctPt </span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment">  so that time goes first (as it should!).</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="comment">- Not exactly an interface change but important: </span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="comment">  \c AlgebraicMeshes and  \c MacroElementNodeUpdateMeshes \b should now </span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">  specify the \c GeomObjects involved in their node update functions. </span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">  (This \b must be done if such meshes are to be used in parallel </span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">  computations involving domain decomposition). The declaration of</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">  the \c GeomObjects should use the functions</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">  \c  AlgebraicMesh::add_geom_object_list_pt(...) and</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">  \c MacroElementNodeUpdateMesh::set_geom_object_vector_pt(...),</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">  respectively.</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">- Added integration point arguments to all get_source-type functions in</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">  elements to allow for overloading in multi-domain calculations.</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">  For example, </span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">  NavierStokesEquations&lt;DIM&gt;::get_body_force_nst(const double&amp; time,</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">                                                 const Vector&lt;double&gt; &amp;s,</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">                                                 const Vector&lt;double&gt; &amp;x,</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">                                                 Vector&lt;double&gt; &amp;result)</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">  \endcode                                                  </span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">  has been changed to</span></div>
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">- Merged \c CRDoubleMatrix and \c DistributableCRDoubleMatrix </span></div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">  into \c CRDoubleMatrix. (Note: \c CRDoubleMatrix is the only </span></div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">  distributable matrix within \c oomph-lib.)</span></div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">- Merged \c SuperLU and \c SuperLU_dist into \c SuperLUSolver.</span></div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">  If \c oomph-lib is compiled with MPI support, the parallel version</span></div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">  of the (exact) preconditioner is used automatically. This behaviour</span></div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">  can be over-ruled with the member function</span></div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">  SuperLUSolver::set_solver_type(...)</span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">  whose argument must be one of the three options listed in the enumeration </span></div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">  \c SuperLUSolver::Type. This allows the serial version of the solver to be</span></div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment">  used even if \c oomph-lib is compiled with MPI support.</span></div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">- Merged \c SuperLUPreconditioner and \c SuperLUDistPreconditioner </span></div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">  into \c SuperLUPreconditioner.</span></div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">  If \c oomph-lib is compiled with MPI support, the parallel version</span></div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">  of the solver is used automatically.</span></div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment">- Updated all solvers/preconditioners to handle new \c CRDoubleMatrix and </span></div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment">  \c DoubleVector.</span></div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment">- In \c NavierStokesLSCPreconditioner \n\n</span></div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="comment">  void set_f_preconditioner(Preconditioner&amp; new_f_preconditioner)</span></div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="comment">  and \n\n</span></div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="comment">  void set_p_preconditioner(Preconditioner&amp; new_f_preconditioner)</span></div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">  \code </span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">  NavierStokesEquations&lt;DIM&gt;::get_body_force_nst(const double&amp; time,</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">                                                 const unsigned&amp; ipt,</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">                                                 const Vector&lt;double&gt; &amp;s,</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">                                                 const Vector&lt;double&gt; &amp;x,</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">                                                 Vector&lt;double&gt; &amp;result)</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">- \c GeomObject::drdt(...) is now \c GeomObject::dposition_dt(...)</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">  to make it consistent with all other functions of that type. </span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">- \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) now</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">  requires a pointer to the \c Problem to be specified as the first argument. </span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">- Specification of wall and fluid meshes in \c FSIPreconditioner</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">  changed from read/write access functions </span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">  \c FSIPreconditioner::navier_stokes_mesh_pt() and </span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">  \c FSIPreconditioner::wall_mesh_pt() to</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">  \c FSIPreconditioner::set_navier_stokes_mesh(...) and </span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment">  \c FSIPreconditioner::set_wall_mesh(...), respectively.</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment">- Specification of fluid mesh in \c NavierStokesLSCPreconditioner</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment">  changed from read/write access function </span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment">  \c FSIPreconditioner::navier_stokes_mesh_pt()</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">  to </span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="comment">  \c FSIPreconditioner::set_navier_stokes_mesh(...).</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="comment">- Removed all explicit references to \c MPI_COMM_WORLD and the parameters</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="comment">  \c MPI_Helpers::Nproc \c MPI_Helpers::My_rank. The total number of</span></div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="comment">  processors and the rank of each processor should be obtained from </span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="comment">  the appropriate \c OomphCommunicator.</span></div>
 <div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="comment">  were changed to </span></div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment">  \code </span></div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="comment">  void set_f_preconditioner(Preconditioner* new_f_preconditioner_pt)</span></div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment">  and</span></div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment">  \code </span></div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="comment">  void set_p_preconditioner(Preconditioner* new_f_preconditioner_pt)</span></div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="comment">  respectively, to make them consistent with the rest of the code.</span></div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="comment">- Changed </span></div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="comment">- Replaced \c MPI_Helpers::setup(...) with \c MPI_Helpers::init(...)</span></div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="comment">  and added \c MPI_Helpers::finalize(). These should be called instead</span></div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment">  of MPI&#39;s own \c init() and \c finalize() functions. </span></div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="comment">- Introduced \c DoubleVector -- a distributable vector storing double</span></div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="comment">  precision numbers.</span></div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="comment">- Merged \c CRDoubleMatrix and \c DistributableCRDoubleMatrix </span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment">  into \c CRDoubleMatrix. (Note: \c CRDoubleMatrix is the only </span></div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="comment">  distributable matrix within \c oomph-lib.)</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="comment">- Merged \c SuperLU and \c SuperLU_dist into \c SuperLUSolver.</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="comment">  If \c oomph-lib is compiled with MPI support, the parallel version</span></div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="comment">  of the (exact) preconditioner is used automatically. This behaviour</span></div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="comment">  can be over-ruled with the member function</span></div>
 <div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="comment">  FiniteElement::get_block_numbers_for_unknowns(...)</span></div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment">  \endcode </span></div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment">  to </span></div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment">  FiniteElement::get_dof_numbers_for_unknowns(...)</span></div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment">  and </span></div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="comment">  FiniteElement::nblock_types()</span></div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="comment">  to </span></div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment">  FiniteElement::ndof_types()</span></div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="comment">- Nearly an interface change:  We now provide the option to exclude/wipe the </span></div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="comment">  validata from the distribution (during \c make \c dist). To make sure that</span></div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;<span class="comment">  the self-test procedure doesn&#39;t break if there&#39;s</span></div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;<span class="comment">  no validata, configure now assesses the</span></div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="comment">  availability of validata by checking the existence</span></div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;<span class="comment">  of </span></div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="comment">  demo_drivers/poisson/one_d_poisson/validata/one_d_poisson_results.dat.gz</span></div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="comment">  If this is not found, we&#39;ll assume that there&#39;s</span></div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="comment">  no validata anywhere. In that case, &quot;make check&quot; will still</span></div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;<span class="comment">  compile and run the demo drivers but not use</span></div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;<span class="comment">  fpdiff.py to compare them against the validata.</span></div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="comment">  The behaviour is thus similar to what&#39;s done if</span></div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="comment">  we don&#39;t have python. We therefore modified the </span></div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="comment">  &quot;no_python&quot; argument that used to be passed</span></div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="comment">  to all validate.sh scripts to suppress the</span></div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="comment">  execution of fpdiff.py and replaced it by</span></div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;<span class="comment">  &quot;no_fpdiff&quot;. As a result all validate.sh scripts</span></div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="comment">  had to be changed. MAKE SURE YOU UPDATE ANY NEW ONES BEFORE </span></div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="comment">  ADDING THEM TO THE DISTRIBUTION!</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="comment">  SuperLUSolver::set_solver_type(...)</span></div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment">  whose argument must be one of the three options listed in the enumeration </span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment">  \c SuperLUSolver::Type. This allows the serial version of the solver to be</span></div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment">  used even if \c oomph-lib is compiled with MPI support.</span></div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment">- Merged \c SuperLUPreconditioner and \c SuperLUDistPreconditioner </span></div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="comment">  into \c SuperLUPreconditioner.</span></div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="comment">  If \c oomph-lib is compiled with MPI support, the parallel version</span></div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment">  of the solver is used automatically.</span></div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment">- Updated all solvers/preconditioners to handle new \c CRDoubleMatrix and </span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment">  \c DoubleVector.</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="comment">- In \c NavierStokesLSCPreconditioner \n\n</span></div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="comment">  void set_f_preconditioner(Preconditioner&amp; new_f_preconditioner)</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;<span class="comment">  and \n\n</span></div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;<span class="comment">  void set_p_preconditioner(Preconditioner&amp; new_f_preconditioner)</span></div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<span class="comment">  were changed to </span></div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="comment">  \code </span></div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;<span class="comment">  void set_f_preconditioner(Preconditioner* new_f_preconditioner_pt)</span></div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="comment">  and</span></div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="comment">  \code </span></div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="comment">  void set_p_preconditioner(Preconditioner* new_f_preconditioner_pt)</span></div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="comment">  respectively, to make them consistent with the rest of the code.</span></div>
 <div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="comment">  To reflect the fact that the fpdiff-ing can now</span></div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;<span class="comment">  be suppressed for multiple reasons, we renamed</span></div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="comment">  bin/validate_no_python.sh</span></div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="comment">  to</span></div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;<span class="comment">  bin/dummy_validate.sh</span></div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;<span class="comment">- All the bools in calls to the various </span></div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="comment">  \c node_update(...) functions were changed to </span></div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;<span class="comment">  \c const \c bool&amp; (rather than \c bool).</span></div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;<span class="comment">- The constructors for all constitutive </span></div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;<span class="comment">  equations now take pointers to constitutive parameters</span></div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="comment">  rather than the parameters themselves. (With the</span></div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="comment">  previous approach, changing Young&#39;s modulus, say,</span></div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<span class="comment">  required the construction of a new constitutive </span></div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="comment">  equation object that then had to be passed to </span></div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="comment">  all elements again etc.)</span></div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="comment">- Got rid of all other instances where</span></div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="comment">  time argument was passed by copy rather than by</span></div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="comment">  constant reference -- as long as grep-ing for the</span></div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="comment">  pattern &#39;(double t&#39; detected it. In practice this</span></div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="comment">  involved various Navier-Stokes traction, body force</span></div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="comment">  and source functions. </span></div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="comment">.</span></div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
-<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
-<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;<span class="comment">\subsection zero_point_eight_to_zero_point_five Changes between version 0.8 and 0.85</span></div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="comment">\subsubsection new_functionality_zero_point_five Major new functionality</span></div>
-<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="comment">- Added a variety of iterative linear solvers and general-purpose</span></div>
-<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;<span class="comment">  preconditioners.</span></div>
-<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="comment">- Added wrappers to the powerful serial and parallel iterative</span></div>
-<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;<span class="comment">  solvers/preconditioners from the  Hyre and Trilinos libraries.</span></div>
-<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;<span class="comment">- Developed a general block preconditioning framework and used it</span></div>
-<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="comment">  implement problem-specific preconditioners for Navier-Stokes</span></div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="comment">  and fluid-structure-interaction problems. </span></div>
-<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;<span class="comment">  - &lt;a href=&quot;../../preconditioners/lsc_navier_stokes/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="comment">    Using \c oomph-lib&#39;s Least-Squares-Commutator Navier-Stokes </span></div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="comment">    preconditioner.&lt;/a&gt;</span></div>
-<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="comment">    \n\n</span></div>
-<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="comment">  - &lt;a href=&quot;../../preconditioners/fsi/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="comment">    Using \c oomph-lib&#39;s FSI preconditioner.&lt;/a&gt;</span></div>
-<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;<span class="comment">  .</span></div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="comment">- Provided segregated solver capabilities for fluid-structure </span></div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;<span class="comment">  interaction.</span></div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="comment">- Changed </span></div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;<span class="comment">  FiniteElement::get_block_numbers_for_unknowns(...)</span></div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="comment">  \endcode </span></div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="comment">  to </span></div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;<span class="comment">  FiniteElement::get_dof_numbers_for_unknowns(...)</span></div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;<span class="comment">  and </span></div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;<span class="comment">  FiniteElement::nblock_types()</span></div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;<span class="comment">  to </span></div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;<span class="comment">  FiniteElement::ndof_types()</span></div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="comment">- Nearly an interface change:  We now provide the option to exclude/wipe the </span></div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<span class="comment">  validata from the distribution (during \c make \c dist). To make sure that</span></div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="comment">  the self-test procedure doesn&#39;t break if there&#39;s</span></div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="comment">  no validata, configure now assesses the</span></div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment">  availability of validata by checking the existence</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="comment">  of </span></div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="comment">  demo_drivers/poisson/one_d_poisson/validata/one_d_poisson_results.dat.gz</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="comment">  If this is not found, we&#39;ll assume that there&#39;s</span></div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="comment">  no validata anywhere. In that case, &quot;make check&quot; will still</span></div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="comment">  compile and run the demo drivers but not use</span></div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="comment">  fpdiff.py to compare them against the validata.</span></div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;<span class="comment">  The behaviour is thus similar to what&#39;s done if</span></div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;<span class="comment">  we don&#39;t have python. We therefore modified the </span></div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;<span class="comment">  &quot;no_python&quot; argument that used to be passed</span></div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;<span class="comment">  to all validate.sh scripts to suppress the</span></div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;<span class="comment">  execution of fpdiff.py and replaced it by</span></div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;<span class="comment">  &quot;no_fpdiff&quot;. As a result all validate.sh scripts</span></div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;<span class="comment">  had to be changed. MAKE SURE YOU UPDATE ANY NEW ONES BEFORE </span></div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;<span class="comment">  ADDING THEM TO THE DISTRIBUTION!</span></div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;<span class="comment">  To reflect the fact that the fpdiff-ing can now</span></div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="comment">  be suppressed for multiple reasons, we renamed</span></div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="comment">  bin/validate_no_python.sh</span></div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;<span class="comment">  to</span></div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;<span class="comment">  bin/dummy_validate.sh</span></div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;<span class="comment">- All the bools in calls to the various </span></div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;<span class="comment">  \c node_update(...) functions were changed to </span></div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="comment">  \c const \c bool&amp; (rather than \c bool).</span></div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="comment">- The constructors for all constitutive </span></div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="comment">  equations now take pointers to constitutive parameters</span></div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="comment">  rather than the parameters themselves. (With the</span></div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;<span class="comment">  previous approach, changing Young&#39;s modulus, say,</span></div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="comment">  required the construction of a new constitutive </span></div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="comment">  equation object that then had to be passed to </span></div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;<span class="comment">  all elements again etc.)</span></div>
 <div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="comment">- Added a number of additional tutorials/demo codes illustrating</span></div>
-<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;<span class="comment">  \c oomph-lib&#39;s fluid-structure interaction capabilities:</span></div>
-<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="comment">  - &lt;a href=&quot;../../interaction/turek_flag/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;<span class="comment">    Turek &amp; Hron&#39;s FSI benchmark problem of flow past a &quot;flag&quot;.&lt;/a&gt;</span></div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;<span class="comment">    \n\n</span></div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;<span class="comment">  - &lt;a href=&quot;../../interaction/fsi_channel_with_leaflet/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;<span class="comment">    Flow in a channel with an elastic leaflet.&lt;/a&gt;</span></div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;<span class="comment">    \n\n</span></div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;<span class="comment">  - &lt;a href=&quot;../../interaction/fsi_channel_segregated_solver/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;<span class="comment">    Using \c oomph-lib&#39;s segregated solvers for</span></div>
-<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;<span class="comment">    fluid-structure-interaction  problems.&lt;/a&gt;</span></div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;<span class="comment">    \n\n</span></div>
-<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;<span class="comment">  - &lt;a href=&quot;../../preconditioners/fsi/html/index.html&quot;&gt;</span></div>
-<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;<span class="comment">    Using \c oomph-lib&#39;s FSI preconditioner.&lt;/a&gt;</span></div>
-<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;<span class="comment">  .</span></div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;<span class="comment">- MPI capability is now fully integrated into the library (rather</span></div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;<span class="comment">  than being kept in a separate mpi directory/sub-library) but not yet</span></div>
-<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;<span class="comment">  complete (or documented). Segments of code that involve</span></div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;<span class="comment">  MPI calls are surrounded by \c \#ifdef \c OOMPH_HAS_MPI \c [...] \c \#endif.</span></div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;<span class="comment">  They are only compiled if the \c --enable-MPI flag is specified</span></div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;<span class="comment">  at the configure stage.  </span></div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="comment">- Got rid of all other instances where</span></div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;<span class="comment">  time argument was passed by copy rather than by</span></div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="comment">  constant reference -- as long as grep-ing for the</span></div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="comment">  pattern &#39;(double t&#39; detected it. In practice this</span></div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;<span class="comment">  involved various Navier-Stokes traction, body force</span></div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;<span class="comment">  and source functions. </span></div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;<span class="comment">\subsection zero_point_eight_to_zero_point_five Changes between version 0.8 and 0.85</span></div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;<span class="comment">\subsubsection new_functionality_zero_point_five Major new functionality</span></div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;<span class="comment">- Added a variety of iterative linear solvers and general-purpose</span></div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;<span class="comment">  preconditioners.</span></div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;<span class="comment">- Added wrappers to the powerful serial and parallel iterative</span></div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;<span class="comment">  solvers/preconditioners from the  Hyre and Trilinos libraries.</span></div>
 <div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="comment">- Assuming you have \c pdflatex installed on your machine, </span></div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="comment">  the documentation is now not only built in html format</span></div>
-<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="comment">  (pretty but hard to print) but we also create associated</span></div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="comment">  pdf files. These are accessible via the link at the </span></div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;<span class="comment">  bottom of relevant html page.</span></div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;<span class="comment">- \c oomph-lib&#39;s build script, \c autogen.\c sh now allows for</span></div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="comment">  parallel compilation. This can lead to considerable speedups</span></div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;<span class="comment">  on multicore processors that are now widely available. To </span></div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;<span class="comment">  build \c oomph-lib in parallel, using up four threads</span></div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;<span class="comment">  run  \c autogen.\c sh as follows</span></div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;<span class="comment">  ./autogen.sh --jobs=4 </span></div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;<span class="comment">  or (if you are re-building) </span></div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;<span class="comment">  \code</span></div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="comment">  ./autogen.sh --jobs=4 --rebuild</span></div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;<span class="comment">  \endcode</span></div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;<span class="comment">- Angelo </span></div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;<span class="comment">  Simone has written a python script that converts \c oomph-lib&#39;s</span></div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;<span class="comment">  output to the vtu format that can be read by </span></div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;<span class="comment">  &lt;a href=&quot;http://www.paraview.org&quot;&gt;paraview&lt;/a&gt;,</span></div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;<span class="comment">  an open-source 3D plotting package. This is discussed in </span></div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;<span class="comment">  &lt;a href=&quot;../../paraview/html/index.html&quot;&gt; separate tutorial.&lt;/a&gt;</span></div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="comment">- ...and much more (eigenproblems, bifurcation tracking, </span></div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;<span class="comment">  advection-diffusion-reaction equations, displacement-based linear</span></div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;<span class="comment">  elasticity, impedance-type outflow boundary</span></div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;<span class="comment">  conditions for Navier-Stokes problems, Lagrange-multiplier-based</span></div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;<span class="comment">  \c FaceElements to apply non-trivial boundaries to beams and shells, ...).</span></div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;<span class="comment">  Feel free to have a look around the distribution.</span></div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;<span class="comment">  You&#39;re welcome to use it all, but please remember</span></div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;<span class="comment">  that you use any functionality for which no documentation</span></div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="comment">  is available at your own risk; while we reserve the</span></div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="comment">  right to change interfaces for all objects in the library, </span></div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;<span class="comment">  such changes are almost certain to happen for objects that are not</span></div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="comment">  yet documented (in the form of tutorials). </span></div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="comment">- Developed a general block preconditioning framework and used it</span></div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="comment">  implement problem-specific preconditioners for Navier-Stokes</span></div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="comment">  and fluid-structure-interaction problems. </span></div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;<span class="comment">  - &lt;a href=&quot;../../preconditioners/lsc_navier_stokes/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;<span class="comment">    Using \c oomph-lib&#39;s Least-Squares-Commutator Navier-Stokes </span></div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;<span class="comment">    preconditioner.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="comment">    \n\n</span></div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;<span class="comment">  - &lt;a href=&quot;../../preconditioners/fsi/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;<span class="comment">    Using \c oomph-lib&#39;s FSI preconditioner.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;<span class="comment">  .</span></div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;<span class="comment">- Provided segregated solver capabilities for fluid-structure </span></div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="comment">  interaction.</span></div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;<span class="comment">- Added a number of additional tutorials/demo codes illustrating</span></div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="comment">  \c oomph-lib&#39;s fluid-structure interaction capabilities:</span></div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;<span class="comment">  - &lt;a href=&quot;../../interaction/turek_flag/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;<span class="comment">    Turek &amp; Hron&#39;s FSI benchmark problem of flow past a &quot;flag&quot;.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;<span class="comment">    \n\n</span></div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;<span class="comment">  - &lt;a href=&quot;../../interaction/fsi_channel_with_leaflet/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;<span class="comment">    Flow in a channel with an elastic leaflet.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;<span class="comment">    \n\n</span></div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;<span class="comment">  - &lt;a href=&quot;../../interaction/fsi_channel_segregated_solver/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;<span class="comment">    Using \c oomph-lib&#39;s segregated solvers for</span></div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="comment">    fluid-structure-interaction  problems.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;<span class="comment">    \n\n</span></div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;<span class="comment">  - &lt;a href=&quot;../../preconditioners/fsi/html/index.html&quot;&gt;</span></div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;<span class="comment">    Using \c oomph-lib&#39;s FSI preconditioner.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;<span class="comment">  .</span></div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;<span class="comment">- MPI capability is now fully integrated into the library (rather</span></div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;<span class="comment">  than being kept in a separate mpi directory/sub-library) but not yet</span></div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="comment">  complete (or documented). Segments of code that involve</span></div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="comment">  MPI calls are surrounded by \c \#ifdef \c OOMPH_HAS_MPI \c [...] \c \#endif.</span></div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;<span class="comment">  They are only compiled if the \c --enable-MPI flag is specified</span></div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="comment">  at the configure stage.  </span></div>
 <div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="comment">.  </span></div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;<span class="comment">\subsubsection major_interface_changes_zero_point_five Major interface changes</span></div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="comment">- \c Problem::actions_before_solve() becomes </span></div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="comment">  \c Problem::actions_before_newton_solve()</span></div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;<span class="comment">- \c Problem::actions_after_solve() </span></div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment">  becomes \c Problem::actions_after_newton_solve()</span></div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="comment">- \c TCrouzeixRaviartElement&lt;DIM&gt;</span></div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="comment">  becomes \c TCrouzeixRaviartElement&lt;DIM&gt;</span></div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="comment">- \c QCrouzeixRaviartElement&lt;DIM&gt;</span></div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment">  becomes \c QCrouzeixRaviartElement&lt;DIM&gt;</span></div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="comment">- Assuming you have \c pdflatex installed on your machine, </span></div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="comment">  the documentation is now not only built in html format</span></div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;<span class="comment">  (pretty but hard to print) but we also create associated</span></div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="comment">  pdf files. These are accessible via the link at the </span></div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="comment">  bottom of relevant html page.</span></div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="comment">- \c oomph-lib&#39;s build script, \c autogen.\c sh now allows for</span></div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="comment">  parallel compilation. This can lead to considerable speedups</span></div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="comment">  on multicore processors that are now widely available. To </span></div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment">  build \c oomph-lib in parallel, using up four threads</span></div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;<span class="comment">  run  \c autogen.\c sh as follows</span></div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="comment">  ./autogen.sh --jobs=4 </span></div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="comment">  \endcode</span></div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="comment">  or (if you are re-building) </span></div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="comment">  \code</span></div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="comment">  ./autogen.sh --jobs=4 --rebuild</span></div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment">  \endcode</span></div>
 <div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="comment">- \c RefineableQCrouzeixRaviartElement&lt;DIM&gt;</span></div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="comment">  becomes \c RefineableQCrouzeixRaviartElement&lt;DIM&gt;</span></div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="comment">- Fixed various violations of our naming conventions; see </span></div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="comment">  \ref interface_changes.</span></div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="comment">  \n\n</span></div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="comment">- Changed the interface of to the \c FaceElements so that the faces </span></div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="comment">  are represented by an integer \c face_index, rather than the</span></div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="comment">  combination \c s_fixed_index and \c s_limit which was not </span></div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="comment">  sufficiently general. </span></div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="comment">.</span></div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="comment">\section pdf PDF file</span></div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160; </div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="comment">- Angelo </span></div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;<span class="comment">  Simone has written a python script that converts \c oomph-lib&#39;s</span></div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="comment">  output to the vtu format that can be read by </span></div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;<span class="comment">  &lt;a href=&quot;http://www.paraview.org&quot;&gt;paraview&lt;/a&gt;,</span></div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;<span class="comment">  an open-source 3D plotting package. This is discussed in </span></div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="comment">  &lt;a href=&quot;../../paraview/html/index.html&quot;&gt; separate tutorial.&lt;/a&gt;</span></div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;<span class="comment">- ...and much more (eigenproblems, bifurcation tracking, </span></div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="comment">  advection-diffusion-reaction equations, displacement-based linear</span></div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="comment">  elasticity, impedance-type outflow boundary</span></div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="comment">  conditions for Navier-Stokes problems, Lagrange-multiplier-based</span></div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="comment">  \c FaceElements to apply non-trivial boundaries to beams and shells, ...).</span></div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="comment">  Feel free to have a look around the distribution.</span></div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="comment">  You&#39;re welcome to use it all, but please remember</span></div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="comment">  that you use any functionality for which no documentation</span></div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="comment">  is available at your own risk; while we reserve the</span></div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="comment">  right to change interfaces for all objects in the library, </span></div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="comment">  such changes are almost certain to happen for objects that are not</span></div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="comment">  yet documented (in the form of tutorials). </span></div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="comment">.  </span></div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="comment">&lt;HR&gt;</span></div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="comment">\subsubsection major_interface_changes_zero_point_five Major interface changes</span></div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="comment">- \c Problem::actions_before_solve() becomes </span></div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="comment">  \c Problem::actions_before_newton_solve()</span></div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="comment">- \c Problem::actions_after_solve() </span></div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="comment">  becomes \c Problem::actions_after_newton_solve()</span></div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="comment">- \c TCrouzeixRaviartElement&lt;DIM&gt;</span></div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="comment">  becomes \c TCrouzeixRaviartElement&lt;DIM&gt;</span></div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;<span class="comment">- \c QCrouzeixRaviartElement&lt;DIM&gt;</span></div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="comment">  becomes \c QCrouzeixRaviartElement&lt;DIM&gt;</span></div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="comment">- \c RefineableQCrouzeixRaviartElement&lt;DIM&gt;</span></div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="comment">  becomes \c RefineableQCrouzeixRaviartElement&lt;DIM&gt;</span></div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="comment">- Fixed various violations of our naming conventions; see </span></div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="comment">  \ref interface_changes.</span></div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="comment">  \n\n</span></div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="comment">- Changed the interface of to the \c FaceElements so that the faces </span></div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="comment">  are represented by an integer \c face_index, rather than the</span></div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="comment">  combination \c s_fixed_index and \c s_limit which was not </span></div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="comment">  sufficiently general. </span></div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="comment">.</span></div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="comment">&lt;hr&gt;</span></div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="comment">\section pdf PDF file</span></div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="comment">A &lt;a href=&quot;../latex/refman.pdf&quot;&gt;pdf version&lt;/a&gt; of this document is available.</span></div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="achange__log_8txt_html_abeb16f0c9840edbbb5b82bf10abe73b9"><div class="ttname"><a href="change__log_8txt.html#abeb16f0c9840edbbb5b82bf10abe73b9">geometry</a></div><div class="ttdeci">virtual broken functions in base classes provide instructions what to do for others n n Provided machinery to establish what the equations unknowns in a fully built problem represent Calling&lt; code &gt; Meshes and Nodes point of view Very useful for debugging(e.g. &quot;Why are all the entries in the n-th row/column in the Jacobian zero?&quot; or &quot;The n-th residual is enormous -- which equation does it correspond to?&quot;, etc.) \n\n - Provided machinery for hp adaptivity and p-type spectral elements with mortar const raints in 2D and 3D.\n\n - Added interfaces to the Trilinos ANASAZI eigensolver to allow parallel solution of eigenproblems. \n\n - Basic implementation of discontinuous Galerkin methods for general flux transport problems.\n\n - Many new detailed tutorials explaining these boundaries are respected under mesh i e the mesh converges to the exact domain geometry</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00244">change_log.txt:244</a></div></div>
-<div class="ttc" id="achange__log_8txt_html_ab6e0a7cbe54d340f48a1ebed8a12c217"><div class="ttname"><a href="change__log_8txt.html#ab6e0a7cbe54d340f48a1ebed8a12c217">equations</a></div><div class="ttdeci">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection one_point_zero_to_two_point_zero Changes between version and *subsubsection new_functionality_two_point_zero Major new functionality bla bla and bla&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic equations of linear and the interaction between these two systems of equations in time harmonic acoustic fluid structure interaction problems All equations are implemented in cartesian and cylindrical polar based the coupling of full nonlinear elasticity and the Navier Stokes equations n n Implemented the linearised Navier Stokes equations(with the option to study their solutions as perturbations relative to a base state that is itself governed by the full Navier-Stokes equations). \n\n - Provided elements for the solution of the axisymmetric equations of linear elasticity. \n\n - Finished what is hopefully the final rewrite of the(parallel) block preconditioning framework and its extensive tutorial. \n\n - Provided elements for the solution of the Foeppl-von-Karman equations in various formulations(using either an Airy-stress function or the in-plane displacements) and in various coordinate systems. \n\n - Provided elements for Darcy porous media flow and Biot-type poro-elasticity</div></div>
-<div class="ttc" id="achange__log_8txt_html_a0e44a62a3694e146e8fd717fa5a6e321"><div class="ttname"><a href="change__log_8txt.html#a0e44a62a3694e146e8fd717fa5a6e321">href</a></div><div class="ttdeci">&quot;../../example_code_list/html/index.html&quot;&gt; extensive list of example codes&lt;/a &gt; to see what else is available. . \subsection zero_point_eight_five_to_zero_point_nine Changes between version 0.85 and 0.9 \subsubsection new_functionality_zero_point_nine Major new functionality - Significantly extended \c oomph-lib 's parallel processing capabilities. The library 's solver and(block) preconditioning framework is now fully parallelised href</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00270">change_log.txt:270</a></div></div>
-<div class="ttc" id="achange__log_8txt_html_abc98ded66aa0d665d9f489b9ab86c188"><div class="ttname"><a href="change__log_8txt.html#abc98ded66aa0d665d9f489b9ab86c188">in</a></div><div class="ttdeci">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection one_point_zero_to_two_point_zero Changes between version and *subsubsection new_functionality_two_point_zero Major new functionality bla bla and bla&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic equations of linear and the interaction between these two systems of equations in time harmonic acoustic fluid structure interaction problems All equations are implemented in cartesian and cylindrical polar based the coupling of full nonlinear elasticity and the Navier Stokes equations n n Implemented the linearised Navier Stokes including the ability to use the latter elements in fluid structure interaction problems which are governed by the equations of poro elasticity coupled to the Navier Stokes equations n n Implemented the ability adapt unstructured meshes in(in serial and in parallel) and(in a parallel setting) to distribute such meshes over multiple processors</div></div>
+<div class="ttc" id="afinal__svn__log_8txt_html_a14acf85415a535b6695a36c9f8292a8b"><div class="ttname"><a href="final__svn__log_8txt.html#a14acf85415a535b6695a36c9f8292a8b">work</a></div><div class="ttdeci">nothing else would work</div><div class="ttdef"><b>Definition:</b> <a href="final__svn__log_8txt_source.html#l00775">final_svn_log.txt:775</a></div></div>
+<div class="ttc" id="achange__log_8txt_html_ad66a9350e9eba79d6dee9b01e77801f2"><div class="ttname"><a href="change__log_8txt.html#ad66a9350e9eba79d6dee9b01e77801f2">equations</a></div><div class="ttdeci">takes time dependent macro element behaviour into account n n Implemented a Krylov subspace solver for the solution of single equation augmented linear the time harmonic equations of linear and the interaction between these two systems of equations in time harmonic acoustic fluid structure interaction problems All equations are implemented in cartesian and cylindrical polar based the coupling of full nonlinear elasticity and the Navier Stokes equations n n Implemented the linearised Navier Stokes equations(with the option to study their solutions as perturbations relative to a base state that is itself governed by the full Navier-Stokes equations). \n\n - Provided elements for the solution of the axisymmetric equations of linear elasticity. \n\n - Finished what is hopefully the final rewrite of the(parallel) block preconditioning framework and its extensive tutorial. \n\n - Provided elements for the solution of the Foeppl-von-Karman equations in various formulations(using either an Airy-stress function or the in-plane displacements) and in various coordinate systems. \n\n - Provided elements for Darcy porous media flow and Biot-type poro-elasticity</div></div>
+<div class="ttc" id="achange__log_8txt_html_a0e44a62a3694e146e8fd717fa5a6e321"><div class="ttname"><a href="change__log_8txt.html#a0e44a62a3694e146e8fd717fa5a6e321">href</a></div><div class="ttdeci">&quot;../../example_code_list/html/index.html&quot;&gt; extensive list of example codes&lt;/a &gt; to see what else is available. . \subsection zero_point_eight_five_to_zero_point_nine Changes between version 0.85 and 0.9 \subsubsection new_functionality_zero_point_nine Major new functionality - Significantly extended \c oomph-lib 's parallel processing capabilities. The library 's solver and(block) preconditioning framework is now fully parallelised href</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00309">change_log.txt:309</a></div></div>
+<div class="ttc" id="achange__log_8txt_html_a981f3d481cdddc8284bdc7cafc9f661e"><div class="ttname"><a href="change__log_8txt.html#a981f3d481cdddc8284bdc7cafc9f661e">in</a></div><div class="ttdeci">takes time dependent macro element behaviour into account n n Implemented a Krylov subspace solver for the solution of single equation augmented linear the time harmonic equations of linear and the interaction between these two systems of equations in time harmonic acoustic fluid structure interaction problems All equations are implemented in cartesian and cylindrical polar based the coupling of full nonlinear elasticity and the Navier Stokes equations n n Implemented the linearised Navier Stokes including the ability to use the latter elements in fluid structure interaction problems which are governed by the equations of poro elasticity coupled to the Navier Stokes equations n n Implemented the ability adapt unstructured meshes in(in serial and in parallel) and(in a parallel setting) to distribute such meshes over multiple processors</div></div>
+<div class="ttc" id="afinal__svn__log_8txt_html_a0931eb7d0b3047f5e5212798953284e8"><div class="ttname"><a href="final__svn__log_8txt.html#a0931eb7d0b3047f5e5212798953284e8">tube</a></div><div class="ttdeci">nothing else would probably because of the static non libraries Trilinos does the same Removed dlamch c from the two superlu sources as it s an lapack file Added Airy cantilever doc Finished off solid theory doc Upgraded osc tube(Sarah 's code) to be able to handle Robert 's wall shape</div></div>
+<div class="ttc" id="afinal__svn__log__before__move__to__git_8txt_html_a793bec2167335097b0f9d3b852e37ccf"><div class="ttname"><a href="final__svn__log__before__move__to__git_8txt.html#a793bec2167335097b0f9d3b852e37ccf">build</a></div><div class="ttdeci">r1367 Jun lines Added output of the sparse indexed Jacobian to BlackBox FD Newton solver in oomph_utilities if the Doc_Progress flag is set to true r1366 Jun lines Added functions to allow updating a faceted surface mesh to allow unstructured remeshing of three dimensional free surface problems This is not yet complete by any but part of the plan to include this functionality The next step in the process is to change the way the surface coordinates are calculated to use only the vertex nodes(and not all nodes) when computing the extreme values of coordinate. ------------------------------------------------------------------------ r1364|bergemann|2021-06-18 09 how things were originally done To switch to a dynamic build</div><div class="ttdef"><b>Definition:</b> <a href="final__svn__log__before__move__to__git_8txt_source.html#l00015">final_svn_log_before_move_to_git.txt:15</a></div></div>
 <div class="ttc" id="achange__log_8txt_html_a36c05f3f4643f38f109250325c8b95f1"><div class="ttname"><a href="change__log_8txt.html#a36c05f3f4643f38f109250325c8b95f1">those</a></div><div class="ttdeci">mainpage Change log This document provides an overview of the major changes between different official releases of c oomph lib c oomph lib is hosted on and distributed via its GitHub page&lt; center &gt;&lt; a href=&quot;https: https: &lt;/center&gt;&lt;br&gt; from where a complete log of all changes is available The move to GitHub was accompanied by a version bump to This GitHub repository was preceded by two subversion based repositories and for historical reasons we provide access to the complete log from those</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00021">change_log.txt:21</a></div></div>
-<div class="ttc" id="achange__log_8txt_html_a2ed0a0fcf4412460d8f77641d5cfb0d2"><div class="ttname"><a href="change__log_8txt.html#a2ed0a0fcf4412460d8f77641d5cfb0d2">refinement</a></div><div class="ttdeci">virtual broken functions in base classes provide instructions what to do for others n n Provided machinery to establish what the equations unknowns in a fully built problem represent Calling&lt; code &gt; Meshes and Nodes point of view Very useful for debugging(e.g. &quot;Why are all the entries in the n-th row/column in the Jacobian zero?&quot; or &quot;The n-th residual is enormous -- which equation does it correspond to?&quot;, etc.) \n\n - Provided machinery for hp adaptivity and p-type spectral elements with mortar const raints in 2D and 3D.\n\n - Added interfaces to the Trilinos ANASAZI eigensolver to allow parallel solution of eigenproblems. \n\n - Basic implementation of discontinuous Galerkin methods for general flux transport problems.\n\n - Many new detailed tutorials explaining these boundaries are respected under mesh refinement</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00220">change_log.txt:220</a></div></div>
 <div class="ttc" id="achange__log_8txt_html_a99575938e982e5401b8afe6205c9d29c"><div class="ttname"><a href="change__log_8txt.html#a99575938e982e5401b8afe6205c9d29c">repository</a></div><div class="ttdeci">this has been incorporated into the git log&lt; br &gt;&lt; br &gt; The file&lt; a href=&quot;../final_svn_log.txt&quot;&gt; final_svn_log txt&lt;/a &gt; contains the complete log of our private svn repository(revisions 1 to 207) which preceded its public counterpart. .&lt;/center &gt; The remainder of this document covers the following issues</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00026">change_log.txt:26</a></div></div>
 <div class="ttc" id="achange__log_8txt_html_a56a3e7e628870a6fbaf6c27fd357a892"><div class="ttname"><a href="change__log_8txt.html#a56a3e7e628870a6fbaf6c27fd357a892">Obviously</a></div><div class="ttdeci">endcode Obviously</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00146">change_log.txt:146</a></div></div>
-<div class="ttc" id="achange__log_8txt_html_abed6d5cb12e46810fcbe0026fa75fdc3"><div class="ttname"><a href="change__log_8txt.html#abed6d5cb12e46810fcbe0026fa75fdc3">elasticity</a></div><div class="ttdeci">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection one_point_zero_to_two_point_zero Changes between version and *subsubsection new_functionality_two_point_zero Major new functionality bla bla and bla&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic equations of linear elasticity</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00173">change_log.txt:173</a></div></div>
-<div class="ttc" id="achange__log_8txt_html_aa996e9c26380ec3e230b5a2e12b8a080"><div class="ttname"><a href="change__log_8txt.html#aa996e9c26380ec3e230b5a2e12b8a080">equation</a></div><div class="ttdeci">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection one_point_zero_to_two_point_zero Changes between version and *subsubsection new_functionality_two_point_zero Major new functionality bla bla and bla&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz equation(with various ways of implementing the Sommerfeld radiation condition)</div></div>
-<div class="ttc" id="achange__log_8txt_html_a0e0878d92a40b210ef9c6c6fc73a5d5e"><div class="ttname"><a href="change__log_8txt.html#a0e0878d92a40b210ef9c6c6fc73a5d5e">optimised</a></div><div class="ttdeci">the parallel assembly of the Jacobian and residual vector has been optimised</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00271">change_log.txt:271</a></div></div>
+<div class="ttc" id="achange__log_8txt_html_aef87361580a0cc487592ceae1e4fe145"><div class="ttname"><a href="change__log_8txt.html#aef87361580a0cc487592ceae1e4fe145">elasticity</a></div><div class="ttdeci">takes time dependent macro element behaviour into account n n Implemented a Krylov subspace solver for the solution of single equation augmented linear the time harmonic equations of linear elasticity</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00212">change_log.txt:212</a></div></div>
+<div class="ttc" id="achange__log_8txt_html_a82b82caa7730fbcde401ae93506a377c"><div class="ttname"><a href="change__log_8txt.html#a82b82caa7730fbcde401ae93506a377c">coordinates</a></div><div class="ttdeci">takes time dependent macro element behaviour into account n n Implemented a Krylov subspace solver for the solution of single equation augmented linear the time harmonic equations of linear and the interaction between these two systems of equations in time harmonic acoustic fluid structure interaction problems All equations are implemented in cartesian and cylindrical polar coordinates(in the latter case, using an azimuthal Fourier decomposition for the solution). \n\n - Provided block preconditioners for the solution of large-displacement fluid-structure interaction problems</div></div>
+<div class="ttc" id="achange__log_8txt_html_a0e0878d92a40b210ef9c6c6fc73a5d5e"><div class="ttname"><a href="change__log_8txt.html#a0e0878d92a40b210ef9c6c6fc73a5d5e">optimised</a></div><div class="ttdeci">the parallel assembly of the Jacobian and residual vector has been optimised</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00310">change_log.txt:310</a></div></div>
 <div class="ttc" id="afinal__svn__log__before__move__to__git_8txt_html_af53d6799b6e51ca01f1ba73d5ab52b31"><div class="ttname"><a href="final__svn__log__before__move__to__git_8txt.html#af53d6799b6e51ca01f1ba73d5ab52b31">argument</a></div><div class="ttdeci">the constructor to the non refinable TetgenMesh now includes the same default argument(const bool &amp;split_corner_elements=false) as the refineable version</div></div>
 <div class="ttc" id="afinal__svn__log__before__move__to__git_8txt_html_a618fd00804c45fe1a1a34e7d63394e0f"><div class="ttname"><a href="final__svn__log__before__move__to__git_8txt.html#a618fd00804c45fe1a1a34e7d63394e0f">themselves</a></div><div class="ttdeci">the latter is required to ensure we use code enclosed by directives the user shouldn t have to deal with this themselves</div><div class="ttdef"><b>Definition:</b> <a href="final__svn__log__before__move__to__git_8txt_source.html#l00473">final_svn_log_before_move_to_git.txt:473</a></div></div>
-<div class="ttc" id="achange__log_8txt_html_ae6d82961ee38c7789536f16da83236e5"><div class="ttname"><a href="change__log_8txt.html#ae6d82961ee38c7789536f16da83236e5">coordinates</a></div><div class="ttdeci">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection one_point_zero_to_two_point_zero Changes between version and *subsubsection new_functionality_two_point_zero Major new functionality bla bla and bla&lt; HR &gt; subsection zero_point_nine_to_one_point_zero Changes between version and *subsubsection new_functionality_one_point_zero Major new functionality Provided the capability to solve the Helmholtz the time harmonic equations of linear and the interaction between these two systems of equations in time harmonic acoustic fluid structure interaction problems All equations are implemented in cartesian and cylindrical polar coordinates(in the latter case, using an azimuthal Fourier decomposition for the solution). \n\n - Provided block preconditioners for the solution of large-displacement fluid-structure interaction problems</div></div>
+<div class="ttc" id="achange__log_8txt_html_ae05a3cd8c8c49997e1dafd77625e289c"><div class="ttname"><a href="change__log_8txt.html#ae05a3cd8c8c49997e1dafd77625e289c">directory</a></div><div class="ttdeci">endcode you should only compile the library with c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter problems after upgrading to a new version&lt; HR &gt; subsection one_point_zero_to_two_point_zero Changes between version and *subsubsection new_functionality_two_point_zero Major new functionality changes Moved to C standard and now use automatic formatting of code in the c src directory</div><div class="ttdef"><b>Definition:</b> <a href="change__log_8txt_source.html#l00159">change_log.txt:159</a></div></div>
 
     <!-- jQuery for Bootstrap and Doxygen -->
     <script src="../../js/jquery-1.12.0.min.js"></script>
@@ -840,7 +880,7 @@
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Mon Aug 23 2021 17:44:29
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Wed Aug 25 2021 20:15:28
         </div>
       </div>
     </footer>

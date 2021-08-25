@@ -18,7 +18,7 @@ The remainder of this document covers the following issues\+:
 \item \mbox{\hyperlink{index_interface_changes}{Policy on interface changes}}
 \item \mbox{\hyperlink{index_one_point_zero_to_two_point_zero}{Changes between version 1.\+0 and 2.\+0.$\ast$}}
 \begin{DoxyItemize}
-\item \mbox{\hyperlink{index_new_functionality_two_point_zero}{Major new functionality}}
+\item \mbox{\hyperlink{index_new_functionality_two_point_zero}{Major new functionality/changes}}
 \end{DoxyItemize}
 \item \mbox{\hyperlink{index_zero_point_nine_to_one_point_zero}{Changes between version 0.\+9 and 1.\+0.$\ast$}}
 \begin{DoxyItemize}
@@ -108,12 +108,42 @@ Obviously, you should only compile the library with {\ttfamily W\+A\+R\+N\+\_\+\
 
 \DoxyHorRuler{0}
 \hypertarget{index_one_point_zero_to_two_point_zero}{}\doxysubsection{Changes between version 1.\+0 and 2.\+0.$\ast$}\label{index_one_point_zero_to_two_point_zero}
-\hypertarget{index_new_functionality_two_point_zero}{}\doxysubsubsection{Major new functionality}\label{index_new_functionality_two_point_zero}
+\hypertarget{index_new_functionality_two_point_zero}{}\doxysubsubsection{Major new functionality/changes}\label{index_new_functionality_two_point_zero}
 
 \begin{DoxyItemize}
-\item bla
-\item bla
-\item and bla
+\item Moved to C++11 standard and now use automatic formatting of code in the {\ttfamily src} directory, using {\ttfamily clang-\/format}. ~\newline
+~\newline
+
+\item Upgraded all python scripts to python3. ~\newline
+~\newline
+
+\item Included {\ttfamily C\+G\+AL}, {\ttfamily G\+MG}, {\ttfamily M\+P\+FR} and {\ttfamily Boost} into the third-\/party libraries that are shipped and automatically installed with {\ttfamily oomph-\/lib}. Existing installations can be used instead (via suitable flags in the configure options), but {\ttfamily oomph-\/lib} is only guaranteed to work with the versions provided. This functionality does not work on mac\+OS so mac\+OS users must add the {\ttfamily --enable-\/suppress-\/cgal-\/build} flag to their configuration options to ensure that this doesn\textquotesingle{}t break their build. ~\newline
+~\newline
+ They are used for more efficient implementations of {\ttfamily locate\+\_\+zeta(...)} functionality. ~\newline
+~\newline
+
+\item Generalised unstructured 3D (tet-\/)mesh generation procedures so it can use {\ttfamily tetgen} and {\ttfamily gmsh}. ~\newline
+~\newline
+
+\item Provided scripts that (i) download the third-\/party tar files (for {\ttfamily M\+U\+M\+PS}, {\ttfamily trilinos} and {\ttfamily hypre}) and (ii) move the built installations to permanent locations. ~\newline
+~\newline
+
+\item Provided space-\/time discretisations for time-\/periodic unsteady-\/heat and Navier-\/\+Stokes equations. ~\newline
+~\newline
+
+\item Implemented a geometric multigrid solver for scalar P\+D\+Es (tested for the Poisson and Helmholtz equations). ~\newline
+~\newline
+
+\item Implemented the {\ttfamily Quad\+From\+Triangle\+Mesh} to construct quad-\/based meshes from triangle meshes. ~\newline
+~\newline
+
+\item Provided functionality to impose periodicity for three-\/dimensional brick meshes. ~\newline
+~\newline
+
+\item Provided machinery to create three-\/dimensional meshes based on the \char`\"{}extrusion\char`\"{} of a two-\/dimensional mesh; takes time-\/dependent macro-\/element behaviour into account. ~\newline
+~\newline
+
+\item Implemented a Krylov-\/subspace solver for the solution of single-\/equation-\/augmented linear systems ({\ttfamily Augmented\+G\+M\+R\+ES} ).
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
