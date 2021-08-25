@@ -106,7 +106,7 @@ work. (We show below how this is done as part of the overall workflow but want
 to make sure we know where to start; if you have just completed the steps described in 'Basic setup' above, you are now in this blissful state).
 
 The end-goal is to emulate the Git branching model described
-in https://nvie.com/posts/a-successful-git-branching-model/.
+in [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model).
 
 The idea is as follows: you add your changes to your *local forked forked*
 repository, and then push these changes to your *remote forked* repository. Once
