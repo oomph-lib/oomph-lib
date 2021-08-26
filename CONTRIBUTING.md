@@ -399,7 +399,8 @@ To manually format specific files containing C++ code with `clang-format`, you
 will need to pass their names to the `clang-format` command and also specify the
 `-i` and `--style=file` flags. These flags specify that the formatting should be
 performed "in-place" and using the style specification provided in the
-`.clang-format` file, respectively. For example, to format two files named
+`.clang-format` file (which should be located in one of the parent directories
+of the source file), respectively. For example, to format two files named
 `file1.cc` and `file2.cc`, use the following:
 ```bash
 >>> clang-format -i --style=file file1.cc file2.cc
@@ -409,8 +410,10 @@ want to format all `.h` and `.cc` files in a folder, use the following:
 ```bash
 >>> clang-format -i --style=file *.{h,cc}
 ```
-Be warned, you should not use the latter command in the `src/generic` folder as
-some of the files in this folder contain C code that we purposely avoid formatting.
+Be warned, you should **not(!)** use the latter command in the `src/generic/` folder
+or in the `demo_drivers/` folder; the `src/generic/` folder has files containing
+C code that we purposely avoid formatting, and formatting the code in the
+`demo_driver/` folder can break the documentation.
 
 _For the above to work, you will need at least version 10.0.0 of `clang-format`._
 ## Pre-commit hooks (optional)
