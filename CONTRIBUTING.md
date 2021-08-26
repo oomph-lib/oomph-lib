@@ -62,19 +62,19 @@ Contributing to `oomph-lib` involves three separate repositories:
     and the repository exists.
     ```
     To address this issue complete the following steps (links to the relevant GitHub resources have been provided):
-    1. [Generate a new SSH key if you don't have one.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key) 
-    2. [Add the new SSH key to the ssh-agent.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent) 
+    1. [Generate a new SSH key if you don't have one.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key)
+    2. [Add the new SSH key to the ssh-agent.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
     3. [Add the new SSH key to your GitHub account.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
-    
+
     More details, if required, can be found on [Connecting to GitHub with SSH](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
-    
-    
+
+
     For consistency, we will use SSH commands in this document wherever possible.
-    If you would prefer to use the HTTPS-based equivalents instead, replace all occurrences of 
+    If you would prefer to use the HTTPS-based equivalents instead, replace all occurrences of
     ```bash
     git@github.com:JoeCoolDummy/oomph-lib.git
-    ``` 
-    with 
+    ```
+    with
     ```bash
     https://github.com/JoeCoolDummy/oomph-lib
     ```
@@ -100,32 +100,13 @@ Switched to a new branch 'development'
 ```
 You should only ever interact with the `development` branch. The `main` branch is only updated (and never by you!) when a new stable version with significant new features is available and needs to be shared with the whole wide world.
 
-Your local forked repository is automatically aware of the GitHub-hosted remote counterpart it was cloned from (i.e. your forked one). The `git remote` command lists the URLs associated with the `origin` repository:
-```bash
->>> git remote -v
-origin	git@github.com:JoeCoolDummy/oomph-lib.git (fetch)
-origin	git@github.com:JoeCoolDummy/oomph-lib.git (push)
-```
-You can therefore use `origin` as a shorthand for the full URL. It is useful to add a similar shorthand for the official `oomph-lib` repository (the `upstream` one):
-```bash
->>> git remote add upstream git@github.com:oomph-lib/oomph-lib.git
-```
-You can check that this is now known within your local forked repository:
-```bash
->>> git remote -v
-origin	git@github.com:JoeCoolDummy/oomph-lib.git (fetch)
-origin	git@github.com:JoeCoolDummy/oomph-lib.git (push)
-upstream	git@github.com:oomph-lib/oomph-lib.git (fetch)
-upstream	git@github.com:oomph-lib/oomph-lib.git (push)
-```
-
 ## The workflow
 We will assume that you have updated your remote forked repository from the official one, and have updated the `development` branch on your computer before doing any new
 work. (We show below how this is done as part of the overall workflow but want
 to make sure we know where to start; if you have just completed the steps described in 'Basic setup' above, you are now in this blissful state).
 
 The end-goal is to emulate the Git branching model described
-in https://nvie.com/posts/a-successful-git-branching-model/.
+in [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model).
 
 The idea is as follows: you add your changes to your *local forked forked*
 repository, and then push these changes to your *remote forked* repository. Once
@@ -317,6 +298,8 @@ This involves the following steps:
      GitHub will show you that "This branch is n commits behind `oomph-lib:development`."
      The "Fetch upstream" button allows a comparison ("Compare") and "Fetch and merge". Go for the latter when happy. GitHub will now announce that "This branch is even with `oomph-lib:development`".
 
+   **Note: It is a good idea to do this regularly to make sure that you have the latest changes.**
+
 8. Now the `development` branch on your computer (cloned from the forked
    remote repository) is out of sync with the updated version at GitHub. (And if you do `git difftool feature-add-new-important-headers..development` you'll see that the `development` branch obviously(!) does not yet contain the changes we've made in the local forked `feature-add-new-important-headers` branch.) So pull the updated
    `development` branch from the `origin` repository, as follows:
@@ -371,18 +354,21 @@ Described below is an alternative way to pull changes from the official reposito
 
 3. Confirm that a remote named `upstream` has been added to your list of remotes
    ```bash
-   >>> git remote
+   >>> git remote -v
+   origin	git@github.com:JoeCoolDummy/oomph-lib.git (fetch)
+   origin	git@github.com:JoeCoolDummy/oomph-lib.git (push)
+   upstream	git@github.com:oomph-lib/oomph-lib.git (fetch)
+   upstream	git@github.com:oomph-lib/oomph-lib.git (push)
    ```
-
 4. Fetch the upstream copy of the `development` branch and immediately merge it into your local copy
    ```bash
-   >>> git pull upstream
+   >>> git pull upstream development
    ```
 
 5. Resolve any merge conflicts you may have. Strictly speaking, you
    should only be using the `development` branch to stay in sync with the upstream repository i.e. you shouldn't be adding changes to it directly yourself, so there should never be any merge conflicts.
 
-7. Now push the changes in your local forked repository up to your remote forked
+6. Now push the changes in your local forked repository up to your remote forked
    repository (`origin`)
    ```bash
    >>> git push origin development
@@ -409,6 +395,27 @@ directly anyway!) After formatting your code it will create an extra commit
 containing any changes that were made. If your code did not require any changes,
 an additional commit will not be created.
 
+To manually format specific files containing C++ code with `clang-format`, you
+will need to pass their names to the `clang-format` command and also specify the
+`-i` and `--style=file` flags. These flags specify that the formatting should be
+performed "in-place" and using the style specification provided in the
+`.clang-format` file (which should be located either in the current directory
+or in one of its parent directories -- the "nearest one" is used), respectively. 
+For example, to format two files named `file1.cc` and `file2.cc`, use the following:
+```bash
+>>> clang-format -i --style=file file1.cc file2.cc
+```
+Any number of files can be supplied to this command so if, instead, you
+want to format all `.h` and `.cc` files in a folder, use the following:
+```bash
+>>> clang-format -i --style=file *.{h,cc}
+```
+Be warned, you should **not(!)** use the latter command in the `src/generic/` folder
+or in the `demo_drivers/` folder; the `src/generic/` folder has files containing
+C code that we purposely avoid formatting, and formatting the code in the
+`demo_driver/` folder can break the documentation.
+
+_For the above to work, you will need at least version 10.0.0 of `clang-format`._
 ## Pre-commit hooks (optional)
 
 A pre-commit hook is something that automatically runs on your local computer
