@@ -399,9 +399,9 @@ To manually format specific files containing C++ code with `clang-format`, you
 will need to pass their names to the `clang-format` command and also specify the
 `-i` and `--style=file` flags. These flags specify that the formatting should be
 performed "in-place" and using the style specification provided in the
-`.clang-format` file (which should be located in one of the parent directories
-of the source file), respectively. For example, to format two files named
-`file1.cc` and `file2.cc`, use the following:
+`.clang-format` file (which should be located either in the current directory
+or in one of its parent directories -- the "nearest one" is used), respectively. 
+For example, to format two files named `file1.cc` and `file2.cc`, use the following:
 ```bash
 >>> clang-format -i --style=file file1.cc file2.cc
 ```
