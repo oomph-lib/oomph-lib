@@ -117,7 +117,7 @@ We use the ``cmake-format`` pre-commit hook to automatically format
 >>> pip install pre-commit
 ```
 The ``.pre-commit-config.yaml`` will take care of the rest. Do not edit the
-``.cmake-format.json`` file.
+``.cmake-format.py`` file.
 
 ## Usage
 
@@ -265,7 +265,7 @@ If you are comfortable with CMake and you wish to specify your own executable
 using the standard CMake functions then make sure to add the following line
 after calling ``add_executable``
 ```cmake
-      target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})
+  target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})
 ```
 where ``<your-target>`` is the name of your executable. This imports the compile
 definitions defined by ``oomph-lib`` (during its build) that are needed to make
