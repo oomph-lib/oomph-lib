@@ -5,52 +5,42 @@ on: push
 env:
   CMAKE_BUILD_TYPE: Debug
   CTEST_OUTPUT_ON_FAILURE: 1
-  INSTALL_LOCATION: .local
+  INSTALL_LOCATION: '${{ github.workspace }}/.local'
+  OOMPH_ENABLE_MPI: 0
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-latest]
-        OOMPH_ENABLE_MPI: [0]
-        include:
-          - os: macos-latest
-            compiler: clang
-            install-deps: |
-              brew install cmake open-mpi
-              brew reinstall gfortran
-
-    runs-on: ${{ matrix.os }}
-
+    runs-on: macos-latest
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
       - name: Install dependencies
-        run: ${{ matrix.install-deps }}
+        run: brew install cmake open-mpi && brew reinstall gfortran
+
+      - name: Get latest CMake and Ninja
+        uses: PuneetMatharu/get-cmake@latest
 
       - name: Output CMake version
         run: cmake --version
 
-      - name: Check out code
-        uses: actions/checkout@v2
-
       - name: Configure (${{ env.CMAKE_BUILD_TYPE }})
         run: |
-          cmake -DCMAKE_BUILD_TYPE=${{ env.CMAKE_BUILD_TYPE }} \
-          -DOOMPH_ENABLE_MPI=${{ matrix.OOMPH_ENABLE_MPI }} \
-          -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION \
+          cmake -G Ninja \
+          -DCMAKE_BUILD_TYPE=${{ env.CMAKE_BUILD_TYPE }} \
+          -DOOMPH_ENABLE_MPI=${{ env.OOMPH_ENABLE_MPI }} \
+          -DCMAKE_INSTALL_PREFIX=${{ env.INSTALL_LOCATION }} \
           -B build
 
       - name: Build & install
         working-directory: build
-        run: |
-          make --jobs $(sysctl -n hw.logicalcpu)
-          make install
+        run: ninja && ninja install
 
       - name: Run self-tests
         id: self_tests
         run: |
           cd demo_drivers
-          cmake -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/$INSTALL_LOCATION -B build
+          cmake -DCMAKE_PREFIX_PATH=${{ env.INSTALL_LOCATION }} -B build
           cd build
           ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j $(sysctl -n hw.logicalcpu) --timeout 10000 --no-label-summary
         continue-on-error: true
@@ -58,7 +48,7 @@ jobs:
       - name: Upload validation log file
         uses: actions/upload-artifact@v2
         with:
-          name: validation-${{ matrix.os }}-${{ matrix.compiler }}-MPI_${{ matrix.OOMPH_ENABLE_MPI }}.log
+          name: validation-${{ runner.os }}-MPI_${{ env.OOMPH_ENABLE_MPI }}.log
           path: ./validation.log
 
       - name: Propagate status
