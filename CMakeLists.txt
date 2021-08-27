@@ -70,6 +70,8 @@ find_package(LAPACK)
 find_package(Python3 REQUIRED)
 
 # ------------------------------[ BUILD OPTIONS ]-------------------------------
+# cmake-format: off
+
 # We silence a few harmless warnings in external_src/ and in src/. If you want,
 # you can choose to have them displayed during the build
 option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display all warnings" OFF)
@@ -113,22 +115,16 @@ option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 option(ALREADY_HAVE_BLAS "Use BLAS library specified via absolute path" OFF)
 option(ALREADY_HAVE_LAPACK "Use LAPACK library specified via absolute path" OFF)
 option(ALREADY_HAVE_METIS "Suppress build of oomph-lib's own copy of metis" OFF)
-option(ALREADY_HAVE_PARMETIS "Suppress build of oomph-lib's copy of parmetis"
-       OFF)
-option(ALREADY_HAVE_SUPERLU
-       "Suppress build of oomph-lib's copy of serial SuperLU" OFF)
-option(ALREADY_HAVE_SUPERLU_DIST
-       "Suppress build of oomph-lib's copy of serial SuperLU_dist" OFF)
-option(SUPPRESS_TRIANGLE_LIB
-       "Suppress build of oomph-lib's copy of the triangle library" OFF)
-option(SUPPRESS_TETGEN_LIB
-       "Suppress build of oomph-lib's copy of the tetgen library" OFF)
+option(ALREADY_HAVE_PARMETIS "Suppress build of oomph-lib's copy of parmetis" OFF)
+option(ALREADY_HAVE_SUPERLU "Suppress build of oomph-lib's copy of serial SuperLU" OFF)
+option(ALREADY_HAVE_SUPERLU_DIST "Suppress build of oomph-lib's copy of serial SuperLU_dist" OFF)
+option(SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
+option(SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
 # Support for deprecated packages:
+option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU" OFF)
 
-option(OOMPH_USE_DEPRECATED_SUPERLU
-       "Use oomph-lib's deprecated version of SuperLU" OFF)
-
+# cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
 
 # Run clang-tidy during the build if the user requires
