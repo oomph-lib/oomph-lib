@@ -13,14 +13,15 @@ FetchContent_Declare(
   GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(hypre_project)
 
-# Add OOMPH_HAS_HYPRE to the compiler flags to define the symbol and make the
-# accumulated compiler flags visible in the parent scope
-list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_HYPRE)
-set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update global variables
 
-# Add the HYPRE libraries to the list of external distribution libraries and
-# make the updated variable value visible to the parent scope
+# Update external distributions preprocessor definitions and list of libraries
+list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_HYPRE)
 list(APPEND EXTERNAL_DIST_LIBS HYPRE::HYPRE)
+
+# Make the updated variable values visible to the parent scope
+set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
 set(EXTERNAL_DIST_LIBS ${EXTERNAL_DIST_LIBS} PARENT_SCOPE)
 
 # Define an internal project variable to indicate that we possess this library

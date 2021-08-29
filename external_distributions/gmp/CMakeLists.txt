@@ -13,15 +13,19 @@ FetchContent_Declare(gmp_project
                      URL "${CMAKE_CURRENT_LIST_DIR}/gmp-6.1.2.tar.xz")
 FetchContent_MakeAvailable(gmp_project)
 
-# Add the OOMPH_HAS_GMP symbol to the compiler flags to define and make the
-# compiler flag(s) visible to the parent scope
-list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_GMP)
-set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update global variables
 
-# Add the gmp library to the list of external distribution libraries and make
-# the updated variable value visible to the parent scope
+# Update external distributions preprocessor definitions and list of libraries
+list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_GMP)
 list(APPEND EXTERNAL_DIST_LIBS GMP::GMP)
+
+# Make the updated variable values visible to the parent scope
+set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
 set(EXTERNAL_DIST_LIBS ${EXTERNAL_DIST_LIBS} PARENT_SCOPE)
+
+# Define an internal project variable to indicate that we possess this library
+set(OOMPH_HAS_GMP TRUE CACHE INTERNAL "")
 
 message(STATUS "Leaving gmp subdirectory")
 # ------------------------------------------------------------------------------

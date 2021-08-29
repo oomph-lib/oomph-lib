@@ -29,14 +29,15 @@ FetchContent_Declare(
   GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(CGAL_project)
 
-# Add the OOMPH_HAS_CGAL symbol to the compiler flags to define and make the
-# compiler flag(s) visible to the parent scope
-list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_CGAL)
-set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update global variables
 
-# Add the nlohmann JSON library to the list of external distribution libraries
-# and make the updated variable value visible to the parent scope
+# Update external distributions preprocessor definitions and list of libraries
+list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_CGAL)
 list(APPEND EXTERNAL_DIST_LIBS CGAL::CGAL)
+
+# Make the updated variable values visible to the parent scope
+set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
 set(EXTERNAL_DIST_LIBS ${EXTERNAL_DIST_LIBS} PARENT_SCOPE)
 
 # Define an internal project variable to indicate that we possess this library

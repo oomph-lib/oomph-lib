@@ -49,6 +49,9 @@ FetchContent_Declare(
   GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(mumps_project)
 
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update global variables
+
 # Update external distributions preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_MUMPS)
 if(OOMPH_HAS_MPI)
