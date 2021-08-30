@@ -26,7 +26,7 @@ set(autobuild ON)
 set(lapack_external OFF)
 set(scalapack_external OFF)
 set(mumps_external OFF)
-set(parallel ${OOMPH_HAS_MPI})
+set(parallel ${OOMPH_ENABLE_MPI})
 set(intsize64 OFF)
 set(metis OFF)
 set(scotch OFF)
@@ -44,6 +44,7 @@ set(use_default_install_location ON)
 include(FetchContent)
 FetchContent_Declare(
   mumps_project
+  # GIT_REPOSITORY https://github.com/scivision/mumps.git GIT_TAG v5.4.1.1
   GIT_REPOSITORY https://github.com/PuneetMatharu/mumps.git
   GIT_TAG v5.4.0.6
   GIT_SHALLOW TRUE)
