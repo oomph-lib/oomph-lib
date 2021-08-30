@@ -101,14 +101,14 @@ option(OOMPH_ENABLE_TESTING "Build unit tests" OFF)
 
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
-option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
+option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" ON)
 option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
 # Optionally build third-party libraries. [WORK IN PROGRESS.]
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
 option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
-option(OOMPH_WANT_TRILINOS "Use Trilinos library" ON)
+option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
 option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 
 # Fine-grained control of build of external_srcs. NOTE: These don't work yet!
