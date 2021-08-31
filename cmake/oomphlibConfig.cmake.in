@@ -50,6 +50,7 @@ endif()
 # has already been found otherwise these dependency checks can be called again
 # and again unnecessarily
 if(OOMPH_HAS_TRILINOS AND NOT Trilinos_FOUND)
+  set(OOMPH_TRILINOS_INSTALL_DIR "@OOMPH_TRILINOS_INSTALL_DIR@")
   find_dependency(Trilinos 11.8.1 REQUIRED)
 
   # TrilinosConfig.cmake doesn't set Trilinos_FOUND
