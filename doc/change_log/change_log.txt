@@ -160,12 +160,14 @@ problems after upgrading to a new version.
   \n\n
 - Upgraded all python scripts to python3.
   \n\n
-- Included \c CGAL, \c GMG, \c MPFR and \c boost into the third party libraries
+- Included \c CGAL, \c GMG, \c MPFR and \c Boost into the third-party libraries
   that are shipped and automatically installed with \c
   oomph-lib. Existing installations can be used instead (via suitable
   flags in the configure options), but \c oomph-lib
-  is only guaranteed to work with the versions provided. And it's
-  not supported on Mac OS X.
+  is only guaranteed to work with the versions provided. This functionality
+  does not work on macOS so macOS users must add 
+  the \c --enable-suppress-cgal-build flag to their configuration options 
+  to ensure that this doesn't break their build.
   \n\n
   They are used for more efficient implementations of \c
   locate_zeta(...) functionality.
