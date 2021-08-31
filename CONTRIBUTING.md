@@ -1,6 +1,6 @@
 # The `oomph-lib` GitHub workflow
 
-**A guide to working with and contributing to the (now-GitHub-hosted) `oomph-lib` repository.**
+This document is intended as a guide to working with and contributing to the (now-GitHub-hosted) `oomph-lib` repository. It is **not** intended to be a comprehensive guide to Git/GitHub itself, though we aim to be comprehensive in the sense that we show you all the steps required to interact with the repository. In this sense no prior knowledge of Git/GitHub is required. For more information on Git/Github, we recommend the excellent Git Book which is available at https://git-scm.com/book/en/v2
 
 _Notation:_ We prefix any command line input with "`>>>`" and generally show the resulting output from Git underneath. Lengthy output is sometimes truncated and omitted parts are then indicated by "`[...]`". Comments for specific commands are prefixed with "`#`".
 

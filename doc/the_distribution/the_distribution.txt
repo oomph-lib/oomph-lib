@@ -793,6 +793,13 @@ make
    - The \c INCLUDES variable should only be specified once.
    .
   
+It makes sense to create a separate GitHub repository for your user
+driver directory. This won't interfere with the forked/cloned
+oomph-lib repository that you're working within. As far as the \c
+oomph-lib repository is concerned your user driver directory is simply
+one of possibly many directories that it's not tracking. Similarly, from
+within your user driver directory, the files outside it are not
+tracked by your repository, so the two can happily co-exist.
 
 \subsubsection add_src Adding new libraries and linking against them from driver codes
 
@@ -853,7 +860,7 @@ that uses a user library.
 
 
 
-\subsection dont_have_auto_tools Writing/linking user code without autotools
+\subsection dont_have_auto_tools Writing/linking user code without autotools: How do I treat \c oomph-lib simply as a library?
 Linking directly against \c oomph-lib's (sub-)libraries 
 is slightly complicated by cross-compilation issues arising from
 the fact that the \c oomph-lib distribution includes a few C and Fortran 
