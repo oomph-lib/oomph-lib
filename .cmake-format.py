@@ -60,6 +60,13 @@ with section("parse"):
                 'TARGET': '*'
             }
         },
+        'oomph_git_patch_command': {
+            'flags': [],
+            'kwargs': {
+                'PATCH_DIRECTORY': '*',
+                'PATCH_FILE': '*'
+            }
+        },
         'oomph_library_config': {
             'flags': [],
             'kwargs': {
