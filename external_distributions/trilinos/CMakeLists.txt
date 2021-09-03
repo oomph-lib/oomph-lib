@@ -3,15 +3,13 @@
 # ==============================================================================
 include(ExternalProject)
 
-# # Desired installation location and the location of the library files and #
-# library headers
-set(INSTALL_SUBDIR TRILINOS_installation)
-set(TRILINOS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${INSTALL_SUBDIR}")
+# Cache the Trilinos package version number
+set(TRILINOS_VERSION 11.8.1 CACHE STRING "Trilinos version number" FORCE)
 
 # cmake-format: off
 # TODO: Update Trilinos generic code to use new Trilinos functionality.
 # The patch file and how to apply it
-# set(PATCH_FILE 0001-Patch-of-CMakeLists.txt-for-FetchContents.patch).
+# set(PATCH_FILE 0001-Patch-of-CMakeLists.txt-for-FetchContents.patch)
 # Patch above is for the latest version of Trilinos.
 #
 # Patch below is for Trilinos 11.8.1.
@@ -20,10 +18,6 @@ set(PATCH_COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_D
     && git checkout <SOURCE_DIR>/CMakeLists.txt
     && git apply <SOURCE_DIR>/${PATCH_FILE})
 # cmake-format: on
-
-# Specify the locations of the BLAS and LAPACK library artifacts
-set(TPL_BLAS_LIBRARIES "$<TARGET_LINKER_FILE:oomph_blas>")
-set(TPL_LAPACK_LIBRARIES "$<TARGET_LINKER_FILE:oomph_lapack>")
 
 # The compiler issues an error about an implicit function declaration, which
 # appears in a C file in Trilinos v11.8.1. I'm hoping this will be fixed in a
@@ -37,7 +31,7 @@ set(OOMPH_TRILINOS_FLAGS
     -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}
     -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
     -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
-    -DCMAKE_Fortran_COMPILER=/usr/local/bin/gfortran # ${CMAKE_Fortran_COMPILER}
+    -DCMAKE_Fortran_COMPILER=${CMAKE_Fortran_COMPILER}
     -DCMAKE_C_FLAGS:STRING=${TRILINOS_C_FLAGS}
     -DCMAKE_CXX_FLAGS:STRING=${CMAKE_CXX_FLAGS}
     -DCMAKE_Fortran_FLAGS:STRING=${CMAKE_Fortran_FLAGS}
@@ -58,10 +52,12 @@ set(OOMPH_TRILINOS_FLAGS
     -DTrilinos_ENABLE_Triutils:BOOL=ON
     -DTPL_ENABLE_BLAS:BOOL=ON
     -DTPL_ENABLE_LAPACK:BOOL=ON
-    -DTPL_BLAS_LIBRARIES:PATH="${TPL_BLAS_LIBRARIES}"
-    -DTPL_LAPACK_LIBRARIES:PATH="${TPL_LAPACK_LIBRARIES}")
+    -DTPL_BLAS_LIBRARIES:PATH=$<TARGET_LINKER_FILE:oomph_blas>
+    -DTPL_LAPACK_LIBRARIES:PATH=$<TARGET_LINKER_FILE:oomph_lapack>)
 
-# TODO: Add FindTrilinos.cmake?
+# Make OOMPH_TRILINOS_MODULE_PATH a cache variable so that we can get its value
+# when the oomphlibConfig.cmake.in file is processed. It'll come in handy when
+# we install Trilinos to a location which isn't in the user's PATH variable
 set(OOMPH_TRILINOS_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/trilinos_install"
     CACHE PATH "Path to Trilinos installation directory" FORCE)
 set(OOMPH_TRILINOS_INCLUDE_DIR "${OOMPH_TRILINOS_INSTALL_DIR}/include")
@@ -103,7 +99,6 @@ ExternalProject_Add(
   BUILD_BYPRODUCTS ${TRILINOS_LIBRARIES_WITH_PATHS}
   PATCH_COMMAND ${PATCH_COMMAND}
   DEPENDS oomph::oomph_blas oomph::oomph_lapack)
-# ExternalProject_Get_Property(oomph_trilinos_project INSTALL_DIR)
 
 # Build it as a static/shared library depending on how oomph-lib is being built
 set(LIBTYPE STATIC)
@@ -111,13 +106,16 @@ if(BUILD_SHARED_LIBS)
   set(LIBTYPE SHARED)
 endif()
 
-# Make a target that combines the Trilinos libraries into one
+# Make a target that combines the Trilinos libraries into one and indicates to
+# our library that this library is provided externally. We need to do this
+# because the Trilinos library only gets configured, built and installed during
+# our build phase, so we can't get hold of variables defined by Trilinos, e.g. a
+# list of the libraries that it built, until then
 add_library(Trilinos::Trilinos INTERFACE IMPORTED GLOBAL)
 set_target_properties(
   Trilinos::Trilinos
   PROPERTIES IMPORTED_LOCATION "${TRILINOS_LIBRARIES_WITH_PATHS}"
-             INTERFACE_INCLUDE_DIRECTORIES
-             "$<BUILD_INTERFACE:${OOMPH_TRILINOS_INCLUDE_DIR}>")
+             INTERFACE_INCLUDE_DIRECTORIES "${OOMPH_TRILINOS_INCLUDE_DIR}")
 target_link_libraries(Trilinos::Trilinos INTERFACE "${TRILINOS_LIBRARIES}")
 
 # Make it clear that our aliased library depends on the ExternalProject library
