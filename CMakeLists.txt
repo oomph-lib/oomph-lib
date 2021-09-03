@@ -77,10 +77,10 @@ find_package(Python3 REQUIRED)
 # you can choose to have them displayed during the build
 option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display all warnings" OFF)
 
-# Enable the Clang static code analyser/formatter. NOTE: If you enable
-# clang-tidy, you should NOT run the Makefile/Ninja build in parallel as it may
-# lead to data races. This functionality should probably be reserved for a CI
-# server to run. [WORK IN PROGRESS.]
+# Enable the Clang static code analyser/formatter.
+# NOTE: If you enable clang-tidy, you should NOT run the Makefile/Ninja build in
+# parallel as it may lead to data races. This functionality should probably be
+# reserved for a CI server to run. [WORK IN PROGRESS.]
 option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy C++ static code analysis" OFF)
 option(OOMPH_ENABLE_CLANG_FORMAT "Enable Clang-based C++ code formatting" OFF)
 
@@ -105,6 +105,9 @@ option(OOMPH_ENABLE_TESTING "Build unit tests" OFF)
 option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
+# Optionally build MKR BLAS and LAPACK
+option(OOMPH_USE_MKL_BLAS_AND_LAPACK "Use the MKL implementation of BLAS and LAPACK" OFF)
+
 # Optionally build third-party libraries. [WORK IN PROGRESS.]
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
@@ -113,6 +116,7 @@ option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
 option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 
 # Fine-grained control of build of external_srcs. NOTE: These don't work yet!
+# TODO: ADD OOMPH_ PREFIXES TO THESE VARIABLES!
 option(ALREADY_HAVE_BLAS "Use BLAS library specified via absolute path" OFF)
 option(ALREADY_HAVE_LAPACK "Use LAPACK library specified via absolute path" OFF)
 option(ALREADY_HAVE_METIS "Suppress build of oomph-lib's own copy of metis" OFF)
@@ -145,8 +149,8 @@ else()
   set(OOMPH_INTSIZE 32)
 endif()
 
-# Add PARANOID and RANGE_CHECKING for Debug configurations if desired. Have to
-# use generator expressions to make sure it works correctly for multi-config.
+# Add PARANOID and RANGE_CHECKING for Debug configurations if desired. We have
+# to use generator expressions so that it works correctly for multi-config.
 # generators like Xcode, Visual Studio or Ninja Multi-Config
 if(OOMPH_ENABLE_PARANOID)
   add_compile_definitions("$<$<CONFIG:DEBUG>:PARANOID>")
@@ -194,8 +198,7 @@ endif()
 include(OomphCheckForRequiredHeaders)
 
 # Enable @rpath in the install name for any shared library being built note:
-# this is overwritten by INSTALL_NAME_DIR. See:
-# https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/RPATH-handling#:~:text=Since%20version%202.8.,overridden%20for%20the%20install%20tree.
+# this is overwritten by INSTALL_NAME_DIR. See: https://tinyurl.com/feksedtz
 set(CMAKE_MACOSX_RPATH TRUE)
 
 # -------------------------[ ADD CONFIG. HEADER FLAG ]--------------------------
