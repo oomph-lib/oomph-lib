@@ -121,8 +121,19 @@ function(oomph_library_config)
     set(LINK_TYPE INTERFACE)
   endif()
 
+  # Provide an alias for the library so that users importing the library can
+  # link to the library they require by selecting the library they need from the
+  # project "namespace"
+  set(LIBRARY_ALIAS ${PROJECT_NAMESPACE}::${LIBNAME})
+
   # Create an alias library name, e.g. generic can be linked with oomph::generic
-  add_library(${PROJECT_NAMESPACE}::${LIBNAME} ALIAS ${LIBNAME})
+  add_library(${LIBRARY_ALIAS} ALIAS ${LIBNAME})
+
+  # Storage for the list of libraries exported by oomph-lib; append to the cache
+  # variable in two steps: first edit the variable locally, then update the
+  # variable globally. This approach avoids adding a leading ";" in the variable
+  list(APPEND OOMPHLIB_LIBRARIES ${LIBRARY_ALIAS})
+  set(OOMPHLIB_LIBRARIES "${OOMPHLIB_LIBRARIES}" CACHE INTERNAL "")
 
   # Specify the location of the library headers at build-time/install-time. Add
   # these build-time directories for the following reasons:

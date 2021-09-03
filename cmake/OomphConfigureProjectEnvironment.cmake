@@ -62,6 +62,9 @@ endif(APPLE)
 # Define the namespace for libraries to be exported within
 set(PROJECT_NAMESPACE oomph)
 
+# Storage for the list of libraries exported by oomph-lib
+set(OOMPHLIB_LIBRARIES CACHE INTERNAL "" FORCE)
+
 # Make sure different configurations (e.g. Debug and Release) don't collide
 set(CMAKE_DEBUG_POSTFIX "d")
 
