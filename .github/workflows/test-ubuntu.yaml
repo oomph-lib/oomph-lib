@@ -3,7 +3,6 @@ name: Ubuntu
 on: push
 
 env:
-  CMAKE_BUILD_TYPE: Release
   CTEST_OUTPUT_ON_FAILURE: 1
   INSTALL_LOCATION: '${{ github.workspace }}/.local'
   OOMPH_ENABLE_MPI: 0
@@ -16,47 +15,18 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: sudo apt-get install -y gfortran openmpi-bin libopenmpi-dev
+        run: sudo apt-get install -y gfortran openmpi-bin libopenmpi-dev ninja-build
 
-      - name: Install Ninja
-        run: sudo apt-get install ninja-build
-
-      - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1.9
-        with:
-          cmake-version: '3.16.x'
-
-      # # Should ideally restrict this to 3.17 but doing so leads to the GitHub
-      # # Action producing an error as a result of the Action trying to assign
-      # # CMake to the path in an "old-fashioned" way. The latest version of this
-      # # Action takes care of that.
-      # - name: Get latest CMake and Ninja
-      #   uses: PuneetMatharu/get-cmake@latest
-
-      - name: Output CMake version
-        run: cmake --version
-
-      - name: Configure (${{ env.CMAKE_BUILD_TYPE }})
-        run: |
-          cmake -G Ninja \
-          -DCMAKE_BUILD_TYPE=${{ env.CMAKE_BUILD_TYPE }} \
-          -DOOMPH_ENABLE_MPI=${{ env.OOMPH_ENABLE_MPI }} \
-          -DCMAKE_INSTALL_PREFIX=${{ env.INSTALL_LOCATION }} \
-          -DOOMPH_ENABLE_PARANOID=OFF \
-          -DOOMPH_ENABLE_RANGE_CHECKING=OFF \
-          -B build
-
-      - name: Build & install
-        working-directory: build
-        run: ninja && ninja install
+      - name: Configure, build & install
+        run: cmake --preset CI-build -B build && cd build && ninja && ninja install
 
       - name: Run self-tests
         id: self_tests
         run: |
-          cd demo_drivers
-          cmake -DCMAKE_PREFIX_PATH=${{ env.INSTALL_LOCATION }} -B build
-          cd build
-          ctest -C ${{ env.CMAKE_BUILD_TYPE }} -j $(nproc) --timeout 10000 --no-label-summary
+          cd demo_drivers && cp ../CMakePresets.json ./
+          cmake --preset CI-demo-drivers
+          cd build && cp ../CMakePresets.json ./
+          ctest --preset CI-demo-drivers -j $(nproc)
         continue-on-error: true
 
       - name: Upload validation log file
@@ -65,6 +35,6 @@ jobs:
           name: validation-${{ runner.os }}-MPI_${{ env.OOMPH_ENABLE_MPI }}.log
           path: ./validation.log
 
-      - name: Propagate status
+      - name: Propagate CTest status
         if: steps.self_tests.outcome == 'failure'
         run: exit 8

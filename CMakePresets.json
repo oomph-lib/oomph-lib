@@ -32,24 +32,6 @@
       }
     },
     {
-      "name": "CI-build",
-      "inherits": "base",
-      "displayName": "CI Build Config",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build",
-      "installDir": "$penv{INSTALL_LOCATION}"
-    },
-    {
-      "name": "CI-demo-drivers",
-      "inherits": "base",
-      "displayName": "CI Demo Drivers Config",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build",
-      "cacheVariables": {
-        "CMAKE_PREFIX_PATH": "$penv{INSTALL_LOCATION}"
-      }
-    },
-    {
       "name": "optimised",
       "inherits": "base",
       "displayName": "Optimised Config",
@@ -85,6 +67,23 @@
       "inherits": "base",
       "displayName": "Ninja Multi-Config",
       "generator": "Ninja Multi-Config"
+    },
+    {
+      "name": "CI-build",
+      "inherits": "base",
+      "displayName": "Build Config for CI/CD",
+      "generator": "Ninja",
+      "installDir": "$penv{INSTALL_LOCATION}"
+    },
+    {
+      "name": "CI-demo-drivers",
+      "displayName": "Demo Drivers Build Config for CI/CD",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_PREFIX_PATH": "$penv{INSTALL_LOCATION}"
+      }
     }
   ],
   "buildPresets": [
