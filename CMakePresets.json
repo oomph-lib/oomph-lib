@@ -1,0 +1,124 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 16,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
+        "OOMPH_ENABLE_CLANG_TIDY": "OFF",
+        "OOMPH_ENABLE_CLANG_FORMAT": "OFF",
+        "OOMPH_BLEEDING_EDGE": "OFF",
+        "OOMPH_ENABLE_PARANOID": "OFF",
+        "OOMPH_ENABLE_RANGE_CHECKING": "OFF",
+        "OOMPH_WANT_CGAL": "OFF",
+        "OOMPH_WANT_HYPRE": "OFF",
+        "OOMPH_WANT_MUMPS": "OFF",
+        "OOMPH_WANT_TRILINOS": "OFF",
+        "OOMPH_WANT_NLOHMANN_JSON": "OFF",
+        "OOMPH_USE_DEPRECATED_SUPERLU": "OFF",
+        "OOMPH_ENABLE_TESTING": "OFF",
+        "OOMPH_ENABLE_MPI": "OFF",
+        "OOMPH_ENABLE_CUDA": "OFF",
+        "BUILD_SHARED_LIBS": "OFF",
+        "SUPPRESS_DOC": "ON",
+        "SYMBOLIC_LINKS_FOR_HEADERS": "ON"
+      }
+    },
+    {
+      "name": "default",
+      "inherits": "base",
+      "displayName": "Default Config",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build"
+    },
+    {
+      "name": "debug",
+      "inherits": "base",
+      "displayName": "Debug Config",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "OOMPH_ENABLE_PARANOID": "ON",
+        "OOMPH_ENABLE_RANGE_CHECKING": "ON"
+      }
+    },
+    {
+      "name": "mpi",
+      "inherits": "base",
+      "displayName": "Default MPI Config",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-mpi",
+      "environment": {
+        "CC": "mpicc",
+        "CXX": "mpic++",
+        "FC": "mpifort"
+      }
+    },
+    {
+      "name": "ninja-multi",
+      "inherits": "base",
+      "displayName": "Ninja Multi-Config",
+      "generator": "Ninja Multi-Config"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default"
+    },
+    {
+      "name": "debug",
+      "configurePreset": "debug"
+    },
+    {
+      "name": "mpi",
+      "configurePreset": "mpi"
+    },
+    {
+      "name": "ninja-multi",
+      "configurePreset": "ninja-multi"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test-base",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true,
+        "labelSummary": false
+      },
+      "execution": {
+        "timeout": 10000,
+        "noTestsAction": "error"
+      }
+    },
+    {
+      "name": "default",
+      "configurePreset": "default",
+      "inherits": "test-base"
+    },
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "inherits": "test-base"
+    },
+    {
+      "name": "mpi",
+      "configurePreset": "mpi",
+      "inherits": "test-base"
+    },
+    {
+      "name": "ninja-multi",
+      "configurePreset": "ninja-multi",
+      "inherits": "test-base"
+    }
+  ]
+}
