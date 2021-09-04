@@ -18,6 +18,9 @@ jobs:
       - name: Install dependencies
         run: brew install cmake open-mpi && brew reinstall gfortran
 
+      - name: Install Ninja
+        run: brew install ninja
+
       - name: Get latest CMake and Ninja
         uses: PuneetMatharu/get-cmake@latest
 

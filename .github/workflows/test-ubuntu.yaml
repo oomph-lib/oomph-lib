@@ -18,6 +18,9 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install -y gfortran openmpi-bin libopenmpi-dev
 
+      - name: Install Ninja
+        run: sudo apt-get install ninja-build
+
       # Should ideally restrict this to 3.17 but doing so leads to the GitHub
       # Action producing an error as a result of the Action trying to assign
       # CMake to the path in an "old-fashioned" way. The latest version of this
