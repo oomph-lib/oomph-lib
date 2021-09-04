@@ -149,9 +149,9 @@ else()
   set(OOMPH_INTSIZE 32)
 endif()
 
-# Add PARANOID and RANGE_CHECKING for Debug configurations if desired. We have
-# to use generator expressions so that it works correctly for multi-config.
-# generators like Xcode, Visual Studio or Ninja Multi-Config
+# Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired.
+# We have to use generator expressions so that it works correctly for multi-
+# configuration generators like Xcode, Visual Studio or Ninja Multi-Config
 if(OOMPH_ENABLE_PARANOID)
   add_compile_definitions("$<$<CONFIG:DEBUG>:PARANOID>")
 endif()

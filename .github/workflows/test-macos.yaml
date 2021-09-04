@@ -21,8 +21,13 @@ jobs:
       - name: Install Ninja
         run: brew install ninja
 
-      - name: Get latest CMake and Ninja
-        uses: PuneetMatharu/get-cmake@latest
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.9
+        with:
+          cmake-version: '3.16.x'
+
+      # - name: Get latest CMake and Ninja
+      #   uses: PuneetMatharu/get-cmake@latest
 
       - name: Output CMake version
         run: cmake --version

@@ -21,12 +21,17 @@ jobs:
       - name: Install Ninja
         run: sudo apt-get install ninja-build
 
-      # Should ideally restrict this to 3.17 but doing so leads to the GitHub
-      # Action producing an error as a result of the Action trying to assign
-      # CMake to the path in an "old-fashioned" way. The latest version of this
-      # Action takes care of that.
-      - name: Get latest CMake and Ninja
-        uses: PuneetMatharu/get-cmake@latest
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.9
+        with:
+          cmake-version: '3.16.x'
+
+      # # Should ideally restrict this to 3.17 but doing so leads to the GitHub
+      # # Action producing an error as a result of the Action trying to assign
+      # # CMake to the path in an "old-fashioned" way. The latest version of this
+      # # Action takes care of that.
+      # - name: Get latest CMake and Ninja
+      #   uses: PuneetMatharu/get-cmake@latest
 
       - name: Output CMake version
         run: cmake --version
