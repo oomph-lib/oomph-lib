@@ -32,9 +32,27 @@
       }
     },
     {
-      "name": "default",
+      "name": "CI-build",
       "inherits": "base",
-      "displayName": "Default Config",
+      "displayName": "CI Build Config",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "installDir": "$penv{INSTALL_LOCATION}"
+    },
+    {
+      "name": "CI-demo-drivers",
+      "inherits": "base",
+      "displayName": "CI Demo Drivers Config",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_PREFIX_PATH": "$penv{INSTALL_LOCATION}"
+      }
+    },
+    {
+      "name": "optimised",
+      "inherits": "base",
+      "displayName": "Optimised Config",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build"
     },
@@ -71,8 +89,16 @@
   ],
   "buildPresets": [
     {
-      "name": "default",
-      "configurePreset": "default"
+      "name": "CI-build",
+      "configurePreset": "CI-build"
+    },
+    {
+      "name": "CI-demo-drivers",
+      "configurePreset": "CI-demo-drivers"
+    },
+    {
+      "name": "optimised",
+      "configurePreset": "optimised"
     },
     {
       "name": "debug",
@@ -101,8 +127,13 @@
       }
     },
     {
-      "name": "default",
-      "configurePreset": "default",
+      "name": "CI-demo-drivers",
+      "configurePreset": "CI-demo-drivers",
+      "inherits": "test-base"
+    },
+    {
+      "name": "optimised",
+      "configurePreset": "optimised",
       "inherits": "test-base"
     },
     {
