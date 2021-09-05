@@ -73,7 +73,9 @@
       "inherits": "base",
       "displayName": "Build Config for CI/CD",
       "generator": "Ninja",
-      "installDir": "$penv{INSTALL_LOCATION}"
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "$penv{INSTALL_LOCATION}"
+      }
     },
     {
       "name": "CI-demo-drivers",
@@ -87,14 +89,6 @@
     }
   ],
   "buildPresets": [
-    {
-      "name": "CI-build",
-      "configurePreset": "CI-build"
-    },
-    {
-      "name": "CI-demo-drivers",
-      "configurePreset": "CI-demo-drivers"
-    },
     {
       "name": "optimised",
       "configurePreset": "optimised"
@@ -110,6 +104,14 @@
     {
       "name": "ninja-multi",
       "configurePreset": "ninja-multi"
+    },
+    {
+      "name": "CI-build",
+      "configurePreset": "CI-build"
+    },
+    {
+      "name": "CI-demo-drivers",
+      "configurePreset": "CI-demo-drivers"
     }
   ],
   "testPresets": [
