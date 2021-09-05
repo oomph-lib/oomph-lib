@@ -75,7 +75,9 @@
       "displayName": "Build Config for CI/CD",
       "generator": "Ninja",
       "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}"
+        "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}",
+        "OOMPH_ENABLE_MPI": "$penv{OOMPH_ENABLE_MPI}",
+        "OOMPH_WANT_TRILINOS": "$penv{OOMPH_WANT_TRILINOS}"
       }
     },
     {

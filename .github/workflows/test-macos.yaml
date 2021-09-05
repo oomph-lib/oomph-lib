@@ -4,13 +4,22 @@ on: push
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
-  OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
-  OOMPH_ENABLE_MPI: 0
 
 jobs:
   build:
+    strategy:
+      fail-fast: false
+      matrix:
+        OOMPH_ENABLE_MPI: [true, false]
+        OOMPH_WANT_TRILINOS: [true, false]
+
     runs-on: macos-latest
     steps:
+      - env:
+          OOMPH_ENABLE_MPI: ${{ matrix.OOMPH_ENABLE_MPI }}
+          OOMPH_WANT_TRILINOS: ${{ matrix.OOMPH_WANT_TRILINOS }}
+          OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local/MPI_${{ OOMPH_ENABLE_MPI }}-Trilinos_${{ OOMPH_WANT_TRILINOS }}'
+
       - name: Check out repository
         uses: actions/checkout@v2
 
@@ -18,7 +27,7 @@ jobs:
         run: brew install cmake open-mpi ninja && brew reinstall gfortran
 
       - name: Configure, build & install
-        run: cmake --preset CI-build -B build && cd build && ninja && ninja install
+        run: cmake --preset CI-build -B build && ninja && ninja install
 
       - name: Run self-tests
         id: self_tests
