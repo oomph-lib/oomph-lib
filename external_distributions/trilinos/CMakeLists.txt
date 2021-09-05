@@ -101,11 +101,14 @@ set(OOMPH_TRILINOS_LIBRARIES_WITH_PATHS ${TRILINOS_LIBRARIES_WITH_PATHS} CACHE
 # The recipe for building the actual library
 ExternalProject_Add(
   oomph_trilinos_project
+  GIT_REPOSITORY https://github.com/trilinos/Trilinos
+  GIT_TAG trilinos-release-11-8-1
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
+  PATCH_COMMAND ${PATCH_COMMAND}
   INSTALL_DIR "${OOMPH_TRILINOS_INSTALL_DIR}"
-  URL "${CMAKE_CURRENT_LIST_DIR}/Trilinos-11.8.1-Source.tar.gz"
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR> ${OOMPH_TRILINOS_FLAGS}
   BUILD_BYPRODUCTS ${OOMPH_TRILINOS_LIBRARIES_WITH_PATHS}
-  PATCH_COMMAND ${PATCH_COMMAND}
   DEPENDS oomph::oomph_blas oomph::oomph_lapack)
 
 # Build it as a static/shared library depending on how oomph-lib is being built
