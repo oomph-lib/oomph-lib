@@ -63,10 +63,6 @@ set(OOMPH_TRILINOS_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/trilinos_install"
 set(OOMPH_TRILINOS_INCLUDE_DIR "${OOMPH_TRILINOS_INSTALL_DIR}/include")
 set(OOMPH_TRILINOS_LIBRARY_DIR "${OOMPH_TRILINOS_INSTALL_DIR}/lib")
 
-# Create the include directory to silence the CMake error about a non-existent
-# path for the "imported target Trilinos::Trilinos"
-file(MAKE_DIRECTORY ${OOMPH_TRILINOS_INCLUDE_DIR})
-
 # Trilinos library names for linking
 set(TRILINOS_LIBRARIES
     amesos
@@ -76,8 +72,16 @@ set(TRILINOS_LIBRARIES
     epetraext
     ifpack
     ml
-    teuchos
-    triutils)
+    teuchosremainder
+    teuchosnumerics
+    teuchoscomm
+    teuchosparameterlist
+    teuchoscore
+    triutils
+    CACHE
+    INTERNAL
+    "List of Trilinos libraries to link against"
+    FORCE)
 
 # The libraries built by Trilinos with full paths and lib decorations (e.g.
 # "lib" prefix and ".a" suffix)
@@ -90,13 +94,17 @@ foreach(TRILINOS_LIBRARY IN LISTS TRILINOS_LIBRARIES)
   )
 endforeach()
 
+# Cache the library artifacts to link against (needed for oomphlibConfig.cmake)
+set(OOMPH_TRILINOS_LIBRARIES_WITH_PATHS ${TRILINOS_LIBRARIES_WITH_PATHS} CACHE
+    INTERNAL "" FORCE)
+
 # The recipe for building the actual library
 ExternalProject_Add(
   oomph_trilinos_project
   INSTALL_DIR "${OOMPH_TRILINOS_INSTALL_DIR}"
   URL "${CMAKE_CURRENT_LIST_DIR}/Trilinos-11.8.1-Source.tar.gz"
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR> ${OOMPH_TRILINOS_FLAGS}
-  BUILD_BYPRODUCTS ${TRILINOS_LIBRARIES_WITH_PATHS}
+  BUILD_BYPRODUCTS ${OOMPH_TRILINOS_LIBRARIES_WITH_PATHS}
   PATCH_COMMAND ${PATCH_COMMAND}
   DEPENDS oomph::oomph_blas oomph::oomph_lapack)
 
@@ -106,17 +114,21 @@ if(BUILD_SHARED_LIBS)
   set(LIBTYPE SHARED)
 endif()
 
+# Create the include directory to silence the CMake error about a non-existent
+# path for the "imported target Trilinos::Trilinos"
+file(MAKE_DIRECTORY ${OOMPH_TRILINOS_INCLUDE_DIR})
+
 # Make a target that combines the Trilinos libraries into one and indicates to
 # our library that this library is provided externally. We need to do this
 # because the Trilinos library only gets configured, built and installed during
 # our build phase, so we can't get hold of variables defined by Trilinos, e.g. a
 # list of the libraries that it built, until then
-add_library(Trilinos::Trilinos INTERFACE IMPORTED GLOBAL)
+add_library(Trilinos::Trilinos ${LIBTYPE} IMPORTED GLOBAL)
 set_target_properties(
   Trilinos::Trilinos
-  PROPERTIES IMPORTED_LOCATION "${TRILINOS_LIBRARIES_WITH_PATHS}"
-             INTERFACE_INCLUDE_DIRECTORIES "${OOMPH_TRILINOS_INCLUDE_DIR}")
-target_link_libraries(Trilinos::Trilinos INTERFACE "${TRILINOS_LIBRARIES}")
+  PROPERTIES IMPORTED_LOCATION "${OOMPH_TRILINOS_LIBRARIES_WITH_PATHS}"
+             INTERFACE_INCLUDE_DIRECTORIES "${OOMPH_TRILINOS_INCLUDE_DIR}"
+             INTERFACE_LINK_LIBRARIES "${TRILINOS_LIBRARIES}")
 
 # Make it clear that our aliased library depends on the ExternalProject library
 # being built to handle the race condition for linking

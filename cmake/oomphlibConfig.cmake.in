@@ -53,6 +53,14 @@ endif()
 if(OOMPH_HAS_TRILINOS AND NOT Trilinos_FOUND)
   set(OOMPH_TRILINOS_VERSION "@TRILINOS_VERSION@")
   set(OOMPH_TRILINOS_INSTALL_DIR "@OOMPH_TRILINOS_INSTALL_DIR@")
+  set(OOMPH_TRILINOS_INCLUDE_DIR "${OOMPH_TRILINOS_INSTALL_DIR}/include")
+
+  set(TRILINOS_LIBRARIES "@TRILINOS_LIBRARIES@")
+  set(OOMPH_TRILINOS_LIBRARIES_WITH_PATHS
+      "@OOMPH_TRILINOS_LIBRARIES_WITH_PATHS@")
+
+  # Provide the location of the Trilinos install directory so that CMake can
+  # find the TrilinosConfig.cmake file
   list(APPEND CMAKE_PREFIX_PATH "${OOMPH_TRILINOS_INSTALL_DIR}")
   find_dependency(Trilinos ${OOMPH_TRILINOS_VERSION} CONFIG REQUIRED)
 
@@ -60,6 +68,16 @@ if(OOMPH_HAS_TRILINOS AND NOT Trilinos_FOUND)
   if(Trilinos_LIBRARIES)
     set(Trilinos_FOUND TRUE)
   endif()
+
+  # Create the Trilinos libraries target to link against; this contains the
+  # paths to each library artifact and the path to the Trilinos include
+  # directory where all the headers are stored
+  add_library(Trilinos::Trilinos INTERFACE IMPORTED GLOBAL)
+  set_target_properties(
+    Trilinos::Trilinos
+    PROPERTIES IMPORTED_LOCATION "${OOMPH_TRILINOS_LIBRARIES_WITH_PATHS}"
+               INTERFACE_INCLUDE_DIRECTORIES "${OOMPH_TRILINOS_INCLUDE_DIR}"
+               INTERFACE_LINK_LIBRARIES "${TRILINOS_LIBRARIES}")
 endif()
 if(OOMPH_HAS_MUMPS AND NOT MUMPS_FOUND)
   find_dependency(MUMPS 5.4.0 REQUIRED)
