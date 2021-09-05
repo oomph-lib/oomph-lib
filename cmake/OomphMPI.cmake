@@ -53,6 +53,10 @@ endfunction()
 if(NOT MPI_FOUND)
   find_package(MPI REQUIRED)
   oomph_check_mpi()
+
+  if(NOT MPI_FOUND)
+    message(STATUS "MPI could not be found!")
+  endif()
 endif()
 
 # if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.19.0") else() message( STATUS "I
