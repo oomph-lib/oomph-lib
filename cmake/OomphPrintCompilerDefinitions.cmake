@@ -8,6 +8,6 @@ get_directory_property(OOMPH_COMPILE_DEFINITIONS DIRECTORY ${CMAKE_SOURCE_DIR}
                                                            COMPILE_DEFINITIONS)
 message(STATUS "COMPILER DEFINITIONS:")
 foreach(DEFN ${OOMPH_COMPILE_DEFINITIONS})
-  message(STATUS "  -D" ${DEFN})
+  message(STATUS "  ...${DEFN}")
 endforeach()
 # ------------------------------------------------------------------------------
