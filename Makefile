@@ -1,3 +1,14 @@
+NPROCS:=1
+OS := $(shell uname -s)
+
+ifeq ($(OS),Linux)
+	NPROCS := $(shell nproc)
+endif
+ifeq ($(OS),Darwin)
+	NPROCS := $(shell sysctl -n hw.logicalcpu)
+endif
+
+
 setup:
 	echo "Can't use this yet. WIP. Need to make sure it runs safely."
 	mkdir build && cd build
@@ -19,7 +30,7 @@ check:
 	else
 		cmake ..
 	fi
-	ctest -j4
+	ctest -j $(NPROCS) --timeout 10000 --no-label-summary
 
 cmake-format:
 	set -f
