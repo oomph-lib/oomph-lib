@@ -75,7 +75,7 @@
       "displayName": "Build Config for CI/CD",
       "generator": "Ninja",
       "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "$penv{INSTALL_LOCATION}"
+        "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}"
       }
     },
     {
@@ -85,7 +85,7 @@
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_PREFIX_PATH": "$penv{INSTALL_LOCATION}"
+        "CMAKE_PREFIX_PATH": "$penv{OOMPH_INSTALL_PATH}"
       }
     }
   ],
