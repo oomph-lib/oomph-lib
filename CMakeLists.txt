@@ -77,16 +77,16 @@ find_package(Python3 REQUIRED)
 # you can choose to have them displayed during the build
 option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display all warnings" OFF)
 
+# Attempt to build and use up-to-date external sources. [WORK IN PROGRESS]
+option(OOMPH_BLEEDING_EDGE "Try to build with up-to-date external sources" OFF)
+option(OOMPH_ENABLE_64BIT_INTS "Use 64-bit ints for matrix indices" OFF)
+
 # Enable the Clang static code analyser/formatter.
 # NOTE: If you enable clang-tidy, you should NOT run the Makefile/Ninja build in
 # parallel as it may lead to data races. This functionality should probably be
 # reserved for a CI server to run. [WORK IN PROGRESS.]
 option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy C++ static code analysis" OFF)
 option(OOMPH_ENABLE_CLANG_FORMAT "Enable Clang-based C++ code formatting" OFF)
-
-# Attempt to build and use up-to-date external sources. [WORK IN PROGRESS]
-option(OOMPH_BLEEDING_EDGE "Try to build with up-to-date external sources" OFF)
-option(OOMPH_ENABLE_64BIT_INTS "Use 64-bit ints for matrix indices" OFF)
 
 # Extra debugging compile options; only used by Debug configurations
 option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ON)
@@ -102,17 +102,18 @@ option(OOMPH_ENABLE_TESTING "Build unit tests" OFF)
 
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
-option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
+option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" ON)
 option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
 # Optionally build MKR BLAS and LAPACK
-option(OOMPH_USE_MKL_BLAS_AND_LAPACK "Use the MKL implementation of BLAS and LAPACK" OFF)
+option(OOMPH_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS" OFF)
+# option(OOMPH_USE_MKL_BLAS_AND_LAPACK "Use the MKL implementation of BLAS and LAPACK" OFF)
 
 # Optionally build third-party libraries. [WORK IN PROGRESS.]
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
 option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
-option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
+option(OOMPH_WANT_TRILINOS "Use Trilinos library" ON)
 option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 
 # Fine-grained control of build of external_srcs. NOTE: These don't work yet!

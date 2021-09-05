@@ -41,7 +41,13 @@ endif()
 
 # Add BLAS
 if(NOT ALREADY_HAVE_BLAS)
-  add_subdirectory(oomph_blas)
+  if(OOMPH_USE_OPENBLAS)
+    # Need to use the 'develop' branch of: https://github.com/xianyi/OpenBLAS OR
+    # USE: 'brew install openblas' & 'sudo apt-get install libopenblas-dev'
+    add_subdirectory(oomph_openblas_0.3.17)
+  else()
+    add_subdirectory(oomph_blas)
+  endif()
 endif()
 
 # Add LAPACK/FORTRAN LAPACK
