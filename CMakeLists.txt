@@ -45,7 +45,7 @@ project(
 # Specify the location of non-standard CMake modules and the C++ standard
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/")
 # FIXME: Up-to-date Trilinos requires C++14!
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
@@ -192,6 +192,44 @@ endif()
 # harnessing CUDA functionality for (hopefully damn fast) computations.
 if(OOMPH_ENABLE_CUDA)
   find_package(CUDA REQUIRED)
+endif()
+
+# TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD
+if(WITH_BLACS)
+  set(OOMPH_ALREADY_HAVE_BLACS TRUE)
+endif()
+if(WITH_SCALAPACK)
+  set(OOMPH_ALREADY_HAVE_SCALAPACK TRUE)
+endif()
+if(WITH_PORD)
+  set(OOMPH_ALREADY_HAVE_PORD TRUE)
+endif()
+if(WITH_MUMPS)
+  set(OOMPH_ALREADY_HAVE_MUMPS TRUE)
+endif()
+if(WITH_BLAS)
+  set(OOMPH_ALREADY_HAVE_BLAS TRUE)
+endif()
+if(WITH_LAPACK)
+  set(OOMPH_ALREADY_HAVE_LAPACK TRUE)
+endif()
+if(WITH_HYPRE)
+  set(OOMPH_ALREADY_HAVE_HYPRE TRUE)
+endif()
+if(WITH_TRILINOS)
+  set(OOMPH_ALREADY_HAVE_TRILINOS TRUE)
+endif()
+if(WITH_BOOST)
+  set(OOMPH_ALREADY_HAVE_BOOST TRUE)
+endif()
+if(WITH_GMP)
+  set(OOMPH_ALREADY_HAVE_GMP TRUE)
+endif()
+if(WITH_MPFR)
+  set(OOMPH_ALREADY_HAVE_MPFR TRUE)
+endif()
+if(WITH_CGAL)
+  set(OOMPH_ALREADY_HAVE_CGAL TRUE)
 endif()
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
