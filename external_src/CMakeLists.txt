@@ -40,20 +40,23 @@ if(NOT SUPPRESS_TETGEN_LIB)
 endif()
 
 # Add BLAS
-if(NOT ALREADY_HAVE_BLAS)
-  if(OOMPH_USE_OPENBLAS)
-    # Need to use the 'develop' branch of: https://github.com/xianyi/OpenBLAS OR
-    # USE: 'brew install openblas' & 'sudo apt-get install libopenblas-dev'
-    add_subdirectory(oomph_openblas_0.3.17)
-  else()
+if(NOT OOMPH_USE_OPENBLAS)
+  if(NOT ALREADY_HAVE_BLAS)
     add_subdirectory(oomph_blas)
   endif()
-endif()
 
-# Add LAPACK/FORTRAN LAPACK
-if(NOT ALREADY_HAVE_LAPACK)
-  add_subdirectory(oomph_lapack)
-  add_subdirectory(oomph_flapack)
+  # Add LAPACK/FORTRAN LAPACK
+  if(NOT ALREADY_HAVE_LAPACK)
+    add_subdirectory(oomph_lapack)
+    add_subdirectory(oomph_flapack)
+  endif()
+else()
+
+  # Need to use the 'develop' branch of: https://github.com/xianyi/OpenBLAS OR
+  # USE: 'brew install openblas' & 'sudo apt-get install libopenblas-dev'
+  #
+  # add_subdirectory(oomph_openblas_0.3.17)
+
 endif()
 
 # Add SuperLU

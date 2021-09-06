@@ -26,6 +26,9 @@ set(HAVE_UNISTDH @OOMPH_HAS_UNISTDH@)
 set(OOMPH_SUPPRESSED_TRIANGLE_LIB @SUPPRESS_TRIANGLE_LIB@)
 set(OOMPH_SUPPRESSED_TETGEN_LIB @SUPPRESS_TETGEN_LIB@)
 
+# Capture user's decision to use/build OpenBLAS/LAPACK
+set(OOMPH_USE_OPENBLAS @OOMPH_USE_OPENBLAS@)
+
 # Capture values from the configuration step to determine which dependencies
 # should be forwarded to the user
 set(OOMPH_HAS_MPI @OOMPH_ENABLE_MPI@)
@@ -34,6 +37,17 @@ set(OOMPH_HAS_HYPRE @OOMPH_WANT_HYPRE@)
 set(OOMPH_HAS_MUMPS @OOMPH_WANT_MUMPS@)
 set(OOMPH_HAS_TRILINOS @OOMPH_WANT_TRILINOS@)
 set(OOMPH_HAS_NLOHMANN_JSON @OOMPH_WANT_NLOHMANN_JSON@)
+
+# Search for OpenBLAS/LAPACK libraries
+if(OOMPH_USE_OPENBLAS)
+  set(BLAS_DIRS @BLAS_DIRS@)
+  set(LAPACK_DIRS @LAPACK_DIRS@)
+  list(APPEND CMAKE_PREFIX_PATH "${BLAS_DIRS};${LAPACK_DIRS}")
+
+  set(BLA_VENDOR @BLA_VENDOR@)
+  find_dependency(BLAS REQUIRED)
+  find_dependency(LAPACK REQUIRED)
+endif()
 
 # Forward library dependencies to the library consumer:
 

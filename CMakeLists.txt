@@ -64,10 +64,8 @@ set(CMAKE_MESSAGE_LOG_LEVEL VERBOSE)
 # ----------------------[ FIND REQUIRED/DESIRED PACKAGES ]----------------------
 
 # Built-in modules to find out whether certain packages are installed
-find_package(BLAS)
 find_package(Doxygen)
 find_package(Git)
-find_package(LAPACK)
 find_package(Python3 REQUIRED)
 
 # ------------------------------[ BUILD OPTIONS ]-------------------------------
@@ -105,8 +103,8 @@ option(OOMPH_ENABLE_TESTING "Build unit tests" OFF)
 option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
-# Optionally build MKR BLAS and LAPACK
-option(OOMPH_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS" OFF)
+# Optionally build OpenBLAS/LAPACK
+option(OOMPH_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK" ON)
 # option(OOMPH_USE_MKL_BLAS_AND_LAPACK "Use the MKL implementation of BLAS and LAPACK" OFF)
 
 # Optionally build third-party libraries. [WORK IN PROGRESS.]
@@ -192,6 +190,38 @@ endif()
 # harnessing CUDA functionality for (hopefully damn fast) computations.
 if(OOMPH_ENABLE_CUDA)
   find_package(CUDA REQUIRED)
+endif()
+
+if(OOMPH_USE_OPENBLAS)
+  # Search for OpenBLAS/LAPACK libraries. Ideally, installed via 'sudo apt-get'
+  # or 'brew install' and the user simply sets 'CMAKE_PREFIX_PATH' in their
+  # CMakeUserPresets.json.
+  list(APPEND CMAKE_PREFIX_PATH "/usr/local/Cellar/openblas/0.3.17")
+  set(BLA_VENDOR OpenBLAS)
+  find_package(BLAS REQUIRED)
+  find_package(LAPACK REQUIRED)
+
+  # NOTE: For BLAS and LAPACK, there should be just a single library artifact
+  # but we'll generically loop over the *_LIBRARIES variables set by the Find*
+  # modules to be on the safe side...
+
+  # Store a list of directories containing the BLAS libraries
+  set(BLAS_DIRS)
+  foreach(BLAS_LIBRARY IN LISTS BLAS_LIBRARIES)
+    get_filename_component(BLAS_DIR ${BLAS_LIBRARY} DIRECTORY)
+    list(APPEND BLAS_DIRS ${BLAS_DIR})
+  endforeach()
+
+  # Store a list of directories containing the LAPACK libraries
+  set(LAPACK_DIRS)
+  foreach(LAPACK_LIBRARY IN LISTS LAPACK_LIBRARIES)
+    get_filename_component(LAPACK_DIR ${LAPACK_LIBRARY} DIRECTORY)
+    list(APPEND LAPACK_DIRS ${LAPACK_DIR})
+  endforeach()
+
+  # PM: Disable Trilinos for now; not sure how to link it against OpenBLAS
+  set(OOMPH_WANT_TRILINOS OFF CACHE BOOL
+      "Disable Trilinos when OpenBLAS is used" FORCE)
 endif()
 
 # TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD
