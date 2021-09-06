@@ -34,6 +34,29 @@
       }
     },
     {
+      "name": "CI-build",
+      "inherits": "base",
+      "displayName": "Build Config for CI/CD",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}",
+        "OOMPH_ENABLE_MPI": "$penv{OOMPH_ENABLE_MPI}",
+        "OOMPH_WANT_MUMPS": "$penv{OOMPH_WANT_MUMPS}",
+        "OOMPH_WANT_TRILINOS": "$penv{OOMPH_WANT_TRILINOS}",
+        "OOMPH_USE_OPENBLAS": "$penv{OOMPH_USE_OPENBLAS}"
+      }
+    },
+    {
+      "name": "CI-demo-drivers",
+      "displayName": "Demo Drivers Build Config for CI/CD",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_PREFIX_PATH": "$penv{OOMPH_INSTALL_PATH}"
+      }
+    },
+    {
       "name": "optimised",
       "inherits": "base",
       "displayName": "Optimised Config",
@@ -69,31 +92,17 @@
       "inherits": "base",
       "displayName": "Ninja Multi-Config",
       "generator": "Ninja Multi-Config"
-    },
-    {
-      "name": "CI-build",
-      "inherits": "base",
-      "displayName": "Build Config for CI/CD",
-      "generator": "Ninja",
-      "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}",
-        "OOMPH_ENABLE_MPI": "$penv{OOMPH_ENABLE_MPI}",
-        "OOMPH_WANT_MUMPS": "$penv{OOMPH_WANT_MUMPS}",
-        "OOMPH_WANT_TRILINOS": "$penv{OOMPH_WANT_TRILINOS}"
-      }
-    },
-    {
-      "name": "CI-demo-drivers",
-      "displayName": "Demo Drivers Build Config for CI/CD",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_PREFIX_PATH": "$penv{OOMPH_INSTALL_PATH}"
-      }
     }
   ],
   "buildPresets": [
+    {
+      "name": "CI-build",
+      "configurePreset": "CI-build"
+    },
+    {
+      "name": "CI-demo-drivers",
+      "configurePreset": "CI-demo-drivers"
+    },
     {
       "name": "optimised",
       "configurePreset": "optimised"
@@ -109,14 +118,6 @@
     {
       "name": "ninja-multi",
       "configurePreset": "ninja-multi"
-    },
-    {
-      "name": "CI-build",
-      "configurePreset": "CI-build"
-    },
-    {
-      "name": "CI-demo-drivers",
-      "configurePreset": "CI-demo-drivers"
     }
   ],
   "testPresets": [
@@ -133,6 +134,16 @@
       }
     },
     {
+      "name": "ninja-multi",
+      "configurePreset": "ninja-multi",
+      "inherits": "test-base"
+    },
+    {
+      "name": "CI-demo-drivers",
+      "configurePreset": "CI-demo-drivers",
+      "inherits": "test-base"
+    },
+    {
       "name": "optimised",
       "configurePreset": "optimised",
       "inherits": "test-base"
@@ -145,16 +156,6 @@
     {
       "name": "mpi",
       "configurePreset": "mpi",
-      "inherits": "test-base"
-    },
-    {
-      "name": "ninja-multi",
-      "configurePreset": "ninja-multi",
-      "inherits": "test-base"
-    },
-    {
-      "name": "CI-demo-drivers",
-      "configurePreset": "CI-demo-drivers",
       "inherits": "test-base"
     }
   ]
