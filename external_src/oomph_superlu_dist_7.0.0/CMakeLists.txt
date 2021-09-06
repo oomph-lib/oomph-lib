@@ -242,6 +242,12 @@ if(OOMPH_ENABLE_CUDA)
   list(APPEND LINKLIBS ${CUDA_LIBRARIES} ${CUDA_CUBLAS_LIBRARIES})
 endif()
 
+# See:
+# https://github.com/xiaoyeli/superlu_dist#dependent-external-libraries-blas-and-parmetis
+# Might be able to link against OpenBLAS...
+#
+# -DTPL_BLAS_LIBRARIES="<BLAS library name>"
+
 if(UNIX)
   list(APPEND LINKLIBS m)
 endif()
