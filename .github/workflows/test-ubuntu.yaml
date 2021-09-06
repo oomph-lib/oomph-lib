@@ -10,9 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        OOMPH_ENABLE_MPI: ["OFF", "ON"]
-        OOMPH_WANT_TRILINOS: ["OFF", "ON"]
-        OOMPH_WANT_MUMPS: ["OFF", "ON"]
+        OOMPH_ENABLE_MPI: ["OFF"]
+        OOMPH_WANT_MUMPS: ["OFF"]
 
     runs-on: ubuntu-latest
     steps:
@@ -26,9 +25,8 @@ jobs:
         run: cmake --preset CI-build -B build && cd build && ninja && ninja install
         env:
           OOMPH_ENABLE_MPI: ${{ matrix.OOMPH_ENABLE_MPI }}
-          OOMPH_WANT_TRILINOS: ${{ matrix.OOMPH_WANT_TRILINOS }}
           OOMPH_WANT_MUMPS: ${{ matrix.OOMPH_WANT_MUMPS }}
-          OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local/MPI_${{ matrix.OOMPH_ENABLE_MPI }}-Trilinos_${{ matrix.OOMPH_WANT_TRILINOS }}-MUMPS_${{ matrix.OOMPH_WANT_MUMPS }}'
+          OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
 
       - name: Run self-tests
         id: self_tests
@@ -39,12 +37,12 @@ jobs:
           ctest --preset CI-demo-drivers -j $(nproc)
         continue-on-error: true
         env:
-          OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local/MPI_${{ matrix.OOMPH_ENABLE_MPI }}-Trilinos_${{ matrix.OOMPH_WANT_TRILINOS }}-MUMPS_${{ matrix.OOMPH_WANT_MUMPS }}'
+          OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
 
       - name: Upload validation log file
         uses: actions/upload-artifact@v2
         with:
-          name: validation-${{ runner.os }}-MPI_${{ env.OOMPH_ENABLE_MPI }}.log
+          name: validation-${{ runner.os }}-MPI_${{ env.OOMPH_ENABLE_MPI }}-MUMPS_${{ env.OOMPH_WANT_MUMPS }}.log
           path: ./validation.log
 
       - name: Propagate CTest status
