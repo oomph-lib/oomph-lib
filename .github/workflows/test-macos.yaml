@@ -10,8 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        OOMPH_ENABLE_MPI: [true, false]
-        OOMPH_WANT_TRILINOS: [true, false]
+        OOMPH_ENABLE_MPI: ["OFF", "ON"]
+        OOMPH_WANT_TRILINOS: ["OFF", "ON"]
 
     runs-on: macos-latest
     steps:
