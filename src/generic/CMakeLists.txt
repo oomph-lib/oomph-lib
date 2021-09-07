@@ -90,7 +90,6 @@ set(HEADERS
     matrix_vector_product.h
     projection.h
     line_visualiser.h
-    Subparametric_Telements.h
     sum_of_matrices.h
     implicit_midpoint_rule.h
     trapezoid_rule.h
