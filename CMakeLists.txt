@@ -114,7 +114,8 @@ option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
 option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
 option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 
-# Fine-grained control of build of external_srcs. NOTE: These don't work yet!
+# Fine-grained control of build of external_srcs. NOTE: These should be set on
+# the fly after checking whether the appropriate variable WITH_* has been set!
 # TODO: ADD OOMPH_ PREFIXES TO THESE VARIABLES!
 option(ALREADY_HAVE_BLAS "Use BLAS library specified via absolute path" OFF)
 option(ALREADY_HAVE_LAPACK "Use LAPACK library specified via absolute path" OFF)
