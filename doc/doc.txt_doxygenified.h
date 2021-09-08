@@ -1,6 +1,6 @@
 /**
 
-\mainpage
+\mainpage notitle
 \htmlonly
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >

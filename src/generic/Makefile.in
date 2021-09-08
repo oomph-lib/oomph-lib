@@ -182,10 +182,10 @@ am__libgeneric_la_SOURCES_DIST = oomph_definitions.h Qelements.h \
 	general_purpose_preconditioners.h block_preconditioner.h \
 	general_purpose_block_preconditioners.h \
 	SuperLU_preconditioner.h matrix_vector_product.h projection.h \
-	line_visualiser.h Subparametric_Telements.h sum_of_matrices.h \
-	implicit_midpoint_rule.h trapezoid_rule.h \
-	preconditioner_array.h pml_meshes.h pml_mapping_functions.h \
-	generalised_timesteppers.h vector_matrix.h face_mesh_project.h \
+	line_visualiser.h sum_of_matrices.h implicit_midpoint_rule.h \
+	trapezoid_rule.h preconditioner_array.h pml_meshes.h \
+	pml_mapping_functions.h generalised_timesteppers.h \
+	vector_matrix.h face_mesh_project.h \
 	generalised_newtonian_constitutive_models.h \
 	unstructured_two_d_mesh_geometry_base.h geometric_multigrid.h \
 	sample_point_container.h sample_point_parameters.h \
@@ -463,10 +463,10 @@ am__library_include_HEADERS_DIST = oomph_definitions.h Qelements.h \
 	general_purpose_preconditioners.h block_preconditioner.h \
 	general_purpose_block_preconditioners.h \
 	SuperLU_preconditioner.h matrix_vector_product.h projection.h \
-	line_visualiser.h Subparametric_Telements.h sum_of_matrices.h \
-	implicit_midpoint_rule.h trapezoid_rule.h \
-	preconditioner_array.h pml_meshes.h pml_mapping_functions.h \
-	generalised_timesteppers.h vector_matrix.h face_mesh_project.h \
+	line_visualiser.h sum_of_matrices.h implicit_midpoint_rule.h \
+	trapezoid_rule.h preconditioner_array.h pml_meshes.h \
+	pml_mapping_functions.h generalised_timesteppers.h \
+	vector_matrix.h face_mesh_project.h \
 	generalised_newtonian_constitutive_models.h \
 	unstructured_two_d_mesh_geometry_base.h geometric_multigrid.h \
 	sample_point_container.h sample_point_parameters.h \
@@ -757,10 +757,10 @@ headers = oomph_definitions.h Qelements.h Qspectral_elements.h \
 	general_purpose_preconditioners.h block_preconditioner.h \
 	general_purpose_block_preconditioners.h \
 	SuperLU_preconditioner.h matrix_vector_product.h projection.h \
-	line_visualiser.h Subparametric_Telements.h sum_of_matrices.h \
-	implicit_midpoint_rule.h trapezoid_rule.h \
-	preconditioner_array.h pml_meshes.h pml_mapping_functions.h \
-	generalised_timesteppers.h vector_matrix.h face_mesh_project.h \
+	line_visualiser.h sum_of_matrices.h implicit_midpoint_rule.h \
+	trapezoid_rule.h preconditioner_array.h pml_meshes.h \
+	pml_mapping_functions.h generalised_timesteppers.h \
+	vector_matrix.h face_mesh_project.h \
 	generalised_newtonian_constitutive_models.h \
 	unstructured_two_d_mesh_geometry_base.h geometric_multigrid.h \
 	sample_point_container.h sample_point_parameters.h \

@@ -362,10 +362,7 @@ target_alias =
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
-SUBDIRS = \
- clamped_shell \
- linear_shell
-
+SUBDIRS = clamped_shell
 all: all-recursive
 
 .SUFFIXES:
