@@ -46,6 +46,13 @@
 #include <mumps_c_types.h>
 #include <dmumps_c.h>
 
+// offset macros for the 1-indexed (FORTRAN) arrays in the
+// MUMPS interface; makes the control integers, info etc. easier to
+// read w.r.t. the MUMPS documentation
+#define ICNTL(i) icntl[(i) - 1]
+#define INFOG(i) infog[(i) - 1]
+#define INFO(i)   info[(i) - 1]
+
 namespace oomph
 {
   //====================================================================
@@ -207,6 +214,42 @@ namespace oomph
     /// globally.
     static int Default_workspace_scaling_factor;
 
+    /// Tell MUMPS that the Jacobian matrix is unsymmetric
+    void declare_jacobian_is_unsymmetric()
+    {
+      Jacobian_symmetry_flag = Unsymmetric;
+    }
+
+    /// Tell MUMPS that the Jacobian matrix is general symmetric
+    void declare_jacobian_is_symmetric()
+    {
+      Jacobian_symmetry_flag = Symmetric;
+    }
+
+    /// Tell MUMPS that the Jacobian matrix is symmetric positive-definite
+    void declare_jacobian_is_symmetric_positive_definite()
+    {
+      Jacobian_symmetry_flag = Symmetric_positive_definite;
+    }
+
+    // tell MUMPS to use the PORD package for the ordering
+    void use_pord_ordering()
+    {
+      Jacobian_ordering_flag = Pord_ordering;
+    }
+
+    // tell MUMPS to use the METIS package for the ordering
+    void use_metis_ordering()
+    {
+      Jacobian_ordering_flag = Metis_ordering;
+    }
+
+    // tell MUMPS to use the SCOTCH package for the ordering
+    void use_scotch_ordering()
+    {
+      Jacobian_ordering_flag = Scotch_ordering;
+    }
+
   private:
     /// Initialise instance of mumps data structure
     void initialise_mumps();
@@ -258,6 +301,34 @@ namespace oomph
 
     /// Pointer to MUMPS struct that contains the solver data
     DMUMPS_STRUC_C* Mumps_struc_pt;
+
+    /// \short values of the SYM variable used by the MUMPS solver
+    /// which dictates the symmetry properties of the Jacobian matrix;
+    /// magic numbers as defined by MUMPS documentation
+    enum
+    {
+      Unsymmetric = 0,
+      Symmetric_positive_definite = 1,
+      Symmetric = 2
+    };
+
+    /// \short ordering library to use for serial analysis;
+    /// magic numbers as defined by MUMPS documentation
+    enum
+    {
+      Scotch_ordering = 3,
+      Pord_ordering   = 4,
+      Metis_ordering  = 5
+    };
+    
+    /// \short symmetry of the Jacobian matrix we're solving;
+    /// takes one of the enum values above
+    unsigned Jacobian_symmetry_flag;
+
+    /// \short stores an integer from the public enum
+    /// which specifies which package (PORD, Metis or SCOTCH)
+    /// is used to reorder the Jacobian matrix during the analysis
+    unsigned Jacobian_ordering_flag;
   };
 
 
