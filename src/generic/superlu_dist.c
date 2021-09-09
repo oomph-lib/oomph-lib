@@ -25,7 +25,7 @@
 */
 #include <math.h>
 #ifdef USING_OOMPH_SUPERLU_DIST
-#ifdef OOMPH_BLEEDING_EDGE
+#ifdef OOMPH_TRANSITION_TO_VERSION_3
 #include "oomph_superlu_dist_7.0.0.h"
 #else
 #include "oomph_superlu_dist_3.0.h"

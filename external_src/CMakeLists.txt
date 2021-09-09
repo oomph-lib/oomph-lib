@@ -69,7 +69,7 @@ if(NOT ALREADY_HAVE_SUPERLU)
 endif()
 
 # Provide up-to-date sources if the user wants a "bleeding edge" oomph-lib
-if(OOMPH_BLEEDING_EDGE)
+if(OOMPH_TRANSITION_TO_VERSION_3)
   # Add GKlib for METIS and METIS
   if(NOT ALREADY_HAVE_METIS)
     add_subdirectory(oomph_gklib_from_metis_from_parmetis_4.0.3)

@@ -44,7 +44,6 @@ project(
 
 # Specify the location of non-standard CMake modules and the C++ standard
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/")
-# FIXME: Up-to-date Trilinos requires C++14!
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
@@ -76,15 +75,19 @@ find_package(Python3 REQUIRED)
 option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display all warnings" OFF)
 
 # Attempt to build and use up-to-date external sources. [WORK IN PROGRESS]
-option(OOMPH_BLEEDING_EDGE "Try to build with up-to-date external sources" OFF)
+# CHANGES WITH 'OOMPH_TRANSITION_TO_VERSION_3'
+option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
 option(OOMPH_ENABLE_64BIT_INTS "Use 64-bit ints for matrix indices" OFF)
 
-# Enable the Clang static code analyser/formatter.
-# NOTE: If you enable clang-tidy, you should NOT run the Makefile/Ninja build in
-# parallel as it may lead to data races. This functionality should probably be
-# reserved for a CI server to run. [WORK IN PROGRESS.]
+# Enable the Clang static code analyser/formatter. [WORK IN PROGRESS]
+# WARNING: If you enable clang-tidy, you MUST NOT(!) run the Makefile/Ninja
+# build in parallel as it will likely lead to data races and thus the output
+# will be mangled.
+#
+# This functionality really be reserved for a CI server to run...
 option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy C++ static code analysis" OFF)
 option(OOMPH_ENABLE_CLANG_FORMAT "Enable Clang-based C++ code formatting" OFF)
+option(OOMPH_ENABLE_INCLUDE_WHAT_YOU_USE "Enable 'Include What You Use' sanitisation" OFF)
 
 # Extra debugging compile options; only used by Debug configurations
 option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ON)
@@ -100,7 +103,7 @@ option(OOMPH_ENABLE_TESTING "Build unit tests" OFF)
 
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
-option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
+option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" ON)
 option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
 # Optionally build OpenBLAS/LAPACK
@@ -162,8 +165,8 @@ endif()
 # If we're using up-to-date external sources/dists then make sure we have a
 # preprocessor definition to handle changes that need to be made from within
 # source files (e.g. API changes)
-if(OOMPH_BLEEDING_EDGE)
-  add_compile_definitions(OOMPH_BLEEDING_EDGE)
+if(OOMPH_TRANSITION_TO_VERSION_3)
+  add_compile_definitions(OOMPH_TRANSITION_TO_VERSION_3)
 endif()
 if(OOMPH_USE_DEPRECATED_SUPERLU)
   add_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
