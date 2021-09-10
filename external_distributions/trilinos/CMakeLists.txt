@@ -64,7 +64,7 @@ endif()
 # when the oomphlibConfig.cmake.in file is processed. It'll come in handy when
 # we install Trilinos to a location which isn't in the user's PATH variable
 set(OOMPH_TRILINOS_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/trilinos_install"
-    CACHE PATH "Path to Trilinos installation directory" FORCE)
+    CACHE PATH "Path to Trilinos installation directory")
 set(OOMPH_TRILINOS_INCLUDE_DIR "${OOMPH_TRILINOS_INSTALL_DIR}/include")
 set(OOMPH_TRILINOS_LIBRARY_DIR "${OOMPH_TRILINOS_INSTALL_DIR}/lib")
 
