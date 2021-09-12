@@ -4,13 +4,13 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(two_fluid_spherical_cap C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME two_fluid_spherical_cap
   SOURCES two_fluid_spherical_cap.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::fluid_interface
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

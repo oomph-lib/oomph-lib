@@ -4,14 +4,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(time_periodic_taylor_couette C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME time_periodic_taylor_couette
   SOURCES ../self_starting_BDF2_timestepper.h time_periodic_taylor_couette.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::linearised_axisym_navier_stokes
             oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

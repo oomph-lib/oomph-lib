@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(hanging_node_reconciliation C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME adaptive_driven_cavity
   SOURCES adaptive_driven_cavity.cc
   LIBRARIES oomph::navier_stokes MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME hp_adaptive_driven_cavity
   SOURCES hp_adaptive_driven_cavity.cc
   LIBRARIES oomph::navier_stokes MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

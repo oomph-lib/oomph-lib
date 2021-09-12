@@ -4,26 +4,26 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(mesh_from_inline_triangle C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME mesh_from_inline_triangle
   SOURCES mesh_from_inline_triangle.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME mesh_from_inline_triangle_no_adapt
   SOURCES mesh_from_inline_triangle_no_adapt.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME mesh_from_inline_triangle_polygon
   SOURCES mesh_from_inline_triangle.cc
   LIBRARIES oomph::poisson
   CXX_DEFINITIONS OUTER_POLYGON
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

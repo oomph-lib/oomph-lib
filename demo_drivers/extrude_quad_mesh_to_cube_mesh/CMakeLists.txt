@@ -3,19 +3,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(extrude_quad_mesh_to_cube_mesh C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME extrude_triangle_generated_mesh
   SOURCES extrude_triangle_generated_mesh.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME extrude_with_macro_element_representation
   SOURCES extrude_with_macro_element_representation.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

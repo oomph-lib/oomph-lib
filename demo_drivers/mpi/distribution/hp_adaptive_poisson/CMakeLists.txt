@@ -4,13 +4,13 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(hp_adaptive_poisson C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME two_d_poisson_hp_adapt
   SOURCES two_d_poisson_hp_adapt.cc
   LIBRARIES oomph::poisson MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -4,33 +4,33 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(mesh_from_triangle C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME mesh_from_triangle_navier_stokes
   SOURCES mesh_from_triangle_navier_stokes.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME mesh_from_triangle_navier_stokes_adapt
   SOURCES mesh_from_triangle_navier_stokes.cc
   LIBRARIES oomph::navier_stokes
   CXX_DEFINITIONS ADAPT
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME mesh_from_triangle_poisson
   SOURCES mesh_from_triangle_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME mesh_from_triangle_poisson_adapt
   SOURCES mesh_from_triangle_poisson.cc
   LIBRARIES oomph::poisson
   CXX_DEFINITIONS ADAPT
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

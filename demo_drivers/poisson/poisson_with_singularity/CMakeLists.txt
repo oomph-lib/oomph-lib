@@ -4,20 +4,20 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(poisson_with_singularity C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME two_d_poisson
   SOURCES two_d_poisson.cc poisson_elements_with_singularity.h
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME two_d_poisson_without_singularity_subtracted_off
   SOURCES two_d_poisson.cc poisson_elements_with_singularity.h
   LIBRARIES oomph::poisson
   CXX_DEFINITIONS DONT_USE_SINGULARITY
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

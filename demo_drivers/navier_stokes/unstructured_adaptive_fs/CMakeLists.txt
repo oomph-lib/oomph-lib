@@ -4,21 +4,21 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(unstructured_adaptive_fs C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME adaptive_bubble_in_channel
   SOURCES adaptive_bubble_in_channel.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
             oomph::fluid_interface
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME adaptive_drop_in_channel
   SOURCES adaptive_drop_in_channel.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
             oomph::fluid_interface
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

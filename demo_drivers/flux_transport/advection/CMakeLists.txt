@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(advection C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME one_d_advection
   SOURCES one_d_advection.cc
   LIBRARIES oomph::flux_transport
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME two_d_advection
   SOURCES two_d_advection.cc
   LIBRARIES oomph::flux_transport
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

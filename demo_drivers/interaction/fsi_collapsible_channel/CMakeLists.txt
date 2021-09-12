@@ -4,87 +4,87 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(fsi_collapsible_channel C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_algebraic_adapt_CR
   SOURCES fsi_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_algebraic_adapt_TH
   SOURCES fsi_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::navier_stokes
   CXX_DEFINITIONS TAYLOR_HOOD
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_algebraic_CR
   SOURCES fsi_collapsible_channel.cc
   LIBRARIES oomph::beam oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_algebraic_TH
   SOURCES fsi_collapsible_channel.cc
   LIBRARIES oomph::beam oomph::navier_stokes
   CXX_DEFINITIONS TAYLOR_HOOD
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_adapt_CR
   SOURCES fsi_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::navier_stokes
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_adapt_TH
   SOURCES fsi_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::navier_stokes
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE TAYLOR_HOOD
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_CR
   SOURCES fsi_collapsible_channel.cc
   LIBRARIES oomph::beam oomph::navier_stokes
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_TH
   SOURCES fsi_collapsible_channel.cc
   LIBRARIES oomph::beam oomph::navier_stokes
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE TAYLOR_HOOD
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_pseudo_solid_collapsible_channel_adapt_CR
   SOURCES fsi_pseudo_solid_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::constitutive oomph::solid oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_pseudo_solid_collapsible_channel_adapt_TH
   SOURCES fsi_pseudo_solid_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::constitutive oomph::solid oomph::navier_stokes
   CXX_DEFINITIONS TAYLOR_HOOD
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_pseudo_solid_collapsible_channel_CR
   SOURCES fsi_pseudo_solid_collapsible_channel.cc
   LIBRARIES oomph::beam oomph::constitutive oomph::solid oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_pseudo_solid_collapsible_channel_TH
   SOURCES fsi_pseudo_solid_collapsible_channel.cc
   LIBRARIES oomph::beam oomph::constitutive oomph::solid oomph::navier_stokes
   CXX_DEFINITIONS TAYLOR_HOOD
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

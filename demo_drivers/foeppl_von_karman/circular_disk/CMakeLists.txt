@@ -4,13 +4,13 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(circular_disk C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME circular_disk
   SOURCES circular_disk.cc
   LIBRARIES oomph::foeppl_von_karman
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -4,14 +4,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(space_time_oscillating_cylinder C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME space_time_oscillating_cylinder
   SOURCES space_time_oscillating_cylinder.cc
   LIBRARIES oomph::space_time_navier_stokes
             oomph::space_time_block_preconditioner oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

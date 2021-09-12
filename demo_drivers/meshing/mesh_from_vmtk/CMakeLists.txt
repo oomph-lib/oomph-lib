@@ -5,13 +5,13 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(mesh_from_vmtk C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
   SOURCES create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # Symlink built mesh to scripts directory
 set(NAME create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh)

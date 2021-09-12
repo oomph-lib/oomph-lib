@@ -4,14 +4,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(axi_static_cap C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME axi_static_cap
   SOURCES axi_static_cap.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::fluid_interface oomph::solid
             oomph::constitutive
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

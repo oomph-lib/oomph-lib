@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(jeffery_hamel C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME jeffery_hamel
@@ -16,7 +16,7 @@ oomph_add_executable(
           jh_includes.h
           polar_streamfunction_traction_elements.h
   LIBRARIES oomph::polar_navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

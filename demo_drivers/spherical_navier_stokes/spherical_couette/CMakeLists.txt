@@ -4,13 +4,13 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(spherical_couette C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME spherical_couette
   SOURCES spherical_couette.cc
   LIBRARIES oomph::spherical_navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

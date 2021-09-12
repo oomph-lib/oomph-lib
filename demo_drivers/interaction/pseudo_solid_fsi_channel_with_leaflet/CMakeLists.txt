@@ -4,14 +4,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(pseudo_solid_fsi_channel_with_leaflet C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME fsi_channel_with_leaflet_precond
   SOURCES fsi_channel_with_leaflet_precond.cc
   LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes
             oomph::constitutive oomph::solid
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

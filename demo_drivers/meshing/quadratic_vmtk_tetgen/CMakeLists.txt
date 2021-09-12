@@ -4,20 +4,20 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(quadratic_vmtk_tetgen C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME snap_mesh
   SOURCES snap_mesh.cc
   LIBRARIES oomph::mesh_smoothing oomph::solid oomph::constitutive
             oomph::navier_stokes oomph::poisson oomph::linear_elasticity
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME xda_to_poly_fsi
   SOURCES xda_to_poly_fsi.cc
   LIBRARIES oomph::generic
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -4,20 +4,20 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(fsi_collapsible_channel C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_adapt
   SOURCES fsi_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::navier_stokes MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_adapt
   SOURCES fsi_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::navier_stokes MPI::MPI_CXX
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

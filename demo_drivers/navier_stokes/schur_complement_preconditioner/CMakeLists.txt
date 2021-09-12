@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(schur_complement_preconditioner C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME three_d_fp
   SOURCES three_d_fp.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME two_d_fp
   SOURCES two_d_fp.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

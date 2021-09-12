@@ -4,13 +4,13 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(flow_past_oscillating_cylinder C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME flow_past_oscillating_cylinder
   SOURCES flow_past_oscillating_cylinder.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

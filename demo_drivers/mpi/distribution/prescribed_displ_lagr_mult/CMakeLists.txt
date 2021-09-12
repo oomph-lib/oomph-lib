@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(prescribed_displ_lagr_mult C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME prescribed_displ_lagr_mult
   SOURCES prescribed_displ_lagr_mult.cc
   LIBRARIES oomph::solid oomph::constitutive MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME resize_hanging_node_tester
   SOURCES resize_hanging_node_tester.cc
   LIBRARIES oomph::solid oomph::constitutive MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(mesh_from_geompack C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME convert_geom_file
   SOURCES convert_geom_file.cc
-  CXX_STANDARD 11
+  CXX_STANDARD 14
   SILENCE_NO_LIBS_SUPPLIED_WARNING)
 
 oomph_add_executable(
   NAME mesh_from_geompack_poisson
   SOURCES mesh_from_geompack_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

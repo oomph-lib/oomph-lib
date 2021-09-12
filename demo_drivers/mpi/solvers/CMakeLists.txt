@@ -5,44 +5,44 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(solvers C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME driven_cavity
   SOURCES driven_cavity.cc
   LIBRARIES oomph::navier_stokes MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME direct_solver_test
   SOURCES direct_solver_test.cc
   LIBRARIES oomph::poisson MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME airy_cantilever
   SOURCES airy_cantilever.cc
   LIBRARIES oomph::solid oomph::constitutive MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_channel_with_leaflet
   SOURCES fsi_channel_with_leaflet.cc
   LIBRARIES oomph::beam oomph::navier_stokes oomph::generic MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 if(OOMPH_HAS_TRILINOS)
   oomph_add_executable(
     NAME TrilinosSolver_test
     SOURCES TrilinosSolver_test.cc
     LIBRARIES oomph::poisson MPI::MPI_CXX
-    CXX_STANDARD 11)
+    CXX_STANDARD 14)
 
   oomph_add_executable(
     NAME two_d_multi_poisson
     SOURCES two_d_multi_poisson.cc
     LIBRARIES oomph::generic MPI::MPI_CXX
-    CXX_STANDARD 11)
+    CXX_STANDARD 14)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

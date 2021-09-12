@@ -4,14 +4,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(thermal_fibre C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME thermal_fibre
   SOURCES non_isothermal_axisym_nst_elements.h thermal_fibre.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::fluid_interface
             oomph::steady_axisym_advection_diffusion
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

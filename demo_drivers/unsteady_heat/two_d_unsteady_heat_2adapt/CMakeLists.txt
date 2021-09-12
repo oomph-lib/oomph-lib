@@ -4,13 +4,13 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(two_d_unsteady_heat_2adapt C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME two_d_unsteady_heat_2adapt
   SOURCES two_d_unsteady_heat_2adapt.cc
   LIBRARIES oomph::unsteady_heat
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(eluting_sphere C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME eluting_sphere
   SOURCES eluting_sphere.cc
   LIBRARIES oomph::spherical_advection_diffusion
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME eluting_sphere_adapt
   SOURCES eluting_sphere_adapt.cc
   LIBRARIES oomph::spherical_advection_diffusion
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

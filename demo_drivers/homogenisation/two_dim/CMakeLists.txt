@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(two_dim C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME two_dim
@@ -12,7 +12,7 @@ oomph_add_executable(
           Thomo_lin_elasticity_elements.h Thomo_lin_elasticity_elements.cc
           two_dim.cc
   LIBRARIES oomph::linear_elasticity
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME two_dim_hex
@@ -20,7 +20,7 @@ oomph_add_executable(
           Thomo_lin_elasticity_elements.h Thomo_lin_elasticity_elements.cc
           two_dim_hex.cc
   LIBRARIES oomph::linear_elasticity
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

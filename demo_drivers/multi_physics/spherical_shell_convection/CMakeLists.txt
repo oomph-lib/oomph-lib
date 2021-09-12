@@ -4,13 +4,13 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(spherical_shell_convection C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME spherical_shell_convection
   SOURCES spherical_shell_convection.cc spherical_buoyant_navier_stokes.h
   LIBRARIES oomph::spherical_advection_diffusion oomph::spherical_navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

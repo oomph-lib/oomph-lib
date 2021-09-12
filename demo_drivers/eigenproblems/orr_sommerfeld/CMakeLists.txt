@@ -5,14 +5,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(orr_sommerfeld C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 if(HAVE_ARPACK_SOURCES)
   oomph_add_executable(
     NAME orr_sommerfeld
     SOURCES orr_sommerfeld.cc
     LIBRARIES oomph::generic
-    CXX_STANDARD 11)
+    CXX_STANDARD 14)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

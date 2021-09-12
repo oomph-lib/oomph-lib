@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(simple_shear C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 # Precompile the mesh as an OBJECT library
 add_library(precompiled_mesh OBJECT precompiled_mesh.cc)
@@ -16,13 +16,13 @@ oomph_add_executable(
   NAME simple_shear
   SOURCES simple_shear.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::generic precompiled_mesh
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME refineable_simple_shear
   SOURCES refineable_simple_shear.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::generic precompiled_mesh
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

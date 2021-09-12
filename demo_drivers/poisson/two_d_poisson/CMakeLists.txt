@@ -5,19 +5,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(two_d_poisson C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME two_d_poisson
   SOURCES two_d_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME two_d_poisson2
   SOURCES two_d_poisson2.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # Do we have the hsl sources?
 set(CXX_DEFINITION)
@@ -30,7 +30,7 @@ oomph_add_executable(
   SOURCES two_d_poisson_compare_solvers.cc
   LIBRARIES oomph::poisson
   CXX_DEFINITIONS ${CXX_DEFINITION}
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

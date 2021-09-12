@@ -4,20 +4,20 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(unstructured_two_d_curved C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME adaptive_unstructured_two_d_curved
   SOURCES unstructured_two_d_curved.cc
   LIBRARIES oomph::axisym_poroelasticity
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME unstructured_two_d_curved
   SOURCES unstructured_two_d_curved.cc
   LIBRARIES oomph::axisym_poroelasticity
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

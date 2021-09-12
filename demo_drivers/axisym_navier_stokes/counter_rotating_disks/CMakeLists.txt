@@ -4,14 +4,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(counter_rotating_disks C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME counter_rotating_disks
   SOURCES counter_rotating_disks.cc linearised_axisym_navier_stokes_elements.h
           multi_domain_linearised_axisym_navier_stokes_elements.h
   LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME counter_rotating_disks_ref
@@ -20,7 +20,7 @@ oomph_add_executable(
           linearised_axisym_navier_stokes_elements.h
           multi_domain_linearised_axisym_navier_stokes_elements.h
   LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

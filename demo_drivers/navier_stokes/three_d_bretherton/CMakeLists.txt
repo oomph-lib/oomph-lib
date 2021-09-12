@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(three_d_bretherton C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME three_d_breth
@@ -17,7 +17,7 @@ oomph_add_executable(
           extra_elements.h
           st_mesh.h
   LIBRARIES oomph::navier_stokes oomph::fluid_interface
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

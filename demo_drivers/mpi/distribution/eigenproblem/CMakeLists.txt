@@ -5,14 +5,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(eigenproblem C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 if(OOMPH_HAS_TRILINOS)
   oomph_add_executable(
     NAME harmonic
     SOURCES harmonic.cc
     LIBRARIES oomph::navier_stokes MPI::MPI_CXX
-    CXX_STANDARD 11)
+    CXX_STANDARD 14)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

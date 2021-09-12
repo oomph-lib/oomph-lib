@@ -4,20 +4,20 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(three_d_cantilever C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME three_d_cantilever
   SOURCES three_d_cantilever.cc
   LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME three_d_cantilever_adapt
   SOURCES three_d_cantilever.cc
   LIBRARIES oomph::solid oomph::constitutive
   CXX_DEFINITIONS REFINE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -4,13 +4,13 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(axisym_displ_based_foeppl_von_karman C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME axisym_displ_based_fvk
   SOURCES axisym_displ_based_fvk.cc
   LIBRARIES oomph::axisym_displ_based_foeppl_von_karman
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

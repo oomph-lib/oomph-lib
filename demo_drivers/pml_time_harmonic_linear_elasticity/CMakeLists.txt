@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(pml_time_harmonic_linear_elasticity C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME time_harmonic_elasticity_driver
   SOURCES time_harmonic_elasticity_driver.cc
   LIBRARIES oomph::pml_time_harmonic_linear_elasticity
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME time_harmonic_elasticity_driver_source
   SOURCES time_harmonic_elasticity_driver_source.cc
   LIBRARIES oomph::pml_time_harmonic_linear_elasticity
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

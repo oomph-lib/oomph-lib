@@ -4,13 +4,13 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(pseudo_solid_collapsible_channel C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME pseudo_solid_collapsible_channel
   SOURCES pseudo_solid_collapsible_channel.cc
   LIBRARIES oomph::navier_stokes oomph::solid oomph::constitutive
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

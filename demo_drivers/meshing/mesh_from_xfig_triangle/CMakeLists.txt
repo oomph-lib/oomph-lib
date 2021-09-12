@@ -5,25 +5,25 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(mesh_from_xfig_triangle C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME fig2poly
   SOURCES fig2poly.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME mesh_from_xfig_poisson
   SOURCES mesh_from_xfig_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME mesh_from_xfig_navier_stokes
   SOURCES mesh_from_xfig_navier_stokes.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # Create a symlink to the built mesh from the scripts directory
 add_custom_target(

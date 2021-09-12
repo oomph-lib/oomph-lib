@@ -4,32 +4,32 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(boussinesq_convection C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME multi_domain_boussinesq_convection
   SOURCES multi_domain_boussinesq_convection.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME multi_domain_boussinesq_convection_fd
   SOURCES multi_domain_boussinesq_convection.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes MPI::MPI_CXX
   CXX_DEFINITIONS USE_FD_JACOBIAN_NST_IN_MULTI_DOMAIN_BOUSSINESQ
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME multi_domain_ref_b_convection
   SOURCES multi_domain_ref_b_convection.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME refineable_b_convection
   SOURCES refineable_b_convection.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes MPI::MPI_CXX
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

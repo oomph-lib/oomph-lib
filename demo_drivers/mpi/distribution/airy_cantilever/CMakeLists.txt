@@ -4,14 +4,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(airy_cantilever C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME airy_cantilever2_adapt
   SOURCES airy_cantilever2.cc
   LIBRARIES oomph::solid oomph::constitutive MPI::MPI_CXX
   CXX_DEFINITIONS REFINE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -4,25 +4,25 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(double_diffusive_convection C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME dd_convection
   SOURCES dd_convection.cc db_navier_st_elements.h
   LIBRARIES oomph::advection_diffusion_reaction oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME multimesh_dd_convection
   SOURCES multimesh_dd_convection.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME multimesh_ref_dd_convection
   SOURCES multimesh_ref_dd_convection.cc db_nst_external_elements.h
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -4,14 +4,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(unstructured_adaptive_ALE C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME unstructured_adaptive_ALE
   SOURCES unstructured_adaptive_ALE.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
             oomph::rigid_body
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

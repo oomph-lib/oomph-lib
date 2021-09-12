@@ -4,25 +4,25 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(spectral C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME one_d_spectral
   SOURCES one_d_spectral.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME three_d_spectral_adapt
   SOURCES three_d_spectral_adapt.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME two_d_spectral_adapt
   SOURCES two_d_spectral_adapt.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

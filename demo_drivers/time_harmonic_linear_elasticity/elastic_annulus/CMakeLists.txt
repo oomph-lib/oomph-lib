@@ -4,33 +4,33 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(elastic_annulus C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME adaptive_time_harmonic_elastic_annulus
   SOURCES time_harmonic_elastic_annulus.cc
   LIBRARIES oomph::time_harmonic_linear_elasticity
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME adaptive_unstructured_time_harmonic_elastic_annulus
   SOURCES unstructured_time_harmonic_elastic_annulus.cc
   LIBRARIES oomph::time_harmonic_linear_elasticity
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME time_harmonic_elastic_annulus
   SOURCES time_harmonic_elastic_annulus.cc
   LIBRARIES oomph::time_harmonic_linear_elasticity
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME unstructured_time_harmonic_elastic_annulus
   SOURCES unstructured_time_harmonic_elastic_annulus.cc
   LIBRARIES oomph::time_harmonic_linear_elasticity
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

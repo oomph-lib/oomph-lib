@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(fsi_driven_cavity C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME fsi_driven_cavity_driver
   SOURCES fsi_driven_cavity_driver.cc fsi_driven_cavity_problem.h
   LIBRARIES oomph::beam oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_driven_cavity_segregated_driver
   SOURCES fsi_driven_cavity_segregated_driver.cc fsi_driven_cavity_problem.h
   LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

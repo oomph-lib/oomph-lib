@@ -4,20 +4,20 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(point_source C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME adaptive_helmholtz_point_source
   SOURCES helmholtz_point_source.cc
   LIBRARIES oomph::helmholtz
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME helmholtz_point_source
   SOURCES helmholtz_point_source.cc
   LIBRARIES oomph::helmholtz
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

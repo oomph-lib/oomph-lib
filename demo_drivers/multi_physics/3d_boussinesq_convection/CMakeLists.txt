@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(3d_boussinesq_convection C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME 3d_multimesh_ref_b_convect
   SOURCES 3d_multimesh_ref_b_convect.cc my_boussinesq_elements.h
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME 3d_ref_b_convect
   SOURCES 3d_ref_b_convect.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

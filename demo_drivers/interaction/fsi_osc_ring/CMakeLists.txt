@@ -4,31 +4,31 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(fsi_osc_ring C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME fsi_osc_ring
   SOURCES fsi_osc_ring.cc
   LIBRARIES oomph::beam oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_osc_ring_compare_jacs
   SOURCES fsi_osc_ring_compare_jacs.cc
   LIBRARIES oomph::beam oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME osc_ring_alg
   SOURCES osc_ring_alg.cc osc_ring_sarah_asymptotics.h
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME osc_ring_macro
   SOURCES osc_ring_macro.cc osc_ring_sarah_asymptotics.h
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

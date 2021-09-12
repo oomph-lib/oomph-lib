@@ -4,21 +4,21 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(b_convection_sphere C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME b_convection_sphere
   SOURCES half_rectangle_with_hole_mesh.h b_convection_sphere.cc
           axisym_buoyant_navier_stokes.h
   LIBRARIES oomph::axisym_advection_diffusion oomph::axisym_navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME multi_domain_b_convect_sph
   SOURCES multi_domain_b_convect_sph.cc half_rectangle_with_hole_mesh.h
           multi_domain_axisym_boussinesq_elements.h
   LIBRARIES oomph::axisym_advection_diffusion oomph::axisym_navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

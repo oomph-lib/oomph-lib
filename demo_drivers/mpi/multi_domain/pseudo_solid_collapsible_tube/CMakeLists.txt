@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(pseudo_solid_collapsible_tube C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
   oomph_add_executable(
@@ -13,7 +13,7 @@ if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
     SOURCES pseudo_solid_collapsible_tube.cc
     LIBRARIES oomph::multi_physics oomph::navier_stokes oomph::solid
               MPI::MPI_CXX
-    CXX_STANDARD 11)
+    CXX_STANDARD 14)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

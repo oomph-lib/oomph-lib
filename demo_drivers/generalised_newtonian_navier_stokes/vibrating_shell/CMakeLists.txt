@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(vibrating_shell C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME vibrating_shell_non_newtonian
@@ -12,7 +12,7 @@ oomph_add_executable(
   LIBRARIES oomph::generalised_newtonian_navier_stokes oomph::navier_stokes
             oomph::solid oomph::constitutive oomph::fluid_interface
             oomph::rigid_body
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

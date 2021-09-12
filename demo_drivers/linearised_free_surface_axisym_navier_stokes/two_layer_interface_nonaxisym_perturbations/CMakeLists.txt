@@ -4,14 +4,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(two_layer_interface_nonaxisym_perturbations C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME two_layer_interface_nonaxisym_perturbations
   SOURCES two_layer_interface_nonaxisym_perturbations.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
             oomph::fluid_interface oomph::oomph_crbond_bessel
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

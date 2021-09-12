@@ -4,14 +4,14 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(soluble_surfactant C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME soluble_surfactant
   SOURCES double_buoyant_navier_stokes_elements.h soluble_surfactant.cc
   LIBRARIES oomph::advection_diffusion_reaction oomph::navier_stokes
             oomph::fluid_interface
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

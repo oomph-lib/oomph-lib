@@ -4,20 +4,20 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(navier_stokes_with_singularity C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME adaptive_driven_cavity
   SOURCES adaptive_driven_cavity.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME circular_couette
   SOURCES driven_cavity.cc navier_stokes_elements_with_singularity.h
   LIBRARIES oomph::navier_stokes
   CXX_DEFINITIONS COUETTE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME circular_couette_without_pseudo_singularity_subtracted_off
@@ -25,14 +25,14 @@ oomph_add_executable(
           finite_re_perturbation.h
   LIBRARIES oomph::navier_stokes
   CXX_DEFINITIONS DONT_USE_SINGULARITY COUETTE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME driven_cavity
   SOURCES driven_cavity.cc navier_stokes_elements_with_singularity.h
           finite_re_perturbation.h
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME driven_cavity_without_singularity_subtracted_off
@@ -40,7 +40,7 @@ oomph_add_executable(
           finite_re_perturbation.h
   LIBRARIES oomph::navier_stokes
   CXX_DEFINITIONS DONT_USE_SINGULARITY
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 

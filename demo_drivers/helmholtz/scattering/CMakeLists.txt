@@ -4,33 +4,33 @@
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(scattering C CXX Fortran)
 find_package(oomphlib REQUIRED)
-enable_testing()
+include(CTest)
 
 oomph_add_executable(
   NAME adaptive_scattering
   SOURCES scattering.cc
   LIBRARIES oomph::helmholtz
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME adaptive_unstructured_scattering
   SOURCES unstructured_scattering.cc
   LIBRARIES oomph::helmholtz
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME scattering
   SOURCES scattering.cc
   LIBRARIES oomph::helmholtz
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME unstructured_scattering
   SOURCES unstructured_scattering.cc
   LIBRARIES oomph::helmholtz
-  CXX_STANDARD 11)
+  CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
 
