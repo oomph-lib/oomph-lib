@@ -273,27 +273,26 @@ namespace oomph
 #ifdef OOMPH_TRANSITION_TO_VERSION_3
     switch (objective)
     {
-      case 0: 
-	// Edge-cut minimization
-	options[0] = METIS_OBJTYPE_CUT;
-	break;
-	
-      case 1:
-	// communication volume minimisation
-	options[0] = METIS_OBJTYPE_VOL;
-	break;
-	
-      default:
-	std::ostringstream error_stream;
-	error_stream << "Wrong objective for METIS. objective = "
-		     << objective << std::endl;
+      case 0:
+        // Edge-cut minimization
+        options[0] = METIS_OBJTYPE_CUT;
+        break;
 
-	throw OomphLibError(
-	  error_stream.str(),
-	  OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      case 1:
+        // communication volume minimisation
+        options[0] = METIS_OBJTYPE_VOL;
+        break;
+
+      default:
+        std::ostringstream error_stream;
+        error_stream << "Wrong objective for METIS. objective = " << objective
+                     << std::endl;
+
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-    
+
     // Number of cut edges in graph
     int* edgecut = new int[nelem];
 
@@ -426,22 +425,22 @@ namespace oomph
     }
 
 #ifdef OOMPH_TRANSITION_TO_VERSION_3
-    
+
     // Call partitioner
     METIS_PartGraphKway(&nvertex,
-			xadj,
-			&adjacency_vector[0],
-			vwgt,
-			adjwgt,
-			&wgtflag,
-			&numflag,
-			&nparts,
-			options,
-			edgecut,
-			part);
+                        xadj,
+                        &adjacency_vector[0],
+                        vwgt,
+                        adjwgt,
+                        &wgtflag,
+                        &numflag,
+                        &nparts,
+                        options,
+                        edgecut,
+                        part);
 #else
     // original code to delete in version 3
-    
+
     // Call partitioner
     if (objective == 0)
     {
@@ -484,7 +483,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-        
+
 #ifdef PARANOID
     std::vector<bool> done(nparts, false);
 #endif
@@ -1100,30 +1099,30 @@ namespace oomph
       int* options = new int[10];
       options[0] = 0;
 
-#ifdef OOMPH_TRANSITION_TO_VERSION_3      
+#ifdef OOMPH_TRANSITION_TO_VERSION_3
       switch (objective)
       {
-	case 0: 
-	  // Edge-cut minimization
-	  options[0] = METIS_OBJTYPE_CUT;
-	  break;
-	
-	case 1:
-	  // communication volume minimisation
-	  options[0] = METIS_OBJTYPE_VOL;
-	  break;
-	
-	default:
-	  std::ostringstream error_stream;
-	  error_stream << "Wrong objective for METIS. objective = "
-		       << objective << std::endl;
+        case 0:
+          // Edge-cut minimization
+          options[0] = METIS_OBJTYPE_CUT;
+          break;
 
-	  throw OomphLibError(
-	    error_stream.str(),
-	    OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        case 1:
+          // communication volume minimisation
+          options[0] = METIS_OBJTYPE_VOL;
+          break;
+
+        default:
+          std::ostringstream error_stream;
+          error_stream << "Wrong objective for METIS. objective = " << objective
+                       << std::endl;
+
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
       }
 #endif
-      
+
       // Number of cut edges in graph
       int* edgecut = new int[total_number_of_root_elements];
 
@@ -1228,23 +1227,23 @@ namespace oomph
       else
       {
 #ifdef OOMPH_TRANSITION_TO_VERSION_3
-	
-	METIS_PartGraphKway(&nvertex,
-			    xadj,
-			    &adjacency_vector[0],
-			    vwgt,
-			    adjwgt,
-			    &wgtflag,
-			    &numflag,
-			    &nparts,
-			    options,
-			    edgecut,
-			    part);
+
+        METIS_PartGraphKway(&nvertex,
+                            xadj,
+                            &adjacency_vector[0],
+                            vwgt,
+                            adjwgt,
+                            &wgtflag,
+                            &numflag,
+                            &nparts,
+                            options,
+                            edgecut,
+                            part);
 #else
-	// for old version of METIS; these two functions have been merged
-	// in the new METIS API
-	
-	if (objective == 0)
+        // for old version of METIS; these two functions have been merged
+        // in the new METIS API
+
+        if (objective == 0)
         {
           // Partition with the objective of minimising the edge cut
           METIS_PartGraphKway(&nvertex,

@@ -66,15 +66,20 @@ namespace oomph
   //=============================================================================
   /// Constructor: Call setup
   //=============================================================================
-  MumpsSolver::MumpsSolver() : Suppress_solve(false), Doc_stats(false),
-			       Suppress_warning_about_MPI_COMM_WORLD(false),
-			       Suppress_mumps_info_during_solve(false),
-			       Mumps_is_initialised(false),
-			       Workspace_scaling_factor(Default_workspace_scaling_factor),
-			       Delete_matrix_data(false), Mumps_struc_pt(nullptr),
-			       Jacobian_symmetry_flag(Unsymmetric),
-			       Jacobian_ordering_flag(Metis_ordering) { }
-    
+  MumpsSolver::MumpsSolver()
+    : Suppress_solve(false),
+      Doc_stats(false),
+      Suppress_warning_about_MPI_COMM_WORLD(false),
+      Suppress_mumps_info_during_solve(false),
+      Mumps_is_initialised(false),
+      Workspace_scaling_factor(Default_workspace_scaling_factor),
+      Delete_matrix_data(false),
+      Mumps_struc_pt(nullptr),
+      Jacobian_symmetry_flag(Unsymmetric),
+      Jacobian_ordering_flag(Metis_ordering)
+  {
+  }
+
   //=============================================================================
   /// Initialise instance of mumps data structure
   //=============================================================================
@@ -103,28 +108,28 @@ namespace oomph
     dmumps_c(Mumps_struc_pt);
     Mumps_is_initialised = true;
 
-    //Output stream for global info on host. Negative value suppresses printing
+    // Output stream for global info on host. Negative value suppresses printing
     Mumps_struc_pt->ICNTL(3) = -1;
-  
-    //Only show error messages and stats
+
+    // Only show error messages and stats
     // (4 for full doc; creates huge amount of output)
     Mumps_struc_pt->ICNTL(4) = 2;
-  
-    //Write matrix
+
+    // Write matrix
     // sprintf(Mumps_struc_pt->write_problem,"/work/e173/e173/mheil/matrix");
-  
+
     // Assembled matrix (rather than element-by_element)
     Mumps_struc_pt->ICNTL(5) = 0;
 
     // set the package to use for ordering during (sequential) analysis
     Mumps_struc_pt->ICNTL(7) = Jacobian_ordering_flag;
-  
+
     // Distributed problem with user-specified distribution
     Mumps_struc_pt->ICNTL(18) = 3;
-  
+
     // Dense RHS
     Mumps_struc_pt->ICNTL(20) = 0;
-   
+
     // Non-distributed solution
     Mumps_struc_pt->ICNTL(21) = 0;
   }
@@ -302,38 +307,39 @@ namespace oomph
         int* matrix_start_pt = cr_matrix_pt->row_start();
         int i_row = 0;
 
-	// is the matrix symmetric? If so, we must only provide
-	// MUMPS with the upper (or lower) triangular part of the Jacobian
-	if(Mumps_struc_pt->sym != Unsymmetric)
-	{
-	  oomph_info << "Assuming Jacobian matrix is symmetric "
-		     << "(passing MUMPS the upper triangular part)" << std::endl;
-	}
-	     
-	for (int count = 0; count < nnz_loc; count++)
-	{
-	  A_loc[count] = matrix_value_pt[count];
-	  Jcn_loc[count] = matrix_index_pt[count] + 1;
-	  if (count < matrix_start_pt[i_row + 1])
-	  {
-	    Irn_loc[count] = first_row + i_row + 1;
-	  }
-	  else
-	  {
-	    i_row++;
-	    Irn_loc[count] = first_row + i_row + 1;
-	  }
+        // is the matrix symmetric? If so, we must only provide
+        // MUMPS with the upper (or lower) triangular part of the Jacobian
+        if (Mumps_struc_pt->sym != Unsymmetric)
+        {
+          oomph_info << "Assuming Jacobian matrix is symmetric "
+                     << "(passing MUMPS the upper triangular part)"
+                     << std::endl;
+        }
 
-	  // only pass the upper triangular part (and diagonal)
-	  // if we have a symmetric matrix (MUMPS sums values,
-	  // so need to set the lwoer triangle to zero)
-	  if( (Mumps_struc_pt->sym != Unsymmetric) &&
-	      (Irn_loc[count] > Jcn_loc[count]) )
-	  {	      
-	    A_loc[count] = 0.0;
-	  }
-	}
-	
+        for (int count = 0; count < nnz_loc; count++)
+        {
+          A_loc[count] = matrix_value_pt[count];
+          Jcn_loc[count] = matrix_index_pt[count] + 1;
+          if (count < matrix_start_pt[i_row + 1])
+          {
+            Irn_loc[count] = first_row + i_row + 1;
+          }
+          else
+          {
+            i_row++;
+            Irn_loc[count] = first_row + i_row + 1;
+          }
+
+          // only pass the upper triangular part (and diagonal)
+          // if we have a symmetric matrix (MUMPS sums values,
+          // so need to set the lwoer triangle to zero)
+          if ((Mumps_struc_pt->sym != Unsymmetric) &&
+              (Irn_loc[count] > Jcn_loc[count]))
+          {
+            A_loc[count] = 0.0;
+          }
+        }
+
         // Now delete the matrix if we are allowed
         if (Delete_matrix_data == true)
         {
@@ -377,24 +383,24 @@ namespace oomph
           oomph_info
             << "Time for mumps analysis stage in MumpsSolver [sec]       : "
             << t_end_analyse - t_start_analyse
-	    << "\n(Ordering generated using: ";
-	  
-	  switch(Mumps_struc_pt->INFOG(7))
-	  {
-	    case Scotch_ordering:
-	      oomph_info << "SCOTCH";
-	      break;
-	    case Pord_ordering:
-	      oomph_info << "PORD";
-	      break;
-	    case Metis_ordering:
-	      oomph_info << "METIS";
-	      break;
-	    default:
-	      oomph_info << Mumps_struc_pt->INFOG(7);
-	  }
+            << "\n(Ordering generated using: ";
 
-	  oomph_info << ")" << std::endl;
+          switch (Mumps_struc_pt->INFOG(7))
+          {
+            case Scotch_ordering:
+              oomph_info << "SCOTCH";
+              break;
+            case Pord_ordering:
+              oomph_info << "PORD";
+              break;
+            case Metis_ordering:
+              oomph_info << "METIS";
+              break;
+            default:
+              oomph_info << Mumps_struc_pt->INFOG(7);
+          }
+
+          oomph_info << ")" << std::endl;
         }
 
 

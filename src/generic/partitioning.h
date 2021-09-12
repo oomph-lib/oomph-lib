@@ -55,12 +55,12 @@ namespace oomph
 #ifndef OOMPH_TRANSITION_TO_VERSION_3
     // function from old API which no longer exists in METIS 5.1,
     // remove this moving to oomph-lib version 3
-    
+
     /// \short Metis graph partitioning function -- decomposes
     /// nodal graph based on minimum communication volume
     void METIS_PartGraphVKway(
       int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*);
-    
+
 #endif
   }
 
