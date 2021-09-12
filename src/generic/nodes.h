@@ -591,7 +591,7 @@ namespace oomph
     HijackedData(const unsigned& copied_value, Data* const& data_pt);
 
     /// \short (Shallow) copy constructor
-    HijackedData(const Data& data) : Data(data) {}
+    HijackedData(const Data& data) = delete;
 
     /// Broken assignment operator
     void operator=(const HijackedData&) = delete;
@@ -665,7 +665,7 @@ namespace oomph
     CopiedData(Data* const& data_pt);
 
     /// \short (Shallow) copy constructor
-    CopiedData(const Data& data) : Data(data) {}
+    CopiedData(const Data& data) = delete;
 
     /// Broken assignment operator
     void operator=(const CopiedData&) = delete;
