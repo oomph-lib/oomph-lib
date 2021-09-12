@@ -79,16 +79,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    FoepplvonKarmanEquations(const FoepplvonKarmanEquations& dummy)
-    {
-      BrokenCopy::broken_copy("FoepplvonKarmanEquations");
-    }
+    FoepplvonKarmanEquations(const FoepplvonKarmanEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const FoepplvonKarmanEquations&)
-    {
-      BrokenCopy::broken_assign("FoepplvonKarmanEquations");
-    }
+    void operator=(const FoepplvonKarmanEquations&) = delete;
 
     // Access functions for the physical constants
 
@@ -514,17 +508,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QFoepplvonKarmanElement(const QFoepplvonKarmanElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QFoepplvonKarmanElement");
-    }
+    QFoepplvonKarmanElement(const QFoepplvonKarmanElement<NNODE_1D>& dummy) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const QFoepplvonKarmanElement<NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("QFoepplvonKarmanElement");
-    }
-
+    void operator=(const QFoepplvonKarmanElement<NNODE_1D>&) = delete;
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n

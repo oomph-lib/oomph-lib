@@ -65,11 +65,8 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableSpaceTimeUnsteadyHeatEquations(
-      const RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableSpaceTimeUnsteadyHeatEquations");
-    }
-
+      const RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>& dummy) =
+      delete;
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -239,12 +236,7 @@ namespace oomph
     /// Broken copy constructor
     RefineableQUnsteadyHeatSpaceTimeElement(
       const RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>&
-        dummy)
-    {
-      // Output a broken copy message
-      BrokenCopy::broken_copy("RefineableQuadUnsteadyHeatSpaceTimeElement");
-    } // End of RefineableQUnsteadyHeatSpaceTimeElement
-
+        dummy) = delete;
 
     /// Rebuild from sons (empty)
     void rebuild_from_sons(Mesh*& mesh_pt) {}

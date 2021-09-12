@@ -105,16 +105,10 @@ namespace oomph
     Matrix() {}
 
     /// Broken copy constructor
-    Matrix(const Matrix& matrix)
-    {
-      BrokenCopy::broken_copy("Matrix");
-    }
+    Matrix(const Matrix& matrix) = delete;
 
     /// Broken assignment operator
-    void operator=(const Matrix&)
-    {
-      BrokenCopy::broken_assign("Matrix");
-    }
+    void operator=(const Matrix&) = delete;
 
     /// Virtual (empty) destructor
     virtual ~Matrix() {}
@@ -277,16 +271,10 @@ namespace oomph
     DoubleMatrixBase() : Linear_solver_pt(0), Default_linear_solver_pt(0) {}
 
     /// Broken copy constructor
-    DoubleMatrixBase(const DoubleMatrixBase& matrix)
-    {
-      BrokenCopy::broken_copy("DoubleMatrixBase");
-    }
+    DoubleMatrixBase(const DoubleMatrixBase& matrix) = delete;
 
     /// Broken assignment operator
-    void operator=(const DoubleMatrixBase&)
-    {
-      BrokenCopy::broken_assign("DoubleMatrixBase");
-    }
+    void operator=(const DoubleMatrixBase&) = delete;
 
     /// Return the number of rows of the matrix
     virtual unsigned long nrow() const = 0;
@@ -615,10 +603,7 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    void operator=(const SparseMatrix&)
-    {
-      BrokenCopy::broken_assign("SparseMatrix");
-    }
+    void operator=(const SparseMatrix&) = delete;
 
     /// Destructor, delete the memory associated with the values
     virtual ~SparseMatrix()
@@ -747,10 +732,7 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    void operator=(const CRMatrix&)
-    {
-      BrokenCopy::broken_assign("CRMatrix");
-    }
+    void operator=(const CRMatrix&) = delete;
 
     /// Destructor, delete any allocated memory
     virtual ~CRMatrix()
@@ -924,10 +906,7 @@ namespace oomph
     CRDoubleMatrix(const CRDoubleMatrix& matrix);
 
     /// Broken assignment operator
-    void operator=(const CRDoubleMatrix&)
-    {
-      BrokenCopy::broken_assign("CRDoubleMatrix");
-    }
+    void operator=(const CRDoubleMatrix&) = delete;
 
     /// Destructor
     virtual ~CRDoubleMatrix();
@@ -1307,18 +1286,10 @@ namespace oomph
                       const double& initial_val);
 
     /// Broken copy constructor
-    DenseDoubleMatrix(const DenseDoubleMatrix& matrix)
-      : DoubleMatrixBase(), DenseMatrix<double>()
-    {
-      BrokenCopy::broken_copy("DenseDoubleMatrix");
-    }
+    DenseDoubleMatrix(const DenseDoubleMatrix& matrix) = delete;
 
     /// Broken assignment operator
-    void operator=(const DenseDoubleMatrix&)
-    {
-      BrokenCopy::broken_assign("DenseDoubleMatrix");
-    }
-
+    void operator=(const DenseDoubleMatrix&) = delete;
 
     /// Return the number of rows of the matrix
     inline unsigned long nrow() const
@@ -2666,10 +2637,7 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    void operator=(const CCMatrix&)
-    {
-      BrokenCopy::broken_assign("CCMatrix");
-    }
+    void operator=(const CCMatrix&) = delete;
 
 
     /// Destructor, delete any allocated memory
@@ -2837,17 +2805,10 @@ namespace oomph
                    const unsigned long& m);
 
     /// Broken copy constructor
-    CCDoubleMatrix(const CCDoubleMatrix& matrix)
-      : DoubleMatrixBase(), CCMatrix<double>()
-    {
-      BrokenCopy::broken_copy("CCDoubleMatrix");
-    }
+    CCDoubleMatrix(const CCDoubleMatrix& matrix) = delete;
 
     /// Broken assignment operator
-    void operator=(const CCDoubleMatrix&)
-    {
-      BrokenCopy::broken_assign("CCDoubleMatrix");
-    }
+    void operator=(const CCDoubleMatrix&) = delete;
 
     /// Destructor: Kill the LU factors if they have been setup.
     virtual ~CCDoubleMatrix();

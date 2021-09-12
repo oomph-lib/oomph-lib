@@ -59,16 +59,10 @@ namespace oomph
     ComplexMatrixBase() {}
 
     /// Broken copy constructor
-    ComplexMatrixBase(const ComplexMatrixBase& matrix)
-    {
-      BrokenCopy::broken_copy("ComplexMatrixBase");
-    }
+    ComplexMatrixBase(const ComplexMatrixBase& matrix) = delete;
 
     /// Broken assignment operator
-    void operator=(const ComplexMatrixBase&)
-    {
-      BrokenCopy::broken_assign("ComplexMatrixBase");
-    }
+    void operator=(const ComplexMatrixBase&) = delete;
 
     /// Return the number of rows of the matrix
     virtual unsigned long nrow() const = 0;
@@ -216,17 +210,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    DenseComplexMatrix(const DenseComplexMatrix& matrix)
-    {
-      BrokenCopy::broken_copy("DenseComplexMatrix");
-    }
+    DenseComplexMatrix(const DenseComplexMatrix& matrix) = delete;
 
     /// Broken assignment operator
-    void operator=(const DenseComplexMatrix&)
-    {
-      BrokenCopy::broken_assign("DenseComplexMatrix");
-    }
-
+    void operator=(const DenseComplexMatrix&) = delete;
 
     /// Return the number of rows of the matrix
     inline unsigned long nrow() const
@@ -323,17 +310,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    CRComplexMatrix(const CRComplexMatrix& matrix)
-    {
-      BrokenCopy::broken_copy("CRComplexMatrix");
-    }
-
+    CRComplexMatrix(const CRComplexMatrix& matrix) = delete;
 
     /// Broken assignment operator
-    void operator=(const CRComplexMatrix&)
-    {
-      BrokenCopy::broken_assign("CRComplexMatrix");
-    }
+    void operator=(const CRComplexMatrix&) = delete;
 
     /// Destructor: Kill the LU decomposition if it has been computed
     virtual ~CRComplexMatrix()
@@ -449,16 +429,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    CCComplexMatrix(const CCComplexMatrix& matrix)
-    {
-      BrokenCopy::broken_copy("CCComplexMatrix");
-    }
+    CCComplexMatrix(const CCComplexMatrix& matrix) = delete;
 
     /// Broken assignment operator
-    void operator=(const CCComplexMatrix&)
-    {
-      BrokenCopy::broken_assign("CCComplexMatrix");
-    }
+    void operator=(const CCComplexMatrix&) = delete;
 
     /// Destructor: Kill the LU factors if they have been setup.
     virtual ~CCComplexMatrix()

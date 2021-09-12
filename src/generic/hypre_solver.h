@@ -233,16 +233,10 @@ namespace oomph
     }
 
     /// Broken copy constructor.
-    HypreInterface(const HypreInterface&)
-    {
-      BrokenCopy::broken_copy("HypreInterface");
-    }
+    HypreInterface(const HypreInterface&) = delete;
 
     /// Broken assignment operator.
-    void operator=(const HypreInterface&)
-    {
-      BrokenCopy::broken_assign("HypreInterface");
-    }
+    void operator=(const HypreInterface&) = delete;
 
     /// Turn on  the hypre error messages
     void enable_hypre_error_messages()
@@ -540,16 +534,10 @@ namespace oomph
     ~HypreSolver() {}
 
     /// Broken copy constructor.
-    HypreSolver(const HypreSolver&)
-    {
-      BrokenCopy::broken_copy("HypreSolver");
-    }
+    HypreSolver(const HypreSolver&) = delete;
 
     /// Broken assignment operator.
-    void operator=(const HypreSolver&)
-    {
-      BrokenCopy::broken_assign("HypreSolver");
-    }
+    void operator=(const HypreSolver&) = delete;
 
     /// \short Disable resolve function (overloads the LinearSolver
     /// disable_resolve function).
@@ -882,16 +870,10 @@ namespace oomph
     }
 
     /// Broken copy constructor.
-    HyprePreconditioner(const HyprePreconditioner&)
-    {
-      BrokenCopy::broken_copy("HyprePreconditioner");
-    }
+    HyprePreconditioner(const HyprePreconditioner&) = delete;
 
     /// Broken assignment operator.
-    void operator=(const HyprePreconditioner&)
-    {
-      BrokenCopy::broken_assign("HyprePreconditioner");
-    }
+    void operator=(const HyprePreconditioner&) = delete;
 
     /// \short Static double that accumulates the preconditioner
     /// solve time of all instantiations of this class. Reset

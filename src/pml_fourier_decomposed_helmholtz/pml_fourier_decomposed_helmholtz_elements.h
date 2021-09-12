@@ -183,10 +183,7 @@ namespace oomph
 
     /// Broken copy constructor
     PMLFourierDecomposedHelmholtzEquations(
-      const PMLFourierDecomposedHelmholtzEquations& dummy)
-    {
-      BrokenCopy::broken_copy("PMLFourierDecomposedHelmholtzEquations");
-    }
+      const PMLFourierDecomposedHelmholtzEquations& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -194,11 +191,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const PMLFourierDecomposedHelmholtzEquations&)
-     {
-      BrokenCopy::broken_assign
-       ("PMLFourierDecomposedHelmholtzEquations");
-       }*/
+    /*void operator=(const PMLFourierDecomposedHelmholtzEquations&) = delete;*/
 
     /// \short Return the index at which the unknown value
     /// is stored: Real/imag part of index contains (real) index of
@@ -707,18 +700,11 @@ namespace oomph
 
     /// Broken copy constructor
     QPMLFourierDecomposedHelmholtzElement(
-      const QPMLFourierDecomposedHelmholtzElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QPMLFourierDecomposedHelmholtzElement");
-    }
+      const QPMLFourierDecomposedHelmholtzElement<NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
     /*void operator=(const
-                   QPMLFourierDecomposedHelmholtzElement<NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign
-       ("QPMLFourierDecomposedHelmholtzElement");
-       }*/
+                   QPMLFourierDecomposedHelmholtzElement<NNODE_1D>&) = delete;*/
 
 
     /// \short  Required  # of `values' (pinned or dofs)

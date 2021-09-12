@@ -105,10 +105,7 @@ namespace oomph
 
 
     /// Broken copy constructor
-    FSIPreconditioner(const FSIPreconditioner&)
-    {
-      BrokenCopy::broken_copy("FSIPreconditioner");
-    }
+    FSIPreconditioner(const FSIPreconditioner&) = delete;
 
 
     /// Broken assignment operator
@@ -117,10 +114,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const FSIPreconditioner&)
-     {
-      BrokenCopy::broken_assign("FSIPreconditioner");
-      }*/
+    /*void operator=(const FSIPreconditioner&) =
+      delete;*/
 
     /// Set solid preconditioner (deletes existing one)
     void set_solid_preconditioner_pt(Preconditioner* solid_preconditioner_pt)
@@ -525,17 +520,11 @@ namespace oomph
 
 
     /// Broken copy constructor
-    SimpleFSIPreconditioner(const SimpleFSIPreconditioner&)
-    {
-      BrokenCopy::broken_copy("SimpleFSIPreconditioner");
-    }
+    SimpleFSIPreconditioner(const SimpleFSIPreconditioner&) = delete;
 
 
     /// Broken assignment operator
-    /*void operator=(const SimpleFSIPreconditioner&)
-     {
-      BrokenCopy::broken_assign("SimpleFSIPreconditioner");
-      }*/
+    /*void operator=(const SimpleFSIPreconditioner&) = delete;*/
 
     /// \short Setter function for the mesh containing the
     /// block-preconditionable Navier-Stokes elements.

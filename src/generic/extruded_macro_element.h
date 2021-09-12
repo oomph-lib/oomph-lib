@@ -88,18 +88,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    ExtrudedMacroElement(const ExtrudedMacroElement& dummy)
-    {
-      BrokenCopy::broken_copy("ExtrudedMacroElement");
-    } // End of ExtrudedMacroElement
-
+    ExtrudedMacroElement(const ExtrudedMacroElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const ExtrudedMacroElement&)
-    {
-      BrokenCopy::broken_assign("ExtrudedMacroElement");
-    } // End of ExtrudedMacroElement
-
+    void operator=(const ExtrudedMacroElement&) = delete;
 
     /// Empty destructor
     virtual ~ExtrudedMacroElement()
@@ -175,22 +167,13 @@ namespace oomph
 
 
     /// Broken copy constructor
-    QExtrudedMacroElement(const QExtrudedMacroElement& dummy)
-    {
-      BrokenCopy::broken_copy("QExtrudedMacroElement");
-    } // End of QExtrudedMacroElement
-
+    QExtrudedMacroElement(const QExtrudedMacroElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QExtrudedMacroElement&)
-    {
-      BrokenCopy::broken_assign("QExtrudedMacroElement");
-    } // End of operator=
-
+    void operator=(const QExtrudedMacroElement&) = delete;
 
     /// Empty destructor
-    virtual ~QExtrudedMacroElement(){};
-
+    virtual ~QExtrudedMacroElement() {}
 
     /// \short Plot: x,y,t in tecplot format
     void output(const unsigned& t, std::ostream& outfile, const unsigned& nplot)

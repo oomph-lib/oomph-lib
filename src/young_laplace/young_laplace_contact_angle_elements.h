@@ -68,17 +68,10 @@ namespace oomph
 
     /// Broken copy constructor
     YoungLaplaceContactAngleElement(
-      const YoungLaplaceContactAngleElement& dummy)
-    {
-      BrokenCopy::broken_copy("YoungLaplaceContactAngleElement");
-    }
+      const YoungLaplaceContactAngleElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const YoungLaplaceContactAngleElement&)
-    {
-      BrokenCopy::broken_assign("YoungLaplaceContactAngleElement");
-    }
-
+    void operator=(const YoungLaplaceContactAngleElement&) = delete;
 
     /// \short Access function for the pointer to the prescribed contact angle
     /// (const version)

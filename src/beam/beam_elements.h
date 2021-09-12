@@ -547,11 +547,7 @@ namespace oomph
 
     /// Broken copy constructor
     ClampedSlidingHermiteBeamBoundaryConditionElement(
-      const ClampedSlidingHermiteBeamBoundaryConditionElement& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "ClampedSlidingHermiteBeamBoundaryConditionElement");
-    }
+      const ClampedSlidingHermiteBeamBoundaryConditionElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -559,11 +555,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const ClampedSlidingHermiteBeamBoundaryConditionElement&)
-     {
-      BrokenCopy::broken_assign(
-       "ClampedSlidingHermiteBeamBoundaryConditionElement");
-       }*/
+    /*void operator=(const ClampedSlidingHermiteBeamBoundaryConditionElement&) =
+      delete;*/
 
 
     /// \short Set vectors to some point on the symmetry line, and

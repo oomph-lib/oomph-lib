@@ -70,18 +70,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    FishDomain(const FishDomain&)
-    {
-      BrokenCopy::broken_copy("FishDomain");
-    }
-
+    FishDomain(const FishDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const FishDomain&)
-    {
-      BrokenCopy::broken_assign("FishDomain");
-    }
-
+    void operator=(const FishDomain&) = delete;
 
     /// Destructor for FishDomain: Empty; cleanup done in base class
     virtual ~FishDomain() {}

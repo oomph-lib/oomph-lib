@@ -112,16 +112,10 @@ namespace oomph
     };
 
     /// Broken copy constructor
-    PreconditionerArray(const PreconditionerArray&)
-    {
-      BrokenCopy::broken_copy("PreconditionerArray");
-    }
+    PreconditionerArray(const PreconditionerArray&) = delete;
 
     /// Broken assignment operator
-    void operator=(const PreconditionerArray&)
-    {
-      BrokenCopy::broken_assign("PreconditionerArray");
-    }
+    void operator=(const PreconditionerArray&) = delete;
 
     /// Destructor (empty)
     ~PreconditionerArray()

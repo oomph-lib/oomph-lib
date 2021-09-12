@@ -55,16 +55,11 @@ namespace oomph
     ~MatrixBasedDiagPreconditioner(){};
 
     /// Broken copy constructor
-    MatrixBasedDiagPreconditioner(const MatrixBasedDiagPreconditioner&)
-    {
-      BrokenCopy::broken_copy("MatrixBasedDiagPreconditioner");
-    }
+    MatrixBasedDiagPreconditioner(const MatrixBasedDiagPreconditioner&) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const MatrixBasedDiagPreconditioner&)
-    {
-      BrokenCopy::broken_assign("MatrixBasedDiagPreconditioner");
-    }
+    void operator=(const MatrixBasedDiagPreconditioner&) = delete;
 
     /// Apply preconditioner to z, i.e. z=D^-1
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
@@ -102,16 +97,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    MatrixBasedLumpedPreconditioner(const MatrixBasedDiagPreconditioner&)
-    {
-      BrokenCopy::broken_copy("MatrixBasedDiagPreconditioner");
-    }
+    MatrixBasedLumpedPreconditioner(const MatrixBasedDiagPreconditioner&) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const MatrixBasedLumpedPreconditioner&)
-    {
-      BrokenCopy::broken_assign("MatrixBasedDiagPreconditioner");
-    }
+    void operator=(const MatrixBasedLumpedPreconditioner&) = delete;
 
     /// Apply preconditioner to z, i.e. z=D^-1
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
@@ -286,17 +276,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    ILUZeroPreconditioner(const ILUZeroPreconditioner&)
-    {
-      BrokenCopy::broken_copy("ILUZeroPreconditioner");
-    }
+    ILUZeroPreconditioner(const ILUZeroPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ILUZeroPreconditioner&)
-    {
-      BrokenCopy::broken_assign("ILUZeroPreconditioner");
-    }
-
+    void operator=(const ILUZeroPreconditioner&) = delete;
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
@@ -334,16 +317,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    ILUZeroPreconditioner(const ILUZeroPreconditioner&)
-    {
-      BrokenCopy::broken_copy("ILUZeroPreconditioner");
-    }
+    ILUZeroPreconditioner(const ILUZeroPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ILUZeroPreconditioner&)
-    {
-      BrokenCopy::broken_assign("ILUZeroPreconditioner");
-    }
+    void operator=(const ILUZeroPreconditioner&) = delete;
 
     /// Destructor (empty)
     ~ILUZeroPreconditioner(){};

@@ -74,16 +74,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Domain(const Domain&)
-    {
-      BrokenCopy::broken_copy("Domain");
-    }
+    Domain(const Domain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const Domain&)
-    {
-      BrokenCopy::broken_assign("Domain");
-    }
+    void operator=(const Domain&) = delete;
 
     /// \short Destructor: Strictly speaking, whoever creates an object
     /// dynamically should be responsible for the cleanup of said object
@@ -333,17 +327,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    WarpedCubeDomain(const WarpedCubeDomain&)
-    {
-      BrokenCopy::broken_copy("WarpedCubeDomain");
-    }
+    WarpedCubeDomain(const WarpedCubeDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const WarpedCubeDomain&)
-    {
-      BrokenCopy::broken_assign("WarpedCubeDomain");
-    }
-
+    void operator=(const WarpedCubeDomain&) = delete;
 
     /// Destructor (empty; clean up handled in base class)
     ~WarpedCubeDomain() {}

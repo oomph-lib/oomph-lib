@@ -62,16 +62,10 @@ namespace oomph
         Setup_time(0){};
 
     /// Broken copy constructor
-    Preconditioner(const Preconditioner&)
-    {
-      BrokenCopy::broken_copy("Preconditioner");
-    }
+    Preconditioner(const Preconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const Preconditioner&)
-    {
-      BrokenCopy::broken_assign("Preconditioner");
-    }
+    void operator=(const Preconditioner&) = delete;
 
     /// Destructor (empty)
     virtual ~Preconditioner() {}
@@ -261,16 +255,10 @@ namespace oomph
     IdentityPreconditioner() {}
 
     /// Broken copy constructor
-    IdentityPreconditioner(const IdentityPreconditioner&)
-    {
-      BrokenCopy::broken_copy("IdentityPreconditioner");
-    }
+    IdentityPreconditioner(const IdentityPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const IdentityPreconditioner&)
-    {
-      BrokenCopy::broken_assign("IdentityPreconditioner");
-    }
+    void operator=(const IdentityPreconditioner&) = delete;
 
     /// Destructor (empty)
     virtual ~IdentityPreconditioner() {}

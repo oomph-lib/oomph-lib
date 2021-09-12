@@ -334,16 +334,10 @@ namespace oomph
     double Error_weight;
 
     /// Broken copy constructor
-    TR(const TR& dummy)
-    {
-      BrokenCopy::broken_copy("TR");
-    }
+    TR(const TR& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TR& dummy)
-    {
-      BrokenCopy::broken_assign("TR");
-    }
+    void operator=(const TR& dummy) = delete;
   };
 
 } // namespace oomph

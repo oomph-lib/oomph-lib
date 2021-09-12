@@ -69,10 +69,8 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableHelmholtzEquations(const RefineableHelmholtzEquations<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableHelmholtzEquations");
-    }
+    RefineableHelmholtzEquations(
+      const RefineableHelmholtzEquations<DIM>& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -80,10 +78,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const RefineableHelmholtzEquations<DIM>&)
-     {
-      BrokenCopy::broken_assign("RefineableHelmholtzEquations");
-      }*/
+    /*void operator=(const RefineableHelmholtzEquations<DIM>&) = delete;*/
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -212,16 +207,11 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQHelmholtzElement(
-      const RefineableQHelmholtzElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQuadHelmholtzElement");
-    }
+      const RefineableQHelmholtzElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const RefineableQHelmholtzElement<DIM,NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("RefineableQuadHelmholtzElement");
-      }*/
+    /*void operator=(const RefineableQHelmholtzElement<DIM,NNODE_1D>&) =
+     * delete;*/
 
     /// Number of continuously interpolated values: 2
     unsigned ncont_interpolated_values() const

@@ -66,17 +66,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AnnularDomain(const AnnularDomain&)
-    {
-      BrokenCopy::broken_copy("AnnularDomain");
-    }
+    AnnularDomain(const AnnularDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const AnnularDomain&)
-    {
-      BrokenCopy::broken_assign("AnnularDomain");
-    }
-
+    void operator=(const AnnularDomain&) = delete;
 
     /// Destructor: Empty; cleanup done in base class
     ~AnnularDomain() {}

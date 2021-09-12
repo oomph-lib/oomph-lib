@@ -67,10 +67,7 @@ namespace oomph
     HelmholtzEquations() : Source_fct_pt(0), K_squared_pt(0) {}
 
     /// Broken copy constructor
-    HelmholtzEquations(const HelmholtzEquations& dummy)
-    {
-      BrokenCopy::broken_copy("HelmholtzEquations");
-    }
+    HelmholtzEquations(const HelmholtzEquations& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -78,10 +75,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const HelmholtzEquations&)
-     {
-      BrokenCopy::broken_assign("HelmholtzEquations");
-      }*/
+    /*void operator=(const HelmholtzEquations&) = delete;*/
 
     /// \short Return the index at which the unknown value
     /// is stored.
@@ -472,16 +466,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QHelmholtzElement(const QHelmholtzElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QHelmholtzElement");
-    }
+    QHelmholtzElement(const QHelmholtzElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QHelmholtzElement<DIM,NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("QHelmholtzElement");
-      }*/
+    /*void operator=(const QHelmholtzElement<DIM,NNODE_1D>&) = delete;*/
 
 
     /// \short  Required  # of `values' (pinned or dofs)

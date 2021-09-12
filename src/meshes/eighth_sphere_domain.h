@@ -58,17 +58,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    EighthSphereDomain(const EighthSphereDomain&)
-    {
-      BrokenCopy::broken_copy("EighthSphereDomain");
-    }
+    EighthSphereDomain(const EighthSphereDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const EighthSphereDomain&)
-    {
-      BrokenCopy::broken_assign("EighthSphereDomain");
-    }
-
+    void operator=(const EighthSphereDomain&) = delete;
 
     /// Destructor: Empty; cleanup done in base class
     ~EighthSphereDomain() {}

@@ -159,16 +159,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    GeomObject(const GeomObject& dummy)
-    {
-      BrokenCopy::broken_copy("GeomObject");
-    }
+    GeomObject(const GeomObject& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const GeomObject&)
-    {
-      BrokenCopy::broken_assign("GeomObject");
-    }
+    void operator=(const GeomObject&) = delete;
 
     /// (Empty) destructor
     virtual ~GeomObject() {}
@@ -510,17 +504,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    StraightLine(const StraightLine& dummy)
-    {
-      BrokenCopy::broken_copy("StraightLine");
-    }
+    StraightLine(const StraightLine& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const StraightLine&)
-    {
-      BrokenCopy::broken_assign("StraightLine");
-    }
-
+    void operator=(const StraightLine&) = delete;
 
     /// Destructor:  Clean up if necessary
     ~StraightLine()
@@ -713,17 +700,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Ellipse(const Ellipse& dummy)
-    {
-      BrokenCopy::broken_copy("Ellipse");
-    }
+    Ellipse(const Ellipse& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Ellipse&)
-    {
-      BrokenCopy::broken_assign("Ellipse");
-    }
-
+    void operator=(const Ellipse&) = delete;
 
     /// Destructor:  Clean up if necessary
     ~Ellipse()
@@ -1020,16 +1000,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Circle(const Circle& dummy)
-    {
-      BrokenCopy::broken_copy("Circle");
-    }
+    Circle(const Circle& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Circle&)
-    {
-      BrokenCopy::broken_assign("Circle");
-    }
+    void operator=(const Circle&) = delete;
 
     /// Destructor:  Clean up if necessary
     virtual ~Circle()
@@ -1163,16 +1137,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    EllipticalTube(const EllipticalTube& node)
-    {
-      BrokenCopy::broken_copy("EllipticalTube");
-    }
+    EllipticalTube(const EllipticalTube& node) = delete;
 
     /// Broken assignment operator
-    void operator=(const EllipticalTube&)
-    {
-      BrokenCopy::broken_assign("EllipticalTube");
-    }
+    void operator=(const EllipticalTube&) = delete;
 
     /// Access function to x-half axis
     double& a()

@@ -212,16 +212,10 @@ namespace oomph
 
     /// \short Broken copy constructor
     LagrangeEnforcedFlowPreconditioner(
-      const LagrangeEnforcedFlowPreconditioner&)
-    {
-      BrokenCopy::broken_copy("LagrangeEnforcedFlowPreconditioner");
-    }
+      const LagrangeEnforcedFlowPreconditioner&) = delete;
 
     /// \short Broken assignment operator
-    void operator=(const LagrangeEnforcedFlowPreconditioner&)
-    {
-      BrokenCopy::broken_assign(" LagrangeEnforcedFlowPreconditioner");
-    }
+    void operator=(const LagrangeEnforcedFlowPreconditioner&) = delete;
 
     /// \short Setup method for the LagrangeEnforcedFlowPreconditioner.
     void setup();

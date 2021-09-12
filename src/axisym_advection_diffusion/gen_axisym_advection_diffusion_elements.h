@@ -89,10 +89,7 @@ namespace oomph
 
     /// Broken copy constructor
     GeneralisedAxisymAdvectionDiffusionEquations(
-      const GeneralisedAxisymAdvectionDiffusionEquations& dummy)
-    {
-      BrokenCopy::broken_copy("GeneralisedAxisymAdvectionDiffusionEquations");
-    }
+      const GeneralisedAxisymAdvectionDiffusionEquations& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -100,10 +97,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const GeneralisedAxisymAdvectionDiffusionEquations&)
-     {
-      BrokenCopy::broken_assign("GeneralisedAxisymAdvectionDiffusionEquations");
-      }*/
+    /*void operator=(const GeneralisedAxisymAdvectionDiffusionEquations&) =
+     * delete;*/
 
     /// \short Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
@@ -678,17 +673,12 @@ namespace oomph
 
     /// Broken copy constructor
     QGeneralisedAxisymAdvectionDiffusionElement(
-      const QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QGeneralisedAxisymAdvectionDiffusionElement");
-    }
+      const QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>& dummy) =
+      delete;
 
     /// Broken assignment operator
     /*void operator=(const
-     QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("QGeneralisedAxisymAdvectionDiffusionElement");
-      }*/
+     QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>&) = delete;*/
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n

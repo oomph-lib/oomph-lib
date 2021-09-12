@@ -125,10 +125,8 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PseudoElasticFSIPreconditioner(const PseudoElasticFSIPreconditioner&)
-    {
-      BrokenCopy::broken_copy("PseudoElasticFSIPreconditioner");
-    }
+    PseudoElasticFSIPreconditioner(const PseudoElasticFSIPreconditioner&) =
+      delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -136,10 +134,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const PseudoElasticFSIPreconditioner&)
-     {
-      BrokenCopy::broken_assign("PseudoElasticFSIPreconditioner");
-      }*/
+    /*void operator=(const PseudoElasticFSIPreconditioner&) =
+      delete;*/
 
     /// clean up memory method
     void clean_up_memory();

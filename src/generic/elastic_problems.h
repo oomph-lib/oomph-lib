@@ -102,16 +102,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    SolidICProblem(const SolidICProblem&)
-    {
-      BrokenCopy::broken_copy("SolidICProblem");
-    }
+    SolidICProblem(const SolidICProblem&) = delete;
 
     /// Broken assignment operator
-    void operator=(const SolidICProblem&)
-    {
-      BrokenCopy::broken_assign("SolidICProblem");
-    }
+    void operator=(const SolidICProblem&) = delete;
 
     /// Update after solve (empty)
     void actions_after_newton_solve() {}

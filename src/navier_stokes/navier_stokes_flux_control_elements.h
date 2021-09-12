@@ -148,11 +148,7 @@ namespace oomph
     ~NetFluxControlElement() {}
 
     /// Broken copy constructor
-    NetFluxControlElement(const NetFluxControlElement& dummy)
-    {
-      BrokenCopy::broken_copy("NetFluxControlElement");
-    }
-
+    NetFluxControlElement(const NetFluxControlElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -160,10 +156,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const NetFluxControlElement&)
-     {
-      BrokenCopy::broken_assign("NetFluxControlElement");
-      }*/
+    /*void operator=(const NetFluxControlElement&) = delete;*/
 
     /// Spatial dimension of the problem
     unsigned dim() const

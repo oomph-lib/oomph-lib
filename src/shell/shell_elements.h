@@ -648,16 +648,10 @@ namespace oomph
 
     /// Broken copy constructor
     ClampedHermiteShellBoundaryConditionElement(
-      const ClampedHermiteShellBoundaryConditionElement& dummy)
-    {
-      BrokenCopy::broken_copy("ClampedHermiteShellBoundaryConditionElement");
-    }
+      const ClampedHermiteShellBoundaryConditionElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const ClampedHermiteShellBoundaryConditionElement&)
-    {
-      BrokenCopy::broken_assign("ClampedHermiteShellBoundaryConditionElement");
-    }
+    void operator=(const ClampedHermiteShellBoundaryConditionElement&) = delete;
 
     /// \short Set normal vector to clamping plane
     void set_symmetry_line(const Vector<double>& normal_to_clamping_plane)

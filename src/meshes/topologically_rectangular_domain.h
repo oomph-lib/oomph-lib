@@ -81,18 +81,11 @@ namespace oomph
 
 
     /// Broken copy constructor
-    TopologicallyRectangularDomain(const TopologicallyRectangularDomain&)
-    {
-      BrokenCopy::broken_copy("TopologicallyRectangularDomain");
-    }
-
+    TopologicallyRectangularDomain(const TopologicallyRectangularDomain&) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const TopologicallyRectangularDomain&)
-    {
-      BrokenCopy::broken_assign("TopologicallyRectangularDomain");
-    }
-
+    void operator=(const TopologicallyRectangularDomain&) = delete;
 
     /// Destructor - empty; clean up done in base class
     ~TopologicallyRectangularDomain() {}

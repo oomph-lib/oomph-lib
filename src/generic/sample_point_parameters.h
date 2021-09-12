@@ -79,17 +79,11 @@ namespace oomph
 #endif
 
     /// \short Broken copy constructor.
-    SamplePointContainerParameters(const SamplePointContainerParameters& data)
-    {
-      BrokenCopy::broken_copy("SamplePointContainerParameters");
-    }
+    SamplePointContainerParameters(const SamplePointContainerParameters& data) =
+      delete;
 
     /// Broken assignment operator.
-    void operator=(const SamplePointContainerParameters&)
-    {
-      BrokenCopy::broken_assign("SamplePointContainerParameters");
-    }
-
+    void operator=(const SamplePointContainerParameters&) = delete;
 
     /// Empty destructor
     virtual ~SamplePointContainerParameters() {}
@@ -247,16 +241,10 @@ namespace oomph
 
     /// \short Broken copy constructor.
     CGALSamplePointContainerParameters(
-      const CGALSamplePointContainerParameters& data)
-    {
-      BrokenCopy::broken_copy("CGALSamplePointContainerParameters");
-    }
+      const CGALSamplePointContainerParameters& data) = delete;
 
     /// Broken assignment operator.
-    void operator=(const CGALSamplePointContainerParameters&)
-    {
-      BrokenCopy::broken_assign("CGALSamplePointContainerParameters");
-    }
+    void operator=(const CGALSamplePointContainerParameters&) = delete;
   };
 
 #endif
@@ -278,16 +266,10 @@ namespace oomph
     friend class NonRefineableBinArrayParameters;
 
     /// \short Broken copy constructor.
-    BinArrayParameters(const BinArrayParameters& data)
-    {
-      BrokenCopy::broken_copy("BinArrayParameters");
-    }
+    BinArrayParameters(const BinArrayParameters& data) = delete;
 
     /// Broken assignment operator.
-    void operator=(const BinArrayParameters&)
-    {
-      BrokenCopy::broken_assign("BinArrayParameters");
-    }
+    void operator=(const BinArrayParameters&) = delete;
 
     /// Empty destructor
     virtual ~BinArrayParameters() {}
@@ -353,16 +335,11 @@ namespace oomph
     }
 
     /// \short Broken copy constructor.
-    RefineableBinArrayParameters(const RefineableBinArrayParameters& data)
-    {
-      BrokenCopy::broken_copy("RefineableBinArrayParameters");
-    }
+    RefineableBinArrayParameters(const RefineableBinArrayParameters& data) =
+      delete;
 
     /// Broken assignment operator.
-    void operator=(const RefineableBinArrayParameters&)
-    {
-      BrokenCopy::broken_assign("RefineableBinArrayParameters");
-    }
+    void operator=(const RefineableBinArrayParameters&) = delete;
 
     /// Empty destructor
     virtual ~RefineableBinArrayParameters() {}
@@ -487,16 +464,11 @@ namespace oomph
     }
 
     /// \short Broken copy constructor.
-    NonRefineableBinArrayParameters(const NonRefineableBinArrayParameters& data)
-    {
-      BrokenCopy::broken_copy("NonRefineableBinArrayParameters");
-    }
+    NonRefineableBinArrayParameters(
+      const NonRefineableBinArrayParameters& data) = delete;
 
     /// Broken assignment operator.
-    void operator=(const NonRefineableBinArrayParameters&)
-    {
-      BrokenCopy::broken_assign("NonRefineableBinArrayParameters");
-    }
+    void operator=(const NonRefineableBinArrayParameters&) = delete;
 
     /// Empty destructor
     virtual ~NonRefineableBinArrayParameters() {}

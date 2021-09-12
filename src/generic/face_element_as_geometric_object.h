@@ -88,10 +88,7 @@ namespace oomph
 
 
     /// Broken copy constructor
-    FaceElementAsGeomObject(const FaceElementAsGeomObject&)
-    {
-      BrokenCopy::broken_copy("FaceElementAsGeomObject");
-    }
+    FaceElementAsGeomObject(const FaceElementAsGeomObject&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -99,10 +96,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const FaceElementAsGeomObject&)
-     {
-      BrokenCopy::broken_assign("FaceElementAsGeomObject");
-      }*/
+    /*void operator=(const FaceElementAsGeomObject&) = delete;*/
 
     /// \short The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by

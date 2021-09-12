@@ -80,16 +80,10 @@ namespace oomph
 
     /// Broken copy constructor
     FoepplvonKarmanVolumeConstraintElement(
-      const FoepplvonKarmanVolumeConstraintElement&)
-    {
-      BrokenCopy::broken_copy("FoepplvonKarmanVolumeConstraintElement");
-    }
+      const FoepplvonKarmanVolumeConstraintElement&) = delete;
 
     /// Broken assignment operator
-    void operator=(const FoepplvonKarmanVolumeConstraintElement&)
-    {
-      BrokenCopy::broken_assign("FoepplvonKarmanVolumeConstraintElement");
-    }
+    void operator=(const FoepplvonKarmanVolumeConstraintElement&) = delete;
 
     /// \short Returns the volume "under the elements" in the constrained
     /// regions

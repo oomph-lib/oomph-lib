@@ -182,10 +182,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HelmholtzBCElementBase(const HelmholtzBCElementBase& dummy)
-    {
-      BrokenCopy::broken_copy("HelmholtzBCElementBase");
-    }
+    HelmholtzBCElementBase(const HelmholtzBCElementBase& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -193,10 +190,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const HelmholtzBCElementBase&)
-     {
-      BrokenCopy::broken_assign("HelmholtzBCElementBase");
-      }*/
+    /*void operator=(const HelmholtzBCElementBase&) = delete;*/
 
 
     /// \short Specify the value of nodal zeta from the face geometry

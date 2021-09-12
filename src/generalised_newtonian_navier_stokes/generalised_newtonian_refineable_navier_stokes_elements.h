@@ -863,11 +863,8 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableGeneralisedNewtonianQCrouzeixRaviartElement(
-      const RefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "RefineableGeneralisedNewtonianQCrouzeixRaviartElement");
-    }
+      const RefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>& dummy) =
+      delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -877,10 +874,7 @@ namespace oomph
     // rightly, it shouts.
     /*void operator=(const
                    RefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>&)
-     {
-      BrokenCopy::broken_assign(
-       "RefineableGeneralisedNewtonianQCrouzeixRaviartElement");
-       }*/
+      = delete;*/
 
     /// Number of continuously interpolated values: DIM (velocities)
     unsigned ncont_interpolated_values() const
@@ -1118,19 +1112,13 @@ namespace oomph
 
     /// Broken copy constructor
     PRefineableGeneralisedNewtonianQCrouzeixRaviartElement(
-      const PRefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "PRefineableGeneralisedNewtonianQCrouzeixRaviartElement");
-    }
+      const PRefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>&
+        dummy) = delete;
 
     /// Broken assignment operator
     /*void operator=(const
                    PRefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>&)
-     {
-      BrokenCopy::broken_assign(
-       "PRefineableGeneralisedNewtonianQCrouzeixRaviartElement");
-       }*/
+      = delete;*/
 
     /// \short Return the i-th pressure value
     /// (Discontinous pressure interpolation -- no need to cater for hanging

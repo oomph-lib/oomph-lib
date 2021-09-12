@@ -43,16 +43,10 @@ namespace oomph
     ErrorEstimator() {}
 
     /// Broken copy constructor
-    ErrorEstimator(const ErrorEstimator&)
-    {
-      BrokenCopy::broken_copy("ErrorEstimator");
-    }
+    ErrorEstimator(const ErrorEstimator&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ErrorEstimator&)
-    {
-      BrokenCopy::broken_assign("ErrorEstimator");
-    }
+    void operator=(const ErrorEstimator&) = delete;
 
     /// Empty virtual destructor
     virtual ~ErrorEstimator() {}
@@ -88,16 +82,10 @@ namespace oomph
     ElementWithZ2ErrorEstimator() {}
 
     /// Broken copy constructor
-    ElementWithZ2ErrorEstimator(const ElementWithZ2ErrorEstimator&)
-    {
-      BrokenCopy::broken_copy("ElementWithZ2ErrorEstimator");
-    }
+    ElementWithZ2ErrorEstimator(const ElementWithZ2ErrorEstimator&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ElementWithZ2ErrorEstimator&)
-    {
-      BrokenCopy::broken_assign("ElementWithZ2ErrorEstimator");
-    }
+    void operator=(const ElementWithZ2ErrorEstimator&) = delete;
 
     /// \short Number of 'flux' terms for Z2 error estimation
     virtual unsigned num_Z2_flux_terms() = 0;
@@ -322,16 +310,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Z2ErrorEstimator(const Z2ErrorEstimator&)
-    {
-      BrokenCopy::broken_copy("Z2ErrorEstimator");
-    }
+    Z2ErrorEstimator(const Z2ErrorEstimator&) = delete;
 
     /// Broken assignment operator
-    void operator=(const Z2ErrorEstimator&)
-    {
-      BrokenCopy::broken_assign("Z2ErrorEstimator");
-    }
+    void operator=(const Z2ErrorEstimator&) = delete;
 
     /// Empty virtual destructor
     virtual ~Z2ErrorEstimator() {}
@@ -590,20 +572,11 @@ namespace oomph
       Region_upp_bound[0] = upper_right;
     }
 
-
     /// Broken copy constructor
-    DummyErrorEstimator(const DummyErrorEstimator&)
-    {
-      BrokenCopy::broken_copy("DummyErrorEstimator");
-    }
-
+    DummyErrorEstimator(const DummyErrorEstimator&) = delete;
 
     /// Broken assignment operator
-    void operator=(const DummyErrorEstimator&)
-    {
-      BrokenCopy::broken_assign("DummyErrorEstimator");
-    }
-
+    void operator=(const DummyErrorEstimator&) = delete;
 
     /// Empty virtual destructor
     virtual ~DummyErrorEstimator() {}

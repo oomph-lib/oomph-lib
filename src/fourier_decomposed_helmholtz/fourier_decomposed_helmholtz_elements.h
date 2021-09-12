@@ -101,10 +101,7 @@ namespace oomph
 
     /// Broken copy constructor
     FourierDecomposedHelmholtzEquations(
-      const FourierDecomposedHelmholtzEquations& dummy)
-    {
-      BrokenCopy::broken_copy("FourierDecomposedHelmholtzEquations");
-    }
+      const FourierDecomposedHelmholtzEquations& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -112,10 +109,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const FourierDecomposedHelmholtzEquations&)
-     {
-      BrokenCopy::broken_assign("FourierDecomposedHelmholtzEquations");
-      }*/
+    /*void operator=(const FourierDecomposedHelmholtzEquations&) = delete;*/
 
 
     /// \short Return the index at which the unknown value
@@ -454,16 +448,11 @@ namespace oomph
 
     /// Broken copy constructor
     QFourierDecomposedHelmholtzElement(
-      const QFourierDecomposedHelmholtzElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QFourierDecomposedHelmholtzElement");
-    }
+      const QFourierDecomposedHelmholtzElement<NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QFourierDecomposedHelmholtzElement<NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("QFourierDecomposedHelmholtzElement");
-      }*/
+    /*void operator=(const QFourierDecomposedHelmholtzElement<NNODE_1D>&) =
+     * delete;*/
 
 
     /// \short  Required  # of `values' (pinned or dofs)

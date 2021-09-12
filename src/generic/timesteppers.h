@@ -83,16 +83,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Time(const Time&)
-    {
-      BrokenCopy::broken_copy("Time");
-    }
+    Time(const Time&) = delete;
 
     /// Broken assignment operator
-    void operator=(const Time&)
-    {
-      BrokenCopy::broken_assign("Time");
-    }
+    void operator=(const Time&) = delete;
 
     /// \short Resize the vector holding the number of previous timesteps
     /// and initialise the new values to zero.
@@ -312,16 +306,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TimeStepper(const TimeStepper&)
-    {
-      BrokenCopy::broken_copy("TimeStepper");
-    }
+    TimeStepper(const TimeStepper&) = delete;
 
     /// Broken assignment operator
-    void operator=(const TimeStepper&)
-    {
-      BrokenCopy::broken_assign("TimeStepper");
-    }
+    void operator=(const TimeStepper&) = delete;
 
     /// virtual destructor
     virtual ~TimeStepper();
@@ -708,16 +696,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    Steady(const Steady&)
-    {
-      BrokenCopy::broken_copy("Steady");
-    }
+    Steady(const Steady&) = delete;
 
     /// Broken assignment operator
-    void operator=(const Steady&)
-    {
-      BrokenCopy::broken_assign("Steady");
-    }
+    void operator=(const Steady&) = delete;
 
     /// \short Return the actual order of the scheme. Returning zero here --
     /// doesn't make much sense, though
@@ -942,16 +924,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Newmark(const Newmark&)
-    {
-      BrokenCopy::broken_copy("Newmark");
-    }
+    Newmark(const Newmark&) = delete;
 
     /// Broken assignment operator
-    void operator=(const Newmark&)
-    {
-      BrokenCopy::broken_assign("Newmark");
-    }
+    void operator=(const Newmark&) = delete;
 
 
     /// The actual order (accuracy of the scheme)
@@ -1108,16 +1084,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    NewmarkBDF(const NewmarkBDF&)
-    {
-      BrokenCopy::broken_copy("NewmarkBDF");
-    }
+    NewmarkBDF(const NewmarkBDF&) = delete;
 
     /// Broken assignment operator
-    void operator=(const NewmarkBDF&)
-    {
-      BrokenCopy::broken_assign("NewmarkBDF");
-    }
+    void operator=(const NewmarkBDF&) = delete;
 
     /// Set weights
     void set_weights();
@@ -1248,16 +1218,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    BDF(const BDF&)
-    {
-      BrokenCopy::broken_copy("BDF");
-    }
+    BDF(const BDF&) = delete;
 
     /// Broken assignment operator
-    void operator=(const BDF&)
-    {
-      BrokenCopy::broken_assign("BDF");
-    }
+    void operator=(const BDF&) = delete;
 
     /// Return the actual order of the scheme
     unsigned order() const

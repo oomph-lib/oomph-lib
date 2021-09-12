@@ -67,16 +67,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    FSIFluidElement(const FSIFluidElement&)
-    {
-      BrokenCopy::broken_copy("FSIFluidElement");
-    }
+    FSIFluidElement(const FSIFluidElement&) = delete;
 
     /// Broken assignment operator
-    void operator=(const FSIFluidElement&)
-    {
-      BrokenCopy::broken_assign("FSIFluidElement");
-    }
+    void operator=(const FSIFluidElement&) = delete;
 
     /// \short Compute the load vector that is applied by current
     /// element (at its local coordinate s) onto the adjacent
@@ -223,16 +217,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    FSIWallElement(const FSIWallElement&)
-    {
-      BrokenCopy::broken_copy("FSIWallElement");
-    }
+    FSIWallElement(const FSIWallElement&) = delete;
 
     /// Broken assignment operator
-    void operator=(const FSIWallElement&)
-    {
-      BrokenCopy::broken_assign("FSIWallElement");
-    }
+    void operator=(const FSIWallElement&) = delete;
 
     /// Empty virtual destructor for safety
     virtual ~FSIWallElement() {}

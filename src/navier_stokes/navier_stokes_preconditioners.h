@@ -714,10 +714,7 @@ namespace oomph
 
     /// Broken copy constructor
     NavierStokesSchurComplementPreconditioner(
-      const NavierStokesSchurComplementPreconditioner&)
-    {
-      BrokenCopy::broken_copy("NavierStokesSchurComplementPreconditioner");
-    }
+      const NavierStokesSchurComplementPreconditioner&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -725,10 +722,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const NavierStokesSchurComplementPreconditioner&)
-     {
-      BrokenCopy::broken_assign("NavierStokesSchurComplementPreconditioner");
-      }*/
+    /*void operator=(const NavierStokesSchurComplementPreconditioner&) =
+     * delete;*/
 
     /// Set the problem pointer (non-const pointer, the problem WILL be
     /// changed) for use in get_pressure_advection_diffusion_matrix().
@@ -1273,18 +1268,11 @@ namespace oomph
 
 
     /// Broken copy constructor
-    NavierStokesExactPreconditioner(const NavierStokesExactPreconditioner&)
-    {
-      BrokenCopy::broken_copy("NavierStokesExactPreconditioner");
-    }
-
+    NavierStokesExactPreconditioner(const NavierStokesExactPreconditioner&) =
+      delete;
 
     /// Broken assignment operator
-    /*void operator=(const NavierStokesExactPreconditioner&)
-     {
-      BrokenCopy::broken_assign("NavierStokesExactPreconditioner");
-      }*/
-
+    /*void operator=(const NavierStokesExactPreconditioner&) = delete;*/
 
     /// Setup the preconditioner
     void setup();

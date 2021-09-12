@@ -745,16 +745,10 @@ namespace oomph
     ~MGPreconditioner(){};
 
     /// Broken copy constructor.
-    MGPreconditioner(const MGPreconditioner&)
-    {
-      BrokenCopy::broken_copy("MGPreconditioner");
-    }
+    MGPreconditioner(const MGPreconditioner&) = delete;
 
     /// Broken assignment operator.
-    void operator=(const MGPreconditioner&)
-    {
-      BrokenCopy::broken_assign("MGPreconditioner");
-    }
+    void operator=(const MGPreconditioner&) = delete;
 
     /// \short Function to set up a preconditioner for the linear system
     void setup()

@@ -61,16 +61,10 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableLinearWaveEquations(
-      const RefineableLinearWaveEquations<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableLinearWaveEquations");
-    }
+      const RefineableLinearWaveEquations<DIM>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableLinearWaveEquations<DIM>&)
-    {
-      BrokenCopy::broken_assign("RefineableLinearWaveEquations");
-    }
+    void operator=(const RefineableLinearWaveEquations<DIM>&) = delete;
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -194,16 +188,10 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQLinearWaveElement(
-      const RefineableQLinearWaveElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQuadLinearWaveElement");
-    }
+      const RefineableQLinearWaveElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableQLinearWaveElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("RefineableQuadLinearWaveElement");
-    }
+    void operator=(const RefineableQLinearWaveElement<DIM, NNODE_1D>&) = delete;
 
     /// Number of continuously interpolated values: 1
     unsigned ncont_interpolated_values() const

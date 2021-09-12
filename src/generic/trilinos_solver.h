@@ -80,21 +80,10 @@ namespace oomph
 
     /// Broken copy constructor
     OomphLibPreconditionerEpetraOperator(
-      const OomphLibPreconditionerEpetraOperator&)
-#ifdef OOMPH_HAS_MPI
-      : Operator_comm(MPI_Helpers::communicator_pt()->mpi_comm())
-#else
-      : Operator_comm()
-#endif
-    {
-      BrokenCopy::broken_copy("OomphLibPreconditionerEpetraOperator");
-    }
+      const OomphLibPreconditionerEpetraOperator&) = delete;
 
     /// Broken assignment operator.
-    void operator=(const OomphLibPreconditionerEpetraOperator&)
-    {
-      BrokenCopy::broken_assign("OomphLibPreconditionerEpetraOperator");
-    }
+    void operator=(const OomphLibPreconditionerEpetraOperator&) = delete;
 
     /// Broken Epetra_Operator member - SetUseTranspose
     int SetUseTranspose(bool UseTranspose)
@@ -327,16 +316,10 @@ namespace oomph
     }
 
     /// Broken copy constructor.
-    TrilinosAztecOOSolver(const TrilinosAztecOOSolver&)
-    {
-      BrokenCopy::broken_copy("TrilinosAztecOOSolver");
-    }
+    TrilinosAztecOOSolver(const TrilinosAztecOOSolver&) = delete;
 
     /// Broken assignment operator.
-    void operator=(const TrilinosAztecOOSolver&)
-    {
-      BrokenCopy::broken_assign("TrilinosAztecOOSolver");
-    }
+    void operator=(const TrilinosAztecOOSolver&) = delete;
 
     /// \short Enable workaround for creating of epetra matrix that respects
     /// aztecoo's ordering requirements

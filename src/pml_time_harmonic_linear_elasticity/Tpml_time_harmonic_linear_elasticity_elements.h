@@ -77,17 +77,12 @@ namespace oomph
 
     /// Broken copy constructor
     TPMLTimeHarmonicLinearElasticityElement(
-      const TPMLTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("TPMLTimeHarmonicLinearElasticityElement");
-    }
+      const TPMLTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>& dummy) =
+      delete;
 
     /// Broken assignment operator
     void operator=(
-      const TPMLTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("TPMLTimeHarmonicLinearElasticityElement");
-    }
+      const TPMLTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>&) = delete;
 
     /// \short Output function:
     void output(std::ostream& outfile)

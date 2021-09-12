@@ -98,16 +98,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    LinearSolver(const LinearSolver& dummy)
-    {
-      BrokenCopy::broken_copy("LinearSolver");
-    }
+    LinearSolver(const LinearSolver& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const LinearSolver&)
-    {
-      BrokenCopy::broken_assign("LinearSolver");
-    }
+    void operator=(const LinearSolver&) = delete;
 
     /// Empty virtual destructor
     virtual ~LinearSolver() {}
@@ -355,16 +349,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    DenseLU(const DenseLU& dummy)
-    {
-      BrokenCopy::broken_copy("DenseLU");
-    }
+    DenseLU(const DenseLU& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const DenseLU&)
-    {
-      BrokenCopy::broken_assign("DenseLU");
-    }
+    void operator=(const DenseLU&) = delete;
 
     /// Destructor, clean up the stored LU factors
     ~DenseLU()
@@ -447,16 +435,10 @@ namespace oomph
     FD_LU() : DenseLU() {}
 
     /// Broken copy constructor
-    FD_LU(const FD_LU& dummy)
-    {
-      BrokenCopy::broken_copy("FD_LU");
-    }
+    FD_LU(const FD_LU& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const FD_LU&)
-    {
-      BrokenCopy::broken_assign("FD_LU");
-    }
+    void operator=(const FD_LU&) = delete;
 
     /// \short Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
@@ -543,16 +525,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SuperLUSolver(const SuperLUSolver& dummy)
-    {
-      BrokenCopy::broken_copy("SuperLUSolver");
-    }
+    SuperLUSolver(const SuperLUSolver& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const SuperLUSolver&)
-    {
-      BrokenCopy::broken_assign("SuperLUSolver");
-    }
+    void operator=(const SuperLUSolver&) = delete;
 
     /// Destructor, clean up the stored matrices
     ~SuperLUSolver()

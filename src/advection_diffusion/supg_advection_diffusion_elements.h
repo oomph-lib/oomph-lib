@@ -281,17 +281,12 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQSUPGAdvectionDiffusionElement(
-      const RefineableQSUPGAdvectionDiffusionElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQSUPGAdvectionDiffusionElement");
-    }
+      const RefineableQSUPGAdvectionDiffusionElement<DIM, NNODE_1D>& dummy) =
+      delete;
 
     /// Broken assignment operator
     void operator=(
-      const RefineableQSUPGAdvectionDiffusionElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("RefineableQSUPGAdvectionDiffusionElement");
-    }
+      const RefineableQSUPGAdvectionDiffusionElement<DIM, NNODE_1D>&) = delete;
 
     /// Number of continuously interpolated values: 1
     unsigned ncont_interpolated_values() const

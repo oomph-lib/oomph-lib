@@ -67,16 +67,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineablePoissonEquations(const RefineablePoissonEquations<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineablePoissonEquations");
-    }
+    RefineablePoissonEquations(const RefineablePoissonEquations<DIM>& dummy) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const RefineablePoissonEquations<DIM>&)
-    {
-      BrokenCopy::broken_assign("RefineablePoissonEquations");
-    }
+    void operator=(const RefineablePoissonEquations<DIM>&) = delete;
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -209,16 +204,10 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQPoissonElement(
-      const RefineableQPoissonElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQuadPoissonElement");
-    }
+      const RefineableQPoissonElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableQPoissonElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("RefineableQuadPoissonElement");
-    }
+    void operator=(const RefineableQPoissonElement<DIM, NNODE_1D>&) = delete;
 
     /// Number of continuously interpolated values: 1
     unsigned ncont_interpolated_values() const
@@ -285,16 +274,11 @@ namespace oomph
 
 
     /// Broken copy constructor
-    PRefineableQPoissonElement(const PRefineableQPoissonElement<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("PRefineableQPoissonElement");
-    }
+    PRefineableQPoissonElement(const PRefineableQPoissonElement<DIM>& dummy) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const PRefineableQPoissonElement<DIM>&)
-    {
-      BrokenCopy::broken_assign("PRefineableQPoissonElement");
-    }
+    void operator=(const PRefineableQPoissonElement<DIM>&) = delete;
 
     void further_build();
 

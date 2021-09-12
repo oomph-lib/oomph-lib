@@ -67,10 +67,7 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQSpectralPoissonElement(
-      const RefineableQSpectralPoissonElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQuadPoissonElement");
-    }
+      const RefineableQSpectralPoissonElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -78,10 +75,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const RefineableQSpectralPoissonElement<DIM,NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("RefineableQuadPoissonElement");
-      }*/
+    /*void operator=(const RefineableQSpectralPoissonElement<DIM,NNODE_1D>&) =
+     * delete;*/
 
     /// Number of continuously interpolated values: 1
     unsigned ncont_interpolated_values() const

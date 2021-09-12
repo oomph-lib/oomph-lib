@@ -137,10 +137,7 @@ namespace oomph
 
     /// Broken copy constructor
     AxisymmetricTCrouzeixRaviartElement(
-      const AxisymmetricTCrouzeixRaviartElement& dummy)
-    {
-      BrokenCopy::broken_copy("AxisymmetricTCrouzeixRaviartElement");
-    }
+      const AxisymmetricTCrouzeixRaviartElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -148,10 +145,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const AxisymmetricTCrouzeixRaviartElement&)
-     {
-      BrokenCopy::broken_assign("AxisymmetricTCrouzeixRaviartElement");
-      }*/
+    /*void operator=(const AxisymmetricTCrouzeixRaviartElement&) =
+      delete;*/
 
 
     /// \short Number of values (pinned or dofs) required at local node n.
@@ -647,16 +642,12 @@ namespace oomph
 
 
     /// Broken copy constructor
-    AxisymmetricTTaylorHoodElement(const AxisymmetricTTaylorHoodElement& dummy)
-    {
-      BrokenCopy::broken_copy("AxisymmetricTTaylorHoodElement");
-    }
+    AxisymmetricTTaylorHoodElement(
+      const AxisymmetricTTaylorHoodElement& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const AxisymmetricTTaylorHoodElement&)
-     {
-      BrokenCopy::broken_assign("AxisymmetricTTaylorHoodElement");
-      }*/
+    /*void operator=(const AxisymmetricTTaylorHoodElement&) =
+      delete;*/
 
     /// \short Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version

@@ -509,16 +509,10 @@ namespace oomph
     } // EOFunc destructor
 
     /// Broken copy constructor
-    BlockPreconditioner(const BlockPreconditioner&)
-    {
-      BrokenCopy::broken_copy("BlockPreconditioner");
-    }
+    BlockPreconditioner(const BlockPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const BlockPreconditioner&)
-    {
-      BrokenCopy::broken_assign("BlockPreconditioner");
-    }
+    void operator=(const BlockPreconditioner&) = delete;
 
     /// \short Access function to matrix_pt. If this is the master then cast
     /// the matrix pointer to MATRIX*, error check and return. Otherwise ask

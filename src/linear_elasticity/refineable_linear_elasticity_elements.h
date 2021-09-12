@@ -264,16 +264,11 @@ namespace oomph
 
     /// Broken copy constructor
     PRefineableQLinearElasticityElement(
-      const PRefineableQLinearElasticityElement<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("PRefineableQLinearElasticityElement");
-    }
+      const PRefineableQLinearElasticityElement<DIM>& dummy) = delete;
 
     /// Broken assignment operator
-    /* void operator=(const PRefineableQLinearElasticityElement<DIM>&)
-      {
-       BrokenCopy::broken_assign("PRefineableQLinearElasticityElement");
-       }*/
+    /* void operator=(const PRefineableQLinearElasticityElement<DIM>&) =
+     * delete;*/
 
     void further_build();
 

@@ -62,16 +62,10 @@ namespace oomph
     MumpsSolver();
 
     /// Broken copy constructor
-    MumpsSolver(const MumpsSolver& dummy)
-    {
-      BrokenCopy::broken_copy("MumpsSolver");
-    }
+    MumpsSolver(const MumpsSolver& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const MumpsSolver&)
-    {
-      BrokenCopy::broken_assign("MumpsSolver");
-    }
+    void operator=(const MumpsSolver&) = delete;
 
     /// Destructor: Cleanup
     ~MumpsSolver();
@@ -279,17 +273,10 @@ namespace oomph
     ~NewMumpsPreconditioner() {}
 
     /// Broken copy constructor.
-    NewMumpsPreconditioner(const NewMumpsPreconditioner&)
-    {
-      BrokenCopy::broken_copy("NewMumpsPreconditioner");
-    }
-
+    NewMumpsPreconditioner(const NewMumpsPreconditioner&) = delete;
 
     /// Broken assignment operator.
-    void operator=(const NewMumpsPreconditioner&)
-    {
-      BrokenCopy::broken_assign("NewMumpsPreconditioner");
-    }
+    void operator=(const NewMumpsPreconditioner&) = delete;
 
     /// \short Function to set up a preconditioner for the linear
     /// system defined by matrix_pt. This function must be called

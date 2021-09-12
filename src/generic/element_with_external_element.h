@@ -81,17 +81,10 @@ namespace oomph
     virtual ~ElementWithExternalElement();
 
     /// Broken copy constructor
-    ElementWithExternalElement(const ElementWithExternalElement&)
-    {
-      BrokenCopy::broken_copy("ElementWithExternalElement");
-    }
+    ElementWithExternalElement(const ElementWithExternalElement&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ElementWithExternalElement&)
-    {
-      BrokenCopy::broken_assign("ElementWithExternalElement");
-    }
-
+    void operator=(const ElementWithExternalElement&) = delete;
 
     /// \short Helper function to check if storage has actually been allocated
     bool storage_has_been_allocated() const

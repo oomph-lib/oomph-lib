@@ -66,17 +66,10 @@ namespace oomph
 #endif
 
     /// Broken copy constructor
-    TriangleScaffoldMesh(const TriangleScaffoldMesh&)
-    {
-      BrokenCopy::broken_copy("TriangleScaffoldMesh");
-    }
+    TriangleScaffoldMesh(const TriangleScaffoldMesh&) = delete;
 
     /// Broken assignment operator
-    void operator=(const TriangleScaffoldMesh&)
-    {
-      BrokenCopy::broken_assign("TriangleScaffoldMesh");
-    }
-
+    void operator=(const TriangleScaffoldMesh&) = delete;
 
     /// Empty destructor
     ~TriangleScaffoldMesh() {}

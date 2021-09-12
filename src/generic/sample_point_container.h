@@ -23,9 +23,8 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef SAMPLE_POINT_CONTAINER_HEADER
-#define SAMPLE_POINT_CONTAINER_HEADER
-
+#ifndef OOMPH_SAMPLE_POINT_CONTAINER_HEADER
+#define OOMPH_SAMPLE_POINT_CONTAINER_HEADER
 
 #ifdef OOMPH_HAS_CGAL
 
@@ -63,16 +62,10 @@ public:
   }
 
   /// \short Broken copy constructor.
-  SamplePoint(const SamplePoint& data)
-  {
-    BrokenCopy::broken_copy("SamplePoint");
-  }
+  SamplePoint(const SamplePoint& data) = delete;
 
   /// Broken assignment operator.
-  void operator=(const SamplePoint&)
-  {
-    BrokenCopy::broken_assign("SamplePoint");
-  }
+  void operator=(const SamplePoint&) = delete;
 
   /// Access function to the index of finite element in its mesh
   unsigned element_index_in_mesh() const
@@ -127,16 +120,10 @@ public:
 
 
   /// \short Broken copy constructor.
-  RefineableBin(const RefineableBin& data)
-  {
-    BrokenCopy::broken_copy("RefineableBin");
-  }
+  RefineableBin(const RefineableBin& data) = delete;
 
   /// Broken assignment operator.
-  void operator=(const RefineableBin&)
-  {
-    BrokenCopy::broken_assign("RefineableBin");
-  }
+  void operator=(const RefineableBin&) = delete;
 
   /// Destructor
   ~RefineableBin();
@@ -252,16 +239,10 @@ public:
   }
 
   /// \short Broken copy constructor.
-  SamplePointContainer(const SamplePointContainer& data)
-  {
-    BrokenCopy::broken_copy("SamplePointContainer");
-  }
+  SamplePointContainer(const SamplePointContainer& data) = delete;
 
   /// Broken assignment operator.
-  void operator=(const SamplePointContainer&)
-  {
-    BrokenCopy::broken_assign("SamplePointContainer");
-  }
+  void operator=(const SamplePointContainer&) = delete;
 
   /// Virtual destructor
   virtual ~SamplePointContainer() {}
@@ -450,16 +431,10 @@ public:
   }
 
   /// \short Broken copy constructor.
-  BinArray(const BinArray& data)
-  {
-    BrokenCopy::broken_copy("BinArray");
-  }
+  BinArray(const BinArray& data) = delete;
 
   /// Broken assignment operator.
-  void operator=(const BinArray&)
-  {
-    BrokenCopy::broken_assign("BinArray");
-  }
+  void operator=(const BinArray&) = delete;
 
   /// Virtual destructor
   virtual ~BinArray() {}
@@ -549,16 +524,10 @@ public:
   RefineableBinArray(SamplePointContainerParameters* bin_array_parameters_pt);
 
   /// \short Broken copy constructor.
-  RefineableBinArray(const RefineableBinArray& data)
-  {
-    BrokenCopy::broken_copy("RefineableBinArray");
-  }
+  RefineableBinArray(const RefineableBinArray& data) = delete;
 
   /// Broken assignment operator.
-  void operator=(const RefineableBinArray&)
-  {
-    BrokenCopy::broken_assign("RefineableBinArray");
-  }
+  void operator=(const RefineableBinArray&) = delete;
 
   /// Destructor
   ~RefineableBinArray()
@@ -860,16 +829,10 @@ public:
   }
 
   /// \short Broken copy constructor.
-  NonRefineableBinArray(const NonRefineableBinArray& data)
-  {
-    BrokenCopy::broken_copy("NonRefineableBinArray");
-  }
+  NonRefineableBinArray(const NonRefineableBinArray& data) = delete;
 
   /// Broken assignment operator.
-  void operator=(const NonRefineableBinArray&)
-  {
-    BrokenCopy::broken_assign("NonRefineableBinArray");
-  }
+  void operator=(const NonRefineableBinArray&) = delete;
 
   /// \short Find sub-GeomObject (finite element) and the local coordinate
   /// s within it that contains point with global coordinate zeta.
@@ -1081,16 +1044,10 @@ public:
     SamplePointContainerParameters* sample_point_container_parameters_pt);
 
   /// \short Broken copy constructor.
-  CGALSamplePointContainer(const CGALSamplePointContainer& data)
-  {
-    BrokenCopy::broken_copy("CGALSamplePointContainer");
-  }
+  CGALSamplePointContainer(const CGALSamplePointContainer& data) = delete;
 
   /// Broken assignment operator.
-  void operator=(const CGALSamplePointContainer&)
-  {
-    BrokenCopy::broken_assign("CGALSamplePointContainer");
-  }
+  void operator=(const CGALSamplePointContainer&) = delete;
 
   /// Virtual destructor
   virtual ~CGALSamplePointContainer()

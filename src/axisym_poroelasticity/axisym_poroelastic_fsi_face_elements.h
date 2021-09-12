@@ -85,16 +85,10 @@ namespace oomph
 
     /// Broken copy constructor
     LinearisedAxisymPoroelasticBJS_FSIElement(
-      const LinearisedAxisymPoroelasticBJS_FSIElement& dummy)
-    {
-      BrokenCopy::broken_copy("LinearisedAxisymPoroelasticBJS_FSIElement");
-    }
+      const LinearisedAxisymPoroelasticBJS_FSIElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const LinearisedAxisymPoroelasticBJS_FSIElement&)
-    {
-      BrokenCopy::broken_assign("LinearisedAxisymPoroelasticBJS_FSIElement");
-    }
+    void operator=(const LinearisedAxisymPoroelasticBJS_FSIElement&) = delete;
 
     /// \short Access function for the pointer to the fluid Strouhal number
     /// (if not set, St defaults to 1)
