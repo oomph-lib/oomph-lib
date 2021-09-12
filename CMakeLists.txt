@@ -82,9 +82,11 @@ option(OOMPH_ENABLE_64BIT_INTS "Use 64-bit ints for matrix indices" OFF)
 # Enable the Clang static code analyser/formatter. [WORK IN PROGRESS]
 # WARNING: If you enable clang-tidy, you MUST NOT(!) run the Makefile/Ninja
 # build in parallel as it will likely lead to data races and thus the output
-# will be mangled.
+# will be mangled. ALSO, you should enable as many options as possible for the
+# build so that most, or all, of the code is visible to the formatter (which
+# formats the code visible during the build).
 #
-# This functionality really be reserved for a CI server to run...
+# This functionality should really be reserved for a CI server to run...
 option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy C++ static code analysis" OFF)
 option(OOMPH_ENABLE_CLANG_FORMAT "Enable Clang-based C++ code formatting" OFF)
 option(OOMPH_ENABLE_INCLUDE_WHAT_YOU_USE "Enable 'Include What You Use' sanitisation" OFF)
@@ -103,29 +105,37 @@ option(OOMPH_ENABLE_TESTING "Build unit tests" OFF)
 
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
-option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" ON)
+option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
 # Optionally build OpenBLAS/LAPACK
 option(OOMPH_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK" ON)
 # option(OOMPH_USE_MKL_BLAS_AND_LAPACK "Use the MKL implementation of BLAS and LAPACK" OFF)
 
+# TODO: Discuss CGAL with MH: "CGAL 5.0 is the first release of CGAL that
+# requires a C++ compiler with the support of C++14"
+
+# FIXME: spdlog and Backward need to be "exported"(?!) with 'generic'. Not sure
+# what this means....
+
 # Optionally build third-party libraries. [WORK IN PROGRESS.]
+option(OOMPH_WANT_BACKWARD "Use the Backward library for stack trace pretty-printing" OFF)
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
 option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
-option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
 option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
+option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
+option(OOMPH_WANT_SPDLOG "Use the spdlog logging library" OFF)
 
 # Fine-grained control of build of external_srcs. NOTE: These should be set on
 # the fly after checking whether the appropriate variable WITH_* has been set!
 # TODO: ADD OOMPH_ PREFIXES TO THESE VARIABLES!
-option(ALREADY_HAVE_BLAS "Use BLAS library specified via absolute path" OFF)
-option(ALREADY_HAVE_LAPACK "Use LAPACK library specified via absolute path" OFF)
-option(ALREADY_HAVE_METIS "Suppress build of oomph-lib's own copy of metis" OFF)
-option(ALREADY_HAVE_PARMETIS "Suppress build of oomph-lib's copy of parmetis" OFF)
-option(ALREADY_HAVE_SUPERLU "Suppress build of oomph-lib's copy of serial SuperLU" OFF)
-option(ALREADY_HAVE_SUPERLU_DIST "Suppress build of oomph-lib's copy of serial SuperLU_dist" OFF)
+# option(ALREADY_HAVE_BLAS "Use BLAS library specified via absolute path" OFF)
+# option(ALREADY_HAVE_LAPACK "Use LAPACK library specified via absolute path" OFF)
+# option(ALREADY_HAVE_METIS "Suppress build of oomph-lib's own copy of metis" OFF)
+# option(ALREADY_HAVE_PARMETIS "Suppress build of oomph-lib's copy of parmetis" OFF)
+# option(ALREADY_HAVE_SUPERLU "Suppress build of oomph-lib's copy of serial SuperLU" OFF)
+# option(ALREADY_HAVE_SUPERLU_DIST "Suppress build of oomph-lib's copy of serial SuperLU_dist" OFF)
 option(SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 option(SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
@@ -229,40 +239,40 @@ if(OOMPH_USE_OPENBLAS)
 endif()
 
 # TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD
-if(WITH_BLACS)
+if(DEFINED WITH_BLACS)
   set(OOMPH_ALREADY_HAVE_BLACS TRUE)
 endif()
-if(WITH_SCALAPACK)
+if(DEFINED WITH_SCALAPACK)
   set(OOMPH_ALREADY_HAVE_SCALAPACK TRUE)
 endif()
-if(WITH_PORD)
+if(DEFINED WITH_PORD)
   set(OOMPH_ALREADY_HAVE_PORD TRUE)
 endif()
-if(WITH_MUMPS)
+if(DEFINED WITH_MUMPS)
   set(OOMPH_ALREADY_HAVE_MUMPS TRUE)
 endif()
-if(WITH_BLAS)
+if(DEFINED WITH_BLAS)
   set(OOMPH_ALREADY_HAVE_BLAS TRUE)
 endif()
-if(WITH_LAPACK)
+if(DEFINED WITH_LAPACK)
   set(OOMPH_ALREADY_HAVE_LAPACK TRUE)
 endif()
-if(WITH_HYPRE)
+if(DEFINED WITH_HYPRE)
   set(OOMPH_ALREADY_HAVE_HYPRE TRUE)
 endif()
-if(WITH_TRILINOS)
+if(DEFINED WITH_TRILINOS)
   set(OOMPH_ALREADY_HAVE_TRILINOS TRUE)
 endif()
-if(WITH_BOOST)
+if(DEFINED WITH_BOOST)
   set(OOMPH_ALREADY_HAVE_BOOST TRUE)
 endif()
-if(WITH_GMP)
+if(DEFINED WITH_GMP)
   set(OOMPH_ALREADY_HAVE_GMP TRUE)
 endif()
-if(WITH_MPFR)
+if(DEFINED WITH_MPFR)
   set(OOMPH_ALREADY_HAVE_MPFR TRUE)
 endif()
-if(WITH_CGAL)
+if(DEFINED WITH_CGAL)
   set(OOMPH_ALREADY_HAVE_CGAL TRUE)
 endif()
 

@@ -1,8 +1,12 @@
+# ---------------------------[ INITIAL BOILERPLATE ]---------------------------
+
 @PACKAGE_INIT@
 
 # CMake module used to specify dependencies that should be propagated to
 # consumers of the package
 include(CMakeFindDependencyMacro)
+
+# -------------------[ EXTRACT IMPORTANT DEFINED VARIABLES ]-------------------
 
 # Package root directory
 set(OOMPH_ROOT_DIR "@OOMPH_ROOT_DIR@")
@@ -37,6 +41,7 @@ set(OOMPH_HAS_HYPRE @OOMPH_WANT_HYPRE@)
 set(OOMPH_HAS_MUMPS @OOMPH_WANT_MUMPS@)
 set(OOMPH_HAS_TRILINOS @OOMPH_WANT_TRILINOS@)
 set(OOMPH_HAS_NLOHMANN_JSON @OOMPH_WANT_NLOHMANN_JSON@)
+set(OOMPH_HAS_SPDLOG @OOMPH_HAS_SPDLOG@)
 
 # Search for OpenBLAS/LAPACK libraries
 if(OOMPH_USE_OPENBLAS)
@@ -49,7 +54,7 @@ if(OOMPH_USE_OPENBLAS)
   find_dependency(LAPACK REQUIRED)
 endif()
 
-# Forward library dependencies to the library consumer:
+# ---------------------[ FORWARD DEPENDENCY REQUIREMENTS ]---------------------
 
 # Python3 for self-tests
 find_dependency(Python3 QUIET)
@@ -61,10 +66,35 @@ if(OOMPH_HAS_MPI)
   set(MPI_VARIABLENP_RUN_COMMAND "@MPI_VARIABLENP_RUN_COMMAND@")
 endif()
 
+# --------------------------[ THIRD-PARTY LIBRARIES ]--------------------------
+
 # Third-party libraries we built. Make sure to also check whether the dependency
 # has already been found otherwise these dependency checks can be called again
 # and again unnecessarily
+
+# Backward
+if(OOMPH_HAS_BACKWARD AND NOT Backward_FOUND)
+  find_dependency(Backward REQUIRED)
+endif()
+
+# CGAL
+if(OOMPH_HAS_CGAL AND NOT CGAL_FOUND)
+  find_dependency(CGAL 5.2.2 REQUIRED)
+endif()
+
+# MUMPS
+if(OOMPH_HAS_MUMPS AND NOT MUMPS_FOUND)
+  find_dependency(MUMPS 5.4.0 REQUIRED)
+endif()
+
+# nlohmann_json
+if(OOMPH_HAS_NLOHMANN_JSON AND NOT nlohmann_json_FOUND)
+  find_dependency(nlohmann_json 3.9.1 REQUIRED)
+endif()
+
+# Trilinos
 if(OOMPH_HAS_TRILINOS AND NOT Trilinos_FOUND)
+  # Extract important information from the Trilinos build
   set(OOMPH_TRILINOS_VERSION "@TRILINOS_VERSION@")
   set(OOMPH_TRILINOS_INSTALL_DIR "@OOMPH_TRILINOS_INSTALL_DIR@")
   set(OOMPH_TRILINOS_INCLUDE_DIR "${OOMPH_TRILINOS_INSTALL_DIR}/include")
@@ -93,20 +123,20 @@ if(OOMPH_HAS_TRILINOS AND NOT Trilinos_FOUND)
                INTERFACE_INCLUDE_DIRECTORIES "${OOMPH_TRILINOS_INCLUDE_DIR}"
                INTERFACE_LINK_LIBRARIES "${TRILINOS_LIBRARIES}")
 endif()
-if(OOMPH_HAS_MUMPS AND NOT MUMPS_FOUND)
-  find_dependency(MUMPS 5.4.0 REQUIRED)
+
+# spdlog
+if(OOMPH_HAS_SPDLOG AND NOT spdlog_FOUND)
+  find_dependency(spdlog 1.9.2 REQUIRED)
 endif()
-if(OOMPH_HAS_NLOHMANN_JSON AND NOT nlohmann_json_FOUND)
-  find_dependency(nlohmann_json 3.9.1 REQUIRED)
-endif()
-if(OOMPH_HAS_CGAL AND NOT CGAL_FOUND)
-  find_dependency(CGAL 5.2.2 REQUIRED)
-endif()
+
+# --------------------------[ REMAINING BOILERPLATE ]--------------------------
 
 include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@Exports.cmake")
 
 # TODO: Update this to check for all of the desired components...
 check_required_components("@PROJECT_NAMESPACE@")
+
+# -------------------[ INCLUDE EXTRA INSTALLED CMAKE FILES ]-------------------
 
 include("${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake")

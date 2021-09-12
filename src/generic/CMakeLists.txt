@@ -216,16 +216,20 @@ set(LINKLIBS ${EXTERNAL_SRC_LIBS})
 
 # PM: Handle external distribution dependencies more carefully; don't "glob" add
 # all of the external libs as they might not all be required by the generic
-# library (e.g. the nlohmann_json library). ${EXTERNAL_DIST_LIBS})
+# library (e.g. the nlohmann_json library).
 
-if(OOMPH_HAS_MPI)
-  list(APPEND SOURCES superlu_dist.c)
+if(OOMPH_HAS_BACKWARD)
+  list(APPEND LINKLIBS backward)
 endif()
 
 if(OOMPH_HAS_HYPRE)
   list(APPEND SOURCES hypre_solver.cc)
   list(APPEND HEADERS hypre_solver.h)
   list(APPEND LINKLIBS HYPRE::HYPRE)
+endif()
+
+if(OOMPH_HAS_MPI)
+  list(APPEND SOURCES superlu_dist.c)
 endif()
 
 if(OOMPH_HAS_MUMPS)
@@ -236,6 +240,10 @@ if(OOMPH_HAS_MUMPS)
   else()
     list(APPEND LINKLIBS MUMPS::MPISEQ)
   endif()
+endif()
+
+if(OOMPH_HAS_SPDLOG)
+  list(APPEND LINKLIBS spdlog::spdlog)
 endif()
 
 if(OOMPH_HAS_TRILINOS)
