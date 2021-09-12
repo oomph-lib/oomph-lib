@@ -32,7 +32,7 @@
 #endif
 
 // oomph-lib headers
-#include "../generic/domain.h"
+#include "domain.h"
 // #include "extruded_macro_element.h"
 
 namespace oomph
