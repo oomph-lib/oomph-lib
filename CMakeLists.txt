@@ -94,6 +94,7 @@ option(OOMPH_ENABLE_INCLUDE_WHAT_YOU_USE "Enable 'Include What You Use' sanitisa
 # Extra debugging compile options; only used by Debug configurations
 option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ON)
 option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ON)
+option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
 
 # General options
 option(BUILD_SHARED_LIBS "Build using shared libraries; static otherwise" OFF)
@@ -101,7 +102,7 @@ option(SUPPRESS_DOC "Suppress Doxygen creation of API documentation" ON)
 option(SYMBOLIC_LINKS_FOR_HEADERS "Replace headers by symbolic links" ON)
 
 # Testing [PM: not sure if this is needed; should build self-tests separately]
-option(OOMPH_ENABLE_TESTING "Build unit tests" OFF)
+option(OOMPH_ENABLE_TESTING "Build tests with library build" OFF)
 
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
@@ -111,9 +112,6 @@ option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 # Optionally build OpenBLAS/LAPACK
 option(OOMPH_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK" ON)
 # option(OOMPH_USE_MKL_BLAS_AND_LAPACK "Use the MKL implementation of BLAS and LAPACK" OFF)
-
-# TODO: Discuss CGAL with MH: "CGAL 5.0 is the first release of CGAL that
-# requires a C++ compiler with the support of C++14"
 
 # FIXME: spdlog and Backward need to be "exported"(?!) with 'generic'. Not sure
 # what this means....
@@ -129,13 +127,6 @@ option(OOMPH_WANT_SPDLOG "Use the spdlog logging library" OFF)
 
 # Fine-grained control of build of external_srcs. NOTE: These should be set on
 # the fly after checking whether the appropriate variable WITH_* has been set!
-# TODO: ADD OOMPH_ PREFIXES TO THESE VARIABLES!
-# option(ALREADY_HAVE_BLAS "Use BLAS library specified via absolute path" OFF)
-# option(ALREADY_HAVE_LAPACK "Use LAPACK library specified via absolute path" OFF)
-# option(ALREADY_HAVE_METIS "Suppress build of oomph-lib's own copy of metis" OFF)
-# option(ALREADY_HAVE_PARMETIS "Suppress build of oomph-lib's copy of parmetis" OFF)
-# option(ALREADY_HAVE_SUPERLU "Suppress build of oomph-lib's copy of serial SuperLU" OFF)
-# option(ALREADY_HAVE_SUPERLU_DIST "Suppress build of oomph-lib's copy of serial SuperLU_dist" OFF)
 option(SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 option(SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
@@ -153,6 +144,22 @@ endif()
 # Run clang-format during the build if the user requires
 if(OOMPH_ENABLE_CLANG_FORMAT)
   include(OomphClangFormat)
+endif()
+
+include(CTest)
+
+# Add code coverage compiler flags, if requested
+if(OOMPH_ENABLE_CODE_COVERAGE)
+  # We can only get coverage for the library sources if the demo drivers are
+  # built with the library itself, which requires OOMPH_ENABLE_TESTING to be
+  # enabled
+  if(NOT OOMPH_ENABLE_TESTING)
+    set(OOMPH_ENABLE_TESTING ON CACHE BOOL "Build tests with library build"
+        FORCE)
+  endif()
+
+  include(OomphEnableCodeCoverage)
+  oomph_enable_code_coverage()
 endif()
 
 # Set the matrix integer index size
@@ -238,7 +245,8 @@ if(OOMPH_USE_OPENBLAS)
       "Disable Trilinos when OpenBLAS is used" FORCE)
 endif()
 
-# TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD
+# TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD TODO: ADD OOMPH_
+# PREFIXES TO THESE VARIABLES!
 if(DEFINED WITH_BLACS)
   set(OOMPH_ALREADY_HAVE_BLACS TRUE)
 endif()
@@ -296,7 +304,6 @@ endif()
 message(VERBOSE "<====== Starting oomph-lib library build ======>")
 
 # Process the oomph-lib directories containing the library files
-add_subdirectory(scripts)
 add_subdirectory(external_src)
 add_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
 add_subdirectory(external_distributions)
@@ -324,8 +331,8 @@ include(OomphExportPackage)
 # larger project hierarchy.
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) AND OOMPH_ENABLE_TESTING)
   add_subdirectory(demo_drivers)
-  add_subdirectory(self_test)
-  include(OomphGetDoctest)
+  # FIXME: Need to integrate self_test into the self-test framework
+  # add_subdirectory(self_test)
   enable_testing()
   add_subdirectory(tests)
 endif()

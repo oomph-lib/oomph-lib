@@ -8,7 +8,7 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
 # ------------------------------------------------------------------------------
-# Define additional variables required by the configure file here
+# Define additional variables required by the oomphlibConfig.cmake.in file here
 
 # Get the compile definitions
 get_directory_property(
@@ -52,10 +52,13 @@ configure_file("${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}.pc.in"
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
         DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/")
 
+# ------------------------------------------------------------------------------
+
 # Handle everything else that should be exported, e.g. useful CMake modules:
 
 # The list of modules to export
-set(CMAKE_MODULES_TO_INSTALL OomphAddExecutable.cmake OomphAddTest.cmake)
+set(CMAKE_MODULES_TO_INSTALL OomphAddExecutable.cmake OomphAddTest.cmake
+    OomphEnableCodeCoverage.cmake)
 
 # Place each module in the appropriate build/install directory
 foreach(MODULE IN LISTS CMAKE_MODULES_TO_INSTALL)
