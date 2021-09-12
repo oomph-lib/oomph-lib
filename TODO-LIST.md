@@ -8,7 +8,7 @@
 - [ ] Empty.
 
 ## Not urgent but important
-- [ ] Add function `oomphlib(<your-target>)` that implements `target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})` if the user doesn't use the oomph-lib CMake commands to add drivers, see e.g. `cotire()`.
+- [ ] Add function `add_oomphlib(<your-target>)` that implements `target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})` if the user doesn't use the oomph-lib CMake commands to add drivers, see e.g. `cotire()`.
 - [ ] Add code coverage.
 - [ ] Add Docker support; see https://github.com/FEniCS/dolfinx
 - [ ] Test the build of the demo_drivers with the main build (i.e. add_subdirectory(demo_drivers)).
