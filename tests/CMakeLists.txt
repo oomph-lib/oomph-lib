@@ -2,6 +2,9 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered tests subdirectory")
 
+# Download Doctest
+include(OomphGetDoctest)
+
 # The subdirectories to build
 set(TEST_SUBDIRS json)
 
