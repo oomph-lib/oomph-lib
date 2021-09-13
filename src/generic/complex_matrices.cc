@@ -24,6 +24,7 @@
 // LIC//
 // LIC//====================================================================
 #include "complex_matrices.h"
+#include <set>
 
 namespace oomph
 {
@@ -536,6 +537,647 @@ namespace oomph
         soln[i] += Matrixdata[M * i + j] * x[j];
       }
     }
+  }
+
+  //===========================================================================
+  /// Function to multiply this matrix by the CRDoubleMatrix matrix_in.
+  /// In a serial matrix, there are 4 methods available:
+  /// Method 1: First runs through this matrix and matrix_in to find the storage
+  ///           requirements for result - arrays of the correct size are
+  ///           then allocated before performing the calculation.
+  ///           Minimises memory requirements but more costly.
+  /// Method 2: Grows storage for values and column indices of result 'on the
+  ///           fly' using an array of maps. Faster but more memory
+  ///           intensive.
+  /// Method 3: Grows storage for values and column indices of result 'on the
+  ///           fly' using a vector of vectors. Not particularly impressive
+  ///           on the platforms we tried...
+  /// Method 2 is employed by default.
+  //=============================================================================
+  void CRComplexMatrix::multiply(const CRComplexMatrix& matrix_in,
+                                 CRComplexMatrix& result) const
+  {
+#ifdef PARANOID
+    // check that this matrix is built
+    if (!Built)
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream << "This matrix has not been built";
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+    // check that this matrix is built
+    if (!matrix_in.built())
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream << "This matrix matrix_in has not been built";
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+    // if soln is setup then it should have the same distribution as x
+    if (result.built())
+    {
+      if (!(*result.distribution_pt() == *this->distribution_pt()))
+      {
+        std::ostringstream error_message_stream;
+        error_message_stream
+          << "The matrix result is setup and therefore must have the same "
+          << "distribution as the vector x";
+        throw OomphLibError(error_message_stream.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+#endif
+
+    // short name for Serial_matrix_matrix_multiply_method
+    unsigned method = 2;
+
+    // if this matrix is not distributed and matrix in is not distributed
+    if ((method == 1) || (method == 2) || (method == 3))
+    {
+      // NB N is number of rows!
+      unsigned long N = this->nrow();
+      unsigned long M = matrix_in.ncol();
+      unsigned long Nnz = 0;
+
+      // pointers to arrays which store result
+      int* Row_start = 0;
+      std::complex<double>* Value = 0;
+      int* Column_index = 0;
+
+      // get pointers to matrix_in
+      const int* matrix_in_row_start = matrix_in.row_start();
+      const int* matrix_in_column_index = matrix_in.column_index();
+      const std::complex<double>* matrix_in_value = matrix_in.value();
+
+      // get pointers to this matrix
+      const std::complex<double>* this_value = this->value();
+      const int* this_row_start = this->row_start();
+      const int* this_column_index = this->column_index();
+
+      // clock_t clock1 = clock();
+
+      // METHOD 1
+      // --------
+      if (method == 1)
+      {
+        // allocate storage for row starts
+        Row_start = new int[N + 1];
+        Row_start[0] = 0;
+
+        // a set to store number of non-zero columns in each row of result
+        std::set<unsigned> columns;
+
+        // run through rows of this matrix and matrix_in to find number of
+        // non-zero entries in each row of result
+        for (unsigned long this_row = 0; this_row < N; this_row++)
+        {
+          // run through non-zeros in this_row of this matrix
+          for (int this_ptr = this_row_start[this_row];
+               this_ptr < this_row_start[this_row + 1];
+               this_ptr++)
+          {
+            // find column index for non-zero
+            int matrix_in_row = this_column_index[this_ptr];
+
+            // run through corresponding row in matrix_in
+            for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
+                 matrix_in_ptr < matrix_in_row_start[matrix_in_row + 1];
+                 matrix_in_ptr++)
+            {
+              // find column index for non-zero in matrix_in and store in
+              // columns
+              columns.insert(matrix_in_column_index[matrix_in_ptr]);
+            }
+          }
+          // update Row_start
+          Row_start[this_row + 1] = Row_start[this_row] + columns.size();
+
+          // wipe values in columns
+          columns.clear();
+        }
+
+        // set Nnz
+        Nnz = Row_start[N];
+
+        // allocate arrays for result
+        Value = new std::complex<double>[Nnz];
+        Column_index = new int[Nnz];
+
+        // set all values of Column_index to -1
+        for (unsigned long i = 0; i < Nnz; i++)
+        {
+          Column_index[i] = -1;
+        }
+
+        // Calculate values for result - first run through rows of this matrix
+        for (unsigned long this_row = 0; this_row < N; this_row++)
+        {
+          // run through non-zeros in this_row
+          for (int this_ptr = this_row_start[this_row];
+               this_ptr < this_row_start[this_row + 1];
+               this_ptr++)
+          {
+            // find value of non-zero
+            std::complex<double> this_val = this_value[this_ptr];
+
+            // find column associated with non-zero
+            int matrix_in_row = this_column_index[this_ptr];
+
+            // run through corresponding row in matrix_in
+            for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
+                 matrix_in_ptr < matrix_in_row_start[matrix_in_row + 1];
+                 matrix_in_ptr++)
+            {
+              // find column index for non-zero in matrix_in
+              int col = matrix_in_column_index[matrix_in_ptr];
+
+              // find position in result to insert value
+              for (int ptr = Row_start[this_row];
+                   ptr <= Row_start[this_row + 1];
+                   ptr++)
+              {
+                if (ptr == Row_start[this_row + 1])
+                {
+                  // error - have passed end of row without finding
+                  // correct column
+                  std::ostringstream error_message;
+                  error_message << "Error inserting value in result";
+
+                  throw OomphLibError(error_message.str(),
+                                      OOMPH_CURRENT_FUNCTION,
+                                      OOMPH_EXCEPTION_LOCATION);
+                }
+                else if (Column_index[ptr] == -1)
+                {
+                  // first entry for this column index
+                  Column_index[ptr] = col;
+                  Value[ptr] = this_val * matrix_in_value[matrix_in_ptr];
+                  break;
+                }
+                else if (Column_index[ptr] == col)
+                {
+                  // column index already exists - add value
+                  Value[ptr] += this_val * matrix_in_value[matrix_in_ptr];
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // METHOD 2
+      // --------
+      else if (method == 2)
+      {
+        // generate array of maps to store values for result
+        std::map<int, std::complex<double>>* result_maps =
+          new std::map<int, std::complex<double>>[N];
+
+        // run through rows of this matrix
+        for (unsigned long this_row = 0; this_row < N; this_row++)
+        {
+          // run through non-zeros in this_row
+          for (int this_ptr = this_row_start[this_row];
+               this_ptr < this_row_start[this_row + 1];
+               this_ptr++)
+          {
+            // find value of non-zero
+            std::complex<double> this_val = this_value[this_ptr];
+
+            // find column index associated with non-zero
+            int matrix_in_row = this_column_index[this_ptr];
+
+            // run through corresponding row in matrix_in
+            for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
+                 matrix_in_ptr < matrix_in_row_start[matrix_in_row + 1];
+                 matrix_in_ptr++)
+            {
+              // find column index for non-zero in matrix_in
+              int col = matrix_in_column_index[matrix_in_ptr]; // This is the
+                                                               // offending line
+              // insert value
+              result_maps[this_row][col] +=
+                this_val * matrix_in_value[matrix_in_ptr];
+            }
+          }
+        }
+
+        // allocate Row_start
+        Row_start = new int[N + 1];
+
+        // copy across row starts
+        Row_start[0] = 0;
+        for (unsigned long row = 0; row < N; row++)
+        {
+          int size = result_maps[row].size();
+          Row_start[row + 1] = Row_start[row] + size;
+        }
+
+        // set Nnz
+        Nnz = Row_start[N];
+
+        // allocate other arrays
+        Value = new std::complex<double>[Nnz];
+        Column_index = new int[Nnz];
+
+        // copy values and column indices
+        for (unsigned long row = 0; row < N; row++)
+        {
+          unsigned ptr = Row_start[row];
+          for (std::map<int, std::complex<double>>::iterator i =
+                 result_maps[row].begin();
+               i != result_maps[row].end();
+               i++)
+          {
+            Column_index[ptr] = i->first;
+            Value[ptr] = i->second;
+            ptr++;
+          }
+        }
+        // tidy up memory
+        delete[] result_maps;
+      }
+
+      // METHOD 3
+      // --------
+      else if (method == 3)
+      {
+        // vectors of vectors to store results
+        std::vector<std::vector<int>> result_cols(N);
+        std::vector<std::vector<std::complex<double>>> result_vals(N);
+
+        // run through the rows of this matrix
+        for (unsigned long this_row = 0; this_row < N; this_row++)
+        {
+          // run through non-zeros in this_row
+          for (int this_ptr = this_row_start[this_row];
+               this_ptr < this_row_start[this_row + 1];
+               this_ptr++)
+          {
+            // find value of non-zero
+            std::complex<double> this_val = this_value[this_ptr];
+
+            // find column index associated with non-zero
+            int matrix_in_row = this_column_index[this_ptr];
+
+            // run through corresponding row in matrix_in
+            for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
+                 matrix_in_ptr < matrix_in_row_start[matrix_in_row + 1];
+                 matrix_in_ptr++)
+            {
+              // find column index for non-zero in matrix_in
+              int col = matrix_in_column_index[matrix_in_ptr];
+
+              // insert value
+              int size = result_cols[this_row].size();
+              for (int i = 0; i <= size; i++)
+              {
+                if (i == size)
+                {
+                  // first entry for this column
+                  result_cols[this_row].push_back(col);
+                  result_vals[this_row].push_back(
+                    this_val * matrix_in_value[matrix_in_ptr]);
+                }
+                else if (col == result_cols[this_row][i])
+                {
+                  // column already exists
+                  result_vals[this_row][i] +=
+                    this_val * matrix_in_value[matrix_in_ptr];
+                  break;
+                }
+              }
+            }
+          }
+        }
+
+        // allocate Row_start
+        Row_start = new int[N + 1];
+
+        // copy across row starts
+        Row_start[0] = 0;
+        for (unsigned long row = 0; row < N; row++)
+        {
+          int size = result_cols[row].size();
+          Row_start[row + 1] = Row_start[row] + size;
+        }
+
+        // set Nnz
+        Nnz = Row_start[N];
+
+        // allocate other arrays
+        Value = new std::complex<double>[Nnz];
+        Column_index = new int[Nnz];
+
+        // copy across values and column indices
+        for (unsigned long row = 0; row < N; row++)
+        {
+          unsigned ptr = Row_start[row];
+          unsigned nnn = result_cols[row].size();
+          for (unsigned i = 0; i < nnn; i++)
+          {
+            Column_index[ptr] = result_cols[row][i];
+            Value[ptr] = result_vals[row][i];
+            ptr++;
+          }
+        }
+      }
+
+      // build
+      unsigned long nnz = this->nnz();
+      result.build_without_copy(Value, Column_index, Row_start, nnz, M, Nnz);
+    }
+  }
+
+  //=============================================================================
+  /// Element-wise addition of this matrix with matrix_in.
+  //=============================================================================
+  void CRComplexMatrix::add(const CRComplexMatrix& matrix_in,
+                            CRComplexMatrix& result_matrix) const
+  {
+#ifdef PARANOID
+    // Check if this matrix is built.
+    if (!this->built())
+    {
+      std::ostringstream error_message;
+      error_message << "The matrix is not built.\n"
+                    << "Please build the matrix!\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check if this matrix_in is built.
+    if (!matrix_in.built())
+    {
+      std::ostringstream error_message;
+      error_message << "The matrix matrix_in is not built.\n"
+                    << "Please build the matrix!\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check if the dimensions of this matrix and matrix_in are the same.
+    unsigned long this_nrow = this->nrow();
+    unsigned long matrix_in_nrow = matrix_in.nrow();
+    if (this_nrow != matrix_in_nrow)
+    {
+      std::ostringstream error_message;
+      error_message << "matrix_in has a different number of rows than\n"
+                    << "this matrix.\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    unsigned long this_ncol = this->ncol();
+    unsigned long matrix_in_ncol = matrix_in.ncol();
+    if (this_ncol != matrix_in_ncol)
+    {
+      std::ostringstream error_message;
+      error_message << "matrix_in has a different number of columns than\n"
+                    << "this matrix.\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check if the distribution is the same (Otherwise we may have to send and
+    // receive data from other processors - which is not implemented!)
+    if (*(this->distribution_pt()) != *(matrix_in.distribution_pt()))
+    {
+      std::ostringstream error_message;
+      error_message << "matrix_in must have the same distribution as\n"
+                    << "this matrix.\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // If the matrix is built, check that it's existing distribution is the
+    // same as the in matrix. Since we'll use the same distribution instead
+    // of completely rebuilding it.
+    if (result_matrix.built() &&
+        (*result_matrix.distribution_pt() != *matrix_in.distribution_pt()))
+    {
+      std::ostringstream error_message;
+      error_message << "The result_matrix is built. "
+                    << "But has a different distribution from matrix_in \n"
+                    << "They need to be the same.\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // To add the elements of two CRDoubleMatrices, we need to know the union of
+    // the sparsity patterns. This is determined by the column indices.
+    // We add the column indices and values (entries) as a key-value pair in
+    // a map (per row). We then read these out into two column indices and
+    // values vector for the result matrix.
+
+    unsigned nrow_local = this->nrow();
+    Vector<int> res_column_indices;
+    Vector<std::complex<double>> res_values;
+    Vector<int> res_row_start;
+    res_row_start.reserve(nrow_local + 1);
+
+    // The row_start and column_indices
+    const int* this_column_indices = this->column_index();
+    const int* this_row_start = this->row_start();
+    const int* in_column_indices = matrix_in.column_index();
+    const int* in_row_start = matrix_in.row_start();
+
+    // Values from this matrix and matrix_in.
+    const std::complex<double>* this_values = this->value();
+    const std::complex<double>* in_values = matrix_in.value();
+
+    // The first entry in row_start is always zero.
+    res_row_start.push_back(0);
+
+    // Loop through the rows of both matrices and insert the column indices and
+    // values as a key-value pair.
+    for (unsigned row_i = 0; row_i < nrow_local; row_i++)
+    {
+      // Create the map for this row.
+      std::map<int, std::complex<double>> res_row_map;
+
+      // Insert the column and value pair for this matrix.
+      for (int i = this_row_start[row_i]; i < this_row_start[row_i + 1]; i++)
+      {
+        res_row_map[this_column_indices[i]] = this_values[i];
+      }
+
+      // Insert the column and value pair for in matrix.
+      for (int i = in_row_start[row_i]; i < in_row_start[row_i + 1]; i++)
+      {
+        res_row_map[in_column_indices[i]] += in_values[i];
+      }
+
+      // Fill in the row start
+      res_row_start.push_back(res_row_start.back() + res_row_map.size());
+
+      // Now insert the key into res_column_indices and value into res_values
+      for (std::map<int, std::complex<double>>::iterator it =
+             res_row_map.begin();
+           it != res_row_map.end();
+           ++it)
+      {
+        res_column_indices.push_back(it->first);
+        res_values.push_back(it->second);
+      }
+    }
+
+    // Finally build the result_matrix.
+    // Use the existing distribution.
+    result_matrix.build(res_values,
+                        res_column_indices,
+                        res_row_start,
+                        this->ncol(),
+                        this->nrow());
+  }
+
+  //=============================================================================
+  /// Element-wise addition of this matrix with matrix_in.
+  //=============================================================================
+  void CRComplexMatrix::add(const CRDoubleMatrix& matrix_in,
+                            CRComplexMatrix& result_matrix) const
+  {
+#ifdef PARANOID
+    // Check if this matrix is built.
+    if (!this->built())
+    {
+      std::ostringstream error_message;
+      error_message << "The matrix is not built.\n"
+                    << "Please build the matrix!\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check if this matrix_in is built.
+    if (!matrix_in.built())
+    {
+      std::ostringstream error_message;
+      error_message << "The matrix matrix_in is not built.\n"
+                    << "Please build the matrix!\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check if the dimensions of this matrix and matrix_in are the same.
+    unsigned long this_nrow = this->nrow();
+    unsigned long matrix_in_nrow = matrix_in.nrow();
+    if (this_nrow != matrix_in_nrow)
+    {
+      std::ostringstream error_message;
+      error_message << "matrix_in has a different number of rows than\n"
+                    << "this matrix.\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    unsigned long this_ncol = this->ncol();
+    unsigned long matrix_in_ncol = matrix_in.ncol();
+    if (this_ncol != matrix_in_ncol)
+    {
+      std::ostringstream error_message;
+      error_message << "matrix_in has a different number of columns than\n"
+                    << "this matrix.\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check if the distribution is the same (Otherwise we may have to send and
+    // receive data from other processors - which is not implemented!)
+    if (*(this->distribution_pt()) != *(matrix_in.distribution_pt()))
+    {
+      std::ostringstream error_message;
+      error_message << "matrix_in must have the same distribution as\n"
+                    << "this matrix.\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // If the matrix is built, check that it's existing distribution is the
+    // same as the in matrix. Since we'll use the same distribution instead
+    // of completely rebuilding it.
+    if (result_matrix.built() &&
+        (*result_matrix.distribution_pt() != *matrix_in.distribution_pt()))
+    {
+      std::ostringstream error_message;
+      error_message << "The result_matrix is built. "
+                    << "But has a different distribution from matrix_in \n"
+                    << "They need to be the same.\n";
+      throw OomphLibError(
+        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // To add the elements of two CRDoubleMatrices, we need to know the union of
+    // the sparsity patterns. This is determined by the column indices.
+    // We add the column indices and values (entries) as a key-value pair in
+    // a map (per row). We then read these out into two column indices and
+    // values vector for the result matrix.
+
+    unsigned nrow_local = this->nrow();
+    Vector<int> res_column_indices;
+    Vector<std::complex<double>> res_values;
+    Vector<int> res_row_start;
+    res_row_start.reserve(nrow_local + 1);
+
+    // The row_start and column_indices
+    const int* this_column_indices = this->column_index();
+    const int* this_row_start = this->row_start();
+    const int* in_column_indices = matrix_in.column_index();
+    const int* in_row_start = matrix_in.row_start();
+
+    // Values from this matrix and matrix_in.
+    const std::complex<double>* this_values = this->value();
+    const double* in_values = matrix_in.value();
+
+    // The first entry in row_start is always zero.
+    res_row_start.push_back(0);
+
+    // Loop through the rows of both matrices and insert the column indices and
+    // values as a key-value pair.
+    for (unsigned row_i = 0; row_i < nrow_local; row_i++)
+    {
+      // Create the map for this row.
+      std::map<int, std::complex<double>> res_row_map;
+
+      // Insert the column and value pair for this matrix.
+      for (int i = this_row_start[row_i]; i < this_row_start[row_i + 1]; i++)
+      {
+        res_row_map[this_column_indices[i]] = this_values[i];
+      }
+
+      // Insert the column and value pair for in matrix.
+      for (int i = in_row_start[row_i]; i < in_row_start[row_i + 1]; i++)
+      {
+        res_row_map[in_column_indices[i]] += in_values[i];
+      }
+
+      // Fill in the row start
+      res_row_start.push_back(res_row_start.back() + res_row_map.size());
+
+      // Now insert the key into res_column_indices and value into res_values
+      for (std::map<int, std::complex<double>>::iterator it =
+             res_row_map.begin();
+           it != res_row_map.end();
+           ++it)
+      {
+        res_column_indices.push_back(it->first);
+        res_values.push_back(it->second);
+      }
+    }
+
+    // Finally build the result_matrix.
+    // Use the existing distribution.
+    result_matrix.build(res_values,
+                        res_column_indices,
+                        res_row_start,
+                        this->ncol(),
+                        this->nrow());
   }
 
 

@@ -377,6 +377,21 @@ namespace oomph
     void multiply_transpose(const Vector<std::complex<double>>& x,
                             Vector<std::complex<double>>& soln);
 
+    // \short Add the matrix to matrix_in (CRDoubleMatrix) and return result:
+    // result_matrix = A + matrix_in
+    void add(const CRDoubleMatrix& matrix_in,
+             CRComplexMatrix& result_matrix) const;
+
+    // \short Add the matrix to matrix_in (CRComplexMatrix) and return result:
+    // result_matrix = A + matrix_in
+    void add(const CRComplexMatrix& matrix_in,
+             CRComplexMatrix& result_matrix) const;
+
+    // \short Multiply the matrix by matrix_in (CRComplexMatrix) and returns
+    // result: result=A matrix_in
+    void multiply(const CRComplexMatrix& matrix_in,
+                  CRComplexMatrix& result) const;
+
   protected:
     /// Flag to indicate if stats are to be displayed during
     /// solution of linear system with SuperLU
