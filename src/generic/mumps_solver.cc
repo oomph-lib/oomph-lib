@@ -66,17 +66,6 @@ namespace oomph
   //=============================================================================
   /// Constructor: Call setup
   //=============================================================================
-<<<<<<< HEAD
-  MumpsSolver::MumpsSolver() : Suppress_solve(false), Doc_stats(false),
-			       Suppress_warning_about_MPI_COMM_WORLD(false),
-			       Suppress_mumps_info_during_solve(false),
-			       Mumps_is_initialised(false),
-			       Workspace_scaling_factor(Default_workspace_scaling_factor),
-			       Delete_matrix_data(false), Mumps_struc_pt(nullptr),
-			       Jacobian_symmetry_flag(MumpsJacobianSymmetryFlags::Unsymmetric),
-			       Jacobian_ordering_flag(MumpsJacobianOrderingFlags::Metis_ordering) { }
-    
-=======
   MumpsSolver::MumpsSolver()
     : Suppress_solve(false),
       Doc_stats(false),
@@ -86,12 +75,11 @@ namespace oomph
       Workspace_scaling_factor(Default_workspace_scaling_factor),
       Delete_matrix_data(false),
       Mumps_struc_pt(nullptr),
-      Jacobian_symmetry_flag(Unsymmetric),
-      Jacobian_ordering_flag(Metis_ordering)
+      Jacobian_symmetry_flag(MumpsJacobianSymmetryFlags::Unsymmetric),
+      Jacobian_ordering_flag(MumpsJacobianOrderingFlags::Metis_ordering)
   {
   }
 
->>>>>>> af9dd87a048e0ee6b61358d42084857cb9bd74a3
   //=============================================================================
   /// Initialise instance of mumps data structure
   //=============================================================================
@@ -319,43 +307,9 @@ namespace oomph
         int* matrix_start_pt = cr_matrix_pt->row_start();
         int i_row = 0;
 
-<<<<<<< HEAD
-	// is the matrix symmetric? If so, we must only provide
-	// MUMPS with the upper (or lower) triangular part of the Jacobian
-	if(Mumps_struc_pt->sym != MumpsJacobianSymmetryFlags::Unsymmetric)
-	{
-	  oomph_info << "Assuming Jacobian matrix is symmetric "
-		     << "(passing MUMPS the upper triangular part)" << std::endl;
-	}
-	     
-	for (int count = 0; count < nnz_loc; count++)
-	{
-	  A_loc[count] = matrix_value_pt[count];
-	  Jcn_loc[count] = matrix_index_pt[count] + 1;
-	  if (count < matrix_start_pt[i_row + 1])
-	  {
-	    Irn_loc[count] = first_row + i_row + 1;
-	  }
-	  else
-	  {
-	    i_row++;
-	    Irn_loc[count] = first_row + i_row + 1;
-	  }
-
-	  // only pass the upper triangular part (and diagonal)
-	  // if we have a symmetric matrix (MUMPS sums values,
-	  // so need to set the lwoer triangle to zero)
-	  if( (Mumps_struc_pt->sym != MumpsJacobianSymmetryFlags::Unsymmetric) &&
-	      (Irn_loc[count] > Jcn_loc[count]) )
-	  {	      
-	    A_loc[count] = 0.0;
-	  }
-	}
-	
-=======
         // is the matrix symmetric? If so, we must only provide
         // MUMPS with the upper (or lower) triangular part of the Jacobian
-        if (Mumps_struc_pt->sym != Unsymmetric)
+        if (Mumps_struc_pt->sym != MumpsJacobianSymmetryFlags::Unsymmetric)
         {
           oomph_info << "Assuming Jacobian matrix is symmetric "
                      << "(passing MUMPS the upper triangular part)"
@@ -379,14 +333,13 @@ namespace oomph
           // only pass the upper triangular part (and diagonal)
           // if we have a symmetric matrix (MUMPS sums values,
           // so need to set the lwoer triangle to zero)
-          if ((Mumps_struc_pt->sym != Unsymmetric) &&
+          if ((Mumps_struc_pt->sym != MumpsJacobianSymmetryFlags::Unsymmetric) &&
               (Irn_loc[count] > Jcn_loc[count]))
           {
             A_loc[count] = 0.0;
           }
         }
 
->>>>>>> af9dd87a048e0ee6b61358d42084857cb9bd74a3
         // Now delete the matrix if we are allowed
         if (Delete_matrix_data == true)
         {
@@ -430,37 +383,17 @@ namespace oomph
           oomph_info
             << "Time for mumps analysis stage in MumpsSolver [sec]       : "
             << t_end_analyse - t_start_analyse
-<<<<<<< HEAD
-	    << "\n(Ordering generated using: ";
-	  
-	  switch(Mumps_struc_pt->INFOG(7))
-	  {
-	    case MumpsJacobianOrderingFlags::Scotch_ordering:
-	      oomph_info << "SCOTCH";
-	      break;
-	    case MumpsJacobianOrderingFlags::Pord_ordering:
-	      oomph_info << "PORD";
-	      break;
-	    case MumpsJacobianOrderingFlags::Metis_ordering:
-	      oomph_info << "METIS";
-	      break;
-	    default:
-	      oomph_info << Mumps_struc_pt->INFOG(7);
-	  }
-
-	  oomph_info << ")" << std::endl;
-=======
             << "\n(Ordering generated using: ";
 
           switch (Mumps_struc_pt->INFOG(7))
           {
-            case Scotch_ordering:
+            case MumpsJacobianOrderingFlags::Scotch_ordering:
               oomph_info << "SCOTCH";
               break;
-            case Pord_ordering:
+            case MumpsJacobianOrderingFlags::Pord_ordering:
               oomph_info << "PORD";
               break;
-            case Metis_ordering:
+            case MumpsJacobianOrderingFlags::Metis_ordering:
               oomph_info << "METIS";
               break;
             default:
@@ -468,7 +401,6 @@ namespace oomph
           }
 
           oomph_info << ")" << std::endl;
->>>>>>> af9dd87a048e0ee6b61358d42084857cb9bd74a3
         }
 
 
