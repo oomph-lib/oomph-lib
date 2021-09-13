@@ -56,16 +56,10 @@ namespace oomph
     Integral(){};
 
     /// Broken copy constructor
-    Integral(const Integral& dummy)
-    {
-      BrokenCopy::broken_copy("Integral");
-    }
+    Integral(const Integral& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Integral&)
-    {
-      BrokenCopy::broken_assign("Integral");
-    }
+    void operator=(const Integral&) = delete;
 
     /// Virtual destructor (empty)
     virtual ~Integral(){};
@@ -102,16 +96,10 @@ namespace oomph
     PointIntegral(){};
 
     /// Broken copy constructor
-    PointIntegral(const PointIntegral& dummy)
-    {
-      BrokenCopy::broken_copy("PointIntegral");
-    }
+    PointIntegral(const PointIntegral& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const PointIntegral&)
-    {
-      BrokenCopy::broken_assign("PointIntegral");
-    }
+    void operator=(const PointIntegral&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -184,16 +172,10 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss& dummy)
-    {
-      BrokenCopy::broken_copy("Gauss");
-    }
+    Gauss(const Gauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Gauss&)
-    {
-      BrokenCopy::broken_assign("Gauss");
-    }
+    void operator=(const Gauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -236,16 +218,10 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss& dummy)
-    {
-      BrokenCopy::broken_copy("Gauss");
-    }
+    Gauss(const Gauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Gauss&)
-    {
-      BrokenCopy::broken_assign("Gauss");
-    }
+    void operator=(const Gauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -288,16 +264,10 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss& dummy)
-    {
-      BrokenCopy::broken_copy("Gauss");
-    }
+    Gauss(const Gauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Gauss&)
-    {
-      BrokenCopy::broken_assign("Gauss");
-    }
+    void operator=(const Gauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -340,16 +310,10 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss& dummy)
-    {
-      BrokenCopy::broken_copy("Gauss");
-    }
+    Gauss(const Gauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Gauss&)
-    {
-      BrokenCopy::broken_assign("Gauss");
-    }
+    void operator=(const Gauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -392,16 +356,10 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss& dummy)
-    {
-      BrokenCopy::broken_copy("Gauss");
-    }
+    Gauss(const Gauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Gauss&)
-    {
-      BrokenCopy::broken_assign("Gauss");
-    }
+    void operator=(const Gauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -445,16 +403,10 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss& dummy)
-    {
-      BrokenCopy::broken_copy("Gauss");
-    }
+    Gauss(const Gauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Gauss&)
-    {
-      BrokenCopy::broken_assign("Gauss");
-    }
+    void operator=(const Gauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -497,16 +449,10 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss& dummy)
-    {
-      BrokenCopy::broken_copy("Gauss");
-    }
+    Gauss(const Gauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Gauss&)
-    {
-      BrokenCopy::broken_assign("Gauss");
-    }
+    void operator=(const Gauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -549,16 +495,10 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss& dummy)
-    {
-      BrokenCopy::broken_copy("Gauss");
-    }
+    Gauss(const Gauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Gauss&)
-    {
-      BrokenCopy::broken_assign("Gauss");
-    }
+    void operator=(const Gauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -601,16 +541,10 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss& dummy)
-    {
-      BrokenCopy::broken_copy("Gauss");
-    }
+    Gauss(const Gauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Gauss&)
-    {
-      BrokenCopy::broken_assign("Gauss");
-    }
+    void operator=(const Gauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -648,16 +582,10 @@ namespace oomph
     Gauss_Rescaled(){};
 
     /// Broken copy constructor
-    Gauss_Rescaled(const Gauss_Rescaled& dummy)
-    {
-      BrokenCopy::broken_copy("Gauss_Rescaled");
-    }
+    Gauss_Rescaled(const Gauss_Rescaled& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Gauss_Rescaled&)
-    {
-      BrokenCopy::broken_assign("Gauss_Rescaled");
-    }
+    void operator=(const Gauss_Rescaled&) = delete;
 
     /// The constructor in this case takes the lower and upper arguments
     Gauss_Rescaled(double lower, double upper) : Lower(lower), Upper(upper)
@@ -726,16 +654,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -778,16 +700,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -831,16 +747,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -876,16 +786,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -930,16 +834,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -982,16 +880,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -1035,16 +927,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -1085,16 +971,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -1136,16 +1016,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -1190,16 +1064,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -1240,16 +1108,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -1292,16 +1154,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -1346,16 +1202,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const
@@ -1400,16 +1250,10 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss& dummy)
-    {
-      BrokenCopy::broken_copy("TGauss");
-    }
+    TGauss(const TGauss& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TGauss&)
-    {
-      BrokenCopy::broken_assign("TGauss");
-    }
+    void operator=(const TGauss&) = delete;
 
     /// Number of integration points of the scheme
     unsigned nweight() const

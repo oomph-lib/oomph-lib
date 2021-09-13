@@ -79,16 +79,10 @@ namespace oomph
 
     /// Broken copy constructor
     SphericalAdvectionDiffusionEquations(
-      const SphericalAdvectionDiffusionEquations& dummy)
-    {
-      BrokenCopy::broken_copy("SphericalAdvectionDiffusionEquations");
-    }
+      const SphericalAdvectionDiffusionEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const SphericalAdvectionDiffusionEquations&)
-    {
-      BrokenCopy::broken_assign("SphericalAdvectionDiffusionEquations");
-    }
+    void operator=(const SphericalAdvectionDiffusionEquations&) = delete;
 
     /// \short Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
@@ -511,16 +505,11 @@ namespace oomph
 
     /// Broken copy constructor
     QSphericalAdvectionDiffusionElement(
-      const QSphericalAdvectionDiffusionElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QSphericalAdvectionDiffusionElement");
-    }
+      const QSphericalAdvectionDiffusionElement<NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QSphericalAdvectionDiffusionElement<NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("QSphericalAdvectionDiffusionElement");
-    }
+    void operator=(const QSphericalAdvectionDiffusionElement<NNODE_1D>&) =
+      delete;
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
@@ -715,16 +704,10 @@ namespace oomph
 
     /// Broken copy constructor
     SphericalAdvectionDiffusionFluxElement(
-      const SphericalAdvectionDiffusionFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("SphericalAdvectionDiffusionFluxElement");
-    }
+      const SphericalAdvectionDiffusionFluxElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const SphericalAdvectionDiffusionFluxElement&)
-    {
-      BrokenCopy::broken_assign("SphericalAdvectionDiffusionFluxElement");
-    }
+    void operator=(const SphericalAdvectionDiffusionFluxElement&) = delete;
 
     /// Access function for the prescribed-beta function pointer
     SphericalAdvectionDiffusionPrescribedBetaFctPt& beta_fct_pt()

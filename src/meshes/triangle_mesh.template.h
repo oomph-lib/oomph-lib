@@ -845,16 +845,10 @@ namespace oomph
 #endif
 
     /// Broken copy constructor
-    TriangleMesh(const TriangleMesh& dummy)
-    {
-      BrokenCopy::broken_copy("TriangleMesh");
-    }
+    TriangleMesh(const TriangleMesh& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TriangleMesh&)
-    {
-      BrokenCopy::broken_assign("TriangleMesh");
-    }
+    void operator=(const TriangleMesh&) = delete;
 
     /// Destructor
     virtual ~TriangleMesh()

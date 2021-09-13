@@ -512,17 +512,10 @@ namespace oomph
 #endif // OOMPH_HAS_TRIANGLE_LIB
 
     /// Broken copy constructor
-    QuadFromTriangleMesh(const QuadFromTriangleMesh& dummy)
-    {
-      BrokenCopy::broken_copy("QuadFromTriangleMesh");
-    }
+    QuadFromTriangleMesh(const QuadFromTriangleMesh& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QuadFromTriangleMesh&)
-    {
-      BrokenCopy::broken_assign("QuadFromTriangleMesh");
-    }
-
+    void operator=(const QuadFromTriangleMesh&) = delete;
 
     /// Empty destructor
     ~QuadFromTriangleMesh()

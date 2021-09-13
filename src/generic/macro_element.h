@@ -92,18 +92,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    MacroElement(const MacroElement& dummy)
-    {
-      BrokenCopy::broken_copy("MacroElement");
-    }
-
+    MacroElement(const MacroElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const MacroElement&)
-    {
-      BrokenCopy::broken_assign("MacroElement");
-    }
-
+    void operator=(const MacroElement&) = delete;
 
     /// Empty destructor
     virtual ~MacroElement()
@@ -301,20 +293,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QMacroElement(const QMacroElement& dummy)
-    {
-      BrokenCopy::broken_copy("QMacroElement");
-    }
+    QMacroElement(const QMacroElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QMacroElement&)
-    {
-      BrokenCopy::broken_assign("QMacroElement");
-    }
+    void operator=(const QMacroElement&) = delete;
 
     /// Empty destructor
     virtual ~QMacroElement(){};
-
 
     /// \short Plot: x,y in tecplot format at time level t (t=0: current;
     /// t>0: previous)
@@ -401,17 +386,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QMacroElement(const QMacroElement& dummy)
-    {
-      BrokenCopy::broken_copy("QMacroElement");
-    }
+    QMacroElement(const QMacroElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QMacroElement&)
-    {
-      BrokenCopy::broken_assign("QMacroElement");
-    }
-
+    void operator=(const QMacroElement&) = delete;
 
     /// Empty destructor
     virtual ~QMacroElement(){};

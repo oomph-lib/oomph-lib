@@ -76,16 +76,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AdvectionDiffusionFluxElement(const AdvectionDiffusionFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("AdvectionDiffusionFluxElement");
-    }
+    AdvectionDiffusionFluxElement(const AdvectionDiffusionFluxElement& dummy) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const AdvectionDiffusionFluxElement&)
-    {
-      BrokenCopy::broken_assign("AdvectionDiffusionFluxElement");
-    }
+    void operator=(const AdvectionDiffusionFluxElement&) = delete;
 
     /// Access function for the prescribed-flux function pointer
     AdvectionDiffusionPrescribedFluxFctPt& flux_fct_pt()

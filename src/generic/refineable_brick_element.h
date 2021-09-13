@@ -80,10 +80,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableQElement<3>(const RefineableQElement<3>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQElement<3>");
-    }
+    RefineableQElement<3>(const RefineableQElement<3>& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -91,10 +88,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const RefineableQElement<3>&)
-     {
-      BrokenCopy::broken_assign("RefineableQElement<3>");
-      }*/
+    /*void operator=(const RefineableQElement<3>&) = delete;*/
 
     /// Destructor
     virtual ~RefineableQElement<3>()
@@ -252,16 +246,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    RefineableSolidQElement(const RefineableSolidQElement<3>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableSolidQElement<3>");
-    }
+    RefineableSolidQElement(const RefineableSolidQElement<3>& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const RefineableSolidQElement<3>&)
-     {
-      BrokenCopy::broken_assign("RefineableSolidQElement<3>");
-      }*/
+    /*void operator=(const RefineableSolidQElement<3>&) = delete;*/
 
     /// Virtual Destructor
     virtual ~RefineableSolidQElement() {}

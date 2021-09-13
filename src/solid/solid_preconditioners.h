@@ -208,10 +208,7 @@ namespace oomph
 
     /// Broken copy constructor
     PressureBasedSolidLSCPreconditioner(
-      const PressureBasedSolidLSCPreconditioner&)
-    {
-      BrokenCopy::broken_copy("PressureBasedSolidLSCPreconditioner");
-    }
+      const PressureBasedSolidLSCPreconditioner&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -219,10 +216,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const PressureBasedSolidLSCPreconditioner&)
-     {
-      BrokenCopy::broken_assign("PressureBasedSolidLSCPreconditioner");
-      }*/
+    /*void operator=(const PressureBasedSolidLSCPreconditioner&) = delete;*/
 
     /// Setup the preconditioner
     void setup();
@@ -443,17 +437,11 @@ namespace oomph
 
     /// Broken copy constructor
     PressureBasedSolidExactPreconditioner(
-      const PressureBasedSolidExactPreconditioner&)
-    {
-      BrokenCopy::broken_copy("PressureBasedSolidExactPreconditioner");
-    }
+      const PressureBasedSolidExactPreconditioner&) = delete;
 
 
     /// Broken assignment operator
-    /*void operator=(const PressureBasedSolidExactPreconditioner&)
-     {
-      BrokenCopy::broken_assign("PressureBasedSolidExactPreconditioner");
-      }*/
+    /*void operator=(const PressureBasedSolidExactPreconditioner&) = delete;*/
 
 
     /// Setup the preconditioner

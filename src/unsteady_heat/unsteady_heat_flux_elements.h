@@ -68,10 +68,7 @@ namespace oomph
                             const int& face_index);
 
     /// Broken copy constructor
-    UnsteadyHeatFluxElement(const UnsteadyHeatFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("UnsteadyHeatFluxElement");
-    }
+    UnsteadyHeatFluxElement(const UnsteadyHeatFluxElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -79,10 +76,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const UnsteadyHeatFluxElement&)
-     {
-      BrokenCopy::broken_assign("UnsteadyHeatFluxElement");
-      }*/
+    /*void operator=(const UnsteadyHeatFluxElement&) = delete;*/
 
     /// Access function for the prescribed-flux function pointer
     UnsteadyHeatPrescribedFluxFctPt& flux_fct_pt()

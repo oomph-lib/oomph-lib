@@ -60,16 +60,10 @@ namespace oomph
     QHermiteElementBase() {}
 
     /// Broken copy constructor
-    QHermiteElementBase(const QHermiteElementBase&)
-    {
-      BrokenCopy::broken_copy("QHermiteElementBase");
-    }
+    QHermiteElementBase(const QHermiteElementBase&) = delete;
 
     /// Broken assignment operator
-    void operator=(const QHermiteElementBase&)
-    {
-      BrokenCopy::broken_assign("QHermiteElementBase");
-    }
+    void operator=(const QHermiteElementBase&) = delete;
   };
 
 
@@ -117,17 +111,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    QHermiteElement(const QHermiteElement& dummy)
-    {
-      BrokenCopy::broken_copy("QHermiteElement");
-    }
+    QHermiteElement(const QHermiteElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QHermiteElement&)
-    {
-      BrokenCopy::broken_assign("QHermiteElement");
-    }
-
+    void operator=(const QHermiteElement&) = delete;
 
     /// Check whether the local coordinate are valid or not
     bool local_coord_is_valid(const Vector<double>& s)
@@ -494,16 +481,10 @@ namespace oomph
     DiagQHermiteElement() : QHermiteElement<DIM>() {}
 
     /// Broken copy constructor
-    DiagQHermiteElement(const DiagQHermiteElement& dummy)
-    {
-      BrokenCopy::broken_copy("DiagQHermiteElement");
-    }
+    DiagQHermiteElement(const DiagQHermiteElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const DiagQHermiteElement&)
-    {
-      BrokenCopy::broken_assign("DiagQHermiteElement");
-    }
+    void operator=(const DiagQHermiteElement&) = delete;
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -534,16 +515,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQHermiteElement(const SolidQHermiteElement& dummy)
-    {
-      BrokenCopy::broken_copy("SolidQHermiteElement");
-    }
+    SolidQHermiteElement(const SolidQHermiteElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const SolidQHermiteElement&)
-    {
-      BrokenCopy::broken_assign("SolidQHermiteElement");
-    }
+    void operator=(const SolidQHermiteElement&) = delete;
 
     /// Overload the output function
     void output(std::ostream& outfile);
@@ -601,16 +576,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidDiagQHermiteElement(const SolidDiagQHermiteElement& dummy)
-    {
-      BrokenCopy::broken_copy("SolidDiagQHermiteElement");
-    }
+    SolidDiagQHermiteElement(const SolidDiagQHermiteElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const SolidDiagQHermiteElement&)
-    {
-      BrokenCopy::broken_assign("SolidDiagQHermiteElement");
-    }
+    void operator=(const SolidDiagQHermiteElement&) = delete;
 
     /// \short Overload the local to lagrangian mapping so that it uses diagonal
     /// terms only.

@@ -66,12 +66,7 @@ namespace oomph
     /// Broken copy constructor
     RefineableSpaceTimeUnsteadyHeatMixedOrderEquations(
       const RefineableSpaceTimeUnsteadyHeatMixedOrderEquations<SPATIAL_DIM>&
-        dummy)
-    {
-      BrokenCopy::broken_copy(
-        "RefineableSpaceTimeUnsteadyHeatMixedOrderEquations");
-    }
-
+        dummy) = delete;
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -242,13 +237,8 @@ namespace oomph
     /// Broken copy constructor
     RefineableQUnsteadyHeatMixedOrderSpaceTimeElement(
       const RefineableQUnsteadyHeatMixedOrderSpaceTimeElement<SPATIAL_DIM,
-                                                              NNODE_1D>& dummy)
-    {
-      // Output a broken copy message
-      BrokenCopy::broken_copy(
-        "RefineableQuadUnsteadyHeatMixedOrderSpaceTimeElement");
-    } // End of RefineableQUnsteadyHeatMixedOrderSpaceTimeElement
-
+                                                              NNODE_1D>&
+        dummy) = delete;
 
     /// Rebuild from sons (empty)
     void rebuild_from_sons(Mesh*& mesh_pt) {}

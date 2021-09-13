@@ -68,16 +68,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PoissonFluxElement(const PoissonFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("PoissonFluxElement");
-    }
+    PoissonFluxElement(const PoissonFluxElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const PoissonFluxElement&)
-    {
-      BrokenCopy::broken_assign("PoissonFluxElement");
-    }
+    void operator=(const PoissonFluxElement&) = delete;
 
     /// \short Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when

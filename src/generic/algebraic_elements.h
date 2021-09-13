@@ -110,10 +110,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AlgebraicNode(const AlgebraicNode&)
-    {
-      BrokenCopy::broken_copy("AlgebraicNode");
-    }
+    AlgebraicNode(const AlgebraicNode&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -121,10 +118,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const AlgebraicNode&)
-     {
-      BrokenCopy::broken_assign("AlgebraicNode");
-      }*/
+    /*void operator=(const AlgebraicNode&) = delete;*/
 
 
     /// \short Update the current nodal position, using the first
@@ -515,16 +509,10 @@ namespace oomph
     AlgebraicElementBase() {}
 
     /// Broken copy constructor
-    AlgebraicElementBase(const AlgebraicElementBase&)
-    {
-      BrokenCopy::broken_copy("AlgebraicElementBase");
-    }
+    AlgebraicElementBase(const AlgebraicElementBase&) = delete;
 
     /// Broken assignment operator
-    void operator=(const AlgebraicElementBase&)
-    {
-      BrokenCopy::broken_assign("AlgebraicElementBase");
-    }
+    void operator=(const AlgebraicElementBase&) = delete;
 
     /// \short Set up node update info for (newly created) algebraic node:
     /// I.e. work out its node update information by interpolation from
@@ -568,16 +556,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AlgebraicElement(const AlgebraicElement&)
-    {
-      BrokenCopy::broken_copy("AlgebraicElement");
-    }
+    AlgebraicElement(const AlgebraicElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const AlgebraicElement&)
-     {
-      BrokenCopy::broken_assign("AlgebraicElement");
-      }*/
+    /*void operator=(const AlgebraicElement&) = delete;*/
 
 
     /// Empty Destructor must clean up the allocated memory
@@ -625,16 +607,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AlgebraicMesh(const AlgebraicMesh&)
-    {
-      BrokenCopy::broken_copy("AlgebraicMesh");
-    }
+    AlgebraicMesh(const AlgebraicMesh&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const AlgebraicMesh&)
-     {
-      BrokenCopy::broken_assign("AlgebraicMesh");
-      }*/
+    /*void operator=(const AlgebraicMesh&) = delete;*/
 
     /// Surely a proper destructor is required... ?
     ~AlgebraicMesh() {}
@@ -886,16 +862,10 @@ namespace oomph
     DummyAlgebraicMesh() {}
 
     /// Broken copy constructor
-    DummyAlgebraicMesh(const DummyAlgebraicMesh&)
-    {
-      BrokenCopy::broken_copy("DummyAlgebraicMesh");
-    }
+    DummyAlgebraicMesh(const DummyAlgebraicMesh&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const DummyAlgebraicMesh&)
-     {
-      BrokenCopy::broken_assign("DummyAlgebraicMesh");
-      }*/
+    /*void operator=(const DummyAlgebraicMesh&) = delete;*/
 
     /// \short Update the nodal position posn at time level t (t=0: present;
     /// t>0: previous). Do nothing

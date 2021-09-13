@@ -75,17 +75,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QuarterPipeDomain(const QuarterPipeDomain&)
-    {
-      BrokenCopy::broken_copy("QuarterPipeDomain");
-    }
-
+    QuarterPipeDomain(const QuarterPipeDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const QuarterPipeDomain&)
-    {
-      BrokenCopy::broken_assign("QuarterPipeDomain");
-    }
+    void operator=(const QuarterPipeDomain&) = delete;
 
     /// Destructor:
     ~QuarterPipeDomain()

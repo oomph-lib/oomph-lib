@@ -202,16 +202,10 @@ namespace oomph
     virtual ~RefineableElement();
 
     /// Broken copy constructor
-    RefineableElement(const RefineableElement&)
-    {
-      BrokenCopy::broken_copy("RefineableElement");
-    }
+    RefineableElement(const RefineableElement&) = delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableElement&)
-    {
-      BrokenCopy::broken_assign("RefineableElement");
-    }
+    void operator=(const RefineableElement&) = delete;
 
     /// Access function: Pointer to quadtree representation of this element
     Tree* tree_pt()
@@ -684,17 +678,10 @@ namespace oomph
     virtual ~PRefineableElement() {}
 
     /// Broken copy constructor
-    PRefineableElement(const PRefineableElement&)
-    {
-      BrokenCopy::broken_copy("PRefineableElement");
-    }
+    PRefineableElement(const PRefineableElement&) = delete;
 
     /// Broken assignment operator
-    void operator=(const PRefineableElement&)
-    {
-      BrokenCopy::broken_assign("PRefineableElement");
-    }
-
+    void operator=(const PRefineableElement&) = delete;
 
     /// Flag to indicate suppression of any refinement
     bool p_refinement_is_enabled()

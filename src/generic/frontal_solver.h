@@ -137,17 +137,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HSL_MA42(const HSL_MA42&)
-    {
-      BrokenCopy::broken_copy("HSL_MA42");
-    }
+    HSL_MA42(const HSL_MA42&) = delete;
 
     /// Broken assignment operator
-    void operator=(const HSL_MA42&)
-    {
-      BrokenCopy::broken_assign("HSL_MA42");
-    }
-
+    void operator=(const HSL_MA42&) = delete;
 
     /// Clean up memory
     void clean_up_memory()

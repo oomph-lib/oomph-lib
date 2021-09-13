@@ -77,10 +77,7 @@ namespace oomph
 
     /// Broken copy constructor
     FourierDecomposedHelmholtzBCElementBase(
-      const FourierDecomposedHelmholtzBCElementBase& dummy)
-    {
-      BrokenCopy::broken_copy("FourierDecomposedHelmholtzBCElementBase");
-    }
+      const FourierDecomposedHelmholtzBCElementBase& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -88,10 +85,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const FourierDecomposedHelmholtzBCElementBase&)
-     {
-      BrokenCopy::broken_assign("FourierDecomposedHelmholtzBCElementBase");
-      }*/
+    /*void operator=(const FourierDecomposedHelmholtzBCElementBase&) = delete;*/
 
 
     /// \short Specify the value of nodal zeta from the face geometry

@@ -69,17 +69,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    QuarterCircleSectorDomain(const QuarterCircleSectorDomain&)
-    {
-      BrokenCopy::broken_copy("QuarterCircleSectorDomain");
-    }
+    QuarterCircleSectorDomain(const QuarterCircleSectorDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const QuarterCircleSectorDomain&)
-    {
-      BrokenCopy::broken_assign("QuarterCircleSectorDomain");
-    }
-
+    void operator=(const QuarterCircleSectorDomain&) = delete;
 
     /// Destructor: empty; cleanup done in base class
     ~QuarterCircleSectorDomain() {}

@@ -32,7 +32,7 @@
 #endif
 
 // oomph-lib headers
-#include "../generic/domain.h"
+#include "domain.h"
 // #include "extruded_macro_element.h"
 
 namespace oomph
@@ -72,18 +72,10 @@ namespace oomph
     ~ExtrudedDomain() {}
 
     /// Broken copy constructor
-    ExtrudedDomain(const ExtrudedDomain&)
-    {
-      // Return a broken copy message
-      BrokenCopy::broken_copy("ExtrudedDomain");
-    } // End of ExtrudedDomain
+    ExtrudedDomain(const ExtrudedDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ExtrudedDomain&)
-    {
-      // Return a broken assign message
-      BrokenCopy::broken_assign("ExtrudedDomain");
-    } // End of ExtrudedDomain
+    void operator=(const ExtrudedDomain&) = delete;
 
     /// \short Access to i-th extruded macro element
     ExtrudedMacroElement* macro_element_pt(const unsigned& i);

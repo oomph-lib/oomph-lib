@@ -112,10 +112,7 @@ namespace oomph
     MapMatrixMixed(){};
 
     /// Broken assignment operator
-    void operator=(const MapMatrixMixed&)
-    {
-      BrokenCopy::broken_assign("MapMatrixMixed");
-    }
+    void operator=(const MapMatrixMixed&) = delete;
 
     /// Typedef to keep the code more readable
     typedef std::map<KEY_TYPE_COL, VALUE_TYPE> InnerMapMixed;
@@ -559,10 +556,7 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    void operator=(const MapMatrix&)
-    {
-      BrokenCopy::broken_assign("MapMatrix");
-    }
+    void operator=(const MapMatrix&) = delete;
   };
 
 } // namespace oomph

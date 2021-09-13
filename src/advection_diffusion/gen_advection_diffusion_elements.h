@@ -87,16 +87,10 @@ namespace oomph
 
     /// Broken copy constructor
     GeneralisedAdvectionDiffusionEquations(
-      const GeneralisedAdvectionDiffusionEquations& dummy)
-    {
-      BrokenCopy::broken_copy("GeneralisedAdvectionDiffusionEquations");
-    }
+      const GeneralisedAdvectionDiffusionEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const GeneralisedAdvectionDiffusionEquations&)
-    {
-      BrokenCopy::broken_assign("GeneralisedAdvectionDiffusionEquations");
-    }
+    void operator=(const GeneralisedAdvectionDiffusionEquations&) = delete;
 
     /// \short Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
@@ -664,16 +658,12 @@ namespace oomph
 
     /// Broken copy constructor
     QGeneralisedAdvectionDiffusionElement(
-      const QGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QGeneralisedAdvectionDiffusionElement");
-    }
+      const QGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>& dummy) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const QGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("QGeneralisedAdvectionDiffusionElement");
-    }
+    void operator=(
+      const QGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>&) = delete;
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n

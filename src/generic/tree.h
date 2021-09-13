@@ -78,16 +78,10 @@ namespace oomph
     virtual ~Tree();
 
     /// Broken copy constructor
-    Tree(const Tree& dummy)
-    {
-      BrokenCopy::broken_copy("Tree");
-    }
+    Tree(const Tree& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Tree&)
-    {
-      BrokenCopy::broken_assign("Tree");
-    }
+    void operator=(const Tree&) = delete;
 
     /// \short Return the pointer to the object (RefineableElement)
     /// represented by the tree
@@ -353,16 +347,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    TreeRoot(const TreeRoot& dummy)
-    {
-      BrokenCopy::broken_copy("TreeRoot");
-    }
+    TreeRoot(const TreeRoot& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TreeRoot&)
-    {
-      BrokenCopy::broken_assign("TreeRoot");
-    }
+    void operator=(const TreeRoot&) = delete;
 
     /// \short Return the pointer to the neighbouring TreeRoots in specified
     /// direction.  Returns NULL if there's no neighbour in this direction.
@@ -435,16 +423,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TreeForest(const TreeForest& dummy)
-    {
-      BrokenCopy::broken_copy("TreeForest");
-    }
+    TreeForest(const TreeForest& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TreeForest&)
-    {
-      BrokenCopy::broken_assign("TreeForest");
-    }
+    void operator=(const TreeForest&) = delete;
 
     /// \short Destructor: Delete the constituent trees (and thus
     /// the objects associated with its non-leaf nodes!)

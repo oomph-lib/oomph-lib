@@ -93,16 +93,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    FullCircleDomain(const FullCircleDomain&)
-    {
-      BrokenCopy::broken_copy("FullCircleDomain");
-    }
+    FullCircleDomain(const FullCircleDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const FullCircleDomain&)
-    {
-      BrokenCopy::broken_assign("FullCircleDomain");
-    }
+    void operator=(const FullCircleDomain&) = delete;
 
 
     /// Destructor: Empty; cleanup done in base class

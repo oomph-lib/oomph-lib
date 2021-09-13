@@ -630,11 +630,7 @@ namespace oomph
 
     /// Broken copy constructor
     LinearisedFSIAxisymmetricNStNoSlipBCElementElement(
-      const LinearisedFSIAxisymmetricNStNoSlipBCElementElement& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "LinearisedFSIAxisymmetricNStNoSlipBCElementElement");
-    }
+      const LinearisedFSIAxisymmetricNStNoSlipBCElementElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -643,10 +639,7 @@ namespace oomph
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
     /*void operator=(const LinearisedFSIAxisymmetricNStNoSlipBCElementElement&)
-     {
-      BrokenCopy::broken_assign(
-       "LinearisedFSIAxisymmetricNStNoSlipBCElementElement");
-       }*/
+      = delete;*/
 
 
     /// \short Access function for the pointer to the fluid Strouhal number

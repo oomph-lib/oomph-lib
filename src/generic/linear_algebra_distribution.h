@@ -442,16 +442,10 @@ namespace oomph
 
     /// Broken copy constructor
     DistributableLinearAlgebraObject(
-      const DistributableLinearAlgebraObject& matrix)
-    {
-      BrokenCopy::broken_copy("DistributableLinearAlgebraObject");
-    }
+      const DistributableLinearAlgebraObject& matrix) = delete;
 
     /// Broken assignment operator
-    void operator=(const DistributableLinearAlgebraObject&)
-    {
-      BrokenCopy::broken_assign("DistributableLinearAlgebraObject");
-    }
+    void operator=(const DistributableLinearAlgebraObject&) = delete;
 
     /// Destructor
     virtual ~DistributableLinearAlgebraObject()

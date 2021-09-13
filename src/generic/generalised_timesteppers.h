@@ -71,16 +71,10 @@ namespace oomph
     GeneralisedTimeStepper() : TimeStepper() {}
 
     /// Broken copy constructor
-    GeneralisedTimeStepper(const GeneralisedTimeStepper&)
-    {
-      BrokenCopy::broken_copy("GeneralisedTimeStepper");
-    }
+    GeneralisedTimeStepper(const GeneralisedTimeStepper&) = delete;
 
     /// Broken assignment operator
-    void operator=(const GeneralisedTimeStepper&)
-    {
-      BrokenCopy::broken_assign("GeneralisedTimeStepper");
-    }
+    void operator=(const GeneralisedTimeStepper&) = delete;
 
   public:
     /// Return the number of entries that correspond to dof storage
@@ -126,10 +120,7 @@ namespace oomph
 
 
     /// Broken copy constructor
-    ContinuationStorageScheme(const ContinuationStorageScheme&)
-    {
-      BrokenCopy::broken_copy("ContinuationStorageScheme");
-    }
+    ContinuationStorageScheme(const ContinuationStorageScheme&) = delete;
 
     /// Modify the scheme based on the underlying timestepper
     void modify_storage(GeneralisedTimeStepper* const& time_stepper_pt)
@@ -156,10 +147,7 @@ namespace oomph
 
 
     /// Broken assignment operator
-    void operator=(const ContinuationStorageScheme&)
-    {
-      BrokenCopy::broken_assign("ContinuationStorageScheme");
-    }
+    void operator=(const ContinuationStorageScheme&) = delete;
 
     /// Return the actual order of the scheme. It's a steady
     /// scheme so it's zero, but that doesn't really make sense.

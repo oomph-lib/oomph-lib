@@ -89,16 +89,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    ElementWithMovingNodes(const ElementWithMovingNodes&)
-    {
-      BrokenCopy::broken_copy("ElementWithMovingNodes");
-    }
+    ElementWithMovingNodes(const ElementWithMovingNodes&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ElementWithMovingNodes&)
-    {
-      BrokenCopy::broken_assign("ElementWithMovingNodes");
-    }
+    void operator=(const ElementWithMovingNodes&) = delete;
 
     /// \short Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description

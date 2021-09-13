@@ -73,10 +73,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HelmholtzFluxElement(const HelmholtzFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("HelmholtzFluxElement");
-    }
+    HelmholtzFluxElement(const HelmholtzFluxElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -84,10 +81,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const HelmholtzFluxElement&)
-     {
-      BrokenCopy::broken_assign("HelmholtzFluxElement");
-      }*/
+    /*void operator=(const HelmholtzFluxElement&) = delete;*/
 
 
     /// Access function for the prescribed-flux function pointer

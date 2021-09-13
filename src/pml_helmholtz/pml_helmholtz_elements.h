@@ -76,10 +76,7 @@ namespace oomph
 
 
     /// Broken copy constructor
-    PMLHelmholtzEquations(const PMLHelmholtzEquations& dummy)
-    {
-      BrokenCopy::broken_copy("PMLHelmholtzEquations");
-    }
+    PMLHelmholtzEquations(const PMLHelmholtzEquations& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -87,10 +84,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const PMLHelmholtzEquations&)
-      {
-      BrokenCopy::broken_assign("PMLHelmholtzEquations");
-      }*/
+    /*void operator=(const PMLHelmholtzEquations&) = delete;*/
 
     /// \short Return the index at which the unknown value
     /// is stored.
@@ -772,17 +766,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QPMLHelmholtzElement(const QPMLHelmholtzElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QPMLHelmholtzElement");
-    }
+    QPMLHelmholtzElement(const QPMLHelmholtzElement<DIM, NNODE_1D>& dummy) =
+      delete;
 
     /// Broken assignment operator
-    /*void operator=(const QPMLHelmholtzElement<DIM,NNODE_1D>&)
-      {
-      BrokenCopy::broken_assign("QPMLHelmholtzElement");
-      }*/
-
+    /*void operator=(const QPMLHelmholtzElement<DIM,NNODE_1D>&) = delete;*/
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n

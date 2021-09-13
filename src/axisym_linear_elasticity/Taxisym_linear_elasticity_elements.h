@@ -75,16 +75,11 @@ namespace oomph
 
     /// Broken copy constructor
     TAxisymmetricLinearElasticityElement(
-      const TAxisymmetricLinearElasticityElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("TAxisymmetricLinearElasticityElement");
-    }
+      const TAxisymmetricLinearElasticityElement<NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TAxisymmetricLinearElasticityElement<NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("TAxisymmetricLinearElasticityElement");
-    }
+    void operator=(const TAxisymmetricLinearElasticityElement<NNODE_1D>&) =
+      delete;
 
     /// \short Output function:
     void output(std::ostream& outfile)

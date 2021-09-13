@@ -462,11 +462,7 @@ namespace oomph
     /// Broken copy constructor
     FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement(
       const FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement&
-        dummy)
-    {
-      BrokenCopy::broken_copy(
-        "FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement");
-    }
+        dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -475,11 +471,8 @@ namespace oomph
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
     /*void operator=(
-     const FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement&)
-     {
-      BrokenCopy::broken_assign(
-       "FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement");
-       }*/
+     const FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement&) =
+      delete;*/
 
 
     /// Add the element's contribution to its residual vector

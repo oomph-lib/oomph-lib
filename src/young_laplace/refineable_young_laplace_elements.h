@@ -68,16 +68,10 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableYoungLaplaceEquations(
-      const RefineableYoungLaplaceEquations& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableYoungLaplaceEquations");
-    }
+      const RefineableYoungLaplaceEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableYoungLaplaceEquations&)
-    {
-      BrokenCopy::broken_assign("RefineableYoungLaplaceEquations");
-    }
+    void operator=(const RefineableYoungLaplaceEquations&) = delete;
 
     /// Compute element residual vector taking hanging nodes into account
     void fill_in_contribution_to_residuals(Vector<double>& residuals);
@@ -193,16 +187,10 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQYoungLaplaceElement(
-      const RefineableQYoungLaplaceElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQuadYoungLaplaceElement");
-    }
+      const RefineableQYoungLaplaceElement<NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableQYoungLaplaceElement<NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("RefineableQuadYoungLaplaceElement");
-    }
+    void operator=(const RefineableQYoungLaplaceElement<NNODE_1D>&) = delete;
 
     /// Number of continuously interpolated values: 1
     unsigned ncont_interpolated_values() const

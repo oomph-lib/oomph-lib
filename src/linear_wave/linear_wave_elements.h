@@ -65,16 +65,10 @@ namespace oomph
     LinearWaveEquations() : Source_fct_pt(0) {}
 
     /// Broken copy constructor
-    LinearWaveEquations(const LinearWaveEquations& dummy)
-    {
-      BrokenCopy::broken_copy("LinearWaveEquations");
-    }
+    LinearWaveEquations(const LinearWaveEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const LinearWaveEquations&)
-    {
-      BrokenCopy::broken_assign("LinearWaveEquations");
-    }
+    void operator=(const LinearWaveEquations&) = delete;
 
     /// \short Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
@@ -421,17 +415,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QLinearWaveElement(const QLinearWaveElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QLinearWaveElement");
-    }
+    QLinearWaveElement(const QLinearWaveElement<DIM, NNODE_1D>& dummy) = delete;
 
 
     /// Broken assignment operator
-    void operator=(const QLinearWaveElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("QLinearWaveElement");
-    }
+    void operator=(const QLinearWaveElement<DIM, NNODE_1D>&) = delete;
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n

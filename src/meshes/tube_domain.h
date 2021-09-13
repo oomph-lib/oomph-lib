@@ -99,17 +99,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TubeDomain(const TubeDomain&)
-    {
-      BrokenCopy::broken_copy("TubeDomain");
-    }
+    TubeDomain(const TubeDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const TubeDomain&)
-    {
-      BrokenCopy::broken_assign("TubeDomain");
-    }
-
+    void operator=(const TubeDomain&) = delete;
 
     /// Destructor: Empty; cleanup done in base class
     ~TubeDomain() {}

@@ -69,16 +69,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableBrickMesh(const RefineableBrickMesh& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableBrickMesh");
-    }
+    RefineableBrickMesh(const RefineableBrickMesh& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableBrickMesh&)
-    {
-      BrokenCopy::broken_assign("RefineableBrickMesh");
-    }
+    void operator=(const RefineableBrickMesh&) = delete;
 
     /// Destructor:
     virtual ~RefineableBrickMesh() {}

@@ -196,18 +196,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    WomersleyEquations(const WomersleyEquations& dummy)
-    {
-      BrokenCopy::broken_copy("WomersleyEquations");
-    }
-
+    WomersleyEquations(const WomersleyEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const WomersleyEquations&)
-    {
-      BrokenCopy::broken_assign("WomersleyEquations");
-    }
-
+    void operator=(const WomersleyEquations&) = delete;
 
     /// Set pointer to pressure gradient (single-valued Data)
     void set_pressure_gradient_pt(Data*& pressure_gradient_data_pt)
@@ -654,16 +646,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QWomersleyElement(const QWomersleyElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QWomersleyElement");
-    }
+    QWomersleyElement(const QWomersleyElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QWomersleyElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("QWomersleyElement");
-    }
+    void operator=(const QWomersleyElement<DIM, NNODE_1D>&) = delete;
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
@@ -2776,20 +2762,12 @@ namespace oomph
 
     /// Broken copy constructor
     NetFluxControlElementForWomersleyPressureControl(
-      const NetFluxControlElementForWomersleyPressureControl& dummy)
-      : NetFluxControlElement(dummy)
-    {
-      BrokenCopy::broken_copy(
-        "NetFluxControlElementForWomersleyPressureControl");
-    }
+      const NetFluxControlElementForWomersleyPressureControl& dummy) = delete;
 
 
     /// Broken assignment operator
-    void operator=(const NetFluxControlElementForWomersleyPressureControl&)
-    {
-      BrokenCopy::broken_assign(
-        "NetFluxControlElementForWomersleyPressureControl");
-    }
+    void operator=(const NetFluxControlElementForWomersleyPressureControl&) =
+      delete;
 
 
     /// \short The number of "DOF types" that degrees of freedom in this element

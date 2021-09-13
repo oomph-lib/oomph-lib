@@ -376,16 +376,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    WarpedCircularDisk(const WarpedCircularDisk& dummy)
-    {
-      BrokenCopy::broken_copy("WarpedCircularDisk");
-    }
+    WarpedCircularDisk(const WarpedCircularDisk& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const WarpedCircularDisk&)
-    {
-      BrokenCopy::broken_assign("WarpedCircularDisk");
-    }
+    void operator=(const WarpedCircularDisk&) = delete;
 
     /// Destructor
     virtual ~WarpedCircularDisk()
@@ -555,17 +549,11 @@ namespace oomph
 
     /// Broken copy constructor
     WarpedCircularDiskWithAnnularInternalBoundary(
-      const WarpedCircularDiskWithAnnularInternalBoundary& dummy)
-    {
-      BrokenCopy::broken_copy("WarpedCircularDiskWithAnnularInternalBoundary");
-    }
+      const WarpedCircularDiskWithAnnularInternalBoundary& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const WarpedCircularDiskWithAnnularInternalBoundary&)
-    {
-      BrokenCopy::broken_assign(
-        "WarpedCircularDiskWithAnnularInternalBoundary");
-    }
+    void operator=(const WarpedCircularDiskWithAnnularInternalBoundary&) =
+      delete;
 
     /// Destructor (empty; cleanup happens in base class)
     virtual ~WarpedCircularDiskWithAnnularInternalBoundary() {}

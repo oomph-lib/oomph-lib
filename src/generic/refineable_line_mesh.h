@@ -58,16 +58,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableLineMesh(const RefineableLineMesh& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableLineMesh");
-    }
+    RefineableLineMesh(const RefineableLineMesh& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableLineMesh&)
-    {
-      BrokenCopy::broken_assign("RefineableLineMesh");
-    }
+    void operator=(const RefineableLineMesh&) = delete;
 
     /// Destructor:
     virtual ~RefineableLineMesh() {}

@@ -342,16 +342,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    MeshAsGeomObject(const MeshAsGeomObject&)
-    {
-      BrokenCopy::broken_copy("MeshAsGeomObject");
-    }
+    MeshAsGeomObject(const MeshAsGeomObject&) = delete;
 
     /// Broken assignment operator
-    void operator=(const MeshAsGeomObject&)
-    {
-      BrokenCopy::broken_assign("MeshAsGeomObject");
-    }
+    void operator=(const MeshAsGeomObject&) = delete;
 
     /// How many items of Data does the shape of the object depend on?
     unsigned ngeom_data() const

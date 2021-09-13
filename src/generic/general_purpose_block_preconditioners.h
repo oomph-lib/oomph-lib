@@ -126,16 +126,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    GeneralPurposeBlockPreconditioner(const GeneralPurposeBlockPreconditioner&)
-    {
-      BrokenCopy::broken_copy("GeneralPurposeBlockPreconditioner");
-    }
+    GeneralPurposeBlockPreconditioner(
+      const GeneralPurposeBlockPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const GeneralPurposeBlockPreconditioner&)
-    {
-      BrokenCopy::broken_assign("GeneralPurposeBlockPreconditioner");
-    }
+    void operator=(const GeneralPurposeBlockPreconditioner&) = delete;
 
     /// access function to set the subsidiary preconditioner function.
     void set_subsidiary_preconditioner_function(
@@ -358,16 +353,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BlockDiagonalPreconditioner(const BlockDiagonalPreconditioner&)
-    {
-      BrokenCopy::broken_copy("BlockDiagonalPreconditioner");
-    }
+    BlockDiagonalPreconditioner(const BlockDiagonalPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const BlockDiagonalPreconditioner&)
-    {
-      BrokenCopy::broken_assign("BlockDiagonalPreconditioner");
-    }
+    void operator=(const BlockDiagonalPreconditioner&) = delete;
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
@@ -505,16 +494,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BlockTriangularPreconditioner(const BlockTriangularPreconditioner&)
-    {
-      BrokenCopy::broken_copy("BlockTriangularPreconditioner");
-    }
+    BlockTriangularPreconditioner(const BlockTriangularPreconditioner&) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const BlockTriangularPreconditioner&)
-    {
-      BrokenCopy::broken_assign("BlockTriangularPreconditioner");
-    }
+    void operator=(const BlockTriangularPreconditioner&) = delete;
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
@@ -564,16 +548,10 @@ namespace oomph
     virtual ~ExactBlockPreconditioner() {}
 
     /// Broken copy constructor
-    ExactBlockPreconditioner(const ExactBlockPreconditioner&)
-    {
-      BrokenCopy::broken_copy("ExactBlockPreconditioner");
-    }
+    ExactBlockPreconditioner(const ExactBlockPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ExactBlockPreconditioner&)
-    {
-      BrokenCopy::broken_assign("ExactBlockPreconditioner");
-    }
+    void operator=(const ExactBlockPreconditioner&) = delete;
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
@@ -628,16 +606,10 @@ namespace oomph
     ~DummyBlockPreconditioner() {}
 
     /// Broken copy constructor
-    DummyBlockPreconditioner(const DummyBlockPreconditioner&)
-    {
-      BrokenCopy::broken_copy("DummyBlockPreconditioner");
-    }
+    DummyBlockPreconditioner(const DummyBlockPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const DummyBlockPreconditioner&)
-    {
-      BrokenCopy::broken_assign("DummyBlockPreconditioner");
-    }
+    void operator=(const DummyBlockPreconditioner&) = delete;
 
     /// Apply preconditioner to r (just copy r to z).
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z)

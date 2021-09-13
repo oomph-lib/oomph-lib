@@ -67,16 +67,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    TPoissonElement(const TPoissonElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("TPoissonElement");
-    }
+    TPoissonElement(const TPoissonElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TPoissonElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("TPoissonElement");
-    }
+    void operator=(const TPoissonElement<DIM, NNODE_1D>&) = delete;
 
     /// \short  Access function for Nvalue: # of `values' (pinned or dofs)
     /// at node n (always returns the same value at every node, 1)

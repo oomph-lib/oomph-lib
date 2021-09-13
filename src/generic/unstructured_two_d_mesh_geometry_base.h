@@ -1745,17 +1745,10 @@ namespace oomph
 
     /// Broken copy constructor
     UnstructuredTwoDMeshGeometryBase(
-      const UnstructuredTwoDMeshGeometryBase& dummy)
-    {
-      BrokenCopy::broken_copy("UnstructuredTwoDMeshGeometryBase");
-    }
+      const UnstructuredTwoDMeshGeometryBase& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const UnstructuredTwoDMeshGeometryBase&)
-    {
-      BrokenCopy::broken_assign("UnstructuredTwoDMeshGeometryBase");
-    }
-
+    void operator=(const UnstructuredTwoDMeshGeometryBase&) = delete;
 
     /// Empty destructor
     ~UnstructuredTwoDMeshGeometryBase() {}

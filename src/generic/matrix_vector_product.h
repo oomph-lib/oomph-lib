@@ -62,16 +62,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    MatrixVectorProduct(const MatrixVectorProduct&)
-    {
-      BrokenCopy::broken_copy("MatrixVectorProduct");
-    }
+    MatrixVectorProduct(const MatrixVectorProduct&) = delete;
 
     /// Broken assignment operator
-    void operator=(const MatrixVectorProduct&)
-    {
-      BrokenCopy::broken_assign("MatrixVectorProduct");
-    }
+    void operator=(const MatrixVectorProduct&) = delete;
 
     /// \short Destructor
     ~MatrixVectorProduct()

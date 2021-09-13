@@ -139,10 +139,7 @@ namespace oomph
 
     /// Broken copy constructor
     GeneralisedNewtonianTCrouzeixRaviartElement(
-      const GeneralisedNewtonianTCrouzeixRaviartElement<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("GeneralisedNewtonianTCrouzeixRaviartElement");
-    }
+      const GeneralisedNewtonianTCrouzeixRaviartElement<DIM>& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -150,10 +147,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const GeneralisedNewtonianTCrouzeixRaviartElement<DIM>&)
-     {
-      BrokenCopy::broken_assign("GeneralisedNewtonianTCrouzeixRaviartElement");
-      }*/
+    /*void operator=(const GeneralisedNewtonianTCrouzeixRaviartElement<DIM>&) =
+      delete;*/
 
 
     /// \short Number of values (pinned or dofs) required at local node n.
@@ -812,16 +807,11 @@ namespace oomph
 
     /// Broken copy constructor
     GeneralisedNewtonianTTaylorHoodElement(
-      const GeneralisedNewtonianTTaylorHoodElement<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("GeneralisedNewtonianTTaylorHoodElement");
-    }
+      const GeneralisedNewtonianTTaylorHoodElement<DIM>& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const GeneralisedNewtonianTTaylorHoodElement<DIM>&)
-     {
-      BrokenCopy::broken_assign("GeneralisedNewtonianTTaylorHoodElement");
-      }*/
+    /*void operator=(const GeneralisedNewtonianTTaylorHoodElement<DIM>&) =
+      delete;*/
 
     /// \short Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version

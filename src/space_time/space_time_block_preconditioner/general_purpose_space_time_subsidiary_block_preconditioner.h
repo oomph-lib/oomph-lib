@@ -118,17 +118,11 @@ namespace oomph
 
     /// Broken copy constructor
     SpaceTimeNavierStokesSubsidiaryPreconditioner(
-      const SpaceTimeNavierStokesSubsidiaryPreconditioner&)
-    {
-      BrokenCopy::broken_copy("SpaceTimeNavierStokesSubsidiaryPreconditioner");
-    }
+      const SpaceTimeNavierStokesSubsidiaryPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const SpaceTimeNavierStokesSubsidiaryPreconditioner&)
-    {
-      BrokenCopy::broken_assign(
-        "SpaceTimeNavierStokesSubsidiaryPreconditioner");
-    }
+    void operator=(const SpaceTimeNavierStokesSubsidiaryPreconditioner&) =
+      delete;
 
     /// \short For some reason we need to remind the compiler that there is
     /// also a function named setup in the base class.
@@ -296,16 +290,10 @@ namespace oomph
     } // End of clean_up_memory
 
     /// Broken copy constructor
-    GMRESBlockPreconditioner(const GMRESBlockPreconditioner&)
-    {
-      BrokenCopy::broken_copy("GMRESBlockPreconditioner");
-    } // End of GMRESBlockPreconditioner
+    GMRESBlockPreconditioner(const GMRESBlockPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const GMRESBlockPreconditioner&)
-    {
-      BrokenCopy::broken_assign("GMRESBlockPreconditioner");
-    } // End of operator=
+    void operator=(const GMRESBlockPreconditioner&) = delete;
 
     /// \short For some reason we need to remind the compiler that there is
     /// also a function named setup in the base class.

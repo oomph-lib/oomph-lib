@@ -76,10 +76,7 @@ namespace oomph
 
     /// Broken copy constructor
     SteadyAxisymAdvectionDiffusionEquations(
-      const SteadyAxisymAdvectionDiffusionEquations& dummy)
-    {
-      BrokenCopy::broken_copy("SteadyAxisymAdvectionDiffusionEquations");
-    }
+      const SteadyAxisymAdvectionDiffusionEquations& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -87,10 +84,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const SteadyAxisymAdvectionDiffusionEquations&)
-     {
-      BrokenCopy::broken_assign("SteadyAxisymAdvectionDiffusionEquations");
-     }*/
+    /*void operator=(const SteadyAxisymAdvectionDiffusionEquations&) =
+      delete;*/
 
     /// \short Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
@@ -448,16 +443,11 @@ namespace oomph
 
     /// Broken copy constructor
     QSteadyAxisymAdvectionDiffusionElement(
-      const QSteadyAxisymAdvectionDiffusionElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QSteadyAxisymAdvectionDiffusionElement");
-    }
+      const QSteadyAxisymAdvectionDiffusionElement<NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QSteadyAxisymAdvectionDiffusionElement<NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("QSteadyAxisymAdvectionDiffusionElement");
-     }*/
+    /*void operator=(const QSteadyAxisymAdvectionDiffusionElement<NNODE_1D>&) =
+      delete;*/
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
@@ -651,16 +641,11 @@ namespace oomph
 
     /// Broken copy constructor
     SteadyAxisymAdvectionDiffusionFluxElement(
-      const SteadyAxisymAdvectionDiffusionFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("SteadyAxisymAdvectionDiffusionFluxElement");
-    }
+      const SteadyAxisymAdvectionDiffusionFluxElement& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SteadyAxisymAdvectionDiffusionFluxElement&)
-     {
-      BrokenCopy::broken_assign("SteadyAxisymAdvectionDiffusionFluxElement");
-     }*/
+    /*void operator=(const SteadyAxisymAdvectionDiffusionFluxElement&) =
+      delete;*/
 
     /// Access function for the prescribed-beta function pointer
     SteadyAxisymAdvectionDiffusionPrescribedBetaFctPt& beta_fct_pt()

@@ -50,17 +50,10 @@ namespace oomph
     ~SuperLUPreconditioner() {}
 
     /// Broken copy constructor.
-    SuperLUPreconditioner(const SuperLUPreconditioner&)
-    {
-      BrokenCopy::broken_copy("SuperLUPreconditioner");
-    }
-
+    SuperLUPreconditioner(const SuperLUPreconditioner&) = delete;
 
     /// Broken assignment operator.
-    void operator=(const SuperLUPreconditioner&)
-    {
-      BrokenCopy::broken_assign("SuperLUPreconditioner");
-    }
+    void operator=(const SuperLUPreconditioner&) = delete;
 
     /// \short Function to set up a preconditioner for the linear
     /// system defined by matrix_pt. This function must be called

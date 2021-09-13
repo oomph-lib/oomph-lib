@@ -46,22 +46,13 @@ namespace oomph
                              const std::string& curve_file_name);
 
     /// Broken copy constructor
-    GeompackQuadScaffoldMesh(const GeompackQuadScaffoldMesh&)
-    {
-      BrokenCopy::broken_copy("GeompackQuadScaffoldMesh");
-    }
-
+    GeompackQuadScaffoldMesh(const GeompackQuadScaffoldMesh&) = delete;
 
     /// Broken assignment operator
-    void operator=(const GeompackQuadScaffoldMesh&)
-    {
-      BrokenCopy::broken_assign("GeompackQuadScaffoldMesh");
-    }
+    void operator=(const GeompackQuadScaffoldMesh&) = delete;
 
     /// Empty destructor
     ~GeompackQuadScaffoldMesh() {}
-
-
   }; // end class
 
 } // namespace oomph

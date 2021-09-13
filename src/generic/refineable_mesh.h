@@ -89,16 +89,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    RefineableMeshBase(const RefineableMeshBase& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableMeshBase");
-    }
+    RefineableMeshBase(const RefineableMeshBase& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableMeshBase&)
-    {
-      BrokenCopy::broken_assign("RefineableMeshBase");
-    }
+    void operator=(const RefineableMeshBase&) = delete;
 
     /// Empty Destructor:
     virtual ~RefineableMeshBase() {}
@@ -408,16 +402,11 @@ namespace oomph
 
 
     /// Broken copy constructor
-    TreeBasedRefineableMeshBase(const TreeBasedRefineableMeshBase& dummy)
-    {
-      BrokenCopy::broken_copy("TreeBasedRefineableMeshBase");
-    }
+    TreeBasedRefineableMeshBase(const TreeBasedRefineableMeshBase& dummy) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const TreeBasedRefineableMeshBase&)
-    {
-      BrokenCopy::broken_assign("TreeBasedRefineableMeshBase");
-    }
+    void operator=(const TreeBasedRefineableMeshBase&) = delete;
 
     /// Empty Destructor:
     virtual ~TreeBasedRefineableMeshBase()
@@ -873,10 +862,7 @@ namespace oomph
     TreeBasedRefineableMesh() : TreeBasedRefineableMeshBase() {}
 
     /// Broken copy constructor
-    TreeBasedRefineableMesh(const TreeBasedRefineableMesh& dummy)
-    {
-      BrokenCopy::broken_copy("TreeBasedRefineableMesh");
-    }
+    TreeBasedRefineableMesh(const TreeBasedRefineableMesh& dummy) = delete;
 
     /// Empty virtual destructor
     virtual ~TreeBasedRefineableMesh() {}
