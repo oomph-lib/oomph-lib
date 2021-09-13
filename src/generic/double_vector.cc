@@ -106,7 +106,7 @@ namespace oomph
       // re-allocate memory which was deleted by clear()
       unsigned nrow_local = this->nrow_local();
       Values_pt = new double[nrow_local];
-   
+
       // use the initialise method to populate the vector
       this->initialise(v);
       Built = true;

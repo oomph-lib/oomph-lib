@@ -250,13 +250,14 @@ namespace oomph
     /// boundaries, specified by TetMeshFacetedSurfaces.
     /// Also specify target size for uniform element size.
     /// Optionally specify the target element volume in each region.
-    TetgenMesh(TetMeshFacetedClosedSurface* const& outer_boundary_pt,
-               Vector<TetMeshFacetedSurface*>& internal_surface_pt,
-               const double& element_volume,
-               TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
-               const bool& use_attributes = false,
-               const bool& split_corner_elements = false,
-	       Vector<double>* const& target_element_volume_in_region_pt = nullptr)
+    TetgenMesh(
+      TetMeshFacetedClosedSurface* const& outer_boundary_pt,
+      Vector<TetMeshFacetedSurface*>& internal_surface_pt,
+      const double& element_volume,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false,
+      const bool& split_corner_elements = false,
+      Vector<double>* const& target_element_volume_in_region_pt = nullptr)
     {
       // Mesh can only be built with 3D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(3);
@@ -286,9 +287,9 @@ namespace oomph
       // Tetgen data structure for the input and output
       tetgenio in;
       this->build_tetgenio(outer_boundary_pt,
-			   internal_surface_pt,
-			   target_element_volume_in_region_pt,
-			   in);
+                           internal_surface_pt,
+                           target_element_volume_in_region_pt,
+                           in);
 
 
       // Now tetrahedralise
@@ -300,8 +301,8 @@ namespace oomph
       // switch without  subsequent floating-point number switches on the
       // specific element volume constraints for particular regions (the 5th
       // index in the tetgenio.regionlist array). The 'A' enables region
-      // attributes, and the second 'a' switch with the subsequent float sets the
-      // global (non-region-specific) element volume constraint.
+      // attributes, and the second 'a' switch with the subsequent float sets
+      // the global (non-region-specific) element volume constraint.
       std::stringstream input_string;
       input_string << "pq2.0aAa" << element_volume;
 
@@ -393,10 +394,11 @@ namespace oomph
     }
 
     ///\short Build tetgenio object from the TetMeshFacetedSurfaces
-    void build_tetgenio(TetMeshFacetedSurface* const& outer_boundary_pt,
-                        Vector<TetMeshFacetedSurface*>& internal_surface_pt,
-			Vector<double>* const& target_element_volume_in_region_pt,
-                        tetgenio& tetgen_io)
+    void build_tetgenio(
+      TetMeshFacetedSurface* const& outer_boundary_pt,
+      Vector<TetMeshFacetedSurface*>& internal_surface_pt,
+      Vector<double>* const& target_element_volume_in_region_pt,
+      tetgenio& tetgen_io)
     {
       // Pointer to Tetgen facet
       tetgenio::facet* f;
@@ -602,7 +604,7 @@ namespace oomph
 
       // Set storage for the regions
       tetgen_io.regionlist = new double[5 * tetgen_io.numberofregions];
-      
+
       // Loop over all the internal boundaries again
       counter = 0;
       for (unsigned h = 0; h < n_internal; ++h)
@@ -626,19 +628,19 @@ namespace oomph
                 static_cast<double>(srf_pt->region_id_for_tetgen(j));
               ++counter;
 
-	      // if there's no target volumes specified, default to zero
-	      if(target_element_volume_in_region_pt == nullptr)
-	      {
-		tetgen_io.regionlist[counter] = 0;
-	      }
-	      else
-	      {
-		// deliberate integer division here to round down to the region number
-		// (five doubles per region)
-		tetgen_io.regionlist[counter] =
-		  (*target_element_volume_in_region_pt)[unsigned(counter / 5)];
-	      }
-	      
+              // if there's no target volumes specified, default to zero
+              if (target_element_volume_in_region_pt == nullptr)
+              {
+                tetgen_io.regionlist[counter] = 0;
+              }
+              else
+              {
+                // deliberate integer division here to round down to the region
+                // number (five doubles per region)
+                tetgen_io.regionlist[counter] =
+                  (*target_element_volume_in_region_pt)[unsigned(counter / 5)];
+              }
+
               ++counter;
             }
           }
