@@ -72,8 +72,8 @@ namespace oomph
 			       Mumps_is_initialised(false),
 			       Workspace_scaling_factor(Default_workspace_scaling_factor),
 			       Delete_matrix_data(false), Mumps_struc_pt(nullptr),
-			       Jacobian_symmetry_flag(Unsymmetric),
-			       Jacobian_ordering_flag(Metis_ordering) { }
+			       Jacobian_symmetry_flag(MumpsJacobianSymmetryFlags::Unsymmetric),
+			       Jacobian_ordering_flag(MumpsJacobianOrderingFlags::Metis_ordering) { }
     
   //=============================================================================
   /// Initialise instance of mumps data structure
@@ -304,7 +304,7 @@ namespace oomph
 
 	// is the matrix symmetric? If so, we must only provide
 	// MUMPS with the upper (or lower) triangular part of the Jacobian
-	if(Mumps_struc_pt->sym != Unsymmetric)
+	if(Mumps_struc_pt->sym != MumpsJacobianSymmetryFlags::Unsymmetric)
 	{
 	  oomph_info << "Assuming Jacobian matrix is symmetric "
 		     << "(passing MUMPS the upper triangular part)" << std::endl;
@@ -327,7 +327,7 @@ namespace oomph
 	  // only pass the upper triangular part (and diagonal)
 	  // if we have a symmetric matrix (MUMPS sums values,
 	  // so need to set the lwoer triangle to zero)
-	  if( (Mumps_struc_pt->sym != Unsymmetric) &&
+	  if( (Mumps_struc_pt->sym != MumpsJacobianSymmetryFlags::Unsymmetric) &&
 	      (Irn_loc[count] > Jcn_loc[count]) )
 	  {	      
 	    A_loc[count] = 0.0;
@@ -381,13 +381,13 @@ namespace oomph
 	  
 	  switch(Mumps_struc_pt->INFOG(7))
 	  {
-	    case Scotch_ordering:
+	    case MumpsJacobianOrderingFlags::Scotch_ordering:
 	      oomph_info << "SCOTCH";
 	      break;
-	    case Pord_ordering:
+	    case MumpsJacobianOrderingFlags::Pord_ordering:
 	      oomph_info << "PORD";
 	      break;
-	    case Metis_ordering:
+	    case MumpsJacobianOrderingFlags::Metis_ordering:
 	      oomph_info << "METIS";
 	      break;
 	    default:
