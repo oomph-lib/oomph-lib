@@ -58,13 +58,15 @@ namespace oomph
       const double& element_volume,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& use_attributes = false,
-      const bool& split_corner_elements = false)
+      const bool& split_corner_elements = false,
+      Vector<double>* const& target_element_volume_in_region_pt = nullptr)
       : TetgenMesh<ELEMENT>(outer_boundary_pt,
                             internal_closed_surface_pt,
                             element_volume,
                             time_stepper_pt,
                             use_attributes,
-                            split_corner_elements),
+                            split_corner_elements,
+                            target_element_volume_in_region_pt),
         Corner_elements_must_be_split(split_corner_elements)
     {
       // Initialise the data associated with adaptation

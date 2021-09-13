@@ -499,14 +499,14 @@ namespace oomph
   {
   public:
     /// \short Constructor. Default settings: Current directory, step `0',
-    /// label="", full documentation enabled and output directory is not
+    /// label="", full documentation enabled and output directory is
     /// required to exist when set_directory() is called.
     DocInfo()
       : Directory("."),
         Doc_flag(true),
         Number(0),
         Label(""),
-        Directory_must_exist(false)
+        Directory_must_exist(true)
     {
     }
 
@@ -516,7 +516,7 @@ namespace oomph
         Doc_flag(true),
         Number(0),
         Label(""),
-        Directory_must_exist(false)
+        Directory_must_exist(true)
     {
     }
 
