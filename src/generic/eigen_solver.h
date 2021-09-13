@@ -143,6 +143,13 @@ namespace oomph
                                     Vector<DoubleVector>& eigenvector_real,
                                     Vector<DoubleVector>& eigenvector_imag) = 0;
 
+    /// Solve the adjoint eigen problem
+    virtual void solve_adjoint_eigenproblem(
+      Problem* const& problem_pt,
+      const int& n_eval,
+      Vector<std::complex<double>>& eigenvalue,
+      Vector<DoubleVector>& eigenvector) = 0;
+
 
     /// Set the value of the (real) shift
     void set_shift(const double& shift_value)
@@ -254,6 +261,15 @@ namespace oomph
       abort();
     }
 
+    /// Solve the adjoint eigen problem
+    void solve_adjoint_eigenproblem(Problem* const& problem_pt,
+                                    const int& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    Vector<DoubleVector>& eigenvector)
+    {
+      BrokenCopy::broken_assign("ARPACK");
+    }
+
 
     /// Set the desired eigenvalues to be left of the shift
     void get_eigenvalues_left_of_shift()
@@ -354,6 +370,14 @@ namespace oomph
                             Vector<DoubleVector>& eigenvector_real,
                             Vector<DoubleVector>& eigenvector_imag);
 
+    /// Solve the adjoint eigen problem
+    void solve_adjoint_eigenproblem(Problem* const& problem_pt,
+                                    const int& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    Vector<DoubleVector>& eigenvector)
+    {
+      BrokenCopy::broken_assign("LAPACK_QZ");
+    };
 
     /// Find the eigenvalues of a complex generalised eigenvalue problem
     /// specified by \f$ Ax = \lambda  Mx \f$. Note: the (real) shift

@@ -2031,7 +2031,15 @@ namespace oomph
         n_eval, alpha, beta, eigenvector_real, eigenvector_imag, steady);
     }
 
-    /// Get the matrices required by a eigensolver. If the
+    /// \Short Solve an adjoint eigenvalue problem using the same procedure as
+    /// solve_eigenproblem. See the documentation on that function for more
+    /// details.
+    void solve_adjoint_eigenproblem(const unsigned& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    Vector<DoubleVector>& eigenvector,
+                                    const bool& steady = true);
+
+    /// \short Get the matrices required by a eigensolver. If the
     /// shift parameter is non-zero the second matrix will be shifted
     virtual void get_eigenproblem_matrices(CRDoubleMatrix& mass_matrix,
                                            CRDoubleMatrix& main_matrix,
