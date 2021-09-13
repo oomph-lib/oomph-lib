@@ -333,7 +333,8 @@ namespace oomph
           // only pass the upper triangular part (and diagonal)
           // if we have a symmetric matrix (MUMPS sums values,
           // so need to set the lwoer triangle to zero)
-          if ((Mumps_struc_pt->sym != MumpsJacobianSymmetryFlags::Unsymmetric) &&
+          if ((Mumps_struc_pt->sym !=
+               MumpsJacobianSymmetryFlags::Unsymmetric) &&
               (Irn_loc[count] > Jcn_loc[count]))
           {
             A_loc[count] = 0.0;
