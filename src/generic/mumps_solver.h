@@ -299,7 +299,7 @@ namespace oomph
     /// \short values of the SYM variable used by the MUMPS solver
     /// which dictates the symmetry properties of the Jacobian matrix;
     /// magic numbers as defined by MUMPS documentation
-    enum
+    enum MumpsJacobianSymmetryFlags
     {
       Unsymmetric = 0,
       Symmetric_positive_definite = 1,
@@ -308,7 +308,7 @@ namespace oomph
 
     /// \short ordering library to use for serial analysis;
     /// magic numbers as defined by MUMPS documentation
-    enum
+    enum MumpsJacobianOrderingFlags
     {
       Scotch_ordering = 3,
       Pord_ordering = 4,
