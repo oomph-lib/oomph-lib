@@ -740,9 +740,12 @@ namespace oomph
 
   {
   public:
-    // publically expose template parameters
-    static const unsigned TEMPLATE_PARAMETER_DIM = DIM;
-    static const unsigned TEMPLATE_PARAMETER_NNODE_1D = 3;
+   
+   /// Publicly exposed template parameter
+   static const unsigned TEMPLATE_PARAMETER_DIM = DIM;
+   
+   /// Publicly exposed template parameter
+   static const unsigned TEMPLATE_PARAMETER_NNODE_1D = 3;
 
   private:
     /// Static array of ints to hold number of variables at node
