@@ -614,9 +614,9 @@ namespace oomph
       const std::complex<double>* matrix_in_value = matrix_in.value();
 
       // get pointers to this matrix
-      const std::complex<double>* this_value = this->value();
-      const int* this_row_start = this->row_start();
-      const int* this_column_index = this->column_index();
+      const std::complex<double>* i_value = this->value();
+      const int* i_row_start = this->row_start();
+      const int* i_column_index = this->column_index();
 
       // clock_t clock1 = clock();
 
@@ -633,28 +633,28 @@ namespace oomph
 
         // run through rows of this matrix and matrix_in to find number of
         // non-zero entries in each row of result
-        for (unsigned long this_row = 0; this_row < N; this_row++)
+        for (unsigned long i_row = 0; i_row < N; i_row++)
         {
-          // run through non-zeros in this_row of this matrix
-          for (int this_ptr = this_row_start[this_row];
-               this_ptr < this_row_start[this_row + 1];
-               this_ptr++)
+          // run through non-zeros in i_row of this matrix
+          for (int i_non_zero = i_row_start[i_row];
+               i_non_zero < i_row_start[i_row + 1];
+               i_non_zero++)
           {
             // find column index for non-zero
-            int matrix_in_row = this_column_index[this_ptr];
+            int matrix_in_row = i_column_index[i_non_zero];
 
             // run through corresponding row in matrix_in
-            for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
-                 matrix_in_ptr < matrix_in_row_start[matrix_in_row + 1];
-                 matrix_in_ptr++)
+            for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
+                 matrix_in_index < matrix_in_row_start[matrix_in_row + 1];
+                 matrix_in_index++)
             {
               // find column index for non-zero in matrix_in and store in
               // columns
-              columns.insert(matrix_in_column_index[matrix_in_ptr]);
+              columns.insert(matrix_in_column_index[matrix_in_index]);
             }
           }
           // update Row_start
-          Row_start[this_row + 1] = Row_start[this_row] + columns.size();
+          Row_start[i_row + 1] = Row_start[i_row] + columns.size();
 
           // wipe values in columns
           columns.clear();
@@ -674,33 +674,33 @@ namespace oomph
         }
 
         // Calculate values for result - first run through rows of this matrix
-        for (unsigned long this_row = 0; this_row < N; this_row++)
+        for (unsigned long i_row = 0; i_row < N; i_row++)
         {
-          // run through non-zeros in this_row
-          for (int this_ptr = this_row_start[this_row];
-               this_ptr < this_row_start[this_row + 1];
-               this_ptr++)
+          // run through non-zeros in i_row
+          for (int i_non_zero = i_row_start[i_row];
+               i_non_zero < i_row_start[i_row + 1];
+               i_non_zero++)
           {
             // find value of non-zero
-            std::complex<double> this_val = this_value[this_ptr];
+            std::complex<double> i_val = i_value[i_non_zero];
 
             // find column associated with non-zero
-            int matrix_in_row = this_column_index[this_ptr];
+            int matrix_in_row = i_column_index[i_non_zero];
 
             // run through corresponding row in matrix_in
-            for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
-                 matrix_in_ptr < matrix_in_row_start[matrix_in_row + 1];
-                 matrix_in_ptr++)
+            for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
+                 matrix_in_index < matrix_in_row_start[matrix_in_row + 1];
+                 matrix_in_index++)
             {
               // find column index for non-zero in matrix_in
-              int col = matrix_in_column_index[matrix_in_ptr];
+              int col = matrix_in_column_index[matrix_in_index];
 
               // find position in result to insert value
-              for (int ptr = Row_start[this_row];
-                   ptr <= Row_start[this_row + 1];
-                   ptr++)
+              for (int insert_position = Row_start[i_row];
+                   insert_position <= Row_start[i_row + 1];
+                   insert_position++)
               {
-                if (ptr == Row_start[this_row + 1])
+                if (insert_position == Row_start[i_row + 1])
                 {
                   // error - have passed end of row without finding
                   // correct column
@@ -711,17 +711,19 @@ namespace oomph
                                       OOMPH_CURRENT_FUNCTION,
                                       OOMPH_EXCEPTION_LOCATION);
                 }
-                else if (Column_index[ptr] == -1)
+                else if (Column_index[insert_position] == -1)
                 {
                   // first entry for this column index
-                  Column_index[ptr] = col;
-                  Value[ptr] = this_val * matrix_in_value[matrix_in_ptr];
+                  Column_index[insert_position] = col;
+                  Value[insert_position] =
+                    i_val * matrix_in_value[matrix_in_index];
                   break;
                 }
-                else if (Column_index[ptr] == col)
+                else if (Column_index[insert_position] == col)
                 {
                   // column index already exists - add value
-                  Value[ptr] += this_val * matrix_in_value[matrix_in_ptr];
+                  Value[insert_position] +=
+                    i_val * matrix_in_value[matrix_in_index];
                   break;
                 }
               }
@@ -739,30 +741,31 @@ namespace oomph
           new std::map<int, std::complex<double>>[N];
 
         // run through rows of this matrix
-        for (unsigned long this_row = 0; this_row < N; this_row++)
+        for (unsigned long i_row = 0; i_row < N; i_row++)
         {
-          // run through non-zeros in this_row
-          for (int this_ptr = this_row_start[this_row];
-               this_ptr < this_row_start[this_row + 1];
-               this_ptr++)
+          // run through non-zeros in i_row
+          for (int i_non_zero = i_row_start[i_row];
+               i_non_zero < i_row_start[i_row + 1];
+               i_non_zero++)
           {
             // find value of non-zero
-            std::complex<double> this_val = this_value[this_ptr];
+            std::complex<double> i_val = i_value[i_non_zero];
 
             // find column index associated with non-zero
-            int matrix_in_row = this_column_index[this_ptr];
+            int matrix_in_row = i_column_index[i_non_zero];
 
             // run through corresponding row in matrix_in
-            for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
-                 matrix_in_ptr < matrix_in_row_start[matrix_in_row + 1];
-                 matrix_in_ptr++)
+            for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
+                 matrix_in_index < matrix_in_row_start[matrix_in_row + 1];
+                 matrix_in_index++)
             {
               // find column index for non-zero in matrix_in
-              int col = matrix_in_column_index[matrix_in_ptr]; // This is the
-                                                               // offending line
+              int col =
+                matrix_in_column_index[matrix_in_index]; // This is the
+                                                         // offending line
               // insert value
-              result_maps[this_row][col] +=
-                this_val * matrix_in_value[matrix_in_ptr];
+              result_maps[i_row][col] +=
+                i_val * matrix_in_value[matrix_in_index];
             }
           }
         }
@@ -788,15 +791,15 @@ namespace oomph
         // copy values and column indices
         for (unsigned long row = 0; row < N; row++)
         {
-          unsigned ptr = Row_start[row];
+          unsigned insert_position = Row_start[row];
           for (std::map<int, std::complex<double>>::iterator i =
                  result_maps[row].begin();
                i != result_maps[row].end();
                i++)
           {
-            Column_index[ptr] = i->first;
-            Value[ptr] = i->second;
-            ptr++;
+            Column_index[insert_position] = i->first;
+            Value[insert_position] = i->second;
+            insert_position++;
           }
         }
         // tidy up memory
@@ -812,43 +815,43 @@ namespace oomph
         std::vector<std::vector<std::complex<double>>> result_vals(N);
 
         // run through the rows of this matrix
-        for (unsigned long this_row = 0; this_row < N; this_row++)
+        for (unsigned long i_row = 0; i_row < N; i_row++)
         {
-          // run through non-zeros in this_row
-          for (int this_ptr = this_row_start[this_row];
-               this_ptr < this_row_start[this_row + 1];
-               this_ptr++)
+          // run through non-zeros in i_row
+          for (int i_non_zero = i_row_start[i_row];
+               i_non_zero < i_row_start[i_row + 1];
+               i_non_zero++)
           {
             // find value of non-zero
-            std::complex<double> this_val = this_value[this_ptr];
+            std::complex<double> i_val = i_value[i_non_zero];
 
             // find column index associated with non-zero
-            int matrix_in_row = this_column_index[this_ptr];
+            int matrix_in_row = i_column_index[i_non_zero];
 
             // run through corresponding row in matrix_in
-            for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
-                 matrix_in_ptr < matrix_in_row_start[matrix_in_row + 1];
-                 matrix_in_ptr++)
+            for (int matrix_in_index = matrix_in_row_start[matrix_in_row];
+                 matrix_in_index < matrix_in_row_start[matrix_in_row + 1];
+                 matrix_in_index++)
             {
               // find column index for non-zero in matrix_in
-              int col = matrix_in_column_index[matrix_in_ptr];
+              int col = matrix_in_column_index[matrix_in_index];
 
               // insert value
-              int size = result_cols[this_row].size();
+              int size = result_cols[i_row].size();
               for (int i = 0; i <= size; i++)
               {
                 if (i == size)
                 {
                   // first entry for this column
-                  result_cols[this_row].push_back(col);
-                  result_vals[this_row].push_back(
-                    this_val * matrix_in_value[matrix_in_ptr]);
+                  result_cols[i_row].push_back(col);
+                  result_vals[i_row].push_back(
+                    i_val * matrix_in_value[matrix_in_index]);
                 }
-                else if (col == result_cols[this_row][i])
+                else if (col == result_cols[i_row][i])
                 {
                   // column already exists
-                  result_vals[this_row][i] +=
-                    this_val * matrix_in_value[matrix_in_ptr];
+                  result_vals[i_row][i] +=
+                    i_val * matrix_in_value[matrix_in_index];
                   break;
                 }
               }
@@ -877,13 +880,13 @@ namespace oomph
         // copy across values and column indices
         for (unsigned long row = 0; row < N; row++)
         {
-          unsigned ptr = Row_start[row];
+          unsigned insert_position = Row_start[row];
           unsigned nnn = result_cols[row].size();
           for (unsigned i = 0; i < nnn; i++)
           {
-            Column_index[ptr] = result_cols[row][i];
-            Value[ptr] = result_vals[row][i];
-            ptr++;
+            Column_index[insert_position] = result_cols[row][i];
+            Value[insert_position] = result_vals[row][i];
+            insert_position++;
           }
         }
       }
@@ -922,9 +925,9 @@ namespace oomph
     }
 
     // Check if the dimensions of this matrix and matrix_in are the same.
-    unsigned long this_nrow = this->nrow();
+    unsigned long i_nrow = this->nrow();
     unsigned long matrix_in_nrow = matrix_in.nrow();
-    if (this_nrow != matrix_in_nrow)
+    if (i_nrow != matrix_in_nrow)
     {
       std::ostringstream error_message;
       error_message << "matrix_in has a different number of rows than\n"
@@ -933,9 +936,9 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    unsigned long this_ncol = this->ncol();
+    unsigned long i_ncol = this->ncol();
     unsigned long matrix_in_ncol = matrix_in.ncol();
-    if (this_ncol != matrix_in_ncol)
+    if (i_ncol != matrix_in_ncol)
     {
       std::ostringstream error_message;
       error_message << "matrix_in has a different number of columns than\n"
@@ -983,13 +986,13 @@ namespace oomph
     res_row_start.reserve(nrow_local + 1);
 
     // The row_start and column_indices
-    const int* this_column_indices = this->column_index();
-    const int* this_row_start = this->row_start();
+    const int* i_column_indices = this->column_index();
+    const int* i_row_start = this->row_start();
     const int* in_column_indices = matrix_in.column_index();
     const int* in_row_start = matrix_in.row_start();
 
     // Values from this matrix and matrix_in.
-    const std::complex<double>* this_values = this->value();
+    const std::complex<double>* i_values = this->value();
     const std::complex<double>* in_values = matrix_in.value();
 
     // The first entry in row_start is always zero.
@@ -1003,9 +1006,9 @@ namespace oomph
       std::map<int, std::complex<double>> res_row_map;
 
       // Insert the column and value pair for this matrix.
-      for (int i = this_row_start[row_i]; i < this_row_start[row_i + 1]; i++)
+      for (int i = i_row_start[row_i]; i < i_row_start[row_i + 1]; i++)
       {
-        res_row_map[this_column_indices[i]] = this_values[i];
+        res_row_map[i_column_indices[i]] = i_values[i];
       }
 
       // Insert the column and value pair for in matrix.
@@ -1065,9 +1068,9 @@ namespace oomph
     }
 
     // Check if the dimensions of this matrix and matrix_in are the same.
-    unsigned long this_nrow = this->nrow();
+    unsigned long i_nrow = this->nrow();
     unsigned long matrix_in_nrow = matrix_in.nrow();
-    if (this_nrow != matrix_in_nrow)
+    if (i_nrow != matrix_in_nrow)
     {
       std::ostringstream error_message;
       error_message << "matrix_in has a different number of rows than\n"
@@ -1076,9 +1079,9 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    unsigned long this_ncol = this->ncol();
+    unsigned long i_ncol = this->ncol();
     unsigned long matrix_in_ncol = matrix_in.ncol();
-    if (this_ncol != matrix_in_ncol)
+    if (i_ncol != matrix_in_ncol)
     {
       std::ostringstream error_message;
       error_message << "matrix_in has a different number of columns than\n"
@@ -1126,13 +1129,13 @@ namespace oomph
     res_row_start.reserve(nrow_local + 1);
 
     // The row_start and column_indices
-    const int* this_column_indices = this->column_index();
-    const int* this_row_start = this->row_start();
+    const int* i_column_indices = this->column_index();
+    const int* i_row_start = this->row_start();
     const int* in_column_indices = matrix_in.column_index();
     const int* in_row_start = matrix_in.row_start();
 
     // Values from this matrix and matrix_in.
-    const std::complex<double>* this_values = this->value();
+    const std::complex<double>* i_values = this->value();
     const double* in_values = matrix_in.value();
 
     // The first entry in row_start is always zero.
@@ -1146,9 +1149,9 @@ namespace oomph
       std::map<int, std::complex<double>> res_row_map;
 
       // Insert the column and value pair for this matrix.
-      for (int i = this_row_start[row_i]; i < this_row_start[row_i + 1]; i++)
+      for (int i = i_row_start[row_i]; i < i_row_start[row_i + 1]; i++)
       {
-        res_row_map[this_column_indices[i]] = this_values[i];
+        res_row_map[i_column_indices[i]] = i_values[i];
       }
 
       // Insert the column and value pair for in matrix.
