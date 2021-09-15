@@ -37,13 +37,14 @@ jobs:
         env:
           OOMPH_BUILD_PATH: '${{ github.workspace }}/build'
 
-      - name: Generate code coverage report
+      - name: Generate code coverage report (HTML & XML)
         run: |
           fd .gcno build/external_{src,distributions} -x rm -f {}
-          mkdir coverage_reports
-          gcovr -r . --html --html-details -o coverage_reports/${{ env.COVERAGE_REPORT_NAME }}
+          mkdir -p coverage_reports/{html,xml}
+          gcovr -r . --html --html-details -o coverage_reports/html/${{ env.COVERAGE_REPORT_NAME }}
+          gcovr -r . --xml-pretty -o coverage_reports/xml/${{ env.COVERAGE_REPORT_NAME }}
 
-      - name: Upload code coverage report
+      - name: Upload code coverage reports
         uses: actions/upload-artifact@v2
         with:
           name: coverage-report-${{ runner.os }}.html
