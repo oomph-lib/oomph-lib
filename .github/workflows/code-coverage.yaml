@@ -4,6 +4,7 @@ on: push
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
+  COVERAGE_REPORT_NAME: 'coverage-report.html'
 
 jobs:
   build:
@@ -18,30 +19,35 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: brew install cmake open-mpi ninja openblas gcovr && brew reinstall gfortran
+        run: brew install cmake open-mpi ninja openblas gcovr fd && brew reinstall gfortran
 
       - name: Configure, build & install
-        run: cmake --preset CI-build -B build && cd build && ninja && ninja install
+        run: cmake --preset CI-build-coverage -B build && cd build && ninja
         env:
           OOMPH_USE_OPENBLAS: ${{ matrix.OOMPH_USE_OPENBLAS }}
-          OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
 
       - name: Run self-tests
         id: self_tests
         run: |
           cd demo_drivers && cp ../CMakePresets.json ./
-          cmake --preset CI-demo-drivers
+          cmake --preset CI-demo-drivers-coverage
           cd build && cp ../CMakePresets.json ./
-          ctest --preset CI-demo-drivers -j $(sysctl -n hw.logicalcpu)
+          ctest --preset CI-demo-drivers-coverage -j $(sysctl -n hw.logicalcpu)
         continue-on-error: true
         env:
-          OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
+          OOMPH_BUILD_PATH: '${{ github.workspace }}/build'
 
-      - name: Upload validation log file
+      - name: Generate code coverage report
+        run: |
+          fd .gcno build/external_{src,distributions} -x rm -f {}
+          mkdir coverage_reports
+          gcovr -r . --html --html-details -o coverage_reports/${{ env.COVERAGE_REPORT_NAME }}
+
+      - name: Upload code coverage report
         uses: actions/upload-artifact@v2
         with:
-          name: validation-${{ runner.os }}-OpenBLAS_${{ env.OOMPH_USE_OPENBLAS }}.log
-          path: ./validation.log
+          name: coverage-report-${{ runner.os }}.html
+          path: ./coverage_reports/
 
       - name: Propagate CTest status
         if: steps.self_tests.outcome == 'failure'

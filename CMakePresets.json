@@ -11,13 +11,15 @@
       "hidden": true,
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "TRUE",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "OOMPH_TRANSITION_TO_VERSION_3": "OFF",
         "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
         "OOMPH_ENABLE_CLANG_TIDY": "OFF",
         "OOMPH_ENABLE_CLANG_FORMAT": "OFF",
-        "OOMPH_TRANSITION_TO_VERSION_3": "OFF",
+        "OOMPH_ENABLE_CODE_COVERAGE": "OFF",
         "OOMPH_ENABLE_PARANOID": "OFF",
         "OOMPH_ENABLE_RANGE_CHECKING": "OFF",
+        "OOMPH_ENABLE_CCACHE": "OFF",
         "OOMPH_USE_OPENBLAS": "OFF",
         "OOMPH_WANT_BACKWARD": "OFF",
         "OOMPH_WANT_CGAL": "OFF",
@@ -55,8 +57,24 @@
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_PREFIX_PATH": "$penv{OOMPH_INSTALL_PATH}",
+        "CMAKE_PREFIX_PATH": "$penv{OOMPH_INSTALL_PATH}"
+      }
+    },
+    {
+      "name": "CI-coverage",
+      "inherits": "CI-build",
+      "displayName": "Build Config for CI/CD code coverage",
+      "cacheVariables": {
         "OOMPH_ENABLE_CODE_COVERAGE": "ON"
+      }
+    },
+    {
+      "name": "CI-demo-drivers-coverage",
+      "inherits": "CI-demo-drivers-build",
+      "displayName": "Demo Drivers Build Config for CI/CD code coverage",
+      "cacheVariables": {
+        "OOMPH_ENABLE_CODE_COVERAGE": "ON",
+        "CMAKE_PREFIX_PATH": "$penv{OOMPH_BUILD_PATH}"
       }
     },
     {
@@ -107,6 +125,14 @@
       "configurePreset": "CI-demo-drivers"
     },
     {
+      "name": "CI-build-coverage",
+      "configurePreset": "CI-build-coverage"
+    },
+    {
+      "name": "CI-demo-drivers-coverage",
+      "configurePreset": "CI-demo-drivers-coverage"
+    },
+    {
       "name": "optimised",
       "configurePreset": "optimised"
     },
@@ -144,6 +170,11 @@
     {
       "name": "CI-demo-drivers",
       "configurePreset": "CI-demo-drivers",
+      "inherits": "test-base"
+    },
+    {
+      "name": "CI-demo-drivers-coverage",
+      "configurePreset": "CI-demo-drivers-coverage",
       "inherits": "test-base"
     },
     {
