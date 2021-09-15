@@ -61,7 +61,7 @@
       }
     },
     {
-      "name": "CI-coverage",
+      "name": "CI-build-with-coverage",
       "inherits": "CI-build",
       "displayName": "Build Config for CI/CD code coverage",
       "cacheVariables": {
@@ -69,8 +69,8 @@
       }
     },
     {
-      "name": "CI-demo-drivers-coverage",
-      "inherits": "CI-demo-drivers-build",
+      "name": "CI-demo-drivers-with-coverage",
+      "inherits": "CI-demo-drivers",
       "displayName": "Demo Drivers Build Config for CI/CD code coverage",
       "cacheVariables": {
         "OOMPH_ENABLE_CODE_COVERAGE": "ON",
@@ -125,12 +125,12 @@
       "configurePreset": "CI-demo-drivers"
     },
     {
-      "name": "CI-build-coverage",
-      "configurePreset": "CI-build-coverage"
+      "name": "CI-build-with-coverage",
+      "configurePreset": "CI-build-with-coverage"
     },
     {
-      "name": "CI-demo-drivers-coverage",
-      "configurePreset": "CI-demo-drivers-coverage"
+      "name": "CI-demo-drivers-with-coverage",
+      "configurePreset": "CI-demo-drivers-with-coverage"
     },
     {
       "name": "optimised",
@@ -173,8 +173,8 @@
       "inherits": "test-base"
     },
     {
-      "name": "CI-demo-drivers-coverage",
-      "configurePreset": "CI-demo-drivers-coverage",
+      "name": "CI-demo-drivers-with-coverage",
+      "configurePreset": "CI-demo-drivers-with-coverage",
       "inherits": "test-base"
     },
     {

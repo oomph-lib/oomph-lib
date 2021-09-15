@@ -1,4 +1,4 @@
-name: macOS
+name: Code coverage
 
 on: push
 
@@ -22,7 +22,7 @@ jobs:
         run: brew install cmake open-mpi ninja openblas gcovr fd && brew reinstall gfortran
 
       - name: Configure, build & install
-        run: cmake --preset CI-build-coverage -B build && cd build && ninja
+        run: cmake --preset CI-build-with-coverage -B build && cd build && ninja
         env:
           OOMPH_USE_OPENBLAS: ${{ matrix.OOMPH_USE_OPENBLAS }}
 
@@ -30,9 +30,9 @@ jobs:
         id: self_tests
         run: |
           cd demo_drivers && cp ../CMakePresets.json ./
-          cmake --preset CI-demo-drivers-coverage
+          cmake --preset CI-demo-drivers-with-coverage
           cd build && cp ../CMakePresets.json ./
-          ctest --preset CI-demo-drivers-coverage -j $(sysctl -n hw.logicalcpu)
+          ctest --preset CI-demo-drivers-with-coverage -j $(sysctl -n hw.logicalcpu)
         continue-on-error: true
         env:
           OOMPH_BUILD_PATH: '${{ github.workspace }}/build'
