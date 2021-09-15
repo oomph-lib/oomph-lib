@@ -226,7 +226,7 @@ function(oomph_library_config)
   set(ALL_HEADERS ${HEADERS} ${HEADERS_NO_COMBINE} ${SOURCES_NO_BUILD})
 
   # Install (or symlink) the headers
-  if(${SYMBOLIC_LINKS_FOR_HEADERS})
+  if(${OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS})
     include(OomphCreateSymlinksForHeaders)
     oomph_create_symlinks_for_headers(
       REAL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
