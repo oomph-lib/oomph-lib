@@ -28,18 +28,21 @@ function(oomph_create_combined_header)
   cmake_parse_arguments(PARSE_ARGV 0 ${PREFIX} "${FLAGS}"
                         "${SINGLE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}")
 
+  # Redefine the prefixed arguments in this scope with clearer variable names
+  set(HEADERS ${${PREFIX}_HEADERS})
+  set(TARGET ${${PREFIX}_TARGET})
+  set(SUBDIRECTORY ${${PREFIX}_SUBDIRECTORY})
+
   # Construct the header for the combined header file
-  set(${PREFIX}_COMBINED_HEADER_FILE
+  set(COMBINED_HEADER_FILE
       "// This file was generated automatically during the CMake process and\n")
-  string(APPEND ${PREFIX}_COMBINED_HEADER_FILE
-         "// it will be remade automatically\n")
+  string(APPEND COMBINED_HEADER_FILE "// it will be remade automatically\n")
 
   # Add the "#include<...>" commands
-  foreach(${PREFIX}_FILE ${${PREFIX}_HEADERS})
-    string(APPEND ${PREFIX}_COMBINED_HEADER_FILE
-           "#include <${${PREFIX}_SUBDIRECTORY}/${${PREFIX}_FILE}>\n")
+  foreach(FILE IN LISTS HEADERS)
+    string(APPEND COMBINED_HEADER_FILE "#include <${SUBDIRECTORY}/${FILE}>\n")
   endforeach()
 
   # Write to file
-  file(WRITE ${${PREFIX}_TARGET} ${${PREFIX}_COMBINED_HEADER_FILE})
+  file(WRITE ${TARGET} ${COMBINED_HEADER_FILE})
 endfunction()

@@ -19,6 +19,11 @@ set(SOURCES
 # Set the name of the library
 set(LIBNAME space_time_unsteady_heat_mixed_order_galerkin_petrov)
 
+# Unlike most libraries, the name of this library is not the same as the name of
+# this subdirectory. Therefore we need to provide the directory name to the
+# user. It's a bit clunky for now... WIP.
+set(INCLUDE_SUBDIRECTORY galerkin_petrov_mixed_order)
+
 # We depend on the generic library
 set(LINKLIBS generic space_time_block_preconditioner)
 
@@ -28,7 +33,8 @@ oomph_library_config(
   LIBNAME ${LIBNAME}
   HEADERS ${HEADERS}
   SOURCES ${SOURCES}
-  LINKLIBS ${LINKLIBS})
+  LINKLIBS ${LINKLIBS}
+  INCLUDE_SUBDIRECTORY ${INCLUDE_SUBDIRECTORY})
 
 message(
   VERBOSE

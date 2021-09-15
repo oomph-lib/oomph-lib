@@ -73,6 +73,7 @@ with section("parse"):
                 'HEADERS': '*',
                 'HEADERS_NO_COMBINE': '*',
                 'HEADERS_NO_INSTALL': '*',
+                'INCLUDE_SUBDIRECTORY': '*',
                 'LIBNAME': '*',
                 'LIBTYPE': '*',
                 'LINKLIBS': '*',

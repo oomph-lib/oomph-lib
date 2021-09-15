@@ -68,7 +68,7 @@ function(oomph_library_config)
   # Define the supported set of keywords
   set(PREFIX ARG)
   set(FLAGS "")
-  set(SINGLE_VALUE_ARGS LIBNAME LIBTYPE)
+  set(SINGLE_VALUE_ARGS LIBNAME LIBTYPE INCLUDE_SUBDIRECTORY)
   set(MULTI_VALUE_ARGS
       HEADERS
       SOURCES
@@ -169,7 +169,7 @@ function(oomph_library_config)
     target_link_libraries(${LIBNAME} ${LINK_TYPE} ${LINKLIBS})
   endif()
 
-  # Silence the annoying warnings produced by this library if it is going to be
+  # Silence the annoying warnings produced by the library if it is going to be
   # compiled, i.e. it is not an INTERFACE library
   if(NOT (LINK_TYPE STREQUAL INTERFACE))
     include(OomphTargetSilenceWarnings)
@@ -188,11 +188,17 @@ function(oomph_library_config)
   # headers from <INSTALL-DIR>/include/${LIBNAME}/. This allows us to group
   # associated headers together.
   # ----------------------------------------------------------------------------
+  # TODO: Update this to automatically compute the enclosing subdirectory!
+  set(LIBRARY_INCLUDE_SUBDIR ${LIBNAME})
+  if(LIBRARY_INCLUDE_SUBDIR)
+    set(LIBRARY_INCLUDE_SUBDIR ${INCLUDE_SUBDIRECTORY})
+  endif()
+
   include(OomphCreateCombinedHeader)
   oomph_create_combined_header(
     TARGET "${CMAKE_CURRENT_BINARY_DIR}/../${LIBNAME}.h"
     HEADERS ${HEADERS} ${SOURCES_NO_BUILD}
-    SUBDIRECTORY ${LIBNAME})
+    SUBDIRECTORY ${LIBRARY_INCLUDE_SUBDIR})
 
   # Define the installation locations and export target. Although this only
   # installs the library, it's important that the includes directory is added so
@@ -216,11 +222,12 @@ function(oomph_library_config)
           DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}")
 
   # The directory to install the library headers to
-  set(LIBRARY_INCLUDE_DIR "${OOMPH_INSTALL_INCLUDE_DIR}/${LIBNAME}")
+  set(LIBRARY_INCLUDE_DIR
+      "${OOMPH_INSTALL_INCLUDE_DIR}/${LIBRARY_INCLUDE_SUBDIR}")
 
   # Create the headers install directory. Do it now so that there's a valid
   # directory to create symlinks from (if used)
-  install(DIRECTORY DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}/${LIBNAME}")
+  install(DIRECTORY DESTINATION "${LIBRARY_INCLUDE_DIR}")
 
   # Combine everything that shouldn't be built into a single variable
   set(ALL_HEADERS ${HEADERS} ${HEADERS_NO_COMBINE} ${SOURCES_NO_BUILD})
