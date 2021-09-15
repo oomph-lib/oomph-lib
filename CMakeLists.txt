@@ -70,6 +70,8 @@ find_package(Python3 REQUIRED)
 # ------------------------------[ BUILD OPTIONS ]-------------------------------
 # cmake-format: off
 
+# FIXME: TIDY UP GROUPING OF BUILD OPTIONS
+
 # We silence a few harmless warnings in external_src/ and in src/. If you want,
 # you can choose to have them displayed during the build
 option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display all warnings" OFF)
@@ -78,28 +80,21 @@ option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display all warnings" OFF)
 # CHANGES WITH 'OOMPH_TRANSITION_TO_VERSION_3'
 option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
 option(OOMPH_ENABLE_64BIT_INTS "Use 64-bit ints for matrix indices" OFF)
-
-# Enable the Clang static code analyser/formatter. [WORK IN PROGRESS]
-# WARNING: If you enable clang-tidy, you MUST NOT(!) run the Makefile/Ninja
-# build in parallel as it will likely lead to data races and thus the output
-# will be mangled. ALSO, you should enable as many options as possible for the
-# build so that most, or all, of the code is visible to the formatter (which
-# formats the code visible during the build).
-#
-# This functionality should really be reserved for a CI server to run...
-option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy C++ static code analysis" OFF)
-option(OOMPH_ENABLE_CLANG_FORMAT "Enable Clang-based C++ code formatting" OFF)
-option(OOMPH_ENABLE_INCLUDE_WHAT_YOU_USE "Enable 'Include What You Use' sanitisation" OFF)
+option(OOMPH_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK" OFF)
+# option(OOMPH_USE_MKL_BLAS_AND_LAPACK "Use the MKL implementation of BLAS and LAPACK" OFF)
 
 # Extra debugging compile options; only used by Debug configurations
-option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ON)
-option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ON)
-option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
+option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
+option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
+
+# Enable the use of 'ccache', which is a compiler cache that can drastically
+# improve build times for C and C++ projects
+option(OOMPH_ENABLE_CCACHE "Enable 'ccache' compiler caching support" OFF)
 
 # General options
 option(BUILD_SHARED_LIBS "Build using shared libraries; static otherwise" OFF)
-option(SUPPRESS_DOC "Suppress Doxygen creation of API documentation" ON)
-option(SYMBOLIC_LINKS_FOR_HEADERS "Replace headers by symbolic links" ON)
+option(OOMPH_SUPPRESS_DOC_BUILD "Suppress Doxygen creation of API documentation" ON)
+option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Replace headers by symbolic links" ON)
 
 # Testing [PM: not sure if this is needed; should build self-tests separately]
 option(OOMPH_ENABLE_TESTING "Build tests with library build" OFF)
@@ -109,14 +104,9 @@ option(OOMPH_ENABLE_TESTING "Build tests with library build" OFF)
 option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
-# Optionally build OpenBLAS/LAPACK
-option(OOMPH_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK" ON)
-# option(OOMPH_USE_MKL_BLAS_AND_LAPACK "Use the MKL implementation of BLAS and LAPACK" OFF)
-
+# Optionally build third-party libraries. [WORK IN PROGRESS.]
 # FIXME: spdlog and Backward need to be "exported"(?!) with 'generic'. Not sure
 # what this means....
-
-# Optionally build third-party libraries. [WORK IN PROGRESS.]
 option(OOMPH_WANT_BACKWARD "Use the Backward library for stack trace pretty-printing" OFF)
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
@@ -133,33 +123,27 @@ option(SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen lib
 # Support for deprecated packages:
 option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU" OFF)
 
+# Extra, clever stuff that isn't really necessary...
+#
+# Enable the Clang static code analyser/formatter. [WORK IN PROGRESS]
+# WARNING: If you enable clang-tidy, you MUST NOT(!) run the Makefile/Ninja
+# build in parallel as it will likely lead to data races and thus the output
+# will be mangled. ALSO, you should enable as many options as possible for the
+# build so that most, or all, of the code is visible to the formatter (which
+# formats the code visible during the build).
+#
+# This functionality should really be reserved for a CI server to run...
+option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy C++ static code analysis" OFF)
+option(OOMPH_ENABLE_CLANG_FORMAT "Enable Clang-based C++ code formatting" OFF)
+option(OOMPH_ENABLE_INCLUDE_WHAT_YOU_USE "Enable 'Include What You Use' sanitisation" OFF)
+option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
+
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
 
-# Run clang-tidy during the build if the user requires
-if(OOMPH_ENABLE_CLANG_TIDY)
-  include(OomphStaticAnalysers)
-endif()
-
-# Run clang-format during the build if the user requires
-if(OOMPH_ENABLE_CLANG_FORMAT)
-  include(OomphClangFormat)
-endif()
-
-include(CTest)
-
-# Add code coverage compiler flags, if requested
-if(OOMPH_ENABLE_CODE_COVERAGE)
-  # We can only get coverage for the library sources if the demo drivers are
-  # built with the library itself, which requires OOMPH_ENABLE_TESTING to be
-  # enabled
-  if(NOT OOMPH_ENABLE_TESTING)
-    set(OOMPH_ENABLE_TESTING ON CACHE BOOL "Build tests with library build"
-        FORCE)
-  endif()
-
-  include(OomphEnableCodeCoverage)
-  oomph_enable_code_coverage()
+# Add ccache support to the build
+if(OOMPH_ENABLE_CCACHE)
+  include(OomphCcache)
 endif()
 
 # Set the matrix integer index size
@@ -189,34 +173,10 @@ if(OOMPH_USE_DEPRECATED_SUPERLU)
   add_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
 endif()
 
-# Let CMake take care of the famous -fPIC flag
-if(BUILD_SHARED_LIBS)
-  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-endif()
-
-# The demo_driver self-tests use shell scripts and symbolic links, both of which
-# require a Unix-based system
-if(NOT UNIX)
-  set(OOMPH_ENABLE_TESTING OFF)
-  set(SYMBOLIC_LINKS_FOR_HEADERS OFF)
-endif()
-
-# Set up MPI functionality (see cmake/OomphMPI.cmake)
-if(OOMPH_ENABLE_MPI)
-  include(OomphMPI)
-endif()
-
-# Set up CUDA functionality. Nothing in the library uses CUDA yet. However, the
-# plan is to support SuperLU Dist 7.0.0 in the future, which is capable of
-# harnessing CUDA functionality for (hopefully damn fast) computations.
-if(OOMPH_ENABLE_CUDA)
-  find_package(CUDA REQUIRED)
-endif()
-
+# If we want to use up-to-date OpenBLAS/LAPACK libraries
 if(OOMPH_USE_OPENBLAS)
-  # Search for OpenBLAS/LAPACK libraries. Ideally, installed via 'sudo apt-get'
-  # or 'brew install' and the user simply sets 'CMAKE_PREFIX_PATH' in their
-  # CMakeUserPresets.json.
+  # Ideally, the user would install this via 'sudo apt-get' or 'brew install'
+  # and they would simply set 'CMAKE_PREFIX_PATH' in their CMakeUserPresets.json
   list(APPEND CMAKE_PREFIX_PATH "/usr/local/Cellar/openblas/0.3.17")
   set(BLA_VENDOR OpenBLAS)
   find_package(BLAS REQUIRED)
@@ -243,6 +203,30 @@ if(OOMPH_USE_OPENBLAS)
   # PM: Disable Trilinos for now; not sure how to link it against OpenBLAS
   set(OOMPH_WANT_TRILINOS OFF CACHE BOOL
       "Disable Trilinos when OpenBLAS is used" FORCE)
+endif()
+
+# Let CMake take care of the famous -fPIC flag
+if(BUILD_SHARED_LIBS)
+  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+endif()
+
+# The demo_driver self-tests use shell scripts and symbolic links, both of which
+# require a Unix-based system
+if(NOT UNIX)
+  set(OOMPH_ENABLE_TESTING OFF)
+  set(SYMBOLIC_LINKS_FOR_HEADERS OFF)
+endif()
+
+# Set up MPI functionality (see cmake/OomphMPI.cmake)
+if(OOMPH_ENABLE_MPI)
+  include(OomphMPI)
+endif()
+
+# Set up CUDA functionality. Nothing in the library uses CUDA yet. However, the
+# plan is to support SuperLU Dist 7.0.0 in the future, which is capable of
+# harnessing CUDA functionality for (hopefully damn fast) computations.
+if(OOMPH_ENABLE_CUDA)
+  find_package(CUDA REQUIRED)
 endif()
 
 # TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD TODO: ADD OOMPH_
@@ -282,6 +266,30 @@ if(DEFINED WITH_MPFR)
 endif()
 if(DEFINED WITH_CGAL)
   set(OOMPH_ALREADY_HAVE_CGAL TRUE)
+endif()
+
+# Run clang-format during the build if the user requires
+if(OOMPH_ENABLE_CLANG_FORMAT)
+  include(OomphClangFormat)
+endif()
+
+# Run clang-tidy during the build if the user requires
+if(OOMPH_ENABLE_CLANG_TIDY)
+  include(OomphStaticAnalysers)
+endif()
+
+# Add code coverage compiler flags, if requested
+if(OOMPH_ENABLE_CODE_COVERAGE)
+  # We can only get coverage for the library sources if the demo drivers are
+  # built with the library itself, which requires OOMPH_ENABLE_TESTING to be
+  # enabled
+  if(NOT OOMPH_ENABLE_TESTING)
+    # set(OOMPH_ENABLE_TESTING ON CACHE BOOL "Build tests with library build"
+    # FORCE)
+  endif()
+
+  include(OomphEnableCodeCoverage)
+  oomph_enable_code_coverage()
 endif()
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
@@ -329,11 +337,11 @@ include(OomphExportPackage)
 # Enable testing for the current directory and all child directories but only
 # when this is the root project, i.e. it isn't being built as part of some
 # larger project hierarchy.
-if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) AND OOMPH_ENABLE_TESTING)
+if(OOMPH_IS_MAIN_PROJECT AND OOMPH_ENABLE_TESTING)
+  include(CTest)
   add_subdirectory(demo_drivers)
   # FIXME: Need to integrate self_test into the self-test framework
   # add_subdirectory(self_test)
-  enable_testing()
   add_subdirectory(tests)
 endif()
 
