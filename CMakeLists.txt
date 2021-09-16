@@ -175,9 +175,12 @@ endif()
 
 # If we want to use up-to-date OpenBLAS/LAPACK libraries
 if(OOMPH_USE_OPENBLAS)
-  # Ideally, the user would install this via 'sudo apt-get' or 'brew install'
-  # and they would simply set 'CMAKE_PREFIX_PATH' in their CMakeUserPresets.json
+  # Need path to OpenBLAS on macOS; find out how to get rid of this. Ideally
+  # build OpenBLAS with oomph-lib
   list(APPEND CMAKE_PREFIX_PATH "/usr/local/Cellar/openblas/0.3.17")
+
+  # Ideally, the user will install OpenBLAS via 'sudo apt-get' or 'brew install'
+  # and they will simply set 'CMAKE_PREFIX_PATH' in their CMakeUserPresets.json
   set(BLA_VENDOR OpenBLAS)
   find_package(BLAS REQUIRED)
   find_package(LAPACK REQUIRED)
