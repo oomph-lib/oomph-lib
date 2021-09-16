@@ -95,6 +95,7 @@ function(oomph_library_config)
   set(SOURCES ${${PREFIX}_SOURCES})
   set(LIBNAME ${${PREFIX}_LIBNAME})
   set(LIBTYPE ${${PREFIX}_LIBTYPE})
+  set(INCLUDE_SUBDIRECTORY ${${PREFIX}_INCLUDE_SUBDIRECTORY})
   set(LINKLIBS ${${PREFIX}_LINKLIBS})
   set(HEADERS_NO_COMBINE ${${PREFIX}_HEADERS_NO_COMBINE})
   set(HEADERS_NO_INSTALL ${${PREFIX}_HEADERS_NO_INSTALL})
@@ -188,12 +189,45 @@ function(oomph_library_config)
   # headers from <INSTALL-DIR>/include/${LIBNAME}/. This allows us to group
   # associated headers together.
   # ----------------------------------------------------------------------------
+  # ~~~
+  # TODO: Add a note somewhere that the library directory should either match
+  # the library name or be set
+  # TODO: The <SUBDIR> value should NOT be the path from src/ as this would
+  # break for the build.
+  # FIXME: We should, for good practice, include the full path from the root
+  # source directory...
+  #
+  # When headers get installed to "<INSTALL-PATH>/oomphlib/include/<SUBDIR>/",
+  # we provide a combined header in the ".../include/" directory that can be
+  # included by the user to include all files shipped with a library. The
+  # include paths in the combined header have the form
+  #                     #include <<SUBDIR>/<FILE 1>>
+  #                                 ...
+  #                     #include <<SUBDIR>/<FILE N>>
+  # The "<SUBDIR>" is simply the folder that encloses it.
+  # Therefore we need to the correct "<SUBDIR>" value. In most cases, this is
+  # obvious -- it is just the name of the library itself, e.g. the <SUBDIR> of
+  # the "generic" library src/generic/ contains the
+  # definition of
+  # ~~~
+  #
+  # We want to provide a combined header above the level of a library directory
+  # which includes the path to files in the livrary The include paths we provide
+  # for #headers In general, the name of the folder that encloses the definition
+  # of a library is the same as the name of the library, e.g. src/generic/
+  # contains the definition of the "generic" library. However, in some cases the
+  # name of the directory may be different to the name of the library, e.g. the
+  # library "space_time_unsteady_heat_equal_order_galerkin" is contained in the
+  # folder src/ galerkin_equal_order
+  #
   # TODO: Update this to automatically compute the enclosing subdirectory!
   set(LIBRARY_INCLUDE_SUBDIR ${LIBNAME})
-  if(LIBRARY_INCLUDE_SUBDIR)
+  if(INCLUDE_SUBDIRECTORY)
     set(LIBRARY_INCLUDE_SUBDIR ${INCLUDE_SUBDIRECTORY})
   endif()
 
+  # Create the combined header and install it to the build directory, but one
+  # folder above
   include(OomphCreateCombinedHeader)
   oomph_create_combined_header(
     TARGET "${CMAKE_CURRENT_BINARY_DIR}/../${LIBNAME}.h"
