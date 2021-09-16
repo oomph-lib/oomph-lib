@@ -21,12 +21,12 @@ jobs:
       - name: Install dependencies
         run: brew install cmake open-mpi ninja openblas gcovr fd && brew reinstall gfortran
 
-      - name: Configure, build & install
+      - name: Configure & build (with coverage)
         run: cmake --preset CI-build-with-coverage -B build && cd build && ninja
         env:
           OOMPH_USE_OPENBLAS: ${{ matrix.OOMPH_USE_OPENBLAS }}
 
-      - name: Run self-tests
+      - name: Run self-tests (with coverage)
         id: self_tests
         run: |
           cd demo_drivers && cp ../CMakePresets.json ./
@@ -37,9 +37,22 @@ jobs:
         env:
           OOMPH_BUILD_PATH: '${{ github.workspace }}/build'
 
+      # For now, assume we don't care about coverage for the external sources
+      # or the demo drivers (they're only used to validate the library sources).
+      # To avoid include their coverage into the full
+      - name: Delete unnecessary coverage files
+        run: |
+          printf "\n%s\n\n" "--> Deleting coverage files from external_src and external_distributions..."
+          fd -u '.*\.(gcno|gcda|gcov)' build/external_{src,distributions} -x echo " *" {}
+          fd -u '.*\.(gcno|gcda|gcov)' build/external_{src,distributions} -x rm -f {}
+          printf "\n%s\n\n" "---> Deleting coverage files from demo_drivers/..."
+          fd -u '.*\.(gcno|gcda|gcov)' demo_drivers/build/ -x echo " *" {}
+          fd -u '.*\.(gcno|gcda|gcov)' demo_drivers/build/ -x rm -f {}
+
+      # TODO: Delete the HTML reports in favour of XML reports which are directly uploaded
+      # to codecov.io! (And update the "name" element below accordingly.)
       - name: Generate code coverage report (HTML & XML)
         run: |
-          fd .gcno build/external_{src,distributions} -x rm -f {}
           mkdir -p coverage_reports/{html,xml}
           gcovr -r . --html --html-details -o coverage_reports/html/${{ env.COVERAGE_REPORT_NAME }}
           gcovr -r . --xml-pretty -o coverage_reports/xml/${{ env.COVERAGE_REPORT_NAME }}
