@@ -4,7 +4,7 @@ on: push
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
-  COVERAGE_REPORT_NAME: 'coverage-report.html'
+  COVERAGE_REPORT_NAME: 'coverage-report.xml'
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: brew install cmake open-mpi ninja openblas gcovr fd && brew reinstall gfortran
+        run: brew install cmake open-mpi ninja openblas gcovr fd gnupg curl coreutils && brew reinstall gfortran
 
       - name: Configure & build (with coverage)
         run: cmake --preset CI-build-with-coverage -B build && cd build && ninja
@@ -42,26 +42,25 @@ jobs:
       # To avoid include their coverage into the full
       - name: Delete unnecessary coverage files
         run: |
-          printf "\n%s\n\n" "--> Deleting coverage files from external_src and external_distributions..."
+          printf "\n%s\n\n" "--> Deleting coverage files from external_src/ and external_distributions/..."
           fd -u '.*\.(gcno|gcda|gcov)' build/external_{src,distributions} -x echo " *" {}
           fd -u '.*\.(gcno|gcda|gcov)' build/external_{src,distributions} -x rm -f {}
           printf "\n%s\n\n" "---> Deleting coverage files from demo_drivers/..."
           fd -u '.*\.(gcno|gcda|gcov)' demo_drivers/build/ -x echo " *" {}
           fd -u '.*\.(gcno|gcda|gcov)' demo_drivers/build/ -x rm -f {}
 
-      # TODO: Delete the HTML reports in favour of XML reports which are directly uploaded
-      # to codecov.io! (And update the "name" element below accordingly.)
-      - name: Generate code coverage report (HTML & XML)
-        run: |
-          mkdir -p coverage_reports/{html,xml}
-          gcovr -r . --html --html-details -o coverage_reports/html/${{ env.COVERAGE_REPORT_NAME }}
-          gcovr -r . --xml-pretty -o coverage_reports/xml/${{ env.COVERAGE_REPORT_NAME }}
+      - name: Generate XML code coverage report
+        run: gcovr -r . --xml-pretty -o coverage-report.xml
 
-      - name: Upload code coverage reports
-        uses: actions/upload-artifact@v2
+      - name: Upload coverage report to codecov.io
+        uses: codecov/codecov-action@v2
         with:
-          name: coverage-report-${{ runner.os }}.html
-          path: ./coverage_reports/
+          name: codecov-umbrella
+          files: ./coverage-report.xml
+          flags: integration-tests
+          fail_ci_if_error: true
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Propagate CTest status
         if: steps.self_tests.outcome == 'failure'
