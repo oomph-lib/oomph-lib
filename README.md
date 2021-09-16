@@ -11,6 +11,9 @@
   <a href="../../actions/workflows/build-and-publish-docs.yaml">
     <img alt="Documentation" src="../../actions/workflows/build-and-publish-docs.yaml/badge.svg?branch=main">
   </a>
+  <a href="https://codecov.io/gh/puneetmatharu/oomph-lib">
+    <img alt="Code coverage" src="https://codecov.io/gh/puneetmatharu/oomph-lib/branch/feature-convert-to-cmake-build-system/graph/badge.svg?token=ZYGR7Q26I1"/>
+  </a>
 </div>
 
 <br>
