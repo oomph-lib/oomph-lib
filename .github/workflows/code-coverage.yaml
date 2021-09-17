@@ -62,6 +62,11 @@ jobs:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Upload coverage report to codacy.com
+        run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l CPP -r ./coverage-report.xml
+        env:
+          CODACY_PROJECT_TOKEN: '${{ secrets.CODACY_PROJECT_TOKEN }}'
+
       - name: Propagate CTest status
         if: steps.self_tests.outcome == 'failure'
         run: exit 8
