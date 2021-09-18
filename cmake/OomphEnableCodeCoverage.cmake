@@ -2,7 +2,7 @@
 # =============================================================================
 # DESCRIPTION:
 # ------------
-# Adds the compiler needed for collecting code coverage results.
+# Adds the compiler flags needed for collecting code coverage results.
 #
 # USAGE:
 # ------
