@@ -218,10 +218,11 @@ path to the target. This allows us to provide a unified self-test build (from
 the base ``demo_drivers`` folder) that avoid clashes between target names. We do
 rely on the user never creating two targets with the same name in the same
 folder but this should always be the case. To use target-based commands on a
-particular target, create a hash of the path, append it to the original target
-name and use that name for your commands:
+particular target, create a (SHA1) hash of the path, shorten it to 7 characters,
+then append it to the original target name and use that name for your commands:
 ```cmake
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")           # Create hash
+  string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)                 # Shorten to 7 characters
   set(HASHED_TARGET_NAME <YOUR-EXECUTABLE-NAME>_${PATH_HASH})  # Append hash
 ```
 **In progress**:
