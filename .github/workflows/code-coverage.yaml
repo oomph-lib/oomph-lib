@@ -33,7 +33,7 @@ jobs:
           cmake --preset CI-demo-drivers-with-coverage
           cd build && cp ../CMakePresets.json ./
           ctest --preset CI-demo-drivers-with-coverage -j $(sysctl -n hw.logicalcpu)
-        continue-on-error: true
+        continue-on-error: false
         env:
           OOMPH_BUILD_PATH: '${{ github.workspace }}/build'
 
@@ -66,7 +66,3 @@ jobs:
         run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l CPP -r ./coverage-report.xml
         env:
           CODACY_PROJECT_TOKEN: '${{ secrets.CODACY_PROJECT_TOKEN }}'
-
-      - name: Propagate CTest status
-        if: steps.self_tests.outcome == 'failure'
-        run: exit 8
