@@ -20,7 +20,7 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.unsteady_vmtk_fsi
-  TARGET_DEPENDENCIES unstructured_adaptive_2d_fsi
+  TARGET_DEPENDENCIES unsteady_vmtk_fsi
   EXTRA_REQUIRES
     fluid.1.ele
     fluid.1.face
@@ -31,7 +31,7 @@ oomph_add_test(
     solid.1.node
     solid_quadratic_nodes.dat
     boundary_enumeration.dat
-  LABELS "interaction;unsteady_vmtk_fsi;adapt")
+  LABELS "interaction;unsteady_vmtk_fsi")
 
 message(VERBOSE "Leaving unsteady_vmtk_fsi subdirectory")
 # ------------------------------------------------------------------------------
