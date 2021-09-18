@@ -10,16 +10,23 @@
       "name": "base",
       "hidden": true,
       "cacheVariables": {
+        "BUILD_SHARED_LIBS": "OFF",
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "OOMPH_TRANSITION_TO_VERSION_3": "OFF",
         "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
-        "OOMPH_ENABLE_CLANG_TIDY": "OFF",
+        "OOMPH_ENABLE_CCACHE": "OFF",
         "OOMPH_ENABLE_CLANG_FORMAT": "OFF",
+        "OOMPH_ENABLE_CLANG_TIDY": "OFF",
         "OOMPH_ENABLE_CODE_COVERAGE": "OFF",
+        "OOMPH_ENABLE_CUDA": "OFF",
+        "OOMPH_ENABLE_MPI": "OFF",
         "OOMPH_ENABLE_PARANOID": "OFF",
         "OOMPH_ENABLE_RANGE_CHECKING": "OFF",
-        "OOMPH_ENABLE_CCACHE": "OFF",
+        "OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS": "ON",
+        "OOMPH_ENABLE_TESTING": "OFF",
+        "OOMPH_SUPPRESS_DOC_BUILD": "ON",
+        "OOMPH_TRANSITION_TO_VERSION_3": "OFF",
+        "OOMPH_USE_DEPRECATED_SUPERLU": "OFF",
         "OOMPH_USE_OPENBLAS": "OFF",
         "OOMPH_WANT_BACKWARD": "OFF",
         "OOMPH_WANT_CGAL": "OFF",
@@ -27,14 +34,7 @@
         "OOMPH_WANT_MUMPS": "OFF",
         "OOMPH_WANT_NLOHMANN_JSON": "OFF",
         "OOMPH_WANT_SPDLOG": "OFF",
-        "OOMPH_WANT_TRILINOS": "OFF",
-        "OOMPH_USE_DEPRECATED_SUPERLU": "OFF",
-        "OOMPH_ENABLE_TESTING": "OFF",
-        "OOMPH_ENABLE_MPI": "OFF",
-        "OOMPH_ENABLE_CUDA": "OFF",
-        "BUILD_SHARED_LIBS": "OFF",
-        "OOMPH_SUPPRESS_DOC_BUILD": "ON",
-        "OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS": "ON"
+        "OOMPH_WANT_TRILINOS": "OFF"
       }
     },
     {
@@ -45,9 +45,9 @@
       "cacheVariables": {
         "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}",
         "OOMPH_ENABLE_MPI": "$penv{OOMPH_ENABLE_MPI}",
+        "OOMPH_USE_OPENBLAS": "$penv{OOMPH_USE_OPENBLAS}",
         "OOMPH_WANT_MUMPS": "$penv{OOMPH_WANT_MUMPS}",
-        "OOMPH_WANT_TRILINOS": "$penv{OOMPH_WANT_TRILINOS}",
-        "OOMPH_USE_OPENBLAS": "$penv{OOMPH_USE_OPENBLAS}"
+        "OOMPH_WANT_TRILINOS": "$penv{OOMPH_WANT_TRILINOS}"
       }
     },
     {
