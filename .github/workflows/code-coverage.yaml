@@ -39,7 +39,8 @@ jobs:
 
       # For now, assume we don't care about coverage for the external sources
       # or the demo drivers (they're only used to validate the library sources).
-      # To avoid include their coverage into the full
+      # To avoid including their coverage information, delete their respective
+      # coverage artifacts (i.e. .gcno, .gcda, and .gcov files)
       - name: Delete unnecessary coverage files
         run: |
           printf "\n%s\n\n" "--> Deleting coverage files from external_src/ and external_distributions/..."
