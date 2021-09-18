@@ -49,6 +49,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 
+# Build in debugging mode by default
 if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
 endif()
@@ -123,20 +124,25 @@ option(SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen lib
 # Support for deprecated packages:
 option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU" OFF)
 
+# Enable the use of code coverage flags so that coverage data can be collected
+option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
+
 # Extra, clever stuff that isn't really necessary...
 #
-# Enable the Clang static code analyser/formatter. [WORK IN PROGRESS]
-# WARNING: If you enable clang-tidy, you MUST NOT(!) run the Makefile/Ninja
-# build in parallel as it will likely lead to data races and thus the output
-# will be mangled. ALSO, you should enable as many options as possible for the
-# build so that most, or all, of the code is visible to the formatter (which
-# formats the code visible during the build).
+# Integrate the use of static code analysers/formatting with the build of the
+# library itself. [WORK IN PROGRESS]
 #
-# This functionality should really be reserved for a CI server to run...
+# WARNING: If you enable clang-tidy, you MUST NOT(!) run the Makefile/Ninja
+# build in parallel as it will lead to data races and the source files will
+# become mangled as a result. Also, if you want to enable clang-tidy, you should
+# enable as many options as possible for the build so that most, if not all, of
+# the library code is visible to the build and able to get formatted.
+#
+# This functionality is intended for use by a CI server to run.
+# TODO: Add to Codacy functionality.
 option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy C++ static code analysis" OFF)
 option(OOMPH_ENABLE_CLANG_FORMAT "Enable Clang-based C++ code formatting" OFF)
 option(OOMPH_ENABLE_INCLUDE_WHAT_YOU_USE "Enable 'Include What You Use' sanitisation" OFF)
-option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
 
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
@@ -330,22 +336,23 @@ include(OomphExportPackage)
 
 # ---------------------------------[ TESTING ]----------------------------------
 
-# The last part to the build is compiling tests. The demo_drivers currently work
-# when run *outside* the library build. I haven't tried integrating their build
-# into the build of the library itself yet. I imagine it should be okay for the
-# most part. There might be an issue with calling find_package(oomphlib) from
-# the demo_drivers CMakeLists.txt files though. Also, note that private/ and
-# user_src/ and user_drivers/ are not built with the library.
+# A flag to indicate that we're building the demo drivers with the library. If
+# the demo drivers are built with the library then we don't need to call
+# "find_package(oomphlib REQUIRED)" in each demo_driver subdirectory to locate
+# the generated oomph-lib libraries as they'll be visible in the scope
+set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
 
-# Enable testing for the current directory and all child directories but only
+# Enable testing for the current directory and all child directories but ONLY
 # when this is the root project, i.e. it isn't being built as part of some
-# larger project hierarchy.
+# larger project hierarchy
+set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
 if(OOMPH_IS_MAIN_PROJECT AND OOMPH_ENABLE_TESTING)
+  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY ON)
   include(CTest)
   add_subdirectory(demo_drivers)
-  # FIXME: Need to integrate self_test into the self-test framework
-  # add_subdirectory(self_test)
   add_subdirectory(tests)
+  # FIXME: Need to integrate self_test files into the self-test framework
+  # add_subdirectory(self_test)
 endif()
 
 # -----------------------[ CONFIGURE oomph-lib-config.h ]-----------------------
