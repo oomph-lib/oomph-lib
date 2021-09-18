@@ -1,22 +1,18 @@
-# cmake-format: off
-# ==============================================================================
-# Example driver codes for testing/illustrating oomph-lib functionality. Go wild.
-# ==============================================================================
-# cmake-format: on
-cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
+# ------------------------------------------------------------------------------
+list(APPEND CMAKE_MESSAGE_INDENT " ")
+message(VERBOSE "Entered demo_drivers subdirectory")
 
+cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(demo_drivers C CXX Fortran)
-find_package(oomphlib REQUIRED)
+if(NOT BUILDING_DEMO_DRIVERS_WITH_LIBRARY)
+  find_package(oomphlib REQUIRED)
+endif()
 include(CTest)
 
 # Add code coverage compiler flags, if requested
-if(OOMPH_ENABLE_CODE_COVERAGE)
+if(OOMPH_ENABLE_CODE_COVERAGE AND NOT OOMPH_BUILDING_DEMO_DRIVERS_WITH_LIBRARY)
   oomph_enable_code_coverage()
 endif()
-
-# Helpful info. for the user
-list(APPEND CMAKE_MESSAGE_INDENT " ")
-message(VERBOSE "Entered demo_drivers subdirectory")
 
 set(SUBDIRS
     FAQ
@@ -80,3 +76,4 @@ foreach(SUBDIR ${SUBDIRS})
 endforeach()
 
 message(VERBOSE "Leaving demo_drivers subdirectory")
+# ------------------------------------------------------------------------------

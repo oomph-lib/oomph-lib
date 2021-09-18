@@ -1,8 +1,12 @@
 # ------------------------------------------------------------------------------
+list(APPEND CMAKE_MESSAGE_INDENT " ")
+message(VERBOSE "Entered extrude_quad_mesh_to_cube_mesh subdirectory")
 
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(extrude_quad_mesh_to_cube_mesh C CXX Fortran)
-find_package(oomphlib REQUIRED)
+if(NOT BUILDING_DEMO_DRIVERS_WITH_LIBRARY)
+  find_package(oomphlib REQUIRED)
+endif()
 include(CTest)
 
 oomph_add_executable(
@@ -26,4 +30,5 @@ oomph_add_test(
   EXTRA_REQUIRES triangle_meshes
   LABELS "extrude_quad_mesh_to_cube_mesh")
 
+message(VERBOSE "Leaving extrude_quad_mesh_to_cube_mesh subdirectory")
 # ------------------------------------------------------------------------------

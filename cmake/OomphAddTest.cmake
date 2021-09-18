@@ -78,9 +78,11 @@ function(oomph_add_test)
     message(STATUS "Bash is unavailable so I can't construct any tests. Sorry!")
   endif()
 
-  # Hash the path to create a unique ID for our targets. Required to avoid
-  # clashes with targets in other directories
+  # Hash the path to create a unique ID for our targets but shorten it to the
+  # first 7 characters for brevity. A unique ID is required to avoid clashes
+  # with targets in other directories
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")
+  string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
 
   # Create the target name
   set(OOMPH_TEST_NAME ${TEST_NAME}_${PATH_HASH})

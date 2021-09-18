@@ -339,18 +339,23 @@ include(OomphExportPackage)
 # A flag to indicate that we're building the demo drivers with the library. If
 # the demo drivers are built with the library then we don't need to call
 # "find_package(oomphlib REQUIRED)" in each demo_driver subdirectory to locate
-# the generated oomph-lib libraries as they'll be visible in the scope
-set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
+# the generated oomph-lib libraries, as they'll already be visible to that scope
+set(BUILDING_DEMO_DRIVERS_WITH_LIBRARY OFF)
 
 # Enable testing for the current directory and all child directories but ONLY
 # when this is the root project, i.e. it isn't being built as part of some
 # larger project hierarchy
-set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
 if(OOMPH_IS_MAIN_PROJECT AND OOMPH_ENABLE_TESTING)
-  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY ON)
+  if(NOT OOMPH_DONT_SILENCE_USELESS_WARNINGS)
+    include(OomphSilenceWarnings)
+  endif()
+  set(BUILDING_DEMO_DRIVERS_WITH_LIBRARY ON)
   include(CTest)
+  include(OomphAddTest)
+  include(OomphAddExecutable)
   add_subdirectory(demo_drivers)
   add_subdirectory(tests)
+
   # FIXME: Need to integrate self_test files into the self-test framework
   # add_subdirectory(self_test)
 endif()

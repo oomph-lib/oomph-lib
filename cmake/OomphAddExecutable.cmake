@@ -103,6 +103,7 @@ function(oomph_add_executable)
   # perfectly valid assumption. If you did do that and you're reading this now,
   # what on earth are you doing?
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")
+  string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
 
   # Add executable to the build
   add_executable(${NAME}_${PATH_HASH} ${SOURCES})
