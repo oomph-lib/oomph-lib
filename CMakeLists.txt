@@ -100,6 +100,10 @@ option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Replace headers by symbolic link
 # Testing [PM: not sure if this is needed; should build self-tests separately]
 option(OOMPH_ENABLE_TESTING "Build tests with library build" OFF)
 
+# Benchmarking
+option(OOMPH_ENABLE_GOOGLE_BENCHMARK "Provide Google benchmark support" OFF)
+# FIXME: need some way of already knowing that already have google benchmark
+
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
 option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
@@ -107,7 +111,7 @@ option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
 # Optionally build third-party libraries. [WORK IN PROGRESS.]
 # FIXME: spdlog and Backward need to be "exported"(?!) with 'generic'. Not sure
-# what this means....
+# what this means yet...
 option(OOMPH_WANT_BACKWARD "Use the Backward library for stack trace pretty-printing" OFF)
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
@@ -187,6 +191,9 @@ if(OOMPH_USE_OPENBLAS)
 
   # Ideally, the user will install OpenBLAS via 'sudo apt-get' or 'brew install'
   # and they will simply set 'CMAKE_PREFIX_PATH' in their CMakeUserPresets.json
+  # NOTE: You can override the BLAS/LAPACK vendor by setting it's value as a
+  # cache variable from the command-line, i.e. "cmake -DBLA_VENDOR ...". It will
+  # then override the value used here.
   set(BLA_VENDOR OpenBLAS)
   find_package(BLAS REQUIRED)
   find_package(LAPACK REQUIRED)
@@ -240,40 +247,40 @@ endif()
 
 # TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD TODO: ADD OOMPH_
 # PREFIXES TO THESE VARIABLES!
-if(DEFINED WITH_BLACS)
+if(DEFINED OOMPH_WITH_BLACS)
   set(OOMPH_ALREADY_HAVE_BLACS TRUE)
 endif()
-if(DEFINED WITH_SCALAPACK)
+if(DEFINED OOMPH_WITH_SCALAPACK)
   set(OOMPH_ALREADY_HAVE_SCALAPACK TRUE)
 endif()
-if(DEFINED WITH_PORD)
+if(DEFINED OOMPH_WITH_PORD)
   set(OOMPH_ALREADY_HAVE_PORD TRUE)
 endif()
-if(DEFINED WITH_MUMPS)
+if(DEFINED OOMPH_WITH_MUMPS)
   set(OOMPH_ALREADY_HAVE_MUMPS TRUE)
 endif()
-if(DEFINED WITH_BLAS)
+if(DEFINED OOMPH_WITH_BLAS)
   set(OOMPH_ALREADY_HAVE_BLAS TRUE)
 endif()
-if(DEFINED WITH_LAPACK)
+if(DEFINED OOMPH_WITH_LAPACK)
   set(OOMPH_ALREADY_HAVE_LAPACK TRUE)
 endif()
-if(DEFINED WITH_HYPRE)
+if(DEFINED OOMPH_WITH_HYPRE)
   set(OOMPH_ALREADY_HAVE_HYPRE TRUE)
 endif()
-if(DEFINED WITH_TRILINOS)
+if(DEFINED OOMPH_WITH_TRILINOS)
   set(OOMPH_ALREADY_HAVE_TRILINOS TRUE)
 endif()
-if(DEFINED WITH_BOOST)
+if(DEFINED OOMPH_WITH_BOOST)
   set(OOMPH_ALREADY_HAVE_BOOST TRUE)
 endif()
-if(DEFINED WITH_GMP)
+if(DEFINED OOMPH_WITH_GMP)
   set(OOMPH_ALREADY_HAVE_GMP TRUE)
 endif()
-if(DEFINED WITH_MPFR)
+if(DEFINED OOMPH_WITH_MPFR)
   set(OOMPH_ALREADY_HAVE_MPFR TRUE)
 endif()
-if(DEFINED WITH_CGAL)
+if(DEFINED OOMPH_WITH_CGAL)
   set(OOMPH_ALREADY_HAVE_CGAL TRUE)
 endif()
 
@@ -299,6 +306,11 @@ if(OOMPH_ENABLE_CODE_COVERAGE)
 
   include(OomphEnableCodeCoverage)
   oomph_enable_code_coverage()
+endif()
+
+# Has the user specified the path a directory containing the benchmark library?
+if(OOMPH_WITH_GOOGLE_BENCHMARK AND IS_DIRECTORY OOMPH_WITH_GOOGLE_BENCHMARK)
+  set(OOMPH_ALREADY_HAVE_GOOGLE_BENCHMARK TRUE)
 endif()
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
@@ -334,6 +346,14 @@ message(VERBOSE "<====== Finished oomph-lib library build ======>")
 # Now export the package so it can be found using find_package(...)
 include(OomphExportPackage)
 
+# -------------------------------[ BENCHMARKING ]-------------------------------
+
+set(BUILDING_BENCHMARKS_WITH_LIBRARY OFF)
+if(OOMPH_ENABLE_GOOGLE_BENCHMARK)
+  set(BUILDING_BENCHMARKS_WITH_LIBRARY ON)
+  add_subdirectory(benchmark)
+endif()
+
 # ---------------------------------[ TESTING ]----------------------------------
 
 # A flag to indicate that we're building the demo drivers with the library. If
@@ -346,10 +366,10 @@ set(BUILDING_DEMO_DRIVERS_WITH_LIBRARY OFF)
 # when this is the root project, i.e. it isn't being built as part of some
 # larger project hierarchy
 if(OOMPH_IS_MAIN_PROJECT AND OOMPH_ENABLE_TESTING)
+  set(BUILDING_DEMO_DRIVERS_WITH_LIBRARY ON)
   if(NOT OOMPH_DONT_SILENCE_USELESS_WARNINGS)
     include(OomphSilenceWarnings)
   endif()
-  set(BUILDING_DEMO_DRIVERS_WITH_LIBRARY ON)
   include(CTest)
   include(OomphAddTest)
   include(OomphAddExecutable)
