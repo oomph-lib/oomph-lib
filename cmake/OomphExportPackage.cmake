@@ -56,11 +56,18 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
 
 # ------------------------------------------------------------------------------
 
+# Install anything that needs to be generated using configure_file(...), i.e.
+# any .cmake.in files
+
+# Install config files
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/oomphlibUninstall.cmake"
+        DESTINATION ${OOMPH_INSTALL_CONFIG_DIR})
+
 # Handle everything else that should be exported, e.g. useful CMake modules:
 
 # The list of modules to export
 set(CMAKE_MODULES_TO_INSTALL OomphAddExecutable.cmake OomphAddTest.cmake
-    OomphEnableCodeCoverage.cmake)
+    OomphEnableCodeCoverage.cmake OomphGetGoogleBenchmark.cmake)
 
 # Place each module in the same build/install directory that we place the
 # oomphlibConfig.cmake file
