@@ -161,7 +161,10 @@ include("${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
 # Define a 'uninstall' target (i.e. to run "ninja uninstall") to uninstall files
-add_custom_target(
-  uninstall
-  COMMAND ${CMAKE_COMMAND} -P
-          ${CMAKE_CURRENT_LIST_DIR}/${OOMPH_PROJECT_NAME}Uninstall.cmake)
+# if the user doesn't already have one
+if(NOT TARGET uninstall)
+  add_custom_target(
+    uninstall
+    COMMAND ${CMAKE_COMMAND} -P
+            ${CMAKE_CURRENT_LIST_DIR}/${OOMPH_PROJECT_NAME}Uninstall.cmake)
+endif()
