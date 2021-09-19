@@ -8,20 +8,18 @@
 - [ ] Empty.
 
 ## Not urgent but important
+- [ ] Add notes on how to use `CMakePresets.json` and how they can define their own `CMakeUserPresets.json` file.
 - [ ] Add function `add_oomphlib(<your-target>)` that implements `target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})` if the user doesn't use the oomph-lib CMake commands to add drivers, see e.g. `cotire()`.
-- [ ] Add code coverage.
 - [ ] Add Docker support; see https://github.com/FEniCS/dolfinx
-- [ ] Test the build of the demo_drivers with the main build (i.e. add_subdirectory(demo_drivers)).
 - [ ] Add sanitiser support (e.g. address/memory, etc.).
 - [ ] Sort out external distribution build
 - [ ] Add check_...() calls to make sure the C/C++/Fortran compiler work
 - [ ] Add (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) in conditionals where appropriate. See: https://cliutils.gitlab.io/modern-cmake/chapters/testing.html
-- [ ] Sort out building of oomph-lib with shared libraries. Currently breaks when it gets to oomph_superlu
 - [ ] Sort out *sequential* build of MUMPS
 - [ ] Sort out a subproject build of private/
 - [ ] Find and doc. how users can build a Debug and Release version and easily switch between the two.
-- [ ] Remove OomphPrintCompilerDefinitions.cmake.
 - [ ] Download CMake oomph-lib in a folder that has a space in the name.
+- [ ] Sort out building of oomph-lib with shared libraries. Currently breaks when it gets to oomph_superlu
 
 ## Not urgent and not important
 - [ ] Sort out external distribution build with up-to-date sources.
@@ -30,6 +28,10 @@
 - [ ] Address MUMPS 64-bit int (i.e. long long) compatibility issue
 
 ## Finished
+- [x] Remove OomphPrintCompilerDefinitions.cmake. [EDIT: Changed mind -- it's helpful, so leave it!]
+- [x] Add support for the Google benchmark library.
+- [x] Test and fix the build of the demo_drivers with the main build (i.e. add_subdirectory(demo_drivers)).
+- [x] Add code coverage.
 - [x] Remove warnings for external sources on a target basis; see e.g. OomphWarnings.cmake.
 - [x] Grab latest version of oomph-lib and add in new code.
 - [x] Add Ninja and MPI support to Workflows.
