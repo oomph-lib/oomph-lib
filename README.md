@@ -82,6 +82,7 @@
   - [Usage](#usage)
     - [Building and installing](#building-and-installing)
     - [Useful CMake flags](#useful-cmake-flags)
+    - [`CMakePresets.json`/`CMakeUserPresets.json` [WIP]](#cmakepresetsjsoncmakeuserpresetsjson-wip)
     - [Examples/testing](#examplestesting)
     - [Uninstall](#uninstall)
     - [Development](#development)
@@ -125,6 +126,7 @@ Finish documenting the following:
 - [ ] Adding a new library.
 - [ ] Adding a new demo-driver.
 - [ ] Packaging with CPack.
+- [ ] Adding a benchmark.
 
 ## Recommended
 
@@ -156,6 +158,24 @@ If you'd prefer to use Makefile Generators for your build system instead, run
 >>> cmake -B build
 >>> cd build && make && make install
 ```
+
+#### Customising the installation location
+
+By default, `oomph-lib` will be installed to a `/usr/local/` on UNIX systems. If you want to install the library to a different location, specify the value of `CMAKE_INSTALL_PREFIX` when you run the initial `cmake` command. For example
+```bash
+cmake -DCMAKE_INSTALL_PREFIX=~/local
+```
+
+_**Note:** We recommend against setting a non-standard installation location. The reason for this is when you try to build any subproject that calls `find_package(oomphlib ...)`, CMake will check the default system paths for the `oomph-lib` installation. Because the library is likely to be installed to a non-standard location, you will either need to pass the location of the installation to `cmake` using the `CMAKE_PREFIX_PATH` variable (every time you try to build a subproject!) or you will need to add the location of the installation to your environment `PATH` variable:_
+```bash
+# Option 1: Specify the installation location
+cmake -G Ninja -DCMAKE_PREFIX_PATH=~/local -B build
+
+# Option 2: Update the PATH environment variable
+export PATH="$PATH:~/local"
+```
+
+
 ### Useful CMake flags
 
 To customise your build, provide arguments of the form ``-D<YOUR-FLAG-HERE>``
@@ -173,6 +193,12 @@ To enable the use of MPI (if available on your system) use
 ```bash
   -DOOMPH_ENABLE_MPI
 ```
+
+
+### `CMakePresets.json`/`CMakeUserPresets.json` [WIP]
+
+TODO: Add notes on how to use a `CMakePresets.json` and how to write a `CMakeUserPresets.json` file.
+
 ### Examples/testing
 
 ``oomph-lib`` comes with an extensive list of well-documented examples situated
