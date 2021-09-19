@@ -20,17 +20,17 @@ function(delete_folder_if_empty DIR)
 endfunction(delete_folder_if_empty)
 
 # Find 'install_manifest.txt' which contains a list of the installed files
-if(NOT EXISTS "@CMAKE_CURRENT_BINARY_DIR@/install_manifest.txt")
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/install_manifest.txt")
   message(
     FATAL_ERROR
-      "Cannot find install manifest: @CMAKE_CURRENT_BINARY_DIR@/install_manifest.txt"
+      "Cannot find install manifest: ${CMAKE_CURRENT_SOURCE_DIR}/install_manifest.txt"
   )
 endif()
 
 # Remove files from 'install_manifest.txt'
 message(STATUS "")
 message(STATUS "Removing files from 'install_manifest.txt'")
-file(READ "@CMAKE_CURRENT_BINARY_DIR@/install_manifest.txt" files)
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 foreach(file ${files})
   message(STATUS "Uninstalling $ENV{DESTDIR}${file}")
