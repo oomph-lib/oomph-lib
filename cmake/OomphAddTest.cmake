@@ -127,19 +127,27 @@ function(oomph_add_test)
   # TODO: Make directory copies platform independent. Using the copy_directory
   # command will screw up the validate.sh paths so I'm not using it right now.
 
+  set(SYMLINK_TEST_DATA_NOT_COPY TRUE)
+
   # Add each requirement to the copy target as a file-copy command or as a
   # directory-copy command. All of these commands will be executed when the
   # copy_<path-hash> target is called
   foreach(REQUIREMENT IN LISTS REQUIREMENTS_WITH_PATHS)
-    if(IS_DIRECTORY "${REQUIREMENT}")
+    if(SYMLINK_TEST_DATA_NOT_COPY)
       add_custom_command(
-        TARGET copy_${PATH_HASH} COMMAND cp -r "${REQUIREMENT}"
+        TARGET copy_${PATH_HASH} COMMAND ln -s "${REQUIREMENT}"
                                          "${CMAKE_CURRENT_BINARY_DIR}")
     else()
-      add_custom_command(
-        TARGET copy_${PATH_HASH}
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${REQUIREMENT}"
-                "${CMAKE_CURRENT_BINARY_DIR}")
+      if(IS_DIRECTORY "${REQUIREMENT}")
+        add_custom_command(
+          TARGET copy_${PATH_HASH} COMMAND cp -r "${REQUIREMENT}"
+                                           "${CMAKE_CURRENT_BINARY_DIR}")
+      else()
+        add_custom_command(
+          TARGET copy_${PATH_HASH}
+          COMMAND ${CMAKE_COMMAND} -E copy_if_different "${REQUIREMENT}"
+                  "${CMAKE_CURRENT_BINARY_DIR}")
+      endif()
     endif()
   endforeach()
 
