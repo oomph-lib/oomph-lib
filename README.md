@@ -148,7 +148,7 @@ The ``.pre-commit-config.yaml`` will take care of the rest. Do not edit the
 ### Building and installing
 
 To configure, build and install the project using Ninja (recommended), ``cd``
-into the root directory of the oomph-lib project and run the following:
+into the root directory of the `oomph-lib` project and run the following:
 ```bash
 >>> cmake -G Ninja -B build              # Configure and generate build system
 >>> cd build && ninja && ninja install   # Build and install
@@ -161,15 +161,17 @@ If you'd prefer to use Makefile Generators for your build system instead, run
 
 #### Customising the installation location
 
-By default, `oomph-lib` will be installed to a `/usr/local/` on UNIX systems. If you want to install the library to a different location, specify the value of `CMAKE_INSTALL_PREFIX` when you run the initial `cmake` command. For example
+By default, `oomph-lib` will be installed to `/usr/local/` on UNIX systems. If you want to install the library to a different location, specify the value of `CMAKE_INSTALL_PREFIX` when you run the initial `cmake` command. For example
 ```bash
-cmake -DCMAKE_INSTALL_PREFIX=~/local
+cmake -DCMAKE_INSTALL_PREFIX=~/oomph-lib-installation -B build
 ```
 
-_**Note:** We recommend against setting a non-standard installation location. The reason for this is when you try to build any subproject that calls `find_package(oomphlib ...)`, CMake will check the default system paths for the `oomph-lib` installation. Because the library is likely to be installed to a non-standard location, you will either need to pass the location of the installation to `cmake` using the `CMAKE_PREFIX_PATH` variable (every time you try to build a subproject!) or you will need to add the location of the installation to your environment `PATH` variable:_
+_**Note:** We recommend against setting a non-standard installation location. The reason for this is when you try to build any subproject that calls `find_package(oomphlib ...)`, CMake will check the default system paths for the `oomph-lib` installation. Because the library is likely to be installed to a non-standard location, it won't be able to find it. As a result, you will either need to pass the location of the installation to `cmake` using one of the following options:_
+1. _Specifying the `CMAKE_PREFIX_PATH` variable (every time you try to configure a subproject!), or_
+2. _You will need to add the location of the installation to your environment `PATH` variable:_
 ```bash
 # Option 1: Specify the installation location
-cmake -G Ninja -DCMAKE_PREFIX_PATH=~/local -B build
+cmake -G Ninja -DCMAKE_PREFIX_PATH=~/oomph-lib-installation -B build
 
 # Option 2: Update the PATH environment variable
 export PATH="$PATH:~/local"
@@ -184,10 +186,6 @@ at the CMake configuration/generation step.
 To specify a ``Release`` build (i.e. optimised; the default is ``Debug``) use
 ```bash
   -DCMAKE_BUILD_TYPE=Release
-```
-To specify the installation location append the flag
-```bash
-  -DCMAKE_INSTALL_PREFIX=~/my-custom-install
 ```
 To enable the use of MPI (if available on your system) use
 ```bash
@@ -253,7 +251,7 @@ then append it to the original target name and use that name for your commands:
 ```
 **In progress**:
 
-- [ ] Add a "make self-test" command for the root oomph-lib directory which executes all of the self-tests.
+- [ ] Add a "make self-test" command for the root `oomph-lib` directory which executes all of the self-tests.
 - [ ] Document CTest usages:
    - [ ] Parallel execution; append a ``-j <N>`` flag.
    - [ ] Test filtering:
@@ -282,7 +280,7 @@ project files and delete the build folder using the following
 ```
 ### Development
 
-To define your own executable that uses the oomph-lib library, you will first
+To define your own executable that uses the `oomph-lib` library, you will first
 need to import the ``oomphlib`` package after it has been installed. Once this
 has been done, you can define your own executable using the helper function
 ``oomph_add_executable(...)`` ([defined here](cmake/OomphAddExecutable.cmake>)).
