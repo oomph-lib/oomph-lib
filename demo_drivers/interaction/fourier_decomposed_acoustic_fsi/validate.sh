@@ -3,7 +3,6 @@
 # Get the OOPMH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$1
 
-
 #Set the number of tests to be checked
 NUM_TESTS=3
 
@@ -19,95 +18,85 @@ cd Validation
 
 echo "Running Fourier-decomposed acoustic fsi validation "
 mkdir RESLT
-../fourier_decomposed_acoustic_fsi --nstep 2 > OUTPUT_structured
+../fourier_decomposed_acoustic_fsi --nstep 2 >OUTPUT_structured
 echo "done"
-echo " " >> validation.log
-echo "Fourier-decomposed acoustic fsi validation" >> validation.log
-echo "------------------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT/helmholtz_soln1.dat RESLT/elast_soln1.dat RESLT/trace.dat > result.dat
+echo " " >>validation.log
+echo "Fourier-decomposed acoustic fsi validation" >>validation.log
+echo "------------------------------------------" >>validation.log
+echo " " >>validation.log
+echo "Validation directory: " >>validation.log
+echo " " >>validation.log
+echo "  " $(pwd) >>validation.log
+echo " " >>validation.log
+cat RESLT/helmholtz_soln1.dat RESLT/elast_soln1.dat RESLT/trace.dat >result.dat
 
 if test "$2" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result.dat.gz  \
-         result.dat >> validation.log
+  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/result.dat.gz \
+    result.dat 5.0e-08 0.10 >>validation.log
 fi
 
 mv RESLT RESLT_structured
-
-
 
 # Validation for unstructured acoustic fsi problem
 #-------------------------------------------------
 
 echo "Running unstructured Fourier-decomposed acoustic fsi validation "
 mkdir RESLT
-../unstructured_fourier_decomposed_acoustic_fsi > OUTPUT_unstructured
+../unstructured_fourier_decomposed_acoustic_fsi >OUTPUT_unstructured
 echo "done"
-echo " " >> validation.log
-echo "Unstructured Fourier-decomposed acoustic fsi validation" >> validation.log
-echo "-------------------------------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat  RESLT/trace.dat > unstructured_result.dat
+echo " " >>validation.log
+echo "Unstructured Fourier-decomposed acoustic fsi validation" >>validation.log
+echo "-------------------------------------------------------" >>validation.log
+echo " " >>validation.log
+echo "Validation directory: " >>validation.log
+echo " " >>validation.log
+echo "  " $(pwd) >>validation.log
+echo " " >>validation.log
+cat RESLT/trace.dat >unstructured_result.dat
 
 if test "$2" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_result.dat.gz  \
-         unstructured_result.dat >> validation.log
+  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_result.dat.gz \
+    unstructured_result.dat >>validation.log
 fi
 
 mv RESLT RESLT_unstructured
-
 
 # Validation for adaptive unstructured acoustic fsi problem
 #-----------------------------------------------------------
 
 echo "Running adaptive unstructured Fourier-decomposed acoustic fsi validation "
 mkdir RESLT
-../adaptive_unstructured_fourier_decomposed_acoustic_fsi > OUTPUT_adaptive_unstructured
+../adaptive_unstructured_fourier_decomposed_acoustic_fsi >OUTPUT_adaptive_unstructured
 echo "done"
-echo " " >> validation.log
-echo "Unstructured adaptive Fourier-decomposed acoustic fsi validation" >> validation.log
-echo "----------------------------------------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat  RESLT/trace.dat > adaptive_unstructured_result.dat
+echo " " >>validation.log
+echo "Unstructured adaptive Fourier-decomposed acoustic fsi validation" >>validation.log
+echo "----------------------------------------------------------------" >>validation.log
+echo " " >>validation.log
+echo "Validation directory: " >>validation.log
+echo " " >>validation.log
+echo "  " $(pwd) >>validation.log
+echo " " >>validation.log
+cat RESLT/trace.dat >adaptive_unstructured_result.dat
 
 if test "$2" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adaptive_unstructured_result.dat.gz  \
-         adaptive_unstructured_result.dat 1.0e-14 0.25 >> validation.log
+  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adaptive_unstructured_result.dat.gz \
+    adaptive_unstructured_result.dat 1.0e-14 0.25 >>validation.log
 fi
 
 mv RESLT RESLT_adaptive_unstructured
 
-
 # Append log to main validation log
-cat validation.log >> $OOMPH_ROOT_DIR/validation.log
-
-
+cat validation.log >>$OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
-
-
 #######################################################################
-
-
 
 #Check that we get the correct number of OKs
 # validate_ok_count will exit with status
