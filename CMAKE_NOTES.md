@@ -8,11 +8,11 @@ release.
 
 ## Preserve previously-installed (third-party) libraries
 
-- Once a third-party library has been installed, you may want to move it's installation from the `build/` folder to some other folder of your choice. If you wipe the `build/` folder and want to tell `oomph-lib` that you already have an installation of the third-party library that you want to use again, you'll need to specify a path to it with the variable `-DOOMPH_WITH_FOO=BAR`, where `FOO` is one of the supported values and `BAR` is the path to the installation (it should contain a `include` and `lib` subdirectory). For example, if you moved `Trilinos`
+- Once a third-party library has been installed, you may want to move the installation from the `build/` folder **[not sure this is true, I think they get installed to the same location as the library unless we've explicitly set `<INSTALL_DIR>` with `ExternalProject`/`FetchContent`]** to some other folder of your choice. If you move the installation then wipe the `build/` folder, you can tell `oomph-lib` when you next build it that you already have an installation of the same third-party library. To do you'll need to specify a path to it with the variable `-DOOMPH_WITH_FOO=BAR`, where `FOO` is one of the supported values and `BAR` is the path to the installation (it should contain a `include` and `lib` subdirectory). For example, if you moved `Trilinos`
 ```bash
 cmake -G Ninja -DOOMPH_WITH_TRILINOS="~/trilinos_install" -B build
 ```
-In general, it is rather painful to specify this flag so we recommend you specify this value in your `CMakeUserPresets.json` file.
+In general, it is rather painful to specify this flag so we recommend specifying this value in your `CMakeUserPresets.json` file.
 
 
 
@@ -25,14 +25,16 @@ In general, it is rather painful to specify this flag so we recommend you specif
 
 ## Steps to adding the Google benchmark library
 
+**FIXME:** Update these instructions.
+
 ### Initial steps
 
-- Add FetchContent recipe to download the `benchmark` library.
+- Add `FetchContent` recipe to download the `benchmark` library.
 - Create a `benchmark/` directory.
-- Add a CMakeLists.txt file to the folder with the obvious boilerplate (`cmake_minimum_required(...)` and `project(...)`).
-- If the library build includes the benchmarking directory, add a `find_package(oomphlib REQUIRED)` call.
+- Add a `CMakeLists.txt` file to the folder with the obvious boilerplate (`cmake_minimum_required(...)` and `project(...)`).
+- If the library build includes the `benchmarking/` directory, add a `find_package(oomphlib REQUIRED)` call.
 - `include(...)` the module for downloading the benchmarking library.
-- To ensure the benchmarking library can find the GetGoogleBenchmark script after installation, make sure it gets distributed with the library to lib/cmake/oomphlib/.
+- To ensure the `benchmark` library can find the `OomphGetGoogleBenchmark.cmake` script after installation, make sure it gets distributed with the library to `lib/cmake/oomphlib/`.
 -
 ### Build-time compatibility
 
@@ -44,19 +46,19 @@ cd build
 ninja
 ```
 
-- Add FetchContent recipe to download the benchmark library.
-- Create a benchmark directory.
+- Add `FetchContent` recipe to download the `benchmark` library.
+- Create a `benchmark/` directory.
 - Add a CMake script that defines the project.
 - If the benchmarking is NOT part of the library build:
-    - Add a find_package call for the oomphlib package
+    - Add a `find_package(...)` call for the `oomphlib` package
 - Include the module for downloading the benchmarking library.
-- To ensure the benchmarking library can find the GetGoogleBenchmark script after installation, make sure it gets distributed with the library to lib/cmake/oomphlib/.
-- TO FIND OUT: Should the .cmake files that get installed be added to the CMAKE_MODULE_PATH? ACTUALLY, probably just needs to be the current LIST_DIR, so it works at build time and install time
-- Should probably store the path to the benchmark directory and call find_dependency() after in the main config file and use the download cmake file otherwise
+- To ensure the `benchmark` library can find the `OomphGetGoogleBenchmark.cmake` script after installation, make sure it gets distributed with the library to `lib/cmake/oomphlib/`.
+- TO FIND OUT: Should the `.cmake` files that get installed be added to the `CMAKE_MODULE_PATH`? ACTUALLY, probably just needs to be the current `...LIST_DIR`, so it works at build time and install time
+- Should probably store the path to the `benchmark/` directory and call `find_dependency()` after in the main config file and use the download cmake file otherwise
 - Need to include the module
 
 ### Install-time compatibility
-Things to check:
+**Things to check:**
 - [ ] Can it be used at build time?
 - [ ] Can it be used after the library is installed?
 Both require updating the CMake module path.
