@@ -246,41 +246,64 @@ if(OOMPH_ENABLE_CUDA)
 endif()
 
 # TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD TODO: ADD OOMPH_
-# PREFIXES TO THESE VARIABLES!
+# PREFIXES TO THESE VARIABLES! FIXME: Not currently used!
 if(DEFINED OOMPH_WITH_BLACS)
   set(OOMPH_ALREADY_HAVE_BLACS TRUE)
 endif()
+# FIXME: Not currently used!
 if(DEFINED OOMPH_WITH_SCALAPACK)
   set(OOMPH_ALREADY_HAVE_SCALAPACK TRUE)
 endif()
+# FIXME: Not currently used!
 if(DEFINED OOMPH_WITH_PORD)
   set(OOMPH_ALREADY_HAVE_PORD TRUE)
 endif()
+# FIXME: Not currently used!
 if(DEFINED OOMPH_WITH_MUMPS)
   set(OOMPH_ALREADY_HAVE_MUMPS TRUE)
 endif()
+# FIXME: Not currently used!
 if(DEFINED OOMPH_WITH_BLAS)
   set(OOMPH_ALREADY_HAVE_BLAS TRUE)
 endif()
+# FIXME: Not currently used!
 if(DEFINED OOMPH_WITH_LAPACK)
   set(OOMPH_ALREADY_HAVE_LAPACK TRUE)
 endif()
 if(DEFINED OOMPH_WITH_HYPRE)
+  if(NOT (IS_DIRECTORY OOMPH_WITH_HYPRE))
+    message(FATAL_ERROR "Input 'OOMPH_WITH_HYPRE' is not a directory!")
+  endif()
   set(OOMPH_ALREADY_HAVE_HYPRE TRUE)
 endif()
 if(DEFINED OOMPH_WITH_TRILINOS)
+  if(NOT (IS_DIRECTORY OOMPH_WITH_TRILINOS))
+    message(FATAL_ERROR "Input 'OOMPH_WITH_TRILINOS' is not a directory!")
+  endif()
   set(OOMPH_ALREADY_HAVE_TRILINOS TRUE)
 endif()
 if(DEFINED OOMPH_WITH_BOOST)
+  if(NOT (IS_DIRECTORY OOMPH_WITH_BOOST))
+    message(FATAL_ERROR "Input 'OOMPH_WITH_BOOST' is not a directory!")
+  endif()
   set(OOMPH_ALREADY_HAVE_BOOST TRUE)
 endif()
 if(DEFINED OOMPH_WITH_GMP)
+  if(NOT (IS_DIRECTORY OOMPH_WITH_GMP))
+    message(FATAL_ERROR "Input 'OOMPH_WITH_GMP' is not a directory!")
+  endif()
   set(OOMPH_ALREADY_HAVE_GMP TRUE)
 endif()
 if(DEFINED OOMPH_WITH_MPFR)
+  if(NOT (IS_DIRECTORY OOMPH_WITH_MPFR))
+    message(FATAL_ERROR "Input 'OOMPH_WITH_MPFR' is not a directory!")
+  endif()
   set(OOMPH_ALREADY_HAVE_MPFR TRUE)
 endif()
 if(DEFINED OOMPH_WITH_CGAL)
+  if(NOT (IS_DIRECTORY OOMPH_WITH_CGAL))
+    message(FATAL_ERROR "Input 'OOMPH_WITH_CGAL' is not a directory!")
+  endif()
   set(OOMPH_ALREADY_HAVE_CGAL TRUE)
 endif()
 
@@ -308,8 +331,13 @@ if(OOMPH_ENABLE_CODE_COVERAGE)
   oomph_enable_code_coverage()
 endif()
 
-# Has the user specified the path a directory containing the benchmark library?
-if(OOMPH_WITH_GOOGLE_BENCHMARK AND IS_DIRECTORY OOMPH_WITH_GOOGLE_BENCHMARK)
+# Has the user specified the path to a directory which contains the benchmark
+# library?
+if(OOMPH_WITH_GOOGLE_BENCHMARK)
+  if(NOT (IS_DIRECTORY OOMPH_WITH_GOOGLE_BENCHMARK))
+    message(
+      FATAL_ERROR "Input 'OOMPH_WITH_GOOGLE_BENCHMARK' is not a directory!")
+  endif()
   set(OOMPH_ALREADY_HAVE_GOOGLE_BENCHMARK TRUE)
 endif()
 
