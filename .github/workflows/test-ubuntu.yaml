@@ -3,6 +3,8 @@ name: Ubuntu
 on: push
 
 env:
+  # Environment variable that controls if the output should be logged for failed
+  # CTest tests
   CTEST_OUTPUT_ON_FAILURE: 1
 
 jobs:
@@ -40,7 +42,7 @@ jobs:
       - name: Upload validation log file
         uses: actions/upload-artifact@v2
         with:
-          name: validation-${{ runner.os }}-OpenBLAS_${{ env.OOMPH_USE_OPENBLAS }}.log
+          name: validation-${{ runner.os }}-OpenBLAS_${{ matrix.OOMPH_USE_OPENBLAS }}.log
           path: ./validation.log
 
       - name: Propagate CTest status
