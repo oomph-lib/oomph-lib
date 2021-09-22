@@ -93,7 +93,7 @@ int main()
   row_start_square[3] = 4;
   row_start_square[4] = 5; // Fictitous index = NNz
 
-  Vector<std::complex<double>> x(2);
+  Vector<std::complex<double>> x(4);
   x[0] = complex<double>(2, 2);
   x[1] = complex<double>(-2, 3);
   x[2] = complex<double>(0.5, 2.2);
@@ -107,10 +107,17 @@ int main()
 
   Vector<std::complex<double>> soln(4);
 
+  Vector<double> value_double(5);
+  value_double[0] = double(1);
+  value_double[1] = double(2);
+  value_double[2] = double(3);
+  value_double[3] = double(4);
+  value_double[4] = double(5);
+
+  unsigned* method_ptr = new unsigned;
+
   // test default constructor
   CRComplexMatrix matrix_default();
-  // cout << matrix_default.nrow() << endl;
-  // cout << matrix_default.ncol() << endl;
 
   // test full matrix constructor
   CRComplexMatrix matrix(values, column_index, row_start, n, m);
@@ -118,10 +125,23 @@ int main()
   cout << matrix.ncol() << endl;
   print_cr_complex_matrix(matrix);
 
-  CRComplexMatrix matrix_square(values_square, column_index_square, row_start_square, 4, 4);
+  CRComplexMatrix matrix_square(
+    values_square, column_index_square, row_start_square, 4, 4);
   cout << matrix_square.nrow() << endl;
   cout << matrix_square.ncol() << endl;
   print_cr_complex_matrix(matrix_square);
+
+  CRComplexMatrix matrix_result(
+    values_square, column_index_square, row_start_square, 4, 4);
+  print_cr_complex_matrix(matrix_result);
+
+  unsigned ncol_double = matrix_square.ncol();
+  LinearAlgebraDistribution* dist_ptr = new LinearAlgebraDistribution();
+  CRDoubleMatrix matrix_in_double(
+    dist_ptr, ncol_double, value_double, column_index, row_start);
+
+  CRComplexMatrix matrix_square_2(
+    values_square, column_index_square, row_start_square, 4, 4);
 
   // test LU decomposition
   cout << matrix_square.ludecompose() << endl;
@@ -137,6 +157,53 @@ int main()
   // test multiply transposed
   matrix_square.multiply_transpose(x, soln);
   print_complex_vector(soln);
+
+
+  // test add (CRDoubleMatrix)
+  matrix_square.add(matrix_in_double, matrix_square);
+  print_cr_complex_matrix(matrix_square);
+
+  // test add (CRComplexMatrix)
+  matrix_square.add(matrix_square, matrix_square);
+  print_cr_complex_matrix(matrix_square);
+
+  // Print input matrices
+  cout << "A" << endl;
+  print_cr_complex_matrix(matrix_square);
+  cout << "B" << endl;
+  print_cr_complex_matrix(matrix_square_2);
+
+  // test multiply method 2 (default)
+  matrix_square.multiply(matrix_square_2, matrix_result);
+  cout << "A B" << endl;
+  print_cr_complex_matrix(matrix_result);
+
+  // test multiply set method and default value
+  method_ptr = &matrix_square.serial_matrix_matrix_multiply_method();
+  cout << *method_ptr << endl;
+
+  // test multiply method 1
+  *method_ptr = 1;
+  matrix_square.multiply(matrix_square_2, matrix_result);
+  cout << *method_ptr << endl;
+  cout << "A B" << endl;
+  print_cr_complex_matrix(matrix_result);
+
+  // test multiply method 3
+  *method_ptr = 3;
+  matrix_square.multiply(matrix_square_2, matrix_result);
+  cout << *method_ptr << endl;
+  cout << "A B" << endl;
+  print_cr_complex_matrix(matrix_result);
+
+  // Print cleanup messages for easier debugging
+  cout << "Begin cleanup" << endl;
+  delete dist_ptr;
+  dist_ptr = 0;
+  method_ptr = 0;
+  delete method_ptr;
+  method_ptr = 0;
+  cout << "Finished cleanup" << endl;
 
   return (EXIT_SUCCESS);
 }

@@ -113,8 +113,6 @@ int main()
 
   // test default constructor
   CCComplexMatrix matrix_default();
-  // cout << matrix_default.nrow() << endl;
-  // cout << matrix_default.ncol() << endl;
 
   // test full matrix constructor
   CCComplexMatrix matrix(values, row_index, column_start, n, m);
@@ -122,7 +120,8 @@ int main()
   cout << matrix.ncol() << endl;
   print_cc_complex_matrix(matrix);
 
-  CCComplexMatrix matrix_square(values_square, row_index_square, column_start_square, 4, 4);
+  CCComplexMatrix matrix_square(
+    values_square, row_index_square, column_start_square, 4, 4);
   cout << matrix_square.nrow() << endl;
   cout << matrix_square.ncol() << endl;
   print_cc_complex_matrix(matrix_square);
@@ -144,4 +143,3 @@ int main()
 
   return (EXIT_SUCCESS);
 }
-

@@ -284,12 +284,20 @@ namespace oomph
     ///  Info flag for the SuperLU solver
     int Info;
 
+    /// \short  A switch variable for selecting the matrix multiply method for
+    /// serial (non-parallel) runs. Note that the parallel case hasn't been
+    /// implemented, so this is used in both cases.
+    unsigned Serial_matrix_matrix_multiply_method;
+
   public:
     /// Default constructor
     CRComplexMatrix() : CRMatrix<std::complex<double>>(), F_factors(0), Info(0)
     {
       // By default SuperLU solves linear systems quietly
       Doc_stats_during_solve = false;
+
+      // Set the serial the default matrix-matrix multiply method
+      Serial_matrix_matrix_multiply_method = 2;
     }
 
     /// Constructor: Pass vector of values, vector of column indices,
@@ -306,6 +314,9 @@ namespace oomph
     {
       // By default SuperLU solves linear systems quietly
       Doc_stats_during_solve = false;
+
+      // Set the default serial matrix-matrix multiply method
+      Serial_matrix_matrix_multiply_method = 2;
     }
 
 
@@ -391,6 +402,23 @@ namespace oomph
     // result: result=A matrix_in
     void multiply(const CRComplexMatrix& matrix_in,
                   CRComplexMatrix& result) const;
+
+    /// \short Access function to Serial_matrix_matrix_multiply_method, the flag
+    /// which determines the matrix matrix multiplication method used for serial
+    /// matrices.
+    unsigned& serial_matrix_matrix_multiply_method()
+    {
+      return Serial_matrix_matrix_multiply_method;
+    }
+
+    /// \short Read only access function (const version) to
+    /// Serial_matrix_matrix_multiply_method, the flag
+    /// which determines the matrix matrix multiplication method used for serial
+    /// matrices.
+    const unsigned& serial_matrix_matrix_multiply_method() const
+    {
+      return Serial_matrix_matrix_multiply_method;
+    }
 
   protected:
     /// Flag to indicate if stats are to be displayed during

@@ -542,8 +542,8 @@ namespace oomph
   }
 
   //===========================================================================
-  /// Function to multiply this matrix by the CRDoubleMatrix matrix_in.
-  /// In a serial matrix, there are 4 methods available:
+  /// Function to multiply this matrix by the CRComplexMatrix matrix_in.
+  /// In a serial matrix, there are 3 methods available:
   /// Method 1: First runs through this matrix and matrix_in to find the storage
   ///           requirements for result - arrays of the correct size are
   ///           then allocated before performing the calculation.
@@ -554,7 +554,7 @@ namespace oomph
   /// Method 3: Grows storage for values and column indices of result 'on the
   ///           fly' using a vector of vectors. Not particularly impressive
   ///           on the platforms we tried...
-  /// Method 2 is employed by default.
+  /// Method 2 is employed by default. See also CRDoubleMatrix::multiply(...)
   //=============================================================================
   void CRComplexMatrix::multiply(const CRComplexMatrix& matrix_in,
                                  CRComplexMatrix& result) const
@@ -595,12 +595,12 @@ namespace oomph
 #endif
 
     // short name for Serial_matrix_matrix_multiply_method
-    unsigned method = 2;
+    unsigned method = this->Serial_matrix_matrix_multiply_method;
 
     // if this matrix is not distributed and matrix in is not distributed
     if ((method == 1) || (method == 2) || (method == 3))
     {
-      // NB N is number of rows!
+      // NB n is number of rows!
       unsigned long n = this->nrow();
       unsigned long m = matrix_in.ncol();
       unsigned long local_nnz = 0;
@@ -900,8 +900,7 @@ namespace oomph
 
       // build
       unsigned long this_nnz = this->nnz();
-      result.build_without_copy(
-        value, column_index, row_start, this_nnz, m, local_nnz);
+      result.build_without_copy(value, column_index, row_start, this_nnz, m, n);
     }
   }
 

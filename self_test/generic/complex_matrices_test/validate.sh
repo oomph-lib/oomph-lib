@@ -16,7 +16,7 @@ cd Validation
 
 # Validation for dense complex matrix
 #-----------------------------------------
-echo "Running dense complex matrix alidation "
+echo "Running dense complex matrix validation "
 ../dense_complex_matrix_test > OUTPUT
 echo "done"
 echo " " >> validation.log
