@@ -35,19 +35,25 @@ from __future__ import unicode_literals
 # x.encode()) / decoded (with str(y)) in python3. e.g. see
 # variable_from_makefile.
 
-
-import subprocess as subp
-from multiprocessing import Pool
-import sys
 import argparse
+import multiprocessing
 import os
 import os.path
-import multiprocessing
-import itertools as it
 import pprint
+import subprocess as subp
+import sys
 
+from enum import IntEnum
 from functools import partial as pt
+from multiprocessing import Pool
 from os.path import join as pjoin
+
+
+class ExitCode(IntEnum):
+    """Define our own custom enumeration to represent certain exit codes."""
+    SUCCESS = 0
+    BUILD_FAILURE = 1
+    TEST_FAILURE = 2
 
 
 class Colours:
@@ -197,7 +203,7 @@ def find_validate_dirs(base_dirs):
     return all_validation_dirs
 
 
-def dispatch_dir(dirname, features, **kwargs):
+def dispatch_dir(dirname, features, **kwargs) -> ExitCode:
     """Check for missing features and print the appropriate message if
     needed. Otherwise run the check function."""
 
@@ -209,8 +215,7 @@ def dispatch_dir(dirname, features, **kwargs):
             if feature['check_driver_function'](dirname):
                 missing_feature_message(dirname, feature['feature_name'])
                 return
-
-    make_check_in_dir(dirname, **kwargs)
+    return make_check_in_dir(dirname, **kwargs)
 
 
 # Functions for checking if a test needs a certain feature
@@ -230,7 +235,7 @@ def check_if_hlib_driver(d):
 
 # The function doing the bulk of the actual work (called many times in
 # parallel by main).
-def make_check_in_dir(directory, just_build=False):
+def make_check_in_dir(directory, just_build=False) -> ExitCode:
     """
     Rebuild binaries in the directory using make if needed then run the
     tests.
@@ -263,10 +268,15 @@ def make_check_in_dir(directory, just_build=False):
                                  stdout=tracefile,
                                  stderr=subp.STDOUT)
 
-        # If it failed then return a build failure immediately
-        if build_return != 0:
-            build_fail_message(directory)
-            return
+    # If the build failed then return with a build failure immediately
+    if build_return != ExitCode.SUCCESS:
+        build_fail_message(directory)
+        with open(tracefile_path, 'r') as tracefile:
+            print(tracefile.read())
+        return ExitCode.BUILD_FAILURE
+
+    # Re-open the tracefile and continue appending to it
+    with open(tracefile_path, 'a') as tracefile:
 
         if not just_build:
             tracefile.write("\nRunning self test properly:\n")
@@ -283,7 +293,6 @@ def make_check_in_dir(directory, just_build=False):
             tracefile.write(
                 "\nNot running self test because you set the 'just_build' option\n")
             tracefile.flush()
-
             test_result = 0
 
     final_tracefile_path = pjoin(directory, "Validation", "make_check_output")
@@ -301,12 +310,13 @@ def make_check_in_dir(directory, just_build=False):
 
     if test_result == 0:
         check_success_message(directory)
-        return
+        exit_code = ExitCode.SUCCESS
     else:
         with open(tracefile_name, 'r') as tracefile:
             print(tracefile.read())
         check_fail_message(directory)
-        return
+        exit_code = ExitCode.TEST_FAILURE
+    return exit_code
 
 
 # Function dealing with parsing of arguments, getting everything set up and
@@ -509,16 +519,21 @@ def main():
     f = pt(dispatch_dir, features=oomph_features, just_build=args.just_build)
 
     if args.serial_mode:
-        list(map(f, validation_dirs))  # list forces evaluation of the map
+        # list forces evaluation of the map
+        test_results = list(map(f, validation_dirs))
     else:
-        # Run it in parallel.
-        Pool(processes=int(args.ncores)).map(f, validation_dirs, 1)
-        # Set chunksize to 1 (i.e. each "make check" call is in its own "chunk
-        # of work") to avoid the situation where multiple slow "make check"s
-        # end up in the same chunk and we have to wait ages for it to finish.
+        # Run it in parallel, using a context manager to safely handle the
+        # destruction of any allocated resources
+        with Pool(processes=int(args.ncores)) as pool:
+            # Set chunksize to 1 (i.e. each "make check" call is in its own
+            # "chunk of work") to avoid the situation where multiple slow "make
+            # check"s end up in the same chunk and we have to wait ages for it
+            # to finish
+            test_results = pool.map(f, validation_dirs, 1)
 
-    # Done!
-    return 0
+    # Done! If any of the tests returned a non-zero exit code, then return a
+    # non-zero exit code here!
+    return any(test_results)
 
 
 # If this script is run from a shell then run main() and return the result.
