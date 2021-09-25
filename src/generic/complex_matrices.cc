@@ -1078,9 +1078,9 @@ namespace oomph
     }
 
     // Check if the dimensions of this matrix and matrix_in are the same.
-    unsigned long i_nrow = this->nrow();
+    unsigned long this_nrow = this->nrow();
     unsigned long matrix_in_nrow = matrix_in.nrow();
-    if (i_nrow != matrix_in_nrow)
+    if (this_nrow != matrix_in_nrow)
     {
       std::ostringstream error_message;
       error_message << "matrix_in has a different number of rows than\n"
@@ -1158,15 +1158,15 @@ namespace oomph
       // Create the map for this row.
       std::map<int, std::complex<double>> res_row_map;
 
-      int i_row_end = i_row_start[row_i + 1];
       // Insert the column and value pair for this matrix.
+      int i_row_end = i_row_start[row_i + 1];
       for (int i = i_row_start[row_i]; i < i_row_end; i++)
       {
         res_row_map[i_column_indices[i]] = i_values[i];
       }
 
-      int in_row_end = in_row_start[row_i + 1];
       // Insert the column and value pair for in matrix.
+      int in_row_end = in_row_start[row_i + 1];
       for (int i = in_row_start[row_i]; i < in_row_end; i++)
       {
         res_row_map[in_column_indices[i]] += in_values[i];

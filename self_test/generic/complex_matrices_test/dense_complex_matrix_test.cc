@@ -38,13 +38,13 @@ void print_complex_vector(Vector<complex<double>>& x)
   }
 }
 
-void print_dense_complex_matrix(DenseComplexMatrix& M)
+void print_dense_complex_matrix(DenseComplexMatrix& matrix)
 {
-  for (unsigned i = 0; i < M.nrow(); i++)
+  for (unsigned i = 0; i < matrix.nrow(); i++)
   {
-    for (unsigned j = 0; j < M.ncol(); j++)
+    for (unsigned j = 0; j < matrix.ncol(); j++)
     {
-      cout << M(i, j) << ", ";
+      cout << matrix(i, j) << ", ";
     }
     cout << endl;
   }
@@ -72,9 +72,9 @@ int main()
   Vector<std::complex<double>> soln(2);
 
   // test default constructor
-  DenseComplexMatrix matrix_default();
-  // cout << matrix_default.nrow() << endl;
-  // cout << matrix_default.ncol() << endl;
+  DenseComplexMatrix matrix_default;
+  cout << matrix_default.nrow() << endl;
+  cout << matrix_default.ncol() << endl;
 
   // test square matrix constructor
   DenseComplexMatrix matrix_square(2);

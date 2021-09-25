@@ -38,13 +38,13 @@ void print_complex_vector(Vector<complex<double>>& x)
   }
 }
 
-void print_cc_complex_matrix(CCComplexMatrix& M)
+void print_cc_complex_matrix(CCComplexMatrix& matrix)
 {
-  for (unsigned i = 0; i < M.nrow(); i++)
+  for (unsigned i = 0; i < matrix.nrow(); i++)
   {
-    for (unsigned j = 0; j < M.ncol(); j++)
+    for (unsigned j = 0; j < matrix.ncol(); j++)
     {
-      cout << M(i, j) << ", ";
+      cout << matrix(i, j) << ", ";
     }
     cout << endl;
   }
@@ -112,7 +112,9 @@ int main()
   Vector<std::complex<double>> soln(4);
 
   // test default constructor
-  CCComplexMatrix matrix_default();
+  CCComplexMatrix matrix_default;
+  cout << matrix_default.nrow() << endl;
+  cout << matrix_default.ncol() << endl;
 
   // test full matrix constructor
   CCComplexMatrix matrix(values, row_index, column_start, n, m);

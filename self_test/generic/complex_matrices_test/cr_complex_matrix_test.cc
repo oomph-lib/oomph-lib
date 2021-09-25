@@ -38,13 +38,13 @@ void print_complex_vector(Vector<complex<double>>& x)
   }
 }
 
-void print_cr_complex_matrix(CRComplexMatrix& M)
+void print_cr_complex_matrix(CRComplexMatrix& matrix)
 {
-  for (unsigned i = 0; i < M.nrow(); i++)
+  for (unsigned i = 0; i < matrix.nrow(); i++)
   {
-    for (unsigned j = 0; j < M.ncol(); j++)
+    for (unsigned j = 0; j < matrix.ncol(); j++)
     {
-      cout << M(i, j) << ", ";
+      cout << matrix(i, j) << ", ";
     }
     cout << endl;
   }
@@ -117,7 +117,9 @@ int main()
   unsigned* method_ptr = new unsigned;
 
   // test default constructor
-  CRComplexMatrix matrix_default();
+  CRComplexMatrix matrix_default;
+  cout << matrix_default.nrow() << endl;
+  cout << matrix_default.ncol() << endl;
 
   // test full matrix constructor
   CRComplexMatrix matrix(values, column_index, row_start, n, m);
