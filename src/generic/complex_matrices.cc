@@ -899,8 +899,8 @@ namespace oomph
       }
 
       // build
-      unsigned long this_nnz = this->nnz();
-      result.build_without_copy(value, column_index, row_start, this_nnz, m, n);
+      unsigned long n_nz = this->nnz();
+      result.build_without_copy(value, column_index, row_start, n_nz, m, n);
     }
   }
 
@@ -1078,9 +1078,9 @@ namespace oomph
     }
 
     // Check if the dimensions of this matrix and matrix_in are the same.
-    unsigned long this_nrow = this->nrow();
+    unsigned long n_row = this->nrow();
     unsigned long matrix_in_nrow = matrix_in.nrow();
-    if (this_nrow != matrix_in_nrow)
+    if (n_row != matrix_in_nrow)
     {
       std::ostringstream error_message;
       error_message << "matrix_in has a different number of rows than\n"
