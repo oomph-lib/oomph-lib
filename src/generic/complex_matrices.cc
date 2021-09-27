@@ -601,8 +601,8 @@ namespace oomph
     if ((method == 1) || (method == 2) || (method == 3))
     {
       // NB n is number of rows!
-      unsigned long n = this->nrow();
-      unsigned long m = matrix_in.ncol();
+      const unsigned long n = this->nrow();
+      const unsigned long m = matrix_in.ncol();
       unsigned long local_nnz = 0;
 
       // pointers to arrays which store result
@@ -899,7 +899,7 @@ namespace oomph
       }
 
       // build
-      unsigned long n_nz = this->nnz();
+      const unsigned long n_nz = this->nnz();
       result.build_without_copy(value, column_index, row_start, n_nz, m, n);
     }
   }
@@ -932,8 +932,8 @@ namespace oomph
     }
 
     // Check if the dimensions of this matrix and matrix_in are the same.
-    unsigned long i_nrow = this->nrow();
-    unsigned long matrix_in_nrow = matrix_in.nrow();
+    const unsigned long i_nrow = this->nrow();
+    const unsigned long matrix_in_nrow = matrix_in.nrow();
     if (i_nrow != matrix_in_nrow)
     {
       std::ostringstream error_message;
@@ -943,8 +943,8 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    unsigned long i_ncol = this->ncol();
-    unsigned long matrix_in_ncol = matrix_in.ncol();
+    const unsigned long i_ncol = this->ncol();
+    const unsigned long matrix_in_ncol = matrix_in.ncol();
     if (i_ncol != matrix_in_ncol)
     {
       std::ostringstream error_message;
@@ -1012,16 +1012,15 @@ namespace oomph
       // Create the map for this row.
       std::map<int, std::complex<double>> res_row_map;
 
-
-      int i_row_end = i_row_start[row_i + 1];
       // Insert the column and value pair for this matrix.
+      int i_row_end = i_row_start[row_i + 1];
       for (int i = i_row_start[row_i]; i < i_row_end; i++)
       {
         res_row_map[i_column_indices[i]] = i_values[i];
       }
 
-      int in_row_end = in_row_start[row_i + 1];
       // Insert the column and value pair for in matrix.
+      int in_row_end = in_row_start[row_i + 1];
       for (int i = in_row_start[row_i]; i < in_row_end; i++)
       {
         res_row_map[in_column_indices[i]] += in_values[i];
@@ -1078,8 +1077,8 @@ namespace oomph
     }
 
     // Check if the dimensions of this matrix and matrix_in are the same.
-    unsigned long n_row = this->nrow();
-    unsigned long matrix_in_nrow = matrix_in.nrow();
+    const unsigned long n_row = this->nrow();
+    const unsigned long matrix_in_nrow = matrix_in.nrow();
     if (n_row != matrix_in_nrow)
     {
       std::ostringstream error_message;
@@ -1089,8 +1088,8 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    unsigned long i_ncol = this->ncol();
-    unsigned long matrix_in_ncol = matrix_in.ncol();
+    const unsigned long i_ncol = this->ncol();
+    const unsigned long matrix_in_ncol = matrix_in.ncol();
     if (i_ncol != matrix_in_ncol)
     {
       std::ostringstream error_message;
@@ -1482,7 +1481,7 @@ namespace oomph
     }
 #endif
 
-    unsigned long r_n = residual.size();
+    const unsigned long r_n = residual.size();
     if (r_n != N)
     {
       residual.resize(N);

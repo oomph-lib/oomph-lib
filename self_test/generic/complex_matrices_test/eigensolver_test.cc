@@ -53,14 +53,14 @@ int main()
   rhs[0] = complex<double>(1, 0);
   rhs[1] = complex<double>(2, 0);
 
-  CRComplexMatrix A(values, column_index, row_start, 2, 2);
+  CRComplexMatrix cr_matrix(values, column_index, row_start, 2, 2);
 
   values[0] = complex<double>(1, 0);
   values[1] = complex<double>(0, 1);
   values[2] = complex<double>(0.2, 0);
   values[3] = complex<double>(1, 0);
 
-  CCComplexMatrix M(values, column_index, row_start, 2, 2);
+  CCComplexMatrix cc_matrix(values, column_index, row_start, 2, 2);
 
   // Create eigensolver
   LAPACK_QZ eigen_solver;
@@ -69,7 +69,7 @@ int main()
   Vector<Vector<complex<double>>> evec;
 
   // Use eigensolver with complex matrices
-  eigen_solver.find_eigenvalues(A, M, eval, evec);
+  eigen_solver.find_eigenvalues(cr_matrix, cc_matrix, eval, evec);
 
   // test eigen_solver complex output
   for (int i = 0; i < 2; i++)

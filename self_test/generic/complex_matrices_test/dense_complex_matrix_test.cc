@@ -32,7 +32,8 @@ using namespace oomph;
 
 void print_complex_vector(Vector<complex<double>>& x)
 {
-  for (unsigned i = 0; i < x.size(); i++)
+  unsigned vector_length = x.size();
+  for (unsigned i = 0; i < vector_length; i++)
   {
     cout << x[i] << endl;
   }
@@ -40,9 +41,11 @@ void print_complex_vector(Vector<complex<double>>& x)
 
 void print_dense_complex_matrix(DenseComplexMatrix& matrix)
 {
-  for (unsigned i = 0; i < matrix.nrow(); i++)
+  unsigned n_row = matrix.nrow();
+  unsigned n_col = matrix.ncol();
+  for (unsigned i = 0; i < n_row; i++)
   {
-    for (unsigned j = 0; j < matrix.ncol(); j++)
+    for (unsigned j = 0; j < n_col; j++)
     {
       cout << matrix(i, j) << ", ";
     }

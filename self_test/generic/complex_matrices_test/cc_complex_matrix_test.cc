@@ -32,7 +32,8 @@ using namespace oomph;
 
 void print_complex_vector(Vector<complex<double>>& x)
 {
-  for (unsigned i = 0; i < x.size(); i++)
+  unsigned vector_length = x.size();
+  for (unsigned i = 0; i < vector_length; i++)
   {
     cout << x[i] << endl;
   }
@@ -40,9 +41,11 @@ void print_complex_vector(Vector<complex<double>>& x)
 
 void print_cc_complex_matrix(CCComplexMatrix& matrix)
 {
-  for (unsigned i = 0; i < matrix.nrow(); i++)
+  unsigned n_row = matrix.nrow();
+  unsigned n_col = matrix.ncol();
+  for (unsigned i = 0; i < n_row; i++)
   {
-    for (unsigned j = 0; j < matrix.ncol(); j++)
+    for (unsigned j = 0; j < n_col; j++)
     {
       cout << matrix(i, j) << ", ";
     }
@@ -52,9 +55,6 @@ void print_cc_complex_matrix(CCComplexMatrix& matrix)
 
 int main()
 {
-  unsigned long n = 2;
-  unsigned long m = 4;
-
   Vector<complex<double>> values(4);
   values[0] = complex<double>(1, 1);
   values[1] = complex<double>(2, 1);
@@ -67,10 +67,12 @@ int main()
   row_index[2] = 1;
   row_index[3] = 3;
 
-  Vector<int> column_start(3); // length = n+1
+  // Final entry stores a fictitous index equal to the number of non-zeros, NNz
+  constexpr unsigned n_column = 2;
+  Vector<int> column_start(n_column + 1);
   column_start[0] = 0;
   column_start[1] = 2;
-  column_start[2] = 4; // Fictitous index = NNz
+  column_start[2] = 4;
 
   Vector<complex<double>> values_square(7);
   values_square[0] = complex<double>(1, 1);
@@ -90,12 +92,14 @@ int main()
   row_index_square[5] = 2;
   row_index_square[6] = 3;
 
-  Vector<int> column_start_square(5); // length = n+1
+  // Final entry stores a fictitous index equal to the number of non-zeros, NNz
+  constexpr unsigned n_column_square = 4;
+  Vector<int> column_start_square(n_column_square + 1);
   column_start_square[0] = 0;
   column_start_square[1] = 2;
   column_start_square[2] = 4;
   column_start_square[3] = 6;
-  column_start_square[4] = 7; // Fictitous index = NNz
+  column_start_square[4] = 7;
 
   Vector<std::complex<double>> x(4);
   x[0] = complex<double>(2, 2);
@@ -117,6 +121,8 @@ int main()
   cout << matrix_default.ncol() << endl;
 
   // test full matrix constructor
+  constexpr unsigned long n = 2;
+  constexpr unsigned long m = 4;
   CCComplexMatrix matrix(values, row_index, column_start, n, m);
   cout << matrix.nrow() << endl;
   cout << matrix.ncol() << endl;

@@ -30,19 +30,22 @@
 using namespace std;
 using namespace oomph;
 
-void print_complex_vector(Vector<complex<double>>& x)
+void print_complex_vector(const Vector<complex<double>>& x)
 {
-  for (unsigned i = 0; i < x.size(); i++)
+  unsigned vector_length = x.size();
+  for (unsigned i = 0; i < vector_length; i++)
   {
     cout << x[i] << endl;
   }
 }
 
-void print_cr_complex_matrix(CRComplexMatrix& matrix)
+void print_cr_complex_matrix(const CRComplexMatrix& matrix)
 {
-  for (unsigned i = 0; i < matrix.nrow(); i++)
+  unsigned n_row = matrix.nrow();
+  unsigned n_col = matrix.ncol();
+  for (unsigned i = 0; i < n_row; i++)
   {
-    for (unsigned j = 0; j < matrix.ncol(); j++)
+    for (unsigned j = 0; j < n_col; j++)
     {
       cout << matrix(i, j) << ", ";
     }
@@ -52,9 +55,6 @@ void print_cr_complex_matrix(CRComplexMatrix& matrix)
 
 int main()
 {
-  unsigned long n = 2;
-  unsigned long m = 4;
-
   Vector<complex<double>> values(4);
   values[0] = complex<double>(1, 1);
   values[1] = complex<double>(2, 1);
@@ -67,10 +67,12 @@ int main()
   column_index[2] = 1;
   column_index[3] = 3;
 
-  Vector<int> row_start(3); // length = n+1
+  // Final entry stores a fictitous index equal to the number of non-zeros, NNz
+  unsigned n_row = 2;
+  Vector<int> row_start(n_row + 1);
   row_start[0] = 0;
   row_start[1] = 2;
-  row_start[2] = 4; // Fictitous index = NNz
+  row_start[2] = 4;
 
   Vector<complex<double>> values_square(5);
   values_square[0] = complex<double>(1, 1);
@@ -86,12 +88,14 @@ int main()
   column_index_square[3] = 0;
   column_index_square[4] = 3;
 
-  Vector<int> row_start_square(5); // length = n+1
+  // Final entry stores a fictitous index equal to the number of non-zeros, NNz
+  unsigned n_row_square = 4;
+  Vector<int> row_start_square(n_row_square + 1);
   row_start_square[0] = 0;
   row_start_square[1] = 2;
   row_start_square[2] = 3;
   row_start_square[3] = 4;
-  row_start_square[4] = 5; // Fictitous index = NNz
+  row_start_square[4] = 5;
 
   Vector<std::complex<double>> x(4);
   x[0] = complex<double>(2, 2);
@@ -114,14 +118,14 @@ int main()
   value_double[3] = double(4);
   value_double[4] = double(5);
 
-  unsigned* method_ptr = new unsigned;
-
   // test default constructor
   CRComplexMatrix matrix_default;
   cout << matrix_default.nrow() << endl;
   cout << matrix_default.ncol() << endl;
 
   // test full matrix constructor
+  constexpr unsigned long n = 2;
+  constexpr unsigned long m = 4;
   CRComplexMatrix matrix(values, column_index, row_start, n, m);
   cout << matrix.nrow() << endl;
   cout << matrix.ncol() << endl;
@@ -138,9 +142,9 @@ int main()
   print_cr_complex_matrix(matrix_result);
 
   unsigned ncol_double = matrix_square.ncol();
-  LinearAlgebraDistribution* dist_ptr = new LinearAlgebraDistribution();
+  LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution();
   CRDoubleMatrix matrix_in_double(
-    dist_ptr, ncol_double, value_double, column_index, row_start);
+    dist_pt, ncol_double, value_double, column_index, row_start);
 
   CRComplexMatrix matrix_square_2(
     values_square, column_index_square, row_start_square, 4, 4);
@@ -181,30 +185,31 @@ int main()
   print_cr_complex_matrix(matrix_result);
 
   // test multiply set method and default value
-  method_ptr = &matrix_square.serial_matrix_matrix_multiply_method();
-  cout << *method_ptr << endl;
+  unsigned* method_pt = new unsigned;
+  method_pt = &matrix_square.serial_matrix_matrix_multiply_method();
+  cout << *method_pt << endl;
 
   // test multiply method 1
-  *method_ptr = 1;
+  *method_pt = 1;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << *method_ptr << endl;
+  cout << *method_pt << endl;
   cout << "A B" << endl;
   print_cr_complex_matrix(matrix_result);
 
   // test multiply method 3
-  *method_ptr = 3;
+  *method_pt = 3;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << *method_ptr << endl;
+  cout << *method_pt << endl;
   cout << "A B" << endl;
   print_cr_complex_matrix(matrix_result);
 
   // Print cleanup messages for easier debugging
   cout << "Begin cleanup" << endl;
-  delete dist_ptr;
-  dist_ptr = 0;
-  method_ptr = 0;
-  delete method_ptr;
-  method_ptr = 0;
+  delete dist_pt;
+  dist_pt = nullptr;
+  method_pt = nullptr;
+  delete method_pt;
+  method_pt = nullptr;
   cout << "Finished cleanup" << endl;
 
   return (EXIT_SUCCESS);
