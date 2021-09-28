@@ -2,6 +2,10 @@
 # Modified version of the file here:
 # https://github.com/pablospe/cmake-example-library/blob/master/cmake/SetEnv.cmake
 # ==============================================================================
+# Print the logo
+file(READ "${CMAKE_CURRENT_LIST_DIR}/AsciiLogo.txt" ASCII_OOMPH_LIB_LOGO)
+message("${ASCII_OOMPH_LIB_LOGO}")
+
 # Introduce CMAKE_INSTALL_LIBDIR, CMAKE_INSTALL_BINDIR, CMAKE_INSTALL_INCLUDEDIR
 include(GNUInstallDirs)
 
