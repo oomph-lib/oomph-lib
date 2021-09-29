@@ -18,11 +18,9 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 # Is oomph-lib being used directly or as an external project?
-set(OOMPH_IS_MAIN_PROJECT TRUE)
-if(NOT DEFINED OOMPH_IS_MAIN_PROJECT)
-  if(NOT (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
-    set(OOMPH_IS_MAIN_PROJECT FALSE)
-  endif()
+set(OOMPH_IS_MAIN_PROJECT FALSE)
+if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  set(OOMPH_IS_MAIN_PROJECT TRUE)
 endif()
 
 # ------------------------------------------------------------------------------
