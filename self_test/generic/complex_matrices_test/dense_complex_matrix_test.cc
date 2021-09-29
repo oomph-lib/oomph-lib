@@ -55,42 +55,35 @@ void print_dense_complex_matrix(DenseComplexMatrix& matrix)
 
 int main()
 {
-  Vector<complex<double>> values(4);
-  values[0] = complex<double>(1, 1);
-  values[1] = complex<double>(0, 1);
-  values[2] = complex<double>(2, 1);
-  values[3] = complex<double>(1, 1);
-
-  complex<double> single_value(0, 1);
-
-  Vector<std::complex<double>> x(2);
-  x[0] = complex<double>(1, 1.5);
-  x[1] = complex<double>(-2, 3);
-
-  Vector<std::complex<double>> rhs(2);
-  rhs[0] = complex<double>(1, 0);
-  rhs[1] = complex<double>(1.4, 1);
-
-  Vector<std::complex<double>> residual(2);
-  Vector<std::complex<double>> soln(2);
-
   // test default constructor
   DenseComplexMatrix matrix_default;
   cout << matrix_default.nrow() << endl;
   cout << matrix_default.ncol() << endl;
 
+  constexpr unsigned long n_row = 2;
+
   // test square matrix constructor
-  DenseComplexMatrix matrix_square(2);
+  DenseComplexMatrix matrix_square(n_row);
   cout << matrix_square.nrow() << endl;
   cout << matrix_square.ncol() << endl;
 
+  constexpr unsigned long n_col = 3;
+
   // test rectangular matrix constructor
-  DenseComplexMatrix matrix_rect(3, 2);
+  DenseComplexMatrix matrix_rect(n_row, n_col);
   cout << matrix_rect.nrow() << endl;
   cout << matrix_rect.ncol() << endl;
 
-  // test full constructor
-  DenseComplexMatrix matrix(2, 2, single_value);
+  Vector<complex<double>> values(4);
+  values[0] = complex<double>(1.0, 1.0);
+  values[1] = complex<double>(0.0, 1.0);
+  values[2] = complex<double>(2.0, 1.0);
+  values[3] = complex<double>(1.0, 1.0);
+
+  complex<double> inital_value(0.0, 1.0);
+
+  // test constructor with every entry equal to a single initial value
+  DenseComplexMatrix matrix(n_row, n_col, inital_value);
   cout << matrix.nrow() << endl;
   cout << matrix.ncol() << endl;
   print_dense_complex_matrix(matrix);
@@ -105,14 +98,28 @@ int main()
   // test LU decomposition
   cout << matrix_square.ludecompose() << endl;
 
+  constexpr unsigned long vector_length = n_row;
+
+  Vector<std::complex<double>> rhs(vector_length);
+  rhs[0] = complex<double>(1.0, 0.0);
+  rhs[1] = complex<double>(1.4, 1.0);
+
   // test LU back substitution
   // note: overwrites rhs
   matrix_square.lubksub(rhs);
   print_complex_vector(rhs);
 
+  Vector<std::complex<double>> x(2);
+  x[0] = complex<double>(1.0, 1.5);
+  x[1] = complex<double>(-2.0, 3.0);
+
+  Vector<std::complex<double>> residual(vector_length);
+
   // test residual
   matrix_square.residual(x, rhs, residual);
   print_complex_vector(residual);
+
+  Vector<std::complex<double>> soln(vector_length);
 
   // test multiply
   matrix_square.multiply(x, soln);

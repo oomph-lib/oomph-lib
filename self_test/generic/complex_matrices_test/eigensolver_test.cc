@@ -32,46 +32,60 @@ using namespace oomph;
 
 int main()
 {
-  Vector<int> row_start(3);
-  row_start[0] = 0;
-  row_start[1] = 2;
-  row_start[2] = 4;
-
-  Vector<int> column_index(4);
-  column_index[0] = 0;
-  column_index[1] = 1;
-  column_index[2] = 0;
-  column_index[3] = 1;
-
-  Vector<complex<double>> values(4);
-  values[0] = complex<double>(1, 1);
-  values[1] = complex<double>(0, 1);
-  values[2] = complex<double>(0, 1);
-  values[3] = complex<double>(1, 1);
-
-  Vector<complex<double>> rhs(2);
-  rhs[0] = complex<double>(1, 0);
-  rhs[1] = complex<double>(2, 0);
-
-  CRComplexMatrix cr_matrix(values, column_index, row_start, 2, 2);
-
-  values[0] = complex<double>(1, 0);
-  values[1] = complex<double>(0, 1);
-  values[2] = complex<double>(0.2, 0);
-  values[3] = complex<double>(1, 0);
-
-  CCComplexMatrix cc_matrix(values, column_index, row_start, 2, 2);
-
   // Create eigensolver
   LAPACK_QZ eigen_solver;
+
+  constexpr unsigned long n_row = 2;
+  constexpr unsigned long n_col = 2;
+  // Number of non zero entries for the different matrices
+  constexpr unsigned long n_nz_cr = 4;
+  constexpr unsigned long n_nz_cc = 4;
+
+  Vector<int> row_start_cr(n_row + 1);
+  row_start_cr[0] = 0;
+  row_start_cr[1] = 2;
+  row_start_cr[2] = n_nz_cr;
+
+  Vector<int> column_index_cr(n_nz_cr);
+  column_index_cr[0] = 0;
+  column_index_cr[1] = 1;
+  column_index_cr[2] = 0;
+  column_index_cr[3] = 1;
+
+  Vector<complex<double>> values_cr(n_nz_cr);
+  values_cr[0] = complex<double>(1.0, 1.0);
+  values_cr[1] = complex<double>(0.0, 1.0);
+  values_cr[2] = complex<double>(0.0, 1.0);
+  values_cr[3] = complex<double>(1.0, 1.0);
+
+  CRComplexMatrix matrix_cr(
+    values_cr, column_index_cr, row_start_cr, n_row, n_col);
+
+  Vector<int> row_start_cc(n_row + 1);
+  row_start_cc[0] = 0;
+  row_start_cc[1] = 2;
+  row_start_cc[2] = n_nz_cc;
+
+  Vector<int> column_index_cc(n_nz_cc);
+  column_index_cc[0] = 0;
+  column_index_cc[1] = 1;
+  column_index_cc[2] = 0;
+  column_index_cc[3] = 1;
+
+  Vector<complex<double>> values_cc(n_nz_cc);
+  values_cc[0] = complex<double>(1.0, 0.0);
+  values_cc[1] = complex<double>(0.0, 1.0);
+  values_cc[2] = complex<double>(0.2, 0.0);
+  values_cc[3] = complex<double>(1.0, 0.0);
+
+  CCComplexMatrix matrix_cc(
+    values_cc, column_index_cc, row_start_cc, n_row, n_col);
 
   Vector<complex<double>> eval;
   Vector<Vector<complex<double>>> evec;
 
-  // Use eigensolver with complex matrices
-  eigen_solver.find_eigenvalues(cr_matrix, cc_matrix, eval, evec);
-
-  // test eigen_solver complex output
+  // test eigen_solver with complex matrices
+  eigen_solver.find_eigenvalues(matrix_cr, matrix_cc, eval, evec);
   for (int i = 0; i < 2; i++)
   {
     cout << eval[i] << ": ";

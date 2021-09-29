@@ -55,35 +55,55 @@ void print_cc_complex_matrix(CCComplexMatrix& matrix)
 
 int main()
 {
-  Vector<complex<double>> values(4);
-  values[0] = complex<double>(1, 1);
-  values[1] = complex<double>(2, 1);
-  values[2] = complex<double>(3, 1);
-  values[3] = complex<double>(4, 1);
+  // test default constructor
+  CCComplexMatrix matrix_default;
+  cout << matrix_default.nrow() << endl;
+  cout << matrix_default.ncol() << endl;
 
-  Vector<int> row_index(4);
-  row_index[0] = 0;
-  row_index[1] = 2;
-  row_index[2] = 1;
-  row_index[3] = 3;
+  constexpr unsigned long n_col_rect = 2;
+  constexpr unsigned long n_row_rect = 4;
+  // Number of non-zero entries
+  constexpr unsigned n_nz_rect = 4;
 
-  // Final entry stores a fictitous index equal to the number of non-zeros, NNz
-  constexpr unsigned n_column = 2;
-  Vector<int> column_start(n_column + 1);
-  column_start[0] = 0;
-  column_start[1] = 2;
-  column_start[2] = 4;
+  Vector<complex<double>> value_rect(n_nz_rect);
+  value_rect[0] = complex<double>(1.0, 1.0);
+  value_rect[1] = complex<double>(2.0, 1.0);
+  value_rect[2] = complex<double>(3.0, 1.0);
+  value_rect[3] = complex<double>(4.0, 1.0);
 
-  Vector<complex<double>> values_square(7);
-  values_square[0] = complex<double>(1, 1);
-  values_square[1] = complex<double>(2, -1);
-  values_square[2] = complex<double>(3, 0.1);
-  values_square[3] = complex<double>(4, 3);
-  values_square[4] = complex<double>(5, 1);
-  values_square[5] = complex<double>(6, -2);
-  values_square[6] = complex<double>(0.5, -1);
+  Vector<int> row_index_rect(n_nz_rect);
+  row_index_rect[0] = 0;
+  row_index_rect[1] = 2;
+  row_index_rect[2] = 1;
+  row_index_rect[3] = 3;
 
-  Vector<int> row_index_square(7);
+  // Final entry stores a fictitous index equal to the number of non-zeros
+  Vector<int> column_start_rect(n_col_rect + 1);
+  column_start_rect[0] = 0;
+  column_start_rect[1] = 2;
+  column_start_rect[2] = n_nz_rect;
+
+  // test full matrix constructor with a rectangular matrix
+  CCComplexMatrix matrix_rect(
+    value_rect, row_index_rect, column_start_rect, n_col_rect, n_row_rect);
+  cout << matrix_rect.nrow() << endl;
+  cout << matrix_rect.ncol() << endl;
+  print_cc_complex_matrix(matrix_rect);
+
+  constexpr unsigned long n_col_square = 4;
+  constexpr unsigned long n_row_square = 4;
+  constexpr unsigned n_nz_square = 7;
+
+  Vector<complex<double>> values_square(n_nz_square);
+  values_square[0] = complex<double>(1.0, 1.0);
+  values_square[1] = complex<double>(2.0, -1.0);
+  values_square[2] = complex<double>(3.0, 0.1);
+  values_square[3] = complex<double>(4.0, 3.0);
+  values_square[4] = complex<double>(5.0, 1.0);
+  values_square[5] = complex<double>(6.0, -2.0);
+  values_square[6] = complex<double>(0.5, -1.0);
+
+  Vector<int> row_index_square(n_nz_square);
   row_index_square[0] = 0;
   row_index_square[1] = 2;
   row_index_square[2] = 0;
@@ -92,44 +112,20 @@ int main()
   row_index_square[5] = 2;
   row_index_square[6] = 3;
 
-  // Final entry stores a fictitous index equal to the number of non-zeros, NNz
-  constexpr unsigned n_column_square = 4;
-  Vector<int> column_start_square(n_column_square + 1);
+  // Final entry stores a fictitous index equal to the number of non-zeros
+  Vector<int> column_start_square(n_col_square + 1);
   column_start_square[0] = 0;
   column_start_square[1] = 2;
   column_start_square[2] = 4;
   column_start_square[3] = 6;
-  column_start_square[4] = 7;
+  column_start_square[4] = n_nz_square;
 
-  Vector<std::complex<double>> x(4);
-  x[0] = complex<double>(2, 2);
-  x[1] = complex<double>(-2, 3);
-  x[2] = complex<double>(1, -2);
-  x[3] = complex<double>(-2, 1);
-
-  Vector<std::complex<double>> rhs(4);
-  rhs[0] = complex<double>(1, -0.5);
-  rhs[1] = complex<double>(0.5, 1.2);
-  rhs[2] = complex<double>(2, 0.3);
-  rhs[3] = complex<double>(-3, -0.4);
-
-  Vector<std::complex<double>> soln(4);
-
-  // test default constructor
-  CCComplexMatrix matrix_default;
-  cout << matrix_default.nrow() << endl;
-  cout << matrix_default.ncol() << endl;
-
-  // test full matrix constructor
-  constexpr unsigned long n = 2;
-  constexpr unsigned long m = 4;
-  CCComplexMatrix matrix(values, row_index, column_start, n, m);
-  cout << matrix.nrow() << endl;
-  cout << matrix.ncol() << endl;
-  print_cc_complex_matrix(matrix);
-
-  CCComplexMatrix matrix_square(
-    values_square, row_index_square, column_start_square, 4, 4);
+  // test full matrix constructor with a square matrix
+  CCComplexMatrix matrix_square(values_square,
+                                row_index_square,
+                                column_start_square,
+                                n_col_square,
+                                n_row_square);
   cout << matrix_square.nrow() << endl;
   cout << matrix_square.ncol() << endl;
   print_cc_complex_matrix(matrix_square);
@@ -137,9 +133,25 @@ int main()
   // test LU decomposition
   cout << matrix_square.ludecompose() << endl;
 
+  constexpr unsigned long vector_length = n_row_square;
+
+  Vector<complex<double>> rhs(vector_length);
+  rhs[0] = complex<double>(1.0, -0.5);
+  rhs[1] = complex<double>(0.5, 1.2);
+  rhs[2] = complex<double>(2.0, 0.3);
+  rhs[3] = complex<double>(-3.0, -0.4);
+
   // test residual
   matrix_square.lubksub(rhs);
   print_complex_vector(rhs);
+
+  Vector<complex<double>> x(vector_length);
+  x[0] = complex<double>(2.0, 2.0);
+  x[1] = complex<double>(-2.0, 3.0);
+  x[2] = complex<double>(1.0, -2.0);
+  x[3] = complex<double>(-2.0, 1.0);
+
+  Vector<complex<double>> soln(vector_length);
 
   // test multiply
   matrix_square.multiply(x, soln);
