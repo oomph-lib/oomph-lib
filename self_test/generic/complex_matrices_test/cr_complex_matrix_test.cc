@@ -221,22 +221,21 @@ int main()
   cout << "A B" << endl;
   print_cr_complex_matrix(matrix_result);
 
-  // test multiply set method and default value
-  unsigned* method_pt = new unsigned;
-  method_pt = &matrix_square.serial_matrix_matrix_multiply_method();
-  cout << *method_pt << endl;
+  // Create a reference to Serial_matrix_matrix_multiply_method
+  unsigned& method = matrix_square.serial_matrix_matrix_multiply_method();
+  cout << method << endl;
 
   // test multiply method 1
-  *method_pt = 1;
+  method = 1;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << *method_pt << endl;
+  cout << method << endl;
   cout << "A B" << endl;
   print_cr_complex_matrix(matrix_result);
 
   // test multiply method 3
-  *method_pt = 3;
+  method = 3;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << *method_pt << endl;
+  cout << method << endl;
   cout << "A B" << endl;
   print_cr_complex_matrix(matrix_result);
 
@@ -244,9 +243,6 @@ int main()
   cout << "Begin cleanup" << endl;
   delete dist_pt;
   dist_pt = nullptr;
-  method_pt = nullptr;
-  delete method_pt;
-  method_pt = nullptr;
   cout << "Finished cleanup" << endl;
 
   return (EXIT_SUCCESS);
