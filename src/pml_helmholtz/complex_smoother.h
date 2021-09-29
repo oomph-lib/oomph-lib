@@ -483,7 +483,10 @@ namespace oomph
     /// This obtains the Jacobian matrix J and the residual vector r
     /// (needed for the Newton method) from the problem's get_jacobian
     /// function and returns the result of Jx=r.
-    void solve(Problem* const& problem_pt, DoubleVector& result) = delete;
+    void solve(Problem* const& problem_pt, DoubleVector& result)
+    {
+      BrokenCopy::broken_assign("ComplexDampedJacobi");
+    }
 
     /// Number of iterations taken
     unsigned iterations() const
