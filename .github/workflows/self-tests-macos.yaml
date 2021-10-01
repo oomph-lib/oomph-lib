@@ -22,8 +22,11 @@ jobs:
       - name: Build
         run: ./non_interactive_autogen.sh -s -j$(sysctl -n hw.logicalcpu)
 
+      # Continue running even if the test fails so that the validation.log can be
+      # uploaded and reviewed later on
       - name: Validate
         run: ./bin/parallel_self_test.py
+        continue-on-error: true
 
       - name: Upload validation log file
         uses: actions/upload-artifact@v2
