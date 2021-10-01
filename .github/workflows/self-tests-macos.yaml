@@ -25,6 +25,7 @@ jobs:
       # Continue running even if the test fails so that the validation.log can be
       # uploaded and reviewed later on
       - name: Validate
+        id: self_tests
         run: ./bin/parallel_self_test.py
         continue-on-error: true
 
@@ -33,3 +34,7 @@ jobs:
         with:
           name: macos-latest validation log
           path: ./validation.log
+
+      - name: Propagate self-test status
+        if: steps.self_tests.outcome == 'failure'
+        run: exit 1
