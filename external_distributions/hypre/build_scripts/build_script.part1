@@ -50,4 +50,8 @@ tar xfz hypre-2.0.0.tar.gz
 # Go to it source directory
 cd  hypre-2.0.0/src
 
+# Patch for latest version of openmpi
+find . -type f -exec sed -i 's|MPI_Address|MPI_Get_address|g' {} \;
+find . -type f -exec sed -i 's|MPI_Type_struct|MPI_Type_create_struct|g' {} \;
+
 # Configure it

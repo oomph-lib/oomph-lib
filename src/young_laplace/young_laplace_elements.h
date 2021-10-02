@@ -78,16 +78,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    YoungLaplaceEquations(const YoungLaplaceEquations& dummy)
-    {
-      BrokenCopy::broken_copy("YoungLaplaceEquations");
-    }
+    YoungLaplaceEquations(const YoungLaplaceEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const YoungLaplaceEquations&)
-    {
-      BrokenCopy::broken_assign("YoungLaplaceEquations");
-    }
+    void operator=(const YoungLaplaceEquations&) = delete;
 
     /// Access function: Nodal function value at local node n
     /// Uses suitably interpolated value for hanging nodes.
@@ -481,17 +475,10 @@ namespace oomph
     QYoungLaplaceElement() : QElement<2, NNODE_1D>(), YoungLaplaceEquations() {}
 
     /// Broken copy constructor
-    QYoungLaplaceElement(const QYoungLaplaceElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QYoungLaplaceElement");
-    }
+    QYoungLaplaceElement(const QYoungLaplaceElement<NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QYoungLaplaceElement<NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("QYoungLaplaceElement");
-    }
-
+    void operator=(const QYoungLaplaceElement<NNODE_1D>&) = delete;
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n

@@ -241,16 +241,10 @@ namespace oomph
     std::map<unsigned, unsigned> Main_to_added_mapping;
 
     /// Inaccessible copy constructor
-    AddedMainNumberingLookup(const AddedMainNumberingLookup& dummy)
-    {
-      BrokenCopy::broken_copy("AddedMainNumberingLookup");
-    }
+    AddedMainNumberingLookup(const AddedMainNumberingLookup& dummy) = delete;
 
     /// Inaccessible assignment operator
-    void operator=(const AddedMainNumberingLookup& dummy)
-    {
-      BrokenCopy::broken_assign("AddedMainNumberingLookup");
-    }
+    void operator=(const AddedMainNumberingLookup& dummy) = delete;
   };
 
 
@@ -312,16 +306,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SumOfMatrices(const SumOfMatrices& matrix)
-    {
-      BrokenCopy::broken_copy("SumOfMatrices");
-    }
+    SumOfMatrices(const SumOfMatrices& matrix) = delete;
 
     /// Broken assignment operator
-    void operator=(const SumOfMatrices&)
-    {
-      BrokenCopy::broken_assign("SumOfMatrices");
-    }
+    void operator=(const SumOfMatrices&) = delete;
 
     /// Destructor: delete matrices as instructed by
     /// Should_delete_added_matrix vector and Should_delete_main_matrix.

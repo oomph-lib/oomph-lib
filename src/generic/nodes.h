@@ -217,16 +217,10 @@ namespace oomph
          const bool& allocate_storage = true);
 
     /// \short Broken copy constructor.
-    Data(const Data& data)
-    {
-      BrokenCopy::broken_copy("Data");
-    }
+    Data(const Data& data) = delete;
 
     /// Broken assignment operator.
-    void operator=(const Data&)
-    {
-      BrokenCopy::broken_assign("Data");
-    }
+    void operator=(const Data&) = delete;
 
     /// Output operator: output all values at all times, along with any extra
     /// information stored for the timestepper.
@@ -597,13 +591,10 @@ namespace oomph
     HijackedData(const unsigned& copied_value, Data* const& data_pt);
 
     /// \short (Shallow) copy constructor
-    HijackedData(const Data& data) : Data(data) {}
+    HijackedData(const Data& data) = delete;
 
     /// Broken assignment operator
-    void operator=(const HijackedData&)
-    {
-      BrokenCopy::broken_assign("HijackedData");
-    }
+    void operator=(const HijackedData&) = delete;
 
     /// \short Destructor informs original object that the copy is
     /// being deleted and clears its pointers to the stored values.
@@ -674,13 +665,10 @@ namespace oomph
     CopiedData(Data* const& data_pt);
 
     /// \short (Shallow) copy constructor
-    CopiedData(const Data& data) : Data(data) {}
+    CopiedData(const Data& data) = delete;
 
     /// Broken assignment operator
-    void operator=(const CopiedData&)
-    {
-      BrokenCopy::broken_assign("CopiedData");
-    }
+    void operator=(const CopiedData&) = delete;
 
     /// \short Destructor informs original object that the copy is
     /// being deleted and clears its pointers to the stored values.
@@ -788,16 +776,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HangInfo(const HangInfo&)
-    {
-      BrokenCopy::broken_copy("HangInfo");
-    }
+    HangInfo(const HangInfo&) = delete;
 
     /// Broken assignment operator
-    void operator=(const HangInfo&)
-    {
-      BrokenCopy::broken_assign("HangInfo");
-    }
+    void operator=(const HangInfo&) = delete;
 
     /// Return the number of master nodes
     unsigned nmaster() const
@@ -1021,16 +1003,10 @@ namespace oomph
     virtual ~Node();
 
     /// Broken copy constructor
-    Node(const Node& node) : Data()
-    {
-      BrokenCopy::broken_copy("Node");
-    }
+    Node(const Node& node) = delete;
 
     /// Broken assignment operator
-    void operator=(const Node&)
-    {
-      BrokenCopy::broken_assign("Node");
-    }
+    void operator=(const Node&) = delete;
 
     /// Output operator: output location and all values at all times, along with
     /// any extra information stored for the timestepper.
@@ -1763,16 +1739,10 @@ namespace oomph
     virtual ~SolidNode();
 
     /// Broken copy constructor
-    SolidNode(const SolidNode& solid_node) : Node()
-    {
-      BrokenCopy::broken_copy("SolidNode");
-    }
+    SolidNode(const SolidNode& solid_node) = delete;
 
     /// Broken assignment operator
-    void operator=(const SolidNode&)
-    {
-      BrokenCopy::broken_assign("SolidNode");
-    }
+    void operator=(const SolidNode&) = delete;
 
     /// \short Copy nodal positions and associated data from specified
     /// node object
@@ -2192,16 +2162,10 @@ namespace oomph
     virtual ~BoundaryNodeBase();
 
     /// Broken copy constructor
-    BoundaryNodeBase(const BoundaryNodeBase& boundary_node_base)
-    {
-      BrokenCopy::broken_copy("BoundaryNodeBase");
-    }
+    BoundaryNodeBase(const BoundaryNodeBase& boundary_node_base) = delete;
 
     /// Broken assignment operator
-    void operator=(const BoundaryNodeBase&)
-    {
-      BrokenCopy::broken_assign("BoundaryNodeBase");
-    }
+    void operator=(const BoundaryNodeBase&) = delete;
 
     /// Have boundary coordinates been set up?
     bool boundary_coordinates_have_been_set_up()
@@ -2545,16 +2509,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BoundaryNode(const BoundaryNode<NODE_TYPE>& node)
-    {
-      BrokenCopy::broken_copy("BouandryNode");
-    }
+    BoundaryNode(const BoundaryNode<NODE_TYPE>& node) = delete;
 
     /// Broken assignment operator
-    void operator=(const BoundaryNode<NODE_TYPE>&)
-    {
-      BrokenCopy::broken_assign("BoundaryNode");
-    }
+    void operator=(const BoundaryNode<NODE_TYPE>&) = delete;
 
     /// Have boundary coordinates been set up?
     bool boundary_coordinates_have_been_set_up()

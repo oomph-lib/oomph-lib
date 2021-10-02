@@ -59,10 +59,8 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableQSpectralElement(const RefineableQSpectralElement<1>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQSpectralElement<1>");
-    }
+    RefineableQSpectralElement(const RefineableQSpectralElement<1>& dummy) =
+      delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -70,10 +68,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const RefineableQSpectralElement<1>&)
-     {
-      BrokenCopy::broken_assign("RefineableQSpecralElement<1>");
-      }*/
+    /*void operator=(const RefineableQSpectralElement<1>&) = delete;*/
 
     /// Destructor
     virtual ~RefineableQSpectralElement()

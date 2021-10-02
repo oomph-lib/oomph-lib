@@ -124,16 +124,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BiharmonicPreconditioner(const BiharmonicPreconditioner&)
-    {
-      BrokenCopy::broken_copy("BiharmonicPreconditioner");
-    }
+    BiharmonicPreconditioner(const BiharmonicPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const BiharmonicPreconditioner&)
-    {
-      BrokenCopy::broken_assign("BiharmonicPreconditioner");
-    }
+    void operator=(const BiharmonicPreconditioner&) = delete;
 
     /// \short Setup the preconditioner
     void setup();
@@ -226,16 +220,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    ExactSubBiharmonicPreconditioner(const ExactSubBiharmonicPreconditioner&)
-    {
-      BrokenCopy::broken_copy("ExactSubBiharmonicPreconditioner");
-    }
+    ExactSubBiharmonicPreconditioner(const ExactSubBiharmonicPreconditioner&) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const ExactSubBiharmonicPreconditioner&)
-    {
-      BrokenCopy::broken_assign("ExactSubBiharmonicPreconditioner");
-    }
+    void operator=(const ExactSubBiharmonicPreconditioner&) = delete;
 
     /// \short Setup the preconditioner
     void setup();
@@ -327,16 +316,10 @@ namespace oomph
 
     /// Broken copy constructor
     InexactSubBiharmonicPreconditioner(
-      const InexactSubBiharmonicPreconditioner&)
-    {
-      BrokenCopy::broken_copy("InexactSubBiharmonicPreconditioner");
-    }
+      const InexactSubBiharmonicPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const InexactSubBiharmonicPreconditioner&)
-    {
-      BrokenCopy::broken_assign("InexactSubBiharmonicPreconditioner");
-    }
+    void operator=(const InexactSubBiharmonicPreconditioner&) = delete;
 
     /// \short Setup the preconditioner
     void setup();

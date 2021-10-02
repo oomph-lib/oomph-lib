@@ -74,16 +74,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    LinearWaveFluxElement(const LinearWaveFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("LinearWaveFluxElement");
-    }
+    LinearWaveFluxElement(const LinearWaveFluxElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const LinearWaveFluxElement&)
-    {
-      BrokenCopy::broken_assign("LinearWaveFluxElement");
-    }
+    void operator=(const LinearWaveFluxElement&) = delete;
 
 
     /// Access function for the prescribed-flux function pointer

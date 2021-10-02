@@ -691,11 +691,7 @@ namespace oomph
 
     /// Broken copy constructor
     PMLHelmholtzFluxFromNormalDisplacementBCElement(
-      const PMLHelmholtzFluxFromNormalDisplacementBCElement& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "PMLHelmholtzFluxFromNormalDisplacementBCElement");
-    }
+      const PMLHelmholtzFluxFromNormalDisplacementBCElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -704,11 +700,7 @@ namespace oomph
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
     /*void operator=(const
-                   PMLHelmholtzFluxFromNormalDisplacementBCElement&)
-     {
-      BrokenCopy::broken_assign
-       ("PMLHelmholtzFluxFromNormalDisplacementBCElement");
-       }*/
+                   PMLHelmholtzFluxFromNormalDisplacementBCElement&) = delete;*/
 
 
     /// Add the element's contribution to its residual vector

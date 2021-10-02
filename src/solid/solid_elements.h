@@ -2144,10 +2144,7 @@ namespace oomph
 
     /// Broken copy constructor
     TPVDElementWithContinuousPressure(
-      const TPVDElementWithContinuousPressure<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("TPVDElementWithContinuousPressu");
-    }
+      const TPVDElementWithContinuousPressure<DIM>& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -2155,10 +2152,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const TPVDElementWithContinuousPressure<DIM>&)
-     {
-      BrokenCopy::broken_assign("TPVDElementWithContinuousPressure");
-      }*/
+    /*void operator=(const TPVDElementWithContinuousPressure<DIM>&) = delete;*/
 
     /// \short Set the value at which the solid pressure is stored in the nodes
     inline int solid_p_nodal_index() const

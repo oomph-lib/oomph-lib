@@ -130,10 +130,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Shape(const Shape& shape)
-    {
-      BrokenCopy::broken_copy("Shape");
-    }
+    Shape(const Shape& shape) = delete;
 
     /// Default constructor - just assigns a null pointers and zero index
     /// sizes.
@@ -352,10 +349,7 @@ namespace oomph
     DShape() : DPsi(0), Allocated_storage(0), Index1(0), Index2(0), Index3(0) {}
 
     /// Broken copy constructor
-    DShape(const DShape& dshape)
-    {
-      BrokenCopy::broken_copy("DShape");
-    }
+    DShape(const DShape& dshape) = delete;
 
     /// The assignment operator does a shallow copy
     /// (resets the pointer to the data)
@@ -544,10 +538,7 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    void operator=(const ShapeWithDeepCopy& old_shape)
-    {
-      BrokenCopy::broken_assign("ShapeWithDeepCopy");
-    }
+    void operator=(const ShapeWithDeepCopy& old_shape) = delete;
 
     /// Destructor, clear up the memory allocated by the object
     ~ShapeWithDeepCopy()

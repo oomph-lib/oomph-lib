@@ -83,16 +83,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    IterativeLinearSolver(const IterativeLinearSolver&)
-    {
-      BrokenCopy::broken_copy("IterativeLinearSolver");
-    }
+    IterativeLinearSolver(const IterativeLinearSolver&) = delete;
 
     /// Broken assignment operator
-    void operator=(const IterativeLinearSolver&)
-    {
-      BrokenCopy::broken_assign("IterativeLinearSolver");
-    }
+    void operator=(const IterativeLinearSolver&) = delete;
 
     /// Destructor (empty)
     virtual ~IterativeLinearSolver() {}
@@ -306,16 +300,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    CG(const CG&)
-    {
-      BrokenCopy::broken_copy("CG");
-    }
+    CG(const CG&) = delete;
 
     /// Broken assignment operator
-    void operator=(const CG&)
-    {
-      BrokenCopy::broken_assign("CG");
-    }
+    void operator=(const CG&) = delete;
 
     /// Overload disable resolve so that it cleans up memory too
     void disable_resolve()
@@ -438,17 +426,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BiCGStab(const BiCGStab&)
-    {
-      BrokenCopy::broken_copy("BiCGStab");
-    }
+    BiCGStab(const BiCGStab&) = delete;
 
     /// Broken assignment operator
-    void operator=(const BiCGStab&)
-    {
-      BrokenCopy::broken_assign("BiCGStab");
-    }
-
+    void operator=(const BiCGStab&) = delete;
 
     /// Overload disable resolve so that it cleans up memory too
     void disable_resolve()
@@ -633,16 +614,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    GS(const GS&)
-    {
-      BrokenCopy::broken_copy("GS");
-    }
+    GS(const GS&) = delete;
 
     /// Broken assignment operator
-    void operator=(const GS&)
-    {
-      BrokenCopy::broken_assign("GS");
-    }
+    void operator=(const GS&) = delete;
 
     /// Overload disable resolve so that it cleans up memory too
     void disable_resolve()
@@ -825,16 +800,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    GS(const GS&)
-    {
-      BrokenCopy::broken_copy("GS");
-    }
+    GS(const GS&) = delete;
 
     /// Broken assignment operator
-    void operator=(const GS&)
-    {
-      BrokenCopy::broken_assign("GS");
-    }
+    void operator=(const GS&) = delete;
 
     /// \short The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
@@ -1047,16 +1016,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    DampedJacobi(const DampedJacobi&)
-    {
-      BrokenCopy::broken_copy("DampedJacobi");
-    }
+    DampedJacobi(const DampedJacobi&) = delete;
 
     /// Broken assignment operator
-    void operator=(const DampedJacobi&)
-    {
-      BrokenCopy::broken_assign("DampedJacobi");
-    }
+    void operator=(const DampedJacobi&) = delete;
 
     /// Cleanup data that's stored for resolve (if any has been stored)
     void clean_up_memory()
@@ -1282,16 +1245,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    GMRES(const GMRES&)
-    {
-      BrokenCopy::broken_copy("GMRES");
-    }
+    GMRES(const GMRES&) = delete;
 
     /// Broken assignment operator
-    void operator=(const GMRES&)
-    {
-      BrokenCopy::broken_assign("GMRES");
-    }
+    void operator=(const GMRES&) = delete;
 
     /// Overload disable resolve so that it cleans up memory too
     void disable_resolve()
@@ -1649,16 +1606,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AugmentedProblemGMRES(const AugmentedProblemGMRES&)
-    {
-      BrokenCopy::broken_copy("AugmentedProblemGMRES");
-    }
+    AugmentedProblemGMRES(const AugmentedProblemGMRES&) = delete;
 
     /// Broken assignment operator
-    void operator=(const AugmentedProblemGMRES&)
-    {
-      BrokenCopy::broken_assign("AugmentedProblemGMRES");
-    }
+    void operator=(const AugmentedProblemGMRES&) = delete;
 
     /// Overload disable resolve so that it cleans up memory too
     void disable_resolve()

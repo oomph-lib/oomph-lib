@@ -80,16 +80,11 @@ namespace oomph
 
     /// Broken copy constructor
     TDisplacementBasedFoepplvonKarmanElement(
-      const TDisplacementBasedFoepplvonKarmanElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("TDisplacementBasedFoepplvonKarmanElement");
-    }
+      const TDisplacementBasedFoepplvonKarmanElement<NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TDisplacementBasedFoepplvonKarmanElement<NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("TDisplacementBasedFoepplvonKarmanElement");
-    }
+    void operator=(const TDisplacementBasedFoepplvonKarmanElement<NNODE_1D>&) =
+      delete;
 
     /// \short Access function for Nvalue: # of `values' (pinned or
     /// dofs) at node n (always returns the same value at every node, 4)

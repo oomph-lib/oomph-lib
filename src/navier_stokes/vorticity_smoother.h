@@ -1843,16 +1843,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    VorticitySmoother(const VorticitySmoother&)
-    {
-      BrokenCopy::broken_copy("VorticitySmoother");
-    }
+    VorticitySmoother(const VorticitySmoother&) = delete;
 
     /// Broken assignment operator
-    void operator=(const VorticitySmoother&)
-    {
-      BrokenCopy::broken_assign("VorticitySmoother");
-    }
+    void operator=(const VorticitySmoother&) = delete;
 
     /// Empty virtual destructor
     virtual ~VorticitySmoother() {}

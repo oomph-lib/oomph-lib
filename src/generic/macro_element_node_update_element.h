@@ -74,10 +74,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    MacroElementNodeUpdateNode(const MacroElementNodeUpdateNode&)
-    {
-      BrokenCopy::broken_copy("MacroElementNodeUpdateNode");
-    }
+    MacroElementNodeUpdateNode(const MacroElementNodeUpdateNode&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -85,11 +82,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const MacroElementNodeUpdateNode&)
-     {
-      BrokenCopy::broken_assign("MacroElementNodeUpdateNode");
-      }*/
-
+    /*void operator=(const MacroElementNodeUpdateNode&) = delete;*/
 
     ///\short Destructor (empty)
     virtual ~MacroElementNodeUpdateNode() {}
@@ -207,16 +200,11 @@ namespace oomph
     MacroElementNodeUpdateElementBase() {}
 
     /// Broken copy constructor
-    MacroElementNodeUpdateElementBase(const MacroElementNodeUpdateElementBase&)
-    {
-      BrokenCopy::broken_copy("MacroElementNodeUpdateElementBase");
-    }
+    MacroElementNodeUpdateElementBase(
+      const MacroElementNodeUpdateElementBase&) = delete;
 
     /// Broken assignment operator
-    void operator=(const MacroElementNodeUpdateElementBase&)
-    {
-      BrokenCopy::broken_assign("MacroElementNodeUpdateElementBase");
-    }
+    void operator=(const MacroElementNodeUpdateElementBase&) = delete;
 
     /// Virtual destructor (empty)
     virtual ~MacroElementNodeUpdateElementBase() {}
@@ -293,19 +281,14 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    MacroElementNodeUpdateElement(const MacroElementNodeUpdateElement&)
-    {
-      BrokenCopy::broken_copy("MacroElementNodeUpdateElement");
-    }
+    MacroElementNodeUpdateElement(const MacroElementNodeUpdateElement&) =
+      delete;
 
     /// Empty destructor to clean up allocated memory
     ~MacroElementNodeUpdateElement() {}
 
     /// Broken assignment operator
-    /*void operator=(const MacroElementNodeUpdateElement&)
-     {
-      BrokenCopy::broken_assign("MacroElementNodeUpdateElement");
-      }*/
+    /*void operator=(const MacroElementNodeUpdateElement&) = delete;*/
 
     /// \short Set node update information:
     /// Pass the vector of (pointers to) the geometric objects
@@ -383,16 +366,10 @@ namespace oomph
     virtual ~MacroElementNodeUpdateMesh() {}
 
     /// Broken copy constructor
-    MacroElementNodeUpdateMesh(const MacroElementNodeUpdateMesh&)
-    {
-      BrokenCopy::broken_copy("MacroElementNodeUpdateMesh");
-    }
+    MacroElementNodeUpdateMesh(const MacroElementNodeUpdateMesh&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const MacroElementNodeUpdateMesh&)
-     {
-      BrokenCopy::broken_assign("MacroElementNodeUpdateMesh");
-      }*/
+    /*void operator=(const MacroElementNodeUpdateMesh&) = delete;*/
 
     /// Access to Macro_domain_pt for MacroElementNodeUpdateMesh; this
     /// must be filled in by any mesh which inherits from here

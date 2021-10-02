@@ -103,17 +103,11 @@ namespace oomph
 
 
     /// Broken copy constructor
-    BiharmonicFluxElement(const BiharmonicFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("BiharmonicFluxElement<DIM>");
-    }
+    BiharmonicFluxElement(const BiharmonicFluxElement& dummy) = delete;
 
 
     /// Broken assignment operator
-    void operator=(const BiharmonicFluxElement&)
-    {
-      BrokenCopy::broken_assign("BiharmonicFluxElement<DIM>");
-    }
+    void operator=(const BiharmonicFluxElement&) = delete;
 
     /// Access function for the flux0 function pointer
     FluxFctPt& flux0_fct_pt()

@@ -77,10 +77,7 @@ namespace oomph
 
     /// Broken copy constructor
     PMLFourierDecomposedHelmholtzFluxElement(
-      const PMLFourierDecomposedHelmholtzFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("PMLFourierDecomposedHelmholtzFluxElement");
-    }
+      const PMLFourierDecomposedHelmholtzFluxElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -88,11 +85,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const PMLFourierDecomposedHelmholtzFluxElement&)
-     {
-      BrokenCopy::broken_assign
-       ("PMLFourierDecomposedHelmholtzFluxElement");
-       }*/
+    /*void operator=(const PMLFourierDecomposedHelmholtzFluxElement&) =
+     * delete;*/
 
 
     /// Access function for the prescribed-flux function pointer
@@ -431,18 +425,11 @@ namespace oomph
 
     /// Broken copy constructor
     PMLFourierDecomposedHelmholtzPowerMonitorElement(
-      const PMLFourierDecomposedHelmholtzPowerMonitorElement& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "PMLFourierDecomposedHelmholtzPowerMonitorElement");
-    }
+      const PMLFourierDecomposedHelmholtzPowerMonitorElement& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const PMLFourierDecomposedHelmholtzPowerMonitorElement&)
-     {
-      BrokenCopy::broken_assign
-       ("PMLFourierDecomposedHelmholtzPowerMonitorElement");
-       }*/
+    /*void operator=(const PMLFourierDecomposedHelmholtzPowerMonitorElement&) =
+     * delete;*/
 
 
     /// \short Specify the value of nodal zeta from the face geometry

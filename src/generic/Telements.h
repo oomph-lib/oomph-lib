@@ -1105,10 +1105,7 @@ namespace oomph
     TElementGeometricBase() {}
 
     /// Broken copy constructor
-    TElementGeometricBase(const TElementGeometricBase&)
-    {
-      BrokenCopy::broken_copy("TElementGeometricBase");
-    }
+    TElementGeometricBase(const TElementGeometricBase&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -1116,10 +1113,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const TElementGeometricBase&)
-     {
-      BrokenCopy::broken_assign("TElementGeometricBase");
-      }*/
+    /*void operator=(const TElementGeometricBase&) = delete;*/
   };
 
 
@@ -1139,16 +1133,10 @@ namespace oomph
     TElementBase() {}
 
     /// Broken copy constructor
-    TElementBase(const TElementBase&)
-    {
-      BrokenCopy::broken_copy("TElementBase");
-    }
+    TElementBase(const TElementBase&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const TElementBase&)
-     {
-      BrokenCopy::broken_assign("TElementBase");
-      }*/
+    /*void operator=(const TElementBase&) = delete;*/
 
     /// It's a T element!
     ElementGeometry::ElementGeometry element_geometry() const
@@ -1273,16 +1261,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    TElement(const TElement&)
-    {
-      BrokenCopy::broken_copy("TElement");
-    }
+    TElement(const TElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const TElement&)
-     {
-      BrokenCopy::broken_assign("TElement");
-      }*/
+    /*void operator=(const TElement&) = delete;*/
 
 
     /// Destructor
@@ -1590,16 +1572,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    TElement(const TElement&)
-    {
-      BrokenCopy::broken_copy("TElement");
-    }
+    TElement(const TElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const TElement&)
-     {
-      BrokenCopy::broken_assign("TElement");
-      }*/
+    /*void operator=(const TElement&) = delete;*/
 
 
     /// Destructor
@@ -3113,16 +3089,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    TElement(const TElement&)
-    {
-      BrokenCopy::broken_copy("TElement");
-    }
+    TElement(const TElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const TElement&)
-     {
-      BrokenCopy::broken_assign("TElement");
-      }*/
+    /*void operator=(const TElement&) = delete;*/
 
 
     /// Destructor
@@ -3673,16 +3643,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TBubbleEnrichedElement(const TBubbleEnrichedElement&)
-    {
-      BrokenCopy::broken_copy("TBubbleEnrichedElement");
-    }
+    TBubbleEnrichedElement(const TBubbleEnrichedElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const TBubbleEnrichedElement&)
-     {
-      BrokenCopy::broken_assign("TBubbleEnrichedElement");
-      }*/
+    /*void operator=(const TBubbleEnrichedElement&) = delete;*/
 
     /// Destructor
     ~TBubbleEnrichedElement() {}
@@ -3741,16 +3705,10 @@ namespace oomph
     TSolidElementBase(){};
 
     /// Broken copy constructor
-    TSolidElementBase(const TSolidElementBase&)
-    {
-      BrokenCopy::broken_copy("TSolidElementBase");
-    }
+    TSolidElementBase(const TSolidElementBase&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const TSolidElementBase&)
-     {
-      BrokenCopy::broken_assign("TSolidElementBase");
-      }*/
+    /*void operator=(const TSolidElementBase&) = delete;*/
   };
 
 
@@ -3787,16 +3745,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidTElement(const SolidTElement&)
-    {
-      BrokenCopy::broken_copy("SolidTElement");
-    }
+    SolidTElement(const SolidTElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidTElement&)
-     {
-      BrokenCopy::broken_assign("SolidTElement");
-      }*/
+    /*void operator=(const SolidTElement&) = delete;*/
 
     /// \short Build the lower-dimensional FaceElement (an element of type
     /// SolidPointElement).  The face index takes two values
@@ -3858,16 +3810,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidTElement(const SolidTElement&)
-    {
-      BrokenCopy::broken_copy("SolidTElement");
-    }
+    SolidTElement(const SolidTElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidTElement&)
-     {
-      BrokenCopy::broken_assign("SolidTElement");
-      }*/
+    /*void operator=(const SolidTElement&) = delete;*/
 
     /// \short Build the lower-dimensional FaceElement (an element of type
     /// SolidTElement<1,NNODE_1D>). The face index takes three possible values:
@@ -3924,16 +3870,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidTElement(const SolidTElement&)
-    {
-      BrokenCopy::broken_copy("SolidTElement");
-    }
+    SolidTElement(const SolidTElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidTElement&)
-     {
-      BrokenCopy::broken_assign("SolidTElement");
-      }*/
+    /*void operator=(const SolidTElement&) = delete;*/
 
 
     /// \short Build the lower-dimensional FaceElement (an element of type
@@ -4003,16 +3943,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidTBubbleEnrichedElement(const SolidTBubbleEnrichedElement&)
-    {
-      BrokenCopy::broken_copy("SolidTBubbleEnrichedElement");
-    }
+    SolidTBubbleEnrichedElement(const SolidTBubbleEnrichedElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidTBubbleEnrichedElement&)
-     {
-      BrokenCopy::broken_assign("SolidTBubbleEnrichedElement");
-      }*/
+    /*void operator=(const SolidTBubbleEnrichedElement&) = delete;*/
 
     /// Destructor
     ~SolidTBubbleEnrichedElement() {}

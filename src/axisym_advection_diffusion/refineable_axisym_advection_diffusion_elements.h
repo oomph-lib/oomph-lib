@@ -68,10 +68,7 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableAxisymAdvectionDiffusionEquations(
-      const RefineableAxisymAdvectionDiffusionEquations& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableAxisymAdvectionDiffusionEquations");
-    }
+      const RefineableAxisymAdvectionDiffusionEquations& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -79,10 +76,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const RefineableAxisymAdvectionDiffusionEquations&)
-     {
-      BrokenCopy::broken_assign("RefineableAxisymAdvectionDiffusionEquations");
-      }*/
+    /*void operator=(const RefineableAxisymAdvectionDiffusionEquations&) =
+     * delete;*/
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -381,17 +376,13 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQAxisymAdvectionDiffusionElement(
-      const RefineableQAxisymAdvectionDiffusionElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQAxisymAdvectionDiffusionElement");
-    }
+      const RefineableQAxisymAdvectionDiffusionElement<NNODE_1D>& dummy) =
+      delete;
 
     /// Broken assignment operator
     /*void operator=(const
-                   RefineableQAxisymAdvectionDiffusionElement<NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("RefineableQAxisymAdvectionDiffusionElement");
-      }*/
+                   RefineableQAxisymAdvectionDiffusionElement<NNODE_1D>&) =
+       delete;*/
 
     /// Number of continuously interpolated values: 1
     unsigned ncont_interpolated_values() const

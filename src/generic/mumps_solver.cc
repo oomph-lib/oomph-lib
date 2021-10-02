@@ -67,17 +67,18 @@ namespace oomph
   /// Constructor: Call setup
   //=============================================================================
   MumpsSolver::MumpsSolver()
+    : Suppress_solve(false),
+      Doc_stats(false),
+      Suppress_warning_about_MPI_COMM_WORLD(false),
+      Suppress_mumps_info_during_solve(false),
+      Mumps_is_initialised(false),
+      Workspace_scaling_factor(Default_workspace_scaling_factor),
+      Delete_matrix_data(false),
+      Mumps_struc_pt(nullptr),
+      Jacobian_symmetry_flag(MumpsJacobianSymmetryFlags::Unsymmetric),
+      Jacobian_ordering_flag(MumpsJacobianOrderingFlags::Metis_ordering)
   {
-    Doc_stats = false;
-    Suppress_solve = false;
-    Delete_matrix_data = false;
-    Suppress_warning_about_MPI_COMM_WORLD = false;
-    Suppress_mumps_info_during_solve = false;
-    Workspace_scaling_factor = Default_workspace_scaling_factor;
-    Mumps_is_initialised = false;
-    Mumps_struc_pt = 0;
   }
-
 
   //=============================================================================
   /// Initialise instance of mumps data structure
@@ -96,8 +97,9 @@ namespace oomph
     // Root processor participates in solution
     Mumps_struc_pt->par = 1;
 
-    // Matrix is unsymmetric
-    Mumps_struc_pt->sym = 0;
+    // Set matrix symmetry properties
+    // (unsymmetric / symmetric positive definite / general symmetric)
+    Mumps_struc_pt->sym = Jacobian_symmetry_flag;
 
     // First call does the initialise phase
     Mumps_struc_pt->job = -1;
@@ -107,26 +109,29 @@ namespace oomph
     Mumps_is_initialised = true;
 
     // Output stream for global info on host. Negative value suppresses printing
-    Mumps_struc_pt->icntl[2] = -1;
+    Mumps_struc_pt->ICNTL(3) = -1;
 
     // Only show error messages and stats
-    Mumps_struc_pt->icntl[3] =
-      2; // 4 for full doc; creates huge amount of output
+    // (4 for full doc; creates huge amount of output)
+    Mumps_struc_pt->ICNTL(4) = 2;
 
     // Write matrix
     // sprintf(Mumps_struc_pt->write_problem,"/work/e173/e173/mheil/matrix");
 
     // Assembled matrix (rather than element-by_element)
-    Mumps_struc_pt->icntl[4] = 0;
+    Mumps_struc_pt->ICNTL(5) = 0;
+
+    // set the package to use for ordering during (sequential) analysis
+    Mumps_struc_pt->ICNTL(7) = Jacobian_ordering_flag;
 
     // Distributed problem with user-specified distribution
-    Mumps_struc_pt->icntl[17] = 3;
+    Mumps_struc_pt->ICNTL(18) = 3;
 
     // Dense RHS
-    Mumps_struc_pt->icntl[19] = 0;
+    Mumps_struc_pt->ICNTL(20) = 0;
 
     // Non-distributed solution
-    Mumps_struc_pt->icntl[20] = 0;
+    Mumps_struc_pt->ICNTL(21) = 0;
   }
 
 
@@ -248,7 +253,7 @@ namespace oomph
     {
       // Output stream for global info on host. Negative value suppresses
       // printing
-      Mumps_struc_pt->icntl[2] = 6;
+      Mumps_struc_pt->ICNTL(3) = 6;
     }
 
     // number of processors
@@ -301,6 +306,16 @@ namespace oomph
         int* matrix_index_pt = cr_matrix_pt->column_index();
         int* matrix_start_pt = cr_matrix_pt->row_start();
         int i_row = 0;
+
+        // is the matrix symmetric? If so, we must only provide
+        // MUMPS with the upper (or lower) triangular part of the Jacobian
+        if (Mumps_struc_pt->sym != MumpsJacobianSymmetryFlags::Unsymmetric)
+        {
+          oomph_info << "Assuming Jacobian matrix is symmetric "
+                     << "(passing MUMPS the upper triangular part)"
+                     << std::endl;
+        }
+
         for (int count = 0; count < nnz_loc; count++)
         {
           A_loc[count] = matrix_value_pt[count];
@@ -313,6 +328,16 @@ namespace oomph
           {
             i_row++;
             Irn_loc[count] = first_row + i_row + 1;
+          }
+
+          // only pass the upper triangular part (and diagonal)
+          // if we have a symmetric matrix (MUMPS sums values,
+          // so need to set the lwoer triangle to zero)
+          if ((Mumps_struc_pt->sym !=
+               MumpsJacobianSymmetryFlags::Unsymmetric) &&
+              (Irn_loc[count] > Jcn_loc[count]))
+          {
+            A_loc[count] = 0.0;
           }
         }
 
@@ -358,7 +383,25 @@ namespace oomph
           double t_end_analyse = TimingHelpers::timer();
           oomph_info
             << "Time for mumps analysis stage in MumpsSolver [sec]       : "
-            << t_end_analyse - t_start_analyse << std::endl;
+            << t_end_analyse - t_start_analyse
+            << "\n(Ordering generated using: ";
+
+          switch (Mumps_struc_pt->INFOG(7))
+          {
+            case MumpsJacobianOrderingFlags::Scotch_ordering:
+              oomph_info << "SCOTCH";
+              break;
+            case MumpsJacobianOrderingFlags::Pord_ordering:
+              oomph_info << "PORD";
+              break;
+            case MumpsJacobianOrderingFlags::Metis_ordering:
+              oomph_info << "METIS";
+              break;
+            default:
+              oomph_info << Mumps_struc_pt->INFOG(7);
+          }
+
+          oomph_info << ")" << std::endl;
         }
 
 
@@ -370,7 +413,7 @@ namespace oomph
           if (!Suppress_mumps_info_during_solve)
           {
             oomph_info << "Estimated max. workspace in MB: "
-                       << Mumps_struc_pt->infog[25] << std::endl;
+                       << Mumps_struc_pt->INFOG(26) << std::endl;
           }
         }
 
@@ -382,13 +425,13 @@ namespace oomph
         {
           // Set workspace to multiple of that -- ought to be "significantly
           // larger than infog(26)", according to the manual :(
-          Mumps_struc_pt->icntl[22] =
-            Workspace_scaling_factor * Mumps_struc_pt->infog[25];
+          Mumps_struc_pt->ICNTL(23) =
+            Workspace_scaling_factor * Mumps_struc_pt->INFOG(26);
 
           if (!Suppress_mumps_info_during_solve)
           {
             oomph_info << "Attempting factorisation with workspace estimate: "
-                       << Mumps_struc_pt->icntl[22] << " MB\n";
+                       << Mumps_struc_pt->ICNTL(23) << " MB\n";
             oomph_info << "corresponding to Workspace_scaling_factor = "
                        << Workspace_scaling_factor << "\n";
           }
@@ -398,13 +441,13 @@ namespace oomph
           dmumps_c(Mumps_struc_pt);
 
           // Check for error
-          if (Mumps_struc_pt->infog[0] != 0)
+          if (Mumps_struc_pt->INFOG(1) != 0)
           {
             if (!Suppress_mumps_info_during_solve)
             {
               oomph_info << "Error during mumps factorisation!\n";
-              oomph_info << "Error codes: " << Mumps_struc_pt->info[0] << " "
-                         << Mumps_struc_pt->info[1] << std::endl;
+              oomph_info << "Error codes: " << Mumps_struc_pt->INFO(1) << " "
+                         << Mumps_struc_pt->INFO(2) << std::endl;
             }
 
             // Increase scaling factor for workspace and run again
@@ -465,7 +508,7 @@ namespace oomph
 
     // Switch off docing again by setting output stream for global info on
     // to negative number
-    Mumps_struc_pt->icntl[2] = -1;
+    Mumps_struc_pt->ICNTL(3) = -1;
   }
 
   //=============================================================================
@@ -584,7 +627,7 @@ namespace oomph
     {
       // Output stream for global info on host. Negative value suppresses
       // printing
-      Mumps_struc_pt->icntl[2] = 6;
+      Mumps_struc_pt->ICNTL(3) = 6;
     }
 
     // number of DOFs
@@ -649,7 +692,7 @@ namespace oomph
 
     // Switch off docing again by setting output stream for global info on
     // to negative number
-    Mumps_struc_pt->icntl[2] = -1;
+    Mumps_struc_pt->ICNTL(3) = -1;
   }
 
   //=========================================================================
@@ -823,7 +866,7 @@ namespace oomph
 
     // Switch off docing again by setting output stream for global info on
     // to negative number
-    Mumps_struc_pt->icntl[2] = -1;
+    Mumps_struc_pt->ICNTL(3) = -1;
 
     // If we are not storing the solver data for resolves, delete it
     if (!Enable_resolve)
@@ -981,7 +1024,7 @@ namespace oomph
     {
       // Output stream for global info on host. Negative value suppresses
       // printing
-      Mumps_struc_pt->icntl[2] = 6;
+      Mumps_struc_pt->ICNTL(3) = 6;
     }
 
     // Now do the back substitution phase
@@ -993,7 +1036,7 @@ namespace oomph
 
     // Switch off docing again by setting output stream for global info on
     // to negative number
-    Mumps_struc_pt->icntl[2] = -1;
+    Mumps_struc_pt->ICNTL(3) = -1;
 
     if ((Doc_time) &&
         (this->distribution_pt()->communicator_pt()->my_rank() == 0))

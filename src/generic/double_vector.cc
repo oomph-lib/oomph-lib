@@ -100,11 +100,21 @@ namespace oomph
     // Set the distribution
     this->build_distribution(dist_pt);
 
-    // use the initialise method to populate the vector
-    this->initialise(v);
+    // update the values
+    if (dist_pt->built())
+    {
+      // re-allocate memory which was deleted by clear()
+      unsigned nrow_local = this->nrow_local();
+      Values_pt = new double[nrow_local];
 
-    // indicate that its built
-    Built = true;
+      // use the initialise method to populate the vector
+      this->initialise(v);
+      Built = true;
+    }
+    else
+    {
+      Built = false;
+    }
   }
 
   //============================================================================

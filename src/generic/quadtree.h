@@ -108,16 +108,10 @@ namespace oomph
     virtual ~QuadTree() {}
 
     /// Broken copy constructor
-    QuadTree(const QuadTree& dummy)
-    {
-      BrokenCopy::broken_copy("QuadTree");
-    }
+    QuadTree(const QuadTree& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QuadTree&)
-    {
-      BrokenCopy::broken_assign("QuadTree");
-    }
+    void operator=(const QuadTree&) = delete;
 
     /// \short Overload the function construct_son to ensure that the son
     /// is a specific QuadTree and not a general Tree.
@@ -342,16 +336,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    QuadTreeRoot(const QuadTreeRoot& dummy) : TreeRoot(dummy)
-    {
-      BrokenCopy::broken_copy("QuadTreeRoot");
-    }
+    QuadTreeRoot(const QuadTreeRoot& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QuadTreeRoot&)
-    {
-      BrokenCopy::broken_assign("QuadTreeRoot");
-    }
+    void operator=(const QuadTreeRoot&) = delete;
 
 
     /// \short Return north equivalent of the neighbours in specified
@@ -435,16 +423,10 @@ namespace oomph
     QuadTreeForest(Vector<TreeRoot*>& trees_pt);
 
     /// Broken copy constructor
-    QuadTreeForest(const QuadTreeForest& dummy)
-    {
-      BrokenCopy::broken_copy("QuadTreeForest");
-    }
+    QuadTreeForest(const QuadTreeForest& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QuadTreeForest&)
-    {
-      BrokenCopy::broken_assign("QuadTreeForest");
-    }
+    void operator=(const QuadTreeForest&) = delete;
 
     /// \short Destructor: Delete the constituent quadtrees (and thus
     /// the objects associated with its non-leaf nodes!)

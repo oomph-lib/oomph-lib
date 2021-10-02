@@ -23,8 +23,8 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_REFINEABLE_QUAD_MESH_HEADER
-#define OOMPH_REFINEABLE_QUAD_MESH_HEADER
+#ifndef OOMPH_GENERIC_REFINEABLE_QUAD_MESH_HEADER
+#define OOMPH_GENERIC_REFINEABLE_QUAD_MESH_HEADER
 
 #include <limits.h>
 
@@ -59,10 +59,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableQuadMesh(const RefineableQuadMesh& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQuadMesh");
-    }
+    RefineableQuadMesh(const RefineableQuadMesh& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -70,10 +67,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const RefineableQuadMesh&)
-     {
-      BrokenCopy::broken_assign("RefineableQuadMesh");
-      }*/
+    /*void operator=(const RefineableQuadMesh&) = delete;*/
 
     /// Destructor:
     virtual ~RefineableQuadMesh() {}

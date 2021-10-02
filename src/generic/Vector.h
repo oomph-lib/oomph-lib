@@ -150,6 +150,13 @@ namespace oomph
     {
     }
 
+    /// \short A constructor that creates a vector with entries set by the
+    /// values in the input initialiser_list
+    /// Example:
+    ///           Vector<int> arr{0, 20, 100, 150);
+    ///           Vector<int> arr = {0, 20, 100, 150);
+    Vector(std::initializer_list<_Tp> init) : std::vector<_Tp>(init) {}
+
     /// Copy constructor
     Vector(const Vector<_Tp>& __x) : std::vector<_Tp>(__x) {}
 
@@ -231,6 +238,13 @@ namespace oomph
     Vector(size_type __n, const bool& __value) : std::vector<bool>(__n, __value)
     {
     }
+
+    /// \short A constructor that creates a vector with entries set by the
+    /// values in the input initialiser_list.
+    /// Example:
+    ///           Vector<int> arr{true, false, false, true);
+    ///           Vector<int> arr = {true, false, false, true);
+    Vector(std::initializer_list<bool> init) : std::vector<bool>(init) {}
 
     /// Copy constructor
     Vector(const Vector<bool>& __x) : std::vector<bool>(__x) {}

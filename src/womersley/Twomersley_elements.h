@@ -69,16 +69,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TWomersleyElement(const TWomersleyElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("TWomersleyElement");
-    }
+    TWomersleyElement(const TWomersleyElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TWomersleyElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("TWomersleyElement");
-    }
+    void operator=(const TWomersleyElement<DIM, NNODE_1D>&) = delete;
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n

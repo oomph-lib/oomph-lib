@@ -322,16 +322,10 @@ namespace oomph
     } // End of clean_up_memory
 
     /// \short Broken copy constructor
-    ComplexDampedJacobi(const ComplexDampedJacobi&)
-    {
-      BrokenCopy::broken_copy("ComplexDampedJacobi");
-    }
+    ComplexDampedJacobi(const ComplexDampedJacobi&) = delete;
 
     /// \short Broken assignment operator
-    void operator=(const ComplexDampedJacobi&)
-    {
-      BrokenCopy::broken_assign("ComplexDampedJacobi");
-    }
+    void operator=(const ComplexDampedJacobi&) = delete;
 
     /// \short Function to calculate the value of Omega by passing in the
     /// value of k and h [see Elman et al. "A multigrid method enhanced by
@@ -881,16 +875,10 @@ namespace oomph
     } // End of ~ComplexGMRES
 
     /// Broken copy constructor
-    ComplexGMRES(const ComplexGMRES&)
-    {
-      BrokenCopy::broken_copy("ComplexGMRES");
-    } // End of ComplexGMRES (copy constructor)
+    ComplexGMRES(const ComplexGMRES&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ComplexGMRES&)
-    {
-      BrokenCopy::broken_assign("ComplexGMRES");
-    } // End of operator= (assignment operator)
+    void operator=(const ComplexGMRES&) = delete;
 
     /// Overload disable resolve so that it cleans up memory too
     void disable_resolve()
@@ -1800,16 +1788,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HelmholtzGMRESMG(const HelmholtzGMRESMG&)
-    {
-      BrokenCopy::broken_copy("HelmholtzGMRESMG");
-    }
+    HelmholtzGMRESMG(const HelmholtzGMRESMG&) = delete;
 
     /// Broken assignment operator
-    void operator=(const HelmholtzGMRESMG&)
-    {
-      BrokenCopy::broken_assign("HelmholtzGMRESMG");
-    }
+    void operator=(const HelmholtzGMRESMG&) = delete;
 
     /// Overload disable resolve so that it cleans up memory too
     void disable_resolve()
@@ -3341,16 +3323,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HelmholtzFGMRESMG(const HelmholtzFGMRESMG&)
-    {
-      BrokenCopy::broken_copy("HelmholtzFGMRESMG");
-    }
+    HelmholtzFGMRESMG(const HelmholtzFGMRESMG&) = delete;
 
     /// Broken assignment operator
-    void operator=(const HelmholtzFGMRESMG&)
-    {
-      BrokenCopy::broken_assign("HelmholtzFGMRESMG");
-    }
+    void operator=(const HelmholtzFGMRESMG&) = delete;
 
     /// \short Overloaded function to let the user know that left
     /// preconditioning is not possible with FGMRES, only right preconditioning

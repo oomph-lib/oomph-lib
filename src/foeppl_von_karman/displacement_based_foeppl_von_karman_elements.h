@@ -89,16 +89,10 @@ namespace oomph
 
     /// Broken copy constructor
     DisplacementBasedFoepplvonKarmanEquations(
-      const DisplacementBasedFoepplvonKarmanEquations& dummy)
-    {
-      BrokenCopy::broken_copy("DisplacementBasedFoepplvonKarmanEquations");
-    }
+      const DisplacementBasedFoepplvonKarmanEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const DisplacementBasedFoepplvonKarmanEquations&)
-    {
-      BrokenCopy::broken_assign("DisplacementBasedFoepplvonKarmanEquations");
-    }
+    void operator=(const DisplacementBasedFoepplvonKarmanEquations&) = delete;
 
     /// Poisson's ratio
     const double& nu() const

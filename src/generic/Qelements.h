@@ -67,10 +67,7 @@ namespace oomph
     QElementGeometricBase() {}
 
     /// Broken copy constructor
-    QElementGeometricBase(const QElementGeometricBase&)
-    {
-      BrokenCopy::broken_copy("QElementGeometricBase");
-    }
+    QElementGeometricBase(const QElementGeometricBase&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -78,10 +75,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const QElementGeometricBase&)
-     {
-      BrokenCopy::broken_assign("QElementGeometricBase");
-      }*/
+    /*void operator=(const QElementGeometricBase&) = delete;*/
   };
 
 
@@ -100,16 +94,10 @@ namespace oomph
     QElementBase() : S_macro_ll_pt(0), S_macro_ur_pt(0) {}
 
     /// Broken copy constructor
-    QElementBase(const QElementBase&)
-    {
-      BrokenCopy::broken_copy("QElementBase");
-    }
+    QElementBase(const QElementBase&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QElementBase&)
-     {
-      BrokenCopy::broken_assign("QElementBase");
-      }*/
+    /*void operator=(const QElementBase&) = delete;*/
 
     /// Destructor: Kill storage for macro element reference coords
     virtual ~QElementBase()
@@ -346,16 +334,10 @@ namespace oomph
     QSolidElementBase(){};
 
     /// Broken copy constructor
-    QSolidElementBase(const QSolidElementBase&)
-    {
-      BrokenCopy::broken_copy("QSolidElementBase");
-    }
+    QSolidElementBase(const QSolidElementBase&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QSolidElementBase&)
-     {
-      BrokenCopy::broken_assign("QSolidElementBase");
-      }*/
+    /*void operator=(const QSolidElementBase&) = delete;*/
 
     /// \short Set pointer to MacroElement -- overloads generic version
     /// in RefineableQElement<2> and uses the MacroElement
@@ -520,16 +502,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QElement(const QElement&)
-    {
-      BrokenCopy::broken_copy("QElement");
-    }
+    QElement(const QElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QElement&)
-     {
-      BrokenCopy::broken_assign("QElement");
-      }*/
+    /*void operator=(const QElement&) = delete;*/
 
     /// Calculate the geometric shape functions at local coordinate s
     void shape(const Vector<double>& s, Shape& psi) const;
@@ -881,16 +857,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QElement(const QElement&)
-    {
-      BrokenCopy::broken_copy("QElement");
-    }
+    QElement(const QElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QElement&)
-     {
-      BrokenCopy::broken_assign("QElement");
-      }*/
+    /*void operator=(const QElement&) = delete;*/
 
     /// Calculate the geometric shape functions at local coordinate s
     void shape(const Vector<double>& s, Shape& psi) const;
@@ -1300,16 +1270,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    QElement(const QElement&)
-    {
-      BrokenCopy::broken_copy("QElement");
-    }
+    QElement(const QElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QElement&)
-     {
-      BrokenCopy::broken_assign("QElement");
-      }*/
+    /*void operator=(const QElement&) = delete;*/
 
     /// Calculate the geometric shape functions at local coordinate s
     void shape(const Vector<double>& s, Shape& psi) const;
@@ -1795,16 +1759,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQElement(const SolidQElement&)
-    {
-      BrokenCopy::broken_copy("SolidQElement");
-    }
+    SolidQElement(const SolidQElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidQElement&)
-     {
-      BrokenCopy::broken_assign("SolidQElement");
-      }*/
+    /*void operator=(const SolidQElement&) = delete;*/
 
     /// Overload the output function
     void output(std::ostream& outfile)
@@ -1966,16 +1924,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQElement(const SolidQElement&)
-    {
-      BrokenCopy::broken_copy("SolidQElement");
-    }
+    SolidQElement(const SolidQElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidQElement&)
-     {
-      BrokenCopy::broken_assign("SolidQElement");
-      }*/
+    /*void operator=(const SolidQElement&) = delete;*/
 
     /// Overload the output function
     void output(std::ostream& outfile)
@@ -2138,16 +2090,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQElement(const SolidQElement&)
-    {
-      BrokenCopy::broken_copy("SolidQElement");
-    }
+    SolidQElement(const SolidQElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidQElement&)
-     {
-      BrokenCopy::broken_assign("SolidQElement");
-      }*/
+    /*void operator=(const SolidQElement&) = delete;*/
 
     /// Overload the output function
     void output(std::ostream& outfile)

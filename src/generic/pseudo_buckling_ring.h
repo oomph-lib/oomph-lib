@@ -270,17 +270,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PseudoBucklingRing(const PseudoBucklingRing& node)
-    {
-      BrokenCopy::broken_copy("PseudoBucklingRing");
-    }
+    PseudoBucklingRing(const PseudoBucklingRing& node) = delete;
 
     /// Broken assignment operator
-    void operator=(const PseudoBucklingRing&)
-    {
-      BrokenCopy::broken_assign("PseudoBucklingRing");
-    }
-
+    void operator=(const PseudoBucklingRing&) = delete;
 
     /// Destructor:  Clean up if necessary
     ~PseudoBucklingRing()
@@ -702,16 +695,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    PseudoBucklingRingElement(const PseudoBucklingRingElement& dummy)
-    {
-      BrokenCopy::broken_copy("PseudoBucklingRingElement");
-    }
+    PseudoBucklingRingElement(const PseudoBucklingRingElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const PseudoBucklingRingElement&)
-    {
-      BrokenCopy::broken_assign("PseudoBucklingRingElement");
-    }
+    void operator=(const PseudoBucklingRingElement&) = delete;
 
     /// Destructor: Kill internal data and set to NULL
     virtual ~PseudoBucklingRingElement()

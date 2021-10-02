@@ -79,10 +79,7 @@ namespace oomph
     DummyBrickElement() : QElement<3, 2>() {}
 
     /// Broken copy constructor
-    DummyBrickElement(const DummyBrickElement& dummy)
-    {
-      BrokenCopy::broken_copy("DummyElement");
-    }
+    DummyBrickElement(const DummyBrickElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -90,10 +87,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const DummyBrickElement&)
-     {
-      BrokenCopy::broken_assign("DummyBrickElement");
-      }*/
+    /*void operator=(const DummyBrickElement&) = delete;*/
 
 
     /// \short  Required  # of `values' (pinned or dofs)
@@ -188,16 +182,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    BrickMeshBase(const BrickMeshBase&)
-    {
-      BrokenCopy::broken_copy("BrickMeshBase");
-    }
+    BrickMeshBase(const BrickMeshBase&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const BrickMeshBase&)
-     {
-      BrokenCopy::broken_assign("BrickMeshBase");
-      }*/
+    /*void operator=(const BrickMeshBase&) = delete;*/
 
     /// Destructor (empty)
     virtual ~BrickMeshBase() {}

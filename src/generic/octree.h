@@ -119,17 +119,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    OcTree(const OcTree& dummy)
-    {
-      BrokenCopy::broken_copy("OcTree");
-    }
+    OcTree(const OcTree& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const OcTree&)
-    {
-      BrokenCopy::broken_assign("OcTree");
-    }
-
+    void operator=(const OcTree&) = delete;
 
     /// \short Overload the function construct_son to ensure that the son
     /// is a specific OcTree and not a general Tree.
@@ -665,17 +658,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    OcTreeRoot(const OcTreeRoot& dummy) : TreeRoot(dummy)
-    {
-      BrokenCopy::broken_copy("OcTreeRoot");
-    }
+    OcTreeRoot(const OcTreeRoot& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const OcTreeRoot&)
-    {
-      BrokenCopy::broken_assign("OcTreeRoot");
-    }
-
+    void operator=(const OcTreeRoot&) = delete;
 
     /// \short Return vector of pointers to the edge-neighbouring TreeRoots
     /// in the (enumerated) (edge) direction.
@@ -954,16 +940,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    OcTreeForest(const OcTreeForest& dummy)
-    {
-      BrokenCopy::broken_copy("OcTreeForest");
-    }
+    OcTreeForest(const OcTreeForest& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const OcTreeForest&)
-    {
-      BrokenCopy::broken_assign("OcTreeForest");
-    }
+    void operator=(const OcTreeForest&) = delete;
 
     /// \short Destructor: Delete the constituent octrees (and thus
     /// the associated objects!)

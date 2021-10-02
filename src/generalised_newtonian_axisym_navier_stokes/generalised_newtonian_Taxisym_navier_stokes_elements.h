@@ -143,19 +143,12 @@ namespace oomph
 
     /// Broken copy constructor
     GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement(
-      const GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement");
-    }
+      const GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement& dummy) =
+      delete;
 
     /// Broken assignment operator
     void operator=(
-      const GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement&)
-    {
-      BrokenCopy::broken_assign(
-        "GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement");
-    }
+      const GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement&) = delete;
 
 
     /// \short Number of values (pinned or dofs) required at local node n.
@@ -643,18 +636,11 @@ namespace oomph
 
     /// Broken copy constructor
     GeneralisedNewtonianAxisymmetricTTaylorHoodElement(
-      const GeneralisedNewtonianAxisymmetricTTaylorHoodElement& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "GeneralisedNewtonianAxisymmetricTTaylorHoodElement");
-    }
+      const GeneralisedNewtonianAxisymmetricTTaylorHoodElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const GeneralisedNewtonianAxisymmetricTTaylorHoodElement&)
-    {
-      BrokenCopy::broken_assign(
-        "GeneralisedNewtonianAxisymmetricTTaylorHoodElement");
-    }
+    void operator=(const GeneralisedNewtonianAxisymmetricTTaylorHoodElement&) =
+      delete;
 
     /// \short Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version

@@ -1268,17 +1268,10 @@ namespace oomph
     Problem();
 
     /// Broken copy constructor
-    Problem(const Problem& dummy)
-    {
-      BrokenCopy::broken_copy("Problem");
-    }
+    Problem(const Problem& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Problem&)
-    {
-      BrokenCopy::broken_assign("Problem");
-    }
-
+    void operator=(const Problem&) = delete;
 
     /// Virtual destructor to clean up memory
     virtual ~Problem();
@@ -2987,16 +2980,10 @@ namespace oomph
     }
 
     /*  /// Broken copy constructor */
-    /*  NewtonSolverError(const NewtonSolverError& dummy)  */
-    /*   {  */
-    /*    BrokenCopy::broken_copy("NewtonSolverError"); */
-    /*   }  */
+    /*  NewtonSolverError(const NewtonSolverError& dummy) = delete;  */
 
     /*  /// Broken assignment operator */
-    /*  void operator=(const NewtonSolverError&)  */
-    /*   { */
-    /*    BrokenCopy::broken_assign("NewtonSolverError"); */
-    /*   } */
+    /*  void operator=(const NewtonSolverError&) = delete; */
   };
 
 

@@ -27,6 +27,8 @@ jobs:
       run: make -C doc
     - name: Run website install script
       run: ./bin/website_install.sh
+    - name: Grab redirect file
+      run: cp ./bin/redirect.html ./build/website/index.html
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:

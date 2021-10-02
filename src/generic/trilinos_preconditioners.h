@@ -87,11 +87,7 @@ namespace oomph
     }
 
     /// Broken copy constructor.
-    TrilinosPreconditionerBase(const TrilinosPreconditionerBase&)
-    {
-      BrokenCopy::broken_copy("TrilinosPreconditionerBase");
-    }
-
+    TrilinosPreconditionerBase(const TrilinosPreconditionerBase&) = delete;
 
     /// Broken assignment operator.
     // Commented out broken assignment operator because this can lead to a
@@ -99,10 +95,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const TrilinosPreconditionerBase&)
-     {
-      BrokenCopy::broken_assign("TrilinosPreconditionerBase");
-      }*/
+    /*void operator=(const TrilinosPreconditionerBase&) = delete;*/
 
     /// \short Function to set up a preconditioner for the linear system
     /// defined by matrix_pt. This function must be called before using
@@ -174,16 +167,10 @@ namespace oomph
     virtual ~TrilinosMLPreconditioner() {}
 
     /// Broken copy constructor.
-    TrilinosMLPreconditioner(const TrilinosMLPreconditioner&)
-    {
-      BrokenCopy::broken_copy("TrilinosMLPreconditioner");
-    }
+    TrilinosMLPreconditioner(const TrilinosMLPreconditioner&) = delete;
 
     /// Broken assignment operator.
-    /*void operator=(const TrilinosMLPreconditioner&)
-     {
-      BrokenCopy::broken_assign("TrilinosMLPreconditioner");
-      }*/
+    /*void operator=(const TrilinosMLPreconditioner&) = delete;*/
 
     /// \short Set control flags to values for Petrov-Galerkin
     /// preconditioning - for non symmetric systems
@@ -296,17 +283,10 @@ namespace oomph
     virtual ~TrilinosIFPACKPreconditioner() {}
 
     /// Broken copy constructor.
-    TrilinosIFPACKPreconditioner(const TrilinosIFPACKPreconditioner&)
-    {
-      BrokenCopy::broken_copy("TrilinosIFPACKPreconditioner");
-    }
-
+    TrilinosIFPACKPreconditioner(const TrilinosIFPACKPreconditioner&) = delete;
 
     /// Broken assignment operator.
-    /*void operator=(const TrilinosIFPACKPreconditioner&)
-     {
-      BrokenCopy::broken_assign("TrilinosIFPACKPreconditioner");
-      }*/
+    /*void operator=(const TrilinosIFPACKPreconditioner&) = delete;*/
 
     /// Function to set Preconditioner_type to "ILU"
     void set_preconditioner_ILU()

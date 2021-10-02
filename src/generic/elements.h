@@ -613,16 +613,10 @@ namespace oomph
     virtual ~GeneralisedElement();
 
     /// Broken copy constructor
-    GeneralisedElement(const GeneralisedElement&)
-    {
-      BrokenCopy::broken_copy("GeneralisedElement");
-    }
+    GeneralisedElement(const GeneralisedElement&) = delete;
 
     /// Broken assignment operator
-    void operator=(const GeneralisedElement&)
-    {
-      BrokenCopy::broken_assign("GeneralisedElement");
-    }
+    void operator=(const GeneralisedElement&) = delete;
 
     /// Return a pointer to i-th internal data object.
     Data*& internal_data_pt(const unsigned& i)
@@ -1810,10 +1804,7 @@ namespace oomph
     virtual ~FiniteElement();
 
     /// Broken copy constructor
-    FiniteElement(const FiniteElement&)
-    {
-      BrokenCopy::broken_copy("FiniteElement");
-    }
+    FiniteElement(const FiniteElement&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -1821,10 +1812,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const FiniteElement&)
-      {
-      BrokenCopy::broken_assign("FiniteElement");
-      }*/
+    /*void operator=(const FiniteElement&) = delete;*/
 
     /// Check whether the local coordinate are valid or not
     virtual bool local_coord_is_valid(const Vector<double>& s)
@@ -3469,16 +3457,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PointElement(const PointElement&)
-    {
-      BrokenCopy::broken_copy("PointElement");
-    }
+    PointElement(const PointElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const PointElement&)
-      {
-      BrokenCopy::broken_assign("PointElement");
-      }*/
+    /*void operator=(const PointElement&) = delete;*/
 
     /// Calculate the geometric shape functions at local coordinate s
     void shape(const Vector<double>& s, Shape& psi) const;
@@ -3526,17 +3508,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    SolidInitialCondition(const SolidInitialCondition&)
-    {
-      BrokenCopy::broken_copy("SolidInitialCondition");
-    }
+    SolidInitialCondition(const SolidInitialCondition&) = delete;
 
     /// Broken assignment operator
-    void operator=(const SolidInitialCondition&)
-    {
-      BrokenCopy::broken_assign("SolidInitialCondition");
-    }
-
+    void operator=(const SolidInitialCondition&) = delete;
 
     /// (Reference to) pointer to geom object that specifies the initial
     /// condition
@@ -3630,17 +3605,10 @@ namespace oomph
     virtual ~SolidFiniteElement();
 
     /// Broken copy constructor
-    SolidFiniteElement(const SolidFiniteElement&)
-    {
-      BrokenCopy::broken_copy("SolidFiniteElement");
-    }
-
+    SolidFiniteElement(const SolidFiniteElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidFiniteElement&)
-      {
-      BrokenCopy::broken_assign("SolidFiniteElement");
-      }*/
+    /*void operator=(const SolidFiniteElement&) = delete;*/
 
     ///\short The number of geometric data affecting a SolidFiniteElemnet is
     /// the same as the number of nodes (one variable position data per node)
@@ -4526,16 +4494,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    FaceElement(const FaceElement&)
-    {
-      BrokenCopy::broken_copy("FaceElement");
-    }
+    FaceElement(const FaceElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const FaceElement&)
-      {
-      BrokenCopy::broken_assign("FaceElement");
-      }*/
+    /*void operator=(const FaceElement&) = delete;*/
 
     /// Access function for the boundary number in bulk mesh
     inline const unsigned& boundary_number_in_bulk_mesh() const
@@ -5266,16 +5228,10 @@ namespace oomph
 
     /// Broken copy constructor
     SolidElementWithDiagonalMassMatrix(
-      const SolidElementWithDiagonalMassMatrix&)
-    {
-      BrokenCopy::broken_copy("SolidElementWithDiagonalMassMatrix");
-    }
+      const SolidElementWithDiagonalMassMatrix&) = delete;
 
     /// Broken assignment operator
-    void operator=(const SolidElementWithDiagonalMassMatrix&)
-    {
-      BrokenCopy::broken_assign("SolidElementWithDiagonalMassMatrix");
-    }
+    void operator=(const SolidElementWithDiagonalMassMatrix&) = delete;
 
     /// \short Get the diagonal of whatever represents the mass matrix
     /// in the specific preconditionable element. For Navier-Stokes
@@ -5310,16 +5266,10 @@ namespace oomph
 
     /// Broken copy constructor
     NavierStokesElementWithDiagonalMassMatrices(
-      const NavierStokesElementWithDiagonalMassMatrices&)
-    {
-      BrokenCopy::broken_copy("NavierStokesElementWithDiagonalMassMatrices");
-    }
+      const NavierStokesElementWithDiagonalMassMatrices&) = delete;
 
     /// Broken assignment operator
-    void operator=(const NavierStokesElementWithDiagonalMassMatrices&)
-    {
-      BrokenCopy::broken_assign("NavierStokesElementWithDiagonalMassMatrices");
-    }
+    void operator=(const NavierStokesElementWithDiagonalMassMatrices&) = delete;
 
     /// \short Compute the diagonal of the velocity/pressure mass matrices.
     /// If which one=0, both are computed, otherwise only the pressure

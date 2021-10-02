@@ -68,18 +68,13 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableAdvectionDiffusionReactionEquations(
-      const RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableAdvectionDiffusionReactionEquations");
-    }
+      const RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>&
+        dummy) = delete;
 
     /// Broken assignment operator
     void operator=(
-      const RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>&)
-    {
-      BrokenCopy::broken_assign(
-        "RefineableAdvectionDiffusionReactionEquations");
-    }
+      const RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>&) =
+      delete;
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -229,21 +224,14 @@ namespace oomph
     RefineableQAdvectionDiffusionReactionElement(
       const RefineableQAdvectionDiffusionReactionElement<NREAGENT,
                                                          DIM,
-                                                         NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "RefineableQuadAdvectionDiffusionReactionElement");
-    }
+                                                         NNODE_1D>& dummy) =
+      delete;
 
     /// Broken assignment operator
     void operator=(
       const RefineableQAdvectionDiffusionReactionElement<NREAGENT,
                                                          DIM,
-                                                         NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign(
-        "RefineableQuadAdvectionDiffusionReactionElement");
-    }
+                                                         NNODE_1D>&) = delete;
 
     /// Number of continuously interpolated values: NREAGENT
     unsigned ncont_interpolated_values() const

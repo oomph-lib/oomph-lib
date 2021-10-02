@@ -384,18 +384,11 @@ namespace oomph
       }
     }
 
-
     /// Broken copy constructor
-    Mesh(const Mesh& dummy)
-    {
-      BrokenCopy::broken_copy("Mesh");
-    }
+    Mesh(const Mesh& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const Mesh&)
-    {
-      BrokenCopy::broken_assign("Mesh");
-    }
+    void operator=(const Mesh&) = delete;
 
     /// Virtual Destructor to clean up all memory
     virtual ~Mesh();
@@ -2572,17 +2565,10 @@ namespace oomph
     SolidMesh() {}
 
     /// Broken copy constructor
-    SolidMesh(const SolidMesh& dummy)
-    {
-      BrokenCopy::broken_copy("SolidMesh");
-    }
+    SolidMesh(const SolidMesh& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const SolidMesh&)
-    {
-      BrokenCopy::broken_assign("SolidMesh");
-    }
-
+    void operator=(const SolidMesh&) = delete;
 
     /// \short Constructor builds combined mesh from the meshes specified.
     /// Note: This simply merges the meshes' elements and nodes (ignoring

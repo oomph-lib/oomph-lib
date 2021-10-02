@@ -75,10 +75,8 @@ namespace oomph
 
     /// Broken copy constructor
     TTimeHarmonicLinearElasticityElement(
-      const TTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("TTimeHarmonicLinearElasticityElement");
-    }
+      const TTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>& dummy) =
+      delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -87,9 +85,7 @@ namespace oomph
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
     /*void operator=(const TTimeHarmonicLinearElasticityElement<DIM,NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("TTimeHarmonicLinearElasticityElement");
-      }*/
+     * = delete;*/
 
     /// \short Output function:
     void output(std::ostream& outfile)

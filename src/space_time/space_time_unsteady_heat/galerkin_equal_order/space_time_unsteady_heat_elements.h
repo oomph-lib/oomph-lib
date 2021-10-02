@@ -101,11 +101,8 @@ namespace oomph
 
 
     /// Broken copy constructor
-    SpaceTimeUnsteadyHeatEquations(const SpaceTimeUnsteadyHeatEquations& dummy)
-    {
-      BrokenCopy::broken_copy("SpaceTimeUnsteadyHeatEquations");
-    }
-
+    SpaceTimeUnsteadyHeatEquations(
+      const SpaceTimeUnsteadyHeatEquations& dummy) = delete;
 
     /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
     /// at your own risk!
@@ -719,12 +716,8 @@ namespace oomph
 
     /// Broken copy constructor
     QUnsteadyHeatSpaceTimeElement(
-      const QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>& dummy)
-    {
-      // Output broken copy message
-      BrokenCopy::broken_copy("QUnsteadyHeatSpaceTimeElement");
-    } // End of QUnsteadyHeatSpaceTimeElement
-
+      const QUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>& dummy) =
+      delete;
 
     /// \short Required number of 'values' (pinned or dofs) at node n
     inline unsigned required_nvalue(const unsigned& n) const

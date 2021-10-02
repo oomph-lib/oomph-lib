@@ -153,11 +153,50 @@ problems after upgrading to a new version.
 
 \subsection one_point_zero_to_two_point_zero Changes between version 1.0 and 2.0.*
 
-\subsubsection new_functionality_two_point_zero Major new functionality
+\subsubsection new_functionality_two_point_zero Major new functionality/changes
 
-- bla
-- bla
-- and bla
+- Moved to C++11 standard and now use automatic formatting of code in
+  the \c src directory, using \c clang-format.
+  \n\n
+- Upgraded all python scripts to python3.
+  \n\n
+- Included \c CGAL, \c GMG, \c MPFR and \c Boost into the third-party libraries
+  that are shipped and automatically installed with \c
+  oomph-lib. Existing installations can be used instead (via suitable
+  flags in the configure options), but \c oomph-lib
+  is only guaranteed to work with the versions provided. This functionality
+  does not work on macOS so macOS users must add 
+  the \c --enable-suppress-cgal-build flag to their configuration options 
+  to ensure that this doesn't break their build.
+  \n\n
+  They are used for more efficient implementations of \c
+  locate_zeta(...) functionality.
+  \n\n 
+- Generalised unstructured 3D (tet-)mesh generation procedures so it can use \c
+  tetgen and \c gmsh.
+  \n\n 
+- Provided scripts that (i) download the third-party tar files (for \c MUMPS,
+  \c trilinos and \c hypre) and (ii) move the built installations to
+  permanent locations.
+  \n\n
+- Provided space-time discretisations for time-periodic unsteady-heat and
+  Navier-Stokes equations.
+  \n\n
+- Implemented a geometric multigrid solver for scalar PDEs (tested
+  for the Poisson and Helmholtz equations).
+  \n\n
+- Implemented the \c QuadFromTriangleMesh to construct quad-based meshes
+  from triangle meshes.
+  \n\n
+- Provided functionality to impose periodicity for three-dimensional
+  brick meshes.
+  \n\n
+- Provided machinery to create three-dimensional meshes based on the
+  "extrusion" of a two-dimensional mesh; takes time-dependent
+  macro-element behaviour into account.
+  \n\n
+- Implemented a Krylov-subspace solver for the solution of
+  single-equation-augmented linear systems (\c AugmentedGMRES ).
 .
 
 

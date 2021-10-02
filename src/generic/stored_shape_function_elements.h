@@ -117,16 +117,10 @@ namespace oomph
     virtual ~StorableShapeElementBase();
 
     /// Broken copy constructor
-    StorableShapeElementBase(const StorableShapeElementBase&)
-    {
-      BrokenCopy::broken_copy("StorableShapeElementBase");
-    }
+    StorableShapeElementBase(const StorableShapeElementBase&) = delete;
 
     /// Broken assignment operator
-    void operator=(const StorableShapeElementBase&)
-    {
-      BrokenCopy::broken_assign("StorableShapeElementBase");
-    }
+    void operator=(const StorableShapeElementBase&) = delete;
 
     /// \short Delete all the objects stored in the [...]_local_stored_pt
     /// vectors and delete the vectors themselves
@@ -419,16 +413,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    StorableShapeSolidElementBase(const StorableShapeSolidElementBase&)
-    {
-      BrokenCopy::broken_copy("StorableShapeSolidElementBase");
-    }
+    StorableShapeSolidElementBase(const StorableShapeSolidElementBase&) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const StorableShapeSolidElementBase&)
-    {
-      BrokenCopy::broken_assign("StorableShapeSolidElementBase");
-    }
+    void operator=(const StorableShapeSolidElementBase&) = delete;
 
     /// \short Delete all the objects stored in the [...]_lagrangian_stored_pt
     /// vectors and delete the vectors themselves
@@ -580,16 +569,10 @@ namespace oomph
     virtual ~StorableShapeElement() {}
 
     /// Broken copy constructor
-    StorableShapeElement(const StorableShapeElement&)
-    {
-      BrokenCopy::broken_copy("StorableShapeElement");
-    }
+    StorableShapeElement(const StorableShapeElement&) = delete;
 
     /// Broken assignment operator
-    void operator=(const StorableShapeElement&)
-    {
-      BrokenCopy::broken_assign("StorableShapeElement");
-    }
+    void operator=(const StorableShapeElement&) = delete;
   };
 
 
@@ -624,16 +607,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    StorableShapeSolidElement(const StorableShapeSolidElement&)
-    {
-      BrokenCopy::broken_copy("StorableShapeSolidElement");
-    }
+    StorableShapeSolidElement(const StorableShapeSolidElement&) = delete;
 
     /// Broken assignment operator
-    void operator=(const StorableShapeSolidElement&)
-    {
-      BrokenCopy::broken_assign("StorableShapeSolidElement");
-    }
+    void operator=(const StorableShapeSolidElement&) = delete;
   };
 
 } // namespace oomph

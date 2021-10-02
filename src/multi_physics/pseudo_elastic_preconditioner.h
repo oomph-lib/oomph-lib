@@ -150,10 +150,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PseudoElasticPreconditioner(const PseudoElasticPreconditioner&)
-    {
-      BrokenCopy::broken_copy("PseudoElasticPreconditioner");
-    }
+    PseudoElasticPreconditioner(const PseudoElasticPreconditioner&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -162,10 +159,7 @@ namespace oomph
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
     /*void operator=
-     (const PseudoElasticPreconditioner&)
-     {
-      BrokenCopy::broken_assign(" PseudoElasticPreconditioner");
-      }*/
+     (const PseudoElasticPreconditioner&) = delete;*/
 
     /// Setup method for the PseudoElasticPreconditioner.
     void setup();
@@ -359,17 +353,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PseudoElasticPreconditionerOld(const PseudoElasticPreconditionerOld&)
-    {
-      BrokenCopy::broken_copy("PseudoElasticPreconditionerOld");
-    }
+    PseudoElasticPreconditionerOld(const PseudoElasticPreconditionerOld&) =
+      delete;
 
     /// Broken assignment operator
-    /*void operator=
-     (const PseudoElasticPreconditionerOld&)
-     {
-      BrokenCopy::broken_assign(" PseudoElasticPreconditionerOld");
-      }*/
+    /*void operator=(const PseudoElasticPreconditionerOld&) = delete;*/
 
     /// Setup method for the PseudoElasticPreconditionerOld.
     void setup();
@@ -531,19 +519,11 @@ namespace oomph
 
     /// Broken copy constructor
     PseudoElasticPreconditionerSubsidiaryPreconditionerOld(
-      const PseudoElasticPreconditionerSubsidiaryPreconditionerOld&)
-    {
-      BrokenCopy::broken_copy(
-        "PseudoElasticPreconditionerSubsidiaryPreconditionerOld ");
-    }
+      const PseudoElasticPreconditionerSubsidiaryPreconditionerOld&) = delete;
 
     /// Broken assignment operator
     /*void operator=(const
-     PseudoElasticPreconditionerSubsidiaryPreconditionerOld&)
-     {
-      BrokenCopy::broken_assign
-      (" PseudoElasticPreconditionerSubsidiaryPreconditionerOld");
-      }*/
+     PseudoElasticPreconditionerSubsidiaryPreconditionerOld&) = delete;*/
 
     // Setup the preconditioner
     void setup();
@@ -634,19 +614,13 @@ namespace oomph
 
     /// Broken copy constructor
     PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld(
-      const PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld&)
-    {
-      BrokenCopy::broken_copy(
-        "PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld ");
-    }
+      const PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld&) =
+      delete;
 
     /// Broken assignment operator
     /*void operator=
-     (const PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld&)
-     {
-      BrokenCopy::broken_assign
-      (" PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld");
-      }*/
+     (const PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld&) =
+     delete;*/
 
     /// clean up the memory
     void clean_up_memory();
@@ -771,17 +745,11 @@ namespace oomph
 
     /// Broken copy constructor
     PseudoElasticPreconditionerScalingHelperOld(
-      const PseudoElasticPreconditionerScalingHelperOld&)
-    {
-      BrokenCopy::broken_copy("PseudoElasticPreconditionerScalingHelper");
-    }
+      const PseudoElasticPreconditionerScalingHelperOld&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const PseudoElasticPreconditionerScalingHelperOld&)
-     {
-      BrokenCopy::
-      broken_assign("PseudoElasticPreconditionerScalingHelper");
-      }*/
+    /*void operator=(const PseudoElasticPreconditionerScalingHelperOld&) =
+     * delete;*/
 
     /// returns the infinite norm of S
     double s_inf_norm()

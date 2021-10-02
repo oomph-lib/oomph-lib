@@ -3,9 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC//           Version 0.90. August 3, 2009.
-// LIC//
-// LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2021 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -29,6 +27,7 @@
 #ifndef OOMPH_QUAD_FROM_TRIANGLE_MESH_HEADER
 #define OOMPH_QUAD_FROM_TRIANGLE_MESH_HEADER
 
+
 #ifdef OOMPH_HAS_MPI
 // MPI header
 #include "mpi.h"
@@ -41,6 +40,10 @@
 #include <string.h>
 #include <iomanip>
 
+#ifdef OOMPH_HAS_FPUCONTROLH
+#include <fpu_control.h>
+#endif
+
 // The mesh
 #include "generic/problem.h"
 #include "generic/quad_mesh.h"
@@ -50,12 +53,11 @@
 #include "generic/refineable_quad_mesh.h"
 #include "generic/Qelements.h"
 
-using namespace std;
-using namespace oomph;
 
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
+
 
 namespace oomph
 {
@@ -471,6 +473,12 @@ namespace oomph
       // Build the mesh using triangulate function
       triangulate(triswitches, &triangulate_io, &triangulate_out, 0);
 
+#ifdef OOMPH_HAS_FPUCONTROLH
+      // Reset flags that are tweaked by triangle; can cause nasty crashes
+      fpu_control_t cw = (_FPU_DEFAULT & ~_FPU_EXTENDED) | _FPU_DOUBLE;
+      _FPU_SETCW(cw);
+#endif
+
       // Build scaffold
       TriangleScaffoldMesh* tmp_mesh_pt =
         new TriangleScaffoldMesh(triangulate_out);
@@ -504,16 +512,10 @@ namespace oomph
 #endif // OOMPH_HAS_TRIANGLE_LIB
 
     /// Broken copy constructor
-    QuadFromTriangleMesh(const QuadFromTriangleMesh& dummy)
-    {
-      BrokenCopy::broken_copy("QuadFromTriangleMesh");
-    }
+    QuadFromTriangleMesh(const QuadFromTriangleMesh& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QuadFromTriangleMesh&)
-    {
-      BrokenCopy::broken_assign("QuadFromTriangleMesh");
-    }
+    void operator=(const QuadFromTriangleMesh&) = delete;
 
     /// Empty destructor
     ~QuadFromTriangleMesh()
@@ -560,9 +562,11 @@ namespace oomph
     bool Use_attributes;
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// Unstructured refineable QuadFromTriangleMesh
@@ -629,9 +633,11 @@ namespace oomph
     virtual ~RefineableQuadFromTriangleMesh() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// Unstructured QuadFromTriangleMesh upgraded to solid mesh
@@ -678,9 +684,11 @@ namespace oomph
     virtual ~SolidQuadFromTriangleMesh() {}
   };
 
+
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
+
 
   //=========================================================================
   /// Unstructured refineable QuadFromTriangleMesh upgraded to solid mesh
@@ -731,7 +739,9 @@ namespace oomph
     virtual ~RefineableSolidQuadFromTriangleMesh() {}
   };
 
+
 } // namespace oomph
 
+
 #include "quad_from_triangle_mesh.tpp" // OOMPH_QUAD_FROM_TRIANGLE_MESH_HEADER
-#endif
+#endif // OOMPH_QUAD_FROM_TRIANGLE_MESH_HEADER

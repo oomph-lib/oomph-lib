@@ -72,16 +72,10 @@ namespace oomph
     PoissonEquations() : Source_fct_pt(0), Source_fct_gradient_pt(0) {}
 
     /// Broken copy constructor
-    PoissonEquations(const PoissonEquations& dummy)
-    {
-      BrokenCopy::broken_copy("PoissonEquations");
-    }
+    PoissonEquations(const PoissonEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const PoissonEquations&)
-    {
-      BrokenCopy::broken_assign("PoissonEquations");
-    }
+    void operator=(const PoissonEquations&) = delete;
 
     /// \short Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
@@ -559,16 +553,10 @@ namespace oomph
     QPoissonElement() : QElement<DIM, NNODE_1D>(), PoissonEquations<DIM>() {}
 
     /// Broken copy constructor
-    QPoissonElement(const QPoissonElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QPoissonElement");
-    }
+    QPoissonElement(const QPoissonElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QPoissonElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("QPoissonElement");
-    }
+    void operator=(const QPoissonElement<DIM, NNODE_1D>&) = delete;
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n

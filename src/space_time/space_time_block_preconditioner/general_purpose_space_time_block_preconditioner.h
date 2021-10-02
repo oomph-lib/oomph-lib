@@ -89,18 +89,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    ExactDGPBlockPreconditioner(const ExactDGPBlockPreconditioner&)
-    {
-      BrokenCopy::broken_copy("ExactDGPBlockPreconditioner");
-    }
-
+    ExactDGPBlockPreconditioner(const ExactDGPBlockPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ExactDGPBlockPreconditioner&)
-    {
-      BrokenCopy::broken_assign("ExactDGPBlockPreconditioner");
-    }
-
+    void operator=(const ExactDGPBlockPreconditioner&) = delete;
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
@@ -262,18 +254,10 @@ namespace oomph
 
     /// Broken copy constructor
     BandedBlockTriangularPreconditioner(
-      const BandedBlockTriangularPreconditioner&)
-    {
-      BrokenCopy::broken_copy("BandedBlockTriangularPreconditioner");
-    }
-
+      const BandedBlockTriangularPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const BandedBlockTriangularPreconditioner&)
-    {
-      BrokenCopy::broken_assign("BandedBlockTriangularPreconditioner");
-    }
-
+    void operator=(const BandedBlockTriangularPreconditioner&) = delete;
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);

@@ -96,16 +96,10 @@ namespace oomph
     virtual ~BinaryTree() {}
 
     /// Broken copy constructor
-    BinaryTree(const BinaryTree& dummy)
-    {
-      BrokenCopy::broken_copy("BinaryTree");
-    }
+    BinaryTree(const BinaryTree& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const BinaryTree&)
-    {
-      BrokenCopy::broken_assign("BinaryTree");
-    }
+    void operator=(const BinaryTree&) = delete;
 
     /// \short Overload the function construct_son to ensure that the son
     /// is a specific BinaryTree and not a general Tree.
@@ -258,16 +252,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BinaryTreeRoot(const BinaryTreeRoot& dummy) : TreeRoot(dummy)
-    {
-      BrokenCopy::broken_copy("BinaryTreeRoot");
-    }
+    BinaryTreeRoot(const BinaryTreeRoot& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const BinaryTreeRoot&)
-    {
-      BrokenCopy::broken_assign("BinaryTreeRoot");
-    }
+    void operator=(const BinaryTreeRoot&) = delete;
 
     /// \short If binary_tree_root_pt is a neighbour, return the direction
     /// (L/R) in which it is found, otherwise return OMEGA
@@ -312,16 +300,10 @@ namespace oomph
     BinaryTreeForest(Vector<TreeRoot*>& trees_pt);
 
     /// Broken copy constructor
-    BinaryTreeForest(const BinaryTreeForest& dummy)
-    {
-      BrokenCopy::broken_copy("BinaryTreeForest");
-    }
+    BinaryTreeForest(const BinaryTreeForest& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const BinaryTreeForest&)
-    {
-      BrokenCopy::broken_assign("BinaryTreeForest");
-    }
+    void operator=(const BinaryTreeForest&) = delete;
 
     /// \short Destructor: Delete the constituent binary trees (and thus
     /// the objects associated with its non-leaf nodes!)

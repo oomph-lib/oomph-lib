@@ -72,16 +72,11 @@ namespace oomph
 
 
     /// Broken copy constructor
-    TFoepplvonKarmanElement(const TFoepplvonKarmanElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("TFoepplvonKarmanElement");
-    }
+    TFoepplvonKarmanElement(const TFoepplvonKarmanElement<NNODE_1D>& dummy) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const TFoepplvonKarmanElement<NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("TFoepplvonKarmanElement");
-    }
+    void operator=(const TFoepplvonKarmanElement<NNODE_1D>&) = delete;
 
     /// \short  Access function for Nvalue: # of `values' (pinned or dofs)
     /// at node n (always returns the same value at every node, 8)

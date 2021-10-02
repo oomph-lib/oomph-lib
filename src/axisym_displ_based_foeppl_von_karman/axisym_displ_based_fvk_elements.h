@@ -60,16 +60,11 @@ namespace oomph
     AxisymFoepplvonKarmanEquations() : Pressure_fct_pt(0), Nu_pt(0) {}
 
     /// Broken copy constructor
-    AxisymFoepplvonKarmanEquations(const AxisymFoepplvonKarmanEquations& dummy)
-    {
-      BrokenCopy::broken_copy("AxisymFoepplvonKarmanEquations");
-    }
+    AxisymFoepplvonKarmanEquations(
+      const AxisymFoepplvonKarmanEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const AxisymFoepplvonKarmanEquations&)
-    {
-      BrokenCopy::broken_assign("AxisymFoepplvonKarmanEquations");
-    }
+    void operator=(const AxisymFoepplvonKarmanEquations&) = delete;
 
     /// Poisson's ratio
     const double& nu() const
@@ -422,16 +417,10 @@ namespace oomph
 
     /// Broken copy constructor
     AxisymFoepplvonKarmanElement(
-      const AxisymFoepplvonKarmanElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("AxisymFoepplvonKarmanElement");
-    }
+      const AxisymFoepplvonKarmanElement<NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const AxisymFoepplvonKarmanElement<NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("AxisymFoepplvonKarmanElement");
-    }
+    void operator=(const AxisymFoepplvonKarmanElement<NNODE_1D>&) = delete;
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n

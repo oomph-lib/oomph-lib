@@ -207,17 +207,11 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    DisplacementControlElement(const DisplacementControlElement&)
-    {
-      BrokenCopy::broken_copy("DisplacementControlElement");
-    }
+    DisplacementControlElement(const DisplacementControlElement&) = delete;
 
 
     /// Broken assignment operator
-    void operator=(const DisplacementControlElement&)
-    {
-      BrokenCopy::broken_assign("DisplacementControlElement");
-    }
+    void operator=(const DisplacementControlElement&) = delete;
 
 
     /// \short Pointer to Data object whose one-and-only value represents the

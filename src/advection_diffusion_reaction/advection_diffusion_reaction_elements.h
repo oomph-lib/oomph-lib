@@ -96,16 +96,10 @@ namespace oomph
 
     /// Broken copy constructor
     AdvectionDiffusionReactionEquations(
-      const AdvectionDiffusionReactionEquations& dummy)
-    {
-      BrokenCopy::broken_copy("AdvectionDiffusionReactionEquations");
-    }
+      const AdvectionDiffusionReactionEquations& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const AdvectionDiffusionReactionEquations&)
-    {
-      BrokenCopy::broken_assign("AdvectionDiffusionReactionEquations");
-    }
+    void operator=(const AdvectionDiffusionReactionEquations&) = delete;
 
     /// \short Return the index at which the unknown i-th reagent
     /// is stored. The default value, i, is appropriate for single-physics
@@ -684,17 +678,13 @@ namespace oomph
 
     /// Broken copy constructor
     QAdvectionDiffusionReactionElement(
-      const QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("QAdvectionDiffusionReactionElement");
-    }
+      const QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>&
+        dummy) = delete;
 
     /// Broken assignment operator
     void operator=(
-      const QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("QAdvectionDiffusionReactionElement");
-    }
+      const QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>&) =
+      delete;
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n

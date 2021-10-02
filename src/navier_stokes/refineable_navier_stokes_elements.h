@@ -1132,10 +1132,7 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQCrouzeixRaviartElement(
-      const RefineableQCrouzeixRaviartElement<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQCrouzeixRaviartElement");
-    }
+      const RefineableQCrouzeixRaviartElement<DIM>& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -1143,10 +1140,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const RefineableQCrouzeixRaviartElement<DIM>&)
-     {
-      BrokenCopy::broken_assign("RefineableQCrouzeixRaviartElement");
-      }*/
+    /*void operator=(const RefineableQCrouzeixRaviartElement<DIM>&) = delete;*/
 
     /// Number of continuously interpolated values: DIM (velocities)
     unsigned ncont_interpolated_values() const
@@ -1394,16 +1388,11 @@ namespace oomph
 
     /// Broken copy constructor
     PRefineableQCrouzeixRaviartElement(
-      const PRefineableQCrouzeixRaviartElement<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("PRefineableQCrouzeixRaviartElement");
-    }
+      const PRefineableQCrouzeixRaviartElement<DIM>& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const PRefineableQCrouzeixRaviartElement<DIM>&)
-     {
-      BrokenCopy::broken_assign("PRefineableQCrouzeixRaviartElement");
-      }*/
+    /*void operator=(const PRefineableQCrouzeixRaviartElement<DIM>&) =
+     * delete;*/
 
     /// \short Return the i-th pressure value
     /// (Discontinous pressure interpolation -- no need to cater for hanging
