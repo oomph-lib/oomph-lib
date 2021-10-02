@@ -1,41 +1,40 @@
+# ------------------------------------------------------------------------------
 name: Code coverage
 
 on: push
 
-env:
-  CTEST_OUTPUT_ON_FAILURE: 1
-  COVERAGE_REPORT_NAME: 'coverage-report.xml'
+# ------------------------------------------------------------------------------
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        OOMPH_USE_OPENBLAS: ["ON"]
-
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
+      # -----------------[[[ GENERATE CODE COVERAGE RESULTS ]]]-----------------
+
       - name: Check out repository
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: brew install cmake open-mpi ninja openblas gcovr fd gnupg curl coreutils && brew reinstall gfortran
+        run: |
+          sudo apt-get install -y gfortran ninja-build libopenblas-dev \
+          openmpi-bin libopenmpi-dev gcovr fd-find gnupg2 curl
 
       - name: Configure & build (with coverage)
-        run: cmake --preset CI-build-with-coverage -B build && cd build && ninja
-        env:
-          OOMPH_USE_OPENBLAS: ${{ matrix.OOMPH_USE_OPENBLAS }}
+        run: |
+          cmake --preset CI-build-with-coverage \
+          -D OOMPH_USE_OPENBLAS=ON \
+          -D OOMPH_ENABLE_MPI=ON \
+          -B build && cd build && ninja
 
       - name: Run self-tests (with coverage)
         id: self_tests
         run: |
           cd demo_drivers && cp ../CMakePresets.json ./
-          cmake --preset CI-demo-drivers-with-coverage
+          cmake --preset CI-demo-drivers-with-coverage -D CMAKE_PREFIX_PATH='${{ github.workspace }}/build' -B build
           cd build && cp ../CMakePresets.json ./
           ctest --preset CI-demo-drivers-with-coverage -j $(sysctl -n hw.logicalcpu)
-        continue-on-error: false
-        env:
-          OOMPH_BUILD_PATH: '${{ github.workspace }}/build'
+
+      # ----------------[[[ PROCESS AND UPLOAD CODE COVERAGE ]]]----------------
 
       # For now, assume we don't care about coverage for the external sources
       # or the demo drivers (they're only used to validate the library sources).
@@ -67,3 +66,5 @@ jobs:
         run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l CPP -r ./coverage-report.xml
         env:
           CODACY_PROJECT_TOKEN: '${{ secrets.CODACY_PROJECT_TOKEN }}'
+
+# ------------------------------------------------------------------------------

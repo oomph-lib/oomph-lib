@@ -1,18 +1,21 @@
+# ------------------------------------------------------------------------------
 name: Ubuntu
 
 on: push
 
+# Environment variable(s) that can be read during jobs
 env:
-  # Environment variable that controls if the output should be logged for failed
-  # CTest tests
-  CTEST_OUTPUT_ON_FAILURE: 1
+  # The oomph-lib installation location
+  OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
+
+# ------------------------------------------------------------------------------
 
 jobs:
   build:
     strategy:
       fail-fast: false
       matrix:
-        OOMPH_USE_OPENBLAS: ["ON"]
+        OOMPH_ENABLE_MPI: ["OFF", "ON"]
 
     runs-on: ubuntu-latest
     steps:
@@ -20,31 +23,37 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: sudo apt-get install -y gfortran openmpi-bin libopenmpi-dev ninja-build libopenblas-dev
+        run: sudo apt-get install -y gfortran ninja-build libopenblas-dev
+
+      - name: Install MPI dependencies (if required)
+        if: ${{ matrix.OOMPH_ENABLE_MPI }} == "ON"
+        run: sudo apt-get install openmpi-bin libopenmpi-dev
 
       - name: Configure, build & install
-        run: cmake --preset CI-build -B build && cd build && ninja && ninja install
-        env:
-          OOMPH_USE_OPENBLAS: ${{ matrix.OOMPH_USE_OPENBLAS }}
-          OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
+        run: |
+          cmake --preset CI-build \
+          -D CMAKE_INSTALL_PREFIX='${{ env.OOMPH_INSTALL_PATH }}' \
+          -D OOMPH_USE_OPENBLAS=ON \
+          -D OOMPH_ENABLE_MPI=${{ matrix.OOMPH_ENABLE_MPI }} \
+          -B build && cd build && ninja && ninja install
 
       - name: Run self-tests
         id: self_tests
         run: |
           cd demo_drivers && cp ../CMakePresets.json ./
-          cmake --preset CI-demo-drivers
+          cmake --preset CI-demo-drivers -D CMAKE_PREFIX_PATH='${{ env.OOMPH_INSTALL_PATH }}' -B build
           cd build && cp ../CMakePresets.json ./
           ctest --preset CI-demo-drivers -j $(nproc)
         continue-on-error: true
-        env:
-          OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
 
       - name: Upload validation log file
         uses: actions/upload-artifact@v2
         with:
-          name: validation-${{ runner.os }}-OpenBLAS_${{ matrix.OOMPH_USE_OPENBLAS }}.log
+          name: validation-${{ runner.os }}-MPI_${{ matrix.OOMPH_ENABLE_MPI }}.log
           path: ./validation.log
 
       - name: Propagate CTest status
         if: steps.self_tests.outcome == 'failure'
         run: exit 8
+
+# ------------------------------------------------------------------------------

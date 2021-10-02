@@ -44,21 +44,15 @@
       "displayName": "Build Config for CI/CD",
       "generator": "Ninja",
       "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}",
-        "OOMPH_ENABLE_MPI": "$penv{OOMPH_ENABLE_MPI}",
-        "OOMPH_USE_OPENBLAS": "$penv{OOMPH_USE_OPENBLAS}",
-        "OOMPH_WANT_MUMPS": "$penv{OOMPH_WANT_MUMPS}",
-        "OOMPH_WANT_TRILINOS": "$penv{OOMPH_WANT_TRILINOS}"
+        "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}"
       }
     },
     {
       "name": "CI-demo-drivers",
       "displayName": "Demo Drivers Build Config for CI/CD",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_PREFIX_PATH": "$penv{OOMPH_INSTALL_PATH}"
+        "CMAKE_BUILD_TYPE": "Release"
       }
     },
     {

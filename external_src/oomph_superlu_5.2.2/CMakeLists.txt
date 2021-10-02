@@ -240,6 +240,7 @@ if(ENABLE_COMPLEX16)
     zdiagonal.c)
 endif()
 
+# Specify the libraries that we depend on
 if(OOMPH_USE_OPENBLAS AND BLAS_FOUND)
   set(LINKLIBS BLAS::BLAS)
 else()

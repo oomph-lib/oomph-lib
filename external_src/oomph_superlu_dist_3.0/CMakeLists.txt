@@ -86,8 +86,13 @@ if(BUILD_SHARED_LIBS)
   set(LIBTYPE SHARED)
 endif()
 
-# The libraries that we depend on
-set(LINKLIBS oomph_blas oomph_metis_from_parmetis_3.1.1)
+# Specify the libraries that we depend on
+set(LINKLIBS oomph_metis_from_parmetis_3.1.1)
+if(OOMPH_USE_OPENBLAS AND BLAS_FOUND)
+  list(APPEND LINKLIBS BLAS::BLAS)
+else()
+  list(APPEND LINKLIBS oomph_blas)
+endif()
 
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
@@ -98,7 +103,7 @@ oomph_library_config(
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
 
-# Silence the annoying warnings produced by this library
+# Silence the (annoying) warnings produced by this library
 include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(
   TARGET ${LIBNAME}
