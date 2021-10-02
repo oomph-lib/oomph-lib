@@ -1,8 +1,15 @@
 # ==============================================================================
 # Locate/download the Google benchmarking suite, benchmark.
 # ==============================================================================
-# We've already found the benchmark library so we don't need to do anything
+include_guard()
+
+# Search for the benchmark library to see if we need to build it ourselves
 if(benchmark_FOUND)
+  message(VERBOSE "Google 'benchmark' library: found!")
+elseif(NOT benchmark_FOUND)
+  message(VERBOSE
+          "Could not find Google 'benchmark' library so I'll build it for you!")
+
   # Set the version of Google benchmark that we want
   set(OOMPH_GOOGLE_BENCHMARK_VERSION 1.6.0 CACHE INTERNAL "")
 
@@ -25,7 +32,8 @@ if(benchmark_FOUND)
     set(BENCHMARK_DOWNLOAD_DEPENDENCIES ON)
     set(CMAKE_BUILD_TYPE "Release")
 
-    # Set the installation location
+    # FIXME: Doesn't actually control the installation destination for some
+    # reason... Need to find out why... Set the installation location
     set(OOMPH_GOOGLE_BENCHMARK_INSTALL_DIR
         "${CMAKE_CURRENT_BINARY_DIR}/google_benchmark_install" CACHE PATH
         "Path to the Google benchmark installation")
@@ -33,16 +41,19 @@ if(benchmark_FOUND)
     # This is where the magic happens: define the rule for how to download the
     # library and where to install it
     # cmake-format: off
-  FetchContent_Declare(
-    google_benchmark
-    GIT_REPOSITORY https://github.com/google/benchmark.git
-    GIT_SHALLOW TRUE
-    GIT_TAG v${OOMPH_GOOGLE_BENCHMARK_VERSION}
-    INSTALL_DIR "${OOMPH_GOOGLE_BENCHMARK_INSTALL_DIR}"
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>)
-  FetchContent_MakeAvailable(google_benchmark)
+    FetchContent_Declare(
+      google_benchmark
+      GIT_REPOSITORY https://github.com/google/benchmark.git
+      GIT_SHALLOW TRUE
+      GIT_TAG v${OOMPH_GOOGLE_BENCHMARK_VERSION}
+      INSTALL_DIR "${OOMPH_GOOGLE_BENCHMARK_INSTALL_DIR}"
+      CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>)
+    FetchContent_MakeAvailable(google_benchmark)
   # cmake-format: on
   endif()
+
+  # Define an internal project variable to indicate that we possess this library
+  set(OOMPH_HAS_GOOGLE_BENCHMARK TRUE CACHE INTERNAL "")
 
   # If the benchmark library isn't available now, something went wrong
   if(NOT TARGET benchmark::benchmark)
@@ -52,7 +63,4 @@ if(benchmark_FOUND)
     )
   endif()
 endif()
-
-# Define an internal project variable to indicate that we possess this library
-set(OOMPH_HAS_GOOGLE_BENCHMARK TRUE CACHE INTERNAL "")
 # -----------------------------------------------------------------------------

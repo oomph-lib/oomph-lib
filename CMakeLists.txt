@@ -361,7 +361,7 @@ endif()
 
 # ------------------------------[ BUILD LIBRARY ]-------------------------------
 
-message(VERBOSE "<====== Starting oomph-lib library build ======>")
+message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
 
 # Process the oomph-lib directories containing the library files
 add_subdirectory(external_src)
@@ -370,7 +370,7 @@ add_subdirectory(external_distributions)
 add_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
 add_subdirectory(src)
 
-message(VERBOSE "<====== Finished oomph-lib library build ======>")
+message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
 
 # --------------------------------[ EXPORTING ]---------------------------------
 
