@@ -98,11 +98,10 @@ option(OOMPH_SUPPRESS_DOC_BUILD "Suppress Doxygen creation of API documentation"
 option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Replace headers by symbolic links" ON)
 
 # Testing [PM: not sure if this is needed; should build self-tests separately]
-option(OOMPH_ENABLE_TESTING "Build tests with library build" OFF)
+option(OOMPH_ENABLE_IN_BUILD_TESTING "Build tests with library build" OFF)
 
 # Benchmarking
 option(OOMPH_ENABLE_GOOGLE_BENCHMARK "Provide Google benchmark support" OFF)
-# FIXME: need some way of already knowing that already have google benchmark
 
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
@@ -215,10 +214,6 @@ if(OOMPH_USE_OPENBLAS)
     get_filename_component(LAPACK_DIR ${LAPACK_LIBRARY} DIRECTORY)
     list(APPEND LAPACK_DIRS ${LAPACK_DIR})
   endforeach()
-
-  # PM: Disable Trilinos for now; not sure how to link it against OpenBLAS
-  set(OOMPH_WANT_TRILINOS OFF CACHE BOOL
-      "Disable Trilinos when OpenBLAS is used" FORCE)
 endif()
 
 # Let CMake take care of the famous -fPIC flag
@@ -229,7 +224,7 @@ endif()
 # The demo_driver self-tests use shell scripts and symbolic links, both of which
 # require a Unix-based system
 if(NOT UNIX)
-  set(OOMPH_ENABLE_TESTING OFF)
+  set(OOMPH_ENABLE_IN_BUILD_TESTING OFF)
   set(SYMBOLIC_LINKS_FOR_HEADERS OFF)
 endif()
 
@@ -244,6 +239,10 @@ endif()
 if(OOMPH_ENABLE_CUDA)
   find_package(CUDA REQUIRED)
 endif()
+
+# TODO: PLACE ALL OF THE PARSING OF THIRD-PARTY LIBRARY PATHS BELOW INTO
+# OomphParseThirdPartyLibraryPathInputs.cmake:
+include(OomphParseThirdPartyLibraryPathInputs)
 
 # TODO: FINISH OFF INTEGRATION OF THIS VARIABLES INTO BUILD TODO: ADD OOMPH_
 # PREFIXES TO THESE VARIABLES! FIXME: Not currently used!
@@ -323,11 +322,11 @@ endif()
 # Add code coverage compiler flags, if requested
 if(OOMPH_ENABLE_CODE_COVERAGE)
   # We can only get coverage for the library sources if the demo drivers are
-  # built with the library itself, which requires OOMPH_ENABLE_TESTING to be
-  # enabled
-  if(NOT OOMPH_ENABLE_TESTING)
-    # set(OOMPH_ENABLE_TESTING ON CACHE BOOL "Build tests with library build"
-    # FORCE)
+  # built with the library itself, which requires OOMPH_ENABLE_IN_BUILD_TESTING
+  # to be enabled
+  if(NOT OOMPH_ENABLE_IN_BUILD_TESTING)
+    # set(OOMPH_ENABLE_IN_BUILD_TESTING ON CACHE BOOL "Build tests with library
+    # build" FORCE)
   endif()
 
   include(OomphEnableCodeCoverage)
@@ -396,7 +395,7 @@ set(BUILDING_DEMO_DRIVERS_WITH_LIBRARY OFF)
 # Enable testing for the current directory and all child directories but ONLY
 # when this is the root project, i.e. it isn't being built as part of some
 # larger project hierarchy
-if(OOMPH_IS_MAIN_PROJECT AND OOMPH_ENABLE_TESTING)
+if(OOMPH_IS_MAIN_PROJECT AND OOMPH_ENABLE_IN_BUILD_TESTING)
   set(BUILDING_DEMO_DRIVERS_WITH_LIBRARY ON)
   if(NOT OOMPH_DONT_SILENCE_USELESS_WARNINGS)
     include(OomphSilenceWarnings)
