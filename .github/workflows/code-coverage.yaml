@@ -3,6 +3,11 @@ name: Code coverage
 
 on: push
 
+# Environment variable(s) that can be read during jobs
+env:
+  # The oomph-lib installation location
+  OOMPH_ENABLE_MPI: 'OFF'
+
 # ------------------------------------------------------------------------------
 
 jobs:
@@ -23,7 +28,7 @@ jobs:
         run: |
           cmake --preset CI-build-with-coverage \
           -D OOMPH_USE_OPENBLAS=ON \
-          -D OOMPH_ENABLE_MPI=ON \
+          -D OOMPH_ENABLE_MPI=${{ env.OOMPH_ENABLE_MPI }} \
           -B build && cd build && ninja
 
       - name: Run self-tests (with coverage)
