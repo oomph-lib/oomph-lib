@@ -66,7 +66,7 @@ function(oomph_add_test)
     message(FATAL_ERROR "No TARGET argument supplied.")
   elseif(NOT TARGET_DEPENDENCIES)
     message(VERBOSE
-            "No TARGET_DEPENDENCIES argument supplied. Not creating a test.")
+            "No TARGET_DEPENDENCIES argument supplied. Can't create a test.")
     return()
   elseif(NOT LABELS)
     message(WARNING "No LABELS supplied. These are helpful for running CTest\
@@ -75,7 +75,8 @@ function(oomph_add_test)
 
   find_program(BASH_PROGRAM bash)
   if(NOT BASH_PROGRAM)
-    message(STATUS "Bash is unavailable so I can't construct any tests. Sorry!")
+    message(
+      STATUS "You don't have 'bash', so I can't construct any tests. Sorry!")
   endif()
 
   # Hash the path to create a unique ID for our targets but shorten it to the
@@ -124,16 +125,16 @@ function(oomph_add_test)
   # Declare a copy_... target to copy the required files to the build directory
   add_custom_target(copy_${PATH_HASH} WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 
-  # TODO: Make directory copies platform independent. Using the copy_directory
-  # command will screw up the validate.sh paths so I'm not using it right now.
-
-  set(SYMLINK_TEST_DATA_NOT_COPY TRUE)
+  # Flag used to control whether files are symlinked instead of copied; keeping
+  # the option to copy files around just incase we need it later on (but I doubt
+  # it)
+  set(SYMLINK_TEST_DATA_INSTEAD_OF_COPY TRUE)
 
   # Add each requirement to the copy target as a file-copy command or as a
   # directory-copy command. All of these commands will be executed when the
   # copy_<path-hash> target is called
   foreach(REQUIREMENT IN LISTS REQUIREMENTS_WITH_PATHS)
-    if(SYMLINK_TEST_DATA_NOT_COPY)
+    if(SYMLINK_TEST_DATA_INSTEAD_OF_COPY)
       add_custom_command(
         TARGET copy_${PATH_HASH} COMMAND ln -s "${REQUIREMENT}"
                                          "${CMAKE_CURRENT_BINARY_DIR}")
@@ -163,6 +164,8 @@ function(oomph_add_test)
 
   # Add on commands to build the targets we need
   foreach(TARGET_DEPENDENCY IN LISTS TARGET_DEPENDENCIES)
+    # FIXME: Need to fix the issue with not being to rerun "ctest" twice without
+    # wiping the "build/" directory
     add_custom_command(
       TARGET build_targets_${PATH_HASH}
       COMMAND ${CMAKE_MAKE_PROGRAM} ${TARGET_DEPENDENCY}_${PATH_HASH}

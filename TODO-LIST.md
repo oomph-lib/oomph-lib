@@ -8,6 +8,7 @@
 - [ ] Empty.
 
 ## Not urgent but important
+- [ ] Fix issue with not being able to rerun `ctest` in a directory twice (at least for `mpi/distribution/adaptive_driven_cavity`).
 - [ ] Add notes on how to use `CMakePresets.json` and how they can define their own `CMakeUserPresets.json` file.
 - [ ] Add function `add_oomphlib(<your-target>)` that implements `target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})` if the user doesn't use the oomph-lib CMake commands to add drivers, see e.g. `cotire()`.
 - [ ] Add Docker support; see https://github.com/FEniCS/dolfinx
