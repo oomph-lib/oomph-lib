@@ -184,8 +184,9 @@ endif()
 
 # If we want to use up-to-date OpenBLAS/LAPACK libraries
 if(OOMPH_USE_OPENBLAS)
-  # Need path to OpenBLAS on macOS; find out how to get rid of this. Ideally
-  # build OpenBLAS with oomph-lib
+  # Need path to OpenBLAS on macOS
+  #
+  # FIXME: Find out how to get rid of this. Could build OpenBLAS with oomph-lib
   list(APPEND CMAKE_PREFIX_PATH "/usr/local/Cellar/openblas/0.3.17")
 
   # Ideally, the user will install OpenBLAS via 'sudo apt-get' or 'brew install'
