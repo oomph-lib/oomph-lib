@@ -30,7 +30,7 @@
 using namespace std;
 using namespace oomph;
 
-void print_complex_vector(Vector<complex<double>>& x)
+void print_complex_vector(const Vector<complex<double>>& x)
 {
   unsigned vector_length = x.size();
   for (unsigned i = 0; i < vector_length; i++)
@@ -39,7 +39,7 @@ void print_complex_vector(Vector<complex<double>>& x)
   }
 }
 
-void print_dense_complex_matrix(DenseComplexMatrix& matrix)
+void print_dense_complex_matrix(const DenseComplexMatrix& matrix)
 {
   unsigned n_row = matrix.nrow();
   unsigned n_col = matrix.ncol();
@@ -61,24 +61,20 @@ int main()
   cout << matrix_default.ncol() << endl;
 
   constexpr unsigned long n_row = 2;
+  constexpr unsigned long n_col = 3;
+  // Number of non-zero entries
+  constexpr unsigned n_nz = 4;
 
   // test square matrix constructor
   DenseComplexMatrix matrix_square(n_row);
   cout << matrix_square.nrow() << endl;
   cout << matrix_square.ncol() << endl;
 
-  constexpr unsigned long n_col = 3;
 
   // test rectangular matrix constructor
   DenseComplexMatrix matrix_rect(n_row, n_col);
   cout << matrix_rect.nrow() << endl;
   cout << matrix_rect.ncol() << endl;
-
-  Vector<complex<double>> values(4);
-  values[0] = complex<double>(1.0, 1.0);
-  values[1] = complex<double>(0.0, 1.0);
-  values[2] = complex<double>(2.0, 1.0);
-  values[3] = complex<double>(1.0, 1.0);
 
   complex<double> inital_value(0.0, 1.0);
 
@@ -87,6 +83,12 @@ int main()
   cout << matrix.nrow() << endl;
   cout << matrix.ncol() << endl;
   print_dense_complex_matrix(matrix);
+
+  Vector<complex<double>> values(n_nz);
+  values[0] = complex<double>(1.0, 1.0);
+  values[1] = complex<double>(0.0, 1.0);
+  values[2] = complex<double>(2.0, 1.0);
+  values[3] = complex<double>(1.0, 1.0);
 
   // test round bracket access overloaded operator
   matrix_square(0, 0) = values[0];
@@ -109,7 +111,7 @@ int main()
   matrix_square.lubksub(rhs);
   print_complex_vector(rhs);
 
-  Vector<std::complex<double>> x(2);
+  Vector<std::complex<double>> x(vector_length);
   x[0] = complex<double>(1.0, 1.5);
   x[1] = complex<double>(-2.0, 3.0);
 

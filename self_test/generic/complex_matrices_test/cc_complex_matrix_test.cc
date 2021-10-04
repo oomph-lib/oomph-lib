@@ -30,7 +30,7 @@
 using namespace std;
 using namespace oomph;
 
-void print_complex_vector(Vector<complex<double>>& x)
+void print_complex_vector(const Vector<complex<double>>& x)
 {
   unsigned vector_length = x.size();
   for (unsigned i = 0; i < vector_length; i++)
@@ -39,7 +39,7 @@ void print_complex_vector(Vector<complex<double>>& x)
   }
 }
 
-void print_cc_complex_matrix(CCComplexMatrix& matrix)
+void print_cc_complex_matrix(const CCComplexMatrix& matrix)
 {
   unsigned n_row = matrix.nrow();
   unsigned n_col = matrix.ncol();

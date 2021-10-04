@@ -165,7 +165,7 @@ int main()
 
   constexpr unsigned n_nz_double = 5;
 
-  Vector<double> value_double(5);
+  Vector<double> value_double(n_nz_double);
   value_double[0] = double(1.0);
   value_double[1] = double(2.0);
   value_double[2] = double(3.0);
