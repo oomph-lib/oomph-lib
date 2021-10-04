@@ -10,7 +10,6 @@ include(FetchContent)
 
 # Targets to store the accumulated compiler flags and external libs to link
 set(EXTERNAL_DIST_CXX_DEFINITIONS "")
-set(EXTERNAL_DIST_LIBS)
 
 if(OOMPH_WANT_BACKWARD)
   add_subdirectory(backward)
@@ -47,9 +46,6 @@ endif()
 
 # Make the accumulated compiler flags visible in the parent scope
 set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
-
-# Make the accumulated external libraries target visible in the parent scope
-set(EXTERNAL_DIST_LIBS ${EXTERNAL_DIST_LIBS} PARENT_SCOPE)
 
 message(VERBOSE "Leaving external_distributions subdirectory")
 # ------------------------------------------------------------------------------

@@ -274,6 +274,9 @@ oomph_library_config(
 # Specify the location of the external_src headers at build time. We don't need
 # to worry about the location of the headers at install time because they'll all
 # be bundled together in build/include/.
+#
+# TODO: Test whether this can just be replaced with linking to the required
+# oomph_ libraries...
 target_include_directories(
   ${LIBNAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/external_src>)
 

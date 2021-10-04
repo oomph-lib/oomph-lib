@@ -18,13 +18,10 @@ FetchContent_MakeAvailable(nlohmann_json)
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables
 
-# Update external distributions preprocessor definitions and list of libraries
+# Update external distributions preprocessor definitions and make the updated
+# variable values visible to the parent scope
 list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_NLOHMANN_JSON)
-list(APPEND EXTERNAL_DIST_LIBS nlohmann_json::nlohmann_json)
-
-# Make the updated variable values visible to the parent scope
 set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
-set(EXTERNAL_DIST_LIBS ${EXTERNAL_DIST_LIBS} PARENT_SCOPE)
 
 # Define an internal project variable to indicate that we possess this library
 set(OOMPH_HAS_NLOHMANN_JSON TRUE CACHE INTERNAL "")

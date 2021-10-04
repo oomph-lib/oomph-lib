@@ -170,13 +170,10 @@ add_dependencies(Trilinos::Trilinos oomph_trilinos_project)
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables
 
-# Update external distributions preprocessor definitions and list of libraries
-list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_TRILINOS)
-list(APPEND EXTERNAL_DIST_LIBS Trilinos::Trilinos)
-
-# Make the updated variable values visible to the parent scope
+# Update external distributions preprocessor definitions and make the updated
+# variable values visible to the parent scope
+list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_SPDLOG)
 set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
-set(EXTERNAL_DIST_LIBS ${EXTERNAL_DIST_LIBS} PARENT_SCOPE)
 
 # Define an internal project variable to indicate that we possess this library
 set(OOMPH_HAS_TRILINOS TRUE CACHE INTERNAL "")
