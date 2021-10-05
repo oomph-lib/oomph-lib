@@ -166,11 +166,11 @@ int main()
   constexpr unsigned n_nz_double = 5;
 
   Vector<double> value_double(n_nz_double);
-  value_double[0] = double(1.0);
-  value_double[1] = double(2.0);
-  value_double[2] = double(3.0);
-  value_double[3] = double(4.0);
-  value_double[4] = double(5.0);
+  value_double[0] = 1.0;
+  value_double[1] = 2.0;
+  value_double[2] = 3.0;
+  value_double[3] = 4.0;
+  value_double[4] = 5.0;
 
   Vector<int> column_index_double(n_nz_double);
   column_index_double[0] = 0;
