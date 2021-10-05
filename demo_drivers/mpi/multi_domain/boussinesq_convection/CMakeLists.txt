@@ -54,5 +54,10 @@ oomph_add_test(
 set_tests_properties(mpi.boussinesq_convection
                      PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
 
+# TODO: Patch
+if(APPLE)
+  set_tests_properties(mpi.boussinesq_convection PROPERTIES DISABLED YES)
+endif()
+
 message(VERBOSE "Leaving boussinesq_convection subdirectory")
 # ------------------------------------------------------------------------------

@@ -30,5 +30,10 @@ oomph_add_test(
 set_tests_properties(mpi.hp_adaptive_driven_cavity
                      PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
 
+# TODO: Patch
+if(APPLE)
+  set_tests_properties(mpi.hp_adaptive_driven_cavity PROPERTIES DISABLED YES)
+endif()
+
 message(VERBOSE "Leaving hp_adaptive_driven_cavity subdirectory")
 # ------------------------------------------------------------------------------

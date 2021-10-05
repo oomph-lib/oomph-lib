@@ -34,8 +34,17 @@ oomph_add_test(
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
 # We'll pass this to all other MPI-enabled self-tests to ensure that parallel
 # self-test do NOT run at the same time!
+#
+# TODO: TEST TO SEE IF I NEED TO USE:
+#
+# set_tests_properties(mpi.adaptive_driven_cavity PROPERTIES RUN_SERIAL TRUE)
 set_tests_properties(mpi.adaptive_driven_cavity
                      PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
+
+# TODO: Patch
+if(APPLE)
+  set_tests_properties(mpi.adaptive_driven_cavity PROPERTIES DISABLED YES)
+endif()
 
 message(VERBOSE "Leaving adaptive_driven_cavity subdirectory")
 # ------------------------------------------------------------------------------

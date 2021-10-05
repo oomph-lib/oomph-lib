@@ -36,5 +36,10 @@ oomph_add_test(
 set_tests_properties(mpi.bifurcation_tracking
                      PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
 
+# TODO: Patch
+if(APPLE)
+  set_tests_properties(mpi.bifurcation_tracking PROPERTIES DISABLED YES)
+endif()
+
 message(VERBOSE "Leaving bifurcation_tracking subdirectory")
 # ------------------------------------------------------------------------------

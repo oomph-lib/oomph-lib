@@ -31,5 +31,10 @@ oomph_add_test(
 set_tests_properties(mpi.three_d_entry_flow
                      PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
 
+# TODO: Patch
+if(APPLE)
+  set_tests_properties(mpi.three_d_entry_flow PROPERTIES DISABLED YES)
+endif()
+
 message(VERBOSE "Leaving three_d_entry_flow subdirectory")
 # ------------------------------------------------------------------------------
