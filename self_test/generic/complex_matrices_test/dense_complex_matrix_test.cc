@@ -102,7 +102,7 @@ int main()
 
   constexpr unsigned long vector_length = n_row;
 
-  Vector<std::complex<double>> rhs(vector_length);
+  Vector<complex<double>> rhs(vector_length);
   rhs[0] = complex<double>(1.0, 0.0);
   rhs[1] = complex<double>(1.4, 1.0);
 
@@ -111,17 +111,17 @@ int main()
   matrix_square.lubksub(rhs);
   print_complex_vector(rhs);
 
-  Vector<std::complex<double>> x(vector_length);
+  Vector<complex<double>> x(vector_length);
   x[0] = complex<double>(1.0, 1.5);
   x[1] = complex<double>(-2.0, 3.0);
 
-  Vector<std::complex<double>> residual(vector_length);
+  Vector<complex<double>> residual(vector_length);
 
   // test residual
   matrix_square.residual(x, rhs, residual);
   print_complex_vector(residual);
 
-  Vector<std::complex<double>> soln(vector_length);
+  Vector<complex<double>> soln(vector_length);
 
   // test multiply
   matrix_square.multiply(x, soln);

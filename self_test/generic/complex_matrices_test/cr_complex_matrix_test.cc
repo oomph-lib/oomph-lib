@@ -135,7 +135,7 @@ int main()
 
   constexpr unsigned long vector_length = n_row_square;
 
-  Vector<std::complex<double>> rhs(vector_length);
+  Vector<complex<double>> rhs(vector_length);
   rhs[0] = complex<double>(1.0, 0.0);
   rhs[1] = complex<double>(0.0, 1.0);
   rhs[2] = complex<double>(2.0, 1.0);
@@ -145,13 +145,13 @@ int main()
   matrix_square.lubksub(rhs);
   print_complex_vector(rhs);
 
-  Vector<std::complex<double>> x(vector_length);
+  Vector<complex<double>> x(vector_length);
   x[0] = complex<double>(2.0, 2.0);
   x[1] = complex<double>(-2.0, 3.0);
   x[2] = complex<double>(0.5, 2.2);
   x[3] = complex<double>(-1.4, 3.0);
 
-  Vector<std::complex<double>> soln(vector_length);
+  Vector<complex<double>> soln(vector_length);
 
   // test multiply
   matrix_square.multiply(x, soln);
