@@ -5,13 +5,24 @@ on: push
 
 # Environment variable(s) that can be read during jobs
 env:
-  # The oomph-lib installation location
-  OOMPH_ENABLE_MPI: 'ON'
+  # The installation location for third-party libraries
+  OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
 
 # ------------------------------------------------------------------------------
 
 jobs:
   build:
+    strategy:
+      fail-fast: false
+      matrix:
+        # NOTE: The possible options are: [
+        #   {status: "OFF", preset: CI-build-with-coverage},
+        #   {status: "ON",  preset: CI-mpi-build-with-coverage}
+        # ]
+        mpi_info: [
+          {status: "ON", cmake_preset: CI-mpi-build-with-coverage}
+        ]
+
     runs-on: ubuntu-latest
     steps:
       # -----------------[[[ GENERATE CODE COVERAGE RESULTS ]]]-----------------
@@ -26,18 +37,18 @@ jobs:
 
       - name: Configure & build (with coverage)
         run: |
-          cmake --preset CI-build-with-coverage \
+          cmake --preset ${{ matrix.mpi_info.cmake_preset }} \
+          -D CMAKE_INSTALL_PREFIX='${{ env.OOMPH_INSTALL_PATH }}' \
           -D OOMPH_USE_OPENBLAS=ON \
-          -D OOMPH_ENABLE_MPI=${{ env.OOMPH_ENABLE_MPI }} \
-          -B build && cd build && ninja
+          -B build && cd build && ninja && ninja install
 
       - name: Run self-tests (with coverage)
         id: self_tests
         run: |
           cd demo_drivers && cp ../CMakePresets.json ./
-          cmake --preset CI-demo-drivers-with-coverage -D CMAKE_PREFIX_PATH='${{ github.workspace }}/build' -B build
+          cmake --preset CI-demo-drivers-with-coverage -D CMAKE_PREFIX_PATH='${{ github.workspace }}/build;${{ env.OOMPH_INSTALL_PATH }}' -B build
           cd build && cp ../CMakePresets.json ./
-          ctest --preset CI-demo-drivers-with-coverage -j $(sysctl -n hw.logicalcpu)
+          ctest --preset CI-demo-drivers-with-coverage -j $(nproc)
 
       # ----------------[[[ PROCESS AND UPLOAD CODE COVERAGE ]]]----------------
 
@@ -48,11 +59,11 @@ jobs:
       - name: Delete unnecessary coverage files
         run: |
           printf "\n%s\n\n" "--> Deleting coverage files from external_src/ and external_distributions/..."
-          fd -u '.*\.(gcno|gcda|gcov)' build/external_{src,distributions} -x echo " *" {}
-          fd -u '.*\.(gcno|gcda|gcov)' build/external_{src,distributions} -x rm -f {}
+          fdfind -u '.*\.(gcno|gcda|gcov)' build/external_{src,distributions} -x echo " *" {}
+          fdfind -u '.*\.(gcno|gcda|gcov)' build/external_{src,distributions} -x rm -f {}
           printf "\n%s\n\n" "---> Deleting coverage files from demo_drivers/..."
-          fd -u '.*\.(gcno|gcda|gcov)' demo_drivers/build/ -x echo " *" {}
-          fd -u '.*\.(gcno|gcda|gcov)' demo_drivers/build/ -x rm -f {}
+          fdfind -u '.*\.(gcno|gcda|gcov)' demo_drivers/build/ -x echo " *" {}
+          fdfind -u '.*\.(gcno|gcda|gcov)' demo_drivers/build/ -x rm -f {}
 
       - name: Generate XML code coverage report
         run: gcovr -r . --xml-pretty -o coverage-report.xml

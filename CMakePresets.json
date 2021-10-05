@@ -48,6 +48,23 @@
       }
     },
     {
+      "name": "CI-mpi-build",
+      "inherits": "base",
+      "displayName": "MPI Build Config for CI/CD",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "$penv{OOMPH_INSTALL_PATH}",
+        "OOMPH_ENABLE_MPI": "ON",
+        "OOMPH_WANT_TRILINOS": "ON",
+        "OOMPH_WANT_MUMPS": "ON"
+      },
+      "environment": {
+        "CC": "mpicc",
+        "CXX": "mpic++",
+        "FC": "mpifort"
+      }
+    },
+    {
       "name": "CI-demo-drivers",
       "displayName": "Demo Drivers Build Config for CI/CD",
       "generator": "Ninja",
@@ -59,6 +76,14 @@
       "name": "CI-build-with-coverage",
       "inherits": "CI-build",
       "displayName": "Build Config for CI/CD code coverage",
+      "cacheVariables": {
+        "OOMPH_ENABLE_CODE_COVERAGE": "ON"
+      }
+    },
+    {
+      "name": "CI-mpi-build-with-coverage",
+      "inherits": "CI-mpi-build",
+      "displayName": "MPI Build Config for CI/CD code coverage",
       "cacheVariables": {
         "OOMPH_ENABLE_CODE_COVERAGE": "ON"
       }

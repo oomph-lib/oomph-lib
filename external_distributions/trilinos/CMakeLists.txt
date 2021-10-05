@@ -72,8 +72,7 @@ set(OOMPH_TRILINOS_FLAGS
     -DTPL_LAPACK_LIBRARIES:PATH=${OOMPH_LAPACK_LIBRARIES})
 
 if(OOMPH_ENABLE_MPI AND MPI_FOUND)
-  get_filename_component(MPI_BASE_DIRECTORY ${MPI_CXX_INCLUDE_DIRS} DIRECTORY)
-  list(APPEND OOMPH_TRILINOS_FLAGS -DMPI_BASE_DIR:PATH=${MPI_BASE_DIRECTORY})
+  list(APPEND OOMPH_TRILINOS_FLAGS -DMPI_BASE_DIR:PATH=${MPI_CXX_INCLUDE_DIRS})
 endif()
 
 # Make OOMPH_TRILINOS_MODULE_PATH a cache variable so that we can get its value
@@ -172,7 +171,7 @@ add_dependencies(Trilinos::Trilinos oomph_trilinos_project)
 
 # Update external distributions preprocessor definitions and make the updated
 # variable values visible to the parent scope
-list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_SPDLOG)
+list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_TRILINOS)
 set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
 
 # Define an internal project variable to indicate that we possess this library

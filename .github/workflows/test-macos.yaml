@@ -15,7 +15,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        OOMPH_ENABLE_MPI: ["ON"] #, "ON"]
+        # NOTE: The main options are: [
+        #   {status: "OFF", preset: CI-build},
+        #   {status: "ON",  preset: CI-mpi-build}
+        # ]
+        mpi_info: [
+          {status: "ON", cmake_preset: CI-mpi-build}
+        ]
 
     runs-on: macos-latest
     steps:
@@ -26,15 +32,14 @@ jobs:
         run: brew install cmake ninja openblas && brew reinstall gfortran
 
       - name: Install MPI dependencies (if required)
-        if: ${{ matrix.OOMPH_ENABLE_MPI }} == "ON"
+        if: ${{ matrix.mpi_info.status }} == "ON"
         run: brew install open-mpi
 
       - name: Configure, build & install
         run: |
-          cmake --preset CI-build \
+          cmake --preset ${{ matrix.mpi_info.cmake_preset }} \
           -D CMAKE_INSTALL_PREFIX='${{ env.OOMPH_INSTALL_PATH }}' \
           -D OOMPH_USE_OPENBLAS=ON \
-          -D OOMPH_ENABLE_MPI=${{ matrix.OOMPH_ENABLE_MPI }} \
           -B build && cd build && ninja && ninja install
 
       - name: Run self-tests
@@ -49,7 +54,7 @@ jobs:
       - name: Upload validation log file
         uses: actions/upload-artifact@v2
         with:
-          name: validation-${{ runner.os }}-MPI_${{ matrix.OOMPH_ENABLE_MPI }}.log
+          name: validation-${{ runner.os }}-MPI_${{ matrix.mpi_info.status }}.log
           path: ./validation.log
 
       - name: Propagate CTest status
