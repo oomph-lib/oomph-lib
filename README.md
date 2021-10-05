@@ -236,19 +236,40 @@ For those of you comfortable with CMake, you may wish to control the target
 properties of executables in a ``CMakeLists.txt`` file. You may also notice that
 you are unable to apply target-based CMake commands because CMake is unable to
 recognise the name of the target you have provided. The reason for this is that
-inside ``oomph_add_executable(...)`` and ``oomph_add_test(...)`` we create a
-unique target name for each executable/test by appending the SHA1 hash of the
-path to the target. This allows us to provide a unified self-test build (from
-the base ``demo_drivers`` folder) that avoid clashes between target names. We do
-rely on the user never creating two targets with the same name in the same
-folder but this should always be the case. To use target-based commands on a
-particular target, create a (SHA1) hash of the path, shorten it to 7 characters,
-then append it to the original target name and use that name for your commands:
+inside ``oomph_add_executable(...)`` we create a unique target name for each
+executable/test by appending the SHA1 hash of the path to the target. This allows
+us to provide a unified self-test build (from the base ``demo_drivers`` folder)
+that avoid clashes between target names. We do rely on the user never creating
+two targets with the same name in the same folder but this should always be the
+case. To use target-based commands on a particular target, create a (SHA1) hash
+of the path, shorten it to 7 characters, then append it to the original target
+name and use that name for your commands:
+
 ```cmake
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")           # Create hash
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)                 # Shorten to 7 characters
   set(HASHED_TARGET_NAME <YOUR-EXECUTABLE-NAME>_${PATH_HASH})  # Append hash
 ```
+
+**Note:** You do not need to append the path hash to test names as, unlike
+targets, CMake allows tests to share the same name.
+
+### Disabling a test
+
+To temporarily disable a test, you need to set the `DISABLED` property to `TRUE`
+using the argument to `TEST_NAME`:
+
+```cmake
+# Define test
+oomph_add_test(
+  TEST_NAME interaction.fourier_decomposed_acoustic_fsi
+  ...)
+
+# Disable test
+set_tests_properties(interaction.fourier_decomposed_acoustic_fsi
+                     PROPERTIES DISABLED YES)
+```
+
 **In progress**:
 
 - [ ] Add a "make self-test" command for the root `oomph-lib` directory which executes all of the self-tests.

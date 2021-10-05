@@ -85,9 +85,6 @@ function(oomph_add_test)
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
 
-  # Create the target name
-  set(OOMPH_TEST_NAME ${TEST_NAME}_${PATH_HASH})
-
   # We always need a validate.sh script
   set(REQUIREMENTS_WITH_PATHS "${CMAKE_CURRENT_LIST_DIR}/validate.sh")
   set(TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/validate.sh")
