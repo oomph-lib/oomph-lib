@@ -10,9 +10,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install requirements
-        run: |
-          brew install make automake libtool autoconf doxygen
-          brew reinstall gfortran
+        run: brew install make automake libtool autoconf doxygen && brew reinstall gfortran
 
       - name: Extra config
         run:
@@ -32,7 +30,7 @@ jobs:
       - name: Upload validation log file
         uses: actions/upload-artifact@v2
         with:
-          name: macos-latest validation log
+          name: validation-${{ runner.os }}.log
           path: ./validation.log
 
       - name: Propagate self-test status
