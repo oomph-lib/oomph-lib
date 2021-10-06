@@ -33,6 +33,7 @@ set(scotch OFF)
 set(openmp OFF)
 set(mumps_matlab OFF)
 set(use_default_install_location ON)
+# set(BUILD_TESTING OFF)
 
 # TODO: Find out how to control the installation destination of the stupid thing
 
