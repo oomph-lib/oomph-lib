@@ -4,25 +4,78 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered hypre subdirectory")
 
+# Hypre build options
+set(HYPRE_ENABLE_SHARED OFF)
+set(HYPRE_ENABLE_BIGINT OFF)
+set(HYPRE_ENABLE_MIXEDINT OFF)
+set(HYPRE_ENABLE_SINGLE OFF)
+set(HYPRE_ENABLE_LONG_DOUBLE OFF)
+set(HYPRE_ENABLE_COMPLEX OFF)
+set(HYPRE_WITH_MPI ON)
+set(HYPRE_WITH_OPENMP ${OOMPH_ENABLE_MPI})
+set(HYPRE_ENABLE_HOPSCOTCH OFF)
+set(HYPRE_WITH_DSUPERLU OFF)
+set(HYPRE_PRINT_ERRORS OFF)
+set(HYPRE_TIMING OFF)
+set(HYPRE_BUILD_EXAMPLES OFF)
+set(HYPRE_BUILD_TESTS OFF)
+# set(HYPRE_WITH_EXTRA_CFLAGS) set(HYPRE_WITH_EXTRA_CXXFLAGS)
+
+# Should Hypre just use its own internal BLAS/LAPACK libraries?
+set(HYPRE_ENABLE_HYPRE_BLAS OFF)
+set(HYPRE_ENABLE_HYPRE_LAPACK OFF)
+
+# Specify the absolute paths to the BLAS/LAPACK libraries. If we're using
+# OpenBLAS, specify the path to the libraries that we found. If not, and we're
+# just going to build our own, then use a generator expression to define the
+# path to the library (the value will be populated properly at build-time, when
+# the actual library artifact is generated)
+
+# BLAS
+if(HYPRE_ENABLE_HYPRE_BLAS)
+  set(TPL_BLAS_LIBRARIES)
+  if(OOMPH_USE_OPENBLAS)
+    set(TPL_BLAS_LIBRARIES "${BLAS_LIBRARIES}")
+  else()
+    set(TPL_BLAS_LIBRARIES "$<TARGET_LINKER_FILE:oomph_blas>")
+  endif()
+endif()
+
+# LAPACK
+if(HYPRE_ENABLE_HYPRE_LAPACK)
+  set(TPL_LAPACK_LIBRARIES)
+  if(OOMPH_USE_OPENBLAS)
+    set(TPL_LAPACK_LIBRARIES "${LAPACK_LIBRARIES}")
+  else()
+    set(TPL_LAPACK_LIBRARIES "$<TARGET_LINKER_FILE:oomph_lapack>")
+  endif()
+endif()
+
+# Configuration/build commands
+set(OOMPH_CONFIGURE_COMMAND_FOR_HYPRE
+    "cd src && cmake -G ${CMAKE_GENERATOR} -B cmbuild")
+set(OOMPH_BUILD_COMMAND_FOR_HYPRE "cd cmbuild && ${CMAKE_MAKE_PROGRAM}")
+
 # Download HYPRE repo
+# cmake-format: off
 include(FetchContent)
 FetchContent_Declare(
   hypre_project
   GIT_REPOSITORY https://github.com/hypre-space/hypre.git
   GIT_TAG v2.21.0
-  GIT_SHALLOW TRUE)
+  GIT_SHALLOW TRUE
+  CONFIGURE_COMMAND ${OOMPH_CONFIGURE_COMMAND_FOR_HYPRE}
+  BUILD_COMMAND ${OOMPH_BUILD_COMMAND_FOR_HYPRE})
 FetchContent_MakeAvailable(hypre_project)
+# cmake-format: on
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables
 
-# Update external distributions preprocessor definitions and list of libraries
+# Update external distributions preprocessor definitions and make the updated
+# variable values visible to the parent scope
 list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_HYPRE)
-list(APPEND EXTERNAL_DIST_LIBS HYPRE::HYPRE)
-
-# Make the updated variable values visible to the parent scope
 set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
-set(EXTERNAL_DIST_LIBS ${EXTERNAL_DIST_LIBS} PARENT_SCOPE)
 
 # Define an internal project variable to indicate that we possess this library
 set(OOMPH_HAS_HYPRE TRUE CACHE INTERNAL "")
