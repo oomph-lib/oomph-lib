@@ -161,12 +161,13 @@ accumulated_cpp_flags=''
 # anything under GNU< Linux (MH 12/01/2007)
 #
 AC_HEADER_STDC
-AC_CHECK_HEADERS([limits.h stdlib.h string.h sys/time.h],
-                  [echo "Congratulations -- required headers were found";],
-                  [echo "==================================================";
-                   echo "Trouble -- missing header[s]! ";
-                   echo "==================================================";
-                   exit])
+
+#AC_CHECK_HEADERS([limits.h stdlib.h string.h sys/time.h],
+#                  [echo "Congratulations -- required headers were found";],
+#                  [echo "==================================================";
+#                   echo "Trouble -- missing header[s]! ";
+#                   echo "==================================================";
+#                   exit])
 
 
 #Check for the execinfo header
