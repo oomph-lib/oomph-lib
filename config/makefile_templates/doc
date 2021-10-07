@@ -14,7 +14,7 @@ html/index.html: $(docfile).txt_doxygenified.h oomph-lib_header.html
 	rm $(docfile).txt_doxygenified.h.junk
 	doxygen
 if HAVE_PDF_LATEX
-        # Truncate the file after the main text by inserting end document at theend of index tex, then do some further customisation; then run make with "-i" to keep going after errors (of the fake variety from pdflatex)
+        # Truncate the file after the main text by inserting end document at the end of index tex, then do some further customisation; then run make with "-i" to keep going after errors (of the fake variety from pdflatex)
 	if [ "${suppress_latex_in_this_directory}" != "1" ]; then (cd latex; rm -f refman.pdf; echo "\end{document}" >> index.tex; mv refman.tex refman.tex.back; $(top_builddir)/../bin/customise_latex.bash refman.tex.back > refman.tex; $(top_builddir)/../bin/tweak_doxygen_latex_style_file.bash;  make -i ; mv refman.pdf ../$(docfile).pdf; ln -s ../$(docfile).pdf refman.pdf); fi
 
 endif
