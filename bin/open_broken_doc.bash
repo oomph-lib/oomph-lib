@@ -25,11 +25,10 @@ browser=firefox
 bin_dir=`dirname "$0"`
 
 # Extract the broken html files from it
-rm broken_files.txt
-$bin_dir/find_missing_doxygen_hooks.sh  | grep 'html:' | awk 'BEGIN{ FS= ":"}{print $1}' | unique broken_files.txt
+rm -f .broken_files.txt
+$bin_dir/find_missing_doxygen_hooks.sh  | grep 'html:' | awk 'BEGIN{ FS= ":"}{print $1}' | unique .broken_files.txt
 
-for file in `cat broken_files.txt`; do
-    echo $file
+for file in `cat .broken_files.txt`; do
     txt_file_dir=`dirname $file`/..
     txt_file=`echo $txt_file_dir/*.txt`
     if [ -e $txt_file ] ; then
