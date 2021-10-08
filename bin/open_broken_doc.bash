@@ -50,3 +50,4 @@ for file in `cat .broken_files.txt`; do
         echo " "
     fi
 done
+rm -f .broken_files.txt
