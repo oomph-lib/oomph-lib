@@ -439,8 +439,8 @@ else \
   # accomodate up to three digits for each part version id
   doxygen_version=`doxygen --version | \
     $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-  # Need at least version 1.9.3 --> 1009003
-  if test "$doxygen_version" -ge 1009003; then
+  # Need at least version 1.9.2 --> 1009002
+  if test "$doxygen_version" -ge 1009002; then
     echo "Congratulations!"
     echo "I have located a (sufficiently) up-to-date version of doxygen:" \
          `doxygen --version`
