@@ -8,8 +8,8 @@ echo "    bin/find_missing_doxygen_hooks.sh "
 echo " "
 echo "to find potentially broken documentation. "
 echo "For each potentially broken html file, I'll display"
-echo "the file (using an in-script specificable brower)"
-echo "and try to open the *.txt that's likely be the source"
+echo "the file (using an in-script specifiable brower)"
+echo "and try to open the *.txt that's likely to be the source"
 echo "for the documentation. If it can't be found that way,"
 echo "you'll have to dig around yourself."
 echo " "
@@ -41,7 +41,7 @@ for file in `cat broken_files.txt`; do
         echo " "
         echo "        "$txt_file
         echo " "
-        firefox $file
+        $browser $file
         emacs $txt_file
     else
         echo " "
