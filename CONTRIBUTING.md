@@ -9,6 +9,7 @@ _Notation:_ We prefix any command line input with "`>>>`" and generally show the
   - [Basic setup (only to be done once)](#basic-setup-only-to-be-done-once)
   - [The workflow](#the-workflow)
   - [The steps in detail](#the-steps-in-detail)
+  - [Code review](#code-review) 
   - [Advanced: pulling in upstream changes from the command-line](#advanced-pulling-in-upstream-changes-from-the-command-line)
   - [Clang-format](#clang-format)
   - [Pre-commit hooks (optional)](#pre-commit-hooks-optional)
@@ -18,7 +19,7 @@ _Notation:_ We prefix any command line input with "`>>>`" and generally show the
 
 ## Basic setup (only to be done once)
 
-We assume that you have created a GitHub account, and for the purpose of this document assume that your GitHub home page is https://github.com/JoeCoolDummy. Unless your name is Joe Cool Dummy, you'll have to change the name to your own.
+We assume that you have created a GitHub account, and for the purpose of this document assume that your GitHub home page is https://github.com/JoeCoolDummy. Unless your name is Joe Cool Dummy, you'll have to change the name to your own. (Some screenshots show the name of the actual people who prepared the associated parts of this document; too much work to edit the figures!)
 
 Contributing to `oomph-lib` involves three separate repositories:
 -   The official repository, https://github.com/oomph-lib/oomph-lib.
@@ -255,6 +256,8 @@ This involves the following steps:
    will pull these formatting changes back into your local repository. To avoid merge conflicts
    it's a good habit to do this a few minutes after pushing anything to your remote repository.
 
+   Also remember that a push to a remote repository will usually spawn a number of Action-based self-tests. While these don't "cost" us anything (Thank you, Github!) you should still kill unnecessary runs (in the Actions tab) if the push to your forked repository is intended as a backup and/or has not affected parts of the library that are tested by these Actions. For instance, there's no need to re-run the self-tests if you've only worked on the documentation.
+
 6. Now go to the GitHub webpage for your remote forked repository
    (https://github.com/JoeCoolDummy/oomph-lib/) and click on the button with a branch symbol and the text "`main`":
 
@@ -268,6 +271,8 @@ This involves the following steps:
 
     ![](doc/README/reviewers_button.png)
 
+    Also choose one or more tag(s) from the dropdown menu to indicate which part of the library is affected by your pull request.
+
    By default, the pull request will attempt to merge into the `main` branch of
    the base repository (`oomph-lib/oomph-lib`) as indicated in this box:
 
@@ -277,7 +282,7 @@ This involves the following steps:
 
    ![](doc/README/base_repository_button_development.png)
 
-   Provide a meaningful description of your changes in the textbox, press the button "Create pull request" and wait for somebody to merge your changes in (or get back to you with comments/requests). Note that subsequent changes (in response to discussions/requests, say) can simply be submitted to the same branch (repeating everything from step 3 above); they will automatically be added/included to the same pull request.
+   Provide a meaningful description of your changes in the textbox, press the button "Create pull request" and wait for somebody to merge your changes in (or get back to you with comments/requests; see below in [Code review](#code-review) for details of the review process). Note that subsequent changes (in response to discussions/requests, say) can simply be submitted to the same branch (repeating everything from step 3 above); they will automatically be added/included to the same pull request.
 
    Note that when you return to the branch's GitHub page (on your remote forked repository) you won't see the lovely green
 
@@ -338,6 +343,45 @@ This involves the following steps:
    ```bash
    >>> git push origin --delete feature-add-new-important-headers
    ```
+
+## Code review
+Generally, pull requests should be of a "digestible" size so that any issues arising during a code review can be resolved within a few iterations. Interact with the code reviewer by whichever means is easiest for you, but use the "comments" feature on the Github webpages in the first instance so there's a record of the issues raised. Sometimes it'll be easier to follow up via zoom or face-to-face discussions but in any case, the discussion should ultimately be marked as resolved, and the changes made should be transparent. "All done" is fine; more detail is required if suggestions were (jointly) deemed to be inappropriate. No need to over-engineer any of this -- small pull requests can just be merged in. However, the workflow described below should be sufficiently robust to deal even with "monster" pull requests.
+
+The general workflow for approving a pull request is as follows:
+
+1. **Reviewer:** Go to the "Files changed" tab for the pull request
+
+      ![](doc/README/files_changed_tab.png)
+
+   and inspect the changes made.
+
+ 1. **Reviewer:** Add comments/requests for change by leaving a comment near the relevant part of the code. Hover over the line number until the blue plus sign appears
+    ![](doc/README/plus_sign.png)
+
+    Click on it to make the comments window appear. Describe the issue and if it's something that you feel *must* be resolved, press the green "Start a review" button. (If it's just a comment, use "Add single comment" instead.)
+    ![](doc/README/comment_requesting_changes.png)
+    
+1. **Reviewer:** Keep going until you've reviewed all the changed files and left comments on all relevant issues, then finish the review by pressing the green "Finish your review" button at the very top of the page.
+      ![](doc/README/finish_your_review.png)
+
+1. **Reviewer:** Add a brief overall summary of the issues raised in the window that appears:
+      ![](doc/README/finish_review2.png)
+
+   If the changes are deemed essential, check the "Request changes" radio button before submitting the review.
+
+1. **Reviewee:** Work your way through the comments and either change the code as suggested (do this in your local cloned version of your forked repository, and then commit/push the changes to your remote forked repository; they will then automatically be included into the pull request), and leave a comment to say that you've done so. Alternatively, discuss/clarify the issue with the reviewer. 
+
+1. **Reviewee:** When you believe the issue has been resolved to everybody's satisfaction (this may involve a few iterations), leave a final comment "Done" in the chain of comments, and let the reviewer know when you've dealt with all of them.
+
+1. **Reviewer:** Revisit the issues. Sadly, there does not seem to be an easy way to do this; you'll have to scroll back through the conversation page to find any change requests that you made. They are marked with a red symbol:
+![](doc/README/resolve_conversation.png)
+Once you're happy with the changes made (or agree that the request wasn't sensible), press the "Resolve conversation" button. 
+
+1. **Reviewer:** Once all the issues have been dealt with to your satisfaction, go to the bottom of the page and indicate that you approve the changes made as part of this pull request:
+  ![](doc/README/list_of_changes_requested_approve.png)
+
+1. **Reviewer:** When all requests from all reviewers have been dealt with, and all reviewers have approved the changes, the changes can be merged in by pressing the green "Merge pull request" button. **IMPORTANT:** Before you merge, go to the top of the page and double-check that you're merging into the `development` branch rather than the `main` branch!
+
 ## Advanced: pulling in upstream changes from the command-line
 
 Described below is an alternative way to pull changes from the official repository (`upstream`) into your local forked and remote forked repositories using the command-line.
