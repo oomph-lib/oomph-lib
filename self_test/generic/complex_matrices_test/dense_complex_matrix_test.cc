@@ -26,33 +26,12 @@
 
 // Oomph-lib includes
 #include "generic.h"
+#include "complex_matrices_test_utility_functions.h"
 
 using namespace std;
 using namespace oomph;
 
-void print_complex_vector(const Vector<complex<double>>& x)
-{
-  unsigned vector_length = x.size();
-  for (unsigned i = 0; i < vector_length; i++)
-  {
-    cout << x[i] << endl;
-  }
-}
-
-void print_dense_complex_matrix(const DenseComplexMatrix& matrix)
-{
-  unsigned n_row = matrix.nrow();
-  unsigned n_col = matrix.ncol();
-  for (unsigned i = 0; i < n_row; i++)
-  {
-    for (unsigned j = 0; j < n_col; j++)
-    {
-      cout << matrix(i, j) << ", ";
-    }
-    cout << endl;
-  }
-}
-
+/// Main test function for the dense complex matrix class
 int main()
 {
   // test default constructor
@@ -82,7 +61,7 @@ int main()
   DenseComplexMatrix matrix(n_row, n_col, inital_value);
   cout << matrix.nrow() << endl;
   cout << matrix.ncol() << endl;
-  print_dense_complex_matrix(matrix);
+  print_complex_matrix(matrix);
 
   Vector<complex<double>> values(n_nz);
   values[0] = complex<double>(1.0, 1.0);
@@ -95,7 +74,7 @@ int main()
   matrix_square(0, 1) = values[1];
   matrix_square(1, 0) = values[2];
   matrix_square(1, 1) = values[3];
-  print_dense_complex_matrix(matrix_square);
+  print_complex_matrix(matrix_square);
 
   // test LU decomposition
   cout << matrix_square.ludecompose() << endl;

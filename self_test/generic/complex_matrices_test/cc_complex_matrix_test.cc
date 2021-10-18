@@ -26,33 +26,12 @@
 
 // Oomph-lib includes
 #include "generic.h"
+#include "complex_matrices_test_utility_functions.h"
 
 using namespace std;
 using namespace oomph;
 
-void print_complex_vector(const Vector<complex<double>>& x)
-{
-  unsigned vector_length = x.size();
-  for (unsigned i = 0; i < vector_length; i++)
-  {
-    cout << x[i] << endl;
-  }
-}
-
-void print_cc_complex_matrix(const CCComplexMatrix& matrix)
-{
-  unsigned n_row = matrix.nrow();
-  unsigned n_col = matrix.ncol();
-  for (unsigned i = 0; i < n_row; i++)
-  {
-    for (unsigned j = 0; j < n_col; j++)
-    {
-      cout << matrix(i, j) << ", ";
-    }
-    cout << endl;
-  }
-}
-
+/// Main test function for the compressed-column complex matrix class
 int main()
 {
   // test default constructor
@@ -88,7 +67,7 @@ int main()
     value_rect, row_index_rect, column_start_rect, n_col_rect, n_row_rect);
   cout << matrix_rect.nrow() << endl;
   cout << matrix_rect.ncol() << endl;
-  print_cc_complex_matrix(matrix_rect);
+  print_complex_matrix(matrix_rect);
 
   constexpr unsigned long n_col_square = 4;
   constexpr unsigned long n_row_square = 4;
@@ -128,7 +107,7 @@ int main()
                                 n_row_square);
   cout << matrix_square.nrow() << endl;
   cout << matrix_square.ncol() << endl;
-  print_cc_complex_matrix(matrix_square);
+  print_complex_matrix(matrix_square);
 
   // test LU decomposition
   cout << matrix_square.ludecompose() << endl;

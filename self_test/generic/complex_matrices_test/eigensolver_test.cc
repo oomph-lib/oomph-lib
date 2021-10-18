@@ -26,10 +26,13 @@
 
 // Oomph-lib includes
 #include "generic.h"
+#include "complex_matrices_test_utility_functions.h"
 
 using namespace std;
 using namespace oomph;
 
+/// Main test function for the eigensolver of the compressed form of a complex
+/// matrix eigenvalue problem
 int main()
 {
   // Create eigensolver

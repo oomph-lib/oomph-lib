@@ -26,33 +26,12 @@
 
 // Oomph-lib includes
 #include "generic.h"
+#include "complex_matrices_test_utility_functions.h"
 
 using namespace std;
 using namespace oomph;
 
-void print_complex_vector(const Vector<complex<double>>& x)
-{
-  unsigned vector_length = x.size();
-  for (unsigned i = 0; i < vector_length; i++)
-  {
-    cout << x[i] << endl;
-  }
-}
-
-void print_cr_complex_matrix(const CRComplexMatrix& matrix)
-{
-  unsigned n_row = matrix.nrow();
-  unsigned n_col = matrix.ncol();
-  for (unsigned i = 0; i < n_row; i++)
-  {
-    for (unsigned j = 0; j < n_col; j++)
-    {
-      cout << matrix(i, j) << ", ";
-    }
-    cout << endl;
-  }
-}
-
+/// Main test function for the compressed-row complex matrix class
 int main()
 {
   // test default constructor
@@ -88,7 +67,7 @@ int main()
     value_rect, column_index_rect, row_start_rect, n_col_rect, n_row_rect);
   cout << matrix_rect.nrow() << endl;
   cout << matrix_rect.ncol() << endl;
-  print_cr_complex_matrix(matrix_rect);
+  print_complex_matrix(matrix_rect);
 
   constexpr unsigned long n_col_square = 4;
   constexpr unsigned long n_row_square = 4;
@@ -128,7 +107,7 @@ int main()
                                 n_row_square);
   cout << matrix_square.nrow() << endl;
   cout << matrix_square.ncol() << endl;
-  print_cr_complex_matrix(matrix_square);
+  print_complex_matrix(matrix_square);
 
   // test LU decomposition
   cout << matrix_square.ludecompose() << endl;
@@ -191,24 +170,24 @@ int main()
 
   // test add (CRDoubleMatrix)
   matrix_square.add(matrix_in_double, matrix_square);
-  print_cr_complex_matrix(matrix_square);
+  print_complex_matrix(matrix_square);
 
   // test add (CRComplexMatrix)
   matrix_square.add(matrix_square, matrix_square);
-  print_cr_complex_matrix(matrix_square);
+  print_complex_matrix(matrix_square);
 
   // Print input matrices
   cout << "A" << endl;
-  print_cr_complex_matrix(matrix_square);
+  print_complex_matrix(matrix_square);
 
   CRComplexMatrix matrix_square_2(values_square,
-                                column_index_square,
-                                row_start_square,
-                                n_col_square,
-                                n_row_square);
+                                  column_index_square,
+                                  row_start_square,
+                                  n_col_square,
+                                  n_row_square);
 
   cout << "B" << endl;
-  print_cr_complex_matrix(matrix_square_2);
+  print_complex_matrix(matrix_square_2);
 
   CRComplexMatrix matrix_result(values_square,
                                 column_index_square,
@@ -219,7 +198,7 @@ int main()
   // test multiply method 2 (default)
   matrix_square.multiply(matrix_square_2, matrix_result);
   cout << "A B" << endl;
-  print_cr_complex_matrix(matrix_result);
+  print_complex_matrix(matrix_result);
 
   // Create a reference to Serial_matrix_matrix_multiply_method
   unsigned& method = matrix_square.serial_matrix_matrix_multiply_method();
@@ -230,14 +209,14 @@ int main()
   matrix_square.multiply(matrix_square_2, matrix_result);
   cout << method << endl;
   cout << "A B" << endl;
-  print_cr_complex_matrix(matrix_result);
+  print_complex_matrix(matrix_result);
 
   // test multiply method 3
   method = 3;
   matrix_square.multiply(matrix_square_2, matrix_result);
   cout << method << endl;
   cout << "A B" << endl;
-  print_cr_complex_matrix(matrix_result);
+  print_complex_matrix(matrix_result);
 
   // Print cleanup messages for easier debugging
   cout << "Begin cleanup" << endl;
