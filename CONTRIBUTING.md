@@ -256,7 +256,10 @@ This involves the following steps:
    will pull these formatting changes back into your local repository. To avoid merge conflicts
    it's a good habit to do this a few minutes after pushing anything to your remote repository.
 
-   Also remember that a push to a remote repository will usually spawn a number of Action-based self-tests. While these don't "cost" us anything (Thank you, Github!) you should still kill unnecessary runs (in the Actions tab) if the push to your forked repository is intended as a backup and/or has not affected parts of the library that are tested by these Actions. For instance, there's no need to re-run the self-tests if you've only worked on the documentation.
+   Also remember that a push to a remote repository will usually spawn a number of Action-based self-tests. While these don't "cost" us anything (Thank you, Github!) you should still kill unnecessary runs (in the Actions tab) if the push to your forked repository is intended as a backup and/or has not affected parts of the library that are tested by these Actions. For instance, there's no need to re-run the self-tests if you've only worked on the documentation. You can cancel a particular workflow by clicking on the "..." button as shown here:
+
+    ![](doc/README/running_actions.png)
+
 
 6. Now go to the GitHub webpage for your remote forked repository
    (https://github.com/JoeCoolDummy/oomph-lib/) and click on the button with a branch symbol and the text "`main`":
@@ -271,7 +274,9 @@ This involves the following steps:
 
     ![](doc/README/reviewers_button.png)
 
-    Also choose one or more tag(s) from the dropdown menu to indicate which part of the library is affected by your pull request.
+    Also choose one or more labels(s) from the dropdown menu to indicate which part of the library is affected by your pull request.
+
+      ![](doc/README/labels_for_pull_request.png)
 
    By default, the pull request will attempt to merge into the `main` branch of
    the base repository (`oomph-lib/oomph-lib`) as indicated in this box:
