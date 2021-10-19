@@ -260,6 +260,8 @@ This involves the following steps:
 
     ![](doc/README/running_actions.png)
 
+    However, a complete set of self-tests should be run before submitting a pull request.
+
 
 6. Now go to the GitHub webpage for your remote forked repository
    (https://github.com/JoeCoolDummy/oomph-lib/) and click on the button with a branch symbol and the text "`main`":
@@ -274,7 +276,7 @@ This involves the following steps:
 
     ![](doc/README/reviewers_button.png)
 
-    Also choose one or more labels(s) from the dropdown menu to indicate which part of the library is affected by your pull request.
+    Also choose one or more label(s) from the dropdown menu to indicate which part of the library is affected by your pull request.
 
       ![](doc/README/labels_for_pull_request.png)
 
@@ -356,34 +358,41 @@ The general workflow for approving a pull request is as follows:
 
 1. **Reviewer:** Go to the "Files changed" tab for the pull request
 
-      ![](doc/README/files_changed_tab.png)
+   ![](doc/README/files_changed_tab.png)
 
    and inspect the changes made.
 
  1. **Reviewer:** Add comments/requests for change by leaving a comment near the relevant part of the code. Hover over the line number until the blue plus sign appears
+
     ![](doc/README/plus_sign.png)
 
     Click on it to make the comments window appear. Describe the issue and if it's something that you feel *must* be resolved, press the green "Start a review" button. (If it's just a comment, use "Add single comment" instead.)
+   
     ![](doc/README/comment_requesting_changes.png)
-    
+   
 1. **Reviewer:** Keep going until you've reviewed all the changed files and left comments on all relevant issues, then finish the review by pressing the green "Finish your review" button at the very top of the page.
-      ![](doc/README/finish_your_review.png)
+
+    ![](doc/README/finish_your_review.png)
 
 1. **Reviewer:** Add a brief overall summary of the issues raised in the window that appears:
-      ![](doc/README/finish_review2.png)
+
+   ![](doc/README/finish_review2.png)
 
    If the changes are deemed essential, check the "Request changes" radio button before submitting the review.
 
-1. **Reviewee:** Work your way through the comments and either change the code as suggested (do this in your local cloned version of your forked repository, and then commit/push the changes to your remote forked repository; they will then automatically be included into the pull request), and leave a comment to say that you've done so. Alternatively, discuss/clarify the issue with the reviewer. 
+1. **Reviewee:** Work your way through the comments and either change the code as suggested (do this in your local cloned version of your forked repository, in the same branch from which you originally submitted the pull request; then commit/push the changes to your remote forked repository; the changes will then automatically be included into the pull request), and leave a comment to say that you've done so. Alternatively, discuss/clarify the issue with the reviewer. 
 
 1. **Reviewee:** When you believe the issue has been resolved to everybody's satisfaction (this may involve a few iterations), leave a final comment "Done" in the chain of comments, and let the reviewer know when you've dealt with all of them.
 
 1. **Reviewer:** Revisit the issues. Sadly, there does not seem to be an easy way to do this; you'll have to scroll back through the conversation page to find any change requests that you made. They are marked with a red symbol:
-![](doc/README/resolve_conversation.png)
-Once you're happy with the changes made (or agree that the request wasn't sensible), press the "Resolve conversation" button. 
 
-1. **Reviewer:** Once all the issues have been dealt with to your satisfaction, go to the bottom of the page and indicate that you approve the changes made as part of this pull request:
-  ![](doc/README/list_of_changes_requested_approve.png)
+   ![](doc/README/resolve_conversation.png)
+
+   Once you're happy with the changes made (or agree that the request wasn't sensible), press the "Resolve conversation" button. 
+
+1. **Reviewer:** Once all the issues have been dealt with to your satisfaction, go to the bottom of the page and indicate that you approve the changes made as part of this pull request (click on the "..." next to your name):
+
+   ![](doc/README/list_of_changes_requested_approve.png)
 
 1. **Reviewer:** When all requests from all reviewers have been dealt with, and all reviewers have approved the changes, the changes can be merged in by pressing the green "Merge pull request" button. **IMPORTANT:** Before you merge, go to the top of the page and double-check that you're merging into the `development` branch rather than the `main` branch!
 
