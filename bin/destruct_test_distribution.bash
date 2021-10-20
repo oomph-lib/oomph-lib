@@ -12,7 +12,7 @@
 # location of tar files for external distributions,
 # currently (and for the foreseeable future!)
 #
-#   http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/
+#   https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/
 #
 # should probably be handled the same way but aren't
 # yet. Works fine on leylandii/vummath.
@@ -102,28 +102,28 @@ fi
 
 #------------------------------------------------------
 # Name of trilinos tar file at 
-# http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/
+# https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/
 # [update]
 #------------------------------------------------------
 trilinos_tar_file=trilinos-11.8.1-Source.tar.gz
 
 #------------------------------------------------------
 # Name of hypre tar file at 
-# http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/
+# https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/
 # [update]
 #------------------------------------------------------
 hypre_tar_file=hypre-2.0.0.tar.gz
 
 #------------------------------------------------------
 # Name of mumps tar file at 
-# http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/
+# https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/
 # [update]
 #------------------------------------------------------
 mumps_tar_file=MUMPS_4.10.0.tar.gz
 
 #------------------------------------------------------
 # Name of scalapack tar file at 
-# http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/
+# https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/
 # [update]
 #------------------------------------------------------
 scalapack_tar_file=scalapack_installer.tgz
@@ -134,7 +134,7 @@ echo "CHECKING EXTERNAL DISTRIBUTIONS"
 echo "==============================="
 echo " " 
 
-full_url=http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/$trilinos_tar_file 
+full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$trilinos_tar_file 
 echo "Tar file: "
 echo " "
 echo "     "$full_url
@@ -149,7 +149,7 @@ else
 fi
 echo " "
 
-full_url=http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/$hypre_tar_file 
+full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$hypre_tar_file 
 echo "Tar file: "
 echo " "
 echo "     "$full_url
@@ -164,7 +164,7 @@ else
 fi
 echo " "
 
-full_url=http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/$mumps_tar_file 
+full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$mumps_tar_file 
 echo "Tar file: "
 echo " "
 echo "     "$full_url
@@ -179,7 +179,7 @@ else
 fi
 echo " "
 
-full_url=http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/$scalapack_tar_file 
+full_url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$scalapack_tar_file 
 echo "Tar file: "
 echo " "
 echo "     "$full_url
@@ -257,7 +257,7 @@ for do_mpi in 0 1; do
                 # TRILINOS [update version number]
                 #---------------------------------
                 echo "cd external_distributions/trilinos/  " >> build_script.bash 
-                echo " wget http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/"$trilinos_tar_file >> build_script.bash 
+                echo " wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$trilinos_tar_file >> build_script.bash 
                 echo "if [ ! -e $trilinos_tar_file ]; then  " >> build_script.bash 
                 echo "   echo \"Download of trilinos tar file failed\"  " >> build_script.bash 
                 echo "   exit  " >> build_script.bash 
@@ -269,7 +269,7 @@ for do_mpi in 0 1; do
                 # HYPRE [updateversion number]
                 #-----------------------------
                 echo "cd external_distributions/hypre" >> build_script.bash 
-                echo "wget http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/"$hypre_tar_file >> build_script.bash 
+                echo "wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$hypre_tar_file >> build_script.bash 
                 echo "if [ ! -e $hypre_tar_file ]; then" >> build_script.bash 
                 echo "    echo \"Download of hypre tar file failed\" " >> build_script.bash 
                 echo "    exit" >> build_script.bash 
@@ -281,8 +281,8 @@ for do_mpi in 0 1; do
                 # MUMPS/SCALAPACK [update version number]
                 #----------------------------------------
                 echo "cd external_distributions/mumps_and_scalapack" >> build_script.bash 
-                echo "wget http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/"$scalapack_tar_file >> build_script.bash 
-                echo "wget http://www.maths.manchester.ac.uk/~oomphlib/oomph-lib_external_distfiles/"$mumps_tar_file >> build_script.bash 
+                echo "wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$scalapack_tar_file >> build_script.bash 
+                echo "wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/"$mumps_tar_file >> build_script.bash 
                 echo "if [ ! -e $mumps_tar_file ]; then" >> build_script.bash 
                 echo "    echo \"Download of mumps tar file failed\" " >> build_script.bash 
                 echo "    exit" >> build_script.bash 

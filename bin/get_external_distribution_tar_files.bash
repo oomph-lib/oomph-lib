@@ -13,7 +13,7 @@ echo " "
 
 # Do we have the interweb?
 # from https://stackoverflow.com/questions/929368/how-to-test-an-internet-connection-with-bash
-url=http://oomph-lib.maths.man.ac.uk/oomph-lib_external_distfiles/
+url=https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/
 wget -q --spider $url
 if [ $? -eq 0 ]; then
     echo "Yay!"
@@ -64,7 +64,7 @@ tar_file=trilinos-11.8.1-Source.tar.gz
 if [ -e $tar_file ]; then
     echo "        tar file "$tar_file" already exists; not downloading it again!"
 else
-    wget http://oomph-lib.maths.man.ac.uk/oomph-lib_external_distfiles/$tar_file
+    wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$tar_file
     if [ -e $tar_file ]; then
         echo "Success!"
     else
@@ -87,7 +87,7 @@ tar_file=hypre-2.0.0.tar.gz
 if [ -e $tar_file ]; then
     echo "        tar file "$tar_file" already exists; not downloading it again!"
 else
-    wget http://oomph-lib.maths.man.ac.uk/oomph-lib_external_distfiles/$tar_file
+    wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$tar_file
     if [ -e $tar_file ]; then
         echo "Success!"
     else
@@ -112,7 +112,7 @@ for tar_file in `echo $tar_file_list`; do
     if [ -e $tar_file ]; then
         echo "        tar file "$tar_file" already exists; not downloading it again!"
     else
-        wget http://oomph-lib.maths.man.ac.uk/oomph-lib_external_distfiles/$tar_file
+        wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles/$tar_file
         if [ -e $tar_file ]; then
             echo "Success!"
         else
