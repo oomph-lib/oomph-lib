@@ -3,8 +3,13 @@ name: Documentation
 on:
   push:
     branches:
-      - fix_doc
-#     - main
+      - main
+  workflow_dispatch:
+    inputs:
+      publishBranch:
+        description: 'Branch to publish built docs'
+        required: true
+        default: 'gh-pages'
 
 jobs:
   build-and-deploy:
@@ -22,7 +27,7 @@ jobs:
 
     - name: Bleeding edge doxygen 
       run: |
-        wget https://www.doxygen.nl/files/doxygen-1.9.2.linux.bin.tar.gz
+        wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles//doxygen-1.9.2.linux.bin.tar.gz
         tar xvfz doxygen-1.9.2.linux.bin.tar.gz
         sudo apt install libclang1-9
         sudo apt install libclang-cpp9
@@ -49,6 +54,6 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages # The branch the action should deploy to.
+        BRANCH: ${{ github.event.inputs.publishBranch }} # The branch the action should deploy to.
         FOLDER: build/website # The folder the action should deploy.
         CLEAN: true
