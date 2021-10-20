@@ -3,8 +3,13 @@ name: Documentation
 on:
   push:
     branches:
-      - fix_doc
-#     - main
+      - main
+  workflow_dispatch:
+    inputs:
+      publishBranch:
+        description: 'Branch to publish built docs'
+        required: true
+        default: 'gh-pages'
 
 jobs:
   build-and-deploy:
@@ -49,6 +54,6 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages # The branch the action should deploy to.
+        BRANCH: ${{ github.event.inputs.publishBranch }} # The branch the action should deploy to.
         FOLDER: build/website # The folder the action should deploy.
         CLEAN: true
