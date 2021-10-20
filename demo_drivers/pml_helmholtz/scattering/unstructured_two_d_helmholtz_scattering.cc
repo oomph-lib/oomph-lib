@@ -68,14 +68,14 @@ namespace GlobalParameters
  /// Square of the wavenumber (also known as k^2)
  double K_squared = Wavenumber * Wavenumber;
 
- /// \short Number of terms used in the computation
+ ///  Number of terms used in the computation
  /// of the exact solution
  unsigned N_fourier=100;
 
  /// Imaginary unit
  std::complex<double> I(0.0,1.0);
 
- /// \short Exact solution for scattered field
+ ///  Exact solution for scattered field
  /// (vector returns real and impaginary parts).
  void get_exact_u(const Vector<double>& x, Vector<double>& u)
  {
@@ -147,7 +147,7 @@ namespace GlobalParameters
 
 
 
- /// \short Flux (normal derivative) on the unit disk
+ ///  Flux (normal derivative) on the unit disk
  /// for a planar incoming wave
  void prescribed_incoming_flux(const Vector<double>& x,
                                complex<double>& flux)
@@ -207,7 +207,7 @@ namespace GlobalParameters
    /// Default constructor (empty)
    TestPMLMapping(){};
 
-   /// \short Overwrite the pure PML mapping coefficient function to return the
+   ///  Overwrite the pure PML mapping coefficient function to return the
    /// coeffcients proposed by Bermudez et al
    std::complex<double> gamma(const double& nu_i,
                               const double& pml_width_i,
@@ -256,19 +256,19 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){};
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ ///  Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 
  /// Create PML meshes
  void create_pml_meshes();
 
- /// \short Create Helmholtz flux elements on boundary b of the Mesh pointed
+ ///  Create Helmholtz flux elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the specified surface Mesh
  void create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
                            Mesh* const & helmholtz_inner_boundary_mesh_pt);
 
- /// \short Create Helmholtz power elements on boundary b of the Mesh pointed
+ ///  Create Helmholtz power elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the specified surface Mesh
  void create_power_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
                             Mesh* const & helmholtz_power_boundary_mesh_pt);
@@ -327,7 +327,7 @@ private:
  /// Pointer to the bottom left corner PML mesh
  Mesh* PML_bottom_left_mesh_pt;
 
- /// \short Pointer to the mesh containing
+ ///  Pointer to the mesh containing
  /// the Helmholtz inner boundary condition elements
  Mesh* Helmholtz_inner_boundary_mesh_pt;
 

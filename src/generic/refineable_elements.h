@@ -114,16 +114,16 @@ namespace oomph
     /// Global element number -- for plotting/validation purposes
     long Number;
 
-    /// \short Max. allowed discrepancy in element integrity check
+    ///  Max. allowed discrepancy in element integrity check
     static double Max_integrity_tolerance;
 
-    /// \short Static helper function that is used to check that the value_id
+    ///  Static helper function that is used to check that the value_id
     /// is in range
     static void check_value_id(const int& n_continuously_interpolated_values,
                                const int& value_id);
 
 
-    /// \short Assemble the jacobian matrix for the mapping from local
+    ///  Assemble the jacobian matrix for the mapping from local
     /// to Eulerian coordinates, given the derivatives of the shape function
     /// w.r.t the local coordinates.
     /// Overload the standard version to use the hanging information for
@@ -131,7 +131,7 @@ namespace oomph
     void assemble_local_to_eulerian_jacobian(
       const DShape& dpsids, DenseMatrix<double>& jacobian) const;
 
-    /// \short Assemble the the "jacobian" matrix of second derivatives of the
+    ///  Assemble the the "jacobian" matrix of second derivatives of the
     /// mapping from local to Eulerian coordinates, given
     /// the second derivatives of the shape functions w.r.t. local coordinates.
     /// Overload the standard version to use the hanging information for
@@ -139,14 +139,14 @@ namespace oomph
     void assemble_local_to_eulerian_jacobian2(
       const DShape& d2psids, DenseMatrix<double>& jacobian2) const;
 
-    /// \short Assemble the covariant Eulerian base vectors, assuming that
+    ///  Assemble the covariant Eulerian base vectors, assuming that
     /// the derivatives of the shape functions with respect to the local
     /// coordinates have already been constructed.
     /// Overload the standard version to account for hanging nodes.
     void assemble_eulerian_base_vectors(
       const DShape& dpsids, DenseMatrix<double>& interpolated_G) const;
 
-    /// \short Calculate the mapping from local to Eulerian coordinates given
+    ///  Calculate the mapping from local to Eulerian coordinates given
     /// the derivatives of the shape functions w.r.t the local coordinates.
     /// assuming that the coordinates are aligned in the direction of the local
     /// coordinates, i.e. there are no cross terms and the jacobian is diagonal.
@@ -159,23 +159,23 @@ namespace oomph
       DenseMatrix<double>& inverse_jacobian) const;
 
   private:
-    /// \short Storage for local equation numbers of hanging node variables
+    ///  Storage for local equation numbers of hanging node variables
     /// (values stored at master nodes). It is
     /// essential that these are indexed by a Node pointer because the Node
     /// may be internal or external to the element.
     /// local equation number = Local_hang_eqn(master_node_pt,ival)
     std::map<Node*, int>* Local_hang_eqn;
 
-    /// \short Lookup scheme for unique number associated with any of the nodes
+    ///  Lookup scheme for unique number associated with any of the nodes
     /// that actively control the shape of the element (i.e. they are either
     /// non-hanging nodes of this element or master nodes of hanging nodes.
     std::map<Node*, unsigned> Shape_controlling_node_lookup;
 
   protected:
-    /// \short Assign the local equation numbers for hanging node variables
+    ///  Assign the local equation numbers for hanging node variables
     void assign_hanging_local_eqn_numbers(const bool& store_local_dof_pt);
 
-    /// \short Calculate the contributions to the jacobian from the nodal
+    ///  Calculate the contributions to the jacobian from the nodal
     /// degrees of freedom using finite differences.
     /// This version is overloaded to take hanging node information into
     /// account
@@ -183,7 +183,7 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian);
 
   public:
-    /// \short Constructor, calls the FiniteElement constructor and initialises
+    ///  Constructor, calls the FiniteElement constructor and initialises
     /// the member data
     RefineableElement()
       : FiniteElement(),
@@ -219,7 +219,7 @@ namespace oomph
       Tree_pt = my_tree_pt;
     }
 
-    /// \short Set the number of sons that can be constructed by the element
+    ///  Set the number of sons that can be constructed by the element
     /// The default is none
     virtual unsigned required_nsons() const
     {
@@ -245,7 +245,7 @@ namespace oomph
       Refinement_is_enabled = true;
     }
 
-    /// \short Split the element into the  number of sons to be
+    ///  Split the element into the  number of sons to be
     /// constructed and return a
     /// vector of pointers to the sons. Elements are allocated, but they are
     /// not given any properties. The refinement level of the sons is one
@@ -271,7 +271,7 @@ namespace oomph
     }
 
 
-    /// \short Access function that returns the local equation number for the
+    ///  Access function that returns the local equation number for the
     /// hanging node variables (values stored at master nodes). The local
     /// equation number corresponds to the i-th unknown stored at the node
     /// addressed by node_pt
@@ -293,7 +293,7 @@ namespace oomph
       return Local_hang_eqn[i][node_pt];
     }
 
-    /// \short Interface to function that builds the element: i.e.  construct
+    ///  Interface to function that builds the element: i.e.  construct
     /// the nodes, assign their positions, apply boundary conditions, etc. The
     /// required procedures depend on the geometrical type of the element and
     /// must be implemented in specific refineable elements. Any new nodes
@@ -353,11 +353,11 @@ namespace oomph
       return Sons_to_be_unrefined;
     }
 
-    /// \short Rebuild the element, e.g. set internal values in line with
+    ///  Rebuild the element, e.g. set internal values in line with
     /// those of the sons that have now merged
     virtual void rebuild_from_sons(Mesh*& mesh_pt) = 0;
 
-    /// \short Unbuild the element, i.e. mark the nodes that were created
+    ///  Unbuild the element, i.e. mark the nodes that were created
     /// during its creation for possible deletion
     virtual void unbuild()
     {
@@ -381,7 +381,7 @@ namespace oomph
       }
     }
 
-    /// \short Final operations that must be performed when the element is no
+    ///  Final operations that must be performed when the element is no
     /// longer active in the mesh, but still resident in the QuadTree.
     virtual void deactivate_element();
 
@@ -403,7 +403,7 @@ namespace oomph
       Number = mynumber;
     }
 
-    /// \short Number of continuously interpolated values. Note: We assume
+    ///  Number of continuously interpolated values. Note: We assume
     /// that they are located at the beginning of the value_pt Vector!
     /// (Used for interpolation to son elements, for integrity check
     /// and post-processing -- we can only expect
@@ -411,7 +411,7 @@ namespace oomph
     /// element boundaries).
     virtual unsigned ncont_interpolated_values() const = 0;
 
-    /// \short Get all continously interpolated function values in this
+    ///  Get all continously interpolated function values in this
     /// element as a Vector. Note: Vector sets is own size to ensure that
     /// that this function can be used in black-box fashion.
     virtual void get_interpolated_values(const Vector<double>& s,
@@ -420,7 +420,7 @@ namespace oomph
       get_interpolated_values(0, s, values);
     }
 
-    /// \short Get all continously interpolated function values at previous
+    ///  Get all continously interpolated function values at previous
     /// timestep in this element as a Vector. (t=0: present; t>0:
     /// prev. timestep) Note: Vector sets is own size to ensure that that this
     /// function can be used in black-box fashion.
@@ -428,7 +428,7 @@ namespace oomph
                                          const Vector<double>& s,
                                          Vector<double>& values) = 0;
 
-    /// \short In mixed elements, different sets of nodes are used to
+    ///  In mixed elements, different sets of nodes are used to
     /// interpolate different unknowns. This function returns the n-th node that
     /// interpolates the value_id-th unknown. Default implementation is that all
     /// variables use the positional nodes, i.e. isoparametric elements. Note
@@ -440,7 +440,7 @@ namespace oomph
       return node_pt(n);
     }
 
-    /// \short Return the local one dimensional fraction of the n1d-th node
+    ///  Return the local one dimensional fraction of the n1d-th node
     /// in the direction of the local coordinate s[i] that is used to
     /// interpolate the value_id-th continuously interpolated unknown. Default
     /// assumes isoparametric interpolation for all unknowns
@@ -450,7 +450,7 @@ namespace oomph
       return local_one_d_fraction_of_node(n1d, i);
     }
 
-    /// \short Return a pointer to the node that interpolates the value-id-th
+    ///  Return a pointer to the node that interpolates the value-id-th
     /// unknown at local coordinate s. If there is not a node at that position,
     /// then return 0.
     virtual Node* get_interpolating_node_at_local_coordinate(
@@ -461,14 +461,14 @@ namespace oomph
     }
 
 
-    /// \short Return the number of nodes that are used to interpolate the
+    ///  Return the number of nodes that are used to interpolate the
     /// value_id-th unknown. Default is to assume isoparametric elements.
     virtual unsigned ninterpolating_node(const int& value_id)
     {
       return nnode();
     }
 
-    /// \short Return the number of nodes in a one_d direction that are
+    ///  Return the number of nodes in a one_d direction that are
     /// used to interpolate the value_id-th unknown. Default is to assume
     /// an isoparametric mapping.
     virtual unsigned ninterpolating_node_1d(const int& value_id)
@@ -476,7 +476,7 @@ namespace oomph
       return nnode_1d();
     }
 
-    /// \short Return the basis functions that are used to interpolate
+    ///  Return the basis functions that are used to interpolate
     /// the value_id-th unknown. By default assume isoparameteric interpolation
     virtual void interpolating_basis(const Vector<double>& s,
                                      Shape& psi,
@@ -485,19 +485,19 @@ namespace oomph
       shape(s, psi);
     }
 
-    /// \short Check the integrity of the element: Continuity of positions
+    ///  Check the integrity of the element: Continuity of positions
     /// values, etc. Essentially, check that the approximation of the functions
     /// is consistent when viewed from both sides of the element boundaries
     /// Must be overloaded for each different geometric element
     virtual void check_integrity(double& max_error) = 0;
 
-    /// \short Max. allowed discrepancy in element integrity check
+    ///  Max. allowed discrepancy in element integrity check
     static double& max_integrity_tolerance()
     {
       return Max_integrity_tolerance;
     }
 
-    /// \short The purpose of this function is to identify all possible
+    ///  The purpose of this function is to identify all possible
     /// Data that can affect the fields interpolated by the FiniteElement.
     /// This must be overloaded to include data from any hanging nodes
     /// correctly
@@ -505,7 +505,7 @@ namespace oomph
       std::set<std::pair<Data*, unsigned>>& paired_field_data);
 
 
-    /// \short Overload the function that assigns local equation numbers
+    ///  Overload the function that assigns local equation numbers
     /// for the Data stored at the nodes so that hanging data is taken
     /// into account
     inline void assign_nodal_local_eqn_numbers(const bool& store_local_dof_pt)
@@ -514,7 +514,7 @@ namespace oomph
       assign_hanging_local_eqn_numbers(store_local_dof_pt);
     }
 
-    /// \short Pointer to the root element in refinement hierarchy (must be
+    ///  Pointer to the root element in refinement hierarchy (must be
     /// implemented in specific elements that do refinement via
     /// tree-like refinement structure. Here we provide a default
     /// implementation that is appropriate for cases where tree-like
@@ -584,7 +584,7 @@ namespace oomph
       }
     }
 
-    /// \short Initial setup of the element: e.g. set the appropriate internal
+    ///  Initial setup of the element: e.g. set the appropriate internal
     /// p-order. If an adopted father is specified, information from this is
     /// used instead of using the father found from the tree.
     virtual void initial_setup(Tree* const& adopted_father_pt = 0,
@@ -592,23 +592,23 @@ namespace oomph
     {
     }
 
-    /// \short Pre-build the element
+    ///  Pre-build the element
     virtual void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt) {}
 
-    /// \short Further build: e.g. deal with interpolation of internal values
+    ///  Further build: e.g. deal with interpolation of internal values
     virtual void further_build() {}
 
-    /// \short Mark up any hanging nodes that arise as a result of non-uniform
+    ///  Mark up any hanging nodes that arise as a result of non-uniform
     /// refinement. Any hanging nodes will be documented in files addressed by
     /// the streams in the vector output_stream, if the streams are open.
     virtual void setup_hanging_nodes(Vector<std::ofstream*>& output_stream) {}
 
-    /// \short Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes (e.g. lower order interpolations
     /// for the pressure in Taylor Hood).
     virtual void further_setup_hanging_nodes() {}
 
-    /// \short Compute derivatives of elemental residual vector with respect
+    ///  Compute derivatives of elemental residual vector with respect
     /// to nodal coordinates. Default implementation by FD can be overwritten
     /// for specific elements.
     /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
@@ -621,7 +621,7 @@ namespace oomph
       RankThreeTensor<double>& dresidual_dnodal_coordinates);
 
 
-    /// \short Number of shape-controlling nodes = the number
+    ///  Number of shape-controlling nodes = the number
     /// of non-hanging nodes plus the number of master nodes associated
     /// with hanging nodes.
     unsigned nshape_controlling_nodes()
@@ -629,7 +629,7 @@ namespace oomph
       return Shape_controlling_node_lookup.size();
     }
 
-    /// \short Return lookup scheme for unique number associated
+    ///  Return lookup scheme for unique number associated
     /// with any of the nodes that actively control the shape of the
     /// element (i.e. they are either non-hanging nodes of this element
     /// or master nodes of hanging nodes.
@@ -664,7 +664,7 @@ namespace oomph
     bool To_be_p_unrefined;
 
   public:
-    /// \short Constructor, calls the RefineableElement constructor
+    ///  Constructor, calls the RefineableElement constructor
     PRefineableElement()
       : RefineableElement(),
         P_order(2),
@@ -811,7 +811,7 @@ namespace oomph
     }
 
 
-    /// \short Broken function -- this shouldn't really be needed.
+    ///  Broken function -- this shouldn't really be needed.
     void get_interpolated_values(const Vector<double>& s,
                                  Vector<double>& values)
     {
@@ -822,7 +822,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Broken function -- this shouldn't really be needed.
+    ///  Broken function -- this shouldn't really be needed.
     virtual void get_interpolated_values(const unsigned& t,
                                          const Vector<double>& s,
                                          Vector<double>& values)
@@ -873,20 +873,20 @@ namespace oomph
                                  public virtual SolidFiniteElement
   {
   private:
-    /// \short Storage for local equation numbers of
+    ///  Storage for local equation numbers of
     /// hanging node variables associated with nodal positions.
     /// local position equation number =
     /// Local_position_hang_eqn(master_node_pt,ival)
     std::map<Node*, DenseMatrix<int>> Local_position_hang_eqn;
 
 
-    /// \short Assign local equation numbers to the hanging values associated
+    ///  Assign local equation numbers to the hanging values associated
     /// with positions or additional solid values.
     void assign_solid_hanging_local_eqn_numbers(const bool& store_local_dof_pt);
 
 
   protected:
-    /// \short Flag deciding if the Lagrangian coordinates of newly-created
+    ///  Flag deciding if the Lagrangian coordinates of newly-created
     /// interior SolidNodes are to be determined by the father element's
     /// undeformed MacroElement representation (if it has one). Default: False
     /// as it means that, following a refinement an element is no longer in
@@ -898,21 +898,21 @@ namespace oomph
     /// to say that one is "more correct" than the other...
     bool Use_undeformed_macro_element_for_new_lagrangian_coords;
 
-    /// \short Assemble the jacobian matrix for the mapping from local
+    ///  Assemble the jacobian matrix for the mapping from local
     /// to lagrangian coordinates, given the derivatives of the shape function
     /// Overload the standard version to use the hanging information for
     /// the lagrangian coordinates.
     void assemble_local_to_lagrangian_jacobian(
       const DShape& dpsids, DenseMatrix<double>& jacobian) const;
 
-    /// \short Assemble the the "jacobian" matrix of second derivatives, given
+    ///  Assemble the the "jacobian" matrix of second derivatives, given
     /// the second derivatives of the shape functions w.r.t. local coordinates
     /// Overload the standard version to use the hanging information for
     /// the lagrangian coordinates.
     void assemble_local_to_lagrangian_jacobian2(
       const DShape& d2psids, DenseMatrix<double>& jacobian2) const;
 
-    /// \short Calculate the mapping from local to Lagrangian coordinates given
+    ///  Calculate the mapping from local to Lagrangian coordinates given
     /// the derivatives of the shape functions w.r.t the local coorindates.
     /// assuming that the coordinates are aligned in the direction of the local
     /// coordinates, i.e. there are no cross terms and the jacobian is diagonal.
@@ -935,7 +935,7 @@ namespace oomph
     /// Virtual Destructor, delete any allocated storage
     virtual ~RefineableSolidElement() {}
 
-    /// \short Overload the local equation numbers for Data stored as part
+    ///  Overload the local equation numbers for Data stored as part
     /// of solid nodes to include hanging node data
     void assign_solid_local_eqn_numbers(const bool& store_local_dof_pt)
     {
@@ -943,30 +943,30 @@ namespace oomph
       assign_solid_hanging_local_eqn_numbers(store_local_dof_pt);
     }
 
-    ///\short The number of geometric data affecting a
+    /// The number of geometric data affecting a
     /// RefineableSolidFiniteElement is the positional Data of all
     /// non-hanging nodes plus the geometric Data of all distinct
     /// master nodes. Recomputed on the fly.
     unsigned ngeom_data() const;
 
-    /// \short Return pointer to the j-th Data item that the object's
+    ///  Return pointer to the j-th Data item that the object's
     /// shape depends on: Positional data of non-hanging nodes and
     /// positional data of master nodes. Recomputed on the fly.
     Data* geom_data_pt(const unsigned& j);
 
-    /// \short Specify Data that affects the geometry of the element
+    ///  Specify Data that affects the geometry of the element
     /// by adding the position Data to the set that's passed in.
     /// (This functionality is required in FSI problems; set is used to
     /// avoid double counting). Refineable version includes hanging nodes
     void identify_geometric_data(std::set<Data*>& geometric_data_pt);
 
-    /// \short Compute element residual Vector and element Jacobian matrix
+    ///  Compute element residual Vector and element Jacobian matrix
     /// corresponding to the solid positions. Overloaded version to take
     /// the hanging nodes into account
     void fill_in_jacobian_from_solid_position_by_fd(
       Vector<double>& residuals, DenseMatrix<double>& jacobian);
 
-    /// \short Return the flag deciding if the Lagrangian coordinates of
+    ///  Return the flag deciding if the Lagrangian coordinates of
     /// newly-created interior SolidNodes are to be determined by the father
     /// element's undeformed MacroElement representation (if it has one).
     /// Default: False as it means that, following a refinement an element
@@ -982,7 +982,7 @@ namespace oomph
       return Use_undeformed_macro_element_for_new_lagrangian_coords;
     }
 
-    /// \short Set the flag deciding if the Lagrangian coordinates of
+    ///  Set the flag deciding if the Lagrangian coordinates of
     /// newly-created interior SolidNodes are to be determined by the father
     /// element's undeformed MacroElement representation (if it has one).
     void enable_use_of_undeformed_macro_element_for_new_lagrangian_coords()
@@ -990,7 +990,7 @@ namespace oomph
       Use_undeformed_macro_element_for_new_lagrangian_coords = true;
     }
 
-    /// \short Unset the flag deciding if the Lagrangian coordinates of
+    ///  Unset the flag deciding if the Lagrangian coordinates of
     /// newly-created interior SolidNodes are to be determined by the father
     /// element's undeformed MacroElement representation (if it has one).
     void disable_use_of_undeformed_macro_element_for_new_lagrangian_coords()
@@ -998,7 +998,7 @@ namespace oomph
       Use_undeformed_macro_element_for_new_lagrangian_coords = false;
     }
 
-    /// \short Access the local equation number of of hanging node variables
+    ///  Access the local equation number of of hanging node variables
     /// associated with nodal positions. The function returns a dense
     /// matrix that contains all the local equation numbers corresponding to
     /// the positional degrees of freedom.
@@ -1007,7 +1007,7 @@ namespace oomph
       return Local_position_hang_eqn[node_pt];
     }
 
-    /// \short Further build: Pass the father's
+    ///  Further build: Pass the father's
     /// Use_undeformed_macro_element_for_new_lagrangian_coords
     /// flag down, then call the underlying RefineableElement's
     /// version.

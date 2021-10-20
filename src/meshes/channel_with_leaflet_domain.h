@@ -41,7 +41,7 @@ namespace oomph
   class ChannelWithLeafletDomain : public Domain
   {
   public:
-    ///\short Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -270,7 +270,7 @@ namespace oomph
     /// Number of macro element rows above the leaflet
     unsigned Ny2;
 
-    /// \short Center of the domain : origin of the leaflet, extracted
+    ///  Center of the domain : origin of the leaflet, extracted
     /// from GeomObject and stored for fast access.
     double X_0;
 

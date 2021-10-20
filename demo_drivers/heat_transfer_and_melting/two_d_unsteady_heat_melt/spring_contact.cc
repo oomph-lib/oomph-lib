@@ -44,7 +44,7 @@ namespace GlobalFct
  /// Max. displacement
  double U_max=5.5;
 
- /// \short Number of primary variables. Equal to number of raw "displacement"
+ ///  Number of primary variables. Equal to number of raw "displacement"
  /// variables for contact problem; total number of degrees of freedom
  /// in that case is twice as big because of the unknown contact forces.
  unsigned N_primary=1;

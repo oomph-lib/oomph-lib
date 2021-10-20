@@ -67,7 +67,7 @@ private:
 
 public: 
 
- /// \short Constructor: call the underlying constructors and 
+ ///  Constructor: call the underlying constructors and 
  /// initialise the pointer to the Rayleigh number to point
  /// to the default value of 0.0.
  QCrouzeixRaviartElementWithTwoExternalElement() : 
@@ -112,7 +112,7 @@ public:
   DenseMatrix<double> &result, Vector<unsigned> &global_eqn_number);
 
 
- ///\short Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing or analytically
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -143,7 +143,7 @@ public:
      residuals,jacobian,mass_matrix);
   }
 
- /// \short Compute the contribution of the external
+ ///  Compute the contribution of the external
  /// degrees of freedom (temperatures) on the Navier-Stokes equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
@@ -248,7 +248,7 @@ class QAdvectionDiffusionElementWithExternalElement :
 
 public:
 
- /// \short Constructor: call the underlying constructors
+ ///  Constructor: call the underlying constructors
  QAdvectionDiffusionElementWithExternalElement() : 
   QAdvectionDiffusionElement<DIM,3>(),
   ElementWithExternalElement()
@@ -261,7 +261,7 @@ public:
    this->ignore_external_geometric_data();
   } 
 
- /// \short Overload the wind function in the advection-diffusion equations.
+ ///  Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity,
  /// obtained from the source element in the other mesh
@@ -275,7 +275,7 @@ public:
   Vector<double> &result, Vector<unsigned> &global_eqn_number);
 
 
- ///\short Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -307,7 +307,7 @@ public:
   }
 
 
- /// \short Compute the contribution of the external
+ ///  Compute the contribution of the external
  /// degrees of freedom (velocities) on the AdvectionDiffusion equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
@@ -542,7 +542,7 @@ get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
 
 
 //==========================================================================
-/// \short Overload the wind function in the advection-diffusion equations.
+///  Overload the wind function in the advection-diffusion equations.
 /// This provides the coupling from the Navier--Stokes equations to the
 /// advection-diffusion equations because the wind is the fluid velocity,
 /// obtained from the source elements in the other mesh
@@ -617,14 +617,14 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- /// \short Thermal Rayleigh number, set to be greater than 
+ ///  Thermal Rayleigh number, set to be greater than 
  /// the threshold for linear instability
  double Rayleigh_T = 1800.0;
 
- /// \short Solutal Rayleigh number
+ ///  Solutal Rayleigh number
  double Rayleigh_S = -1000;
 
- /// \short Length of domain
+ ///  Length of domain
  double Lambda = 1.414;
 
  /// Gravity vector
@@ -662,7 +662,7 @@ public:
    delete this->time_stepper_pt();
   }
 
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
@@ -671,7 +671,7 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt(){}
 
- /// \short Actions before the timestep (update the the time-dependent 
+ ///  Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
   {
@@ -687,25 +687,25 @@ public:
     fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
 
- /// \short Doc the solution.
+ ///  Doc the solution.
  void doc_solution();
 
- /// \short Set the boundary conditions
+ ///  Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
- /// \short Access function to the Navier-Stokes mesh
+ ///  Access function to the Navier-Stokes mesh
  RectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt() 
   {
    return dynamic_cast<RectangularQuadMesh<NST_ELEMENT>*>(Nst_mesh_pt);
   }
 
- /// \short Access function to the Advection-Diffusion mesh
+ ///  Access function to the Advection-Diffusion mesh
  RectangularQuadMesh<AD_ELEMENT>* temp_mesh_pt() 
   {
    return dynamic_cast<RectangularQuadMesh<AD_ELEMENT>*>(Temp_mesh_pt);
   }
  
- /// \short Access function to the Advection-Diffusion concentration mesh
+ ///  Access function to the Advection-Diffusion concentration mesh
  RectangularQuadMesh<AD_ELEMENT>* conc_mesh_pt() 
   {
    return dynamic_cast<RectangularQuadMesh<AD_ELEMENT>*>(Conc_mesh_pt);
@@ -744,7 +744,7 @@ protected:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-/// \short Constructor for convection problem
+///  Constructor for convection problem
 //========================================================================
 template<class NST_ELEMENT,class AD_ELEMENT>
 DDConvectionProblem<NST_ELEMENT,AD_ELEMENT>::DDConvectionProblem()

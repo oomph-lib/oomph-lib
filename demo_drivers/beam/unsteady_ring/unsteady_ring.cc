@@ -75,7 +75,7 @@ namespace Global_Physical_Variables
  /// Wall thickness -- 1/20 for default value of scaling factor
  double H=Alpha*1.0/20.0;
 
- /// \short Square of timescale ratio (i.e. non-dimensional density)  
+ ///  Square of timescale ratio (i.e. non-dimensional density)  
  /// -- 1.0 for default value of scaling factor
  double Lambda_sq=pow(Alpha,2);
 
@@ -115,7 +115,7 @@ public:
  /// Update function is empty 
  void actions_before_newton_solve() {}
  
- /// \short Setup initial conditions
+ ///  Setup initial conditions
  void set_initial_conditions();
 
  /// Doc solution
@@ -124,11 +124,11 @@ public:
  /// Do unsteady run
  void unsteady_run();
 
- /// \short Dump problem-specific parameter values, then dump
+ ///  Dump problem-specific parameter values, then dump
  /// generic problem data.
  void dump_it(ofstream& dump_file);
 
- /// \short Read problem-specific parameter values, then recover
+ ///  Read problem-specific parameter values, then recover
  /// generic problem data.
  void restart(ifstream& restart_file);
 

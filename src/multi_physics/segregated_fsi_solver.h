@@ -65,7 +65,7 @@ namespace oomph
       return CPU_total;
     }
 
-    /// \short Total essential CPU time for segregated solve
+    ///  Total essential CPU time for segregated solve
     /// (excluding any actions that merely doc the progress
     /// of the iteration, etc.)
     double& essential_cpu_total()
@@ -73,7 +73,7 @@ namespace oomph
       return Essential_cpu_total;
     }
 
-    /// \short CPU time for computation of global residual vectors
+    ///  CPU time for computation of global residual vectors
     /// Note: This time is contained in Total_CPU and is
     /// only used if convergence is based on the residual
     /// of the fully coupled system.
@@ -113,12 +113,12 @@ namespace oomph
     /// Total CPU time for segregated solve
     double CPU_total;
 
-    /// \short Total essential CPU time for segregated solve
+    ///  Total essential CPU time for segregated solve
     /// (excluding any actions that merely doc the progress
     /// of the iteration, etc.)
     double Essential_cpu_total;
 
-    /// \short  CPU time for computation of global residual vectors
+    ///   CPU time for computation of global residual vectors
     /// Note: This time is contained in Total_CPU and is
     /// only used if convergence is based on the residual
     /// of the fully coupled system
@@ -167,20 +167,20 @@ namespace oomph
   class SegregatableFSIProblem : public virtual Problem
   {
   protected:
-    /// \short This function is called once at the start of each
+    ///  This function is called once at the start of each
     /// segregated solve.
     virtual void actions_before_segregated_solve() {}
 
-    /// \short This function is called once at the end of each
+    ///  This function is called once at the end of each
     /// segregated solve.
     virtual void actions_after_segregated_solve() {}
 
-    /// \short This function is to be filled with actions that take place
+    ///  This function is to be filled with actions that take place
     /// before the check for convergence of the entire segregated solve
     virtual void actions_before_segregated_convergence_check() {}
 
   public:
-    /// \short Constructor. Set default values for solver parameters:
+    ///  Constructor. Set default values for solver parameters:
     /// - Don't use pointwise Aitken extrapolation but if it's used at
     ///   all, it's used immediately.
     /// - No under-relaxation at all (neither classical nor Irons&Tuck)
@@ -234,14 +234,14 @@ namespace oomph
       T_ref = clock();
       T_spent_on_actual_solve = 0.0;
 
-      /// \short boolean flag to indicate if timer has been halted
+      ///  boolean flag to indicate if timer has been halted
       Timer_has_been_halted = false;
     }
 
     /// Empty virtual destructor
     virtual ~SegregatableFSIProblem() {}
 
-    /// \short Identify the fluid and solid Data. This is a pure virtual
+    ///  Identify the fluid and solid Data. This is a pure virtual
     /// function that MUST be implemented for every specific problem that
     /// is to be solved by the segregated solver.
     /// The two mesh pointers identify meshes that contain
@@ -259,7 +259,7 @@ namespace oomph
                                                Mesh*& fluid_mesh_pt,
                                                Mesh*& solid_mesh_pt) = 0;
 
-    /// \short Setup the segregated solver: Backup the pinned status of
+    ///  Setup the segregated solver: Backup the pinned status of
     /// the fluid and solid dofs and allocate the internal storage
     /// based on the input provided by identify_fluid_and_solid_dofs(...)
     /// In addition, reset storage associated with convergence acceleration
@@ -273,20 +273,20 @@ namespace oomph
     void setup_segregated_solver(
       const bool& full_setup_of_fluid_and_solid_dofs = true);
 
-    /// \short Segregated solver. Peform a segregated step from
+    ///  Segregated solver. Peform a segregated step from
     /// the present state of the system.
     /// Returns PicardConvergenceData object that contains the vital
     /// stats of the iteration
     PicardConvergenceData segregated_solve();
 
-    /// \short Steady version of segregated solver. Makes all
+    ///  Steady version of segregated solver. Makes all
     /// timesteppers steady before solving.
     /// Returns PicardConvergenceData object that contains the
     /// vital stats of the iteration.
     PicardConvergenceData steady_segregated_solve();
 
 
-    /// \short Unsteady segregated solver, advance time by dt and solve
+    ///  Unsteady segregated solver, advance time by dt and solve
     /// by the segregated solver. The time values are always shifted by
     /// this function.
     /// Returns PicardConvergenceData object that contains the
@@ -294,7 +294,7 @@ namespace oomph
     PicardConvergenceData unsteady_segregated_solve(const double& dt);
 
 
-    /// \short Unsteady segregated solver. Advance time by dt and solve
+    ///  Unsteady segregated solver. Advance time by dt and solve
     /// the system by a segregated method. The boolean flag is used to
     /// control whether the time values should be shifted. If it is true
     /// the current data values will be shifted (stored as previous
@@ -305,7 +305,7 @@ namespace oomph
                                                     const bool& shift_values);
 
 
-    /// \short Assess convergence based on max. residual of coupled system of
+    ///  Assess convergence based on max. residual of coupled system of
     /// eqns. The argument specifies the convergence tolerance.
     void assess_convergence_based_on_max_global_residual(const double& tol)
     {
@@ -313,7 +313,7 @@ namespace oomph
       Convergence_tolerance = tol;
     }
 
-    /// \short Assess convergence based on max. residuals of coupled
+    ///  Assess convergence based on max. residuals of coupled
     /// system of eqns. This interface has no argument
     /// and the default convergence tolerance
     /// for the Newton solver, Problem::Newton_solver_tolerance is used.
@@ -323,7 +323,7 @@ namespace oomph
         Problem::Newton_solver_tolerance);
     }
 
-    /// \short Assess convergence based on max. absolute change of solid
+    ///  Assess convergence based on max. absolute change of solid
     /// dofs. The argument specifies the convergence tolerance.
     void assess_convergence_based_on_absolute_solid_change(const double& tol)
     {
@@ -331,7 +331,7 @@ namespace oomph
       Convergence_tolerance = tol;
     }
 
-    /// \short Assess convergence based on max. absolute change of solid
+    ///  Assess convergence based on max. absolute change of solid
     /// dofs. This interface has no argument and the default
     /// convergence tolerance
     /// for the Newton solver, Problem::Newton_solver_tolerance is used.
@@ -341,7 +341,7 @@ namespace oomph
         Problem::Newton_solver_tolerance);
     }
 
-    /// \short Assess convergence based on max. relative change of solid
+    ///  Assess convergence based on max. relative change of solid
     /// dofs. The argument specifies the convergence tolerance.
     void assess_convergence_based_on_relative_solid_change(const double& tol)
     {
@@ -349,7 +349,7 @@ namespace oomph
       Convergence_tolerance = tol;
     }
 
-    /// \short Assess convergence based on max. relative change of solid
+    ///  Assess convergence based on max. relative change of solid
     /// dofs. This interface has no argument and the default
     /// convergence tolerance
     /// for the Newton solver, Problem::Newton_solver_tolerance is used.
@@ -360,7 +360,7 @@ namespace oomph
     }
 
 
-    /// \short Use pointwise Aitken extrapolation. The argument is used to
+    ///  Use pointwise Aitken extrapolation. The argument is used to
     /// specify the Picard iteration after which pointwise Aitken extrapolation
     /// is to be used for the first time.
     void enable_pointwise_aitken(const unsigned& pointwise_aitken_start)
@@ -369,7 +369,7 @@ namespace oomph
       Use_pointwise_aitken = true;
     }
 
-    /// \short Use pointwise Aitken extrapolation. This interface has
+    ///  Use pointwise Aitken extrapolation. This interface has
     /// no argument and the current value of Pointwise_aitken_start will
     /// be used. The default is zero, extrapolation starts immediately
     void enable_pointwise_aitken()
@@ -377,13 +377,13 @@ namespace oomph
       Use_pointwise_aitken = true;
     }
 
-    /// \short Disable the use of pointwise Aitken extrapolation
+    ///  Disable the use of pointwise Aitken extrapolation
     void disable_pointwise_aitken()
     {
       Use_pointwise_aitken = false;
     }
 
-    ///\short Use under-relaxation and (optionally) specify under-relaxation
+    /// Use under-relaxation and (optionally) specify under-relaxation
     /// parameter. Default: omega=1.0 (i.e. no actual under-relaxation;
     /// Other extreme: omega=0.0 (freeze wall shape). Under-relaxation
     /// parameter can also be computed dynamically by setting
@@ -393,13 +393,13 @@ namespace oomph
       Omega_relax = omega;
     }
 
-    ///\short Use Irons and Tuck extrapolation for solid dofs
+    /// Use Irons and Tuck extrapolation for solid dofs
     void enable_irons_and_tuck_extrapolation()
     {
       Use_irons_and_tuck_extrapolation = true;
     }
 
-    ///\short Do not use Irons and Tuck extrapolation for solid dofs
+    /// Do not use Irons and Tuck extrapolation for solid dofs
     void disable_irons_and_tuck_extrapolation()
     {
       Use_irons_and_tuck_extrapolation = false;
@@ -422,7 +422,7 @@ namespace oomph
       Solid_solve
     };
 
-    /// \short Get rms of change in the solid dofs; the max. change of the
+    ///  Get rms of change in the solid dofs; the max. change of the
     /// solid dofs and the rms norm of the solid dofs themselves.
     /// Change is computed relative to the reference values stored when
     /// store_solid_dofs() was last called.
@@ -430,12 +430,12 @@ namespace oomph
                           double& max_change,
                           double& rms_norm);
 
-    /// \short Store the current solid values as reference values for
+    ///  Store the current solid values as reference values for
     /// future convergence check. Also add another entry to pointwise
     /// Aitken history if required.
     void store_solid_dofs();
 
-    /// \short Reset timer
+    ///  Reset timer
     void reset_timer()
     {
       T_spent_on_actual_solve = 0.0;
@@ -444,7 +444,7 @@ namespace oomph
     }
 
 
-    /// \short (Re-)start timer (e.g. after completing non-essential
+    ///  (Re-)start timer (e.g. after completing non-essential
     /// parts of the code such as documentation of the iteration's
     /// progress)
     void restart_timer()
@@ -454,7 +454,7 @@ namespace oomph
     }
 
 
-    /// \short Halt timer (e.g. before performing non-essential
+    ///  Halt timer (e.g. before performing non-essential
     /// parts of the code such as documentation of the iteration's
     /// progress)
     void halt_timer()
@@ -467,7 +467,7 @@ namespace oomph
     }
 
 
-    /// \short Total elapsed time since start of solve
+    ///  Total elapsed time since start of solve
     double t_spent_on_actual_solve()
     {
       halt_timer();
@@ -481,7 +481,7 @@ namespace oomph
     /// Rebuild global mesh for monolithic discretisation
     void rebuild_monolithic_mesh();
 
-    /// \short Number of Aitken histories available (int because after
+    ///  Number of Aitken histories available (int because after
     /// extrapolation it's re-initialised to -1 to force the computation
     /// of three new genuine iterates).
     int Pointwise_aitken_counter;
@@ -489,7 +489,7 @@ namespace oomph
     /// Use pointwise Aitken extrapolation?
     bool Use_pointwise_aitken;
 
-    /// \short Start pointwise Aitken extrpolation after specified number
+    ///  Start pointwise Aitken extrpolation after specified number
     /// of Picard iterations
     unsigned Pointwise_aitken_start;
 
@@ -518,39 +518,39 @@ namespace oomph
     /// Do pointwise Aitken extrapolation for solid
     void pointwise_aitken_extrapolate();
 
-    /// \short Vector storing the Data objects associated with the fluid
+    ///  Vector storing the Data objects associated with the fluid
     /// problem: Tyically the nodal and internal data of the elements in the
     /// fluid bulk mesh
     Vector<Data*> Fluid_data_pt;
 
-    /// \short Vector of vectors that store the pinned status of
+    ///  Vector of vectors that store the pinned status of
     /// fluid Data values
     Vector<std::vector<bool>> Fluid_value_is_pinned;
 
-    /// \short Vector storing the Data objects associated with the solid
+    ///  Vector storing the Data objects associated with the solid
     /// problem: Typically the positional data of solid nodes and
     /// any quantities associated with displacement control, say.
     Vector<Data*> Solid_data_pt;
 
-    /// \short Vector of vectors that store the pinned status of
+    ///  Vector of vectors that store the pinned status of
     /// solid Data values
     Vector<std::vector<bool>> Solid_value_is_pinned;
 
-    /// \short Vector storing the previous solid values -- used for
+    ///  Vector storing the previous solid values -- used for
     /// convergence check
     Vector<double> Previous_solid_value;
 
-    /// \short Mesh containing only fluid elements -- the elements in this
+    ///  Mesh containing only fluid elements -- the elements in this
     /// Mesh will be excluded from the assembly process when
     /// the solid problem is solved
     Mesh* Fluid_mesh_pt;
 
-    /// \short Mesh containing only solid elements -- the elements in this
+    ///  Mesh containing only solid elements -- the elements in this
     /// mesh will be excluded from the assembly process when
     /// the fluid problem is solved
     Mesh* Solid_mesh_pt;
 
-    /// \short Backup for the pointers to the submeshes in the original problem
+    ///  Backup for the pointers to the submeshes in the original problem
     Vector<Mesh*> Orig_sub_mesh_pt;
 
     /// Vector of changes in Irons and Tuck under-relaxation
@@ -559,7 +559,7 @@ namespace oomph
     /// Irons and Tuck relaxation factor
     double R_irons_and_tuck;
 
-    /// \short Vector of Vectors containing up to three previous
+    ///  Vector of Vectors containing up to three previous
     /// iterates for the solid dofs; used for pointwise Aitken extrapolation
     Vector<Vector<double>> Pointwise_aitken_solid_value;
 
@@ -570,11 +570,11 @@ namespace oomph
     /// Extrapolate solid data and update fluid mesh during unsteady run
     void extrapolate_solid_data();
 
-    /// \short Under-relax the most recently computed solid variables, either
+    ///  Under-relax the most recently computed solid variables, either
     /// by classical relaxation or by Irons & Tuck
     void under_relax_solid();
 
-    /// \short Only include fluid elements in the Problem's mesh. This is
+    ///  Only include fluid elements in the Problem's mesh. This is
     /// called before the segregated fluid solve. The fluid elements are
     /// identified by the user via the fluid_mesh_pt argument
     /// in the pure virtual function identify_fluid_and_solid_dofs(...).
@@ -585,7 +585,7 @@ namespace oomph
     /// it won't be very efficient.
     void use_only_fluid_elements();
 
-    /// \short Only include solid elements in the Problem's mesh. This is
+    ///  Only include solid elements in the Problem's mesh. This is
     /// called before the segregated solid solve. The solid elements are
     /// identified by the user via the solid_mesh_pt argument
     /// in the pure virtual function identify_fluid_and_solid_dofs(...).
@@ -599,28 +599,28 @@ namespace oomph
     /// Pin fluid dofs
     void pin_fluid_dofs();
 
-    /// \short Under-relaxation parameter. (1.0: no under-relaxation;
+    ///  Under-relaxation parameter. (1.0: no under-relaxation;
     /// 0.0: Freeze wall shape)
     double Omega_relax;
 
-    /// \short Boolean flag to indicate use of Irons and Tuck's extrapolation
+    ///  Boolean flag to indicate use of Irons and Tuck's extrapolation
     /// for solid values
     bool Use_irons_and_tuck_extrapolation;
 
     /// Convergence criterion (enumerated flag)
     int Convergence_criterion;
 
-    /// \short Reference time for segregated solve. Can be
+    ///  Reference time for segregated solve. Can be
     /// re-initialised whenever total elapsed time has been stored
     /// (before entering non-essential doc sections of the code)
     clock_t T_ref;
 
-    /// \short Total elapsed time since start of solve, can be
+    ///  Total elapsed time since start of solve, can be
     /// accumulated by adding bits of time spent in relevant parts of
     /// code (bypassing sections that only document the progress)
     double T_spent_on_actual_solve;
 
-    /// \short boolean flag to indicate if timer has been halted
+    ///  boolean flag to indicate if timer has been halted
     bool Timer_has_been_halted;
   };
 

@@ -73,7 +73,7 @@ namespace oomph
       load = 0.0;
     }
 
-    /// \short Public boolean to allow gap between poro-elastic and Navier
+    ///  Public boolean to allow gap between poro-elastic and Navier
     /// Stokes element in FSI computations. Useful in hybrid linear/nonlinear
     /// geometry runs where this will happen
     bool Allow_gap_in_FSI = false;
@@ -94,7 +94,7 @@ namespace oomph
       public virtual FaceElement
   {
   protected:
-    /// \short Pointer to an imposed traction function. Arguments:
+    ///  Pointer to an imposed traction function. Arguments:
     /// Eulerian coordinate; outer unit normal; applied traction.
     /// (Not all of the input arguments will be required for all specific load
     /// functions but the list should cover all cases)
@@ -103,7 +103,7 @@ namespace oomph
                             const Vector<double>& n,
                             Vector<double>& result);
 
-    /// \short Pointer to an imposed pressure function. Arguments:
+    ///  Pointer to an imposed pressure function. Arguments:
     /// Eulerian coordinate; outer unit normal; applied pressure.
     /// (Not all of the input arguments will be required for all specific load
     /// functions but the list should cover all cases)
@@ -113,7 +113,7 @@ namespace oomph
                             double& result);
 
 
-    /// \short Get the traction vector: Pass number of integration point
+    ///  Get the traction vector: Pass number of integration point
     /// (dummy), Eulerrian coordinate and normal vector and return the pressure
     /// (not all of the input arguments will be required for all specific load
     /// functions but the list should cover all cases). This function is virtual
@@ -127,7 +127,7 @@ namespace oomph
       Traction_fct_pt(time, x, n, traction);
     }
 
-    /// \short Get the pressure value: Pass number of integration point (dummy),
+    ///  Get the pressure value: Pass number of integration point (dummy),
     /// Eulerrian coordinate and normal vector and return the pressure
     /// (not all of the input arguments will be required for all specific load
     /// functions but the list should cover all cases). This function is virtual
@@ -142,7 +142,7 @@ namespace oomph
     }
 
 
-    /// \short Helper function that actually calculates the residuals
+    ///  Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
@@ -151,7 +151,7 @@ namespace oomph
 
 
   public:
-    /// \short Constructor, which takes a "bulk" element and the value of the
+    ///  Constructor, which takes a "bulk" element and the value of the
     /// index and its limit
     AxisymmetricPoroelasticityTractionElement(FiniteElement* const& element_pt,
                                               const int& face_index)
@@ -195,7 +195,7 @@ namespace oomph
     }
 
 
-    /// \short Default constructor
+    ///  Default constructor
     AxisymmetricPoroelasticityTractionElement() {}
 
     /// Reference to the traction function pointer
@@ -234,7 +234,7 @@ namespace oomph
     }
 
     /// Specify the value of nodal zeta from the face geometry
-    /// \short The "global" intrinsic coordinate of the element when
+    ///  The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
@@ -245,7 +245,7 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
@@ -253,7 +253,7 @@ namespace oomph
     }
 
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Get continuous time from timestepper of first node
@@ -421,20 +421,20 @@ namespace oomph
       this->write_tecplot_zone_footer(outfile, n_plot);
     }
 
-    /// \short C_style output function
+    ///  C_style output function
     void output(FILE* file_pt)
     {
       FaceGeometry<ELEMENT>::output(file_pt);
     }
 
-    /// \short C-style output function
+    ///  C-style output function
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       FaceGeometry<ELEMENT>::output(file_pt, n_plot);
     }
 
 
-    /// \short Ratio of lengths of line elements (or annular surface areas)
+    ///  Ratio of lengths of line elements (or annular surface areas)
     /// in the undeformed and deformed configuration (needed to translate
     /// normal flux correctly between small displacement formulation used
     /// here and the possibly large displacement NSt formulation used in
@@ -509,14 +509,14 @@ namespace oomph
       return return_val;
     }
 
-    /// \short Compute traction vector at specified local coordinate
+    ///  Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
     void traction(const double& time,
                   const Vector<double>& s,
                   Vector<double>& traction);
 
-    /// \short Compute pressure value at specified local coordinate
+    ///  Compute pressure value at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
     void pressure(const double& time,
@@ -524,7 +524,7 @@ namespace oomph
                   double& pressure);
 
 
-    /// \short Compute contributions to integrated porous flux over boundary:
+    ///  Compute contributions to integrated porous flux over boundary:
     /// q_skeleton = \int \partial u_displ / \partial t \cdot n ds
     /// q_seepage  = \int k q \cdot n ds
     void contribution_to_total_porous_flux(double& skeleton_flux_contrib,
@@ -904,32 +904,32 @@ namespace oomph
       public virtual ElementWithExternalElement
   {
   protected:
-    /// \short Pointer to the ratio, \f$ Q \f$, of the stress used to
+    ///  Pointer to the ratio, \f$ Q \f$, of the stress used to
     /// non-dimensionalise the fluid stresses to the stress used to
     /// non-dimensionalise the poroelastic stresses.
     double* Q_pt;
 
-    /// \short Static default value for the ratio of stress scales
+    ///  Static default value for the ratio of stress scales
     /// used in the fluid and poroelasticity equations (default is 1.0)
     static double Default_Q_Value;
 
 
   public:
-    /// \short Return the ratio of the stress scales used to non-dimensionalise
+    ///  Return the ratio of the stress scales used to non-dimensionalise
     /// the fluid and poroelasticity equations.
     const double& q() const
     {
       return *Q_pt;
     }
 
-    /// \short Return a pointer the ratio of stress scales used to
+    ///  Return a pointer the ratio of stress scales used to
     /// non-dimensionalise the fluid and poroelastic equations.
     double*& q_pt()
     {
       return Q_pt;
     }
 
-    /// \short Get the (combined) traction from the neighbouring Navier-Stokes
+    ///  Get the (combined) traction from the neighbouring Navier-Stokes
     /// bulk element's stress
     void get_traction(const double& time,
                       const unsigned& intpt,
@@ -1001,7 +1001,7 @@ namespace oomph
       traction[1] = q_value * traction_nst[1];
     }
 
-    /// \short Get the pore fluid pressure from the neighbouring Navier-Stokes
+    ///  Get the pore fluid pressure from the neighbouring Navier-Stokes
     /// bulk element's stress
     void get_pressure(const double& time,
                       const unsigned& intpt,
@@ -1037,7 +1037,7 @@ namespace oomph
     }
 
   public:
-    /// \short Constructor, which takes a "bulk" element and the
+    ///  Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     FSILinearisedAxisymPoroelasticTractionElement(
       FiniteElement* const& element_pt, const int& face_index)
@@ -1050,10 +1050,10 @@ namespace oomph
       this->set_ninteraction(1);
     }
 
-    /// \short Default constructor
+    ///  Default constructor
     FSILinearisedAxisymPoroelasticTractionElement() {}
 
-    /// \short Output function -- overloaded version -- ignores
+    ///  Output function -- overloaded version -- ignores
     /// n_plot since fsi elements can only evaluate traction at
     /// Gauss points.
     void output(std::ostream& outfile, const unsigned& n_plot)

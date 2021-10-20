@@ -41,7 +41,7 @@
 namespace oomph
 {
   //=============================================================
-  /// \short Base class for Discontinuous Galerkin Faces.
+  ///  Base class for Discontinuous Galerkin Faces.
   /// These are responsible for calculating the normal fluxes
   /// that provide the communication between the discontinuous
   /// elements.
@@ -63,7 +63,7 @@ namespace oomph
     Vector<Vector<unsigned>> Neighbour_external_data;
 
   protected:
-    /// \short Return the index at which the i-th unknown flux is stored.
+    ///  Return the index at which the i-th unknown flux is stored.
     // The default return is suitable for single-physics problem
     virtual inline unsigned flux_index(const unsigned& i) const
     {
@@ -102,12 +102,12 @@ namespace oomph
     // Get the value of the unknowns
     virtual void interpolated_u(const Vector<double>& s, Vector<double>& f);
 
-    ///\short Get the data that are used to interpolate the unkowns
+    /// Get the data that are used to interpolate the unkowns
     /// in the element. These must be returned in order.
     virtual void get_interpolation_data(Vector<Data*>& interpolation_data);
 
 
-    ///\short Calculate the normal numerical flux at the integration point.
+    /// Calculate the normal numerical flux at the integration point.
     /// This is the most general interface that can be overloaded if desired
     virtual void numerical_flux_at_knot(const unsigned& ipt,
                                         const Shape& psi,
@@ -116,7 +116,7 @@ namespace oomph
                                         DenseMatrix<double>& dflux_du_ext,
                                         unsigned flag);
 
-    ///\short Calculate the normal flux, which is the dot product of our
+    /// Calculate the normal flux, which is the dot product of our
     /// approximation to the flux with the outer unit normal
     virtual void numerical_flux(const Vector<double>& n_out,
                                 const Vector<double>& u_int,
@@ -132,7 +132,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///\short Calculate the derivative of the
+    /// Calculate the derivative of the
     /// normal flux, which is the dot product of our
     /// approximation to the flux with the outer unit normal,
     /// with respect to the interior and exterior variables
@@ -144,7 +144,7 @@ namespace oomph
                                     DenseMatrix<double>& dflux_du_ext);
 
 
-    ///\short Add the contribution from integrating the numerical flux
+    /// Add the contribution from integrating the numerical flux
     // over the face to the residuals
     void add_flux_contributions(Vector<double>& residuals,
                                 DenseMatrix<double>& jacobian,
@@ -160,32 +160,32 @@ namespace oomph
   class DGElement : public virtual FiniteElement
   {
   protected:
-    ///\short The DGFaceElement requires access to the nodal local equation
+    /// The DGFaceElement requires access to the nodal local equation
     /// information, so it's a friend
     friend class DGFaceElement;
 
-    ///\short Vector of pointers to faces of the element
+    /// Vector of pointers to faces of the element
     Vector<FaceElement*> Face_element_pt;
 
     /// Pointer to Mesh, which will be responsible for the neighbour finding
     DGMesh* DG_mesh_pt;
 
-    ///\short Pointer to storage for a mass matrix that can be recycled if
+    /// Pointer to storage for a mass matrix that can be recycled if
     /// desired
     DenseDoubleMatrix* M_pt;
 
-    /// \short Pointer to storage for the average values of the of the
+    ///  Pointer to storage for the average values of the of the
     /// variables over the element
     double* Average_value;
 
-    ///\short Boolean flag to indicate whether to reuse the mass matrix
+    /// Boolean flag to indicate whether to reuse the mass matrix
     bool Mass_matrix_reuse_is_enabled;
 
-    ///\short Boolean flag to indicate whether the mass matrix has been
+    /// Boolean flag to indicate whether the mass matrix has been
     /// computed
     bool Mass_matrix_has_been_computed;
 
-    ///\short Boolean flag to indicate whether the mass matrix can be
+    /// Boolean flag to indicate whether the mass matrix can be
     /// deleted (i.e. was it created by this element)
     bool Can_delete_mass_matrix;
 
@@ -207,7 +207,7 @@ namespace oomph
     {
     }
 
-    ///\short Virtual destructor, destroy the mass matrix, if we created it
+    /// Virtual destructor, destroy the mass matrix, if we created it
     /// Clean-up storage associated with average values
     virtual ~DGElement()
     {
@@ -222,7 +222,7 @@ namespace oomph
       }
     }
 
-    ///\short Access function for the boolean to indicate whether the
+    /// Access function for the boolean to indicate whether the
     /// mass matrix has been computed
     bool mass_matrix_has_been_computed()
     {
@@ -272,19 +272,19 @@ namespace oomph
       Can_delete_mass_matrix = false;
     }
 
-    ///\short Function that computes and stores the (inverse) mass matrix
+    /// Function that computes and stores the (inverse) mass matrix
     void pre_compute_mass_matrix();
 
     // Function that is used to construct all the faces of the DGElement
     virtual void build_all_faces() = 0;
 
-    ///\short Function that returns the current value of the residuals
+    /// Function that returns the current value of the residuals
     /// multiplied by the inverse mass matrix (virtual so that it can be
     /// overloaded specific elements in which time saving tricks can be applied)
     virtual void get_inverse_mass_matrix_times_residuals(
       Vector<double>& minv_res);
 
-    ///\short Construct all nodes and faces of the element.
+    /// Construct all nodes and faces of the element.
     /// The vector of booleans boundary should be the same size
     /// as the number of nodes and if any entries are true
     /// that node will be constructed as a boundary node.
@@ -432,7 +432,7 @@ namespace oomph
       this->calculate_element_averages(this->Average_value);
     }
 
-    /// \short Return the average values
+    ///  Return the average values
     double& average_value(const unsigned& i)
     {
       if (Average_value == 0)
@@ -445,7 +445,7 @@ namespace oomph
     }
 
 
-    /// \short Return the average values
+    ///  Return the average values
     const double& average_value(const unsigned& i) const
     {
       if (Average_value == 0)
@@ -519,7 +519,7 @@ namespace oomph
 
 
   //======================================================
-  /// \short Base class for slope limiters
+  ///  Base class for slope limiters
   //=====================================================
   class SlopeLimiter
   {
@@ -542,7 +542,7 @@ namespace oomph
 
   class MinModLimiter : public SlopeLimiter
   {
-    ///\short Constant that is used in the modified min-mod function to
+    /// Constant that is used in the modified min-mod function to
     /// provide better properties at extrema
     double M;
 
@@ -550,7 +550,7 @@ namespace oomph
     bool MUSCL;
 
   public:
-    ///\short Constructor takes a value for the modification parameter M
+    /// Constructor takes a value for the modification parameter M
     ///(default to zero --- classic min mod) and a flag to indicate whether
     /// we use MUSCL limiting or not --- default false
     MinModLimiter(const double& m = 0.0, const bool& muscl = false)

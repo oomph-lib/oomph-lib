@@ -55,7 +55,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short The FSIFluidElement class is a base class for all
+  ///  The FSIFluidElement class is a base class for all
   /// fluid finite elements that apply a load (traction) onto an adjacent
   /// SolidFiniteElement.
   //=========================================================================
@@ -72,7 +72,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const FSIFluidElement&) = delete;
 
-    /// \short Compute the load vector that is applied by current
+    ///  Compute the load vector that is applied by current
     /// element (at its local coordinate s) onto the adjacent
     /// SolidElement. N is the outer unit normal on the FSIFluidElement.
     virtual void get_load(const Vector<double>& s,
@@ -80,7 +80,7 @@ namespace oomph
                           Vector<double>& load) = 0;
 
 
-    /// \short Add to the set \c paired_load_data pairs containing
+    ///  Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
     /// and
     /// - the index of the value in that Data object
@@ -90,7 +90,7 @@ namespace oomph
     virtual void identify_load_data(
       std::set<std::pair<Data*, unsigned>>& paired_load_data) = 0;
 
-    /// \short Add to the set \c paired_pressure_data pairs containing
+    ///  Add to the set \c paired_pressure_data pairs containing
     /// - the pointer to a Data object
     /// and
     /// - the index of the value in that Data object
@@ -108,7 +108,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short This is a base class for all SolidFiniteElements
+  ///  This is a base class for all SolidFiniteElements
   /// that participate in FSI computations. These elements
   /// provide interfaces and generic funcionality for
   /// the two additional roles that SolidFiniteElements play
@@ -193,7 +193,7 @@ namespace oomph
                          public virtual ElementWithExternalElement
   {
   public:
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -207,7 +207,7 @@ namespace oomph
     /// Static flag that allows the suppression of warning messages
     static bool Dont_warn_about_missing_adjacent_fluid_elements;
 
-    /// \short Constructor. Note that element is not fully-functional
+    ///  Constructor. Note that element is not fully-functional
     /// until its setup_fsi_wall_element() function has been called!
     FSIWallElement()
       : Only_front_is_loaded_by_fluid(true),
@@ -225,7 +225,7 @@ namespace oomph
     /// Empty virtual destructor for safety
     virtual ~FSIWallElement() {}
 
-    /// \short Setup: Assign storage -- pass the Eulerian
+    ///  Setup: Assign storage -- pass the Eulerian
     /// dimension of the "adjacent" fluid elements and the
     /// number of local coordinates required to parametrise
     /// the wall element. E.g. for a FSIKirchhoffLoveBeam,
@@ -233,7 +233,7 @@ namespace oomph
     void setup_fsi_wall_element(const unsigned& nlagr_solid,
                                 const unsigned& ndim_fluid);
 
-    /// \short Return the ratio of the stress scales used to non-dimensionalise
+    ///  Return the ratio of the stress scales used to non-dimensionalise
     /// the fluid and solid equations. E.g. \f$ Q = \mu U/(LE) \f$
     /// if the fluid mechanics stresses (pressures) are scaled on the
     /// viscous scale \f$ \mu U / L\f$ and the solid mechanics stresses
@@ -243,7 +243,7 @@ namespace oomph
       return *Q_pt;
     }
 
-    /// \short Return a pointer the ratio of stress scales used to
+    ///  Return a pointer the ratio of stress scales used to
     /// non-dimensionalise the fluid and solid equations.
     double*& q_pt()
     {
@@ -251,14 +251,14 @@ namespace oomph
     }
 
 
-    /// \short Allow element to be loaded by fluid on both
+    ///  Allow element to be loaded by fluid on both
     /// sides. (Resizes containers for lookup schemes and initialises
     /// data associated with elements at the "back" of the FSIWallElement
     /// to NULL.
     void enable_fluid_loading_on_both_sides();
 
 
-    /// \short Is the element exposed to (and hence loaded by)
+    ///  Is the element exposed to (and hence loaded by)
     /// fluid only on its "front"? True by default. This flag is set to
     /// false if the FSIWallElement is immersed in fluid in which case
     /// each integration point is loaded by two adjacent
@@ -272,7 +272,7 @@ namespace oomph
     }
 
 
-    /// \short Do not include any external data that affects the load
+    ///  Do not include any external data that affects the load
     /// in the computation of element's Jacobian matrix. This
     /// functionality is provided to allow the  "user" to deem the coupling
     /// to the fluid equations to be
@@ -285,7 +285,7 @@ namespace oomph
     }
 
 
-    /// \short Include all external fluid data that affects the load in the
+    ///  Include all external fluid data that affects the load in the
     /// computation of the element's Jacobian matrix
     void include_external_load_data()
     {
@@ -293,7 +293,7 @@ namespace oomph
       Ignore_shear_stress_in_jacobian = false;
     }
 
-    /// \short Call this function to ignore shear stress component
+    ///  Call this function to ignore shear stress component
     /// of load when calculating the Jacobian, i.e. to ignore
     /// fluid velocity Data in the FSIFluidElement and "far away"
     /// geometric Data that affects nodal positions in the FSIFluidElement,
@@ -312,7 +312,7 @@ namespace oomph
       Ignore_shear_stress_in_jacobian = false;
     }
 
-    /// \short Update the nodal positions in all fluid elements that affect
+    ///  Update the nodal positions in all fluid elements that affect
     /// the traction on this FSIWallElement
     void node_update_adjacent_fluid_elements();
 
@@ -348,7 +348,7 @@ namespace oomph
     }
 
   protected:
-    /// \short After an internal data change, update the nodal positions
+    ///  After an internal data change, update the nodal positions
     inline void update_in_internal_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
@@ -370,7 +370,7 @@ namespace oomph
     }
 
 
-    /// \short After an external data change, update the nodal positions
+    ///  After an external data change, update the nodal positions
     inline void update_in_external_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
@@ -392,7 +392,7 @@ namespace oomph
     }
 
 
-    /// \short After a nodal data change, update the nodal positions
+    ///  After a nodal data change, update the nodal positions
     inline void update_in_nodal_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
@@ -413,7 +413,7 @@ namespace oomph
       }
     }
 
-    /// \short After an external field data change, update the nodal positions
+    ///  After an external field data change, update the nodal positions
     inline void update_in_external_interaction_field_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
@@ -435,7 +435,7 @@ namespace oomph
     }
 
 
-    /// \short After an external geometric data change, update the nodal
+    ///  After an external geometric data change, update the nodal
     /// positions
     inline void update_in_external_interaction_geometric_fd(const unsigned& i)
     {
@@ -458,7 +458,7 @@ namespace oomph
     }
 
 
-    /// \short After an internal data change, update the nodal positions
+    ///  After an internal data change, update the nodal positions
     inline void update_in_solid_position_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
@@ -480,7 +480,7 @@ namespace oomph
     }
 
 
-    /// \short Get FE Jacobian by systematic finite differencing w.r.t.
+    ///  Get FE Jacobian by systematic finite differencing w.r.t.
     /// nodal positition Data, internal and external Data and any
     /// load Data that is not included in the previous categories.
     /// This is a re-implementation of the generic FD routines with
@@ -495,7 +495,7 @@ namespace oomph
     // DenseMatrix<double>& jacobian);
 
 
-    /// \short  Get the contribution to the load vector provided by
+    ///   Get the contribution to the load vector provided by
     /// the adjacent fluid element: Pass number of integration point
     /// in solid element, and the unit normal vector (pointing into the fluid!)
     /// and return the load vector.
@@ -509,7 +509,7 @@ namespace oomph
 
 
   private:
-    /// \short Overload the function that must return all field data involved
+    ///  Overload the function that must return all field data involved
     /// in the interactions from the external (fluid) element. It allows
     /// the velocity degrees of freedom to be ignored if we want to
     /// ignore the shear stresses when computing the Jacobian.
@@ -517,29 +517,29 @@ namespace oomph
       Vector<std::set<FiniteElement*>> const& external_elements_pt,
       std::set<std::pair<Data*, unsigned>>& paired_iteraction_data);
 
-    /// \short Function that must return all geometric data involved
+    ///  Function that must return all geometric data involved
     /// in the desired interactions from the external element
     void identify_all_geometric_data_for_external_interaction(
       Vector<std::set<FiniteElement*>> const& external_elements_pt,
       std::set<Data*>& external_geometric_data_pt);
 
-    /// \short Static default value for the ratio of stress scales
+    ///  Static default value for the ratio of stress scales
     /// used in the fluid and solid equations (default is 1.0)
     static double Default_Q_Value;
 
-    /// \short Is the element exposed to (and hence loaded by)
+    ///  Is the element exposed to (and hence loaded by)
     /// fluid only on its "front"? True by default. This flag is set to
     /// false if the FSIWallElement is immersed in fluid in which case
     /// each integration point is loaded by two adjacent
     /// fluid elements, one at the "front" and one at the "back".
     bool Only_front_is_loaded_by_fluid;
 
-    /// \short Pointer to the ratio, \f$ Q \f$ , of the stress used to
+    ///  Pointer to the ratio, \f$ Q \f$ , of the stress used to
     /// non-dimensionalise the fluid stresses to the stress used to
     /// non-dimensionalise the solid stresses.
     double* Q_pt;
 
-    /// \short Set this flag to true to ignore shear stress component
+    ///  Set this flag to true to ignore shear stress component
     /// of load when calculating the Jacobian, i.e. to ignore
     /// fluid velocity Data in the FSIFluidElement and "far away"
     /// geometric Data that affects nodal positions in the FSIFluidElement,
@@ -559,7 +559,7 @@ namespace oomph
   namespace FSI_functions
   {
     //============================================================================
-    /// \short Apply no-slip condition for N.St. on a moving wall node,
+    ///  Apply no-slip condition for N.St. on a moving wall node,
     /// u = St dR/dt, where the Strouhal number St = a/(UT) is defined by
     /// FSI_functions::Strouhal_for_no_slip and is initialised to 1.0.
     /// Note: This requires the x,y,[z] velocity components to be stored
@@ -571,14 +571,14 @@ namespace oomph
 
 
     //============================================================================
-    /// \short Strouhal number St = a/(UT) for application of no slip condition.
+    ///  Strouhal number St = a/(UT) for application of no slip condition.
     /// Initialised to 1.0.
     //============================================================================
     extern double Strouhal_for_no_slip;
 
 
     //============================================================================
-    /// \short Set up the information that the FSIWallElements
+    ///  Set up the information that the FSIWallElements
     /// in the specified solid mesh require to obtain the fluid loading from the
     /// adjacent fluid elements in the specified fluid mesh.
     /// The parameter b specifies the boundary in the fluid mesh
@@ -613,7 +613,7 @@ namespace oomph
     }
 
     //============================================================================
-    /// \short Set up the information that the FSIWallElements
+    ///  Set up the information that the FSIWallElements
     /// in the specified solid mesh require to obtain the fluid loading from the
     /// adjacent fluid elements in the specified fluid mesh.
     /// The parameter b specifies the boundary in the fluid mesh
@@ -645,7 +645,7 @@ namespace oomph
 
 
     //============================================================================
-    /// \short Setup multi-domain interaction required for imposition
+    ///  Setup multi-domain interaction required for imposition
     /// of solid displacements onto the pseudo-solid fluid mesh by
     /// Lagrange multipliers: This function locates the bulk solid
     /// elements next to boundary b_solid_fsi (the FSI boundary)
@@ -677,7 +677,7 @@ namespace oomph
 
 
     //============================================================================
-    /// \short Setup multi-domain interaction required for imposition
+    ///  Setup multi-domain interaction required for imposition
     /// of solid displacements onto the pseudo-solid fluid mesh by
     /// Lagrange multipliers: This function locates the bulk solid
     /// elements next to boundary b_solid_fsi (the FSI boundary)

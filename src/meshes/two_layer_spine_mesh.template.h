@@ -60,7 +60,7 @@ namespace oomph
                             public SpineMesh
   {
   public:
-    /// \short Constructor: Pass number of elements in x-direction, number of
+    ///  Constructor: Pass number of elements in x-direction, number of
     /// elements in y-direction in bottom and top layer, respectively,
     /// axial length and height of top and bottom layers and pointer
     /// to timestepper (defaults to Steady timestepper)
@@ -74,7 +74,7 @@ namespace oomph
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
 
-    /// \short Constructor: Pass number of elements in x-direction, number of
+    ///  Constructor: Pass number of elements in x-direction, number of
     /// elements in y-direction in bottom and top layer, respectively,
     /// axial length and height of top and bottom layers, a boolean
     /// flag to make the mesh periodic in the x-direction, and pointer
@@ -90,7 +90,7 @@ namespace oomph
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
 
-    /// \short Constructor: Pass number of elements in x-direction, number of
+    ///  Constructor: Pass number of elements in x-direction, number of
     /// elements in y-direction in bottom and top layer, respectively,
     /// axial length and height of top and bottom layers, a boolean
     /// flag to make the mesh periodic in the x-direction, a boolean flag to
@@ -155,21 +155,21 @@ namespace oomph
       return Interface_lower_boundary_element_pt.size();
     }
 
-    ///\short Index of the face of the elements next to the interface
+    /// Index of the face of the elements next to the interface
     /// in the upper region (always -2)
     int interface_upper_face_index_at_boundary(const unsigned& e)
     {
       return -2;
     }
 
-    ///\short Index of the face of the elements next to the interface in
+    /// Index of the face of the elements next to the interface in
     /// the lower region (always 2)
     int interface_lower_face_index_at_boundary(const unsigned& e)
     {
       return 2;
     }
 
-    /// \short General node update function implements pure virtual function
+    ///  General node update function implements pure virtual function
     /// defined in SpineMesh base class and performs specific update
     /// actions, depending on the node update fct id stored for each node.
     void spine_node_update(SpineNode* spine_node_pt)
@@ -203,10 +203,10 @@ namespace oomph
     /// Number of elements in upper layer
     unsigned Ny2;
 
-    /// \short  Height of the lower layer
+    ///   Height of the lower layer
     double H1;
 
-    /// \short  Height of the upper layer
+    ///   Height of the upper layer
     double H2;
 
     /// Vector of pointers to element in the upper layer
@@ -215,30 +215,30 @@ namespace oomph
     /// Vector of pointers to element in the lower layer
     Vector<FiniteElement*> Upper_layer_element_pt;
 
-    /// \short Vector of pointers to the elements adjacent to the interface
+    ///  Vector of pointers to the elements adjacent to the interface
     /// on the lower layer
     Vector<FiniteElement*> Interface_lower_boundary_element_pt;
 
-    /// \short Vector of pointers to the element adjacent to the interface
+    ///  Vector of pointers to the element adjacent to the interface
     /// on the upper layer
     Vector<FiniteElement*> Interface_upper_boundary_element_pt;
 
 
-    /// \short The spacing function for the x co-ordinates with two
+    ///  The spacing function for the x co-ordinates with two
     /// regions.
     double x_spacing_function(unsigned xelement,
                               unsigned xnode,
                               unsigned yelement,
                               unsigned ynode);
 
-    /// \short The spacing function for the y co-ordinates with three
+    ///  The spacing function for the y co-ordinates with three
     /// regions in each fluid.
     double y_spacing_function(unsigned xelement,
                               unsigned xnode,
                               unsigned yelement,
                               unsigned ynode);
 
-    /// \short Update function for the lower part of the domain
+    ///  Update function for the lower part of the domain
     void spine_node_update_lower(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
@@ -250,7 +250,7 @@ namespace oomph
     }
 
 
-    /// \short Update function for the upper part of the domain
+    ///  Update function for the upper part of the domain
     void spine_node_update_upper(SpineNode* spine_node_pt)
     {
       // Get fraction alon the spine
@@ -264,7 +264,7 @@ namespace oomph
         (this->Ymin + H) + W * (this->Ymax - (this->Ymin + H));
     }
 
-    /// \short Helper function to actually build the two-layer spine mesh
+    ///  Helper function to actually build the two-layer spine mesh
     /// (called from various constructors)
     virtual void build_two_layer_mesh(TimeStepper* time_stepper_pt);
   };

@@ -84,7 +84,7 @@ namespace Global_Physical_Variables
  /// we have an impulsive start)
  double T_cos=0.0;
 
- /// \short Pressure growth factor for pressure acting on the outside
+ ///  Pressure growth factor for pressure acting on the outside
  /// of the solid wall
  double P_outside_scale=0.0;
 
@@ -252,7 +252,7 @@ class PressureWaveFSIProblem : public Problem
 
 public:
 
- /// \short Constructor
+ ///  Constructor
  PressureWaveFSIProblem();
 
  /// Create the fluid traction elements
@@ -261,7 +261,7 @@ public:
  /// Create the solid traction elements
  void create_solid_traction_elements();
 
- /// \short Update the problem specs before next timestep: Emtpy
+ ///  Update the problem specs before next timestep: Emtpy
  void actions_before_implicit_timestep() {}
 
  /// Doc solution
@@ -297,10 +297,10 @@ private:
  /// Pointer to fluid timestepper
  TimeStepper* Fluid_time_stepper_pt;
 
- /// \short Mesh as geom object representation of fluid mesh
+ ///  Mesh as geom object representation of fluid mesh
  MeshAsGeomObject* Fluid_mesh_geom_obj_pt;
 
- /// \short Vector of pairs containing pointers to elements and
+ ///  Vector of pairs containing pointers to elements and
  /// local coordinates within them for regularly spaced plot points
  Vector<std::pair<FLUID_ELEMENT*,Vector<double> > > Regularly_spaced_plot_point;
 

@@ -50,7 +50,7 @@ namespace oomph
   class ExplicitTimeStepper;
 
   //====================================================================
-  /// \short Class to keep track of discrete/continous time. It is essential
+  ///  Class to keep track of discrete/continous time. It is essential
   /// to have a single Time object when using multiple time-stepping schemes;
   /// e.g., in fluid-structure interaction problems, it is common to use
   /// different schemes for the fluid and solid domains.
@@ -69,11 +69,11 @@ namespace oomph
     Vector<double> Dt;
 
   public:
-    /// \short Constructor: Do not allocate any storage for previous timesteps,
+    ///  Constructor: Do not allocate any storage for previous timesteps,
     /// but set the initial value of the time to zero
     Time() : Continuous_time(0.0) {}
 
-    /// \short Constructor: Pass the number of timesteps to be stored
+    ///  Constructor: Pass the number of timesteps to be stored
     /// and set the initial value of time to zero.
     Time(const unsigned& ndt) : Continuous_time(0.0)
     {
@@ -88,21 +88,21 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const Time&) = delete;
 
-    /// \short Resize the vector holding the number of previous timesteps
+    ///  Resize the vector holding the number of previous timesteps
     /// and initialise the new values to zero.
     void resize(const unsigned& n_dt)
     {
       Dt.resize(n_dt, 0.0);
     }
 
-    /// \short Set all timesteps to the same value, dt.
+    ///  Set all timesteps to the same value, dt.
     void initialise_dt(const double& dt_)
     {
       unsigned ndt = Dt.size();
       Dt.assign(ndt, dt_);
     }
 
-    /// \short Set the value of the timesteps to be equal to the values passed
+    ///  Set the value of the timesteps to be equal to the values passed
     /// in a vector
     void initialise_dt(const Vector<double>& dt_)
     {
@@ -145,7 +145,7 @@ namespace oomph
       return Dt[t];
     }
 
-    /// \short Return the value of the continuous time at the t-th previous
+    ///  Return the value of the continuous time at the t-th previous
     /// time level (t=0: current; t>0 previous).
     double time(const unsigned& t = 0) const
     {
@@ -168,7 +168,7 @@ namespace oomph
       return time_local;
     }
 
-    /// \short Update all stored values of dt by shifting each value along
+    ///  Update all stored values of dt by shifting each value along
     /// the array. This function must be called before starting to solve at a
     /// new time level.
     void shift_dt()
@@ -194,7 +194,7 @@ namespace oomph
 
 
   //====================================================================
-  /// \short Base class for time-stepping schemes.
+  ///  Base class for time-stepping schemes.
   /// Timestepper provides an approximation of the temporal derivatives of
   /// Data such that the i-th derivative of the j-th value in Data is
   /// represented as
@@ -236,26 +236,26 @@ namespace oomph
     /// Storage for the weights associated with the timestepper
     DenseMatrix<double> Weight;
 
-    /// \short String that indicates the type of the timestepper
+    ///  String that indicates the type of the timestepper
     ///(e.g. "BDF", "Newmark", etc.)
     std::string Type;
 
-    /// \short Boolean variable to indicate whether the timestepping scheme can
+    ///  Boolean variable to indicate whether the timestepping scheme can
     /// be adaptive
     bool Adaptive_Flag;
 
-    /// \short Bool to indicate if the timestepper is steady, i.e. its
+    ///  Bool to indicate if the timestepper is steady, i.e. its
     /// time-derivatives evaluate to zero. This status may be achieved
     /// temporarily by calling make_steady(). It can be reset to the
     /// appropriate default by the function undo_make_steady().
     bool Is_steady;
 
-    /// \short Boolean to indicate if the timestepper will output warnings when
+    ///  Boolean to indicate if the timestepper will output warnings when
     /// setting possibly an incorrect number of initial data values from
     /// function pointers
     bool Shut_up_in_assign_initial_data_values;
 
-    /// \short Flag: is adaptivity done by taking a separate step using an
+    ///  Flag: is adaptivity done by taking a separate step using an
     /// ExplicitTimeStepper object?
     bool Predict_by_explicit_step;
 
@@ -268,12 +268,12 @@ namespace oomph
     /// compare for paranoid checks.
     double Predicted_time;
 
-    /// \short The time-index in each Data object where predicted values are
+    ///  The time-index in each Data object where predicted values are
     /// stored. -1 if not set.
     int Predictor_storage_index;
 
   public:
-    /// \short Constructor. Pass the amount of storage required by
+    ///  Constructor. Pass the amount of storage required by
     /// timestepper (present value + history values) and the
     /// order of highest time-derivative.
     TimeStepper(const unsigned& tstorage, const unsigned& max_deriv)
@@ -351,7 +351,7 @@ namespace oomph
     /// Number of timestep increments that are required by the scheme
     virtual unsigned ndt() const = 0;
 
-    /// \short Number of previous values needed to calculate the value at the
+    ///  Number of previous values needed to calculate the value at the
     /// current time. i.e. how many previous values must we loop over to
     /// calculate the values at the evaluation time. For most methods this is
     /// 1, i.e. just use the value at t_{n+1}. See midpoint method for a
@@ -364,12 +364,12 @@ namespace oomph
     /// Number of previous values available: 0 for static, 1 for BDF<1>,...
     virtual unsigned nprev_values() const = 0;
 
-    /// \short Function to set the weights for present timestep (don't
+    ///  Function to set the weights for present timestep (don't
     /// need to pass present timestep or previous timesteps as they
     /// are available via Time_pt)
     virtual void set_weights() = 0;
 
-    /// \short Function to make the time stepper temporarily steady. This
+    ///  Function to make the time stepper temporarily steady. This
     /// is trivially achieved by setting all the weights to zero
     void make_steady()
     {
@@ -384,14 +384,14 @@ namespace oomph
       Is_steady = true;
     }
 
-    /// \short Flag to indicate if a timestepper has been made steady (possibly
+    ///  Flag to indicate if a timestepper has been made steady (possibly
     /// temporarily to switch off time-dependence)
     bool is_steady() const
     {
       return Is_steady;
     }
 
-    /// \short Flag: is adaptivity done by taking a separate step using an
+    ///  Flag: is adaptivity done by taking a separate step using an
     /// ExplicitTimeStepper object?
     bool predict_by_explicit_step() const
     {
@@ -433,7 +433,7 @@ namespace oomph
 #endif
     }
 
-    /// \short Return the time-index in each Data where predicted values are
+    ///  Return the time-index in each Data where predicted values are
     /// stored if the timestepper is adaptive.
     unsigned predictor_storage_index() const
     {
@@ -457,27 +457,27 @@ namespace oomph
 #endif
     }
 
-    /// \short Enable the output of warnings due to possible fct pointer vector
+    ///  Enable the output of warnings due to possible fct pointer vector
     /// size mismatch in assign_initial_data_values (Default)
     void enable_warning_in_assign_initial_data_values()
     {
       Shut_up_in_assign_initial_data_values = false;
     }
 
-    /// \short Disable the output of warnings due to possible fct pointer vector
+    ///  Disable the output of warnings due to possible fct pointer vector
     /// size mismatch in assign_initial_data_values
     void disable_warning_in_assign_initial_data_values()
     {
       Shut_up_in_assign_initial_data_values = true;
     }
 
-    /// \short Get a (const) pointer to the weights.
+    ///  Get a (const) pointer to the weights.
     const DenseMatrix<double>* weights_pt() const
     {
       return &Weight;
     }
 
-    /// \short Reset the is_steady status of a specific TimeStepper to its
+    ///  Reset the is_steady status of a specific TimeStepper to its
     /// default and re-assign the weights.
     virtual void undo_make_steady()
     {
@@ -485,7 +485,7 @@ namespace oomph
       set_weights();
     }
 
-    /// \short Return string that indicates the type of the timestepper
+    ///  Return string that indicates the type of the timestepper
     /// (e.g. "BDF", "Newmark", etc.)
     std::string type() const
     {
@@ -497,7 +497,7 @@ namespace oomph
     // normal polymorphism because data.value is different to node.value and
     // value is not a virtual function.
 
-    /// \short Evaluate i-th derivative of all values in Data and return in
+    ///  Evaluate i-th derivative of all values in Data and return in
     /// Vector deriv[].
     void time_derivative(const unsigned& i,
                          Data* const& data_pt,
@@ -514,7 +514,7 @@ namespace oomph
       }
     }
 
-    /// \short Evaluate i-th derivative of j-th value in Data.
+    ///  Evaluate i-th derivative of j-th value in Data.
     double time_derivative(const unsigned& i,
                            Data* const& data_pt,
                            const unsigned& j)
@@ -530,7 +530,7 @@ namespace oomph
       return deriv;
     }
 
-    /// \short Evaluate i-th derivative of all values in Node and return in
+    ///  Evaluate i-th derivative of all values in Node and return in
     /// Vector deriv[] (this can't be simply combined with time_derivative(..,
     /// Data, ...) because of differences with haning nodes).
     void time_derivative(const unsigned& i,
@@ -548,7 +548,7 @@ namespace oomph
       }
     }
 
-    /// \short Evaluate i-th derivative of j-th value in Node. Note the use of
+    ///  Evaluate i-th derivative of j-th value in Node. Note the use of
     /// the node's value() function so that hanging nodes are taken into
     /// account (this is why the functions for Data and Node cannot be
     /// combined through simple polymorphism: value is not virtual).
@@ -596,26 +596,26 @@ namespace oomph
       return Weight(i, j);
     }
 
-    /// \short Return the number of doubles required to represent history
+    ///  Return the number of doubles required to represent history
     /// (one for steady)
     unsigned ntstorage() const
     {
       return (Weight.ncol());
     }
 
-    /// \short Initialise the time-history for the Data values
+    ///  Initialise the time-history for the Data values
     /// corresponding to an impulsive start.
     virtual void assign_initial_values_impulsive(Data* const& data_pt) = 0;
 
-    /// \short Initialiset the positions for the node corresponding to
+    ///  Initialiset the positions for the node corresponding to
     /// an impulsive start
     virtual void assign_initial_positions_impulsive(Node* const& node_pt) = 0;
 
-    /// \short This function advances the Data's time history so that
+    ///  This function advances the Data's time history so that
     /// we can move on to the next timestep
     virtual void shift_time_values(Data* const& data_pt) = 0;
 
-    ///\short This function advances the time history of the positions
+    /// This function advances the time history of the positions
     /// at a node. The default should be OK, but would need to be overloaded
     virtual void shift_time_positions(Node* const& node_pt) = 0;
 
@@ -625,19 +625,19 @@ namespace oomph
       return Adaptive_Flag;
     }
 
-    /// \short Set the weights for the predictor
+    ///  Set the weights for the predictor
     /// previous timestep (currently empty -- overwrite for specific scheme)
     virtual void set_predictor_weights() {}
 
-    /// \short Do the predictor step for data stored in a Data object
+    ///  Do the predictor step for data stored in a Data object
     /// (currently empty -- overwrite for specific scheme)
     virtual void calculate_predicted_values(Data* const& data_pt) {}
 
-    ///\short Do the predictor step for the positions at a node
+    /// Do the predictor step for the positions at a node
     /// (currently empty --- overwrite for a specific scheme)
     virtual void calculate_predicted_positions(Node* const& node_pt) {}
 
-    /// \short Set the weights for the error computation,
+    ///  Set the weights for the error computation,
     /// (currently empty -- overwrite for specific scheme)
     virtual void set_error_weights() {}
 
@@ -680,7 +680,7 @@ namespace oomph
   class Steady : virtual public TimeStepper
   {
   public:
-    /// \short Constructor: Creates storage for NSTEPS previous timesteps
+    ///  Constructor: Creates storage for NSTEPS previous timesteps
     /// and can evaluate up to 2nd derivatives (though it doesn't
     /// actually do anything -- all time-derivatives
     /// evaluate to zero)
@@ -701,14 +701,14 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const Steady&) = delete;
 
-    /// \short Return the actual order of the scheme. Returning zero here --
+    ///  Return the actual order of the scheme. Returning zero here --
     /// doesn't make much sense, though
     unsigned order() const
     {
       return 0;
     }
 
-    /// \short  Initialise the time-history for the Data values,
+    ///   Initialise the time-history for the Data values,
     /// corresponding to an impulsive start.
     void assign_initial_values_impulsive(Data* const& data_pt)
     {
@@ -728,7 +728,7 @@ namespace oomph
       }
     }
 
-    /// \short  Initialise the time-history for the nodal positions
+    ///   Initialise the time-history for the nodal positions
     /// corresponding to an impulsive start.
     void assign_initial_positions_impulsive(Node* const& node_pt)
     {
@@ -755,11 +755,11 @@ namespace oomph
     }
 
 
-    /// \short Typedef for function that returns the (scalar) initial
+    ///  Typedef for function that returns the (scalar) initial
     /// value at a given value of the continuous time t.
     typedef double (*InitialConditionFctPt)(const double& t);
 
-    /// \short  Initialise the time-history for the Data values,
+    ///   Initialise the time-history for the Data values,
     /// corresponding to given time history, specified by
     /// Vector of function pointers.
     void assign_initial_data_values(
@@ -785,7 +785,7 @@ namespace oomph
       }
     }
 
-    /// \short This function updates the Data's time history so that
+    ///  This function updates the Data's time history so that
     /// we can advance to the next timestep. As for BDF schemes,
     /// we simply push the values backwards...
     void shift_time_values(Data* const& data_pt)
@@ -808,7 +808,7 @@ namespace oomph
       }
     }
 
-    ///\short This function advances the time history of the positions
+    /// This function advances the time history of the positions
     /// at a node.
     void shift_time_positions(Node* const& node_pt)
     {
@@ -895,7 +895,7 @@ namespace oomph
 
 
   //====================================================================
-  /// \short Newmark scheme for second time deriv. Stored data represents
+  ///  Newmark scheme for second time deriv. Stored data represents
   /// - t=0: value at at present time, Time_pt->time()
   /// - t=1: value at previous time, Time_pt->time()-dt
   /// -  ...
@@ -911,7 +911,7 @@ namespace oomph
   class Newmark : public TimeStepper
   {
   public:
-    /// \short Constructor: Pass pointer to global time. We set up a
+    ///  Constructor: Pass pointer to global time. We set up a
     /// timestepping scheme with NSTEPS+2 doubles to represent the history and
     /// the highest deriv is 2.
     Newmark() : TimeStepper(NSTEPS + 3, 2)
@@ -942,19 +942,19 @@ namespace oomph
       return 2;
     }
 
-    /// \short Initialise the time-history for the values,
+    ///  Initialise the time-history for the values,
     /// corresponding to an impulsive start.
     void assign_initial_values_impulsive(Data* const& data_pt);
 
-    /// \short Initialise the time-history for the values,
+    ///  Initialise the time-history for the values,
     /// corresponding to an impulsive start.
     void assign_initial_positions_impulsive(Node* const& node_pt);
 
-    /// \short Typedef for function that returns the (scalar) initial
+    ///  Typedef for function that returns the (scalar) initial
     /// value at a given value of the continuous time t.
     typedef double (*InitialConditionFctPt)(const double& t);
 
-    /// \short  Initialise the time-history for the Data values,
+    ///   Initialise the time-history for the Data values,
     /// so that the Newmark representations for current veloc and
     /// acceleration are exact.
     void assign_initial_data_values(
@@ -964,14 +964,14 @@ namespace oomph
       Vector<InitialConditionFctPt> initial_accel_fct);
 
 
-    /// \short Typedef for function that returns the (scalar) initial
+    ///  Typedef for function that returns the (scalar) initial
     /// value at a given value of the continuous time t and the spatial
     /// coordinate -- appropriate for assignement of initial conditions for
     /// nodes
     typedef double (*NodeInitialConditionFctPt)(const double& t,
                                                 const Vector<double>& x);
 
-    /// \short  Initialise the time-history for the nodal values,
+    ///   Initialise the time-history for the nodal values,
     /// so that the Newmark representations for current veloc and
     /// acceleration are exact.
     void assign_initial_data_values(
@@ -980,7 +980,7 @@ namespace oomph
       Vector<NodeInitialConditionFctPt> initial_veloc_fct,
       Vector<NodeInitialConditionFctPt> initial_accel_fct);
 
-    /// \short  First step in a two-stage procedure to assign
+    ///   First step in a two-stage procedure to assign
     /// the history values for the Newmark scheme so
     /// that the veloc and accel that are computed by the scheme
     /// are correct at the current time.
@@ -1005,7 +1005,7 @@ namespace oomph
     void assign_initial_data_values_stage1(const unsigned t_deriv,
                                            Data* const& data_pt);
 
-    /// \short Second step in a two-stage procedure to assign
+    ///  Second step in a two-stage procedure to assign
     /// the history values for the Newmark scheme so
     /// that the veloc and accel that are computed by the scheme
     /// are correct at the current time.
@@ -1017,11 +1017,11 @@ namespace oomph
     void assign_initial_data_values_stage2(Data* const& data_pt);
 
 
-    /// \short This function updates the Data's time history so that
+    ///  This function updates the Data's time history so that
     /// we can advance to the next timestep.
     void shift_time_values(Data* const& data_pt);
 
-    /// \short This function updates a nodal time history so that
+    ///  This function updates a nodal time history so that
     /// we can advance to the next timestep.
     void shift_time_positions(Node* const& node_pt);
 
@@ -1056,7 +1056,7 @@ namespace oomph
 
 
   //====================================================================
-  /// \short Newmark scheme for second time deriv with first derivatives
+  ///  Newmark scheme for second time deriv with first derivatives
   /// calculated using BDF. . Stored data represents
   /// - t=0: value at at present time, Time_pt->time()
   /// - t=1: value at previous time, Time_pt->time()-dt
@@ -1073,7 +1073,7 @@ namespace oomph
   class NewmarkBDF : public Newmark<NSTEPS>
   {
   public:
-    /// \short Constructor: Pass pointer to global time. We set up a
+    ///  Constructor: Pass pointer to global time. We set up a
     /// timestepping scheme with NSTEPS+2 doubles to represent the history and
     /// the highest deriv is 2.
     NewmarkBDF()
@@ -1092,15 +1092,15 @@ namespace oomph
     /// Set weights
     void set_weights();
 
-    /// \short This function updates the Data's time history so that
+    ///  This function updates the Data's time history so that
     /// we can advance to the next timestep.
     void shift_time_values(Data* const& data_pt);
 
-    /// \short This function updates a nodal time history so that
+    ///  This function updates a nodal time history so that
     /// we can advance to the next timestep.
     void shift_time_positions(Node* const& node_pt);
 
-    /// \short Degrade scheme to first order BDF (for first derivs/veloc);
+    ///  Degrade scheme to first order BDF (for first derivs/veloc);
     /// usually for start-up.
     void enable_degrade_first_derivatives_to_bdf1()
     {
@@ -1108,14 +1108,14 @@ namespace oomph
     }
 
 
-    /// \short Disable degradation to first order BDF.
+    ///  Disable degradation to first order BDF.
     void disable_degrade_first_derivatives_to_bdf1()
     {
       Degrade_to_bdf1_for_first_derivs = false;
     }
 
   private:
-    /// \short Set original Newmark weights for velocities (needed when
+    ///  Set original Newmark weights for velocities (needed when
     /// shifting history values -- they're used when updating the
     /// previous accelerations and doing this with bdf can make the
     /// scheme unstable...
@@ -1134,11 +1134,11 @@ namespace oomph
         this->Beta1 * dt * this->Weight(2, NSTEPS + 2);
     }
 
-    /// \short Boolean flag to indicate degradation of scheme to first
+    ///  Boolean flag to indicate degradation of scheme to first
     /// order BDF (for first derivs/veloc); usually for start-up.
     bool Degrade_to_bdf1_for_first_derivs;
 
-    /// \short Original Newmark weights for velocities (needed when
+    ///  Original Newmark weights for velocities (needed when
     /// shifting history values -- they're used when updating the
     /// previous accelerations and doing this with bdf can make the
     /// scheme unstable...
@@ -1152,7 +1152,7 @@ namespace oomph
 
 
   //====================================================================
-  /// \short Templated class for BDF-type time-steppers with fixed or
+  ///  Templated class for BDF-type time-steppers with fixed or
   /// variable timestep.
   /// 1st time derivative recovered directly from the previous function
   /// values. Template parameter represents the number of previous timesteps
@@ -1229,7 +1229,7 @@ namespace oomph
       return NSTEPS;
     }
 
-    /// \short  Initialise the time-history for the Data values,
+    ///   Initialise the time-history for the Data values,
     /// corresponding to an impulsive start.
     void assign_initial_values_impulsive(Data* const& data_pt)
     {
@@ -1258,7 +1258,7 @@ namespace oomph
       }
     }
 
-    /// \short  Initialise the time-history for the nodal positions
+    ///   Initialise the time-history for the nodal positions
     /// corresponding to an impulsive start.
     void assign_initial_positions_impulsive(Node* const& node_pt)
     {
@@ -1297,11 +1297,11 @@ namespace oomph
     }
 
 
-    /// \short Typedef for function that returns the (scalar) initial
+    ///  Typedef for function that returns the (scalar) initial
     /// value at a given value of the continuous time t.
     typedef double (*InitialConditionFctPt)(const double& t);
 
-    /// \short  Initialise the time-history for the Data values,
+    ///   Initialise the time-history for the Data values,
     /// corresponding to given time history, specified by
     /// Vector of function pointers.
     void assign_initial_data_values(
@@ -1327,7 +1327,7 @@ namespace oomph
       }
     }
 
-    /// \short This function updates the Data's time history so that
+    ///  This function updates the Data's time history so that
     /// we can advance to the next timestep. For BDF schemes,
     /// we simply push the values backwards...
     void shift_time_values(Data* const& data_pt)
@@ -1368,7 +1368,7 @@ namespace oomph
       }
     }
 
-    ///\short This function advances the time history of the positions
+    /// This function advances the time history of the positions
     /// at a node.
     void shift_time_positions(Node* const& node_pt)
     {

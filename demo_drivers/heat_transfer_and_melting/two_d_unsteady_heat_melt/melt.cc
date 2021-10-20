@@ -87,7 +87,7 @@ namespace ExactSolution
  /// Growth rate for interface
  double Growth_rate=1.0;
  
- /// \short Frequency of co-sinusoidal oscillation of incoming heat flux
+ ///  Frequency of co-sinusoidal oscillation of incoming heat flux
  /// (to assess suppression of re-freezing). Set to zero for validation.
  double Omega_cos=0.0;
 
@@ -134,7 +134,7 @@ t*Y*Y*Growth_rate*pow(sin(2.0*X*0.3141592653589793E1),2.0)*0.3141592653589793E1
  }
 
 
- /// \short Flux required by the exact solution on a boundary with outer unit
+ ///  Flux required by the exact solution on a boundary with outer unit
  /// normal n. No dependence on temperature u.
  void prescribed_flux_for_unsteady_heat_validation(const double& t,
                                                    const Vector<double>& x, 
@@ -196,7 +196,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
  
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
   
  /// Actions before adapt: wipe flux elements
@@ -213,7 +213,7 @@ public:
    rebuild_global_mesh();
   }
 
- /// \short Actions after adapt: 
+ ///  Actions after adapt: 
  /// Setup the problem again -- remember that the mesh has been
  /// completely rebuilt and its element's don't have any
  /// pointers to source fcts etc. yet
@@ -304,7 +304,7 @@ private:
   }
 
 
- /// \short Helper function to (re-)set boundary condition
+ ///  Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup()
   {
@@ -440,7 +440,7 @@ private:
  // Setup labels for output
  DocInfo Doc_info;
 
- /// \short Backup of Surface_melt_mesh_pt so the Lagrange multipliers
+ ///  Backup of Surface_melt_mesh_pt so the Lagrange multipliers
  /// and melt rate can be projected across
  BackupMeshForProjection<TElement<1,3> >*  Backed_up_surface_melt_mesh_pt;
  
@@ -702,7 +702,7 @@ void UnsteadyHeatMeltProblem<ELEMENT>::doc_solution()
 
 
 //=======start_of_main====================================================
-/// \short Driver code for unsteady heat equation
+///  Driver code for unsteady heat equation
 //========================================================================
 int main(int argc, char* argv[])
 {

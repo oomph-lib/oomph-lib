@@ -59,27 +59,27 @@ namespace Global_Parameters
  /// The number of adaptations allowed by the Newton solver
  unsigned N_adaptations=1;
 
- /// \short The choice of whether or not to use adaptation
+ ///  The choice of whether or not to use adaptation
  ///    0 = Uniform refinement
  ///    1 = Adaptive refinement
  unsigned Use_adaptation_flag=0;
  
- /// \short The choice of pre-smoother:
+ ///  The choice of pre-smoother:
  ///    0 = Damped Jacobi
  ///    1 = Gauss-Seidel
  unsigned Pre_smoother_flag=0;
  
- /// \short The choice of post-smoother:
+ ///  The choice of post-smoother:
  ///    0 = Damped Jacobi
  ///    1 = Gauss-Seidel
  unsigned Post_smoother_flag=0;
 
- /// \short The choice of linear solver
+ ///  The choice of linear solver
  ///    0 = SuperLU
  ///    1 = Multigrid
  unsigned Linear_solver_flag=1;
 
- /// \short The MG solver allows for five different levels of output:
+ ///  The MG solver allows for five different levels of output:
  ///    0 = Outputs everything
  ///    1 = Outputs everything and plots refinement and unrefinement patterns
  ///    2 = Outputs everything except the smoother timings 
@@ -88,7 +88,7 @@ namespace Global_Parameters
  /// Note: choosing '1' will also keep the coarser problems alive
  unsigned Output_management_flag=0;
 
- /// \short Variable used to decide whether or not convergence information
+ ///  Variable used to decide whether or not convergence information
  /// is displayed:
  ///    0 = Don't display convergence information
  ///    1 = Display convergence information
@@ -175,25 +175,25 @@ namespace TanhSolnForPoisson
  /// Parameter for steepness of step
  double Alpha=1.0;
 
- /// \short Orientation (non-normalised x-component of unit vector in
+ ///  Orientation (non-normalised x-component of unit vector in
  /// direction of step plane)
  double N_x=-1.0;
 
- /// \short Orientation (non-normalised y-component of unit vector in
+ ///  Orientation (non-normalised y-component of unit vector in
  /// direction of step plane)
  double N_y=-1.0;
 
- /// \short Orientation (non-normalised z-component of unit vector in
+ ///  Orientation (non-normalised z-component of unit vector in
  /// direction of step plane)
  double N_z=1.0;
 
- /// \short Orientation (x-coordinate of step plane) 
+ ///  Orientation (x-coordinate of step plane) 
  double X_0=0.0;
 
- /// \short Orientation (y-coordinate of step plane) 
+ ///  Orientation (y-coordinate of step plane) 
  double Y_0=0.0;
 
- /// \short Orientation (z-coordinate of step plane) 
+ ///  Orientation (z-coordinate of step plane) 
  double Z_0=0.0;
 
  // Exact solution as a Vector
@@ -286,7 +286,7 @@ public:
    Problem::mesh_pt()=0;
   } // End of ~UnitCubePoissonMGProblem
 
- /// \short Update the problem specs before solve: 
+ ///  Update the problem specs before solve: 
  /// Set Dirichlet boundary conditions from exact solution.
  void actions_before_newton_solve();
  
@@ -302,7 +302,7 @@ public:
  
 private:
     
- /// \short Overload generic access function to the mesh by one that returns
+ ///  Overload generic access function to the mesh by one that returns
  /// a pointer to the mesh with return type specified by the template parameter 
  MESH* mesh_pt() 
   {
@@ -313,7 +313,7 @@ private:
  /// Build and set multgrid solver
  void set_multigrid_solver();
  
- /// \short Pointer to the bulk mesh. Overloads the pure virtual function in
+ ///  Pointer to the bulk mesh. Overloads the pure virtual function in
  /// the abstract base class, MGProblem. Must be refineable to allow the
  /// use of refine_base_mesh_as_in_reference_mesh_minus_one() in make_copy()
  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt() 
@@ -594,7 +594,7 @@ void UnitCubePoissonMGProblem<ELEMENT,MESH>::doc_solution()
 ////////////////////////////////////////////////////////////////////////
 
 //======start_of_main================================================
-/// \short Driver for 3D Poisson problem in a unit cube. Solution has
+///  Driver for 3D Poisson problem in a unit cube. Solution has
 /// a sharp step.
 //===================================================================
 int main(int argc, char *argv[])

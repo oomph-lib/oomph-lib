@@ -32,7 +32,7 @@
 namespace oomph
 {
   //=====================================================================
-  /// \short Fill in the residuals for the volume constraint
+  ///  Fill in the residuals for the volume constraint
   //====================================================================
   void LinearisedNavierStokesEigenfunctionNormalisationElement::
     fill_in_generic_contribution_to_residuals_normalisation(
@@ -65,7 +65,7 @@ namespace oomph
   }
 
   //===========================================================================
-  /// \short Constructor: Pass pointer to target volume. "Pressure" value that
+  ///  Constructor: Pass pointer to target volume. "Pressure" value that
   /// "traded" for the volume contraint is created internally (as a Data
   /// item with a single pressure value)
   //===========================================================================
@@ -86,7 +86,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Constructor: Pass pointer to target volume, pointer to Data
+  ///  Constructor: Pass pointer to target volume, pointer to Data
   /// item whose value specified by index_of_traded_pressure represents
   /// the "Pressure" value that "traded" for the volume contraint.
   /// The Data is stored as external Data for this element.

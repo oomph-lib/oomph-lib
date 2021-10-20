@@ -48,22 +48,22 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   protected:
-    /// \short Pointer to n_p-th pressure node (Default: NULL,
+    ///  Pointer to n_p-th pressure node (Default: NULL,
     /// indicating that pressure is not based on nodal interpolation).
     virtual Node* pressure_node_pt(const unsigned& n_p)
     {
       return NULL;
     }
 
-    /// \short Unpin all pressure dofs in the element
+    ///  Unpin all pressure dofs in the element
     virtual void unpin_elemental_pressure_dofs() = 0;
 
-    /// \short Pin unused nodal pressure dofs (empty by default, because
+    ///  Pin unused nodal pressure dofs (empty by default, because
     /// by default pressure dofs are not associated with nodes)
     virtual void pin_elemental_redundant_nodal_pressure_dofs() {}
 
   public:
-    /// \short Empty Constructor
+    ///  Empty Constructor
     RefineableAxisymmetricNavierStokesEquations()
       : AxisymmetricNavierStokesEquations(),
         RefineableElement(),
@@ -78,7 +78,7 @@ namespace oomph
       return 6;
     }
 
-    /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+    ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain rate tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -166,7 +166,7 @@ namespace oomph
       this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
     }
 
-    /// \short Compute the derivatives of the i-th component of
+    ///  Compute the derivatives of the i-th component of
     /// velocity at point s with respect
     /// to all data that can affect its value. In addition, return the global
     /// equation numbers corresponding to the data.
@@ -306,7 +306,7 @@ namespace oomph
     }
 
 
-    /// \short  Loop over all elements in Vector (which typically contains
+    ///   Loop over all elements in Vector (which typically contains
     /// all the elements in a fluid mesh) and pin the nodal pressure degrees
     /// of freedom that are not being used. Function uses
     /// the member function
@@ -330,7 +330,7 @@ namespace oomph
       }
     }
 
-    /// \short Unpin all pressure dofs in elements listed in vector.
+    ///  Unpin all pressure dofs in elements listed in vector.
     static void unpin_all_pressure_dofs(
       const Vector<GeneralisedElement*>& element_pt)
     {
@@ -345,7 +345,7 @@ namespace oomph
       }
     }
 
-    /// \short Compute derivatives of elemental residual vector with respect to
+    ///  Compute derivatives of elemental residual vector with respect to
     /// nodal coordinates. This function computes these terms analytically and
     /// overwrites the default implementation in the FiniteElement base class.
     /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
@@ -353,7 +353,7 @@ namespace oomph
       RankThreeTensor<double>& dresidual_dnodal_coordinates);
 
   private:
-    /// \short Add element's contribution to the elemental residual vector
+    ///  Add element's contribution to the elemental residual vector
     /// and/or Jacobian matrix and mass matrix
     /// flag=2: compute all
     /// flag=1: compute both residual and Jacobian
@@ -364,7 +364,7 @@ namespace oomph
       DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
-    /// \short Add element's contribution to the derivative of the
+    ///  Add element's contribution to the derivative of the
     /// elemental residual vector
     /// and/or Jacobian matrix and/or mass matrix
     /// flag=2: compute all
@@ -382,7 +382,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Compute the hessian tensor vector products required to
+    ///  Compute the hessian tensor vector products required to
     /// perform continuation of bifurcations analytically
     void fill_in_contribution_to_hessian_vector_products(
       Vector<double> const& Y,
@@ -406,7 +406,7 @@ namespace oomph
       public virtual RefineableQElement<2>
   {
   private:
-    /// \short Pointer to n_p-th pressure node
+    ///  Pointer to n_p-th pressure node
     Node* pressure_node_pt(const unsigned& n_p)
     {
       return this->node_pt(this->Pconv[n_p]);
@@ -449,7 +449,7 @@ namespace oomph
     }
 
   public:
-    /// \short Constructor:
+    ///  Constructor:
     RefineableAxisymmetricQTaylorHoodElement()
       : RefineableElement(),
         RefineableAxisymmetricNavierStokesEquations(),
@@ -476,26 +476,26 @@ namespace oomph
     /// Rebuild from sons: empty
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return 2;
     }
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return AxisymmetricQTaylorHoodElement::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return AxisymmetricQTaylorHoodElement::vertex_node_pt(j);
     }
 
-    /// \short Get the function value u in Vector.
+    ///  Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -518,7 +518,7 @@ namespace oomph
       values[DIM] = interpolated_p_axi_nst(s);
     }
 
-    /// \short Get the function value u in Vector.
+    ///  Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -560,7 +560,7 @@ namespace oomph
       values[DIM] = interpolated_p_axi_nst(s);
     }
 
-    ///  \short Perform additional hanging node procedures for variables
+    ///   Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. The pressures are stored
     /// at the 3rd location in each node
     void further_setup_hanging_nodes()
@@ -569,7 +569,7 @@ namespace oomph
       this->setup_hang_for_value(DIM);
     }
 
-    /// \short The velocities are isoparametric and so the "nodes" interpolating
+    ///  The velocities are isoparametric and so the "nodes" interpolating
     /// the velocities are the geometric nodes. The pressure "nodes" are a
     /// subset of the nodes, so when n_value==DIM, the n-th pressure
     /// node is returned.
@@ -589,7 +589,7 @@ namespace oomph
       }
     }
 
-    /// \short The pressure nodes are the corner nodes, so when n_value==DIM,
+    ///  The pressure nodes are the corner nodes, so when n_value==DIM,
     /// the fraction is the same as the 1d node number, 0 or 1.
     double local_one_d_fraction_of_interpolating_node(const unsigned& n1d,
                                                       const unsigned& i,
@@ -608,7 +608,7 @@ namespace oomph
       }
     }
 
-    /// \short The velocity nodes are the same as the geometric nodes. The
+    ///  The velocity nodes are the same as the geometric nodes. The
     /// pressure nodes must be calculated by using the same methods as
     /// the geometric nodes, but by recalling that there are only two pressure
     /// nodes per edge.
@@ -673,7 +673,7 @@ namespace oomph
     }
 
 
-    /// \short The number of 1d pressure nodes is 2, the number of 1d velocity
+    ///  The number of 1d pressure nodes is 2, the number of 1d velocity
     /// nodes is the same as the number of 1d geometric nodes.
     unsigned ninterpolating_node_1d(const int& n_value)
     {
@@ -688,7 +688,7 @@ namespace oomph
       }
     }
 
-    /// \short The number of pressure nodes is 4. The number of
+    ///  The number of pressure nodes is 4. The number of
     /// velocity nodes is the same as the number of geometric nodes.
     unsigned ninterpolating_node(const int& n_value)
     {
@@ -703,7 +703,7 @@ namespace oomph
       }
     }
 
-    /// \short The basis interpolating the pressure is given by pshape().
+    ///  The basis interpolating the pressure is given by pshape().
     //// The basis interpolating the velocity is shape().
     void interpolating_basis(const Vector<double>& s,
                              Shape& psi,
@@ -776,7 +776,7 @@ namespace oomph
     }
 
   public:
-    /// \short Constructor:
+    ///  Constructor:
     RefineableAxisymmetricQCrouzeixRaviartElement()
       : RefineableElement(),
         RefineableAxisymmetricNavierStokesEquations(),
@@ -892,26 +892,26 @@ namespace oomph
         ->set_value(2, 0.5 * (slope1 + slope2));
     }
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return 2;
     }
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return AxisymmetricQCrouzeixRaviartElement::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return AxisymmetricQCrouzeixRaviartElement::vertex_node_pt(j);
     }
 
-    /// \short Get the function value u in Vector.
+    ///  Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -930,7 +930,7 @@ namespace oomph
       }
     }
 
-    /// \short Get all function values [u,v..,p] at previous timestep t
+    ///  Get all function values [u,v..,p] at previous timestep t
     /// (t=0: present; t>0: previous timestep).
     /// \n
     /// Note: Given the generality of the interface (this function is
@@ -973,7 +973,7 @@ namespace oomph
       }
     }
 
-    ///  \short Perform additional hanging node procedures for variables
+    ///   Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Empty
     void further_setup_hanging_nodes() {}
 

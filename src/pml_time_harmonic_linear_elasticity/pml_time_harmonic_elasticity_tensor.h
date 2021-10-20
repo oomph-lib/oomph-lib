@@ -55,7 +55,7 @@ namespace oomph
   //=====================================================================
   class PMLTimeHarmonicElasticityTensor
   {
-    ///\short Translation table from the four indices to the corresponding
+    /// Translation table from the four indices to the corresponding
     /// independent component
     static const unsigned Index[3][3][3][3];
 
@@ -69,7 +69,7 @@ namespace oomph
     }
 
 
-    ///\short Helper range checking function
+    /// Helper range checking function
     /// (Note that this only captures over-runs in 3D but
     /// errors are likely to be caught in evaluation of the
     /// stress and strain tensors anyway...)
@@ -120,7 +120,7 @@ namespace oomph
     virtual ~PMLTimeHarmonicElasticityTensor() {}
 
   public:
-    ///\short Return the appropriate independent component
+    /// Return the appropriate independent component
     /// via the index translation scheme (const version).
     std::complex<double> operator()(const unsigned& i,
                                     const unsigned& j,
@@ -151,7 +151,7 @@ namespace oomph
     /// Storage for the independent components of the elasticity tensor
     std::complex<double> C[4];
 
-    /// \short Translation scheme between the 21 independent components of the
+    ///  Translation scheme between the 21 independent components of the
     /// general elasticity tensor and the isotropic case
     static const unsigned StaticIndex[21];
 
@@ -159,7 +159,7 @@ namespace oomph
     double Nu;
 
   public:
-    /// \short Constructor. Passing in the values of the Poisson's ratio
+    ///  Constructor. Passing in the values of the Poisson's ratio
     /// and Young's modulus (interpreted as the ratio of the actual
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
@@ -174,7 +174,7 @@ namespace oomph
       this->set_lame_coefficients(lambda, mu);
     }
 
-    /// \short Constructor. Passing in the value of the Poisson's ratio.
+    ///  Constructor. Passing in the value of the Poisson's ratio.
     /// Stresses and tractions in the governing equations are assumed
     /// to have been non-dimensionalised on Young's modulus.
     PMLTimeHarmonicIsotropicElasticityTensor(const double& nu)
@@ -196,7 +196,7 @@ namespace oomph
       return Nu;
     }
 
-    /// \short Update parameters: Specify values of the Poisson's ratio
+    ///  Update parameters: Specify values of the Poisson's ratio
     /// and (optionally) Young's modulus (interpreted as the ratio of the actual
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing

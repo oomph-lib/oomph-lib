@@ -44,7 +44,7 @@ namespace oomph
 
 
 //=======================================================================
-/// \short Update function: Call the update function in the Node's
+///  Update function: Call the update function in the Node's
 /// PerturbedSpineMesh
 //=======================================================================
 void PerturbedSpineNode::node_update(
@@ -139,7 +139,7 @@ void PerturbedSpineElement<ELEMENT>::complete_setup_of_dependencies()
 
 
 //=======================================================================
-/// \short Update function to update all nodes of mesh.
+///  Update function to update all nodes of mesh.
 /// [Doesn't make sense to use this mesh with SolidElements anyway,
 /// so we buffer the case if update_all_solid_nodes (which defaults
 /// to false) is set to true.]

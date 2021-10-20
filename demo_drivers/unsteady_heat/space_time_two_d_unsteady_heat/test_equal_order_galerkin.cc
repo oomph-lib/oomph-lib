@@ -135,7 +135,7 @@ namespace SinSolution
   } // End of get_exact_u
 
 
-  /// \short Source function to make it an exact solution
+  ///  Source function to make it an exact solution
   void get_source(const double& t,
                   const Vector<double>& x,
                   double& source)
@@ -179,13 +179,13 @@ public:
   /// Destructor (empty)
   ~UnsteadyHeatProblem();
 
-  /// \short Update the problem specs before solve (empty)
+  ///  Update the problem specs before solve (empty)
   void actions_before_newton_solve() {}
 
   /// Update the problem specs after solve (empty)
   void actions_after_newton_solve() {}
 
-  /// \short Update the problem specs before solve (empty)
+  ///  Update the problem specs before solve (empty)
   void actions_before_adapt() {}
 
   /// Update the problem specs after solve
@@ -198,24 +198,24 @@ public:
     complete_problem_setup();
   } // End of actions_after_adapt
 
-  /// \short Create the space-time mesh with the chosen number of elements in
+  ///  Create the space-time mesh with the chosen number of elements in
   /// the time direction and the chosen spatial resolution
   void create_spacetime_mesh();
 
-  /// \short Assign the Dirichlet and maybe time-periodic BCs
+  ///  Assign the Dirichlet and maybe time-periodic BCs
   void apply_boundary_conditions();
 
-  /// \short Assign the appropriate boundary conditions and enforce periodicity
+  ///  Assign the appropriate boundary conditions and enforce periodicity
   /// in the time direction
   void enforce_time_periodic_boundary_conditions();
 
-  /// \short Function to set the periodicity between two octrees and assign
+  ///  Function to set the periodicity between two octrees and assign
   /// the up and right equivalents to both elements
   void set_neighbour_periodic_and_up_right_equivalents(FiniteElement* el0_pt,
       FiniteElement* el1_pt,
       const int& direction0);
 
-  /// \short Complete problem setup; make all the elements fully functional
+  ///  Complete problem setup; make all the elements fully functional
   /// by passing pointers to all physical parameters
   void complete_problem_setup();
 
@@ -290,7 +290,7 @@ UnsteadyHeatProblem<ELEMENT>::~UnsteadyHeatProblem()
 
 
 //======start_of_create_spacetime_mesh======================================
-/// \short Helper function to create the space-time mesh (to be assigned to
+///  Helper function to create the space-time mesh (to be assigned to
 /// Bulk_mesh_pt) with the chosen number of elements in the time direction
 /// and an appropriate spatial resolution (to capture the time-periodic
 /// solution properly).
@@ -346,7 +346,7 @@ void UnsteadyHeatProblem<ELEMENT>::complete_problem_setup()
 
 
 //======start_of_apply_boundary_conditions=================================
-/// \short Apply the Dirichlet conditions on the spatial boundaries and
+///  Apply the Dirichlet conditions on the spatial boundaries and
 /// the initial time boundary, if specified, otherwise apply time-periodic
 /// boundary conditions on the time boundaries. More explicitly:
 ///             Boundary 0 (t=0) -- Dirichlet or time-periodic BCs
@@ -425,7 +425,7 @@ void UnsteadyHeatProblem<ELEMENT>::apply_boundary_conditions()
 
 
 //======start_of_enforce_time_periodic_boundary_conditions=================
-/// \short Assign the appropriate boundary conditions, i.e. periodicity
+///  Assign the appropriate boundary conditions, i.e. periodicity
 /// in the t-direction. In the x and y-direction apply Dirichlet boundary
 /// conditions. In summary:
 ///             Boundary 0 (t=0) -- Periodic in time (w.r.t. boundary 5)

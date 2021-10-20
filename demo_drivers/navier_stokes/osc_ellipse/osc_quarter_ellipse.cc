@@ -39,7 +39,7 @@ using namespace std;
 using namespace oomph;
 
 //============start_of_MyEllipse===========================================
-/// \short Oscillating ellipse
+///  Oscillating ellipse
 /// \f[ x = (A + \widehat{A} \cos(2\pi t/T)) \cos(\xi)  \f]
 /// \f[ y = \frac{\sin(\xi)}{A + \widehat{A} \cos(2\pi t/T)}   \f]
 /// Note that cross-sectional area is conserved.
@@ -49,7 +49,7 @@ class MyEllipse : public GeomObject
 
 public:
 
- /// \short Constructor:  Pass initial x-half axis, amplitude of x-variation, 
+ ///  Constructor:  Pass initial x-half axis, amplitude of x-variation, 
  /// period of oscillation and pointer to time object.
  MyEllipse(const double& a, const double& a_hat,
            const double& period, Time* time_pt) : 
@@ -58,7 +58,7 @@ public:
  /// Destructor: Empty
  virtual ~MyEllipse() {}
 
- /// \short Current position vector to material point at 
+ ///  Current position vector to material point at 
  /// Lagrangian coordinate xi 
  void position(const Vector<double>& xi, Vector<double>& r) const
   {
@@ -71,7 +71,7 @@ public:
    r[1] = (1.0/axis)*sin(xi[0]);
   } 
 
- /// \short Parametrised position on object: r(xi). Evaluated at
+ ///  Parametrised position on object: r(xi). Evaluated at
  /// previous time level. t=0: current time; t>0: previous
  /// time level.
  void position(const unsigned& t, const Vector<double>& xi,
@@ -189,7 +189,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Update problem specs before solve (empty)
+ ///  Update problem specs before solve (empty)
  void actions_before_newton_solve() {} 
  
  /// Actions before adapt (empty)
@@ -212,7 +212,7 @@ public:
   } // end of actions_after_adapt
 
 
- /// \short Update the problem specs before next timestep
+ ///  Update the problem specs before next timestep
  void actions_before_implicit_timestep()
   {
    // Update the domain shape
@@ -241,7 +241,7 @@ public:
  /// Timestepping loop
  void unsteady_run(DocInfo& doc_info);
 
- /// \short Set initial condition
+ ///  Set initial condition
  void set_initial_condition();
 
 private:
@@ -385,7 +385,7 @@ OscEllipseProblem<ELEMENT,TIMESTEPPER>::OscEllipseProblem()
 
 
 //======================start_of_set_initial_condition====================
-/// \short Set initial condition: Assign previous and current values
+///  Set initial condition: Assign previous and current values
 /// from exact solution.
 //========================================================================
 template<class ELEMENT,class TIMESTEPPER>

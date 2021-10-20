@@ -29,14 +29,14 @@
 namespace oomph
 {
   //=============================================================================
-  /// \short Functions to create instances of optimal subsidiary operators for
+  ///  Functions to create instances of optimal subsidiary operators for
   /// the PseudoElasticPreconditioner
   //=============================================================================
   namespace Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
   {
 #ifdef OOMPH_HAS_HYPRE
 
-    /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
+    ///  AMG w/ GS smoothing for the augmented elastic subsidiary linear
     /// systems
     Preconditioner* get_elastic_preconditioner_hypre()
     {
@@ -61,7 +61,7 @@ namespace oomph
     }
 
 
-    /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
+    ///  AMG w/ GS smoothing for the augmented elastic subsidiary linear
     /// systems -- calls Hypre version to stay consistent with previous default
     Preconditioner* get_elastic_preconditioner()
     {
@@ -72,7 +72,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRILINOS
 
-    /// \short TrilinosML smoothing for the augmented elastic
+    ///  TrilinosML smoothing for the augmented elastic
     /// subsidiary linear systems
     Preconditioner* get_elastic_preconditioner_trilinos_ml()
     {
@@ -80,7 +80,7 @@ namespace oomph
       return trilinos_prec_pt;
     }
 
-    /// \short CG with diagonal preconditioner for the lagrange multiplier
+    ///  CG with diagonal preconditioner for the lagrange multiplier
     /// subsidiary linear systems.
     Preconditioner* get_lagrange_multiplier_preconditioner()
     {
@@ -488,7 +488,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Apply the elastic subsidiary preconditioner.
+  ///  Apply the elastic subsidiary preconditioner.
   //=============================================================================
   void PseudoElasticPreconditioner::elastic_preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)
@@ -498,7 +498,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Apply the lagrange multiplier subsidiary preconditioner.
+  ///  Apply the lagrange multiplier subsidiary preconditioner.
   //=============================================================================
   void PseudoElasticPreconditioner::lagrange_multiplier_preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)
@@ -522,7 +522,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Clears the memory.
+  ///  Clears the memory.
   //=============================================================================
   void PseudoElasticPreconditioner::clean_up_memory()
   {
@@ -746,7 +746,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Apply the elastic subsidiary preconditioner.
+  ///  Apply the elastic subsidiary preconditioner.
   //=============================================================================
   void PseudoElasticPreconditionerOld::elastic_preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)
@@ -757,7 +757,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Apply the lagrange multiplier subsidiary preconditioner.
+  ///  Apply the lagrange multiplier subsidiary preconditioner.
   //=============================================================================
   void PseudoElasticPreconditionerOld::lagrange_multiplier_preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)
@@ -781,7 +781,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Clears the memory.
+  ///  Clears the memory.
   //=============================================================================
   void PseudoElasticPreconditionerOld::clean_up_memory()
   {
@@ -808,7 +808,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Setup the preconditioner
+  ///  Setup the preconditioner
   //=============================================================================
   void PseudoElasticPreconditionerSubsidiaryPreconditionerOld::setup()
   {
@@ -891,7 +891,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Apply the preconditioner.
+  ///  Apply the preconditioner.
   //=============================================================================
   void PseudoElasticPreconditionerSubsidiaryPreconditionerOld::
     preconditioner_solve(const DoubleVector& r, DoubleVector& z)
@@ -946,7 +946,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Setup the preconditioner.
+  ///  Setup the preconditioner.
   //=============================================================================
   void PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld::setup()
   {

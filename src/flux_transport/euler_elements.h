@@ -45,29 +45,29 @@ namespace oomph
   template<unsigned DIM>
   class EulerEquations : public FluxTransportEquations<DIM>
   {
-    //\short Default value for gamma (initialised to 1.4)
+    // Default value for gamma (initialised to 1.4)
     static double Default_Gamma_Value;
 
     // Pointer to the specific gas constant
     double* Gamma_pt;
 
-    /// \short Storage for the average primitive values
+    ///  Storage for the average primitive values
     double* Average_prim_value;
 
-    /// \short Storage for the approximated gradients
+    ///  Storage for the approximated gradients
     double* Average_gradient;
 
   protected:
-    /// \short DIM momentum-components, a density and an energy are transported
+    ///  DIM momentum-components, a density and an energy are transported
     inline unsigned nflux() const
     {
       return DIM + 2;
     }
 
-    /// \short Return the flux as a function of the unknown
+    ///  Return the flux as a function of the unknown
     void flux(const Vector<double>& u, DenseMatrix<double>& f);
 
-    /// \short Return the flux derivatives as a function of the unknowns
+    ///  Return the flux derivatives as a function of the unknowns
     // void dflux_du(const Vector<double> &u, RankThreeTensor<double> &df_du);
 
   public:
@@ -99,25 +99,25 @@ namespace oomph
     /// Calculate the pressure from the unknowns
     double pressure(const Vector<double>& u) const;
 
-    /// \short Return the value of gamma
+    ///  Return the value of gamma
     double gamma() const
     {
       return *Gamma_pt;
     }
 
-    /// \short Access function for the pointer to gamma
+    ///  Access function for the pointer to gamma
     double*& gamma_pt()
     {
       return Gamma_pt;
     }
 
-    /// \short Access function for the pointer to gamma (const version)
+    ///  Access function for the pointer to gamma (const version)
     double* const& gamma_pt() const
     {
       return Gamma_pt;
     }
 
-    ///\short The number of unknowns at each node is the number of flux
+    /// The number of unknowns at each node is the number of flux
     /// components
     inline unsigned required_nvalue(const unsigned& n) const
     {
@@ -198,7 +198,7 @@ namespace oomph
     }
 
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
@@ -206,7 +206,7 @@ namespace oomph
       output(outfile, nplot);
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
@@ -226,7 +226,7 @@ namespace oomph
       }
     }
 
-    /// \short Return access to the average gradient
+    ///  Return access to the average gradient
     double& average_gradient(const unsigned& i, const unsigned& j)
     {
       if (Average_gradient == 0)
@@ -238,7 +238,7 @@ namespace oomph
       return Average_gradient[DIM * i + j];
     }
 
-    /// \short Return the average values
+    ///  Return the average values
     double& average_prim_value(const unsigned& i)
     {
       if (Average_prim_value == 0)
@@ -257,7 +257,7 @@ namespace oomph
                                 public virtual EulerEquations<DIM>
   {
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    ///  Constructor: Call constructors for QElement and
     /// Advection Diffusion equations
     QSpectralEulerElement()
       : QSpectralElement<DIM, NNODE_1D>(), EulerEquations<DIM>()
@@ -278,14 +278,14 @@ namespace oomph
      const QSpectralEulerElement<DIM,NNODE_1D>&) = delete;*/
 
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
       EulerEquations<DIM>::output(outfile);
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -293,21 +293,21 @@ namespace oomph
     }
 
 
-    /*/// \short C-style output function:
+    /*///  C-style output function:
    ///  x,y,u   or    x,y,z,u
    void output(FILE* file_pt)
     {
      EulerEquations<NFLUX,DIM>::output(file_pt);
     }
 
-   ///  \short C-style output function:
+   ///   C-style output function:
    ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
    void output(FILE* file_pt, const unsigned &n_plot)
     {
      EulerEquations<NFLUX,DIM>::output(file_pt,n_plot);
     }
 
-   /// \short Output function for an exact solution:
+   ///  Output function for an exact solution:
    ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
    void output_fct(std::ostream &outfile, const unsigned &n_plot,
                    FiniteElement::SteadyExactSolutionFctPt
@@ -317,7 +317,7 @@ namespace oomph
       output_fct(outfile,n_plot,exact_soln_pt);}
 
 
-   /// \short Output function for a time-dependent exact solution.
+   ///  Output function for a time-dependent exact solution.
    ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
    /// (Calls the steady version)
    void output_fct(std::ostream &outfile, const unsigned &n_plot,
@@ -340,7 +340,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const;
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    ///  Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_flux_transport(
       const unsigned& ipt,
@@ -354,7 +354,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Define the shape functions and test functions and derivatives
+  ///  Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// Galerkin: Test functions = shape functions
@@ -418,7 +418,7 @@ namespace oomph
 
 
   //=======================================================================
-  /// \short Face geometry for the QEulerElement elements:
+  ///  Face geometry for the QEulerElement elements:
   /// The spatial dimension of the face elements is one lower than that
   /// of the bulk element but they have the same number of points along
   /// their 1D edges.
@@ -428,7 +428,7 @@ namespace oomph
     : public virtual QSpectralElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };
@@ -465,7 +465,7 @@ namespace oomph
     }
 
     /// Specify the value of nodal zeta from the face geometry
-    /// \short The "global" intrinsic coordinate of the element when
+    ///  The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
@@ -689,7 +689,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short FaceElement for Discontinuous Galerkin Problems with reflection
+  ///  FaceElement for Discontinuous Galerkin Problems with reflection
   /// boundary conditions
   //======================================================================
   template<class ELEMENT>
@@ -714,7 +714,7 @@ namespace oomph
 
 
     /// Specify the value of nodal zeta from the face geometry
-    /// \short The "global" intrinsic coordinate of the element when
+    ///  The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
@@ -822,7 +822,7 @@ namespace oomph
     }
 
 
-    ///\short Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,
@@ -949,7 +949,7 @@ namespace oomph
     }
 
 
-    ///\short Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,

@@ -60,7 +60,7 @@ namespace Global_Variables
  /// By default we're dumping the matrices for comparison
  bool Dump_matrices=true;
 
- /// \short Halt code execution at the end of the most memory-intensive 
+ ///  Halt code execution at the end of the most memory-intensive 
  /// phase?
  bool Halt_code=false;
 
@@ -117,7 +117,7 @@ public:
  void actions_after_newton_solve(){}
 
 
- /// \short Update the problem specs before solve.
+ ///  Update the problem specs before solve.
  /// Re-set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve()
   {

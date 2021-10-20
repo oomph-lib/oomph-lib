@@ -56,12 +56,12 @@ namespace Global_Physical_Variables
  /// The Strouhal number
  double St = 1.0;
 
- /// \short Ratio of poro-elastic fluid to Navier-Stokes fluid densities -- 
+ ///  Ratio of poro-elastic fluid to Navier-Stokes fluid densities -- 
  /// almost certainly one; we allow a variable value to be able to switch off
  /// wall inertia without having to set the Reynolds number to zero.
  double Poro_elastic_to_navier_stokes_fluid_density=1.0;
 
- /// \short The Womersley number -- dependent parameter; compute
+ ///  The Womersley number -- dependent parameter; compute
  /// from Re and St
  double Wo = 0.0;
 
@@ -75,14 +75,14 @@ namespace Global_Physical_Variables
  /// from Re, Q and density ratio
  double Lambda_sq=0.0;
 
- /// \short Non-dim permeability -- ratio of typical porous flux to fluid veloc
+ ///  Non-dim permeability -- ratio of typical porous flux to fluid veloc
  /// scale
  double Permeability=5.0; 
 
  /// Poisson's ratio of drained poro-elastic medium
  double Nu = 0.35;
 
- /// \short Define the non-dimensional Young's modulus (ratio of actual 
+ ///  Define the non-dimensional Young's modulus (ratio of actual 
  /// Young's modulus to the one used to non-dimensionalise (poro-elastic)
  /// stresses
  double E = 1.0;
@@ -93,7 +93,7 @@ namespace Global_Physical_Variables
  /// Porosity
  double Porosity=0.18; 
 
- /// \short Ratio of the densities of the fluid and solid phases of
+ ///  Ratio of the densities of the fluid and solid phases of
  /// the poroelastic material
  double Density_ratio_poro=1.0; 
 
@@ -109,7 +109,7 @@ namespace Global_Physical_Variables
  /// mu - second Lame parameter  -- dependent parameter; compute from nu
  double Mu_lame = 0.0;
 
- /// \short Ratio of the pore fluid density to the compound density --
+ ///  Ratio of the pore fluid density to the compound density --
  /// dependent parameter compute from density ratio and porosity.
  double Rho_f_over_rho = 0.0;
 
@@ -140,18 +140,18 @@ namespace Global_Physical_Variables
  /// Constant inlet pressure (for steady Poiseuille flow)
  double P_inlet_initial=500.0; // Length*4.0/(Inner_radius*Inner_radius);
 
- /// \short Actual (possibly time varying) inlet pressure -- initialised to
+ ///  Actual (possibly time varying) inlet pressure -- initialised to
  /// P_inlet_initial.
  double P_inlet_const=P_inlet_initial;
 
- /// \short Increment for pressure (default: double the inlet pressure 
+ ///  Increment for pressure (default: double the inlet pressure 
  /// over duration of then tanh step)
  double P_inlet_step=P_inlet_initial;
 
- /// \short Parameter for tanh origin for pressure incrementation
+ ///  Parameter for tanh origin for pressure incrementation
  double T_tanh=0.25; 
 
- /// \short Steepness parameter for tanh for pressure incrementation
+ ///  Steepness parameter for tanh for pressure incrementation
  double Alpha_tanh=100.0;
 
  /// FSI parameter
@@ -288,7 +288,7 @@ namespace Global_Physical_Variables
 
  }
 
- /// \short Global function that completes the edge sign setup
+ ///  Global function that completes the edge sign setup
  template<class ELEMENT>
  void edge_sign_setup(Mesh* mesh_pt)
  {
@@ -355,7 +355,7 @@ public:
  /// Create the poroelasticity traction/pressure elements
  void create_poro_face_elements();
 
- /// \short Update the problem specs before next timestep. Increase
+ ///  Update the problem specs before next timestep. Increase
  /// inlet pressure
  void actions_before_implicit_timestep()
   {
@@ -402,18 +402,18 @@ private:
  /// Id for Lagrange multiplier that enforces (no-)slip on fluid
  unsigned Lagrange_id;
 
- /// \short Mesh as geom object representation of fluid mesh
+ ///  Mesh as geom object representation of fluid mesh
  MeshAsGeomObject* Fluid_mesh_geom_obj_pt;
 
- /// \short Vector of pairs containing pointers to elements and
+ ///  Vector of pairs containing pointers to elements and
  /// local coordinates within them for regularly spaced plot points
  Vector<std::pair<FLUID_ELEMENT*,Vector<double> > > 
  Fluid_regularly_spaced_plot_point;
 
- /// \short Mesh as geom object representation of solid mesh
+ ///  Mesh as geom object representation of solid mesh
  MeshAsGeomObject* Solid_mesh_geom_obj_pt;
 
- /// \short Vector of pairs containing pointers to elements and
+ ///  Vector of pairs containing pointers to elements and
  /// local coordinates within them for regularly spaced plot points
  Vector<std::pair<POROELASTICITY_ELEMENT*,Vector<double> > > 
  Solid_regularly_spaced_plot_point;
@@ -1046,7 +1046,7 @@ create_fluid_traction_elements()
 }
 
 //========================================================================
-/// \short Create the traction/pressure elements to the appropriate boundaries
+///  Create the traction/pressure elements to the appropriate boundaries
 /// of the poroelasticity mesh
 //========================================================================
 template<class FLUID_ELEMENT, class POROELASTICITY_ELEMENT>

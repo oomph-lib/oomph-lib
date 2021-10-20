@@ -248,7 +248,7 @@ public:
  ~RectangleWithHoleDomain(){}
 
 
- /// \short Helper function to interpolate linearly between the
+ ///  Helper function to interpolate linearly between the
  /// "right" and "left" points; \f$ s \in [-1,1] \f$
  void linear_interpolate(Vector<double> left, Vector<double> right,
                          const double &s, Vector<double> &f)
@@ -261,7 +261,7 @@ public:
 
    
 
- /// \short Parametrisation of macro element boundaries: f(s) is the position
+ ///  Parametrisation of macro element boundaries: f(s) is the position
  /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
  /// at the specfied discrete time level (time=0: present; time>0: previous)
  void macro_element_boundary(const unsigned &time,
@@ -1046,7 +1046,7 @@ public:
   }
  
  
- /// \short Destructor: Empty
+ ///  Destructor: Empty
  virtual ~RefineableRectangleWithHoleMesh() {}
  
 };
@@ -1062,7 +1062,7 @@ public:
   {}
 
  //Overload the fill contribution to jacobian
-  ///\short Compute the element's residual Vector and the jacobian matrix
+  /// Compute the element's residual Vector and the jacobian matrix
  /// Virtual function can be overloaded by hanging-node version
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -1098,7 +1098,7 @@ public:
  /// Destructor: clean up the memory
  ~FlowAroundCylinderProblem();
 
- /// \short Set the boundary conditions on the cylinder 
+ ///  Set the boundary conditions on the cylinder 
  /// and at the inlet
  void set_boundary_conditions()
   {
@@ -1198,7 +1198,7 @@ public:
 
  void actions_before_newton_convergence_check() {set_boundary_conditions();}
 
- /// \short Update the problem specs before solve (empty; all prescribed
+ ///  Update the problem specs before solve (empty; all prescribed
  /// velocities are constant along their respective boundares, therefore
  /// their FE interpolation onto the newly created nodes is sufficiently
  /// accurate)

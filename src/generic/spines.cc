@@ -142,7 +142,7 @@ namespace oomph
   }
 
   //====================================================================
-  /// \short Function to describe the dofs of the Spine. The ostream
+  ///  Function to describe the dofs of the Spine. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the

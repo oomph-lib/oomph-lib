@@ -59,7 +59,7 @@ class MyLinearElasticityElement : public virtual QLinearElasticityElement<DIM,3>
  
 public: 
 
- /// \short The number of "DOF types" that degrees of freedom in this element
+ ///  The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into: The displacement components
  unsigned ndof_types() const
   {
@@ -146,7 +146,7 @@ namespace Global_Parameters
  /// Amplitude of traction applied
  double Amplitude = 1.0;
 
- /// \short Specify problem to be solved (boundary conditons for finite or
+ ///  Specify problem to be solved (boundary conditons for finite or
  /// infinite domain).
  bool Finite=false;
 
@@ -194,7 +194,7 @@ class PeriodicLoadProblem : public Problem
 {
 public:
 
- /// \short Constructor: Pass number of elements in x and y directions 
+ ///  Constructor: Pass number of elements in x and y directions 
  /// and lengths
  PeriodicLoadProblem(const unsigned &nx, const unsigned &ny, 
                      const double &lx, const double &ly);

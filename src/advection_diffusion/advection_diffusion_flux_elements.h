@@ -44,7 +44,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short A class for elements that allow the imposition of an
+  ///  A class for elements that allow the imposition of an
   /// applied flux on the boundaries of Advection Diffusion elements.
   /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
   /// policy class.
@@ -54,19 +54,19 @@ namespace oomph
                                         public virtual FaceElement
   {
   public:
-    /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
+    ///  Function pointer to the prescribed-flux function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*AdvectionDiffusionPrescribedFluxFctPt)(
       const Vector<double>& x, double& flux);
 
 
-    /// \short Constructor, takes the pointer to the "bulk" element
+    ///  Constructor, takes the pointer to the "bulk" element
     /// and the index of the face to be created
     AdvectionDiffusionFluxElement(FiniteElement* const& bulk_el_pt,
                                   const int& face_index);
 
 
-    ///\short  Broken empty constructor
+    ///  Broken empty constructor
     AdvectionDiffusionFluxElement()
     {
       throw OomphLibError(
@@ -99,7 +99,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector and
+    ///  Add the element's contribution to its residual vector and
     /// its Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -110,7 +110,7 @@ namespace oomph
     }
 
     /// Specify the value of nodal zeta from the face geometry
-    /// \short The "global" intrinsic coordinate of the element when
+    ///  The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
@@ -121,14 +121,14 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
-    /// \short Output function -- forward to broken version in FiniteElement
+    ///  Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
-    /// \short Output function -- forward to broken version in FiniteElement
+    ///  Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& nplot)
     {
@@ -137,7 +137,7 @@ namespace oomph
 
 
   protected:
-    /// \short Function to compute the shape and test functions and to return
+    ///  Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test(const Vector<double>& s,
@@ -161,7 +161,7 @@ namespace oomph
     }
 
 
-    /// \short Function to compute the shape and test functions and to return
+    ///  Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test_at_knot(const unsigned& ipt,
@@ -185,7 +185,7 @@ namespace oomph
     }
 
 
-    /// \short Function to calculate the prescribed flux at a given spatial
+    ///  Function to calculate the prescribed flux at a given spatial
     /// position
     void get_flux(const Vector<double>& x, double& flux)
     {
@@ -202,7 +202,7 @@ namespace oomph
     }
 
   private:
-    /// \short Add the element's contribution to its residual vector.
+    ///  Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_adv_diff_flux(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
@@ -225,7 +225,7 @@ namespace oomph
 
 
   //===========================================================================
-  /// \short Constructor, takes the pointer to the "bulk" element and the index
+  ///  Constructor, takes the pointer to the "bulk" element and the index
   /// of the face to be created
   //===========================================================================
   template<class ELEMENT>

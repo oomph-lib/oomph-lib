@@ -59,7 +59,7 @@ namespace BL_Squash
  /// Fraction of points in boundary layer
  double Fract_in_BL=0.5;
 
- /// \short Mapping [0,1] -> [0,1] that re-distributes
+ ///  Mapping [0,1] -> [0,1] that re-distributes
  /// nodal points across the channel width
  double squash_fct(const double& s)
  {
@@ -126,7 +126,7 @@ class OscillatingWall : public GeomObject
 
 public:
 
- /// \short Constructor : It's a 2D object, parametrised by 
+ ///  Constructor : It's a 2D object, parametrised by 
  /// one Lagrangian coordinate. Arguments: height at ends, x-coordinate of 
  /// left end, length, amplitude of deflection, period of oscillation, and
  /// pointer to time object
@@ -148,17 +148,17 @@ public:
  double& period(){return T;}
  
 
- /// \short Set the flag so that the wall remains steady 
+ ///  Set the flag so that the wall remains steady 
  /// once it reaches maximum amplitude
  void enable_remain_steady_at_maximum_amplitude()
   {Remain_steady_at_maximum_amplitude = true;}
 
- /// \short Set the flag so that the wall continues to oscillate after it
+ ///  Set the flag so that the wall continues to oscillate after it
  /// reaches maximum amplitude
  void disable_remain_steady_at_maximum_amplitude()
   {Remain_steady_at_maximum_amplitude = false;}
 
- /// \short Position vector at Lagrangian coordinate zeta 
+ ///  Position vector at Lagrangian coordinate zeta 
  /// at time level t.
  void position(const unsigned& t, const Vector<double>&zeta, 
                Vector<double>& r) const
@@ -194,7 +194,7 @@ public:
   } // end of "unsteady" version
 
 
- /// \short "Current" position vector at Lagrangian coordinate zeta 
+ ///  "Current" position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>&zeta, Vector<double>& r) const
   {
    position (0, zeta, r);
@@ -278,7 +278,7 @@ class CollapsibleChannelProblem : public Problem
 
  public :
 
- /// \short Constructor : the arguments are the number of elements,
+ ///  Constructor : the arguments are the number of elements,
  /// the length of the domain and the amplitude and period of 
  ///the oscillations
  CollapsibleChannelProblem(const unsigned& nup, 
@@ -307,7 +307,7 @@ class CollapsibleChannelProblem : public Problem
 
   } // end of access to bulk mesh
 
- /// \short Access function to the pointer to the master impedance mesh which
+ ///  Access function to the pointer to the master impedance mesh which
  /// is used when using impedance boundary conditions with flux control elements
  Mesh* &outflow_impedance_master_mesh_pt()
   {
@@ -320,7 +320,7 @@ class CollapsibleChannelProblem : public Problem
  /// Run unsteady problem
  void unsteady_run(string directory_for_data, double nstep, const bool& validation_run=false);
 
- /// \short Refine any element whoes centre node lies between x coorodinates
+ ///  Refine any element whoes centre node lies between x coorodinates
  /// x_min and x_max
  void refine_elements_based_on_x_coord(const double& x_min, const double& x_max);
 
@@ -386,7 +386,7 @@ private :
  ///Number of elements in the x direction in the upstream part of the channel
  unsigned Nup;
 
- /// \short Number of elements in the x direction in the "collapsible" 
+ ///  Number of elements in the x direction in the "collapsible" 
  /// part of the channel
  unsigned Ncollapsible;
 
@@ -414,7 +414,7 @@ private :
  /// Pointer to the "bulk" mesh
  RefineableCollapsibleChannelMesh<ELEMENT>* Bulk_mesh_pt;
  
- /// \short Pointer to the "surface" mesh that contains the applied traction
+ ///  Pointer to the "surface" mesh that contains the applied traction
  /// elements at the inflow
  Mesh* Inflow_traction_mesh_pt; 
 
@@ -452,7 +452,7 @@ private :
  /// Amplitude of osciallation
  double Amplitude;
 
- /// \short Outflow boundary type:
+ ///  Outflow boundary type:
  /// 0: prescribed flux boundary conditions
  /// 1: impedance boundary conditions
  /// 2: prescribed outflow
@@ -780,7 +780,7 @@ void CollapsibleChannelProblem<ELEMENT>::actions_before_newton_solve()
 
 
 //============================================================================
-/// \short Refine any element whoes centre node lies between x coorodinates
+///  Refine any element whoes centre node lies between x coorodinates
 /// x_min and x_max
 //============================================================================
 template <class ELEMENT>

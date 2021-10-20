@@ -62,12 +62,12 @@ namespace oomph
     /// Destructor (empty)
     virtual ~MGProblem() {}
 
-    /// \short This function needs to be implemented in the derived problem:
+    ///  This function needs to be implemented in the derived problem:
     /// Returns a pointer to a new object of the same type as the derived
     /// problem
     virtual MGProblem* make_new_problem() = 0;
 
-    /// \short Function to get a pointer to the mesh we will be working
+    ///  Function to get a pointer to the mesh we will be working
     /// with. If there are flux elements present in the mesh this will
     /// be overloaded to return a pointer to the bulk mesh otherwise
     /// it can be overloaded to point to the global mesh but it must
@@ -89,11 +89,11 @@ namespace oomph
   class MGSolver : public IterativeLinearSolver
   {
   public:
-    /// \short typedef for a function that returns a pointer to an object
+    ///  typedef for a function that returns a pointer to an object
     /// of the class Smoother to be used as the pre-smoother
     typedef Smoother* (*PreSmootherFactoryFctPt)();
 
-    /// \short typedef for a function that returns a pointer to an object
+    ///  typedef for a function that returns a pointer to an object
     /// of the class Smoother to be used as the post-smoother
     typedef Smoother* (*PostSmootherFactoryFctPt)();
 
@@ -113,7 +113,7 @@ namespace oomph
       Post_smoother_factory_function_pt = post_smoother_fn;
     }
 
-    /// \short Constructor: Set up default values for number of V-cycles
+    ///  Constructor: Set up default values for number of V-cycles
     /// and pre- and post-smoothing steps.
     MGSolver(MGProblem* mg_problem_pt)
       : Nvcycle(200),
@@ -213,34 +213,34 @@ namespace oomph
       } // if (Has_been_setup)
     } // End of clean_up_memory
 
-    /// \short Makes a vector which will be used in the self-test. Is currently
+    ///  Makes a vector which will be used in the self-test. Is currently
     /// set to make the entries of the vector represent a plane wave propagating
     /// at an angle of 45 degrees
     void set_self_test_vector();
 
-    /// \short Makes a vector, restricts it down the levels of the hierarchy
+    ///  Makes a vector, restricts it down the levels of the hierarchy
     /// and documents it at each level. After this is done the vector is
     /// interpolated up the levels of the hierarchy with the output
     /// being documented at each level
     void self_test();
 
-    /// \short Make a self-test to make sure that the interpolation matrices
+    ///  Make a self-test to make sure that the interpolation matrices
     /// are doing the same thing to restrict the vectors down through the
     /// heirachy.
     void restriction_self_test();
 
-    /// \short Make a self-test to make sure that the interpolation matrices
+    ///  Make a self-test to make sure that the interpolation matrices
     /// are doing the same thing to interpolate the vectors up.
     void interpolation_self_test();
 
-    /// \short Given a level in the hierarchy, an input vector and a filename
+    ///  Given a level in the hierarchy, an input vector and a filename
     /// this function will document the given vector according to the structure
     /// of the mesh on the given level
     void plot(const unsigned& hierarchy_level,
               const DoubleVector& input_vector,
               const std::string& filename);
 
-    /// \short Disable all output from mg_solve apart from the number of
+    ///  Disable all output from mg_solve apart from the number of
     /// V-cycles used to solve the problem
     void disable_v_cycle_output()
     {
@@ -251,7 +251,7 @@ namespace oomph
       Suppress_v_cycle_output = true;
     } // End of disable_v_cycle_output
 
-    /// \short Suppress anything that can be suppressed, i.e. any timings.
+    ///  Suppress anything that can be suppressed, i.e. any timings.
     /// Things like mesh adaptation can not however be silenced using this
     void disable_output()
     {
@@ -272,7 +272,7 @@ namespace oomph
       oomph_info.stream_pt() = &oomph_nullstream;
     } // End of disable_output
 
-    /// \short Enable the output of the V-cycle timings and other output
+    ///  Enable the output of the V-cycle timings and other output
     void enable_v_cycle_output()
     {
       // Enable time documentation
@@ -282,7 +282,7 @@ namespace oomph
       Suppress_v_cycle_output = false;
     } // End of enable_v_cycle_output
 
-    /// \short Enable the output from anything that could have been suppressed
+    ///  Enable the output from anything that could have been suppressed
     void enable_doc_everything()
     {
       // Enable the documentation of everything (if this is set to TRUE then
@@ -291,7 +291,7 @@ namespace oomph
       Doc_everything = true;
     } // End of enable_doc_everything
 
-    /// \short Enable the output from anything that could have been suppressed
+    ///  Enable the output from anything that could have been suppressed
     void enable_output()
     {
       // Enable time documentation
@@ -304,7 +304,7 @@ namespace oomph
       Suppress_v_cycle_output = false;
     } // End of enable_output
 
-    /// \short Suppress the output of both smoothers and SuperLU
+    ///  Suppress the output of both smoothers and SuperLU
     void disable_smoother_and_superlu_doc_time()
     {
       // Loop over all levels of the hierarchy
@@ -340,7 +340,7 @@ namespace oomph
       return Npre_smooth;
     } // End of npre_smooth
 
-    /// \short Pre-smoother: Perform 'max_iter' smoothing steps on the
+    ///  Pre-smoother: Perform 'max_iter' smoothing steps on the
     /// linear system Ax=b with current RHS vector, b, starting with
     /// current solution vector, x. Return the residual vector r=b-Ax.
     /// Uses the default smoother (set in the MGProblem constructor)
@@ -358,7 +358,7 @@ namespace oomph
         Residual_mg_vectors_storage[level]);
     } // End of pre_smooth
 
-    /// \short Post-smoother: Perform max_iter smoothing steps on the
+    ///  Post-smoother: Perform max_iter smoothing steps on the
     /// linear system Ax=b with current RHS vector, b, starting with
     /// current solution vector, x. Uses the default smoother (set in
     /// the MGProblem constructor) which can be overloaded for specific
@@ -370,7 +370,7 @@ namespace oomph
         Rhs_mg_vectors_storage[level], X_mg_vectors_storage[level]);
     } // End of post_smooth
 
-    /// \short Return norm of residual r=b-Ax and the residual vector itself
+    ///  Return norm of residual r=b-Ax and the residual vector itself
     /// on the level-th level
     double residual_norm(const unsigned& level)
     {
@@ -387,7 +387,7 @@ namespace oomph
       return Residual_mg_vectors_storage[level].norm();
     } // End of residual_norm
 
-    /// \short Call the direct solver (SuperLU) to solve the problem exactly.
+    ///  Call the direct solver (SuperLU) to solve the problem exactly.
     // The result is placed in X_mg
     void direct_solve()
     {
@@ -396,7 +396,7 @@ namespace oomph
         Rhs_mg_vectors_storage[Nlevel - 1], X_mg_vectors_storage[Nlevel - 1]);
     } // End of direct_solve
 
-    /// \short Builds a CRDoubleMatrix that is used to interpolate the
+    ///  Builds a CRDoubleMatrix that is used to interpolate the
     /// residual between levels. The transpose can be used as the full
     /// weighting restriction.
     void interpolation_matrix_set(const unsigned& level,
@@ -414,7 +414,7 @@ namespace oomph
         ncol, nnz, value, col_index, row_st);
     } // End of interpolation_matrix_set
 
-    /// \short Builds a CRDoubleMatrix that is used to interpolate the
+    ///  Builds a CRDoubleMatrix that is used to interpolate the
     /// residual between levels. The transpose can be used as the full
     /// weighting restriction.
     void interpolation_matrix_set(const unsigned& level,
@@ -459,7 +459,7 @@ namespace oomph
       dist_pt = 0;
     } // End of interpolation_matrix_set
 
-    /// \short Builds a CRDoubleMatrix on each level that is used to
+    ///  Builds a CRDoubleMatrix on each level that is used to
     /// restrict the residual between levels. The transpose can be used
     /// as the interpolation matrix
     void set_restriction_matrices_as_interpolation_transposes()
@@ -476,35 +476,35 @@ namespace oomph
       }
     } // End of set_restriction_matrices_as_interpolation_transposes
 
-    /// \short Restrict residual (computed on level-th MG level) to the next
+    ///  Restrict residual (computed on level-th MG level) to the next
     /// coarser mesh and stick it into the coarse mesh RHS vector.
     void restrict_residual(const unsigned& level);
 
-    /// \short Interpolate solution at current level onto next finer mesh
+    ///  Interpolate solution at current level onto next finer mesh
     /// and correct the solution x at that level
     void interpolate_and_correct(const unsigned& level);
 
-    /// \short Given the son_type of an element and a local node number
+    ///  Given the son_type of an element and a local node number
     /// j in that element with nnode_1d nodes per coordinate direction,
     /// return the local coordinate s in its father element. Needed in
     /// the setup of the interpolation matrices
     void level_up_local_coord_of_node(const int& son_type, Vector<double>& s);
 
-    /// \short Setup the interpolation matrix on each level
+    ///  Setup the interpolation matrix on each level
     void setup_interpolation_matrices();
 
-    /// \short Setup the interpolation matrix on each level (used for
+    ///  Setup the interpolation matrix on each level (used for
     /// unstructured meshes)
     void setup_interpolation_matrices_unstructured();
 
-    /// \short Setup the transfer matrices on each level
+    ///  Setup the transfer matrices on each level
     void setup_transfer_matrices();
 
-    /// \short Do a full setup (assumes everything will be setup around the
+    ///  Do a full setup (assumes everything will be setup around the
     /// MGProblem pointer given in the constructor)
     void full_setup();
 
-    /// \short Virtual function in the base class that needs to be implemented
+    ///  Virtual function in the base class that needs to be implemented
     /// later but for now just leave it empty
     void solve(Problem* const& problem_pt, DoubleVector& result)
     {
@@ -606,63 +606,63 @@ namespace oomph
     } // End of iterations
 
   protected:
-    /// \short Do the actual solve -- this is called through the pure virtual
+    ///  Do the actual solve -- this is called through the pure virtual
     /// solve function in the LinearSolver base class. The function is stored
     /// as protected to allow the MGPreconditioner derived class to use the
     /// solver
     void mg_solve(DoubleVector& result);
 
-    /// \short Normalise the rows of the restriction matrices to avoid
+    ///  Normalise the rows of the restriction matrices to avoid
     /// amplifications when projecting to the coarser level
     void modify_restriction_matrices();
 
-    /// \short Maximum number of V-cycles (this is set as a protected variable
+    ///  Maximum number of V-cycles (this is set as a protected variable
     /// so
     // that it can be changed in the MGPreconditioner class)
     unsigned Nvcycle;
 
-    /// \short Pointer to the MG problem (deep copy). This is protected to
+    ///  Pointer to the MG problem (deep copy). This is protected to
     /// provide access to the MG preconditioner
     MGProblem* Mg_problem_pt;
 
-    /// \short Vector to store the RHS vectors (Rhs_mg). This is protected to
+    ///  Vector to store the RHS vectors (Rhs_mg). This is protected to
     /// allow the multigrid preconditioner to assign the RHS vector during
     /// preconditioner_solve()
     Vector<DoubleVector> Rhs_mg_vectors_storage;
 
-    /// \short Indicates whether or not the V-cycle output should be
+    ///  Indicates whether or not the V-cycle output should be
     /// suppressed. Needs to be protected member data for the multigrid
     /// preconditioner to know whether or not to output information
     /// with each preconditioning step
     bool Suppress_v_cycle_output;
 
-    /// \short If this is set to true then all output from the solver is
+    ///  If this is set to true then all output from the solver is
     /// suppressed. This is protected member data so that the multigrid
     /// preconditioner knows whether or not to restore the stream pointer
     bool Suppress_all_output;
 
-    /// \short Pointer to the output stream -- defaults to std::cout.
+    ///  Pointer to the output stream -- defaults to std::cout.
     /// This is protected member data to allow the preconditioner to
     /// restore normal output if everything was chosen to be
     /// suppressed by the user
     std::ostream* Stream_pt;
 
   private:
-    /// \short Function to create pre-smoothers
+    ///  Function to create pre-smoothers
     PreSmootherFactoryFctPt Pre_smoother_factory_function_pt;
 
-    /// \short Function to create post-smoothers
+    ///  Function to create post-smoothers
     PostSmootherFactoryFctPt Post_smoother_factory_function_pt;
 
-    /// \short Function to set up the hierachy of levels. Creates a vector
+    ///  Function to set up the hierachy of levels. Creates a vector
     /// of pointers to each MG level
     void setup_mg_hierarchy();
 
-    /// \short Function to set up the hierachy of levels. Creates a vector
+    ///  Function to set up the hierachy of levels. Creates a vector
     /// of pointers to each MG level
     void setup_mg_structures();
 
-    /// \short Function to set up all of the smoothers once the system matrices
+    ///  Function to set up all of the smoothers once the system matrices
     /// have been set up
     void setup_smoothers();
 
@@ -687,12 +687,12 @@ namespace oomph
     /// Vector to store the residual vectors
     Vector<DoubleVector> Residual_mg_vectors_storage;
 
-    /// \short Vector to store the result of interpolation on each level (only
+    ///  Vector to store the result of interpolation on each level (only
     /// required if the user wishes to document the output of interpolation
     /// and restriction on each level)
     Vector<DoubleVector> Interpolation_self_test_vectors_storage;
 
-    /// \short Vector to store the result of restriction on each level (only
+    ///  Vector to store the result of restriction on each level (only
     /// required if the user wishes to document the output of interpolation
     /// and restriction on each level)
     Vector<DoubleVector> Restriction_self_test_vectors_storage;
@@ -709,7 +709,7 @@ namespace oomph
     /// Number of post-smoothing steps
     unsigned Npost_smooth;
 
-    /// \short If this is set to true we document everything. In addition
+    ///  If this is set to true we document everything. In addition
     /// to outputting the information of the setup timings and V-cycle
     /// data we document the refinement and unrefinement patterns given
     /// by the transfer operators which is done by keeping the coarser
@@ -750,7 +750,7 @@ namespace oomph
     /// Broken assignment operator.
     void operator=(const MGPreconditioner&) = delete;
 
-    /// \short Function to set up a preconditioner for the linear system
+    ///  Function to set up a preconditioner for the linear system
     void setup()
     {
 #ifdef OOMPH_HAS_MPI
@@ -777,7 +777,7 @@ namespace oomph
       }
     } // End of setup
 
-    /// \short Function applies MG to the vector r for a full solve
+    ///  Function applies MG to the vector r for a full solve
     virtual void preconditioner_solve(const DoubleVector& rhs, DoubleVector& z)
     {
 #ifdef PARANOID
@@ -960,7 +960,7 @@ namespace oomph
   } // End of full_setup
 
   //===================================================================
-  /// \short Set up the MG hierarchy
+  ///  Set up the MG hierarchy
   //===================================================================
   // Function to set up the hierachy of levels. Creates a vector of
   // pointers to each MG level
@@ -1107,7 +1107,7 @@ namespace oomph
   } // End of setup_mg_hierarchy
 
   //===================================================================
-  /// \short Set up the transfer matrices. Both the pure injection and
+  ///  Set up the transfer matrices. Both the pure injection and
   /// full weighting method have been implemented here but it is highly
   /// recommended that full weighting is used in general. In both
   /// methods the transpose of the transfer matrix is used to transfer
@@ -1172,7 +1172,7 @@ namespace oomph
   } // End of setup_transfer_matrices function
 
   //===================================================================
-  /// \short Set up the MG hierarchy structures
+  ///  Set up the MG hierarchy structures
   //===================================================================
   // Function to set up the hierachy of levels. Creates a vector of
   // pointers to each MG level
@@ -1354,7 +1354,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short Set up the smoothers on all levels
+  ///  Set up the smoothers on all levels
   //=========================================================================
   template<unsigned DIM>
   void MGSolver<DIM>::setup_smoothers()
@@ -1504,7 +1504,7 @@ namespace oomph
 
 
   //===================================================================
-  /// \short Setup the interpolation matrices
+  ///  Setup the interpolation matrices
   //===================================================================
   template<unsigned DIM>
   void MGSolver<DIM>::setup_interpolation_matrices()
@@ -1826,7 +1826,7 @@ namespace oomph
   } // End of setup_interpolation_matrices
 
   //===================================================================
-  /// \short Setup the interpolation matrices
+  ///  Setup the interpolation matrices
   //===================================================================
   template<unsigned DIM>
   void MGSolver<DIM>::setup_interpolation_matrices_unstructured()
@@ -2011,7 +2011,7 @@ namespace oomph
   } // End of setup_interpolation_matrices_unstructured
 
   //===================================================================
-  /// \short Restrict residual (computed on current MG level) to
+  ///  Restrict residual (computed on current MG level) to
   /// next coarser mesh and stick it into the coarse mesh RHS vector
   /// using the restriction matrix (if restrict_flag=1) or the transpose
   /// of the interpolation matrix (if restrict_flag=2)
@@ -2036,7 +2036,7 @@ namespace oomph
   } // End of restrict_residual
 
   //===================================================================
-  /// \short Interpolate solution at current level onto
+  ///  Interpolate solution at current level onto
   /// next finer mesh and correct the solution x at that level
   //===================================================================
   template<unsigned DIM>
@@ -2064,7 +2064,7 @@ namespace oomph
   } // End of interpolate_and_correct
 
   //===================================================================
-  /// \short Modify the restriction matrices
+  ///  Modify the restriction matrices
   //===================================================================
   template<unsigned DIM>
   void MGSolver<DIM>::modify_restriction_matrices()
@@ -2126,7 +2126,7 @@ namespace oomph
   } // End of modify_restriction_matrices
 
   //===================================================================
-  /// \short Makes a vector, restricts it down the levels of the hierarchy
+  ///  Makes a vector, restricts it down the levels of the hierarchy
   /// and documents it at each level. After this is done the vector is
   /// interpolated up the levels of the hierarchy with the output
   /// being documented at each level
@@ -2212,7 +2212,7 @@ namespace oomph
   } // End of self_test
 
   //===================================================================
-  /// \short Sets the initial vector to be used in the restriction and
+  ///  Sets the initial vector to be used in the restriction and
   /// interpolation self-tests
   //===================================================================
   template<unsigned DIM>
@@ -2299,7 +2299,7 @@ namespace oomph
   } // End of set_self_test_vector
 
   //===================================================================
-  /// \short Function which implements a self-test to restrict the
+  ///  Function which implements a self-test to restrict the
   /// residual vector down all of the coarser grids and output
   /// the restricted vectors to file
   //===================================================================
@@ -2336,7 +2336,7 @@ namespace oomph
   } // End of restriction_self_test
 
   //=======================================================================
-  /// \short Function which implements a self-test to interpolate a
+  ///  Function which implements a self-test to interpolate a
   /// vector up all of levels of the MG hierarchy and outputs the
   /// restricted vectors to file
   //=======================================================================
@@ -2372,7 +2372,7 @@ namespace oomph
   } // End of interpolation_self_test
 
   //===================================================================
-  /// \short Plots the input vector (assuming we're dealing with scalar
+  ///  Plots the input vector (assuming we're dealing with scalar
   /// nodal data, otherwise I don't know how to implement this...)
   //===================================================================
   template<unsigned DIM>
@@ -2519,7 +2519,7 @@ namespace oomph
   } // End of plot
 
   //===================================================================
-  /// \short Linear solver
+  ///  Linear solver
   //===================================================================
   template<unsigned DIM>
   void MGSolver<DIM>::mg_solve(DoubleVector& result)

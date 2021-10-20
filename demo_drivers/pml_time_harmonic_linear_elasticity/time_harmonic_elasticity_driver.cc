@@ -116,7 +116,7 @@ namespace Global_Parameters
  /// Output directory
  string Directory="RESLT";
 
-/// \short Compute Hankel function of the first kind of orders 0...n and 
+///  Compute Hankel function of the first kind of orders 0...n and 
 /// its derivates  at coordinate x. The function returns the vector 
 /// then its derivative. 
  void Hankel_first(const unsigned& n, const double& x,
@@ -527,7 +527,7 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
  unsigned nel=this->mesh_pt()->nelement();
  for (unsigned e=0;e<nel;e++)
   {     
-   /// \short Upcast from PMLElement to time harmonic 
+   ///  Upcast from PMLElement to time harmonic 
    /// linear elasticity bulk element
    PMLTimeHarmonicLinearElasticityEquations<2> *el_pt = 
     dynamic_cast<PMLTimeHarmonicLinearElasticityEquations<2>*>
@@ -540,7 +540,7 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
    el_pt->omega_sq_pt()= &Global_Parameters::Omega_sq;
   } // end_of_assignment                        
  
- /// \short Boundaries with id 0 and 1 represent the interior boundary
+ ///  Boundaries with id 0 and 1 represent the interior boundary
  /// and these are the only ones that need to be processed, hence the loop
  /// below only considers nodes on these two boundaries.
  for(unsigned b=0;b<2;b++)

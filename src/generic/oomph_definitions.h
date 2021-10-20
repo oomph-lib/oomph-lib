@@ -98,7 +98,7 @@ namespace oomph
   //======================================================================
   namespace Global_timings
   {
-    /// \short Global boolean to switch on comprehensive timing -- can
+    ///  Global boolean to switch on comprehensive timing -- can
     /// probably be declared const false when development on hector
     /// is complete
     extern bool Doc_comprehensive_timings;
@@ -119,13 +119,13 @@ namespace oomph
     /// Setup terminate helper
     extern void setup();
 
-    /// \short Suppress error messages (e.g. because error has been caught)
+    ///  Suppress error messages (e.g. because error has been caught)
     extern void suppress_exception_error_messages();
 
     /// Function to spawn messages from uncaught errors
     extern void spawn_errors_from_uncaught_errors();
 
-    /// \short Clean up function that deletes anything dynamically allocated
+    ///  Clean up function that deletes anything dynamically allocated
     /// in this namespace
     extern void clean_up_memory();
 
@@ -148,7 +148,7 @@ namespace oomph
   class OomphLibQuietException : public std::runtime_error
   {
   public:
-    ///\short Constructor
+    /// Constructor
     OomphLibQuietException();
 
     /// The destructor cannot throw an exception (C++ STL standard)
@@ -173,7 +173,7 @@ namespace oomph
   class OomphLibException : public std::runtime_error
   {
   public:
-    /// \short Suppress issueing of the error message in destructor
+    ///  Suppress issueing of the error message in destructor
     /// (useful if error is caught successfully!)
     void disable_error_message()
     {
@@ -185,7 +185,7 @@ namespace oomph
     }
 
   protected:
-    ///\short Constructor takes the error description, function name
+    /// Constructor takes the error description, function name
     /// and a location string provided by the OOMPH_EXCEPTION_LOCATION
     /// macro and combines them into a standard header. The exception type
     /// will be the string "WARNING" or "ERROR" and the message is written to
@@ -208,7 +208,7 @@ namespace oomph
     /// String stream that records the error message
     std::stringstream* Exception_stringstream_pt;
 
-    /// \short Boolean to suppress issuing of the error message in destructor
+    ///  Boolean to suppress issuing of the error message in destructor
     /// (useful if error is caught successfully!)
     bool Suppress_error_message;
   };
@@ -227,7 +227,7 @@ namespace oomph
     static unsigned Output_width;
 
   public:
-    ///\short Constructor requires the error description and the function
+    /// Constructor requires the error description and the function
     /// in which the error occured and the location provided by the
     /// OOMPH_EXCEPTION_LOCATION macro
     OomphLibError(const std::string& error_description,
@@ -243,14 +243,14 @@ namespace oomph
     {
     }
 
-    /// \short Static member function used to specify the error stream,
+    ///  Static member function used to specify the error stream,
     /// which must be passed as a pointer because streams cannot be copied.
     static inline void set_stream_pt(std::ostream* const& stream_pt)
     {
       Stream_pt = stream_pt;
     }
 
-    /// \short Static member function used to specify the width (in characters)
+    ///  Static member function used to specify the width (in characters)
     /// of the error stream
     static inline void set_output_width(const unsigned& output_width)
     {
@@ -272,7 +272,7 @@ namespace oomph
     static unsigned Output_width;
 
   public:
-    ///\short Constructor requires the warning description and the function
+    /// Constructor requires the warning description and the function
     /// in which the warning occurred.
     OomphLibWarning(const std::string& warning_description,
                     const std::string& function_name,
@@ -287,14 +287,14 @@ namespace oomph
     {
     }
 
-    /// \short Static member function used to specify the error stream,
+    ///  Static member function used to specify the error stream,
     /// which must be passed as a pointer because streams cannot be copied.
     static inline void set_stream_pt(std::ostream* const& stream_pt)
     {
       Stream_pt = stream_pt;
     }
 
-    /// \short Static member function used to specify the width (in characters)
+    ///  Static member function used to specify the width (in characters)
     /// of the error stream
     static inline void set_output_width(const unsigned& output_width)
     {
@@ -344,7 +344,7 @@ namespace oomph
     /// Empty virtual destructor
     virtual ~OutputModifier() {}
 
-    /// \short Function that will be called before output from an
+    ///  Function that will be called before output from an
     /// OomphOutput object. It returns a bool (true in this default
     /// implementation) to indicate that output should be continued.
     virtual bool operator()(std::ostream& stream)
@@ -406,11 +406,11 @@ namespace oomph
   //=======================================================================
   namespace Global_string_for_annotation
   {
-    /// \short Return the i-th string or "" if the relevant string hasn't
+    ///  Return the i-th string or "" if the relevant string hasn't
     /// been defined
     extern std::string string(const unsigned& i);
 
-    /// \short Storage for strings that may be used for global annotations.
+    ///  Storage for strings that may be used for global annotations.
     /// This is global data and you use it at your own risk!
     extern std::vector<std::string> String;
   } // namespace Global_string_for_annotation
@@ -436,14 +436,14 @@ namespace oomph
     OutputModifier* Output_modifier_pt;
 
   public:
-    ///\short Set default values for the output stream (cout)
+    /// Set default values for the output stream (cout)
     /// and modifier (no modification)
     OomphInfo()
       : Stream_pt(&std::cout), Output_modifier_pt(&default_output_modifier)
     {
     }
 
-    ///\short Overload the << operator, writing output to the stream addressed
+    /// Overload the << operator, writing output to the stream addressed
     /// by Stream_pt and calling the function defined by the object addressed by
     /// Output_modifier_pt
     template<class _Tp>

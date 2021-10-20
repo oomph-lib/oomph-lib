@@ -56,7 +56,7 @@ using namespace oomph;
 namespace Global_Parameters
 {
 
- /// \short Body force
+ ///  Body force
  void body_force(const Vector<double>& x,
                  Vector<std::complex<double> >& b)
  {
@@ -322,7 +322,7 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
  unsigned nel=this->mesh_pt()->nelement();
  for (unsigned e=0;e<nel;e++)
   {     
-   /// \short Upcast from GeneralisedElement to time harmonic 
+   ///  Upcast from GeneralisedElement to time harmonic 
    /// linear elasticity bulk element
    PMLTimeHarmonicLinearElasticityEquations<2> *el_pt = 
     dynamic_cast<PMLTimeHarmonicLinearElasticityEquations<2>*>

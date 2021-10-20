@@ -169,7 +169,7 @@ namespace PlanarWave
 //=====================================================================
 namespace ProblemParameters
 {
- /// \short Square of the wavenumber
+ ///  Square of the wavenumber
  double K_squared=10.0;
  
  /// Fourier wave number
@@ -245,7 +245,7 @@ namespace ProblemParameters
  }//end of get_exact_u
 
  
- /// \short Get -du/dr (spherical r) for exact solution. Equal to prescribed
+ ///  Get -du/dr (spherical r) for exact solution. Equal to prescribed
  /// flux on inner boundary.
  void exact_minus_dudr(const Vector<double>& x, std::complex<double>& flux)
  {
@@ -338,7 +338,7 @@ public:
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
  
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ ///  Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
   
@@ -362,14 +362,14 @@ public:
   
 private:
  
- /// \short Create BC elements on outer boundary
+ ///  Create BC elements on outer boundary
  void create_outer_bc_elements();
  
  /// Create flux elements on inner boundary
  void create_flux_elements_on_inner_boundary();
  
  
- /// \short Delete boundary face elements and wipe the surface mesh
+ ///  Delete boundary face elements and wipe the surface mesh
  void delete_face_elements( Mesh* const & boundary_mesh_pt)
   {
    // Loop over the surface elements
@@ -397,7 +397,7 @@ private:
 
 #endif
   
- /// \short Pointer to mesh containing the DtN boundary
+ ///  Pointer to mesh containing the DtN boundary
  /// condition elements
  FourierDecomposedHelmholtzDtNMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
 

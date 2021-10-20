@@ -76,7 +76,7 @@ namespace oomph
     /// Index at which the i-th velocity component is stored
     Vector<unsigned> U_index_axisymmetric_nst_traction;
 
-    /// \short Pointer to an imposed traction function. Arguments:
+    ///  Pointer to an imposed traction function. Arguments:
     /// Eulerian coordinate; outer unit normal;
     /// applied traction. (Not all of the input arguments will be
     /// required for all specific load functions but the list should
@@ -87,7 +87,7 @@ namespace oomph
                             Vector<double>& result);
 
 
-    /// \short Get the traction vector: Pass number of integration point
+    ///  Get the traction vector: Pass number of integration point
     /// (dummy), Eulerian coordinate and normal vector and return the load
     /// vector (not all of the input arguments will be required for all specific
     /// load functions but the list should cover all cases). This function is
@@ -102,7 +102,7 @@ namespace oomph
     }
 
 
-    /// \short Helper function that actually calculates the residuals
+    ///  Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
@@ -111,7 +111,7 @@ namespace oomph
 
 
   public:
-    /// \short Constructor, which takes a "bulk" element and the
+    ///  Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     AxisymmetricNavierStokesTractionElement(FiniteElement* const& element_pt,
                                             const int& face_index)
@@ -165,7 +165,7 @@ namespace oomph
     }
 
     /// Specify the value of nodal zeta from the face geometry
-    /// \short The "global" intrinsic coordinate of the element when
+    ///  The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
@@ -176,14 +176,14 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile)
     {
       unsigned nplot = 5;
       output(outfile, nplot);
     }
 
-    /// \short Number of scalars/fields output by this element. Reimplements
+    ///  Number of scalars/fields output by this element. Reimplements
     /// broken virtual function in base class.
     unsigned nscalar_paraview() const
     {
@@ -193,7 +193,7 @@ namespace oomph
       return 2 * (n_dim + 1);
     }
 
-    /// \short Write values of the k-th scalar field at the plot points. Needs
+    ///  Write values of the k-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
     void scalar_value_paraview(std::ofstream& file_out,
                                const unsigned& k,
@@ -276,7 +276,7 @@ namespace oomph
       }
     }
 
-    /// \short Name of the i-th scalar field. Default implementation
+    ///  Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names in specific elements.
     std::string scalar_name_paraview(const unsigned& i) const
@@ -306,7 +306,7 @@ namespace oomph
       }
     }
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Number of dimensions
@@ -386,20 +386,20 @@ namespace oomph
       }
     }
 
-    /// \short C_style output function
+    ///  C_style output function
     void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
-    /// \short C-style output function
+    ///  C-style output function
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
 
-    /// \short Compute traction vector at specified local coordinate
+    ///  Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
     void traction(const double& time,
@@ -606,7 +606,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short A class for elements that allow the imposition of the linearised
+  ///  A class for elements that allow the imposition of the linearised
   /// FSI no slip condition from an adjacent linearly elastic axisymmetric
   /// solid. The element geometry is obtained from the FaceGeometry<ELEMENT>
   /// policy class.
@@ -618,7 +618,7 @@ namespace oomph
       public virtual ElementWithExternalElement
   {
   public:
-    /// \short Constructor, takes the pointer to the "bulk" element and the
+    ///  Constructor, takes the pointer to the "bulk" element and the
     /// face index identifying the face to which the element is attached.
     /// The optional identifier can be used
     /// to distinguish the additional nodal values created by
@@ -642,7 +642,7 @@ namespace oomph
       = delete;*/
 
 
-    /// \short Access function for the pointer to the fluid Strouhal number
+    ///  Access function for the pointer to the fluid Strouhal number
     /// (if not set, St defaults to 1)
     double*& st_pt()
     {
@@ -665,7 +665,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector and its
+    ///  Add the element's contribution to its residual vector and its
     /// Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -740,7 +740,7 @@ namespace oomph
 
 
   protected:
-    /// \short Function to compute the shape and test functions and to return
+    ///  Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test(const Vector<double>& s,
@@ -764,7 +764,7 @@ namespace oomph
     }
 
 
-    /// \short Function to compute the shape and test functions and to return
+    ///  Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test_at_knot(const unsigned& ipt,
@@ -789,7 +789,7 @@ namespace oomph
 
 
   private:
-    /// \short Add the element's contribution to its residual vector.
+    ///  Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     void fill_in_generic_residual_contribution_fsi_no_slip_axisym(
@@ -874,7 +874,7 @@ namespace oomph
 
 
   //===========================================================================
-  /// \short Helper function to compute the element's residual vector and
+  ///  Helper function to compute the element's residual vector and
   /// the Jacobian matrix.
   //===========================================================================
   template<class FLUID_BULK_ELEMENT, class SOLID_BULK_ELEMENT>

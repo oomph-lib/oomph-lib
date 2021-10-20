@@ -41,7 +41,7 @@
 namespace oomph
 {
   //====================================================================
-  /// \short 3D tube mesh class.
+  ///  3D tube mesh class.
   /// The domain is specified by the GeomObject that identifies
   /// the entire volume. Non-refineable base version!
   ///
@@ -56,7 +56,7 @@ namespace oomph
   class TubeMesh : public virtual BrickMeshBase
   {
   public:
-    /// \short Constructor: Pass pointer to geometric object that
+    ///  Constructor: Pass pointer to geometric object that
     /// specifies the volume, start and end coordinates for the centreline
     /// on the geometric object. Values of theta at which dividing lines
     /// are to be placed, fractions of the radius for the central box
@@ -70,7 +70,7 @@ namespace oomph
              const unsigned& nlayer,
              TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short Destructor: empty
+    ///  Destructor: empty
     virtual ~TubeMesh()
     {
       delete Domain_pt;
@@ -126,7 +126,7 @@ namespace oomph
 
   {
   public:
-    /// \short Constructor for adaptive deformable quarter tube mesh class.
+    ///  Constructor for adaptive deformable quarter tube mesh class.
     /// Pass pointer to geometric object that
     /// specifies the volume, start and end coordinates for the centreline
     /// on the geometric object. Values of theta at which dividing lines
@@ -186,7 +186,7 @@ namespace oomph
 #endif
     }
 
-    /// \short Destructor: empty
+    ///  Destructor: empty
     virtual ~RefineableTubeMesh() {}
   };
 

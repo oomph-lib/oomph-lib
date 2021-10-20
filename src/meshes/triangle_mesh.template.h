@@ -87,7 +87,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short Helper object for dealing with the parameters used for the
+  ///  Helper object for dealing with the parameters used for the
   /// TriangleMesh objects
   //=========================================================================
   class TriangleMeshParameters
@@ -165,7 +165,7 @@ namespace oomph
       return Internal_closed_curve_pt;
     }
 
-    /// \short Helper function for getting access to the internal
+    ///  Helper function for getting access to the internal
     /// closed boundaries
     Vector<TriangleMeshClosedCurve*>& internal_closed_curve_pt()
     {
@@ -178,7 +178,7 @@ namespace oomph
       return Internal_open_curves_pt;
     }
 
-    /// \short Helper function for getting access to the internal
+    ///  Helper function for getting access to the internal
     /// open boundaries
     Vector<TriangleMeshOpenCurve*>& internal_open_curves_pt()
     {
@@ -269,26 +269,26 @@ namespace oomph
       return Regions_areas;
     }
 
-    /// \short Helper function for enabling the use of attributes
+    ///  Helper function for enabling the use of attributes
     void enable_use_attributes()
     {
       Use_attributes = true;
     }
 
-    /// \short Helper function for disabling the use of attributes
+    ///  Helper function for disabling the use of attributes
     void disable_use_attributes()
     {
       Use_attributes = false;
     }
 
-    /// \short Helper function for getting the status of use_attributes
+    ///  Helper function for getting the status of use_attributes
     /// variable
     bool is_use_attributes() const
     {
       return Use_attributes;
     }
 
-    /// \short Helper function for enabling the use of boundary refinement
+    ///  Helper function for enabling the use of boundary refinement
     void enable_boundary_refinement()
     {
       Boundary_refinement = true;
@@ -312,31 +312,31 @@ namespace oomph
       return Comm_pt;
     }
 
-    /// \short Helper function for disabling the use of boundary refinement
+    ///  Helper function for disabling the use of boundary refinement
     void disable_boundary_refinement()
     {
       Boundary_refinement = false;
     }
 
-    /// \short Helper function for getting the status of boundary refinement
+    ///  Helper function for getting the status of boundary refinement
     bool is_boundary_refinement_allowed() const
     {
       return Boundary_refinement;
     }
 
-    /// \short Helper function for enabling the use of boundary refinement
+    ///  Helper function for enabling the use of boundary refinement
     void enable_internal_boundary_refinement()
     {
       Internal_boundary_refinement = true;
     }
 
-    /// \short Helper function for disabling the use of boundary refinement
+    ///  Helper function for disabling the use of boundary refinement
     void disable_internal_boundary_refinement()
     {
       Internal_boundary_refinement = false;
     }
 
-    /// \short Helper function for getting the status of boundary refinement
+    ///  Helper function for getting the status of boundary refinement
     bool is_internal_boundary_refinement_allowed() const
     {
       return Internal_boundary_refinement;
@@ -379,11 +379,11 @@ namespace oomph
     /// Store the coordinates for defining extra holes
     Vector<Vector<double>> Extra_holes_coordinates;
 
-    /// \short Store the coordinates for defining extra regions
+    ///  Store the coordinates for defining extra regions
     /// The key on the map is the region id
     std::map<unsigned, Vector<double>> Regions_coordinates;
 
-    /// \short Target areas for regions; defaults to 0.0 which (luckily)
+    ///  Target areas for regions; defaults to 0.0 which (luckily)
     /// implies "no specific target area" for triangle!
     std::map<unsigned, double> Regions_areas;
 
@@ -423,7 +423,7 @@ namespace oomph
   class TriangleMesh : public virtual TriangleMeshBase
   {
   public:
-    /// \short Empty constructor
+    ///  Empty constructor
     TriangleMesh()
     {
 #ifdef OOMPH_HAS_TRIANGLE_LIB
@@ -444,7 +444,7 @@ namespace oomph
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(2);
     }
 
-    /// \short Constructor with the input files
+    ///  Constructor with the input files
     TriangleMesh(
       const std::string& node_file_name,
       const std::string& element_file_name,
@@ -511,7 +511,7 @@ namespace oomph
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
   public:
-    /// \short Build mesh, based on the specifications on
+    ///  Build mesh, based on the specifications on
     /// TriangleMeshParameters
     TriangleMesh(TriangleMeshParameters& triangle_mesh_parameters,
                  TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
@@ -750,7 +750,7 @@ namespace oomph
       this->snap_nodes_onto_geometric_objects();
     }
 
-    /// \short Build mesh from poly file, with specified target
+    ///  Build mesh from poly file, with specified target
     /// area for all elements.
     TriangleMesh(
       const std::string& poly_file_name,
@@ -886,7 +886,7 @@ namespace oomph
 #endif
     }
 
-    /// \short Overload set_mesh_level_time_stepper so that the stored
+    ///  Overload set_mesh_level_time_stepper so that the stored
     /// time stepper now corresponds to the new timestepper
     void set_mesh_level_time_stepper(TimeStepper* const& time_stepper_pt,
                                      const bool& preserve_existing_data)
@@ -896,12 +896,12 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Compute the boundary segments connectivity for those
+    ///  Compute the boundary segments connectivity for those
     /// boundaries that were splited during the distribution process
     void compute_boundary_segments_connectivity_and_initial_zeta_values(
       const unsigned& b);
 
-    /// \short Re-assign the boundary segments initial zeta (arclength)
+    ///  Re-assign the boundary segments initial zeta (arclength)
     /// value for those internal boundaries that were splited during the
     /// distribution process. Those boundaries that have one face element
     /// at each side of the boundary
@@ -910,12 +910,12 @@ namespace oomph
       Vector<std::list<FiniteElement*>>& old_segment_sorted_ele_pt,
       std::map<FiniteElement*, bool>& old_is_inverted);
 
-    /// \short Re-scale the re-assigned zeta values for the boundary
+    ///  Re-scale the re-assigned zeta values for the boundary
     /// nodes, apply only for internal boundaries
     void re_scale_re_assigned_initial_zeta_values_for_internal_boundary(
       const unsigned& b);
 
-    /// \short Identify the segments from the old mesh (original mesh)
+    ///  Identify the segments from the old mesh (original mesh)
     /// in the new mesh (this) and assign initial and final boundary
     /// coordinates for the segments that create the boundary. (This is
     /// the version called from the original mesh to identify its own
@@ -926,19 +926,19 @@ namespace oomph
       const bool& is_internal_boundary,
       std::map<FiniteElement*, FiniteElement*>& face_to_bulk_element_pt);
 
-    /// \short Identify the segments from the old mesh (original mesh)
+    ///  Identify the segments from the old mesh (original mesh)
     /// in the new mesh (this) and assign initial and final boundary
     /// coordinates for the segments that create the boundary
     void identify_boundary_segments_and_assign_initial_zeta_values(
       const unsigned& b, TriangleMesh<ELEMENT>* original_mesh_pt);
 
-    /// \short In charge of sinchronize the boundary coordinates for
+    ///  In charge of sinchronize the boundary coordinates for
     /// internal boundaries that were split as part of the distribution
     /// process. Called after setup_boundary_coordinates() for the
     /// original mesh only
     void synchronize_boundary_coordinates(const unsigned& b);
 
-    /// \short Select face element from boundary using the criteria to
+    ///  Select face element from boundary using the criteria to
     /// decide which of the two face elements should be used on internal
     /// boundaries
     void select_boundary_face_elements(
@@ -947,14 +947,14 @@ namespace oomph
       bool& is_internal_boundary,
       std::map<FiniteElement*, FiniteElement*>& face_to_bulk_element_pt);
 
-    /// \short Return direct access to nodes associated with a boundary but
+    ///  Return direct access to nodes associated with a boundary but
     /// sorted in segments
     Vector<Vector<Node*>>& boundary_segment_node_pt(const unsigned& b)
     {
       return Boundary_segment_node_pt[b];
     }
 
-    /// \short Return direct access to nodes associated with a segment of
+    ///  Return direct access to nodes associated with a segment of
     /// a given boundary
     Vector<Node*>& boundary_segment_node_pt(const unsigned& b,
                                             const unsigned& s)
@@ -974,7 +974,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Update the TriangulateIO object to the current nodal position
+    ///  Update the TriangulateIO object to the current nodal position
     /// and the centre hole coordinates.
     void update_triangulateio(Vector<Vector<double>>& internal_point)
     {
@@ -995,7 +995,7 @@ namespace oomph
       update_triangulateio();
     }
 
-    /// \short Update the triangulateio object to the current nodal positions
+    ///  Update the triangulateio object to the current nodal positions
     void update_triangulateio()
     {
       // Get number of points
@@ -1056,7 +1056,7 @@ namespace oomph
 
 #endif // #ifdef OOMPH_HAS_MPI
 
-    /// \short Completely regenerate the mesh from the trianglateio structure
+    ///  Completely regenerate the mesh from the trianglateio structure
     void remesh_from_internal_triangulateio()
     {
       // Remove all the boundary node information
@@ -1168,7 +1168,7 @@ namespace oomph
 
 #endif
 
-    /// \short Return the vector that contains the oomph-lib node number
+    ///  Return the vector that contains the oomph-lib node number
     /// for all vertex nodes in the TriangulateIO representation of the mesh
     Vector<unsigned> oomph_vertex_nodes_id()
     {
@@ -1183,7 +1183,7 @@ namespace oomph
     bool Use_attributes;
 
   protected:
-    /// \short Target areas for regions; defaults to 0.0 which (luckily)
+    ///  Target areas for regions; defaults to 0.0 which (luckily)
     /// implies "no specific target area" for triangle!
     std::map<unsigned, double> Regions_areas;
 
@@ -1193,13 +1193,13 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Helper function to create TriangulateIO object (return in
+    ///  Helper function to create TriangulateIO object (return in
     /// triangulate_io) from the .poly file
     void build_triangulateio(const std::string& poly_file_name,
                              TriangulateIO& triangulate_io,
                              bool& use_attributes);
 
-    /// \short A general-purpose construction function that builds the
+    ///  A general-purpose construction function that builds the
     /// mesh once the different specific constructors have assembled the
     /// appropriate information.
     void generic_constructor(
@@ -1353,7 +1353,7 @@ namespace oomph
     /// Temporary scaffold mesh
     TriangleScaffoldMesh* Tmp_mesh_pt;
 
-    /// \short Vector storing oomph-lib node number
+    ///  Vector storing oomph-lib node number
     /// for all vertex nodes in the TriangulateIO representation of the mesh
     Vector<unsigned> Oomph_vertex_nodes_id;
 
@@ -1745,14 +1745,14 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Get the number of shared boundaries overlaping internal
+    ///  Get the number of shared boundaries overlaping internal
     /// boundaries
     const unsigned nshared_boundary_overlaps_internal_boundary()
     {
       return Shared_boundary_overlaps_internal_boundary.size();
     }
 
-    /// \short Checks if the shared boundary overlaps an internal boundary
+    ///  Checks if the shared boundary overlaps an internal boundary
     const bool shared_boundary_overlaps_internal_boundary(
       const unsigned& shd_bnd_id)
     {
@@ -1765,7 +1765,7 @@ namespace oomph
       return false;
     }
 
-    /// \short Gets the boundary id of the internal boundary that the
+    ///  Gets the boundary id of the internal boundary that the
     /// shared boundary lies on
     const unsigned shared_boundary_overlapping_internal_boundary(
       const unsigned& shd_bnd_id)
@@ -1790,7 +1790,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Gets the shared boundaries ids that overlap the given
+    ///  Gets the shared boundaries ids that overlap the given
     /// internal boundary
     void get_shared_boundaries_overlapping_internal_boundary(
       const unsigned& internal_bnd_id, Vector<unsigned>& shd_bnd_ids)
@@ -1828,14 +1828,14 @@ namespace oomph
 #endif
     }
 
-    /// \short Gets the storage that indicates if a shared boundary is part
+    ///  Gets the storage that indicates if a shared boundary is part
     /// of an internal boundary
     std::map<unsigned, unsigned>& shared_boundary_overlaps_internal_boundary()
     {
       return Shared_boundary_overlaps_internal_boundary;
     }
 
-    /// \short Helper function to verify if a given boundary was splitted
+    ///  Helper function to verify if a given boundary was splitted
     /// in the distribution process
     const bool boundary_was_splitted(const unsigned& b)
     {
@@ -1851,7 +1851,7 @@ namespace oomph
       }
     }
 
-    /// \short Gets the number of subpolylines that create the boundarya
+    ///  Gets the number of subpolylines that create the boundarya
     /// (useful only when the boundary is marked as split)
     const unsigned nboundary_subpolylines(const unsigned& b)
     {
@@ -1878,7 +1878,7 @@ namespace oomph
       return (*it).second.size();
     }
 
-    /// \short Gets the vector of auxiliar polylines that will represent
+    ///  Gets the vector of auxiliar polylines that will represent
     /// the given boundary (useful only when the boundaries were
     /// split)
     Vector<TriangleMeshPolyLine*>& boundary_subpolylines(const unsigned& b)
@@ -1904,7 +1904,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Returns the value that indicates if a subpolyline of a
+    ///  Returns the value that indicates if a subpolyline of a
     /// given boundary continues been used as internal boundary or should
     /// be changed as shared boundary
     const bool boundary_marked_as_shared_boundary(const unsigned& b,
@@ -1928,23 +1928,23 @@ namespace oomph
     /// The final boundary id for shared boundaries
     unsigned Final_shared_boundary_id;
 
-    /// \short Stores the boundaries ids created by the interaction of two
+    ///  Stores the boundaries ids created by the interaction of two
     /// processors Shared_boundaries_ids[iproc][jproc] = Vector of shared
     /// boundaries ids "iproc" processor shares boundaries with "jproc"
     /// processor
     Vector<Vector<Vector<unsigned>>> Shared_boundaries_ids;
 
-    /// \short Stores the processors involved in the generation of a shared
+    ///  Stores the processors involved in the generation of a shared
     /// boundary, in 2D two processors give rise to the creation of a
     /// shared boundary
     std::map<unsigned, Vector<unsigned>> Shared_boundary_from_processors;
 
-    /// \short Stores information about those shared boundaries that lie over or
+    ///  Stores information about those shared boundaries that lie over or
     /// over a segment of an internal boundary (only used when using
     /// internal boundaries in the domain)
     std::map<unsigned, unsigned> Shared_boundary_overlaps_internal_boundary;
 
-    /// \short Stores the polyline representation of the shared boundaries
+    ///  Stores the polyline representation of the shared boundaries
     /// Shared_boundary_polyline_pt[iproc][ncurve][npolyline] = polyline_pt
     Vector<Vector<Vector<TriangleMeshPolyLine*>>> Shared_boundary_polyline_pt;
 
@@ -1953,36 +1953,36 @@ namespace oomph
       Shared_boundary_polyline_pt.clear();
     }
 
-    ///\short Stores the boundary elements adjacent to the shared boundaries,
+    /// Stores the boundary elements adjacent to the shared boundaries,
     /// these
     /// elements are a subset of the halo and haloed elements
     std::map<unsigned, Vector<FiniteElement*>> Shared_boundary_element_pt;
 
-    /// \short For the e-th finite element on shared boundary b, this is
+    ///  For the e-th finite element on shared boundary b, this is
     /// the index of the face that lies along that boundary
     std::map<unsigned, Vector<int>> Face_index_at_shared_boundary;
 
-    /// \short Stores the boundary nodes adjacent to the shared boundaries,
+    ///  Stores the boundary nodes adjacent to the shared boundaries,
     /// these nodes are a subset of the halo and haloed nodes
     std::map<unsigned, Vector<Node*>> Shared_boundary_node_pt;
 
-    /// \short Flag to indicate if a polyline has been splitted during the
+    ///  Flag to indicate if a polyline has been splitted during the
     /// distribution process, the boundary id of the polyline is used to
     /// indicate if spplited
     std::map<unsigned, bool> Boundary_was_splitted;
 
-    /// \short The polylines that will temporary represent the boundary that was
+    ///  The polylines that will temporary represent the boundary that was
     /// splitted in the distribution process. Used to ease the sending of
     /// info. to Triangle during the adaptation process.
     std::map<unsigned, Vector<TriangleMeshPolyLine*>> Boundary_subpolylines;
 
-    ///\short Flag to indicate if an internal boundary will be used as shared
+    /// Flag to indicate if an internal boundary will be used as shared
     /// boundary
     /// because there is overlapping of the internal boundary with the shared
     /// boundary
     std::map<unsigned, std::vector<bool>> Boundary_marked_as_shared_boundary;
 
-    /// \short Creates the distributed domain representation. Joins the
+    ///  Creates the distributed domain representation. Joins the
     /// original boundaires, shared boundaries and creates connections among
     /// them to create the new polygons that represent the distributed
     /// domain
@@ -1990,19 +1990,19 @@ namespace oomph
       Vector<TriangleMeshPolygon*>& polygons_pt,
       Vector<TriangleMeshOpenCurve*>& open_curves_pt);
 
-    /// \short Sorts the polylines so they be continuous and then we can
+    ///  Sorts the polylines so they be continuous and then we can
     /// create a closed or open curve from them
     void sort_polylines_helper(
       Vector<TriangleMeshPolyLine*>& unsorted_polylines_pt,
       Vector<Vector<TriangleMeshPolyLine*>>& sorted_polylines_pt);
 
-    /// \short Take the polylines from the shared boundaries and create
+    ///  Take the polylines from the shared boundaries and create
     /// temporary polygon representations of the domain
     void create_tmp_polygons_helper(
       Vector<Vector<TriangleMeshPolyLine*>>& polylines_pt,
       Vector<TriangleMeshPolygon*>& polygons_pt);
 
-    ///\short Take the polylines from the original open curves and created
+    /// Take the polylines from the original open curves and created
     /// new temporaly representations of open curves with the bits of
     /// original curves not overlapped by shared boundaries
     void create_tmp_open_curves_helper(
@@ -2010,19 +2010,19 @@ namespace oomph
       Vector<TriangleMeshPolyLine*>& unsorted_shared_to_internal_poly_pt,
       Vector<TriangleMeshOpenCurve*>& open_curves_pt);
 
-    /// \short Flag to know if it is the first time we are going to compute the
+    ///  Flag to know if it is the first time we are going to compute the
     /// holes left by the halo elements
     bool First_time_compute_holes_left_by_halo_elements;
 
     /// Backup the original extra holes coordinates
     Vector<Vector<double>> Original_extra_holes_coordinates;
 
-    /// \short Compute the holes left by the halo elements, those
+    ///  Compute the holes left by the halo elements, those
     /// adjacent to the shared boundaries
     void compute_holes_left_by_halo_elements_helper(
       Vector<Vector<double>>& output_holes_coordinates);
 
-    /// \short Keeps those vertices that define a hole, those that are
+    ///  Keeps those vertices that define a hole, those that are
     /// inside closed internal boundaries in the new polygons that define the
     /// domain. Delete those outside/inside the outer polygons (this is
     /// required since Triangle can not deal with vertices that define
@@ -2031,7 +2031,7 @@ namespace oomph
       Vector<TriangleMeshPolygon*>& polygons_pt,
       Vector<Vector<double>>& output_holes_coordinates);
 
-    /// \short Check for any possible connections that the array of
+    ///  Check for any possible connections that the array of
     /// sorted nodes have with any previous boundaries or with
     /// itself. Return -1 if no connection was found, return -2 if the
     /// connection is with the same polyline, return the boundary id of
@@ -2049,12 +2049,12 @@ namespace oomph
       Node*& new_node_pt,
       const bool called_from_load_balance = false);
 
-    /// \short Establish the connections of the polylines previously marked
+    ///  Establish the connections of the polylines previously marked
     /// as having connections. This connections were marked in the function
     /// TriangleMesh::create_polylines_from_halo_elements_helper().
     void create_shared_polylines_connections();
 
-    /// \short Creates the shared boundaries
+    ///  Creates the shared boundaries
     void create_shared_boundaries(
       OomphCommunicator* comm_pt,
       const Vector<unsigned>& element_domain,
@@ -2063,7 +2063,7 @@ namespace oomph
       std::map<Data*, std::set<unsigned>>& processors_associated_with_data,
       const bool& overrule_keep_as_halo_element_status);
 
-    /// \short Creates the halo elements on all processors
+    ///  Creates the halo elements on all processors
     /// Gets the halo elements on all processors, these elements are then used
     /// on the function that computes the shared boundaries among the processors
     void get_halo_elements_on_all_procs(
@@ -2075,13 +2075,13 @@ namespace oomph
       std::map<GeneralisedElement*, unsigned>& element_to_global_index,
       Vector<Vector<Vector<GeneralisedElement*>>>& output_halo_elements_pt);
 
-    /// \short Get the element edges (pair of nodes, edges) that lie
+    ///  Get the element edges (pair of nodes, edges) that lie
     /// on a boundary (used to mark shared boundaries that lie on
     /// internal boundaries)
     void get_element_edges_on_boundary(
       std::map<std::pair<Node*, Node*>, unsigned>& element_edges_on_boundary);
 
-    /// \short Creates polylines from the intersection of halo elements
+    ///  Creates polylines from the intersection of halo elements
     /// on all processors. The new polylines define the shared boundaries
     /// in the domain This get the polylines on ALL processors, that is
     /// why the three dimensions
@@ -2094,7 +2094,7 @@ namespace oomph
       std::map<std::pair<Node*, Node*>, unsigned>& elements_edges_on_boundary,
       Vector<Vector<Vector<TriangleMeshPolyLine*>>>& output_polylines_pt);
 
-    /// \short Break any possible loop created by the sorted list of
+    ///  Break any possible loop created by the sorted list of
     /// nodes that is used to create a new shared polyline
     void break_loops_on_shared_polyline_helper(
       const unsigned& initial_shd_bnd_id,
@@ -2109,7 +2109,7 @@ namespace oomph
       Vector<int>& output_connect_to_the_left,
       Vector<int>& output_connect_to_the_right);
 
-    /// \short Break any possible loop created by the sorted list of
+    ///  Break any possible loop created by the sorted list of
     /// nodes that is used to create a new shared polyline (modified
     /// version for load balance)
     void break_loops_on_shared_polyline_load_balance_helper(
@@ -2127,7 +2127,7 @@ namespace oomph
       Vector<int>& output_connect_to_the_left,
       Vector<int>& output_connect_to_the_right);
 
-    /// \short Create the shared polyline and fill the data structured
+    ///  Create the shared polyline and fill the data structured
     /// that keep all the information associated with the creationg of the
     /// shared boundary
     void create_shared_polyline(
@@ -2192,7 +2192,7 @@ namespace oomph
       }
     };
 
-    /// \short 2D cross product of OA and OB vectors, i.e. z-component of their
+    ///  2D cross product of OA and OB vectors, i.e. z-component of their
     /// 3D cross product. Returns a positive value, if OAB makes a
     /// counter-clockwise turn, negative for clockwise turn, and zero if the
     /// points are collinear.
@@ -2201,7 +2201,7 @@ namespace oomph
       return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
     }
 
-    /// \short Returns a list of points on the convex hull in counter-clockwise
+    ///  Returns a list of points on the convex hull in counter-clockwise
     /// order. Note: the last point in the returned list is the same as the
     /// first one.
     std::vector<Point> convex_hull(std::vector<Point> P)
@@ -2248,13 +2248,13 @@ namespace oomph
                                  public virtual RefineableMeshBase
   {
   public:
-    /// \short Function pointer to function that updates the
+    ///  Function pointer to function that updates the
     /// mesh following the snapping of boundary nodes to the
     /// boundaries (e.g. to move boundary nodes very slightly
     /// to satisfy volume constraints)
     typedef void (*MeshUpdateFctPt)(Mesh* mesh_pt);
 
-    /// \short Function pointer to a function that can generate
+    ///  Function pointer to a function that can generate
     /// a point within the ihole-th hole, so that this can be
     /// overloaded by the user if they have a better way of
     /// doing it than our clunky default. The function
@@ -2265,7 +2265,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Build mesh, based on the specifications on
+    ///  Build mesh, based on the specifications on
     /// TriangleMeshParameters
     RefineableTriangleMesh(
       TriangleMeshParameters& triangle_mesh_parameters,
@@ -2281,7 +2281,7 @@ namespace oomph
 
 #endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Build mesh, based on the polyfiles
+    ///  Build mesh, based on the polyfiles
     RefineableTriangleMesh(
       const std::string& node_file_name,
       const std::string& element_file_name,
@@ -2309,7 +2309,7 @@ namespace oomph
   protected:
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Build mesh from specified triangulation and
+    ///  Build mesh from specified triangulation and
     /// associated target areas for elements in it
     /// NOTE: This is used ONLY during adaptation and should not be used
     /// as a method of constructing a TriangleMesh object in demo drivers!
@@ -2410,45 +2410,45 @@ namespace oomph
     /// Empty Destructor
     virtual ~RefineableTriangleMesh() {}
 
-    /// \short Enables info. and timings for tranferring of target
+    ///  Enables info. and timings for tranferring of target
     /// areas
     void enable_timings_tranfering_target_areas()
     {
       Print_timings_transfering_target_areas = true;
     }
 
-    /// \short Disables info. and timings for tranferring of target
+    ///  Disables info. and timings for tranferring of target
     /// areas
     void disable_timings_tranfering_target_areas()
     {
       Print_timings_transfering_target_areas = false;
     }
 
-    /// \short Enables the solution projection step during adaptation
+    ///  Enables the solution projection step during adaptation
     void enable_projection()
     {
       Disable_projection = false;
     }
 
-    /// \short Disables the solution projection step during adaptation
+    ///  Disables the solution projection step during adaptation
     void disable_projection()
     {
       Disable_projection = true;
     }
 
-    /// \short Enables info. and timings for projection
+    ///  Enables info. and timings for projection
     void enable_timings_projection()
     {
       Print_timings_projection = true;
     }
 
-    /// \short Disables info. and timings for projection
+    ///  Disables info. and timings for projection
     void disable_timings_projection()
     {
       Print_timings_projection = false;
     }
 
-    /// \short Read/write access to number of bins in the x-direction
+    ///  Read/write access to number of bins in the x-direction
     /// when transferring target areas by bin method. Only used if we
     /// don't have CGAL!
     unsigned& nbin_x_for_area_transfer()
@@ -2456,7 +2456,7 @@ namespace oomph
       return Nbin_x_for_area_transfer;
     }
 
-    /// \short Read/write access to number of bins in the y-direction
+    ///  Read/write access to number of bins in the y-direction
     /// when transferring target areas by bin method. Only used if we
     /// don't have CGAL!
     unsigned& nbin_y_for_area_transfer()
@@ -2464,7 +2464,7 @@ namespace oomph
       return Nbin_y_for_area_transfer;
     }
 
-    /// \short Read/write access to number of sample points from which
+    ///  Read/write access to number of sample points from which
     /// we try to locate zeta by Newton method when transferring target areas
     /// using cgal-based sample point container. If Newton method doesn't
     /// converge from any of these we use the nearest sample point.
@@ -2606,7 +2606,7 @@ namespace oomph
       Min_element_size = backup;
     }
 
-    /// \short Unrefine mesh uniformly: Return 0 for success,
+    ///  Unrefine mesh uniformly: Return 0 for success,
     /// 1 for failure (if unrefinement has reached the coarsest permitted
     /// level)
     unsigned unrefine_uniformly()
@@ -2621,7 +2621,7 @@ namespace oomph
     /// Adapt mesh, based on elemental error provided
     void adapt(const Vector<double>& elem_error);
 
-    /// \short Access to function pointer to function that updates the
+    ///  Access to function pointer to function that updates the
     /// mesh following the snapping of boundary nodes to the
     /// boundaries (e.g. to move boundary nodes very slightly
     /// to satisfy volume constraints)
@@ -2630,7 +2630,7 @@ namespace oomph
       return Mesh_update_fct_pt;
     }
 
-    /// \short Access to function pointer to can be
+    ///  Access to function pointer to can be
     /// used to generate the internal point for the ihole-th
     /// hole.
     InternalHolePointUpdateFctPt& internal_hole_point_update_fct_pt()
@@ -2699,11 +2699,11 @@ namespace oomph
                                          const std::string& poly_file_name);
 
 #ifdef OOMPH_HAS_MPI
-    // \short Fill the boundary elements structures when dealing with
+    //  Fill the boundary elements structures when dealing with
     // shared boundaries that overlap internal boundaries
     void fill_boundary_elements_and_nodes_for_internal_boundaries();
 
-    // \short Fill the boundary elements structures when dealing with
+    //  Fill the boundary elements structures when dealing with
     // shared boundaries that overlap internal boundaries. Document the
     // number of elements on the shared boundaries that go to internal
     // boundaries
@@ -2819,12 +2819,12 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Performs the load balancing for unstructured meshes, the
+    ///  Performs the load balancing for unstructured meshes, the
     /// load balancing strategy is based on mesh migration
     void load_balance(
       const Vector<unsigned>& input_target_domain_for_local_non_halo_element);
 
-    /// \short Use the first and second group of elements to find the
+    ///  Use the first and second group of elements to find the
     /// intersection between them to get the shared boundary
     /// elements from the first and second group
     void get_shared_boundary_elements_and_face_indexes(
@@ -2835,7 +2835,7 @@ namespace oomph
       Vector<FiniteElement*>& second_shared_boundary_element_pt,
       Vector<unsigned>& second_shared_boundary_element_face_index);
 
-    /// \short Creates the new shared boundaries, this method is also in
+    ///  Creates the new shared boundaries, this method is also in
     /// charge of computing the shared boundaries ids of each processor
     /// and send that info. to all the processors
     void create_new_shared_boundaries(
@@ -2843,14 +2843,14 @@ namespace oomph
       Vector<Vector<FiniteElement*>>& new_shared_boundary_element_pt,
       Vector<Vector<unsigned>>& new_shared_boundary_element_face_index);
 
-    /// \short Computes the degree of the nodes on the shared boundaries, the
+    ///  Computes the degree of the nodes on the shared boundaries, the
     /// degree of the node is computed from the global graph created by the
     /// shared boundaries of all processors
     void compute_shared_node_degree_helper(
       Vector<Vector<FiniteElement*>>& unsorted_face_ele_pt,
       std::map<Node*, unsigned>& global_node_degree);
 
-    /// \short Sort the nodes on the new shared boundaries (after load
+    ///  Sort the nodes on the new shared boundaries (after load
     /// balancing), computes the alias of the nodes and creates the adjacency
     /// matrix that represent the graph created by the shared edges between each
     /// pair of processors
@@ -2860,21 +2860,21 @@ namespace oomph
       std::map<Node*, Vector<Vector<unsigned>>>& node_alias,
       Vector<Vector<Vector<unsigned>>>& adjacency_matrix);
 
-    /// \short Get the nodes on the shared boundary (b), these are stored
+    ///  Get the nodes on the shared boundary (b), these are stored
     /// in the segment they belong
     void get_shared_boundary_segment_nodes_helper(
       const unsigned& shd_bnd_id, Vector<Vector<Node*>>& tmp_segment_nodes);
 
 #endif // #ifdef OOMPH_HAS_MPI
 
-    /// \short Get the nodes on the boundary (b), these are stored in
+    ///  Get the nodes on the boundary (b), these are stored in
     /// the segment they belong (also used by the load balance method
     /// to re-set the number of segments per boundary after load
     /// balance has taken place)
     void get_boundary_segment_nodes_helper(
       const unsigned& b, Vector<Vector<Node*>>& tmp_segment_nodes);
 
-    /// \short Enable/disable unrefinement/refinement methods for original
+    ///  Enable/disable unrefinement/refinement methods for original
     /// boundaries
     void enable_boundary_unrefinement_constrained_by_target_areas()
     {
@@ -2896,7 +2896,7 @@ namespace oomph
       Do_boundary_refinement_constrained_by_target_areas = false;
     }
 
-    /// \short Enable/disable unrefinement/refinement methods for shared
+    ///  Enable/disable unrefinement/refinement methods for shared
     /// boundaries
     void enable_shared_boundary_unrefinement_constrained_by_target_areas()
     {
@@ -2920,13 +2920,13 @@ namespace oomph
 
 
   protected:
-    /// \short A map that stores the vertices that receive connections, they
+    ///  A map that stores the vertices that receive connections, they
     /// are identified by the boundary number that receive the connection
     /// This is necessary for not erasing them on the adaptation process,
     /// specifically for the un-refinement process
     std::map<unsigned, std::set<Vector<double>>> Boundary_connections_pt;
 
-    /// \short Verifies if the given boundary receives a connection, and
+    ///  Verifies if the given boundary receives a connection, and
     /// if that is the case then returns the list of vertices that
     /// receive the connections
     const bool boundary_connections(const unsigned& b,
@@ -2949,17 +2949,17 @@ namespace oomph
       }
     }
 
-    /// \short Synchronise the vertices that are marked for non deletion
+    ///  Synchronise the vertices that are marked for non deletion
     //  on the shared boundaries. Unrefinement of shared boundaries is
     //  performed only if the candidate node is not marked for non deletion
     const void synchronize_shared_boundary_connections();
 
-    /// \short Mark the vertices that are not allowed for deletion by
+    ///  Mark the vertices that are not allowed for deletion by
     /// the unrefienment/refinement polyline methods. In charge of
     /// filling the Boundary_chunk_connections_pt structure
     void add_vertices_for_non_deletion();
 
-    /// \short Adds the vertices from the sources boundary that are
+    ///  Adds the vertices from the sources boundary that are
     /// repeated in the destination boundary to the list of non
     /// delete-able vertices in the destination boundary
     void add_non_delete_vertices_from_boundary_helper(
@@ -2968,14 +2968,14 @@ namespace oomph
       const unsigned& dst_bnd_id,
       const unsigned& dst_bnd_chunk);
 
-    /// \short After unrefinement and refinement has taken place compute
+    ///  After unrefinement and refinement has taken place compute
     /// the new vertices numbers of the temporary representation of the
     //  boundaries to connect.
     void create_temporary_boundary_connections(
       Vector<TriangleMeshPolygon*>& tmp_outer_polygons_pt,
       Vector<TriangleMeshOpenCurve*>& tmp_open_curves_pt);
 
-    /// \short After unrefinement and refinement has taken place compute
+    ///  After unrefinement and refinement has taken place compute
     /// the new vertices numbers of the boundaries to connect (in a
     /// distributed scheme it may be possible that the destination boundary
     /// does no longer exist, therefore the connection is suspended and
@@ -2984,7 +2984,7 @@ namespace oomph
       Vector<TriangleMeshPolyLine*>& resume_initial_connection_polyline_pt,
       Vector<TriangleMeshPolyLine*>& resume_final_connection_polyline_pt);
 
-    /// \short Restore the connections of the specific polyline
+    ///  Restore the connections of the specific polyline
     /// The vertices numbering on the destination boundaries may have
     /// change because of (un)refinement in the destination boundaries.
     /// Also deals with connection that do not longer exist because the
@@ -2995,7 +2995,7 @@ namespace oomph
       Vector<TriangleMeshPolyLine*>& resume_initial_connection_polyline_pt,
       Vector<TriangleMeshPolyLine*>& resume_final_connection_polyline_pt);
 
-    /// \short Resume the boundary connections that may have been
+    ///  Resume the boundary connections that may have been
     /// suspended because the destination boundary is no part of the
     /// domain. The connections are no permanently suspended because if
     /// load balance takes place the destination boundary may be part of
@@ -3005,14 +3005,14 @@ namespace oomph
       Vector<TriangleMeshPolyLine*>& resume_initial_connection_polyline_pt,
       Vector<TriangleMeshPolyLine*>& resume_final_connection_polyline_pt);
 
-    /// \short Computes the associated vertex number on the destination
+    ///  Computes the associated vertex number on the destination
     /// boundary
     bool get_connected_vertex_number_on_dst_boundary(
       Vector<double>& vertex_coordinates,
       const unsigned& dst_b_id,
       unsigned& vertex_number);
 
-    /// \short Helper function that performs the unrefinement process
+    ///  Helper function that performs the unrefinement process
     // on the specified boundary by using the provided vertices
     /// representation. Optional boolean is used to run it as test only (if
     /// true is specified as input) in which case vertex coordinates aren't
@@ -3024,7 +3024,7 @@ namespace oomph
                            double& unrefinement_tolerance,
                            const bool& check_only = false);
 
-    /// \short Helper function that performs the refinement process
+    ///  Helper function that performs the refinement process
     /// on the specified boundary by using the provided vertices
     /// representation. Optional boolean is used to run it as test only (if
     /// true is specified as input) in which case vertex coordinates aren't
@@ -3035,7 +3035,7 @@ namespace oomph
                          double& refinement_tolerance,
                          const bool& check_only = false);
 
-    // \short Helper function that applies the maximum length constraint
+    //  Helper function that applies the maximum length constraint
     // when it was specified. This will increase the number of points in
     // the current curve section in case that any segment on it does not
     // fulfils the requirement
@@ -3044,7 +3044,7 @@ namespace oomph
       Vector<Vector<double>>& vector_bnd_vertices,
       double& max_length_constraint);
 
-    /// \short Helper function that performs the unrefinement process on
+    ///  Helper function that performs the unrefinement process on
     /// the specified boundary by using the provided vertices
     /// representation and the associated target area. Used only when the
     /// 'allow_automatic_creation_of_vertices_on_boundaries' flag is set to
@@ -3056,7 +3056,7 @@ namespace oomph
       double& unrefinement_tolerance,
       Vector<double>& area_constraint);
 
-    /// \short Helper function that performs the refinement process on
+    ///  Helper function that performs the refinement process on
     /// the specified boundary by using the provided vertices
     /// representation and the associated elements target area. Used
     /// only when the 'allow_automatic_creation_of_vertices_on_boundaries'
@@ -3067,7 +3067,7 @@ namespace oomph
       double& refinement_tolerance,
       Vector<double>& area_constraint);
 
-    /// \short Helper function that performs the unrefinement process
+    ///  Helper function that performs the unrefinement process
     /// on the specified boundary by using the provided vertices
     /// representation and the associated target area.
     /// NOTE: This is the version that applies unrefinement to shared
@@ -3078,7 +3078,7 @@ namespace oomph
       Vector<Vector<double>>& vector_bnd_vertices,
       Vector<double>& area_constraint);
 
-    /// \short Helper function that performs the refinement process
+    ///  Helper function that performs the refinement process
     /// on the specified boundary by using the provided vertices
     /// representation and the associated elements target area.
     /// NOTE: This is the version that applies refinement to shared
@@ -3111,18 +3111,18 @@ namespace oomph
     }
 
 #ifdef OOMPH_HAS_MPI
-    /// \short Stores the nodes in the boundaries in the same order in all the
+    ///  Stores the nodes in the boundaries in the same order in all the
     /// processors
     /// Sorted_shared_boundary_node_pt[bnd_id][i-th node] = Node*
     /// It is a map since the boundary id may not start at zero
     std::map<unsigned, Vector<Node*>> Sorted_shared_boundary_node_pt;
 
-    /// \short Sort the nodes on shared boundaries so that the processors
+    ///  Sort the nodes on shared boundaries so that the processors
     /// that share a boundary agree with the order of the nodes on the
     /// boundary
     void sort_nodes_on_shared_boundaries();
 
-    /// \short Re-establish the shared boundary elements after the
+    ///  Re-establish the shared boundary elements after the
     /// adaptation process (the updating of shared nodes is optional and
     /// performed by default)
     void reset_shared_boundary_elements_and_nodes(
@@ -3131,13 +3131,13 @@ namespace oomph
       const bool flush_nodes = true,
       const bool update_nodes = true);
 
-    /// \short In charge of. re-establish the halo(ed) scheme on all processors.
+    ///  In charge of. re-establish the halo(ed) scheme on all processors.
     /// Sends info. to create halo elements and nodes on the processors
     /// that need it. It uses and all to all communication strategy therefore
     /// must be called on all processors.
     void reset_halo_haloed_scheme();
 
-    /// \short Compute the names of the nodes on shared boundaries in
+    ///  Compute the names of the nodes on shared boundaries in
     /// this (my_rank) processor with other processors. Also compute the
     /// names of nodes on shared boundaries of other processors with
     /// other processors (useful when there is an element that requires
@@ -3151,7 +3151,7 @@ namespace oomph
       std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
       Vector<Node*>& global_shared_node_pt);
 
-    /// \short Get the original boundaries to which is associated each
+    ///  Get the original boundaries to which is associated each
     /// shared node, and send the info. to the related processors. We
     /// need to do this so that at the reset of halo(ed) info. stage,
     /// the info. be already updated.
@@ -3160,7 +3160,7 @@ namespace oomph
       std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
       Vector<Node*>& global_shared_node_pt);
 
-    /// \short In charge of creating additional halo(ed) elements on
+    ///  In charge of creating additional halo(ed) elements on
     /// those processors that have no shared boundaries in common but have
     /// shared nodes
     void reset_halo_haloed_scheme_helper(
@@ -3181,7 +3181,7 @@ namespace oomph
     // BEGIN: Methods to perform load balance
     // *********************************************************************
 
-    /// \short Check if necessary to add the element to the new domain or if it
+    ///  Check if necessary to add the element to the new domain or if it
     /// has been previously added
     unsigned try_to_add_element_pt_load_balance(
       Vector<FiniteElement*>& new_elements_on_domain, FiniteElement*& ele_pt)
@@ -3220,7 +3220,7 @@ namespace oomph
       }
     }
 
-    /// \short Helper function to get the required elemental information from
+    ///  Helper function to get the required elemental information from
     /// the element to be sent. This info. involves the association of
     /// the element to a boundary or region, and if its part of the
     /// halo(ed) elements within a processor
@@ -3229,7 +3229,7 @@ namespace oomph
       Vector<Vector<FiniteElement*>>& f_haloed_ele_pt,
       FiniteElement* ele_pt);
 
-    /// \short Check if necessary to add the node to the new domain or if it has
+    ///  Check if necessary to add the node to the new domain or if it has
     /// been already added
     unsigned try_to_add_node_pt_load_balance(Vector<Node*>& new_nodes_on_domain,
                                              Node*& node_pt)
@@ -3268,14 +3268,14 @@ namespace oomph
       }
     }
 
-    /// \short Helper function to add haloed node
+    ///  Helper function to add haloed node
     void add_node_load_balance_helper(
       unsigned& iproc,
       Vector<Vector<FiniteElement*>>& f_halo_ele_pt,
       Vector<Node*>& new_nodes_on_domain,
       Node* nod_pt);
 
-    /// \short Helper function to get the required nodal information
+    ///  Helper function to get the required nodal information
     /// from an haloed node so that a fully-functional node (and
     /// therefore element) can be created on the receiving process
     /// (this is the specific version for the load balance strategy,
@@ -3288,7 +3288,7 @@ namespace oomph
       unsigned& iproc,
       Node* nod_pt);
 
-    /// \short Helper function to create elements on the loop
+    ///  Helper function to create elements on the loop
     /// process based on the info received in
     /// send_and_received_elements_nodes_info
     void create_element_load_balance_helper(
@@ -3304,7 +3304,7 @@ namespace oomph
       std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
       Vector<Node*>& global_shared_node_pt);
 
-    /// \short Helper function to create elements on the loop
+    ///  Helper function to create elements on the loop
     /// process based on the info received in
     /// send_and_received_elements_nodes_info
     /// This function is in charge of verify if the element is associated
@@ -3315,7 +3315,7 @@ namespace oomph
         received_old_haloed_element_pt,
       FiniteElement* ele_pt);
 
-    /// \short Helper function to add a new node from load balance
+    ///  Helper function to add a new node from load balance
     void add_received_node_load_balance_helper(
       Node*& new_nod_pt,
       Vector<Vector<FiniteElement*>>& f_haloed_ele_pt,
@@ -3331,7 +3331,7 @@ namespace oomph
       std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
       Vector<Node*>& global_shared_node_pt);
 
-    /// \short Helper function which constructs a new node (on an
+    ///  Helper function which constructs a new node (on an
     /// element) with the information sent from the load balance
     /// process
     void construct_new_node_load_balance_helper(
@@ -3356,24 +3356,24 @@ namespace oomph
     // *********************************************************************
     // Start communication variables
     // *********************************************************************
-    /// \short Vector of flat-packed doubles to be communicated with
+    ///  Vector of flat-packed doubles to be communicated with
     /// other processors
     Vector<double> Flat_packed_doubles;
 
-    /// \short Counter used when processing vector of flat-packed
+    ///  Counter used when processing vector of flat-packed
     /// doubles
     unsigned Counter_for_flat_packed_doubles;
 
-    /// \short Vector of flat-packed unsigneds to be communicated with
+    ///  Vector of flat-packed unsigneds to be communicated with
     /// other processors
     Vector<unsigned> Flat_packed_unsigneds;
 
-    /// \short Counter used when processing vector of flat-packed
+    ///  Counter used when processing vector of flat-packed
     /// unsigneds
     unsigned Counter_for_flat_packed_unsigneds;
 
 #ifdef ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION
-    /// \short Temporary vector of strings to enable full annotation of
+    ///  Temporary vector of strings to enable full annotation of
     /// RefineableTriangleMesh comms
     Vector<std::string> Flat_packed_unsigneds_string;
 #endif
@@ -3386,7 +3386,7 @@ namespace oomph
     // Start communication functions
     // *********************************************************************
 
-    /// \short Check if necessary to add the element as haloed or if it has been
+    ///  Check if necessary to add the element as haloed or if it has been
     /// previously added to the haloed scheme
     unsigned try_to_add_root_haloed_element_pt(const unsigned& p,
                                                GeneralisedElement*& el_pt)
@@ -3424,7 +3424,7 @@ namespace oomph
       }
     }
 
-    /// \short Check if necessary to add the node as haloed or if it has been
+    ///  Check if necessary to add the node as haloed or if it has been
     /// previously added to the haloed scheme
     unsigned try_to_add_haloed_node_pt(const unsigned& p, Node*& nod_pt)
     {
@@ -3459,24 +3459,24 @@ namespace oomph
       }
     }
 
-    /// \short Helper function to get the required elemental information from
+    ///  Helper function to get the required elemental information from
     /// an haloed element. This info. involves the association of the element
     /// to a boundary or region.
     void get_required_elemental_information_helper(unsigned& iproc,
                                                    FiniteElement* ele_pt);
 
-    /// \short Helper function to get the required nodal information
+    ///  Helper function to get the required nodal information
     /// from a haloed node so that a fully-functional halo node (and
     /// therefore element) can be created on the receiving process
     void get_required_nodal_information_helper(unsigned& iproc, Node* nod_pt);
 
-    /// \short Helper function to add haloed node
+    ///  Helper function to add haloed node
     void add_haloed_node_helper(unsigned& iproc, Node* nod_pt);
 
-    /// \short Helper function to send back halo and haloed information
+    ///  Helper function to send back halo and haloed information
     void send_and_receive_elements_nodes_info(int& send_proc, int& recv_proc);
 
-    /// \short Helper function to create (halo) elements on the loop
+    ///  Helper function to create (halo) elements on the loop
     /// process based on the info received in send_and_received_located_info
     void create_halo_element(
       unsigned& iproc,
@@ -3487,13 +3487,13 @@ namespace oomph
       std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
       Vector<Node*>& global_shared_node_pt);
 
-    /// \short Helper function to create (halo) elements on the loop
+    ///  Helper function to create (halo) elements on the loop
     /// process based on the info received in send_and_received_located_info
     /// This function is in charge of verify if the element is associated to
     /// a boundary
     void add_halo_element_helper(unsigned& iproc, FiniteElement* ele_pt);
 
-    /// \short Helper function to add halo node
+    ///  Helper function to add halo node
     void add_halo_node_helper(
       Node*& new_nod_pt,
       Vector<Node*>& new_nodes_on_domain,
@@ -3506,7 +3506,7 @@ namespace oomph
       std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
       Vector<Node*>& global_shared_node_pt);
 
-    /// \short Helper function which constructs a new halo node
+    ///  Helper function which constructs a new halo node
     /// (on an element) with the information sent from the haloed process
     void construct_new_halo_node_helper(
       Node*& new_nod_pt,
@@ -3520,7 +3520,7 @@ namespace oomph
       std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
       Vector<Node*>& global_shared_node_pt);
 
-    /// \short Helper function that assigns/updates the references to the node
+    ///  Helper function that assigns/updates the references to the node
     /// so that it can be found with any other reference. The return
     /// value indicates whether or not a node was found on the same
     /// reference
@@ -3542,7 +3542,7 @@ namespace oomph
 
 #endif // #ifdef OOMPH_HAS_MPI
 
-    /// \short Helper function that updates the input polygon's PSLG
+    ///  Helper function that updates the input polygon's PSLG
     /// by using the end-points of elements from FaceMesh(es) that are
     /// constructed for the boundaries associated with the segments of the
     /// polygon. Optional boolean is used to run it as test only (if
@@ -3552,7 +3552,7 @@ namespace oomph
     bool update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
                                         const bool& check_only = false);
 
-    /// \short Helper function that updates the input open curve by using
+    ///  Helper function that updates the input open curve by using
     /// end-points of elements from FaceMesh(es) that are constructed for the
     /// boundaries associated with the polylines. Optional boolean is used to
     /// run it as test only (if true is specified as input) in which case the
@@ -3562,7 +3562,7 @@ namespace oomph
     bool update_open_curve_using_face_mesh(
       TriangleMeshOpenCurve* open_polyline_pt, const bool& check_only = false);
 
-    /// \short Generate a new PSLG representation of the inner hole
+    ///  Generate a new PSLG representation of the inner hole
     /// boundaries. Optional boolean is used to run it as test only (if
     /// true is specified as input) in which case PSLG isn't actually
     /// modified. Returned boolean indicates if PSLG was (or would have
@@ -3571,18 +3571,18 @@ namespace oomph
       Vector<Vector<double>>& internal_point_coord,
       const bool& check_only = false);
 
-    /// \short Snap the boundary nodes onto any curvilinear boundaries
+    ///  Snap the boundary nodes onto any curvilinear boundaries
     void snap_nodes_onto_boundary(RefineableTriangleMesh<ELEMENT>*& new_mesh_pt,
                                   const unsigned& b);
 
-    /// \short Helper function
+    ///  Helper function
     /// Creates an unsorted face mesh representation from the specified
     /// boundary id. It means that the elements are not sorted along the
     /// boundary
     void create_unsorted_face_mesh_representation(const unsigned& boundary_id,
                                                   Mesh* face_mesh_pt);
 
-    /// \short Helper function
+    ///  Helper function
     /// Creates a sorted face mesh representation of the specified PolyLine
     /// It means that the elements are sorted along the boundary
     /// It also returns a map that indicated the inverted elements
@@ -3592,41 +3592,41 @@ namespace oomph
       std::map<FiniteElement*, bool>& is_inverted,
       bool& inverted_face_mesh);
 
-    /// \short Helper function to construct face mesh representation of all
+    ///  Helper function to construct face mesh representation of all
     /// polylines, possibly with segments re-distributed between polylines
     /// to maintain an appxroximately even sub-division of the polygon
     void get_face_mesh_representation(TriangleMeshPolygon* polygon_pt,
                                       Vector<Mesh*>& face_mesh_pt);
 
-    /// \short Helper function to construct face mesh representation of
+    ///  Helper function to construct face mesh representation of
     /// open curves
     void get_face_mesh_representation(TriangleMeshOpenCurve* open_polyline_pt,
                                       Vector<Mesh*>& face_mesh_pt);
 
-    /// \short Updates the polylines representation after restart
+    ///  Updates the polylines representation after restart
     void update_polygon_after_restart(TriangleMeshPolygon*& polygon_pt);
 
-    /// \short Updates the open curve representation after restart
+    ///  Updates the open curve representation after restart
     void update_open_curve_after_restart(TriangleMeshOpenCurve*& open_curve_pt);
 
-    /// \short Updates the polylines using the elements area as constraint for
+    ///  Updates the polylines using the elements area as constraint for
     /// the number of points along the boundaries
     bool update_polygon_using_elements_area(TriangleMeshPolygon*& polygon_pt,
                                             const Vector<double>& target_area);
 
-    /// \short Updates the open curve but using the elements area instead
+    ///  Updates the open curve but using the elements area instead
     /// of the default refinement and unrefinement methods
     bool update_open_curve_using_elements_area(
       TriangleMeshOpenCurve*& open_curve_pt, const Vector<double>& target_area);
 
 #ifdef OOMPH_HAS_MPI
-    /// \short Updates the polylines using the elements area as
+    ///  Updates the polylines using the elements area as
     /// constraint for the number of points along the boundaries
     bool update_shared_curve_using_elements_area(
       Vector<TriangleMeshPolyLine*>& vector_polyline_pt,
       const Vector<double>& target_areas);
 
-    /// \short Updates the shared polylines representation after restart
+    ///  Updates the shared polylines representation after restart
     void update_shared_curve_after_restart(
       Vector<TriangleMeshPolyLine*>& vector_polyline_pt);
 
@@ -3686,7 +3686,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Build a new TriangulateIO object from previous TriangulateIO
+    ///  Build a new TriangulateIO object from previous TriangulateIO
     /// based on target area for each element
     void refine_triangulateio(TriangulateIO& triangulate_io,
                               const Vector<double>& target_area,
@@ -3694,7 +3694,7 @@ namespace oomph
 
 #endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Compute target area based on the element's error and the
+    ///  Compute target area based on the element's error and the
     /// error target; return minimum angle (in degrees)
     double compute_area_target(const Vector<double>& elem_error,
                                Vector<double>& target_area)
@@ -3825,17 +3825,17 @@ namespace oomph
       return min_angle;
     }
 
-    /// \short Number of bins in the x-direction
+    ///  Number of bins in the x-direction
     /// when transferring target areas by bin method. Only used if we
     /// don't have CGAL!
     unsigned Nbin_x_for_area_transfer;
 
-    /// \short Number of bins in the y-direction
+    ///  Number of bins in the y-direction
     /// when transferring target areas by bin method. Only used if we
     /// don't have CGAL!
     unsigned Nbin_y_for_area_transfer;
 
-    /// \short Default value for max. number of sample points used for
+    ///  Default value for max. number of sample points used for
     /// locate_zeta when transferring target areas using cgal-based sample point
     /// container
     unsigned
@@ -3869,13 +3869,13 @@ namespace oomph
     /// The printing level for load balance
     unsigned Print_timings_level_load_balance;
 
-    /// \short Function pointer to function that updates the
+    ///  Function pointer to function that updates the
     /// mesh following the snapping of boundary nodes to the
     /// boundaries (e.g. to move boundary nodes very slightly
     /// to satisfy volume constraints)
     MeshUpdateFctPt Mesh_update_fct_pt;
 
-    /// \short Function pointer to function that can be set
+    ///  Function pointer to function that can be set
     /// to update the position of the central point in internal
     /// holes
     InternalHolePointUpdateFctPt Internal_hole_point_update_fct_pt;
@@ -3897,7 +3897,7 @@ namespace oomph
   public:
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Build mesh, based on closed curve that specifies
+    ///  Build mesh, based on closed curve that specifies
     /// the outer boundary of the domain and any number of internal
     /// clsed curves. Specify target area for uniform element size.
     SolidTriangleMesh(TriangleMeshParameters& triangle_mesh_parameters,
@@ -3947,7 +3947,7 @@ namespace oomph
       public virtual SolidMesh
   {
   public:
-    /// \short Build mesh, based on the specifications on
+    ///  Build mesh, based on the specifications on
     /// TriangleMeshParameter
     RefineableSolidTriangleMesh(
       TriangleMeshParameters& triangle_mesh_parameters,
@@ -3960,7 +3960,7 @@ namespace oomph
       set_lagrangian_nodal_coordinates();
     }
 
-    /// \short Build mesh from specified triangulation and
+    ///  Build mesh from specified triangulation and
     /// associated target areas for elements in it.
     RefineableSolidTriangleMesh(
       const Vector<double>& target_area,

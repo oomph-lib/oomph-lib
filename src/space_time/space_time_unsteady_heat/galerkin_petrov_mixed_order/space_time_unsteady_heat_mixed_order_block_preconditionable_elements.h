@@ -63,7 +63,7 @@ namespace oomph
     /// Empty destructor
     ~BlockPrecQUnsteadyHeatMixedOrderSpaceTimeElement() {}
 
-    /// \short Overload the pure virtual base class implementation.
+    ///  Overload the pure virtual base class implementation.
     /// Create a list of pairs for all unknowns in this element,
     /// so the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
@@ -94,7 +94,7 @@ namespace oomph
     /// Empty destructor
     ~BlockPrecRefineableQUnsteadyHeatMixedOrderSpaceTimeElement() {}
 
-    /// \short Overload the pure virtual base class implementation.
+    ///  Overload the pure virtual base class implementation.
     /// Create a list of pairs for all unknowns in this element,
     /// so the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number

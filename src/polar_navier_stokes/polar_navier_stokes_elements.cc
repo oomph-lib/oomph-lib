@@ -766,7 +766,7 @@ namespace oomph
   }
 
   //==============================================================
-  /// \short Compute traction (on the viscous scale) at local
+  ///  Compute traction (on the viscous scale) at local
   /// coordinate s for outer unit normal N
   //==============================================================
   void PolarNavierStokesEquations::get_traction(const Vector<double>& s,
@@ -1001,7 +1001,7 @@ namespace oomph
   }
 
   //==============================================================
-  ///  \short Get integral of kinetic energy over element:
+  ///   Get integral of kinetic energy over element:
   //==============================================================
   double PolarNavierStokesEquations::kin_energy() const
   {

@@ -76,11 +76,11 @@ namespace oomph
   // Physical constants
   // ------------------
 
-  /// \short Pointer to the viscosity ratio (relative to the 
+  ///  Pointer to the viscosity ratio (relative to the 
   /// viscosity used in the definition of the Reynolds number)
   double *Viscosity_Ratio_pt;
  
-  /// \short Pointer to the density ratio (relative to the
+  ///  Pointer to the density ratio (relative to the
   /// density used in the definition of the Reynolds number)
   double *Density_Ratio_pt;
  
@@ -98,23 +98,23 @@ namespace oomph
                              const Vector<double> &x, 
                              Vector<double> &result);
 
-  /// \short Pointer to derivatives of base flow solution velocity
+  ///  Pointer to derivatives of base flow solution velocity
   /// components w.r.t. global coordinates (r and z) function
   void (*Base_flow_dudx_fct_pt)(const double& time,
                                 const Vector<double> &x, 
                                 DenseMatrix<double> &result);
   
-  /// \short Boolean flag to indicate if ALE formulation is disabled when
+  ///  Boolean flag to indicate if ALE formulation is disabled when
   /// the time-derivatives are computed. Only set to true if you're sure
   /// that the mesh is stationary.
   bool ALE_is_disabled;
 
-  /// \short Access function for the local equation number
+  ///  Access function for the local equation number
   /// information for the i-th component of the pressure.
   /// p_local_eqn[n,i] = local equation number or < 0 if pinned.
   virtual int p_local_eqn(const unsigned &n, const unsigned &i)=0;
 
-  /// \short Compute the shape functions and their derivatives 
+  ///  Compute the shape functions and their derivatives 
   /// w.r.t. global coordinates at local coordinate s.
   /// Return Jacobian of mapping between local and global coordinates.
   virtual double dshape_and_dtest_eulerian_linearised_axi_nst(
@@ -122,7 +122,7 @@ namespace oomph
    Shape &psi, DShape &dpsidx,
    Shape &test, DShape &dtestdx) const=0;
 
-  /// \short Compute the shape functions and their derivatives
+  ///  Compute the shape functions and their derivatives
   /// w.r.t. global coordinates at the ipt-th integration point.
   /// Return Jacobian of mapping between local and global coordinates.
   virtual double dshape_and_dtest_eulerian_at_knot_linearised_axi_nst(
@@ -138,7 +138,7 @@ namespace oomph
   virtual void pshape_linearised_axi_nst(const Vector<double> &s,
                                          Shape &psi, Shape &test) const=0;
 
-  /// \short Calculate the velocity components of the base flow solution
+  ///  Calculate the velocity components of the base flow solution
   /// at a given time and Eulerian position
   virtual void get_base_flow_u(const double& time,
                                const unsigned& ipt,
@@ -158,7 +158,7 @@ namespace oomph
     }
   }
 
-  /// \short Calculate the derivatives of the velocity components of the 
+  ///  Calculate the derivatives of the velocity components of the 
   /// base flow solution w.r.t. global coordinates (r and z) at a given
   /// time and Eulerian position
   virtual void get_base_flow_dudx(const double& time,
@@ -183,7 +183,7 @@ namespace oomph
     }
   }
 
-  /// \short Compute the residuals for the Navier-Stokes equations; 
+  ///  Compute the residuals for the Navier-Stokes equations; 
   /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
   virtual void fill_in_generic_residual_contribution_linearised_axi_nst(
    Vector<double> &residuals,
@@ -193,7 +193,7 @@ namespace oomph
   
    public:
   
-  /// \short Constructor: NULL the base flow solution and the
+  ///  Constructor: NULL the base flow solution and the
   /// derivatives of the base flow function
   LinearisedAxisymmetricNavierStokesEquations()
    : Base_flow_u_fct_pt(0), Base_flow_dudx_fct_pt(0), ALE_is_disabled(false)
@@ -240,14 +240,14 @@ namespace oomph
    /// Pointer to azimuthal mode number k in e^ik(theta) decomposition
    int* &azimuthal_mode_number_pt() { return Azimuthal_Mode_Number_pt; }
 
-   /// \short Viscosity ratio for element: element's viscosity relative
+   ///  Viscosity ratio for element: element's viscosity relative
    /// to the viscosity used in the definition of the Reynolds number
    const double &viscosity_ratio() const { return *Viscosity_Ratio_pt; }
 
    /// Pointer to the viscosity ratio
    double* &viscosity_ratio_pt() { return Viscosity_Ratio_pt; }
 
-   /// \short Density ratio for element: element's density relative
+   ///  Density ratio for element: element's density relative
    /// to the viscosity used in the definition of the Reynolds number
    const double &density_ratio() const { return *Density_Ratio_pt; }
 
@@ -262,7 +262,7 @@ namespace oomph
      return Base_flow_u_fct_pt;
     }
 
-   /// \short Access function for the derivatives of the base flow
+   ///  Access function for the derivatives of the base flow
    /// w.r.t. global coordinates solution pointer
    void (* &base_flow_dudx_fct_pt())(const double& time,
                                      const Vector<double>& x, 
@@ -271,11 +271,11 @@ namespace oomph
      return Base_flow_dudx_fct_pt;
     }
 
-   /// \short Return the number of pressure degrees of freedom
+   ///  Return the number of pressure degrees of freedom
    /// associated with a single pressure component in the element
    virtual unsigned npres_linearised_axi_nst() const=0;
    
-   /// \short Return the index at which the i-th unknown velocity
+   ///  Return the index at which the i-th unknown velocity
    /// component is stored. The default value, i, is appropriate for
    /// single-physics problems. In derived multi-physics elements, this
    /// function should be overloaded to reflect the chosen storage scheme.
@@ -284,7 +284,7 @@ namespace oomph
    virtual inline unsigned u_index_linearised_axi_nst(const unsigned &i)
     const { return i; }
  
-   /// \short Return the i-th component of du/dt at local node n. 
+   ///  Return the i-th component of du/dt at local node n. 
    /// Uses suitably interpolated value for hanging nodes.
    double du_dt_linearised_axi_nst(const unsigned &n, const unsigned &i) const
    {
@@ -313,17 +313,17 @@ namespace oomph
     return dudt;
    }
  
-   /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
+   ///  Disable ALE, i.e. assert the mesh is not moving -- you do this
    /// at your own risk!
    void disable_ALE() { ALE_is_disabled = true; }
 
-   /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
+   ///  (Re-)enable ALE, i.e. take possible mesh motion into account
    /// when evaluating the time-derivative. Note: By default, ALE is
    /// enabled, at the expense of possibly creating unnecessary work
    /// in problems where the mesh is, in fact, stationary.
    void enable_ALE() { ALE_is_disabled = false; }
    
-   /// \short Return the i-th pressure value at local pressure "node" n_p.
+   ///  Return the i-th pressure value at local pressure "node" n_p.
    /// Uses suitably interpolated value for hanging nodes.
    virtual double p_linearised_axi_nst(const unsigned &n_p,
                                        const unsigned &i) const=0; 
@@ -335,12 +335,12 @@ namespace oomph
    virtual inline int p_index_linearised_axi_nst(const unsigned &i)
     const { return Pressure_not_stored_at_node; }
 
-   /// \short Strain-rate tensor: \f$ e_{ij} \f$
+   ///  Strain-rate tensor: \f$ e_{ij} \f$
    /// where \f$ i,j = r,z,\theta \f$ (in that order)
    void strain_rate(const Vector<double>& s, 
                     DenseMatrix<double>& strain_rate) const;
  
-   /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
+   ///  Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
    /// in tecplot format. Default number of plot points
    void output(std::ostream &outfile)
    {
@@ -348,11 +348,11 @@ namespace oomph
     output(outfile,nplot);
    }
 
-   /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
+   ///  Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
    /// in tecplot format. nplot points in each coordinate direction
    void output(std::ostream &outfile, const unsigned &nplot);
    
-   /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
+   ///  Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
    /// in tecplot format. Default number of plot points
    void output(FILE* file_pt)
    {
@@ -360,11 +360,11 @@ namespace oomph
     output(file_pt,nplot);
    }
 
-   /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
+   ///  Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
    /// in tecplot format. nplot points in each coordinate direction
    void output(FILE* file_pt, const unsigned &nplot);
    
-   /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S,
+   ///  Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S,
    /// in tecplot format. nplot points in each coordinate direction
    /// at timestep t (t=0: present; t>0: previous timestep)
    void output_veloc(std::ostream &outfile, const unsigned &nplot,
@@ -381,7 +381,7 @@ namespace oomph
      GeneralisedElement::Dummy_matrix,0);
    }
 
-   /// \short Compute the element's residual Vector and the jacobian matrix.
+   ///  Compute the element's residual Vector and the jacobian matrix.
    /// Virtual function can be overloaded by hanging-node version.
    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                          DenseMatrix<double> &jacobian)
@@ -391,7 +391,7 @@ namespace oomph
      residuals,jacobian,GeneralisedElement::Dummy_matrix,1);
    }
 
-   /// \short Add the element's contribution to its residuals vector,
+   ///  Add the element's contribution to its residuals vector,
    /// jacobian matrix and mass matrix
    void fill_in_contribution_to_jacobian_and_mass_matrix(
     Vector<double> &residuals, DenseMatrix<double> &jacobian, 
@@ -402,7 +402,7 @@ namespace oomph
      residuals,jacobian,mass_matrix,2);
    }
    
-   /// \short Return the i-th component of the FE interpolated velocity
+   ///  Return the i-th component of the FE interpolated velocity
    /// u[i] at local coordinate s
    double interpolated_u_linearised_axi_nst(const Vector<double> &s, 
                                             const unsigned &i) const
@@ -431,7 +431,7 @@ namespace oomph
     return(interpolated_u);
    }
 
-   /// \short Return the i-th component of the FE interpolated pressure
+   ///  Return the i-th component of the FE interpolated pressure
    /// p[i] at local coordinate s
    double interpolated_p_linearised_axi_nst(const Vector<double> &s,
                                             const unsigned &i) const
@@ -486,13 +486,13 @@ namespace oomph
    
     protected:
    
-   /// \short Internal indices that indicate at which internal data the
+   ///  Internal indices that indicate at which internal data the
    /// pressure values are stored. We note that there are two pressure
    /// values, corresponding to the functions P^C(r,z,t) and P^S(r,z,t)
    /// which multiply the cosine and sine terms respectively.
    Vector<unsigned> P_linearised_axi_nst_internal_index;
    
-   /// \short Velocity shape and test functions and their derivatives 
+   ///  Velocity shape and test functions and their derivatives 
    /// w.r.t. global coordinates at local coordinate s (taken from geometry).
    /// Return Jacobian of mapping between local and global coordinates.
    inline double dshape_and_dtest_eulerian_linearised_axi_nst(
@@ -500,7 +500,7 @@ namespace oomph
     Shape &psi, DShape &dpsidx,
     Shape &test, DShape &dtestdx) const;
    
-   /// \short Velocity shape and test functions and their derivatives
+   ///  Velocity shape and test functions and their derivatives
    /// w.r.t. global coordinates at the ipt-th integation point
    /// (taken from geometry).
    /// Return Jacobian of mapping between local and global coordinates.
@@ -519,7 +519,7 @@ namespace oomph
 
     public:
    
-   /// \short Constructor: there are three internal values for each
+   ///  Constructor: there are three internal values for each
    /// of the two pressure components
    LinearisedAxisymmetricQCrouzeixRaviartElement() : QElement<2,3>(),
     LinearisedAxisymmetricNavierStokesEquations(), P_linearised_axi_nst_internal_index(2)
@@ -537,7 +537,7 @@ namespace oomph
     /// Return number of values (pinned or dofs) required at local node n
     virtual unsigned required_nvalue(const unsigned &n) const;
     
-    /// \short Return the pressure value i at internal dof i_internal
+    ///  Return the pressure value i at internal dof i_internal
     /// (Discontinous pressure interpolation -- no need to cater for
     /// hanging nodes)
     double p_linearised_axi_nst(const unsigned &i_internal,
@@ -547,11 +547,11 @@ namespace oomph
       ->value(i_internal);
     }
     
-    /// \short Return number of pressure values corresponding to a
+    ///  Return number of pressure values corresponding to a
     /// single pressure component
     unsigned npres_linearised_axi_nst() const { return 3; }
 
-    /// \short Fix both components of the internal pressure degrees
+    ///  Fix both components of the internal pressure degrees
     /// of freedom p_dof to pvalue
     void fix_pressure(const unsigned &p_dof, const double &pvalue)
     {
@@ -565,7 +565,7 @@ namespace oomph
       }
     }
    
-    /// \short Overload the access function for the i-th component of the 
+    ///  Overload the access function for the i-th component of the 
     /// pressure's local equation numbers
     inline int p_local_eqn(const unsigned &n, const unsigned &i) 
     {
@@ -592,7 +592,7 @@ namespace oomph
     // NOTE: This function is only used in block preconditioning context
     // and if used (it isn't!) must be accompanied by an equivalent
     // overload of get_dof_numbers_for_unknowns(...)
-    /* /// \short The number of "DOF types" that degrees of freedom in this */
+    /* ///  The number of "DOF types" that degrees of freedom in this */
     /* /// element are sub-divided into: Velocity and pressure. */
     /* unsigned ndof_types()const { return 8; } */
 
@@ -605,7 +605,7 @@ namespace oomph
  // ----------------
 
  //==========================================================================
- /// \short Derivatives of the shape functions and test functions w.r.t.
+ ///  Derivatives of the shape functions and test functions w.r.t.
  /// global (Eulerian) coordinates at local coordinate s.
  /// Return Jacobian of mapping between local and global coordinates.
  //==========================================================================
@@ -632,7 +632,7 @@ namespace oomph
   }
 
  //==========================================================================
- /// \short Derivatives of the shape functions and test functions w.r.t.
+ ///  Derivatives of the shape functions and test functions w.r.t.
  /// global (Eulerian) coordinates at the ipt-th integration point.
  /// Return Jacobian of mapping between local and global coordinates.
  //==========================================================================
@@ -696,7 +696,7 @@ namespace oomph
   };
  
  //==========================================================================
- /// \short Face geometry of face geometry of the linearised axisymmetric
+ ///  Face geometry of face geometry of the linearised axisymmetric
  /// Crouzeix Raviart elements
  //==========================================================================
  template<>
@@ -732,11 +732,11 @@ namespace oomph
    
     protected:
    
-   /// \short Static array of ints to hold conversion from pressure 
+   ///  Static array of ints to hold conversion from pressure 
    /// node numbers to actual node numbers
    static const unsigned Pconv[];
    
-   /// \short Velocity shape and test functions and their derivatives
+   ///  Velocity shape and test functions and their derivatives
    /// w.r.t. global coordinates  at local coordinate s (taken from geometry).
    /// Return Jacobian of mapping between local and global coordinates.
    inline double dshape_and_dtest_eulerian_linearised_axi_nst(
@@ -744,7 +744,7 @@ namespace oomph
     Shape &psi, DShape &dpsidx,
     Shape &test, DShape &dtestdx) const;
    
-   /// \short Velocity shape and test functions and their derivatives
+   ///  Velocity shape and test functions and their derivatives
    /// w.r.t. global coordinates the ipt-th integation point
    /// (taken from geometry).
    /// Return Jacobian of mapping between local and global coordinates.
@@ -767,19 +767,19 @@ namespace oomph
    LinearisedAxisymmetricQTaylorHoodElement() : QElement<2,3>(),  
     LinearisedAxisymmetricNavierStokesEquations() {}
    
-    /// \short Number of values (pinned or dofs) required at node n. Can
+    ///  Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version
     inline virtual unsigned required_nvalue(const unsigned &n) const 
      { return Initial_Nvalue[n]; }
 
-    /// \short Which nodal value represents the pressure? Overload version
+    ///  Which nodal value represents the pressure? Overload version
     /// in base class which returns static int "Pressure_not_stored_at_node"
     virtual int p_index_linearised_axi_nst(const unsigned &i) const
     {
      return (6+i);
     }
    
-    /// \short Access function for the i-th component of pressure
+    ///  Access function for the i-th component of pressure
     /// at local pressure node n_p (const version).
     double p_linearised_axi_nst(const unsigned &n_p,
                                 const unsigned &i) const
@@ -787,11 +787,11 @@ namespace oomph
      return nodal_value(Pconv[n_p],p_index_linearised_axi_nst(i));
     }
     
-    /// \short Return number of pressure values corresponding to a
+    ///  Return number of pressure values corresponding to a
     /// single pressure component
     unsigned npres_linearised_axi_nst() const { return 4; }
     
-    /// \short Fix both components of the pressure at local pressure
+    ///  Fix both components of the pressure at local pressure
     /// node n_p to pvalue
     void fix_pressure(const unsigned &n_p, const double &pvalue)
     {
@@ -804,7 +804,7 @@ namespace oomph
       }
     }
     
-    /// \short Overload the access function for the i-th component of the
+    ///  Overload the access function for the i-th component of the
     /// pressure's local equation numbers
     inline int p_local_eqn(const unsigned &n, const unsigned &i)
      {
@@ -830,7 +830,7 @@ namespace oomph
     /* // NOTE: This function is only used in block preconditioning context */
     /* // and if used (it isn't!) must be accompanied by an equivalent */
     /* // overload of get_dof_numbers_for_unknowns(...) */
-    /* /// \short Returns the number of "DOF types" that degrees of freedom */
+    /* ///  Returns the number of "DOF types" that degrees of freedom */
     /* /// in this element are sub-divided into: Velocity and pressure. */
     /* unsigned ndof_types()const { return 8; } */
     
@@ -841,7 +841,7 @@ namespace oomph
  // ----------------
 
  //==========================================================================
- /// \short Derivatives of the shape functions and test functions w.r.t
+ ///  Derivatives of the shape functions and test functions w.r.t
  /// global (Eulerian) coordinates at local coordinate s.
  /// Return Jacobian of mapping between local and global coordinates.
  //==========================================================================
@@ -868,7 +868,7 @@ namespace oomph
   }
  
  //==========================================================================
- /// \short Derivatives of the shape functions and test functions w.r.t
+ ///  Derivatives of the shape functions and test functions w.r.t
  /// global (Eulerian) coordinates at the ipt-th integration point.
  /// Return Jacobian of mapping between local and global coordinates.
  //==========================================================================
@@ -945,7 +945,7 @@ namespace oomph
   };
  
  //==========================================================================
- /// \short Face geometry of the face geometry of the linearised
+ ///  Face geometry of the face geometry of the linearised
  /// axisymmetric Taylor Hood elements
  //==========================================================================
  template<>

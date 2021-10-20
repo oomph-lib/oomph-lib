@@ -29,7 +29,7 @@
 namespace oomph
 {
   //=============================================================================
-  /// \short Constructor - domain boundaries are described with four boundary
+  ///  Constructor - domain boundaries are described with four boundary
   /// function pointers describing the topology of the north, east, south, and
   /// west boundaries
   //=============================================================================
@@ -145,7 +145,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Constructor - takes length of domain in x and y direction as
+  ///  Constructor - takes length of domain in x and y direction as
   /// arguements. Assumes domain is rectangular, and the south west (lower
   /// left) corner is at 0,0.
   //=============================================================================
@@ -190,7 +190,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Constructor - takes the minimum and maximum coordinates of the
+  ///  Constructor - takes the minimum and maximum coordinates of the
   /// of an assumed rectanguler domain in the x and y direction
   //=============================================================================
   TopologicallyRectangularDomain::TopologicallyRectangularDomain(
@@ -235,7 +235,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short allows the boundary derivate function pointers to be set. To
+  ///  allows the boundary derivate function pointers to be set. To
   /// compute the derivatives of the problem domain global coordinates (x_i) wrt
   /// the macro element coordinates (m_i), dx_i/dm_t is required along the
   /// domain boundaries (where dm_t is the macro element coordinate tangential
@@ -260,7 +260,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short allows the boundary second derivate function pointers to be set.
+  ///  allows the boundary second derivate function pointers to be set.
   /// To compute the second derivatives of the problem domain global
   /// coordinates (x_i) wrt the macro element coordinates (m_i), d2x_i/dm_t^2
   /// is required along the domain boundaries (where dm_t is the macro element
@@ -394,7 +394,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the north
+  ///  takes the macro element coordinate position along the north
   /// boundary and returns the global coordinate position along that boundary
   //=============================================================================
   void TopologicallyRectangularDomain::r_N(const Vector<double>& s,
@@ -413,7 +413,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the east
+  ///  takes the macro element coordinate position along the east
   /// boundary and returns the global coordinate position along that boundary
   //=============================================================================
   void TopologicallyRectangularDomain::r_E(const Vector<double>& s,
@@ -432,7 +432,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the south
+  ///  takes the macro element coordinate position along the south
   /// boundary and returns the global coordinate position along that boundary
   //=============================================================================
   void TopologicallyRectangularDomain::r_S(const Vector<double>& s,
@@ -451,7 +451,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the west
+  ///  takes the macro element coordinate position along the west
   /// boundary and returns the global coordinate position along that boundary
   /// access down boundary function pointer
   //=============================================================================
@@ -471,7 +471,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the north
+  ///  takes the macro element coordinate position along the north
   /// boundary and returns the derivates of the global coordinates with respect
   /// to the boundary
   //=============================================================================
@@ -507,7 +507,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the E
+  ///  takes the macro element coordinate position along the E
   /// boundary and returns the derivates of the global coordinates with respect
   /// to the boundary
   //=============================================================================
@@ -543,7 +543,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the south
+  ///  takes the macro element coordinate position along the south
   /// boundary and returns the derivates of the global coordinates with respect
   /// to the boundary
   //=============================================================================
@@ -579,7 +579,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the W
+  ///  takes the macro element coordinate position along the W
   /// boundary and returns the derivates of the global coordinates with respect
   /// to the boundary
   //=============================================================================
@@ -615,7 +615,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the north
+  ///  takes the macro element coordinate position along the north
   /// boundary and returns the second derivates of the global coordinates with
   /// respect to the boundary
   //=============================================================================
@@ -668,7 +668,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the east
+  ///  takes the macro element coordinate position along the east
   /// boundary and returns the second derivates of the global coordinates with
   /// respect to the boundary
   //=============================================================================
@@ -721,7 +721,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the south
+  ///  takes the macro element coordinate position along the south
   /// boundary and returns the second derivates of the global coordinates with
   /// respect to the boundary
   //=============================================================================
@@ -774,7 +774,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short takes the macro element coordinate position along the west
+  ///  takes the macro element coordinate position along the west
   /// boundary and returns the second derivates of the global coordinates with
   /// respect to the boundary
   //=============================================================================

@@ -78,7 +78,7 @@ class SpikedLine : public GeomObject
 
 public:
 
- /// \short Constructor:  Four item of geometric data: 
+ ///  Constructor:  Four item of geometric data: 
  /// \code
  ///  Geom_data_pt[0]->value(0) = height
  ///  Geom_data_pt[0]->value(1) = amplitude
@@ -112,7 +112,7 @@ public:
   }
 
 
- /// \short Constructor:  Pass height, amplitude, zeta min and zeta max
+ ///  Constructor:  Pass height, amplitude, zeta min and zeta max
  /// (all are pinned by default)
  SpikedLine(const double& height, const double& amplitude,
             const double& zeta_min, const double& zeta_max)
@@ -150,7 +150,7 @@ public:
   }
 
 
- /// \short Position Vector at Lagrangian coordinate zeta 
+ ///  Position Vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
 #ifdef PARANOID
@@ -181,7 +181,7 @@ public:
   }
 
 
- /// \short Parametrised position on object: r(zeta). Evaluated at
+ ///  Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. 
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -221,7 +221,7 @@ public:
   }
 
 
- /// \short Derivative of position Vector w.r.t. to coordinates: 
+ ///  Derivative of position Vector w.r.t. to coordinates: 
  /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i). 
  /// Evaluated at current time.
  virtual void dposition(const Vector<double>& zeta, 
@@ -246,7 +246,7 @@ public:
   }
 
 
- /// \short 2nd derivative of position Vector w.r.t. to coordinates: 
+ ///  2nd derivative of position Vector w.r.t. to coordinates: 
  /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ = ddrdzeta(alpha,beta,i). 
  /// Evaluated at current time.
  virtual void d2position(const Vector<double>& zeta, 
@@ -258,7 +258,7 @@ public:
   }
 
 
- /// \short Posn Vector and its  1st & 2nd derivatives
+ ///  Posn Vector and its  1st & 2nd derivatives
  /// w.r.t. to coordinates:
  /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i). 
  /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ = ddrdzeta(alpha,beta,i). 
@@ -304,14 +304,14 @@ public:
  /// How many items of Data does the shape of the object depend on?
  unsigned ngeom_data() const {return Geom_data_pt.size();}
  
- /// \short Return pointer to the j-th Data item that the object's 
+ ///  Return pointer to the j-th Data item that the object's 
  /// shape depends on 
  Data* geom_data_pt(const unsigned& j) {return Geom_data_pt[j];}
  
 
 private:
 
- /// \short Vector of pointers to Data items that affects the object's shape
+ ///  Vector of pointers to Data items that affects the object's shape
  Vector<Data*> Geom_data_pt;
 
  /// Do I need to clean up?
@@ -344,7 +344,7 @@ public:
  /// Update the after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve. 
+ ///  Update the problem specs before solve. 
  /// set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve()
   { 

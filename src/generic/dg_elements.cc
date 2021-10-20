@@ -329,7 +329,7 @@ namespace oomph
   }
 
   //===============================================================
-  ///\short Calculate the derivative of the
+  /// Calculate the derivative of the
   /// normal flux, which is the dot product of our
   /// approximation to the flux with the outer unit normal,
   /// with respect to the interior and exterior variables
@@ -573,7 +573,7 @@ namespace oomph
   }
 
   //========================================================================
-  ///\short Function that computes and stores the (inverse) mass matrix
+  /// Function that computes and stores the (inverse) mass matrix
   //========================================================================
   void DGElement::pre_compute_mass_matrix()
   {

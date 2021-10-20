@@ -56,14 +56,14 @@ using namespace std;
 namespace GlobalParameters
 {
 
- /// \short Square of the wavenumber
+ ///  Square of the wavenumber
  double K_squared=10.0; 
   
- /// \short Flag to choose the Dirichlet to Neumann BC
+ ///  Flag to choose the Dirichlet to Neumann BC
  /// or ABC BC
  bool DtN_BC=false;
 
- /// \short Flag to choose wich order to use
+ ///  Flag to choose wich order to use
  // in the ABCs BC: 1 for ABC 1st order...
  unsigned ABC_order=3;
 
@@ -124,7 +124,7 @@ public:
 
  
 
- /// \short Add the element's contribution to its residual vector and
+ ///  Add the element's contribution to its residual vector and
  /// element Jacobian matrix (wrapper)
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -254,11 +254,11 @@ public:
  /// Destructor (empty)
  ~HelmholtzPointSourceProblem(){}
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ ///  Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
  
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve(){} 
 
  /// Update the problem specs after solve (empty)
@@ -281,19 +281,19 @@ public:
  
 private:
 
- /// \short Create BC elements on boundary b of the Mesh pointed
+ ///  Create BC elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the specified survace Mesh 
  void create_outer_bc_elements(
   const unsigned &b, Mesh* const &bulk_mesh_pt,
   Mesh* const & helmholtz_outer_boundary_mesh_pt);
  
- /// \short Delete boundary face elements and wipe the surface mesh
+ ///  Delete boundary face elements and wipe the surface mesh
  void delete_face_elements( Mesh* const & boundary_mesh_pt);
 
- /// \short Set up boundary condition elements on outer boundary
+ ///  Set up boundary condition elements on outer boundary
  void setup_outer_boundary();
 
- /// \short Set up point source
+ ///  Set up point source
  void setup_point_source();
 
 #ifdef ADAPTIVE
@@ -311,7 +311,7 @@ private:
  /// Mesh as geometric object representation of bulk mesh
  MeshAsGeomObject* Mesh_as_geom_obj_pt;
 
- /// \short Pointer to mesh containing the DtN (or ABC) boundary
+ ///  Pointer to mesh containing the DtN (or ABC) boundary
  /// condition elements
  HelmholtzDtNMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
  

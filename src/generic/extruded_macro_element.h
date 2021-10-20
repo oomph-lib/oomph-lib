@@ -58,7 +58,7 @@ namespace oomph
   class ExtrudedMacroElement : public virtual MacroElement
   {
   public:
-    /// \short Constructor: Pass pointer to ExtrudedDomain and the ID number
+    ///  Constructor: Pass pointer to ExtrudedDomain and the ID number
     /// of the ExtrudedMacroElement within that ExtrudedDomain.
     /// NOTE: The base class MacroElement requires a pointer to a Domain
     /// object. However, the ExtrudedDomain class has not yet been defined
@@ -102,7 +102,7 @@ namespace oomph
     } // End of ~ExtrudedMacroElement
 
 
-    /// \short Access function to the ExtrudedDomain
+    ///  Access function to the ExtrudedDomain
     ExtrudedDomain*& extruded_domain_pt()
     {
       // Return a pointer to the extruded domain within which this extruded
@@ -144,7 +144,7 @@ namespace oomph
   class QExtrudedMacroElement<3> : public ExtrudedMacroElement
   {
   public:
-    /// \short Constructor: Pass the pointer to the domain and the ID
+    ///  Constructor: Pass the pointer to the domain and the ID
     /// number of this extruded macro element
     QExtrudedMacroElement(ExtrudedDomain* domain_pt,
                           const unsigned& macro_element_number)
@@ -175,7 +175,7 @@ namespace oomph
     /// Empty destructor
     virtual ~QExtrudedMacroElement() {}
 
-    /// \short Plot: x,y,t in tecplot format
+    ///  Plot: x,y,t in tecplot format
     void output(const unsigned& t, std::ostream& outfile, const unsigned& nplot)
     {
       // Make sure that t=0 otherwise this doesn't make sense
@@ -247,7 +247,7 @@ namespace oomph
                    Vector<double>& r);
 
 
-    /// \short Output all macro element boundaries as tecplot zones
+    ///  Output all macro element boundaries as tecplot zones
     void output_macro_element_boundaries(std::ostream& outfile,
                                          const unsigned& nplot);
   };

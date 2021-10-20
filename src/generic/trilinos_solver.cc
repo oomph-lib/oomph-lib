@@ -481,7 +481,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Function to resolve a linear system using the existing solver
+  ///  Function to resolve a linear system using the existing solver
   /// data, allowing a solve with a new right hand side vector. This
   /// function must be used after a call to solve(...) with
   /// enable_resolve set to true.

@@ -53,7 +53,7 @@ namespace oomph
   class XdaTetMesh : public virtual TetMeshBase
   {
   public:
-    /// \short Constructor: Pass name of xda file. Note that
+    ///  Constructor: Pass name of xda file. Note that
     /// all boundary elements get their own ID -- this is required for
     /// FSI problems. In this case; the vector containing the oomph-lib
     /// boundary IDs of all oomph-lib boundaries that collectively form
@@ -63,7 +63,7 @@ namespace oomph
     XdaTetMesh(const std::string xda_file_name,
                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short Setup boundary coordinate on boundary b while is
+    ///  Setup boundary coordinate on boundary b while is
     /// temporarily flattened to simplex faces. Boundary coordinates are the
     /// x-y coordinates in the plane of that boundary with the
     /// x-axis along the line from the (lexicographically)
@@ -93,14 +93,14 @@ namespace oomph
                                     const bool& switch_normal,
                                     std::ofstream& outfile);
 
-    /// \short Access function to the number of distinct boundaries specified
+    ///  Access function to the number of distinct boundaries specified
     /// in the original xda enumeration.
     unsigned nxda_boundary()
     {
       return Boundary_id.size();
     }
 
-    /// \short Access functions to the Vector of oomph-lib boundary ids
+    ///  Access functions to the Vector of oomph-lib boundary ids
     /// that make up boundary b in the original xda enumeration
     Vector<unsigned> oomph_lib_boundary_ids(const unsigned& xda_boundary_id)
     {
@@ -108,7 +108,7 @@ namespace oomph
     }
 
   private:
-    /// \short Vector of vectors containing the boundary IDs of
+    ///  Vector of vectors containing the boundary IDs of
     /// the overall boundary specified in the xda file.
     Vector<Vector<unsigned>> Boundary_id;
   };
@@ -127,7 +127,7 @@ namespace oomph
                           public virtual SolidMesh
   {
   public:
-    /// \short Constructor. Boundary coordinates are setup
+    ///  Constructor. Boundary coordinates are setup
     /// automatically.
     SolidXdaTetMesh(const std::string xda_file_name,
                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)

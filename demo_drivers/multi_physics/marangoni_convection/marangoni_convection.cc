@@ -104,7 +104,7 @@ protected:
    return (1.0 - Ca*Ma*T);
   }
 
- /// \short Fill in the contribution to the residuals
+ ///  Fill in the contribution to the residuals
   /// Calculate the contribution to the jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
                                        DenseMatrix<double> &jacobian)
@@ -168,7 +168,7 @@ protected:
   }
 
  
- /// \short Overload the Helper function to calculate the residuals and 
+ ///  Overload the Helper function to calculate the residuals and 
  /// jacobian entries. This particular function ensures that the
  /// additional entries are calculated inside the integration loop
  void add_additional_residual_contributions_interface(
@@ -299,22 +299,22 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- /// \short Rayleigh number, set to be zero so that
+ ///  Rayleigh number, set to be zero so that
  /// there are no gravitational effects
  double Rayleigh = 0.0;
 
- /// \short Scaled Bond number (Bo/Ca), set to be zero
+ ///  Scaled Bond number (Bo/Ca), set to be zero
  /// so that there are no gravitational effects
  double Scaled_Bond = 0.0;
  
- /// \short Biot number
+ ///  Biot number
  double Biot = 1.0;
 
- /// \short Marangoni number (just above the threshold for 
+ ///  Marangoni number (just above the threshold for 
  /// linear instability)
  double Marangoni = 125.0;
 
- /// \short Capillary number (of which the results are independent
+ ///  Capillary number (of which the results are independent
  /// for a pinned surface)
  double Capillary = 0.0045;
 
@@ -345,7 +345,7 @@ public:
  /// Destructor. Empty
  ~ConvectionProblem() {}
 
- /// \short Release the free surface so that it can move
+ ///  Release the free surface so that it can move
  void unpin_surface()
   {
    //Only bother if the surface is pinned
@@ -391,7 +391,7 @@ public:
   }
 
 
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
@@ -417,7 +417,7 @@ public:
     }
   }
 
- /// \short Actions before the timestep (update the the time-dependent 
+ ///  Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
   {set_boundary_conditions(time_pt()->time());}
@@ -441,13 +441,13 @@ public:
   } // end_of_unfix_pressure
 
 
- /// \short Doc the solution.
+ ///  Doc the solution.
  void doc_solution();
 
- /// \short Set the boundary conditions
+ ///  Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
- /// \short Overloaded version of the problem's access function to 
+ ///  Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  SingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt;
@@ -465,7 +465,7 @@ private:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-/// \short Constructor for convection problem
+///  Constructor for convection problem
 //========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::

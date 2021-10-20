@@ -90,11 +90,11 @@ class ModalPoissonEquations : public virtual FiniteElement
  
 public:
  
- /// \short Function pointer to source function fct(x,f(x)) -- 
+ ///  Function pointer to source function fct(x,f(x)) -- 
  /// x is a Vector! 
  typedef void (*PoissonSourceFctPt)(const Vector<double>& x, double& f);
  
- /// \short Function pointer to a diffusion function fxt(x,f(x))
+ ///  Function pointer to a diffusion function fxt(x,f(x))
  typedef void (*PoissonDiffFctPt)(const Vector<double> &x, double &f);
  
  /// Constructor (must initialise the Source_fct_pt to null)
@@ -117,7 +117,7 @@ public:
    output(outfile,nplot);
   }
  
- /// \short Output FE representation of soln: x,y,u or x,y,z,u at 
+ ///  Output FE representation of soln: x,y,u or x,y,z,u at 
  /// Nplot^DIM plot points
  void output(ostream &outfile, const unsigned &nplot)
   {
@@ -201,7 +201,7 @@ public:
   }
 
 
- /// \short Output exact soln: x,y,u_exact or x,y,z,u_exact at 
+ ///  Output exact soln: x,y,u_exact or x,y,z,u_exact at 
  /// nplot^DIM plot points (dummy time-dependent version to 
  /// keep intel compiler happy)
  virtual void output_fct(ostream &outfile, const unsigned &nplot,
@@ -525,12 +525,12 @@ public:
   }
 
 
- /// \short Self-test: Return 0 for OK
+ ///  Self-test: Return 0 for OK
  unsigned self_test() {return 0;}
 
 protected:
 
- /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ ///  Shape/test functions and derivs w.r.t. to global coords at 
  /// local coord. s; return  Jacobian of mapping
  virtual double dshape_dbasis_and_dtest_eulerian(const Vector<double> &s, 
                                                  Shape &psi, 
@@ -540,7 +540,7 @@ protected:
                                                  Shape &test, 
                                                  DShape &dtestdx) const=0;
 
- /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ ///  Shape/test functions and derivs w.r.t. to global coords at 
  /// integration point ipt; return  Jacobian of mapping
  virtual double dshape_dbasis_and_dtest_eulerian_at_knot(const unsigned &ipt, 
                                                  Shape &psi, 
@@ -550,7 +550,7 @@ protected:
                                                  Shape &test, 
                                                  DShape &dtestdx) const=0;
 
- /// \short Compute element residual Vector only (if flag=and/or element 
+ ///  Compute element residual Vector only (if flag=and/or element 
  /// Jacobian matrix 
  virtual void add_generic_residual_contribution(Vector<double> &residuals, 
                                                  DenseMatrix<double> &jacobian, 
@@ -702,7 +702,7 @@ class RefineableModalPoissonEquations :
 {
   public:
 
- /// \short Constructor, simply call other constructors
+ ///  Constructor, simply call other constructors
  RefineableModalPoissonEquations() : ModalPoissonEquations<DIM>(),
   RefineableElement(), ElementWithZ2ErrorEstimator() 
   { } 
@@ -729,7 +729,7 @@ class RefineableModalPoissonEquations :
  // FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
  // double& error, double& norm);
  
-/// \short Get the function value u in Vector.
+///  Get the function value u in Vector.
 /// Note: Given the generality of the interface (this function
 /// is usually called from black-box documentation or interpolation routines),
 /// the values Vector sets its own size in here.
@@ -761,7 +761,7 @@ void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
  }
 
 
- /// \short Get the function value u in Vector.
+ ///  Get the function value u in Vector.
  /// Note: Given the generality of the interface (this function
  /// is usually called from black-box documentation or interpolation routines),
  /// the values Vector sets its own size in here.
@@ -797,7 +797,7 @@ void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
 
   private:
 
- /// \short Add element's contribution to elemental residual vector and/or 
+ ///  Add element's contribution to elemental residual vector and/or 
  /// Jacobian matrix 
  /// flag=1: compute both
  /// flag=0: compute only residual vector
@@ -805,7 +805,7 @@ void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
   const unsigned& flag); 
 
- /// \short Compute derivatives of elemental residual vector with respect
+ ///  Compute derivatives of elemental residual vector with respect
  /// to nodal coordinates. Overwrites default implementation in 
  /// FiniteElement base class.
  /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
@@ -1350,7 +1350,7 @@ class ModalPRefineableQPoissonElement :
 {
    public:
 
- /// \short Constructor, simply call the other constructors 
+ ///  Constructor, simply call the other constructors 
  ModalPRefineableQPoissonElement() : 
   RefineableElement(),
   RefineableModalPoissonEquations<DIM>(),
@@ -1378,15 +1378,15 @@ class ModalPRefineableQPoissonElement :
  /// Number of continuously interpolated values: 1
  unsigned ncont_interpolated_values() const {return 1;}
 
- /// \short Number of vertex nodes in the element
+ ///  Number of vertex nodes in the element
  unsigned nvertex_node() const
   {return QPoissonElement<DIM,2>::nvertex_node();}
 
- /// \short Pointer to the j-th vertex node in the element
+ ///  Pointer to the j-th vertex node in the element
  Node* vertex_node_pt(const unsigned& j) const
   {return QPoissonElement<DIM,2>::vertex_node_pt(j);}
 
- /// \short Order of recovery shape functions for Z2 error estimation:
+ ///  Order of recovery shape functions for Z2 error estimation:
  /// - Same order as shape functions.
  //unsigned nrecovery_order()
  // {
@@ -1409,7 +1409,7 @@ class ModalPRefineableQPoissonElement :
  
  //Extra modal stuff:
 
- /// \short Function pointer to source function fct(x,f(x)) -- 
+ ///  Function pointer to source function fct(x,f(x)) -- 
  /// x is a Vector! 
  typedef void (*PoissonSourceFctPt)(const Vector<double>& x, double& f);
  
@@ -1547,7 +1547,7 @@ class ModalPRefineableQPoissonElement :
  {return RefineableModalPoissonEquations<DIM>::self_test();}
  
 //=========================================================================
-/// \short Compute the geometric basis functions and also
+///  Compute the geometric basis functions and also
 /// first derivatives w.r.t. global coordinates at local coordinate s;
 /// Returns Jacobian of mapping from global to local coordinates.
 /// Most general form of the function, but may be over-loaded, if desired
@@ -1557,7 +1557,7 @@ class ModalPRefineableQPoissonElement :
                                 DShape &dbasis) const;
  
 //========================================================================
-/// \short Compute the geometric shape functions and also first
+///  Compute the geometric shape functions and also first
 /// derivatives w.r.t. global coordinates at integration point ipt.
 /// Most general form of function, but may be over-loaded if desired
 //========================================================================
@@ -1566,7 +1566,7 @@ class ModalPRefineableQPoissonElement :
                                               DShape &dbasis) const;
 
 //=========================================================================
-/// \short Return the shape function and its derivatives w.r.t. the local
+///  Return the shape function and its derivatives w.r.t. the local
 /// coordinates at the ipt-th integration point.
 //=========================================================================
  virtual void dbasis_local_at_knot(const unsigned &ipt, Shape &basis,
@@ -1669,7 +1669,7 @@ class ModalPRefineableQPoissonElement :
 };
 
 //=========================================================================
-/// \short Compute the geometric basis functions and also
+///  Compute the geometric basis functions and also
 /// first derivatives w.r.t. global coordinates at local coordinate s;
 /// Returns Jacobian of mapping from global to local coordinates.
 /// Most general form of the function, but may be over-loaded, if desired
@@ -1700,7 +1700,7 @@ double ModalPRefineableQPoissonElement<DIM>::dbasis_eulerian(
 }
 
 //========================================================================
-/// \short Compute the geometric shape functions and also first
+///  Compute the geometric shape functions and also first
 /// derivatives w.r.t. global coordinates at integration point ipt.
 /// Most general form of function, but may be over-loaded if desired
 //========================================================================
@@ -1789,7 +1789,7 @@ public:
    delete Problem::mesh_pt();
   }
  
- /// \short Update the problem specs before solve: Reset boundary conditions
+ ///  Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
  
@@ -1797,11 +1797,11 @@ public:
  void actions_after_newton_solve()
   {}
  
- /// \short Doc the solution. DocInfo object stores flags/labels for where
+ ///  Doc the solution. DocInfo object stores flags/labels for where
  /// the output gets written to.
  void doc_solution(DocInfo& doc_info);
  
- /// \short Overloaded version of the Problem's access function to the mesh.
+ ///  Overloaded version of the Problem's access function to the mesh.
  /// Recasts the pointer to the base Mesh object to the actual mesh type.
  RefineableOneDMesh<ELEMENT>* mesh_pt() 
   {

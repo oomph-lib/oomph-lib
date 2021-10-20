@@ -47,7 +47,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Dummy mesh that can be created and deleted in
+  ///  Dummy mesh that can be created and deleted in
   /// SolidICProblem
   //======================================================================
   class DummyMesh : public Mesh
@@ -63,7 +63,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short IC problem for an elastic body discretised on a given (sub)-mesh.
+  ///  IC problem for an elastic body discretised on a given (sub)-mesh.
   /// We switch the elements' residuals and Jacobians to the system of
   /// equations that forces the wall shape to become that of
   /// a specified "initial condition object".
@@ -87,7 +87,7 @@ namespace oomph
   class SolidICProblem : public Problem
   {
   public:
-    /// \short Constructor. Initialise pointer
+    ///  Constructor. Initialise pointer
     /// to IC object to NULL. Create a dummy mesh that can be deleted
     /// when static problem finally goes out of scope at end of
     /// program execution.
@@ -110,10 +110,10 @@ namespace oomph
     /// Update after solve (empty)
     void actions_after_newton_solve() {}
 
-    /// \short Update the problem specs before solve.  (empty)
+    ///  Update the problem specs before solve.  (empty)
     void actions_before_newton_solve() {}
 
-    /// \short Force the elastic structure that is discretised on the specified
+    ///  Force the elastic structure that is discretised on the specified
     /// mesh to deform in the shape of the initial condition object
     /// (evaluated at the time specified)
     void set_static_initial_condition(Problem* problem_pt,
@@ -121,7 +121,7 @@ namespace oomph
                                       SolidInitialCondition* ic_pt,
                                       const double& time);
 
-    /// \short Force the elastic structure that is discretised on the specified
+    ///  Force the elastic structure that is discretised on the specified
     /// mesh to deform in the shape of the initial condition object (wrapper)
     void set_static_initial_condition(Problem* problem_pt,
                                       Mesh* mesh_pt,
@@ -131,7 +131,7 @@ namespace oomph
       set_static_initial_condition(problem_pt, mesh_pt, ic_pt, time);
     }
 
-    /// \short Setup initial condition for time-integration
+    ///  Setup initial condition for time-integration
     /// with Newmark's method. History values are assigned to that
     /// the velocity and accelerations determined by the Newmark
     /// scheme are exact at the initial time.
@@ -143,7 +143,7 @@ namespace oomph
                                                 const double& dt);
 
 
-    /// \short Setup initial condition for time-integration
+    ///  Setup initial condition for time-integration
     /// with Newmark's method. Past displacements and velocities are assigned
     /// directly (consistent with the idea that a second order ODE
     /// can take ICs up to 1st order, while the history value for
@@ -166,7 +166,7 @@ namespace oomph
       SolidFiniteElement::MultiplierFctPt multiplier_fct_pt = 0);
 
 
-    /// \short Max. tolerated residual after application of consistent
+    ///  Max. tolerated residual after application of consistent
     /// Newmark IC. Used to check if we have specified the correct
     /// timescale ratio (non-dim density).
     double& max_residual_after_consistent_newton_ic()
@@ -195,7 +195,7 @@ namespace oomph
     /// Vector of Vectors  to store pointers to exernal data in the elements
     Vector<Vector<Data*>> Backup_ext_data;
 
-    /// \short Max. tolerated residual after application of consistent
+    ///  Max. tolerated residual after application of consistent
     /// Newmark IC. Used to check if we have specified the correct
     /// timescale ratio (non-dim density).
     double Max_residual_after_consistent_newton_ic;
@@ -203,7 +203,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Setup initial condition for time-integration
+  ///  Setup initial condition for time-integration
   /// with Newmark's method. History values are assigned to that
   /// the velocity and accelerations determined by the Newmark
   /// scheme are exact at the initial time.
@@ -338,7 +338,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Setup initial condition for time-integration
+  ///  Setup initial condition for time-integration
   /// with Newmark's method. Past displacements and velocities are assigned
   /// directly (consistent with the idea that a second order ODE
   /// can take ICs up to 1st order, while the history value for

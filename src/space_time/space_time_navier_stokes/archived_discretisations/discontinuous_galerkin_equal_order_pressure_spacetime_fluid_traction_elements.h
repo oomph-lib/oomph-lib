@@ -166,7 +166,7 @@ namespace oomph
     }
 
   protected:
-    /// \short This function returns the residuals for the traction function.
+    ///  This function returns the residuals for the traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_fluid_traction(
       Vector<double>& residuals,
@@ -174,7 +174,7 @@ namespace oomph
       const unsigned& flag);
 
 
-    /// \short The "global" intrinsic coordinate of the element when
+    ///  The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceSpaceTimeElement representation, by default
     double zeta_nodal(const unsigned& n,
@@ -185,7 +185,7 @@ namespace oomph
     } // End of zeta_nodal
 
 
-    /// \short Access function that returns the local equation numbers
+    ///  Access function that returns the local equation numbers
     /// for velocity components.
     /// u_local_eqn(n,i)=local equation number or < 0 if pinned.
     /// The default is to asssume that n is the local node number
@@ -195,7 +195,7 @@ namespace oomph
       return nodal_local_eqn(n, i);
     }
 
-    /// \short Function to compute the shape and test functions and to return
+    ///  Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
     inline double shape_and_test_at_knot(const unsigned& ipt,
                                          Shape& psi,
@@ -465,7 +465,7 @@ namespace oomph
     ~RefineableNavierStokesSpaceTimeTractionElement() {}
 
 
-    /// \short Number of continuously interpolated values are the
+    ///  Number of continuously interpolated values are the
     /// same as those in the bulk element.
     unsigned ncont_interpolated_values() const
     {
@@ -481,7 +481,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    /// \short This function returns the residuals and the Jacobian
+    ///  This function returns the residuals and the Jacobian
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
     {
@@ -492,7 +492,7 @@ namespace oomph
 
 
   protected:
-    /// \short This function returns the residuals for the traction function.
+    ///  This function returns the residuals for the traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void refineable_fill_in_generic_residual_contribution_fluid_traction(
       Vector<double>& residuals,

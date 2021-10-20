@@ -97,18 +97,18 @@ namespace oomph
   class ImmersedRigidBodyElement : public GeneralisedElement, public GeomObject
   {
   public:
-    /// \short Function pointer to function that specifies
+    ///  Function pointer to function that specifies
     /// external force
     typedef void (*ExternalForceFctPt)(const double& time,
                                        Vector<double>& external_force);
 
-    /// \short Function pointer to function that specifies
+    ///  Function pointer to function that specifies
     /// external torque
     typedef void (*ExternalTorqueFctPt)(const double& time,
                                         double& external_torque);
 
   protected:
-    /// \short Default constructor that intialises everything to
+    ///  Default constructor that intialises everything to
     /// zero. This is expected to be called only from derived clases
     /// such as the ImmersedRigidBodyTriangleMeshPolygon that can provided
     /// their own position() functions.
@@ -133,7 +133,7 @@ namespace oomph
     }
 
   public:
-    /// \short Constructor that takes an underlying geometric object:
+    ///  Constructor that takes an underlying geometric object:
     /// and timestepper.
     ImmersedRigidBodyElement(GeomObject* const& geom_object_pt,
                              TimeStepper* const& time_stepper_pt,
@@ -162,7 +162,7 @@ namespace oomph
       Include_geometric_rotation = true;
     }
 
-    /// \short Set the rotation of the object to be ignored (only really
+    ///  Set the rotation of the object to be ignored (only really
     /// useful if you have a circular shape)
     void unset_geometric_rotation()
     {
@@ -211,7 +211,7 @@ namespace oomph
                       const unsigned& j,
                       Vector<double>& drdt);
 
-    /// \short Destuctor: Cleanup if required
+    ///  Destuctor: Cleanup if required
     ~ImmersedRigidBodyElement()
     {
       if (Displacement_data_is_internal)
@@ -235,7 +235,7 @@ namespace oomph
       return Moment_of_inertia;
     }
 
-    /// \short Pointer to Data for centre of gravity displacement.
+    ///  Pointer to Data for centre of gravity displacement.
     /// Values: 0: x-displ; 1: y-displ; 2: rotation angle.
     Data*& centre_displacement_data_pt()
     {
@@ -323,7 +323,7 @@ namespace oomph
       this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
     }
 
-    /// \short Update the positions of the nodes in fluid elements
+    ///  Update the positions of the nodes in fluid elements
     /// adjacent to the rigid body, defined as being elements in the
     /// drag mesh.
     inline void node_update_adjacent_fluid_elements()
@@ -348,70 +348,70 @@ namespace oomph
     }
 
 
-    /// \short After an external data change, update the nodal positions
+    ///  After an external data change, update the nodal positions
     inline void update_in_external_fd(const unsigned& i)
     {
       node_update_adjacent_fluid_elements();
     }
 
-    ///\short Do nothing to reset within finite-differencing of  external data
+    /// Do nothing to reset within finite-differencing of  external data
     inline void reset_in_external_fd(const unsigned& i) {}
 
-    ///\short After all external data finite-differencing, update nodal
+    /// After all external data finite-differencing, update nodal
     /// positions
     inline void reset_after_external_fd()
     {
       node_update_adjacent_fluid_elements();
     }
 
-    ///\short After an internal data change, update the nodal positions
+    /// After an internal data change, update the nodal positions
     inline void update_in_internal_fd(const unsigned& i)
     {
       node_update_adjacent_fluid_elements();
     }
 
-    ///\short Do nothing to reset within finite-differencing of internal data
+    /// Do nothing to reset within finite-differencing of internal data
     inline void reset_in_internal_fd(const unsigned& i) {}
 
-    ///\short After all internal data finite-differencing, update nodal
+    /// After all internal data finite-differencing, update nodal
     /// positions
     inline void reset_after_internal_fd()
     {
       node_update_adjacent_fluid_elements();
     }
 
-    /// \short Get force and torque from specified fct pointers and
+    ///  Get force and torque from specified fct pointers and
     /// drag mesh
     void get_force_and_torque(const double& time,
                               Vector<double>& force,
                               double& torque);
 
-    /// \short Access to function pointer to function that specifies
+    ///  Access to function pointer to function that specifies
     /// external force
     ExternalForceFctPt& external_force_fct_pt()
     {
       return External_force_fct_pt;
     }
 
-    /// \short Access to function pointer to function that specifies
+    ///  Access to function pointer to function that specifies
     /// external torque
     ExternalTorqueFctPt& external_torque_fct_pt()
     {
       return External_torque_fct_pt;
     }
 
-    /// \short Access fct to mesh containing face elements that allow
+    ///  Access fct to mesh containing face elements that allow
     /// the computation of the drag on the body
     Mesh* const& drag_mesh_pt()
     {
       return Drag_mesh_pt;
     }
 
-    /// \short Function to set the drag mesh and add the appropriate load
+    ///  Function to set the drag mesh and add the appropriate load
     /// and geometric data as external data to the Rigid Body
     void set_drag_mesh(Mesh* const& drag_mesh_pt);
 
-    /// \short Function to clear the drag mesh and all associated external data
+    ///  Function to clear the drag mesh and all associated external data
     void flush_drag_mesh()
     {
       // Delete the hijacked data created as the load
@@ -428,26 +428,26 @@ namespace oomph
       return 1;
     }
 
-    /// \short Return pointer to the j-th (only) Data item that the object's
+    ///  Return pointer to the j-th (only) Data item that the object's
     /// shape depends on.
     Data* geom_data_pt(const unsigned& j)
     {
       return this->Centre_displacement_data_pt;
     }
 
-    /// \short Access function to the direction of gravity
+    ///  Access function to the direction of gravity
     Vector<double>*& g_pt()
     {
       return G_pt;
     }
 
-    /// \short Access function for gravity
+    ///  Access function for gravity
     const Vector<double>& g() const
     {
       return *G_pt;
     }
 
-    /// \short Access function for the pointer to the fluid Reynolds number
+    ///  Access function for the pointer to the fluid Reynolds number
     double*& re_pt()
     {
       return Re_pt;
@@ -459,7 +459,7 @@ namespace oomph
       return *Re_pt;
     }
 
-    /// \short Access function for the pointer to the fluid Strouhal number
+    ///  Access function for the pointer to the fluid Strouhal number
     double*& st_pt()
     {
       return St_pt;
@@ -471,7 +471,7 @@ namespace oomph
       return *St_pt;
     }
 
-    /// \short Access function for pointer to the fluid inverse Froude number
+    ///  Access function for pointer to the fluid inverse Froude number
     /// (dimensionless gravitational loading)
     double*& re_invfr_pt()
     {
@@ -484,7 +484,7 @@ namespace oomph
       return *ReInvFr_pt;
     }
 
-    /// \short Access function for the pointer to the density ratio
+    ///  Access function for the pointer to the density ratio
     double*& density_ratio_pt()
     {
       return Density_ratio_pt;
@@ -497,7 +497,7 @@ namespace oomph
     }
 
   protected:
-    /// \short Helper function to adjust the position in
+    ///  Helper function to adjust the position in
     /// response to changes in position and angle of the solid
     /// about the centre of mass
     inline void apply_rigid_body_motion(const unsigned& t,
@@ -536,7 +536,7 @@ namespace oomph
 
 
   private:
-    /// \short Return the equation number associated with the i-th
+    ///  Return the equation number associated with the i-th
     /// centre of gravity displacment
     /// 0: x-displ; 1: y-displ; 2: rotation angle.
     inline int centre_displacement_local_eqn(const unsigned& i)
@@ -551,7 +551,7 @@ namespace oomph
       }
     }
 
-    /// \short Initialisation function
+    ///  Initialisation function
     void initialise(TimeStepper* const& time_stepper_pt);
 
     /// Get residuals and/or Jacobian
@@ -592,7 +592,7 @@ namespace oomph
     /// Polar moment of inertia of body
     double Moment_of_inertia;
 
-    /// \short Data for centre of gravity displacement.
+    ///  Data for centre of gravity displacement.
     /// Values: 0: x-displ; 1: y-displ; 2: rotation angle.
     Data* Centre_displacement_data_pt;
 
@@ -600,15 +600,15 @@ namespace oomph
     /// Underlying geometric object
     GeomObject* Geom_object_pt;
 
-    /// \short Function pointer to function that specifies
+    ///  Function pointer to function that specifies
     /// external force
     ExternalForceFctPt External_force_fct_pt;
 
-    /// \short Function pointer to function that specifies
+    ///  Function pointer to function that specifies
     /// external torque
     ExternalTorqueFctPt External_torque_fct_pt;
 
-    /// \short Mesh containing face elements that allow the computation of
+    ///  Mesh containing face elements that allow the computation of
     /// the drag on the body
     Mesh* Drag_mesh_pt;
 
@@ -636,7 +636,7 @@ namespace oomph
     /// Static default value for gravity
     static Vector<double> Default_Gravity_vector;
 
-    /// \short Index for the data (internal or external) that contains the
+    ///  Index for the data (internal or external) that contains the
     /// centre-of-gravity displacement
     unsigned Index_for_centre_displacement;
 
@@ -668,7 +668,7 @@ namespace oomph
                                                public ImmersedRigidBodyElement
   {
   public:
-    /// \short Constructor: Specify coordinates of a point inside the hole
+    ///  Constructor: Specify coordinates of a point inside the hole
     /// and a vector of pointers to TriangleMeshPolyLines
     /// that define the boundary segments of the polygon.
     /// Each TriangleMeshPolyLine has its own boundary ID and can contain
@@ -682,7 +682,7 @@ namespace oomph
       TimeStepper* const& time_stepper_pt,
       Data* const& centre_displacement_data_pt = 0);
 
-    /// \short Empty Destuctor
+    ///  Empty Destuctor
     ~ImmersedRigidBodyTriangleMeshPolygon() {}
 
     /// Overload (again) the position to apply the rotation and translation
@@ -705,14 +705,14 @@ namespace oomph
     }
 
 
-    /// \short Update the reference configuration by re-setting the original
+    ///  Update the reference configuration by re-setting the original
     /// position of the vertices to their current ones, re-set the
     /// original position of the centre of mass, and the displacements
     /// and rotations relative to it
     void reset_reference_configuration();
 
   private:
-    /// \short Get the initial position of the polygon
+    ///  Get the initial position of the polygon
     void get_initial_position(const Vector<double>& xi, Vector<double>& r) const
     {
       // Find the number of polylines (boundaries)
@@ -860,7 +860,7 @@ namespace oomph
       } // End of loop over polylines
     }
 
-    /// \short Vector of intrisic coordinate values at the nodes
+    ///  Vector of intrisic coordinate values at the nodes
     Vector<Vector<double>> Zeta_vertex;
   };
 

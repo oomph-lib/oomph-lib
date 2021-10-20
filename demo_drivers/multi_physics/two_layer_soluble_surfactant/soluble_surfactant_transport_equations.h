@@ -139,7 +139,7 @@ protected:
   return (-Beta/(1.0 - C));
  }
    
- /// \short Fill in the contribution to the residuals
+ ///  Fill in the contribution to the residuals
   /// Calculate the contribution to the jacobian
   /*void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
                                        DenseMatrix<double> &jacobian)
@@ -179,7 +179,7 @@ protected:
 
 
  
- /// \short Overload the Helper function to calculate the residuals and 
+ ///  Overload the Helper function to calculate the residuals and 
  /// jacobian entries. This particular function ensures that the
  /// additional entries are calculated inside the integration loop
  void add_additional_residual_contributions_interface(

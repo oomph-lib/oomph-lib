@@ -43,7 +43,7 @@ namespace oomph
 
 
 //======================================================================
-/// \short Refineable version of the linearised axisymmetric
+///  Refineable version of the linearised axisymmetric
 /// Navier--Stokes equations
 //======================================================================
 class RefineableLinearisedAxisymmetricNavierStokesEquations : 
@@ -53,20 +53,20 @@ public virtual ElementWithZ2ErrorEstimator
 {
   protected:
  
- /// \short Pointer to n_p-th pressure node (Default: NULL, 
+ ///  Pointer to n_p-th pressure node (Default: NULL, 
  /// indicating that pressure is not based on nodal interpolation).
  virtual Node* pressure_node_pt(const unsigned& n_p) {return NULL;}
  
- /// \short Unpin all pressure dofs in the element 
+ ///  Unpin all pressure dofs in the element 
  virtual void unpin_elemental_pressure_dofs()=0;
  
- /// \short Pin unused nodal pressure dofs (empty by default, because
+ ///  Pin unused nodal pressure dofs (empty by default, because
  /// by default pressure dofs are not associated with nodes)
  virtual void pin_elemental_redundant_nodal_pressure_dofs(){}
 
   public:
  
- /// \short Empty Constructor
+ ///  Empty Constructor
  RefineableLinearisedAxisymmetricNavierStokesEquations() : 
   LinearisedAxisymmetricNavierStokesEquations(),
   RefineableElement(),
@@ -79,7 +79,7 @@ public virtual ElementWithZ2ErrorEstimator
    return 6;
   }
  
- /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+ ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
  /// in strain rate tensor.
  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   {
@@ -165,7 +165,7 @@ public virtual ElementWithZ2ErrorEstimator
    this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
   }
  
- /// \short Loop over all elements in Vector (which typically contains
+ ///  Loop over all elements in Vector (which typically contains
  /// all the elements in a fluid mesh) and pin the nodal pressure degrees
  /// of freedom that are not being used. Function uses 
  /// the member function
@@ -205,7 +205,7 @@ public virtual ElementWithZ2ErrorEstimator
  
   private:
  
- /// \short Add element's contribution to the elemental residual vector 
+ ///  Add element's contribution to the elemental residual vector 
  /// and/or Jacobian matrix 
  /// flag=1: compute both
  /// flag=0: compute only residual vector
@@ -226,7 +226,7 @@ public virtual ElementWithZ2ErrorEstimator
 
 
 //======================================================================
-/// \short Refineable version of linearised axisymmetric quad
+///  Refineable version of linearised axisymmetric quad
 ///  Taylor Hood elements. (note that unlike the cartesian version
 /// this is not scale-able to higher dimensions!)
 //======================================================================
@@ -294,7 +294,7 @@ public virtual RefineableQElement<2>
 
   public:
  
- /// \short Constructor: 
+ ///  Constructor: 
  RefineableLinearisedAxisymmetricQTaylorHoodElement() : 
   RefineableElement(),
   RefineableLinearisedAxisymmetricNavierStokesEquations(),
@@ -312,7 +312,7 @@ public virtual RefineableQElement<2>
  /// Rebuild from sons: empty
  void rebuild_from_sons(Mesh* &mesh_pt) {}
  
- /// \short Order of recovery shape functions for Z2 error estimation:
+ ///  Order of recovery shape functions for Z2 error estimation:
  /// Same order as shape functions.
  unsigned nrecovery_order() { return 2; }
 
@@ -326,7 +326,7 @@ public virtual RefineableQElement<2>
    return LinearisedAxisymmetricQTaylorHoodElement::vertex_node_pt(j);
   }
  
- /// \short Get the function value u in Vector.
+ ///  Get the function value u in Vector.
  /// Note: Given the generality of the interface (this function
  /// is usually called from black-box documentation or interpolation
  /// routines), the values Vector sets its own size in here.
@@ -354,7 +354,7 @@ public virtual RefineableQElement<2>
    }
  }
  
- /// \short Get the function value u in Vector.
+ ///  Get the function value u in Vector.
  /// Note: Given the generality of the interface (this function
  /// is usually called from black-box documentation or interpolation
  /// routines), the values Vector sets its own size in here.
@@ -397,7 +397,7 @@ public virtual RefineableQElement<2>
    }
  }
  
- ///  \short Perform additional hanging node procedures for variables
+ ///   Perform additional hanging node procedures for variables
  /// that are not interpolated by all nodes. The two pressure components
  /// are stored at the 6th and 7th location in each node
  void further_setup_hanging_nodes()
@@ -409,7 +409,7 @@ public virtual RefineableQElement<2>
     }
   }
 
- /// \short The velocities are isoparametric and so the "nodes" interpolating
+ ///  The velocities are isoparametric and so the "nodes" interpolating
  /// the velocities are the geometric nodes. The pressure "nodes" are a 
  /// subset of the nodes, so when n_value==6 or 7, the n-th pressure
  /// node is returned.
@@ -427,7 +427,7 @@ public virtual RefineableQElement<2>
    else { return this->node_pt(n); }
   }
 
- /// \short The pressure nodes are the corner nodes, so when n_value==6 or 7,
+ ///  The pressure nodes are the corner nodes, so when n_value==6 or 7,
  /// the fraction is the same as the 1d node number, 0 or 1.
  double local_one_d_fraction_of_interpolating_node(const unsigned &n1d,
                                                    const unsigned &i, 
@@ -446,7 +446,7 @@ public virtual RefineableQElement<2>
     }
   }
  
- /// \short The velocity nodes are the same as the geometric nodes. The
+ ///  The velocity nodes are the same as the geometric nodes. The
  /// pressure nodes must be calculated by using the same methods as
  /// the geometric nodes, but by recalling that there are only two pressure
  /// nodes per edge.
@@ -508,7 +508,7 @@ public virtual RefineableQElement<2>
   }
 
 
- /// \short The number of 1d pressure nodes is 2, the number of 1d velocity
+ ///  The number of 1d pressure nodes is 2, the number of 1d velocity
  /// nodes is the same as the number of 1d geometric nodes.
  unsigned ninterpolating_node_1d(const int &n_value)
   {
@@ -517,7 +517,7 @@ public virtual RefineableQElement<2>
    else { return this->nnode_1d(); }
   }
  
- /// \short The number of pressure nodes is 4. The number of 
+ ///  The number of pressure nodes is 4. The number of 
  /// velocity nodes is the same as the number of geometric nodes.
  unsigned ninterpolating_node(const int &n_value)
   {
@@ -526,7 +526,7 @@ public virtual RefineableQElement<2>
    else { return this->nnode(); }
   }
  
- /// \short The basis interpolating the pressure is given by pshape().
+ ///  The basis interpolating the pressure is given by pshape().
  //// The basis interpolating the velocity is shape().
  void interpolating_basis(const Vector<double> &s,
                           Shape &psi,
@@ -583,7 +583,7 @@ public virtual FaceGeometry<FaceGeometry
 
 
 //======================================================================
-/// \short Refineable version of linearised axisymmetric quad
+///  Refineable version of linearised axisymmetric quad
 /// Crouzeix Raviart elements (note that unlike the cartesian version
 /// this is not scale-able to higher dimensions!)
 //======================================================================
@@ -611,7 +611,7 @@ public virtual RefineableQElement<2>
  
   public:
  
-/// \short Constructor:
+///  Constructor:
  RefineableLinearisedAxisymmetricQCrouzeixRaviartElement() : 
   RefineableElement(),
   RefineableLinearisedAxisymmetricNavierStokesEquations(),
@@ -705,22 +705,22 @@ public virtual RefineableQElement<2>
     } // End of loop over pressure components
   }
  
-/// \short Order of recovery shape functions for Z2 error estimation:
+///  Order of recovery shape functions for Z2 error estimation:
 /// Same order as shape functions.
  unsigned nrecovery_order()
   {
    return 2;
   }
   
- /// \short Number of vertex nodes in the element
+ ///  Number of vertex nodes in the element
  unsigned nvertex_node() const
  { return LinearisedAxisymmetricQCrouzeixRaviartElement::nvertex_node(); }
  
- /// \short Pointer to the j-th vertex node in the element
+ ///  Pointer to the j-th vertex node in the element
  Node* vertex_node_pt(const unsigned& j) const
   { return LinearisedAxisymmetricQCrouzeixRaviartElement::vertex_node_pt(j); }
  
- /// \short Get the function value u in Vector.
+ ///  Get the function value u in Vector.
  /// Note: Given the generality of the interface (this function
  /// is usually called from black-box documentation or interpolation
  /// routines), the values Vector sets its own size in here.
@@ -742,7 +742,7 @@ public virtual RefineableQElement<2>
     }
   }
  
- /// \short Get all function values [U^C,U^S,...,P^S] at previous timestep t
+ ///  Get all function values [U^C,U^S,...,P^S] at previous timestep t
  /// (t=0: present; t>0: previous timestep). 
  /// \n 
  /// Note: Given the generality of the interface (this function is
@@ -781,7 +781,7 @@ public virtual RefineableQElement<2>
    }
  }
     
- /// \short Perform additional hanging node procedures for variables
+ ///  Perform additional hanging node procedures for variables
  /// that are not interpolated by all nodes. Empty
  void further_setup_hanging_nodes() {}
  

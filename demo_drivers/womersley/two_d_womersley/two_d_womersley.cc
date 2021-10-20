@@ -102,7 +102,7 @@ public:
   {}
 
 
- /// \short Implement pure virtual fct (defined in the base class 
+ ///  Implement pure virtual fct (defined in the base class 
  /// WomersleyImpedanceTubeBase) that builds the mesh of Womersley elements
  /// (of the type specified by the template argument), using the
  /// specified timestepper. Also applies the boundary condition.
@@ -153,7 +153,7 @@ public:
 
 
  //=======start_of_main====================================================
- /// \short Driver code for Womersley problem driven by outflow
+ ///  Driver code for Womersley problem driven by outflow
  /// from Navier-Stokes mesh
  //========================================================================
  void run_navier_stokes_outflow()
@@ -353,7 +353,7 @@ public:
 
 
  //=======start_of_main====================================================
- /// \short Driver code for Womersley problem based on impedance tube
+ ///  Driver code for Womersley problem based on impedance tube
  //========================================================================
  void run_impedance_tube()
  {
@@ -445,7 +445,7 @@ public:
 
 
 //========================================================================
-/// \short Normal driver code for Womersley problem with prescribed flux
+///  Normal driver code for Womersley problem with prescribed flux
 //========================================================================
 void run_prescribed_flux()
 {
@@ -566,7 +566,7 @@ void run_prescribed_flux()
 
 
 //========================================================================
-/// \short Normal driver code for Womersley problem with prescribed 
+///  Normal driver code for Womersley problem with prescribed 
 /// pressure gradient
 //========================================================================
 void run_prescribed_pressure_gradient()
@@ -686,7 +686,7 @@ void run_prescribed_pressure_gradient()
 
 
 //=======start_of_main====================================================
-/// \short Driver code for Womersley problem
+///  Driver code for Womersley problem
 //========================================================================
 int main()
 {

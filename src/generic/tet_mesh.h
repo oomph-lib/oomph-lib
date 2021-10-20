@@ -93,7 +93,7 @@ namespace oomph
     }
 
 
-    /// \short Set intrinisic coordinates in GeomObject
+    ///  Set intrinisic coordinates in GeomObject
     void set_zeta_in_geom_object(const Vector<double>& zeta)
     {
 #ifdef PARANOID
@@ -113,7 +113,7 @@ namespace oomph
       Zeta_in_geom_object = zeta;
     }
 
-    /// \short Get intrinisic coordinates in GeomObject (returns zero sized
+    ///  Get intrinisic coordinates in GeomObject (returns zero sized
     /// vector if no such coordinates have been specified)
     Vector<double> zeta_in_geom_object() const
     {
@@ -149,7 +149,7 @@ namespace oomph
     /// Set of (one-based!) boundary IDs this vertex lives on
     std::set<unsigned> One_based_boundary_id;
 
-    /// \short Intrinisic coordinates in GeomObject (zero sized if there
+    ///  Intrinisic coordinates in GeomObject (zero sized if there
     /// isn't one.
     Vector<double> Zeta_in_geom_object;
   };
@@ -209,7 +209,7 @@ namespace oomph
       return One_based_boundary_id;
     }
 
-    /// \short Set (one-based!) boundary IDs this facet lives on. Passed to any
+    ///  Set (one-based!) boundary IDs this facet lives on. Passed to any
     /// existing vertices and to any future ones
     void set_one_based_boundary_id(const unsigned& one_based_id)
     {
@@ -225,7 +225,7 @@ namespace oomph
       }
     }
 
-    /// \short Set (one-based!) region ID this facet is adjacent to.
+    ///  Set (one-based!) region ID this facet is adjacent to.
     /// Specification of zero argument is harmless as it indicates that
     /// that facet is not adjacent to any region.
     void set_one_based_adjacent_region_id(const unsigned& one_based_id)
@@ -282,12 +282,12 @@ namespace oomph
     /// (One-based!) boundary IDs this facet lives on
     unsigned One_based_boundary_id;
 
-    /// \short Set of one-based adjacent region ids; no adjacent region if
+    ///  Set of one-based adjacent region ids; no adjacent region if
     /// it's zero.
     std::set<unsigned> One_based_adjacent_region_id;
 
 
-    /// \short Facet is to be embedded in specified one-based region.
+    ///  Facet is to be embedded in specified one-based region.
     /// Defaults to zero, indicating that its not embedded.
     unsigned One_based_region_id_that_facet_is_embedded_in;
   };
@@ -305,7 +305,7 @@ namespace oomph
   class TetMeshFacetedSurface
   {
   public:
-    ///\short Constructor:
+    /// Constructor:
     TetMeshFacetedSurface()
       : Boundaries_can_be_split_in_tetgen(true),
         Geom_object_with_boundaries_pt(0)
@@ -381,7 +381,7 @@ namespace oomph
       return Vertex_pt[j];
     }
 
-    /// \short Access to GeomObject with boundaries associated with this
+    ///  Access to GeomObject with boundaries associated with this
     /// surface (Null if there isn't one!)
     DiskLikeGeomObjectWithBoundaries* geom_object_with_boundaries_pt()
     {
@@ -408,7 +408,7 @@ namespace oomph
       outfile.close();
     }
 
-    /// \short Virtual function that specifies the variation of the
+    ///  Virtual function that specifies the variation of the
     /// zeta coordinates in the GeomObject along the
     /// boundary connecting vertices 0 and 1 in
     /// facet facet_id. Default implementation: Linear interpolation
@@ -427,7 +427,7 @@ namespace oomph
                 (zeta_vertex[1][1] - zeta_vertex[0][1]) * zeta_boundary;
     }
 
-    /// \short Virtual function that specifies the variation of the
+    ///  Virtual function that specifies the variation of the
     /// zeta coordinates in the GeomObject along the
     /// boundary connecting vertices 1 and 2 in
     /// facet facet_id. Default implementation: Linear interpolation
@@ -446,7 +446,7 @@ namespace oomph
                 (zeta_vertex[1][1] - zeta_vertex[0][1]) * zeta_boundary;
     }
 
-    /// \short Virtual function that specifies the variation of the
+    ///  Virtual function that specifies the variation of the
     /// zeta coordinates in the GeomObject along the
     /// boundary connecting vertices 2 and 0 in
     /// facet facet_id. Default implementation: Linear interpolation
@@ -466,7 +466,7 @@ namespace oomph
     }
 
 
-    /// \short Facet connectivity: vertex_index[j] is the index of the
+    ///  Facet connectivity: vertex_index[j] is the index of the
     /// j-th vertex (in the Vertex_pt vector) in facet f. Bit of an obscure
     /// functionality that's only needed for setup tetgen_io.
     Vector<unsigned> vertex_index_in_tetgen(const unsigned& f)
@@ -485,15 +485,15 @@ namespace oomph
     /// Vector of pointers to facets
     Vector<TetMeshFacet*> Facet_pt;
 
-    /// \short Boolean to indicate whether extra vertices can be added
+    ///  Boolean to indicate whether extra vertices can be added
     /// on the boundary in tetgen
     bool Boundaries_can_be_split_in_tetgen;
 
-    /// \short Facet connectivity: Facet_vertex_index[f][j] is the index of the
+    ///  Facet connectivity: Facet_vertex_index[f][j] is the index of the
     /// j-th vertex (in the Vertex_pt vector) in facet f.
     Vector<Vector<unsigned>> Facet_vertex_index_in_tetgen;
 
-    /// \short GeomObject with boundaries associated with this surface
+    ///  GeomObject with boundaries associated with this surface
     DiskLikeGeomObjectWithBoundaries* Geom_object_with_boundaries_pt;
 
 
@@ -537,7 +537,7 @@ namespace oomph
   class TetMeshFacetedClosedSurface : public virtual TetMeshFacetedSurface
   {
   public:
-    ///\short Constructor:
+    /// Constructor:
     TetMeshFacetedClosedSurface()
       : TetMeshFacetedSurface(), Faceted_volume_represents_hole_for_gmsh(false)
     {
@@ -577,7 +577,7 @@ namespace oomph
       Internal_point_for_tetgen.push_back(std::make_pair(hole_point, -1));
     }
 
-    /// \short Specify a region; pass (zero-based) region ID and coordinate
+    ///  Specify a region; pass (zero-based) region ID and coordinate
     /// of point in region for tetgen
     void set_region_for_tetgen(const unsigned& region_id,
                                const Vector<double>& region_point)
@@ -586,14 +586,14 @@ namespace oomph
         std::make_pair(region_point, region_id));
     }
 
-    /// \short Number of internal points (identifying either regions or holes)
+    ///  Number of internal points (identifying either regions or holes)
     /// for tetgen
     unsigned ninternal_point_for_tetgen()
     {
       return Internal_point_for_tetgen.size();
     }
 
-    /// \short Return the (zero-based) region ID of j-th internal point for
+    ///  Return the (zero-based) region ID of j-th internal point for
     /// tetgen. Negative if it's actually a hole.
     const int& region_id_for_tetgen(const unsigned& j) const
     {
@@ -672,15 +672,15 @@ namespace oomph
     /// Destructor (empty)
     virtual ~TetMeshBase() {}
 
-    /// \short Global static data that specifies the permitted
+    ///  Global static data that specifies the permitted
     /// error in the setup of the boundary coordinates
     static double Tolerance_for_boundary_finding;
 
-    /// \short Assess mesh quality: Ratio of max. edge length to min. height,
+    ///  Assess mesh quality: Ratio of max. edge length to min. height,
     /// so if it's very large it's BAAAAAD.
     void assess_mesh_quality(std::ofstream& some_file);
 
-    /// \short Setup boundary coordinate on boundary b which is
+    ///  Setup boundary coordinate on boundary b which is
     /// assumed to be planar. Boundary coordinates are the
     /// x-y coordinates in the plane of that boundary, with the
     /// x-axis along the line from the (lexicographically)
@@ -709,7 +709,7 @@ namespace oomph
       this->setup_boundary_coordinates<ELEMENT>(b, switch_normal, some_file);
     }
 
-    /// \short Setup boundary coordinate on boundary b which is
+    ///  Setup boundary coordinate on boundary b which is
     /// assumed to be planar. Boundary coordinates are the
     /// x-y coordinates in the plane of that boundary, with the
     /// x-axis along the line from the (lexicographically)
@@ -740,7 +740,7 @@ namespace oomph
     }
 
 
-    /// \short Setup boundary coordinate on boundary b which is
+    ///  Setup boundary coordinate on boundary b which is
     /// assumed to be planar. Boundary coordinates are the
     /// x-y coordinates in the plane of that boundary, with the
     /// x-axis along the line from the (lexicographically)
@@ -765,7 +765,7 @@ namespace oomph
                                     const bool& switch_normal,
                                     std::ofstream& outfile);
 
-    /// \short Setup boundary coordinate on boundary b which is
+    ///  Setup boundary coordinate on boundary b which is
     /// assumed to be planar. Boundary coordinates are the
     /// x-y coordinates in the plane of that boundary, with the
     /// x-axis along the line from the (lexicographically)
@@ -901,7 +901,7 @@ namespace oomph
       }
     }
 
-    /// \short Return the i-th region attribute (here only used as the
+    ///  Return the i-th region attribute (here only used as the
     /// (assumed to be unsigned) region id
     double region_attribute(const unsigned& i)
     {
@@ -947,7 +947,7 @@ namespace oomph
       }
     }
 
-    /// \short Snap boundaries specified by the IDs listed in boundary_id to
+    ///  Snap boundaries specified by the IDs listed in boundary_id to
     /// a quadratric surface, specified in the file
     /// quadratic_surface_file_name. This is usually used with vmtk-based
     /// meshes for which oomph-lib's xda to poly conversion code produces the
@@ -965,7 +965,7 @@ namespace oomph
       const bool& switch_normal,
       DocInfo& doc_info);
 
-    /// \short Snap boundaries specified by the IDs listed in boundary_id to
+    ///  Snap boundaries specified by the IDs listed in boundary_id to
     /// a quadratric surface, specified in the file
     /// quadratic_surface_file_name. This is usually used with vmtk-based
     /// meshes for which oomph-lib's xda to poly conversion code produces the
@@ -988,13 +988,13 @@ namespace oomph
         boundary_id, quadratic_surface_file_name, switch_normal, doc_info);
     }
 
-    /// \short Move the nodes on boundaries with associated GeomObjects so
+    ///  Move the nodes on boundaries with associated GeomObjects so
     /// that they exactly coincide with the geometric object. This requires
     /// that the boundary coordinates are set up consistently.
     void snap_nodes_onto_geometric_objects();
 
 
-    /// \short Non-Delaunay split elements that have three faces on a boundary
+    ///  Non-Delaunay split elements that have three faces on a boundary
     /// into sons. Timestepper species timestepper for new nodes; defaults
     /// to to steady timestepper.
     template<class ELEMENT>
@@ -1011,17 +1011,17 @@ namespace oomph
     }
 
 
-    /// \short Setup lookup schemes which establish which elements are located
+    ///  Setup lookup schemes which establish which elements are located
     /// next to mesh's boundaries. Doc in outfile (if it's open).
     void setup_boundary_element_info(std::ostream& outfile);
 
 
   protected:
-    /// \short Vectors of vectors of elements in each region (note: this just
+    ///  Vectors of vectors of elements in each region (note: this just
     /// stores them; the region IDs are contained in Region_attribute!)
     Vector<Vector<FiniteElement*>> Region_element_pt;
 
-    /// \short Vector of attributes associated with the elements in each region
+    ///  Vector of attributes associated with the elements in each region
     /// NOTE: double is enforced on us by tetgen. We use it as an unsigned
     /// to indicate the actual (zero-based) region ID
     Vector<double> Region_attribute;
@@ -1030,7 +1030,7 @@ namespace oomph
     Vector<std::map<unsigned, Vector<FiniteElement*>>>
       Boundary_region_element_pt;
 
-    /// \short Storage for the face index adjacent to a boundary in a particular
+    ///  Storage for the face index adjacent to a boundary in a particular
     /// region
     Vector<std::map<unsigned, Vector<int>>> Face_index_region_at_boundary;
 
@@ -1040,15 +1040,15 @@ namespace oomph
     /// Vector to faceted surfaces that define internal boundaries
     Vector<TetMeshFacetedSurface*> Internal_surface_pt;
 
-    /// \short Reverse lookup scheme: Pointer to faceted surface (if any!)
+    ///  Reverse lookup scheme: Pointer to faceted surface (if any!)
     /// associated with boundary b
     std::map<unsigned, TetMeshFacetedSurface*> Tet_mesh_faceted_surface_pt;
 
-    /// \short Reverse lookup scheme: Pointer to facet (if any!)
+    ///  Reverse lookup scheme: Pointer to facet (if any!)
     /// associated with boundary b
     std::map<unsigned, TetMeshFacet*> Tet_mesh_facet_pt;
 
-    /// \short Boundary coordinates of vertices in triangular facets
+    ///  Boundary coordinates of vertices in triangular facets
     /// associated with given boundary. Is only set up for triangular facets!
     std::map<unsigned, Vector<Vector<double>>>
       Triangular_facet_vertex_boundary_coordinate;

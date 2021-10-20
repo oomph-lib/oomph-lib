@@ -87,7 +87,7 @@ class OscRingNStProblem : public Problem
 
 public:
 
- /// \short Constructor: Pass timestep and function pointer to the 
+ ///  Constructor: Pass timestep and function pointer to the 
  /// solution that provides the initial conditions for the fluid
  OscRingNStProblem(const double& dt,
                    FiniteElement::UnsteadyExactSolutionFctPt IC_fct_pt);
@@ -104,10 +104,10 @@ public:
  /// Update after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve(){}
 
- /// \short Update the problem specs before checking Newton
+ ///  Update the problem specs before checking Newton
  /// convergence: Update the fluid mesh and re-set velocity
  ///  boundary conditions -- no slip velocity on the wall means
  /// that the velocity on the wall is dependent.
@@ -119,7 +119,7 @@ public:
  }
 
 
- /// \short Update the problem specs after adaptation:
+ ///  Update the problem specs after adaptation:
  /// Set auxiliary update function that applies no slip on all 
  /// boundary nodes and choose fluid pressure dof that drives
  /// the wall deformation
@@ -152,7 +152,7 @@ public:
  void unsteady_run(const unsigned &ntsteps, const bool& restarted,
                    DocInfo& doc_info);
 
- /// \short Set initial condition (incl previous timesteps) according
+ ///  Set initial condition (incl previous timesteps) according
  /// to specified function. 
  void set_initial_condition();
  
@@ -165,10 +165,10 @@ public:
    return Fluid_mesh_pt; 
   }
  
- /// \short Dump problem data.
+ ///  Dump problem data.
  void dump_it(ofstream& dump_file, DocInfo doc_info);
 
- /// \short Read problem data.
+ ///  Read problem data.
  void restart(ifstream& restart_file);
 
 private:
@@ -194,7 +194,7 @@ private:
  /// Pointer to node on coarsest mesh on which velocity is traced
  Node* Veloc_trace_node_pt;
 
- /// \short Pointer to node in symmetry plane on coarsest mesh at 
+ ///  Pointer to node in symmetry plane on coarsest mesh at 
  /// which velocity is traced
  Node* Sarah_veloc_trace_node_pt;
 

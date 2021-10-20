@@ -50,7 +50,7 @@ using namespace oomph;
 //========================================================================
 namespace GlobalParameters
 {
- /// \short Solver specific parameters:
+ ///  Solver specific parameters:
  ///----------------------------------- 
  /// The number of nodes in one direction (default=2)
  unsigned Nnode_1d=2;
@@ -64,34 +64,34 @@ namespace GlobalParameters
  /// The number of adaptations allowed by the Newton solver
  unsigned N_adaptations=1;
 
- /// \short The choice of whether or not to use adaptation
+ ///  The choice of whether or not to use adaptation
  ///    0 = Uniform refinement
  ///    1 = Adaptive refinement
  unsigned Use_adaptation_flag=0;
 
- /// \short The choice of pre-smoother:
+ ///  The choice of pre-smoother:
  ///    0 = Automatic (GMRES as a smoother on levels where kh>0.5)
  ///    1 = Damped Jacobi on all levels with a constant omega value
  unsigned Pre_smoother_flag=0;
  
- /// \short The choice of post-smoother:
+ ///  The choice of post-smoother:
  ///    0 = Automatic (GMRES as a smoother on levels where kh>0.5)
  ///    1 = Damped Jacobi on all levels with a constant omega value
  unsigned Post_smoother_flag=0;
 
- /// \short The choice of linear solver
+ ///  The choice of linear solver
  ///    0 = SuperLU
  ///    1 = Multigrid
  unsigned Linear_solver_flag=1;
  
- /// \short The MG solver allows for five different levels of output:
+ ///  The MG solver allows for five different levels of output:
  ///    0 = Outputs everything
  ///    1 = Outputs everything except the smoother timings 
  ///    2 = Outputs setup information but no V-cycle timings
  ///    3 = Suppresses all output
  unsigned Output_management_flag=0;
   
- /// \short Variable used to decide whether or not convergence information
+ ///  Variable used to decide whether or not convergence information
  /// is displayed:
  ///    0 = Don't display convergence information
  ///    1 = Display convergence information
@@ -103,7 +103,7 @@ namespace GlobalParameters
  // Pointer to the output stream -- defaults to oomph_info
  std::ostream* Stream_pt;
   
- /// \short Problem specific parameters:
+ ///  Problem specific parameters:
  ///------------------------------------
  /// Length of the cube in each direction
  double Lx=1.0;
@@ -178,7 +178,7 @@ namespace GlobalParameters
  // Set the exact solution pointer to the get_simple_exact_u function above
  FiniteElement::SteadyExactSolutionFctPt simple_exact_u_pt=&get_simple_exact_u;
 
- /// \short New mapping function that makes the mapping independent of the
+ ///  New mapping function that makes the mapping independent of the
  /// PML thickness
  class TestPMLMapping : public virtual PMLMapping
  {
@@ -188,7 +188,7 @@ namespace GlobalParameters
   /// Default constructor (empty)
   TestPMLMapping(){};
 
-  /// \short Overwrite the pure PML mapping coefficient function to return the
+  ///  Overwrite the pure PML mapping coefficient function to return the
   /// coeffcients proposed by Bermudez et al
   std::complex<double> gamma(const double& nu_i,
 			     const double& pml_width_i,
@@ -209,7 +209,7 @@ namespace GlobalParameters
  /// Set the new PML mapping
  TestPMLMapping* Test_pml_mapping_pt=new TestPMLMapping;
  
- /// \short The choice of whether or not to enable the new test mapping
+ ///  The choice of whether or not to enable the new test mapping
  ///    1 = Enable test mapping
  ///    0 = Disable test mapping
  unsigned Enable_test_pml_mapping_flag=0;
@@ -217,7 +217,7 @@ namespace GlobalParameters
  /// The tolerance for a point relative to the bounding inner square
  double Eps=1.0e-12;
    
- /// \short Function to determine whether or not a point lies in the centre
+ ///  Function to determine whether or not a point lies in the centre
  /// of the mesh (in the pinned region)
  bool is_in_pinned_region(const Vector<double>& x)
  {
@@ -243,7 +243,7 @@ namespace Smoother_Factory_Function_Helper
  /// The value of the damping factor for the damped Jacobi smoother
  double Omega=0.4;
  
- /// \short Returns a pointer to a Smoother object which is to be used as
+ ///  Returns a pointer to a Smoother object which is to be used as
  /// the pre-smoother
  HelmholtzSmoother* set_pre_smoother()
  {
@@ -251,7 +251,7 @@ namespace Smoother_Factory_Function_Helper
   return new ComplexDampedJacobi<CRDoubleMatrix>(Omega);
  } 
  
- /// \short Returns a pointer to a Smoother object which is to be used as
+ ///  Returns a pointer to a Smoother object which is to be used as
  /// the post-smoother
  HelmholtzSmoother* set_post_smoother()
  {
@@ -319,7 +319,7 @@ private:
   return new PMLStructuredCubicHelmholtz<ELEMENT>;
  }
 
- /// \short Overload the mg_bulk_mesh_pt function to return a pointer to the
+ ///  Overload the mg_bulk_mesh_pt function to return a pointer to the
  /// "refineable" portion of the mesh
  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt()
  {

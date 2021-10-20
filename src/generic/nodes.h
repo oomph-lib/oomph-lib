@@ -63,7 +63,7 @@ namespace oomph
   class BoundaryNode;
 
   //=====================================================================
-  /// \short A class that represents a collection of data;
+  ///  A class that represents a collection of data;
   /// each Data object may contain many different individual values,
   /// as would be natural in non-scalar problems.
   /// Data provides storage for auxiliary `history' values that are
@@ -101,7 +101,7 @@ namespace oomph
     // the use of positions as variables for solid mechanics problems.
     friend class SolidNode;
 
-    /// \short C-style array of pointers to data values and
+    ///  C-style array of pointers to data values and
     /// possible history values. The data must be ordered in such a way
     /// that Value[i][t] gives the i-th data value at the time value t.
     /// The ordering is chosen so that all the time levels of a particular
@@ -111,49 +111,49 @@ namespace oomph
     /// value(time,ival) and set_value(time,ival,value), where time=0: present.
     double** Value;
 
-    /// \short C-style array of pointers to the (global) equation numbers
+    ///  C-style array of pointers to the (global) equation numbers
     /// of the values.
     long* Eqn_number;
 
-    /// \short Pointer to a Timestepper.
+    ///  Pointer to a Timestepper.
     /// The inclusion of a Timestepper pointer in the Data class, ensures that
     /// time-derivatives can be calculated and storage can be managed at the
     /// low (Data) level.
     TimeStepper* Time_stepper_pt;
 
   protected:
-    /// \short C-style array of any Data objects that contain copies
+    ///  C-style array of any Data objects that contain copies
     /// of the current Data object's data values.
     Data** Copy_of_data_pt;
 
-    /// \short Number of Data that contain copies of this Data object's
+    ///  Number of Data that contain copies of this Data object's
     /// values
     unsigned Ncopies;
 
   private:
-    /// \short Number of values stored in the data object.
+    ///  Number of values stored in the data object.
     unsigned Nvalue;
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Non-halo processor ID for Data; -1 if it's not a halo.
+    ///  Non-halo processor ID for Data; -1 if it's not a halo.
     int Non_halo_proc_ID;
 
 #endif
 
-    /// \short Check that the arguments are within
+    ///  Check that the arguments are within
     /// the range of the stored data values and timesteps.
     void range_check(const unsigned& t, const unsigned& i) const;
 
-    /// \short Delete all storage allocated by the Data object for values
+    ///  Delete all storage allocated by the Data object for values
     /// and equation numbers.
     void delete_value_storage();
 
-    /// \short Add the pointer data_pt to the array Copy_of_data_pt.
+    ///  Add the pointer data_pt to the array Copy_of_data_pt.
     /// This should be used whenever copies are made of the data.
     void add_copy(Data* const& data_pt);
 
-    /// \short Remove the pointer data_pt from the array Copy_of_data_pt.
+    ///  Remove the pointer data_pt from the array Copy_of_data_pt.
     /// This should be used whenever copies of the data are deleted.
     void remove_copy(Data* const& data_pt);
 
@@ -161,7 +161,7 @@ namespace oomph
     /// Default (static) timestepper used in steady problems.
     static TimeStepper* Default_static_time_stepper_pt;
 
-    /// \short Helper function that should be overloaded in derived classes
+    ///  Helper function that should be overloaded in derived classes
     /// that can contain copies of Data. The function must
     /// reset the internal pointers to the copied data. This is used
     /// when resizing data to ensure that all the pointers remain valid.
@@ -170,7 +170,7 @@ namespace oomph
     virtual void reset_copied_pointers();
 
   public:
-    /// \short Helper function that should be overloaded derived classes
+    ///  Helper function that should be overloaded derived classes
     /// that contain copies of data. The function must
     /// unset (NULL out) the internal pointers to the copied data.
     /// This is used when destructing data to ensure that all pointers remain
@@ -178,34 +178,34 @@ namespace oomph
     /// be a copy.
     virtual void clear_copied_pointers();
 
-    /// \short Static "Magic number" used in place of the equation number to
+    ///  Static "Magic number" used in place of the equation number to
     /// indicate that the value is pinned.
     static long Is_pinned;
 
-    /// \short Static "Magic number" used in place of the equation number to
+    ///  Static "Magic number" used in place of the equation number to
     /// indicate that the value is pinned, but only for the duration of a
     /// segregated solve.
     static long Is_segregated_solve_pinned;
 
-    /// \short Static "Magic number" used in place of the equation number to
+    ///  Static "Magic number" used in place of the equation number to
     /// denote a value that hasn't been classified as pinned or free.
     static long Is_unclassified;
 
-    ///\short Static "Magic number" used in place of the equation number to
+    /// Static "Magic number" used in place of the equation number to
     /// indicate that the value is constrained because it is associated
     /// with non-conforming element boundaries --- a hanging node ---
     ///(and is therefore pinned)
     static long Is_constrained;
 
-    ///\short Default: Just set pointer to (steady) timestepper.
+    /// Default: Just set pointer to (steady) timestepper.
     /// No storage for values is allocated.
     Data();
 
-    ///\short Default constructor for steady problems:
+    /// Default constructor for steady problems:
     /// assign memory for initial_n_value values.
     Data(const unsigned& initial_n_value);
 
-    /// \short Constructor for unsteady problems: assign memory for
+    ///  Constructor for unsteady problems: assign memory for
     /// initial_n_value values and any memory required by the Timestepper for
     /// the storage of history values.
     // ALH: Note the "awkward" C++ syntax for passing a constant reference to
@@ -216,7 +216,7 @@ namespace oomph
          const unsigned& initial_n_value,
          const bool& allocate_storage = true);
 
-    /// \short Broken copy constructor.
+    ///  Broken copy constructor.
     Data(const Data& data) = delete;
 
     /// Broken assignment operator.
@@ -229,7 +229,7 @@ namespace oomph
     /// Destructor, deallocates memory assigned for data.
     virtual ~Data();
 
-    /// \short Set a new timestepper by resizing the appropriate storage.
+    ///  Set a new timestepper by resizing the appropriate storage.
     /// If already assigned the equation numbering will not be altered
     void set_time_stepper(TimeStepper* const& time_stepper_pt,
                           const bool& preserve_existing_data);
@@ -246,7 +246,7 @@ namespace oomph
       return Time_stepper_pt;
     }
 
-    /// \short Return a boolean to indicate whether
+    ///  Return a boolean to indicate whether
     /// the Data objact contains any copied values.
     /// A base Data object can never be a copy so the default implementation
     /// always returns false.
@@ -255,7 +255,7 @@ namespace oomph
       return false;
     }
 
-    /// \short Return flag to indicate whether the i-th value is a copy.
+    ///  Return flag to indicate whether the i-th value is a copy.
     /// A base Data object can never be a copy so the default implementation
     /// always returns false.
     virtual bool is_a_copy(const unsigned& i) const
@@ -263,7 +263,7 @@ namespace oomph
       return false;
     }
 
-    /// \short Set the i-th stored data value to specified value.
+    ///  Set the i-th stored data value to specified value.
     /// The only reason that we require an explicit set function is
     /// because we redefine value() in the Node class to interpolate
     /// the values for nodes that are hanging and so we cannot
@@ -276,7 +276,7 @@ namespace oomph
       Value[i][0] = value_;
     }
 
-    /// \short Set the t-th history value of the i-th stored data value to
+    ///  Set the t-th history value of the i-th stored data value to
     /// specified value.
     void set_value(const unsigned& t, const unsigned& i, const double& value_)
     {
@@ -286,7 +286,7 @@ namespace oomph
       Value[i][t] = value_;
     }
 
-    /// \short Return i-th stored value.
+    ///  Return i-th stored value.
     /// This function is not virtual so that it can be inlined.
     /// This means that if we have an explicit pointer to a Data object
     /// Data* data_pt->value() always returns the "raw" stored value.
@@ -298,7 +298,7 @@ namespace oomph
       return Value[i][0];
     }
 
-    /// \short Return i-th value at time level t (t=0: present, t>0: previous)
+    ///  Return i-th value at time level t (t=0: present, t>0: previous)
     /// This function is not virtual so that it can be inlined.
     /// This means that if we have an explicit pointer to a Data object
     /// Data* data_pt->value() always returns to the "raw" stored value.
@@ -313,11 +313,11 @@ namespace oomph
     /// Compute Vector of values for the Data value.
     void value(Vector<double>& values) const;
 
-    /// \short Compute Vector of values (dofs or pinned) in this data
+    ///  Compute Vector of values (dofs or pinned) in this data
     /// at time level t (t=0: present; t>0: previous).
     void value(const unsigned& t, Vector<double>& values) const;
 
-    /// \short Return the pointer to the i-the stored value.
+    ///  Return the pointer to the i-the stored value.
     /// Typically this is required when direct access
     /// to the stored value is required, e.g. when writing functions that
     /// return a reference to a variable that is stored in a Data object.
@@ -329,7 +329,7 @@ namespace oomph
       return Value[i];
     }
 
-    /// \short Return the pointer to the i-th stored value,
+    ///  Return the pointer to the i-th stored value,
     /// or any of its history values (const version).
     /// Typically this is required when direct access
     /// to the stored value is required, e.g. when writing functions that
@@ -381,13 +381,13 @@ namespace oomph
       return Eqn_number[i];
     }
 
-    /// \short Pin the i-th stored variable.
+    ///  Pin the i-th stored variable.
     inline void pin(const unsigned& i)
     {
       eqn_number(i) = Is_pinned;
     }
 
-    /// \short Unpin the i-th stored variable.
+    ///  Unpin the i-th stored variable.
     inline void unpin(const unsigned& i)
     {
       eqn_number(i) = Is_unclassified;
@@ -413,20 +413,20 @@ namespace oomph
       }
     }
 
-    /// \short Test whether the i-th variable is pinned (1: true; 0: false).
+    ///  Test whether the i-th variable is pinned (1: true; 0: false).
     bool is_pinned(const unsigned& i) const
     {
       return (Eqn_number[i] == Is_pinned);
     }
 
-    /// \short Test whether the i-th variable is temporaily pinned for a
+    ///  Test whether the i-th variable is temporaily pinned for a
     /// segregated solve.
     bool is_segregated_solve_pinned(const unsigned& i)
     {
       return Eqn_number[i] == Is_segregated_solve_pinned;
     }
 
-    /// \short Constrain the i-th stored variable when making hanging data
+    ///  Constrain the i-th stored variable when making hanging data
     /// If the data is already pinned leave it along, otherwise mark as
     /// constrained (hanging)
     inline void constrain(const unsigned& i)
@@ -437,7 +437,7 @@ namespace oomph
       }
     }
 
-    /// \short Unconstrain the i-th stored variable when make the data
+    ///  Unconstrain the i-th stored variable when make the data
     /// nonhanging. Only unconstrain if it was actually constrained (hanging)
     inline void unconstrain(const unsigned& i)
     {
@@ -467,7 +467,7 @@ namespace oomph
       }
     }
 
-    /// \short Test whether the i-th variable is constrained (1: true; 0:
+    ///  Test whether the i-th variable is constrained (1: true; 0:
     /// false).
     bool is_constrained(const unsigned& i)
     {
@@ -475,7 +475,7 @@ namespace oomph
     }
 
 
-    /// \short Self-test: Have all values been classified as pinned/unpinned?
+    ///  Self-test: Have all values been classified as pinned/unpinned?
     /// Return 0 if OK.
     unsigned self_test();
 
@@ -485,16 +485,16 @@ namespace oomph
       return Nvalue;
     }
 
-    /// \short Return total number of doubles stored per value
+    ///  Return total number of doubles stored per value
     /// to record time history of each value (one for steady problems).
     unsigned ntstorage() const;
 
-    /// \short Assign global equation numbers; increment global number
+    ///  Assign global equation numbers; increment global number
     /// of unknowns, global_ndof; and add any new dofs to the dof_pt.
     virtual void assign_eqn_numbers(unsigned long& global_ndof,
                                     Vector<double*>& dof_pt);
 
-    /// \short Function to describe the dofs of the Node. The ostream
+    ///  Function to describe the dofs of the Node. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -508,55 +508,55 @@ namespace oomph
     /// Change (increase) the number of values that may be stored.
     virtual void resize(const unsigned& n_value);
 
-    /// \short Add pointers to all unpinned and unconstrained data to a map
+    ///  Add pointers to all unpinned and unconstrained data to a map
     /// indexed by (global) equation number
     virtual void add_value_pt_to_map(
       std::map<unsigned, double*>& map_of_value_pt);
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Label the node as halo and specify processor that holds
+    ///  Label the node as halo and specify processor that holds
     /// non-halo counterpart
     void set_halo(const unsigned& non_halo_proc_ID)
     {
       Non_halo_proc_ID = non_halo_proc_ID;
     }
 
-    /// \short Label the node as not being a halo
+    ///  Label the node as not being a halo
     void set_nonhalo()
     {
       Non_halo_proc_ID = -1;
     }
 
-    /// \short Is this Data a halo?
+    ///  Is this Data a halo?
     bool is_halo() const
     {
       return (Non_halo_proc_ID != -1);
     }
 
-    /// \short ID of processor ID that holds non-halo counterpart
+    ///  ID of processor ID that holds non-halo counterpart
     /// of halo node; negative if not a halo.
     int non_halo_proc_ID()
     {
       return Non_halo_proc_ID;
     }
 
-    /// \short Add all data and time history values to the vector in
+    ///  Add all data and time history values to the vector in
     /// the internal storage order
     virtual void add_values_to_vector(Vector<double>& vector_of_values);
 
-    /// \short Read all data and time history values from the vector
+    ///  Read all data and time history values from the vector
     /// starting from index. On return the index will be
     /// set to the value at the end of the data that has been read in
     virtual void read_values_from_vector(const Vector<double>& vector_of_values,
                                          unsigned& index);
 
 
-    /// \short Add all equation numbers to the vector in
+    ///  Add all equation numbers to the vector in
     /// the internal storage order
     virtual void add_eqn_numbers_to_vector(Vector<long>& vector_of_eqn_numbers);
 
-    /// \short Read all equation numbers from the vector
+    ///  Read all equation numbers from the vector
     /// starting from index. On return the index will be
     /// set to the value at the end of the data that has been read in
     virtual void read_eqn_numbers_from_vector(
@@ -567,36 +567,36 @@ namespace oomph
   };
 
   //=========================================================================
-  /// \short Custom Data class that is used when HijackingData.
+  ///  Custom Data class that is used when HijackingData.
   /// The class always contains a single value that is
   /// copied from another Data object.
   //=========================================================================
   class HijackedData : public Data
   {
   private:
-    ///\short Pointer to the Data object from which the value is copied
+    /// Pointer to the Data object from which the value is copied
     Data* Copied_data_pt;
 
-    ///\short Index of the value that is copied from within the Data object
+    /// Index of the value that is copied from within the Data object
     unsigned Copied_index;
 
-    /// \short Reset the pointers to the copied data.
+    ///  Reset the pointers to the copied data.
     void reset_copied_pointers();
 
   public:
-    /// \short Clear the pointers to the copied data
+    ///  Clear the pointers to the copied data
     void clear_copied_pointers();
 
-    ///\short Constructor
+    /// Constructor
     HijackedData(const unsigned& copied_value, Data* const& data_pt);
 
-    /// \short (Shallow) copy constructor
+    ///  (Shallow) copy constructor
     HijackedData(const Data& data) = delete;
 
     /// Broken assignment operator
     void operator=(const HijackedData&) = delete;
 
-    /// \short Destructor informs original object that the copy is
+    ///  Destructor informs original object that the copy is
     /// being deleted and clears its pointers to the stored values.
     ~HijackedData()
     {
@@ -614,14 +614,14 @@ namespace oomph
       Eqn_number = 0;
     }
 
-    /// \short Return a boolean to indicate whether the data contains
+    ///  Return a boolean to indicate whether the data contains
     /// any copied values. Hijacked data is always a copy
     bool is_a_copy() const
     {
       return true;
     }
 
-    /// \short Return a boolean to indicate whether
+    ///  Return a boolean to indicate whether
     /// the i-th value is a copied value.
     /// Hijacked data is always a copy
     bool is_a_copy(const unsigned& i) const
@@ -629,7 +629,7 @@ namespace oomph
       return true;
     }
 
-    /// \short HijackedData is always a copy, so no equation numbers
+    ///  HijackedData is always a copy, so no equation numbers
     /// should be allocated. This function just returns.
     void assign_eqn_numbers(unsigned long& global_ndof, Vector<double*>& dof_pt)
     {
@@ -637,40 +637,40 @@ namespace oomph
     }
 
 
-    /// \short We cannot resize HijackedData, so the resize function
+    ///  We cannot resize HijackedData, so the resize function
     /// throws a warning.
     void resize(const unsigned& n_value);
   };
 
 
   //=========================================================================
-  /// \short Custom Data class that is used when making a shallow copy
+  ///  Custom Data class that is used when making a shallow copy
   /// of a data object. The class contains a copy of an entire other
   /// Data object.
   //=========================================================================
   class CopiedData : public Data
   {
   private:
-    ///\short Pointer to the Data object from which the values are copied
+    /// Pointer to the Data object from which the values are copied
     Data* Copied_data_pt;
 
-    /// \short Reset the pointers to the copied data.
+    ///  Reset the pointers to the copied data.
     void reset_copied_pointers();
 
   public:
-    /// \short Clear the pointers to the copied data
+    ///  Clear the pointers to the copied data
     void clear_copied_pointers();
 
-    ///\short Constructor
+    /// Constructor
     CopiedData(Data* const& data_pt);
 
-    /// \short (Shallow) copy constructor
+    ///  (Shallow) copy constructor
     CopiedData(const Data& data) = delete;
 
     /// Broken assignment operator
     void operator=(const CopiedData&) = delete;
 
-    /// \short Destructor informs original object that the copy is
+    ///  Destructor informs original object that the copy is
     /// being deleted and clears its pointers to the stored values.
     ~CopiedData()
     {
@@ -688,14 +688,14 @@ namespace oomph
       Eqn_number = 0;
     }
 
-    /// \short Return a boolean to indicate whether the data contains
+    ///  Return a boolean to indicate whether the data contains
     /// any copied values. Copied data is always a copy
     bool is_a_copy() const
     {
       return true;
     }
 
-    /// \short Return a boolean to indicate whether
+    ///  Return a boolean to indicate whether
     /// the i-th value is a copied value.
     /// All copied data is always a copy
     bool is_a_copy(const unsigned& i) const
@@ -703,7 +703,7 @@ namespace oomph
       return true;
     }
 
-    /// \short CopiedData is always a copy, so no equation numbers
+    ///  CopiedData is always a copy, so no equation numbers
     /// should be allocated. This function just returns.
     void assign_eqn_numbers(unsigned long& global_ndof, Vector<double*>& dof_pt)
     {
@@ -711,7 +711,7 @@ namespace oomph
     }
 
 
-    /// \short We cannot resize CopiedData, so the resize function
+    ///  We cannot resize CopiedData, so the resize function
     /// throws a warning.
     void resize(const unsigned& n_value);
   };
@@ -722,7 +722,7 @@ namespace oomph
 
 
   //=====================================================================
-  ///\short Class that contains data for hanging nodes.
+  /// Class that contains data for hanging nodes.
   ///
   /// To ensure inter-element continuity, the values and nodal positions
   /// of hanging nodes must be linear combinations of the
@@ -821,17 +821,17 @@ namespace oomph
       return Master_weights[i];
     }
 
-    /// \short Set the pointer to the i-th master node and its weight
+    ///  Set the pointer to the i-th master node and its weight
     void set_master_node_pt(const unsigned& i,
                             Node* const& master_node_pt,
                             const double& weight);
 
-    /// \short Add (pointer to) master node and corresponding weight to
+    ///  Add (pointer to) master node and corresponding weight to
     /// the internally stored (pointers to) master nodes and weights
     void add_master_node_pt(Node* const& master_node_pt, const double& weight);
 
   private:
-    /// \short Check that the argument is within the range of
+    ///  Check that the argument is within the range of
     /// stored data values.
     void range_check(const unsigned& i) const;
 
@@ -851,7 +851,7 @@ namespace oomph
 
 
   //=====================================================================
-  /// \short Nodes are derived from Data, but, in addition, have a
+  ///  Nodes are derived from Data, but, in addition, have a
   /// definite (Eulerian) position in a space of a given dimension.
   ///
   /// The nodal coordinates are used in the elements' mapping
@@ -915,13 +915,13 @@ namespace oomph
     friend class BoundaryNodeBase;
 
   protected:
-    /// \short Private function to check that the arguemnts to the position
+    ///  Private function to check that the arguemnts to the position
     /// functions are in range
     void x_gen_range_check(const unsigned& t,
                            const unsigned& k,
                            const unsigned& i) const;
 
-    /// \short Array of pointers to the data holding the Eulerian positions.
+    ///  Array of pointers to the data holding the Eulerian positions.
     /// The storage format must be the same as the internal data storage
     /// so that we can implement the functions x() in generality here without
     /// the need for virtual functions. The first index will be a flat array
@@ -929,10 +929,10 @@ namespace oomph
     /// of time history values at each position type.
     double** X_position;
 
-    /// \short Pointer to the timestepper associated with the position data.
+    ///  Pointer to the timestepper associated with the position data.
     TimeStepper* Position_time_stepper_pt;
 
-    /// \short C-style array of pointers to hanging node info.
+    ///  C-style array of pointers to hanging node info.
     /// It's set to NULL if the node isn't hanging.
     /// The first entry (0) is the geometric hanging node data.
     /// The remaining entries correspond to the hanging data for the
@@ -945,37 +945,37 @@ namespace oomph
     /// Eulerian dimension of the node
     unsigned Ndim;
 
-    /// \short Number of coordinate types used in the mapping between
+    ///  Number of coordinate types used in the mapping between
     /// local and global coordinates
     /// (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for
     /// 2D Hermite elements, etc).
     unsigned Nposition_type;
 
-    /// \short Flag to indicate that the Node has become
+    ///  Flag to indicate that the Node has become
     /// obsolete --- usually during mesh refinement process
     bool Obsolete;
 
-    /// \short Direct access to the pointer to the i-th stored coordinate data
+    ///  Direct access to the pointer to the i-th stored coordinate data
     double* x_position_pt(const unsigned& i)
     {
       return X_position[i];
     }
 
-    /// \short Pointer to auxiliary update function -- this
+    ///  Pointer to auxiliary update function -- this
     /// can be used to update any nodal values following the update
     /// of the nodal position. This is needed e.g. to update the no-slip
     /// condition on moving boundaries.
     AuxNodeUpdateFctPt Aux_node_update_fct_pt;
 
   public:
-    /// \short Static "Magic number" used to indicate that there is no
+    ///  Static "Magic number" used to indicate that there is no
     /// independent position in a periodic node.
     static unsigned No_independent_position;
 
-    /// \short Default constructor
+    ///  Default constructor
     Node();
 
-    /// \short Steady constructor, for a Node of spatial dimension n_dim.
+    ///  Steady constructor, for a Node of spatial dimension n_dim.
     /// Allocates storage for initial_n_value values.
     /// NPosition_type is the number of coordinate types
     /// needed in the mapping between local and global coordinates
@@ -986,7 +986,7 @@ namespace oomph
          const unsigned& initial_n_value,
          const bool& allocate_x_position = true);
 
-    /// \short Unsteady constructor for a node of spatial dimension n_dim.
+    ///  Unsteady constructor for a node of spatial dimension n_dim.
     /// Allocates storage for initial_n_value values with
     /// history values as required by the timestepper.
     /// n_position_type: # of coordinate
@@ -1012,32 +1012,32 @@ namespace oomph
     /// any extra information stored for the timestepper.
     friend std::ostream& operator<<(std::ostream& out, const Node& d);
 
-    /// \short Number of coordinate
+    ///  Number of coordinate
     /// types needed in the mapping between local and global coordinates.
     unsigned nposition_type() const
     {
       return Nposition_type;
     }
 
-    /// \short Return a pointer to the position timestepper.
+    ///  Return a pointer to the position timestepper.
     TimeStepper*& position_time_stepper_pt()
     {
       return Position_time_stepper_pt;
     }
 
-    /// \short Return a pointer to the position timestepper (const version).
+    ///  Return a pointer to the position timestepper (const version).
     TimeStepper* const& position_time_stepper_pt() const
     {
       return Position_time_stepper_pt;
     }
 
-    /// \short Set a new position timestepper be resizing the appropriate
+    ///  Set a new position timestepper be resizing the appropriate
     /// storage
     virtual void set_position_time_stepper(
       TimeStepper* const& position_time_stepper_pt,
       const bool& preserve_existing_data);
 
-    /// \short Check whether the pointer parameter_pt addresses position data
+    ///  Check whether the pointer parameter_pt addresses position data
     /// values. It never does for a standard node, because the positions are
     /// not data
     virtual bool does_pointer_correspond_to_position_data(
@@ -1046,12 +1046,12 @@ namespace oomph
       return false;
     }
 
-    /// \short Assign global equation numbers; increment global number
+    ///  Assign global equation numbers; increment global number
     /// of unknowns, global_ndof; and add any new dofs to the dof_pt.
     virtual void assign_eqn_numbers(unsigned long& global_ndof,
                                     Vector<double*>& dof_pt);
 
-    /// \short Return (Eulerian) spatial dimension of the node.
+    ///  Return (Eulerian) spatial dimension of the node.
     unsigned ndim() const
     {
       return Ndim;
@@ -1075,7 +1075,7 @@ namespace oomph
       return X_position[Nposition_type * i][0];
     }
 
-    /// \short Return the position x(i) at previous timestep t
+    ///  Return the position x(i) at previous timestep t
     /// (t=0: present; t>0 previous timestep).
     double& x(const unsigned& t, const unsigned& i)
     {
@@ -1085,7 +1085,7 @@ namespace oomph
       return X_position[Nposition_type * i][t];
     }
 
-    /// \short Return the position x(i) at previous timestep t
+    ///  Return the position x(i) at previous timestep t
     /// (t=0: present; t>0 previous timestep) (const version)
     const double& x(const unsigned& t, const unsigned& i) const
     {
@@ -1095,14 +1095,14 @@ namespace oomph
       return X_position[Nposition_type * i][t];
     }
 
-    /// \short  Return the i-th component of nodal velocity: dx/dt
+    ///   Return the i-th component of nodal velocity: dx/dt
     double dx_dt(const unsigned& i) const;
 
-    /// \short Return the i-th component of j-th derivative of nodal position:
+    ///  Return the i-th component of j-th derivative of nodal position:
     /// d^jx/dt^j.
     double dx_dt(const unsigned& j, const unsigned& i) const;
 
-    /// \short Return pointer to copied node (null if the
+    ///  Return pointer to copied node (null if the
     /// current node is not a copy -- always the case here; it's overloaded
     /// for boundary nodes)
     virtual Node* copied_node_pt() const
@@ -1122,7 +1122,7 @@ namespace oomph
       return false;
     }
 
-    /// \short Reference to the generalised position x(k,i).
+    ///  Reference to the generalised position x(k,i).
     /// `Type': k; Coordinate direction: i.
     double& x_gen(const unsigned& k, const unsigned& i)
     {
@@ -1132,7 +1132,7 @@ namespace oomph
       return X_position[Nposition_type * i + k][0];
     }
 
-    /// \short Reference to the generalised position x(k,i).
+    ///  Reference to the generalised position x(k,i).
     /// `Type': k; Coordinate direction: i (const version).
     const double& x_gen(const unsigned& k, const unsigned& i) const
     {
@@ -1142,7 +1142,7 @@ namespace oomph
       return X_position[Nposition_type * i + k][0];
     }
 
-    /// \short Reference to the generalised position x(k,i) at the previous
+    ///  Reference to the generalised position x(k,i) at the previous
     /// timestep [t=0: present].  `Type': k; Coordinate direction: i.
     double& x_gen(const unsigned& t, const unsigned& k, const unsigned& i)
     {
@@ -1152,7 +1152,7 @@ namespace oomph
       return X_position[Nposition_type * i + k][t];
     }
 
-    /// \short Reference to the generalised position x(k,i) at the previous
+    ///  Reference to the generalised position x(k,i) at the previous
     /// timestep [t=0: present].  `Type': k; Coordinate direction: i.
     /// (const version)
     const double& x_gen(const unsigned& t,
@@ -1165,19 +1165,19 @@ namespace oomph
       return X_position[Nposition_type * i + k][t];
     }
 
-    /// \short  i-th component of time derivative (velocity) of the
+    ///   i-th component of time derivative (velocity) of the
     /// generalised position, dx(k,i)/dt. `Type': k; Coordinate direction: i.
     double dx_gen_dt(const unsigned& k, const unsigned& i) const;
 
 
-    /// \short  i-th component of j-th time derivative (velocity) of the
+    ///   i-th component of j-th time derivative (velocity) of the
     /// generalised position, d^jx(k,i)/dt^j. `Type': k; Coordinate direction:
     /// i.
     double dx_gen_dt(const unsigned& j,
                      const unsigned& k,
                      const unsigned& i) const;
 
-    /// \short Direct access to the i-th coordinate at time level t
+    ///  Direct access to the i-th coordinate at time level t
     /// (t=0: present; t>0: previous)
     double* x_pt(const unsigned& t, const unsigned& i)
     {
@@ -1193,14 +1193,14 @@ namespace oomph
     /// Read nodal position and associated data from file for restart
     void read(std::ifstream& restart_file);
 
-    ///\short The pin_all() function must be overloaded by SolidNodes,
+    /// The pin_all() function must be overloaded by SolidNodes,
     /// so we put the virtual interface here to avoid virtual functions in Data
     virtual void pin_all()
     {
       Data::pin_all();
     }
 
-    ///\short The unpin_all() function must be overloaded by SolidNode,
+    /// The unpin_all() function must be overloaded by SolidNode,
     /// so we put the virtual interface here to avoid virtual functions in Data
     virtual void unpin_all()
     {
@@ -1208,7 +1208,7 @@ namespace oomph
     }
 
 
-    /// \short Code that encapsulates the hanging status of the node (incl. the
+    ///  Code that encapsulates the hanging status of the node (incl. the
     /// geometric hanging status) as
     /// \f$  \sum_{i=-1}{nval-1} Node::is_hanging(i) 2^{i+1} \f$
     unsigned hang_code()
@@ -1224,7 +1224,7 @@ namespace oomph
     }
 
 
-    /// \short Return pointer to hanging node data (this refers to the geometric
+    ///  Return pointer to hanging node data (this refers to the geometric
     /// hanging node status) (const version).
     HangInfo* const& hanging_pt() const
     {
@@ -1338,28 +1338,28 @@ namespace oomph
     /// Label node as non-hanging node by removing all hanging node data.
     void set_nonhanging();
 
-    /// \short Resize the number of equations
+    ///  Resize the number of equations
     void resize(const unsigned& n_value);
 
-    /// \short Constrain the positions when the node is made hanging
+    ///  Constrain the positions when the node is made hanging
     /// Empty virtual function that is overloaded in SolidNodes
     virtual void constrain_positions() {}
 
-    /// \short Unconstrain the positions when the node is made non-hanging
+    ///  Unconstrain the positions when the node is made non-hanging
     /// Empty virtual function that is overloaded in SolidNodes
     virtual void unconstrain_positions() {}
 
-    /// \short Make the node periodic by copying the values from node_pt.
+    ///  Make the node periodic by copying the values from node_pt.
     /// Note that the coordinates will always remain independent, even
     /// though this may lead to (a little) unrequired information being stored.
     /// Broken virtual (only implemented in BoundaryNodes)
     virtual void make_periodic(Node* const& node_pt);
 
-    /// \short Make the nodes passed in the vector periodic_nodes share the
+    ///  Make the nodes passed in the vector periodic_nodes share the
     /// same data as this node.
     virtual void make_periodic_nodes(const Vector<Node*>& periodic_nodes_pt);
 
-    /// \short Return a pointer to set of mesh boundaries that this
+    ///  Return a pointer to set of mesh boundaries that this
     /// node occupies; this will be overloaded by BoundaryNodes. The
     /// default behaviour is that the Node does not lie on any boundaries
     /// so the pointer to the set of boundaries is NULL
@@ -1368,7 +1368,7 @@ namespace oomph
       boundaries_pt = 0;
     }
 
-    /// \short Test whether the Node lies on a boundary. The "bulk" Node
+    ///  Test whether the Node lies on a boundary. The "bulk" Node
     /// cannot lie on a boundary, so return false. This will be overloaded
     /// by BoundaryNodes
     virtual bool is_on_boundary() const
@@ -1376,7 +1376,7 @@ namespace oomph
       return false;
     }
 
-    /// \short Test whether the node lies on mesh boundary b. The "bulk" Node
+    ///  Test whether the node lies on mesh boundary b. The "bulk" Node
     /// cannot lie on a boundary, so return false. This will be overloaded by
     /// BoundaryNodes
     virtual bool is_on_boundary(const unsigned& b) const
@@ -1384,15 +1384,15 @@ namespace oomph
       return false;
     }
 
-    /// \short Broken interface for adding the node to the mesh boundary b
+    ///  Broken interface for adding the node to the mesh boundary b
     /// Essentially here for error reporting.
     virtual void add_to_boundary(const unsigned& b);
 
-    /// \short Broken interface for removing the node from the mesh boundary b
+    ///  Broken interface for removing the node from the mesh boundary b
     /// Here to provide error reporting.
     virtual void remove_from_boundary(const unsigned& b);
 
-    /// \short Get the number of boundary coordinates on mesh boundary b.
+    ///  Get the number of boundary coordinates on mesh boundary b.
     /// Broken virtual interface provides run-time
     /// error checking
     virtual unsigned ncoordinates_on_boundary(const unsigned& b);
@@ -1401,14 +1401,14 @@ namespace oomph
     /// provides run-time error checking
     virtual bool boundary_coordinates_have_been_set_up();
 
-    /// \short Return the vector of the k-th generalised boundary coordinates
+    ///  Return the vector of the k-th generalised boundary coordinates
     /// on mesh boundary b. Broken virtual interface provides run-time
     /// error checking
     virtual void get_coordinates_on_boundary(const unsigned& b,
                                              const unsigned& k,
                                              Vector<double>& boundary_zeta);
 
-    /// \short Set the vector of the k-th generalised boundary coordinates
+    ///  Set the vector of the k-th generalised boundary coordinates
     /// on mesh boundary b. Broken virtual interface provides run-time error
     /// checking
     virtual void set_coordinates_on_boundary(
@@ -1416,7 +1416,7 @@ namespace oomph
       const unsigned& k,
       const Vector<double>& boundary_zeta);
 
-    /// \short Return the vector of coordinates on mesh boundary b
+    ///  Return the vector of coordinates on mesh boundary b
     /// Broken virtual interface provides run-time error checking
     virtual void get_coordinates_on_boundary(const unsigned& b,
                                              Vector<double>& boundary_zeta)
@@ -1424,7 +1424,7 @@ namespace oomph
       get_coordinates_on_boundary(b, 0, boundary_zeta);
     }
 
-    /// \short Set the vector of coordinates on mesh boundary b
+    ///  Set the vector of coordinates on mesh boundary b
     /// Broken virtual interface provides run-time error checking
     virtual void set_coordinates_on_boundary(
       const unsigned& b, const Vector<double>& boundary_zeta)
@@ -1451,14 +1451,14 @@ namespace oomph
       return Obsolete;
     }
 
-    /// \short Return the i-th value stored at the Node. This interface
+    ///  Return the i-th value stored at the Node. This interface
     /// does NOT take the hanging status of the Node into account.
     double raw_value(const unsigned& i) const
     {
       return Data::value(i);
     }
 
-    /// \short Return the i-th value at time level t
+    ///  Return the i-th value at time level t
     /// (t=0: present, t>0: previous). This interface does NOT take the
     /// hanging status of the Node into account.
     double raw_value(const unsigned& t, const unsigned& i) const
@@ -1466,7 +1466,7 @@ namespace oomph
       return Data::value(t, i);
     }
 
-    /// \short Return i-th value (dofs or pinned) at this node
+    ///  Return i-th value (dofs or pinned) at this node
     /// either directly or via hanging node representation.
     /// Note that this REDFINES the interface in Data
     /// Thus, the present function will be called
@@ -1477,7 +1477,7 @@ namespace oomph
     /// Data then the "wrong" (Data) version of the function will be called.
     double value(const unsigned& i) const;
 
-    /// \short Return i-th value at time level t (t=0: present, t>0: previous)
+    ///  Return i-th value at time level t (t=0: present, t>0: previous)
     /// either directly or via hanging node representation.
     /// Note that this REDEFINES the interface in Data
     /// Thus, the present function will be called
@@ -1488,7 +1488,7 @@ namespace oomph
     /// Data then the "wrong" (Data) version of the function will be called.
     double value(const unsigned& t, const unsigned& i) const;
 
-    /// \short Compute Vector of values for the Data value
+    ///  Compute Vector of values for the Data value
     /// taking the hanging node status into account.
     /// Note that this REDEFINES the interface in Data
     /// Thus, the present function will be called
@@ -1507,7 +1507,7 @@ namespace oomph
       return vals;
     }
 
-    /// \short Compute Vector of values (dofs or pinned) in this data
+    ///  Compute Vector of values (dofs or pinned) in this data
     /// at time level t (t=0: present; t>0: previous). This interface
     /// explicitly takes the hanging status into account.
     /// Thus, the present function will be called
@@ -1518,7 +1518,7 @@ namespace oomph
     /// Data then the "wrong" (Data) version of the function will be called.
     void value(const unsigned& t, Vector<double>& values) const;
 
-    /// \short Compute Vector of nodal positions
+    ///  Compute Vector of nodal positions
     /// either directly or via hanging node representation
     void position(Vector<double>& pos) const;
 
@@ -1530,53 +1530,53 @@ namespace oomph
       return pos;
     }
 
-    /// \short Compute Vector of nodal position at time level t
+    ///  Compute Vector of nodal position at time level t
     /// (t=0: current; t>0: previous timestep),
     /// either directly or via hanging node representation.
     void position(const unsigned& t, Vector<double>& pos) const;
 
-    /// \short Return i-th nodal coordinate
+    ///  Return i-th nodal coordinate
     /// either directly or via hanging node representation.
     double position(const unsigned& i) const;
 
-    /// \short Return i-th nodal coordinate at time level t
+    ///  Return i-th nodal coordinate at time level t
     /// (t=0: current; t>0: previous time level),
     /// either directly or via hanging node representation.
     double position(const unsigned& t, const unsigned& i) const;
 
-    /// \short Return generalised nodal coordinate
+    ///  Return generalised nodal coordinate
     /// either directly or via hanging node representation.
     double position_gen(const unsigned& k, const unsigned& i) const;
 
-    /// \short Return generalised nodal coordinate at time level t
+    ///  Return generalised nodal coordinate at time level t
     /// (t=0: current; t>0: previous time level),
     /// either directly or via hanging node representation.
     double position_gen(const unsigned& t,
                         const unsigned& k,
                         const unsigned& i) const;
 
-    /// \short  Return the i-th component of nodal velocity: dx/dt,
+    ///   Return the i-th component of nodal velocity: dx/dt,
     /// either directly or via hanging node representation.
     double dposition_dt(const unsigned& i) const;
 
-    /// \short Return the i-th component of j-th derivative of nodal position:
+    ///  Return the i-th component of j-th derivative of nodal position:
     /// d^jx/dt^j either directly or via hanging node representation
     double dposition_dt(const unsigned& j, const unsigned& i) const;
 
-    /// \short  i-th component of time derivative (velocity) of the
+    ///   i-th component of time derivative (velocity) of the
     /// generalised position, dx(k,i)/dt. `Type': k; Coordinate direction: i.
     /// This function uses the hanging node representation if necessary.
     double dposition_gen_dt(const unsigned& k, const unsigned& i) const;
 
 
-    /// \short  i-th component of j-th time derivative (velocity) of the
+    ///   i-th component of j-th time derivative (velocity) of the
     /// generalised position, d^jx(k,i)/dt^j. `Type': k; Coordinate direction:
     /// i. This function uses the hanging node representation if necessary
     double dposition_gen_dt(const unsigned& j,
                             const unsigned& k,
                             const unsigned& i) const;
 
-    /// \short Interface for functions that update the nodal
+    ///  Interface for functions that update the nodal
     /// position using algebraic remeshing strategies. The
     /// interface is common to SpineNodes, AlgebraicNodes and
     /// MacroElementNodeUpdateNodes.
@@ -1590,7 +1590,7 @@ namespace oomph
     }
 
 
-    /// \short Set pointer to auxiliary update function -- this
+    ///  Set pointer to auxiliary update function -- this
     /// can be used to update any nodal values following the update
     /// of the nodal position. This is needed e.g. to update the no-slip
     /// condition on moving boundaries.
@@ -1602,14 +1602,14 @@ namespace oomph
     }
 
 
-    /// \short Boolean to indicate if node has a pointer to
+    ///  Boolean to indicate if node has a pointer to
     /// and auxiliary update function.
     bool has_auxiliary_node_update_fct_pt()
     {
       return (Aux_node_update_fct_pt != 0);
     }
 
-    /// \short Execute auxiliary update function (if any) -- this
+    ///  Execute auxiliary update function (if any) -- this
     /// can be used to update any nodal values following the update
     /// of the nodal position. This is needed e.g. to update the no-slip
     /// condition on moving boundaries.
@@ -1621,28 +1621,28 @@ namespace oomph
       }
     }
 
-    /// \short Return the number of geometric data that affect the nodal
+    ///  Return the number of geometric data that affect the nodal
     /// position. The default value is zero (node is stationary)
     virtual inline unsigned ngeom_data() const
     {
       return 0;
     }
 
-    /// \short Return a pointer to an array of all (geometric) data that affect
+    ///  Return a pointer to an array of all (geometric) data that affect
     /// the nodal position. The default value is zero (node is stationary)
     virtual inline Data** all_geom_data_pt()
     {
       return 0;
     }
 
-    /// \short Return the number of geometric objects that affect the nodal
+    ///  Return the number of geometric objects that affect the nodal
     /// position. The default value is zero (node is stationary)
     virtual inline unsigned ngeom_object() const
     {
       return 0;
     }
 
-    /// \short Return a pointer to an array of all (geometric) objects that
+    ///  Return a pointer to an array of all (geometric) objects that
     /// affect the nodal position. The default value is zero (node is
     /// stationary)
     virtual inline GeomObject** all_geom_object_pt()
@@ -1656,11 +1656,11 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Add all data and time history values to the vector.
+    ///  Add all data and time history values to the vector.
     /// Overloaded to add the position information as well.
     void add_values_to_vector(Vector<double>& vector_of_values);
 
-    /// \short Read all data and time history values from the vector
+    ///  Read all data and time history values from the vector
     /// starting from index. On return the index will be
     /// set the value at the end of the data that has been read in
     /// Overload to also read the position information.
@@ -1671,7 +1671,7 @@ namespace oomph
   };
 
   //=====================================================================
-  /// \short A Class for nodes that deform elastically (i.e. position is an
+  ///  A Class for nodes that deform elastically (i.e. position is an
   /// unknown in the problem). The idea is that the Eulerian positions are
   /// stored in a Data object and the Lagrangian coordinates are stored in
   /// addition. The pointer that addresses the Eulerian positions is
@@ -1686,7 +1686,7 @@ namespace oomph
   class SolidNode : public Node
   {
   private:
-    /// \short Private function to check that the arguments to the position
+    ///  Private function to check that the arguments to the position
     /// functions are in range
     void xi_gen_range_check(const unsigned& k, const unsigned& i) const;
 
@@ -1694,21 +1694,21 @@ namespace oomph
     /// Number of Lagrangian coordinates of the node
     unsigned Nlagrangian;
 
-    /// \short Number of types of Lagrangian coordinates used to interpolate
+    ///  Number of types of Lagrangian coordinates used to interpolate
     /// the Lagrangian coordinates within the element
     unsigned Nlagrangian_type;
 
     /// Pointer to data that will hold variable positions in elastic nodes
     Data* Variable_position_pt;
 
-    /// \short Storage for the Lagrangian positions
+    ///  Storage for the Lagrangian positions
     double* Xi_position;
 
   public:
-    /// \short Default Constructor
+    ///  Default Constructor
     SolidNode() : Node() {}
 
-    /// \short Steady constructor. The node has n_lagrangian Lagrangian
+    ///  Steady constructor. The node has n_lagrangian Lagrangian
     /// coordinates of n_lagrangian_type types (1 for Lagrange elements,
     /// 2 for 1D Hermite etc.).
     /// The Eulerian dimension of the Node is n_dim and we have n_position_type
@@ -1721,7 +1721,7 @@ namespace oomph
               const unsigned& n_position_type,
               const unsigned& initial_n_value);
 
-    /// \short Unsteady constructor.
+    ///  Unsteady constructor.
     /// Allocates storage for initial_n_value nodal values with history values
     /// as required by timestepper.
     /// The node has n_lagrangian Lagrangian coordinates of
@@ -1744,15 +1744,15 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const SolidNode&) = delete;
 
-    /// \short Copy nodal positions and associated data from specified
+    ///  Copy nodal positions and associated data from specified
     /// node object
     void copy(SolidNode* orig_node_pt);
 
-    /// \short Dump nodal positions (variable and fixed) and associated
+    ///  Dump nodal positions (variable and fixed) and associated
     /// data to file for restart
     void dump(std::ostream& dump_file) const;
 
-    /// \short Read nodal positions (variable and fixed) and associated
+    ///  Read nodal positions (variable and fixed) and associated
     /// data from file for restart
     void read(std::ifstream& restart_file);
 
@@ -1771,13 +1771,13 @@ namespace oomph
     /// Set the variable position data from an external data object
     void set_external_variable_position_pt(Data* const& data_pt);
 
-    /// \short Set a new position timestepper be resizing the appropriate
+    ///  Set a new position timestepper be resizing the appropriate
     /// storage Overloaded from the basic implementation to take into account
     /// the fact that position is now Data
     void set_position_time_stepper(TimeStepper* const& position_time_stepper_pt,
                                    const bool& preserve_existing_data);
 
-    /// \short Overload the check whether the pointer parameter_pt addresses
+    ///  Overload the check whether the pointer parameter_pt addresses
     /// position data values
     bool does_pointer_correspond_to_position_data(double* const& parameter_pt);
 
@@ -1793,7 +1793,7 @@ namespace oomph
       return Variable_position_pt->is_a_copy(Nposition_type * i);
     }
 
-    /// \short Return the equation number for generalised Eulerian coordinate:
+    ///  Return the equation number for generalised Eulerian coordinate:
     /// type of coordinate: k, coordinate direction: i.
     const long& position_eqn_number(const unsigned& k, const unsigned& i) const
     {
@@ -1806,7 +1806,7 @@ namespace oomph
       return Variable_position_pt->is_pinned(Nposition_type * i);
     }
 
-    /// \short Test whether the k-th type of the i-th coordinate is pinned
+    ///  Test whether the k-th type of the i-th coordinate is pinned
     /// 0: false; 1: true
     bool position_is_pinned(const unsigned& k, const unsigned& i)
     {
@@ -1819,7 +1819,7 @@ namespace oomph
       return Variable_position_pt->pin(Nposition_type * i);
     }
 
-    /// \short Pin the generalised nodal position.
+    ///  Pin the generalised nodal position.
     /// `Type': k; Coordinate direction: i.
     void pin_position(const unsigned& k, const unsigned& i)
     {
@@ -1832,7 +1832,7 @@ namespace oomph
       return Variable_position_pt->unpin(Nposition_type * i);
     }
 
-    /// \short Unpin the generalised nodal position.
+    ///  Unpin the generalised nodal position.
     /// `Type': k; Coordinate direction: i.
     void unpin_position(const unsigned& k, const unsigned& i)
     {
@@ -1853,14 +1853,14 @@ namespace oomph
       Variable_position_pt->unpin_all();
     }
 
-    /// \short Overload the constrain positions function to constrain all
+    ///  Overload the constrain positions function to constrain all
     /// position values
     inline void constrain_positions()
     {
       Variable_position_pt->constrain_all();
     }
 
-    /// \short Overload the unconstrain positions function to unconstrain all
+    ///  Overload the unconstrain positions function to unconstrain all
     /// position values
     inline void unconstrain_positions()
     {
@@ -1873,7 +1873,7 @@ namespace oomph
       return Nlagrangian;
     }
 
-    ///\short Number of types of Lagrangian coordinates used to interpolate
+    /// Number of types of Lagrangian coordinates used to interpolate
     /// the Lagrangian coordinates within the element
     unsigned nlagrangian_type() const
     {
@@ -1898,7 +1898,7 @@ namespace oomph
       return Xi_position[Nlagrangian_type * i];
     }
 
-    /// \short Reference to the generalised Lagrangian position.
+    ///  Reference to the generalised Lagrangian position.
     /// `Type': k; 'Coordinate direction: i.
     double& xi_gen(const unsigned& k, const unsigned& i)
     {
@@ -1908,7 +1908,7 @@ namespace oomph
       return Xi_position[Nlagrangian_type * i + k];
     }
 
-    /// \short Reference to the generalised Lagrangian position.
+    ///  Reference to the generalised Lagrangian position.
     /// `Type': k; 'Coordinate direction: i. (const version
     const double& xi_gen(const unsigned& k, const unsigned& i) const
     {
@@ -1918,11 +1918,11 @@ namespace oomph
       return Xi_position[Nlagrangian_type * i + k];
     }
 
-    ///\short Return lagrangian coordinate either directly or via
+    /// Return lagrangian coordinate either directly or via
     /// hanging node representation
     double lagrangian_position(const unsigned& i) const;
 
-    ///\short Return generalised lagrangian coordinate either directly or via
+    /// Return generalised lagrangian coordinate either directly or via
     /// hanging node representation
     double lagrangian_position_gen(const unsigned& k, const unsigned& i) const;
 
@@ -1930,7 +1930,7 @@ namespace oomph
     void assign_eqn_numbers(unsigned long& global_number,
                             Vector<double*>& dof_pt);
 
-    /// \short Function to describe the dofs of the Node. The ostream
+    ///  Function to describe the dofs of the Node. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -1941,17 +1941,17 @@ namespace oomph
     void describe_dofs(std::ostream& out,
                        const std::string& current_string) const;
 
-    ///\short Overload the function add_values_to_map so that it also adds
+    /// Overload the function add_values_to_map so that it also adds
     /// the variable position data
     void add_value_pt_to_map(std::map<unsigned, double*>& map_of_value_pt);
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Add all data, position and time history values to the vector
+    ///  Add all data, position and time history values to the vector
     /// Overload to add the Lagrangian coordinates to the vector
     void add_values_to_vector(Vector<double>& vector_of_values);
 
-    /// \short Read all data and time history values from the vector
+    ///  Read all data and time history values from the vector
     /// starting from index. On return the index will be
     /// set the value at the end of the data that has been read in
     /// Overload to add the position information and Lagrangian coordinates
@@ -1959,12 +1959,12 @@ namespace oomph
                                  unsigned& index);
 
 
-    /// \short Add all equation numbers to the vector in
+    ///  Add all equation numbers to the vector in
     /// the internal storage order. Overload to add equation numbers
     /// associated with the positional dofs
     void add_eqn_numbers_to_vector(Vector<long>& vector_of_eqn_numbers);
 
-    /// \short Read all equation numbers from the vector
+    ///  Read all equation numbers from the vector
     /// starting from index. On return the index will be
     /// set to the value at the end of the data that has been read in
     /// Overload to include the equation numbrs associated with the
@@ -1975,7 +1975,7 @@ namespace oomph
 #endif
 
 
-    /// \short Overload node update function: Since the position
+    ///  Overload node update function: Since the position
     /// of SolidNodes is determined by unknowns, there's nothing
     /// to be done apart from performing the auxiliary node
     /// update function (if any)
@@ -1987,7 +1987,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short A class that contains the information required by Nodes that
+  ///  A class that contains the information required by Nodes that
   /// are located on Mesh boundaries. A BoundaryNode of a particular type
   /// is obtained by combining a given Node with this class.
   /// By differentiating between Nodes and BoundaryNodes we avoid a lot
@@ -1996,7 +1996,7 @@ namespace oomph
   class BoundaryNodeBase
   {
   private:
-    /// \short Pointer to a map of pointers to
+    ///  Pointer to a map of pointers to
     /// intrinsic boundary coordinates of the Node,
     /// indexed by the boundary number. If the Node does not lie
     /// on a boundary this map should never be queried because
@@ -2004,12 +2004,12 @@ namespace oomph
     /// can only be accessed via the appropriate set and get functions.
     std::map<unsigned, DenseMatrix<double>*>* Boundary_coordinates_pt;
 
-    /// \short Pointer to set of mesh boundaries occupied by the Node;
+    ///  Pointer to set of mesh boundaries occupied by the Node;
     /// NULL if the Node is not on any boundaries
     std::set<unsigned>* Boundaries_pt;
 
   protected:
-    /// \short Pointer to a map,
+    ///  Pointer to a map,
     /// indexed by the face element identifier it returns
     /// the position of the first face element value.
     /// If the Node does not lie on a face element
@@ -2017,17 +2017,17 @@ namespace oomph
     std::map<unsigned, unsigned>*
       Index_of_first_value_assigned_by_face_element_pt;
 
-    /// \short If the BoundaryNode is periodic, this pointer is set to
+    ///  If the BoundaryNode is periodic, this pointer is set to
     /// the BoundaryNode whose data it shares
     Node* Copied_node_pt;
 
-    /// \short Helper function that is used to turn BoundaryNodes into
+    ///  Helper function that is used to turn BoundaryNodes into
     /// peridic boundary nodes by setting the data values of
     /// copied_node_pt to those of original_node_pt.
     void make_node_periodic(Node* const& node_pt,
                             Node* const& original_node_pt);
 
-    /// \short Helper function that is used to turn BoundaryNodes into
+    ///  Helper function that is used to turn BoundaryNodes into
     /// periodic boundary nodes by setting the data values of the nodes
     /// in the vector periodic_copies_pt to be the same as those
     /// in node_pt.
@@ -2035,21 +2035,21 @@ namespace oomph
                              Vector<Node*> const& periodic_copies_pt);
 
   public:
-    /// \short Member function that allocates storage for a given
+    ///  Member function that allocates storage for a given
     /// number of additional degrees of freedom, n_additional_value,
     /// associated with a particular face_id to the Node
     /// node_pt
     virtual void assign_additional_values_with_face_id(
       const unsigned& n_additional_value, const unsigned& face_id = 0) = 0;
 
-    /// \short Return pointer to the map giving
+    ///  Return pointer to the map giving
     /// the index of the first face element value.
     std::map<unsigned, unsigned>*& index_of_first_value_assigned_by_face_element_pt()
     {
       return Index_of_first_value_assigned_by_face_element_pt;
     }
 
-    /// \short Return the index of the first value associated with
+    ///  Return the index of the first value associated with
     /// the i-th face element value. If no argument is specified
     /// we return the index associated with the first (and assumed to be only)
     /// face element attached to this node. Throws error only in paranoid mode
@@ -2081,7 +2081,7 @@ namespace oomph
     }
 
 
-    /// \short Return the index of the first value associated with
+    ///  Return the index of the first value associated with
     /// the i-th face element value. If no argument id is specified
     /// we return the index associated with the first (and assumed to be only)
     /// face element attached to this node.
@@ -2136,7 +2136,7 @@ namespace oomph
       return (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
     }
 
-    /// \short Return the number of values associated with
+    ///  Return the number of values associated with
     /// the i-th face element field. If no argument is specified
     /// we return the value associated with the first (and assumed to be only)
     /// face element attached to this node. Throws error only in paranoid mode
@@ -2149,7 +2149,7 @@ namespace oomph
     virtual unsigned nvalue_assigned_by_face_element(
       const unsigned& face_id = 0) const = 0;
 
-    /// \short Default constructor, set the pointers to the storage to NULL
+    ///  Default constructor, set the pointers to the storage to NULL
     BoundaryNodeBase()
       : Boundary_coordinates_pt(0),
         Boundaries_pt(0),
@@ -2158,7 +2158,7 @@ namespace oomph
     {
     }
 
-    /// \short Destructor, clean up any allocated storage for the boundaries
+    ///  Destructor, clean up any allocated storage for the boundaries
     virtual ~BoundaryNodeBase();
 
     /// Broken copy constructor
@@ -2173,32 +2173,32 @@ namespace oomph
       return (Boundary_coordinates_pt != 0);
     }
 
-    /// \short Access to pointer to set of mesh boundaries that this
+    ///  Access to pointer to set of mesh boundaries that this
     /// node occupies; NULL if the node is not on any boundary
     void get_boundaries_pt(std::set<unsigned>*& boundaries_pt)
     {
       boundaries_pt = Boundaries_pt;
     }
 
-    /// \short Add the node to the mesh boundary b
+    ///  Add the node to the mesh boundary b
     void add_to_boundary(const unsigned& b);
 
-    /// \short Remove the node from the mesh boundary b
+    ///  Remove the node from the mesh boundary b
     void remove_from_boundary(const unsigned& b);
 
-    /// \short Test whether the node lies on a boundary
+    ///  Test whether the node lies on a boundary
     bool is_on_boundary() const
     {
       return !(Boundaries_pt == 0);
     }
 
-    /// \short Test whether the node lies on mesh boundary b
+    ///  Test whether the node lies on mesh boundary b
     bool is_on_boundary(const unsigned& b) const;
 
-    /// \short Get the number of boundary coordinates on mesh boundary b
+    ///  Get the number of boundary coordinates on mesh boundary b
     unsigned ncoordinates_on_boundary(const unsigned& b);
 
-    /// \short Return the vector of boundary coordinates on mesh boundary b
+    ///  Return the vector of boundary coordinates on mesh boundary b
     void get_coordinates_on_boundary(const unsigned& b,
                                      Vector<double>& boundary_zeta)
     {
@@ -2207,7 +2207,7 @@ namespace oomph
     }
 
 
-    /// \short Set the vector of boundary coordinates on mesh boundary b
+    ///  Set the vector of boundary coordinates on mesh boundary b
     void set_coordinates_on_boundary(const unsigned& b,
                                      const Vector<double>& boundary_zeta)
     {
@@ -2215,13 +2215,13 @@ namespace oomph
       set_coordinates_on_boundary(b, 0, boundary_zeta);
     }
 
-    /// \short Return the vector of the k-th generalised boundary coordinates
+    ///  Return the vector of the k-th generalised boundary coordinates
     /// on mesh boundary b.
     void get_coordinates_on_boundary(const unsigned& b,
                                      const unsigned& k,
                                      Vector<double>& boundary_zeta);
 
-    /// \short Set the vector of the k-th generalised boundary coordinates on
+    ///  Set the vector of the k-th generalised boundary coordinates on
     /// mesh boundary b.
     void set_coordinates_on_boundary(const unsigned& b,
                                      const unsigned& k,
@@ -2230,7 +2230,7 @@ namespace oomph
 
 
   //====================================================================
-  /// \short A template Class for BoundaryNodes; that is Nodes that MAY live
+  ///  A template Class for BoundaryNodes; that is Nodes that MAY live
   /// on the boundary of a Mesh. The class is formed by a simple
   /// composition of the template parameter NODE_TYPE, which must be
   /// a Node class and the BoundaryNodeBase class.
@@ -2242,7 +2242,7 @@ namespace oomph
   class BoundaryNode : public NODE_TYPE, public BoundaryNodeBase
   {
   private:
-    /// \short Set pointers to the copied data used when we have periodic nodes
+    ///  Set pointers to the copied data used when we have periodic nodes
     void reset_copied_pointers()
     {
 #ifdef PARANOID
@@ -2283,7 +2283,7 @@ namespace oomph
       }
     }
 
-    /// \short Copy over additional information so that if the node
+    ///  Copy over additional information so that if the node
     /// is periodic it can remain active if the node that holds the periodic
     /// data is deleted
     void clear_additional_copied_pointers()
@@ -2327,7 +2327,7 @@ namespace oomph
     }
 
   public:
-    /// \short Clear pointers to the copied data used when we have periodic
+    ///  Clear pointers to the copied data used when we have periodic
     /// nodes. The shallow (pointer) copy is turned into a deep copy by
     /// allocating new data and copying the actual values across.
     void clear_copied_pointers()
@@ -2379,10 +2379,10 @@ namespace oomph
     }
 
 
-    /// \short Default Constructor
+    ///  Default Constructor
     BoundaryNode() : NODE_TYPE(), BoundaryNodeBase() {}
 
-    /// \short Steady constructor, for a BoundaryNode of spatial dimension
+    ///  Steady constructor, for a BoundaryNode of spatial dimension
     /// n_dim. Simply passes all arguments through to the underlying Node
     /// constructor which allocates storage for initial_n_value values.
     /// NPosition_type is the number of coordinate types
@@ -2396,7 +2396,7 @@ namespace oomph
     {
     }
 
-    /// \short Unsteady constructor for a BoundaryNode
+    ///  Unsteady constructor for a BoundaryNode
     /// of spatial dimension n_dim. Simply passes all arguments through to
     /// the underlygin Node constructor which
     /// allocates storage for initial_n_value values with
@@ -2414,7 +2414,7 @@ namespace oomph
     {
     }
 
-    /// \short Steady constructor for Solid-type boundary nodes.
+    ///  Steady constructor for Solid-type boundary nodes.
     /// The node has n_lagrangian Lagrangian
     /// coordinates of n_lagrangian_type types (1 for Lagrange elements,
     /// 2 for 1D Hermite etc.).
@@ -2436,7 +2436,7 @@ namespace oomph
     {
     }
 
-    /// \short Unsteady constructor for Solid-type boundary nodes
+    ///  Unsteady constructor for Solid-type boundary nodes
     /// Allocates storage for initial_n_value nodal values with history values
     /// as required by timestepper.
     /// The node has n_lagrangian Lagrangian coordinates of
@@ -2459,7 +2459,7 @@ namespace oomph
     {
     }
 
-    /// \short Destructor resets pointers if
+    ///  Destructor resets pointers if
     ~BoundaryNode()
     {
       // If there are any copies of this Node
@@ -2520,7 +2520,7 @@ namespace oomph
       return BoundaryNodeBase::boundary_coordinates_have_been_set_up();
     }
 
-    /// \short Access to pointer to set of mesh boundaries that this
+    ///  Access to pointer to set of mesh boundaries that this
     /// node occupies; NULL if the node is not on any boundary
     /// Final overload
     void get_boundaries_pt(std::set<unsigned>*& boundaries_pt)
@@ -2528,41 +2528,41 @@ namespace oomph
       BoundaryNodeBase::get_boundaries_pt(boundaries_pt);
     }
 
-    /// \short Test whether the node lies on a boundary
+    ///  Test whether the node lies on a boundary
     /// Final overload
     bool is_on_boundary() const
     {
       return BoundaryNodeBase::is_on_boundary();
     }
 
-    /// \short Test whether the node lies on mesh boundary b
+    ///  Test whether the node lies on mesh boundary b
     /// Final overload
     bool is_on_boundary(const unsigned& b) const
     {
       return BoundaryNodeBase::is_on_boundary(b);
     }
 
-    /// \short Add the node to mesh boundary b, final overload
+    ///  Add the node to mesh boundary b, final overload
     void add_to_boundary(const unsigned& b)
     {
       BoundaryNodeBase::add_to_boundary(b);
     }
 
-    /// \short Remover the node from mesh boundary b, final overload
+    ///  Remover the node from mesh boundary b, final overload
     void remove_from_boundary(const unsigned& b)
     {
       BoundaryNodeBase::remove_from_boundary(b);
     }
 
 
-    /// \short Get the number of boundary coordinates on mesh boundary b.
+    ///  Get the number of boundary coordinates on mesh boundary b.
     unsigned ncoordinates_on_boundary(const unsigned& b)
     {
       return BoundaryNodeBase::ncoordinates_on_boundary(b);
     }
 
 
-    /// \short Return the vector of coordinates on mesh boundary b
+    ///  Return the vector of coordinates on mesh boundary b
     /// Final overload
     void get_coordinates_on_boundary(const unsigned& b,
                                      Vector<double>& boundary_zeta)
@@ -2570,7 +2570,7 @@ namespace oomph
       BoundaryNodeBase::get_coordinates_on_boundary(b, boundary_zeta);
     }
 
-    /// \short Set the vector of coordinates on mesh boundary b
+    ///  Set the vector of coordinates on mesh boundary b
     /// Final overload
     void set_coordinates_on_boundary(const unsigned& b,
                                      const Vector<double>& boundary_zeta)
@@ -2579,7 +2579,7 @@ namespace oomph
     }
 
 
-    /// \short Return the vector of k-th generalised boundary coordinates
+    ///  Return the vector of k-th generalised boundary coordinates
     /// on mesh boundary b Final overload
     void get_coordinates_on_boundary(const unsigned& b,
                                      const unsigned& k,
@@ -2588,7 +2588,7 @@ namespace oomph
       BoundaryNodeBase::get_coordinates_on_boundary(b, k, boundary_zeta);
     }
 
-    /// \short Set the vector of k-th generalised boundary coordinates
+    ///  Set the vector of k-th generalised boundary coordinates
     /// on mesh boundary b. Final overload
     void set_coordinates_on_boundary(const unsigned& b,
                                      const unsigned& k,
@@ -2598,7 +2598,7 @@ namespace oomph
     }
 
 
-    /// \short Return the number of values associated with
+    ///  Return the number of values associated with
     /// the i-th face element field. If no argument is specified
     /// we return the value associated with the first (and assumed to be only)
     /// face element attached to this node. Throws error only in paranoid mode
@@ -2775,20 +2775,20 @@ namespace oomph
     }
 
 
-    /// \short Make the node periodic
+    ///  Make the node periodic
     void make_periodic(Node* const& node_pt)
     {
       BoundaryNodeBase::make_node_periodic(this, node_pt);
     }
 
-    /// \short Make the nodes passed in periodic_nodes periodic from
+    ///  Make the nodes passed in periodic_nodes periodic from
     /// this node
     void make_periodic_nodes(const Vector<Node*>& periodic_nodes_pt)
     {
       BoundaryNodeBase::make_nodes_periodic(this, periodic_nodes_pt);
     }
 
-    /// \short Return a boolean to indicate whether the data contains
+    ///  Return a boolean to indicate whether the data contains
     /// any copied values. If the node is periodic all values are copied
     bool is_a_copy() const
     {
@@ -2802,7 +2802,7 @@ namespace oomph
       }
     }
 
-    /// \short Return a boolean to indicate whether
+    ///  Return a boolean to indicate whether
     /// the i-th value is a copied value.
     /// If the node is periodic all values are copies
     bool is_a_copy(const unsigned& i) const
@@ -2818,14 +2818,14 @@ namespace oomph
     }
 
 
-    /// \short Return pointer to copied node (null if the
+    ///  Return pointer to copied node (null if the
     /// current node is not a copy)
     Node* copied_node_pt() const
     {
       return Copied_node_pt;
     }
 
-    /// \short Overload the equation assignment operation
+    ///  Overload the equation assignment operation
     void assign_eqn_numbers(unsigned long& global_ndof, Vector<double*>& dof_pt)
     {
       // If the boundary node is not periodic call the ususal
@@ -2851,7 +2851,7 @@ namespace oomph
     }
 
 
-    /// \short Resize the number of equations
+    ///  Resize the number of equations
     void resize(const unsigned& n_value)
     {
       // If the node is periodic, warn, but do nothing
@@ -2881,7 +2881,7 @@ namespace oomph
   };
 
 
-  /// \short Make the node periodic
+  ///  Make the node periodic
   template<>
   inline void BoundaryNode<SolidNode>::make_periodic(Node* const& node_pt)
   {

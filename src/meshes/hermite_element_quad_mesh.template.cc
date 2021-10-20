@@ -40,7 +40,7 @@
 namespace oomph
 {
   //=============================================================================
-  /// \short sets the generalised position of the node (i.e. - x_i, dx_i/ds_0,
+  ///  sets the generalised position of the node (i.e. - x_i, dx_i/ds_0,
   /// dx_i/ds_1 & d2x_i/ds_0ds_1 for i = 1,2). Takes the x,y coordinates of the
   /// node from which its position can be determined.
   //=============================================================================
@@ -106,7 +106,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short sets the generalised position of the node (i.e. - x_i, dx_i/ds_0,
+  ///  sets the generalised position of the node (i.e. - x_i, dx_i/ds_0,
   /// dx_i/ds_1 & d2x_i/ds_0ds_1 for i = 1,2). Takes the x,y coordinates of the
   /// node from which its position can be determined. Also sets coordinates
   /// on boundary vector for the node to be the generalised position of the node
@@ -189,7 +189,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short computes the generalised position of the node at position
+  ///  computes the generalised position of the node at position
   /// (node_num_x, node_num_y) in the macro element coordinate scheme.
   ///     index 0 of m_gen : 0 - m_i
   ///                        1 - dm_i/ds_0
@@ -597,7 +597,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Generic mesh construction function to build the mesh
+  ///  Generic mesh construction function to build the mesh
   //=============================================================================
   template<class ELEMENT>
   void HermiteQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
@@ -1259,7 +1259,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Setup lookup schemes which establish which elements are located
+  ///  Setup lookup schemes which establish which elements are located
   /// next to which boundaries (Doc to outfile if it's open). Specific version
   /// for HermiteQuadMesh to ensure that the order of the elements in
   /// Boundary_element_pt matches the actual order along the boundary. This is

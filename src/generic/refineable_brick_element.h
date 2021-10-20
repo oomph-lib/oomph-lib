@@ -67,7 +67,7 @@ namespace oomph
                                 public virtual BrickElementBase
   {
   public:
-    /// \short Shorthand for pointer to an argument-free void member
+    ///  Shorthand for pointer to an argument-free void member
     /// function of the refineable element
     typedef void (RefineableQElement<3>::*VoidMemFctPt)();
 
@@ -104,14 +104,14 @@ namespace oomph
       return 8;
     }
 
-    /// \short If a neighbouring element has already created a node at
+    ///  If a neighbouring element has already created a node at
     /// a position corresponding to the local fractional position within the
     /// present element, s_fraction, return
     /// a pointer to that node. If not, return NULL (0).
     virtual Node* node_created_by_neighbour(const Vector<double>& s_fraction,
                                             bool& is_periodic);
 
-    /// \short If a neighbouring element has already created a node at
+    ///  If a neighbouring element has already created a node at
     /// a position corresponding to the local fractional position within the
     /// present element, s_fraction, return
     /// a pointer to that node. If not, return NULL (0).
@@ -124,7 +124,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short Build the element: i.e. give it nodal positions, apply BCs, etc.
+    ///  Build the element: i.e. give it nodal positions, apply BCs, etc.
     /// Pointers to any new nodes will be returned in new_node_pt. If
     /// it is open, the positions of the new
     /// nodes will be written to the file stream new_nodes_file
@@ -133,7 +133,7 @@ namespace oomph
                        bool& was_already_built,
                        std::ofstream& new_nodes_file);
 
-    /// \short Check the integrity of the element: ensure that the position and
+    ///  Check the integrity of the element: ensure that the position and
     /// values are continuous across the element faces
     void check_integrity(double& max_error);
 
@@ -152,18 +152,18 @@ namespace oomph
       return dynamic_cast<OcTree*>(Tree_pt);
     }
 
-    /// \short Markup all hanging nodes & document the results in
+    ///  Markup all hanging nodes & document the results in
     /// the output streams contained in the vector output_stream, if they
     /// are open.
     void setup_hanging_nodes(Vector<std::ofstream*>& output_stream);
 
-    /// \short Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes (e.g. lower order interpolations
     /// as for the pressure in Taylor Hood).
     virtual void further_setup_hanging_nodes() = 0;
 
   protected:
-    /// \short Coincidence between son nodal points and father boundaries:
+    ///  Coincidence between son nodal points and father boundaries:
     /// Father_bound[nnode_1d](nnode_son,son_type)={RU/RF/RD/RB/.../ OMEGA}
     /// so that node nnode_son in element of type son_type lies
     /// on boundary/vertex Father_bound[nnode_1d](nnode_son,son_type) in its
@@ -171,11 +171,11 @@ namespace oomph
     /// the value is OMEGA.
     static std::map<unsigned, DenseMatrix<int>> Father_bound;
 
-    /// \short Setup static matrix for coincidence between son
+    ///  Setup static matrix for coincidence between son
     /// nodal points and father boundaries
     void setup_father_bounds();
 
-    /// \short Determine Vector of boundary conditions along the element's
+    ///  Determine Vector of boundary conditions along the element's
     /// face (R/L/U/D/B/F) -- BC is the least restrictive combination
     /// of all the nodes on this face.
     ///
@@ -193,7 +193,7 @@ namespace oomph
     /// boundaries.
     void get_boundaries(const int& edge, std::set<unsigned>& boundaries) const;
 
-    /// \short Determine Vector of boundary conditions along the element's
+    ///  Determine Vector of boundary conditions along the element's
     /// boundary (or vertex) bound (S/W/N/E/SW/SE/NW/NE).
     ///
     /// This function assumes that the same boundary condition is applied
@@ -210,18 +210,18 @@ namespace oomph
     ///   - bound_cons[ival]=1 if value ival on this boundary is pinned
     void get_bcs(int bound, Vector<int>& bound_cons) const;
 
-    /// \short Return the value of the intrinsic boundary coordinate
+    ///  Return the value of the intrinsic boundary coordinate
     /// interpolated along the face
     void interpolated_zeta_on_face(const unsigned& boundary,
                                    const int& face,
                                    const Vector<double>& s,
                                    Vector<double>& zeta);
 
-    /// \short Internal helper function that is used to construct the
+    ///  Internal helper function that is used to construct the
     /// hanging node schemes for the value_id-th interpolated value
     void setup_hang_for_value(const int& value_id);
 
-    /// \short Internal helper function that is used to construct the
+    ///  Internal helper function that is used to construct the
     /// hanging node schemes for the positions.
     virtual void oc_hang_helper(const int& value_id,
                                 const int& my_edge,
@@ -255,13 +255,13 @@ namespace oomph
     virtual ~RefineableSolidQElement() {}
 
 
-    /// \short Final over-ride: Use version in QSolidElementBase
+    ///  Final over-ride: Use version in QSolidElementBase
     void set_macro_elem_pt(MacroElement* macro_elem_pt)
     {
       QSolidElementBase::set_macro_elem_pt(macro_elem_pt);
     }
 
-    /// \short Final over-ride: Use version in QSolidElementBase
+    ///  Final over-ride: Use version in QSolidElementBase
     void set_macro_elem_pt(MacroElement* macro_elem_pt,
                            MacroElement* undeformed_macro_elem_pt)
     {
@@ -269,26 +269,26 @@ namespace oomph
                                            undeformed_macro_elem_pt);
     }
 
-    /// \short Use the generic finite difference routine defined in
+    ///  Use the generic finite difference routine defined in
     /// RefineableSolidElement to calculate the Jacobian matrix
     void get_jacobian(Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       RefineableSolidElement::get_jacobian(residuals, jacobian);
     }
 
-    /// \short Determine vector of solid (positional) boundary conditions
+    ///  Determine vector of solid (positional) boundary conditions
     /// along face (R/L/U/D/B/F) [Pressure does not have to be included
     /// since it can't be subjected to bc at more than one node anyway]
     void get_face_solid_bcs(const int& edge,
                             Vector<int>& solid_bound_cons) const;
 
-    /// \short Determine vector of solid (positional) boundary conditions
+    ///  Determine vector of solid (positional) boundary conditions
     /// along edge (or on vertex) bound (S/W/N/E/SW/SE/NW/NE): For direction i,
     /// solid_bound_cons[i]=1 if displacement in this coordinate direction
     /// is pinned and 0 if it's free.
     void get_solid_bcs(int bound, Vector<int>& solid_bound_cons) const;
 
-    /// \short Build the element, i.e. give it nodal positions, apply BCs, etc.
+    ///  Build the element, i.e. give it nodal positions, apply BCs, etc.
     /// Incl. documention into new_nodes_file
     // NOTE: FOR SOME REASON THIS NEEDS TO LIVE IN *.H TO WORK ON INTEL
     void build(Mesh*& mesh_pt,

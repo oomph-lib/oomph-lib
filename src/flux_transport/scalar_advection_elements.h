@@ -46,27 +46,27 @@ namespace oomph
   template<unsigned DIM>
   class ScalarAdvectionEquations : public FluxTransportEquations<DIM>
   {
-    /// \short Typedef for a wind function as a possible function of position
+    ///  Typedef for a wind function as a possible function of position
     typedef void (*ScalarAdvectionWindFctPt)(const Vector<double>& x,
                                              Vector<double>& wind);
 
-    /// \short Function pointer to the wind function
+    ///  Function pointer to the wind function
     ScalarAdvectionWindFctPt Wind_fct_pt;
 
   protected:
-    /// \short A single flux is interpolated
+    ///  A single flux is interpolated
     inline unsigned nflux() const
     {
       return 1;
     }
 
-    /// \short Return the flux as a function of the unknown
+    ///  Return the flux as a function of the unknown
     void flux(const Vector<double>& u, DenseMatrix<double>& f);
 
-    /// \short Return the flux derivatives as a function of the unknowns
+    ///  Return the flux derivatives as a function of the unknowns
     void dflux_du(const Vector<double>& u, RankThreeTensor<double>& df_du);
 
-    ///\short Return the wind at a given position
+    /// Return the wind at a given position
     inline virtual void get_wind_scalar_adv(const unsigned& ipt,
                                             const Vector<double>& s,
                                             const Vector<double>& x,
@@ -105,7 +105,7 @@ namespace oomph
       return Wind_fct_pt;
     }
 
-    ///\short The number of unknowns at each node is the number of values
+    /// The number of unknowns at each node is the number of values
     unsigned required_nvalue(const unsigned& n) const
     {
       return 1;
@@ -202,7 +202,7 @@ namespace oomph
       public virtual ScalarAdvectionEquations<DIM>
   {
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    ///  Constructor: Call constructors for QElement and
     /// Advection Diffusion equations
     QSpectralScalarAdvectionElement()
       : QSpectralElement<DIM, NNODE_1D>(), ScalarAdvectionEquations<DIM>()
@@ -222,21 +222,21 @@ namespace oomph
     /*void operator=(
      const QSpectralScalarAdvectionElement<DIM,NNODE_1D>&) = delete;*/
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///   Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return 1;
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
       ScalarAdvectionEquations<DIM>::output(outfile);
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -244,21 +244,21 @@ namespace oomph
     }
 
 
-    /*/// \short C-style output function:
+    /*///  C-style output function:
    ///  x,y,u   or    x,y,z,u
    void output(FILE* file_pt)
     {
      ScalarAdvectionEquations<NFLUX,DIM>::output(file_pt);
     }
 
-   ///  \short C-style output function:
+   ///   C-style output function:
    ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
    void output(FILE* file_pt, const unsigned &n_plot)
     {
      ScalarAdvectionEquations<NFLUX,DIM>::output(file_pt,n_plot);
     }
 
-   /// \short Output function for an exact solution:
+   ///  Output function for an exact solution:
    ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
    void output_fct(std::ostream &outfile, const unsigned &n_plot,
                    FiniteElement::SteadyExactSolutionFctPt
@@ -268,7 +268,7 @@ namespace oomph
       output_fct(outfile,n_plot,exact_soln_pt);}
 
 
-   /// \short Output function for a time-dependent exact solution.
+   ///  Output function for a time-dependent exact solution.
    ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
    /// (Calls the steady version)
    void output_fct(std::ostream &outfile, const unsigned &n_plot,
@@ -291,7 +291,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const;
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    ///  Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_flux_transport(
       const unsigned& ipt,
@@ -305,7 +305,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Define the shape functions and test functions and derivatives
+  ///  Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// Galerkin: Test functions = shape functions
@@ -369,7 +369,7 @@ namespace oomph
 
 
   //=======================================================================
-  /// \short Face geometry for the QScalarAdvectionElement elements:
+  ///  Face geometry for the QScalarAdvectionElement elements:
   /// The spatial dimension of the face elements is one lower than that
   /// of the bulk element but they have the same number of points along
   /// their 1D edges.
@@ -379,7 +379,7 @@ namespace oomph
     : public virtual QSpectralElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QSpectralElement<DIM - 1, NNODE_1D>() {}
   };
@@ -508,7 +508,7 @@ namespace oomph
     }
 
 
-    ///\short Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,
@@ -647,7 +647,7 @@ namespace oomph
     }
 
 
-    ///\short Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,
@@ -684,7 +684,7 @@ namespace oomph
                                   public virtual ScalarAdvectionEquations<DIM>
   {
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    ///  Constructor: Call constructors for QElement and
     /// Advection Diffusion equations
     QScalarAdvectionElement()
       : QElement<DIM, NNODE_1D>(), ScalarAdvectionEquations<DIM>()
@@ -699,21 +699,21 @@ namespace oomph
     /*void operator=(
      const QScalarAdvectionElement<DIM,NNODE_1D>&) = delete;*/
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///   Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return 1;
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
       ScalarAdvectionEquations<DIM>::output(outfile);
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -721,21 +721,21 @@ namespace oomph
     }
 
 
-    /*/// \short C-style output function:
+    /*///  C-style output function:
    ///  x,y,u   or    x,y,z,u
    void output(FILE* file_pt)
     {
      ScalarAdvectionEquations<NFLUX,DIM>::output(file_pt);
     }
 
-   ///  \short C-style output function:
+   ///   C-style output function:
    ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
    void output(FILE* file_pt, const unsigned &n_plot)
     {
      ScalarAdvectionEquations<NFLUX,DIM>::output(file_pt,n_plot);
     }
 
-   /// \short Output function for an exact solution:
+   ///  Output function for an exact solution:
    ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
    void output_fct(std::ostream &outfile, const unsigned &n_plot,
                    FiniteElement::SteadyExactSolutionFctPt
@@ -745,7 +745,7 @@ namespace oomph
       output_fct(outfile,n_plot,exact_soln_pt);}
 
 
-   /// \short Output function for a time-dependent exact solution.
+   ///  Output function for a time-dependent exact solution.
    ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
    /// (Calls the steady version)
    void output_fct(std::ostream &outfile, const unsigned &n_plot,
@@ -768,7 +768,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const;
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    ///  Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_flux_transport(
       const unsigned& ipt,
@@ -782,7 +782,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Define the shape functions and test functions and derivatives
+  ///  Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// Galerkin: Test functions = shape functions
@@ -846,7 +846,7 @@ namespace oomph
 
 
   //=======================================================================
-  /// \short Face geometry for the QScalarAdvectionElement elements:
+  ///  Face geometry for the QScalarAdvectionElement elements:
   /// The spatial dimension of the face elements is one lower than that
   /// of the bulk element but they have the same number of points along
   /// their 1D edges.
@@ -856,7 +856,7 @@ namespace oomph
     : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };
@@ -917,7 +917,7 @@ namespace oomph
     }
 
 
-    ///\short Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,
@@ -995,7 +995,7 @@ namespace oomph
     }
 
 
-    ///\short Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,

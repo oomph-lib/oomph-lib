@@ -48,7 +48,7 @@ namespace Global_Physical_Variables
  /// Prescribed position of control point
  double Prescribed_y = 1.0;
 
- /// \short Pointer to pressure load (stored in Data so it can 
+ ///  Pointer to pressure load (stored in Data so it can 
  /// become an unknown in the problem when displacement control is used
  Data* Pext_data_pt;
 
@@ -56,7 +56,7 @@ namespace Global_Physical_Variables
  double Pcos=1.0;
 
 
- /// \short Return a reference to the external pressure 
+ ///  Return a reference to the external pressure 
  /// load on the elastic tube.
  double external_pressure() 
   {return (*Pext_data_pt->value_pt(0))*pow(0.05,3)/12.0;}

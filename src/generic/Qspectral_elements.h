@@ -177,14 +177,14 @@ namespace oomph
     }
 
 
-    ///\short Return the i-th data object associated with the polynomials
+    /// Return the i-th data object associated with the polynomials
     /// of order p. Note that i <= p.
     Data* spectral_data_pt(const unsigned& i) const
     {
       return (*Spectral_data_pt)[i];
     }
 
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -224,7 +224,7 @@ namespace oomph
       }
     }
 
-    /// \short Assign the local equation numbers. If the boolean argument is
+    ///  Assign the local equation numbers. If the boolean argument is
     /// true then store degrees of freedom at Dof_pt
     virtual void assign_all_generic_local_eqn_numbers(
       const bool& store_local_dof_pt)
@@ -372,7 +372,7 @@ namespace oomph
                                         public virtual LineElementBase
   {
   private:
-    /// \short Default integration rule: Gaussian integration of same 'order'
+    ///  Default integration rule: Gaussian integration of same 'order'
     /// as the element
     // This is sort of optimal, because it means that the integration is exact
     // for the shape functions. Can overwrite this in specific element
@@ -464,13 +464,13 @@ namespace oomph
     /// Calculate the geometric shape functions at local coordinate s
     inline void shape(const Vector<double>& s, Shape& psi) const;
 
-    /// \short Compute the  geometric shape functions and
+    ///  Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     inline void dshape_local(const Vector<double>& s,
                              Shape& psi,
                              DShape& dpsids) const;
 
-    /// \short Compute the geometric shape functions, derivatives and
+    ///  Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
     inline void d2shape_local(const Vector<double>& s,
@@ -478,7 +478,7 @@ namespace oomph
                               DShape& dpsids,
                               DShape& d2psids) const;
 
-    /// \short Overload the template-free interface for the calculation of
+    ///  Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one-dimensional element, so
     /// use the 1D version.
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -512,7 +512,7 @@ namespace oomph
     /// Output at n_plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
-    /// \short  Get cector of local coordinates of plot point i (when plotting
+    ///   Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
       const unsigned& i,
@@ -537,7 +537,7 @@ namespace oomph
       }
     }
 
-    /// \short Return string for tecplot zone header (when plotting
+    ///  Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
     {
@@ -546,7 +546,7 @@ namespace oomph
       return header.str();
     }
 
-    /// \short Return total number of plot points (when plotting
+    ///  Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
     unsigned nplot_points(const unsigned& nplot) const
     {
@@ -559,7 +559,7 @@ namespace oomph
       return np;
     }
 
-    /// \short Build the lower-dimensional FaceElement (an element of type
+    ///  Build the lower-dimensional FaceElement (an element of type
     /// QSpectralElement<0,NNODE_1D>). The face index takes two values
     /// corresponding to the two possible faces:
     /// -1 (Left)  s[0] = -1.0
@@ -650,7 +650,7 @@ namespace oomph
                                         public virtual QuadElementBase
   {
   private:
-    /// \short Default integration rule: Gaussian integration of same 'order'
+    ///  Default integration rule: Gaussian integration of same 'order'
     /// as the element
     // This is sort of optimal, because it means that the integration is exact
     // for the shape functions. Can overwrite this in specific element
@@ -753,13 +753,13 @@ namespace oomph
     /// Calculate the geometric shape functions at local coordinate s
     inline void shape(const Vector<double>& s, Shape& psi) const;
 
-    /// \short Compute the  geometric shape functions and
+    ///  Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     inline void dshape_local(const Vector<double>& s,
                              Shape& psi,
                              DShape& dpsids) const;
 
-    /// \short Compute the geometric shape functions, derivatives and
+    ///  Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ \partial ^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial ^2 \psi_j / \partial s_1^2 \f$
@@ -769,7 +769,7 @@ namespace oomph
                               DShape& dpsids,
                               DShape& d2psids) const;
 
-    /// \short Overload the template-free interface for the calculation of
+    ///  Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one-dimensional element, so
     /// use the 1D version.
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -803,7 +803,7 @@ namespace oomph
     /// Output at n_plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
-    /// \short  Get cector of local coordinates of plot point i (when plotting
+    ///   Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
       const unsigned& i,
@@ -835,7 +835,7 @@ namespace oomph
     }
 
 
-    /// \short Return string for tecplot zone header (when plotting
+    ///  Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
     {
@@ -844,7 +844,7 @@ namespace oomph
       return header.str();
     }
 
-    /// \short Return total number of plot points (when plotting
+    ///  Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
     unsigned nplot_points(const unsigned& nplot) const
     {
@@ -857,7 +857,7 @@ namespace oomph
       return np;
     }
 
-    /// \short Build the lower-dimensional FaceElement (an element of type
+    ///  Build the lower-dimensional FaceElement (an element of type
     /// QSpectralElement<1,NNODE_1D>). The face index takes four values
     /// corresponding to the four possible faces:
     /// -1 (West)  s[0] = -1.0
@@ -965,7 +965,7 @@ namespace oomph
                                         public virtual BrickElementBase
   {
   private:
-    /// \short Default integration rule: Gaussian integration of same 'order'
+    ///  Default integration rule: Gaussian integration of same 'order'
     /// as the element
     // This is sort of optimal, because it means that the integration is exact
     // for the shape functions. Can overwrite this in specific element
@@ -1084,13 +1084,13 @@ namespace oomph
     /// Calculate the geometric shape functions at local coordinate s
     inline void shape(const Vector<double>& s, Shape& psi) const;
 
-    /// \short Compute the  geometric shape functions and
+    ///  Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     inline void dshape_local(const Vector<double>& s,
                              Shape& psi,
                              DShape& dpsids) const;
 
-    /// \short Compute the geometric shape functions, derivatives and
+    ///  Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ \partial ^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial ^2 \psi_j / \partial s_1^2 \f$
@@ -1104,7 +1104,7 @@ namespace oomph
                               DShape& d2psids) const;
 
 
-    /// \short Overload the template-free interface for the calculation of
+    ///  Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one-dimensional element, so
     /// use the 3D version.
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -1137,7 +1137,7 @@ namespace oomph
     /// Output at nplot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
-    /// \short  Get cector of local coordinates of plot point i (when plotting
+    ///   Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
       const unsigned& i,
@@ -1174,7 +1174,7 @@ namespace oomph
     }
 
 
-    /// \short Return string for tecplot zone header (when plotting
+    ///  Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
     {
@@ -1184,7 +1184,7 @@ namespace oomph
       return header.str();
     }
 
-    /// \short Return total number of plot points (when plotting
+    ///  Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
     unsigned nplot_points(const unsigned& nplot) const
     {
@@ -1197,7 +1197,7 @@ namespace oomph
       return np;
     }
 
-    /// \short Build the lower-dimensional FaceElement (an element of type
+    ///  Build the lower-dimensional FaceElement (an element of type
     /// QSpectralElement<2,NNODE_1D>). The face index takes six values
     /// corresponding to the six possible faces:
     /// -1 (Left)   s[0] = -1.0

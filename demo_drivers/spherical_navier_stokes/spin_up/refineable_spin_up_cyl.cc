@@ -110,13 +110,13 @@ public:
 
 
 
- /// \short Set the boundary conditions
+ ///  Set the boundary conditions
  void set_boundary_conditions();
 
  /// Update the after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Update the problem specs before solve
+ ///  Update the problem specs before solve
  void actions_before_newton_solve(){}
  
  
@@ -124,7 +124,7 @@ public:
  void actions_after_implicit_timestep() {}
 
  
- /// \short Update the problem specs before next timestep: 
+ ///  Update the problem specs before next timestep: 
  /// Set Dirichlet boundary conditions from exact solution.
  void actions_before_implicit_timestep() {set_boundary_conditions();}
 
@@ -308,7 +308,7 @@ RefineableSphericalSpinUpProblem<ELEMENT>::RefineableSphericalSpinUpProblem()
 
 
 //=========start of actions_before_implicit_timestep======================
-/// \short Actions before timestep: update the domain, then reset the 
+///  Actions before timestep: update the domain, then reset the 
 /// boundary conditions for the current time.
 //========================================================================
 template<class ELEMENT>

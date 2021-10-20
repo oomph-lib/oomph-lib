@@ -55,12 +55,12 @@ namespace oomph
     /// Destructor (empty)
     virtual ~HelmholtzMGProblem() {}
 
-    /// \short This function needs to be implemented in the derived problem:
+    ///  This function needs to be implemented in the derived problem:
     /// Returns a pointer to a new object of the same type as the derived
     /// problem
     virtual HelmholtzMGProblem* make_new_problem() = 0;
 
-    /// \short Function to get a pointer to the mesh we will be working
+    ///  Function to get a pointer to the mesh we will be working
     /// with. If there are flux elements present in the mesh this will
     /// be overloaded to return a pointer to the bulk mesh otherwise
     /// it can be overloaded to point to the global mesh but it must
@@ -82,11 +82,11 @@ namespace oomph
   class HelmholtzMGPreconditioner : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
-    /// \short typedef for a function that returns a pointer to an object
+    ///  typedef for a function that returns a pointer to an object
     /// of the class HelmholtzSmoother to be used as the pre-smoother
     typedef HelmholtzSmoother* (*PreSmootherFactoryFctPt)();
 
-    /// \short typedef for a function that returns a pointer to an object
+    ///  typedef for a function that returns a pointer to an object
     /// of the class HelmholtzSmoother to be used as the post-smoother
     typedef HelmholtzSmoother* (*PostSmootherFactoryFctPt)();
 
@@ -106,7 +106,7 @@ namespace oomph
       Post_smoother_factory_function_pt = post_smoother_fn;
     }
 
-    /// \short Constructor: Set up default values for number of V-cycles
+    ///  Constructor: Set up default values for number of V-cycles
     /// and pre- and post-smoothing steps.
     HelmholtzMGPreconditioner(HelmholtzMGProblem* mg_problem_pt)
       : BlockPreconditioner<CRDoubleMatrix>(),
@@ -221,7 +221,7 @@ namespace oomph
       Doc_time = false;
     } // End of disable_doc_time
 
-    /// \short Disable all output from mg_solve apart from the number of
+    ///  Disable all output from mg_solve apart from the number of
     /// V-cycles used to solve the problem
     void disable_v_cycle_output()
     {
@@ -232,7 +232,7 @@ namespace oomph
       Suppress_v_cycle_output = true;
     } // End of disable_v_cycle_output
 
-    /// \short Suppress anything that can be suppressed, i.e. any timings.
+    ///  Suppress anything that can be suppressed, i.e. any timings.
     /// Things like mesh adaptation can not however be silenced using this
     void disable_output()
     {
@@ -260,7 +260,7 @@ namespace oomph
       Doc_time = true;
     } // End of enable_doc_time
 
-    /// \short Enable the output of the V-cycle timings and other output
+    ///  Enable the output of the V-cycle timings and other output
     void enable_v_cycle_output()
     {
       // Enable time documentation
@@ -270,7 +270,7 @@ namespace oomph
       Suppress_v_cycle_output = false;
     } // End of enable_v_cycle_output
 
-    /// \short Enable the output from anything that could have been suppressed
+    ///  Enable the output from anything that could have been suppressed
     void enable_output()
     {
       // Enable time documentation
@@ -283,7 +283,7 @@ namespace oomph
       Suppress_v_cycle_output = false;
     } // End of enable_output
 
-    /// \short Suppress the output of both smoothers and SuperLU
+    ///  Suppress the output of both smoothers and SuperLU
     void disable_smoother_and_superlu_doc_time()
     {
       // Loop over all levels of the hierarchy
@@ -317,7 +317,7 @@ namespace oomph
       return Npre_smooth;
     } // End of npre_smooth
 
-    /// \short Pre-smoother: Perform 'max_iter' smoothing steps on the
+    ///  Pre-smoother: Perform 'max_iter' smoothing steps on the
     /// linear system Ax=b with current RHS vector, b, starting with
     /// current solution vector, x. Return the residual vector r=b-Ax.
     /// Uses the default smoother (set in the HelmholtzMGProblem constructor)
@@ -332,7 +332,7 @@ namespace oomph
       residual_norm(level);
     } // End of pre_smooth
 
-    /// \short Post-smoother: Perform max_iter smoothing steps on the
+    ///  Post-smoother: Perform max_iter smoothing steps on the
     /// linear system Ax=b with current RHS vector, b, starting with
     /// current solution vector, x. Uses the default smoother (set in
     /// the HelmholtzMGProblem constructor) which can be overloaded for specific
@@ -347,7 +347,7 @@ namespace oomph
       residual_norm(level);
     } // End of post_smooth
 
-    /// \short Return norm of residual r=b-Ax and the residual vector itself
+    ///  Return norm of residual r=b-Ax and the residual vector itself
     /// on the level-th level
     double residual_norm(const unsigned& level)
     {
@@ -366,11 +366,11 @@ namespace oomph
     /// Calculate the norm of the residual vector, r=b-Ax
     double residual_norm(const unsigned& level, Vector<DoubleVector>& residual);
 
-    /// \short Function to create the fully expanded system matrix on the
+    ///  Function to create the fully expanded system matrix on the
     /// coarsest level
     void setup_coarsest_level_structures();
 
-    /// \short Call the direct solver (SuperLU) to solve the problem exactly.
+    ///  Call the direct solver (SuperLU) to solve the problem exactly.
     // The result is placed in X_mg
     void direct_solve()
     {
@@ -390,7 +390,7 @@ namespace oomph
                                  X_mg_vectors_storage[Nlevel - 1]);
     } // End of direct_solve
 
-    /// \short Builds a CRDoubleMatrix that is used to interpolate the
+    ///  Builds a CRDoubleMatrix that is used to interpolate the
     /// residual between levels. The transpose can be used as the full
     /// weighting restriction.
     void interpolation_matrix_set(const unsigned& level,
@@ -409,7 +409,7 @@ namespace oomph
 
     } // End of interpolation_matrix_set
 
-    /// \short Builds a CRDoubleMatrix that is used to interpolate the
+    ///  Builds a CRDoubleMatrix that is used to interpolate the
     /// residual between levels. The transpose can be used as the full
     /// weighting restriction.
     void interpolation_matrix_set(const unsigned& level,
@@ -455,7 +455,7 @@ namespace oomph
 
     } // End of interpolation_matrix_set
 
-    /// \short Builds a CRDoubleMatrix on each level that is used to
+    ///  Builds a CRDoubleMatrix on each level that is used to
     /// restrict the residual between levels. The transpose can be used
     /// as the interpolation matrix
     void set_restriction_matrices_as_interpolation_transposes()
@@ -472,35 +472,35 @@ namespace oomph
       }
     } // End of set_restriction_matrices_as_interpolation_transposes
 
-    /// \short Restrict residual (computed on level-th MG level) to the next
+    ///  Restrict residual (computed on level-th MG level) to the next
     /// coarser mesh and stick it into the coarse mesh RHS vector.
     void restrict_residual(const unsigned& level);
 
-    /// \short Interpolate solution at current level onto next finer mesh
+    ///  Interpolate solution at current level onto next finer mesh
     /// and correct the solution x at that level
     void interpolate_and_correct(const unsigned& level);
 
-    /// \short Given the son_type of an element and a local node number
+    ///  Given the son_type of an element and a local node number
     /// j in that element with nnode_1d nodes per coordinate direction,
     /// return the local coordinate s in its father element. Needed in
     /// the setup of the interpolation matrices
     void level_up_local_coord_of_node(const int& son_type, Vector<double>& s);
 
-    /// \short Setup the interpolation matrix on each level
+    ///  Setup the interpolation matrix on each level
     void setup_interpolation_matrices();
 
-    /// \short Setup the interpolation matrix on each level (used for
+    ///  Setup the interpolation matrix on each level (used for
     /// unstructured meshes)
     void setup_interpolation_matrices_unstructured();
 
-    /// \short Setup the transfer matrices on each level
+    ///  Setup the transfer matrices on each level
     void setup_transfer_matrices();
 
-    /// \short Do a full setup (assumes everything will be setup around the
+    ///  Do a full setup (assumes everything will be setup around the
     /// HelmholtzMGProblem pointer given in the constructor)
     void full_setup();
 
-    /// \short Function applies MG to the vector r for a full solve
+    ///  Function applies MG to the vector r for a full solve
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
       // Split up the RHS vector into DoubleVectors, whose entries are
@@ -542,7 +542,7 @@ namespace oomph
       return V_cycle_counter;
     } // End of iterations
 
-    /// \short Use the version in the Preconditioner base class for the
+    ///  Use the version in the Preconditioner base class for the
     /// alternative setup function that takes a matrix pointer as an argument.
     using Preconditioner::setup;
 
@@ -553,13 +553,13 @@ namespace oomph
     /// Function to create post-smoothers
     PostSmootherFactoryFctPt Post_smoother_factory_function_pt;
 
-    /// \short Do the actual solve -- this is called through the pure virtual
+    ///  Do the actual solve -- this is called through the pure virtual
     /// solve function in the LinearSolver base class. The function is stored
     /// as protected to allow the HelmholtzMGPreconditioner derived class to use
     /// the solver
     void mg_solve(Vector<DoubleVector>& result);
 
-    /// \short Function to ensure the block form of the Jacobian matches
+    ///  Function to ensure the block form of the Jacobian matches
     /// the form described, i.e. we should have:
     ///                       |-----|------|
     ///                       | A_r | -A_c |
@@ -568,7 +568,7 @@ namespace oomph
     ///                       |-----|------|
     void block_preconditioner_self_test();
 
-    /// \short Function to set up the hierachy of levels. Creates a vector
+    ///  Function to set up the hierachy of levels. Creates a vector
     /// of pointers to each MG level
     void setup()
     {
@@ -584,19 +584,19 @@ namespace oomph
       }
     } // End of setup
 
-    /// \short Function to set up the hierachy of levels. Creates a vector
+    ///  Function to set up the hierachy of levels. Creates a vector
     /// of pointers to each MG level
     void setup_mg_hierarchy();
 
-    /// \short Function to set up the hierachy of levels. Creates a vector
+    ///  Function to set up the hierachy of levels. Creates a vector
     /// of pointers to each MG level
     void setup_mg_structures();
 
-    /// \short Estimate the value of the parameter h on the level-th problem
+    ///  Estimate the value of the parameter h on the level-th problem
     /// in the hierarchy.
     void maximum_edge_width(const unsigned& level, double& h);
 
-    /// \short Function to set up all of the smoothers once the system matrices
+    ///  Function to set up all of the smoothers once the system matrices
     /// have been set up
     void setup_smoothers();
 
@@ -606,7 +606,7 @@ namespace oomph
     /// Vector containing pointers to problems in hierarchy
     Vector<HelmholtzMGProblem*> Mg_hierarchy_pt;
 
-    /// \short Vector of vectors to store the system matrices. The i-th
+    ///  Vector of vectors to store the system matrices. The i-th
     /// entry in this vector contains a vector of length two. The first
     /// entry of which contains the real part of the system matrix which
     /// we refer to as A_r and the second entry contains the imaginary
@@ -614,7 +614,7 @@ namespace oomph
     /// the true system matrix is given by A = A_r + iA_c
     Vector<Vector<CRDoubleMatrix*>> Mg_matrices_storage_pt;
 
-    /// \short Stores the system matrix on the coarest level in the fully
+    ///  Stores the system matrix on the coarest level in the fully
     /// expanded format:
     ///                       |-----|------|
     ///                       | A_r | -A_c |
@@ -624,7 +624,7 @@ namespace oomph
     /// Note: this is NOT the same as A = A_r + iA_c
     CRDoubleMatrix* Coarsest_matrix_mg_pt;
 
-    /// \short Assuming we're solving the system Ax=b, this vector will
+    ///  Assuming we're solving the system Ax=b, this vector will
     /// contain the expanded solution vector on the coarsest level of the
     /// heirarchy. This will have the form:
     ///                           |-----|
@@ -634,7 +634,7 @@ namespace oomph
     ///                           |-----|
     DoubleVector Coarsest_x_mg;
 
-    /// \short Assuming we're solving the system Ax=b, this vector will
+    ///  Assuming we're solving the system Ax=b, this vector will
     /// contain the expanded solution vector on the coarsest level of the
     /// heirarchy. This will have the form:
     ///                           |-----|
@@ -650,18 +650,18 @@ namespace oomph
     /// Vector to store the restriction matrices
     Vector<CRDoubleMatrix*> Restriction_matrices_storage_pt;
 
-    /// \short Vector of vectors to store the solution vectors (X_mg) in two
+    ///  Vector of vectors to store the solution vectors (X_mg) in two
     /// parts; the real and imaginary. To access the real part of the solution
     /// vector on the i-th level we need to access X_mg_vectors_storage[i][0]
     /// while accessing X_mg_vectors_storage[i][1] will give us the
     /// corresponding imaginary part
     Vector<Vector<DoubleVector>> X_mg_vectors_storage;
 
-    /// \short Vector of vectors to store the RHS vectors. This uses the same
+    ///  Vector of vectors to store the RHS vectors. This uses the same
     /// format as the X_mg_vectors_storage vector
     Vector<Vector<DoubleVector>> Rhs_mg_vectors_storage;
 
-    /// \short Vector to vectors to store the residual vectors. This uses
+    ///  Vector to vectors to store the residual vectors. This uses
     /// the same format as the X_mg_vectors_storage vector
     Vector<Vector<DoubleVector>> Residual_mg_vectors_storage;
 
@@ -671,7 +671,7 @@ namespace oomph
     /// Vector to store the post-smoothers
     Vector<HelmholtzSmoother*> Post_smoothers_storage_pt;
 
-    /// \short Vector to storage the maximum edge width of each mesh. We only
+    ///  Vector to storage the maximum edge width of each mesh. We only
     /// need the maximum edge width on levels where we use a smoother to
     /// determine the value of kh
     Vector<double> Max_edge_width;
@@ -709,7 +709,7 @@ namespace oomph
     /// Boolean variable to indicate whether or not the solver has been setup
     bool Has_been_setup;
 
-    /// \short Boolean variable to indicate whether or not the problem was
+    ///  Boolean variable to indicate whether or not the problem was
     /// successfully solved
     bool Has_been_solved;
 
@@ -721,7 +721,7 @@ namespace oomph
   };
 
   //========================================================================
-  /// \short Calculating the residual r=b-Ax in the complex case requires
+  ///  Calculating the residual r=b-Ax in the complex case requires
   /// more care than the real case. To calculate the residual vector we
   /// split A, x and b into their complex components:
   ///           r = b - A*x,
@@ -866,7 +866,7 @@ namespace oomph
   }
 
   //=====================================================================
-  /// \short Check the block preconditioner framework returns the correct
+  ///  Check the block preconditioner framework returns the correct
   /// system matrix
   //=====================================================================
   template<unsigned DIM>
@@ -1255,7 +1255,7 @@ namespace oomph
   } // End of full_setup
 
   //===================================================================
-  /// \short Set up the MG hierarchy. Creates a vector of pointers to
+  ///  Set up the MG hierarchy. Creates a vector of pointers to
   /// each MG level and resizes internal storage for multigrid data
   //===================================================================
   // Function to set up the hierachy of levels.
@@ -1412,7 +1412,7 @@ namespace oomph
   } // End of setup_mg_hierarchy
 
   //===================================================================
-  /// \short Set up the transfer matrices. Both the pure injection and
+  ///  Set up the transfer matrices. Both the pure injection and
   /// full weighting method have been implemented here but it is highly
   /// recommended that full weighting is used in general. In both
   /// methods the transpose of the transfer matrix is used to transfer
@@ -1470,7 +1470,7 @@ namespace oomph
   } // End of setup_transfer_matrices function
 
   //===================================================================
-  /// \short Set up the MG structures on each level
+  ///  Set up the MG structures on each level
   //===================================================================
   template<unsigned DIM>
   void HelmholtzMGPreconditioner<DIM>::setup_mg_structures()
@@ -1957,7 +1957,7 @@ namespace oomph
   } // End of setup_mg_structures
 
   //=========================================================================
-  /// \short Function to set up structures on the coarsest level of the MG
+  ///  Function to set up structures on the coarsest level of the MG
   /// hierarchy. This includes setting up the CRDoubleMatrix version of the
   /// coarsest level system matrix. This would otherwise be stored as a
   /// vector of pointers to the constituent CRDoubleMatrix objects which
@@ -2207,7 +2207,7 @@ namespace oomph
 
 
   //==========================================================================
-  /// \short Find the value of the parameters h on the level-th problem in
+  ///  Find the value of the parameters h on the level-th problem in
   /// the hierarchy. The value of h is determined by looping over each element
   /// in the mesh and calculating the length of each side and take the maximum
   /// value.Note, this is a heuristic calculation; if the mesh is nonuniform
@@ -2334,7 +2334,7 @@ namespace oomph
   } // End of maximum_edge_width
 
   //==========================================================================
-  /// \short Find the value of the parameters h on the level-th problem in
+  ///  Find the value of the parameters h on the level-th problem in
   /// the hierarchy. The value of h is determined by looping over each element
   /// in the mesh and calculating the length of each side and take the maximum
   /// value. Note, this is a heuristic calculation; if the mesh is non-uniform
@@ -2535,7 +2535,7 @@ namespace oomph
   } // End of maximum_edge_width
 
   //=========================================================================
-  /// \short Set up the smoothers on all levels
+  ///  Set up the smoothers on all levels
   //=========================================================================
   template<unsigned DIM>
   void HelmholtzMGPreconditioner<DIM>::setup_smoothers()
@@ -2738,7 +2738,7 @@ namespace oomph
 
 
   //===================================================================
-  /// \short Set up the interpolation matrices
+  ///  Set up the interpolation matrices
   //===================================================================
   template<unsigned DIM>
   void HelmholtzMGPreconditioner<DIM>::setup_interpolation_matrices()
@@ -3236,7 +3236,7 @@ namespace oomph
   } // End of setup_interpolation_matrices
 
   //===================================================================
-  /// \short Setup the interpolation matrices
+  ///  Setup the interpolation matrices
   //===================================================================
   template<unsigned DIM>
   void HelmholtzMGPreconditioner<
@@ -3433,7 +3433,7 @@ namespace oomph
   } // End of setup_interpolation_matrices_unstructured
 
   //=========================================================================
-  /// \short Given the son type of the element and the local coordinate s of
+  ///  Given the son type of the element and the local coordinate s of
   /// a given node in the son element, return the local coordinate s in its
   /// father element. 3D case.
   //=========================================================================
@@ -3500,7 +3500,7 @@ namespace oomph
   } // End of level_up_local_coord_of_node
 
   //=========================================================================
-  /// \short Given the son type of the element and the local coordinate s of
+  ///  Given the son type of the element and the local coordinate s of
   /// a given node in the son element, return the local coordinate s in its
   /// father element. 2D case.
   //=========================================================================
@@ -3554,7 +3554,7 @@ namespace oomph
   } // End of level_up_local_coord_of_node
 
   //===================================================================
-  /// \short Restrict residual (computed on current MG level) to
+  ///  Restrict residual (computed on current MG level) to
   /// next coarser mesh and stick it into the coarse mesh RHS vector
   /// using the restriction matrix (if restrict_flag=1) or the transpose
   /// of the interpolation matrix (if restrict_flag=2)
@@ -3588,7 +3588,7 @@ namespace oomph
   } // End of restrict_residual
 
   //===================================================================
-  /// \short Interpolate solution at current level onto
+  ///  Interpolate solution at current level onto
   /// next finer mesh and correct the solution x at that level
   //===================================================================
   template<unsigned DIM>
@@ -3631,7 +3631,7 @@ namespace oomph
   } // End of interpolate_and_correct
 
   //===================================================================
-  /// \short Linear solver. This is where the general V-cycle algorithm
+  ///  Linear solver. This is where the general V-cycle algorithm
   /// is implemented
   //===================================================================
   template<unsigned DIM>

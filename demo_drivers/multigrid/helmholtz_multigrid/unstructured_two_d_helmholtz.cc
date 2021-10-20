@@ -55,7 +55,7 @@ using namespace std;
 //========================================================================
 namespace GlobalParameters
 {
- /// \short Mesh specific parameters:
+ ///  Mesh specific parameters:
  ///---------------------------------
  /// Length of the square in each direction
  double Lx=1.0;
@@ -71,18 +71,18 @@ namespace GlobalParameters
  /// size of the physical domain
  double Pml_thickness=1.0e-01;
  
- /// \short The choice of whether or not to disable PMLs (the default is to
+ ///  The choice of whether or not to disable PMLs (the default is to
  /// enable them)
  ///    0 = Enable PMLs
  ///    1 = Disable PMLs
  unsigned Disable_pml_flag=0;
  
- /// \short The choice of whether or not to enable the new test mapping
+ ///  The choice of whether or not to enable the new test mapping
  ///    1 = Enable test mapping
  ///    0 = Disable test mapping
  unsigned Enable_test_pml_mapping_flag=0;
  
- /// \short Problem specific parameters:
+ ///  Problem specific parameters:
  ///------------------------------------
  /// Square of the wavenumber (also known as k^2)
  double K_squared=1600.0;
@@ -90,7 +90,7 @@ namespace GlobalParameters
  /// Wavenumber (also known as k), k=omega/c
  double Wavenumber=sqrt(K_squared);
 
- /// \short Choose the value of the shift to create the complex-shifted
+ ///  Choose the value of the shift to create the complex-shifted
  /// Laplacian preconditioner (CSLP)
  double Alpha_shift=0.5;
  
@@ -101,7 +101,7 @@ namespace GlobalParameters
   Wavenumber=sqrt(K_squared);
  }
  
- /// \short Value of the solution on the boundary of the obstacle (here
+ ///  Value of the solution on the boundary of the obstacle (here
  /// we assume the solution is a plane wave incident at angle alpha)
  void get_exact_u(const Vector<double>& x,
 		  Vector<double>& u,
@@ -169,7 +169,7 @@ namespace GlobalParameters
   }
  } // End of get_exact_u_bessel
  
- /// \short Default value of the solution on the boundary of the obstacle.
+ ///  Default value of the solution on the boundary of the obstacle.
  /// This represents a Bessel solution
  void default_get_exact_u(const Vector<double>& x,Vector<double>& u)
  {
@@ -198,34 +198,34 @@ namespace GlobalParameters
  /// The number of adaptations allowed by the Newton solver
  unsigned N_adaptations=1;
 
- /// \short The choice of whether or not to use adaptation
+ ///  The choice of whether or not to use adaptation
  ///    0 = Uniform refinement
  ///    1 = Adaptive refinement
  unsigned Use_adaptation_flag=0;
 
- /// \short The choice of pre-smoother:
+ ///  The choice of pre-smoother:
  ///    0 = Automatic (GMRES as a smoother on levels where kh>0.5)
  ///    1 = Damped Jacobi on all levels with a constant omega value
  unsigned Pre_smoother_flag=0;
  
- /// \short The choice of post-smoother:
+ ///  The choice of post-smoother:
  ///    0 = Automatic (GMRES as a smoother on levels where kh>0.5)
  ///    1 = Damped Jacobi on all levels with a constant omega value
  unsigned Post_smoother_flag=0;
  
- /// \short The choice of linear solver
+ ///  The choice of linear solver
  ///    0 = SuperLU
  ///    1 = Multigrid
  unsigned Linear_solver_flag=1;
  
- /// \short The MG solver allows for five different levels of output:
+ ///  The MG solver allows for five different levels of output:
  ///    0 = Outputs everything
  ///    1 = Outputs everything except the smoother timings 
  ///    2 = Outputs setup information but no V-cycle timings
  ///    3 = Suppresses all output
  unsigned Output_management_flag=0;
  
- /// \short Variable used to decide whether or not convergence information
+ ///  Variable used to decide whether or not convergence information
  /// is displayed:
  ///    0 = Don't display convergence information
  ///    1 = Display convergence information
@@ -237,7 +237,7 @@ namespace GlobalParameters
  // Pointer to the output stream -- defaults to std::cout
  std::ostream* Stream_pt;
  
- /// \short New mapping function that makes the mapping independent of the
+ ///  New mapping function that makes the mapping independent of the
  /// PML thickness
  class TestPMLMapping : public virtual PMLMapping
  {
@@ -247,7 +247,7 @@ namespace GlobalParameters
   /// Default constructor (empty)
   TestPMLMapping(){};
 
-  /// \short Overwrite the pure PML mapping coefficient function to return the
+  ///  Overwrite the pure PML mapping coefficient function to return the
   /// coeffcients proposed by Bermudez et al
   std::complex<double> gamma(const double& nu_i,
 			     const double& pml_width_i,
@@ -291,7 +291,7 @@ namespace Smoother_Factory_Function_Helper
  /// The value of the damping factor for the damped Jacobi smoother
  double Omega=0.4;
  
- /// \short Returns a pointer to a Smoother object which is to be used as
+ ///  Returns a pointer to a Smoother object which is to be used as
  /// the pre-smoother
  HelmholtzSmoother* set_pre_smoother()
  {
@@ -299,7 +299,7 @@ namespace Smoother_Factory_Function_Helper
   return new ComplexDampedJacobi<CRDoubleMatrix>(Omega);
  } 
  
- /// \short Returns a pointer to a Smoother object which is to be used as
+ ///  Returns a pointer to a Smoother object which is to be used as
  /// the post-smoother
  HelmholtzSmoother* set_post_smoother()
  {
@@ -338,7 +338,7 @@ public:
    doc_solution();
   }
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where
+ ///  Doc the solution. DocInfo object stores flags/labels for where
  /// the output gets written to
  void doc_solution();
 
@@ -369,7 +369,7 @@ private:
    return new PMLHelmholtzMGProblem<ELEMENT>;
   }
 
- /// \short Overload the mg_bulk_mesh_pt function to return a pointer to the
+ ///  Overload the mg_bulk_mesh_pt function to return a pointer to the
  /// "refineable" portion of the mesh
  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt()
   {

@@ -302,11 +302,11 @@ namespace oomph
   /// Product of Reynolds number and inverse of Froude number
   double ReInvFr = 5.0;
   
-  /// \short Ratio of viscosity in upper fluid to viscosity in lower
+  ///  Ratio of viscosity in upper fluid to viscosity in lower
   /// fluid. Reynolds number etc. is based on viscosity in lower fluid.
   double Viscosity_Ratio = 0.1;
   
-  /// \short Ratio of density in upper fluid to density in lower
+  ///  Ratio of density in upper fluid to density in lower
   /// fluid. Reynolds number etc. is based on density in lower fluid.
   double Density_Ratio = 0.5;
   
@@ -319,7 +319,7 @@ namespace oomph
   /// Pseudo-solid Poisson ratio
   double Nu=0.1;
 
-  /// \short Length of the channel
+  ///  Length of the channel
   double Length = 1.0;
 
   // Height of the channel
@@ -334,7 +334,7 @@ namespace oomph
   /// Trace file
   ofstream Trace_file;
 
-  /// \short File to document the norm of the solution (for validation 
+  ///  File to document the norm of the solution (for validation 
   /// purposes -- triangle doesn't give fully reproducible results so
   /// mesh generation/adaptation may generate slightly different numbers
   /// of elements on different machines!)
@@ -430,7 +430,7 @@ public:
    Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
   }
  
- /// \short Set boundary conditions and complete the build of all elements
+ ///  Set boundary conditions and complete the build of all elements
  void complete_problem_setup();
 
  /// Doc the solution
@@ -505,10 +505,10 @@ void deform_interface(const double &epsilon,const unsigned &n_periods)
 private:
  
 
- /// \short Create free surface elements
+ ///  Create free surface elements
  void create_free_surface_elements();
 
- /// \short Delete free surface elements 
+ ///  Delete free surface elements 
  void delete_free_surface_elements()
   {
    // How many surface elements are in the surface mesh

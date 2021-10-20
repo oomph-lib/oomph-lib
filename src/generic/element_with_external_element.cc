@@ -30,7 +30,7 @@
 namespace oomph
 {
   //======================================================================
-  /// \short Destructor, clean up any memory allocated for the equation
+  ///  Destructor, clean up any memory allocated for the equation
   /// numbering schemes and storage for the external elements
   //======================================================================
   ElementWithExternalElement::~ElementWithExternalElement()
@@ -70,7 +70,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Initialise storage for source elements and their
+  ///  Initialise storage for source elements and their
   /// associated local coordinates for the specified number of interactions
   //========================================================================
   void ElementWithExternalElement::initialise_external_element_storage()
@@ -119,7 +119,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Clear the storage for pointers to external  elements and their
+  ///  Clear the storage for pointers to external  elements and their
   /// associated local coordinates.
   //========================================================================
   void ElementWithExternalElement::flush_all_external_element_storage()
@@ -143,7 +143,7 @@ namespace oomph
 
 
   //================================================================
-  /// \short Function that must return all the data involved
+  ///  Function that must return all the data involved
   /// in the desired interactions from the external element
   /// Default is to call the identify_field_data_for_interaction()
   /// for each element.
@@ -169,7 +169,7 @@ namespace oomph
   }
 
   //=======================================================================
-  /// \short Function that must return all geometric data involved
+  ///  Function that must return all geometric data involved
   /// in the desired interactions from the external element
   /// Default is to add all geometric data for each element for each
   /// interaction
@@ -194,7 +194,7 @@ namespace oomph
     } // End of loop over interactions
   }
 
-  /// \short Function to describe the local dofs of the element. The ostream
+  ///  Function to describe the local dofs of the element. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the

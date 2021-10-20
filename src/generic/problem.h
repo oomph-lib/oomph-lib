@@ -93,7 +93,7 @@ namespace oomph
 
 
   //=======================================================================
-  /// \short The Problem class
+  ///  The Problem class
   ///
   /// The main components of a Problem are:
   /// - a pointer to the (global) Mesh (which provides ordered
@@ -196,69 +196,69 @@ namespace oomph
     /// Pointer to global time for the problem
     Time* Time_pt;
 
-    /// \short The Vector of time steppers (there could be many
+    ///  The Vector of time steppers (there could be many
     /// different ones in multiphysics problems)
     Vector<TimeStepper*> Time_stepper_pt;
 
-    /// \short Pointer to a single explicit timestepper
+    ///  Pointer to a single explicit timestepper
     ExplicitTimeStepper* Explicit_time_stepper_pt;
 
     /// Pointer to vector for backup of dofs
     Vector<double>* Saved_dof_pt;
 
-    /// \short Has default set_initial_condition function been called?
+    ///  Has default set_initial_condition function been called?
     /// Default: false
     bool Default_set_initial_condition_called;
 
-    /// \short Use the globally convergent newton method
+    ///  Use the globally convergent newton method
     bool Use_globally_convergent_newton_method;
 
-    /// \short Boolean to indicate that empty
+    ///  Boolean to indicate that empty
     /// actions_before_read_unstructured_meshes() function has been called.
     bool Empty_actions_before_read_unstructured_meshes_has_been_called;
 
-    /// \short Boolean to indicate that empty
+    ///  Boolean to indicate that empty
     /// actions_after_read_unstructured_meshes() function has been called.
     bool Empty_actions_after_read_unstructured_meshes_has_been_called;
 
-    /// \short Boolean to indicate whether local dof pointers should be
+    ///  Boolean to indicate whether local dof pointers should be
     /// stored in the elements
     bool Store_local_dof_pt_in_elements;
 
-    /// \short Use values from the time stepper predictor as an initial guess
+    ///  Use values from the time stepper predictor as an initial guess
     bool Use_predictor_values_as_initial_guess;
 
   protected:
-    ///\short Vector of pointers to copies of the problem used in adaptive
+    /// Vector of pointers to copies of the problem used in adaptive
     /// bifurcation tracking problems (ALH: TEMPORARY HACK, WILL BE FIXED)
     Vector<Problem*> Copy_of_problem_pt;
 
-    /// \short Map used to determine whether the derivatives with respect to
+    ///  Map used to determine whether the derivatives with respect to
     /// a parameter should be finite differenced. The default is that
     /// finite differences should be used
     std::map<double*, bool> Calculate_dparameter_analytic;
 
-    /// \short Map used to determine whether the hessian products should be
+    ///  Map used to determine whether the hessian products should be
     /// computed using finite differences. The default is that finite
     /// differences will be used
     bool Calculate_hessian_products_analytic;
 
   public:
-    /// \short Hook for debugging. Can be overloaded in driver code; argument
+    ///  Hook for debugging. Can be overloaded in driver code; argument
     /// allows identification of where we're coming from
     virtual void debug_hook_fct(const unsigned& i)
     {
       oomph_info << "Called empty hook fct with i=" << i << std::endl;
     }
 
-    /// \short Function to turn on analytic calculation of the parameter
+    ///  Function to turn on analytic calculation of the parameter
     /// derivatives in continuation and bifurcation detection problems
     inline void set_analytic_dparameter(double* const& parameter_pt)
     {
       Calculate_dparameter_analytic[parameter_pt] = true;
     }
 
-    /// \short Function to turn off analytic calculation of the parameter
+    ///  Function to turn off analytic calculation of the parameter
     /// derivatives in continuation and bifurcation detection problems
     inline void unset_analytic_dparameter(double* const& parameter_pt)
     {
@@ -272,7 +272,7 @@ namespace oomph
       }
     }
 
-    /// \short Function to determine whether the parameter derivatives
+    ///  Function to determine whether the parameter derivatives
     /// are calculated analytically
     inline bool is_dparameter_calculated_analytically(
       double* const& parameter_pt)
@@ -284,41 +284,41 @@ namespace oomph
               Calculate_dparameter_analytic.end());
     }
 
-    /// \short Function to turn on analytic calculation of the parameter
+    ///  Function to turn on analytic calculation of the parameter
     /// derivatives in continuation and bifurcation detection problems
     inline void set_analytic_hessian_products()
     {
       Calculate_hessian_products_analytic = true;
     }
 
-    /// \short Function to turn off analytic calculation of the parameter
+    ///  Function to turn off analytic calculation of the parameter
     /// derivatives in continuation and bifurcation detection problems
     void unset_analytic_hessian_products()
     {
       Calculate_hessian_products_analytic = false;
     }
 
-    /// \short Function to determine whether the hessian products
+    ///  Function to determine whether the hessian products
     /// are calculated analytically
     inline bool are_hessian_products_calculated_analytically()
     {
       return Calculate_hessian_products_analytic;
     }
 
-    /// \short Set all pinned values to zero.
+    ///  Set all pinned values to zero.
     /// Used to set boundary conditions to be homogeneous in the copy
     /// of the problem  used in adaptive bifurcation tracking
     /// (ALH: TEMPORARY HACK, WILL BE FIXED)
     void set_pinned_values_to_zero();
 
 
-    /// \short Flag to allow suppression of warning messages re reading in
+    ///  Flag to allow suppression of warning messages re reading in
     /// unstructured meshes during restart.
     static bool Suppress_warning_about_actions_before_read_unstructured_meshes;
 
 
   private:
-    /// \short Private helper function that actually performs the unsteady
+    ///  Private helper function that actually performs the unsteady
     /// "doubly"  adaptive Newton solve. See actual (non-helper) functions
     /// for description of parameters.
     double doubly_adaptive_unsteady_newton_solve_helper(
@@ -330,7 +330,7 @@ namespace oomph
       const bool& shift = true);
 
 
-    /// \short Helper function to do compund refinement of (all) refineable
+    ///  Helper function to do compund refinement of (all) refineable
     /// (sub)mesh(es) uniformly as many times as specified in vector and
     /// rebuild problem; doc refinement process. Set boolean argument
     /// to true if you want to prune immediately after refining the meshes
@@ -339,7 +339,7 @@ namespace oomph
                               DocInfo& doc_info,
                               const bool& prune);
 
-    /// \short Helper function to do compund p-refinement of (all) p-refineable
+    ///  Helper function to do compund p-refinement of (all) p-refineable
     /// (sub)mesh(es) uniformly as many times as specified in vector and
     /// rebuild problem; doc refinement process. Set boolean argument
     /// to true if you want to prune immediately after refining the meshes
@@ -348,11 +348,11 @@ namespace oomph
                                 DocInfo& doc_info,
                                 const bool& prune);
 
-    /// \short Helper function to re-setup the Base_mesh enumeration
+    ///  Helper function to re-setup the Base_mesh enumeration
     /// (used during load balancing) after pruning
     void setup_base_mesh_info_after_pruning();
 
-    /// \short Private helper function that is used to assemble the Jacobian
+    ///  Private helper function that is used to assemble the Jacobian
     /// matrix in the case when the storage is row or column compressed.
     /// The boolean Flag indicates
     /// if we want compressed row format (true) or compressed column.
@@ -365,7 +365,7 @@ namespace oomph
       Vector<double*>& residual,
       bool compressed_row_flag);
 
-    /// \short Private helper function that is used to assemble the Jacobian
+    ///  Private helper function that is used to assemble the Jacobian
     /// matrix in the case when the storage is row or column compressed.
     /// The boolean Flag indicates
     /// if we want compressed row format (true) or compressed column.
@@ -378,7 +378,7 @@ namespace oomph
       Vector<double*>& residual,
       bool compressed_row_flag);
 
-    /// \short Private helper function that is used to assemble the Jacobian
+    ///  Private helper function that is used to assemble the Jacobian
     /// matrix in the case when the storage is row or column compressed.
     /// The boolean Flag indicates
     /// if we want compressed row format (true) or compressed column.
@@ -391,7 +391,7 @@ namespace oomph
       Vector<double*>& residual,
       bool compressed_row_flag);
 
-    /// \short Private helper function that is used to assemble the Jacobian
+    ///  Private helper function that is used to assemble the Jacobian
     /// matrix in the case when the storage is row or column compressed.
     /// The boolean Flag indicates
     /// if we want compressed row format (true) or compressed column.
@@ -404,7 +404,7 @@ namespace oomph
       Vector<double*>& residual,
       bool compressed_row_flag);
 
-    /// \short Private helper function that is used to assemble the Jacobian
+    ///  Private helper function that is used to assemble the Jacobian
     /// matrix in the case when the storage is row or column compressed.
     /// The boolean Flag indicates
     /// if we want compressed row format (true) or compressed column.
@@ -417,24 +417,24 @@ namespace oomph
       Vector<double*>& residual,
       bool compressed_row_flag);
 
-    /// \short Vector of global data: "Nobody" (i.e. none of the elements etc.)
+    ///  Vector of global data: "Nobody" (i.e. none of the elements etc.)
     /// is "in charge" of this Data so it would be overlooked when it
     /// comes to equation-numbering, timestepping etc. Including
     /// (pointers) to such Data in here, puts the Problem itself
     /// "in charge" of these tasks.
     Vector<Data*> Global_data_pt;
 
-    /// \short A function that performs the guts of the continuation
+    ///  A function that performs the guts of the continuation
     /// derivative calculation in arc length continuation problems.
     void calculate_continuation_derivatives_helper(const DoubleVector& z);
 
-    /// \short A function that performs the guts of the continuation
+    ///  A function that performs the guts of the continuation
     /// derivative calculation in arc-length continuation problems using
     /// finite differences
     void calculate_continuation_derivatives_fd_helper(
       double* const& parameter_pt);
 
-    /// \short A function that is used to adapt a bifurcation-tracking
+    ///  A function that is used to adapt a bifurcation-tracking
     /// problem, which requires separate interpolation of the
     /// associated eigenfunction. The error measure is chosen to be
     /// a suitable combination of the errors in the base flow and the
@@ -444,13 +444,13 @@ namespace oomph
                                   const unsigned& bifurcation_type,
                                   const bool& actually_adapt = true);
 
-    /// \short A function that is used to document the errors used
+    ///  A function that is used to document the errors used
     /// in the adaptive solution of bifurcation problems.
     void bifurcation_adapt_doc_errors(const unsigned& bifurcation_type);
 
     // ALH_TEMP_DEVELOPMENT
   protected:
-    /// \short The distribution of the DOFs in this problem.
+    ///  The distribution of the DOFs in this problem.
     /// This object is created in the Problem constructor and setup
     /// when assign_eqn_numbers(...) is called.
     /// If this problem is distributed then this distribution will match
@@ -462,7 +462,7 @@ namespace oomph
   private:
 #ifdef OOMPH_HAS_MPI
 
-    ///\short Helper method that returns the (unique) global equations to which
+    /// Helper method that returns the (unique) global equations to which
     /// the elements in the range el_lo to el_hi contribute on this
     /// processor using the given assembly_handler
     void get_my_eqns(AssemblyHandler* const& assembly_handler_pt,
@@ -470,7 +470,7 @@ namespace oomph
                      const unsigned& el_hi,
                      Vector<unsigned>& my_eqns);
 
-    /// \short Helper method to assemble CRDoubleMatrices from distributed
+    ///  Helper method to assemble CRDoubleMatrices from distributed
     /// on multiple processors.
     void parallel_sparse_assemble(
       const LinearAlgebraDistribution* const& dist_pt,
@@ -480,7 +480,7 @@ namespace oomph
       Vector<unsigned>& nnz,
       Vector<double*>& residuals);
 
-    /// \short A private helper function to
+    ///  A private helper function to
     /// copy the haloed equation numbers into the halo equation numbers,
     /// either for the problem's one and only mesh or for all of its
     /// submeshes. Bools control if we deal with data associated with
@@ -488,7 +488,7 @@ namespace oomph
     void copy_haloed_eqn_numbers_helper(const bool& do_halos,
                                         const bool& do_external_halos);
 
-    /// \short Private helper function to remove repeated data
+    ///  Private helper function to remove repeated data
     /// in external haloed elements in specified mesh. Bool is true if some data
     /// was removed -- this usually requires re-running through certain
     /// parts of the equation numbering procedure.
@@ -496,39 +496,39 @@ namespace oomph
                                bool& actually_removed_some_data);
 
 
-    /// \short Consolidate external halo node storage by removing nulled out
+    ///  Consolidate external halo node storage by removing nulled out
     /// pointers in external halo and haloed schemes for all meshes.
     void remove_null_pointers_from_external_halo_node_storage();
 
-    /// \short Helper function to re-assign the first and last elements to be
+    ///  Helper function to re-assign the first and last elements to be
     /// assembled by each processor during parallel assembly for
     /// non-distributed problem.
     void recompute_load_balanced_assembly();
 
-    /// \short Boolean to switch on assessment of load imbalance in parallel
+    ///  Boolean to switch on assessment of load imbalance in parallel
     /// assembly of distributed problem
     bool Doc_imbalance_in_parallel_assembly;
 
-    /// \short Flag to use "default partition" during load balance.
+    ///  Flag to use "default partition" during load balance.
     /// Should only be set to true when run in validation mode.
     bool Use_default_partition_in_load_balance;
 
-    /// \short First element to be assembled by given processor for
+    ///  First element to be assembled by given processor for
     /// non-distributed problem (only kept up to date when default assignment
     /// is used)
     Vector<unsigned> First_el_for_assembly;
 
-    /// \short Last element (plus one) to be assembled by given processor
+    ///  Last element (plus one) to be assembled by given processor
     /// for non-distributed problem (only kept up to date when default
     /// assignment is used)
     Vector<unsigned> Last_el_plus_one_for_assembly;
 
-    /// \short Boolean indicating that the division of elements over processors
+    ///  Boolean indicating that the division of elements over processors
     /// during the assembly process must be re-load-balanced.
     /// (only used for non-distributed problems)
     bool Must_recompute_load_balance_for_assembly;
 
-    /// \short Map which stores the correspondence between a root element and
+    ///  Map which stores the correspondence between a root element and
     /// its element number (plus one) within the global mesh at the point
     /// when it is distributed. NB a root element in this instance is one
     /// of the elements in the uniformly-refined mesh at the point when
@@ -538,7 +538,7 @@ namespace oomph
     std::map<GeneralisedElement*, unsigned> Base_mesh_element_number_plus_one;
 
 
-    /// \short Vector to store the correspondence between a root element and
+    ///  Vector to store the correspondence between a root element and
     /// its element number within the global mesh at the point when it is
     /// distributed. NB a root element in this instance is one of the elements
     /// in the uniformly-refined mesh at the point when Problem::distribute()
@@ -553,13 +553,13 @@ namespace oomph
     /// Vector of pointers to dofs
     Vector<double*> Dof_pt;
 
-    ///\short Counter that records how many elements contribute to each dof.
+    /// Counter that records how many elements contribute to each dof.
     /// Used to determine the (discrete) arc-length automatically.
     /// It really should be an integer, but is a double so that the
     /// distribution information can be used for distributed problems
     DoubleVectorWithHaloEntries Element_count_per_dof;
 
-    /// \short Function that populates the Element_counter_per_dof vector
+    ///  Function that populates the Element_counter_per_dof vector
     /// with the number of elements that contribute to each dof. For example,
     /// with linear elements in 1D each dof contains contributions from two
     /// elements apart from those on the boundary. Returns the total number
@@ -572,44 +572,44 @@ namespace oomph
     /// Storage for assembly times (used for load balancing)
     Vector<double> Elemental_assembly_time;
 
-    /// \short Pointer to the halo scheme for any global vectors
+    ///  Pointer to the halo scheme for any global vectors
     /// that have the Dof_distribution
     DoubleVectorHaloScheme* Halo_scheme_pt;
 
-    /// \short Storage for the halo degrees of freedom (only required)
+    ///  Storage for the halo degrees of freedom (only required)
     /// when accessing via the global equation number in distributed problems
     Vector<double*> Halo_dof_pt;
 
-    /// \short Function that is used to setup the halo scheme
+    ///  Function that is used to setup the halo scheme
     void setup_dof_halo_scheme();
 
 #endif
 
     //--------------------- Newton solver parameters
 
-    /// \short Relaxation fator for Newton method (only a fractional Newton
+    ///  Relaxation fator for Newton method (only a fractional Newton
     /// correction is applied if this is less than 1; default 1).
     double Relaxation_factor;
 
-    /// \short The Tolerance below which the Newton Method is deemed to have
+    ///  The Tolerance below which the Newton Method is deemed to have
     /// converged
     double Newton_solver_tolerance;
 
     /// Maximum number of Newton iterations
     unsigned Max_newton_iterations;
 
-    /// \short Actual number of Newton iterations taken during the most recent
+    ///  Actual number of Newton iterations taken during the most recent
     /// iteration
     unsigned Nnewton_iter_taken;
 
     /// Maximum residuals at start and after each newton iteration
     Vector<double> Max_res;
 
-    /// \short Maximum desired residual:
+    ///  Maximum desired residual:
     /// if the maximum residual exceeds this value, the program will exit
     double Max_residuals;
 
-    /// \short Bool to specify what to do if a Newton solve fails within a
+    ///  Bool to specify what to do if a Newton solve fails within a
     /// time adaptive solve. Default (false) is to half the step and try
     /// again. If true then crash instead.
     bool Time_adaptive_newton_crash_on_solve_fail;
@@ -617,26 +617,26 @@ namespace oomph
     /// Is re-use of Jacobian in Newton iteration enabled? Default: false
     bool Jacobian_reuse_is_enabled;
 
-    /// \short Has a Jacobian been computed (and can therefore be re-used
+    ///  Has a Jacobian been computed (and can therefore be re-used
     /// if required)? Default: false
     bool Jacobian_has_been_computed;
 
-    /// \short Boolean flag indicating if we're dealing with a linear or
+    ///  Boolean flag indicating if we're dealing with a linear or
     /// nonlinear Problem -- if set to false the Newton solver will not check
     /// the residual before or after the linear solve. Set to true by default;
     /// can be over-written in specific Problem class.
     bool Problem_is_nonlinear;
 
-    /// \short Protected boolean flag to halt program execution
+    ///  Protected boolean flag to halt program execution
     /// during sparse assemble process to assess peak memory
     /// usage. Initialised to false (obviously!)
     bool Pause_at_end_of_sparse_assembly;
 
-    /// \short Protected boolean flag to provide comprehensive timimings
+    ///  Protected boolean flag to provide comprehensive timimings
     /// during problem distribution. Initialised to false.
     bool Doc_time_in_distribute;
 
-    /// \short Flag to determine which sparse assembly method to use
+    ///  Flag to determine which sparse assembly method to use
     /// By default we use assembly by vectors of pairs.
     unsigned Sparse_assembly_method;
 
@@ -650,27 +650,27 @@ namespace oomph
       Perform_assembly_using_two_arrays
     };
 
-    /// \short the number of elements to initially allocate for a matrix row
+    ///  the number of elements to initially allocate for a matrix row
     /// within the sparse_assembly_with_two_arrays(...) method (if a matrix
     /// of this size has not been assembled already). If a matrix of this size
     /// has been assembled then the number of elements in each row in that
     /// matrix is used as the initial allocation
     unsigned Sparse_assemble_with_arrays_initial_allocation;
 
-    /// \short the number of elements to add to a matrix row when the initial
+    ///  the number of elements to add to a matrix row when the initial
     /// allocation is exceeded within the sparse_assemble_with_two_arrays(...)
     /// method.
     unsigned Sparse_assemble_with_arrays_allocation_increment;
 
-    /// \short the number of elements in each row of a compressed matrix
+    ///  the number of elements in each row of a compressed matrix
     /// in the previous matrix assembly.
     Vector<Vector<unsigned>> Sparse_assemble_with_arrays_previous_allocation;
 
-    /// \short A tolerance used to determine whether the entry in a sparse
+    ///  A tolerance used to determine whether the entry in a sparse
     /// matrix is zero. If it is then storage need not be allocated.
     double Numerical_zero_for_sparse_assembly;
 
-    /// \short Protected helper function that is used to assemble the Jacobian
+    ///  Protected helper function that is used to assemble the Jacobian
     /// matrix in the case when the storage is row or column compressed.
     /// The boolean Flag indicates
     /// if we want compressed row format (true) or compressed column.
@@ -690,12 +690,12 @@ namespace oomph
     /// Default:false
     bool Mass_matrix_reuse_is_enabled;
 
-    ///\short Has the mass matrix been computed (and can therefore be reused)
+    /// Has the mass matrix been computed (and can therefore be reused)
     /// Default: false
     bool Mass_matrix_has_been_computed;
 
     //---------------------Discontinuous control flags
-    ///\short Is the problem a discontinuous one, i.e. can the
+    /// Is the problem a discontinuous one, i.e. can the
     /// elemental contributions be treated independently. Default: false
     bool Discontinuous_element_formulation;
 
@@ -708,16 +708,16 @@ namespace oomph
     /// Maximum desired dt
     double Maximum_dt;
 
-    /// \short Maximum possible increase of dt between time-steps in adaptive
+    ///  Maximum possible increase of dt between time-steps in adaptive
     /// schemes
     double DTSF_max_increase;
 
-    /// \short Minimum allowed decrease of dt between time-steps in adaptive
+    ///  Minimum allowed decrease of dt between time-steps in adaptive
     /// schemes. Lower scaling values will reject the time-step (and retry
     /// with a smaller dt).
     double DTSF_min_decrease;
 
-    /// \short If  Minimum_dt_but_still_proceed positive, then dt will not be
+    ///  If  Minimum_dt_but_still_proceed positive, then dt will not be
     /// reduced below this value during adaptive timestepping and the
     /// computation will continue with this value, accepting the larger
     /// errors that this will incur). Note: This option is disabled by default
@@ -733,7 +733,7 @@ namespace oomph
     /// Proportion of the arc-length to taken by the parameter
     double Desired_proportion_of_arc_length;
 
-    /// \short Value of the scaling parameter required so that the parameter
+    ///  Value of the scaling parameter required so that the parameter
     /// occupies the desired proportion of the arc length. NOTE: If you wish
     /// to change this then make sure to set the value of Scale_arc_length
     /// to false to ensure the value of this isn't overwritten during the
@@ -744,7 +744,7 @@ namespace oomph
     /// Storage for the sign of the global Jacobian
     int Sign_of_jacobian;
 
-    /// \short The direction of the change in parameter that will ensure that
+    ///  The direction of the change in parameter that will ensure that
     /// a branch is followed in one direction only
     double Continuation_direction;
 
@@ -779,7 +779,7 @@ namespace oomph
     /// Storage for the current step value
     double Ds_current;
 
-    /// \short The desired number of Newton Steps to reach convergence at each
+    ///  The desired number of Newton Steps to reach convergence at each
     /// step along the arc
     unsigned Desired_newton_iterations_ds;
 
@@ -817,7 +817,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
 
-    /// \short enum for distribution of distributed jacobians.
+    ///  enum for distribution of distributed jacobians.
     ///  1 - Automatic - the Problem distribution is employed, unless any
     /// processor has number of rows equal to 110% of N/P, in which case
     /// uniform distribution is employed.
@@ -830,7 +830,7 @@ namespace oomph
                                                  Problem_matrix_distribution,
                                                  Uniform_matrix_distribution};
 
-    /// \short accesss function to the distributed matrix distribution method
+    ///  accesss function to the distributed matrix distribution method
     ///  1 - Automatic - the Problem distribution is employed, unless any
     /// processor has number of rows equal to 110% of N/P, in which case
     /// uniform distribution is employed.
@@ -844,21 +844,21 @@ namespace oomph
       return Dist_problem_matrix_distribution;
     }
 
-    /// \short Enable doc of load imbalance in parallel
+    ///  Enable doc of load imbalance in parallel
     /// assembly of distributed problem
     void enable_doc_imbalance_in_parallel_assembly()
     {
       Doc_imbalance_in_parallel_assembly = true;
     }
 
-    /// \short Disable doc of load imbalance in parallel
+    ///  Disable doc of load imbalance in parallel
     /// assembly of distributed problem
     void disable_doc_imbalance_in_parallel_assembly()
     {
       Doc_imbalance_in_parallel_assembly = false;
     }
 
-    /// \short Return vector of most-recent elemental assembly times
+    ///  Return vector of most-recent elemental assembly times
     /// (used for load balancing). Zero sized if no Jacobian has been
     /// computed since last re-assignment of equation numbers
     Vector<double> elemental_assembly_time()
@@ -866,7 +866,7 @@ namespace oomph
       return Elemental_assembly_time;
     }
 
-    /// \short Clear storage of most-recent elemental assembly times
+    ///  Clear storage of most-recent elemental assembly times
     /// (used for load balancing). Next load balancing operation
     /// will be based on the number of elements associated with a tree root.
     void clear_elemental_assembly_time()
@@ -876,7 +876,7 @@ namespace oomph
     }
 
   private:
-    /// \short Load balance helper routine: Get data to be sent to other
+    ///  Load balance helper routine: Get data to be sent to other
     /// processors during load balancing and other information about
     /// re-distribution.
     /// - target_domain_for_local_non_halo_element: Input, generated by METIS.
@@ -900,7 +900,7 @@ namespace oomph
       Vector<unsigned>& new_domain_for_base_element,
       unsigned& max_refinement_level_overall);
 
-    /// \short Get flat-packed refinement pattern for each root element in
+    ///  Get flat-packed refinement pattern for each root element in
     /// current mesh (labeled by unique number of root element in unrefined base
     /// mesh). The vector stored for each root element contains the following
     /// information:
@@ -925,7 +925,7 @@ namespace oomph
         flat_packed_refinement_info_for_root);
 
 
-    /// \short Load balance helper routine: Send data to other
+    ///  Load balance helper routine: Send data to other
     /// processors during load balancing.
     /// - send_n: Input, number of data to be sent to each processor
     /// - send_data: Input, storage for all values to be sent to all processors
@@ -944,7 +944,7 @@ namespace oomph
       std::map<unsigned, Vector<unsigned>>& refinement_info_for_root_local,
       Vector<Vector<Vector<unsigned>>>& refinement_info_for_root_elements);
 
-    /// \short The distributed matrix distribution method
+    ///  The distributed matrix distribution method
     ///  1 - Automatic - the Problem distribution is employed, unless any
     /// processor has number of rows equal to 110% of N/P, in which case
     /// uniform distribution is employed.
@@ -955,7 +955,7 @@ namespace oomph
     /// possible. (very well load balanced)
     Distributed_problem_matrix_distribution Dist_problem_matrix_distribution;
 
-    /// \short The amount of data allocated during the previous parallel sparse
+    ///  The amount of data allocated during the previous parallel sparse
     /// assemble. Used to optimise the next call to parallel_sparse_assemble()
     unsigned Parallel_sparse_assemble_previous_allocation;
 
@@ -979,11 +979,11 @@ namespace oomph
       Problem_has_been_distributed = false;
     }
 
-    /// \short Set default first and last elements for parallel assembly
+    ///  Set default first and last elements for parallel assembly
     /// of non-distributed problem.
     void set_default_first_and_last_element_for_assembly();
 
-    /// \short Manually set first and last elements for parallel assembly
+    ///  Manually set first and last elements for parallel assembly
     /// of non-distributed problem.
     void set_first_and_last_element_for_assembly(
       Vector<unsigned>& first_el_for_assembly,
@@ -999,7 +999,7 @@ namespace oomph
     }
 
 
-    /// \short Get first and last elements for parallel assembly
+    ///  Get first and last elements for parallel assembly
     /// of non-distributed problem.
     void get_first_and_last_element_for_assembly(
       Vector<unsigned>& first_el_for_assembly,
@@ -1016,7 +1016,7 @@ namespace oomph
 
 #endif
 
-    /// \short Actions that are to be performed before a mesh adaptation.
+    ///  Actions that are to be performed before a mesh adaptation.
     /// These might include removing any additional elements, such as traction
     /// boundary elements before the adaptation.
     virtual void actions_before_adapt() {}
@@ -1025,19 +1025,19 @@ namespace oomph
     virtual void actions_after_adapt() {}
 
   protected:
-    /// \short Any actions that are to be performed before a complete
+    ///  Any actions that are to be performed before a complete
     /// Newton solve (e.g. adjust boundary conditions). CAREFUL: This
     /// step should (and if the FD-based LinearSolver FD_LU is used, must)
     /// only update values that are pinned!
     virtual void actions_before_newton_solve() {}
 
-    /// \short Any actions that are to be performed after a complete Newton
+    ///  Any actions that are to be performed after a complete Newton
     /// solve, e.g. post processing.  CAREFUL: This step should (and if the
     /// FD-based LinearSolver FD_LU is used, must) only update values that are
     /// pinned!
     virtual void actions_after_newton_solve() {}
 
-    /// \short Any actions that are to be performed before
+    ///  Any actions that are to be performed before
     /// the residual is checked in the Newton method, e.g. update
     /// any boundary conditions that depend upon
     /// variables of the problem; update any `dependent' variables; or
@@ -1047,40 +1047,40 @@ namespace oomph
     /// only update values that are pinned!
     virtual void actions_before_newton_convergence_check() {}
 
-    /// \short Any actions that are to be performed before each individual
+    ///  Any actions that are to be performed before each individual
     /// Newton step. Most likely to be used for diagnostic purposes
     /// to doc the solution during a non-converging iteration, say.
     virtual void actions_before_newton_step() {}
 
-    /// \short Any actions that are to be performed after each individual
+    ///  Any actions that are to be performed after each individual
     /// Newton step. Most likely to be used for diagnostic purposes
     /// to doc the solution during a non-converging iteration, say.
     virtual void actions_after_newton_step() {}
 
-    /// \short Actions that should be performed before each implicit time step.
+    ///  Actions that should be performed before each implicit time step.
     /// This is needed when one wants
     /// to solve a steady problem before timestepping and needs to distinguish
     /// between the two cases
     virtual void actions_before_implicit_timestep() {}
 
-    /// \short Actions that should be performed after each implicit time step.
+    ///  Actions that should be performed after each implicit time step.
     /// This is needed when one wants
     /// to solve a steady problem before timestepping and needs to distinguish
     /// between the two cases
     virtual void actions_after_implicit_timestep() {}
 
-    /// \short Actions that should be performed after each implicit time step.
+    ///  Actions that should be performed after each implicit time step.
     /// This is needed if your actions_after_implicit_timestep() modify the
     /// solution in a way that affects the error estimate.
     virtual void actions_after_implicit_timestep_and_error_estimation() {}
 
-    /// \short Actions that should be performed before each explicit time step.
+    ///  Actions that should be performed before each explicit time step.
     virtual void actions_before_explicit_timestep() {}
 
-    /// \short Actions that should be performed after each explicit time step.
+    ///  Actions that should be performed after each explicit time step.
     virtual void actions_after_explicit_timestep() {}
 
-    /// \short Actions that are to be performed before reading in
+    ///  Actions that are to be performed before reading in
     /// restart data for problems involving unstructured bulk meshes.
     /// If the problem contains such meshes we need
     /// to strip out any face elements that are attached to them
@@ -1097,7 +1097,7 @@ namespace oomph
       Empty_actions_before_read_unstructured_meshes_has_been_called = true;
     }
 
-    /// \short Actions that are to be performed before reading in
+    ///  Actions that are to be performed before reading in
     /// restart data for problems involving unstructured bulk meshes.
     /// Typically used to re-attach FaceElements, say, that were stripped
     /// out in actions_before_read_unstructured_meshes(). This function is
@@ -1120,7 +1120,7 @@ namespace oomph
 
 #endif
 
-    /// \short Actions that are to be performed when the global parameter
+    ///  Actions that are to be performed when the global parameter
     /// addressed by parameter_pt
     /// has been changed in the function get_derivative_wrt_global_parameter()
     /// The default is to call actions_before_newton_solve(),
@@ -1139,7 +1139,7 @@ namespace oomph
       actions_after_newton_solve();
     }
 
-    /// \short Actions that are to be performed after a change in the parameter
+    ///  Actions that are to be performed after a change in the parameter
     /// that is being varied as part of the solution of a bifurcation detection
     /// problem. The default is to call actions_before_newton_solve(),
     /// actions_before_newton_convergence_check() and
@@ -1156,13 +1156,13 @@ namespace oomph
       actions_after_newton_solve();
     }
 
-    /// \short Empty virtual function; provides hook to perform actions after
+    ///  Empty virtual function; provides hook to perform actions after
     /// the increase in the arclength parameter (during continuation)
     virtual void actions_after_parameter_increase(double* const& parameter_pt)
     {
     }
 
-    /// \short Access function to the derivative of the i-th (local)
+    ///  Access function to the derivative of the i-th (local)
     /// dof with respect to
     /// the arc length, used in continuation
     inline double& dof_derivative(const unsigned& i)
@@ -1177,7 +1177,7 @@ namespace oomph
       }
     }
 
-    /// \short Access function to the current value of the i-th (local)
+    ///  Access function to the current value of the i-th (local)
     /// dof at the start of a continuation step
     inline double& dof_current(const unsigned& i)
     {
@@ -1191,7 +1191,7 @@ namespace oomph
       }
     }
 
-    /// \short Set initial condition (incl previous timesteps).
+    ///  Set initial condition (incl previous timesteps).
     /// We need to establish this interface
     /// because I.C. needs to be reset when problem is adapted during
     /// the first timestep.
@@ -1219,7 +1219,7 @@ namespace oomph
       Default_set_initial_condition_called = true;
     }
 
-    /// \short Function to calculate a global error norm, used in adaptive
+    ///  Function to calculate a global error norm, used in adaptive
     /// timestepping to control the change in timestep. Individual errors for
     /// each data object can be obtained via the data timestepper's
     /// temporal_error_in_value or temporal_error_in_position functions and
@@ -1262,7 +1262,7 @@ namespace oomph
     typedef void (*SpatialErrorEstimatorWithDocFctPt)(
       Mesh*& mesh_pt, Vector<double>& elemental_error, DocInfo& doc_info);
 
-    /// \short Constructor: Allocate space for one time stepper
+    ///  Constructor: Allocate space for one time stepper
     /// and set all pointers to NULL and set defaults for all
     /// parameters.
     Problem();
@@ -1288,7 +1288,7 @@ namespace oomph
       return Mesh_pt;
     }
 
-    /// \short Return a pointer to the i-th submesh. If there are
+    ///  Return a pointer to the i-th submesh. If there are
     /// no submeshes, the 0-th submesh is the global mesh itself.
     Mesh*& mesh_pt(const unsigned& imesh)
     {
@@ -1325,7 +1325,7 @@ namespace oomph
       return Sub_mesh_pt.size();
     }
 
-    /// \short Add a submesh to the problem and return its number, i, by which
+    ///  Add a submesh to the problem and return its number, i, by which
     /// it can be accessed via mesh_pt(i).
     unsigned add_sub_mesh(Mesh* const& mesh_pt)
     {
@@ -1334,19 +1334,19 @@ namespace oomph
     }
 
 
-    /// \short Flush the problem's collection of sub-meshes. Must be followed
+    ///  Flush the problem's collection of sub-meshes. Must be followed
     /// by call to rebuild_global_mesh().
     void flush_sub_meshes()
     {
       Sub_mesh_pt.clear();
     }
 
-    /// \short Build the global mesh by combining the all the submeshes.
+    ///  Build the global mesh by combining the all the submeshes.
     /// \b Note: The nodes boundary information refers to the boundary numbers
     /// within the submesh!
     void build_global_mesh();
 
-    /// \short If one of the submeshes has changed (e.g. by
+    ///  If one of the submeshes has changed (e.g. by
     /// mesh adaptation) we need to update the global mesh.
     /// \b Note: The nodes boundary information refers to the
     /// boundary numbers within the submesh!
@@ -1354,7 +1354,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Function to build the Problem's base mesh; this must be supplied
+    ///  Function to build the Problem's base mesh; this must be supplied
     /// by the user if they wish to use the load_balance() functionality,
     /// which is only available to problems that have already been distributed.
     /// If the problem has multiple meshes, each mesh must be built, added as
@@ -1376,7 +1376,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short  Balance the load of a (possibly non-uniformly refined) problem
+    ///   Balance the load of a (possibly non-uniformly refined) problem
     /// that has already been distributed, by re-distributing elements over
     /// processors.
     void load_balance()
@@ -1396,7 +1396,7 @@ namespace oomph
         doc_info, report_stats, input_target_domain_for_local_non_halo_element);
     }
 
-    /// \short Balance the load of a (possibly non-uniformly refined) problem
+    ///  Balance the load of a (possibly non-uniformly refined) problem
     /// that has already been distributed, by re-distributing elements over
     /// processors.  Produce explicit stats of load balancing process if
     /// boolean, report_stats, is set to true.
@@ -1415,7 +1415,7 @@ namespace oomph
     }
 
 
-    /// \short Balance the load of a (possibly non-uniformly refined) problem
+    ///  Balance the load of a (possibly non-uniformly refined) problem
     /// that has already been distributed, by re-distributing elements over
     /// processors.  Produce explicit stats of load balancing process if
     /// boolean, report_stats, is set to true.
@@ -1429,7 +1429,7 @@ namespace oomph
         doc_info, report_stats, input_target_domain_for_local_non_halo_element);
     }
 
-    /// \short Balance the load of a (possibly non-uniformly refined) problem
+    ///  Balance the load of a (possibly non-uniformly refined) problem
     /// that has already been distributed, by re-distributing elements over
     /// processors. Produce explicit stats of load balancing process if
     /// boolean, report_stats, is set to true and doc various bits of
@@ -1441,19 +1441,19 @@ namespace oomph
       const bool& report_stats,
       const Vector<unsigned>& input_target_domain_for_local_non_halo_element);
 
-    /// \short Set the use of the default partition in the load balance
+    ///  Set the use of the default partition in the load balance
     void set_default_partition_in_load_balance()
     {
       Use_default_partition_in_load_balance = true;
     }
 
-    /// \short Do not use the default partition in the load balance
+    ///  Do not use the default partition in the load balance
     void unset_default_partition_in_load_balance()
     {
       Use_default_partition_in_load_balance = false;
     }
 
-    /// \short Load balance helper routine: refine each new base (sub)mesh
+    ///  Load balance helper routine: refine each new base (sub)mesh
     /// based upon the elements to be refined within each tree at each root
     /// on the current processor
     void refine_distributed_base_mesh(
@@ -1519,7 +1519,7 @@ namespace oomph
     double time() const;
 
 
-    /// \short Access function for the pointer to the first (presumably only)
+    ///  Access function for the pointer to the first (presumably only)
     /// timestepper
     TimeStepper*& time_stepper_pt()
     {
@@ -1532,7 +1532,7 @@ namespace oomph
       return Time_stepper_pt[0];
     }
 
-    /// \short Access function for the pointer to the first (presumably only)
+    ///  Access function for the pointer to the first (presumably only)
     /// timestepper
     const TimeStepper* time_stepper_pt() const
     {
@@ -1557,13 +1557,13 @@ namespace oomph
       return Explicit_time_stepper_pt;
     }
 
-    /// \short Set all problem data to have the same timestepper
+    ///  Set all problem data to have the same timestepper
     /// (timestepper_pt) Return the new number of dofs in the problem
     unsigned long set_timestepper_for_all_data(
       TimeStepper* const& time_stepper_pt,
       const bool& preserve_existing_data = false);
 
-    /// \short Shift all values along to prepare for next timestep
+    ///  Shift all values along to prepare for next timestep
     virtual void shift_time_values();
 
     /// Return a pointer to the assembly handler object
@@ -1578,32 +1578,32 @@ namespace oomph
       return Assembly_handler_pt;
     }
 
-    /// \short Access function to min timestep in adaptive timestepping
+    ///  Access function to min timestep in adaptive timestepping
     double& minimum_dt()
     {
       return Minimum_dt;
     }
 
-    /// \short Access function to max timestep in adaptive timestepping
+    ///  Access function to max timestep in adaptive timestepping
     double& maximum_dt()
     {
       return Maximum_dt;
     }
 
-    /// \short Access function to max Newton iterations before giving up.
+    ///  Access function to max Newton iterations before giving up.
     unsigned& max_newton_iterations()
     {
       return Max_newton_iterations;
     }
 
-    /// \short Access function to Problem_is_nonlinear.
+    ///  Access function to Problem_is_nonlinear.
     void problem_is_nonlinear(const bool& prob_lin)
     {
       Problem_is_nonlinear = prob_lin;
     }
 
 
-    /// \short Access function to max residuals in Newton iterations before
+    ///  Access function to max residuals in Newton iterations before
     /// giving up.
     double& max_residuals()
     {
@@ -1616,30 +1616,30 @@ namespace oomph
       return Time_adaptive_newton_crash_on_solve_fail;
     }
 
-    /// \short Access function to tolererance of the Newton solver, i.e. the
+    ///  Access function to tolererance of the Newton solver, i.e. the
     /// maximum value of the residuals that will be accepted.
     double& newton_solver_tolerance()
     {
       return Newton_solver_tolerance;
     }
 
-    /// \short Add a timestepper to the problem. The function will automatically
+    ///  Add a timestepper to the problem. The function will automatically
     /// create or resize the Time object so that it contains the appropriate
     /// number of levels of storage.
     void add_time_stepper_pt(TimeStepper* const& time_stepper_pt);
 
-    /// \short Set the explicit timestepper for the problem. The function
+    ///  Set the explicit timestepper for the problem. The function
     /// will automatically create or resize the Time object so that it contains
     /// the appropriate number of levels of storage
     void set_explicit_time_stepper_pt(
       ExplicitTimeStepper* const& explicit_time_stepper_pt);
 
 
-    /// \short Set all timesteps to the same value, dt, and assign
+    ///  Set all timesteps to the same value, dt, and assign
     /// weights for all timesteppers in the problem
     void initialise_dt(const double& dt);
 
-    /// \short Set the value of the timesteps to be equal to the values passed
+    ///  Set the value of the timesteps to be equal to the values passed
     /// in a vector and assign weights for all timesteppers in the problem
     void initialise_dt(const Vector<double>& dt);
 
@@ -1649,7 +1649,7 @@ namespace oomph
       return Global_data_pt[i];
     }
 
-    /// \short Add Data to the Problem's global data -- the Problem will
+    ///  Add Data to the Problem's global data -- the Problem will
     /// perform equation numbering etc. for such Data
     void add_global_data(Data* const& global_data_pt)
     {
@@ -1657,14 +1657,14 @@ namespace oomph
     }
 
 
-    /// \short Flush the Problem's global data  -- resizes container to zero.
+    ///  Flush the Problem's global data  -- resizes container to zero.
     /// Data objects are not deleted!
     void flush_global_data()
     {
       Global_data_pt.resize(0);
     }
 
-    /// \short Return the pointer to the dof distribution (read-only)
+    ///  Return the pointer to the dof distribution (read-only)
     LinearAlgebraDistribution* const& dof_distribution_pt() const
     {
       return Dof_distribution_pt;
@@ -1688,24 +1688,24 @@ namespace oomph
       return Global_data_pt.size();
     }
 
-    /// \short Self-test: Check meshes and global data. Return 0 for OK
+    ///  Self-test: Check meshes and global data. Return 0 for OK
     unsigned self_test();
 
-    /// \short Insist that local dof pointers are set up in each element
+    ///  Insist that local dof pointers are set up in each element
     /// when equation numbering takes place
     void enable_store_local_dof_pt_in_elements()
     {
       Store_local_dof_pt_in_elements = true;
     }
 
-    /// \short Insist that local dof pointers are NOT set up in each element
+    ///  Insist that local dof pointers are NOT set up in each element
     /// when equation numbering takes place (the default)
     void disable_store_local_dof_pt_in_elements()
     {
       Store_local_dof_pt_in_elements = false;
     }
 
-    /// \short Assign all equation numbers for problem: Deals with global
+    ///  Assign all equation numbers for problem: Deals with global
     /// data (= data that isn't attached to any elements) and then
     /// does the equation numbering for the elements. Virtual so it
     /// can be overloaded in MPI problems.  Bool argument can be set to false
@@ -1714,14 +1714,14 @@ namespace oomph
     unsigned long assign_eqn_numbers(
       const bool& assign_local_eqn_numbers = true);
 
-    /// \short Function to describe the dofs in terms of the global
+    ///  Function to describe the dofs in terms of the global
     /// equation number, i.e. what type of value (nodal value of
     /// a Node; value in a Data object; value of internal Data in an
     /// element; etc) is the unknown with a certain global equation number.
     /// Output stream defaults to oomph_info.
     void describe_dofs(std::ostream& out = *(oomph_info.stream_pt())) const;
 
-    /// \short Indicate that the problem involves discontinuous elements
+    ///  Indicate that the problem involves discontinuous elements
     /// This allows for a more efficiently assembly and inversion of the
     /// mass matrix
     void enable_discontinuous_formulation()
@@ -1729,7 +1729,7 @@ namespace oomph
       Discontinuous_element_formulation = true;
     }
 
-    /// \short Disable the use of a discontinuous-element formulation.
+    ///  Disable the use of a discontinuous-element formulation.
     /// Note that the methods will all still work even if the elements are
     /// discontinuous, we will just be assembling a larger system matrix than
     /// necessary.
@@ -1738,27 +1738,27 @@ namespace oomph
       Discontinuous_element_formulation = false;
     }
 
-    /// \short Return the vector of dofs, i.e. a vector containing the current
+    ///  Return the vector of dofs, i.e. a vector containing the current
     /// values of all unknowns.
     void get_dofs(DoubleVector& dofs) const;
 
-    /// \short Return vector of the t'th history value of all dofs.
+    ///  Return vector of the t'th history value of all dofs.
     void get_dofs(const unsigned& t, DoubleVector& dofs) const;
 
-    /// \short Set the values of the dofs
+    ///  Set the values of the dofs
     void set_dofs(const DoubleVector& dofs);
 
-    /// \short Set the history values of the dofs
+    ///  Set the history values of the dofs
     void set_dofs(const unsigned& t, DoubleVector& dofs);
 
     /// Set history values of dofs from the type of vector stored in
     /// problem::Dof_pt.
     void set_dofs(const unsigned& t, Vector<double*>& dof_pt);
 
-    /// \short Add lambda x incremenet_dofs[l] to the l-th dof
+    ///  Add lambda x incremenet_dofs[l] to the l-th dof
     void add_to_dofs(const double& lambda, const DoubleVector& increment_dofs);
 
-    /// \short Return a pointer to the dof, indexed by global equation number
+    ///  Return a pointer to the dof, indexed by global equation number
     /// which may be haloed or stored locally. If it is haloed, a local copy
     /// must have been requested on this processor in the Halo_scheme_pt.
     inline double* global_dof_pt(const unsigned& i)
@@ -1809,35 +1809,35 @@ namespace oomph
       }
     }
 
-    /// \short i-th dof in the problem
+    ///  i-th dof in the problem
     double& dof(const unsigned& i)
     {
       return *(Dof_pt[i]);
     }
 
-    /// \short i-th dof in the problem (const version)
+    ///  i-th dof in the problem (const version)
     double dof(const unsigned& i) const
     {
       return *(Dof_pt[i]);
     }
 
-    /// \short Pointer to i-th dof in the problem
+    ///  Pointer to i-th dof in the problem
     double*& dof_pt(const unsigned& i)
     {
       return Dof_pt[i];
     }
 
-    /// \short Pointer to i-th dof in the problem (const version)
+    ///  Pointer to i-th dof in the problem (const version)
     double* dof_pt(const unsigned& i) const
     {
       return Dof_pt[i];
     }
 
-    ///\short Return the residual vector multiplied by the inverse mass matrix
+    /// Return the residual vector multiplied by the inverse mass matrix
     /// Virtual so that it can be overloaded for mpi problems
     virtual void get_inverse_mass_matrix_times_residuals(DoubleVector& Mres);
 
-    /// \short Get the time derivative of all values (using
+    ///  Get the time derivative of all values (using
     /// get_inverse_mass_matrix_times_residuals(..) with all time steppers set
     /// to steady) e.g. for use in explicit time steps. The approach used is
     /// slighty hacky, beware if you have a residual which is non-linear or
@@ -1845,11 +1845,11 @@ namespace oomph
     /// get_jacobian(...).
     virtual void get_dvaluesdt(DoubleVector& f);
 
-    /// \short Return the fully-assembled residuals Vector for the problem:
+    ///  Return the fully-assembled residuals Vector for the problem:
     /// Virtual so it can be overloaded in for mpi problems
     virtual void get_residuals(DoubleVector& residuals);
 
-    /// \short Return the fully-assembled Jacobian and residuals for the problem
+    ///  Return the fully-assembled Jacobian and residuals for the problem
     /// Interface for the case when the Jacobian matrix is dense.
     /// This is virtual so, if we feel like it (e.g. for testing iterative
     /// solvers with specific test matrices, we can bypass the default
@@ -1857,7 +1857,7 @@ namespace oomph
     virtual void get_jacobian(DoubleVector& residuals,
                               DenseDoubleMatrix& jacobian);
 
-    /// \short Return the fully-assembled Jacobian and residuals for the
+    ///  Return the fully-assembled Jacobian and residuals for the
     /// problem. Interface for the case when the Jacobian is in row-compressed
     /// storage format. This is virtual so, if we feel like it (e.g. for testing
     /// iterative solvers with specific test matrices), we can bypass the
@@ -1865,7 +1865,7 @@ namespace oomph
     virtual void get_jacobian(DoubleVector& residuals,
                               CRDoubleMatrix& jacobian);
 
-    /// \short Return the fully-assembled Jacobian and residuals for the
+    ///  Return the fully-assembled Jacobian and residuals for the
     /// problem. Interface for the case when the Jacobian is in
     /// column-compressed storage format. This is virtual so, if we feel like it
     /// (e.g. for testing iterative solvers with specific test matrices), we can
@@ -1874,7 +1874,7 @@ namespace oomph
     virtual void get_jacobian(DoubleVector& residuals,
                               CCDoubleMatrix& jacobian);
 
-    /// \short Dummy virtual function that must be overloaded by the problem to
+    ///  Dummy virtual function that must be overloaded by the problem to
     /// specify which matrices should be summed to give the final Jacobian.
     virtual void get_jacobian(DoubleVector& residuals, SumOfMatrices& jacobian)
     {
@@ -1886,17 +1886,17 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Return the fully-assembled Jacobian and residuals, generated by
+    ///  Return the fully-assembled Jacobian and residuals, generated by
     /// finite differences
     void get_fd_jacobian(DoubleVector& residuals,
                          DenseMatrix<double>& jacobian);
 
-    /// \short Get the derivative of the entire residuals vector wrt a
+    ///  Get the derivative of the entire residuals vector wrt a
     /// global parameter, used in continuation problems
     void get_derivative_wrt_global_parameter(double* const& parameter_pt,
                                              DoubleVector& result);
 
-    /// \short Return the product of the global hessian (derivative of Jacobian
+    ///  Return the product of the global hessian (derivative of Jacobian
     /// matrix  with respect to all variables) with
     /// an eigenvector, Y, and any number of other specified vectors C
     /// (d(J_{ij})/d u_{k}) Y_{j} C_{k}.
@@ -1910,14 +1910,14 @@ namespace oomph
       Vector<DoubleVectorWithHaloEntries>& product);
 
 
-    /// \short Get derivative of an element in the problem wrt a global
+    ///  Get derivative of an element in the problem wrt a global
     /// parameter, used in continuation problems
     // void get_derivative_wrt_global_parameter(double* const &parameter_pt,
     //                                         GeneralisedElement* const
     //                                         &elem_pt, Vector<double>
     //                                         &result);
 
-    /// \short Solve an eigenproblem as assembled by EigenElements
+    ///  Solve an eigenproblem as assembled by EigenElements
     /// calculate n_eval eigenvalues and return the corresponding
     /// eigenvectors. The boolean flag (default true) specifies whether
     /// the steady jacobian should be assembled. If the flag is false
@@ -1929,7 +1929,7 @@ namespace oomph
                             Vector<DoubleVector>& eigenvector,
                             const bool& steady = true);
 
-    /// \short Solve an eigenproblem as assembled by EigenElements,
+    ///  Solve an eigenproblem as assembled by EigenElements,
     /// but only return the eigenvalues, not the eigenvectors.
     /// The boolean flag (default true) is used to specify whether the
     /// weighted mass-matrix terms from the timestepping scheme should
@@ -1943,31 +1943,31 @@ namespace oomph
       solve_eigenproblem(n_eval, eigenvalue, eigenvector, steady);
     }
 
-    /// \short Get the matrices required by a eigensolver. If the
+    ///  Get the matrices required by a eigensolver. If the
     /// shift parameter is non-zero the second matrix will be shifted
     virtual void get_eigenproblem_matrices(CRDoubleMatrix& mass_matrix,
                                            CRDoubleMatrix& main_matrix,
                                            const double& shift = 0.0);
 
-    /// \short Assign the eigenvector passed to the function
+    ///  Assign the eigenvector passed to the function
     /// to the dofs in the problem so that it can be output by
     /// the usual routines.
     void assign_eigenvector_to_dofs(DoubleVector& eigenvector);
 
-    /// \short Add the eigenvector passed to the function scaled by
+    ///  Add the eigenvector passed to the function scaled by
     /// the constat epsilon to the dofs in the problem so that
     /// it can be output by the usual routines
     void add_eigenvector_to_dofs(const double& epsilon,
                                  const DoubleVector& eigenvector);
 
 
-    /// \short Store the current values of the degrees of freedom
+    ///  Store the current values of the degrees of freedom
     void store_current_dof_values();
 
-    /// \short Restore the stored values of the degrees of freedom
+    ///  Restore the stored values of the degrees of freedom
     void restore_dof_values();
 
-    /// \short Enable recycling of Jacobian in Newton iteration
+    ///  Enable recycling of Jacobian in Newton iteration
     /// (if the linear solver allows it).
     /// Useful for linear problems with constant Jacobians or nonlinear
     /// problems where you're willing to risk the trade-off between
@@ -1978,14 +1978,14 @@ namespace oomph
       Jacobian_has_been_computed = false;
     }
 
-    /// \short Disable recycling of Jacobian in Newton iteration
+    ///  Disable recycling of Jacobian in Newton iteration
     void disable_jacobian_reuse()
     {
       Jacobian_reuse_is_enabled = false;
       Jacobian_has_been_computed = false;
     }
 
-    /// \short Is recycling of Jacobian in Newton iteration enabled?
+    ///  Is recycling of Jacobian in Newton iteration enabled?
     bool jacobian_reuse_is_enabled()
     {
       return Jacobian_reuse_is_enabled;
@@ -1996,16 +1996,16 @@ namespace oomph
       return Use_predictor_values_as_initial_guess;
     }
 
-    /// \short Use Newton method to solve the problem
+    ///  Use Newton method to solve the problem
     void newton_solve();
 
-    /// \short enable globally convergent Newton method
+    ///  enable globally convergent Newton method
     void enable_globally_convergent_newton_method()
     {
       Use_globally_convergent_newton_method = true;
     }
 
-    /// \short disable globally convergent Newton method
+    ///  disable globally convergent Newton method
     void disable_globally_convergent_newton_method()
     {
       Use_globally_convergent_newton_method = false;
@@ -2022,12 +2022,12 @@ namespace oomph
       const double& stpmax);
 
   public:
-    /// \short Adaptive Newton solve: up to max_adapt adaptations of all
+    ///  Adaptive Newton solve: up to max_adapt adaptations of all
     /// refineable submeshes are performed to achieve the
     /// the error targets specified in the refineable submeshes.
     void newton_solve(unsigned const& max_adapt);
 
-    /// \short Solve a steady problem using adaptive Newton's method,
+    ///  Solve a steady problem using adaptive Newton's method,
     /// but in the context of an overall unstady problem, perhaps to
     /// determine an initial condition.
     /// This is achieved by setting the weights in the timesteppers to be zero
@@ -2037,7 +2037,7 @@ namespace oomph
     /// achieve the the error targets specified in the refineable submeshes.
     void steady_newton_solve(unsigned const& max_adapt = 0);
 
-    /// \short Copy Data values, nodal positions etc from specified problem.
+    ///  Copy Data values, nodal positions etc from specified problem.
     /// Note: This is not a copy constructor. We assume that the current
     /// and the "original" problem have both been created by calling
     /// the same problem constructor so that all Data objects,
@@ -2048,19 +2048,19 @@ namespace oomph
     /// multigrid computations.
     void copy(Problem* orig_problem_pt);
 
-    /// \short Make and return a pointer to the copy of the problem. A virtual
+    ///  Make and return a pointer to the copy of the problem. A virtual
     /// function that must be filled in by the user is they wish to perform
     /// adaptive refinement in bifurcation tracking or in multigrid problems.
     /// ALH: WILL NOT BE NECESSARY IN BIFURCATION TRACKING IN LONG RUN...
     virtual Problem* make_copy();
 
-    /// \short Read refinement pattern of all refineable meshes and refine them
+    ///  Read refinement pattern of all refineable meshes and refine them
     /// accordingly, then read all Data and nodal position info from
     /// file for restart. Return flag to indicate if the restart was from
     /// steady or unsteady solution
     virtual void read(std::ifstream& restart_file, bool& unsteady_restart);
 
-    /// \short Read refinement pattern of all refineable meshes and refine them
+    ///  Read refinement pattern of all refineable meshes and refine them
     /// accordingly, then read all Data and nodal position info from
     /// file for restart.
     virtual void read(std::ifstream& restart_file)
@@ -2069,11 +2069,11 @@ namespace oomph
       read(restart_file, unsteady_restart);
     }
 
-    /// \short Dump refinement pattern of all refineable meshes and all generic
+    ///  Dump refinement pattern of all refineable meshes and all generic
     /// Problem data to file for restart.
     virtual void dump(std::ofstream& dump_file) const;
 
-    /// \short Dump refinement pattern of all refineable meshes and all generic
+    ///  Dump refinement pattern of all refineable meshes and all generic
     /// Problem data to file for restart.
     void dump(const std::string& dump_file_name) const
     {
@@ -2091,22 +2091,22 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Get pointers to all possible halo data indexed by global
+    ///  Get pointers to all possible halo data indexed by global
     /// equation number in a map.
     void get_all_halo_data(std::map<unsigned, double*>& map_of_halo_data);
 
-    /// \short Classify any non-classified nodes into halo/haloed and
+    ///  Classify any non-classified nodes into halo/haloed and
     /// synchronise equation numbers. Return the total
     /// number of degrees of freedom in the overall problem
     long synchronise_eqn_numbers(const bool& assign_local_eqn_numbers = true);
 
-    /// \short Synchronise the degrees of freedom by overwriting
+    ///  Synchronise the degrees of freedom by overwriting
     /// the haloed values with their non-halo counterparts held
     /// on other processors. Bools control if we deal with data associated with
     /// external halo/ed elements/nodes or the "normal" halo/ed ones.
     void synchronise_dofs(const bool& do_halos, const bool& do_external_halos);
 
-    /// \short Perform all required synchronisation in solvers
+    ///  Perform all required synchronisation in solvers
     void synchronise_all_dofs();
 
     /// Check the halo/haloed node/element schemes
@@ -2120,23 +2120,23 @@ namespace oomph
       check_halo_schemes(tmp_doc_info);
     }
 
-    /// \short Distribute the problem and doc, using the specified partition;
+    ///  Distribute the problem and doc, using the specified partition;
     /// returns a vector which details the partitioning
     Vector<unsigned> distribute(const Vector<unsigned>& element_partition,
                                 DocInfo& doc_info,
                                 const bool& report_stats = false);
 
-    /// \short Distribute the problem; returns a vector which
+    ///  Distribute the problem; returns a vector which
     /// details the partitioning
     Vector<unsigned> distribute(DocInfo& doc_info,
                                 const bool& report_stats = false);
 
-    /// \short Distribute the problem using the specified partition;
+    ///  Distribute the problem using the specified partition;
     /// returns a vector which details the partitioning
     Vector<unsigned> distribute(const Vector<unsigned>& element_partition,
                                 const bool& report_stats = false);
 
-    /// \short Distribute the problem; returns a vector which
+    ///  Distribute the problem; returns a vector which
     /// details the partitioning
     Vector<unsigned> distribute(const bool& report_stats = false);
 
@@ -2149,7 +2149,7 @@ namespace oomph
                                        Vector<unsigned>& element_domain,
                                        const bool& report_stats = false);
 
-    /// \short (Irreversibly) prune halo(ed) elements and nodes, usually
+    ///  (Irreversibly) prune halo(ed) elements and nodes, usually
     /// after another round of refinement, to get rid of
     /// excessively wide halo layers. Note that the current
     /// mesh will be now regarded as the base mesh and no unrefinement
@@ -2158,7 +2158,7 @@ namespace oomph
     void prune_halo_elements_and_nodes(DocInfo& doc_info,
                                        const bool& report_stats);
 
-    /// \short (Irreversibly) prune halo(ed) elements and nodes, usually
+    ///  (Irreversibly) prune halo(ed) elements and nodes, usually
     /// after another round of refinement, to get rid of
     /// excessively wide halo layers. Note that the current
     /// mesh will be now regarded as the base mesh and no unrefinement
@@ -2182,37 +2182,37 @@ namespace oomph
 
 #endif
 
-    /// \short Wrapper function to delete external storage for
+    ///  Wrapper function to delete external storage for
     /// each submesh of the problem
     void delete_all_external_storage();
 
-    /// \short Boolean to indicate if all output is suppressed in
+    ///  Boolean to indicate if all output is suppressed in
     /// Problem::newton_solve(). Defaults to false.
     bool Shut_up_in_newton_solve;
 
 
   protected:
-    /// \short Boolean to indicate whether a Newton step should be taken
+    ///  Boolean to indicate whether a Newton step should be taken
     /// even if the initial residuals are below the required tolerance
     bool Always_take_one_newton_step;
 
-    /// \short What it says: If temporally adaptive Newton solver fails to
+    ///  What it says: If temporally adaptive Newton solver fails to
     /// to converge, reduce timestep by this factor and try again; defaults
     /// to 1/2; can be over-written by user in derived problem.
     double Timestep_reduction_factor_after_nonconvergence;
 
 
-    /// \short Boolean to decide if a timestep is to be rejected if the
+    ///  Boolean to decide if a timestep is to be rejected if the
     /// error estimate post-solve (computed by global_temporal_error_norm())
     /// exceeds the tolerance required in the call to
     /// adaptive_unsteady_newton_solve(...). Defaults to true.
     bool Keep_temporal_error_below_tolerance;
 
-    /// \short Perform a basic arc-length continuation step using Newton's
+    ///  Perform a basic arc-length continuation step using Newton's
     /// method. Returns number of Newton steps taken.
     unsigned newton_solve_continuation(double* const& parameter_pt);
 
-    /// \short This function performs a basic continuation step using the Newton
+    ///  This function performs a basic continuation step using the Newton
     /// method. The number of Newton steps taken is returned, to be used in any
     /// external step-size control routines.
     /// The governing parameter of the problem is passed as a pointer to the
@@ -2221,7 +2221,7 @@ namespace oomph
     unsigned newton_solve_continuation(double* const& parameter_pt,
                                        DoubleVector& z);
 
-    ///\short A function to calculate the derivatives wrt the arc-length. This
+    /// A function to calculate the derivatives wrt the arc-length. This
     /// version of the function actually does a linear solve so that the
     /// derivatives
     /// are calculated "exactly" rather than using the values at the Newton
@@ -2233,7 +2233,7 @@ namespace oomph
     /// small.
     void calculate_continuation_derivatives(double* const& parameter_pt);
 
-    /// \short A function to calculate the derivatives with respect to the
+    ///  A function to calculate the derivatives with respect to the
     /// arc-length required for continuation. The arguments is the solution
     /// of the  linear system,
     /// Jz = dR/dparameter, that gives du/dparameter and the direction
@@ -2241,19 +2241,19 @@ namespace oomph
     /// are stored in the ContinuationParameters namespace.
     void calculate_continuation_derivatives(const DoubleVector& z);
 
-    /// \short A function to calculate the derivatives with respect to the
+    ///  A function to calculate the derivatives with respect to the
     /// arc-length required for continuation by finite differences, using
     /// the previous values of the solution. The derivatives are stored in
     /// the ContinuationParameters namespace.
     void calculate_continuation_derivatives_fd(double* const& parameter_pt);
 
-    /// \short Return a boolean flag to indicate whether the pointer
+    ///  Return a boolean flag to indicate whether the pointer
     /// parameter_pt refers to values stored in a Data object that
     /// is contained within the problem
     bool does_pointer_correspond_to_problem_data(double* const& parameter_pt);
 
   public:
-    /// \short Virtual function that is used to symmetrise the problem so that
+    ///  Virtual function that is used to symmetrise the problem so that
     /// the current solution exactly satisfies any symmetries within the system.
     /// Used when adpativly solving pitchfork detection problems when small
     /// asymmetries in the coarse solution can be magnified
@@ -2262,19 +2262,19 @@ namespace oomph
     /// The default issues a warning
     virtual void symmetrise_eigenfunction_for_adaptive_pitchfork_tracking();
 
-    ///\short Return pointer to the parameter that is used in the
+    /// Return pointer to the parameter that is used in the
     /// bifurcation detection. If we are not tracking a bifurcation then
     /// an error will be thrown by the AssemblyHandler
     double* bifurcation_parameter_pt() const;
 
 
-    /// \short Return the eigenfunction calculated as part of a
+    ///  Return the eigenfunction calculated as part of a
     /// bifurcation tracking process. If we are not tracking a bifurcation
     /// then an error will be thrown by the AssemblyHandler
     void get_bifurcation_eigenfunction(Vector<DoubleVector>& eigenfunction);
 
 
-    /// \short Turn on fold tracking using the augmented system specified
+    ///  Turn on fold tracking using the augmented system specified
     /// in the FoldHandler class. After a call to this function subsequent calls
     /// of the standard solution methods will converge to a fold (limit) point
     /// at a particular value of the variable addressed by parameter_pt.
@@ -2286,13 +2286,13 @@ namespace oomph
     void activate_fold_tracking(double* const& parameter_pt,
                                 const bool& block_solve = true);
 
-    ///\short Activate generic bifurcation tracking for a single (real)
+    /// Activate generic bifurcation tracking for a single (real)
     /// eigenvalue where the initial guess for the eigenvector can be specified.
     void activate_bifurcation_tracking(double* const& parameter_pt,
                                        const DoubleVector& eigenvector,
                                        const bool& block_solve = true);
 
-    ///\short Activate generic bifurcation tracking for a single (real)
+    /// Activate generic bifurcation tracking for a single (real)
     /// eigenvalue where the initial guess for the eigenvector can be specified
     /// and the normalisation condition can also be specified.
     void activate_bifurcation_tracking(double* const& parameter_pt,
@@ -2301,7 +2301,7 @@ namespace oomph
                                        const bool& block_solve = true);
 
 
-    /// \short Turn on pitchfork tracking using the augmented system specified
+    ///  Turn on pitchfork tracking using the augmented system specified
     /// in the PitchForkHandler class.
     /// After a call to this function subsequent calls
     /// of the standard solution methods will converge to a pitchfork
@@ -2321,7 +2321,7 @@ namespace oomph
                                      const DoubleVector& symmetry_vector,
                                      const bool& block_solve = true);
 
-    /// \short Turn on Hopf bifurcation
+    ///  Turn on Hopf bifurcation
     /// tracking using the augmented system specified
     /// in the HopfHandler class. After a call to this function subsequent calls
     /// of the standard solution methods will converge to a Hopf bifuraction
@@ -2332,7 +2332,7 @@ namespace oomph
     void activate_hopf_tracking(double* const& parameter_pt,
                                 const bool& block_solve = true);
 
-    /// \short Turn on Hopf bifurcation
+    ///  Turn on Hopf bifurcation
     /// tracking using the augmented system specified
     /// in the HopfHandler class. After a call to this function subsequent calls
     /// of the standard solution methods will converge to a Hopf bifuraction
@@ -2348,18 +2348,18 @@ namespace oomph
                                 const DoubleVector& null_imag,
                                 const bool& block_solve = true);
 
-    /// \short Deactivate all bifuraction tracking, by reseting
+    ///  Deactivate all bifuraction tracking, by reseting
     /// the assembly handler to the default
     void deactivate_bifurcation_tracking()
     {
       reset_assembly_handler_to_default();
     }
 
-    /// \short Reset the system to the standard non-augemented state
+    ///  Reset the system to the standard non-augemented state
     void reset_assembly_handler_to_default();
 
   private:
-    /// \short Private helper function that actually contains the guts
+    ///  Private helper function that actually contains the guts
     /// of the arc-length stepping, parameter_pt is a pointer to the
     /// parameter that is traded for the arc-length constraint, ds is
     /// the desired arc length and max_adapt is the maximum number of
@@ -2372,12 +2372,12 @@ namespace oomph
 
     // ALH_DEVELOP
   protected:
-    /// \short Private helper function that is used to set the appropriate
+    ///  Private helper function that is used to set the appropriate
     /// pinned values for continuation.
     void set_consistent_pinned_values_for_continuation();
 
   public:
-    /// \short Solve a steady problem using arc-length continuation, when the
+    ///  Solve a steady problem using arc-length continuation, when the
     /// parameter that becomes a variable corresponding to the arc-length
     /// constraint equation is an external double:
     /// parameter_pt is a pointer to that double,
@@ -2387,7 +2387,7 @@ namespace oomph
                                  const double& ds,
                                  const unsigned& max_adapt = 0);
 
-    /// \short Solve a steady problem using arc-length continuation, when the
+    ///  Solve a steady problem using arc-length continuation, when the
     /// variable corresponding to the arc-length
     /// constraint equation is already stored in data used in the problem:
     /// data_pt is a pointer to the appropriate data object,
@@ -2402,7 +2402,7 @@ namespace oomph
                                  const unsigned& max_adapt = 0);
 
 
-    /// \short Reset the "internal" arc-length continuation parameters, so as
+    ///  Reset the "internal" arc-length continuation parameters, so as
     /// to allow continuation in another parameter. N.B. The parameters that
     /// are reset are the "minimum" that are required, others should perhaps
     /// be reset, depending upon the application.
@@ -2417,7 +2417,7 @@ namespace oomph
       Dof_derivative.resize(0);
     }
 
-    /// \short Access function for the sign of the global jacobian matrix.
+    ///  Access function for the sign of the global jacobian matrix.
     /// This will be set by the linear solver, if possible (direct solver).
     /// If not alternative methods must be used to detect bifurcations
     /// (solving the associated eigenproblem).
@@ -2426,15 +2426,15 @@ namespace oomph
       return Sign_of_jacobian;
     }
 
-    /// \short Take an explicit timestep of size dt and optionally shift
+    ///  Take an explicit timestep of size dt and optionally shift
     /// any stored values of the time history
     void explicit_timestep(const double& dt, const bool& shift_values = true);
 
-    /// \short Advance time by dt and solve by Newton's method.
+    ///  Advance time by dt and solve by Newton's method.
     /// This version always shifts time values
     void unsteady_newton_solve(const double& dt);
 
-    /// \short Advance time by dt and solve the system,
+    ///  Advance time by dt and solve the system,
     /// using Newton's method. The boolean flag is used to control
     /// whether the time
     /// values should be shifted. If it is true the current data values will
@@ -2442,7 +2442,7 @@ namespace oomph
     /// previous timesteps) before solution.
     void unsteady_newton_solve(const double& dt, const bool& shift_values);
 
-    /// \short Unsteady adaptive Newton solve: up to max_adapt adaptations of
+    ///  Unsteady adaptive Newton solve: up to max_adapt adaptations of
     /// all refineable submeshes are performed to achieve the the error targets
     /// specified in the refineable submeshes. If first==true, the initial
     /// conditions are re-assigned after the mesh adaptations. Shifting of time
@@ -2456,7 +2456,7 @@ namespace oomph
                                const bool& shift = true);
 
 
-    /// \short Unsteady "doubly" adaptive Newton solve: Does temporal
+    ///  Unsteady "doubly" adaptive Newton solve: Does temporal
     /// adaptation first, i.e. we try to do a timestep with an increment
     /// of dt, and adjusting dt until the solution on the given mesh satisfies
     /// the temporal error measure with tolerance epsilon. Following
@@ -2487,7 +2487,7 @@ namespace oomph
     }
 
 
-    /// \short Unsteady "doubly" adaptive Newton solve: Does temporal
+    ///  Unsteady "doubly" adaptive Newton solve: Does temporal
     /// adaptation first, i.e. we try to do a timestep with an increment
     /// of dt, and adjusting dt until the solution on the given mesh satisfies
     /// the temporal error measure with tolerance epsilon. Following
@@ -2520,7 +2520,7 @@ namespace oomph
     }
 
 
-    /// \short Attempt to advance timestep by dt_desired. If the solution fails
+    ///  Attempt to advance timestep by dt_desired. If the solution fails
     /// the timestep will be halved until convergence is achieved, or the
     /// timestep falls below NewtonSolverParameters::Minimum_time_step. The
     /// error control parameter epsilon represents the (approximate) desired
@@ -2531,7 +2531,7 @@ namespace oomph
     double adaptive_unsteady_newton_solve(const double& dt_desired,
                                           const double& epsilon);
 
-    /// \short Attempt to advance timestep by dt_desired. If the solution fails
+    ///  Attempt to advance timestep by dt_desired. If the solution fails
     /// the timestep will be halved until convergence is achieved, or the
     /// timestep falls below NewtonSolverParameters::Minimum_time_step. The
     /// error control parameter epsilon represents the (approximate) desired
@@ -2544,33 +2544,33 @@ namespace oomph
                                           const double& epsilon,
                                           const bool& shift_values);
 
-    /// \short Initialise data and nodal positions to simulate impulsive
+    ///  Initialise data and nodal positions to simulate impulsive
     /// start from initial configuration/solution
     void assign_initial_values_impulsive();
 
-    /// \short Initialise data and nodal positions to simulate an impulsive
+    ///  Initialise data and nodal positions to simulate an impulsive
     /// start and also set the initial and previous values of dt
     void assign_initial_values_impulsive(const double& dt);
 
-    /// \short Calculate predictions
+    ///  Calculate predictions
     void calculate_predictions();
 
-    ///\short Enable recycling of the mass matrix in explicit timestepping
+    /// Enable recycling of the mass matrix in explicit timestepping
     /// schemes. Useful for timestepping on fixed meshes when you want
     /// to avoid the linear solve phase.
     void enable_mass_matrix_reuse();
 
-    ///\short Turn off recyling of the mass matrix in explicit timestepping
+    /// Turn off recyling of the mass matrix in explicit timestepping
     /// schemes
     void disable_mass_matrix_reuse();
 
-    ///\short Return whether the mass matrix is being reused
+    /// Return whether the mass matrix is being reused
     bool mass_matrix_reuse_is_enabled()
     {
       return Mass_matrix_reuse_is_enabled;
     }
 
-    /// \short Refine refineable sub-meshes, each as many times as
+    ///  Refine refineable sub-meshes, each as many times as
     /// specified in the vector and rebuild problem
     void refine_uniformly(const Vector<unsigned>& nrefine_for_mesh)
     {
@@ -2580,7 +2580,7 @@ namespace oomph
       refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
     }
 
-    /// \short Refine refineable sub-meshes, each as many times as
+    ///  Refine refineable sub-meshes, each as many times as
     /// specified in the vector and rebuild problem; doc refinement process
     void refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
                           DocInfo& doc_info)
@@ -2589,7 +2589,7 @@ namespace oomph
       refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
     }
 
-    /// \short Refine refineable sub-meshes, each as many times as
+    ///  Refine refineable sub-meshes, each as many times as
     /// specified in the vector and rebuild problem. Prune after
     /// refinements
     void refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh)
@@ -2600,7 +2600,7 @@ namespace oomph
       refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
     }
 
-    /// \short Refine refineable sub-meshes, each as many times as
+    ///  Refine refineable sub-meshes, each as many times as
     /// specified in the vector and rebuild problem; doc refinement process
     void refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh,
                                     DocInfo& doc_info)
@@ -2609,7 +2609,7 @@ namespace oomph
       refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
     }
 
-    /// \short  Refine (all) refineable (sub)mesh(es) uniformly and
+    ///   Refine (all) refineable (sub)mesh(es) uniformly and
     /// rebuild problem; doc refinement process.
     void refine_uniformly(DocInfo& doc_info)
     {
@@ -2622,7 +2622,7 @@ namespace oomph
     }
 
 
-    /// \short  Refine (all) refineable (sub)mesh(es) uniformly and
+    ///   Refine (all) refineable (sub)mesh(es) uniformly and
     /// rebuild problem; doc refinement process.
     void refine_uniformly_and_prune(DocInfo& doc_info)
     {
@@ -2635,7 +2635,7 @@ namespace oomph
     }
 
 
-    /// \short  Refine (all) refineable (sub)mesh(es) uniformly and
+    ///   Refine (all) refineable (sub)mesh(es) uniformly and
     /// rebuild problem
     void refine_uniformly()
     {
@@ -2655,7 +2655,7 @@ namespace oomph
       refine_uniformly(i_mesh, doc_info);
     }
 
-    /// \short p-refine p-refineable sub-meshes, each as many times as
+    ///  p-refine p-refineable sub-meshes, each as many times as
     /// specified in the vector and rebuild problem
     void p_refine_uniformly(const Vector<unsigned>& nrefine_for_mesh)
     {
@@ -2665,7 +2665,7 @@ namespace oomph
       p_refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
     }
 
-    /// \short p-refine p-refineable sub-meshes, each as many times as
+    ///  p-refine p-refineable sub-meshes, each as many times as
     /// specified in the vector and rebuild problem; doc refinement process
     void p_refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
                             DocInfo& doc_info)
@@ -2674,7 +2674,7 @@ namespace oomph
       p_refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
     }
 
-    /// \short p-refine p-refineable sub-meshes, each as many times as
+    ///  p-refine p-refineable sub-meshes, each as many times as
     /// specified in the vector and rebuild problem. Prune after
     /// refinements
     void p_refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh)
@@ -2689,7 +2689,7 @@ namespace oomph
       p_refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
     }
 
-    /// \short p-refine p-refineable sub-meshes, each as many times as
+    ///  p-refine p-refineable sub-meshes, each as many times as
     /// specified in the vector and rebuild problem; doc refinement process
     void p_refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh,
                                       DocInfo& doc_info)
@@ -2702,7 +2702,7 @@ namespace oomph
       p_refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
     }
 
-    /// \short  p-refine (all) p-refineable (sub)mesh(es) uniformly and
+    ///   p-refine (all) p-refineable (sub)mesh(es) uniformly and
     /// rebuild problem; doc refinement process.
     void p_refine_uniformly(DocInfo& doc_info)
     {
@@ -2715,7 +2715,7 @@ namespace oomph
     }
 
 
-    /// \short  p-refine (all) p-refineable (sub)mesh(es) uniformly and
+    ///   p-refine (all) p-refineable (sub)mesh(es) uniformly and
     /// rebuild problem; doc refinement process.
     void p_refine_uniformly_and_prune(DocInfo& doc_info)
     {
@@ -2732,7 +2732,7 @@ namespace oomph
     }
 
 
-    /// \short  p-refine (all) p-refineable (sub)mesh(es) uniformly and
+    ///   p-refine (all) p-refineable (sub)mesh(es) uniformly and
     /// rebuild problem
     void p_refine_uniformly()
     {
@@ -2752,77 +2752,77 @@ namespace oomph
       p_refine_uniformly(i_mesh, doc_info);
     }
 
-    /// \short Refine (one and only!) mesh by splitting the elements identified
+    ///  Refine (one and only!) mesh by splitting the elements identified
     /// by their numbers relative to the problems' only mesh, then rebuild
     /// the problem.
     void refine_selected_elements(
       const Vector<unsigned>& elements_to_be_refined);
 
 
-    /// \short Refine (one and only!) mesh by splitting the elements identified
+    ///  Refine (one and only!) mesh by splitting the elements identified
     /// by their pointers, then rebuild the problem.
     void refine_selected_elements(
       const Vector<RefineableElement*>& elements_to_be_refined_pt);
 
-    /// \short Refine specified submesh by splitting the elements identified
+    ///  Refine specified submesh by splitting the elements identified
     /// by their numbers relative to the submesh, then rebuild the problem.
     void refine_selected_elements(
       const unsigned& i_mesh, const Vector<unsigned>& elements_to_be_refined);
 
-    /// \short Refine specified submesh by splitting the elements identified
+    ///  Refine specified submesh by splitting the elements identified
     /// by their pointers, then rebuild the problem.
     void refine_selected_elements(
       const unsigned& i_mesh,
       const Vector<RefineableElement*>& elements_to_be_refined_pt);
 
-    /// \short Refine all submeshes by splitting the elements identified
+    ///  Refine all submeshes by splitting the elements identified
     /// by their numbers relative to each submesh in a Vector of Vectors,
     /// then rebuild the problem.
     void refine_selected_elements(
       const Vector<Vector<unsigned>>& elements_to_be_refined);
 
-    /// \short Refine all submeshes by splitting the elements identified
+    ///  Refine all submeshes by splitting the elements identified
     /// by their pointers within each submesh in a Vector of Vectors,
     /// then rebuild the problem.
     void refine_selected_elements(
       const Vector<Vector<RefineableElement*>>& elements_to_be_refined_pt);
 
-    /// \short p-refine (one and only!) mesh by refining the elements identified
+    ///  p-refine (one and only!) mesh by refining the elements identified
     /// by their numbers relative to the problems' only mesh, then rebuild
     /// the problem.
     void p_refine_selected_elements(
       const Vector<unsigned>& elements_to_be_refined);
 
 
-    /// \short p-refine (one and only!) mesh by refining the elements identified
+    ///  p-refine (one and only!) mesh by refining the elements identified
     /// by their pointers, then rebuild the problem.
     void p_refine_selected_elements(
       const Vector<PRefineableElement*>& elements_to_be_refined_pt);
 
-    /// \short p-refine specified submesh by refining the elements identified
+    ///  p-refine specified submesh by refining the elements identified
     /// by their numbers relative to the submesh, then rebuild the problem.
     void p_refine_selected_elements(
       const unsigned& i_mesh, const Vector<unsigned>& elements_to_be_refined);
 
-    /// \short p-refine specified submesh by refining the elements identified
+    ///  p-refine specified submesh by refining the elements identified
     /// by their pointers, then rebuild the problem.
     void p_refine_selected_elements(
       const unsigned& i_mesh,
       const Vector<PRefineableElement*>& elements_to_be_refined_pt);
 
-    /// \short p-refine all submeshes by refining the elements identified
+    ///  p-refine all submeshes by refining the elements identified
     /// by their numbers relative to each submesh in a Vector of Vectors,
     /// then rebuild the problem.
     void p_refine_selected_elements(
       const Vector<Vector<unsigned>>& elements_to_be_refined);
 
-    /// \short p-refine all submeshes by refining the elements identified
+    ///  p-refine all submeshes by refining the elements identified
     /// by their pointers within each submesh in a Vector of Vectors,
     /// then rebuild the problem.
     void p_refine_selected_elements(
       const Vector<Vector<PRefineableElement*>>& elements_to_be_refined_pt);
 
-    /// \short  Refine (all) refineable (sub)mesh(es) uniformly and
+    ///   Refine (all) refineable (sub)mesh(es) uniformly and
     /// rebuild problem. Return 0 for success,
     /// 1 for failure (if unrefinement has reached the coarsest permitted
     /// level)
@@ -2833,14 +2833,14 @@ namespace oomph
     /// the coarsest permitted level)
     unsigned unrefine_uniformly(const unsigned& i_mesh);
 
-    /// \short  p-unrefine (all) p-refineable (sub)mesh(es) uniformly and
+    ///   p-unrefine (all) p-refineable (sub)mesh(es) uniformly and
     /// rebuild problem.
     void p_unrefine_uniformly(DocInfo& doc_info);
 
     /// Do uniform p-unrefinement for submesh i_mesh without documentation.
     void p_unrefine_uniformly(const unsigned& i_mesh, DocInfo& doc_info);
 
-    /// \short Adapt problem:
+    ///  Adapt problem:
     /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
     /// based on their own error estimates and the target errors specified
     /// in the mesh(es). Following mesh adaptation,
@@ -2849,7 +2849,7 @@ namespace oomph
     /// function, Problem can immediately be solved again.
     void adapt(unsigned& n_refined, unsigned& n_unrefined);
 
-    /// \short Adapt problem:
+    ///  Adapt problem:
     /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
     /// based on their own error estimates and the target errors specified
     /// in the mesh(es). Following mesh adaptation,
@@ -2862,7 +2862,7 @@ namespace oomph
       adapt(n_refined, n_unrefined);
     }
 
-    /// \short p-adapt problem:
+    ///  p-adapt problem:
     /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
     /// based on their own error estimates and the target errors specified
     /// in the mesh(es). Following mesh adaptation,
@@ -2871,7 +2871,7 @@ namespace oomph
     /// function, Problem can immediately be solved again.
     void p_adapt(unsigned& n_refined, unsigned& n_unrefined);
 
-    /// \short p-adapt problem:
+    ///  p-adapt problem:
     /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
     /// based on their own error estimates and the target errors specified
     /// in the mesh(es). Following mesh adaptation,
@@ -2885,7 +2885,7 @@ namespace oomph
     }
 
 
-    /// \short Adapt problem:
+    ///  Adapt problem:
     /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
     /// based on the error estimates in elemental_error
     /// and the target errors specified
@@ -2898,7 +2898,7 @@ namespace oomph
       unsigned& n_unrefined,
       Vector<Vector<double>>& elemental_error);
 
-    /// \short Adapt problem:
+    ///  Adapt problem:
     /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
     /// based on the error estimates in elemental_error
     /// and the target errors specified
@@ -2914,15 +2914,15 @@ namespace oomph
     }
 
 
-    /// \short  Return the error estimates computed by (all) refineable
+    ///   Return the error estimates computed by (all) refineable
     /// (sub)mesh(es) in the elemental_error structure, which consists of
     /// a vector of vectors of elemental errors, one vector for each (sub)mesh.
     void get_all_error_estimates(Vector<Vector<double>>& elemental_error);
 
-    /// \short Get max and min error for all elements in submeshes
+    ///  Get max and min error for all elements in submeshes
     void doc_errors(DocInfo& doc_info);
 
-    /// \short Get max and min error for all elements in submeshes
+    ///  Get max and min error for all elements in submeshes
     void doc_errors()
     {
       DocInfo tmp_doc_info;
@@ -2930,14 +2930,14 @@ namespace oomph
       doc_errors(tmp_doc_info);
     }
 
-    /// \short Enable the output of information when in the newton solver
+    ///  Enable the output of information when in the newton solver
     /// (Default)
     void enable_info_in_newton_solve()
     {
       Shut_up_in_newton_solve = false;
     }
 
-    /// \short Disable the output of information when in the  newton solver
+    ///  Disable the output of information when in the  newton solver
     void disable_info_in_newton_solve()
     {
       Shut_up_in_newton_solve = true;

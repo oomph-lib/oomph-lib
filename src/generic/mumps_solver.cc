@@ -50,7 +50,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short Default factor for workspace -- static so it can be overwritten
+  ///  Default factor for workspace -- static so it can be overwritten
   /// globally.
   //=========================================================================
   int MumpsSolver::Default_workspace_scaling_factor = 5;

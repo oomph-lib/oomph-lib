@@ -51,7 +51,7 @@ namespace Global_Physical_Variables
  ///Direction of the wall normal vector
  Vector<double> Wall_normal;
 
- /// \short Function that specifies the wall unit normal
+ ///  Function that specifies the wall unit normal
  void wall_unit_normal_fct(const Vector<double> &x, 
                       Vector<double> &normal)
  {

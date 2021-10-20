@@ -46,7 +46,7 @@ namespace oomph
   class Problem;
 
   //=============================================================================
-  /// \short Preconditioner base class. Gives an interface to call all other
+  ///  Preconditioner base class. Gives an interface to call all other
   /// preconditioners through and stores the matrix and communicator
   /// pointers. All preconditioners should be derived from this class.
   //=============================================================================
@@ -70,13 +70,13 @@ namespace oomph
     /// Destructor (empty)
     virtual ~Preconditioner() {}
 
-    /// \short Apply the preconditioner. Pure virtual generic interface
+    ///  Apply the preconditioner. Pure virtual generic interface
     /// function. This method should apply the preconditioner operator to the
     /// vector r and return the vector z.
     virtual void preconditioner_solve(const DoubleVector& r,
                                       DoubleVector& z) = 0;
 
-    /// \short Apply the preconditioner. Pure virtual generic interface
+    ///  Apply the preconditioner. Pure virtual generic interface
     /// function. This method should apply the preconditioner operator to the
     /// vector r and return the vector z. (broken virtual)
     virtual void preconditioner_solve_transpose(const DoubleVector& r,
@@ -88,7 +88,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Setup the preconditioner: store the matrix pointer and the
+    ///  Setup the preconditioner: store the matrix pointer and the
     /// communicator pointer then call preconditioner specific setup()
     /// function.
     void setup(DoubleMatrixBase* matrix_pt)
@@ -114,7 +114,7 @@ namespace oomph
       Setup_time = setup_time_finish - setup_time_start;
     }
 
-    /// \short Compatability layer for old preconditioners where problem
+    ///  Compatability layer for old preconditioners where problem
     /// pointers were needed. The problem pointer is only used to get a
     /// communicator pointer.
     void setup(const Problem* problem_pt, DoubleMatrixBase* matrix_pt)
@@ -139,11 +139,11 @@ namespace oomph
     } // End of disable_silent_preconditioner_setup
 
 
-    /// \short Setup the preconditioner. Pure virtual generic interface
+    ///  Setup the preconditioner. Pure virtual generic interface
     /// function.
     virtual void setup() = 0;
 
-    /// \short Clean up memory (empty). Generic interface function.
+    ///  Clean up memory (empty). Generic interface function.
     virtual void clean_up_memory() {}
 
     /// Get function for matrix pointer.
@@ -161,7 +161,7 @@ namespace oomph
       return Matrix_pt;
     }
 
-    /// \short Set the matrix pointer.
+    ///  Set the matrix pointer.
     virtual void set_matrix_pt(DoubleMatrixBase* matrix_pt)
     {
       Matrix_pt = matrix_pt;
@@ -189,13 +189,13 @@ namespace oomph
       return Comm_pt;
     }
 
-    /// \short Set the communicator pointer
+    ///  Set the communicator pointer
     virtual void set_comm_pt(const OomphCommunicator* const comm_pt)
     {
       Comm_pt = comm_pt;
     }
 
-    /// \short Returns the time to setup the preconditioner.
+    ///  Returns the time to setup the preconditioner.
     double setup_time() const
     {
       return Setup_time;
@@ -235,7 +235,7 @@ namespace oomph
     /// Storage for a pointer to the matrix.
     DoubleMatrixBase* Matrix_pt;
 
-    /// \short Storage for a pointer to the communicator. Null
+    ///  Storage for a pointer to the communicator. Null
     /// if the preconditioner should not be distributed.
     const OomphCommunicator* Comm_pt;
 
@@ -287,7 +287,7 @@ namespace oomph
       }
     }
 
-    /// \short Apply the preconditioner. This method should apply the
+    ///  Apply the preconditioner. This method should apply the
     /// preconditioner operator to the vector r and return the vector z.
     virtual void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
@@ -323,7 +323,7 @@ namespace oomph
     }
 
 
-    /// \short Apply the preconditioner. This method should apply the
+    ///  Apply the preconditioner. This method should apply the
     /// preconditioner operator to the vector r and return the vector z.
     void preconditioner_solve_transpose(const DoubleVector& r, DoubleVector& z)
     {

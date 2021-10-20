@@ -51,7 +51,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short A Generalised Element class.
+  ///  A Generalised Element class.
   ///
   /// The main components of a GeneralisedElement are:
   /// - pointers to its internal and external Data, which are stored together
@@ -72,18 +72,18 @@ namespace oomph
   class GeneralisedElement
   {
   private:
-    /// \short Storage for the global equation numbers represented by the
+    ///  Storage for the global equation numbers represented by the
     /// degrees of freedom in the element.
     unsigned long* Eqn_number;
 
-    /// \short Storage for array of pointers to degrees of freedom ordered
+    ///  Storage for array of pointers to degrees of freedom ordered
     /// by local equation number. This information is not needed, except in
     /// continuation, bifurcation tracking and periodic orbit calculations.
     /// It is not set up unless the control flag
     /// Problem::Store_local_dof_pts_in_elements = true
     double** Dof_pt;
 
-    /// \short Storage for pointers to internal and external data.
+    ///  Storage for pointers to internal and external data.
     /// The data is of the same type and so can be addressed by
     /// a single pointer. The idea is that the array is of
     /// total size Ninternal_data + Nexternal_data.
@@ -91,7 +91,7 @@ namespace oomph
     /// and the external data are stored at the end of the array.
     Data** Data_pt;
 
-    /// \short Pointer to array storage for local equation numbers associated
+    ///  Pointer to array storage for local equation numbers associated
     /// with internal and external data. Again, we save storage by using
     /// a single pointer to access this information. The first index of the
     /// array is of dimension Nineternal_data + Nexternal_data and the second
@@ -109,7 +109,7 @@ namespace oomph
     /// Number of external data
     unsigned Nexternal_data;
 
-    /// \short Storage for boolean flags of size Ninternal_data + Nexternal_data
+    ///  Storage for boolean flags of size Ninternal_data + Nexternal_data
     /// that correspond to the data used in the element. The flags
     /// indicate whether the particular
     /// internal or external data should be included in the general
@@ -124,7 +124,7 @@ namespace oomph
   protected:
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Non-halo processor ID for Data; -1 if it's not a halo.
+    ///  Non-halo processor ID for Data; -1 if it's not a halo.
     int Non_halo_proc_ID;
 
     /// Does this element need to be kept as a halo element during a distribute?
@@ -132,7 +132,7 @@ namespace oomph
 
 #endif
 
-    /// \short Add a (pointer to an) internal data object to the element and
+    ///  Add a (pointer to an) internal data object to the element and
     /// return the index required to obtain it from the access
     /// function \c internal_data_pt(). The boolean indicates whether
     /// the datum should be included in the general finite-difference loop
@@ -141,7 +141,7 @@ namespace oomph
     unsigned add_internal_data(Data* const& data_pt, const bool& fd = true);
 
 
-    /// \short Return the status of the boolean flag indicating whether
+    ///  Return the status of the boolean flag indicating whether
     /// the internal data is included in the finite difference loop
     inline bool internal_data_fd(const unsigned& i) const
     {
@@ -162,7 +162,7 @@ namespace oomph
     }
 
 
-    /// \short Set the boolean flag to exclude the internal datum from
+    ///  Set the boolean flag to exclude the internal datum from
     /// the finite difference loop when computing the jacobian matrix
     inline void exclude_internal_data_fd(const unsigned& i)
     {
@@ -182,7 +182,7 @@ namespace oomph
       Data_fd[i] = false;
     }
 
-    /// \short Set the boolean flag to include the internal datum in
+    ///  Set the boolean flag to include the internal datum in
     /// the finite difference loop when computing the jacobian matrix
     inline void include_internal_data_fd(const unsigned& i)
     {
@@ -202,7 +202,7 @@ namespace oomph
       Data_fd[i] = true;
     }
 
-    /// \short Clear the storage for the global equation numbers
+    ///  Clear the storage for the global equation numbers
     /// and pointers to dofs (if stored)
     void clear_global_eqn_numbers()
     {
@@ -213,7 +213,7 @@ namespace oomph
       Ndof = 0;
     }
 
-    /// \short Add the contents of the queue global_eqn_numbers
+    ///  Add the contents of the queue global_eqn_numbers
     /// to the local storage for the local-to-global translation scheme.
     /// It is essential that the entries in the queue are added IN ORDER
     /// i.e. from the front.
@@ -221,16 +221,16 @@ namespace oomph
       std::deque<unsigned long> const& global_eqn_numbers,
       std::deque<double*> const& global_dof_pt);
 
-    /// \short Empty dense matrix used as a dummy argument to combined
+    ///  Empty dense matrix used as a dummy argument to combined
     /// residual and jacobian functions in the case when only the residuals
     /// are being assembled
     static DenseMatrix<double> Dummy_matrix;
 
-    /// \short Static storage for deque used to add_global_equation_numbers
+    ///  Static storage for deque used to add_global_equation_numbers
     /// when pointers to the dofs in each element are not required
     static std::deque<double*> Dof_pt_deque;
 
-    /// \short Assign the local equation numbers for the internal
+    ///  Assign the local equation numbers for the internal
     /// and external Data
     /// This must be called after the global equation numbers have all been
     /// assigned. It is virtual so that it can be overloaded by
@@ -241,7 +241,7 @@ namespace oomph
     virtual void assign_internal_and_external_local_eqn_numbers(
       const bool& store_local_dof_pt);
 
-    /// \short Assign all the local equation numbering schemes that can
+    ///  Assign all the local equation numbering schemes that can
     /// be applied generically for the element. In most cases, this is the
     /// function that will be overloaded by inherited classes. It is required
     /// to ensure that assign_additional_local_eqn_numbers() can always be
@@ -256,13 +256,13 @@ namespace oomph
       this->assign_internal_and_external_local_eqn_numbers(store_local_dof_pt);
     }
 
-    /// \short Setup any additional look-up schemes for local equation numbers.
+    ///  Setup any additional look-up schemes for local equation numbers.
     /// Examples of use include using local storage to refer to explicit
     /// degrees of freedom. The additional memory cost of such storage may
     /// or may not be offset by fast local access.
     virtual void assign_additional_local_eqn_numbers() {}
 
-    /// \short Return the local equation number corresponding to the j-th
+    ///  Return the local equation number corresponding to the j-th
     /// value stored at the i-th internal data
     inline int internal_local_eqn(const unsigned& i, const unsigned& j) const
     {
@@ -306,7 +306,7 @@ namespace oomph
       return Data_local_eqn[i][j];
     }
 
-    /// \short Return the local equation number corresponding to the j-th
+    ///  Return the local equation number corresponding to the j-th
     /// value stored at the i-th external data
     inline int external_local_eqn(const unsigned& i, const unsigned& j)
     {
@@ -351,7 +351,7 @@ namespace oomph
       return Data_local_eqn[Ninternal_data + i][j];
     }
 
-    /// \short Add the elemental contribution to the residuals vector. Note that
+    ///  Add the elemental contribution to the residuals vector. Note that
     /// this function will NOT initialise the residuals vector. It must be
     /// called after the residuals vector has been initialised to zero.
     virtual void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -378,7 +378,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Calculate the contributions to the jacobian from the internal
+    ///  Calculate the contributions to the jacobian from the internal
     /// degrees of freedom using finite differences.
     /// This version of the function assumes that the residuals vector has
     /// already been calculated. If the boolean argument is true, the finite
@@ -390,7 +390,7 @@ namespace oomph
                                               DenseMatrix<double>& jacobian,
                                               const bool& fd_all_data = false);
 
-    /// \short Calculate the contributions to the jacobian from the internal
+    ///  Calculate the contributions to the jacobian from the internal
     /// degrees of freedom using finite differences. This version computes
     /// the residuals vector before calculating the jacobian terms.
     /// If the boolean argument is true, the finite
@@ -410,7 +410,7 @@ namespace oomph
     }
 
 
-    /// \short Calculate the contributions to the jacobian from the external
+    ///  Calculate the contributions to the jacobian from the external
     /// degrees of freedom using finite differences.
     /// This version of the function assumes that the residuals vector has
     /// already been calculated.
@@ -424,7 +424,7 @@ namespace oomph
                                               const bool& fd_all_data = false);
 
 
-    /// \short Calculate the contributions to the jacobian from the external
+    ///  Calculate the contributions to the jacobian from the external
     /// degrees of freedom using finite differences. This version computes
     /// the residuals vector before calculating the jacobian terms.
     /// If the boolean argument is true, the finite
@@ -443,22 +443,22 @@ namespace oomph
       fill_in_jacobian_from_external_by_fd(residuals, jacobian, fd_all_data);
     }
 
-    /// \short Function that is called before the finite differencing of
+    ///  Function that is called before the finite differencing of
     /// any internal data. This may be overloaded to update any dependent
     /// data before finite differencing takes place.
     virtual inline void update_before_internal_fd() {}
 
-    /// \short Function that is call after the finite differencing of
+    ///  Function that is call after the finite differencing of
     /// the internal data. This may be overloaded to reset any dependent
     /// variables that may have changed during the finite differencing.
     virtual inline void reset_after_internal_fd() {}
 
-    /// \short Function called within the finite difference loop for
+    ///  Function called within the finite difference loop for
     /// internal data after a change in any values in the i-th
     /// internal data object.
     virtual inline void update_in_internal_fd(const unsigned& i) {}
 
-    /// \short Function called within the finite difference loop for
+    ///  Function called within the finite difference loop for
     /// internal data after the values in the i-th external data object
     /// are reset. The default behaviour is to call the update function.
     virtual inline void reset_in_internal_fd(const unsigned& i)
@@ -467,22 +467,22 @@ namespace oomph
     }
 
 
-    /// \short Function that is called before the finite differencing of
+    ///  Function that is called before the finite differencing of
     /// any external data. This may be overloaded to update any dependent
     /// data before finite differencing takes place.
     virtual inline void update_before_external_fd() {}
 
-    /// \short Function that is call after the finite differencing of
+    ///  Function that is call after the finite differencing of
     /// the external data. This may be overloaded to reset any dependent
     /// variables that may have changed during the finite differencing.
     virtual inline void reset_after_external_fd() {}
 
-    /// \short Function called within the finite difference loop for
+    ///  Function called within the finite difference loop for
     /// external data after a change in any values in the i-th
     /// external data object
     virtual inline void update_in_external_fd(const unsigned& i) {}
 
-    /// \short Function called within the finite difference loop for
+    ///  Function called within the finite difference loop for
     /// external data after the values in the i-th external data object
     /// are reset. The default behaviour is to call the update function.
     virtual inline void reset_in_external_fd(const unsigned& i)
@@ -490,7 +490,7 @@ namespace oomph
       update_in_external_fd(i);
     }
 
-    /// \short Add the elemental contribution to the jacobian matrix.
+    ///  Add the elemental contribution to the jacobian matrix.
     /// and the residuals vector. Note that
     /// this function will NOT initialise the residuals vector or the jacobian
     /// matrix. It must be called after the residuals vector and
@@ -513,7 +513,7 @@ namespace oomph
       fill_in_jacobian_from_external_by_fd(full_residuals, jacobian, true);
     }
 
-    /// \short Add the elemental contribution to the mass matrix matrix.
+    ///  Add the elemental contribution to the mass matrix matrix.
     /// and the residuals vector. Note that
     /// this function should NOT initialise the residuals vector or the mass
     /// matrix. It must be called after the residuals vector and
@@ -522,7 +522,7 @@ namespace oomph
     virtual void fill_in_contribution_to_mass_matrix(
       Vector<double>& residuals, DenseMatrix<double>& mass_matrix);
 
-    /// \short Add the elemental contribution to the jacobian matrix,
+    ///  Add the elemental contribution to the jacobian matrix,
     /// mass matrix and the residuals vector. Note that
     /// this function should NOT initialise any entries.
     /// It must be called after the residuals vector and
@@ -532,7 +532,7 @@ namespace oomph
       DenseMatrix<double>& jacobian,
       DenseMatrix<double>& mass_matrix);
 
-    /// \short Add the elemental contribution to the derivatives of
+    ///  Add the elemental contribution to the derivatives of
     /// the residuals with respect to a parameter. This function should
     /// NOT initialise any entries and must be called after the entries
     /// have been initialised to zero
@@ -542,7 +542,7 @@ namespace oomph
       double* const& parameter_pt, Vector<double>& dres_dparam);
 
 
-    /// \short Add the elemental contribution to the derivatives of
+    ///  Add the elemental contribution to the derivatives of
     /// the elemental Jacobian matrix
     /// and residuals with respect to a parameter. This function should
     /// NOT initialise any entries and must be called after the entries
@@ -554,7 +554,7 @@ namespace oomph
       Vector<double>& dres_dparam,
       DenseMatrix<double>& djac_dparam);
 
-    /// \short Add the elemental contribution to the derivative of the
+    ///  Add the elemental contribution to the derivative of the
     /// jacobian matrix,
     /// mass matrix and the residuals vector with respect to the
     /// passed parameter. Note that
@@ -568,7 +568,7 @@ namespace oomph
       DenseMatrix<double>& dmass_matrix_dparam);
 
 
-    /// \short Fill in contribution to the product of the Hessian
+    ///  Fill in contribution to the product of the Hessian
     /// (derivative of Jacobian with
     /// respect to all variables) an eigenvector, Y, and
     /// other specified vectors, C
@@ -578,13 +578,13 @@ namespace oomph
       DenseMatrix<double> const& C,
       DenseMatrix<double>& product);
 
-    /// \short Fill in the contribution to the inner products between given
+    ///  Fill in the contribution to the inner products between given
     /// pairs of history values
     virtual void fill_in_contribution_to_inner_products(
       Vector<std::pair<unsigned, unsigned>> const& history_index,
       Vector<double>& inner_product);
 
-    /// \short Fill in the contributions to the vectors that when taken
+    ///  Fill in the contributions to the vectors that when taken
     /// as dot product with other history values give the inner product
     /// over the element
     virtual void fill_in_contribution_to_inner_product_vectors(
@@ -592,7 +592,7 @@ namespace oomph
       Vector<Vector<double>>& inner_product_vector);
 
   public:
-    /// \short Constructor: Initialise all pointers and all values to zero
+    ///  Constructor: Initialise all pointers and all values to zero
     GeneralisedElement()
       : Eqn_number(0),
         Dof_pt(0),
@@ -691,15 +691,15 @@ namespace oomph
       return Data_pt[Ninternal_data + i];
     }
 
-    /// \short Static boolean to suppress warnings about repeated internal
+    ///  Static boolean to suppress warnings about repeated internal
     /// data. Defaults to false.
     static bool Suppress_warning_about_repeated_internal_data;
 
-    /// \short Static boolean to suppress warnings about repeated external
+    ///  Static boolean to suppress warnings about repeated external
     /// data. Defaults to true.
     static bool Suppress_warning_about_repeated_external_data;
 
-    /// \short Return the global equation number corresponding to the
+    ///  Return the global equation number corresponding to the
     /// ieqn_local-th local equation number
     unsigned long eqn_number(const unsigned& ieqn_local) const
     {
@@ -718,7 +718,7 @@ namespace oomph
     }
 
 
-    ///\short Return the local equation number corresponding to the
+    /// Return the local equation number corresponding to the
     /// ieqn_global-th global equation number. Returns minus one (-1) if there
     /// is
     /// no local degree of freedom corresponding to the chosen global equation
@@ -752,7 +752,7 @@ namespace oomph
     /// finite-differencing
     unsigned add_external_data(Data* const& data_pt, const bool& fd = true);
 
-    /// \short Return the status of the boolean flag indicating whether
+    ///  Return the status of the boolean flag indicating whether
     /// the external data is included in the finite difference loop
     inline bool external_data_fd(const unsigned& i) const
     {
@@ -773,7 +773,7 @@ namespace oomph
     }
 
 
-    /// \short Set the boolean flag to exclude the external datum from the
+    ///  Set the boolean flag to exclude the external datum from the
     /// the finite difference loop when computing the jacobian matrix
     inline void exclude_external_data_fd(const unsigned& i)
     {
@@ -793,7 +793,7 @@ namespace oomph
       Data_fd[Ninternal_data + i] = false;
     }
 
-    /// \short Set the boolean flag to include the external datum in the
+    ///  Set the boolean flag to include the external datum in the
     /// the finite difference loop when computing the jacobian matrix
     inline void include_external_data_fd(const unsigned& i)
     {
@@ -837,7 +837,7 @@ namespace oomph
       return Ndof;
     }
 
-    ///\short Return the vector of dof values at time level t
+    /// Return the vector of dof values at time level t
     void dof_vector(const unsigned& t, Vector<double>& dof)
     {
       // Check that the internal storage has been set up
@@ -862,7 +862,7 @@ namespace oomph
       }
     }
 
-    ///\short Return the vector of pointers to dof values
+    /// Return the vector of pointers to dof values
     void dof_pt_vector(Vector<double*>& dof_pt)
     {
       // Check that the internal storage has been set up
@@ -888,7 +888,7 @@ namespace oomph
     }
 
 
-    /// \short Set the timestepper associated with the i-th internal data
+    ///  Set the timestepper associated with the i-th internal data
     /// object
     void set_internal_data_time_stepper(const unsigned& i,
                                         TimeStepper* const& time_stepper_pt,
@@ -898,7 +898,7 @@ namespace oomph
                                                   preserve_existing_data);
     }
 
-    /// \short Assign the global equation numbers to the internal Data.
+    ///  Assign the global equation numbers to the internal Data.
     /// The arguments are the current highest global equation number
     /// (which will be incremented) and a Vector of pointers to the
     /// global variables (to which any unpinned values in the internal Data are
@@ -906,7 +906,7 @@ namespace oomph
     void assign_internal_eqn_numbers(unsigned long& global_number,
                                      Vector<double*>& Dof_pt);
 
-    /// \short Function to describe the dofs of the element. The ostream
+    ///  Function to describe the dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -917,7 +917,7 @@ namespace oomph
     void describe_dofs(std::ostream& out,
                        const std::string& current_string) const;
 
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -928,28 +928,28 @@ namespace oomph
     virtual void describe_local_dofs(std::ostream& out,
                                      const std::string& current_string) const;
 
-    /// \short Add pointers to the internal data values to map indexed
+    ///  Add pointers to the internal data values to map indexed
     /// by the global equation number.
     void add_internal_value_pt_to_map(
       std::map<unsigned, double*>& map_of_value_pt);
 
 #ifdef OOMPH_HAS_MPI
-    /// \short Add all internal data and time history values to the vector in
+    ///  Add all internal data and time history values to the vector in
     /// the internal storage order
     void add_internal_data_values_to_vector(Vector<double>& vector_of_values);
 
-    /// \short Read all internal data and time history values from the vector
+    ///  Read all internal data and time history values from the vector
     /// starting from index. On return the index will be
     /// set to the value at the end of the data that has been read in
     void read_internal_data_values_from_vector(
       const Vector<double>& vector_of_values, unsigned& index);
 
-    /// \short Add all equation numbers associated with internal data
+    ///  Add all equation numbers associated with internal data
     /// to the vector in the internal storage order
     void add_internal_eqn_numbers_to_vector(
       Vector<long>& vector_of_eqn_numbers);
 
-    /// \short Read all equation numbers associated with internal data
+    ///  Read all equation numbers associated with internal data
     /// from the vector
     /// starting from index. On return the index will be
     /// set to the value at the end of the data that has been read in
@@ -958,12 +958,12 @@ namespace oomph
 
 #endif
 
-    /// \short Setup the arrays of local equation numbers for the element.
+    ///  Setup the arrays of local equation numbers for the element.
     /// If the optional boolean argument is true, then pointers to the
     /// associated degrees of freedom are stored locally in the array Dof_pt
     virtual void assign_local_eqn_numbers(const bool& store_local_dof_pt);
 
-    /// \short Complete the setup of any additional dependencies
+    ///  Complete the setup of any additional dependencies
     /// that the element may have. Empty virtual function that may be
     /// overloaded for specific derived elements. Used, e.g., for elements
     /// with algebraic node update functions to determine the "geometric
@@ -973,7 +973,7 @@ namespace oomph
     /// are accounted for.
     virtual void complete_setup_of_dependencies() {}
 
-    /// \short Calculate the vector of residuals of the equations in the
+    ///  Calculate the vector of residuals of the equations in the
     /// element. By default initialise the vector to zero and then call the
     /// fill_in_contribution_to_residuals() function. Note that this entire
     /// function can be overloaded if desired.
@@ -985,7 +985,7 @@ namespace oomph
       fill_in_contribution_to_residuals(residuals);
     }
 
-    /// \short Calculate the elemental Jacobian matrix "d equation / d
+    ///  Calculate the elemental Jacobian matrix "d equation / d
     /// variable".
     virtual void get_jacobian(Vector<double>& residuals,
                               DenseMatrix<double>& jacobian)
@@ -998,7 +998,7 @@ namespace oomph
       fill_in_contribution_to_jacobian(residuals, jacobian);
     }
 
-    /// \short Calculate the residuals and the elemental "mass" matrix, the
+    ///  Calculate the residuals and the elemental "mass" matrix, the
     /// matrix that multiplies the time derivative terms in a problem.
     virtual void get_mass_matrix(Vector<double>& residuals,
                                  DenseMatrix<double>& mass_matrix)
@@ -1011,7 +1011,7 @@ namespace oomph
       fill_in_contribution_to_mass_matrix(residuals, mass_matrix);
     }
 
-    /// \short Calculate the residuals and jacobian and elemental "mass" matrix,
+    ///  Calculate the residuals and jacobian and elemental "mass" matrix,
     /// the matrix that multiplies the time derivative terms.
     virtual void get_jacobian_and_mass_matrix(Vector<double>& residuals,
                                               DenseMatrix<double>& jacobian,
@@ -1029,7 +1029,7 @@ namespace oomph
     }
 
 
-    /// \short Calculate the derivatives of the residuals with respect to
+    ///  Calculate the derivatives of the residuals with respect to
     /// a parameter
     virtual void get_dresiduals_dparameter(double* const& parameter_pt,
                                            Vector<double>& dres_dparam)
@@ -1041,7 +1041,7 @@ namespace oomph
                                                           dres_dparam);
     }
 
-    /// \short Calculate the derivatives of the elemental Jacobian matrix
+    ///  Calculate the derivatives of the elemental Jacobian matrix
     /// and residuals with respect to a parameter
     virtual void get_djacobian_dparameter(double* const& parameter_pt,
                                           Vector<double>& dres_dparam,
@@ -1056,7 +1056,7 @@ namespace oomph
         parameter_pt, dres_dparam, djac_dparam);
     }
 
-    /// \short Calculate the derivatives of the elemental Jacobian matrix
+    ///  Calculate the derivatives of the elemental Jacobian matrix
     /// mass matrix and residuals with respect to a parameter
     virtual void get_djacobian_and_dmass_matrix_dparameter(
       double* const& parameter_pt,
@@ -1076,7 +1076,7 @@ namespace oomph
     }
 
 
-    /// \short Calculate the product of the Hessian (derivative of Jacobian with
+    ///  Calculate the product of the Hessian (derivative of Jacobian with
     /// respect to all variables) an eigenvector, Y, and
     /// other specified vectors, C
     /// (d(J_{ij})/d u_{k}) Y_{j} C_{k}
@@ -1090,7 +1090,7 @@ namespace oomph
       this->fill_in_contribution_to_hessian_vector_products(Y, C, product);
     }
 
-    /// \short Return the vector of inner product of the given pairs of
+    ///  Return the vector of inner product of the given pairs of
     /// history values
     virtual void get_inner_products(
       Vector<std::pair<unsigned, unsigned>> const& history_index,
@@ -1101,7 +1101,7 @@ namespace oomph
                                                    inner_product);
     }
 
-    /// \short  Compute the vectors that when taken as a dot product with
+    ///   Compute the vectors that when taken as a dot product with
     /// other history values give the inner product over the element.
     virtual void get_inner_product_vectors(
       Vector<unsigned> const& history_index,
@@ -1117,12 +1117,12 @@ namespace oomph
     }
 
 
-    /// \short Self-test: Have all internal values been classified as
+    ///  Self-test: Have all internal values been classified as
     /// pinned/unpinned? Return 0 if OK.
     virtual unsigned self_test();
 
 
-    /// \short Compute norm of solution -- broken virtual can be overloaded
+    ///  Compute norm of solution -- broken virtual can be overloaded
     /// by element writer to implement whatever norm is desired for
     /// the specific element
     virtual void compute_norm(Vector<double>& norm)
@@ -1134,7 +1134,7 @@ namespace oomph
     }
 
 
-    /// \short Compute norm of solution -- broken virtual can be overloaded
+    ///  Compute norm of solution -- broken virtual can be overloaded
     /// by element writer to implement whatever norm is desired for
     /// the specific element
     virtual void compute_norm(double& norm)
@@ -1146,26 +1146,26 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Label the element as halo and specify processor that holds
+    ///  Label the element as halo and specify processor that holds
     /// non-halo counterpart
     void set_halo(const unsigned& non_halo_proc_ID)
     {
       Non_halo_proc_ID = non_halo_proc_ID;
     }
 
-    /// \short Label the element as not being a halo
+    ///  Label the element as not being a halo
     void set_nonhalo()
     {
       Non_halo_proc_ID = -1;
     }
 
-    /// \short Is this element a halo?
+    ///  Is this element a halo?
     bool is_halo() const
     {
       return (Non_halo_proc_ID != -1);
     }
 
-    /// \short ID of processor ID that holds non-halo counterpart
+    ///  ID of processor ID that holds non-halo counterpart
     /// of halo element; negative if not a halo.
     int non_halo_proc_ID()
     {
@@ -1178,14 +1178,14 @@ namespace oomph
       Must_be_kept_as_halo = true;
     }
 
-    /// \short Do not insist that this element be kept as a halo element during
+    ///  Do not insist that this element be kept as a halo element during
     /// distribution
     void unset_must_be_kept_as_halo()
     {
       Must_be_kept_as_halo = false;
     }
 
-    /// \short Test whether the element must be kept as a halo element
+    ///  Test whether the element must be kept as a halo element
     bool must_be_kept_as_halo() const
     {
       return Must_be_kept_as_halo;
@@ -1193,11 +1193,11 @@ namespace oomph
 
 #endif
 
-    /// \short Double used for the default finite difference step in elemental
+    ///  Double used for the default finite difference step in elemental
     /// jacobian calculations
     static double Default_fd_jacobian_step;
 
-    /// \short The number of types of degrees of freedom in this element
+    ///  The number of types of degrees of freedom in this element
     /// are sub-divided into
     virtual unsigned ndof_types() const
     {
@@ -1211,7 +1211,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Create a list of pairs for the unknowns that this element
+    ///  Create a list of pairs for the unknowns that this element
     /// is "in charge of" -- ignore any unknowns associated with external
     /// \c Data. The first entry in each pair must contain the global equation
     /// number of the unknown, while the second one contains the number
@@ -1252,7 +1252,7 @@ namespace oomph
   class Integral;
 
   //===========================================================================
-  /// \short Helper namespace for tolerances and iterations within the Newton
+  ///  Helper namespace for tolerances and iterations within the Newton
   /// method used in the locate_zeta function in FiniteElements.
   //===========================================================================
   namespace Locate_zeta_helpers
@@ -1263,7 +1263,7 @@ namespace oomph
     /// Maximum number of Newton iterations
     extern unsigned Max_newton_iterations;
 
-    /// \short Multiplier for (zeta-based) outer radius of element used for
+    ///  Multiplier for (zeta-based) outer radius of element used for
     /// deciding that point is outside element. Set to negative value
     /// to suppress test.
     extern double Radius_multiplier_for_fast_exit_from_locate_zeta;
@@ -1277,12 +1277,12 @@ namespace oomph
   } // namespace Locate_zeta_helpers
 
 
-  /// \short Typedef for the function that translates the face coordinate
+  ///  Typedef for the function that translates the face coordinate
   /// to the coordinate in the bulk element
   typedef void (*CoordinateMappingFctPt)(const Vector<double>& s,
                                          Vector<double>& s_bulk);
 
-  /// \short Typedef for the function that returns the partial derivative
+  ///  Typedef for the function that returns the partial derivative
   /// of the local coordinates in the bulk element
   /// with respect to the coordinates along the face.
   /// In addition this function returns an index of one of the
@@ -1294,7 +1294,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short A general Finite Element class.
+  ///  A general Finite Element class.
   ///
   /// The main components of a FiniteElement are:
   /// - pointers to its Nodes
@@ -1318,24 +1318,24 @@ namespace oomph
     /// Storage for pointers to the nodes in the element
     Node** Node_pt;
 
-    /// \short Storage for the local equation numbers associated with
+    ///  Storage for the local equation numbers associated with
     /// the values stored at the nodes
     int** Nodal_local_eqn;
 
     /// Number of nodes in the element
     unsigned Nnode;
 
-    /// \short The spatial dimension of the element, i.e. the number
+    ///  The spatial dimension of the element, i.e. the number
     /// of local coordinates used to parametrize it.
     unsigned Elemental_dimension;
 
-    /// \short The spatial dimension of the nodes in the element.
+    ///  The spatial dimension of the nodes in the element.
     /// We assume that nodes have the same spatial dimension, because
     /// we cannot think of any "real" problems for which that would not
     /// be the case.
     unsigned Nodal_dimension;
 
-    /// \short The number of coordinate types required to interpolate
+    ///  The number of coordinate types required to interpolate
     /// the element's geometry between the nodes. For Lagrange elements
     /// it is 1 (the default). It must be over-ridden by using
     /// the set_nposition_type() function in the constructors of elements
@@ -1344,37 +1344,37 @@ namespace oomph
     unsigned Nnodal_position_type;
 
   protected:
-    /// \short Assemble the jacobian matrix for the mapping from local
+    ///  Assemble the jacobian matrix for the mapping from local
     /// to Eulerian coordinates, given the derivatives of the shape function
     /// w.r.t the local coordinates.
     virtual void assemble_local_to_eulerian_jacobian(
       const DShape& dpsids, DenseMatrix<double>& jacobian) const;
 
-    /// \short Assemble the the "jacobian" matrix of second derivatives of the
+    ///  Assemble the the "jacobian" matrix of second derivatives of the
     /// mapping from local to Eulerian coordinates, given
     /// the second derivatives of the shape functions w.r.t. local coordinates.
     virtual void assemble_local_to_eulerian_jacobian2(
       const DShape& d2psids, DenseMatrix<double>& jacobian2) const;
 
-    /// \short Assemble the covariant Eulerian base vectors, assuming that
+    ///  Assemble the covariant Eulerian base vectors, assuming that
     /// the derivatives of the shape functions with respect to the local
     /// coordinates have already been constructed.
     virtual void assemble_eulerian_base_vectors(
       const DShape& dpsids, DenseMatrix<double>& interpolated_G) const;
 
-    /// \short Default return value for required_nvalue(n) which gives the
+    ///  Default return value for required_nvalue(n) which gives the
     /// number of "data" values required by the element at node n; for example,
     /// solving a Poisson equation would required only one "data" value at each
     /// node. The defaults is set to zero, because a general element is
     /// problem-less.
     static const unsigned Default_Initial_Nvalue;
 
-    /// \short Default value for the tolerance to be used when locating nodes
+    ///  Default value for the tolerance to be used when locating nodes
     /// via local coordinates
     static const double Node_location_tolerance;
 
   public:
-    /// \short Set the dimension of the element and initially set
+    ///  Set the dimension of the element and initially set
     /// the dimension of the nodes to be the same as the dimension of the
     /// element.
     void set_dimension(const unsigned& dim)
@@ -1383,7 +1383,7 @@ namespace oomph
       Nodal_dimension = dim;
     }
 
-    /// \short Set the dimension of the nodes in the element. This will
+    ///  Set the dimension of the nodes in the element. This will
     /// typically only be required when constructing FaceElements or
     /// in beam and shell type elements where a lower dimensional surface
     /// is embedded in a higher dimensional space.
@@ -1392,14 +1392,14 @@ namespace oomph
       Nodal_dimension = nodal_dim;
     }
 
-    /// \short Set the number of types required to interpolate the coordinate
+    ///  Set the number of types required to interpolate the coordinate
     void set_nnodal_position_type(const unsigned& nposition_type)
     {
       Nnodal_position_type = nposition_type;
     }
 
 
-    /// \short Set the number of nodes in the element to n, by resizing
+    ///  Set the number of nodes in the element to n, by resizing
     /// the storage for pointers to the Node objects.
     void set_n_node(const unsigned& n)
     {
@@ -1427,7 +1427,7 @@ namespace oomph
       }
     }
 
-    /// \short Return the local equation number corresponding to the i-th
+    ///  Return the local equation number corresponding to the i-th
     /// value at the n-th local node.
     inline int nodal_local_eqn(const unsigned& n, const unsigned& i) const
     {
@@ -1469,7 +1469,7 @@ namespace oomph
     }
 
 
-    /// \short Compute the geometric shape functions (psi) at integration point
+    ///  Compute the geometric shape functions (psi) at integration point
     /// ipt. Return the determinant of the jacobian of the mapping (detJ).
     /// Additionally calculate the derivatives of "detJ" w.r.t. the
     /// nodal coordinates.
@@ -1478,11 +1478,11 @@ namespace oomph
                                DenseMatrix<double>& djacobian_dX) const;
 
   protected:
-    /// \short Static array that holds the number of second derivatives
+    ///  Static array that holds the number of second derivatives
     /// as a function of the dimension of the element
     static const unsigned N2deriv[];
 
-    /// \short Take the matrix passed as jacobian and return its inverse in
+    ///  Take the matrix passed as jacobian and return its inverse in
     /// inverse_jacobian. This function is templated by the dimension of the
     /// element because matrix inversion cannot be written efficiently in a
     /// generic manner.
@@ -1491,7 +1491,7 @@ namespace oomph
                            DenseMatrix<double>& inverse_jacobian) const;
 
 
-    /// \short A template-free interface that takes the matrix passed as
+    ///  A template-free interface that takes the matrix passed as
     /// jacobian and return its inverse in inverse_jacobian. By default the
     /// function will use the dimension of the element to call the correct
     /// invert_jacobian(..) function. This should be overloaded for efficiency
@@ -1501,7 +1501,7 @@ namespace oomph
       DenseMatrix<double>& inverse_jacobian) const;
 
 
-    /// \short Calculate the mapping from local to Eulerian coordinates,
+    ///  Calculate the mapping from local to Eulerian coordinates,
     /// given the derivatives of the shape functions w.r.t. local coordinates.
     /// Returns the determinant of the jacobian, the jacobian and inverse
     /// jacobian
@@ -1517,7 +1517,7 @@ namespace oomph
     }
 
 
-    /// \short Calculate the mapping from local to Eulerian coordinates,
+    ///  Calculate the mapping from local to Eulerian coordinates,
     /// given the derivatives of the shape functions w.r.t. local coordinates,
     /// Return only the determinant of the jacobian and the inverse of the
     /// mapping (ds/dx).
@@ -1532,7 +1532,7 @@ namespace oomph
       return local_to_eulerian_mapping(dpsids, jacobian, inverse_jacobian);
     }
 
-    /// \short Calculate the mapping from local to Eulerian coordinates given
+    ///  Calculate the mapping from local to Eulerian coordinates given
     /// the derivatives of the shape functions w.r.t the local coordinates.
     /// assuming that the coordinates are aligned in the direction of the local
     /// coordinates, i.e. there are no cross terms and the jacobian is diagonal.
@@ -1543,7 +1543,7 @@ namespace oomph
       DenseMatrix<double>& jacobian,
       DenseMatrix<double>& inverse_jacobian) const;
 
-    /// \short A template-free interface that calculates the derivative of the
+    ///  A template-free interface that calculates the derivative of the
     /// jacobian of a mapping with respect to the nodal coordinates X_ij.
     /// To do this it requires the jacobian matrix and the derivatives of the
     /// shape functions w.r.t. the local coordinates. By default the function
@@ -1556,7 +1556,7 @@ namespace oomph
       const DShape& dpsids,
       DenseMatrix<double>& djacobian_dX) const;
 
-    /// \short Calculate the derivative of the jacobian of a mapping with
+    ///  Calculate the derivative of the jacobian of a mapping with
     /// respect to the nodal coordinates X_ij using the jacobian matrix
     /// and the derivatives of the shape functions w.r.t. the local
     /// coordinates. This function is templated by the dimension of the
@@ -1567,7 +1567,7 @@ namespace oomph
       const DShape& dpsids,
       DenseMatrix<double>& djacobian_dX) const;
 
-    /// \short A template-free interface that calculates the derivative w.r.t.
+    ///  A template-free interface that calculates the derivative w.r.t.
     /// the nodal coordinates \f$ X_{pq} \f$ of the derivative of the shape
     /// functions \f$ \psi_j \f$ w.r.t. the global eulerian coordinates
     /// \f$ x_i \f$. I.e. this function calculates
@@ -1594,7 +1594,7 @@ namespace oomph
       const DShape& dpsids,
       RankFourTensor<double>& d_dpsidx_dX) const;
 
-    /// \short Calculate the derivative w.r.t. the nodal coordinates
+    ///  Calculate the derivative w.r.t. the nodal coordinates
     /// \f$ X_{pq} \f$ of the derivative of the shape functions w.r.t. the
     /// global eulerian coordinates \f$ x_i \f$, using the determinant of
     /// the jacobian mapping, its derivative w.r.t. the nodal coordinates
@@ -1614,7 +1614,7 @@ namespace oomph
       const DShape& dpsids,
       RankFourTensor<double>& d_dpsidx_dX) const;
 
-    /// \short Convert derivative w.r.t.local coordinates to derivatives
+    ///  Convert derivative w.r.t.local coordinates to derivatives
     /// w.r.t the coordinates used to assemble the inverse_jacobian passed
     /// in the mapping. On entry, dbasis must contain the basis function
     /// derivatives w.r.t. the local coordinates; it will contain the
@@ -1624,7 +1624,7 @@ namespace oomph
     virtual void transform_derivatives(
       const DenseMatrix<double>& inverse_jacobian, DShape& dbasis) const;
 
-    /// \short Convert derivative w.r.t local coordinates to derivatives
+    ///  Convert derivative w.r.t local coordinates to derivatives
     /// w.r.t the coordinates used to assemble the inverse jacobian passed
     /// in the mapping, assuming that the coordinates are aligned in the
     /// direction of the local coordinates. On entry dbasis must contain
@@ -1634,7 +1634,7 @@ namespace oomph
     void transform_derivatives_diagonal(
       const DenseMatrix<double>& inverse_jacobian, DShape& dbasis) const;
 
-    /// \short Convert derivatives and second derivatives w.r.t. local
+    ///  Convert derivatives and second derivatives w.r.t. local
     /// coordiantes to derivatives and second derivatives w.r.t. the coordinates
     /// used to assemble the jacobian, inverse jacobian and jacobian2 passed to
     /// the function. By default this function will call
@@ -1653,7 +1653,7 @@ namespace oomph
       DShape& dbasis,
       DShape& d2basis) const;
 
-    /// \short Convert derivatives and second derivatives w.r.t. local
+    ///  Convert derivatives and second derivatives w.r.t. local
     /// coordinates to derivatives and second derivatives w.r.t. the coordinates
     /// used to asssmble the jacobian, inverse jacobian and jacobian2 passed in
     /// the mapping. This is templated by dimension because the method of
@@ -1668,7 +1668,7 @@ namespace oomph
       DShape& dbasis,
       DShape& d2basis) const;
 
-    /// \short Convert derivatives and second derivatives w.r.t. local
+    ///  Convert derivatives and second derivatives w.r.t. local
     /// coordinates to derivatives and second derivatives w.r.t. the coordinates
     /// used to asssmble the jacobian, inverse jacobian and jacobian2 passed in
     /// the mapping. This version of the function assumes that the local
@@ -1687,14 +1687,14 @@ namespace oomph
     /// Pointer to the element's macro element (NULL by default)
     MacroElement* Macro_elem_pt;
 
-    /// \short Calculate the contributions to the jacobian from the nodal
+    ///  Calculate the contributions to the jacobian from the nodal
     /// degrees of freedom using finite differences.
     /// This version of the function assumes that the residuals vector has
     /// already been calculated
     virtual void fill_in_jacobian_from_nodal_by_fd(
       Vector<double>& residuals, DenseMatrix<double>& jacobian);
 
-    /// \short Calculate the contributions to the jacobian from the nodal
+    ///  Calculate the contributions to the jacobian from the nodal
     /// degrees of freedom using finite differences. This version computes
     /// the residuals vector before calculating the jacobian terms.
     void fill_in_jacobian_from_nodal_by_fd(DenseMatrix<double>& jacobian)
@@ -1708,21 +1708,21 @@ namespace oomph
       fill_in_jacobian_from_nodal_by_fd(residuals, jacobian);
     }
 
-    /// \short Function that is called before the finite differencing of
+    ///  Function that is called before the finite differencing of
     /// any nodal data. This may be overloaded to update any dependent
     /// data before finite differencing takes place.
     virtual inline void update_before_nodal_fd() {}
 
-    /// \short Function that is call after the finite differencing of
+    ///  Function that is call after the finite differencing of
     /// the nodal data. This may be overloaded to reset any dependent
     /// variables that may have changed during the finite differencing.
     virtual inline void reset_after_nodal_fd() {}
 
-    /// \short Function called within the finite difference loop for
+    ///  Function called within the finite difference loop for
     /// nodal data after a change in the i-th nodal value.
     virtual inline void update_in_nodal_fd(const unsigned& i) {}
 
-    /// \short Function called within the finite difference loop for
+    ///  Function called within the finite difference loop for
     /// nodal data after the i-th nodal values is reset.
     /// The default behaviour is to call the update function.
     virtual inline void reset_in_nodal_fd(const unsigned& i)
@@ -1731,7 +1731,7 @@ namespace oomph
     }
 
 
-    /// \short Add the elemental contribution to the jacobian matrix.
+    ///  Add the elemental contribution to the jacobian matrix.
     /// and the residuals vector. Note that
     /// this function will NOT initialise the residuals vector or the jacobian
     /// matrix. It must be called after the residuals vector and
@@ -1758,28 +1758,28 @@ namespace oomph
     }
 
   public:
-    /// \short Function pointer for function that computes vector-valued
+    ///  Function pointer for function that computes vector-valued
     /// steady "exact solution" \f$ {\bf f}({\bf x}) \f$
     /// as \f$ \mbox{\tt fct}({\bf x}, {\bf f}) \f$.
     typedef void (*SteadyExactSolutionFctPt)(const Vector<double>&,
                                              Vector<double>&);
 
-    /// \short Function pointer for function that computes Vector-valued
+    ///  Function pointer for function that computes Vector-valued
     /// time-dependent function \f$ {\bf f}(t,{\bf x}) \f$
     /// as \f$ \mbox{\tt fct}(t, {\bf x}, {\bf f}) \f$.
     typedef void (*UnsteadyExactSolutionFctPt)(const double&,
                                                const Vector<double>&,
                                                Vector<double>&);
 
-    /// \short Tolerance below which the jacobian is considered singular
+    ///  Tolerance below which the jacobian is considered singular
     static double Tolerance_for_singular_jacobian;
 
-    /// \short Boolean that if set to true allows a negative jacobian
+    ///  Boolean that if set to true allows a negative jacobian
     /// in the transform between global and local coordinates (negative surface
     /// area = left-handed coordinate system).
     static bool Accept_negative_jacobian;
 
-    /// \short Static boolean to suppress output while checking
+    ///  Static boolean to suppress output while checking
     /// for inverted elements
     static bool Suppress_output_while_checking_for_inverted_elements;
 
@@ -1797,7 +1797,7 @@ namespace oomph
     {
     }
 
-    /// \short The destructor cleans up the static memory allocated
+    ///  The destructor cleans up the static memory allocated
     /// for shape function storage. Internal and external data get
     /// wiped by the GeneralisedElement destructor; nodes get
     /// killed in mesh destructor.
@@ -1824,7 +1824,7 @@ namespace oomph
       return true;
     }
 
-    ///\short Adjust local coordinates so that they're located inside
+    /// Adjust local coordinates so that they're located inside
     /// the element
     virtual void move_local_coord_back_into_element(Vector<double>& s) const
     {
@@ -1835,14 +1835,14 @@ namespace oomph
     }
 
 
-    /// \short Compute centre of gravity of all nodes and radius of node that
+    ///  Compute centre of gravity of all nodes and radius of node that
     /// is furthest from it. Used to assess approximately if a point
     /// is likely to be contained with an element in locate_zeta-like
     /// operations
     void get_centre_of_gravity_and_max_radius_in_terms_of_zeta(
       Vector<double>& cog, double& max_radius) const;
 
-    /// \short Get local coordinates of node j in the element; vector
+    ///  Get local coordinates of node j in the element; vector
     /// sets its own size (broken virtual)
     virtual void local_coordinate_of_node(const unsigned& j,
                                           Vector<double>& s) const
@@ -1853,12 +1853,12 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Get the local fraction of the node j in the element
+    ///  Get the local fraction of the node j in the element
     /// A dumb, but correct default implementation is provided.
     virtual void local_fraction_of_node(const unsigned& j,
                                         Vector<double>& s_fraction);
 
-    /// \short Get the local fraction of any node in the n-th position
+    ///  Get the local fraction of any node in the n-th position
     /// in a one dimensional expansion along the i-th local coordinate
     virtual double local_one_d_fraction_of_node(const unsigned& n1d,
                                                 const unsigned& i)
@@ -1872,7 +1872,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Set pointer to macro element -- can be overloaded in derived
+    ///  Set pointer to macro element -- can be overloaded in derived
     /// elements to perform additional tasks
     virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
     {
@@ -1885,7 +1885,7 @@ namespace oomph
       return Macro_elem_pt;
     }
 
-    /// \short Global coordinates as function of local coordinates.
+    ///  Global coordinates as function of local coordinates.
     /// Either via FE representation or via macro-element (if Macro_elem_pt!=0)
     void get_x(const Vector<double>& s, Vector<double>& x) const
     {
@@ -1902,7 +1902,7 @@ namespace oomph
     }
 
 
-    /// \short Global coordinates as function of local coordinates
+    ///  Global coordinates as function of local coordinates
     /// at previous time "level" t (t=0: present; t>0: previous).
     /// Either via FE representation of QElement or
     /// via macro-element (if Macro_elem_pt!=0).
@@ -1932,7 +1932,7 @@ namespace oomph
     }
 
 
-    /// \short Global coordinates as function of local coordinates
+    ///  Global coordinates as function of local coordinates
     /// using macro element representation.
     /// (Broken virtual --- this  must be overloaded in specific geometric
     /// element classes)
@@ -1945,7 +1945,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Global coordinates as function of local coordinates
+    ///  Global coordinates as function of local coordinates
     /// at previous time "level" t (t=0: present; t>0: previous).
     /// using macro element representation
     /// (Broken virtual -- overload in specific geometric element class
@@ -1970,16 +1970,16 @@ namespace oomph
       return Integral_pt;
     }
 
-    /// \short Calculate the geometric shape functions
+    ///  Calculate the geometric shape functions
     /// at local coordinate s. This function must be overloaded for each
     /// specific geometric element.
     virtual void shape(const Vector<double>& s, Shape& psi) const = 0;
 
-    /// \short Return the geometric shape function at the ipt-th integration
+    ///  Return the geometric shape function at the ipt-th integration
     /// point
     virtual void shape_at_knot(const unsigned& ipt, Shape& psi) const;
 
-    /// \short Function to compute the geometric shape functions and
+    ///  Function to compute the geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s.
     /// This function must be overloaded for each specific geometric element.
     /// (Broken virtual function --- specifies the interface)
@@ -1993,13 +1993,13 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Return the geometric shape function and its derivative w.r.t.
+    ///  Return the geometric shape function and its derivative w.r.t.
     /// the local coordinates at the ipt-th integration point.
     virtual void dshape_local_at_knot(const unsigned& ipt,
                                       Shape& psi,
                                       DShape& dpsids) const;
 
-    /// \short Function to compute the geometric shape functions and also
+    ///  Function to compute the geometric shape functions and also
     /// first and second derivatives w.r.t.
     /// local coordinates at local coordinate s. This function must
     /// be overloaded for each specific geometric element (if required).
@@ -2029,7 +2029,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Return the geometric shape function and its first and
+    ///  Return the geometric shape function and its first and
     /// second derivatives w.r.t.
     /// the local coordinates at the ipt-th integration point.
     ///  Numbering:
@@ -2051,37 +2051,37 @@ namespace oomph
                                        DShape& dpsids,
                                        DShape& d2psids) const;
 
-    /// \short Return the Jacobian of mapping from local to global
+    ///  Return the Jacobian of mapping from local to global
     /// coordinates at local position s.
     virtual double J_eulerian(const Vector<double>& s) const;
 
-    /// \short Return the Jacobian of the mapping from local to global
+    ///  Return the Jacobian of the mapping from local to global
     /// coordinates at the ipt-th integration point
     virtual double J_eulerian_at_knot(const unsigned& ipt) const;
 
-    /// \short Check that Jacobian of mapping between local and Eulerian
+    ///  Check that Jacobian of mapping between local and Eulerian
     /// coordinates at all integration points is positive.
     void check_J_eulerian_at_knots(bool& passed) const;
 
-    /// \short Helper function used to check for singular or negative
+    ///  Helper function used to check for singular or negative
     /// Jacobians in the transform from local to global or Lagrangian
     /// coordinates.
     void check_jacobian(const double& jacobian) const;
 
-    /// \short Compute the geometric shape functions and also
+    ///  Compute the geometric shape functions and also
     /// first derivatives w.r.t. global coordinates at local coordinate s;
     /// Returns Jacobian of mapping from global to local coordinates.
     double dshape_eulerian(const Vector<double>& s,
                            Shape& psi,
                            DShape& dpsidx) const;
 
-    /// \short Return the geometric shape functions and also first
+    ///  Return the geometric shape functions and also first
     /// derivatives w.r.t. global coordinates at the ipt-th integration point.
     virtual double dshape_eulerian_at_knot(const unsigned& ipt,
                                            Shape& psi,
                                            DShape& dpsidx) const;
 
-    /// \short Compute the geometric shape functions (psi) and first derivatives
+    ///  Compute the geometric shape functions (psi) and first derivatives
     /// w.r.t. global coordinates (dpsidx) at the ipt-th integration point.
     /// Return the determinant of the jacobian of the mapping (detJ).
     /// Additionally calculate the derivatives of both "detJ" and "dpsidx"
@@ -2093,7 +2093,7 @@ namespace oomph
       DenseMatrix<double>& djacobian_dX,
       RankFourTensor<double>& d_dpsidx_dX) const;
 
-    /// \short Compute the geometric shape functions and also first
+    ///  Compute the geometric shape functions and also first
     /// and second derivatives w.r.t. global coordinates at local coordinate s;
     /// Returns Jacobian of mapping from global to local coordinates.
     ///  Numbering:
@@ -2116,7 +2116,7 @@ namespace oomph
                             DShape& d2psidx) const;
 
 
-    /// \short Return the geometric shape functions and also first
+    ///  Return the geometric shape functions and also first
     /// and second derivatives w.r.t. global coordinates at ipt-th integration
     /// point.
     ///  Numbering:
@@ -2138,13 +2138,13 @@ namespace oomph
                                             DShape& dpsidx,
                                             DShape& d2psidx) const;
 
-    /// \short Assign the local equation numbers for Data stored at the nodes
+    ///  Assign the local equation numbers for Data stored at the nodes
     /// Virtual so that it can be overloaded by RefineableFiniteElements.
     /// If the boolean is true then the pointers to the degrees of freedom
     /// associated with each equation number are stored in Dof_pt
     virtual void assign_nodal_local_eqn_numbers(const bool& store_local_dof_pt);
 
-    /// \short Function to describe the local dofs of the element[s]. The
+    ///  Function to describe the local dofs of the element[s]. The
     /// ostream specifies the output stream to which the description is written;
     /// the string stores the currently assembled output that is ultimately
     /// written to the output stream by Data::describe_dofs(...); it is
@@ -2153,7 +2153,7 @@ namespace oomph
     virtual void describe_local_dofs(std::ostream& out,
                                      const std::string& current_string) const;
 
-    /// \short Function to describe the local dofs of the element[s]. The
+    ///  Function to describe the local dofs of the element[s]. The
     /// ostream specifies the output stream to which the description is written;
     /// the string stores the currently assembled output that is ultimately
     /// written to the output stream by Data::describe_dofs(...); it is
@@ -2162,7 +2162,7 @@ namespace oomph
     virtual void describe_nodal_local_dofs(
       std::ostream& out, const std::string& current_string) const;
 
-    /// \short Overloaded version of the calculation of the local equation
+    ///  Overloaded version of the calculation of the local equation
     /// numbers. If the boolean argument is true then pointers to the degrees
     /// of freedom associated with each equation number are stored locally
     /// in the array Dof_pt.
@@ -2217,7 +2217,7 @@ namespace oomph
       return Nnode;
     }
 
-    /// \short Return the number of nodes along one edge of the element
+    ///  Return the number of nodes along one edge of the element
     /// Default is to return zero --- must be overloaded by geometric
     /// elements
     virtual unsigned nnode_1d() const
@@ -2225,7 +2225,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short Return the i-th coordinate at local node n. Do not use
+    ///  Return the i-th coordinate at local node n. Do not use
     /// the hanging node representation.
     /// NOTE: Moved to cc file because of a possible compiler bug
     /// in gcc (yes, really!). The move to the cc file avoids inlining
@@ -2246,7 +2246,7 @@ namespace oomph
     /*  return tmp; // node_pt(n)->x(i); */
     /* } */
 
-    /// \short Return the i-th coordinate at local node n, at time level t
+    ///  Return the i-th coordinate at local node n, at time level t
     /// (t=0: present; t>0: previous time level).
     /// Do not use the hanging node representation.
     double raw_nodal_position(const unsigned& t,
@@ -2256,14 +2256,14 @@ namespace oomph
       return node_pt(n)->x(t, i);
     }
 
-    /// \short Return the i-th component of nodal velocity: dx/dt at local node
+    ///  Return the i-th component of nodal velocity: dx/dt at local node
     /// n. Do not use the hanging node representation.
     double raw_dnodal_position_dt(const unsigned& n, const unsigned& i) const
     {
       return node_pt(n)->dx_dt(i);
     }
 
-    /// \short Return the i-th component of j-th derivative of nodal position:
+    ///  Return the i-th component of j-th derivative of nodal position:
     /// d^jx/dt^j at node n. Do not use the hanging node representation.
     double raw_dnodal_position_dt(const unsigned& n,
                                   const unsigned& j,
@@ -2272,7 +2272,7 @@ namespace oomph
       return node_pt(n)->dx_dt(j, i);
     }
 
-    /// \short Return the value of the k-th type of the i-th positional variable
+    ///  Return the value of the k-th type of the i-th positional variable
     /// at the local node n. Do not use the hanging node representation.
     double raw_nodal_position_gen(const unsigned& n,
                                   const unsigned& k,
@@ -2281,7 +2281,7 @@ namespace oomph
       return node_pt(n)->x_gen(k, i);
     }
 
-    /// \short Return the generalised nodal position (type k, i-th variable)
+    ///  Return the generalised nodal position (type k, i-th variable)
     /// at previous timesteps at local node n. Do not use the hanging node
     /// representation.
     double raw_nodal_position_gen(const unsigned& t,
@@ -2292,7 +2292,7 @@ namespace oomph
       return node_pt(n)->x_gen(t, k, i);
     }
 
-    /// \short i-th component of time derivative (velocity) of the
+    ///  i-th component of time derivative (velocity) of the
     /// generalised position, dx(k,i)/dt at local node n.
     /// `Type': k; Coordinate direction: i. Do not use the hanging node
     /// representation.
@@ -2303,7 +2303,7 @@ namespace oomph
       return node_pt(n)->dx_gen_dt(k, i);
     }
 
-    /// \short i-th component of j-th time derivative  of the
+    ///  i-th component of j-th time derivative  of the
     /// generalised position, dx(k,i)/dt at local node n.
     /// `Type': k; Coordinate direction: i. Do not use the hanging node
     /// representation.
@@ -2316,7 +2316,7 @@ namespace oomph
     }
 
 
-    /// \short Return the i-th coordinate at local node n. If the
+    ///  Return the i-th coordinate at local node n. If the
     /// node is hanging, the appropriate interpolation is handled by the
     /// position function in the Node class.
     double nodal_position(const unsigned& n, const unsigned& i) const
@@ -2324,7 +2324,7 @@ namespace oomph
       return node_pt(n)->position(i);
     }
 
-    /// \short Return the i-th coordinate at local node n, at time level t
+    ///  Return the i-th coordinate at local node n, at time level t
     /// (t=0: present; t>0: previous time level)
     /// Returns suitably interpolated version for hanging nodes.
     double nodal_position(const unsigned& t,
@@ -2340,7 +2340,7 @@ namespace oomph
       return node_pt(n)->dposition_dt(i);
     }
 
-    /// \short Return the i-th component of j-th derivative of nodal position:
+    ///  Return the i-th component of j-th derivative of nodal position:
     /// d^jx/dt^j at node n.
     double dnodal_position_dt(const unsigned& n,
                               const unsigned& j,
@@ -2349,7 +2349,7 @@ namespace oomph
       return node_pt(n)->dposition_dt(j, i);
     }
 
-    /// \short Return the value of the k-th type of the i-th positional variable
+    ///  Return the value of the k-th type of the i-th positional variable
     /// at the local node n.
     double nodal_position_gen(const unsigned& n,
                               const unsigned& k,
@@ -2358,7 +2358,7 @@ namespace oomph
       return node_pt(n)->position_gen(k, i);
     }
 
-    /// \short Return the generalised nodal position (type k, i-th variable)
+    ///  Return the generalised nodal position (type k, i-th variable)
     /// at previous timesteps at local node n
     double nodal_position_gen(const unsigned& t,
                               const unsigned& n,
@@ -2368,7 +2368,7 @@ namespace oomph
       return node_pt(n)->position_gen(t, k, i);
     }
 
-    /// \short i-th component of time derivative (velocity) of the
+    ///  i-th component of time derivative (velocity) of the
     /// generalised position, dx(k,i)/dt at local node n.
     /// `Type': k; Coordinate direction: i.
     double dnodal_position_gen_dt(const unsigned& n,
@@ -2378,7 +2378,7 @@ namespace oomph
       return node_pt(n)->dposition_gen_dt(k, i);
     }
 
-    /// \short i-th component of j-th time derivative  of the
+    ///  i-th component of j-th time derivative  of the
     /// generalised position, dx(k,i)/dt at local node n.
     /// `Type': k; Coordinate direction: i.
     double dnodal_position_gen_dt(const unsigned& j,
@@ -2390,14 +2390,14 @@ namespace oomph
     }
 
 
-    /// \short Compute derivatives of elemental residual vector with respect
+    ///  Compute derivatives of elemental residual vector with respect
     /// to nodal coordinates. Default implementation by FD can be overwritten
     /// for specific elements.
     /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
     virtual void get_dresidual_dnodal_coordinates(
       RankThreeTensor<double>& dresidual_dnodal_coordinates);
 
-    /// \short This is an empty function that establishes a uniform
+    ///  This is an empty function that establishes a uniform
     /// interface for all (derived) elements that involve time-derivatives.
     /// Such elements are/should be implemented in ALE form to allow
     /// mesh motions. The additional expense associated with the
@@ -2428,7 +2428,7 @@ namespace oomph
     }
 
 
-    /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
+    ///  (Re-)enable ALE, i.e. take possible mesh motion into account
     /// when evaluating the time-derivative. This function is empty
     /// and simply establishes a common interface for all derived
     /// elements that are formulated in ALE form.
@@ -2451,7 +2451,7 @@ namespace oomph
         warn_message.str(), "Problem::enable_ALE()", OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Number of values that must be stored at local node n by
+    ///  Number of values that must be stored at local node n by
     /// the element. The default is 0, until over-ridden by a particular
     /// element. For example, a Poisson equation requires only one value to be
     /// stored at each node; 2D Navier--Stokes equations require two values
@@ -2462,7 +2462,7 @@ namespace oomph
       return Default_Initial_Nvalue;
     }
 
-    /// \short Return the number of coordinate types that the element requires
+    ///  Return the number of coordinate types that the element requires
     /// to interpolate the geometry between
     /// the nodes. For Lagrange elements it is 1.
     unsigned nnodal_position_type() const
@@ -2470,7 +2470,7 @@ namespace oomph
       return Nnodal_position_type;
     }
 
-    /// \short Return boolean to indicate if any of the element's nodes
+    ///  Return boolean to indicate if any of the element's nodes
     /// are geometrically hanging.
     bool has_hanging_nodes() const
     {
@@ -2500,7 +2500,7 @@ namespace oomph
         error_msg, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Pointer to the j-th vertex node in the element. Broken virtual
+    ///  Pointer to the j-th vertex node in the element. Broken virtual
     /// function in "pure" finite elements.
     virtual Node* vertex_node_pt(const unsigned& j) const
     {
@@ -2509,7 +2509,7 @@ namespace oomph
         error_msg, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Construct the local node n and return a pointer to the newly
+    ///  Construct the local node n and return a pointer to the newly
     /// created node object.
     virtual Node* construct_node(const unsigned& n)
     {
@@ -2521,7 +2521,7 @@ namespace oomph
       return node_pt(n);
     }
 
-    /// \short Construct the local node n, including
+    ///  Construct the local node n, including
     /// storage for history values required by timestepper, and return a pointer
     /// to the newly created node object.
     virtual Node* construct_node(const unsigned& n,
@@ -2537,7 +2537,7 @@ namespace oomph
       return node_pt(n);
     }
 
-    /// \short Construct the local node n as a boundary node;
+    ///  Construct the local node n as a boundary node;
     /// that is a node that MAY be placed on a mesh boundary
     /// and return a pointer to the newly created node object.
     virtual Node* construct_boundary_node(const unsigned& n)
@@ -2550,7 +2550,7 @@ namespace oomph
       return node_pt(n);
     }
 
-    /// \short Construct the local node n, including
+    ///  Construct the local node n, including
     /// storage for history values required by timestepper,
     /// as a boundary node; that is a node that MAY be placed on a mesh
     /// boundary and return a pointer to the newly created node object.
@@ -2567,23 +2567,23 @@ namespace oomph
       return node_pt(n);
     }
 
-    /// \short Return the number of the node *node_pt if this node
+    ///  Return the number of the node *node_pt if this node
     /// is in the element, else return -1;
     int get_node_number(Node* const& node_pt) const;
 
 
-    /// \short If there is a node at this local coordinate, return the pointer
+    ///  If there is a node at this local coordinate, return the pointer
     /// to the node
     virtual Node* get_node_at_local_coordinate(const Vector<double>& s) const;
 
-    /// \short Return the i-th value stored at local node n
+    ///  Return the i-th value stored at local node n
     /// but do NOT take hanging nodes into account
     double raw_nodal_value(const unsigned& n, const unsigned& i) const
     {
       return node_pt(n)->raw_value(i);
     }
 
-    /// \short Return the i-th value stored at local node n, at time level t
+    ///  Return the i-th value stored at local node n, at time level t
     /// (t=0: present; t>0 previous timesteps), but do NOT take hanging nodes
     /// into account
     double raw_nodal_value(const unsigned& t,
@@ -2593,14 +2593,14 @@ namespace oomph
       return node_pt(n)->raw_value(t, i);
     }
 
-    /// \short Return the i-th value stored at local node n.
+    ///  Return the i-th value stored at local node n.
     /// Produces suitably interpolated values for hanging nodes.
     double nodal_value(const unsigned& n, const unsigned& i) const
     {
       return node_pt(n)->value(i);
     }
 
-    /// \short Return the i-th value stored at local node n, at time level t
+    ///  Return the i-th value stored at local node n, at time level t
     /// (t=0: present; t>0 previous timesteps). Produces suitably interpolated
     /// values for hanging nodes.
     double nodal_value(const unsigned& t,
@@ -2610,7 +2610,7 @@ namespace oomph
       return node_pt(n)->value(t, i);
     }
 
-    /// \short Return the spatial dimension of the element, i.e.
+    ///  Return the spatial dimension of the element, i.e.
     /// the number of local coordinates required to parametrise its
     /// geometry.
     unsigned dim() const
@@ -2630,7 +2630,7 @@ namespace oomph
     virtual double interpolated_x(const Vector<double>& s,
                                   const unsigned& i) const;
 
-    ///\short Return FE interpolated coordinate x[i] at local coordinate s
+    /// Return FE interpolated coordinate x[i] at local coordinate s
     /// at previous timestep t (t=0: present; t>0: previous timestep)
     virtual double interpolated_x(const unsigned& t,
                                   const Vector<double>& s,
@@ -2640,41 +2640,41 @@ namespace oomph
     virtual void interpolated_x(const Vector<double>& s,
                                 Vector<double>& x) const;
 
-    /// \short Return FE interpolated position x[] at local coordinate s
+    ///  Return FE interpolated position x[] at local coordinate s
     /// at previous timestep t as Vector (t=0: present; t>0: previous timestep)
     virtual void interpolated_x(const unsigned& t,
                                 const Vector<double>& s,
                                 Vector<double>& x) const;
 
-    /// \short Return t-th time-derivative of the
+    ///  Return t-th time-derivative of the
     /// i-th FE-interpolated Eulerian coordinate at
     /// local coordinate s.
     virtual double interpolated_dxdt(const Vector<double>& s,
                                      const unsigned& i,
                                      const unsigned& t);
 
-    /// \short Compte t-th time-derivative of the
+    ///  Compte t-th time-derivative of the
     /// FE-interpolated Eulerian coordinate vector at
     /// local coordinate s.
     virtual void interpolated_dxdt(const Vector<double>& s,
                                    const unsigned& t,
                                    Vector<double>& dxdt);
 
-    /// \short A standard FiniteElement is fixed, so there are no geometric
+    ///  A standard FiniteElement is fixed, so there are no geometric
     /// data when viewed in its GeomObject incarnation
     inline unsigned ngeom_data() const
     {
       return 0;
     }
 
-    /// \short A standard FiniteElement is fixed, so there are no geometric
+    ///  A standard FiniteElement is fixed, so there are no geometric
     /// data when viewed in its GeomObject incarnation
     inline Data* geom_data_pt(const unsigned& j)
     {
       return 0;
     }
 
-    /// \short Return the parametrised position of the FiniteElement in
+    ///  Return the parametrised position of the FiniteElement in
     /// its incarnation as a GeomObject, r(zeta).
     /// The position is given by the Eulerian coordinate and the intrinsic
     /// coordinate (zeta) is the local coordinate of the element (s).
@@ -2683,7 +2683,7 @@ namespace oomph
       this->interpolated_x(zeta, r);
     }
 
-    /// \short Return the parametrised position of the FiniteElement
+    ///  Return the parametrised position of the FiniteElement
     /// in its GeomObject incarnation:
     /// r(zeta). The position is given by the Eulerian coordinate and the
     /// intrinsic coordinate (zeta) is the local coordinate of the element (s)
@@ -2698,7 +2698,7 @@ namespace oomph
       this->interpolated_x(t, zeta, r);
     }
 
-    /// \short Return the t-th time derivative of the
+    ///  Return the t-th time derivative of the
     /// parametrised position of the FiniteElement
     /// in its GeomObject incarnation:
     /// \f$ \frac{d^{t} dr(zeta)}{d t^{t}} \f$.
@@ -2710,7 +2710,7 @@ namespace oomph
       this->interpolated_dxdt(zeta, t, drdt);
     }
 
-    /// \short Specify the values of the "global" intrinsic coordinate, zeta,
+    ///  Specify the values of the "global" intrinsic coordinate, zeta,
     /// of a compound geometric object (a mesh of elements) when
     /// the element is viewied as a sub-geometric object.
     /// The default assumption is that the element will be
@@ -2733,7 +2733,7 @@ namespace oomph
     }
 
 
-    /// \short Calculate the interpolated value of zeta, the intrinsic
+    ///  Calculate the interpolated value of zeta, the intrinsic
     /// coordinate of the element when viewed as a compound geometric object
     /// within a Mesh as a function of the local coordinate of the element, s.
     /// The default assumption is the zeta is interpolated using the shape
@@ -2746,7 +2746,7 @@ namespace oomph
     /// other.
     void interpolated_zeta(const Vector<double>& s, Vector<double>& zeta) const;
 
-    /// \short For a given value of zeta, the "global" intrinsic coordinate of
+    ///  For a given value of zeta, the "global" intrinsic coordinate of
     /// a mesh of FiniteElements represented as a compound geometric object,
     /// find the local coordinate in this element that corresponds to the
     /// requested value of zeta.
@@ -2761,12 +2761,12 @@ namespace oomph
                      const bool& use_coordinate_as_initial_guess = false);
 
 
-    /// \short Update the positions of all nodes in the element using
+    ///  Update the positions of all nodes in the element using
     /// each node update function. The default implementation may
     /// be overloaded so that more efficient versions can be written
     virtual void node_update();
 
-    /// \short The purpose of this function is to identify all possible
+    ///  The purpose of this function is to identify all possible
     /// Data that can affect the fields interpolated by the FiniteElement.
     /// The information will typically be used in interaction problems in
     /// which the FiniteElement provides a forcing term for an
@@ -2785,7 +2785,7 @@ namespace oomph
       std::set<std::pair<Data*, unsigned>>& paired_field_data);
 
 
-    /// \short The purpose of this
+    ///  The purpose of this
     /// function is to identify all \c Data objects that affect the elements'
     /// geometry. This function is implemented as an empty virtual
     /// function since it can only be implemented in conjunction
@@ -2823,7 +2823,7 @@ namespace oomph
     double size() const;
 
 
-    /// \short Broken virtual
+    ///  Broken virtual
     /// function to compute the actual size (taking into account
     /// factors such as 2pi or radii the integrand) -- such function
     /// can only be implemented on an equation-by-equation basis.
@@ -2837,7 +2837,7 @@ namespace oomph
       return 0.0;
     }
 
-    /// \short Virtual function to write the double precision numbers that
+    ///  Virtual function to write the double precision numbers that
     /// appear in a single line of output into the data vector. Empty virtual,
     /// can be overloaded for specific elements; used e.g. by LineVisualiser.
     virtual void point_output_data(const Vector<double>& s,
@@ -2845,7 +2845,7 @@ namespace oomph
     {
     }
 
-    /// \short Output solution (as defined by point_output_data())
+    ///  Output solution (as defined by point_output_data())
     /// at local cordinates s
     void point_output(std::ostream& outfile, const Vector<double>& s)
     {
@@ -2861,7 +2861,7 @@ namespace oomph
       }
     }
 
-    /// \short Return the number of actual plot points for paraview
+    ///  Return the number of actual plot points for paraview
     /// plot with parameter nplot. Broken virtual; can be overloaded
     /// in specific elements.
     virtual unsigned nplot_points_paraview(const unsigned& nplot) const
@@ -2875,7 +2875,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short Return the number of local sub-elements for paraview plot with
+    ///  Return the number of local sub-elements for paraview plot with
     /// parameter nplot. Broken virtual; can be overloaded
     /// in specific elements.
     virtual unsigned nsub_elements_paraview(const unsigned& nplot) const
@@ -2889,7 +2889,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short Paraview output -- this outputs the coordinates at the plot
+    ///  Paraview output -- this outputs the coordinates at the plot
     /// points (for parameter nplot) to specified output file.
     void output_paraview(std::ofstream& file_out, const unsigned& nplot) const
     {
@@ -2951,7 +2951,7 @@ namespace oomph
       }
     }
 
-    /// \short Fill in the offset information for paraview plot. Broken virtual.
+    ///  Fill in the offset information for paraview plot. Broken virtual.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     virtual void write_paraview_output_offset_information(
@@ -2963,7 +2963,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Return the paraview element type.  Broken virtual.
+    ///  Return the paraview element type.  Broken virtual.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     virtual void write_paraview_type(std::ofstream& file_out,
@@ -2975,7 +2975,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Return the offsets for the paraview sub-elements. Broken
+    ///  Return the offsets for the paraview sub-elements. Broken
     /// virtual. Needs to be implemented for each new geometric element type;
     /// see http://www.vtk.org/VTK/img/file-formats.pdf
     virtual void write_paraview_offsets(std::ofstream& file_out,
@@ -2988,7 +2988,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Number of scalars/fields output by this element. Broken
+    ///  Number of scalars/fields output by this element. Broken
     /// virtual. Needs to be implemented for each new specific element type.
     virtual unsigned nscalar_paraview() const
     {
@@ -3001,7 +3001,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short Write values of the i-th scalar field at the plot points. Broken
+    ///  Write values of the i-th scalar field at the plot points. Broken
     /// virtual. Needs to be implemented for each new specific element type.
     virtual void scalar_value_paraview(std::ofstream& file_out,
                                        const unsigned& i,
@@ -3013,7 +3013,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Write values of the i-th scalar field at the plot points. Broken
+    ///  Write values of the i-th scalar field at the plot points. Broken
     /// virtual. Needs to be implemented for each new specific element type.
     virtual void scalar_value_fct_paraview(
       std::ofstream& file_out,
@@ -3027,7 +3027,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Write values of the i-th scalar field at the plot points. Broken
+    ///  Write values of the i-th scalar field at the plot points. Broken
     /// virtual. Needs to be implemented for each new specific element type.
     virtual void scalar_value_fct_paraview(
       std::ofstream& file_out,
@@ -3042,7 +3042,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Name of the i-th scalar field. Default implementation
+    ///  Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names in specific elements.
     virtual std::string scalar_name_paraview(const unsigned& i) const
@@ -3050,7 +3050,7 @@ namespace oomph
       return "V" + StringConversion::to_string(i);
     }
 
-    /// \short Output the element data --- typically the values at the
+    ///  Output the element data --- typically the values at the
     /// nodes in a format suitable for post-processing.
     virtual void output(std::ostream& outfile)
     {
@@ -3060,7 +3060,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Output the element data --- pass (some measure of)
+    ///  Output the element data --- pass (some measure of)
     /// the number of plot points per element
     virtual void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -3070,7 +3070,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Output the element data at time step t. This is const because
+    ///  Output the element data at time step t. This is const because
     /// it is newly added and so can be done easily. Really all the
     /// output(...) functions should be const!
     virtual void output(const unsigned& t,
@@ -3083,7 +3083,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Output the element data --- typically the values at the
+    ///  Output the element data --- typically the values at the
     /// nodes in a format suitable for post-processing.
     /// (C style output)
     virtual void output(FILE* file_pt)
@@ -3094,7 +3094,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Output the element data --- pass (some measure of)
+    ///  Output the element data --- pass (some measure of)
     /// the number of plot points per element
     /// (C style output)
     virtual void output(FILE* file_pt, const unsigned& n_plot)
@@ -3144,7 +3144,7 @@ namespace oomph
     }
 
 
-    /// \short  Get cector of local coordinates of plot point i (when plotting
+    ///   Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction").
     /// Generally these plot points will be uniformly spaced across the element.
     /// The optional final boolean flag (default: false) allows them to
@@ -3161,7 +3161,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     };
 
-    /// \short Return string for tecplot zone header (when plotting
+    ///  Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction")
     virtual std::string tecplot_zone_string(const unsigned& nplot) const
     {
@@ -3172,21 +3172,21 @@ namespace oomph
       return "dummy return";
     }
 
-    /// \short Add tecplot zone "footer" to output stream (when plotting
+    ///  Add tecplot zone "footer" to output stream (when plotting
     /// nplot points in each "coordinate direction").
     /// Empty by default -- can be used, e.g., to add FE connectivity
     /// lists to elements that need it.
     virtual void write_tecplot_zone_footer(std::ostream& outfile,
                                            const unsigned& nplot) const {};
 
-    /// \short Add tecplot zone "footer" to C-style output. (when plotting
+    ///  Add tecplot zone "footer" to C-style output. (when plotting
     /// nplot points in each "coordinate direction").
     /// Empty by default -- can be used, e.g., to add FE connectivity
     /// lists to elements that need it.
     virtual void write_tecplot_zone_footer(FILE* file_pt,
                                            const unsigned& nplot) const {};
 
-    /// \short Return total number of plot points (when plotting
+    ///  Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction")
     virtual unsigned nplot_points(const unsigned& nplot) const
     {
@@ -3223,7 +3223,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Given the exact solution \f$ {\bf f}({\bf x}) \f$ this function
+    ///  Given the exact solution \f$ {\bf f}({\bf x}) \f$ this function
     /// calculates the norm of the error and that of the exact solution.
     /// Version with vectors of norms and errors so that different variables'
     /// norms and errors can be returned individually
@@ -3237,7 +3237,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Given the exact solution \f$ {\bf f}({\bf x}) \f$ this function
+    ///  Given the exact solution \f$ {\bf f}({\bf x}) \f$ this function
     /// calculates the norm of the error and that of the exact solution.
     /// Version with vectors of norms and errors so that different variables'
     /// norms and errors can be returned individually
@@ -3254,7 +3254,7 @@ namespace oomph
     }
 
 
-    /// \short Plot the error when compared
+    ///  Plot the error when compared
     /// against a given exact solution \f$ {\bf f}({\bf x}) \f$.
     /// Also calculates the norm of the
     /// error and that of the exact solution.
@@ -3271,7 +3271,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Plot the error when compared
+    ///  Plot the error when compared
     /// against a given time-dependent exact solution \f$ {\bf f}(t,{\bf x})
     /// \f$. Also calculates the norm of the error and that of the exact
     /// solution.
@@ -3290,7 +3290,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Plot the error when compared
+    ///  Plot the error when compared
     /// against a given exact solution \f$ {\bf f}({\bf x}) \f$.
     /// Also calculates the norm of the
     /// error and that of the exact solution.
@@ -3310,7 +3310,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Plot the error when compared
+    ///  Plot the error when compared
     /// against a given time-dependent exact solution \f$ {\bf f}(t,{\bf x})
     /// \f$. Also calculates the norm of the error and that of the exact
     /// solution. Version with vectors of norms and errors so that different
@@ -3331,7 +3331,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Plot the error when compared
+    ///  Plot the error when compared
     /// against a given exact solution \f$ {\bf f}({\bf x}) \f$.
     /// Also calculates the maximum absolute error
     virtual void compute_abs_error(
@@ -3347,20 +3347,20 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Evaluate integral of a Vector-valued function
+    ///  Evaluate integral of a Vector-valued function
     /// \f$ {\bf f}({\bf x}) \f$ over the element.
     void integrate_fct(FiniteElement::SteadyExactSolutionFctPt integrand_fct_pt,
                        Vector<double>& integral);
 
 
-    /// \short Evaluate integral of a Vector-valued, time-dependent function
+    ///  Evaluate integral of a Vector-valued, time-dependent function
     /// \f$ {\bf f}(t,{\bf x}) \f$ over the element.
     void integrate_fct(
       FiniteElement::UnsteadyExactSolutionFctPt integrand_fct_pt,
       const double& time,
       Vector<double>& integral);
 
-    /// \short Function for building a lower dimensional FaceElement
+    ///  Function for building a lower dimensional FaceElement
     /// on the specified face of the FiniteElement.
     /// The arguments are the index of the face, an integer whose value
     /// depends on the particular element type, and a pointer to the
@@ -3369,7 +3369,7 @@ namespace oomph
                                     FaceElement* face_element_pt);
 
 
-    /// \short Self-test: Check inversion of element & do self-test for
+    ///  Self-test: Check inversion of element & do self-test for
     /// GeneralisedElement. Return 0 if OK.
     virtual unsigned self_test();
 
@@ -3471,12 +3471,12 @@ namespace oomph
       s.resize(0);
     }
 
-    /// \short  Return spatial dimension of element (=number of local
+    ///   Return spatial dimension of element (=number of local
     /// coordinates needed to parametrise the element)
     // unsigned dim() const {return 0;}
 
   private:
-    /// \short Default integration scheme
+    ///  Default integration scheme
     static PointIntegral Default_integration_scheme;
   };
 
@@ -3489,7 +3489,7 @@ namespace oomph
   class GeomObject;
 
   //=======================================================================
-  /// \short A class to specify the initial conditions for a solid body.
+  ///  A class to specify the initial conditions for a solid body.
   /// Solid bodies are often discretised with
   /// Hermite-type elements, for which the assignment
   /// of the generalised nodal values is nontrivial since they represent
@@ -3528,11 +3528,11 @@ namespace oomph
 
 
   private:
-    /// \short Pointer to the GeomObject that specifies the initial
+    ///  Pointer to the GeomObject that specifies the initial
     /// condition (shape, veloc and accel)
     GeomObject* Geom_object_pt;
 
-    /// \short Which time derivative (0,1,2) are we currently assigning
+    ///  Which time derivative (0,1,2) are we currently assigning
     unsigned IC_time_deriv;
   };
 
@@ -3543,7 +3543,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short SolidFiniteElement class.
+  ///  SolidFiniteElement class.
   ///
   /// Solid elements are elements whose nodal positions are unknowns
   /// in the problem -- their nodes are SolidNodes. In such elements,
@@ -3567,14 +3567,14 @@ namespace oomph
   class SolidFiniteElement : public virtual FiniteElement
   {
   public:
-    /// \short Set the lagrangian dimension of the element --- the number
+    ///  Set the lagrangian dimension of the element --- the number
     /// of lagrangian coordinates stored at the nodes in the element.
     void set_lagrangian_dimension(const unsigned& lagrangian_dimension)
     {
       Lagrangian_dimension = lagrangian_dimension;
     }
 
-    /// \short Return whether there is internal solid data (e.g. discontinuous
+    ///  Return whether there is internal solid data (e.g. discontinuous
     /// solid pressure). At present, this is used to report an error in
     /// setting initial conditions for ElasticProblems which can't
     /// handle such cases. The default is false.
@@ -3583,7 +3583,7 @@ namespace oomph
       return false;
     }
 
-    /// \short Pointer to function that computes the "multiplier" for the
+    ///  Pointer to function that computes the "multiplier" for the
     /// inertia terms in the consistent determination of the initial
     /// conditions for Newmark timestepping.
     typedef double (*MultiplierFctPt)(const Vector<double>& xi);
@@ -3610,21 +3610,21 @@ namespace oomph
     /// Broken assignment operator
     /*void operator=(const SolidFiniteElement&) = delete;*/
 
-    ///\short The number of geometric data affecting a SolidFiniteElemnet is
+    /// The number of geometric data affecting a SolidFiniteElemnet is
     /// the same as the number of nodes (one variable position data per node)
     inline unsigned ngeom_data() const
     {
       return nnode();
     }
 
-    /// \short Return pointer to the j-th Data item that the object's
+    ///  Return pointer to the j-th Data item that the object's
     /// shape depends on. (Redirects to the nodes' positional Data).
     inline Data* geom_data_pt(const unsigned& j)
     {
       return static_cast<SolidNode*>(node_pt(j))->variable_position_pt();
     }
 
-    /// \short Specify Data that affects the geometry of the element
+    ///  Specify Data that affects the geometry of the element
     /// by adding the position Data to the set that's passed in.
     /// (This functionality is required in FSI problems; set is used to
     /// avoid double counting).
@@ -3640,7 +3640,7 @@ namespace oomph
     }
 
 
-    /// \short In a SolidFiniteElement, the "global" intrinsic coordinate
+    ///  In a SolidFiniteElement, the "global" intrinsic coordinate
     /// of the element when viewed as part of a compound geometric
     /// object (a Mesh) is, by default, the Lagrangian coordinate
     /// Note the assumption here is that we are always using isoparameteric
@@ -3653,7 +3653,7 @@ namespace oomph
       return lagrangian_position_gen(n, k, i);
     }
 
-    /// \short Eulerian and Lagrangian coordinates as function of the
+    ///  Eulerian and Lagrangian coordinates as function of the
     /// local coordinates: The Eulerian position is returned in
     /// FE-interpolated form (\c x_fe) and then in the form obtained
     /// from the "current" MacroElement representation (if it exists -- if not,
@@ -3675,7 +3675,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Set pointer to MacroElement -- overloads generic version
+    ///  Set pointer to MacroElement -- overloads generic version
     /// and uses the MacroElement
     /// also as the default for the "undeformed" configuration.
     /// This assignment must be overwritten with
@@ -3690,7 +3690,7 @@ namespace oomph
       Undeformed_macro_elem_pt = macro_elem_pt;
     }
 
-    /// \short Set pointers to "current" and "undeformed" MacroElements.
+    ///  Set pointers to "current" and "undeformed" MacroElements.
     /// Can be overloaded in derived classes to perform additional
     /// tasks
     virtual void set_macro_elem_pt(MacroElement* macro_elem_pt,
@@ -3700,7 +3700,7 @@ namespace oomph
       Undeformed_macro_elem_pt = undeformed_macro_elem_pt;
     }
 
-    /// \short Set pointer to "undeformed" macro element.
+    ///  Set pointer to "undeformed" macro element.
     /// Can be overloaded in derived classes to perform additional
     /// tasks.
     void set_undeformed_macro_elem_pt(MacroElement* undeformed_macro_elem_pt)
@@ -3715,20 +3715,20 @@ namespace oomph
       return Undeformed_macro_elem_pt;
     }
 
-    /// \short Calculate shape functions and derivatives w.r.t. Lagrangian
+    ///  Calculate shape functions and derivatives w.r.t. Lagrangian
     /// coordinates at local coordinate s. Returns the Jacobian of the mapping
     /// from Lagrangian to local coordinates.
     double dshape_lagrangian(const Vector<double>& s,
                              Shape& psi,
                              DShape& dpsidxi) const;
 
-    /// \short Return the geometric shape functions and also first
+    ///  Return the geometric shape functions and also first
     /// derivatives w.r.t. Lagrangian coordinates at ipt-th integration point.
     virtual double dshape_lagrangian_at_knot(const unsigned& ipt,
                                              Shape& psi,
                                              DShape& dpsidxi) const;
 
-    /// \short Compute the geometric shape functions and also first
+    ///  Compute the geometric shape functions and also first
     /// and second derivatives w.r.t. Lagrangian coordinates at
     /// local coordinate s;
     /// Returns Jacobian of mapping from Lagrangian to local coordinates.
@@ -3752,7 +3752,7 @@ namespace oomph
                               DShape& dpsidxi,
                               DShape& d2psidxi) const;
 
-    /// \short Return  the geometric shape functions and also first
+    ///  Return  the geometric shape functions and also first
     /// and second derivatives w.r.t. Lagrangian coordinates at
     /// the ipt-th integration point.
     /// Returns Jacobian of mapping from Lagrangian to local coordinates.
@@ -3776,7 +3776,7 @@ namespace oomph
                                               DShape& dpsidxi,
                                               DShape& d2psidxi) const;
 
-    /// \short Return the number of Lagrangian coordinates that the
+    ///  Return the number of Lagrangian coordinates that the
     /// element requires at all nodes.
     /// This is by default the elemental dimension. If we ever need any
     /// other case, it can be implemented.
@@ -3785,7 +3785,7 @@ namespace oomph
       return Lagrangian_dimension;
     }
 
-    /// \short Return the number of types of (generalised)
+    ///  Return the number of types of (generalised)
     /// nodal Lagrangian coordinates required to
     /// interpolate the Lagrangian coordinates in the element. (E.g.
     /// 1 for Lagrange-type elements; 2 for Hermite beam elements;
@@ -3812,7 +3812,7 @@ namespace oomph
       return node_pt(n);
     }
 
-    ///\short  Construct the local node n and return
+    ///  Construct the local node n and return
     /// a pointer to it. Additionally, create storage for `history'
     /// values as required by timestepper
     Node* construct_node(const unsigned& n, TimeStepper* const& time_stepper_pt)
@@ -3830,7 +3830,7 @@ namespace oomph
       return node_pt(n);
     }
 
-    /// \short Construct the local node n and return a pointer to it.
+    ///  Construct the local node n and return a pointer to it.
     /// in the case when it is a boundary node; that is it MAY be
     /// located on a Mesh boundary
     Node* construct_boundary_node(const unsigned& n)
@@ -3848,7 +3848,7 @@ namespace oomph
       return node_pt(n);
     }
 
-    ///\short  Construct the local node n and return
+    ///  Construct the local node n and return
     /// a pointer to it, in the case when the node MAY be located
     /// on a boundary. Additionally, create storage for `history'
     /// values as required by timestepper
@@ -3868,7 +3868,7 @@ namespace oomph
       return node_pt(n);
     }
 
-    /// \short Overload assign_all_generic_local_equation numbers to
+    ///  Overload assign_all_generic_local_equation numbers to
     /// include the data associated with solid dofs.
     /// It remains virtual so that it can be overloaded
     /// by RefineableSolidElements. If the boolean argument is true
@@ -3883,7 +3883,7 @@ namespace oomph
       assign_solid_local_eqn_numbers(store_local_dof_pt);
     }
 
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -3894,14 +3894,14 @@ namespace oomph
     void describe_local_dofs(std::ostream& out,
                              const std::string& current_string) const;
 
-    /// \short Return i-th Lagrangian coordinate at local node n without using
+    ///  Return i-th Lagrangian coordinate at local node n without using
     /// the hanging representation
     double raw_lagrangian_position(const unsigned& n, const unsigned& i) const
     {
       return static_cast<SolidNode*>(node_pt(n))->xi(i);
     }
 
-    /// \short Return Generalised Lagrangian coordinate at local node n.
+    ///  Return Generalised Lagrangian coordinate at local node n.
     /// `Direction' i, `Type' k. Does not use the hanging node representation
     double raw_lagrangian_position_gen(const unsigned& n,
                                        const unsigned& k,
@@ -3916,7 +3916,7 @@ namespace oomph
       return static_cast<SolidNode*>(node_pt(n))->lagrangian_position(i);
     }
 
-    /// \short Return Generalised Lagrangian coordinate at local node n.
+    ///  Return Generalised Lagrangian coordinate at local node n.
     /// `Direction' i, `Type' k.
     double lagrangian_position_gen(const unsigned& n,
                                    const unsigned& k,
@@ -3925,22 +3925,22 @@ namespace oomph
       return static_cast<SolidNode*>(node_pt(n))->lagrangian_position_gen(k, i);
     }
 
-    /// \short Return i-th FE-interpolated Lagrangian coordinate xi[i] at
+    ///  Return i-th FE-interpolated Lagrangian coordinate xi[i] at
     /// local coordinate s.
     virtual double interpolated_xi(const Vector<double>& s,
                                    const unsigned& i) const;
 
-    /// \short Compute FE interpolated Lagrangian coordinate vector xi[] at
+    ///  Compute FE interpolated Lagrangian coordinate vector xi[] at
     /// local coordinate s as Vector
     virtual void interpolated_xi(const Vector<double>& s,
                                  Vector<double>& xi) const;
 
-    /// \short Compute derivatives of FE-interpolated Lagrangian coordinates xi
+    ///  Compute derivatives of FE-interpolated Lagrangian coordinates xi
     /// with respect to local coordinates: dxids[i][j]=dxi_i/ds_j.
     virtual void interpolated_dxids(const Vector<double>& s,
                                     DenseMatrix<double>& dxids) const;
 
-    /// \short Return the Jacobian of mapping from local to Lagrangian
+    ///  Return the Jacobian of mapping from local to Lagrangian
     /// coordinates at local position s.  NOT YET IMPLEMENTED
     virtual void J_lagrangian(const Vector<double>& s) const
     {
@@ -3950,7 +3950,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Return the Jacobian of the mapping from local to Lagrangian
+    ///  Return the Jacobian of the mapping from local to Lagrangian
     /// coordinates at the ipt-th integration point. NOT YET IMPLEMENTED
     virtual double J_lagrangian_at_knot(const unsigned& ipt) const
     {
@@ -3960,13 +3960,13 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Pointer to object that describes the initial condition.
+    ///  Pointer to object that describes the initial condition.
     SolidInitialCondition*& solid_ic_pt()
     {
       return Solid_ic_pt;
     }
 
-    /// \short Set to alter the problem being solved when
+    ///  Set to alter the problem being solved when
     /// assigning the initial conditions for time-dependent problems:
     /// solve for the history value that
     /// corresponds to the acceleration in the Newmark scheme by demanding
@@ -3977,13 +3977,13 @@ namespace oomph
       Solve_for_consistent_newmark_accel_flag = true;
     }
 
-    /// \short Set to reset the problem being solved to be the standard problem
+    ///  Set to reset the problem being solved to be the standard problem
     void disable_solve_for_consistent_newmark_accel()
     {
       Solve_for_consistent_newmark_accel_flag = false;
     }
 
-    /// \short Access function: Pointer to multiplicator function for assignment
+    ///  Access function: Pointer to multiplicator function for assignment
     /// of consistent assignement of initial conditions for Newmark scheme
     MultiplierFctPt& multiplier_fct_pt()
     {
@@ -3991,7 +3991,7 @@ namespace oomph
     }
 
 
-    /// \short Access function: Pointer to multiplicator function for assignment
+    ///  Access function: Pointer to multiplicator function for assignment
     /// of consistent assignement of initial conditions for Newmark scheme
     /// (const version)
     MultiplierFctPt multiplier_fct_pt() const
@@ -4000,7 +4000,7 @@ namespace oomph
     }
 
 
-    /// \short Compute the residuals for the setup of an initial condition.
+    ///  Compute the residuals for the setup of an initial condition.
     /// The global equations are:
     /// \f[
     /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n)
@@ -4020,7 +4020,7 @@ namespace oomph
       fill_in_residuals_for_solid_ic(residuals);
     }
 
-    /// \short Fill in the residuals for the setup of an initial condition.
+    ///  Fill in the residuals for the setup of an initial condition.
     /// The global equations are:
     /// \f[
     /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n)
@@ -4042,7 +4042,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    /// \short Fill in the residuals and Jacobian for the setup of an
+    ///  Fill in the residuals and Jacobian for the setup of an
     /// initial condition. The global equations are:
     /// \f[
     /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n)
@@ -4064,18 +4064,18 @@ namespace oomph
     }
 
 
-    /// \short Fill in the contributions of the Jacobian matrix
+    ///  Fill in the contributions of the Jacobian matrix
     /// for the consistent assignment of the initial "accelerations" in
     /// Newmark scheme. In this case the Jacobian is the mass matrix.
     void fill_in_jacobian_for_newmark_accel(DenseMatrix<double>& jacobian);
 
 
-    /// \short Calculate the L2 norm of the displacement u=R-r to overload the
+    ///  Calculate the L2 norm of the displacement u=R-r to overload the
     /// compute_norm function in the GeneralisedElement base class
     void compute_norm(double& el_norm);
 
   protected:
-    /// \short Helper function to fill in the residuals and (if flag==1) the
+    ///  Helper function to fill in the residuals and (if flag==1) the
     /// Jacobian for the setup of an initial condition. The global equations
     /// are: \f[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk}
     /// \psi_{jk}(\xi_n)
@@ -4093,7 +4093,7 @@ namespace oomph
                                                DenseMatrix<double>& jacobian,
                                                const unsigned& flag);
 
-    /// \short Set the number of types required to interpolate the
+    ///  Set the number of types required to interpolate the
     /// Lagrangian coordinates
     void set_nnodal_lagrangian_type(const unsigned& nlagrangian_type)
     {
@@ -4103,7 +4103,7 @@ namespace oomph
     /// Pointer to the element's "undeformed" macro element (NULL by default)
     MacroElement* Undeformed_macro_elem_pt;
 
-    /// \short Calculate the mapping from local to lagrangian coordinates,
+    ///  Calculate the mapping from local to lagrangian coordinates,
     /// given the derivatives of the shape functions w.r.t. local coorindates.
     /// Return the determinant of the jacobian, the jacobian  and inverse
     /// jacobian
@@ -4118,7 +4118,7 @@ namespace oomph
       return invert_jacobian_mapping(jacobian, inverse_jacobian);
     }
 
-    /// \short Calculate the mapping from local to lagrangian coordinates,
+    ///  Calculate the mapping from local to lagrangian coordinates,
     /// given the derivatives of the shape functions w.r.t. local coordinates,
     /// Return only the determinant of the jacobian and the inverse of the
     /// mapping (ds/dx)
@@ -4133,7 +4133,7 @@ namespace oomph
       return local_to_lagrangian_mapping(dpsids, jacobian, inverse_jacobian);
     }
 
-    /// \short Calculate the mapping from local to Lagrangian coordinates given
+    ///  Calculate the mapping from local to Lagrangian coordinates given
     /// the derivatives of the shape functions w.r.t the local coorindates.
     /// assuming that the coordinates are aligned in the direction of the local
     /// coordinates, i.e. there are no cross terms and the jacobian is diagonal.
@@ -4145,21 +4145,21 @@ namespace oomph
       DenseMatrix<double>& inverse_jacobian) const;
 
 
-    /// \short Assigns local equation numbers for the generic solid
+    ///  Assigns local equation numbers for the generic solid
     /// local equation numbering schemes.
     /// If the boolean flag is true the the degrees of freedom are stored in
     /// Dof_pt
     virtual void assign_solid_local_eqn_numbers(const bool& store_local_dof);
 
-    /// \short Classifies dofs locally for solid specific aspects.
+    ///  Classifies dofs locally for solid specific aspects.
     void describe_solid_local_dofs(std::ostream& out,
                                    const std::string& current_string) const;
 
-    /// \short Pointer to object that specifies the initial condition
+    ///  Pointer to object that specifies the initial condition
     SolidInitialCondition* Solid_ic_pt;
 
   public:
-    /// \short Access function that returns the local equation number that
+    ///  Access function that returns the local equation number that
     /// corresponds to the j-th coordinate of the k-th position-type at the
     /// n-th local node.
     inline int position_local_eqn(const unsigned& n,
@@ -4207,7 +4207,7 @@ namespace oomph
     }
 
   protected:
-    /// \short Overload the fill_in_contribution_to_jacobian() function to
+    ///  Overload the fill_in_contribution_to_jacobian() function to
     /// use finite
     /// differences to calculate the solid residuals by default
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -4241,14 +4241,14 @@ namespace oomph
     }
 
 
-    /// \short Use finite differences to calculate the Jacobian entries
+    ///  Use finite differences to calculate the Jacobian entries
     /// corresponding to the solid positions. This version assumes
     /// that the residuals vector has already been computed
     virtual void fill_in_jacobian_from_solid_position_by_fd(
       Vector<double>& residuals, DenseMatrix<double>& jacobian);
 
 
-    /// \short Use finite differences to calculate the Jacobian entries
+    ///  Use finite differences to calculate the Jacobian entries
     /// corresponding to the solid positions.
     void fill_in_jacobian_from_solid_position_by_fd(
       DenseMatrix<double>& jacobian)
@@ -4262,22 +4262,22 @@ namespace oomph
       fill_in_jacobian_from_solid_position_by_fd(residuals, jacobian);
     }
 
-    /// \short Function that is called before the finite differencing of
+    ///  Function that is called before the finite differencing of
     /// any solid position data. This may be overloaded to update any dependent
     /// data before finite differencing takes place.
     virtual inline void update_before_solid_position_fd() {}
 
-    /// \short Function that is call after the finite differencing of
+    ///  Function that is call after the finite differencing of
     /// the solid position data. This may be overloaded to reset any dependent
     /// variables that may have changed during the finite differencing.
     virtual inline void reset_after_solid_position_fd() {}
 
-    /// \short Function called within the finite difference loop for
+    ///  Function called within the finite difference loop for
     /// the solid position dat after a change in any values in the n-th
     ///  node.
     virtual inline void update_in_solid_position_fd(const unsigned& i) {}
 
-    /// \short Function called within the finite difference loop for
+    ///  Function called within the finite difference loop for
     /// solid position data after the values in the i-th node
     /// are reset. The default behaviour is to call the update function.
     virtual inline void reset_in_solid_position_fd(const unsigned& i)
@@ -4287,32 +4287,32 @@ namespace oomph
 
 
   private:
-    /// \short Assemble the jacobian matrix for the mapping from local
+    ///  Assemble the jacobian matrix for the mapping from local
     /// to lagrangian coordinates, given the derivatives of the shape function
     virtual void assemble_local_to_lagrangian_jacobian(
       const DShape& dpsids, DenseMatrix<double>& jacobian) const;
 
 
-    /// \short Assemble the the "jacobian" matrix of second derivatives, given
+    ///  Assemble the the "jacobian" matrix of second derivatives, given
     /// the second derivatives of the shape functions w.r.t. local coordinates
     virtual void assemble_local_to_lagrangian_jacobian2(
       const DShape& d2psids, DenseMatrix<double>& jacobian2) const;
 
-    /// \short Pointer to function that computes the "multiplier" for the
+    ///  Pointer to function that computes the "multiplier" for the
     /// inertia terms in the consistent determination of the initial
     /// conditions for Newmark timestepping.
     MultiplierFctPt Multiplier_fct_pt;
 
-    /// \short Array to hold the local equation number information for the
+    ///  Array to hold the local equation number information for the
     /// solid equations, whatever they may be.
     // ALH: (This is here so that the numbering can be done automatically)
     int* Position_local_eqn;
 
-    /// \short The Lagrangian dimension of the nodes stored in the element,
+    ///  The Lagrangian dimension of the nodes stored in the element,
     //// i.e. the number of Lagrangian coordinates
     unsigned Lagrangian_dimension;
 
-    /// \short The number of coordinate types requried to intepolate the
+    ///  The number of coordinate types requried to intepolate the
     /// Lagrangian coordinates in the element.  For Lagrange elements
     /// it is 1 (the default). It must be over-ridden by using
     /// the set_nlagrangian_type() function in the constructors of elements
@@ -4321,7 +4321,7 @@ namespace oomph
     unsigned Nnodal_lagrangian_type;
 
   protected:
-    /// \short Flag to indicate which system of equations to solve
+    ///  Flag to indicate which system of equations to solve
     /// when assigning initial conditions for time-dependent problems.
     /// If true, solve for the history value that
     /// corresponds to the acceleration in the Newmark scheme by demanding
@@ -4330,7 +4330,7 @@ namespace oomph
     bool Solve_for_consistent_newmark_accel_flag;
 
   private:
-    /// \short Access to the "multiplier" for the
+    ///  Access to the "multiplier" for the
     /// inertia terms in the consistent determination of the initial
     /// conditions for Newmark timestepping.
     inline double multiplier(const Vector<double>& xi)
@@ -4364,12 +4364,12 @@ namespace oomph
   //========================================================================
   class FaceElement : public virtual FiniteElement
   {
-    /// \short Typedef for the function that translates the face coordinate
+    ///  Typedef for the function that translates the face coordinate
     /// to the coordinate in the bulk element
     typedef void (*CoordinateMappingFctPt)(const Vector<double>& s,
                                            Vector<double>& s_bulk);
 
-    /// \short Typedef for the function that returns the partial derivative
+    ///  Typedef for the function that returns the partial derivative
     /// of the local coordinates in the bulk element
     /// with respect to the coordinates along the face.
     /// In addition this function returns an index of one of the
@@ -4380,15 +4380,15 @@ namespace oomph
       unsigned& interior_direction);
 
   private:
-    /// \short Pointer to a function that translates the face coordinate
+    ///  Pointer to a function that translates the face coordinate
     /// to the coordinate in the bulk element
     CoordinateMappingFctPt Face_to_bulk_coordinate_fct_pt;
 
-    /// \short Pointer to a function that returns the derivatives of the local
+    ///  Pointer to a function that returns the derivatives of the local
     /// "bulk" coordinates with respect to the local face coordinates.
     BulkCoordinateDerivativesFctPt Bulk_coordinate_derivatives_fct_pt;
 
-    /// \short Vector holding integers to translate additional position types
+    ///  Vector holding integers to translate additional position types
     /// to those of the "bulk" element; e.g. Bulk_position_type(1) is
     /// the position type of the "bulk" element that corresponds to face
     /// position type 1. This is required in QHermiteElements, where the slope
@@ -4397,14 +4397,14 @@ namespace oomph
     /// we are located.
     Vector<unsigned> Bulk_position_type;
 
-    /// \short Sign of outer unit normal (relative to cross-products of tangent
+    ///  Sign of outer unit normal (relative to cross-products of tangent
     /// vectors in the corresponding "bulk" element.
     int Normal_sign;
 
-    /// \short Index of the face
+    ///  Index of the face
     int Face_index;
 
-    /// \short Ignores the warning when the tangent vectors from
+    ///  Ignores the warning when the tangent vectors from
     /// continuous_tangent_and_outer_unit_normal may not be continuous
     /// as a result of the unit normal being aligned with the z axis.
     /// This can be avoided by supplying a general direction vector for
@@ -4417,20 +4417,20 @@ namespace oomph
 
 #ifdef PARANOID
 
-    /// \short Has the Boundary_number_in_bulk_mesh been set? Only included if
+    ///  Has the Boundary_number_in_bulk_mesh been set? Only included if
     /// compiled with PARANOID switched on.
     bool Boundary_number_in_bulk_mesh_has_been_set;
 
 #endif
 
-    /// \short Pointer to the associated higher-dimensional "bulk" element
+    ///  Pointer to the associated higher-dimensional "bulk" element
     FiniteElement* Bulk_element_pt;
 
-    /// \short List of indices of the local node numbers in the "bulk" element
+    ///  List of indices of the local node numbers in the "bulk" element
     /// that correspond to the local node numbers in the FaceElement
     Vector<unsigned> Bulk_node_number;
 
-    /// \short A vector that will hold the number of data values at the nodes
+    ///  A vector that will hold the number of data values at the nodes
     /// that are associated with the "bulk" element. i.e. not including any
     /// additional degrees of freedom that might be required for extra equations
     /// that are being solved by
@@ -4440,14 +4440,14 @@ namespace oomph
     // the face!
     Vector<unsigned> Nbulk_value;
 
-    /// \short A general direction pointer for the tangent vectors.
+    ///  A general direction pointer for the tangent vectors.
     /// This is used in the function continuous_tangent_and_outer_unit_normal()
     /// for creating continuous tangent vectors in spatial dimensions.
     /// The general direction is projected on to the surface. This technique is
     /// not required in two spatial dimensions.
     Vector<double>* Tangent_direction_pt;
 
-    /// \short Helper function adding additional values for the unknowns
+    ///  Helper function adding additional values for the unknowns
     /// associated with the FaceElement. This function also sets the map
     /// containing the position of the first entry of this face element's
     /// additional values.The inputs are the number of additional values
@@ -4515,7 +4515,7 @@ namespace oomph
 #endif
     }
 
-    /// \short In a FaceElement, the "global" intrinsic coordinate
+    ///  In a FaceElement, the "global" intrinsic coordinate
     /// of the element along the boundary, when viewed as part of
     /// a compound geometric object is specified using the
     /// boundary coordinate defined by the mesh.
@@ -4537,21 +4537,21 @@ namespace oomph
       return zeta[i];
     }
 
-    /// \short Return the Jacobian of mapping from local to global
+    ///  Return the Jacobian of mapping from local to global
     /// coordinates at local position s.
     /// Overloaded from FiniteElement.
     double J_eulerian(const Vector<double>& s) const;
 
-    /// \short Return the Jacobian of the mapping from local to global
+    ///  Return the Jacobian of the mapping from local to global
     /// coordinates at the ipt-th integration point
     /// Overloaded from FiniteElement.
     double J_eulerian_at_knot(const unsigned& ipt) const;
 
-    /// \short Check that Jacobian of mapping between local and Eulerian
+    ///  Check that Jacobian of mapping between local and Eulerian
     /// coordinates at all integration points is positive.
     void check_J_eulerian_at_knots(bool& passed) const;
 
-    /// \short Return FE interpolated coordinate x[i] at local coordinate s.
+    ///  Return FE interpolated coordinate x[i] at local coordinate s.
     /// Overloaded to get information from bulk.
     double interpolated_x(const Vector<double>& s, const unsigned& i) const
     {
@@ -4563,7 +4563,7 @@ namespace oomph
       return bulk_element_pt()->interpolated_x(s_bulk, i);
     }
 
-    ///\short Return FE interpolated coordinate x[i] at local coordinate s
+    /// Return FE interpolated coordinate x[i] at local coordinate s
     /// at previous timestep t (t=0: present; t>0: previous timestep).
     /// Overloaded to get information from bulk.
     double interpolated_x(const unsigned& t,
@@ -4578,7 +4578,7 @@ namespace oomph
       return bulk_element_pt()->interpolated_x(t, s_bulk, i);
     }
 
-    /// \short Return FE interpolated position x[] at local coordinate s as
+    ///  Return FE interpolated position x[] at local coordinate s as
     /// Vector Overloaded to get information from bulk.
     void interpolated_x(const Vector<double>& s, Vector<double>& x) const
     {
@@ -4590,7 +4590,7 @@ namespace oomph
       bulk_element_pt()->interpolated_x(s_bulk, x);
     }
 
-    /// \short Return FE interpolated position x[] at local coordinate s
+    ///  Return FE interpolated position x[] at local coordinate s
     /// at previous timestep t as Vector (t=0: present; t>0: previous timestep).
     /// Overloaded to get information from bulk.
     void interpolated_x(const unsigned& t,
@@ -4605,7 +4605,7 @@ namespace oomph
       bulk_element_pt()->interpolated_x(t, s_bulk, x);
     }
 
-    /// \short Return t-th time-derivative of the
+    ///  Return t-th time-derivative of the
     /// i-th FE-interpolated Eulerian coordinate at
     /// local coordinate s. Overloaded to get information from bulk.
     double interpolated_dxdt(const Vector<double>& s,
@@ -4620,7 +4620,7 @@ namespace oomph
       return bulk_element_pt()->interpolated_dxdt(s_bulk, i, t);
     }
 
-    /// \short Compte t-th time-derivative of the
+    ///  Compte t-th time-derivative of the
     /// FE-interpolated Eulerian coordinate vector at
     /// local coordinate s.  Overloaded to get information from bulk.
     void interpolated_dxdt(const Vector<double>& s,
@@ -4635,41 +4635,41 @@ namespace oomph
       bulk_element_pt()->interpolated_dxdt(s_bulk, t, dxdt);
     }
 
-    /// \short Sign of outer unit normal (relative to cross-products of tangent
+    ///  Sign of outer unit normal (relative to cross-products of tangent
     /// vectors in the corresponding "bulk" element.
     int& normal_sign()
     {
       return Normal_sign;
     }
 
-    /// \short Return sign of outer unit normal (relative to cross-products
+    ///  Return sign of outer unit normal (relative to cross-products
     /// of tangent vectors in the corresponding "bulk" element. (const version)
     int normal_sign() const
     {
       return Normal_sign;
     }
 
-    /// \short Index of the face (a number that uniquely identifies the face
+    ///  Index of the face (a number that uniquely identifies the face
     /// in the element)
     int& face_index()
     {
       return Face_index;
     }
 
-    /// \short Index of the face (a number that uniquely identifies the face
+    ///  Index of the face (a number that uniquely identifies the face
     /// in the element) (const version)
     int face_index() const
     {
       return Face_index;
     }
 
-    /// \short Public access function for the tangent direction pointer.
+    ///  Public access function for the tangent direction pointer.
     const Vector<double>* tangent_direction_pt() const
     {
       return Tangent_direction_pt;
     }
 
-    /// \short Set the tangent direction vector.
+    ///  Set the tangent direction vector.
     void set_tangent_direction(Vector<double>* tangent_direction_pt)
     {
 #ifdef PARANOID
@@ -4716,21 +4716,21 @@ namespace oomph
       Tangent_direction_pt = tangent_direction_pt;
     }
 
-    /// \short Turn on warning for when there may be discontinuous tangent
+    ///  Turn on warning for when there may be discontinuous tangent
     /// vectors from continuous_tangent_and_outer_unit_normal(...)
     void turn_on_warning_for_discontinuous_tangent()
     {
       FaceElement::Ignore_discontinuous_tangent_warning = true;
     }
 
-    /// \short Turn off warning for when there may be discontinuous tangent
+    ///  Turn off warning for when there may be discontinuous tangent
     /// vectors from continuous_tangent_and_outer_unit_normal(...)
     void turn_off_warning_for_discontinuous_tangent()
     {
       FaceElement::Ignore_discontinuous_tangent_warning = false;
     }
 
-    /// \short Compute the tangent vector(s) and the outer unit normal
+    ///  Compute the tangent vector(s) and the outer unit normal
     /// vector at the specified local coordinate.
     /// In two spatial dimensions, a "tangent direction" is not required.
     /// In three spatial dimensions, a tangent direction is required
@@ -4742,7 +4742,7 @@ namespace oomph
       Vector<Vector<double>>& tang_vec,
       Vector<double>& unit_normal) const;
 
-    /// \short Compute the tangent vector(s) and the outer unit normal
+    ///  Compute the tangent vector(s) and the outer unit normal
     /// vector at the ipt-th integration point. This is a wrapper around
     /// continuous_tangent_and_outer_unit_normal(...) with the integration
     /// points converted into local coordinates.
@@ -4751,11 +4751,11 @@ namespace oomph
       Vector<Vector<double>>& tang_vec,
       Vector<double>& unit_normal) const;
 
-    /// \short Compute outer unit normal at the specified local coordinate
+    ///  Compute outer unit normal at the specified local coordinate
     void outer_unit_normal(const Vector<double>& s,
                            Vector<double>& unit_normal) const;
 
-    /// \short Compute outer unit normal at ipt-th integration point
+    ///  Compute outer unit normal at ipt-th integration point
     void outer_unit_normal(const unsigned& ipt,
                            Vector<double>& unit_normal) const;
 
@@ -4778,14 +4778,14 @@ namespace oomph
 #pragma clang diagnostic ignored "-Woverloaded-virtual"
 #endif
 
-    /// \short Return the pointer to the function that maps the face
+    ///  Return the pointer to the function that maps the face
     /// coordinate to the bulk coordinate
     CoordinateMappingFctPt& face_to_bulk_coordinate_fct_pt()
     {
       return Face_to_bulk_coordinate_fct_pt;
     }
 
-    /// \short Return the pointer to the function that maps the face
+    ///  Return the pointer to the function that maps the face
     /// coordinate to the bulk coordinate (const version)
     CoordinateMappingFctPt face_to_bulk_coordinate_fct_pt() const
     {
@@ -4793,14 +4793,14 @@ namespace oomph
     }
 
 
-    /// \short Return the pointer to the function that returns the derivatives
+    ///  Return the pointer to the function that returns the derivatives
     /// of the bulk coordinates wrt the face coordinates
     BulkCoordinateDerivativesFctPt& bulk_coordinate_derivatives_fct_pt()
     {
       return Bulk_coordinate_derivatives_fct_pt;
     }
 
-    /// \short Return the pointer to the function that returns the derivatives
+    ///  Return the pointer to the function that returns the derivatives
     /// of the bulk coordinates wrt the face coordinates (const version)
     BulkCoordinateDerivativesFctPt bulk_coordinate_derivatives_fct_pt() const
     {
@@ -4811,16 +4811,16 @@ namespace oomph
 #pragma clang diagnostic pop
 #endif
 
-    /// \short Return vector of local coordinates in bulk element,
+    ///  Return vector of local coordinates in bulk element,
     /// given the local coordinates in this FaceElement
     Vector<double> local_coordinate_in_bulk(const Vector<double>& s) const;
 
-    /// \short Calculate the vector of local coordinate in the bulk element
+    ///  Calculate the vector of local coordinate in the bulk element
     /// given the local coordinates in this FaceElement
     void get_local_coordinate_in_bulk(const Vector<double>& s,
                                       Vector<double>& s_bulk) const;
 
-    /// \short Calculate the derivatives of the local coordinates in the
+    ///  Calculate the derivatives of the local coordinates in the
     /// bulk element with respect to the local coordinates in this FaceElement.
     /// In addition return the index of a bulk local coordinate that varies away
     /// from the face.
@@ -4828,54 +4828,54 @@ namespace oomph
                              DenseMatrix<double>& dsbulk_dsface,
                              unsigned& interior_direction) const;
 
-    /// \short Return the position type in the "bulk" element that corresponds
+    ///  Return the position type in the "bulk" element that corresponds
     /// to position type i on the FaceElement.
     unsigned& bulk_position_type(const unsigned& i)
     {
       return Bulk_position_type[i];
     }
 
-    /// \short Return the position type in the "bulk" element that corresponds
+    ///  Return the position type in the "bulk" element that corresponds
     /// to the position type i on the FaceElement. Const version
     const unsigned& bulk_position_type(const unsigned& i) const
     {
       return Bulk_position_type[i];
     }
 
-    /// \short Resize the storage for the bulk node numbers
+    ///  Resize the storage for the bulk node numbers
     void bulk_node_number_resize(const unsigned& i)
     {
       Bulk_node_number.resize(i);
     }
 
-    /// \short Return the bulk node number that corresponds to the n-th
+    ///  Return the bulk node number that corresponds to the n-th
     /// local node number
     unsigned& bulk_node_number(const unsigned& n)
     {
       return Bulk_node_number[n];
     }
 
-    /// \short Return the bulk node number that corresponds to the n-th
+    ///  Return the bulk node number that corresponds to the n-th
     /// local node number (const version)
     const unsigned& bulk_node_number(const unsigned& n) const
     {
       return Bulk_node_number[n];
     }
 
-    /// \short Resize the storage for bulk_position_type to i entries.
+    ///  Resize the storage for bulk_position_type to i entries.
     void bulk_position_type_resize(const unsigned& i)
     {
       Bulk_position_type.resize(i);
     }
 
-    /// \short Return the number of values originally stored at local node n
+    ///  Return the number of values originally stored at local node n
     /// (before the FaceElement added additional values to it (if it did))
     unsigned& nbulk_value(const unsigned& n)
     {
       return Nbulk_value[n];
     }
 
-    /// \short Return the number of values originally stored at local node n
+    ///  Return the number of values originally stored at local node n
     /// (before the FaceElement added additional values to it (if it did))
     /// (const version)
     unsigned nbulk_value(const unsigned& n) const
@@ -4883,14 +4883,14 @@ namespace oomph
       return Nbulk_value[n];
     }
 
-    /// \short  Resize the storage for the number of values originally
+    ///   Resize the storage for the number of values originally
     /// stored at the local nodes to i entries.
     void nbulk_value_resize(const unsigned& i)
     {
       Nbulk_value.resize(i);
     }
 
-    /// \short Provide additional storage for a specified number of
+    ///  Provide additional storage for a specified number of
     /// values at the nodes of the FaceElement. (This is needed, for
     /// instance, in free-surface elements, if the non-penetration
     /// condition is imposed by Lagrange multipliers whose values
@@ -4941,7 +4941,7 @@ namespace oomph
                            public virtual SolidFiniteElement
   {
   public:
-    /// \short The "global" intrinsic coordinate of the element when
+    ///  The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     /// This final over-ride is required because both SolidFiniteElements
@@ -4954,7 +4954,7 @@ namespace oomph
     }
 
 
-    /// \short Return i-th FE-interpolated Lagrangian coordinate xi[i] at
+    ///  Return i-th FE-interpolated Lagrangian coordinate xi[i] at
     /// local coordinate s. Overloaded from SolidFiniteElement. Note that
     /// the Lagrangian coordinates are those defined in the bulk!
     /// For instance, in a 1D FaceElement that is aligned with
@@ -4974,7 +4974,7 @@ namespace oomph
     }
 
 
-    /// \short Compute FE interpolated Lagrangian coordinate vector xi[] at
+    ///  Compute FE interpolated Lagrangian coordinate vector xi[] at
     /// local coordinate s as Vector. Overloaded from SolidFiniteElement. Note
     /// that the Lagrangian coordinates are those defined in the bulk!
     /// For instance, in a 1D FaceElement that is aligned with
@@ -5041,7 +5041,7 @@ namespace oomph
                            public virtual FaceElement
   {
   public:
-    /// \short Constructor, which takes a "bulk" element and the
+    ///  Constructor, which takes a "bulk" element and the
     /// face index
     DummyFaceElement(FiniteElement* const& element_pt, const int& face_index)
       : FaceGeometry<ELEMENT>(), FaceElement()
@@ -5052,11 +5052,11 @@ namespace oomph
     }
 
 
-    /// \short Constructor
+    ///  Constructor
     DummyFaceElement() : FaceGeometry<ELEMENT>(), FaceElement() {}
 
 
-    /// \short The "global" intrinsic coordinate of the element when
+    ///  The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     double zeta_nodal(const unsigned& n,
@@ -5121,7 +5121,7 @@ namespace oomph
     /// Empty virtual destructor
     virtual ~ElementWithDragFunction() {}
 
-    /// \short Function that specifies the drag force and the torque about
+    ///  Function that specifies the drag force and the torque about
     /// the origin
     virtual void get_drag_and_torque(Vector<double>& drag_force,
                                      Vector<double>& drag_torque) = 0;
@@ -5146,7 +5146,7 @@ namespace oomph
   class FreeStandingFaceElement : public virtual FaceGeometry<ELEMENT>
   {
   public:
-    /// \short Constructor
+    ///  Constructor
     FreeStandingFaceElement()
       : FaceGeometry<ELEMENT>(), Boundary_number_in_bulk_mesh(0)
     {
@@ -5172,7 +5172,7 @@ namespace oomph
 #endif
     }
 
-    /// \short In a FaceElement, the "global" intrinsic coordinate
+    ///  In a FaceElement, the "global" intrinsic coordinate
     /// of the element along the boundary, when viewed as part of
     /// a compound geometric object is specified using the
     /// boundary coordinate defined by the mesh.
@@ -5200,7 +5200,7 @@ namespace oomph
 
 #ifdef PARANOID
 
-    /// \short Has the Boundary_number_in_bulk_mesh been set? Only included if
+    ///  Has the Boundary_number_in_bulk_mesh been set? Only included if
     /// compiled with PARANOID switched on.
     bool Boundary_number_in_bulk_mesh_has_been_set;
 
@@ -5233,7 +5233,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const SolidElementWithDiagonalMassMatrix&) = delete;
 
-    /// \short Get the diagonal of whatever represents the mass matrix
+    ///  Get the diagonal of whatever represents the mass matrix
     /// in the specific preconditionable element. For Navier-Stokes
     /// elements this is the velocity mass matrix; for incompressible solids
     /// it's the mass matrix; ...
@@ -5271,7 +5271,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const NavierStokesElementWithDiagonalMassMatrices&) = delete;
 
-    /// \short Compute the diagonal of the velocity/pressure mass matrices.
+    ///  Compute the diagonal of the velocity/pressure mass matrices.
     /// If which one=0, both are computed, otherwise only the pressure
     /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
     /// LSC version of the preconditioner only needs that one)

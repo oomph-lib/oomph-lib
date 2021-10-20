@@ -57,32 +57,32 @@ namespace oomph
   class PVDEquationsBase : public virtual SolidFiniteElement
   {
   private:
-    /// \short Static "magic" number that indicates that the solid pressure
+    ///  Static "magic" number that indicates that the solid pressure
     /// is not stored at a node
     static int Solid_pressure_not_stored_at_node;
 
   public:
-    /// \short Function pointer to function that specifies the isotropic
+    ///  Function pointer to function that specifies the isotropic
     /// growth as a function of the Lagrangian coordinates FCT(xi,gamma(xi)) --
     /// xi is a Vector!
     typedef void (*IsotropicGrowthFctPt)(const Vector<double>& xi,
                                          double& gamma);
 
-    /// \short Function pointer to function that specifies the pre-stress
+    ///  Function pointer to function that specifies the pre-stress
     /// sigma_0(i,j) as a function of the Lagrangian coordinates
     /// FCT(i,j,xi) --  xi is a Vector!
     typedef double (*PrestressFctPt)(const unsigned& i,
                                      const unsigned& j,
                                      const Vector<double>& xi);
 
-    /// \short Function pointer to function that specifies the body force
+    ///  Function pointer to function that specifies the body force
     /// as a function of the Lagrangian coordinates and time FCT(t,xi,b) --
     /// xi and b are  Vectors!
     typedef void (*BodyForceFctPt)(const double& t,
                                    const Vector<double>& xi,
                                    Vector<double>& b);
 
-    /// \short Constructor: Set null pointers for constitutive law and for
+    ///  Constructor: Set null pointers for constitutive law and for
     /// isotropic growth function. Set physical parameter values to
     /// default values, enable inertia and set body force to zero.
     /// Default evaluation of Jacobian: analytically rather than by FD.
@@ -166,21 +166,21 @@ namespace oomph
       return Unsteady;
     }
 
-    /// \short Return the number of solid pressure degrees of freedom
+    ///  Return the number of solid pressure degrees of freedom
     /// Default is that there are no solid pressures
     virtual unsigned npres_solid() const
     {
       return 0;
     }
 
-    /// \short Return the local degree of freedom associated with the
+    ///  Return the local degree of freedom associated with the
     /// i-th solid pressure. Default is that there are none.
     virtual int solid_p_local_eqn(const unsigned& i) const
     {
       return -1;
     }
 
-    /// \short Return the index at which the solid pressure is stored if it
+    ///  Return the index at which the solid pressure is stored if it
     /// is stored at the nodes. If not stored at the nodes this will return
     /// a negative number.
     virtual int solid_p_nodal_index() const
@@ -189,13 +189,13 @@ namespace oomph
     }
 
 
-    /// \short Unpin all solid pressure dofs in the element
+    ///  Unpin all solid pressure dofs in the element
     virtual void unpin_elemental_solid_pressure_dofs() = 0;
 
     /// Pin the element's redundant solid pressures (needed for refinement)
     virtual void pin_elemental_redundant_nodal_solid_pressures() {}
 
-    /// \short  Loop over all elements in Vector (which typically contains
+    ///   Loop over all elements in Vector (which typically contains
     /// all the elements in a refineable solid mesh) and pin the nodal solid
     /// pressure  degrees of freedom that are not being used. Function uses
     /// the member function
@@ -217,7 +217,7 @@ namespace oomph
       }
     }
 
-    /// \short Unpin all pressure dofs in elements listed in vector.
+    ///  Unpin all pressure dofs in elements listed in vector.
     static void unpin_all_solid_pressure_dofs(
       const Vector<GeneralisedElement*>& element_pt)
     {
@@ -230,27 +230,27 @@ namespace oomph
       }
     }
 
-    /// \short Return the 2nd Piola Kirchoff stress tensor, as calculated
+    ///  Return the 2nd Piola Kirchoff stress tensor, as calculated
     /// from the constitutive law at specified local coordinate
     /// (needed by \c get_principal_stress(...), so I'm afraid I will
     /// have to insist that you implement it...
     virtual void get_stress(const Vector<double>& s,
                             DenseMatrix<double>& sigma) = 0;
 
-    /// \short Return the strain tensor
+    ///  Return the strain tensor
     void get_strain(const Vector<double>& s, DenseMatrix<double>& strain) const;
 
     /// Get potential (strain) and kinetic energy
     void get_energy(double& pot_en, double& kin_en);
 
-    /// \short Return the deformed covariant basis vectors
+    ///  Return the deformed covariant basis vectors
     /// at specified local coordinate: \c def_covariant_basis(i,j)
     /// is the j-th component of the i-th basis vector.
     void get_deformed_covariant_basis_vectors(
       const Vector<double>& s, DenseMatrix<double>& def_covariant_basis);
 
 
-    /// \short Compute principal stress vectors and (scalar) principal stresses
+    ///  Compute principal stress vectors and (scalar) principal stresses
     /// at specified local coordinate. \c  principal_stress_vector(i,j)
     /// is the j-th component of the i-th principal stress vector.
     void get_principal_stress(const Vector<double>& s,
@@ -258,7 +258,7 @@ namespace oomph
                               Vector<double>& principal_stress);
 
 
-    /// \short Evaluate isotropic growth function at Lagrangian coordinate xi
+    ///  Evaluate isotropic growth function at Lagrangian coordinate xi
     /// and/or local coordinate s.
     /// (returns 1, i.e. no growth, if no function pointer has been set)
     /// This function is virtual to allow overloading in multi-physics
@@ -282,7 +282,7 @@ namespace oomph
     }
 
 
-    /// \short Evaluate body force at Lagrangian coordinate xi at present time
+    ///  Evaluate body force at Lagrangian coordinate xi at present time
     /// (returns zero vector if no body force function pointer has been set)
     inline void body_force(const Vector<double>& xi, Vector<double>& b) const
     {
@@ -310,13 +310,13 @@ namespace oomph
     }
 
 
-    /// \short returns the number of DOF types associated with this element.
+    ///  returns the number of DOF types associated with this element.
     unsigned ndof_types() const
     {
       return DIM;
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF" that this unknown is associated with.
@@ -388,7 +388,7 @@ namespace oomph
       return Evaluate_jacobian_by_fd;
     }
 
-    /// \short Return (i,j)-th component of second Piola Kirchhoff membrane
+    ///  Return (i,j)-th component of second Piola Kirchhoff membrane
     /// prestress at Lagrangian coordinate xi
     double prestress(const unsigned& i,
                      const unsigned& j,
@@ -439,14 +439,14 @@ namespace oomph
   class PVDEquations : public virtual PVDEquationsBase<DIM>
   {
   public:
-    /// \short  Constructor
+    ///   Constructor
     PVDEquations() {}
 
-    /// \short Return the 2nd Piola Kirchoff stress tensor, as calculated
+    ///  Return the 2nd Piola Kirchoff stress tensor, as calculated
     /// from the constitutive law at specified local coordinate
     void get_stress(const Vector<double>& s, DenseMatrix<double>& sigma);
 
-    /// \short Fill in the residuals for the solid equations (the discretised
+    ///  Fill in the residuals for the solid equations (the discretised
     /// principle of virtual displacements)
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -454,7 +454,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    /// \short Fill in contribution to Jacobian (either by FD or analytically,
+    ///  Fill in contribution to Jacobian (either by FD or analytically,
     /// control this via evaluate_jacobian_by_fd()
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -524,20 +524,20 @@ namespace oomph
     void output(FILE* file_pt, const unsigned& n_plot);
 
 
-    /// \short Output: x,y,[z],xi0,xi1,[xi2],gamma and the strain and stress
+    ///  Output: x,y,[z],xi0,xi1,[xi2],gamma and the strain and stress
     /// components
     void extended_output(std::ostream& outfile, const unsigned& n_plot);
 
 
   protected:
-    /// \short Compute element residual Vector only (if flag=and/or element
+    ///  Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_contribution_to_residuals_pvd(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
       const unsigned& flag);
 
-    /// \short Return the 2nd Piola Kirchhoff stress tensor, as
+    ///  Return the 2nd Piola Kirchhoff stress tensor, as
     /// calculated from the constitutive law: Pass metric tensors in the
     /// stress free and current configurations.
     inline void get_stress(const DenseMatrix<double>& g,
@@ -562,7 +562,7 @@ namespace oomph
         g, G, sigma);
     }
 
-    /// \short Return the derivatives of the 2nd Piola Kirchhoff stress tensor,
+    ///  Return the derivatives of the 2nd Piola Kirchhoff stress tensor,
     /// as calculated from the constitutive law: Pass metric tensors in the
     /// stress free and current configurations and the current value of the
     /// the stress tensor.
@@ -733,12 +733,12 @@ namespace oomph
   class ProjectablePVDElement : public virtual ProjectableElement<PVD_ELEMENT>
   {
   public:
-    /// \short Constructor [this was only required explicitly
+    ///  Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectablePVDElement() {}
 
 
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     /// In the underlying PVD elements there are no field values
@@ -760,26 +760,26 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: 0
+    ///  Number of fields to be projected: 0
     unsigned nfields_for_projection()
     {
       return 0;
     }
 
-    /// \short Number of history values to be stored for fld-th field
+    ///  Number of history values to be stored for fld-th field
     /// (Includes the current value!). No nodal data.
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
       return 0;
     }
 
-    ///\short Number of positional history values (Includes the current value!)
+    /// Number of positional history values (Includes the current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -789,7 +789,7 @@ namespace oomph
       return this->J_eulerian(s);
     }
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,
@@ -867,7 +867,7 @@ namespace oomph
     {
     }
 
-    /// \short Return the 2nd Piola Kirchoff stress tensor, as calculated
+    ///  Return the 2nd Piola Kirchoff stress tensor, as calculated
     /// from the constitutive law at specified local coordinate
     void get_stress(const Vector<double>& s, DenseMatrix<double>& sigma);
 
@@ -907,7 +907,7 @@ namespace oomph
         0);
     }
 
-    /// \short Fill in contribution to Jacobian (either by FD or analytically,
+    ///  Fill in contribution to Jacobian (either by FD or analytically,
     /// for the positional variables; control this via
     /// evaluate_jacobian_by_fd(). Note: Jacobian entries arising from
     /// derivatives w.r.t. pressure terms are always computed analytically.
@@ -948,7 +948,7 @@ namespace oomph
       }
     }
 
-    /// \short Fill in contribution to Mass matrix and
+    ///  Fill in contribution to Mass matrix and
     /// Jacobian (either by FD or analytically,
     /// for the positional variables; control this via
     /// evaluate_jacobian_by_fd(). Note: Jacobian entries arising from
@@ -1050,23 +1050,23 @@ namespace oomph
     /// C-style output: x,y,[z],xi0,xi1,[xi2],p,gamma
     void output(FILE* file_pt, const unsigned& n_plot);
 
-    /// \short Output: x,y,[z],xi0,xi1,[xi2],gamma and the strain and stress
+    ///  Output: x,y,[z],xi0,xi1,[xi2],gamma and the strain and stress
     /// components
     void extended_output(std::ostream& outfile, const unsigned& n_plot);
 
 
-    /// \short Compute the diagonal of the displacement mass matrix for
+    ///  Compute the diagonal of the displacement mass matrix for
     /// LSC preconditioner
     void get_mass_matrix_diagonal(Vector<double>& mass_diag);
 
-    /// \short returns the number of DOF types associated with this element:
+    ///  returns the number of DOF types associated with this element:
     ///  displacement components and pressure
     unsigned ndof_types() const
     {
       return DIM + 1;
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF" that this unknown is associated with.
@@ -1137,7 +1137,7 @@ namespace oomph
     }
 
   protected:
-    /// \short Return the deviatoric part of the 2nd Piola Kirchhoff stress
+    ///  Return the deviatoric part of the 2nd Piola Kirchhoff stress
     /// tensor, as calculated from the constitutive law in the nearly
     /// incompresible formulation. Also return the contravariant
     /// deformed metric tensor, the generalised dilatation, and the
@@ -1169,7 +1169,7 @@ namespace oomph
     }
 
 
-    /// \short Return the derivative of the
+    ///  Return the derivative of the
     /// deviatoric part of the 2nd Piola Kirchhoff stress
     /// tensor, as calculated from the constitutive law in the nearly
     /// incompresible formulation. Also return the derivative of the
@@ -1236,7 +1236,7 @@ namespace oomph
     /// Boolean to determine whether the solid is incompressible or not
     bool Incompressible;
 
-    /// \short Returns the residuals for the discretised principle of
+    ///  Returns the residuals for the discretised principle of
     /// virtual displacements, formulated in the incompressible/
     /// near-incompressible case.
     /// - If flag==0, compute only the residual vector.
@@ -1249,7 +1249,7 @@ namespace oomph
       DenseMatrix<double>& mass_matrix,
       const unsigned& flag);
 
-    /// \short  Return the deviatoric part of the 2nd Piola Kirchhoff stress
+    ///   Return the deviatoric part of the 2nd Piola Kirchhoff stress
     /// tensor, as calculated from the constitutive law in the
     /// incompresible formulation. Also return the contravariant
     /// deformed metric tensor, and the
@@ -1280,7 +1280,7 @@ namespace oomph
         g, G, sigma_dev, Gcontra, detG);
     }
 
-    /// \short  Return the derivative of the 2nd Piola Kirchhoff stress
+    ///   Return the derivative of the 2nd Piola Kirchhoff stress
     /// tensor, as calculated from the constitutive law in the
     /// incompresible formulation. Also return
     /// derivative of the determinant of the deformed covariant metric tensor
@@ -1330,7 +1330,7 @@ namespace oomph
   class QPVDElementWithPressure : public virtual SolidQElement<DIM, 3>,
                                   public virtual PVDEquationsWithPressure<DIM>
   {
-    /// \short Unpin all solid pressure dofs in the element
+    ///  Unpin all solid pressure dofs in the element
     void unpin_elemental_solid_pressure_dofs()
     {
       unsigned n_pres = this->npres_solid();
@@ -1342,11 +1342,11 @@ namespace oomph
     }
 
   protected:
-    /// \short Internal index that indicates at which internal data value the
+    ///  Internal index that indicates at which internal data value the
     /// solid presure is stored
     unsigned P_solid_internal_index;
 
-    /// \short Overload the access function
+    ///  Overload the access function
     /// that is used to return local equation corresponding to the i-th
     /// solid pressure value
     inline int solid_p_local_eqn(const unsigned& i) const
@@ -1358,7 +1358,7 @@ namespace oomph
     inline void solid_pshape(const Vector<double>& s, Shape& psi) const;
 
   public:
-    /// \short There is internal solid data so we can't use the automatic
+    ///  There is internal solid data so we can't use the automatic
     /// assignment of consistent initial conditions for time-dependent problems.
     bool has_internal_solid_data()
     {
@@ -1526,7 +1526,7 @@ namespace oomph
     /// node
     static const unsigned Initial_Nvalue[];
 
-    /// \short Unpin all solid pressure dofs in the element
+    ///  Unpin all solid pressure dofs in the element
     void unpin_elemental_solid_pressure_dofs()
     {
       // find the index at which the pressure is stored
@@ -1540,11 +1540,11 @@ namespace oomph
     }
 
   protected:
-    /// \short Static array of ints to hold conversion from pressure node
+    ///  Static array of ints to hold conversion from pressure node
     /// numbers to actual node numbers
     static const unsigned Pconv[];
 
-    /// \short Overload the access function
+    ///  Overload the access function
     /// that is used to return local equation corresponding to the i-th
     /// solid pressure value
     inline int solid_p_local_eqn(const unsigned& i) const
@@ -1562,13 +1562,13 @@ namespace oomph
     {
     }
 
-    /// \short Set the value at which the solid pressure is stored in the nodes
+    ///  Set the value at which the solid pressure is stored in the nodes
     inline int solid_p_nodal_index() const
     {
       return 0;
     }
 
-    /// \short Number of values (pinned or dofs) required at node n. Can
+    ///  Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version
     inline virtual unsigned required_nvalue(const unsigned& n) const
     {
@@ -1783,26 +1783,26 @@ namespace oomph
       PVDEquations<DIM>::output(file_pt, n_plot);
     }
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return (NNODE_1D - 1);
     }
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<DIM, NNODE_1D>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
 
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -1819,7 +1819,7 @@ namespace oomph
       return DIM + DIM * (DIM - 1) / 2;
     }
 
-    /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+    ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -1966,20 +1966,20 @@ namespace oomph
     }
 
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return (NNODE_1D - 1);
     }
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<DIM, NNODE_1D>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<DIM, NNODE_1D>::vertex_node_pt(j);
@@ -1992,7 +1992,7 @@ namespace oomph
       return DIM + DIM * (DIM - 1) / 2;
     }
 
-    /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+    ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -2105,7 +2105,7 @@ namespace oomph
     /// Static array of ints to hold number of variables at node
     static const unsigned Initial_Nvalue[];
 
-    /// \short Unpin all solid pressure dofs in the element
+    ///  Unpin all solid pressure dofs in the element
     void unpin_elemental_solid_pressure_dofs()
     {
       // find the index at which the pressure is stored
@@ -2119,11 +2119,11 @@ namespace oomph
     }
 
   protected:
-    /// \short Static array of ints to hold conversion from pressure
+    ///  Static array of ints to hold conversion from pressure
     /// node numbers to actual node numbers
     static const unsigned Pconv[];
 
-    /// \short Overload the access function
+    ///  Overload the access function
     /// that is used to return local equation corresponding to the i-th
     /// solid pressure value
     inline int solid_p_local_eqn(const unsigned& i) const
@@ -2154,13 +2154,13 @@ namespace oomph
     // rightly, it shouts.
     /*void operator=(const TPVDElementWithContinuousPressure<DIM>&) = delete;*/
 
-    /// \short Set the value at which the solid pressure is stored in the nodes
+    ///  Set the value at which the solid pressure is stored in the nodes
     inline int solid_p_nodal_index() const
     {
       return 0;
     }
 
-    /// \short Number of values (pinned or dofs) required at node n. Can
+    ///  Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version
     inline virtual unsigned required_nvalue(const unsigned& n) const
     {
@@ -2215,20 +2215,20 @@ namespace oomph
       PVDEquationsWithPressure<DIM>::output(file_pt, n_plot);
     }
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return 2;
     }
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<DIM, 3>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<DIM, 3>::vertex_node_pt(j);
@@ -2241,7 +2241,7 @@ namespace oomph
       return DIM + DIM * (DIM - 1) / 2;
     }
 
-    /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+    ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -2371,7 +2371,7 @@ namespace oomph
   //====================================================================
   namespace SolidHelpers
   {
-    /// \short Document the principal stresses in a 2D SolidMesh
+    ///  Document the principal stresses in a 2D SolidMesh
     /// pointed to by \c mesh_pt, in the directory specified
     /// by the DocInfo object, in a format that can be processed with
     /// tecplot macro.
@@ -2495,12 +2495,12 @@ namespace oomph
     : public virtual ProjectableElement<PVD_ELEMENT>
   {
   public:
-    /// \short Constructor [this was only required explicitly
+    ///  Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectablePVDElementWithContinuousPressure() {}
 
 
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     /// In the underlying PVD elements  the pressures (the first
@@ -2523,14 +2523,14 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: 1, corresponding to
+    ///  Number of fields to be projected: 1, corresponding to
     /// the pressure only
     unsigned nfields_for_projection()
     {
       return 1;
     }
 
-    /// \short Number of history values to be stored for fld-th field.
+    ///  Number of history values to be stored for fld-th field.
     /// (Includes the current value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -2539,13 +2539,13 @@ namespace oomph
       return 1;
     }
 
-    ///\short Number of positional history values (Includes the current value!)
+    /// Number of positional history values (Includes the current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -2557,7 +2557,7 @@ namespace oomph
       return this->J_eulerian(s);
     }
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,

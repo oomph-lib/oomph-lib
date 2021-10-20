@@ -61,7 +61,7 @@ using namespace oomph;
   /// Strouhal number
   double St = 1.0;
  
-  /// \short Density ratio (Solid density / Fluid density)
+  ///  Density ratio (Solid density / Fluid density)
   double Density_ratio = 1.0;
 
   /// Initial axis of the elliptical solid in x-direction
@@ -74,7 +74,7 @@ using namespace oomph;
   /// Pseudo-solid (mesh) Poisson ratio
   double Nu=0.3;
 
-  /// \short Pseudo-solid (mesh) "density" 
+  ///  Pseudo-solid (mesh) "density" 
   /// Set to zero because we don't want inertia in the node update!
   double Lambda_sq=0.0;
 
@@ -137,7 +137,7 @@ namespace Jeffery_Solution
 
 
 //===================start_of_general_ellipse=================================
-/// \short A geometric object for an ellipse with initial centre of mass at
+///  A geometric object for an ellipse with initial centre of mass at
 /// (centre_x, centre_y) with axis in the x direction given by 2a
 /// and in the y-direction given by 2b. The boundary of the ellipse is
 /// parametrised by its angle.
@@ -151,7 +151,7 @@ private:
 
 public:
  
- /// \short Simple Constructor that transfers appropriate geometric 
+ ///  Simple Constructor that transfers appropriate geometric 
  /// parameters into internal data
  GeneralEllipse(const double &centre_x, const double &centre_y,
                 const double &a, const double &b)
@@ -213,7 +213,7 @@ public:
  /// Rebuild the meshes of Lagrange multiplier and drag elements
  void actions_after_adapt();
  
- /// \short Re-apply the no slip condition (imposed indirectly via dependent
+ ///  Re-apply the no slip condition (imposed indirectly via dependent
  /// velocities)
  void actions_before_newton_convergence_check()
   {
@@ -221,7 +221,7 @@ public:
    Fluid_mesh_pt->node_update();
   }
  
- /// \short Set boundary condition, assign auxiliary node update fct.
+ ///  Set boundary condition, assign auxiliary node update fct.
  /// Complete the build of all elements, attach power elements that allow
  /// computation of drag vector
  void complete_problem_setup();
@@ -229,7 +229,7 @@ public:
  ///Set the boundary velocity
  void set_boundary_velocity();
 
- ///\short Function that solves a simplified problem to ensure that 
+ /// Function that solves a simplified problem to ensure that 
  ///the positions of the boundary nodes are initially consistent with
  ///the lagrange multiplier formulation
  void solve_for_consistent_nodal_positions();
@@ -242,19 +242,19 @@ public:
 
 private:
  
- /// \short Create elements that enforce prescribed boundary motion
+ ///  Create elements that enforce prescribed boundary motion
  /// for the pseudo-solid fluid mesh by Lagrange multipliers
  void create_lagrange_multiplier_elements();
 
- /// \short Delete elements that impose the prescribed boundary displacement
+ ///  Delete elements that impose the prescribed boundary displacement
  /// and wipe the associated mesh
  void delete_lagrange_multiplier_elements();
 
- /// \short Create elements that calculate the drag and torque on
+ ///  Create elements that calculate the drag and torque on
  /// the boundaries
  void create_drag_elements();
  
- /// \short Delete elements that calculate the drag and torque on the 
+ ///  Delete elements that calculate the drag and torque on the 
  /// boundaries
  void delete_drag_elements();
 
@@ -646,7 +646,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::actions_after_adapt()
 
 
 //============start_complete_problem_setup=================================
-/// \short Set boundary condition, assign auxiliary node update fct.
+///  Set boundary condition, assign auxiliary node update fct.
 /// Complete the build of all elements, attach power elements that allow
 /// computation of drag vector
 //=========================================================================
@@ -973,7 +973,7 @@ create_lagrange_multiplier_elements()
 
 
 //===============start_delete_lagrange_multiplier_elements==================
-/// \short Delete elements that impose the prescribed boundary displacement
+///  Delete elements that impose the prescribed boundary displacement
 /// and wipe the associated mesh
 //==========================================================================
 template<class ELEMENT>
@@ -1072,7 +1072,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::create_drag_elements()
 
 
 //=======================================================================
-/// \short Delete elements that calculate the drag and torque on the 
+///  Delete elements that calculate the drag and torque on the 
 /// boundaries
 //=======================================================================
 template<class ELEMENT>

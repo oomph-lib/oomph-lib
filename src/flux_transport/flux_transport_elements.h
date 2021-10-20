@@ -49,13 +49,13 @@ namespace oomph
   class FluxTransportEquations : public virtual FiniteElement
   {
   protected:
-    /// \short Return the number of fluxes (default zero)
+    ///  Return the number of fluxes (default zero)
     virtual inline unsigned nflux() const
     {
       return 0;
     }
 
-    /// \short Return the index at which the i-th unknown value
+    ///  Return the index at which the i-th unknown value
     /// is stored. The default value, i, is appropriate for single-physics
     /// problems.
     /// In derived multi-physics elements, this function should be overloaded
@@ -66,7 +66,7 @@ namespace oomph
       return i;
     }
 
-    /// \short Return the flux as a function of the unknown. This interface
+    ///  Return the flux as a function of the unknown. This interface
     /// could (should) be generalised)
     virtual void flux(const Vector<double>& u, DenseMatrix<double>& f)
     {
@@ -79,12 +79,12 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Return the flux derivatives as a funciton of the unknowns
+    ///  Return the flux derivatives as a funciton of the unknowns
     /// Default finite-different implementation
     virtual void dflux_du(const Vector<double>& u,
                           RankThreeTensor<double>& df_du);
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_flux_transport(
       const Vector<double>& s,
@@ -93,7 +93,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_flux_transport(
       const unsigned& ipt,
@@ -122,7 +122,7 @@ namespace oomph
         0);
     }
 
-    ///\short Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// Virtual function can be overloaded by hanging-node version
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -153,7 +153,7 @@ namespace oomph
     }
 
 
-    ///\short Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     virtual void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,
@@ -165,11 +165,11 @@ namespace oomph
     double interpolated_u_flux_transport(const Vector<double>& s,
                                          const unsigned& i);
 
-    /// \short i-th component of du/dt at local node n.
+    ///  i-th component of du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
     double du_dt_flux_transport(const unsigned& n, const unsigned& i) const;
 
-    /// \short Compute the average values of the fluxes
+    ///  Compute the average values of the fluxes
     void calculate_element_averages(double*& average_values);
 
     // Default output function

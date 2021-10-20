@@ -56,16 +56,16 @@
 namespace oomph
 {
   //====================================================================
-  /// \short  Wrapper to Mumps solver
+  ///   Wrapper to Mumps solver
   //====================================================================
   class MumpsSolver : public LinearSolver
   {
   public:
-    /// \short Static flag that determines whether the warning about
+    ///  Static flag that determines whether the warning about
     /// incorrect distribution of RHSs will be printed or not
     static bool Suppress_incorrect_rhs_distribution_warning_in_resolve;
 
-    /// \short Constructor: Call setup
+    ///  Constructor: Call setup
     MumpsSolver();
 
     /// Broken copy constructor
@@ -84,7 +84,7 @@ namespace oomph
       clean_up_memory();
     }
 
-    /// \short Set boolean to suppress warning about communicator
+    ///  Set boolean to suppress warning about communicator
     /// not equal to MPI_COMM_WORLD
     void enable_suppress_warning_about_MPI_COMM_WORLD()
     {
@@ -97,7 +97,7 @@ namespace oomph
       Suppress_warning_about_MPI_COMM_WORLD = false;
     }
 
-    /// \short Set boolean to suppress info being printed to screen
+    ///  Set boolean to suppress info being printed to screen
     /// during MUMPS solve
     void enable_suppress_mumps_info_during_solve()
     {
@@ -110,12 +110,12 @@ namespace oomph
       Suppress_mumps_info_during_solve = false;
     }
 
-    /// \short Solver: Takes pointer to problem and returns the results Vector
+    ///  Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual Vector.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     /// The function returns the global result Vector.
     /// Note: if Delete_matrix_data is true the function
@@ -124,7 +124,7 @@ namespace oomph
                const DoubleVector& rhs,
                DoubleVector& result);
 
-    /// \short Resolve the system defined by the last assembled Jacobian
+    ///  Resolve the system defined by the last assembled Jacobian
     /// and the specified rhs vector if resolve has been enabled.
     /// Note: returns the global result Vector.
     void resolve(const DoubleVector& rhs, DoubleVector& result);
@@ -141,21 +141,21 @@ namespace oomph
       Doc_stats = false;
     }
 
-    /// \short Returns the time taken to assemble the Jacobian matrix and
+    ///  Returns the time taken to assemble the Jacobian matrix and
     /// residual vector
     double jacobian_setup_time()
     {
       return Jacobian_setup_time;
     }
 
-    /// \short Return the time taken to solve the linear system (needs to be
+    ///  Return the time taken to solve the linear system (needs to be
     /// overloaded for each linear solver)
     virtual double linear_solver_solution_time()
     {
       return Solution_time;
     }
 
-    /// \short Set the flag to avoid solution of the system, so
+    ///  Set the flag to avoid solution of the system, so
     /// just assemble the Jacobian and the rhs.
     /// (Used only for timing runs, obviously)
     void enable_suppress_solve()
@@ -163,14 +163,14 @@ namespace oomph
       Suppress_solve = true;
     }
 
-    /// \short Unset the flag so that the system is actually solved again
+    ///  Unset the flag so that the system is actually solved again
     /// This is the default (obviously)
     void disable_suppress_solve()
     {
       Suppress_solve = false;
     }
 
-    /// \short Set Delete_matrix_data flag. MumpsSolver needs its own copy
+    ///  Set Delete_matrix_data flag. MumpsSolver needs its own copy
     /// of the input matrix, therefore a copy must be made if any matrix
     /// used with this solver is to be preserved. If the input matrix can be
     /// deleted the flag can be set to true to reduce the amount of memory
@@ -181,7 +181,7 @@ namespace oomph
       Delete_matrix_data = true;
     }
 
-    /// \short Unset Delete_matrix_data flag. MumpsSolver needs its own copy
+    ///  Unset Delete_matrix_data flag. MumpsSolver needs its own copy
     /// of the input matrix, therefore a copy must be made if any matrix
     /// used with this solver is to be preserved. If the input matrix can be
     /// deleted the flag can be set to true to reduce the amount of memory
@@ -192,19 +192,19 @@ namespace oomph
       Delete_matrix_data = false;
     }
 
-    /// \short Do the factorisation stage
+    ///  Do the factorisation stage
     /// Note: if Delete_matrix_data is true the function
     /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
     void factorise(DoubleMatrixBase* const& matrix_pt);
 
-    /// \short Do the backsubstitution for mumps solver
+    ///  Do the backsubstitution for mumps solver
     /// Note: returns the global result Vector.
     void backsub(const DoubleVector& rhs, DoubleVector& result);
 
     /// Clean up the memory allocated by the mumps solver
     void clean_up_memory();
 
-    /// \short Default factor for workspace -- static so it can be overwritten
+    ///  Default factor for workspace -- static so it can be overwritten
     /// globally.
     static int Default_workspace_scaling_factor;
 
@@ -276,7 +276,7 @@ namespace oomph
     // Work space scaling factor
     unsigned Workspace_scaling_factor;
 
-    /// \short Delete_matrix_data flag. MumpsSolver needs its own copy
+    ///  Delete_matrix_data flag. MumpsSolver needs its own copy
     /// of the input matrix, therefore a copy must be made if any matrix
     /// used with this solver is to be preserved. If the input matrix can be
     /// deleted the flag can be set to true to reduce the amount of memory
@@ -296,7 +296,7 @@ namespace oomph
     /// Pointer to MUMPS struct that contains the solver data
     DMUMPS_STRUC_C* Mumps_struc_pt;
 
-    /// \short values of the SYM variable used by the MUMPS solver
+    ///  values of the SYM variable used by the MUMPS solver
     /// which dictates the symmetry properties of the Jacobian matrix;
     /// magic numbers as defined by MUMPS documentation
     enum MumpsJacobianSymmetryFlags
@@ -306,7 +306,7 @@ namespace oomph
       Symmetric = 2
     };
 
-    /// \short ordering library to use for serial analysis;
+    ///  ordering library to use for serial analysis;
     /// magic numbers as defined by MUMPS documentation
     enum MumpsJacobianOrderingFlags
     {
@@ -315,11 +315,11 @@ namespace oomph
       Metis_ordering = 5
     };
 
-    /// \short symmetry of the Jacobian matrix we're solving;
+    ///  symmetry of the Jacobian matrix we're solving;
     /// takes one of the enum values above
     unsigned Jacobian_symmetry_flag;
 
-    /// \short stores an integer from the public enum
+    ///  stores an integer from the public enum
     /// which specifies which package (PORD, Metis or SCOTCH)
     /// is used to reorder the Jacobian matrix during the analysis
     unsigned Jacobian_ordering_flag;
@@ -349,7 +349,7 @@ namespace oomph
     /// Broken assignment operator.
     void operator=(const NewMumpsPreconditioner&) = delete;
 
-    /// \short Function to set up a preconditioner for the linear
+    ///  Function to set up a preconditioner for the linear
     /// system defined by matrix_pt. This function must be called
     /// before using preconditioner_solve.
     /// Note: matrix_pt must point to an object of class
@@ -378,7 +378,7 @@ namespace oomph
       }
     }
 
-    /// \short Function applies Mumps to vector r for (exact)
+    ///  Function applies Mumps to vector r for (exact)
     /// preconditioning, this requires a call to setup(...) first.
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
@@ -386,7 +386,7 @@ namespace oomph
     }
 
 
-    /// \short Clean up memory -- forward the call to the version in
+    ///  Clean up memory -- forward the call to the version in
     /// Mumps in its LinearSolver incarnation.
     void clean_up_memory()
     {
@@ -407,7 +407,7 @@ namespace oomph
     }
 
   private:
-    /// \short the Mumps solver emplyed by this preconditioner
+    ///  the Mumps solver emplyed by this preconditioner
     MumpsSolver Solver;
   };
 

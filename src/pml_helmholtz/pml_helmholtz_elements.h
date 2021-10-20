@@ -61,7 +61,7 @@ namespace oomph
                                 public virtual FiniteElement
   {
   public:
-    /// \short Function pointer to source function fct(x,f(x)) --
+    ///  Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*PMLHelmholtzSourceFctPt)(const Vector<double>& x,
                                             std::complex<double>& f);
@@ -86,7 +86,7 @@ namespace oomph
     // rightly, it shouts.
     /*void operator=(const PMLHelmholtzEquations&) = delete;*/
 
-    /// \short Return the index at which the unknown value
+    ///  Return the index at which the unknown value
     /// is stored.
     virtual inline std::complex<unsigned> u_index_helmholtz() const
     {
@@ -128,14 +128,14 @@ namespace oomph
     }
 
 
-    /// \short Number of scalars/fields output by this element. Reimplements
+    ///  Number of scalars/fields output by this element. Reimplements
     /// broken virtual function in base class.
     unsigned nscalar_paraview() const
     {
       return 2;
     }
 
-    /// \short Write values of the i-th scalar field at the plot points. Needs
+    ///  Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
     void scalar_value_paraview(std::ofstream& file_out,
                                const unsigned& i,
@@ -183,7 +183,7 @@ namespace oomph
       }
     }
 
-    /// \short Write values of the i-th scalar field at the plot points. Needs
+    ///  Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
     void scalar_value_fct_paraview(
       std::ofstream& file_out,
@@ -244,7 +244,7 @@ namespace oomph
       }
     }
 
-    /// \short Name of the i-th scalar field. Default implementation
+    ///  Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!)
     /// be overloaded with more meaningful names in specific elements.
     std::string scalar_name_paraview(const unsigned& i) const
@@ -285,7 +285,7 @@ namespace oomph
       output(outfile, n_plot);
     }
 
-    /// \short Output FE representation of soln: x,y,u_re,u_im or
+    ///  Output FE representation of soln: x,y,u_re,u_im or
     /// x,y,z,u_re,u_im at  n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
@@ -302,7 +302,7 @@ namespace oomph
       const unsigned& nplot);
 
 
-    /// \short Output function for real part of full time-dependent solution
+    ///  Output function for real part of full time-dependent solution
     /// u = Re( (u_r +i u_i) exp(-i omega t))
     /// at phase angle omega t = phi.
     /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
@@ -311,7 +311,7 @@ namespace oomph
                      const double& phi,
                      const unsigned& n_plot);
 
-    /// \short Output function for imaginary part of full time-dependent
+    ///  Output function for imaginary part of full time-dependent
     /// solution u = Im( (u_r +i u_i) exp(-i omega t) ) at phase angle omega t =
     /// phi. x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
     /// direction
@@ -326,7 +326,7 @@ namespace oomph
       output(file_pt, n_plot);
     }
 
-    /// \short C-style output FE representation of soln: x,y,u_re,u_im or
+    ///  C-style output FE representation of soln: x,y,u_re,u_im or
     /// x,y,z,u_re,u_im at  n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
@@ -336,7 +336,7 @@ namespace oomph
                     const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Output exact soln: (dummy time-dependent version to
+    ///  Output exact soln: (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
       std::ostream& outfile,
@@ -351,7 +351,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for real part of full time-dependent fct
+    ///  Output function for real part of full time-dependent fct
     /// u = Re( (u_r +i u_i) exp(-i omega t)
     /// at phase angle omega t = phi.
     /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
@@ -361,7 +361,7 @@ namespace oomph
                          const unsigned& n_plot,
                          FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Output function for imaginary part of full time-dependent fct
+    ///  Output function for imaginary part of full time-dependent fct
     /// u = Im( (u_r +i u_i) exp(-i omega t))
     /// at phase angle omega t = phi.
     /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
@@ -429,7 +429,7 @@ namespace oomph
       }
     }
 
-    /// \short Pure virtual function in which we specify the
+    ///  Pure virtual function in which we specify the
     /// values to be pinned (and set to zero) on the outer edge of
     /// the pml layer. All of them! Vector is resized internally.
     void values_to_be_pinned_on_outer_pml_boundary(
@@ -490,7 +490,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector and
+    ///  Add the element's contribution to its residual vector and
     /// element Jacobian matrix (wrapper)
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -500,7 +500,7 @@ namespace oomph
     }
 
 
-    /// \short Return FE representation of function value u_helmholtz(s)
+    ///  Return FE representation of function value u_helmholtz(s)
     /// at local coordinate s
     inline std::complex<double> interpolated_u_pml_helmholtz(
       const Vector<double>& s) const
@@ -535,11 +535,11 @@ namespace oomph
     }
 
 
-    /// \short Self-test: Return 0 for OK
+    ///  Self-test: Return 0 for OK
     unsigned self_test();
 
 
-    /// \short Compute pml coefficients at position x and integration point ipt.
+    ///  Compute pml coefficients at position x and integration point ipt.
     /// pml_laplace_factor is used in the residual contribution from the laplace
     /// operator, similarly pml_k_squared_factor is used in the contribution
     /// from the k^2 of the Helmholtz operator.
@@ -587,7 +587,7 @@ namespace oomph
           }
         }
 
-        /// \short  for 2D, in order:
+        ///   for 2D, in order:
         /// g_y/g_x, g_x/g_y for Laplace bit and g_x*g_y for Helmholtz bit
         /// for 3D, in order: g_y*g_x/g_x, g*x*g_z/g_y, g_x*g_y/g_z for Laplace
         /// bit and g_x*g_y*g_z for Helmholtz bit
@@ -607,7 +607,7 @@ namespace oomph
       }
       else
       {
-        /// \short The weights all default to 1.0 as if the propagation
+        ///  The weights all default to 1.0 as if the propagation
         /// medium is the physical domain
         for (unsigned k = 0; k < DIM; k++)
         {
@@ -634,14 +634,14 @@ namespace oomph
     /// everytime it uses it
     static BermudezPMLMapping Default_pml_mapping;
 
-    /// \short The number of "DOF types" that degrees of freedom in this element
+    ///  The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: real and imaginary part
     unsigned ndof_types() const
     {
       return 2;
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.
@@ -694,7 +694,7 @@ namespace oomph
 
 
   protected:
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_helmholtz(
       const Vector<double>& s,
@@ -704,7 +704,7 @@ namespace oomph
       DShape& dtestdx) const = 0;
 
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_helmholtz(
       const unsigned& ipt,
@@ -713,7 +713,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    /// \short Compute element residual Vector only (if flag=and/or element
+    ///  Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_residual_contribution_helmholtz(
       Vector<double>& residuals,
@@ -744,7 +744,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short QPMLHelmholtzElement elements are linear/quadrilateral/
+  ///  QPMLHelmholtzElement elements are linear/quadrilateral/
   /// brick-shaped PMLHelmholtz elements with isoparametric
   /// interpolation for the function.
   //======================================================================
@@ -753,12 +753,12 @@ namespace oomph
                                public virtual PMLHelmholtzEquations<DIM>
   {
   private:
-    /// \short Static int that holds the number of variables at
+    ///  Static int that holds the number of variables at
     /// nodes: always the same
     static const unsigned Initial_Nvalue;
 
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    ///  Constructor: Call constructors for QElement and
     /// PMLHelmholtz equations
     QPMLHelmholtzElement()
       : QElement<DIM, NNODE_1D>(), PMLHelmholtzEquations<DIM>()
@@ -772,14 +772,14 @@ namespace oomph
     /// Broken assignment operator
     /*void operator=(const QPMLHelmholtzElement<DIM,NNODE_1D>&) = delete;*/
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///   Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
@@ -787,14 +787,14 @@ namespace oomph
     }
 
 
-    ///  \short Output function:
+    ///   Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       PMLHelmholtzEquations<DIM>::output(outfile, n_plot);
     }
 
-    /// \short Output function for real part of full time-dependent solution
+    ///  Output function for real part of full time-dependent solution
     /// u = Re( (u_r +i u_i) exp(-i omega t)
     /// at phase angle omega t = phi.
     /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
@@ -806,7 +806,7 @@ namespace oomph
       PMLHelmholtzEquations<DIM>::output_real(outfile, phi, n_plot);
     }
 
-    /// \short Output function for imaginary part of full time-dependent
+    ///  Output function for imaginary part of full time-dependent
     /// solution u = Im( (u_r +i u_i) exp(-i omega t)) at phase angle omega t =
     /// phi. x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
     /// direction
@@ -818,7 +818,7 @@ namespace oomph
     }
 
 
-    /// \short C-style output function:
+    ///  C-style output function:
     ///  x,y,u   or    x,y,z,u
     void output(FILE* file_pt)
     {
@@ -826,7 +826,7 @@ namespace oomph
     }
 
 
-    ///  \short C-style output function:
+    ///   C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -834,7 +834,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for an exact solution:
+    ///  Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -844,7 +844,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for real part of full time-dependent fct
+    ///  Output function for real part of full time-dependent fct
     /// u = Re( (u_r +i u_i) exp(-i omega t)
     /// at phase angle omega t = phi.
     /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
@@ -858,7 +858,7 @@ namespace oomph
         outfile, phi, n_plot, exact_soln_pt);
     }
 
-    /// \short Output function for imaginary part of full time-dependent fct
+    ///  Output function for imaginary part of full time-dependent fct
     /// u = Im( (u_r +i u_i) exp(-i omega t))
     /// at phase angle omega t = phi.
     /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
@@ -873,7 +873,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for a time-dependent exact solution.
+    ///  Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
     void output_fct(std::ostream& outfile,
@@ -895,7 +895,7 @@ namespace oomph
                                                       DShape& dtestdx) const;
 
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    ///  Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_helmholtz(
       const unsigned& ipt,
@@ -976,7 +976,7 @@ namespace oomph
     : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };
@@ -995,7 +995,7 @@ namespace oomph
     : public virtual PointElement
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : PointElement() {}
   };
@@ -1014,11 +1014,11 @@ namespace oomph
     : public virtual ProjectableElement<HELMHOLTZ_ELEMENT>
   {
   public:
-    /// \short Constructor [this was only required explicitly
+    ///  Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectablePMLHelmholtzElement() {}
 
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
@@ -1049,13 +1049,13 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: 2 (real and imag part)
+    ///  Number of fields to be projected: 2 (real and imag part)
     unsigned nfields_for_projection()
     {
       return 2;
     }
 
-    /// \short Number of history values to be stored for fld-th field.
+    ///  Number of history values to be stored for fld-th field.
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -1072,14 +1072,14 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
-    ///\short Number of positional history values
+    /// Number of positional history values
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -1105,7 +1105,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,
@@ -1196,7 +1196,7 @@ namespace oomph
       return this->nodal_local_eqn(j, u_nodal_index);
     }
 
-    /// \short Output FE representation of soln: x,y,u or x,y,z,u at
+    ///  Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot)
     {
@@ -1230,7 +1230,7 @@ namespace oomph
     : public virtual QPMLHelmholtzElement<2, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate QElement
     PMLLayerElement() : QPMLHelmholtzElement<2, NNODE_1D>() {}
   };

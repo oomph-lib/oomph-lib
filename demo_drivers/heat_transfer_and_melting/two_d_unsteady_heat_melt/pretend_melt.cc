@@ -90,7 +90,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
  
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
   
  /// Actions before adapt: wipe flux elements
@@ -103,7 +103,7 @@ public:
    rebuild_global_mesh();
   }
 
- /// \short Actions after adapt: 
+ ///  Actions after adapt: 
  /// Setup the problem again -- remember that the mesh has been
  /// completely rebuilt and its element's don't have any
  /// pointers to source fcts etc. yet
@@ -224,7 +224,7 @@ private:
   }
 
 
- /// \short Helper function to (re-)set boundary condition
+ ///  Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup()
   {
@@ -535,7 +535,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
 //=======start_of_main====================================================
-/// \short Driver code for unsteady heat equation
+///  Driver code for unsteady heat equation
 //========================================================================
 int main(int argc, char* argv[])
 {

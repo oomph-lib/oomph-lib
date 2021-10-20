@@ -70,7 +70,7 @@ namespace Global_Physical_Variables
  /// Free surface cosine deform parameter
  double Epsilon = 0.1;
 
- /// \short Pvd file -- a wrapper for all the different
+ ///  Pvd file -- a wrapper for all the different
  /// vtu output files plus information about continuous time
  /// to facilitate animations in paraview
  ofstream Pvd_file;
@@ -111,7 +111,7 @@ public:
  // Update before solve (empty)
  void actions_before_newton_solve() {}
 
- /// \short Update after solve can remain empty, because the update 
+ ///  Update after solve can remain empty, because the update 
  /// is performed automatically after every Newton step.
  void actions_after_newton_solve() {}
 
@@ -141,10 +141,10 @@ public:
 
   } // End of set_initial_condition
 
- /// \short Access function for the specific mesh
+ ///  Access function for the specific mesh
  HorizontalSingleLayerSpineMesh<ELEMENT>*  Bulk_mesh_pt; 
 
- /// \short Mesh for the free surface (interface) elements
+ ///  Mesh for the free surface (interface) elements
  Mesh* Interface_mesh_pt;
 
  /// Doc the solution

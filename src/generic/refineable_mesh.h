@@ -109,14 +109,14 @@ namespace oomph
       return Nunrefined;
     }
 
-    /// \short Number of elements that would have liked to be refined further
+    ///  Number of elements that would have liked to be refined further
     /// but can't because they've reached the max. refinement level
     unsigned& nrefinement_overruled()
     {
       return Nrefinement_overruled;
     }
 
-    /// \short Max. number of elements that we allow to remain unrefined
+    ///  Max. number of elements that we allow to remain unrefined
     /// if no other mesh adaptation is required (to avoid
     /// mesh-adaptations that would only unrefine a few elements
     /// and then force a new solve -- this can't be worth our while!)
@@ -151,28 +151,28 @@ namespace oomph
       return Spatial_error_estimator_pt;
     }
 
-    /// \short Access fct for min. error (i.e. (try to) merge elements if
+    ///  Access fct for min. error (i.e. (try to) merge elements if
     /// their error is smaller)
     double& min_permitted_error()
     {
       return Min_permitted_error;
     }
 
-    /// \short Access fct for max. error (i.e. split elements if their
+    ///  Access fct for max. error (i.e. split elements if their
     /// error is larger)
     double& max_permitted_error()
     {
       return Max_permitted_error;
     }
 
-    /// \short Access fct for min. actual error in present solution (i.e. before
+    ///  Access fct for min. actual error in present solution (i.e. before
     /// re-solve on adapted mesh)
     double& min_error()
     {
       return Min_error;
     }
 
-    /// \short Access fct for max. actual error in present solution (i.e. before
+    ///  Access fct for max. actual error in present solution (i.e. before
     /// re-solve on adapted mesh)
     double& max_error()
     {
@@ -245,11 +245,11 @@ namespace oomph
       return *Doc_info_pt;
     }
 
-    /// \short Adapt mesh: Refine elements whose error is lager than err_max
+    ///  Adapt mesh: Refine elements whose error is lager than err_max
     /// and (try to) unrefine those whose error is smaller than err_min
     virtual void adapt(const Vector<double>& elemental_error) = 0;
 
-    /// \short p-adapt mesh: Refine elements whose error is lager than err_max
+    ///  p-adapt mesh: Refine elements whose error is lager than err_max
     /// and (try to) unrefine those whose error is smaller than err_min
     virtual void p_adapt(const Vector<double>& elemental_error)
     {
@@ -299,12 +299,12 @@ namespace oomph
       p_refine_uniformly(doc_info);
     }
 
-    /// \short Unrefine mesh uniformly: Return 0 for success,
+    ///  Unrefine mesh uniformly: Return 0 for success,
     /// 1 for failure (if unrefinement has reached the coarsest permitted
     /// level)
     virtual unsigned unrefine_uniformly() = 0;
 
-    /// \short p-unrefine mesh uniformly
+    ///  p-unrefine mesh uniformly
     void p_unrefine_uniformly(DocInfo& doc_info)
     {
       // Derived classes must implement this as required. Default throws an
@@ -319,7 +319,7 @@ namespace oomph
     }
 
   protected:
-    /// \short Pointer to spatial error estimator
+    ///  Pointer to spatial error estimator
     ErrorEstimator* Spatial_error_estimator_pt;
 
     /// Max. error (i.e. split elements if their error is larger)
@@ -352,13 +352,13 @@ namespace oomph
     /// Pointer to DocInfo
     DocInfo* Doc_info_pt;
 
-    /// \short Max. number of elements that can remain unrefined
+    ///  Max. number of elements that can remain unrefined
     /// if no other mesh adaptation is required (to avoid
     /// mesh-adaptations that would only unrefine a few elements
     /// and then force a new solve -- this can't be worth our while!)
     unsigned Max_keep_unrefined;
 
-    /// \short Number of elements that would like to be refined further but
+    ///  Number of elements that would like to be refined further but
     /// can't because they've reached the max. refinement level
     unsigned Nrefinement_overruled;
   };
@@ -419,11 +419,11 @@ namespace oomph
       }
     }
 
-    /// \short Adapt mesh: Refine elements whose error is lager than err_max
+    ///  Adapt mesh: Refine elements whose error is lager than err_max
     /// and (try to) unrefine those whose error is smaller than err_min
     void adapt(const Vector<double>& elemental_error);
 
-    /// \short p-adapt mesh: Refine elements whose error is lager than err_max
+    ///  p-adapt mesh: Refine elements whose error is lager than err_max
     /// and (try to) unrefine those whose error is smaller than err_min
     void p_adapt(const Vector<double>& elemental_error);
 
@@ -445,12 +445,12 @@ namespace oomph
       RefineableMeshBase::p_refine_uniformly();
     }
 
-    /// \short Unrefine mesh uniformly: Return 0 for success,
+    ///  Unrefine mesh uniformly: Return 0 for success,
     /// 1 for failure (if unrefinement has reached the coarsest permitted
     /// level)
     unsigned unrefine_uniformly();
 
-    /// \short p-unrefine mesh uniformly
+    ///  p-unrefine mesh uniformly
     void p_unrefine_uniformly(DocInfo& doc_info);
 
     /// Set up the tree forest associated with the Mesh (if any)
@@ -508,11 +508,11 @@ namespace oomph
       return Min_p_refinement_level;
     }
 
-    /// \short Perform the actual tree-based mesh adaptation,
+    ///  Perform the actual tree-based mesh adaptation,
     /// documenting the progress in the directory specified in DocInfo object.
     virtual void adapt_mesh(DocInfo& doc_info);
 
-    /// \short Perform the actual tree-based mesh adaptation. A simple wrapper
+    ///  Perform the actual tree-based mesh adaptation. A simple wrapper
     /// to call the function without documentation.
     virtual void adapt_mesh()
     {
@@ -524,11 +524,11 @@ namespace oomph
       adapt_mesh(doc_info);
     }
 
-    /// \short Perform the actual tree-based mesh p-adaptation,
+    ///  Perform the actual tree-based mesh p-adaptation,
     /// documenting the progress in the directory specified in DocInfo object.
     void p_adapt_mesh(DocInfo& doc_info);
 
-    /// \short Perform the actual tree-based mesh p-adaptation. A simple wrapper
+    ///  Perform the actual tree-based mesh p-adaptation. A simple wrapper
     /// to call the function without documentation.
     void p_adapt_mesh()
     {
@@ -540,40 +540,40 @@ namespace oomph
       p_adapt_mesh(doc_info);
     }
 
-    /// \short Refine mesh by splitting the elements identified
+    ///  Refine mesh by splitting the elements identified
     /// by their numbers.
     virtual void refine_selected_elements(
       const Vector<unsigned>& elements_to_be_refined);
 
-    /// \short Refine mesh by splitting the elements identified
+    ///  Refine mesh by splitting the elements identified
     /// by their pointers.
     virtual void refine_selected_elements(
       const Vector<RefineableElement*>& elements_to_be_refined);
 
-    /// \short p-refine mesh by refining the elements identified
+    ///  p-refine mesh by refining the elements identified
     /// by their numbers.
     void p_refine_selected_elements(
       const Vector<unsigned>& elements_to_be_refined);
 
-    /// \short p-refine mesh by refining the elements identified
+    ///  p-refine mesh by refining the elements identified
     /// by their pointers.
     void p_refine_selected_elements(
       const Vector<PRefineableElement*>& elements_to_be_refined_pt);
 
 
-    /// \short Refine base mesh to same degree as reference mesh (relative
+    ///  Refine base mesh to same degree as reference mesh (relative
     /// to original unrefined mesh).
     virtual void refine_base_mesh_as_in_reference_mesh(
       TreeBasedRefineableMeshBase* const& ref_mesh_pt);
 
-    /// \short Refine base mesh to same degree as reference mesh minus one
+    ///  Refine base mesh to same degree as reference mesh minus one
     /// level of refinement (relative to original unrefined mesh). Useful
     /// function for multigrid solvers; allows the easy copy of a mesh
     /// to the level of refinement just below the current one
     virtual bool refine_base_mesh_as_in_reference_mesh_minus_one(
       TreeBasedRefineableMeshBase* const& ref_mesh_pt);
 
-    /// \short Refine mesh once so that its topology etc becomes that of the
+    ///  Refine mesh once so that its topology etc becomes that of the
     /// (finer!) reference mesh -- if possible! Useful for meshes in multigrid
     /// hierarchies. If the meshes are too different and the conversion
     /// cannot be performed, the code dies (provided PARANOID is enabled).
@@ -584,13 +584,13 @@ namespace oomph
     virtual void get_refinement_levels(unsigned& min_refinement_level,
                                        unsigned& max_refinement_level);
 
-    /// \short Extract the elements at a particular refinement level in
+    ///  Extract the elements at a particular refinement level in
     /// the refinement pattern - used in Mesh::redistribute or whatever it's
     /// going to be called (RefineableMeshBase::reduce_halo_layers or something)
     virtual void get_elements_at_refinement_level(
       unsigned& refinement_level, Vector<RefineableElement*>& level_elements);
 
-    /// \short Extract refinement pattern: Consider the hypothetical mesh
+    ///  Extract refinement pattern: Consider the hypothetical mesh
     /// obtained by truncating the refinement of the current mesh to a given
     /// level (where \c level=0 is the un-refined base mesh). To advance
     /// to the next refinement level, we need to refine (split) the
@@ -613,7 +613,7 @@ namespace oomph
                                  Vector<Vector<unsigned>>& to_be_refined);
 
 
-    /// \short Level to which the mesh was uniformly refined when it was pruned
+    ///  Level to which the mesh was uniformly refined when it was pruned
     /// (const version)
     unsigned uniform_refinement_level_when_pruned() const
     {
@@ -621,7 +621,7 @@ namespace oomph
     }
 
 
-    /// \short Level to which the mesh was uniformly refined when it was pruned
+    ///  Level to which the mesh was uniformly refined when it was pruned
     unsigned& uniform_refinement_level_when_pruned()
     {
       return Uniform_refinement_level_when_pruned;
@@ -728,18 +728,18 @@ namespace oomph
 
 #endif
 
-    /// \short Split all the elements in the mesh if required. This template
+    ///  Split all the elements in the mesh if required. This template
     /// free interface will be overloaded in RefineableMesh<ELEMENT> so that any
     /// new elements that are created will be of the correct type.
     virtual void split_elements_if_required() = 0;
 
-    /// \short p-refine all the elements in the mesh if required. This template
+    ///  p-refine all the elements in the mesh if required. This template
     /// free interface will be overloaded in RefineableMesh<ELEMENT> so that
     /// any temporary copies of the element that are created will be of the
     /// correct type.
     virtual void p_refine_elements_if_required() = 0;
 
-    /// \short Complete the hanging node scheme recursively
+    ///  Complete the hanging node scheme recursively
     void complete_hanging_nodes(const int& ncont_interpolated_values);
 
 
@@ -749,7 +749,7 @@ namespace oomph
                                             Vector<double>& hang_weights,
                                             const int& ival);
 
-    /// \short Level to which the mesh was uniformly refined when it was pruned
+    ///  Level to which the mesh was uniformly refined when it was pruned
     unsigned Uniform_refinement_level_when_pruned;
 
     /// Max. permissible refinement level (relative to base mesh)
@@ -770,7 +770,7 @@ namespace oomph
   private:
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Helper struct to collate data required during
+    ///  Helper struct to collate data required during
     /// TreeBasedRefineableMeshBase::synchronise_hanging_nodes
     struct HangHelperStruct
     {
@@ -808,7 +808,7 @@ namespace oomph
   class TreeBasedRefineableMesh : public virtual TreeBasedRefineableMeshBase
   {
   private:
-    /// \short Split all the elements if required. Overload the template-free
+    ///  Split all the elements if required. Overload the template-free
     /// interface so that any new elements that are created
     /// will be of the correct type.
     void split_elements_if_required()
@@ -824,7 +824,7 @@ namespace oomph
       }
     }
 
-    /// \short p-refine all the elements if required. Overload the template-free
+    ///  p-refine all the elements if required. Overload the template-free
     /// interface so that any temporary copies of the element that are created
     /// will be of the correct type.
     void p_refine_elements_if_required()
@@ -917,7 +917,7 @@ namespace oomph
     }
 
 
-    /// \short Compute target volume based on the elements' error and the
+    ///  Compute target volume based on the elements' error and the
     /// error target; return max edge ratio
     double compute_volume_target(const Vector<double>& elem_error,
                                  Vector<double>& target_volume)

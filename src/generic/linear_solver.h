@@ -67,23 +67,23 @@ namespace oomph
   class LinearSolver : public DistributableLinearAlgebraObject
   {
   protected:
-    ///\short Boolean that indicates whether the matrix (or its factors, in
+    /// Boolean that indicates whether the matrix (or its factors, in
     /// the case of direct solver) should be stored so that the resolve function
     /// can be used.
     bool Enable_resolve;
 
-    /// \short Boolean flag that indicates whether the time taken
+    ///  Boolean flag that indicates whether the time taken
     // for the solves should be documented
     bool Doc_time;
 
-    /// \short flag that indicates whether the gradient required for the
+    ///  flag that indicates whether the gradient required for the
     /// globally convergent Newton method should be computed or not
     bool Compute_gradient;
 
-    /// \short flag that indicates whether the gradient was computed or not
+    ///  flag that indicates whether the gradient was computed or not
     bool Gradient_has_been_computed;
 
-    /// \short DoubleVector storing the gradient for the globally convergent
+    ///  DoubleVector storing the gradient for the globally convergent
     /// Newton method
     DoubleVector Gradient_for_glob_conv_newton_solve;
 
@@ -106,38 +106,38 @@ namespace oomph
     /// Empty virtual destructor
     virtual ~LinearSolver() {}
 
-    /// \short Enable documentation of solve times
+    ///  Enable documentation of solve times
     void enable_doc_time()
     {
       Doc_time = true;
     }
 
-    /// \short Disable documentation of solve times
+    ///  Disable documentation of solve times
     void disable_doc_time()
     {
       Doc_time = false;
     }
 
-    /// \short Is documentation of solve times enabled?
+    ///  Is documentation of solve times enabled?
     bool is_doc_time_enabled() const
     {
       return Doc_time;
     }
 
-    /// \short Boolean flag indicating if resolves are enabled
+    ///  Boolean flag indicating if resolves are enabled
     bool is_resolve_enabled() const
     {
       return Enable_resolve;
     }
 
-    /// \short Enable resolve (i.e. store matrix and/or LU decomposition, say)
+    ///  Enable resolve (i.e. store matrix and/or LU decomposition, say)
     /// Virtual so it can be overloaded to perform additional tasks
     virtual void enable_resolve()
     {
       Enable_resolve = true;
     }
 
-    /// \short Disable resolve (i.e. store matrix and/or LU decomposition, say)
+    ///  Disable resolve (i.e. store matrix and/or LU decomposition, say)
     /// This function simply resets an internal flag. It's virtual so
     /// it can be overloaded to perform additional tasks such as
     /// cleaning up memory that is only required for the resolve.
@@ -146,12 +146,12 @@ namespace oomph
       Enable_resolve = false;
     }
 
-    /// \short Solver: Takes pointer to problem and returns the results vector
+    ///  Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     virtual void solve(Problem* const& problem_pt, DoubleVector& result) = 0;
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     virtual void solve(DoubleMatrixBase* const& matrix_pt,
                        const DoubleVector& rhs,
@@ -163,7 +163,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     virtual void solve(DoubleMatrixBase* const& matrix_pt,
                        const Vector<double>& rhs,
@@ -175,7 +175,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Solver: Takes pointer to problem and returns the results vector
+    ///  Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by the
     /// problem's fully assembled Jacobian and residual vector (broken virtual).
     virtual void solve_transpose(Problem* const& problem_pt,
@@ -195,7 +195,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     } // End of solve_transpose
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     virtual void solve_transpose(DoubleMatrixBase* const& matrix_pt,
                                  const DoubleVector& rhs,
@@ -207,7 +207,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     virtual void solve_transpose(DoubleMatrixBase* const& matrix_pt,
                                  const Vector<double>& rhs,
@@ -219,7 +219,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Resolve the system defined by the last assembled jacobian
+    ///  Resolve the system defined by the last assembled jacobian
     /// and the rhs vector. Solution is returned in the vector result.
     /// (broken virtual)
     virtual void resolve(const DoubleVector& rhs, DoubleVector& result)
@@ -230,7 +230,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Solver: Resolve the system defined by the last assembled jacobian
+    ///  Solver: Resolve the system defined by the last assembled jacobian
     /// and the rhs vector. Solution is returned in the vector result.
     /// (broken virtual)
     virtual void resolve_transpose(const DoubleVector& rhs,
@@ -250,12 +250,12 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     } // End of resolve_transpose
 
-    /// \short Empty virtual function that can be overloaded in specific
+    ///  Empty virtual function that can be overloaded in specific
     /// linear solvers to clean up any memory that may have been
     /// allocated (e.g. when preparing for a re-solve).
     virtual void clean_up_memory() {}
 
-    ///  \short returns the time taken to assemble the Jacobian matrix and
+    ///   returns the time taken to assemble the Jacobian matrix and
     /// residual vector (needs to be overloaded for each solver)
     virtual double jacobian_setup_time() const
     {
@@ -266,7 +266,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short return the time taken to solve the linear system (needs to be
+    ///  return the time taken to solve the linear system (needs to be
     /// overloaded for each linear solver)
     virtual double linear_solver_solution_time() const
     {
@@ -277,7 +277,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short function to enable the computation of the gradient required
+    ///  function to enable the computation of the gradient required
     /// for the globally convergent Newton method
     virtual void enable_computation_of_gradient()
     {
@@ -288,21 +288,21 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short function to disable the computation of the gradient required
+    ///  function to disable the computation of the gradient required
     /// for the globally convergent Newton method
     void disable_computation_of_gradient()
     {
       Compute_gradient = false;
     }
 
-    /// \short function to reset the size of the gradient before each Newton
+    ///  function to reset the size of the gradient before each Newton
     /// solve
     void reset_gradient()
     {
       Gradient_for_glob_conv_newton_solve.clear();
     }
 
-    /// \short function to access the gradient, provided it has been computed
+    ///  function to access the gradient, provided it has been computed
     void get_gradient(DoubleVector& gradient)
     {
 #ifdef PARANOID
@@ -324,7 +324,7 @@ namespace oomph
   };
 
   //=============================================================================
-  /// \short Dense LU decomposition-based solve of full assembled linear system.
+  ///  Dense LU decomposition-based solve of full assembled linear system.
   /// VERY inefficient but useful to illustrate the principle.
   /// Only suitable for use with Serial matrices and vectors.
   /// This solver will only work with non-distributed matrices and vectors
@@ -360,31 +360,31 @@ namespace oomph
       clean_up_memory();
     }
 
-    /// \short Solver: Takes pointer to problem and returns the results Vector
+    ///  Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual Vector.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
                DoubleVector& result);
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const Vector<double>& rhs,
                Vector<double>& result);
 
-    ///  \short returns the time taken to assemble the jacobian matrix and
+    ///   returns the time taken to assemble the jacobian matrix and
     /// residual vector
     double jacobian_setup_time() const
     {
       return Jacobian_setup_time;
     }
 
-    /// \short return the time taken to solve the linear system (needs to be
+    ///  return the time taken to solve the linear system (needs to be
     /// overloaded for each linear solver)
     virtual double linear_solver_solution_time() const
     {
@@ -410,7 +410,7 @@ namespace oomph
     /// Solution time
     double Solution_time;
 
-    /// \short Sign of the determinant of the matrix
+    ///  Sign of the determinant of the matrix
     /// (obtained during the LU decomposition)
     int Sign_of_determinant_of_matrix;
 
@@ -424,7 +424,7 @@ namespace oomph
 
 
   //====================================================================
-  /// \short Dense LU decomposition-based solve of linear system
+  ///  Dense LU decomposition-based solve of linear system
   /// assembled via finite differencing of the residuals Vector.
   /// Even more inefficient than DenseLU but excellent sanity check!
   //====================================================================
@@ -440,12 +440,12 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const FD_LU&) = delete;
 
-    /// \short Solver: Takes pointer to problem and returns the results Vector
+    ///  Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's residual Vector (Jacobian computed by FD approx.)
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
@@ -454,7 +454,7 @@ namespace oomph
       DenseLU::solve(matrix_pt, rhs, result);
     }
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix
+    ///  Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -473,7 +473,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short. SuperLU Project Solver class. This is a combined wrapper for both
+  /// . SuperLU Project Solver class. This is a combined wrapper for both
   /// SuperLU and SuperLU Dist.
   /// See http://crd.lbl.gov/~xiaoye/SuperLU/
   /// Default Behaviour: If this solver is distributed over more than one
@@ -485,7 +485,7 @@ namespace oomph
   class SuperLUSolver : public LinearSolver
   {
   public:
-    /// \short enum type to specify the solver behaviour.
+    ///  enum type to specify the solver behaviour.
     /// Default - will employ superlu dist if more than 1 processor.
     /// Serial - will always try use superlu (serial).
     /// Distributed - will always try to use superlu dist.
@@ -552,12 +552,12 @@ namespace oomph
       clean_up_memory();
     }
 
-    /// \short Solver: Takes pointer to problem and returns the results Vector
+    ///  Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual Vector.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     /// The function returns the global result Vector.
     /// Note: if Delete_matrix_data is true the function
@@ -567,7 +567,7 @@ namespace oomph
                DoubleVector& result);
 
 
-    /*  /// \short Linear-algebra-type solver: Takes pointer to a matrix */
+    /*  ///  Linear-algebra-type solver: Takes pointer to a matrix */
     /*  /// and rhs vector and returns the solution of the linear system */
     /*  /// Call the broken base-class version. If you want this, please  */
     /*  /// implement it */
@@ -576,12 +576,12 @@ namespace oomph
     /*                     Vector<double> &result) */
     /*   {LinearSolver::solve(matrix_pt,rhs,result);} */
 
-    /// \short Solver: Takes pointer to problem and returns the results Vector
+    ///  Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual Vector.
     void solve_transpose(Problem* const& problem_pt, DoubleVector& result);
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     /// The function returns the global result Vector.
     /// Note: if Delete_matrix_data is true the function
@@ -590,12 +590,12 @@ namespace oomph
                          const DoubleVector& rhs,
                          DoubleVector& result);
 
-    /// \short Resolve the system defined by the last assembled jacobian
+    ///  Resolve the system defined by the last assembled jacobian
     /// and the specified rhs vector if resolve has been enabled.
     /// Note: returns the global result Vector.
     void resolve(const DoubleVector& rhs, DoubleVector& result);
 
-    /// \short Resolve the (transposed) system defined by the last assembled
+    ///  Resolve the (transposed) system defined by the last assembled
     /// Jacobian and the specified rhs vector if resolve has been enabled.
     void resolve_transpose(const DoubleVector& rhs, DoubleVector& result);
 
@@ -611,37 +611,37 @@ namespace oomph
       Doc_stats = false;
     }
 
-    /// \short returns the time taken to assemble the jacobian matrix and
+    ///  returns the time taken to assemble the jacobian matrix and
     /// residual vector
     double jacobian_setup_time() const
     {
       return Jacobian_setup_time;
     }
 
-    /// \short return the time taken to solve the linear system (needs to be
+    ///  return the time taken to solve the linear system (needs to be
     /// overloaded for each linear solver)
     virtual double linear_solver_solution_time() const
     {
       return Solution_time;
     }
 
-    /// \short Do the factorisation stage
+    ///  Do the factorisation stage
     /// Note: if Delete_matrix_data is true the function
     /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
     void factorise(DoubleMatrixBase* const& matrix_pt);
 
-    /// \short Do the backsubstitution for SuperLU solver
+    ///  Do the backsubstitution for SuperLU solver
     /// Note: returns the global result Vector.
     void backsub(const DoubleVector& rhs, DoubleVector& result);
 
-    /// \short Do the back-substitution for transposed system of the SuperLU
+    ///  Do the back-substitution for transposed system of the SuperLU
     /// solver Note: Returns the global result Vector.
     void backsub_transpose(const DoubleVector& rhs, DoubleVector& result);
 
     /// Clean up the memory allocated by the solver
     void clean_up_memory();
 
-    /// \short Specify the solve type. Either default, serial or distributed.
+    ///  Specify the solve type. Either default, serial or distributed.
     /// See enum SuperLU_solver_type for more details.
     void set_solver_type(const Type& t)
     {
@@ -669,7 +669,7 @@ namespace oomph
     // SuperLU Dist methods
     ///////////////////////
 
-    /// \short Set Delete_matrix_data flag. SuperLU_dist needs its own copy
+    ///  Set Delete_matrix_data flag. SuperLU_dist needs its own copy
     /// of the input matrix, therefore a copy must be made if any matrix
     /// used with this solver is to be preserved. If the input matrix can be
     /// deleted the flag can be set to true to reduce the amount of memory
@@ -680,7 +680,7 @@ namespace oomph
       Dist_delete_matrix_data = true;
     }
 
-    /// \short Unset Delete_matrix_data flag. SuperLU_dist needs its own copy
+    ///  Unset Delete_matrix_data flag. SuperLU_dist needs its own copy
     /// of the input matrix, therefore a copy must be made if any matrix
     /// used with this solver is to be preserved. If the input matrix can be
     void disable_delete_matrix_data_in_superlu_dist()
@@ -688,7 +688,7 @@ namespace oomph
       Dist_delete_matrix_data = false;
     }
 
-    /// \short Set flag so that SuperLU_DIST is allowed to permute matrix rows
+    ///  Set flag so that SuperLU_DIST is allowed to permute matrix rows
     /// and columns during factorisation. This is the default for SuperLU_DIST,
     /// and can lead to significantly faster solves.
     void enable_row_and_col_permutations_in_superlu_dist()
@@ -696,14 +696,14 @@ namespace oomph
       Dist_allow_row_and_col_permutations = true;
     }
 
-    /// \short Set flag so that SuperLU_DIST is not allowed to permute matrix
+    ///  Set flag so that SuperLU_DIST is not allowed to permute matrix
     /// rows and columns during factorisation.
     void disable_row_and_col_permutations_in_superlu_dist()
     {
       Dist_allow_row_and_col_permutations = false;
     }
 
-    /// \short Calling this method will ensure that when the problem based
+    ///  Calling this method will ensure that when the problem based
     /// solve interface is used, a global (serial) jacobian will be
     /// assembled.
     /// Note: calling this function will delete any distributed solve data.
@@ -716,7 +716,7 @@ namespace oomph
       }
     }
 
-    /// \short Calling this method will ensure that when the problem based
+    ///  Calling this method will ensure that when the problem based
     /// solve interface is used, a distributed jacobian will be
     /// assembled.
     /// Note: calling this function will delete any global solve data.
@@ -806,12 +806,12 @@ namespace oomph
     // SuperLU Dist member data
     ///////////////////////////
   public:
-    /// \short Static flag that determines whether the warning about
+    ///  Static flag that determines whether the warning about
     /// incorrect distribution of RHSs will be printed or not
     static bool Suppress_incorrect_rhs_distribution_warning_in_resolve;
 
   private:
-    /// \short Flag that determines whether the MPIProblem based solve function
+    ///  Flag that determines whether the MPIProblem based solve function
     /// uses the global or distributed version of SuperLU_DIST
     /// (default value is false).
     bool Dist_use_global_solver;
@@ -834,13 +834,13 @@ namespace oomph
     /// Info flag for the SuperLU solver
     int Dist_info;
 
-    /// \short If true then SuperLU_DIST is allowed to permute matrix rows
+    ///  If true then SuperLU_DIST is allowed to permute matrix rows
     /// and columns during factorisation. This is the default for SuperLU_DIST,
     /// and can lead to significantly faster solves, but has been known to
     /// fail, hence the default value is 0.
     bool Dist_allow_row_and_col_permutations;
 
-    /// \short Delete_matrix_data flag. SuperLU_dist needs its own copy
+    ///  Delete_matrix_data flag. SuperLU_dist needs its own copy
     /// of the input matrix, therefore a copy must be made if any matrix
     /// used with this solver is to be preserved. If the input matrix can be
     /// deleted the flag can be set to true to reduce the amount of memory
@@ -851,11 +851,11 @@ namespace oomph
     /// Pointer for storage of the matrix values required by SuperLU_DIST
     double* Dist_value_pt;
 
-    /// \short Pointer for storage of matrix rows or column indices required
+    ///  Pointer for storage of matrix rows or column indices required
     /// by SuperLU_DIST
     int* Dist_index_pt;
 
-    /// \short Pointers for storage of matrix column or row starts
+    ///  Pointers for storage of matrix column or row starts
     // required by SuperLU_DIST
     int* Dist_start_pt;
 

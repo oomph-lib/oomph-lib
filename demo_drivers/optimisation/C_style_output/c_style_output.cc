@@ -78,7 +78,7 @@ class ElasticRefineableQuarterCircleSectorMesh :
 
 public:
 
- /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ ///  Constructor: Build mesh and copy Eulerian coords to Lagrangian
  /// ones so that the initial configuration is the stress-free one.
  ElasticRefineableQuarterCircleSectorMesh<ELEMENT>(GeomObject* wall_pt,
                                          const double& xi_lo,
@@ -142,7 +142,7 @@ class SimpleRefineableRectangularQuadMesh :
 
 public: 
 
- /// \short  Pass number of elements in the horizontal 
+ ///   Pass number of elements in the horizontal 
  /// and vertical directions, and the corresponding dimensions.
  /// Timestepper defaults to Static.
  SimpleRefineableRectangularQuadMesh(const unsigned &Nx,

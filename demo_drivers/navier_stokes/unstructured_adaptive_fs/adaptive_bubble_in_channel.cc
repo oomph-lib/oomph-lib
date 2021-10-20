@@ -383,15 +383,15 @@ namespace oomph
   /// Initial radius of bubble
   double Radius = 0.25;
 
-  /// \short Volume of the bubble (negative because it's outside the
+  ///  Volume of the bubble (negative because it's outside the
   /// fluid!)
   double Volume = -MathematicalConstants::Pi*Radius*Radius;
 
-  /// \short Scaling factor for inflow velocity (allows it to be switched off
+  ///  Scaling factor for inflow velocity (allows it to be switched off
   /// to do hydrostatics)
   double Inflow_veloc_magnitude = 0.0;
 
-  /// \short Length of the channel
+  ///  Length of the channel
   double Length = 3.0;
 
   /// Constitutive law used to determine the mesh deformation
@@ -400,7 +400,7 @@ namespace oomph
   /// Trace file
   ofstream Trace_file;
 
-  /// \short File to document the norm of the solution (for validation 
+  ///  File to document the norm of the solution (for validation 
   /// purposes -- triangle doesn't give fully reproducible results so
   /// mesh generation/adaptation may generate slightly different numbers
   /// of elements on different machines!)
@@ -519,7 +519,7 @@ public:
    Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
   }
  
- /// \short Set boundary conditions and complete the build of all elements
+ ///  Set boundary conditions and complete the build of all elements
  void complete_problem_setup();
 
  /// Doc the solution
@@ -532,10 +532,10 @@ public:
 private:
  
 
- /// \short Create free surface elements
+ ///  Create free surface elements
  void create_free_surface_elements();
 
- /// \short Delete free surface elements 
+ ///  Delete free surface elements 
  void delete_free_surface_elements()
   {
    // How many surface elements are in the surface mesh
@@ -557,7 +557,7 @@ private:
 /// Create elements that impose volume constraint on the bubble
  void create_volume_constraint_elements();
 
- /// \short Delete volume constraint elements
+ ///  Delete volume constraint elements
  void delete_volume_constraint_elements()
   {
    // How many surface elements are in the surface mesh

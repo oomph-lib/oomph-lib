@@ -41,7 +41,7 @@
 namespace oomph
 {
   //=============================================================================
-  /// \short Topologically Rectangular Domain - a domain dexcribing a
+  ///  Topologically Rectangular Domain - a domain dexcribing a
   /// topologically rectangular problem - primarily contains functions to access
   /// the position of the global boundary relative to the macro element
   /// boundary, as well as first and second derivates of the global boundary wrt
@@ -50,14 +50,14 @@ namespace oomph
   class TopologicallyRectangularDomain : public Domain
   {
   public:
-    /// \short boundary function pointer - for a given boundary takes the
+    ///  boundary function pointer - for a given boundary takes the
     /// macro element coordinate position on that boundary and for that position
     /// returns the global coordinates (x) coordinates, or derivatives -
     /// dx_i/dm_t or second derivatives d2x_i/dm_t^2
     typedef void (*BoundaryFctPt)(const double& s, Vector<double>& r);
 
 
-    /// \short Constructor - domain boundaries are described with four boundary
+    ///  Constructor - domain boundaries are described with four boundary
     /// function pointers describing the topology of the north, east, south, and
     /// west boundaries
     TopologicallyRectangularDomain(BoundaryFctPt north_pt,
@@ -66,13 +66,13 @@ namespace oomph
                                    BoundaryFctPt west_pt);
 
 
-    /// \short Constructor - takes length of domain in x and y direction as
+    ///  Constructor - takes length of domain in x and y direction as
     /// arguements. Assumes domain is rectangular, and the south west (lower
     /// left) corner is at 0,0.
     TopologicallyRectangularDomain(const double& l_x, const double& l_y);
 
 
-    /// \short Constructor - takes the minimum and maximum coordinates of the
+    ///  Constructor - takes the minimum and maximum coordinates of the
     /// of an assumed rectanguler domain in the x and y direction
     TopologicallyRectangularDomain(const double& x_min,
                                    const double& x_max,
@@ -91,7 +91,7 @@ namespace oomph
     ~TopologicallyRectangularDomain() {}
 
 
-    /// \short allows the boundary derivate function pointers to be set. To
+    ///  allows the boundary derivate function pointers to be set. To
     /// compute the derivatives of the problem domain global coordinates (x_i)
     /// wrt the macro element coordinates (m_i), dx_i/dm_t is required along the
     /// domain boundaries (where dm_t is the macro element coordinate tangential
@@ -106,7 +106,7 @@ namespace oomph
                                            BoundaryFctPt d_west_pt);
 
 
-    /// \short allows the boundary second derivate function pointers to be set.
+    ///  allows the boundary second derivate function pointers to be set.
     /// To compute the second derivatives of the problem domain global
     /// coordinates (x_i) wrt the macro element coordinates (m_i), d2x_i/dm_t^2
     /// is required along the domain boundaries (where dm_t is the macro element
@@ -151,125 +151,125 @@ namespace oomph
 
 
   private:
-    /// \short Function pointer to prescribe the north boundary of this
+    ///  Function pointer to prescribe the north boundary of this
     /// topologically rectangular domain
     BoundaryFctPt North_boundary_fn_pt;
 
-    /// \short Function pointer to prescribe the east boundary of this
+    ///  Function pointer to prescribe the east boundary of this
     /// topologically rectangular domain
     BoundaryFctPt East_boundary_fn_pt;
 
-    /// \short Function pointer to prescribe the north boundary of this
+    ///  Function pointer to prescribe the north boundary of this
     /// topologically rectangular domain
     BoundaryFctPt South_boundary_fn_pt;
 
-    /// \short Function pointer to prescribe the west boundary of this
+    ///  Function pointer to prescribe the west boundary of this
     /// topologically rectangular domain
     BoundaryFctPt West_boundary_fn_pt;
 
 
-    /// \short Function pointer to prescribe the derivates of global coordinates
+    ///  Function pointer to prescribe the derivates of global coordinates
     /// wrt to the macro element coordinate tangential to the north boundary
     BoundaryFctPt dNorth_boundary_fn_pt;
 
-    /// \short Function pointer to prescribe the derivates of global coordinates
+    ///  Function pointer to prescribe the derivates of global coordinates
     /// wrt to the macro element coordinate tangential to the east boundary
     BoundaryFctPt dEast_boundary_fn_pt;
 
-    /// \short Function pointer to prescribe the derivates of global coordinates
+    ///  Function pointer to prescribe the derivates of global coordinates
     /// wrt to the macro element coordinate tangential to the south boundary
     BoundaryFctPt dSouth_boundary_fn_pt;
 
-    /// \short Function pointer to prescribe the derivates of global coordinates
+    ///  Function pointer to prescribe the derivates of global coordinates
     /// wrt to the macro element coordinate tangential to the west boundary
     BoundaryFctPt dWest_boundary_fn_pt;
 
 
-    /// \short Function pointer to prescribe the second derivates of global
+    ///  Function pointer to prescribe the second derivates of global
     /// coordinates wrt to the macro element coordinate tangential to the north
     /// boundary
     BoundaryFctPt d2North_boundary_fn_pt;
 
-    /// \short Function pointer to prescribe the second derivates of global
+    ///  Function pointer to prescribe the second derivates of global
     /// coordinates wrt to the macro element coordinate tangential to the east
     /// boundary
     BoundaryFctPt d2East_boundary_fn_pt;
 
-    /// \short Function pointer to prescribe the second derivates of global
+    ///  Function pointer to prescribe the second derivates of global
     /// coordinates wrt to the macro element coordinate tangential to the south
     /// boundary
     BoundaryFctPt d2South_boundary_fn_pt;
 
-    /// \short Function pointer to prescribe the second derivates of global
+    ///  Function pointer to prescribe the second derivates of global
     /// coordinates wrt to the macro element coordinate tangential to the west
     /// boundary
     BoundaryFctPt d2West_boundary_fn_pt;
 
 
-    /// \short coordinate position of south west corner of domain (only used if
+    ///  coordinate position of south west corner of domain (only used if
     /// boundary functions are not used)
     Vector<double> x_south_west;
 
-    /// \short coordinate position of north east corner of domain (only used if
+    ///  coordinate position of north east corner of domain (only used if
     /// boundary functions are not used)
     Vector<double> x_north_east;
 
 
-    /// \short takes the macro element coordinate position along the north
+    ///  takes the macro element coordinate position along the north
     /// boundary and returns the global coordinate position along that boundary
     void r_N(const Vector<double>& s, Vector<double>& f);
 
-    /// \short takes the macro element coordinate position along the east
+    ///  takes the macro element coordinate position along the east
     /// boundary and returns the global coordinate position along that boundary
     void r_E(const Vector<double>& s, Vector<double>& f);
 
-    /// \short takes the macro element coordinate position along the south
+    ///  takes the macro element coordinate position along the south
     /// boundary and returns the global coordinate position along that boundary
     void r_S(const Vector<double>& s, Vector<double>& f);
 
-    /// \short takes the macro element coordinate position along the west
+    ///  takes the macro element coordinate position along the west
     /// boundary and returns the global coordinate position along that boundary
     /// access down boundary function pointer
     void r_W(const Vector<double>& s, Vector<double>& f);
 
 
-    /// \short takes the macro element coordinate position along the north
+    ///  takes the macro element coordinate position along the north
     /// boundary and returns the derivates of the global coordinates with
     /// respect to the boundary
     void dr_N(const Vector<double>& s, Vector<double>& dr);
 
-    /// \short takes the macro element coordinate position along the E
+    ///  takes the macro element coordinate position along the E
     /// boundary and returns the derivates of the global coordinates with
     /// respect to the boundary
     void dr_E(const Vector<double>& s, Vector<double>& dr);
 
-    /// \short takes the macro element coordinate position along the south
+    ///  takes the macro element coordinate position along the south
     /// boundary and returns the derivates of the global coordinates with
     /// respect to the boundary
     void dr_S(const Vector<double>& s, Vector<double>& dr);
 
-    /// \short takes the macro element coordinate position along the W
+    ///  takes the macro element coordinate position along the W
     /// boundary and returns the derivates of the global coordinates with
     /// respect to the boundary
     void dr_W(const Vector<double>& s, Vector<double>& dr);
 
 
-    /// \short takes the macro element coordinate position along the north
+    ///  takes the macro element coordinate position along the north
     /// boundary and returns the second derivates of the global coordinates with
     /// respect to the boundary
     void d2r_N(const Vector<double>& s, Vector<double>& d2r);
 
-    /// \short takes the macro element coordinate position along the east
+    ///  takes the macro element coordinate position along the east
     /// boundary and returns the second derivates of the global coordinates with
     /// respect to the boundary
     void d2r_E(const Vector<double>& s, Vector<double>& d2r);
 
-    /// \short takes the macro element coordinate position along the south
+    ///  takes the macro element coordinate position along the south
     /// boundary and returns the second derivates of the global coordinates with
     /// respect to the boundary
     void d2r_S(const Vector<double>& s, Vector<double>& d2r);
 
-    /// \short takes the macro element coordinate position along the west
+    ///  takes the macro element coordinate position along the west
     /// boundary and returns the second derivates of the global coordinates with
     /// respect to the boundary
     void d2r_W(const Vector<double>& s, Vector<double>& d2r);

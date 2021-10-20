@@ -34,7 +34,7 @@
 
 namespace oomph
 {
-  /// \short Compute element residual Vector only (if JFLAG=and/or element
+  ///  Compute element residual Vector only (if JFLAG=and/or element
   /// Jacobian matrix
   template<unsigned DIM>
   void BiharmonicEquations<DIM>::

@@ -36,7 +36,7 @@ namespace oomph
     0.0;
 
   //======================================================================
-  /// \short Compute element residual Vector and/or element Jacobian matrix
+  ///  Compute element residual Vector and/or element Jacobian matrix
   ///
   /// flag=1: compute both
   /// flag=0: compute only residual Vector
@@ -281,7 +281,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Output function:
+  ///  Output function:
   ///
   ///   r,z,u,w_r,w_z
   ///
@@ -387,7 +387,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short  Output exact solution
+  ///   Output exact solution
   ///
   /// Solution is provided via function pointer.
   /// Plot at a given number of plot points.
@@ -438,7 +438,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Validate against exact solution
+  ///  Validate against exact solution
   ///
   /// Solution is provided via function pointer.
   /// Plot error at a given number of plot points.
@@ -515,7 +515,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Calculate the integrated value of the unknown over the element
+  ///  Calculate the integrated value of the unknown over the element
   ///
   //======================================================================
   double GeneralisedAxisymAdvectionDiffusionEquations::integrate_u()

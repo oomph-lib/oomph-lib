@@ -566,7 +566,7 @@ namespace oomph
 
 
   //=======================================================================
-  /// \short Default constructor, set the default linear solver and
+  ///  Default constructor, set the default linear solver and
   /// matrix-matrix multiplication method.
   //========================================================================
   CCDoubleMatrix::CCDoubleMatrix() : CCMatrix<double>()
@@ -576,7 +576,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Constructor: Pass vector of values, vector of row indices,
+  ///  Constructor: Pass vector of values, vector of row indices,
   /// vector of column starts and number of rows (can be suppressed
   /// for square matrices). Number of nonzero entries is read
   /// off from value, so make sure the vector has been shrunk
@@ -1304,7 +1304,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Constructor: Takes the distribution and the number of columns, as
+  ///  Constructor: Takes the distribution and the number of columns, as
   /// well as the vector of values, vector of column indices,vector of row
   /// starts.
   //=============================================================================
@@ -1357,7 +1357,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Runs through the column index vector and checks if the entries
+  ///  Runs through the column index vector and checks if the entries
   /// are arranged arbitrarily or if they follow the regular lexicographical
   /// of matrices. If a boolean argument is provided with the assignment
   /// TRUE then information on the first entry which is not in the correct
@@ -1434,7 +1434,7 @@ namespace oomph
   } // End of entries_are_sorted()
 
   //=============================================================================
-  /// \short This helper function sorts the entries in the column index vector
+  ///  This helper function sorts the entries in the column index vector
   /// and the value vector. During the construction of the matrix the entries
   /// were most likely assigned in an arbitrary order. As a result, it cannot
   /// be assumed that the entries in the column index vector corresponding to
@@ -1665,7 +1665,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short build method: Takes the distribution and the number of columns, as
+  ///  build method: Takes the distribution and the number of columns, as
   /// well as the vector of values, vector of column indices,vector of row
   /// starts.
   //=============================================================================
@@ -1689,7 +1689,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short method to rebuild the matrix, but not the distribution
+  ///  method to rebuild the matrix, but not the distribution
   //=============================================================================
   void CRDoubleMatrix::build(const unsigned& ncol,
                              const Vector<double>& value,
@@ -1705,7 +1705,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short method to rebuild the matrix, but not the distribution
+  ///  method to rebuild the matrix, but not the distribution
   //=============================================================================
   void CRDoubleMatrix::build_without_copy(const unsigned& ncol,
                                           const unsigned& nnz,
@@ -3667,7 +3667,7 @@ namespace oomph
   namespace CRDoubleMatrixHelpers
   {
     //============================================================================
-    /// \short Builds a uniformly distributed matrix.
+    ///  Builds a uniformly distributed matrix.
     /// A locally replicated matrix is constructed then redistributed using
     /// OOMPH-LIB's default uniform row distribution.
     /// This is memory intensive thus should be used for
@@ -3982,7 +3982,7 @@ namespace oomph
     }
 
     //============================================================================
-    /// \short Calculates the largest Gershgorin disc whilst preserving the
+    ///  Calculates the largest Gershgorin disc whilst preserving the
     /// sign. Let A be an n by n matrix, with entries aij. For \f$ i \in \{
     /// 1,...,n \} \f$ let \f$ R_i = \sum_{i\neq j} |a_{ij}| \f$ be the sum of
     /// the absolute values of the non-diagonal entries in the i-th row. Let \f$
@@ -4319,7 +4319,7 @@ namespace oomph
     }
 
     //============================================================================
-    /// \short Concatenate CRDoubleMatrix matrices.
+    ///  Concatenate CRDoubleMatrix matrices.
     /// The in matrices are concatenated such that the block structure of the
     /// in matrices are preserved in the result matrix. Communication between
     /// processors is required. If the block structure of the sub matrices does
@@ -5171,7 +5171,7 @@ namespace oomph
     }
 
     //============================================================================
-    /// \short Concatenate CRDoubleMatrix matrices.
+    ///  Concatenate CRDoubleMatrix matrices.
     ///
     /// The Vector row_distribution_pt contains the LinearAlgebraDistribution
     /// of each block row.
@@ -5876,7 +5876,7 @@ namespace oomph
 
 
     //============================================================================
-    /// \short Concatenate CRDoubleMatrix matrices.
+    ///  Concatenate CRDoubleMatrix matrices.
     /// This calls the other concatenate_without_communication(...) function,
     /// passing block_distribution_pt as both the row_distribution_pt and
     /// col_distribution_pt. This should only be called for block square

@@ -89,7 +89,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve: 
+ ///  Update the problem specs before solve: 
  void actions_before_newton_solve() {}
 
  /// Timestep the problem with constant timestep dt for nstep steps

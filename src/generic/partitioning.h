@@ -48,7 +48,7 @@ namespace oomph
   //==================================================================
   extern "C"
   {
-    /// \short Metis graph partitioning function
+    ///  Metis graph partitioning function
     void METIS_PartGraphKway(
       int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*);
 
@@ -56,7 +56,7 @@ namespace oomph
     // function from old API which no longer exists in METIS 5.1,
     // remove this moving to oomph-lib version 3
 
-    /// \short Metis graph partitioning function -- decomposes
+    ///  Metis graph partitioning function -- decomposes
     /// nodal graph based on minimum communication volume
     void METIS_PartGraphVKway(
       int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*);
@@ -70,7 +70,7 @@ namespace oomph
   //====================================================================
   namespace METIS
   {
-    /// \short Default function that translates spatial
+    ///  Default function that translates spatial
     /// error into weight for METIS partitioning (unit weight regardless
     /// of input)
     extern void default_error_to_weight_fct(const double& spatial_error,
@@ -78,18 +78,18 @@ namespace oomph
                                             const double& min_error,
                                             int& weight);
 
-    /// \short Typedef for function pointer to to function that translates
+    ///  Typedef for function pointer to to function that translates
     /// spatial error into weight for METIS partitioning.
     typedef void (*ErrorToWeightFctPt)(const double& spatial_error,
                                        const double& max_error,
                                        const double& min_error,
                                        int& weight);
 
-    /// \short Function pointer to to function that translates spatial
+    ///  Function pointer to to function that translates spatial
     /// error into weight for METIS partitioning.
     extern ErrorToWeightFctPt Error_to_weight_fct_pt;
 
-    /// \short Partition mesh uniformly by dividing elements
+    ///  Partition mesh uniformly by dividing elements
     /// equally over the partitions, in the order
     /// in which they are returned by problem.
     /// On return, element_domain[ielem] contains the number
@@ -100,7 +100,7 @@ namespace oomph
                                        Vector<unsigned>& element_domain);
 
 
-    /// \short Use METIS to assign each element to a domain.
+    ///  Use METIS to assign each element to a domain.
     /// On return, element_domain[ielem] contains the number
     /// of the domain [0,1,...,ndomain-1] to which
     /// element ielem has been assigned.
@@ -114,7 +114,7 @@ namespace oomph
                                Vector<unsigned>& element_domain);
 
 
-    /// \short Use METIS to assign each element to a domain.
+    ///  Use METIS to assign each element to a domain.
     /// On return, element_domain[ielem] contains the number
     /// of the domain [0,1,...,ndomain-1] to which
     /// element ielem has been assigned.
@@ -128,7 +128,7 @@ namespace oomph
                                const unsigned& objective,
                                Vector<unsigned>& element_domain);
 
-    //  /// \short Use METIS to assign each element to a domain.
+    //  ///  Use METIS to assign each element to a domain.
     //  /// On return, element_domain[ielem] contains the number
     //  /// of the domain [0,1,...,ndomain-1] to which
     //  /// element ielem has been assigned.
@@ -144,7 +144,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
 
-    /// \short Use METIS to assign each element in an already-distributed mesh
+    ///  Use METIS to assign each element in an already-distributed mesh
     /// to a domain. On return, element_domain_on_this_proc[e] contains the
     /// number of the domain [0,1,...,ndomain-1] to which non-halo element e on
     /// THE CURRENT PROCESSOR ONLY has been assigned. The order of the non-halo

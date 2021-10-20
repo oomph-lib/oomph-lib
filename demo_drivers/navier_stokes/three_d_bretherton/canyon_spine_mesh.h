@@ -49,7 +49,7 @@ class MyCanyonMesh : public  SimpleCubicMesh<ELEMENT >,
 
 public:
 
- /// \short Constructor: Pass number of elements in x-direction, number of
+ ///  Constructor: Pass number of elements in x-direction, number of
  /// elements in y-direction, number of elements in z-direciton,
  /// the maximum and minimum values of x, y and z. The radius of the 
  /// inner cylinder is R and the rotation flag specifies whether the mesh
@@ -110,7 +110,7 @@ public:
   }
 
 
- /// \short General node update function implements pure virtual function 
+ ///  General node update function implements pure virtual function 
  /// defined in SpineMesh base class and performs specific node update
  /// actions:  along vertical spines
  virtual void spine_node_update(SpineNode* spine_node_pt)
@@ -192,7 +192,7 @@ protected:
 /// Sacled radius of the canyon (must be between 0 and one
  double Radius;
 
- /// \short Helper function to actually build the single-layer spine mesh 
+ ///  Helper function to actually build the single-layer spine mesh 
  /// (called from various constructors)
  virtual void build_single_layer_mesh(TimeStepper* time_stepper_pt);
  

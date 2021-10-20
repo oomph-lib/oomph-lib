@@ -70,7 +70,7 @@ private:
  static double Default_Physical_Constant_Value;
 
 public:
- ///\short Constructor: call the underlying constructors and 
+ /// Constructor: call the underlying constructors and 
  ///initialise the pointer to the Rayleigh number to address the default
  ///value of 0.0
  RefineableBuoyantQSphericalCrouzeixRaviartElement() : 
@@ -80,7 +80,7 @@ public:
    Ra_pt = &Default_Physical_Constant_Value;
   }
 
- ///\short The required number of values stored at the nodes is 
+ /// The required number of values stored at the nodes is 
  ///the sum of the required values of the two single-physics elements. This
  ///step is generic for any composed element of this type.
   inline unsigned required_nvalue(const unsigned &n) const
@@ -116,7 +116,7 @@ public:
   void output(std::ostream &outfile)
   {FiniteElement::output(outfile);}
   
-  /// \short Output function:  
+  ///  Output function:  
   ///  x,y,u   or    x,y,z,u at Nplot^DIM plot points
   void output(std::ostream &outfile, const unsigned &nplot)
   {
@@ -159,22 +159,22 @@ public:
    
   }
 
- /// \short C-style output function:  Broken default
+ ///  C-style output function:  Broken default
  void output(FILE* file_pt)
   {FiniteElement::output(file_pt);}
 
- ///  \short C-style output function: Broken default
+ ///   C-style output function: Broken default
  void output(FILE* file_pt, const unsigned &n_plot)
   {FiniteElement::output(file_pt,n_plot);}
 
- /// \short Output function for an exact solution: Broken default
+ ///  Output function for an exact solution: Broken default
  void output_fct(std::ostream &outfile, const unsigned &Nplot,
                  FiniteElement::SteadyExactSolutionFctPt 
                  exact_soln_pt)
   {FiniteElement::output_fct(outfile,Nplot,exact_soln_pt);}
 
 
- /// \short Output function for a time-dependent exact solution.
+ ///  Output function for a time-dependent exact solution.
  /// Broken default
  void output_fct(std::ostream &outfile, const unsigned &Nplot,
                  const double& time,
@@ -185,26 +185,26 @@ public:
     output_fct(outfile,Nplot,time,exact_soln_pt);
   }
 
- ///\short Overload the index at which the temperature 
+ /// Overload the index at which the temperature 
  ///variable is stored. We choose to store is after the fluid velocities.
  unsigned u_index_spherical_adv_diff() const {return 3;}
  
- /// \short Number of vertex nodes in the element is obtained from the
+ ///  Number of vertex nodes in the element is obtained from the
  /// geometric element.
  unsigned nvertex_node() const
   {return QElement<2,3>::nvertex_node();}
 
- /// \short Pointer to the j-th vertex node in the element,
+ ///  Pointer to the j-th vertex node in the element,
  /// Call the geometric element's function.
  Node* vertex_node_pt(const unsigned& j) const
  {return QElement<2,3>::vertex_node_pt(j);}
  
- /// \short The total number of continously interpolated values is
+ ///  The total number of continously interpolated values is
  /// 4 (3 fluid velocities and one temperature).
  unsigned ncont_interpolated_values() const 
   {return 4;}
 
- /// \short Get the continuously interpolated values at the local coordinate s.
+ ///  Get the continuously interpolated values at the local coordinate s.
  /// We choose to put the fluid velocities first, followed by the
  /// temperature.
  void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
@@ -232,7 +232,7 @@ public:
 
 
  
- /// \short Get all continuously interpolated values at the local 
+ ///  Get all continuously interpolated values at the local 
  /// coordinate s at time level t (t=0: present; t>0: previous).
  /// We choose to put the fluid velocities first, followed by the
  /// temperature
@@ -263,7 +263,7 @@ public:
 
 
  
- /// \short The additional hanging node information must be set up
+ ///  The additional hanging node information must be set up
  /// for both single-physics elements.
  void further_setup_hanging_nodes()
   {
@@ -273,7 +273,7 @@ public:
 
 
  
- /// \short Call the rebuild_from_sons functions for each of the
+ ///  Call the rebuild_from_sons functions for each of the
  /// constituent multi-physics elements.
  void rebuild_from_sons(Mesh* &mesh_pt) 
   {
@@ -288,7 +288,7 @@ public:
 
 
 
- /// \short Call the underlying single-physics element's further_build()
+ ///  Call the underlying single-physics element's further_build()
  /// functions and make sure that the pointer to the Rayleigh number
  /// is passed to the sons
  void further_build()
@@ -313,7 +313,7 @@ public:
  unsigned nrecovery_order() 
   {return RefineableQSphericalCrouzeixRaviartElement::nrecovery_order();}
 
- /// \short The number of Z2 flux terms is the same as that in 
+ ///  The number of Z2 flux terms is the same as that in 
  /// the fluid element plus that in the advection-diffusion element
  unsigned num_Z2_flux_terms()
   {
@@ -322,7 +322,7 @@ public:
   }
 
 
- /// \short Get the Z2 flux by concatenating the fluxes from the fluid and
+ ///  Get the Z2 flux by concatenating the fluxes from the fluid and
  /// the advection diffusion elements.
  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   {
@@ -349,11 +349,11 @@ public:
 
   } //end of get_Z2_flux
 
- /// \short The number of compound fluxes is two (one for the fluid and
+ ///  The number of compound fluxes is two (one for the fluid and
  /// one for the temperature)
  unsigned ncompound_fluxes() {return 2;}
 
- /// \short Fill in which flux components are associated with the fluid
+ ///  Fill in which flux components are associated with the fluid
  /// measure and which are associated with the temperature measure
  void get_Z2_compound_flux_indices(Vector<unsigned> &flux_index) 
   {
@@ -375,7 +375,7 @@ public:
   } //end of get_Z2_compound_flux_indices
 
 
- /// \short Validate against exact solution at given time
+ ///  Validate against exact solution at given time
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -387,7 +387,7 @@ public:
   {FiniteElement::compute_error(outfile,exact_soln_pt,
                                 time,error,norm);}
 
- /// \short Validate against exact solution.
+ ///  Validate against exact solution.
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -398,7 +398,7 @@ public:
   {FiniteElement::
    compute_error(outfile,exact_soln_pt,error,norm);}
  
- /// \short Overload the wind function in the advection-diffusion equations.
+ ///  Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity.
 void get_wind_spherical_adv_diff(const unsigned& ipt,
@@ -410,7 +410,7 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
   }
  
  
- /// \short Overload the body force in the navier-stokes equations
+ ///  Overload the body force in the navier-stokes equations
  /// This provides the coupling from the advection-diffusion equations
  /// to the Navier--Stokes equations, the body force is the
  /// temperature multiplied by the Rayleigh number acting in the
@@ -451,7 +451,7 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
   }
 
 
- ///\short Compute the element's residual Vector and the jacobian matrix
+ /// Compute the element's residual Vector and the jacobian matrix
  ///using full finite differences, the default implementation
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
@@ -494,7 +494,7 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
    this->fill_in_off_diagonal_jacobian_blocks_analytic(residuals,jacobian);
  }
 
- /// \short Compute the contribution of the off-diagonal blocks
+ ///  Compute the contribution of the off-diagonal blocks
  /// analytically.
  void fill_in_off_diagonal_jacobian_blocks_analytic(
   Vector<double> &residuals, DenseMatrix<double> &jacobian)
@@ -835,7 +835,7 @@ public virtual  QElement<1,3>
 
   public:
  
- /// \short Constructor: Call the constructor for the
+ ///  Constructor: Call the constructor for the
  /// appropriate lower-dimensional QElement
  FaceGeometry() : QElement<1,3>() {}
 

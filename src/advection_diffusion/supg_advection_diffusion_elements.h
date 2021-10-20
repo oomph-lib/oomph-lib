@@ -31,7 +31,7 @@
 namespace oomph
 {
   //======================================================================
-  /// \short QSUPGAdvectionDiffusionElement<DIM,NNODE_1D> elements are
+  ///  QSUPGAdvectionDiffusionElement<DIM,NNODE_1D> elements are
   /// SUPG-stabilised Advection Diffusion elements with
   /// NNODE_1D nodal points in each coordinate direction. Inherits
   /// from QAdvectionDiffusionElement and overwrites their
@@ -43,7 +43,7 @@ namespace oomph
     : public virtual QAdvectionDiffusionElement<DIM, NNODE_1D>
   {
   public:
-    ///\short  Constructor: Call constructors for underlying
+    ///  Constructor: Call constructors for underlying
     /// QAdvectionDiffusion element. Initialise stabilisation parameter
     /// to zero
     QSUPGAdvectionDiffusionElement()
@@ -163,7 +163,7 @@ namespace oomph
     }
 
 
-    /// \short Output function:
+    ///  Output function:
     /// x,y,u,w_x,w_y,tau_supg  or    x,y,z,u,w_x,w_y,w_z,tau_supg
     /// nplot points in each coordinate direction
     void output(std::ostream& outfile, const unsigned& nplot)
@@ -257,7 +257,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Refineable version of QSUPGAdvectionDiffusionElement.
+  ///  Refineable version of QSUPGAdvectionDiffusionElement.
   /// Inherit from the standard QSUPGAdvectionDiffusionElement and the
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
@@ -268,7 +268,7 @@ namespace oomph
       public virtual RefineableQElement<DIM>
   {
   public:
-    /// \short Constructor: Pass refinement level to refineable quad element
+    ///  Constructor: Pass refinement level to refineable quad element
     /// (default 0 = root)
     RefineableQSUPGAdvectionDiffusionElement()
       : RefineableElement(),
@@ -294,13 +294,13 @@ namespace oomph
       return 1;
     }
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QSUPGAdvectionDiffusionElement<DIM, NNODE_1D>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QSUPGAdvectionDiffusionElement<DIM, NNODE_1D>::vertex_node_pt(j);
@@ -309,14 +309,14 @@ namespace oomph
     /// Rebuild from sons: empty
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return (NNODE_1D - 1);
     }
 
-    ///  \short Perform additional hanging node procedures for variables
+    ///   Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Empty.
     void further_setup_hanging_nodes() {}
   };

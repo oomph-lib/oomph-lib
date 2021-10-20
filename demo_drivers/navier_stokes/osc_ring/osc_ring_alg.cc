@@ -636,7 +636,7 @@ class OscRingNStProblem : public Problem
 
 public:
 
- /// \short Constructor: Pass timestep and function 
+ ///  Constructor: Pass timestep and function 
  /// pointer to the solution that provides the initial conditions for the fluid
  OscRingNStProblem(const double& dt,
                    FiniteElement::UnsteadyExactSolutionFctPt IC_fct_pt);
@@ -653,10 +653,10 @@ public:
  /// Update after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve(){}
 
- /// \short Update the fluid mesh and re-set velocity boundary conditions. 
+ ///  Update the fluid mesh and re-set velocity boundary conditions. 
  void actions_before_newton_convergence_check() 
  {
   // Update the fluid mesh -- auxiliary update function for algebraic
@@ -664,7 +664,7 @@ public:
   fluid_mesh_pt()->node_update(); 
  }
 
- /// \short Finish problem setup: Setup element-specific things 
+ ///  Finish problem setup: Setup element-specific things 
  /// (source fct pointers etc.)
  void finish_problem_setup();
 
@@ -679,14 +679,14 @@ public:
                    DocInfo& doc_info);
 
 
- /// \short Set initial condition (incl previous timesteps) according
+ ///  Set initial condition (incl previous timesteps) according
  /// to specified function. 
  void set_initial_condition();
  
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
 
- /// \short Doc the solution (historic version, maintained for backwards 
+ ///  Doc the solution (historic version, maintained for backwards 
  /// compatibility)
  void doc_solution_historic(DocInfo& doc_info);
 
@@ -696,10 +696,10 @@ public:
    return Fluid_mesh_pt; 
   }
  
- /// \short Dump generic problem data.
+ ///  Dump generic problem data.
  void dump_it(ofstream& dump_file, DocInfo doc_info);
 
- /// \short Read generic problem data.
+ ///  Read generic problem data.
  void restart(ifstream& restart_file);
 
 private:
@@ -707,7 +707,7 @@ private:
  /// Write header for trace file
  void write_trace_file_header();
 
- /// \short Write header for trace file (historic version, maintained for 
+ ///  Write header for trace file (historic version, maintained for 
  /// backwards compatibility)
  void write_trace_file_header_historic();
 
@@ -729,7 +729,7 @@ private:
  /// Pointer to node on coarsest mesh on which velocity is traced
  Node* Veloc_trace_node_pt;
 
- /// \short Pointer to node in symmetry plane on coarsest mesh at 
+ ///  Pointer to node in symmetry plane on coarsest mesh at 
  /// which velocity is traced
  Node* Sarah_veloc_trace_node_pt;
 

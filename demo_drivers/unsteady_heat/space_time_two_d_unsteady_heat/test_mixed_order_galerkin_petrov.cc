@@ -81,16 +81,16 @@ namespace GlobalParameters
   ///--------------------------Mesh Properties----------------------------
 
   ///----------------------------Solver Info------------------------------
-  /// \short Variable to choose which preconditioner to use. The actual
+  ///  Variable to choose which preconditioner to use. The actual
   /// preconditioner we choose to use is defined by the enumeration class
   /// implemented in the problem
   unsigned Preconditioner=1;
 
-  /// \short Storage for the number of dof types in the mesh. Will be
+  ///  Storage for the number of dof types in the mesh. Will be
   /// assigned in the function assign_time_slice_id()
   unsigned N_dof_type=0;
 
-  /// \short Helper function which sets up the mapping between DOF types
+  ///  Helper function which sets up the mapping between DOF types
   /// and which block they should be assigned to. This relies on the concept
   /// of "time slabs" in the space-time formulation. All dofs in a given
   /// time slab will be aggregrated together
@@ -160,7 +160,7 @@ namespace SinSolution
   } // End of get_exact_u
 
 
-  /// \short Source function to make it an exact solution
+  ///  Source function to make it an exact solution
   void get_source(const double& t,
                   const Vector<double>& x,
                   double& source)
@@ -204,13 +204,13 @@ public:
   /// Destructor (empty)
   ~UnsteadyHeatProblem();
 
-  /// \short Update the problem specs before solve (empty)
+  ///  Update the problem specs before solve (empty)
   void actions_before_newton_solve() {}
 
   /// Update the problem specs after solve (empty)
   void actions_after_newton_solve() {}
 
-  /// \short Update the problem specs before solve (empty)
+  ///  Update the problem specs before solve (empty)
   void actions_before_adapt() {}
 
   /// Update the problem specs after solve
@@ -224,7 +224,7 @@ public:
     // Assign the appropriate boundary conditions
     apply_boundary_conditions();
 
-    // \short Pin the redundant temporal nodes that should not be proper dofs
+    //  Pin the redundant temporal nodes that should not be proper dofs
     // (because of the time discretisation we're using)
     pin_redundant_temporal_nodes();
 
@@ -236,7 +236,7 @@ public:
     complete_problem_setup();
   } // End of actions_after_adapt
 
-  /// \short A wrapper around the Problem's refine_uniformly(...) function;
+  ///  A wrapper around the Problem's refine_uniformly(...) function;
   /// update the number of space-time slabs after a uniform refinement so
   /// that the preconditioner solve the system more efficiently.
   void refine_uniformly()
@@ -248,7 +248,7 @@ public:
     Problem::refine_uniformly();
   } // End of refine_uniformly
 
-  /// \short A wrapper around the Problem's adapt(...) function; issue a
+  ///  A wrapper around the Problem's adapt(...) function; issue a
   /// warning that adaptation doesn't work for these elements
   void adapt()
   {
@@ -285,25 +285,25 @@ public:
     }
   } // End of unpin_all_dofs
 
-  /// \short Create the space-time mesh with the chosen number of elements in
+  ///  Create the space-time mesh with the chosen number of elements in
   /// the time direction and the chosen spatial resolution
   void create_spacetime_mesh();
 
-  /// \short The mixed order elements use linear interpolation in time so the
+  ///  The mixed order elements use linear interpolation in time so the
   /// only nodes which contribute to the unknowns in the system are those that
   /// lie on the temporal boundaries of the elements. Thus, all nodes that do
   /// not lie on these boundaries need to be pinned (otherwise we'd get zero
   /// rows in the system matrix making it singular...).
   void pin_redundant_temporal_nodes();
 
-  /// \short Assign the Dirichlet and maybe time-periodic BCs
+  ///  Assign the Dirichlet and maybe time-periodic BCs
   void apply_boundary_conditions();
 
-  /// \short Assign the appropriate boundary conditions and enforce periodicity
+  ///  Assign the appropriate boundary conditions and enforce periodicity
   /// in the time direction
   void enforce_time_periodic_boundary_conditions();
 
-  /// \short Function to set the periodicity between two octrees and assign
+  ///  Function to set the periodicity between two octrees and assign
   /// the up and right equivalents to both elements
   void set_neighbour_periodic_and_up_right_equivalents(FiniteElement* el0_pt,
       FiniteElement* el1_pt,
@@ -312,14 +312,14 @@ public:
   /// Helper function when space-time block preconditioning is being used
   void assign_time_slab_id();
 
-  /// \short Complete problem setup; make all the elements fully functional
+  ///  Complete problem setup; make all the elements fully functional
   /// by passing pointers to all physical parameters
   void complete_problem_setup();
 
-  /// \short Assign the chosen solver (and preconditioner if so desired)
+  ///  Assign the chosen solver (and preconditioner if so desired)
   void set_up_spacetime_solver();
 
-  /// \short Helper function to update the block preconditioner after, what
+  ///  Helper function to update the block preconditioner after, what
   /// seems like, a uniform refinement
   void update_block_preconditioner_after_refinement();
 
@@ -343,7 +343,7 @@ private:
   /// Pointer to the mesh
   RefineableSimpleCubicMesh<ELEMENT>* Bulk_mesh_pt;
 
-  /// \short The number of space-time slabs in the mesh; this is essentially
+  ///  The number of space-time slabs in the mesh; this is essentially
   /// a copy of N_t in the GlobalParameters namespace but will be updated
   /// when we complete a uniform refinement
   unsigned N_space_time_slab;
@@ -444,7 +444,7 @@ UnsteadyHeatProblem<ELEMENT>::~UnsteadyHeatProblem()
 
 
 //======start_of_create_spacetime_mesh======================================
-/// \short Helper function to create the space-time mesh (to be assigned to
+///  Helper function to create the space-time mesh (to be assigned to
 /// Bulk_mesh_pt) with the chosen number of elements in the time direction
 /// and an appropriate spatial resolution (to capture the time-periodic
 /// solution properly).
@@ -482,7 +482,7 @@ void UnsteadyHeatProblem<ELEMENT>::create_spacetime_mesh()
 
 
 //======start_of_pin_redundant_temporal_nodes================================
-/// \short The mixed order elements use linear interpolation in time so the
+///  The mixed order elements use linear interpolation in time so the
 /// only nodes which contribute to the unknowns in the system are those that
 /// lie on the temporal boundaries of the elements. Thus, all nodes that do
 /// not lie on these boundaries need to be pinned (otherwise we'd get zero
@@ -520,7 +520,7 @@ void UnsteadyHeatProblem<ELEMENT>::pin_redundant_temporal_nodes()
 
 
 //======start_of_apply_boundary_conditions=================================
-/// \short Apply the Dirichlet conditions on the spatial boundaries and
+///  Apply the Dirichlet conditions on the spatial boundaries and
 /// the initial time boundary, if specified, otherwise apply time-periodic
 /// boundary conditions on the time boundaries. More explicitly:
 ///             Boundary 0 (t=0) -- Dirichlet or time-periodic BCs
@@ -599,7 +599,7 @@ void UnsteadyHeatProblem<ELEMENT>::apply_boundary_conditions()
 
 
 //======start_of_enforce_time_periodic_boundary_conditions=================
-/// \short Assign the appropriate boundary conditions, i.e. periodicity
+///  Assign the appropriate boundary conditions, i.e. periodicity
 /// in the t-direction. In the x and y-direction apply Dirichlet boundary
 /// conditions. In summary:
 ///             Boundary 0 (t=0) -- Periodic in time (w.r.t. boundary 5)
@@ -1209,7 +1209,7 @@ void UnsteadyHeatProblem<ELEMENT>::set_up_spacetime_solver()
 
 
 //======start_of_update_block_preconditioner_after_refinement===========
-/// \short Helper function to update the block preconditioner after, what
+///  Helper function to update the block preconditioner after, what
 /// seems like, a uniform refinement
 //========================================================================
 template<class ELEMENT>

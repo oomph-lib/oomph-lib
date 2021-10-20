@@ -542,7 +542,7 @@ namespace oomph
   void AlgebraicChannelWithLeafletMesh<ELEMENT>::slanted_bound_up(
     const unsigned& t, const Vector<double>& zeta, Vector<double>& r)
   {
-    ///\short Coordinates of the point on the boundary beetween the upper
+    /// Coordinates of the point on the boundary beetween the upper
     /// and the lower part, in the same column, at the east.
     double htot = this->domain_pt()->htot();
 

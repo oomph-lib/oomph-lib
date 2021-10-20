@@ -97,7 +97,7 @@ public:
  /// Perform nstep timesteps of size dt
  void timestep(const double &dt, const unsigned &nstep);
 
- /// \short Overloaded Problem's access function to the mesh.
+ ///  Overloaded Problem's access function to the mesh.
  /// Recasts the pointer to the base Mesh object to the actual mesh type.
  /// This is required so that we can call specific RefineableMesh functions
  RefineableOneDMesh<ELEMENT>* mesh_pt() 

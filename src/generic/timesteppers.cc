@@ -496,7 +496,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short Initialise the time-history for the values,
+  ///  Initialise the time-history for the values,
   /// corresponding to an impulsive start.
   //=========================================================================
   template<unsigned NSTEPS>
@@ -525,7 +525,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short Initialise the time-history for the values,
+  ///  Initialise the time-history for the values,
   /// corresponding to an impulsive start.
   //=========================================================================
   template<unsigned NSTEPS>
@@ -561,7 +561,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short  Initialise the time-history for the Data values,
+  ///   Initialise the time-history for the Data values,
   /// so that the Newmark representations for current veloc and
   /// acceleration are exact.
   //=========================================================================
@@ -680,7 +680,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short  Initialise the time-history for the Data values,
+  ///   Initialise the time-history for the Data values,
   /// so that the Newmark representations for current veloc and
   /// acceleration are exact.
   //=========================================================================
@@ -804,7 +804,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short  First step in a two-stage procedure to assign
+  ///   First step in a two-stage procedure to assign
   /// the history values for the Newmark scheme so
   /// that the veloc and accel that are computed by the scheme
   /// are correct at the current time.
@@ -875,7 +875,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Second step in a two-stage procedure to assign
+  ///  Second step in a two-stage procedure to assign
   /// the history values for the Newmark scheme so
   /// that the veloc and accel that are computed by the scheme
   /// are correct at the current time.
@@ -943,7 +943,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short This function updates the Data's time history so that
+  ///  This function updates the Data's time history so that
   /// we can advance to the next timestep.
   //=========================================================================
   template<unsigned NSTEPS>
@@ -976,7 +976,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short This function updates a nodal time history so that
+  ///  This function updates a nodal time history so that
   /// we can advance to the next timestep.
   //=========================================================================
   template<unsigned NSTEPS>
@@ -1075,7 +1075,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short This function updates the Data's time history so that
+  ///  This function updates the Data's time history so that
   /// we can advance to the next timestep.
   //=========================================================================
   template<unsigned NSTEPS>
@@ -1121,7 +1121,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short This function updates a nodal time history so that
+  ///  This function updates a nodal time history so that
   /// we can advance to the next timestep.
   //=========================================================================
   template<unsigned NSTEPS>

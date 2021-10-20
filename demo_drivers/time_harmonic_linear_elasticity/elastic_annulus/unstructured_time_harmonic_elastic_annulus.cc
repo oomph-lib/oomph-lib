@@ -74,7 +74,7 @@ public:
  /// Destructor:  Empty
  ~MyStraightLine(){}
  
- /// \short Position Vector at Lagrangian coordinate zeta 
+ ///  Position Vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position Vector
@@ -177,7 +177,7 @@ public:
 
 private:
 
- /// \short Create traction elements
+ ///  Create traction elements
  void create_traction_elements();
 
  /// Delete traction elements

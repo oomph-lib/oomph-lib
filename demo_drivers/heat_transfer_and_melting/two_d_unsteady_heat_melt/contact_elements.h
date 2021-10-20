@@ -44,7 +44,7 @@ namespace oomph
  
 
 //=========================================================
-/// \short Piecewise Gauss integration rule. Uses
+///  Piecewise Gauss integration rule. Uses
 /// Gauss rules of specified order in three sub-intervals
 /// of element.
 //=========================================================
@@ -58,7 +58,7 @@ namespace oomph
    
     public:
    
-   /// \short Constructor: Pass in lower and upper limits of 1D coordinate
+   ///  Constructor: Pass in lower and upper limits of 1D coordinate
    /// over which we're integrating
    PiecewiseGauss(const double& lower, const double& upper) : 
    Lower(lower), Upper(upper)
@@ -145,7 +145,7 @@ namespace oomph
 
 
 //======================================================================
-/// \short Base class for penetrator. Must be able to compute
+///  Base class for penetrator. Must be able to compute
 /// the penetration with another body, based on the position vector, x,
 /// to, and the outer unit normal, n, on that other body. 
 //======================================================================
@@ -160,7 +160,7 @@ class Penetrator
   /// Destructor
   virtual ~Penetrator(){};
   
-  /// \short Get penetration for given point x with outer unit normal n.
+  ///  Get penetration for given point x with outer unit normal n.
   /// Should return the negative distance along outer unit normal to the  
   /// closest point on the penetrator, so that minus values imply no 
   /// penetration and positive ones imply penetration. If the ray from the 
@@ -176,7 +176,7 @@ class Penetrator
   /// Output coordinates of penetrator at nplot plot points
   virtual void output(std::ostream &outfile, const unsigned& nplot) const =0;
   
-  /// \short Get rigid body displacement of reference point in penetrator.
+  ///  Get rigid body displacement of reference point in penetrator.
   /// Broken virtual, so you don't really have to imlement this...
   virtual Vector<double> rigid_body_displacement() const 
   {
@@ -186,7 +186,7 @@ class Penetrator
     OOMPH_EXCEPTION_LOCATION);
   }
 
-  /// \short Vector of pairs identifying values (via a pair of pointer to 
+  ///  Vector of pairs identifying values (via a pair of pointer to 
   /// Data object and index within it) that correspond to the Data values 
   /// that are determined by the horizontal/vertical/... equilibrium of force 
   /// equations. Empty by default, indicating that the penetrator is in a 
@@ -198,7 +198,7 @@ class Penetrator
     return dummy;
    }
 
-  /// \short Get surface coordinate along penetrator for given point x;
+  ///  Get surface coordinate along penetrator for given point x;
   /// implies some sort of "projection"-type relation between
   /// point x and the parametrisation of the surface (e.g. polar
   /// angle).
@@ -216,7 +216,7 @@ class Penetrator
 
 
 //======================================================================
-/// \short Base class for "heated" penetrator.
+///  Base class for "heated" penetrator.
 //======================================================================
 class HeatedPenetrator : public virtual Penetrator
  {
@@ -229,7 +229,7 @@ class HeatedPenetrator : public virtual Penetrator
   /// Destructor
   virtual ~HeatedPenetrator(){};
 
-  /// \short Get penetrator temperature at surface for given point x. Specific 
+  ///  Get penetrator temperature at surface for given point x. Specific 
   /// implementation of penetetrator has do decide how to relate
   /// these two points.
   virtual double temperature(const Vector<double>& x) const=0;
@@ -243,7 +243,7 @@ class HeatedPenetrator : public virtual Penetrator
 
 
 //======================================================================
-/// \short Penetrator -- here implemented as a circle
+///  Penetrator -- here implemented as a circle
 //======================================================================
 class CircularPenetrator : public virtual Penetrator
  {
@@ -268,7 +268,7 @@ class CircularPenetrator : public virtual Penetrator
   /// Destructor
   virtual ~CircularPenetrator(){}
 
-  /// \short Get penetration for given point x
+  ///  Get penetration for given point x
   void penetration(const Vector<double>& x,
                      const Vector<double>& n,
                      double& d,
@@ -321,7 +321,7 @@ class CircularPenetrator : public virtual Penetrator
    }
     
   
-  /// \short Get position to surface, r, in terms of surface coordinate zeta.
+  ///  Get position to surface, r, in terms of surface coordinate zeta.
   void position_from_zeta(const Vector<double>& zeta, 
                           Vector<double>& r) const
   {
@@ -332,7 +332,7 @@ class CircularPenetrator : public virtual Penetrator
 
 
 
-  /// \short Get surface coordinate along penetrator for given point x.
+  ///  Get surface coordinate along penetrator for given point x.
   /// We assume that point on the surface and given point share the
   /// same polar angle and return that polar angle 
   void surface_coordinate(const Vector<double>& x, Vector<double>& zeta) const
@@ -341,7 +341,7 @@ class CircularPenetrator : public virtual Penetrator
   }
 
   
-  /// \short Get rigid body displacement of reference point in penetrator.
+  ///  Get rigid body displacement of reference point in penetrator.
   Vector<double> rigid_body_displacement() const
    {    
     unsigned n=Orig_centre.size();
@@ -354,7 +354,7 @@ class CircularPenetrator : public virtual Penetrator
    }
 
 
-  /// \short Set original centre of penetrator (for computation of rigid body
+  ///  Set original centre of penetrator (for computation of rigid body
   /// displacement
   void set_original_centre(const Vector<double>& orig_centre)
   {
@@ -364,12 +364,12 @@ class CircularPenetrator : public virtual Penetrator
 
    protected:
   
-  /// \short Pointer to centre of penetrator (origin for cylindrical polar
+  ///  Pointer to centre of penetrator (origin for cylindrical polar
   /// coordinate system)
   Vector<double>* Centre_pt;
 
 
-  /// \short Original centre of penetrator (origin for cylindrical polar
+  ///  Original centre of penetrator (origin for cylindrical polar
   /// coordinate system)
   Vector<double> Orig_centre;
 
@@ -385,7 +385,7 @@ class CircularPenetrator : public virtual Penetrator
 
 
 //======================================================================
-/// \short Heated circular penetrator
+///  Heated circular penetrator
 //======================================================================
 class HeatedCircularPenetrator : public virtual HeatedPenetrator,
  public virtual CircularPenetrator
@@ -401,7 +401,7 @@ class HeatedCircularPenetrator : public virtual HeatedPenetrator,
   virtual ~HeatedCircularPenetrator(){}
 
 
-  /// \short Get temperature on penetrator at point "associated" with
+  ///  Get temperature on penetrator at point "associated" with
   /// point x using the same logic as for the position function). Here
   /// we assume that both points shrare the same polar angle relative
   /// to the centre of (circular!) penetrator
@@ -427,7 +427,7 @@ class HeatedCircularPenetrator : public virtual HeatedPenetrator,
 namespace PolygonHelper
 {
 
- /// \short Check if point in inside polygon.
+ ///  Check if point in inside polygon.
  /// Reference: http://paulbourke.net/geometry/insidepoly/
  bool point_is_in_polygon(const Vector<double>& point,
                           const Vector<Vector<double> >& polygon_vertex)
@@ -676,7 +676,7 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
  
    public:
  
-  /// \short Constructor, which takes a "bulk" element and the 
+  ///  Constructor, which takes a "bulk" element and the 
  /// value of the index and its limit
   SurfaceContactElementBase(FiniteElement* const &element_pt, 
                             const int &face_index,
@@ -768,10 +768,10 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
    }
  
 
-   /// \short Default constructor
+   ///  Default constructor
    SurfaceContactElementBase(){}
  
-   /// \short Enforce permanent contact with penetrator, allowing
+   ///  Enforce permanent contact with penetrator, allowing
    /// for negative contact pressures.
    void enable_stick()
    {
@@ -795,14 +795,14 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
     return FaceGeometry<ELEMENT>::s_max();
    }
    
-   /// \short Allow only proper non-penetration (without "stick", i.e.
+   ///  Allow only proper non-penetration (without "stick", i.e.
    /// we don't allow negative contact pressures) 
    void disable_stick()
    {
     Enable_stick=false;
    }
    
-   /// \short Do we allow only proper non-penetration (without "stick", i.e.
+   ///  Do we allow only proper non-penetration (without "stick", i.e.
    /// no negative contact pressures)?
    bool is_stick_enabled()
    {
@@ -834,13 +834,13 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
    //   }
    
    
-   /// \short Pointer to penetrator
+   ///  Pointer to penetrator
    Penetrator* penetrator_pt() const
     {
      return Penetrator_pt;
     }
    
-   /// \short Set pointer to penetrator
+   ///  Set pointer to penetrator
    void set_penetrator_pt(Penetrator* penetrator_pt)
    {
     Penetrator_pt=penetrator_pt;
@@ -888,22 +888,22 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
      }
    }
    
-   /// \short C_style output function
+   ///  C_style output function
    void output(FILE* file_pt)
    {FiniteElement::output(file_pt);}
    
-   /// \short C-style output function
+   ///  C-style output function
    void output(FILE* file_pt, const unsigned &n_plot)
    {FiniteElement::output(file_pt,n_plot);}
    
-   /// \short Output function
+   ///  Output function
    void output(std::ostream &outfile)
    {
     unsigned n_plot=5;
     FiniteElement::output(outfile,n_plot);
    }
    
-   /// \short Output function
+   ///  Output function
    void output(std::ostream &outfile, const unsigned &n_plot)
    {
     FiniteElement::output(outfile,n_plot);
@@ -974,7 +974,7 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
    
    protected:
    
-   /// \short Get interpolated pressure (essentially a Lagrange multiplier
+   ///  Get interpolated pressure (essentially a Lagrange multiplier
    /// that enforces the imposed boundary motion to ensure 
    /// non-penetration or contact)
    double get_interpolated_lagrange_p(const Vector<double>& s)
@@ -1010,7 +1010,7 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
     return p;
    }
    
-/// \short Helper function that actually calculates the residuals
+///  Helper function that actually calculates the residuals
 /// This small level of indirection is required to avoid calling
 /// fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
 /// which causes all kinds of pain if overloading later on
@@ -1029,24 +1029,24 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
  /// Pointer to penetrator
  Penetrator* Penetrator_pt;
  
- /// \short ID of the contact constraint (used for the identification of
+ ///  ID of the contact constraint (used for the identification of
  /// the nodal value that corresponds to the pressure-like
  /// Lagrange multipliers.
  unsigned Contact_id;
  
-   /// \short Do we allow only proper non-penetration (without "stick", i.e.
+   ///  Do we allow only proper non-penetration (without "stick", i.e.
    /// no negative contact pressures)?
  bool Enable_stick;
  
  
- /// \short Vector containing the type of Data (labeled by the 
+ ///  Vector containing the type of Data (labeled by the 
  /// class' private enumeration) that is determined (via pseudo-hijacking)
  /// from the Penetrator's i-th equilibrium of forces equation. -1 if
  /// this relevant equilibrium equation is not employed to determine
  /// an unknown that's associated with the current element.
  Vector<int> Penetrator_eq_data_type;
  
- /// \short Vector containing the index of the Data object (e.g. the
+ ///  Vector containing the index of the Data object (e.g. the
  /// node number in the current element) that stores the unknown 
  /// that is determined from the Penetrator's 
  /// i-th equilibrium of forces equation. -1 if the relevant 
@@ -1054,7 +1054,7 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
  /// an unknown that's associated with the current element.
  Vector<int> Penetrator_eq_data_index;
  
- /// \short Vector containing the index of the value in the Data 
+ ///  Vector containing the index of the value in the Data 
  /// object (e.g. the node number in the current element) that 
  /// stores the unknown that is determined from the Penetrator's 
  /// i-th equilibrium of forces equation. -1 if the relevant 
@@ -1087,7 +1087,7 @@ public virtual SurfaceContactElementBase<ELEMENT>
  
   public:
  
- /// \short Constructor, which takes a "bulk" element and the 
+ ///  Constructor, which takes a "bulk" element and the 
  /// value of the index and its limit
   NonlinearSurfaceContactElement(FiniteElement* const &element_pt, 
                                  const int &face_index,
@@ -1105,14 +1105,14 @@ public virtual SurfaceContactElementBase<ELEMENT>
  void fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals);
 
  
- /// \short Output function
+ ///  Output function
  void output(std::ostream &outfile)
  {
   unsigned n_plot=5;
   this->output(outfile,n_plot);
  }
 
- /// \short Output function
+ ///  Output function
  void output(std::ostream &outfile, const unsigned &n_plot)
  {
   
@@ -1774,7 +1774,7 @@ public virtual SurfaceContactElementBase<ELEMENT>
  
   public:
  
- /// \short Constructor, which takes a "bulk" element and the 
+ ///  Constructor, which takes a "bulk" element and the 
  /// value of the index and its limit
   LinearSurfaceContactElement(FiniteElement* const &element_pt, 
                               const int &face_index,
@@ -1800,7 +1800,7 @@ public virtual SurfaceContactElementBase<ELEMENT>
     }
   }
 
- /// \short Default constructor
+ ///  Default constructor
  LinearSurfaceContactElement(){}
 
  /// Return the residuals for the SurfaceContactElement equations
@@ -1808,14 +1808,14 @@ public virtual SurfaceContactElementBase<ELEMENT>
                                                         residuals);
  
  
- /// \short Output function
+ ///  Output function
  void output(std::ostream &outfile)
  {
   unsigned n_plot=5;
   this->output(outfile,n_plot);
  }
 
- /// \short Output function
+ ///  Output function
  void output(std::ostream &outfile, const unsigned &n_plot)
  {
   unsigned n_dim = this->nodal_dimension();

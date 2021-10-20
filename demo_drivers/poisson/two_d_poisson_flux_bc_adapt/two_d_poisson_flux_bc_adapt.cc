@@ -62,7 +62,7 @@ class SimpleRefineableRectangularQuadMesh :
 
 public: 
 
- /// \short  Pass number of elements in the horizontal 
+ ///   Pass number of elements in the horizontal 
  /// and vertical directions, and the corresponding dimensions.
  /// Timestepper defaults to Static.
  SimpleRefineableRectangularQuadMesh(const unsigned &Nx,
@@ -156,7 +156,7 @@ public:
 
 private:
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ ///  Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
@@ -169,16 +169,16 @@ private:
  /// Actions after adapt: Rebuild the mesh of prescribed flux elements
  void actions_after_adapt();
 
- /// \short Create Poisson flux elements on boundary b of the Mesh pointed
+ ///  Create Poisson flux elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the Mesh object pointed to by 
  /// surface_mesh_pt
  void create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
                            Mesh* const &surface_mesh_pt);
 
- /// \short Delete Poisson flux elements and wipe the surface mesh
+ ///  Delete Poisson flux elements and wipe the surface mesh
  void delete_flux_elements(Mesh* const &surface_mesh_pt);
 
- /// \short Set pointer to prescribed-flux function for all
+ ///  Set pointer to prescribed-flux function for all
  /// elements in the surface mesh
  void set_prescribed_flux_pt();
 

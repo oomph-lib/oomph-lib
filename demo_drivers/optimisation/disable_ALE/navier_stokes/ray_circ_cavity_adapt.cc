@@ -44,7 +44,7 @@ using namespace oomph;
 
 
 //============start_of_MyEllipse===========================================
-/// \short Ellipse
+///  Ellipse
 /// \f[ x = a  \cos(\xi)  \f]
 /// \f[ y = b  \sin(\xi)  \f]
 //=========================================================================
@@ -53,14 +53,14 @@ class MyEllipse : public GeomObject
 
 public:
 
- /// \short Constructor:  Pass half axes
+ ///  Constructor:  Pass half axes
  MyEllipse(const double& a, const double& b) :
   GeomObject(1,2), A(a), B(b) {}
 
  /// Destructor: Empty
  virtual ~MyEllipse() {}
 
- /// \short Current position vector to material point at 
+ ///  Current position vector to material point at 
  /// Lagrangian coordinate xi 
  void position(const Vector<double>& xi, Vector<double>& r) const
   {
@@ -72,7 +72,7 @@ public:
 
 
 
- /// \short Parametrised position on object: r(xi). Evaluated at
+ ///  Parametrised position on object: r(xi). Evaluated at
  /// previous time level. t=0: current time; t>0: previous
  /// time level.
  void position(const unsigned& t, const Vector<double>& xi,
@@ -145,7 +145,7 @@ public:
  //Update before solve is empty
  void actions_before_newton_solve() {}
 
- /// \short Update after solve is empty
+ ///  Update after solve is empty
  void actions_after_newton_solve() {}
 
  //Actions before timestep: Update no slip on lower oscillating wall
@@ -174,7 +174,7 @@ public:
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
 
- /// \short Set initial condition (incl previous timesteps) according
+ ///  Set initial condition (incl previous timesteps) according
  /// to specified function. 
  void set_initial_condition();
 
@@ -348,7 +348,7 @@ RayleighProblem<ELEMENT,TIMESTEPPER>::RayleighProblem
 
 
 //======================start_of_set_initial_condition====================
-/// \short Set initial condition: Assign previous and current values
+///  Set initial condition: Assign previous and current values
 /// from exact solution.
 //========================================================================
 template<class ELEMENT,class TIMESTEPPER>

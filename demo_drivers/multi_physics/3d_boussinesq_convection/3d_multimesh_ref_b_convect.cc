@@ -71,7 +71,7 @@ namespace Global_Physical_Variables
  /// Reynolds number
  double Reynolds=10.0;
 
- /// \short Rayleigh number
+ ///  Rayleigh number
  double Rayleigh = 100.0;
  
  /// Gravity vector
@@ -116,13 +116,13 @@ public:
    delete Adv_diff_mesh_pt;
   }
 
- /// \short Update the problem specs before solve:
+ ///  Update the problem specs before solve:
  void actions_before_newton_solve();
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Overloaded version of the problem's access function to 
+ ///  Overloaded version of the problem's access function to 
  /// the NST mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableSimpleCubicMesh<NST_ELEMENT>* nst_mesh_pt() 
@@ -131,7 +131,7 @@ public:
     (Nst_mesh_pt);
   }
 
- /// \short Overloaded version of the problem's access function to 
+ ///  Overloaded version of the problem's access function to 
  /// the AD mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableSimpleCubicMesh<AD_ELEMENT>* adv_diff_mesh_pt() 
@@ -143,7 +143,7 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt() {}
 
- /// \short Actions after adaptation, reset all sources, then
+ ///  Actions after adaptation, reset all sources, then
  /// re-pin a single pressure degree of freedom
  void actions_after_adapt()
   {
@@ -152,10 +152,10 @@ public:
     <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
   }
 
- /// \short Doc the solution.
+ ///  Doc the solution.
  void doc_solution();
 
- /// \short Switch to the iterative linear solve
+ ///  Switch to the iterative linear solve
  void switch_to_iterative_linear_solver();
 
 private:

@@ -58,7 +58,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short A class for elements that allow the imposition of the linearised
+  ///  A class for elements that allow the imposition of the linearised
   /// poroelastic FSI
   /// slip condition (according to the Beavers-Joseph-Saffman condition) from an
   /// adjacent poroelastic axisymmetric medium. The element geometry is obtained
@@ -71,7 +71,7 @@ namespace oomph
       public virtual ElementWithExternalElement
   {
   public:
-    /// \short Constructor, takes the pointer to the "bulk" element and the
+    ///  Constructor, takes the pointer to the "bulk" element and the
     /// face index identifying the face to which the element is attached.
     /// The optional identifier can be used
     /// to distinguish the additional nodal values created by
@@ -80,7 +80,7 @@ namespace oomph
                                               const int& face_index,
                                               const unsigned& id = 0);
 
-    /// \short Default constructor
+    ///  Default constructor
     LinearisedAxisymPoroelasticBJS_FSIElement() {}
 
     /// Broken copy constructor
@@ -90,7 +90,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const LinearisedAxisymPoroelasticBJS_FSIElement&) = delete;
 
-    /// \short Access function for the pointer to the fluid Strouhal number
+    ///  Access function for the pointer to the fluid Strouhal number
     /// (if not set, St defaults to 1)
     double*& st_pt()
     {
@@ -129,7 +129,7 @@ namespace oomph
 
     // hieher need to add derivs w.r.t external data (the
     // bulk velocity dofs
-    /* /// \short Add the element's contribution to its residual vector and its
+    /* ///  Add the element's contribution to its residual vector and its
      */
     /* /// Jacobian matrix */
     /* void fill_in_contribution_to_jacobian( */
@@ -146,7 +146,7 @@ namespace oomph
     /*  } */
 
 
-    /// \short Return this element's contribution to the total volume enclosed
+    ///  Return this element's contribution to the total volume enclosed
     /// by collection of these elements
     double contribution_to_enclosed_volume()
     {
@@ -440,7 +440,7 @@ namespace oomph
     }
 
 
-    /// \short Compute contributions to integrated porous flux over boundary:
+    ///  Compute contributions to integrated porous flux over boundary:
     /// q_skeleton = \int \partial u_displ / \partial t \cdot n ds
     /// q_seepage  = \int k q \cdot n ds
     /// q_nst      = \int u \cdot n ds
@@ -643,7 +643,7 @@ namespace oomph
 
 
   protected:
-    /// \short Function to compute the shape and test functions and to return
+    ///  Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     double shape_and_test(const Vector<double>& s,
@@ -667,7 +667,7 @@ namespace oomph
     }
 
 
-    /// \short Function to compute the shape and test functions and to return
+    ///  Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     double shape_and_test_at_knot(const unsigned& ipt,
@@ -691,7 +691,7 @@ namespace oomph
     }
 
   private:
-    /// \short Add the element's contribution to its residual vector.
+    ///  Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     void fill_in_generic_residual_contribution_axisym_poroelastic_fsi(
@@ -803,7 +803,7 @@ namespace oomph
   }
 
   //===========================================================================
-  /// \short Helper function to compute the element's residual vector and
+  ///  Helper function to compute the element's residual vector and
   /// the Jacobian matrix.
   //===========================================================================
   template<class FLUID_BULK_ELEMENT, class POROELASTICITY_BULK_ELEMENT>

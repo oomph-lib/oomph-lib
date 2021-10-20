@@ -46,7 +46,7 @@ namespace Global_Physical_Variables
  ///Direction of the wall normal vector
  Vector<double> Wall_normal;
 
- /// \short Function that specifies the wall unit normal
+ ///  Function that specifies the wall unit normal
  void wall_unit_normal_fct(const Vector<double> &x, 
                       Vector<double> &normal)
  {
@@ -712,7 +712,7 @@ public:
   }
 
  
- /// \short Destructor: Empty
+ ///  Destructor: Empty
  virtual ~RefineableCylinderAndInterfaceMesh() {}
 
 
@@ -748,7 +748,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve: 
+ ///  Update the problem specs before solve: 
  void actions_before_newton_solve() {set_boundary_conditions();}
 
  /// Strip off the interface before adaptation
@@ -760,7 +760,7 @@ public:
 
  void actions_after_adapt() {finish_problem_setup(); this->rebuild_global_mesh();}
 
- /// \short Complete problem setup: Setup element-specific things 
+ ///  Complete problem setup: Setup element-specific things 
  /// (source fct pointers etc.)
  void finish_problem_setup();
 
@@ -993,7 +993,7 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
 
 
 //========================================================================
-/// \short Complete build of Poisson problem:
+///  Complete build of Poisson problem:
 /// Loop over elements and setup pointers to source function
 ///
 //========================================================================

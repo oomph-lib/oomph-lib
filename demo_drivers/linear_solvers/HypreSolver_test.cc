@@ -93,7 +93,7 @@ public:
 
   }
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ ///  Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
@@ -109,11 +109,11 @@ public:
  /// Report number of Newton iterations taken
  unsigned newton_count(){return Newton_count-1;}
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ ///  Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
  
- /// \short Overloaded version of the problem's access function to 
+ ///  Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()

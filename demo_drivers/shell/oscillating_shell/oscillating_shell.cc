@@ -47,7 +47,7 @@ namespace Global_Physical_Variables
 //  /// Prescribed position of control point
 //  double Prescribed_y = 1.0;
 
-//  /// \short Pointer to pressure load (stored in Data so it can 
+//  ///  Pointer to pressure load (stored in Data so it can 
 //  /// become an unknown in the problem when displacement control is used
 //  Data* Pext_data_pt;
 
@@ -57,7 +57,7 @@ namespace Global_Physical_Variables
  /// Only keep p_cos switched on until T_pcos_end
  double T_pcos_end=10.0;
 
-//  /// \short Return a reference to the external pressure 
+//  ///  Return a reference to the external pressure 
 //  /// load on the elastic tube.
 //  double external_pressure() 
 //   {return (*Pext_data_pt->value_pt(0))*pow(0.05,3)/12.0;}
@@ -76,7 +76,7 @@ namespace Global_Physical_Variables
  }
 
 
- /// \short Square of timescale ratio (i.e. non-dimensional 
+ ///  Square of timescale ratio (i.e. non-dimensional 
  /// density)   -- 1.0 for default value of scaling factor
  double Lambda_sq=1.0;
 

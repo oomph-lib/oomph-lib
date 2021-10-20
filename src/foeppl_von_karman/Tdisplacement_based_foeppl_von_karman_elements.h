@@ -70,7 +70,7 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///\short  Constructor: Call constructors for TElement and
+    ///  Constructor: Call constructors for TElement and
     /// Foeppl von Karman equations
     TDisplacementBasedFoepplvonKarmanElement()
       : TElement<2, NNODE_1D>(), DisplacementBasedFoepplvonKarmanEquations()
@@ -86,14 +86,14 @@ namespace oomph
     void operator=(const TDisplacementBasedFoepplvonKarmanElement<NNODE_1D>&) =
       delete;
 
-    /// \short Access function for Nvalue: # of `values' (pinned or
+    ///  Access function for Nvalue: # of `values' (pinned or
     /// dofs) at node n (always returns the same value at every node, 4)
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    /// \short The number of dof types that degrees of freedom in this
+    ///  The number of dof types that degrees of freedom in this
     /// element are sub-divided into
     unsigned ndof_types() const
     {
@@ -106,7 +106,7 @@ namespace oomph
       return 5;
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global
     /// equation number of the unknown, while the second one contains
     /// the number of the dof type that this unknown is associated with.
@@ -228,14 +228,14 @@ namespace oomph
       } // for (n < n_node)
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,w
     void output(std::ostream& outfile)
     {
       DisplacementBasedFoepplvonKarmanEquations::output(outfile);
     }
 
-    ///  \short Output function:
+    ///   Output function:
     ///   x,y,w at n_plot^2 plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -243,7 +243,7 @@ namespace oomph
     }
 
 
-    /// \short C-style output function:
+    ///  C-style output function:
     ///  x,y,w
     void output(FILE* file_pt)
     {
@@ -251,7 +251,7 @@ namespace oomph
     }
 
 
-    ///  \short C-style output function:
+    ///   C-style output function:
     ///   x,y,w at n_plot^2 plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -259,7 +259,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for an exact solution:
+    ///  Output function for an exact solution:
     ///  x,y,w_exact
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -270,7 +270,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for a time-dependent exact solution.
+    ///  Output function for a time-dependent exact solution.
     ///  x,y,w_exact (calls the steady version)
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -299,7 +299,7 @@ namespace oomph
                                                         Shape& test,
                                                         DShape& dtestdx) const;
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
@@ -318,13 +318,13 @@ namespace oomph
       this->get_gradient_of_deflection(s, flux);
     }
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<2, NNODE_1D>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<2, NNODE_1D>::vertex_node_pt(j);
@@ -409,7 +409,7 @@ namespace oomph
     : public virtual TElement<1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : TElement<1, NNODE_1D>() {}
   };

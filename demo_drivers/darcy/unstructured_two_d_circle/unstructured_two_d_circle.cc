@@ -38,7 +38,7 @@ using namespace std;
 namespace TestProblem
 {
 
- /// \short Flag to indicate that we want the forced solution a "point source"
+ ///  Flag to indicate that we want the forced solution a "point source"
  /// in the mass flux
  bool Use_point_source_solution=false;
 
@@ -128,7 +128,7 @@ namespace TestProblem
  /// The directory in which the solution is output
  std::string Directory="RESLT";
 
- /// \short Global function that completes the edge sign setup --
+ ///  Global function that completes the edge sign setup --
  /// has to be called before projection in unstructured
  /// adaptation
  template<class ELEMENT>

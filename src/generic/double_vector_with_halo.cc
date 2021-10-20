@@ -28,7 +28,7 @@
 namespace oomph
 {
   //============================================================================
-  ///\short Constructor that sets up the required information communicating
+  /// Constructor that sets up the required information communicating
   /// between all processors. Requires two "all to all" communications.
   /// Arguments are the distribution of the DoubleVector and a
   /// Vector of global unknowns required on this processor.
@@ -217,7 +217,7 @@ namespace oomph
   }
 
   //=====================================================================
-  ///\short Function that sets up a vector of pointers to halo
+  /// Function that sets up a vector of pointers to halo
   /// data, index using the scheme in Local_index. The first arguement
   /// is a map of pointers to all halo data index by the global equation
   /// number

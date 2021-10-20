@@ -46,7 +46,7 @@
 namespace oomph
 {
   //===========================================================================
-  /// \short The least-squares commutator (LSC; formerly BFBT)
+  ///  The least-squares commutator (LSC; formerly BFBT)
   /// preconditioner. It uses blocks corresponding to the displacement/position
   /// and pressure unknowns, i.e. there are a total of 2x2 blocks,
   /// and all displacement/position components are treated as a
@@ -232,21 +232,21 @@ namespace oomph
       Solid_mesh_pt = mesh_pt;
     }
 
-    /// \short Enable mass matrix diagonal scaling in the
+    ///  Enable mass matrix diagonal scaling in the
     /// Schur complement approximation
     void enable_p_matrix_scaling()
     {
       P_matrix_using_scaling = true;
     }
 
-    /// \short Enable mass matrix diagonal scaling in the
+    ///  Enable mass matrix diagonal scaling in the
     /// Schur complement approximation
     void disable_p_matrix_scaling()
     {
       P_matrix_using_scaling = false;
     }
 
-    /// \short Return whether the mass matrix is using diagonal
+    ///  Return whether the mass matrix is using diagonal
     /// scaling or not
     bool is_p_matrix_using_scaling() const
     {
@@ -266,7 +266,7 @@ namespace oomph
       Using_default_p_preconditioner = false;
     }
 
-    /// \short Function to (re-)set pressure matrix preconditioner  (inexact
+    ///  Function to (re-)set pressure matrix preconditioner  (inexact
     /// solver) to SuperLU
     void set_p_superlu_preconditioner()
     {
@@ -290,7 +290,7 @@ namespace oomph
       Using_default_f_preconditioner = false;
     }
 
-    ///\short Function to (re-)set momentum matrix preconditioner (inexact
+    /// Function to (re-)set momentum matrix preconditioner (inexact
     /// solver) to SuperLU
     void set_f_superlu_preconditioner()
     {
@@ -314,7 +314,7 @@ namespace oomph
       Doc_time = false;
     }
 
-    /// \short If this function is called then:
+    ///  If this function is called then:
     /// in setup(...) : BFBt is computed.
     /// in preconditioner_solve(...) : a single matrix vector product with
     /// BFBt is performed.
@@ -323,7 +323,7 @@ namespace oomph
       Form_BFBt_product = true;
     }
 
-    /// \short if this function is called  then:
+    ///  if this function is called  then:
     /// in setup(...) : the matrices B, F are assembled and stored
     /// (the default behaviour) .
     /// in preconditioner_solve(...) : a sequence of matrix vector products
@@ -335,7 +335,7 @@ namespace oomph
       Form_BFBt_product = false;
     }
 
-    /// \short Helper function to delete preconditioner data.
+    ///  Helper function to delete preconditioner data.
     void clean_up_memory();
 
   private:
@@ -356,12 +356,12 @@ namespace oomph
     /// flag indicating whether the default P preconditioner is used
     bool Using_default_p_preconditioner;
 
-    /// \short Control flag is true if the preconditioner has been setup
+    ///  Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is
     /// called again)
     bool Preconditioner_has_been_setup;
 
-    /// \short Control flag is true if mass matrix diagonal scaling
+    ///  Control flag is true if mass matrix diagonal scaling
     /// is used in the Schur complement approximation
     bool P_matrix_using_scaling;
 
@@ -370,7 +370,7 @@ namespace oomph
     /// PressureBasedSolidEquations<DIM>::get_mass_matrix_diagonal(...).
     CRDoubleMatrix* assemble_mass_matrix_diagonal();
 
-    /// \short Boolean indicating whether the momentum system preconditioner
+    ///  Boolean indicating whether the momentum system preconditioner
     /// is a block preconditioner
     bool F_preconditioner_is_block_preconditioner;
 
@@ -389,7 +389,7 @@ namespace oomph
     /// MatrixVectorProduct operator for E (BFBt) if BFBt is to be formed.
     MatrixVectorProduct* E_mat_vec_pt;
 
-    /// \short indicates whether BFBt should be formed or the component matrices
+    ///  indicates whether BFBt should be formed or the component matrices
     /// should be retained.
     /// If true then:
     /// in setup(...) : BFBt is computed.
@@ -403,7 +403,7 @@ namespace oomph
     ///  are replaced with BQ and QBt with scaling)
     bool Form_BFBt_product;
 
-    /// \short the pointer to the mesh of block preconditionable solid
+    ///  the pointer to the mesh of block preconditionable solid
     /// elements.
     Mesh* Solid_mesh_pt;
   };
@@ -415,7 +415,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short The exact solid preconditioner. This extracts 2x2 blocks
+  ///  The exact solid preconditioner. This extracts 2x2 blocks
   /// (corresponding to the displacement/position and pressure unknowns)
   /// and uses these to
   /// build a single preconditioner matrix for testing purposes.

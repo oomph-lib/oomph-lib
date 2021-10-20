@@ -42,7 +42,7 @@ namespace oomph
 
 
   //=======================================================================
-  /// \short A policy class that serves to establish the
+  ///  A policy class that serves to establish the
   /// common interfaces for elements that contain moving nodes. This
   /// class provides storage for the geometric data that affect the
   /// update of all the nodes of the element, i.e. USUALLY
@@ -94,7 +94,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const ElementWithMovingNodes&) = delete;
 
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -121,7 +121,7 @@ namespace oomph
       return Ngeom_dof;
     }
 
-    /// \short Return the local equation number corresponding to the i-th
+    ///  Return the local equation number corresponding to the i-th
     /// value at the n-th geometric data object.
     inline int geometric_data_local_eqn(const unsigned& n, const unsigned& i)
     {
@@ -168,7 +168,7 @@ namespace oomph
     void assemble_set_of_all_geometric_data(
       std::set<Data*>& unique_geom_data_pt);
 
-    /// \short Specify Data that affects the geometry of the element
+    ///  Specify Data that affects the geometry of the element
     /// by adding the element's geometric Data to the set that's passed in.
     /// (This functionality is required in FSI problems; set is used to
     /// avoid double counting).
@@ -182,13 +182,13 @@ namespace oomph
       }
     }
 
-    /// \short Return whether shape derivatives are evaluated by fd
+    ///  Return whether shape derivatives are evaluated by fd
     bool are_dresidual_dnodal_coordinates_always_evaluated_by_fd() const
     {
       return Evaluate_dresidual_dnodal_coordinates_by_fd;
     }
 
-    /// \short Insist that shape derivatives are always
+    ///  Insist that shape derivatives are always
     /// evaluated by fd (using
     /// FiniteElement::get_dresidual_dnodal_coordinates())
     void enable_always_evaluate_dresidual_dnodal_coordinates_by_fd()
@@ -196,7 +196,7 @@ namespace oomph
       Evaluate_dresidual_dnodal_coordinates_by_fd = true;
     }
 
-    /// \short Insist that shape derivatives are always
+    ///  Insist that shape derivatives are always
     /// evaluated using the overloaded version of this function
     /// that may have been implemented in a derived class.
     /// (The default behaviour will still be finite differences unless the
@@ -214,7 +214,7 @@ namespace oomph
       Method_for_shape_derivs = Shape_derivs_by_direct_fd;
     }
 
-    /// \short Evaluate shape derivatives by chain rule. Currently disabled by
+    ///  Evaluate shape derivatives by chain rule. Currently disabled by
     /// default because it's broken; can re-enable use by setting optional
     /// boolean to true.
     void evaluate_shape_derivs_by_chain_rule(
@@ -239,7 +239,7 @@ namespace oomph
       Method_for_shape_derivs = Shape_derivs_by_chain_rule;
     }
 
-    /// \short Evaluate shape derivatives by (anticipated) fastest method.
+    ///  Evaluate shape derivatives by (anticipated) fastest method.
     /// Currently disabled by default because it's broken; can re-enable
     /// use by setting optional boolean to true.
     void evaluate_shape_derivs_by_fastest_method(
@@ -290,7 +290,7 @@ namespace oomph
     }
 
   protected:
-    /// \short Compute derivatives of the nodal coordinates w.r.t.
+    ///  Compute derivatives of the nodal coordinates w.r.t.
     /// to the geometric dofs. Default implementation by FD can be overwritten
     /// for specific elements.
     /// dnodal_coordinates_dgeom_dofs(l,i,j) = dX_{ij} / d s_l
@@ -306,7 +306,7 @@ namespace oomph
     virtual void assign_all_generic_local_eqn_numbers(
       const bool& store_local_dof_pt);
 
-    /// \short Calculate the contributions to the Jacobian matrix from the
+    ///  Calculate the contributions to the Jacobian matrix from the
     /// geometric data. This version
     /// assumes that the (full) residuals vector has already been calculated
     /// and is passed in as the first argument -- needed in case
@@ -334,13 +334,13 @@ namespace oomph
     }
 
 
-    /// \short Vector that stores pointers to all Data that affect the
+    ///  Vector that stores pointers to all Data that affect the
     /// node update operations, i.e. the variables that can affect
     /// the position of the node.
     Vector<Data*> Geom_data_pt;
 
   public:
-    /// \short Return the number of geometric data upon which the shape
+    ///  Return the number of geometric data upon which the shape
     /// of the element depends
     unsigned ngeom_data() const
     {
@@ -348,25 +348,25 @@ namespace oomph
     }
 
   private:
-    /// \short Array to hold local eqn number information for the
+    ///  Array to hold local eqn number information for the
     /// geometric Data variables
     int** Geometric_data_local_eqn;
 
-    /// \short Number of geometric dofs (computed on the fly when
+    ///  Number of geometric dofs (computed on the fly when
     /// equation numbers are set up)
     unsigned Ngeom_dof;
 
-    /// \short Set flag to true to bypass calculation of Jacobain entries
+    ///  Set flag to true to bypass calculation of Jacobain entries
     /// resulting from geometric data.
     bool Bypass_fill_in_jacobian_from_geometric_data;
 
-    /// \short Boolean to decide if shape derivatives are to be evaluated
+    ///  Boolean to decide if shape derivatives are to be evaluated
     /// by fd (using FiniteElement::get_dresidual_dnodal_coordinates())
     /// or analytically, using the overloaded version of this function
     /// in this class.
     bool Evaluate_dresidual_dnodal_coordinates_by_fd;
 
-    /// \short Choose method for evaluation of shape derivatives
+    ///  Choose method for evaluation of shape derivatives
     /// (this takes one of the values in the enumeration)
     int Method_for_shape_derivs;
   };
@@ -381,7 +381,7 @@ namespace oomph
                                          public ElementWithMovingNodes
   {
   public:
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -417,7 +417,7 @@ namespace oomph
     }
 
 
-    /// \short Overload the node assignment routine to assign nodes of the
+    ///  Overload the node assignment routine to assign nodes of the
     /// appropriate type.
     Node* construct_node(const unsigned& n)
     {
@@ -476,7 +476,7 @@ namespace oomph
     }
 
 
-    /// \short Complete the setup of additional dependencies. Overloads
+    ///  Complete the setup of additional dependencies. Overloads
     /// empty virtual function in GeneralisedElement to determine the "geometric
     /// Data", i.e. the Data that affects the element's shape.
     /// This function is called (for all elements) at the very beginning of the
@@ -492,7 +492,7 @@ namespace oomph
     }
 
 
-    /// \short Assign local equation numbers for the underlying element, then
+    ///  Assign local equation numbers for the underlying element, then
     /// deal with the additional geometric dofs
     void assign_all_generic_local_eqn_numbers(const bool& store_local_dof_pt)
     {

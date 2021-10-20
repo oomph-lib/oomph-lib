@@ -47,7 +47,7 @@ using namespace oomph;
 namespace FishSolnOneDPoisson
 {
 
- /// \short Sign of the source function 
+ ///  Sign of the source function 
  /// (- gives the upper half of the fish, + the lower half)
  int Sign=-1;
 
@@ -108,7 +108,7 @@ public:
     }
   }
 
- /// \short Doc the solution, pass the number of the case considered,
+ ///  Doc the solution, pass the number of the case considered,
  /// so that output files can be distinguished.
  void doc_solution(DocInfo& doc);
 
@@ -126,7 +126,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for 1D Poisson problem in unit interval.
+///  Constructor for 1D Poisson problem in unit interval.
 /// Discretise the 1D domain with n_element elements of type ELEMENT.
 /// Specify function pointer to source function. 
 //========================================================================
@@ -173,7 +173,7 @@ OneDPoissonProblem<ELEMENT>::OneDPoissonProblem(const unsigned& n_element,
 
 
 //===start_of_actions_before_newton_solve======================================
-/// \short Update the problem specs before solve: (Re)set boundary values
+///  Update the problem specs before solve: (Re)set boundary values
 /// from the exact solution. 
 //=============================================================================
 template<class ELEMENT>

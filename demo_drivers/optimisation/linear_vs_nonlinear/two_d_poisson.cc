@@ -88,7 +88,7 @@ class PoissonProblem : public Problem
 
 public:
 
- /// \short Constructor: Pass pointer to source function
+ ///  Constructor: Pass pointer to source function
  /// Mesh has 2^|n_power| x 2^|n_power| elements.
  PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
                 const unsigned& n_power);
@@ -96,7 +96,7 @@ public:
  /// Destructor (empty)
  ~PoissonProblem(){}
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ ///  Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
@@ -109,11 +109,11 @@ public:
  /// Treat the problem as being linear
  void set_problem_is_linear() {Problem::Problem_is_nonlinear = false;}
 
- /// \short Return the flag to determine whether the problem is being
+ ///  Return the flag to determine whether the problem is being
  /// treated as linear or nonlinear
  bool is_problem_nonlinear() const {return Problem::Problem_is_nonlinear;}
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ ///  Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 

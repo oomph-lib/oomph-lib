@@ -36,7 +36,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Class that makes the finite element specified as template argument
+  ///  Class that makes the finite element specified as template argument
   /// projectable -- on the assumption that all fields are interpolated
   /// by isoparametric Lagrange interpolation between the nodes.
   //======================================================================
@@ -51,7 +51,7 @@ namespace oomph
       Boundary_id = UINT_MAX;
     }
 
-    /// \short Nodal value of boundary coordinate
+    ///  Nodal value of boundary coordinate
     double zeta_nodal(const unsigned& n,
                       const unsigned& k,
                       const unsigned& i) const
@@ -101,7 +101,7 @@ namespace oomph
       return Boundary_id;
     }
 
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
@@ -121,13 +121,13 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected.
+    ///  Number of fields to be projected.
     unsigned nfields_for_projection()
     {
       return this->node_pt(0)->nvalue();
     }
 
-    /// \short Number of history values to be stored for fld-th field
+    ///  Number of history values to be stored for fld-th field
     /// (includes current value!). Extract from first node but assume it's
     /// the same for all.
     unsigned nhistory_values_for_projection(const unsigned& fld)
@@ -135,7 +135,7 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
-    ///\short Number of positional history values (Note: count includes
+    /// Number of positional history values (Note: count includes
     /// current value!). Extract from first node but assume it's
     /// the same for all.
     unsigned nhistory_values_for_coordinate_projection()
@@ -144,7 +144,7 @@ namespace oomph
     }
 
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s.
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -155,7 +155,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,
@@ -179,14 +179,14 @@ namespace oomph
       return interpolated_u;
     }
 
-    /// \short Return number of values in field fld
+    ///  Return number of values in field fld
     unsigned nvalue_of_field(const unsigned& fld)
     {
       return this->nnode();
     }
 
 
-    /// \short Return local equation number of value j in field fld. Assumed to
+    ///  Return local equation number of value j in field fld. Assumed to
     /// be the local nodal equation.
     int local_equation(const unsigned& fld, const unsigned& j)
     {
@@ -222,7 +222,7 @@ namespace oomph
   class BackupMeshForProjection : public virtual Mesh
   {
   public:
-    /// \short Constructor: Pass existing mesh and the boundary ID (need to find
+    ///  Constructor: Pass existing mesh and the boundary ID (need to find
     /// the boundary coordinates that are used for the projection.
     /// Optional final argument specifies the ID of the field (i.e. the
     /// index of the relevant nodal value!) to be projected.
@@ -386,7 +386,7 @@ namespace oomph
       }
     }
 
-    /// \short Project the solution that was present in the original mesh
+    ///  Project the solution that was present in the original mesh
     /// and from which this backup mesh was created onto the mesh
     /// pointed to by new_mesh_pt. Note that elements in the new mesh do
     /// not have to be projectable. The original mesh may by now have
@@ -420,7 +420,7 @@ namespace oomph
     }
 
 
-    /// \short Copy nodal values back onto original mesh from which this
+    ///  Copy nodal values back onto original mesh from which this
     /// mesh was built. This obviously only makes sense if the original
     /// mesh still exists!
     void copy_onto_original_mesh()
@@ -470,7 +470,7 @@ namespace oomph
     /// Boundary id
     unsigned Boundary_id;
 
-    /// \short ID of field to be projected (UINT_MAX if there isn't one, in
+    ///  ID of field to be projected (UINT_MAX if there isn't one, in
     /// which case we're doing all of them.
     unsigned ID_of_field_to_be_projected;
   };

@@ -54,7 +54,7 @@ namespace oomph
   class ProjectableElementBase
   {
   protected:
-    ///\short Enumerated collection to specify which projection problem
+    /// Enumerated collection to specify which projection problem
     /// is to be solved.
     enum Projection_Type
     {
@@ -69,36 +69,36 @@ namespace oomph
     /// Time level we are projecting  (0=current values; >0: history values)
     unsigned Time_level_for_projection;
 
-    ///\short When projecting the history values of the nodal coordinates,
+    /// When projecting the history values of the nodal coordinates,
     /// this is the coordinate we're projecting
     unsigned Projected_coordinate;
 
-    ///\short When projecting the Lagrangain coordinates indicate which
+    /// When projecting the Lagrangain coordinates indicate which
     /// coordiante is to be projected
     unsigned Projected_lagrangian;
 
-    /// \short Variable to indicate if we're projecting the history values of
+    ///  Variable to indicate if we're projecting the history values of
     /// the nodal coordinates (Coordinate) the values themselves (Value), or the
     /// Lagrangian coordinates in Solid Mechanics problems (Lagrangian)
     Projection_Type Projection_type;
 
-    /// \short Bool to know if we do projection or not. If false (the default)
+    ///  Bool to know if we do projection or not. If false (the default)
     /// we solve the element's "real" equations rather than the projection
     /// equations
     bool Do_projection;
 
 
-    /// \short Store number of "external" interactions that were assigned to
+    ///  Store number of "external" interactions that were assigned to
     /// the element before doing the projection.
     unsigned Backup_ninteraction;
 
-    /// \short Remember if the element includes external geometric data
+    ///  Remember if the element includes external geometric data
     /// when used in  non-projection mode (this is temporarily disabled during
     /// the projection)
     bool Backup_external_geometric_data;
 
 
-    /// \short Remember if the element includes external data when used in
+    ///  Remember if the element includes external data when used in
     /// non-projection mode (this is temporarily disabled during the
     /// projection)
     bool Backup_external_interaction_data;
@@ -122,7 +122,7 @@ namespace oomph
     /// Virtual destructor
     virtual ~ProjectableElementBase() {}
 
-    /// \short Pure virtual function in which the element writer
+    ///  Pure virtual function in which the element writer
     /// must specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
@@ -132,28 +132,28 @@ namespace oomph
     virtual Vector<std::pair<Data*, unsigned>> data_values_of_field(
       const unsigned& fld) = 0;
 
-    /// \short Number of fields of the problem, so e.g. for 2D Navier Stokes
+    ///  Number of fields of the problem, so e.g. for 2D Navier Stokes
     /// this would be 3 (for the two velocities and one pressure)
     virtual unsigned nfields_for_projection() = 0;
 
-    /// \short Number of history values to be stored for fld-th field
+    ///  Number of history values to be stored for fld-th field
     /// (includes current value!)
     virtual unsigned nhistory_values_for_projection(const unsigned& fld) = 0;
 
-    ///\short Number of history values to be stored when projecting
+    /// Number of history values to be stored when projecting
     /// the history values of the nodal coordinates (includes current value!)
     virtual unsigned nhistory_values_for_coordinate_projection() = 0;
 
-    /// \short Return number of values (pinned or not) associated with
+    ///  Return number of values (pinned or not) associated with
     /// field fld within the element. This must correspond to the
     /// number of shape functions returned in jacobian_and_shape_of_field(...).
     virtual unsigned nvalue_of_field(const unsigned& fld) = 0;
 
-    /// \short Return local equation numbers associated with value ivalue
+    ///  Return local equation numbers associated with value ivalue
     /// of field fld within the element.
     virtual int local_equation(const unsigned& fld, const unsigned& ivalue) = 0;
 
-    /// \short Return Jacobian of mapping and the shape functions associated
+    ///  Return Jacobian of mapping and the shape functions associated
     /// with field fld. The number of shape functions must match the
     /// number of values specified in nvalue_of_field(...). For
     /// Lagrange-type interpolations the shape functinos are simply
@@ -164,7 +164,7 @@ namespace oomph
                                                const Vector<double>& s,
                                                Shape& psi) = 0;
 
-    /// \short Return the fld-th field at local coordinates s
+    ///  Return the fld-th field at local coordinates s
     /// at time-level time (time=0: current value; time>0: history values)
     virtual double get_field(const unsigned& time,
                              const unsigned& fld,
@@ -198,7 +198,7 @@ namespace oomph
       }
     }
 
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -230,11 +230,11 @@ namespace oomph
 
 
   public:
-    /// \short Constructor [this was only required explicitly
+    ///  Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableElement() {}
 
-    /// \short Residual for the projection step. Flag indicates if we
+    ///  Residual for the projection step. Flag indicates if we
     /// want the Jacobian (1) or not (0). Virtual so it can be
     /// overloaded if necessary
     virtual void residual_for_projection(Vector<double>& residuals,
@@ -526,7 +526,7 @@ namespace oomph
     } // End of residual_for_projection function
 
 
-    /// \short Use Eulerian coordinates for matching in locate_zeta
+    ///  Use Eulerian coordinates for matching in locate_zeta
     /// when doing projection
     double zeta_nodal(const unsigned& n,
                       const unsigned& k,
@@ -543,7 +543,7 @@ namespace oomph
     }
 
 
-    /// \short Backup the element's state and
+    ///  Backup the element's state and
     /// switch it to projection mode.
     void enable_projection()
     {
@@ -577,7 +577,7 @@ namespace oomph
       set_ninteraction(1);
     }
 
-    ///\short Helper function to restore the element to the state
+    /// Helper function to restore the element to the state
     /// it was in before we entered the projection mode and switch off
     /// projection mode.
     void disable_projection()
@@ -640,14 +640,14 @@ namespace oomph
       return Time_level_for_projection;
     }
 
-    /// \short When projecting the history values of the nodal coordinates,
+    ///  When projecting the history values of the nodal coordinates,
     /// this is the coordinate we're projecting
     unsigned& projected_coordinate()
     {
       return Projected_coordinate;
     }
 
-    /// \short When projecting the Lagrangian coordinates this is
+    ///  When projecting the Lagrangian coordinates this is
     /// the coordinate that is being projected
     unsigned& projected_lagrangian_coordinate()
     {
@@ -744,7 +744,7 @@ namespace oomph
       Use_iterative_solver_for_projection = false;
     }
 
-    ///\short Project from base into the problem's own mesh.
+    /// Project from base into the problem's own mesh.
     void project(Mesh* base_mesh_pt, const bool& dont_project_positions = false)
     {
       // Use an iterative solver?
@@ -1372,7 +1372,7 @@ namespace oomph
         // Reset verbosity in Newton solver
         Shut_up_in_newton_solve = shut_up_in_newton_solve_backup;
 
-        /// \short Disable documentation of solve times
+        ///  Disable documentation of solve times
         if (backed_up_doc_time_enabled)
         {
           linear_solver_pt()->enable_doc_time();
@@ -1420,7 +1420,7 @@ namespace oomph
     }
 
 
-    /// \short Helper function to store positions (the only things that
+    ///  Helper function to store positions (the only things that
     /// have been set before doing projection
     void store_positions()
     {
@@ -1461,7 +1461,7 @@ namespace oomph
       }
     }
 
-    /// \short Helper function to restore positions (the only things that
+    ///  Helper function to restore positions (the only things that
     /// have been set before doing projection
     void restore_positions()
     {
@@ -1499,7 +1499,7 @@ namespace oomph
       }
     }
 
-    ///\short Pin all the field values and position unknowns (bit inefficient)
+    /// Pin all the field values and position unknowns (bit inefficient)
     void pin_all()
     {
       // No need to do anything if there are no elements (in fact, we
@@ -1569,7 +1569,7 @@ namespace oomph
     }
 
 
-    ///\short Unpin all the field values and position unknowns (bit inefficient)
+    /// Unpin all the field values and position unknowns (bit inefficient)
     void unpin_all()
     {
       // No need to do anything if there are no elements (in fact, we
@@ -1635,7 +1635,7 @@ namespace oomph
       }
     }
 
-    /// \short Helper function to unpin the values of coordinate coord
+    ///  Helper function to unpin the values of coordinate coord
     void unpin_dofs_of_coordinate(const unsigned& coord)
     {
       // Loop over the nodes
@@ -1663,7 +1663,7 @@ namespace oomph
       }
     }
 
-    /// \short Helper function to unpin the values of coordinate coord
+    ///  Helper function to unpin the values of coordinate coord
     void pin_dofs_of_coordinate(const unsigned& coord)
     {
       // Loop over the nodes

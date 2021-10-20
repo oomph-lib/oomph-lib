@@ -47,7 +47,7 @@ namespace oomph
   class UnsteadyHeatEquationsBase : public virtual FiniteElement
   {
   public:
-    /// \short Function pointer to source function fct(t,x,f(x,t)) --
+    ///  Function pointer to source function fct(t,x,f(x,t)) --
     /// x is a Vector!
     typedef void (*UnsteadyHeatSourceFctPt)(const double& time,
                                             const Vector<double>& x,
@@ -73,14 +73,14 @@ namespace oomph
   class UnsteadyHeatEquations : public virtual UnsteadyHeatEquationsBase
   {
   public:
-    /// \short Function pointer to source function fct(t,x,f(x,t)) --
+    ///  Function pointer to source function fct(t,x,f(x,t)) --
     /// x is a Vector!
     typedef void (*UnsteadyHeatSourceFctPt)(const double& time,
                                             const Vector<double>& x,
                                             double& u);
 
 
-    /// \short Constructor: Initialises the Source_fct_pt to null and
+    ///  Constructor: Initialises the Source_fct_pt to null and
     /// sets flag to use ALE formulation of the equations.
     /// Also set Alpha (thermal inertia) and Beta (thermal conductivity)
     /// parameters to defaults (both one for natural scaling)
@@ -104,7 +104,7 @@ namespace oomph
     // rightly, it shouts.
     /*void operator=(const UnsteadyHeatEquations&) = delete;*/
 
-    /// \short Return the index at which the unknown value
+    ///  Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
     /// problems, when there is only one variable, the value that satisfies the
     /// unsteady heat equation.
@@ -116,7 +116,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short du/dt at local node n.
+    ///  du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
     double du_dt_ust_heat(const unsigned& n) const
     {
@@ -145,7 +145,7 @@ namespace oomph
       return dudt;
     }
 
-    /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
+    ///  Disable ALE, i.e. assert the mesh is not moving -- you do this
     /// at your own risk!
     void disable_ALE()
     {
@@ -153,7 +153,7 @@ namespace oomph
     }
 
 
-    /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
+    ///  (Re-)enable ALE, i.e. take possible mesh motion into account
     /// when evaluating the time-derivative. Note: By default, ALE is
     /// enabled, at the expense of possibly creating unnecessary work
     /// in problems where the mesh is, in fact, stationary.
@@ -173,7 +173,7 @@ namespace oomph
     }
 
 
-    /// \short Output FE representation of soln: x,y,u or x,y,z,u at
+    ///  Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
@@ -185,7 +185,7 @@ namespace oomph
     }
 
 
-    /// \short C-style output FE representation of soln: x,y,u or x,y,z,u at
+    ///  C-style output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
@@ -196,7 +196,7 @@ namespace oomph
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
 
-    /// \short Output exact soln: x,y,u_exact or x,y,z,u_exact at
+    ///  Output exact soln: x,y,u_exact or x,y,z,u_exact at
     /// nplot^DIM plot points (time-dependent version)
     virtual void output_fct(
       std::ostream& outfile,
@@ -234,7 +234,7 @@ namespace oomph
     }
 
 
-    /// \short Get source term at continous time t and (Eulerian) position x.
+    ///  Get source term at continous time t and (Eulerian) position x.
     /// Virtual so it can be overloaded in derived multiphysics elements.
     virtual inline void get_source_ust_heat(const double& t,
                                             const unsigned& ipt,
@@ -359,7 +359,7 @@ namespace oomph
     }
 
 
-    /// \short Return FE representation of function value u(s) at local
+    ///  Return FE representation of function value u(s) at local
     /// coordinate s at previous time t (t=0: present)
     inline double interpolated_u_ust_heat(const unsigned& t,
                                           const Vector<double>& s) const
@@ -415,12 +415,12 @@ namespace oomph
     }
 
 
-    /// \short Self-test: Return 0 for OK
+    ///  Self-test: Return 0 for OK
     unsigned self_test();
 
 
   protected:
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_ust_heat(
       const Vector<double>& s,
@@ -430,7 +430,7 @@ namespace oomph
       DShape& dtestdx) const = 0;
 
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_ust_heat(
       const unsigned& ipt,
@@ -439,7 +439,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    /// \short Compute element residual Vector only (if flag=and/or element
+    ///  Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_residual_contribution_ust_heat(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
@@ -447,7 +447,7 @@ namespace oomph
     /// Pointer to source function:
     UnsteadyHeatSourceFctPt Source_fct_pt;
 
-    /// \short Boolean flag to indicate if ALE formulation is disabled when
+    ///  Boolean flag to indicate if ALE formulation is disabled when
     /// time-derivatives are computed. Only set to true if you're sure
     /// that the mesh is stationary.
     bool ALE_is_disabled;
@@ -459,11 +459,11 @@ namespace oomph
     double* Beta_pt;
 
   private:
-    /// \short Static default value for the Alpha parameter:
+    ///  Static default value for the Alpha parameter:
     /// (thermal inertia): One for natural scaling
     static double Default_alpha_parameter;
 
-    /// \short Static default value for the Beta parameter (thermal
+    ///  Static default value for the Beta parameter (thermal
     /// conductivity): One for natural scaling
     static double Default_beta_parameter;
   };
@@ -483,12 +483,12 @@ namespace oomph
                                public virtual UnsteadyHeatEquations<DIM>
   {
   private:
-    /// \short Static array of ints to hold number of variables at
+    ///  Static array of ints to hold number of variables at
     /// nodes: Initial_Nvalue[n]
     static const unsigned Initial_Nvalue;
 
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    ///  Constructor: Call constructors for QElement and
     /// UnsteadyHeat equations
     QUnsteadyHeatElement()
       : QElement<DIM, NNODE_1D>(), UnsteadyHeatEquations<DIM>()
@@ -502,14 +502,14 @@ namespace oomph
     /// Broken assignment operator
     /*void operator=(const QUnsteadyHeatElement<DIM,NNODE_1D>&) = delete;*/
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///   Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
@@ -517,7 +517,7 @@ namespace oomph
     }
 
 
-    ///  \short Output function:
+    ///   Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -525,7 +525,7 @@ namespace oomph
     }
 
 
-    /// \short C-style output function:
+    ///  C-style output function:
     ///  x,y,u   or    x,y,z,u
     void output(FILE* file_pt)
     {
@@ -533,7 +533,7 @@ namespace oomph
     }
 
 
-    ///  \short C-style output function:
+    ///   C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -541,7 +541,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for an exact solution:
+    ///  Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -551,7 +551,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for a time-dependent exact solution.
+    ///  Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
     void output_fct(std::ostream& outfile,
@@ -574,7 +574,7 @@ namespace oomph
                                                      DShape& dtestdx) const;
 
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     inline double dshape_and_dtest_eulerian_at_knot_ust_heat(
       const unsigned& ipt,
@@ -663,7 +663,7 @@ namespace oomph
     : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };
@@ -681,7 +681,7 @@ namespace oomph
     : public virtual PointElement
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : PointElement() {}
   };
@@ -700,11 +700,11 @@ namespace oomph
     : public virtual ProjectableElement<UNSTEADY_HEAT_ELEMENT>
   {
   public:
-    /// \short Constructor [this was only required explicitly
+    ///  Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableUnsteadyHeatElement() {}
 
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
@@ -736,13 +736,13 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: Just one
+    ///  Number of fields to be projected: Just one
     unsigned nfields_for_projection()
     {
       return 1;
     }
 
-    /// \short Number of history values to be stored for fld-th field.
+    ///  Number of history values to be stored for fld-th field.
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -760,14 +760,14 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
-    ///\short Number of positional history values
+    /// Number of positional history values
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -794,7 +794,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,
@@ -870,7 +870,7 @@ namespace oomph
     }
 
 
-    /// \short Output FE representation of soln: x,y,u or x,y,z,u at
+    ///  Output FE representation of soln: x,y,u or x,y,z,u at
     /// and history values at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot)
     {

@@ -70,11 +70,11 @@ namespace oomph
   /// Index at which the i-th velocity component is stored.
   Vector<unsigned> U_index_interface;
   
-  /// \short Index at which the i-th component of the perturbation
+  ///  Index at which the i-th component of the perturbation
   /// to the nodal coordinate is stored.
   Vector<unsigned> Xhat_index_interface;
   
-  /// \short Access function that returns the local equation number
+  ///  Access function that returns the local equation number
   /// for the i-th kinematic equation (i=1,2) that corresponds to the n-th
   /// local node. This must be overloaded by specific interface elements
   /// and depends on the method for handing the free-surface deformation.
@@ -82,7 +82,7 @@ namespace oomph
   
    public:
 
-  /// \short Hijack the kinematic condition at the nodes passed in the vector
+  ///  Hijack the kinematic condition at the nodes passed in the vector
   /// This is required so that contact-angle conditions can be applied
   /// by the LinearisedAxisymmetricFluidInterfaceEdgeElements.
   virtual void hijack_kinematic_conditions(const Vector<unsigned> 
@@ -91,14 +91,14 @@ namespace oomph
 
    protected:
   
-  /// \short Helper function to calculate the residuals and (if flag==true)
+  ///  Helper function to calculate the residuals and (if flag==true)
   /// the Jacobian -- this function only deals with part of the Jacobian.
   virtual void fill_in_generic_residual_contribution_interface(
    Vector<double> &residuals, 
    DenseMatrix<double> &jacobian, 
    unsigned flag);
   
-  /// \short Helper function to calculate the additional contributions
+  ///  Helper function to calculate the additional contributions
   /// to the jacobian. This will be overloaded by elements that
   /// require contributions to their underlying equations from surface
   /// integrals. The only example at the moment are elements that
@@ -113,7 +113,7 @@ namespace oomph
    const double &r, const double &W,
    const double &J) {}
   
-  /// \short i-th component of dXhat/dt at local node n. 
+  ///  i-th component of dXhat/dt at local node n. 
   /// Uses suitably interpolated value for hanging nodes.
   double dXhat_dt(const unsigned &n, const unsigned &i) const
   {
@@ -157,7 +157,7 @@ namespace oomph
     Azimuthal_Mode_Number_pt = &Default_Azimuthal_Mode_Number_Value;
    }
   
-  /// \short Virtual function that specifies the surface tension as 
+  ///  Virtual function that specifies the surface tension as 
   /// a function of local position within the element
   /// The default behaviour is a constant surface tension of value 1.0
   /// It is expected that this function will be overloaded in more
@@ -191,7 +191,7 @@ namespace oomph
   /// Pointer to azimuthal mode number k in e^ik(theta) decomposition
   int* &azimuthal_mode_number_pt() { return Azimuthal_Mode_Number_pt; }
   
-  /// \short Return the i-th velocity component at local node n 
+  ///  Return the i-th velocity component at local node n 
   /// The use of the array U_index_interface allows the velocity
   /// components to be stored in any location at the node.
   double u(const unsigned &n, const unsigned &i)
@@ -260,7 +260,7 @@ namespace oomph
   {
     private:
    
-   /// \short In these elements, the kinematic condition is the equation 
+   ///  In these elements, the kinematic condition is the equation 
    /// used to determine the "order epsilon" contributions to the free surface
    /// "height". We have two sets of unknowns, HC and HS, and we therefore have
    /// two kinematic conditions. Overload the function accordingly.
@@ -270,7 +270,7 @@ namespace oomph
    }
    
    
-   /// \short Hijacking the kinematic condition corresponds to hijacking the
+   ///  Hijacking the kinematic condition corresponds to hijacking the
    /// spine heights.
    void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
    {
@@ -283,7 +283,7 @@ namespace oomph
      }
    }
    
-   /// \short i-th component of dH/dt at local node n. 
+   ///  i-th component of dH/dt at local node n. 
    /// Uses suitably interpolated value for hanging nodes.
    double dH_dt(const unsigned &n, const unsigned &i) const
    {
@@ -394,7 +394,7 @@ namespace oomph
     void output_perturbation_to_interface(std::ostream &outfile,
                                           const unsigned &nplot);
     
-    /// \short Return the i-th component of the FE interpolated perturbed
+    ///  Return the i-th component of the FE interpolated perturbed
     /// surface height (i=0 is cosine part, i=1 is sine part) at local
     /// coordinate s
     double interpolated_H(const Vector<double> &s,

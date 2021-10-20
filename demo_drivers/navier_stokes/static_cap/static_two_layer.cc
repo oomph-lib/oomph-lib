@@ -57,7 +57,7 @@ namespace Global_Physical_Variables
  ///Direction of the wall normal vector
  Vector<double> Wall_normal;
 
- /// \short Function that specifies the wall unit normal
+ ///  Function that specifies the wall unit normal
  void wall_unit_normal_fct(const Vector<double> &x, 
                       Vector<double> &normal)
  {
@@ -455,7 +455,7 @@ class ElasticTwoLayerMesh :
 
 public:
 
- /// \short Constructor: Pass number of elements in x-direction, number of
+ ///  Constructor: Pass number of elements in x-direction, number of
  /// elements in y-direction in bottom and top layer, respectively,
  /// axial length and height of top and bottom layers, a boolean
  /// flag to make the mesh periodic in the x-direction, and pointer 
@@ -709,12 +709,12 @@ public:
  unsigned long ninterface_lower() const 
  {return Interface_lower_boundary_element_pt.size();}
 
- ///\short Index of the face of the elements next to the interface
+ /// Index of the face of the elements next to the interface
  ///in the upper region (always -2)
  int interface_upper_face_index_at_boundary(const unsigned &e)
  {return -2;}
 
- ///\short Index of the face of the elements next to the interface in
+ /// Index of the face of the elements next to the interface in
  /// the lower region (always 2)
  int interface_lower_face_index_at_boundary(const unsigned &e)
  {return 2;}
@@ -727,11 +727,11 @@ private:
  /// Vector of pointers to element in the lower layer
  Vector <FiniteElement *> Upper_layer_element_pt;
 
- /// \short Vector of pointers to the elements adjacent to the interface
+ ///  Vector of pointers to the elements adjacent to the interface
  /// on the lower layer
  Vector <FiniteElement*> Interface_lower_boundary_element_pt;
 
- /// \short Vector of pointers to the element adjacent to the interface
+ ///  Vector of pointers to the element adjacent to the interface
  /// on the upper layer
  Vector<FiniteElement *> Interface_upper_boundary_element_pt;
 
@@ -741,7 +741,7 @@ private:
 
 
 //===========start_of_pseudo_elastic_class====================================
-///\short A class that solves the Navier--Stokes equations
+/// A class that solves the Navier--Stokes equations
 ///to compute the shape of a static interface between two fluids in a 
 ///rectangular container with an imposed contact angle at the boundary.
 //============================================================================

@@ -54,7 +54,7 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- /// \short Rayleigh number, set to be greater than 
+ ///  Rayleigh number, set to be greater than 
  /// the threshold for linear instability
  double Rayleigh = 1800.0;
  
@@ -87,13 +87,13 @@ public:
  /// Destructor. Empty
  ~RefineableConvectionProblem() {}
 
- /// \short Update the problem specs before solve:
+ ///  Update the problem specs before solve:
  void actions_before_newton_solve();
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Access function to the NST mesh. 
+ ///  Access function to the NST mesh. 
  /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt() 
@@ -102,7 +102,7 @@ public:
     (Nst_mesh_pt);
   } // end_of_nst_mesh
 
- /// \short Access function to the AD mesh. 
+ ///  Access function to the AD mesh. 
  /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<AD_ELEMENT>* adv_diff_mesh_pt() 
@@ -114,7 +114,7 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt() {}
 
- /// \short Actions after adaptation, re-set all interactions, then
+ ///  Actions after adaptation, re-set all interactions, then
  /// re-pin a single pressure degree of freedom
  void actions_after_adapt()
   {
@@ -160,16 +160,16 @@ public:
     fix_pressure(pdof,pvalue);
   }
  
- /// \short Set the
+ ///  Set the
  /// boundary condition on the upper wall to be perturbed slightly
  /// to force the solution into the symmetry broken state.
  void enable_imperfection() {Imperfect = true;}
 
- /// \short Set the
+ ///  Set the
  /// boundary condition on the upper wall to be unperturbed.
  void disable_imperfection() {Imperfect = false;}
 
- /// \short Doc the solution.
+ ///  Doc the solution.
  void doc_solution();
 
 private:

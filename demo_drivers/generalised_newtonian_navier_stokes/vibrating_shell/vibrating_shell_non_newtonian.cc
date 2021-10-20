@@ -53,7 +53,7 @@ namespace oomph
   /// Which bdf timestepper do we use?
   unsigned BDF_type=2;
 
-  /// \short Number of previous timesteps to be used for
+  ///  Number of previous timesteps to be used for
   /// extrapolation of strain rate (cannot be bigger than  BDF_type)
   unsigned Nprev_for_extrapolation_of_strain_rate=2;
 
@@ -212,7 +212,7 @@ namespace oomph
   /// Trace file
   ofstream Trace_file;
 
-  /// \short File to document the norm of the solution (for validation 
+  ///  File to document the norm of the solution (for validation 
   /// purposes -- triangle doesn't give fully reproducible results so
   /// mesh generation/adaptation may generate slightly different numbers
   /// of elements on different machines!)
@@ -358,7 +358,7 @@ public:
 
   }
 
- /// \short Set boundary conditions and complete the build of all elements
+ ///  Set boundary conditions and complete the build of all elements
  void complete_problem_setup();
 
  /// Doc the solution
@@ -391,7 +391,7 @@ public:
     }
   }
 
- /// \short Enable use of fixed point iteration
+ ///  Enable use of fixed point iteration
  /// for all elements
   void enable_fixed_point_iteration_for_strain_rate_for_all_elements()
   {
@@ -404,7 +404,7 @@ public:
    }
   }
 
-  /// \short Disable use of fixed point iteration
+  ///  Disable use of fixed point iteration
   void disable_fixed_point_iteration_for_strain_rate_for_all_elements()
    {
     unsigned n_element = Fluid_mesh_pt->nelement();
@@ -416,7 +416,7 @@ public:
      }
    }
 
- /// \short Enable use of Aitken extrapolation for all elements
+ ///  Enable use of Aitken extrapolation for all elements
  void enable_aitken_extrapolation_for_all_elements()
   {
    unsigned n_element = Fluid_mesh_pt->nelement();
@@ -428,7 +428,7 @@ public:
    }
   }
 
- /// \short Disable use of Aitken extrapolation
+ ///  Disable use of Aitken extrapolation
  void disable_aitken_extrapolation_for_all_elements()
   {
    unsigned n_element = Fluid_mesh_pt->nelement();
@@ -661,10 +661,10 @@ private:
  /// or read from a restart file)
  double Next_dt;
 
- /// \short Create free surface elements
+ ///  Create free surface elements
  void create_free_surface_elements();
 
- /// \short Delete free surface elements 
+ ///  Delete free surface elements 
  void delete_free_surface_elements()
   {
    // How many surface elements are in the surface mesh

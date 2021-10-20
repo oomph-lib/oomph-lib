@@ -150,7 +150,7 @@ class CompressedSquareProblem : public Problem
 
 public:
 
- /// \short Constructor: Pass flag that determines if we want to use
+ ///  Constructor: Pass flag that determines if we want to use
  /// a true incompressible formulation
  CompressedSquareProblem(const bool& incompress);
  
@@ -160,7 +160,7 @@ public:
  /// Update function (empty)
  void actions_before_newton_solve() {}
 
- /// \short Doc the solution & exact (linear) solution for compressible 
+ ///  Doc the solution & exact (linear) solution for compressible 
  /// or incompressible materials
  void doc_solution(const bool& incompress);
 

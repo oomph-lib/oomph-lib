@@ -110,7 +110,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Actions before the timestep (empty)
+ ///  Actions before the timestep (empty)
  void actions_before_implicit_timestep() {}
 
  /// Update the problem specs after solve (empty)
@@ -133,10 +133,10 @@ public:
 
   } // End of actions_after_adapt
 
- /// \short Set initial condition (incl previous timesteps)
+ ///  Set initial condition (incl previous timesteps)
  void set_initial_condition();
 
- /// \short Set the boundary conditions
+ ///  Set the boundary conditions
  void set_boundary_conditions();
 
  /// Access function for the specific mesh
@@ -450,7 +450,7 @@ public:
 
   } // End of actions_after_adapt
 
- /// \short Set the three velocity components to a smoothly varying,
+ ///  Set the three velocity components to a smoothly varying,
  /// non-zero profile
  void set_initial_condition();
 
@@ -631,7 +631,7 @@ PerturbedStateProblem(const unsigned& n_r,
 
 
 //======start_of_perturbed_state_set_initial_condition===================
-/// \short Set the three velocity components to a smoothly-varying,
+///  Set the three velocity components to a smoothly-varying,
 /// non-zero profile
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT>
@@ -755,7 +755,7 @@ doc_solution(DocInfo& doc_info)
 
 
 //=====start_of_stability_problem_class==================================
-/// \short Container class for the Tuckerman counter-rotating lids
+///  Container class for the Tuckerman counter-rotating lids
 /// stability problem
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT>

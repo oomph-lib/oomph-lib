@@ -48,7 +48,7 @@ namespace oomph
   class MacroElementNodeUpdateNode : public Node
   {
   public:
-    /// \short Constructor for steady node of spatial
+    ///  Constructor for steady node of spatial
     /// dimension n_dim, with n_position_type generalised coordinates
     /// and with initial_nvalue dofs.
     MacroElementNodeUpdateNode(const unsigned& n_dim,
@@ -60,7 +60,7 @@ namespace oomph
       // updates of function values are performed.
     }
 
-    ///\short Constructor for bog-standard node of spatial
+    /// Constructor for bog-standard node of spatial
     /// dimension n_dim, with n_position_type generalised coordinates,
     /// with initial_nvalue dofs and with time dependence.
     MacroElementNodeUpdateNode(TimeStepper* time_stepper_pt,
@@ -84,10 +84,10 @@ namespace oomph
     // rightly, it shouts.
     /*void operator=(const MacroElementNodeUpdateNode&) = delete;*/
 
-    ///\short Destructor (empty)
+    /// Destructor (empty)
     virtual ~MacroElementNodeUpdateNode() {}
 
-    /// \short Update the current nodal position. If
+    ///  Update the current nodal position. If
     /// required, perform the auxiliary update of nodal values.
     /// If update_all_time_levels_for_new_node==true, previous
     /// positions are also updated -- as indicated by the name
@@ -96,7 +96,7 @@ namespace oomph
     /// MacroElementNodeUpdateElementBase::build_macro_element_node_update_node(...)
     void node_update(const bool& update_all_time_levels_for_new_node = false);
 
-    /// \short  Pointer to finite element that performs the update by referring
+    ///   Pointer to finite element that performs the update by referring
     /// to its macro-element representation (Access required...)
     FiniteElement*& node_update_element_pt()
     {
@@ -104,20 +104,20 @@ namespace oomph
     }
 
 
-    /// \short Vector of local coordinates of node with the finite element that
+    ///  Vector of local coordinates of node with the finite element that
     /// performs the MacroElement-based node update operation
     Vector<double>& s_in_node_update_element()
     {
       return S_in_node_update_element;
     }
 
-    /// \short Number of geometric objects involved in node update function
+    ///  Number of geometric objects involved in node update function
     unsigned ngeom_object() const
     {
       return Geom_object_pt.size();
     }
 
-    /// \short Vector of (pointers to) geometric objects involved in
+    ///  Vector of (pointers to) geometric objects involved in
     /// node update function
     Vector<GeomObject*>& geom_object_pt()
     {
@@ -125,7 +125,7 @@ namespace oomph
     }
 
 
-    /// \short Pointer to i-th geometric object involved in
+    ///  Pointer to i-th geometric object involved in
     /// node update function
     GeomObject* geom_object_pt(const unsigned& i)
     {
@@ -133,14 +133,14 @@ namespace oomph
     }
 
 
-    /// \short Return vector of geometric objects involved in
+    ///  Return vector of geometric objects involved in
     /// node update function
     Vector<GeomObject*>& vector_geom_object_pt()
     {
       return Geom_object_pt;
     }
 
-    /// \short Return all geometric objects that affect the node update
+    ///  Return all geometric objects that affect the node update
     inline GeomObject** all_geom_object_pt()
     {
       if (Geom_object_pt.size() > 0)
@@ -153,7 +153,7 @@ namespace oomph
       }
     }
 
-    /// \short Set node update information for node:
+    ///  Set node update information for node:
     /// Pass the pointer to the element that performs the update operation,
     /// the vector containing the node's local coordinates in that
     /// element and the vector of (pointers to) the geometric objects
@@ -169,15 +169,15 @@ namespace oomph
 
 
   private:
-    /// \short Pointer to finite element that performs the node update
+    ///  Pointer to finite element that performs the node update
     /// by referring to its macro-element representation
     FiniteElement* Node_update_element_pt;
 
-    /// \short Vector containing the node's local coordinates in node update
+    ///  Vector containing the node's local coordinates in node update
     /// element.
     Vector<double> S_in_node_update_element;
 
-    /// \short Vector of geometric objects that are involved
+    ///  Vector of geometric objects that are involved
     /// in the node update operation
     Vector<GeomObject*> Geom_object_pt;
   };
@@ -209,27 +209,27 @@ namespace oomph
     /// Virtual destructor (empty)
     virtual ~MacroElementNodeUpdateElementBase() {}
 
-    /// \short Set node update information:
+    ///  Set node update information:
     /// Pass the vector of (pointers to) the geometric objects
     /// that affect the node update. This gets passed on to all nodes in
     /// the element.
     virtual void set_node_update_info(
       const Vector<GeomObject*>& geom_object_pt) = 0;
 
-    /// \short Number of geometric objects involved in node update function
+    ///  Number of geometric objects involved in node update function
     inline unsigned ngeom_object()
     {
       return Geom_object_pt.size();
     }
 
-    /// \short Vector of (pointers to) geometric objects involved in
+    ///  Vector of (pointers to) geometric objects involved in
     /// node update function
     Vector<GeomObject*>& geom_object_pt()
     {
       return Geom_object_pt;
     }
 
-    /// \short Pointer to i-th geometric object involved in
+    ///  Pointer to i-th geometric object involved in
     /// node update function
     GeomObject* geom_object_pt(const unsigned& i)
     {
@@ -238,7 +238,7 @@ namespace oomph
 
 
   protected:
-    /// \short Vector of geometric objects that are involved
+    ///  Vector of geometric objects that are involved
     /// in the node update operation
     Vector<GeomObject*> Geom_object_pt;
   };
@@ -290,7 +290,7 @@ namespace oomph
     /// Broken assignment operator
     /*void operator=(const MacroElementNodeUpdateElement&) = delete;*/
 
-    /// \short Set node update information:
+    ///  Set node update information:
     /// Pass the vector of (pointers to) the geometric objects
     /// that affect the node update. This gets passed on to all nodes in
     /// the element.
@@ -321,7 +321,7 @@ namespace oomph
     }
 
 
-    /// \short Rebuild after unrefinement: Reset the node update information
+    ///  Rebuild after unrefinement: Reset the node update information
     /// for all nodes so that the nodes get updated by this element.
     /// If we don't do that, some nodes might still want to be updated
     /// by elements that no longer exist which leads to the most wonderful
@@ -378,7 +378,7 @@ namespace oomph
       return Macro_domain_pt;
     }
 
-    /// \short Update all nodal positions via sparse MacroElement-based
+    ///  Update all nodal positions via sparse MacroElement-based
     /// update functions. If a Node is hanging its position is updated
     /// after updating the position of its masters first.
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
@@ -459,7 +459,7 @@ namespace oomph
     }
 
 #ifdef OOMPH_HAS_MPI
-    /// \short Overload the base class distribute function to deal
+    ///  Overload the base class distribute function to deal
     /// with halo nodes on halo elements that may have pointers
     /// to macro elements that no longer exist
     void distribute(OomphCommunicator* comm_pt,
@@ -505,25 +505,25 @@ namespace oomph
     }
 #endif
 
-    /// \short Set geometric objects associated with MacroElementNodeUpdateMesh;
+    ///  Set geometric objects associated with MacroElementNodeUpdateMesh;
     /// this must also be called from the constructor of each derived mesh
     void set_geom_object_vector_pt(Vector<GeomObject*> geom_object_vector_pt)
     {
       Geom_object_vector_pt = geom_object_vector_pt;
     }
 
-    /// \short Access function to the vector of GeomObject
+    ///  Access function to the vector of GeomObject
     Vector<GeomObject*> geom_object_vector_pt()
     {
       return Geom_object_vector_pt;
     }
 
   private:
-    /// \short Vector of GeomObject associated with
+    ///  Vector of GeomObject associated with
     /// MacroElementNodeUpdateNodeMesh
     Vector<GeomObject*> Geom_object_vector_pt;
 
-    /// \short Domain associated with MacroElementNodeUpdateNodeMesh
+    ///  Domain associated with MacroElementNodeUpdateNodeMesh
     Domain* Macro_domain_pt;
   };
 

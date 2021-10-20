@@ -67,7 +67,7 @@ namespace oomph
     /// Constructor
     MyRefineableQTaylorHoodElement() {}
 
-    /// \short Pure virtual function in which we specify the
+    ///  Pure virtual function in which we specify the
     /// values to be pinned (and set to zero) on the outer edge of
     /// the "pml" layer. None since we're not using this as pml functionality
     void values_to_be_pinned_on_outer_pml_boundary(Vector<unsigned>& values_to_pin)
@@ -82,7 +82,7 @@ namespace oomph
     public virtual MyRefineableQTaylorHoodElement
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate QElement
     PMLLayerElement() : MyRefineableQTaylorHoodElement()
     {}
@@ -97,7 +97,7 @@ namespace oomph
     public virtual QElement<1,3>
   {
   public:
-    /// \short Constructor: Call the constructor for the 1D quadratic element
+    ///  Constructor: Call the constructor for the 1D quadratic element
     FaceGeometry() : QElement<1,3>() {}
   };
 } // End of namespace oomph
@@ -107,12 +107,12 @@ namespace oomph
 ////////////////////////////////////////////////////////////////////////
 
 //======start_of_OscillatingCylinder_class============================
-/// \short Oscillating cylinder class
+///  Oscillating cylinder class
 //====================================================================
 class OscillatingCylinder : public GeomObject
 {
 public:
-  /// \short Constructor: Pass in the radius, the amplitude of the cylinder
+  ///  Constructor: Pass in the radius, the amplitude of the cylinder
   /// motion, the simulation Strouhal number and a pointer to time object.
   OscillatingCylinder(double* radius_pt,
                       double* amplitude_pt,
@@ -140,7 +140,7 @@ public:
     return Time_pt;
   } // End of time_pt
 
-  /// \short Current position vector to material point at Lagrangian
+  ///  Current position vector to material point at Lagrangian
   /// coordinate xi (steady version)
   void position(const Vector<double>& xi,
                 Vector<double>& r) const
@@ -152,7 +152,7 @@ public:
     r[1]=(*Radius_pt)*sin(xi[0]);
   } // End of position
 
-  /// \short Current position vector to material point at Lagrangian
+  ///  Current position vector to material point at Lagrangian
   /// coordinate xi (unsteady version). Implementation includes a
   /// transition phase where the cylinder oscillates to a smaller
   /// amplitude than the target value. Used to ensure that the solution
@@ -195,7 +195,7 @@ public:
     r[1]+=translation;
   } // End of position
 
-  /// \short Parametrised position on object: r(zeta). Evaluated at
+  ///  Parametrised position on object: r(zeta). Evaluated at
   /// the continuous time value, t.
   virtual void position(const double& t,
                         const Vector<double>& xi,
@@ -214,7 +214,7 @@ public:
     r[1]+=translation;
   } // End of position
 
-  /// \short Velocity at any given point on the rigid cylinder at time, t
+  ///  Velocity at any given point on the rigid cylinder at time, t
   virtual void velocity(const double& t,Vector<double>& u) const
   {
     // Scaling factor
@@ -248,7 +248,7 @@ private:
 //====================================================================
 namespace NodeReordering
 {
-  /// \short Function for ordering nodes. Return true if first node's position
+  ///  Function for ordering nodes. Return true if first node's position
   /// is "before" second nodes. Dimension 0 checked first, then... until they
   /// are different (by more than tol=1e-10). If they are both in exactly
   /// the same place an error is thrown.
@@ -323,7 +323,7 @@ namespace NodeReordering
   } // End of node_global_position_comparison
 
 
-  /// \short Get a vector of the nodes in the order in which they are
+  ///  Get a vector of the nodes in the order in which they are
   /// encountered when stepping through the elements (similar to
   /// reorder_nodes() but without changing the mesh's node vector).
   void get_node_reordering(Mesh* mesh_pt,
@@ -444,7 +444,7 @@ namespace NodeReordering
   } // End of get_node_reordering
 
 
-  /// \short Reorder nodes in the order in which they are encountered when
+  ///  Reorder nodes in the order in which they are encountered when
   /// stepping through the elements
   void reorder_nodes(Mesh* mesh_pt,const bool& use_old_ordering)
   {
@@ -476,12 +476,12 @@ namespace NodeReordering
 namespace GlobalParameters
 {
   ///--------------------------Cylinder Motion----------------------------
-  /// \short Amplitude of the cylinder motion used by Williamson & Roshko
+  ///  Amplitude of the cylinder motion used by Williamson & Roshko
   /// (1988). As a side note, since the (simulation) cylinder has unit
   /// diameter (i.e. D=1) this is actually the dimensionless amplitude.
   double Amplitude=0.25;
 
-  /// \short The target amplitude; used if we're going to do a parameter
+  ///  The target amplitude; used if we're going to do a parameter
   /// sweep through the amplitude-wavelength plane. This is generally the
   /// second parameter for which parameter continuation is used (if, of
   /// course, the value of Amplitude is different to Amplitude_target).
@@ -490,7 +490,7 @@ namespace GlobalParameters
   /// The number of steps used to reach the target amplitude
   unsigned N_amplitude_step=5;
 
-  /// \short The ratio between the cylinder excitation period, T_e, and
+  ///  The ratio between the cylinder excitation period, T_e, and
   /// the stationary cylinder vortex-shedding period, T_s. Explicitly,
   /// we have, Period_ratio=T_e/T_s. If the value of this parameter ever
   /// changes then the function
@@ -503,7 +503,7 @@ namespace GlobalParameters
   /// by the non-dimensionalised amplitude parameter).
   double Period_ratio=1.0;
 
-  /// \short The target Period_ratio value; used if we're going to do a
+  ///  The target Period_ratio value; used if we're going to do a
   /// parameter sweep through the amplitude-wavelength plane. This will
   /// normally be the last parameter for which parameter continuation is
   /// used (again, if the value of Period_ratio is different to
@@ -516,7 +516,7 @@ namespace GlobalParameters
 
 
   ///---------------------Navier-Stokes Parameters------------------------
-  /// \short Set the (current) Reynolds number. A pointer to this variable
+  ///  Set the (current) Reynolds number. A pointer to this variable
   /// is provided to elements to make them fully functional. As this is
   /// used to calculate the Womersley number (=Re*St), the function
   ///                 update_physical_parameter(),
@@ -524,21 +524,21 @@ namespace GlobalParameters
   /// the value of this variable.
   double Re=2.0;
 
-  /// \short The target Reynolds number used in simulations. If this is
+  ///  The target Reynolds number used in simulations. If this is
   /// different to the current Reynolds number then the first part of this
   /// simulation will (or at least, should) work to reach the target
   /// Reynolds number. Also, the value this number takes dictates the
   /// choice of Strouhal number (=St).
   double Re_target=10.0;
 
-  /// \short The number of steps used to reach the target Reynolds number.
+  ///  The number of steps used to reach the target Reynolds number.
   /// In general the target Reynolds number will be reached using natural
   /// parameter continuation as pseudo-arc-length continuation doesn't
   /// seem to be a reliable method for it (or at least that's what was
   /// observed in coarse-grid simulations).
   unsigned N_re_step=2;
 
-  /// \short The Strouhal number, St, is normally defined as
+  ///  The Strouhal number, St, is normally defined as
   ///                             St=L/UT,
   /// where L, U and T are the defining length-scale, flow speed and
   /// defining time scale. Physically, this parameter represents the
@@ -580,14 +580,14 @@ namespace GlobalParameters
   ///                    =(St_{vort}/Period_ratio)*dr_{cyl}/dt.
   double St=1.0;
 
-  /// \short The Womersley number (=Re*St), otherwise denoted as ReSt,
+  ///  The Womersley number (=Re*St), otherwise denoted as ReSt,
   /// is dependent on the value of the Reynolds number and the Strouhal
   /// number. If either value is changed then the function
   ///                 update_physical_parameter(),
   /// will be called which, in turn, updates the Womersley number value.
   double ReSt=Re*St;
 
-  /// \short Function to calculate the Strouhal number appropriate for
+  ///  Function to calculate the Strouhal number appropriate for
   /// this simulation. The value chosen corresponds to the Strouhal
   /// number associated with the vortex-shedding frequency of the flow
   /// past a stationary cylinder.
@@ -647,7 +647,7 @@ namespace GlobalParameters
     }
   } // End of calculate_strouhal_number
 
-  /// \short Update physical parameters. This updates:
+  ///  Update physical parameters. This updates:
   ///               (1) The Reynolds number, and;
   ///               (2) The Strouhal number,
   /// and should ALWAYS be called after either the Reynolds number or
@@ -693,7 +693,7 @@ namespace GlobalParameters
   /// The number of elements in the time direction
   unsigned N_t=25;
 
-  /// \short Update mesh parameters. This is (and only needs to be)
+  ///  Update mesh parameters. This is (and only needs to be)
   /// once per simulation, during the setup of the mesh. This decides
   /// how thick the "fine resolution" layer of elements around the
   /// cylinder is. This layer is used to accurately resolve the boundary
@@ -719,16 +719,16 @@ namespace GlobalParameters
 
 
   ///----------------------------Solver Info------------------------------
-  /// \short Variable to choose which preconditioner to use. The actual
+  ///  Variable to choose which preconditioner to use. The actual
   /// preconditioner we choose to use is defined by the enumeration class
   /// implemented in the problem
   unsigned Preconditioner=0;
 
-  /// \short Storage for the number of dof types in the mesh. Will be
+  ///  Storage for the number of dof types in the mesh. Will be
   /// assigned in the function assign_time_slice_id()
   unsigned N_dof_type=0;
 
-  /// \short Helper function which sets up the mapping between DOF types
+  ///  Helper function which sets up the mapping between DOF types
   /// and which block they should be assigned to. This relies on the concept
   /// of "time slices" in the space-time formulation. All dofs in a given
   /// time slice will be aggregrated together
@@ -859,7 +859,7 @@ namespace GlobalParameters
     }
   } // End of doc_maximum_central_box_deformation
 
-  /// \short Helper function that takes a pointer to one of the problem
+  ///  Helper function that takes a pointer to one of the problem
   /// parameters and returns a string to denote it. Used in the (generic)
   /// parameter continuation functions to tell the user which parameter
   /// we're changing and what value it has at each iteration
@@ -988,7 +988,7 @@ namespace GlobalParameters
 //======================================================================
 namespace SubsidiaryPreconditionerHelper
 {
-  /// \short Function used to generate instances of the chosen subsidiary
+  ///  Function used to generate instances of the chosen subsidiary
   /// preconditioner to solve the (subsidiary) block systems
   Preconditioner* get_new_preconditioner()
   {
@@ -1012,24 +1012,24 @@ public:
   /// Destructor
   ~NavierStokesProblem();
 
-  /// \short Update the problem specs before solve (empty)
+  ///  Update the problem specs before solve (empty)
   void actions_before_newton_solve() {}
 
-  /// \short Update the problem specs before solve (empty)
+  ///  Update the problem specs before solve (empty)
   void actions_after_newton_solve() {}
 
   /// Update the problem specs after an increase in a parameter
   void actions_after_parameter_increase(double* const& parameter_pt);
 
-  /// \short Create the space-time mesh with the chosen number of elements in
+  ///  Create the space-time mesh with the chosen number of elements in
   /// the time direction and the chosen spatial resolution
   void create_spacetime_mesh();
 
-  /// \short Assign the appropriate boundary conditions and enforce periodicity
+  ///  Assign the appropriate boundary conditions and enforce periodicity
   /// in the time direction
   void apply_boundary_conditions();
 
-  /// \short The mixed order elements use linear interpolation in time so the
+  ///  The mixed order elements use linear interpolation in time so the
   /// only nodes which contribute to the unknowns in the system are those that
   /// lie on the temporal boundaries of the elements. Thus, all nodes that do
   /// not lie on these boundaries need to be pinned (otherwise we'd get zero
@@ -1039,15 +1039,15 @@ public:
   /// Assign the time slice number to each element
   void assign_time_slice_id();
 
-  /// \short Assign the chosen solver to this Problem (and preconditioner if
+  ///  Assign the chosen solver to this Problem (and preconditioner if
   /// so desired)
   void set_up_spacetime_solver();
 
-  /// \short Complete problem setup: do anything else that's needed to make the
+  ///  Complete problem setup: do anything else that's needed to make the
   /// elements fully functional (e.g. pass pointers to problem parameters)
   void complete_problem_setup();
 
-  /// \short Use continuation in a particular parameter. This should make
+  ///  Use continuation in a particular parameter. This should make
   /// things sufficiently generic so *natural* continuation can be used
   /// interchangeably with ease for any given input parameter.
   /// NOTE: It's important that the function:
@@ -1081,7 +1081,7 @@ private:
   /// Pointer to the space-time mesh
   ExtrudedCubeMeshFromQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
-  /// \short Pointer to the spatial mesh. NOTE: We keep this so that we
+  ///  Pointer to the spatial mesh. NOTE: We keep this so that we
   /// retain a pointer to the Domain which will tell the ExtrudedDomain
   /// how to move the nodes when we want to do a parameter sweep in the
   /// cylinder oscillation amplitude...
@@ -1239,7 +1239,7 @@ actions_after_parameter_increase(double* const& parameter_pt)
 } // End of actions_after_parameter_increase
 
 //=====start_of_create_spacetime_mesh=======================================
-/// \short Helper function to create the space-time mesh (to be assigned to
+///  Helper function to create the space-time mesh (to be assigned to
 /// Bulk_mesh_pt) with the chosen number of elements in the time direction
 /// and an appropriate spatial resolution (to capture the time-periodic
 /// solution properly).
@@ -1325,7 +1325,7 @@ void NavierStokesProblem<ELEMENT>::create_spacetime_mesh()
 
 
 //=====start_of_pin_redundant_temporal_nodes================================
-/// \short The mixed order elements use linear interpolation in time so the
+///  The mixed order elements use linear interpolation in time so the
 /// only nodes which contribute to the unknowns in the system are those that
 /// lie on the temporal boundaries of the elements. Thus, all nodes that do
 /// not lie on these boundaries need to be pinned (otherwise we'd get zero
@@ -1509,7 +1509,7 @@ void NavierStokesProblem<ELEMENT>::complete_problem_setup()
 
 
 //=========start_of_element_to_ijk_map_setup==============================
-/// \short Set up the map which maps a given element e to it's (i,j,k)
+///  Set up the map which maps a given element e to it's (i,j,k)
 /// coordinates in the mesh where i,j and k are integers (such that
 /// 0<=i<N_x, 0<=j<N_y, 0<=k<N_t).
 //========================================================================
@@ -1571,7 +1571,7 @@ void NavierStokesProblem<ELEMENT>::assign_time_slice_id()
 
 
 //=========start_of_apply_boundary_conditions====================
-/// \short Assign the appropriate boundary conditions, i.e. periodicity
+///  Assign the appropriate boundary conditions, i.e. periodicity
 /// in the t-direction. In the x and y-direction apply Dirichlet boundary
 /// conditions. In summary:
 ///             Boundary 0 (t=0) -- Periodic in time (with boundary 5)
@@ -1838,7 +1838,7 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
 
 
 //=======start_of_run_natural_continuation=================================
-/// \short Use continuation in a particular parameter. This should make
+///  Use continuation in a particular parameter. This should make
 /// things sufficiently generic so natural/arc-length continuation can
 /// be used interchangeably with ease for any given input parameter.
 /// NOTE: It's important that the function:

@@ -46,7 +46,7 @@ namespace oomph
   namespace VorticityRecoveryHelpers
   {
     //========================================================================
-    /// \short Class to indicate which derivatives of the vorticity/
+    ///  Class to indicate which derivatives of the vorticity/
     /// velocity we want to recover. We choose to immediately instantiate
     /// an object of this class by dropping the semi-colon after the class
     /// description.
@@ -121,7 +121,7 @@ namespace oomph
         calculate_number_of_values_per_field();
       } // End of set_maximum_order_of_vorticity_derivative
 
-      /// \short Calculates the number of values per field given the number of
+      ///  Calculates the number of values per field given the number of
       /// vorticity and velocity derivatives to recover (stored as private data)
       void calculate_number_of_values_per_field()
       {
@@ -147,7 +147,7 @@ namespace oomph
         }
       } // End of calculate_number_of_values_per_field
 
-      /// \short Helper function that determines the number of n-th order
+      ///  Helper function that determines the number of n-th order
       /// partial derivatives in d-dimensions. Specifically there are
       /// (n+d-1)(choose)(d-1) possible n-th order partial derivatives in
       /// d-dimensions. Implementation makes use of the code found at:
@@ -195,17 +195,17 @@ namespace oomph
       } // End of ncont_interpolated_values
 
     private:
-      /// \short Number of values per field; how many of the following do we
+      ///  Number of values per field; how many of the following do we
       /// want: u,v,p,omega,d/dx,d/dy, d^2/dx^2,d^2/dxdy,d^2/dy^2,
       /// d^3/dx^3,d^3/dx^2dy,d^3/dxdy^2,d^3/dy^3,
       /// du/dx,du/dy,dv/dx,dv/dy
       unsigned Number_of_values_per_field;
 
-      /// \short Maximum number of derivatives to retain in the vorticity
+      ///  Maximum number of derivatives to retain in the vorticity
       /// recovery. Note, the value -1 means we ONLY output u,v[,w],p.
       int Maximum_order_of_vorticity_derivative;
 
-      /// \short Maximum number of derivatives to retain in the velocity
+      ///  Maximum number of derivatives to retain in the velocity
       /// recovery. Note, the value 0 means we don't calculate the
       /// derivatives of the velocity
       int Maximum_order_of_velocity_derivative;
@@ -265,7 +265,7 @@ namespace oomph
     typedef void (*ExactVorticityFctPt)(
       const Vector<double>& x, Vector<Vector<double>>& vort_and_derivs);
 
-    /// \short Helper function to create a container for the vorticity and
+    ///  Helper function to create a container for the vorticity and
     /// its partial derivatives. If the user wishes to output everything then
     /// this also creates space for the velocity derivatives too. This function
     /// has been written to allow for generalisation of the storage without
@@ -305,7 +305,7 @@ namespace oomph
       return vort_and_derivs;
     } // End of create_container_for_vorticity_and_derivatives
 
-    /// \short Helper function that, given the local dof number of the i-th
+    ///  Helper function that, given the local dof number of the i-th
     /// vorticity or velocity derivative, returns the index in the container
     /// that stores the corresponding value.
     /// Note 1: this function goes hand-in-hand with
@@ -449,7 +449,7 @@ namespace oomph
     } // End of vorticity_dof_to_container_id
 
 
-    /// \short Helper function that, given the local dof number of the i-th
+    ///  Helper function that, given the local dof number of the i-th
     /// vorticity or velocity derivative, returns the index in the container
     /// that stores the corresponding value.
     /// Note 1: this function goes hand-in-hand with
@@ -546,7 +546,7 @@ namespace oomph
       return container_id;
     } // End of recovered_dof_to_container_id
 
-    /// \short Given the STORED dof number, this function returns the global
+    ///  Given the STORED dof number, this function returns the global
     /// recovered number. For example, if we only want to recover the velocity
     /// derivatives then the stored dof number of du/dy is 1 (as 0 is associated
     /// with du/dx). The global recovered number is 11 (as there are currently
@@ -618,7 +618,7 @@ namespace oomph
       return index;
     } // End of stored_dof_to_recoverable_dof
 
-    /// \short The maximum order of vorticity derivative that can be recovered.
+    ///  The maximum order of vorticity derivative that can be recovered.
     /// This is set in the constructor and should NOT be changed during the
     /// running of the code. As such, a set...() function is not provided.
     /// DRAIG: Leave get_ prefix?
@@ -628,7 +628,7 @@ namespace oomph
       return Maximum_order_of_recoverable_vorticity_derivatives;
     } // End of get_maximum_order_of_recoverable_vorticity_derivative
 
-    /// \short The maximum order of velocity derivative that can be recovered.
+    ///  The maximum order of velocity derivative that can be recovered.
     /// This is set in the constructor and should NOT be changed during the
     /// running of the code. As such, a set...() function is not provided.
     /// DRAIG: Leave get_ prefix?
@@ -638,7 +638,7 @@ namespace oomph
       return Maximum_order_of_recoverable_velocity_derivatives;
     } // End of get_maximum_order_of_recoverable_velocity_derivative
 
-    /// \short The maximum order of derivatives calculated in the vorticity
+    ///  The maximum order of derivatives calculated in the vorticity
     /// recovery. Note, this value can only be set through the namespace
     /// VorticityRecoveryHelpers.
     /// DRAIG: Leave get_ prefix?
@@ -648,7 +648,7 @@ namespace oomph
       return Maximum_order_of_vorticity_derivative;
     } // End of get_maximum_order_of_vorticity_derivative
 
-    /// \short The maximum order of derivatives calculated in the velocity
+    ///  The maximum order of derivatives calculated in the velocity
     /// recovery. Note, this value can only be set through the namespace
     /// VorticityRecoveryHelpers.
     /// DRAIG: Leave get_ prefix?
@@ -658,7 +658,7 @@ namespace oomph
       return Maximum_order_of_velocity_derivative;
     } // End of get_maximum_order_of_velocity_derivative
 
-    /// \short The number of terms calculated in the vorticity recovery. Also
+    ///  The number of terms calculated in the vorticity recovery. Also
     /// includes the zeroth derivative, i.e. the vorticity itself
     unsigned nvorticity_derivatives_to_recover() const
     {
@@ -705,7 +705,7 @@ namespace oomph
       return VorticityRecoveryHelpers::Recovery_helper.npartial_derivative(n);
     } // End of npartial_derivative
 
-    /// \short Access function: Pointer to function that specifies exact
+    ///  Access function: Pointer to function that specifies exact
     /// vorticity and derivatives (for validation).
     ExactVorticityFctPt& exact_vorticity_fct_pt()
     {
@@ -713,7 +713,7 @@ namespace oomph
       return Exact_vorticity_fct_pt;
     } // End of exact_vorticity_fct_pt
 
-    /// \short Access function: Pointer to function that specifies exact
+    ///  Access function: Pointer to function that specifies exact
     /// vorticity and derivatives (for validation) -- const version
     ExactVorticityFctPt exact_vorticity_fct_pt() const
     {
@@ -728,7 +728,7 @@ namespace oomph
       return Smoothed_vorticity_index;
     } // End of smoothed_vorticity_index
 
-    /// \short Number of values required at local node n. In order to simplify
+    ///  Number of values required at local node n. In order to simplify
     /// matters, we allocate storage for pressure variables at all the nodes
     /// and then pin those that are not used.
     unsigned required_nvalue(const unsigned& n) const
@@ -737,14 +737,14 @@ namespace oomph
       return Number_of_values_per_field;
     } // End of required_nvalue
 
-    /// \short Number of continuously interpolated values:
+    ///  Number of continuously interpolated values:
     unsigned ncont_interpolated_values() const
     {
       // Return the number of values used per field
       return Number_of_values_per_field;
     } // End of ncont_interpolated_values
 
-    /// \short Get the function value u in Vector.
+    ///  Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function is usually
     /// called from black-box documentation or interpolation routines), the
     /// values Vector sets its own size in here.
@@ -758,7 +758,7 @@ namespace oomph
       get_interpolated_values(t, s, values);
     } // End of get_interpolated_values
 
-    /// \short Get the function value u in Vector.
+    ///  Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function is usually
     /// called from black-box documentation or interpolation routines), the
     /// values Vector sets its own size in here.
@@ -820,7 +820,7 @@ namespace oomph
       } // for (unsigned j=0;j<nnod;j++)
     } // End of pin_smoothed_vorticity
 
-    /// \short Output exact velocity, vorticity, derivatives and indicator
+    ///  Output exact velocity, vorticity, derivatives and indicator
     /// based on functions specified by two function pointers
     void output_analytical_veloc_and_vorticity(std::ostream& outfile,
                                                const unsigned& nplot)
@@ -895,7 +895,7 @@ namespace oomph
       this->write_tecplot_zone_footer(outfile, nplot);
     } // End of output_analytical_veloc_and_vorticity
 
-    /// \short Output the velocity, smoothed vorticity and derivatives
+    ///  Output the velocity, smoothed vorticity and derivatives
     void output_smoothed_vorticity(std::ostream& outfile, const unsigned& nplot)
     {
       // Vector of local coordinates
@@ -982,7 +982,7 @@ namespace oomph
       this->write_tecplot_zone_footer(outfile, nplot);
     } // End of output_smoothed_vorticity
 
-    /// \short Number of scalars/fields output by this element. Re-implements
+    ///  Number of scalars/fields output by this element. Re-implements
     /// broken virtual function in base class.
     unsigned nscalar_paraview() const
     {
@@ -990,7 +990,7 @@ namespace oomph
       return ncont_interpolated_values();
     } // End of nscalar_paraview
 
-    /// \short Write values of the i-th scalar field at the plot points. Needs
+    ///  Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
     void scalar_value_paraview(std::ofstream& file_out,
                                const unsigned& i,
@@ -1058,7 +1058,7 @@ namespace oomph
       } // for (unsigned iplot=0;iplot<num_plot_points;iplot++)
     } // End of scalar_value_paraview
 
-    /// \short Name of the i-th scalar field. Default implementation
+    ///  Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names in specific elements.
     std::string scalar_name_paraview(const unsigned& i) const
@@ -1154,7 +1154,7 @@ namespace oomph
       }
     } // End of scalar_name_paraview
 
-    /// \short Overloaded output function: Output velocity, pressure and the
+    ///  Overloaded output function: Output velocity, pressure and the
     /// smoothed vorticity
     void output(std::ostream& outfile, const unsigned& nplot)
     {
@@ -1621,7 +1621,7 @@ namespace oomph
       }
     } // End of get_raw_vorticity_third_deriv
 
-    /// \short Compute the element's contribution to the (squared) L2 norm
+    ///  Compute the element's contribution to the (squared) L2 norm
     /// of the difference between exact and smoothed vorticity. The input
     /// i corresponds to the i-th dof stored at each node (excluding the
     /// velocities and pressure).
@@ -1736,7 +1736,7 @@ namespace oomph
     } // End of vorticity_error_squared
 
 
-    /// \short Compute smoothed vorticity and its derivatives
+    ///  Compute smoothed vorticity and its derivatives
     void vorticity_and_its_derivs(const Vector<double>& s,
                                   Vector<Vector<double>>& vort_and_derivs) const
     {
@@ -1786,39 +1786,39 @@ namespace oomph
     /// Number of dimensions in the element
     unsigned N_dim;
 
-    /// \short Index of smoothed vorticity -- followed by derivatives;
+    ///  Index of smoothed vorticity -- followed by derivatives;
     /// in 2D this has value 3
     unsigned Smoothed_vorticity_index;
 
-    /// \short The current maximum order of vorticity derivatives that can be
+    ///  The current maximum order of vorticity derivatives that can be
     /// recovered. Currently, we can recover up to the third derivative:
     /// omega,d/dx,d/dy,
     /// d^2/dx^2,d^2/dxdy,d^2/dy^2,
     /// d^3/dx^3,d^3/dx^2dy,d^3/dxdy^2,d^3/dy^3
     unsigned Maximum_order_of_recoverable_vorticity_derivatives;
 
-    /// \short The current maximum order of velocity derivatives that can be
+    ///  The current maximum order of velocity derivatives that can be
     /// recovered. Currently, we can recover the first derivatives:
     /// du/dx,du/dy,dv/dx,dv/dy
     unsigned Maximum_order_of_recoverable_velocity_derivatives;
 
-    /// \short Number of values per field; how many of the following do we want:
+    ///  Number of values per field; how many of the following do we want:
     /// u,v,p,omega,d/dx,d/dy,
     /// d^2/dx^2,d^2/dxdy,d^2/dy^2,
     /// d^3/dx^3,d^3/dx^2dy,d^3/dxdy^2,d^3/dy^3,
     /// du/dx,du/dy,dv/dx,dv/dy
     unsigned Number_of_values_per_field;
 
-    /// \short Maximum number of derivatives to retain in the vorticity
+    ///  Maximum number of derivatives to retain in the vorticity
     /// recovery. Note, the value -1 means we ONLY output u,v[,w],p.
     int Maximum_order_of_vorticity_derivative;
 
-    /// \short Maximum number of derivatives to retain in the velocity
+    ///  Maximum number of derivatives to retain in the velocity
     /// recovery. Note, the value 0 means we don't calculate the derivatives
     /// of the velocity
     int Maximum_order_of_velocity_derivative;
 
-    /// \short Pointer to function that specifies exact vorticity and
+    ///  Pointer to function that specifies exact vorticity and
     /// derivs (for validation).
     ExactVorticityFctPt Exact_vorticity_fct_pt;
   };
@@ -1858,7 +1858,7 @@ namespace oomph
       return Recovery_order;
     }
 
-    /// \short Recovery shape functions as functions of the global, Eulerian
+    ///  Recovery shape functions as functions of the global, Eulerian
     /// coordinate x of dimension dim. The recovery shape functions are complete
     /// polynomials of the order specified by Recovery_order.
     void shape_rec(const Vector<double>& x, Vector<double>& psi_r)
@@ -1992,7 +1992,7 @@ namespace oomph
       return 0;
     } // End of integral_rec
 
-    /// \short Setup patches: For each vertex node pointed to by nod_pt,
+    ///  Setup patches: For each vertex node pointed to by nod_pt,
     /// adjacent_elements_pt[nod_pt] contains the pointer to the vector that
     /// contains the pointers to the elements that the node is part of.
     /// Also returns a Vector of vertex nodes for use in get_element_errors.
@@ -2105,7 +2105,7 @@ namespace oomph
       }
     } // End of setup_patches
 
-    /// \short Given the vector of elements that make up a patch, compute
+    ///  Given the vector of elements that make up a patch, compute
     /// the vector of recovered vorticity coefficients and return a pointer
     /// to it. n_deriv indicates which derivative of the vorticity is
     /// supposed to be smoothed: 0: zeroth (i.e. the vorticity itself)
@@ -2443,7 +2443,7 @@ namespace oomph
       recover_vorticity(mesh_pt, doc_info);
     }
 
-    /// \short Recover vorticity from patches -- output intermediate steps
+    ///  Recover vorticity from patches -- output intermediate steps
     /// to directory specified by DocInfo object
     void recover_vorticity(Mesh* mesh_pt, DocInfo& doc_info)
     {

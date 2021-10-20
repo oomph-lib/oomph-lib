@@ -141,7 +141,7 @@ public:
  ///Constructor, initialise rotation to NULL (default)
  Rotateable() : RefineableElement(), ELEMENT(), Rotated(0) { }
  
- ///\short Overload the further build function to pass the rotate information
+ /// Overload the further build function to pass the rotate information
  ///to the sons
  void further_build()
   {
@@ -151,7 +151,7 @@ public:
   }
 
   
- ///\short Rotate the element by a given angle:
+ /// Rotate the element by a given angle:
  /// 0 (0), 1(90 degrees), 2(180 degrees), 3 (270 degrees)
  void rotate(const unsigned &angle)
   {
@@ -218,7 +218,7 @@ public:
   }
    
  
- /// \short Rotate the local coordinates so that that output is
+ ///  Rotate the local coordinates so that that output is
  /// will be consistent, irrespective of the rotation of the element
  void rotate_local_coordinates(Vector<double> &s)
   {
@@ -250,7 +250,7 @@ public:
 
  
 
-/// \short Output function overloaded to produce identical output
+///  Output function overloaded to produce identical output
 /// under rotation
 void output(std::ostream &outfile, 
             const unsigned &nplot)
@@ -284,7 +284,7 @@ void output(std::ostream &outfile,
 
 }
 
- /// \short Output exact solution: Overloaded to produce identical
+ ///  Output exact solution: Overloaded to produce identical
  /// output under rotation
  void output_fct(std::ostream &outfile, 
                  const unsigned &nplot, 
@@ -425,7 +425,7 @@ class TestRefineableRectangularQuadMesh :
 
 public: 
 
- /// \short Pass the angle of rotation and the timestepper to
+ ///  Pass the angle of rotation and the timestepper to
  /// the Mesh.
  TestRefineableRectangularQuadMesh(const unsigned &angle,
                                    TimeStepper* time_stepper_pt=
@@ -452,7 +452,7 @@ public:
              CompareElementCoordinate<ELEMENT>());
   }
 
- /// \short Destructor: Empty -- all cleanup gets handled in the base
+ ///  Destructor: Empty -- all cleanup gets handled in the base
  /// classes
  virtual ~TestRefineableRectangularQuadMesh() {}
 
@@ -508,18 +508,18 @@ PoissonEquations<2>::PoissonSourceFctPt source_fct_pt);
  /// Destructor (empty -- all the cleanup is done in base class)
  ~TestRefineablePoissonProblem(){};
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ ///  Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ ///  Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 
- /// \short Overloaded version of the Problem's access function to 
+ ///  Overloaded version of the Problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  TestRefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 

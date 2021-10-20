@@ -55,7 +55,7 @@ namespace Global_Parameters
  /// Define Fourier wavenumber
  int Fourier_wavenumber = 3;
 
- /// \short Define the non-dimensional square angular frequency of 
+ ///  Define the non-dimensional square angular frequency of 
  /// time-harmonic motion
  std::complex<double> Omega_sq (10.0,5.0);
 
@@ -88,7 +88,7 @@ namespace Global_Parameters
  }
  
  
- /// \short The body force function; returns vector of complex doubles
+ ///  The body force function; returns vector of complex doubles
  /// in the order (b_r, b_z, b_theta)
  void body_force(const Vector<double> &x,
                  Vector<std::complex<double> > &result)
@@ -135,7 +135,7 @@ class FourierDecomposedTimeHarmonicLinearElasticityProblem : public Problem
 {
 public:
 
- /// \short Constructor: Pass boundary locations
+ ///  Constructor: Pass boundary locations
  FourierDecomposedTimeHarmonicLinearElasticityProblem(const double& rmin,
                                                       const double& rmax,
                                                       const double &zmin, 

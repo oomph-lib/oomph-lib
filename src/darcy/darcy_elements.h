@@ -40,7 +40,7 @@
 namespace oomph
 {
   //===========================================================================
-  /// \short Class implementing the generic maths of the Darcy equations using
+  ///  Class implementing the generic maths of the Darcy equations using
   /// Raviart-Thomas elements with both edge and internal degrees of freedom
   //===========================================================================
   template<unsigned DIM>
@@ -81,7 +81,7 @@ namespace oomph
       return Mass_source_fct_pt;
     }
 
-    /// \short Indirect access to the source function - returns 0 if no source
+    ///  Indirect access to the source function - returns 0 if no source
     /// function has been set
     void source(const Vector<double>& x, Vector<double>& b) const
     {
@@ -102,7 +102,7 @@ namespace oomph
       }
     }
 
-    /// \short Indirect access to the mass source function - returns 0 if no
+    ///  Indirect access to the mass source function - returns 0 if no
     /// mass source function has been set
     void mass_source(const Vector<double>& x, double& b) const
     {
@@ -127,7 +127,7 @@ namespace oomph
     /// Return the equation number of the n-th internal degree of freedom
     virtual int q_internal_local_eqn(const unsigned& n) const = 0;
 
-    /// \short Return vector of pointers to the Data objects that store the
+    ///  Return vector of pointers to the Data objects that store the
     /// edge flux values
     virtual Vector<Data*> q_edge_data_pt() const = 0;
 
@@ -137,7 +137,7 @@ namespace oomph
     /// Return the nodal index at which the nth edge unknown is stored
     virtual unsigned q_edge_index(const unsigned& n) const = 0;
 
-    /// \short Return the index of the internal data where the q_internal
+    ///  Return the index of the internal data where the q_internal
     /// degrees of freedom are stored
     virtual unsigned q_internal_index() const = 0;
 
@@ -154,7 +154,7 @@ namespace oomph
     /// Return the face index associated with specified edge
     virtual unsigned face_index_of_edge(const unsigned& j) const = 0;
 
-    /// \short Compute the face element coordinates of the nth flux
+    ///  Compute the face element coordinates of the nth flux
     /// interpolation point along an edge
     virtual void face_local_coordinate_of_flux_interpolation_point(
       const unsigned& edge, const unsigned& n, Vector<double>& s) const = 0;
@@ -200,11 +200,11 @@ namespace oomph
       (void)this->transform_basis(s, q_basis_local, psi, q_basis);
     }
 
-    /// \short Returns the number of flux interpolation points along each
+    ///  Returns the number of flux interpolation points along each
     /// edge of the element
     virtual unsigned nedge_flux_interpolation_point() const = 0;
 
-    /// \short Compute the global coordinates of the flux_interpolation
+    ///  Compute the global coordinates of the flux_interpolation
     /// point associated with the j-th edge-based q basis fct
     virtual void edge_flux_interpolation_point_global(
       const unsigned& j, Vector<double>& x) const = 0;
@@ -215,7 +215,7 @@ namespace oomph
     virtual Vector<double> edge_flux_interpolation_point(
       const unsigned& edge, const unsigned& n) const = 0;
 
-    /// \short Returns the global coordinates of the nth flux
+    ///  Returns the global coordinates of the nth flux
     /// interpolation point along an edge
     virtual void edge_flux_interpolation_point_global(
       const unsigned& edge, const unsigned& n, Vector<double>& x) const = 0;
@@ -247,7 +247,7 @@ namespace oomph
     /// Scale the edge basis to allow arbitrary edge mappings
     virtual void scale_basis(Shape& basis) const = 0;
 
-    /// \short Performs a div-conserving transformation of the vector basis
+    ///  Performs a div-conserving transformation of the vector basis
     /// functions from the reference element to the actual element
     double transform_basis(const Vector<double>& s,
                            const Shape& q_basis_local,
@@ -407,7 +407,7 @@ namespace oomph
     }
 
 
-    /// \short Helper function to pin superfluous dofs (empty; can be overloaded
+    ///  Helper function to pin superfluous dofs (empty; can be overloaded
     /// in projectable elements where we introduce at least one
     /// dof per node to allow projection during unstructured refinement)
     virtual void pin_superfluous_darcy_dofs() {}
@@ -426,25 +426,25 @@ namespace oomph
       output(outfile, nplot);
     }
 
-    /// \short Output FE representation of soln: x,y,q1,q2,div_q,p at
+    ///  Output FE representation of soln: x,y,q1,q2,div_q,p at
     /// Nplot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
 
-    /// \short Output incl. projection of fluxes into direction of
+    ///  Output incl. projection of fluxes into direction of
     /// the specified unit vector
     void output_with_projected_flux(std::ostream& outfile,
                                     const unsigned& nplot,
                                     const Vector<double> unit_normal);
 
 
-    /// \short Output FE representation of exact soln: x,y,q1,q2,div_q,p at
+    ///  Output FE representation of exact soln: x,y,q1,q2,div_q,p at
     /// Nplot^DIM plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Compute the error between the FE solution and the exact solution
+    ///  Compute the error between the FE solution and the exact solution
     /// using the H(div) norm for q and L^2 norm for p
     void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
@@ -469,7 +469,7 @@ namespace oomph
 
 
   protected:
-    /// \short Returns the geometric basis, and the q, p and divergence basis
+    ///  Returns the geometric basis, and the q, p and divergence basis
     /// functions and test functions at local coordinate s
     virtual double shape_basis_test_local(const Vector<double>& s,
                                           Shape& psi,
@@ -480,7 +480,7 @@ namespace oomph
                                           Shape& div_q_basis_ds,
                                           Shape& div_q_test_ds) const = 0;
 
-    /// \short Returns the geometric basis, and the q, p and divergence basis
+    ///  Returns the geometric basis, and the q, p and divergence basis
     /// functions and test functions at integration point ipt
     virtual double shape_basis_test_local_at_knot(
       const unsigned& ipt,
@@ -519,11 +519,11 @@ namespace oomph
       public virtual ProjectableElementBase
   {
   public:
-    /// \short Constructor [this was only required explicitly
+    ///  Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableDarcyElement() {}
 
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
@@ -579,13 +579,13 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: 2 (pressure and flux)
+    ///  Number of fields to be projected: 2 (pressure and flux)
     unsigned nfields_for_projection()
     {
       return 2;
     }
 
-    /// \short Number of history values to be stored for fld-th field.
+    ///  Number of history values to be stored for fld-th field.
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -602,14 +602,14 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
-    ///\short Number of positional history values
+    /// Number of positional history values
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -674,7 +674,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,
@@ -773,7 +773,7 @@ namespace oomph
       return return_value;
     }
 
-    /// \short Output FE representation of soln as in underlying element
+    ///  Output FE representation of soln as in underlying element
     void output(std::ostream& outfile, const unsigned& nplot)
     {
       DARCY_ELEMENT::output(outfile, nplot);
@@ -786,7 +786,7 @@ namespace oomph
     }
 
 
-    /// \short Helper function to pin superfluous dofs; required because
+    ///  Helper function to pin superfluous dofs; required because
     /// we introduce at least one dof per node to allow projection
     /// during unstructured refinement)
     void pin_superfluous_darcy_dofs()
@@ -798,7 +798,7 @@ namespace oomph
       }
     }
 
-    /// \short Residual for the projection step. Flag indicates if we
+    ///  Residual for the projection step. Flag indicates if we
     /// want the Jacobian (1) or not (0). Virtual so it can be
     /// overloaded if necessary
     void residual_for_projection(Vector<double>& residuals,

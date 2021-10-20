@@ -84,12 +84,12 @@ namespace Global_Physical_Variables
   //----------------------------
   
   //Density ratio:
-  /// \short Ratio of density in upper fluid to density in lower
+  ///  Ratio of density in upper fluid to density in lower
   /// fluid. Reynolds number etc. is based on density in lower fluid.
   double R = 1.0;
 
   //Vecosity ratio;
-  /// \short Ratio of viscosity in upper fluid to viscosity in lower
+  ///  Ratio of viscosity in upper fluid to viscosity in lower
   /// fluid. Reynolds number etc. is based on viscosity in lower fluid.
   double M = 0.5;
 
@@ -110,7 +110,7 @@ namespace Global_Physical_Variables
   /// on the viscous scale and so multiplying the normal stress balanced by the
   /// Reynolds number gives a term in the Capillary number only (Ca Re = We).
   
-  /// \short Capillary number (of which the results are independent
+  ///  Capillary number (of which the results are independent
   /// for a pinned surface)
   double Ca = 0.001;
   
@@ -123,40 +123,40 @@ namespace Global_Physical_Variables
   /// Surfactant Parameters
   //--------------------------
   
-  /// \short Marangoni number
+  ///  Marangoni number
   double Ma = 10.0;
 
-  /// \short Surface Elasticity number (Capillary number x Marangoni number)
+  ///  Surface Elasticity number (Capillary number x Marangoni number)
   double Beta_s =Ca*Ma;
 
-  /// \short Surface Peclet number
+  ///  Surface Peclet number
   double Pe_s = 10.0;
   
-  /// \short Bulk Peclet number
+  ///  Bulk Peclet number
   double Pe_b = 10.0;
   
-  /// \short Micelle Pelect number
+  ///  Micelle Pelect number
   double Pe_m = 10.0;
 
   /// Solubility Parameters
   //-------------------------
  
-  /// \short Biot number
+  ///  Biot number
  double Biot = 0.1; 
   
-  /// \short The ratio of adsorption-desorption times
+  ///  The ratio of adsorption-desorption times
   double K_b = 3.0;
 
-  // \short ratio of equilibrium concentrations
+  //  ratio of equilibrium concentrations
   double Beta_b = 1.0;
 
-  // \short Reaction rate between bulk and micelle 
+  //  Reaction rate between bulk and micelle 
  double K_m = 1.0;
 
  /// Power of the concentration in bulk -> micelle flux expression
  double N = 10.0;
   
- /// \short The imposed pressure gradient
+ ///  The imposed pressure gradient
  double Delta_P = 1.0; 
   
  /// Timescales for transport equations (identically one from our
@@ -231,14 +231,14 @@ namespace Global_Physical_Variables
  ///Direction of the wall normal vector (at the inlet)
  Vector<double> Wall_normal;
 
- /// \short Function that specifies the wall unit normal at the inlet
+ ///  Function that specifies the wall unit normal at the inlet
  void wall_unit_normal_inlet_fct(const Vector<double> &x, 
                                  Vector<double> &normal)
  {
   normal=Wall_normal;
  }
 
- /// \short Function that specified the wall unit normal at the outlet
+ ///  Function that specified the wall unit normal at the outlet
  void wall_unit_normal_outlet_fct(const Vector<double> &x, 
                                  Vector<double> &normal)
  {
@@ -271,7 +271,7 @@ class DependentPositionPointElement :
   //Face ID
   unsigned Id;
   
-  /// \short Fill in the residuals for the volume constraint
+  ///  Fill in the residuals for the volume constraint
  void fill_in_generic_contribution_to_residuals_match_position(
   Vector<double> &residuals,
   DenseMatrix<double> &jacobian,
@@ -392,14 +392,14 @@ public:
   //Empty Destructor
   ~DependentPositionPointElement() {}
   
- /// \short Fill in the residuals for the volume constraint
+ ///  Fill in the residuals for the volume constraint
  void fill_in_contribution_to_residuals( Vector<double> &residuals)
  {
   this->fill_in_generic_contribution_to_residuals_match_position(
    residuals,GeneralisedElement::Dummy_matrix,0);
  }
   
- /// \short Fill in the residuals and jacobian for the volume constraint
+ ///  Fill in the residuals and jacobian for the volume constraint
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
  {
@@ -446,7 +446,7 @@ class ElasticRefineableTwoLayerMesh :
   
 public:
 
- /// \short Constructor: Pass number of elements in x-direction, number of
+ ///  Constructor: Pass number of elements in x-direction, number of
  /// elements in y-direction in bottom and top layer, respectively,
  /// axial length and height of top and bottom layers, a boolean
  /// flag to make the mesh periodic in the x-direction, and pointer 
@@ -654,7 +654,7 @@ public:
  /// Destructor. Empty
  ~SurfactantProblem() {}
 
- /// \short Release the free surface so that it can move
+ ///  Release the free surface so that it can move
  void unpin_surface()
   {
    //Only bother if the surface is pinned
@@ -749,7 +749,7 @@ public:
   }
 
 
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
   void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
@@ -758,7 +758,7 @@ public:
  /// Remember to update the nodes if the surface is not pinned
  void actions_before_newton_convergence_check() {}
 
- /// \short Actions before the timestep (update the the time-dependent 
+ ///  Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
   {
@@ -1169,16 +1169,16 @@ void deform_interface(const double &epsilon,
 } // End of deform_free_surface
 
   
- /// \short Doc the solution.
+ ///  Doc the solution.
  void doc_solution(std::ofstream &trace);
 
- /// \short Set the boundary conditions
+ ///  Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
  //Return the global error norm to be used in adaptive timestepping
  double global_temporal_error_norm();
   
- /// \short Overloaded version of the problem's access function to 
+ ///  Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  ElasticRefineableTwoLayerMesh<ELEMENT>* Bulk_mesh_pt;
@@ -1376,7 +1376,7 @@ private:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-/// \short Constructor for convection problem
+///  Constructor for convection problem
 //========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::

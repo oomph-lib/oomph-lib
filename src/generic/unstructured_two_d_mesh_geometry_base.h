@@ -108,14 +108,14 @@ namespace oomph
     /// Initialise TriangulateIO structure
     extern void initialise_triangulateio(TriangulateIO& triangle_io);
 
-    /// \short Make (partial) deep copy of TriangulateIO object. We only copy
+    ///  Make (partial) deep copy of TriangulateIO object. We only copy
     /// those items we need within oomph-lib's adaptation procedures.
     /// Warnings are issued if triangulate_io contains data that is not
     /// not copied, unless quiet=true;
     extern TriangulateIO deep_copy_of_triangulateio_representation(
       TriangulateIO& triangle_io, const bool& quiet);
 
-    /// \short Write the triangulateio data to disk as a poly file,
+    ///  Write the triangulateio data to disk as a poly file,
     /// mainly used for debugging
     extern void write_triangulateio_to_polyfile(TriangulateIO& triangle_io,
                                                 std::ostream& poly_file);
@@ -131,12 +131,12 @@ namespace oomph
       TriangulateIO& triangle_io,
       bool& use_attributes);
 
-    /// \short Write all the triangulateio data to disk in a dump file
+    ///  Write all the triangulateio data to disk in a dump file
     /// that can then be used to restart simulations
     extern void dump_triangulateio(TriangulateIO& triangle_io,
                                    std::ostream& dump_file);
 
-    /// \short Read the triangulateio data from a dump file on
+    ///  Read the triangulateio data from a dump file on
     /// disk, which can then be used to restart simulations
     extern void read_triangulateio(std::istream& restart_file,
                                    TriangulateIO& triangle_io);
@@ -179,7 +179,7 @@ namespace oomph
     /// Empty destructor
     virtual ~TriangleMeshCurveSection() {}
 
-    /// \short Number of segments that this part of the
+    ///  Number of segments that this part of the
     /// boundary is to be represented by. This corresponds
     /// to the number of straight-line segments in triangle
     /// representation.
@@ -199,7 +199,7 @@ namespace oomph
     virtual void output(std::ostream& outfile,
                         const unsigned& n_sample = 50) = 0;
 
-    /// \short Enable refinement of curve section to create a better
+    ///  Enable refinement of curve section to create a better
     /// representation of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
     /// interpretation of the optional argument which specifies the
@@ -210,7 +210,7 @@ namespace oomph
       Refinement_tolerance = tolerance;
     }
 
-    /// \short Set tolerance for refinement of curve sections to create a better
+    ///  Set tolerance for refinement of curve sections to create a better
     /// representation of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
     /// interpretation of the refinement tolerance. (The smaller the
@@ -222,7 +222,7 @@ namespace oomph
       Refinement_tolerance = tolerance;
     }
 
-    /// \short Get tolerance for refinement of curve sections to create a better
+    ///  Get tolerance for refinement of curve sections to create a better
     /// representation of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
     /// interpretation. If it's negative refinement is disabled.
@@ -231,13 +231,13 @@ namespace oomph
       return Refinement_tolerance;
     }
 
-    /// \short Disable refinement of curve section
+    ///  Disable refinement of curve section
     void disable_refinement_tolerance()
     {
       Refinement_tolerance = -1.0;
     }
 
-    /// \short Enable unrefinement of curve sections to avoid unnecessarily
+    ///  Enable unrefinement of curve sections to avoid unnecessarily
     /// large numbers of elements on of curvilinear boundaries (e.g. in
     /// free-surface problems). See tutorial for interpretation of the optional
     /// argument which specifies the unrefinement tolerance. It defaults to 0.04
@@ -248,7 +248,7 @@ namespace oomph
       Unrefinement_tolerance = tolerance;
     }
 
-    /// \short Set tolerance for unrefinement of curve sections
+    ///  Set tolerance for unrefinement of curve sections
     /// to avoid unnecessarily large
     /// numbers of elements on of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
@@ -263,7 +263,7 @@ namespace oomph
       Unrefinement_tolerance = tolerance;
     }
 
-    /// \short Get tolerance for unrefinement of curve section to create a
+    ///  Get tolerance for unrefinement of curve section to create a
     /// better representation of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
     /// interpretation. If it's negative unrefinement is disabled.
@@ -272,13 +272,13 @@ namespace oomph
       return Unrefinement_tolerance;
     }
 
-    /// \short Disable unrefinement of curve sections
+    ///  Disable unrefinement of curve sections
     void disable_unrefinement_tolerance()
     {
       Unrefinement_tolerance = -1.0;
     }
 
-    /// \short Allows to specify the maximum distance between two vertices
+    ///  Allows to specify the maximum distance between two vertices
     /// that define the associated polyline of the curve section, it only
     /// takes effect on the unrefinement and refinement steps
     void set_maximum_length(const double& maximum_length)
@@ -286,14 +286,14 @@ namespace oomph
       Maximum_length = maximum_length;
     }
 
-    /// \short Disables the use of the maximum length criteria on the
+    ///  Disables the use of the maximum length criteria on the
     /// unrefinement or refinement steps
     void disable_use_maximum_length()
     {
       Maximum_length = -1.0;
     }
 
-    /// \short Gets access to the maximum length variable
+    ///  Gets access to the maximum length variable
     double maximum_length()
     {
       return Maximum_length;
@@ -305,7 +305,7 @@ namespace oomph
     /// Get last vertex coordinates
     virtual void final_vertex_coordinate(Vector<double>& vertex) = 0;
 
-    /// \short Connects the initial vertex of the curve section to a desired
+    ///  Connects the initial vertex of the curve section to a desired
     /// target polyline by specifying the vertex number. There is a checking
     /// which verifies that the initial vertex is close enough to the
     /// destination vertex on the target polyline by no more than the specified
@@ -315,7 +315,7 @@ namespace oomph
       const unsigned& vertex_number,
       const double& tolerance_for_connection = 1.0e-14);
 
-    /// \short Connects the final vertex of the curve section to a desired
+    ///  Connects the final vertex of the curve section to a desired
     /// target polyline by specifying the vertex number. There is a checking
     /// which verifies that the final vertex is close enough to the
     /// destination vertex on the target polyline by no more than the specified
@@ -325,7 +325,7 @@ namespace oomph
       const unsigned& vertex_number,
       const double& tolerance_for_connection = 1.0e-14);
 
-    /// \short Connects the initial vertex of the curve section to a desired
+    ///  Connects the initial vertex of the curve section to a desired
     /// target curviline by specifying the s value (intrinsic value on the
     /// geometric object of the curviline) where to connect on the target
     /// curviline. There is a checking which verifies that the initial vertex
@@ -336,7 +336,7 @@ namespace oomph
       const double& s_value,
       const double& tolerance_for_connection = 1.0e-14);
 
-    /// \short Connects the final vertex of the curve section to a desired
+    ///  Connects the final vertex of the curve section to a desired
     /// target curviline by specifying the s value (intrinsic value on the
     /// geometric object of the curviline) where to connect on the target
     /// curviline. There is a checking which verifies that the final vertex
@@ -543,38 +543,38 @@ namespace oomph
       Final_vertex_connected_to_curviline = false;
     }
 
-    /// \short Gets the s value to which the initial end is connected
+    ///  Gets the s value to which the initial end is connected
     double initial_s_connection_value() const
     {
       return Initial_s_connection_value;
     }
 
-    /// \short Sets the s value to which the initial end is connected
+    ///  Sets the s value to which the initial end is connected
     double& initial_s_connection_value()
     {
       return Initial_s_connection_value;
     }
 
-    /// \short Gets the s value to which the final end is connected
+    ///  Gets the s value to which the final end is connected
     double final_s_connection_value() const
     {
       return Final_s_connection_value;
     }
 
-    /// \short Sets the s value to which the final end is connected
+    ///  Sets the s value to which the final end is connected
     double& final_s_connection_value()
     {
       return Final_s_connection_value;
     }
 
-    /// \short Gets the tolerance value for connections among
+    ///  Gets the tolerance value for connections among
     /// curvilines
     double tolerance_for_s_connection() const
     {
       return Tolerance_for_s_connection;
     }
 
-    /// \short Sets the tolerance value for connections among
+    ///  Sets the tolerance value for connections among
     /// curvilines
     double& tolerance_for_s_connection()
     {
@@ -582,20 +582,20 @@ namespace oomph
     }
 
   protected:
-    /// \short Used for stating if the initial end is connected
+    ///  Used for stating if the initial end is connected
     /// to another boundary
     bool Initial_vertex_connected;
 
-    /// \short Used for stating if the final end is connected
+    ///  Used for stating if the final end is connected
     /// to another boundary
     bool Final_vertex_connected;
 
-    /// \short Indicates if the connection is suspended because the
+    ///  Indicates if the connection is suspended because the
     /// boundary to connect is no longer part of the domain (only used in
     /// a distributed context)
     bool Initial_vertex_connected_suspended;
 
-    /// \short Indicates if the connection is suspended because the
+    ///  Indicates if the connection is suspended because the
     /// boundary to connect is no longer part of the domain (only used in
     /// a distributed context)
     bool Final_vertex_connected_suspended;
@@ -603,22 +603,22 @@ namespace oomph
     /// Stores the id to which the initial end is connected
     unsigned Initial_vertex_connected_bnd_id;
 
-    /// \short Stores the vertex number used for connection with
+    ///  Stores the vertex number used for connection with
     /// the initial end
     unsigned Initial_vertex_connected_n_vertex;
 
-    /// \short Stores the chunk number of the boundary to which is
+    ///  Stores the chunk number of the boundary to which is
     /// connected th initial end
     unsigned Initial_vertex_connected_n_chunk;
 
     /// Stores the id to which the initial end is connected
     unsigned Final_vertex_connected_bnd_id;
 
-    /// \short Stores the vertex number used for connection with
+    ///  Stores the vertex number used for connection with
     /// the final end
     unsigned Final_vertex_connected_n_vertex;
 
-    /// \short Stores the chunk number of the boundary to which is
+    ///  Stores the chunk number of the boundary to which is
     /// connected th initial end
     unsigned Final_vertex_connected_n_chunk;
 
@@ -628,11 +628,11 @@ namespace oomph
     /// States if the final vertex is connected to a curviline
     bool Final_vertex_connected_to_curviline;
 
-    /// \short Stores the s value used for connecting the
+    ///  Stores the s value used for connecting the
     /// initial end with a curviline
     double Initial_s_connection_value;
 
-    /// \short Stores the s value used for connecting the
+    ///  Stores the s value used for connecting the
     /// final end with a curviline
     double Final_s_connection_value;
 
@@ -661,7 +661,7 @@ namespace oomph
   class TriangleMeshCurviLine : public virtual TriangleMeshCurveSection
   {
   public:
-    /// \short Constructor: Specify GeomObject, the start and end coordinates
+    ///  Constructor: Specify GeomObject, the start and end coordinates
     /// of the relevant boundary in terms of the GeomObject's intrinsic
     /// coordinate, the number of (initially straight-line) segments that
     /// this GeomObject is to be split up into, and the boundary ID.
@@ -689,7 +689,7 @@ namespace oomph
     }
 
 
-    /// \short Empty Destuctor
+    ///  Empty Destuctor
     virtual ~TriangleMeshCurviLine() {}
 
     /// Pointer to GeomObject that represents this part of the boundary
@@ -710,14 +710,14 @@ namespace oomph
       return Zeta_end;
     }
 
-    /// \short Number of (initially straight-line) segments that this part of
+    ///  Number of (initially straight-line) segments that this part of
     /// the boundary is to be represented by
     unsigned nsegment() const
     {
       return Nsegment;
     }
 
-    /// \short Number of (initially straight-line) segments that this part of
+    ///  Number of (initially straight-line) segments that this part of
     /// the boundary is to be represented by. This version allows the change of
     /// the number of segments
     unsigned& nsegment()
@@ -753,7 +753,7 @@ namespace oomph
       }
     }
 
-    /// \short Boolean to indicate if vertices in polygonal representation
+    ///  Boolean to indicate if vertices in polygonal representation
     /// of the Curvline are spaced (approximately) evenly in arclength
     /// along the GeomObject [true] or in equal increments in zeta [false]
     bool space_vertices_evenly_in_arclength() const
@@ -783,13 +783,13 @@ namespace oomph
       Geom_object_pt->position(z, vertex);
     }
 
-    /// \short Does the vector for storing connections has elements?
+    ///  Does the vector for storing connections has elements?
     bool are_there_connection_points()
     {
       return !Connection_points_pt.empty();
     }
 
-    /// \short Returns the connection points vector
+    ///  Returns the connection points vector
     Vector<double>* connection_points_pt()
     {
       return &Connection_points_pt;
@@ -846,7 +846,7 @@ namespace oomph
     /// Boundary ID
     unsigned Boundary_id;
 
-    /// \short Boolean to indicate if vertices in polygonal representation
+    ///  Boolean to indicate if vertices in polygonal representation
     /// of the Curviline are spaced (approximately) evenly in arclength
     /// along the GeomObject [true] or in equal increments in zeta [false]
     bool Space_vertices_evenly_in_arclength;
@@ -855,7 +855,7 @@ namespace oomph
     /// than one polyline
     unsigned Boundary_chunk;
 
-    /// \short Stores the information for connections received on the
+    ///  Stores the information for connections received on the
     /// curviline. Used when converting to polyline
     Vector<double> Connection_points_pt;
   };
@@ -867,7 +867,7 @@ namespace oomph
   class TriangleMeshPolyLine : public virtual TriangleMeshCurveSection
   {
   public:
-    /// \short Constructor: Takes vectors of vertex coordinates in order
+    ///  Constructor: Takes vectors of vertex coordinates in order
     /// Also allows the optional specification of a boundary ID -- useful
     /// in a mesh generation context. If not specified it defaults to zero.
     TriangleMeshPolyLine(const Vector<Vector<double>>& vertex_coordinate,
@@ -1107,13 +1107,13 @@ namespace oomph
 
 
   //===================================================================
-  /// \short Namespace that allows the specification of a tolerance
+  ///  Namespace that allows the specification of a tolerance
   /// between vertices at the ends of polylines that are supposed
   /// to be at the same position.
   //===================================================================
   namespace ToleranceForVertexMismatchInPolygons
   {
-    /// \short Acceptable discrepancy for mismatch in vertex coordinates.
+    ///  Acceptable discrepancy for mismatch in vertex coordinates.
     /// In paranoid mode, the code will die if the beginning/end of
     /// two adjacent polylines differ by more than that. If the
     /// discrepancy is smaller (but nonzero) one of the vertex coordinates
@@ -1128,7 +1128,7 @@ namespace oomph
 
 
   //=====================================================================
-  // \short Class defining triangle mesh curves. Abstract class for
+  //  Class defining triangle mesh curves. Abstract class for
   /// closed curves and open curves. All TriangleMeshCurves are composed
   /// of a Vector of TriangleMeshCurveSections
   //=====================================================================
@@ -1174,7 +1174,7 @@ namespace oomph
       return Curve_section_pt.size();
     }
 
-    /// \short Enable refinement of polylines to create a better
+    ///  Enable refinement of polylines to create a better
     /// representation of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
     /// interpretation of the optional argument which specifies the
@@ -1193,7 +1193,7 @@ namespace oomph
       }
     }
 
-    /// \short Set tolerance for refinement of polylines to create a better
+    ///  Set tolerance for refinement of polylines to create a better
     /// representation of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
     /// interpretation of the refinement tolerance. (The smaller the
@@ -1213,7 +1213,7 @@ namespace oomph
       }
     }
 
-    /// \short Get tolerance for refinement of polylines to create a better
+    ///  Get tolerance for refinement of polylines to create a better
     /// representation of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
     /// interpretation. If it's negative refinement is disabled.
@@ -1222,7 +1222,7 @@ namespace oomph
       return Polyline_refinement_tolerance;
     }
 
-    /// \short Disable refinement of polylines
+    ///  Disable refinement of polylines
     void disable_polyline_refinement()
     {
       Polyline_refinement_tolerance = -1.0;
@@ -1235,7 +1235,7 @@ namespace oomph
       }
     }
 
-    /// \short Enable unrefinement of polylines to avoid unnecessarily large
+    ///  Enable unrefinement of polylines to avoid unnecessarily large
     /// numbers of elements on of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
     /// interpretation of the optional argument which specifies the
@@ -1255,7 +1255,7 @@ namespace oomph
       }
     }
 
-    /// \short Set tolerance for unrefinement of polylines
+    ///  Set tolerance for unrefinement of polylines
     /// to avoid unnecessarily large
     /// numbers of elements on of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
@@ -1278,7 +1278,7 @@ namespace oomph
       }
     }
 
-    /// \short Get tolerance for unrefinement of polylines to create a better
+    ///  Get tolerance for unrefinement of polylines to create a better
     /// representation of curvilinear boundaries (e.g. in free-surface
     /// problems). See tutorial for
     /// interpretation. If it's negative unrefinement is disabled.
@@ -1287,7 +1287,7 @@ namespace oomph
       return Polyline_unrefinement_tolerance;
     }
 
-    /// \short Disable unrefinement of polylines
+    ///  Disable unrefinement of polylines
     void disable_polyline_unrefinement()
     {
       Polyline_unrefinement_tolerance = -1.0;
@@ -1450,7 +1450,7 @@ namespace oomph
   class TriangleMeshPolygon : public virtual TriangleMeshClosedCurve
   {
   public:
-    /// \short Constructor: Specify vector of pointers to
+    ///  Constructor: Specify vector of pointers to
     /// TriangleMeshCurveSection that define the boundary of the segments of the
     /// polygon. Each TriangleMeshCurveSection has its own boundary ID and can
     /// contain multiple (straight-line) segments. For consistency across the
@@ -1547,34 +1547,34 @@ namespace oomph
       return boundary_id;
     }
 
-    /// \short Is re-distribution of polyline segments in the curve
+    ///  Is re-distribution of polyline segments in the curve
     /// between different boundaries during adaptation enabled?
     bool is_redistribution_of_segments_between_polylines_enabled()
     {
       return Enable_redistribution_of_segments_between_polylines;
     }
 
-    /// \short Enable re-distribution of polyline segments in the curve
+    ///  Enable re-distribution of polyline segments in the curve
     /// between different boundaries during adaptation
     void enable_redistribution_of_segments_between_polylines()
     {
       Enable_redistribution_of_segments_between_polylines = true;
     }
 
-    /// \short Disable re-distribution of polyline segments in the curve
+    ///  Disable re-distribution of polyline segments in the curve
     /// between different boundaries during adaptation
     void disable_redistribution_of_segments_between_polylines()
     {
       Enable_redistribution_of_segments_between_polylines = false;
     }
 
-    /// \short Test whether curve can update reference
+    ///  Test whether curve can update reference
     bool can_update_reference_configuration() const
     {
       return Can_update_configuration;
     }
 
-    /// \short Virtual function that should be overloaded to update the polygons
+    ///  Virtual function that should be overloaded to update the polygons
     /// reference configuration
     virtual void reset_reference_configuration()
     {
@@ -1594,37 +1594,37 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Test whether the polygon is fixed or not
+    ///  Test whether the polygon is fixed or not
     bool is_fixed() const
     {
       return Polygon_fixed;
     }
 
-    /// \short Set the polygon to be fixed
+    ///  Set the polygon to be fixed
     void set_fixed()
     {
       Polygon_fixed = true;
     }
 
-    /// \short Set the polygon to be allowed to move (default)
+    ///  Set the polygon to be allowed to move (default)
     void set_unfixed()
     {
       Polygon_fixed = false;
     }
 
   protected:
-    /// \short Is re-distribution of polyline segments between different
+    ///  Is re-distribution of polyline segments between different
     /// boundaries during adaptation enabled? (Default: false)
     bool Enable_redistribution_of_segments_between_polylines;
 
-    ///\short Boolean flag to indicate whether the polygon can update its
+    /// Boolean flag to indicate whether the polygon can update its
     /// own reference configuration after it has moved i.e. if it is
     /// upgraded to a rigid body rather than being a free surface (default
     /// false)
     bool Can_update_configuration;
 
   private:
-    ///\short Boolean flag to indicate whether the polygon can move
+    /// Boolean flag to indicate whether the polygon can move
     /// (default false because if it doesn't move this will just lead to
     ///  wasted work)
     bool Polygon_fixed;
@@ -1740,7 +1740,7 @@ namespace oomph
     /// Public static flag to suppress warning; defaults to false
     static bool Suppress_warning_about_regions_and_boundaries;
 
-    /// \short Empty constructor
+    ///  Empty constructor
     UnstructuredTwoDMeshGeometryBase() {}
 
     /// Broken copy constructor
@@ -1822,7 +1822,7 @@ namespace oomph
       return Region_attribute[i];
     }
 
-    /// \short Return the geometric object associated with the b-th boundary or
+    ///  Return the geometric object associated with the b-th boundary or
     /// null if the boundary has associated geometric object.
     GeomObject* boundary_geom_object_pt(const unsigned& b)
     {
@@ -1838,20 +1838,20 @@ namespace oomph
       }
     }
 
-    /// \short Return direct access to the geometric object storage
+    ///  Return direct access to the geometric object storage
     std::map<unsigned, GeomObject*>& boundary_geom_object_pt()
     {
       return Boundary_geom_object_pt;
     }
 
-    /// \short Return access to the vector of boundary coordinates associated
+    ///  Return access to the vector of boundary coordinates associated
     /// with each geometric object
     std::map<unsigned, Vector<double>>& boundary_coordinate_limits()
     {
       return Boundary_coordinate_limits;
     }
 
-    /// \short Return access to the coordinate limits associated with
+    ///  Return access to the coordinate limits associated with
     /// the geometric object associated with boundary b
     Vector<double>& boundary_coordinate_limits(const unsigned& b)
     {
@@ -1932,7 +1932,7 @@ namespace oomph
       }
     }
 
-    /// \short Return pointer to the current polyline that describes
+    ///  Return pointer to the current polyline that describes
     /// the b-th mesh boundary
     TriangleMeshPolyLine* boundary_polyline_pt(const unsigned& b)
     {
@@ -1948,27 +1948,27 @@ namespace oomph
       return 0;
     }
 
-    /// \short Gets a pointer to a set with all the nodes related with a
+    ///  Gets a pointer to a set with all the nodes related with a
     /// boundary
     std::map<unsigned, std::set<Node*>>& nodes_on_boundary_pt()
     {
       return Nodes_on_boundary_pt;
     }
 
-    /// \short Gets the vertex number on the destination polyline (used
+    ///  Gets the vertex number on the destination polyline (used
     /// to create the connections among shared boundaries)
     const bool get_connected_vertex_number_on_destination_polyline(
       TriangleMeshPolyLine* dst_polyline_pt,
       Vector<double>& vertex_coordinates,
       unsigned& vertex_number);
 
-    /// \short Sort the polylines coming from joining them. Check whether
+    ///  Sort the polylines coming from joining them. Check whether
     /// it is necessary to reverse them or not. Used when joining two curve
     /// polylines in order to create a polygon
     void check_contiguousness_on_polylines_helper(
       Vector<TriangleMeshPolyLine*>& polylines_pt, unsigned& index);
 
-    /// \short Sort the polylines coming from joining them. Check whether
+    ///  Sort the polylines coming from joining them. Check whether
     /// it is necessary to reverse them or not. Used when joining polylines
     /// and they still do not create a polygon
     void check_contiguousness_on_polylines_helper(
@@ -2068,86 +2068,86 @@ namespace oomph
       }
     }
 
-    /// \short Flag used at the setup_boundary_coordinate function to know
+    ///  Flag used at the setup_boundary_coordinate function to know
     /// if initial zeta values for segments have been assigned
     std::map<unsigned, bool> Assigned_segments_initial_zeta_values;
 
-    /// \short Return direct access to the initial coordinates of a boundary
+    ///  Return direct access to the initial coordinates of a boundary
     std::map<unsigned, Vector<double>>& boundary_initial_coordinate()
     {
       return Boundary_initial_coordinate;
     }
 
-    /// \short Return direct access to the final coordinates of a boundary
+    ///  Return direct access to the final coordinates of a boundary
     std::map<unsigned, Vector<double>>& boundary_final_coordinate()
     {
       return Boundary_final_coordinate;
     }
 
-    /// \short Return direct access to the initial zeta coordinate of a
+    ///  Return direct access to the initial zeta coordinate of a
     /// boundary
     std::map<unsigned, Vector<double>>& boundary_initial_zeta_coordinate()
     {
       return Boundary_initial_zeta_coordinate;
     }
 
-    /// \short Return direct access to the final zeta coordinates of a
+    ///  Return direct access to the final zeta coordinates of a
     /// boundary
     std::map<unsigned, Vector<double>>& boundary_final_zeta_coordinate()
     {
       return Boundary_final_zeta_coordinate;
     }
 
-    /// \short Return the info. to know if it is necessary to reverse the
+    ///  Return the info. to know if it is necessary to reverse the
     /// segment based on a previous mesh
     std::map<unsigned, Vector<unsigned>>& boundary_segment_inverted()
     {
       return Boundary_segment_inverted;
     }
 
-    /// \short Return direct access to the initial coordinates for the
+    ///  Return direct access to the initial coordinates for the
     /// segments that are part of a boundary
     std::map<unsigned, Vector<Vector<double>>>& boundary_segment_initial_coordinate()
     {
       return Boundary_segment_initial_coordinate;
     }
 
-    /// \short Return direct access to the final coordinates for the
+    ///  Return direct access to the final coordinates for the
     /// segments that are part of a boundary
     std::map<unsigned, Vector<Vector<double>>>& boundary_segment_final_coordinate()
     {
       return Boundary_segment_final_coordinate;
     }
 
-    /// \short Return direct access to the initial arclength for the
+    ///  Return direct access to the initial arclength for the
     /// segments that are part of a boundary
     std::map<unsigned, Vector<double>>& boundary_segment_initial_arclength()
     {
       return Boundary_segment_initial_arclength;
     }
 
-    /// \short Return direct access to the final arclength for the
+    ///  Return direct access to the final arclength for the
     /// segments that are part of a boundary
     std::map<unsigned, Vector<double>>& boundary_segment_final_arclength()
     {
       return Boundary_segment_final_arclength;
     }
 
-    /// \short Return direct access to the initial zeta for the
+    ///  Return direct access to the initial zeta for the
     /// segments that are part of a boundary
     std::map<unsigned, Vector<double>>& boundary_segment_initial_zeta()
     {
       return Boundary_segment_initial_zeta;
     }
 
-    /// \short Return direct access to the final zeta for the
+    ///  Return direct access to the final zeta for the
     /// segments that are part of a boundary
     std::map<unsigned, Vector<double>>& boundary_segment_final_zeta()
     {
       return Boundary_segment_final_zeta;
     }
 
-    /// \short Return the initial zeta for the segments that are
+    ///  Return the initial zeta for the segments that are
     /// part of a boundary
     Vector<double>& boundary_segment_initial_zeta(const unsigned& b)
     {
@@ -2171,7 +2171,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the final zeta for the segments that are
+    ///  Return the final zeta for the segments that are
     /// part of a boundary
     Vector<double>& boundary_segment_final_zeta(const unsigned& b)
     {
@@ -2195,7 +2195,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the initial coordinates for the boundary
+    ///  Return the initial coordinates for the boundary
     Vector<double>& boundary_initial_coordinate(const unsigned& b)
     {
       std::map<unsigned, Vector<double>>::iterator it =
@@ -2217,7 +2217,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the final coordinates for the boundary
+    ///  Return the final coordinates for the boundary
     Vector<double>& boundary_final_coordinate(const unsigned& b)
     {
       std::map<unsigned, Vector<double>>::iterator it =
@@ -2240,7 +2240,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the info. to know if it is necessary to reverse the
+    ///  Return the info. to know if it is necessary to reverse the
     /// segment based on a previous mesh
     const Vector<unsigned> boundary_segment_inverted(const unsigned& b) const
     {
@@ -2264,7 +2264,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the info. to know if it is necessary to reverse the
+    ///  Return the info. to know if it is necessary to reverse the
     /// segment based on a previous mesh
     Vector<unsigned>& boundary_segment_inverted(const unsigned& b)
     {
@@ -2288,7 +2288,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the initial zeta coordinate for the boundary
+    ///  Return the initial zeta coordinate for the boundary
     Vector<double>& boundary_initial_zeta_coordinate(const unsigned& b)
     {
       std::map<unsigned, Vector<double>>::iterator it =
@@ -2312,7 +2312,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the final zeta coordinate for the boundary
+    ///  Return the final zeta coordinate for the boundary
     Vector<double>& boundary_final_zeta_coordinate(const unsigned& b)
     {
       std::map<unsigned, Vector<double>>::iterator it =
@@ -2335,7 +2335,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the initial arclength for the segments that are
+    ///  Return the initial arclength for the segments that are
     /// part of a boundary
     Vector<double>& boundary_segment_initial_arclength(const unsigned& b)
     {
@@ -2359,7 +2359,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the final arclength for the segments that are
+    ///  Return the final arclength for the segments that are
     /// part of a boundary
     Vector<double>& boundary_segment_final_arclength(const unsigned& b)
     {
@@ -2383,7 +2383,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the initial coordinates for the segments that are
+    ///  Return the initial coordinates for the segments that are
     /// part of a boundary
     Vector<Vector<double>>& boundary_segment_initial_coordinate(
       const unsigned& b)
@@ -2408,7 +2408,7 @@ namespace oomph
       return (*it).second;
     }
 
-    /// \short Return the final coordinates for the segments that are
+    ///  Return the final coordinates for the segments that are
     /// part of a boundary
     Vector<Vector<double>>& boundary_segment_final_coordinate(const unsigned& b)
     {
@@ -2434,7 +2434,7 @@ namespace oomph
 
 #endif // OOMPH_HAS_MPI
 
-    /// \short Setup boundary coordinate on boundary b.
+    ///  Setup boundary coordinate on boundary b.
     /// Boundary coordinate increases continously along
     /// polygonal boundary. It's zero at the lowest left
     /// node on the boundary.
@@ -2446,7 +2446,7 @@ namespace oomph
       setup_boundary_coordinates<ELEMENT>(b, some_file);
     }
 
-    /// \short Setup boundary coordinate on boundary b. Doc Faces
+    ///  Setup boundary coordinate on boundary b. Doc Faces
     /// in outfile.
     /// Boundary coordinate increases continously along
     /// polygonal boundary. It's zero at the lowest left
@@ -2458,7 +2458,7 @@ namespace oomph
   protected:
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Create TriangulateIO object from outer boundaries,
+    ///  Create TriangulateIO object from outer boundaries,
     /// internal boundaries, and open curves. Add the holes and regions
     /// information as well
     void build_triangulateio(
@@ -2470,7 +2470,7 @@ namespace oomph
       std::map<unsigned, double>& regions_areas,
       TriangulateIO& triangulate_io);
 
-    /// \short Data structure filled when the connection matrix is created, for
+    ///  Data structure filled when the connection matrix is created, for
     /// each polyline, there are two vertex_connection_info structures,
     /// one for each end
     struct vertex_connection_info
@@ -2481,7 +2481,7 @@ namespace oomph
       unsigned vertex_number_to_connect;
     }; // vertex_connection_info
 
-    /// \short Data structure to store the base vertex info, initial or final
+    ///  Data structure to store the base vertex info, initial or final
     /// vertex in the polylines have an associated base vertex
     struct base_vertex_info
     {
@@ -2492,7 +2492,7 @@ namespace oomph
       unsigned vertex_number;
     }; // base_vertex_info
 
-    /// \short Helps to add information to the connection matrix of the
+    ///  Helps to add information to the connection matrix of the
     /// given polyline
     void add_connection_matrix_info_helper(
       TriangleMeshPolyLine* polyline_pt,
@@ -2500,14 +2500,14 @@ namespace oomph
         connection_matrix,
       TriangleMeshPolyLine* next_polyline_pt = 0);
 
-    /// \short Initialise the base vertex structure, set every vertex to
+    ///  Initialise the base vertex structure, set every vertex to
     /// no visited and not being a base vertex
     void initialise_base_vertex(
       TriangleMeshPolyLine* polyline_pt,
       std::map<unsigned, std::map<unsigned, Vector<base_vertex_info>>>&
         base_vertices);
 
-    /// \short Helps to identify the base vertex of the given polyline
+    ///  Helps to identify the base vertex of the given polyline
     void add_base_vertex_info_helper(
       TriangleMeshPolyLine* polyline_pt,
       std::map<unsigned, std::map<unsigned, Vector<base_vertex_info>>>&
@@ -2521,71 +2521,71 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Used to store the nodes associated to a boundary and to an
+    ///  Used to store the nodes associated to a boundary and to an
     /// specific segment (this only applies in distributed meshes where the
     /// boundary is splitted in segments)
     std::map<unsigned, Vector<Vector<Node*>>> Boundary_segment_node_pt;
 
-    /// \short Stores the initial zeta coordinate for the segments that
+    ///  Stores the initial zeta coordinate for the segments that
     /// appear when a boundary is splited among processors
     std::map<unsigned, Vector<double>> Boundary_segment_initial_zeta;
 
-    /// \short Stores the final zeta coordinate for the segments that
+    ///  Stores the final zeta coordinate for the segments that
     /// appear when a boundary is splited among processors
     std::map<unsigned, Vector<double>> Boundary_segment_final_zeta;
 
-    /// \short Stores the initial coordinates for the boundary
+    ///  Stores the initial coordinates for the boundary
     std::map<unsigned, Vector<double>> Boundary_initial_coordinate;
 
-    /// \short Stores the final coordinates for the boundary
+    ///  Stores the final coordinates for the boundary
     std::map<unsigned, Vector<double>> Boundary_final_coordinate;
 
-    /// \short Stores the info. to know if it is necessary to reverse the
+    ///  Stores the info. to know if it is necessary to reverse the
     /// segment based on a previous mesh
     std::map<unsigned, Vector<unsigned>> Boundary_segment_inverted;
 
-    /// \short Stores the initial zeta coordinate for the boundary
+    ///  Stores the initial zeta coordinate for the boundary
     std::map<unsigned, Vector<double>> Boundary_initial_zeta_coordinate;
 
-    /// \short Stores the final zeta coordinate for the boundary
+    ///  Stores the final zeta coordinate for the boundary
     std::map<unsigned, Vector<double>> Boundary_final_zeta_coordinate;
 
-    /// \short Stores the initial arclength for the segments that appear when
+    ///  Stores the initial arclength for the segments that appear when
     /// a boundary is splited among processors
     std::map<unsigned, Vector<double>> Boundary_segment_initial_arclength;
 
-    /// \short Stores the final arclength for the segments that appear when
+    ///  Stores the final arclength for the segments that appear when
     /// a boundary is splited among processors
     std::map<unsigned, Vector<double>> Boundary_segment_final_arclength;
 
-    /// \short Stores the initial coordinates for the segments that appear
+    ///  Stores the initial coordinates for the segments that appear
     /// when a boundary is splited among processors
     std::map<unsigned, Vector<Vector<double>>>
       Boundary_segment_initial_coordinate;
 
-    /// \short Stores the final coordinates for the segments that appear
+    ///  Stores the final coordinates for the segments that appear
     /// when a boundary is splited among processors
     std::map<unsigned, Vector<Vector<double>>>
       Boundary_segment_final_coordinate;
 
 #endif
 
-    /// \short Flag to indicate whether the automatic creation of vertices
+    ///  Flag to indicate whether the automatic creation of vertices
     /// along the boundaries by Triangle is allowed
     bool Allow_automatic_creation_of_vertices_on_boundaries;
 
-    /// \short Snap the boundary nodes onto any curvilinear boundaries
+    ///  Snap the boundary nodes onto any curvilinear boundaries
     /// defined by geometric objects
     void snap_nodes_onto_geometric_objects();
 
-    /// \short Vector of elements in each region differentiated by attribute
+    ///  Vector of elements in each region differentiated by attribute
     /// (the key of the map is the attribute)
     std::map<unsigned, Vector<FiniteElement*>> Region_element_pt;
 
     /// Vector of attributes associated with the elements in each region
     Vector<double> Region_attribute;
 
-    /// \short Storage for the geometric objects associated with any boundaries
+    ///  Storage for the geometric objects associated with any boundaries
     std::map<unsigned, GeomObject*> Boundary_geom_object_pt;
 
     /// Storage for the limits of the boundary coordinates defined by the use
@@ -2619,7 +2619,7 @@ namespace oomph
     /// Storage for the face index adjacent to a boundary in a particular region
     Vector<std::map<unsigned, Vector<int>>> Face_index_region_at_boundary;
 
-    /// \short Storage for pairs of doubles representing:
+    ///  Storage for pairs of doubles representing:
     /// .first: the arclength along the polygonal representation of
     ///         the curviline
     /// .second: the corresponding intrinsic coordinate on the associated
@@ -2629,28 +2629,28 @@ namespace oomph
     std::map<unsigned, Vector<std::pair<double, double>>>
       Polygonal_vertex_arclength_info;
 
-    /// \short Stores a pointer to a set with all the nodes
+    ///  Stores a pointer to a set with all the nodes
     /// related with a boundary
     std::map<unsigned, std::set<Node*>> Nodes_on_boundary_pt;
 
-    /// \short A set that contains the curve sections created by this object
+    ///  A set that contains the curve sections created by this object
     /// therefore it is necessary to free their associated memory
     std::set<TriangleMeshCurveSection*> Free_curve_section_pt;
 
-    /// \short A set that contains the polygons created by this object
+    ///  A set that contains the polygons created by this object
     /// therefore it is necessary to free their associated memory
     std::set<TriangleMeshPolygon*> Free_polygon_pt;
 
-    /// \short A set that contains the open curves created by this
+    ///  A set that contains the open curves created by this
     /// object therefore it is necessary to free their associated memory
     std::set<TriangleMeshOpenCurve*> Free_open_curve_pt;
 
-    /// \short Helper function to copy the connection information from
+    ///  Helper function to copy the connection information from
     /// the input curve(polyline or curviline) to the output polyline
     void copy_connection_information(TriangleMeshCurveSection* input_curve_pt,
                                      TriangleMeshCurveSection* output_curve_pt);
 
-    /// \short Helper function to copy the connection information from
+    ///  Helper function to copy the connection information from
     /// the input curve(polyline or curviline) to the output sub-polyline
     void copy_connection_information_to_sub_polylines(
       TriangleMeshCurveSection* input_curve_pt,
@@ -2669,7 +2669,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Helper function to create polyline vertex coordinates for
+    ///  Helper function to create polyline vertex coordinates for
     /// curvilinear boundary specified by boundary_pt, using either
     /// equal increments in zeta or in (approximate) arclength
     /// along the curviline. vertex_coord[i_vertex][i_dim] stores
@@ -2839,7 +2839,7 @@ namespace oomph
       }
     }
 
-    /// \short Helper function to create polyline vertex coordinates for
+    ///  Helper function to create polyline vertex coordinates for
     /// curvilinear boundary specified by boundary_pt, using either
     /// equal increments in zeta or in (approximate) arclength
     /// along the curviline. vertex_coord[i_vertex][i_dim] stores
@@ -3335,7 +3335,7 @@ namespace oomph
       } // Less number of insertion points than vertices
     }
 
-    /// \short Helper function that returns a polygon representation for
+    ///  Helper function that returns a polygon representation for
     /// the given closed curve, it also computes the maximum boundary id of
     /// the constituent curves.
     /// If the TriangleMeshClosedCurve is already a TriangleMeshPolygon
@@ -3488,7 +3488,7 @@ namespace oomph
       return output_polygon_pt;
     }
 
-    /// \short Helper function that creates and returns an open curve with
+    ///  Helper function that creates and returns an open curve with
     /// the polyline representation of its constituent curve sections. The
     /// new created open curve is deleted when the TriangleMesh destructor
     /// is called
@@ -3625,7 +3625,7 @@ namespace oomph
       return output_open_polyline_pt;
     }
 
-    /// \short Stores the geometric objects associated to the
+    ///  Stores the geometric objects associated to the
     /// curve sections that compound the closed curve. It also
     /// stores the limits defined by these geometric objects
     void set_geom_objects_and_coordinate_limits_for_close_curve(
@@ -3712,7 +3712,7 @@ namespace oomph
       } // else
     } // function
 
-    /// \short Stores the geometric objects associated to the
+    ///  Stores the geometric objects associated to the
     /// curve sections that compound the open curve. It also
     /// stores the limits defined by these geometric objects
     void set_geom_objects_and_coordinate_limits_for_open_curve(
@@ -3749,7 +3749,7 @@ namespace oomph
   private:
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    /// \short Helper function that creates the associated polyline
+    ///  Helper function that creates the associated polyline
     /// representation for curvilines
     TriangleMeshCurveSection* curviline_to_polyline(
       TriangleMeshCurviLine*& curviline_pt, unsigned& bnd_id)
@@ -3776,7 +3776,7 @@ namespace oomph
       return new TriangleMeshPolyLine(bound, bnd_id);
     }
 
-    /// \short Get the associated vertex to the given s value by looking to
+    ///  Get the associated vertex to the given s value by looking to
     /// the list of s values created when changing from curviline to polyline
     unsigned get_associated_vertex_to_svalue(double& target_s_value,
                                              unsigned& bnd_id)
@@ -3786,7 +3786,7 @@ namespace oomph
         target_s_value, bnd_id, s_tolerance);
     }
 
-    /// \short Get the associated vertex to the given s value by looking to
+    ///  Get the associated vertex to the given s value by looking to
     /// the list of s values created when changing from curviline to polyline
     unsigned get_associated_vertex_to_svalue(double& target_s_value,
                                              unsigned& bnd_id,

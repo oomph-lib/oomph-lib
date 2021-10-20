@@ -97,7 +97,7 @@ namespace oomph
   class NonLinearElasticitySmoothMesh : public Problem
   {
   public:
-    /// \short Functor to update the nodal positions in SolidMesh pointed to by
+    ///  Functor to update the nodal positions in SolidMesh pointed to by
     /// orig_mesh_pt in response to the displacement of some of its
     /// nodes relative to their original position which must still be indicated
     /// by the nodes' Lagrangian position. copy_of_mesh_pt must be a deep copy
@@ -125,7 +125,7 @@ namespace oomph
     }
 
 
-    /// \short Functor to update the nodal positions in SolidMesh pointed to by
+    ///  Functor to update the nodal positions in SolidMesh pointed to by
     /// orig_mesh_pt in response to the displacement of some of its
     /// nodes relative to their original position which must still be indicated
     /// by the nodes' Lagrangian position. copy_of_mesh_pt must be a deep copy
@@ -390,7 +390,7 @@ namespace oomph
     ~NonLinearElasticitySmoothMesh() {}
 
 
-    /// \short Update nodal positions in main mesh -- also moves the
+    ///  Update nodal positions in main mesh -- also moves the
     /// nodes of the FaceElements that impose the new position
     void actions_before_newton_solve()
     {
@@ -411,7 +411,7 @@ namespace oomph
     }
 
 
-    /// \short Backup nodal positions in dummy mesh to allow for reset
+    ///  Backup nodal positions in dummy mesh to allow for reset
     /// after non-convergence of Newton method
     void backup()
     {
@@ -523,7 +523,7 @@ namespace oomph
   class LinearElasticitySmoothMesh : public Problem
   {
   public:
-    /// \short Constructor: Specify SolidMesh whose nodal positions are to
+    ///  Constructor: Specify SolidMesh whose nodal positions are to
     /// be adjusted, and set of nodes in that mesh whose position
     /// are to remain fixed.
     void operator()(SolidMesh* orig_mesh_pt, std::set<Node*> pinned_nodes)
@@ -658,7 +658,7 @@ namespace oomph
   class PoissonSmoothMesh : public Problem
   {
   public:
-    /// \short Functor: Specify SolidMesh whose nodal positions are to
+    ///  Functor: Specify SolidMesh whose nodal positions are to
     /// be adjusted, and set of nodes in that mesh whose position
     /// are to remain fixed.
     void operator()(SolidMesh* orig_mesh_pt, std::set<Node*> pinned_nodes)

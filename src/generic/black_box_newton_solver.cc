@@ -46,7 +46,7 @@ namespace oomph
     /// Number of Newton iterations taken in most recent invocation
     unsigned N_iter_taken = 0;
 
-    /// \short Flag to indicate if progress of Newton iteration is to be
+    ///  Flag to indicate if progress of Newton iteration is to be
     /// documented (defaults to false)
     bool Doc_Progress = false;
 
@@ -59,7 +59,7 @@ namespace oomph
     /// Use steplength control do make globally convergent (default false)
     bool Use_step_length_control = false;
 
-    /// \short Black-box FD Newton solver:
+    ///  Black-box FD Newton solver:
     /// Calling sequence for residual function is
     /// \code residual_fct(parameters,unknowns,residuals) \endcode
     /// where all arguments are double Vectors.

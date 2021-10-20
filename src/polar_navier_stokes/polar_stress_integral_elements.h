@@ -61,7 +61,7 @@ namespace oomph
     unsigned Dim;
 
   protected:
-    /// \short Access function that returns the local equation numbers
+    ///  Access function that returns the local equation numbers
     /// for velocity components.
     /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
     /// The default is to asssume that n is the local node number
@@ -71,7 +71,7 @@ namespace oomph
       return nodal_local_eqn(n, i);
     }
 
-    ///\short Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
     inline double shape_and_test_at_knot(const unsigned& ipt,
                                          Shape& psi,
@@ -182,7 +182,7 @@ namespace oomph
       // Do nothing
     }
 
-    ///\short Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// Plus the mass matrix especially for eigenvalue problems
     void fill_in_contribution_to_jacobian_and_mass_matrix(
       Vector<double>& residuals,

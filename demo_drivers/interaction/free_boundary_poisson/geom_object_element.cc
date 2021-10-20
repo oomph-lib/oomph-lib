@@ -80,7 +80,7 @@ private:
  /// Trace file
  ofstream Trace_file;
 
- /// \short Pointer to data item that stores the "load" on the ring
+ ///  Pointer to data item that stores the "load" on the ring
  Data* Load_pt;
 
  /// Doc info object

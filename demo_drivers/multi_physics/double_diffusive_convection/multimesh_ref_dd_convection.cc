@@ -52,14 +52,14 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- /// \short Thermal Rayleigh number, set to be greater than 
+ ///  Thermal Rayleigh number, set to be greater than 
  /// the threshold for linear instability
  double Rayleigh_T = 1800.0;
  
- /// \short Solutal Rayleigh number
+ ///  Solutal Rayleigh number
  double Rayleigh_S = -1000;
 
- /// \short Length of domain
+ ///  Length of domain
  double Lambda = 1.414;
 
  /// Gravity vector
@@ -100,7 +100,7 @@ public:
   }
 
 
- /// \short Actions before the timestep (update the the time-dependent 
+ ///  Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
   {
@@ -108,11 +108,11 @@ public:
   }
 
 
- /// \short Set the boundary conditions
+ ///  Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
 
- /// \short Access function to the NST mesh. 
+ ///  Access function to the NST mesh. 
  /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt() 
@@ -121,7 +121,7 @@ public:
     (Nst_mesh_pt);
   } // end_of_nst_mesh
 
- /// \short Access function to the AD mesh. 
+ ///  Access function to the AD mesh. 
  /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<AD_ELEMENT>* temp_mesh_pt() 
@@ -130,7 +130,7 @@ public:
     (Temp_mesh_pt);
   } // end_of_ad_mesh
 
- /// \short Access function to the AD mesh. 
+ ///  Access function to the AD mesh. 
  /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<AD_ELEMENT>* conc_mesh_pt() 
@@ -162,7 +162,7 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt() {}
 
- /// \short Actions after adaptation, reset all sources, then
+ ///  Actions after adaptation, reset all sources, then
  /// re-pin a single pressure degree of freedom
  void actions_after_adapt()
   {
@@ -198,7 +198,7 @@ public:
   } // end_of_fix_pressure
 
   
- /// \short Doc the solution.
+ ///  Doc the solution.
  void doc_solution();
 
 private:

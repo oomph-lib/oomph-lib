@@ -150,7 +150,7 @@ namespace oomph
       return 2;
     }
 
-    /// \short Initialise the time-history for the Data values, corresponding
+    ///  Initialise the time-history for the Data values, corresponding
     /// to an impulsive start.
     void assign_initial_values_impulsive(Data* const& data_pt)
     {
@@ -159,7 +159,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION);
     }
 
-    /// \short Initialise the time-history for the nodal positions
+    ///  Initialise the time-history for the nodal positions
     /// corresponding to an impulsive start.
     void assign_initial_positions_impulsive(Node* const& node_pt)
     {
@@ -205,7 +205,7 @@ namespace oomph
     }
 
 
-    /// \short This function updates the Data's time history so that
+    ///  This function updates the Data's time history so that
     /// we can advance to the next timestep.
     void shift_time_values(Data* const& data_pt)
     {
@@ -252,7 +252,7 @@ namespace oomph
 
     bool Shift_f;
 
-    ///\short This function advances the time history of the positions at a
+    /// This function advances the time history of the positions at a
     /// node.
     void shift_time_positions(Node* const& node_pt)
     {

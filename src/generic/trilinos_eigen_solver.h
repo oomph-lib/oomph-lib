@@ -578,31 +578,31 @@ namespace oomph
     typedef Anasazi::MultiVecTraits<ST, MV> MVT;
     typedef Anasazi::OperatorTraits<ST, MV, OP> OPT;
 
-    /// \short Pointer to output manager
+    ///  Pointer to output manager
     Anasazi::OutputManager<ST>* Output_manager_pt;
 
-    /// \short Pointer to a linear solver
+    ///  Pointer to a linear solver
     LinearSolver* Linear_solver_pt;
 
-    /// \short Pointer to a default linear solver
+    ///  Pointer to a default linear solver
     LinearSolver* Default_linear_solver_pt;
 
-    /// \short Integer to set whether the real, imaginary or magnitude is
+    ///  Integer to set whether the real, imaginary or magnitude is
     /// required
     /// to be small or large.
     int Spectrum;
 
-    /// \short Number of Arnoldi vectors to compute
+    ///  Number of Arnoldi vectors to compute
     int NArnoldi;
 
-    /// \short Set the shifted value
+    ///  Set the shifted value
     double Sigma;
 
-    ///\short Boolean to set which part of the spectrum left (default) or right
+    /// Boolean to set which part of the spectrum left (default) or right
     /// of the shifted value.
     bool Small;
 
-    /// \short Boolean to indicate whether or not to compute the eigenvectors
+    ///  Boolean to indicate whether or not to compute the eigenvectors
     bool Compute_eigenvectors;
 
 
@@ -646,13 +646,13 @@ namespace oomph
       return NArnoldi;
     }
 
-    /// \short Set to enable the computation of the eigenvectors (default)
+    ///  Set to enable the computation of the eigenvectors (default)
     void enable_compute_eigenvectors()
     {
       Compute_eigenvectors = true;
     }
 
-    /// \short Set to disable the computation of the eigenvectors
+    ///  Set to disable the computation of the eigenvectors
     void disable_compute_eigenvectors()
     {
       Compute_eigenvectors = false;

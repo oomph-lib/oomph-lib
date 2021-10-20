@@ -45,7 +45,7 @@ class UnitCircle : public GeomObject
 
  public:
 
-  /// \short Constructor: Pass the number of Lagrangian
+  ///  Constructor: Pass the number of Lagrangian
   /// and Eulerian coordinates to the constructor of the
   ///  GeomObject base class.
   UnitCircle() : GeomObject(1,2) {}
@@ -53,7 +53,7 @@ class UnitCircle : public GeomObject
   /// Destructor -- emtpy
   virtual ~UnitCircle(){}
 
-  /// \short Position vector, r, to the point on the circle identified by  
+  ///  Position vector, r, to the point on the circle identified by  
   /// its 1D Lagrangian coordinate, xi (passed as a 1D Vector):
   void position(const Vector<double>& xi, Vector<double>& r) const
   {
@@ -63,7 +63,7 @@ class UnitCircle : public GeomObject
   }
 
 
-  /// \short Position vector, r, to the point on the circle identified by  
+  ///  Position vector, r, to the point on the circle identified by  
   /// its 1D Lagrangian coordinate, xi (passed as a 1D Vector) at discrete time
   /// level t (t=0: present; t>0: previous). The shape of the object 
   /// is not time-dependent, therefore we forward this call to the 

@@ -33,7 +33,7 @@
 namespace oomph
 {
   //=============================================================
-  /// \short Constructor. Pass the pointers to the GeomObjects that parametrise
+  ///  Constructor. Pass the pointers to the GeomObjects that parametrise
   /// the cylinder, the three edges of the flag, the length and height of the
   /// domain, the length and height of the flag, the coordinates of the
   /// centre of the cylinder and its radius. Timestepper defaults to Steady

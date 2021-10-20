@@ -64,7 +64,7 @@ namespace Global_Physical_Variables
 
 
 //==start_of_problem_class================================================
-/// \short Refineable rotating cylinder problem in a rectangular
+///  Refineable rotating cylinder problem in a rectangular
 /// axisymmetric domain
 //========================================================================
 template <class ELEMENT, class TIMESTEPPER>
@@ -103,14 +103,14 @@ public:
 
 private:
 
- /// \short Update the problem specs before solve. 
+ ///  Update the problem specs before solve. 
  /// Reset velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve() { set_boundary_conditions(); }
  
  /// No actions required after solve step
  void actions_after_newton_solve() {}
 
- /// \short After adaptation: Pin pressure again (the previously pinned
+ ///  After adaptation: Pin pressure again (the previously pinned
  /// value might have disappeared) and pin redudant pressure dofs
  void actions_after_adapt()
   {
@@ -237,7 +237,7 @@ RotatingCylinderProblem(const unsigned& n_r, const unsigned& n_z,
 
 
 //==start_of_set_initial_condition========================================
-/// \short Set initial conditions: Set all nodal velocities to zero and
+///  Set initial conditions: Set all nodal velocities to zero and
 /// initialise the previous velocities to correspond to an impulsive start
 //========================================================================
 template <class ELEMENT, class TIMESTEPPER>
@@ -266,7 +266,7 @@ void RotatingCylinderProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
 
 
 //==start_of_set_boundary_conditions======================================
-/// \short Set boundary conditions: Set both velocity components to zero
+///  Set boundary conditions: Set both velocity components to zero
 /// on the bottom (solid) wall and the horizontal component only to zero
 /// on the side (periodic) boundaries
 //========================================================================

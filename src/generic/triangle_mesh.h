@@ -91,24 +91,24 @@ namespace oomph
       setup_boundary_element_info(outfile);
     }
 
-    /// \short Setup lookup schemes which establish which elements are located
+    ///  Setup lookup schemes which establish which elements are located
     /// next to mesh's boundaries. Doc in outfile (if it's open).
     void setup_boundary_element_info(std::ostream& outfile);
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
-    /// \short const access for Use_triangulateio_restart.
+    ///  const access for Use_triangulateio_restart.
     bool use_triangulateio_restart() const
     {
       return Use_triangulateio_restart;
     }
 
-    /// \short write access for Use_triangulateio_restart.
+    ///  write access for Use_triangulateio_restart.
     void enable_triangulateio_restart()
     {
       Use_triangulateio_restart = true;
     }
 
-    /// \short write access for Use_triangulateio_restart.
+    ///  write access for Use_triangulateio_restart.
     void disable_triangulateio_restart()
     {
       Use_triangulateio_restart = false;
@@ -120,12 +120,12 @@ namespace oomph
       return Triangulateio;
     }
 
-    /// \short Helper function. Write a TriangulateIO object file with all the
+    ///  Helper function. Write a TriangulateIO object file with all the
     /// triangulateio fields. String s is add to assign a different value for
     /// the input and/or output structure
     void write_triangulateio(TriangulateIO& triangulate_io, std::string& s);
 
-    /// \short Helper function. Clean up the memory associated with the
+    ///  Helper function. Clean up the memory associated with the
     /// TriangulateIO object. This should really only be used to save
     /// memory in extremely tight situations.
     void clear_triangulateio()
@@ -133,7 +133,7 @@ namespace oomph
       TriangleHelper::clear_triangulateio(Triangulateio);
     }
 
-    /// \short Dump the triangulateio structure to a dump file and
+    ///  Dump the triangulateio structure to a dump file and
     /// record boundary coordinates of boundary nodes
     void dump_triangulateio(std::ostream& dump_file);
 
@@ -209,7 +209,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Regenerate the mesh from a dumped triangulateio file
+    ///  Regenerate the mesh from a dumped triangulateio file
     /// and dumped boundary coordinates of boundary nodes
     void remesh_from_triangulateio(std::istream& restart_file);
 
@@ -257,7 +257,7 @@ namespace oomph
   protected:
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    ///\short TriangulateIO representation of the mesh
+    /// TriangulateIO representation of the mesh
     TriangulateIO Triangulateio;
 
     /// Should we use triangulateio specific parts for dump/restart? (Doesn't

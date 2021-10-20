@@ -359,14 +359,14 @@ public:
  /// Destructor (empty)
  ~PoissonProblem(){}
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ ///  Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve(){} 
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ ///  Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 
@@ -375,15 +375,15 @@ private:
  /// Pointer to source function
  PoissonEquations<2>::PoissonSourceFctPt Source_fct_pt;
 
- /// \short Pointer to the element defining the unknown C1 (Note: eqn element is
+ ///  Pointer to the element defining the unknown C1 (Note: eqn element is
  /// templated by the wrapped element!)
  SingularPoissonSolutionElement<ELEMENT>* Singular_poisson_solution1_element_pt;
  
- /// \short Pointer to the element defining the unknown C2 (Note: eqn element is
+ ///  Pointer to the element defining the unknown C2 (Note: eqn element is
  /// templated by the wrapped element!)
  SingularPoissonSolutionElement<ELEMENT>* Singular_poisson_solution2_element_pt;
 
- /// \short Pointer to the C mesh associated with the elements defining the
+ ///  Pointer to the C mesh associated with the elements defining the
  /// unknowns C1 and C2
  Mesh* Singular_poisson_solution_mesh_pt;
 

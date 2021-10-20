@@ -155,7 +155,7 @@ class BrethertonElement : public ELEMENT
 
 public:
 
- /// \short Typedef for pointer (global) function that specifies the
+ ///  Typedef for pointer (global) function that specifies the
  /// the inflow
  typedef void (*InflowFctPt)(const Vector<double>& x, Vector<double>& veloc);
 
@@ -163,7 +163,7 @@ public:
  BrethertonElement() : ELEMENT() {}
 
 
- /// \short Activate the dependency of the "inflow" on the external
+ ///  Activate the dependency of the "inflow" on the external
  /// data. Pass the vector of pointers to the external Data that affects
  /// the inflow, the id of the boundary on which the inflow
  /// condition is to be applied and the function pointer to 
@@ -333,7 +333,7 @@ private:
  
 
 
- /// \short For all nodes that are located on specified boundary
+ ///  For all nodes that are located on specified boundary
  /// re-assign the inflow velocity, using the function pointed to
  /// by the function pointer
  void reassign_inflow()
@@ -382,14 +382,14 @@ private:
  /// Storage for the external Data that affects the inflow
  Vector<Data*> Inflow_ext_data;
 
- /// \short Storage for the local equation numbers associated the Data
+ ///  Storage for the local equation numbers associated the Data
  /// values that affect the inflow
  DenseMatrix<int> Inflow_ext_data_eqn;
 
  /// Number of the inflow boundary in the global mesh
  unsigned Inflow_boundary;
 
- /// \short Function pointer to the global function that specifies the
+ ///  Function pointer to the global function that specifies the
  /// inflow velocity profile on the global mesh boundary Inflow_boundary
  InflowFctPt Inflow_fct_pt;
 
@@ -470,7 +470,7 @@ public:
  /// Constructor: 
  BrethertonProblem();
 
- /// \short Spine heights/lengths are unknowns in the problem so their
+ ///  Spine heights/lengths are unknowns in the problem so their
  /// values get corrected during each Newton step. However,
  /// changing their value does not automatically change the
  /// nodal positions, so we need to update all of them
@@ -501,10 +501,10 @@ public:
     }
   }
 
- /// \short Update before solve: empty
+ ///  Update before solve: empty
  void actions_before_newton_solve() {}
 
- /// \short Update after solve can remain empty, because the update 
+ ///  Update after solve can remain empty, because the update 
  /// is performed automatically after every Newton step.
  void actions_after_newton_solve() {}
 
@@ -518,7 +518,7 @@ public:
   }
 
  
- /// \short Activate the dependency of the inflow velocity on the 
+ ///  Activate the dependency of the inflow velocity on the 
  /// spine heights at the outflow
  void activate_inflow_dependency();
 

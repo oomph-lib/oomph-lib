@@ -60,17 +60,17 @@ namespace oomph
   //======================================================================
   namespace Multi_domain_functions
   {
-    /// \short Boolean to indicate that failure in setup multi domain
+    ///  Boolean to indicate that failure in setup multi domain
     /// functions is acceptable; defaults to false. If set to true
     /// external element pointers are set to null for those elements
     /// for which external elements couldn't be located.
     extern bool Accept_failed_locate_zeta_in_setup_multi_domain_interaction;
 
-    /// \short Dimension of zeta tuples (set by get_dim_helper) -- needed
+    ///  Dimension of zeta tuples (set by get_dim_helper) -- needed
     /// because we store the scalar coordinates in flat-packed form.
     extern unsigned Dim;
 
-    /// \short Lookup scheme for whether a local element's integration point
+    ///  Lookup scheme for whether a local element's integration point
     /// has had an external element assigned to it -- essentially boolean.
     /// External_element_located[e][ipt] = {0,1} if external element
     /// for ipt-th integration in local element e {has not, has} been found.
@@ -78,13 +78,13 @@ namespace oomph
     /// elements over and over again when we go around the spirals.
     extern Vector<Vector<unsigned>> External_element_located;
 
-    /// \short Vector of flat-packed zeta coordinates for which the external
+    ///  Vector of flat-packed zeta coordinates for which the external
     /// element could not be found during current local search. These
     /// will be sent to the next processor in the ring-like parallel search.
     /// The zeta coordinates come in groups of Dim (scalar) coordinates.
     extern Vector<double> Flat_packed_zetas_not_found_locally;
 
-    /// \short Vector of flat-packed zeta coordinates for which the external
+    ///  Vector of flat-packed zeta coordinates for which the external
     /// element could not be found on another processor and for which
     /// we're currently searching here. Whatever can't be found here,
     /// gets written into Flat_packed_zetas_not_found_locally and then
@@ -92,7 +92,7 @@ namespace oomph
     /// The zeta coordinates come in  groups of Dim (scalar) coordinates.
     extern Vector<double> Received_flat_packed_zetas_to_be_found;
 
-    /// \short Proc_id_plus_one_of_external_element[i] contains the
+    ///  Proc_id_plus_one_of_external_element[i] contains the
     /// processor id (plus one) of the processor
     /// on which the i-th zeta coordinate tuple received from elsewhere
     /// (in the order in which these are stored in
@@ -101,28 +101,28 @@ namespace oomph
     /// search.
     extern Vector<int> Proc_id_plus_one_of_external_element;
 
-    /// \short Vector to indicate (to another processor) whether a
+    ///  Vector to indicate (to another processor) whether a
     /// located element (that will have to represented as an external
     /// halo element on that processor) should be newly created on that
     /// processor (2), already exists on that processor (1), or
     /// is not on the current processor either (0).
     extern Vector<unsigned> Located_element_status;
 
-    /// \short Vector of flat-packed local coordinates for zeta tuples
+    ///  Vector of flat-packed local coordinates for zeta tuples
     /// that have been located
     extern Vector<double> Flat_packed_located_coordinates;
 
-    /// \short Vector of flat-packed doubles to be communicated with
+    ///  Vector of flat-packed doubles to be communicated with
     /// other processors
     extern Vector<double> Flat_packed_doubles;
 
-    /// \short Counter used when processing vector of flat-packed
+    ///  Counter used when processing vector of flat-packed
     /// doubles -- this is really "private" data, declared here
     /// to avoid having to pass it (and the associated array)
     /// between the various helper functions
     extern unsigned Counter_for_flat_packed_doubles;
 
-    /// \short Vector of flat-packed unsigneds to be communicated with
+    ///  Vector of flat-packed unsigneds to be communicated with
     /// other processors -- this is really "private" data, declared here
     /// to avoid having to pass the array between the various helper
     /// functions
@@ -137,13 +137,13 @@ namespace oomph
 
 #endif
 
-    /// \short Counter used when processing vector of flat-packed
+    ///  Counter used when processing vector of flat-packed
     /// unsigneds -- this is really "private" data, declared here
     /// to avoid having to pass it (and the associated array)
     /// between the various helper functions
     extern unsigned Counter_for_flat_packed_unsigneds;
 
-    /// \short Enumerators for element status in location procedure
+    ///  Enumerators for element status in location procedure
     enum
     {
       New,
@@ -151,36 +151,36 @@ namespace oomph
       Not_found
     };
 
-    /// \short Boolean to indicate when to use the bulk element as the
+    ///  Boolean to indicate when to use the bulk element as the
     /// external element.  Defaults to false, you must have set up FaceElements
     /// properly first in order for it to work
     extern bool Use_bulk_element_as_external;
 
-    /// \short Boolean to indicate if we're allowed to use halo elements
+    ///  Boolean to indicate if we're allowed to use halo elements
     /// as external elements. Can drastically reduce the number of
     /// external halo elements -- currently not aware of any problems
     /// therefore set to true by default but retention
     /// of this flag allows easy return to previous implementation.
     extern bool Allow_use_of_halo_elements_as_external_elements;
 
-    /// \short Indicate whether we are allowed to use halo elements as
+    ///  Indicate whether we are allowed to use halo elements as
     /// external elements for projection, possibly only required in
     /// parallel unstructured mesh generation during the projection
     /// stage. Default set to true
     extern bool Allow_use_of_halo_elements_as_external_elements_for_projection;
 
-    /// \short Boolean to indicate whether to doc timings or not.
+    ///  Boolean to indicate whether to doc timings or not.
     extern bool Doc_timings;
 
-    /// \short Boolean to indicate whether to document basic info (to screen)
+    ///  Boolean to indicate whether to document basic info (to screen)
     ///        during setup_multi_domain_interaction() routines
     extern bool Doc_stats;
 
-    /// \short Boolean to indicate whether to document further info (to screen)
+    ///  Boolean to indicate whether to document further info (to screen)
     ///        during setup_multi_domain_interaction() routines
     extern bool Doc_full_stats;
 
-    /// \short Output file to document the boundary coordinate
+    ///  Output file to document the boundary coordinate
     /// along the mesh boundary of the bulk mesh during call to
     /// setup_bulk_elements_adjacent_to_face_mesh(...)
     extern std::ofstream Doc_boundary_coordinate_file;
@@ -188,7 +188,7 @@ namespace oomph
 
     // Functions for multi-domain method
 
-    /// \short Identify the \c FaceElements (stored in the mesh pointed to by
+    ///  Identify the \c FaceElements (stored in the mesh pointed to by
     /// \c face_mesh_pt) that are adjacent to the bulk elements next to the
     /// \c boundary_in_bulk_mesh -th boundary of the mesh pointed to by
     /// \c bulk_mesh_pt. The \c FaceElements must be derived
@@ -206,7 +206,7 @@ namespace oomph
       const unsigned& interaction = 0);
 
 
-    /// \short Identify the \c FaceElements (stored in the mesh pointed to by
+    ///  Identify the \c FaceElements (stored in the mesh pointed to by
     /// \c face_mesh_pt) that are adjacent to the bulk elements next to the
     /// \c boundary_in_bulk_mesh -th boundary of the mesh pointed to by
     /// \c bulk_mesh_pt. The \c FaceElements must be derived
@@ -220,7 +220,7 @@ namespace oomph
       Mesh* const& face_mesh_pt,
       const unsigned& interaction = 0);
 
-    /// \short Set up the two-way multi-domain interactions for the
+    ///  Set up the two-way multi-domain interactions for the
     /// problem pointed to by \c problem_pt.
     /// Use this for cases where first_mesh_pt and second_mesh_pt
     /// occupy the same physical space and are populated by
@@ -239,7 +239,7 @@ namespace oomph
       const unsigned& first_interaction = 0,
       const unsigned& second_interaction = 0);
 
-    /// \short Function to set up the one-way multi-domain interaction for
+    ///  Function to set up the one-way multi-domain interaction for
     /// problems where the meshes pointed to by \c mesh_pt and \c
     /// external_mesh_pt occupy the same physical space, and the elements in \c
     /// external_mesh_pt act as "external elements" for the \c
@@ -258,7 +258,7 @@ namespace oomph
                                         Mesh* const& external_mesh_pt,
                                         const unsigned& interaction_index = 0);
 
-    /// \short Function to set up the one-way multi-domain interaction for
+    ///  Function to set up the one-way multi-domain interaction for
     /// FSI-like problems.
     /// - \c mesh_pt points to the mesh of \c ElemenWithExternalElements for
     /// which
@@ -290,7 +290,7 @@ namespace oomph
                                         const unsigned& interaction_index = 0);
 
 
-    /// \short Function to set up the one-way multi-domain interaction for
+    ///  Function to set up the one-way multi-domain interaction for
     /// FSI-like problems.
     /// - \c mesh_pt points to the mesh of \c ElemenWithExternalElements for
     /// which
@@ -344,7 +344,7 @@ namespace oomph
       const unsigned& interaction_index,
       const Vector<Mesh*>& external_face_mesh_pt);
 
-    /// \short Helper function to locate "local" zeta coordinates
+    ///  Helper function to locate "local" zeta coordinates
     /// This is the vector-based version which operates simultaenously
     /// on the meshes contained in the Vectors.
     void locate_zeta_for_local_coordinates(
@@ -356,11 +356,11 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
-    /// \short Helper function to send any "missing" zeta coordinates to
+    ///  Helper function to send any "missing" zeta coordinates to
     /// the next process and receive any coordinates from previous process
     void send_and_receive_missing_zetas(Problem* problem_pt);
 
-    /// \short Helper function to locate these "missing" zeta coordinates.
+    ///  Helper function to locate these "missing" zeta coordinates.
     /// This is the vector-based function which operates simultaneously
     /// on the meshes contained in the vectors.
     void locate_zeta_for_missing_coordinates(
@@ -370,12 +370,12 @@ namespace oomph
       Vector<MeshAsGeomObject*>& mesh_geom_obj_pt);
 
 
-    /// \short Helper function to send back any located information
+    ///  Helper function to send back any located information
     void send_and_receive_located_info(int& iproc,
                                        Mesh* const& external_mesh_pt,
                                        Problem* problem_pt);
 
-    /// \short Create external (halo) elements on the loop process based on the
+    ///  Create external (halo) elements on the loop process based on the
     /// information received from each locate_zeta call on other processes
     /// This is the vector-based function which operates simultaneously
     /// on the meshes contained in the vectors.
@@ -388,7 +388,7 @@ namespace oomph
 
     // Helper functions for external haloed node identification
 
-    /// \short Helper function to add external haloed nodes, inc. masters
+    ///  Helper function to add external haloed nodes, inc. masters
     /// of external haloed nodes
     void add_external_haloed_node_to_storage(int& iproc,
                                              Node* nod_pt,
@@ -397,7 +397,7 @@ namespace oomph
                                              int& n_cont_inter_values);
 
 
-    /// \short Recursively add any master nodes (and their master nodes etc)
+    ///  Recursively add any master nodes (and their master nodes etc)
     /// of external haloed nodes
     void recursively_add_masters_of_external_haloed_node(
       int& iproc,
@@ -407,21 +407,21 @@ namespace oomph
       int& n_cont_inter_values);
 
 
-    /// \short Helper function to add external haloed node that is not a master
+    ///  Helper function to add external haloed node that is not a master
     void add_external_haloed_node_helper(int& iproc,
                                          Node* nod_pt,
                                          Problem* problem_pt,
                                          Mesh* const& external_mesh_pt,
                                          int& n_cont_inter_values);
 
-    /// \short Helper function to add external haloed node that is a master
+    ///  Helper function to add external haloed node that is a master
     void add_external_haloed_master_node_helper(int& iproc,
                                                 Node* master_nod_pt,
                                                 Problem* problem_pt,
                                                 Mesh* const& external_mesh_pt,
                                                 int& n_cont_inter_values);
 
-    /// \short Helper function to get the required nodal information from an
+    ///  Helper function to get the required nodal information from an
     /// external haloed node so that a fully-functional external halo
     /// node (and therefore element) can be created on the receiving process
     void get_required_nodal_information_helper(int& iproc,
@@ -430,7 +430,7 @@ namespace oomph
                                                Mesh* const& external_mesh_pt,
                                                int& n_cont_inter_values);
 
-    /// \short Helper function to get the required master nodal information from
+    ///  Helper function to get the required master nodal information from
     /// an external haloed master node so that a fully-functional external halo
     /// master node (and possible element) can be created on the receiving proc
     void get_required_master_nodal_information_helper(
@@ -442,7 +442,7 @@ namespace oomph
 
     // Helper functions for external halo node identification
 
-    /// \short Helper function to add external halo nodes, including any
+    ///  Helper function to add external halo nodes, including any
     /// masters, based on information received from the haloed process
     template<class EXT_ELEMENT>
     void add_external_halo_node_to_storage(Node*& new_nod_pt,
@@ -453,7 +453,7 @@ namespace oomph
                                            int& n_cont_inter_values,
                                            Problem* problem_pt);
 
-    /// \short Recursively add masters of external halo nodes (and their
+    ///  Recursively add masters of external halo nodes (and their
     /// masters, etc) based on information received from the haloed process
     template<class EXT_ELEMENT>
     void recursively_add_masters_of_external_halo_node_to_storage(
@@ -466,7 +466,7 @@ namespace oomph
       Problem* problem_pt);
 
 
-    /// \short Helper function to add external halo node that is not a master
+    ///  Helper function to add external halo node that is not a master
     void add_external_halo_node_helper(Node*& new_nod_pt,
                                        Mesh* const& external_mesh_pt,
                                        unsigned& loc_p,
@@ -475,7 +475,7 @@ namespace oomph
                                        int& n_cont_inter_values,
                                        Problem* problem_pt);
 
-    /// \short Helper function to add external halo node that is a master
+    ///  Helper function to add external halo node that is a master
     template<class EXT_ELEMENT>
     void add_external_halo_master_node_helper(Node*& new_master_nod_pt,
                                               Node*& new_nod_pt,
@@ -485,7 +485,7 @@ namespace oomph
                                               Problem* problem_pt);
 
 
-    /// \short Helper function which constructs a new external halo node
+    ///  Helper function which constructs a new external halo node
     /// (on an element) with the information sent from the haloed process
     void construct_new_external_halo_node_helper(
       Node*& new_nod_pt,
@@ -495,7 +495,7 @@ namespace oomph
       Mesh* const& external_mesh_pt,
       Problem* problem_pt);
 
-    /// \short Helper function which constructs a new external halo master node
+    ///  Helper function which constructs a new external halo master node
     /// with the information sent from the haloed process
     template<class EXT_ELEMENT>
     void construct_new_external_halo_master_node_helper(
@@ -507,14 +507,14 @@ namespace oomph
 
 #endif
 
-    /// \short Helper function that computes the dimension of the elements
+    ///  Helper function that computes the dimension of the elements
     /// within each of the specified meshes (and checks they are the same)
     /// Stores result in Dim.
     void get_dim_helper(Problem* problem_pt,
                         Mesh* const& mesh_pt,
                         Mesh* const& external_mesh_pt);
 
-    /// \short Helper function that clears all the intermediate information used
+    ///  Helper function that clears all the intermediate information used
     /// during the external storage creation at the end of the procedure
     void clean_up();
 

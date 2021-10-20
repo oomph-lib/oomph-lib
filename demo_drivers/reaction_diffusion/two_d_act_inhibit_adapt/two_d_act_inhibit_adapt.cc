@@ -102,7 +102,7 @@ public:
  //Set the timestep
  void timestep(const double &dt, const unsigned &nstep);
 
- /// \short Overloaded version of the problem's access function to 
+ ///  Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -121,7 +121,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for ActivatorInhibitor problem
+///  Constructor for ActivatorInhibitor problem
 //========================================================================
 template<class ELEMENT>
 RefineableActivatorInhibitorProblem<ELEMENT>::

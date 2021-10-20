@@ -52,7 +52,7 @@ public virtual ElementWithZ2ErrorEstimator
 {
   public:
 
- /// \short Constructor, simply call other constructors
+ ///  Constructor, simply call other constructors
  RefineablePolarStreamfunctionEquations() : 
  PolarStreamfunctionEquations(),
  RefineableElement(), 
@@ -72,7 +72,7 @@ public virtual ElementWithZ2ErrorEstimator
   {this->get_flux(s,flux);}
 
 
-/// \short Get the function value u in Vector.
+///  Get the function value u in Vector.
 /// Note: Given the generality of the interface (this function
 /// is usually called from black-box documentation or interpolation routines),
 /// the values Vector sets its own size in here.
@@ -111,7 +111,7 @@ void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
    }
  }
 
- /// \short Get the function value u in Vector.
+ ///  Get the function value u in Vector.
  /// Note: Given the generality of the interface (this function
  /// is usually called from black-box documentation or interpolation routines),
  /// the values Vector sets its own size in here.
@@ -153,7 +153,7 @@ void get_interpolated_values(const unsigned& t,
   private:
 
 
-/// \short Add element's contribution to elemental residual vector and/or 
+///  Add element's contribution to elemental residual vector and/or 
 /// Jacobian matrix 
 /// flag=1: compute both
 /// flag=0: compute only residual vector
@@ -176,7 +176,7 @@ public virtual RefineableQElement<2>
 {
   public:
 
- /// \short Constructor, simply call the other constructors 
+ ///  Constructor, simply call the other constructors 
  RefineablePolarStreamfunctionElement() : 
   RefineableElement(),
   RefineablePolarStreamfunctionEquations(),
@@ -194,22 +194,22 @@ public virtual RefineableQElement<2>
  /// Number of continuously interpolated values: 3
  unsigned ncont_interpolated_values() const {return 3;}
 
- /// \short Number of vertex nodes in the element
+ ///  Number of vertex nodes in the element
  unsigned nvertex_node() const
   {return PolarStreamfunctionElement::nvertex_node();}
 
- /// \short Pointer to the j-th vertex node in the element
+ ///  Pointer to the j-th vertex node in the element
  Node* vertex_node_pt(const unsigned& j) const
   {return PolarStreamfunctionElement::vertex_node_pt(j);}
 
  /// Rebuild from sons: empty
  void rebuild_from_sons(Mesh* &mesh_pt) {}
 
- /// \short Order of recovery shape functions for Z2 error estimation:
+ ///  Order of recovery shape functions for Z2 error estimation:
  /// Same order as shape functions.
  unsigned nrecovery_order() {return (2);}
 
- ///  \short Perform additional hanging node procedures for variables
+ ///   Perform additional hanging node procedures for variables
  /// that are not interpolated by all nodes. Empty.
  void further_setup_hanging_nodes(){}
 

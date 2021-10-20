@@ -60,12 +60,12 @@ namespace oomph
   class FoepplvonKarmanEquations : public virtual FiniteElement
   {
   public:
-    /// \short Function pointer to pressure function fct(x,f(x)) --
+    ///  Function pointer to pressure function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*FoepplvonKarmanPressureFctPt)(const Vector<double>& x,
                                                  double& f);
 
-    /// \short Constructor (must initialise the Pressure_fct_pt and
+    ///  Constructor (must initialise the Pressure_fct_pt and
     /// Airy_forcing_fct_pt to null). Also set physical parameters to their
     /// default values. No volume constraint applied by default.
     FoepplvonKarmanEquations() : Pressure_fct_pt(0), Airy_forcing_fct_pt(0)
@@ -99,7 +99,7 @@ namespace oomph
     }
 
 
-    /// \short Set Data value containing a single value which represents the
+    ///  Set Data value containing a single value which represents the
     /// volume control pressure as external data for this element.
     /// Only used for volume controlled problems in conjunction with
     /// FoepplvonKarmanVolumeConstraintElement.
@@ -121,7 +121,7 @@ namespace oomph
         add_external_data(data_pt);
     }
 
-    /// \short Return the index at which the i-th unknown value
+    ///  Return the index at which the i-th unknown value
     /// is stored. The default value, i, is appropriate for single-physics
     /// problems. By default, these are:
     /// 0: w
@@ -144,7 +144,7 @@ namespace oomph
       output(outfile, n_plot);
     }
 
-    /// \short Output FE representation of soln: x,y,w at
+    ///  Output FE representation of soln: x,y,w at
     /// n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
@@ -155,7 +155,7 @@ namespace oomph
       output(file_pt, n_plot);
     }
 
-    /// \short C-style output FE representation of soln: x,y,w at
+    ///  C-style output FE representation of soln: x,y,w at
     /// n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
@@ -164,7 +164,7 @@ namespace oomph
                     const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Output exact soln: x,y,w_exact at
+    ///  Output exact soln: x,y,w_exact at
     /// n_plot^DIM plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
@@ -226,7 +226,7 @@ namespace oomph
       return Airy_forcing_fct_pt;
     }
 
-    /// \short Get pressure term at (Eulerian) position x. This function is
+    ///  Get pressure term at (Eulerian) position x. This function is
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the pressure function might be determined by
     /// another system of equations.
@@ -246,7 +246,7 @@ namespace oomph
       }
     }
 
-    /// \short Get Airy forcing term at (Eulerian) position x. This function is
+    ///  Get Airy forcing term at (Eulerian) position x. This function is
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the pressure function might be determined by
     /// another system of equations.
@@ -306,7 +306,7 @@ namespace oomph
     // void fill_in_contribution_to_jacobian(Vector<double> &residuals,
     //                                      DenseMatrix<double> &jacobian);
 
-    /// \short Return FE representation of function value w_fvk(s)
+    ///  Return FE representation of function value w_fvk(s)
     /// at local coordinate s (by default - if index > 0, returns
     /// FE representation of valued stored at index^th nodal index
     inline double interpolated_w_fvk(const Vector<double>& s,
@@ -342,7 +342,7 @@ namespace oomph
                              double& sigma_yy,
                              double& sigma_xy);
 
-    /// \short Return the integral of the displacement over the current
+    ///  Return the integral of the displacement over the current
     /// element, effectively calculating its contribution to the volume under
     /// the membrane. Virtual so it can be overloaded in multi-physics
     /// where the volume may incorporate an offset, say.
@@ -395,10 +395,10 @@ namespace oomph
       return integral_w;
     }
 
-    /// \short Self-test: Return 0 for OK
+    ///  Self-test: Return 0 for OK
     unsigned self_test();
 
-    /// \short Sets a flag to signify that we are solving the linear, pure
+    ///  Sets a flag to signify that we are solving the linear, pure
     /// bending equations, and pin all the nodal values that will not be used in
     /// this case
     void use_linear_bending_model()
@@ -432,7 +432,7 @@ namespace oomph
 
 
   protected:
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_fvk(const Vector<double>& s,
                                                  Shape& psi,
@@ -441,7 +441,7 @@ namespace oomph
                                                  DShape& dtestdx) const = 0;
 
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_fvk(
       const unsigned& ipt,
@@ -465,11 +465,11 @@ namespace oomph
     /// Default value for physical constants
     static double Default_Physical_Constant_Value;
 
-    /// \short Flag which stores whether we are using a linear, pure bending
+    ///  Flag which stores whether we are using a linear, pure bending
     /// model instead of the full non-linear Foeppl-von Karman
     bool Linear_bending_model;
 
-    /// \short Index of the external Data object that represents the volume
+    ///  Index of the external Data object that represents the volume
     /// constraint pressure (initialised to -1 indicating no such constraint)
     /// Gets overwritten when calling
     /// set_volume_constraint_pressure_data_as_external_data(...)
@@ -495,12 +495,12 @@ namespace oomph
                                   public virtual FoepplvonKarmanEquations
   {
   private:
-    /// \short Static int that holds the number of variables at
+    ///  Static int that holds the number of variables at
     /// nodes: always the same
     static const unsigned Initial_Nvalue;
 
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    ///  Constructor: Call constructors for QElement and
     /// FoepplvonKarmanEquations
     QFoepplvonKarmanElement()
       : QElement<2, NNODE_1D>(), FoepplvonKarmanEquations()
@@ -514,14 +514,14 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const QFoepplvonKarmanElement<NNODE_1D>&) = delete;
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///   Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,w
     void output(std::ostream& outfile)
     {
@@ -529,7 +529,7 @@ namespace oomph
     }
 
 
-    ///  \short Output function:
+    ///   Output function:
     ///   x,y,w at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -537,7 +537,7 @@ namespace oomph
     }
 
 
-    /// \short C-style output function:
+    ///  C-style output function:
     ///  x,y,w
     void output(FILE* file_pt)
     {
@@ -545,7 +545,7 @@ namespace oomph
     }
 
 
-    ///  \short C-style output function:
+    ///   C-style output function:
     ///   x,y,w at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -553,7 +553,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for an exact solution:
+    ///  Output function for an exact solution:
     ///  x,y,w_exact at n_plot^DIM plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -563,7 +563,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for a time-dependent exact solution.
+    ///  Output function for a time-dependent exact solution.
     ///  x,y,w_exact at n_plot^DIM plot points
     /// (Calls the steady version)
     void output_fct(std::ostream& outfile,
@@ -586,7 +586,7 @@ namespace oomph
                                                 DShape& dtestdx) const;
 
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    ///  Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_fvk(const unsigned& ipt,
                                                         Shape& psi,
@@ -667,7 +667,7 @@ namespace oomph
     : public virtual QElement<1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };
@@ -685,7 +685,7 @@ namespace oomph
     : public virtual ProjectableElement<FVK_ELEMENT>
   {
   public:
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
@@ -717,13 +717,13 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: Just two
+    ///  Number of fields to be projected: Just two
     unsigned nfields_for_projection()
     {
       return 8;
     }
 
-    /// \short Number of history values to be stored for fld-th field.
+    ///  Number of history values to be stored for fld-th field.
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -742,14 +742,14 @@ namespace oomph
     }
 
 
-    ///\short Number of positional history values
+    /// Number of positional history values
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -776,7 +776,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,

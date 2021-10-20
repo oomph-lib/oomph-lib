@@ -54,7 +54,7 @@ class WavyWall : public GeomObject
 
 public:
 
- /// \short Constructor:  Pass wavelength and amplitude
+ ///  Constructor:  Pass wavelength and amplitude
  WavyWall(const double& l, const double& amplitude)
   : GeomObject(1,2), L(l), A(amplitude) {}
 
@@ -92,7 +92,7 @@ class SimpleSpineMesh : public SimpleRectangularQuadMesh<ELEMENT >,
 
 public:
 
- /// \short Constructor: Pass number of elements in x-direction,
+ ///  Constructor: Pass number of elements in x-direction,
  /// number of elements in y-direction, length in x direction, initial 
  /// height of mesh, and pointer to timestepper (defaults to 
  /// Steady timestepper)
@@ -104,7 +104,7 @@ public:
                  TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper);
 
 
- /// \short Function pointer to  function, h(x), that may be used 
+ ///  Function pointer to  function, h(x), that may be used 
  /// to specify the "height" of the domain, by assigning the function
  /// values to the spine heights.
  typedef double (*HeightFctPt)(const double& x);
@@ -116,7 +116,7 @@ public:
   }
 
 
- /// \short Height function -- this is called by update_spine_heights()
+ ///  Height function -- this is called by update_spine_heights()
  /// when spine heights are assigned.
  double height_fct(const double& x) 
   {
@@ -132,7 +132,7 @@ public:
   }
 
 
- /// \short Update the spine heights according to the function specified
+ ///  Update the spine heights according to the function specified
  /// by height_fct_pt().
  void update_spine_heights()
   {
@@ -149,7 +149,7 @@ public:
   }
 
 
- /// \short General node update function implements pure virtual function 
+ ///  General node update function implements pure virtual function 
  /// defined in SpineMesh base class and performs specific node update
  /// actions: Nodes are located along vertical "spines" that emanate
  /// from the "substrate" (the lower wall) specified by a
@@ -466,7 +466,7 @@ public:
  /// Destructor: (empty)
  ~ChannelSpineFlowProblem(){}
 
- /// \short Update the problem specs before solve. Update the nodal
+ ///  Update the problem specs before solve. Update the nodal
  /// positions
  void actions_before_newton_solve()
   { 

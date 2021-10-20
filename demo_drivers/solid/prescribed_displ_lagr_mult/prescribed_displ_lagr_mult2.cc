@@ -69,7 +69,7 @@ public:
  /// Empty Destructor
  ~WarpedLine(){}
 
- /// \short Position vector at Lagrangian coordinate zeta 
+ ///  Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position vector
@@ -77,7 +77,7 @@ public:
    r[1] = 1.0+Ampl*0.5*(1.0-cos(2.0*MathematicalConstants::Pi*zeta[0]));
   }
  
- /// \short Parametrised position on object: r(zeta). Evaluated at
+ ///  Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Forward to steady version
  void position(const unsigned& t, const Vector<double>& zeta,

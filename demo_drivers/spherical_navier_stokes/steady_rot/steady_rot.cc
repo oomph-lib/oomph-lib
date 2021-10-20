@@ -136,7 +136,7 @@ public:
  /// Update the after solve (empty)
  void actions_after_newton_solve(){}
  
- /// \short Update the problem specs before solve
+ ///  Update the problem specs before solve
  void actions_before_newton_solve(){}
  
  // Access function for the specific mesh

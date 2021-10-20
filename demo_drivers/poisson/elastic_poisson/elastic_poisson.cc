@@ -70,7 +70,7 @@ namespace ConstSourceForPoisson
 
 
 //=========================================================================
-/// \short Fish back as a GeneralisedElement: Circular ring whose 
+///  Fish back as a GeneralisedElement: Circular ring whose 
 /// position is given by
 /// \f[ x = X_c + R \cos(\xi)  \f]
 /// \f[ y = Y_c + R \sin(\xi)  \f]
@@ -89,7 +89,7 @@ class ElasticFishBackElement : public GeneralisedElement, public Circle
 
 public:
 
- /// \short Constructor: Build  ring from doubles that describe 
+ ///  Constructor: Build  ring from doubles that describe 
  /// the geometry: x and y positions of centre and the radius.
  /// Initialise stiffness to 1.0.
  ElasticFishBackElement(const double& x_c, const double& y_c, 
@@ -152,7 +152,7 @@ public:
    fill_in_generic_residual_contribution(residuals,jacobian,1);
   }
 
- /// \short Set pointer to Data object that specifies the "load"
+ ///  Set pointer to Data object that specifies the "load"
  /// on the fish back
  void set_load_pt(Data* load_pt)
   {
@@ -180,7 +180,7 @@ public:
  protected:
 
 
-/// \short Compute element residual Vector (only if flag=0) and also
+///  Compute element residual Vector (only if flag=0) and also
 /// the element Jacobian matrix (if flag=1)
  void fill_in_generic_residual_contribution(Vector<double> &residuals,
                                             DenseMatrix<double> &jacobian,
@@ -245,7 +245,7 @@ class RefineableFishPoissonProblem : public Problem
 
 public:
 
- /// \short  Constructor: Bool flag specifies if position of fish back is
+ ///   Constructor: Bool flag specifies if position of fish back is
  /// prescribed or computed from the coupled problem. String specifies
  /// output directory
  RefineableFishPoissonProblem(const bool& fix_position, string directory_name);
@@ -253,7 +253,7 @@ public:
  /// Destructor
  virtual ~RefineableFishPoissonProblem();
 
- /// \short Update after Newton step: Update mesh in response 
+ ///  Update after Newton step: Update mesh in response 
  /// to possible changes in the wall shape
  void actions_before_newton_convergence_check()
   {
@@ -302,10 +302,10 @@ private:
  /// that represents the fish back
  Mesh* Fish_back_mesh_pt;
 
- /// \short Pointer to data item that stores the "load" on the fish back
+ ///  Pointer to data item that stores the "load" on the fish back
  Data* Load_pt;
 
- /// \short Is the position of the fish back prescribed?
+ ///  Is the position of the fish back prescribed?
  bool Fix_position;
 
  /// Doc info object

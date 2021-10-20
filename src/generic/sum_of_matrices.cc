@@ -33,7 +33,7 @@
 namespace oomph
 {
   // =================================================================
-  /// \short Matrix-vector multiplication for a sumofmatrices class. Just
+  ///  Matrix-vector multiplication for a sumofmatrices class. Just
   /// delegate each multiplication to the appropriate class then add up the
   /// results.
   // =================================================================

@@ -41,7 +41,7 @@ namespace oomph
   //======================================================================
   namespace Multi_domain_functions
   {
-    /// \short Output file to document the boundary coordinate
+    ///  Output file to document the boundary coordinate
     /// along the mesh boundary of the bulk mesh during call to
     /// setup_bulk_elements_adjacent_to_face_mesh(...)
     std::ofstream Doc_boundary_coordinate_file;
@@ -49,17 +49,17 @@ namespace oomph
     // Workspace for locate zeta methods
     //----------------------------------
 
-    /// \short Boolean to indicate that failure in setup multi domain
+    ///  Boolean to indicate that failure in setup multi domain
     /// functions is acceptable; defaults to false. If set to true
     /// external element pointers are set to null for those elements
     /// for which external elements couldn't be located.
     bool Accept_failed_locate_zeta_in_setup_multi_domain_interaction = false;
 
-    /// \short Dimension of zeta tuples (set by get_dim_helper) -- needed
+    ///  Dimension of zeta tuples (set by get_dim_helper) -- needed
     /// because we store the scalar coordinates in flat-packed form.
     unsigned Dim;
 
-    /// \short Lookup scheme for whether a local element's integration point
+    ///  Lookup scheme for whether a local element's integration point
     /// has had an external element assigned to it -- essentially boolean.
     /// External_element_located[e][ipt] = {0,1} if external element
     /// for ipt-th integration in local element e {has not, has} been found.
@@ -67,13 +67,13 @@ namespace oomph
     /// elements over and over again when we go around the spirals.
     Vector<Vector<unsigned>> External_element_located;
 
-    /// \short Vector of flat-packed zeta coordinates for which the external
+    ///  Vector of flat-packed zeta coordinates for which the external
     /// element could not be found during current local search. These
     /// will be sent to the next processor in the ring-like parallel search.
     /// The zeta coordinates come in groups of Dim (scalar) coordinates.
     Vector<double> Flat_packed_zetas_not_found_locally;
 
-    /// \short Vector of flat-packed zeta coordinates for which the external
+    ///  Vector of flat-packed zeta coordinates for which the external
     /// element could not be found on another processor and for which
     /// we're currently searching here. Whatever can't be found here,
     /// gets written into Flat_packed_zetas_not_found_locally and then
@@ -81,7 +81,7 @@ namespace oomph
     /// The zeta coordinates come in  groups of Dim (scalar) coordinates.
     Vector<double> Received_flat_packed_zetas_to_be_found;
 
-    /// \short Proc_id_plus_one_of_external_element[i] contains the
+    ///  Proc_id_plus_one_of_external_element[i] contains the
     /// processor id (plus one) of the processor
     /// on which the i-th zeta coordinate tuple received from elsewhere
     /// (in the order in which these are stored in
@@ -90,28 +90,28 @@ namespace oomph
     /// search.
     Vector<int> Proc_id_plus_one_of_external_element;
 
-    /// \short Vector to indicate (to another processor) whether a
+    ///  Vector to indicate (to another processor) whether a
     /// located element (that will have to represented as an external
     /// halo element on that processor) should be newly created on that
     /// processor (2), already exists on that processor (1), or
     /// is not on the current processor either (0).
     Vector<unsigned> Located_element_status;
 
-    /// \short Vector of flat-packed local coordinates for zeta tuples
+    ///  Vector of flat-packed local coordinates for zeta tuples
     /// that have been located
     Vector<double> Flat_packed_located_coordinates;
 
-    /// \short Vector of flat-packed doubles to be communicated with
+    ///  Vector of flat-packed doubles to be communicated with
     /// other processors
     Vector<double> Flat_packed_doubles;
 
-    /// \short Counter used when processing vector of flat-packed
+    ///  Counter used when processing vector of flat-packed
     /// doubles -- this is really "private" data, declared here
     /// to avoid having to pass it (and the associated array)
     /// between the various helper functions
     unsigned Counter_for_flat_packed_doubles;
 
-    /// \short Vector of flat-packed unsigneds to be communicated with
+    ///  Vector of flat-packed unsigneds to be communicated with
     /// other processors -- this is really "private" data, declared here
     /// to avoid having to pass the array between the various helper
     /// functions
@@ -127,7 +127,7 @@ namespace oomph
 
 #endif
 
-    /// \short Counter used when processing vector of flat-packed
+    ///  Counter used when processing vector of flat-packed
     /// unsigneds -- this is really "private" data, declared here
     /// to avoid having to pass it (and the associated array)
     /// between the various helper functions
@@ -136,32 +136,32 @@ namespace oomph
     // Other parameters
     //-----------------
 
-    /// \short Boolean to indicate when to use the bulk element as the
+    ///  Boolean to indicate when to use the bulk element as the
     /// external element.  Defaults to false, you must have set up FaceElements
     /// properly first in order for it to work
     bool Use_bulk_element_as_external = false;
 
-    /// \short Boolean to indicate if we're allowed to use halo elements
+    ///  Boolean to indicate if we're allowed to use halo elements
     /// as external elements. Can drastically reduce the number of
     /// external halo elements -- currently not aware of any problems
     /// therefore set to true by default but retention
     /// of this flag allows easy return to previous implementation.
     bool Allow_use_of_halo_elements_as_external_elements = true;
 
-    /// \short Indicate whether we are allowed to use halo elements as
+    ///  Indicate whether we are allowed to use halo elements as
     /// external elements for projection, possibly only required in
     /// parallel unstructured mesh generation during the projection
     /// stage. Default set to true
     bool Allow_use_of_halo_elements_as_external_elements_for_projection = true;
 
-    /// \short Boolean to indicate whether to doc timings or not.
+    ///  Boolean to indicate whether to doc timings or not.
     bool Doc_timings = false;
 
-    /// \short Boolean to indicate whether to output basic info during
+    ///  Boolean to indicate whether to output basic info during
     ///        setup_multi_domain_interaction() routines
     bool Doc_stats = false;
 
-    /// \short Boolean to indicate whether to output further info during
+    ///  Boolean to indicate whether to output further info during
     ///        setup_multi_domain_interaction() routines
     bool Doc_full_stats = false;
 

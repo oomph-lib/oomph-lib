@@ -245,7 +245,7 @@ namespace oomph
 
  namespace Factories
  {
-  /// \short Make a timestepper from an input argument using
+  ///  Make a timestepper from an input argument using
   /// new.
   TimeStepper* time_stepper_factory(const std::string& ts_name)
   {

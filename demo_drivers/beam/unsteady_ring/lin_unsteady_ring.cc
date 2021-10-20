@@ -48,10 +48,10 @@ namespace Global_Physical_Variables
  /// Flag for long/short run: Default =  perform long run
  unsigned Long_run_flag=1;
 
- /// \short Flag for fixed timestep: Default = fixed timestep
+ ///  Flag for fixed timestep: Default = fixed timestep
  unsigned Fixed_timestep_flag=1;
 
- /// \short Boolean flag to decide if to set IC for Newmark
+ ///  Boolean flag to decide if to set IC for Newmark
  /// directly or consistently : No Default
  bool Consistent_newmark_ic;
 
@@ -73,7 +73,7 @@ class ElasticRingProblem : public Problem
 
 public:
 
- /// \short Constructor: Number of elements, length of domain, flag for
+ ///  Constructor: Number of elements, length of domain, flag for
  /// setting Newmark IC directly or consistently
  ElasticRingProblem(const unsigned &N, const double &L);
                     
@@ -100,7 +100,7 @@ private:
  /// Length of domain (in terms of the Lagrangian coordinates)
  double Length;
 
- /// \short In which element are we applying displacement control?
+ ///  In which element are we applying displacement control?
  /// (here only used for doc of radius)
  ELEMENT* Displ_control_elem_pt;
 
@@ -110,7 +110,7 @@ private:
  /// Pointer to geometric object that represents the undeformed shape
  GeomObject* Undef_geom_pt;
 
- /// \short Pointer to object that specifies the initial condition
+ ///  Pointer to object that specifies the initial condition
  SolidInitialCondition* IC_pt;
 
  /// Trace file for recording control data

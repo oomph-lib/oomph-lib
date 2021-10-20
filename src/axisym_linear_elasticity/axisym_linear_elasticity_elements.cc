@@ -31,7 +31,7 @@
 
 namespace oomph
 {
-  /// \short Static default value for Young's modulus (1.0 -- for natural
+  ///  Static default value for Young's modulus (1.0 -- for natural
   /// scaling, i.e. all stresses have been non-dimensionalised by
   /// the same reference Young's modulus. Setting the "non-dimensional"
   /// Young's modulus (obtained by de-referencing Youngs_modulus_pt)

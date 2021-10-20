@@ -50,7 +50,7 @@ class TwoLayerPerturbedSpineMesh
 
 public:
 
- /// \short Constructor: Pass in:
+ ///  Constructor: Pass in:
  ///   - number of elements in x-direction
  ///   - number of elements in y-direction in bottom layer
  ///   - number of elements in y-direction in top layer
@@ -69,7 +69,7 @@ public:
                             TimeStepper* time_stepper_pt=
                             &Mesh::Default_TimeStepper);
  
- /// \short Constructor: Pass in:
+ ///  Constructor: Pass in:
  ///   - number of elements in x-direction
  ///   - number of elements in y-direction in bottom layer
  ///   - number of elements in y-direction in top layer
@@ -90,7 +90,7 @@ public:
                             TimeStepper* time_stepper_pt=
                             &Mesh::Default_TimeStepper);
  
- /// \short Constructor: Pass in:
+ ///  Constructor: Pass in:
  ///   - number of elements in x-direction
  ///   - number of elements in y-direction in bottom layer
  ///   - number of elements in y-direction in top layer
@@ -115,7 +115,7 @@ public:
                             &Mesh::Default_TimeStepper);
  
  
- /// \short Reorder the elements so we loop over them vertically first
+ ///  Reorder the elements so we loop over them vertically first
  /// (advantageous in "wide" domains if a frontal solver is used).
  void element_reorder();
 
@@ -133,7 +133,7 @@ public:
  ///Number of elements in top layer
  unsigned long nlower() const { return Lower_layer_element_pt.size(); }
  
- /// \short General node update function implements pure virtual function 
+ ///  General node update function implements pure virtual function 
  /// defined in PerturbedSpineMesh base class and performs specific update
  /// actions, depending on the node update fct id stored for each node.
  /// This function sets the nodal positions to be the same as in the base
@@ -170,7 +170,7 @@ public:
  /// Access function for number of elements in upper layer
  const unsigned& ny2() const { return Ny2; }
  
- /// \short Set up the internal data YC_index and YS_index, which
+ ///  Set up the internal data YC_index and YS_index, which
  /// store the indices at which the perturbations to the nodal
  /// y-position are stored in the bulk element
  const void set_perturbation_to_nodal_positions_indices(
@@ -189,10 +189,10 @@ public:
  /// Number of elements in upper layer
  unsigned Ny2;
 
- /// \short  Height of the lower layer
+ ///   Height of the lower layer
  double H1;
 
- /// \short  Height of the upper layer
+ ///   Height of the upper layer
  double H2;
 
  /// Pointer to corresponding mesh of base state problem
@@ -202,13 +202,13 @@ public:
  //  perturbed spines as it builds them
  SpineMesh* Base_mesh_pt;
 
- /// \short Index at which the cosine part of the perturbation to the
+ ///  Index at which the cosine part of the perturbation to the
  /// nodal y-position is stored in the bulk element. The mesh needs to
  /// know this so that the value of the nodal position perturbation can
  /// be updated during the "perturbed spine node update" procedure
  int YC_index;
 
- /// \short Index at which the sine part of the perturbation to the
+ ///  Index at which the sine part of the perturbation to the
  /// nodal y-position is stored in the bulk element. The mesh needs to
  /// know this so that the value of the nodal position perturbation can
  /// be updated during the "perturbed spine node update" procedure
@@ -220,12 +220,12 @@ public:
  /// Vector of pointers to element in the upper layer
  Vector <FiniteElement *> Upper_layer_element_pt;
  
- /// \short The spacing function for the x co-ordinates with two 
+ ///  The spacing function for the x co-ordinates with two 
  /// regions.
  double x_spacing_function(unsigned xelement, unsigned xnode,
                            unsigned yelement, unsigned ynode);
 
- /// \short The spacing function for the y co-ordinates with three
+ ///  The spacing function for the y co-ordinates with three
  /// regions in each fluid.
  double y_spacing_function(unsigned xelement, unsigned xnode,
                            unsigned yelement, unsigned ynode);
@@ -336,13 +336,13 @@ public:
     }
   }
 
- /// \short Helper function to actually build the two-layer spine mesh 
+ ///  Helper function to actually build the two-layer spine mesh 
  /// (called from various constructors)
  virtual void build_two_layer_mesh(TimeStepper* time_stepper_pt);
 
   private:
 
- /// \short Static "magic" number that indicates that the indices at
+ ///  Static "magic" number that indicates that the indices at
  /// which the perturbations to the nodal y-positions are stored have
  /// not been set up
  static int Perturbation_to_nodal_position_indices_not_set_up;

@@ -651,7 +651,7 @@ namespace oomph
   }
 
   //==============================================================
-  /// \short Compute traction (on the viscous scale) at local
+  ///  Compute traction (on the viscous scale) at local
   /// coordinate s for outer unit normal N
   //==============================================================
   void GeneralisedNewtonianAxisymmetricNavierStokesEquations::traction(
@@ -1020,7 +1020,7 @@ namespace oomph
   }
 
   //==============================================================
-  ///  \short Get integral of kinetic energy over element:
+  ///   Get integral of kinetic energy over element:
   //==============================================================
   double GeneralisedNewtonianAxisymmetricNavierStokesEquations::kin_energy()
     const
@@ -4091,7 +4091,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Compute the hessian tensor vector products required to
+  ///  Compute the hessian tensor vector products required to
   /// perform continuation of bifurcations analytically
   //=========================================================================
   void GeneralisedNewtonianAxisymmetricNavierStokesEquations::

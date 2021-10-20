@@ -38,7 +38,7 @@ namespace oomph
   //===========================================================================
   namespace PseudoSolidHelper
   {
-    /// \short Static variable to hold the default value for the pseudo-solid's
+    ///  Static variable to hold the default value for the pseudo-solid's
     /// inertia parameter Lambda^2.
     extern double Zero;
 
@@ -60,7 +60,7 @@ namespace oomph
     bool Shape_derivs_by_direct_fd;
 
   public:
-    /// \short Constructor, call the BASIC and SOLID elements' constructors and
+    ///  Constructor, call the BASIC and SOLID elements' constructors and
     /// set the "density" parameter for solid element to zero
     PseudoSolidNodeUpdateElement()
       : BASIC(), SOLID(), Shape_derivs_by_direct_fd(true)
@@ -68,7 +68,7 @@ namespace oomph
       SOLID::lambda_sq_pt() = &PseudoSolidHelper::Zero;
     }
 
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -83,20 +83,20 @@ namespace oomph
       SOLID::describe_local_dofs(out, current_string);
     }
 
-    /// \short Compute norm of solution: use the version in the BASIC
+    ///  Compute norm of solution: use the version in the BASIC
     /// class if there's any ambiguity
     void compute_norm(double& el_norm)
     {
       BASIC::compute_norm(el_norm);
     }
 
-    /// \short The required number of values is the sum of the two
+    ///  The required number of values is the sum of the two
     unsigned required_nvalue(const unsigned& n) const
     {
       return BASIC::required_nvalue(n) + SOLID::required_nvalue(n);
     }
 
-    /// \short We assume that the solid stuff is stored at the end of
+    ///  We assume that the solid stuff is stored at the end of
     /// the nodes, i.e. its index is the number of continuously interplated
     /// values in the BASIC equations.
     int solid_p_nodal_index() const
@@ -114,7 +114,7 @@ namespace oomph
       return SOLID::solid_p_nodal_index();
     }
 
-    /// \short Final override for the residuals function. Contributions are
+    ///  Final override for the residuals function. Contributions are
     /// added from both underlying element types
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -124,7 +124,7 @@ namespace oomph
       SOLID::fill_in_contribution_to_residuals(residuals);
     }
 
-    /// \short Final override for jacobian function: Contributions are
+    ///  Final override for jacobian function: Contributions are
     /// included from both the underlying element types
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -138,7 +138,7 @@ namespace oomph
       fill_in_shape_derivatives(jacobian);
     }
 
-    /// \short Final override for mass matrix function: contributions
+    ///  Final override for mass matrix function: contributions
     /// are included from both the underlying element types
     void fill_in_contribution_to_jacobian_and_mass_matrix(
       Vector<double>& residuals,
@@ -170,7 +170,7 @@ namespace oomph
     }
 
 
-    /// \short Fill in the shape derivatives of the BASIC equations
+    ///  Fill in the shape derivatives of the BASIC equations
     /// w.r.t. the solid position dofs
     void fill_in_shape_derivatives(DenseMatrix<double>& jacobian)
     {
@@ -241,7 +241,7 @@ namespace oomph
     }
 
 
-    /// \short Fill in the derivatives of the BASIC equations
+    ///  Fill in the derivatives of the BASIC equations
     /// w.r.t. the solid position dofs
     void fill_in_shape_derivatives_by_fd(DenseMatrix<double>& jacobian)
     {
@@ -408,7 +408,7 @@ namespace oomph
     }
 
 
-    /// \short Specify Data that affects the geometry of the element
+    ///  Specify Data that affects the geometry of the element
     /// by adding the position Data to the set that's passed in.
     /// (This functionality is required in FSI problems; set is used to
     /// avoid double counting).
@@ -430,7 +430,7 @@ namespace oomph
       BASIC::output(outfile);
     }
 
-    /// \short Output function: Plot at n_p plot points using the basic
+    ///  Output function: Plot at n_p plot points using the basic
     /// element's output function
     void output(std::ostream& outfile, const unsigned& n_p)
     {
@@ -449,7 +449,7 @@ namespace oomph
       BASIC::output(file_pt, n_p);
     }
 
-    /// \short Number of 'flux' terms for Z2 error estimation: Error estimation
+    ///  Number of 'flux' terms for Z2 error estimation: Error estimation
     /// is based on error in BASIC element
     unsigned num_Z2_flux_terms()
     {
@@ -457,7 +457,7 @@ namespace oomph
     }
 
 
-    /// \short Plot the error when compared against a given exact flux.
+    ///  Plot the error when compared against a given exact flux.
     /// Also calculates the norm of the error and that of the exact flux.
     /// Use version in BASIC element
     void compute_exact_Z2_error(
@@ -476,19 +476,19 @@ namespace oomph
       BASIC::get_Z2_flux(s, flux);
     }
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return BASIC::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return BASIC::vertex_node_pt(j);
     }
 
-    /// \short Order of recovery shape functions for Z2 error estimation: Done
+    ///  Order of recovery shape functions for Z2 error estimation: Done
     /// for BASIC element since it determines the refinement
     unsigned nrecovery_order()
     {
@@ -496,28 +496,28 @@ namespace oomph
     }
 
 
-    /// \short The number of "DOF types" that degrees of freedom in this element
+    ///  The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into.
     unsigned ndof_types() const
     {
       return BASIC::ndof_types() + SOLID::ndof_types();
     }
 
-    /// \short return the number of DOF types associated with the BASIC
+    ///  return the number of DOF types associated with the BASIC
     /// elements in this combined element
     unsigned nbasic_dof_types() const
     {
       return BASIC::ndof_types();
     }
 
-    /// \short return the number of DOF types associated with the SOLID
+    ///  return the number of DOF types associated with the SOLID
     /// elements in this combined element
     unsigned nsolid_dof_types() const
     {
       return SOLID::ndof_types();
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.
@@ -557,7 +557,7 @@ namespace oomph
     : public virtual FaceGeometry<SOLID>
   {
   public:
-    /// \short Constuctor calls the constructor of the SolidQElement
+    ///  Constuctor calls the constructor of the SolidQElement
     /// (Only the Intel compiler seems to need this!)
     FaceGeometry() : FaceGeometry<SOLID>() {}
   };
@@ -568,7 +568,7 @@ namespace oomph
     : public virtual FaceGeometry<FaceGeometry<SOLID>>
   {
   public:
-    /// \short Constuctor calls the constructor of the SolidQElement
+    ///  Constuctor calls the constructor of the SolidQElement
     /// (Only the Intel compiler seems to need this!)
     FaceGeometry() : FaceGeometry<FaceGeometry<SOLID>>() {}
 
@@ -584,7 +584,7 @@ namespace oomph
                                                  public virtual SOLID
   {
   public:
-    /// \short Constructor, call the BASIC and SOLID elements' constructors and
+    ///  Constructor, call the BASIC and SOLID elements' constructors and
     /// set the "density" parameter for solid element to zero
     RefineablePseudoSolidNodeUpdateElement()
       : RefineableElement(), BASIC(), SOLID()
@@ -592,7 +592,7 @@ namespace oomph
       SOLID::lambda_sq_pt() = &PseudoSolidHelper::Zero;
     }
 
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -607,13 +607,13 @@ namespace oomph
       SOLID::describe_local_dofs(out, current_string);
     }
 
-    /// \short The required number of values is the sum of the two
+    ///  The required number of values is the sum of the two
     unsigned required_nvalue(const unsigned& n) const
     {
       return BASIC::required_nvalue(n) + SOLID::required_nvalue(n);
     }
 
-    /// \short The number of continuously interpolated values is the
+    ///  The number of continuously interpolated values is the
     /// sum of the SOLID and BASIC values
     unsigned ncont_interpolated_values() const
     {
@@ -621,7 +621,7 @@ namespace oomph
              SOLID::ncont_interpolated_values();
     }
 
-    /// \short We assume that the solid stuff is stored at the end of
+    ///  We assume that the solid stuff is stored at the end of
     /// the nodes, i.e. its index is the number of continuously interplated
     /// values in the BASIC equations.
     int solid_p_nodal_index() const
@@ -641,7 +641,7 @@ namespace oomph
       }
     }
 
-    ///\short Final override for residuals function: adds contributions
+    /// Final override for residuals function: adds contributions
     /// from both underlying element types
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -651,7 +651,7 @@ namespace oomph
       SOLID::fill_in_contribution_to_residuals(residuals);
     }
 
-    ///\short Final override for jacobian function: Calls get_jacobian() for
+    /// Final override for jacobian function: Calls get_jacobian() for
     /// both of the underlying element types
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -666,7 +666,7 @@ namespace oomph
       fill_in_shape_derivatives_by_fd(jacobian);
     }
 
-    /// \short Final override for mass matrix function: contributions
+    ///  Final override for mass matrix function: contributions
     /// are included from both the underlying element types
     void fill_in_contribution_to_jacobian_and_mass_matrix(
       Vector<double>& residuals,
@@ -685,7 +685,7 @@ namespace oomph
     }
 
 
-    /// \short Fill in the derivatives of the BASIC equations
+    ///  Fill in the derivatives of the BASIC equations
     /// w.r.t. to the solid position dofs, taking hanging nodes
     /// into account
     void fill_in_shape_derivatives_by_fd(DenseMatrix<double>& jacobian)
@@ -1047,7 +1047,7 @@ namespace oomph
     }
 
 
-    /// \short Specify Data that affects the geometry of the element
+    ///  Specify Data that affects the geometry of the element
     /// by adding the position Data to the set that's passed in.
     /// (This functionality is required in FSI problems; set is used to
     /// avoid double counting). Refineable version includes hanging nodes
@@ -1088,7 +1088,7 @@ namespace oomph
     }
 
 
-    /// \short Final override for the assign__additional_local_eqn_numbers():
+    ///  Final override for the assign__additional_local_eqn_numbers():
     ///  Call the version for the BASIC element
     void assign_additional_local_eqn_numbers()
     {
@@ -1157,7 +1157,7 @@ namespace oomph
       }
     }
 
-    /// \short We must compose the underlying interpolating nodes from
+    ///  We must compose the underlying interpolating nodes from
     /// the BASIC and SOLID equations, the BASIC ones are first
     Node* interpolating_node_pt(const unsigned& n, const int& value_id)
     {
@@ -1176,7 +1176,7 @@ namespace oomph
       }
     }
 
-    /// \short The pressure nodes are the corner nodes, so when value_id==0,
+    ///  The pressure nodes are the corner nodes, so when value_id==0,
     /// the fraction is the same as the 1d node number, 0 or 1.
     double local_one_d_fraction_of_interpolating_node(const unsigned& n1d,
                                                       const unsigned& i,
@@ -1200,7 +1200,7 @@ namespace oomph
     }
 
 
-    /// \short The velocity nodes are the same as the geometric nodes. The
+    ///  The velocity nodes are the same as the geometric nodes. The
     /// pressure nodes must be calculated by using the same methods as
     /// the geometric nodes, but by recalling that there are only two pressure
     /// nodes per edge.
@@ -1223,7 +1223,7 @@ namespace oomph
       }
     }
 
-    /// \short The number of 1d pressure nodes is 2, otherwise we have
+    ///  The number of 1d pressure nodes is 2, otherwise we have
     /// the positional nodes
     unsigned ninterpolating_node_1d(const int& value_id)
     {
@@ -1242,7 +1242,7 @@ namespace oomph
       }
     }
 
-    /// \short The number of pressure nodes is 2^DIM. The number of
+    ///  The number of pressure nodes is 2^DIM. The number of
     /// velocity nodes is the same as the number of geometric nodes.
     unsigned ninterpolating_node(const int& value_id)
     {
@@ -1261,7 +1261,7 @@ namespace oomph
       }
     }
 
-    /// \short The basis interpolating the pressure is given by pshape().
+    ///  The basis interpolating the pressure is given by pshape().
     //// The basis interpolating the velocity is shape().
     void interpolating_basis(const Vector<double>& s,
                              Shape& psi,
@@ -1283,7 +1283,7 @@ namespace oomph
     }
 
 
-    /// \short Number of 'flux' terms for Z2 error estimation: Error estimation
+    ///  Number of 'flux' terms for Z2 error estimation: Error estimation
     /// is based on error in BASIC element
     unsigned num_Z2_flux_terms()
     {
@@ -1297,7 +1297,7 @@ namespace oomph
       BASIC::get_Z2_flux(s, flux);
     }
 
-    /// \short Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Done for both of the
     /// underlying element types.
     void further_setup_hanging_nodes()
@@ -1307,7 +1307,7 @@ namespace oomph
     }
 
 
-    /// \short Build function: Call the one for the SOLID element since it
+    ///  Build function: Call the one for the SOLID element since it
     /// calls the one basic build function automatically.
     void build(Mesh*& mesh_pt,
                Vector<Node*>& new_node_pt,
@@ -1318,7 +1318,7 @@ namespace oomph
     }
 
 
-    /// \short Build function: Call the one for the SOLID element since it
+    ///  Build function: Call the one for the SOLID element since it
     /// calls the one basic build function automatically.
     void build(Mesh*& mesh_pt,
                Vector<Node*>& new_node_pt,
@@ -1336,25 +1336,25 @@ namespace oomph
     }
 
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return BASIC::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return BASIC::vertex_node_pt(j);
     }
 
-    /// \short Compute norm of solution. Use version in BASIC element.
+    ///  Compute norm of solution. Use version in BASIC element.
     void compute_norm(double& norm)
     {
       BASIC::compute_norm(norm);
     }
 
-    /// \short Plot the error when compared against a given exact flux.
+    ///  Plot the error when compared against a given exact flux.
     /// Also calculates the norm of the error and that of the exact flux.
     /// Use version in BASIC element
     void compute_exact_Z2_error(
@@ -1366,7 +1366,7 @@ namespace oomph
       BASIC::compute_exact_Z2_error(outfile, exact_flux_pt, error, norm);
     }
 
-    /// \short Order of recovery shape functions for Z2 error estimation: Done
+    ///  Order of recovery shape functions for Z2 error estimation: Done
     /// for BASIC element since it determines the refinement
     unsigned nrecovery_order()
     {
@@ -1397,28 +1397,28 @@ namespace oomph
       BASIC::output(file_pt, n_p);
     }
 
-    /// \short The number of "DOF types" that degrees of freedom in this element
+    ///  The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into.
     unsigned ndof_types() const
     {
       return BASIC::ndof_types() + SOLID::ndof_types();
     }
 
-    /// \short return the number of DOF types associated with the BASIC
+    ///  return the number of DOF types associated with the BASIC
     /// elements in this combined element
     unsigned nbasic_dof_types() const
     {
       return BASIC::ndof_types();
     }
 
-    /// \short return the number of DOF types associated with the SOLID
+    ///  return the number of DOF types associated with the SOLID
     /// elements in this combined element
     unsigned nsolid_dof_types() const
     {
       return SOLID::ndof_types();
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.
@@ -1459,7 +1459,7 @@ namespace oomph
     : public virtual FaceGeometry<SOLID>
   {
   public:
-    /// \short Constructor calls the constructor of the SolidQElement
+    ///  Constructor calls the constructor of the SolidQElement
     /// (Only the Intel compiler seems to need this!)
     FaceGeometry() : FaceGeometry<SOLID>() {}
 
@@ -1473,7 +1473,7 @@ namespace oomph
     : public virtual FaceGeometry<FaceGeometry<SOLID>>
   {
   public:
-    /// \short Constuctor calls the constructor of the SolidQElement
+    ///  Constuctor calls the constructor of the SolidQElement
     /// (Only the Intel compiler seems to need this!)
     FaceGeometry() : FaceGeometry<FaceGeometry<SOLID>>() {}
 

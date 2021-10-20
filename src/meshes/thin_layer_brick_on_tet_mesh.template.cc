@@ -34,7 +34,7 @@
 namespace oomph
 {
   //=====================================================================
-  /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of
+  ///  Constructor: Specify (quadratic) tet mesh, boundary IDs of
   /// boundary on which the current mesh is to be erected (in an FSI context
   /// this boundary tends to be the FSI boundary of the fluid mesh. Also
   /// specify the uniform thickness of layer, and the number of element layers.

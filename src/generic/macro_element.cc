@@ -29,7 +29,7 @@
 namespace oomph
 {
   //=================================================================
-  /// \short Get global position r(S) at discrete time level t.
+  ///  Get global position r(S) at discrete time level t.
   /// t=0: Present time; t>0: previous timestep.
   //=================================================================
   void QMacroElement<2>::macro_map(const double& t,
@@ -117,7 +117,7 @@ namespace oomph
   }
 
   //=================================================================
-  /// \short Get global position r(S) at discrete time level t.
+  ///  Get global position r(S) at discrete time level t.
   /// t=0: Present time; t>0: previous timestep.
   //=================================================================
   void QMacroElement<2>::macro_map(const unsigned& t,
@@ -206,7 +206,7 @@ namespace oomph
 
 
   //=================================================================
-  /// \short Output all macro element boundaries as tecplot zones
+  ///  Output all macro element boundaries as tecplot zones
   //=================================================================
   void QMacroElement<2>::output_macro_element_boundaries(std::ostream& outfile,
                                                          const unsigned& nplot)
@@ -232,7 +232,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Assembles the jacobian of the mapping from the macro coordinates to
+  ///  Assembles the jacobian of the mapping from the macro coordinates to
   /// the global coordinates
   //=============================================================================
   void QMacroElement<2>::assemble_macro_to_eulerian_jacobian(
@@ -328,7 +328,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Assembles the second derivative jacobian of the mapping from the
+  ///  Assembles the second derivative jacobian of the mapping from the
   /// macro coordinates to global coordinates x
   //=============================================================================
   void QMacroElement<2>::assemble_macro_to_eulerian_jacobian2(
@@ -434,7 +434,7 @@ namespace oomph
 
 
   //=================================================================
-  /// \short Get global position r(S) at discrete time level t.
+  ///  Get global position r(S) at discrete time level t.
   /// t=0: Present time; t>0: previous timestep.
   //=================================================================
   void QMacroElement<3>::macro_map(const unsigned& t,
@@ -654,7 +654,7 @@ namespace oomph
 
 
   //=================================================================
-  /// \short Output all macro element boundaries as tecplot zones
+  ///  Output all macro element boundaries as tecplot zones
   //=================================================================
   void QMacroElement<3>::output_macro_element_boundaries(std::ostream& outfile,
                                                          const unsigned& nplot)

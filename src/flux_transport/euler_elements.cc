@@ -68,7 +68,7 @@ namespace oomph
 
 
   //=========================================================
-  /// \short Return the flux as a function of the unknowns
+  ///  Return the flux as a function of the unknowns
   /// The unknowns are stored as density, energy and then
   /// the velocity components
   //=========================================================
@@ -161,7 +161,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Return the flux derivatives as a function of the unknowns
+  ///  Return the flux derivatives as a function of the unknowns
   //=====================================================================
   /*template<unsigned DIM>
   void EulerEquations<DIM>::

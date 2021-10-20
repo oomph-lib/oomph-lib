@@ -105,14 +105,14 @@ public:
 
 private:
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ ///  Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Create Poisson flux elements on boundary b of the Mesh pointed
+ ///  Create Poisson flux elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the Mesh object pointed to by 
  /// surface_mesh_pt
  void create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,

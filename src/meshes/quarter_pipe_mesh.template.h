@@ -52,7 +52,7 @@ namespace oomph
   class QuarterPipeMesh : public virtual SimpleCubicMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass number of elements in various directions,
+    ///  Constructor: Pass number of elements in various directions,
     /// the inner and outer radius and the length of the tube
     QuarterPipeMesh(const unsigned& ntheta,
                     const unsigned& nr,
@@ -119,7 +119,7 @@ namespace oomph
                                     public RefineableBrickMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass number of elements in various directions,
+    ///  Constructor: Pass number of elements in various directions,
     /// the inner and outer radius and the length of the tube
     RefineableQuarterPipeMesh(
       const unsigned& ntheta,
@@ -172,7 +172,7 @@ namespace oomph
                                  public virtual SolidMesh
   {
   public:
-    /// \short Constructor:  Pass number of elements in various directions,
+    ///  Constructor:  Pass number of elements in various directions,
     /// the inner and outer radius and the length of the tube.
     /// Builds mesh and copies Eulerian coords to Lagrangian
     /// ones so that the initial configuration is the stress-free one.
@@ -211,7 +211,7 @@ namespace oomph
       public RefineableBrickMesh<ELEMENT>
   {
   public:
-    /// \short Constructor:  Pass number of elements in various directions,
+    ///  Constructor:  Pass number of elements in various directions,
     /// the inner and outer radius and the length of the tube.
     /// Builds mesh and copies Eulerian coords to Lagrangian
     /// ones so that the initial configuration is the stress-free one.

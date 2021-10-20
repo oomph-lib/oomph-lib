@@ -54,7 +54,7 @@ namespace oomph
     /// Constructor
     MyRefineableQTaylorHoodElement() {}
 
-    /// \short Pure virtual function in which we specify the
+    ///  Pure virtual function in which we specify the
     /// values to be pinned (and set to zero) on the outer edge of
     /// the "pml" layer. None since we're not using this as pml functionality
     void values_to_be_pinned_on_outer_pml_boundary(Vector<unsigned>& values_to_pin)
@@ -69,7 +69,7 @@ namespace oomph
     public virtual MyRefineableQTaylorHoodElement
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate QElement
     PMLLayerElement() : MyRefineableQTaylorHoodElement()
     {}
@@ -84,7 +84,7 @@ namespace oomph
     public virtual QElement<1,3>
   {
   public:
-    /// \short Constructor: Call the constructor for the 1D quadratic element
+    ///  Constructor: Call the constructor for the 1D quadratic element
     FaceGeometry() : QElement<1,3>() {}
   };
 } // End of namespace oomph
@@ -94,13 +94,13 @@ namespace oomph
 ////////////////////////////////////////////////////////////////////////
 
 //======start_of_OscillatingCylinder========================================
-/// \short Oscillating cylinder class
+///  Oscillating cylinder class
 //==========================================================================
 class OscillatingCylinder : public GeomObject
 {
 public:
 
-  /// \short Constructor: Pass radius, amplitude of the motion, the excitation
+  ///  Constructor: Pass radius, amplitude of the motion, the excitation
   /// wavelength and pointer to time object.
   OscillatingCylinder(double* radius_pt,
                       double* amplitude_pt,
@@ -123,7 +123,7 @@ public:
     return *Amplitude_pt;
   } // End of amplitude
 
-  /// \short Current position vector to material point at Lagrangian
+  ///  Current position vector to material point at Lagrangian
   /// coordinate xi (steady version)
   void position(const Vector<double>& xi,
                 Vector<double>& r) const
@@ -135,7 +135,7 @@ public:
     r[1]=(*Radius_pt)*sin(xi[0]);
   } // End of position
 
-  /// \short Current position vector to material point at Lagrangian
+  ///  Current position vector to material point at Lagrangian
   /// coordinate xi (unsteady version). Implementation includes a
   /// transition phase where the cylinder oscillates to a smaller
   /// amplitude than the target value. Used to ensure that the solution
@@ -186,7 +186,7 @@ private:
   /// Pointer to the current time in the problem
   Time* Time_pt;
 
-  /// \short Boolean variable to indicate whether or not to use a transition
+  ///  Boolean variable to indicate whether or not to use a transition
   /// phase at the start of the simulation. Defaults to true.
   bool Use_transition_phase;
 }; // End of OscillatingCylinder class
@@ -201,7 +201,7 @@ private:
 namespace GlobalParameters
 {
   ///------------------------------------------------CYLINDER MOTION------
-  /// \short Amplitude of the cylinder motion used by Williamson &
+  ///  Amplitude of the cylinder motion used by Williamson &
   /// Roshko (1988). Probably best to fix the wavelength and vary this
   /// to get different wake modes. Also the easiest way to get different
   /// wake patterns to shown in Leontini et al. (2006). SIDE NOTE: as
@@ -225,7 +225,7 @@ namespace GlobalParameters
   /// The Womersley number
   double ReSt=Re*St;
 
-  /// \short Function to calculate the appropriate Strouhal number for
+  ///  Function to calculate the appropriate Strouhal number for
   /// the simulation.
   /// Some noteworthy Re-St values:
   ///                  (1)  Re=100 --> St=0.1643
@@ -273,7 +273,7 @@ namespace GlobalParameters
     }
   } // End of calculate_strouhal_number
 
-  /// \short Update physical parameters. This updates:
+  ///  Update physical parameters. This updates:
   ///               (1) The Reynolds number, and;
   ///               (2) The Strouhal number,
   /// and should ALWAYS be called after either the Reynolds number or
@@ -454,14 +454,14 @@ public:
   /// After adaptation: Unpin pressure and pin redundant pressure dofs.
   void actions_after_adapt();
 
-  /// \short Actions to complete before an implicit timestep:
+  ///  Actions to complete before an implicit timestep:
   /// Provide a perturbation to the solution
   void actions_before_implicit_timestep();
 
   /// Doc the solution
   void doc_solution(const bool& in_unsteady=false);
 
-  /// \short Output the velocity components at a point on the centerline
+  ///  Output the velocity components at a point on the centerline
   /// to observe the oscillating behaviour without having to output all
   /// the data (i.e. V1, V2 etc.):
   void doc_trace_node_velocities_and_pressure();

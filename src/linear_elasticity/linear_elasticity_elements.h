@@ -56,7 +56,7 @@ namespace oomph
   class LinearElasticityEquationsBase : public virtual FiniteElement
   {
   public:
-    /// \short Return the index at which the i-th unknown displacement
+    ///  Return the index at which the i-th unknown displacement
     /// component is stored. The default value, i, is appropriate for
     /// single-physics problems.
     virtual inline unsigned u_index_linear_elasticity(const unsigned i) const
@@ -152,14 +152,14 @@ namespace oomph
     }
 
 
-    /// \short Function pointer to function that specifies the body force
+    ///  Function pointer to function that specifies the body force
     /// as a function of the Cartesian coordinates and time FCT(t,x,b) --
     /// x and b are  Vectors!
     typedef void (*BodyForceFctPt)(const double& t,
                                    const Vector<double>& x,
                                    Vector<double>& b);
 
-    /// \short Constructor: Set null pointers for constitutive law and for
+    ///  Constructor: Set null pointers for constitutive law and for
     /// isotropic growth function. Set physical parameter values to
     /// default values, switch on inertia and set body force to zero.
     LinearElasticityEquationsBase()
@@ -231,7 +231,7 @@ namespace oomph
     /// Pin the element's redundant solid pressures (needed for refinement)
     virtual void pin_elemental_redundant_nodal_solid_pressures() {}
 
-    /// \short  Loop over all elements in Vector (which typically contains
+    ///   Loop over all elements in Vector (which typically contains
     /// all the elements in a refineable solid mesh) and pin the nodal solid
     /// pressure  degrees of freedom that are not being used. Function uses
     /// the member function
@@ -255,17 +255,17 @@ namespace oomph
       }
     }
 
-    /// \short Return the Cauchy stress tensor, as calculated
+    ///  Return the Cauchy stress tensor, as calculated
     /// from the elasticity tensor at specified local coordinate
     /// Virtual so separaete versions can (and must!) be provided
     /// for displacement and pressure-displacement formulations.
     virtual void get_stress(const Vector<double>& s,
                             DenseMatrix<double>& sigma) const = 0;
 
-    /// \short Return the strain tensor
+    ///  Return the strain tensor
     void get_strain(const Vector<double>& s, DenseMatrix<double>& strain) const;
 
-    /// \short Evaluate body force at Eulerian coordinate x at present time
+    ///  Evaluate body force at Eulerian coordinate x at present time
     /// (returns zero vector if no body force function pointer has been set)
     inline void body_force(const Vector<double>& x, Vector<double>& b) const
     {
@@ -293,7 +293,7 @@ namespace oomph
     }
 
 
-    /// \short The number of "DOF types" that degrees of freedom in this element
+    ///  The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: for now lump them all into one DOF type.
     /// Can be adjusted later
     unsigned ndof_types() const
@@ -302,7 +302,7 @@ namespace oomph
       // return 1;
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF types" that this unknown is associated with.
@@ -379,7 +379,7 @@ namespace oomph
     : public virtual LinearElasticityEquationsBase<DIM>
   {
   public:
-    /// \short  Constructor
+    ///   Constructor
     LinearElasticityEquations() {}
 
     /// Number of values required at node n.
@@ -388,7 +388,7 @@ namespace oomph
       return DIM;
     }
 
-    /// \short Return the residuals for the solid equations (the discretised
+    ///  Return the residuals for the solid equations (the discretised
     /// principle of virtual displacements)
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -407,7 +407,7 @@ namespace oomph
         residuals, jacobian, 1);
     }
 
-    /// \short Return the Cauchy stress tensor, as calculated
+    ///  Return the Cauchy stress tensor, as calculated
     /// from the elasticity tensor at specified local coordinate
     void get_stress(const Vector<double>& s, DenseMatrix<double>& sigma) const;
 
@@ -444,7 +444,7 @@ namespace oomph
     /// Output: x,y,[z],u,v,[w]
     void output(FILE* file_pt, const unsigned& n_plot);
 
-    /// \short Validate against exact solution.
+    ///  Validate against exact solution.
     /// Solution is provided via function pointer.
     /// Plot at a given number of plot points and compute L2 error
     /// and L2 norm of displacement solution over element
@@ -453,7 +453,7 @@ namespace oomph
                        double& error,
                        double& norm);
 
-    /// \short Validate against exact solution.
+    ///  Validate against exact solution.
     /// Solution is provided via function pointer.
     /// Plot at a given number of plot points and compute L2 error
     /// and L2 norm of displacement solution over element
@@ -465,7 +465,7 @@ namespace oomph
                        double& norm);
 
   private:
-    /// \short Private helper function to compute residuals and (if requested
+    ///  Private helper function to compute residuals and (if requested
     /// via flag) also the Jacobian matrix.
     virtual void fill_in_generic_contribution_to_residuals_linear_elasticity(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
@@ -616,12 +616,12 @@ namespace oomph
     : public virtual ProjectableElement<LINEAR_ELAST_ELEMENT>
   {
   public:
-    /// \short Constructor [this was only required explicitly
+    ///  Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableLinearElasticityElement() {}
 
 
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     /// In the underlying linear elasticity elements the
@@ -643,14 +643,14 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: dim, corresponding to
+    ///  Number of fields to be projected: dim, corresponding to
     /// the displacement components
     unsigned nfields_for_projection()
     {
       return this->dim();
     }
 
-    /// \short Number of history values to be stored for fld-th field.
+    ///  Number of history values to be stored for fld-th field.
     /// (includes present value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -667,14 +667,14 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
-    ///\short Number of positional history values: Read out from
+    /// Number of positional history values: Read out from
     /// positional timestepper  (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -690,7 +690,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,

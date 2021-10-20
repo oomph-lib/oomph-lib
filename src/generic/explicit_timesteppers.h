@@ -79,7 +79,7 @@ namespace oomph
     /// Empty destructor
     virtual ~ExplicitTimeSteppableObject() {}
 
-    ///\short A single virtual function that returns the residuals
+    /// A single virtual function that returns the residuals
     /// vector multiplied by the inverse mass matrix
     virtual void get_dvaluesdt(DoubleVector& minv_res);
 
@@ -96,30 +96,30 @@ namespace oomph
     virtual void add_to_dofs(const double& lambda,
                              const DoubleVector& increment_dofs);
 
-    /// \short Empty virtual function to do anything needed before a stage of
+    ///  Empty virtual function to do anything needed before a stage of
     /// an explicit time step (Runge-Kutta steps contain multiple stages per
     /// time step, most others only contain one).
     virtual void actions_before_explicit_stage() {}
 
-    /// \short Empty virtual function that should be overloaded to update any
+    ///  Empty virtual function that should be overloaded to update any
     /// dependent data or boundary conditions that should be advanced after each
     /// stage of an explicit time step (Runge-Kutta steps contain multiple
     /// stages per time step, most others only contain one).
     virtual void actions_after_explicit_stage() {}
 
-    /// \short Empty virtual function that can be overloaded to do anything
+    ///  Empty virtual function that can be overloaded to do anything
     /// needed before an explicit step.
     virtual void actions_before_explicit_timestep() {}
 
-    /// \short Empty virtual function that can be overloaded to do anything
+    ///  Empty virtual function that can be overloaded to do anything
     /// needed after an explicit step.
     virtual void actions_after_explicit_timestep() {}
 
-    ///\short Broken virtual function that should be overloaded to
+    /// Broken virtual function that should be overloaded to
     /// return access to the local time in the object
     virtual double& time();
 
-    /// \short Virtual function that should be overloaded to return a pointer to
+    ///  Virtual function that should be overloaded to return a pointer to
     /// a Time object.
     virtual Time* time_pt() const;
   };
@@ -131,12 +131,12 @@ namespace oomph
   class ExplicitTimeStepper
   {
   protected:
-    /// \short String that indicates the type of the timestepper
+    ///  String that indicates the type of the timestepper
     ///(e.g. "RungeKutta", etc.)
     std::string Type;
 
   public:
-    /// \short Empty Constructor.
+    ///  Empty Constructor.
     ExplicitTimeStepper() {}
 
     /// Broken copy constructor
@@ -173,7 +173,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const Euler&) = delete;
 
-    /// \short Overload function that is used to advance time in the object
+    ///  Overload function that is used to advance time in the object
     /// reference by object_pt by an amount dt
     void timestep(ExplicitTimeSteppableObject* const& object_pt,
                   const double& dt);

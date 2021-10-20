@@ -56,7 +56,7 @@ class CombCanSpineMesh : public SpineMesh
 
 public:
 
- /// \short Constructor: Pass number of elements in x-direction, number of
+ ///  Constructor: Pass number of elements in x-direction, number of
  /// The composed mesh is too complicated for giving xmin,xmax etc.. Nevertheless we keep nx, ny, nz making reference 
 //   to the elements in each direction of each cubic mesh
  CombCanSpineMesh(const unsigned int &nel_xz, const unsigned int &nel_y, const double &alpha, const double &length, const double &height, 
@@ -225,7 +225,7 @@ protected:
       }
   }
 
- /// \short Helper function to actually build the single-layer spine mesh 
+ ///  Helper function to actually build the single-layer spine mesh 
  /// (called from various constructors)
  virtual void build_single_layer_mesh(TimeStepper* time_stepper_pt);
 

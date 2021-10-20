@@ -34,7 +34,7 @@
 namespace oomph
 {
   //=============================================================================
-  /// \short An Epetra_Operator class for oomph-lib preconditioners.
+  ///  An Epetra_Operator class for oomph-lib preconditioners.
   /// A helper class for TrilinosOomphLibPreconditioner to allow an oomph-lib
   /// preconditioner (i.e. one derived from Preconditioner) to be used with
   /// a trilinos solver (TrilinosAztecOOSolver)
@@ -42,7 +42,7 @@ namespace oomph
   class OomphLibPreconditionerEpetraOperator : public Epetra_Operator
   {
   public:
-    /// \short Constructor - takes the pointer to the oomph-lib
+    ///  Constructor - takes the pointer to the oomph-lib
     /// preconditioner and the distribution of the preconditioner
     /// Note: the oomph-lib preconditioner must be setup.
     /// If use_eptra_values is true then the epetra vector values is used
@@ -70,7 +70,7 @@ namespace oomph
         Oomph_lib_preconditioner_pt->distribution_pt());
     }
 
-    /// \short Destructor - deletes the Epetra_map and My_global_rows vector
+    ///  Destructor - deletes the Epetra_map and My_global_rows vector
     /// (if MPI)
     ~OomphLibPreconditionerEpetraOperator()
     {
@@ -107,7 +107,7 @@ namespace oomph
     }
 
 
-    /// \short applies the oomph-lib preconditioner. Converts the Epetra vector
+    ///  applies the oomph-lib preconditioner. Converts the Epetra vector
     /// applys the preconditioner by calling the oomph-lib preconditioner's
     /// preconditioner_solve functionality.
     /// NOTE : the oomph-lib preconditioner is setup prior to being passed to
@@ -238,12 +238,12 @@ namespace oomph
     Epetra_SerialComm Operator_comm;
 #endif
 
-    /// \short Use the epetra data within the vectors passed to the oomph-lib
+    ///  Use the epetra data within the vectors passed to the oomph-lib
     /// preconditioner. If this is true none of the vector rebuild methods can
     /// be called.
     bool Use_epetra_values;
 
-    /// \short A pointer to an Epetra_Map object - describes distribution of the
+    ///  A pointer to an Epetra_Map object - describes distribution of the
     /// preconditioner, in this instance it is primarily used to prescribe the
     /// distribution
     /// of the residual and solution vector
@@ -255,7 +255,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short An interface to the Trilinos AztecOO classes allowing it to be used
+  ///  An interface to the Trilinos AztecOO classes allowing it to be used
   /// as an Oomph-lib LinearSolver.
   /// The AztecOO solver is a Krylov Subspace solver; the solver type (either
   /// CG, GMRES or BiCGStab) can be set using solver_type(). This solver can be
@@ -321,21 +321,21 @@ namespace oomph
     /// Broken assignment operator.
     void operator=(const TrilinosAztecOOSolver&) = delete;
 
-    /// \short Enable workaround for creating of epetra matrix that respects
+    ///  Enable workaround for creating of epetra matrix that respects
     /// aztecoo's ordering requirements
     void enable_aztecoo_workaround_for_epetra_matrix_setup()
     {
       Use_aztecoo_workaround_for_epetra_matrix_setup = true;
     }
 
-    /// \short Disable workaround for creating of epetra matrix that respects
+    ///  Disable workaround for creating of epetra matrix that respects
     /// aztecoo's ordering requirements
     void disable_aztecoo_workaround_for_epetra_matrix_setup()
     {
       Use_aztecoo_workaround_for_epetra_matrix_setup = false;
     }
 
-    /// \short Is workaround for creating of epetra matrix that respects
+    ///  Is workaround for creating of epetra matrix that respects
     /// aztecoo's ordering requirements enabled?
     bool is_aztecoo_workaround_for_epetra_matrix_setup_enabled()
     {
@@ -380,12 +380,12 @@ namespace oomph
       Epetra_matrix_pt = 0;
     }
 
-    /// \short Function which uses problem_pt's get_jacobian(...) function to
+    ///  Function which uses problem_pt's get_jacobian(...) function to
     /// generate a linear system which is then solved. This function deletes
     /// any existing internal data and then generates a new AztecOO solver.
     void solve(Problem* const& problem_pt, DoubleVector& solution);
 
-    /// \short Function to solve the linear system defined by matrix_pt and rhs.
+    ///  Function to solve the linear system defined by matrix_pt and rhs.
     /// \b NOTE 1. The matrix has to be of type CRDoubleMatrix or
     /// DistributedCRDoubleMatrix.
     /// \b NOTE 2. This function will delete any existing internal data and
@@ -394,13 +394,13 @@ namespace oomph
                const DoubleVector& rhs,
                DoubleVector& solution);
 
-    /// \short Function to resolve a linear system using the existing solver
+    ///  Function to resolve a linear system using the existing solver
     /// data, allowing a solve with a new right hand side vector. This
     /// function must be used after a call to solve(...) with
     /// enable_resolve set to true.
     void resolve(const DoubleVector& rhs, DoubleVector& solution);
 
-    /// \short Disable resolve function (overloads the LinearSolver
+    ///  Disable resolve function (overloads the LinearSolver
     /// disable_resolve function).
     void disable_resolve()
     {
@@ -408,7 +408,7 @@ namespace oomph
       clean_up_memory();
     }
 
-    /// \short Call if the matrix can be deleted
+    ///  Call if the matrix can be deleted
     void enable_delete_matrix()
     {
       Delete_matrix = true;
@@ -456,7 +456,7 @@ namespace oomph
       return Linear_solver_solution_time;
     }
 
-    /// \short Set the assembly of the serial jacobian
+    ///  Set the assembly of the serial jacobian
     /// when performing a problem-based solve
     void enable_assemble_serial_jacobian()
     {
@@ -479,7 +479,7 @@ namespace oomph
     //  return If_oomphlib_preconditioner_use_epetra_values;
     // }
 
-    /// \short Enumerated list to define which AztecOO solver is used
+    ///  Enumerated list to define which AztecOO solver is used
     enum AztecOO_solver_types
     {
       CG,
@@ -488,17 +488,17 @@ namespace oomph
     };
 
   protected:
-    /// \short Helper function performs the actual solve once the AztecOO
+    ///  Helper function performs the actual solve once the AztecOO
     /// solver is set up
     void solve_using_AztecOO(Epetra_Vector*& rhs_pt, Epetra_Vector*& soln_pt);
 
-    /// \short Helper function for setting up the solver. Converts the oomph-lib
+    ///  Helper function for setting up the solver. Converts the oomph-lib
     /// matrices to Epetra matrices, sets up the preconditioner, creates the
     /// Trilinos Aztec00 solver and passes in the matrix, preconditioner and
     /// parameters.
     void solver_setup(DoubleMatrixBase* const& matrix_pt);
 
-    /// \short Use workaround for creating of epetra matrix that respects
+    ///  Use workaround for creating of epetra matrix that respects
     /// aztecoo's ordering requirements
     bool Use_aztecoo_workaround_for_epetra_matrix_setup;
 
@@ -514,7 +514,7 @@ namespace oomph
     /// Stores time for the solution (excludes time to set up preconditioner)
     double Linear_solver_solution_time;
 
-    /// \short Trilinos copies matrix data from oomph-lib's own CRDoubleMatrix
+    ///  Trilinos copies matrix data from oomph-lib's own CRDoubleMatrix
     /// or DistributedCRDoubleMatrix to Trilinos's Epetra format - the Trilinos
     /// solver no longer requires the oomph-lib matrices and therefore they
     /// could be deleted to save memory. This must be requested explicitly by
@@ -522,29 +522,29 @@ namespace oomph
     /// preconditioner is setup.
     bool Delete_matrix;
 
-    /// \short If true, when performing a problem based solve a serial matrix
+    ///  If true, when performing a problem based solve a serial matrix
     /// will be requested from Problem::get_jacobian(...). Defaults to true
     bool Assemble_serial_jacobian;
 
-    /// \short Defines which solver is set up - available types are
+    ///  Defines which solver is set up - available types are
     /// defined in AztecOO_solver_types
     unsigned Solver_type;
 
-    /// \short Helper flag keeping track of whether we called the
+    ///  Helper flag keeping track of whether we called the
     /// linear algebra or problem-based solve function.
     bool Using_problem_based_solve;
 
-    /// \short A pointer for the linear system matrix in Epetra_CrsMatrix format
+    ///  A pointer for the linear system matrix in Epetra_CrsMatrix format
     Epetra_CrsMatrix* Epetra_matrix_pt;
 
-    /// \short A pointer to the Epetra_Operator for the preconditioner. This is
+    ///  A pointer to the Epetra_Operator for the preconditioner. This is
     /// only used if the preconditioner NOT a Trilinos preconditioner.
     Epetra_Operator* Epetra_preconditioner_pt;
 
     /// Oomph lib matrix pointer
     DoubleMatrixBase* Oomph_matrix_pt;
 
-    /// \short A pointer to the underlying problem (NULL if MATRIX based solve)
+    ///  A pointer to the underlying problem (NULL if MATRIX based solve)
     /// The problem_pt is stored here in a problem based solve for the
     /// preconditioner
     Problem* Problem_pt;

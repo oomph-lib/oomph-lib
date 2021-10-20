@@ -183,10 +183,10 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve: 
+ ///  Update the problem specs before solve: 
  void actions_before_newton_solve() {}
 
- /// \short Calculate the values of the effective modulus by
+ ///  Calculate the values of the effective modulus by
  /// integrating over each element
  void calculate_coefficients()
   {
@@ -261,7 +261,7 @@ public:
   }
 
 
- /// \short Make our own solve function
+ ///  Make our own solve function
  void solve() 
   {
    //Enable the resolve

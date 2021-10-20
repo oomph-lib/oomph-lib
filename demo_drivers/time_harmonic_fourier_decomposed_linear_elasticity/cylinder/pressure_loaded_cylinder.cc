@@ -52,7 +52,7 @@ namespace Global_Parameters
  /// Define Fourier wavenumber
  int Fourier_wavenumber = 0;
 
- /// \short Define the non-dimensional square angular frequency of 
+ ///  Define the non-dimensional square angular frequency of 
  /// time-harmonic motion
  std::complex<double> Omega_sq (10.0,0.0);
 
@@ -100,7 +100,7 @@ class FourierDecomposedTimeHarmonicLinearElasticityProblem : public Problem
 {
 public:
 
- /// \short Constructor: Pass number of elements in r and z directions 
+ ///  Constructor: Pass number of elements in r and z directions 
  /// and boundary locations
  FourierDecomposedTimeHarmonicLinearElasticityProblem(
  const unsigned &nr, const unsigned &nz,

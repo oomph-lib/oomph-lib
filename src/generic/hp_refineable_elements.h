@@ -59,17 +59,17 @@ namespace oomph
     /// Destructor
     virtual ~PRefineableQElement() {}
 
-    /// \short Initial setup of element (set the correct p-order and
+    ///  Initial setup of element (set the correct p-order and
     /// integration scheme) If an adopted father is specified, information
     /// from this is used instead of using the father found from the tree.
     void initial_setup(Tree* const& adopted_father_pt = 0,
                        const unsigned& initial_p_order = 0);
 
-    /// \short Pre-build (search father for required nodes which may already
+    ///  Pre-build (search father for required nodes which may already
     /// exist)
     void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt);
 
-    /// \short p-refine the element (refine if inc>0, unrefine if inc<0).
+    ///  p-refine the element (refine if inc>0, unrefine if inc<0).
     void p_refine(const int& inc,
                   Mesh* const& mesh_pt,
                   GeneralisedElement* const& clone_pt);
@@ -84,12 +84,12 @@ namespace oomph
                        DShape& dpsids,
                        DShape& d2psids) const;
 
-    /// \short Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes (e.g. lower order interpolations
     /// for the pressure in Taylor Hood).
     void further_setup_hanging_nodes() {}
 
-    /// \short Returns the number of nodes along each edge of the element.
+    ///  Returns the number of nodes along each edge of the element.
     /// Overloaded to return the (variable) p-order rather than the template
     /// argument.
     unsigned nnode_1d() const
@@ -124,12 +124,12 @@ namespace oomph
     /// are still required.
     void rebuild_from_sons(Mesh*& mesh_pt);
 
-    /// \short Check the integrity of interpolated values across element
+    ///  Check the integrity of interpolated values across element
     /// boundaries.
     void check_integrity(double& max_error);
 
   protected:
-    /// \short Set up hanging node information. Empty for 1D elements.
+    ///  Set up hanging node information. Empty for 1D elements.
     void binary_hang_helper(const int& value_id,
                             const int& my_edge,
                             std::ofstream& output_hangfile);
@@ -151,17 +151,17 @@ namespace oomph
     /// Destructor
     virtual ~PRefineableQElement() {}
 
-    /// \short Initial setup of element (set the correct p-order and
+    ///  Initial setup of element (set the correct p-order and
     /// integration scheme) If an adopted father is specified, information
     /// from this is used instead of using the father found from the tree.
     void initial_setup(Tree* const& adopted_father_pt = 0,
                        const unsigned& initial_p_order = 0);
 
-    /// \short Pre-build (search father for required nodes which may already
+    ///  Pre-build (search father for required nodes which may already
     /// exist)
     void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt);
 
-    /// \short p-refine the element (refine if inc>0, unrefine if inc<0).
+    ///  p-refine the element (refine if inc>0, unrefine if inc<0).
     void p_refine(const int& inc,
                   Mesh* const& mesh_pt,
                   GeneralisedElement* const& clone_pt);
@@ -176,12 +176,12 @@ namespace oomph
                        DShape& dpsids,
                        DShape& d2psids) const;
 
-    /// \short Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes (e.g. lower order interpolations
     /// for the pressure in Taylor Hood).
     void further_setup_hanging_nodes() {}
 
-    /// \short Returns the number of nodes along each edge of the element.
+    ///  Returns the number of nodes along each edge of the element.
     /// Overloaded to return the (variable) p-order rather than the template
     /// argument.
     unsigned nnode_1d() const
@@ -219,7 +219,7 @@ namespace oomph
     /// are still required.
     void rebuild_from_sons(Mesh*& mesh_pt);
 
-    /// \short Check the integrity of interpolated values across element
+    ///  Check the integrity of interpolated values across element
     /// boundaries.
     /// Note: with the mortar method, continuity is enforced weakly across non-
     /// conforming element boundaries, so it makes no sense to check the
@@ -227,7 +227,7 @@ namespace oomph
     void check_integrity(double& max_error);
 
   protected:
-    /// \short Set up hanging node information.
+    ///  Set up hanging node information.
     /// Overloaded to implement the mortar method rather than constrained
     /// approximation. This enforces continuity weakly via an integral matching
     /// condition at non-conforming element boundaries.
@@ -252,17 +252,17 @@ namespace oomph
     /// Destructor
     virtual ~PRefineableQElement() {}
 
-    /// \short Initial setup of element (set the correct p-order and
+    ///  Initial setup of element (set the correct p-order and
     /// integration scheme) If an adopted father is specified, information
     /// from this is used instead of using the father found from the tree.
     void initial_setup(Tree* const& adopted_father_pt = 0,
                        const unsigned& initial_p_order = 0);
 
-    /// \short Pre-build (search father for required nodes which may already
+    ///  Pre-build (search father for required nodes which may already
     /// exist)
     void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt);
 
-    /// \short p-refine the element (refine if inc>0, unrefine if inc<0).
+    ///  p-refine the element (refine if inc>0, unrefine if inc<0).
     void p_refine(const int& inc,
                   Mesh* const& mesh_pt,
                   GeneralisedElement* const& clone_pt);
@@ -277,12 +277,12 @@ namespace oomph
                        DShape& dpsids,
                        DShape& d2psids) const;
 
-    /// \short Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes (e.g. lower order interpolations
     /// for the pressure in Taylor Hood).
     void further_setup_hanging_nodes() {}
 
-    /// \short Returns the number of nodes along each edge of the element.
+    ///  Returns the number of nodes along each edge of the element.
     /// Overloaded to return the (variable) p-order rather than the template
     /// argument.
     unsigned nnode_1d() const
@@ -320,7 +320,7 @@ namespace oomph
     /// are still required.
     void rebuild_from_sons(Mesh*& mesh_pt);
 
-    /// \short Check the integrity of interpolated values across element
+    ///  Check the integrity of interpolated values across element
     /// boundaries.
     /// Note: with the mortar method, continuity is enforced weakly across non-
     /// conforming element boundaries, so it makes no sense to check the
@@ -328,7 +328,7 @@ namespace oomph
     void check_integrity(double& max_error);
 
   protected:
-    /// \short Set up hanging node information.
+    ///  Set up hanging node information.
     /// Overloaded to implement the mortar method rather than constrained
     /// approximation. This enforces continuity weakly via an integral matching
     /// condition at non-conforming element boundaries.

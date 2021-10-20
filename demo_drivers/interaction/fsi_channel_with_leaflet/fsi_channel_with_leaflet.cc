@@ -54,7 +54,7 @@ namespace Global_Physical_Variables
  /// Non-dimensional wall thickness.
  double H=0.05;
  
- /// \short Fluid structure interaction parameter: Ratio of stresses used for
+ ///  Fluid structure interaction parameter: Ratio of stresses used for
  /// non-dimensionalisation of fluid to solid stresses. 
  double Q=1.0e-6;
 
@@ -67,7 +67,7 @@ namespace Global_Physical_Variables
  /// Max. flux
  double Max_flux=2.0;
  
- /// \short Flux: Pulsatile flow fluctuating between Min_flux and Max_flux 
+ ///  Flux: Pulsatile flow fluctuating between Min_flux and Max_flux 
  /// with period Period
  double flux(const double& t)
  {  
@@ -98,7 +98,7 @@ public:
    X0=x0;
   }
  
- /// \short Position vector at Lagrangian coordinate zeta 
+ ///  Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position Vector
@@ -107,7 +107,7 @@ public:
   }
 
 
- /// \short Parametrised position on object: r(zeta). Evaluated at
+ ///  Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Calls steady version.
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -118,7 +118,7 @@ public:
   } // end of position
 
 
- /// \short Posn vector and its  1st & 2nd derivatives
+ ///  Posn vector and its  1st & 2nd derivatives
  /// w.r.t. to coordinates:
  /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i). 
  /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ = 
@@ -166,7 +166,7 @@ class FSIChannelWithLeafletProblem : public Problem
 
 public:
 
- /// \short Constructor: Pass the lenght of the domain at the left
+ ///  Constructor: Pass the lenght of the domain at the left
  /// of the leaflet lleft,the lenght of the domain at the right of the
  /// leaflet lright,the height of the leaflet hleaflet, the total height
  /// of the domain htot, the number of macro-elements at the left of the
@@ -230,7 +230,7 @@ public:
    }
   } // end of actions_before_implicit_timestep
 
- /// \short Update before checking Newton convergence: Update the
+ ///  Update before checking Newton convergence: Update the
  /// nodal positions in the fluid mesh in response to possible 
  /// changes in the wall shape
  void actions_before_newton_convergence_check()

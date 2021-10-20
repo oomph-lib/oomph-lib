@@ -44,7 +44,7 @@ namespace oomph
   class HijackedElementBase
   {
   public:
-    /// \short Constructor, initialise the pointer to the equation numbers
+    ///  Constructor, initialise the pointer to the equation numbers
     /// for the storage to zero
     HijackedElementBase()
       : Hijacked_global_eqn_number_pt(0), Hijacked_local_eqn_number_pt(0)
@@ -59,7 +59,7 @@ namespace oomph
     /// Destructor, destroy the storage for the equation numbers
     virtual ~HijackedElementBase();
 
-    /// \short Reset the hijacked data pt, so that none of the equations in the
+    ///  Reset the hijacked data pt, so that none of the equations in the
     /// element are hijacked.
     void unhijack_all_data()
     {
@@ -85,12 +85,12 @@ namespace oomph
     /// been assigned.
     std::set<long*>* Hijacked_global_eqn_number_pt;
 
-    /// \short Pointer to  a vector of integers
+    ///  Pointer to  a vector of integers
     /// containing the local equation numbers of
     /// any hijacked variables in the element.
     Vector<int>* Hijacked_local_eqn_number_pt;
 
-    /// \short Pointer to a double that multiplies the contribution to
+    ///  Pointer to a double that multiplies the contribution to
     /// the residuals from the original element.
     /// This is usually used as a homotopy parameter to permit a smooth
     /// transition between different types of boundary conditions, rather than
@@ -101,18 +101,18 @@ namespace oomph
     /// residuals
     static double Default_residual_multiplier;
 
-    /// \short Mark the global equation, addressed by global_eqn_pt,
+    ///  Mark the global equation, addressed by global_eqn_pt,
     /// as hijacked by this element.
     void hijack_global_eqn(long* const& global_eqn_pt);
 
-    /// \short The global equation, addressed by global_eqn_pt,
+    ///  The global equation, addressed by global_eqn_pt,
     /// is no longer hijacked by this element.
     void unhijack_global_eqn(long* const& global_eqn_pt);
   };
 
 
   //========================================================================
-  /// \short Hijacked elements are elements in which one or more
+  ///  Hijacked elements are elements in which one or more
   /// Data values that affect the element's residuals, are determined
   /// by another element -- the data values are then said to have
   /// been hijacked by another element. The main functionality
@@ -141,7 +141,7 @@ namespace oomph
     }
 
 
-    /// \short Constructor used for hijacking face elements with specification
+    ///  Constructor used for hijacking face elements with specification
     /// of ID of additional variables
     Hijacked(FiniteElement* const& element_pt,
              const int& face_index,
@@ -151,7 +151,7 @@ namespace oomph
     }
 
 
-    /// \short Hijack the i-th value stored at internal data n.
+    ///  Hijack the i-th value stored at internal data n.
     /// Optionally return a custom-made (copied) data object that contains only
     /// the hijacked value. This can be used as the input to other elements.
     /// Note that the calling program assumes responsibility for this
@@ -180,7 +180,7 @@ namespace oomph
     }
 
 
-    /// \short Hijack the i-th value stored at external data n.
+    ///  Hijack the i-th value stored at external data n.
     /// Optionally return a custom-made (copied) data object that contains only
     /// the hijacked value. Note that the calling program assumes
     /// responsibility for this data object and must clean it up.
@@ -206,7 +206,7 @@ namespace oomph
       return temp_data_pt;
     }
 
-    /// \short Hijack the i-th value stored at node n.
+    ///  Hijack the i-th value stored at node n.
     /// Optionally return a custom-made (copied) data object that contains only
     /// the hijacked value. Once again, the calling program must
     /// clean up the allocated Data object.
@@ -232,7 +232,7 @@ namespace oomph
       return temp_data_pt;
     }
 
-    /// \short Hijack the i-th positional value stored at node n.
+    ///  Hijack the i-th positional value stored at node n.
     /// Optionaly return a custom-made (copied) data object that contains only
     /// the hijacked value. Again, responsibility for the memory allocated
     /// lies with the calling function.
@@ -271,7 +271,7 @@ namespace oomph
       return temp_data_pt;
     }
 
-    /// \short Hijack the i-th value stored at the spine that affects
+    ///  Hijack the i-th value stored at the spine that affects
     /// local node n.
     /// Optionally return a custom-made (copied) data object that contains only
     /// the hijacked value. Deletion must be handled at the higher level
@@ -311,7 +311,7 @@ namespace oomph
     }
 
 
-    /// \short Set up the local equation numbers for the underlying element,
+    ///  Set up the local equation numbers for the underlying element,
     /// then set up the local arrays to hold the hijacked variables.
     /// If the boolean argument is true then pointers to the associated degrees
     /// of freedom are stored in the array Dof_pt
@@ -371,7 +371,7 @@ namespace oomph
       }
     }
 
-    /// \short Get the residuals from the underlying element, but then wipe the
+    ///  Get the residuals from the underlying element, but then wipe the
     /// entries in the residual vector that correspond to hijacked
     /// values -- they will be computed by other elements.
     void get_residuals(Vector<double>& residuals)
@@ -388,7 +388,7 @@ namespace oomph
     }
 
 
-    /// \short Get the residuals and Jacobian matrix from the underlying
+    ///  Get the residuals and Jacobian matrix from the underlying
     /// element, but then wipe the entries in the residual vector and the
     /// rows in the Jacobian matrix that correspond to hijacked
     /// values -- they will be computed by other elements.
@@ -417,7 +417,7 @@ namespace oomph
 
 
   //============================================================================
-  ///\short Explicit definition of the face geometry of hijacked elements:
+  /// Explicit definition of the face geometry of hijacked elements:
   /// the same as the face geometry of the underlying element
   //============================================================================
   template<class ELEMENT>
@@ -431,7 +431,7 @@ namespace oomph
   };
 
   //============================================================================
-  ///\short Explicit definition of the face geometry of hijacked elements:
+  /// Explicit definition of the face geometry of hijacked elements:
   /// the same as the face geometry of the underlying element
   //============================================================================
   template<class ELEMENT>
@@ -446,7 +446,7 @@ namespace oomph
   };
 
   //============================================================================
-  ///\short Explicit definition of the face geometry of hijacked elements:
+  /// Explicit definition of the face geometry of hijacked elements:
   /// the same as the face geometry of the underlying element
   //============================================================================
   template<class ELEMENT>

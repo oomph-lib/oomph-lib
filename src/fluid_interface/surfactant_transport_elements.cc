@@ -114,7 +114,7 @@ namespace oomph
   }
 
   //=======================================================================
-  /// \short Overload the Helper function to calculate the residuals and
+  ///  Overload the Helper function to calculate the residuals and
   /// jacobian entries. This particular function ensures that the
   /// additional entries are calculated inside the integration loop
   void SurfactantTransportInterfaceElement::
@@ -353,7 +353,7 @@ namespace oomph
   }
 
   //=======================================================================
-  /// \short Compute the concentration intergated over the surface area
+  ///  Compute the concentration intergated over the surface area
   //=======================================================================
   double SurfactantTransportInterfaceElement::integrate_c()
   {

@@ -410,7 +410,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+  ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
   /// vector and returns the solution of the linear system.
   //============================================================================
   void DenseLU::solve(DoubleMatrixBase* const& matrix_pt,
@@ -530,7 +530,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+  ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
   /// vector and returns the solution of the linear system.
   //=============================================================================
   void DenseLU::solve(DoubleMatrixBase* const& matrix_pt,
@@ -715,11 +715,11 @@ namespace oomph
   //===================================================================
   extern "C"
   {
-    /// \short Function to calculate the number of bytes used to store the
+    ///  Function to calculate the number of bytes used to store the
     /// LU factors
     double get_lu_factor_memory_usage_in_bytes();
 
-    /// \short Function to calculate the number of bytes used in calculating
+    ///  Function to calculate the number of bytes used in calculating
     /// and storing the LU factors
     double get_total_memory_usage_in_bytes();
   }
@@ -730,18 +730,18 @@ namespace oomph
   //===================================================================
   extern "C"
   {
-    /// \short Function to calculate the number of bytes used to store the
+    ///  Function to calculate the number of bytes used to store the
     /// LU factors
     double get_lu_factor_memory_usage_in_bytes_dist();
 
-    /// \short Function to calculate the number of bytes used in calculating
+    ///  Function to calculate the number of bytes used in calculating
     /// and storing the LU factors
     double get_total_memory_usage_in_bytes_dist();
   }
 #endif
 
   //=============================================================================
-  /// \short How much memory do the LU factors take up? In bytes
+  ///  How much memory do the LU factors take up? In bytes
   /// NOTE: This has been scraped from dQuerySpace(...) in dmemory.c in
   ///                 external_src/oomph_superlu_4.3
   //=============================================================================
@@ -769,7 +769,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short How much memory was used in total? In bytes
+  ///  How much memory was used in total? In bytes
   /// NOTE: This has been scraped from dQuerySpace(...) in dmemory.c in
   ///                 external_src/oomph_superlu_4.3
   //=============================================================================
@@ -1775,7 +1775,7 @@ namespace oomph
 
 
   //===================================================================
-  ///\short LU decompose the matrix addressed by matrix_pt by using
+  /// LU decompose the matrix addressed by matrix_pt by using
   /// the SuperLU solver. The resulting matrix factors are stored
   /// internally.
   //===================================================================
@@ -2116,7 +2116,7 @@ namespace oomph
 #endif
 
   //===================================================================
-  ///\short LU decompose the matrix addressed by matrix_pt by using
+  /// LU decompose the matrix addressed by matrix_pt by using
   /// the SuperLU solver. The resulting matrix factors are stored
   /// internally.
   //===================================================================

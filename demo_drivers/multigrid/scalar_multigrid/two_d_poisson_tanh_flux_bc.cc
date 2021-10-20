@@ -91,7 +91,7 @@ namespace TanhSolnForPoisson
 //========================================================================
 namespace Smoother_Factory_Function_Helper
 {
- /// \short Returns a pointer to a Gauss-Seidel Smoother object which can
+ ///  Returns a pointer to a Gauss-Seidel Smoother object which can
  /// be used as a pre- or post-smoother
  Smoother* set_smoother()
  {
@@ -127,20 +127,20 @@ public:
  /// Actions after adapt: Rebuild the mesh of prescribed flux elements
  void actions_after_adapt();
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ ///  Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where
+ ///  Doc the solution. DocInfo object stores flags/labels for where
  /// the output gets written to
  void doc_solution(DocInfo& doc_info);
 
 private:
 
- /// \short Create Poisson flux elements on the b-th boundary of the
+ ///  Create Poisson flux elements on the b-th boundary of the
  /// problem's mesh
  void create_flux_elements(const unsigned& b);
 
@@ -150,7 +150,7 @@ private:
  /// Build and set multgrid solver
  void set_multigrid_solver();
 
- /// \short Pointer to the bulk mesh. Overloads the pure virtual function in
+ ///  Pointer to the bulk mesh. Overloads the pure virtual function in
  /// the abstract base class, MGProblem. Must be refineable to allow the
  /// use of refine_base_mesh_as_in_reference_mesh_minus_one() in make_copy()
  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt()
@@ -159,7 +159,7 @@ private:
    return Bulk_mesh_pt;
   } // End of mg_bulk_mesh_pt
 
- /// \short Return a pointer to a new instance of the same problem.
+ ///  Return a pointer to a new instance of the same problem.
  MGProblem* make_new_problem()
   {
    // Make new problem of the FluxPoissonMGProblem class whose template
@@ -556,7 +556,7 @@ void FluxPoissonMGProblem<ELEMENT,MESH>::doc_solution(DocInfo& doc_info)
 ////////////////////////////////////////////////////////////////////////
 
 //======start_of_main=====================================================
-/// \short Demonstrate how to solve 2D Poisson problem with flux boundary
+///  Demonstrate how to solve 2D Poisson problem with flux boundary
 /// conditions.
 //========================================================================
 int main(int argc, char **argv)

@@ -142,7 +142,7 @@ namespace ProblemParameters
 
 
 
- /// \short Get -du/dr (spherical r) for exact solution. Equal to prescribed
+ ///  Get -du/dr (spherical r) for exact solution. Equal to prescribed
  /// flux on inner boundary.
  void exact_minus_dudr(const Vector<double>& x, std::complex<double>& flux)
  {
@@ -263,7 +263,7 @@ public:
   }
 
 
- /// \short Add the element's contribution to its residual vector and
+ ///  Add the element's contribution to its residual vector and
  /// element Jacobian matrix (wrapper)
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -384,7 +384,7 @@ class PMLLayerElement<PMLHelmholtzPointSourceElement<ELEMENT> > :
 
   public:
 
- /// \short Constructor: Call the constructor for the
+ ///  Constructor: Call the constructor for the
  /// appropriate Element
  PMLLayerElement() : PMLLayerElement<ELEMENT>()
   {}
@@ -406,7 +406,7 @@ class PMLLayerElement<
 
   public:
 
- /// \short Constructor: Call the constructor for the
+ ///  Constructor: Call the constructor for the
  /// appropriate Element
  PMLLayerElement() : PMLLayerElement<ELEMENT>()
   {}
@@ -443,7 +443,7 @@ public:
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ ///  Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 
@@ -472,7 +472,7 @@ private:
  /// Create flux elements on inner boundary
  void create_flux_elements_on_inner_boundary();
 
- /// \short Delete boundary face elements and wipe the surface mesh
+ ///  Delete boundary face elements and wipe the surface mesh
  void delete_face_elements(Mesh* const & boundary_mesh_pt)
   {
    // Loop over the surface elements

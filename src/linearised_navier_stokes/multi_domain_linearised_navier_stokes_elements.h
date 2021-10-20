@@ -70,7 +70,7 @@ public:
     ElementWithExternalElement::ignore_external_geometric_data();
   }
 
-  /// \short Overload get_base_flow_u(...) to return the external
+  ///  Overload get_base_flow_u(...) to return the external
   /// element's velocity components at the integration point
   virtual void get_base_flow_u(const double& time,
                                const unsigned& ipt,
@@ -102,7 +102,7 @@ public:
 
   } // End of overloaded get_base_flow_u function
 
-  /// \short Overload get_base_flow_dudx(...) to return the derivatives of
+  ///  Overload get_base_flow_dudx(...) to return the derivatives of
   /// the external element's velocity components w.r.t. global coordinates
   /// at the integration point
   virtual void get_base_flow_dudx(const double& time,
@@ -141,7 +141,7 @@ public:
   } // End of overloaded get_base_flow_dudx function
 
 
-  /// \short Compute the element's residual vector and the Jacobian matrix
+  ///  Compute the element's residual vector and the Jacobian matrix
   void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                         DenseMatrix<double>& jacobian)
   {
@@ -188,7 +188,7 @@ public:
     ElementWithExternalElement::ignore_external_geometric_data();
   }
 
-  /// \short Overload get_base_flow_u(...) to return the external
+  ///  Overload get_base_flow_u(...) to return the external
   /// element's velocity components at the integration point
   virtual void get_base_flow_u(const double& time,
                                const unsigned& ipt,
@@ -220,7 +220,7 @@ public:
 
   } // End of overloaded get_base_flow_u function
 
-  /// \short Overload get_base_flow_dudx(...) to return the derivatives of
+  ///  Overload get_base_flow_dudx(...) to return the derivatives of
   /// the external element's velocity components w.r.t. global coordinates
   /// at the integration point
   virtual void get_base_flow_dudx(const double& time,
@@ -259,7 +259,7 @@ public:
   } // End of overloaded get_base_flow_dudx function
 
 
-  /// \short Compute the element's residual vector and the Jacobian matrix
+  ///  Compute the element's residual vector and the Jacobian matrix
   void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                         DenseMatrix<double>& jacobian)
   {
@@ -279,7 +279,7 @@ public:
 
 
 //======================================================================
-/// \short Build a RefineableLinearisedQTaylorHood element
+///  Build a RefineableLinearisedQTaylorHood element
 /// that inherits from ElementWithExternalElement so that it can
 /// "communicate" with an axisymmetric Navier-Stokes element that
 /// provides the base flow velocities and their derivatives w.r.t.
@@ -307,7 +307,7 @@ public:
     ElementWithExternalElement::ignore_external_geometric_data();
   }
 
-  /// \short Overload get_base_flow_u(...) to return the external
+  ///  Overload get_base_flow_u(...) to return the external
   /// element's velocity components at the integration point
   virtual void get_base_flow_u(const double& time,
                                const unsigned& ipt,
@@ -339,7 +339,7 @@ public:
 
   } // End of overloaded get_base_flow_u function
 
-  /// \short Overload get_base_flow_dudx(...) to return the derivatives of
+  ///  Overload get_base_flow_dudx(...) to return the derivatives of
   /// the external element's velocity components w.r.t. global coordinates
   /// at the integration point
   virtual void get_base_flow_dudx(const double& time,
@@ -378,7 +378,7 @@ public:
   } // End of overloaded get_base_flow_dudx function
 
 
-  /// \short Compute the element's residual vector and the Jacobian matrix
+  ///  Compute the element's residual vector and the Jacobian matrix
   void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                         DenseMatrix<double>& jacobian)
   {
@@ -398,7 +398,7 @@ public:
 
 
 //======================================================================
-/// \short Build a RefineableLinearisedQCrouzeixRaviart element
+///  Build a RefineableLinearisedQCrouzeixRaviart element
 /// that inherits from ElementWithExternalElement so that it can
 /// "communicate" with an axisymmetric Navier-Stokes element that
 /// provides the base flow velocities and their derivatives w.r.t.
@@ -427,7 +427,7 @@ public:
     ElementWithExternalElement::ignore_external_geometric_data();
   }
 
-  /// \short Overload get_base_flow_u(...) to return the external
+  ///  Overload get_base_flow_u(...) to return the external
   /// element's velocity components at the integration point
   virtual void get_base_flow_u(const double& time,
                                const unsigned& ipt,
@@ -459,7 +459,7 @@ public:
 
   } // End of overloaded get_base_flow_u function
 
-  /// \short Overload get_base_flow_dudx(...) to return the derivatives of
+  ///  Overload get_base_flow_dudx(...) to return the derivatives of
   /// the external element's velocity components w.r.t. global coordinates
   /// at the integration point
   virtual void get_base_flow_dudx(const double& time,
@@ -498,7 +498,7 @@ public:
   } // End of overloaded get_base_flow_dudx function
 
 
-  /// \short Compute the element's residual vector and the Jacobian matrix
+  ///  Compute the element's residual vector and the Jacobian matrix
   void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                         DenseMatrix<double>& jacobian)
   {

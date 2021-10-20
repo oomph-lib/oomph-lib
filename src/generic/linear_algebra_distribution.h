@@ -47,7 +47,7 @@
 namespace oomph
 {
   //=============================================================================
-  /// \short Describes the distribution of a distributable linear algebra type
+  ///  Describes the distribution of a distributable linear algebra type
   /// object. Typically this is a container (such as a DoubleVector) or an
   /// operator (e.g Preconditioner or LinearSolver).
   /// This object is used in both serial and parallel implementations. In the
@@ -63,11 +63,11 @@ namespace oomph
   class LinearAlgebraDistribution
   {
   public:
-    /// \short Default Constructor - creates a Distribution that has not been
+    ///  Default Constructor - creates a Distribution that has not been
     /// setup
     LinearAlgebraDistribution() : Comm_pt(0) {}
 
-    /// \short Constructor. Takes the first_row, nrow_local (both for this
+    ///  Constructor. Takes the first_row, nrow_local (both for this
     /// processor) and nrow as arguments. If nrow is not provided
     /// or equal to 0 then it will be computed automatically
     LinearAlgebraDistribution(const OomphCommunicator& comm,
@@ -79,7 +79,7 @@ namespace oomph
       this->build(&comm, first_row_, n_row_local, n_row);
     };
 
-    /// \short Constructor. Takes the number of global rows and uniformly
+    ///  Constructor. Takes the number of global rows and uniformly
     /// distributes them over the processors if distributed = true (default),
     /// if distributed = false then every row is duplicated on every processor
     LinearAlgebraDistribution(const OomphCommunicator& comm,
@@ -90,7 +90,7 @@ namespace oomph
       this->build(&comm, n_row, distributed_);
     };
 
-    /// \short Constructor. Takes the first_row, nrow_local (both for this
+    ///  Constructor. Takes the first_row, nrow_local (both for this
     /// processor) and nrow as arguments. If nrow is not provided
     /// or equal to 0 then it will be computed automatically
     LinearAlgebraDistribution(const OomphCommunicator* const comm_pt,
@@ -102,7 +102,7 @@ namespace oomph
       this->build(comm_pt, first_row_, n_row_local, n_row);
     };
 
-    /// \short Constructor. Takes the number of global rows and uniformly
+    ///  Constructor. Takes the number of global rows and uniformly
     /// distributes them over the processors if distributed = true (default),
     /// if distributed = false then every row is duplicated on every processor
     LinearAlgebraDistribution(const OomphCommunicator* const comm_pt,
@@ -113,21 +113,21 @@ namespace oomph
       this->build(comm_pt, n_row, distributed_);
     };
 
-    /// \short Copy Constructor.
+    ///  Copy Constructor.
     LinearAlgebraDistribution(const LinearAlgebraDistribution& old_dist)
       : Comm_pt(0)
     {
       this->build(old_dist);
     }
 
-    /// \short pointer based copy constructor
+    ///  pointer based copy constructor
     LinearAlgebraDistribution(const LinearAlgebraDistribution* old_dist_pt)
       : Comm_pt(0)
     {
       this->build(old_dist_pt);
     }
 
-    /// \short Destructor
+    ///  Destructor
     ~LinearAlgebraDistribution()
     {
       delete Comm_pt;
@@ -139,7 +139,7 @@ namespace oomph
       this->build(old_dist);
     }
 
-    /// \short Sets the distribution. Takes first_row, nrow_local and
+    ///  Sets the distribution. Takes first_row, nrow_local and
     /// nrow as arguments. If nrow is not provided or equal to
     /// 0 then it is computed automatically
     void build(const OomphCommunicator* const comm_pt,
@@ -147,7 +147,7 @@ namespace oomph
                const unsigned& nrow_local,
                const unsigned& nrow = 0);
 
-    /// \short Build the LinearAlgebraDistribution. if distributed = true
+    ///  Build the LinearAlgebraDistribution. if distributed = true
     /// (default) then uniformly distribute nrow over all processors where
     /// processors 0 holds approximately the first nrow/n_proc, processor
     /// 1 holds the next nrow/n_proc and so on... or if distributed = false
@@ -156,18 +156,18 @@ namespace oomph
                const unsigned& nrow,
                const bool& distributed = true);
 
-    /// \short Copy the argument distribution.
+    ///  Copy the argument distribution.
     /// Also a helper method for the =assignment operator and copy constructor
     void build(const LinearAlgebraDistribution& new_dist);
 
-    /// \short Copy the argument distribution.
+    ///  Copy the argument distribution.
     /// Also a helper method for the =assignment operator and copy constructor
     void build(const LinearAlgebraDistribution* new_dist_pt)
     {
       this->build(*new_dist_pt);
     }
 
-    /// \short clears the distribution
+    ///  clears the distribution
     void clear()
     {
       // delete the communicator
@@ -182,13 +182,13 @@ namespace oomph
       Nrow = 0;
     }
 
-    /// \short access function to the number of global rows.
+    ///  access function to the number of global rows.
     unsigned nrow() const
     {
       return Nrow;
     }
 
-    /// \short access function for the num of local rows on this processor. If
+    ///  access function for the num of local rows on this processor. If
     /// no MPI then Nrow is returned.
     unsigned nrow_local() const
     {
@@ -217,7 +217,7 @@ namespace oomph
 #endif
     }
 
-    /// \short access function for the num of local rows on this processor. If
+    ///  access function for the num of local rows on this processor. If
     /// no MPI the nrow is returned
     unsigned nrow_local(const unsigned& p) const
     {
@@ -256,7 +256,7 @@ namespace oomph
 #endif
     }
 
-    /// \short access function for the first row on this processor. If not
+    ///  access function for the first row on this processor. If not
     /// distributed then this is just zero.
     unsigned first_row() const
     {
@@ -285,7 +285,7 @@ namespace oomph
 #endif
     }
 
-    /// \short access function for the first row on the p-th processor
+    ///  access function for the first row on the p-th processor
     unsigned first_row(const unsigned& p) const
     {
 #ifdef PARANOID
@@ -324,7 +324,7 @@ namespace oomph
 #endif
     }
 
-    /// \short access function to the distributed - indicates whether the
+    ///  access function to the distributed - indicates whether the
     /// distribution is serial or distributed
     bool distributed() const
     {
@@ -348,20 +348,20 @@ namespace oomph
       return true;
     }
 
-    /// \short == Operator
+    ///  == Operator
     bool operator==(const LinearAlgebraDistribution& other_dist) const;
 
-    /// \short != operator
+    ///  != operator
     bool operator!=(const LinearAlgebraDistribution& other_dist) const
     {
       return !(*this == other_dist);
     }
 
-    /// \short << operator
+    ///  << operator
     friend std::ostream& operator<<(std::ostream& stream,
                                     LinearAlgebraDistribution& dist);
 
-    /// \short return the local index corresponding to the global index
+    ///  return the local index corresponding to the global index
     unsigned global_to_local_row_map(const unsigned& global_i) const
     {
 #ifdef PARANOID
@@ -383,7 +383,7 @@ namespace oomph
       return (unsigned)local_i;
     }
 
-    /// \short return the processor rank of the global row number i
+    ///  return the processor rank of the global row number i
     unsigned rank_of_global_row(const unsigned i) const
     {
       unsigned p = 0;
@@ -394,13 +394,13 @@ namespace oomph
       return p;
     }
 
-    /// \short return the nrow_local Vector
+    ///  return the nrow_local Vector
     Vector<unsigned> nrow_local_vector() const
     {
       return Nrow_local;
     }
 
-    /// \short return the first_row Vector
+    ///  return the first_row Vector
     Vector<unsigned> first_row_vector() const
     {
       return First_row;
@@ -427,7 +427,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Base class for any linear algebra object that is distributable.
+  ///  Base class for any linear algebra object that is distributable.
   /// Just contains storage for the LinearAlgebraDistribution object and
   /// access functions
   //=============================================================================
@@ -459,31 +459,31 @@ namespace oomph
       return Distribution_pt;
     }
 
-    /// \short access function to the number of global rows.
+    ///  access function to the number of global rows.
     unsigned nrow() const
     {
       return Distribution_pt->nrow();
     }
 
-    /// \short access function for the num of local rows on this processor.
+    ///  access function for the num of local rows on this processor.
     unsigned nrow_local() const
     {
       return Distribution_pt->nrow_local();
     }
 
-    /// \short access function for the num of local rows on this processor.
+    ///  access function for the num of local rows on this processor.
     unsigned nrow_local(const unsigned& p) const
     {
       return Distribution_pt->nrow_local(p);
     }
 
-    /// \short access function for the first row on this processor
+    ///  access function for the first row on this processor
     unsigned first_row() const
     {
       return Distribution_pt->first_row();
     }
 
-    /// \short access function for the first row on this processor
+    ///  access function for the first row on this processor
     unsigned first_row(const unsigned& p) const
     {
       return Distribution_pt->first_row(p);
@@ -502,14 +502,14 @@ namespace oomph
       return Distribution_pt->built();
     }
 
-    /// \short setup the distribution of this distributable linear algebra
+    ///  setup the distribution of this distributable linear algebra
     /// object
     void build_distribution(const LinearAlgebraDistribution* const dist_pt)
     {
       Distribution_pt->build(dist_pt);
     }
 
-    /// \short setup the distribution of this distributable linear algebra
+    ///  setup the distribution of this distributable linear algebra
     /// object
     void build_distribution(const LinearAlgebraDistribution& dist)
     {
@@ -517,7 +517,7 @@ namespace oomph
     }
 
   protected:
-    /// \short clear the distribution of this distributable linear algebra
+    ///  clear the distribution of this distributable linear algebra
     /// object
     void clear_distribution()
     {
@@ -534,7 +534,7 @@ namespace oomph
   //=============================================================================
   namespace LinearAlgebraDistributionHelpers
   {
-    /// \short Takes a vector of LinearAlgebraDistribution objects and
+    ///  Takes a vector of LinearAlgebraDistribution objects and
     /// concatenates them such that the nrow_local of the out_distribution
     /// is the sum of the nrow_local of all the in_distributions and the number
     /// of global rows of the out_distribution is the sum of the number of

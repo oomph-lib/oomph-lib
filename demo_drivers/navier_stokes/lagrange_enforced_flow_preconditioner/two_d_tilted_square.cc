@@ -121,7 +121,7 @@ namespace Global_Variables
 namespace oomph
 {
 //========================================================================
-/// \short A Sloping Mesh  class.
+///  A Sloping Mesh  class.
 ///
 /// Derived from RectangularQuadMesh:
 /// the same mesh rotated with an angle phi (in radians)
@@ -165,11 +165,11 @@ class TiltedCavityProblem : public Problem
 {
 public:
 
-  /// \short Constructor: Pass number of elements in x and y directions and
+  ///  Constructor: Pass number of elements in x and y directions and
   /// lengths
   TiltedCavityProblem();
 
-  /// \short Update before Newton solve.
+  ///  Update before Newton solve.
   void actions_before_newton_solve()
   {
     // Alias the namespace for convenience
@@ -211,7 +211,7 @@ public:
     } // for  
   }
 
-  /// \short Update after Newton step - document the number of iterations 
+  ///  Update after Newton step - document the number of iterations 
   /// required for the iterative solver to converge.
   void actions_after_newton_step()
   {
@@ -248,7 +248,7 @@ public:
  /// Doc the solution
  void doc_solution();
 
- /// \short Create lagrange elements on boundary b of the Mesh pointed
+ ///  Create lagrange elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the Mesh object pointed to by
  /// surface_mesh_pt
  void create_parall_outflow_lagrange_elements(const unsigned &b,

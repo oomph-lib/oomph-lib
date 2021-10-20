@@ -66,7 +66,7 @@ namespace oomph
   bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements = false;
 
   //====================================================================
-  /// \short Function to describe the local dofs of the element. The ostream
+  ///  Function to describe the local dofs of the element. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -130,7 +130,7 @@ namespace oomph
 
 
   //==================================================================
-  /// \short Allow element to be loaded by fluid on both
+  ///  Allow element to be loaded by fluid on both
   /// sides. (Resizes containers for lookup schemes and initialises
   /// data associated with elements at the "back" of the FSIWallElement
   /// to NULL.

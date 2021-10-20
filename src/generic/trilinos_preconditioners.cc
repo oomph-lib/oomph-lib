@@ -35,7 +35,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Static double that accumulates the preconditioner
+  ///  Static double that accumulates the preconditioner
   /// solve time of all instantiations of this class. Reset
   /// it manually, e.g. after every Newton solve.
   //=============================================================================
@@ -43,7 +43,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Function to set up a preconditioner for the linear system
+  ///  Function to set up a preconditioner for the linear system
   /// defined by matrix_pt. This function must be called before using
   /// preconditioner_solve.
   /// \b NOTE 1. matrix_pt must point to an object of class CRDoubleMatrix or
@@ -93,7 +93,7 @@ namespace oomph
   }
 
   //===========================================================================
-  /// \short Function to setup a preconditioner for the linear system defined
+  ///  Function to setup a preconditioner for the linear system defined
   /// by the oomph-lib oomph_matrix_pt and Epetra epetra_matrix_pt matrices.
   /// This method is called by Trilinos solvers.
   //===========================================================================
@@ -119,7 +119,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short preconditioner_solve - applies the preconditioner to the vector r
+  ///  preconditioner_solve - applies the preconditioner to the vector r
   /// taking distributed oomph-lib vectors (DistributedVector<double>) as
   /// arguments.
   //=============================================================================

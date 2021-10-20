@@ -77,7 +77,7 @@ namespace oomph
                                public virtual SolidFaceElement
   {
   protected:
-    /// \short Pointer to an imposed traction function. Arguments:
+    ///  Pointer to an imposed traction function. Arguments:
     /// Lagrangian coordinate; Eulerian coordinate; outer unit normal;
     /// applied traction. (Not all of the input arguments will be
     /// required for all specific load functions but the list should
@@ -88,7 +88,7 @@ namespace oomph
                             Vector<double>& result);
 
 
-    /// \short Get the traction vector: Pass number of integration point
+    ///  Get the traction vector: Pass number of integration point
     /// (dummy), Lagr. coordinate and normal vector and return the load vector
     /// (not all of the input arguments will be
     /// required for all specific load functions but the list should
@@ -104,7 +104,7 @@ namespace oomph
     }
 
 
-    /// \short Helper function that actually calculates the residuals
+    ///  Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
@@ -113,7 +113,7 @@ namespace oomph
 
 
   public:
-    /// \short Constructor, which takes a "bulk" element and the
+    ///  Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     SolidTractionElement(FiniteElement* const& element_pt,
                          const int& face_index,
@@ -187,7 +187,7 @@ namespace oomph
       this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
     }
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
@@ -195,7 +195,7 @@ namespace oomph
     }
 
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       unsigned n_dim = this->nodal_dimension();
@@ -254,20 +254,20 @@ namespace oomph
       this->write_tecplot_zone_footer(outfile, n_plot);
     }
 
-    /// \short C_style output function
+    ///  C_style output function
     void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
-    /// \short C-style output function
+    ///  C-style output function
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
 
-    /// \short Compute traction vector at specified local coordinate
+    ///  Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
     void traction(const Vector<double>& s, Vector<double>& traction);
@@ -484,7 +484,7 @@ namespace oomph
     /// Destructor should not delete anything
     ~RefineableSolidTractionElement() {}
 
-    /// \short Number of continuously interpolated values are the
+    ///  Number of continuously interpolated values are the
     /// same as those in the bulk element.
     unsigned ncont_interpolated_values() const
     {
@@ -500,7 +500,7 @@ namespace oomph
     }
 
 
-    ///\short This function returns the residuals and the Jacobian
+    /// This function returns the residuals and the Jacobian
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
     {
@@ -518,7 +518,7 @@ namespace oomph
 
 
   protected:
-    /// \short This function returns the residuals for the
+    ///  This function returns the residuals for the
     /// traction function.
     void refineable_fill_in_contribution_to_residuals_solid_traction(
       Vector<double>& residuals);
@@ -783,7 +783,7 @@ namespace oomph
     bool Normal_points_into_fluid;
 
   public:
-    /// \short Constructor: Create element as FSIWallElement (and thus,
+    ///  Constructor: Create element as FSIWallElement (and thus,
     /// by inheritance, a GeomObject) with DIM-1 Lagrangian and DIM
     /// Eulerian coordinates. By default, we assume that the
     /// normal vector computed by the underlying FaceElement
@@ -805,25 +805,25 @@ namespace oomph
       setup_fsi_wall_element(n_lagr, n_dim);
     }
 
-    /// \short Destructor: empty
+    ///  Destructor: empty
     ~FSISolidTractionElement() {}
 
 
-    /// \short Set the normal computed by underlying FaceElement
+    ///  Set the normal computed by underlying FaceElement
     /// to point into the fluid
     void set_normal_pointing_into_fluid()
     {
       Normal_points_into_fluid = true;
     }
 
-    /// \short Set the normal computed by underlying FaceElement
+    ///  Set the normal computed by underlying FaceElement
     /// to point out of the fluid
     void set_normal_pointing_out_of_fluid()
     {
       Normal_points_into_fluid = false;
     }
 
-    /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
+    ///  Derivative of position vector w.r.t. the SolidFiniteElement's
     /// Lagrangian coordinates; evaluated at current time.
     void dposition_dlagrangian_at_local_coordinate(
       const Vector<double>& s, DenseMatrix<double>& drdxi) const
@@ -834,7 +834,7 @@ namespace oomph
     }
 
 
-    /// \short Final overload... Forwards to the version in the FSIWallElement
+    ///  Final overload... Forwards to the version in the FSIWallElement
     virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                   DenseMatrix<double>& jacobian)
     {
@@ -846,7 +846,7 @@ namespace oomph
     }
 
 
-    /// \short Get the load vector: Pass number of the integration point,
+    ///  Get the load vector: Pass number of the integration point,
     /// Lagr. coordinate, Eulerian coordinate (neither of the last two
     /// are used in the FSI implementation of this function!) and normal vector
     /// and return the load vector, taking
@@ -873,7 +873,7 @@ namespace oomph
     } // end of get_traction
 
 
-    /// \short Output function: Note we can only output the traction
+    ///  Output function: Note we can only output the traction
     /// at Gauss points so n_plot is actually ignored.
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -938,7 +938,7 @@ namespace oomph
       }
     }
 
-    /// \short Broken overloaded reference to the traction function pointer.
+    ///  Broken overloaded reference to the traction function pointer.
     /// It doesn't make sense to specify an external
     /// traction.
     virtual void (*&traction_fct_pt())(const Vector<double>& xi,
@@ -955,14 +955,14 @@ namespace oomph
       return this->Traction_fct_pt;
     }
 
-    /// \short The number of "DOF types" that degrees of freedom in this element
+    ///  The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Just the solid degrees of freedom themselves.
     unsigned ndof_types() const
     {
       return 1;
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF types" that this unknown is associated with.
@@ -1045,7 +1045,7 @@ namespace oomph
       public virtual FSIWallElement
   {
   public:
-    /// \short Constructor: Create element as FSIWallElement (and thus,
+    ///  Constructor: Create element as FSIWallElement (and thus,
     /// by inheritance, a GeomObject) with DIM-1 Lagrangian and DIM
     /// Eulerian coordinates. By default, we assume that the
     /// normal vector computed by the underlying FaceElement
@@ -1062,11 +1062,11 @@ namespace oomph
     {
     }
 
-    /// \short Destructor: empty
+    ///  Destructor: empty
     ~RefineableFSISolidTractionElement() {}
 
 
-    /// \short Final overload. Get contributions from refineable solid
+    ///  Final overload. Get contributions from refineable solid
     /// traction element and derivatives from external data
     virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                   DenseMatrix<double>& jacobian)
@@ -1106,7 +1106,7 @@ namespace oomph
       public virtual SolidFaceElement
   {
   public:
-    /// \short Constructor takes a "bulk" element and the
+    ///  Constructor takes a "bulk" element and the
     /// index that identifies which face the FaceElement is supposed
     /// to be attached to. The optional identifier can be used
     /// to distinguish the additional nodal values created by
@@ -1187,7 +1187,7 @@ namespace oomph
     }
 
 
-    /// \short Access to GeomObject that specifies the prescribed
+    ///  Access to GeomObject that specifies the prescribed
     /// boundary displacement; GeomObject is assumed to be
     /// parametrised by the same coordinate that is used as
     /// the boundary coordinate in the bulk solid mesh to which
@@ -1198,7 +1198,7 @@ namespace oomph
     }
 
 
-    /// \short Set GeomObject that specifies the prescribed
+    ///  Set GeomObject that specifies the prescribed
     /// boundary displacement; GeomObject is assumed to be
     /// parametrised by the same coordinate that is used as
     /// the boundary coordinate in the bulk solid mesh to which
@@ -1374,7 +1374,7 @@ namespace oomph
     }
 
 
-    /// \short Fill in contribution to Mass matrix and
+    ///  Fill in contribution to Mass matrix and
     /// Jacobian. There is no contributiont to mass matrix
     /// so simply call the fill_in_contribution_to_jacobian term
     /// Note that the Jacobian is multiplied by minus one to
@@ -1400,7 +1400,7 @@ namespace oomph
     }
 
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Elemental dimension
@@ -1504,7 +1504,7 @@ namespace oomph
     }
 
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
@@ -1512,7 +1512,7 @@ namespace oomph
     }
 
 
-    /// \short Compute square of L2 norm of error between
+    ///  Compute square of L2 norm of error between
     /// prescribed and actual displacement
     double square_of_l2_norm_of_error()
     {
@@ -1671,7 +1671,7 @@ namespace oomph
 
 
   protected:
-    /// \short Helper function to compute the residuals and, if flag==1, the
+    ///  Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
       Vector<double>& residuals,
@@ -1895,7 +1895,7 @@ namespace oomph
     }
 
 
-    /// \short The number of "DOF types" that degrees of freedom in this element
+    ///  The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: We only label the
     /// Lagrange multiplier degrees of freedom (one for each spatial dimension)
     unsigned ndof_types() const
@@ -1904,7 +1904,7 @@ namespace oomph
     }
 
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the dof that this unknown is associated with.
@@ -1954,7 +1954,7 @@ namespace oomph
 
 #ifdef PARANOID
 
-    /// \short Bool to record the number of geom Data that has been
+    ///  Bool to record the number of geom Data that has been
     /// assigned to external data (we're keeping a record to make
     /// sure we're not accidentally wiping more than we assigned). Only
     /// included if compiled with PARANOID switched on.
@@ -1962,21 +1962,21 @@ namespace oomph
 
 #endif
 
-    /// \short GeomObject that specifies the prescribed
+    ///  GeomObject that specifies the prescribed
     /// boundary displacement; GeomObject is assumed to be
     /// parametrised by the same coordinate the is used as
     /// the boundary coordinate in the bulk solid mesh to which
     /// this element is attached.
     GeomObject* Boundary_shape_geom_object_pt;
 
-    /// \short Storage for sub-GeomObject at the integration points
+    ///  Storage for sub-GeomObject at the integration points
     Vector<GeomObject*> Sub_geom_object_pt;
 
-    /// \short Storage for local coordinates in sub-GeomObjects at integration
+    ///  Storage for local coordinates in sub-GeomObjects at integration
     /// points
     Vector<Vector<double>> Zeta_sub_geom_object;
 
-    /// \short Boolean flag to indicate if we're using geometric Data of
+    ///  Boolean flag to indicate if we're using geometric Data of
     /// sub-GeomObjects that make up the (possibly compound) GeomObject
     /// that specifies the boundary shape. Defaults to true.
     bool Sparsify;
@@ -2012,7 +2012,7 @@ namespace oomph
 
   {
   public:
-    /// \short Constructor takes a "bulk" element and the
+    ///  Constructor takes a "bulk" element and the
     /// index that identifies which face the FaceElement is supposed
     /// to be attached to. The optional identifier can be used
     /// to distinguish the additional nodal values created by
@@ -2027,7 +2027,7 @@ namespace oomph
     }
 
 
-    /// \short Number of continuously interpolated values: Same for
+    ///  Number of continuously interpolated values: Same for
     /// all nodes since it's a refineable element
     unsigned ncont_interpolated_values() const
     {
@@ -2058,7 +2058,7 @@ namespace oomph
 
 
   protected:
-    /// \short Helper function to compute the residuals and, if flag==1, the
+    ///  Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
       Vector<double>& residuals,
@@ -2537,7 +2537,7 @@ namespace oomph
       public virtual ElementWithExternalElement
   {
   public:
-    /// \short Function to describe the local dofs of the elements. The ostream
+    ///  Function to describe the local dofs of the elements. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -2552,7 +2552,7 @@ namespace oomph
       describe_nodal_local_dofs(out, current_string);
     }
 
-    /// \short Constructor takes a "bulk" element and the
+    ///  Constructor takes a "bulk" element and the
     /// index that identifies which face the FaceElement is supposed
     /// to be attached to. The optional identifier can be used
     /// to distinguish the additional nodal values created by
@@ -2648,7 +2648,7 @@ namespace oomph
       this->fill_in_jacobian_from_external_interaction_by_fd(jacobian);
     }
 
-    /// \short Fill in contribution to Mass matrix and
+    ///  Fill in contribution to Mass matrix and
     /// Jacobian. There is no contributiont to mass matrix
     /// so simply call the fill_in_contribution_to_jacobian term
     /// Note that the Jacobian is multiplied by minus one to
@@ -2674,7 +2674,7 @@ namespace oomph
     }
 
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Elemental dimension
@@ -2766,7 +2766,7 @@ namespace oomph
     }
 
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
@@ -2775,7 +2775,7 @@ namespace oomph
 
 
   protected:
-    /// \short Helper function to compute the residuals and, if flag==1, the
+    ///  Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
       Vector<double>& residuals,
@@ -2985,7 +2985,7 @@ namespace oomph
     }
 
 
-    /// \short The number of "DOF types" that degrees of freedom in this element
+    ///  The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Just the solid degrees of freedom themselves.
     unsigned ndof_types() const
     {
@@ -2993,7 +2993,7 @@ namespace oomph
     };
 
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the dof that this unknown is associated with.
@@ -3072,7 +3072,7 @@ namespace oomph
 
   {
   public:
-    /// \short Function to describe the local dofs of the element. The ostream
+    ///  Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -3083,7 +3083,7 @@ namespace oomph
     using FSIImposeDisplacementByLagrangeMultiplierElement<
       ELEMENT>::describe_local_dofs;
 
-    /// \short Constructor takes a "bulk" element and the
+    ///  Constructor takes a "bulk" element and the
     /// index that identifies which face the FaceElement is supposed
     /// to be attached to. The optional identifier can be used
     /// to distinguish the additional nodal values created by
@@ -3098,7 +3098,7 @@ namespace oomph
     }
 
 
-    /// \short Number of continuously interpolated values: Same for
+    ///  Number of continuously interpolated values: Same for
     /// all nodes since it's a refineable element
     unsigned ncont_interpolated_values() const
     {
@@ -3128,7 +3128,7 @@ namespace oomph
 
 
   protected:
-    /// \short Helper function to compute the residuals and, if flag==1, the
+    ///  Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
       Vector<double>& residuals,

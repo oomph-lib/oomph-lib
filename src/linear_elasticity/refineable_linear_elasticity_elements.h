@@ -47,7 +47,7 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    /// \short Constructor
+    ///  Constructor
     RefineableLinearElasticityEquations()
       : LinearElasticityEquations<DIM>(),
         RefineableElement(),
@@ -56,7 +56,7 @@ namespace oomph
     }
 
 
-    /// \short Get the function value u in Vector.
+    ///  Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -86,7 +86,7 @@ namespace oomph
       }
     }
 
-    /// \short Get the current interpolated values (displacements).
+    ///  Get the current interpolated values (displacements).
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines),the values Vector sets its own size in here.
@@ -104,7 +104,7 @@ namespace oomph
       return DIM + DIM * (DIM - 1) / 2;
     }
 
-    /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+    ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -208,26 +208,26 @@ namespace oomph
     /// Empty rebuild from sons, no need to reconstruct anything here
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QLinearElasticityElement<DIM, NNODE_1D>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QLinearElasticityElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return NNODE_1D - 1;
     }
 
-    ///  \short No additional hanging node procedures are required
+    ///   No additional hanging node procedures are required
     void further_setup_hanging_nodes() {}
   };
 
@@ -242,7 +242,7 @@ namespace oomph
       public virtual PRefineableQElement<DIM>
   {
   public:
-    /// \short Constructor, simply call the other constructors
+    ///  Constructor, simply call the other constructors
     PRefineableQLinearElasticityElement()
       : RefineableElement(),
         RefineableLinearElasticityEquations<DIM>(),
@@ -278,19 +278,19 @@ namespace oomph
       return 1;
     }
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QLinearElasticityElement<DIM, 2>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QLinearElasticityElement<DIM, 2>::vertex_node_pt(j);
     }
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// - Same order as shape functions.
     // unsigned nrecovery_order()
     // {

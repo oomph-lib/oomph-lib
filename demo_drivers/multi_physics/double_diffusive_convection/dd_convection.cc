@@ -57,14 +57,14 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- /// \short Thermal Rayleigh number, set to be greater than 
+ ///  Thermal Rayleigh number, set to be greater than 
  /// the threshold for linear instability
  double Rayleigh_T =  1800.0;
 
- /// \short Solutal Rayleigh number
+ ///  Solutal Rayleigh number
  double Rayleigh_S = -1000;
 
- /// \short Length of domain
+ ///  Length of domain
  double Lambda = 1.414;
 
  /// Gravity vector
@@ -92,7 +92,7 @@ public:
  /// Destructor. Empty
  ~ConvectionProblem() {}
 
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
@@ -101,7 +101,7 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt(){}
 
- /// \short Actions before the timestep (update the the time-dependent 
+ ///  Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
   {
@@ -117,13 +117,13 @@ public:
     fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
 
- /// \short Doc the solution.
+ ///  Doc the solution.
  void doc_solution();
 
- /// \short Set the boundary conditions
+ ///  Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
- /// \short Overloaded version of the problem's access function to 
+ ///  Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -142,7 +142,7 @@ private:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-/// \short Constructor for convection problem
+///  Constructor for convection problem
 //========================================================================
 template<class ELEMENT>
 ConvectionProblem<ELEMENT>::ConvectionProblem()

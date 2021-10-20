@@ -45,7 +45,7 @@ namespace oomph
   
 
 //===start_of_simple_block_diagonal_preconditioner_class=======================
-/// \short Simple proof-of-concept block diagonal preconditioner for
+///  Simple proof-of-concept block diagonal preconditioner for
 /// demo purposes. There's a much better version in src/generic!
 //=============================================================================
  template<typename MATRIX> 
@@ -87,10 +87,10 @@ namespace oomph
   /// Apply preconditioner to r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
   
-  /// \short Setup the preconditioner 
+  ///  Setup the preconditioner 
   virtual void setup();
   
-  /// \short Add a mesh 
+  ///  Add a mesh 
   void add_mesh(const Mesh* const mesh_pt)
   {
 #ifdef PARANOID
@@ -111,11 +111,11 @@ namespace oomph
   
  private :
   
-  /// \short Vector of preconditioner pointers for storing the 
+  ///  Vector of preconditioner pointers for storing the 
   /// preconditioners for each diagonal block 
   Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
 
-  /// \short Vector of Mesh pointers. We store it here since this
+  ///  Vector of Mesh pointers. We store it here since this
   /// preconditioner is responsible for the DOF ordering, which is
   /// determined by calls to BlockPreconditioner::set_mesh(...).
   Vector<const Mesh*> My_mesh_pt;

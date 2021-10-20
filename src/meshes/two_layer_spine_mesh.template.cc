@@ -204,7 +204,7 @@ namespace oomph
 
 
   //==================================================================
-  /// \short The spacing function for the x co-ordinate, which is the
+  ///  The spacing function for the x co-ordinate, which is the
   /// same as the default function.
   //==================================================================
   template<class ELEMENT>
@@ -220,7 +220,7 @@ namespace oomph
   }
 
   //==================================================================
-  /// \short The spacing function for the y co-ordinates, which splits
+  ///  The spacing function for the y co-ordinates, which splits
   /// the region into two regions (1 and 2), according to the
   /// heights H1 and H2, with Ny1 and Ny2 elements respectively.
   template<class ELEMENT>

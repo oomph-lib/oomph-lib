@@ -43,7 +43,7 @@
 namespace oomph
 {
   //=============================================================================
-  /// \short Functions to create instances of optimal subsidiary operators for
+  ///  Functions to create instances of optimal subsidiary operators for
   /// the PseudoElasticPreconditioner. By default we use hypre for the
   /// the elastic blocks but can use Trilinos ML too.
   //=============================================================================
@@ -51,11 +51,11 @@ namespace oomph
   {
 #ifdef OOMPH_HAS_HYPRE
 
-    /// \short Hypre AMG w/ GS smoothing for the augmented elastic
+    ///  Hypre AMG w/ GS smoothing for the augmented elastic
     /// subsidiary linear systems
     Preconditioner* get_elastic_preconditioner_hypre();
 
-    /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
+    ///  AMG w/ GS smoothing for the augmented elastic subsidiary linear
     /// systems -- calls Hypre version to stay consistent with previous default
     Preconditioner* get_elastic_preconditioner();
 
@@ -63,11 +63,11 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRILINOS
 
-    /// \short TrilinosML smoothing for the augmented elastic
+    ///  TrilinosML smoothing for the augmented elastic
     /// subsidiary linear systems
     Preconditioner* get_elastic_preconditioner_trilinos_ml();
 
-    /// \short CG with diagonal preconditioner for the lagrange multiplier
+    ///  CG with diagonal preconditioner for the lagrange multiplier
     /// subsidiary linear systems.
     Preconditioner* get_lagrange_multiplier_preconditioner();
 #endif
@@ -80,7 +80,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short A subsidiary preconditioner for the pseudo-elastic FSI
+  ///  A subsidiary preconditioner for the pseudo-elastic FSI
   /// preconditioner. Also a stand-alone preconditioner for the problem of
   /// non-linear elasticity subject to prescribed displacement by Lagrange
   /// multiplier.
@@ -98,19 +98,19 @@ namespace oomph
   //=============================================================================
   class PseudoElasticPreconditioner : public BlockPreconditioner<CRDoubleMatrix>
   {
-    /// \short PseudoElasticFSIPreconditioner is a friend to access the private
+    ///  PseudoElasticFSIPreconditioner is a friend to access the private
     /// *_preconditioner_solve(...) method
     friend class PseudoElasticFSIPreconditioner;
 
   public:
-    /// \short This preconditioner includes the option to use subsidiary
+    ///  This preconditioner includes the option to use subsidiary
     /// operators other than SuperLUPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
     /// responsible for the destruction of the subsidiary preconditioners.
     typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
-    /// \short The augmented elasticity system can be preconditioned in one
+    ///  The augmented elasticity system can be preconditioned in one
     /// of four ways.
     /// 0 - Exact preconditioner
     /// 1 - Block diagonal preconditioning
@@ -126,7 +126,7 @@ namespace oomph
       Block_upper_triangular_preconditioner
     };
 
-    /// \short Default (and only) constructor.
+    ///  Default (and only) constructor.
     PseudoElasticPreconditioner()
     {
       // null pointers
@@ -164,7 +164,7 @@ namespace oomph
     /// Setup method for the PseudoElasticPreconditioner.
     void setup();
 
-    /// \short Apply the preconditioner. Method implemented in two
+    ///  Apply the preconditioner. Method implemented in two
     /// other methods (elastic and lagrange multiplier subsidiary
     /// preocnditioner) for the PseudoElasticFSIPreconditioner
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
@@ -173,33 +173,33 @@ namespace oomph
       this->lagrange_multiplier_preconditioner_solve(r, z);
     }
 
-    /// \short Access function to mesh containing the block-preconditionable
+    ///  Access function to mesh containing the block-preconditionable
     /// elastic elements
     void set_elastic_mesh(Mesh* mesh_pt)
     {
       Elastic_mesh_pt = mesh_pt;
     }
 
-    /// \short Access function to mesh containing the block-preconditionable
+    ///  Access function to mesh containing the block-preconditionable
     /// lagrange multiplier elements
     void set_lagrange_multiplier_mesh(Mesh* mesh_pt)
     {
       Lagrange_multiplier_mesh_pt = mesh_pt;
     }
 
-    /// \short Call to use the inf norm of S as scaling
+    ///  Call to use the inf norm of S as scaling
     void enable_inf_norm_of_s_scaling()
     {
       Use_inf_norm_of_s_scaling = true;
     }
 
-    /// \short Call to use no scaling
+    ///  Call to use no scaling
     void disable_inf_norm_of_s_scaling()
     {
       Use_inf_norm_of_s_scaling = false;
     }
 
-    /// \short By default the Lagrange multiplier subsidiary systems are
+    ///  By default the Lagrange multiplier subsidiary systems are
     /// preconditioner with SuperLUPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
@@ -209,7 +209,7 @@ namespace oomph
       Lagrange_multiplier_subsidiary_preconditioner_function_pt = prec_fn;
     }
 
-    /// \short By default the elastic subsidiary systems are
+    ///  By default the elastic subsidiary systems are
     /// preconditioner with SuperLUPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
@@ -219,7 +219,7 @@ namespace oomph
       Elastic_subsidiary_preconditioner_function_pt = prec_fn;
     }
 
-    /// \short Set the type of preconditioner applied to the elastic:
+    ///  Set the type of preconditioner applied to the elastic:
     /// 0 - Exact preconditioner
     /// 1 - Block diagonal preconditioning
     /// 2 - Block upper triangular preconditioner
@@ -231,35 +231,35 @@ namespace oomph
       return E_preconditioner_type;
     }
 
-    /// \short Clears the memory.
+    ///  Clears the memory.
     void clean_up_memory();
 
   private:
-    /// \short Apply the elastic subsidiary preconditioner.
+    ///  Apply the elastic subsidiary preconditioner.
     void elastic_preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    /// \short  Apply the lagrange multiplier subsidiary preconditioner.
+    ///   Apply the lagrange multiplier subsidiary preconditioner.
     void lagrange_multiplier_preconditioner_solve(const DoubleVector& r,
                                                   DoubleVector& z);
 
     /// The scaling. Defaults to infinity norm of S.
     double Scaling;
 
-    /// \short boolean indicating whether the inf-norm of S should be used as
+    ///  boolean indicating whether the inf-norm of S should be used as
     /// scaling. Default = true;
     bool Use_inf_norm_of_s_scaling;
 
-    /// \short An unsigned indicating which method should be used for
+    ///  An unsigned indicating which method should be used for
     /// preconditioning the solid component.
     Elastic_preconditioner_type E_preconditioner_type;
 
-    /// \short the dimension of the problem
+    ///  the dimension of the problem
     unsigned Dim;
 
-    /// \short storage for the preconditioner for the solid system
+    ///  storage for the preconditioner for the solid system
     Preconditioner* Elastic_preconditioner_pt;
 
-    /// \short lagrange multiplier preconditioner pt
+    ///  lagrange multiplier preconditioner pt
     Vector<Preconditioner*> Lagrange_multiplier_preconditioner_pt;
 
     /// The Lagrange multiplier subsidiary preconditioner function pointer
@@ -282,7 +282,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short A subsidiary preconditioner for the pseudo-elastic FSI
+  ///  A subsidiary preconditioner for the pseudo-elastic FSI
   /// preconditioner. Also a stand-alone preconditioner for the problem of
   /// non-linear elasticity subject to prescribed displacement by Lagrange
   /// multiplier..
@@ -301,19 +301,19 @@ namespace oomph
   class PseudoElasticPreconditionerOld
     : public BlockPreconditioner<CRDoubleMatrix>
   {
-    /// \short PseudoElasticFSIPreconditioner is a friend to access the private
+    ///  PseudoElasticFSIPreconditioner is a friend to access the private
     /// *_preconditioner_solve(...) method
     friend class PseudoElasticFSIPreconditioner;
 
   public:
-    /// \short This preconditioner includes the option to use subsidiary
+    ///  This preconditioner includes the option to use subsidiary
     /// operators other than SuperLUPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
     /// responsible for the destruction of the subsidiary preconditioners.
     typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
-    /// \short The augmented elasticity system can be preconditioned in one
+    ///  The augmented elasticity system can be preconditioned in one
     /// of four ways.
     /// 0 - Exact preconditioner
     /// 1 - Block diagonal preconditioning
@@ -329,7 +329,7 @@ namespace oomph
       Block_upper_triangular_preconditioner
     };
 
-    /// \short Default (and only) constructor.
+    ///  Default (and only) constructor.
     PseudoElasticPreconditionerOld()
     {
       // null pointers
@@ -362,7 +362,7 @@ namespace oomph
     /// Setup method for the PseudoElasticPreconditionerOld.
     void setup();
 
-    /// \short Apply the preconditioner. Method implemented in two
+    ///  Apply the preconditioner. Method implemented in two
     /// other methods (elastic and lagrange multiplier subsidiary
     /// preocnditioner) for the PseudoElasticFSIPreconditioner
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
@@ -371,33 +371,33 @@ namespace oomph
       this->lagrange_multiplier_preconditioner_solve(r, z);
     }
 
-    /// \short Access function to mesh containing the block-preconditionable
+    ///  Access function to mesh containing the block-preconditionable
     /// elastic elements
     void set_elastic_mesh(Mesh* mesh_pt)
     {
       Elastic_mesh_pt = mesh_pt;
     }
 
-    /// \short Access function to mesh containing the block-preconditionable
+    ///  Access function to mesh containing the block-preconditionable
     /// lagrange multiplier elements
     void set_lagrange_multiplier_mesh(Mesh* mesh_pt)
     {
       Lagrange_multiplier_mesh_pt = mesh_pt;
     }
 
-    /// \short Call to use the inf norm of S as scaling
+    ///  Call to use the inf norm of S as scaling
     void enable_inf_norm_of_s_scaling()
     {
       Use_inf_norm_of_s_scaling = true;
     }
 
-    /// \short Call to use no scaling
+    ///  Call to use no scaling
     void disable_inf_norm_of_s_scaling()
     {
       Use_inf_norm_of_s_scaling = false;
     }
 
-    /// \short By default the Lagrange multiplier subsidiary systems are
+    ///  By default the Lagrange multiplier subsidiary systems are
     /// preconditioner with SuperLUPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
@@ -407,7 +407,7 @@ namespace oomph
       Lagrange_multiplier_subsidiary_preconditioner_function_pt = prec_fn;
     }
 
-    /// \short By default the elastic subsidiary systems are
+    ///  By default the elastic subsidiary systems are
     /// preconditioner with SuperLUPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
@@ -417,7 +417,7 @@ namespace oomph
       Elastic_subsidiary_preconditioner_function_pt = prec_fn;
     }
 
-    /// \short Set the type of preconditioner applied to the elastic:
+    ///  Set the type of preconditioner applied to the elastic:
     /// 0 - Exact preconditioner
     /// 1 - Block diagonal preconditioning
     /// 2 - Block upper triangular preconditioner
@@ -429,35 +429,35 @@ namespace oomph
       return E_preconditioner_type;
     }
 
-    /// \short Clears the memory.
+    ///  Clears the memory.
     void clean_up_memory();
 
   private:
-    /// \short Apply the elastic subsidiary preconditioner.
+    ///  Apply the elastic subsidiary preconditioner.
     void elastic_preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    /// \short  Apply the lagrange multiplier subsidiary preconditioner.
+    ///   Apply the lagrange multiplier subsidiary preconditioner.
     void lagrange_multiplier_preconditioner_solve(const DoubleVector& r,
                                                   DoubleVector& z);
 
     /// The scaling. Defaults to infinity norm of S.
     double Scaling;
 
-    /// \short boolean indicating whether the inf-norm of S should be used as
+    ///  boolean indicating whether the inf-norm of S should be used as
     /// scaling. Default = true;
     bool Use_inf_norm_of_s_scaling;
 
-    /// \short An unsigned indicating which method should be used for
+    ///  An unsigned indicating which method should be used for
     /// preconditioning the solid component.
     Elastic_preconditioner_type E_preconditioner_type;
 
-    /// \short the dimension of the problem
+    ///  the dimension of the problem
     unsigned Dim;
 
-    /// \short storage for the preconditioner for the solid system
+    ///  storage for the preconditioner for the solid system
     Preconditioner* Elastic_preconditioner_pt;
 
-    /// \short lagrange multiplier preconditioner pt
+    ///  lagrange multiplier preconditioner pt
     Vector<Preconditioner*> Lagrange_multiplier_preconditioner_pt;
 
     /// The Lagrange multiplier subsidary preconditioner function pointer
@@ -496,7 +496,7 @@ namespace oomph
     : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
-    /// \short typedef for a function that allows other preconditioners to be
+    ///  typedef for a function that allows other preconditioners to be
     /// emplyed to solve the subsidiary linear systems.
     /// The function should return a pointer to the requred subsidiary
     /// preconditioner generated using new. This preconditioner is responsible
@@ -531,7 +531,7 @@ namespace oomph
     // Apply the preconditioner
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    /// \short Specify the scaling. Default is 1.0  Must be called before
+    ///  Specify the scaling. Default is 1.0  Must be called before
     /// setup(...).
     double& scaling()
     {
@@ -585,7 +585,7 @@ namespace oomph
     : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
-    /// \short This preconditioner includes the option to use subsidiary
+    ///  This preconditioner includes the option to use subsidiary
     /// operators other than SuperLUPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
@@ -625,7 +625,7 @@ namespace oomph
     /// clean up the memory
     void clean_up_memory();
 
-    /// \short Setup the preconditioner
+    ///  Setup the preconditioner
     void setup();
 
     /// Apply preconditioner to r
@@ -656,7 +656,7 @@ namespace oomph
       Method = 2;
     }
 
-    /// \short Specify the scaling. Default is 1.0  Must be set before
+    ///  Specify the scaling. Default is 1.0  Must be set before
     /// setup(...).
     double& scaling()
     {
@@ -664,7 +664,7 @@ namespace oomph
     }
 
   private:
-    /// \short Vector of SuperLU preconditioner pointers for storing the
+    ///  Vector of SuperLU preconditioner pointers for storing the
     /// preconditioners for each diagonal block
     Vector<PseudoElasticPreconditionerSubsidiaryPreconditionerOld*>
       Diagonal_block_preconditioner_pt;
@@ -693,7 +693,7 @@ namespace oomph
 
   // /*
   //=============================================================================
-  /// \short A helper class for PseudoElasticPreconditioner.
+  ///  A helper class for PseudoElasticPreconditioner.
   ///  Note that this is NOT actually a functioning preconditioner.
   /// We simply derive from this class to get access to the blocks.
   //=============================================================================

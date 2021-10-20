@@ -52,7 +52,7 @@ namespace oomph
     void assign_default_element_gradients();
 
   public:
-    /// \short Constructor: Pass number of elements, length,
+    ///  Constructor: Pass number of elements, length,
     /// pointer to GeomObject that defines the undeformed Eulerian position,
     /// and the timestepper -- defaults to (Steady) default timestepper defined
     /// in the Mesh base class
@@ -62,7 +62,7 @@ namespace oomph
       GeomObject* undef_eulerian_posn_pt,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short Constructor: Pass number of elements, xmin, xmax
+    ///  Constructor: Pass number of elements, xmin, xmax
     /// pointer to GeomObject that defines the undeformed Eulerian position,
     /// and the timestepper -- defaults to (Steady) default timestepper defined
     /// in the Mesh base class

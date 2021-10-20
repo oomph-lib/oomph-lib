@@ -55,7 +55,7 @@ namespace oomph
   class LinearWaveEquations : public virtual FiniteElement
   {
   public:
-    /// \short Function pointer to source function fct(x,f(x)) --
+    ///  Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*LinearWaveSourceFctPt)(const double& time,
                                           const Vector<double>& x,
@@ -70,7 +70,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const LinearWaveEquations&) = delete;
 
-    /// \short Return the index at which the unknown value
+    ///  Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
     /// problems, when there is only one variable, the value that satisfies the
     /// linear wave equation.
@@ -82,7 +82,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short du/dt at local node n.
+    ///  du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
     double du_dt_lin_wave(const unsigned& n) const
     {
@@ -110,7 +110,7 @@ namespace oomph
       return dudt;
     }
 
-    /// \short d^2u/dt^2 at local node n.
+    ///  d^2u/dt^2 at local node n.
     /// Uses suitably interpolated value for hanging nodes.
     double d2u_dt2_lin_wave(const unsigned& n) const
     {
@@ -145,7 +145,7 @@ namespace oomph
       output(outfile, nplot);
     }
 
-    /// \short Output FE representation of soln: x,y,u or x,y,z,u at
+    ///  Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
@@ -157,7 +157,7 @@ namespace oomph
       output(file_pt, nplot);
     }
 
-    /// \short Output FE representation of soln: x,y,u or x,y,z,u at
+    ///  Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& nplot);
 
@@ -166,7 +166,7 @@ namespace oomph
                     const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Output exact soln: x,y,u_exact or x,y,z,u_exact at
+    ///  Output exact soln: x,y,u_exact or x,y,z,u_exact at
     /// nplot^DIM plot points (time-dependent version)
     virtual void output_fct(
       std::ostream& outfile,
@@ -200,7 +200,7 @@ namespace oomph
     }
 
 
-    /// \short Get source term at continous time t and (Eulerian) position x.
+    ///  Get source term at continous time t and (Eulerian) position x.
     /// Virtual so it can be overloaded in derived multiphysics elements.
     inline void get_source_lin_wave(const double& t,
                                     const unsigned& ipt,
@@ -350,12 +350,12 @@ namespace oomph
     }
 
 
-    /// \short Self-test: Return 0 for OK
+    ///  Self-test: Return 0 for OK
     unsigned self_test();
 
 
   protected:
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_lin_wave(
       const Vector<double>& s,
@@ -364,7 +364,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_lin_wave(
       const unsigned& ipt,
@@ -373,7 +373,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    /// \short Compute element residual Vector only (if flag=and/or element
+    ///  Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_residual_contribution_lin_wave(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
@@ -402,13 +402,13 @@ namespace oomph
                              public virtual LinearWaveEquations<DIM>
   {
   private:
-    /// \short Static array of ints to hold number of variables at
+    ///  Static array of ints to hold number of variables at
     /// nodes: Initial_Nvalue[n]
     static const unsigned Initial_Nvalue[];
 
 
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    ///  Constructor: Call constructors for QElement and
     /// LinearWave equations
     QLinearWaveElement() : QElement<DIM, NNODE_1D>(), LinearWaveEquations<DIM>()
     {
@@ -421,35 +421,35 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const QLinearWaveElement<DIM, NNODE_1D>&) = delete;
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///   Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue[n];
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
       LinearWaveEquations<DIM>::output(outfile);
     }
 
-    ///  \short Output function:
+    ///   Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       LinearWaveEquations<DIM>::output(outfile, n_plot);
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u
     void output(FILE* file_pt)
     {
       LinearWaveEquations<DIM>::output(file_pt);
     }
 
-    ///  \short Output function:
+    ///   Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -457,7 +457,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for an exact solution:
+    ///  Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -467,7 +467,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for a time-dependent exact solution.
+    ///  Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
     void output_fct(std::ostream& outfile,
@@ -490,7 +490,7 @@ namespace oomph
                                                      DShape& dtestdx) const;
 
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    ///  Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_lin_wave(
       const unsigned& ipt,
@@ -578,7 +578,7 @@ namespace oomph
     : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };
@@ -596,7 +596,7 @@ namespace oomph
     : public virtual PointElement
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : PointElement() {}
   };

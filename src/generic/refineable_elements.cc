@@ -1048,7 +1048,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Return pointer to the j-th Data item that the object's
+  ///  Return pointer to the j-th Data item that the object's
   /// shape depends on: Positional data of non-hanging nodes and
   /// positional data of master nodes. Recomputed on the fly.
   //========================================================================
@@ -1129,7 +1129,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Specify Data that affects the geometry of the element
+  ///  Specify Data that affects the geometry of the element
   /// by adding the position Data to the set that's passed in.
   /// (This functionality is required in FSI problems; set is used to
   /// avoid double counting). Refineable version includes hanging nodes

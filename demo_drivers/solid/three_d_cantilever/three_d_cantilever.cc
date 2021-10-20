@@ -57,7 +57,7 @@ class RefineableElasticQuarterTubeMesh :
  
 public:
  
- /// \short Constructor: 
+ ///  Constructor: 
  RefineableElasticQuarterTubeMesh(GeomObject* wall_pt,
                                   const Vector<double>& xi_lo,
                                   const double& fract_mid,
@@ -94,7 +94,7 @@ class ElasticQuarterTubeMesh : public virtual QuarterTubeMesh<ELEMENT>,
  
 public:
  
- /// \short Constructor: 
+ ///  Constructor: 
  ElasticQuarterTubeMesh(GeomObject* wall_pt,
                  const Vector<double>& xi_lo,
                  const double& fract_mid,

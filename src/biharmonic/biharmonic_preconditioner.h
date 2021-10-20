@@ -82,7 +82,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Biharmonic Preconditioner - for two dimensional problems
+  ///  Biharmonic Preconditioner - for two dimensional problems
   //=============================================================================
   class BiharmonicPreconditioner : public BlockPreconditioner<CRDoubleMatrix>
   {
@@ -129,13 +129,13 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const BiharmonicPreconditioner&) = delete;
 
-    /// \short Setup the preconditioner
+    ///  Setup the preconditioner
     void setup();
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    /// \short Access function to the preconditioner type \n
+    ///  Access function to the preconditioner type \n
     /// + 0 : exact BBD \n
     /// + 1 : inexact BBD w/ SuperLU \n
     /// + 2 : inexact BBD w/ AMG (Hypre Boomer AMG)
@@ -145,7 +145,7 @@ namespace oomph
       return Preconditioner_type;
     }
 
-    /// \short Access function to the mesh pt for the bulk elements. The mesh
+    ///  Access function to the mesh pt for the bulk elements. The mesh
     /// should only contain BiharmonicElement<2> and
     /// Hijacked<BiharmonicElement<2> > elements
     Mesh*& bulk_element_mesh_pt()
@@ -176,7 +176,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Sub Biharmonic Preconditioner - an exact preconditioner for the
+  ///  Sub Biharmonic Preconditioner - an exact preconditioner for the
   /// 3x3 top left hand corner sub block matrix.
   /// Used as part of the BiharmonicPreconditioner<MATRIX> .
   /// By default this uses the BBD (block-bordered-diagonal/arrow-shaped)
@@ -187,7 +187,7 @@ namespace oomph
     : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
-    /// \short Constructor - for a preconditioner acting as a sub preconditioner
+    ///  Constructor - for a preconditioner acting as a sub preconditioner
     ExactSubBiharmonicPreconditioner(BiharmonicPreconditioner* master_prec_pt,
                                      const bool& retain_all_blocks = false)
       : Retain_all_blocks(retain_all_blocks)
@@ -226,7 +226,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const ExactSubBiharmonicPreconditioner&) = delete;
 
-    /// \short Setup the preconditioner
+    ///  Setup the preconditioner
     void setup();
 
     /// Apply preconditioner to r
@@ -244,7 +244,7 @@ namespace oomph
   };
 
   //=============================================================================
-  /// \short SubBiharmonic Preconditioner  - an inexact preconditioner for the
+  ///  SubBiharmonic Preconditioner  - an inexact preconditioner for the
   /// 3x3 top left hand corner sub block matrix.
   /// Used as part of the BiharmonicPreconditioner<MATRIX>
   //=============================================================================
@@ -252,7 +252,7 @@ namespace oomph
     : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
-    /// \short Constructor for the inexact block preconditioner. \n
+    ///  Constructor for the inexact block preconditioner. \n
     /// This a helper class for BiharmonicPreconditioner and cannot be used
     /// as a standalone preconditioner. \n
     /// master_prec_pt is the pointer to the master BiharmonicPreconditioner.
@@ -321,7 +321,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const InexactSubBiharmonicPreconditioner&) = delete;
 
-    /// \short Setup the preconditioner
+    ///  Setup the preconditioner
     void setup();
 
     /// Apply preconditioner to r
@@ -329,19 +329,19 @@ namespace oomph
 
     //    private:
 
-    /// \short Computes the inexact schur complement of the block J_00 using
+    ///  Computes the inexact schur complement of the block J_00 using
     /// lumping as an approximate inverse of block J_11 and J_22
     /// (where possible)
     void compute_inexact_schur_complement();
 
-    /// \short Pointer to the S00 Schur Complement preconditioner
+    ///  Pointer to the S00 Schur Complement preconditioner
     Preconditioner* S_00_preconditioner_pt;
 
-    /// \short Preconditioner for storing the lumped J_11 matrix
+    ///  Preconditioner for storing the lumped J_11 matrix
     MatrixBasedLumpedPreconditioner<CRDoubleMatrix>*
       Lumped_J_11_preconditioner_pt;
 
-    /// \short Preconditioner for storing the lumped J_22 matrix
+    ///  Preconditioner for storing the lumped J_22 matrix
     MatrixBasedLumpedPreconditioner<CRDoubleMatrix>*
       Lumped_J_22_preconditioner_pt;
 
@@ -351,7 +351,7 @@ namespace oomph
     ///
     CRDoubleMatrix* S_00_pt;
 
-    /// \short booean indicating whether (Hypre BoomerAMG) AMG should be used
+    ///  booean indicating whether (Hypre BoomerAMG) AMG should be used
     /// to solve the S00 subsidiary linear system.
     unsigned Use_amg;
   };

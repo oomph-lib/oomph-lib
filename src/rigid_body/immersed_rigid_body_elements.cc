@@ -28,14 +28,14 @@
 
 namespace oomph
 {
-  /// \short Static default value for physical constants
+  ///  Static default value for physical constants
   /// Zero gives instantaneous force and torque balances --- no solid intertia
   double ImmersedRigidBodyElement::Default_Physical_Constant_Value = 0.0;
 
-  /// \short Static default value for physical ratio
+  ///  Static default value for physical ratio
   double ImmersedRigidBodyElement::Default_Physical_Ratio_Value = 1.0;
 
-  /// \short Static default gravity direction vector
+  ///  Static default gravity direction vector
   Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2, 0.0);
 
   //=======================================================================
@@ -375,7 +375,7 @@ namespace oomph
 
 
   //=======================================================================
-  /// \short Constructor: Specify coordinates of a point inside the hole
+  ///  Constructor: Specify coordinates of a point inside the hole
   /// and a vector of pointers to TriangleMeshPolyLines
   /// that define the boundary segments of the polygon.
   /// Each TriangleMeshPolyLine has its own boundary ID and can contain
@@ -541,7 +541,7 @@ namespace oomph
 
 
   //===============================================================
-  /// \short Update the reference configuration by re-setting the original
+  ///  Update the reference configuration by re-setting the original
   /// position of the vertices to their current ones, re-set the
   /// original position of the centre of mass, and the displacements
   /// and rotations relative to it

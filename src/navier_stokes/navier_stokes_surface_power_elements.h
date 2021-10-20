@@ -66,7 +66,7 @@ namespace oomph
     }
 
 
-    /// \short The "global" intrinsic coordinate of the element when
+    ///  The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     /// This final over-ride is required for cases where the
@@ -80,7 +80,7 @@ namespace oomph
     }
 
 
-    /// \short Get drag force (traction acting on fluid)
+    ///  Get drag force (traction acting on fluid)
     Vector<double> drag_force()
     {
       std::ofstream dummy_file;
@@ -88,7 +88,7 @@ namespace oomph
     }
 
 
-    /// \short Get  drag force (traction acting on fluid)
+    ///  Get  drag force (traction acting on fluid)
     /// Doc in outfile.
     Vector<double> drag_force(std::ofstream& outfile)
     {
@@ -212,7 +212,7 @@ namespace oomph
       return drag;
     }
 
-    /// \short Get integral of instantaneous rate of work done by
+    ///  Get integral of instantaneous rate of work done by
     /// the traction that's exerted onto the fluid.
     double get_rate_of_traction_work()
     {
@@ -221,7 +221,7 @@ namespace oomph
     }
 
 
-    /// \short Get integral of instantaneous rate of work done by
+    ///  Get integral of instantaneous rate of work done by
     /// the traction that's exerted onto the fluid. Doc in outfile.
     double get_rate_of_traction_work(std::ofstream& outfile)
     {
@@ -364,7 +364,7 @@ namespace oomph
     }
 
 
-    /// \short Get integral of instantaneous rate of work done by
+    ///  Get integral of instantaneous rate of work done by
     /// the traction that's exerted onto the fluid, decomposed into pressure
     /// and normal and tangential viscous components.
     void get_rate_of_traction_work_components(double& rate_of_work_integral_p,
@@ -379,7 +379,7 @@ namespace oomph
     }
 
 
-    /// \short Get integral of instantaneous rate of work done by
+    ///  Get integral of instantaneous rate of work done by
     /// the traction that's exerted onto the fluid, decomposed into pressure
     /// and normal and tangential viscous components.  Doc in outfile.
     void get_rate_of_traction_work_components(std::ofstream& outfile,
@@ -559,7 +559,7 @@ namespace oomph
     }
 
 
-    /// \short Get integral of kinetic energy flux
+    ///  Get integral of kinetic energy flux
     double get_kinetic_energy_flux()
     {
       std::ofstream dummy_file;
@@ -567,7 +567,7 @@ namespace oomph
     }
 
 
-    /// \short Get integral of kinetic energy flux and doc
+    ///  Get integral of kinetic energy flux and doc
     double get_kinetic_energy_flux(std::ofstream& outfile)
     {
       // Initialise
@@ -700,7 +700,7 @@ namespace oomph
     }
 
 
-    /// \short Get integral of volume flux
+    ///  Get integral of volume flux
     double get_volume_flux()
     {
       std::ofstream dummy_file;
@@ -708,7 +708,7 @@ namespace oomph
     }
 
 
-    /// \short Get integral of volume flux and doc
+    ///  Get integral of volume flux and doc
     double get_volume_flux(std::ofstream& outfile)
     {
       // Initialise

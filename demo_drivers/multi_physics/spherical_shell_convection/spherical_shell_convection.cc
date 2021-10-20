@@ -89,7 +89,7 @@ public:
   } // end of fix_pressure
 
 
- /// \short Set the boundary conditions
+ ///  Set the boundary conditions
  void set_boundary_conditions(const double &time);
  
  void actions_before_implicit_timestep()
@@ -248,7 +248,7 @@ RefineableSphereConvectionProblem<ELEMENT>::RefineableSphereConvectionProblem()
 
 
 //=========start of set_boundary_conditions===============================
-/// \short Set the boundary conditions so that the inner sphere has
+///  Set the boundary conditions so that the inner sphere has
 /// a constant angular rotation of angular velocity one.
 //========================================================================
 template<class ELEMENT>

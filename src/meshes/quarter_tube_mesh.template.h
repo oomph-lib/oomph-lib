@@ -41,7 +41,7 @@
 namespace oomph
 {
   //====================================================================
-  /// \short 3D quarter tube mesh class.
+  ///  3D quarter tube mesh class.
   /// The domain is specified by the GeomObject that identifies
   /// boundary 3. Non-refineable base version!
   ///
@@ -64,7 +64,7 @@ namespace oomph
   class QuarterTubeMesh : public virtual BrickMeshBase
   {
   public:
-    /// \short Constructor: Pass pointer to geometric object that
+    ///  Constructor: Pass pointer to geometric object that
     /// specifies the wall, start and end coordinates on the
     /// geometric object, and the fraction along
     /// which the dividing line is to be placed, and the timestepper.
@@ -76,7 +76,7 @@ namespace oomph
                     const unsigned& nlayer,
                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    /// \short Destructor: empty
+    ///  Destructor: empty
     virtual ~QuarterTubeMesh()
     {
       delete Domain_pt;
@@ -94,7 +94,7 @@ namespace oomph
       return Domain_pt;
     }
 
-    /// \short Function pointer for function that squashes
+    ///  Function pointer for function that squashes
     /// the outer macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value (defined in the underlying Domain object)
@@ -104,7 +104,7 @@ namespace oomph
     }
 
 
-    /// \short Function pointer for function for axial spacing
+    ///  Function pointer for function for axial spacing
     virtual QuarterTubeDomain::AxialSpacingFctPt& axial_spacing_fct_pt()
     {
       return Domain_pt->axial_spacing_fct_pt();
@@ -161,7 +161,7 @@ namespace oomph
 
   {
   public:
-    /// \short Constructor for adaptive deformable quarter tube mesh class.
+    ///  Constructor for adaptive deformable quarter tube mesh class.
     /// The domain is specified by the GeomObject that
     /// identifies boundary 3. Pass pointer to geometric object that
     /// specifies the wall, start and end coordinates on the
@@ -217,7 +217,7 @@ namespace oomph
 #endif
     }
 
-    /// \short Destructor: empty
+    ///  Destructor: empty
     virtual ~RefineableQuarterTubeMesh() {}
   };
 
@@ -239,7 +239,7 @@ namespace oomph
       public virtual RefineableQuarterTubeMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass pointer to geometric object, start and
+    ///  Constructor: Pass pointer to geometric object, start and
     /// end coordinates on the geometric object and the fraction along
     /// which the dividing line is to be placed when updating the nodal
     /// positions, and timestepper (defaults to (Steady) default timestepper
@@ -288,10 +288,10 @@ namespace oomph
       this->setup_macro_element_node_update();
     }
 
-    /// \short Destructor: empty
+    ///  Destructor: empty
     virtual ~MacroElementNodeUpdateRefineableQuarterTubeMesh() {}
 
-    /// \short Resolve mesh update: Update current nodal
+    ///  Resolve mesh update: Update current nodal
     /// positions via sparse MacroElement-based update.
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
     /// so we buffer the case if update_all_solid_nodes is set to
@@ -319,7 +319,7 @@ namespace oomph
     }
 
   private:
-    /// \short Setup all the information that's required for MacroElement-based
+    ///  Setup all the information that's required for MacroElement-based
     /// node update: Tell the elements that their geometry depends on the
     /// geometric object that parametrises the wall
     void setup_macro_element_node_update()
@@ -378,7 +378,7 @@ namespace oomph
 
 
   //====================================================================
-  /// \short Algebraic 3D quarter tube mesh class.
+  ///  Algebraic 3D quarter tube mesh class.
   ///
   /// The mesh boundaries are numbered as follows:
   /// - Boundary 0: "Inflow" cross section; located along the
@@ -438,7 +438,7 @@ namespace oomph
       public RefineableQuarterTubeMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass pointer to geometric object, start and
+    ///  Constructor: Pass pointer to geometric object, start and
     /// end coordinates of the geometric object and the fraction along
     /// the 2nd Lagrangian coordinate at which the dividing line between
     /// region 1 and region 2 is to be placed, and timestepper
@@ -497,7 +497,7 @@ namespace oomph
       return AlgebraicMesh::self_test();
     }
 
-    /// \short Broken version of the QuarterTubeDomain function
+    ///  Broken version of the QuarterTubeDomain function
     /// Function is broken because axial spacing isn't implemented
     /// yet for the Algebraic version of the RefineableQuarterTubeMesh.
     /// Note: this function must be used BEFORE algebraic_node_update(...)
@@ -517,7 +517,7 @@ namespace oomph
       return this->Domain_pt->axial_spacing_fct_pt();
     }
 
-    /// \short Resolve mesh update: Update current nodal
+    ///  Resolve mesh update: Update current nodal
     /// positions via algebraic node update.
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
     /// so we buffer the case if update_all_solid_nodes is set to
@@ -545,7 +545,7 @@ namespace oomph
     }
 
 
-    /// \short Implement the algebraic node update function for a node
+    ///  Implement the algebraic node update function for a node
     /// at time level t (t=0: present; t>0: previous): Update with
     /// the node's first (default) update function.
     void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt)
@@ -590,7 +590,7 @@ namespace oomph
       }
     }
 
-    /// \short Update the node update info for specified algebraic node
+    ///  Update the node update info for specified algebraic node
     /// following any spatial mesh adaptation.
     void update_node_update(AlgebraicNode*& node_pt)
     {
@@ -624,24 +624,24 @@ namespace oomph
     /// Fractional height of central region
     double Lambda_y;
 
-    /// \short Algebraic update function for a node that is located
+    ///  Algebraic update function for a node that is located
     /// in the central region
     void node_update_central_region(const unsigned& t, AlgebraicNode*& node_pt);
 
-    /// \short Algebraic update function for a node that is located
+    ///  Algebraic update function for a node that is located
     /// in the lower-right region
     void node_update_lower_right_region(const unsigned& t,
                                         AlgebraicNode*& node_pt);
 
-    /// \short Algebraic update function for a node that is located
+    ///  Algebraic update function for a node that is located
     /// in the upper-left region
     void node_update_upper_left_region(const unsigned& t,
                                        AlgebraicNode*& node_pt);
 
-    /// \short Setup algebraic update operation for all nodes
+    ///  Setup algebraic update operation for all nodes
     void setup_algebraic_node_update();
 
-    /// \short Update algebraic node update function for nodes in
+    ///  Update algebraic node update function for nodes in
     /// the region defined by region_id
     void update_node_update_in_region(AlgebraicNode*& node_pt, int& region_id);
   };

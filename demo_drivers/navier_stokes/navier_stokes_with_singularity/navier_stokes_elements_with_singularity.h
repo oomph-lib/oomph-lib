@@ -146,7 +146,7 @@ class SingularNavierStokesSolutionElement : public virtual GeneralisedElement
   return internal_data_pt(0)->unpin(0);
  }
  
- /// \short Set pointer to associated wrapped Navier-Stokes element which
+ ///  Set pointer to associated wrapped Navier-Stokes element which
  /// contains the singularity (at local coordinate s). Also specify the 
  /// direction in which the slope of the FE part of the pressure is 
  /// set to zero. (Could also set a velocity derivative to zero but this
@@ -218,7 +218,7 @@ class SingularNavierStokesSolutionElement : public virtual GeneralisedElement
    return (*Velocity_singular_fct_pt)(x);
   }
  
- /// \short Evaluate gradient of velocity singular function at Eulerian 
+ ///  Evaluate gradient of velocity singular function at Eulerian 
  /// position x. grad[i][j] = du_i/dx_j
  Vector<Vector<double> > grad_velocity_singular_function(
   const Vector<double>& x) const
@@ -285,7 +285,7 @@ class SingularNavierStokesSolutionElement : public virtual GeneralisedElement
    return (*Grad_pressure_singular_fct_pt)(x);
   }
  
- /// \short Evaluate velocity singular function (including its amplitude):
+ ///  Evaluate velocity singular function (including its amplitude):
  /// u_bar = C * velocity_singular
  Vector<double> u_bar(const Vector<double>& x)
   {
@@ -308,7 +308,7 @@ class SingularNavierStokesSolutionElement : public virtual GeneralisedElement
    return u;
   }
  
- /// \short Evaluate gradient of velocity singular function
+ ///  Evaluate gradient of velocity singular function
  /// (including its amplitude):
  /// grad_u_bar = C * grad_velocity_singular;
  /// grad[i][j] = du_i/dx_j
@@ -336,7 +336,7 @@ class SingularNavierStokesSolutionElement : public virtual GeneralisedElement
    return grad_u;
   }
  
- /// \short Evaluate pressure singular function (including its amplitude):
+ ///  Evaluate pressure singular function (including its amplitude):
  /// p_bar = C * pressure_singular
   double p_bar(const Vector<double>& x)
  {
@@ -347,7 +347,7 @@ class SingularNavierStokesSolutionElement : public virtual GeneralisedElement
   return c*pressure_singular_function(x);
  }
  
- /// \short Evaluate gradient of pressure singular function
+ ///  Evaluate gradient of pressure singular function
  /// (including its amplitude):
  /// grad_p_bar = C * grad_pressure_singular
  Vector<double> grad_p_bar(const Vector<double>& x)
@@ -439,26 +439,26 @@ class SingularNavierStokesSolutionElement : public virtual GeneralisedElement
    }
  }
  
- /// \short Pointer to wrapped Navier-Stokes element
+ ///  Pointer to wrapped Navier-Stokes element
  WRAPPED_NAVIER_STOKES_ELEMENT* Wrapped_navier_stokes_el_pt;
 
- /// \short Pointer to velocity singular function
+ ///  Pointer to velocity singular function
  NavierStokesVelocitySingularFctPt Velocity_singular_fct_pt;
 
- /// \short Pointer to gradient of velocity singular function;
+ ///  Pointer to gradient of velocity singular function;
  /// grad[i][j] = du_i/dx_j
  NavierStokesGradVelocitySingularFctPt Grad_velocity_singular_fct_pt;
 
- /// \short Pointer to pressure singular function
+ ///  Pointer to pressure singular function
  NavierStokesPressureSingularFctPt Pressure_singular_fct_pt;
 
- /// \short Pointer to gradient of pressure singular function
+ ///  Pointer to gradient of pressure singular function
  NavierStokesGradPressureSingularFctPt Grad_pressure_singular_fct_pt;
 
  /// Local coordinates of singulariity in wrapped Navier-Stokes element
  Vector<double> S_in_wrapped_navier_stokes_element;
  
- /// \short Direction of the derivative used for the residual of the element
+ ///  Direction of the derivative used for the residual of the element
  unsigned* Direction_pt;
 
 // Does singular fct satisfy Stokes eqn?
@@ -568,21 +568,21 @@ public virtual BASIC_NAVIER_STOKES_ELEMENT
 
 
 
- /// \short Impose Dirichlet BC on the d-th component of the velocity
+ ///  Impose Dirichlet BC on the d-th component of the velocity
  /// (including the singular contribution) at the j-th node
  void impose_velocity_dirichlet_bc_on_node(const unsigned& j, const unsigned& d)
  {
   Node_is_subject_to_velocity_dirichlet_bcs[j][d] = true;
  }
  
- /// \short Undo Dirichlet BC on the d-th velocity component (including the
+ ///  Undo Dirichlet BC on the d-th velocity component (including the
  /// singular contribution) of the jth node
  void undo_velocity_dirichlet_bc_on_node(const unsigned& j, const unsigned& d)
  {
   Node_is_subject_to_velocity_dirichlet_bcs[j][d] = false;
  }
  
- /// \short Specify Dirichlet boundary value for the d-th velocity component
+ ///  Specify Dirichlet boundary value for the d-th velocity component
  /// (including the singular contribution) at the j-th local node
  void set_velocity_dirichlet_value_on_node(const unsigned& j,
                                            const unsigned& d,
@@ -604,7 +604,7 @@ public virtual BASIC_NAVIER_STOKES_ELEMENT
   Pressure_dof_is_subject_to_dirichlet_bc[j] = false;
  }
 
- /// \short Specify Dirichlet boundary value for the j-th pressure dof
+ ///  Specify Dirichlet boundary value for the j-th pressure dof
  void set_dirichlet_value_on_pressure_dof(const unsigned& j,
                                           const double& value)
  {
@@ -616,7 +616,7 @@ public virtual BASIC_NAVIER_STOKES_ELEMENT
   <BASIC_NAVIER_STOKES_ELEMENT> >*> c_equation_elements_pt()
   {return C_equation_elements_pt;}
  
- /// \short Add pointer to associated SingularNavierStokesSolutionElement that determines the
+ ///  Add pointer to associated SingularNavierStokesSolutionElement that determines the
  /// value of the amplitude of the singular functions (and gives access
  /// to the singular functions). The unknown amplitude becomes
  /// external Data for this element so assign_eqn_numbers() must be
@@ -682,7 +682,7 @@ public virtual BASIC_NAVIER_STOKES_ELEMENT
    0);
  }
  
- /// \short Add the element's contribution to its residual vector and
+ ///  Add the element's contribution to its residual vector and
  /// element Jacobian matrix (wrapper)
  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
                                        DenseMatrix<double> &jacobian)
@@ -697,7 +697,7 @@ public virtual BASIC_NAVIER_STOKES_ELEMENT
   /* FiniteElement::fill_in_contribution_to_jacobian(residuals,jacobian); */
  }
  
- /// \short Overload the output function 
+ ///  Overload the output function 
  /// x, y, [z,] u, v, [w], p, u_fe, v_fe, [w_fe], p_fe,
  // u_sing, v_sing, [w_sing], p_sing
  void output(std::ostream &outfile,const unsigned &nplot)
@@ -843,7 +843,7 @@ void compute_error(std::ostream &outfile,
 }
 
 
- /// \short Overloaded version of the interpolated velocity solution including
+ ///  Overloaded version of the interpolated velocity solution including
  /// the singular contributions
  inline Vector<double> interpolated_u_nst(const Vector<double> &s) 
   const
@@ -926,14 +926,14 @@ void compute_error(std::ostream &outfile,
 
   private:
 
- /// \short Evaluate i-th u_bar (i-th velocity singular function 
+ ///  Evaluate i-th u_bar (i-th velocity singular function 
  /// incl. the amplitudes) function at Eulerian position x
  Vector<double> u_bar(const unsigned& i,const Vector<double>& x) const
   {
    return C_equation_elements_pt[i]->u_bar(x);
   }
  
- /// \short Evaluate sum of all velocity singular fcts
+ ///  Evaluate sum of all velocity singular fcts
  /// (incl. the amplitude) at Eulerian position x
  Vector<double> u_bar(const Vector<double>& x) const
   {
@@ -955,7 +955,7 @@ void compute_error(std::ostream &outfile,
    return sum;
  }
 
- /// \short Evaluate i-th grad_u_bar (i-th gradient of velocity singular 
+ ///  Evaluate i-th grad_u_bar (i-th gradient of velocity singular 
  /// fct incl. the amplitude) function at Eulerian position x;
  /// grad[i][j] = du_i/dx_j
  Vector<Vector<double> > grad_u_bar(const unsigned& i,
@@ -964,7 +964,7 @@ void compute_error(std::ostream &outfile,
    return C_equation_elements_pt[i]->grad_u_bar(x);
   }
  
- /// \short Evaluate gradient of sum of all velocity singular fcts
+ ///  Evaluate gradient of sum of all velocity singular fcts
  /// (incl. the amplitudes) at Eulerian position x: grad[i][j] = du_i/dx_j
  Vector<Vector<double> > grad_u_bar(const Vector<double>& x) const
   {
@@ -1002,7 +1002,7 @@ void compute_error(std::ostream &outfile,
  }
 
 
- /// \short Evaluate gradient of i-th "raw" velocity singular function at 
+ ///  Evaluate gradient of i-th "raw" velocity singular function at 
  /// Eulerian position x
  Vector<Vector<double> > grad_velocity_singular_function(const unsigned& i, 
                                            const Vector<double>& x) const
@@ -1010,7 +1010,7 @@ void compute_error(std::ostream &outfile,
   return C_equation_elements_pt[i]->grad_velocity_singular_function(x);
  }
 
- /// \short Evaluate i-th pressure singular fct (without the 
+ ///  Evaluate i-th pressure singular fct (without the 
  /// amplitude) at Eulerian position x
  double pressure_singular_function(const unsigned& i,
                                    const Vector<double>& x) const
@@ -1019,14 +1019,14 @@ void compute_error(std::ostream &outfile,
  }
 
 
- /// \short Evaluate i-th p_bar (i-th pressure singular fct (incl. the 
+ ///  Evaluate i-th p_bar (i-th pressure singular fct (incl. the 
  /// amplitude) at Eulerian position x
  double p_bar(const unsigned& i,const Vector<double>& x) const
  {
   return C_equation_elements_pt[i]->p_bar(x);
  }
  
- /// \short Evaluate sum of all pressure singular fcts
+ ///  Evaluate sum of all pressure singular fcts
  /// (incl. the amplitudes) at Eulerian position x
  double p_bar(const Vector<double>& x) const
  {
@@ -1041,7 +1041,7 @@ void compute_error(std::ostream &outfile,
   return sum;
  }
 
- /// \short Return FE representation of velocity solution WITHOUT singular
+ ///  Return FE representation of velocity solution WITHOUT singular
  /// contributions at local coordinate s
  Vector<double> interpolated_u_nst_fe_only
   (const Vector<double> &s) const
@@ -1079,7 +1079,7 @@ void compute_error(std::ostream &outfile,
   }
  
 
- /// \short Return FE representation of pressure solution WITHOUT singular
+ ///  Return FE representation of pressure solution WITHOUT singular
  /// contributions at local coordinate s
  double interpolated_p_nst_fe_only(const Vector<double>& s) const
  {
@@ -1628,25 +1628,25 @@ void fill_in_generic_residual_contribution_wrapped_nst(
 
 
 
-/// \short Vector of pointers to SingularNavierStokesSolutionElement objects
+///  Vector of pointers to SingularNavierStokesSolutionElement objects
 Vector<SingularNavierStokesSolutionElement<NavierStokesElementWithSingularity
 <BASIC_NAVIER_STOKES_ELEMENT> >*> C_equation_elements_pt;
 
-/// \short Vector indicating which velocity component of
+///  Vector indicating which velocity component of
 /// which node is subject to Dirichlet BC
 /// [size = number of nodes; initialised to false]
 Vector<std::vector<bool> > Node_is_subject_to_velocity_dirichlet_bcs;
 
-/// \short Imposed values of velocity component at nodes
+///  Imposed values of velocity component at nodes
 /// that are subject to Dirichlet BC
 /// [size = number of nodes; initialised to zero]
 Vector<Vector<double> > Imposed_velocity_values_at_node;
 
-/// \short Vector indicating which pressure dof is subject to Dirichlet BC
+///  Vector indicating which pressure dof is subject to Dirichlet BC
 /// [size = number of pressure dofs; initialised to false]
 std::vector<bool> Pressure_dof_is_subject_to_dirichlet_bc;
 
-/// \short Imposed value at pressure dofs
+///  Imposed value at pressure dofs
 /// that are subject to Dirichlet BC
 /// [size = number of pressure dof; initialised to zero]
 Vector<double> Imposed_value_at_pressure_dof;

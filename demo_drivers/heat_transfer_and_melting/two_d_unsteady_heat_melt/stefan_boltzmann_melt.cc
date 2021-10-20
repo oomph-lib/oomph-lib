@@ -56,7 +56,7 @@ using namespace std;
 
 
 //======================================================================
-/// \short A class for elements that allow the imposition of (mutual)
+///  A class for elements that allow the imposition of (mutual)
 /// Stefan Boltzmann heat flux on the boundaries of UnsteadyHeat elements.
 /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
 /// policy class.
@@ -70,7 +70,7 @@ class StefanBoltzmannMeltElement :
 public:
 
 
- /// \short Constructor, takes the pointer to the "bulk" element and the
+ ///  Constructor, takes the pointer to the "bulk" element and the
  /// index of the face to be created. Calls the constructors of the 
  /// underlying classes
  StefanBoltzmannMeltElement(FiniteElement* const &bulk_el_pt,
@@ -89,7 +89,7 @@ public:
    BrokenCopy::broken_copy("StefanBoltzmannMeltElement");
   }
  
-  /// \short Specify the value of nodal zeta from the face geometry:
+  ///  Specify the value of nodal zeta from the face geometry:
   /// The "global" intrinsic coordinate of the element when
   /// viewed as part of a geometric object should be given by
   /// the FaceElement representation, by default (final overload)
@@ -119,7 +119,7 @@ class MyIntegral : public Integral
 
 public:
 
- /// \short Constructor: Specify number of uniformly spaced sample points in 
+ ///  Constructor: Specify number of uniformly spaced sample points in 
  /// unit interval
  MyIntegral(const unsigned& n_knot){N_knot=n_knot;}
 
@@ -138,7 +138,7 @@ public:
  /// Number of integration points of the scheme
  unsigned nweight() const {return N_knot;}
 
- /// \short Return coordinate s[j] (j=0) of integration point i -- 
+ ///  Return coordinate s[j] (j=0) of integration point i -- 
  double knot(const unsigned &i, const unsigned &j) const 
   {
    double dx=1.0/double(N_knot);
@@ -638,7 +638,7 @@ Sigma+pow(Theta_0+U0,4.0),0.25)+Theta_0;
 
  }
  
- /// \short Melt flux for exact solution (to test melting without feedback
+ ///  Melt flux for exact solution (to test melting without feedback
  /// with S.B.)
  double melt_flux(const double& t)
  {
@@ -739,7 +739,7 @@ public:
  /// Destructor (empty)
  ~StefanBoltzmannProblem(){}
 
- /// \short Update the problem specs before solve: Update Stefan Boltzmann
+ ///  Update the problem specs before solve: Update Stefan Boltzmann
  /// radiation
  void actions_before_newton_solve()
   {
@@ -754,7 +754,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
  
- /// \short Update the problem specs before next timestep: 
+ ///  Update the problem specs before next timestep: 
  /// Set Dirchlet boundary conditions from exact solution.
  void actions_before_implicit_timestep()
   {
@@ -824,7 +824,7 @@ public:
   }
 
 
- /// \short Create the melt elements and also identify nodes to be pinned
+ ///  Create the melt elements and also identify nodes to be pinned
  /// on inner boundary
  void create_melt_elements()
   {
@@ -925,7 +925,7 @@ public:
 
   }
 
- /// \short Doc the solution. 
+ ///  Doc the solution. 
  void doc_solution();
  
 private:

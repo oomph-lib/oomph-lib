@@ -63,8 +63,14 @@ all:
         # github-hosted webpages
 	../bin/make_index_html_in_demo_driver_dirs.bash
 
+#clean-local:
+#        # Get rid of index.html files in demo_drivers
+#	cd ../demo_drivers; find . -name 'index.html' -exec rm {} \;
 
 EXTRA_DIST += oomph-lib_header.html.template oomph-lib_footer.html.template \
 css js\
 extra_latex_style_files navbar_toggle.js raw_doxygen
 
+junk:
+	my_dir=`pwd`; echo "my_dir: "$$my_dir; cd $(top_builddir)/doc; doc_dir=`pwd`; echo "doc_dir: "$$doc_dir; cd $$my_dir; if [ "$$my_dir" == "$$doc_dir" ]; then echo "blabla"; fi
+#if [ "`pwd`" == "$(top_builddir)/doc" ] ; then echo "in doc"; fi

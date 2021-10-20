@@ -117,7 +117,7 @@ class ElasticRefineableQuarterCircleSectorMesh :
 
 public:
 
- /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ ///  Constructor: Build mesh and copy Eulerian coords to Lagrangian
  /// ones so that the initial configuration is the stress-free one.
  ElasticRefineableQuarterCircleSectorMesh<ELEMENT>(GeomObject* wall_pt,
                                          const double& xi_lo,

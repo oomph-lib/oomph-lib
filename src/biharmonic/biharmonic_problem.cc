@@ -35,7 +35,7 @@
 namespace oomph
 {
   //=============================================================================
-  /// \short Impose a Clamped Edge. Imposes the prescribed dirichlet BCs u and
+  ///  Impose a Clamped Edge. Imposes the prescribed dirichlet BCs u and
   /// du/dn dirichlet BCs by pinning
   //=============================================================================
   template<unsigned DIM>
@@ -287,7 +287,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Imposes a 'free' edge. Imposes the prescribed Neumann BCs
+  ///  Imposes a 'free' edge. Imposes the prescribed Neumann BCs
   /// laplacian(u) and dlaplacian(u)/dn with flux edge elements
   //=============================================================================
   template<unsigned DIM>
@@ -334,7 +334,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short documents the solution, and if an exact solution is provided, then
+  ///  documents the solution, and if an exact solution is provided, then
   /// the error between the numerical and exact solution is presented
   //=============================================================================
   template<unsigned DIM>
@@ -383,7 +383,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Computes the elemental residual vector and the elemental jacobian
+  ///  Computes the elemental residual vector and the elemental jacobian
   /// matrix if JFLAG = 0
   /// Imposes the equations :  du/ds_n = dt/ds_n * ds_t/dt * du/dt
   //=============================================================================
@@ -448,7 +448,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Imposes a solid boundary - no flow into boundary or along boundary
+  ///  Imposes a solid boundary - no flow into boundary or along boundary
   /// v_n = 0 and v_t = 0. User must presribe the streamfunction psi to ensure
   /// dpsi/dt = 0 is imposed at all points on the boundary and not just at the
   /// nodes
@@ -477,7 +477,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Impose a traction free edge - i.e. v_t = 0 or dpsi/dn = 0. In
+  ///  Impose a traction free edge - i.e. v_t = 0 or dpsi/dn = 0. In
   /// general dpsi/dn = 0 can only be imposed using equation elements to set
   /// the DOFs dpsi/ds_n, however in the special case of  dt/ds_n = 0, then
   /// dpsi/ds_n = 0 and can be imposed using pinning - this is handled
@@ -650,7 +650,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Impose a prescribed fluid flow comprising the velocity normal to
+  ///  Impose a prescribed fluid flow comprising the velocity normal to
   /// the boundary (u_imposed_fn[0]) and the velocity tangential to the
   /// boundary (u_imposed_fn[1])
   //=============================================================================
@@ -803,7 +803,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short documents the solution, and if an exact solution is provided, then
+  ///  documents the solution, and if an exact solution is provided, then
   /// the error between the numerical and exact solution is presented
   //=============================================================================
   template<unsigned DIM>

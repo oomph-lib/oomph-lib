@@ -45,7 +45,7 @@
 namespace oomph
 {
   //======================================================================
-  /// \short A class for elements that allow the imposition of an
+  ///  A class for elements that allow the imposition of an
   /// applied flux on the boundaries of UnsteadyHeat elements.
   /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
   /// policy class.
@@ -55,14 +55,14 @@ namespace oomph
                                   public virtual FaceElement
   {
   public:
-    /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
+    ///  Function pointer to the prescribed-flux function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*UnsteadyHeatPrescribedFluxFctPt)(const double& time,
                                                     const Vector<double>& x,
                                                     double& flux);
 
 
-    /// \short Constructor, takes the pointer to the "bulk" element and the
+    ///  Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to be created
     UnsteadyHeatFluxElement(FiniteElement* const& bulk_el_pt,
                             const int& face_index);
@@ -104,7 +104,7 @@ namespace oomph
     }
 
 
-    /// \short Specify the value of nodal zeta from the face geometry:
+    ///  Specify the value of nodal zeta from the face geometry:
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
@@ -123,7 +123,7 @@ namespace oomph
       FaceGeometry<ELEMENT>::output(outfile);
     }
 
-    /// \short Output function -- forward to broken version in FiniteElement
+    ///  Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -137,7 +137,7 @@ namespace oomph
       FaceGeometry<ELEMENT>::output(file_pt);
     }
 
-    /// \short C-style output function -- forward to broken version in
+    ///  C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -146,7 +146,7 @@ namespace oomph
     }
 
   protected:
-    /// \short Function to compute the shape and test functions and to return
+    ///  Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test(const Vector<double>& s,
@@ -187,7 +187,7 @@ namespace oomph
 
 
   private:
-    /// \short Compute the element residual vector.
+    ///  Compute the element residual vector.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_ust_heat_flux(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);

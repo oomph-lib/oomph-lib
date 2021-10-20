@@ -50,7 +50,7 @@ namespace oomph
       public virtual ElementWithDragFunction
   {
   public:
-    ///\short Constructor, which takes a "bulk" element and the value of an
+    /// Constructor, which takes a "bulk" element and the value of an
     /// index describing to which face the element should be attached.
     NavierStokesSurfaceDragTorqueElement(FiniteElement* const& element_pt,
                                          const int& face_index)
@@ -67,7 +67,7 @@ namespace oomph
       this->Centre_of_rotation.resize(this->Dim, 0.0);
     }
 
-    /// \short Set the translation and rotation of the rigid object
+    ///  Set the translation and rotation of the rigid object
     /// as external data
     void set_translation_and_rotation(Data* const& object_data_pt)
     {
@@ -75,14 +75,14 @@ namespace oomph
     }
 
 
-    /// \short Access function for the centre of rotation
+    ///  Access function for the centre of rotation
     double& centre_of_rotation(const unsigned& i)
     {
       return this->Centre_of_rotation[i];
     }
 
 
-    /// \short Function that specifies the drag force and the torque about
+    ///  Function that specifies the drag force and the torque about
     /// the origin
     virtual void get_drag_and_torque(Vector<double>& drag_force,
                                      Vector<double>& drag_torque)
@@ -220,7 +220,7 @@ namespace oomph
     }
 
 
-    /// \short Specify the value of nodal zeta from the face geometry
+    ///  Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
@@ -233,7 +233,7 @@ namespace oomph
     }
 
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Get pointer to assocated bulk element

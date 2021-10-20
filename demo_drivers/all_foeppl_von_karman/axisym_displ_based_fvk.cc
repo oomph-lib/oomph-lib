@@ -94,7 +94,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
  
- /// \short Doc the solution.
+ ///  Doc the solution.
  void doc_solution();
  
 private:

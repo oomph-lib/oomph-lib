@@ -77,7 +77,7 @@ namespace oomph
 namespace oomph
 {
   //=============================================================================
-  /// \short PreconditionerArray -
+  ///  PreconditionerArray -
   /// NOTE - first implementation, a number of assumptions / simplifications
   /// were made:
   /// 1. Only works with CRDoubleMatrices
@@ -123,7 +123,7 @@ namespace oomph
       this->clean_up_memory();
     }
 
-    /// \short Setup the preconditioners. Sets up each preconditioner in the
+    ///  Setup the preconditioners. Sets up each preconditioner in the
     /// array for the corresponding matrix in the vector matrix_pt.
     /// The number of preconditioners in the array is taken to be the length of
     /// prec_pt
@@ -132,12 +132,12 @@ namespace oomph
                                Vector<Preconditioner*> prec_pt,
                                const OomphCommunicator* comm_pt);
 
-    /// \short Applies each preconditioner to the corresponding vector in
+    ///  Applies each preconditioner to the corresponding vector in
     /// r and z
     void solve_preconditioners(const Vector<DoubleVector>& r,
                                Vector<DoubleVector>& z);
 
-    /// \short Clean up memory.
+    ///  Clean up memory.
     void clean_up_memory()
     {
       // delete the preconditioner pt
@@ -178,7 +178,7 @@ namespace oomph
     }
 
   private:
-    /// \short helper method for computing the MPI_Isend and MPI_Irecv tags
+    ///  helper method for computing the MPI_Isend and MPI_Irecv tags
     int compute_tag(const int& nproc,
                     const int& source,
                     const int& dest,
@@ -187,33 +187,33 @@ namespace oomph
       return source + (nproc * dest) + (nproc * nproc * type);
     }
 
-    /// \short the number of preconditioner in the array
+    ///  the number of preconditioner in the array
     unsigned Nprec;
 
     /// The pointer to the local preconditioner on this processor
     Preconditioner* Preconditioner_pt;
 
-    /// \short The first_row component of the distribution of the processors
+    ///  The first_row component of the distribution of the processors
     /// over the preconditioners
     Vector<unsigned> First_proc_for_prec;
 
-    /// \short The nrow_local component of the distribution of the processors
+    ///  The nrow_local component of the distribution of the processors
     /// over the preconditioners
     Vector<unsigned> Nproc_for_prec;
 
-    /// \short Storage (indexed [i][j]) for the first row that will be sent
+    ///  Storage (indexed [i][j]) for the first row that will be sent
     /// from this processor to processor j for preconditioner i
     Vector<Vector<unsigned>> First_row_for_proc;
 
-    /// \short Storage (indexed [i][j]) for the nrow_local that will be sent
+    ///  Storage (indexed [i][j]) for the nrow_local that will be sent
     /// from this processor to processor j for preconditioner i
     Vector<Vector<unsigned>> Nrow_local_for_proc;
 
-    /// \short Storage (indexed [i][j]) for the first row that will be received
+    ///  Storage (indexed [i][j]) for the first row that will be received
     /// by this processor from processor j for preconditioner i
     Vector<Vector<unsigned>> First_row_from_proc;
 
-    /// \short Storage (indexed [i][j]) for the nrow_local that will be
+    ///  Storage (indexed [i][j]) for the nrow_local that will be
     /// received by this processor from processor j for preconditioner i
     Vector<Vector<unsigned>> Nrow_local_from_proc;
 
@@ -231,7 +231,7 @@ namespace oomph
     Vector<LinearAlgebraDistribution*> Distribution_pt;
 #endif
 
-    /// \short the communication method in the setup_preconditioners(...) method
+    ///  the communication method in the setup_preconditioners(...) method
     /// 1. Non-blocking Send with Blocking Recv
     /// 2. MPI_Datatypes with Non-blocking sends and receives
     unsigned Method;

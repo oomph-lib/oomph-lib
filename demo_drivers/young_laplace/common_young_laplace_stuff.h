@@ -187,7 +187,7 @@ namespace GlobalParameters
  // Spine functions
  //----------------
 
- /// \short Spine basis: The position vector to the basis of the spine
+ ///  Spine basis: The position vector to the basis of the spine
  /// as a function of the two coordinates x_1 and x_2, and its
  /// derivatives w.r.t. to these coordinates. 
  /// dspine_B[i][j] = d spine_B[j] / dx_i
@@ -211,7 +211,7 @@ namespace GlobalParameters
  } // End of bspine functions
 
   
- /// \short Spine: The spine vector field as a function of the two 
+ ///  Spine: The spine vector field as a function of the two 
  /// coordinates x_1 and x_2, and its derivatives w.r.t. to these coordinates:
  /// dspine[i][j] = d spine[j] / dx_i
  void spine_function(const Vector<double>& xx, 

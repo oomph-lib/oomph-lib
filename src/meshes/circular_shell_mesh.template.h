@@ -77,7 +77,7 @@ namespace oomph
     }
 
 
-    /// \short Constructor for the mesh -- specify fct that maps axial
+    ///  Constructor for the mesh -- specify fct that maps axial
     ///  Lagr. coordinates to new positions to allow for better resolution of
     /// bending boundary layer
     CircularCylindricalShellMesh(
@@ -100,7 +100,7 @@ namespace oomph
       this->build_mesh(nx, ny, lx, ly);
     }
 
-    /// \short Constructor for the mesh. nx_bl azimuthal layers of
+    ///  Constructor for the mesh. nx_bl azimuthal layers of
     /// elements near the ends are squashed to that axial extent
     /// of the elements changes from lx/nx to delta_bl.
     CircularCylindricalShellMesh(
@@ -125,7 +125,7 @@ namespace oomph
     }
 
 
-    /// \short In all elastic problems, the nodes must be assigned an
+    ///  In all elastic problems, the nodes must be assigned an
     /// undeformed, or reference, position, corresponding to the
     /// stress-free state of the elastic body. This function assigns
     /// the undeformed position for the nodes on the elastic tube
@@ -147,7 +147,7 @@ namespace oomph
                     const double& ly);
 
 
-    /// \short Fct that defines the axial stretching to accomodate
+    ///  Fct that defines the axial stretching to accomodate
     /// bending boundary layers
     double scaled_x(const double& x)
     {
@@ -192,11 +192,11 @@ namespace oomph
     /// Fct pointer to fct that defines the axial stretching fct
     AxialBLStretchingFctPt Axial_bl_stretching_fct_pt;
 
-    /// \short Number of azimuthal element layers that get squashed into
+    ///  Number of azimuthal element layers that get squashed into
     /// each of the the two boundary layers at the ends of the tube
     unsigned Nx_bl;
 
-    /// \short Axial extent of the squashed boundary layer part of the mesh
+    ///  Axial extent of the squashed boundary layer part of the mesh
     /// occupied by Nx_bl elements (at each end of the tube)
     double Delta_bl;
   };

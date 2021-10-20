@@ -340,7 +340,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short Calculate the derivatives of the contravariant
+  ///  Calculate the derivatives of the contravariant
   /// 2nd Piola Kirchhoff stress tensor with respect to the deformed metric
   /// tensor. Arguments are the
   /// covariant undeformed and deformed metric tensor and the
@@ -439,7 +439,7 @@ namespace oomph
 
 
   //=========================================================================
-  /// \short Calculate the derivatives of the contravariant
+  ///  Calculate the derivatives of the contravariant
   /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
   /// with respect to the deformed metric tensor.
   /// Also return the derivatives of the determinant of the
@@ -555,7 +555,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Calculate the derivatives of the contravariant
+  ///  Calculate the derivatives of the contravariant
   /// 2nd Piola Kirchoff stress tensor with respect to the deformed metric
   /// tensor. Also return the derivatives of the generalised dilatation,
   /// \f$ d, \f$ with respect to the deformed metric tensor.
@@ -674,7 +674,7 @@ namespace oomph
 
 
   //=====================================================================
-  /// \short Calculate the contravariant 2nd Piola Kirchhoff
+  ///  Calculate the contravariant 2nd Piola Kirchhoff
   /// stress tensor. Arguments are the
   /// covariant undeformed (stress-free) and deformed metric
   /// tensors, g and G, and the matrix in which to return the stress tensor.

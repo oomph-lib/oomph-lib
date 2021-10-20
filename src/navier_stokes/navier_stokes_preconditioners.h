@@ -97,10 +97,10 @@ namespace oomph
     {
     }
 
-    /// \short Empty virtual destructor
+    ///  Empty virtual destructor
     virtual ~FpPreconditionerAssemblyHandler() {}
 
-    /// \short Return the contribution to the residuals of the element elem_pt
+    ///  Return the contribution to the residuals of the element elem_pt
     void get_residuals(GeneralisedElement* const& elem_pt,
                        Vector<double>& residuals)
     {
@@ -114,7 +114,7 @@ namespace oomph
         ->fill_in_pressure_advection_diffusion_residuals(residuals);
     }
 
-    /// \short Calculate the elemental Jacobian matrix "d equation
+    ///  Calculate the elemental Jacobian matrix "d equation
     /// / d variable" for elem_pt.
     void get_jacobian(GeneralisedElement* const& elem_pt,
                       Vector<double>& residuals,
@@ -147,7 +147,7 @@ namespace oomph
 
 
   //===========================================================================
-  /// \short Auxiliary Problem that can be used to assemble the
+  ///  Auxiliary Problem that can be used to assemble the
   /// pressure advection diffusion matrix needed by the FpPreconditoner
   //===========================================================================
   template<class ELEMENT>
@@ -198,7 +198,7 @@ namespace oomph
     }
 
 
-    /// \short Reset pin status of all values
+    ///  Reset pin status of all values
     void reset_pin_status()
     {
       // Reset pin status for nodes
@@ -251,7 +251,7 @@ namespace oomph
     }
 
 
-    /// \short Pin all non-pressure dofs and (if boolean flag is set to true
+    ///  Pin all non-pressure dofs and (if boolean flag is set to true
     /// also all pressure dofs along domain boundaries -- only used
     /// for validation)
     void pin_all_non_pressure_dofs(
@@ -360,7 +360,7 @@ namespace oomph
     }
 
 
-    /// \short Validate pressure advection diffusion problem and doc exact
+    ///  Validate pressure advection diffusion problem and doc exact
     /// and computed solution in directory specified in DocInfo object
     void validate(DocInfo& doc_info)
     {
@@ -473,7 +473,7 @@ namespace oomph
     }
 
 
-    /// \short Doc solution (only needed during development -- kept alive
+    ///  Doc solution (only needed during development -- kept alive
     /// in case validation is required during code maintenance)
     void doc_solution(DocInfo& doc_info)
     {
@@ -528,7 +528,7 @@ namespace oomph
     /// The spatial dimension
     unsigned Ndim;
 
-    /// \short Pointer to orig problem (required so we can re-assign
+    ///  Pointer to orig problem (required so we can re-assign
     /// eqn numbers)
     Problem* Orig_problem_pt;
 
@@ -543,7 +543,7 @@ namespace oomph
 
 
   //===========================================================================
-  /// \short The least-squares commutator (LSC; formerly BFBT) Navier Stokes
+  ///  The least-squares commutator (LSC; formerly BFBT) Navier Stokes
   /// preconditioner. It uses blocks corresponding to the velocity
   /// and pressure unknowns, i.e. there are a total of 2x2 blocks,
   /// and all velocity components are treated as a single block of unknowns.
@@ -746,7 +746,7 @@ namespace oomph
       return Problem_pt;
     }
 
-    /// \short Accept presence of elements that are not of type
+    ///  Accept presence of elements that are not of type
     /// NavierStokesElementWithDiagonalMassMatrices without issuing a warning.
     void enable_accept_non_NavierStokesElementWithDiagonalMassMatrices_elements()
     {
@@ -754,7 +754,7 @@ namespace oomph
     }
 
 
-    /// \short Do not accept presence of elements that are not of type
+    ///  Do not accept presence of elements that are not of type
     /// NavierStokesElementWithDiagonalMassMatrices without issuing a warning.
     void disable_accept_non_NavierStokesElementWithDiagonalMassMatrices_elements()
     {
@@ -765,7 +765,7 @@ namespace oomph
     /// Setup the preconditioner
     void setup();
 
-    /// \short for some reason we have to remind the compiler that there is a
+    ///  for some reason we have to remind the compiler that there is a
     /// setup() function in Preconditioner base class.
     using Preconditioner::setup;
 
@@ -800,7 +800,7 @@ namespace oomph
       Using_default_p_preconditioner = false;
     }
 
-    /// \short Function to (re-)set pressure matrix preconditioner  (inexact
+    ///  Function to (re-)set pressure matrix preconditioner  (inexact
     /// solver) to SuperLU
     void set_p_superlu_preconditioner()
     {
@@ -836,7 +836,7 @@ namespace oomph
       Use_LSC = false;
     }
 
-    ///\short Function to (re-)set momentum matrix preconditioner (inexact
+    /// Function to (re-)set momentum matrix preconditioner (inexact
     /// solver) to SuperLU
     void set_f_superlu_preconditioner()
     {
@@ -859,22 +859,22 @@ namespace oomph
       Doc_time = false;
     }
 
-    /// \short Helper function to delete preconditioner data.
+    ///  Helper function to delete preconditioner data.
     void clean_up_memory();
 
-    /// \short Use  Robin BC elements for the Fp preconditioner
+    ///  Use  Robin BC elements for the Fp preconditioner
     void enable_robin_for_fp()
     {
       Use_robin_for_fp = true;
     }
 
-    /// \short Don't use Robin BC elements for the Fp preconditioenr
+    ///  Don't use Robin BC elements for the Fp preconditioenr
     void disable_robin_for_fp()
     {
       Use_robin_for_fp = false;
     }
 
-    /// \short Set boolean indicating that we want to pin first pressure
+    ///  Set boolean indicating that we want to pin first pressure
     /// dof in Navier Stokes mesh when
     /// assembling the pressure advection diffusion system for
     /// Fp preconditoner -- needed at zero Reynolds number
@@ -884,7 +884,7 @@ namespace oomph
       Pin_first_pressure_dof_in_press_adv_diff = true;
     }
 
-    /// \short Set boolean indicating that we do not want to pin first pressure
+    ///  Set boolean indicating that we do not want to pin first pressure
     /// dof in Navier Stokes mesh when
     /// assembling the pressure advection diffusion system for
     /// Fp preconditoner -- needed at zero Reynolds number
@@ -894,7 +894,7 @@ namespace oomph
       Pin_first_pressure_dof_in_press_adv_diff = false;
     }
 
-    /// \short Validate auxiliary pressure advection diffusion problem
+    ///  Validate auxiliary pressure advection diffusion problem
     /// in 2D
     template<class ELEMENT>
     void validate(DocInfo& doc_info, Problem* orig_problem_pt)
@@ -904,7 +904,7 @@ namespace oomph
       aux_problem.validate(doc_info);
     }
 
-    /// \short Pin all non-pressure dofs
+    ///  Pin all non-pressure dofs
     void pin_all_non_pressure_dofs()
     {
       // Backup pin status and then pin all non-pressure degrees of freedom
@@ -1102,7 +1102,7 @@ namespace oomph
     }
 
 
-    /// \short Reset pin status of all values
+    ///  Reset pin status of all values
     void reset_pin_status()
     {
       // Reset pin status for nodes
@@ -1172,17 +1172,17 @@ namespace oomph
     /// flag indicating whether the default P preconditioner is used
     bool Using_default_p_preconditioner;
 
-    /// \short Control flag is true if the preconditioner has been setup
+    ///  Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is
     /// called again)
     bool Preconditioner_has_been_setup;
 
-    /// \short Boolean to indicate that presence of elements that are not of
+    ///  Boolean to indicate that presence of elements that are not of
     /// type NavierStokesElementWithDiagonalMassMatrices is acceptable
     /// (suppresses warning that issued otherwise).
     bool Accept_non_NavierStokesElementWithDiagonalMassMatrices_elements;
 
-    /// \short Helper function to assemble the inverse diagonals of the pressure
+    ///  Helper function to assemble the inverse diagonals of the pressure
     /// and velocity mass matrices from the elemental contributions defined in
     /// NavierStokesEquations<DIM>.
     /// If do_both=true, both are computed, otherwise only the velocity
@@ -1193,7 +1193,7 @@ namespace oomph
       CRDoubleMatrix*& inv_v_mass_pt,
       const bool& do_both);
 
-    /// \short Boolean indicating whether the momentum system preconditioner
+    ///  Boolean indicating whether the momentum system preconditioner
     /// is a block preconditioner
     bool F_preconditioner_is_block_preconditioner;
 
@@ -1212,11 +1212,11 @@ namespace oomph
     /// MatrixVectorProduct operator for E = Fp Qp^{-1} (only for Fp variant)
     MatrixVectorProduct* E_mat_vec_pt;
 
-    /// \short the pointer to the mesh of block preconditionable Navier
+    ///  the pointer to the mesh of block preconditionable Navier
     /// Stokes elements.
     Mesh* Navier_stokes_mesh_pt;
 
-    /// \short Flag to indicate if there are multiple element types in the
+    ///  Flag to indicate if there are multiple element types in the
     /// Navier-Stokes mesh.
     bool Allow_multiple_element_type_in_navier_stokes_mesh;
 
@@ -1226,11 +1226,11 @@ namespace oomph
     /// Use Robin BC elements for Fp preconditoner?
     bool Use_robin_for_fp;
 
-    /// \short Map to store original eqn numbers of various Data values when
+    ///  Map to store original eqn numbers of various Data values when
     /// assembling pressure advection diffusion matrix
     std::map<Data*, std::vector<int>> Eqn_number_backup;
 
-    /// \short Boolean indicating if we want to pin first pressure
+    ///  Boolean indicating if we want to pin first pressure
     /// dof in Navier Stokes mesh when
     /// assembling the pressure advection diffusion system for
     /// Fp preconditoner -- needed at zero Reynolds number
@@ -1249,7 +1249,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short The exact Navier Stokes preconditioner. This extracts 2x2 blocks
+  ///  The exact Navier Stokes preconditioner. This extracts 2x2 blocks
   /// (corresponding to the velocity and pressure unknowns) and uses these to
   /// build a single preconditioner matrix for testing purposes.
   /// Iterative solvers should converge in a single step if this is used.

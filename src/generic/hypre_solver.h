@@ -50,11 +50,11 @@ namespace oomph
   //==================================================================
   namespace HypreHelpers
   {
-    /// \short Default for AMG strength (0.25 recommended for 2D problems;
+    ///  Default for AMG strength (0.25 recommended for 2D problems;
     /// larger (0.5-0.75, say) for 3D
     extern double AMG_strength;
 
-    /// \short Default AMG coarsening strategy. Coarsening types include:
+    ///  Default AMG coarsening strategy. Coarsening types include:
     ///  0 = CLJP (parallel coarsening using independent sets)
     ///  1 = classical RS with no boundary treatment (not recommended
     ///      in parallel)
@@ -71,11 +71,11 @@ namespace oomph
     /// AMG interpolation truncation factor
     extern double AMG_truncation; // 0.0;
 
-    /// \short Helper function to check the Hypre error flag, return the
+    ///  Helper function to check the Hypre error flag, return the
     /// message associated with any error, and reset the error flag to zero.
     int check_HYPRE_error_flag(std::ostringstream& message);
 
-    /// \short Helper function to create a HYPRE_IJVector and HYPRE_ParVector.
+    ///  Helper function to create a HYPRE_IJVector and HYPRE_ParVector.
     /// + If no MPI then serial vectors are created
     /// + If MPI and serial input vector then distributed hypre vectors are
     ///   created
@@ -86,7 +86,7 @@ namespace oomph
                                     HYPRE_IJVector& hypre_ij_vector,
                                     HYPRE_ParVector& hypre_par_vector);
 
-    /// \short Helper function to create an empty HYPRE_IJVector and
+    ///  Helper function to create an empty HYPRE_IJVector and
     /// HYPRE_ParVector.
     /// + If no MPI then serial vectors are created
     /// + If MPI and serial distribution then distributed hypre vectors are
@@ -97,14 +97,14 @@ namespace oomph
                              HYPRE_IJVector& hypre_ij_vector,
                              HYPRE_ParVector& hypre_par_vector);
 
-    /// \short Helper function to create a serial HYPRE_IJMatrix and
+    ///  Helper function to create a serial HYPRE_IJMatrix and
     /// HYPRE_ParCSRMatrix from a CRDoubleMatrix
     void create_HYPRE_Matrix(CRDoubleMatrix* oomph_matrix,
                              HYPRE_IJMatrix& hypre_ij_matrix,
                              HYPRE_ParCSRMatrix& hypre_par_matrix,
                              LinearAlgebraDistribution* dist_pt);
 
-    /// \short Helper function to set Euclid options using a command line
+    ///  Helper function to set Euclid options using a command line
     /// like array.
     void euclid_settings_helper(const bool& use_block_jacobi,
                                 const bool& use_row_scaling,
@@ -133,7 +133,7 @@ namespace oomph
   class HypreInterface
   {
   public:
-    /// \short  Constructor
+    ///   Constructor
     HypreInterface()
     {
 #ifdef PARANOID
@@ -250,7 +250,7 @@ namespace oomph
       Hypre_error_messages = false;
     }
 
-    /// \short Enumerated flag to define which Hypre methods are used
+    ///  Enumerated flag to define which Hypre methods are used
     /// CAREFUL: DON'T CHANGE THE ORDER OF THESE!
     enum Hypre_method_types
     {
@@ -287,17 +287,17 @@ namespace oomph
     /// Function deletes all solver data.
     void hypre_clean_up_memory();
 
-    /// \short Function which sets values of First_global_row,
+    ///  Function which sets values of First_global_row,
     /// Last_global_row and other partitioning data and creates the distributed
     /// Hypre matrix (stored in Matrix_ij/Matrix_par) from the CRDoubleMatrix.
     void hypre_matrix_setup(CRDoubleMatrix* matrix_pt);
 
-    /// \short Sets up the data required for to use as an oomph-lib
+    ///  Sets up the data required for to use as an oomph-lib
     /// LinearSolver or Preconditioner. This must be called after
     /// the Hypre matrix has been generated using hypre_matrix_setup(...).
     void hypre_solver_setup();
 
-    /// \short Helper function performs a solve if any solver
+    ///  Helper function performs a solve if any solver
     /// exists.
     void hypre_solve(const DoubleVector& rhs, DoubleVector& solution);
 
@@ -310,16 +310,16 @@ namespace oomph
     /// Tolerance used to terminate solver.
     double Tolerance;
 
-    /// \short Hypre method flag. Valid values are specified in enumeration
+    ///  Hypre method flag. Valid values are specified in enumeration
     unsigned Hypre_method;
 
-    /// \short Preconditioner method flag used with Hypre's PCG,
+    ///  Preconditioner method flag used with Hypre's PCG,
     /// GMRES and BiCGStab in solve(...) or resolve(...). Valid values
     /// are BoomerAMG, Euclid, ParaSails or None (all enumerated above),
     /// for any other value no preconditioner is set.
     unsigned Internal_preconditioner;
 
-    /// \short Used to set the Hypre printing level for AMG
+    ///  Used to set the Hypre printing level for AMG
     /// 0: no printout
     /// 1: print setup information
     /// 2: print solve information
@@ -332,12 +332,12 @@ namespace oomph
     /// Parameter to identify diagonally dominant parts of the matrix in AMG
     double AMG_max_row_sum;
 
-    /// \short Flag to determine whether simple smoothers (determined by the
+    ///  Flag to determine whether simple smoothers (determined by the
     ///  AMG_simple_smoother flag) or complex smoothers (determined by the
     ///  AMG_complex_smoother flag are used in AMG
     bool AMG_using_simple_smoothing;
 
-    /// \short Simple smoothing methods used in BoomerAMG. Relaxation types
+    ///  Simple smoothing methods used in BoomerAMG. Relaxation types
     /// include:
     ///  0 = Jacobi
     ///  1 = Gauss-Seidel, sequential
@@ -350,7 +350,7 @@ namespace oomph
     /// To use these methods set AMG_using_simple_smoothing to true
     unsigned AMG_simple_smoother;
 
-    /// \short Complex smoothing methods used in BoomerAMG. Relaxation types
+    ///  Complex smoothing methods used in BoomerAMG. Relaxation types
     /// are:
     ///  6 = Schwarz
     ///  7 = Pilut
@@ -359,7 +359,7 @@ namespace oomph
     /// To use these methods set AMG_using_simple_smoothing to false
     unsigned AMG_complex_smoother;
 
-    /// \short The number of smoother iterations to apply
+    ///  The number of smoother iterations to apply
     unsigned AMG_smoother_iterations;
 
     /// Damping factor for BoomerAMG smoothed Jacobi or hybrid SOR
@@ -371,7 +371,7 @@ namespace oomph
     /// Interpolation truncation factor for BoomerAMG
     double AMG_truncation;
 
-    /// \short AMG coarsening strategy. Coarsening types include:
+    ///  AMG coarsening strategy. Coarsening types include:
     ///  0 = CLJP (parallel coarsening using independent sets)
     ///  1 = classical RS with no boundary treatment (not recommended
     ///      in parallel)
@@ -385,7 +385,7 @@ namespace oomph
     ///  11= One pass RS on each processor (not recommended)
     unsigned AMG_coarsening;
 
-    /// \short ParaSails symmetry flag, used to inform ParaSails of
+    ///  ParaSails symmetry flag, used to inform ParaSails of
     /// Symmetry of definitenss of problem and type of ParaSails
     /// preconditioner:
     /// 0 = nonsymmetric and/or indefinite problem, nonsymmetric preconditioner
@@ -417,18 +417,18 @@ namespace oomph
     /// Euclid level parameter for ILU(k) factorization
     int Euclid_level;
 
-    /// \short Flag to set the level of printing from Euclid
+    ///  Flag to set the level of printing from Euclid
     /// when the Euclid destructor is called
     /// 0: no printing (default)
     /// 1: prints summary of runtime settings and timings
     /// 2: as 1 plus prints memory usage
     unsigned Euclid_print_level;
 
-    /// \short Used to set the Hypre printing level for the Krylov
+    ///  Used to set the Hypre printing level for the Krylov
     /// subspace solvers
     unsigned Krylov_print_level;
 
-    /// \short Flag to determine if non-zero values of the Hypre error flag
+    ///  Flag to determine if non-zero values of the Hypre error flag
     /// plus Hypre error messages are output to screen at various points
     /// in the solve function, i.e. after:
     /// 1. setting up the Hypre matrix
@@ -440,22 +440,22 @@ namespace oomph
     /// 7. deallocation of solver data
     bool Hypre_error_messages;
 
-    /// \short Internal flag which is true when hypre_setup or hypre_solve
+    ///  Internal flag which is true when hypre_setup or hypre_solve
     /// can delete input matrix.
     bool Delete_input_data;
 
 #ifdef OOMPH_HAS_MPI
-    /// \short Internal flag which tell the solver if the rhs Vector is
+    ///  Internal flag which tell the solver if the rhs Vector is
     /// distributed or not
     bool Using_distributed_rhs;
 
-    /// \short Internal flag which tell the solver if the solution Vector to
+    ///  Internal flag which tell the solver if the solution Vector to
     /// be returned is distributed or not
     bool Returning_distributed_solution;
 #endif
 
   private:
-    /// \short Hypre copies matrix data from oomph-lib's CRDoubleMatrix
+    ///  Hypre copies matrix data from oomph-lib's CRDoubleMatrix
     /// into its own data structures, doubling the memory requirements.
     /// As far as the Hypre solvers are concerned the oomph-lib matrix
     /// is no longer required and could be deleted to save memory.
@@ -464,19 +464,19 @@ namespace oomph
     /// flag from false (its default) to true.
     bool Delete_matrix;
 
-    /// \short The Hypre_IJMatrix version of the matrix used in solve(...),
+    ///  The Hypre_IJMatrix version of the matrix used in solve(...),
     /// resolve(...) or preconditioner_solve(...).
     HYPRE_IJMatrix Matrix_ij;
 
-    /// \short The Hypre_ParCSRMatrix version of the matrix used in solve(...),
+    ///  The Hypre_ParCSRMatrix version of the matrix used in solve(...),
     /// resolve(...) or preconditioner_solve(...).
     HYPRE_ParCSRMatrix Matrix_par;
 
-    /// \short The Hypre solver used in solve(...), resolve(...) or
+    ///  The Hypre solver used in solve(...), resolve(...) or
     /// preconditioner_solve(...). [This is a C structure!]
     HYPRE_Solver Solver;
 
-    /// \short The internal Hypre preconditioner used in conjunction with
+    ///  The internal Hypre preconditioner used in conjunction with
     /// Solver. [This is a C structure!]
     HYPRE_Solver Preconditioner;
 
@@ -513,7 +513,7 @@ namespace oomph
   class HypreSolver : public LinearSolver, public HypreInterface
   {
   public:
-    /// \short  Constructor
+    ///   Constructor
     HypreSolver()
     {
       // Hypre copies matrix data from oomph-lib's CRDoubleMatrix
@@ -539,7 +539,7 @@ namespace oomph
     /// Broken assignment operator.
     void operator=(const HypreSolver&) = delete;
 
-    /// \short Disable resolve function (overloads the LinearSolver
+    ///  Disable resolve function (overloads the LinearSolver
     /// disable_resolve function).
     void disable_resolve()
     {
@@ -565,14 +565,14 @@ namespace oomph
       return Hypre_method;
     }
 
-    /// \short Access function to Internal_preconditioner flag -- specified
+    ///  Access function to Internal_preconditioner flag -- specified
     /// via enumeration.
     unsigned& internal_preconditioner()
     {
       return Internal_preconditioner;
     }
 
-    /// \short Function to select use of 'simple' AMG smoothers as controlled
+    ///  Function to select use of 'simple' AMG smoothers as controlled
     /// by AMG_simple_smoother flag
     void amg_using_simple_smoothing()
     {
@@ -585,7 +585,7 @@ namespace oomph
       return AMG_simple_smoother;
     }
 
-    /// \short Function to select use of 'complex' AMG smoothers as controlled
+    ///  Function to select use of 'complex' AMG smoothers as controlled
     /// by AMG_complex_smoother flag
     void amg_using_complex_smoothing()
     {
@@ -695,35 +695,35 @@ namespace oomph
       Euclid_rowScale = false;
     }
 
-    /// \short Enable use of Block Jacobi
+    ///  Enable use of Block Jacobi
     /// as opposed to PILU
     void enable_euclid_using_BJ()
     {
       Euclid_using_BJ = true;
     }
 
-    /// \short Disable use of Block Jacobi,
+    ///  Disable use of Block Jacobi,
     /// so PILU will be used
     void disable_euclid_using_BJ()
     {
       Euclid_using_BJ = false;
     }
 
-    /// \short Function to switch on ILU(k) factorization for Euclid
+    ///  Function to switch on ILU(k) factorization for Euclid
     /// (default is ILU(k) factorization)
     void euclid_using_ILUK()
     {
       Euclid_using_ILUT = false;
     }
 
-    /// \short Function to switch on ILUT factorization for Euclid
+    ///  Function to switch on ILUT factorization for Euclid
     /// (default is ILU(k) factorization)
     void euclid_using_ILUT()
     {
       Euclid_using_ILUT = true;
     }
 
-    /// \short Function to set the level of printing from Euclid
+    ///  Function to set the level of printing from Euclid
     /// when the Euclid destructor is called
     /// 0: no printing (default)
     /// 1: prints summary of runtime settings and timings
@@ -739,7 +739,7 @@ namespace oomph
       return Krylov_print_level;
     }
 
-    /// \short Hypre copies matrix data from oomph-lib's CRDoubleMatrix
+    ///  Hypre copies matrix data from oomph-lib's CRDoubleMatrix
     /// or DistributedCRDoubleMatrix into its own data structures,
     /// doubling the memory requirements for the matrix.
     /// As far as the Hypre solvers are concerned the oomph-lib matrix
@@ -753,7 +753,7 @@ namespace oomph
       Delete_matrix = true;
     }
 
-    /// \short Hypre copies matrix data from oomph-lib's CRDoubleMatrix
+    ///  Hypre copies matrix data from oomph-lib's CRDoubleMatrix
     /// or DistributedCRDoubleMatrix into its own data structures,
     /// doubling the memory requirements for the matrix.
     /// Calling this function ensures that the matrix is not deleted.
@@ -763,12 +763,12 @@ namespace oomph
     }
 
 
-    /// \short Function which uses problem_pt's get_jacobian(...) function to
+    ///  Function which uses problem_pt's get_jacobian(...) function to
     /// generate a linear system which is then solved. This function deletes
     /// any existing internal data and then generates a new Hypre solver.
     void solve(Problem* const& problem_pt, DoubleVector& solution);
 
-    /// \short Function to solve the linear system defined by matrix_pt
+    ///  Function to solve the linear system defined by matrix_pt
     /// and rhs. This function will delete any existing internal data
     /// and generate a new Hypre solver.
     /// \b Note: The matrix has to be of type CRDoubleMatrix or
@@ -785,7 +785,7 @@ namespace oomph
                const DoubleVector& rhs,
                DoubleVector& solution);
 
-    /// \short Function to resolve a linear system using the existing solver
+    ///  Function to resolve a linear system using the existing solver
     /// data, allowing a solve with a new right hand side vector. This
     /// function must be used after a call to solve(...) with
     /// enable_resolve set to true.
@@ -795,7 +795,7 @@ namespace oomph
     void clean_up_memory();
 
   private:
-    /// \short Hypre copies matrix data from oomph-lib's CRDoubleMatrix
+    ///  Hypre copies matrix data from oomph-lib's CRDoubleMatrix
     /// or DistributedCRDoubleMatrix into its own data structures,
     /// doubling the memory requirements for the matrix.
     /// As far as the Hypre solvers are concerned the oomph-lib matrix
@@ -825,7 +825,7 @@ namespace oomph
   class HyprePreconditioner : public Preconditioner, public HypreInterface
   {
   public:
-    /// \short  Constructor. Provide optional string that is used
+    ///   Constructor. Provide optional string that is used
     /// in annotation of performance
     HyprePreconditioner(const std::string& context_string = "")
     {
@@ -875,13 +875,13 @@ namespace oomph
     /// Broken assignment operator.
     void operator=(const HyprePreconditioner&) = delete;
 
-    /// \short Static double that accumulates the preconditioner
+    ///  Static double that accumulates the preconditioner
     /// solve time of all instantiations of this class. Reset
     /// it manually, e.g. after every Newton solve, using
     /// reset_cumulative_solve_times().
     static double Cumulative_preconditioner_solve_time;
 
-    /// \short Static double that accumulates the preconditioner
+    ///  Static double that accumulates the preconditioner
     /// solve time of all instantiations of this class, labeled by
     /// context string. Reset
     /// it manually, e.g. after every Newton solve, using
@@ -889,13 +889,13 @@ namespace oomph
     static std::map<std::string, double> Context_based_cumulative_solve_time;
 
 
-    /// \short Static unsigned that accumulates the number of preconditioner
+    ///  Static unsigned that accumulates the number of preconditioner
     /// solves of all instantiations of this class. Reset
     /// it manually, e.g. after every Newton solve, using
     /// reset_cumulative_solve_times().
     static unsigned Cumulative_npreconditioner_solve;
 
-    /// \short Static unsigned that accumulates the number of preconditioner
+    ///  Static unsigned that accumulates the number of preconditioner
     /// solves of all instantiations of this class, labeled by
     /// context string. Reset
     /// it manually, e.g. after every Newton solve, using
@@ -903,27 +903,27 @@ namespace oomph
     static std::map<std::string, unsigned>
       Context_based_cumulative_npreconditioner_solve;
 
-    /// \short Static unsigned that stores nrow for the most recent
+    ///  Static unsigned that stores nrow for the most recent
     /// instantiations of this class, labeled by
     /// context string. Reset
     /// it manually, e.g. after every Newton solve, using
     /// reset_cumulative_solve_times().
     static std::map<std::string, unsigned> Context_based_nrow;
 
-    /// \short Report cumulative solve times of all instantiations of this
+    ///  Report cumulative solve times of all instantiations of this
     /// class
     static void report_cumulative_solve_times();
 
-    /// \short Reset cumulative solve times
+    ///  Reset cumulative solve times
     static void reset_cumulative_solve_times();
 
-    /// \short Enable reporting of cumulative solve time in destructor
+    ///  Enable reporting of cumulative solve time in destructor
     void enable_report_my_cumulative_preconditioner_solve_time()
     {
       Report_my_cumulative_preconditioner_solve_time = true;
     }
 
-    /// \short Disable reporting of cumulative solve time in destructor
+    ///  Disable reporting of cumulative solve time in destructor
     void disable_report_my_cumulative_preconditioner_solve_time()
     {
       Report_my_cumulative_preconditioner_solve_time = false;
@@ -947,7 +947,7 @@ namespace oomph
       return Hypre_method;
     }
 
-    /// \short Access function to Internal_preconditioner flag -- specified
+    ///  Access function to Internal_preconditioner flag -- specified
     /// via enumeration.
     unsigned& internal_preconditioner()
     {
@@ -972,7 +972,7 @@ namespace oomph
       return Max_iter;
     }
 
-    /// \short Function to select use of 'simple' AMG smoothers as controlled
+    ///  Function to select use of 'simple' AMG smoothers as controlled
     /// by the flag AMG_simple_smoother
     void amg_using_simple_smoothing()
     {
@@ -985,7 +985,7 @@ namespace oomph
       return AMG_simple_smoother;
     }
 
-    /// \short Function to select use of 'complex' AMG smoothers as controlled
+    ///  Function to select use of 'complex' AMG smoothers as controlled
     /// by the flag AMG_complex_smoother
     void amg_using_complex_smoothing()
     {
@@ -998,7 +998,7 @@ namespace oomph
       return AMG_complex_smoother;
     }
 
-    /// \short Return function for the AMG_using_simple_smoothing_flag
+    ///  Return function for the AMG_using_simple_smoothing_flag
     bool& amg_using_simple_smoothing_flag()
     {
       return AMG_using_simple_smoothing;
@@ -1112,35 +1112,35 @@ namespace oomph
       Euclid_rowScale = false;
     }
 
-    /// \short Enable use of Block Jacobi
+    ///  Enable use of Block Jacobi
     /// as opposed to PILU
     void enable_euclid_using_BJ()
     {
       Euclid_using_BJ = true;
     }
 
-    /// \short Disable use of Block Jacobi,
+    ///  Disable use of Block Jacobi,
     /// so PILU will be used
     void disable_euclid_using_BJ()
     {
       Euclid_using_BJ = false;
     }
 
-    /// \short Function to switch on ILU(k) factorization for Euclid
+    ///  Function to switch on ILU(k) factorization for Euclid
     /// (default is ILU(k) factorization)
     void euclid_using_ILUK()
     {
       Euclid_using_ILUT = false;
     }
 
-    /// \short Function to switch on ILUT factorization for Euclid
+    ///  Function to switch on ILUT factorization for Euclid
     /// (default is ILU(k) factorization)
     void euclid_using_ILUT()
     {
       Euclid_using_ILUT = true;
     }
 
-    /// \short Function to set the level of printing from Euclid
+    ///  Function to set the level of printing from Euclid
     /// when the Euclid destructor is called
     /// 0: no printing (default)
     /// 1: prints summary of runtime settings and timings
@@ -1150,7 +1150,7 @@ namespace oomph
       return Euclid_print_level;
     }
 
-    /// \short Hypre copies matrix data from oomph-lib's CRDoubleMatrix
+    ///  Hypre copies matrix data from oomph-lib's CRDoubleMatrix
     /// or DistributedCRDoubleMatrix into its own data structures,
     /// doubling the memory requirements for the matrix.
     /// As far as the Hypre solvers are concerned the oomph-lib matrix
@@ -1164,7 +1164,7 @@ namespace oomph
       Delete_matrix = true;
     }
 
-    /// \short Hypre copies matrix data from oomph-lib's CRDoubleMatrix
+    ///  Hypre copies matrix data from oomph-lib's CRDoubleMatrix
     /// or DistributedCRDoubleMatrix into its own data structures,
     /// doubling the memory requirements for the matrix.
     /// Calling this function ensures that the matrix is not deleted.
@@ -1173,7 +1173,7 @@ namespace oomph
       Delete_matrix = false;
     }
 
-    /// \short Function to set up a preconditioner for the linear
+    ///  Function to set up a preconditioner for the linear
     /// system defined by matrix_pt. This function is required when
     /// preconditioning and must be called before using the
     /// preconditioner_solve(...) function. This interface allows
@@ -1191,7 +1191,7 @@ namespace oomph
     /// enable_delete_matrix() function.
     void setup();
 
-    /// \short Function applies solver to vector r for preconditioning.
+    ///  Function applies solver to vector r for preconditioning.
     /// This requires a call to setup(...) first.
     /// \b Note: Hypre copies matrix data from oomph-lib's CRDoubleMatrix
     /// or DistributedCRDoubleMatrix into its own data structures,
@@ -1207,7 +1207,7 @@ namespace oomph
     void clean_up_memory();
 
   private:
-    /// \short Hypre copies matrix data from oomph-lib's CRDoubleMatrix
+    ///  Hypre copies matrix data from oomph-lib's CRDoubleMatrix
     /// or DistributedCRDoubleMatrix into its own data structures,
     /// doubling the memory requirements for the matrix.
     /// As far as the Hypre solvers are concerned the oomph-lib matrix
@@ -1220,13 +1220,13 @@ namespace oomph
     // Flag is true to output results of timings
     bool Doc_time;
 
-    /// \short Private double that accumulates the preconditioner
+    ///  Private double that accumulates the preconditioner
     /// solve time of thi instantiation of this class. Is reported
     /// in destructor if Report_my_cumulative_preconditioner_solve_time
     /// is set to true
     double My_cumulative_preconditioner_solve_time;
 
-    /// \short Bool to request report of My_cumulative_preconditioner_solve_time
+    ///  Bool to request report of My_cumulative_preconditioner_solve_time
     /// in destructor
     bool Report_my_cumulative_preconditioner_solve_time;
 
@@ -1244,17 +1244,17 @@ namespace oomph
   //==================================================================
   namespace Hypre_default_settings
   {
-    /// \short Set default parameters for use as preconditioner in
+    ///  Set default parameters for use as preconditioner in
     /// for momentum block in Navier-Stokes problem
     extern void set_defaults_for_navier_stokes_momentum_block(
       HyprePreconditioner* hypre_preconditioner_pt);
 
-    /// \short Set default parameters for use as preconditioner in
+    ///  Set default parameters for use as preconditioner in
     /// 2D Poisson-type problem.
     extern void set_defaults_for_2D_poisson_problem(
       HyprePreconditioner* hypre_preconditioner_pt);
 
-    /// \short Set default parameters for use as preconditioner in
+    ///  Set default parameters for use as preconditioner in
     /// 3D Poisson-type problem.
     extern void set_defaults_for_3D_poisson_problem(
       HyprePreconditioner* hypre_preconditioner_pt);

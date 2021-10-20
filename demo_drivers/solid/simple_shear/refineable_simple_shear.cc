@@ -58,7 +58,7 @@ class RefineableElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
 
 public:
 
- /// \short Constructor: 
+ ///  Constructor: 
  RefineableElasticCubicMesh(const unsigned &nx, const unsigned &ny, 
                             const unsigned &nz,
                             const double &a, const double &b, 
@@ -200,7 +200,7 @@ public:
     mesh_pt()->element_pt());
   }
 
- /// \short Update before solve: We're dealing with a static problem so
+ ///  Update before solve: We're dealing with a static problem so
  /// the nodal positions before the next solve merely serve as
  /// initial conditions. For meshes that are very strongly refined
  /// near the boundary, the update of the displacement boundary

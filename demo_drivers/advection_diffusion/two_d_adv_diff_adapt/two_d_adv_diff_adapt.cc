@@ -112,7 +112,7 @@ public:
  /// Destructor. Empty
  ~RefineableAdvectionDiffusionProblem(){}
 
- /// \short Update the problem specs before solve: Reset boundary conditions
+ ///  Update the problem specs before solve: Reset boundary conditions
  /// to the values from the tanh solution.
  void actions_before_newton_solve();
 
@@ -129,10 +129,10 @@ public:
    Doc_info.number()++;
   }
 
- /// \short Doc the solution.
+ ///  Doc the solution.
  void doc_solution();
 
- /// \short Overloaded version of the problem's access function to 
+ ///  Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -157,7 +157,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for AdvectionDiffusion problem: Pass pointer to 
+///  Constructor for AdvectionDiffusion problem: Pass pointer to 
 /// source function.
 //========================================================================
 template<class ELEMENT>

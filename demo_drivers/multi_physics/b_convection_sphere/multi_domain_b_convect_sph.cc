@@ -91,7 +91,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve (empty; all prescribed
+ ///  Update the problem specs before solve (empty; all prescribed
  /// velocities are constant along their respective boundares, therefore
  /// their FE interpolation onto the newly created nodes is sufficiently
  /// accurate)

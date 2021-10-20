@@ -45,7 +45,7 @@ namespace oomph
   class BrethertonSpineMesh : public SingleLayerSpineMesh<ELEMENT>
   {
   public:
-    /// \short Constructor. Arguments:
+    ///  Constructor. Arguments:
     /// - nx1:   Number of elements along wall in deposited film region
     /// - nx2:   Number of elements along wall in horizontal transition region
     /// - nx3:   Number of elements along wall in channel region
@@ -134,7 +134,7 @@ namespace oomph
       }
     }
 
-    /// \short General node update function implements pure virtual function
+    ///  General node update function implements pure virtual function
     /// defined in SpineMesh base class and performs specific update
     /// actions, depending on the node update fct id stored for each node.
     void spine_node_update(SpineNode* spine_node_pt)
@@ -181,7 +181,7 @@ namespace oomph
     }
 
 
-    /// \short Pointer to control element (just under the symmetry line
+    ///  Pointer to control element (just under the symmetry line
     /// near the bubble tip, so the bubble tip is located at
     /// s=[1.0,1.0] in this element.
     ELEMENT* control_element_pt()
@@ -190,20 +190,20 @@ namespace oomph
     }
 
 
-    /// \short Read the value of the spine centre's vertical fraction
+    ///  Read the value of the spine centre's vertical fraction
     double spine_centre_fraction() const
     {
       return *Spine_centre_fraction_pt;
     }
 
-    /// \short Set the pointer to the spine centre's vertial fraction
+    ///  Set the pointer to the spine centre's vertial fraction
     void set_spine_centre_fraction_pt(double* const& fraction_pt)
     {
       Spine_centre_fraction_pt = fraction_pt;
     }
 
   protected:
-    /// \short Update function for the deposited film region in the
+    ///  Update function for the deposited film region in the
     /// lower part of the domain: Vertical spines
     void spine_node_update_film_lower(SpineNode* spine_node_pt)
     {
@@ -226,7 +226,7 @@ namespace oomph
     }
 
 
-    /// \short Update function for the horizontal transitition region in the
+    ///  Update function for the horizontal transitition region in the
     /// lower part of the domain: Spine points from wall to origin
     void spine_node_update_horizontal_transition_lower(SpineNode* spine_node_pt)
     {
@@ -272,7 +272,7 @@ namespace oomph
     }
 
 
-    /// \short Update function for the vertical transitition region in the
+    ///  Update function for the vertical transitition region in the
     /// lower part of the domain: Spine points to origin
     void spine_node_update_vertical_transition_lower(SpineNode* spine_node_pt)
     {
@@ -330,7 +330,7 @@ namespace oomph
     }
 
 
-    /// \short Update function for the vertical transitition region in the
+    ///  Update function for the vertical transitition region in the
     /// upper part of the domain: Spine points to origin
     void spine_node_update_vertical_transition_upper(SpineNode* spine_node_pt)
     {
@@ -388,7 +388,7 @@ namespace oomph
     }
 
 
-    /// \short Update function for the horizontal transitition region in the
+    ///  Update function for the horizontal transitition region in the
     /// upper part of the domain: Spine points towards origin
     void spine_node_update_horizontal_transition_upper(SpineNode* spine_node_pt)
     {
@@ -435,7 +435,7 @@ namespace oomph
     }
 
 
-    /// \short Update function for the deposited film region in the
+    ///  Update function for the deposited film region in the
     /// upper part of the domain: Vertical spines
     void spine_node_update_film_upper(SpineNode* spine_node_pt)
     {
@@ -458,7 +458,7 @@ namespace oomph
     }
 
 
-    /// \short Update function for the nodes in the channel region ahead
+    ///  Update function for the nodes in the channel region ahead
     /// of the finger tip: Nodes are evenly distributed along vertical
     /// lines between the top and bottom walls
     void spine_node_update_channel(SpineNode* spine_node_pt)
@@ -482,7 +482,7 @@ namespace oomph
     }
 
 
-    /// \short Initial reordering elements of the elements -- before
+    ///  Initial reordering elements of the elements -- before
     /// the channel mesh is added. Vertical stacks of elements, each topped by
     /// their interface element -- this is (currently) identical to the
     /// version in the SingleLayerSpineMesh but it's important
@@ -500,7 +500,7 @@ namespace oomph
     /// Number of elements along wall in channel region
     unsigned Nx3;
 
-    /// \short Number of elements in vertical transition region (there are
+    ///  Number of elements in vertical transition region (there are
     /// twice as many elements across the channel)
     unsigned Nhalf;
 
@@ -534,7 +534,7 @@ namespace oomph
     /// Default spine fraction
     double Default_spine_centre_fraction;
 
-    /// \short Pointer to control element (just under the symmetry line
+    ///  Pointer to control element (just under the symmetry line
     /// near the bubble tip; the bubble tip is located at s=[1.0,1.0]
     /// in this element
     ELEMENT* Control_element_pt;

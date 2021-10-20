@@ -98,13 +98,13 @@ public:
    BrokenCopy::broken_copy("NetFluxControlElement");
   } 
  
- /// \short Function return pointer to the Data object whose
+ ///  Function return pointer to the Data object whose
  /// single value is the pressure applied by the elements in 
  /// Flux_control_mesh_pt
  Data* pressure_data_pt() const {return Pressure_data_pt;}
 
 
- /// \short Add the element's contribution to its residual vector:
+ ///  Add the element's contribution to its residual vector:
  /// The flow constraint. [Note: Jacobian is computed 
  /// automatically by finite-differencing]
  void fill_in_contribution_to_residuals(Vector<double> &residuals)
@@ -133,7 +133,7 @@ public:
 
 
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ ///  The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into
  /// 
  /// IMPORTANT:
@@ -147,7 +147,7 @@ public:
 //   return 2;
 //  }
 
- /// \short Create a list of pairs for all unknowns in this element,
+ ///  Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
  /// of the "block" that this unknown is associated with.
@@ -177,15 +177,15 @@ public:
  
 private:
  
- /// \short Data object whose single value is the pressure 
+ ///  Data object whose single value is the pressure 
  /// applied by the elements in the Flux_control_mesh_pt
  Data* Pressure_data_pt;
  
- /// \short Mesh of elements which impose a pressure which controls
+ ///  Mesh of elements which impose a pressure which controls
  /// the net flux
  Mesh* Flux_control_mesh_pt;
  
- /// \short Pointer to the value that stores the prescribed outflow
+ ///  Pointer to the value that stores the prescribed outflow
  double* Prescribed_outflow_value_pt;
 
 };
@@ -247,14 +247,14 @@ public:
  /// Destructor should not delete anything
  ~NavierStokesFluxControlElement() {}
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ ///  The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into
  unsigned nblock_types()
   {
    return 2;
   }
 
- /// \short Create a list of pairs for all unknowns in this element,
+ ///  Create a list of pairs for all unknowns in this element,
  /// Do nothing since this element adds no new dofs
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
@@ -283,7 +283,7 @@ public:
  void output(std::ostream &outfile, const unsigned &nplot)
   {FiniteElement::output(outfile,nplot);}
  
- /// \short Function to add to external data the Data object whose
+ ///  Function to add to external data the Data object whose
  /// single value is the pressure applied by the element
  void add_pressure_data(Data* pressure_data_pt)
   {
@@ -293,7 +293,7 @@ public:
 protected:
  
  
- /// \short Access function that returns the local equation numbers
+ ///  Access function that returns the local equation numbers
  /// for velocity components.
  /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
  /// The default is to asssume that n is the local node number
@@ -301,7 +301,7 @@ protected:
  virtual inline int u_local_eqn(const unsigned &n, const unsigned &i)
   {return this->nodal_local_eqn(n,i);}
  
- ///\short Function to compute the shape and test functions and to return 
+ /// Function to compute the shape and test functions and to return 
  ///the Jacobian of mapping 
  inline double shape_and_test_at_knot(const unsigned &ipt, 
                                       Shape &psi, Shape &test)
@@ -318,7 +318,7 @@ protected:
   }
  
  
- ///\short This function returns the residuals for the 
+ /// This function returns the residuals for the 
  /// traction function.
  ///flag=1(or 0): do (or don't) compute the Jacobian as well. 
  void fill_in_generic_residual_contribution_fluid_traction(
@@ -405,7 +405,7 @@ protected:
  
 private:
  
- /// \short Id of external Data object whose single value is the 
+ ///  Id of external Data object whose single value is the 
  /// pressure applied by the elements
  unsigned Pressure_data_id;
  

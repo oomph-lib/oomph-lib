@@ -124,7 +124,7 @@ template<class ELEMENT>
 class TorusProblem : public Problem
 {
 public:
- /// \short Constructor taking the maximum refinement level and
+ ///  Constructor taking the maximum refinement level and
  /// the minimum and maximum error targets.
  TorusProblem(const unsigned &max_refinement_level,
               const double &min_error_target, 
@@ -152,7 +152,7 @@ void set_initial_condition()
  /// Return a pointer to the specific mesh used
  RefineableFullCircleMesh<ELEMENT>* mesh_pt() 
   {return dynamic_cast<RefineableFullCircleMesh<ELEMENT>*>(Problem::mesh_pt());}
- /// \short Update the problem specs before next timestep: 
+ ///  Update the problem specs before next timestep: 
  void actions_before_implicit_timestep() 
   {set_boundary_conditions(time());}
 

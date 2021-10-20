@@ -48,7 +48,7 @@ namespace oomph
   class SimpleRectangularTriMesh : public virtual TriangleMeshBase
   {
   public:
-    /// \short Constructor
+    ///  Constructor
     /// n_x  : number of elements in the x direction;
     /// n_y  : number of elements in the y direction;
     /// l_x  : length in the x direction

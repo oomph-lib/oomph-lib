@@ -47,7 +47,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Setup the precoonditioner.
+  ///  Setup the precoonditioner.
   //=============================================================================
   void PseudoElasticFSIPreconditioner::setup()
   {
@@ -275,7 +275,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Apply the preconditioner
+  ///  Apply the preconditioner
   //=============================================================================
   void PseudoElasticFSIPreconditioner::preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)

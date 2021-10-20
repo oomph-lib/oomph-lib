@@ -27,7 +27,7 @@
 
 namespace oomph
 {
-  /// \short Static boolean to allow block_matrix_test(...) to be run.
+  ///  Static boolean to allow block_matrix_test(...) to be run.
   /// Defaults to false.
   template<typename MATRIX>
   bool BlockPreconditioner<MATRIX>::Run_block_matrix_test = false;
@@ -2358,7 +2358,7 @@ namespace oomph
 
   //============================================================================
   //??ds
-  /// \short Function to turn this preconditioner into a
+  ///  Function to turn this preconditioner into a
   /// subsidiary preconditioner that operates within a bigger
   /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
   /// preconditioner dealing with the fluid sub-blocks within a
@@ -2401,7 +2401,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short Function to turn this block preconditioner into a
+  ///  Function to turn this block preconditioner into a
   /// subsidiary block preconditioner that operates within a bigger
   /// master block preconditioner (e.g. a Navier-Stokes 2x2 block
   /// preconditioner dealing with the fluid sub-blocks within a
@@ -2762,7 +2762,7 @@ namespace oomph
   } // get_concatenated_block_vector(...)
 
   //============================================================================
-  /// \short Takes concatenated block ordered vector, b, and copies its
+  ///  Takes concatenated block ordered vector, b, and copies its
   // entries to the appropriate entries in the naturally ordered vector, v.
   // Here the values in block_vec_number indicates which blocks the vector
   // b is a concatenation of. The block number are those in the current
@@ -2926,7 +2926,7 @@ namespace oomph
   } // return_concatenated_block_vector(...)
 
   //============================================================================
-  /// \short Takes the naturally ordered vector and rearranges it into a
+  ///  Takes the naturally ordered vector and rearranges it into a
   /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
   /// the i-th entry in the vector associated with block b.
   /// Note: If the preconditioner is a subsidiary preconditioner then only the
@@ -3087,7 +3087,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short Takes the naturally ordered vector and rearranges it into a
+  ///  Takes the naturally ordered vector and rearranges it into a
   /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
   /// the i-th entry in the vector associated with block b.
   /// Note: If the preconditioner is a subsidiary preconditioner then only the
@@ -3117,7 +3117,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Takes the naturally ordered vector and
+  ///  Takes the naturally ordered vector and
   /// rearranges it into a vector of sub vectors corresponding to the blocks,
   /// so s[b][i] contains the i-th entry in the vector associated with block b.
   /// The block_vec_number indicates which blocks we want.
@@ -3404,7 +3404,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short A helper function, takes the naturally ordered vector and
+  ///  A helper function, takes the naturally ordered vector and
   /// rearranges it into a vector of sub vectors corresponding to the blocks,
   /// so s[b][i] contains the i-th entry in the vector associated with block b.
   /// The block_vec_number indicates which blocks we want.
@@ -3432,7 +3432,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Takes the vector of block vectors, s, and copies its entries into
+  ///  Takes the vector of block vectors, s, and copies its entries into
   /// the naturally ordered vector, v. If this is a subsidiary block
   /// preconditioner only those entries in v that are associated with its
   /// blocks are affected. The block_vec_number indicates which block the
@@ -3641,7 +3641,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short Takes the vector of block vectors, s, and copies its entries into
+  ///  Takes the vector of block vectors, s, and copies its entries into
   /// the naturally ordered vector, v. If this is a subsidiary block
   /// preconditioner only those entries in v that are associated with its
   /// blocks are affected. The block_vec_number indicates which block the
@@ -3670,7 +3670,7 @@ namespace oomph
   } // return_block_vectors(...)
 
   //============================================================================
-  /// \short Takes the naturally ordered vector and
+  ///  Takes the naturally ordered vector and
   /// rearranges it into a vector of sub vectors corresponding to the blocks,
   /// so s[b][i] contains the i-th entry in the vector associated with block b.
   /// The block_vec_number indicates which blocks we want.
@@ -3971,7 +3971,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short A helper function, takes the naturally ordered vector and
+  ///  A helper function, takes the naturally ordered vector and
   /// rearranges it into a vector of sub vectors corresponding to the blocks,
   /// so s[b][i] contains the i-th entry in the vector associated with block b.
   /// The block_vec_number indicates which blocks we want.
@@ -3999,7 +3999,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short A helper function, takes the naturally ordered vector, v,
+  ///  A helper function, takes the naturally ordered vector, v,
   /// and extracts the n-th block vector, b.
   /// Here n is the block number in the current preconditioner.
   /// NOTE: The ordering of the vector b is the same as the
@@ -4178,7 +4178,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Takes the naturally ordered vector, v and returns the n-th
+  ///  Takes the naturally ordered vector, v and returns the n-th
   /// block vector, b. Here n is the block number in the current
   /// preconditioner.
   //============================================================================
@@ -4278,7 +4278,7 @@ namespace oomph
   } // get_block_vector(...)
 
   //============================================================================
-  /// \short Takes the n-th block ordered vector, b,  and copies its entries
+  ///  Takes the n-th block ordered vector, b,  and copies its entries
   /// to the appropriate entries in the naturally ordered vector, v.
   /// Here n is the block number in the current block preconditioner.
   /// If the preconditioner is a subsidiary block preconditioner
@@ -4478,7 +4478,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Takes the n-th block ordered vector, b,  and copies its entries
+  ///  Takes the n-th block ordered vector, b,  and copies its entries
   /// to the appropriate entries in the naturally ordered vector, v.
   /// Here n is the block number in the current block preconditioner.
   /// If the preconditioner is a subsidiary block preconditioner
@@ -4559,7 +4559,7 @@ namespace oomph
   } // return_block_vector(...)
 
   //============================================================================
-  /// \short Given the naturally ordered vector, v, return
+  ///  Given the naturally ordered vector, v, return
   /// the vector rearranged in block order in w. This is a legacy function
   /// from the old block preconditioning framework. Kept alive in case it may
   /// be needed again.
@@ -4763,7 +4763,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Given the naturally ordered vector, v, return
+  ///  Given the naturally ordered vector, v, return
   /// the vector rearranged in block order in w. This function calls
   /// get_concatenated_block_vector(...) with the identity block mapping.
   ///
@@ -4827,7 +4827,7 @@ namespace oomph
   } // get_block_ordered_preconditioner_vector(...)
 
   //============================================================================
-  /// \short Takes the block ordered vector, w, and reorders it in the natural
+  ///  Takes the block ordered vector, w, and reorders it in the natural
   /// order. Reordered vector is returned in v. Note: If the preconditioner is
   /// a subsidiary preconditioner then only the components of the vector
   /// associated with the blocks of the subsidiary preconditioner will be
@@ -5029,7 +5029,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short Takes the block ordered vector, w, and reorders it in natural
+  ///  Takes the block ordered vector, w, and reorders it in natural
   /// order. Reordered vector is returned in v. Note: If the preconditioner is
   /// a subsidiary preconditioner then only the components of the vector
   /// associated with the blocks of the subsidiary preconditioner will be
@@ -5093,7 +5093,7 @@ namespace oomph
   } // function return_block_ordered_preconditioner_vector
 
   //=============================================================================
-  /// \short Gets block (i,j) from the matrix pointed to by
+  ///  Gets block (i,j) from the matrix pointed to by
   /// Matrix_pt and returns it in output_block. This is associated with the
   /// internal blocks. Please use the other get_block(...) function.
   //=============================================================================
@@ -5658,7 +5658,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short Gets dof-level block (i,j).
+  ///  Gets dof-level block (i,j).
   /// If Replacement_dof_block_pt(i,j) is not null, then the replacement
   /// block is returned via a deep copy.
   ///
@@ -5832,7 +5832,7 @@ namespace oomph
   }
 
   //=============================================================================
-  /// \short test function to check that every element in the block matrix
+  ///  test function to check that every element in the block matrix
   /// (block_i,block_j) matches the corresponding element in the original matrix
   //=============================================================================
   template<typename MATRIX>

@@ -65,7 +65,7 @@ namespace oomph
     return elem_pt->dof_pt_vector(dof_pt);
   }
 
-  /// \short Return the t-th level of storage associated with the i-th
+  ///  Return the t-th level of storage associated with the i-th
   /// (local) dof stored in the problem
   double& AssemblyHandler::local_problem_dof(Problem* const& problem_pt,
                                              const unsigned& t,
@@ -119,7 +119,7 @@ namespace oomph
   }
 
   //=======================================================================
-  /// \short Calculate the derivative of the residuals with respect to
+  ///  Calculate the derivative of the residuals with respect to
   /// a parameter, by calling the elemental function
   //======================================================================
   void AssemblyHandler::get_dresiduals_dparameter(
@@ -132,7 +132,7 @@ namespace oomph
 
 
   //=====================================================================
-  /// \short Calculate the derivative of the residuals and jacobian
+  ///  Calculate the derivative of the residuals and jacobian
   /// with respect to a parameter by calling the elemental function
   //========================================================================
   void AssemblyHandler::get_djacobian_dparameter(
@@ -144,7 +144,7 @@ namespace oomph
     elem_pt->get_djacobian_dparameter(parameter_pt, dres_dparam, djac_dparam);
   }
 
-  /// \short Calculate the product of the Hessian (derivative of Jacobian with
+  ///  Calculate the product of the Hessian (derivative of Jacobian with
   /// respect to all variables) an eigenvector, Y, and
   /// other specified vectors, C
   /// (d(J_{ij})/d u_{k}) Y_{j} C_{k}
@@ -3131,7 +3131,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Calculate the elemental Jacobian matrix "d equation
+  ///  Calculate the elemental Jacobian matrix "d equation
   /// / d variable".
   //======================================================================
   void PitchForkHandler::get_jacobian(GeneralisedElement* const& elem_pt,
@@ -3530,7 +3530,7 @@ namespace oomph
   }
 
   //==============================================================
-  /// \short Solve non-block system
+  ///  Solve non-block system
   //==============================================================
   void PitchForkHandler::solve_full_system()
   {
@@ -4776,7 +4776,7 @@ namespace oomph
 
 
   //===============================================================
-  /// \short Calculate the elemental Jacobian matrix "d equation
+  ///  Calculate the elemental Jacobian matrix "d equation
   /// / d variable".
   //==================================================================
   void HopfHandler::get_jacobian(GeneralisedElement* const& elem_pt,

@@ -155,7 +155,7 @@ public virtual PeriodicOrbitBaseElement
    fill_in_generic_residual_contribution(residuals,jacobian,mass_matrix,2);
   }
  
- /// \short Calculate the elemental contributions to the global 
+ ///  Calculate the elemental contributions to the global 
  /// residual vector for the weak form of the Poisson equation
  void fill_in_generic_residual_contribution(Vector<double> &residuals,
                                             DenseMatrix<double> &jacobian,

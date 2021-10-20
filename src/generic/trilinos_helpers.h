@@ -67,7 +67,7 @@ namespace oomph
 
 
   //=============================================================================
-  /// \short Helper namespace for use with the Trilinos Epetra package.
+  ///  Helper namespace for use with the Trilinos Epetra package.
   /// Contains functions to generate two Epetra containers (Epetra_Vector and
   /// Epetra_CrsMatrix) and provides access to the trilinos matrix-matrix
   /// and matrix-vector product routines.
@@ -77,7 +77,7 @@ namespace oomph
     // VECTOR METHODS
     // ============================================================
 
-    /// \short create an Epetra_Vector from an oomph-lib DoubleVector.
+    ///  create an Epetra_Vector from an oomph-lib DoubleVector.
     /// If oomph_vec is NOT distributed (i.e. locally replicated) and
     /// on more than one processor, then the returned Epetra_Vector will be
     /// uniformly distributed. If the oomph_vec is distributed then the
@@ -85,7 +85,7 @@ namespace oomph
     Epetra_Vector* create_distributed_epetra_vector(
       const DoubleVector& oomph_vec);
 
-    /// \short create an Epetra_Vector based on the argument oomph-lib
+    ///  create an Epetra_Vector based on the argument oomph-lib
     /// LinearAlgebraDistribution
     /// If dist is NOT distributed and
     /// on more than one processor, then the returned Epetra_Vector will be
@@ -95,7 +95,7 @@ namespace oomph
     Epetra_Vector* create_distributed_epetra_vector(
       const LinearAlgebraDistribution* dist_pt);
 
-    /// \short create an Epetra_Vector equivalent of DoubleVector
+    ///  create an Epetra_Vector equivalent of DoubleVector
     /// The argument DoubleVector must be built.
     /// The Epetra_Vector will point to, and NOT COPY the underlying data in the
     /// DoubleVector.
@@ -103,7 +103,7 @@ namespace oomph
     /// the same distribution.
     Epetra_Vector* create_epetra_vector_view_data(DoubleVector& oomph_vec);
 
-    /// \short Helper function to copy the contents of a Trilinos vector to an
+    ///  Helper function to copy the contents of a Trilinos vector to an
     /// oomph-lib distributed vector. The distribution of the two vectors must
     /// be identical
     void copy_to_oomphlib_vector(const Epetra_Vector* epetra_vec_pt,
@@ -112,7 +112,7 @@ namespace oomph
     // MATRIX METHODS
     // ============================================================
 
-    /// \short create an Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
+    ///  create an Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
     /// If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and
     /// on more than one processor, then the returned Epetra_Vector will be
     /// uniformly distributed. If the oomph_matrix_pt is distributed then the
@@ -124,7 +124,7 @@ namespace oomph
       const CRDoubleMatrix* oomph_matrix_pt,
       const LinearAlgebraDistribution* dist_pt);
 
-    /// \short create and Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
+    ///  create and Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
     /// Specialisation for Trilinos AztecOO.
     /// If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and
     /// on more than one processor, then the returned Epetra_Vector will be
@@ -139,7 +139,7 @@ namespace oomph
     // MATRIX OPERATION METHODS
     // ==================================================
 
-    /// \short  Function to perform a matrix-vector multiplication on a
+    ///   Function to perform a matrix-vector multiplication on a
     /// oomph-lib matrix and vector using Trilinos functionality.
     /// NOTE 1. the matrix and the vectors must have the same communicator.
     /// NOTE 2. The vector will be returned with the same distribution
@@ -149,7 +149,7 @@ namespace oomph
                   const DoubleVector& x,
                   DoubleVector& soln);
 
-    /// \short Function to perform a matrix-matrix multiplication on oomph-lib
+    ///  Function to perform a matrix-matrix multiplication on oomph-lib
     /// matrices by using Trilinos functionality.
     /// \b NOTE 1. There are two Trilinos matrix-matrix multiplication methods
     /// available, using either the EpetraExt::MatrixMatrix class (if use_ml ==

@@ -35,7 +35,7 @@ namespace oomph
 
 
   //===========================================================================
-  /// \short Constructor. Order 0 elements have 1 pressure dof and no internal
+  ///  Constructor. Order 0 elements have 1 pressure dof and no internal
   /// velocity dofs
   //===========================================================================
   template<>
@@ -208,7 +208,7 @@ namespace oomph
 
 
   //===========================================================================
-  /// \short Constructor. Order 1 elements have 3 pressure dofs and 2 internal
+  ///  Constructor. Order 1 elements have 3 pressure dofs and 2 internal
   /// velocity dofs
   //===========================================================================
   template<>

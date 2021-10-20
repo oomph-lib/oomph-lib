@@ -58,7 +58,7 @@ namespace oomph
     : public virtual FiniteElement
   {
   public:
-    /// \short Return the index at which the i-th (i=0: r, i=1: z; i=2: theta)
+    ///  Return the index at which the i-th (i=0: r, i=1: z; i=2: theta)
     /// real or imag unknown displacement component is stored at the nodes.
     /// The default assignment here (u_r_real, u_z_real, ..., u_theta_imag)
     /// is appropriate for single-physics problems.
@@ -102,7 +102,7 @@ namespace oomph
       }
     }
 
-    /// \short Return FE interpolated displacement u[i] (i=0: r, i=1: z; i=2:
+    ///  Return FE interpolated displacement u[i] (i=0: r, i=1: z; i=2:
     /// theta) at local coordinate s
     std::complex<double> interpolated_u_time_harmonic_fourier_decomposed_linear_elasticity(
       const Vector<double>& s, const unsigned& i) const
@@ -137,13 +137,13 @@ namespace oomph
     }
 
 
-    /// \short Function pointer to function that specifies the body force
+    ///  Function pointer to function that specifies the body force
     /// as a function of the Cartesian coordinates and time FCT(x,b) --
     /// x and b are  Vectors!
     typedef void (*BodyForceFctPt)(const Vector<double>& x,
                                    Vector<std::complex<double>>& b);
 
-    /// \short Constructor: Set null pointers for constitutive law.
+    ///  Constructor: Set null pointers for constitutive law.
     /// Set physical parameter values to
     /// default values, and set body force to zero.
     TimeHarmonicFourierDecomposedLinearElasticityEquationsBase()
@@ -236,7 +236,7 @@ namespace oomph
       return Body_force_fct_pt;
     }
 
-    /// \short Evaluate body force at Eulerian coordinate x at present time
+    ///  Evaluate body force at Eulerian coordinate x at present time
     /// (returns zero vector if no body force function pointer has been set)
     inline void body_force(const Vector<double>& x,
                            Vector<std::complex<double>>& b) const
@@ -257,7 +257,7 @@ namespace oomph
       }
     }
 
-    /// \short The number of "DOF types" that degrees of freedom in this element
+    ///  The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: for now lump them all into one DOF type.
     /// Can be adjusted later
     unsigned ndof_types() const
@@ -265,7 +265,7 @@ namespace oomph
       return 1;
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.
@@ -351,7 +351,7 @@ namespace oomph
     : public TimeHarmonicFourierDecomposedLinearElasticityEquationsBase
   {
   public:
-    /// \short  Constructor
+    ///   Constructor
     TimeHarmonicFourierDecomposedLinearElasticityEquations() {}
 
     /// Number of values required at node n.
@@ -360,7 +360,7 @@ namespace oomph
       return 6;
     }
 
-    /// \short Return the residuals for the equations (the discretised
+    ///  Return the residuals for the equations (the discretised
     /// principle of virtual displacements)
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -386,7 +386,7 @@ namespace oomph
     void get_strain(const Vector<double>& s,
                     DenseMatrix<std::complex<double>>& strain);
 
-    /// \short Compute norm of solution: square of the L2 norm
+    ///  Compute norm of solution: square of the L2 norm
     void compute_norm(double& norm);
 
     /// Output exact solution: r,z, u_r_real, u_z_real, ..., u_theta_imag
@@ -425,7 +425,7 @@ namespace oomph
 
 
   private:
-    /// \short Private helper function to compute residuals and (if requested
+    ///  Private helper function to compute residuals and (if requested
     /// via flag) also the Jacobian matrix.
     virtual void fill_in_generic_contribution_to_residuals_fourier_decomp_time_harmonic_linear_elasticity(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
@@ -548,19 +548,19 @@ namespace oomph
     }
 
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<2, NNODE_1D>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<2, NNODE_1D>::vertex_node_pt(j);
     }
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
@@ -574,7 +574,7 @@ namespace oomph
       return 12;
     }
 
-    /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+    ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -652,11 +652,11 @@ namespace oomph
     : public virtual ProjectableElement<TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
   {
   public:
-    /// \short Constructor [this was only required explicitly
+    ///  Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement() {}
 
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     /// In the underlying time-harmonic linear elasticity elemements the
@@ -679,14 +679,14 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: 3*dim, corresponding to
+    ///  Number of fields to be projected: 3*dim, corresponding to
     /// real and imag parts of the displacement components
     unsigned nfields_for_projection()
     {
       return 3 * this->dim();
     }
 
-    /// \short Number of history values to be stored for fld-th field.
+    ///  Number of history values to be stored for fld-th field.
     /// (includes present value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -703,7 +703,7 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
-    ///\short Number of positional history values: Read out from
+    /// Number of positional history values: Read out from
     /// positional timestepper
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
@@ -711,7 +711,7 @@ namespace oomph
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -727,7 +727,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,

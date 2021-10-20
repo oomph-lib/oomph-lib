@@ -53,12 +53,12 @@ namespace oomph
   class FluidInterfaceBoundingElement : public virtual FaceElement
   {
   private:
-    /// \short Function pointer to a wall unit normal function. Returns the
+    ///  Function pointer to a wall unit normal function. Returns the
     /// unit normal on the wall, at the specified Eulerian coordinate.
     typedef void (*WallUnitNormalFctPt)(const Vector<double>& x,
                                         Vector<double>& unit_normal);
 
-    /// \short Pointer to a wall normal function that returns
+    ///  Pointer to a wall normal function that returns
     /// the wall unit normal as a function of position in global
     /// Eulerian coordinates.
     WallUnitNormalFctPt Wall_unit_normal_fct_pt;
@@ -70,22 +70,22 @@ namespace oomph
     double* Ca_pt;
 
   protected:
-    /// \short Flag used to determine whether the contact angle is to be
+    ///  Flag used to determine whether the contact angle is to be
     /// used (0 if not), and whether it will be applied weakly as a force term
     /// in the momentum equations (1) or by hijacking the kinematic
     /// condition (2).
     unsigned Contact_angle_flag;
 
-    /// \short Index at which the i-th velocity component is stored in the
+    ///  Index at which the i-th velocity component is stored in the
     /// element's nodes
     Vector<unsigned> U_index_interface_boundary;
 
-    /// \short Function that is used to determine the local equation number of
+    ///  Function that is used to determine the local equation number of
     /// the kinematic equation associated with the nodes of the element
     /// This must be overloaded depending on the node update scheme
     virtual int kinematic_local_eqn(const unsigned& n) = 0;
 
-    /// \short Function that returns the unit normal of the bounding wall
+    ///  Function that returns the unit normal of the bounding wall
     /// directed out of the fluid
     void wall_unit_normal(const Vector<double>& x, Vector<double>& normal)
     {
@@ -105,7 +105,7 @@ namespace oomph
 #endif
     }
 
-    ///\short The geometric data of the parent element is included as
+    /// The geometric data of the parent element is included as
     /// external data and so a (bulk) node update must take place after
     /// the variation of any of this external data
     inline void update_in_external_fd(const unsigned& i)
@@ -114,12 +114,12 @@ namespace oomph
       bulk_element_pt()->node_update();
     }
 
-    ///\short The only external data are these geometric data so
+    /// The only external data are these geometric data so
     /// We can omit the reset function (relying on the next update
     // function to take care of the remesh)
     inline void reset_in_external_fd(const unsigned& i) {}
 
-    /// \short We require a final node update in the bulk element
+    ///  We require a final node update in the bulk element
     /// after all finite differencing
     inline void reset_after_external_fd()
     {
@@ -155,7 +155,7 @@ namespace oomph
       return U_index_interface_boundary;
     }
 
-    /// \short Set a pointer to the desired contact angle. Optional boolean
+    ///  Set a pointer to the desired contact angle. Optional boolean
     /// (defaults to true)
     /// chooses strong imposition via hijacking (true) or weak imposition
     /// via addition to momentum equation (false). The default strong imposition
@@ -225,7 +225,7 @@ namespace oomph
       unsigned flag) = 0;
 
 
-    /// \short Empty helper function to calculate the additional contributions
+    ///  Empty helper function to calculate the additional contributions
     /// arising from the node update strategy to the Jacobian within the
     /// integration loop. This will be overloaded by elements that require
     /// contributions to their underlying equations from boundary integrals.
@@ -276,7 +276,7 @@ namespace oomph
     : public FluidInterfaceBoundingElement
   {
   protected:
-    /// \short Overload the helper function to calculate the residuals and
+    ///  Overload the helper function to calculate the residuals and
     /// (if flag==1) the Jacobian -- this function only deals with
     /// the part of the Jacobian that can be handled generically.
     /// Specific additional contributions may be provided in
@@ -296,7 +296,7 @@ namespace oomph
   class LineFluidInterfaceBoundingElement : public FluidInterfaceBoundingElement
   {
   protected:
-    /// \short Overload the helper function to calculate the residuals and
+    ///  Overload the helper function to calculate the residuals and
     /// (if flag==true) the Jacobian -- this function only deals with
     /// the part of the Jacobian that can be handled generically.
     /// Specific additional contributions may be provided in
@@ -337,25 +337,25 @@ namespace oomph
     /// Nodal index at which the i-th velocity component is stored.
     Vector<unsigned> U_index_interface;
 
-    /// \short The Data that contains the external  pressure is stored
+    ///  The Data that contains the external  pressure is stored
     /// as external Data for the element. Which external Data item is it?
     /// (int so it can be initialised to -1, indicating that external
     /// pressure hasn't been set).
     int External_data_number_of_external_pressure;
 
-    /// \short Pointer to the Data item that stores the external pressure
+    ///  Pointer to the Data item that stores the external pressure
     Data* Pext_data_pt;
 
-    /// \short Which of the values in Pext_data_pt stores the external pressure
+    ///  Which of the values in Pext_data_pt stores the external pressure
     unsigned Index_of_external_pressure_value;
 
-    /// \short Access function that returns the local equation number
+    ///  Access function that returns the local equation number
     /// for the (scalar) kinematic equation associated with the j-th local
     /// node. This must be overloaded by specific interface elements
     /// and depends on the method for handing the free-surface deformation.
     virtual int kinematic_local_eqn(const unsigned& n) = 0;
 
-    /// \short Access function for the local equation number that
+    ///  Access function for the local equation number that
     /// corresponds to the external pressure.
     int pext_local_eqn()
     {
@@ -371,7 +371,7 @@ namespace oomph
                                 Index_of_external_pressure_value);
     }
 
-    /// \short Helper function to calculate the residuals and
+    ///  Helper function to calculate the residuals and
     /// (if flag==1) the Jacobian of the equations.
     /// This is implemented generically using the surface
     /// divergence information that is overloaded in each element
@@ -379,7 +379,7 @@ namespace oomph
     virtual void fill_in_generic_residual_contribution_interface(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
-    /// \short Compute the surface gradient and surface divergence
+    ///  Compute the surface gradient and surface divergence
     /// operators given the shape functions, derivatives,
     /// tangent vectors and position. All derivatives and
     /// tangent vectors should be formed
@@ -408,7 +408,7 @@ namespace oomph
       DShape& dpsidS,
       DShape& dpsidS_div) = 0;
 
-    /// \short Helper function to calculate the additional contributions
+    ///  Helper function to calculate the additional contributions
     /// to the resisuals and Jacobian that arise from specific node update
     /// strategies. This is called within the integration loop over the
     /// element (for efficiency) and therefore requires a fairly large
@@ -450,7 +450,7 @@ namespace oomph
       St_pt = &Default_Physical_Constant_Value;
     }
 
-    /// \short Virtual function that specifies the non-dimensional
+    ///  Virtual function that specifies the non-dimensional
     ///  surface tension as a function of local position within the element.
     /// The default behaviour is a constant surface tension of value 1.0
     /// This function can be overloaded in more specialised elements to
@@ -506,13 +506,13 @@ namespace oomph
       return St_pt;
     }
 
-    /// \short Return the i-th velocity component at local node j.
+    ///  Return the i-th velocity component at local node j.
     double u(const unsigned& j, const unsigned& i)
     {
       return node_pt(j)->value(U_index_interface[i]);
     }
 
-    /// \short Calculate the i-th velocity component at the local coordinate s.
+    ///  Calculate the i-th velocity component at the local coordinate s.
     double interpolated_u(const Vector<double>& s, const unsigned& i);
 
     /// Return the value of the external pressure
@@ -531,7 +531,7 @@ namespace oomph
       }
     }
 
-    /// \short Set the Data that contains the single pressure value
+    ///  Set the Data that contains the single pressure value
     /// that specifies the "external pressure" for the
     /// interface/free-surface. Setting this only makes sense
     /// if the interface is, in fact, a free surface (well,
@@ -568,7 +568,7 @@ namespace oomph
       Index_of_external_pressure_value = 0;
     }
 
-    /// \short Set the Data that contains the pressure value
+    ///  Set the Data that contains the pressure value
     /// that specifies the "external pressure" for the
     /// interface/free-surface. Setting this only makes sense
     /// if the interface is, in fact, a free surface (well,
@@ -612,7 +612,7 @@ namespace oomph
     }
 
 
-    /// \short Create a bounding element e.g. to apply a contact angle boundary
+    ///  Create a bounding element e.g. to apply a contact angle boundary
     /// condition
     virtual FluidInterfaceBoundingElement* make_bounding_element(
       const int& face_index)
@@ -624,7 +624,7 @@ namespace oomph
     }
 
 
-    /// \short Hijack the kinematic condition at the node numbers passed in
+    ///  Hijack the kinematic condition at the node numbers passed in
     /// the vector. The node numbers correspond to the local numbers of
     /// nodes in the associated bulk element.
     /// This is required so that contact-angle conditions can be applied

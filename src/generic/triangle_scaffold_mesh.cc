@@ -647,7 +647,7 @@ namespace oomph
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
   //=====================================================================
-  /// \short Constructor: Pass a data structure obtained from the triangulate
+  ///  Constructor: Pass a data structure obtained from the triangulate
   /// function
   //=====================================================================
   TriangleScaffoldMesh::TriangleScaffoldMesh(TriangulateIO& triangle_data)

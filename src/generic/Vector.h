@@ -140,17 +140,17 @@ namespace oomph
     /// Construct an empty vector
     Vector() : std::vector<_Tp>() {}
 
-    /// \short A constructor that creates a vector of size __n.
+    ///  A constructor that creates a vector of size __n.
     /// Note the use of explicit for "strong" type checking
     explicit Vector(size_type __n) : std::vector<_Tp>(__n) {}
 
-    /// \short A constructor that creates a vector of size __n and
+    ///  A constructor that creates a vector of size __n and
     /// initialises every entry to __value
     Vector(size_type __n, const _Tp& __value) : std::vector<_Tp>(__n, __value)
     {
     }
 
-    /// \short A constructor that creates a vector with entries set by the
+    ///  A constructor that creates a vector with entries set by the
     /// values in the input initialiser_list
     /// Example:
     ///           Vector<int> arr{0, 20, 100, 150);
@@ -191,7 +191,7 @@ namespace oomph
   };
 
   //==================================================================
-  ///\short A Vector of bools cannot be created because the is no
+  /// A Vector of bools cannot be created because the is no
   /// compiler-independent  implementation of the bit manipulators.
   /// Making all the constructors private should lead to compile-time
   /// errors.
@@ -213,7 +213,7 @@ namespace oomph
     typedef size_t size_type;
 
 
-    /// \short Dummy constructor to avoid compiler from warning about
+    ///  Dummy constructor to avoid compiler from warning about
     /// only-private constructors
     Vector(const double& dont_call_this_constructor)
     {
@@ -229,17 +229,17 @@ namespace oomph
     /// Construct an empty vector
     Vector() : std::vector<bool>() {}
 
-    /// \short A constructor that creates a vector of size __n.
+    ///  A constructor that creates a vector of size __n.
     /// Note the use of explicit for "strong" type checking
     explicit Vector(size_type __n) : std::vector<bool>(__n) {}
 
-    /// \short A constructor that creates a vector of size __n and
+    ///  A constructor that creates a vector of size __n and
     /// initialises every entry to __value
     Vector(size_type __n, const bool& __value) : std::vector<bool>(__n, __value)
     {
     }
 
-    /// \short A constructor that creates a vector with entries set by the
+    ///  A constructor that creates a vector with entries set by the
     /// values in the input initialiser_list.
     /// Example:
     ///           Vector<int> arr{true, false, false, true);
@@ -267,7 +267,7 @@ namespace oomph
   //=================================================================
   namespace VectorHelpers
   {
-    /// \short Check the lengths if two Vectors are the same length
+    ///  Check the lengths if two Vectors are the same length
     inline void check_lengths_match(const Vector<double>& a,
                                     const Vector<double>& b)
     {
@@ -286,7 +286,7 @@ namespace oomph
     }
 
 
-    /// \short Probably not always best/fastest because not optimised for
+    ///  Probably not always best/fastest because not optimised for
     /// dimension but useful...
     inline double dot(const Vector<double>& a, const Vector<double>& b)
     {
@@ -299,13 +299,13 @@ namespace oomph
       return temp;
     }
 
-    /// \short Get the magnitude of a vector.
+    ///  Get the magnitude of a vector.
     inline double magnitude(const Vector<double>& a)
     {
       return (std::sqrt(dot(a, a)));
     }
 
-    /// \short Get the angle between two vector.
+    ///  Get the angle between two vector.
     inline double angle(const Vector<double>& a, const Vector<double>& b)
     {
       // Notice that we use one square root operation by avoiding the
@@ -314,7 +314,7 @@ namespace oomph
     }
 
 
-    /// \short Cross product using "proper" output (move semantics means this is
+    ///  Cross product using "proper" output (move semantics means this is
     /// ok nowadays).
     inline void cross(const Vector<double>& A,
                       const Vector<double>& B,
@@ -339,7 +339,7 @@ namespace oomph
       C[2] = A[0] * B[1] - A[1] * B[0];
     }
 
-    /// \short Cross product using "proper" output (move semantics means this is
+    ///  Cross product using "proper" output (move semantics means this is
     /// ok This calls the other cross(...) function.
     inline Vector<double> cross(const Vector<double>& A,
                                 const Vector<double>& B)

@@ -56,7 +56,7 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    /// \short Constructor: Pass refinement level to refineable element
+    ///  Constructor: Pass refinement level to refineable element
     /// (default 0 = root)
     RefineableYoungLaplaceEquations(const int& refine_level = 0)
       : YoungLaplaceEquations(),
@@ -82,14 +82,14 @@ namespace oomph
       return 2;
     }
 
-    /// \short Get 'flux' for Z2 error recovery:  Standard flux
+    ///  Get 'flux' for Z2 error recovery:  Standard flux
     /// from YoungLaplace equations
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_flux(s, flux);
     }
 
-    /// \short Get the function value u in Vector.
+    ///  Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -119,7 +119,7 @@ namespace oomph
     }
 
 
-    /// \short Get the function value u in Vector.
+    ///  Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -140,7 +140,7 @@ namespace oomph
     }
 
 
-    /// \short Further build: Copy function pointers to spine and spine base
+    ///  Further build: Copy function pointers to spine and spine base
     /// functions from father. Kappa is passed across with set_kappa(...)
     /// to ensure that it's added to the element's external Data.
     void further_build()
@@ -175,7 +175,7 @@ namespace oomph
       public virtual RefineableQElement<2>
   {
   public:
-    /// \short Constructor: Pass refinement level to refineable quad element
+    ///  Constructor: Pass refinement level to refineable quad element
     /// (default 0 = root)
     RefineableQYoungLaplaceElement()
       : RefineableElement(),
@@ -198,13 +198,13 @@ namespace oomph
       return 1;
     }
 
-    /// \short Number of vertex nodes in the element
+    ///  Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QYoungLaplaceElement<NNODE_1D>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    ///  Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QYoungLaplaceElement<NNODE_1D>::vertex_node_pt(j);
@@ -213,14 +213,14 @@ namespace oomph
     /// Rebuild from sons: empty
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    ///  Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return (NNODE_1D - 1);
     }
 
-    ///  \short Perform additional hanging node procedures for variables
+    ///   Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Empty.
     void further_setup_hanging_nodes() {}
   };
@@ -240,7 +240,7 @@ namespace oomph
     : public virtual QElement<1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };

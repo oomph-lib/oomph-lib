@@ -393,7 +393,7 @@ namespace Global_Parameters
  }
 
 
- /// \short Blended Pseudo_singularity for computation of Couette flow: 
+ ///  Blended Pseudo_singularity for computation of Couette flow: 
  /// grad[i][j] = du_i/dx_j
  Vector<Vector<double> > blended_grad_velocity_pseudo_singularity_for_couette(
   const Vector<double>& x)
@@ -494,7 +494,7 @@ namespace Global_Parameters
  }
 
   
-/// \short Function that computes the gradient of the fitting velocity solution near
+///  Function that computes the gradient of the fitting velocity solution near
 /// the corner (0,0): grad[i][j] = du_i/dx_j
  Vector<Vector<double> > grad_velocity_singularity1(const Vector<double>& coord)
  {  
@@ -532,7 +532,7 @@ namespace Global_Parameters
  } // End of function
 
 
- /// \short Function that computes the gradient of the fitting velocity solution near
+ ///  Function that computes the gradient of the fitting velocity solution near
  /// the corner (1,0): grad[i][j] = du_i/dx_j
  Vector<Vector<double> > grad_velocity_singularity2(const Vector<double>& coord)
  { 

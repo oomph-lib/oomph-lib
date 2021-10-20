@@ -49,14 +49,14 @@ namespace oomph
   double AxisymmetricPoroelasticityEquations::Default_density_ratio_value = 1.0;
 
   //===================================================================
-  /// \short Static default value for permeability (1.0 for natural scaling
+  ///  Static default value for permeability (1.0 for natural scaling
   /// i.e. timescale is given by L^2/(k^* E)
   //===================================================================
   double AxisymmetricPoroelasticityEquations::Default_permeability_value = 1.0;
 
 
   //===================================================================
-  /// \short Static default value for ratio of the material's actual
+  ///  Static default value for ratio of the material's actual
   /// permeability to the permeability used in the non-dimensionalisastion
   /// of the equations
   //===================================================================
@@ -74,7 +74,7 @@ namespace oomph
   double AxisymmetricPoroelasticityEquations::Default_porosity_value = 1.0;
 
   //======================================================================
-  /// \short Performs a div-conserving transformation of the vector basis
+  ///  Performs a div-conserving transformation of the vector basis
   /// functions from the reference element to the actual element
   //======================================================================
   double AxisymmetricPoroelasticityEquations::transform_basis(
@@ -139,7 +139,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Output FE representation of soln:
+  ///  Output FE representation of soln:
   /// x,y,u1,u2,q1,q2,div_q,p at Nplot^2 plot points
   //========================================================================
   void AxisymmetricPoroelasticityEquations::output(std::ostream& outfile,
@@ -199,7 +199,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Output FE representation of exact soln at
+  ///  Output FE representation of exact soln at
   /// Nplot^2 plot points
   //============================================================================
   void AxisymmetricPoroelasticityEquations::output_fct(
@@ -250,7 +250,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Output FE representation of exact soln at
+  ///  Output FE representation of exact soln at
   /// Nplot^2 plot points. Unsteady version
   //========================================================================
   void AxisymmetricPoroelasticityEquations::output_fct(
@@ -302,7 +302,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Compute the error between the FE solution and the exact solution
+  ///  Compute the error between the FE solution and the exact solution
   /// using the H(div) norm for q and L^2 norm for u and p
   //========================================================================
   void AxisymmetricPoroelasticityEquations::compute_error(
@@ -409,7 +409,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Compute the error between the FE solution and the exact solution
+  ///  Compute the error between the FE solution and the exact solution
   /// using the H(div) norm for u and L^2 norm for p. Unsteady version
   //========================================================================
   void AxisymmetricPoroelasticityEquations::compute_error(

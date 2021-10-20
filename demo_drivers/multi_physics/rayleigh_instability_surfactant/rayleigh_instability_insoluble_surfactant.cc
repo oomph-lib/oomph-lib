@@ -82,16 +82,16 @@ namespace Global_Physical_Variables
  /// Free surface cosine deformation parameter
  double Epsilon = 1.0e-3;
 
- /// \short Surface Elasticity number (weak case)
+ ///  Surface Elasticity number (weak case)
  double Beta = 3.6e-3;
 
- /// \short Surface Peclet number
+ ///  Surface Peclet number
  double Peclet_S = 4032.0;
 
- /// \short Sufrace Peclet number multiplied by Strouhal number
+ ///  Sufrace Peclet number multiplied by Strouhal number
  double Peclet_St_S = 1.0; 
  
- /// \short Pvd file -- a wrapper for all the different
+ ///  Pvd file -- a wrapper for all the different
  /// vtu output files plus information about continuous time
  /// to facilitate animations in paraview
  ofstream Pvd_file;
@@ -210,7 +210,7 @@ protected:
    return (1.0 - Beta*(C-1.0));
   } // End of sigma
 
- /// \short Fill in the contribution to the residuals
+ ///  Fill in the contribution to the residuals
  /// Calculate the contribution to the jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,DenseMatrix<double> &jacobian)
   {
@@ -273,7 +273,7 @@ protected:
   }
 
  
-  /// \short Overload the Helper function to calculate the residuals and 
+  ///  Overload the Helper function to calculate the residuals and 
   /// jacobian entries. This particular function ensures that the
   /// additional entries are calculated inside the integration loop
   void add_additional_residual_contributions_interface(Vector<double> &residuals, DenseMatrix<double> &jacobian,
@@ -623,7 +623,7 @@ public:
   }
 
  
- /// \short Compute the concentration intergated over the area
+ ///  Compute the concentration intergated over the area
  double integrate_c() const
   {
    //Find out how many nodes there are
@@ -712,7 +712,7 @@ class MyHorizontalSingleLayerSpineMesh :
 
 public:
 
- /// \short Constructor: Pass number of elements in x-direction, number of
+ ///  Constructor: Pass number of elements in x-direction, number of
  /// elements in y-direction, radial extent, axial length , and pointer 
  /// to timestepper (defaults to Steady timestepper)
  MyHorizontalSingleLayerSpineMesh(const unsigned &nx, 
@@ -723,7 +723,7 @@ public:
                                   &Mesh::Default_TimeStepper) :
   HorizontalSingleLayerSpineMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt) {}
 
- /// \short Node update function assumed spines rooted at the wall
+ ///  Node update function assumed spines rooted at the wall
  /// fixed to be at r=1 and directed inwards to r=0.
  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
@@ -839,10 +839,10 @@ public:
   }
 
 
- /// \short Access function for the specific mesh
+ ///  Access function for the specific mesh
  MyHorizontalSingleLayerSpineMesh<ELEMENT>*  Bulk_mesh_pt; 
 
- /// \short Mesh for the free surface (interface) elements
+ ///  Mesh for the free surface (interface) elements
  Mesh* Interface_mesh_pt;
 
  /// Doc the solution

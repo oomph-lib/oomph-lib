@@ -52,14 +52,14 @@ private:
 protected:
 
 
- /// \short Access function that returns the local equation number
+ ///  Access function that returns the local equation number
  /// for the streamfunction components.
  /// The default is to asssume that n is the local node number
  /// and the streamfunction component is the 1st unknown stored at the node.
  virtual inline int s_local_eqn(const unsigned &n)
   {return nodal_local_eqn(n,0);}
  
- ///\short Function to compute the shape and test functions and to return 
+ /// Function to compute the shape and test functions and to return 
  ///the Jacobian of mapping 
  inline double shape_and_test_at_knot(const unsigned &ipt, 
                                       Shape &psi, Shape &test)
@@ -75,7 +75,7 @@ protected:
    return J_eulerian_at_knot(ipt);
   }
 
- ///\short This function returns the residuals for the 
+ /// This function returns the residuals for the 
  /// traction function.
  ///flag=1(or 0): do (or don't) compute the Jacobian as well. 
  void fill_in_generic_residual_contribution(Vector<double> &residuals, 
@@ -159,7 +159,7 @@ public:
    fill_in_generic_residual_contribution(residuals,jacobian,GeneralisedElement::Dummy_matrix,1);
   }
 
- ///\short Compute the element's residual Vector and the jacobian matrix
+ /// Compute the element's residual Vector and the jacobian matrix
  /// Plus the mass matrix especially for eigenvalue problems
  void fill_in_contribution_to_jacobian_and_mass_matrix(
   Vector<double> &residuals,

@@ -58,7 +58,7 @@ private:
 
 public: 
 
- /// \short Constructor: call the underlying constructors and 
+ ///  Constructor: call the underlying constructors and 
  /// initialise the pointer to the Rayleigh number to point
  /// to the default value of 0.0.
  RefineableQCrouzeixRaviartElementWithExternalElement() : 
@@ -75,7 +75,7 @@ public:
    this->ignore_external_geometric_data();
   } 
 
- ///\short The required number of values stored at the nodes is the number of
+ /// The required number of values stored at the nodes is the number of
  ///required values of the CrouzeixRaviartElement.
  unsigned required_nvalue(const unsigned &n) const
   {return RefineableQCrouzeixRaviartElement<DIM>::required_nvalue(n);}
@@ -89,7 +89,7 @@ public:
  ///  Overload the standard output function with the broken default
  void output(ostream &outfile) {FiniteElement::output(outfile);}
 
- /// \short Output function:  
+ ///  Output function:  
  ///  Output x, y, u, v, p at Nplot^DIM plot points
  // Start of output function
  void output(ostream &outfile, const unsigned &nplot)
@@ -125,22 +125,22 @@ public:
   } //End of output function
 
 
- /// \short C-style output function: Broken default
+ ///  C-style output function: Broken default
  void output(FILE* file_pt)
   {FiniteElement::output(file_pt);}
 
- ///  \short C-style output function: Broken default
+ ///   C-style output function: Broken default
  void output(FILE* file_pt, const unsigned &n_plot)
   {FiniteElement::output(file_pt,n_plot);}
 
- /// \short Output function for an exact solution: Broken default
+ ///  Output function for an exact solution: Broken default
  void output_fct(ostream &outfile, const unsigned &Nplot,
                  FiniteElement::SteadyExactSolutionFctPt 
                  exact_soln_pt)
   {FiniteElement::output_fct(outfile,Nplot,exact_soln_pt);}
 
 
- /// \short Output function for a time-dependent exact solution:
+ ///  Output function for a time-dependent exact solution:
  /// Broken default.
  void output_fct(ostream &outfile, const unsigned &Nplot,
                  const double& time,
@@ -151,7 +151,7 @@ public:
     output_fct(outfile,Nplot,time,exact_soln_pt);
   }
 
- /// \short Call the underlying single-physics element's further_build()
+ ///  Call the underlying single-physics element's further_build()
  /// functions and make sure that the pointer to the Rayleigh number
  /// is passed to the sons
  void further_build()
@@ -175,7 +175,7 @@ public:
  /// so don't overload this one - overload the other one to have the same
  /// values as this one, somehow...
 
- /// \short Validate against exact solution at given time
+ ///  Validate against exact solution at given time
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -187,7 +187,7 @@ public:
   {FiniteElement::compute_error(outfile,exact_soln_pt,
                                 time,error,norm);}
  
- /// \short Validate against exact solution.
+ ///  Validate against exact solution.
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -218,7 +218,7 @@ public:
     residuals);
   }
 
- ///\short Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -249,7 +249,7 @@ public:
      residuals,jacobian,mass_matrix);
   }
 
- /// \short Compute the contribution of the external
+ ///  Compute the contribution of the external
  /// degrees of freedom (temperatures) on the Navier-Stokes equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
@@ -416,7 +416,7 @@ class RefineableQAdvectionDiffusionElementWithExternalElement :
 
 public:
 
- /// \short Constructor: call the underlying constructors
+ ///  Constructor: call the underlying constructors
  RefineableQAdvectionDiffusionElementWithExternalElement() : 
   RefineableQAdvectionDiffusionElement<DIM,3>(), ElementWithExternalElement()
   { 
@@ -428,7 +428,7 @@ public:
    this->ignore_external_geometric_data();
   }
 
- ///\short The required number of values stored at the nodes is the number of
+ /// The required number of values stored at the nodes is the number of
  ///required values of the AdvectionDiffusionElement.
  unsigned required_nvalue(const unsigned &n) const
   {return RefineableQAdvectionDiffusionElement<DIM,3>::required_nvalue(n);}
@@ -436,7 +436,7 @@ public:
  ///  Overload the standard output function with the broken default
  void output(ostream &outfile) {FiniteElement::output(outfile);}
 
- /// \short Output function:  
+ ///  Output function:  
  ///  Output x, y, theta at Nplot^DIM plot points
  // Start of output function
  void output(ostream &outfile, const unsigned &nplot)
@@ -468,22 +468,22 @@ public:
   } //End of output function
 
 
- /// \short C-style output function: Broken default
+ ///  C-style output function: Broken default
  void output(FILE* file_pt)
   {FiniteElement::output(file_pt);}
 
- ///  \short C-style output function: Broken default
+ ///   C-style output function: Broken default
  void output(FILE* file_pt, const unsigned &n_plot)
   {FiniteElement::output(file_pt,n_plot);}
 
- /// \short Output function for an exact solution: Broken default
+ ///  Output function for an exact solution: Broken default
  void output_fct(ostream &outfile, const unsigned &Nplot,
                  FiniteElement::SteadyExactSolutionFctPt 
                  exact_soln_pt)
   {FiniteElement::output_fct(outfile,Nplot,exact_soln_pt);}
 
 
- /// \short Output function for a time-dependent exact solution:
+ ///  Output function for a time-dependent exact solution:
  /// Broken default.
  void output_fct(ostream &outfile, const unsigned &Nplot,
                  const double& time,
@@ -502,7 +502,7 @@ public:
 //  unsigned nrecovery_order() 
 //   {return RefineableQCrouzeixRaviartElement<DIM>::nrecovery_order();}
 
-//  /// \short The number of Z2 flux terms is the same as that in 
+//  ///  The number of Z2 flux terms is the same as that in 
 //  /// the NavierStokes (fluid) element.
 //  unsigned num_Z2_flux_terms()
 //   {
@@ -515,7 +515,7 @@ public:
 //    RefineableQCrouzeixRaviartElement<DIM>::get_Z2_flux(s,flux);
 //   } //end of get_Z2_flux
 
- /// \short Validate against exact solution at given time
+ ///  Validate against exact solution at given time
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -527,7 +527,7 @@ public:
   {FiniteElement::compute_error(outfile,exact_soln_pt,
                                 time,error,norm);}
  
- /// \short Validate against exact solution.
+ ///  Validate against exact solution.
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -537,7 +537,7 @@ public:
                     double& error, double& norm)
   {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}
 
- /// \short Overload the wind function in the advection-diffusion equations.
+ ///  Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity,
  /// obtained from the source element in the other mesh
@@ -558,7 +558,7 @@ public:
     fill_in_contribution_to_residuals(residuals);
   }
 
- ///\short Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -589,7 +589,7 @@ public:
   }
 
 
- /// \short Compute the contribution of the external
+ ///  Compute the contribution of the external
  /// degrees of freedom (velocities) on the advection-diffusion equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
@@ -871,7 +871,7 @@ get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
 
 
 //==========================================================================
-/// \short Overload the wind function in the advection-diffusion equations.
+///  Overload the wind function in the advection-diffusion equations.
 /// This provides the coupling from the Navier--Stokes equations to the
 /// advection-diffusion equations because the wind is the fluid velocity,
 /// obtained from the source elements in the other mesh

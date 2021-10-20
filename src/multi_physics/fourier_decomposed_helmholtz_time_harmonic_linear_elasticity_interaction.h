@@ -50,12 +50,12 @@ namespace oomph
       public virtual ElementWithExternalElement
   {
   protected:
-    /// \short Pointer to the ratio, \f$ Q \f$ , of the stress used to
+    ///  Pointer to the ratio, \f$ Q \f$ , of the stress used to
     /// non-dimensionalise the fluid stresses to the stress used to
     /// non-dimensionalise the solid stresses.
     double* Q_pt;
 
-    /// \short Static default value for the ratio of stress scales
+    ///  Static default value for the ratio of stress scales
     /// used in the fluid and solid equations (default is 1.0)
     static double Default_Q_Value;
 
@@ -63,7 +63,7 @@ namespace oomph
     Vector<std::complex<unsigned>>
       U_index_fourier_decomposed_time_harmonic_linear_elasticity_helmholtz_traction;
 
-    /// \short Helper function that actually calculates the residuals
+    ///  Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
@@ -71,7 +71,7 @@ namespace oomph
       Vector<double>& residuals);
 
   public:
-    /// \short Constructor, which takes a "bulk" element and the
+    ///  Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement(
       FiniteElement* const& element_pt, const int& face_index)
@@ -150,7 +150,7 @@ namespace oomph
       fill_in_jacobian_from_external_interaction_by_fd(residuals, jacobian);
     }
 
-    /// \short Return the ratio of the stress scales used to non-dimensionalise
+    ///  Return the ratio of the stress scales used to non-dimensionalise
     /// the fluid and elasticity equations. E.g.
     /// \f$ Q = (\omega a)^2 \rho/E \f$, i.e. the
     /// ratio between the inertial fluid stress and the solid's elastic
@@ -160,7 +160,7 @@ namespace oomph
       return *Q_pt;
     }
 
-    /// \short Return a pointer the ratio of stress scales used to
+    ///  Return a pointer the ratio of stress scales used to
     /// non-dimensionalise the fluid and solid equations.
     double*& q_pt()
     {
@@ -168,7 +168,7 @@ namespace oomph
     }
 
 
-    /// \short Output function
+    ///  Output function
     void output(std::ostream& outfile)
     {
       /// Dummy
@@ -176,7 +176,7 @@ namespace oomph
       output(outfile, nplot);
     }
 
-    /// \short Output function: Plot traction etc at Gauss points
+    ///  Output function: Plot traction etc at Gauss points
     /// nplot is ignored.
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -231,13 +231,13 @@ namespace oomph
       }
     }
 
-    /// \short C_style output function
+    ///  C_style output function
     void output(FILE* file_pt)
     {
       FaceGeometry<ELASTICITY_BULK_ELEMENT>::output(file_pt);
     }
 
-    /// \short C-style output function
+    ///  C-style output function
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       FaceGeometry<ELASTICITY_BULK_ELEMENT>::output(file_pt, n_plot);
@@ -439,7 +439,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short A class for elements that allow the imposition of an
+  ///  A class for elements that allow the imposition of an
   /// prescribed flux (determined from the normal displacements of an
   /// adjacent linearly elastic solid. Normal derivative for displacement
   /// potential is given by normal displacement of adjacent solid multiplies
@@ -454,7 +454,7 @@ namespace oomph
       public virtual ElementWithExternalElement
   {
   public:
-    /// \short Constructor, takes the pointer to the "bulk" element and the
+    ///  Constructor, takes the pointer to the "bulk" element and the
     /// face index identifying the face to which the element is attached.
     FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement(
       FiniteElement* const& bulk_el_pt, const int& face_index);
@@ -485,7 +485,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector and its
+    ///  Add the element's contribution to its residual vector and its
     /// Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -572,7 +572,7 @@ namespace oomph
 
 
   protected:
-    /// \short Function to compute the shape and test functions and to return
+    ///  Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test(const Vector<double>& s,
@@ -596,7 +596,7 @@ namespace oomph
     }
 
 
-    /// \short Function to compute the shape and test functions and to return
+    ///  Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test_at_knot(const unsigned& ipt,
@@ -621,7 +621,7 @@ namespace oomph
 
 
   private:
-    /// \short Add the element's contribution to its residual vector.
+    ///  Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     void fill_in_generic_residual_contribution_helmholtz_flux_from_displacement(
@@ -731,7 +731,7 @@ namespace oomph
 
 
   //===========================================================================
-  /// \short Helper function to compute the element's residual vector and
+  ///  Helper function to compute the element's residual vector and
   /// the Jacobian matrix.
   //===========================================================================
   template<class HELMHOLTZ_BULK_ELEMENT, class ELASTICITY_BULK_ELEMENT>

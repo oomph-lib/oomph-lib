@@ -81,7 +81,7 @@ public:
    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->fix_pressure(pdof,pvalue);
   } // end of fix_pressure
 
- /// \short Update the problem specs before solve. 
+ ///  Update the problem specs before solve. 
  /// Re-set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve()
   {   

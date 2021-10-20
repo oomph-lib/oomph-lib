@@ -51,7 +51,7 @@ namespace oomph
   //===============================================================
   namespace MeshExtrusionHelpers
   {
-    /// \short Class to contain any helpers for the mesh extrusion. At
+    ///  Class to contain any helpers for the mesh extrusion. At
     /// the moment this only used to decide on whether or not to
     /// doc the mesh setup time
     class ExtrusionHelper
@@ -91,14 +91,14 @@ namespace oomph
   } // namespace MeshExtrusionHelpers
 
   //=======================================================================
-  /// \short Mesh class that takes a 2D mesh consisting of quadrilateral
+  ///  Mesh class that takes a 2D mesh consisting of quadrilateral
   /// elements and "extrudes" it in the z-direction.
   //=======================================================================
   template<class ELEMENT>
   class ExtrudedCubeMeshFromQuadMesh : public virtual BrickMeshBase
   {
   public:
-    /// \short Constructor: Pass a mesh consisting of quad elements,
+    ///  Constructor: Pass a mesh consisting of quad elements,
     /// specify the number of elements in the z direction, and the
     /// corresponding length in this direction. Assumes that the back
     /// lower left corner is located at (0,0,0). Timestepper defaults
@@ -115,7 +115,7 @@ namespace oomph
     }
 
 
-    /// \short Constructor: Pass a mesh consisting of quad elements,
+    ///  Constructor: Pass a mesh consisting of quad elements,
     /// specify the number of elements in the z direction, and the
     /// corresponding minimum and maximum z-value of the mesh. Again,
     /// timestepper defaults to Steady.
@@ -132,7 +132,7 @@ namespace oomph
     }
 
 
-    /// \short Destructor: If the underlying spatial domain was made up of
+    ///  Destructor: If the underlying spatial domain was made up of
     /// any macro elements then we will have created an extruded domain
     /// which in turn creates extruded macro elements. As we're responsible
     /// for creating the domain, we need to kill it and it'll kill the
@@ -158,7 +158,7 @@ namespace oomph
     } // End of ExtrudedCubeMeshFromQuadMesh
 
 
-    /// \short Return the value of the z-coordinate at the node given by the
+    ///  Return the value of the z-coordinate at the node given by the
     /// local node number, znode.
     virtual double z_spacing_function(const unsigned& z_element,
                                       const unsigned& z_node) const
@@ -171,7 +171,7 @@ namespace oomph
     } // End of z_spacing_function
 
 
-    /// \short Get all the boundary information of an element using the
+    ///  Get all the boundary information of an element using the
     /// input (quad_mesh_pt) mesh. If the element lies on a boundary then
     /// the user will be given the corresponding boundary index and the
     /// index of the face of quad_el_pt attached to the boundary. If the
@@ -222,7 +222,7 @@ namespace oomph
       public virtual RefineableBrickMesh<ELEMENT>
   {
   public:
-    /// \short Constructor: Pass a mesh consisting of quad elements,
+    ///  Constructor: Pass a mesh consisting of quad elements,
     /// specify the number of elements in the z direction, and the
     /// corresponding length in this direction. Assumes that the back
     /// lower left corner is located at (0,0,0). Timestepper defaults
@@ -241,7 +241,7 @@ namespace oomph
     }
 
 
-    /// \short Constructor: Pass a mesh consisting of quad elements,
+    ///  Constructor: Pass a mesh consisting of quad elements,
     /// specify the number of elements in the z direction, and the
     /// corresponding minimum and maximum z-value of the mesh. Again,
     /// timestepper defaults to Steady.

@@ -52,7 +52,7 @@ namespace oomph
 /* namespace IntersectionChecker */
 /* { */
 
-/*  /// \short Check if finite-length line segments specified by end points */
+/*  ///  Check if finite-length line segments specified by end points */
 /*  /// intersect (true) or not (false). From */
 /*  /// http://paulbourke.net/geometry/lineline2d/ */
 /*  /// C++ contribution by Damian Coventry. */
@@ -115,7 +115,7 @@ namespace oomph
 
 
 //======================================================================
-/// \short Template free base class for face elements that involve 
+///  Template free base class for face elements that involve 
 /// all kinds of heat transfer operation. Used to store spatial dim of
 /// problem and the index at which the temperature is stored in the bulk element
 //======================================================================
@@ -125,7 +125,7 @@ namespace oomph
    public:
   
 
-  /// \short Function pointer to the prescribed-flux function.
+  ///  Function pointer to the prescribed-flux function.
   /// Flux is allowed to depend on the spatial
   /// position, x, the outer unit normal, n, and the continuous time. 
   /// We also allow a dependendence on actual local "temperature", u.
@@ -148,7 +148,7 @@ namespace oomph
  
   protected:
 
- /// \short Function to calculate the prescribed flux at a given spatial
+ ///  Function to calculate the prescribed flux at a given spatial
  /// position, x, the outer unit normal, n, and the continuous time. 
  /// We also allow an explicit dependendence on the integration point, ipt,
  /// and the actual local "temperature", u, in anticipation of
@@ -279,7 +279,7 @@ namespace oomph
 /*   } */
 
 
-/*  /// \short Enable smoothing of shadow; optional argument provides */
+/*  ///  Enable smoothing of shadow; optional argument provides */
 /*  /// value for tanh smoothing factor (defaults to 100) */
 /*  void enable_smoothed_sun_shadow(const double& alpha_tanh_smooth_sun_shadow= */
 /*                                  100.0) */
@@ -288,13 +288,13 @@ namespace oomph
 /*   Alpha_tanh_smooth_sun_shadow=alpha_tanh_smooth_sun_shadow; */
 /*  } */
 
-/*  /// \short Disable smoothing of shadow */
+/*  ///  Disable smoothing of shadow */
 /*  void disable_smoothed_sun_shadow() */
 /*  { */
 /*   Smoothed_sun_shadow=false; */
 /*  } */
 
-/*  /// \short Disable smoothing of shadow */
+/*  ///  Disable smoothing of shadow */
 /*  bool smoothed_sun_shadow_is_enabled() */
 /*  { */
 /*   return Smoothed_sun_shadow; */
@@ -338,7 +338,7 @@ namespace oomph
 /*    Use_analytical_radiation_fct=false; */
 /*   } */
  
-/*  /// \short Update limiting angles for diffuse radiation, given the */
+/*  ///  Update limiting angles for diffuse radiation, given the */
 /*  /// pointers to nodes that make up the "upper boundary" */
 /*  /// that can potentially shield the integration points from diffuse */
 /*  /// radiation */
@@ -346,7 +346,7 @@ namespace oomph
 /*                              shielding_node_pt); */
 
 
-/*  /// \short Get the atmospheric radiation as fct of integration point */
+/*  ///  Get the atmospheric radiation as fct of integration point */
 /*  /// index, time, Eulerian coordinate and outer unit normal. Virtual  */
 /*  /// so it can be overloaded in multiphysics problems */
 /*  virtual double atmospheric_radiation(const unsigned& intpt, */
@@ -377,19 +377,19 @@ namespace oomph
 /*  double Alpha_tanh_smooth_sun_shadow; */
 
  
-/*  /// \short Boolean to indicate the analytically prescribed radiation */
+/*  ///  Boolean to indicate the analytically prescribed radiation */
 /*  /// fct (radiation flux as fct of x,n,t) should be used */
 /*  /// rather than radiative flux based on direct and diffuse solar */
 /*  /// flux. */
 /*  bool Use_analytical_radiation_fct; */
  
-/*  /// \short Vector of pairs storing max. and minimum angle for exposure */
+/*  ///  Vector of pairs storing max. and minimum angle for exposure */
 /*  /// to diffuse atmospheric radiation for each integration point. */
 /*  /// Initialised to 0 and pi (full radiation from semicircle above  */
 /*  /// integration point) */
 /*  Vector<std::pair<double,double> > Diffuse_limit_angles; */
 
-/*  /// \short Pointer to function that specifies atmospheric */
+/*  ///  Pointer to function that specifies atmospheric */
 /*  /// radiation in terms of directional solar flux (unit vector and magnitude) */
 /*  /// and total diffusive radiation (which is later weighted by diffuse limiting */
 /*  /// angles). Input argument: time. */
@@ -398,7 +398,7 @@ namespace oomph
 /*                                       Vector<double> &solar_flux_unit_vector,  */
 /*                                       double& total_diffuse_radiation); */
 
-/*  /// \short Pointer to analytical radiation function. Arguments: */
+/*  ///  Pointer to analytical radiation function. Arguments: */
 /*  /// Time, Eulerian coordinate and outer unit normal. Returns  */
 /*  /// heat flux. Only used for validation */
 /*  void (*Analytical_radiation_fct_pt)(const double& time, */
@@ -409,7 +409,7 @@ namespace oomph
 
 /*   private: */
 
-/*  /// \short Private helper function to check if the straight line */
+/*  ///  Private helper function to check if the straight line */
 /*  /// connecting (x_prev,y_prev) and (x_next,y_next) jumps */
 /*  /// quadrants (in which case crossing_quadrants is returned as true) */
 /*  /// and what increment to the winding number this results in. */
@@ -431,7 +431,7 @@ namespace oomph
 
 
 /* //===================================================================== */
-/* /// \short Get the atmospheric radiation as fct of integration point */
+/* ///  Get the atmospheric radiation as fct of integration point */
 /* /// index, time, Eulerian coordinate and outer unit normal. Virtual  */
 /* /// so it can be overloaded in multiphysics problems */
 /* //===================================================================== */
@@ -529,7 +529,7 @@ namespace oomph
 
 
 /* //==================================================================== */
-/* /// \short Private helper function to check if the straight line */
+/* ///  Private helper function to check if the straight line */
 /* /// connecting (x_prev,y_prev) and (x_next,y_next) jumps */
 /* /// quadrants (in which case crossing_quadrants is returned as true) */
 /* /// and what increment to the winding number this results in. */
@@ -651,7 +651,7 @@ namespace oomph
 /* } */
 
 /* //===================================================================== */
-/* /// \short Update limiting angles for diffuse radiation, given the */
+/* ///  Update limiting angles for diffuse radiation, given the */
 /* /// Vector of pointers to nodes that make up the "upper boundary" */
 /* /// that can potentially shield the integration points from diffuse */
 /* /// radiation */
@@ -937,7 +937,7 @@ namespace oomph
 
 
 /* //===================================================================== */
-/* /// \short Output cone of diffuse radiation for all integration points */
+/* ///  Output cone of diffuse radiation for all integration points */
 /* //===================================================================== */
 /* void SolarRadiationBase::output_diffuse_radiation_cone( */
 /*  std::ostream &outfile, const double& radius) */
@@ -980,7 +980,7 @@ namespace oomph
 
 
 /* //===================================================================== */
-/* /// \short Output illumination angles for all integration points */
+/* ///  Output illumination angles for all integration points */
 /* //===================================================================== */
 /* void SolarRadiationBase::output_limiting_angles(std::ostream &outfile) */
 /* { */
@@ -1028,7 +1028,7 @@ namespace oomph
 
 
 /* //===================================================================== */
-/* /// \short Output illumination angles for all integration points */
+/* ///  Output illumination angles for all integration points */
 /* //===================================================================== */
 /* void SolarRadiationBase::output_atmospheric_radiation(std::ostream &outfile) */
 /* { */
@@ -1158,7 +1158,7 @@ namespace oomph
 /*   } */
 
 
-/*  /// \short Compute the incoming Stefan Boltzmann radiation */
+/*  ///  Compute the incoming Stefan Boltzmann radiation */
 /*  /// onto integration point ipt -- input externally pre-computed */
 /*  /// Eulerian coordinate of illuminated integration point, r_illuminated,  */
 /*  /// and outer unit normal to that point, n_illuminated.  */
@@ -1190,7 +1190,7 @@ namespace oomph
 /*  } */
 
 
-/*  /// \short Compute the element's contribution to Stefan Boltzmann  */
+/*  ///  Compute the element's contribution to Stefan Boltzmann  */
 /*  /// radiation onto point at r_illuminated with local outer unit  */
 /*  /// normal n_illuminated, */
 /*  /// using the integration points (in current element) contained */
@@ -1209,7 +1209,7 @@ namespace oomph
 /*     outfile); */
 /*   } */
 
-/*  /// \short Compute the element's contribution to Stefan Boltzmann  */
+/*  ///  Compute the element's contribution to Stefan Boltzmann  */
 /*  /// radiation onto point at r_illuminated with local outer unit  */
 /*  /// normal n_illuminated, */
 /*  /// using the integration points (in current element) contained */
@@ -1230,7 +1230,7 @@ namespace oomph
 /*    } */
 /*  } */
        
-/*  /// \short Set illumination info: For integration point, ipt, */
+/*  ///  Set illumination info: For integration point, ipt, */
 /*  /// we store all pairs identifying illuminating elements */
 /*  /// (via pointer to element and indices of illuminating  */
 /*  /// integration points): */
@@ -1286,10 +1286,10 @@ namespace oomph
 
 /*   } */
 
-/*  /// \short Output Stefan Boltzmann radiation: x,y,in,out,n_x,n_y */
+/*  ///  Output Stefan Boltzmann radiation: x,y,in,out,n_x,n_y */
 /*  void output_stefan_boltzmann_radiation(std::ostream &outfile); */
 
-/*  /// \short Output Stefan Boltzmann radiation: Plots rays from illuminated */
+/*  ///  Output Stefan Boltzmann radiation: Plots rays from illuminated */
 /*  /// integration point to illuminating ones (and back). */
 /*  void output_stefan_boltzmann_radiation_rays(std::ostream &outfile); */
  
@@ -1301,7 +1301,7 @@ namespace oomph
 /*  /// Pointer to non-dim zero centrigrade offset in Stefan Boltzmann law */
 /*  double* Theta_0_pt; */
 
-/*  /// \short Illumination info: For each integration point, ipt, */
+/*  ///  Illumination info: For each integration point, ipt, */
 /*  /// we store all pairs identifying illuminating elements */
 /*  /// (via pointer to element and illumnating integration points): */
 /*  /// */
@@ -1321,7 +1321,7 @@ namespace oomph
 
 
 /* //===================================================================== */
-/* /// \short Compute the element's contribution to Stefan Boltzmann radiation */
+/* ///  Compute the element's contribution to Stefan Boltzmann radiation */
 /* /// onto point at r_illuminated with local outer unit normal n_illuminated, */
 /* /// using the integration points (in current element) contained */
 /* /// in visible_intpts_in_current_element. */
@@ -1508,7 +1508,7 @@ namespace oomph
 
 
 //======================================================================
-/// \short A base class for face elements that involve all kinds of
+///  A base class for face elements that involve all kinds of
 /// heat transfer. It's actually a fully functional re-implementation
 /// of the UnsteadyHeatFluxElement defined in the unsteady heat library
 /// with a slightly more general interface to the prescribed flux
@@ -1689,7 +1689,7 @@ template <class ELEMENT>
   }
   
   
-  /// \short Specify the value of nodal zeta from the face geometry:
+  ///  Specify the value of nodal zeta from the face geometry:
   /// The "global" intrinsic coordinate of the element when
   /// viewed as part of a geometric object should be given by
   /// the FaceElement representation, by default (needed to break
@@ -1725,7 +1725,7 @@ template <class ELEMENT>
   output(outfile,nplot);
  }
  
- /// \short Output function. Output "temperature", "incoming" heat flux,
+ ///  Output function. Output "temperature", "incoming" heat flux,
  /// and outer unit normal. n_plot is ignored because flux function may
  /// depend explicitly on integration point!
  void output(std::ostream &outfile, const unsigned &n_plot)
@@ -1788,18 +1788,18 @@ template <class ELEMENT>
    }
  }
  
- /// \short C_style output function
+ ///  C_style output function
  void output(FILE* file_pt)
  {FiniteElement::output(file_pt);}
  
- /// \short C-style output function
+ ///  C-style output function
  void output(FILE* file_pt, const unsigned &n_plot)
  {FiniteElement::output(file_pt,n_plot);}
  
  
    protected:
  
- /// \short Function to compute the shape and test functions and to return 
+ ///  Function to compute the shape and test functions and to return 
  /// the Jacobian of mapping between local and global (Eulerian)
  /// coordinates
  inline double shape_and_test(const Vector<double> &s, Shape &psi, Shape &test)
@@ -1942,7 +1942,7 @@ fill_in_generic_residual_contribution_ust_heat_flux(Vector<double> &residuals)
 
 
 /* //====================================================================== */
-/* /// \short A class for elements that allow the imposition of solar/ */
+/* ///  A class for elements that allow the imposition of solar/ */
 /* /// atmospheric heat flux on the boundaries of UnsteadyHeat elements. */
 /* /// The element geometry is obtained from the  FaceGeometry<ELEMENT>  */
 /* /// policy class. */
@@ -1958,7 +1958,7 @@ fill_in_generic_residual_contribution_ust_heat_flux(Vector<double> &residuals)
  
 /* public: */
 
-/*  /// \short Constructor, takes the pointer to the "bulk" element and the  */
+/*  ///  Constructor, takes the pointer to the "bulk" element and the  */
 /*  /// index of the face to be created */
 /*  SolarUnsteadyHeatFluxElement(FiniteElement* const &bulk_el_pt,  */
 /*                               const int &face_index); */
@@ -1995,7 +1995,7 @@ fill_in_generic_residual_contribution_ust_heat_flux(Vector<double> &residuals)
 /*  //   fill_in_generic_residual_contribution_solar_ust_heat_flux(residuals,jacobian,1); */
 /*  //  } */
 
-/*  /// \short Change integration scheme (overloads underlying version and */
+/*  ///  Change integration scheme (overloads underlying version and */
 /*  /// and resizes lookup schemes introduced in this class. */
 /*  void set_integration_scheme(Integral* const &integral_pt) */
 /*  { */
@@ -2013,7 +2013,7 @@ fill_in_generic_residual_contribution_ust_heat_flux(Vector<double> &residuals)
 
 /*  // hierher needed? */
 
-/*  /// \short Specify the value of nodal zeta from the face geometry: */
+/*  ///  Specify the value of nodal zeta from the face geometry: */
 /*  /// The "global" intrinsic coordinate of the element when */
 /*  /// viewed as part of a geometric object should be given by */
 /*  /// the FaceElement representation, by default (needed to break */
@@ -2025,7 +2025,7 @@ fill_in_generic_residual_contribution_ust_heat_flux(Vector<double> &residuals)
 
 /* protected: */
  
-/*  /// \short Function to compute the shape and test functions and to return  */
+/*  ///  Function to compute the shape and test functions and to return  */
 /*  /// the Jacobian of mapping between local and global (Eulerian) */
 /*  /// coordinates */
 /*  inline double shape_and_test(const Vector<double> &s, Shape &psi, Shape &test) */
@@ -2048,7 +2048,7 @@ fill_in_generic_residual_contribution_ust_heat_flux(Vector<double> &residuals)
 
 /* private: */
 
-/*  /// \short Compute the element residual vector. */
+/*  ///  Compute the element residual vector. */
 /*  /// flag=1(or 0): do (or don't) compute the Jacobian as well.  */
 /*  void fill_in_generic_residual_contribution_solar_ust_heat_flux( */
 /*   Vector<double> &residuals, DenseMatrix<double> &jacobian,  */
@@ -2250,7 +2250,7 @@ public virtual FaceGeometry<ELEMENT>,
   
    public:
   
-   /// \short Constructor, which takes a "bulk" element and the 
+   ///  Constructor, which takes a "bulk" element and the 
    /// value of the index and its limit
    SurfaceMeltElement(FiniteElement* const &bulk_el_pt, 
                       const int &face_index,
@@ -2342,7 +2342,7 @@ public virtual FaceGeometry<ELEMENT>,
    }
   
   
-  /// \short Get interpolated pressure (essentially a Lagrange multiplier
+  ///  Get interpolated pressure (essentially a Lagrange multiplier
   /// that enforces the imposed boundary motion)
   double get_interpolated_lagrange_p(const Vector<double>& s)
   {
@@ -2428,7 +2428,7 @@ public virtual FaceGeometry<ELEMENT>,
   }
 
   
-  /// \short Set "Lagrange multiplier pressure" to zero (to make things
+  ///  Set "Lagrange multiplier pressure" to zero (to make things
   /// consistent with re-set Lagrangian coordinates
   void set_lagrange_multiplier_pressure_to_zero()
   {
@@ -2454,7 +2454,7 @@ public virtual FaceGeometry<ELEMENT>,
   }
 
   
-  /// \short Specify the value of nodal zeta from the face geometry:
+  ///  Specify the value of nodal zeta from the face geometry:
   /// The "global" intrinsic coordinate of the element when
   /// viewed as part of a geometric object should be given by
   /// the FaceElement representation, by default (needed to break
@@ -2504,7 +2504,7 @@ public virtual FaceGeometry<ELEMENT>,
    }
  }
  
- /// \short Generalised output function to include melt information:
+ ///  Generalised output function to include melt information:
  /// temperature, incoming flux, melt rate, outer unit normal
  void output_melt(std::ostream &outfile)
  { 
@@ -2580,7 +2580,7 @@ public virtual FaceGeometry<ELEMENT>,
  
    protected:
  
- /// \short Helper function that actually calculates the residuals
+ ///  Helper function that actually calculates the residuals
  void fill_in_contribution_to_residuals_surface_melt(
   Vector<double> &residuals);
  

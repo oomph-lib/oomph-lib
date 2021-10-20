@@ -29,7 +29,7 @@
 namespace oomph
 {
   //=========================================================================
-  /// \short Given the son type of the element and the local coordinate s of
+  ///  Given the son type of the element and the local coordinate s of
   /// a given node in the son element, return the local coordinate s in its
   /// father element. 2D case.
   //=========================================================================
@@ -83,7 +83,7 @@ namespace oomph
   } // End of level_up_local_coord_of_node
 
   //=========================================================================
-  /// \short Given the son type of the element and the local coordinate s of
+  ///  Given the son type of the element and the local coordinate s of
   /// a given node in the son element, return the local coordinate s in its
   /// father element. 3D case.
   //=========================================================================

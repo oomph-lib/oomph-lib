@@ -93,7 +93,7 @@ namespace ProblemParameters
  /// One day in our non-dim units
  double One_day=0.4084910633;
 
- /// \short Function that specifies atmospheric
+ ///  Function that specifies atmospheric
  /// radiation in terms of directional solar flux vector
  /// (which has direction and magnitude; well, like most vectors, actually)
  /// and total diffusive radiation (which is later weighted by diffuse limiting
@@ -138,7 +138,7 @@ namespace ExactSolution
  /// Growth rate for interface
  double Growth_rate=1.0;
  
- /// \short Frequency of co-sinusoidal oscillation of incoming heat flux
+ ///  Frequency of co-sinusoidal oscillation of incoming heat flux
  /// (to assess suppression of re-freezing). Set to zero for validation.
  double Omega_cos=0.0;
 
@@ -185,7 +185,7 @@ t*Y*Y*Growth_rate*pow(sin(2.0*X*0.3141592653589793E1),2.0)*0.3141592653589793E1
  }
 
 
- /// \short Flux into bulk required by the exact solution on a 
+ ///  Flux into bulk required by the exact solution on a 
  /// boundary with outer unit normal n. No dependence on temperature u.
  void flux_into_bulk(const double& t,
                      const Vector<double>& x, 
@@ -210,7 +210,7 @@ Y*cos(2.0*X*0.3141592653589793E1))*Ny;
 
  }
 
- /// \short Total flux (into bulk + melt) required by the exact 
+ ///  Total flux (into bulk + melt) required by the exact 
  /// solution on a boundary with outer unit
  /// normal n. No dependence on temperature u.
  void prescribed_flux_for_unsteady_heat_validation(const double& t,
@@ -265,10 +265,10 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
  
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve(){}
   
- /// \short Actions before next timestep
+ ///  Actions before next timestep
  void actions_before_implicit_timestep()
   {
    // Amplitude of oscillation
@@ -320,7 +320,7 @@ public:
    rebuild_global_mesh();
   }
  
- /// \short Actions after adapt: 
+ ///  Actions after adapt: 
  /// Setup the problem again -- remember that the mesh has been
  /// completely rebuilt and its element's don't have any
  /// pointers to source fcts etc. yet
@@ -593,7 +593,7 @@ private:
   }
 
 
- /// \short Helper function to (re-)set boundary condition
+ ///  Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup()
   {
@@ -1340,7 +1340,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
 
 
 //=======start_of_main====================================================
-/// \short Driver code
+///  Driver code
 //========================================================================
 int main(int argc, char* argv[])
 {

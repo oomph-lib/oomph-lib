@@ -60,10 +60,10 @@ using namespace std;
 namespace Global_Parameters
 {
 
- /// \short Square of wavenumber for the Helmholtz equation
+ ///  Square of wavenumber for the Helmholtz equation
  double K_squared=10.0;
  
- /// \short Radius of outer boundary of Helmholtz domain
+ ///  Radius of outer boundary of Helmholtz domain
  double Outer_radius=2.0; 
 
  /// FSI parameter
@@ -90,11 +90,11 @@ namespace Global_Parameters
   Omega_sq=Density_ratio*Q;
  }
 
- /// \short Wavenumber "zenith"-variation of imposed displacement of coating
+ ///  Wavenumber "zenith"-variation of imposed displacement of coating
  /// on inner boundary 
  unsigned M=4; 
 
- /// \short Displacement field on inner boundary of solid
+ ///  Displacement field on inner boundary of solid
  void solid_boundary_displacement(const Vector<double>& x,
                                   Vector<std::complex<double> >& u)
  {
@@ -131,7 +131,7 @@ public:
  /// Constructor:
  CoatedSphereProblem();
  
- /// \short Update function (empty)
+ ///  Update function (empty)
  void actions_before_newton_solve(){}
 
  /// Update function (empty)
@@ -148,16 +148,16 @@ public:
 
 private:
 
- /// \short Create FSI traction elements
+ ///  Create FSI traction elements
  void create_fsi_traction_elements();
 
- /// \short Create Helmholtz FSI flux elements
+ ///  Create Helmholtz FSI flux elements
  void create_helmholtz_fsi_flux_elements(); 
 
  /// Setup interaction
  void setup_interaction();
 
- /// \short Create DtN elements on outer boundary
+ ///  Create DtN elements on outer boundary
  void create_helmholtz_DtN_elements();
 
  /// Pointer to solid mesh
@@ -172,7 +172,7 @@ private:
  /// Pointer to mesh of Helmholtz FSI flux elements
  Mesh* Helmholtz_fsi_flux_mesh_pt;
  
- /// \short Pointer to mesh containing the DtN elements
+ ///  Pointer to mesh containing the DtN elements
  FourierDecomposedHelmholtzDtNMesh<HELMHOLTZ_ELEMENT>* Helmholtz_DtN_mesh_pt;
  
  /// Trace file

@@ -43,7 +43,7 @@
 namespace oomph
 {
   //======================================================================
-  /// \short Displacement control element: In the "normal" formulation
+  ///  Displacement control element: In the "normal" formulation
   /// of solid mechanics problems, the external load is given and the
   /// displacement throughout the solid body is computed.
   /// For highly nonlinear problems it is sometimes helpful to
@@ -105,7 +105,7 @@ namespace oomph
   class DisplacementControlElement : public virtual GeneralisedElement
   {
   public:
-    /// \short Constructor. Pass:
+    ///  Constructor. Pass:
     /// - Pointer to \c SolidFiniteElement that contains the control point
     /// - Vector that contains the local coordinates of the control point
     ///   in that element.
@@ -159,7 +159,7 @@ namespace oomph
       }
     }
 
-    /// \short Constructor. Pass:
+    ///  Constructor. Pass:
     /// - Pointer to \c SolidFiniteElement that contains the control point
     /// - Vector that contains the local coordinates of the control point
     ///   in that element.
@@ -214,7 +214,7 @@ namespace oomph
     void operator=(const DisplacementControlElement&) = delete;
 
 
-    /// \short Pointer to Data object whose one-and-only value represents the
+    ///  Pointer to Data object whose one-and-only value represents the
     /// load that is adjusted to allow displacement control
     Data* displacement_control_load_pt() const
     {
@@ -242,7 +242,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector:
+    ///  Add the element's contribution to its residual vector:
     /// The displacement constraint. [Note: Jacobian is computed
     /// automatically by finite-differencing]
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -256,14 +256,14 @@ namespace oomph
       }
     }
 
-    /// \short The number of "DOF" that degrees of freedom in this element
+    ///  The number of "DOF" that degrees of freedom in this element
     /// are sub-divided into: Just the control pressure.
     unsigned ndof_types() const
     {
       return 1;
     }
 
-    /// \short Create a list of pairs for all unknowns in this element,
+    ///  Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.
@@ -298,32 +298,32 @@ namespace oomph
     }
 
   protected:
-    /// \short Pointer to Data item whose one-and-only  value
+    ///  Pointer to Data item whose one-and-only  value
     /// contains the load value that is being adjusted
     /// to allow displacement control.
     Data* Displacement_control_load_pt;
 
-    /// \short Pointer to the value that stores the prescribed coordinate
+    ///  Pointer to the value that stores the prescribed coordinate
     /// of the control point
     double* Control_position_value_pt;
 
-    /// \short Coordinate direction in which the displacement of the
+    ///  Coordinate direction in which the displacement of the
     /// control point is controlled
     unsigned Controlled_direction;
 
     /// Pointer to SolidFiniteElement at which control displacement is applied
     SolidFiniteElement* Controlled_element_pt;
 
-    /// \short Vector of local coordinates of point at which control
+    ///  Vector of local coordinates of point at which control
     /// displacement is applied
     Vector<double> Controlled_point;
 
-    /// \short Flag to indicate if load data was created internally or
+    ///  Flag to indicate if load data was created internally or
     /// externally (and is therefore stored in the element's internal or
     /// external Data)
     bool Load_data_created_internally;
 
-    /// \short In which component (in the vector of the element's internal or
+    ///  In which component (in the vector of the element's internal or
     /// external Data) is the load stored?
     unsigned Load_data_index;
 

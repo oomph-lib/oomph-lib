@@ -65,11 +65,11 @@ namespace Global_Physical_Variables
  /// Product of Reynolds number and inverse of Froude number
  double ReInvFr = 5.0; // (Fr = 1)
 
- /// \short Ratio of viscosity in upper fluid to viscosity in lower
+ ///  Ratio of viscosity in upper fluid to viscosity in lower
  /// fluid. Reynolds number etc. is based on viscosity in lower fluid.
  double Viscosity_Ratio = 0.1;
 
- /// \short Ratio of density in upper fluid to density in lower
+ ///  Ratio of density in upper fluid to density in lower
  /// fluid. Reynolds number etc. is based on density in lower fluid.
  double Density_Ratio = 0.5;
 
@@ -121,7 +121,7 @@ public:
 
 private:
 
- /// \short Spine heights/lengths are unknowns in the problem so their
+ ///  Spine heights/lengths are unknowns in the problem so their
  /// values get corrected during each Newton step. However, changing
  /// their value does not automatically change the nodal positions, so
  /// we need to update all of them here.
@@ -133,7 +133,7 @@ private:
  /// No actions required before solve step
  void actions_before_newton_solve() {}
 
- /// \short Update after solve can remain empty, because the update 
+ ///  Update after solve can remain empty, because the update 
  /// is performed automatically after every Newton step.
  void actions_after_newton_solve() {}
 
@@ -157,10 +157,10 @@ private:
  ofstream Trace_file;
 
 
- /// \short Pointer to the specific bulk mesh
+ ///  Pointer to the specific bulk mesh
  TwoLayerSpineMesh<ELEMENT>* Bulk_mesh_pt; 
 
- /// \short Pointer to the surface mesh
+ ///  Pointer to the surface mesh
  Mesh* Surface_mesh_pt;
 
 
@@ -330,7 +330,7 @@ InterfaceProblem(const unsigned &n_r, const unsigned &n_z1,
 
 
 //==start_of_set_initial_condition========================================
-/// \short Set initial conditions: Set all nodal velocities to zero and
+///  Set initial conditions: Set all nodal velocities to zero and
 /// initialise the previous velocities and nodal positions to correspond
 /// to an impulsive start
 //========================================================================
@@ -360,7 +360,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
 
 
 //==start_of_set_boundary_conditions======================================
-/// \short Set boundary conditions: Set all velocity components to zero
+///  Set boundary conditions: Set all velocity components to zero
 /// on the top and bottom (solid) walls and the radial and azimuthal
 /// components only to zero on the side boundaries
 //========================================================================

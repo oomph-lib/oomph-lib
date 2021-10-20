@@ -87,7 +87,7 @@ class RefineableFishPoissonProblem : public Problem
 
 public:
 
- /// \short  Constructor: Bool flag specifies if position of fish back is
+ ///   Constructor: Bool flag specifies if position of fish back is
  /// prescribed or computed from the coupled problem. String specifies
  /// output directory
  RefineableFishPoissonProblem(bool fix_position, string directory_name);
@@ -95,7 +95,7 @@ public:
  /// Destructor
  virtual ~RefineableFishPoissonProblem();
 
- /// \short Update after Newton step: Update in response to possible changes
+ ///  Update after Newton step: Update in response to possible changes
  /// in the wall shape
  void actions_before_newton_convergence_check()
   {
@@ -118,14 +118,14 @@ public:
    return Fish_mesh_pt;
   }
 
- /// \short Return value of the "load" on the elastically supported ring
+ ///  Return value of the "load" on the elastically supported ring
  /// that represents the fish's back
  double& load()
   {
    return *Load_pt->value_pt(0);
   }
 
- /// \short Return value of the vertical displacement of the ring that
+ ///  Return value of the vertical displacement of the ring that
  /// represents the fish's back
  double& y_c()
   {
@@ -141,7 +141,7 @@ public:
 
 private:
 
- /// \short Node at which the solution of the Poisson equation is documented
+ ///  Node at which the solution of the Poisson equation is documented
  /// This solution at this node is also used as the "load" on the ring
  /// that represents the fish's back
  Node* Doc_node_pt;
@@ -156,10 +156,10 @@ private:
  /// that represents the fish's back
  Mesh* Fish_back_mesh_pt;
 
- /// \short Pointer to data item that stores the "load" on the fish back
+ ///  Pointer to data item that stores the "load" on the fish back
  Data* Load_pt;
 
- /// \short Is the position of the fish's back prescribed?
+ ///  Is the position of the fish's back prescribed?
  bool Fix_position;
 
  /// Doc info object

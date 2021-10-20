@@ -60,7 +60,7 @@ namespace oomph
   class EigenSolver : public DistributableLinearAlgebraObject
   {
   protected:
-    /// \short Double value that represents the real part of the shift in
+    ///  Double value that represents the real part of the shift in
     /// shifted eigensolvers
     double Sigma_real;
 
@@ -74,7 +74,7 @@ namespace oomph
     /// Empty destructor
     virtual ~EigenSolver() {}
 
-    /// \short Actual eigensolver. This takes a pointer to a problem and returns
+    ///  Actual eigensolver. This takes a pointer to a problem and returns
     /// a vector of complex numbers representing the eigenvalues
     /// and a corresponding vector of eigenvectors
     virtual void solve_eigenproblem(Problem* const& problem_pt,
@@ -103,27 +103,27 @@ namespace oomph
   class ARPACK : public EigenSolver
   {
   private:
-    /// \short Pointer to a linear solver
+    ///  Pointer to a linear solver
     LinearSolver* Linear_solver_pt;
 
-    /// \short Pointer to a default linear solver
+    ///  Pointer to a default linear solver
     LinearSolver* Default_linear_solver_pt;
 
-    /// \short Integer to set whether the real, imaginary or magnitude is
+    ///  Integer to set whether the real, imaginary or magnitude is
     /// required
     /// to be small or large.
     int Spectrum;
 
 
-    /// \short Number of Arnoldi vectors to compute
+    ///  Number of Arnoldi vectors to compute
     int NArnoldi;
 
 
-    ///\short Boolean to set which part of the spectrum left (default) or right
+    /// Boolean to set which part of the spectrum left (default) or right
     /// of the shifted value.
     bool Small;
 
-    /// \short Boolean to indicate whether or not to compute the eigenvectors
+    ///  Boolean to indicate whether or not to compute the eigenvectors
     bool Compute_eigenvectors;
 
 
@@ -149,13 +149,13 @@ namespace oomph
       return NArnoldi;
     }
 
-    /// \short Set to enable the computation of the eigenvectors (default)
+    ///  Set to enable the computation of the eigenvectors (default)
     void enable_compute_eigenvectors()
     {
       Compute_eigenvectors = true;
     }
 
-    /// \short Set to disable the computation of the eigenvectors
+    ///  Set to disable the computation of the eigenvectors
     void disable_compute_eigenvectors()
     {
       Compute_eigenvectors = false;

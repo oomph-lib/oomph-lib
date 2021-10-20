@@ -43,7 +43,7 @@ namespace oomph
   //=============================================================
   // DOXYERROR: the maths below is wrong somehow but I have no idea what it's
   // supposed to be doing!
-  /// \short A class for all elements that solve the Advection
+  ///  A class for all elements that solve the Advection
   /// Diffusion equations in conservative form using isoparametric elements
   /// in a cylindrical polar coordinate system.
   /// \mbox{\boldmath$\nabla\cdot$} \left(
@@ -57,22 +57,22 @@ namespace oomph
     : public virtual FiniteElement
   {
   public:
-    /// \short Function pointer to source function fct(x,f(x)) --
+    ///  Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*GeneralisedAxisymAdvectionDiffusionSourceFctPt)(
       const Vector<double>& x, double& f);
 
-    /// \short Function pointer to wind function fct(x,w(x)) --
+    ///  Function pointer to wind function fct(x,w(x)) --
     /// x is a Vector!
     typedef void (*GeneralisedAxisymAdvectionDiffusionWindFctPt)(
       const Vector<double>& x, Vector<double>& wind);
 
 
-    /// \short Function pointer to a diffusivity function
+    ///  Function pointer to a diffusivity function
     typedef void (*GeneralisedAxisymAdvectionDiffusionDiffFctPt)(
       const Vector<double>& x, DenseMatrix<double>& D);
 
-    /// \short Constructor: Initialise the Source_fct_pt and Wind_fct_pt
+    ///  Constructor: Initialise the Source_fct_pt and Wind_fct_pt
     /// to null and set (pointer to) Peclet number to default
     GeneralisedAxisymAdvectionDiffusionEquations()
       : Source_fct_pt(0),
@@ -100,7 +100,7 @@ namespace oomph
     /*void operator=(const GeneralisedAxisymAdvectionDiffusionEquations&) =
      * delete;*/
 
-    /// \short Return the index at which the unknown value
+    ///  Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
     /// problems, when there is only one variable, the value that satisfies
     /// the advection-diffusion equation.
@@ -112,7 +112,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short du/dt at local node n.
+    ///  du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
     double du_dt_cons_axisym_adv_diff(const unsigned& n) const
     {
@@ -139,7 +139,7 @@ namespace oomph
       return dudt;
     }
 
-    /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
+    ///  Disable ALE, i.e. assert the mesh is not moving -- you do this
     /// at your own risk!
     void disable_ALE()
     {
@@ -147,7 +147,7 @@ namespace oomph
     }
 
 
-    /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
+    ///  (Re-)enable ALE, i.e. take possible mesh motion into account
     /// when evaluating the time-derivative. Note: By default, ALE is
     /// enabled, at the expense of possibly creating unnecessary work
     /// in problems where the mesh is, in fact, stationary.
@@ -164,7 +164,7 @@ namespace oomph
       output(outfile, nplot);
     }
 
-    /// \short Output FE representation of soln: r,z,u at
+    ///  Output FE representation of soln: r,z,u at
     /// nplot^2 plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
@@ -175,7 +175,7 @@ namespace oomph
       output(file_pt, n_plot);
     }
 
-    /// \short C-style output FE representation of soln: r,z,u at
+    ///  C-style output FE representation of soln: r,z,u at
     /// n_plot^2 plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
@@ -185,7 +185,7 @@ namespace oomph
                     const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Output exact soln: r,z,,u_exact at
+    ///  Output exact soln: r,z,,u_exact at
     /// nplot^2 plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
@@ -221,7 +221,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Integrate the concentration over the element
+    ///  Integrate the concentration over the element
     double integrate_u();
 
 
@@ -260,7 +260,7 @@ namespace oomph
     }
 
 
-    /// \short Access function: Pointer to additional (conservative)
+    ///  Access function: Pointer to additional (conservative)
     /// wind function.
     /// Const version
     GeneralisedAxisymAdvectionDiffusionWindFctPt conserved_wind_fct_pt() const
@@ -304,7 +304,7 @@ namespace oomph
       return PeSt_pt;
     }
 
-    /// \short Get source term at (Eulerian) position x. This function is
+    ///  Get source term at (Eulerian) position x. This function is
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the source function might be determined by
     /// another system of equations
@@ -324,7 +324,7 @@ namespace oomph
       }
     }
 
-    /// \short Get wind at (Eulerian) position x and/or local coordinate s.
+    ///  Get wind at (Eulerian) position x and/or local coordinate s.
     /// This function is
     /// virtual to allow overloading in multi-physics problems where
     /// the wind function might be determined by
@@ -352,7 +352,7 @@ namespace oomph
     }
 
 
-    /// \short Get additional (conservative)
+    ///  Get additional (conservative)
     /// wind at (Eulerian) position x and/or local coordinate s.
     /// This function is
     /// virtual to allow overloading in multi-physics problems where
@@ -380,7 +380,7 @@ namespace oomph
     }
 
 
-    /// \short Get diffusivity tensor at (Eulerian) position
+    ///  Get diffusivity tensor at (Eulerian) position
     /// x and/or local coordinate s.
     /// This function is
     /// virtual to allow overloading in multi-physics problems where
@@ -531,7 +531,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector and
+    ///  Add the element's contribution to its residual vector and
     /// the element Jacobian matrix (wrapper)
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -584,11 +584,11 @@ namespace oomph
     }
 
 
-    /// \short Self-test: Return 0 for OK
+    ///  Self-test: Return 0 for OK
     unsigned self_test();
 
   protected:
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_cons_axisym_adv_diff(
       const Vector<double>& s,
@@ -597,7 +597,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_cons_axisym_adv_diff(
       const unsigned& ipt,
@@ -606,7 +606,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    /// \short Add the element's contribution to its residual vector only
+    ///  Add the element's contribution to its residual vector only
     /// (if flag=and/or element  Jacobian matrix
     virtual void fill_in_generic_residual_contribution_cons_axisym_adv_diff(
       Vector<double>& residuals,
@@ -632,7 +632,7 @@ namespace oomph
     /// Pointer to diffusivity funciton
     GeneralisedAxisymAdvectionDiffusionDiffFctPt Diff_fct_pt;
 
-    /// \short Boolean flag to indicate if ALE formulation is disabled when
+    ///  Boolean flag to indicate if ALE formulation is disabled when
     /// time-derivatives are computed. Only set to false if you're sure
     /// that the mesh is stationary.
     bool ALE_is_disabled;
@@ -649,7 +649,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short QGeneralisedAxisymAdvectionDiffusionElement elements are
+  ///  QGeneralisedAxisymAdvectionDiffusionElement elements are
   /// linear/quadrilateral/brick-shaped Advection Diffusion elements with
   /// isoparametric interpolation for the function.
   //======================================================================
@@ -659,12 +659,12 @@ namespace oomph
       public virtual GeneralisedAxisymAdvectionDiffusionEquations
   {
   private:
-    /// \short Static array of ints to hold number of variables at
+    ///  Static array of ints to hold number of variables at
     /// nodes: Initial_Nvalue[n]
     static const unsigned Initial_Nvalue;
 
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    ///  Constructor: Call constructors for QElement and
     /// Advection Diffusion equations
     QGeneralisedAxisymAdvectionDiffusionElement()
       : QElement<2, NNODE_1D>(), GeneralisedAxisymAdvectionDiffusionEquations()
@@ -680,21 +680,21 @@ namespace oomph
     /*void operator=(const
      QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>&) = delete;*/
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///   Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  r,z,u
     void output(std::ostream& outfile)
     {
       GeneralisedAxisymAdvectionDiffusionEquations::output(outfile);
     }
 
-    /// \short Output function:
+    ///  Output function:
     /// r,z,u  at n_plot^2 plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -702,21 +702,21 @@ namespace oomph
     }
 
 
-    /// \short C-style output function:
+    ///  C-style output function:
     ///  r,z,u
     void output(FILE* file_pt)
     {
       GeneralisedAxisymAdvectionDiffusionEquations::output(file_pt);
     }
 
-    ///  \short C-style output function:
+    ///   C-style output function:
     ///   r,z,u at n_plot^2 plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       GeneralisedAxisymAdvectionDiffusionEquations::output(file_pt, n_plot);
     }
 
-    /// \short Output function for an exact solution:
+    ///  Output function for an exact solution:
     ///  r,z,u_exact at n_plot^2 plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -727,7 +727,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for a time-dependent exact solution.
+    ///  Output function for a time-dependent exact solution.
     ///  r,z,u_exact  at n_plot^2 plot points
     /// (Calls the steady version)
     void output_fct(std::ostream& outfile,
@@ -750,7 +750,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const;
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    ///  Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_cons_axisym_adv_diff(
       const unsigned& ipt,
@@ -764,7 +764,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Define the shape functions and test functions and derivatives
+  ///  Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// Galerkin: Test functions = shape functions
@@ -829,7 +829,7 @@ namespace oomph
 
 
   //=======================================================================
-  /// \short Face geometry for the QGeneralisedAxisymAdvectionDiffusionElement
+  ///  Face geometry for the QGeneralisedAxisymAdvectionDiffusionElement
   /// elements: The spatial dimension of the face elements is one lower than
   /// that of the bulk element but they have the same number of points along
   /// their 1D edges.
@@ -839,7 +839,7 @@ namespace oomph
     : public virtual QElement<1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };

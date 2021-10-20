@@ -379,7 +379,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
   //======================================================================
-  /// \short Identify the segments from the old mesh (original mesh)
+  ///  Identify the segments from the old mesh (original mesh)
   /// in the new mesh (this) and assign initial and final boundary
   /// coordinates for the segments that create the boundary
   //======================================================================
@@ -1828,7 +1828,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Compute the boundary segments connectivity for those
+  ///  Compute the boundary segments connectivity for those
   /// boundaries that were splited during the distribution process
   /// and also the initial zeta values for each segment (the initial
   /// and final boundary nodes coordinates)
@@ -4077,7 +4077,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Re-assign the boundary segments initial zeta (arclength)
+  ///  Re-assign the boundary segments initial zeta (arclength)
   /// for those internal boundaries that were splited during the
   /// distribution process. Those boundaries that have one face element
   /// at each side of the boundary. Here we create the segments only
@@ -6554,7 +6554,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Re-assign the boundary segments initial zeta (arclength)
+  ///  Re-assign the boundary segments initial zeta (arclength)
   /// for those internal boundaries that were splited during the
   /// distribution process (only apply for internal boundaries that
   /// have one face element at each side of the boundary)
@@ -8122,7 +8122,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
   //====================================================================
-  // \short Creates the distributed domain representation. Joins the
+  //  Creates the distributed domain representation. Joins the
   // original boundaires, shared boundaries and creates connections among
   // them to create the new polygons that represent the distributed
   // domain
@@ -8624,7 +8624,7 @@ namespace oomph
   }
 
   //======================================================================
-  // \short Take the polylines from the shared boundaries and the boundaries
+  //  Take the polylines from the shared boundaries and the boundaries
   // to create polygons
   //======================================================================
   template<class ELEMENT>
@@ -9023,7 +9023,7 @@ namespace oomph
   }
 
   //======================================================================
-  //\short Take the polylines from the original open curves and created
+  // Take the polylines from the original open curves and created
   // new temporaly representations of open curves with the bits of
   // original curves not overlapped by shared boundaries
   //======================================================================
@@ -9062,7 +9062,7 @@ namespace oomph
   }
 
   //======================================================================
-  //\short Check for any possible connections that the array of sorted
+  // Check for any possible connections that the array of sorted
   // nodes have with original boundary nodes, previous shared polyline
   // nodes or with itself polyline nodes. In case that there is a
   // connection, get the boundary id to which connects
@@ -9501,7 +9501,7 @@ namespace oomph
   }
 
   //======================================================================
-  // \short Establish the connections of the polylines previously
+  //  Establish the connections of the polylines previously
   // marked as having connections. This connections were created in the
   // function TriangleMesh::create_polylines_from_halo_elements_helper().
   // In case of doing load balancing the connections were created by the
@@ -10812,7 +10812,7 @@ namespace oomph
   }
 
   //=======================================================================
-  // \short Compute the holes left by the halo elements, those adjacent
+  //  Compute the holes left by the halo elements, those adjacent
   // to the shared boundaries
   //=======================================================================
   template<class ELEMENT>
@@ -10918,7 +10918,7 @@ namespace oomph
   }
 
   //======================================================================
-  // \short Keeps those vertices that define a hole, those that are
+  //  Keeps those vertices that define a hole, those that are
   // inside closed internal boundaries in the new polygons that define
   // the domain. Delete those outside/inside the outer polygons (this
   // is required since Triangle can not deal with vertices that define
@@ -11331,7 +11331,7 @@ namespace oomph
   }
 
   //======================================================================
-  // \short Sorts the polylines so they be contiguous and then we can
+  //  Sorts the polylines so they be contiguous and then we can
   // create a closed or open curve from them
   //======================================================================
   template<class ELEMENT>
@@ -11532,7 +11532,7 @@ namespace oomph
   }
 
   //======================================================================
-  // \short Creates the shared boundaries
+  //  Creates the shared boundaries
   //======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::create_shared_boundaries(
@@ -11608,7 +11608,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Creates the halo elements on all processors
+  ///  Creates the halo elements on all processors
   /// Gets the halo elements on all processors, these elements are then used
   /// on the function that computes the shared boundaries among the processors
   //======================================================================
@@ -11697,7 +11697,7 @@ namespace oomph
   }
 
   //====================================================================
-  // \short Get the element edges (pair of nodes, edges) that lie
+  //  Get the element edges (pair of nodes, edges) that lie
   // on a boundary (used to mark shared boundaries that lie on
   // internal boundaries)
   //====================================================================
@@ -11760,7 +11760,7 @@ namespace oomph
   }
 
   // ======================================================================
-  // \short Creates polylines from the intersection of halo elements on
+  //  Creates polylines from the intersection of halo elements on
   // all processors. The new polylines define the shared boundaries in
   // the domain This method computes the polylines on ALL processors,
   // that is why the three dimensions in the structure
@@ -13258,7 +13258,7 @@ namespace oomph
   }
 
   // ======================================================================
-  // \short Break any possible loop created by the sorted list of nodes
+  //  Break any possible loop created by the sorted list of nodes
   // that is used to create a new shared polyline
   // ======================================================================
   template<class ELEMENT>
@@ -14182,7 +14182,7 @@ namespace oomph
   }
 
   // ======================================================================
-  // \short Break any possible loop created by the sorted list of nodes
+  //  Break any possible loop created by the sorted list of nodes
   // that is used to create a new shared polyline
   // ======================================================================
   template<class ELEMENT>
@@ -14609,7 +14609,7 @@ namespace oomph
   }
 
   // ======================================================================
-  // \short Create the shared polyline and fill the data structured
+  //  Create the shared polyline and fill the data structured
   // that keep all the information associated with the creationg of the
   // shared boundary
   // ======================================================================
@@ -14853,7 +14853,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Reset the boundary elements info. after load balance have
+  ///  Reset the boundary elements info. after load balance have
   /// taken place
   //======================================================================
   template<class ELEMENT>
@@ -16048,7 +16048,7 @@ namespace oomph
   }
 
   //======================================================================
-  // \short Compute the alias of the nodes on shared boundaries in this
+  //  Compute the alias of the nodes on shared boundaries in this
   // (my_rank) processor with other processors. Also compute the alias
   // of nodes on shared boundaries of other processors with other
   // processors (useful when there is an element that requires to be
@@ -17048,7 +17048,7 @@ namespace oomph
   }
 
   //======================================================================
-  // \short Get the original boundaries to which is associated each
+  //  Get the original boundaries to which is associated each
   // shared node, and send the info. to the related processors. We
   // need to do this so that at the reset of halo(ed) info. stage,
   // the info. is updated
@@ -17647,7 +17647,7 @@ namespace oomph
   }
 
   //======================================================================
-  // \short In charge of creating additional halo(ed) elements on those
+  //  In charge of creating additional halo(ed) elements on those
   // processors that have no shared boundaries in common but have
   // shared nodes
   // ======================================================================
@@ -17984,7 +17984,7 @@ namespace oomph
   // *********************************************************************
 
   //========start of get_required_elemental_information_helper==============
-  /// \short Helper function to get the required elemental information from
+  ///  Helper function to get the required elemental information from
   /// an haloed element. This info. involves the association of the element
   /// to a boundary or region.
   //========================================================================
@@ -19190,7 +19190,7 @@ namespace oomph
   }
 
   //========start of add_halo_element_helper==============================
-  /// \short Helper function to create (halo) elements on the loop
+  ///  Helper function to create (halo) elements on the loop
   /// process based on the info received in send_and_received_located_info
   /// This function is in charge of verify if the element is associated to
   /// a boundary
@@ -20444,7 +20444,7 @@ namespace oomph
   // *********************************************************************
 
   //======================================================================
-  /// \short Performs the load balancing for unstructured meshes, the
+  ///  Performs the load balancing for unstructured meshes, the
   /// load balancing strategy is based on mesh migration
   //======================================================================
   template<class ELEMENT>
@@ -22694,7 +22694,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Creates the new shared boundaries, this method is also in
+  ///  Creates the new shared boundaries, this method is also in
   /// charge of computing the shared boundaries ids of each processor
   /// and send that info. to all the processors
   //======================================================================
@@ -26023,7 +26023,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Get the nodes on the shared boundary (b), these are stored
+  ///  Get the nodes on the shared boundary (b), these are stored
   /// in the segment they belong
   //======================================================================
   template<class ELEMENT>
@@ -26351,7 +26351,7 @@ namespace oomph
   }
 
   //=====start of get_required_elemental_information_load_balance_helper====
-  /// \short Helper function to get the required elemental information from
+  ///  Helper function to get the required elemental information from
   /// the element that will be sent to iproc processor.
   /// This info. involves the association of the element to a boundary or
   /// region.
@@ -26745,7 +26745,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Helper function to add nodes on a new domain as a result of
+  ///  Helper function to add nodes on a new domain as a result of
   /// load balance
   //======================================================================
   template<class ELEMENT>
@@ -27493,7 +27493,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Helper function to create elements on the loop
+  ///  Helper function to create elements on the loop
   /// process based on the info received in
   /// send_and_received_elements_nodes_info
   //======================================================================
@@ -27574,7 +27574,7 @@ namespace oomph
   }
 
   //========start of add_element_load_balance_helper=====================
-  /// \short Helper function to create elements on the loop
+  ///  Helper function to create elements on the loop
   /// process based on the info received in
   /// send_and_received_elements_nodes_info
   /// This function is in charge of verify if the element is associated
@@ -27835,7 +27835,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Helper function to add a new node from load balance
+  ///  Helper function to add a new node from load balance
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::add_received_node_load_balance_helper(
@@ -27897,7 +27897,7 @@ namespace oomph
   }
 
   //============start_of_construct_new_node_load_balance_helper()=========
-  /// \short Helper function which constructs a new node (on an
+  ///  Helper function which constructs a new node (on an
   /// element) with the information sent from the load balance
   /// process
   //======================================================================
@@ -29063,7 +29063,7 @@ namespace oomph
 #endif // #ifdef OOMPH_HAS_MPI
 
   //======================================================================
-  /// \short Get the nodes on the boundary (b), these are stored in the
+  ///  Get the nodes on the boundary (b), these are stored in the
   /// segment they belong (also used by the load balance method to
   /// re-set the number of segments per boundary after load balance has
   /// taken place)
@@ -32579,7 +32579,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Adds the vertices from the sources boundary that are
+  ///  Adds the vertices from the sources boundary that are
   /// repeated in the destination boundary to the list of non
   /// delete-able vertices in the destination boundary
   //=========================================================================
@@ -32666,7 +32666,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
   //=========================================================================
-  /// \short Synchronise the vertices that are marked for non deletion
+  ///  Synchronise the vertices that are marked for non deletion
   //  on the shared boundaries. Unrefinement of shared boundaries is
   //  performed only if the candidate node is not marked for non deletion
   //=========================================================================
@@ -33042,7 +33042,7 @@ namespace oomph
 #endif // #ifdef OOMPH_HAS_MPI
 
   //=========================================================================
-  /// \short After unrefinement and refinement has taken place compute
+  ///  After unrefinement and refinement has taken place compute
   /// the new vertices numbers of the temporary representation of the
   //  boundaries to connect.
   //=========================================================================
@@ -33162,7 +33162,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short After unrefinement and refinement has taken place compute
+  ///  After unrefinement and refinement has taken place compute
   /// the new vertices numbers of the boundaries to connect (in a
   /// distributed scheme it may be possible that the destination
   /// boundary does no longer exist, therefore the connection is
@@ -33284,7 +33284,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Restore the connections of the specific polyline
+  ///  Restore the connections of the specific polyline
   /// The vertices numbering on the destination boundaries may have
   /// change because of (un)refinement in the destination boundaries.
   /// Also deals with connection that do not longer exist because the
@@ -34037,7 +34037,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Resume the boundary connections that may have been
+  ///  Resume the boundary connections that may have been
   /// suspended because the destination boundary is no part of the
   /// domain. The connections are no permanently suspended because if
   /// load balance takes place the destination boundary may be part of
@@ -34084,7 +34084,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Gets the associated vertex number according to the vertex
+  ///  Gets the associated vertex number according to the vertex
   /// coordinates on the destination boundary
   //=========================================================================
   template<class ELEMENT>
@@ -34126,7 +34126,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Helper function that updates the input polygon's PSLG
+  ///  Helper function that updates the input polygon's PSLG
   /// by using the end-points of elements from FaceMesh(es) that are
   /// constructed for the boundaries associated with the segments of the
   /// polygon. Optional boolean is used to run it as test only (if
@@ -34617,7 +34617,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Helper function that updates the input open curve by using
+  ///  Helper function that updates the input open curve by using
   /// end-points of elements from FaceMesh(es) that are constructed for the
   /// boundaries associated with the polylines. Optional boolean is used to
   /// run it as test only (if true is specified as input) in which case the
@@ -35102,7 +35102,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Helper function that performs the unrefinement process
+  ///  Helper function that performs the unrefinement process
   /// on the specified boundary by using the provided vertices
   /// representation. Optional boolean is used to run it as test only (if
   /// true is specified as input) in which case vertex coordinates aren't
@@ -35397,7 +35397,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Helper function that performs the refinement process
+  ///  Helper function that performs the refinement process
   /// on the specified boundary by using the provided vertices
   /// representation. Optional boolean is used to run it as test only (if
   /// true is specified as input) in which case vertex coordinates aren't
@@ -35545,7 +35545,7 @@ namespace oomph
   }
 
   //=========================================================================
-  // \short Helper function that applies the maximum length constraint
+  //  Helper function that applies the maximum length constraint
   // when it was specified. This will increase the number of points in
   // the current curve section in case that any segment on it does not
   // fulfils the requirement
@@ -35663,7 +35663,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Helper function
+  ///  Helper function
   /// Creates an unsorted face mesh representation from the specified
   /// boundary id. It means that the elements are not sorted along the
   /// boundary
@@ -35697,7 +35697,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Helper function
+  ///  Helper function
   /// Creates a sorted face mesh representation of the specified PolyLine
   /// It means that the elements are sorted along the boundary
   //=========================================================================
@@ -37655,7 +37655,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Updates the polygon but using the elements area instead of
+  ///  Updates the polygon but using the elements area instead of
   /// the default refinement and unrefinement methods
   //======================================================================
   template<class ELEMENT>
@@ -38613,7 +38613,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Updates the open curve but using the elements area instead
+  ///  Updates the open curve but using the elements area instead
   /// of the default refinement and unrefinement methods
   //======================================================================
   template<class ELEMENT>
@@ -39888,7 +39888,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
   //======================================================================
-  /// \short Updates the polylines using the elements area as
+  ///  Updates the polylines using the elements area as
   /// constraint for the number of points along the boundaries
   //======================================================================
   template<class ELEMENT>
@@ -40551,7 +40551,7 @@ namespace oomph
 #endif // #ifdef OOMPH_HAS_MPI
 
   //=========================================================================
-  /// \short Helper function that performs the unrefinement process
+  ///  Helper function that performs the unrefinement process
   /// on the specified boundary by using the provided vertices
   /// representation and the associated target area.
   //=========================================================================
@@ -40807,7 +40807,7 @@ namespace oomph
   }
 
   //=========================================================================
-  /// \short Helper function that performs the refinement process
+  ///  Helper function that performs the refinement process
   /// on the specified boundary by using the provided vertices
   /// representation and the associated elements target area.
   //=========================================================================
@@ -40947,7 +40947,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Helper function that performs the unrefinement process
+  ///  Helper function that performs the unrefinement process
   /// on the specified boundary by using the provided vertices
   /// representation and the associated target area.
   /// NOTE: This is the version that applies unrefinement to shared
@@ -41156,7 +41156,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Helper function that performs the refinement process
+  ///  Helper function that performs the refinement process
   /// on the specified boundary by using the provided vertices
   /// representation and the associated elements target area.
   /// NOTE: This is the version that applies refinement to shared
@@ -41263,7 +41263,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Updates the polylines representation after restart
+  ///  Updates the polylines representation after restart
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::update_polygon_after_restart(
@@ -42032,7 +42032,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Updates the open curve representation after restart
+  ///  Updates the open curve representation after restart
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::update_open_curve_after_restart(
@@ -43008,7 +43008,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
   //======================================================================
-  /// \short Updates the shared polylines representation after restart
+  ///  Updates the shared polylines representation after restart
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::update_shared_curve_after_restart(
@@ -43420,7 +43420,7 @@ namespace oomph
   }
 
   //===================================================================
-  // \short Fill the boundary elements structures when dealing with
+  //  Fill the boundary elements structures when dealing with
   // shared boundaries that overlap internal boundaries. Document the
   // number of elements on the shared boundaries that go to internal
   // boundaries
@@ -43435,7 +43435,7 @@ namespace oomph
   }
 
   //===================================================================
-  // \short Fill the boundary elements structures when dealing with
+  //  Fill the boundary elements structures when dealing with
   // shared boundaries that overlap internal boundaries
   //===================================================================
   template<class ELEMENT>

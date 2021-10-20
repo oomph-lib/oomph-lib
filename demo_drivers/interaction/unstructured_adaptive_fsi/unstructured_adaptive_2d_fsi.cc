@@ -110,7 +110,7 @@ class UnstructuredFSIProblem : public Problem
 
 public:
 
- /// \short Constructor: 
+ ///  Constructor: 
  UnstructuredFSIProblem();
 
  /// Destructor (empty)

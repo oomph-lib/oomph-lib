@@ -42,7 +42,7 @@ namespace oomph
     RefineableBinArrayParameters::Default_max_number_of_sample_point_per_bin =
       15; // hierher explore. Can be 1 if points are uniformly spaced
 
-  /// \short Default value for number of spirals that are being
+  ///  Default value for number of spirals that are being
   /// visited before doing another circular mpi communication
   unsigned NonRefineableBinArrayParameters::Default_nspiral_chunk =
     10; // hierher explore 1;

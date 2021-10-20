@@ -82,7 +82,7 @@ class RefineableFishPoissonProblem : public Problem
 
 public:
 
- /// \short  Constructor: Bool flag specifies if position of fish back is
+ ///   Constructor: Bool flag specifies if position of fish back is
  /// prescribed or computed from the coupled problem. String specifies
  /// output directory.
  RefineableFishPoissonProblem(
@@ -92,7 +92,7 @@ public:
  /// Destructor
  virtual ~RefineableFishPoissonProblem();
 
- /// \short Update after Newton step: Update mesh in response to 
+ ///  Update after Newton step: Update mesh in response to 
  /// possible changes in the wall shape
  void actions_before_newton_convergence_check()
   {
@@ -121,7 +121,7 @@ public:
   }
 
 
- /// \short Return value of the vertical displacement of the ring that
+ ///  Return value of the vertical displacement of the ring that
  /// represents the fish's back
  double& y_c()
   {
@@ -213,10 +213,10 @@ private:
  /// that represents the fish back
  Mesh* Fish_back_mesh_pt;
 
- /// \short Pointer to data item that stores the "load" on the fish back
+ ///  Pointer to data item that stores the "load" on the fish back
  Data* Load_pt;
 
- /// \short Is the position of the fish back prescribed?
+ ///  Is the position of the fish back prescribed?
  bool Fix_position;
 
  /// Doc info object

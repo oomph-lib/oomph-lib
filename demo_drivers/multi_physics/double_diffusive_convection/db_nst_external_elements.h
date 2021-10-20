@@ -61,7 +61,7 @@ private:
 
 public: 
 
- /// \short Constructor: call the underlying constructors and 
+ ///  Constructor: call the underlying constructors and 
  /// initialise the pointer to the Rayleigh number to point
  /// to the default value of 0.0.
  RefineableQCrouzeixRaviartElementWithTwoExternalElement() : 
@@ -93,7 +93,7 @@ public:
  ///Access function for the pointer to the solutal Rayleigh number
  double* &ra_s_pt() {return Ra_S_pt;}
 
- /// \short Call the underlying single-physics element's further_build()
+ ///  Call the underlying single-physics element's further_build()
  /// functions and make sure that the pointer to the Rayleigh number
  /// is passed to the sons
  void further_build()
@@ -136,7 +136,7 @@ public:
     residuals);
   }
 
- ///\short Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -167,7 +167,7 @@ public:
      residuals,jacobian,mass_matrix);
   }
 
- /// \short Compute the contribution of the external
+ ///  Compute the contribution of the external
  /// degrees of freedom (temperatures) on the Navier-Stokes equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
@@ -319,7 +319,7 @@ class RefineableQAdvectionDiffusionElementWithExternalElement :
 
 public:
 
- /// \short Constructor: call the underlying constructors
+ ///  Constructor: call the underlying constructors
  RefineableQAdvectionDiffusionElementWithExternalElement() : 
   RefineableQAdvectionDiffusionElement<DIM,3>(), ElementWithExternalElement()
   { 
@@ -331,7 +331,7 @@ public:
    this->ignore_external_geometric_data();
   }
 
- /// \short Overload the wind function in the advection-diffusion equations.
+ ///  Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity,
  /// obtained from the source element in the other mesh
@@ -352,7 +352,7 @@ public:
     fill_in_contribution_to_residuals(residuals);
   }
 
- ///\short Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -383,7 +383,7 @@ public:
   }
 
 
- /// \short Compute the contribution of the external
+ ///  Compute the contribution of the external
  /// degrees of freedom (velocities) on the advection-diffusion equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
@@ -665,7 +665,7 @@ get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
 
 
 //==========================start_of_get_wind_adv_diff====================
-/// \short Overload the wind function in the advection-diffusion equations.
+///  Overload the wind function in the advection-diffusion equations.
 /// This provides the coupling from the Navier--Stokes equations to the
 /// advection-diffusion equations because the wind is the fluid velocity,
 /// obtained from the source elements in the other mesh

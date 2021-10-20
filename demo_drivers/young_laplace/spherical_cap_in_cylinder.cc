@@ -61,7 +61,7 @@ public:
  /// Destructor (empty)
  ~RefineableYoungLaplaceProblem(){};
 
- /// \short Update the problem specs before solve: Empty
+ ///  Update the problem specs before solve: Empty
  void actions_before_solve(){};
 
  /// Update the problem after solve: Empty
@@ -70,7 +70,7 @@ public:
  /// Increment problem parameters
  void increment_parameters();
 
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ ///  Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to and the trace file
  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 

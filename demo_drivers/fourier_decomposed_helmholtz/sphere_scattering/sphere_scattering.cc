@@ -57,7 +57,7 @@ class AnnularQuadMesh : public SimpleRectangularQuadMesh<ELEMENT>
  
   public:
 
- // \short Constructor for angular mesh with n_r x n_phi 
+ //  Constructor for angular mesh with n_r x n_phi 
  // 2D quad elements. Calls constructor for the underlying 
  // SimpleRectangularQuadMesh; then deforms the mesh so that it fits 
  // into the annular region bounded by the radii r_min and r_max
@@ -221,7 +221,7 @@ namespace PlanarWave
 //=====================================================================
 namespace ProblemParameters
 {
- /// \short Square of the wavenumber
+ ///  Square of the wavenumber
  double K_squared=10.0;
  
  /// Fourier wave number
@@ -297,7 +297,7 @@ namespace ProblemParameters
  }//end of get_exact_u
 
  
- /// \short Get -du/dr (spherical r) for exact solution. Equal to prescribed
+ ///  Get -du/dr (spherical r) for exact solution. Equal to prescribed
  /// flux on inner boundary.
  void exact_minus_dudr(const Vector<double>& x, std::complex<double>& flux)
  {
@@ -393,7 +393,7 @@ public:
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
  
- /// \short Doc the solution. DocInfo object stores flags/labels for where the
+ ///  Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
   
@@ -408,7 +408,7 @@ public:
   
 private:
  
- /// \short Create BC elements on outer boundary
+ ///  Create BC elements on outer boundary
  void create_outer_bc_elements();
  
  /// Create flux elements on inner boundary
@@ -417,11 +417,11 @@ private:
  /// Pointer to bulk mesh
  AnnularQuadMesh<ELEMENT>* Bulk_mesh_pt;
   
- /// \short Pointer to mesh containing the DtN boundary
+ ///  Pointer to mesh containing the DtN boundary
  /// condition elements
  FourierDecomposedHelmholtzDtNMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
 
- /// \short Mesh of face elements that apply the prescribed flux
+ ///  Mesh of face elements that apply the prescribed flux
  /// on the inner boundary
  Mesh* Helmholtz_inner_boundary_mesh_pt;
 

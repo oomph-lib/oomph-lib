@@ -107,7 +107,7 @@ public:
  /// Empty Destructor
  ~WarpedLine(){}
 
- /// \short Position vector at Lagrangian coordinate zeta 
+ ///  Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    double zetaa=X_min+zeta[0]*(X_max-X_min);
@@ -128,7 +128,7 @@ public:
    r[1]-=Lift_off_amplitude*exp(-Lift_off_alpha*(zetaa-0.5)*(zetaa-0.5));
   }
  
- /// \short Parametrised position on object: r(zeta). Evaluated at
+ ///  Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Forward to steady version
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -154,7 +154,7 @@ public:
  /// Access to amplitude
  double& ampl() {return Ampl;}
 
- /// \short How many items of Data does the shape of the object depend on?
+ ///  How many items of Data does the shape of the object depend on?
  /// None.
  unsigned ngeom_data() const
   {
@@ -218,7 +218,7 @@ private:
 
 //======================================================================
 // hierher update
-/// \short Penetrator that keeps circle in contact with a control node 
+///  Penetrator that keeps circle in contact with a control node 
 /// on target surface (made of solid contact face elements) -- centre
 /// of the circular penetrator is located at
 ///  
@@ -257,7 +257,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
 
    public:
 
-  /// \short Constructor: Pass pointer to control node whose 
+  ///  Constructor: Pass pointer to control node whose 
   /// index_of_contact_pressure-th value represents the Lagrange multiplier
   /// (the discrete contact pressure) that has been traded for the
   /// vertical displacement/weight constraint. Also need the indices
@@ -313,7 +313,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
    }
   
 
-  /// \short Vector of pairs identifying values (via a pair of pointer to 
+  ///  Vector of pairs identifying values (via a pair of pointer to 
   /// Data object and index within it) that correspond to the Data values 
   /// that are determined by the horizontal/vertical/... equilibrium equations.
   Vector<std::pair<Data*,unsigned> > equilibrium_data()
@@ -364,14 +364,14 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
    }
 
 
-  /// \short Access to pointer to mesh of contact elements that contribute to 
+  ///  Access to pointer to mesh of contact elements that contribute to 
   /// force on penetrator
   Mesh* contact_element_mesh_pt() const
    {
     return Contact_element_mesh_pt;
    }
 
-  /// \short Set pointer to mesh of contact elements and setup
+  ///  Set pointer to mesh of contact elements and setup
   /// external Data, i.e. Data that affects the residuals in this
   /// element. Also set the node pointed to by Control_node_pt
   /// as external Data for the elements in the contact mesh
@@ -519,7 +519,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
     return (Target_yc_pt!=0);
    }
 
-  /// \short Impose weight (rather than imposed displacement). Target
+  ///  Impose weight (rather than imposed displacement). Target
   /// weight specified via pointer.
   void impose_weight(double* target_weight_pt)
    {
@@ -527,7 +527,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
     Target_yc_pt=0;
    }
 
-  /// \short Impose vertical position of control node (rather than weight).
+  ///  Impose vertical position of control node (rather than weight).
   /// Target vertical position of control node specified via pointer.
   void impose_yc(double* target_yc_pt)
    {
@@ -536,7 +536,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
    }
 
 
-  /// \short Is angle of rotation about control node imposed? If false then 
+  ///  Is angle of rotation about control node imposed? If false then 
   /// horizontal force is imposed.
   bool rotation_angle_is_imposed()
    {
@@ -544,7 +544,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
    }
 
 
-  /// \short Impose horizontal force (rather than rotation about contact node). 
+  ///  Impose horizontal force (rather than rotation about contact node). 
   /// Target force specified via pointer.
   void impose_horizontal_force(double* target_horizontal_force_pt)
    {
@@ -552,7 +552,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
     Target_rotation_angle_pt=0;
    }
 
-  /// \short Impose rotation about contact node (rather than horizontal force)
+  ///  Impose rotation about contact node (rather than horizontal force)
   /// Target angle specified via pointer.
   void impose_rotation_angle(double* target_rotation_angle_pt)
    {
@@ -679,7 +679,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
      }
    }
  
-  /// \short Get penetration for given point x.
+  ///  Get penetration for given point x.
   void penetration(const Vector<double>& x,
                      const Vector<double>& n,
                      double& d,
@@ -728,7 +728,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
      }
    }
     
-  /// \short Resulting force from all associated ContactElements
+  ///  Resulting force from all associated ContactElements
   Vector<double> resulting_force() const
   {
    Vector<double> contact_force(2,0.0);
@@ -758,33 +758,33 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
   /// Control node
   SolidNode* Control_node_pt;
 
-  /// \short Index at which contact pressure (Lagr mult) is stored in nodal
+  ///  Index at which contact pressure (Lagr mult) is stored in nodal
   /// data associated with control node
   unsigned Index_of_contact_pressure;
 
-  /// \short Where is the vertical displacement (linear_elasticity) stored?
+  ///  Where is the vertical displacement (linear_elasticity) stored?
   unsigned Index_of_vertical_displacement;
 
-  /// \short Where is the horizontal displacement (linear_elasticity) stored?
+  ///  Where is the horizontal displacement (linear_elasticity) stored?
   unsigned Index_of_horizontal_displacement;
 
-  /// \short Index of external data that contains the the contact
+  ///  Index of external data that contains the the contact
   /// pressure in its Index_of_contact_pressure-th value
   unsigned External_data_index_of_traded_contact_pressure;
   
-  /// \short Pointer to target weight (null if vertical displacement of control
+  ///  Pointer to target weight (null if vertical displacement of control
   /// node is imposed)
   double* Target_weight_pt;
 
-  /// \short Pointer to target horizontal force (null if rotation angle angle 
+  ///  Pointer to target horizontal force (null if rotation angle angle 
   /// about control node is imposed)
   double* Target_horizontal_force_pt;
 
-  /// \short Pointer to  target vertical displacement of control node (null if 
+  ///  Pointer to  target vertical displacement of control node (null if 
   /// weight is imposed)
   double* Target_yc_pt;
 
-  /// \short Pointer to target rotation angle about control node (null 
+  ///  Pointer to target rotation angle about control node (null 
   /// if horizontal force is imposed)
   double* Target_rotation_angle_pt;
 
@@ -807,7 +807,7 @@ namespace ProblemParameters
 
 #ifdef STRUCTURED_MESH
 
- /// \short GeomObject specifying the shape of the boundary: Initially it's 
+ ///  GeomObject specifying the shape of the boundary: Initially it's 
  /// almost flat.
  WarpedLine Boundary_geom_object(1.0e-10,0.0,1.0);
 
@@ -819,22 +819,22 @@ namespace ProblemParameters
  /// Right end of contact region (for unstructured mesh only)
  double X_contact_end_right=0.7;
 
- /// \short GeomObject specifying the shape of the boundary: Initially it's 
+ ///  GeomObject specifying the shape of the boundary: Initially it's 
  /// almost flat. Starts at the left
  WarpedLine Boundary_geom_object_left(1.0e-10,0.0,X_contact_end_left);
 
- /// \short GeomObject specifying the shape of the boundary: Initially it's 
+ ///  GeomObject specifying the shape of the boundary: Initially it's 
  /// almost flat.
  WarpedLine Boundary_geom_object_contact(1.0e-10,X_contact_end_left,
                                          X_contact_end_right);
 
- /// \short GeomObject specifying the shape of the boundary: Initially it's 
+ ///  GeomObject specifying the shape of the boundary: Initially it's 
  /// almost flat.
  WarpedLine Boundary_geom_object_right(1.0e-10,X_contact_end_right,1.0);
 
 #endif
 
- /// \short Impose position of centre (i.e. a stand-alone penetrator with
+ ///  Impose position of centre (i.e. a stand-alone penetrator with
  /// prescribed position or indirectly via control node?
  bool Impose_position_of_centre=true;
  
@@ -925,7 +925,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
  
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve()
   {
    // For maximum stability: Reset the current nodal positions to be
@@ -995,7 +995,7 @@ public:
    rebuild_global_mesh();
   }
  
- /// \short Actions after adapt: 
+ ///  Actions after adapt: 
  /// Setup the problem again -- remember that the mesh has been
  /// completely rebuilt and its element's don't have any
  /// pointers to source fcts etc. yet
@@ -1097,7 +1097,7 @@ public:
 private:
 
 
- /// \short Create elements that enforce prescribed boundary motion
+ ///  Create elements that enforce prescribed boundary motion
  /// by Lagrange multipliers
  void create_displ_imposition_elements()
   {
@@ -1319,7 +1319,7 @@ private:
   } // end of create_displ_imposition_elements
 
 
- /// \short Delete elements that enforce prescribed boundary motion
+ ///  Delete elements that enforce prescribed boundary motion
  /// by Lagrange multiplliers
  void delete_displ_imposition_elements()
   {
@@ -1387,7 +1387,7 @@ private:
   }
 
 
- /// \short Helper function to (re-)set boundary condition
+ ///  Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup()
   {
@@ -1751,7 +1751,7 @@ private:
  /// Pointer to the "surface" contact mesh
  Mesh* Surface_contact_mesh_pt;
  
- /// \short Pointers to meshes of Lagrange multiplier elements to impose 
+ ///  Pointers to meshes of Lagrange multiplier elements to impose 
  /// displacement of top boundary
  SolidMesh* Displ_imposition_mesh_pt;
 
@@ -1776,26 +1776,26 @@ private:
 
 #ifdef STRUCTURED_MESH
 
- /// \short Backup of Surface_contact_mesh_pt so the Lagrange multipliers
+ ///  Backup of Surface_contact_mesh_pt so the Lagrange multipliers
  /// can be projected across
  BackupMeshForProjection<QElement<1,3> >* Backed_up_surface_contact_mesh_pt;
 
 #else
 
- /// \short Backup of Surface_contact_mesh_pt so the Lagrange multipliers
+ ///  Backup of Surface_contact_mesh_pt so the Lagrange multipliers
  /// can be projected across
  BackupMeshForProjection<TElement<1,3> >* Backed_up_surface_contact_mesh_pt;
 
 #endif
 
- /// \short Pointer to control node where Lagrange multiplier (contact pressure)
+ ///  Pointer to control node where Lagrange multiplier (contact pressure)
  /// is "pseudo-hijacked" to impose either displacement or weight constraint.
  SolidNode* Control_node_pt;
 
  /// x coordinate of old control node
  double Xc_old;
 
- /// \short ID of additional nodal values created by contact elements to store
+ ///  ID of additional nodal values created by contact elements to store
  /// contact pressure/Lagr. mult.
  unsigned Contact_id;
 
@@ -2301,7 +2301,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 
 
 //=======start_of_main====================================================
-/// \short Driver code
+///  Driver code
 //========================================================================
 int main(int argc, char* argv[])
 {

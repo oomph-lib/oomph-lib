@@ -106,7 +106,7 @@ namespace oomph
   }
 
   //========================================================================
-  /// \short Extract the elements at a particular refinement level in
+  ///  Extract the elements at a particular refinement level in
   /// the refinement pattern (used in Mesh::redistribute or whatever it's
   /// going to be called (RefineableMeshBase::reduce_halo_layers or something)
   //========================================================================
@@ -1880,7 +1880,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Refine to same degree as the reference mesh.
+  ///  Refine to same degree as the reference mesh.
   //========================================================================
   void TreeBasedRefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
     TreeBasedRefineableMeshBase* const& ref_mesh_pt)
@@ -1897,7 +1897,7 @@ namespace oomph
 
 
   //========================================================================
-  /// \short Refine to same degree as the reference mesh minus one. Useful
+  ///  Refine to same degree as the reference mesh minus one. Useful
   /// function for multigrid solvers; allows the easy copy of a mesh
   /// to the level of refinement just below the current one. Returns
   /// a boolean variable which indicates if the reference mesh has not

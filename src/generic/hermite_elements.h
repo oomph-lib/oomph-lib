@@ -85,7 +85,7 @@ namespace oomph
   class QHermiteElement : public virtual QHermiteElementBase
   {
   private:
-    /// \short Default integration rule: Gaussian integration of same 'order'
+    ///  Default integration rule: Gaussian integration of same 'order'
     /// as the element
     // This is sort of optimal, because it means that the integration is exact
     // for the shape functions. Can overwrite this in specific element
@@ -131,7 +131,7 @@ namespace oomph
       return true;
     }
 
-    /// \short Adjust local coordinates so that they're located inside
+    ///  Adjust local coordinates so that they're located inside
     /// the element
     void move_local_coord_back_into_element(Vector<double>& s) const
     {
@@ -148,13 +148,13 @@ namespace oomph
     /// s
     void shape(const Vector<double>& s, Shape& psi) const;
 
-    /// \short Function to compute the  geometric shape functions and
+    ///  Function to compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     void dshape_local(const Vector<double>& s,
                       Shape& psi,
                       DShape& dpsids) const;
 
-    /// \short Function to compute the geometric shape functions and
+    ///  Function to compute the geometric shape functions and
     /// also first and second derivatives wrt local coordinates at
     /// local coordinate s.
     ///  Numbering:
@@ -177,7 +177,7 @@ namespace oomph
                        DShape& d2psids) const;
 
 
-    /// \short Overload the template-free interface for the calculation of
+    ///  Overload the template-free interface for the calculation of
     /// the inverse jacobian. The element dimension must be passed to
     /// the function
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -186,7 +186,7 @@ namespace oomph
       return invert_jacobian<DIM>(jacobian, inverse_jacobian);
     }
 
-    /// \short Overload the template-free interface for the calculation of
+    ///  Overload the template-free interface for the calculation of
     /// transformation of second derivatives. The element dimension should be
     /// passed as a template paremeter, for "optimum" efficiency.
     void transform_second_derivatives(
@@ -245,7 +245,7 @@ namespace oomph
       }
     }
 
-    /// \short Get the local fraction of any node in the n-th position
+    ///  Get the local fraction of any node in the n-th position
     /// in a one dimensional expansion along the i-th local coordinate
     double local_one_d_fraction_of_node(const unsigned& n1d, const unsigned& i)
     {
@@ -272,7 +272,7 @@ namespace oomph
     /// C_style output at n_plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
-    /// \short  Get cector of local coordinates of plot point i (when plotting
+    ///   Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
       const unsigned& i,
@@ -280,7 +280,7 @@ namespace oomph
       Vector<double>& s,
       const bool& use_equally_spaced_interior_sample_points = false) const;
 
-    /// \short Return string for tecplot zone header (when plotting
+    ///  Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const;
 
@@ -288,7 +288,7 @@ namespace oomph
     /// nplot points in each "coordinate direction)
     unsigned nplot_points(const unsigned& nplot) const;
 
-    /// \short Build the lower-dimensional FaceElement of the type
+    ///  Build the lower-dimensional FaceElement of the type
     /// QHermiteElement<DIM-1>. The face index takes a value that
     /// correponds to the possible faces:
     ///
@@ -434,7 +434,7 @@ namespace oomph
   class DiagQHermiteElement : public virtual QHermiteElement<DIM>
   {
   protected:
-    /// \short Overload the template-free interface for the calculation of
+    ///  Overload the template-free interface for the calculation of
     /// the inverse jacobian. Pass the dimension of the element to the
     /// invert_jacobian function.
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -443,7 +443,7 @@ namespace oomph
       return FiniteElement::invert_jacobian<DIM>(jacobian, inverse_jacobian);
     }
 
-    /// \short Overload the local to eulerian mapping so that it uses diagonal
+    ///  Overload the local to eulerian mapping so that it uses diagonal
     /// terms only.
     double local_to_eulerian_mapping(
       const DShape& dpsids,
@@ -454,7 +454,7 @@ namespace oomph
         dpsids, jacobian, inverse_jacobian);
     }
 
-    /// \short Overload the template-free interface for the transformation
+    ///  Overload the template-free interface for the transformation
     /// of derivatives, so that the diagonal version is used.
     void transform_derivatives(const DenseMatrix<double>& inverse_jacobian,
                                DShape& dbasis) const
@@ -462,7 +462,7 @@ namespace oomph
       FiniteElement::transform_derivatives_diagonal(inverse_jacobian, dbasis);
     }
 
-    /// \short Overload the template-free interface for the calculation of
+    ///  Overload the template-free interface for the calculation of
     /// transformation of second derivatives.
     void transform_second_derivatives(
       const DenseMatrix<double>& jacobian,
@@ -532,7 +532,7 @@ namespace oomph
     /// C_style output at n_plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
-    /// \short Build the lower-dimensional FaceElement of the type
+    ///  Build the lower-dimensional FaceElement of the type
     /// SolidQHermiteElement<DIM-1>. The face index takes a value that
     /// correponds to the possible faces:
     ///
@@ -581,7 +581,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const SolidDiagQHermiteElement&) = delete;
 
-    /// \short Overload the local to lagrangian mapping so that it uses diagonal
+    ///  Overload the local to lagrangian mapping so that it uses diagonal
     /// terms only.
     double local_to_lagrangian_mapping(
       const DShape& dpsids,

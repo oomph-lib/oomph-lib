@@ -73,7 +73,7 @@ public:
  /// Virtual destructor (empty)
  virtual ~TemplateFreeHeatedPenetratorFluxElementBase(){}
 
- /// \short Pure virtual function: Return temperature at 
+ ///  Pure virtual function: Return temperature at 
  /// local coordinate s.
  virtual double penetrator_temperature(const Vector<double>& s) const=0;
 
@@ -95,13 +95,13 @@ class TLinearHeatAndElasticityElement :
 
 public:
 
- /// \short Constructor: call the underlying constructors
+ ///  Constructor: call the underlying constructors
  TLinearHeatAndElasticityElement() : 
   TLinearElasticityElement<DIM,NNODE_1D>(),
   TUnsteadyHeatElement<DIM,NNODE_1D>() 
   {}
 
- ///\short The required number of values stored at the nodes is the sum of the
+ /// The required number of values stored at the nodes is the sum of the
  ///required values of the two single-physics  elements. Note that this step is
  ///generic for any multi-physics element of this type.
  unsigned required_nvalue(const unsigned &n) const
@@ -109,7 +109,7 @@ public:
            TUnsteadyHeatElement<DIM,NNODE_1D>::required_nvalue(n));}
  
 
- /// \short Number of scalars/fields output by this element. Broken
+ ///  Number of scalars/fields output by this element. Broken
  /// virtual. Needs to be implemented for each new specific element type.
  /// Temporary dummy
  unsigned nscalar_paraview() const
@@ -123,7 +123,7 @@ public:
   return 0;
  }
  
- /// \short Write values of the i-th scalar field at the plot points. Broken
+ ///  Write values of the i-th scalar field at the plot points. Broken
  /// virtual. Needs to be implemented for each new specific element type.
  /// Temporary dummy
  void scalar_value_paraview(std::ofstream& file_out,
@@ -137,7 +137,7 @@ public:
  }
  
  
- /// \short Name of the i-th scalar field. Default implementation
+ ///  Name of the i-th scalar field. Default implementation
  /// returns V1 for the first one, V2 for the second etc. Can (should!) be
  /// overloaded with more meaningful names.
  std::string scalar_name_paraview(const unsigned& i) const
@@ -152,7 +152,7 @@ public:
    FiniteElement::output(outfile);
   }
 
- /// \short Output function:  
+ ///  Output function:  
  void output(std::ostream &outfile, const unsigned &nplot)
   {
 
@@ -195,21 +195,21 @@ public:
 
   } 
 
- /// \short C-style output function: Broken default
+ ///  C-style output function: Broken default
  void output(FILE* file_pt)
   {FiniteElement::output(file_pt);}
 
- ///  \short C-style output function: Broken default
+ ///   C-style output function: Broken default
  void output(FILE* file_pt, const unsigned &n_plot)
   {FiniteElement::output(file_pt,n_plot);}
 
- /// \short Output function for an exact solution: Broken default
+ ///  Output function for an exact solution: Broken default
  void output_fct(std::ostream &outfile, const unsigned &Nplot,
                  FiniteElement::SteadyExactSolutionFctPt 
                  exact_soln_pt)
   {FiniteElement::output_fct(outfile,Nplot,exact_soln_pt);}
 
- /// \short Output function for a time-dependent exact solution:
+ ///  Output function for a time-dependent exact solution:
  /// Broken default.
  void output_fct(std::ostream &outfile, const unsigned &Nplot,
                  const double& time,
@@ -220,11 +220,11 @@ public:
     output_fct(outfile,Nplot,time,exact_soln_pt);
   }
 
- ///\short Overload the index at which the temperature 
+ /// Overload the index at which the temperature 
  ///variable is stored. We choose to store it after the displacements
  inline unsigned u_index_ust_heat() const {return DIM;}
  
- /// \short Validate against exact solution at given time
+ ///  Validate against exact solution at given time
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -236,7 +236,7 @@ public:
   {FiniteElement::compute_error(outfile,exact_soln_pt,
                                 time,error,norm);}
  
- /// \short Validate against exact solution.
+ ///  Validate against exact solution.
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -247,7 +247,7 @@ public:
   {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}
  
 
- /// \short Calculate the element's contribution to the residual vector.
+ ///  Calculate the element's contribution to the residual vector.
  /// Recall that fill_in_* functions MUST NOT initialise the entries 
  /// in the vector to zero. This allows us to call the 
  /// fill_in_* functions of the constituent single-physics elements
@@ -263,7 +263,7 @@ public:
     residuals);
   }
 
- ///\short Compute the element's residual Vector and the Jacobian matrix.
+ /// Compute the element's residual Vector and the Jacobian matrix.
  /// No off diagonal blocks!
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
@@ -287,22 +287,22 @@ public:
    TUnsteadyHeatElement<DIM,NNODE_1D>::get_Z2_flux(s,flux);
   }
 
- /// \short Number of 'flux' terms for Z2 error estimation: Error estimation
+ ///  Number of 'flux' terms for Z2 error estimation: Error estimation
  /// is based on error in unsteady heat element
  unsigned num_Z2_flux_terms() 
   {
    return TUnsteadyHeatElement<DIM,NNODE_1D>::num_Z2_flux_terms();
   }
 
- /// \short Number of vertex nodes in the element
+ ///  Number of vertex nodes in the element
  unsigned nvertex_node() const
   {return TUnsteadyHeatElement<DIM,NNODE_1D>::nvertex_node();}
 
- /// \short Pointer to the j-th vertex node in the element
+ ///  Pointer to the j-th vertex node in the element
  Node* vertex_node_pt(const unsigned& j) const
   {return TUnsteadyHeatElement<DIM,NNODE_1D>::vertex_node_pt(j);}
 
- /// \short Order of recovery shape functions for Z2 error estimation: Done
+ ///  Order of recovery shape functions for Z2 error estimation: Done
  /// for unsteady heat element since it determines the refinement
  unsigned nrecovery_order() 
   {
@@ -369,12 +369,12 @@ public virtual TElement<DIM-1,NNODE_1D>
   
  public:
   
-  /// \short Constructor [this was only required explicitly
+  ///  Constructor [this was only required explicitly
   /// from gcc 4.5.2 onwards...]
   ProjectableLinearHeatAndElasticityElement(){}
   
   
-  /// \short Specify the values associated with field fld. 
+  ///  Specify the values associated with field fld. 
   /// The information is returned in a vector of pairs which comprise 
   /// the Data object and the value within it, that correspond to field fld. 
   /// In the underlying elements the 
@@ -396,14 +396,14 @@ public virtual TElement<DIM-1,NNODE_1D>
     return data_values;
    }
 
-  /// \short Number of fields to be projected: dim, corresponding to 
+  ///  Number of fields to be projected: dim, corresponding to 
   /// the displacement components plus temperature
   unsigned nfields_for_projection()
    {
     return this->dim()+1;
    }
   
-  /// \short Number of history values to be stored for fld-th field. 
+  ///  Number of history values to be stored for fld-th field. 
   /// (includes present value!)
   unsigned nhistory_values_for_projection(const unsigned &fld)
    {
@@ -423,14 +423,14 @@ public virtual TElement<DIM-1,NNODE_1D>
    return this->node_pt(0)->ntstorage();   
    }
   
-  ///\short Number of positional history values: Read out from
+  /// Number of positional history values: Read out from
   /// positional timestepper  (Note: count includes current value!)
   unsigned nhistory_values_for_coordinate_projection()
    {
     return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
    }
   
-  /// \short Return Jacobian of mapping and shape functions of field fld
+  ///  Return Jacobian of mapping and shape functions of field fld
   /// at local coordinate s
   double jacobian_and_shape_of_field(const unsigned &fld, 
                                      const Vector<double> &s, 
@@ -447,7 +447,7 @@ public virtual TElement<DIM-1,NNODE_1D>
   
 
 
-  /// \short Return interpolated field fld at local coordinate s, at time level
+  ///  Return interpolated field fld at local coordinate s, at time level
   /// t (t=0: present; t>0: history values)
   double get_field(const unsigned &t, 
                    const unsigned &fld,
@@ -570,7 +570,7 @@ public:
  /// Virtual destructor (empty)
  virtual ~TemplateFreeHeatedLinearSurfaceContactElementBase(){}
 
- /// \short Pure virtual function: Return heat flux required to 
+ ///  Pure virtual function: Return heat flux required to 
  /// maintain continuity of temperature to adjacent penetrator at 
  /// local coordinate s.
  virtual double heat_flux(const Vector<double>& s) const=0;
@@ -603,7 +603,7 @@ class HeatedLinearSurfaceContactElement :
   public:
  
 
- /// \short Constructor, which takes a "bulk" element and the 
+ ///  Constructor, which takes a "bulk" element and the 
  /// value of the index and its limit
  HeatedLinearSurfaceContactElement(FiniteElement* const &element_pt, 
                                    const int &face_index,
@@ -657,10 +657,10 @@ class HeatedLinearSurfaceContactElement :
   }
 
 
- /// \short Default constructor
+ ///  Default constructor
  HeatedLinearSurfaceContactElement(){}
 
- /// \short Function to describe the local dofs of the element. The ostream 
+ ///  Function to describe the local dofs of the element. The ostream 
  /// specifies the output stream to which the description 
  /// is written; the string stores the currently 
  /// assembled output that is ultimately written to the
@@ -686,7 +686,7 @@ class HeatedLinearSurfaceContactElement :
   }
 
 
- /// \short Return heat flux required to maintain continuity of temperature
+ ///  Return heat flux required to maintain continuity of temperature
  /// to adjacent penetrator at local coordinate s
  double heat_flux(const Vector<double>& s) const
   {
@@ -853,7 +853,7 @@ class HeatedLinearSurfaceContactElement :
 
 protected:
 
- /// \short Overloaded fill in contributions function -- includes heat flux
+ ///  Overloaded fill in contributions function -- includes heat flux
  /// to ensure continuity of temperature
  void fill_in_contribution_to_residuals_surface_contact(
   Vector<double>& residuals);
@@ -1420,7 +1420,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
 
 
 //======================================================================
-/// \short A class for elements that allow the imposition of an 
+///  A class for elements that allow the imposition of an 
 /// applied flux on the boundaries of UnsteadyHeat elements.
 /// The element geometry is obtained from the  FaceGeometry<ELEMENT> 
 /// policy class.
@@ -1436,16 +1436,16 @@ class HeatedPenetratorFluxElement :
 public:
 
  // hierher
- // /// \short Function pointer to the prescribed-flux function fct(x,f(x)) -- 
+ // ///  Function pointer to the prescribed-flux function fct(x,f(x)) -- 
  // /// x is a Vector! 
  // typedef void (*UnsteadyHeatPrescribedFluxFctPt)
  //  (const double& time, const Vector<double>& x, double& flux);
 
 
- /// \short Default constructor
+ ///  Default constructor
  HeatedPenetratorFluxElement(){}
 
- /// \short Constructor, takes the pointer to the "bulk" element and the 
+ ///  Constructor, takes the pointer to the "bulk" element and the 
  /// index of the face to be created
  HeatedPenetratorFluxElement(FiniteElement* const &bulk_el_pt, 
                          const int &face_index);
@@ -1456,13 +1456,13 @@ public:
    BrokenCopy::broken_copy("HeatedPenetratorFluxElement");
   } 
  
- /// \short Pointer to penetrator
+ ///  Pointer to penetrator
  Penetrator* penetrator_pt() const
  {
   return Penetrator_pt;
  }
 
- /// \short Set pointer to penetrator
+ ///  Set pointer to penetrator
  void set_penetrator_pt(Penetrator* penetrator_pt)
  {
   Penetrator_pt=penetrator_pt;
@@ -1521,12 +1521,12 @@ public:
  /// until somebody decides what exactly they want to plot here...
  void output(std::ostream &outfile) {FaceGeometry<ELEMENT>::output(outfile);}
 
- /// \short Output function -- forward to broken version in FiniteElement
+ ///  Output function -- forward to broken version in FiniteElement
  /// until somebody decides what exactly they want to plot here...
 // void output(std::ostream &outfile, const unsigned &n_plot)
  // {FaceGeometry<ELEMENT>::output(outfile,n_plot);}
 
-//\short Output function -- hierher rushed
+// Output function -- hierher rushed
  void output(std::ostream &outfile, const unsigned &nplot)
   {
 
@@ -1571,14 +1571,14 @@ public:
  /// until somebody decides what exactly they want to plot here...
  void output(FILE* file_pt) {FaceGeometry<ELEMENT>::output(file_pt);}
 
- /// \short C-style output function -- forward to broken version in 
+ ///  C-style output function -- forward to broken version in 
  /// FiniteElement until somebody decides what exactly they want to plot 
  /// here...
  void output(FILE* file_pt, const unsigned &n_plot)
   {FaceGeometry<ELEMENT>::output(file_pt,n_plot);}
 
 
- /// \short Pure virtual function: Return temperature at 
+ ///  Pure virtual function: Return temperature at 
  /// local coordinate s.
  double penetrator_temperature(const Vector<double>& s) const
   {
@@ -1601,7 +1601,7 @@ public:
 
 protected:
  
- /// \short Function to compute the shape and test functions and to return 
+ ///  Function to compute the shape and test functions and to return 
  /// the Jacobian of mapping between local and global (Eulerian)
  /// coordinates
  inline double shape_and_test(const Vector<double> &s, Shape &psi, Shape &test)
@@ -1642,7 +1642,7 @@ protected:
 private:
 
 
- /// \short Compute the element residual vector.
+ ///  Compute the element residual vector.
  /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
  void fill_in_generic_residual_contribution_ust_heat_flux(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
@@ -2018,7 +2018,7 @@ public:
  /// Empty Destructor
  ~WarpedLine(){}
 
- /// \short Position vector at Lagrangian coordinate zeta 
+ ///  Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    double zetaa=X_min+zeta[0]*(X_max-X_min);
@@ -2039,7 +2039,7 @@ public:
    r[1]-=Lift_off_amplitude*exp(-Lift_off_alpha*(zetaa-0.5)*(zetaa-0.5));
   }
  
- /// \short Parametrised position on object: r(zeta). Evaluated at
+ ///  Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Forward to steady version
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -2065,7 +2065,7 @@ public:
  /// Access to amplitude
  double& ampl() {return Ampl;}
 
- /// \short How many items of Data does the shape of the object depend on?
+ ///  How many items of Data does the shape of the object depend on?
  /// None.
  unsigned ngeom_data() const
   {
@@ -2129,7 +2129,7 @@ private:
 
 //======================================================================
 // hierher update
-/// \short Penetrator that keeps circle in contact with a control node 
+///  Penetrator that keeps circle in contact with a control node 
 /// on target surface (made of solid contact face elements) -- centre
 /// of the circular penetrator is located at
 ///  
@@ -2168,7 +2168,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
 
    public:
 
-  /// \short Constructor: Pass pointer to control node whose 
+  ///  Constructor: Pass pointer to control node whose 
   /// index_of_contact_pressure-th value represents the Lagrange multiplier
   /// (the discrete contact pressure) that has been traded for the
   /// vertical displacement/weight constraint. Also need the indices
@@ -2230,7 +2230,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    }
   
 
-  /// \short Get surface coordinate along penetrator for given point x.
+  ///  Get surface coordinate along penetrator for given point x.
   /// We assume that point on the surface and given point share the
   /// same polar angle and return that polar angle 
   void surface_coordinate(const Vector<double>& x, Vector<double>& zeta) const
@@ -2239,7 +2239,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    }
   
   
-  /// \short Get rigid body displacement of reference point in penetrator.
+  ///  Get rigid body displacement of reference point in penetrator.
   Vector<double> rigid_body_displacement() const
    {    
     unsigned n=Orig_centre.size();
@@ -2252,7 +2252,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    }
   
   
-  /// \short Set original centre of penetrator (for computation of rigid body
+  ///  Set original centre of penetrator (for computation of rigid body
   /// displacement
   void set_original_centre(const Vector<double>& orig_centre)
    {
@@ -2260,7 +2260,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    }
   
   
-  /// \short Vector of pairs identifying values (via a pair of pointer to 
+  ///  Vector of pairs identifying values (via a pair of pointer to 
   /// Data object and index within it) that correspond to the Data values 
   /// that are determined by the horizontal/vertical/... equilibrium equations.
   Vector<std::pair<Data*,unsigned> > equilibrium_data()
@@ -2311,14 +2311,14 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    }
 
 
-  /// \short Access to pointer to mesh of contact elements that contribute to 
+  ///  Access to pointer to mesh of contact elements that contribute to 
   /// force on penetrator
   Mesh* contact_element_mesh_pt() const
    {
     return Contact_element_mesh_pt;
    }
 
-  /// \short Set pointer to mesh of contact elements and setup
+  ///  Set pointer to mesh of contact elements and setup
   /// external Data, i.e. Data that affects the residuals in this
   /// element. Also set the node pointed to by Control_node_pt
   /// as external Data for the elements in the contact mesh
@@ -2465,7 +2465,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
     return (Target_yc_pt!=0);
    }
 
-  /// \short Impose weight (rather than imposed displacement). Target
+  ///  Impose weight (rather than imposed displacement). Target
   /// weight specified via pointer.
   void impose_weight(double* target_weight_pt)
    {
@@ -2473,7 +2473,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
     Target_yc_pt=0;
    }
 
-  /// \short Impose vertical position of control node (rather than weight).
+  ///  Impose vertical position of control node (rather than weight).
   /// Target vertical position of control node specified via pointer.
   void impose_yc(double* target_yc_pt)
    {
@@ -2482,7 +2482,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    }
 
 
-  /// \short Is angle of rotation about control node imposed? If false then 
+  ///  Is angle of rotation about control node imposed? If false then 
   /// horizontal force is imposed.
   bool rotation_angle_is_imposed()
    {
@@ -2490,7 +2490,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    }
 
 
-  /// \short Impose horizontal force (rather than rotation about contact node). 
+  ///  Impose horizontal force (rather than rotation about contact node). 
   /// Target force specified via pointer.
   void impose_horizontal_force(double* target_horizontal_force_pt)
    {
@@ -2498,7 +2498,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
     Target_rotation_angle_pt=0;
    }
 
-  /// \short Impose rotation about contact node (rather than horizontal force)
+  ///  Impose rotation about contact node (rather than horizontal force)
   /// Target angle specified via pointer.
   void impose_rotation_angle(double* target_rotation_angle_pt)
    {
@@ -2625,7 +2625,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
      }
    }
  
-  /// \short Get penetration for given point x.
+  ///  Get penetration for given point x.
   void penetration(const Vector<double>& x, const Vector<double>& n,
                    double& d,bool& intersection) const
   {
@@ -2661,7 +2661,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
   }
 
 
-  /// \short Get temperature on penetrator at point "associated" with
+  ///  Get temperature on penetrator at point "associated" with
   /// point x using the same logic as for the position function). Here
   /// we assume that both points shrare the same polar angle relative
   /// to the centre of (circular!) penetrator
@@ -2683,7 +2683,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
      }
    }
     
-  /// \short Get position to surface, r, in terms of surface coordinate zeta.
+  ///  Get position to surface, r, in terms of surface coordinate zeta.
   void position_from_zeta(const Vector<double>& zeta, 
                           Vector<double>& r) const
   {
@@ -2692,7 +2692,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    r[1]=centre(1)+(*Radius_pt)*sin(phi);
   }
 
-  /// \short Resulting force from all associated ContactElements
+  ///  Resulting force from all associated ContactElements
   Vector<double> resulting_force() const
   {
    Vector<double> contact_force(2,0.0);
@@ -2719,40 +2719,40 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
   /// Pointer to radius of penetrator
   double* Radius_pt;
 
-  /// \short Original centre of penetrator (origin for cylindrical polar
+  ///  Original centre of penetrator (origin for cylindrical polar
   /// coordinate system)
   Vector<double> Orig_centre;
 
   /// Control node
   SolidNode* Control_node_pt;
 
-  /// \short Index at which contact pressure (Lagr mult) is stored in nodal
+  ///  Index at which contact pressure (Lagr mult) is stored in nodal
   /// data associated with control node
   unsigned Index_of_contact_pressure;
 
-  /// \short Where is the vertical displacement (linear_elasticity) stored?
+  ///  Where is the vertical displacement (linear_elasticity) stored?
   unsigned Index_of_vertical_displacement;
 
-  /// \short Where is the horizontal displacement (linear_elasticity) stored?
+  ///  Where is the horizontal displacement (linear_elasticity) stored?
   unsigned Index_of_horizontal_displacement;
 
-  /// \short Index of external data that contains the the contact
+  ///  Index of external data that contains the the contact
   /// pressure in its Index_of_contact_pressure-th value
   unsigned External_data_index_of_traded_contact_pressure;
   
-  /// \short Pointer to target weight (null if vertical displacement of control
+  ///  Pointer to target weight (null if vertical displacement of control
   /// node is imposed)
   double* Target_weight_pt;
 
-  /// \short Pointer to target horizontal force (null if rotation angle angle 
+  ///  Pointer to target horizontal force (null if rotation angle angle 
   /// about control node is imposed)
   double* Target_horizontal_force_pt;
 
-  /// \short Pointer to  target vertical displacement of control node (null if 
+  ///  Pointer to  target vertical displacement of control node (null if 
   /// weight is imposed)
   double* Target_yc_pt;
 
-  /// \short Pointer to target rotation angle about control node (null 
+  ///  Pointer to target rotation angle about control node (null 
   /// if horizontal force is imposed)
   double* Target_rotation_angle_pt;
 
@@ -2783,7 +2783,7 @@ namespace ProblemParameters
 
 #ifdef STRUCTURED_MESH
 
- /// \short GeomObject specifying the shape of the boundary: Initially it's 
+ ///  GeomObject specifying the shape of the boundary: Initially it's 
  /// almost flat.
  WarpedLine Boundary_geom_object(1.0e-10,0.0,1.0);
 
@@ -2795,22 +2795,22 @@ namespace ProblemParameters
  /// Right end of contact region (for unstructured mesh only)
  double X_contact_end_right=0.7;
 
- /// \short GeomObject specifying the shape of the boundary: Initially it's 
+ ///  GeomObject specifying the shape of the boundary: Initially it's 
  /// almost flat. Starts at the left
  WarpedLine Boundary_geom_object_left(1.0e-10,0.0,X_contact_end_left);
 
- /// \short GeomObject specifying the shape of the boundary: Initially it's 
+ ///  GeomObject specifying the shape of the boundary: Initially it's 
  /// almost flat.
  WarpedLine Boundary_geom_object_contact(1.0e-10,X_contact_end_left,
                                          X_contact_end_right);
 
- /// \short GeomObject specifying the shape of the boundary: Initially it's 
+ ///  GeomObject specifying the shape of the boundary: Initially it's 
  /// almost flat.
  WarpedLine Boundary_geom_object_right(1.0e-10,X_contact_end_right,1.0);
 
 #endif
 
- /// \short Impose position of centre (i.e. a stand-alone penetrator with
+ ///  Impose position of centre (i.e. a stand-alone penetrator with
  /// prescribed position or indirectly via control node?
  bool Impose_position_of_centre=true;
  
@@ -2922,7 +2922,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
  
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve()
   {
    // For maximum stability: Reset the current nodal positions to be
@@ -3015,7 +3015,7 @@ public:
    rebuild_global_mesh();
   }
  
- /// \short Actions after adapt: 
+ ///  Actions after adapt: 
  /// Setup the problem again -- remember that the mesh has been
  /// completely rebuilt and its element's don't have any
  /// pointers to source fcts etc. yet
@@ -3120,7 +3120,7 @@ public:
 private:
 
 
- /// \short Create elements that enforce prescribed boundary motion
+ ///  Create elements that enforce prescribed boundary motion
  /// by Lagrange multipliers
  void create_displ_imposition_elements()
   {
@@ -3344,7 +3344,7 @@ private:
   } // end of create_displ_imposition_elements
 
 
- /// \short Delete elements that enforce prescribed boundary motion
+ ///  Delete elements that enforce prescribed boundary motion
  /// by Lagrange multiplliers
  void delete_displ_imposition_elements()
   {
@@ -3512,7 +3512,7 @@ private:
    
   }
 
- /// \short Helper function to (re-)set boundary condition
+ ///  Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup()
   {
@@ -3929,7 +3929,7 @@ private:
  /// Pointer to the "surface" contact mesh
  Mesh* Surface_contact_mesh_pt;
  
- /// \short Pointers to meshes of Lagrange multiplier elements to impose 
+ ///  Pointers to meshes of Lagrange multiplier elements to impose 
  /// displacement of top boundary
  SolidMesh* Displ_imposition_mesh_pt;
 
@@ -3939,7 +3939,7 @@ private:
  /// Penetrator mesh
  Mesh* Penetrator_mesh_pt;
 
- /// \short Pointer to the "surface" mesh on boulder that applies flux boundary 
+ ///  Pointer to the "surface" mesh on boulder that applies flux boundary 
  /// condition to boulder
  Mesh* Boulder_surface_contact_mesh_pt;
  
@@ -3963,26 +3963,26 @@ private:
 
 #ifdef STRUCTURED_MESH
 
- /// \short Backup of Surface_contact_mesh_pt so the Lagrange multipliers
+ ///  Backup of Surface_contact_mesh_pt so the Lagrange multipliers
  /// can be projected across
  BackupMeshForProjection<QElement<1,3> >* Backed_up_surface_contact_mesh_pt;
 
 #else
 
- /// \short Backup of Surface_contact_mesh_pt so the Lagrange multipliers
+ ///  Backup of Surface_contact_mesh_pt so the Lagrange multipliers
  /// can be projected across
  BackupMeshForProjection<TElement<1,3> >* Backed_up_surface_contact_mesh_pt;
 
 #endif
 
- /// \short Pointer to control node where Lagrange multiplier (contact pressure)
+ ///  Pointer to control node where Lagrange multiplier (contact pressure)
  /// is "pseudo-hijacked" to impose either displacement or weight constraint.
  SolidNode* Control_node_pt;
 
  /// x coordinate of old control node
  double Xc_old;
 
- /// \short ID of additional nodal values created by contact elements to store
+ ///  ID of additional nodal values created by contact elements to store
  /// contact pressure/Lagr. mult.
  unsigned Contact_id;
 
@@ -4610,7 +4610,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 
 
 //=======start_of_main====================================================
-/// \short Driver code
+///  Driver code
 //========================================================================
 int main(int argc, char* argv[])
 {

@@ -55,7 +55,7 @@ class MyMesh : public virtual RefineableSolidQuadFromTriangleMesh<ELEMENT>
  
 public:
  
- /// \short Constructor: 
+ ///  Constructor: 
  MyMesh(TriangleMeshParameters &triangle_mesh_parameters, 
 	TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
   : QuadFromTriangleMesh<ELEMENT>(triangle_mesh_parameters,time_stepper_pt),
@@ -90,7 +90,7 @@ namespace Global_Physical_Variables
  /// Uniform pressure
  double P = 0.0;
 
- /// \short Constant pressure load. The arguments to this function are imposed
+ ///  Constant pressure load. The arguments to this function are imposed
  /// on us by the SolidTractionElements which allow the traction to 
  /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the 
  /// outer unit normal to the surface. Here we only need the outer unit
@@ -118,7 +118,7 @@ class UnstructuredSolidProblem : public Problem
 
 public:
 
- /// \short Constructor: 
+ ///  Constructor: 
  UnstructuredSolidProblem();
 
  /// Destructor (empty)

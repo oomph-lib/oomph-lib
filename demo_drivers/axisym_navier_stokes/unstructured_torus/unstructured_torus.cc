@@ -217,13 +217,13 @@ template<class ELEMENT>
 class UnstructuredTorusProblem : public Problem
 {
 public:
- /// \short Constructor taking the maximum refinement level and
+ ///  Constructor taking the maximum refinement level and
  /// the minimum and maximum error targets.
  UnstructuredTorusProblem(
               const double &min_error_target, 
               const double &max_error_target);
 
- /// \short Calculate the square of the l2 norm
+ ///  Calculate the square of the l2 norm
  double calculate_square_of_l2_norm()
   {
    //Initialise
@@ -241,7 +241,7 @@ public:
   }
 
 
- /// \short Calculate the cross-sectional area of the domain
+ ///  Calculate the cross-sectional area of the domain
  double calculate_area()
   {
    //Initialise
@@ -281,7 +281,7 @@ void set_initial_condition()
  /// Return a pointer to the specific mesh used
  RefineableTriangleMesh<ELEMENT>* mesh_pt() 
   {return dynamic_cast<RefineableTriangleMesh<ELEMENT>*>(Problem::mesh_pt());}
- /// \short Update the problem specs before next timestep: 
+ ///  Update the problem specs before next timestep: 
  void actions_before_implicit_timestep() 
   {set_boundary_conditions(time());}
 

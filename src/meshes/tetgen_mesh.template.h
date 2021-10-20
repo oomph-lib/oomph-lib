@@ -44,21 +44,21 @@
 namespace oomph
 {
   //=========start of TetgenMesh class======================================
-  /// \short  Unstructured tet mesh based on output from Tetgen:
+  ///   Unstructured tet mesh based on output from Tetgen:
   /// http://wias-berlin.de/software/tetgen/
   //========================================================================
   template<class ELEMENT>
   class TetgenMesh : public virtual TetMeshBase
   {
   public:
-    /// \short Empty constructor
+    ///  Empty constructor
     TetgenMesh()
     {
       // Mesh can only be built with 3D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(3);
     }
 
-    /// \short Constructor with the input files
+    ///  Constructor with the input files
     TetgenMesh(const std::string& node_file_name,
                const std::string& element_file_name,
                const std::string& face_file_name,
@@ -96,7 +96,7 @@ namespace oomph
     }
 
 
-    /// \short Constructor with tetgenio data structure
+    ///  Constructor with tetgenio data structure
     TetgenMesh(tetgenio& tetgen_data,
                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
                const bool& use_attributes = false)
@@ -135,7 +135,7 @@ namespace oomph
     }
 
 
-    /// \short Constructor with the input files. Setting the boolean
+    ///  Constructor with the input files. Setting the boolean
     /// flag to true splits "corner" elements, i.e. elements that
     /// that have at least three faces on a domain boundary. The
     /// relevant elements are split without introducing hanging
@@ -191,7 +191,7 @@ namespace oomph
       }
     }
 
-    /// \short Constructor with tetgen data structure Setting the boolean
+    ///  Constructor with tetgen data structure Setting the boolean
     /// flag to true splits "corner" elements, i.e. elements that
     /// that have at least three faces on a domain boundary. The
     /// relevant elements are split without introducing hanging
@@ -245,7 +245,7 @@ namespace oomph
     }
 
 
-    /// \short Build mesh, based on a TetgenMeshFactedClosedSurface that
+    ///  Build mesh, based on a TetgenMeshFactedClosedSurface that
     /// specifies the outer boundary of the domain and any number of internal
     /// boundaries, specified by TetMeshFacetedSurfaces.
     /// Also specify target size for uniform element size.
@@ -393,7 +393,7 @@ namespace oomph
       snap_nodes_onto_geometric_objects();
     }
 
-    ///\short Build tetgenio object from the TetMeshFacetedSurfaces
+    /// Build tetgenio object from the TetMeshFacetedSurfaces
     void build_tetgenio(
       TetMeshFacetedSurface* const& outer_boundary_pt,
       Vector<TetMeshFacetedSurface*>& internal_surface_pt,
@@ -659,7 +659,7 @@ namespace oomph
     }
 
 
-    /// \short Overload set_mesh_level_time_stepper so that the stored
+    ///  Overload set_mesh_level_time_stepper so that the stored
     /// time stepper now corresponds to the new timestepper
     void set_mesh_level_time_stepper(TimeStepper* const& time_stepper_pt,
                                      const bool& preserve_existing_data)
@@ -705,21 +705,21 @@ namespace oomph
     void build_from_scaffold(TimeStepper* time_stepper_pt,
                              const bool& use_attributes);
 
-    /// \short Function to setup the reverse look-up schemes
+    ///  Function to setup the reverse look-up schemes
     void setup_reverse_lookup_schemes_for_faceted_surface(
       TetMeshFacetedSurface* const& faceted_surface_pt);
 
     /// Temporary scaffold mesh
     TetgenScaffoldMesh* Tmp_mesh_pt;
 
-    /// \short Boolean to indicate whether a tetgenio representation of the
+    ///  Boolean to indicate whether a tetgenio representation of the
     /// mesh exists
     bool Tetgenio_exists;
 
-    /// \short Tetgen representation of mesh
+    ///  Tetgen representation of mesh
     tetgenio* Tetgenio_pt;
 
-    /// \short Boolean flag to indicate whether to use attributes or not
+    ///  Boolean flag to indicate whether to use attributes or not
     /// (required for multidomain meshes)
     bool Use_attributes;
 
@@ -740,7 +740,7 @@ namespace oomph
                           public virtual SolidMesh
   {
   public:
-    /// \short Constructor. Boundary coordinates are setup
+    ///  Constructor. Boundary coordinates are setup
     /// automatically.
     SolidTetgenMesh(const std::string& node_file_name,
                     const std::string& element_file_name,
@@ -759,7 +759,7 @@ namespace oomph
       set_lagrangian_nodal_coordinates();
     }
 
-    /// \short Constructor. Boundary coordinates are re-setup
+    ///  Constructor. Boundary coordinates are re-setup
     /// automatically, with the orientation of the outer unit
     /// normal determined by switch_normal.
     SolidTetgenMesh(const std::string& node_file_name,

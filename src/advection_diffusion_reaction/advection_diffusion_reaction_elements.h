@@ -42,7 +42,7 @@
 namespace oomph
 {
   //=============================================================
-  /// \short A class for all elements that solve the Advection
+  ///  A class for all elements that solve the Advection
   /// Diffusion Reaction equations using isoparametric elements.
   /// \f[
   /// \tau_{i} \frac{\partial C_{i}}{\partial t}
@@ -57,28 +57,28 @@ namespace oomph
   class AdvectionDiffusionReactionEquations : public virtual FiniteElement
   {
   public:
-    /// \short Function pointer to source function fct(x,f(x)) --
+    ///  Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*AdvectionDiffusionReactionSourceFctPt)(
       const Vector<double>& x, Vector<double>& f);
 
-    /// \short Function pointer to reaction terms
+    ///  Function pointer to reaction terms
     typedef void (*AdvectionDiffusionReactionReactionFctPt)(
       const Vector<double>& c, Vector<double>& R);
 
-    /// \short Function pointer to derivative of reaction terms
+    ///  Function pointer to derivative of reaction terms
     typedef void (*AdvectionDiffusionReactionReactionDerivFctPt)(
       const Vector<double>& c, DenseMatrix<double>& dRdC);
 
 
-    /// \short Function pointer to wind function fct(x,w(x)) --
+    ///  Function pointer to wind function fct(x,w(x)) --
     /// x is a Vector!
     typedef void (*AdvectionDiffusionReactionWindFctPt)(const double& time,
                                                         const Vector<double>& x,
                                                         Vector<double>& wind);
 
 
-    /// \short Constructor: Initialise the Source_fct_pt, Wind_fct_pt,
+    ///  Constructor: Initialise the Source_fct_pt, Wind_fct_pt,
     /// Reaction_fct_pt to null and initialise the dimensionless
     /// timescale and diffusion ratios
     AdvectionDiffusionReactionEquations()
@@ -101,7 +101,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const AdvectionDiffusionReactionEquations&) = delete;
 
-    /// \short Return the index at which the unknown i-th reagent
+    ///  Return the index at which the unknown i-th reagent
     /// is stored. The default value, i, is appropriate for single-physics
     /// problems, when there are only i variables, the values that satisfies
     /// the advection-diffusion-reaction equation.
@@ -113,7 +113,7 @@ namespace oomph
       return i;
     }
 
-    /// \short dc_r/dt at local node n.
+    ///  dc_r/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
     double dc_dt_adv_diff_react(const unsigned& n, const unsigned& r) const
     {
@@ -141,7 +141,7 @@ namespace oomph
     }
 
 
-    /// \short dc/dt at local node n.
+    ///  dc/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
     void dc_dt_adv_diff_react(const unsigned& n, Vector<double>& dc_dt) const
     {
@@ -180,14 +180,14 @@ namespace oomph
       }
     }
 
-    /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
+    ///  Disable ALE, i.e. assert the mesh is not moving -- you do this
     /// at your own risk!
     void disable_ALE()
     {
       ALE_is_disabled = true;
     }
 
-    /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
+    ///  (Re-)enable ALE, i.e. take possible mesh motion into account
     /// when evaluating the time-derivative. Note: By default, ALE is
     /// enabled, at the expense of possibly creating unnecessary work
     /// in problems where the mesh is, in fact, stationary.
@@ -204,7 +204,7 @@ namespace oomph
       output(outfile, nplot);
     }
 
-    /// \short Output FE representation of soln: x,y,u or x,y,z,u at
+    ///  Output FE representation of soln: x,y,u or x,y,z,u at
     /// nplot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
@@ -216,7 +216,7 @@ namespace oomph
       output(file_pt, n_plot);
     }
 
-    /// \short C-style output FE representation of soln: x,y,u or x,y,z,u at
+    ///  C-style output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
@@ -226,7 +226,7 @@ namespace oomph
                     const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Output exact soln: x,y,u_exact or x,y,z,u_exact at
+    ///  Output exact soln: x,y,u_exact or x,y,z,u_exact at
     /// nplot^DIM plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
@@ -241,7 +241,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Compute norm of the solution:
+    ///  Compute norm of the solution:
     /// sum of squares of the L2 norm for each reagent
     void compute_norm(double& norm);
 
@@ -340,7 +340,7 @@ namespace oomph
       return Tau_pt;
     }
 
-    /// \short Get source term at (Eulerian) position x. This function is
+    ///  Get source term at (Eulerian) position x. This function is
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the source function might be determined by
     /// another system of equations
@@ -363,7 +363,7 @@ namespace oomph
       }
     }
 
-    /// \short Get wind at (Eulerian) position x and/or local coordinate s.
+    ///  Get wind at (Eulerian) position x and/or local coordinate s.
     /// This function is
     /// virtual to allow overloading in multi-physics problems where
     /// the wind function might be determined by
@@ -392,7 +392,7 @@ namespace oomph
     }
 
 
-    /// \short Get reaction as a function of the given reagent concentrations
+    ///  Get reaction as a function of the given reagent concentrations
     /// This function is
     /// virtual to allow overloading in multi-physics problems where
     /// the reaction function might be determined by
@@ -416,7 +416,7 @@ namespace oomph
       }
     }
 
-    /// \short Get the derivatives of the reaction terms with respect to the
+    ///  Get the derivatives of the reaction terms with respect to the
     /// concentration variables. If no explicit function pointer is set,
     /// these will be calculated by finite differences
     virtual void get_reaction_deriv_adv_diff_react(
@@ -533,7 +533,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector and
+    ///  Add the element's contribution to its residual vector and
     /// the element Jacobian matrix (wrapper)
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -586,10 +586,10 @@ namespace oomph
     }
 
 
-    /// \short Self-test: Return 0 for OK
+    ///  Self-test: Return 0 for OK
     unsigned self_test();
 
-    /// \short Return the integrated reagent concentrations
+    ///  Return the integrated reagent concentrations
     void integrate_reagents(Vector<double>& C) const;
 
   protected:
@@ -597,7 +597,7 @@ namespace oomph
     static const unsigned N_reagent;
 
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_adv_diff_react(
       const Vector<double>& s,
@@ -606,7 +606,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_adv_diff_react(
       const unsigned& ipt,
@@ -615,7 +615,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    /// \short Add the element's contribution to its residual vector only
+    ///  Add the element's contribution to its residual vector only
     /// (if flag=and/or element  Jacobian matrix
     virtual void fill_in_generic_residual_contribution_adv_diff_react(
       Vector<double>& residuals,
@@ -641,7 +641,7 @@ namespace oomph
     /// Pointer to reaction derivatives
     AdvectionDiffusionReactionReactionDerivFctPt Reaction_deriv_fct_pt;
 
-    /// \short Boolean flag to indicate if ALE formulation is disabled when
+    ///  Boolean flag to indicate if ALE formulation is disabled when
     /// time-derivatives are computed. Only set to true if you're sure
     /// that the mesh is stationary.
     bool ALE_is_disabled;
@@ -658,7 +658,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short QAdvectionDiffusionReactionElement elements are
+  ///  QAdvectionDiffusionReactionElement elements are
   /// linear/quadrilateral/brick-shaped Advection Diffusion elements with
   /// isoparametric interpolation for the function.
   //======================================================================
@@ -668,7 +668,7 @@ namespace oomph
       public virtual AdvectionDiffusionReactionEquations<NREAGENT, DIM>
   {
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    ///  Constructor: Call constructors for QElement and
     /// Advection Diffusion equations
     QAdvectionDiffusionReactionElement()
       : QElement<DIM, NNODE_1D>(),
@@ -686,21 +686,21 @@ namespace oomph
       const QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>&) =
       delete;
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///   Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return NREAGENT;
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
       AdvectionDiffusionReactionEquations<NREAGENT, DIM>::output(outfile);
     }
 
-    /// \short Output function:
+    ///  Output function:
     ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -709,14 +709,14 @@ namespace oomph
     }
 
 
-    /// \short C-style output function:
+    ///  C-style output function:
     ///  x,y,u   or    x,y,z,u
     void output(FILE* file_pt)
     {
       AdvectionDiffusionReactionEquations<NREAGENT, DIM>::output(file_pt);
     }
 
-    ///  \short C-style output function:
+    ///   C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -724,7 +724,7 @@ namespace oomph
                                                                  n_plot);
     }
 
-    /// \short Output function for an exact solution:
+    ///  Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -735,7 +735,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for a time-dependent exact solution.
+    ///  Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
     void output_fct(std::ostream& outfile,
@@ -758,7 +758,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const;
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    ///  Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_adv_diff_react(
       const unsigned& ipt,
@@ -772,7 +772,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Define the shape functions and test functions and derivatives
+  ///  Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// Galerkin: Test functions = shape functions
@@ -836,7 +836,7 @@ namespace oomph
 
 
   //=======================================================================
-  /// \short Face geometry for the QAdvectionDiffusionReactionElement elements:
+  ///  Face geometry for the QAdvectionDiffusionReactionElement elements:
   /// The spatial dimension of the face elements is one lower than that
   /// of the bulk element but they have the same number of points along
   /// their 1D edges.
@@ -847,7 +847,7 @@ namespace oomph
     : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };
@@ -867,7 +867,7 @@ namespace oomph
     : public virtual PointElement
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    ///  Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : PointElement() {}
   };
@@ -881,7 +881,7 @@ namespace oomph
     : public virtual ProjectableElement<ADR_ELEMENT>
   {
   public:
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
@@ -901,27 +901,27 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: Just one
+    ///  Number of fields to be projected: Just one
     unsigned nfields_for_projection()
     {
       return this->N_reagent;
     }
 
-    /// \short Number of history values to be stored for fld-th field
+    ///  Number of history values to be stored for fld-th field
     /// (includes current value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
       return this->node_pt(0)->ntstorage();
     }
 
-    ///\short Number of positional history values
+    /// Number of positional history values
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -937,7 +937,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,

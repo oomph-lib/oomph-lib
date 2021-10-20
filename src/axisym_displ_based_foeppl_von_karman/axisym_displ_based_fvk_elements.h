@@ -50,12 +50,12 @@ namespace oomph
   class AxisymFoepplvonKarmanEquations : public virtual FiniteElement
   {
   public:
-    /// \short Function pointer to pressure function fct(r,f(r)) --
+    ///  Function pointer to pressure function fct(r,f(r)) --
     /// r is a Vector!
     typedef void (*AxisymFoepplvonKarmanPressureFctPt)(const double& r,
                                                        double& f);
 
-    /// \short Constructor (must initialise the Pressure_fct_pt). Also
+    ///  Constructor (must initialise the Pressure_fct_pt). Also
     /// set physical parameters to their default values.
     AxisymFoepplvonKarmanEquations() : Pressure_fct_pt(0), Nu_pt(0) {}
 
@@ -99,7 +99,7 @@ namespace oomph
       return Eta_pt;
     }
 
-    /// \short Return the index at which the i-th unknown value
+    ///  Return the index at which the i-th unknown value
     /// is stored. The default value, i, is appropriate for single-physics
     /// problems. By default, these are:
     /// 0: transverse displacement w
@@ -120,7 +120,7 @@ namespace oomph
       output(outfile, n_plot);
     }
 
-    /// \short Output FE representation of soln: r,w,sigma_r_r,sigma_phi_phi
+    ///  Output FE representation of soln: r,w,sigma_r_r,sigma_phi_phi
     /// at n_plot plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
@@ -131,7 +131,7 @@ namespace oomph
       output(file_pt, n_plot);
     }
 
-    /// \short C-style output FE representation of soln: r,w at
+    ///  C-style output FE representation of soln: r,w at
     /// n_plot plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
@@ -140,7 +140,7 @@ namespace oomph
                     const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Output exact soln: r,w_exact at
+    ///  Output exact soln: r,w_exact at
     /// n_plot plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
@@ -189,7 +189,7 @@ namespace oomph
       return Pressure_fct_pt;
     }
 
-    /// \short Get pressure term at (Eulerian) position r. This function is
+    ///  Get pressure term at (Eulerian) position r. This function is
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the pressure function might be determined by
     /// another system of equations.
@@ -245,7 +245,7 @@ namespace oomph
     //                                      DenseMatrix<double> &jacobian);
 
 
-    /// \short Return FE representation of transverse displacement
+    ///  Return FE representation of transverse displacement
     inline double interpolated_w_fvk(const Vector<double>& s) const
     {
       // Find number of nodes
@@ -273,7 +273,7 @@ namespace oomph
     }
 
 
-    /// \short Return FE representation of radial displacement
+    ///  Return FE representation of radial displacement
     inline double interpolated_u_fvk(const Vector<double>& s) const
     {
       // Find number of nodes
@@ -301,21 +301,21 @@ namespace oomph
     }
 
 
-    /// \short Compute in-plane stresses. Return boolean to indicate success
+    ///  Compute in-plane stresses. Return boolean to indicate success
     /// (false if attempt to evaluate stresses at zero radius)
     bool interpolated_stress(const Vector<double>& s,
                              double& sigma_r_r,
                              double& sigma_phi_phi) const;
 
 
-    /// \short Self-test: Return 0 for OK
+    ///  Self-test: Return 0 for OK
     unsigned self_test();
 
 
     // switch back on and test!
 
 
-    /// \short Sets a flag to signify that we are solving the linear,
+    ///  Sets a flag to signify that we are solving the linear,
     /// pure bending equations, and pin all the nodal values that will
     /// not be used in this case
     void use_linear_bending_model()
@@ -349,7 +349,7 @@ namespace oomph
 
 
   protected:
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_axisym_fvk(
       const Vector<double>& s,
@@ -359,7 +359,7 @@ namespace oomph
       DShape& dtestdr) const = 0;
 
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    ///  Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_axisym_fvk(
       const unsigned& ipt,
@@ -377,7 +377,7 @@ namespace oomph
     /// Pointer to Poisson's ratio
     double* Nu_pt;
 
-    /// \short Flag which stores whether we are using a linear,
+    ///  Flag which stores whether we are using a linear,
     /// pure bending model instead of the full non-linear Foeppl-von Karman
     bool Linear_bending_model;
 
@@ -403,12 +403,12 @@ namespace oomph
       public virtual AxisymFoepplvonKarmanEquations
   {
   private:
-    /// \short Static int that holds the number of variables at
+    ///  Static int that holds the number of variables at
     /// nodes: always the same
     static const unsigned Initial_Nvalue;
 
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    ///  Constructor: Call constructors for QElement and
     /// AxisymFoepplvonKarmanEquations
     AxisymFoepplvonKarmanElement()
       : QElement<1, NNODE_1D>(), AxisymFoepplvonKarmanEquations()
@@ -422,7 +422,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const AxisymFoepplvonKarmanElement<NNODE_1D>&) = delete;
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///   Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
@@ -430,35 +430,35 @@ namespace oomph
     }
 
 
-    /// \short Output function:
+    ///  Output function:
     ///  r,w,sigma_r_r,sigma_phi_phi
     void output(std::ostream& outfile)
     {
       AxisymFoepplvonKarmanEquations::output(outfile);
     }
 
-    ///  \short Output function:
+    ///   Output function:
     ///   r,w,sigma_r_r,sigma_phi_phi at n_plot plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       AxisymFoepplvonKarmanEquations::output(outfile, n_plot);
     }
 
-    /// \short C-style output function:
+    ///  C-style output function:
     ///  r,w
     void output(FILE* file_pt)
     {
       AxisymFoepplvonKarmanEquations::output(file_pt);
     }
 
-    ///  \short C-style output function:
+    ///   C-style output function:
     ///   r,w at n_plot plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       AxisymFoepplvonKarmanEquations::output(file_pt, n_plot);
     }
 
-    /// \short Output function for an exact solution:
+    ///  Output function for an exact solution:
     ///  r,w_exact at n_plot plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -468,7 +468,7 @@ namespace oomph
         outfile, n_plot, exact_soln_pt);
     }
 
-    /// \short Output function for a time-dependent exact solution.
+    ///  Output function for a time-dependent exact solution.
     ///  r,w_exact at n_plot plot points
     /// (Calls the steady version)
     void output_fct(std::ostream& outfile,
@@ -482,7 +482,7 @@ namespace oomph
 
 
   protected:
-    /// \short Shape, test functions & derivs. w.r.t. to global coords.
+    ///  Shape, test functions & derivs. w.r.t. to global coords.
     /// Return Jacobian.
     inline double dshape_and_dtest_eulerian_axisym_fvk(const Vector<double>& s,
                                                        Shape& psi,
@@ -490,7 +490,7 @@ namespace oomph
                                                        Shape& test,
                                                        DShape& dtestdr) const;
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    ///  Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_axisym_fvk(
       const unsigned& ipt,

@@ -81,7 +81,7 @@ public:
  /// Destructor to clean up memory
  ~EultingSphereProblem();
 
- /// \short Set the boundary conditions
+ ///  Set the boundary conditions
  void set_boundary_conditions();
  
  // Access function for the specific mesh
@@ -173,7 +173,7 @@ EultingSphereProblem<ELEMENT>::EultingSphereProblem()
 
 
 //=========start of set_boundary_conditions===============================
-/// \short Set the boundary conditions so that the inner sphere has
+///  Set the boundary conditions so that the inner sphere has
 /// a constant angular rotation of angular velocity one.
 //========================================================================
 template<class ELEMENT>

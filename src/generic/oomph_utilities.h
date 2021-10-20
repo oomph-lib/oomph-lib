@@ -83,7 +83,7 @@ namespace oomph
   //====================================================================
   namespace ANSIEscapeCode
   {
-    /// \short Function to change text effect. NOTE: This assumes the user
+    ///  Function to change text effect. NOTE: This assumes the user
     /// knows what they're doing/assigning; no error checking done here...
     extern void set_text_effect(std::string text_effect);
 
@@ -102,14 +102,14 @@ namespace oomph
   } // namespace ANSIEscapeCode
 
   //=====================================================================
-  /// \short Namespace for debugging helpers. Currently only contains a
+  ///  Namespace for debugging helpers. Currently only contains a
   /// function to prett-ify file name and line numbers (in red) to use
   /// when debugging. Makes it easy to identify where a std::cout
   /// statement was called.
   //=====================================================================
   namespace DebugHelpers
   {
-    /// \short Return the concaternation of the initials of the input
+    ///  Return the concaternation of the initials of the input
     /// file name and line number. The make_new_line flag indicates
     /// whether the string starts on a new line or not
     extern std::string debug_string(const std::string& filename,
@@ -183,7 +183,7 @@ namespace oomph
   // =================================================================
   namespace StringConversion
   {
-    /// \short Conversion function that should work for anything with
+    ///  Conversion function that should work for anything with
     /// operator<< defined (at least all basic types).
     template<class T>
     std::string to_string(T object, unsigned float_precision = 8)
@@ -194,13 +194,13 @@ namespace oomph
       return ss.str();
     }
 
-    /// \short Convert a string to lower case (outputs a copy).
+    ///  Convert a string to lower case (outputs a copy).
     std::string to_lower(const std::string& input);
 
-    /// \short Convert a string to upper case (outputs a copy).
+    ///  Convert a string to upper case (outputs a copy).
     std::string to_upper(const std::string& input);
 
-    /// \short Split a string, s, into a vector of strings where ever there is
+    ///  Split a string, s, into a vector of strings where ever there is
     /// an instance of delimiter (i.e. is delimiter is " " will give a list of
     /// words). Note that multiple delimiters in a row will give empty
     /// strings.
@@ -208,7 +208,7 @@ namespace oomph
                       char delim,
                       Vector<std::string>& elems);
 
-    /// \short Split a string, s, into a vector of strings where ever there is
+    ///  Split a string, s, into a vector of strings where ever there is
     /// an instance of delimiter (i.e. is delimiter is " " will give a list of
     /// words). Note that multiple delimiters in a row will give empty
     /// strings. Return by value.
@@ -219,7 +219,7 @@ namespace oomph
 
   namespace TypeNames
   {
-    /// \short Get the type name of an object. Only for use in debugging, do
+    ///  Get the type name of an object. Only for use in debugging, do
     /// not write real code using this function as it is implementation
     /// dependant!
     template<class T>
@@ -244,7 +244,7 @@ namespace oomph
       return typestr;
     }
 
-    /// \short Get the type name of an object from a pointer to the object (we
+    ///  Get the type name of an object from a pointer to the object (we
     /// usually want the type of the object itself not the pointer because the
     /// type of the pointer may be a base class). Only for use in debugging,
     /// do not write real code using this function as it is implementation
@@ -298,7 +298,7 @@ namespace oomph
   // Automatically checked casting functions (from boost)
   // ============================================================
 
-  /// \short Runtime checked dynamic cast. This is the safe but slightly slower
+  ///  Runtime checked dynamic cast. This is the safe but slightly slower
   /// cast. Use it in any of these cases:
   /// - You aren't entirely sure the cast is always safe.
   /// - You have strange inheritance structures (e.g. the "Diamond of Death" in
@@ -323,7 +323,7 @@ namespace oomph
     return tmp;
   }
 
-  /// \short Checked static cast. Only use this cast if ALL of these are true:
+  ///  Checked static cast. Only use this cast if ALL of these are true:
   /// - You are sure that the cast will always succeed.
   /// - You aren't using any strange inheritance structures (e.g. the "Diamond
   /// of Death" in element inheritance, if you aren't sure just try compiling).
@@ -412,18 +412,18 @@ namespace oomph
 
 
   //====================================================================
-  /// \short Collection of data structures for storing information about
+  ///  Collection of data structures for storing information about
   /// linear solves. Currently only contains storage for the
   /// iteration counts and the linear solver time.
   //====================================================================
   class DocLinearSolverInfo
   {
   public:
-    /// \short Constructor. Initialised the Iterations_and_times vector of
+    ///  Constructor. Initialised the Iterations_and_times vector of
     /// vector of pairs.
     DocLinearSolverInfo() : Iterations_and_times() {}
 
-    /// \short Set up a new vector of pairs for a new time step.
+    ///  Set up a new vector of pairs for a new time step.
     void setup_new_time_step()
     {
       // For each new time step, we have a new vector consisting of pairs of
@@ -437,7 +437,7 @@ namespace oomph
       setup_new_time_step();
     }
 
-    /// \short Add a new iteration and time pair.
+    ///  Add a new iteration and time pair.
     void add_iteration_and_time(unsigned iter,
                                 double prec_setup_time,
                                 double linear_solver_time)
@@ -472,13 +472,13 @@ namespace oomph
       return Iterations_and_times.back().size();
     }
 
-    /// \short Accessor function for the iteration and times.
+    ///  Accessor function for the iteration and times.
     Vector<Vector<Vector<double>>>& iterations_and_times()
     {
       return Iterations_and_times;
     }
 
-    /// \short Accessor function for the iteration and times (const version).
+    ///  Accessor function for the iteration and times (const version).
     Vector<Vector<Vector<double>>> iterations_and_times() const
     {
       return Iterations_and_times;
@@ -490,7 +490,7 @@ namespace oomph
   };
 
   //====================================================================
-  /// \short Information for documentation of results:
+  ///  Information for documentation of results:
   /// Directory and file number to enable output
   /// in the form RESLT/filename11.dat, say.
   /// Documentation can be switched on and off.
@@ -498,7 +498,7 @@ namespace oomph
   class DocInfo
   {
   public:
-    /// \short Constructor. Default settings: Current directory, step `0',
+    ///  Constructor. Default settings: Current directory, step `0',
     /// label="", full documentation enabled and output directory is
     /// required to exist when set_directory() is called.
     DocInfo()
@@ -510,7 +510,7 @@ namespace oomph
     {
     }
 
-    /// \short Constructor with specific directory.
+    ///  Constructor with specific directory.
     DocInfo(const std::string& directory)
       : Directory(directory),
         Doc_flag(true),
@@ -526,25 +526,25 @@ namespace oomph
       return Directory;
     }
 
-    /// \short Set output directory (we try to open a file in it
+    ///  Set output directory (we try to open a file in it
     /// to see if the directory exists -- if it doesn't we'll
     /// issue a warning -- or, if directory_must_exist()==true,
     /// throw and OomphLibError
     void set_directory(const std::string& directory);
 
-    /// \short Enable documentation
+    ///  Enable documentation
     void enable_doc()
     {
       Doc_flag = true;
     }
 
-    /// \short Disable documentation
+    ///  Disable documentation
     void disable_doc()
     {
       Doc_flag = false;
     }
 
-    /// \short Are we documenting?
+    ///  Are we documenting?
     bool is_doc_enabled() const
     {
       return Doc_flag;
@@ -580,13 +580,13 @@ namespace oomph
       return Label;
     }
 
-    /// \short Call to throw an error if directory does not exist
+    ///  Call to throw an error if directory does not exist
     void enable_error_if_directory_does_not_exist()
     {
       Directory_must_exist = true;
     }
 
-    /// \short Call to issue a warning if the directory does not exists
+    ///  Call to issue a warning if the directory does not exists
     void disable_error_if_directory_does_not_exist()
     {
       Directory_must_exist = false;
@@ -694,35 +694,35 @@ namespace oomph
       const std::string& command_line_flag,
       const std::string& documentation = "Undocumented");
 
-    /// \short Specify possible command line flag that specifies a double,
+    ///  Specify possible command line flag that specifies a double,
     /// accessed via pointer
     extern void specify_command_line_flag(
       const std::string& command_line_flag,
       double* arg_pt,
       const std::string& documentation = "Undocumented");
 
-    /// \short Specify possible command line flag that specifies an int,
+    ///  Specify possible command line flag that specifies an int,
     /// accessed via pointer
     extern void specify_command_line_flag(
       const std::string& command_line_flag,
       int* arg_pt,
       const std::string& documentation = "Undocumented");
 
-    /// \short Specify possible command line flag that specifies an unsigned,
+    ///  Specify possible command line flag that specifies an unsigned,
     /// accessed via pointer
     extern void specify_command_line_flag(
       const std::string& command_line_flag,
       unsigned* arg_pt,
       const std::string& documentation = "Undocumented");
 
-    /// \short Specify possible command line flag that specifies a string,
+    ///  Specify possible command line flag that specifies a string,
     /// accessed via pointer
     extern void specify_command_line_flag(
       const std::string& command_line_flag,
       std::string* arg_pt,
       const std::string& documentation = "Undocumented");
 
-    /// \short Check if specified flag has been set (the associated
+    ///  Check if specified flag has been set (the associated
     /// value will have been assigned directly)
     extern bool command_line_flag_has_been_set(const std::string& flag);
 
@@ -739,12 +739,12 @@ namespace oomph
     /// Helper function to check if command line index is legal
     extern void check_arg_index(const int& argc, const int& arg_index);
 
-    /// \short Parse command line, check for recognised flags and assign
+    ///  Parse command line, check for recognised flags and assign
     /// associated values
     extern void parse_and_assign(
       int argc, char* argv[], const bool& throw_on_unrecognised_args = false);
 
-    /// \short Parse previously specified command line, check for
+    ///  Parse previously specified command line, check for
     /// recognised flags and assign associated values
     extern void parse_and_assign(
       const bool& throw_on_unrecognised_args = false);
@@ -763,7 +763,7 @@ namespace oomph
   class MPIOutputModifier : public OutputModifier
   {
   private:
-    /// \short Rank of single processor that produces output (only used
+    ///  Rank of single processor that produces output (only used
     /// if  Output_from_single_processor=true
     unsigned Output_rank;
 
@@ -821,7 +821,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short MPI_Helpers class contains static helper methods to support MPI
+  ///  MPI_Helpers class contains static helper methods to support MPI
   /// within oomph-lib. The methods init(...) and finalize() initialize and
   /// finalize MPI in oomph-lib and manage the oomph-libs global communicator
   /// communicator_pt().
@@ -831,7 +831,7 @@ namespace oomph
   class MPI_Helpers
   {
   public:
-    /// \short initialise mpi (oomph-libs equivalent of MPI_Init(...))
+    ///  initialise mpi (oomph-libs equivalent of MPI_Init(...))
     /// Initialises MPI and creates the global oomph-lib communicator.
     /// If optional boolean flag is set to false, we use
     /// MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true.
@@ -854,11 +854,11 @@ namespace oomph
     }
 
   private:
-    /// \short private default constructor definition (to prevent instances of
+    ///  private default constructor definition (to prevent instances of
     /// the class being instantiated)
     MPI_Helpers();
 
-    /// \short private copy constructor definition (to prevent instances of
+    ///  private copy constructor definition (to prevent instances of
     /// the class being instantiated)
     MPI_Helpers(const MPI_Helpers&);
 
@@ -972,26 +972,26 @@ namespace oomph
   //===============================================================
   namespace MemoryUsage
   {
-    /// \short Boolean to suppress synchronisation of doc memory
+    ///  Boolean to suppress synchronisation of doc memory
     /// usage on processors (via mpi barriers). True (i.e. sync is
     /// is suppressed by default because not all processors may
     /// execute the reach the relevant doc memory usage statements
     /// causing the code to hang).
     extern bool Suppress_mpi_synchronisation;
 
-    /// \short String containing system command that obtains memory usage
+    ///  String containing system command that obtains memory usage
     /// of all processes.
     /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
     /// no guarantees for any other platform; Linux or not. MH]
     extern std::string My_memory_usage_system_string;
 
-    /// \short Bool allowing quick bypassing of ALL operations related
+    ///  Bool allowing quick bypassing of ALL operations related
     /// to memory usage monitoring -- this allows the code to remain
     /// "instrumented" without incurring the heavy penalties associated
     /// with the system calls and i/o. Default setting: false.
     extern bool Bypass_all_memory_usage_monitoring;
 
-    /// \short String containing name of file in which we document
+    ///  String containing name of file in which we document
     /// my memory usage -- you may want to change this to allow different
     /// processors to write to separate files (especially in mpi
     /// context). Note that file is appended to
@@ -999,13 +999,13 @@ namespace oomph
     /// helper function empty_memory_usage_file()
     extern std::string My_memory_usage_filename;
 
-    /// \short Function to empty file that records my memory usage in
+    ///  Function to empty file that records my memory usage in
     /// file whose name is specified by My_memory_usage_filename.
     void empty_my_memory_usage_file();
 
 #ifdef OOMPH_HAS_UNISTDH
 
-    /// \short Doc my memory usage, prepended by string (which allows
+    ///  Doc my memory usage, prepended by string (which allows
     /// identification from where the function is called, say) that records
     /// memory usage in file whose name is specified by
     /// My_memory_usage_filename. Data is appended to that file; wipe it with
@@ -1016,12 +1016,12 @@ namespace oomph
 
 #endif
 
-    /// \short String containing system command that obtains total memory usage.
+    ///  String containing system command that obtains total memory usage.
     /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
     /// no guarantees for any other platform; Linux or not. MH]
     extern std::string Total_memory_usage_system_string;
 
-    /// \short String containing name of file in which we document total
+    ///  String containing name of file in which we document total
     /// memory usage -- you may want to change this to allow different
     /// processors to write to separate files (especially in mpi
     /// context). Note that file is appended to
@@ -1029,32 +1029,32 @@ namespace oomph
     /// helper function empty_memory_usage_file()
     extern std::string Total_memory_usage_filename;
 
-    /// \short Function to empty file that records total memory usage in
+    ///  Function to empty file that records total memory usage in
     /// file whose name is specified by Total_memory_usage_filename.
     void empty_total_memory_usage_file();
 
-    /// \short Doc total memory usage, prepended by string (which allows
+    ///  Doc total memory usage, prepended by string (which allows
     /// identification from where the function is called, say) that records
     /// mem usage in file whose name is specified by
     /// Total_memory_usage_filename. Data is appended to that file; wipe it with
     /// empty_memory_usage_file().
     void doc_total_memory_usage(const std::string& prefix_string = "");
 
-    /// \short Function to empty file that records total and local memory usage
+    ///  Function to empty file that records total and local memory usage
     /// in appropriate files
     void empty_memory_usage_files();
 
-    /// \short Doc total and local memory usage, prepended by string (which
+    ///  Doc total and local memory usage, prepended by string (which
     /// allows identification from where the function is called, say)
     void doc_memory_usage(const std::string& prefix_string = "");
 
-    /// \short String containing system command that runs "top" (or equivalent)
+    ///  String containing system command that runs "top" (or equivalent)
     /// "indefinitely" and writes to file specified in Top_output_filename.
     /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
     /// no guarantees for any other platform; Linux or not. MH]
     extern std::string Top_system_string;
 
-    /// \short  String containing name of file in which we document "continuous"
+    ///   String containing name of file in which we document "continuous"
     /// output from "top" (or equivalent)-- you may want to change this to
     /// allow different processors to write to separate files (especially in mpi
     /// context). Note that file is appended to
@@ -1062,24 +1062,24 @@ namespace oomph
     /// helper function empty_top_file()
     extern std::string Top_output_filename;
 
-    /// \short Function to empty file that records continuous output from top in
+    ///  Function to empty file that records continuous output from top in
     /// file whose name is specified by Top_output_filename
     void empty_top_file();
 
-    /// \short Start running top continuously and output (append) into
+    ///  Start running top continuously and output (append) into
     /// file specified by Top_output_filename. Wipe that file  with
     /// empty_top_file() first if you wish. Note that this is again
     /// quite Linux specific and unlikely to work on other operating systems.
     /// Insert optional comment into output file before starting.
     void run_continous_top(const std::string& comment = "");
 
-    /// \short Stop running top continuously. Note that this is
+    ///  Stop running top continuously. Note that this is
     /// again quite Linux specific and unlikely to work on other operating
     /// systems.
     /// Insert optional comment into output file before stopping.
     void stop_continous_top(const std::string& comment = "");
 
-    /// \short Insert comment into running continuous top output
+    ///  Insert comment into running continuous top output
     void insert_comment_to_continous_top(const std::string& comment);
 
   } // end of namespace MemoryUsage

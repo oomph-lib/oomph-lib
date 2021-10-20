@@ -38,7 +38,7 @@ namespace oomph
 
 
 //===========start_of_general_circle=========================================
-/// \short GeneralCircle "upgraded" to a GeneralisedElement: Circular 
+///  GeneralCircle "upgraded" to a GeneralisedElement: Circular 
 /// ring whose position is given by
 /// \f[ x = X_c + R \cos(\zeta)  \f]
 /// \f[ y = Y_c + R \sin(\zeta)  \f]
@@ -58,7 +58,7 @@ class ElasticallySupportedRingElement : public GeneralisedElement,
 
 public:
    
- /// \short Constructor: Build  ring from doubles that describe 
+ ///  Constructor: Build  ring from doubles that describe 
  /// the geometry: x and y positions of centre and the radius.
  /// Initialise stiffness to 1.0. By default, no load is set.
  ElasticallySupportedRingElement(const double& x_c, const double& y_c, 
@@ -93,7 +93,7 @@ public:
   }
 
 
- /// \short Set pointer to Data object that specifies the "load"
+ ///  Set pointer to Data object that specifies the "load"
  /// on the ElasticallySupportedRingElement
  void set_load_pt(Data* load_pt)
   {
@@ -192,7 +192,7 @@ public:
  protected:
 
 
- /// \short Compute element residual Vector (only if flag=0) and also
+ ///  Compute element residual Vector (only if flag=0) and also
  /// the element Jacobian matrix (if flag=1)
  void fill_in_generic_residual_contribution(Vector<double> &residuals,
                                             DenseMatrix<double> &jacobian,
@@ -257,11 +257,11 @@ private:
  /// Stiffness of the ring's "elastic" support
  double K_stiff;
 
- /// \short Index of the location of the load Data in the element's 
+ ///  Index of the location of the load Data in the element's 
  /// array of external data
  unsigned External_load_index;
 
- /// \short Index of the location of the geometric Data in the element's 
+ ///  Index of the location of the geometric Data in the element's 
  /// array of internal data
  unsigned Internal_geometric_data_index;
 

@@ -40,7 +40,7 @@
 namespace oomph
 {
   //=========================================================================
-  /// \short Class implementing the generic maths of the axisym poroelasticity
+  ///  Class implementing the generic maths of the axisym poroelasticity
   /// equations: axisym linear elasticity coupled with axisym Darcy
   /// equations (using Raviart-Thomas elements with both edge and internal
   /// degrees of freedom) including inertia in both.
@@ -77,7 +77,7 @@ namespace oomph
     {
     }
 
-    /// \short Access function to non-dim Young's modulus (ratio of actual
+    ///  Access function to non-dim Young's modulus (ratio of actual
     /// Young's modulus to reference stress used to non-dim the equations.
     /// (const version)
     const double& youngs_modulus() const
@@ -85,7 +85,7 @@ namespace oomph
       return *Youngs_modulus_pt;
     }
 
-    /// \short Pointer to non-dim Young's modulus (ratio of actual
+    ///  Pointer to non-dim Young's modulus (ratio of actual
     /// Young's modulus to reference stress used to non-dim the equations.
     double*& youngs_modulus_pt()
     {
@@ -151,7 +151,7 @@ namespace oomph
     }
 
 
-    /// \short Access function for the ratio of the material's actual
+    ///  Access function for the ratio of the material's actual
     /// permeability to the permeability used in the non-dimensionalisation of
     /// the equations
     const double& permeability_ratio() const
@@ -227,7 +227,7 @@ namespace oomph
       return Mass_source_fct_pt;
     }
 
-    /// \short Indirect access to the solid body force function - returns 0 if
+    ///  Indirect access to the solid body force function - returns 0 if
     /// no forcing function has been set
     void solid_body_force(const double& time,
                           const Vector<double>& x,
@@ -249,7 +249,7 @@ namespace oomph
       }
     }
 
-    /// \short Indirect access to the fluid body force function - returns 0 if
+    ///  Indirect access to the fluid body force function - returns 0 if
     /// no forcing function has been set
     void fluid_body_force(const double& time,
                           const Vector<double>& x,
@@ -271,7 +271,7 @@ namespace oomph
       }
     }
 
-    /// \short Indirect access to the mass source function - returns 0 if no
+    ///  Indirect access to the mass source function - returns 0 if no
     /// mass source function has been set
     void mass_source(const double& time,
                      const Vector<double>& x,
@@ -300,7 +300,7 @@ namespace oomph
     /// Return the equation number of the j-th internal degree of freedom
     virtual int q_internal_local_eqn(const unsigned& j) const = 0;
 
-    /// \short Return vector of pointers to the Data objects that store the
+    ///  Return vector of pointers to the Data objects that store the
     /// edge flux values
     virtual Vector<Data*> q_edge_data_pt() const = 0;
 
@@ -310,7 +310,7 @@ namespace oomph
     /// Return the nodal index at which the jth edge unknown is stored
     virtual unsigned q_edge_index(const unsigned& j) const = 0;
 
-    /// \short Return the index of the internal data where the q internal
+    ///  Return the index of the internal data where the q internal
     /// degrees of freedom are stored
     virtual unsigned q_internal_index() const = 0;
 
@@ -320,7 +320,7 @@ namespace oomph
     /// Return the values of the j-th edge (flux) degree of freedom
     virtual double q_edge(const unsigned& j) const = 0;
 
-    /// \short Return the values of the j-th edge (flux) degree of freedom at
+    ///  Return the values of the j-th edge (flux) degree of freedom at
     /// time history level t
     virtual double q_edge(const unsigned& t, const unsigned& j) const = 0;
 
@@ -331,7 +331,7 @@ namespace oomph
     /// Return the face index associated with specified edge
     virtual unsigned face_index_of_edge(const unsigned& j) const = 0;
 
-    /// \short Compute the face element coordinates of the nth flux
+    ///  Compute the face element coordinates of the nth flux
     /// interpolation point along an edge
     virtual void face_local_coordinate_of_flux_interpolation_point(
       const unsigned& edge, const unsigned& n, Vector<double>& s) const = 0;
@@ -339,7 +339,7 @@ namespace oomph
     /// Return the values of the j-th internal degree of freedom
     virtual double q_internal(const unsigned& j) const = 0;
 
-    /// \short Return the values of the j-th internal degree of freedom at
+    ///  Return the values of the j-th internal degree of freedom at
     /// time history level t
     virtual double q_internal(const unsigned& t, const unsigned& j) const = 0;
 
@@ -349,13 +349,13 @@ namespace oomph
     /// Set the values of the j-th internal degree of freedom
     virtual void set_q_internal(const unsigned& j, const double& value) = 0;
 
-    /// \short Set the values of the j-th edge (flux) degree of freedom at
+    ///  Set the values of the j-th edge (flux) degree of freedom at
     /// time history level t
     virtual void set_q_edge(const unsigned& t,
                             const unsigned& j,
                             const double& value) = 0;
 
-    /// \short Set the values of the j-th internal degree of freedom at
+    ///  Set the values of the j-th internal degree of freedom at
     /// time history level t
     virtual void set_q_internal(const unsigned& t,
                                 const unsigned& j,
@@ -393,16 +393,16 @@ namespace oomph
       (void)this->transform_basis(s, q_basis_local, psi, q_basis);
     }
 
-    /// \short Returns the number of flux_interpolation points along each edge
+    ///  Returns the number of flux_interpolation points along each edge
     /// of the element
     virtual unsigned nedge_flux_interpolation_point() const = 0;
 
-    /// \short Returns the local coordinate of the jth flux_interpolation point
+    ///  Returns the local coordinate of the jth flux_interpolation point
     /// along the specified edge
     virtual Vector<double> edge_flux_interpolation_point(
       const unsigned& edge, const unsigned& j) const = 0;
 
-    /// \short Compute the global coordinates of the jth flux_interpolation
+    ///  Compute the global coordinates of the jth flux_interpolation
     /// point along an edge
     virtual void edge_flux_interpolation_point_global(
       const unsigned& edge, const unsigned& j, Vector<double>& x) const = 0;
@@ -438,7 +438,7 @@ namespace oomph
     /// Scale the edge basis to allow arbitrary edge mappings
     virtual void scale_basis(Shape& basis) const = 0;
 
-    /// \short Performs a div-conserving transformation of the vector basis
+    ///  Performs a div-conserving transformation of the vector basis
     /// functions from the reference element to the actual element
     double transform_basis(const Vector<double>& s,
                            const Shape& q_basis_local,
@@ -446,7 +446,7 @@ namespace oomph
                            DShape& dpsi,
                            Shape& q_basis) const;
 
-    /// \short Performs a div-conserving transformation of the vector basis
+    ///  Performs a div-conserving transformation of the vector basis
     /// functions from the reference element to the actual element
     double transform_basis(const Vector<double>& s,
                            const Shape& q_basis_local,
@@ -628,7 +628,7 @@ namespace oomph
     }
 
 
-    /// \short Calculate the FE representation of the i-th component of u
+    ///  Calculate the FE representation of the i-th component of u
     /// at time level t (t=0: current)
     double interpolated_u(const unsigned& t,
                           const Vector<double>& s,
@@ -706,7 +706,7 @@ namespace oomph
       }
     }
 
-    /// \short Calculate the FE representation of q
+    ///  Calculate the FE representation of q
     /// at time level t (t=0: current)
     void interpolated_q(const unsigned& t,
                         const Vector<double>& s,
@@ -1047,14 +1047,14 @@ namespace oomph
     }
 
 
-    /// \short Number of scalars/fields output by this element. Reimplements
+    ///  Number of scalars/fields output by this element. Reimplements
     /// broken virtual function in base class.
     unsigned nscalar_paraview() const
     {
       return 8;
     }
 
-    /// \short Write values of the i-th scalar field at the plot points. Needs
+    ///  Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
     void scalar_value_paraview(std::ofstream& file_out,
                                const unsigned& i,
@@ -1115,7 +1115,7 @@ namespace oomph
       }
     }
 
-    /// \short Name of the i-th scalar field. Default implementation
+    ///  Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names in specific elements.
     std::string scalar_name_paraview(const unsigned& i) const
@@ -1169,7 +1169,7 @@ namespace oomph
       }
     }
 
-    /// \short Output solution in data vector at local cordinates s:
+    ///  Output solution in data vector at local cordinates s:
     /// r,z,u_r,u_z,q_r,q_z,div_q,p,durdt,duzdt
     void point_output_data(const Vector<double>& s, Vector<double>& data)
     {
@@ -1224,37 +1224,37 @@ namespace oomph
       output(outfile, nplot);
     }
 
-    /// \short Output FE representation of soln: x,y,u1,u2,div_q,p at
+    ///  Output FE representation of soln: x,y,u1,u2,div_q,p at
     /// Nplot^2 plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
-    /// \short Output incl. projection of fluxes into direction of
+    ///  Output incl. projection of fluxes into direction of
     /// the specified unit vector
     void output_with_projected_flux(std::ostream& outfile,
                                     const unsigned& nplot,
                                     const Vector<double> unit_normal);
 
-    /// \short Output FE representation of exact soln: x,y,u1,u2,div_q,p at
+    ///  Output FE representation of exact soln: x,y,u1,u2,div_q,p at
     /// Nplot^2 plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Output FE representation of exact soln: x,y,u1,u2,div_q,p at
+    ///  Output FE representation of exact soln: x,y,u1,u2,div_q,p at
     /// Nplot^2 plot points. Unsteady version
     void output_fct(std::ostream& outfile,
                     const unsigned& nplot,
                     const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
-    /// \short Compute the error between the FE solution and the exact solution
+    ///  Compute the error between the FE solution and the exact solution
     /// using the H(div) norm for q and L^2 norm for p
     void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                        Vector<double>& error,
                        Vector<double>& norm);
 
-    /// \short Compute the error between the FE solution and the exact solution
+    ///  Compute the error between the FE solution and the exact solution
     /// using the H(div) norm for q and L^2 norm for p. Unsteady version
     void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
@@ -1278,7 +1278,7 @@ namespace oomph
     }
 
   protected:
-    /// \short Compute the geometric basis, and the q, p and divergence basis
+    ///  Compute the geometric basis, and the q, p and divergence basis
     /// functions and test functions at local coordinate s
     virtual double shape_basis_test_local(const Vector<double>& s,
                                           Shape& psi,
@@ -1294,7 +1294,7 @@ namespace oomph
                                           Shape& div_q_basis_ds,
                                           Shape& div_q_test_ds) const = 0;
 
-    /// \short Compute the geometric basis, and the q, p and divergence basis
+    ///  Compute the geometric basis, and the q, p and divergence basis
     /// functions and test functions at integration point ipt
     virtual double shape_basis_test_local_at_knot(
       const unsigned& ipt,
@@ -1340,7 +1340,7 @@ namespace oomph
     /// permeability
     double* Permeability_pt;
 
-    /// \short Ratio of the material's actual permeability to the permeability
+    ///  Ratio of the material's actual permeability to the permeability
     /// used in the non-dimensionalisation of the equations
     double* Permeability_ratio_pt;
 
@@ -1367,11 +1367,11 @@ namespace oomph
     /// Static default value for the density ratio
     static double Default_density_ratio_value;
 
-    /// \short Static default value for the permeability (1.0 for natural
+    ///  Static default value for the permeability (1.0 for natural
     /// scaling; i.e. timescale is given by L^2/(k^* E)
     static double Default_permeability_value;
 
-    /// \short Static default value for the ratio of the material's actual
+    ///  Static default value for the ratio of the material's actual
     /// permeability to the permeability used to non-dimensionalise the
     /// equations
     static double Default_permeability_ratio_value;
@@ -1398,11 +1398,11 @@ namespace oomph
       public virtual ProjectableElementBase
   {
   public:
-    /// \short Constructor [this was only required explicitly
+    ///  Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectableAxisymmetricPoroelasticityElement() {}
 
-    /// \short Specify the values associated with field fld.
+    ///  Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
@@ -1477,14 +1477,14 @@ namespace oomph
       return data_values;
     }
 
-    /// \short Number of fields to be projected: 4 (two displacement components,
+    ///  Number of fields to be projected: 4 (two displacement components,
     /// pressure, Darcy flux)
     unsigned nfields_for_projection()
     {
       return 4;
     }
 
-    /// \short Number of history values to be stored for fld-th field.
+    ///  Number of history values to be stored for fld-th field.
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -1514,14 +1514,14 @@ namespace oomph
       return return_value;
     }
 
-    ///\short Number of positional history values
+    /// Number of positional history values
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    /// \short Return Jacobian of mapping and shape functions of field fld
+    ///  Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -1605,7 +1605,7 @@ namespace oomph
     }
 
 
-    /// \short Return interpolated field fld at local coordinate s, at time
+    ///  Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,
@@ -1739,14 +1739,14 @@ namespace oomph
     }
 
 
-    /// \short Output FE representation of soln as in underlying element
+    ///  Output FE representation of soln as in underlying element
     void output(std::ostream& outfile, const unsigned& nplot)
     {
       AXISYMMETRIC_POROELASTICITY_ELEMENT::output(outfile, nplot);
     }
 
 
-    /// \short Residual for the projection step. Flag indicates if we
+    ///  Residual for the projection step. Flag indicates if we
     /// want the Jacobian (1) or not (0). Virtual so it can be
     /// overloaded if necessary
     void residual_for_projection(Vector<double>& residuals,

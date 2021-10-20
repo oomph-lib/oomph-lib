@@ -690,7 +690,7 @@ namespace oomph
       return Constitutive_law_pt;
     }
 
-    /// \short Return the stress tensor, as calculated from the constitutive law
+    ///  Return the stress tensor, as calculated from the constitutive law
     /// in the Near-incompresible formulation
     void get_stress(const DenseMatrix<double>& g,
                     const DenseMatrix<double>& G,
@@ -717,7 +717,7 @@ namespace oomph
         g, G, sigma, Gup, pressure_stress, kappa);
     }
 
-    /// \short Return the stress tensor, as calculated from the constitutive law
+    ///  Return the stress tensor, as calculated from the constitutive law
     /// in the "true" incompresible formulation
     void get_stress(const DenseMatrix<double>& g,
                     const DenseMatrix<double>& G,
@@ -787,7 +787,7 @@ namespace oomph
       SolidFiniteElement::fill_in_jacobian_from_solid_position_by_fd(jacobian);
     }
 
-    /// \short Return the residuals for the equations of solid mechanics
+    ///  Return the residuals for the equations of solid mechanics
     /// formulated in the incompressible case!
     inline void fill_in_generic_residual_contribution_axisym_pvd_with_pressure(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
@@ -1349,7 +1349,7 @@ namespace oomph
     : public SolidQElement<2, 3>,
       public AxisymmetricPVDEquationsWithPressure
   {
-    /// \short Internal index that indicates at which internal data value the
+    ///  Internal index that indicates at which internal data value the
     /// solid pressure is stored
     unsigned P_solid_internal_index;
 
@@ -1363,7 +1363,7 @@ namespace oomph
     inline void solid_pshape(const Vector<double>& s, Shape& psi) const;
 
   public:
-    /// \short There is internal solid data so we can't use the automatic
+    ///  There is internal solid data so we can't use the automatic
     /// assignment of consistent initial conditions for time-dependent problems.
     bool has_internal_solid_data()
     {

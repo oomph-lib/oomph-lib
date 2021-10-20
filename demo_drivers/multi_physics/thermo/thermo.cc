@@ -61,7 +61,7 @@ private:
  static double Default_Physical_Constant_Value;
 
 public:
- /// \short Constructor: call the underlying constructors and 
+ ///  Constructor: call the underlying constructors and 
  /// initialise the pointer to Alpha to point
  /// to the default value of 1.0.
  QThermalPVDElement() : QPVDElement<DIM,3>(),
@@ -70,7 +70,7 @@ public:
    Alpha_pt = &Default_Physical_Constant_Value;
   }
 
- ///\short The required number of values stored at the nodes is the sum of the
+ /// The required number of values stored at the nodes is the sum of the
  ///required values of the two single-physics elements. Note that this step is
  ///generic for any multi-physics element of this type.
  unsigned required_nvalue(const unsigned &n) const
@@ -86,7 +86,7 @@ public:
  ///  Overload the standard output function with the broken default
  void output(ostream &outfile) {FiniteElement::output(outfile);}
 
- /// \short Output function:  
+ ///  Output function:  
  ///  Output x, y, u, v, p, theta at Nplot^DIM plot points
  // Start of output function
  void output(ostream &outfile, const unsigned &nplot)
@@ -121,22 +121,22 @@ public:
    this->write_tecplot_zone_footer(outfile,nplot);
   } //End of output function
 
- /// \short C-style output function: Broken default
+ ///  C-style output function: Broken default
  void output(FILE* file_pt)
   {FiniteElement::output(file_pt);}
 
- ///  \short C-style output function: Broken default
+ ///   C-style output function: Broken default
  void output(FILE* file_pt, const unsigned &n_plot)
   {FiniteElement::output(file_pt,n_plot);}
 
- /// \short Output function for an exact solution: Broken default
+ ///  Output function for an exact solution: Broken default
  void output_fct(ostream &outfile, const unsigned &Nplot,
                  FiniteElement::SteadyExactSolutionFctPt 
                  exact_soln_pt)
   {FiniteElement::output_fct(outfile,Nplot,exact_soln_pt);}
 
 
- /// \short Output function for a time-dependent exact solution:
+ ///  Output function for a time-dependent exact solution:
  /// Broken default.
  void output_fct(ostream &outfile, const unsigned &Nplot,
                  const double& time,
@@ -147,14 +147,14 @@ public:
     output_fct(outfile,Nplot,time,exact_soln_pt);
   }
   
- /// \short Compute norm of solution: use the version in the unsteady heat
+ ///  Compute norm of solution: use the version in the unsteady heat
  /// class 
  void compute_norm(double& el_norm)
  {
   QUnsteadyHeatElement<DIM,3>::compute_norm(el_norm);
  }
 
- /// \short Validate against exact solution at given time
+ ///  Validate against exact solution at given time
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -166,7 +166,7 @@ public:
   {FiniteElement::compute_error(outfile,exact_soln_pt,
                                 time,error,norm);}
  
- /// \short Validate against exact solution.
+ ///  Validate against exact solution.
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
@@ -176,7 +176,7 @@ public:
                     double& error, double& norm)
   {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}
 
- /// \short Overload the growth function in the advection-diffusion equations.
+ ///  Overload the growth function in the advection-diffusion equations.
  /// to be temperature-dependent.
  void get_isotropic_growth(const unsigned& ipt, const Vector<double> &s, 
                            const Vector<double>& xi, double &gamma) const
@@ -186,7 +186,7 @@ public:
   gamma = 1.0 + (*Alpha_pt)*this->interpolated_u_ust_heat(s);
  }
  
- /// \short Calculate the contribution to the residual vector.
+ ///  Calculate the contribution to the residual vector.
  /// We assume that the vector has been initialised to zero
  /// before this function is called.
  void fill_in_contribution_to_residuals(Vector<double> &residuals)
@@ -199,7 +199,7 @@ public:
     fill_in_contribution_to_residuals(residuals);
   }
 
- ///\short Compute the element's residual Vector and the jacobian matrix
+ /// Compute the element's residual Vector and the jacobian matrix
  /// We assume that the residuals vector and jacobian matrix have been
  /// initialised to zero before calling this function
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
@@ -258,7 +258,7 @@ public:
  /// Destructor. Empty
  ~ThermalProblem() {}
 
- /// \short Update the problem specs before solve (empty)
+ ///  Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
@@ -267,10 +267,10 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt(){}
  
- /// \short Doc the solution.
+ ///  Doc the solution.
  void doc_solution();
 
- /// \short Overloaded version of the problem's access function to 
+ ///  Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  ElasticRectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -287,7 +287,7 @@ private:
 }; // end of problem class
 
 //========================================================================
-/// \short Constructor for Convection problem
+///  Constructor for Convection problem
 //========================================================================
 template<class ELEMENT>
 ThermalProblem<ELEMENT>::ThermalProblem()

@@ -107,7 +107,7 @@ namespace oomph
       return 1;
     }
 
-    /// \short Return coordinate s[j] (j=0) of integration point i --
+    ///  Return coordinate s[j] (j=0) of integration point i --
     /// deliberately broken!
     double knot(const unsigned& i, const unsigned& j) const
     {
@@ -566,7 +566,7 @@ namespace oomph
   };
 
   //=========================================================
-  ///\short Class for multidimensional Gaussian integration rules,
+  /// Class for multidimensional Gaussian integration rules,
   /// over intervals other than -1 to 1, all intervals are
   /// rescaled in this case
   //=========================================================
