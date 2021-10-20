@@ -26,7 +26,6 @@
 
 // Oomph-lib includes
 #include "generic.h"
-#include "complex_matrices_test_utility_functions.h"
 
 using namespace std;
 using namespace oomph;

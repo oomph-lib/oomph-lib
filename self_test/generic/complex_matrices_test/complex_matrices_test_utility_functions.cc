@@ -23,15 +23,32 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef OOMPH_COMPLEX_MATRICES_TEST_UTILITY_FUNCTIONS_HEADER
-#define OOMPH_COMPLEX_MATRICES_TEST_UTILITY_FUNCTIONS_HEADER
+#include "complex_matrices_test_utility_functions.h"
 
-#include "generic.h"
+using namespace std;
+using namespace oomph;
 
 /// Print complex vector to console out
-void print_complex_vector(const oomph::Vector<std::complex<double>>& x);
+void print_complex_vector(const Vector<complex<double>>& x)
+{
+  unsigned vector_length = x.size();
+  for (unsigned i = 0; i < vector_length; i++)
+  {
+    cout << x[i] << endl;
+  }
+}
 
 /// Print a complex matrix in its dense form to console out
-void print_complex_matrix(const oomph::ComplexMatrixBase& matrix);
-
-#endif
+void print_complex_matrix(const ComplexMatrixBase& matrix)
+{
+  unsigned n_row = matrix.nrow();
+  unsigned n_col = matrix.ncol();
+  for (unsigned i = 0; i < n_row; i++)
+  {
+    for (unsigned j = 0; j < n_col; j++)
+    {
+      cout << matrix(i, j) << ", ";
+    }
+    cout << endl;
+  }
+}

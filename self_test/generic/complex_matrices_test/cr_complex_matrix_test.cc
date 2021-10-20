@@ -219,10 +219,8 @@ int main()
   print_complex_matrix(matrix_result);
 
   // Print cleanup messages for easier debugging
-  cout << "Begin cleanup" << endl;
   delete dist_pt;
   dist_pt = nullptr;
-  cout << "Finished cleanup" << endl;
 
   return (EXIT_SUCCESS);
 }

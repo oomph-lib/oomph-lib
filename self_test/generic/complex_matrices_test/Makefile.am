@@ -10,9 +10,9 @@ check_PROGRAMS= dense_complex_matrix_test cr_complex_matrix_test cc_complex_matr
 #----------------------------------------------------------------------
 
 # Sources for executable
-dense_complex_matrix_test_SOURCES = dense_complex_matrix_test.cc
-cr_complex_matrix_test_SOURCES = cr_complex_matrix_test.cc
-cc_complex_matrix_test_SOURCES = cc_complex_matrix_test.cc
+dense_complex_matrix_test_SOURCES = dense_complex_matrix_test.cc complex_matrices_test_utility_functions.cc
+cr_complex_matrix_test_SOURCES = cr_complex_matrix_test.cc complex_matrices_test_utility_functions.cc
+cc_complex_matrix_test_SOURCES = cc_complex_matrix_test.cc complex_matrices_test_utility_functions.cc
 eigensolver_test_SOURCES = eigensolver_test.cc
 
 # Required libraries:
