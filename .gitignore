@@ -120,8 +120,10 @@ config/configure_options/current
 make_check_output
 aclocal.m4
 autogen_fresh.dat
-autom4te.cache/
 build/
+autom4te.cache/*
+autom4te.cache/
+configure.scan
 config.guess
 config.h
 config.h.in
@@ -153,6 +155,32 @@ external_distributions/hypre/hypre-*
 external_distributions/hypre/hypre_default_installation/
 external_distributions/trilinos/trilinos-*
 external_distributions/trilinos/trilinos_default_installation/
+
+
+# boost:
+external_distributions/boost/boost_1_65_1/
+external_distributions/boost/boost_default_installation/
+
+# cgal
+external_distributions/cgal/CGAL-4.11/
+external_distributions/cgal/cgal_default_installation/
+
+#gmp
+external_distributions/gmp/gmp-6.1.2/
+external_distributions/gmp/gmp_default_installation/
+
+#mpfr
+external_distributions/mpfr/mpfr-3.1.6/
+external_distributions/mpfr/mpfr_default_installation/
+
+# mumps and stuff
+external_distributions/mumps_and_scalapack/MUMPS_4.10.0.tar.gz
+external_distributions/mumps_and_scalapack/build_script.bash
+external_distributions/mumps_and_scalapack/mumps/
+external_distributions/mumps_and_scalapack/mumps_and_scalapack_default_installation/
+external_distributions/mumps_and_scalapack/scalapack/
+external_distributions/mumps_and_scalapack/scalapack_installer.tgz
+
 
 # arpack and hsl files which are automatically generated.
 external_src/oomph_arpack/all_arpack_sources.f

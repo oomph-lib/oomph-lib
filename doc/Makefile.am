@@ -58,6 +58,12 @@ include $(top_srcdir)/config/makefile_templates/doc
 
 docfile = doc
 
+all:
+        # Create index.html in demo_drivers directory (needed for github
+        # github-hosted webpages
+	../bin/make_index_html_in_demo_driver_dirs.bash
+
+
 EXTRA_DIST += oomph-lib_header.html.template oomph-lib_footer.html.template \
 css js\
 extra_latex_style_files navbar_toggle.js raw_doxygen
