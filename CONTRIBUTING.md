@@ -299,7 +299,7 @@ This involves the following steps:
 
    ![](doc/README/contribute_or_fetch_upstream_button.png)
 
-   and continue from there. Leave another comment to explain the changes you've made in response to the reviewer's comments/requests, and then fingers crossed!
+   and continue from there. Leave another comment to explain the changes you've made in response to the reviewer's comments/requests (again, see the instructions for the [Code review](#code-review) for details), and then fingers crossed!
 
 7. Once the pull request has been accepted and the changes made have been merged
    into the official repository, update the `development` branch on your remote forked branch. This is done most easily via the webpage: go to the `development` branch for the remote forked repository, i.e. go to https://github.com/JoeCoolDummy/oomph-lib and click on the button with a branch symbol and the text "`main`":
