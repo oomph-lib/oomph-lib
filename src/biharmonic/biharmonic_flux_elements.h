@@ -236,7 +236,7 @@ namespace oomph
     /// functions
     unsigned Nface_nodal_dof;
 
-    /// 
+    ///
     unsigned Boundary;
   };
 

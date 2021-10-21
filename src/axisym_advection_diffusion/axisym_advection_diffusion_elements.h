@@ -70,9 +70,8 @@ namespace oomph
 
     /// Constructor: Initialise the Source_fct_pt and Wind_fct_pt
     /// to null and set (pointer to) Peclet number to default
-    AxisymAdvectionDiffusionEquations() : Source_fct_pt(0),
-                                          Wind_fct_pt(0),
-                                          ALE_is_disabled(false)
+    AxisymAdvectionDiffusionEquations()
+      : Source_fct_pt(0), Wind_fct_pt(0), ALE_is_disabled(false)
     {
       // Set pointer to Peclet number to the default value zero
       Pe_pt = &Default_peclet_number;

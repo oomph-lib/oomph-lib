@@ -146,7 +146,7 @@ namespace oomph
     }
 
 
-    /// 
+    ///
     void build_global_mesh_and_assign_eqn_numbers()
     {
       add_sub_mesh(Bulk_element_mesh_pt);
