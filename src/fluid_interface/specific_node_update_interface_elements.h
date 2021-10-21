@@ -287,7 +287,7 @@ namespace oomph
       this->fill_in_jacobian_from_geometric_data(jacobian);
     }
 
-    /// 
+    ///
     /// Helper function to calculate the additional contributions
     /// These are those filled in by the particular equations
     void add_additional_residual_contributions_interface(
