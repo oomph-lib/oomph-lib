@@ -46,7 +46,10 @@ jobs:
     - name: Build bin
       run: make -C bin
     - name: Build doc
-      run: make -C doc
+      run: |
+           date
+           make -C doc
+           date
     - name: Run website install script
       run: ./bin/website_install.sh
     - name: Grab redirect file
