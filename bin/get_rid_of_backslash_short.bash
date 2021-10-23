@@ -12,7 +12,7 @@ file_list=`find . -name '*.h' -o -name '*.cc'`
 for file in `echo $file_list`; do
     echo "Doing $file"
     cp $file $file.tmp
-    sed 's/\\short//g' $file.tmp > $file
+    sed 's/\\short //g' $file.tmp > $file
     rm $file.tmp
 done
 

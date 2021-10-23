@@ -515,7 +515,7 @@ namespace oomph
     /// boundary of the mesh
     void remove_boundary_nodes(const unsigned& b);
 
-    //\ short Remove a node from the boundary b
+    /// Remove a node from the boundary b
     void remove_boundary_node(const unsigned& b, Node* const& node_pt);
 
     /// Add a (pointer to) a node to the b-th boundary

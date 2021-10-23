@@ -414,7 +414,7 @@ namespace oomph
       Delete_matrix = true;
     }
 
-    ///\ short Call if the matrix can not be deleted (default)
+    /// Call if the matrix can not be deleted (default)
     void disable_delete_matrix()
     {
       Delete_matrix = false;
