@@ -90,7 +90,7 @@ public:
  /// Empty Destructor
  ~WarpedLine(){}
 
- ///  Position vector at Lagrangian coordinate zeta 
+ /// Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position vector
@@ -98,7 +98,7 @@ public:
    r[1] = 1.0+Ampl*0.5*(1.0-cos(2.0*MathematicalConstants::Pi*zeta[0]));
   }
  
- ///  Parametrised position on object: r(zeta). Evaluated at
+ /// Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Forward to steady version
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -110,7 +110,7 @@ public:
  /// Access to amplitude
  double& ampl() {return Ampl;}
 
- ///  How many items of Data does the shape of the object depend on?
+ /// How many items of Data does the shape of the object depend on?
  /// None.
  unsigned ngeom_data() const
   {
@@ -166,7 +166,7 @@ public:
  /// Update function (empty)
  void actions_after_newton_solve() {}
 
- ///  Update function (empty)
+ /// Update function (empty)
  void actions_before_newton_solve() {}
 
  /// Access function for the solid mesh
@@ -200,7 +200,7 @@ public:
 
 private:
 
- ///  Create elements that enforce prescribed boundary motion
+ /// Create elements that enforce prescribed boundary motion
  /// by Lagrange multiplilers
  void create_lagrange_multiplier_elements();
 

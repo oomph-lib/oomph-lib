@@ -363,7 +363,7 @@ public:
    Doc_info.number()++;
   }
 
- ///  Update the problem specs before solve 
+ /// Update the problem specs before solve 
  void actions_before_newton_solve() {}
 
  /// Spine heights/lengths are unknowns in the problem so their
@@ -381,7 +381,7 @@ public:
  /// Doc the solution
  void doc_solution();
 
- ///  Overload generic access function by one that returns
+ /// Overload generic access function by one that returns
  /// a pointer to the specific  mesh
  AxialSpineQuarterTubeMesh<
   ELEMENT, SpineSurfaceFluidInterfaceElement<ELEMENT> >* Bulk_mesh_pt;

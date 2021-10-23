@@ -59,14 +59,14 @@ namespace Global_Parameters
  /// Strouhal number (default assignment for FSI1 test case)
  double St=0.5;
 
- ///  Product of Reynolds and Strouhal numbers (default
+ /// Product of Reynolds and Strouhal numbers (default
  /// assignment for FSI1 test case)
  double ReSt=10.0;
 
  /// FSI parameter (default assignment for FSI1 test case)
  double Q=1.429e-6;
  
- ///  Density ratio (solid to fluid; default assignment for FSI1
+ /// Density ratio (solid to fluid; default assignment for FSI1
  /// test case)
  double Density_ratio=1.0; 
 
@@ -85,7 +85,7 @@ namespace Global_Parameters
  /// Pointer to constitutive law
  ConstitutiveLaw* Constitutive_law_pt=0;
 
- ///  Timescale ratio for solid (dependent parameter
+ /// Timescale ratio for solid (dependent parameter
  /// assigned in set_parameters())
  double Lambda_sq=0.0;
 
@@ -122,7 +122,7 @@ namespace Global_Parameters
  /// Max. flux
  double Max_flux=1.0;
 
- ///  Flux increases between Min_flux and Max_flux over 
+ /// Flux increases between Min_flux and Max_flux over 
  /// period Ramp_period
  double flux(const double& t)
  {    
@@ -371,7 +371,7 @@ class TurekProblem : public Problem
 
 public:
 
- ///  Constructor: Pass length and height of domain
+ /// Constructor: Pass length and height of domain
  TurekProblem(const double &length, const double &height);
  
 
@@ -447,7 +447,7 @@ public:
  /// Update function (empty)
  void actions_before_newton_solve(){}
 
- ///  Update the (dependent) fluid node positions following the
+ /// Update the (dependent) fluid node positions following the
  /// update of the solid variables before performing Newton convergence
  /// check
  void actions_before_newton_convergence_check();
@@ -490,7 +490,7 @@ private:
  /// Backed-up y coordinate of fluid control node
  double Fluid_control_x1;
 
- ///  Boolean indicating if the current processor contains the
+ /// Boolean indicating if the current processor contains the
  /// fluid control node
  bool I_have_the_fluid_control_node;
  

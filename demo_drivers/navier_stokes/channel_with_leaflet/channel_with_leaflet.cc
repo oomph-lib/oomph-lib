@@ -45,7 +45,7 @@ class Leaflet : public GeomObject
 
 public:
 
- ///  Constructor: Pass length (in Lagrangian coordinates),
+ /// Constructor: Pass length (in Lagrangian coordinates),
  /// the amplitude of the horizontal and vertical deflection of the tip,
  /// the x-coordinate of the origin and the period of the oscillation.
  /// Passes the number of Lagrangian and Eulerian coordinates to the
@@ -59,7 +59,7 @@ public:
  /// Destructor -- emtpy
  virtual ~Leaflet(){}
 
- ///  Position vector, r, to the point identified by  
+ /// Position vector, r, to the point identified by  
  /// its 1D Lagrangian coordinate, xi (passed as a 1D Vector) at discrete time
  /// level t (t=0: present; t>0: previous).
  void position(const unsigned& t, const Vector<double>& xi, 
@@ -98,13 +98,13 @@ private :
  /// Length in terms of Lagrangian coordinates
  double Length;
  
- /// Horizontal displacement of tip
+ ///Horizontal displacement of tip
  double D_x;
  
- /// Vertical displacement of tip
+ ///Vertical displacement of tip
  double D_y;
  
-/// Origin
+///Origin
  double X_0;
  
  ///Period of the oscillations

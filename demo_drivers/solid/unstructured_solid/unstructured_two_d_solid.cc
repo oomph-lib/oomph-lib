@@ -50,7 +50,7 @@ class ElasticTriangleMesh : public virtual TriangleMesh<ELEMENT>,
  
 public:
  
- ///  Constructor: 
+ /// Constructor: 
  ElasticTriangleMesh(const std::string& node_file_name,
                      const std::string& element_file_name,
                      const std::string& poly_file_name,
@@ -128,7 +128,7 @@ namespace Global_Physical_Variables
  /// Uniform pressure
  double P = 0.0;
 
- ///  Constant pressure load. The arguments to this function are imposed
+ /// Constant pressure load. The arguments to this function are imposed
  /// on us by the SolidTractionElements which allow the traction to 
  /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the 
  /// outer unit normal to the surface. Here we only need the outer unit
@@ -159,7 +159,7 @@ class UnstructuredSolidProblem : public Problem
 
 public:
 
- ///  Constructor: 
+ /// Constructor: 
  UnstructuredSolidProblem();
 
  /// Destructor (empty)

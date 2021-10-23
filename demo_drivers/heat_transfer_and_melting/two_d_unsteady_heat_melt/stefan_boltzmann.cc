@@ -61,7 +61,7 @@ class MyIntegral : public Integral
 
 public:
 
- ///  Constructor: Specify number of uniformly spaced sample points in 
+ /// Constructor: Specify number of uniformly spaced sample points in 
  /// unit interval
  MyIntegral(const unsigned& n_knot){N_knot=n_knot;}
 
@@ -74,7 +74,7 @@ public:
  /// Number of integration points of the scheme
  unsigned nweight() const {return N_knot;}
 
- ///  Return coordinate s[j] (j=0) of integration point i -- 
+ /// Return coordinate s[j] (j=0) of integration point i -- 
  double knot(const unsigned &i, const unsigned &j) const 
   {
    double dx=1.0/double(N_knot);
@@ -310,7 +310,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
  
- ///  Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
  

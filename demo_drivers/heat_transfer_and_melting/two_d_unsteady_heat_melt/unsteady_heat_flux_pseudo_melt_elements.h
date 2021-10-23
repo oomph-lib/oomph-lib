@@ -49,7 +49,7 @@ namespace oomph
 {
 
 //======================================================================
-///  A class for elements that allow the imposition of an 
+/// A class for elements that allow the imposition of an 
 /// applied flux on the boundaries of UnsteadyHeat elements.
 /// "Temperature" is limited by melt-like construction --
 /// just the right amount of flux is "withdrawn" (if required) 
@@ -68,12 +68,12 @@ public virtual FaceElement
  
 public:
 
- ///  Function pointer to the prescribed-flux function fct(x,f(x)) -- 
+ /// Function pointer to the prescribed-flux function fct(x,f(x)) -- 
  /// x is a Vector! 
  typedef void (*UnsteadyHeatPrescribedFluxFctPt)
   (const double& time, const Vector<double>& x, double& flux);
 
- ///  Constructor, takes the pointer to the "bulk" element and the 
+ /// Constructor, takes the pointer to the "bulk" element and the 
  /// index of the face to be created, and (optionally) the face element ID.
  UnsteadyHeatFluxPseudoMeltElement(FiniteElement* const &bulk_el_pt, 
                              const int &face_index, const unsigned &id=0);
@@ -98,7 +98,7 @@ public:
  }
  
  /// Specify the value of nodal zeta from the face geometry
- ///  The "global" intrinsic coordinate of the element when
+ /// The "global" intrinsic coordinate of the element when
  /// viewed as part of a geometric object should be given by
  /// the FaceElement representation, by default (needed to break
  /// indeterminacy if bulk element is SolidElement)
@@ -113,7 +113,7 @@ public:
   output(outfile,nplot);
  }
  
- ///  Output function
+ /// Output function
  void output(std::ostream &outfile, const unsigned &n_plot)
  {
   // Locally cache the index at which the variable is stored
@@ -216,7 +216,7 @@ public:
  /// until somebody decides what exactly they want to plot here...
  void output(FILE* file_pt) {FaceGeometry<ELEMENT>::output(file_pt);}
 
- ///  C-style output function -- forward to broken version in 
+ /// C-style output function -- forward to broken version in 
  /// FiniteElement until somebody decides what exactly they want to plot 
  /// here...
  void output(FILE* file_pt, const unsigned &n_plot)
@@ -224,7 +224,7 @@ public:
 
 
 
- ///  Plot landscape of residuals for j-th node
+ /// Plot landscape of residuals for j-th node
  void plot_residual_landscape(std::ostream &landscape_outfile,
                               std::ostream &soln_outfile,
                               Problem* problem_pt,
@@ -337,7 +337,7 @@ public:
   
   protected:
  
- ///  Function to compute the shape and test functions and to return 
+ /// Function to compute the shape and test functions and to return 
  /// the Jacobian of mapping between local and global (Eulerian)
  /// coordinates
  inline double shape_and_test(const Vector<double> &s, Shape &psi, Shape &test)
@@ -356,7 +356,7 @@ public:
   return J_eulerian(s);
  }
  
- ///  Function to calculate the prescribed flux at a given spatial
+ /// Function to calculate the prescribed flux at a given spatial
  /// position and at a given time
  void get_flux(const double& time, const Vector<double>& x, double& flux)
  {
@@ -376,7 +376,7 @@ public:
   private:
  
  
- ///  Compute the element residual vector.
+ /// Compute the element residual vector.
  /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
  void fill_in_generic_residual_contribution_ust_heat_flux(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 

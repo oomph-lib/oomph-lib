@@ -47,21 +47,21 @@ namespace Global_Physical_Variables
  /// Pointer to Data object that stores external pressure
  Data* P_ext_data_pt=0;
 
- ///  Min. pressure. Only used in steady runs during parameter
+ /// Min. pressure. Only used in steady runs during parameter
  /// incrementation. Use 1.5 for values of Re to
  /// span the range in Heil (2004) paper. 
  double Pmin=1.5;
 
- ///  Max. pressure. Only used in steady runs during parameter
+ /// Max. pressure. Only used in steady runs during parameter
  /// incrementation. Use 2.0 for Re=250; 3.7 for Re=0 to
  /// span the range in Heil (2004) paper. 
  double Pmax=2.0;
 
- ///  Jump in pressure after a restart --  used to give a steady
+ /// Jump in pressure after a restart --  used to give a steady
  /// solution a kick before starting a time-dependent run
  double P_step=0.0;
 
- ///  Current prescribed vertical position of control point 
+ /// Current prescribed vertical position of control point 
  /// (only used for displacement control)
  double Yprescr = 1.0;
 
@@ -70,7 +70,7 @@ namespace Global_Physical_Variables
  /// 0.6 corresponds to the value in Heil (2004) paper for static runs.
  double Yprescr_min=0.6; 
 
- ///  Load function: Apply a constant external pressure to the wall.
+ /// Load function: Apply a constant external pressure to the wall.
  /// Note:  This is the load without the fluid contribution!
  /// Fluid load gets added on by FSIWallElement.
  void load(const Vector<double>& xi, const Vector<double>& x,
@@ -83,7 +83,7 @@ namespace Global_Physical_Variables
  } //end of load
 
 
- ///  Fluid structure interaction parameter: Ratio of stresses used for
+ /// Fluid structure interaction parameter: Ratio of stresses used for
  /// non-dimensionalisation of fluid to solid stresses. As in Heil (2004) 
  /// paper 
  double Q=1.0e-2;
@@ -113,7 +113,7 @@ namespace BL_Squash
  /// Fraction of points in boundary layer
  double Fract_in_BL=0.5; 
 
- ///  Mapping [0,1] -> [0,1] that re-distributes
+ /// Mapping [0,1] -> [0,1] that re-distributes
  /// nodal points across the channel width
  double squash_fct(const double& s)
  {
@@ -157,7 +157,7 @@ class UndeformedWall : public GeomObject
 
 public:
 
- ///  Constructor: arguments are the starting point and the height
+ /// Constructor: arguments are the starting point and the height
  /// above y=0.
  UndeformedWall(const double& x0, const double& h): GeomObject(1,2)
   {
@@ -166,7 +166,7 @@ public:
   }
  
 
- ///  Position vector at Lagrangian coordinate zeta 
+ /// Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position Vector
@@ -175,7 +175,7 @@ public:
   }
 
 
- ///  Parametrised position on object: r(zeta). Evaluated at
+ /// Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Calls steady version.
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -187,7 +187,7 @@ public:
   } // end of position
 
 
- ///  Posn vector and its  1st & 2nd derivatives
+ /// Posn vector and its  1st & 2nd derivatives
  /// w.r.t. to coordinates:
  /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i). 
  /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ = 
@@ -241,7 +241,7 @@ namespace Flags
  /// Steady run (1) or unsteady run (0)
  unsigned Steady_flag=1;
 
- ///  Number of steps in parameter study
+ /// Number of steps in parameter study
  unsigned Nsteps=5;
 
  /// String to identify the run type in trace file
@@ -316,7 +316,7 @@ class FSICollapsibleChannelProblem : public virtual Problem
 
 public :
 
-///  Constructor: The arguments are the number of elements and
+/// Constructor: The arguments are the number of elements and
 /// the lengths of the domain.
  FSICollapsibleChannelProblem(const unsigned& nup, 
                               const unsigned& ncollapsible,
@@ -339,7 +339,7 @@ public :
  /// classes
  virtual void steady_run();
 
- ///  Unsteady run; virtual so it can be overloaded in derived problem
+ /// Unsteady run; virtual so it can be overloaded in derived problem
  /// classes. Specify timestep or use default of 0.1
  virtual void unsteady_run(const double& dt=0.1);
 
@@ -371,7 +371,7 @@ public :
  void actions_after_newton_solve(){}
 
 
- ///  Update before checking Newton convergence: Update the
+ /// Update before checking Newton convergence: Update the
  /// nodal positions in the fluid mesh in response to possible 
  /// changes in the wall shape.
  void actions_before_newton_convergence_check()
@@ -398,16 +398,16 @@ public :
 
   protected:
  
- ///  Dump problem to disk to allow for restart.
+ /// Dump problem to disk to allow for restart.
  void dump_it(ofstream& dump_file);
 
- ///  Read problem for restart from specified restart file.
+ /// Read problem for restart from specified restart file.
  void restart(ifstream& restart_file);
 
  ///Number of elements in the x direction in the upstream part of the channel
  unsigned Nup;
 
- ///  Number of elements in the x direction in the collapsible part of 
+ /// Number of elements in the x direction in the collapsible part of 
  /// the channel
  unsigned Ncollapsible;
 
@@ -432,7 +432,7 @@ public :
  /// Pointer to the "bulk" mesh
  AlgebraicCollapsibleChannelMesh<ELEMENT>* Bulk_mesh_pt;
 
- ///  Pointer to the mesh that contains the displacement control element
+ /// Pointer to the mesh that contains the displacement control element
  Mesh* Displ_control_mesh_pt; 
  
  /// Use displacement control?
@@ -457,11 +457,11 @@ public :
  /// (or at which wall displacement is monitored in unsteady runs)
  GeomObject* Ctrl_geom_obj_pt;
 
- ///  Vector of local coordinates of displacement control point
+ /// Vector of local coordinates of displacement control point
  /// in Ctrl_geom_obj_pt
  Vector<double> S_displ_ctrl;
 
- /// Pointer to geometric object (one Lagrangian, two Eulerian 
+ ///Pointer to geometric object (one Lagrangian, two Eulerian 
  /// coordinates) that will be built from the wall mesh
  MeshAsGeomObject* Wall_geom_object_pt;
 

@@ -106,7 +106,7 @@ namespace Global_Parameters
  /// Uniform pressure
  double P = 0.0;
 
- ///  Constant pressure load. The arguments to this function are imposed
+ /// Constant pressure load. The arguments to this function are imposed
  /// on us by the SolidTractionElements which allow the traction to 
  /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the 
  /// outer unit normal to the surface. Here we only need the outer unit
@@ -161,7 +161,7 @@ private:
  /// IDs of solid mesh boundaries where displacements are pinned
  Vector<unsigned> Pinned_solid_boundary_id;
 
- ///  IDs of solid mesh boundaries which make up the traction interface
+ /// IDs of solid mesh boundaries which make up the traction interface
  Vector<unsigned> Solid_traction_boundary_id;
 
 };

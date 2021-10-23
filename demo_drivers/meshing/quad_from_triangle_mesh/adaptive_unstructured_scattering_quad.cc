@@ -58,18 +58,18 @@ using namespace std;
 namespace GlobalParameters
 {
 
- ///  Square of the wavenumber
+ /// Square of the wavenumber
  double K_squared=10.0; 
  
- ///  Number of terms used in the computation 
+ /// Number of terms used in the computation 
  /// of the exact solution
  unsigned N_fourier=10;
  
- ///  Flag to choose the Dirichlet to Neumann BC
+ /// Flag to choose the Dirichlet to Neumann BC
  /// or ABC BC
  bool DtN_BC=false;
 
- ///  Flag to choose wich order to use
+ /// Flag to choose wich order to use
  // in the ABCs BC: 1 for ABC 1st order...
  unsigned ABC_order=3;
 
@@ -79,7 +79,7 @@ namespace GlobalParameters
  /// Imaginary unit 
  std::complex<double> I(0.0,1.0);
  
- ///  Exact solution for scattered field 
+ /// Exact solution for scattered field 
  /// (vector returns real and impaginary parts).
  void get_exact_u(const Vector<double>& x, Vector<double>& u)
  {
@@ -151,7 +151,7 @@ namespace GlobalParameters
  
 
 
- ///  Flux (normal derivative) on the unit disk
+ /// Flux (normal derivative) on the unit disk
  /// for a planar incoming wave
  void prescribed_incoming_flux(const Vector<double>& x, 
                                complex<double>& flux)
@@ -230,11 +230,11 @@ public:
  /// Destructor (empty)
  ~ScatteringProblem(){}
 
- ///  Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
  
- ///  Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve(){} 
 
  /// Update the problem specs after solve (empty)
@@ -255,35 +255,35 @@ public:
  /// Actions after adapt: Rebuild the mesh of prescribed flux elements
  void actions_after_adapt();
  
- ///  Create BC elements on boundary b of the Mesh pointed
+ /// Create BC elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the specified survace Mesh 
  void create_outer_bc_elements(
   const unsigned &b, Mesh* const &bulk_mesh_pt,
   Mesh* const & helmholtz_outer_boundary_mesh_pt);
  
- ///  Create Helmholtz flux elements on boundary b of the Mesh pointed
+ /// Create Helmholtz flux elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the specified surface Mesh 
  void create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
                            Mesh* const & helmholtz_inner_boundary_mesh_pt);
  
- ///  Delete boundary face elements and wipe the surface mesh
+ /// Delete boundary face elements and wipe the surface mesh
  void delete_face_elements( Mesh* const & boundary_mesh_pt);
  
- ///  Set pointer to prescribed-flux function for all
+ /// Set pointer to prescribed-flux function for all
  /// elements in the surface mesh on the surface of the unit disk
  void set_prescribed_incoming_flux_pt();
 
- ///  Set up boundary condition elements on outer boundary
+ /// Set up boundary condition elements on outer boundary
  void setup_outer_boundary();
 
  /// Pointer to the "bulk" mesh
  MESH* Bulk_mesh_pt;
 
- ///  Pointer to mesh containing the DtN (or ABC) boundary
+ /// Pointer to mesh containing the DtN (or ABC) boundary
  /// condition elements
  HelmholtzDtNMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
  
- ///  Pointer to the mesh containing 
+ /// Pointer to the mesh containing 
  /// the Helmholtz inner boundary condition elements 
  Mesh* Helmholtz_inner_boundary_mesh_pt;
 

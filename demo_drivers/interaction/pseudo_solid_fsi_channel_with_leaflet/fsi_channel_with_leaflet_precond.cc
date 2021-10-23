@@ -61,13 +61,13 @@ public:
  /// default constructor
  PseudoElasticBulkElement() : ELEMENT() {}
  
- ///  Return the number of DOF types associated with this element. 
+ /// Return the number of DOF types associated with this element. 
  unsigned ndof_types() const
   {
    return 2*ELEMENT::dim();
   }
  
- ///  Create a list of pairs for all unknowns in this element,
+ /// Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
  /// of the "DOF" that this unknown is associated with.
@@ -160,7 +160,7 @@ class FaceGeometry<PseudoElasticBulkElement<ELEMENT> > :
 namespace LSC_Preconditioner_Helper
 {
 
- ///  Create instance of Hypre preconditioner with settings that are
+ /// Create instance of Hypre preconditioner with settings that are
  /// appropriate for serial solution of Navier-Stokes momentum block
  Preconditioner* set_hypre_preconditioner()
  {
@@ -227,7 +227,7 @@ namespace Global_Parameters
  /// Non-dimensional wall thickness.
  double H=0.05;
  
- ///  Fluid structure interaction parameter: Ratio of stresses used 
+ /// Fluid structure interaction parameter: Ratio of stresses used 
  /// for non-dimensionalisation of fluid to solid stresses. 
  double Q=2.0e-7;
 
@@ -240,7 +240,7 @@ namespace Global_Parameters
  /// Max. flux
  double U_perturbation=0.5;
  
- ///  Flux: Pulsatile flow 
+ /// Flux: Pulsatile flow 
  double flux(const double& t)
  {  
   return U_base+U_perturbation*cos(2.0*MathematicalConstants::Pi*t/T);
@@ -280,7 +280,7 @@ public:
    X0=x0;
   }
  
- ///  Position vector at Lagrangian coordinate zeta 
+ /// Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position Vector
@@ -289,7 +289,7 @@ public:
   }
 
 
- ///  Parametrised position on object: r(zeta). Evaluated at
+ /// Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Calls steady version.
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -300,7 +300,7 @@ public:
   } // end of position
 
 
- ///  Posn vector and its  1st & 2nd derivatives
+ /// Posn vector and its  1st & 2nd derivatives
  /// w.r.t. to coordinates:
  /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i). 
  /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ = 
@@ -349,7 +349,7 @@ class FSIChannelWithLeafletProblem : public Problem
 
 public:
 
- ///  Constructor: Pass multiplier for uniform mesh refinement
+ /// Constructor: Pass multiplier for uniform mesh refinement
  FSIChannelWithLeafletProblem(const unsigned& mesh_multiplier);
 
  /// Destructor empty
@@ -368,7 +368,7 @@ public:
  /// Actions after solve (empty)
  void actions_after_newton_solve(){}
 
- ///  Actions before Newton solve:
+ /// Actions before Newton solve:
  /// Reset the  pseudo-elastic undeformed configuration
  void actions_before_newton_solve()
   {
@@ -376,7 +376,7 @@ public:
    Bulk_mesh_pt->set_lagrangian_nodal_coordinates();
   }
  
- ///  Update no slip before Newton convergence check
+ /// Update no slip before Newton convergence check
  void actions_before_newton_convergence_check()
   {
    // Loop over the nodes to perform auxiliary node update (no slip) 
@@ -416,7 +416,7 @@ public:
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
  
- ///  Create elements that enforce prescribed boundary motion
+ /// Create elements that enforce prescribed boundary motion
  /// by Lagrange multipliers
  void create_lagrange_multiplier_elements();
  

@@ -301,7 +301,7 @@ private:
  /// Create FSI traction elements
  void create_fsi_traction_elements();
 
- ///  Create elements that enforce prescribed boundary motion
+ /// Create elements that enforce prescribed boundary motion
  /// for the pseudo-solid fluid mesh by Lagrange multipliers
  void create_lagrange_multiplier_elements();
 

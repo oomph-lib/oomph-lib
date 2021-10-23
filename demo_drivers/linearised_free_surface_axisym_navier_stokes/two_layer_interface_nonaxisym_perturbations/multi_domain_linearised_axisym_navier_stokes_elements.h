@@ -74,7 +74,7 @@ public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
     ElementWithExternalElement::ignore_external_geometric_data();
    }
   
-  ///  Overload get_base_flow_u(...) to return the external
+  /// Overload get_base_flow_u(...) to return the external
   /// element's velocity components at the integration point
   virtual void get_base_flow_u(const double& time,
                                const unsigned& ipt,
@@ -106,7 +106,7 @@ public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
 
   } // End of overloaded get_base_flow_u function
 
-  ///  Overload get_base_flow_dudx(...) to return the derivatives of
+  /// Overload get_base_flow_dudx(...) to return the derivatives of
   /// the external element's velocity components w.r.t. global coordinates
   /// at the integration point
   virtual void get_base_flow_dudx(const double& time,
@@ -145,7 +145,7 @@ public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
 
   } // End of overloaded get_base_flow_dudx function
 
-  ///  Overload get_base_flow_p(...) to return the external
+  /// Overload get_base_flow_p(...) to return the external
   /// element's pressure at the integration point
   virtual void get_base_flow_p(const double& time,
                                const unsigned& ipt,
@@ -174,7 +174,7 @@ public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
 
   } // End of overloaded get_base_flow_p function
 
-  ///  Overload get_base_flow_dudt(...) to return the derivatives of
+  /// Overload get_base_flow_dudt(...) to return the derivatives of
   /// the external element's velocity components w.r.t. time
   /// at the integration point
   virtual void get_base_flow_dudt(const double& time,
@@ -208,7 +208,7 @@ public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
 
   } // End of overloaded get_base_flow_dudt function
 
-  ///  Overload get_base_flow_duds(...) to return the derivatives of
+  /// Overload get_base_flow_duds(...) to return the derivatives of
   /// the external element's velocity components w.r.t. local coordinates
   /// at the integration point
   virtual void get_base_flow_duds(const double& time,
@@ -247,7 +247,7 @@ public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
 
   } // End of overloaded get_base_flow_duds function
 
-  ///  Compute the element's residual vector and the Jacobian matrix
+  /// Compute the element's residual vector and the Jacobian matrix
   void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                         DenseMatrix<double> &jacobian)
   {

@@ -322,7 +322,7 @@ public:
 
 private:
 
- ///  Create traction elements
+ /// Create traction elements
  void create_traction_elements();
 
  /// Delete traction elements

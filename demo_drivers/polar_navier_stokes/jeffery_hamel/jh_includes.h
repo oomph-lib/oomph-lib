@@ -38,10 +38,10 @@ class FluxConstraint : public GeneralisedElement
 
  protected:
 
- ///  Pointer to the Data item that stores the external pressure
+ /// Pointer to the Data item that stores the external pressure
  Data* Pext_pt;
 
- ///  The Data that contains the traded pressure is stored
+ /// The Data that contains the traded pressure is stored
  /// as external Data for the element. Which external Data item is it?
  unsigned External_data_number_of_Pext;
 
@@ -156,7 +156,7 @@ public:
  /// Return length of upper stress integral element vector
  unsigned upper_stress_integral_elt_length() {return Upper_stress_integral_elt_pt.size();}
 
- ///  Constructor, which "builds" the mesh. The arguments are the number
+ /// Constructor, which "builds" the mesh. The arguments are the number
  /// of elements in each direction.
  jh_mesh(const unsigned int &nx,const unsigned int &ny) : 
    Refineable_r_mesh<ELEMENT>(nx,ny)

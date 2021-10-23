@@ -55,7 +55,7 @@ public:
  /// Return length of outlet traction element vector
  unsigned outlet_traction_elt_length() {return Outlet_traction_elt_pt.size();}
 
- ///  Constructor, which "builds" the mesh. The arguments are the number
+ /// Constructor, which "builds" the mesh. The arguments are the number
  /// of elements in each direction.
  streamfunction_mesh(const unsigned int &nx,const unsigned int &ny) : 
    Refineable_r_mesh<RefineablePolarStreamfunctionElement>(nx,ny)
@@ -172,7 +172,7 @@ public:
  /// Destructor (empty -- all the cleanup is done in base class)
  ~StreamfunctionProblem(){};
 
- ///  Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_solve();
 
@@ -228,7 +228,7 @@ public:
                 const int azimuthal,
                 bool log_output,string file_name);
  
- ///  Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 

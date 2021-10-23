@@ -45,7 +45,7 @@ namespace oomph
   
 
 //=========================start_of_diagonal_class=============================
-///  Simple proof-of-concept block diagonal preconditioner for
+/// Simple proof-of-concept block diagonal preconditioner for
 /// demo purposes. There's a much better version in src/generic!
 //=============================================================================
  template<typename MATRIX> 
@@ -61,7 +61,7 @@ namespace oomph
    } // end_of_constructor
 
  
-  ///  Destructor - delete the subsidiary preconditioners (solvers for
+  /// Destructor - delete the subsidiary preconditioners (solvers for
   /// linear systems involving diagonal block)
   ~Diagonal()
    {
@@ -84,7 +84,7 @@ namespace oomph
    }
 
 
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   void setup();
   
   // Use the version in the Preconditioner base class for the alternative
@@ -103,11 +103,11 @@ namespace oomph
 
  private :
   
-  ///  Vector of pointers to preconditioners/inexact solvers 
+  /// Vector of pointers to preconditioners/inexact solvers 
   /// for each diagonal block
   Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
   
-  ///  Mesh pointers with preconditionable elements used
+  /// Mesh pointers with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
 
@@ -228,7 +228,7 @@ namespace oomph
 
 
 //=========================start_of_diagonal_class=============================
-///  SimpleTwoDofOnly block diagonal preconditioner which works with
+/// SimpleTwoDofOnly block diagonal preconditioner which works with
 /// only two DOF types.  If this is used by a master preconditioner to operate
 /// on a compound block with more than two DOF types then they must be coarsened 
 /// via a parameter to the master preconditioner's member
@@ -268,7 +268,7 @@ namespace oomph
     BrokenCopy::broken_assign("SimpleTwoDofOnly");
    }
   
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   void setup();
   
   // Use the version in the Preconditioner base class for the alternative
@@ -286,11 +286,11 @@ namespace oomph
   
  private :
   
-  ///  Vector of pointers to preconditioners/inexact solvers 
+  /// Vector of pointers to preconditioners/inexact solvers 
   /// for each diagonal block
   Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
 
@@ -437,7 +437,7 @@ namespace oomph
 
 
 //=========================start_of_diagonal_class=============================
-///  SimpleOneDofOnly block diagonal preconditioner which works with
+/// SimpleOneDofOnly block diagonal preconditioner which works with
 /// only one DOF type. If this is used by a master preconditioner to operate
 /// on a compound block with more than one DOF type then they must be coarsened 
 /// via a parameter to the master preconditioner's member
@@ -479,7 +479,7 @@ namespace oomph
    }
 
 
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   void setup();
   
   // Use the version in the Preconditioner base class for the alternative
@@ -497,10 +497,10 @@ namespace oomph
   
    private :
   
-  ///  Pointer to the preconditioners/inexact solver.
+  /// Pointer to the preconditioners/inexact solver.
   Preconditioner* Subsidiary_preconditioner_pt;
   
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
  };
@@ -620,7 +620,7 @@ namespace oomph
 
 
 //=========================start_of_diagonal_class=============================
-///  CoarseTwoIntoOne block diagonal preconditioner which works with
+/// CoarseTwoIntoOne block diagonal preconditioner which works with
 /// only two DOF types. If this is used by a master preconditioner to operate
 /// on a compound block with more than two DOF types then they must be coarsened 
 /// via a parameter to the master preconditioner's member
@@ -665,7 +665,7 @@ namespace oomph
    }
 
 
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   void setup();
   
   // This is put in to override the default behaviour of name hiding, which
@@ -675,7 +675,7 @@ namespace oomph
   using Preconditioner::setup;
 
    
-  ///  Preconditioner solve for the diagonal preconditioner: 
+  /// Preconditioner solve for the diagonal preconditioner: 
   /// Apply preconditioner to r and return z, so that P z = r, where
   /// P is the block diagonal matrix constructed from the original 
   /// linear system.
@@ -689,10 +689,10 @@ namespace oomph
 
  private :
   
-  ///  Pointer to the preconditioners/inexact solvers 
+  /// Pointer to the preconditioners/inexact solvers 
   Preconditioner* Subsidiary_preconditioner_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
  };
@@ -846,7 +846,7 @@ namespace oomph
 
 
 //=========================start_of_upper_triangular_class=====================
-///  Upper triangular preconditioner for a system 
+/// Upper triangular preconditioner for a system 
 /// with any number of dof types.
 //=============================================================================
  template<typename MATRIX> 
@@ -885,7 +885,7 @@ namespace oomph
   /// Apply preconditioner to r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
  
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   void setup();
   
   // Use the version in the Preconditioner base class for the alternative
@@ -903,11 +903,11 @@ namespace oomph
   /// Pointers to matrix vector product operators for the off diagonals
   DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_product_pt;
 
-  ///  Vector of pointers to preconditioners/inexact solvers 
+  /// Vector of pointers to preconditioners/inexact solvers 
   /// for each diagonal block
   Vector<Preconditioner*> Block_preconditioner_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
 
@@ -1077,7 +1077,7 @@ namespace oomph
 ////////////////////////////////////////////////////////////////////////////////
 
 //=======================start_of_two_plus_three_class=========================
-///  Block diagonal preconditioner for system with 5 dof types
+/// Block diagonal preconditioner for system with 5 dof types
 /// assembled into a 2x2 block system, with (0,0) block containing the 
 /// first two dof types and the (1,1) block the remaining three dof types.
 //=============================================================================
@@ -1118,7 +1118,7 @@ namespace oomph
   /// Apply preconditioner to r, i.e. return z such that P z = r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
   
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   virtual void setup();
  
   /// Specify the mesh that contains multi-poisson elements
@@ -1129,15 +1129,15 @@ namespace oomph
 
  private :
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (0,0) block
   Preconditioner* First_subsidiary_preconditioner_pt;
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.  
   Mesh* Multi_poisson_mesh_pt; 
  };
@@ -1281,7 +1281,7 @@ namespace oomph
 
 
 //=================start_of_two_plus_three_upper_triangular_class==============
-///  Upper triangular two plus three triangular preconditioner for a 
+/// Upper triangular two plus three triangular preconditioner for a 
 /// system with  5 dof types.
 //=============================================================================
  template<typename MATRIX> 
@@ -1325,7 +1325,7 @@ namespace oomph
   /// Apply preconditioner to r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
  
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   void setup();
   
   // Use the version in the Preconditioner base class for the alternative
@@ -1343,15 +1343,15 @@ namespace oomph
   /// Pointer to matrix vector product operator for the single off diagonals
   MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (0,0) block
   Preconditioner* First_subsidiary_preconditioner_pt;
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
 
@@ -1525,7 +1525,7 @@ namespace oomph
 
 
 //=========start_of_two_plus_three_upper_triangular_with_sub_class=============
-///  Upper block triangular with subsidiary block preconditioners 
+/// Upper block triangular with subsidiary block preconditioners 
 /// for a system with 5 dof types.
 //=============================================================================
  template<typename MATRIX> 
@@ -1573,7 +1573,7 @@ namespace oomph
   /// Apply preconditioner to r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
  
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   void setup();
 
   // Use the version in the Preconditioner base class for the alternative
@@ -1591,15 +1591,15 @@ namespace oomph
   /// Pointer to matrix vector product operators for the off diagonal block
   MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (0,0) block
   Preconditioner* First_subsidiary_preconditioner_pt;
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
 
@@ -1816,7 +1816,7 @@ namespace oomph
 ////////////////////////////////////////////////////////////////////////////////
  
 //====================start_of_two_plus_one_class=============================
-///  Block diagonal preconditioner for system with 3 dof types
+/// Block diagonal preconditioner for system with 3 dof types
 /// assembled into a 2x2 block system, with (0,0) block containing
 /// the first two dof types, the (1,1) block containing the last one.
 /// Both blocks are solved by subsidiary diagonal block preconditioners, so
@@ -1867,7 +1867,7 @@ public BlockPreconditioner<MATRIX>
   /// Apply preconditioner to r, i.e. return z such that P z = r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
   
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   void setup();
   
   // Use the version in the Preconditioner base class for the alternative
@@ -1882,18 +1882,18 @@ public BlockPreconditioner<MATRIX>
 
    private :
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (0,0) block
   Preconditioner* First_subsidiary_preconditioner_pt;
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
   
   /// Matrix vector product operators for the off diagonals.
   MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
 
@@ -2101,7 +2101,7 @@ template<typename MATRIX>
 
  
 //=========start_of_two_plus_three_upper_triangular_with_two_sub_class=========
-///  Upper block triangular with two levels of subsidiary preconditioners
+/// Upper block triangular with two levels of subsidiary preconditioners
 /// for a system with 5 dof types.
 //=============================================================================
  template<typename MATRIX> 
@@ -2149,7 +2149,7 @@ template<typename MATRIX>
   /// Apply preconditioner to r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
  
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   void setup();
 
   // Use the version in the Preconditioner base class for the alternative
@@ -2167,15 +2167,15 @@ template<typename MATRIX>
   /// Pointer to matrix vector product operator
   MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (0,0) block
   Preconditioner* First_subsidiary_preconditioner_pt;
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
 
@@ -2402,7 +2402,7 @@ template<typename MATRIX>
 
 
 //=============start_of_two_plus_three_upper_triangular_with_replace_class=====
-///  Block diagonal preconditioner for system with 5 dof types
+/// Block diagonal preconditioner for system with 5 dof types
 /// assembled into a 2x2 block system, with (0,0) block containing
 /// the first two dof types, the (1,1) block the remaining dof types.
 /// The blocks are solved by upper block triangular preconditioners.
@@ -2455,7 +2455,7 @@ template<typename MATRIX>
   /// Apply preconditioner to r, i.e. return z such that P z = r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
   
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   void setup();
  
   /// Specify the mesh that contains multi-poisson elements
@@ -2466,22 +2466,22 @@ template<typename MATRIX>
 
    private :
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for compound  (0,0) block
   Preconditioner* First_subsidiary_preconditioner_pt;
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for compound (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
-  ///  Matrix vector product operator with the compound 
+  /// Matrix vector product operator with the compound 
   /// (0,1) off diagonal block.
   MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
   // Matrix of pointers to replacement matrix blocks
   DenseMatrix<CRDoubleMatrix*> Replacement_matrix_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
   
@@ -2797,7 +2797,7 @@ template<typename MATRIX>
 
 
 //==================start_of_coarse_two_plus_two_plus_one_class================
-///  Block diagonal preconditioner for system with 5 dof types
+/// Block diagonal preconditioner for system with 5 dof types
 /// assembled into a 2x2 block system, with the (0,0) block containing
 /// the first two dof types, the (1,1) block containing the three remaining 
 /// ones.
@@ -2848,7 +2848,7 @@ template<typename MATRIX>
   /// Apply preconditioner to r, i.e. return z such that P z = r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
   
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   virtual void setup();
  
   /// Specify the mesh that contains multi-poisson elements
@@ -2859,11 +2859,11 @@ template<typename MATRIX>
 
  private :
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (0,0) block
   Preconditioner* First_subsidiary_preconditioner_pt;
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
@@ -2873,7 +2873,7 @@ template<typename MATRIX>
   /// Matrix vector product operator
   MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.  
   Mesh* Multi_poisson_mesh_pt;
  };
@@ -3175,7 +3175,7 @@ template<typename MATRIX>
 
 
 //==================start_of_coarse_two_plus_two_plus_one_class================
-///  Block diagonal preconditioner for system with 5 dof types
+/// Block diagonal preconditioner for system with 5 dof types
 /// assembled into a 2x2 block system, with (0,0) block containing
 /// the first dof type, the (1,1) block containing the remaining,
 /// (1,1) block is itself solved by a (2x2) block preconditioner which
@@ -3227,7 +3227,7 @@ template<typename MATRIX>
   /// Apply preconditioner to r, i.e. return z such that P z = r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
   
-  ///  Setup the preconditioner 
+  /// Setup the preconditioner 
   virtual void setup();
  
   /// Specify the mesh that contains multi-poisson elements
@@ -3238,11 +3238,11 @@ template<typename MATRIX>
 
  private :
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (0,0) block
   Preconditioner* First_subsidiary_preconditioner_pt;
   
-  ///  Pointer to preconditioners/inexact solver
+  /// Pointer to preconditioners/inexact solver
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
@@ -3252,7 +3252,7 @@ template<typename MATRIX>
   /// Matrix vector product operators for the off diagonal.
   MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
-  ///  Pointer to mesh with preconditionable elements used
+  /// Pointer to mesh with preconditionable elements used
   /// for classification of dof types.
   Mesh* Multi_poisson_mesh_pt;
 

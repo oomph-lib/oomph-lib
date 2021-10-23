@@ -165,7 +165,7 @@ public:
    delete this->mesh_pt();
   }
 
- ///  Update the problem specs before solve
+ /// Update the problem specs before solve
  void actions_before_newton_solve() {} 
 
  /// Update the problem after solve (empty)
@@ -181,10 +181,10 @@ public:
    Doc_info.number()++;
   }
 
- ///  Doc the solution.
+ /// Doc the solution.
  void doc_solution();
 
- ///  Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -216,7 +216,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-///  Constructor for AdvectionDiffusion problem: Pass pointer to 
+/// Constructor for AdvectionDiffusion problem: Pass pointer to 
 /// source function.
 //========================================================================
 template<class ELEMENT>

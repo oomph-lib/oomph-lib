@@ -88,15 +88,15 @@ class SpineVolumeConstraintPointElement :
  /// Pointer to the desired value of the volume
  double *Volume_pt;
 
- ///  Pointer to the Data item that stores the pressure that has been
+ /// Pointer to the Data item that stores the pressure that has been
  /// "traded" for the volume constraint in its single value.
  Data* Ptraded_data_pt;
 
- ///  The Data that contains the traded pressure is stored
+ /// The Data that contains the traded pressure is stored
  /// as external Data for the element. Which external Data item is it?
  unsigned External_data_number_of_traded_pressure;
 
- ///  The local eqn number for the traded pressure, which is 
+ /// The local eqn number for the traded pressure, which is 
  /// the variable that corresponds to this equation
  inline int ptraded_local_eqn()
   {
@@ -145,7 +145,7 @@ class SpineVolumeConstraintPointElement :
     }
   }
 
- ///  Set the Data that contains the single pressure value
+ /// Set the Data that contains the single pressure value
  /// that is "traded" for the volume constraint.
  /// The Data item must only contain a single value!
  void set_traded_pressure_data(Data* traded_pressure_data_pt)
@@ -193,19 +193,19 @@ public SpineLineFluidInterfaceElement<ELEMENT>
 {
 private:
 
-///  Integer to hold the local equation number for the single pressure
+/// Integer to hold the local equation number for the single pressure
  /// value that has been traded for the volume constraint.
  int Ptraded_local_eqn;
 
- ///  The Data that contains the traded pressure is stored
+ /// The Data that contains the traded pressure is stored
  /// as external Data for the element. Which external Data item is it?
  unsigned External_data_number_of_traded_pressure;
 
- ///  Pointer to the Data item that stores the pressure that has been
+ /// Pointer to the Data item that stores the pressure that has been
  /// "traded" for the volume constraint in its single value.
  Data* Ptraded_data_pt;
 
- ///  The local eqn number for the traded pressure, which is 
+ /// The local eqn number for the traded pressure, which is 
  /// the variable that corresponds to this equation
  inline int ptraded_local_eqn()
   {
@@ -252,7 +252,7 @@ protected:
    return (1.0 - Ca*Ma*T);
   }
 
- ///  Fill in the contribution to the residuals
+ /// Fill in the contribution to the residuals
   /// Calculate the contribution to the jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
                                        DenseMatrix<double> &jacobian)
@@ -318,7 +318,7 @@ protected:
   }
 
  
- ///  Overload the Helper function to calculate the residuals and 
+ /// Overload the Helper function to calculate the residuals and 
  /// jacobian entries. This particular function ensures that the
  /// additional entries are calculated inside the integration loop
  void add_additional_residual_contributions_interface(
@@ -437,7 +437,7 @@ public:
  double* &bi_pt() {return Bi_pt;}
  
 
- ///  Set the Data that contains the single pressure value
+ /// Set the Data that contains the single pressure value
  /// that is "traded" for the volume constraint.
  /// The Data item must only contain a single value!
  void set_traded_pressure_data(Data* traded_pressure_data_pt)
@@ -468,7 +468,7 @@ public:
     this->add_external_data(traded_pressure_data_pt);
   }
  
- ////  Overload the making of the edge element to create out
+ //// Overload the making of the edge element to create out
  /// volume constraint edge element
  FluidInterfaceBoundingElement* make_bounding_element(const int &face_index)
   {
@@ -531,23 +531,23 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- ///  Rayleigh number, set to be greater than 
+ /// Rayleigh number, set to be greater than 
  /// the threshold for linear instability
  double Rayleigh = 0.0;//1800.0;
 
 
- ///  Scaled Bond number (Bo/Ca)
+ /// Scaled Bond number (Bo/Ca)
  /// This is set to zero so that there
  /// are no gravitational effects
  double Scaled_Bond = 0.0;
 
- ///  Biot number
+ /// Biot number
  double Biot = 1.0;
 
- ///  Marangoni number
+ /// Marangoni number
  double Marangoni = 125.0;
 
- ///  Capillary number
+ /// Capillary number
  double Capillary = 1.0;
 
  /// Gravity vector
@@ -566,7 +566,7 @@ namespace Global_Physical_Variables
  ///The external pressure
  double Pext = 0.0;
 
- ///  Function that specifies the wall unit normal
+ /// Function that specifies the wall unit normal
  void wall_unit_normal_left_fct(const Vector<double> &x, 
                                 Vector<double> &normal)
  {
@@ -576,7 +576,7 @@ namespace Global_Physical_Variables
  }
 
 
- ///  Function that specifies the wall unit normal
+ /// Function that specifies the wall unit normal
  void wall_unit_normal_right_fct(const Vector<double> &x, 
                                 Vector<double> &normal)
  {
@@ -609,7 +609,7 @@ public:
  /// Destructor. Empty
  ~ConvectionProblem() {}
 
- ///  Unpin things for timestepping
+ /// Unpin things for timestepping
  void switch_boundary_conditions()
   {
    //Pin the external pressure
@@ -623,7 +623,7 @@ public:
   }
 
 
- ///  Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
@@ -652,7 +652,7 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt(){}
 
- ///  Actions before the timestep (update the the time-dependent 
+ /// Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
   {
@@ -678,13 +678,13 @@ public:
   } // end_of_unfix_pressure
 
 
- ///  Doc the solution.
+ /// Doc the solution.
  void doc_solution();
 
- ///  Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
- ///  Mesh for the bulk fluid elements
+ /// Mesh for the bulk fluid elements
  SingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
 
  /// The mesh for the interface elements
@@ -705,7 +705,7 @@ private:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-///  Constructor for convection problem
+/// Constructor for convection problem
 //========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()

@@ -116,27 +116,27 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- ///  Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem specs after solve (empty)
  void actions_after_implicit_timestep() {}
 
- ///  Update the problem specs before next timestep: 
+ /// Update the problem specs before next timestep: 
  /// Set Dirchlet boundary conditions from exact solution.
  void actions_before_implicit_timestep();
 
- ///  Set initial condition (incl previous timesteps) according
+ /// Set initial condition (incl previous timesteps) according
  /// to specified function. 
  void set_initial_condition();
 
  /// Doc the solution
  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
  
- ///  Dump problem to disk to allow for restart.
+ /// Dump problem to disk to allow for restart.
  void dump_it(ofstream& dump_file);
 
- ///  Read problem for restart from specified restart file.
+ /// Read problem for restart from specified restart file.
  void restart(ifstream& restart_file);
 
  /// Global error norm for adaptive time-stepping
@@ -248,7 +248,7 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem(
 
 
 //=========start of actions_before_implicit_timestep===============================
-///  Actions before timestep: update the domain, then reset the 
+/// Actions before timestep: update the domain, then reset the 
 /// boundary conditions for the current time.
 //========================================================================
 template<class ELEMENT>
@@ -281,7 +281,7 @@ void UnsteadyHeatProblem<ELEMENT>::actions_before_implicit_timestep()
 
 
 //======================start_of_set_initial_condition====================
-///  Set initial condition: Assign previous and current values
+/// Set initial condition: Assign previous and current values
 /// from exact solution or from restart file.
 //========================================================================
 template<class ELEMENT>
@@ -604,7 +604,7 @@ double UnsteadyHeatProblem<ELEMENT>::global_temporal_error_norm()
 
 
 //=======start_of_main====================================================
-///  Driver code for the adaptive solution of an
+/// Driver code for the adaptive solution of an
 /// unsteady heat equation with option for restart from disk: 
 /// Only a single command line argument is allowed.
 /// If specified it is interpreted as the name of the restart file.

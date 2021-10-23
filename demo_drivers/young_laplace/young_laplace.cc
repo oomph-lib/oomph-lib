@@ -61,23 +61,23 @@ public:
  /// Destructor (empty)
  ~YoungLaplaceProblem(){};
 
- ///  Update the problem specs before solve
+ /// Update the problem specs before solve
  void actions_before_newton_solve();
 
  /// Update the problem after solve: Empty
  void actions_after_newton_solve(){};
 
- ///  Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to and the trace file
  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
 private:
 
- ///  Create YoungLaplace contact angle elements on the 
+ /// Create YoungLaplace contact angle elements on the 
  /// b-th boundary of the problem's mesh and add them to mesh
  void create_contact_angle_elements(const unsigned& b);
  
- ///  Number of YoungLaplace "bulk" elements (We're attaching the  
+ /// Number of YoungLaplace "bulk" elements (We're attaching the  
  /// contact angle elements to the bulk mesh --> only the first 
  /// N_bulk_elements elements in the mesh are bulk elements!)
  unsigned N_bulk_elements;

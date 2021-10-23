@@ -89,7 +89,7 @@ class MyMacroElementNodeUpdateRefineableFishMesh :
 
 public: 
 
- ///  Constructor: Pass pointer to GeomObject that defines
+ /// Constructor: Pass pointer to GeomObject that defines
  /// the fish's back and pointer to timestepper
  /// (defaults to (Steady) default timestepper defined in the Mesh
  /// base class).
@@ -118,10 +118,10 @@ public:
 
   } //end of constructor
 
- ///  Destructor: empty
+ /// Destructor: empty
  virtual ~MyMacroElementNodeUpdateRefineableFishMesh(){}
 
- ///  Resolve mesh update: Node update current nodal
+ /// Resolve mesh update: Node update current nodal
  /// positions via sparse MacroElement-based update.
  //void node_update()
  // {
@@ -148,7 +148,7 @@ class FreeBoundaryPoissonProblem : public Problem
 
 public:
 
- ///   Constructor
+ ///  Constructor
  FreeBoundaryPoissonProblem();
 
  /// Destructor (empty)
@@ -169,7 +169,7 @@ public:
  /// Doc the solution
  void doc_solution();
 
- ///  Before checking the new residuals in Newton's method
+ /// Before checking the new residuals in Newton's method
  /// we have to update nodal positions in response to possible 
  /// changes in the position of the domain boundary
  void actions_before_newton_convergence_check()

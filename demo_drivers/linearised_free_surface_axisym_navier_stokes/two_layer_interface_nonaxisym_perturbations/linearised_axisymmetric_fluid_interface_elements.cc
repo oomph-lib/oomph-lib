@@ -45,7 +45,7 @@ namespace oomph
  Default_Azimuthal_Mode_Number_Value = 0;
 
  //=======================================================================
- ///  Calculate the residuals for the linearised axisymmetric
+ /// Calculate the residuals for the linearised axisymmetric
  /// interface element
  //=======================================================================
  void LinearisedAxisymmetricFluidInterfaceElement::

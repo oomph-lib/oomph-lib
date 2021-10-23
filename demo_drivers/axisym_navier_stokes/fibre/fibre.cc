@@ -106,18 +106,18 @@ public:
 
 private:
 
- ///  Update the problem specs before solve
+ /// Update the problem specs before solve
  /// Re-set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve(); 
 
- ///  Update after solve can remain empty, because the update 
+ /// Update after solve can remain empty, because the update 
  /// is performed automatically after every Newton step.
  void actions_after_newton_solve() {}
 
- ///  Access function for the specific mesh
+ /// Access function for the specific mesh
  HorizontalSingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt; 
 
- ///  Mesh for the interface elements
+ /// Mesh for the interface elements
  Mesh* Interface_mesh_pt;
  
  /// Deform the mesh/free surface to a prescribed function
@@ -340,7 +340,7 @@ MeltSpinningProblem(const unsigned &n_r,
 
 
 //===================start_of_actions_before_newton_solve================
-///  Update the problem specs before solve: (Re-)set boundary conditions
+/// Update the problem specs before solve: (Re-)set boundary conditions
 /// just to be on the safe side...
 //========================================================================
 template<class ELEMENT>

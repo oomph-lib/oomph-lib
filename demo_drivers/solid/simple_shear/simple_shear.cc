@@ -55,7 +55,7 @@ class ElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
 
 public:
 
- ///  Constructor: 
+ /// Constructor: 
  ElasticCubicMesh(const unsigned &nx, const unsigned &ny, const unsigned &nz,
                   const double &a, const double &b, const double &c,
                   TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper) :
@@ -149,7 +149,7 @@ public:
  /// Update function (empty)
  void actions_after_newton_solve() {}
 
- ///  Update before solve: We're dealing with a static problem so
+ /// Update before solve: We're dealing with a static problem so
  /// the nodal positions before the next solve merely serve as
  /// initial conditions. For meshes that are very strongly refined
  /// near the boundary, the update of the displacement boundary

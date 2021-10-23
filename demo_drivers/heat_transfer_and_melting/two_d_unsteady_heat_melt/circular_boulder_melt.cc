@@ -104,7 +104,7 @@ namespace ExactSolution
  /// Use analytical outer unit normal when computing fluxes?
  bool Use_analytical_outer_unit_normal=true; // hierher
 
- ///  Frequency of co-sinusoidal oscillation of incoming heat flux
+ /// Frequency of co-sinusoidal oscillation of incoming heat flux
  /// (to assess suppression of re-freezing). Set to zero for validation.
  double Omega_cos=0.0;
 
@@ -158,7 +158,7 @@ t*Y*Y*Growth_rate*pow(sin(2.0*X*0.3141592653589793E1),2.0)*0.3141592653589793E1
   return 1.0-Growth_rate*t*t*(1.0-cos(2.0*x*0.3141592653589793E1));
  }
 
- ///  Analytical outer unit normal
+ /// Analytical outer unit normal
  void analytical_outer_unit_normal(const double& t,
                                    const Vector<double>& x, 
                                    double& nx, double& ny)
@@ -180,7 +180,7 @@ t*Y*Y*Growth_rate*pow(sin(2.0*X*0.3141592653589793E1),2.0)*0.3141592653589793E1
  }
 
 
- ///  Flux into bulk required by the exact solution on a 
+ /// Flux into bulk required by the exact solution on a 
  /// boundary with outer unit normal n. No dependence on temperature u.
  void flux_into_bulk(const double& t,
                      const Vector<double>& x, 
@@ -213,7 +213,7 @@ Y*cos(2.0*X*0.3141592653589793E1))*Ny;
  }
 
 
- ///  Total flux (into bulk + melt) required by the exact 
+ /// Total flux (into bulk + melt) required by the exact 
  /// solution on a boundary with outer unit
  /// normal n. No dependence on temperature u.
  void prescribed_flux_for_unsteady_heat_validation(const double& t,
@@ -263,11 +263,11 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
  
- ///  Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve(){}
   
 
- ///  Actions before next timestep
+ /// Actions before next timestep
  void actions_before_implicit_timestep()
   {
    // Amplitude of oscillation
@@ -324,7 +324,7 @@ public:
    rebuild_global_mesh();
   }
  
- ///  Actions after adapt: 
+ /// Actions after adapt: 
  /// Setup the problem again -- remember that the mesh has been
  /// completely rebuilt and its element's don't have any
  /// pointers to source fcts etc. yet
@@ -561,7 +561,7 @@ private:
   }
 
 
- ///  Helper function to (re-)set boundary condition
+ /// Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup()
   {
@@ -735,7 +735,7 @@ private:
  // Setup labels for output
  DocInfo Doc_info;
 
- ///  Backup of Left_surface_melt_mesh_pt so the Lagrange multipliers
+ /// Backup of Left_surface_melt_mesh_pt so the Lagrange multipliers
  /// and melt rate can be projected across
  BackupMeshForProjection<TElement<1,3> >* //FaceGeometry<ELEMENT> >* 
  Backed_up_left_surface_melt_mesh_pt;
@@ -1234,7 +1234,7 @@ void MeltContactProblem<ELEMENT>::doc_solution()
 
 
 //=======start_of_main====================================================
-///  Driver code
+/// Driver code
 //========================================================================
 int main(int argc, char* argv[])
 {

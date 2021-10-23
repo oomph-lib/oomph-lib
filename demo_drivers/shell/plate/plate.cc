@@ -45,7 +45,7 @@ using namespace oomph;
 
 
 //===========================================================
-///  Flat plate in x-y plane
+/// Flat plate in x-y plane
 //===========================================================
 class FlatPlate : public GeomObject
 {
@@ -83,13 +83,13 @@ public:
    position(zeta,r);
   }
 
- ///  How many items of Data does the shape of the object depend on?
+ /// How many items of Data does the shape of the object depend on?
  virtual unsigned ngeom_data() const
   {
    return 0;
   }
 
- ///  Position Vector and 1st and 2nd derivs w.r.t. zeta.
+ /// Position Vector and 1st and 2nd derivs w.r.t. zeta.
  void d2position(const Vector<double>& zeta, Vector<double>& r,
                  DenseMatrix<double> &drdzeta,
                  RankThreeTensor<double> &ddrdzeta) const
@@ -152,7 +152,7 @@ public:
                const double &ly,
                TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper);
  
- ///  In all elastic problems, the nodes must be assigned an undeformed,
+ /// In all elastic problems, the nodes must be assigned an undeformed,
  /// or reference, position, corresponding to the stress-free state
  /// of the elastic body. This function assigns the undeformed position
  /// for the nodes on the flat plate
@@ -273,7 +273,7 @@ namespace Global_Physical_Variables
  /// Prescribed position of control point
  double Prescribed_z = 0.0;
 
- ///  Pointer to pressure load (stored in Data so it can 
+ /// Pointer to pressure load (stored in Data so it can 
  /// become an unknown in the problem when displacement control is used
  Data* Pext_data_pt;
 
@@ -286,7 +286,7 @@ namespace Global_Physical_Variables
  /// Wall thickness
  double H=0.01;
 
- ///  Return a reference to the external pressure 
+ /// Return a reference to the external pressure 
  /// load on the elastic tube.
  double external_pressure() 
  {return (*Pext_data_pt->value_pt(0)); } // *pow(0.05,3)/12.0;}

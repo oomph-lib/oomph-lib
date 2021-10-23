@@ -92,7 +92,7 @@ class SimpleRefineableRectangularQuadMesh :
 
 public: 
 
- ///   Pass number of elements in the horizontal 
+ ///  Pass number of elements in the horizontal 
  /// and vertical directions, and the corresponding dimensions.
  /// Timestepper defaults to Static.
  SimpleRefineableRectangularQuadMesh(const unsigned &Nx,
@@ -138,18 +138,18 @@ public:
    delete Problem::mesh_pt();
   }
 
- ///  Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- ///  Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 
- ///  Overloaded version of the Problem's access function to 
+ /// Overloaded version of the Problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  SimpleRefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 

@@ -104,7 +104,7 @@ public:
  // Update before solve (empty)
  void actions_before_newton_solve() {}
 
- ///  Update after solve can remain empty, because the update 
+ /// Update after solve can remain empty, because the update 
  /// is performed automatically after every Newton step.
  void actions_after_newton_solve() {}
 
@@ -133,10 +133,10 @@ public:
 
   } // End of set_initial_condition
 
- ///  Access function for the specific mesh
+ /// Access function for the specific mesh
  SingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
 
- ///  Mesh for the interface elements
+ /// Mesh for the interface elements
  Mesh* Surface_mesh_pt;
 
  /// Doc the solution

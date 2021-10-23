@@ -53,7 +53,7 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- ///  Rayleigh number, set to be greater than 
+ /// Rayleigh number, set to be greater than 
  /// the threshold for linear instability
  double Rayleigh = 1800.0;
 
@@ -83,7 +83,7 @@ public:
  /// Destructor. Empty
  ~ConvectionProblem() {}
 
- ///  Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
@@ -92,7 +92,7 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt(){}
 
- ///  Actions before the timestep (update the the time-dependent 
+ /// Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
   {
@@ -108,19 +108,19 @@ public:
     fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
 
- ///  Doc the solution.
+ /// Doc the solution.
  void doc_solution();
 
- ///  Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
- ///  Access function to the Navier-Stokes mesh
+ /// Access function to the Navier-Stokes mesh
  RectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt() 
   {
    return dynamic_cast<RectangularQuadMesh<NST_ELEMENT>*>(Nst_mesh_pt);
   }
 
- ///  Access function to the Advection-Diffusion mesh
+ /// Access function to the Advection-Diffusion mesh
  RectangularQuadMesh<AD_ELEMENT>* adv_diff_mesh_pt() 
   {
    return dynamic_cast<RectangularQuadMesh<AD_ELEMENT>*>(Adv_diff_mesh_pt);
@@ -142,7 +142,7 @@ protected:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-///  Constructor for convection problem
+/// Constructor for convection problem
 //========================================================================
 template<class NST_ELEMENT,class AD_ELEMENT>
 ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()

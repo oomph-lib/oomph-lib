@@ -117,7 +117,7 @@ class PoissonProblem : public Problem
 public:
 
 
- ///  Constructor
+ /// Constructor
  PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
                 const double element_size, const unsigned domain_configuration);
 

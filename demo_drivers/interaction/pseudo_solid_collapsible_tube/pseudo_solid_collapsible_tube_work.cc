@@ -59,13 +59,13 @@ public:
  /// default constructor
  PseudoElasticBulkElement() : ELEMENT() {}
  
- ///  returns the number of DOF types associated with this element. 
+ /// returns the number of DOF types associated with this element. 
  unsigned ndof_types() const
   {
    return 2*ELEMENT::dim();
   }
  
- ///  Create a list of pairs for all unknowns in this element,
+ /// Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
  /// of the "DOF" that this unknown is associated with.
@@ -310,7 +310,7 @@ class FluidMesh : public virtual RefineableQuarterTubeMesh<ELEMENT>,
  
 public:
  
- ///  Constructor: 
+ /// Constructor: 
  FluidMesh(GeomObject* wall_pt,
            const Vector<double>& xi_lo,
            const double& fract_mid,
@@ -468,11 +468,11 @@ public:
  /// Create FSI traction elements
  void create_fsi_traction_elements();
 
- ///  Create elements that enforce prescribed boundary motion
+ /// Create elements that enforce prescribed boundary motion
  /// for the pseudo-solid fluid mesh by Lagrange multipliers
  void create_lagrange_multiplier_elements();
 
- ///  create solid traction elements
+ /// create solid traction elements
  /// (to apply pressure to external solid wall)
  void create_solid_traction_elements();
 
@@ -501,11 +501,11 @@ public:
 
 #ifdef DISTRIBUTE
 
- ///  Before distribute: Flush face submeshes and keep all
+ /// Before distribute: Flush face submeshes and keep all
  /// solid elements adjacent to the fluid as halos.
  void actions_before_distribute();
  
- ///  After distribute: Rebuild face element submeshes and re-setup
+ /// After distribute: Rebuild face element submeshes and re-setup
  /// FSI
  void actions_after_distribute();
 
@@ -570,7 +570,7 @@ private:
  MeshAsGeomObject*
  Solid_fsi_boundary_pt;
 
- ///  Geometric Object defining the undeformed boundary of the
+ /// Geometric Object defining the undeformed boundary of the
  /// fluid mesh
  GeomObject* Wall_pt;
  

@@ -81,7 +81,7 @@ public:
  /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
- ///  Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  FishMesh<ELEMENT>* mesh_pt() 
@@ -89,7 +89,7 @@ public:
    return dynamic_cast<FishMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
- ///  Doc the solution. Output directory and labels are specified 
+ /// Doc the solution. Output directory and labels are specified 
  /// by DocInfo object
  void doc_solution(DocInfo& doc_info);
 

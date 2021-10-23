@@ -59,7 +59,7 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- ///  Rayleigh number, set to be greater than 
+ /// Rayleigh number, set to be greater than 
  /// the threshold for linear instability
  double Rayleigh = 1800.0;
  
@@ -92,13 +92,13 @@ public:
  /// Destructor. Empty
  ~RefineableConvectionProblem() {}
 
- ///  Update the problem specs before solve:
+ /// Update the problem specs before solve:
  void actions_before_newton_solve();
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- ///  Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -110,7 +110,7 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt() {}
 
- ///  Actions after adaptation,
+ /// Actions after adaptation,
  /// Re-pin a single pressure degree of freedom
  void actions_after_adapt()
   {
@@ -132,16 +132,16 @@ public:
     fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
 
- ///  Set the
+ /// Set the
  /// boundary condition on the upper wall to be perturbed slightly
  /// to force the solution into the symmetry broken state.
  void enable_imperfection() {Imperfect = true;}
 
- ///  Set the
+ /// Set the
  /// boundary condition on the upper wall to be unperturbed.
  void disable_imperfection() {Imperfect = false;}
  
- ///  Doc the solution.
+ /// Doc the solution.
  void doc_solution();
  
 private:

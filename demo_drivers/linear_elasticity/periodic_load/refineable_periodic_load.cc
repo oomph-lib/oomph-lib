@@ -92,7 +92,7 @@ class RefineablePeriodicLoadProblem : public Problem
 {
 public:
 
- ///  Constructor: Pass number of elements in x and y directions 
+ /// Constructor: Pass number of elements in x and y directions 
  /// and lengths.
  RefineablePeriodicLoadProblem(const unsigned &nx, const unsigned &ny, 
                                const double &lx, const double &ly);

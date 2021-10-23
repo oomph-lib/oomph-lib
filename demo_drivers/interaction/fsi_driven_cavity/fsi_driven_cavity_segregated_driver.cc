@@ -51,7 +51,7 @@ public :
 
 
 
- ///  Constructor: The arguments are the number of elements,
+ /// Constructor: The arguments are the number of elements,
  /// the lengths of the domain, the fractional height of the gap
  /// next to the moving lid and the period of the lid's oscillation 
  SegregatedFSIDrivenCavityProblem(const unsigned& nx, 
@@ -65,7 +65,7 @@ public :
  /// Destructor (empty)
  ~SegregatedFSIDrivenCavityProblem(){}
 
- ///  Identify the fluid and solid Data and the meshes that
+ /// Identify the fluid and solid Data and the meshes that
  /// contain only elements that are involved in the respective sub-problems. 
  /// This implements a pure pure virtual function in the 
  /// SegregatableFSIProblem base class.
@@ -74,7 +74,7 @@ public :
                                     Mesh*& fluid_mesh_pt,
                                     Mesh*& solid_mesh_pt);
  
- ///  Overload empty virtual function that is called before header for
+ /// Overload empty virtual function that is called before header for
  /// convergence history is written. This can be overloaded to insert
  /// zone information that can be used to identify 
  /// the problem parameters for this solve.
@@ -85,7 +85,7 @@ public :
  void actions_after_newton_solve()  {}
 
 
- ///  Initialise timer and reset counter for Newton iterations
+ /// Initialise timer and reset counter for Newton iterations
  /// if monolithic solver is used.
  void actions_before_newton_solve()
   {
@@ -99,7 +99,7 @@ public :
 //     }
   }
 
- ///  Overload actions before Newton step: Update nodal 
+ /// Overload actions before Newton step: Update nodal 
  /// positions in the fluid mesh in response to any changes in 
  /// the wall displacement field if segregated solver is used.
  void actions_before_newton_step()
@@ -107,7 +107,7 @@ public :
    this->Bulk_mesh_pt->node_update();
   }
 
- ///  Overload actions after Newton step: Update nodal 
+ /// Overload actions after Newton step: Update nodal 
  /// positions in the fluid mesh
  /// in response to any changes in the wall displacement field. If 
  /// monolithic Newton solver is used, doc progress of Newton iteration, 

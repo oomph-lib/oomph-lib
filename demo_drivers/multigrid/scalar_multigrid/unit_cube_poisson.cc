@@ -47,7 +47,7 @@ using namespace oomph;
 //========================================================================
 namespace Smoother_Factory_Function_Helper
 {
- ///  Returns a pointer to a Gauss-Seidel Smoother object which is
+ /// Returns a pointer to a Gauss-Seidel Smoother object which is
  /// to be used as a pre- or post-smoother
  Smoother* set_smoother()
  {
@@ -68,25 +68,25 @@ namespace TanhSolnForPoisson
  /// Parameter for steepness of step
  double Alpha=1.0;
 
- ///  Orientation (non-normalised x-component of unit vector in
+ /// Orientation (non-normalised x-component of unit vector in
  /// direction of step plane)
  double N_x=-1.0;
 
- ///  Orientation (non-normalised y-component of unit vector in
+ /// Orientation (non-normalised y-component of unit vector in
  /// direction of step plane)
  double N_y=-1.0;
 
- ///  Orientation (non-normalised z-component of unit vector in
+ /// Orientation (non-normalised z-component of unit vector in
  /// direction of step plane)
  double N_z=1.0;
 
- ///  Orientation (x-coordinate of step plane) 
+ /// Orientation (x-coordinate of step plane) 
  double X_0=0.0;
 
- ///  Orientation (y-coordinate of step plane) 
+ /// Orientation (y-coordinate of step plane) 
  double Y_0=0.0;
 
- ///  Orientation (z-coordinate of step plane) 
+ /// Orientation (z-coordinate of step plane) 
  double Z_0=0.0;
 
  // Exact solution as a Vector
@@ -175,7 +175,7 @@ public:
    Problem::mesh_pt()=0;
   } // End of ~UnitCubePoissonMGProblem
 
- ///  Update the problem specs before solve: 
+ /// Update the problem specs before solve: 
  /// Set Dirichlet boundary conditions from exact solution.
  void actions_before_newton_solve();
  
@@ -187,7 +187,7 @@ public:
  
 private:
     
- ///  Overload generic access function to the mesh by one that returns
+ /// Overload generic access function to the mesh by one that returns
  /// a pointer to the mesh with return type specified by the template parameter 
  MESH* mesh_pt() 
   {
@@ -198,7 +198,7 @@ private:
  /// Build and set multgrid solver
  void set_multigrid_solver();
  
- ///  Pointer to the bulk mesh. Overloads the pure virtual function in
+ /// Pointer to the bulk mesh. Overloads the pure virtual function in
  /// the abstract base class, MGProblem. Must be refineable to allow the
  /// use of refine_base_mesh_as_in_reference_mesh_minus_one() in make_copy()
  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt() 
@@ -450,7 +450,7 @@ void UnitCubePoissonMGProblem<ELEMENT,MESH>::doc_solution(DocInfo& doc_info)
 ////////////////////////////////////////////////////////////////////////
 
 //=========start_of_main=============================================
-///  Driver for 3D Poisson problem in a unit cube. Solution has
+/// Driver for 3D Poisson problem in a unit cube. Solution has
 /// a sharp step.
 //===================================================================
 int main(int argc, char *argv[])

@@ -51,7 +51,7 @@ class ElasticTriangleMesh : public virtual TriangleMesh<ELEMENT>,
  
 public:
  
- ///  Constructor: 
+ /// Constructor: 
  ElasticTriangleMesh(const std::string& node_file_name,
                      const std::string& element_file_name,
                      const std::string& poly_file_name,
@@ -68,7 +68,7 @@ public:
   }
 
 
- /// Function used to identify the domain boundaries
+ ///Function used to identify the domain boundaries
  void identify_boundaries()
   {
    // We will have three boundaries

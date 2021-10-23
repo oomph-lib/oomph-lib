@@ -58,7 +58,7 @@ public:
   } 
  
 
- ///  Return the indicies at which the unknown values are stored. 
+ /// Return the indicies at which the unknown values are stored. 
  virtual inline unsigned u_index_streamfunction() const {return 0;}
 
  /// Return the indicies at which the (known) velocities are stored.
@@ -71,7 +71,7 @@ public:
    output(outfile,n_plot);
   }
 
- ///  Output FE representation of soln: x,y,u or x,y,z,u at 
+ /// Output FE representation of soln: x,y,u or x,y,z,u at 
  /// n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &n_plot);
  
@@ -82,7 +82,7 @@ public:
    output(file_pt,n_plot);
   }
 
- ///  C-style output FE representation of soln: x,y,u or x,y,z,u at 
+ /// C-style output FE representation of soln: x,y,u or x,y,z,u at 
  /// n_plot^DIM plot points
  void output(FILE* file_pt, const unsigned &n_plot);
 
@@ -140,7 +140,7 @@ public:
   }
  
 
- ///  Return FE representation of streamfunction 
+ /// Return FE representation of streamfunction 
  /// at local coordinate s
  inline double interpolated_streamfunction(const Vector<double> &s) const
   {
@@ -224,7 +224,7 @@ public:
    return(interpolated_dudx);
   }
 
- ///  Construct and Return FE representation of vorticity 
+ /// Construct and Return FE representation of vorticity 
  /// at local coordinate s
  inline double interpolated_vorticity(const Vector<double> &s) const
   {
@@ -260,7 +260,7 @@ public:
 
 protected:
 
- ///  Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// local coord. s; return  Jacobian of mapping
  virtual double dshape_and_dtest_eulerian_poisson(const Vector<double> &s, 
                                                   Shape &psi, 
@@ -268,7 +268,7 @@ protected:
                                                   DShape &dtestdx) const=0;
  
 
- ///  Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// integration point ipt; return  Jacobian of mapping
  virtual double dshape_and_dtest_eulerian_at_knot_poisson(const unsigned &ipt, 
                                                           Shape &psi, 
@@ -277,7 +277,7 @@ protected:
                                                           DShape &dtestdx) 
   const=0;
 
- ///  Compute element residual Vector only (if flag=and/or element 
+ /// Compute element residual Vector only (if flag=and/or element 
  /// Jacobian matrix 
  virtual void fill_in_generic_residual_contribution(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
@@ -299,14 +299,14 @@ protected:
 
 private:
 
- ///  Static int that holds the number of variables at 
+ /// Static int that holds the number of variables at 
  /// nodes: always the same
  static const unsigned Initial_Nvalue;
  
   public:
 
 
- ///  Constructor: Call constructors for QElement and 
+ /// Constructor: Call constructors for QElement and 
  /// Streamfunction equations
  PolarStreamfunctionElement() : QElement<2,3>(), PolarStreamfunctionEquations()
   {}
@@ -317,38 +317,38 @@ private:
    BrokenCopy::broken_copy("PolarStreamfunctionElement");
   } 
  
- ///   Required  # of `values' (pinned or dofs) 
+ ///  Required  # of `values' (pinned or dofs) 
  /// at node n
  inline unsigned required_nvalue(const unsigned &n) const 
   {return Initial_Nvalue;}
 
- ///  Output function:  
+ /// Output function:  
  ///  x,y,u   or    x,y,z,u
  void output(std::ostream &outfile)
   {PolarStreamfunctionEquations::output(outfile);}
 
- ///   Output function:  
+ ///  Output function:  
  ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &n_plot)
   {PolarStreamfunctionEquations::output(outfile,n_plot);}
 
- ///  C-style output function:  
+ /// C-style output function:  
  ///  x,y,u   or    x,y,z,u
  void output(FILE* file_pt)
   {PolarStreamfunctionEquations::output(file_pt);}
 
- ///   C-style output function:  
+ ///  C-style output function:  
  ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(FILE* file_pt, const unsigned &n_plot)
   {PolarStreamfunctionEquations::output(file_pt,n_plot);}
 
- ///  Output function for an exact solution:
+ /// Output function for an exact solution:
  ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
  void output_fct(std::ostream &outfile, const unsigned &n_plot,
                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {PolarStreamfunctionEquations::output_fct(outfile,n_plot,exact_soln_pt);}
 
- ///  Output function for a time-dependent exact solution.
+ /// Output function for a time-dependent exact solution.
  ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
  /// (Calls the steady version)
  void output_fct(std::ostream &outfile, const unsigned &n_plot,
@@ -365,7 +365,7 @@ protected:
   Shape &test, DShape &dtestdx) const;
 
 
- ///  Shape, test functions & derivs. w.r.t. to global coords. at
+ /// Shape, test functions & derivs. w.r.t. to global coords. at
  /// integration point ipt. Return Jacobian.
  inline double dshape_and_dtest_eulerian_at_knot_poisson(const unsigned& ipt,
                                                          Shape &psi, 
@@ -449,7 +449,7 @@ class FaceGeometry<PolarStreamfunctionElement>: public virtual QElement<1,3>
 
   public:
  
- ///  Constructor: Call the constructor for the
+ /// Constructor: Call the constructor for the
  /// appropriate lower-dimensional QElement
  FaceGeometry() : QElement<1,3>() {}
 

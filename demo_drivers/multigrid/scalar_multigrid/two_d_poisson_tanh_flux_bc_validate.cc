@@ -58,27 +58,27 @@ namespace Global_Parameters
  /// The number of adaptations allowed by the Newton solver
  unsigned N_adaptations=1;
 
- ///  The choice of whether or not to use adaptation
+ /// The choice of whether or not to use adaptation
  ///    0 = Uniform refinement
  ///    1 = Adaptive refinement
  unsigned Use_adaptation_flag=0;
  
- ///  The choice of pre-smoother:
+ /// The choice of pre-smoother:
  ///    0 = Damped Jacobi
  ///    1 = Gauss-Seidel
  unsigned Pre_smoother_flag=0;
  
- ///  The choice of post-smoother:
+ /// The choice of post-smoother:
  ///    0 = Damped Jacobi
  ///    1 = Gauss-Seidel
  unsigned Post_smoother_flag=0;
 
- ///  The choice of linear solver
+ /// The choice of linear solver
  ///    0 = SuperLU
  ///    1 = Multigrid
  unsigned Linear_solver_flag=1;
 
- ///  The MG solver allows for five different levels of output:
+ /// The MG solver allows for five different levels of output:
  ///    0 = Outputs everything
  ///    1 = Outputs everything and plots refinement and unrefinement patterns
  ///    2 = Outputs everything except the smoother timings 
@@ -87,7 +87,7 @@ namespace Global_Parameters
  /// Note: choosing '1' will also keep the coarser problems alive
  unsigned Output_management_flag=0;
 
- ///  Variable used to decide whether or not convergence information
+ /// Variable used to decide whether or not convergence information
  /// is displayed:
  ///    0 = Don't display convergence information
  ///    1 = Display convergence information
@@ -106,7 +106,7 @@ namespace Global_Parameters
 //========================================================================
 namespace Smoother_Factory_Function_Helper
 {
- ///  Returns a pointer to a Smoother object which is to be used as
+ /// Returns a pointer to a Smoother object which is to be used as
  /// the pre-smoother
  Smoother* set_pre_smoother()
  {
@@ -133,7 +133,7 @@ namespace Smoother_Factory_Function_Helper
   }
  } // End of set_pre_smoother
  
- ///  Returns a pointer to a Smoother object which is to be used as
+ /// Returns a pointer to a Smoother object which is to be used as
  /// the post-smoother
  Smoother* set_post_smoother()
  {
@@ -227,7 +227,7 @@ public:
  /// Destructor
  ~FluxPoissonMGProblem();
 
- ///  Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution();
   
@@ -237,7 +237,7 @@ public:
  /// Actions after adapt: Rebuild the mesh of prescribed flux elements
  void actions_after_adapt();
 
- ///  Pointer to the bulk mesh. Overloads the pure virtual function in
+ /// Pointer to the bulk mesh. Overloads the pure virtual function in
  /// the abstract base class MGProblem. Must be refineable to allow the
  /// use of refine_base_mesh_as_in_reference_mesh() in make_copy()
  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt()
@@ -246,7 +246,7 @@ public:
    return Bulk_mesh_pt;
   }
 
- ///  Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
@@ -268,7 +268,7 @@ private:
    return dynamic_cast<MESH*>(Problem::mesh_pt());
   }
   
- ///  Return a pointer to a new instance of the same problem.
+ /// Return a pointer to a new instance of the same problem.
  MGProblem* make_new_problem()
   {
    // Make new problem of the FluxPoissonMGProblem class whose template
@@ -278,7 +278,7 @@ private:
     (&SolnForPoisson::source_function);
   }
 
- ///  Create Poisson flux elements on the b-th boundary of the 
+ /// Create Poisson flux elements on the b-th boundary of the 
  /// problem's mesh
  void create_flux_elements(const unsigned &b,
 			   MESH* const &bulk_mesh_pt,
@@ -675,7 +675,7 @@ void FluxPoissonMGProblem<ELEMENT,MESH>::doc_solution()
  
 
 //===============================================start_of_main============
-///  Demonstrate how to solve 2D Poisson problem with flux boundary 
+/// Demonstrate how to solve 2D Poisson problem with flux boundary 
 /// conditions
 //========================================================================
 int main(int argc, char **argv)

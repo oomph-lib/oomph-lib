@@ -81,7 +81,7 @@ public:
  /// Destructor:  Empty
  ~MyStraightLine(){}
  
- ///  Position Vector at Lagrangian coordinate zeta 
+ /// Position Vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position Vector
@@ -111,10 +111,10 @@ private:
 namespace Global_Parameters
 {
 
- ///  Square of wavenumber for the Helmholtz equation
+ /// Square of wavenumber for the Helmholtz equation
  double K_squared=10.0;
  
- ///  Radius of outer boundary of Helmholtz domain
+ /// Radius of outer boundary of Helmholtz domain
  double Outer_radius=2.0; 
 
  /// FSI parameter
@@ -185,7 +185,7 @@ public:
  /// Constructor:
  CoatedSphereProblem();
  
- ///  Update function (empty)
+ /// Update function (empty)
  void actions_before_newton_solve(){}
 
  /// Update function (empty)
@@ -208,16 +208,16 @@ public:
 
 private:
 
- ///  Create FSI traction elements
+ /// Create FSI traction elements
  void create_fsi_traction_elements();
 
- ///  Create Helmholtz FSI flux elements
+ /// Create Helmholtz FSI flux elements
  void create_helmholtz_fsi_flux_elements(); 
 
  /// Setup interaction
  void setup_interaction();
 
- ///  Create DtN elements on outer boundary
+ /// Create DtN elements on outer boundary
  void create_helmholtz_DtN_elements();
 
  /// Create solid traction elements 
@@ -293,7 +293,7 @@ private:
  /// Pointer to mesh of Helmholtz FSI flux elements
  Mesh* Helmholtz_fsi_flux_mesh_pt;
  
- ///  Pointer to mesh containing the DtN elements
+ /// Pointer to mesh containing the DtN elements
  FourierDecomposedHelmholtzDtNMesh<HELMHOLTZ_ELEMENT>* Helmholtz_DtN_mesh_pt;
  
  /// Trace file

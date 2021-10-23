@@ -51,10 +51,10 @@ class SingularPoissonSolutionElement : public virtual GeneralisedElement
 {
   public :
  
- ///  Function pointer to the singular function:
+ /// Function pointer to the singular function:
  typedef double (*PoissonSingularFctPt)(const Vector<double>& x); 
  
- ///  Function pointer to the gradient of the singular function:
+ /// Function pointer to the gradient of the singular function:
  typedef Vector<double> (*PoissonGradSingularFctPt)
   (const Vector<double>& x); 
  
@@ -99,7 +99,7 @@ class SingularPoissonSolutionElement : public virtual GeneralisedElement
   return internal_data_pt(0)->value(0);
  }
  
- ///  Set pointer to associated wrapped Poisson element which contains
+ /// Set pointer to associated wrapped Poisson element which contains
  /// the singularity (at local coordinate s). Also specify the direction
  /// in which the slope of the FE part of the solution is set to zero 
  void set_wrapped_poisson_element_pt(WRAPPED_POISSON_ELEMENT* 
@@ -132,7 +132,7 @@ class SingularPoissonSolutionElement : public virtual GeneralisedElement
  }
  
  
- ///  Access function to pointer to singular function
+ /// Access function to pointer to singular function
  PoissonSingularFctPt& singular_fct_pt() {return Singular_fct_pt;}
  
  /// Evaluate singular function at Eulerian position x
@@ -167,7 +167,7 @@ class SingularPoissonSolutionElement : public virtual GeneralisedElement
   return c*singular_function(x);
  } // End of function
  
- ///  Access function to pointer to the gradient of sing function
+ /// Access function to pointer to the gradient of sing function
  PoissonGradSingularFctPt& grad_singular_fct_pt()
   {return Grad_singular_fct_pt;}
  
@@ -358,7 +358,7 @@ class PoissonElementWithSingularity : public virtual BASIC_POISSON_ELEMENT
   } // End of constructor
  
  
- ///  Impose Dirichlet BC on sum of FE solution and u_bar on j-th local
+ /// Impose Dirichlet BC on sum of FE solution and u_bar on j-th local
  /// node
  void impose_dirichlet_bc_on_node(const unsigned& j)
  {
@@ -389,7 +389,7 @@ class PoissonElementWithSingularity : public virtual BASIC_POISSON_ELEMENT
  }
  
  
- ///  Access function to pointer of vector of 
+ /// Access function to pointer of vector of 
  /// SingularPoissonSolutionElements. These
  /// specify the singular functions that are added to the (regular)
  /// FE solution
@@ -400,7 +400,7 @@ class PoissonElementWithSingularity : public virtual BASIC_POISSON_ELEMENT
   }
  
 
- ///  Add pointer to associated SingularPoissonSolutionElement that 
+ /// Add pointer to associated SingularPoissonSolutionElement that 
  /// determines the value of the amplitude of the singular function (and gives 
  /// access to the singular function). The unknown amplitude becomes
  /// external Data for this element so assign_eqn_numbers() must be
@@ -430,7 +430,7 @@ class PoissonElementWithSingularity : public virtual BASIC_POISSON_ELEMENT
   return C_equation_elements_pt[i]->singular_function(x);
  }
  
- ///  Evaluate the gradient the i-th singular (incl. the amplitude )
+ /// Evaluate the gradient the i-th singular (incl. the amplitude )
  /// at Eulerian position x
  Vector<double> grad_u_bar(const unsigned i,const Vector<double>& x) const
   {
@@ -445,7 +445,7 @@ class PoissonElementWithSingularity : public virtual BASIC_POISSON_ELEMENT
   }
  
  
- ///  Return FE representation of solution WITHOUT singular
+ /// Return FE representation of solution WITHOUT singular
  /// contributions at local coordinate s
  double interpolated_u_poisson_fe_only(const Vector<double> &s) const
  {

@@ -84,11 +84,11 @@ namespace Global_Parameters
  /// Prescribed flow rate
  double Prescribed_flow_rate=Peak_prescribed_flow_rate;
 
- ///  Pointer to Data object whose one and only value stores the
+ /// Pointer to Data object whose one and only value stores the
  /// upstream pressure used to enforce flow rate
  Data* P_in_data_pt=0; 
 
- ///  IDs for the two types of Lagrange multipliers used
+ /// IDs for the two types of Lagrange multipliers used
  /// in this problem
  enum{Parallel_flow_lagrange_multiplier_id, 
       FSI_interface_displacement_lagrange_multiplier_id};
@@ -124,7 +124,7 @@ public:
  /// Create FSI traction elements
  void create_fsi_traction_elements();
 
- ///  Create elements that enforce prescribed boundary motion
+ /// Create elements that enforce prescribed boundary motion
  /// for the pseudo-solid fluid mesh by Lagrange multipliers
  void create_lagrange_multiplier_elements();
 
@@ -205,32 +205,32 @@ private:
  /// Sanity check: Doc boundary coordinates on i-th solid FSI interface
  void doc_solid_boundary_coordinates(const unsigned& i);
  
- ///  Return total number of mesh boundaries that make up the inflow 
+ /// Return total number of mesh boundaries that make up the inflow 
  /// boundary
  unsigned nfluid_inflow_traction_boundary()
   {return Inflow_boundary_id.size();}
 
- ///   Return total number of mesh boundaries that make up the outflow 
+ ///  Return total number of mesh boundaries that make up the outflow 
  /// boundary
  unsigned nfluid_outflow_traction_boundary()
   {return Outflow_boundary_id.size();}
 
- ///  Return total number of mesh boundaries that make up the 
+ /// Return total number of mesh boundaries that make up the 
  /// in- and outflow boundaries where a traction has to be applied
  unsigned nfluid_traction_boundary()
   {return Inflow_boundary_id.size()+Outflow_boundary_id.size();}
 
- ///  Return total number of mesh boundaries in the solid mesh that
+ /// Return total number of mesh boundaries in the solid mesh that
  /// make up the FSI interface
  unsigned nsolid_fsi_boundary()
   {return Solid_fsi_boundary_id.size();}
 
- ///  Return total number of mesh boundaries in the fluid mesh that
+ /// Return total number of mesh boundaries in the fluid mesh that
  /// make up the FSI interface
  unsigned nfluid_fsi_boundary()
   {return Fluid_fsi_boundary_id.size();}
 
- ///  Return total number of mesh boundaries in the solid mesh 
+ /// Return total number of mesh boundaries in the solid mesh 
  /// where the position is pinned.
  unsigned npinned_solid_boundary()
   {return Pinned_solid_boundary_id.size();} 
@@ -266,24 +266,24 @@ private:
  /// IDs of solid mesh boundaries where displacements are pinned
  Vector<unsigned> Pinned_solid_boundary_id;
   
- ///  IDs of solid mesh boundaries which make up the FSI interface
+ /// IDs of solid mesh boundaries which make up the FSI interface
  Vector<unsigned> Solid_fsi_boundary_id;
 
- ///  IDs of solid mesh boundaries which make up the outer surface
+ /// IDs of solid mesh boundaries which make up the outer surface
  Vector<unsigned> Solid_outer_boundary_id;
 
- ///  IDs of fluid mesh boundaries along which inflow boundary conditions
+ /// IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
  Vector<unsigned> Inflow_boundary_id;
 
- ///  IDs of fluid mesh boundaries along which inflow boundary conditions
+ /// IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
  Vector<unsigned> Outflow_boundary_id;
 
- ///  IDs of fluid mesh boundaries which make up the FSI interface
+ /// IDs of fluid mesh boundaries which make up the FSI interface
  Vector<unsigned> Fluid_fsi_boundary_id;
  
- ///  Average wall thickness (computed from area of fsi interface and
+ /// Average wall thickness (computed from area of fsi interface and
  /// volume of solid mesh.
  double Wall_thickness;
  

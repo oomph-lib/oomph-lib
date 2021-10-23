@@ -103,7 +103,7 @@ public:
  /// Destructor (empty)
  ~SteadyTubeProblem() {}
 
- ///  Update the problem specs before solve 
+ /// Update the problem specs before solve 
  void actions_before_newton_solve();
 
  /// After adaptation: Pin redudant pressure dofs.
@@ -117,7 +117,7 @@ public:
  /// Doc the solution
  void doc_solution();
 
- ///  Overload generic access function by one that returns
+ /// Overload generic access function by one that returns
  /// a pointer to the specific  mesh
  RefineableTubeMesh<ELEMENT>* mesh_pt() 
   {

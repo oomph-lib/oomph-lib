@@ -29,21 +29,21 @@
   /// Storage for elemental error estimate -- used for post-processing
   double Error;
 
-  ///  Number of previous history values to be used for  extrapolation
+  /// Number of previous history values to be used for  extrapolation
   /// of strain rate
   unsigned Nprev_for_extrapolation_of_strain_rate;
 
-  ///  Boolean to indicate if we're using a fixed point iteration for
+  /// Boolean to indicate if we're using a fixed point iteration for
   /// the strain rate that forms the basis for the invariant
   bool Use_fixed_point_for_strain_rate;
 
-  ///  Boolean to indicate whether we use Aitken extrapolation
+  /// Boolean to indicate whether we use Aitken extrapolation
   /// during the fixed point iterations
   bool Use_aitken_extrapolation;
 
  public:
 
-  ///  Constructor initialise error and set default for number of 
+  /// Constructor initialise error and set default for number of 
   /// previous history values to be used for extrapolation of strain rate
   MyTaylorHoodElement()
    {
@@ -69,7 +69,7 @@
    }
   
   
-  ///  Number of previous history values to be used for  extrapolation
+  /// Number of previous history values to be used for  extrapolation
   /// of strain rate
   unsigned& nprev_for_extrapolation_of_strain_rate()
    {
@@ -77,7 +77,7 @@
    }
   
 
-  ///  Enable use of fixed point iteration (sets
+  /// Enable use of fixed point iteration (sets
   /// current best guess based on extrapolation)
   void enable_fixed_point_iteration_for_strain_rate()
    {
@@ -86,20 +86,20 @@
     Use_fixed_point_for_strain_rate=true;
    }
 
-  ///  Disable use of fixed point iteration
+  /// Disable use of fixed point iteration
   void disable_fixed_point_iteration_for_strain_rate()
    {
     Use_fixed_point_for_strain_rate=false;
     Use_aitken_extrapolation=false;
    }
 
-  ///  Enable use of Aitken extrapolation
+  /// Enable use of Aitken extrapolation
   void enable_aitken_extrapolation()
    {
     Use_aitken_extrapolation=true;
    }
 
-  ///  Disable use of Aitken extrapolation
+  /// Disable use of Aitken extrapolation
   void disable_aitken_extrapolation()
    {
     Use_aitken_extrapolation=false;
@@ -121,7 +121,7 @@
    }
  
   
-  ///  Update latest guess (obtained via fixed point iteration)
+  /// Update latest guess (obtained via fixed point iteration)
   /// for strain rate from current actual strain rate
   void update_latest_fixed_point_iteration_guess_for_strain_rate()
    {
@@ -182,7 +182,7 @@
    }
 
 
-  ///  Get strain-rate tensor: \f$ e_{ij} \f$  where 
+  /// Get strain-rate tensor: \f$ e_{ij} \f$  where 
   /// \f$ i,j = r,z,\theta \f$ (in that order). Extrapolated
   /// from history values evaluated at integration point ipt. Overloaded
   /// version from base class.
@@ -202,7 +202,7 @@
    }
 
 
-  ///  Get strain-rate tensor: \f$ e_{ij} \f$  where 
+  /// Get strain-rate tensor: \f$ e_{ij} \f$  where 
   /// \f$ i,j = r,z,\theta \f$ (in that order). Extrapolated
   /// from history values evaluated at local coordinate s. Overloaded
   /// version from base class.
@@ -741,7 +741,7 @@ dt_minus_3*dt_minus_3);
     write_tecplot_zone_footer(outfile,nplot); 
    }
 
-  ///  Get 'flux' for Z2 error recovery
+  /// Get 'flux' for Z2 error recovery
   void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
    {
     const unsigned DIM=3;
@@ -829,7 +829,7 @@ dt_minus_3*dt_minus_3);
      }
    }
 
-  ///  Get square of L2 norms of (i) strain invariant, (ii) its 
+  /// Get square of L2 norms of (i) strain invariant, (ii) its 
   /// extrapolated value, (iii) difference between the two. Returns area
   /// as a check
   double square_of_norm_of_strain_invariant(double& norm_squared,
@@ -893,7 +893,7 @@ dt_minus_3*dt_minus_3);
 
    }
 
-  ///  Get square of L2 norms of (i) viscosity, (ii) its 
+  /// Get square of L2 norms of (i) viscosity, (ii) its 
   /// extrapolated value, (iii) difference between the two. Returns area
   /// as a check
   double square_of_norm_of_viscosity(double& norm_squared,
@@ -962,7 +962,7 @@ dt_minus_3*dt_minus_3);
 
    }
 
-  ///  Get square of L2 norms of (i) current strainrate, (ii) its 
+  /// Get square of L2 norms of (i) current strainrate, (ii) its 
   /// latest guess from fixed point iteration, (iii) difference 
   /// between the two. Returns area as a check
   double square_of_norm_of_fixed_point(double& norm_squared,

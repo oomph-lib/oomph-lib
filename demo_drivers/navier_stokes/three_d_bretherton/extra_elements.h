@@ -51,11 +51,11 @@ private:
  /// Pointer to the desired value of the spine height
  double *Height_pt;
  
- ///  The local eqn number for the pressure that has been traded for
+ /// The local eqn number for the pressure that has been traded for
  /// the volume constraint
  int Ptraded_local_eqn;
 
- ///  The Data that contains the traded pressure
+ /// The Data that contains the traded pressure
  Data *Ptraded_data_pt;
  
 
@@ -64,7 +64,7 @@ private:
  /// Calculate the geometric shape functions at local coordinate s. 
  void shape(const Vector<double> &s, Shape &psi) const {psi[0] = 1.0;}
 
- ///  Calculate the geometric shape functions and
+ /// Calculate the geometric shape functions and
  ///derivatives w.r.t. local coordinates at local coordinate s
  void dshape_local(const Vector<double> &s, Shape &psi,
                            DShape &dpsids) const
@@ -94,7 +94,7 @@ public:
  /// Access function to the prescribed spine height
  double*& height_pt() {return Height_pt;}
 
- ///  Return the spatial (Eulerian) dimension of the element
+ /// Return the spatial (Eulerian) dimension of the element
  unsigned dim() const {return 0;} 
 
  /// Return the spatial dimension of local node n
@@ -110,11 +110,11 @@ public:
  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
                                    DenseMatrix<double> &jacobian);
 
- ///  Assign the local equation numbers and their coincidence with
+ /// Assign the local equation numbers and their coincidence with
  /// the global values
  void assign_additional_local_eqn_numbers();
 
- ///  Set the Data that contains the single pressure value
+ /// Set the Data that contains the single pressure value
  /// that is "traded" for the volume constraint.
  /// The Data item must only contain a single value!
  void set_traded_pressure_data(Data* traded_pressure_data_pt)
@@ -251,35 +251,35 @@ class SpineGravityTractionElement :
  ///Pointer to global gravity Vector
  Vector<double> *G_pt;
 
- ///  Pointer to the viscosity ratio (relative to the 
+ /// Pointer to the viscosity ratio (relative to the 
  /// viscosity used in the definition of the Reynolds number)
  double *Viscosity_Ratio_pt;
  
- ///  Pointer to the density ratio (relative to the density used in the 
+ /// Pointer to the density ratio (relative to the density used in the 
  /// definition of the Reynolds number)
  double *Density_Ratio_pt;
 
 protected:
 
- /// Array to hold local eqn number information for veloc: 
+ ///Array to hold local eqn number information for veloc: 
  ///U_local_eqn(jnod,i) = local equation number or < 0 if pinned
  DenseMatrix<int> U_local_eqn;
 
- /// Array to hold the local eqn number information for the
+ ///Array to hold the local eqn number information for the
  /// external data (other nodes in the bulk element)
  DenseMatrix<int> External_u_local_eqn;
 
- /// Vector to keep track of the external data associated
+ ///Vector to keep track of the external data associated
  ///with each bulk node
  Vector<unsigned> External_node;
 
 //BEGIN, bit fo rconsidering Ca as an unknown
 
- ///  The Data that contains the capillary number is stored
+ /// The Data that contains the capillary number is stored
  /// as external Data for the element. Which external Data item is it?
  unsigned External_data_number_of_invca;
 
- ///  Pointer to the Data item that stores the capillary number
+ /// Pointer to the Data item that stores the capillary number
  Data* invca_data_pt;
 
 // Pointer to the BOnd number. This is neccesary because in the equations
@@ -388,17 +388,17 @@ public:
   }
 
 
- ///  Return the number of external velocity data
+ /// Return the number of external velocity data
  unsigned nexternal_u_data() {return External_node.size();}
  
- ///  Viscosity ratio for element: Element's viscosity relative to the 
+ /// Viscosity ratio for element: Element's viscosity relative to the 
  /// viscosity used in the definition of the Reynolds number
  const double &viscosity_ratio() const {return *Viscosity_Ratio_pt;}
 
  /// Pointer to Viscosity Ratio
  double* &viscosity_ratio_pt() {return Viscosity_Ratio_pt;}
 
- ///  Density ratio for element: Element's density relative to the 
+ /// Density ratio for element: Element's density relative to the 
  ///  viscosity used in the definition of the Reynolds number
  const double &density_ratio() const {return *Density_Ratio_pt;}
 
@@ -477,13 +477,13 @@ public:
  double u(const unsigned &l,const unsigned &i)
   {return this->nodal_value(l,i);}
  
- //////  Velocity i at local node l at timestep t (t=0: present; 
+ ////// Velocity i at local node l at timestep t (t=0: present; 
  /// t>0: previous). SIMILAR HEAVY ASSUMPTIONS
  double u(const unsigned &t, const unsigned &l, 
           const unsigned &i) const
   {return this->nodal_value(t,l,i);}
  
- ///  i-th component of du/dt at local node l. 
+ /// i-th component of du/dt at local node l. 
  double du_dt(const unsigned &l, const unsigned &i) const
   {
    // Get the data's timestepper

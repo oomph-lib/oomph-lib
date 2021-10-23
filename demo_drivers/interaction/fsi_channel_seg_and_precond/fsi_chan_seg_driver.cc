@@ -217,7 +217,7 @@ class SegregatedFSICollapsibleChannelProblem :
  //Count the number of Picard iterations
  int Picard_iter;
  
- ///  Vector of pairs of pointers to wall elements 
+ /// Vector of pairs of pointers to wall elements 
  /// (in their incarnation as 
  /// GeomObjects) that contains the control points and the local coordinate
  /// in those objects
@@ -226,7 +226,7 @@ class SegregatedFSICollapsibleChannelProblem :
 
 public :
 
- ///  Constructor: The arguments are the same as the original
+ /// Constructor: The arguments are the same as the original
  /// (non-segregated) problem, namely, numbers of elements and lengths
  /// of different sections of the domain.
  SegregatedFSICollapsibleChannelProblem(const unsigned& nup, 
@@ -244,7 +244,7 @@ public :
  ~SegregatedFSICollapsibleChannelProblem(){}
 
 
- ///  Identify the fluid and solid Data and meshes that
+ /// Identify the fluid and solid Data and meshes that
  /// contain only elements involved in the respective sub-problems. 
  /// This is a specific implementation of a pure virtual function in the 
  /// SegregatableFSIProblem base class.
@@ -325,13 +325,13 @@ public :
 
 
 
- ///  Overload empty virtual function that is called before header for
+ /// Overload empty virtual function that is called before header for
  /// convergence history is written. This can be overloaded to insert
  /// zone information that can be used to identify 
  /// the problem parameters for this solve.
  void write_zone_info_for_convergence_history(ofstream& convergence_file);
 
- ///  Initialise timer and reset counter for Newton iterations
+ /// Initialise timer and reset counter for Newton iterations
  /// if monolithic solver is used.
  void actions_before_newton_solve()
   {
@@ -352,19 +352,19 @@ public :
   }
 
 
- ///  Overload actions before Newton step: Update nodal 
+ /// Overload actions before Newton step: Update nodal 
  /// positions in the fluid mesh in response to any changes in 
  /// the wall displacement field if segregated solver is used.
  void actions_before_newton_step() {}
 
- ///  Overload actions after Newton step: Update nodal 
+ /// Overload actions after Newton step: Update nodal 
  /// positions in the fluid mesh
  /// in response to any changes in the wall displacement field. If 
  /// monolithic Newton solver is used, doc progress of Newton iteration, 
  /// using the same output as during Picard iteration.
  void actions_before_newton_convergence_check();
 
-///  Overload actions before the segregated_convergence_check
+/// Overload actions before the segregated_convergence_check
  /// for documentation purposes
  void actions_before_segregated_convergence_check();
 

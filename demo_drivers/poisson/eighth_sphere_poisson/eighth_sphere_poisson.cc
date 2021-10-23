@@ -47,26 +47,26 @@ namespace TanhSolnForPoisson
  /// Parameter for steepness of step
  double Alpha=1;
 
- /// Orientation (non-normalised x-component of unit vector in direction
+ ///Orientation (non-normalised x-component of unit vector in direction
  /// of step plane)
  double N_x=-1.0;
 
- /// Orientation (non-normalised y-component of unit vector in direction
+ ///Orientation (non-normalised y-component of unit vector in direction
  /// of step plane)
  double N_y=-1.0;
 
- /// Orientation (non-normalised z-component of unit vector in direction
+ ///Orientation (non-normalised z-component of unit vector in direction
  /// of step plane)
  double N_z=1.0;
 
 
- /// Orientation (x-coordinate of step plane) 
+ ///Orientation (x-coordinate of step plane) 
  double X_0=0.0;
 
- /// Orientation (y-coordinate of step plane) 
+ ///Orientation (y-coordinate of step plane) 
  double Y_0=0.0;
 
- /// Orientation (z-coordinate of step plane) 
+ ///Orientation (z-coordinate of step plane) 
  double Z_0=0.0;
 
 
@@ -140,7 +140,7 @@ public:
  /// Destructor: Empty
  ~EighthSpherePoissonProblem(){}
 
- ///  Overload generic access function by one that returns
+ /// Overload generic access function by one that returns
  /// a pointer to the specific  mesh
  RefineableEighthSphereMesh<ELEMENT>* mesh_pt() 
   {
@@ -150,7 +150,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve()  {}
 
- ///  Update the problem specs before solve: 
+ /// Update the problem specs before solve: 
  /// Set Dirchlet boundary conditions from exact solution.
  void actions_before_newton_solve()
  {

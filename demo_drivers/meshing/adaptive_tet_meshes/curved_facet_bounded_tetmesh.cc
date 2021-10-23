@@ -185,11 +185,11 @@ private:
  /// Last boundary ID for torus surrounding edge of disk
  unsigned Last_torus_boundary_id;
  
- ///  Storage for one-based boundary IDs for boundaries on disk within
+ /// Storage for one-based boundary IDs for boundaries on disk within
  ///  the torus region
  Vector<unsigned> One_based_boundary_id_for_disk_within_torus;
 
- ///  Storage for one-based boundary IDs for boundaries on disk 
+ /// Storage for one-based boundary IDs for boundaries on disk 
  /// outside the torus region
  Vector<unsigned> One_based_boundary_id_for_disk_outside_torus;
 

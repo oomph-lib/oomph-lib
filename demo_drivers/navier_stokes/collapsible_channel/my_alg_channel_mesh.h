@@ -52,7 +52,7 @@ class MyAlgebraicCollapsibleChannelMesh :
 
 public: 
 
- ///  Constructor: Pass number of elements in upstream/collapsible/
+ /// Constructor: Pass number of elements in upstream/collapsible/
  /// downstream segment and across the channel; lengths of upstream/
  /// collapsible/downstream segments and width of channel, pointer to 
  /// GeomObject that defines the collapsible segment, and pointer to 
@@ -79,7 +79,7 @@ public:
  
 
 
- ///  Constructor: Pass number of elements in upstream/collapsible/
+ /// Constructor: Pass number of elements in upstream/collapsible/
  /// downstream segment and across the channel; lengths of upstream/
  /// collapsible/downstream segments and width of channel, pointer to 
  /// GeomObject that defines the collapsible segment, function pointer
@@ -114,10 +114,10 @@ public:
   }
  
  
- ///  Destructor: empty
+ /// Destructor: empty
  virtual ~MyAlgebraicCollapsibleChannelMesh(){}
  
- ///  Function pointer for function that squashes
+ /// Function pointer for function that squashes
  /// the mesh near the walls. Default trivial mapping (the identity)
  /// leaves vertical nodal positions unchanged. Mapping is
  /// used in underlying CollapsibleChannelDomain.
@@ -142,11 +142,11 @@ public:
   }
 
 
- ///  Update nodal position at time level t (t=0: present; 
+ /// Update nodal position at time level t (t=0: present; 
  /// t>0: previous)
  void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt);
  
- ///  Update the geometric references that are used 
+ /// Update the geometric references that are used 
  /// to update node after mesh adaptation.
  /// Empty -- no update of node update required
  void update_node_update(AlgebraicNode*& node_pt) {}
@@ -185,7 +185,7 @@ class MyRefineableAlgebraicCollapsibleChannelMesh :
 public: 
 
 
- ///  Constructor: Pass number of elements in upstream/collapsible/
+ /// Constructor: Pass number of elements in upstream/collapsible/
  /// downstream segment and across the channel; lengths of upstream/
  /// collapsible/downstream segments and width of channel, pointer to 
  /// GeomObject that defines the collapsible segment, function pointer
@@ -218,7 +218,7 @@ public:
 
 
 
- ///  Constructor: Pass number of elements in upstream/collapsible/
+ /// Constructor: Pass number of elements in upstream/collapsible/
  /// downstream segment and across the channel; lengths of upstream/
  /// collapsible/downstream segments and width of channel, pointer to 
  /// GeomObject that defines the collapsible segment, function pointer

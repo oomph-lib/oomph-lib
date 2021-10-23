@@ -43,7 +43,7 @@ namespace oomph
   /// Private data for the error weight 
   double Error_weight;
   
-  ///  Bool to indicate if the timestepper is in `BDF1' mode
+  /// Bool to indicate if the timestepper is in `BDF1' mode
   /// i.e. it behaves just as if it were a BDF1 timestepper.
   /// This status may be achieved temporarily by calling
   /// turn_on_bdf1_mode(). It's reset to the default BDF2 behaviour
@@ -103,7 +103,7 @@ namespace oomph
    /// Return the actual order of the scheme
    unsigned order() const { return 2; }
    
-   ///  Function to make the time stepper temporarily work
+   /// Function to make the time stepper temporarily work
    /// as if it is BDF1. This is trivially achieved by resetting the
    /// weights to those of BDF1, before setting the weight corresponding
    /// to history value 2 to zero.
@@ -119,7 +119,7 @@ namespace oomph
    /// Flag to indicate if the timestepper is working in BDF1 mode
    bool bdf1_mode() { return BDF1_mode; }
  
-   ///  Reset the timestepper to BDF2: Set the "BDF1_mode"
+   /// Reset the timestepper to BDF2: Set the "BDF1_mode"
    /// flag to false and re-compute the weights
    void turn_off_bdf1_mode() 
    {
@@ -130,7 +130,7 @@ namespace oomph
     set_weights_bdf2();
    }
 
-   ///  Reset the is_steady status to its default (false) and
+   /// Reset the is_steady status to its default (false) and
    /// re-compute the weights
    void undo_make_steady() 
    {
@@ -148,7 +148,7 @@ namespace oomph
      }
    }
 
-   ///  Initialise the time-history for the Data values,
+   /// Initialise the time-history for the Data values,
    /// corresponding to an impulsive start.
    void assign_initial_values_impulsive(Data* const &data_pt)
    {
@@ -179,7 +179,7 @@ namespace oomph
    }
    
    
-   ///  Initialise the time-history for the nodal positions
+   /// Initialise the time-history for the nodal positions
    /// corresponding to an impulsive start.
    void assign_initial_positions_impulsive(Node* const &node_pt)
    {
@@ -218,11 +218,11 @@ namespace oomph
    }
    
    
-   ///  Typedef for function that returns the (scalar) initial
+   /// Typedef for function that returns the (scalar) initial
    /// value at a given value of the continuous time t.
    typedef double (*InitialConditionFctPt)(const double& t);
    
-   ///  Initialise the time-history for the Data values,
+   /// Initialise the time-history for the Data values,
    /// corresponding to given time history, specified by
    /// Vector of function pointers.
    void assign_initial_data_values(Data* const &data_pt, 
@@ -249,7 +249,7 @@ namespace oomph
      }
    }
    
-   ///  This function updates the Data's time history so that
+   /// This function updates the Data's time history so that
    /// we can advance to the next timestep. For BDF schemes,
    /// we simply push the values backwards...
    void shift_time_values(Data* const &data_pt)
@@ -284,7 +284,7 @@ namespace oomph
      }
    }
    
-   ///  This function advances the time history of the positions
+   /// This function advances the time history of the positions
    /// at a node. 
    void shift_time_positions(Node* const &node_pt)
    {
@@ -343,7 +343,7 @@ namespace oomph
      }
    }
 
-   ///  Implementation of pure virtual function in base class.
+   /// Implementation of pure virtual function in base class.
    /// Set weights corresponding to either a BDF1 scheme or a BDF2
    /// scheme, depending on the flag.
    void set_weights()

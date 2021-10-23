@@ -50,7 +50,7 @@ public:
  /// Return pointer to vector of all Fluid elements
  Vector<GeneralisedElement*> fluid_elt_vector() {return Fluid_elt_pt;}
 
- ///  Constructor, which "builds" the mesh. The arguments are the number
+ /// Constructor, which "builds" the mesh. The arguments are the number
  /// of elements in each direction.
  Refineable_r_mesh(const unsigned int &nx,const unsigned int &ny) :
  RectangularQuadMesh<ELEMENT>(nx,ny,Global_Physical_Variables::R_l,

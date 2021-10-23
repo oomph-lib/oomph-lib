@@ -96,7 +96,7 @@ class PoissonProblem : public Problem
 public:
 
 
-  ///  Constructor: Pass pointer to source function and names of
+  /// Constructor: Pass pointer to source function and names of
   /// two triangle input files
   PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt);
 

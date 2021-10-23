@@ -57,7 +57,7 @@ namespace ProblemParameters
  double Permeability=1.0; // ONLY 1.0 MAKES SENSE IN A PURE PORO-ELASTIC 
                           // PROBLEM!
 
- ///  Non-dim Young's modulus -- set to one implying that equations
+ /// Non-dim Young's modulus -- set to one implying that equations
  /// were scaled on actual young's modulus.
  double E_mod=1.0;
  
@@ -73,14 +73,14 @@ namespace ProblemParameters
  /// Ratio of pore fluid density to solid matrix density
  double Density_ratio=0.6;
 
- ///  Scaling parameter for pressure load on 
+ /// Scaling parameter for pressure load on 
  /// upper boundary (for non-validation case)
  double P=1.0;
 
- ///  Parameter for tanh origin for pressure incrementation
+ /// Parameter for tanh origin for pressure incrementation
  double T_tanh=0.25; 
 
- ///  Steepness parameter for tanh for pressure incrementation
+ /// Steepness parameter for tanh for pressure incrementation
  double Alpha_tanh=100.0;
 
  // First Lame parameter -- dependent parameter!
@@ -107,7 +107,7 @@ namespace ProblemParameters
  // Inner radius of annular region
  double Inner_radius=0.3;
 
- ///  Function that returns zero (for assigment of initial conditions/
+ /// Function that returns zero (for assigment of initial conditions/
  /// history values)
  double zero_fct(const double &time,
                  const Vector<double> &x)
@@ -479,7 +479,7 @@ namespace ProblemParameters
  /// Pointer to timestepper for internal dofs
  TimeStepper* Internal_time_stepper_pt=0;
 
- ///  Global function that completes the edge sign setup --
+ /// Global function that completes the edge sign setup --
  /// has to be called before projection in unstructured
  /// adaptation
  template<class ELEMENT>

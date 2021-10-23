@@ -135,7 +135,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-///  Constructor for ActivatorInhibitor problem
+/// Constructor for ActivatorInhibitor problem
 //========================================================================
 template<class ELEMENT>
 RefineableActivatorInhibitorProblem<ELEMENT>::

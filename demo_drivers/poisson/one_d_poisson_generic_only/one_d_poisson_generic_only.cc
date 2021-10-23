@@ -52,13 +52,13 @@ using namespace oomph;
 class TwoNodeGeometricElement : public FiniteElement
 {
 private:
- ///  Integration scheme that will be used to integrate over the element.
+ /// Integration scheme that will be used to integrate over the element.
  /// Simple Gaussian quadrature in one dimension, with two Gauss points.
  static Gauss<1,2> Default_spatial_integration_scheme;
 
 public:
 
- ///  Element constructor; resize Node_pt to the number of nodes (two)
+ /// Element constructor; resize Node_pt to the number of nodes (two)
  /// and set the integration scheme. 
  TwoNodeGeometricElement()
   {
@@ -139,7 +139,7 @@ class TwoNodePoissonElement : public TwoNodeGeometricElement
     Sign=1;
    }
 
-  ///  Define a specific source function. For greater generality, and
+  /// Define a specific source function. For greater generality, and
   /// inclusion in a library, this could be defined as a source function 
   /// pointer, that would then be set externally.
   double f(const double &x) const 
@@ -147,10 +147,10 @@ class TwoNodePoissonElement : public TwoNodeGeometricElement
     return double(Sign)*30.0*sin(sqrt(30.0)*x);
    }
 
-  ///  Access function to the sign in the source function
+  /// Access function to the sign in the source function
   int& sign() {return Sign;}
 
-  ///  Define an access function to the first data value stored 
+  /// Define an access function to the first data value stored 
   /// at each node. In a more general "Equation" element, such abstraction
   /// is essential, because different Elements will store the same variables
   /// in different locations.
@@ -159,7 +159,7 @@ class TwoNodePoissonElement : public TwoNodeGeometricElement
   /// For the Poisson equation, only one value is stored at each node
   unsigned required_nvalue(const unsigned &n) const {return 1;}
 
-  ///  Calculate the elemental contributions to the global 
+  /// Calculate the elemental contributions to the global 
   /// residual vector for the weak form of the Poisson equation
   void get_residuals(Vector<double> &residuals)
    {
@@ -249,7 +249,7 @@ class TwoNodePoissonElement : public TwoNodeGeometricElement
    } //End of function
 
 
-  ///  Calculate the elemental contribution to the global residual
+  /// Calculate the elemental contribution to the global residual
   /// vector and to the Jacobian matrix dR_{i}/du_{j} used in the Newton method
   void get_jacobian(Vector<double> &residuals, DenseMatrix<double> &jacobian)
    {
@@ -346,7 +346,7 @@ class TwoNodePoissonElement : public TwoNodeGeometricElement
 
 
 
-  ///  Self test function: The sign in the source function should
+  /// Self test function: The sign in the source function should
   /// only have the values +/- 1. Following the general oomph-lib convention,
   /// the self_test() returns 0 for success, and 1 for failure:
   unsigned self_test()

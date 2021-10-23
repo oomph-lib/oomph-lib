@@ -65,7 +65,7 @@ private:
  double Xfraction, Yfraction;
 
  public:
- ///  Constructor, which "builds" the mesh. The arguments are the number
+ /// Constructor, which "builds" the mesh. The arguments are the number
  /// of elements in each zone, the radius of the disc
  CylinderMesh(const unsigned &nx1, const unsigned &nx2,
               const unsigned &ny1, const unsigned &ny2,
@@ -97,7 +97,7 @@ private:
    this->element_reorder();
   }
 
- ///  Define the spacing of the nodes in the r (radial) direction
+ /// Define the spacing of the nodes in the r (radial) direction
  /// In this mesh, there are two different regions with uniform spacing 
  /// in each. 
  /// Note that this can easily be changed to generate non-uniform meshes
@@ -127,7 +127,7 @@ private:
    else {return (x2init + x2step*((np-1)*(xelement-Nx1) + xnode));}
   }
 
- ///  Defines the spacing of the nodes in the z 
+ /// Defines the spacing of the nodes in the z 
  /// (axial) direction.In this mesh there are two different regions
  /// with uniform spacing in each
  /// Note that this can easily be changed to generate non-uniform meshes
@@ -174,7 +174,7 @@ private:
  double Re;
 
 public:
- ///  Constructor:
+ /// Constructor:
  /// Nr: Number of elements in the r (radial) direction
  /// Nz: Number of elements in the z (axial) direction
  RotatingProblem(const unsigned &Nr1, const unsigned &Nr2,

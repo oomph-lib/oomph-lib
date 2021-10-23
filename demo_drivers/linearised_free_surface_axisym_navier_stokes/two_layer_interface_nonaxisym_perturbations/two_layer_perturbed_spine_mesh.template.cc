@@ -30,7 +30,7 @@
 
 namespace oomph
 {
- ///  "Magic" negative number that indicates that the indices at
+ /// "Magic" negative number that indicates that the indices at
  /// which the perturbations to the nodal y-positions are stored have
  /// not been set up
  template<class ELEMENT>
@@ -38,7 +38,7 @@ namespace oomph
  Perturbation_to_nodal_position_indices_not_set_up = -64;
 
  //=======================================================================
- ///  Constructor for 2D perturbed spine mesh: Pass in:
+ /// Constructor for 2D perturbed spine mesh: Pass in:
  ///   - number of elements in x-direction
  ///   - number of elements in y-direction in bottom layer
  ///   - number of elements in y-direction in top layer
@@ -97,7 +97,7 @@ namespace oomph
  
  
  //=======================================================================
- ///  Constructor for 2D perturbed spine mesh: Pass in:
+ /// Constructor for 2D perturbed spine mesh: Pass in:
  ///   - number of elements in x-direction
  ///   - number of elements in y-direction in bottom layer
  ///   - number of elements in y-direction in top layer
@@ -158,7 +158,7 @@ namespace oomph
  
 
  //=======================================================================
- ///  Constructor for 2D perturbed spine mesh: Pass in:
+ /// Constructor for 2D perturbed spine mesh: Pass in:
  ///   - number of elements in x-direction
  ///   - number of elements in y-direction in bottom layer
  ///   - number of elements in y-direction in top layer
@@ -225,7 +225,7 @@ namespace oomph
 
 
 //==================================================================
-///  The spacing function for the x co-ordinate, which is the
+/// The spacing function for the x co-ordinate, which is the
 /// same as the default function.
 //==================================================================
  template<class ELEMENT>
@@ -241,7 +241,7 @@ namespace oomph
  }
 
 //==================================================================
-///  The spacing function for the y co-ordinates, which splits
+/// The spacing function for the y co-ordinates, which splits
 /// the region into two regions (1 and 2), according to the 
 /// heights H1 and H2, with Ny1 and Ny2 elements respectively.
 //==================================================================

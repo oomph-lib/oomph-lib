@@ -613,7 +613,7 @@ class OscRingNStProblem : public Problem
 
 public:
 
- ///  Constructor: Pass timestep and function 
+ /// Constructor: Pass timestep and function 
  /// pointer to the solution that provides the initial conditions for the fluid
  OscRingNStProblem(const double& dt,
                    FiniteElement::UnsteadyExactSolutionFctPt IC_fct_pt);
@@ -634,7 +634,7 @@ public:
  void actions_before_newton_solve(){}
 
 
- ///  Update the problem specs before next timestep:
+ /// Update the problem specs before next timestep:
  /// Update the fluid mesh and re-set velocity boundary conditions. 
  void actions_before_implicit_timestep()
  {
@@ -662,7 +662,7 @@ public:
  void unsteady_run(const unsigned &ntsteps, const bool& restarted,
                    DocInfo& doc_info);
 
- ///  Set initial condition (incl previous timesteps) according
+ /// Set initial condition (incl previous timesteps) according
  /// to specified function. 
  void set_initial_condition();
  
@@ -676,10 +676,10 @@ public:
     Problem::mesh_pt()); 
   }
  
- ///  Dump generic problem data.
+ /// Dump generic problem data.
  void dump_it(ofstream& dump_file);
 
- ///  Read generic problem data.
+ /// Read generic problem data.
  void restart(ifstream& restart_file);
 
 private:
@@ -699,7 +699,7 @@ private:
  /// Pointer to node on coarsest mesh on which velocity is traced
  Node* Veloc_trace_node_pt;
 
- ///  Pointer to node in symmetry plane on coarsest mesh at 
+ /// Pointer to node in symmetry plane on coarsest mesh at 
  /// which velocity is traced
  Node* Sarah_veloc_trace_node_pt;
 

@@ -182,7 +182,7 @@ public:
 
 
 
- ///  Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions();
 
  /// After adaptation: Pin pressure again (the previously pinned
@@ -327,7 +327,7 @@ RefineableSphericalCouetteProblem<ELEMENT>::RefineableSphericalCouetteProblem()
 
 
 //=========start of set_boundary_conditions===============================
-///  Set the boundary conditions so that the inner sphere has
+/// Set the boundary conditions so that the inner sphere has
 /// a constant angular rotation of angular velocity one.
 //========================================================================
 template<class ELEMENT>

@@ -89,7 +89,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
 
- ///  Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 

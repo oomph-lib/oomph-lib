@@ -118,7 +118,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- ///  Actions before the timestep (update the the time-dependent 
+ /// Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep()
   {
@@ -145,10 +145,10 @@ public:
 
   } // End of actions_after_adapt
 
- ///  Set initial condition (incl previous timesteps)
+ /// Set initial condition (incl previous timesteps)
  void set_initial_condition();
 
- ///  Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions();
 
  /// Access function for the specific mesh

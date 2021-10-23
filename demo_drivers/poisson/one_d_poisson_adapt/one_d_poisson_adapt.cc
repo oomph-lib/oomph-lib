@@ -89,18 +89,18 @@ public:
  /// Destructor (empty)
  ~RefineableOneDPoissonProblem() {}
  
- ///  Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve() {}
 
- ///  Doc the solution. DocInfo object stores flags/labels for where
+ /// Doc the solution. DocInfo object stores flags/labels for where
  /// the output gets written to.
  void doc_solution(DocInfo& doc_info);
 
- ///  Overloaded version of the Problem's access function to the mesh.
+ /// Overloaded version of the Problem's access function to the mesh.
  /// Recasts the pointer to the base Mesh object to the actual mesh type.
  RefineableOneDMesh<ELEMENT>* mesh_pt() 
   {

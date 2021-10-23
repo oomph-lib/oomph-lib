@@ -34,7 +34,7 @@ namespace oomph
 {
 
 //=====start_of_circle=====================================================
-///  Simple circle in 2D space.
+/// Simple circle in 2D space.
 /// \f[ x = X_c + R \cos(\zeta)  \f]
 /// \f[ y = Y_c + R \sin(\zeta)  \f]
 //=========================================================================
@@ -48,7 +48,7 @@ public:
                const double& r) : GeomObject(1,2), X_c(x_c), Y_c(y_c), R(r)
   {}
 
- ///  Position Vector at Lagrangian coordinate zeta 
+ /// Position Vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position vector
@@ -56,7 +56,7 @@ public:
    r[1] = Y_c+R*sin(zeta[0]);
   }
 
- ///  Position Vector at Lagrangian coordinate zeta  at time level t
+ /// Position Vector at Lagrangian coordinate zeta  at time level t
  /// (t=0: present; t>0: previous level). Steady object, so we 
  /// simply forward the call to the steady version.
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -86,7 +86,7 @@ protected:
 
 
 //=========================================================================
-///  GeneralCircle in 2D space.
+/// GeneralCircle in 2D space.
 /// \f[ x = X_c + R \cos(\zeta)  \f]
 /// \f[ y = Y_c + R \sin(\zeta)  \f]
 /// The three parameters \f$ X_c, Y_c \f$ and \f$ R \f$ are represented
@@ -133,7 +133,7 @@ public:
    Must_clean_up=true; 
   }
 
- ///  Alternative constructor:  Pass x and y-coords of centre and radius
+ /// Alternative constructor:  Pass x and y-coords of centre and radius
  /// (all as part of Data)
  /// \code 
  /// Geom_data_pt[0]->value(0) = X_c;
@@ -179,7 +179,7 @@ public:
   } // end of destructor
 
 
- ///  Position Vector at Lagrangian coordinate zeta 
+ /// Position Vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Extract data
@@ -194,7 +194,7 @@ public:
   } // end of position(...)
 
 
- ///  Position Vector at Lagrangian coordinate zeta  at time level t
+ /// Position Vector at Lagrangian coordinate zeta  at time level t
  /// (t=0: present; t>0: previous level). Steady object, so we 
  /// simply forward the call to the steady version.
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -213,14 +213,14 @@ public:
  /// How many items of Data does the shape of the object depend on?
  unsigned ngeom_data() const {return Geom_data_pt.size();}
  
- ///  Return pointer to the j-th Data item that the object's 
+ /// Return pointer to the j-th Data item that the object's 
  /// shape depends on 
  Data* geom_data_pt(const unsigned& j) {return Geom_data_pt[j];}
  
 
 protected:
 
- ///  Vector of pointers to Data items that affects the object's shape
+ /// Vector of pointers to Data items that affects the object's shape
  Vector<Data*> Geom_data_pt;
 
  /// Do I need to clean up?

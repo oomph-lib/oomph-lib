@@ -134,7 +134,7 @@ namespace Flag_definition
   ///Destructor (empty)
   ~TopOfFlag(){}
   
-  ///  Return the position along the top of the flag (xi[0] varies 
+  /// Return the position along the top of the flag (xi[0] varies 
   /// between 0 and Lx)
   void position(const unsigned& t,const Vector<double> &xi, Vector<double> &r)
    const
@@ -185,7 +185,7 @@ namespace Flag_definition
   ~BottomOfFlag(){}
   
 
-  ///  Return the position along the bottom of the flag (xi[0] varies 
+  /// Return the position along the bottom of the flag (xi[0] varies 
   /// between 0 and Lx)
   void position(const unsigned& t,const Vector<double> &xi, Vector<double> &r)
    const
@@ -235,7 +235,7 @@ namespace Flag_definition
    ///Destructor (empty)
    ~TipOfFlag(){}
    
-   ///  Return the position
+   /// Return the position
    /// This object links the tips of the top and bottom by a straight line
    /// whilst xi[0] goes from -H/2 to H/2.
    void position(const unsigned& t,const Vector<double> &xi, Vector<double> &r)
@@ -269,7 +269,7 @@ namespace Flag_definition
  /// Pointer to GeomObject that bounds the tip edge of the flag
  TipOfFlag* Tip_flag_pt=0;
 
- ///  Pointer to GeomObject of type Circle that defines the
+ /// Pointer to GeomObject of type Circle that defines the
  /// central cylinder.
  Circle* Cylinder_pt=0;
 
@@ -313,7 +313,7 @@ class TurekNonFSIProblem : public Problem
 
 public:
 
- ///  Constructor: Pass length and height of domain.
+ /// Constructor: Pass length and height of domain.
  TurekNonFSIProblem(const double &length, 
                          const double &height);
  

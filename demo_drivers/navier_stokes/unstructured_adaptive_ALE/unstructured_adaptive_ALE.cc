@@ -72,7 +72,7 @@ namespace oomph
   /// Pseudo-solid Poisson ratio
   double Nu=0.3;
 
-  ///  Pseudo solid "density" -- set to zero because we don't want
+  /// Pseudo solid "density" -- set to zero because we don't want
   /// inertia in the node update!
   double Lambda_sq=0.0;
 
@@ -477,7 +477,7 @@ public:
   }// end of actions_after_adapt
 
 
- ///  Update before implicit timestep: Move hole boundary
+ /// Update before implicit timestep: Move hole boundary
  void actions_before_implicit_timestep()
   {
    double time=this->time_pt()->time();
@@ -545,7 +545,7 @@ public:
     }
   }
  
- ///  Re-apply the no slip condition (imposed indirectly via dependent
+ /// Re-apply the no slip condition (imposed indirectly via dependent
  /// velocities)
  void actions_before_newton_convergence_check()
   {
@@ -560,7 +560,7 @@ public:
  void actions_before_newton_solve(){}
  
  
- ///  Set boundary condition, assign auxiliary node update fct.
+ /// Set boundary condition, assign auxiliary node update fct.
  /// Complete the build of all elements, attach power elements that allow
  /// computation of drag vector
  void complete_problem_setup()
@@ -674,11 +674,11 @@ public:
 private:
  
 
- ///  Create elements that enforce prescribed boundary motion
+ /// Create elements that enforce prescribed boundary motion
  /// for the pseudo-solid fluid mesh by Lagrange multipliers
  void create_lagrange_multiplier_elements();
 
- ///  Delete elements that impose the prescribed boundary displacement
+ /// Delete elements that impose the prescribed boundary displacement
  /// and wipe the associated mesh
  void delete_lagrange_multiplier_elements()
   {

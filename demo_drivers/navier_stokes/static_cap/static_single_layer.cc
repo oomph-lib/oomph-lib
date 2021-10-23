@@ -58,7 +58,7 @@ namespace Global_Physical_Variables
  ///Direction of the wall normal vector
  Vector<double> Wall_normal;
 
- ///  Function that specifies the wall unit normal
+ /// Function that specifies the wall unit normal
  void wall_unit_normal_fct(const Vector<double> &x, 
                       Vector<double> &normal)
  {
@@ -496,7 +496,7 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
 //===========start_of_pseudo_elastic_class====================================
-/// A class that solves the Navier--Stokes equations
+///A class that solves the Navier--Stokes equations
 ///to compute the shape of a static interface in a rectangular container
 ///with imposed contact angle at the boundary.
 //============================================================================

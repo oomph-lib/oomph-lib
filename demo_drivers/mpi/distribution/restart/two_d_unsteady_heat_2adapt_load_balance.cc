@@ -43,7 +43,7 @@ using namespace MathematicalConstants;
 
 
 //============start_of_MyEllipse===========================================
-///  Oscillating ellipse
+/// Oscillating ellipse
 /// \f[ x = (a + \widehat{a} \sin(2\Pi t/T)) \cos(\xi)  \f]
 /// \f[ y = (b + \widehat{b} \sin(2\Pi t/T)) \sin(\xi)  \f]
 //=========================================================================
@@ -52,7 +52,7 @@ class MyEllipse : public GeomObject
 
 public:
 
- ///  Constructor:  Pass half axes, amplitudes of their variation, period
+ /// Constructor:  Pass half axes, amplitudes of their variation, period
  /// of oscillation and pointer to time object.
  MyEllipse(const double& a, const double& b, 
            const double& a_hat, const double& b_hat, 
@@ -63,7 +63,7 @@ public:
  /// Destructor: Empty
  virtual ~MyEllipse() {}
 
- ///  Current position vector to material point at 
+ /// Current position vector to material point at 
  /// Lagrangian coordinate xi 
  void position(const Vector<double>& xi, Vector<double>& r) const
   {
@@ -78,7 +78,7 @@ public:
 
 
 
- ///  Parametrised position on object: r(xi). Evaluated at
+ /// Parametrised position on object: r(xi). Evaluated at
  /// previous time level. t=0: current time; t>0: previous
  /// time level.
  void position(const unsigned& t, const Vector<double>& xi,
@@ -232,20 +232,20 @@ public:
  /// Destructor: Close trace file
  ~RefineableUnsteadyHeatProblem();
 
- ///  Build meshes (helper fct accessed from constructor and
+ /// Build meshes (helper fct accessed from constructor and
  /// from the load balancing routines)
  void build_mesh();
 
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
 
- ///  Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve(){}
 
  /// Update the problem specs after timestep (empty)
  void actions_after_implicit_timestep(){}
 
- ///  Update the problem specs before next timestep: 
+ /// Update the problem specs before next timestep: 
  /// Set Dirchlet boundary conditions from exact solution.
  void actions_before_implicit_timestep();
  
@@ -276,20 +276,20 @@ public:
  /// Global error norm for adaptive time-stepping
  double global_temporal_error_norm();
 
- ///  Set initial condition (incl previous timesteps) according
+ /// Set initial condition (incl previous timesteps) according
  /// to specified function. 
  void set_initial_condition();
 
- ///  Restart
+ /// Restart
  void restart();
 
- ///  Create UnsteadyHeat flux elements on boundary b of the Mesh pointed
+ /// Create UnsteadyHeat flux elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the Mesh object pointed to by 
  /// surface_mesh_pt
  void create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
                            Mesh* const &surface_mesh_pt);
 
- ///  Delete UnsteadyHeat flux elements and wipe the surface mesh
+ /// Delete UnsteadyHeat flux elements and wipe the surface mesh
  void delete_flux_elements(Mesh* const &surface_mesh_pt);
 
  /// Doc the solution
@@ -298,10 +298,10 @@ public:
  /// Return DocInfo object
  DocInfo& doc_info(){return Doc_info;}
 
- ///  Dump problem data to allow for later restart
+ /// Dump problem data to allow for later restart
  void dump_it(ofstream& dump_file);
 
- ///  Read problem data for restart
+ /// Read problem data for restart
  void restart(ifstream& restart_file);
 
  /// Pointer to bulk mesh
@@ -325,7 +325,7 @@ private:
  /// Actions before adapt/distribute: Wipe the mesh of prescribed flux elements
  void generic_actions_before();
  
- ///  Actions after adapt/distribute: Rebuild the mesh of prescribed 
+ /// Actions after adapt/distribute: Rebuild the mesh of prescribed 
  /// flux elements
  void generic_actions_after();
 
@@ -559,7 +559,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
 
 
 //=========start of actions_before_implicit_timestep======================
-///  Actions before timestep: Update the domain shape, then set the 
+/// Actions before timestep: Update the domain shape, then set the 
 /// boundary conditions for the current time.
 //========================================================================
 template<class ELEMENT>

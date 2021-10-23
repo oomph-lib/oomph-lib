@@ -64,7 +64,7 @@ class ElasticBeamProblem : public Problem
 {
 public:
  
- ///  Constructor: The arguments are the number of elements, 
+ /// Constructor: The arguments are the number of elements, 
  /// the length of domain
  ElasticBeamProblem(const unsigned &n_elem, const double &length);
  

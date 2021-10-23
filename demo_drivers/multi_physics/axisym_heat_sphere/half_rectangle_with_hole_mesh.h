@@ -195,7 +195,7 @@ public:
  ~HalfRectangleWithHoleDomain() {}
 
 
- ///  Helper function to interpolate linearly between the
+ /// Helper function to interpolate linearly between the
  /// "right" and "left" points; \f$ s \in [-1,1] \f$
  void linear_interpolate(Vector<double> left, Vector<double> right,
                          const double &s, Vector<double> &f)
@@ -208,7 +208,7 @@ public:
 
    
 
- ///  Parametrisation of macro element boundaries: f(s) is the position
+ /// Parametrisation of macro element boundaries: f(s) is the position
  /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
  /// at the specfied discrete time level (time=0: present; time>0: previous)
  void macro_element_boundary(const unsigned &time,
@@ -973,7 +973,7 @@ public:
   }
  
  
- ///  Destructor: Empty
+ /// Destructor: Empty
  virtual ~RefineableHalfRectangleWithHoleMesh() {}
  
 };

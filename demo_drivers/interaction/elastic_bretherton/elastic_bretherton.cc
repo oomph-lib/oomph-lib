@@ -351,37 +351,37 @@ class SpineGravityTractionElement :
  ///Pointer to global gravity Vector
  Vector<double> *G_pt;
 
- ///  Pointer to the viscosity ratio (relative to the 
+ /// Pointer to the viscosity ratio (relative to the 
  /// viscosity used in the definition of the Reynolds number)
  double *Viscosity_Ratio_pt;
  
- ///  Pointer to the density ratio (relative to the density used in the 
+ /// Pointer to the density ratio (relative to the density used in the 
  /// definition of the Reynolds number)
  double *Density_Ratio_pt;
 
- ///  Pointer to an External Data object that represents the
+ /// Pointer to an External Data object that represents the
  /// an unknown pressure gradient
  Data* Delta_P_pt;
 
 protected:
 
- /// Array to hold local eqn number information for veloc: 
+ ///Array to hold local eqn number information for veloc: 
  ///U_local_eqn(jnod,i) = local equation number or < 0 if pinned
  DenseMatrix<int> U_local_eqn;
 
- /// The local equation number for the external data associated
+ ///The local equation number for the external data associated
  /// with the unknown pressure gradient
  int Delta_P_local_eqn;
 
- ///  The index in the external data at which the Delta_p data is
+ /// The index in the external data at which the Delta_p data is
  /// stored
  unsigned External_Delta_P_index;
 
- /// Array to hold the local eqn number information for the
+ ///Array to hold the local eqn number information for the
  /// external data (other nodes in the bulk element)
  DenseMatrix<int> External_u_local_eqn;
 
- /// Vector to keep track of the external data associated
+ ///Vector to keep track of the external data associated
  ///with each bulk node
  Vector<unsigned> External_node;
 
@@ -477,7 +477,7 @@ public:
     }
   }
 
- ///  Access function to the pointer to pressure gradient data
+ /// Access function to the pointer to pressure gradient data
  void set_delta_p_pt(Data* const &delta_p_pt) 
   {
    Delta_P_pt = delta_p_pt;
@@ -485,24 +485,24 @@ public:
    External_Delta_P_index = add_external_data(delta_p_pt,false);
   }
  
- ///  Return the value of the pressure gradient
+ /// Return the value of the pressure gradient
  const double delta_p() const 
   {
    if(Delta_P_pt==0) {return 0.0;}
    else {return Delta_P_pt->value(0);}
   }
 
- ///  Return the number of external velocity data
+ /// Return the number of external velocity data
  unsigned nexternal_u_data() {return External_node.size();}
 
- ///  Viscosity ratio for element: Element's viscosity relative to the 
+ /// Viscosity ratio for element: Element's viscosity relative to the 
  /// viscosity used in the definition of the Reynolds number
  const double &viscosity_ratio() const {return *Viscosity_Ratio_pt;}
 
  /// Pointer to Viscosity Ratio
  double* &viscosity_ratio_pt() {return Viscosity_Ratio_pt;}
 
- ///  Density ratio for element: Element's density relative to the 
+ /// Density ratio for element: Element's density relative to the 
  ///  viscosity used in the definition of the Reynolds number
  const double &density_ratio() const {return *Density_Ratio_pt;}
 
@@ -525,13 +525,13 @@ public:
  double u(const unsigned &l,const unsigned &i)
   {return nodal_value(l,i);}
  
- //////  Velocity i at local node l at timestep t (t=0: present; 
+ ////// Velocity i at local node l at timestep t (t=0: present; 
  /// t>0: previous). SIMILAR HEAVY ASSUMPTIONS
  double u(const unsigned &t, const unsigned &l, 
           const unsigned &i) const
   {return nodal_value(t,l,i);}
  
- ///  i-th component of du/dt at local node l. 
+ /// i-th component of du/dt at local node l. 
  double du_dt(const unsigned &l, const unsigned &i) const
   {
    // Get the data's timestepper
@@ -997,11 +997,11 @@ private:
  /// Pointer to the desired value of the spine height
  double *Height_pt;
  
- ///  The local eqn number for the pressure that has been traded for
+ /// The local eqn number for the pressure that has been traded for
  /// the volume constraint
  int Ptraded_local_eqn;
 
- ///  The Data that contains the traded pressure
+ /// The Data that contains the traded pressure
  Data *Ptraded_data_pt;
  
 
@@ -1010,7 +1010,7 @@ private:
  /// Calculate the geometric shape functions at local coordinate s. 
  void shape(const Vector<double> &s, Shape &psi) const {psi[0] = 1.0;}
 
- ///  Calculate the geometric shape functions and
+ /// Calculate the geometric shape functions and
  ///derivatives w.r.t. local coordinates at local coordinate s
  void dshape_local(const Vector<double> &s, Shape &psi,
                            DShape &dpsids) const
@@ -1039,7 +1039,7 @@ public:
  /// Access function to the prescribed spine height
  double*& height_pt() {return Height_pt;}
 
- ///  Return the spatial (Eulerian) dimension of the element
+ /// Return the spatial (Eulerian) dimension of the element
  unsigned dim() const {return 0;} 
 
  /// Return the spatial dimension of local node n
@@ -1055,11 +1055,11 @@ public:
  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
                                    DenseMatrix<double> &jacobian);
 
- ///  Assign the local equation numbers and their coincidence with
+ /// Assign the local equation numbers and their coincidence with
  /// the global values
  void assign_additional_local_eqn_numbers();
 
- ///  Set the Data that contains the single pressure value
+ /// Set the Data that contains the single pressure value
  /// that is "traded" for the volume constraint.
  /// The Data item must only contain a single value!
  void set_traded_pressure_data(Data* traded_pressure_data_pt)
@@ -1241,7 +1241,7 @@ public:
    if(Frontal_solver) {delete linear_solver_pt();}
   }
 
- ///  Overload the continuation actions because we're 
+ /// Overload the continuation actions because we're 
  /// continuing in Ca which does not affect the mesh
 	void actions_after_change_in_global_parameter(double* 
 						      const &parameter_pt)
@@ -1254,7 +1254,7 @@ public:
    T = 100.0*Gamma/H;
   }
 
- ///  Spine heights/lengths are unknowns in the problem so their
+ /// Spine heights/lengths are unknowns in the problem so their
  /// values get corrected during each Newton step. However,
  /// changing their value does not automatically change the
  /// nodal positions, so we need to update all of them
@@ -1280,10 +1280,10 @@ public:
     }
   }
  
- ///  Update before solve: empty
+ /// Update before solve: empty
  void actions_before_newton_solve() {}
 
- ///  Update after solve can remain empty, because the update 
+ /// Update after solve can remain empty, because the update 
  /// is performed automatically after every Newton step.
  void actions_after_newton_solve() {}
 
@@ -1579,7 +1579,7 @@ private:
  /// Data value that represents the bubble pressure
  Data* Bubble_pressure_data_pt;
 
- ///  Data value that represents the vertical fraction 
+ /// Data value that represents the vertical fraction 
  /// between the upper and lower walls of the centre of the spines
  /// at the point of transition of the spine mesh
  Data* Mesh_fraction_at_transition_pt;

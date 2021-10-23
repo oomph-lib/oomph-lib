@@ -230,7 +230,7 @@ public:
  virtual double f(const unsigned &t, const unsigned &n,
                   const unsigned &i) const=0;
 
- /////  i-th component of df/dt at local node n. 
+ ///// i-th component of df/dt at local node n. 
  /// Uses suitably interpolated value for hanging nodes.
  double df_dt(const unsigned &n, const unsigned &i) const
   {

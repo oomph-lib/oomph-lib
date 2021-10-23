@@ -55,7 +55,7 @@ class UndeformedWall : public GeomObject
 
 public:
 
- ///  Constructor: arguments are the starting point and the height
+ /// Constructor: arguments are the starting point and the height
  /// above y=0.
  UndeformedWall(const double& x0, const double& h): GeomObject(1,2)
   {
@@ -64,7 +64,7 @@ public:
   }
  
 
- ///  Position vector at Lagrangian coordinate zeta 
+ /// Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position Vector
@@ -73,7 +73,7 @@ public:
   }
 
 
- ///  Parametrised position on object: r(zeta). Evaluated at
+ /// Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Calls steady version.
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -85,7 +85,7 @@ public:
   } // end of position
 
 
- ///  Posn vector and its  1st & 2nd derivatives
+ /// Posn vector and its  1st & 2nd derivatives
  /// w.r.t. to coordinates:
  /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i). 
  /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ = 
@@ -139,11 +139,11 @@ namespace Global_Physical_Variables
  /// Non-dimensional wall thickness. 
  double H=0.002;
  
- ///  Fluid structure interaction parameter: Ratio of stresses used for
+ /// Fluid structure interaction parameter: Ratio of stresses used for
  /// non-dimensionalisation of fluid to solid stresses. 
  double Q=4.0e-5;
 
- ///  Timescale ratio for solid (dependent parameter
+ /// Timescale ratio for solid (dependent parameter
  /// assigned in set_parameters())
  double Lambda_sq=2.0;
 
@@ -161,7 +161,7 @@ class FSIDrivenCavityProblem : public virtual Problem
 
  public :
 
- ///  Constructor: The arguments are the number of elements,
+ /// Constructor: The arguments are the number of elements,
  /// the lengths of the domain, the fractional height of the gap
  /// next to the moving lid and the period of the lid's oscillation 
  FSIDrivenCavityProblem(const unsigned& nx, 
@@ -196,7 +196,7 @@ class FSIDrivenCavityProblem : public virtual Problem
   } // end of access to wall mesh
 
 
- ///  Update the problem specs before solve (empty) 
+ /// Update the problem specs before solve (empty) 
  void actions_before_newton_solve(){}
 
  /// Update the problem after solve (empty)
@@ -222,7 +222,7 @@ class FSIDrivenCavityProblem : public virtual Problem
   }
 
 
- ///  Update before checking Newton convergence: Update the
+ /// Update before checking Newton convergence: Update the
  /// nodal positions in the fluid mesh in response to possible 
  /// changes in the wall shape
  void actions_before_newton_convergence_check()
@@ -269,7 +269,7 @@ protected :
  /// Pointer to control node on the wall
  Node* Wall_node_pt;
 
- /// Pointer to geometric object (one Lagrangian, two Eulerian 
+ ///Pointer to geometric object (one Lagrangian, two Eulerian 
  /// coordinates) that will be built from the wall mesh
  MeshAsGeomObject* Wall_geom_object_pt;
 

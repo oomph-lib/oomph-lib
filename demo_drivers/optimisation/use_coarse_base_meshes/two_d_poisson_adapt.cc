@@ -61,7 +61,7 @@ class SimpleRefineableRectangularQuadMesh :
 
 public: 
 
- ///   Pass number of elements in the horizontal 
+ ///  Pass number of elements in the horizontal 
  /// and vertical directions, and the corresponding dimensions.
  /// Timestepper defaults to Static.
  SimpleRefineableRectangularQuadMesh(const unsigned &Nx,
@@ -150,7 +150,7 @@ class RefineablePoissonProblem : public Problem
 
 public:
 
- ///  Constructor: Pass pointer to source function and number of 
+ /// Constructor: Pass pointer to source function and number of 
  /// refinements for the base mesh. Mesh has 2^|n_power| x 2^|n_power| 
  /// elements. If n_power>0 this is achieved by building a base mesh
  /// with that number of elements; if  n_power<0, we apply the
@@ -161,7 +161,7 @@ public:
  /// Destructor (empty)
  ~RefineablePoissonProblem(){};
 
- ///  Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
@@ -174,15 +174,15 @@ public:
  /// Treat the problem as being linear
  void set_problem_is_linear() {Problem::Problem_is_nonlinear = false;}
 
- ///  Return the flag to determine whether the problem is being
+ /// Return the flag to determine whether the problem is being
  /// treated as linear or nonlinear
  bool is_problem_nonlinear() const {return Problem::Problem_is_nonlinear;}
 
- ///  Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
 
- ///  Overloaded version of the Problem's access function to 
+ /// Overloaded version of the Problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  SimpleRefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 

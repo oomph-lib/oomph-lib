@@ -127,13 +127,13 @@ public:
  /// Destructor. Empty
  ~RefineableAdvectionDiffusionPipeProblem(){}
 
- ///  Set the initial state of the system
+ /// Set the initial state of the system
  void set_initial_condition();
 
- ///  Doc the solution.
+ /// Doc the solution.
  void doc_solution();
 
- ///  Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -152,7 +152,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-///  Constructor for AdvectionDiffusion problem
+/// Constructor for AdvectionDiffusion problem
 //========================================================================
 template<class ELEMENT>
 RefineableAdvectionDiffusionPipeProblem<ELEMENT>::

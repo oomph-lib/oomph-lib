@@ -158,7 +158,7 @@ public:
    Bulk_mesh_pt->node_update();
   }
 
- ///  Doc the solution.
+ /// Doc the solution.
  void doc_solution(DocInfo& doc_info);
 
  /// Do steady run up to maximum time t_max with given timestep dt
@@ -166,21 +166,21 @@ public:
 
 private:
 
- ///  Update the problem specs before solve
+ /// Update the problem specs before solve
  /// Re-set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve(); 
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
   
- ///  Create Axisymmetric Advection Diffusion flux elements on boundary b of 
+ /// Create Axisymmetric Advection Diffusion flux elements on boundary b of 
  /// the Mesh pointed to by bulk_mesh_pt and add them to the Mesh 
  /// object pointed to by surface_mesh_pt
  void create_flux_elements(const unsigned &b, 
                            Mesh* const &bulk_mesh_pt,
                            Mesh* const &surface_mesh_pt);
 
- ///  Delete Axisymmetric Advection Diffusion flux elements and wipe the surface mesh
+ /// Delete Axisymmetric Advection Diffusion flux elements and wipe the surface mesh
  void delete_flux_elements(Mesh* const &surface_mesh_pt);
 
  /// Pointer to the "bulk" mesh
@@ -228,7 +228,7 @@ private:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-///  Constructor for convection problem
+/// Constructor for convection problem
 //========================================================================
 template<class ELEMENT>
 AxisymFreeSurfaceNozzleAdvDiffRobinProblem<ELEMENT>::
@@ -443,7 +443,7 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned &n_r,
 } // end of constructor
 
 //===================start_of_actions_before_newton_solve================
-///  Update the problem specs before solve: (Re-)set boundary conditions
+/// Update the problem specs before solve: (Re-)set boundary conditions
 /// just to be on the safe side...
 //========================================================================
 template<class ELEMENT>

@@ -80,11 +80,11 @@ namespace GlobalPhysicalVariables
  /// Product of Reynolds number and inverse of Froude number
  double ReInvFr = 50.0; // (Fr = 1)
 
- ///  Ratio of viscosity in upper fluid to viscosity in lower
+ /// Ratio of viscosity in upper fluid to viscosity in lower
  /// fluid. Reynolds number etc. is based on viscosity in lower fluid.
  double Viscosity_Ratio = 0.1;
 
- ///  Ratio of density in upper fluid to density in lower
+ /// Ratio of density in upper fluid to density in lower
  /// fluid. Reynolds number etc. is based on density in lower fluid.
  double Density_Ratio = 1.0;
 
@@ -141,7 +141,7 @@ public:
 
 
 //=====start_of_base_state_problem_class=================================
-///  Base state problem class for viscous two-layer rotating
+/// Base state problem class for viscous two-layer rotating
 /// cylinder problem
 //=======================================================================
 template<class BASE_ELEMENT,class TIMESTEPPER>
@@ -203,7 +203,7 @@ private:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- ///  Actions before the timestep (update the the time-dependent 
+ /// Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() {}
 
@@ -595,7 +595,7 @@ public:
 
 private:
 
- ///  Update mesh to have nodal positions equal to that of the
+ /// Update mesh to have nodal positions equal to that of the
  /// base state mesh
  void actions_before_newton_convergence_check()
   {
@@ -651,7 +651,7 @@ private:
  /// Index at which the i-th velocity component is stored
  Vector<unsigned> U_nodal_index;
 
- ///  Index at which the i-th component of the perturbation
+ /// Index at which the i-th component of the perturbation
  /// to the nodal coordinate is stored.
  Vector<unsigned> Xhat_nodal_index;
 

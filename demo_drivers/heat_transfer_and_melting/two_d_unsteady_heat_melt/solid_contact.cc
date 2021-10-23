@@ -114,11 +114,11 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
  
- ///  Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
   
 
- ///  Actions before next timestep
+ /// Actions before next timestep
  void actions_before_implicit_timestep()
   {
    // Amplitude of oscillation
@@ -163,7 +163,7 @@ public:
    rebuild_global_mesh();
   }
  
- ///  Actions after adapt: 
+ /// Actions after adapt: 
  /// Setup the problem again -- remember that the mesh has been
  /// completely rebuilt and its element's don't have any
  /// pointers to source fcts etc. yet
@@ -259,7 +259,7 @@ private:
   }
 
 
- ///  Helper function to (re-)set boundary condition
+ /// Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup()
   {
@@ -362,7 +362,7 @@ private:
  // Setup labels for output
  DocInfo Doc_info;
 
- ///  Backup of Surface_contact_mesh_pt so the Lagrange multipliers
+ /// Backup of Surface_contact_mesh_pt so the Lagrange multipliers
  /// can be projected across
  BackupMeshForProjection<TElement<1,3> >* Backed_up_surface_contact_mesh_pt;
 
@@ -605,7 +605,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 
 
 //=======start_of_main====================================================
-///  Driver code
+/// Driver code
 //========================================================================
 int main(int argc, char* argv[])
 {

@@ -50,7 +50,7 @@ namespace oomph
 namespace IntersectionChecker
 {
 
- ///  Check if finite-length line segments specified by end points
+ /// Check if finite-length line segments specified by end points
  /// intersect (true) or not (false). From
  /// http://paulbourke.net/geometry/lineline2d/
  /// C++ contribution by Damian Coventry.
@@ -175,7 +175,7 @@ public:
   }
  
  
- ///  Enable smoothing of shadow; optional argument provides
+ /// Enable smoothing of shadow; optional argument provides
  /// value for tanh smoothing factor (defaults to 100)
  void enable_smoothed_sun_shadow(const double& alpha_tanh_smooth_sun_shadow=
                                  100.0)
@@ -184,13 +184,13 @@ public:
   Alpha_tanh_smooth_sun_shadow=alpha_tanh_smooth_sun_shadow;
  }
  
- ///  Disable smoothing of shadow
+ /// Disable smoothing of shadow
  void disable_smoothed_sun_shadow()
  {
   Smoothed_sun_shadow=false;
  }
 
- ///  Disable smoothing of shadow
+ /// Disable smoothing of shadow
  bool smoothed_sun_shadow_is_enabled()
  {
   return Smoothed_sun_shadow;
@@ -214,7 +214,7 @@ public:
   {return Atmospheric_radiation_fct_pt;}
 
   
- ///  Update limiting angles for diffuse radiation, given the
+ /// Update limiting angles for diffuse radiation, given the
  /// pointers to nodes that make up the "upper boundary"
  /// that can potentially shield the integration points from diffuse
  /// radiation
@@ -222,7 +222,7 @@ public:
                              shielding_node_pt);
 
 
- ///  Get the atmospheric radiation as fct of integration point
+ /// Get the atmospheric radiation as fct of integration point
  /// index, time, Eulerian coordinate and outer unit normal. Virtual
  /// so it can be overloaded in multiphysics problems
  virtual double atmospheric_radiation(const unsigned& intpt,
@@ -237,12 +237,12 @@ public:
                                     const double& radius);
  
 
-///  Output min angle of cone of diffuse radiation for 
+/// Output min angle of cone of diffuse radiation for 
 /// all integration points
 void output_diffuse_radiation_cone_min_angle(std::ostream &outfile,
                                              const double& radius);
 
-///  Output max angle of cone of diffuse radiation for 
+/// Output max angle of cone of diffuse radiation for 
 /// all integration points
 void output_diffuse_radiation_cone_max_angle(std::ostream &outfile,
                                              const double& radius);
@@ -263,13 +263,13 @@ protected:
  /// Factor for tanh profile to smooth solar shadows
  double Alpha_tanh_smooth_sun_shadow;
 
-  ///  Vector of pairs storing max. and minimum angle for exposure
+  /// Vector of pairs storing max. and minimum angle for exposure
  /// to diffuse atmospheric radiation for each integration point.
  /// Initialised to 0 and pi (full radiation from semicircle above
  /// integration point)
  Vector<std::pair<double,double> > Diffuse_limit_angles;
 
- ///  Pointer to function that specifies atmospheric
+ /// Pointer to function that specifies atmospheric
  /// radiation in terms of directional solar flux (unit vector and magnitude)
  /// and total diffusive radiation (which is later weighted by diffuse limiting
  /// angles). Input argument: time.
@@ -280,7 +280,7 @@ protected:
 
   private:
 
- ///  Private helper function to check if the straight line
+ /// Private helper function to check if the straight line
  /// connecting (x_prev,y_prev) and (x_next,y_next) jumps
  /// quadrants (in which case crossing_quadrants is returned as true)
  /// and what increment to the winding number this results in.
@@ -302,7 +302,7 @@ protected:
 
 
 //=====================================================================
-///  Get the atmospheric radiation as fct of integration point
+/// Get the atmospheric radiation as fct of integration point
 /// index, time, Eulerian coordinate and outer unit normal. Virtual
 /// so it can be overloaded in multiphysics problems
 //=====================================================================
@@ -398,7 +398,7 @@ double SolarRadiationBase::atmospheric_radiation(const unsigned& intpt,
 
 
 //====================================================================
-///  Private helper function to check if the straight line
+/// Private helper function to check if the straight line
 /// connecting (x_prev,y_prev) and (x_next,y_next) jumps
 /// quadrants (in which case crossing_quadrants is returned as true)
 /// and what increment to the winding number this results in.
@@ -520,7 +520,7 @@ void SolarRadiationBase::check_quadrant_jump(const double& x_prev,
 }
 
 //=====================================================================
-///  Update limiting angles for diffuse radiation, given the
+/// Update limiting angles for diffuse radiation, given the
 /// Vector of pointers to nodes that make up the "upper boundary"
 /// that can potentially shield the integration points from diffuse
 /// radiation
@@ -860,7 +860,7 @@ void SolarRadiationBase::check_quadrant_jump(const double& x_prev,
 
 
 //=====================================================================
-///  Output cone of diffuse radiation for all integration points
+/// Output cone of diffuse radiation for all integration points
 //=====================================================================
 void SolarRadiationBase::output_diffuse_radiation_cone(
  std::ostream &outfile, const double& radius)
@@ -914,7 +914,7 @@ void SolarRadiationBase::output_diffuse_radiation_cone(
 
 
 //=====================================================================
-///  Output max angle of cone of diffuse radiation for 
+/// Output max angle of cone of diffuse radiation for 
 /// all integration points
 //=====================================================================
 void SolarRadiationBase::output_diffuse_radiation_cone_max_angle(
@@ -963,7 +963,7 @@ void SolarRadiationBase::output_diffuse_radiation_cone_max_angle(
   }
 }
 //=====================================================================
-///  Output min angle of cone of diffuse radiation for 
+/// Output min angle of cone of diffuse radiation for 
 /// all integration points
 //=====================================================================
 void SolarRadiationBase::output_diffuse_radiation_cone_min_angle(
@@ -1015,7 +1015,7 @@ void SolarRadiationBase::output_diffuse_radiation_cone_min_angle(
 
 
 //=====================================================================
-///  Output illumination angles for all integration points
+/// Output illumination angles for all integration points
 //=====================================================================
 void SolarRadiationBase::output_limiting_angles(std::ostream &outfile)
 {
@@ -1063,7 +1063,7 @@ void SolarRadiationBase::output_limiting_angles(std::ostream &outfile)
 
 
 //=====================================================================
-///  Output illumination angles for all integration points
+/// Output illumination angles for all integration points
 //=====================================================================
 void SolarRadiationBase::output_atmospheric_radiation(std::ostream &outfile)
 {
@@ -1191,7 +1191,7 @@ public:
   }
 
 
- ///  Compute the element's contribution to Stefan Boltzmann
+ /// Compute the element's contribution to Stefan Boltzmann
  /// radiation onto point at r_illuminated with local outer unit
  /// normal n_illuminated,
  /// using the integration points (in current element) contained
@@ -1210,7 +1210,7 @@ public:
     outfile);
   }
 
- ///  Compute the element's contribution to Stefan Boltzmann
+ /// Compute the element's contribution to Stefan Boltzmann
  /// radiation onto point at r_illuminated with local outer unit
  /// normal n_illuminated,
  /// using the integration points (in current element) contained
@@ -1231,7 +1231,7 @@ public:
    }
  }
        
- ///  Set illumination info: For integration point, ipt,
+ /// Set illumination info: For integration point, ipt,
  /// we store all pairs identifying illuminating elements
  /// (via pointer to element and indices of illuminating
  /// integration points):
@@ -1297,17 +1297,17 @@ public:
 
   }
 
- ///  Output Stefan Boltzmann radiation: x,y,in,out,n_x,n_y
+ /// Output Stefan Boltzmann radiation: x,y,in,out,n_x,n_y
  void output_stefan_boltzmann_radiation(std::ostream &outfile);
 
- ///  Output Stefan Boltzmann radiation: Plots rays from illuminated
+ /// Output Stefan Boltzmann radiation: Plots rays from illuminated
  /// integration point to illuminating ones (and back).
  void output_stefan_boltzmann_radiation_rays(
   std::ostream &outfile, 
   const unsigned& integration_point=UINT_MAX); 
 
 
- ///  Compute the incoming Stefan Boltzmann radiation
+ /// Compute the incoming Stefan Boltzmann radiation
  /// onto integration point ipt -- input externally pre-computed
  /// Eulerian coordinate of illuminated integration point, r_illuminated,
  /// and outer unit normal to that point, n_illuminated.
@@ -1346,7 +1346,7 @@ public:
  /// Pointer to non-dim zero centrigrade offset in Stefan Boltzmann law
  double* Theta_0_pt;
 
- ///  Illumination info: For each integration point, ipt,
+ /// Illumination info: For each integration point, ipt,
  /// we store all pairs identifying illuminating elements
  /// (via pointer to element and illumnating integration points):
  ///
@@ -1366,7 +1366,7 @@ public:
 
 
 //=====================================================================
-///  Compute the element's contribution to Stefan Boltzmann radiation
+/// Compute the element's contribution to Stefan Boltzmann radiation
 /// onto point at r_illuminated with local outer unit normal n_illuminated,
 /// using the integration points (in current element) contained
 /// in visible_intpts_in_current_element.
@@ -1557,7 +1557,7 @@ void StefanBoltzmannRadiationBase::output_stefan_boltzmann_radiation_rays(
 
 
 //======================================================================
-///  A class for elements that allow the imposition of (mutual)
+/// A class for elements that allow the imposition of (mutual)
 /// Stefan Boltzmann heat flux on the boundaries of UnsteadyHeat elements.
 /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
 /// policy class.
@@ -1573,7 +1573,7 @@ public virtual FaceGeometry<ELEMENT>,
  
 public:
 
- ///  Constructor, takes the pointer to the "bulk" element and the
+ /// Constructor, takes the pointer to the "bulk" element and the
  /// index of the face to be created
  StefanBoltzmannUnsteadyHeatFluxElement(FiniteElement* const &bulk_el_pt,
                               const int &face_index);
@@ -1585,7 +1585,7 @@ public:
    BrokenCopy::broken_copy("StefanBoltzmannUnsteadyHeatFluxElement");
   }
  
- ///  Change integration scheme (overloads underlying version and
+ /// Change integration scheme (overloads underlying version and
  /// and resizes lookup schemes introduced in this class.
  void set_integration_scheme(Integral* const &integral_pt)
  {
@@ -1594,7 +1594,7 @@ public:
   Stefan_boltzmann_illumination_info.resize(n_intpt);
  }
 
- ///  Specify the value of nodal zeta from the face geometry:
+ /// Specify the value of nodal zeta from the face geometry:
  /// The "global" intrinsic coordinate of the element when
  /// viewed as part of a geometric object should be given by
  /// the FaceElement representation, by default (needed to break
@@ -1604,7 +1604,7 @@ public:
  {return FaceElement::zeta_nodal(n,k,i);}
  
  
- ///  Generalised output function to include stefan boltzmann information:
+ /// Generalised output function to include stefan boltzmann information:
  /// temperature, total incoming flux, incoming s.b. flux, outgoing s.b. flux, 
  /// outer unit normal. Note that total incoming flux is simply given
  /// by difference between incoming and outgoing radiation since we don't
@@ -1709,7 +1709,7 @@ public:
   protected:
  
 
- ///  Overload the function that determines the prescribed flux 
+ /// Overload the function that determines the prescribed flux 
  /// at a given spatial
  /// position, x, the outer unit normal, n, and the continuous time. 
  /// We also allow an explicit dependendence on the integration point, ipt,
@@ -1835,13 +1835,13 @@ namespace StefanBoltzmannHelper
  /// Number of bins in y direction
  unsigned Ny_bin=1000;
  
- ///  Number of sampling points in element to form segments with which
+ /// Number of sampling points in element to form segments with which
  /// we check intersection with ray
  unsigned Nsample=10;
  
  
  //======================================================================
- ///  Helper function to setup or use bin that is used to
+ /// Helper function to setup or use bin that is used to
  /// locate intersections of rays with boundaries.
  ///
  /// Args:  -- Two vectors, ray_vertex[0] and ray_vertex[1] which define

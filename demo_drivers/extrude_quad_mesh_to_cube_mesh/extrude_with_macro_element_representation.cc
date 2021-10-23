@@ -40,12 +40,12 @@ using namespace oomph;
 ////////////////////////////////////////////////////////////////////////
 
 //======start_of_OscillatingCylinder_class================================
-///  Oscillating cylinder class
+/// Oscillating cylinder class
 //========================================================================
 class OscillatingCylinder : public GeomObject
 {
 public:
-  ///  Constructor: Pass in the radius, the amplitude of the cylinder
+  /// Constructor: Pass in the radius, the amplitude of the cylinder
   /// motion, the simulation Strouhal number and a pointer to time object.
   OscillatingCylinder(double* radius_pt,
                       double* amplitude_pt,
@@ -73,7 +73,7 @@ public:
     return Time_pt;
   } // End of time_pt
 
-  ///  Current position vector to material point at Lagrangian
+  /// Current position vector to material point at Lagrangian
   /// coordinate xi (steady version)
   void position(const Vector<double>& xi,
                 Vector<double>& r) const
@@ -85,7 +85,7 @@ public:
     r[1]=(*Radius_pt)*sin(xi[0]);
   } // End of position
 
-  ///  Current position vector to material point at Lagrangian
+  /// Current position vector to material point at Lagrangian
   /// coordinate xi (unsteady version). Implementation includes a
   /// transition phase where the cylinder oscillates to a smaller
   /// amplitude than the target value. Used to ensure that the solution
@@ -128,7 +128,7 @@ public:
     r[1]+=translation;
   } // End of position
 
-  ///  Parametrised position on object: r(zeta). Evaluated at
+  /// Parametrised position on object: r(zeta). Evaluated at
   /// the continuous time value, t.
   virtual void position(const double& t,
                         const Vector<double>& xi,
@@ -147,7 +147,7 @@ public:
     r[1]+=translation;
   } // End of position
 
-  ///  Velocity at any given point on the rigid cylinder at time, t
+  /// Velocity at any given point on the rigid cylinder at time, t
   virtual void velocity(const double& t, Vector<double>& u) const
   {
     // Scaling factor

@@ -123,7 +123,7 @@ private:
  /// No actions required after solve step
  void actions_after_newton_solve() {}
 
- ///  Actions before the timestep: For maximum stability, reset
+ /// Actions before the timestep: For maximum stability, reset
  /// the current nodal positions to be the "stress-free" ones.
  void actions_before_implicit_timestep()
   {
@@ -328,7 +328,7 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
 
 
 //==start_of_set_initial_condition========================================
-///  Set initial conditions: Set all nodal velocities to zero and
+/// Set initial conditions: Set all nodal velocities to zero and
 /// initialise the previous velocities and nodal positions to correspond
 /// to an impulsive start
 //========================================================================
@@ -358,7 +358,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
 
 
 //==start_of_set_boundary_conditions======================================
-///  Set boundary conditions: Set both velocity components to zero
+/// Set boundary conditions: Set both velocity components to zero
 /// on the bottom (solid) wall and the horizontal component only to zero
 /// on the side (periodic) boundaries
 //========================================================================

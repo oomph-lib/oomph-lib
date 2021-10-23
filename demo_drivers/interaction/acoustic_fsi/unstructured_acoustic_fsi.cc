@@ -76,7 +76,7 @@ public:
  /// Destructor:  Empty
  ~MyStraightLine(){}
  
- ///  Position Vector at Lagrangian coordinate zeta 
+ /// Position Vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position Vector
@@ -107,10 +107,10 @@ private:
 namespace Global_Parameters
 {
 
- ///  Square of wavenumber for the Helmholtz equation
+ /// Square of wavenumber for the Helmholtz equation
  double K_squared=10.0;
  
- ///  Radius of outer boundary of Helmholtz domain
+ /// Radius of outer boundary of Helmholtz domain
  double Outer_radius=4.0; 
 
  /// Order of absorbing/appproximate boundary condition
@@ -204,19 +204,19 @@ private:
  // Complete problem setup
  void complete_problem_setup(); 
 
- ///  Create solid traction elements
+ /// Create solid traction elements
  void create_solid_traction_elements();
 
- ///  Create FSI traction elements
+ /// Create FSI traction elements
  void create_fsi_traction_elements();
  
- ///  Create Helmholtz FSI flux elements
+ /// Create Helmholtz FSI flux elements
  void create_helmholtz_fsi_flux_elements();
 
  /// Delete (face) elements in specified mesh 
  void delete_face_elements(Mesh* const & boundary_mesh_pt);
  
- ///  Create ABC face elements 
+ /// Create ABC face elements 
  void create_helmholtz_ABC_elements();
 
  /// Setup interaction
@@ -237,7 +237,7 @@ private:
  /// Pointer to mesh of Helmholtz FSI flux elements
  Mesh* Helmholtz_fsi_flux_mesh_pt;
  
- ///  Pointer to mesh containing the ABC elements
+ /// Pointer to mesh containing the ABC elements
  Mesh* Helmholtz_outer_boundary_mesh_pt;
  
  /// Boundary ID of upper symmetry boundary

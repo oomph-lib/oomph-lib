@@ -500,18 +500,18 @@ namespace oomph
   /// ??ds
   double min_element_size();
 
-  ///  Write some general data about the previous time step to a
+  /// Write some general data about the previous time step to a
   /// trace file. Extend by overloading write_additional_trace_data(...).
   void write_trace(const unsigned& t_hist=0);
 
 
-  ///  Overload to write problem specific data into trace
+  /// Overload to write problem specific data into trace
   /// file. Note: don't add any line endings, seperate data with the
   /// Trace_seperator string (BEFORE each data entry).
   virtual void write_additional_trace_data(const unsigned& t_hist,
 					   std::ofstream& trace_file) const {}
 
-  ///  Overload to write problem specific headers into trace
+  /// Overload to write problem specific headers into trace
   /// file. Note: don't add any line endings, seperate headers with the
   /// Trace_seperator string (BEFORE each data entry).
   virtual void write_additional_trace_headers(std::ofstream& trace_file)
@@ -523,12 +523,12 @@ namespace oomph
   virtual void initial_doc_additional() const {}
 
 
-  ///  Outputs to be done at the start of a run (i.e. outputing
+  /// Outputs to be done at the start of a run (i.e. outputing
   /// basic info on command line args etc, writing trace file headers,
   /// outputting initial conditions).
   void initial_doc();
 
-  ///  Outputs to be done at the end of a run (e.g. closing tags
+  /// Outputs to be done at the end of a run (e.g. closing tags
   /// for XML files).
   void final_doc()
   {
@@ -560,7 +560,7 @@ namespace oomph
    final_doc_additional();
   }
 
-  ///  General output function: output to trace file. Maybe output
+  /// General output function: output to trace file. Maybe output
   /// Jacobian depending on Doc_info.output_jacobian. Maybe output full
   /// solution depending on should_doc_this_step(..) function. Maybe
   /// output ltes depending on value of Output_ltes. Extend by
@@ -623,7 +623,7 @@ namespace oomph
    }
   }
 
-  ///  Error norm calculator
+  /// Error norm calculator
   virtual double get_error_norm(const unsigned& t_hist=0) const
   {
    if(Exact_solution_pt != 0)
@@ -662,7 +662,7 @@ namespace oomph
    }
   }
 
-  ///  Dummy solution norm calculator (overload in derived classes).
+  /// Dummy solution norm calculator (overload in derived classes).
   virtual double get_solution_norm(const unsigned& t_hist=0) const
   {
    DoubleVector dofs;
@@ -670,7 +670,7 @@ namespace oomph
    return dofs.norm();
   }
 
-  ///  should the previous step be doc'ed? Check if we went past an
+  /// should the previous step be doc'ed? Check if we went past an
   /// entry of Doc_times in the last step. If no Doc_times have been set
   /// then always output.
   virtual bool should_doc_this_step(const double &dt, const double &time) const
@@ -695,7 +695,7 @@ namespace oomph
    return false;
   }
 
-  ///  Assign a vector of times to output the full solution at.
+  /// Assign a vector of times to output the full solution at.
   void set_doc_times(Vector<double> &doc_times)
   {
    Doc_times = doc_times;
@@ -755,10 +755,10 @@ namespace oomph
   }
 
 
-  ///  Perform set up of problem.
+  /// Perform set up of problem.
   virtual void build(Vector<Mesh*>& bulk_mesh_pt);
 
-  ///  Get problem dimension (nodal dimension).
+  /// Get problem dimension (nodal dimension).
   const unsigned dim() const {return this->Dim;}
 
   virtual std::string problem_name() const {return "unknown";}
@@ -773,7 +773,7 @@ namespace oomph
   /// initial conditions.
   virtual void actions_after_set_initial_condition();
 
-  ///  Integrate a function given by func_pt over every element
+  /// Integrate a function given by func_pt over every element
   /// in every bulk mesh in this problem.
   virtual double integrate_over_problem(const ElementalFunction* func_pt,
 					const Integral* quadrature_pt=0) const;
@@ -921,7 +921,7 @@ namespace oomph
 
  protected:
 
-  ///  String to insert between fields in trace file. Use "; " by
+  /// String to insert between fields in trace file. Use "; " by
   /// default (so that "," or " " can be used for lists if needed).
   const std::string Trace_seperator;
   double Dummy_doc_data;
@@ -946,7 +946,7 @@ namespace oomph
    {BrokenCopy::broken_assign("MyProblem");}
  };
 
- ///  Integrate a function given by func_pt over every element
+ /// Integrate a function given by func_pt over every element
  /// in every bulk mesh in this problem.
  double MyProblem::integrate_over_problem(const ElementalFunction* func_pt,
 					  const Integral* quadrature_pt) const
@@ -963,7 +963,7 @@ namespace oomph
 		      OOMPH_EXCEPTION_LOCATION);
  }
 
- ///  Perform set up of problem.
+ /// Perform set up of problem.
  void MyProblem::build(Vector<Mesh*>& bulk_mesh_pt)
  {
   // Copy the first mesh's first timestepper to the problem

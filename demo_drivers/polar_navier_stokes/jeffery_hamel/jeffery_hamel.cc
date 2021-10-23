@@ -156,7 +156,7 @@ public:
  /// Update the after solve (empty)
  void actions_after_solve(){}
 
- ///  Update the problem specs before solve. 
+ /// Update the problem specs before solve. 
  /// Re-set velocity boundary conditions just to be on the safe side...
  void actions_before_solve()
  {

@@ -46,7 +46,7 @@ using namespace MathematicalConstants;
 
 
 //============start_of_MyUnitCircle====================================
-///  Unit circle as GeomObject
+/// Unit circle as GeomObject
 /// \f[ x = \cos(\xi)  \f]
 /// \f[ y = \sin(\xi)  \f]
 //=====================================================================
@@ -55,7 +55,7 @@ class MyUnitCircle : public GeomObject
 
 public:
 
- ///  Constructor: The circle is a 1D object
+ /// Constructor: The circle is a 1D object
  /// (i.e. it's parametrised by one intrinsic coordinate) in 2D space.
  /// Pass these arguments to the constructor of the GeomObject base class.
  MyUnitCircle() : GeomObject(1,2) {}
@@ -63,7 +63,7 @@ public:
  /// Destructor: Empty
  virtual ~MyUnitCircle() {}
 
- ///  Current position vector to material point at 
+ /// Current position vector to material point at 
  /// Lagrangian coordinate xi 
  void position(const Vector<double>& xi, Vector<double>& r) const
   {
@@ -73,7 +73,7 @@ public:
   } // end of position(...)
 
 
- ///  Parametrised position on object: r(xi). Evaluated at
+ /// Parametrised position on object: r(xi). Evaluated at
  /// previous time level. t=0: current time; t>0: previous
  /// time level. Circle is fixed -- simply call the steady version.
  void position(const unsigned& t, const Vector<double>& xi,
@@ -200,13 +200,13 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
 
- ///  Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve(){}
 
  /// Update the problem specs after timestep (empty)
  void actions_after_implicit_timestep(){}
 
- ///  Update the problem specs before next timestep: 
+ /// Update the problem specs before next timestep: 
  /// Set Dirchlet boundary conditions from exact solution.
  void actions_before_implicit_timestep();
  
@@ -216,29 +216,29 @@ public:
  /// Actions after adapt: Rebuild the mesh of prescribed flux elements
  void actions_after_adapt();
 
- ///  Set initial condition (incl previous timesteps) according
+ /// Set initial condition (incl previous timesteps) according
  /// to specified function. Note that his overloads the virtual
  /// function in the Problem base class and is therefore executed 
  /// automatically to re-assign the initial conditions during the 
  /// spatially adaptive solution at the first timestep.
  void set_initial_condition();
 
- ///  Create UnsteadyHeat flux elements on boundary b of the Mesh pointed
+ /// Create UnsteadyHeat flux elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the Mesh object pointed to by 
  /// surface_mesh_pt
  void create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
                            Mesh* const &surface_mesh_pt);
 
- ///  Delete UnsteadyHeat flux elements and wipe the surface mesh
+ /// Delete UnsteadyHeat flux elements and wipe the surface mesh
  void delete_flux_elements(Mesh* const &surface_mesh_pt);
 
  /// Doc the solution
  void doc_solution();
 
- ///  Dump problem data to allow for later restart
+ /// Dump problem data to allow for later restart
  void dump_it(ofstream& dump_file);
 
- ///  Read problem data for restart
+ /// Read problem data for restart
  void restart(ifstream& restart_file);
 
  /// Pointer to bulk mesh
@@ -481,7 +481,7 @@ RefineableUnsteadyHeatProblem<ELEMENT>::~RefineableUnsteadyHeatProblem()
 
 
 //=========start of actions_before_implicit_timestep===============================
-///  Actions before timestep: Set the  boundary conditions 
+/// Actions before timestep: Set the  boundary conditions 
 /// for the current time.
 //========================================================================
 template<class ELEMENT>

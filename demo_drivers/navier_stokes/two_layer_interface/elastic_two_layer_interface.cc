@@ -67,11 +67,11 @@ namespace Global_Physical_Variables
  /// Product of Reynolds number and inverse of Froude number
  double ReInvFr = 5.0;
 
- ///  Ratio of viscosity in upper fluid to viscosity in lower
+ /// Ratio of viscosity in upper fluid to viscosity in lower
  /// fluid. Reynolds number etc. is based on viscosity in lower fluid.
  double Viscosity_Ratio = 0.1;
 
- ///  Ratio of density in upper fluid to density in lower
+ /// Ratio of density in upper fluid to density in lower
  /// fluid. Reynolds number etc. is based on density in lower fluid.
  double Density_Ratio = 0.5;
 
@@ -105,7 +105,7 @@ class ElasticRefineableTwoLayerMesh :
 
 public:
 
- ///  Constructor: Pass number of elements in x-direction, number of
+ /// Constructor: Pass number of elements in x-direction, number of
  /// elements in y-direction in bottom and top layer, respectively,
  /// axial length and height of top and bottom layers, a boolean
  /// flag to make the mesh periodic in the x-direction, and pointer 
@@ -201,7 +201,7 @@ private:
  /// No actions required after solve step
  void actions_after_newton_solve() {}
 
- ///  Actions before the timestep: For maximum stability, reset
+ /// Actions before the timestep: For maximum stability, reset
  /// the current nodal positions to be the "stress-free" ones.
  void actions_before_implicit_timestep()
   {
@@ -429,7 +429,7 @@ InterfaceProblem()
 
 
 //==start_of_set_initial_condition========================================
-///  Set initial conditions: Set all nodal velocities to zero and
+/// Set initial conditions: Set all nodal velocities to zero and
 /// initialise the previous velocities and nodal positions to correspond
 /// to an impulsive start
 //========================================================================
@@ -459,7 +459,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
 
 
 //==start_of_set_boundary_conditions======================================
-///  Set boundary conditions: Set both velocity components
+/// Set boundary conditions: Set both velocity components
 /// to zero on the top and bottom (solid) walls and the horizontal
 /// component only to zero on the side (periodic) boundaries
 //========================================================================
@@ -550,7 +550,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::actions_after_adapt()
 
 
 //==start_of_create_interface_elements====================================
-///  Create interface elements between the two fluids in the mesh
+/// Create interface elements between the two fluids in the mesh
 /// pointed to by Bulk_mesh_pt and add the elements to the Mesh object
 /// pointed to by Surface_mesh_pt.
 //========================================================================

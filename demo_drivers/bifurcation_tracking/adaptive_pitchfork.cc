@@ -57,7 +57,7 @@ namespace Global_Physical_Variables
 ////////////////////////////////////////////////////////////////////////
 
 //============================================================================
-///  A class to do comparison of the nodes based on
+/// A class to do comparison of the nodes based on
 /// lexicographical ordering in the Cartesian coordinates.
 /// This is required to symmetrise eigenfunction (which is a bit of a hack)
 //============================================================================
@@ -132,18 +132,18 @@ public:
  /// Destructor to clean up memory
  ~RefineablePorousChannelProblem();
 
- ///  Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions();
 
- /// No actions are required after the change in bifurcation parameter.
+ ///No actions are required after the change in bifurcation parameter.
  ///This overloads the default which calls actions before and after 
  ///newton solve.
  void actions_after_change_in_bifurcation_parameter() {}
  
- ///  Update the boundary conditions before next timestep: 
+ /// Update the boundary conditions before next timestep: 
  void actions_before_implicit_timestep() {set_boundary_conditions();}
 
- /// Hacky function to symmetrise the problem
+ ///Hacky function to symmetrise the problem
  /// The idea is to sort all nodes in the mesh lexicographically
  /// Then we can loop over all nodes with the same x value and
  /// apply the appropriate symmetry conditions.
@@ -422,7 +422,7 @@ RefineablePorousChannelProblem<ELEMENT>::RefineablePorousChannelProblem()
 
 
 //=========start of actions_before_implicit_timestep======================
-///  Actions before timestep: update the domain, then reset the 
+/// Actions before timestep: update the domain, then reset the 
 /// boundary conditions for the current time.
 //========================================================================
 template<class ELEMENT>

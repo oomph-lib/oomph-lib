@@ -110,7 +110,7 @@ class LinearWaveProblem : public Problem
 
 public:
 
- ///  Constructor: pass number of elements in x and y directions
+ /// Constructor: pass number of elements in x and y directions
  /// bool indicating impulsive or "smooth" start 
  /// and pointer to source function
  LinearWaveProblem(const unsigned& nx, const unsigned& ny, 
@@ -123,13 +123,13 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- ///  Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem specs after solve (empty)
  void actions_after_implicit_timestep() {}
 
- ///  Update the problem specs before next timestep: 
+ /// Update the problem specs before next timestep: 
  /// Set time-dependent Dirchlet boundary from exact solution.
  void actions_before_implicit_timestep()
   {
@@ -193,13 +193,13 @@ public:
     Problem::mesh_pt());
   }
 
- ///  Set initial condition (incl history values)
+ /// Set initial condition (incl history values)
  void set_initial_condition();
 
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
 
- ///  Do unsteady run 
+ /// Do unsteady run 
  void unsteady_run();
 
 private:

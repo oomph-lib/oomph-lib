@@ -74,13 +74,13 @@ namespace Global_Physical_Variables
  /// Free surface cosine deformation parameter
  double Epsilon = 1.0e-3;
 
- ///  Surface Elasticity number (weak case)
+ /// Surface Elasticity number (weak case)
  double Beta = 3.6e-3;
 
- ///  Surface Peclet number
+ /// Surface Peclet number
  double Peclet_S = 4032.0;
 
- ///  Sufrace Peclet number multiplied by Strouhal number
+ /// Sufrace Peclet number multiplied by Strouhal number
  double Peclet_St_S = 1.0; 
  
 } // End of namespace

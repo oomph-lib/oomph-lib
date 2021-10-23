@@ -76,7 +76,7 @@ public:
    Doc_info.number()++;
   }
 
- ///  Update the problem specs before solve 
+ /// Update the problem specs before solve 
  void actions_before_newton_solve();
 
  /// Doc the solution

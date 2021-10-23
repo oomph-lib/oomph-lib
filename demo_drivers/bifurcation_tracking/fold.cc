@@ -94,7 +94,7 @@ class GelfandBratuElement : public QElement<1,NNODE_1D>
  
 
  
- ///  Calculate the elemental contributions to the global 
+ /// Calculate the elemental contributions to the global 
  /// residual vector for the weak form of the Gelfand-Bratu equation
  void fill_in_generic_residual_contribution(Vector<double> &residuals,
                                             DenseMatrix<double> &jacobian,
@@ -209,7 +209,7 @@ class GelfandBratuElement : public QElement<1,NNODE_1D>
   }
 
  
- ///  Calculate the elemental contributions to the derivatives of
+ /// Calculate the elemental contributions to the derivatives of
  /// the global residual vector and jacobian for the weak form of the 
  /// Gelfand-Bratu equation with respect to the passed parameter.
  void fill_in_generic_dresidual_contribution(

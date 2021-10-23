@@ -62,7 +62,7 @@ namespace Global_Physical_Variables
  ///Angle of incline of the slope (45 degrees)
  double Alpha = 1.0*atan(1.0);
 
- /// The Vector direction of gravity, set in main()
+ ///The Vector direction of gravity, set in main()
  Vector<double> G(2,0.0);
 
  ///The Capillary number
@@ -80,14 +80,14 @@ namespace Global_Physical_Variables
  ///Direction of the wall normal vector (at the inlet)
  Vector<double> Wall_normal;
 
- ///  Function that specifies the wall unit normal at the inlet
+ /// Function that specifies the wall unit normal at the inlet
  void wall_unit_normal_inlet_fct(const Vector<double> &x, 
                                  Vector<double> &normal)
  {
   normal=Wall_normal;
  }
 
- ///  Function that specified the wall unit normal at the outlet
+ /// Function that specified the wall unit normal at the outlet
  void wall_unit_normal_outlet_fct(const Vector<double> &x, 
                                  Vector<double> &normal)
  {
@@ -130,7 +130,7 @@ namespace Global_Physical_Variables
 }
 
 //=====================================================================
-/// Generic problem class that will form the base class for both 
+///Generic problem class that will form the base class for both 
 ///spine and elastic mesh-updates of the problem.
 ///Templated by the bulk element and interface element types
 //====================================================================
@@ -168,7 +168,7 @@ public:
  ///Take n_tsteps timesteps of size dt
  void timestep(const double &dt, const unsigned &n_tsteps);
 
- ///  Actions before the timestep 
+ /// Actions before the timestep 
  /// (update the time-dependent boundary conditions)
  void actions_before_implicit_timestep()
   {
@@ -188,7 +188,7 @@ public:
     }
   } //end_of_actions_before_implicit_timestep
 
- /// Function to add the traction boundary elements to boundaries
+ ///Function to add the traction boundary elements to boundaries
  /// 3(inlet) and 1(outlet) of the mesh
  void make_traction_elements()
   {
@@ -295,7 +295,7 @@ public:
     }
   } //end of make_free_surface_elements
 
- /// Complete the build of the problem setting all standard
+ ///Complete the build of the problem setting all standard
  ///parameters and boundary conditions
  void complete_build()
   {
@@ -584,7 +584,7 @@ public:
     } //End of horizontal loop over elements  
   } //end of constructor
 
- ///  General node update function implements pure virtual function 
+ /// General node update function implements pure virtual function 
  /// defined in SpineMesh base class and performs specific node update
  /// actions:  along vertical spines
  virtual void spine_node_update(SpineNode* spine_node_pt)
@@ -734,7 +734,7 @@ public:
    this->complete_build();
   } //end of constructor
 
- /// Update Lagrangian positions after each timestep 
+ ///Update Lagrangian positions after each timestep 
  ///(updated-lagrangian approach)
  void actions_after_implicit_timestep()
   {

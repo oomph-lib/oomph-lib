@@ -89,13 +89,13 @@ namespace Global_Physical_Variables
  /// Free surface cosine deformation parameter
  double Epsilon = 1.0e-3;
 
- ///  Surface Elasticity number
+ /// Surface Elasticity number
  double Beta = 0.1;
 
- ///  Alpha for absorption kinetics
+ /// Alpha for absorption kinetics
  double Alpha_absorption = 1.0;
 
- ///  K parameter that
+ /// K parameter that
  /// describes solubility number
  double K = 0.01;
 
@@ -115,13 +115,13 @@ namespace Global_Physical_Variables
  //to be 1/Pe, after dividing through by Pe
  double Diff = 1.0/Pe;
  
- ///  Surface Peclet number
+ /// Surface Peclet number
  double Peclet_S = 10000.0;
 
- ///  Sufrace Peclet number multiplied by Strouhal number
+ /// Sufrace Peclet number multiplied by Strouhal number
  double Peclet_St_S = 1.0; 
  
- ///  Pvd file -- a wrapper for all the different
+ /// Pvd file -- a wrapper for all the different
  /// vtu output files plus information about continuous time
  /// to facilitate animations in paraview
  ofstream Pvd_file;
@@ -206,7 +206,7 @@ protected:
    return dcdt;
   }
 
-  ///  Overload the Helper function to calculate the residuals and 
+  /// Overload the Helper function to calculate the residuals and 
   /// jacobian entries. This particular function ensures that the
   /// additional entries are calculated inside the integration loop
   void add_additional_residual_contributions_interface(
@@ -495,16 +495,16 @@ public:
   }
 
 
- ///  Access function for the specific mesh
+ /// Access function for the specific mesh
  ElasticRectangularQuadMesh<ELEMENT>*  Bulk_mesh_pt; 
 
- ///  Mesh for the free surface (interface) elements
+ /// Mesh for the free surface (interface) elements
  Mesh* Interface_mesh_pt;
 
- ///  Pointer to the constitutive law
+ /// Pointer to the constitutive law
  ConstitutiveLaw* Constitutive_law_pt;
 
- ///  Node for documentatin
+ /// Node for documentatin
  Node* Document_node_pt;
  
  /// Doc the solution

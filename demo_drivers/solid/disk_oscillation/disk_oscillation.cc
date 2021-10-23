@@ -58,7 +58,7 @@ namespace Global_Physical_Variables
  /// Pointer to constitutive law
  ConstitutiveLaw* Constitutive_law_pt=0;
 
- ///  Multiplier for inertia terms (needed for consistent assignment 
+ /// Multiplier for inertia terms (needed for consistent assignment 
  /// of initial conditions in Newmark scheme)
  double multiplier(const Vector<double>& xi)
  {
@@ -78,7 +78,7 @@ namespace Global_Physical_Variables
 
 
 //================disk_as_geom_object======================================
-///  Axisymmetrially oscillating disk with displacement
+/// Axisymmetrially oscillating disk with displacement
 /// field according to linear elasticity.
 //=========================================================================
 class AxisymOscillatingDisk : public GeomObject
@@ -86,7 +86,7 @@ class AxisymOscillatingDisk : public GeomObject
 
 public:
 
- ///  Constructor: 2 Lagrangian coordinate, 2 Eulerian coords. Pass 
+ /// Constructor: 2 Lagrangian coordinate, 2 Eulerian coords. Pass 
  /// amplitude of oscillation, Poisson ratio nu, and pointer to 
  /// global timestepper.
  AxisymOscillatingDisk(const double& ampl, const double& nu, 
@@ -95,18 +95,18 @@ public:
  /// Destructor (empty)
  ~AxisymOscillatingDisk(){}
 
- ///  Position vector at Lagrangian coordinate xi at present
+ /// Position vector at Lagrangian coordinate xi at present
  /// time
  void position(const Vector<double>& xi, Vector<double>& r) const;
 
- /// Parametrised velocity on object at current time: veloc = d r(xi)/dt.
+ ///Parametrised velocity on object at current time: veloc = d r(xi)/dt.
  void veloc(const Vector<double>& xi, Vector<double>& veloc);
 
- ///  Parametrised acceleration on object at current time: 
+ /// Parametrised acceleration on object at current time: 
  /// accel = d^2 r(xi)/dt^2.
  void accel(const Vector<double>& xi, Vector<double>& accel);
  
- ///  Parametrised j-th time-derivative on object at current time: 
+ /// Parametrised j-th time-derivative on object at current time: 
  /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
  void dposition_dt(const Vector<double>& xi, const unsigned& j, 
                   Vector<double>& drdt)
@@ -139,7 +139,7 @@ public:
   }
 
    
- ///  Residual of dispersion relation for use in black-box Newton method
+ /// Residual of dispersion relation for use in black-box Newton method
  /// which requires global (or static) functions. 
  /// Poisson's ratio is  passed as parameter.
  static void residual_for_dispersion(const Vector<double>& param, 
@@ -200,7 +200,7 @@ AxisymOscillatingDisk::AxisymOscillatingDisk(const double& ampl,
 
 
 //===============start_position===========================================
-///  Position Vector at Lagrangian coordinate xi at present
+/// Position Vector at Lagrangian coordinate xi at present
 /// time
 //========================================================================
 void AxisymOscillatingDisk::position(const Vector<double>& xi,
@@ -238,7 +238,7 @@ void AxisymOscillatingDisk::position(const Vector<double>& xi,
 
 
 //========================================================================
-/// Parametrised velocity on object at current time: 
+///Parametrised velocity on object at current time: 
 /// veloc = d r(xi)/dt.
 //========================================================================
 void AxisymOscillatingDisk::veloc(const Vector<double>& xi,
@@ -364,7 +364,7 @@ class ElasticRefineableQuarterCircleSectorMesh :
 
 public:
 
- ///  Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
  /// ones so that the initial configuration is the stress-free one.
  ElasticRefineableQuarterCircleSectorMesh<ELEMENT>(GeomObject* wall_pt,
                                          const double& xi_lo,
@@ -407,7 +407,7 @@ public:
 
 
 //========start_class=================================================== 
-///  Problem class to simulate small-amplitude oscillations of 
+/// Problem class to simulate small-amplitude oscillations of 
 /// a circular disk.
 //====================================================================== 
 template<class ELEMENT>

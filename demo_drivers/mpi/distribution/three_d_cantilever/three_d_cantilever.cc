@@ -62,7 +62,7 @@ class RefineableElasticQuarterTubeMesh :
 
 public:
 
- ///  Constructor:
+ /// Constructor:
  RefineableElasticQuarterTubeMesh(GeomObject* wall_pt,
                                   const Vector<double>& xi_lo,
                                   const double& fract_mid,
@@ -99,7 +99,7 @@ class ElasticQuarterTubeMesh : public virtual QuarterTubeMesh<ELEMENT>,
 
 public:
 
- ///  Constructor:
+ /// Constructor:
  ElasticQuarterTubeMesh(GeomObject* wall_pt,
                  const Vector<double>& xi_lo,
                  const double& fract_mid,
@@ -136,7 +136,7 @@ class RefineableElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
 
 public:
 
- ///  Constructor:
+ /// Constructor:
  RefineableElasticCubicMesh(const unsigned &nx, const unsigned &ny,
                             const unsigned &nz,
                             const double &a, const double &b,
@@ -172,7 +172,7 @@ class ElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
 
 public:
 
- ///  Constructor:
+ /// Constructor:
  ElasticCubicMesh(const unsigned &nx, const unsigned &ny, const unsigned &nz,
                   const double &a, const double &b, const double &c,
                   TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper) :
@@ -325,7 +325,7 @@ namespace Global_Physical_Variables
  /// Uniform pressure
  double P = 0.0;
 
- ///  Constant pressure load. The arguments to this function are imposed
+ /// Constant pressure load. The arguments to this function are imposed
  /// on us by the SolidTractionElements which allow the traction to
  /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the
  /// outer unit normal to the surface. Here we only need the outer unit
@@ -389,11 +389,11 @@ public:
 
 private:
 
- ///  Pass pointer to traction function to the
+ /// Pass pointer to traction function to the
  /// elements in the traction mesh
  void set_traction_pt();
 
- ///  Create traction elements
+ /// Create traction elements
  void create_traction_elements();
 
  /// Delete traction elements

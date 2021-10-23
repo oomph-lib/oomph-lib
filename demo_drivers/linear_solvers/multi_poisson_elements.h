@@ -66,7 +66,7 @@ class MultiPoissonEquations : public virtual FiniteElement
 
 public:
 
- ///  Function pointer to source function fct(x,f(x)) -- 
+ /// Function pointer to source function fct(x,f(x)) -- 
  /// x is a Vector! 
  typedef void (*MultiPoissonSourceFctPt)(const Vector<double>& x, 
                                          Vector<double>& f);
@@ -82,7 +82,7 @@ public:
    BrokenCopy::broken_copy("MultiPoissonEquations");
   } 
  
- ///  Return the index at which the unknown value
+ /// Return the index at which the unknown value
  /// is stored. The default value, i, is appropriate for single-physics
  /// problems, when there is only one variable, the value that satisfies
  /// the multi_poisson equation. 
@@ -93,14 +93,14 @@ public:
  {return i;}
 
 
- ///  returns the number of DOF types associated with this element:
+ /// returns the number of DOF types associated with this element:
  /// The number of fields
  unsigned ndof_types() const
  {
   return NFIELDS;
  }
  
- ///  Create a list of pairs for all unknowns in this element,
+ /// Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
  /// of the "DOF" that this unknown is associated with.
@@ -147,14 +147,14 @@ public:
  }
  
 
- ///  Number of scalars/fields output by this element. Reimplements
+ /// Number of scalars/fields output by this element. Reimplements
  /// broken virtual function in base class.
  unsigned nscalar_paraview() const
   {
    return NFIELDS;
   }
 
- ///  Write values of the i-th scalar field at the plot points. Needs 
+ /// Write values of the i-th scalar field at the plot points. Needs 
  /// to be implemented for each new specific element type.
  void scalar_value_paraview(std::ofstream& file_out,
                             const unsigned& i,
@@ -187,7 +187,7 @@ public:
     }
   }
 
- ///  Name of the i-th scalar field. Default implementation
+ /// Name of the i-th scalar field. Default implementation
  /// returns V1 for the first one, V2 for the second etc. Can (should!) be
  /// overloaded with more meaningful names in specific elements.
  std::string scalar_name_paraview(const unsigned& i) const
@@ -218,7 +218,7 @@ public:
    output(outfile,n_plot);
   }
 
- ///  Output FE representation of soln: x,y,u or x,y,z,u at 
+ /// Output FE representation of soln: x,y,u or x,y,z,u at 
  /// n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &n_plot);
 
@@ -229,7 +229,7 @@ public:
    output(file_pt,n_plot);
   }
 
- ///  C-style output FE representation of soln: x,y,u or x,y,z,u at 
+ /// C-style output FE representation of soln: x,y,u or x,y,z,u at 
  /// n_plot^DIM plot points
  void output(FILE* file_pt, const unsigned &n_plot);
 
@@ -237,7 +237,7 @@ public:
  void output_fct(std::ostream &outfile, const unsigned &n_plot, 
                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
- ///  Output exact soln: x,y,u_exact or x,y,z,u_exact at 
+ /// Output exact soln: x,y,u_exact or x,y,z,u_exact at 
  /// n_plot^DIM plot points (dummy time-dependent version to 
  /// keep intel compiler happy)
  virtual void output_fct(std::ostream &outfile, const unsigned &n_plot,
@@ -359,7 +359,7 @@ public:
  
 
 
- ///  Return FE representation of i-th function value u_multi_poisson(s) 
+ /// Return FE representation of i-th function value u_multi_poisson(s) 
  /// at local coordinate s
  inline double interpolated_u_multi_poisson(const unsigned& i,
                                             const Vector<double> &s) const
@@ -389,13 +389,13 @@ public:
   }
 
 
- ///  Self-test: Return 0 for OK
+ /// Self-test: Return 0 for OK
  unsigned self_test();
 
 
 protected:
 
- ///  Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// local coord. s; return  Jacobian of mapping
  virtual double dshape_and_dtest_eulerian_multi_poisson
   (const Vector<double> &s, 
@@ -404,7 +404,7 @@ protected:
    DShape &dtestdx) const=0;
  
  
- ///  Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// integration point ipt; return  Jacobian of mapping
  virtual double dshape_and_dtest_eulerian_at_knot_multi_poisson
   (const unsigned &ipt, 
@@ -414,7 +414,7 @@ protected:
    DShape &dtestdx) 
   const=0;
  
- ///  Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// integration point ipt; return Jacobian of mapping (J). Also compute
  /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
  virtual double dshape_and_dtest_eulerian_at_knot_multi_poisson(
@@ -427,7 +427,7 @@ protected:
   RankFourTensor<double> &d_dtestdx_dX,
   DenseMatrix<double> &djacobian_dX) const=0;
  
- ///  Compute element residual Vector only (if flag=and/or element 
+ /// Compute element residual Vector only (if flag=and/or element 
  /// Jacobian matrix 
  virtual void fill_in_generic_residual_contribution_multi_poisson(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
@@ -463,14 +463,14 @@ protected:
 
 private:
 
- ///  Static int that holds the number of variables at 
+ /// Static int that holds the number of variables at 
  /// nodes: always the same
  static const unsigned Initial_Nvalue;
  
   public:
 
 
- ///  Constructor: Call constructors for QElement and 
+ /// Constructor: Call constructors for QElement and 
  /// MultiPoisson equations
  QMultiPoissonElement() : QElement<DIM,NNODE_1D>(), 
   MultiPoissonEquations<DIM,NFIELDS>()
@@ -482,36 +482,36 @@ private:
    BrokenCopy::broken_copy("QMultiPoissonElement");
   } 
  
- ///   Required  # of `values' (pinned or dofs) 
+ ///  Required  # of `values' (pinned or dofs) 
  /// at node n
  inline unsigned required_nvalue(const unsigned &n) const 
   {return Initial_Nvalue;}
 
- ///  Output function:  
+ /// Output function:  
  ///  x,y,u   or    x,y,z,u
  void output(std::ostream &outfile)
   {MultiPoissonEquations<DIM,NFIELDS>::output(outfile);}
 
 
- ///   Output function:  
+ ///  Output function:  
  ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &n_plot)
   {MultiPoissonEquations<DIM,NFIELDS>::output(outfile,n_plot);}
 
 
- ///  C-style output function:  
+ /// C-style output function:  
  ///  x,y,u   or    x,y,z,u
  void output(FILE* file_pt)
   {MultiPoissonEquations<DIM,NFIELDS>::output(file_pt);}
 
 
- ///   C-style output function:  
+ ///  C-style output function:  
  ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(FILE* file_pt, const unsigned &n_plot)
   {MultiPoissonEquations<DIM,NFIELDS>::output(file_pt,n_plot);}
 
 
- ///  Output function for an exact solution:
+ /// Output function for an exact solution:
  ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
  void output_fct(std::ostream &outfile, const unsigned &n_plot,
                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
@@ -519,7 +519,7 @@ private:
 
 
 
- ///  Output function for a time-dependent exact solution.
+ /// Output function for a time-dependent exact solution.
  ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
  /// (Calls the steady version)
  void output_fct(std::ostream &outfile, const unsigned &n_plot,
@@ -537,7 +537,7 @@ private:
   Shape &test, DShape &dtestdx) const;
  
  
- ///  Shape, test functions & derivs. w.r.t. to global coords. at
+ /// Shape, test functions & derivs. w.r.t. to global coords. at
  /// integration point ipt. Return Jacobian.
  inline double dshape_and_dtest_eulerian_at_knot_multi_poisson
   (const unsigned& ipt,
@@ -547,7 +547,7 @@ private:
    DShape &dtestdx) 
   const;
  
- ///  Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// integration point ipt; return Jacobian of mapping (J). Also compute
  /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
  inline double dshape_and_dtest_eulerian_at_knot_multi_poisson(
@@ -679,7 +679,7 @@ template<unsigned DIM, unsigned NNODE_1D, unsigned NFIELDS>
 
   public:
  
- ///  Constructor: Call the constructor for the
+ /// Constructor: Call the constructor for the
  /// appropriate lower-dimensional QElement
   FaceGeometry() : QElement<DIM-1,NNODE_1D>() {}
 
@@ -700,7 +700,7 @@ template<unsigned NNODE_1D, unsigned NFIELDS>
   
    public:
   
-  ///  Constructor: Call the constructor for the
+  /// Constructor: Call the constructor for the
   /// appropriate lower-dimensional QElement
    FaceGeometry() : PointElement() {}
   
@@ -724,7 +724,7 @@ template<unsigned NNODE_1D, unsigned NFIELDS>
 
 /*  public: */
 
-/*   ///  Specify the values associated with field fld.  */
+/*   /// Specify the values associated with field fld.  */
 /*   /// The information is returned in a vector of pairs which comprise  */
 /*   /// the Data object and the value within it, that correspond to field fld.  */
 /*   Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld) */
@@ -759,13 +759,13 @@ template<unsigned NNODE_1D, unsigned NFIELDS>
 /*     return data_values; */
 /*    } */
 
-/*   ///  Number of fields to be projected: Just one */
+/*   /// Number of fields to be projected: Just one */
 /*   unsigned nfields_for_projection() */
 /*    { */
 /*     return 1; */
 /*    } */
  
-/*   ///  Number of history values to be stored for fld-th field */
+/*   /// Number of history values to be stored for fld-th field */
 /*   /// (includes current value!) */
 /*   unsigned nhistory_values_for_projection(const unsigned &fld) */
 /*   { */
@@ -785,14 +785,14 @@ template<unsigned NNODE_1D, unsigned NFIELDS>
 /*    return this->node_pt(0)->ntstorage();    */
 /*   } */
   
-/*   /// Number of positional history values */
+/*   ///Number of positional history values */
 /*   /// (Note: count includes current value!) */
 /*   unsigned nhistory_values_for_coordinate_projection() */
 /*    { */
 /*     return this->node_pt(0)->position_time_stepper_pt()->ntstorage(); */
 /*    } */
   
-/*   ///  Return Jacobian of mapping and shape functions of field fld */
+/*   /// Return Jacobian of mapping and shape functions of field fld */
 /*   /// at local coordinate s */
 /*   double jacobian_and_shape_of_field(const unsigned &fld,  */
 /*                                      const Vector<double> &s,  */
@@ -822,7 +822,7 @@ template<unsigned NNODE_1D, unsigned NFIELDS>
 
 
 
-/*   ///  Return interpolated field fld at local coordinate s, at time level */
+/*   /// Return interpolated field fld at local coordinate s, at time level */
 /*   /// t (t=0: present; t>0: history values) */
 /*   double get_field(const unsigned &t,  */
 /*                    const unsigned &fld, */

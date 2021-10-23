@@ -57,7 +57,7 @@ namespace BL_Squash
  /// Fraction of points in boundary layer
  double Fract_in_BL=0.5;
 
- ///  Mapping [0,1] -> [0,1] that re-distributes
+ /// Mapping [0,1] -> [0,1] that re-distributes
  /// nodal points across the channel width
  double squash_fct(const double& s)
  {
@@ -98,7 +98,7 @@ class UndeformedWall : public GeomObject
 
 public:
 
- ///  Constructor: arguments are the starting point and the height
+ /// Constructor: arguments are the starting point and the height
  /// above y=0.
  UndeformedWall(const double& x0, const double& h): GeomObject(1,2)
   {
@@ -107,7 +107,7 @@ public:
   }
  
 
- ///  Position vector at Lagrangian coordinate zeta 
+ /// Position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
    // Position Vector
@@ -116,7 +116,7 @@ public:
   }
 
 
- ///  Parametrised position on object: r(zeta). Evaluated at
+ /// Parametrised position on object: r(zeta). Evaluated at
  /// previous timestep. t=0: current time; t>0: previous
  /// timestep. Calls steady version.
  void position(const unsigned& t, const Vector<double>& zeta,
@@ -128,7 +128,7 @@ public:
   } // end of position
 
 
- ///  Posn vector and its  1st & 2nd derivatives
+ /// Posn vector and its  1st & 2nd derivatives
  /// w.r.t. to coordinates:
  /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i). 
  /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ = 
@@ -203,7 +203,7 @@ namespace Global_Physical_Variables
  /// External pressure
  double P_ext=0.0;
 
- ///  Load function: Apply a constant external pressure to the wall.
+ /// Load function: Apply a constant external pressure to the wall.
  /// Note:  This is the load without the fluid contribution!
  /// Fluid load gets added on by FSIWallElement.
  void load(const Vector<double>& xi, const Vector<double>& x,
@@ -216,7 +216,7 @@ namespace Global_Physical_Variables
  } //end of load
 
 
- ///  Fluid structure interaction parameter: Ratio of stresses used for
+ /// Fluid structure interaction parameter: Ratio of stresses used for
  /// non-dimensionalisation of fluid to solid stresses. 
  double Q=1.0e-5;
 
@@ -235,7 +235,7 @@ class FSICollapsibleChannelProblem : public Problem
 
  public :
 
-///  Constructor: The arguments are the number of elements and
+/// Constructor: The arguments are the number of elements and
 /// the lengths of the domain.
  FSICollapsibleChannelProblem(const unsigned& nup, 
                        const unsigned& ncollapsible,
@@ -303,13 +303,13 @@ class FSICollapsibleChannelProblem : public Problem
    actions_after_adapt();
   }
    
- ///  Update the problem specs before solve (empty) 
+ /// Update the problem specs before solve (empty) 
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
   
- ///  Update before checking Newton convergence: Update the
+ /// Update before checking Newton convergence: Update the
  /// nodal positions in the fluid mesh in response to possible 
  /// changes in the wall shape
  void actions_before_newton_convergence_check()
@@ -336,7 +336,7 @@ private :
  ///Number of elements in the x direction in the upstream part of the channel
  unsigned Nup;
 
- ///  Number of elements in the x direction in the collapsible part of 
+ /// Number of elements in the x direction in the collapsible part of 
  /// the channel
  unsigned Ncollapsible;
 
@@ -370,7 +370,7 @@ private :
 
 #endif
 
- ///  Pointer to the "surface" mesh that applies the traction at the
+ /// Pointer to the "surface" mesh that applies the traction at the
  /// inflow
  Mesh* Applied_fluid_traction_mesh_pt; 
  

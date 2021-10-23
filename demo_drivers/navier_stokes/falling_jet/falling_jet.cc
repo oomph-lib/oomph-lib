@@ -263,7 +263,7 @@ public:
    doc_solution();
   }
 
- ///  Update the problem specs before solve 
+ /// Update the problem specs before solve 
  void actions_before_newton_solve() { } 
 
  /// After adaptation: Pin redudant pressure dofs.
@@ -277,7 +277,7 @@ public:
  /// Doc the solution
  void doc_solution();
 
- ///  Overload generic access function by one that returns
+ /// Overload generic access function by one that returns
  /// a pointer to the specific  mesh
  ElasticQuarterTubeMesh<ELEMENT,ElasticSurfaceFluidInterfaceElement<ELEMENT> >* 
  mesh_pt() 

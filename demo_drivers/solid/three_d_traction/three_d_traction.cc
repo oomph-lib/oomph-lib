@@ -57,7 +57,7 @@ class ElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
 
 public:
 
- ///  Constructor: 
+ /// Constructor: 
  ElasticCubicMesh(const unsigned &nx, const unsigned &ny, 
                   const unsigned &nz,
                   const double &a, const double &b, 
@@ -90,7 +90,7 @@ class RefineableElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>,
 
 public:
 
- ///  Constructor: 
+ /// Constructor: 
  RefineableElasticCubicMesh(const unsigned &nx, const unsigned &ny, 
                             const unsigned &nz,
                             const double &a, const double &b, 
@@ -296,7 +296,7 @@ public:
    
   }
 
- ///  Update before solve: Empty
+ /// Update before solve: Empty
  void actions_before_newton_solve(){}
 
 private:

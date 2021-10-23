@@ -56,7 +56,7 @@ class RefineableQAxisymCrouzeixRaviartBoussinesqElement :
 
 public: 
 
- ///  Constructor: call the underlying constructors and 
+ /// Constructor: call the underlying constructors and 
  /// initialise the pointer to the Rayleigh number to point
  /// to the default value of 0.0.
  RefineableQAxisymCrouzeixRaviartBoussinesqElement() : 
@@ -76,7 +76,7 @@ public:
  ///Access function for the pointer to the Rayleigh number
  double* &ra_pt() {return Ra_pt;}
 
- ///  Call the underlying single-physics element's further_build()
+ /// Call the underlying single-physics element's further_build()
  /// functions and make sure that the pointer to the Rayleigh number
  /// is passed to the sons. Also make sure that if the external geometric
  /// Data was ignored in the father it's also ignored in the sons
@@ -103,7 +103,7 @@ public:
 
   }
 
- ///  Overload get_body_force_nst() to return the temperature-dependent
+ /// Overload get_body_force_nst() to return the temperature-dependent
  /// buoyancy force, using the temperature computed by the 
  /// "external" advection diffusion element associated with 
  /// integration point \c ipt.
@@ -138,7 +138,7 @@ public:
  } // end overloaded body force
 
 
- ///  Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
  {
@@ -177,14 +177,14 @@ public:
   }
 
 
- ///  Fill in the derivatives of the body force with respect to the
+ /// Fill in the derivatives of the body force with respect to the
  /// external unknowns
  void get_dbody_force_axi_nst_dexternal_element_data(
   const unsigned& ipt, 
   DenseMatrix<double> &result, Vector<unsigned> &global_eqn_number);
 
 
- ///  Compute the contribution of the external
+ /// Compute the contribution of the external
  /// degrees of freedom (temperatures) on the Navier-Stokes equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
@@ -365,7 +365,7 @@ class RefineableQAxisymAdvectionDiffusionBoussinesqElement :
 
 public:
 
- ///  Constructor: call the underlying constructors
+ /// Constructor: call the underlying constructors
  RefineableQAxisymAdvectionDiffusionBoussinesqElement() : 
   RefineableQAxisymAdvectionDiffusionElement<3>(), ElementWithExternalElement()
   { 
@@ -383,7 +383,7 @@ public:
   //       has been set up.
   //-----------------------------------------------------------
   
-  ///  Output function:
+  /// Output function:
   ///  Output x, y, theta at Nplot^DIM plot points
  // Start of output function
   void output(ostream &outfile, const unsigned &nplot)
@@ -419,16 +419,16 @@ public:
  ///  Overload the standard output function with the broken default
  void output(ostream &outfile) {FiniteElement::output(outfile);}
 
- ///  C-style output function: Broken default
+ /// C-style output function: Broken default
  void output(FILE* file_pt)
   {FiniteElement::output(file_pt);}
 
- ///   C-style output function: Broken default
+ ///  C-style output function: Broken default
  void output(FILE* file_pt, const unsigned &n_plot)
   {FiniteElement::output(file_pt,n_plot);}
 
 
- ///  Overload the wind function in the advection-diffusion equations.
+ /// Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity,
  /// obtained from the "external" element
@@ -451,7 +451,7 @@ public:
  }  //end of get_wind_adv_diff
  
 
- /// Compute the element's residual vector and the Jacobian matrix.
+ ///Compute the element's residual vector and the Jacobian matrix.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
   {
@@ -474,7 +474,7 @@ public:
   }
 
 
- ///  Overload the function that must return all field data involved
+ /// Overload the function that must return all field data involved
  /// in the interaction with the external (Navier Stokes) element. 
  /// Only the velocity dofs in the Navier Stokes element affect the
  /// interaction with the current element. 
@@ -482,7 +482,7 @@ public:
   Vector<std::set<FiniteElement*> > const &external_elements_pt,
   std::set<std::pair<Data*,unsigned> > &paired_interaction_data);
 
- ///  Add the element's contribution to its residuals vector,
+ /// Add the element's contribution to its residuals vector,
  /// jacobian matrix and mass matrix
  void fill_in_contribution_to_jacobian_and_mass_matrix(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
@@ -496,7 +496,7 @@ public:
   }
 
  
- ///  Fill in the derivatives of the wind with respect to the
+ /// Fill in the derivatives of the wind with respect to the
  /// external unknowns
  void get_dwind_axi_adv_diff_dexternal_element_data(
   const unsigned& ipt, const unsigned &i,
@@ -519,7 +519,7 @@ public:
  } 
 
  
- ///  Compute the contribution of the external
+ /// Compute the contribution of the external
  /// degrees of freedom (velocities) on the advection-diffusion equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
@@ -822,7 +822,7 @@ private:
 
 public: 
 
- ///  Constructor: call the underlying constructors and 
+ /// Constructor: call the underlying constructors and 
  /// initialise the pointer to the Rayleigh number to point
  /// to the default value of 0.0.
  QAxisymCrouzeixRaviartElementWithExternalElement() : 
@@ -841,20 +841,20 @@ public:
  ///Access function for the pointer to the Rayleigh number
  double* &ra_pt() {return Ra_pt;}
 
- /// Overload get_body_force_nst to get the temperature "body force"
+ ///Overload get_body_force_nst to get the temperature "body force"
  /// from the "source" AdvectionDiffusion element via current integration point
  void get_body_force_axi_nst(const double& time, const unsigned& ipt, 
                              const Vector<double> &s, const Vector<double> &x, 
                              Vector<double> &result);
 
- ///  Fill in the derivatives of the body force with respect to the
+ /// Fill in the derivatives of the body force with respect to the
  /// external unknowns
  void get_dbody_force_axi_nst_dexternal_element_data(
   const unsigned& ipt, 
   DenseMatrix<double> &result, Vector<unsigned> &global_eqn_number);
 
 
- ///  Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing or analytically
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
@@ -877,7 +877,7 @@ public:
 #endif
   }
 
- ///  Add the element's contribution to its residuals vector,
+ /// Add the element's contribution to its residuals vector,
  /// jacobian matrix and mass matrix
  void fill_in_contribution_to_jacobian_and_mass_matrix(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
@@ -890,7 +890,7 @@ public:
      residuals,jacobian,mass_matrix);
   }
 
- ///  Compute the contribution of the external
+ /// Compute the contribution of the external
  /// degrees of freedom (temperatures) on the Navier-Stokes equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
@@ -1003,7 +1003,7 @@ class QAxisymAdvectionDiffusionElementWithExternalElement :
 
 public:
 
- ///  Constructor: call the underlying constructors
+ /// Constructor: call the underlying constructors
  QAxisymAdvectionDiffusionElementWithExternalElement() : 
  QAxisymAdvectionDiffusionElement<3>(),
   ElementWithExternalElement()
@@ -1012,7 +1012,7 @@ public:
    this->set_ninteraction(1);
   } 
 
- ///  Overload the wind function in the advection-diffusion equations.
+ /// Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity,
  /// obtained from the source element in the other mesh
@@ -1029,7 +1029,7 @@ public:
   //       has been set up.
   //-----------------------------------------------------------
   
-  ///  Output function:
+  /// Output function:
   ///  Output x, y, theta at Nplot^DIM plot points
  // Start of output function
   void output(ostream &outfile, const unsigned &nplot)
@@ -1065,24 +1065,24 @@ public:
  ///  Overload the standard output function with the broken default
  void output(ostream &outfile) {FiniteElement::output(outfile);}
 
- ///  C-style output function: Broken default
+ /// C-style output function: Broken default
  void output(FILE* file_pt)
   {FiniteElement::output(file_pt);}
 
- ///   C-style output function: Broken default
+ ///  C-style output function: Broken default
  void output(FILE* file_pt, const unsigned &n_plot)
   {FiniteElement::output(file_pt,n_plot);}
 
 
  
- ///  Fill in the derivatives of the wind with respect to the
+ /// Fill in the derivatives of the wind with respect to the
  /// external unknowns
  void get_dwind_axi_adv_diff_dexternal_element_data(
   const unsigned& ipt, const unsigned &i,
   Vector<double> &result, Vector<unsigned> &global_eqn_number);
 
 
- /// Compute the element's residual vector and the Jacobian matrix.
+ ///Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -1104,7 +1104,7 @@ public:
 #endif
   }
 
- ///  Add the element's contribution to its residuals vector,
+ /// Add the element's contribution to its residuals vector,
  /// jacobian matrix and mass matrix
  void fill_in_contribution_to_jacobian_and_mass_matrix(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
@@ -1118,7 +1118,7 @@ public:
   }
 
 
- ///  Compute the contribution of the external
+ /// Compute the contribution of the external
  /// degrees of freedom (velocities) on the AdvectionDiffusion equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
@@ -1305,7 +1305,7 @@ get_dbody_force_axi_nst_dexternal_element_data(
 
 
 //==========================================================================
-///  Overload the wind function in the advection-diffusion equations.
+/// Overload the wind function in the advection-diffusion equations.
 /// This provides the coupling from the Navier--Stokes equations to the
 /// advection-diffusion equations because the wind is the fluid velocity,
 /// obtained from the source elements in the other mesh

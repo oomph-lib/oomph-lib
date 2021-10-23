@@ -54,11 +54,11 @@ namespace oomph
   {
     public:
 
-   ///  Function pointer to a return a pointer to an  elasticity tensor
+   /// Function pointer to a return a pointer to an  elasticity tensor
    typedef void (*HomLinElasticityTensorFctPt)(const Vector<double> &x,
                                                ElasticityTensor* &E_pt);
    
-   ///  Return the index at which the i-th unknown displacement 
+   /// Return the index at which the i-th unknown displacement 
    /// component is stored. The default value, i, is appropriate for
    /// single-physics problems.
    virtual inline unsigned u_index_linear_elasticity(const unsigned i) const
@@ -115,7 +115,7 @@ namespace oomph
      return(interpolated_u);
     }
    
-   ///  Constructor: Set null pointers for constitutive law and for
+   /// Constructor: Set null pointers for constitutive law and for
    /// isotropic growth function. Set physical parameter values to 
    /// default values, switch off inertia and set body force to zero.
    HomogenisedLinearElasticityEquationsBase() : Elasticity_tensor_fct_pt(0),
@@ -163,7 +163,7 @@ namespace oomph
    HomLinElasticityTensorFctPt elasticity_tensor_fct_pt() const
     {return  Elasticity_tensor_fct_pt;}
 
-   ///  Function to get the specific value of elasticity tensor 
+   /// Function to get the specific value of elasticity tensor 
    /// at the given position
    inline void get_E_pt(const Vector<double> &x, ElasticityTensor*  &E_pt)
    {
@@ -208,10 +208,10 @@ namespace oomph
    /// Timescale ratio (non-dim. density)
    double* Lambda_sq_pt;
    
-   ///  Pointer to the index P in the cell problem
+   /// Pointer to the index P in the cell problem
    unsigned *P_pt;
    
-   ///  Pointer to the index M in the cell problem
+   /// Pointer to the index M in the cell problem
    unsigned *M_pt;
    
    /// Flag that switches inertia on/off
@@ -233,13 +233,13 @@ template<unsigned DIM>
    {
     public:
     
-   ///   Constructor
+   ///  Constructor
    HomogenisedLinearElasticityEquations() {}
 
    /// Always have three displacement components
    unsigned required_nvalue(const unsigned &n) const {return 3;}
    
-   ///  Return the residuals for the solid equations (the discretised
+   /// Return the residuals for the solid equations (the discretised
    /// principle of virtual displacements)
    void fill_in_contribution_to_residuals(Vector<double> &residuals)
     {
@@ -247,7 +247,7 @@ template<unsigned DIM>
       residuals,GeneralisedElement::Dummy_matrix,0);
     }
 
-   ///  Return the generic contribuion to the residuals and (optionally) 
+   /// Return the generic contribuion to the residuals and (optionally) 
    /// the jacobian matrix depending on the flag
    virtual void fill_in_generic_contribution_to_residuals_linear_elasticity(
     Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);

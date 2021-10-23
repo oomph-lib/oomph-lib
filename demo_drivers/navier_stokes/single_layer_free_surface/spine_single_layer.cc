@@ -106,15 +106,15 @@ public:
  /// Do unsteady run up to maximum time t_max with given timestep dt
  void unsteady_run(const double &t_max, const double &dt);
 
- ///  The bulk fluid mesh, complete with spines and update information
+ /// The bulk fluid mesh, complete with spines and update information
  SingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
 
- ///  The mesh that contains the free surface elements
+ /// The mesh that contains the free surface elements
  Mesh* Surface_mesh_pt;
 
 private:
 
- ///  Spine heights/lengths are unknowns in the problem so their
+ /// Spine heights/lengths are unknowns in the problem so their
  /// values get corrected during each Newton step. However, changing
  /// their value does not automatically change the nodal positions, so
  /// we need to update all of them here.
@@ -126,7 +126,7 @@ private:
  /// No actions required before solve step
  void actions_before_newton_solve() {}
 
- ///  Update after solve can remain empty, because the update 
+ /// Update after solve can remain empty, because the update 
  /// is performed automatically after every Newton step.
  void actions_after_newton_solve() {}
 
@@ -289,7 +289,7 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
 
 //========================================================================
 //==start_of_set_initial_condition========================================
-///  Set initial conditions: Set all nodal velocities to zero and
+/// Set initial conditions: Set all nodal velocities to zero and
 /// initialise the previous velocities and nodal positions to correspond
 /// to an impulsive start
 //========================================================================
@@ -319,7 +319,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
 
 
 //==start_of_set_boundary_conditions======================================
-///  Set boundary conditions: Set both velocity components to zero
+/// Set boundary conditions: Set both velocity components to zero
 /// on the bottom (solid) wall and the horizontal component only to zero
 /// on the side (periodic) boundaries
 //========================================================================

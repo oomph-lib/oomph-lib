@@ -111,15 +111,15 @@ private:
  /// Bulk fluid mesh
  TetgenMesh<ELEMENT>* Fluid_mesh_pt;
 
- ///  Meshes of FaceElements imposing parallel outflow 
+ /// Meshes of FaceElements imposing parallel outflow 
  /// and a pressure at the in/outflow
  Vector<Mesh*> Parallel_outflow_lagrange_multiplier_mesh_pt;
 
- ///  IDs of fluid mesh boundaries along which inflow boundary conditions
+ /// IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
  Vector<unsigned> Inflow_boundary_id;
 
- ///  IDs of fluid mesh boundaries along which inflow boundary conditions
+ /// IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
  Vector<unsigned> Outflow_boundary_id;
 

@@ -140,7 +140,7 @@ class FaceGeometry<MySolidElement<ELEMENT> > :
 
 public:
 
- ///  Constructor [this was only required explicitly
+ /// Constructor [this was only required explicitly
  /// from gcc 4.5.2 onwards...]
  FaceGeometry() : FaceGeometry<ELEMENT>() {}
 
@@ -185,7 +185,7 @@ namespace Global_Physical_Variables
  /// Uniform pressure
  double P = 0.0;
 
- ///  Constant pressure load. The arguments to this function are imposed
+ /// Constant pressure load. The arguments to this function are imposed
  /// on us by the SolidTractionElements which allow the traction to 
  /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the 
  /// outer unit normal to the surface. Here we only need the outer unit
@@ -253,11 +253,11 @@ public:
 
 private:
 
- ///  Pass pointer to traction function to the
+ /// Pass pointer to traction function to the
  /// elements in the traction mesh
  void set_traction_pt();
 
- ///  Create traction elements
+ /// Create traction elements
  void create_traction_elements();
 
  /// Delete traction elements

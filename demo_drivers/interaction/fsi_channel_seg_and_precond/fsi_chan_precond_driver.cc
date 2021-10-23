@@ -55,11 +55,11 @@ using namespace oomph;
 namespace Flags
 {
 
- ///  Solver flag [0: direct; 1: exact; 2: simple; 3: Schur/Superlu; 
+ /// Solver flag [0: direct; 1: exact; 2: simple; 3: Schur/Superlu; 
  /// 4: Schur/Hypre]
  unsigned Solver_flag=0;
 
- ///  Solver sub flag [0: diag; 1: retain fluid on solid; 
+ /// Solver sub flag [0: diag; 1: retain fluid on solid; 
  /// 2: retain solid on fluid]
  unsigned Solver_sub_flag=0;
 
@@ -84,7 +84,7 @@ class PreconditionedFSICollapsibleChannelProblem :
 
 public :
 
-///  Constructor: The arguments are the number of elements and
+/// Constructor: The arguments are the number of elements and
 /// the lengths of the domain.
 PreconditionedFSICollapsibleChannelProblem(const unsigned& nup, 
                                            const unsigned& ncollapsible,
@@ -541,7 +541,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
 
 
 
- ///  Update before checking Newton convergence: Update the
+ /// Update before checking Newton convergence: Update the
  /// nodal positions in the fluid mesh in response to possible 
  /// changes in the wall shape.
  void actions_before_newton_convergence_check()

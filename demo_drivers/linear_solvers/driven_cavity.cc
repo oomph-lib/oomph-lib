@@ -79,7 +79,7 @@ class RectangularDrivenCavityProblem : public Problem
 public:
 
 
- ///  Constructor: Specify multiplier for number of element 
+ /// Constructor: Specify multiplier for number of element 
  /// rows/columns and solver flag.
  RectangularDrivenCavityProblem(const unsigned& element_multiplier, 
                                 const bool& use_iterative_solver,
@@ -122,7 +122,7 @@ public:
  void actions_after_newton_solve(){}
 
 
- ///  Update the problem specs before solve. 
+ /// Update the problem specs before solve. 
  /// Re-set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve()
  {

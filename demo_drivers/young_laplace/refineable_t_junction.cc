@@ -61,7 +61,7 @@ namespace GlobalParameters
  // Spine basis
  //------------
 
- ///  Spine basis: The position vector to the basis of the spine
+ /// Spine basis: The position vector to the basis of the spine
  /// as a function of the two coordinates x_1 and x_2, and its
  /// derivatives w.r.t. to these coordinates. 
  /// dspine_B[i][j] = d spine_B[j] / dx_i
@@ -95,7 +95,7 @@ namespace GlobalParameters
  /// Max. spine angle against horizontal plane
  double Alpha_max = MathematicalConstants::Pi/2.0*0.5;
 
- ///  Spine: The spine vector field as a function of the two 
+ /// Spine: The spine vector field as a function of the two 
  /// coordinates x_1 and x_2, and its derivatives w.r.t. to these coordinates:
  /// dspine[i][j] = d spine[j] / dx_i
  void spine_function(const Vector<double>& x, 
@@ -188,13 +188,13 @@ public:
    
   }
 
- ///  Doc the solution. DocInfo object stores flags/labels for where the
+ /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to and the trace file
  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
 private:
 
- ///  Create YoungLaplace contact angle elements on the 
+ /// Create YoungLaplace contact angle elements on the 
  /// b-th boundary of the bulk mesh and add them to contact angle mesh
  void create_contact_angle_elements(const unsigned& b);
  

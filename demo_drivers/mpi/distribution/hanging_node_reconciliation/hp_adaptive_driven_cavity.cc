@@ -64,7 +64,7 @@ class SimpleRefineableRectangularQuadMesh :
 
 public: 
 
- ///   Pass number of elements in the horizontal 
+ ///  Pass number of elements in the horizontal 
  /// and vertical directions, and the corresponding dimensions.
  /// Timestepper defaults to Static.
  SimpleRefineableRectangularQuadMesh(const unsigned &Nx,
@@ -108,7 +108,7 @@ public:
  /// Update the after solve (empty)
  void actions_after_newton_solve() {}
 
- ///  Update the problem specs before solve. 
+ /// Update the problem specs before solve. 
  /// (Re-)set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve()
   { 

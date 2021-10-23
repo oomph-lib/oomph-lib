@@ -53,7 +53,7 @@ class MyTipMesh : public  SimpleCubicMesh<ELEMENT >,
 
 public:
 
- ///  Constructor: Pass number of elements in x-direction, number of
+ /// Constructor: Pass number of elements in x-direction, number of
  /// elements in y-direction, axial length, height of layer, and pointer 
  /// to timestepper (defaults to Steady timestepper)
  MyTipMesh(const unsigned &nx, 
@@ -109,7 +109,7 @@ public:
   }
 
 
- ///  General node update function implements pure virtual function 
+ /// General node update function implements pure virtual function 
  /// defined in SpineMesh base class and performs specific node update
  /// actions:  along vertical spines
 
@@ -194,7 +194,7 @@ protected:
 /// Sacled radius of the canyon (must be between 0 and one
  double Radius;
 
- ///  Helper function to actually build the single-layer spine mesh 
+ /// Helper function to actually build the single-layer spine mesh 
  /// (called from various constructors)
  virtual void build_single_layer_mesh(TimeStepper* time_stepper_pt);
  

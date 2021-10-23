@@ -55,11 +55,11 @@ namespace Global_Physical_Variables
  /// Perturbation pressure
  double Pcos=0.0;
 
- ///  Pointer to pressure load (stored in Data so it can 
+ /// Pointer to pressure load (stored in Data so it can 
  /// become an unknown in the problem when displacement control is used
  Data* Pext_data_pt;
 
- ///  Load function: Constant external pressure with cos variation to
+ /// Load function: Constant external pressure with cos variation to
  /// induce buckling in n=2 mode
  void press_load(const Vector<double>& xi,
                  const Vector<double> &x,
@@ -72,7 +72,7 @@ namespace Global_Physical_Variables
    }
  }
  
- ///  Return a reference to the external pressure 
+ /// Return a reference to the external pressure 
  /// load on the elastic ring.
  /// A reference is obtained by de-referencing the pointer to the
  /// data value that contains the external load

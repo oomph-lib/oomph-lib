@@ -136,7 +136,7 @@ public:
 
 private:
 
- ///  Update the problem specs before solve: Reset boundary conditions
+ /// Update the problem specs before solve: Reset boundary conditions
  /// to the values from the exact solution.
  void actions_before_newton_solve();
 
@@ -149,13 +149,13 @@ private:
  /// Actions after adapt: Rebuild the mesh of prescribed flux elements
  void actions_after_adapt();
 
- ///  Create Advection Diffusion flux elements on boundary b of 
+ /// Create Advection Diffusion flux elements on boundary b of 
  /// the Mesh pointed to by bulk_mesh_pt and add them to the Mesh 
  /// object pointed to by surface_mesh_pt
  void create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
                            Mesh* const &surface_mesh_pt);
 
- ///  Delete Advection Diffusion flux elements and wipe the surface mesh
+ /// Delete Advection Diffusion flux elements and wipe the surface mesh
  void delete_flux_elements(Mesh* const &surface_mesh_pt);
 
  /// Pointer to the "bulk" mesh

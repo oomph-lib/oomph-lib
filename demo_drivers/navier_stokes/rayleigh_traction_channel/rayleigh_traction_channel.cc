@@ -50,7 +50,7 @@ namespace Global_Parameters
  /// Flag for long/short run: Default =  perform long run
  unsigned Long_run_flag=1;
 
- ///  Flag for impulsive start: Default = start from exact
+ /// Flag for impulsive start: Default = start from exact
  /// time-periodic solution. 
  unsigned Impulsive_start_flag=0;
 
@@ -134,7 +134,7 @@ public:
  /// Update before solve is empty
  void actions_before_newton_solve() {}
 
- ///  Update after solve is empty
+ /// Update after solve is empty
  void actions_after_newton_solve() {}
 
  /// Actions before timestep (empty)
@@ -146,11 +146,11 @@ public:
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
 
- ///  Set initial condition (incl previous timesteps) according
+ /// Set initial condition (incl previous timesteps) according
  /// to specified function. 
  void set_initial_condition();
 
- ///  Create traction elements on boundary b of the Mesh pointed
+ /// Create traction elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the Mesh object pointed to by 
  /// surface_mesh_pt
  void create_traction_elements(const unsigned &b, 
@@ -265,7 +265,7 @@ RayleighTractionProblem<ELEMENT,TIMESTEPPER>::RayleighTractionProblem
 } // end of constructor
 
 //======================start_of_set_initial_condition====================
-///  Set initial condition: Assign previous and current values
+/// Set initial condition: Assign previous and current values
 /// from exact solution.
 //========================================================================
 template<class ELEMENT,class TIMESTEPPER>

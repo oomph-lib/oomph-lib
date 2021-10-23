@@ -74,7 +74,7 @@ public:
  /// Empty Constructor
  HarmonicEquations() {}
  
- ///  Access function: Eigenfunction value at local node n
+ /// Access function: Eigenfunction value at local node n
  /// Note that solving the eigenproblem does not assign values
  /// to this storage space. It is used for output purposes only.
  virtual inline double u(const unsigned& n) const 
@@ -87,7 +87,7 @@ public:
    output(outfile,nplot);
   }
 
- ///  Output FE representation of soln: x,y,u or x,y,z,u at 
+ /// Output FE representation of soln: x,y,u or x,y,z,u at 
  /// Nplot  plot points
  void output(ostream &outfile, const unsigned &nplot)
   {
@@ -110,7 +110,7 @@ public:
    write_tecplot_zone_footer(outfile,nplot);
   }
 
- ///  Assemble the contributions to the jacobian and mass
+ /// Assemble the contributions to the jacobian and mass
  /// matrices
  void fill_in_contribution_to_jacobian_and_mass_matrix(
   Vector<double> &residuals,
@@ -189,19 +189,19 @@ public:
 
 protected:
 
- ///  Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// local coord. s; return  Jacobian of mapping
  virtual double dshape_eulerian(const Vector<double> &s, 
                                 Shape &psi, 
                                 DShape &dpsidx) const=0;
 
- ///  Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// integration point ipt; return  Jacobian of mapping
  virtual double dshape_eulerian_at_knot(const unsigned &ipt, 
                                         Shape &psi, 
                                         DShape &dpsidx) const=0;
  
- ///  Access function that returns the local equation number
+ /// Access function that returns the local equation number
  /// of the unknown in the problem. Default is to assume that it is the
  /// first (only) value stored at the node.
  virtual inline int u_local_eqn(const unsigned &n)
@@ -225,19 +225,19 @@ class QHarmonicElement : public virtual QElement<1,NNODE_1D>,
  
   public:
 
- ///  Constructor: Call constructors for QElement and 
+ /// Constructor: Call constructors for QElement and 
  /// Poisson equations
  QHarmonicElement() : QElement<1,NNODE_1D>(), HarmonicEquations() {}
 
- ///   Required  # of `values' (pinned or dofs) 
+ ///  Required  # of `values' (pinned or dofs) 
  /// at node n
  inline unsigned required_nvalue(const unsigned &n) const {return 1;}
 
- ///  Output function overloaded from HarmonicEquations
+ /// Output function overloaded from HarmonicEquations
  void output(ostream &outfile) 
   {HarmonicEquations::output(outfile);}
 
- ///   Output function overloaded from HarmonicEquations
+ ///  Output function overloaded from HarmonicEquations
  void output(ostream &outfile, const unsigned &Nplot) 
   {HarmonicEquations::output(outfile,Nplot);}
 
@@ -251,7 +251,7 @@ protected:
   {return QElement<1,NNODE_1D>::dshape_eulerian(s,psi,dpsidx);}
  
 
- ///  Shape, test functions & derivs. w.r.t. to global coords. at
+ /// Shape, test functions & derivs. w.r.t. to global coords. at
  /// integration point ipt. Return Jacobian.
  inline double dshape_eulerian_at_knot(const unsigned& ipt,
                                        Shape &psi, 
@@ -278,7 +278,7 @@ public:
  /// Solve the problem
  void solve(const unsigned &label);
 
- ///  Doc the solution, pass the number of the case considered,
+ /// Doc the solution, pass the number of the case considered,
  /// so that output files can be distinguished.
  void doc_solution(const unsigned& label);
 
@@ -287,7 +287,7 @@ public:
 
 
 //=====start_of_constructor===============================================
-///  Constructor for 1D Harmonic problem in unit interval.
+/// Constructor for 1D Harmonic problem in unit interval.
 /// Discretise the 1D domain with n_element elements of type ELEMENT.
 /// Specify function pointer to source function. 
 //========================================================================

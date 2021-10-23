@@ -112,7 +112,7 @@ private:
  /// Doc info object for labeling output
  DocInfo Doc_info;
 
- ///  Helper function to (re-)set boundary condition
+ /// Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup();
 

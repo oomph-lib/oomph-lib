@@ -82,7 +82,7 @@ namespace Global_Physical_Variables
  /// Stress ratio
  double Q;
 
- ///  Set the parameters that are used in the code as a function
+ /// Set the parameters that are used in the code as a function
  /// of the Womersley number, the density ratio and H
  void set_params()
  {
@@ -139,13 +139,13 @@ namespace Global_Physical_Variables
 //======================================================================
 class FSIRingProblem : public Problem
 {
- ///  There are very few element types that will work for this problem.
+ /// There are very few element types that will work for this problem.
  /// Rather than passing the element type as a template parameter to the
  /// problem, we choose instead to use a typedef to specify the
  /// particular element fluid used.
  typedef AlgebraicElement<RefineableQCrouzeixRaviartElement<2> > FLUID_ELEMENT;
 
- ///  Typedef to specify the solid element used
+ /// Typedef to specify the solid element used
  typedef FSIHermiteBeamElement SOLID_ELEMENT;
 
 public:
@@ -159,10 +159,10 @@ public:
  /// Update after solve (empty)
  void actions_after_newton_solve() {}
 
- ///  Update before solve (empty)
+ /// Update before solve (empty)
  void actions_before_newton_solve() {}
 
- ///  Update the problem specs before checking Newton
+ /// Update the problem specs before checking Newton
  /// convergence
  void actions_before_newton_convergence_check() 
  {
@@ -171,7 +171,7 @@ public:
   Fluid_mesh_pt->node_update(); 
  }
 
- ///  Update the problem specs after adaptation:
+ /// Update the problem specs after adaptation:
  void actions_after_adapt() 
   {
    // The functions used to update the no slip boundary conditions 
@@ -205,7 +205,7 @@ public:
     (this,1,Fluid_mesh_pt,Wall_mesh_pt);
   }
 
- ///  Doc solution: Pass number of timestep, i (we append to tracefile
+ /// Doc solution: Pass number of timestep, i (we append to tracefile
  /// after every timestep but do a full doc only at certain intervals),
  /// DocInfo object and tracefile
  void doc_solution(const unsigned& i, DocInfo& doc_info, ofstream& trace_file,
@@ -225,7 +225,7 @@ private:
  /// Setup initial condition for fluid
  void set_fluid_initial_condition();
 
- ///  Element used for documenting displacement
+ /// Element used for documenting displacement
  SOLID_ELEMENT* Doc_displacement_elem_pt;
 
  /// Pointer to wall mesh
