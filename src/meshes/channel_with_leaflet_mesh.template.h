@@ -54,7 +54,7 @@ namespace oomph
   class ChannelWithLeafletMesh : public SimpleRectangularQuadMesh<ELEMENT>
   {
   public:
-    ///Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -107,7 +107,7 @@ namespace oomph
       public RefineableQuadMesh<ELEMENT>
   {
   public:
-    ///Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -168,7 +168,7 @@ namespace oomph
       public virtual ChannelWithLeafletMesh<ELEMENT>
   {
   public:
-    ///Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -294,7 +294,7 @@ namespace oomph
       public virtual RefineableQuadMesh<ELEMENT>
   {
   public:
-    ///Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -362,7 +362,7 @@ namespace oomph
       public virtual ChannelWithLeafletMesh<ELEMENT>
   {
   public:
-    ///Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -471,7 +471,7 @@ namespace oomph
       public virtual AlgebraicChannelWithLeafletMesh<ELEMENT>
   {
   public:
-    ///Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
@@ -536,7 +536,7 @@ namespace oomph
       public virtual SolidMesh
   {
   public:
-    ///Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet, the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,
     /// the number of element columns to the left and right of the leaflet,

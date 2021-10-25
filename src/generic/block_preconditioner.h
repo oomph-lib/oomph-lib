@@ -3361,7 +3361,7 @@ namespace oomph
     /// within the subsidiary preconditioner.
     unsigned Internal_nblock_types;
 
-    ///Number of different DOF types in this preconditioner. Note that
+    /// Number of different DOF types in this preconditioner. Note that
     /// this information is maintained if used as a subsidiary or stand-alone
     /// block preconditioner, in the latter case it stores the number of dofs
     /// within the subsidiary preconditioner.

@@ -68,12 +68,12 @@ namespace oomph
     /// Return the number of degrees of freedom in the element elem_pt
     virtual unsigned ndof(GeneralisedElement* const& elem_pt);
 
-    ///Return vector of dofs at time level t in the element elem_pt
+    /// Return vector of dofs at time level t in the element elem_pt
     virtual void dof_vector(GeneralisedElement* const& elem_pt,
                             const unsigned& t,
                             Vector<double>& dof);
 
-    ///Return vector of pointers to dofs in the element elem_pt
+    /// Return vector of pointers to dofs in the element elem_pt
     virtual void dof_pt_vector(GeneralisedElement* const& elem_pt,
                                Vector<double*>& dof_pt);
 
@@ -186,12 +186,12 @@ namespace oomph
     /// Return the number of degrees of freedom in the element elem_pt
     unsigned ndof(GeneralisedElement* const& elem_pt);
 
-    ///Return the global equation number of the local unknown ieqn_local
+    /// Return the global equation number of the local unknown ieqn_local
     /// in elem_pt.
     unsigned long eqn_number(GeneralisedElement* const& elem_pt,
                              const unsigned& ieqn_local);
 
-    ///Return the contribution to the residuals of the element elem_pt
+    /// Return the contribution to the residuals of the element elem_pt
     /// This is deliberately broken in our eigenproblem
     void get_residuals(GeneralisedElement* const& elem_pt,
                        Vector<double>& residuals);
@@ -231,12 +231,12 @@ namespace oomph
     /// Return the number of degrees of freedom in the element elem_pt
     unsigned ndof(GeneralisedElement* const& elem_pt);
 
-    ///Return the global equation number of the local unknown ieqn_local
+    /// Return the global equation number of the local unknown ieqn_local
     /// in elem_pt.
     unsigned long eqn_number(GeneralisedElement* const& elem_pt,
                              const unsigned& ieqn_local);
 
-    ///Return the contribution to the residuals of the element elem_pt
+    /// Return the contribution to the residuals of the element elem_pt
     /// This is deliberately broken in our eigenproblem
     void get_residuals(GeneralisedElement* const& elem_pt,
                        Vector<double>& residuals);
@@ -277,7 +277,7 @@ namespace oomph
     {
     }
 
-    ///Use underlying assembly handler to return the number of
+    /// Use underlying assembly handler to return the number of
     /// degrees of freedom in the element elem_pt
     unsigned ndof(GeneralisedElement* const& elem_pt)
     {
@@ -292,7 +292,7 @@ namespace oomph
       return Assembly_handler_pt->eqn_number(elem_pt, ieqn_local);
     }
 
-    ///Use underlying AssemblyHandler to return
+    /// Use underlying AssemblyHandler to return
     /// the contribution to the residuals of the element elem_pt
     void get_residuals(GeneralisedElement* const& elem_pt,
                        Vector<double>& residuals)
@@ -358,7 +358,7 @@ namespace oomph
       return Assembly_handler_pt->ndof(elem_pt);
     }
 
-    ///Return the global equation number of the local unknown ieqn_local
+    /// Return the global equation number of the local unknown ieqn_local
     /// in elem_pt.Pass through to the original assembly handler
     unsigned long eqn_number(GeneralisedElement* const& elem_pt,
                              const unsigned& ieqn_local)
@@ -366,7 +366,7 @@ namespace oomph
       return Assembly_handler_pt->eqn_number(elem_pt, ieqn_local);
     }
 
-    ///Return the contribution to the residuals of the element elem_pt
+    /// Return the contribution to the residuals of the element elem_pt
     /// by using the derivatives
     void get_residuals(GeneralisedElement* const& elem_pt,
                        Vector<double>& residuals)
@@ -512,7 +512,7 @@ namespace oomph
     double* Parameter_pt;
 
   public:
-    ///Constructor:
+    /// Constructor:
     /// initialise the fold handler, by setting initial guesses
     /// for Y, Phi and calculating count. If the system changes, a new
     /// fold handler must be constructed
@@ -573,7 +573,7 @@ namespace oomph
                                      DenseMatrix<double> const& C,
                                      DenseMatrix<double>& product);
 
-    ///Indicate that we are tracking a fold bifurcation by returning 1
+    /// Indicate that we are tracking a fold bifurcation by returning 1
     int bifurcation_type() const
     {
       return 1;
@@ -912,7 +912,7 @@ namespace oomph
                                      DenseMatrix<double>& product);
 
 
-    ///Indicate that we are tracking a pitchfork
+    /// Indicate that we are tracking a pitchfork
     /// bifurcation by returning 2
     int bifurcation_type() const
     {
@@ -1050,7 +1050,7 @@ namespace oomph
   {
     friend class BlockHopfLinearSolver;
 
-    ///Integer flag to indicate which system should be assembled.
+    /// Integer flag to indicate which system should be assembled.
     /// There are three possibilities. The full augmented system (0),
     /// the non-augmented jacobian system (1), and complex
     /// system (2), where the matrix is a combination of the jacobian
@@ -1138,7 +1138,7 @@ namespace oomph
                                      DenseMatrix<double> const& C,
                                      DenseMatrix<double>& product);
 
-    ///Indicate that we are tracking a Hopf
+    /// Indicate that we are tracking a Hopf
     /// bifurcation by returning 3
     int bifurcation_type() const
     {

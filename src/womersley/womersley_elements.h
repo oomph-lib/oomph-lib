@@ -136,7 +136,7 @@ namespace oomph
       Mesh* navier_stokes_outflow_mesh_pt_mesh_pt) = 0;
 
   protected:
-    ///Pointer to mesh containing the
+    /// Pointer to mesh containing the
     /// NavierStokesImpedanceTractionElements
     /// that contribute to the volume flux into the "downstream tube" that
     /// provides the flow resistance
@@ -2002,7 +2002,7 @@ namespace oomph
       return nodal_local_eqn(n, i);
     }
 
-    ///Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
     inline double shape_and_test_at_knot(const unsigned& ipt,
                                          Shape& psi,
@@ -2025,7 +2025,7 @@ namespace oomph
     }
 
 
-    ///This function returns the residuals for the
+    /// This function returns the residuals for the
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_fluid_traction(

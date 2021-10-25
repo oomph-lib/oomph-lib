@@ -268,7 +268,7 @@ namespace oomph
     }
 
   protected:
-    ///This function returns the residuals for the
+    /// This function returns the residuals for the
     /// flux control master element.
     void fill_in_generic_residual_contribution_flux_control(
       Vector<double>& residuals)
@@ -400,7 +400,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    ///This function returns the residuals and the Jacobian
+    /// This function returns the residuals and the Jacobian
     /// including the Jacobian contribution from the flux control
     /// master element with respect to dof in this
     /// element
@@ -429,7 +429,7 @@ namespace oomph
       return this->nodal_local_eqn(n, i);
     }
 
-    ///Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
     inline double shape_and_test_at_knot(const unsigned& ipt,
                                          Shape& psi,
@@ -449,7 +449,7 @@ namespace oomph
     }
 
 
-    ///This function returns the residuals for the traction function
+    /// This function returns the residuals for the traction function
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     /// This function also calculates the Jacobian contribution for the
     /// NetFluxControlElement
@@ -594,7 +594,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    ///This function returns the residuals and the Jacobian
+    /// This function returns the residuals and the Jacobian
     /// including the Jacobian contribution from the flux control
     /// master element with respect to dof in this
     /// element
@@ -607,7 +607,7 @@ namespace oomph
     }
 
   protected:
-    ///This function returns the residuals for the traction function
+    /// This function returns the residuals for the traction function
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     /// This function also calculates the Jacobian contribution for the
     /// NetFluxControlElement

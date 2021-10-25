@@ -777,7 +777,7 @@ namespace oomph
     } // End of get_source_gradient_nst
 
 
-    ///Compute the residuals for the Navier-Stokes equations.
+    /// Compute the residuals for the Navier-Stokes equations.
     /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
     /// Flag=2: Fill in mass matrix too.
     virtual void fill_in_generic_residual_contribution_nst(
@@ -796,7 +796,7 @@ namespace oomph
       const unsigned& flag);
 
 
-    ///Compute the derivatives of the
+    /// Compute the derivatives of the
     /// residuals for the Navier-Stokes equations with respect to a parameter
     /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
     /// Flag=2: Fill in mass matrix too.
@@ -1651,7 +1651,7 @@ namespace oomph
     } // End of fill_in_contribution_to_residuals
 
 
-    ///Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// Virtual function can be overloaded by hanging-node version
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)

@@ -1775,7 +1775,7 @@ namespace oomph
 
 
   //===================================================================
-  ///LU decompose the matrix addressed by matrix_pt by using
+  /// LU decompose the matrix addressed by matrix_pt by using
   /// the SuperLU solver. The resulting matrix factors are stored
   /// internally.
   //===================================================================
@@ -2116,7 +2116,7 @@ namespace oomph
 #endif
 
   //===================================================================
-  ///LU decompose the matrix addressed by matrix_pt by using
+  /// LU decompose the matrix addressed by matrix_pt by using
   /// the SuperLU solver. The resulting matrix factors are stored
   /// internally.
   //===================================================================

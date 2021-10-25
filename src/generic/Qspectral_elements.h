@@ -177,7 +177,7 @@ namespace oomph
     }
 
 
-    ///Return the i-th data object associated with the polynomials
+    /// Return the i-th data object associated with the polynomials
     /// of order p. Note that i <= p.
     Data* spectral_data_pt(const unsigned& i) const
     {

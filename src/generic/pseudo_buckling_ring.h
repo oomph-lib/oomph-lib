@@ -386,7 +386,7 @@ namespace oomph
     }
 
 
-    ///Parametrised velocity on object at current time: veloc = d
+    /// Parametrised velocity on object at current time: veloc = d
     /// r(zeta)/dt.
     void veloc(const Vector<double>& zeta, Vector<double>& veloc) // const
     {

@@ -773,7 +773,7 @@ namespace oomph
       return 0;
     }
 
-    ///Number of positional history values (Includes the current value!)
+    /// Number of positional history values (Includes the current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
@@ -2539,7 +2539,7 @@ namespace oomph
       return 1;
     }
 
-    ///Number of positional history values (Includes the current value!)
+    /// Number of positional history values (Includes the current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();

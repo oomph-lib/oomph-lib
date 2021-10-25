@@ -500,7 +500,7 @@ namespace oomph
     }
 
 
-    ///This function returns the residuals and the Jacobian
+    /// This function returns the residuals and the Jacobian
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
     {

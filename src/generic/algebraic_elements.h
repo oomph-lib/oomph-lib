@@ -79,7 +79,7 @@ namespace oomph
     }
 
 
-    ///Constructor for bog-standard algebraic node of spatial
+    /// Constructor for bog-standard algebraic node of spatial
     /// dimension n_dim, with n_position_type generalised coordinates,
     /// with initial_nvalue dofs and with time dependence.
     AlgebraicNode(TimeStepper* time_stepper_pt,
@@ -101,7 +101,7 @@ namespace oomph
                                   // constructor
     }
 
-    ///Destructor (empty)
+    /// Destructor (empty)
     virtual ~AlgebraicNode()
     {
 #ifdef LEAK_CHECK

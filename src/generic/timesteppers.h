@@ -615,7 +615,7 @@ namespace oomph
     /// we can move on to the next timestep
     virtual void shift_time_values(Data* const& data_pt) = 0;
 
-    ///This function advances the time history of the positions
+    /// This function advances the time history of the positions
     /// at a node. The default should be OK, but would need to be overloaded
     virtual void shift_time_positions(Node* const& node_pt) = 0;
 
@@ -633,7 +633,7 @@ namespace oomph
     /// (currently empty -- overwrite for specific scheme)
     virtual void calculate_predicted_values(Data* const& data_pt) {}
 
-    ///Do the predictor step for the positions at a node
+    /// Do the predictor step for the positions at a node
     /// (currently empty --- overwrite for a specific scheme)
     virtual void calculate_predicted_positions(Node* const& node_pt) {}
 
@@ -808,7 +808,7 @@ namespace oomph
       }
     }
 
-    ///This function advances the time history of the positions
+    /// This function advances the time history of the positions
     /// at a node.
     void shift_time_positions(Node* const& node_pt)
     {
@@ -1368,7 +1368,7 @@ namespace oomph
       }
     }
 
-    ///This function advances the time history of the positions
+    /// This function advances the time history of the positions
     /// at a node.
     void shift_time_positions(Node* const& node_pt)
     {

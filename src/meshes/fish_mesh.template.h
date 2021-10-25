@@ -164,7 +164,7 @@ namespace oomph
 
 
   protected:
-    ///Setup all the information that's required for spatial adaptivity:
+    /// Setup all the information that's required for spatial adaptivity:
     /// Set pointers to macro elements and build quadtree forest.
     /// (contained in separate function as this functionality is common
     /// to both constructors),

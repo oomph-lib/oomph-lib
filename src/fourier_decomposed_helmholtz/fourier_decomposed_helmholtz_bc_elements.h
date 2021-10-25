@@ -66,7 +66,7 @@ namespace oomph
     FourierDecomposedHelmholtzBCElementBase(FiniteElement* const& bulk_el_pt,
                                             const int& face_index);
 
-    ///Broken empty constructor
+    /// Broken empty constructor
     FourierDecomposedHelmholtzBCElementBase()
     {
       throw OomphLibError("Don't call empty constructor for "

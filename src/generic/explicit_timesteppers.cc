@@ -35,7 +35,7 @@ namespace oomph
   double ExplicitTimeSteppableObject::Dummy_time_value = 0.0;
 
   //==================================================================
-  ///A single virtual function that returns the residuals
+  /// A single virtual function that returns the residuals
   /// vector multiplied by the inverse mass matrix
   //=================================================================
   void ExplicitTimeSteppableObject::get_dvaluesdt(DoubleVector& minv_res)
@@ -126,7 +126,7 @@ namespace oomph
   }
 
   //==================================================================
-  ///Virtual function that should be overloaded to return access
+  /// Virtual function that should be overloaded to return access
   /// to the local time in the object
   //=================================================================
   double& ExplicitTimeSteppableObject::time()

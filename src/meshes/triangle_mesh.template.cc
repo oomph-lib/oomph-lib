@@ -9023,7 +9023,7 @@ namespace oomph
   }
 
   //======================================================================
-  //Take the polylines from the original open curves and created
+  // Take the polylines from the original open curves and created
   // new temporaly representations of open curves with the bits of
   // original curves not overlapped by shared boundaries
   //======================================================================
@@ -9062,7 +9062,7 @@ namespace oomph
   }
 
   //======================================================================
-  //Check for any possible connections that the array of sorted
+  // Check for any possible connections that the array of sorted
   // nodes have with original boundary nodes, previous shared polyline
   // nodes or with itself polyline nodes. In case that there is a
   // connection, get the boundary id to which connects

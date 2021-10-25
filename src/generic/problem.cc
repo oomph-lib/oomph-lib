@@ -6502,7 +6502,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
   //=======================================================================
-  ///Helper method that returns the global equations to which
+  /// Helper method that returns the global equations to which
   /// the elements in the range el_lo to el_hi contribute on this
   /// processor
   //=======================================================================
@@ -11795,7 +11795,7 @@ namespace oomph
   }
 
   //======================================================================
-  ///Enable recycling of the mass matrix in explicit timestepping
+  /// Enable recycling of the mass matrix in explicit timestepping
   /// schemes. Useful for timestepping on fixed meshes when you want
   /// to avoid the linear solve phase.
   //=====================================================================

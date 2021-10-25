@@ -148,7 +148,7 @@ namespace oomph
   class OomphLibQuietException : public std::runtime_error
   {
   public:
-    ///Constructor
+    /// Constructor
     OomphLibQuietException();
 
     /// The destructor cannot throw an exception (C++ STL standard)
@@ -185,7 +185,7 @@ namespace oomph
     }
 
   protected:
-    ///Constructor takes the error description, function name
+    /// Constructor takes the error description, function name
     /// and a location string provided by the OOMPH_EXCEPTION_LOCATION
     /// macro and combines them into a standard header. The exception type
     /// will be the string "WARNING" or "ERROR" and the message is written to
@@ -227,7 +227,7 @@ namespace oomph
     static unsigned Output_width;
 
   public:
-    ///Constructor requires the error description and the function
+    /// Constructor requires the error description and the function
     /// in which the error occured and the location provided by the
     /// OOMPH_EXCEPTION_LOCATION macro
     OomphLibError(const std::string& error_description,
@@ -272,7 +272,7 @@ namespace oomph
     static unsigned Output_width;
 
   public:
-    ///Constructor requires the warning description and the function
+    /// Constructor requires the warning description and the function
     /// in which the warning occurred.
     OomphLibWarning(const std::string& warning_description,
                     const std::string& function_name,
@@ -436,14 +436,14 @@ namespace oomph
     OutputModifier* Output_modifier_pt;
 
   public:
-    ///Set default values for the output stream (cout)
+    /// Set default values for the output stream (cout)
     /// and modifier (no modification)
     OomphInfo()
       : Stream_pt(&std::cout), Output_modifier_pt(&default_output_modifier)
     {
     }
 
-    ///Overload the << operator, writing output to the stream addressed
+    /// Overload the << operator, writing output to the stream addressed
     /// by Stream_pt and calling the function defined by the object addressed by
     /// Output_modifier_pt
     template<class _Tp>

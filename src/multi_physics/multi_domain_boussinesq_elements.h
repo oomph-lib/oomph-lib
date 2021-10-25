@@ -472,7 +472,7 @@ namespace oomph
     } // end of get_wind_adv_diff
 
 
-    ///Compute the element's residual vector and the Jacobian matrix.
+    /// Compute the element's residual vector and the Jacobian matrix.
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
     {
@@ -845,7 +845,7 @@ namespace oomph
       return Ra_pt;
     }
 
-    ///Overload get_body_force_nst to get the temperature "body force"
+    /// Overload get_body_force_nst to get the temperature "body force"
     /// from the "source" AdvectionDiffusion element via current integration
     /// point
     void get_body_force_nst(const double& time,
@@ -1164,7 +1164,7 @@ namespace oomph
       Vector<unsigned>& global_eqn_number);
 
 
-    ///Compute the element's residual vector and the Jacobian matrix.
+    /// Compute the element's residual vector and the Jacobian matrix.
     /// Jacobian is computed by finite-differencing.
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)

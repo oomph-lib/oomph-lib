@@ -131,7 +131,7 @@ namespace oomph
     }
 
 
-    ///The time-dependent mapping from local to global coordinates:
+    /// The time-dependent mapping from local to global coordinates:
     /// r(t,s).
     /// t is the discrete timelevel: t=0: current time; t>0: previous timestep.
     virtual void macro_map(const unsigned& t,
@@ -164,7 +164,7 @@ namespace oomph
                                                  const unsigned& nplot) = 0;
 
 
-    ///the jacobian of the mapping from the macro coordinates to the
+    /// the jacobian of the mapping from the macro coordinates to the
     /// global
     /// coordinates
     virtual void assemble_macro_to_eulerian_jacobian(
@@ -181,7 +181,7 @@ namespace oomph
     }
 
 
-    ///Assembles the second derivative jacobian of the mapping from the
+    /// Assembles the second derivative jacobian of the mapping from the
     /// macro coordinates to the global coordinates
     virtual void assemble_macro_to_eulerian_jacobian2(
       const unsigned& t,
@@ -199,7 +199,7 @@ namespace oomph
     }
 
 
-    ///Assembles the jacobian of the mapping from the macro coordinates
+    /// Assembles the jacobian of the mapping from the macro coordinates
     /// to
     /// the global coordinates
     void assemble_macro_to_eulerian_jacobian(const Vector<double>& s,
@@ -210,7 +210,7 @@ namespace oomph
     }
 
 
-    ///Assembles the second derivative jacobian of the mapping from the
+    /// Assembles the second derivative jacobian of the mapping from the
     /// macro coordinates to the global coordinates
     void assemble_macro_to_eulerian_jacobian2(const Vector<double>& s,
                                               DenseMatrix<double>& jacobian2)
@@ -219,13 +219,13 @@ namespace oomph
       assemble_macro_to_eulerian_jacobian2(t, s, jacobian2);
     }
 
-    ///Access function to the Macro_element_number
+    /// Access function to the Macro_element_number
     unsigned& macro_element_number()
     {
       return Macro_element_number;
     }
 
-    ///Access function to the Domain_pt
+    /// Access function to the Domain_pt
     Domain*& domain_pt()
     {
       return Domain_pt;
@@ -335,7 +335,7 @@ namespace oomph
     void macro_map(const double& t, const Vector<double>& s, Vector<double>& r);
 
 
-    ///assemble the jacobian of the mapping from the macro coordinates to
+    /// assemble the jacobian of the mapping from the macro coordinates to
     /// the global coordinates
     virtual void assemble_macro_to_eulerian_jacobian(
       const unsigned& t,

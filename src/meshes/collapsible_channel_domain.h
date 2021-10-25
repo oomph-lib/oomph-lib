@@ -113,7 +113,7 @@ namespace oomph
       return Lup;
     }
 
-    ///Length of collapsible segment
+    /// Length of collapsible segment
     double l_collapsible()
     {
       return Lcollapsible;

@@ -1617,14 +1617,14 @@ namespace oomph
     /// boundaries during adaptation enabled? (Default: false)
     bool Enable_redistribution_of_segments_between_polylines;
 
-    ///Boolean flag to indicate whether the polygon can update its
+    /// Boolean flag to indicate whether the polygon can update its
     /// own reference configuration after it has moved i.e. if it is
     /// upgraded to a rigid body rather than being a free surface (default
     /// false)
     bool Can_update_configuration;
 
   private:
-    ///Boolean flag to indicate whether the polygon can move
+    /// Boolean flag to indicate whether the polygon can move
     /// (default false because if it doesn't move this will just lead to
     ///  wasted work)
     bool Polygon_fixed;

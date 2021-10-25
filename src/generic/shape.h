@@ -245,7 +245,7 @@ namespace oomph
       return Psi[i * Index2 + j];
     }
 
-    ///Overload the round bracket operator, allowing for two indices
+    /// Overload the round bracket operator, allowing for two indices
     /// (const version)
     inline const double& operator()(const unsigned& i, const unsigned& j) const
     {

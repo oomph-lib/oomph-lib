@@ -119,7 +119,7 @@ namespace oomph
     int NArnoldi;
 
 
-    ///Boolean to set which part of the spectrum left (default) or right
+    /// Boolean to set which part of the spectrum left (default) or right
     /// of the shifted value.
     bool Small;
 

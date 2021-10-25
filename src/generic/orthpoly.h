@@ -51,7 +51,7 @@ namespace oomph
   {
     const double eps = 1.0e-15;
 
-    ///Calculates Legendre polynomial of degree p at x
+    /// Calculates Legendre polynomial of degree p at x
     /// using the three term recurrence relation
     /// \f$ (n+1) P_{n+1} = (2n+1)xP_{n} - nP_{n-1} \f$
     inline double legendre(const unsigned& p, const double& x)

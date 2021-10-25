@@ -1953,7 +1953,7 @@ namespace oomph
       Shared_boundary_polyline_pt.clear();
     }
 
-    ///Stores the boundary elements adjacent to the shared boundaries,
+    /// Stores the boundary elements adjacent to the shared boundaries,
     /// these
     /// elements are a subset of the halo and haloed elements
     std::map<unsigned, Vector<FiniteElement*>> Shared_boundary_element_pt;
@@ -1976,7 +1976,7 @@ namespace oomph
     /// info. to Triangle during the adaptation process.
     std::map<unsigned, Vector<TriangleMeshPolyLine*>> Boundary_subpolylines;
 
-    ///Flag to indicate if an internal boundary will be used as shared
+    /// Flag to indicate if an internal boundary will be used as shared
     /// boundary
     /// because there is overlapping of the internal boundary with the shared
     /// boundary
@@ -2002,7 +2002,7 @@ namespace oomph
       Vector<Vector<TriangleMeshPolyLine*>>& polylines_pt,
       Vector<TriangleMeshPolygon*>& polygons_pt);
 
-    ///Take the polylines from the original open curves and created
+    /// Take the polylines from the original open curves and created
     /// new temporaly representations of open curves with the bits of
     /// original curves not overlapped by shared boundaries
     void create_tmp_open_curves_helper(

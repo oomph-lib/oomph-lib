@@ -305,7 +305,7 @@ namespace oomph
   class TetMeshFacetedSurface
   {
   public:
-    ///Constructor:
+    /// Constructor:
     TetMeshFacetedSurface()
       : Boundaries_can_be_split_in_tetgen(true),
         Geom_object_with_boundaries_pt(0)
@@ -537,7 +537,7 @@ namespace oomph
   class TetMeshFacetedClosedSurface : public virtual TetMeshFacetedSurface
   {
   public:
-    ///Constructor:
+    /// Constructor:
     TetMeshFacetedClosedSurface()
       : TetMeshFacetedSurface(), Faceted_volume_represents_hole_for_gmsh(false)
     {

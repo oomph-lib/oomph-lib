@@ -81,7 +81,7 @@ namespace oomph
       return nodal_local_eqn(n, i);
     }
 
-    ///Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
     inline double shape_and_test_at_knot(const unsigned& ipt,
                                          Shape& psi,
@@ -124,7 +124,7 @@ namespace oomph
     }
 
 
-    ///This function returns the residuals for the
+    /// This function returns the residuals for the
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_fluid_traction(
@@ -365,7 +365,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    ///This function returns the residuals and the Jacobian
+    /// This function returns the residuals and the Jacobian
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
     {
@@ -376,7 +376,7 @@ namespace oomph
 
 
   protected:
-    ///This function returns the residuals for the
+    /// This function returns the residuals for the
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void refineable_fill_in_generic_residual_contribution_fluid_traction(

@@ -54,7 +54,7 @@ namespace oomph
   class ProjectableElementBase
   {
   protected:
-    ///Enumerated collection to specify which projection problem
+    /// Enumerated collection to specify which projection problem
     /// is to be solved.
     enum Projection_Type
     {
@@ -69,11 +69,11 @@ namespace oomph
     /// Time level we are projecting  (0=current values; >0: history values)
     unsigned Time_level_for_projection;
 
-    ///When projecting the history values of the nodal coordinates,
+    /// When projecting the history values of the nodal coordinates,
     /// this is the coordinate we're projecting
     unsigned Projected_coordinate;
 
-    ///When projecting the Lagrangain coordinates indicate which
+    /// When projecting the Lagrangain coordinates indicate which
     /// coordiante is to be projected
     unsigned Projected_lagrangian;
 
@@ -140,7 +140,7 @@ namespace oomph
     /// (includes current value!)
     virtual unsigned nhistory_values_for_projection(const unsigned& fld) = 0;
 
-    ///Number of history values to be stored when projecting
+    /// Number of history values to be stored when projecting
     /// the history values of the nodal coordinates (includes current value!)
     virtual unsigned nhistory_values_for_coordinate_projection() = 0;
 
@@ -577,7 +577,7 @@ namespace oomph
       set_ninteraction(1);
     }
 
-    ///Helper function to restore the element to the state
+    /// Helper function to restore the element to the state
     /// it was in before we entered the projection mode and switch off
     /// projection mode.
     void disable_projection()
@@ -744,7 +744,7 @@ namespace oomph
       Use_iterative_solver_for_projection = false;
     }
 
-    ///Project from base into the problem's own mesh.
+    /// Project from base into the problem's own mesh.
     void project(Mesh* base_mesh_pt, const bool& dont_project_positions = false)
     {
       // Use an iterative solver?
@@ -1499,7 +1499,7 @@ namespace oomph
       }
     }
 
-    ///Pin all the field values and position unknowns (bit inefficient)
+    /// Pin all the field values and position unknowns (bit inefficient)
     void pin_all()
     {
       // No need to do anything if there are no elements (in fact, we
@@ -1569,7 +1569,7 @@ namespace oomph
     }
 
 
-    ///Unpin all the field values and position unknowns (bit inefficient)
+    /// Unpin all the field values and position unknowns (bit inefficient)
     void unpin_all()
     {
       // No need to do anything if there are no elements (in fact, we

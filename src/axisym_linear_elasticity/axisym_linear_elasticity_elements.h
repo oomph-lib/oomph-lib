@@ -711,7 +711,7 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
-    ///Number of positional history values: Read out from
+    /// Number of positional history values: Read out from
     /// positional timestepper  (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {

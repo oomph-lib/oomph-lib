@@ -72,7 +72,7 @@ namespace oomph
       return nodal_local_eqn(n, i);
     }
 
-    ///Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
     inline double shape_and_test_at_knot(const unsigned& ipt,
                                          Shape& psi,
@@ -113,7 +113,7 @@ namespace oomph
       }
     }
 
-    ///This function returns the residuals for the
+    /// This function returns the residuals for the
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution(Vector<double>& residuals,
@@ -265,7 +265,7 @@ namespace oomph
         residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
     }
 
-    ///Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// Plus the mass matrix especially for eigenvalue problems
     void fill_in_contribution_to_jacobian_and_mass_matrix(
       Vector<double>& residuals,

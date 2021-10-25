@@ -252,7 +252,7 @@ namespace oomph
 
     bool Shift_f;
 
-    ///This function advances the time history of the positions at a
+    /// This function advances the time history of the positions at a
     /// node.
     void shift_time_positions(Node* const& node_pt)
     {

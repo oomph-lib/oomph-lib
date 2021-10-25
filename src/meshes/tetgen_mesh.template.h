@@ -393,7 +393,7 @@ namespace oomph
       snap_nodes_onto_geometric_objects();
     }
 
-    ///Build tetgenio object from the TetMeshFacetedSurfaces
+    /// Build tetgenio object from the TetMeshFacetedSurfaces
     void build_tetgenio(
       TetMeshFacetedSurface* const& outer_boundary_pt,
       Vector<TetMeshFacetedSurface*>& internal_surface_pt,

@@ -508,7 +508,7 @@ namespace oomph
       Boundary_coordinate_exists.resize(nbound, false);
     }
 
-    ///Clear all pointers to boundary nodes
+    /// Clear all pointers to boundary nodes
     void remove_boundary_nodes();
 
     /// Remove all information about nodes stored on the b-th

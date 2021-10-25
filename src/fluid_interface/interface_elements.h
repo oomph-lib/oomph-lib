@@ -105,7 +105,7 @@ namespace oomph
 #endif
     }
 
-    ///The geometric data of the parent element is included as
+    /// The geometric data of the parent element is included as
     /// external data and so a (bulk) node update must take place after
     /// the variation of any of this external data
     inline void update_in_external_fd(const unsigned& i)
@@ -114,7 +114,7 @@ namespace oomph
       bulk_element_pt()->node_update();
     }
 
-    ///The only external data are these geometric data so
+    /// The only external data are these geometric data so
     /// We can omit the reset function (relying on the next update
     // function to take care of the remesh)
     inline void reset_in_external_fd(const unsigned& i) {}

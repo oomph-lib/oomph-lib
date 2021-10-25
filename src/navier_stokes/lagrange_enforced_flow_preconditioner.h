@@ -284,7 +284,7 @@ namespace oomph
     void set_navier_stokes_preconditioner(
       Preconditioner* new_ns_preconditioner_pt = 0);
 
-    ///Set Navier-Stokes matrix preconditioner (inexact
+    /// Set Navier-Stokes matrix preconditioner (inexact
     /// solver) to SuperLU
     void set_superlu_for_navier_stokes_preconditioner()
     {

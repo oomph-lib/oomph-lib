@@ -598,7 +598,7 @@ namespace oomph
     /// Set the shifted value
     double Sigma;
 
-    ///Boolean to set which part of the spectrum left (default) or right
+    /// Boolean to set which part of the spectrum left (default) or right
     /// of the shifted value.
     bool Small;
 

@@ -155,14 +155,14 @@ namespace oomph
       return Interface_lower_boundary_element_pt.size();
     }
 
-    ///Index of the face of the elements next to the interface
+    /// Index of the face of the elements next to the interface
     /// in the upper region (always -2)
     int interface_upper_face_index_at_boundary(const unsigned& e)
     {
       return -2;
     }
 
-    ///Index of the face of the elements next to the interface in
+    /// Index of the face of the elements next to the interface in
     /// the lower region (always 2)
     int interface_lower_face_index_at_boundary(const unsigned& e)
     {

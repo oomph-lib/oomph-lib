@@ -45,7 +45,7 @@ namespace oomph
   template<unsigned DIM>
   class EulerEquations : public FluxTransportEquations<DIM>
   {
-    //Default value for gamma (initialised to 1.4)
+    // Default value for gamma (initialised to 1.4)
     static double Default_Gamma_Value;
 
     // Pointer to the specific gas constant
@@ -117,7 +117,7 @@ namespace oomph
       return Gamma_pt;
     }
 
-    ///The number of unknowns at each node is the number of flux
+    /// The number of unknowns at each node is the number of flux
     /// components
     inline unsigned required_nvalue(const unsigned& n) const
     {
@@ -822,7 +822,7 @@ namespace oomph
     }
 
 
-    ///Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,
@@ -949,7 +949,7 @@ namespace oomph
     }
 
 
-    ///Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,

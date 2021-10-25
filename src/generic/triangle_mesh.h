@@ -257,7 +257,7 @@ namespace oomph
   protected:
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    ///TriangulateIO representation of the mesh
+    /// TriangulateIO representation of the mesh
     TriangulateIO Triangulateio;
 
     /// Should we use triangulateio specific parts for dump/restart? (Doesn't

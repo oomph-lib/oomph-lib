@@ -366,13 +366,13 @@ namespace oomph
       return Neighbour_periodic[direction];
     }
 
-    ///Set the neighbour in particular direction to be periodic
+    /// Set the neighbour in particular direction to be periodic
     void set_neighbour_periodic(const int& direction)
     {
       Neighbour_periodic[direction] = true;
     }
 
-    ///Set the neighbour in particular direction to be nonperiodic
+    /// Set the neighbour in particular direction to be nonperiodic
     void set_neighbour_nonperiodic(const int& direction)
     {
       Neighbour_periodic[direction] = false;

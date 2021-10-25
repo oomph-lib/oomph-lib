@@ -718,7 +718,7 @@ namespace oomph
     }
 
 
-    ///Return the local equation number corresponding to the
+    /// Return the local equation number corresponding to the
     /// ieqn_global-th global equation number. Returns minus one (-1) if there
     /// is
     /// no local degree of freedom corresponding to the chosen global equation
@@ -837,7 +837,7 @@ namespace oomph
       return Ndof;
     }
 
-    ///Return the vector of dof values at time level t
+    /// Return the vector of dof values at time level t
     void dof_vector(const unsigned& t, Vector<double>& dof)
     {
       // Check that the internal storage has been set up
@@ -862,7 +862,7 @@ namespace oomph
       }
     }
 
-    ///Return the vector of pointers to dof values
+    /// Return the vector of pointers to dof values
     void dof_pt_vector(Vector<double*>& dof_pt)
     {
       // Check that the internal storage has been set up
@@ -1824,7 +1824,7 @@ namespace oomph
       return true;
     }
 
-    ///Adjust local coordinates so that they're located inside
+    /// Adjust local coordinates so that they're located inside
     /// the element
     virtual void move_local_coord_back_into_element(Vector<double>& s) const
     {
@@ -2630,7 +2630,7 @@ namespace oomph
     virtual double interpolated_x(const Vector<double>& s,
                                   const unsigned& i) const;
 
-    ///Return FE interpolated coordinate x[i] at local coordinate s
+    /// Return FE interpolated coordinate x[i] at local coordinate s
     /// at previous timestep t (t=0: present; t>0: previous timestep)
     virtual double interpolated_x(const unsigned& t,
                                   const Vector<double>& s,
@@ -3610,7 +3610,7 @@ namespace oomph
     /// Broken assignment operator
     /*void operator=(const SolidFiniteElement&) = delete;*/
 
-    ///The number of geometric data affecting a SolidFiniteElemnet is
+    /// The number of geometric data affecting a SolidFiniteElemnet is
     /// the same as the number of nodes (one variable position data per node)
     inline unsigned ngeom_data() const
     {
@@ -4563,7 +4563,7 @@ namespace oomph
       return bulk_element_pt()->interpolated_x(s_bulk, i);
     }
 
-    ///Return FE interpolated coordinate x[i] at local coordinate s
+    /// Return FE interpolated coordinate x[i] at local coordinate s
     /// at previous timestep t (t=0: present; t>0: previous timestep).
     /// Overloaded to get information from bulk.
     double interpolated_x(const unsigned& t,

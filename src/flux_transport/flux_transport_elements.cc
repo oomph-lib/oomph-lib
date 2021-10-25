@@ -80,7 +80,7 @@ namespace oomph
   }
 
   //=====================================================================
-  ///Compute the residuals for the flux transport equations;
+  /// Compute the residuals for the flux transport equations;
   /// flag=1 compute jacobian as well
   /// flag=2 compute mass matrix and jacobian as well
   /// flag=3 compute mass matrix as well

@@ -383,7 +383,7 @@ namespace oomph
       Use_pointwise_aitken = false;
     }
 
-    ///Use under-relaxation and (optionally) specify under-relaxation
+    /// Use under-relaxation and (optionally) specify under-relaxation
     /// parameter. Default: omega=1.0 (i.e. no actual under-relaxation;
     /// Other extreme: omega=0.0 (freeze wall shape). Under-relaxation
     /// parameter can also be computed dynamically by setting
@@ -393,13 +393,13 @@ namespace oomph
       Omega_relax = omega;
     }
 
-    ///Use Irons and Tuck extrapolation for solid dofs
+    /// Use Irons and Tuck extrapolation for solid dofs
     void enable_irons_and_tuck_extrapolation()
     {
       Use_irons_and_tuck_extrapolation = true;
     }
 
-    ///Do not use Irons and Tuck extrapolation for solid dofs
+    /// Do not use Irons and Tuck extrapolation for solid dofs
     void disable_irons_and_tuck_extrapolation()
     {
       Use_irons_and_tuck_extrapolation = false;

@@ -943,7 +943,7 @@ namespace oomph
       assign_solid_hanging_local_eqn_numbers(store_local_dof_pt);
     }
 
-    ///The number of geometric data affecting a
+    /// The number of geometric data affecting a
     /// RefineableSolidFiniteElement is the positional Data of all
     /// non-hanging nodes plus the geometric Data of all distinct
     /// master nodes. Recomputed on the fly.
