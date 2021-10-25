@@ -40,7 +40,7 @@ namespace oomph
 
 
   //=================================================================
-  ///  Vector representation of the  imacro-th macro element
+  /// Vector representation of the  imacro-th macro element
   /// boundary idirect (L/R/D/B/F) at time level t (t=0: present; t>0:
   /// previous): f(s)
   //=================================================================
@@ -101,7 +101,7 @@ namespace oomph
 
 
   //=======================================================================
-  ///  Left boundary face
+  /// Left boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
   void WarpedCubeDomain::r_L(const unsigned& t,
@@ -119,7 +119,7 @@ namespace oomph
 
 
   //=======================================================================
-  ///  Right boundary face
+  /// Right boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
   void WarpedCubeDomain::r_R(const unsigned& t,
@@ -136,7 +136,7 @@ namespace oomph
 
 
   //=======================================================================
-  ///  Down boundary face
+  /// Down boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
   void WarpedCubeDomain::r_D(const unsigned& t,
@@ -153,7 +153,7 @@ namespace oomph
 
 
   //=======================================================================
-  ///  Up boundary face
+  /// Up boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
   void WarpedCubeDomain::r_U(const unsigned& t,
@@ -171,7 +171,7 @@ namespace oomph
 
 
   //=======================================================================
-  ///  Back boundary face
+  /// Back boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
   void WarpedCubeDomain::r_B(const unsigned& t,
@@ -188,7 +188,7 @@ namespace oomph
 
 
   //=======================================================================
-  ///  Front boundary face
+  /// Front boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
   void WarpedCubeDomain::r_F(const unsigned& t,

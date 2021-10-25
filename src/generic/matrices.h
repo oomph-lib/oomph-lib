@@ -61,7 +61,7 @@ namespace oomph
 #undef OOMPH_INITIALISE_DENSE_MATRICES
 
   //=================================================================
-  ///  Abstract base class for matrices, templated by
+  /// Abstract base class for matrices, templated by
   /// the type of object that is stored in them and the type of matrix.
   /// The MATRIX_TYPE template argument is used as part of the
   /// Curiously Recurring Template Pattern, see
@@ -73,7 +73,7 @@ namespace oomph
   class Matrix
   {
   protected:
-    ///  Range check to catch when an index is out of bounds, if so, it
+    /// Range check to catch when an index is out of bounds, if so, it
     /// issues a warning message and dies by throwing an \c OomphLibError
     void range_check(const unsigned long& i, const unsigned long& j) const
     {
@@ -119,7 +119,7 @@ namespace oomph
     /// Return the number of columns of the matrix
     virtual unsigned long ncol() const = 0;
 
-    ///  Round brackets to give access as a(i,j) for read only
+    /// Round brackets to give access as a(i,j) for read only
     /// (we're not providing a general interface for component-wise write
     /// access since not all matrix formats allow efficient direct access!)
     /// The function uses the  MATRIX_TYPE template parameter to call the
@@ -130,7 +130,7 @@ namespace oomph
       return static_cast<MATRIX_TYPE const*>(this)->get_entry(i, j);
     }
 
-    ///   Round brackets to give access as a(i,j) for read-write
+    ///  Round brackets to give access as a(i,j) for read-write
     /// access.
     /// The function uses the MATRIX_TYPE template parameter to call the
     /// entry() function which must be defined in all derived classes
@@ -142,7 +142,7 @@ namespace oomph
       return static_cast<MATRIX_TYPE*>(this)->entry(i, j);
     }
 
-    ///  Output function to print a matrix row-by-row, in the form
+    /// Output function to print a matrix row-by-row, in the form
     /// a(0,0) a(0,1) ...
     /// a(1,0) a(1,1) ...
     /// ...
@@ -157,7 +157,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Output the "bottom right" entry regardless of it being
+    /// Output the "bottom right" entry regardless of it being
     /// zero or not (this allows automatic detection of matrix size in
     /// e.g. matlab, python).
     /// This functionality was moved from the function
@@ -168,12 +168,12 @@ namespace oomph
     virtual void output_bottom_right_zero_helper(
       std::ostream& outfile) const = 0;
 
-    ///  Indexed output function to print a matrix to the stream outfile
+    /// Indexed output function to print a matrix to the stream outfile
     /// as i,j,a(i,j) for a(i,j)!=0 only.
     virtual void sparse_indexed_output_helper(std::ostream& outfile) const = 0;
 
 
-    ///  Indexed output function to print a matrix to the stream outfile
+    /// Indexed output function to print a matrix to the stream outfile
     /// as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if
     /// precision=0 then nothing is changed). If optional boolean flag is set
     /// to true we also output the "bottom right" entry regardless of it being
@@ -218,7 +218,7 @@ namespace oomph
       }
     }
 
-    ///  Indexed output function to print a matrix to the file named
+    /// Indexed output function to print a matrix to the file named
     /// filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If
     /// optional boolean flag is set to true we also output the "bottom right"
     /// entry regardless of it being zero or not (this allows automatic
@@ -253,7 +253,7 @@ namespace oomph
   class LinearSolver;
 
   //=============================================================================
-  ///  Abstract base class for matrices of doubles -- adds
+  /// Abstract base class for matrices of doubles -- adds
   /// abstract interfaces for solving, LU decomposition and
   /// multiplication by vectors.
   //=============================================================================
@@ -285,7 +285,7 @@ namespace oomph
     /// virtual (empty) destructor
     virtual ~DoubleMatrixBase() {}
 
-    ///  Round brackets to give access as a(i,j) for read only
+    /// Round brackets to give access as a(i,j) for read only
     /// (we're not providing a general interface for component-wise write
     /// access since not all matrix formats allow efficient direct access!)
     virtual double operator()(const unsigned long& i,
@@ -304,25 +304,25 @@ namespace oomph
       return Linear_solver_pt;
     }
 
-    ///  Complete LU solve (replaces matrix by its LU decomposition
+    /// Complete LU solve (replaces matrix by its LU decomposition
     /// and overwrites RHS with solution). The default should not need
     /// to be over-written
     void solve(DoubleVector& rhs);
 
-    ///  Complete LU solve (Nothing gets overwritten!). The default should
+    /// Complete LU solve (Nothing gets overwritten!). The default should
     /// not need to be overwritten
     void solve(const DoubleVector& rhs, DoubleVector& soln);
 
-    ///  Complete LU solve (replaces matrix by its LU decomposition
+    /// Complete LU solve (replaces matrix by its LU decomposition
     /// and overwrites RHS with solution). The default should not need
     /// to be over-written
     void solve(Vector<double>& rhs);
 
-    ///  Complete LU solve (Nothing gets overwritten!). The default should
+    /// Complete LU solve (Nothing gets overwritten!). The default should
     /// not need to be overwritten
     void solve(const Vector<double>& rhs, Vector<double>& soln);
 
-    ///  Find the residual, i.e. r=b-Ax the residual
+    /// Find the residual, i.e. r=b-Ax the residual
     virtual void residual(const DoubleVector& x,
                           const DoubleVector& b,
                           DoubleVector& residual_)
@@ -342,7 +342,7 @@ namespace oomph
       residual_ += b;
     }
 
-    ///  Find the maximum residual r=b-Ax -- generic version, can be
+    /// Find the maximum residual r=b-Ax -- generic version, can be
     /// overloaded for specific derived classes where the
     /// max. can be determined "on the fly"
     virtual double max_residual(const DoubleVector& x, const DoubleVector& rhs)
@@ -352,14 +352,14 @@ namespace oomph
       return res.max();
     }
 
-    ///  Multiply the matrix by the vector x: soln=Ax.
+    /// Multiply the matrix by the vector x: soln=Ax.
     virtual void multiply(const DoubleVector& x, DoubleVector& soln) const = 0;
 
-    ///  Multiply the  transposed matrix by the vector x: soln=A^T x
+    /// Multiply the  transposed matrix by the vector x: soln=A^T x
     virtual void multiply_transpose(const DoubleVector& x,
                                     DoubleVector& soln) const = 0;
 
-    ///  For every row, find the maximum absolute value of the
+    /// For every row, find the maximum absolute value of the
     /// entries in this row. Set all values that are less than alpha times
     /// this maximum to zero and return the resulting matrix in
     /// reduced_matrix. Note: Diagonal entries are retained regardless
@@ -375,7 +375,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Class for dense matrices, storing all the values of the
+  /// Class for dense matrices, storing all the values of the
   /// matrix as a pointer to a pointer with assorted output functions
   /// inherited from Matrix<T>. The curious recursive template pattern is
   /// used here to pass the specific class to the base class so that
@@ -442,7 +442,7 @@ namespace oomph
       return *this;
     }
 
-    ///  The access function that will be called by the read-write
+    /// The access function that will be called by the read-write
     /// round-bracket operator.
     inline T& entry(const unsigned long& i, const unsigned long& j)
     {
@@ -452,7 +452,7 @@ namespace oomph
       return Matrixdata[M * i + j];
     }
 
-    ///  The access function the will be called by the read-only
+    /// The access function the will be called by the read-only
     /// (const version) round-bracket operator.
     inline T get_entry(const unsigned long& i, const unsigned long& j) const
     {
@@ -468,7 +468,7 @@ namespace oomph
     /// Constructor to build a matrix with n rows and m columns
     DenseMatrix(const unsigned long& n, const unsigned long& m);
 
-    ///  Constructor to build a matrix with n rows and m columns,
+    /// Constructor to build a matrix with n rows and m columns,
     /// with initial value initial_val
     DenseMatrix(const unsigned long& n,
                 const unsigned long& m,
@@ -500,17 +500,17 @@ namespace oomph
       resize(n, n);
     }
 
-    ///  Resize to a non-square n x m matrix;
+    /// Resize to a non-square n x m matrix;
     /// any values already present will be transfered
     void resize(const unsigned long& n, const unsigned long& m);
 
-    ///  Resize to a non-square n x m matrix and initialize the
+    /// Resize to a non-square n x m matrix and initialize the
     /// new values to initial_value.
     void resize(const unsigned long& n,
                 const unsigned long& m,
                 const T& initial_value);
 
-    ///  Initialize all values in the matrix to val.
+    /// Initialize all values in the matrix to val.
     void initialise(const T& val)
     {
       for (unsigned long i = 0; i < (N * M); ++i)
@@ -526,20 +526,20 @@ namespace oomph
     /// filename.
     void output(std::string filename) const;
 
-    ///  Indexed output function to print a matrix to the
+    /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j)
     void indexed_output(std::ostream& outfile) const;
 
-    ///  Indexed output function to print a matrix to a
+    /// Indexed output function to print a matrix to a
     /// file as i,j,a(i,j). Specify filename.
     void indexed_output(std::string filename) const;
 
-    ///  Output the "bottom right" entry regardless of it being
+    /// Output the "bottom right" entry regardless of it being
     /// zero or not (this allows automatic detection of matrix size in
     /// e.g. matlab, python).
     void output_bottom_right_zero_helper(std::ostream& outfile) const;
 
-    ///  Indexed output function to print a matrix to the
+    /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
     void sparse_indexed_output_helper(std::ostream& outfile) const;
   };
@@ -642,7 +642,7 @@ namespace oomph
       return Nnz;
     }
 
-    ///  Output the "bottom right" entry regardless of it being
+    /// Output the "bottom right" entry regardless of it being
     /// zero or not (this allows automatic detection of matrix size in
     /// e.g. matlab, python).
     virtual void output_bottom_right_zero_helper(std::ostream& outfile) const
@@ -656,7 +656,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Indexed output function to print a matrix to the
+    /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
     virtual void sparse_indexed_output_helper(std::ostream& outfile) const
     {
@@ -672,7 +672,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  A class for compressed row matrices, a sparse storage format
+  /// A class for compressed row matrices, a sparse storage format
   /// Once again the recursive template trick is used to inform that base
   /// class that is should use the access functions provided in the
   /// CRMatrix class.
@@ -689,7 +689,7 @@ namespace oomph
     }
 
 
-    ///  Constructor: Pass vector of values, vector of column indices,
+    /// Constructor: Pass vector of values, vector of column indices,
     /// vector of row starts and number of rows and columns
     /// Number of nonzero entries is read
     /// off from value, so make sure the vector has been shrunk
@@ -706,7 +706,7 @@ namespace oomph
       build(value, column_index_, row_start_, n, m);
     }
 
-    ///  Copy constructor
+    /// Copy constructor
     CRMatrix(const CRMatrix& source_matrix)
       : SparseMatrix<T, CRMatrix<T>>(source_matrix)
     {
@@ -743,7 +743,7 @@ namespace oomph
       Row_start = 0;
     }
 
-    ///  Access function that will be called by the read-only
+    /// Access function that will be called by the read-only
     /// round-bracket operator (const)
     T get_entry(const unsigned long& i, const unsigned long& j) const
     {
@@ -805,7 +805,7 @@ namespace oomph
       return Column_index;
     }
 
-    ///  Output the "bottom right" entry regardless of it being
+    /// Output the "bottom right" entry regardless of it being
     /// zero or not (this allows automatic detection of matrix size in
     /// e.g. matlab, python).
     void output_bottom_right_zero_helper(std::ostream& outfile) const
@@ -823,7 +823,7 @@ namespace oomph
       }
     }
 
-    ///  Indexed output function to print a matrix to the
+    /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
     void sparse_indexed_output_helper(std::ostream& outfile) const
     {
@@ -840,7 +840,7 @@ namespace oomph
     /// Wipe matrix data and set all values to 0.
     void clean_up_memory();
 
-    ///  Build matrix from compressed representation. Number of nonzero
+    /// Build matrix from compressed representation. Number of nonzero
     /// entries is read off from value, so make sure the vector has been shrunk
     /// to its correct length. This matrix forms the storage for
     /// CRDoubleMatrices which are distributable. The argument n should be the
@@ -852,7 +852,7 @@ namespace oomph
                const unsigned long& m);
 
 
-    ///  Function to build matrix from pointers to arrays
+    /// Function to build matrix from pointers to arrays
     /// which hold the row starts, column indices and non-zero values.
     /// The final two arguments are the number of rows and columns.
     /// Note that, as the name suggests, this function does not
@@ -879,7 +879,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  A class for compressed row matrices. This is a distributable
+  /// A class for compressed row matrices. This is a distributable
   /// object.
   //=============================================================================
   class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix>,
@@ -890,7 +890,7 @@ namespace oomph
     /// Default constructor
     CRDoubleMatrix();
 
-    ///  Constructor: vector of values, vector of column indices,
+    /// Constructor: vector of values, vector of column indices,
     /// vector of row starts and number of rows and columns.
     CRDoubleMatrix(const LinearAlgebraDistribution* distribution_pt,
                    const unsigned& ncol,
@@ -898,7 +898,7 @@ namespace oomph
                    const Vector<int>& column_index,
                    const Vector<int>& row_start);
 
-    ///  Constructor: just stores the distribution but does not build the
+    /// Constructor: just stores the distribution but does not build the
     /// matrix
     CRDoubleMatrix(const LinearAlgebraDistribution* distribution_pt);
 
@@ -911,7 +911,7 @@ namespace oomph
     /// Destructor
     virtual ~CRDoubleMatrix();
 
-    ///  Access function: returns the vector Index_of_diagonal_entries.
+    /// Access function: returns the vector Index_of_diagonal_entries.
     /// The i-th entry of the vector contains the index of the last entry
     /// below or on the diagonal. If there are no entries below or on the
     /// diagonal then the corresponding entry is -1. If, however, there are
@@ -937,7 +937,7 @@ namespace oomph
       return Index_of_diagonal_entries;
     } // End of index_of_diagonal_entries
 
-    ///  Create a struct to provide a comparison function for std::sort
+    /// Create a struct to provide a comparison function for std::sort
     struct CRDoubleMatrixComparisonHelper
     {
       // Define the comparison operator
@@ -950,18 +950,18 @@ namespace oomph
       }
     } Comparison_struct;
 
-    ///  Runs through the column index vector and checks if the entries
+    /// Runs through the column index vector and checks if the entries
     /// follow the regular lexicographical ordering of matrix entries, i.e.
     /// it will check (at the i-th row of the matrix) if the entries in the
     /// column index vector associated with this row are in increasing order
     bool entries_are_sorted(const bool& doc_unordered_entries = false) const;
 
-    ///  Sorts the entries associated with each row of the matrix in the
+    /// Sorts the entries associated with each row of the matrix in the
     /// column index vector and the value vector into ascending order and sets
     /// up the Index_of_diagonal_entries vector
     void sort_entries();
 
-    ///  build method: vector of values, vector of column indices,
+    /// build method: vector of values, vector of column indices,
     /// vector of row starts and number of rows and columns.
     void build(const LinearAlgebraDistribution* distribution_pt,
                const unsigned& ncol,
@@ -973,13 +973,13 @@ namespace oomph
     /// distribution
     void build(const LinearAlgebraDistribution* distribution_pt);
 
-    ///  keeps the existing distribution and just matrix that is stored
+    /// keeps the existing distribution and just matrix that is stored
     void build(const unsigned& ncol,
                const Vector<double>& value,
                const Vector<int>& column_index,
                const Vector<int>& row_start);
 
-    ///  keeps the existing distribution and just matrix that is stored
+    /// keeps the existing distribution and just matrix that is stored
     /// without copying the matrix data
     void build_without_copy(const unsigned& ncol,
                             const unsigned& nnz,
@@ -995,7 +995,7 @@ namespace oomph
     /// the same Communicator.
     void redistribute(const LinearAlgebraDistribution* const& dist_pt);
 
-    ///  clear
+    /// clear
     void clear();
 
     /// Return the number of rows of the matrix
@@ -1010,7 +1010,7 @@ namespace oomph
       return CR_matrix.ncol();
     }
 
-    ///  Output the "bottom right" entry regardless of it being
+    /// Output the "bottom right" entry regardless of it being
     /// zero or not (this allows automatic detection of matrix size in
     /// e.g. matlab, python).
     void output_bottom_right_zero_helper(std::ostream& outfile) const
@@ -1018,14 +1018,14 @@ namespace oomph
       CR_matrix.output_bottom_right_zero_helper(outfile);
     }
 
-    ///  Indexed output function to print a matrix to the
+    /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
     void sparse_indexed_output_helper(std::ostream& outfile) const
     {
       CR_matrix.sparse_indexed_output_helper(outfile);
     }
 
-    ///  Indexed output function to print a matrix to a
+    /// Indexed output function to print a matrix to a
     /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
     /// This uses acual global row numbers.
     void sparse_indexed_output_with_offset(std::string filename)
@@ -1098,20 +1098,20 @@ namespace oomph
       return CR_matrix.nnz();
     }
 
-    ///  LU decomposition using SuperLU if matrix is not distributed or
+    /// LU decomposition using SuperLU if matrix is not distributed or
     /// distributed onto a single processor.
     virtual void ludecompose();
 
-    ///  LU back solve for given RHS
+    /// LU back solve for given RHS
     virtual void lubksub(DoubleVector& rhs);
 
-    ///  Multiply the matrix by the vector x: soln=Ax
+    /// Multiply the matrix by the vector x: soln=Ax
     void multiply(const DoubleVector& x, DoubleVector& soln) const;
 
-    ///  Multiply the  transposed matrix by the vector x: soln=A^T x
+    /// Multiply the  transposed matrix by the vector x: soln=A^T x
     void multiply_transpose(const DoubleVector& x, DoubleVector& soln) const;
 
-    ///  Function to multiply this matrix by the CRDoubleMatrix matrix_in.
+    /// Function to multiply this matrix by the CRDoubleMatrix matrix_in.
     /// In a serial matrix, there are 4 methods available:
     /// Method 1: First runs through this matrix and matrix_in to find the
     /// storage
@@ -1133,14 +1133,14 @@ namespace oomph
     void multiply(const CRDoubleMatrix& matrix_in,
                   CRDoubleMatrix& result) const;
 
-    ///  For every row, find the maximum absolute value of the
+    /// For every row, find the maximum absolute value of the
     /// entries in this row. Set all values that are less than alpha times
     /// this maximum to zero and return the resulting matrix in
     /// reduced_matrix. Note: Diagonal entries are retained regardless
     /// of their size.
     void matrix_reduction(const double& alpha, CRDoubleMatrix& reduced_matrix);
 
-    ///  Access function to Serial_matrix_matrix_multiply_method, the flag
+    /// Access function to Serial_matrix_matrix_multiply_method, the flag
     /// which determines the matrix matrix multiplication method used for serial
     /// matrices.
     /// Method 1: First runs through this matrix and matrix_in to find the
@@ -1161,7 +1161,7 @@ namespace oomph
       return Serial_matrix_matrix_multiply_method;
     }
 
-    ///  Read only access function (const version) to
+    /// Read only access function (const version) to
     /// Serial_matrix_matrix_multiply_method, the flag
     /// which determines the matrix matrix multiplication method used for serial
     /// matrices.
@@ -1183,7 +1183,7 @@ namespace oomph
       return Serial_matrix_matrix_multiply_method;
     }
 
-    ///  Access function to Distributed_matrix_matrix_multiply_method, the
+    /// Access function to Distributed_matrix_matrix_multiply_method, the
     /// flag which determines the matrix matrix multiplication method used for
     /// distributed matrices.
     /// Method 1: Trilinos Epetra Matrix Matrix multiply.
@@ -1193,7 +1193,7 @@ namespace oomph
       return Distributed_matrix_matrix_multiply_method;
     }
 
-    ///  Read only access function (const version) to
+    /// Read only access function (const version) to
     /// Distributed_matrix_matrix_multiply_method, the
     /// flag which determines the matrix matrix multiplication method used for
     /// distributed matrices.
@@ -1204,7 +1204,7 @@ namespace oomph
       return Distributed_matrix_matrix_multiply_method;
     }
 
-    ///  access function to the Built flag - indicates whether the matrix
+    /// access function to the Built flag - indicates whether the matrix
     /// has been build - i.e. the distribution has been defined and the matrix
     /// assembled.
     bool built() const
@@ -1212,43 +1212,43 @@ namespace oomph
       return Built;
     }
 
-    ///  if this matrix is distributed then a the equivalent global matrix
+    /// if this matrix is distributed then a the equivalent global matrix
     /// is built using new and returned. The calling method is responsible for
     /// the destruction of the new matrix.
     CRDoubleMatrix* global_matrix() const;
 
-    ///  Returns the transpose of this matrix
+    /// Returns the transpose of this matrix
     void get_matrix_transpose(CRDoubleMatrix* result) const;
 
-    ///  returns the inf-norm of this matrix
+    /// returns the inf-norm of this matrix
     double inf_norm() const;
 
-    ///  returns a Vector of diagonal entries of this matrix.
+    /// returns a Vector of diagonal entries of this matrix.
     /// This only works with square matrices. This condition may be relaxed
     /// in the future if need be.
     Vector<double> diagonal_entries() const;
 
-    ///  element-wise addition of this matrix with matrix_in.
+    /// element-wise addition of this matrix with matrix_in.
     void add(const CRDoubleMatrix& matrix_in,
              CRDoubleMatrix& result_matrix) const;
 
   private:
-    ///  Vector whose i'th entry contains the index of the last entry
+    /// Vector whose i'th entry contains the index of the last entry
     /// below or on the diagonal of the i'th row of the matrix
     Vector<int> Index_of_diagonal_entries;
 
-    ///  Flag to determine which matrix-matrix multiplication method is
+    /// Flag to determine which matrix-matrix multiplication method is
     /// used (for serial (or global) matrices)
     unsigned Serial_matrix_matrix_multiply_method;
 
-    ///  Flag to determine which matrix-matrix multiplication method is
+    /// Flag to determine which matrix-matrix multiplication method is
     /// used (for distributed matrices)
     unsigned Distributed_matrix_matrix_multiply_method;
 
     /// Storage for the Matrix in CR Format
     CRMatrix<double> CR_matrix;
 
-    ///  Flag to indicate whether the matrix has been built - i.e. the
+    /// Flag to indicate whether the matrix has been built - i.e. the
     /// distribution has been setup AND the matrix has been assembled.
     bool Built;
   };
@@ -1263,7 +1263,7 @@ namespace oomph
   class DenseLU;
 
   //=================================================================
-  ///  Class of matrices containing doubles, and stored as a
+  /// Class of matrices containing doubles, and stored as a
   /// DenseMatrix<double>, but with solving functionality inherited
   /// from the abstract DoubleMatrix class.
   //=================================================================
@@ -1279,7 +1279,7 @@ namespace oomph
     /// Constructor to build a matrix with n rows and m columns.
     DenseDoubleMatrix(const unsigned long& n, const unsigned long& m);
 
-    ///  Constructor to build a matrix with n rows and m columns,
+    /// Constructor to build a matrix with n rows and m columns,
     /// with initial value initial_val
     DenseDoubleMatrix(const unsigned long& n,
                       const unsigned long& m,
@@ -1303,7 +1303,7 @@ namespace oomph
       return DenseMatrix<double>::ncol();
     }
 
-    ///  Overload the const version of the round-bracket access operator
+    /// Overload the const version of the round-bracket access operator
     /// for read-only access.
     inline double operator()(const unsigned long& i,
                              const unsigned long& j) const
@@ -1311,7 +1311,7 @@ namespace oomph
       return DenseMatrix<double>::get_entry(i, j);
     }
 
-    ///  Overload the non-const version of the round-bracket access
+    /// Overload the non-const version of the round-bracket access
     /// operator for read-write access
     inline double& operator()(const unsigned long& i, const unsigned long& j)
     {
@@ -1321,16 +1321,16 @@ namespace oomph
     /// Destructor
     virtual ~DenseDoubleMatrix();
 
-    ///  LU decomposition using DenseLU (default linea solver)
+    /// LU decomposition using DenseLU (default linea solver)
     virtual void ludecompose();
 
-    ///  LU backsubstitution
+    /// LU backsubstitution
     virtual void lubksub(DoubleVector& rhs);
 
-    ///  LU backsubstitution
+    /// LU backsubstitution
     virtual void lubksub(Vector<double>& rhs);
 
-    ///  Determine eigenvalues and eigenvectors, using
+    /// Determine eigenvalues and eigenvectors, using
     /// Jacobi rotations. Only for symmetric matrices. Nothing gets overwritten!
     /// - \c eigen_vect(i,j) = j-th component of i-th eigenvector.
     /// - \c eigen_val(i) is the i-th eigenvalue; same ordering as in
@@ -1338,13 +1338,13 @@ namespace oomph
     void eigenvalues_by_jacobi(Vector<double>& eigen_val,
                                DenseMatrix<double>& eigen_vect) const;
 
-    ///  Multiply the matrix by the vector x: soln=Ax
+    /// Multiply the matrix by the vector x: soln=Ax
     void multiply(const DoubleVector& x, DoubleVector& soln) const;
 
-    ///  Multiply the  transposed matrix by the vector x: soln=A^T x
+    /// Multiply the  transposed matrix by the vector x: soln=A^T x
     void multiply_transpose(const DoubleVector& x, DoubleVector& soln) const;
 
-    ///  For every row, find the maximum absolute value of the
+    /// For every row, find the maximum absolute value of the
     /// entries in this row. Set all values that are less than alpha times
     /// this maximum to zero and return the resulting matrix in
     /// reduced_matrix. Note: Diagonal entries are retained regardless
@@ -1381,7 +1381,7 @@ namespace oomph
     /// 3rd Tensor dimension
     unsigned P;
 
-    ///  Range check to catch when an index is out of bounds, if so, it
+    /// Range check to catch when an index is out of bounds, if so, it
     /// issues a warning message and dies by throwing an \c OomphLibError
     void range_check(const unsigned long& i,
                      const unsigned long& j,
@@ -1638,7 +1638,7 @@ namespace oomph
       delete[] temp_tensor;
     }
 
-    ///  Initialise all values in the tensor to val
+    /// Initialise all values in the tensor to val
     void initialise(const T& val)
     {
       for (unsigned long i = 0; i < (N * M * P); ++i)
@@ -1715,7 +1715,7 @@ namespace oomph
     /// 4th Tensor dimension
     unsigned Q;
 
-    ///  Range check to catch when an index is out of bounds, if so, it
+    /// Range check to catch when an index is out of bounds, if so, it
     /// issues a warning message and dies by throwing an \c OomphLibError
     void range_check(const unsigned long& i,
                      const unsigned long& j,
@@ -2014,7 +2014,7 @@ namespace oomph
       delete[] temp_tensor;
     }
 
-    ///  Initialise all values in the tensor to val
+    /// Initialise all values in the tensor to val
     void initialise(const T& val)
     {
       for (unsigned long i = 0; i < (N * M * P * Q); ++i)
@@ -2071,7 +2071,7 @@ namespace oomph
       return Tensordata[Q * (P * (M * i + j) + k) + l];
     }
 
-    ///  Direct access to internal storage of data in flat-packed C-style
+    /// Direct access to internal storage of data in flat-packed C-style
     /// column-major format. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
@@ -2080,7 +2080,7 @@ namespace oomph
       return Tensordata[i];
     }
 
-    ///  Direct access to internal storage of data in flat-packed C-style
+    /// Direct access to internal storage of data in flat-packed C-style
     /// column-major format. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
@@ -2089,7 +2089,7 @@ namespace oomph
       return Tensordata[i];
     }
 
-    ///  Caculate the offset in flat-packed C-style, column-major format,
+    /// Caculate the offset in flat-packed C-style, column-major format,
     /// required for a given i,j. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
@@ -2130,7 +2130,7 @@ namespace oomph
     /// 5th Tensor dimension
     unsigned R;
 
-    ///  Range check to catch when an index is out of bounds, if so, it
+    /// Range check to catch when an index is out of bounds, if so, it
     /// issues a warning message and dies by throwing an \c OomphLibError
     void range_check(const unsigned long& i,
                      const unsigned long& j,
@@ -2473,7 +2473,7 @@ namespace oomph
       delete[] temp_tensor;
     }
 
-    ///  Initialise all values in the tensor to val
+    /// Initialise all values in the tensor to val
     void initialise(const T& val)
     {
       for (unsigned long i = 0; i < (N * M * P * Q * R); ++i)
@@ -2538,7 +2538,7 @@ namespace oomph
       return Tensordata[R * (Q * (P * (M * i + j) + k) + l) + m];
     }
 
-    ///  Direct access to internal storage of data in flat-packed C-style
+    /// Direct access to internal storage of data in flat-packed C-style
     /// column-major format. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
@@ -2548,7 +2548,7 @@ namespace oomph
     }
 
 
-    ///  Direct access to internal storage of data in flat-packed C-style
+    /// Direct access to internal storage of data in flat-packed C-style
     /// column-major format. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
@@ -2557,7 +2557,7 @@ namespace oomph
       return Tensordata[i];
     }
 
-    ///  Caculate the offset in flat-packed Cy-style, column-major format,
+    /// Caculate the offset in flat-packed Cy-style, column-major format,
     /// required for a given i,j,k. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
@@ -2575,7 +2575,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////
 
   //=======================================================================
-  ///  A class for compressed column matrices: a sparse matrix format
+  /// A class for compressed column matrices: a sparse matrix format
   /// The class is passed as the MATRIX_TYPE paramater so that the base
   /// class can use the specific access functions in the round-bracket
   /// operator.
@@ -2592,7 +2592,7 @@ namespace oomph
     }
 
 
-    ///  Constructor: Pass vector of values, vector of row indices,
+    /// Constructor: Pass vector of values, vector of row indices,
     /// vector of column starts and number of rows (can be suppressed
     /// for square matrices). Number of nonzero entries is read
     /// off from value, so make sure the vector has been shrunk
@@ -2610,7 +2610,7 @@ namespace oomph
     }
 
 
-    ///  Copy constructor
+    /// Copy constructor
     CCMatrix(const CCMatrix& source_matrix)
       : SparseMatrix<T, CCMatrix<T>>(source_matrix)
     {
@@ -2649,7 +2649,7 @@ namespace oomph
       Column_start = 0;
     }
 
-    ///  Access function that will be called by the read-only
+    /// Access function that will be called by the read-only
     /// round-bracket operator (const)
     T get_entry(const unsigned long& i, const unsigned long& j) const
     {
@@ -2712,7 +2712,7 @@ namespace oomph
       return Row_index;
     }
 
-    ///  Output the "bottom right" entry regardless of it being
+    /// Output the "bottom right" entry regardless of it being
     /// zero or not (this allows automatic detection of matrix size in
     /// e.g. matlab, python).
     void output_bottom_right_zero_helper(std::ostream& outfile) const
@@ -2730,7 +2730,7 @@ namespace oomph
       }
     }
 
-    ///  Indexed output function to print a matrix to the
+    /// Indexed output function to print a matrix to the
     /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
     void sparse_indexed_output_helper(std::ostream& outfile) const
     {
@@ -2748,7 +2748,7 @@ namespace oomph
     void clean_up_memory();
 
 
-    ///  Build matrix from compressed representation.
+    /// Build matrix from compressed representation.
     /// Number of nonzero entries is read
     /// off from value, so make sure the vector has been shrunk
     /// to its correct length.
@@ -2758,7 +2758,7 @@ namespace oomph
                const unsigned long& n,
                const unsigned long& m);
 
-    ///  Function to build matrix from pointers to arrays
+    /// Function to build matrix from pointers to arrays
     /// which hold the column starts, row indices and non-zero values.
     /// The final parameters specifies the number of rows and columns.
     /// Note that, as the name suggests, this function does not
@@ -2785,7 +2785,7 @@ namespace oomph
 
 
   //=================================================================
-  ///  A class for compressed column matrices that store doubles
+  /// A class for compressed column matrices that store doubles
   //=================================================================
   class CCDoubleMatrix : public DoubleMatrixBase, public CCMatrix<double>
   {
@@ -2793,7 +2793,7 @@ namespace oomph
     /// Default constructor
     CCDoubleMatrix();
 
-    ///  Constructor: Pass vector of values, vector of row indices,
+    /// Constructor: Pass vector of values, vector of row indices,
     /// vector of column starts and number of rows (can be suppressed
     /// for square matrices). Number of nonzero entries is read
     /// off from value, so make sure the vector has been shrunk
@@ -2825,7 +2825,7 @@ namespace oomph
       return CCMatrix<double>::ncol();
     }
 
-    ///  Overload the round-bracket access operator to provide
+    /// Overload the round-bracket access operator to provide
     /// read-only (const) access to the data
     inline double operator()(const unsigned long& i,
                              const unsigned long& j) const
@@ -2833,20 +2833,20 @@ namespace oomph
       return CCMatrix<double>::get_entry(i, j);
     }
 
-    ///  LU decomposition using SuperLU
+    /// LU decomposition using SuperLU
     virtual void ludecompose();
 
-    ///  LU back solve for given RHS
+    /// LU back solve for given RHS
     virtual void lubksub(DoubleVector& rhs);
 
-    ///  Multiply the matrix by the vector x: soln=Ax
+    /// Multiply the matrix by the vector x: soln=Ax
     void multiply(const DoubleVector& x, DoubleVector& soln) const;
 
-    ///  Multiply the  transposed matrix by the vector x: soln=A^T x
+    /// Multiply the  transposed matrix by the vector x: soln=A^T x
     void multiply_transpose(const DoubleVector& x, DoubleVector& soln) const;
 
 
-    ///  Function to multiply this matrix by the CCDoubleMatrix matrix_in
+    /// Function to multiply this matrix by the CCDoubleMatrix matrix_in
     /// The multiplication method used can be selected using the flag
     /// Matrix_matrix_multiply_method. By default Method 2 is used.
     /// Method 1: First runs through this matrix and matrix_in to find the
@@ -2863,14 +2863,14 @@ namespace oomph
     void multiply(const CCDoubleMatrix& matrix_in, CCDoubleMatrix& result);
 
 
-    ///  For every row, find the maximum absolute value of the
+    /// For every row, find the maximum absolute value of the
     /// entries in this row. Set all values that are less than alpha times
     /// this maximum to zero and return the resulting matrix in
     /// reduced_matrix. Note: Diagonal entries are retained regardless
     /// of their size.
     void matrix_reduction(const double& alpha, CCDoubleMatrix& reduced_matrix);
 
-    ///  Access function to Matrix_matrix_multiply_method, the flag
+    /// Access function to Matrix_matrix_multiply_method, the flag
     /// which determines the matrix matrix multiplication method used.
     /// Method 1: First runs through this matrix and matrix_in to find the
     /// storage
@@ -2934,7 +2934,7 @@ namespace oomph
   }
 
   //============================================================================
-  ///  Constructor to build a matrix with n rows and m columns,
+  /// Constructor to build a matrix with n rows and m columns,
   /// with initial value initial_val
   //============================================================================
   template<class T>
@@ -2952,7 +2952,7 @@ namespace oomph
 
 
   //============================================================================
-  ///  Resize to a non-square n_row x m_col matrix,
+  /// Resize to a non-square n_row x m_col matrix,
   /// where any values already present will be transfered.
   //============================================================================
   template<class T>
@@ -3001,7 +3001,7 @@ namespace oomph
 
 
   //============================================================================
-  ///  Resize to a non-square n_row x m_col matrix and initialize the
+  /// Resize to a non-square n_row x m_col matrix and initialize the
   /// new entries to specified value.
   //============================================================================
   template<class T>
@@ -3101,7 +3101,7 @@ namespace oomph
 
 
   //============================================================================
-  ///  Indexed output function to print a matrix to a
+  /// Indexed output function to print a matrix to a
   /// file as i,j,a(i,j). Specify filename.
   //============================================================================
   template<class T>
@@ -3469,7 +3469,7 @@ namespace oomph
 
 
   //=================================================================
-  ///  Dummy zero
+  /// Dummy zero
   //=================================================================
   template<class T, class MATRIX_TYPE>
   T SparseMatrix<T, MATRIX_TYPE>::Zero = T(0);
@@ -3566,7 +3566,7 @@ namespace oomph
       // I do not know what it is.
     } // EoFunc deep_copy
 
-    ///  Builds a uniformly distributed matrix.
+    /// Builds a uniformly distributed matrix.
     /// A locally replicated matrix is constructed then redistributed using
     /// OOMPH-LIB's default uniform row distribution.
     /// This is memory intensive thus should be used for
@@ -3582,13 +3582,13 @@ namespace oomph
       CRDoubleMatrix& mat_out);
 
 
-    ///  Calculates the infinity (maximum) norm of a DenseMartrix of
+    /// Calculates the infinity (maximum) norm of a DenseMartrix of
     /// CRDoubleMatrices as if it was one large matrix.
     /// This avoids creating a concatenation of the sub-blocks just to calculate
     /// the infinity norm.
     double inf_norm(const DenseMatrix<CRDoubleMatrix*>& matrix_pt);
 
-    ///  Calculates the largest Gershgorin disc whilst preserving the
+    /// Calculates the largest Gershgorin disc whilst preserving the
     /// sign. Let A be an n by n matrix, with entries aij. For \f$ i \in \{
     /// 1,...,n \} \f$ let \f$ R_i = \sum_{i\neq j}|a_{ij}| \f$ be the sum of
     /// the absolute values of the non-diagonal entries in the i-th row. Let \f$
@@ -3608,7 +3608,7 @@ namespace oomph
     double gershgorin_eigenvalue_estimate(
       const DenseMatrix<CRDoubleMatrix*>& matrix_pt);
 
-    ///  Concatenate CRDoubleMatrix matrices.
+    /// Concatenate CRDoubleMatrix matrices.
     /// The in matrices are concatenated such that the block structure of the
     /// in matrices are preserved in the result matrix. Communication between
     /// processors is required. If the block structure of the sub matrices does
@@ -3637,7 +3637,7 @@ namespace oomph
     void concatenate(const DenseMatrix<CRDoubleMatrix*>& matrix_pt,
                      CRDoubleMatrix& result_matrix);
 
-    ///  Concatenate CRDoubleMatrix matrices.
+    /// Concatenate CRDoubleMatrix matrices.
     ///
     /// The Vector row_distribution_pt contains the LinearAlgebraDistribution
     /// of each block row.
@@ -3691,7 +3691,7 @@ namespace oomph
       const DenseMatrix<CRDoubleMatrix*>& matrix_pt,
       CRDoubleMatrix& result_matrix);
 
-    ///  Concatenate CRDoubleMatrix matrices.
+    /// Concatenate CRDoubleMatrix matrices.
     /// This calls the other concatenate_without_communication(...) function,
     /// passing block_distribution_pt as both the row_distribution_pt and
     /// col_distribution_pt. This should only be called for block square

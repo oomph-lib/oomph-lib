@@ -41,14 +41,14 @@
 namespace oomph
 {
   //====================================================================
-  ///  Class to aid visualisation of the values on a set
+  /// Class to aid visualisation of the values on a set
   /// of points. NOTE: in a distributed problem, output is only done
   /// on processor 0.
   //====================================================================
   class LineVisualiser
   {
   public:
-    ///  Constructor: Pass pointer to mesh and coordinates of
+    /// Constructor: Pass pointer to mesh and coordinates of
     /// desired plot points: coord_vec[j][i] is the i-th coordinate of
     /// the j-th plot point. Optional final parameter specifies the
     /// maximum search radius in bin when locating the plot points.
@@ -68,7 +68,7 @@ namespace oomph
     }
 
 
-    ///  Constructor reading centerline file
+    /// Constructor reading centerline file
     /// - Open "file_name" and extract 3 first doubles of each line
     /// - Skip lines which does not begin with a number. Scaling
     /// factor allows points defined in input file to be scaled.
@@ -81,7 +81,7 @@ namespace oomph
     }
 
 
-    ///  Constructor reading centerline file
+    /// Constructor reading centerline file
     /// - Open "file_name" and extract 3 first doubles of each line
     /// - Skip lines which does not begin with a number. Scaling
     /// factor allows points defined in input file to be scaled.
@@ -101,7 +101,7 @@ namespace oomph
     }
 
 
-    ///  Output function: output each plot point.
+    /// Output function: output each plot point.
     /// NOTE: in a distributed problem, output is only done
     /// on processor 0.
     void output(std::ostream& outfile)
@@ -129,7 +129,7 @@ namespace oomph
       }
     }
 
-    ///  Output data function: store data associated with each
+    /// Output data function: store data associated with each
     /// plot point in data array
     void get_output_data(Vector<Vector<double>>& data)
     {
@@ -365,7 +365,7 @@ namespace oomph
     }
 
 
-    ///  Update plot points coordinates (in preparation of remesh,
+    /// Update plot points coordinates (in preparation of remesh,
     /// say).
     void update_plot_points_coordinates(Vector<Vector<double>>& coord_vec)
     {
@@ -588,14 +588,14 @@ namespace oomph
     }
 
   private:
-    ///  Max radius beyond which we stop searching the bin. Initialised
+    /// Max radius beyond which we stop searching the bin. Initialised
     /// to DBL_MAX so keep going until the point is found or until
     /// we've searched every single bin. Overwriting this means we won't search
     /// in bins whose closest vertex is at a distance greater than
     /// Max_search_radius from the point to be located.
     double Max_search_radius;
 
-    ///  Pointer to communicator -- allows us to collect data on
+    /// Pointer to communicator -- allows us to collect data on
     /// processor 0 if the mesh is distributed.
     OomphCommunicator* Comm_pt;
 
@@ -664,7 +664,7 @@ namespace oomph
     }
 
 
-    ///  Helper function to setup the output structures
+    /// Helper function to setup the output structures
     void setup(Mesh* mesh_pt, const Vector<Vector<double>>& coord_vec)
     {
       // Read out number of plot points
@@ -819,7 +819,7 @@ namespace oomph
     }
 
 
-    ///  Vector of pairs containing points to finite elements and
+    /// Vector of pairs containing points to finite elements and
     /// local coordinates
     Vector<std::pair<FiniteElement*, Vector<double>>> Plot_point;
 

@@ -43,7 +43,7 @@ namespace oomph
   //======================================================================
   namespace BinaryTreeNames
   {
-    ///  Directions (L/R). OMEGA is used if a direction is undefined
+    /// Directions (L/R). OMEGA is used if a direction is undefined
     /// in a certain context
     enum
     {
@@ -91,7 +91,7 @@ namespace oomph
   class BinaryTree : public virtual Tree
   {
   public:
-    ///  Destructor. Note: Deleting a binary tree also deletes the
+    /// Destructor. Note: Deleting a binary tree also deletes the
     /// objects associated with all non-leaf nodes!
     virtual ~BinaryTree() {}
 
@@ -101,7 +101,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const BinaryTree&) = delete;
 
-    ///  Overload the function construct_son to ensure that the son
+    /// Overload the function construct_son to ensure that the son
     /// is a specific BinaryTree and not a general Tree.
     Tree* construct_son(RefineableElement* const& object_pt,
                         Tree* const& father_pt,
@@ -112,7 +112,7 @@ namespace oomph
       return temp_binary_pt;
     }
 
-    ///  Return pointer to greater or equal-sized edge neighbour
+    /// Return pointer to greater or equal-sized edge neighbour
     /// in specified \c direction; also provide info regarding the relative
     /// size of the neighbour:
     /// - In the present binary tree, the left vertex is located at the local
@@ -138,16 +138,16 @@ namespace oomph
                                     int& diff_level,
                                     bool& in_neighbouring_tree) const;
 
-    ///  Self-test: Check all neighbours. Return success (0)
+    /// Self-test: Check all neighbours. Return success (0)
     /// if the maximum distance between corresponding points in the
     /// neighbours is less than the tolerance specified in the
     /// static value BinaryTree::Max_neighbour_finding_tolerance.
     unsigned self_test();
 
-    ///  Set up the static data, reflection schemes, etc.
+    /// Set up the static data, reflection schemes, etc.
     static void setup_static_data();
 
-    ///  Doc/check all neighbours of binary tree (nodes) contained in the
+    /// Doc/check all neighbours of binary tree (nodes) contained in the
     /// Vector forest_node_pt. Output into neighbours_file which can be viewed
     /// from tecplot with BinaryTreeNeighbours.mcr. Neighbour info and errors
     /// are displayed on neighbours_txt_file. Finally, compute the maximum
@@ -171,13 +171,13 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Default constructor for empty (root) tree: no father, no sons;
+    /// Default constructor for empty (root) tree: no father, no sons;
     /// just pass a pointer to its object. Protected because BinaryTrees can
     /// only be created internally, during the split operation. Only
     /// BinaryTreeRoots can be created externally.
     BinaryTree(RefineableElement* const& object_pt) : Tree(object_pt) {}
 
-    ///  Constructor for tree that has a father: Pass it the pointer
+    /// Constructor for tree that has a father: Pass it the pointer
     /// to its object, the pointer to its father and tell it what type of son
     /// (L/R) it is. Protected because BinaryTrees can only be created
     /// internally, during the split operation. Only BinaryTreeRoots can be
@@ -193,7 +193,7 @@ namespace oomph
     static bool Static_data_has_been_setup;
 
   private:
-    ///  Find greater or equal-sized edge neighbour in direction.
+    /// Find greater or equal-sized edge neighbour in direction.
     /// Auxiliary internal routine which passes additional information around.
     BinaryTree* gteq_edge_neighbour(const int& direction,
                                     double& s_diff,
@@ -205,18 +205,18 @@ namespace oomph
     /// Colours for neighbours in various directions
     static Vector<std::string> Colour;
 
-    ///  S_base(direction): Initial value for coordinate s on the edge
+    /// S_base(direction): Initial value for coordinate s on the edge
     /// indicated by direction (L/R)
     static Vector<double> S_base;
 
     /// Get opposite edge, e.g. Reflect_edge[L]=R
     static Vector<int> Reflect_edge;
 
-    ///  Array of direction/segment adjacency scheme:
+    /// Array of direction/segment adjacency scheme:
     /// Is_adjacent(i_vertex,j_segment): Is vertex adjacent to segment?
     static DenseMatrix<bool> Is_adjacent;
 
-    ///  Reflection scheme: Reflect(direction,segment): Get mirror
+    /// Reflection scheme: Reflect(direction,segment): Get mirror
     /// of segment in specified direction. E.g. Reflect(L,L)=R.
     static DenseMatrix<int> Reflect;
   };
@@ -257,7 +257,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const BinaryTreeRoot&) = delete;
 
-    ///  If binary_tree_root_pt is a neighbour, return the direction
+    /// If binary_tree_root_pt is a neighbour, return the direction
     /// (L/R) in which it is found, otherwise return OMEGA
     int direction_of_neighbour(BinaryTreeRoot* binary_tree_root_pt)
     {
@@ -295,7 +295,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Constructor: Pass vector of pointers to the roots of the
+    /// Constructor: Pass vector of pointers to the roots of the
     /// constituent BinaryTrees
     BinaryTreeForest(Vector<TreeRoot*>& trees_pt);
 
@@ -305,11 +305,11 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const BinaryTreeForest&) = delete;
 
-    ///  Destructor: Delete the constituent binary trees (and thus
+    /// Destructor: Delete the constituent binary trees (and thus
     /// the objects associated with its non-leaf nodes!)
     virtual ~BinaryTreeForest() {}
 
-    ///  Document and check all the neighbours of all the nodes in
+    /// Document and check all the neighbours of all the nodes in
     /// the forest. DocInfo object specifies the output directory and file
     /// numbers for the various files. If \c doc_info.disable_doc() has been
     /// called, no output is created.
@@ -321,7 +321,7 @@ namespace oomph
     {
     }
 
-    ///  Self-test: Check all neighbours. Return success (0) if the
+    /// Self-test: Check all neighbours. Return success (0) if the
     /// maximum distance between corresponding points in the neighbours is
     /// less than the tolerance specified in the static value
     /// BinaryTree::Max_neighbour_finding_tolerance.
@@ -338,7 +338,7 @@ namespace oomph
       return dynamic_cast<BinaryTreeRoot*>(Trees_pt[i]);
     }
 
-    ///  Given the number i of the root binary tree in this forest,
+    /// Given the number i of the root binary tree in this forest,
     /// return a pointer to its neighbour in the specified direction.
     /// NULL if neighbour doesn't exist. (This does the dynamic cast
     /// from a TreeRoot to a BinaryTreeRoot internally).

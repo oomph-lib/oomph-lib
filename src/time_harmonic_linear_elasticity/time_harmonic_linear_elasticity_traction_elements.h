@@ -80,7 +80,7 @@ namespace oomph
     Vector<std::complex<unsigned>>
       U_index_time_harmonic_linear_elasticity_traction;
 
-    ///  Pointer to an imposed traction function. Arguments:
+    /// Pointer to an imposed traction function. Arguments:
     /// Eulerian coordinate; outer unit normal;
     /// applied traction. (Not all of the input arguments will be
     /// required for all specific load functions but the list should
@@ -90,7 +90,7 @@ namespace oomph
                             Vector<std::complex<double>>& result);
 
 
-    ///  Get the traction vector: Pass number of integration point
+    /// Get the traction vector: Pass number of integration point
     /// (dummy), Eulerian coordinate and normal vector and return the load
     /// vector (not all of the input arguments will be required for all specific
     /// load functions but the list should cover all cases). This function is
@@ -104,7 +104,7 @@ namespace oomph
     }
 
 
-    ///  Helper function that actually calculates the residuals
+    /// Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
@@ -113,7 +113,7 @@ namespace oomph
 
 
   public:
-    ///  Constructor, which takes a "bulk" element and the
+    /// Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     TimeHarmonicLinearElasticityTractionElement(
       FiniteElement* const& element_pt, const int& face_index)
@@ -192,7 +192,7 @@ namespace oomph
     }
 
     /// Specify the value of nodal zeta from the face geometry
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
@@ -203,14 +203,14 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
-    ///  Output function
+    /// Output function
     void output(std::ostream& outfile)
     {
       unsigned nplot = 5;
       output(outfile, nplot);
     }
 
-    ///  Output function
+    /// Output function
     void output(std::ostream& outfile, const unsigned& nplot)
     {
       unsigned ndim = dim();
@@ -257,20 +257,20 @@ namespace oomph
       this->write_tecplot_zone_footer(outfile, nplot);
     }
 
-    ///  C_style output function
+    /// C_style output function
     void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
-    ///  C-style output function
+    /// C-style output function
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
 
-    ///  Compute traction vector at specified local coordinate
+    /// Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
     void traction(const Vector<double>& s,

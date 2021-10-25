@@ -42,7 +42,7 @@
 namespace oomph
 {
   //======start_of_ANSIEscapeCode_namespace=============================
-  ///  Contains an enumeration of the ANSI escape codes used for
+  /// Contains an enumeration of the ANSI escape codes used for
   /// colouring text (when piped to the command line). Adapted from
   /// the guide on:
   /// https://stackoverflow.com/questions/2616906/how-do-i-output-
@@ -55,7 +55,7 @@ namespace oomph
   //====================================================================
   namespace ANSIEscapeCode
   {
-    ///  Function to change text effect. NOTE: This assumes the user
+    /// Function to change text effect. NOTE: This assumes the user
     /// knows what they're doing/assigning; no error checking done here...
     void set_text_effect(std::string text_effect)
     {
@@ -79,14 +79,14 @@ namespace oomph
 
 
   //=====================================================================
-  ///  Namespace for debugging helpers. Currently only contains a
+  /// Namespace for debugging helpers. Currently only contains a
   /// function to prett-ify file name and line numbers (in red) to use
   /// when debugging. Makes it easy to identify where a std::cout
   /// statement was called.
   //=====================================================================
   namespace DebugHelpers
   {
-    ///  Return the concaternation of the initials of the input
+    /// Return the concaternation of the initials of the input
     /// file name and line number. The make_new_line flag indicates
     /// whether the string starts with a "\n", i.e. a new line
     std::string debug_string(const std::string& filename,
@@ -290,7 +290,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Set output directory (we try to open a file in it
+  /// Set output directory (we try to open a file in it
   /// to see if the directory exists -- if it doesn't we'll
   /// issue a warning -- or, if directory_must_exist()==true,
   /// die by throwing and OomphLibError
@@ -341,7 +341,7 @@ namespace oomph
   // =================================================================
   namespace StringConversion
   {
-    ///  Convert a string to lower case (outputs a copy).
+    /// Convert a string to lower case (outputs a copy).
     std::string to_lower(const std::string& input)
     {
       std::string output(input);
@@ -354,7 +354,7 @@ namespace oomph
       return output;
     }
 
-    ///  Convert a string to upper case (outputs a copy).
+    /// Convert a string to upper case (outputs a copy).
     std::string to_upper(const std::string& input)
     {
       std::string output(input);
@@ -366,7 +366,7 @@ namespace oomph
       return output;
     }
 
-    ///  Split a string, s, into a vector of strings where ever there is
+    /// Split a string, s, into a vector of strings where ever there is
     /// an instance of delimiter (i.e. is delimiter is " " will give a list of
     /// words). Note that mutliple delimiters in a row will give empty
     /// strings.
@@ -383,7 +383,7 @@ namespace oomph
       }
     }
 
-    ///  Split a string, s, into a vector of strings where ever there is
+    /// Split a string, s, into a vector of strings where ever there is
     /// an instance of delimiter (i.e. is delimiter is " " will give a list of
     /// words). Note that mutliple delimiters in a row will give empty
     /// strings. Return by value.
@@ -455,7 +455,7 @@ namespace oomph
         ArgInfo<bool>(false, 0, doc);
     }
 
-    ///  Specify possible command line flag that specifies a double,
+    /// Specify possible command line flag that specifies a double,
     /// accessed via pointer
     void specify_command_line_flag(const std::string& command_line_flag,
                                    double* arg_pt,
@@ -465,7 +465,7 @@ namespace oomph
         ArgInfo<double>(false, arg_pt, doc);
     }
 
-    ///  Specify possible command line flag that specifies an int,
+    /// Specify possible command line flag that specifies an int,
     /// accessed via pointer
     void specify_command_line_flag(const std::string& command_line_flag,
                                    int* arg_pt,
@@ -475,7 +475,7 @@ namespace oomph
         ArgInfo<int>(false, arg_pt, doc);
     }
 
-    ///  Specify possible command line flag that specifies an unsigned,
+    /// Specify possible command line flag that specifies an unsigned,
     /// accessed via pointer
     void specify_command_line_flag(const std::string& command_line_flag,
                                    unsigned* arg_pt,
@@ -485,7 +485,7 @@ namespace oomph
         ArgInfo<unsigned>(false, arg_pt, doc);
     }
 
-    ///  Specify possible command line flag that specifies a string,
+    /// Specify possible command line flag that specifies a string,
     /// accessed via pointer
     void specify_command_line_flag(const std::string& command_line_flag,
                                    std::string* arg_pt,
@@ -496,7 +496,7 @@ namespace oomph
     }
 
 
-    ///  Check if command line flag has been set (value will have been
+    /// Check if command line flag has been set (value will have been
     /// assigned directly).
     bool command_line_flag_has_been_set(const std::string& flag)
     {
@@ -755,7 +755,7 @@ namespace oomph
     }
 
 
-    ///  Parse command line, check for recognised flags and assign
+    /// Parse command line, check for recognised flags and assign
     /// associated values
     void parse_and_assign(int argc,
                           char* argv[],
@@ -931,7 +931,7 @@ namespace oomph
     }
 
 
-    ///  Parse previously specified command line, check for
+    /// Parse previously specified command line, check for
     /// recognised flags and assign associated values
     void parse_and_assign(const bool& throw_on_unrecognised_args)
     {
@@ -1326,26 +1326,26 @@ namespace oomph
   //===============================================================
   namespace MemoryUsage
   {
-    ///  Boolean to suppress synchronisation of doc memory
+    /// Boolean to suppress synchronisation of doc memory
     /// usage on processors (via mpi barriers). True (i.e. sync is
     /// suppressed) by default because not all processors may
     /// reach the relevant doc memory usage statements
     /// causing the code to hang).
     bool Suppress_mpi_synchronisation = true;
 
-    ///  String containing system command that obtains memory usage
+    /// String containing system command that obtains memory usage
     /// of all processes.
     /// Default assignment for linux. [Disclaimer: works on my machine(s) --
     /// no guarantees for any other platform; linux or not. MH]
     std::string My_memory_usage_system_string = "ps aux";
 
-    ///  Bool allowing quick bypassing of ALL operations related
+    /// Bool allowing quick bypassing of ALL operations related
     /// to memory usage monitoring -- this allows the code to remain
     /// "instrumented" without incurring the heavy penalties associated
     /// with the system calls and i/o. Default setting: false.
     bool Bypass_all_memory_usage_monitoring = false;
 
-    ///  String containing name of file in which we document
+    /// String containing name of file in which we document
     /// my memory usage -- you may want to change this to allow different
     /// processors to write to separate files (especially in mpi
     /// context). Note that file is appended to
@@ -1353,7 +1353,7 @@ namespace oomph
     /// helper function empty_memory_usage_file()
     std::string My_memory_usage_filename = "my_memory_usage.dat";
 
-    ///  Function to empty file that records my memory usage in
+    /// Function to empty file that records my memory usage in
     /// file whose name is specified by My_memory_usage_filename.
     void empty_my_memory_usage_file()
     {
@@ -1370,7 +1370,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_UNISTDH
 
-    ///  Doc my memory usage, prepended by string (which allows
+    /// Doc my memory usage, prepended by string (which allows
     /// identification from where the function is called, say) that records
     /// memory usage in file whose name is specified by
     /// My_memory_usage_filename. Data is appended to that file; wipe it with
@@ -1409,13 +1409,13 @@ namespace oomph
 
 #endif
 
-    ///  String containing system command that obtains total memory usage.
+    /// String containing system command that obtains total memory usage.
     /// Default assignment for linux. [Disclaimer: works on my machine(s) --
     /// no guarantees for any other platform; linux or not. MH]
     std::string Total_memory_usage_system_string =
       "ps aux | awk 'BEGIN{sum=0}{sum+=$4}END{print sum}'";
 
-    ///  String containing name of file in which we document total
+    /// String containing name of file in which we document total
     /// memory usage -- you may want to change this to allow different
     /// processors to write to separate files (especially in mpi
     /// context). Note that file is appended to
@@ -1423,7 +1423,7 @@ namespace oomph
     /// helper function empty_memory_usage_file()
     std::string Total_memory_usage_filename = "memory_usage.dat";
 
-    ///  Function to empty file that records total memory usage in
+    /// Function to empty file that records total memory usage in
     /// file whose name is specified by Total_memory_usage_filename.
     void empty_total_memory_usage_file()
     {
@@ -1437,7 +1437,7 @@ namespace oomph
       the_file.close();
     }
 
-    ///  Doc total memory usage, prepended by string (which allows
+    /// Doc total memory usage, prepended by string (which allows
     /// identification from where the function is called, say) that records
     /// memory usage in file whose name is specified by
     /// Total_memory_usage_filename. Data is appended to that file; wipe it with
@@ -1473,7 +1473,7 @@ namespace oomph
     }
 
 
-    ///  Function to empty file that records total and local memory usage
+    /// Function to empty file that records total and local memory usage
     /// in appropriate files
     void empty_memory_usage_files()
     {
@@ -1485,7 +1485,7 @@ namespace oomph
       empty_top_file();
     }
 
-    ///  Doc total and local memory usage, prepended by string (which
+    /// Doc total and local memory usage, prepended by string (which
     /// allows identification from where the function is called, say). NOTE:
     /// Local memory usage only works if we have unistd.h header
     void doc_memory_usage(const std::string& prefix_string)
@@ -1501,13 +1501,13 @@ namespace oomph
     }
 
 
-    ///  String containing system command that runs "top" (or equivalent)
+    /// String containing system command that runs "top" (or equivalent)
     /// "indefinitely" and writes to file specified in Top_output_filename.
     /// Default assignment for linux. [Disclaimer: works on my machine(s) --
     /// no guarantees for any other platform; linux or not. MH]
     std::string Top_system_string = "while true; do top -b -n 2 ; done  ";
 
-    ///   String containing name of file in which we document "continuous"
+    ///  String containing name of file in which we document "continuous"
     /// output from "top" (or equivalent)-- you may want to change this to
     /// allow different processors to write to separate files (especially in mpi
     /// context). Note that file is appended to
@@ -1515,7 +1515,7 @@ namespace oomph
     /// helper function empty_top_file()
     std::string Top_output_filename = "top_output.dat";
 
-    ///  Function to empty file that records continuous output from top in
+    /// Function to empty file that records continuous output from top in
     /// file whose name is specified by Top_output_filename
     void empty_top_file()
     {
@@ -1531,7 +1531,7 @@ namespace oomph
     }
 
 
-    ///  Start running top continuously and output (append) into
+    /// Start running top continuously and output (append) into
     /// file specified by Top_output_filename. Wipe that file  with
     /// empty_top_file() if you wish. Note that this is again quite Linux
     /// specific and unlikely to work on other operating systems. Insert
@@ -1591,7 +1591,7 @@ namespace oomph
     }
 
 
-    ///  Stop running top continuously. Note that this is
+    /// Stop running top continuously. Note that this is
     /// again quite Linux specific and unlikely to work on other operating
     /// systems. Insert optional comment into output file before stopping.
     void stop_continous_top(const std::string& comment)
@@ -1632,7 +1632,7 @@ namespace oomph
     }
 
 
-    ///  Insert comment into running continuous top output
+    /// Insert comment into running continuous top output
     void insert_comment_to_continous_top(const std::string& comment)
     {
       // bail out straight away?

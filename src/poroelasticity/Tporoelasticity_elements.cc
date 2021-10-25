@@ -29,7 +29,7 @@ namespace oomph
 {
   /// Lowest-order Raviart-Thomas based Darcy equation element
 
-  ///  Constructor. Order 0 elements have 1 pressure dof and no internal
+  /// Constructor. Order 0 elements have 1 pressure dof and no internal
   /// velocity dofs
   template<>
   TPoroelasticityElement<0>::TPoroelasticityElement()
@@ -127,7 +127,7 @@ namespace oomph
 
   /// Second-order Raviart-Thomas based Darcy equation element
 
-  ///  Constructor. Order 1 elements have 3 pressure dofs and 2 internal
+  /// Constructor. Order 1 elements have 3 pressure dofs and 2 internal
   /// velocity dofs
   template<>
   TPoroelasticityElement<1>::TPoroelasticityElement()

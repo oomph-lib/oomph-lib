@@ -73,7 +73,7 @@ namespace oomph
       setup_boundary_element_info(outfile);
     }
 
-    ///  Set up lookup schemes which establish which elements are
+    /// Set up lookup schemes which establish which elements are
     /// located next to mesh's boundaries. Doc in outfile (if it's open).
     void setup_boundary_element_info(std::ostream& outfile);
   };

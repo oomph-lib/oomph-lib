@@ -2401,7 +2401,7 @@ namespace oomph
   } // end of setup_preconditioners()
 
   //============================================================================
-  ///  Applies each preconditioner to the corresponding vector in
+  /// Applies each preconditioner to the corresponding vector in
   /// r and z
   //=============================================================================
   void PreconditionerArray::solve_preconditioners(const Vector<DoubleVector>& r,

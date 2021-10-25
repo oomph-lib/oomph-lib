@@ -52,7 +52,7 @@
 namespace oomph
 {
   //=============================================================================
-  ///  Biharmonic Plate Problem Class - for problems where the load can be
+  /// Biharmonic Plate Problem Class - for problems where the load can be
   /// assumed to be acting normal to the surface of the plate and the
   /// deflections are small relative to the thickness of the plate. Developed
   /// for the topologically rectangular Hermite Element Mesh. Contains functions
@@ -66,17 +66,17 @@ namespace oomph
   class BiharmonicProblem : public Problem
   {
   public:
-    ///  Definition of a dirichlet boundary condition function pointer.
+    /// Definition of a dirichlet boundary condition function pointer.
     /// Takes the position  along a boundary (s) in the macro element coordinate
     /// scheme and returns the value of the boundary condition at that point
     /// (u).
     typedef void (*DirichletBCFctPt)(const double& s, double& u);
 
 
-    ///  Definition of the Source Function.
+    /// Definition of the Source Function.
     typedef void (*BiharmonicSourceFctPt)(const Vector<double>& x, double& f);
 
-    ///  Constructor
+    /// Constructor
     BiharmonicProblem()
     {
       Bulk_element_mesh_pt = 0;
@@ -108,20 +108,20 @@ namespace oomph
     /// action after solve
     void actions_after_newton_solve() {}
 
-    ///  documents the solution, and if an exact solution is provided,
+    /// documents the solution, and if an exact solution is provided,
     /// then the error between the numerical and exact solution is presented
     void doc_solution(
       DocInfo& doc_info,
       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt = 0);
 
-    ///  Access function to the bulk element mesh pt
+    /// Access function to the bulk element mesh pt
     Mesh* bulk_element_mesh_pt()
     {
       return Bulk_element_mesh_pt;
     }
 
   protected:
-    ///  builds the bulk mesh on a prescribed domain with a node spacing
+    /// builds the bulk mesh on a prescribed domain with a node spacing
     /// defined by spacing fn with n_x by n_y elements
     void build_bulk_mesh(
       const unsigned n_x,
@@ -146,7 +146,7 @@ namespace oomph
     }
 
 
-    ///
+    /// Build global mesh and assign equation numbers
     void build_global_mesh_and_assign_eqn_numbers()
     {
       add_sub_mesh(Bulk_element_mesh_pt);
@@ -158,7 +158,7 @@ namespace oomph
       assign_eqn_numbers();
     }
 
-    ///  Impose a load to the surface of the plate.
+    /// Impose a load to the surface of the plate.
     /// note : MUST be called before neumann boundary conditions are imposed,
     /// i.e. a free edge or a simply supported edge with laplacian(u) imposed
     void set_source_function(const BiharmonicSourceFctPt source_fct_pt)
@@ -178,13 +178,13 @@ namespace oomph
       }
     }
 
-    ///  Imposes the prescribed dirichlet BCs u (u_fn) and
+    /// Imposes the prescribed dirichlet BCs u (u_fn) and
     /// du/dn (dudn_fn) dirichlet BCs by 'pinning'
     void set_dirichlet_boundary_condition(const unsigned& b,
                                           DirichletBCFctPt u_fn = 0,
                                           DirichletBCFctPt dudn_fn = 0);
 
-    ///  Imposes the prescribed Neumann BCs laplacian(u)  (flux0_fct_pt)
+    /// Imposes the prescribed Neumann BCs laplacian(u)  (flux0_fct_pt)
     /// and dlaplacian(u)/dn (flux1_fct_pt) with flux edge elements
     void set_neumann_boundary_condition(
       const unsigned& b,
@@ -195,18 +195,18 @@ namespace oomph
     // NOTE: these two private meshes are required for the block
     // preconditioners.
 
-    ///  Mesh for BiharmonicElement<DIM> only - the block preconditioner
+    /// Mesh for BiharmonicElement<DIM> only - the block preconditioner
     /// assemble the global equation number to block number mapping from
     /// elements in this mesh only
     Mesh* Bulk_element_mesh_pt;
 
-    ///  mesh for face elements
+    /// mesh for face elements
     Mesh* Face_element_mesh_pt;
   };
 
 
   //=============================================================================
-  ///  Biharmonic Fluid Problem Class - describes stokes flow in 2D.
+  /// Biharmonic Fluid Problem Class - describes stokes flow in 2D.
   /// Developed for the topologically rectangular Hermite Element Mesh. Contains
   /// functions allowing the following boundary conditions to be applied (on a
   /// given edge):
@@ -224,7 +224,7 @@ namespace oomph
   class BiharmonicFluidProblem : public Problem
   {
   public:
-    ///  Definition of a dirichlet boundary condition function pointer.
+    /// Definition of a dirichlet boundary condition function pointer.
     /// Takes the position  along a boundary (s) in the macro element coordinate
     /// scheme and returns the fluid velocity normal (dpsi/dt) to the boundary
     /// (u[0]) and the fluid velocity tangential (dpsidn) to the boundary
@@ -260,7 +260,7 @@ namespace oomph
     void actions_after_newton_solve() {}
 
 
-    ///  documents the solution, and if an exact solution is provided,
+    /// documents the solution, and if an exact solution is provided,
     /// then the error between the numerical and exact solution is presented
     void doc_solution(
       DocInfo& doc_info,
@@ -268,14 +268,14 @@ namespace oomph
 
 
   protected:
-    ///  Imposes a solid boundary on boundary b - no flow into boundary
+    /// Imposes a solid boundary on boundary b - no flow into boundary
     /// or along boundary v_n = 0 and v_t = 0. User must presribe the
     /// streamfunction psi to ensure dpsi/dt = 0 is imposed at all points on the
     /// boundary and not just at the nodes
     void impose_solid_boundary_on_edge(const unsigned& b,
                                        const double& psi = 0);
 
-    ///  Impose a traction free edge - i.e. v_t = 0 or dpsi/dn = 0. In
+    /// Impose a traction free edge - i.e. v_t = 0 or dpsi/dn = 0. In
     /// general dpsi/dn = 0 can only be imposed using equation elements to set
     /// the DOFs dpsi/ds_n, however in the special case of  dt/ds_n = 0, then
     /// dpsi/ds_n = 0 and can be imposed using pinning - this is handled
@@ -285,7 +285,7 @@ namespace oomph
     void impose_traction_free_edge(const unsigned& b);
 
 
-    ///  Impose a prescribed fluid flow comprising the velocity normal to
+    /// Impose a prescribed fluid flow comprising the velocity normal to
     /// the boundary (u_imposed_fn[0]) and the velocity tangential to the
     /// boundary (u_imposed_fn[1])
     void impose_fluid_flow_on_edge(const unsigned& b,
@@ -299,7 +299,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  Point equation element used to impose the traction free edge (i.e.
+  /// Point equation element used to impose the traction free edge (i.e.
   /// du/dn = 0) on the boundary when dt/ds_n != 0. The following equation is
   /// implemented :  du/ds_n = dt/ds_n * ds_t/dt * du/dt.
   /// The bulk biharmonic elements on the boundary must be hijackable and the
@@ -325,11 +325,11 @@ namespace oomph
     void output(std::ostream& outfile) {}
 
 
-    ///  Output function -- does nothing
+    /// Output function -- does nothing
     void output(std::ostream& outfile, const unsigned& n_plot) {}
 
 
-    ///  Output function -- does nothing
+    /// Output function -- does nothing
     void output_fluid_velocity(std::ostream& outfile, const unsigned& n_plot) {}
 
 
@@ -337,7 +337,7 @@ namespace oomph
     void output(FILE* file_pt) {}
 
 
-    ///  C-style output function -- does nothing
+    /// C-style output function -- does nothing
     void output(FILE* file_pt, const unsigned& n_plot) {}
 
 
@@ -350,7 +350,7 @@ namespace oomph
     }
 
 
-    ///  Compute the elemental residual vector - wrapper function called
+    /// Compute the elemental residual vector - wrapper function called
     /// by get_residuals in GeneralisedElement
     inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -363,7 +363,7 @@ namespace oomph
     }
 
 
-    ///  Compute the elemental residual vector and jacobian matrix -
+    /// Compute the elemental residual vector and jacobian matrix -
     /// wrapper function called by get_jacobian in GeneralisedElement
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -374,7 +374,7 @@ namespace oomph
     }
 
 
-    ///  Computes the elemental residual vector and the elemental jacobian
+    /// Computes the elemental residual vector and the elemental jacobian
     /// matrix if JFLAG = 0
     /// Imposes the equations :  du/ds_n = dt/ds_n * ds_t/dt * du/dt
     virtual void fill_in_generic_residual_contribution_biharmonic_boundary(

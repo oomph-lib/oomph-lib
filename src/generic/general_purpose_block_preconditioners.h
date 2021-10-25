@@ -51,7 +51,7 @@ namespace oomph
 {
   namespace PreconditionerCreationFunctions
   {
-    ///  Helper function to create a SuperLu preconditioner (for use as
+    /// Helper function to create a SuperLu preconditioner (for use as
     /// the default subsididary preconditioner creator in
     /// GeneralPurposeBlockPreconditioners).
     inline Preconditioner* create_super_lu_preconditioner()
@@ -76,7 +76,7 @@ namespace oomph
   class GeneralPurposeBlockPreconditioner : public BlockPreconditioner<MATRIX>
   {
   public:
-    ///  typedef for a function that allows other preconditioners to be
+    /// typedef for a function that allows other preconditioners to be
     /// employed to solve the subsidiary linear systems.
     /// The function should return a pointer to the required subsidiary
     /// preconditioner generated using new. This preconditioner is responsible
@@ -106,7 +106,7 @@ namespace oomph
       }
     }
 
-    ///  ??ds I think clean_up_memory is supposed to clear out any stuff
+    /// ??ds I think clean_up_memory is supposed to clear out any stuff
     /// that doesn't need to be stored between solves. Call clean up on any
     /// non-null subsidiary preconditioners.
     virtual void clean_up_memory()
@@ -145,7 +145,7 @@ namespace oomph
       Subsidiary_preconditioner_creation_function_pt =
         &PreconditionerCreationFunctions::create_super_lu_preconditioner;
     }
-    ///  Set the subsidiary preconditioner to use for block i. The
+    /// Set the subsidiary preconditioner to use for block i. The
     /// subsidiary preconditioner should have been created using new (the
     /// general purpose block preconditioner will delete it later). If null
     /// the general purpose block preconditioner will use the
@@ -171,20 +171,20 @@ namespace oomph
       Subsidiary_preconditioner_pt[i] = prec;
     }
 
-    ///  Get the subsidiary precondtioner pointer in block i (is
+    /// Get the subsidiary precondtioner pointer in block i (is
     /// allowed to be null if not yet set).
     Preconditioner* subsidiary_preconditioner_pt(const unsigned& i) const
     {
       return Subsidiary_preconditioner_pt[i];
     }
 
-    ///  Specify a DOF to block map
+    /// Specify a DOF to block map
     void set_dof_to_block_map(Vector<unsigned>& dof_to_block_map)
     {
       Dof_to_block_map = dof_to_block_map;
     }
 
-    ///  Adds a mesh to be used by the
+    /// Adds a mesh to be used by the
     /// block preconditioning framework for classifying DOF types. Optional
     /// boolean argument (default: false) allows the mesh to contain multiple
     /// element types.
@@ -206,7 +206,7 @@ namespace oomph
         std::make_pair(mesh_pt, allow_multiple_element_type_in_mesh));
     }
 
-    ///  Returns the number of meshes currently set in the
+    /// Returns the number of meshes currently set in the
     /// GeneralPurposeBlockPreconditioner base class.
     unsigned gp_nmesh()
     {
@@ -214,7 +214,7 @@ namespace oomph
     }
 
   protected:
-    ///  Set the mesh in the block preconditioning framework.
+    /// Set the mesh in the block preconditioning framework.
     void gp_preconditioner_set_all_meshes()
     {
       const unsigned nmesh = gp_nmesh();
@@ -250,7 +250,7 @@ namespace oomph
       }
     }
 
-    ///  Create any subsidiary preconditioners needed. Usually
+    /// Create any subsidiary preconditioners needed. Usually
     /// nprec_needed = nblock_types, except for the ExactBlockPreconditioner
     /// which only requires one preconditioner.
     void fill_in_subsidiary_preconditioners(const unsigned& nprec_needed)
@@ -309,7 +309,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  Block diagonal preconditioner. By default SuperLU is used to solve
+  /// Block diagonal preconditioner. By default SuperLU is used to solve
   /// the subsidiary systems, but other preconditioners can be used by setting
   /// them using passing a pointer to a function of type
   /// SubsidiaryPreconditionerFctPt to the method
@@ -361,10 +361,10 @@ namespace oomph
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    ///  Setup the preconditioner
+    /// Setup the preconditioner
     virtual void setup();
 
-    ///  Use two level parallelisation
+    /// Use two level parallelisation
     void enable_two_level_parallelisation()
     {
 #ifndef OOMPH_HAS_MPI
@@ -375,7 +375,7 @@ namespace oomph
       Use_two_level_parallelisation = true;
     }
 
-    ///  Don't use two-level parallelisation
+    /// Don't use two-level parallelisation
     void disable_two_level_parallelisation()
     {
       Use_two_level_parallelisation = false;
@@ -445,7 +445,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  General purpose block triangular preconditioner
+  /// General purpose block triangular preconditioner
   /// By default this is Upper triangular.
   /// By default SuperLUPreconditioner (or SuperLUDistPreconditioner) is used to
   /// solve the subsidiary systems, but other preconditioners can be used by
@@ -503,7 +503,7 @@ namespace oomph
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    ///  Setup the preconditioner
+    /// Setup the preconditioner
     void setup();
 
     /// Use as an upper triangular preconditioner
@@ -556,10 +556,10 @@ namespace oomph
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    ///  Setup the preconditioner
+    /// Setup the preconditioner
     void setup();
 
-    ///  Access for the preconditioner pointer used to solve the
+    /// Access for the preconditioner pointer used to solve the
     /// system (stored in the vector of pointers in the base class);
     Preconditioner*& preconditioner_pt()
     {
@@ -569,7 +569,7 @@ namespace oomph
 
 
   // =================================================================
-  ///  Block "anti-diagonal" preconditioner, i.e. same as block
+  /// Block "anti-diagonal" preconditioner, i.e. same as block
   /// diagonal but along the other diagonal of the matrix (top-right to
   /// bottom-left).
   // =================================================================
@@ -617,7 +617,7 @@ namespace oomph
       z.build(r);
     }
 
-    ///  Setup the preconditioner
+    /// Setup the preconditioner
     void setup()
     {
       // Set up the block look up schemes

@@ -51,7 +51,7 @@ namespace oomph
   class OneDMesh : public virtual LineMeshBase
   {
   public:
-    ///  Constructor: Pass number of elements, n_element, length of
+    /// Constructor: Pass number of elements, n_element, length of
     /// domain, length, and pointer to timestepper (defaults to a Steady
     /// timestepper so we don't need to specify one in problems without
     /// time-dependence).
@@ -65,7 +65,7 @@ namespace oomph
       build_mesh(time_stepper_pt);
     }
 
-    ///  Constructor: Pass number of elements, n_element, minimum
+    /// Constructor: Pass number of elements, n_element, minimum
     /// coordinate, xmin, maximum coordinate, xmax, and a pointer to a
     /// timestepper.
     OneDMesh(const unsigned& n_element,
@@ -109,7 +109,7 @@ namespace oomph
     /// Number of elements
     unsigned N;
 
-    ///  Generic mesh constuction routine, called by all constructors
+    /// Generic mesh constuction routine, called by all constructors
     void build_mesh(TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
   };
 
@@ -122,7 +122,7 @@ namespace oomph
                              public RefineableLineMesh<ELEMENT>
   {
   public:
-    ///  Constructor: Pass number of elements, n_element, length of
+    /// Constructor: Pass number of elements, n_element, length of
     /// domain, length, and pointer to timestepper (defaults to Steady)
     RefineableOneDMesh(
       const unsigned& n_element,
@@ -135,7 +135,7 @@ namespace oomph
       this->setup_binary_tree_forest();
     }
 
-    ///  Constructor that allows the specification of minimum and
+    /// Constructor that allows the specification of minimum and
     /// maximum values of x coordinates. Also pass pointer to timestepper
     /// (defaults to Steady).
     RefineableOneDMesh(

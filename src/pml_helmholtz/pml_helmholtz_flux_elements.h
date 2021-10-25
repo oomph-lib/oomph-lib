@@ -42,7 +42,7 @@
 namespace oomph
 {
   //======================================================================
-  ///  A class for elements that allow the post-processing of
+  /// A class for elements that allow the post-processing of
   /// radiated power and flux on the boundaries of PMLHelmholtz elements.
   /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
   /// policy class.
@@ -52,12 +52,12 @@ namespace oomph
                                    public virtual FaceElement
   {
   public:
-    ///  Constructor, takes the pointer to the "bulk" element and the
+    /// Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
     PMLHelmholtzPowerElement(FiniteElement* const& bulk_el_pt,
                              const int& face_index);
 
-    ///  Broken empty constructor
+    /// Broken empty constructor
     PMLHelmholtzPowerElement()
     {
       throw OomphLibError(
@@ -78,7 +78,7 @@ namespace oomph
     /*void operator=(const PMLHelmholtzPowerElement&) = delete;*/
 
 
-    ///  Specify the value of nodal zeta from the face geometry
+    /// Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
@@ -91,7 +91,7 @@ namespace oomph
     }
 
 
-    ///  Return the index at which the unknown value
+    /// Return the index at which the unknown value
     /// is stored.
     virtual inline std::complex<unsigned> u_index_helmholtz() const
     {
@@ -100,7 +100,7 @@ namespace oomph
     }
 
 
-    ///  Compute the element's contribution to the time-averaged
+    /// Compute the element's contribution to the time-averaged
     /// radiated power over the artificial boundary
     double global_power_contribution()
     {
@@ -109,7 +109,7 @@ namespace oomph
       return global_power_contribution(outfile);
     }
 
-    ///  Compute the element's contribution to the time-averaged
+    /// Compute the element's contribution to the time-averaged
     /// radiated power over the artificial boundary. Also output the
     /// power density in the specified
     /// output file if it's open.
@@ -242,7 +242,7 @@ namespace oomph
     }
 
 
-    ///  Compute the element's contribution to the time-averaged
+    /// Compute the element's contribution to the time-averaged
     /// flux
     std::complex<double> global_flux_contribution()
     {
@@ -251,7 +251,7 @@ namespace oomph
       return global_flux_contribution(outfile);
     }
 
-    ///   Compute the element's contribution to the integral of
+    ///  Compute the element's contribution to the integral of
     /// the flux over the artificial boundary. Also output the
     /// flux  in the specified
     /// output file if it's open.
@@ -370,7 +370,7 @@ namespace oomph
 
 
   protected:
-    ///  The index at which the real and imag part of the unknown is
+    /// The index at which the real and imag part of the unknown is
     /// stored at the nodes
     std::complex<unsigned> U_index_helmholtz;
 
@@ -541,7 +541,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  A class for elements that allow the imposition of an
+  /// A class for elements that allow the imposition of an
   /// applied flux on the boundaries of PMLHelmholtz elements.
   /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
   /// policy class.
@@ -551,18 +551,18 @@ namespace oomph
                                   public virtual FaceElement
   {
   public:
-    ///  Function pointer to the prescribed-flux function fct(x,f(x)) --
+    /// Function pointer to the prescribed-flux function fct(x,f(x)) --
     /// x is a Vector and  the flux is a complex. NOTE THAT f(x) represents
     /// c^2 du/dn!
     typedef void (*PMLHelmholtzPrescribedFluxFctPt)(const Vector<double>& x,
                                                     std::complex<double>& flux);
 
-    ///  Constructor, takes the pointer to the "bulk" element and the
+    /// Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
     PMLHelmholtzFluxElement(FiniteElement* const& bulk_el_pt,
                             const int& face_index);
 
-    ///  Broken empty constructor
+    /// Broken empty constructor
     PMLHelmholtzFluxElement()
     {
       throw OomphLibError(
@@ -595,7 +595,7 @@ namespace oomph
     }
 
 
-    ///  Add the element's contribution to its residual vector and its
+    /// Add the element's contribution to its residual vector and its
     /// Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -606,7 +606,7 @@ namespace oomph
     }
 
 
-    ///  Specify the value of nodal zeta from the face geometry
+    /// Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
@@ -626,7 +626,7 @@ namespace oomph
       FiniteElement::output(outfile);
     }
 
-    ///  Output function -- forward to broken version in FiniteElement
+    /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -641,7 +641,7 @@ namespace oomph
       FiniteElement::output(file_pt);
     }
 
-    ///  C-style output function -- forward to broken version in
+    /// C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -650,7 +650,7 @@ namespace oomph
     }
 
 
-    ///  Return the index at which the unknown value
+    /// Return the index at which the unknown value
     /// is stored.
     virtual inline std::complex<unsigned> u_index_helmholtz() const
     {
@@ -659,14 +659,14 @@ namespace oomph
     }
 
 
-    ///  The number of "DOF types" that degrees of freedom in this element
+    /// The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: real and imaginary part
     unsigned ndof_types() const
     {
       return 2;
     }
 
-    ///  Create a list of pairs for all unknowns in this element,
+    /// Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.
@@ -719,7 +719,7 @@ namespace oomph
     }
 
   protected:
-    ///  Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test(const Vector<double>& s,
@@ -743,7 +743,7 @@ namespace oomph
     }
 
 
-    ///  Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test_at_knot(const unsigned& ipt,
@@ -784,12 +784,12 @@ namespace oomph
     }
 
 
-    ///  The index at which the real and imag part of the unknown is
+    /// The index at which the real and imag part of the unknown is
     /// stored at the nodes
     std::complex<unsigned> U_index_helmholtz;
 
 
-    ///  Add the element's contribution to its residual vector.
+    /// Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     virtual void fill_in_generic_residual_contribution_helmholtz_flux(

@@ -71,7 +71,7 @@ namespace oomph
     /// Virtual destructor
     virtual ~PMLElementBase() {}
 
-    ///  Disable pml. Ensures the PML-ification in all directions
+    /// Disable pml. Ensures the PML-ification in all directions
     /// has been deactivated
     void disable_pml()
     {
@@ -87,7 +87,7 @@ namespace oomph
       }
     } // End of disable_pml
 
-    ///  Enable pml. Specify the coordinate direction along which
+    /// Enable pml. Specify the coordinate direction along which
     /// pml boundary is constant, as well as the coordinate
     /// along the dimension for the interface between the physical and
     /// artificial domains and the coordinate for the outer boundary. All of
@@ -104,7 +104,7 @@ namespace oomph
       Pml_outer_boundary[direction] = outer_domain_border_value;
     }
 
-    ///  Pure virtual function in which we have to specify the
+    /// Pure virtual function in which we have to specify the
     /// values to be pinned (and set to zero) on the outer edge of
     /// the pml layer. This is usually all of the nodal values
     /// (values 0 and 1 (real and imag part) for Helmholtz;
@@ -118,17 +118,17 @@ namespace oomph
     /// Boolean indicating if element is used in pml mode
     bool Pml_is_enabled;
 
-    ///  Coordinate direction along which pml boundary is constant;
+    /// Coordinate direction along which pml boundary is constant;
     /// alternatively: coordinate direction in which coordinate stretching
     /// is performed.
     std::vector<bool> Pml_direction_active;
 
-    ///  Coordinate of inner pml boundary
+    /// Coordinate of inner pml boundary
     /// (Storage is provided for any coordinate
     /// direction; only the entries for "active" directions is used.)
     Vector<double> Pml_inner_boundary;
 
-    ///  Coordinate of outer pml boundary
+    /// Coordinate of outer pml boundary
     /// (Storage is provided for any coordinate
     /// direction; only the entries for "active" directions is used.)
     Vector<double> Pml_outer_boundary;
@@ -139,7 +139,7 @@ namespace oomph
   //////////////////////////////////////////////////////////////////////
 
   //===================================================================
-  ///  All helper routines for 2D bulk boundary mesh usage in order to
+  /// All helper routines for 2D bulk boundary mesh usage in order to
   /// generate PML meshes aligned to the main mesh
   //===================================================================
   namespace TwoDimensionalPMLHelper
@@ -170,7 +170,7 @@ namespace oomph
   class PMLMeshBase
   {
   public:
-    ///  Pure virtual function to provide an optimised version of
+    /// Pure virtual function to provide an optimised version of
     /// the locate_zeta function for PML meshes. As the PML meshes are
     /// rectangular (in 2D, or rectangular prisms in 3D) the location of
     /// a point in the mesh is simpler than in a more complex mesh
@@ -186,7 +186,7 @@ namespace oomph
                           public PMLMeshBase
   {
   public:
-    ///  Constructor: Create the underlying rectangular quad mesh
+    /// Constructor: Create the underlying rectangular quad mesh
     PMLQuadMeshBase(const unsigned& n_pml_x,
                     const unsigned& n_pml_y,
                     const double& x_pml_start,
@@ -204,7 +204,7 @@ namespace oomph
     {
     }
 
-    ///  Overloaded function to allow the user to locate an element
+    /// Overloaded function to allow the user to locate an element
     /// in mesh given the (Eulerian) position of a point. Note, the result
     /// may be nonunique if the given point lies on the boundary of two
     /// elements in the mesh. Additionally, we assume that the PML mesh is
@@ -430,7 +430,7 @@ namespace oomph
   class PMLQuadMesh : public PMLQuadMeshBase<ELEMENT>
   {
   public:
-    ///  Constructor: Pass pointer to "bulk" mesh,
+    /// Constructor: Pass pointer to "bulk" mesh,
     /// the boundary ID of axis aligned boundary to which the
     /// mesh is supposed to be attached and the boundary ID in the
     /// rectangular quad mesh that contains the pml elements.
@@ -504,7 +504,7 @@ namespace oomph
 
       unsigned nnode_1d = this->finite_element_pt(0)->nnode_1d();
 
-      ///  Simple interior node numbering helpers
+      /// Simple interior node numbering helpers
       /// to be precomputed before the main loop
 
       /// Top left node in element
@@ -514,7 +514,7 @@ namespace oomph
       /// Used to find nodes in top row
       unsigned interior_node_nr_helper_3 = nnode_1d * (nnode_1d - 1) - 1;
 
-      ///  Set all nodes from the PML mesh that must disappear
+      /// Set all nodes from the PML mesh that must disappear
       /// after merging as obsolete
       unsigned nnod = this->nboundary_node(quad_boundary_id);
       for (unsigned j = 0; j < nnod; j++)
@@ -669,7 +669,7 @@ namespace oomph
         }
       }
 
-      ///  The alignment is done individually for each boundary
+      /// The alignment is done individually for each boundary
       /// and depends on the ordering of the nodes, in this case of the
       /// RectangularQuadMesh<2,3> for each boundary. There are operations
       /// with mod and div 3 necessary in this case, as well as specific
@@ -776,7 +776,7 @@ namespace oomph
   class PMLCornerQuadMesh : public PMLQuadMeshBase<ELEMENT>
   {
   public:
-    ///  Constructor: Pass pointer to "bulk" mesh
+    /// Constructor: Pass pointer to "bulk" mesh
     /// and the two existing PML meshes in order to construct the corner
     /// PML mesh in between them based on their element number
     /// and coordinates.
@@ -805,7 +805,7 @@ namespace oomph
     {
       unsigned nnode_1d = this->finite_element_pt(0)->nnode_1d();
 
-      ///  Simple interior node numbering helpers
+      /// Simple interior node numbering helpers
       /// to be precomputed before the main loop
 
       /// Top left node in element
@@ -1526,7 +1526,7 @@ namespace oomph
 
 
   //===================================================================
-  ///  All helper routines for 2D bulk boundary mesh usage in order to
+  /// All helper routines for 2D bulk boundary mesh usage in order to
   /// generate PML meshes aligned to the main mesh
   //===================================================================
   namespace TwoDimensionalPMLHelper
@@ -1568,7 +1568,7 @@ namespace oomph
 
       // Specific PML sizes needed, taken directly from physical domain
       double l_pml_right_x_start = ordered_right_boundary_node_pt[0]->x(0);
-      ///  PML layer with added to the bulk mesh coordinate
+      /// PML layer with added to the bulk mesh coordinate
       double l_pml_right_x_end =
         width_x_right_pml + ordered_right_boundary_node_pt[0]->x(0);
       double l_pml_right_y_start = ordered_right_boundary_node_pt[0]->x(1);
@@ -1633,7 +1633,7 @@ namespace oomph
         }
       }
 
-      ///  Return the finalized mesh, with PML enabled
+      /// Return the finalized mesh, with PML enabled
       /// and boundary conditions added
       return pml_right_mesh_pt;
     }
@@ -1677,7 +1677,7 @@ namespace oomph
       double l_pml_top_x_end =
         ordered_top_boundary_node_pt[n_top_boundary_node - 1]->x(0);
       double l_pml_top_y_start = ordered_top_boundary_node_pt[0]->x(1);
-      ///  PML layer width added to the bulk mesh coordinate
+      /// PML layer width added to the bulk mesh coordinate
       double l_pml_top_y_end =
         width_y_top_pml + ordered_top_boundary_node_pt[0]->x(1);
 
@@ -1739,7 +1739,7 @@ namespace oomph
         }
       }
 
-      ///  Return the finalized mesh, with PML enabled
+      /// Return the finalized mesh, with PML enabled
       /// and boundary conditions added
       return pml_top_mesh_pt;
     }
@@ -1779,7 +1779,7 @@ namespace oomph
       unsigned n_y_left_pml = bulk_mesh_pt->nboundary_element(left_boundary_id);
 
       // Specific PML sizes needed, taken directly from physical domain
-      ///  PML layer width subtracted from left bulk mesh coordinate
+      /// PML layer width subtracted from left bulk mesh coordinate
       double l_pml_left_x_start =
         -width_x_left_pml +
         ordered_left_boundary_node_pt[n_left_boundary_node - 1]->x(0);
@@ -1847,7 +1847,7 @@ namespace oomph
         }
       }
 
-      ///  Return the finalized mesh, with PML enabled
+      /// Return the finalized mesh, with PML enabled
       /// and boundary conditions added
       return pml_left_mesh_pt;
     }
@@ -1891,7 +1891,7 @@ namespace oomph
       double l_pml_bottom_x_start =
         ordered_bottom_boundary_node_pt[n_bottom_boundary_node - 1]->x(0);
       double l_pml_bottom_x_end = ordered_bottom_boundary_node_pt[0]->x(0);
-      ///  PML layer width subtracted from the bulk mesh lower
+      /// PML layer width subtracted from the bulk mesh lower
       /// boundary coordinate
       double l_pml_bottom_y_start =
         -width_y_bottom_pml + ordered_bottom_boundary_node_pt[0]->x(1);
@@ -1955,13 +1955,13 @@ namespace oomph
         }
       }
 
-      ///  Return the finalized mesh, with PML enabled
+      /// Return the finalized mesh, with PML enabled
       /// and boundary conditions added
       return pml_bottom_mesh_pt;
     }
 
     //==========================================================================
-    ///  "Constructor" for PML top right corner mesh,
+    /// "Constructor" for PML top right corner mesh,
     /// aligned with the existing PML meshes
     //==========================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
@@ -1972,7 +1972,7 @@ namespace oomph
       const unsigned& right_boundary_id,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
-      ///  Relevant boundary id's to be used in construction
+      /// Relevant boundary id's to be used in construction
       /// Parent id refers to already existing PML meshes
       unsigned parent_boundary_x_id = 2;
       unsigned parent_boundary_y_id = 1;
@@ -1999,7 +1999,7 @@ namespace oomph
                 ordered_right_boundary_node_pt.end(),
                 sorter_right_boundary);
 
-      ///  Number of elements and boundary nodes to be acted upon during
+      /// Number of elements and boundary nodes to be acted upon during
       /// construction are extracted from the 'parent' PML meshes
       unsigned n_x_right_pml =
         pml_right_mesh_pt->nboundary_element(parent_boundary_x_id);
@@ -2010,7 +2010,7 @@ namespace oomph
       unsigned n_y_boundary_nodes =
         pml_top_mesh_pt->nboundary_node(parent_boundary_y_id);
 
-      ///  Specific PML sizes needed, taken directly from physical domain
+      /// Specific PML sizes needed, taken directly from physical domain
       /// and existing PML meshes
       double l_pml_right_x_start =
         ordered_right_boundary_node_pt[n_right_boundary_node - 1]->x(0);
@@ -2048,7 +2048,7 @@ namespace oomph
           time_stepper_pt);
 
       // Enable PML damping on the entire mesh
-      ///  The enabling must be perfromed in both x- and y-directions
+      /// The enabling must be perfromed in both x- and y-directions
       /// as this is a corner PML mesh
       unsigned n_element_pml_top_right = pml_top_right_mesh_pt->nelement();
       for (unsigned e = 0; e < n_element_pml_top_right; e++)
@@ -2090,13 +2090,13 @@ namespace oomph
         }
       }
 
-      ///  Return the finalized mesh, with PML enabled
+      /// Return the finalized mesh, with PML enabled
       /// and boundary conditions added
       return pml_top_right_mesh_pt;
     }
 
     //==========================================================================
-    ///   "Constructor" for PML bottom right corner mesh,
+    ///  "Constructor" for PML bottom right corner mesh,
     /// aligned with the existing PML meshes
     //==========================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
@@ -2107,7 +2107,7 @@ namespace oomph
       const unsigned& right_boundary_id,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
-      ///  Relevant boundary id's to be used in construction
+      /// Relevant boundary id's to be used in construction
       /// Parent id refers to already existing PML meshes
       unsigned parent_boundary_x_id = 0;
       unsigned parent_boundary_y_id = 1;
@@ -2134,7 +2134,7 @@ namespace oomph
                 ordered_right_boundary_node_pt.end(),
                 sorter_right_boundary);
 
-      ///  Number of elements and boundary nodes to be acted upon during
+      /// Number of elements and boundary nodes to be acted upon during
       /// construction are extracted from the 'parent' PML meshes
       unsigned n_x_right_pml =
         pml_right_mesh_pt->nboundary_element(parent_boundary_x_id);
@@ -2143,7 +2143,7 @@ namespace oomph
       unsigned n_x_boundary_nodes =
         pml_right_mesh_pt->nboundary_node(parent_boundary_x_id);
 
-      ///  Specific PML sizes needed, taken directly from physical domain
+      /// Specific PML sizes needed, taken directly from physical domain
       /// and existing PML meshes
       double l_pml_right_x_start = ordered_right_boundary_node_pt[0]->x(0);
       double l_pml_right_x_end =
@@ -2177,7 +2177,7 @@ namespace oomph
           time_stepper_pt);
 
       // Enable PML damping on the entire mesh
-      ///  The enabling must be perfromed in both x- and y-directions
+      /// The enabling must be perfromed in both x- and y-directions
       /// as this is a corner PML mesh
       unsigned n_element_pml_bottom_right =
         pml_bottom_right_mesh_pt->nelement();
@@ -2221,13 +2221,13 @@ namespace oomph
         }
       }
 
-      ///  Return the finalized mesh, with PML enabled
+      /// Return the finalized mesh, with PML enabled
       /// and boundary conditions added
       return pml_bottom_right_mesh_pt;
     }
 
     //==========================================================================
-    ///  "Constructor" for PML top left corner mesh,
+    /// "Constructor" for PML top left corner mesh,
     /// aligned with the existing PML meshes
     //==========================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
@@ -2238,7 +2238,7 @@ namespace oomph
       const unsigned& left_boundary_id,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
-      ///  Relevant boundary id's to be used in construction
+      /// Relevant boundary id's to be used in construction
       /// Parent id refers to already existing PML meshes
       unsigned parent_boundary_x_id = 2;
       unsigned parent_boundary_y_id = 3;
@@ -2260,14 +2260,14 @@ namespace oomph
           bulk_mesh_pt->boundary_node_pt(left_boundary_id, n);
       }
 
-      ///  Sort them from lowest to highest (in y coordinate)
+      /// Sort them from lowest to highest (in y coordinate)
       /// sorter_right_boundary is still functional, as the sorting
       /// is performed by the same criterion
       std::sort(ordered_left_boundary_node_pt.begin(),
                 ordered_left_boundary_node_pt.end(),
                 sorter_right_boundary);
 
-      ///  Number of elements and boundary nodes to be acted upon during
+      /// Number of elements and boundary nodes to be acted upon during
       /// construction are extracted from the 'parent' PML meshes
       unsigned n_x_left_pml =
         pml_left_mesh_pt->nboundary_element(parent_boundary_x_id);
@@ -2276,7 +2276,7 @@ namespace oomph
       unsigned n_y_boundary_nodes =
         pml_top_mesh_pt->nboundary_node(parent_boundary_y_id);
 
-      ///  Specific PML sizes needed, taken directly from physical domain
+      /// Specific PML sizes needed, taken directly from physical domain
       /// and existing PML meshes
       double l_pml_left_x_start =
         pml_left_mesh_pt->boundary_node_pt(parent_boundary_x_id, 0)->x(0);
@@ -2311,7 +2311,7 @@ namespace oomph
         time_stepper_pt);
 
       // Enable PML damping on the entire mesh
-      ///  The enabling must be perfromed in both x- and y-directions
+      /// The enabling must be perfromed in both x- and y-directions
       /// as this is a corner PML mesh
       unsigned n_element_pml_top_left = pml_top_left_mesh_pt->nelement();
 
@@ -2354,13 +2354,13 @@ namespace oomph
         }
       }
 
-      ///  Return the finalized mesh, with PML enabled
+      /// Return the finalized mesh, with PML enabled
       /// and boundary conditions added
       return pml_top_left_mesh_pt;
     }
 
     //==========================================================================
-    ///  "Constructor" for PML bottom left corner mesh,
+    /// "Constructor" for PML bottom left corner mesh,
     /// aligned with the existing PML meshes
     //==========================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
@@ -2371,7 +2371,7 @@ namespace oomph
       const unsigned& left_boundary_id,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
-      ///  Relevant boundary id's to be used in construction
+      /// Relevant boundary id's to be used in construction
       /// Parent id refers to already existing PML meshes
       unsigned parent_boundary_x_id = 0;
       unsigned parent_boundary_y_id = 3;
@@ -2393,21 +2393,21 @@ namespace oomph
           bulk_mesh_pt->boundary_node_pt(left_boundary_id, n);
       }
 
-      ///  Sort them from lowest to highest (in y coordinate)
+      /// Sort them from lowest to highest (in y coordinate)
       /// sorter_right_boundary is still functional, as the sorting
       /// is performed by the same criterion
       std::sort(ordered_left_boundary_node_pt.begin(),
                 ordered_left_boundary_node_pt.end(),
                 sorter_right_boundary);
 
-      ///  Number of elements and boundary nodes to be acted upon during
+      /// Number of elements and boundary nodes to be acted upon during
       /// construction are extracted from the 'parent' PML meshes
       unsigned n_x_left_pml =
         pml_left_mesh_pt->nboundary_element(parent_boundary_x_id);
       unsigned n_y_bottom_pml =
         pml_bottom_mesh_pt->nboundary_element(parent_boundary_y_id);
 
-      ///  Specific PML sizes needed, taken directly from physical domain
+      /// Specific PML sizes needed, taken directly from physical domain
       /// and existing PML meshes
       double l_pml_left_x_start =
         pml_left_mesh_pt->boundary_node_pt(parent_boundary_x_id, 0)->x(0);
@@ -2440,7 +2440,7 @@ namespace oomph
           time_stepper_pt);
 
       // Enable PML damping on the entire mesh
-      ///  The enabling must be perfromed in both x- and y-directions
+      /// The enabling must be perfromed in both x- and y-directions
       /// as this is a corner PML mesh
       unsigned n_element_pml_bottom_left = pml_bottom_left_mesh_pt->nelement();
       for (unsigned e = 0; e < n_element_pml_bottom_left; e++)
@@ -2482,7 +2482,7 @@ namespace oomph
         }
       }
 
-      ///  Return the finalized mesh, with PML enabled
+      /// Return the finalized mesh, with PML enabled
       /// and boundary conditions added
       return pml_bottom_left_mesh_pt;
     }

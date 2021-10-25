@@ -68,7 +68,7 @@ namespace oomph
     /// Destructor
     ~AddedMainNumberingLookup() {}
 
-    ///  Given a main matrix row/col number get the equivalent row/col
+    /// Given a main matrix row/col number get the equivalent row/col
     /// in the added matrix. Throw an error if not found.
     unsigned main_to_added(const int& main) const
     {
@@ -94,7 +94,7 @@ namespace oomph
       return unsigned(result);
     }
 
-    ///  Given a main matrix row/col number get the equivalent row/col
+    /// Given a main matrix row/col number get the equivalent row/col
     /// in the added matrix. Return -1 if not found.
     int unsafe_main_to_added(const int& main) const
     {
@@ -180,13 +180,13 @@ namespace oomph
     // Access functions
     // ============================================================
 
-    ///  Const access function for mapping.
+    /// Const access function for mapping.
     const Vector<unsigned>* added_to_main_mapping_pt() const
     {
       return &Added_to_main_mapping;
     }
 
-    ///  Const access function for mapping.
+    /// Const access function for mapping.
     const std::map<unsigned, unsigned>* main_to_added_mapping_pt() const
     {
       return &Main_to_added_mapping;
@@ -267,18 +267,18 @@ namespace oomph
     /// List of pointers to the matrices that are added to the main matrix
     Vector<DoubleMatrixBase*> Added_matrix_pt;
 
-    ///  List of maps between row numbers of the main matrix and the
+    /// List of maps between row numbers of the main matrix and the
     /// added matrices.
     Vector<const AddedMainNumberingLookup*> Row_map_pt;
 
-    ///  List of maps between col numbers of the main matrix and the
+    /// List of maps between col numbers of the main matrix and the
     /// added matrices.
     Vector<const AddedMainNumberingLookup*> Col_map_pt;
 
     /// Should we delete the sub matrices when destructor is called?
     Vector<unsigned> Should_delete_added_matrix;
 
-    ///  Should we delete the main matrix when destructor is called?
+    /// Should we delete the main matrix when destructor is called?
     /// Default is no.
     bool Should_delete_main_matrix;
 
@@ -339,7 +339,7 @@ namespace oomph
       return Main_matrix_pt;
     }
 
-    ///  Set the main matrix to be deleted by the destructor of the
+    /// Set the main matrix to be deleted by the destructor of the
     /// SumOfMatrices (default is to not delete it).
     void set_delete_main_matrix()
     {
@@ -347,7 +347,7 @@ namespace oomph
     }
 
 
-    ///  Output the "bottom right" entry regardless of it being
+    /// Output the "bottom right" entry regardless of it being
     /// zero or not (this allows automatic detection of matrix size in
     /// e.g. matlab, python).
     void output_bottom_right_zero_helper(std::ostream& outfile) const
@@ -364,7 +364,7 @@ namespace oomph
     }
 
 
-    ///  Output the matrix in sparse format. Note that this is going to be
+    /// Output the matrix in sparse format. Note that this is going to be
     /// slow because we have to check every entry of every matrix for non-zeros.
     void sparse_indexed_output_helper(std::ostream& outfile) const
     {
@@ -383,7 +383,7 @@ namespace oomph
     }
 
 
-    ///  Get a list of row/col indices and total entry for non-zeros in
+    /// Get a list of row/col indices and total entry for non-zeros in
     /// the matrix. e.g. for use as input to other matrix classes. Warning this
     /// is SLOW! for sparse matrices.
     void get_as_indices(Vector<int>& row,
@@ -410,7 +410,7 @@ namespace oomph
       }
     }
 
-    ///  Add a new matrix to the sum by giving a matrix pointer and a
+    /// Add a new matrix to the sum by giving a matrix pointer and a
     /// mapping from the main matrix numbering to the added matrix's numbering.
     void add_matrix(DoubleMatrixBase* added_matrix_pt_in,
                     const AddedMainNumberingLookup* main_to_added_rows_pt,
@@ -511,7 +511,7 @@ namespace oomph
       return Main_matrix_pt->nrow();
     }
 
-    ///  Return the number of columns of the main matrix.
+    /// Return the number of columns of the main matrix.
     inline unsigned long ncol() const
     {
 #ifdef PARANOID
@@ -531,11 +531,11 @@ namespace oomph
       return Added_matrix_pt.size();
     }
 
-    ///  Multiply: just call multiply on each of the matrices and add up
+    /// Multiply: just call multiply on each of the matrices and add up
     /// the results (with appropriate bookeeping of the relative positions).
     void multiply(const DoubleVector& x, DoubleVector& soln) const;
 
-    ///  Broken operator() because it does not make sense to return
+    /// Broken operator() because it does not make sense to return
     /// anything by reference.
     double& entry(const unsigned long& i, const unsigned long& j) const
     {
@@ -568,7 +568,7 @@ namespace oomph
       return sum;
     }
 
-    ///  Dummy overload of a pure virtual function. I'm not sure how best
+    /// Dummy overload of a pure virtual function. I'm not sure how best
     /// to implement this and I don't think I need it.
     virtual void multiply_transpose(const DoubleVector& x,
                                     DoubleVector& soln) const

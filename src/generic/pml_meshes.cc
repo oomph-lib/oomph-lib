@@ -30,7 +30,7 @@
 namespace oomph
 {
   //===================================================================
-  ///  Namespace with functions that allow the construction of
+  /// Namespace with functions that allow the construction of
   /// PML layers on axis aligned boundaries
   //===================================================================
   namespace TwoDimensionalPMLHelper

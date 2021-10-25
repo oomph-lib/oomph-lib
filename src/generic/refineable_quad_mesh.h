@@ -75,14 +75,14 @@ namespace oomph
     virtual ~RefineableQuadMesh() {}
 
 
-    ///  Set up the tree forest associated with the Mesh.
+    /// Set up the tree forest associated with the Mesh.
     /// Forwards call to setup_quadtree_forest()
     virtual void setup_tree_forest()
     {
       setup_quadtree_forest();
     }
 
-    ///  Set up QuadTreeForest. Wipes any existing tree structure below
+    /// Set up QuadTreeForest. Wipes any existing tree structure below
     /// the minimum refinement level and regards the elements at that level
     /// as the root trees in the forest.
     void setup_quadtree_forest()

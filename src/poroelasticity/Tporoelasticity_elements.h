@@ -59,7 +59,7 @@ namespace oomph
     /// The internal data index where the p degrees of freedom are stored
     unsigned P_internal_data_index;
 
-    ///  Unit normal signs associated with each edge to ensure
+    /// Unit normal signs associated with each edge to ensure
     /// inter-element continuity of the flux
     std::vector<short> Sign_edge;
 
@@ -127,7 +127,7 @@ namespace oomph
       return internal_local_eqn(q_internal_index(), n);
     }
 
-    ///  Return the index of the internal data where the q_internal
+    /// Return the index of the internal data where the q_internal
     /// degrees of freedom are stored
     unsigned q_internal_index() const
     {
@@ -185,7 +185,7 @@ namespace oomph
       return nodal_value(q_edge_node_number(n), q_edge_index(n));
     }
 
-    ///  Return the values of the edge (flux) degrees of freedom at time
+    /// Return the values of the edge (flux) degrees of freedom at time
     /// history level t
     double q_edge(const unsigned& t, const unsigned& n) const
     {
@@ -220,7 +220,7 @@ namespace oomph
       return this->internal_data_pt(q_internal_index())->value(n);
     }
 
-    ///  Return the values of the internal (moment) degrees of freedom at
+    /// Return the values of the internal (moment) degrees of freedom at
     /// time history level t
     double q_internal(const unsigned& t, const unsigned& n) const
     {
@@ -477,7 +477,7 @@ namespace oomph
       PoroelasticityEquations<2>::output(outfile);
     }
 
-    ///  Output FE representation of soln: x,y,u1,u2,div_q,p at
+    /// Output FE representation of soln: x,y,u1,u2,div_q,p at
     /// Nplot^DIM plot points
     void output(std::ostream& outfile, const unsigned& Nplot)
     {
@@ -485,7 +485,7 @@ namespace oomph
     }
 
   protected:
-    ///  Returns the geometric basis, and the u, p and divergence basis
+    /// Returns the geometric basis, and the u, p and divergence basis
     /// functions and test functions at local coordinate s
     double shape_basis_test_local(const Vector<double>& s,
                                   Shape& psi,
@@ -524,7 +524,7 @@ namespace oomph
       return J;
     }
 
-    ///  Returns the geometric basis, and the u, p and divergence basis
+    /// Returns the geometric basis, and the u, p and divergence basis
     /// functions and test functions at integration point ipt
     double shape_basis_test_local_at_knot(const unsigned& ipt,
                                           Shape& psi,

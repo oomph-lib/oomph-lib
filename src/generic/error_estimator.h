@@ -51,7 +51,7 @@ namespace oomph
     /// Empty virtual destructor
     virtual ~ErrorEstimator() {}
 
-    ///  Compute the elemental error-measures for a given mesh
+    /// Compute the elemental error-measures for a given mesh
     /// and store them in a vector.
     void get_element_errors(Mesh*& mesh_pt, Vector<double>& elemental_error)
     {
@@ -63,7 +63,7 @@ namespace oomph
     }
 
 
-    ///  Compute the elemental error measures for a given mesh
+    /// Compute the elemental error measures for a given mesh
     /// and store them in a vector. Doc errors etc.
     virtual void get_element_errors(Mesh*& mesh_pt,
                                     Vector<double>& elemental_error,
@@ -72,7 +72,7 @@ namespace oomph
 
 
   //========================================================================
-  ///  Base class for finite elements that can compute the
+  /// Base class for finite elements that can compute the
   /// quantities that are required for the Z2 error estimator.
   //========================================================================
   class ElementWithZ2ErrorEstimator : public virtual FiniteElement
@@ -87,10 +87,10 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const ElementWithZ2ErrorEstimator&) = delete;
 
-    ///  Number of 'flux' terms for Z2 error estimation
+    /// Number of 'flux' terms for Z2 error estimation
     virtual unsigned num_Z2_flux_terms() = 0;
 
-    ///  A stuitable error estimator for
+    /// A stuitable error estimator for
     /// a multi-physics elements may require one Z2 error estimate for each
     /// field (e.g. velocity and temperature in a fluid convection problem).
     /// It is assumed that these error estimates will each use
@@ -102,10 +102,10 @@ namespace oomph
       return 1;
     }
 
-    ///  Z2 'flux' terms for Z2 error estimation
+    /// Z2 'flux' terms for Z2 error estimation
     virtual void get_Z2_flux(const Vector<double>& s, Vector<double>& flux) = 0;
 
-    ///  Plot the error when compared against a given exact flux.
+    /// Plot the error when compared against a given exact flux.
     /// Also calculates the norm of the error and that of the exact flux.
     virtual void compute_exact_Z2_error(
       std::ostream& outfile,
@@ -121,22 +121,22 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Return the compound flux index of each flux component
+    /// Return the compound flux index of each flux component
     /// The default (do nothing behaviour) will mean that all indices
     /// remain at the default value zero.
     virtual void get_Z2_compound_flux_indices(Vector<unsigned>& flux_index) {}
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     virtual unsigned nvertex_node() const = 0;
 
-    ///  Pointer to the j-th vertex node in the element. Needed for
+    /// Pointer to the j-th vertex node in the element. Needed for
     /// efficient patch assmbly
     virtual Node* vertex_node_pt(const unsigned& j) const = 0;
 
-    ///  Order of recovery shape functions
+    /// Order of recovery shape functions
     virtual unsigned nrecovery_order() = 0;
 
-    ///  Return the geometric jacobian (should be overloaded in
+    /// Return the geometric jacobian (should be overloaded in
     /// cylindrical and spherical geometries).
     /// Default value one is suitable for Cartesian coordinates
     virtual double geometric_jacobian(const Vector<double>& x)
@@ -285,7 +285,7 @@ namespace oomph
   class Z2ErrorEstimator : public virtual ErrorEstimator
   {
   public:
-    ///  Function pointer to combined error estimator function
+    /// Function pointer to combined error estimator function
     typedef double (*CombinedErrorEstimateFctPt)(const Vector<double>& errors);
 
     /// Constructor: Set order of recovery shape functions
@@ -298,7 +298,7 @@ namespace oomph
     }
 
 
-    ///  Constructor: Leave order of recovery shape functions open
+    /// Constructor: Leave order of recovery shape functions open
     /// for now -- they will be read out from first element of the mesh
     /// when the error estimator is applied
     Z2ErrorEstimator()
@@ -318,7 +318,7 @@ namespace oomph
     /// Empty virtual destructor
     virtual ~Z2ErrorEstimator() {}
 
-    ///  Compute the elemental error measures for a given mesh
+    /// Compute the elemental error measures for a given mesh
     /// and store them in a vector.
     void get_element_errors(Mesh*& mesh_pt, Vector<double>& elemental_error)
     {
@@ -329,7 +329,7 @@ namespace oomph
       get_element_errors(mesh_pt, elemental_error, doc_info);
     }
 
-    ///  Compute the elemental error measures for a given mesh
+    /// Compute the elemental error measures for a given mesh
     /// and store them in a vector.
     /// If doc_info.enable_doc(), doc FE and recovered fluxes in
     /// - flux_fe*.dat
@@ -356,14 +356,14 @@ namespace oomph
       return Combined_error_fct_pt;
     }
 
-    ///  Access function: Pointer to combined error estimate function.
+    /// Access function: Pointer to combined error estimate function.
     /// Const version
     CombinedErrorEstimateFctPt combined_error_fct_pt() const
     {
       return Combined_error_fct_pt;
     }
 
-    ///  Setup patches: For each vertex node pointed to by nod_pt,
+    /// Setup patches: For each vertex node pointed to by nod_pt,
     /// adjacent_elements_pt[nod_pt] contains the pointer to the vector that
     /// contains the pointers to the elements that the node is part of.
     void setup_patches(Mesh*& mesh_pt,
@@ -387,7 +387,7 @@ namespace oomph
     double get_combined_error_estimate(const Vector<double>& compound_error);
 
   private:
-    ///  Given the vector of elements that make up a patch,
+    /// Given the vector of elements that make up a patch,
     /// the number of recovery and flux terms, and the spatial
     /// dimension of the problem, compute
     /// the matrix of recovered flux coefficients and return
@@ -400,13 +400,13 @@ namespace oomph
       DenseMatrix<double>*& recovered_flux_coefficient_pt);
 
 
-    ///  Return number of coefficients for expansion of recovered fluxes
+    /// Return number of coefficients for expansion of recovered fluxes
     /// for given spatial dimension of elements.
     /// (We use complete polynomials of the specified given order.)
     unsigned nrecovery_terms(const unsigned& dim);
 
 
-    ///  Recovery shape functions as functions of the global, Eulerian
+    /// Recovery shape functions as functions of the global, Eulerian
     /// coordinate x of dimension dim.
     /// The recovery shape functions are  complete polynomials of
     /// the order specified by Recovery_order.
@@ -414,7 +414,7 @@ namespace oomph
                    const unsigned& dim,
                    Vector<double>& psi_r);
 
-    ///  Integation scheme associated with the recovery shape functions
+    /// Integation scheme associated with the recovery shape functions
     /// must be of sufficiently high order to integrate the mass matrix
     /// associated with the recovery shape functions
     Integral* integral_rec(const unsigned& dim, const bool& is_q_mesh);
@@ -454,7 +454,7 @@ namespace oomph
   class DummyErrorEstimator : public virtual ErrorEstimator
   {
   public:
-    ///  Constructor. Provide mesh and number of the elements that define
+    /// Constructor. Provide mesh and number of the elements that define
     /// the regions within which elements are to be refined subsequently.
     /// Also specify the node number of a central node
     /// within elements -- it's used to determine if an element is
@@ -539,7 +539,7 @@ namespace oomph
     }
 
 
-    ///  Constructor. Provide vectors to "lower left" and "upper right"
+    /// Constructor. Provide vectors to "lower left" and "upper right"
     /// vertices of refinement region
     /// Also specify the node number of a central node
     /// within elements -- it's used to determine if an element is
@@ -582,7 +582,7 @@ namespace oomph
     virtual ~DummyErrorEstimator() {}
 
 
-    ///  Compute the elemental error measures for a given mesh
+    /// Compute the elemental error measures for a given mesh
     /// and store them in a vector. Doc errors etc.
     virtual void get_element_errors(Mesh*& mesh_pt,
                                     Vector<double>& elemental_error,
@@ -646,11 +646,11 @@ namespace oomph
     }
 
   private:
-    ///  Use Lagrangian coordinates to decide which element is to be
+    /// Use Lagrangian coordinates to decide which element is to be
     /// refined
     bool Use_lagrangian_coordinates;
 
-    ///  Number of local node that is used to identify if an element
+    /// Number of local node that is used to identify if an element
     /// is located in the refinement region
     unsigned Central_node_number;
 

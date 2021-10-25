@@ -41,7 +41,7 @@
 
 namespace oomph
 {
-  ///  Helper function that updates the input faceted surface
+  /// Helper function that updates the input faceted surface
   /// by using the flattened elements from FaceMesh(es) that are
   /// constructed for the boundaries associated with the segments of the
   /// polygon.
@@ -221,7 +221,7 @@ namespace oomph
   }
 
 
-  ///  Generate a new faceted representation of the inner hole
+  /// Generate a new faceted representation of the inner hole
   /// boundaries
   template<class ELEMENT>
   void RefineableTetgenMesh<ELEMENT>::surface_remesh_for_inner_hole_boundaries()
@@ -241,7 +241,7 @@ namespace oomph
     }
   }
 
-  ///  Snap the boundary nodes onto any curvilinear boundaries
+  /// Snap the boundary nodes onto any curvilinear boundaries
   template<class ELEMENT>
   void RefineableTetgenMesh<ELEMENT>::snap_nodes_onto_boundary(
     RefineableTetgenMesh<ELEMENT>*& new_mesh_pt, const unsigned& b)

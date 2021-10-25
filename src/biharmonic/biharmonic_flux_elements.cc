@@ -65,7 +65,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  Calculate the Jacobian of the mapping between local and global
+  /// Calculate the Jacobian of the mapping between local and global
   /// coordinates at the position s for face elements for two dimensional
   /// problems
   /// The jacobian of the 1D face element is computed which is dt/ds_t
@@ -117,7 +117,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  Compute the elemental contribution to the residual vector for 2D
+  /// Compute the elemental contribution to the residual vector for 2D
   /// problem type 0 biharmonic flux elements
   //=============================================================================
   template<>

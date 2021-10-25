@@ -42,7 +42,7 @@
 namespace oomph
 {
   //=============================================================
-  ///  A class for all elements that solve the Steady Axisymmetric
+  /// A class for all elements that solve the Steady Axisymmetric
   /// Advection Diffusion equations using isoparametric elements.
   /// \f[
   /// Pe \mathbf{w}\cdot(\mathbf{x}) \nabla u =
@@ -54,19 +54,19 @@ namespace oomph
   class SteadyAxisymAdvectionDiffusionEquations : public virtual FiniteElement
   {
   public:
-    ///  Function pointer to source function fct(x,f(x)) --
+    /// Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*SteadyAxisymAdvectionDiffusionSourceFctPt)(
       const Vector<double>& x, double& f);
 
 
-    ///  Function pointer to wind function fct(x,w(x)) --
+    /// Function pointer to wind function fct(x,w(x)) --
     /// x is a Vector!
     typedef void (*SteadyAxisymAdvectionDiffusionWindFctPt)(
       const Vector<double>& x, Vector<double>& wind);
 
 
-    ///  Constructor: Initialise the Source_fct_pt and Wind_fct_pt
+    /// Constructor: Initialise the Source_fct_pt and Wind_fct_pt
     /// to null and set (pointer to) Peclet number to default
     SteadyAxisymAdvectionDiffusionEquations() : Source_fct_pt(0), Wind_fct_pt(0)
     {
@@ -87,7 +87,7 @@ namespace oomph
     /*void operator=(const SteadyAxisymAdvectionDiffusionEquations&) =
       delete;*/
 
-    ///  Return the index at which the unknown value
+    /// Return the index at which the unknown value
     /// is stored. The default value, 0, is appropriate for single-physics
     /// problems, when there is only one variable, the value that satisfies
     /// the steady axisymmetric advection-diffusion equation.
@@ -106,7 +106,7 @@ namespace oomph
       output(outfile, nplot);
     }
 
-    ///  Output FE representation of soln: r,z,u  at
+    /// Output FE representation of soln: r,z,u  at
     /// nplot^2 plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
@@ -118,7 +118,7 @@ namespace oomph
       output(file_pt, n_plot);
     }
 
-    ///  C-style output FE representation of soln: r,z,u  at
+    /// C-style output FE representation of soln: r,z,u  at
     /// n_plot^2 plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
@@ -175,7 +175,7 @@ namespace oomph
       return Pe_pt;
     }
 
-    ///  Get source term at (Eulerian) position x. This function is
+    /// Get source term at (Eulerian) position x. This function is
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the source function might be determined by
     /// another system of equations
@@ -195,7 +195,7 @@ namespace oomph
       }
     }
 
-    ///  Get wind at (Eulerian) position x and/or local coordinate s.
+    /// Get wind at (Eulerian) position x and/or local coordinate s.
     /// This function is
     /// virtual to allow overloading in multi-physics problems where
     /// the wind function might be determined by
@@ -267,7 +267,7 @@ namespace oomph
     }
 
 
-    ///  Add the element's contribution to its residual vector and
+    /// Add the element's contribution to its residual vector and
     /// the element Jacobian matrix (wrapper)
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -306,7 +306,7 @@ namespace oomph
     }
 
 
-    /// Return derivative of u at point s with respect to all data
+    ///Return derivative of u at point s with respect to all data
     /// that can affect its value.
     /// In addition, return the global equation numbers corresponding to the
     /// data. This is virtual so that it can be overloaded in the
@@ -364,11 +364,11 @@ namespace oomph
     }
 
 
-    ///  Self-test: Return 0 for OK
+    /// Self-test: Return 0 for OK
     unsigned self_test();
 
   protected:
-    ///  Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_adv_diff(
       const Vector<double>& s,
@@ -377,7 +377,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    ///  Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_adv_diff(
       const unsigned& ipt,
@@ -386,7 +386,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const = 0;
 
-    ///  Add the element's contribution to its residual vector only
+    /// Add the element's contribution to its residual vector only
     /// (if flag=and/or element  Jacobian matrix
     virtual void fill_in_generic_residual_contribution_adv_diff(
       Vector<double>& residuals,
@@ -419,7 +419,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  QSteadyAxisymAdvectionDiffusionElement elements are
+  /// QSteadyAxisymAdvectionDiffusionElement elements are
   /// linear/quadrilateral/brick-shaped Axisymmetric Advection Diffusion
   /// elements with isoparametric interpolation for the function.
   //======================================================================
@@ -429,12 +429,12 @@ namespace oomph
       public virtual SteadyAxisymAdvectionDiffusionEquations
   {
   private:
-    ///  Static array of ints to hold number of variables at
+    /// Static array of ints to hold number of variables at
     /// nodes: Initial_Nvalue[n]
     static const unsigned Initial_Nvalue;
 
   public:
-    /// Constructor: Call constructors for QElement and
+    ///Constructor: Call constructors for QElement and
     /// Advection Diffusion equations
     QSteadyAxisymAdvectionDiffusionElement()
       : QElement<2, NNODE_1D>(), SteadyAxisymAdvectionDiffusionEquations()
@@ -449,21 +449,21 @@ namespace oomph
     /*void operator=(const QSteadyAxisymAdvectionDiffusionElement<NNODE_1D>&) =
       delete;*/
 
-    ///   Required  # of `values' (pinned or dofs)
+    ///  Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    ///  Output function:
+    /// Output function:
     ///  r,z,u
     void output(std::ostream& outfile)
     {
       SteadyAxisymAdvectionDiffusionEquations::output(outfile);
     }
 
-    ///  Output function:
+    /// Output function:
     ///  r,z,u  at n_plot^2 plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -471,21 +471,21 @@ namespace oomph
     }
 
 
-    ///  C-style output function:
+    /// C-style output function:
     ///  r,z,u
     void output(FILE* file_pt)
     {
       SteadyAxisymAdvectionDiffusionEquations::output(file_pt);
     }
 
-    ///   C-style output function:
+    ///  C-style output function:
     ///   r,z,u at n_plot^2 plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       SteadyAxisymAdvectionDiffusionEquations::output(file_pt, n_plot);
     }
 
-    ///  Output function for an exact solution:
+    /// Output function for an exact solution:
     ///  r,z,u_exact at n_plot^2 plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -505,7 +505,7 @@ namespace oomph
                                                      Shape& test,
                                                      DShape& dtestdx) const;
 
-    ///  Shape, test functions & derivs. w.r.t. to global coords. at
+    /// Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_adv_diff(
       const unsigned& ipt,
@@ -519,7 +519,7 @@ namespace oomph
   // Inline functions:
 
   //======================================================================
-  ///  Define the shape functions and test functions and derivatives
+  /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// Galerkin: Test functions = shape functions
@@ -553,7 +553,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Define the shape functions and test functions and derivatives
+  /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// Galerkin: Test functions = shape functions
@@ -587,7 +587,7 @@ namespace oomph
     : public virtual QElement<1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };
@@ -598,7 +598,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
 
   //======================================================================
-  ///  A class for elements that allow the imposition of an
+  /// A class for elements that allow the imposition of an
   /// applied Robin boundary condition on the boundaries of Steady
   /// Axisymmnetric Advection Diffusion Flux elements.
   /// \f[
@@ -613,18 +613,18 @@ namespace oomph
       public virtual FaceElement
   {
   public:
-    ///  Function pointer to the prescribed-beta function fct(x,beta(x))
+    /// Function pointer to the prescribed-beta function fct(x,beta(x))
     /// -- x is a Vector!
     typedef void (*SteadyAxisymAdvectionDiffusionPrescribedBetaFctPt)(
       const Vector<double>& x, double& beta);
 
-    ///  Function pointer to the prescribed-alpha function fct(x,alpha(x))
+    /// Function pointer to the prescribed-alpha function fct(x,alpha(x))
     /// -- x is a Vector!
     typedef void (*SteadyAxisymAdvectionDiffusionPrescribedAlphaFctPt)(
       const Vector<double>& x, double& alpha);
 
 
-    ///  Constructor, takes the pointer to the "bulk" element
+    /// Constructor, takes the pointer to the "bulk" element
     /// and the index of the face to be created
     SteadyAxisymAdvectionDiffusionFluxElement(FiniteElement* const& bulk_el_pt,
                                               const int& face_index);
@@ -670,7 +670,7 @@ namespace oomph
     }
 
 
-    ///  Add the element's contribution to its residual vector and
+    /// Add the element's contribution to its residual vector and
     /// its Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -682,7 +682,7 @@ namespace oomph
 
 
     /// Specify the value of nodal zeta from the face geometry
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
@@ -694,14 +694,14 @@ namespace oomph
     }
 
 
-    ///  Output function -- forward to broken version in FiniteElement
+    /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
-    ///  Output function -- forward to broken version in FiniteElement
+    /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& nplot)
     {
@@ -710,7 +710,7 @@ namespace oomph
 
 
   protected:
-    ///  Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test(const Vector<double>& s,
@@ -734,7 +734,7 @@ namespace oomph
     }
 
 
-    ///  Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test_at_knot(const unsigned& ipt,
@@ -757,7 +757,7 @@ namespace oomph
       return J_eulerian_at_knot(ipt);
     }
 
-    ///  Function to calculate the prescribed beta at a given spatial
+    /// Function to calculate the prescribed beta at a given spatial
     /// position
     void get_beta(const Vector<double>& x, double& beta)
     {
@@ -773,7 +773,7 @@ namespace oomph
       }
     }
 
-    ///  Function to calculate the prescribed alpha at a given spatial
+    /// Function to calculate the prescribed alpha at a given spatial
     /// position
     void get_alpha(const Vector<double>& x, double& alpha)
     {
@@ -790,7 +790,7 @@ namespace oomph
     }
 
   private:
-    ///  Add the element's contribution to its residual vector.
+    /// Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_adv_diff_flux(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
@@ -815,7 +815,7 @@ namespace oomph
 
 
   //===========================================================================
-  ///  Constructor, takes the pointer to the "bulk" element and the index
+  /// Constructor, takes the pointer to the "bulk" element and the index
   /// of the face to be created
   //===========================================================================
   template<class ELEMENT>
@@ -893,7 +893,7 @@ namespace oomph
 
 
   //===========================================================================
-  ///  Compute the element's residual vector and the (zero) Jacobian
+  /// Compute the element's residual vector and the (zero) Jacobian
   /// matrix for the Robin boundary condition:
   /// \f[
   /// \Delta u \cdot \mathbf{n} + \alpha (\mathbf{x}) = \beta (\mathbf{x})

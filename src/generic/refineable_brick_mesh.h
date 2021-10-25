@@ -77,7 +77,7 @@ namespace oomph
     /// Destructor:
     virtual ~RefineableBrickMesh() {}
 
-    ///  Set up the tree forest associated with the Mesh.
+    /// Set up the tree forest associated with the Mesh.
     /// Forwards call to setup_octree_forest()
     virtual void setup_tree_forest()
     {

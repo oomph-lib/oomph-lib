@@ -32,7 +32,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  create an Epetra_Vector from an oomph-lib DoubleVector.
+  /// create an Epetra_Vector from an oomph-lib DoubleVector.
   /// If oomph_vec is NOT distributed (i.e. locally replicated) and
   /// on more than one processor, then the returned Epetra_Vector will be
   /// uniformly distributed. If the oomph_vec is distributed then the
@@ -89,7 +89,7 @@ namespace oomph
   }
 
   //=============================================================================
-  ///  create an Epetra_Vector based on the argument oomph-lib
+  /// create an Epetra_Vector based on the argument oomph-lib
   /// LinearAlgebraDistribution
   /// If dist is NOT distributed and
   /// on more than one processor, then the returned Epetra_Vector will be
@@ -173,7 +173,7 @@ namespace oomph
   }
 
   //=============================================================================
-  ///  Helper function to copy the contents of a Trilinos vector to an
+  /// Helper function to copy the contents of a Trilinos vector to an
   /// oomph-lib distributed vector. The distribution of the two vectors must
   /// be identical
   //=============================================================================
@@ -277,7 +277,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  create an Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
+  /// create an Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
   /// If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and
   /// on more than one processor, then the returned Epetra_Vector will be
   /// uniformly distributed. If the oomph_matrix_pt is distributed then the
@@ -436,7 +436,7 @@ namespace oomph
     {
     }
 
-    ///  Comparison operator: is column col in the range
+    /// Comparison operator: is column col in the range
     /// between (including) First_col and Last_col
     bool operator()(const int& col)
     {
@@ -460,7 +460,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  create and Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
+  /// create and Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
   /// Specialisation for Trilinos AztecOO.
   /// If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and
   /// on more than one processor, then the returned Epetra_Vector will be
@@ -647,7 +647,7 @@ namespace oomph
 
 
   //============================================================================
-  ///   Function to perform a matrix-vector multiplication on a
+  ///  Function to perform a matrix-vector multiplication on a
   /// oomph-lib matrix and vector using Trilinos functionality.
   /// NOTE 1. the matrix and the vectors must have the same communicator.
   /// NOTE 2. The vector will be returned with the same distribution
@@ -741,7 +741,7 @@ namespace oomph
   }
 
   //=============================================================================
-  ///  Function to perform a matrix-matrix multiplication on oomph-lib
+  /// Function to perform a matrix-matrix multiplication on oomph-lib
   /// matrices by using Trilinos functionality.
   /// \b NOTE 1. There are two Trilinos matrix-matrix multiplication methods
   /// available, using either the EpetraExt::MatrixMatrix class (if use_ml ==

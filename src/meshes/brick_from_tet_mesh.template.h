@@ -108,7 +108,7 @@ namespace oomph
     }
 
 
-    ///  Constructor: Pass xda file name. This returns a pointer to the
+    /// Constructor: Pass xda file name. This returns a pointer to the
     /// internally built XdaTetMesh for external use. Note that YOU
     /// are responsible for deleting this mesh.
     BrickFromTetMesh(const std::string xda_file_name,
@@ -129,7 +129,7 @@ namespace oomph
       // Note that we're keeping the tet mesh alive for external use...
     }
 
-    ///  Access functions to the Vector of oomph-lib boundary ids
+    /// Access functions to the Vector of oomph-lib boundary ids
     /// that make up boundary b in the original xda enumeration
     Vector<unsigned> oomph_lib_boundary_ids(const unsigned& xda_boundary_id)
     {
@@ -146,7 +146,7 @@ namespace oomph
     void build_mesh(TetgenMesh<TElement<3, 3>>* tet_mesh_pt,
                     TimeStepper* time_stepper_pt);
 
-    ///  Vector of vectors containing the boundary IDs of
+    /// Vector of vectors containing the boundary IDs of
     /// the overall boundary specified in the xda file.
     Vector<Vector<unsigned>> Boundary_id;
   };
@@ -180,7 +180,7 @@ namespace oomph
     }
 
 
-    ///  Constructor: Pass xda file name. This returns a pointer to the
+    /// Constructor: Pass xda file name. This returns a pointer to the
     /// internally built XdaTetMesh for external use. Note that YOU
     /// are responsible for deleting this mesh.
     SolidBrickFromTetMesh(
@@ -225,7 +225,7 @@ namespace oomph
     }
 
 
-    ///  Constructor: Pass xda file name. This returns a pointer to the
+    /// Constructor: Pass xda file name. This returns a pointer to the
     /// internally built XdaTetMesh for external use. Note that YOU
     /// are responsible for deleting this mesh.
     RefineableBrickFromTetMesh(
@@ -277,7 +277,7 @@ namespace oomph
     }
 
 
-    ///  Constructor: Pass xda file name. This returns a pointer to the
+    /// Constructor: Pass xda file name. This returns a pointer to the
     /// internally built XdaTetMesh for external use. Note that YOU
     /// are responsible for deleting this mesh.
     RefineableSolidBrickFromTetMesh(

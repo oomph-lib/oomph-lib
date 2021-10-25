@@ -28,7 +28,7 @@
 namespace oomph
 {
   //=====================================================================
-  ///  Constructor: Pass the filename of the mesh files
+  /// Constructor: Pass the filename of the mesh files
   //=====================================================================
   GeompackQuadScaffoldMesh::GeompackQuadScaffoldMesh(
     const std::string& mesh_file_name, const std::string& curve_file_name)

@@ -43,7 +43,7 @@
 namespace oomph
 {
   //======================================================================
-  ///  A version of the Advection Diffusion in spherical
+  /// A version of the Advection Diffusion in spherical
   /// coordinates equations that can be
   /// used with non-uniform mesh refinement. In essence, the class overloads
   /// the fill_in_generic_residual_contribution_spherical_adv_diff()
@@ -57,7 +57,7 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///  Empty Constructor
+    /// Empty Constructor
     RefineableSphericalAdvectionDiffusionEquations()
       : SphericalAdvectionDiffusionEquations(),
         RefineableElement(),
@@ -80,7 +80,7 @@ namespace oomph
       return 2;
     }
 
-    ///  Get 'flux' for Z2 error recovery:
+    /// Get 'flux' for Z2 error recovery:
     /// Standard flux.from AdvectionDiffusion equations
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -88,7 +88,7 @@ namespace oomph
     }
 
 
-    ///  Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -120,7 +120,7 @@ namespace oomph
       }
     }
 
-    ///  Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -195,7 +195,7 @@ namespace oomph
       // this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
     }
 
-    ///  Compute the derivatives of the i-th component of
+    /// Compute the derivatives of the i-th component of
     /// velocity at point s with respect
     /// to all data that can affect its value. In addition, return the global
     /// equation numbers corresponding to the data.
@@ -335,7 +335,7 @@ namespace oomph
 
 
   protected:
-    ///  Add the element's contribution to the elemental residual vector
+    /// Add the element's contribution to the elemental residual vector
     /// and/or Jacobian matrix
     /// flag=1: compute both
     /// flag=0: compute only residual vector
@@ -348,7 +348,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Refineable version of QSphericalAdvectionDiffusionElement.
+  /// Refineable version of QSphericalAdvectionDiffusionElement.
   /// Inherit from the standard QSphericalAdvectionDiffusionElement and the
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
@@ -359,7 +359,7 @@ namespace oomph
       public virtual RefineableQElement<2>
   {
   public:
-    ///  Empty Constructor:
+    /// Empty Constructor:
     RefineableQSphericalAdvectionDiffusionElement()
       : RefineableElement(),
         RefineableSphericalAdvectionDiffusionEquations(),
@@ -384,13 +384,13 @@ namespace oomph
       return 1;
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QSphericalAdvectionDiffusionElement<NNODE_1D>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QSphericalAdvectionDiffusionElement<NNODE_1D>::vertex_node_pt(j);
@@ -399,14 +399,14 @@ namespace oomph
     /// Rebuild from sons: empty
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return (NNODE_1D - 1);
     }
 
-    ///   Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Empty.
     void further_setup_hanging_nodes() {}
   };
@@ -428,7 +428,7 @@ namespace oomph
     : public virtual QElement<1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };

@@ -141,7 +141,7 @@ public:
  ///Constructor, initialise rotation to NULL (default)
  Rotateable() : RefineableElement(), ELEMENT(), Rotated(0) { }
  
- /// Overload the further build function to pass the rotate information
+ ///Overload the further build function to pass the rotate information
  ///to the sons
  void further_build()
   {
@@ -151,7 +151,7 @@ public:
   }
 
   
- /// Rotate the element by a given angle:
+ ///Rotate the element by a given angle:
  /// 0 (0), 1(90 degrees), 2(180 degrees), 3 (270 degrees)
  void rotate(const unsigned &angle)
   {
@@ -316,7 +316,7 @@ public:
     }  
   }
 
- ///  Rotate the local coordinates so that that output is
+ /// Rotate the local coordinates so that that output is
  /// will be consistent, irrespective of the rotation of the element
  void rotate_local_coordinates(Vector<double> &s)
   {
@@ -378,7 +378,7 @@ public:
 
    
 
-///  Output function overloaded to produce identical output
+/// Output function overloaded to produce identical output
 /// under rotation
 void output(std::ostream &outfile, 
             const unsigned &nplot)
@@ -412,7 +412,7 @@ void output(std::ostream &outfile,
 
 }
 
- ///  Output exact solution: Overloaded to produce identical
+ /// Output exact solution: Overloaded to produce identical
  /// output under rotation
  void output_fct(std::ostream &outfile, 
                  const unsigned &nplot, 
@@ -553,7 +553,7 @@ class TestRefineableCubicMesh :
 
 public: 
 
- ///  Pass the angle of rotation and the timestepper to
+ /// Pass the angle of rotation and the timestepper to
  /// the Mesh.
  TestRefineableCubicMesh(const unsigned &angle,
                          TimeStepper* time_stepper_pt=
@@ -580,7 +580,7 @@ public:
              CompareElementCoordinate<ELEMENT>());
   }
 
- ///  Destructor: Empty -- all cleanup gets handled in the base
+ /// Destructor: Empty -- all cleanup gets handled in the base
  /// classes
  virtual ~TestRefineableCubicMesh() {}
 
@@ -597,26 +597,26 @@ namespace TanhSolnForPoisson
  /// Parameter for steepness of step
  double Alpha=50.0;
 
- /// Orientation (non-normalised x-component of unit vector in direction
+ ///Orientation (non-normalised x-component of unit vector in direction
  /// of step plane)
  double N_x=-1.0;
 
- /// Orientation (non-normalised y-component of unit vector in direction
+ ///Orientation (non-normalised y-component of unit vector in direction
  /// of step plane)
  double N_y=-1.0;
 
- /// Orientation (non-normalised z-component of unit vector in direction
+ ///Orientation (non-normalised z-component of unit vector in direction
  /// of step plane)
  double N_z=1.0;
 
 
- /// Orientation (x-coordinate of step plane) 
+ ///Orientation (x-coordinate of step plane) 
  double X_0=0.0;
 
- /// Orientation (y-coordinate of step plane) 
+ ///Orientation (y-coordinate of step plane) 
  double Y_0=0.0;
 
- /// Orientation (z-coordinate of step plane) 
+ ///Orientation (z-coordinate of step plane) 
  double Z_0=0.0;
 
 
@@ -690,7 +690,7 @@ public:
  /// Destructor: Empty
  ~TestPoissonProblem(){}
 
- ///  Overload generic access function by one that returns
+ /// Overload generic access function by one that returns
  /// a pointer to the specific  mesh
  TestRefineableCubicMesh<ELEMENT>* mesh_pt() 
   {
@@ -700,7 +700,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve()  {}
 
- ///  Update the problem specs before solve: 
+ /// Update the problem specs before solve: 
  /// Set Dirchlet boundary conditions from exact solution.
  void actions_before_newton_solve()
  {

@@ -49,7 +49,7 @@ namespace oomph
   //====================================================================
   namespace QuadTreeNames
   {
-    ///  Directions. OMEGA is used if a direction is undefined
+    /// Directions. OMEGA is used if a direction is undefined
     /// in a certain context
     enum
     {
@@ -103,7 +103,7 @@ namespace oomph
   class QuadTree : public virtual Tree
   {
   public:
-    ///  Destructor. Note: Deleting a quadtree also deletes the
+    /// Destructor. Note: Deleting a quadtree also deletes the
     /// objects associated with all non-leaf nodes!
     virtual ~QuadTree() {}
 
@@ -113,7 +113,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const QuadTree&) = delete;
 
-    ///  Overload the function construct_son to ensure that the son
+    /// Overload the function construct_son to ensure that the son
     /// is a specific QuadTree and not a general Tree.
     Tree* construct_son(RefineableElement* const& object_pt,
                         Tree* const& father_pt,
@@ -123,7 +123,7 @@ namespace oomph
       return temp_quad_pt;
     }
 
-    ///  Return pointer to greater or equal-sized edge neighbour
+    /// Return pointer to greater or equal-sized edge neighbour
     /// in specified \c direction; also provide info regarding the relative
     /// size and orientation of neighbour:
     /// - The vector translate_s turns the index of the local coordinate
@@ -163,7 +163,7 @@ namespace oomph
                                   int& diff_level,
                                   bool& in_neighbouring_tree) const;
 
-    ///  Traverse Tree: Preorder traverse and stick pointers to
+    /// Traverse Tree: Preorder traverse and stick pointers to
     /// neighbouring leaf nodes (only) into Vector
     void stick_neighbouring_leaves_into_vector(
       Vector<const QuadTree*>& tree_neighbouring_nodes,
@@ -173,16 +173,16 @@ namespace oomph
       const QuadTree* my_neigh_pt,
       const int& direction) const;
 
-    ///  Self-test: Check all neighbours. Return success (0)
+    /// Self-test: Check all neighbours. Return success (0)
     /// if the max. distance between corresponding points in the
     /// neighbours is less than the tolerance specified in the
     /// static value QuadTree::Max_neighbour_finding_tolerance.
     unsigned self_test();
 
-    ///  Setup the static data, rotation and reflection schemes, etc
+    /// Setup the static data, rotation and reflection schemes, etc
     static void setup_static_data();
 
-    ///  Doc/check all neighbours of quadtree (nodes) contained in the
+    /// Doc/check all neighbours of quadtree (nodes) contained in the
     /// Vector forest_node_pt. Output into neighbours_file which can
     /// be viewed from tecplot with QuadTreeNeighbours.mcr
     /// Neighbour info and errors are displayed on
@@ -208,14 +208,14 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Default constructor for empty (root) tree:
+    /// Default constructor for empty (root) tree:
     /// no father, no sons; just pass a pointer to its object
     /// Protected because QuadTrees can only be created internally,
     /// during the split operation. Only QuadTreeRoots can be
     /// created externally.
     QuadTree(RefineableElement* const& object_pt) : Tree(object_pt) {}
 
-    ///  Constructor for tree that has a father: Pass it the pointer
+    /// Constructor for tree that has a father: Pass it the pointer
     /// to its object, the pointer to its father and tell it what type
     /// of son (SE/SW/NE/NW) it is.
     /// Protected because QuadTrees can only be created internally,
@@ -233,7 +233,7 @@ namespace oomph
 
 
   private:
-    ///  Find greater or equal-sized edge neighbour in direction.
+    /// Find greater or equal-sized edge neighbour in direction.
     /// Auxiliary internal routine which passes additional information around.
     QuadTree* gteq_edge_neighbour(const int& direction,
                                   double& s_diff,
@@ -245,11 +245,11 @@ namespace oomph
     /// Colours for neighbours in various directions
     static Vector<std::string> Colour;
 
-    ///  S_base(i,direction):  Initial value for coordinate s[i] on
+    /// S_base(i,direction):  Initial value for coordinate s[i] on
     /// the edge indicated by direction (S/E/N/W)
     static DenseMatrix<double> S_base;
 
-    ///  S_step(i,direction) Increments for coordinate s[i] when
+    /// S_step(i,direction) Increments for coordinate s[i] when
     /// progressing along the edge indicated by direction (S/E/N/W);
     /// Left/lower vertex: S_base; Right/upper vertex: S_base + S_step
     static DenseMatrix<double> S_step;
@@ -257,26 +257,26 @@ namespace oomph
     /// Get opposite edge, e.g. Reflect_edge[N]=S
     static Vector<int> Reflect_edge;
 
-    ///  Array of direction/quadrant adjacency scheme:
+    /// Array of direction/quadrant adjacency scheme:
     /// Is_adjacent(i_vertex_or_edge,j_quadrant): Is edge/vertex
     /// adjacent to quadrant?
     static DenseMatrix<bool> Is_adjacent;
 
-    ///  Reflection scheme: Reflect(direction,quadrant): Get mirror
+    /// Reflection scheme: Reflect(direction,quadrant): Get mirror
     /// of quadrant in specified direction. E.g. Reflect(S,NE)=SE
     static DenseMatrix<int> Reflect;
 
-    ///  Rotate coordinates: If North becomes NorthIs then direction
+    /// Rotate coordinates: If North becomes NorthIs then direction
     /// becomes Rotate(NorthIs,direction). E.g.  Rotate(E,NW)=NE;
     static DenseMatrix<int> Rotate;
 
-    ///  Angle betwen rotated coordinates: If old_direction becomes
+    /// Angle betwen rotated coordinates: If old_direction becomes
     /// new_direction then the angle between the axes (in anti-clockwise
     /// direction is Rotate_angle(old_direction,new_direction); E.g.
     /// Rotate_angle(E,N)=90;
     static DenseMatrix<int> Rotate_angle;
 
-    ///  S_direct(direction,son_quadrant): The lower left corner
+    /// S_direct(direction,son_quadrant): The lower left corner
     /// of son_quadrant has an offset of h/2 S_direct(direction,son_quadrant)
     /// in the specified direction. E.g. S_direct(S,NE)=1 and  S_direct(S,NW)=0
     static DenseMatrix<int> S_direct;
@@ -292,7 +292,7 @@ namespace oomph
   class QuadTreeRoot : public virtual QuadTree, public virtual TreeRoot
   {
   private:
-    ///  Vector giving the north equivalent of the neighbours:
+    /// Vector giving the north equivalent of the neighbours:
     /// When viewed from the current quadtree's \c neighbour neighbour,
     /// our northern direction is the neighbour's North_equivalent[neighbour]
     /// direction. If there's no rotation, this map contains the identify
@@ -342,7 +342,7 @@ namespace oomph
     void operator=(const QuadTreeRoot&) = delete;
 
 
-    ///  Return north equivalent of the neighbours in specified
+    /// Return north equivalent of the neighbours in specified
     /// direction: When viewed from the current quadtree's \c neighbour
     /// neighbour, our northern direction is the neighbour's
     /// north_equivalent(neighbour) direction. If there's no rotation, this map
@@ -372,7 +372,7 @@ namespace oomph
     }
 
 
-    ///  If quadtree_root_pt is a neighbour, return the direction
+    /// If quadtree_root_pt is a neighbour, return the direction
     /// [N/S/E/W] in which it is found, otherwise return OMEGA
     int direction_of_neighbour(QuadTreeRoot* quadtree_root_pt)
     {
@@ -418,7 +418,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Constructor: Pass vector of pointers to the roots of the
+    /// Constructor: Pass vector of pointers to the roots of the
     /// constituent QuadTrees
     QuadTreeForest(Vector<TreeRoot*>& trees_pt);
 
@@ -428,22 +428,22 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const QuadTreeForest&) = delete;
 
-    ///  Destructor: Delete the constituent quadtrees (and thus
+    /// Destructor: Delete the constituent quadtrees (and thus
     /// the objects associated with its non-leaf nodes!)
     virtual ~QuadTreeForest() {}
 
-    ///  Document and check all the neighbours of all the nodes
+    /// Document and check all the neighbours of all the nodes
     /// in the forest. DocInfo object specifies the output directory
     /// and file numbers for the various files. If \c doc_info.disable_doc()
     /// has been called no output is created.
     void check_all_neighbours(DocInfo& doc_info);
 
-    ///  Open output files that will store any hanging nodes in
+    /// Open output files that will store any hanging nodes in
     /// the forest and return a vector of the streams.
     void open_hanging_node_files(DocInfo& doc_info,
                                  Vector<std::ofstream*>& output_stream);
 
-    ///  Self-test: Check all neighbours. Return success (0)
+    /// Self-test: Check all neighbours. Return success (0)
     /// if the max. distance between corresponding points in the
     /// neighbours is less than the tolerance specified in the
     /// static value QuadTree::Max_neighbour_finding_tolerance.
@@ -464,7 +464,7 @@ namespace oomph
       return dynamic_cast<QuadTreeRoot*>(Trees_pt[i]);
     }
 
-    ///  Given the number i of the root quadtree in this forest, return
+    /// Given the number i of the root quadtree in this forest, return
     /// pointer to its neighbour in the specified direction. NULL
     /// if neighbour doesn't exist. (This does the dynamic cast
     /// from a TreeRoot to a QuadTreeRoot internally).

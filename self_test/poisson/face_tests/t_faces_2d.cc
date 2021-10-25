@@ -67,7 +67,7 @@ namespace MeshDeformation
    }
  }
 
- ///  The outer unit normal of the mesh boundaries
+ /// The outer unit normal of the mesh boundaries
  /// that have been deformed into parabolas. The normal is different
  /// for each boundary, so the input arguments are the boundary and
  /// the global Cartesian coordinate on that boundary, x. The outer

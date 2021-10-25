@@ -34,12 +34,12 @@
 namespace oomph
 {
   //=================================================================
-  ///  Annular domain
+  /// Annular domain
   //=================================================================
   class AnnularDomain : public Domain
   {
   public:
-    ///  Constructor: Specify azimuthal fraction (1.0 is 360 degrees)
+    /// Constructor: Specify azimuthal fraction (1.0 is 360 degrees)
     /// number of macro elements in azimuthal and radial direction,
     /// inner radius and thickness. Rotate mesh by angle phi.
     AnnularDomain(const double& azimuthal_fraction,
@@ -75,7 +75,7 @@ namespace oomph
     ~AnnularDomain() {}
 
 
-    ///  Vector representation of the  i_macro-th macro element
+    /// Vector representation of the  i_macro-th macro element
     /// boundary i_direct (N/S/W/E) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
@@ -112,7 +112,7 @@ namespace oomph
 
 
   //=================================================================
-  ///  Vector representation of the  imacro-th macro element
+  /// Vector representation of the  imacro-th macro element
   /// boundary idirect (N/S/W/E) at time level t
   /// (t=0: present; t>0: previous): f(s)
   //=================================================================

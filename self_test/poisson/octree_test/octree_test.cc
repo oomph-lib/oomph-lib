@@ -144,7 +144,7 @@ public:
  Rotateable() : RefineableElement(), ELEMENT(), Rotated(0) { }
  
 
- /// Overload the further build function to pass the rotate information
+ ///Overload the further build function to pass the rotate information
  ///to the sons
  void further_build()
   {
@@ -154,7 +154,7 @@ public:
   }
 
   
- /// Rotate the element
+ ///Rotate the element
  void rotate(const unsigned &angle)
   {
    Rotated = angle;
@@ -318,7 +318,7 @@ public:
     }  
   }
 
- ///  Rotate the local coordinates so that that output is
+ /// Rotate the local coordinates so that that output is
  /// will be consistent, irrespective of the rotation of the element
  void rotate_local_coordinates(Vector<double> &s)
   {
@@ -393,7 +393,7 @@ class RotatableRefineableCubicMesh :
 
 public: 
 
- ///  Constructor: Pass the rotation index, the number of the 
+ /// Constructor: Pass the rotation index, the number of the 
  /// rotated element and the timestepper to the Mesh.
  RotatableRefineableCubicMesh(const unsigned &angle, 
                               const unsigned& rotated_element,
@@ -427,7 +427,7 @@ public:
   } // end of constructor
  
 
- ///  Destructor: Empty
+ /// Destructor: Empty
  virtual ~RotatableRefineableCubicMesh(){}
 
 }; // end of mesh
@@ -445,26 +445,26 @@ namespace TanhSolnForPoisson
  /// Parameter for steepness of step
  double Alpha=50.0;
 
- /// Orientation (non-normalised x-component of unit vector in direction
+ ///Orientation (non-normalised x-component of unit vector in direction
  /// of step plane)
  double N_x=-1.0;
 
- /// Orientation (non-normalised y-component of unit vector in direction
+ ///Orientation (non-normalised y-component of unit vector in direction
  /// of step plane)
  double N_y=-1.0;
 
- /// Orientation (non-normalised z-component of unit vector in direction
+ ///Orientation (non-normalised z-component of unit vector in direction
  /// of step plane)
  double N_z=1.0;
 
 
- /// Orientation (x-coordinate of step plane) 
+ ///Orientation (x-coordinate of step plane) 
  double X_0=0.0;
 
- /// Orientation (y-coordinate of step plane) 
+ ///Orientation (y-coordinate of step plane) 
  double Y_0=0.0;
 
- /// Orientation (z-coordinate of step plane) 
+ ///Orientation (z-coordinate of step plane) 
  double Z_0=0.0;
 
 
@@ -542,7 +542,7 @@ public:
    Trace_file.close();
   }
 
- ///  Overload generic access function by one that returns
+ /// Overload generic access function by one that returns
  /// a pointer to the specific  mesh
  RotatableRefineableCubicMesh<ELEMENT>* mesh_pt() 
   {
@@ -556,7 +556,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
 
- ///  Update the problem specs before solve: 
+ /// Update the problem specs before solve: 
  /// Set Dirchlet boundary conditions from exact solution.
  void actions_before_newton_solve()
  {

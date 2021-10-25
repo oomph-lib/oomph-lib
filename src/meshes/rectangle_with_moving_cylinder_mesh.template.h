@@ -117,7 +117,7 @@ namespace oomph
     ~RectangleWithHoleAndAnnularRegionDomain() {}
 
 
-    ///  Helper function that, given the Lagrangian coordinate, xi,
+    /// Helper function that, given the Lagrangian coordinate, xi,
     /// (associated with a point on the cylinder), returns the corresponding
     /// point on the outer boundary of the annular region (where the inner
     /// boundary is prescribed by the boundary of the cylinder)
@@ -125,7 +125,7 @@ namespace oomph
                                                        const Vector<double>& xi,
                                                        Vector<double>& r);
 
-    ///  Helper function that, given the Lagrangian coordinate, xi,
+    /// Helper function that, given the Lagrangian coordinate, xi,
     /// (associated with a point on the cylinder), returns the corresponding
     /// point on the outer boundary of the annular region (where the inner
     /// boundary is prescribed by the boundary of the cylinder)
@@ -134,7 +134,7 @@ namespace oomph
                                                        Vector<double>& r);
 
 
-    ///  Helper function to interpolate linearly between the
+    /// Helper function to interpolate linearly between the
     /// "right" and "left" points; \f$ s \in [-1,1] \f$
     void linear_interpolate(const Vector<double>& left,
                             const Vector<double>& right,
@@ -150,7 +150,7 @@ namespace oomph
     } // End of linear_interpolate
 
 
-    ///  Parametrisation of macro element boundaries: f(s) is the position
+    /// Parametrisation of macro element boundaries: f(s) is the position
     /// vector to macro-element m's boundary in the specified direction
     /// [N/S/E/W] at the specified discrete time level (time=0: present; time>0:
     /// previous)
@@ -160,7 +160,7 @@ namespace oomph
                                 const Vector<double>& s,
                                 Vector<double>& f);
 
-    ///  Parametrisation of macro element boundaries: f(s) is the position
+    /// Parametrisation of macro element boundaries: f(s) is the position
     /// vector to macro-element m's boundary in the specified direction
     /// [N/S/E/W] at the specified discrete time level (time=0: present; time>0:
     /// previous)
@@ -198,7 +198,7 @@ namespace oomph
     /// Pointer to geometric object that represents the central cylinder
     GeomObject* Cylinder_pt;
 
-    ///  The radius of the outer boundary of the annular region
+    /// The radius of the outer boundary of the annular region
     /// whose inner boundary is described by Cylinder_pt and outer
     /// boundary is a circle with radius lying between half the length
     /// of the bounding box and the radius cylinder
@@ -228,7 +228,7 @@ namespace oomph
       const double& length,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
-    ///  Destructor: We made the Domain object so we have a responsibility
+    /// Destructor: We made the Domain object so we have a responsibility
     /// for deleting it!
     ~RectangleWithHoleAndAnnularRegionMesh()
     {
@@ -305,7 +305,7 @@ namespace oomph
       this->setup_quadtree_forest();
     } // End of RefineableRectangleWithHoleAndAnnularRegionMesh
 
-    ///  Destructor: Empty
+    /// Destructor: Empty
     virtual ~RefineableRectangleWithHoleAndAnnularRegionMesh() {}
   };
 
@@ -347,7 +347,7 @@ namespace oomph
     } // End of ~RefineableQuadMeshWithMovingCylinder
 
   private:
-    ///  Pointer to the part of the mesh which has a Domain
+    /// Pointer to the part of the mesh which has a Domain
     /// representation. We have to store it because we can't delete it in the
     /// constructor as it would delete the Domain pointer which might be needed
     /// after the whole mesh has been constructed (e.g. for the mesh extrusion

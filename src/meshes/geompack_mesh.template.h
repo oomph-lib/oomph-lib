@@ -41,7 +41,7 @@ namespace oomph
   class GeompackQuadMesh : public Mesh
   {
   public:
-    ///  Constructor with the input files
+    /// Constructor with the input files
     GeompackQuadMesh(const std::string& mesh_file_name,
                      const std::string& curve_file_name,
                      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)

@@ -33,7 +33,7 @@
 namespace oomph
 {
   //=================================================================
-  ///  Actual build function. Pass overall number of elements in the
+  /// Actual build function. Pass overall number of elements in the
   /// horizontal and vertical directions, nx and ny, and the corresponding
   /// dimensions, lx and ly. nx_cut_out and ny_cut_out elements
   /// are cut out from the lower right corner to create the

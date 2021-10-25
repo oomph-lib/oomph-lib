@@ -28,7 +28,7 @@
 namespace oomph
 {
   //=====================================================================
-  ///  Performs a div-conserving transformation of the vector basis
+  /// Performs a div-conserving transformation of the vector basis
   /// functions from the reference element to the actual element
   //=====================================================================
   template<unsigned DIM>
@@ -92,7 +92,7 @@ namespace oomph
   }
 
   //=====================================================================
-  ///  Output FE representation of soln: x,y,q1,q2,div_q,p,q \cdot n
+  /// Output FE representation of soln: x,y,q1,q2,div_q,p,q \cdot n
   //=====================================================================
   template<unsigned DIM>
   void DarcyEquations<DIM>::output_with_projected_flux(
@@ -149,7 +149,7 @@ namespace oomph
 
 
   //=====================================================================
-  ///  Output FE representation of soln: x,y,q1,q2,div_q,p at
+  /// Output FE representation of soln: x,y,q1,q2,div_q,p at
   /// Nplot^DIM plot points
   //=====================================================================
   template<unsigned DIM>
@@ -195,7 +195,7 @@ namespace oomph
   }
 
   //=====================================================================
-  ///  Output FE representation of exact soln: x,y,q1,q2,div_q,p at
+  /// Output FE representation of exact soln: x,y,q1,q2,div_q,p at
   /// Nplot^DIM plot points
   //=====================================================================
   template<unsigned DIM>
@@ -247,7 +247,7 @@ namespace oomph
   }
 
   //=====================================================================
-  ///  Compute the error between the FE solution and the exact solution
+  /// Compute the error between the FE solution and the exact solution
   /// using the H(div) norm for q and L^2 norm for p
   //=====================================================================
   template<unsigned DIM>

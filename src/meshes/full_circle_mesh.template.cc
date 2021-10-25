@@ -32,7 +32,7 @@
 namespace oomph
 {
   //====================================================================
-  ///  Constructor for deformable quarter tube mesh class.
+  /// Constructor for deformable quarter tube mesh class.
   /// The domain is specified by the GeomObject that
   /// identifies the entire volume.
   //====================================================================

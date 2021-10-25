@@ -190,7 +190,7 @@ namespace oomph
   }
 
 
-  ///  Performs a div-conserving transformation of the vector basis
+  /// Performs a div-conserving transformation of the vector basis
   /// functions from the reference element to the actual element
   template<unsigned DIM>
   double PoroelasticityEquations<DIM>::transform_basis(
@@ -254,7 +254,7 @@ namespace oomph
     return det;
   }
 
-  ///  Output FE representation of soln: x,y,u1,u2,q1,q2,div_q,p at
+  /// Output FE representation of soln: x,y,u1,u2,q1,q2,div_q,p at
   /// Nplot^DIM plot points
   template<unsigned DIM>
   void PoroelasticityEquations<DIM>::output(std::ostream& outfile,
@@ -355,7 +355,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
-  ///  Output FE representation of exact soln: x,y,u1,u2,q1,q2,div_q,p at
+  /// Output FE representation of exact soln: x,y,u1,u2,q1,q2,div_q,p at
   /// Nplot^DIM plot points
   template<unsigned DIM>
   void PoroelasticityEquations<DIM>::output_fct(
@@ -405,7 +405,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
-  ///  Output FE representation of exact soln: x,y,u1,u2,div_q,p at
+  /// Output FE representation of exact soln: x,y,u1,u2,div_q,p at
   /// Nplot^DIM plot points. Unsteady version
   template<unsigned DIM>
   void PoroelasticityEquations<DIM>::output_fct(
@@ -456,7 +456,7 @@ namespace oomph
     this->write_tecplot_zone_footer(outfile, nplot);
   }
 
-  ///  Compute the error between the FE solution and the exact solution
+  /// Compute the error between the FE solution and the exact solution
   /// using the H(div) norm for q and L^2 norm for u and p
   template<unsigned DIM>
   void PoroelasticityEquations<DIM>::compute_error(
@@ -562,7 +562,7 @@ namespace oomph
     }
   }
 
-  ///  Compute the error between the FE solution and the exact solution
+  /// Compute the error between the FE solution and the exact solution
   /// using the H(div) norm for u and L^2 norm for p. Unsteady version
   template<unsigned DIM>
   void PoroelasticityEquations<DIM>::compute_error(

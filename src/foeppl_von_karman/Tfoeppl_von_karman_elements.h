@@ -63,7 +63,7 @@ namespace oomph
                                   public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///  Constructor: Call constructors for TElement and
+    /// Constructor: Call constructors for TElement and
     /// Foeppl von Karman equations
     TFoepplvonKarmanElement()
       : TElement<2, NNODE_1D>(), FoepplvonKarmanEquations()
@@ -78,21 +78,21 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const TFoepplvonKarmanElement<NNODE_1D>&) = delete;
 
-    ///   Access function for Nvalue: # of `values' (pinned or dofs)
+    ///  Access function for Nvalue: # of `values' (pinned or dofs)
     /// at node n (always returns the same value at every node, 8)
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    ///  Output function:
+    /// Output function:
     ///  x,y,w
     void output(std::ostream& outfile)
     {
       FoepplvonKarmanEquations::output(outfile);
     }
 
-    ///   Output function:
+    ///  Output function:
     ///   x,y,w at n_plot^2 plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -100,7 +100,7 @@ namespace oomph
     }
 
 
-    ///  C-style output function:
+    /// C-style output function:
     ///  x,y,w
     void output(FILE* file_pt)
     {
@@ -108,7 +108,7 @@ namespace oomph
     }
 
 
-    ///   C-style output function:
+    ///  C-style output function:
     ///   x,y,w at n_plot^2 plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -116,7 +116,7 @@ namespace oomph
     }
 
 
-    ///  Output function for an exact solution:
+    /// Output function for an exact solution:
     ///  x,y,w_exact
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -126,7 +126,7 @@ namespace oomph
     }
 
 
-    ///  Output function for a time-dependent exact solution.
+    /// Output function for a time-dependent exact solution.
     ///  x,y,w_exact (calls the steady version)
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -155,7 +155,7 @@ namespace oomph
                                                         Shape& test,
                                                         DShape& dtestdx) const;
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
@@ -174,13 +174,13 @@ namespace oomph
       this->get_gradient_of_deflection(s, flux);
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<2, NNODE_1D>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<2, NNODE_1D>::vertex_node_pt(j);
@@ -265,7 +265,7 @@ namespace oomph
     : public virtual TElement<1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : TElement<1, NNODE_1D>() {}
   };

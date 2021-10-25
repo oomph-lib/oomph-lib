@@ -48,7 +48,7 @@ namespace oomph
   class CRDoubleMatrix;
 
   //=============================================================================
-  ///  A vector in the mathematical sense, initially developed for
+  /// A vector in the mathematical sense, initially developed for
   /// linear algebra type applications.
   /// If MPI then this vector can be distributed - its distribution is
   /// described by the LinearAlgebraDistribution object at Distribution_pt.
@@ -57,10 +57,10 @@ namespace oomph
   class DoubleVector : public DistributableLinearAlgebraObject
   {
   public:
-    ///  Constructor for an uninitialized DoubleVector
+    /// Constructor for an uninitialized DoubleVector
     DoubleVector() : Values_pt(0), Internal_values(true), Built(false) {}
 
-    ///  Constructor. Assembles a DoubleVector with a prescribed
+    /// Constructor. Assembles a DoubleVector with a prescribed
     /// distribution. Additionally every entry can be set (with argument v -
     /// defaults to 0).
     DoubleVector(const LinearAlgebraDistribution* const& dist_pt,
@@ -70,7 +70,7 @@ namespace oomph
       this->build(dist_pt, v);
     }
 
-    ///  Constructor. Assembles a DoubleVector with a prescribed
+    /// Constructor. Assembles a DoubleVector with a prescribed
     /// distribution. Additionally every entry can be set (with argument v -
     /// defaults to 0).
     DoubleVector(const LinearAlgebraDistribution& dist, const double& v = 0.0)
@@ -102,22 +102,22 @@ namespace oomph
       this->build(old_vector);
     }
 
-    ///  Just copys the argument DoubleVector
+    /// Just copys the argument DoubleVector
     void build(const DoubleVector& old_vector);
 
-    ///  Assembles a DoubleVector with distribution dist, if v is
+    /// Assembles a DoubleVector with distribution dist, if v is
     /// specified each element is set to v, otherwise each element is set to 0.0
     void build(const LinearAlgebraDistribution& dist, const double& v)
     {
       this->build(&dist, v);
     }
 
-    ///  Assembles a DoubleVector with distribution dist, if v is
+    /// Assembles a DoubleVector with distribution dist, if v is
     /// specified each element is set to v, otherwise each element is set to 0.0
     void build(const LinearAlgebraDistribution* const& dist_pt,
                const double& v);
 
-    ///  Assembles a DoubleVector with a distribution dist and
+    /// Assembles a DoubleVector with a distribution dist and
     /// coefficients taken from the vector v. Note. The vector v MUST be of
     /// length nrow()
     void build(const LinearAlgebraDistribution& dist, const Vector<double>& v)
@@ -125,20 +125,20 @@ namespace oomph
       this->build(&dist, v);
     }
 
-    ///  Assembles a DoubleVector with a distribution dist and
+    /// Assembles a DoubleVector with a distribution dist and
     /// coefficients taken from the vector v. Note. The vector v MUST be of
     /// length nrow()
     void build(const LinearAlgebraDistribution* const& dist_pt,
                const Vector<double>& v);
 
-    ///  initialise the whole vector with value v
+    /// initialise the whole vector with value v
     void initialise(const double& v);
 
-    ///  initialise the vector with coefficient from the vector v.
+    /// initialise the vector with coefficient from the vector v.
     /// Note: The vector v must be of length
     void initialise(const Vector<double> v);
 
-    ///  wipes the DoubleVector
+    /// wipes the DoubleVector
     void clear()
     {
       if (Internal_values)
@@ -156,7 +156,7 @@ namespace oomph
       return Built;
     }
 
-    ///  Allows are external data to be used by this vector.
+    /// Allows are external data to be used by this vector.
     /// WARNING: The size of the external data must correspond to the
     /// LinearAlgebraDistribution dist_pt argument.
     /// 1. When a rebuild method is called new internal values are created.
@@ -180,7 +180,7 @@ namespace oomph
       set_external_values(external_values, delete_external_values);
     }
 
-    ///  Allows are external data to be used by this vector.
+    /// Allows are external data to be used by this vector.
     /// WARNING: The size of the external data must correspond to the
     /// distribution of this vector.
     /// 1. When a rebuild method is called new internal values are created.
@@ -215,7 +215,7 @@ namespace oomph
       Internal_values = delete_external_values;
     }
 
-    ///  The contents of the vector are redistributed to match the new
+    /// The contents of the vector are redistributed to match the new
     /// distribution. In a non-MPI rebuild this method works, but does nothing.
     /// \b NOTE 1: The current distribution and the new distribution must have
     /// the same number of global rows.
@@ -223,31 +223,31 @@ namespace oomph
     /// the same Communicator.
     void redistribute(const LinearAlgebraDistribution* const& dist_pt);
 
-    ///  [] access function to the (local) values of this vector
+    /// [] access function to the (local) values of this vector
     double& operator[](int i);
 
-    ///  == operator
+    /// == operator
     bool operator==(const DoubleVector& v);
 
-    ///  += operator with another vector
+    /// += operator with another vector
     void operator+=(const DoubleVector& v);
 
-    ///  -= operator with another vector
+    /// -= operator with another vector
     void operator-=(const DoubleVector& v);
 
-    ///  multiply by a double
+    /// multiply by a double
     void operator*=(const double& d);
 
-    ///  divide by a double
+    /// divide by a double
     void operator/=(const double& d);
 
-    ///  [] access function to the (local) values of this vector
+    /// [] access function to the (local) values of this vector
     const double& operator[](int i) const;
 
-    ///  Ouput operator for DoubleVector
+    /// Ouput operator for DoubleVector
     friend std::ostream& operator<<(std::ostream& out, const DoubleVector& v);
 
-    ///  returns the maximum coefficient
+    /// returns the maximum coefficient
     double max() const;
 
     /// access function to the underlying values
@@ -256,7 +256,7 @@ namespace oomph
       return Values_pt;
     }
 
-    ///  access function to the underlying values (const version)
+    /// access function to the underlying values (const version)
     double* values_pt() const
     {
       return Values_pt;
@@ -318,7 +318,7 @@ namespace oomph
     /// the local vector
     double* Values_pt;
 
-    ///  Boolean flag to indicate whether the vector's data (values_pt)
+    /// Boolean flag to indicate whether the vector's data (values_pt)
     /// is owned by this vector.
     bool Internal_values;
 
@@ -332,7 +332,7 @@ namespace oomph
   //=================================================================
   namespace DoubleVectorHelpers
   {
-    ///  Concatenate DoubleVectors.
+    /// Concatenate DoubleVectors.
     /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
     /// build a new distribution. Otherwise we build a uniform distribution.
     ///
@@ -358,7 +358,7 @@ namespace oomph
     void concatenate(const Vector<DoubleVector*>& in_vector_pt,
                      DoubleVector& out_vector);
 
-    ///  Wrapper around the other concatenate(...) function.
+    /// Wrapper around the other concatenate(...) function.
     /// Be careful with Vector of vectors. If the DoubleVectors are resized,
     /// there could be reallocation of memory. If we wanted to use the function
     /// which takes a Vector of pointers to DoubleVectors, we would either have
@@ -372,7 +372,7 @@ namespace oomph
     /// to delete!
     void concatenate(Vector<DoubleVector>& in_vector, DoubleVector& out_vector);
 
-    ///  Split a DoubleVector into the out DoubleVectors.
+    /// Split a DoubleVector into the out DoubleVectors.
     /// Let vec_A be the in Vector, and let vec_B and vec_C be the out vectors.
     /// Then the splitting of vec_A is depicted below:
     /// vec_A: [a0  (on p0)
@@ -391,7 +391,7 @@ namespace oomph
     void split(const DoubleVector& in_vector,
                Vector<DoubleVector*>& out_vector_pt);
 
-    ///  Wrapper around the other split(...) function.
+    /// Wrapper around the other split(...) function.
     /// Be careful with Vector of vectors. If the DoubleVectors are resized,
     /// there could be reallocation of memory. If we wanted to use the function
     /// which takes a Vector of pointers to DoubleVectors, we would either have
@@ -405,7 +405,7 @@ namespace oomph
     /// to delete!
     void split(const DoubleVector& in_vector, Vector<DoubleVector>& out_vector);
 
-    ///  Concatenate DoubleVectors.
+    /// Concatenate DoubleVectors.
     /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
     /// build a new distribution. Otherwise a new distribution will be built
     /// using LinearAlgebraDistribution::concatenate(...).
@@ -444,7 +444,7 @@ namespace oomph
     void concatenate_without_communication(
       const Vector<DoubleVector*>& in_vector_pt, DoubleVector& out_vector);
 
-    ///  Wrapper around the other concatenate_without_communication(...)
+    /// Wrapper around the other concatenate_without_communication(...)
     /// function.
     /// Be careful with Vector of vectors. If the DoubleVectors are resized,
     /// there could be reallocation of memory. If we wanted to use the function
@@ -460,7 +460,7 @@ namespace oomph
     void concatenate_without_communication(Vector<DoubleVector>& in_vector,
                                            DoubleVector& out_vector);
 
-    ///  Split a DoubleVector into the out DoubleVectors.
+    /// Split a DoubleVector into the out DoubleVectors.
     /// Data stays on its current processor, no data is sent between processors.
     /// This results in our vectors which are a permutation of the in vector.
     ///
@@ -481,7 +481,7 @@ namespace oomph
     void split_without_communication(const DoubleVector& in_vector,
                                      Vector<DoubleVector*>& out_vector_pt);
 
-    ///  Wrapper around the other split_without_communication(...)
+    /// Wrapper around the other split_without_communication(...)
     /// function.
     /// Be careful with Vector of vectors. If the DoubleVectors are resized,
     /// there could be reallocation of memory. If we wanted to use the function

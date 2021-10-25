@@ -47,7 +47,7 @@ namespace oomph
   class RectangleWithHoleMesh : public virtual Mesh
   {
   public:
-    ///  Constructor: Pass pointer to geometric object that
+    /// Constructor: Pass pointer to geometric object that
     /// represents the cylinder, the length and height of the domain.
     /// The GeomObject must be parametrised such that
     /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
@@ -256,7 +256,7 @@ namespace oomph
                                           public RefineableQuadMesh<ELEMENT>
   {
   public:
-    ///  Constructor. Pass pointer to geometric object that
+    /// Constructor. Pass pointer to geometric object that
     /// represents the cylinder, the length and height of the domain.
     /// The GeomObject must be parametrised such that
     /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
@@ -286,7 +286,7 @@ namespace oomph
       this->setup_quadtree_forest();
     }
 
-    ///  Destructor: Empty
+    /// Destructor: Empty
     virtual ~RefineableRectangleWithHoleMesh() {}
   };
 

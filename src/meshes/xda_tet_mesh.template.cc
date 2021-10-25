@@ -34,7 +34,7 @@
 namespace oomph
 {
   //======================================================================
-  ///  Constructor: Pass name of xda file. Note that all
+  /// Constructor: Pass name of xda file. Note that all
   /// boundary elements get their own ID -- this is required for
   /// FSI problems. The vector containing the oomph-lib
   /// boundary IDs of all oomph-lib boundaries that collectively form

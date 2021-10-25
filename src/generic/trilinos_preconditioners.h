@@ -63,13 +63,13 @@ namespace oomph
       Epetra_matrix_pt = 0;
     }
 
-    ///  Destructor.
+    /// Destructor.
     virtual ~TrilinosPreconditionerBase()
     {
       clean_up_memory();
     }
 
-    ///  Static double that accumulates the preconditioner
+    /// Static double that accumulates the preconditioner
     /// solve time of all instantiations of this class. Reset
     /// it manually, e.g. after every Newton solve.
     static double Cumulative_preconditioner_solve_time;
@@ -97,7 +97,7 @@ namespace oomph
     // rightly, it shouts.
     /*void operator=(const TrilinosPreconditionerBase&) = delete;*/
 
-    ///  Function to set up a preconditioner for the linear system
+    /// Function to set up a preconditioner for the linear system
     /// defined by matrix_pt. This function must be called before using
     /// preconditioner_solve.
     /// \b NOTE 1. matrix_pt must point to an object of class CRDoubleMatrix or
@@ -105,12 +105,12 @@ namespace oomph
     /// This method should be called by oomph-lib solvers and preconditioners
     void setup();
 
-    ///  Function to setup a preconditioner for the linear system defined
+    /// Function to setup a preconditioner for the linear system defined
     /// by the oomph-lib oomph_matrix_pt and Epetra epetra_matrix_pt matrices.
     /// This method is called by Trilinos solvers.
     void setup(Epetra_CrsMatrix* epetra_matrix_pt);
 
-    ///  applies the preconditioner
+    /// applies the preconditioner
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Access function to Epetra_preconditioner_pt.
@@ -128,30 +128,30 @@ namespace oomph
     }
 
   protected:
-    ///  Function to set up a specific Trilinos preconditioner.
+    /// Function to set up a specific Trilinos preconditioner.
     /// This is called by setup(...).
     virtual void setup_trilinos_preconditioner(
       Epetra_CrsMatrix* epetra_matrix_pt) = 0;
 
-    ///  The preconditioner which will be set up using function
+    /// The preconditioner which will be set up using function
     /// setup_trilinos_preconditioner(...)
     Epetra_Operator* Epetra_preconditioner_pt;
 
-    ///  Pointer used to store the epetra matrix - only used when this
+    /// Pointer used to store the epetra matrix - only used when this
     /// preconditioner is setup using the oomph-lib interface
     Epetra_CrsMatrix* Epetra_matrix_pt;
   };
 
 
   //============================================================================
-  ///  An interface to the Trilinos ML class - provides a function
+  /// An interface to the Trilinos ML class - provides a function
   /// to construct a serial ML object, and functions to modify some
   /// of the ML paramaters.
   //============================================================================
   class TrilinosMLPreconditioner : public TrilinosPreconditionerBase
   {
   public:
-    ///  Constructor. Build with Smooth Aggretation (SA) default
+    /// Constructor. Build with Smooth Aggretation (SA) default
     /// settings, but our own default number of V cycles (initialised
     /// to 1 to replicate TrilinosML's own behaviour).
     TrilinosMLPreconditioner()
@@ -172,7 +172,7 @@ namespace oomph
     /// Broken assignment operator.
     /*void operator=(const TrilinosMLPreconditioner&) = delete;*/
 
-    ///  Set control flags to values for Petrov-Galerkin
+    /// Set control flags to values for Petrov-Galerkin
     /// preconditioning - for non symmetric systems
     void set_NSSA_default_values()
     {
@@ -180,7 +180,7 @@ namespace oomph
     }
 
 
-    ///  Set control flags to values for classical smoothed aggregation-
+    /// Set control flags to values for classical smoothed aggregation-
     /// based 2-level domain decomposition
     void set_DD_default_values()
     {
@@ -188,14 +188,14 @@ namespace oomph
     }
 
 
-    ///  Set control flags to values 3-level algebraic domain
+    /// Set control flags to values 3-level algebraic domain
     /// decomposition
     void set_DDML_default_values()
     {
       ML_Epetra::SetDefaults("DD-ML", ML_parameters);
     }
 
-    ///  Set control flags to values for classical smoothed
+    /// Set control flags to values for classical smoothed
     /// aggregation preconditioning
     void set_SA_default_values()
     {
@@ -245,12 +245,12 @@ namespace oomph
     }
 
 
-    ///  Default number of V cycles (one to be consistent with
+    /// Default number of V cycles (one to be consistent with
     /// previous default) (It's an int because Trilinos wants it to be!)
     static int Default_n_cycles;
 
   protected:
-    ///  Function to set up the ML preconditioner. It is assumed
+    /// Function to set up the ML preconditioner. It is assumed
     /// Trilinos_matrix_pt points to a suitable matrix.
     void setup_trilinos_preconditioner(Epetra_CrsMatrix* epetra_matrix_pt);
 
@@ -260,7 +260,7 @@ namespace oomph
 
 
   //============================================================================
-  ///  An interface to the Trilinos IFPACK class- provides a function
+  /// An interface to the Trilinos IFPACK class- provides a function
   /// to construct an IFPACK object, and functions to modify some
   /// of the IFPACK paramaters.
   //============================================================================
@@ -325,7 +325,7 @@ namespace oomph
     }
 
   protected:
-    ///  Function to set up an IFPACK preconditioner. It is assumed
+    /// Function to set up an IFPACK preconditioner. It is assumed
     /// Trilinos_matrix_pt points to a suitable matrix.
     void setup_trilinos_preconditioner(Epetra_CrsMatrix* epetra_matrix_pt);
 

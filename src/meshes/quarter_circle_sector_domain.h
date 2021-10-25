@@ -35,14 +35,14 @@
 namespace oomph
 {
   //=================================================================
-  ///  Circular sector as domain. Domain is bounded by
+  /// Circular sector as domain. Domain is bounded by
   /// curved boundary which is represented by a GeomObject. Domain is
   /// parametrised by three macro elements.
   //=================================================================
   class QuarterCircleSectorDomain : public Domain
   {
   public:
-    ///  Constructor: Pass boundary object and start and end coordinates
+    /// Constructor: Pass boundary object and start and end coordinates
     /// and fraction along boundary object where outer ring is divided.
     QuarterCircleSectorDomain(GeomObject* boundary_geom_object_pt,
                               const double& xi_lo,
@@ -77,14 +77,14 @@ namespace oomph
     /// Destructor: empty; cleanup done in base class
     ~QuarterCircleSectorDomain() {}
 
-    ///  Typedef for function pointer for function that squashes
+    /// Typedef for function pointer for function that squashes
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value
     typedef double (*BLSquashFctPt)(const double& s);
 
 
-    ///  Function pointer for function that squashes
+    /// Function pointer for function that squashes
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value
@@ -94,7 +94,7 @@ namespace oomph
     }
 
 
-    ///  Function that squashes the outer two macro elements towards
+    /// Function that squashes the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value
     double s_squashed(const double& s)
@@ -102,7 +102,7 @@ namespace oomph
       return BL_squash_fct_pt(s);
     }
 
-    ///  Vector representation of the  i_macro-th macro element
+    /// Vector representation of the  i_macro-th macro element
     /// boundary i_direct (N/S/W/E) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s). Note that the local coordinate \b s is a 1D
@@ -129,13 +129,13 @@ namespace oomph
     /// Pointer to geometric object that represents the curved wall
     GeomObject* Wall_pt;
 
-    ///  Function pointer for function that squashes
+    /// Function pointer for function that squashes
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value
     BLSquashFctPt BL_squash_fct_pt;
 
-    ///  Default for function that squashes
+    /// Default for function that squashes
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value: Identity.
@@ -144,62 +144,62 @@ namespace oomph
       return s;
     }
 
-    ///  Boundary of top left macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of top left macro element zeta \f$ \in [-1,1] \f$
     void r_top_left_N(const unsigned& t,
                       const Vector<double>& zeta,
                       Vector<double>& f);
 
-    ///  Boundary of top left macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of top left macro element zeta \f$ \in [-1,1] \f$
     void r_top_left_W(const unsigned& t,
                       const Vector<double>& zeta,
                       Vector<double>& f);
 
-    ///  Boundary of top left macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of top left macro element zeta \f$ \in [-1,1] \f$
     void r_top_left_S(const unsigned& t,
                       const Vector<double>& zeta,
                       Vector<double>& f);
 
-    ///  Boundary of top left macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of top left macro element zeta \f$ \in [-1,1] \f$
     void r_top_left_E(const unsigned& t,
                       const Vector<double>& zeta,
                       Vector<double>& f);
 
-    ///  Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
     void r_bot_right_N(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f);
 
-    ///  Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
     void r_bot_right_W(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f);
 
-    ///  Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
     void r_bot_right_S(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f);
 
-    ///  Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
     void r_bot_right_E(const unsigned& t,
                        const Vector<double>& zeta,
                        Vector<double>& f);
 
-    ///  Boundary of central box macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of central box macro element zeta \f$ \in [-1,1] \f$
     void r_centr_N(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    ///  Boundary of central box macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of central box macro element zeta \f$ \in [-1,1] \f$
     void r_centr_E(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    ///  Boundary of central box macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of central box macro element zeta \f$ \in [-1,1] \f$
     void r_centr_S(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);
 
-    ///  Boundary of central box macro element zeta \f$ \in [-1,1] \f$
+    /// Boundary of central box macro element zeta \f$ \in [-1,1] \f$
     void r_centr_W(const unsigned& t,
                    const Vector<double>& zeta,
                    Vector<double>& f);

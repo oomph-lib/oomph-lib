@@ -35,7 +35,7 @@
 namespace oomph
 {
   //=================================================================
-  ///  Tube as a domain. The entire domain must be defined by
+  /// Tube as a domain. The entire domain must be defined by
   /// a GeomObject with the following convention: zeta[0] is the coordinate
   /// along the centreline, zeta[1] is the theta coordinate around the tube
   /// wall and zeta[2] is the radial coordinate.
@@ -69,7 +69,7 @@ namespace oomph
   class TubeDomain : public Domain
   {
   public:
-    ///  Constructor: Pass geometric  object; start and end limit of the
+    /// Constructor: Pass geometric  object; start and end limit of the
     /// centreline coordinate; the theta locations marking the division between
     /// the elements of the outer ring, labelled from the lower left to the
     /// upper left in order, theta should be in the range \f$-\pi\f$ to
@@ -107,7 +107,7 @@ namespace oomph
     /// Destructor: Empty; cleanup done in base class
     ~TubeDomain() {}
 
-    ///  Vector representation of the  i_macro-th macro element
+    /// Vector representation of the  i_macro-th macro element
     /// boundary i_direct (L/R/D/U/B/F) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
@@ -121,7 +121,7 @@ namespace oomph
     /// Storage for the limits of the centreline coordinate
     Vector<double> Centreline_limits;
 
-    ///  Storage for the dividing lines on the boundary
+    /// Storage for the dividing lines on the boundary
     /// starting from the lower left and proceeding anticlockwise to
     /// the upper left
     Vector<double> Theta_positions;
@@ -136,7 +136,7 @@ namespace oomph
     /// Pointer to geometric object that represents the domain
     GeomObject* Volume_pt;
 
-    ///   A very little linear interpolation helper.
+    ///  A very little linear interpolation helper.
     /// Interpolate from the low
     /// point to the high point using the coordinate s which is
     /// assumed to run from -1 to 1.
@@ -160,7 +160,7 @@ namespace oomph
 
 
   //=================================================================
-  ///  Vector representation of the  imacro-th macro element
+  /// Vector representation of the  imacro-th macro element
   /// boundary idirect (L/R/D/U/B/F) at time level t
   /// (t=0: present; t>0: previous): f(s)
   //=================================================================

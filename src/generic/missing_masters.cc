@@ -55,14 +55,14 @@ namespace oomph
 
 #endif
 
-    ///  Boolean to indicate whether to doc timings or not.
+    /// Boolean to indicate whether to doc timings or not.
     bool Doc_timings = false;
 
-    ///  Boolean to indicate whether to output basic info during
+    /// Boolean to indicate whether to output basic info during
     ///        setup_multi_domain_interaction() routines
     bool Doc_stats = false;
 
-    ///  Boolean to indicate whether to output further info during
+    /// Boolean to indicate whether to output further info during
     ///        setup_multi_domain_interaction() routines
     bool Doc_full_stats = false;
 

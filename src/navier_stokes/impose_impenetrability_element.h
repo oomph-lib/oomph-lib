@@ -34,7 +34,7 @@
 namespace oomph
 {
   //========================================================================
-  ///   ImposeImpenetrabilityElement
+  ///  ImposeImpenetrabilityElement
   /// are elements that coincide with the faces of
   /// higher-dimensional "bulk" elements. They are used on
   /// boundaries where we would like to impose impenetrability.
@@ -48,7 +48,7 @@ namespace oomph
     unsigned Id;
 
   public:
-    ///  Constructor takes a "bulk" element, the
+    /// Constructor takes a "bulk" element, the
     /// index that identifies which face the
     /// ImposeImpenetrabilityElement is supposed
     /// to be attached to, and the face element ID
@@ -102,7 +102,7 @@ namespace oomph
       FiniteElement::output(outfile, nplot);
     }
 
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     /// This final over-ride is required because both SolidFiniteElements
@@ -115,7 +115,7 @@ namespace oomph
     }
 
   protected:
-    ///  Helper function to compute the residuals and, if flag==1, the
+    /// Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void fill_in_generic_contribution_to_residuals_parall_lagr_multiplier(
       Vector<double>& residuals,
@@ -284,7 +284,7 @@ namespace oomph
     }
 
 
-    ///  The number of "DOF types" that degrees of freedom in this element
+    /// The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Just the solid degrees of freedom themselves.
     unsigned ndof_types() const
     {
@@ -303,7 +303,7 @@ namespace oomph
       return (this->dim() + 1);
     }
 
-    ///  Create a list of pairs for all unknowns in this element,
+    /// Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.

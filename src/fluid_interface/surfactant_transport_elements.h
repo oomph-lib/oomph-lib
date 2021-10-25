@@ -84,7 +84,7 @@ namespace oomph
       return -this->beta();
     }
 
-    ///  Overload the Helper function to calculate the residuals and
+    /// Overload the Helper function to calculate the residuals and
     /// jacobian entries. This particular function ensures that the
     /// additional entries are calculated inside the integration loop
     void add_additional_residual_contributions_interface(
@@ -188,7 +188,7 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
-    ///  Compute the concentration intergated over the surface area
+    /// Compute the concentration intergated over the surface area
     double integrate_c();
   };
 

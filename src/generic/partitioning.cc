@@ -47,7 +47,7 @@ namespace oomph
   //====================================================================
   namespace METIS
   {
-    ///  Default function that translates spatial
+    /// Default function that translates spatial
     /// error into weight for METIS partitioning (unit weight regardless
     /// of input).
     void default_error_to_weight_fct(const double& spatial_error,
@@ -58,7 +58,7 @@ namespace oomph
       weight = 1;
     }
 
-    ///  Function pointer to to function that translates spatial
+    /// Function pointer to to function that translates spatial
     /// error into weight for METIS partitioning.
     ErrorToWeightFctPt Error_to_weight_fct_pt = &default_error_to_weight_fct;
 
@@ -542,7 +542,7 @@ namespace oomph
 
 
   //==================================================================
-  ///  Use METIS to assign each element in an already-distributed mesh
+  /// Use METIS to assign each element in an already-distributed mesh
   /// to a domain. On return, element_domain_on_this_proc[e] contains the number
   /// of the domain [0,1,...,ndomain-1] to which non-halo element e on THE
   /// CURRENT PROCESSOR ONLY has been assigned. The order of the non-halo

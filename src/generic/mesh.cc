@@ -699,7 +699,7 @@ namespace oomph
   }
 
   //========================================================
-  ///  Function to describe the dofs of the Mesh. The ostream
+  /// Function to describe the dofs of the Mesh. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -734,7 +734,7 @@ namespace oomph
   }
 
   //========================================================
-  ///  Function to describe the local dofs of the elements. The ostream
+  /// Function to describe the local dofs of the elements. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -2875,7 +2875,7 @@ namespace oomph
   }
 
   //========================================================================
-  ///  Synchronise shared node lookup schemes to cater for the
+  /// Synchronise shared node lookup schemes to cater for the
   /// the case where:
   /// (1) a certain node on the current processor is halo with proc p
   ///     (i.e. its non-halo counterpart lives on processor p)
@@ -9468,7 +9468,7 @@ namespace oomph
   //       counterparts were created and whether they were newly added
 
   //========================================================================
-  ///  Add external haloed element whose non-halo counterpart is held
+  /// Add external haloed element whose non-halo counterpart is held
   /// on processor p to the storage scheme for external haloed elements.
   /// If the element is already in the storage scheme then return its index
   //========================================================================
@@ -9509,7 +9509,7 @@ namespace oomph
   }
 
   //========================================================================
-  ///  Add external haloed node whose halo (external) counterpart
+  /// Add external haloed node whose halo (external) counterpart
   /// is held on processor p to the storage scheme for external haloed nodes.
   /// If the node is already in the storage scheme then return its index
   //========================================================================
@@ -9619,7 +9619,7 @@ namespace oomph
                << "<Collection>" << std::endl;
     }
 
-    ///  Add name of output file and associated continuous time
+    /// Add name of output file and associated continuous time
     /// to pvd file.
     void write_pvd_information(std::ofstream& pvd_file,
                                const std::string& output_filename,

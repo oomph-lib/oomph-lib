@@ -55,7 +55,7 @@ namespace oomph
   class ElementWithExternalElement : public virtual FiniteElement
   {
   public:
-    ///  Constructor. Initialise member data and pointers to data
+    /// Constructor. Initialise member data and pointers to data
     /// associated with the external elements to zero.
     ElementWithExternalElement()
       : FiniteElement(),
@@ -77,7 +77,7 @@ namespace oomph
     {
     }
 
-    ///  The destructor, clean up any allocated memory
+    /// The destructor, clean up any allocated memory
     virtual ~ElementWithExternalElement();
 
     /// Broken copy constructor
@@ -86,7 +86,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const ElementWithExternalElement&) = delete;
 
-    ///  Helper function to check if storage has actually been allocated
+    /// Helper function to check if storage has actually been allocated
     bool storage_has_been_allocated() const
     {
       // If either of the storage arrays is zero, then storage has not
@@ -102,7 +102,7 @@ namespace oomph
       }
     }
 
-    ///  Access function to source element for specified interaction
+    /// Access function to source element for specified interaction
     /// index at specified integration point
     FiniteElement*& external_element_pt(const unsigned& interaction_index,
                                         const unsigned& ipt)
@@ -117,7 +117,7 @@ namespace oomph
       return External_element_pt[Nintpt * interaction_index + ipt];
     }
 
-    ///  Access function to source element, const version
+    /// Access function to source element, const version
     FiniteElement* const& external_element_pt(const unsigned& interaction_index,
                                               const unsigned& ipt) const
     {
@@ -131,7 +131,7 @@ namespace oomph
       return External_element_pt[Nintpt * interaction_index + ipt];
     }
 
-    ///  Access function to get source element's local coords for
+    /// Access function to get source element's local coords for
     /// specified interaction index at specified integration point
     Vector<double>& external_element_local_coord(
       const unsigned& interaction_index, const unsigned& ipt)
@@ -145,7 +145,7 @@ namespace oomph
       return External_element_local_coord[Nintpt * interaction_index + ipt];
     }
 
-    ///  Access function to get source element's coords, const version
+    /// Access function to get source element's coords, const version
     Vector<double> const& external_element_local_coord(
       const unsigned& interaction_index, const unsigned& ipt) const
     {
@@ -159,46 +159,46 @@ namespace oomph
     }
 
 
-    ///  Output by plotting vector from integration point to
+    /// Output by plotting vector from integration point to
     /// corresponding point in external element for specified interaction
     /// index
     void output_external_elements(std::ostream& outfile,
                                   const unsigned& interaction_index);
 
-    ///  Initialise storage for pointers to external elements and their
+    /// Initialise storage for pointers to external elements and their
     /// local coordinates. This must be called before any of
     /// the access functions are used.
     void initialise_external_element_storage();
 
-    ///  Flush the storage for external elements
+    /// Flush the storage for external elements
     void flush_all_external_element_storage();
 
-    ///  Set the number of interactions in the element
+    /// Set the number of interactions in the element
     /// This function is usually called in the specific element's constructor
     inline void set_ninteraction(const unsigned& n_interaction)
     {
       Ninteraction = n_interaction;
     }
 
-    ///  Return the number of interactions in the element
+    /// Return the number of interactions in the element
     unsigned ninteraction() const
     {
       return Ninteraction;
     }
 
-    ///  Function that must return all the data involved
+    /// Function that must return all the data involved
     /// in the desired interactions from the external element
     virtual void identify_all_field_data_for_external_interaction(
       Vector<std::set<FiniteElement*>> const& external_elements_pt,
       std::set<std::pair<Data*, unsigned>>& paired_interaction_data);
 
-    ///  Function that must return all geometric data involved
+    /// Function that must return all geometric data involved
     /// in the desired interactions from the external element
     virtual void identify_all_geometric_data_for_external_interaction(
       Vector<std::set<FiniteElement*>> const& external_elements_pt,
       std::set<Data*>& external_geometric_data_pt);
 
-    ///  Return the number of Data items that affect the
+    /// Return the number of Data items that affect the
     /// external interactions in this element.
     /// This includes e.g. fluid velocities
     /// and pressures in adjacent fluid elements in an FSI problem
@@ -207,7 +207,7 @@ namespace oomph
       return Nexternal_interaction_field_data;
     }
 
-    ///  Return vector of pointers to the field Data objects that
+    /// Return vector of pointers to the field Data objects that
     /// affect the interactions on the element.
     Vector<Data*> external_interaction_field_data_pt() const
     {
@@ -225,7 +225,7 @@ namespace oomph
     }
 
 
-    ///  Return the number of geometric Data items that affect the
+    /// Return the number of geometric Data items that affect the
     /// external interactions in this element: i.e. any geometric Data
     /// in the problem that affects the nodal positions in the
     /// external elements.
@@ -246,7 +246,7 @@ namespace oomph
       return Add_external_interaction_data;
     }
 
-    ///  Return vector of pointers to the geometric Data objects that
+    /// Return vector of pointers to the geometric Data objects that
     /// affect the interactions on the element.
     Vector<Data*> external_interaction_geometric_data_pt() const
     {
@@ -263,7 +263,7 @@ namespace oomph
       return temp_data;
     }
 
-    ///  Do not include any external geometric data when computing
+    /// Do not include any external geometric data when computing
     /// the element's Jacobian. This function should be
     /// called if the external element does not move and/or if
     /// the "source term" does not depend on spatial derivatives
@@ -273,14 +273,14 @@ namespace oomph
       Add_external_geometric_data = false;
     }
 
-    ///  Do not include any external interaction data when computing
+    /// Do not include any external interaction data when computing
     /// the element's Jacobian
     void ignore_external_interaction_data()
     {
       Add_external_interaction_data = false;
     }
 
-    ///  Do include external geometric data when computing
+    /// Do include external geometric data when computing
     /// the element's Jacobian. This function should be called
     /// to re-enable inclusion of external geometric data.
     void include_external_geometric_data()
@@ -288,7 +288,7 @@ namespace oomph
       Add_external_geometric_data = true;
     }
 
-    ///  Do include external geometric data when computing the element's
+    /// Do include external geometric data when computing the element's
     /// Jacobian This function should be called
     /// to re-enable inclusion of external interaction data
     void include_external_interaction_data()
@@ -296,14 +296,14 @@ namespace oomph
       Add_external_interaction_data = true;
     }
 
-    ///  Is the external geometric data taken into account when forming
+    /// Is the external geometric data taken into account when forming
     /// the Jacobian?
     bool external_geometric_data_is_included() const
     {
       return Add_external_geometric_data;
     }
 
-    ///  Function to describe the local dofs of the element. The ostream
+    /// Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -315,7 +315,7 @@ namespace oomph
                              const std::string& curr_string) const;
 
   protected:
-    ///  Overload the assign internal and external local equation
+    /// Overload the assign internal and external local equation
     /// number scheme so that the interaction data is taken into account
     void assign_internal_and_external_local_eqn_numbers(
       const bool& store_local_dof_pt)
@@ -330,14 +330,14 @@ namespace oomph
         store_local_dof_pt);
     }
 
-    ///  Assign the local equation numbers for those
+    /// Assign the local equation numbers for those
     /// Data values involved in the external interactions that
     /// affect the residuals of the element
     void assign_external_interaction_data_local_eqn_numbers(
       const bool& store_local_dof_pt);
 
 
-    ///  Calculate the contributions to the jacobian from all external
+    /// Calculate the contributions to the jacobian from all external
     /// interaction degrees of freedom (geometric and field data) in
     /// the external element using finite differences.
     /// This version of the function assumes that the residuals vector has
@@ -353,7 +353,7 @@ namespace oomph
                                                                  jacobian);
     }
 
-    ///  Calculate the contributions to the jacobian from all enternal
+    /// Calculate the contributions to the jacobian from all enternal
     /// interaction degrees of freedom (geometric and field data) in
     /// the external element using finite differences. This version computes
     /// the residuals vector before calculating the jacobian terms.
@@ -370,7 +370,7 @@ namespace oomph
     }
 
 
-    ///  Calculate the contributions to the jacobian from the external
+    /// Calculate the contributions to the jacobian from the external
     /// interaction degrees of freedom associated with fields interpolated by
     /// the external element using finite differences.
     /// This version of the function assumes that the residuals vector has
@@ -378,7 +378,7 @@ namespace oomph
     void fill_in_jacobian_from_external_interaction_field_by_fd(
       Vector<double>& residuals, DenseMatrix<double>& jacobian);
 
-    ///  Calculate the contributions to the jacobian from the enternal
+    /// Calculate the contributions to the jacobian from the enternal
     /// interaction degrees of freedom associated with fields interpolated by
     /// the external element using finite differences. This version computes
     /// the residuals vector before calculating the jacobian terms.
@@ -395,7 +395,7 @@ namespace oomph
                                                              jacobian);
     }
 
-    ///  Calculate the contributions to the jacobian from the external
+    /// Calculate the contributions to the jacobian from the external
     /// interaction degrees of freedom associated with the geometry of
     /// the external elements using finite differences.
     /// This version of the function assumes that the residuals vector has
@@ -403,7 +403,7 @@ namespace oomph
     void fill_in_jacobian_from_external_interaction_geometric_by_fd(
       Vector<double>& residuals, DenseMatrix<double>& jacobian);
 
-    ///  Calculate the contributions to the jacobian from the
+    /// Calculate the contributions to the jacobian from the
     /// external
     /// interaction degrees of freedom associated with the geometry of
     /// the external elements using finite differences. This version computes
@@ -443,19 +443,19 @@ namespace oomph
     }
 
 
-    ///  Function that is called before the finite differencing of
+    /// Function that is called before the finite differencing of
     /// any external interaction data associated with external fields.
     /// This may be overloaded to update any dependent
     /// data before finite differencing takes place.
     virtual inline void update_before_external_interaction_field_fd() {}
 
-    ///  Function that is call after the finite differencing of
+    /// Function that is call after the finite differencing of
     /// the external interaction data associated with external fields
     /// This may be overloaded to reset any dependent
     /// variables that may have changed during the finite differencing.
     virtual inline void reset_after_external_interaction_field_fd() {}
 
-    ///  Function called within the finite difference loop for
+    /// Function called within the finite difference loop for
     /// external interaction data after a change in any values in the i-th
     /// external interaction data object associated with external fields.
     virtual inline void update_in_external_interaction_field_fd(
@@ -463,7 +463,7 @@ namespace oomph
     {
     }
 
-    ///  Function called within the finite difference loop for
+    /// Function called within the finite difference loop for
     /// external interaction data after the values in the
     /// i-th external interaction data object associated with external fields
     /// are reset. The default behaviour is to call the update function.
@@ -474,19 +474,19 @@ namespace oomph
     }
 
 
-    ///  Function that is called before the finite differencing of
+    /// Function that is called before the finite differencing of
     /// any external interaction data associated with external geometry.
     /// This may be overloaded to update any dependent
     /// data before finite differencing takes place.
     virtual inline void update_before_external_interaction_geometric_fd() {}
 
-    ///  Function that is call after the finite differencing of
+    /// Function that is call after the finite differencing of
     /// the external interaction data associated with external geometry.
     /// This may be overloaded to reset any dependent
     /// variables that may have changed during the finite differencing.
     virtual inline void reset_after_external_interaction_geometric_fd() {}
 
-    ///  Function called within the finite difference loop for
+    /// Function called within the finite difference loop for
     /// external interaction data after a change in any values in the i-th
     /// external interaction data object associated with external geometry.
     virtual inline void update_in_external_interaction_geometric_fd(
@@ -494,7 +494,7 @@ namespace oomph
     {
     }
 
-    ///  Function called within the finite difference loop for
+    /// Function called within the finite difference loop for
     /// external interaction data after the values in the
     /// i-th external interaction data object associated with external geometry
     /// are reset. The default behaviour is to call the update function.
@@ -519,7 +519,7 @@ namespace oomph
     Data** External_interaction_geometric_data_pt;
 
   private:
-    ///  Helper function to check that storage has actually been allocated
+    /// Helper function to check that storage has actually been allocated
     void check_storage_allocated() const
     {
       // If either of the storage arrays is zero, then storage has not
@@ -583,7 +583,7 @@ namespace oomph
     /// Number of intergation point in the element
     unsigned Nintpt;
 
-    ///  Number of entries in the external element storage schemes
+    /// Number of entries in the external element storage schemes
     /// (Nintergation_pt * Ninteraction)
     unsigned Nexternal_element_storage;
 
@@ -594,30 +594,30 @@ namespace oomph
     unsigned Nexternal_interaction_geometric_data;
 
 
-    ///  Storage for pointers to elements that provide contributions
+    /// Storage for pointers to elements that provide contributions
     /// to the residuals of the current element. Potentially a different
     /// element contributes to each integration point.
     FiniteElement** External_element_pt;
 
-    ///   Storage for vectors of local coordinates in
+    ///  Storage for vectors of local coordinates in
     /// external elements that correspond to the appropriate integration
     //// point.
     Vector<double>* External_element_local_coord;
 
-    ///  Storage for the index of the values in the external field data
+    /// Storage for the index of the values in the external field data
     /// that affect the interactions in the element
     unsigned* External_interaction_field_data_index;
 
-    ///  Storage for the local equation number associated with the
+    /// Storage for the local equation number associated with the
     /// external field data the affect the interactions in the element
     int* External_interaction_field_data_local_eqn;
 
-    ///  Storage for the index of the values in the external
+    /// Storage for the index of the values in the external
     /// geometric data
     /// that affect the interactions in the element
     unsigned* External_interaction_geometric_data_index;
 
-    ///  Storage for the local equation number associated with the
+    /// Storage for the local equation number associated with the
     /// external geometric data the affect the interactions in the element
     int* External_interaction_geometric_data_local_eqn;
   };

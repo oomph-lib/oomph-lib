@@ -56,7 +56,7 @@ namespace oomph
     ///  Face index associated with edge flux degree of freedom
     static const unsigned Face_index_of_edge_flux[];
 
-    ///  Conversion scheme from an edge degree of freedom to the node
+    /// Conversion scheme from an edge degree of freedom to the node
     /// it's stored at
     static const unsigned Q_edge_conv[];
 
@@ -70,7 +70,7 @@ namespace oomph
     /// The internal data index where the p degrees of freedom are stored
     unsigned P_internal_data_index;
 
-    ///  Unit normal signs associated with each edge to ensure
+    /// Unit normal signs associated with each edge to ensure
     /// inter-element continuity of the flux
     std::vector<short> Sign_edge;
 
@@ -93,7 +93,7 @@ namespace oomph
       return (j + 2) % 3;
     }
 
-    ///  Compute the face element coordinates of the nth flux
+    /// Compute the face element coordinates of the nth flux
     /// interpolation point along specified edge
     void face_local_coordinate_of_flux_interpolation_point(
       const unsigned& edge, const unsigned& n, Vector<double>& s) const
@@ -129,7 +129,7 @@ namespace oomph
       return Face_index_of_edge_flux[j];
     }
 
-    ///  Return the nodal index of the j-th solid displacement unknown
+    /// Return the nodal index of the j-th solid displacement unknown
     /// [0: r; 1: z]
     unsigned u_index_axisym_poroelasticity(const unsigned& j) const
     {
@@ -181,7 +181,7 @@ namespace oomph
       return internal_local_eqn(q_internal_index(), j);
     }
 
-    ///  Return vector of pointers to the Data objects that store the
+    /// Return vector of pointers to the Data objects that store the
     /// edge flux values
     Vector<Data*> q_edge_data_pt() const
     {
@@ -199,7 +199,7 @@ namespace oomph
       return this->internal_data_pt(Q_internal_data_index);
     }
 
-    ///  Return the index of the internal data where the q_internal
+    /// Return the index of the internal data where the q_internal
     /// degrees of freedom are stored
     unsigned q_internal_index() const
     {
@@ -264,7 +264,7 @@ namespace oomph
       return nodal_value(q_edge_node_number(j), q_edge_index(j));
     }
 
-    ///  Return the values of the j-th edge (flux) degree of
+    /// Return the values of the j-th edge (flux) degree of
     /// freedom at time history level t
     double q_edge(const unsigned& t, const unsigned& j) const
     {
@@ -299,7 +299,7 @@ namespace oomph
       return this->internal_data_pt(q_internal_index())->value(j);
     }
 
-    ///  Return the value of the j-th internal degree of freedom at
+    /// Return the value of the j-th internal degree of freedom at
     /// time history level t
     double q_internal(const unsigned& t, const unsigned& j) const
     {
@@ -330,7 +330,7 @@ namespace oomph
       node_pt(q_edge_node_number(j))->set_value(q_edge_index(j), value);
     }
 
-    ///  Set the values of the j-th edge (flux) degree of freedom at
+    /// Set the values of the j-th edge (flux) degree of freedom at
     /// time history level t
     void set_q_edge(const unsigned& t, const unsigned& j, const double& value)
     {
@@ -338,13 +338,13 @@ namespace oomph
     }
 
 
-    ///  Set the values of the j-th internal degree of freedom
+    /// Set the values of the j-th internal degree of freedom
     void set_q_internal(const unsigned& j, const double& value)
     {
       this->internal_data_pt(q_internal_index())->set_value(j, value);
     }
 
-    ///  Set the values of the j-th internal degree of freedom at
+    /// Set the values of the j-th internal degree of freedom at
     /// time history level t
     void set_q_internal(const unsigned& t,
                         const unsigned& j,
@@ -367,11 +367,11 @@ namespace oomph
     void get_div_q_basis_local(const Vector<double>& s,
                                Shape& div_q_basis_ds) const;
 
-    ///  Returns the number of flux_interpolation points along each
+    /// Returns the number of flux_interpolation points along each
     /// edge of the element
     unsigned nedge_flux_interpolation_point() const;
 
-    ///  Returns the local coordinate of the jth flux_interpolation point
+    /// Returns the local coordinate of the jth flux_interpolation point
     /// along specified edge
     Vector<double> edge_flux_interpolation_point(const unsigned& edge,
                                                  const unsigned& j) const
@@ -402,7 +402,7 @@ namespace oomph
       return coord;
     }
 
-    ///  Compute the global coordinates of the jth flux_interpolation
+    /// Compute the global coordinates of the jth flux_interpolation
     /// point along specified edge
     void edge_flux_interpolation_point_global(const unsigned& edge,
                                               const unsigned& j,
@@ -610,7 +610,7 @@ namespace oomph
       AxisymmetricPoroelasticityEquations::output(outfile);
     }
 
-    ///  Output FE representation of soln: x,y,u1,u2,div_q,p at
+    /// Output FE representation of soln: x,y,u1,u2,div_q,p at
     /// Nplot^DIM plot points
     void output(std::ostream& outfile, const unsigned& Nplot)
     {
@@ -618,13 +618,13 @@ namespace oomph
     }
 
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<2, 3>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<2, 3>::vertex_node_pt(j);
@@ -637,7 +637,7 @@ namespace oomph
     }
 
   protected:
-    ///  Returns the geometric basis, and the u, p and divergence basis
+    /// Returns the geometric basis, and the u, p and divergence basis
     /// functions and test functions at local coordinate s
     double shape_basis_test_local(const Vector<double>& s,
                                   Shape& psi,
@@ -676,7 +676,7 @@ namespace oomph
       return J;
     }
 
-    ///  Returns the geometric basis, and the u, p and divergence basis
+    /// Returns the geometric basis, and the u, p and divergence basis
     /// functions and test functions at integration point ipt
     double shape_basis_test_local_at_knot(const unsigned& ipt,
                                           Shape& psi,

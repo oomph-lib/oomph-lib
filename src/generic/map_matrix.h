@@ -221,7 +221,7 @@ namespace oomph
     }
 
 
-    ///  Return (reference to) entry.
+    /// Return (reference to) entry.
     /// Careful: If the entry does not exist then it is created and
     /// set to zero
     VALUE_TYPE& operator()(const KEY_TYPE_ROW& i, const KEY_TYPE_COL& j)
@@ -229,7 +229,7 @@ namespace oomph
       return *entry_pt(i, j);
     }
 
-    ///  Get an element corresponding to the key (i,j)
+    /// Get an element corresponding to the key (i,j)
     ///  Searches the container for an element with a key equivalent to
     /// (i,j) and returns the element if found, otherwise the default 0 value
     /// for the value type is returned. The container is not modified.
@@ -256,7 +256,7 @@ namespace oomph
     }
 
 
-    ///  Dump all non-`zero' entries to file.
+    /// Dump all non-`zero' entries to file.
     /// Output is in the format
     ///   `i', `j', `entry[i][j]'
     void output(std::ostream& outfile)
@@ -291,7 +291,7 @@ namespace oomph
       }
     }
 
-    ///  Work out number of non-`zero' entries
+    /// Work out number of non-`zero' entries
     unsigned long nnz()
     {
       // Initialise counter for # of nonzero entries
@@ -321,7 +321,7 @@ namespace oomph
       return count;
     }
 
-    ///  Work out number of non-`zero' entries, const version
+    /// Work out number of non-`zero' entries, const version
     unsigned long nnz() const
     {
       // Initialise counter for # of nonzero entries
@@ -353,7 +353,7 @@ namespace oomph
     }
 
 
-    ///  Work out total number of entries
+    /// Work out total number of entries
     unsigned long size()
     {
       // Initialise counter for # of nonzero entries
@@ -379,7 +379,7 @@ namespace oomph
       return count;
     }
 
-    ///  Work out total number of entries const version
+    /// Work out total number of entries const version
     unsigned long size() const
     {
       // Initialise counter for # of nonzero entries
@@ -408,7 +408,7 @@ namespace oomph
 
 
   protected:
-    ///  Return pointer to entry
+    /// Return pointer to entry
     VALUE_TYPE* entry_pt(const KEY_TYPE_ROW& i, const KEY_TYPE_COL& j)
     {
       // There's not a single entry in this row: Entry must be zero.

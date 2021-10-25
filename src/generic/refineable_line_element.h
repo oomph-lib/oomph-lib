@@ -65,7 +65,7 @@ namespace oomph
                                 public virtual LineElementBase
   {
   public:
-    ///  Shorthand for pointer to an argument-free void member
+    /// Shorthand for pointer to an argument-free void member
     /// function of the refineable element
     typedef void (RefineableQElement<1>::*VoidMemberFctPt)();
 
@@ -102,7 +102,7 @@ namespace oomph
       return 2;
     }
 
-    ///  If a neighbouring element has already created a node at a
+    /// If a neighbouring element has already created a node at a
     /// position corresponding to the local fractional position within the
     /// present element, s_fraction, return a pointer to that node. If
     /// not, return NULL (0). If the node is on a periodic boundary the
@@ -110,7 +110,7 @@ namespace oomph
     Node* node_created_by_neighbour(const Vector<double>& s_fraction,
                                     bool& is_periodic);
 
-    ///  If a neighbouring element has already created a node at a
+    /// If a neighbouring element has already created a node at a
     /// position corresponding to the local fractional position within the
     /// present element, s_fraction, return a pointer to that node. If
     /// not, return NULL (0). If the node is on a periodic boundary the
@@ -124,7 +124,7 @@ namespace oomph
       return 0;
     }
 
-    ///  Build the element, i.e. give it nodal positions, apply BCs,
+    /// Build the element, i.e. give it nodal positions, apply BCs,
     /// etc. Pointers to any new nodes will be returned in new_node_pt.
     /// If it is open, the positions of the new nodes will be written to
     /// the file stream new_nodes_file.
@@ -133,7 +133,7 @@ namespace oomph
                        bool& was_already_built,
                        std::ofstream& new_nodes_file);
 
-    ///  Check the integrity of the element: ensure that the position
+    /// Check the integrity of the element: ensure that the position
     /// and values are continuous across the element edges.
     void check_integrity(double& max_error);
 
@@ -156,11 +156,11 @@ namespace oomph
     void setup_hanging_nodes(Vector<std::ofstream*>& output_stream) {}
 
   protected:
-    ///  Coincidence between son nodal points and father boundaries:
+    /// Coincidence between son nodal points and father boundaries:
     /// Father_bound[node_1d](jnod_son,son_type) = {L/R/OMEGA}
     static std::map<unsigned, DenseMatrix<int>> Father_bound;
 
-    ///  Setup static matrix for coincidence between son nodal points
+    /// Setup static matrix for coincidence between son nodal points
     /// and father boundaries
     void setup_father_bounds();
 
@@ -213,13 +213,13 @@ namespace oomph
     virtual ~RefineableSolidQElement() {}
 
 
-    ///  Final over-ride: Use version in QSolidElementBase
+    /// Final over-ride: Use version in QSolidElementBase
     void set_macro_elem_pt(MacroElement* macro_elem_pt)
     {
       QSolidElementBase::set_macro_elem_pt(macro_elem_pt);
     }
 
-    ///  Final over-ride: Use version in QSolidElementBase
+    /// Final over-ride: Use version in QSolidElementBase
     void set_macro_elem_pt(MacroElement* macro_elem_pt,
                            MacroElement* undeformed_macro_elem_pt)
     {
@@ -227,14 +227,14 @@ namespace oomph
                                            undeformed_macro_elem_pt);
     }
 
-    ///  Use the generic finite difference routine defined in
+    /// Use the generic finite difference routine defined in
     /// RefineableSolidElement to calculate the Jacobian matrix
     void get_jacobian(Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       RefineableSolidElement::get_jacobian(residuals, jacobian);
     }
 
-    ///  Build the element, i.e. give it nodal positions, apply BCs, etc.
+    /// Build the element, i.e. give it nodal positions, apply BCs, etc.
     /// Incl. documention into new_nodes_file
     // NOTE: FOR SOME REASON THIS NEEDS TO LIVE IN *.H TO WORK ON INTEL
     void build(Mesh*& mesh_pt,

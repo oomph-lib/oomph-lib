@@ -48,7 +48,7 @@ namespace oomph
     /// Default constructor (empty)
     PMLMapping(){};
 
-    ///  Pure virtual to return Pml mapping gamma, where gamma is the
+    /// Pure virtual to return Pml mapping gamma, where gamma is the
     /// \f$d\tilde x / d x\f$ as  function of \f$\nu\f$ where \f$\nu = x - h\f$
     /// where h is the vector from the origin to the start of the Pml
     virtual std::complex<double> gamma(const double& nu_i,
@@ -68,7 +68,7 @@ namespace oomph
     /// Default constructor (empty)
     BermudezPMLMapping(){};
 
-    ///  Overwrite the pure Pml mapping coefficient function to return the
+    /// Overwrite the pure Pml mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al
     std::complex<double> gamma(const double& nu_i,
                                const double& pml_width_i,
@@ -93,7 +93,7 @@ namespace oomph
     /// Default constructor (empty)
     ContinuousBermudezPMLMapping(){};
 
-    ///  Overwrite the pure Pml mapping coefficient function to return the
+    /// Overwrite the pure Pml mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al
     std::complex<double> gamma(const double& nu_i,
                                const double& pml_width_i,

@@ -33,7 +33,7 @@
 namespace oomph
 {
   //========================================================================
-  ///  Get all the boundary information of an element using the
+  /// Get all the boundary information of an element using the
   /// input (quad_mesh_pt) mesh. If the element lies on a boundary then
   /// the user will be given the corresponding boundary index and the
   /// index of the face of quad_el_pt attached to the boundary. If the

@@ -78,32 +78,32 @@ namespace oomph
   class VectorMatrix
   {
   public:
-    ///  Default constructor - constructs an empty matrix.
+    /// Default constructor - constructs an empty matrix.
     VectorMatrix()
     {
       Vector_matrix.resize(0);
     }
 
-    ///  Constructor - constructs an n by m matrix with value val.
+    /// Constructor - constructs an n by m matrix with value val.
     VectorMatrix(const unsigned& n, const unsigned& m, const VALUE_TYPE& val)
     {
       this->build_vectors_and_value(n, m, val);
     }
 
-    ///  Constructor - constructs an n by m matrix, the value is defined
+    /// Constructor - constructs an n by m matrix, the value is defined
     /// by the default initialisation of VALUE_TYPE.
     VectorMatrix(const unsigned& n, const unsigned& m)
     {
       this->build_vectors(n, m);
     }
 
-    ///  Default virtual destructor
+    /// Default virtual destructor
     virtual ~VectorMatrix()
     {
       this->clear();
     }
 
-    ///  returns the number of rows. This is the outer Vector size.
+    /// returns the number of rows. This is the outer Vector size.
     const unsigned nrow() const
     {
 #ifdef PARANOID
@@ -140,7 +140,7 @@ namespace oomph
       return Vector_matrix.size();
     }
 
-    ///  return the number of columns. This is the size of the first inner
+    /// return the number of columns. This is the size of the first inner
     /// vectors, or returns 0 if the outer vector is of size 0
     /// (this->nrow() is 0).
     const unsigned ncol() const
@@ -183,27 +183,27 @@ namespace oomph
       }
     }
 
-    ///  [] access function to the i-th inner vector.
+    /// [] access function to the i-th inner vector.
     Vector<VALUE_TYPE>& operator[](const size_t i)
     {
       return Vector_matrix[i];
     }
 
-    ///  [] access function to the i-th inner vector const version
+    /// [] access function to the i-th inner vector const version
     const Vector<VALUE_TYPE>& operator[](const size_t i) const
     {
       return Vector_matrix[i];
     }
 
 
-    ///  Clears the outer vector. Calling Vector::clear() will invoke the
+    /// Clears the outer vector. Calling Vector::clear() will invoke the
     /// destructor of all the inner Vectors.
     void clear()
     {
       Vector_matrix.clear();
     }
 
-    ///  Resize the existing VectorMatrix.
+    /// Resize the existing VectorMatrix.
     /// WARNING: This invokes the resize function in std::vector, as such, only
     /// new values are assigned, old values as kept.
     /// e.g. if vec = [2,2,2], then vec.resize(5,3) gives
@@ -217,7 +217,7 @@ namespace oomph
       }
     }
 
-    ///  Any elements held in the container before the call are destroyed
+    /// Any elements held in the container before the call are destroyed
     /// and replaced by newly constructed elements (no assignments of elements
     /// take place).
     /// This causes an automatic reallocation of the allocated storage space if
@@ -230,13 +230,13 @@ namespace oomph
 
 
   protected:
-    ///  Builds an n by m VectorMatrix with default VALUE_TYPE.
+    /// Builds an n by m VectorMatrix with default VALUE_TYPE.
     void build_vectors(const unsigned& n, const unsigned& m)
     {
       Vector_matrix.resize(n, Vector<VALUE_TYPE>(m));
     }
 
-    ///  Build an m by n VectorMatrix with VALUE_TYPE val.
+    /// Build an m by n VectorMatrix with VALUE_TYPE val.
     void build_vectors_and_value(const unsigned& n,
                                  const unsigned& m,
                                  const VALUE_TYPE& val)

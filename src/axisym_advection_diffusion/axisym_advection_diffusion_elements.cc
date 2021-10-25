@@ -39,7 +39,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Compute element residual Vector and/or element Jacobian matrix
+  /// Compute element residual Vector and/or element Jacobian matrix
   ///
   /// flag=1: compute both
   /// flag=0: compute only residual Vector
@@ -265,7 +265,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Output function:
+  /// Output function:
   ///
   ///   r,z,u,w_r,w_z
   ///
@@ -353,7 +353,7 @@ namespace oomph
   }
 
   //======================================================================
-  ///   Output exact solution
+  ///  Output exact solution
   ///
   /// Solution is provided via function pointer.
   /// Plot at a given number of plot points.
@@ -405,7 +405,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Validate against exact solution
+  /// Validate against exact solution
   ///
   /// Solution is provided via function pointer.
   /// Plot error at a given number of plot points.

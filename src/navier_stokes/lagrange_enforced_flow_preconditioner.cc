@@ -32,7 +32,7 @@ namespace oomph
   //==========================================================================
   namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
   {
-    ///  CG with diagonal preconditioner for W-block subsidiary linear
+    /// CG with diagonal preconditioner for W-block subsidiary linear
     /// systems.
     Preconditioner* get_w_cg_preconditioner()
     {
@@ -61,7 +61,7 @@ namespace oomph
 #endif
     } // function get_w_cg_preconditioner
 
-    ///  Hypre Boomer AMG setting for the augmented momentum block
+    /// Hypre Boomer AMG setting for the augmented momentum block
     /// of a 2D Navier-Stokes problem using the simple form of the viscous
     /// term (for serial code).
     Preconditioner* boomer_amg_for_2D_momentum_simple_visc()
@@ -101,7 +101,7 @@ namespace oomph
 #endif
     } // function boomer_amg_for_2D_momentum_simple_visc
 
-    ///  Hypre Boomer AMG setting for the augmented momentum block
+    /// Hypre Boomer AMG setting for the augmented momentum block
     /// of a 2D Navier-Stokes problem using the stress divergence form of the
     /// viscous term (for serial code).
     Preconditioner* boomer_amg_for_2D_momentum_stressdiv_visc()
@@ -141,7 +141,7 @@ namespace oomph
 #endif
     } // function boomer_amg_for_2D_momentum_stressdiv_visc
 
-    ///  Hypre Boomer AMG setting for the augmented momentum block
+    /// Hypre Boomer AMG setting for the augmented momentum block
     /// of a 3D Navier-Stokes problem (for serial code).
     Preconditioner* boomer_amg_for_3D_momentum()
     {
@@ -180,7 +180,7 @@ namespace oomph
 #endif
     } // function boomer_amg_for_3D_momentum
 
-    ///  Hypre Boomer AMG setting for the augmented momentum block
+    /// Hypre Boomer AMG setting for the augmented momentum block
     /// of a 3D Navier-Stokes problem (for serial code).
     Preconditioner* boomer_amg2v22_for_3D_momentum()
     {
@@ -220,7 +220,7 @@ namespace oomph
     } // function boomer_amg_for_3D_momentum
 
 
-    ///  Hypre Boomer AMG setting for the 2D Poisson problem
+    /// Hypre Boomer AMG setting for the 2D Poisson problem
     /// (for serial code).
     Preconditioner* boomer_amg_for_2D_poisson_problem()
     {
@@ -259,7 +259,7 @@ namespace oomph
 #endif
     } // function boomer_amg_for_2D_poisson_problem
 
-    ///  Hypre Boomer AMG setting for the 3D Poisson problem
+    /// Hypre Boomer AMG setting for the 3D Poisson problem
     /// (for serial code).
     Preconditioner* boomer_amg_for_3D_poisson_problem()
     {
@@ -305,7 +305,7 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////
 
-  ///  Apply the preconditioner.
+  /// Apply the preconditioner.
   /// r is the residual (rhs), z will contain the solution.
   void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)
@@ -414,7 +414,7 @@ namespace oomph
     }
   } // end of preconditioner_solve
 
-  ///  Set the meshes,
+  /// Set the meshes,
   /// the first mesh in the vector must be the bulk mesh.
   void LagrangeEnforcedFlowPreconditioner::set_meshes(
     const Vector<Mesh*>& mesh_pt)
@@ -1209,7 +1209,7 @@ namespace oomph
     Preconditioner_has_been_setup = true;
   } // func setup
 
-  ///  Function to set a new momentum matrix preconditioner
+  /// Function to set a new momentum matrix preconditioner
   /// (inexact solver)
   void LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(
     Preconditioner* new_ns_preconditioner_pt)
@@ -1245,7 +1245,7 @@ namespace oomph
   } // func set_navier_stokes_preconditioner
 
   //========================================================================
-  ///  Clears the memory.
+  /// Clears the memory.
   //========================================================================
   void LagrangeEnforcedFlowPreconditioner::clean_up_memory()
   {

@@ -46,14 +46,14 @@
 namespace oomph
 {
   //===========================================================================
-  ///  Base class for all linear iterative solvers.
+  /// Base class for all linear iterative solvers.
   /// This merely defines standard interfaces for linear iterative solvers,
   /// so that different solvers can be used in a clean and transparent manner.
   //===========================================================================
   class IterativeLinearSolver : public LinearSolver
   {
   public:
-    ///  Constructor: Set (default) trivial preconditioner and set
+    /// Constructor: Set (default) trivial preconditioner and set
     /// defaults for tolerance and max. number of iterations
     IterativeLinearSolver() : Preconditioner_setup_time(0)
     {
@@ -130,7 +130,7 @@ namespace oomph
       Doc_convergence_history = false;
     }
 
-    ///  Write convergence history into file with specified filename
+    /// Write convergence history into file with specified filename
     /// (automatically switches on doc). Optional second argument is a string
     /// that can be used (as a zone title) to identify what case
     /// we're running (e.g. what combination of linear solver and
@@ -163,20 +163,20 @@ namespace oomph
       if (Output_file_stream.is_open()) Output_file_stream.close();
     }
 
-    ///   returns the time taken to assemble the jacobian matrix and
+    ///  returns the time taken to assemble the jacobian matrix and
     /// residual vector
     double jacobian_setup_time() const
     {
       return Jacobian_setup_time;
     }
 
-    ///  return the time taken to solve the linear system
+    /// return the time taken to solve the linear system
     double linear_solver_solution_time() const
     {
       return Solution_time;
     }
 
-    ///  returns the the time taken to setup the preconditioner
+    /// returns the the time taken to setup the preconditioner
     virtual double preconditioner_setup_time() const
     {
       return Preconditioner_setup_time;
@@ -223,14 +223,14 @@ namespace oomph
     }
 
   protected:
-    ///  Flag indicating if the convergence history is to be
+    /// Flag indicating if the convergence history is to be
     /// documented
     bool Doc_convergence_history;
 
     /// Output file stream for convergence history
     std::ofstream Output_file_stream;
 
-    ///  Default preconditioner:  The base
+    /// Default preconditioner:  The base
     /// class for preconditioners is a fully functional (if trivial!)
     /// preconditioner.
     static IdentityPreconditioner Default_preconditioner;
@@ -253,15 +253,15 @@ namespace oomph
     /// Preconditioner setup time
     double Preconditioner_setup_time;
 
-    ///  indicates whether the preconditioner should be setup before
+    /// indicates whether the preconditioner should be setup before
     /// solve. Default = true;
     bool Setup_preconditioner_before_solve;
 
-    ///  Should we throw an error instead of just returning when we hit
+    /// Should we throw an error instead of just returning when we hit
     /// the max iterations?
     bool Throw_error_after_max_iter;
 
-    ///  Use the iterative solver as preconditioner
+    /// Use the iterative solver as preconditioner
     bool Use_iterative_solver_as_preconditioner;
 
     /// When the iterative solver is used a preconditioner then we call
@@ -277,7 +277,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  The conjugate gradient method.
+  /// The conjugate gradient method.
   //======================================================================
   template<typename MATRIX>
   class CG : public IterativeLinearSolver
@@ -313,12 +313,12 @@ namespace oomph
     }
 
 
-    ///  Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
@@ -352,7 +352,7 @@ namespace oomph
       this->solve_helper(matrix_pt, rhs, solution);
     }
 
-    ///  Re-solve the system defined by the last assembled Jacobian
+    /// Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
     void resolve(const DoubleVector& rhs, DoubleVector& result);
@@ -387,11 +387,11 @@ namespace oomph
     /// Pointer to matrix
     MATRIX* Matrix_pt;
 
-    ///  Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    ///  Boolean flag to indicate if the matrix pointed to be Matrix_pt
+    /// Boolean flag to indicate if the matrix pointed to be Matrix_pt
     /// can be deleted.
     bool Matrix_can_be_deleted;
   };
@@ -403,7 +403,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  The conjugate gradient method.
+  /// The conjugate gradient method.
   //======================================================================
   template<typename MATRIX>
   class BiCGStab : public IterativeLinearSolver
@@ -438,12 +438,12 @@ namespace oomph
       clean_up_memory();
     }
 
-    ///  Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
@@ -477,7 +477,7 @@ namespace oomph
       this->solve_helper(matrix_pt, rhs, solution);
     }
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix
+    /// Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -489,7 +489,7 @@ namespace oomph
     }
 
 
-    ///  Re-solve the system defined by the last assembled Jacobian
+    /// Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
     void resolve(const DoubleVector& rhs, DoubleVector& result);
@@ -524,11 +524,11 @@ namespace oomph
     /// Pointer to matrix
     MATRIX* Matrix_pt;
 
-    ///  Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    ///  Boolean flag to indicate if the matrix pointed to be Matrix_pt
+    /// Boolean flag to indicate if the matrix pointed to be Matrix_pt
     /// can be deleted.
     bool Matrix_can_be_deleted;
   };
@@ -555,7 +555,7 @@ namespace oomph
     /// Virtual empty destructor
     virtual ~Smoother(){};
 
-    ///  The smoother_solve function performs fixed number of iterations
+    /// The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class. Note that the result vector MUST NOT
@@ -567,7 +567,7 @@ namespace oomph
     /// Set up the smoother for the matrix specified by the pointer
     virtual void smoother_setup(DoubleMatrixBase* matrix_pt) = 0;
 
-    ///  Self-test to check that all the dimensions of the inputs to
+    /// Self-test to check that all the dimensions of the inputs to
     /// solve helper are consistent and everything that needs to be built, is.
     template<typename MATRIX>
     void check_validity_of_solve_helper_inputs(MATRIX* const& matrix_pt,
@@ -576,7 +576,7 @@ namespace oomph
                                                const double& n_dof);
 
   protected:
-    ///  When a derived class object is being used as a smoother in
+    /// When a derived class object is being used as a smoother in
     /// the MG solver (or elsewhere) the residual norm does not need to be
     /// calculated because we're simply performing a fixed number of (smoothing)
     /// iterations. This boolean is used as a flag to indicate that the
@@ -592,7 +592,7 @@ namespace oomph
 
 
   //=========================================================================
-  ///  The Gauss Seidel method
+  /// The Gauss Seidel method
   //=========================================================================
   template<typename MATRIX>
   class GS : public virtual Smoother
@@ -640,7 +640,7 @@ namespace oomph
       Matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
     } // End of smoother_setup
 
-    ///  The smoother_solve function performs fixed number of iterations
+    /// The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
@@ -653,12 +653,12 @@ namespace oomph
       solve_helper(Matrix_pt, rhs, result);
     } // End of smoother_setup
 
-    ///  Solver: Takes pointer to problem and returns the results
+    /// Solver: Takes pointer to problem and returns the results
     /// vector which contains the solution of the linear system defined
     /// by the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
@@ -685,7 +685,7 @@ namespace oomph
       this->solve_helper(matrix_pt, rhs, solution);
     } // End of solve
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix
+    /// Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -696,7 +696,7 @@ namespace oomph
       LinearSolver::solve(matrix_pt, rhs, result);
     } // End of solve
 
-    ///  Re-solve the system defined by the last assembled Jacobian
+    /// Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
     void resolve(const DoubleVector& rhs, DoubleVector& result)
@@ -763,11 +763,11 @@ namespace oomph
     /// Number of iterations taken
     unsigned Iterations;
 
-    ///  Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    ///  Boolean flag to indicate if the matrix pointed to be Matrix_pt
+    /// Boolean flag to indicate if the matrix pointed to be Matrix_pt
     /// can be deleted.
     bool Matrix_can_be_deleted;
   };
@@ -777,7 +777,7 @@ namespace oomph
   ///////////////////////////////////////////////////////////////////////////
 
   //=========================================================================
-  ///  Explicit template specialisation of the Gauss Seidel method for
+  /// Explicit template specialisation of the Gauss Seidel method for
   /// compressed row format matrices
   //=========================================================================
   template<>
@@ -805,7 +805,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const GS&) = delete;
 
-    ///  The smoother_solve function performs fixed number of iterations
+    /// The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
@@ -839,16 +839,16 @@ namespace oomph
       setup_helper(matrix_pt);
     } // End of smoother_setup
 
-    ///  Generic setup function to sort out everything that needs to be
+    /// Generic setup function to sort out everything that needs to be
     /// set up with regards to the input matrix
     void setup_helper(DoubleMatrixBase* matrix_pt);
 
-    ///  Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
@@ -889,7 +889,7 @@ namespace oomph
       solve_helper(matrix_pt, rhs, solution);
     } // End of solve
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix
+    /// Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -900,7 +900,7 @@ namespace oomph
       LinearSolver::solve(matrix_pt, rhs, result);
     } // End of solve
 
-    ///  Re-solve the system defined by the last assembled Jacobian
+    /// Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
     void resolve(const DoubleVector& rhs, DoubleVector& result)
@@ -975,15 +975,15 @@ namespace oomph
     /// Number of iterations taken
     unsigned Iterations;
 
-    ///  Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    ///  Boolean flag to indicate if the matrix pointed to be Matrix_pt
+    /// Boolean flag to indicate if the matrix pointed to be Matrix_pt
     /// can be deleted.
     bool Matrix_can_be_deleted;
 
-    ///  Vector whose i'th entry contains the index of the last entry
+    /// Vector whose i'th entry contains the index of the last entry
     /// below or on the diagonal of the i'th row of the matrix
     Vector<int> Index_of_diagonal_entries;
   };
@@ -1106,7 +1106,7 @@ namespace oomph
       }
     } // End of extract_diagonal_entries
 
-    ///  The smoother_solve function performs fixed number of iterations
+    /// The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
@@ -1119,13 +1119,13 @@ namespace oomph
       solve_helper(Matrix_pt, rhs, solution);
     } // End of smoother_solve
 
-    ///  Use damped Jacobi iteration as an IterativeLinearSolver:
+    /// Use damped Jacobi iteration as an IterativeLinearSolver:
     /// This obtains the Jacobian matrix J and the residual vector r
     /// (needed for the Newton method) from the problem's get_jacobian
     /// function and returns the result of Jx=r.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
@@ -1154,7 +1154,7 @@ namespace oomph
       solve_helper(matrix_pt, rhs, solution);
     } // End of solve
 
-    ///  Re-solve the system defined by the last assembled Jacobian
+    /// Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
     void resolve(const DoubleVector& rhs, DoubleVector& result)
@@ -1186,7 +1186,7 @@ namespace oomph
     } // End of iterations
 
   private:
-    ///  This is where the actual work is done -- different
+    /// This is where the actual work is done -- different
     /// implementations for different matrix types.
     void solve_helper(DoubleMatrixBase* const& matrix_pt,
                       const DoubleVector& rhs,
@@ -1198,11 +1198,11 @@ namespace oomph
     /// Vector containing the diagonal entries of A
     Vector<double> Matrix_diagonal;
 
-    ///  Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    ///  Boolean flag to indicate if the matrix pointed to be Matrix_pt
+    /// Boolean flag to indicate if the matrix pointed to be Matrix_pt
     /// can be deleted.
     bool Matrix_can_be_deleted;
 
@@ -1220,7 +1220,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  The GMRES method.
+  /// The GMRES method.
   //======================================================================
   template<typename MATRIX>
   class GMRES : public IterativeLinearSolver
@@ -1263,12 +1263,12 @@ namespace oomph
       Compute_gradient = true;
     }
 
-    ///  Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
@@ -1292,7 +1292,7 @@ namespace oomph
     }
 
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix
+    /// Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -1303,7 +1303,7 @@ namespace oomph
       LinearSolver::solve(matrix_pt, rhs, result);
     }
 
-    ///  Re-solve the system defined by the last assembled Jacobian
+    /// Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
     void resolve(const DoubleVector& rhs, DoubleVector& result);
@@ -1314,13 +1314,13 @@ namespace oomph
       return Iterations;
     }
 
-    ///  access function indicating whether restarted GMRES is used
+    /// access function indicating whether restarted GMRES is used
     bool iteration_restart() const
     {
       return Iteration_restart;
     }
 
-    ///  switches on iteration restarting and takes as an argument the
+    /// switches on iteration restarting and takes as an argument the
     /// number of iterations after which the construction of the
     /// orthogonalisation basis vectors should be restarted
     void enable_iteration_restart(const unsigned& restart)
@@ -1335,13 +1335,13 @@ namespace oomph
       Iteration_restart = false;
     }
 
-    ///  Set left preconditioning (the default)
+    /// Set left preconditioning (the default)
     void set_preconditioner_LHS()
     {
       Preconditioner_LHS = true;
     }
 
-    ///  Enable right preconditioning
+    /// Enable right preconditioning
     void set_preconditioner_RHS()
     {
       Preconditioner_LHS = false;
@@ -1440,7 +1440,7 @@ namespace oomph
       }
     } // End of update
 
-    ///  Helper function: Generate a plane rotation. This is done by
+    /// Helper function: Generate a plane rotation. This is done by
     /// finding the values of \f$ \cos(\theta) \f$ (i.e. cs) and \sin(\theta)
     /// (i.e. sn) such that:
     /// \f[
@@ -1510,7 +1510,7 @@ namespace oomph
       }
     } // End of generate_plane_rotation
 
-    ///  Helper function: Apply plane rotation. This is done using the
+    /// Helper function: Apply plane rotation. This is done using the
     /// update:
     /// \f[
     ///\begin{bmatrix}
@@ -1542,7 +1542,7 @@ namespace oomph
     /// Number of iterations taken
     unsigned Iterations;
 
-    ///  The number of iterations before the iteration proceedure is
+    /// The number of iterations before the iteration proceedure is
     /// restarted if iteration restart is used
     unsigned Restart;
 
@@ -1552,19 +1552,19 @@ namespace oomph
     /// Pointer to matrix
     MATRIX* Matrix_pt;
 
-    ///  Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    ///  Boolean flag to indicate if the matrix pointed to be Matrix_pt
+    /// Boolean flag to indicate if the matrix pointed to be Matrix_pt
     /// can be deleted.
     bool Matrix_can_be_deleted;
 
-    ///  boolean indicating use of left hand preconditioning (if true)
+    /// boolean indicating use of left hand preconditioning (if true)
     /// or right hand preconditioning (if false)
     bool Preconditioner_LHS;
 
-    ///  Storage for the time spent applying the preconditioner
+    /// Storage for the time spent applying the preconditioner
     double Preconditioner_application_time;
   };
 
@@ -1575,7 +1575,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  The GMRES method.
+  /// The GMRES method.
   //======================================================================
   class AugmentedProblemGMRES : public IterativeLinearSolver
   {
@@ -1599,7 +1599,7 @@ namespace oomph
       Iteration_restart = false;
     }
 
-    ///  Destructor: Clean up storage
+    /// Destructor: Clean up storage
     virtual ~AugmentedProblemGMRES()
     {
       clean_up_memory();
@@ -1618,12 +1618,12 @@ namespace oomph
       clean_up_memory();
     } // End of disable_resolve
 
-    ///  Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
@@ -1659,7 +1659,7 @@ namespace oomph
       this->solve_helper(matrix_pt, rhs, solution);
     } // End of solve
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix
+    /// Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -1670,7 +1670,7 @@ namespace oomph
       LinearSolver::solve(matrix_pt, rhs, result);
     }
 
-    ///  Re-solve the system defined by the last assembled Jacobian
+    /// Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
     void resolve(const DoubleVector& rhs, DoubleVector& result);
@@ -1681,13 +1681,13 @@ namespace oomph
       return Iterations;
     }
 
-    ///  access function indicating whether restarted GMRES is used
+    /// access function indicating whether restarted GMRES is used
     bool iteration_restart() const
     {
       return Iteration_restart;
     }
 
-    ///  switches on iteration restarting and takes as an argument the
+    /// switches on iteration restarting and takes as an argument the
     /// number of iterations after which the construction of the
     /// orthogonalisation basis vectors should be restarted
     void enable_iteration_restart(const unsigned& restart)
@@ -1702,13 +1702,13 @@ namespace oomph
       Iteration_restart = false;
     } // End of disable_iteration_restart
 
-    ///  Set left preconditioning (the default)
+    /// Set left preconditioning (the default)
     void set_preconditioner_LHS()
     {
       Preconditioner_LHS = true;
     }
 
-    ///  Enable right preconditioning
+    /// Enable right preconditioning
     void set_preconditioner_RHS()
     {
       Preconditioner_LHS = false;
@@ -1725,7 +1725,7 @@ namespace oomph
       }
     } // End of clean_up_memory
 
-    ///  Multiply the vector x by the augmented system matrix
+    /// Multiply the vector x by the augmented system matrix
     void augmented_matrix_multiply(CRDoubleMatrix* matrix_pt,
                                    const DoubleVector& x,
                                    DoubleVector& soln)
@@ -1763,7 +1763,7 @@ namespace oomph
       soln[n_dof] = C_pt->dot(x_small);
     } // End of augmented_matrix_multiply
 
-    ///  Apply the block-diagonal Schur complement preconditioner to
+    /// Apply the block-diagonal Schur complement preconditioner to
     /// compute the LHS which has size N+1 (the augmented system size)
     void apply_schur_complement_preconditioner(const DoubleVector& rhs,
                                                DoubleVector& soln)
@@ -1887,7 +1887,7 @@ namespace oomph
       }
     } // End of update
 
-    ///  Helper function: Generate a plane rotation. This is done by
+    /// Helper function: Generate a plane rotation. This is done by
     /// finding the values of \f$ \cos(\theta) \f$ (i.e. cs) and \sin(\theta)
     /// (i.e. sn) such that:
     /// \f[
@@ -1957,7 +1957,7 @@ namespace oomph
       }
     } // End of generate_plane_rotation
 
-    ///  Helper function: Apply plane rotation. This is done using the
+    /// Helper function: Apply plane rotation. This is done using the
     /// update:
     /// \f[
     ///\begin{bmatrix}
@@ -1989,7 +1989,7 @@ namespace oomph
     /// Number of iterations taken
     unsigned Iterations;
 
-    ///  The number of iterations before the iteration proceedure is
+    /// The number of iterations before the iteration proceedure is
     /// restarted if iteration restart is used
     unsigned Restart;
 
@@ -2014,15 +2014,15 @@ namespace oomph
     /// The scalar component of the Schur complement preconditioner
     double Schur_complement_scalar;
 
-    ///  Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    ///  Boolean flag to indicate if the matrix pointed to be Matrix_pt
+    /// Boolean flag to indicate if the matrix pointed to be Matrix_pt
     /// can be deleted.
     bool Matrix_can_be_deleted;
 
-    ///  boolean indicating use of left hand preconditioning (if true)
+    /// boolean indicating use of left hand preconditioning (if true)
     /// or right hand preconditioning (if false)
     bool Preconditioner_LHS;
   };

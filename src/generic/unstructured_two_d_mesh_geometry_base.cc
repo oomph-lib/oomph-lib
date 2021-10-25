@@ -127,7 +127,7 @@ namespace oomph
     }
 
 
-    ///  Make (partial) deep copy of TriangulateIO object. We only copy
+    /// Make (partial) deep copy of TriangulateIO object. We only copy
     /// those items we need within oomph-lib's adaptation procedures.
     /// Warnings are issued if triangulate_io contains data that is not
     /// not copied, unless quiet=true;
@@ -303,7 +303,7 @@ namespace oomph
       return triangle_out;
     }
 
-    ///  Write the triangulateio data to disk as a poly file,
+    /// Write the triangulateio data to disk as a poly file,
     /// mainly used for debugging
     void write_triangulateio_to_polyfile(TriangulateIO& triangle_io,
                                          std::ostream& poly_file)
@@ -704,7 +704,7 @@ namespace oomph
     }
 
 
-    ///  Write all the triangulateio data to disk in a dump file
+    /// Write all the triangulateio data to disk in a dump file
     /// that can then be used to restart simulations
     void dump_triangulateio(TriangulateIO& triangle_io, std::ostream& dump_file)
     {
@@ -848,7 +848,7 @@ namespace oomph
       }
     }
 
-    ///  Read the triangulateio data from a dump file on
+    /// Read the triangulateio data from a dump file on
     /// disk, which can then be used to restart simulations
     void read_triangulateio(std::istream& restart_file,
                             TriangulateIO& triangle_io)
@@ -1111,7 +1111,7 @@ namespace oomph
 
 
   // =======================================================================
-  //  Connects the initial vertex of the curve section to a desired
+  // Connects the initial vertex of the curve section to a desired
   /// target polyline by specifying the vertex number. There is a checking
   /// which verifies that the initial vertex is close enough to the
   /// destination vertex on the target polyline by no more than the specified
@@ -1180,7 +1180,7 @@ namespace oomph
   }
 
   // =======================================================================
-  //  Connects the final vertex of the curve section to a desired
+  // Connects the final vertex of the curve section to a desired
   /// target polyline by specifying the vertex number. There is a checking
   /// which verifies that the final vertex is close enough to the
   /// destination vertex on the target polyline by no more than the specified
@@ -1249,7 +1249,7 @@ namespace oomph
   }
 
   // =======================================================================
-  //  Connects the initial vertex of the curve section to a desired
+  // Connects the initial vertex of the curve section to a desired
   /// target curviline by specifying the s value (intrinsic value on the
   /// geometric object of the curviline) where to connect on the target
   /// curviline. There is a checking which verifies that the initial vertex
@@ -1328,7 +1328,7 @@ namespace oomph
   }
 
   // =======================================================================
-  //  Connects the final vertex of the curve section to a desired
+  // Connects the final vertex of the curve section to a desired
   /// target curviline by specifying the s value (intrinsic value on the
   /// geometric object of the curviline) where to connect on the target
   /// curviline. There is a checking which verifies that the final vertex
@@ -3409,7 +3409,7 @@ namespace oomph
   }
 
   //========================================================================
-  ///  Helps to add information to the connection matrix of the
+  /// Helps to add information to the connection matrix of the
   /// given polyline
   //========================================================================
   void UnstructuredTwoDMeshGeometryBase::add_connection_matrix_info_helper(
@@ -3536,7 +3536,7 @@ namespace oomph
   }
 
   //========================================================================
-  //  Initialize the base vertex structure, set every vertex to
+  // Initialize the base vertex structure, set every vertex to
   // no visited and not being a base vertex
   //========================================================================
   void UnstructuredTwoDMeshGeometryBase::initialise_base_vertex(
@@ -3573,7 +3573,7 @@ namespace oomph
   }
 
   //========================================================================
-  //  Helps to identify the base vertex of the given polyline
+  // Helps to identify the base vertex of the given polyline
   //========================================================================
   void UnstructuredTwoDMeshGeometryBase::add_base_vertex_info_helper(
     TriangleMeshPolyLine* polyline_pt,
@@ -4114,7 +4114,7 @@ namespace oomph
   }
 
   //======================================================================
-  ///  Gets the vertex number on the destination polyline (used /
+  /// Gets the vertex number on the destination polyline (used /
   /// to create the connections among shared boundaries)
   //======================================================================
   const bool UnstructuredTwoDMeshGeometryBase::
@@ -4166,7 +4166,7 @@ namespace oomph
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
   //======================================================================
-  ///  Helper function to copy the connection information from
+  /// Helper function to copy the connection information from
   /// the input curve(polyline or curviline) to the output polyline
   //======================================================================
   void UnstructuredTwoDMeshGeometryBase::copy_connection_information(
@@ -4427,7 +4427,7 @@ namespace oomph
   }
 
   //======================================================================
-  ///  Helper function to copy the connection information from
+  /// Helper function to copy the connection information from
   /// the input curve(polyline or curviline) to the output sub-polyline
   //======================================================================
   void UnstructuredTwoDMeshGeometryBase::

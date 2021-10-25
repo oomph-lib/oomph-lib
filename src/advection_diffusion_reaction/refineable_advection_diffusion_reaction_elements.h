@@ -43,7 +43,7 @@
 namespace oomph
 {
   //======================================================================
-  ///  A version of the Advection Diffusion Reaction equations that can be
+  /// A version of the Advection Diffusion Reaction equations that can be
   /// used with non-uniform mesh refinement. In essence, the class overloads
   /// the fill_in_generic_residual_contribution_adv_diff_react()
   /// function so that contributions
@@ -57,7 +57,7 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///  Empty Constructor
+    /// Empty Constructor
     RefineableAdvectionDiffusionReactionEquations()
       : AdvectionDiffusionReactionEquations<NREAGENT, DIM>(),
         RefineableElement(),
@@ -82,7 +82,7 @@ namespace oomph
       return NREAGENT * DIM;
     }
 
-    ///  Get 'flux' for Z2 error recovery:
+    /// Get 'flux' for Z2 error recovery:
     /// Standard flux.from AdvectionDiffusionReaction equations
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -90,7 +90,7 @@ namespace oomph
     }
 
 
-    ///  Get the function values c in Vector.
+    /// Get the function values c in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -125,7 +125,7 @@ namespace oomph
       }
     }
 
-    ///  Get the function values c in Vector.
+    /// Get the function values c in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -185,7 +185,7 @@ namespace oomph
     }
 
   protected:
-    ///  Add the element's contribution to the elemental residual vector
+    /// Add the element's contribution to the elemental residual vector
     /// and/or Jacobian matrix
     /// flag=1: compute both
     /// flag=0: compute only residual vector
@@ -198,7 +198,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Refineable version of QAdvectionDiffusionReactionElement.
+  /// Refineable version of QAdvectionDiffusionReactionElement.
   /// Inherit from the standard QAdvectionDiffusionReactionElement and the
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
@@ -210,7 +210,7 @@ namespace oomph
       public virtual RefineableQElement<DIM>
   {
   public:
-    ///  Empty Constructor:
+    /// Empty Constructor:
     RefineableQAdvectionDiffusionReactionElement()
       : RefineableElement(),
         RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>(),
@@ -239,14 +239,14 @@ namespace oomph
       return NREAGENT;
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>::
         nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>::
@@ -256,14 +256,14 @@ namespace oomph
     /// Rebuild from sons: empty
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return (NNODE_1D - 1);
     }
 
-    ///   Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Empty.
     void further_setup_hanging_nodes() {}
   };
@@ -285,7 +285,7 @@ namespace oomph
     : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };

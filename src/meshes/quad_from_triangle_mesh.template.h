@@ -71,7 +71,7 @@ namespace oomph
                                public virtual QuadMeshBase
   {
   public:
-    ///  Empty constructor
+    /// Empty constructor
     QuadFromTriangleMesh()
     {
 #ifdef OOMPH_HAS_TRIANGLE_LIB
@@ -84,7 +84,7 @@ namespace oomph
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
     }
 
-    ///  Constructor with the input files
+    /// Constructor with the input files
     QuadFromTriangleMesh(
       const std::string& node_file_name,
       const std::string& element_file_name,
@@ -127,7 +127,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    ///  Build mesh, based on the specifications on
+    /// Build mesh, based on the specifications on
     /// TriangleMeshParameters. All the actual work is done
     /// in UnstructuredTwoDMeshGeometryBase
     QuadFromTriangleMesh(
@@ -362,7 +362,7 @@ namespace oomph
       this->snap_nodes_onto_geometric_objects();
     }
 
-    ///  A general-purpose construction function that builds the
+    /// A general-purpose construction function that builds the
     /// mesh once the different specific constructors have assembled the
     /// appropriate information.
     void generic_constructor(
@@ -579,7 +579,7 @@ namespace oomph
   public:
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    ///  Build mesh, based on the specifications on
+    /// Build mesh, based on the specifications on
     /// TriangleMeshParameters
     RefineableQuadFromTriangleMesh(
       TriangleMeshParameters& triangle_mesh_parameters,
@@ -617,7 +617,7 @@ namespace oomph
     /// boundary)
     void adapt(const Vector<double>& elem_error);
 
-    ///  Build mesh, based on the polyfiles
+    /// Build mesh, based on the polyfiles
     RefineableQuadFromTriangleMesh(
       const std::string& node_file_name,
       const std::string& element_file_name,
@@ -666,7 +666,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    ///  Build mesh, based on closed curve that specifies
+    /// Build mesh, based on closed curve that specifies
     /// the outer boundary of the domain and any number of internal
     /// clsed curves. Specify target area for uniform element size.
     SolidQuadFromTriangleMesh(
@@ -699,7 +699,7 @@ namespace oomph
       public virtual SolidMesh
   {
   public:
-    ///  Build mesh from specified triangulation and associated
+    /// Build mesh from specified triangulation and associated
     /// target areas for elements in it.
     RefineableSolidQuadFromTriangleMesh(
       const std::string& node_file_name,
@@ -719,7 +719,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-    ///  Build mesh, based on the specifications on
+    /// Build mesh, based on the specifications on
     /// TriangleMeshParameter
     RefineableSolidQuadFromTriangleMesh(
       TriangleMeshParameters& triangle_mesh_parameters,

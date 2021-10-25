@@ -199,7 +199,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  The destructor cleans up the memory allocated
+  /// The destructor cleans up the memory allocated
   /// for shape function storage.
   //=======================================================================
   StorableShapeElementBase::~StorableShapeElementBase()
@@ -665,7 +665,7 @@ namespace oomph
   }
 
   //=========================================================================
-  ///  Return the shape function stored at the ipt-th integration
+  /// Return the shape function stored at the ipt-th integration
   /// point.
   //=========================================================================
   void StorableShapeElementBase::shape_at_knot(const unsigned& ipt,
@@ -686,7 +686,7 @@ namespace oomph
 
 
   //=========================================================================
-  ///  Return the shape function and its derivatives w.r.t. the local
+  /// Return the shape function and its derivatives w.r.t. the local
   /// coordinates at the ipt-th integration point.
   //=========================================================================
   void StorableShapeElementBase::dshape_local_at_knot(const unsigned& ipt,
@@ -708,7 +708,7 @@ namespace oomph
   }
 
   //=========================================================================
-  ///  Return the shape function and its first and second derivatives
+  /// Return the shape function and its first and second derivatives
   /// w.r.t. the local coordinates at the ipt-th integration point.
   //=========================================================================
   void StorableShapeElementBase::d2shape_local_at_knot(const unsigned& ipt,
@@ -733,7 +733,7 @@ namespace oomph
 
 
   //==========================================================================
-  ///  Compute the geometric shape functions, and
+  /// Compute the geometric shape functions, and
   /// derivatives w.r.t eulerian coordinates at the ipt-th integration point.
   /// If the values have already been computed, return the stored values.
   //==========================================================================
@@ -758,7 +758,7 @@ namespace oomph
   }
 
   //==========================================================================
-  ///  Return the geometric shape functions, first and second
+  /// Return the geometric shape functions, first and second
   /// derivatives w.r.t eulerian coordinates at the ipt-th integration point.
   /// If the values have already been computed, return the stored values.
   //==========================================================================
@@ -783,7 +783,7 @@ namespace oomph
   }
 
   //==========================================================================
-  ///  Return the Jacobian of the mapping between the local and global
+  /// Return the Jacobian of the mapping between the local and global
   /// coordinates. If the value has been precomputed return that
   //==========================================================================
   double StorableShapeElementBase::J_eulerian_at_knot(const unsigned& ipt) const
@@ -1112,7 +1112,7 @@ namespace oomph
 
 
   //==========================================================================
-  ///  Compute the geometric shape functions, and
+  /// Compute the geometric shape functions, and
   /// derivatives w.r.t Lagrangian coordinates at the ipt-th integration point.
   /// If the values have already been computed, return the stored values.
   //==========================================================================
@@ -1136,7 +1136,7 @@ namespace oomph
   }
 
   //==========================================================================
-  ///  Compute the geometric shape functions, first and second
+  /// Compute the geometric shape functions, first and second
   /// derivatives w.r.t Lagrangian coordinates at the ipt-th integration point.
   /// If the values have already been computed, return the stored values.
   //==========================================================================

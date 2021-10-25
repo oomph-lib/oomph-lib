@@ -41,7 +41,7 @@
 namespace oomph
 {
   //=====================================================================
-  ///  Base class for strain energy functions to be used in solid
+  /// Base class for strain energy functions to be used in solid
   /// mechanics computations.
   //====================================================================
   class StrainEnergyFunction
@@ -83,7 +83,7 @@ namespace oomph
     }
 
 
-    ///  Return the derivatives of the strain energy function with
+    /// Return the derivatives of the strain energy function with
     /// respect to the components of the strain tensor (default is to use
     /// finite differences).
     virtual void derivative(const DenseMatrix<double>& gamma,
@@ -96,7 +96,7 @@ namespace oomph
     }
 
 
-    ///  Return the derivatives of the strain energy function with
+    /// Return the derivatives of the strain energy function with
     /// respect to the strain invariants. Default version is to use finite
     /// differences
     virtual void derivatives(Vector<double>& I, Vector<double>& dWdI)
@@ -122,7 +122,7 @@ namespace oomph
       }
     }
 
-    ///  Pure virtual function in which the user must declare if the
+    /// Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode.
@@ -136,7 +136,7 @@ namespace oomph
 
 
   //=====================================================================
-  ///  MooneyRivlin strain-energy function.
+  /// MooneyRivlin strain-energy function.
   /// with constitutive parameters C1 and C2:
   /// \f[
   /// W = C_1 (I_0 - 3) + C_2 (I_1 - 3)
@@ -168,7 +168,7 @@ namespace oomph
     }
 
 
-    ///  Return the derivatives of the strain energy function with
+    /// Return the derivatives of the strain energy function with
     /// respect to the strain invariants
     void derivatives(Vector<double>& I, Vector<double>& dWdI)
     {
@@ -177,7 +177,7 @@ namespace oomph
       dWdI[2] = 0.0;
     }
 
-    ///  Pure virtual function in which the user must declare if the
+    /// Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode. True
@@ -202,7 +202,7 @@ namespace oomph
 
 
   //=====================================================================
-  ///  Generalisation of Mooney Rivlin constitutive law to compressible
+  /// Generalisation of Mooney Rivlin constitutive law to compressible
   /// media as suggested on p. 553 of Fung, Y.C. & Tong, P. "Classical and
   /// Computational Solid Mechanics" World Scientific (2001).
   /// Input parameters are Young's modulus E, Poisson ratio nu and
@@ -216,7 +216,7 @@ namespace oomph
   class GeneralisedMooneyRivlin : public StrainEnergyFunction
   {
   public:
-    ///  Constructor takes the pointers to the constitutive parameters:
+    /// Constructor takes the pointers to the constitutive parameters:
     /// Poisson's ratio, the Mooney-Rivlin parameter. Young's modulus is set
     /// to 1, implying that it has been used to scale the stresses
     GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt)
@@ -228,7 +228,7 @@ namespace oomph
     {
     }
 
-    ///  Constructor takes the pointers to the constitutive parameters:
+    /// Constructor takes the pointers to the constitutive parameters:
     /// Poisson's ratio, the Mooney-Rivlin parameter and Young's modulus
     GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt, double* e_pt)
       : StrainEnergyFunction(),
@@ -264,7 +264,7 @@ namespace oomph
     }
 
 
-    ///  Return the derivatives of the strain energy function with
+    /// Return the derivatives of the strain energy function with
     /// respect to the strain invariants
     void derivatives(Vector<double>& I, Vector<double>& dWdI)
     {
@@ -277,7 +277,7 @@ namespace oomph
     }
 
 
-    ///  Pure virtual function in which the user must declare if the
+    /// Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode. False.
@@ -296,7 +296,7 @@ namespace oomph
     /// Young's modulus
     double* E_pt;
 
-    ///  Boolean flag to indicate if storage for elastic modulus
+    /// Boolean flag to indicate if storage for elastic modulus
     /// must be deleted in destructor
     bool Must_delete_e;
   };
@@ -488,25 +488,25 @@ namespace oomph
   class ConstitutiveLaw
   {
   protected:
-    ///  Test whether a matrix is square
+    /// Test whether a matrix is square
     bool is_matrix_square(const DenseMatrix<double>& M);
 
-    ///  Test whether two matrices are of equal dimensions
+    /// Test whether two matrices are of equal dimensions
     bool are_matrices_of_equal_dimensions(const DenseMatrix<double>& M1,
                                           const DenseMatrix<double>& M2);
 
-    ///  Check for errors in the input,
+    /// Check for errors in the input,
     /// i.e. check that the dimensions of the arrays are all consistent
     void error_checking_in_input(const DenseMatrix<double>& g,
                                  const DenseMatrix<double>& G,
                                  DenseMatrix<double>& sigma);
 
-    ///  Calculate a contravariant tensor from a covariant tensor,
+    /// Calculate a contravariant tensor from a covariant tensor,
     /// and return the determinant of the covariant tensor.
     double calculate_contravariant(const DenseMatrix<double>& Gcov,
                                    DenseMatrix<double>& Gcontra);
 
-    ///  Calculate the derivatives of the contravariant tensor
+    /// Calculate the derivatives of the contravariant tensor
     /// and the derivatives of the determinant of the covariant tensor
     /// with respect to the components of the covariant tensor
     void calculate_d_contravariant_dG(const DenseMatrix<double>& Gcov,
@@ -523,7 +523,7 @@ namespace oomph
     virtual ~ConstitutiveLaw() {}
 
 
-    ///  Calculate the contravariant 2nd Piola Kirchhoff
+    /// Calculate the contravariant 2nd Piola Kirchhoff
     /// stress tensor. Arguments are the
     /// covariant undeformed and deformed metric tensor and the
     /// matrix in which to return the stress tensor
@@ -532,7 +532,7 @@ namespace oomph
       const DenseMatrix<double>& G,
       DenseMatrix<double>& sigma) = 0;
 
-    ///  Calculate the derivatives of the contravariant
+    /// Calculate the derivatives of the contravariant
     /// 2nd Piola Kirchhoff stress tensor with respect to the deformed metric
     /// tensor. Arguments are the
     /// covariant undeformed and deformed metric tensor, the current value of
@@ -552,7 +552,7 @@ namespace oomph
       const bool& symmetrize_tensor = true);
 
 
-    ///  Calculate the deviatoric part
+    /// Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
     /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
     /// Also return the contravariant deformed metric
@@ -575,7 +575,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Calculate the derivatives of the contravariant
+    /// Calculate the derivatives of the contravariant
     /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
     /// with respect to the deformed metric tensor.
     /// Also return the derivatives of the determinant of the
@@ -599,7 +599,7 @@ namespace oomph
       const bool& symmetrize_tensor = true);
 
 
-    ///  Calculate the deviatoric part of the contravariant
+    /// Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
     /// deformed metric tensor, the generalised dilatation, \f$ d, \f$ and
     /// the inverse of the bulk modulus \f$ \kappa\f$. This form is appropriate
@@ -621,7 +621,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Calculate the derivatives of the contravariant
+    /// Calculate the derivatives of the contravariant
     /// 2nd Piola Kirchoff stress tensor with respect to the deformed metric
     /// tensor. Also return the derivatives of the generalised dilatation,
     /// \f$ d, \f$ with respect to the deformed metric tensor.
@@ -643,7 +643,7 @@ namespace oomph
       const bool& symmetrize_tensor = true);
 
 
-    ///  Pure virtual function in which the user must declare if the
+    /// Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode.
@@ -745,7 +745,7 @@ namespace oomph
       if (Must_delete_e) delete E_pt;
     }
 
-    ///  Calculate the contravariant 2nd Piola Kirchhoff
+    /// Calculate the contravariant 2nd Piola Kirchhoff
     /// stress tensor. Arguments are the
     /// covariant undeformed and deformed metric tensor and the
     /// matrix in which to return the stress tensor
@@ -754,7 +754,7 @@ namespace oomph
                                                  DenseMatrix<double>& sigma);
 
 
-    ///  Calculate the deviatoric part
+    /// Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
     /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
     /// Also return the contravariant deformed metric
@@ -771,7 +771,7 @@ namespace oomph
                                                  double& Gdet);
 
 
-    ///  Calculate the deviatoric part of the contravariant
+    /// Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
     /// deformed metric tensor, the generalised dilatation, \f$ d, \f$ and
     /// the inverse of the bulk modulus \f$ \kappa\f$. This form is appropriate
@@ -787,7 +787,7 @@ namespace oomph
                                                  double& inv_kappa);
 
 
-    ///  Pure virtual function in which the writer must declare if the
+    /// Pure virtual function in which the writer must declare if the
     /// constitutive equation requires an incompressible formulation
     /// in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode. False.
@@ -803,7 +803,7 @@ namespace oomph
     /// Young's modulus
     double* E_pt;
 
-    ///  Boolean flag to indicate if storage for elastic modulus
+    /// Boolean flag to indicate if storage for elastic modulus
     /// must be deleted in destructor
     bool Must_delete_e;
   };
@@ -832,7 +832,7 @@ namespace oomph
     {
     }
 
-    ///  Calculate the contravariant 2nd Piola Kirchhoff
+    /// Calculate the contravariant 2nd Piola Kirchhoff
     /// stress tensor. Arguments are the
     /// covariant undeformed and deformed metric tensor and the
     /// matrix in which to return the stress tensor.
@@ -842,7 +842,7 @@ namespace oomph
                                                  DenseMatrix<double>& sigma);
 
 
-    ///  Calculate the deviatoric part
+    /// Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
     /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
     /// Also return the contravariant deformed metric
@@ -859,7 +859,7 @@ namespace oomph
                                                  double& Gdet);
 
 
-    ///  Calculate the deviatoric part of the contravariant
+    /// Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
     /// deformed metric tensor, the generalised dilatation, \f$ d, \f$ and
     /// the inverse of the bulk modulus \f$ \kappa\f$. This form is appropriate
@@ -875,7 +875,7 @@ namespace oomph
                                                  double& inv_kappa);
 
 
-    ///  State if the constitutive equation requires an incompressible
+    /// State if the constitutive equation requires an incompressible
     /// formulation in which the volume constraint is enforced explicitly.
     /// Used as a sanity check in PARANOID mode. This is determined
     /// by interrogating the associated strain energy function.

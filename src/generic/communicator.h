@@ -46,7 +46,7 @@ namespace oomph
   class DenseMatrix;
 
   //=============================================================================
-  ///  An oomph-lib wrapper to the MPI_Comm communicator object. Just
+  /// An oomph-lib wrapper to the MPI_Comm communicator object. Just
   /// contains an MPI_Comm object (which is a pointer) and wrappers to
   /// the MPI_... methods.
   //=============================================================================
@@ -118,7 +118,7 @@ namespace oomph
     }
 #endif
 
-    ///  Destructor. If MPI and this preconditioner owns the MPI_Comm
+    /// Destructor. If MPI and this preconditioner owns the MPI_Comm
     /// object then MPI_Comm_free is called, otherwise nothing happens as
     /// the destruction of the underlying MPI_Comm object is the responsibility
     /// of another communicator.
@@ -191,7 +191,7 @@ namespace oomph
 #endif
     }
 
-    ///  == operator - only returns true if communicators are MPI_IDENT,
+    /// == operator - only returns true if communicators are MPI_IDENT,
     /// i.e. if both group and context are the same
     bool operator==(const OomphCommunicator& other_comm) const
     {
@@ -219,7 +219,7 @@ namespace oomph
 #endif
     }
 
-    ///  != operator returns !(==operator) (see ==operator for more
+    /// != operator returns !(==operator) (see ==operator for more
     /// details)
     bool operator!=(const OomphCommunicator& other_comm) const
     {
@@ -227,7 +227,7 @@ namespace oomph
     }
 
 #ifdef OOMPH_HAS_MPI
-    ///  split the communicator: color is an integer label for the sub
+    /// split the communicator: color is an integer label for the sub
     /// group of processors. key is the rank in this sub group
     OomphCommunicator* split(const int& color, const int& key)
     {
@@ -353,12 +353,12 @@ namespace oomph
     /// the MPI_Comm communicator
     MPI_Comm Comm;
 
-    ///  boolean indiacting whether this communicator owns the underlying
+    /// boolean indiacting whether this communicator owns the underlying
     /// MPI_Comm - if so the destructor will free
     /// the communicator
     bool Owns_mpi_comm;
 
-    ///  boolean to indicate if this communicator is for serial problems.
+    /// boolean to indicate if this communicator is for serial problems.
     /// This is true when serial codes are compiled under MPI
     bool Serial_communicator;
 

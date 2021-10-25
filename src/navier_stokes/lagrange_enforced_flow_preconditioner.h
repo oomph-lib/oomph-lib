@@ -56,33 +56,33 @@ namespace oomph
   //==========================================================================
   namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
   {
-    ///  CG with diagonal preconditioner for W-block subsidiary linear
+    /// CG with diagonal preconditioner for W-block subsidiary linear
     /// systems.
     extern Preconditioner* get_w_cg_preconditioner();
 
-    ///  Hypre Boomer AMG setting for the augmented momentum block
+    /// Hypre Boomer AMG setting for the augmented momentum block
     /// of a 2D Navier-Stokes problem using the simple form of the viscous
     /// term (for serial code).
     extern Preconditioner* boomer_amg_for_2D_momentum_simple_visc();
 
-    ///  Hypre Boomer AMG setting for the augmented momentum block
+    /// Hypre Boomer AMG setting for the augmented momentum block
     /// of a 2D Navier-Stokes problem using the stress divergence form of the
     /// viscous term (for serial code).
     extern Preconditioner* boomer_amg_for_2D_momentum_stressdiv_visc();
 
-    ///  Hypre Boomer AMG setting for the augmented momentum block
+    /// Hypre Boomer AMG setting for the augmented momentum block
     /// of a 3D Navier-Stokes problem (for serial code).
     extern Preconditioner* boomer_amg_for_3D_momentum();
 
-    ///  Hypre Boomer AMG setting for the augmented momentum block
+    /// Hypre Boomer AMG setting for the augmented momentum block
     /// of a 3D Navier-Stokes problem (for serial code).
     extern Preconditioner* boomer_amg2v22_for_3D_momentum();
 
-    ///  Hypre Boomer AMG setting for the 2D Poisson problem
+    /// Hypre Boomer AMG setting for the 2D Poisson problem
     /// (for serial code).
     extern Preconditioner* boomer_amg_for_2D_poisson_problem();
 
-    ///  Hypre Boomer AMG setting for the 3D Poisson problem
+    /// Hypre Boomer AMG setting for the 3D Poisson problem
     /// (for serial code).
     extern Preconditioner* boomer_amg_for_3D_poisson_problem();
 
@@ -91,7 +91,7 @@ namespace oomph
 
 
   //==========================================================================
-  ///  The preconditioner for the Lagrange multiplier constrained
+  /// The preconditioner for the Lagrange multiplier constrained
   /// Navier-Stokes equations. The velocity components are constrained by
   /// Lagrange multiplier, which are applied via OOMPH-LIB's FACE elements.
   ///
@@ -167,7 +167,7 @@ namespace oomph
     : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
-    ///  This preconditioner includes the option to use subsidiary
+    /// This preconditioner includes the option to use subsidiary
     /// operators other than SuperLUPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
@@ -204,31 +204,31 @@ namespace oomph
       Preconditioner_has_been_setup = false;
     } // constructor
 
-    ///  Destructor
+    /// Destructor
     virtual ~LagrangeEnforcedFlowPreconditioner()
     {
       this->clean_up_memory();
     }
 
-    ///  Broken copy constructor
+    /// Broken copy constructor
     LagrangeEnforcedFlowPreconditioner(
       const LagrangeEnforcedFlowPreconditioner&) = delete;
 
-    ///  Broken assignment operator
+    /// Broken assignment operator
     void operator=(const LagrangeEnforcedFlowPreconditioner&) = delete;
 
-    ///  Setup method for the LagrangeEnforcedFlowPreconditioner.
+    /// Setup method for the LagrangeEnforcedFlowPreconditioner.
     void setup();
 
-    ///  Apply the preconditioner.
+    /// Apply the preconditioner.
     /// r is the residual (rhs), z will contain the solution.
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    ///  Set the meshes,
+    /// Set the meshes,
     /// the first mesh in the vector must be the bulk mesh.
     void set_meshes(const Vector<Mesh*>& mesh_pt);
 
-    ///  Set flag to use the infinite norm of the Navier-Stokes F matrix
+    /// Set flag to use the infinite norm of the Navier-Stokes F matrix
     /// as the scaling sigma. This is the default behaviour. Note: the norm of
     /// the NS F matrix positive, however, we actually use the negative of
     /// the norm. This is because the underlying Navier-Stokes Jacobian is
@@ -238,7 +238,7 @@ namespace oomph
       Use_norm_f_for_scaling_sigma = true;
     }
 
-    ///  Access function to set the scaling sigma.
+    /// Access function to set the scaling sigma.
     /// Note: this also sets the flag to use the infinite norm of
     /// the Navier-Stokes F matrix as the scaling sigma to false.
     /// Warning is given if trying to set scaling sigma to be equal to
@@ -273,18 +273,18 @@ namespace oomph
       Use_norm_f_for_scaling_sigma = false;
     }
 
-    ///  Read (const) function to get the scaling sigma.
+    /// Read (const) function to get the scaling sigma.
     double scaling_sigma() const
     {
       return Scaling_sigma;
     }
 
-    ///  Set a new Navier-Stokes matrix preconditioner
+    /// Set a new Navier-Stokes matrix preconditioner
     /// (inexact solver)
     void set_navier_stokes_preconditioner(
       Preconditioner* new_ns_preconditioner_pt = 0);
 
-    /// Set Navier-Stokes matrix preconditioner (inexact
+    ///Set Navier-Stokes matrix preconditioner (inexact
     /// solver) to SuperLU
     void set_superlu_for_navier_stokes_preconditioner()
     {
@@ -296,55 +296,55 @@ namespace oomph
       }
     }
 
-    ///  Clears the memory.
+    /// Clears the memory.
     void clean_up_memory();
 
   private:
-    ///  Control flag is true if the preconditioner has been setup
+    /// Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is
     /// called again)
     bool Preconditioner_has_been_setup;
 
-    ///  Scaling for the augmentation: Scaling_sigma*(LL^T)
+    /// Scaling for the augmentation: Scaling_sigma*(LL^T)
     double Scaling_sigma;
 
-    ///  Flag to indicate if we want to use the infinite norm of the
+    /// Flag to indicate if we want to use the infinite norm of the
     /// Navier-Stokes momentum block for the scaling sigma.
     bool Use_norm_f_for_scaling_sigma;
 
-    ///  Inverse W values
+    /// Inverse W values
     Vector<Vector<double>> Inv_w_diag_values;
 
-    ///  Pointer to the 'preconditioner' for the Navier-Stokes block
+    /// Pointer to the 'preconditioner' for the Navier-Stokes block
     Preconditioner* Navier_stokes_preconditioner_pt;
 
-    ///  Flag to indicate if the preconditioner for the Navier-Stokes
+    /// Flag to indicate if the preconditioner for the Navier-Stokes
     /// block is a block preconditioner or not.
     bool Navier_stokes_preconditioner_is_block_preconditioner;
 
-    ///  Flag to indicate whether the default NS preconditioner is used
+    /// Flag to indicate whether the default NS preconditioner is used
     bool Using_superlu_ns_preconditioner;
 
-    ///  Storage for the meshes. In our implementation, the first mesh
+    /// Storage for the meshes. In our implementation, the first mesh
     /// must always be the Navier-Stokes (bulk) mesh, followed by surface
     /// meshes.
     Vector<Mesh*> My_mesh_pt;
 
-    ///  The number of DOF types in each mesh. This is used create
+    /// The number of DOF types in each mesh. This is used create
     /// various lookup lists.
     Vector<unsigned> My_ndof_types_in_mesh;
 
-    ///  The number of meshes. This is used to create various lookup
+    /// The number of meshes. This is used to create various lookup
     /// lists.
     unsigned My_nmesh;
 
-    ///  The number of Lagrange multiplier DOF types.
+    /// The number of Lagrange multiplier DOF types.
     unsigned N_lagrange_doftypes;
 
-    ///  The number of fluid DOF types (including pressure).
+    /// The number of fluid DOF types (including pressure).
     unsigned N_fluid_doftypes;
 
-    ///  The number of velocity DOF types.
+    /// The number of velocity DOF types.
     unsigned N_velocity_doftypes;
 
   }; // end of LagrangeEnforcedFlowPreconditioner class

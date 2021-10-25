@@ -43,7 +43,7 @@ namespace oomph
   //======================================================================
   namespace Global_timings
   {
-    ///  Global boolean to switch on comprehensive timing -- can
+    /// Global boolean to switch on comprehensive timing -- can
     /// probably be declared const false when development on hector
     /// is complete
     bool Doc_comprehensive_timings = false;
@@ -67,7 +67,7 @@ namespace oomph
       std::set_terminate(spawn_errors_from_uncaught_errors);
     }
 
-    ///  Flush string stream of error messages (call when error has been
+    /// Flush string stream of error messages (call when error has been
     /// caught)
     void suppress_exception_error_messages()
     {
@@ -81,7 +81,7 @@ namespace oomph
       (*Error_message_stream_pt) << (*Exception_stringstream_pt).str();
     }
 
-    ///  Clean up function that deletes anything dynamically allocated
+    /// Clean up function that deletes anything dynamically allocated
     /// in this namespace
     void clean_up_memory()
     {
@@ -281,7 +281,7 @@ namespace oomph
   //=======================================================================
   namespace Global_string_for_annotation
   {
-    ///  Return the i-th string or "" if the relevant string hasn't
+    /// Return the i-th string or "" if the relevant string hasn't
     /// been defined
     std::string string(const unsigned& i)
     {
@@ -295,7 +295,7 @@ namespace oomph
       }
     }
 
-    ///  Storage for strings that may be used for global annotations.
+    /// Storage for strings that may be used for global annotations.
     /// This is global data and you use it at your own risk!
     std::vector<std::string> String;
 

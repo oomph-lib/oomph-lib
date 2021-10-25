@@ -64,7 +64,7 @@ namespace oomph
     /// Apply preconditioner to z, i.e. z=D^-1
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    ///  Setup the preconditioner (store diagonal) from the fully
+    /// Setup the preconditioner (store diagonal) from the fully
     /// assembled matrix.
     void setup();
 
@@ -106,15 +106,15 @@ namespace oomph
     /// Apply preconditioner to z, i.e. z=D^-1
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    ///  Setup the preconditioner (store diagonal) from the fully
+    /// Setup the preconditioner (store diagonal) from the fully
     /// assembled matrix. Problem pointer is ignored.
     void setup();
 
-    ///  For some reason we need to remind the compiler that there is
+    /// For some reason we need to remind the compiler that there is
     /// also a function named setup in the base class.
     using Preconditioner::setup;
 
-    ///  Access function to the Positive_matrix which indicates whether
+    /// Access function to the Positive_matrix which indicates whether
     /// lumped matrix was positive
     bool positive_matrix() const
     {
@@ -131,7 +131,7 @@ namespace oomph
     }
 
 
-    ///  Access function to the inverse of the lumped vector assembled in
+    /// Access function to the inverse of the lumped vector assembled in
     /// the preconditioner setup routine
     double* inverse_lumped_vector_pt()
     {
@@ -149,7 +149,7 @@ namespace oomph
     }
 
 
-    ///  Access function to number of rows for this preconditioner
+    /// Access function to number of rows for this preconditioner
     unsigned& nrow()
     {
       return Nrow;
@@ -174,7 +174,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  Class for a compressed-matrix coefficent (for either CC or CR
+  /// Class for a compressed-matrix coefficent (for either CC or CR
   /// matrices). Contains the (row or column) index and value of a
   /// coefficient in a compressed row or column.
   /// Currently only used in ILU(0) for CCDoubleMatrices to allow the
@@ -230,7 +230,7 @@ namespace oomph
       return Value;
     }
 
-    ///  Access function for the coefficient's (row or column_ index
+    /// Access function for the coefficient's (row or column_ index
     /// (const version)
     unsigned index() const
     {
@@ -284,7 +284,7 @@ namespace oomph
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    ///  Setup the preconditioner (store diagonal) from the fully
+    /// Setup the preconditioner (store diagonal) from the fully
     /// assembled matrix. Problem pointer is ignored.
     void setup();
 
@@ -292,14 +292,14 @@ namespace oomph
     /// Column start for upper triangular matrix
     Vector<unsigned> U_column_start;
 
-    ///  Row entry for the upper triangular matrix (each element of the
+    /// Row entry for the upper triangular matrix (each element of the
     /// vector contains the row index and coefficient)
     Vector<CompressedMatrixCoefficient> U_row_entry;
 
     /// Column start for lower triangular matrix
     Vector<unsigned> L_column_start;
 
-    ///  Row entry for the lower triangular matrix (each element of the
+    /// Row entry for the lower triangular matrix (each element of the
     /// vector contains the row index and coefficient)
     Vector<CompressedMatrixCoefficient> L_row_entry;
   };
@@ -328,7 +328,7 @@ namespace oomph
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-    ///  Setup the preconditioner (store diagonal) from the fully
+    /// Setup the preconditioner (store diagonal) from the fully
     /// assembled matrix. Problem pointer is ignored.
     void setup();
 
@@ -337,20 +337,20 @@ namespace oomph
     /// Row start for upper triangular matrix
     Vector<unsigned> U_row_start;
 
-    ///  column entry for the upper triangular matrix (each element of the
+    /// column entry for the upper triangular matrix (each element of the
     /// vector contains the column index and coefficient)
     Vector<CompressedMatrixCoefficient> U_row_entry;
 
     /// Row start for lower triangular matrix
     Vector<unsigned> L_row_start;
 
-    ///  column entry for the lower triangular matrix (each element of the
+    /// column entry for the lower triangular matrix (each element of the
     /// vector contains the column index and coefficient)
     Vector<CompressedMatrixCoefficient> L_row_entry;
   };
 
   //=============================================================================
-  ///  A preconditioner for performing inner iteration preconditioner
+  /// A preconditioner for performing inner iteration preconditioner
   /// solves. The template argument SOLVER specifies the inner iteration
   /// solver (which must be derived from IterativeLinearSolver) and the
   /// template argument PRECONDITIONER specifies the preconditioner for the
@@ -410,7 +410,7 @@ namespace oomph
       Solver_pt->clean_up_memory();
     }
 
-    ///  Preconditioner setup method. Setup the preconditioner for the
+    /// Preconditioner setup method. Setup the preconditioner for the
     /// inner iteration solver.
     void setup()
     {
@@ -442,7 +442,7 @@ namespace oomph
       Solver_pt->max_iter() = max_iter;
     }
 
-    ///  Preconditioner solve method. Performs the specified number
+    /// Preconditioner solve method. Performs the specified number
     /// of Krylov iterations preconditioned with the specified preconditioner
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {

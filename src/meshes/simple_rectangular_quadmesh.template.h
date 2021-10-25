@@ -57,7 +57,7 @@ namespace oomph
   class SimpleRectangularQuadMesh : public virtual QuadMeshBase
   {
   public:
-    ///  Constructor: Pass number of elements in the horizontal
+    /// Constructor: Pass number of elements in the horizontal
     /// and vertical directions, and the corresponding dimensions.
     /// Timestepper defaults to Steady.
     SimpleRectangularQuadMesh(

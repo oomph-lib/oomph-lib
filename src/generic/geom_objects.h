@@ -103,7 +103,7 @@ namespace oomph
     /// Default constructor.
     GeomObject() : NLagrangian(0), Ndim(0), Geom_object_time_stepper_pt(0) {}
 
-    ///  Constructor: Pass dimension of geometric object (# of Eulerian
+    /// Constructor: Pass dimension of geometric object (# of Eulerian
     /// coords = # of Lagrangian coords; no time history available/needed)
     GeomObject(const unsigned& ndim)
       : NLagrangian(ndim), Ndim(ndim), Geom_object_time_stepper_pt(0)
@@ -111,7 +111,7 @@ namespace oomph
     }
 
 
-    ///  Constructor: pass # of Eulerian and Lagrangian coordinates.
+    /// Constructor: pass # of Eulerian and Lagrangian coordinates.
     /// No time history available/needed
     GeomObject(const unsigned& nlagrangian, const unsigned& ndim)
       : NLagrangian(nlagrangian), Ndim(ndim), Geom_object_time_stepper_pt(0)
@@ -131,7 +131,7 @@ namespace oomph
 #endif
     }
 
-    ///  Constructor: pass # of Eulerian and Lagrangian coordinates
+    /// Constructor: pass # of Eulerian and Lagrangian coordinates
     /// and pointer to time-stepper which is used to handle the
     /// position at previous timesteps and allows the evaluation
     /// of veloc/acceleration etc. in cases where the GeomData
@@ -187,21 +187,21 @@ namespace oomph
       Ndim = n_dim;
     }
 
-    ///  Access function for pointer to time stepper: Null if object is
+    /// Access function for pointer to time stepper: Null if object is
     /// not time-dependent
     TimeStepper*& time_stepper_pt()
     {
       return Geom_object_time_stepper_pt;
     }
 
-    ///  Access function for pointer to time stepper: Null if object is
+    /// Access function for pointer to time stepper: Null if object is
     /// not time-dependent. Const version
     TimeStepper* time_stepper_pt() const
     {
       return Geom_object_time_stepper_pt;
     }
 
-    ///  How many items of Data does the shape of the object depend on?
+    /// How many items of Data does the shape of the object depend on?
     /// This is implemented as a broken virtual function. You must overload
     /// this for GeomObjects that contain geometric Data, i.e. GeomObjects
     /// whose shape depends on Data that may contain unknowns in the
@@ -225,7 +225,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Return pointer to the j-th Data item that the object's
+    /// Return pointer to the j-th Data item that the object's
     /// shape depends on. This is implemented as a broken virtual function.
     /// You must overload this for GeomObjects that contain geometric Data,
     /// i.e. GeomObjects whose shape depends on Data that may contain
@@ -252,7 +252,7 @@ namespace oomph
     virtual void position(const Vector<double>& zeta,
                           Vector<double>& r) const = 0;
 
-    ///  Parametrised position on object: r(zeta). Evaluated at
+    /// Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep. Works for t=0 but needs to be overloaded
     /// if genuine time-dependence is required.
@@ -271,7 +271,7 @@ namespace oomph
     }
 
 
-    ///  Parametrised position on object: r(zeta). Evaluated at
+    /// Parametrised position on object: r(zeta). Evaluated at
     /// the continuous time value, t.
     virtual void position(const double& t,
                           const Vector<double>& zeta,
@@ -287,7 +287,7 @@ namespace oomph
     }
 
 
-    ///  j-th time-derivative on object at current time:
+    /// j-th time-derivative on object at current time:
     /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
     virtual void dposition_dt(const Vector<double>& zeta,
                               const unsigned& j,
@@ -321,7 +321,7 @@ namespace oomph
     }
 
 
-    ///  Derivative of position Vector w.r.t. to coordinates:
+    /// Derivative of position Vector w.r.t. to coordinates:
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     /// Evaluated at current time.
     virtual void dposition(const Vector<double>& zeta,
@@ -334,7 +334,7 @@ namespace oomph
     }
 
 
-    ///  2nd derivative of position Vector w.r.t. to coordinates:
+    /// 2nd derivative of position Vector w.r.t. to coordinates:
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i).
     /// Evaluated at current time.
@@ -348,7 +348,7 @@ namespace oomph
     }
 
 
-    ///  Posn Vector and its  1st & 2nd derivatives
+    /// Posn Vector and its  1st & 2nd derivatives
     /// w.r.t. to coordinates:
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
@@ -365,7 +365,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  A geometric object may be composed of may sub-objects (e.g.
+    /// A geometric object may be composed of may sub-objects (e.g.
     /// a finite-element representation of a boundary). In order to implement
     /// sparse update functions, it is necessary to know the sub-object
     /// and local coordinate within
@@ -390,7 +390,7 @@ namespace oomph
       sub_geom_object_pt = this;
     }
 
-    ///  A geometric object may be composed of many sub-objects
+    /// A geometric object may be composed of many sub-objects
     /// each with their own local coordinate. This function returns the
     /// "global" intrinsic coordinate zeta (within the compound object), at
     /// a given local coordinate s (i.e. the intrinsic coordinate of the
@@ -430,7 +430,7 @@ namespace oomph
     /// Number of Eulerian coordinates
     unsigned Ndim;
 
-    ///  Timestepper (used to handle access to geometry
+    /// Timestepper (used to handle access to geometry
     /// at previous timesteps)
     TimeStepper* Geom_object_time_stepper_pt;
   };
@@ -451,7 +451,7 @@ namespace oomph
   class StraightLine : public GeomObject
   {
   public:
-    ///  Constructor:  One item of geometric data:
+    /// Constructor:  One item of geometric data:
     /// \code
     ///  Geom_data_pt[0]->value(0) = height
     /// \endcode
@@ -521,7 +521,7 @@ namespace oomph
     }
 
 
-    ///  Position Vector at Lagrangian coordinate zeta
+    /// Position Vector at Lagrangian coordinate zeta
     void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       // Position Vector
@@ -530,7 +530,7 @@ namespace oomph
     }
 
 
-    ///  Parametrised position on object: r(zeta). Evaluated at
+    /// Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep.
     void position(const unsigned& t,
@@ -557,7 +557,7 @@ namespace oomph
     }
 
 
-    ///  Derivative of position Vector w.r.t. to coordinates:
+    /// Derivative of position Vector w.r.t. to coordinates:
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     /// Evaluated at current time.
     virtual void dposition(const Vector<double>& zeta,
@@ -569,7 +569,7 @@ namespace oomph
     }
 
 
-    ///  2nd derivative of position Vector w.r.t. to coordinates:
+    /// 2nd derivative of position Vector w.r.t. to coordinates:
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i). Evaluated at current time.
     virtual void d2position(const Vector<double>& zeta,
@@ -581,7 +581,7 @@ namespace oomph
     }
 
 
-    ///  Posn Vector and its  1st & 2nd derivatives
+    /// Posn Vector and its  1st & 2nd derivatives
     /// w.r.t. to coordinates:
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
@@ -612,7 +612,7 @@ namespace oomph
       return Geom_data_pt.size();
     }
 
-    ///  Return pointer to the j-th Data item that the object's
+    /// Return pointer to the j-th Data item that the object's
     /// shape depends on
     Data* geom_data_pt(const unsigned& j)
     {
@@ -620,7 +620,7 @@ namespace oomph
     }
 
   private:
-    ///  Vector of pointers to Data items that affects the object's shape
+    /// Vector of pointers to Data items that affects the object's shape
     Vector<Data*> Geom_data_pt;
 
     /// Do I need to clean up?
@@ -636,14 +636,14 @@ namespace oomph
 
 
   //=========================================================================
-  ///  Steady ellipse with half axes A and B as geometric object:
+  /// Steady ellipse with half axes A and B as geometric object:
   ///  \f[ x = A \cos(\zeta) \f]
   ///  \f[ y = B \sin(\zeta) \f]
   //=========================================================================
   class Ellipse : public GeomObject
   {
   public:
-    ///  Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
+    /// Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
     /// half axes as Data:
     /// \code
     /// Geom_data_pt[0]->value(0) = A
@@ -677,7 +677,7 @@ namespace oomph
     }
 
 
-    ///  Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
+    /// Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass
     /// half axes A and B; both pinned.
     Ellipse(const double& A, const double& B) : GeomObject(1, 2)
     {
@@ -741,7 +741,7 @@ namespace oomph
     }
 
 
-    ///  Position Vector at Lagrangian coordinate zeta
+    /// Position Vector at Lagrangian coordinate zeta
     void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       // Position Vector
@@ -750,7 +750,7 @@ namespace oomph
     }
 
 
-    ///  Parametrised position on object: r(zeta). Evaluated at
+    /// Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep.
     void position(const unsigned& t,
@@ -786,7 +786,7 @@ namespace oomph
     }
 
 
-    ///  Derivative of position Vector w.r.t. to coordinates:
+    /// Derivative of position Vector w.r.t. to coordinates:
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     void dposition(const Vector<double>& zeta,
                    DenseMatrix<double>& drdzeta) const
@@ -797,7 +797,7 @@ namespace oomph
     }
 
 
-    ///  2nd derivative of position Vector w.r.t. to coordinates:
+    /// 2nd derivative of position Vector w.r.t. to coordinates:
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i).
     /// Evaluated at current time.
@@ -809,7 +809,7 @@ namespace oomph
       ddrdzeta(0, 0, 1) = -Geom_data_pt[0]->value(1) * sin(zeta[0]);
     }
 
-    ///  Position Vector and 1st and 2nd derivs to coordinates:
+    /// Position Vector and 1st and 2nd derivs to coordinates:
     /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
     /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
     /// ddrdzeta(alpha,beta,i).
@@ -841,7 +841,7 @@ namespace oomph
       return Geom_data_pt.size();
     }
 
-    ///  Return pointer to the j-th Data item that the object's
+    /// Return pointer to the j-th Data item that the object's
     /// shape depends on
     Data* geom_data_pt(const unsigned& j)
     {
@@ -849,7 +849,7 @@ namespace oomph
     }
 
   private:
-    ///  Vector of pointers to Data items that affects the object's shape
+    /// Vector of pointers to Data items that affects the object's shape
     Vector<Data*> Geom_data_pt;
 
     /// Do I need to clean up?
@@ -865,7 +865,7 @@ namespace oomph
 
 
   //=========================================================================
-  ///  Circle in 2D space.
+  /// Circle in 2D space.
   /// \f[ x = X_c + R \cos(\zeta)  \f]
   /// \f[ y = Y_c + R \sin(\zeta)  \f]
   //=========================================================================
@@ -909,7 +909,7 @@ namespace oomph
     }
 
 
-    ///  Constructor:  Pass x and y-coords of centre and radius (all
+    /// Constructor:  Pass x and y-coords of centre and radius (all
     /// pinned) Circle is static but can be used in time-dependent runs with
     /// specified timestepper.
     Circle(const double& x_c,
@@ -954,7 +954,7 @@ namespace oomph
     }
 
 
-    ///  Constructor:  Pass x and y-coords of centre and radius
+    /// Constructor:  Pass x and y-coords of centre and radius
     /// (all as Data)
     /// \code
     /// Geom_data_pt[0]->value(0) = X_c;
@@ -1020,7 +1020,7 @@ namespace oomph
       }
     }
 
-    ///  Position Vector at Lagrangian coordinate zeta
+    /// Position Vector at Lagrangian coordinate zeta
     void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       // Extract data
@@ -1034,7 +1034,7 @@ namespace oomph
     }
 
 
-    ///  Parametrised position on object: r(zeta). Evaluated at
+    /// Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep.
     void position(const unsigned& t,
@@ -1097,7 +1097,7 @@ namespace oomph
       return Geom_data_pt.size();
     }
 
-    ///  Return pointer to the j-th Data item that the object's
+    /// Return pointer to the j-th Data item that the object's
     /// shape depends on
     Data* geom_data_pt(const unsigned& j)
     {
@@ -1105,7 +1105,7 @@ namespace oomph
     }
 
   protected:
-    ///  Vector of pointers to Data items that affects the object's shape
+    /// Vector of pointers to Data items that affects the object's shape
     Vector<Data*> Geom_data_pt;
 
     /// Do I need to clean up?
@@ -1122,7 +1122,7 @@ namespace oomph
 
 
   //===========================================================
-  ///  Elliptical tube with half axes a and b.
+  /// Elliptical tube with half axes a and b.
   ///
   /// \f[ {\bf r} = ( a \cos(\zeta_1), b \sin(zeta_1), \zeta_0)^T \f]
   ///
@@ -1171,13 +1171,13 @@ namespace oomph
       position(zeta, r);
     }
 
-    ///  How many items of Data does the shape of the object depend on?
+    /// How many items of Data does the shape of the object depend on?
     virtual unsigned ngeom_data() const
     {
       return 0;
     }
 
-    ///  Position Vector and 1st and 2nd derivs w.r.t. zeta.
+    /// Position Vector and 1st and 2nd derivs w.r.t. zeta.
     void d2position(const Vector<double>& zeta,
                     RankThreeTensor<double>& ddrdzeta) const
     {
@@ -1194,7 +1194,7 @@ namespace oomph
       ddrdzeta(0, 1, 2) = ddrdzeta(1, 0, 2) = 0.0;
     }
 
-    ///  Position Vector and 1st and 2nd derivs w.r.t. zeta.
+    /// Position Vector and 1st and 2nd derivs w.r.t. zeta.
     void d2position(const Vector<double>& zeta,
                     Vector<double>& r,
                     DenseMatrix<double>& drdzeta,

@@ -51,7 +51,7 @@ namespace oomph
     ///  Face index associated with edge flux degree of freedom
     static const unsigned Face_index_of_edge_flux[];
 
-    ///  Conversion scheme from an edge degree of freedom to the node it's
+    /// Conversion scheme from an edge degree of freedom to the node it's
     /// stored at
     static const unsigned Q_edge_conv[];
 
@@ -65,7 +65,7 @@ namespace oomph
     /// The internal data index where the p degrees of freedom are stored
     unsigned P_internal_data_index;
 
-    ///  Unit normal signs associated with each edge to ensure
+    /// Unit normal signs associated with each edge to ensure
     /// inter-element continuity of the flux
     std::vector<short> Sign_edge;
 
@@ -88,7 +88,7 @@ namespace oomph
       return (j + 2) % 3;
     }
 
-    ///  Compute the face element coordinates of the nth flux
+    /// Compute the face element coordinates of the nth flux
     /// interpolation point along specified edge
     void face_local_coordinate_of_flux_interpolation_point(
       const unsigned& edge, const unsigned& n, Vector<double>& s) const
@@ -136,7 +136,7 @@ namespace oomph
       return internal_local_eqn(q_internal_index(), n);
     }
 
-    ///  Return vector of pointers to the Data objects that store the
+    /// Return vector of pointers to the Data objects that store the
     /// edge flux values
     Vector<Data*> q_edge_data_pt() const
     {
@@ -154,7 +154,7 @@ namespace oomph
       return this->internal_data_pt(Q_internal_data_index);
     }
 
-    ///  Return the index of the internal data where the q_internal
+    /// Return the index of the internal data where the q_internal
     /// degrees of freedom are stored
     unsigned q_internal_index() const
     {
@@ -167,7 +167,7 @@ namespace oomph
       return n % (ORDER + 1);
     }
 
-    ///  Return the local node number of the node where the nth edge
+    /// Return the local node number of the node where the nth edge
     /// unknown is stored
     unsigned q_edge_node_number(const unsigned& n) const
     {
@@ -217,7 +217,7 @@ namespace oomph
     void get_div_q_basis_local(const Vector<double>& s,
                                Shape& div_q_basis_ds) const;
 
-    ///  Return the number of flux interpolation points along each
+    /// Return the number of flux interpolation points along each
     /// edge of the element
     unsigned nedge_flux_interpolation_point() const;
 
@@ -233,7 +233,7 @@ namespace oomph
     }
 
 
-    ///  Compute the global coordinates of the flux interpolation
+    /// Compute the global coordinates of the flux interpolation
     /// point associated with the j-th edge-based q basis fct
     void edge_flux_interpolation_point_global(const unsigned& j,
                                               Vector<double>& x) const
@@ -244,7 +244,7 @@ namespace oomph
     }
 
 
-    ///  Compute the global coordinates of the nth flux interpolation
+    /// Compute the global coordinates of the nth flux interpolation
     /// point along an edge
     void edge_flux_interpolation_point_global(const unsigned& edge,
                                               const unsigned& n,
@@ -380,20 +380,20 @@ namespace oomph
       DarcyEquations<2>::output(outfile);
     }
 
-    ///  Output FE representation of soln: x,y,u1,u2,div_q,p at
+    /// Output FE representation of soln: x,y,u1,u2,div_q,p at
     /// Nplot^DIM plot points
     void output(std::ostream& outfile, const unsigned& Nplot)
     {
       DarcyEquations<2>::output(outfile, Nplot);
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<2, 3>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<2, 3>::vertex_node_pt(j);
@@ -404,7 +404,7 @@ namespace oomph
     unsigned nrecovery_order();
 
   protected:
-    ///  Return the geometric basis, and the q, p and divergence basis
+    /// Return the geometric basis, and the q, p and divergence basis
     /// functions and test functions at local coordinate s
     double shape_basis_test_local(const Vector<double>& s,
                                   Shape& psi,
@@ -431,7 +431,7 @@ namespace oomph
       return J;
     }
 
-    ///  Return the geometric basis, and the q, p and divergence basis
+    /// Return the geometric basis, and the q, p and divergence basis
     /// functions and test functions at integration point ipt
     double shape_basis_test_local_at_knot(const unsigned& ipt,
                                           Shape& psi,

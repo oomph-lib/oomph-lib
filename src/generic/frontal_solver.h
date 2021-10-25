@@ -55,7 +55,7 @@ namespace oomph
   class HSL_MA42 : public LinearSolver
   {
   private:
-    ///  Special solver for problems with 1 dof (MA42 can't handle this
+    /// Special solver for problems with 1 dof (MA42 can't handle this
     /// case so solve() forwards the "solve" to this function.
     void solve_for_one_dof(Problem* const& problem_pt, DoubleVector& result);
 
@@ -69,23 +69,23 @@ namespace oomph
     /// Use direct access files?
     bool Use_direct_access_files;
 
-    ///  Factor to increase storage for lenbuf[0]; see MA42 documentation
+    /// Factor to increase storage for lenbuf[0]; see MA42 documentation
     /// for details.
     double Lenbuf_factor0;
 
-    ///  Factor to increase storage for lenbuf[1]; see MA42 documentation
+    /// Factor to increase storage for lenbuf[1]; see MA42 documentation
     /// for details
     double Lenbuf_factor1;
 
-    ///  Factor to increase storage for lenbuf[2]; see MA42 documentation
+    /// Factor to increase storage for lenbuf[2]; see MA42 documentation
     /// for details.
     double Lenbuf_factor2;
 
-    ///  Factor to increase storage for front size; see MA42 documentation
+    /// Factor to increase storage for front size; see MA42 documentation
     /// for details.
     double Front_factor;
 
-    ///  Factor to increase size of direct access files; see
+    /// Factor to increase size of direct access files; see
     /// MA42 documentation for details.
     double Lenfle_factor;
 
@@ -114,7 +114,7 @@ namespace oomph
     unsigned long N_dof;
 
   public:
-    ///  Constructor: By default suppress verbose output (stats), don't
+    /// Constructor: By default suppress verbose output (stats), don't
     /// reorder elements and don't use direct access files
     HSL_MA42() : W(0), Lw(0), IW(0), Liw(0), N_dof(0)
     {
@@ -166,12 +166,12 @@ namespace oomph
       clean_up_memory();
     }
 
-    ///  Solver: Takes pointer to problem and returns the results Vector
+    /// Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual Vector.
     void solve(Problem* const& problem_pt, DoubleVector& result);
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     /// Call the broken base-class version. If you want this, please implement
     /// it
@@ -183,7 +183,7 @@ namespace oomph
     }
 
 
-    ///  Linear-algebra-type solver: Takes pointer to a matrix
+    /// Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -195,79 +195,79 @@ namespace oomph
     }
 
 
-    ///  Return the solution to the linear system Ax = result, where
+    /// Return the solution to the linear system Ax = result, where
     /// A is the most recently factorised jacobian matrix of the problem
     /// problem_pt. The solution is returned in the result vector.
     void resolve(const DoubleVector& rhs, DoubleVector& result);
 
-    ///  Function to reorder the elements based on Sloan's algorithm
+    /// Function to reorder the elements based on Sloan's algorithm
     void reorder_elements(Problem* const& problem_pt);
 
-    ///  Enable documentation of statistics
+    /// Enable documentation of statistics
     void enable_doc_stats()
     {
       Doc_stats = true;
     }
 
-    ///  Disable documentation of statistics
+    /// Disable documentation of statistics
     void disable_doc_stats()
     {
       Doc_stats = false;
     }
 
-    ///  Enable reordering using Sloan's algorithm
+    /// Enable reordering using Sloan's algorithm
     void enable_reordering()
     {
       Reorder_flag = true;
     }
 
-    ///  Disable reordering
+    /// Disable reordering
     void disable_reordering()
     {
       Reorder_flag = false;
     }
 
-    ///  Enable use of direct access files
+    /// Enable use of direct access files
     void enable_direct_access_files()
     {
       Use_direct_access_files = true;
     }
 
-    ///  Disable use of direct access files
+    /// Disable use of direct access files
     void disable_direct_access_files()
     {
       Use_direct_access_files = false;
     }
 
-    ///  Factor to increase storage for lenbuf[0]; see MA42 documentation
+    /// Factor to increase storage for lenbuf[0]; see MA42 documentation
     /// for details.
     double& lenbuf_factor0()
     {
       return Lenbuf_factor0;
     }
 
-    ///  Factor to increase storage for lenbuf[1]; see MA42 documentation
+    /// Factor to increase storage for lenbuf[1]; see MA42 documentation
     /// for details.
     double& lenbuf_factor1()
     {
       return Lenbuf_factor1;
     }
 
-    ///  Factor to increase storage for lenbuf[2]; see MA42 documentation
+    /// Factor to increase storage for lenbuf[2]; see MA42 documentation
     /// for details.
     double& lenbuf_factor2()
     {
       return Lenbuf_factor2;
     }
 
-    ///  Factor to increase storage for front size; see MA42 documentation
+    /// Factor to increase storage for front size; see MA42 documentation
     /// for details.
     double& front_factor()
     {
       return Front_factor;
     }
 
-    ///  Factor to increase the size of the direct access files;
+    /// Factor to increase the size of the direct access files;
     /// see MA42 documentation for details.
     double& lenfle_factor()
     {

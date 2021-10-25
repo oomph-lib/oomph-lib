@@ -54,7 +54,7 @@ namespace oomph
   class StorableShapeElementBase : public virtual FiniteElement
   {
   private:
-    ///  Pointer to storage for the pointers to the nodal shape functions
+    /// Pointer to storage for the pointers to the nodal shape functions
     /// at the integration points (knots)
     // ALH: Note that the vector must be Shape* because we do not know,
     // a priori, how much storage to allocate in each Shape object.
@@ -65,32 +65,32 @@ namespace oomph
     // point to the pointer allocated by another element.
     Vector<Shape*>* Shape_stored_pt;
 
-    ///  Pointer to storage for the pointers to the derivatives of the
+    /// Pointer to storage for the pointers to the derivatives of the
     /// nodal shape functions w.r.t. the local coordinates at integration points
     Vector<DShape*>* DShape_local_stored_pt;
 
-    ///  Pointer to storage for the pointers to the second derivatives of
+    /// Pointer to storage for the pointers to the second derivatives of
     /// the nodal shape functions w.r.t. the local coordinates at integration
     /// points
     Vector<DShape*>* D2Shape_local_stored_pt;
 
-    ///  Boolean to determine whether the element can delete the stored
+    /// Boolean to determine whether the element can delete the stored
     /// local shape functions
     bool Can_delete_shape_local_stored;
 
-    ///  Pointer to storage for the derivatives of the
+    /// Pointer to storage for the derivatives of the
     /// shape functions w.r.t. global coordinates at integration points
     Vector<DShape*>* DShape_eulerian_stored_pt;
 
-    ///  Pointer to storage for the second derivatives of the
+    /// Pointer to storage for the second derivatives of the
     /// shape functions w.r.t. global coordinates at integration points
     Vector<DShape*>* D2Shape_eulerian_stored_pt;
 
-    ///  Pointer to storage for the Jacobian of the element w.r.t
+    /// Pointer to storage for the Jacobian of the element w.r.t
     /// global coordinates
     Vector<double>* Jacobian_eulerian_stored_pt;
 
-    ///  Boolean to determine whether the element can delete the stored
+    /// Boolean to determine whether the element can delete the stored
     /// derivatives of shape functions w.r.t. global coordinates
     bool Can_delete_dshape_eulerian_stored;
 
@@ -110,7 +110,7 @@ namespace oomph
     {
     }
 
-    ///  The destructor cleans up the static memory allocated
+    /// The destructor cleans up the static memory allocated
     /// for shape function storage. Internal and external data get
     /// wiped by the GeneralisedElement destructor; nodes get
     /// killed in mesh destructor.
@@ -122,78 +122,78 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const StorableShapeElementBase&) = delete;
 
-    ///  Delete all the objects stored in the [...]_local_stored_pt
+    /// Delete all the objects stored in the [...]_local_stored_pt
     /// vectors and delete the vectors themselves
     void delete_all_shape_local_stored();
 
-    ///  Delete stored shape functions
+    /// Delete stored shape functions
     void delete_shape_local_stored();
 
-    ///  Delete stored derivatives of shape functions w.r.t. to
+    /// Delete stored derivatives of shape functions w.r.t. to
     /// local coordinates
     void delete_dshape_local_stored();
 
-    ///  Delete stored 2nd derivatives of shape functions w.r.t. to
+    /// Delete stored 2nd derivatives of shape functions w.r.t. to
     /// local coordinates
     void delete_d2shape_local_stored();
 
-    ///  Delete all storage related to deriatives of shape fcts
+    /// Delete all storage related to deriatives of shape fcts
     /// w.r.t. to global Eulerian coords
     void delete_all_dshape_eulerian_stored();
 
-    ///  Delete stored deriatives of shape fcts w.r.t. to global
+    /// Delete stored deriatives of shape fcts w.r.t. to global
     /// Eulerian coords
     void delete_dshape_eulerian_stored();
 
-    ///  Delete stored second derivatives of shape functions w.r.t. to
+    /// Delete stored second derivatives of shape functions w.r.t. to
     /// global Eulerian coordinates
     void delete_d2shape_eulerian_stored();
 
-    ///  Delete stored Jacobian of mapping between local and global
+    /// Delete stored Jacobian of mapping between local and global
     /// (Eulerian) coordinates
     void delete_J_eulerian_stored();
 
-    ///  Set the spatial integration scheme -- overloaded from the
+    /// Set the spatial integration scheme -- overloaded from the
     /// finite element base class since a change in the integration scheme
     /// forces a recomputation of the shape fcts at the integration points.
     virtual void set_integration_scheme(Integral* const& integral_pt);
 
-    ///  Return a pointer to the vector of pointers to the
+    /// Return a pointer to the vector of pointers to the
     /// stored shape functions
     inline Vector<Shape*>*& shape_stored_pt()
     {
       return Shape_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the
+    /// Return a pointer to the vector of pointers to the
     /// stored shape functions (const version)
     inline Vector<Shape*>* const& shape_stored_pt() const
     {
       return Shape_stored_pt;
     }
 
-    ///  Return a pointer to the stored shape function at the ipt-th
+    /// Return a pointer to the stored shape function at the ipt-th
     /// integration point
     inline Shape*& shape_stored_pt(const unsigned& ipt)
     {
       return (*Shape_stored_pt)[ipt];
     }
 
-    ///  Return a pointer to the stored shape function at the ipt-th
+    /// Return a pointer to the stored shape function at the ipt-th
     /// integration point (const version)
     inline Shape* const& shape_stored_pt(const unsigned& ipt) const
     {
       return (*Shape_stored_pt)[ipt];
     }
 
-    ///  Return a pointer to the vector of pointers to the stored first
+    /// Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the local coordinates
     inline Vector<DShape*>*& dshape_local_stored_pt()
     {
       return DShape_local_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the stored first
+    /// Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the local coordinates
     /// (const version)
     inline Vector<DShape*>* const& dshape_local_stored_pt() const
@@ -201,14 +201,14 @@ namespace oomph
       return DShape_local_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the stored second
+    /// Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the local coordinates
     inline Vector<DShape*>*& d2shape_local_stored_pt()
     {
       return D2Shape_local_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the stored second
+    /// Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the local coordinates
     /// (const version)
     inline Vector<DShape*>* const& d2shape_local_stored_pt() const
@@ -216,7 +216,7 @@ namespace oomph
       return D2Shape_local_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the stored first
+    /// Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates
     inline Vector<DShape*>*& dshape_eulerian_stored_pt()
@@ -224,7 +224,7 @@ namespace oomph
       return DShape_eulerian_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the stored first
+    /// Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates (const version)
     inline Vector<DShape*>* const& dshape_eulerian_stored_pt() const
@@ -232,7 +232,7 @@ namespace oomph
       return DShape_eulerian_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the stored second
+    /// Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates
     inline Vector<DShape*>*& d2shape_eulerian_stored_pt()
@@ -240,7 +240,7 @@ namespace oomph
       return D2Shape_eulerian_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the stored second
+    /// Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates (const version)
     inline Vector<DShape*>* const& d2shape_eulerian_stored_pt() const
@@ -248,14 +248,14 @@ namespace oomph
       return D2Shape_eulerian_stored_pt;
     }
 
-    ///  Return a pointer to the vector of Jacobians of
+    /// Return a pointer to the vector of Jacobians of
     /// the mapping between the local and global (eulerian) coordinates
     inline Vector<double>*& jacobian_eulerian_stored_pt()
     {
       return Jacobian_eulerian_stored_pt;
     }
 
-    ///  Return a pointer to the vector of Jacobians of
+    /// Return a pointer to the vector of Jacobians of
     /// the mapping between the local and global (eulerian) coordinates
     /// (const version)
     inline Vector<double>* const& jacobian_eulerian_stored_pt() const
@@ -263,7 +263,7 @@ namespace oomph
       return Jacobian_eulerian_stored_pt;
     }
 
-    ///  Set the shape functions pointed to internally to be
+    /// Set the shape functions pointed to internally to be
     /// those pointed to by the FiniteElement element_pt (In most
     /// cases all elements of the same type have the same number of
     /// integration points so the shape function values and their
@@ -274,7 +274,7 @@ namespace oomph
     void set_shape_local_stored_from_element(
       StorableShapeElementBase* const& element_pt);
 
-    ///  Set the derivatives of stored shape functions with respect
+    /// Set the derivatives of stored shape functions with respect
     /// to the global coordinates to be the same as
     /// those pointed to by the FiniteElement element_pt. Note that this
     /// function also calls set_shape_local_stored_from_element(element_pt).
@@ -284,31 +284,31 @@ namespace oomph
     void set_dshape_eulerian_stored_from_element(
       StorableShapeElementBase* const& element_pt);
 
-    ///  Calculate the shape functions at the integration points
+    /// Calculate the shape functions at the integration points
     /// and store the results internally
     void pre_compute_shape_at_knots();
 
-    ///  Return the geometric shape function at the ipt-th integration
+    /// Return the geometric shape function at the ipt-th integration
     /// point
     void shape_at_knot(const unsigned& ipt, Shape& psi) const;
 
-    ///  Calculate the shape functions and first derivatives w.r.t. local
+    /// Calculate the shape functions and first derivatives w.r.t. local
     /// coordinatess at the integration points and store the results internally
     void pre_compute_dshape_local_at_knots();
 
-    ///  Return the geometric shape function and its derivative w.r.t.
+    /// Return the geometric shape function and its derivative w.r.t.
     /// the local coordinates at the ipt-th integration point. If pre-computed
     /// values have been stored, they will be used.
     void dshape_local_at_knot(const unsigned& ipt,
                               Shape& psi,
                               DShape& dpsids) const;
 
-    ///  Calculate the second derivatives of the shape functions
+    /// Calculate the second derivatives of the shape functions
     /// w.r.t. local coordinates at the integration points and store the
     /// results internally
     void pre_compute_d2shape_local_at_knots();
 
-    ///  Return the geometric shape function and its first and
+    /// Return the geometric shape function and its first and
     /// second derivatives w.r.t.
     /// the local coordinates at the ipt-th integration point. If pre-computed
     /// values have been stored, they will be used.
@@ -317,21 +317,21 @@ namespace oomph
                                DShape& dpsids,
                                DShape& d2psids) const;
 
-    ///  Calculate the Jacobian of the mapping from local to global
+    /// Calculate the Jacobian of the mapping from local to global
     /// coordinates at the integration points and store the results
     /// internally.
     void pre_compute_J_eulerian_at_knots();
 
-    ///  Return the Jacobian of the mapping from local to global
+    /// Return the Jacobian of the mapping from local to global
     /// coordinates at the ipt-th integration point
     double J_eulerian_at_knot(const unsigned& ipt) const;
 
-    ///  Calculate the first derivatives of the shape functions
+    /// Calculate the first derivatives of the shape functions
     /// w.r.t the global coordinates at the integration points and store
     /// the results internally
     void pre_compute_dshape_eulerian_at_knots();
 
-    ///  Return the geometric shape functions and also first
+    /// Return the geometric shape functions and also first
     /// derivatives w.r.t. global coordinates at the ipt-th integration point.
     /// If the values of the shape functions and derivatives have been
     /// pre-computed, these will be used
@@ -340,12 +340,12 @@ namespace oomph
                                    DShape& dpsidx) const;
 
 
-    ///  Calculate the first and second derivatives of the shape
+    /// Calculate the first and second derivatives of the shape
     /// functions w.r.t global coordinates at the integration points and
     /// store the results internally.
     void pre_compute_d2shape_eulerian_at_knots();
 
-    ///  Return the geometric shape functions and also first
+    /// Return the geometric shape functions and also first
     /// and second derivatives w.r.t. global coordinates at ipt-th integration
     /// point. If the values of the shape functions and derivatives have been
     /// pre-computred, these will be used
@@ -378,19 +378,19 @@ namespace oomph
                                         public virtual SolidFiniteElement
   {
   private:
-    ///  Pointer to storage for the pointers to the derivatives of the
+    /// Pointer to storage for the pointers to the derivatives of the
     /// shape functions w.r.t. Lagrangian coordinates at integration points
     Vector<DShape*>* DShape_lagrangian_stored_pt;
 
-    ///  Pointer to storage for the pointers to the second derivatives of
+    /// Pointer to storage for the pointers to the second derivatives of
     /// the shape functions w.r.t. Lagrangian coordinates at integration points
     Vector<DShape*>* D2Shape_lagrangian_stored_pt;
 
-    ///  Pointer to storage for the Jacobian of the mapping between
+    /// Pointer to storage for the Jacobian of the mapping between
     /// the local and the global Lagrangian coordinates
     Vector<double>* Jacobian_lagrangian_stored_pt;
 
-    ///  Boolean to determine whether the element can delete the stored
+    /// Boolean to determine whether the element can delete the stored
     /// shape function derivatives w.r.t. the Lagrangian coordinate
     bool Can_delete_dshape_lagrangian_stored;
 
@@ -419,23 +419,23 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const StorableShapeSolidElementBase&) = delete;
 
-    ///  Delete all the objects stored in the [...]_lagrangian_stored_pt
+    /// Delete all the objects stored in the [...]_lagrangian_stored_pt
     /// vectors and delete the vectors themselves
     void delete_all_dshape_lagrangian_stored();
 
-    ///  Delete all the objects stored in the
+    /// Delete all the objects stored in the
     /// Lagrangian_stored vectors
     void delete_dshape_lagrangian_stored();
 
-    ///  Delete stored second derivatives of shape functions w.r.t.
+    /// Delete stored second derivatives of shape functions w.r.t.
     /// Lagrangian coordinates
     void delete_d2shape_lagrangian_stored();
 
-    ///  Delete stored Jaocbian of mapping between local and Lagrangian
+    /// Delete stored Jaocbian of mapping between local and Lagrangian
     /// coordinates
     void delete_J_lagrangian_stored();
 
-    ///  Overload the set_integration_scheme to recompute any stored
+    /// Overload the set_integration_scheme to recompute any stored
     /// derivatives w.r.t. Lagrangian coordinates
     void set_integration_scheme(Integral* const& integral_pt)
     {
@@ -454,7 +454,7 @@ namespace oomph
       }
     }
 
-    ///  Return a pointer to the vector of pointers to the stored first
+    /// Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates
     inline Vector<DShape*>*& dshape_lagrangian_stored_pt()
@@ -462,7 +462,7 @@ namespace oomph
       return DShape_lagrangian_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the stored first
+    /// Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates (const version)
     inline Vector<DShape*>* const& dshape_lagrangian_stored_pt() const
@@ -470,7 +470,7 @@ namespace oomph
       return DShape_lagrangian_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the stored second
+    /// Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates
     inline Vector<DShape*>*& d2shape_lagrangian_stored_pt()
@@ -478,7 +478,7 @@ namespace oomph
       return D2Shape_lagrangian_stored_pt;
     }
 
-    ///  Return a pointer to the vector of pointers to the stored second
+    /// Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates (const version)
     inline Vector<DShape*>* const& d2shape_lagrangian_stored_pt() const
@@ -486,14 +486,14 @@ namespace oomph
       return D2Shape_lagrangian_stored_pt;
     }
 
-    ///  Return a pointer to the vector of Jacobians of
+    /// Return a pointer to the vector of Jacobians of
     /// the mapping between the local and global (eulerian) coordinates
     inline Vector<double>*& jacobian_lagrangian_stored_pt()
     {
       return Jacobian_lagrangian_stored_pt;
     }
 
-    ///  Return a pointer to the vector of Jacobians of
+    /// Return a pointer to the vector of Jacobians of
     /// the mapping between the local and global (eulerian) coordinates
     /// (const version)
     inline Vector<double>* const& jacobian_lagrangian_stored_pt() const
@@ -502,12 +502,12 @@ namespace oomph
     }
 
 
-    ///  Calculate the first derivatives of the shape functions w.r.t
+    /// Calculate the first derivatives of the shape functions w.r.t
     /// Lagrangian coordinates at the integration points and store the
     /// results internally.
     void pre_compute_dshape_lagrangian_at_knots();
 
-    ///  Return the geometric shape functions and also first
+    /// Return the geometric shape functions and also first
     /// derivatives w.r.t. Lagrangian coordinates at ipt-th integration point.
     /// If the values of the shape function and derivatives have been
     /// pre-computed, they will be used.
@@ -515,13 +515,13 @@ namespace oomph
                                      Shape& psi,
                                      DShape& dpsidxi) const;
 
-    ///  Calculate the first and second derivatives of the
+    /// Calculate the first and second derivatives of the
     /// shape functions w.r.t
     /// Lagrangian coordinates at the integration points and store the
     /// results internally
     void pre_compute_d2shape_lagrangian_at_knots();
 
-    ///  Return  the geometric shape functions and also first
+    /// Return  the geometric shape functions and also first
     /// and second derivatives w.r.t. Lagrangian coordinates at
     /// the ipt-th integration point. If the values have been pre-computed,
     /// they will be used.
@@ -532,7 +532,7 @@ namespace oomph
                                       DShape& d2psidxi) const;
 
 
-    ///  Set the derivatives of stored shape functions with respect
+    /// Set the derivatives of stored shape functions with respect
     /// to the lagrangian coordinates to be the same as
     /// those pointed to by the FiniteElement element_pt. Note that this
     /// function also calls set_shape_local_stored_from_element(element_pt).

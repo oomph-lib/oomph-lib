@@ -71,14 +71,14 @@ namespace oomph
 
 #endif
 
-    ///  Boolean to indicate whether to doc timings or not.
+    /// Boolean to indicate whether to doc timings or not.
     extern bool Doc_timings;
 
-    ///  Boolean to indicate whether to document basic info (to screen)
+    /// Boolean to indicate whether to document basic info (to screen)
     ///        during setup_multi_domain_interaction() routines
     extern bool Doc_stats;
 
-    ///  Boolean to indicate whether to document further info (to screen)
+    /// Boolean to indicate whether to document further info (to screen)
     ///        during setup_multi_domain_interaction() routines
     extern bool Doc_full_stats;
 
@@ -89,7 +89,7 @@ namespace oomph
     // Helper functions for external haloed node identification
 
 
-    ///  Helper function to add external haloed nodes, inc. masters
+    /// Helper function to add external haloed nodes, inc. masters
     /// of external haloed nodes
     void add_external_haloed_node_to_storage(int& iproc,
                                              Node* nod_pt,
@@ -99,7 +99,7 @@ namespace oomph
                                              Vector<double>& send_doubles);
 
 
-    ///  Recursively add any master nodes (and their master nodes etc)
+    /// Recursively add any master nodes (and their master nodes etc)
     /// of external haloed nodes
     void recursively_add_masters_of_external_haloed_node(
       int& iproc,
@@ -110,7 +110,7 @@ namespace oomph
       Vector<double>& send_doubles);
 
 
-    ///  Helper function to add external haloed node that is not a master
+    /// Helper function to add external haloed node that is not a master
     void add_external_haloed_node_helper(int& iproc,
                                          Node* nod_pt,
                                          Mesh* const& mesh_pt,
@@ -118,7 +118,7 @@ namespace oomph
                                          Vector<unsigned>& send_unsigneds,
                                          Vector<double>& send_doubles);
 
-    ///  Helper function to add external haloed node that is a master
+    /// Helper function to add external haloed node that is a master
     void add_external_haloed_master_node_helper(
       int& iproc,
       Node* master_nod_pt,
@@ -127,7 +127,7 @@ namespace oomph
       Vector<unsigned>& send_unsigneds,
       Vector<double>& send_doubles);
 
-    ///  Helper function to get the required nodal information from an
+    /// Helper function to get the required nodal information from an
     /// external haloed node so that a fully-functional external halo
     /// node (and therefore element) can be created on the receiving process
     void get_required_nodal_information_helper(int& iproc,
@@ -137,7 +137,7 @@ namespace oomph
                                                Vector<unsigned>& send_unsigneds,
                                                Vector<double>& send_doubles);
 
-    ///  Helper function to get the required master nodal information from
+    /// Helper function to get the required master nodal information from
     /// an external haloed master node so that a fully-functional external halo
     /// master node (and possible element) can be created on the receiving proc
     void get_required_master_nodal_information_helper(
@@ -150,7 +150,7 @@ namespace oomph
 
     // Helper functions for external halo node identification
 
-    ///  Helper function to add external halo nodes, including any
+    /// Helper function to add external halo nodes, including any
     /// masters, based on information received from the haloed process
     template<class EXT_ELEMENT>
     void add_external_halo_node_to_storage(Node*& new_nod_pt,
@@ -164,7 +164,7 @@ namespace oomph
                                            unsigned& counter_for_recv_doubles,
                                            Vector<double>& recv_doubles);
 
-    ///  Recursively add masters of external halo nodes (and their
+    /// Recursively add masters of external halo nodes (and their
     /// masters, etc) based on information received from the haloed process
     template<class EXT_ELEMENT>
     void recursively_add_masters_of_external_halo_node_to_storage(
@@ -179,7 +179,7 @@ namespace oomph
       Vector<double>& recv_doubles);
 
 
-    ///  Helper function to add external halo node that is not a master
+    /// Helper function to add external halo node that is not a master
     void add_external_halo_node_helper(Node*& new_nod_pt,
                                        Mesh* const& mesh_pt,
                                        unsigned& loc_p,
@@ -191,7 +191,7 @@ namespace oomph
                                        unsigned& counter_for_recv_doubles,
                                        Vector<double>& recv_doubles);
 
-    ///  Helper function to add external halo node that is a master
+    /// Helper function to add external halo node that is a master
     template<class EXT_ELEMENT>
     void add_external_halo_master_node_helper(
       Node*& new_master_nod_pt,
@@ -205,7 +205,7 @@ namespace oomph
       Vector<double>& recv_doubles);
 
 
-    ///  Helper function which constructs a new external halo node
+    /// Helper function which constructs a new external halo node
     /// (on an element) with the information sent from the haloed process
     void construct_new_external_halo_node_helper(
       Node*& new_nod_pt,
@@ -218,7 +218,7 @@ namespace oomph
       unsigned& counter_for_recv_doubles,
       Vector<double>& recv_doubles);
 
-    ///  Helper function which constructs a new external halo master node
+    /// Helper function which constructs a new external halo master node
     /// with the information sent from the haloed process
     template<class EXT_ELEMENT>
     void construct_new_external_halo_master_node_helper(

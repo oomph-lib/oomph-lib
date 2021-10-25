@@ -80,7 +80,7 @@ namespace oomph
       public virtual FiniteElement
   {
   public:
-    ///  Constructor: Set null pointers for constitutive law and for
+    /// Constructor: Set null pointers for constitutive law and for
     /// isotropic growth function. Set physical parameter values to
     /// default values, and set body force to zero.
     PMLTimeHarmonicLinearElasticityEquationsBase()
@@ -92,7 +92,7 @@ namespace oomph
         &PMLTimeHarmonicLinearElasticityEquationsBase::Default_pml_mapping;
     }
 
-    ///  Return the index at which the i-th real or imag unknown
+    /// Return the index at which the i-th real or imag unknown
     /// displacement component is stored. The default value is appropriate for
     /// single-physics problems:
     virtual inline std::complex<unsigned> u_index_time_harmonic_linear_elasticity(
@@ -169,7 +169,7 @@ namespace oomph
     }
 
 
-    ///  Function pointer to function that specifies the body force
+    /// Function pointer to function that specifies the body force
     /// as a function of the Cartesian coordinates FCT(x,b) --
     /// x and b are  Vectors!
     typedef void (*BodyForceFctPt)(const Vector<double>& x,
@@ -220,18 +220,18 @@ namespace oomph
       return Body_force_fct_pt;
     }
 
-    ///  Return the Cauchy stress tensor, as calculated
+    /// Return the Cauchy stress tensor, as calculated
     /// from the elasticity tensor at specified local coordinate
     /// Virtual so separaete versions can (and must!) be provided
     /// for displacement and pressure-displacement formulations.
     virtual void get_stress(const Vector<double>& s,
                             DenseMatrix<std::complex<double>>& sigma) const = 0;
 
-    ///  Return the strain tensor
+    /// Return the strain tensor
     void get_strain(const Vector<double>& s,
                     DenseMatrix<std::complex<double>>& strain) const;
 
-    ///  Evaluate body force at Eulerian coordinate x
+    /// Evaluate body force at Eulerian coordinate x
     /// (returns zero vector if no body force function pointer has been set)
     inline void body_force(const Vector<double>& x,
                            Vector<std::complex<double>>& b) const
@@ -254,7 +254,7 @@ namespace oomph
     }
 
 
-    ///  Pure virtual function in which we specify the
+    /// Pure virtual function in which we specify the
     /// values to be pinned (and set to zero) on the outer edge of
     /// the pml layer. All of them! Vector is resized internally.
     void values_to_be_pinned_on_outer_pml_boundary(
@@ -267,7 +267,7 @@ namespace oomph
       }
     }
 
-    ///  The number of "DOF types" that degrees of freedom in this element
+    /// The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: for now lump them all into one DOF type.
     /// Can be adjusted later
     unsigned ndof_types() const
@@ -275,7 +275,7 @@ namespace oomph
       return 1;
     }
 
-    ///  Create a list of pairs for all unknowns in this element,
+    /// Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF types" that this unknown is associated with.
@@ -318,7 +318,7 @@ namespace oomph
       }
     }
 
-    ///  Compute pml coefficients at position x and integration point ipt.
+    /// Compute pml coefficients at position x and integration point ipt.
     /// pml_inverse_jacobian_diagonal contains the diagonal terms from the
     /// inverse of the Jacobian of the PML transformation. These are used to
     /// transform derivatives in real x to derivatives in transformed space
@@ -334,7 +334,7 @@ namespace oomph
       Vector<std::complex<double>>& pml_inverse_jacobian_diagonal,
       std::complex<double>& pml_jacobian_det)
     {
-      ///  The factors all default to 1.0 if the propagation
+      /// The factors all default to 1.0 if the propagation
       /// medium is the physical domain (no PML transformation)
       for (unsigned k = 0; k < DIM; k++)
       {
@@ -447,7 +447,7 @@ namespace oomph
     : public PMLTimeHarmonicLinearElasticityEquationsBase<DIM>
   {
   public:
-    ///   Constructor
+    ///  Constructor
     PMLTimeHarmonicLinearElasticityEquations() {}
 
     /// Number of values required at node n.
@@ -456,7 +456,7 @@ namespace oomph
       return 2 * DIM;
     }
 
-    ///  Return the residuals for the solid equations (the discretised
+    /// Return the residuals for the solid equations (the discretised
     /// principle of virtual displacements)
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -476,7 +476,7 @@ namespace oomph
           residuals, jacobian, 1);
     }
 
-    ///  Return the Cauchy stress tensor, as calculated
+    /// Return the Cauchy stress tensor, as calculated
     /// from the elasticity tensor at specified local coordinate
     void get_stress(const Vector<double>& s,
                     DenseMatrix<std::complex<double>>& sigma) const;
@@ -519,7 +519,7 @@ namespace oomph
       const unsigned& nplot);
 
 
-    ///  Output function for real part of full time-dependent solution
+    /// Output function for real part of full time-dependent solution
     /// u = Re( (u_r +i u_i) exp(-i omega t))
     /// at phase angle omega t = phi.
     /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
@@ -528,7 +528,7 @@ namespace oomph
                      const double& phi,
                      const unsigned& n_plot);
 
-    ///  Output function for imaginary part of full time-dependent
+    /// Output function for imaginary part of full time-dependent
     /// solution u = Im( (u_r +i u_i) exp(-i omega t) ) at phase angle omega t =
     /// phi. x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
     /// direction
@@ -537,7 +537,7 @@ namespace oomph
                      const unsigned& n_plot);
 
 
-    ///  Compute norm of solution: square of the L2 norm
+    /// Compute norm of solution: square of the L2 norm
     void compute_norm(double& norm);
 
     /// Get error against and norm of exact solution
@@ -563,7 +563,7 @@ namespace oomph
     }
 
   private:
-    ///  Private helper function to compute residuals and (if requested
+    /// Private helper function to compute residuals and (if requested
     /// via flag) also the Jacobian matrix.
     virtual void fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
@@ -713,12 +713,12 @@ namespace oomph
     : public virtual ProjectableElement<TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
   {
   public:
-    ///  Constructor [this was only required explicitly
+    /// Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     ProjectablePMLTimeHarmonicLinearElasticityElement() {}
 
 
-    ///  Specify the values associated with field fld.
+    /// Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
     /// In the underlying time-harmonic linear elasticity elemements the
@@ -741,14 +741,14 @@ namespace oomph
       return data_values;
     }
 
-    ///  Number of fields to be projected: 2*dim, corresponding to
+    /// Number of fields to be projected: 2*dim, corresponding to
     /// real and imag parts of the displacement components
     unsigned nfields_for_projection()
     {
       return 2 * this->dim();
     }
 
-    ///  Number of history values to be stored for fld-th field.
+    /// Number of history values to be stored for fld-th field.
     /// (includes present value!)
     unsigned nhistory_values_for_projection(const unsigned& fld)
     {
@@ -765,7 +765,7 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
-    /// Number of positional history values: Read out from
+    ///Number of positional history values: Read out from
     /// positional timestepper
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
@@ -773,7 +773,7 @@ namespace oomph
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
     }
 
-    ///  Return Jacobian of mapping and shape functions of field fld
+    /// Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
     double jacobian_and_shape_of_field(const unsigned& fld,
                                        const Vector<double>& s,
@@ -789,7 +789,7 @@ namespace oomph
     }
 
 
-    ///  Return interpolated field fld at local coordinate s, at time
+    /// Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
     double get_field(const unsigned& t,
                      const unsigned& fld,
@@ -903,7 +903,7 @@ namespace oomph
     : public virtual QPMLTimeHarmonicLinearElasticityElement<2, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate QElement
     PMLLayerElement() : QPMLTimeHarmonicLinearElasticityElement<2, NNODE_1D>()
     {

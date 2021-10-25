@@ -53,7 +53,7 @@ namespace oomph
   class EighthSphereMesh : public virtual BrickMeshBase
   {
   public:
-    ///  Constructor: Pass radius and timestepper; defaults to
+    /// Constructor: Pass radius and timestepper; defaults to
     /// static default timestepper
     EighthSphereMesh(const double& radius,
                      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
@@ -90,7 +90,7 @@ namespace oomph
                                      public virtual RefineableBrickMesh<ELEMENT>
   {
   public:
-    ///  Constructor: Pass radius and timestepper; defaults to
+    /// Constructor: Pass radius and timestepper; defaults to
     /// static default timestepper
     RefineableEighthSphereMesh(
       const double& radius,

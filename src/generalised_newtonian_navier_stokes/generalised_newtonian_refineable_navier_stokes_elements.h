@@ -59,15 +59,15 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   protected:
-    ///  Unpin all pressure dofs in the element
+    /// Unpin all pressure dofs in the element
     virtual void unpin_elemental_pressure_dofs() = 0;
 
-    ///  Pin unused nodal pressure dofs (empty by default, because
+    /// Pin unused nodal pressure dofs (empty by default, because
     /// by default pressure dofs are not associated with nodes)
     virtual void pin_elemental_redundant_nodal_pressure_dofs() {}
 
   public:
-    ///  Constructor
+    /// Constructor
     RefineableGeneralisedNewtonianNavierStokesEquations()
       : GeneralisedNewtonianNavierStokesEquations<DIM>(),
         RefineableElement(),
@@ -76,7 +76,7 @@ namespace oomph
     }
 
 
-    ///   Loop over all elements in Vector (which typically contains
+    ///  Loop over all elements in Vector (which typically contains
     /// all the elements in a fluid mesh) and pin the nodal pressure degrees
     /// of freedom that are not being used. Function uses
     /// the member function
@@ -100,7 +100,7 @@ namespace oomph
       }
     }
 
-    ///  Unpin all pressure dofs in elements listed in vector.
+    /// Unpin all pressure dofs in elements listed in vector.
     static void unpin_all_pressure_dofs(
       const Vector<GeneralisedElement*>& element_pt)
     {
@@ -114,14 +114,14 @@ namespace oomph
       }
     }
 
-    ///  Pointer to n_p-th pressure node (Default: NULL,
+    /// Pointer to n_p-th pressure node (Default: NULL,
     /// indicating that pressure is not based on nodal interpolation).
     virtual Node* pressure_node_pt(const unsigned& n_p)
     {
       return NULL;
     }
 
-    ///  Compute the diagonal of the velocity/pressure mass matrices.
+    /// Compute the diagonal of the velocity/pressure mass matrices.
     /// If which one=0, both are computed, otherwise only the pressure
     /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
     /// LSC version of the preconditioner only needs that one)
@@ -138,7 +138,7 @@ namespace oomph
       return DIM + (DIM * (DIM - 1)) / 2;
     }
 
-    ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
+    /// Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain rate tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -214,7 +214,7 @@ namespace oomph
     }
 
 
-    ///  Compute the derivatives of the i-th component of
+    /// Compute the derivatives of the i-th component of
     /// velocity at point s with respect
     /// to all data that can affect its value. In addition, return the global
     /// equation numbers corresponding to the data.
@@ -355,7 +355,7 @@ namespace oomph
 
 
   protected:
-    ///  Add element's contribution to elemental residual vector and/or
+    /// Add element's contribution to elemental residual vector and/or
     /// Jacobian matrix
     /// flag=1: compute both
     /// flag=0: compute only residual vector
@@ -365,7 +365,7 @@ namespace oomph
       DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
-    ///  Compute derivatives of elemental residual vector with respect
+    /// Compute derivatives of elemental residual vector with respect
     /// to nodal coordinates. Overwrites default implementation in
     /// FiniteElement base class.
     /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
@@ -424,7 +424,7 @@ namespace oomph
     }
 
   public:
-    ///  Constructor
+    /// Constructor
     RefineableGeneralisedNewtonianQTaylorHoodElement()
       : RefineableElement(),
         RefineableGeneralisedNewtonianNavierStokesEquations<DIM>(),
@@ -433,7 +433,7 @@ namespace oomph
     {
     }
 
-    ///  Number of values required at local node n. In order to simplify
+    /// Number of values required at local node n. In order to simplify
     /// matters, we allocate storage for pressure variables at all the nodes
     /// and then pin those that are not used.
     unsigned required_nvalue(const unsigned& n) const
@@ -451,26 +451,26 @@ namespace oomph
     /// Rebuild from sons: empty
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return 2;
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return GeneralisedNewtonianQTaylorHoodElement<DIM>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return GeneralisedNewtonianQTaylorHoodElement<DIM>::vertex_node_pt(j);
     }
 
-    ///  Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -490,7 +490,7 @@ namespace oomph
       values[DIM] = this->interpolated_p_nst(s);
     }
 
-    ///  Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -531,7 +531,7 @@ namespace oomph
     }
 
 
-    ///   Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. The pressures are stored
     /// at the p_nodal_index_nst-th location in each node
     void further_setup_hanging_nodes()
@@ -539,13 +539,13 @@ namespace oomph
       this->setup_hang_for_value(this->p_nodal_index_nst());
     }
 
-    ///  Pointer to n_p-th pressure node
+    /// Pointer to n_p-th pressure node
     Node* pressure_node_pt(const unsigned& n_p)
     {
       return this->node_pt(this->Pconv[n_p]);
     }
 
-    ///  The velocities are isoparametric and so the "nodes" interpolating
+    /// The velocities are isoparametric and so the "nodes" interpolating
     /// the velocities are the geometric nodes. The pressure "nodes" are a
     /// subset of the nodes, so when value_id==DIM, the n-th pressure
     /// node is returned.
@@ -564,7 +564,7 @@ namespace oomph
       }
     }
 
-    ///  The pressure nodes are the corner nodes, so when n_value==DIM,
+    /// The pressure nodes are the corner nodes, so when n_value==DIM,
     /// the fraction is the same as the 1d node number, 0 or 1.
     double local_one_d_fraction_of_interpolating_node(const unsigned& n1d,
                                                       const unsigned& i,
@@ -582,7 +582,7 @@ namespace oomph
       }
     }
 
-    ///  The velocity nodes are the same as the geometric nodes. The
+    /// The velocity nodes are the same as the geometric nodes. The
     /// pressure nodes must be calculated by using the same methods as
     /// the geometric nodes, but by recalling that there are only two pressure
     /// nodes per edge.
@@ -645,7 +645,7 @@ namespace oomph
     }
 
 
-    ///  The number of 1d pressure nodes is 2, the number of 1d velocity
+    /// The number of 1d pressure nodes is 2, the number of 1d velocity
     /// nodes is the same as the number of 1d geometric nodes.
     unsigned ninterpolating_node_1d(const int& value_id)
     {
@@ -659,7 +659,7 @@ namespace oomph
       }
     }
 
-    ///  The number of pressure nodes is 2^DIM. The number of
+    /// The number of pressure nodes is 2^DIM. The number of
     /// velocity nodes is the same as the number of geometric nodes.
     unsigned ninterpolating_node(const int& value_id)
     {
@@ -673,7 +673,7 @@ namespace oomph
       }
     }
 
-    ///  The basis interpolating the pressure is given by pshape().
+    /// The basis interpolating the pressure is given by pshape().
     //// The basis interpolating the velocity is shape().
     void interpolating_basis(const Vector<double>& s,
                              Shape& psi,
@@ -690,7 +690,7 @@ namespace oomph
     }
 
 
-    ///  Add to the set \c paired_load_data pairs containing
+    /// Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
     /// and
     /// - the index of the value in that Data object
@@ -790,7 +790,7 @@ namespace oomph
 
 
   //=======================================================================
-  ///  Face geometry of the RefineableQTaylorHoodElements is the
+  /// Face geometry of the RefineableQTaylorHoodElements is the
   /// same as the Face geometry of the QTaylorHoodElements.
   //=======================================================================
   template<unsigned DIM>
@@ -805,7 +805,7 @@ namespace oomph
 
 
   //=======================================================================
-  ///  Face geometry of the face geometry of
+  /// Face geometry of the face geometry of
   /// the RefineableQTaylorHoodElements is the
   /// same as the Face geometry of the Face geometry of QTaylorHoodElements.
   //=======================================================================
@@ -851,7 +851,7 @@ namespace oomph
     }
 
   public:
-    ///  Constructor
+    /// Constructor
     RefineableGeneralisedNewtonianQCrouzeixRaviartElement()
       : RefineableElement(),
         RefineableGeneralisedNewtonianNavierStokesEquations<DIM>(),
@@ -882,31 +882,31 @@ namespace oomph
       return DIM;
     }
 
-    ///  Rebuild from sons: Reconstruct pressure from the (merged) sons
+    /// Rebuild from sons: Reconstruct pressure from the (merged) sons
     /// This must be specialised for each dimension.
     inline void rebuild_from_sons(Mesh*& mesh_pt);
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return 2;
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return GeneralisedNewtonianQCrouzeixRaviartElement<DIM>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return GeneralisedNewtonianQCrouzeixRaviartElement<DIM>::vertex_node_pt(
         j);
     }
 
-    ///  Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -923,7 +923,7 @@ namespace oomph
       }
     }
 
-    ///  Get all function values [u,v..,p] at previous timestep t
+    /// Get all function values [u,v..,p] at previous timestep t
     /// (t=0: present; t>0: previous timestep).
     ///
     /// Note: Given the generality of the interface (this function
@@ -964,7 +964,7 @@ namespace oomph
       }
     }
 
-    ///   Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Empty
     void further_setup_hanging_nodes() {}
 
@@ -975,7 +975,7 @@ namespace oomph
     inline void further_build();
 
 
-    ///  Add to the set \c paired_load_data pairs containing
+    /// Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
     /// and
     /// - the index of the value in that Data object
@@ -1072,7 +1072,7 @@ namespace oomph
     }
 
   public:
-    ///  Constructor
+    /// Constructor
     PRefineableGeneralisedNewtonianQCrouzeixRaviartElement()
       : RefineableElement(),
         RefineableGeneralisedNewtonianNavierStokesEquations<DIM>(),
@@ -1103,7 +1103,7 @@ namespace oomph
       }
     }
 
-    ///  Destructor
+    /// Destructor
     ~PRefineableGeneralisedNewtonianQCrouzeixRaviartElement()
     {
       delete this->integral_pt();
@@ -1120,7 +1120,7 @@ namespace oomph
                    PRefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>&)
       = delete;*/
 
-    ///  Return the i-th pressure value
+    /// Return the i-th pressure value
     /// (Discontinous pressure interpolation -- no need to cater for hanging
     /// nodes).
     double p_nst(const unsigned& i) const
@@ -1158,7 +1158,7 @@ namespace oomph
       return DIM;
     }
 
-    ///  Rebuild from sons: Reconstruct pressure from the (merged) sons
+    /// Rebuild from sons: Reconstruct pressure from the (merged) sons
     /// This must be specialised for each dimension.
     void rebuild_from_sons(Mesh*& mesh_pt)
     {
@@ -1173,7 +1173,7 @@ namespace oomph
       }
     }
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// - Same order as shape functions.
     // unsigned nrecovery_order()
     // {
@@ -1187,20 +1187,20 @@ namespace oomph
       return 3;
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return GeneralisedNewtonianQCrouzeixRaviartElement<DIM>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return GeneralisedNewtonianQCrouzeixRaviartElement<DIM>::vertex_node_pt(
         j);
     }
 
-    ///  Velocity shape and test functions and their derivs
+    /// Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_nst(const Vector<double>& s,
@@ -1209,7 +1209,7 @@ namespace oomph
                                                 Shape& test,
                                                 DShape& dtestdx) const;
 
-    ///  Velocity shape and test functions and their derivs
+    /// Velocity shape and test functions and their derivs
     /// w.r.t. to global coords at ipt-th integation point (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_nst(const unsigned& ipt,
@@ -1226,7 +1226,7 @@ namespace oomph
                            Shape& psi,
                            Shape& test) const;
 
-    ///  Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -1243,7 +1243,7 @@ namespace oomph
       }
     }
 
-    ///  Get all function values [u,v..,p] at previous timestep t
+    /// Get all function values [u,v..,p] at previous timestep t
     /// (t=0: present; t>0: previous timestep).
     ///
     /// Note: Given the generality of the interface (this function
@@ -1284,7 +1284,7 @@ namespace oomph
       }
     }
 
-    ///   Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Empty
     void further_setup_hanging_nodes() {}
 
@@ -1312,7 +1312,7 @@ namespace oomph
   };
 
   //======================================================================
-  ///  Face geometry of the face geometry of
+  /// Face geometry of the face geometry of
   /// the RefineableQCrouzeixRaviartElements is the
   /// same as the Face geometry of the Face geometry of
   /// QCrouzeixRaviartElements.

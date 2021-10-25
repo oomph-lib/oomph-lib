@@ -61,7 +61,7 @@ namespace oomph
                           public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///  Constructor: Call constructors for TElement and
+    /// Constructor: Call constructors for TElement and
     /// Poisson equations
     TPoissonElement() : TElement<DIM, NNODE_1D>(), PoissonEquations<DIM>() {}
 
@@ -72,21 +72,21 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const TPoissonElement<DIM, NNODE_1D>&) = delete;
 
-    ///   Access function for Nvalue: # of `values' (pinned or dofs)
+    ///  Access function for Nvalue: # of `values' (pinned or dofs)
     /// at node n (always returns the same value at every node, 1)
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    ///  Output function:
+    /// Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
       PoissonEquations<DIM>::output(outfile);
     }
 
-    ///   Output function:
+    ///  Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -94,7 +94,7 @@ namespace oomph
     }
 
 
-    ///  C-style output function:
+    /// C-style output function:
     ///  x,y,u   or    x,y,z,u
     void output(FILE* file_pt)
     {
@@ -102,7 +102,7 @@ namespace oomph
     }
 
 
-    ///   C-style output function:
+    ///  C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -110,7 +110,7 @@ namespace oomph
     }
 
 
-    ///  Output function for an exact solution:
+    /// Output function for an exact solution:
     ///  x,y,u_exact
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -120,7 +120,7 @@ namespace oomph
     }
 
 
-    ///  Output function for a time-dependent exact solution.
+    /// Output function for a time-dependent exact solution.
     ///  x,y,u_exact (calls the steady version)
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -149,7 +149,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const;
 
-    ///  Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_poisson(
@@ -162,7 +162,7 @@ namespace oomph
       RankFourTensor<double>& d_dtestdx_dX,
       DenseMatrix<double>& djacobian_dX) const;
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
@@ -181,13 +181,13 @@ namespace oomph
       this->get_flux(s, flux);
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<DIM, NNODE_1D>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<DIM, NNODE_1D>::vertex_node_pt(j);
@@ -306,7 +306,7 @@ namespace oomph
     : public virtual TElement<DIM - 1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : TElement<DIM - 1, NNODE_1D>() {}
   };
@@ -318,7 +318,7 @@ namespace oomph
   class FaceGeometry<TPoissonElement<1, NNODE_1D>> : public virtual PointElement
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : PointElement() {}
   };

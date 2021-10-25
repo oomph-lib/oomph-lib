@@ -69,7 +69,7 @@ namespace oomph
     /// Pointer to timescale ratio (non-dimensional density)
     double* Lambda_sq_pt;
 
-    ///  Pointer to membrane pre-stress terms -- should
+    /// Pointer to membrane pre-stress terms -- should
     /// probably generalise this to function pointers at some point
     DenseMatrix<double*> Prestress_pt;
 
@@ -86,7 +86,7 @@ namespace oomph
                                   const Vector<double>& N,
                                   Vector<double>& load);
 
-    ///  Pointer to load vector function: Its arguments are:
+    /// Pointer to load vector function: Its arguments are:
     /// Lagrangian coordinate, Eulerian coordinate, normal vector and
     /// load vector itself (not all of the input arguments will be
     /// required for all specific load functions but the list should
@@ -97,12 +97,12 @@ namespace oomph
                                Vector<double>& load);
 
 
-    ///  Pointer to the GeomObject that specifies the undeformed midplane
+    /// Pointer to the GeomObject that specifies the undeformed midplane
     /// of the shell
     GeomObject* Undeformed_midplane_pt;
 
 
-    /// short Helper function to Return the residuals for
+    /// Helper function to Return the residuals for
     /// the equations of KL shell theory. This is used to prevent
     /// a call of fill_in_contribution_to_residuals in
     /// the function fill_in_contribution_to_jacobian that can
@@ -110,7 +110,7 @@ namespace oomph
     /// used as part of a multi-physics element.
     void fill_in_contribution_to_residuals_shell(Vector<double>& residuals);
 
-    ///  Get the load vector for the computation of the rate of work
+    /// Get the load vector for the computation of the rate of work
     /// done by the load. Here we simply forward this to
     /// load_vector(...) but allow it to be overloaded in derived classes
     /// to allow the computation of the rate of work due to constituent
@@ -163,7 +163,7 @@ namespace oomph
       return Load_vector_fct_pt;
     }
 
-    ///  Get the load vector: Pass number of integration point (dummy),
+    /// Get the load vector: Pass number of integration point (dummy),
     /// Lagr. coordinate and normal vector and return the load vector
     /// (not all of the input arguments will be
     /// required for all specific load functions but the list should
@@ -179,7 +179,7 @@ namespace oomph
     }
 
 
-    ///  Set pointer to (i,j)-th component of second Piola Kirchhoff
+    /// Set pointer to (i,j)-th component of second Piola Kirchhoff
     /// membrane prestress to specified value (automatically imposes
     /// symmetry for off-diagonal entries)
     void set_prestress_pt(const unsigned& i,
@@ -190,7 +190,7 @@ namespace oomph
       Prestress_pt(j, i) = value_pt;
     }
 
-    ///  Return (i,j)-th component of second Piola Kirchhoff membrane
+    /// Return (i,j)-th component of second Piola Kirchhoff membrane
     /// prestress
     double prestress(const unsigned& i, const unsigned& j)
     {
@@ -245,14 +245,14 @@ namespace oomph
       return Lambda_sq_pt;
     }
 
-    ///  Return a reference to geometric object that specifies the shell's
+    /// Return a reference to geometric object that specifies the shell's
     /// undeformed geometry
     GeomObject*& undeformed_midplane_pt()
     {
       return Undeformed_midplane_pt;
     }
 
-    ///  Get normal vector
+    /// Get normal vector
     void get_normal(const Vector<double>& s, Vector<double>& N);
 
     /// Overload the standard fill in residuals contribution
@@ -266,11 +266,11 @@ namespace oomph
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian);
 
-    ///  Get potential (strain) and kinetic energy of the element
+    /// Get potential (strain) and kinetic energy of the element
     void get_energy(double& pot_en, double& kin_en);
 
 
-    ///  Get strain and bending tensors; returns pair comprising the
+    /// Get strain and bending tensors; returns pair comprising the
     /// determinant of the undeformed (*.first) and deformed (*.second)
     /// midplane metric tensor.
     std::pair<double, double> get_strain_and_bend(const Vector<double>& s,
@@ -278,7 +278,7 @@ namespace oomph
                                                   DenseDoubleMatrix& bend);
 
 
-    ///  Get integral of instantaneous rate of work done on
+    /// Get integral of instantaneous rate of work done on
     /// the wall due to the load returned by the virtual
     /// function load_vector_for_rate_of_work_computation(...).
     /// In the current class
@@ -412,7 +412,7 @@ namespace oomph
     : public virtual SolidQHermiteElement<1>
   {
   public:
-    ///  Constructor [this was only required explicitly
+    /// Constructor [this was only required explicitly
     /// from gcc 4.5.2 onwards...]
     FaceGeometry() : SolidQHermiteElement<1>() {}
   };
@@ -431,7 +431,7 @@ namespace oomph
                                      public virtual FSIWallElement
   {
   private:
-    ///  Get the load vector for the computation of the rate of work
+    /// Get the load vector for the computation of the rate of work
     /// done by the load. Can switch between full load and fluid load only.
     /// Overloads the version in the shell element base class.
     /// Pass number of integration point (dummy)
@@ -461,12 +461,12 @@ namespace oomph
     /// Boolean flag to indicate whether the normal is directed into the fluid
     bool Normal_points_into_fluid;
 
-    ///  Boolean flag to indicate if rate-of-work by load is to be
+    /// Boolean flag to indicate if rate-of-work by load is to be
     /// based on the fluid traction only
     bool Compute_rate_of_work_by_load_with_fluid_load_only;
 
   public:
-    ///  Constructor: Create shell element as FSIWallElement (and thus,
+    /// Constructor: Create shell element as FSIWallElement (and thus,
     /// by inheritance, a GeomObject) with two Lagrangian coordinates
     /// and 3 Eulerian coordinates. By default, we assume that the
     /// normal vector computed by KirchhoffLoveShellEquations::get_normal(...)
@@ -483,17 +483,17 @@ namespace oomph
       setup_fsi_wall_element(n_lagr, n_dim);
     }
 
-    ///  Destructor: empty
+    /// Destructor: empty
     ~FSIDiagHermiteShellElement() {}
 
-    ///  Set the normal computed by
+    /// Set the normal computed by
     /// KirchhoffLoveShellEquations::get_normal(...) to point into the fluid
     void set_normal_pointing_into_fluid()
     {
       Normal_points_into_fluid = true;
     }
 
-    ///  Set the normal computed by
+    /// Set the normal computed by
     /// KirchhoffLoveShellEquations::get_normal(...) to point out of the fluid
     void set_normal_pointing_out_of_fluid()
     {
@@ -501,13 +501,13 @@ namespace oomph
     }
 
 
-    ///  Derivative of position vector w.r.t. the SolidFiniteElement's
+    /// Derivative of position vector w.r.t. the SolidFiniteElement's
     /// Lagrangian coordinates; evaluated at current time.
     void dposition_dlagrangian_at_local_coordinate(
       const Vector<double>& s, DenseMatrix<double>& drdxi) const;
 
 
-    ///  Get integral of instantaneous rate of work done on
+    /// Get integral of instantaneous rate of work done on
     /// the wall due to the fluid load returned by the function
     /// fluid_load_vector(...).
     double fluid_load_rate_of_work()
@@ -519,7 +519,7 @@ namespace oomph
     }
 
 
-    ///  Get the load vector: Pass number of the integration point,
+    /// Get the load vector: Pass number of the integration point,
     /// Lagr. coordinate, Eulerian coordinate and normal vector
     /// and return the load vector. (Not all of the input arguments will be
     /// required for all specific load functions but the list should
@@ -558,7 +558,7 @@ namespace oomph
       }
     }
 
-    ///  Get the Jacobian and residuals. Wrapper to generic FSI version;
+    /// Get the Jacobian and residuals. Wrapper to generic FSI version;
     /// that catches the case when we replace the Jacobian by the
     /// mass matrix (for the consistent assignment of initial conditions).
     virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -572,14 +572,14 @@ namespace oomph
     }
 
 
-    ///  The number of "DOF types" that degrees of freedom in this element
+    /// The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Just the solid degrees of freedom themselves.
     unsigned ndof_types() const
     {
       return 1;
     }
 
-    ///  Create a list of pairs for all unknowns in this element,
+    /// Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF types" that this unknown is associated with.
@@ -631,13 +631,13 @@ namespace oomph
       public virtual SolidFaceElement
   {
   public:
-    ///  Constructor, takes the pointer to the "bulk" element and the
+    /// Constructor, takes the pointer to the "bulk" element and the
     /// face index.
     ClampedHermiteShellBoundaryConditionElement(
       FiniteElement* const& bulk_el_pt, const int& face_index);
 
 
-    ///  Broken empty constructor
+    /// Broken empty constructor
     ClampedHermiteShellBoundaryConditionElement()
     {
       throw OomphLibError("Don't call empty constructor for "
@@ -653,7 +653,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const ClampedHermiteShellBoundaryConditionElement&) = delete;
 
-    ///  Set normal vector to clamping plane
+    /// Set normal vector to clamping plane
     void set_symmetry_line(const Vector<double>& normal_to_clamping_plane)
     {
       Normal_to_clamping_plane[0] = normal_to_clamping_plane[0];
@@ -671,7 +671,7 @@ namespace oomph
     //////////////////////////////////////////////////////////////////
 
 
-    ///  Calculate the geometric shape functions
+    /// Calculate the geometric shape functions
     /// at local coordinate s. Set any "superfluous" shape functions to zero.
     void shape(const Vector<double>& s, Shape& psi) const
     {
@@ -689,7 +689,7 @@ namespace oomph
     }
 
 
-    ///  Calculate the geometric shape functions
+    /// Calculate the geometric shape functions
     /// at local coordinate s. Set any "superfluous" shape functions to zero.
     void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
@@ -726,7 +726,7 @@ namespace oomph
       FiniteElement::output(outfile);
     }
 
-    ///  Output function
+    /// Output function
     void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output function -- forward to broken version in FiniteElement
@@ -736,7 +736,7 @@ namespace oomph
       FiniteElement::output(file_pt);
     }
 
-    ///  C-style output function -- forward to broken version in
+    /// C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -744,14 +744,14 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
-    ///  The number of "DOF types" that degrees of freedom in this element
+    /// The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Just the solid degrees of freedom themselves.
     unsigned ndof_types() const
     {
       return 1;
     }
 
-    ///  Create a list of pairs for all unknowns in this element,
+    /// Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF types" that this unknown is associated with.
@@ -762,7 +762,7 @@ namespace oomph
 
 
   private:
-    ///  Normal vector to the clamping plane
+    /// Normal vector to the clamping plane
     Vector<double> Normal_to_clamping_plane;
   };
 

@@ -39,7 +39,7 @@ namespace oomph
   class SimpleCubicTetMesh : public TetMeshBase
   {
   public:
-    ///  Constructor: Pass number of element blocks
+    /// Constructor: Pass number of element blocks
     /// in the x, y and z directions and the corresponding dimensions.
     /// Timestepper defaults to Steady.
     SimpleCubicTetMesh(

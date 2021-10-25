@@ -45,7 +45,7 @@ namespace oomph
   class BackwardStepQuadMesh : public virtual RectangularQuadMesh<ELEMENT>
   {
   public:
-    ///  Pass overall number of elements in the horizontal
+    /// Pass overall number of elements in the horizontal
     /// and vertical directions, nx and ny, and the corresponding
     /// dimensions, lx and ly. nx_cut_out and ny_cut_out elements
     /// are cut out from the lower right corner to create the
@@ -94,7 +94,7 @@ namespace oomph
       public RefineableQuadMesh<ELEMENT>
   {
   public:
-    ///  Pass overall number of elements in the horizontal
+    /// Pass overall number of elements in the horizontal
     /// and vertical directions, nx and ny, and the corresponding
     /// dimensions, lx and ly. nx_cut_out and ny_cut_out elements
     /// are cut out from the lower right corner to create the

@@ -65,7 +65,7 @@ namespace oomph
     {
     }
 
-    ///  This function returns the residuals for the traction
+    /// This function returns the residuals for the traction
     /// function. If construct_jacobian_flag=1 (or 0): do (or don't)
     /// compute the Jacobian as well.
     virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
@@ -341,15 +341,15 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   protected:
-    ///  Unpin all pressure dofs in the element
+    /// Unpin all pressure dofs in the element
     virtual void unpin_elemental_pressure_dofs() = 0;
 
-    ///  Pin unused nodal pressure dofs (empty by default, because
+    /// Pin unused nodal pressure dofs (empty by default, because
     /// by default pressure dofs are not associated with nodes)
     virtual void pin_elemental_redundant_nodal_pressure_dofs() {}
 
   public:
-    ///  Constructor
+    /// Constructor
     RefineableSpaceTimeNavierStokesMixedOrderEquations()
       : SpaceTimeNavierStokesMixedOrderEquations<DIM>(),
         RefineableElement(),
@@ -358,7 +358,7 @@ namespace oomph
     }
 
 
-    ///   Loop over all elements in Vector (which typically contains
+    ///  Loop over all elements in Vector (which typically contains
     /// all the elements in a fluid mesh) and pin the nodal pressure degrees
     /// of freedom that are not being used. Function uses
     /// the member function
@@ -385,7 +385,7 @@ namespace oomph
     } // End of pin_redundant_nodal_pressures
 
 
-    ///  Unpin all pressure dofs in elements listed in vector.
+    /// Unpin all pressure dofs in elements listed in vector.
     static void unpin_all_pressure_dofs(
       const Vector<GeneralisedElement*>& element_pt)
     {
@@ -403,7 +403,7 @@ namespace oomph
     } // End of unpin_all_pressure_dofs
 
 
-    ///  Pointer to n_p-th pressure node (Default: NULL,
+    /// Pointer to n_p-th pressure node (Default: NULL,
     /// indicating that pressure is not based on nodal interpolation).
     virtual Node* pressure_node_pt(const unsigned& n_p)
     {
@@ -412,7 +412,7 @@ namespace oomph
     } // End of pressure_node_pt
 
 
-    ///  Compute the diagonal of the velocity/pressure mass matrices.
+    /// Compute the diagonal of the velocity/pressure mass matrices.
     /// If which one=0, both are computed, otherwise only the pressure
     /// (which_one=1) or the velocity mass matrix (which_one=2 -- the
     /// LSC version of the preconditioner only needs that one)
@@ -431,7 +431,7 @@ namespace oomph
     } // End of num_Z2_flux_terms
 
 
-    ///  Get 'flux' for Z2 error recovery: Upper triangular entries
+    /// Get 'flux' for Z2 error recovery: Upper triangular entries
     /// in strain rate tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -570,7 +570,7 @@ namespace oomph
     } // End of further_build
 
 
-    ///  Compute the derivatives of the i-th component of
+    /// Compute the derivatives of the i-th component of
     /// velocity at point s with respect
     /// to all data that can affect its value. In addition, return the global
     /// equation numbers corresponding to the data.
@@ -721,7 +721,7 @@ namespace oomph
     } // End of dinterpolated_u_nst_ddata
 
   protected:
-    ///  Add the elements contribution to elemental residual vector
+    /// Add the elements contribution to elemental residual vector
     /// and/or Jacobian matrix.
     ///           compute_jacobian_flag=0: compute residual vector only
     ///           compute_jacobian_flag=1: compute both
@@ -732,7 +732,7 @@ namespace oomph
       const unsigned& compute_jacobian_flag);
 
 
-    ///  Compute the residuals for the associated pressure advection
+    /// Compute the residuals for the associated pressure advection
     /// diffusion problem. Used by the Fp preconditioner.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_pressure_advection_diffusion_contribution_nst(
@@ -741,7 +741,7 @@ namespace oomph
       const unsigned& compute_jacobian_flag);
 
 
-    ///  Compute derivatives of elemental residual vector with respect
+    /// Compute derivatives of elemental residual vector with respect
     /// to nodal coordinates. Overwrites default implementation in
     /// FiniteElement base class.
     /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
@@ -761,7 +761,7 @@ namespace oomph
       public virtual RefineableQElement<DIM + 1>
   {
   public:
-    ///  Constructor
+    /// Constructor
     RefineableQTaylorHoodMixedOrderSpaceTimeElement()
       : RefineableElement(),
         RefineableSpaceTimeNavierStokesMixedOrderEquations<DIM>(),
@@ -771,7 +771,7 @@ namespace oomph
     }
 
 
-    ///  Number of values required at local node n. In order to simplify
+    /// Number of values required at local node n. In order to simplify
     /// matters, we allocate storage for pressure variables at all the nodes
     /// and then pin those that are not used.
     unsigned required_nvalue(const unsigned& n) const
@@ -793,7 +793,7 @@ namespace oomph
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
@@ -802,7 +802,7 @@ namespace oomph
     } // End of nrecovery_order
 
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       // Call the base class implementation of the function
@@ -810,7 +810,7 @@ namespace oomph
     } // End of nvertex_node
 
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       // Call the base class implementation of the function
@@ -818,7 +818,7 @@ namespace oomph
     } // End of vertex_node_pt
 
 
-    ///  Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function is usually
     /// called from black-box documentation or interpolation routines), the
     /// values Vector sets its own size in here.
@@ -840,7 +840,7 @@ namespace oomph
     } // End of get_interpolated_values
 
 
-    ///  Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -871,7 +871,7 @@ namespace oomph
     } // End of get_interpolated_values
 
 
-    ///  Perform additional hanging node procedures for variables
+    /// Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. The pressures are stored
     /// at the p_nodal_index_nst-th location in each node
     void further_setup_hanging_nodes()
@@ -881,7 +881,7 @@ namespace oomph
     } // End of further_setup_hanging_nodes
 
 
-    ///  Pointer to n_p-th pressure node
+    /// Pointer to n_p-th pressure node
     Node* pressure_node_pt(const unsigned& n_p)
     {
       // Return a pointer to the n_p-th pressure node
@@ -889,7 +889,7 @@ namespace oomph
     } // End of pressure node_pt
 
 
-    ///  The velocities are isoparametric and so the "nodes" interpolating
+    /// The velocities are isoparametric and so the "nodes" interpolating
     /// the velocities are the geometric nodes. The pressure "nodes" are a
     /// subset of the nodes, so when value_id==DIM, the n-th pressure
     /// node is returned.
@@ -911,7 +911,7 @@ namespace oomph
     } // End of interpolating_node_pt
 
 
-    ///  The pressure nodes are the corner nodes, so when n_value==DIM,
+    /// The pressure nodes are the corner nodes, so when n_value==DIM,
     /// the fraction is the same as the 1D node number, 0 or 1.
     double local_one_d_fraction_of_interpolating_node(const unsigned& n_1d,
                                                       const unsigned& i,
@@ -932,7 +932,7 @@ namespace oomph
     } // End of local_one_d_fraction_of_interpolating_node
 
 
-    ///  The velocity nodes are the same as the geometric nodes. The
+    /// The velocity nodes are the same as the geometric nodes. The
     /// pressure nodes must be calculated by using the same methods as
     /// the geometric nodes, but by recalling that there are only two pressure
     /// nodes per edge.
@@ -1008,7 +1008,7 @@ namespace oomph
     } // End of get_interpolating_node_at_local_coordinate
 
 
-    ///  The number of 1D pressure nodes is 2, the number of 1D velocity
+    /// The number of 1D pressure nodes is 2, the number of 1D velocity
     /// nodes is the same as the number of 1D geometric nodes.
     unsigned ninterpolating_node_1d(const int& value_id)
     {
@@ -1027,7 +1027,7 @@ namespace oomph
     } // End of ninterpolating_node_1d
 
 
-    ///  The number of pressure nodes is 2^DIM. The number of
+    /// The number of pressure nodes is 2^DIM. The number of
     /// velocity nodes is the same as the number of geometric nodes.
     unsigned ninterpolating_node(const int& value_id)
     {
@@ -1046,7 +1046,7 @@ namespace oomph
     } // End if ninterpolating_node
 
 
-    ///  The basis interpolating the pressure is given by pshape().
+    /// The basis interpolating the pressure is given by pshape().
     //// The basis interpolating the velocity is shape().
     void interpolating_basis(const Vector<double>& s,
                              Shape& psi,
@@ -1067,7 +1067,7 @@ namespace oomph
     } // End of interpolating_basis
 
 
-    ///  Build FaceElements that apply the Robin boundary condition
+    /// Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
     void build_fp_press_adv_diff_robin_bc_element(const unsigned& face_index)
@@ -1079,7 +1079,7 @@ namespace oomph
     } // End of build_fp_press_adv_diff_robin_bc_element
 
 
-    ///  Add to the set \c paired_load_data pairs containing
+    /// Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
     /// and
     /// - the index of the value in that Data object
@@ -1243,7 +1243,7 @@ namespace oomph
 
 
   //=======================================================================
-  ///  Face geometry of the class:
+  /// Face geometry of the class:
   ///           RefineableQTaylorHoodMixedOrderSpaceTimeElements
   /// is the same as the Face geometry of:
   ///           QTaylorHoodMixedOrderSpaceTimeElements.
@@ -1261,7 +1261,7 @@ namespace oomph
 
 
   //=======================================================================
-  ///  Face geometry of the face geometry of the
+  /// Face geometry of the face geometry of the
   /// RefineableQTaylorHoodMixedOrderSpaceTimeElements is the same as the Face
   /// geometry of the Face geometry of QTaylorHoodMixedOrderSpaceTimeElements.
   //=======================================================================

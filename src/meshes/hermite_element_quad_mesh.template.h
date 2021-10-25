@@ -43,7 +43,7 @@
 namespace oomph
 {
   //=============================================================================
-  ///  A two dimensional Hermite bicubic element quadrilateral mesh for
+  /// A two dimensional Hermite bicubic element quadrilateral mesh for
   /// a topologically rectangular domain. The geometry of the problem must be
   /// prescribed using the TopologicallyRectangularDomain. Non uniform node
   /// spacing can be prescribed using a function pointer.
@@ -52,7 +52,7 @@ namespace oomph
   class HermiteQuadMesh : public Mesh
   {
   public:
-    ///  Mesh Spacing Function Pointer - an optional function pointer
+    /// Mesh Spacing Function Pointer - an optional function pointer
     /// to prescibe the node spacing in a non-uniformly spaced mesh - takes the
     /// position of a node (in macro element coordinates) in the uniformly
     /// spaced mesh and return the position in the non-uniformly spaced mesh
@@ -60,7 +60,7 @@ namespace oomph
                                      Vector<double>& m_non_uniform_spacing);
 
 
-    ///  Mesh Constructor (for a uniformly spaced mesh). Takes the
+    /// Mesh Constructor (for a uniformly spaced mesh). Takes the
     /// following arguments :  nx :              number of elements in x
     /// direction;
     ///              ny :              number of elements in y direction;
@@ -98,7 +98,7 @@ namespace oomph
     }
 
 
-    ///  Mesh Constructor (for a non-uniformly spaced mesh). Takes the
+    /// Mesh Constructor (for a non-uniformly spaced mesh). Takes the
     /// following arguments : nx :              number of elements in x
     /// direction;
     ///                       ny :              number of elements in y
@@ -152,7 +152,7 @@ namespace oomph
 
 
   private:
-    ///  returns the macro element position of the node that is the x-th
+    /// returns the macro element position of the node that is the x-th
     /// node along from the LHS and the y-th node up from the lower edge
     void macro_coordinate_position(const unsigned& node_num_x,
                                    const unsigned& node_num_y,
@@ -171,7 +171,7 @@ namespace oomph
     }
 
 
-    ///  sets the generalised position of the node (i.e. - x_i, dx_i/ds_0,
+    /// sets the generalised position of the node (i.e. - x_i, dx_i/ds_0,
     /// dx_i/ds_1 & d2x_i/ds_0ds_1 for i = 1,2). Takes the x,y coordinates of
     /// the node from which its position can be determined.
     void set_position_of_node(const unsigned& node_num_x,
@@ -179,7 +179,7 @@ namespace oomph
                               Node* node_pt);
 
 
-    ///  sets the generalised position of the node (i.e. - x_i, dx_i/ds_0,
+    /// sets the generalised position of the node (i.e. - x_i, dx_i/ds_0,
     /// dx_i/ds_1 & d2x_i/ds_0ds_1 for i = 1,2). Takes the x,y coordinates of
     /// the node from which its position can be determined. Also sets
     /// coordinates on boundary vector for the node to be the generalised
@@ -189,7 +189,7 @@ namespace oomph
                                        BoundaryNode<Node>* node_pt);
 
 
-    ///  computes the generalised position of the node at position
+    /// computes the generalised position of the node at position
     /// (node_num_x, node_num_y) in the macro element coordinate scheme.
     ///     index 0 of m_gen : 0 - m_i
     ///                        1 - dm_i/ds_0
@@ -201,7 +201,7 @@ namespace oomph
                                                     DenseMatrix<double>& m_gen);
 
 
-    ///  Generic mesh construction function to build the mesh
+    /// Generic mesh construction function to build the mesh
     virtual void build_mesh(TimeStepper* time_stepper_pt);
 
 
@@ -219,7 +219,7 @@ namespace oomph
     }
 
 
-    ///  Setup lookup schemes which establish which elements are located
+    /// Setup lookup schemes which establish which elements are located
     /// next to which boundaries (Doc to outfile if it's open).
     /// Specific version for HermiteQuadMesh to ensure that the order of the
     /// elements in Boundary_element_pt matches the actual order along the
@@ -229,14 +229,14 @@ namespace oomph
     virtual void setup_boundary_element_info(std::ostream& outfile);
 
 
-    ///  number of elements in each coordinate direction
+    /// number of elements in each coordinate direction
     Vector<unsigned> Nelement;
 
-    ///  boolean variable to determine whether the mesh is periodic in the
+    /// boolean variable to determine whether the mesh is periodic in the
     /// x-direction
     bool Xperiodic;
 
-    ///  Pointer to the topologically rectangular domain which prescribes
+    /// Pointer to the topologically rectangular domain which prescribes
     /// the problem domain
     TopologicallyRectangularDomain* Domain_pt;
 

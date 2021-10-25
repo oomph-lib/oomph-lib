@@ -308,7 +308,7 @@ namespace oomph
       double W = w * J;
 
 
-      ///  All the PML weights that participate in the assemby process
+      /// All the PML weights that participate in the assemby process
       /// are computed here. pml_inverse_jacobian_diagonals are are used to
       /// transform derivatives in real x to derivatives in transformed space
       /// \f$\tilde x \f$.

@@ -68,12 +68,12 @@ namespace oomph
     /// Pointer to the desired value of the volume
     double* Prescribed_volume_pt;
 
-    ///  The Data that contains the traded pressure is stored
+    /// The Data that contains the traded pressure is stored
     /// as external or internal Data for the element. What is its index
     /// in these containers?
     unsigned External_or_internal_data_index_of_traded_pressure;
 
-    ///  The Data that contains the traded pressure is stored
+    /// The Data that contains the traded pressure is stored
     /// as external or internal Data for the element. Which one?
     bool Traded_pressure_stored_as_internal_data;
 
@@ -81,7 +81,7 @@ namespace oomph
     /// traded pressure
     unsigned Index_of_traded_pressure_value;
 
-    ///  The local eqn number for the traded pressure
+    /// The local eqn number for the traded pressure
     inline int ptraded_local_eqn()
     {
       if (Traded_pressure_stored_as_internal_data)
@@ -99,17 +99,17 @@ namespace oomph
     }
 
 
-    ///  Fill in the residuals for the volume constraint
+    /// Fill in the residuals for the volume constraint
     void fill_in_generic_contribution_to_residuals_volume_constraint(
       Vector<double>& residuals);
 
   public:
-    ///  Constructor: Pass pointer to target volume. "Pressure" value that
+    /// Constructor: Pass pointer to target volume. "Pressure" value that
     /// "traded" for the volume contraint is created internally (as a Data
     /// item with a single pressure value)
     VolumeConstraintElement(double* prescribed_volume_pt);
 
-    ///  Constructor: Pass pointer to target volume, pointer to Data
+    /// Constructor: Pass pointer to target volume, pointer to Data
     /// item whose value specified by index_of_traded_pressure represents
     /// the "Pressure" value that "traded" for the volume contraint.
     /// The Data is stored as external Data for this element.
@@ -117,7 +117,7 @@ namespace oomph
                             Data* p_traded_data_pt,
                             const unsigned& index_of_traded_pressure);
 
-    ///  Empty destructor
+    /// Empty destructor
     ~VolumeConstraintElement() {}
 
     /// Access to Data that contains the traded pressure
@@ -148,14 +148,14 @@ namespace oomph
     }
 
 
-    ///  Fill in the residuals for the volume constraint
+    /// Fill in the residuals for the volume constraint
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       this->fill_in_generic_contribution_to_residuals_volume_constraint(
         residuals);
     }
 
-    ///  Fill in the residuals and jacobian for the volume constraint
+    /// Fill in the residuals and jacobian for the volume constraint
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
     {
@@ -164,7 +164,7 @@ namespace oomph
         residuals);
     }
 
-    ///  Fill in the residuals, jacobian and mass matrix for the volume
+    /// Fill in the residuals, jacobian and mass matrix for the volume
     /// constraint.
     void fill_in_contribution_to_jacobian_and_mass_matrix(
       Vector<double>& residuals,
@@ -195,7 +195,7 @@ namespace oomph
   class VolumeConstraintBoundingElement : public virtual FaceElement
   {
   protected:
-    ///  The Data that contains the traded pressure is usually stored
+    /// The Data that contains the traded pressure is usually stored
     /// as external Data for this element, but may also be nodal Data
     /// Which Data item is it?
     unsigned Data_number_of_traded_pressure;
@@ -204,12 +204,12 @@ namespace oomph
     /// traded pressure
     unsigned Index_of_traded_pressure_value;
 
-    ///  Boolean to indicate whether the traded pressure is
+    /// Boolean to indicate whether the traded pressure is
     /// stored externally or at a node (this can happen in Taylor-Hood
     /// elements)
     bool Traded_pressure_stored_at_node;
 
-    ///  The local eqn number for the traded pressure
+    /// The local eqn number for the traded pressure
     inline int ptraded_local_eqn()
     {
       // Return the appropriate nodal value if required
@@ -225,7 +225,7 @@ namespace oomph
       }
     }
 
-    ///  Helper function to fill in contributions to residuals
+    /// Helper function to fill in contributions to residuals
     /// (remember that part of the residual is added by the the
     /// associated VolumeConstraintElement). This is dimension/geometry
     /// specific and must be implemented in derived classes for
@@ -234,11 +234,11 @@ namespace oomph
       Vector<double>& residuals) = 0;
 
   public:
-    ///  Constructor initialise the boolean flag
+    /// Constructor initialise the boolean flag
     /// We expect the traded pressure data to be stored externally
     VolumeConstraintBoundingElement() : Traded_pressure_stored_at_node(false) {}
 
-    ///  Empty Destructor
+    /// Empty Destructor
     ~VolumeConstraintBoundingElement() {}
 
     /// Fill in contribution to residuals and Jacobian
@@ -248,7 +248,7 @@ namespace oomph
       this->fill_in_generic_residual_contribution_volume_constraint(residuals);
     }
 
-    ///  Set the "master" volume constraint element
+    /// Set the "master" volume constraint element
     /// The setup here is a bit more complicated than one might expect because
     /// if an internal pressure on a boundary
     /// is hijacked in TaylorHood elements then
@@ -331,7 +331,7 @@ namespace oomph
     : public VolumeConstraintBoundingElement
   {
   protected:
-    ///  Helper function to fill in contributions to residuals
+    /// Helper function to fill in contributions to residuals
     /// (remember that part of the residual is added by the
     /// the associated VolumeConstraintElement). This is specific for
     /// 1D line elements that bound 2D cartesian fluid elements.
@@ -339,10 +339,10 @@ namespace oomph
       Vector<double>& residuals);
 
   public:
-    ///  Empty Contructor
+    /// Empty Contructor
     LineVolumeConstraintBoundingElement() : VolumeConstraintBoundingElement() {}
 
-    ///  Empty Destructor
+    /// Empty Destructor
     ~LineVolumeConstraintBoundingElement() {}
 
     /// Return this element's contribution to the total volume enclosed
@@ -371,7 +371,7 @@ namespace oomph
       public virtual FaceGeometry<ELEMENT>
   {
   public:
-    ///  Contructor: Specify bulk element and index of face to which
+    /// Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached
     ElasticLineVolumeConstraintBoundingElement(FiniteElement* const& element_pt,
                                                const int& face_index)
@@ -396,7 +396,7 @@ namespace oomph
       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
     }
 
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     double zeta_nodal(const unsigned& n,
@@ -423,7 +423,7 @@ namespace oomph
       public virtual SpineElement<FaceGeometry<ELEMENT>>
   {
   public:
-    ///  Contructor: Specify bulk element and index of face to which
+    /// Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached.
     SpineLineVolumeConstraintBoundingElement(FiniteElement* const& element_pt,
                                              const int& face_index)
@@ -449,7 +449,7 @@ namespace oomph
       this->fill_in_jacobian_from_geometric_data(jacobian);
     }
 
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     double zeta_nodal(const unsigned& n,
@@ -482,7 +482,7 @@ namespace oomph
     : public VolumeConstraintBoundingElement
   {
   protected:
-    ///  Helper function to fill in contributions to residuals
+    /// Helper function to fill in contributions to residuals
     /// (remember that part of the residual is added by the
     /// the associated VolumeConstraintElement). This is specific for
     /// 1D line elements that bound 2D cartesian fluid elements.
@@ -490,19 +490,19 @@ namespace oomph
       Vector<double>& residuals);
 
   public:
-    ///  Empty Contructor
+    /// Empty Contructor
     AxisymmetricVolumeConstraintBoundingElement()
       : VolumeConstraintBoundingElement()
     {
     }
 
-    ///  Empty Destructor
+    /// Empty Destructor
     ~AxisymmetricVolumeConstraintBoundingElement() {}
 
     /// Return this element's contribution to the total volume enclosed
     double contribution_to_enclosed_volume();
 
-    ///  Return this element's contribution to the volume flux over
+    /// Return this element's contribution to the volume flux over
     /// the boundary
     double contribution_to_volume_flux()
     {
@@ -604,7 +604,7 @@ namespace oomph
       public virtual FaceGeometry<ELEMENT>
   {
   public:
-    ///  Contructor: Specify bulk element and index of face to which
+    /// Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached
     ElasticAxisymmetricVolumeConstraintBoundingElement(
       FiniteElement* const& element_pt, const int& face_index)
@@ -629,7 +629,7 @@ namespace oomph
       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
     }
 
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     double zeta_nodal(const unsigned& n,
@@ -657,7 +657,7 @@ namespace oomph
       public virtual SpineElement<FaceGeometry<ELEMENT>>
   {
   public:
-    ///  Contructor: Specify bulk element and index of face to which
+    /// Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached.
     SpineAxisymmetricVolumeConstraintBoundingElement(
       FiniteElement* const& element_pt, const int& face_index)
@@ -683,7 +683,7 @@ namespace oomph
       this->fill_in_jacobian_from_geometric_data(jacobian);
     }
 
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     double zeta_nodal(const unsigned& n,
@@ -716,7 +716,7 @@ namespace oomph
     : public VolumeConstraintBoundingElement
   {
   protected:
-    ///  Helper function to fill in contributions to residuals
+    /// Helper function to fill in contributions to residuals
     /// (remember that part of the residual is added by the
     /// the associated VolumeConstraintElement). This is specific for
     /// 2D surface elements that bound 3D cartesian fluid elements.
@@ -724,12 +724,12 @@ namespace oomph
       Vector<double>& residuals);
 
   public:
-    ///  Empty Contructor
+    /// Empty Contructor
     SurfaceVolumeConstraintBoundingElement() : VolumeConstraintBoundingElement()
     {
     }
 
-    ///  Empty Desctructor
+    /// Empty Desctructor
     ~SurfaceVolumeConstraintBoundingElement() {}
   };
 
@@ -755,7 +755,7 @@ namespace oomph
       public virtual FaceGeometry<ELEMENT>
   {
   public:
-    ///  Contructor: Specify bulk element and index of face to which
+    /// Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached.
     ElasticSurfaceVolumeConstraintBoundingElement(
       FiniteElement* const& element_pt, const int& face_index)
@@ -782,7 +782,7 @@ namespace oomph
     }
 
 
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     double zeta_nodal(const unsigned& n,
@@ -815,7 +815,7 @@ namespace oomph
       public virtual SpineElement<FaceGeometry<ELEMENT>>
   {
   public:
-    ///  Contructor: Specify bulk element and index of face to which
+    /// Contructor: Specify bulk element and index of face to which
     /// this face element is to be attached.
     SpineSurfaceVolumeConstraintBoundingElement(
       FiniteElement* const& element_pt, const int& face_index)
@@ -842,7 +842,7 @@ namespace oomph
     }
 
 
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     double zeta_nodal(const unsigned& n,

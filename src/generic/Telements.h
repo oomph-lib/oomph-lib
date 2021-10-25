@@ -153,7 +153,7 @@ namespace oomph
     }
 
 
-    ///  Test whether the face lies on a boundary. Relatively simple
+    /// Test whether the face lies on a boundary. Relatively simple
     /// test, based on all vertices lying on (some) boundary.
     bool is_on_boundary() const
     {
@@ -162,7 +162,7 @@ namespace oomph
     }
 
 
-    ///  Test whether the face is a boundary face, i.e. does it
+    /// Test whether the face is a boundary face, i.e. does it
     /// connnect three boundary nodes?
     bool is_boundary_face() const
     {
@@ -171,7 +171,7 @@ namespace oomph
               (dynamic_cast<BoundaryNodeBase*>(Node3_pt) != 0));
     }
 
-    ///  Access to pointer to set of mesh boundaries that this
+    /// Access to pointer to set of mesh boundaries that this
     /// face occupies; NULL if the node is not on any boundary.
     /// Construct via set intersection of the boundary sets for the
     /// associated vertex nodes
@@ -1170,7 +1170,7 @@ namespace oomph
       return false;
     }
 
-    ///  Adjust local coordinates so that they're located inside
+    /// Adjust local coordinates so that they're located inside
     /// the element
     void move_local_coord_back_into_element(Vector<double>& s) const
     {
@@ -1220,7 +1220,7 @@ namespace oomph
                                 public TElementShape<1, NNODE_1D>
   {
   private:
-    ///  Default integration rule: Gaussian integration of same 'order' as
+    /// Default integration rule: Gaussian integration of same 'order' as
     /// the element
     // This is sort of optimal, because it means that the integration is exact
     // for the shape functions. Can overwrite this in specific element
@@ -1277,14 +1277,14 @@ namespace oomph
     }
 
 
-    ///  Number of vertex nodes in the element: One more
+    /// Number of vertex nodes in the element: One more
     /// than spatial dimension
     unsigned nvertex_node() const
     {
       return 2;
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       switch (j)
@@ -1317,7 +1317,7 @@ namespace oomph
       TElementShape<1, NNODE_1D>::shape(s, psi);
     }
 
-    ///  Compute the  geometric shape functions and
+    /// Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     inline void dshape_local(const Vector<double>& s,
                              Shape& psi,
@@ -1326,7 +1326,7 @@ namespace oomph
       TElementShape<1, NNODE_1D>::dshape_local(s, psi, dpsids);
     }
 
-    ///  Compute the geometric shape functions, derivatives and
+    /// Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
@@ -1339,7 +1339,7 @@ namespace oomph
       TElementShape<1, NNODE_1D>::d2shape_local(s, psi, dpsids, d2psids);
     }
 
-    ///  Overload the template-free interface for the calculation of
+    /// Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one dimensional element, so use
     /// the 1D version.
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -1367,21 +1367,21 @@ namespace oomph
       TElementShape<1, NNODE_1D>::local_coordinate_of_node(j, s);
     }
 
-    ///  Return the number of actual plot points for paraview
+    /// Return the number of actual plot points for paraview
     /// plot with parameter nplot.
     unsigned nplot_points_paraview(const unsigned& nplot) const
     {
       return nplot;
     }
 
-    ///  Return the number of local sub-elements for paraview plot with
+    /// Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
     unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       return (nplot - 1);
     }
 
-    ///  Fill in the offset information for paraview plot.
+    /// Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_output_offset_information(std::ofstream& file_out,
@@ -1399,7 +1399,7 @@ namespace oomph
       counter += nplot_points_paraview(nplot);
     }
 
-    ///  Return the paraview element type.
+    /// Return the paraview element type.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_type(std::ofstream& file_out,
@@ -1412,7 +1412,7 @@ namespace oomph
       }
     }
 
-    ///  Return the offsets for the paraview sub-elements. Needs
+    /// Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_offsets(std::ofstream& file_out,
@@ -1441,7 +1441,7 @@ namespace oomph
     /// C_style output at n_plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
-    ///   Get vector of local coordinates of plot point i (when plotting
+    ///  Get vector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction").
     void get_s_plot(
       const unsigned& i,
@@ -1467,7 +1467,7 @@ namespace oomph
       }
     }
 
-    ///  Return string for tecplot zone header (when plotting
+    /// Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
     {
@@ -1483,7 +1483,7 @@ namespace oomph
       return nplot;
     }
 
-    ///  Build the lower-dimensional FaceElement (an element of type
+    /// Build the lower-dimensional FaceElement (an element of type
     /// PointElement).  The face index takes two values
     /// corresponding to the two possible faces:
     /// -1 (Left)  s[0] = -1.0
@@ -1507,7 +1507,7 @@ namespace oomph
     /// Nodal translation scheme for use when generating face elements
     static const unsigned Node_on_face[3][NNODE_1D];
 
-    ///  Default integration rule: Gaussian integration of same 'order' as
+    /// Default integration rule: Gaussian integration of same 'order' as
     /// the element
     // This is sort of optimal, because it means that the integration is exact
     // for the shape functions. Can overwrite this in specific element
@@ -1587,21 +1587,21 @@ namespace oomph
       return NNODE_1D;
     }
 
-    ///  Number of vertex nodes in the element: One more
+    /// Number of vertex nodes in the element: One more
     /// than spatial dimension
     unsigned nvertex_node() const
     {
       return 3;
     }
 
-    ///  Public access function for Node_on_face.
+    /// Public access function for Node_on_face.
     unsigned get_bulk_node_number(const int& face_index,
                                   const unsigned& i) const
     {
       return Node_on_face[face_index][i];
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       // Vertex nodes come first:
@@ -1626,7 +1626,7 @@ namespace oomph
       TElementShape<2, NNODE_1D>::shape(s, psi);
     }
 
-    ///  Compute the  geometric shape functions and
+    /// Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     inline void dshape_local(const Vector<double>& s,
                              Shape& psi,
@@ -1635,7 +1635,7 @@ namespace oomph
       TElementShape<2, NNODE_1D>::dshape_local(s, psi, dpsids);
     }
 
-    ///  Compute the geometric shape functions, derivatives and
+    /// Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
@@ -1648,7 +1648,7 @@ namespace oomph
       TElementShape<2, NNODE_1D>::d2shape_local(s, psi, dpsids, d2psids);
     }
 
-    ///  Overload the template-free interface for the calculation of
+    /// Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a two dimensional element, so use
     /// the 2D version.
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -1676,7 +1676,7 @@ namespace oomph
       TElementShape<2, NNODE_1D>::local_coordinate_of_node(j, s);
     }
 
-    ///  Return the number of actual plot points for paraview
+    /// Return the number of actual plot points for paraview
     /// plot with parameter nplot.
     unsigned nplot_points_paraview(const unsigned& nplot) const
     {
@@ -1688,7 +1688,7 @@ namespace oomph
       return node_sum;
     }
 
-    ///  Return the number of local sub-elements for paraview plot with
+    /// Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
     unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
@@ -1700,7 +1700,7 @@ namespace oomph
       return local_sum;
     }
 
-    ///  Fill in the offset information for paraview plot.
+    /// Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_output_offset_information(std::ofstream& file_out,
@@ -1731,7 +1731,7 @@ namespace oomph
       counter += nplot_points_paraview(nplot);
     }
 
-    ///  Return the paraview element type.
+    /// Return the paraview element type.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_type(std::ofstream& file_out,
@@ -1746,7 +1746,7 @@ namespace oomph
       }
     }
 
-    ///  Return the offsets for the paraview sub-elements. Needs
+    /// Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_offsets(std::ofstream& file_out,
@@ -1776,7 +1776,7 @@ namespace oomph
     /// C_style output at n_plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
-    ///   Get vector of local coordinates of plot point i (when plotting
+    ///  Get vector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction").
     void get_s_plot(
       const unsigned& iplot,
@@ -1816,7 +1816,7 @@ namespace oomph
       }
     }
 
-    ///  Return string for tecplot zone header (when plotting
+    /// Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
     {
@@ -1831,7 +1831,7 @@ namespace oomph
       return header.str();
     }
 
-    ///  Add tecplot zone "footer" to output stream (when plotting
+    /// Add tecplot zone "footer" to output stream (when plotting
     /// nplot points in each "coordinate direction).
     /// Empty by default -- can be used, e.g., to add FE connectivity
     /// lists to elements that need it.
@@ -1860,7 +1860,7 @@ namespace oomph
       }
     }
 
-    ///  Add tecplot zone "footer" to C-style output. (when plotting
+    /// Add tecplot zone "footer" to C-style output. (when plotting
     /// nplot points in each "coordinate direction).
     /// Empty by default -- can be used, e.g., to add FE connectivity
     /// lists to elements that need it.
@@ -1907,7 +1907,7 @@ namespace oomph
     }
 
 
-    ///  Build the lower-dimensional FaceElement (an element of type
+    /// Build the lower-dimensional FaceElement (an element of type
     /// TElement<1,NNODE_1D>). The face index takes three possible values:
     /// 0 (Left)         s[0] = 0.0
     /// 1 (Bottom)       s[1] = 0.0
@@ -3044,7 +3044,7 @@ namespace oomph
     /// Nodal translation scheme for use when generating face elements
     static const unsigned Node_on_face[4][(NNODE_1D * (NNODE_1D + 1)) / 2];
 
-    ///  Default integration rule: Gaussian integration of same 'order' as
+    /// Default integration rule: Gaussian integration of same 'order' as
     /// the element
     // This is sort of optimal, because it means that the integration is exact
     // for the shape functions. Can overwrite this in specific element
@@ -3105,21 +3105,21 @@ namespace oomph
     }
 
 
-    ///  Number of vertex nodes in the element: One more
+    /// Number of vertex nodes in the element: One more
     /// than spatial dimension
     unsigned nvertex_node() const
     {
       return 4;
     }
 
-    ///  Public access function for Node_on_face.
+    /// Public access function for Node_on_face.
     unsigned get_bulk_node_number(const int& face_index,
                                   const unsigned& i) const
     {
       return Node_on_face[face_index][i];
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       // Vertex nodes come first:
@@ -3144,7 +3144,7 @@ namespace oomph
       TElementShape<3, NNODE_1D>::shape(s, psi);
     }
 
-    ///  Compute the  geometric shape functions and
+    /// Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     inline void dshape_local(const Vector<double>& s,
                              Shape& psi,
@@ -3153,7 +3153,7 @@ namespace oomph
       TElementShape<3, NNODE_1D>::dshape_local(s, psi, dpsids);
     }
 
-    ///  Compute the geometric shape functions, derivatives and
+    /// Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t local coordinates at local coordinate s.
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
@@ -3169,7 +3169,7 @@ namespace oomph
       TElementShape<3, NNODE_1D>::d2shape_local(s, psi, dpsids, d2psids);
     }
 
-    ///  Overload the template-free interface for the calculation of
+    /// Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a three dimensional element, so use
     /// the 3D version.
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -3197,7 +3197,7 @@ namespace oomph
       TElementShape<3, NNODE_1D>::local_coordinate_of_node(j, s);
     }
 
-    ///  Return the number of actual plot points for paraview
+    /// Return the number of actual plot points for paraview
     /// plot with parameter nplot.
     unsigned nplot_points_paraview(const unsigned& nplot) const
     {
@@ -3212,14 +3212,14 @@ namespace oomph
       return node_sum;
     }
 
-    ///  Return the number of local sub-elements for paraview plot with
+    /// Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
     unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       return (nplot - 1) * (nplot - 1) * (nplot - 1);
     }
 
-    ///  Fill in the offset information for paraview plot.
+    /// Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_output_offset_information(std::ofstream& file_out,
@@ -3309,7 +3309,7 @@ namespace oomph
 
     } // end of write Paraview_element...
 
-    ///  Return the paraview element type.
+    /// Return the paraview element type.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_type(std::ofstream& file_out,
@@ -3322,7 +3322,7 @@ namespace oomph
       }
     }
 
-    ///  Return the offsets for the paraview sub-elements. Needs
+    /// Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_offsets(std::ofstream& file_out,
@@ -3349,7 +3349,7 @@ namespace oomph
     /// C_style output at n_plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
-    ///   Get vector of local coordinates of plot point i (when plotting
+    ///  Get vector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
       const unsigned& iplot,
@@ -3397,7 +3397,7 @@ namespace oomph
       }
     }
 
-    ///  Return string for tecplot zone header (when plotting
+    /// Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
     {
@@ -3409,7 +3409,7 @@ namespace oomph
       return header.str();
     }
 
-    ///  Add tecplot zone "footer" to output stream (when plotting
+    /// Add tecplot zone "footer" to output stream (when plotting
     /// nplot points in each "coordinate direction).
     /// Empty by default -- can be used, e.g., to add FE connectivity
     /// lists to elements that need it.
@@ -3487,7 +3487,7 @@ namespace oomph
     } // end of write tecplot...
 
 
-    ///  Add tecplot zone "footer" to C-style output. (when plotting
+    /// Add tecplot zone "footer" to C-style output. (when plotting
     /// nplot points in each "coordinate direction).
     /// Empty by default -- can be used, e.g., to add FE connectivity
     /// lists to elements that need it.
@@ -3524,7 +3524,7 @@ namespace oomph
       }
     }
 
-    ///  Return total number of plot points (when plotting
+    /// Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
     unsigned nplot_points(const unsigned& nplot) const
     {
@@ -3542,7 +3542,7 @@ namespace oomph
       return 1;
     }
 
-    ///  Build the lower-dimensional FaceElement (an element of type
+    /// Build the lower-dimensional FaceElement (an element of type
     /// TElement<2,NNODE_1D>). The face index can take one of four values
     /// corresponding to the four possible faces:
     /// 0: (left)           s[0] = 0.0
@@ -3657,7 +3657,7 @@ namespace oomph
       TBubbleEnrichedElementShape<DIM, 3>::shape(s, psi);
     }
 
-    ///  Compute the  geometric shape functions and
+    /// Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     inline void dshape_local(const Vector<double>& s,
                              Shape& psi,
@@ -3667,7 +3667,7 @@ namespace oomph
     }
 
 
-    ///  Compute the geometric shape functions, derivatives and
+    /// Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
@@ -3688,7 +3688,7 @@ namespace oomph
       TBubbleEnrichedElementShape<DIM, 3>::local_coordinate_of_node(j, s);
     }
 
-    ///  Build the lower-dimensional FaceElement
+    /// Build the lower-dimensional FaceElement
     void build_face_element(const int& face_index,
                             FaceElement* face_element_pt);
   };
@@ -3750,7 +3750,7 @@ namespace oomph
     /// Broken assignment operator
     /*void operator=(const SolidTElement&) = delete;*/
 
-    ///  Build the lower-dimensional FaceElement (an element of type
+    /// Build the lower-dimensional FaceElement (an element of type
     /// SolidPointElement).  The face index takes two values
     /// corresponding to the two possible faces:
     /// -1 (Left)  s[0] = -1.0
@@ -3815,7 +3815,7 @@ namespace oomph
     /// Broken assignment operator
     /*void operator=(const SolidTElement&) = delete;*/
 
-    ///  Build the lower-dimensional FaceElement (an element of type
+    /// Build the lower-dimensional FaceElement (an element of type
     /// SolidTElement<1,NNODE_1D>). The face index takes three possible values:
     /// 0 (Left)         s[0] = 0.0
     /// 1 (Bottom)       s[1] = 0.0
@@ -3876,7 +3876,7 @@ namespace oomph
     /*void operator=(const SolidTElement&) = delete;*/
 
 
-    ///  Build the lower-dimensional FaceElement (an element of type
+    /// Build the lower-dimensional FaceElement (an element of type
     /// SolidTElement<2,NNODE_1D>). The face index can take one of four values
     /// corresponding to the four possible faces:
     /// 0: (left)           s[0] = 0.0
@@ -3951,7 +3951,7 @@ namespace oomph
     /// Destructor
     ~SolidTBubbleEnrichedElement() {}
 
-    ///  Build the lower-dimensional FaceElement
+    /// Build the lower-dimensional FaceElement
     /// Need to put in a final override here
     void build_face_element(const int& face_index,
                             FaceElement* face_element_pt);
@@ -3969,7 +3969,7 @@ namespace oomph
     : public virtual TElement<DIM - 1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : TElement<DIM - 1, NNODE_1D>() {}
   };
@@ -3982,7 +3982,7 @@ namespace oomph
   class FaceGeometry<TElement<1, NNODE_1D>> : public virtual PointElement
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : PointElement() {}
   };
@@ -4005,7 +4005,7 @@ namespace oomph
     : public virtual TElement<1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : TElement<1, NNODE_1D>() {}
   };
@@ -4023,7 +4023,7 @@ namespace oomph
     : public virtual TBubbleEnrichedElement<2, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : TBubbleEnrichedElement<2, NNODE_1D>() {}
   };
@@ -4045,7 +4045,7 @@ namespace oomph
     : public virtual SolidTElement<DIM - 1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : SolidTElement<DIM - 1, NNODE_1D>() {}
   };
@@ -4059,7 +4059,7 @@ namespace oomph
     : public virtual SolidPointElement
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : SolidPointElement() {}
   };
@@ -4082,7 +4082,7 @@ namespace oomph
     : public virtual SolidTElement<1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : SolidTElement<1, NNODE_1D>() {}
   };
@@ -4100,7 +4100,7 @@ namespace oomph
     : public virtual SolidTBubbleEnrichedElement<2, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : SolidTBubbleEnrichedElement<2, NNODE_1D>() {}
   };

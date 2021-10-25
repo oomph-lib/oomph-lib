@@ -75,7 +75,7 @@ namespace oomph
   class DummyBrickElement : public virtual QElement<3, 2>
   {
   public:
-    ///  Constructor:
+    /// Constructor:
     DummyBrickElement() : QElement<3, 2>() {}
 
     /// Broken copy constructor
@@ -90,7 +90,7 @@ namespace oomph
     /*void operator=(const DummyBrickElement&) = delete;*/
 
 
-    ///   Required  # of `values' (pinned or dofs)
+    ///  Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
@@ -98,7 +98,7 @@ namespace oomph
     }
 
 
-    ///  Compute vector of FE interpolated local coordinate in tet,
+    /// Compute vector of FE interpolated local coordinate in tet,
     /// s_tet, evaluated at local coordinate s in current element.
     void interpolated_s_tet(const Vector<double>& s,
                             Vector<double>& s_tet) const
@@ -198,7 +198,7 @@ namespace oomph
       setup_boundary_element_info(outfile);
     }
 
-    ///  Setup lookup schemes which establish whic elements are located
+    /// Setup lookup schemes which establish whic elements are located
     /// next to mesh's boundaries. Doc in outfile (if it's open).
     void setup_boundary_element_info(std::ostream& outfile);
   };

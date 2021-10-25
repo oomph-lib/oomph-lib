@@ -38,7 +38,7 @@ namespace oomph
 
 
   //=========================================================================
-  ///  Set a pointer to the desired contact angle. Optional boolean
+  /// Set a pointer to the desired contact angle. Optional boolean
   /// (defaults to true)
   /// chooses strong imposition via hijacking (true) or weak imposition
   /// via addition to momentum equation (false). The default strong imposition

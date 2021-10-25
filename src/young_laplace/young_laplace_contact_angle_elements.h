@@ -42,7 +42,7 @@
 namespace oomph
 {
   //======================================================================
-  ///  A class for elements that allow the imposition of an
+  /// A class for elements that allow the imposition of an
   /// contact angle bcs for Young Laplace elements.
   /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
   /// policy class. Jacobian is evaluated by finite differencing.
@@ -52,12 +52,12 @@ namespace oomph
                                           public virtual FaceElement
   {
   public:
-    ///  Constructor, takes the pointer to the "bulk" element and the
+    /// Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
     YoungLaplaceContactAngleElement(FiniteElement* const& bulk_el_pt,
                                     const int& face_index);
 
-    ///  Broken empty constructor
+    /// Broken empty constructor
     YoungLaplaceContactAngleElement()
     {
       throw OomphLibError(
@@ -73,7 +73,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const YoungLaplaceContactAngleElement&) = delete;
 
-    ///  Access function for the pointer to the prescribed contact angle
+    /// Access function for the pointer to the prescribed contact angle
     /// (const version)
     double* prescribed_cos_gamma_pt() const
     {
@@ -91,7 +91,7 @@ namespace oomph
     /// Add the element's contribution to its residual vector
     void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
-    ///  Get the local equation number of the (one and only) unknown
+    /// Get the local equation number of the (one and only) unknown
     /// stored at local node n (returns -1 if value is pinned).
     /// Can be overloaded in derived multiphysics elements.
     inline int u_local_eqn(const unsigned& n)
@@ -102,7 +102,7 @@ namespace oomph
 
 
     /// Specify the value of nodal zeta from the face geometry
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
@@ -120,7 +120,7 @@ namespace oomph
       FiniteElement::output(outfile);
     }
 
-    ///  Output function -- forward to broken version in FiniteElement
+    /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -134,7 +134,7 @@ namespace oomph
       FiniteElement::output(file_pt);
     }
 
-    ///  C-style output function -- forward to broken version in
+    /// C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -156,7 +156,7 @@ namespace oomph
       contact_line_vectors(s, tangent, normal, spine, norm_of_drds);
     }
 
-    ///  Get unit tangent and normal vectors to contact line. Final
+    /// Get unit tangent and normal vectors to contact line. Final
     /// argument gives the norm of dR/ds where R is the vector to the
     /// contact line and s the local coordinate in the element.
     void contact_line_vectors(const Vector<double>& s,
@@ -170,7 +170,7 @@ namespace oomph
     }
 
 
-    ///  Get tangent and normal vectors to contact line and spine vector
+    /// Get tangent and normal vectors to contact line and spine vector
     /// (wall normal can then be obtained by cross-product). Final
     /// argument gives the norm of dR/ds where R is the vector to the
     /// contact line and s the local coordinate in the element.
@@ -181,7 +181,7 @@ namespace oomph
                               double& norm_of_drds);
 
   protected:
-    ///  Define an access function to the first data value stored
+    /// Define an access function to the first data value stored
     /// at each node. In a more general "Equation" element, such abstraction
     /// is essential, because different Elements will store the same variables
     /// in different locations.

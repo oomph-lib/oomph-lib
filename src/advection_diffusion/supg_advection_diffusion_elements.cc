@@ -29,7 +29,7 @@
 namespace oomph
 {
   //======================================================================
-  ///  QSUPGAdvectionDiffusionElement<DIM,NNODE_1D> elements are
+  /// QSUPGAdvectionDiffusionElement<DIM,NNODE_1D> elements are
   /// SUPG-stabilised Advection Diffusion elements with
   /// NNODE_1D nodal points in each coordinate direction. Inherits
   /// from QAdvectionDiffusionElement and overwrites their
@@ -38,7 +38,7 @@ namespace oomph
   //======================================================================
 
   //======================================================================
-  ///  Define the shape functions and test functions and derivatives
+  /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// SUPG stabilisation: Petrov-Galerkin, i.e. test functions \f$ \ne \f$
@@ -96,7 +96,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Define the shape functions and test functions and derivatives
+  /// Define the shape functions and test functions and derivatives
   /// w.r.t. global coordinates and return Jacobian of mapping.
   ///
   /// SUPG stabilisation: Petrov-Galerkin, i.e. test functions \f$ \ne \f$

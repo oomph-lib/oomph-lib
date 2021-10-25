@@ -42,7 +42,7 @@ namespace oomph
     Default_dimensionless_number(NREAGENT, 1.0);
 
   //======================================================================
-  ///  Compute element residual Vector and/or element Jacobian matrix
+  /// Compute element residual Vector and/or element Jacobian matrix
   /// and/or the mass matrix
   ///
   /// flag=2: compute Jacobian, residuals and mass matrix
@@ -414,7 +414,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Output function:
+  /// Output function:
   ///
   ///   x,y,u,w_x,w_y   or    x,y,z,u,w_x,w_y,w_z
   ///
@@ -508,7 +508,7 @@ namespace oomph
 
 
   //======================================================================
-  ///   Output exact solution
+  ///  Output exact solution
   ///
   /// Solution is provided via function pointer.
   /// Plot at a given number of plot points.
@@ -560,7 +560,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Validate against exact solution
+  /// Validate against exact solution
   ///
   /// Solution is provided via function pointer.
   /// Plot error at a given number of plot points.

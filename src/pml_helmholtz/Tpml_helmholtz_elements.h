@@ -62,7 +62,7 @@ namespace oomph
                                public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///  Constructor: Call constructors for TElement and
+    /// Constructor: Call constructors for TElement and
     /// PMLHelmholtz equations
     TPMLHelmholtzElement()
       : TElement<DIM, NNODE_1D>(), PMLHelmholtzEquations<DIM>()
@@ -82,21 +82,21 @@ namespace oomph
     // rightly, it shouts.
     /*void operator=(const TPMLHelmholtzElement<DIM,NNODE_1D>&) = delete;*/
 
-    ///   Access function for Nvalue: # of `values' (pinned or dofs)
+    ///  Access function for Nvalue: # of `values' (pinned or dofs)
     /// at node n (always returns the same value at every node, 1)
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    ///  Output function:
+    /// Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
       PMLHelmholtzEquations<DIM>::output(outfile);
     }
 
-    ///   Output function:
+    ///  Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -104,7 +104,7 @@ namespace oomph
     }
 
 
-    ///  C-style output function:
+    /// C-style output function:
     ///  x,y,u   or    x,y,z,u
     void output(FILE* file_pt)
     {
@@ -112,7 +112,7 @@ namespace oomph
     }
 
 
-    ///   C-style output function:
+    ///  C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -120,7 +120,7 @@ namespace oomph
     }
 
 
-    ///  Output function for an exact solution:
+    /// Output function for an exact solution:
     ///  x,y,u_exact
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -130,7 +130,7 @@ namespace oomph
     }
 
 
-    ///  Output function for a time-dependent exact solution.
+    /// Output function for a time-dependent exact solution.
     ///  x,y,u_exact (calls the steady version)
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -161,7 +161,7 @@ namespace oomph
       DShape& dtestdx) const;
 
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
@@ -174,7 +174,7 @@ namespace oomph
       return 2 * DIM;
     }
 
-    ///  Get 'flux' for Z2 error recovery:  Standard flux from
+    /// Get 'flux' for Z2 error recovery:  Standard flux from
     /// UnsteadyHeat equations
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -188,13 +188,13 @@ namespace oomph
       }
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<DIM, NNODE_1D>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<DIM, NNODE_1D>::vertex_node_pt(j);
@@ -283,7 +283,7 @@ namespace oomph
     : public virtual TElement<DIM - 1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : TElement<DIM - 1, NNODE_1D>() {}
   };
@@ -297,7 +297,7 @@ namespace oomph
     : public virtual PointElement
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : PointElement() {}
   };
@@ -316,7 +316,7 @@ namespace oomph
     : public virtual QPMLHelmholtzElement<2, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate QElement
     PMLLayerElement() : QPMLHelmholtzElement<2, NNODE_1D>() {}
   };
@@ -332,7 +332,7 @@ namespace oomph
     : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };
@@ -351,7 +351,7 @@ namespace oomph
     : public virtual QPMLHelmholtzElement<2, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate QElement
     PMLLayerElement() : QPMLHelmholtzElement<2, NNODE_1D>() {}
   };

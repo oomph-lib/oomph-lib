@@ -46,7 +46,7 @@
 namespace oomph
 {
   //=============================================================================
-  ///  A multi vector in the mathematical sense, initially developed for
+  /// A multi vector in the mathematical sense, initially developed for
   /// linear algebra type applications.
   /// If MPI then this multi vector can be distributed - its distribution is
   /// described by the LinearAlgebraDistribution object at Distribution_pt.
@@ -55,13 +55,13 @@ namespace oomph
   class DoubleMultiVector : public DistributableLinearAlgebraObject
   {
   public:
-    ///  Constructor for an uninitialized DoubleMultiVector
+    /// Constructor for an uninitialized DoubleMultiVector
     DoubleMultiVector()
       : Values(0), Nvector(0), Internal_values(true), Built(false)
     {
     }
 
-    ///  Constructor. Assembles a DoubleMultiVector consisting of
+    /// Constructor. Assembles a DoubleMultiVector consisting of
     /// n_vector vectors, each with a prescribed distribution.
     /// Additionally every entry can be set (with argument v -
     /// defaults to 0).
@@ -74,7 +74,7 @@ namespace oomph
       this->setup_doublevector_representation();
     }
 
-    ///  Constructor. Assembles a DoubleMultiVector consisting of
+    /// Constructor. Assembles a DoubleMultiVector consisting of
     /// n_vector vectors, each with a prescribed distribution.
     /// Additionally every entry can be set (with argument v -
     /// defaults to 0).
@@ -87,7 +87,7 @@ namespace oomph
       this->setup_doublevector_representation();
     }
 
-    ///  Constructor. Build a multivector using the same distribution
+    /// Constructor. Build a multivector using the same distribution
     /// of the input vector with n_vector columns and initialised to the value
     /// v
     DoubleMultiVector(const unsigned& n_vector,
@@ -99,7 +99,7 @@ namespace oomph
       this->setup_doublevector_representation();
     }
 
-    ///  Constructor that builds a multivector from selected columns
+    /// Constructor that builds a multivector from selected columns
     /// of the input multivector. The boolean controls whether it is a
     /// shallow or deep copy (default deep)
     DoubleMultiVector(const DoubleMultiVector& old_vector,
@@ -137,7 +137,7 @@ namespace oomph
     }
 
 #ifdef OOMPH_HAS_TRILINOS
-    ///  Constructor that builds a multivector from selected columns
+    /// Constructor that builds a multivector from selected columns
     /// of the input multivector and the provided range. The optional
     /// boolean specifies whether it is a shallow or deep copy. The default
     /// is that it is a deep copy.
@@ -213,7 +213,7 @@ namespace oomph
       return Nvector;
     }
 
-    ///  Provide a (shallow) copy of the old vector
+    /// Provide a (shallow) copy of the old vector
     void shallow_build(const DoubleMultiVector& old_vector)
     {
       // Only bother if the old_vector is not the same as current vector
@@ -238,7 +238,7 @@ namespace oomph
       }
     }
 
-    ///  Build the storage for pointers to vectors with a given
+    /// Build the storage for pointers to vectors with a given
     /// distribution, but do not populate the pointers
     void shallow_build(const unsigned& n_vector,
                        const LinearAlgebraDistribution& dist)
@@ -247,7 +247,7 @@ namespace oomph
     }
 
 
-    ///  Build the storage for pointers to vectors with a given
+    /// Build the storage for pointers to vectors with a given
     /// distribution, but do not populate the pointers
     void shallow_build(const unsigned& n_vector,
                        const LinearAlgebraDistribution* const& dist_pt)
@@ -277,7 +277,7 @@ namespace oomph
     }
 
 
-    ///  Provides a (deep) copy of the old_vector
+    /// Provides a (deep) copy of the old_vector
     void build(const DoubleMultiVector& old_vector)
     {
       // Only bother if the old_vector is not the same as current vector
@@ -307,7 +307,7 @@ namespace oomph
       }
     }
 
-    ///  Assembles a DoubleMultiVector
+    /// Assembles a DoubleMultiVector
     /// with n_vector vectors, a distribution dist, if v is specified
     /// each element is set to v, otherwise each element is set to 0.0
     void build(const unsigned& n_vector,
@@ -317,7 +317,7 @@ namespace oomph
       this->build(n_vector, &dist, initial_value);
     }
 
-    ///  Assembles a DoubleMultiVector with n_vector vectors, each with a
+    /// Assembles a DoubleMultiVector with n_vector vectors, each with a
     /// distribution dist, if v is specified
     /// each element is set to v, otherwise each element is set to 0.0
     void build(const unsigned& n_vector,
@@ -360,7 +360,7 @@ namespace oomph
       }
     }
 
-    ///  initialise the whole vector with value v
+    /// initialise the whole vector with value v
     void initialise(const double& initial_value)
     {
       if (Built)
@@ -379,11 +379,11 @@ namespace oomph
       }
     }
 
-    ///  initialise the vector with coefficient from the vector v.
+    /// initialise the vector with coefficient from the vector v.
     /// Note: The vector v must be of length
     // void initialise(const Vector<double> v);
 
-    ///  wipes the DoubleVector
+    /// wipes the DoubleVector
     void clear()
     {
       // Return if nothing to do
@@ -415,7 +415,7 @@ namespace oomph
       return Built;
     }
 
-    ///  Allows are external data to be used by this vector.
+    /// Allows are external data to be used by this vector.
     /// WARNING: The size of the external data must correspond to the
     /// LinearAlgebraDistribution dist_pt argument.
     /// 1. When a rebuild method is called new internal values are created.
@@ -437,7 +437,7 @@ namespace oomph
       set_external_values(external_values,delete_external_values);
       }*/
 
-    ///  Allows are external data to be used by this vector.
+    /// Allows are external data to be used by this vector.
     /// WARNING: The size of the external data must correspond to the
     /// distribution of this vector.
     /// 1. When a rebuild method is called new internal values are created.
@@ -472,7 +472,7 @@ namespace oomph
       Internal_values = delete_external_values;
       }*/
 
-    ///  The contents of the vector are redistributed to match the new
+    /// The contents of the vector are redistributed to match the new
     /// distribution. In a non-MPI rebuild this method works, but does nothing.
     /// \b NOTE 1: The current distribution and the new distribution must have
     /// the same number of global rows.
@@ -480,7 +480,7 @@ namespace oomph
     /// the same Communicator.
     void redistribute(const LinearAlgebraDistribution* const& dist_pt);
 
-    ///  [] access function to the (local) values of the v-th vector
+    /// [] access function to the (local) values of the v-th vector
     double& operator()(int v, int i) const
     {
 #ifdef RANGE_CHECKING
@@ -510,7 +510,7 @@ namespace oomph
       return Values[v][i];
     }
 
-    ///  == operator
+    /// == operator
     bool operator==(const DoubleMultiVector& vec)
     {
       // if vec is not setup return false
@@ -545,7 +545,7 @@ namespace oomph
       }
     }
 
-    ///  += operator
+    /// += operator
     void operator+=(DoubleMultiVector vec)
     {
 #ifdef PARANOID
@@ -670,7 +670,7 @@ namespace oomph
       return Values;
     }
 
-    ///  access function to the underlying values (const version)
+    /// access function to the underlying values (const version)
     double** values() const
     {
       return Values;
@@ -1004,7 +1004,7 @@ namespace oomph
     /// The number of vectors
     unsigned Nvector;
 
-    ///  Boolean flag to indicate whether the vector's data (values_pt)
+    /// Boolean flag to indicate whether the vector's data (values_pt)
     /// is owned by this vector.
     bool Internal_values;
 

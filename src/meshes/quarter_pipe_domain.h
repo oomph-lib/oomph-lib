@@ -40,7 +40,7 @@ namespace oomph
   class QuarterPipeDomain : public Domain
   {
   public:
-    ///  Constructor: Pass number of elements in various directions,
+    /// Constructor: Pass number of elements in various directions,
     /// the inner and outer radius and the length of the tube
     QuarterPipeDomain(const unsigned& ntheta,
                       const unsigned& nr,
@@ -88,25 +88,25 @@ namespace oomph
       delete Inner_boundary_cross_section_pt;
     }
 
-    ///  Typedef for function pointer for function that implements
+    /// Typedef for function pointer for function that implements
     /// axial spacing of macro elements
     typedef double (*AxialSpacingFctPt)(const double& xi);
 
-    ///  Function pointer for function that  implements
+    /// Function pointer for function that  implements
     /// axial spacing of macro elements
     AxialSpacingFctPt& axial_spacing_fct_pt()
     {
       return Axial_spacing_fct_pt;
     }
 
-    ///  Function that implements
+    /// Function that implements
     /// axial spacing of macro elements
     double axial_spacing_fct(const double& xi)
     {
       return Axial_spacing_fct_pt(xi);
     }
 
-    ///  Vector representation of the i_macro-th macro element
+    /// Vector representation of the i_macro-th macro element
     /// boundary i_direct (U/D/L/R/F/B) at time level t
     /// (t=0: present; t>0: previous): f(s).
     void macro_element_boundary(const unsigned& t,
@@ -134,26 +134,26 @@ namespace oomph
     /// Length
     double Length;
 
-    ///  Geom object representing the outer boundary of
+    /// Geom object representing the outer boundary of
     /// the cross section
     GeomObject* Outer_boundary_cross_section_pt;
 
-    ///  Geom object representing the inner boundary of
+    /// Geom object representing the inner boundary of
     /// the cross section
     GeomObject* Inner_boundary_cross_section_pt;
 
-    ///  Function pointer for function that implements
+    /// Function pointer for function that implements
     /// axial spacing of macro elements
     AxialSpacingFctPt Axial_spacing_fct_pt;
 
-    ///  Default for function that  implements
+    /// Default for function that  implements
     /// axial spacing of macro elements
     static double default_axial_spacing_fct(const double& xi)
     {
       return xi;
     }
 
-    ///  Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
+    /// Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
     void r_U(const unsigned& t,
              const Vector<double>& zeta,
              Vector<double>& f,
@@ -164,7 +164,7 @@ namespace oomph
              const double& zmin,
              const double& zmax);
 
-    ///  Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
+    /// Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
     void r_L(const unsigned& t,
              const Vector<double>& zeta,
              Vector<double>& f,
@@ -175,7 +175,7 @@ namespace oomph
              const double& zmin,
              const double& zmax);
 
-    ///  Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
+    /// Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
     void r_D(const unsigned& t,
              const Vector<double>& zeta,
              Vector<double>& f,
@@ -186,7 +186,7 @@ namespace oomph
              const double& zmin,
              const double& zmax);
 
-    ///  Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
+    /// Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
     void r_R(const unsigned& t,
              const Vector<double>& zeta,
              Vector<double>& f,
@@ -197,7 +197,7 @@ namespace oomph
              const double& zmin,
              const double& zmax);
 
-    ///  Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
+    /// Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
     void r_F(const unsigned& t,
              const Vector<double>& zeta,
              Vector<double>& f,
@@ -208,7 +208,7 @@ namespace oomph
              const double& zmin,
              const double& zmax);
 
-    ///  Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
+    /// Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
     void r_B(const unsigned& t,
              const Vector<double>& zeta,
              Vector<double>& f,

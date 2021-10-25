@@ -52,7 +52,7 @@ namespace oomph
     : public virtual GeneralisedElement
   {
   public:
-    ///  Constructor. Takes pointer to mesh of Foeppl von Karman
+    /// Constructor. Takes pointer to mesh of Foeppl von Karman
     /// elements and a vector of unsigneds which identifies the
     /// regions within it that contribute to the controlled volume
     /// defined as int w dA (i.e. the "volume under the membrane").
@@ -85,7 +85,7 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const FoepplvonKarmanVolumeConstraintElement&) = delete;
 
-    ///  Returns the volume "under the elements" in the constrained
+    /// Returns the volume "under the elements" in the constrained
     /// regions
     double get_bounded_volume()
     {
@@ -115,7 +115,7 @@ namespace oomph
       Volume_control_local_eqn = internal_local_eqn(Pressure_data_index, 0);
     }
 
-    ///  Fill in residual: Difference between actual and
+    /// Fill in residual: Difference between actual and
     /// prescribed bounded volume.
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -235,7 +235,7 @@ namespace oomph
       Prescribed_volume_pt = volume_pt;
     }
 
-    ///  Access to Data object whose single value contains the pressure
+    /// Access to Data object whose single value contains the pressure
     /// that has been "traded" for the volume constraint.
     Data* pressure_data_pt() const
     {
@@ -243,25 +243,25 @@ namespace oomph
     }
 
   protected:
-    ///  Data object whose single value contains the pressure
+    /// Data object whose single value contains the pressure
     /// that has been "traded" for the volume constraint.
     Data* Volume_control_pressure_pt;
 
-    ///  Unsigned indicating which internal Data object
+    /// Unsigned indicating which internal Data object
     /// stores the pressure
     unsigned Pressure_data_index;
 
     /// Local equation number of volume constraint
     int Volume_control_local_eqn;
 
-    ///  Pointer to mesh of Foeppl von Karman elements that bound
+    /// Pointer to mesh of Foeppl von Karman elements that bound
     /// the prescribed volume; NULL if the FvK elements that contribute
     /// to the bounding volume are in charge of adding their own
     /// contribution to the volume constraint equation (and the
     /// associated Jacobian)
     MESH<ELEMENT>* Bounding_mesh_pt;
 
-    ///  Region IDs in the bounding mesh that contribute to the
+    /// Region IDs in the bounding mesh that contribute to the
     /// prescribed/controlled volume
     Vector<unsigned> Contributing_region;
 

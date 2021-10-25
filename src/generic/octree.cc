@@ -77,7 +77,7 @@ namespace oomph
   Vector<Vector<int>> OcTree::Direction_to_vector;
 
   //====================================================================
-  ///  Storage for the up/right-equivalents corresponding to two
+  /// Storage for the up/right-equivalents corresponding to two
   /// pairs of vertices along an element edge:
   /// - The first pair contains
   ///   -# the vertex in the reference element
@@ -485,7 +485,7 @@ namespace oomph
 
 
   //==================================================================
-  ///  Return the vertex of local (vertex) node n
+  /// Return the vertex of local (vertex) node n
   /// in an element with nnode1d nodes in each coordinate direction.
   //==================================================================
   int OcTree::node_number_to_vertex(const unsigned& n, const unsigned& nnode1d)
@@ -2763,7 +2763,7 @@ namespace oomph
 
 
   //================================================================
-  ///  Is the edge neighbour (for edge "edge")  specified via the pointer
+  /// Is the edge neighbour (for edge "edge")  specified via the pointer
   /// also a face neighbour for one of the two adjacent faces?
   //================================================================
   bool OcTree::edge_neighbour_is_face_neighbour(const int& edge,

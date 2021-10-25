@@ -42,7 +42,7 @@ using namespace oomph;
 namespace oomph
 {
   //======================================================================
-  ///  Build the full mesh with the help of the scaffold mesh coming
+  /// Build the full mesh with the help of the scaffold mesh coming
   /// from the triangle mesh generator, Triangle. To build this quad
   /// element based mesh we make use of the fact that a triangle element
   /// can be split as shown in the diagram below:

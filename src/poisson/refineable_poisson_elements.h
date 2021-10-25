@@ -58,7 +58,7 @@ namespace oomph
                                      public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///  Constructor, simply call other constructors
+    /// Constructor, simply call other constructors
     RefineablePoissonEquations()
       : PoissonEquations<DIM>(),
         RefineableElement(),
@@ -162,7 +162,7 @@ namespace oomph
 
 
   private:
-    ///  Add element's contribution to elemental residual vector and/or
+    /// Add element's contribution to elemental residual vector and/or
     /// Jacobian matrix
     /// flag=1: compute both
     /// flag=0: compute only residual vector
@@ -171,7 +171,7 @@ namespace oomph
       DenseMatrix<double>& jacobian,
       const unsigned& flag);
 
-    ///  Compute derivatives of elemental residual vector with respect
+    /// Compute derivatives of elemental residual vector with respect
     /// to nodal coordinates. Overwrites default implementation in
     /// FiniteElement base class.
     /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
@@ -192,7 +192,7 @@ namespace oomph
       public virtual RefineableQElement<DIM>
   {
   public:
-    ///  Constructor, simply call the other constructors
+    /// Constructor, simply call the other constructors
     RefineableQPoissonElement()
       : RefineableElement(),
         RefineablePoissonEquations<DIM>(),
@@ -215,13 +215,13 @@ namespace oomph
       return 1;
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QPoissonElement<DIM, NNODE_1D>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QPoissonElement<DIM, NNODE_1D>::vertex_node_pt(j);
@@ -230,14 +230,14 @@ namespace oomph
     /// Rebuild from sons: empty
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return (NNODE_1D - 1);
     }
 
-    ///   Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Empty.
     void further_setup_hanging_nodes() {}
   };
@@ -253,7 +253,7 @@ namespace oomph
       public virtual PRefineableQElement<DIM>
   {
   public:
-    ///  Constructor, simply call the other constructors
+    /// Constructor, simply call the other constructors
     PRefineableQPoissonElement()
       : RefineableElement(),
         RefineablePoissonEquations<DIM>(),
@@ -288,19 +288,19 @@ namespace oomph
       return 1;
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QPoissonElement<DIM, 2>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QPoissonElement<DIM, 2>::vertex_node_pt(j);
     }
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// - Same order as shape functions.
     // unsigned nrecovery_order()
     // {
@@ -338,7 +338,7 @@ namespace oomph
     : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };

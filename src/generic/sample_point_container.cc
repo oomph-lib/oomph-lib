@@ -642,7 +642,7 @@ namespace oomph
   /// Boolean flag to make to make locate zeta fail
   bool SamplePointContainer::Always_fail_elemental_locate_zeta = false;
 
-  ///  Use equally spaced sample points? (otherwise vertices are sampled
+  /// Use equally spaced sample points? (otherwise vertices are sampled
   /// repeatedly
   bool SamplePointContainer::Use_equally_spaced_interior_sample_points = true;
 
@@ -3080,7 +3080,7 @@ namespace oomph
 
 
   //==============================================================================
-  ///  Find the sub geometric object and local coordinate therein that
+  /// Find the sub geometric object and local coordinate therein that
   /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
   /// on return from this function, none of the constituent sub-objects
   /// contain the required coordinate.
@@ -3339,13 +3339,13 @@ namespace oomph
   /// Default number of bins (in each coordinate direction)
   unsigned NonRefineableBinArray::Default_n_bin_1d = 100;
 
-  ///  Counter for overall number of bins allocated -- used to
+  /// Counter for overall number of bins allocated -- used to
   /// issue warning if this exceeds a threshhold. (Default assignment
   /// of 100^DIM bins per MeshAsGeomObject can be a killer if there
   /// are huge numbers of sub-meshes (e.g. in unstructured FSI).
   unsigned long NonRefineableBinArray::Total_nbin_cells_counter = 0;
 
-  ///  Total number of bins above which warning is issued.
+  /// Total number of bins above which warning is issued.
   /// (Default assignment of 100^DIM bins per MeshAsGeomObject can
   /// be a killer if there are huge numbers of sub-meshes (e.g. in
   /// unstructured FSI).
@@ -3353,25 +3353,25 @@ namespace oomph
     NonRefineableBinArray::Threshold_for_total_bin_cell_number_warning =
       50000000;
 
-  ///  Boolean to supppress warnings about large number of bins
+  /// Boolean to supppress warnings about large number of bins
   bool
     NonRefineableBinArray::Suppress_warning_about_large_total_number_of_bins =
       false;
 
-  ///  Boolean flag to make sure that warning about large number
+  /// Boolean flag to make sure that warning about large number
   /// of bin cells only gets triggered once.
   bool NonRefineableBinArray::Already_warned_about_large_number_of_bin_cells =
     false;
 
-  ///  Fraction of elements/bin that triggers warning. Too many
+  /// Fraction of elements/bin that triggers warning. Too many
   /// elements per bin can lead to very slow computations
   unsigned NonRefineableBinArray::Threshold_for_elements_per_bin_warning = 100;
 
-  ///  Boolean to supppress warnings about small number of bins
+  /// Boolean to supppress warnings about small number of bins
   bool NonRefineableBinArray::Suppress_warning_about_small_number_of_bins =
     false;
 
-  ///  Boolean flag to make sure that warning about small number
+  /// Boolean flag to make sure that warning about small number
   /// of bin cells only gets triggered once.
   bool NonRefineableBinArray::Already_warned_about_small_number_of_bin_cells =
     false;
@@ -3598,7 +3598,7 @@ namespace oomph
 
 
   //==============================================================================
-  ///  Find the sub geometric object and local coordinate therein that
+  /// Find the sub geometric object and local coordinate therein that
   /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
   /// on return from this function, none of the constituent sub-objects
   /// contain the required coordinate.
@@ -3813,7 +3813,7 @@ namespace oomph
 
 
   //==============================================================================
-  ///  Find the sub geometric object and local coordinate therein that
+  /// Find the sub geometric object and local coordinate therein that
   /// corresponds to the intrinsic coordinate zeta, using up to the specified
   /// number of sample points as initial guess for the Newton-based search.
   /// If this fails, return the nearest sample point.

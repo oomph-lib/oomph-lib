@@ -76,7 +76,7 @@ namespace oomph
   } // End of project_point_on_cylinder_to_annular_boundary
 
 
-  ///  Helper function that, given the Lagrangian coordinate, xi,
+  /// Helper function that, given the Lagrangian coordinate, xi,
   /// (associated with a point on the cylinder), returns the corresponding
   /// point on the outer boundary of the annular region (where the inner
   /// boundary is prescribed by the boundary of the cylinder)
@@ -121,7 +121,7 @@ namespace oomph
   } // End of project_point_on_cylinder_to_annular_boundary
 
 
-  ///  Parametrisation of macro element boundaries: f(s) is the position
+  /// Parametrisation of macro element boundaries: f(s) is the position
   /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
   /// at the specified discrete time level (time=0: present; time>0: previous)
   void RectangleWithHoleAndAnnularRegionDomain::macro_element_boundary(
@@ -511,7 +511,7 @@ namespace oomph
   } // End of macro_element_boundary
 
 
-  ///  Parametrisation of macro element boundaries: f(s) is the position
+  /// Parametrisation of macro element boundaries: f(s) is the position
   /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
   /// at the specified discrete time level (time=0: present; time>0: previous)
   void RectangleWithHoleAndAnnularRegionDomain::macro_element_boundary(

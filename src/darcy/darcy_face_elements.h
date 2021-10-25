@@ -72,7 +72,7 @@ namespace oomph
                            public virtual FaceElement
   {
   protected:
-    ///  Pointer to an imposed pressure function. Arguments:
+    /// Pointer to an imposed pressure function. Arguments:
     /// Eulerian coordinate; outer unit normal; applied pressure.
     /// (Not all of the input arguments will be required for all specific load
     /// functions but the list should cover all cases)
@@ -82,7 +82,7 @@ namespace oomph
                             double& result);
 
 
-    ///  Get the pressure value: Pass number of integration point (dummy),
+    /// Get the pressure value: Pass number of integration point (dummy),
     /// Eulerlian coordinate and normal vector and return the pressure
     /// (not all of the input arguments will be required for all specific load
     /// functions but the list should cover all cases). This function is virtual
@@ -97,7 +97,7 @@ namespace oomph
     }
 
 
-    ///  Helper function that actually calculates the residuals
+    /// Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
@@ -106,7 +106,7 @@ namespace oomph
 
 
   public:
-    ///  Constructor, which takes a "bulk" element and the value of the
+    /// Constructor, which takes a "bulk" element and the value of the
     /// index and its limit
     DarcyFaceElement(FiniteElement* const& element_pt, const int& face_index)
       : FaceGeometry<ELEMENT>(), FaceElement()
@@ -170,7 +170,7 @@ namespace oomph
     }
 
     /// Specify the value of nodal zeta from the face geometry
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
@@ -181,32 +181,32 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
-    ///  Output function
+    /// Output function
     void output(std::ostream& outfile)
     {
       FaceGeometry<ELEMENT>::output(outfile);
     }
 
-    ///  Output function
+    /// Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FaceGeometry<ELEMENT>::output(outfile, n_plot);
     }
 
-    ///  C_style output function
+    /// C_style output function
     void output(FILE* file_pt)
     {
       FaceGeometry<ELEMENT>::output(file_pt);
     }
 
-    ///  C-style output function
+    /// C-style output function
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       FaceGeometry<ELEMENT>::output(file_pt, n_plot);
     }
 
 
-    ///  Compute pressure value at specified local coordinate
+    /// Compute pressure value at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
     void pressure(const double& time,

@@ -44,7 +44,7 @@
 namespace oomph
 {
   //======================================================================
-  ///  A class for elements that allow the imposition of an
+  /// A class for elements that allow the imposition of an
   /// applied flux on the boundaries of Fourier decomposed Helmholtz elements.
   /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
   /// policy class.
@@ -55,18 +55,18 @@ namespace oomph
       public virtual FaceElement
   {
   public:
-    ///  Function pointer to the prescribed-flux function fct(x,f(x)) --
+    /// Function pointer to the prescribed-flux function fct(x,f(x)) --
     /// x is a Vector and  the flux is a complex
 
     typedef void (*FourierDecomposedHelmholtzPrescribedFluxFctPt)(
       const Vector<double>& x, std::complex<double>& flux);
 
-    ///  Constructor, takes the pointer to the "bulk" element and the
+    /// Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
     FourierDecomposedHelmholtzFluxElement(FiniteElement* const& bulk_el_pt,
                                           const int& face_index);
 
-    ///  Broken empty constructor
+    /// Broken empty constructor
     FourierDecomposedHelmholtzFluxElement()
     {
       throw OomphLibError("Don't call empty constructor for "
@@ -105,7 +105,7 @@ namespace oomph
     }
 
 
-    ///  Add the element's contribution to its residual vector and its
+    /// Add the element's contribution to its residual vector and its
     /// Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -122,7 +122,7 @@ namespace oomph
       FiniteElement::output(outfile);
     }
 
-    ///  Output function -- forward to broken version in FiniteElement
+    /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -137,7 +137,7 @@ namespace oomph
       FiniteElement::output(file_pt);
     }
 
-    ///  C-style output function -- forward to broken version in
+    /// C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -146,7 +146,7 @@ namespace oomph
     }
 
 
-    ///  Return the index at which the unknown value
+    /// Return the index at which the unknown value
     /// is stored. (Real/imag part gives real index of real/imag part).
     virtual inline std::complex<unsigned> u_index_fourier_decomposed_helmholtz()
       const
@@ -158,7 +158,7 @@ namespace oomph
 
 
   protected:
-    ///  Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test(const Vector<double>& s,
@@ -182,7 +182,7 @@ namespace oomph
     }
 
 
-    ///  Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test_at_knot(const unsigned& ipt,
@@ -223,12 +223,12 @@ namespace oomph
     }
 
 
-    ///  The index at which the real and imag part of the
+    /// The index at which the real and imag part of the
     /// unknown is stored at the nodes
     std::complex<unsigned> U_index_fourier_decomposed_helmholtz;
 
 
-    ///  Add the element's contribution to its residual vector.
+    /// Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     virtual void fill_in_generic_residual_contribution_fourier_decomposed_helmholtz_flux(

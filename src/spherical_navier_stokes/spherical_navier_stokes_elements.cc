@@ -1365,7 +1365,7 @@ namespace oomph
 
 
   //==============================================================
-  ///   Get integral of kinetic energy over element:
+  ///  Get integral of kinetic energy over element:
   //==============================================================
   double SphericalNavierStokesEquations::kin_energy() const
   {
@@ -1409,7 +1409,7 @@ namespace oomph
 
 
   //==========================================================================
-  ///   Get integral of time derivative of kinetic energy over element:
+  ///  Get integral of time derivative of kinetic energy over element:
   //==========================================================================
   double SphericalNavierStokesEquations::d_kin_energy_dt() const
   {

@@ -66,7 +66,7 @@ namespace oomph
     unsigned P_axi_nst_internal_index;
 
 
-    ///  Velocity shape and test functions and their derivs
+    /// Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_axi_nst(const Vector<double>& s,
@@ -75,7 +75,7 @@ namespace oomph
                                                     Shape& test,
                                                     DShape& dtestdx) const;
 
-    ///  Velocity shape and test functions and their derivs
+    /// Velocity shape and test functions and their derivs
     /// w.r.t. to global coords at ipt-th integation point (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_axi_nst(
@@ -85,7 +85,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const;
 
-    ///  Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_axi_nst(
@@ -98,7 +98,7 @@ namespace oomph
       RankFourTensor<double>& d_dtestdx_dX,
       DenseMatrix<double>& djacobian_dX) const;
 
-    ///  Pressure shape and test functions and their derivs
+    /// Pressure shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dpshape_and_dptest_eulerian_axi_nst(const Vector<double>& s,
@@ -149,14 +149,14 @@ namespace oomph
       delete;*/
 
 
-    ///  Number of values (pinned or dofs) required at local node n.
+    /// Number of values (pinned or dofs) required at local node n.
     inline virtual unsigned required_nvalue(const unsigned& n) const
     {
       return 3;
     }
 
 
-    ///  Return the pressure values at internal dof i_internal
+    /// Return the pressure values at internal dof i_internal
     /// (Discontinous pressure interpolation -- no need to cater for hanging
     /// nodes).
     double p_axi_nst(const unsigned& i) const
@@ -178,7 +178,7 @@ namespace oomph
         ->set_value(p_dof, p_value);
     }
 
-    ///  Build FaceElements that apply the Robin boundary condition
+    /// Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
     // void build_fp_press_adv_diff_robin_bc_element(const unsigned&
@@ -191,14 +191,14 @@ namespace oomph
     //   this, face_index));
     // }
 
-    ///  Add to the set paired_load_data
+    /// Add to the set paired_load_data
     /// pairs of pointers to data objects and unsignedegers that
     /// index the values in the data object that affect the load (traction),
     /// as specified in the get_load() function.
     void identify_load_data(
       std::set<std::pair<Data*, unsigned>>& paired_load_data);
 
-    ///   Add to the set \c paired_pressure_data pairs
+    ///  Add to the set \c paired_pressure_data pairs
     /// containing
     /// - the pointer to a Data object
     /// and
@@ -234,20 +234,20 @@ namespace oomph
     }
 
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as unenriched shape functions.
     unsigned nrecovery_order()
     {
       return 2;
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return 3;
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return node_pt(j);
@@ -260,7 +260,7 @@ namespace oomph
       return 6;
     }
 
-    ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
+    /// Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain rate tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -304,14 +304,14 @@ namespace oomph
     }
 
 
-    ///  The number of "DOF types" that degrees of freedom in this element
+    /// The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Velocity (3 components) and pressure.
     unsigned ndof_types() const
     {
       return 4;
     }
 
-    ///  Create a list of pairs for all unknowns in this element,
+    /// Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.
@@ -578,11 +578,11 @@ namespace oomph
     static const unsigned Initial_Nvalue[];
 
   protected:
-    ///  Static array of ints to hold conversion from pressure
+    /// Static array of ints to hold conversion from pressure
     /// node numbers to actual node numbers
     static const unsigned Pconv[];
 
-    ///  Velocity shape and test functions and their derivs
+    /// Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_axi_nst(const Vector<double>& s,
@@ -591,7 +591,7 @@ namespace oomph
                                                     Shape& test,
                                                     DShape& dtestdx) const;
 
-    ///  Velocity shape and test functions and their derivs
+    /// Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_axi_nst(
@@ -601,7 +601,7 @@ namespace oomph
       Shape& test,
       DShape& dtestdx) const;
 
-    ///  Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_axi_nst(
@@ -614,7 +614,7 @@ namespace oomph
       RankFourTensor<double>& d_dtestdx_dX,
       DenseMatrix<double>& djacobian_dX) const;
 
-    ///  Compute the pressure shape and test functions and derivatives
+    /// Compute the pressure shape and test functions and derivatives
     /// w.r.t. global coords at local coordinate s.
     /// Return Jacobian of mapping between local and global coordinates.
     virtual double dpshape_and_dptest_eulerian_axi_nst(const Vector<double>& s,
@@ -649,7 +649,7 @@ namespace oomph
     /*void operator=(const AxisymmetricTTaylorHoodElement&) =
       delete;*/
 
-    ///  Number of values (pinned or dofs) required at node n. Can
+    /// Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version
     inline virtual unsigned required_nvalue(const unsigned& n) const
     {
@@ -669,13 +669,13 @@ namespace oomph
                                Shape& psi,
                                Shape& test) const;
 
-    ///  Which nodal value represents the pressure?
+    /// Which nodal value represents the pressure?
     unsigned p_index_axi_nst()
     {
       return 3;
     }
 
-    ///  Pointer to n_p-th pressure node
+    /// Pointer to n_p-th pressure node
     // Node* pressure_node_pt(const unsigned &n_p)
     //{return this->Node_pt[Pconv[n_p]];}
 
@@ -685,14 +685,14 @@ namespace oomph
       return this->nodal_local_eqn(Pconv[n], 3);
     }
 
-    ///  Access function for the pressure values at local pressure
+    /// Access function for the pressure values at local pressure
     /// node n_p (const version)
     double p_axi_nst(const unsigned& n_p) const
     {
       return this->nodal_value(Pconv[n_p], 3);
     }
 
-    ///  Set the value at which the pressure is stored in the nodes
+    /// Set the value at which the pressure is stored in the nodes
     int p_nodal_index_axi_nst() const
     {
       return static_cast<int>(3);
@@ -712,7 +712,7 @@ namespace oomph
     }
 
 
-    ///  Build FaceElements that apply the Robin boundary condition
+    /// Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
     // void build_fp_press_adv_diff_robin_bc_element(const unsigned&
@@ -724,7 +724,7 @@ namespace oomph
     //    this, face_index));
     // }
 
-    ///  Add to the set \c paired_load_data pairs containing
+    /// Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
     /// and
     /// - the index of the value in that Data object
@@ -734,7 +734,7 @@ namespace oomph
     void identify_load_data(
       std::set<std::pair<Data*, unsigned>>& paired_load_data);
 
-    ///   Add to the set \c paired_pressure_data pairs
+    ///  Add to the set \c paired_pressure_data pairs
     /// containing
     /// - the pointer to a Data object
     /// and
@@ -769,20 +769,20 @@ namespace oomph
       AxisymmetricNavierStokesEquations::output(file_pt, n_plot);
     }
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return 2;
     }
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return 3;
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return node_pt(j);
@@ -796,7 +796,7 @@ namespace oomph
       return 6;
     }
 
-    ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
+    /// Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain rate tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -839,14 +839,14 @@ namespace oomph
       }
     }
 
-    ///  The number of "DOF types" that degrees of freedom in this element
+    /// The number of "DOF types" that degrees of freedom in this element
     /// are sub-divided into: Velocities (3  components) and pressure.
     unsigned ndof_types() const
     {
       return 4;
     }
 
-    ///  Create a list of pairs for all unknowns in this element,
+    /// Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.

@@ -37,7 +37,7 @@ namespace oomph
 
 
   //============================================================================
-  ///  FSI preconditioner. This extracts upper/lower triangular
+  /// FSI preconditioner. This extracts upper/lower triangular
   /// blocks in the 3x3 overall block matrix structure arising from
   /// the monolithic discretisation of FSI problems with algebraic
   /// node updates. Dofs are decomposed into fluid velocity, pressure
@@ -50,7 +50,7 @@ namespace oomph
   class FSIPreconditioner : public BlockPreconditioner<CRDoubleMatrix>
   {
   public:
-    ///  Constructor: By default use block triangular form with retained
+    /// Constructor: By default use block triangular form with retained
     /// fluid on solid terms. A problem pointer is required for the underlying
     /// NavierStokesSchurComplementPreconditioner.
     FSIPreconditioner(Problem* problem_pt)
@@ -142,7 +142,7 @@ namespace oomph
       Retain_fluid_onto_solid_terms = false;
     }
 
-    ///  Switch to block-triangular preconditioner in which
+    /// Switch to block-triangular preconditioner in which
     /// action of fluid dofs onto solid equations is retained
     void use_block_triangular_version_with_fluid_on_solid()
     {
@@ -150,7 +150,7 @@ namespace oomph
       Retain_fluid_onto_solid_terms = true;
     }
 
-    ///  Switch to block-triangular preconditioner in which
+    /// Switch to block-triangular preconditioner in which
     /// action of solid dofs onto fluid equations is retained
     void use_block_triangular_version_with_solid_on_fluid()
     {
@@ -158,7 +158,7 @@ namespace oomph
       Retain_fluid_onto_solid_terms = false;
     }
 
-    ///  Setter function for the mesh containing the
+    /// Setter function for the mesh containing the
     /// block-preconditionable Navier-Stokes elements. The optional argument
     /// indicates if there are more than one type of elements in same mesh.
     void set_navier_stokes_mesh(
@@ -173,7 +173,7 @@ namespace oomph
         allow_multiple_element_type_in_navier_stokes_mesh;
     }
 
-    ///  Setter function for the mesh containing the
+    /// Setter function for the mesh containing the
     /// block-preconditionable FSI solid elements. The optional argument
     /// indicates if there are more than one type of elements in the same mesh.
     void set_wall_mesh(
@@ -188,10 +188,10 @@ namespace oomph
         allow_multiple_element_type_in_wall_mesh;
     }
 
-    ///  Setup the preconditioner
+    /// Setup the preconditioner
     void setup();
 
-    ///  Apply preconditioner to r
+    /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Access function to the Navier Stokes preconditioner (inexact solver)
@@ -230,11 +230,11 @@ namespace oomph
     /// Boolean indicating the preconditioner has been set up
     bool Preconditioner_has_been_setup;
 
-    ///  Boolean flag used to indicate that the solid onto fluid
+    /// Boolean flag used to indicate that the solid onto fluid
     /// interaction terms are to be retained
     bool Retain_solid_onto_fluid_terms;
 
-    ///  Boolean flag used to indicate that the fluid onto solid
+    /// Boolean flag used to indicate that the fluid onto solid
     /// interaction terms are to be retained
     bool Retain_fluid_onto_solid_terms;
 
@@ -471,7 +471,7 @@ namespace oomph
 
 
   //============================================================================
-  ///  FSI preconditioner. This extracts upper/lower triangular
+  /// FSI preconditioner. This extracts upper/lower triangular
   /// blocks in the 3x3 overall block matrix structure arising from
   /// the monolithic discretisation of FSI problems with algebraic
   /// node updates. Dofs are decomposed into fluid velocity, pressure
@@ -526,7 +526,7 @@ namespace oomph
     /// Broken assignment operator
     /*void operator=(const SimpleFSIPreconditioner&) = delete;*/
 
-    ///  Setter function for the mesh containing the
+    /// Setter function for the mesh containing the
     /// block-preconditionable Navier-Stokes elements.
     void set_navier_stokes_mesh(
       Mesh* mesh_pt,
@@ -540,7 +540,7 @@ namespace oomph
         allow_multiple_element_type_in_navier_stokes_mesh;
     }
 
-    ///  Setter function for the mesh containing the
+    /// Setter function for the mesh containing the
     /// block-preconditionable FSI solid elements.
     void set_wall_mesh(
       Mesh* mesh_pt,
@@ -554,10 +554,10 @@ namespace oomph
         allow_multiple_element_type_in_wall_mesh;
     }
 
-    ///  Setup the preconditioner
+    /// Setup the preconditioner
     void setup();
 
-    ///  Apply preconditioner to r
+    /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Switch to block-diagonal preconditioner
@@ -567,7 +567,7 @@ namespace oomph
       Retain_fluid_onto_solid_terms = false;
     }
 
-    ///  Switch to block-triangular preconditioner in which
+    /// Switch to block-triangular preconditioner in which
     /// action of fluid dofs onto solid equations is retained
     void use_block_triangular_version_with_fluid_on_solid()
     {
@@ -575,7 +575,7 @@ namespace oomph
       Retain_fluid_onto_solid_terms = true;
     }
 
-    ///  Switch to block-triangular preconditioner in which
+    /// Switch to block-triangular preconditioner in which
     /// action of solid dofs onto fluid equations is retained
     void use_block_triangular_version_with_solid_on_fluid()
     {
@@ -584,18 +584,18 @@ namespace oomph
     }
 
   private:
-    ///  Preconditioner (inexact solver)
+    /// Preconditioner (inexact solver)
     Preconditioner* Preconditioner_pt;
 
-    ///  Boolean flag used to indicate that the solid onto fluid
+    /// Boolean flag used to indicate that the solid onto fluid
     /// interaction terms are to be retained
     bool Retain_solid_onto_fluid_terms;
 
-    ///  Boolean flag used to indicate that the fluid onto solid
+    /// Boolean flag used to indicate that the fluid onto solid
     /// interaction terms are to be retained
     bool Retain_fluid_onto_solid_terms;
 
-    ///  Identify the required blocks: Here we only need
+    /// Identify the required blocks: Here we only need
     /// the momentum, gradient and divergence blocks of the
     /// 2x2 block-structured fluid matrix, the 1x1 solid block
     /// and the selected FSI-off diagonals.

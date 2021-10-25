@@ -38,7 +38,7 @@
 
 namespace oomph
 {
-  ///  Class implementing the generic maths of the poroelasticity
+  /// Class implementing the generic maths of the poroelasticity
   /// equations: linear elasticity coupled with Darcy equations (using
   /// Raviart-Thomas elements with both edge and internal degrees of freedom)
   template<unsigned DIM>
@@ -165,7 +165,7 @@ namespace oomph
       return Mass_source_fct_pt;
     }
 
-    ///  Indirect access to the solid force function - returns 0 if no
+    /// Indirect access to the solid force function - returns 0 if no
     /// forcing function has been set
     void force_solid(const double& time,
                      const Vector<double>& x,
@@ -187,7 +187,7 @@ namespace oomph
       }
     }
 
-    ///  Indirect access to the fluid forcing function - returns 0 if no
+    /// Indirect access to the fluid forcing function - returns 0 if no
     /// forcing function has been set
     void force_fluid(const double& time,
                      const Vector<double>& x,
@@ -209,7 +209,7 @@ namespace oomph
       }
     }
 
-    ///  Indirect access to the mass source function - returns 0 if no
+    /// Indirect access to the mass source function - returns 0 if no
     /// mass source function has been set
     void mass_source(const double& time,
                      const Vector<double>& x,
@@ -241,11 +241,11 @@ namespace oomph
       return (*Elasticity_tensor_pt)(i, j, k, l);
     }
 
-    ///  Return the Cauchy stress tensor, as calculated
+    /// Return the Cauchy stress tensor, as calculated
     /// from the elasticity tensor at specified local coordinate
     void get_stress(const Vector<double>& s, DenseMatrix<double>& sigma) const;
 
-    ///  Return the strain tensor
+    /// Return the strain tensor
     void get_strain(const Vector<double>& s, DenseMatrix<double>& strain) const;
 
     /// Number of values required at node n
@@ -264,7 +264,7 @@ namespace oomph
     /// Return the nodal index at which the nth edge unknown is stored
     virtual unsigned q_edge_index(const unsigned& n) const = 0;
 
-    ///  Return the index of the internal data where the q_internal
+    /// Return the index of the internal data where the q_internal
     /// degrees of freedom are stored
     virtual unsigned q_internal_index() const = 0;
 
@@ -274,14 +274,14 @@ namespace oomph
     /// Return the values of the edge (flux) degrees of freedom
     virtual double q_edge(const unsigned& n) const = 0;
 
-    ///  Return the values of the edge (flux) degrees of freedom at time
+    /// Return the values of the edge (flux) degrees of freedom at time
     /// history level t
     virtual double q_edge(const unsigned& t, const unsigned& n) const = 0;
 
     /// Return the values of the internal (moment) degrees of freedom
     virtual double q_internal(const unsigned& n) const = 0;
 
-    ///  Return the values of the internal (moment) degrees of freedom at
+    /// Return the values of the internal (moment) degrees of freedom at
     /// time history level t
     virtual double q_internal(const unsigned& t, const unsigned& n) const = 0;
 
@@ -344,7 +344,7 @@ namespace oomph
     /// Scale the edge basis to allow arbitrary edge mappings
     virtual void scale_basis(Shape& basis) const = 0;
 
-    ///  Performs a div-conserving transformation of the vector basis
+    /// Performs a div-conserving transformation of the vector basis
     /// functions from the reference element to the actual element
     double transform_basis(const Vector<double>& s,
                            const Shape& q_basis_local,
@@ -352,7 +352,7 @@ namespace oomph
                            DShape& dpsi,
                            Shape& q_basis) const;
 
-    ///  Performs a div-conserving transformation of the vector basis
+    /// Performs a div-conserving transformation of the vector basis
     /// functions from the reference element to the actual element
     double transform_basis(const Vector<double>& s,
                            const Shape& q_basis_local,
@@ -709,31 +709,31 @@ namespace oomph
       output(outfile, nplot);
     }
 
-    ///  Output FE representation of soln: x,y,u1,u2,div_q,p at
+    /// Output FE representation of soln: x,y,u1,u2,div_q,p at
     /// Nplot^DIM plot points
     void output(std::ostream& outfile, const unsigned& nplot);
 
-    ///  Output FE representation of exact soln: x,y,u1,u2,div_q,p at
+    /// Output FE representation of exact soln: x,y,u1,u2,div_q,p at
     /// Nplot^DIM plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
-    ///  Output FE representation of exact soln: x,y,u1,u2,div_q,p at
+    /// Output FE representation of exact soln: x,y,u1,u2,div_q,p at
     /// Nplot^DIM plot points. Unsteady version
     void output_fct(std::ostream& outfile,
                     const unsigned& nplot,
                     const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
-    ///  Compute the error between the FE solution and the exact solution
+    /// Compute the error between the FE solution and the exact solution
     /// using the H(div) norm for q and L^2 norm for p
     void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                        Vector<double>& error,
                        Vector<double>& norm);
 
-    ///  Compute the error between the FE solution and the exact solution
+    /// Compute the error between the FE solution and the exact solution
     /// using the H(div) norm for q and L^2 norm for p. Unsteady version
     void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
@@ -742,7 +742,7 @@ namespace oomph
                        Vector<double>& norm);
 
   protected:
-    ///  Returns the geometric basis, and the q, p and divergence basis
+    /// Returns the geometric basis, and the q, p and divergence basis
     /// functions and test functions at local coordinate s
     virtual double shape_basis_test_local(const Vector<double>& s,
                                           Shape& psi,
@@ -758,7 +758,7 @@ namespace oomph
                                           Shape& div_q_basis_ds,
                                           Shape& div_q_test_ds) const = 0;
 
-    ///  Returns the geometric basis, and the q, p and divergence basis
+    /// Returns the geometric basis, and the q, p and divergence basis
     /// functions and test functions at integration point ipt
     virtual double shape_basis_test_local_at_knot(
       const unsigned& ipt,

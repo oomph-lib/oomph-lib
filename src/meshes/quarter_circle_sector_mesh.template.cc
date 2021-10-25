@@ -843,7 +843,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Algebraic update function: Update in central box according
+  /// Algebraic update function: Update in central box according
   /// to wall shape at time level t (t=0: present; t>0: previous)
   //======================================================================
   template<class ELEMENT>

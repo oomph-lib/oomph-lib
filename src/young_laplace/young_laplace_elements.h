@@ -61,12 +61,12 @@ namespace oomph
   class YoungLaplaceEquations : public virtual FiniteElement
   {
   public:
-    ///  Function pointer to "spine base" function
+    /// Function pointer to "spine base" function
     typedef void (*SpineBaseFctPt)(const Vector<double>& x,
                                    Vector<double>& spine_base,
                                    Vector<Vector<double>>& dspine_base);
 
-    ///  Function pointer to "spine" function
+    /// Function pointer to "spine" function
     typedef void (*SpineFctPt)(const Vector<double>& x,
                                Vector<double>& spine,
                                Vector<Vector<double>>& dspine);
@@ -97,7 +97,7 @@ namespace oomph
       output(outfile, n_plot);
     }
 
-    ///  Output FE representation of soln
+    /// Output FE representation of soln
     /// at n_plot^2 plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
@@ -108,7 +108,7 @@ namespace oomph
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
 
-    ///  Output exact soln at
+    /// Output exact soln at
     /// n_plot^2 plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
@@ -142,7 +142,7 @@ namespace oomph
     }
 
 
-    ///  Access function: Pointer Data object that stores kappa (const
+    /// Access function: Pointer Data object that stores kappa (const
     /// version -- kappa must be set with set_kappa() which also ensures
     /// that the Data object is added to the element's external Data.
     Data* kappa_pt()
@@ -150,14 +150,14 @@ namespace oomph
       return Kappa_pt;
     }
 
-    ///  Use spines or not? (Based on availability of function pointers
+    /// Use spines or not? (Based on availability of function pointers
     /// to to spine and spine base vector fields)
     bool use_spines() const
     {
       return (Spine_fct_pt != 0);
     }
 
-    ///  Access function to function pointer that specifies spine base
+    /// Access function to function pointer that specifies spine base
     /// vector field
     SpineBaseFctPt& spine_base_fct_pt()
     {
@@ -165,7 +165,7 @@ namespace oomph
     }
 
 
-    ///  Access function to function pointer that specifies spine
+    /// Access function to function pointer that specifies spine
     /// vector field
     SpineFctPt& spine_fct_pt()
     {
@@ -239,7 +239,7 @@ namespace oomph
     }
 
 
-    ///  Get spine base vector field: Defaults to standard cartesian
+    /// Get spine base vector field: Defaults to standard cartesian
     /// representation if no spine base fct pointers have been set.
     /// dspine_B[i][j] = d spine_B[j] / dx_i
     inline virtual void get_spine_base(
@@ -267,7 +267,7 @@ namespace oomph
       }
     }
 
-    ///  Get spine vector field: Defaults to standard cartesian
+    /// Get spine vector field: Defaults to standard cartesian
     /// representation if no spine base fct pointers have been set.
     /// dspine[i][j] = d spine[j] / dx_i
     inline void get_spine(const Vector<double>& x,
@@ -334,11 +334,11 @@ namespace oomph
     }
 
 
-    ///  Self-test: Return 0 for OK
+    /// Self-test: Return 0 for OK
     unsigned self_test();
 
 
-    ///  Helper fct: Allocate storage for a vector of vectors of doubles
+    /// Helper fct: Allocate storage for a vector of vectors of doubles
     /// to v(n_rows,n_cols) and initialise each component to 0.0.
     static void allocate_vector_of_vectors(unsigned n_rows,
                                            unsigned n_cols,
@@ -425,7 +425,7 @@ namespace oomph
     }
 
   protected:
-    ///  Get the local equation number of the (one and only) unknown
+    /// Get the local equation number of the (one and only) unknown
     /// stored at local node n (returns -1 if value is pinned).
     /// Can be overloaded in derived multiphysics elements.
     virtual inline int u_local_eqn(const unsigned& n)
@@ -443,7 +443,7 @@ namespace oomph
     SpineFctPt Spine_fct_pt;
 
   private:
-    ///  Pointer to Data item that stores kappa as its first value
+    /// Pointer to Data item that stores kappa as its first value
     /// -- private to ensure that it must be set with
     /// set_kappa(...) which adds the Data to the element's internal
     /// Data!
@@ -465,12 +465,12 @@ namespace oomph
                                public virtual YoungLaplaceEquations
   {
   private:
-    ///  Static array of ints to hold number of variables at
+    /// Static array of ints to hold number of variables at
     /// nodes: Initial_Nvalue[n]
     static const unsigned Initial_Nvalue[];
 
   public:
-    ///  Constructor: Call constructors for QElement and
+    /// Constructor: Call constructors for QElement and
     /// YoungLaplace equations
     QYoungLaplaceElement() : QElement<2, NNODE_1D>(), YoungLaplaceEquations() {}
 
@@ -480,28 +480,28 @@ namespace oomph
     /// Broken assignment operator
     void operator=(const QYoungLaplaceElement<NNODE_1D>&) = delete;
 
-    ///   Required  # of `values' (pinned or dofs)
+    ///  Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue[n];
     }
 
-    ///  Output function
+    /// Output function
     void output(std::ostream& outfile)
     {
       YoungLaplaceEquations::output(outfile);
     }
 
 
-    ///   Output function at n_plot^2 plot points
+    ///  Output function at n_plot^2 plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       YoungLaplaceEquations::output(outfile, n_plot);
     }
 
 
-    ///  Output function for an exact solutio at n_plot^2 plot points
+    /// Output function for an exact solutio at n_plot^2 plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
@@ -510,7 +510,7 @@ namespace oomph
     }
 
 
-    ///  Output function for a time-dependent exact solution
+    /// Output function for a time-dependent exact solution
     /// at n_plot^2 plot points (calls the steady version)
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -538,7 +538,7 @@ namespace oomph
     : public virtual QElement<1, NNODE_1D>
   {
   public:
-    ///  Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<1, NNODE_1D>() {}
   };
@@ -581,7 +581,7 @@ namespace oomph
       add_external_data(static_cast<Data*>(control_node_pt));
     }
 
-    ///  Access function to the pointer to the Data object that
+    /// Access function to the pointer to the Data object that
     /// stores the curvature.
     Data*& kappa_pt()
     {
@@ -599,7 +599,7 @@ namespace oomph
     }
 
 
-    ///  Add the element's contribution to its residual vector:
+    /// Add the element's contribution to its residual vector:
     /// The height constraint. [Note: Jacobian is computed
     /// automatically by finite-differencing]
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -612,10 +612,10 @@ namespace oomph
     /// Pointer to value that stores the controlled height
     double* Prescribed_height_pt;
 
-    ///  Pointer to node at which the height is controlled
+    /// Pointer to node at which the height is controlled
     Node* Control_node_pt;
 
-    ///  In which component (in the vector of the element's internal
+    /// In which component (in the vector of the element's internal
     /// Data) is the unknown curvature stored?
     unsigned Curvature_data_index;
 

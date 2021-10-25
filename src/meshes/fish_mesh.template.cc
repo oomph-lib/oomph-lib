@@ -674,7 +674,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Setup algebraic update operation. Nodes are "suspended"
+  /// Setup algebraic update operation. Nodes are "suspended"
   /// from the fish's back and the upper edge of the fin. Nodes
   /// in the lower half are placed symmetrically.
   //======================================================================
@@ -886,7 +886,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Algebraic update function: Update in (upper or lower) body
+  /// Algebraic update function: Update in (upper or lower) body
   /// according to wall shape at time level t (t=0: present; t>0: previous)
   //======================================================================
   template<class ELEMENT>
@@ -942,7 +942,7 @@ namespace oomph
 
 
   //======================================================================
-  ///  Algebraic update function: Update in (upper or lower) fin
+  /// Algebraic update function: Update in (upper or lower) fin
   /// according to wall shape at time level t (t=0: present; t>0: previous)
   //======================================================================
   template<class ELEMENT>

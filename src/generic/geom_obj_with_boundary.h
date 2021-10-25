@@ -75,7 +75,7 @@ namespace oomph
       return Boundary_parametrising_geom_object_pt.size();
     }
 
-    ///  Compute 3D vector of Eulerian coordinates at 1D boundary
+    /// Compute 3D vector of Eulerian coordinates at 1D boundary
     /// coordinate zeta_bound on boundary b:
     void position_on_boundary(const unsigned& b,
                               const double& zeta_bound,
@@ -86,7 +86,7 @@ namespace oomph
       position(zeta, r);
     }
 
-    ///  Compute 2D vector of intrinsic coordinates at 1D boundary
+    /// Compute 2D vector of intrinsic coordinates at 1D boundary
     /// coordinate zeta_bound on boundary b:
     void zeta_on_boundary(const unsigned& b,
                           const double& zeta_bound,
@@ -132,21 +132,21 @@ namespace oomph
                                                          zeta);
     }
 
-    ///  Pointer to GeomObject<1,2> that parametrises intrinisc
+    /// Pointer to GeomObject<1,2> that parametrises intrinisc
     /// coordinates along boundary b
     GeomObject* boundary_parametrising_geom_object_pt(const unsigned& b) const
     {
       return Boundary_parametrising_geom_object_pt[b];
     }
 
-    ///  Initial value of 1D boundary coordinate
+    /// Initial value of 1D boundary coordinate
     /// zeta_bound on boundary b:
     double zeta_boundary_start(const unsigned& b) const
     {
       return Zeta_boundary_start[b];
     }
 
-    ///  Final value of 1D boundary coordinate
+    /// Final value of 1D boundary coordinate
     /// zeta_bound on boundary b:
     double zeta_boundary_end(const unsigned& b) const
     {
@@ -154,7 +154,7 @@ namespace oomph
     }
 
 
-    ///  Boundary triad on boundary b at boundary coordinate zeta_bound.
+    /// Boundary triad on boundary b at boundary coordinate zeta_bound.
     /// Broken virtual.
     virtual void boundary_triad(const unsigned& b,
                                 const double& zeta_bound,
@@ -170,7 +170,7 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    ///  Output boundaries at nplot plot points. Streams:
+    /// Output boundaries at nplot plot points. Streams:
     /// - two_d_boundaries_file: zeta_0, zeta_1, zeta_bound
     /// - three_d_boundaries_file : x, y, z, zeta_0, zeta_1, zeta_bound
     void output_boundaries(const unsigned& nplot,
@@ -189,7 +189,7 @@ namespace oomph
     }
 
 
-    ///  Output boundaries and triad at nplot plot points. Streams:
+    /// Output boundaries and triad at nplot plot points. Streams:
     /// - two_d_boundaries_file: zeta_0, zeta_1, zeta_bound
     /// - three_d_boundaries_file : x, y, z, zeta_0, zeta_1, zeta_bound
     /// - boundaries_tangent_file : x, y, z, t_x, t_y, t_z
@@ -251,7 +251,7 @@ namespace oomph
     }
 
 
-    ///  Specify intrinsic coordinates of a point within a specified
+    /// Specify intrinsic coordinates of a point within a specified
     /// region  -- region ID, r, should be positive.
     void add_region_coordinates(const unsigned& r,
                                 Vector<double>& zeta_in_region)
@@ -310,15 +310,15 @@ namespace oomph
     }
 
   protected:
-    ///  Storage for initial value of 1D boundary coordinate
+    /// Storage for initial value of 1D boundary coordinate
     /// on boundary b:
     Vector<double> Zeta_boundary_start;
 
-    ///  Storage for final value of 1D boundary coordinate
+    /// Storage for final value of 1D boundary coordinate
     /// on boundary b:
     Vector<double> Zeta_boundary_end;
 
-    ///  Pointer to GeomObject<1,2> that parametrises intrinisc
+    /// Pointer to GeomObject<1,2> that parametrises intrinisc
     /// coordinates along boundary b; essentially provides a wrapper to
     /// zeta_on_boundary(...)
     Vector<GeomObject*> Boundary_parametrising_geom_object_pt;
@@ -334,7 +334,7 @@ namespace oomph
 
 
   //=========================================================================
-  ///  Warped disk in 3d: zeta[0]=x; zeta[1]=y (so it doesn't have
+  /// Warped disk in 3d: zeta[0]=x; zeta[1]=y (so it doesn't have
   /// coordinate singularities), with specification of two boundaries (b=0,1)
   /// that turn the whole thing into a circular disk.
   //=========================================================================
@@ -398,7 +398,7 @@ namespace oomph
       return Epsilon;
     }
 
-    ///  Position Vector at Lagrangian coordinate zeta
+    /// Position Vector at Lagrangian coordinate zeta
     void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       // Position Vector
@@ -410,7 +410,7 @@ namespace oomph
     }
 
 
-    ///  Parametrised position on object: r(zeta). Evaluated at
+    /// Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep. Object is steady so calls time-independent version
     void position(const unsigned& t,
@@ -499,7 +499,7 @@ namespace oomph
 
 
   //=========================================================================
-  ///  Warped disk in 3d: zeta[0]=x; zeta[1]=y (so it doesn't have
+  /// Warped disk in 3d: zeta[0]=x; zeta[1]=y (so it doesn't have
   /// coordinate singularities), with specification of two boundaries (b=0,1)
   /// that turn the whole thing into a circular disk. In addition
   /// has two internal boundaries (b=2,3), a distance h_annulus from
@@ -559,7 +559,7 @@ namespace oomph
     virtual ~WarpedCircularDiskWithAnnularInternalBoundary() {}
 
 
-    ///  Thickness of annular region (distance of internal boundary
+    /// Thickness of annular region (distance of internal boundary
     /// from outer edge of unit circle)
     double h_annulus() const
     {
@@ -567,7 +567,7 @@ namespace oomph
     }
 
   protected:
-    ///  Thickness of annular region (distance of internal boundary
+    /// Thickness of annular region (distance of internal boundary
     /// from outer edge of unit circle)
     double H_annulus;
   };

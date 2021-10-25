@@ -34,7 +34,7 @@
 namespace oomph
 {
   //========================================================================
-  ///   ImposeParallelOutflowElement
+  ///  ImposeParallelOutflowElement
   /// are elements that coincide with the faces of
   /// higher-dimensional "bulk" elements. They are used on
   /// boundaries where we would like to impose parallel outflow and
@@ -53,7 +53,7 @@ namespace oomph
 
 
   public:
-    ///  Constructor takes a "bulk" element, the
+    /// Constructor takes a "bulk" element, the
     /// index that identifies which face the
     /// ImposeParallelOutflowElement is supposed
     /// to be attached to, and the face element ID
@@ -112,7 +112,7 @@ namespace oomph
       FiniteElement::output(outfile, nplot);
     }
 
-    ///  The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     /// This final over-ride is required because both SolidFiniteElements
@@ -132,7 +132,7 @@ namespace oomph
     }
 
   protected:
-    ///  Helper function to compute the residuals and, if flag==1, the
+    /// Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void fill_in_generic_contribution_to_residuals_parall_lagr_multiplier(
       Vector<double>& residuals,
@@ -319,7 +319,7 @@ namespace oomph
       }
     }
 
-    ///  The number of degrees of freedom types that this element is
+    /// The number of degrees of freedom types that this element is
     /// divided into: The ImposeParallelOutflowElement is responsible for 1(2)
     /// of it's own degrees of freedom. In addition to this, it also classifies
     /// the 2(3) constrained velocity bulk degrees of freedom which this face
@@ -334,7 +334,7 @@ namespace oomph
       return 2 * (this->dim()) + 1;
     }
 
-    ///  Create a list of pairs for all unknowns in this element,
+    /// Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the LOCAL number
     /// of the "DOF types" that this unknown is associated with.

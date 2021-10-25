@@ -238,7 +238,7 @@ namespace oomph
 
 
   //============================================================================
-  ///  preconditioner solve for the biharmonic preconditioner
+  /// preconditioner solve for the biharmonic preconditioner
   //============================================================================
   void BiharmonicPreconditioner::preconditioner_solve(const DoubleVector& r,
                                                       DoubleVector& z)
@@ -330,7 +330,7 @@ namespace oomph
 
 
   //============================================================================
-  ///  preconditioner solve for the exact sub biharmonic preconditioner
+  /// preconditioner solve for the exact sub biharmonic preconditioner
   //============================================================================
   void ExactSubBiharmonicPreconditioner::preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)
@@ -440,7 +440,7 @@ namespace oomph
   }
 
   //============================================================================
-  ///  computes the schur complement for the inexact sub biharmonic
+  /// computes the schur complement for the inexact sub biharmonic
   /// preconditioner
   //============================================================================
   void InexactSubBiharmonicPreconditioner::compute_inexact_schur_complement()
@@ -652,7 +652,7 @@ namespace oomph
 
 
   //============================================================================
-  ///  preconditioner solve for the inexact sub biharmonic preconditioner
+  /// preconditioner solve for the inexact sub biharmonic preconditioner
   //============================================================================
   void InexactSubBiharmonicPreconditioner::preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)

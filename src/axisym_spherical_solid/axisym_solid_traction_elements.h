@@ -83,7 +83,7 @@ namespace oomph
     }
 
   public:
-    ///  Constructor, which takes a "bulk" element and
+    /// Constructor, which takes a "bulk" element and
     /// the value of the index and its limit
     AxisymmetricSolidTractionElement(FiniteElement* const& element_pt,
                                      const int& face_index)

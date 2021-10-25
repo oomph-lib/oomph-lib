@@ -187,7 +187,7 @@ public:
   }
  
 
- /// short Overload assign local equation numbers: Add the dependency 
+ /// Overload assign local equation numbers: Add the dependency 
  /// on the external Data that affects the inflow profile
  void assign_local_eqn_numbers(const bool  &store_local_dof_pt)
   {

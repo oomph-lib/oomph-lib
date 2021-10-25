@@ -40,7 +40,7 @@ namespace oomph
   //==================================================================
   namespace Hypre_default_settings
   {
-    ///  Set default parameters for use as preconditioner in
+    /// Set default parameters for use as preconditioner in
     /// 2D Poisson-type problem.
     void set_defaults_for_2D_poisson_problem(
       HyprePreconditioner* hypre_preconditioner_pt)
@@ -67,7 +67,7 @@ namespace oomph
     }
 
 
-    ///  Set default parameters for use as preconditioner in
+    /// Set default parameters for use as preconditioner in
     /// 3D Poisson-type problem.
     void set_defaults_for_3D_poisson_problem(
       HyprePreconditioner* hypre_preconditioner_pt)
@@ -80,7 +80,7 @@ namespace oomph
     }
 
 
-    ///  Set default parameters for use as preconditioner in
+    /// Set default parameters for use as preconditioner in
     /// for momentum block in Navier-Stokes problem
     void set_defaults_for_navier_stokes_momentum_block(
       HyprePreconditioner* hypre_preconditioner_pt)
@@ -112,13 +112,13 @@ namespace oomph
   namespace HypreHelpers
   {
     //========================================================================
-    ///  Default for AMG strength (0.25 recommended for 2D problems;
+    /// Default for AMG strength (0.25 recommended for 2D problems;
     /// larger (0.5-0.75, say) for 3D
     //========================================================================
     double AMG_strength = 0.25;
 
     //========================================================================
-    ///  Default AMG coarsening strategy. Coarsening types include:
+    /// Default AMG coarsening strategy. Coarsening types include:
     ///  0 = CLJP (parallel coarsening using independent sets)
     ///  1 = classical RS with no boundary treatment (not recommended
     ///      in parallel)
@@ -403,7 +403,7 @@ namespace oomph
     }
 
     //====================================================================
-    ///  Helper function to set Euclid options using a command line
+    /// Helper function to set Euclid options using a command line
     /// like array.
     //=====================================================================
     void euclid_settings_helper(const bool& use_block_jacobi,
@@ -1597,7 +1597,7 @@ namespace oomph
 
 
   //=============================================================================
-  ///  Static double that accumulates the preconditioner
+  /// Static double that accumulates the preconditioner
   /// solve time of all instantiations of this class. Reset
   /// it manually, e.g. after every Newton solve, using
   /// reset_cumulative_solve_times().
@@ -1605,7 +1605,7 @@ namespace oomph
   double HyprePreconditioner::Cumulative_preconditioner_solve_time = 0.0;
 
   //=============================================================================
-  ///  map of static doubles that accumulates the preconditioner
+  /// map of static doubles that accumulates the preconditioner
   /// solve time of all instantiations of this class, labeled by
   /// context string. Reset
   /// it manually, e.g. after every Newton solve, using
@@ -1615,7 +1615,7 @@ namespace oomph
     HyprePreconditioner::Context_based_cumulative_solve_time;
 
   //=============================================================================
-  ///  Static unsigned that accumulates the number of preconditioner
+  /// Static unsigned that accumulates the number of preconditioner
   /// solves of all instantiations of this class. Reset
   /// it manually, e.g. after every Newton solve, using
   /// reset_cumulative_solve_times().
@@ -1623,7 +1623,7 @@ namespace oomph
   unsigned HyprePreconditioner::Cumulative_npreconditioner_solve = 0;
 
   //=============================================================================
-  ///  Static unsigned that accumulates the number of preconditioner
+  /// Static unsigned that accumulates the number of preconditioner
   /// solves of all instantiations of this class, labeled by
   /// context string. Reset
   /// it manually, e.g. after every Newton solve, using
@@ -1633,7 +1633,7 @@ namespace oomph
     HyprePreconditioner::Context_based_cumulative_npreconditioner_solve;
 
   //=============================================================================
-  ///  Static unsigned that stores nrow for the most recent
+  /// Static unsigned that stores nrow for the most recent
   /// instantiations of this class, labeled by
   /// context string. Reset
   /// it manually, e.g. after every Newton solve, using
@@ -1642,7 +1642,7 @@ namespace oomph
   std::map<std::string, unsigned> HyprePreconditioner::Context_based_nrow;
 
   //=============================================================================
-  ///  Report cumulative solve times of all instantiations of this
+  /// Report cumulative solve times of all instantiations of this
   /// class
   //=============================================================================
   void HyprePreconditioner::report_cumulative_solve_times()
@@ -1694,7 +1694,7 @@ namespace oomph
   }
 
   //=============================================================================
-  ///  Reset cumulative solve times
+  /// Reset cumulative solve times
   //=============================================================================
   void HyprePreconditioner::reset_cumulative_solve_times()
   {

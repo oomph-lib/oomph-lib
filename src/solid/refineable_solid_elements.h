@@ -46,7 +46,7 @@ namespace oomph
                                  public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///  Constructor
+    /// Constructor
     RefineablePVDEquations()
       : PVDEquations<DIM>(),
         RefineableElement(),
@@ -83,7 +83,7 @@ namespace oomph
       return DIM + DIM * (DIM - 1) / 2;
     }
 
-    ///  Get 'flux' for Z2 error recovery:   Upper triangular entries
+    /// Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -180,7 +180,7 @@ namespace oomph
                                 public virtual RefineableSolidQElement<DIM>
   {
   public:
-    ///  Constructor:
+    /// Constructor:
     RefineableQPVDElement()
       : QPVDElement<DIM, NNODE_1D>(),
         RefineableElement(),
@@ -193,26 +193,26 @@ namespace oomph
     /// Empty rebuild from sons, no need to reconstruct anything here
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QPVDElement<DIM, NNODE_1D>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QPVDElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return NNODE_1D - 1;
     }
 
-    ///   No additional hanging node procedures are required
+    ///  No additional hanging node procedures are required
     /// for the solid elements.
     void further_setup_hanging_nodes() {}
   };
@@ -283,7 +283,7 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///  Constructor:
+    /// Constructor:
     RefineablePVDEquationsWithPressure()
       : PVDEquationsWithPressure<DIM>(),
         RefineableElement(),
@@ -292,7 +292,7 @@ namespace oomph
     {
     }
 
-    ///  Add element's contribution to elemental residual vector and/or
+    /// Add element's contribution to elemental residual vector and/or
     /// Jacobian matrix
     /// flag=1: compute both
     /// flag=0: compute only residual vector
@@ -417,7 +417,7 @@ namespace oomph
     }
 
 
-    ///  Compute the diagonal of the displacement mass matrix for
+    /// Compute the diagonal of the displacement mass matrix for
     /// LSC preconditioner
     void get_mass_matrix_diagonal(Vector<double>& mass_diag);
   };
@@ -447,7 +447,7 @@ namespace oomph
     }
 
   public:
-    ///  Constructor:
+    /// Constructor:
     RefineableQPVDElementWithPressure()
       : QPVDElementWithPressure<DIM>(),
         RefineableElement(),
@@ -458,34 +458,34 @@ namespace oomph
     }
 
 
-    ///  Reconstruct the pressure from the sons
+    /// Reconstruct the pressure from the sons
     /// Must be specialized for each dimension
     inline void rebuild_from_sons(Mesh*& mesh_pt);
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QPVDElementWithPressure<DIM>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QPVDElementWithPressure<DIM>::vertex_node_pt(j);
     }
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return 2;
     } // NNODE_1D-1;}
 
-    ///   No additional hanging node procedures are required for
+    ///  No additional hanging node procedures are required for
     /// discontinuous solid pressures.
     void further_setup_hanging_nodes() {}
 
-    ///   Further build: Interpolate the solid pressure values
+    ///  Further build: Interpolate the solid pressure values
     /// Again this must be specialised for each dimension
     inline void further_build();
 
@@ -825,7 +825,7 @@ namespace oomph
       public virtual RefineableSolidQElement<DIM>
   {
   public:
-    ///  Constructor:
+    /// Constructor:
     RefineableQPVDElementWithContinuousPressure()
       : QPVDElementWithContinuousPressure<DIM>(),
         RefineableElement(),
@@ -836,7 +836,7 @@ namespace oomph
     }
 
 
-    ///  Overload the number of additional solid dofs at each node, we
+    /// Overload the number of additional solid dofs at each node, we
     /// shall always assign 1, otherwise it's a real pain
     unsigned required_nvalue(const unsigned& n) const
     {
@@ -916,19 +916,19 @@ namespace oomph
     }
 
 
-    ///  Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QPVDElementWithContinuousPressure<DIM>::nvertex_node();
     }
 
-    ///  Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QPVDElementWithContinuousPressure<DIM>::vertex_node_pt(j);
     }
 
-    ///  Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
@@ -936,7 +936,7 @@ namespace oomph
     } // NNODE_1D-1;}
 
 
-    ///  The pressure "nodes" are a
+    /// The pressure "nodes" are a
     /// subset of the nodes, so when value_id==0, the n-th pressure
     /// node is returned.
     Node* interpolating_node_pt(const unsigned& n, const int& value_id)
@@ -957,7 +957,7 @@ namespace oomph
       }
     }
 
-    ///  The pressure nodes are the corner nodes, so when value_id==0,
+    /// The pressure nodes are the corner nodes, so when value_id==0,
     /// the fraction is the same as the 1d node number, 0 or 1.
     double local_one_d_fraction_of_interpolating_node(const unsigned& n1d,
                                                       const unsigned& i,
@@ -979,7 +979,7 @@ namespace oomph
       }
     }
 
-    ///  The velocity nodes are the same as the geometric nodes. The
+    /// The velocity nodes are the same as the geometric nodes. The
     /// pressure nodes must be calculated by using the same methods as
     /// the geometric nodes, but by recalling that there are only two pressure
     /// nodes per edge.
@@ -1046,7 +1046,7 @@ namespace oomph
     }
 
 
-    ///  The number of 1d pressure nodes is 2, otherwise we have
+    /// The number of 1d pressure nodes is 2, otherwise we have
     /// the positional nodes
     unsigned ninterpolating_node_1d(const int& value_id)
     {
@@ -1064,7 +1064,7 @@ namespace oomph
       }
     }
 
-    ///  The number of pressure nodes is 2^DIM. The number of
+    /// The number of pressure nodes is 2^DIM. The number of
     /// velocity nodes is the same as the number of geometric nodes.
     unsigned ninterpolating_node(const int& value_id)
     {
@@ -1082,7 +1082,7 @@ namespace oomph
       }
     }
 
-    ///  The basis interpolating the pressure is given by pshape().
+    /// The basis interpolating the pressure is given by pshape().
     //// The basis interpolating the velocity is shape().
     void interpolating_basis(const Vector<double>& s,
                              Shape& psi,
@@ -1103,7 +1103,7 @@ namespace oomph
     }
 
 
-    ///   Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes.
     void further_setup_hanging_nodes()
     {
