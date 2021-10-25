@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - fix_doc
   workflow_dispatch:
     inputs:
       publishBranch:
@@ -46,9 +47,8 @@ jobs:
       run: make -C bin
     - name: Build doc
       run: |
-           date
            make -C doc
-           date
+           find . -name 'doxygen.png'
     - name: Run website install script
       run: ./bin/website_install.sh
     - name: Grab redirect file
