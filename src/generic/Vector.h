@@ -191,7 +191,7 @@ namespace oomph
   };
 
   //==================================================================
-  ///A Vector of bools cannot be created because the is no
+  /// A Vector of bools cannot be created because the is no
   /// compiler-independent  implementation of the bit manipulators.
   /// Making all the constructors private should lead to compile-time
   /// errors.

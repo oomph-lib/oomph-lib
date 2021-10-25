@@ -641,7 +641,7 @@ namespace oomph
       }
     }
 
-    ///Final override for residuals function: adds contributions
+    /// Final override for residuals function: adds contributions
     /// from both underlying element types
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
@@ -651,7 +651,7 @@ namespace oomph
       SOLID::fill_in_contribution_to_residuals(residuals);
     }
 
-    ///Final override for jacobian function: Calls get_jacobian() for
+    /// Final override for jacobian function: Calls get_jacobian() for
     /// both of the underlying element types
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)

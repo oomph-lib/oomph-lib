@@ -464,7 +464,7 @@ namespace oomph
       visc_ratio = *Viscosity_Ratio_pt;
     }
 
-    ///Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=2 or 1 or 0: compute the Jacobian and/or mass matrix
     /// as well.
     virtual void fill_in_generic_residual_contribution_axi_nst(
@@ -473,7 +473,7 @@ namespace oomph
       DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
-    ///Compute the derivative of residuals for the
+    /// Compute the derivative of residuals for the
     /// Navier--Stokes equations; with respect to a parameeter
     /// flag=2 or 1 or 0: compute the Jacobian and/or mass matrix as well
     virtual void fill_in_generic_dresidual_contribution_axi_nst(
@@ -964,7 +964,7 @@ namespace oomph
         0);
     }
 
-    ///Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// Virtual function can be overloaded by hanging-node version
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -2095,7 +2095,7 @@ namespace oomph
       }
     }
 
-    ///Number of positional history values (includes current value!)
+    /// Number of positional history values (includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
@@ -2302,7 +2302,7 @@ namespace oomph
       }
     }
 
-    ///Number of positional history values (includes current value!)
+    /// Number of positional history values (includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {
       return this->node_pt(0)->position_time_stepper_pt()->ntstorage();

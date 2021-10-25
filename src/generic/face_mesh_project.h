@@ -135,7 +135,7 @@ namespace oomph
       return this->node_pt(0)->ntstorage();
     }
 
-    ///Number of positional history values (Note: count includes
+    /// Number of positional history values (Note: count includes
     /// current value!). Extract from first node but assume it's
     /// the same for all.
     unsigned nhistory_values_for_coordinate_projection()

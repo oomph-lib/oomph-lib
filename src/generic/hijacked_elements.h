@@ -417,7 +417,7 @@ namespace oomph
 
 
   //============================================================================
-  ///Explicit definition of the face geometry of hijacked elements:
+  /// Explicit definition of the face geometry of hijacked elements:
   /// the same as the face geometry of the underlying element
   //============================================================================
   template<class ELEMENT>
@@ -431,7 +431,7 @@ namespace oomph
   };
 
   //============================================================================
-  ///Explicit definition of the face geometry of hijacked elements:
+  /// Explicit definition of the face geometry of hijacked elements:
   /// the same as the face geometry of the underlying element
   //============================================================================
   template<class ELEMENT>
@@ -446,7 +446,7 @@ namespace oomph
   };
 
   //============================================================================
-  ///Explicit definition of the face geometry of hijacked elements:
+  /// Explicit definition of the face geometry of hijacked elements:
   /// the same as the face geometry of the underlying element
   //============================================================================
   template<class ELEMENT>

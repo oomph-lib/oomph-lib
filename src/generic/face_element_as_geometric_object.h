@@ -61,7 +61,7 @@ namespace oomph
                                   public virtual ElementWithExternalElement
   {
   public:
-    ///Constructor which takes a pointer to a "bulk" element,
+    /// Constructor which takes a pointer to a "bulk" element,
     /// to which this element is attached. The face index, indicates
     /// the face (of the bulk element) that is to be constructed.
     /// Note that this element tends to be constructed

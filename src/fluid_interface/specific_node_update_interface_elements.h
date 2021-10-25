@@ -92,7 +92,7 @@ namespace oomph
     /// Empty constructor
     FluidInterfaceAdditionalValues<ELEMENT>() {}
 
-    ///Specific interface that states how many additional values are
+    /// Specific interface that states how many additional values are
     /// required for the n-th node. Default is zero, but issue error_message.
     inline unsigned nadditional_values(const unsigned& n)
     {
@@ -100,7 +100,7 @@ namespace oomph
       return 0;
     }
 
-    ///Specify any additional index setup information that is required;
+    /// Specify any additional index setup information that is required;
     /// i.e. the look-up schemes for the additional values.
     /// Default is empty with error message
     inline void setup_equation_indices(ELEMENT* const& element_pt,
@@ -122,14 +122,14 @@ namespace oomph
     /// Empty constructor
     FluidInterfaceAdditionalValues<FluidInterfaceElement>() {}
 
-    ///Specific interface that states how many additional values are
+    /// Specific interface that states how many additional values are
     /// required for the n-th node. No additional values
     inline unsigned nadditional_values(const unsigned& n)
     {
       return 0;
     }
 
-    ///Specify any additional index setup information that is required;
+    /// Specify any additional index setup information that is required;
     /// i.e. the look-up schemes for the additional values.
     /// Empty
     inline void setup_equation_indices(FluidInterfaceElement* const& element_pt,
@@ -178,7 +178,7 @@ namespace oomph
     }
 
   protected:
-    ///Fill in the specific surface derivative calculations
+    /// Fill in the specific surface derivative calculations
     /// by calling the appropriate class function
     double compute_surface_derivatives(
       const Shape& psi,
@@ -711,7 +711,7 @@ namespace oomph
     }
 
   protected:
-    ///Fill in the specific surface derivative calculations
+    /// Fill in the specific surface derivative calculations
     /// by calling the appropriate function from the derivative class
     double compute_surface_derivatives(
       const Shape& psi,
@@ -1046,7 +1046,7 @@ namespace oomph
     Vector<unsigned> Lagrange_index;
 
   public:
-    ///Set the Id and offset
+    /// Set the Id and offset
     void set_lagrange_index(const Vector<unsigned>& lagrange_index)
     {
       Lagrange_index = lagrange_index;
@@ -1133,7 +1133,7 @@ namespace oomph
     Vector<unsigned> Lagrange_index;
 
   public:
-    ///Set the Id
+    /// Set the Id
     void set_lagrange_index(const Vector<unsigned>& lagrange_index)
     {
       Lagrange_index = lagrange_index;

@@ -229,7 +229,7 @@ namespace oomph
     bool Use_predictor_values_as_initial_guess;
 
   protected:
-    ///Vector of pointers to copies of the problem used in adaptive
+    /// Vector of pointers to copies of the problem used in adaptive
     /// bifurcation tracking problems (ALH: TEMPORARY HACK, WILL BE FIXED)
     Vector<Problem*> Copy_of_problem_pt;
 
@@ -462,7 +462,7 @@ namespace oomph
   private:
 #ifdef OOMPH_HAS_MPI
 
-    ///Helper method that returns the (unique) global equations to which
+    /// Helper method that returns the (unique) global equations to which
     /// the elements in the range el_lo to el_hi contribute on this
     /// processor using the given assembly_handler
     void get_my_eqns(AssemblyHandler* const& assembly_handler_pt,
@@ -553,7 +553,7 @@ namespace oomph
     /// Vector of pointers to dofs
     Vector<double*> Dof_pt;
 
-    ///Counter that records how many elements contribute to each dof.
+    /// Counter that records how many elements contribute to each dof.
     /// Used to determine the (discrete) arc-length automatically.
     /// It really should be an integer, but is a double so that the
     /// distribution information can be used for distributed problems
@@ -690,12 +690,12 @@ namespace oomph
     /// Default:false
     bool Mass_matrix_reuse_is_enabled;
 
-    ///Has the mass matrix been computed (and can therefore be reused)
+    /// Has the mass matrix been computed (and can therefore be reused)
     /// Default: false
     bool Mass_matrix_has_been_computed;
 
     //---------------------Discontinuous control flags
-    ///Is the problem a discontinuous one, i.e. can the
+    /// Is the problem a discontinuous one, i.e. can the
     /// elemental contributions be treated independently. Default: false
     bool Discontinuous_element_formulation;
 
@@ -1833,7 +1833,7 @@ namespace oomph
       return Dof_pt[i];
     }
 
-    ///Return the residual vector multiplied by the inverse mass matrix
+    /// Return the residual vector multiplied by the inverse mass matrix
     /// Virtual so that it can be overloaded for mpi problems
     virtual void get_inverse_mass_matrix_times_residuals(DoubleVector& Mres);
 
@@ -2221,7 +2221,7 @@ namespace oomph
     unsigned newton_solve_continuation(double* const& parameter_pt,
                                        DoubleVector& z);
 
-    ///A function to calculate the derivatives wrt the arc-length. This
+    /// A function to calculate the derivatives wrt the arc-length. This
     /// version of the function actually does a linear solve so that the
     /// derivatives
     /// are calculated "exactly" rather than using the values at the Newton
@@ -2262,7 +2262,7 @@ namespace oomph
     /// The default issues a warning
     virtual void symmetrise_eigenfunction_for_adaptive_pitchfork_tracking();
 
-    ///Return pointer to the parameter that is used in the
+    /// Return pointer to the parameter that is used in the
     /// bifurcation detection. If we are not tracking a bifurcation then
     /// an error will be thrown by the AssemblyHandler
     double* bifurcation_parameter_pt() const;
@@ -2286,13 +2286,13 @@ namespace oomph
     void activate_fold_tracking(double* const& parameter_pt,
                                 const bool& block_solve = true);
 
-    ///Activate generic bifurcation tracking for a single (real)
+    /// Activate generic bifurcation tracking for a single (real)
     /// eigenvalue where the initial guess for the eigenvector can be specified.
     void activate_bifurcation_tracking(double* const& parameter_pt,
                                        const DoubleVector& eigenvector,
                                        const bool& block_solve = true);
 
-    ///Activate generic bifurcation tracking for a single (real)
+    /// Activate generic bifurcation tracking for a single (real)
     /// eigenvalue where the initial guess for the eigenvector can be specified
     /// and the normalisation condition can also be specified.
     void activate_bifurcation_tracking(double* const& parameter_pt,
@@ -2555,16 +2555,16 @@ namespace oomph
     /// Calculate predictions
     void calculate_predictions();
 
-    ///Enable recycling of the mass matrix in explicit timestepping
+    /// Enable recycling of the mass matrix in explicit timestepping
     /// schemes. Useful for timestepping on fixed meshes when you want
     /// to avoid the linear solve phase.
     void enable_mass_matrix_reuse();
 
-    ///Turn off recyling of the mass matrix in explicit timestepping
+    /// Turn off recyling of the mass matrix in explicit timestepping
     /// schemes
     void disable_mass_matrix_reuse();
 
-    ///Return whether the mass matrix is being reused
+    /// Return whether the mass matrix is being reused
     bool mass_matrix_reuse_is_enabled()
     {
       return Mass_matrix_reuse_is_enabled;

@@ -566,7 +566,7 @@ namespace oomph
   };
 
   //=========================================================
-  ///Class for multidimensional Gaussian integration rules,
+  /// Class for multidimensional Gaussian integration rules,
   /// over intervals other than -1 to 1, all intervals are
   /// rescaled in this case
   //=========================================================

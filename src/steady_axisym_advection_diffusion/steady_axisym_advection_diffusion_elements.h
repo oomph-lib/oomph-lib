@@ -306,7 +306,7 @@ namespace oomph
     }
 
 
-    ///Return derivative of u at point s with respect to all data
+    /// Return derivative of u at point s with respect to all data
     /// that can affect its value.
     /// In addition, return the global equation numbers corresponding to the
     /// data. This is virtual so that it can be overloaded in the
@@ -434,7 +434,7 @@ namespace oomph
     static const unsigned Initial_Nvalue;
 
   public:
-    ///Constructor: Call constructors for QElement and
+    /// Constructor: Call constructors for QElement and
     /// Advection Diffusion equations
     QSteadyAxisymAdvectionDiffusionElement()
       : QElement<2, NNODE_1D>(), SteadyAxisymAdvectionDiffusionEquations()

@@ -1514,7 +1514,7 @@ namespace oomph
       return return_value;
     }
 
-    ///Number of positional history values
+    /// Number of positional history values
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {

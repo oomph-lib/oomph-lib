@@ -375,7 +375,7 @@ namespace oomph
     }
 
 
-    ///Compute the residuals for the Navier--Stokes equations.
+    /// Compute the residuals for the Navier--Stokes equations.
     /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
     /// Flag=2: Fill in mass matrix too.
     virtual void fill_in_generic_residual_contribution_nst(
@@ -384,7 +384,7 @@ namespace oomph
       DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
-    ///Compute the derivatives of the
+    /// Compute the derivatives of the
     /// residuals for the Navier--Stokes equations with respect to a parameter
     /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
     /// Flag=2: Fill in mass matrix too.
@@ -935,7 +935,7 @@ namespace oomph
         0);
     }
 
-    ///Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// Virtual function can be overloaded by hanging-node version
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -973,7 +973,7 @@ namespace oomph
         0);
     }
 
-    ///Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// Virtual function can be overloaded by hanging-node version
     void fill_in_contribution_to_djacobian_dparameter(
       double* const& parameter_pt,
@@ -2737,7 +2737,7 @@ namespace oomph
       }
     }
 
-    ///Number of positional history values.
+    /// Number of positional history values.
     /// (Note: count includes current value!)
     unsigned nhistory_values_for_coordinate_projection()
     {

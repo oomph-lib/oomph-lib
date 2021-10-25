@@ -390,7 +390,7 @@ namespace oomph
       this->get_interpolated_values(0, s, value);
     }
 
-    ///Return the temporal dummy values
+    /// Return the temporal dummy values
     void get_interpolated_values(const unsigned& t,
                                  const Vector<double>& s,
                                  Vector<double>& value)
@@ -408,7 +408,7 @@ namespace oomph
       }
     }
 
-    //Order of recovery shape functions for Z2 error estimation:
+    // Order of recovery shape functions for Z2 error estimation:
     unsigned nrecovery_order()
     {
       return NNODE_1D - 1;
@@ -706,7 +706,7 @@ namespace oomph
     /// Storage for the previous solution
     Vector<double> Previous_dofs;
 
-    ///Store number of degrees of freedom in the original problem
+    /// Store number of degrees of freedom in the original problem
     unsigned Ndof;
 
     /// Storage for number of elements in the period

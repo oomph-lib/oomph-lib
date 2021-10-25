@@ -67,7 +67,7 @@ namespace oomph
   class LinearSolver : public DistributableLinearAlgebraObject
   {
   protected:
-    ///Boolean that indicates whether the matrix (or its factors, in
+    /// Boolean that indicates whether the matrix (or its factors, in
     /// the case of direct solver) should be stored so that the resolve function
     /// can be used.
     bool Enable_resolve;

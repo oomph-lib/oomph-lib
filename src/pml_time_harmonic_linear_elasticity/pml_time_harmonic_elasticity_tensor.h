@@ -55,7 +55,7 @@ namespace oomph
   //=====================================================================
   class PMLTimeHarmonicElasticityTensor
   {
-    ///Translation table from the four indices to the corresponding
+    /// Translation table from the four indices to the corresponding
     /// independent component
     static const unsigned Index[3][3][3][3];
 
@@ -69,7 +69,7 @@ namespace oomph
     }
 
 
-    ///Helper range checking function
+    /// Helper range checking function
     /// (Note that this only captures over-runs in 3D but
     /// errors are likely to be caught in evaluation of the
     /// stress and strain tensors anyway...)
@@ -120,7 +120,7 @@ namespace oomph
     virtual ~PMLTimeHarmonicElasticityTensor() {}
 
   public:
-    ///Return the appropriate independent component
+    /// Return the appropriate independent component
     /// via the index translation scheme (const version).
     std::complex<double> operator()(const unsigned& i,
                                     const unsigned& j,

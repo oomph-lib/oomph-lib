@@ -836,7 +836,7 @@ namespace oomph
       Use_LSC = false;
     }
 
-    ///Function to (re-)set momentum matrix preconditioner (inexact
+    /// Function to (re-)set momentum matrix preconditioner (inexact
     /// solver) to SuperLU
     void set_f_superlu_preconditioner()
     {

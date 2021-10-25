@@ -50,7 +50,7 @@ namespace oomph
       public virtual ElementWithDragFunction
   {
   public:
-    ///Constructor, which takes a "bulk" element and the value of an
+    /// Constructor, which takes a "bulk" element and the value of an
     /// index describing to which face the element should be attached.
     NavierStokesSurfaceDragTorqueElement(FiniteElement* const& element_pt,
                                          const int& face_index)

@@ -191,17 +191,17 @@ namespace oomph
     /// denote a value that hasn't been classified as pinned or free.
     static long Is_unclassified;
 
-    ///Static "Magic number" used in place of the equation number to
+    /// Static "Magic number" used in place of the equation number to
     /// indicate that the value is constrained because it is associated
     /// with non-conforming element boundaries --- a hanging node ---
     ///(and is therefore pinned)
     static long Is_constrained;
 
-    ///Default: Just set pointer to (steady) timestepper.
+    /// Default: Just set pointer to (steady) timestepper.
     /// No storage for values is allocated.
     Data();
 
-    ///Default constructor for steady problems:
+    /// Default constructor for steady problems:
     /// assign memory for initial_n_value values.
     Data(const unsigned& initial_n_value);
 
@@ -574,10 +574,10 @@ namespace oomph
   class HijackedData : public Data
   {
   private:
-    ///Pointer to the Data object from which the value is copied
+    /// Pointer to the Data object from which the value is copied
     Data* Copied_data_pt;
 
-    ///Index of the value that is copied from within the Data object
+    /// Index of the value that is copied from within the Data object
     unsigned Copied_index;
 
     /// Reset the pointers to the copied data.
@@ -587,7 +587,7 @@ namespace oomph
     /// Clear the pointers to the copied data
     void clear_copied_pointers();
 
-    ///Constructor
+    /// Constructor
     HijackedData(const unsigned& copied_value, Data* const& data_pt);
 
     /// (Shallow) copy constructor
@@ -651,7 +651,7 @@ namespace oomph
   class CopiedData : public Data
   {
   private:
-    ///Pointer to the Data object from which the values are copied
+    /// Pointer to the Data object from which the values are copied
     Data* Copied_data_pt;
 
     /// Reset the pointers to the copied data.
@@ -661,7 +661,7 @@ namespace oomph
     /// Clear the pointers to the copied data
     void clear_copied_pointers();
 
-    ///Constructor
+    /// Constructor
     CopiedData(Data* const& data_pt);
 
     /// (Shallow) copy constructor
@@ -722,7 +722,7 @@ namespace oomph
 
 
   //=====================================================================
-  ///Class that contains data for hanging nodes.
+  /// Class that contains data for hanging nodes.
   ///
   /// To ensure inter-element continuity, the values and nodal positions
   /// of hanging nodes must be linear combinations of the
@@ -1193,14 +1193,14 @@ namespace oomph
     /// Read nodal position and associated data from file for restart
     void read(std::ifstream& restart_file);
 
-    ///The pin_all() function must be overloaded by SolidNodes,
+    /// The pin_all() function must be overloaded by SolidNodes,
     /// so we put the virtual interface here to avoid virtual functions in Data
     virtual void pin_all()
     {
       Data::pin_all();
     }
 
-    ///The unpin_all() function must be overloaded by SolidNode,
+    /// The unpin_all() function must be overloaded by SolidNode,
     /// so we put the virtual interface here to avoid virtual functions in Data
     virtual void unpin_all()
     {
@@ -1873,7 +1873,7 @@ namespace oomph
       return Nlagrangian;
     }
 
-    ///Number of types of Lagrangian coordinates used to interpolate
+    /// Number of types of Lagrangian coordinates used to interpolate
     /// the Lagrangian coordinates within the element
     unsigned nlagrangian_type() const
     {
@@ -1918,11 +1918,11 @@ namespace oomph
       return Xi_position[Nlagrangian_type * i + k];
     }
 
-    ///Return lagrangian coordinate either directly or via
+    /// Return lagrangian coordinate either directly or via
     /// hanging node representation
     double lagrangian_position(const unsigned& i) const;
 
-    ///Return generalised lagrangian coordinate either directly or via
+    /// Return generalised lagrangian coordinate either directly or via
     /// hanging node representation
     double lagrangian_position_gen(const unsigned& k, const unsigned& i) const;
 
@@ -1941,7 +1941,7 @@ namespace oomph
     void describe_dofs(std::ostream& out,
                        const std::string& current_string) const;
 
-    ///Overload the function add_values_to_map so that it also adds
+    /// Overload the function add_values_to_map so that it also adds
     /// the variable position data
     void add_value_pt_to_map(std::map<unsigned, double*>& map_of_value_pt);
 

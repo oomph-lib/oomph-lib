@@ -66,7 +66,7 @@ namespace oomph
     /// Return the flux derivatives as a function of the unknowns
     void dflux_du(const Vector<double>& u, RankThreeTensor<double>& df_du);
 
-    ///Return the wind at a given position
+    /// Return the wind at a given position
     inline virtual void get_wind_scalar_adv(const unsigned& ipt,
                                             const Vector<double>& s,
                                             const Vector<double>& x,
@@ -105,7 +105,7 @@ namespace oomph
       return Wind_fct_pt;
     }
 
-    ///The number of unknowns at each node is the number of values
+    /// The number of unknowns at each node is the number of values
     unsigned required_nvalue(const unsigned& n) const
     {
       return 1;
@@ -508,7 +508,7 @@ namespace oomph
     }
 
 
-    ///Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,
@@ -647,7 +647,7 @@ namespace oomph
     }
 
 
-    ///Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,
@@ -917,7 +917,7 @@ namespace oomph
     }
 
 
-    ///Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,
@@ -995,7 +995,7 @@ namespace oomph
     }
 
 
-    ///Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
       Vector<double>& residuals,

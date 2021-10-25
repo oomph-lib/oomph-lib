@@ -41,7 +41,7 @@ namespace oomph
   class ChannelWithLeafletDomain : public Domain
   {
   public:
-    ///Constructor: Pass pointer to GeomObject that represents the
+    /// Constructor: Pass pointer to GeomObject that represents the
     /// leaflet,
     /// the length of the domain to left and right of the leaflet, the
     /// height of the leaflet and the overall height of the channel,

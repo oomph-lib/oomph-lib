@@ -354,26 +354,26 @@ namespace oomph
       node_update_adjacent_fluid_elements();
     }
 
-    ///Do nothing to reset within finite-differencing of  external data
+    /// Do nothing to reset within finite-differencing of  external data
     inline void reset_in_external_fd(const unsigned& i) {}
 
-    ///After all external data finite-differencing, update nodal
+    /// After all external data finite-differencing, update nodal
     /// positions
     inline void reset_after_external_fd()
     {
       node_update_adjacent_fluid_elements();
     }
 
-    ///After an internal data change, update the nodal positions
+    /// After an internal data change, update the nodal positions
     inline void update_in_internal_fd(const unsigned& i)
     {
       node_update_adjacent_fluid_elements();
     }
 
-    ///Do nothing to reset within finite-differencing of internal data
+    /// Do nothing to reset within finite-differencing of internal data
     inline void reset_in_internal_fd(const unsigned& i) {}
 
-    ///After all internal data finite-differencing, update nodal
+    /// After all internal data finite-differencing, update nodal
     /// positions
     inline void reset_after_internal_fd()
     {

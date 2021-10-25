@@ -310,7 +310,7 @@ namespace oomph
       return Sub_geom_object_pt.size();
     }
 
-    ///Constructor
+    /// Constructor
     MeshAsGeomObject(Mesh* const& mesh_pt) : GeomObject()
     {
       // Create default parameters
@@ -324,7 +324,7 @@ namespace oomph
     }
 
 
-    ///Constructor
+    /// Constructor
     MeshAsGeomObject(
       SamplePointContainerParameters* sample_point_container_parameters_pt)
       : GeomObject()

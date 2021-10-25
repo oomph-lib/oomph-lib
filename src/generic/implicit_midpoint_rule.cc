@@ -52,7 +52,7 @@ namespace oomph
     }
   }
 
-  ///This function advances the time history of the positions
+  /// This function advances the time history of the positions
   /// at a node. ??ds Untested: I have no problems with moving nodes.
   void IMRBase::shift_time_positions(Node* const& node_pt)
   {

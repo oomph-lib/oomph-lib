@@ -88,33 +88,33 @@ namespace oomph
     LinearAlgebraDistribution* Distribution_pt;
 
   public:
-    ///Constructor that sets up the required information communicating
+    /// Constructor that sets up the required information communicating
     /// between all processors. Requires two "all to all" communications.
     /// Arguments are the distribution of the DoubleVector and a
     /// Vector of global unknowns required on this processor.
     DoubleVectorHaloScheme(LinearAlgebraDistribution* const& dist_pt,
                            const Vector<unsigned>& required_global_eqn);
 
-    ///Return the number of halo values
+    /// Return the number of halo values
     inline unsigned n_halo_values() const
     {
       return Local_index.size();
     }
 
-    ///Return the pointer to the distirbution used to setup
+    /// Return the pointer to the distirbution used to setup
     /// the halo information
     inline LinearAlgebraDistribution*& distribution_pt()
     {
       return Distribution_pt;
     }
 
-    ///Function that sets up a vector of pointers to halo
+    /// Function that sets up a vector of pointers to halo
     /// data, index using the scheme in Local_index
     void setup_halo_dofs(const std::map<unsigned, double*>& halo_data_pt,
                          Vector<double*>& halo_dof_pt);
 
 
-    ///Return the local index associated with the global equation
+    /// Return the local index associated with the global equation
     inline unsigned local_index(const unsigned& global_eqn)
     {
       // Does the entry exist in the map
@@ -332,7 +332,7 @@ namespace oomph
     }
 
 
-    ///Construct the halo scheme and storage for the halo
+    /// Construct the halo scheme and storage for the halo
     /// data
     void build_halo_scheme(DoubleVectorHaloScheme* const& halo_scheme_pt);
   };

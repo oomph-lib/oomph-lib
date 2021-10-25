@@ -89,7 +89,7 @@ namespace oomph
       this->internal_data_pt(this->P_nst_internal_index)->unpin(p_dof);
     }
 
-    ///The required number of values stored at the nodes is the sum of
+    /// The required number of values stored at the nodes is the sum of
     /// the required values of the two single-physics  elements. Note that this
     /// step is generic for any multi-physics element of this type.
     unsigned required_nvalue(const unsigned& n) const
@@ -243,7 +243,7 @@ namespace oomph
       FiniteElement::output_fct(outfile, Nplot, time, exact_soln_pt);
     }
 
-    ///Overload the index at which the temperature
+    /// Overload the index at which the temperature
     /// variable is stored. We choose to store it after the fluid velocities.
     inline unsigned u_index_adv_diff() const
     {
@@ -336,7 +336,7 @@ namespace oomph
 #ifdef USE_FD_JACOBIAN_FOR_BUOYANT_Q_ELEMENT
 
 
-    ///Compute the element's residual vector and the Jacobian matrix.
+    /// Compute the element's residual vector and the Jacobian matrix.
     /// Jacobian is computed by finite-differencing.
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -364,7 +364,7 @@ namespace oomph
 //-----------------------------------------------------------------------
 #ifdef USE_OFF_DIAGONAL_FD_JACOBIAN_FOR_BUOYANT_Q_ELEMENT
 
-    ///Helper function to get the off-diagonal blocks of the Jacobian
+    /// Helper function to get the off-diagonal blocks of the Jacobian
     /// matrix by finite differences
     void fill_in_off_diagonal_jacobian_blocks_by_fd(
       Vector<double>& residuals, DenseMatrix<double>& jacobian)
@@ -511,7 +511,7 @@ namespace oomph
     }
 
 
-    ///Compute the element's residual Vector and the Jacobian matrix.
+    /// Compute the element's residual Vector and the Jacobian matrix.
     /// Use finite-differencing only for the off-diagonal blocks.
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -559,7 +559,7 @@ namespace oomph
 //-----------------------------------------------------------------------
 #else
 
-    ///Helper function to get the off-diagonal blocks of the Jacobian
+    /// Helper function to get the off-diagonal blocks of the Jacobian
     /// matrix analytically
     void fill_in_off_diagonal_jacobian_blocks_analytic(
       Vector<double>& residuals, DenseMatrix<double>& jacobian)
@@ -691,7 +691,7 @@ namespace oomph
     }
 
 
-    ///Compute the element's residual Vector and the Jacobian matrix.
+    /// Compute the element's residual Vector and the Jacobian matrix.
     /// Use analytic expressions for the off-diagonal blocks
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -809,7 +809,7 @@ namespace oomph
     static double Default_Physical_Constant_Value;
 
   public:
-    ///Constructor: call the underlying constructors and
+    /// Constructor: call the underlying constructors and
     /// initialise the pointer to the Rayleigh number to address the default
     /// value of 0.0
     RefineableBuoyantQCrouzeixRaviartElement()
@@ -819,7 +819,7 @@ namespace oomph
       Ra_pt = &Default_Physical_Constant_Value;
     }
 
-    ///The required number of values stored at the nodes is
+    /// The required number of values stored at the nodes is
     /// the sum of the required values of the two single-physics elements. This
     /// step is generic for any composed element of this type.
     inline unsigned required_nvalue(const unsigned& n) const
@@ -972,7 +972,7 @@ namespace oomph
       FiniteElement::output_fct(outfile, Nplot, time, exact_soln_pt);
     }
 
-    ///Overload the index at which the temperature
+    /// Overload the index at which the temperature
     /// variable is stored. We choose to store is after the fluid velocities.
     unsigned u_index_adv_diff() const
     {
@@ -1261,7 +1261,7 @@ namespace oomph
     }
 
 
-    ///Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// using full finite differences, the default implementation
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)

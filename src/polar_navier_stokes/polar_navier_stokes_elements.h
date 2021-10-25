@@ -570,7 +570,7 @@ namespace oomph
                                             0);
     }
 
-    ///Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// Virtual function can be overloaded by hanging-node version
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
@@ -638,7 +638,7 @@ namespace oomph
       */
     } // End of fill_in_contribution_to_jacobian
 
-    ///Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// Plus the mass matrix especially for eigenvalue problems
     void fill_in_contribution_to_jacobian_and_mass_matrix(
       Vector<double>& residuals,
@@ -650,7 +650,7 @@ namespace oomph
         residuals, jacobian, mass_matrix, 2);
     }
 
-    ///Compute the residuals for the Navier--Stokes equations;
+    /// Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     virtual void fill_in_generic_residual_contribution(
       Vector<double>& residuals,
@@ -1076,7 +1076,7 @@ namespace oomph
       return this->node_pt(Pconv[n_p]);
     }
 
-    ///Return the velocity component u[i] at local node
+    /// Return the velocity component u[i] at local node
     /// n. Uses suitably interpolated value for hanging nodes.
     double u_pnst(const unsigned& n, const unsigned& i) const
     {

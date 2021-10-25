@@ -79,7 +79,7 @@ namespace oomph
     /// Empty destructor
     virtual ~ExplicitTimeSteppableObject() {}
 
-    ///A single virtual function that returns the residuals
+    /// A single virtual function that returns the residuals
     /// vector multiplied by the inverse mass matrix
     virtual void get_dvaluesdt(DoubleVector& minv_res);
 
@@ -115,7 +115,7 @@ namespace oomph
     /// needed after an explicit step.
     virtual void actions_after_explicit_timestep() {}
 
-    ///Broken virtual function that should be overloaded to
+    /// Broken virtual function that should be overloaded to
     /// return access to the local time in the object
     virtual double& time();
 

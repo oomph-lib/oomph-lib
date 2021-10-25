@@ -60,7 +60,7 @@ namespace oomph
       // updates of function values are performed.
     }
 
-    ///Constructor for bog-standard node of spatial
+    /// Constructor for bog-standard node of spatial
     /// dimension n_dim, with n_position_type generalised coordinates,
     /// with initial_nvalue dofs and with time dependence.
     MacroElementNodeUpdateNode(TimeStepper* time_stepper_pt,
@@ -84,7 +84,7 @@ namespace oomph
     // rightly, it shouts.
     /*void operator=(const MacroElementNodeUpdateNode&) = delete;*/
 
-    ///Destructor (empty)
+    /// Destructor (empty)
     virtual ~MacroElementNodeUpdateNode() {}
 
     /// Update the current nodal position. If

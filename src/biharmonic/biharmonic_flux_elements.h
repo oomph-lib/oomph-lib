@@ -87,7 +87,7 @@ namespace oomph
     /// of the macro element coordinate position (s) along the problem edge
     typedef void (*FluxFctPt)(const double& s, double& flux);
 
-    ///constructor
+    /// constructor
     BiharmonicFluxElement(FiniteElement* const& bulk_el_pt,
                           const int& face_index,
                           const unsigned& b);
