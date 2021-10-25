@@ -200,21 +200,20 @@ int main()
   cout << "A B" << endl;
   print_complex_matrix(matrix_result);
 
-  // Create a reference to Serial_matrix_matrix_multiply_method
-  unsigned& method = matrix_square.serial_matrix_matrix_multiply_method();
-  cout << method << endl;
+  // test default method is set to 2
+  cout << matrix_square.serial_matrix_matrix_multiply_method() << endl;
 
   // test multiply method 1
-  method = 1;
+  matrix_square.serial_matrix_matrix_multiply_method() = 1;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << method << endl;
+  cout << matrix_square.serial_matrix_matrix_multiply_method() << endl;
   cout << "A B" << endl;
   print_complex_matrix(matrix_result);
 
   // test multiply method 3
-  method = 3;
+  matrix_square.serial_matrix_matrix_multiply_method() = 3;
   matrix_square.multiply(matrix_square_2, matrix_result);
-  cout << method << endl;
+  cout << matrix_square.serial_matrix_matrix_multiply_method() << endl;
   cout << "A B" << endl;
   print_complex_matrix(matrix_result);
 
