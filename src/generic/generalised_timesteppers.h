@@ -39,7 +39,7 @@
 namespace oomph
 {
   //======================================================================
-  /// \short Generalised timestepper that can serve a variety of purposes
+  /// Generalised timestepper that can serve a variety of purposes
   /// in continuation, bifurcation detection and periodic-orbit computations.
   /// The key generalisation is that more than one of the entries is actually
   /// a degree of freedom in the problem. These are distinct from our
@@ -71,16 +71,10 @@ namespace oomph
     GeneralisedTimeStepper() : TimeStepper() {}
 
     /// Broken copy constructor
-    GeneralisedTimeStepper(const GeneralisedTimeStepper&)
-    {
-      BrokenCopy::broken_copy("GeneralisedTimeStepper");
-    }
+    GeneralisedTimeStepper(const GeneralisedTimeStepper&) = delete;
 
     /// Broken assignment operator
-    void operator=(const GeneralisedTimeStepper&)
-    {
-      BrokenCopy::broken_assign("GeneralisedTimeStepper");
-    }
+    void operator=(const GeneralisedTimeStepper&) = delete;
 
   public:
     /// Return the number of entries that correspond to dof storage
@@ -95,7 +89,7 @@ namespace oomph
   };
 
   //========================================================================
-  /// \short GeneralisedTimestepper used to store the arclength derivatives
+  /// GeneralisedTimestepper used to store the arclength derivatives
   /// and pervious solutions required in continuation problems. The data
   /// is stored as auxilliary data in the (fake) TimeStepper so that
   /// spatial adaptivity will be handled automatically through our standard
@@ -126,10 +120,7 @@ namespace oomph
 
 
     /// Broken copy constructor
-    ContinuationStorageScheme(const ContinuationStorageScheme&)
-    {
-      BrokenCopy::broken_copy("ContinuationStorageScheme");
-    }
+    ContinuationStorageScheme(const ContinuationStorageScheme&) = delete;
 
     /// Modify the scheme based on the underlying timestepper
     void modify_storage(GeneralisedTimeStepper* const& time_stepper_pt)
@@ -156,10 +147,7 @@ namespace oomph
 
 
     /// Broken assignment operator
-    void operator=(const ContinuationStorageScheme&)
-    {
-      BrokenCopy::broken_assign("ContinuationStorageScheme");
-    }
+    void operator=(const ContinuationStorageScheme&) = delete;
 
     /// Return the actual order of the scheme. It's a steady
     /// scheme so it's zero, but that doesn't really make sense.
@@ -168,13 +156,13 @@ namespace oomph
       return 0;
     }
 
-    /// \short This is a steady scheme, so you can't do this
+    /// This is a steady scheme, so you can't do this
     void undo_make_steady()
     {
       Is_steady = true;
     }
 
-    /// \short Broken initialisation the time-history for the Data values
+    /// Broken initialisation the time-history for the Data values
     /// corresponding to an impulsive start.
     void assign_initial_values_impulsive(Data* const& data_pt)
     {
@@ -184,7 +172,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Broken initialisation of
+    /// Broken initialisation of
     /// the positions for the node corresponding to an impulsive start
     void assign_initial_positions_impulsive(Node* const& node_pt)
     {
@@ -227,7 +215,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short Set consistent values of the derivatives and current value when
+    /// Set consistent values of the derivatives and current value when
     /// the data is pinned. This must be done by the "timestepper" because only
     /// it knows the local storage scheme
     void set_consistent_pinned_values(Data* const& data_pt)
@@ -267,7 +255,7 @@ namespace oomph
       }
     }
 
-    /// \short Set consistent values of the derivatives and current value when
+    /// Set consistent values of the derivatives and current value when
     /// the Nodes position is pinned. This must be done by the "timestepper"
     /// because only it knows the local storage scheme
     void set_consistent_pinned_positions(Node* const& node_pt)

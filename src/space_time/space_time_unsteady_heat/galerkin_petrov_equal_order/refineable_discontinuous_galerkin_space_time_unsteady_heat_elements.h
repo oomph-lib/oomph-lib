@@ -38,9 +38,9 @@
 #include "generic/error_estimator.h"
 #include "discontinuous_galerkin_space_time_unsteady_heat_elements.h"
 
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////////
 
 namespace oomph
 {
@@ -65,11 +65,8 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableSpaceTimeUnsteadyHeatEquations(
-      const RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableSpaceTimeUnsteadyHeatEquations");
-    }
-
+      const RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>& dummy) =
+      delete;
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -79,7 +76,7 @@ namespace oomph
     } // End of num_Z2_flux_terms
 
 
-    /// \short Get 'flux' for Z2 error recovery:
+    /// Get 'flux' for Z2 error recovery:
     /// Different to the get_flux function in the base class as we also
     /// have to include du/dt as we're doing temporal adaptivity too
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
@@ -119,7 +116,7 @@ namespace oomph
     } // End of get_Z2_flux
 
 
-    /// \short Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function is usually
     /// called from black-box documentation or interpolation routines), the
     /// values Vector sets its own size in here.
@@ -153,7 +150,7 @@ namespace oomph
     } // End of get_interpolated_values
 
 
-    /// \short Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function is usually
     /// called from black-box documentation or interpolation routines), the
     /// values Vector sets its own size in here.
@@ -205,7 +202,7 @@ namespace oomph
     } // End of further_build
 
   private:
-    /// \short Add element's contribution to elemental residual vector and/or
+    /// Add element's contribution to elemental residual vector and/or
     /// Jacobian matrix
     /// flag=0: compute residual vector only
     /// flag=1: compute both
@@ -226,7 +223,7 @@ namespace oomph
       public virtual RefineableQElement<SPATIAL_DIM + 1>
   {
   public:
-    /// \short Constructor
+    /// Constructor
     RefineableQUnsteadyHeatSpaceTimeElement()
       : RefineableElement(),
         RefineableSpaceTimeUnsteadyHeatEquations<SPATIAL_DIM>(),
@@ -239,18 +236,13 @@ namespace oomph
     /// Broken copy constructor
     RefineableQUnsteadyHeatSpaceTimeElement(
       const RefineableQUnsteadyHeatSpaceTimeElement<SPATIAL_DIM, NNODE_1D>&
-        dummy)
-    {
-      // Output a broken copy message
-      BrokenCopy::broken_copy("RefineableQuadUnsteadyHeatSpaceTimeElement");
-    } // End of RefineableQUnsteadyHeatSpaceTimeElement
-
+        dummy) = delete;
 
     /// Rebuild from sons (empty)
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
 
-    /// \short Perform additional hanging node procedures for variables
+    /// Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes (empty).
     void further_setup_hanging_nodes() {}
 
@@ -263,7 +255,7 @@ namespace oomph
     } // End of ncont_interpolated_values
 
 
-    /// \short Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       // Call the base class function
@@ -272,7 +264,7 @@ namespace oomph
     } // End of nvertex_node
 
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       // Call the base class function
@@ -281,7 +273,7 @@ namespace oomph
     } // End of vertex_node_pt
 
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
@@ -291,9 +283,9 @@ namespace oomph
   }; // End of RefineableQUnsteadyHeatSpaceTimeElement class
 
 
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
 
 
   //=======================================================================
@@ -309,7 +301,7 @@ namespace oomph
     : public virtual QElement<SPATIAL_DIM, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<SPATIAL_DIM, NNODE_1D>() {}
   }; // End of FaceGeometry<RefineableQUnsteadyHeatSpaceTimeElement... class

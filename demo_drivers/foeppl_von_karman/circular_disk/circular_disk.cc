@@ -80,9 +80,9 @@ namespace TestSoln
 }
 
 
-///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
 
 
 //==start_of_problem_class============================================
@@ -114,7 +114,7 @@ public:
    rebuild_global_mesh();
   }
  
- /// \short Actions after adapt: 
+ /// Actions after adapt: 
  /// Setup the problem again -- remember that the mesh has been
  /// completely rebuilt and its element's don't have any
  /// pointers to source fcts etc. yet
@@ -157,7 +157,7 @@ private:
  /// Helper function to apply boundary conditions
  void apply_boundary_conditions();
 
- /// \short Helper function to (re-)set boundary condition
+ /// Helper function to (re-)set boundary condition
  /// and complete the build of  all elements
  void complete_problem_setup();
 
@@ -665,7 +665,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
 
 
 //=======start_of_main========================================
-///Driver code for demo of inline triangle mesh generation
+/// Driver code for demo of inline triangle mesh generation
 //============================================================
 int main(int argc, char **argv)
 {

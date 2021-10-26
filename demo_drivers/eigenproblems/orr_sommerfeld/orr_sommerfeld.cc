@@ -23,8 +23,8 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Diver to solve the orr-sommerfeld equation for Poiseuille flow
-///using the ARPACK (default) eigensolver.
+/// Diver to solve the orr-sommerfeld equation for Poiseuille flow
+/// using the ARPACK (default) eigensolver.
 
 // Generic oomph-lib routines only
 #include "generic.h"
@@ -104,7 +104,7 @@ public:
    output(outfile,nplot);
   }
 
- /// \short Output FE representation of soln: x,y,u or x,y,z,u at 
+ /// Output FE representation of soln: x,y,u or x,y,z,u at 
  /// Nplot^DIM plot points
  void output(ostream &outfile, const unsigned &nplot)
   {
@@ -481,7 +481,7 @@ public:
     }
   }
 
- ///Return FE representation of the pressure 
+ /// Return FE representation of the pressure 
  inline double interpolated_p(const Vector<double> &s, const unsigned &i) const
   {
    unsigned n_pres = npres();
@@ -531,13 +531,13 @@ public:
 
 protected:
 
- /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// local coord. s; return  Jacobian of mapping
  virtual double dshape_eulerian(const Vector<double> &s, 
                                 Shape &psi, 
                                 DShape &dpsidx) const=0;
 
- /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// Shape/test functions and derivs w.r.t. to global coords at 
  /// integration point ipt; return  Jacobian of mapping
  virtual double dshape_eulerian_at_knot(const unsigned &ipt, 
                                         Shape &psi, 
@@ -559,9 +559,9 @@ private:
 
 
 
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////////
 
 
 
@@ -583,7 +583,7 @@ private:
  // This is a policy class and we provide specialised versions
  // for all dimensions below, so this one never actually gets built
 
- /// \short Static array of ints to hold number of variables at 
+ /// Static array of ints to hold number of variables at 
  /// nodes: Initial_Nvalue[n]
  static const unsigned Initial_Nvalue[];
  
@@ -603,12 +603,12 @@ class QOrrSommerfeldElement<1,NNODE_1D> : public virtual QElement<1,NNODE_1D>,
   public:
 
 
- /// \short Function to assign the local equation numbers arrays.
+ /// Function to assign the local equation numbers arrays.
  /// Can be overloaded for hangeable version of element
  void assign_additional_local_eqn_numbers();
 
 
- ///\short  Constructor: Call constructors for QElement and 
+ /// Constructor: Call constructors for QElement and 
  /// Poisson equations
  QOrrSommerfeldElement() : QElement<1,NNODE_1D>(), OrrSommerfeldEquations<1>()
   {
@@ -619,7 +619,7 @@ class QOrrSommerfeldElement<1,NNODE_1D> : public virtual QElement<1,NNODE_1D>,
 
 
 
- /// \short  Required  # of `values' (pinned or dofs) 
+ ///  Required  # of `values' (pinned or dofs) 
  /// at node n
  inline unsigned required_nvalue(const unsigned &n) const 
   {
@@ -628,7 +628,7 @@ class QOrrSommerfeldElement<1,NNODE_1D> : public virtual QElement<1,NNODE_1D>,
 
 
 
- /// \short Access functions for the nodal function values: Nodal 
+ /// Access functions for the nodal function values: Nodal 
  /// value at local node n.
  /// Uses suitably interpolated value for hanging nodes.
  inline double u(const unsigned &n, const unsigned &i) const
@@ -638,7 +638,7 @@ class QOrrSommerfeldElement<1,NNODE_1D> : public virtual QElement<1,NNODE_1D>,
  inline double p(const unsigned &n, const unsigned &i) const
   {return this->internal_data_pt(n)->value(i);}
 
- /// \short Output function:  
+ /// Output function:  
  ///  x,y,u   or    x,y,z,u
  void output(ostream &outfile)
   {
@@ -648,7 +648,7 @@ class QOrrSommerfeldElement<1,NNODE_1D> : public virtual QElement<1,NNODE_1D>,
   unsigned npres() const {return ninternal_data();}
 
 
- ///  \short Output function:  
+ ///  Output function:  
  ///   x,y,u   or    x,y,z,u at Nplot^DIM plot points
  void output(ostream &outfile, const unsigned &Nplot)
   {
@@ -673,14 +673,14 @@ protected:
                                DShape &dpsidx) const;
  
 
- /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+ /// Shape, test functions & derivs. w.r.t. to global coords. at
  /// integration point ipt. Return Jacobian.
  inline double dshape_eulerian_at_knot(const unsigned& ipt,
                                        Shape &psi, 
                                        DShape &dpsidx) const;
 private:
  
- /// \short Static array of ints to hold number of variables
+ /// Static array of ints to hold number of variables
  /// at nodes: Initial_Nvalue[n]
  static const unsigned Initial_Nvalue[];
  
@@ -804,7 +804,7 @@ public:
  /// Destructor (empty)
  ~OrrSommerfeldProblem(){}
  
- ///Access function for the Real part of the wavenumber
+ /// Access function for the Real part of the wavenumber
  double* &a_real_pt() {return A_real_pt;}
 
  /// Update the problem specs before solve: (Re)set boundary conditions
@@ -813,7 +813,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Doc the solution, pass the number of the case considered,
+ /// Doc the solution, pass the number of the case considered,
  /// so that output files can be distinguished.
  void doc_solution(const unsigned& label);
 
@@ -824,7 +824,7 @@ public:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for 1D Poisson problem in unit interval.
+/// Constructor for 1D Poisson problem in unit interval.
 /// Discretise the 1D domain with n_element elements of type ELEMENT.
 /// Specify function pointer to source function. 
 //========================================================================
@@ -922,18 +922,18 @@ void OrrSommerfeldProblem<ELEMENT>::doc_solution(const unsigned& label)
 
  
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
-///Mini Element to implement the eigenvalue constraint
+/// Mini Element to implement the eigenvalue constraint
 class ZeroResidualGenElement : public GeneralisedElement
 {
  //This Element actually stores a pointer to the eigenvalue problem
  OrrSommerfeldProblem<QOrrSommerfeldElement<1,3> > *eigenvalue_problem_pt;
  
 public:
- ///Simple constructor
+ /// Simple constructor
  ZeroResidualGenElement()
   {
    //One item of internal data will store the real part of the eigenvalue
@@ -945,11 +945,11 @@ public:
     (Param::N_element,internal_data_pt(0)->value_pt(0));
   }
 
- ///Destructor
+ /// Destructor
  virtual ~ZeroResidualGenElement() 
   {delete eigenvalue_problem_pt;}
 
- ///Access function for the the eigenvalue
+ /// Access function for the the eigenvalue
  double& eval() {return *(internal_data_pt(0)->value_pt(0));}
 
  double* eval_pt() {return internal_data_pt(0)->value_pt(0);}
@@ -992,7 +992,7 @@ public:
 };
 
 
-///Mini problem class for the continuation problem
+/// Mini problem class for the continuation problem
 class ContinuationProblem : public Problem
 {
 

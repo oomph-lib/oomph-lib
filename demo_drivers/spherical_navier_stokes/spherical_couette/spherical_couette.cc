@@ -54,9 +54,9 @@ namespace Global_Physical_Variables
 } // end of GPV namespace
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //=====================================================================
 /// Class of face elements whose sole raison d'etre is to calculate the
@@ -69,8 +69,8 @@ class TorqueCalculationElement : public virtual FaceGeometry<ELEMENT>,
 
 public:
 
- ///Constructor, which takes a "bulk" element and the value of the index
- ///and its limit
+ /// Constructor, which takes a "bulk" element and the value of the index
+ /// and its limit
  TorqueCalculationElement(FiniteElement* const &element_pt, 
                           const int &face_index) : 
   FaceGeometry<ELEMENT>(), FaceElement()
@@ -171,7 +171,7 @@ public:
  ~RefineableSphericalCouetteProblem();
 
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -182,7 +182,7 @@ public:
 
 
 
- /// \short Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions();
 
  /// After adaptation: Pin pressure again (the previously pinned
@@ -327,7 +327,7 @@ RefineableSphericalCouetteProblem<ELEMENT>::RefineableSphericalCouetteProblem()
 
 
 //=========start of set_boundary_conditions===============================
-/// \short Set the boundary conditions so that the inner sphere has
+/// Set the boundary conditions so that the inner sphere has
 /// a constant angular rotation of angular velocity one.
 //========================================================================
 template<class ELEMENT>
@@ -493,9 +493,9 @@ double RefineableSphericalCouetteProblem<ELEMENT>::compute_torque()
  return torque;
 }
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main======================================================

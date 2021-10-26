@@ -40,9 +40,9 @@ using namespace std;
 using namespace oomph;
 
 
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -137,11 +137,11 @@ public:
  /// Meshes of fluid traction elements that apply pressure at in/outflow
  Vector<Mesh*> Fluid_traction_mesh_pt;
 
- /// \short IDs of fluid mesh boundaries along which inflow boundary conditions
+ /// IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
  Vector<unsigned> Inflow_boundary_id;
 
- /// \short IDs of fluid mesh boundaries along which inflow boundary conditions
+ /// IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
  Vector<unsigned> Outflow_boundary_id;
 

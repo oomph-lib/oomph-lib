@@ -36,11 +36,11 @@
 #endif
 
 // oomph-lib headers
-#include "../generic/Vector.h"
-#include "../generic/macro_element.h"
-#include "../generic/oomph_utilities.h"
-#include "../generic/quadtree.h"
-#include "../generic/octree.h"
+#include "Vector.h"
+#include "macro_element.h"
+#include "oomph_utilities.h"
+#include "quadtree.h"
+#include "octree.h"
 
 namespace oomph
 {
@@ -58,7 +58,7 @@ namespace oomph
   class ExtrudedMacroElement : public virtual MacroElement
   {
   public:
-    /// \short Constructor: Pass pointer to ExtrudedDomain and the ID number
+    /// Constructor: Pass pointer to ExtrudedDomain and the ID number
     /// of the ExtrudedMacroElement within that ExtrudedDomain.
     /// NOTE: The base class MacroElement requires a pointer to a Domain
     /// object. However, the ExtrudedDomain class has not yet been defined
@@ -88,18 +88,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    ExtrudedMacroElement(const ExtrudedMacroElement& dummy)
-    {
-      BrokenCopy::broken_copy("ExtrudedMacroElement");
-    } // End of ExtrudedMacroElement
-
+    ExtrudedMacroElement(const ExtrudedMacroElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const ExtrudedMacroElement&)
-    {
-      BrokenCopy::broken_assign("ExtrudedMacroElement");
-    } // End of ExtrudedMacroElement
-
+    void operator=(const ExtrudedMacroElement&) = delete;
 
     /// Empty destructor
     virtual ~ExtrudedMacroElement()
@@ -110,7 +102,7 @@ namespace oomph
     } // End of ~ExtrudedMacroElement
 
 
-    /// \short Access function to the ExtrudedDomain
+    /// Access function to the ExtrudedDomain
     ExtrudedDomain*& extruded_domain_pt()
     {
       // Return a pointer to the extruded domain within which this extruded
@@ -123,9 +115,9 @@ namespace oomph
     ExtrudedDomain* Extruded_domain_pt;
   };
 
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
 
   //===================================================================
   /// QExtrudedMacroElement
@@ -152,7 +144,7 @@ namespace oomph
   class QExtrudedMacroElement<3> : public ExtrudedMacroElement
   {
   public:
-    /// \short Constructor: Pass the pointer to the domain and the ID
+    /// Constructor: Pass the pointer to the domain and the ID
     /// number of this extruded macro element
     QExtrudedMacroElement(ExtrudedDomain* domain_pt,
                           const unsigned& macro_element_number)
@@ -175,24 +167,15 @@ namespace oomph
 
 
     /// Broken copy constructor
-    QExtrudedMacroElement(const QExtrudedMacroElement& dummy)
-    {
-      BrokenCopy::broken_copy("QExtrudedMacroElement");
-    } // End of QExtrudedMacroElement
-
+    QExtrudedMacroElement(const QExtrudedMacroElement& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const QExtrudedMacroElement&)
-    {
-      BrokenCopy::broken_assign("QExtrudedMacroElement");
-    } // End of operator=
-
+    void operator=(const QExtrudedMacroElement&) = delete;
 
     /// Empty destructor
-    virtual ~QExtrudedMacroElement(){};
+    virtual ~QExtrudedMacroElement() {}
 
-
-    /// \short Plot: x,y,t in tecplot format
+    /// Plot: x,y,t in tecplot format
     void output(const unsigned& t, std::ostream& outfile, const unsigned& nplot)
     {
       // Make sure that t=0 otherwise this doesn't make sense
@@ -264,7 +247,7 @@ namespace oomph
                    Vector<double>& r);
 
 
-    /// \short Output all macro element boundaries as tecplot zones
+    /// Output all macro element boundaries as tecplot zones
     void output_macro_element_boundaries(std::ostream& outfile,
                                          const unsigned& nplot);
   };

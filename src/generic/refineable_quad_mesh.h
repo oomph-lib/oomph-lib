@@ -23,8 +23,8 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef QMESH2OOMPH_D_HEADER
-#define QMESH2OOMPH_D_HEADER
+#ifndef OOMPH_GENERIC_REFINEABLE_QUAD_MESH_HEADER
+#define OOMPH_GENERIC_REFINEABLE_QUAD_MESH_HEADER
 
 #include <limits.h>
 
@@ -61,10 +61,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableQuadMesh(const RefineableQuadMesh& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQuadMesh");
-    }
+    RefineableQuadMesh(const RefineableQuadMesh& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -72,23 +69,20 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const RefineableQuadMesh&)
-     {
-      BrokenCopy::broken_assign("RefineableQuadMesh");
-      }*/
+    /*void operator=(const RefineableQuadMesh&) = delete;*/
 
     /// Destructor:
     virtual ~RefineableQuadMesh() {}
 
 
-    /// \short Set up the tree forest associated with the Mesh.
+    /// Set up the tree forest associated with the Mesh.
     /// Forwards call to setup_quadtree_forest()
     virtual void setup_tree_forest()
     {
       setup_quadtree_forest();
     }
 
-    /// \short Set up QuadTreeForest. Wipes any existing tree structure below
+    /// Set up QuadTreeForest. Wipes any existing tree structure below
     /// the minimum refinement level and regards the elements at that level
     /// as the root trees in the forest.
     void setup_quadtree_forest()

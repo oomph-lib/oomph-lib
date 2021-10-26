@@ -124,11 +124,11 @@ function type PoissonEquations<2>::PoissonSourceFctPt.]
 
 \section constructor The Problem constructor
 As before we start by creating the "bulk" mesh and store
-a pointer to this mesh in the private data member
-\c TwoMeshFluxPoissonProblem::Bulk_mesh_pt:
+a pointer to this mesh in the private data member \c TwoMeshFluxPoissonProblem::Bulk_mesh_pt:
 
-\skipline start_of_constructor   
-\until n_x,n_y
+\dontinclude two_d_poisson_flux_bc2.cc
+\skipline start_of_constructor
+\until SimpleRectangularQuadMesh
 
 Next, we construct an (empty) \c Mesh and store a pointer
 to it in the private data member \c

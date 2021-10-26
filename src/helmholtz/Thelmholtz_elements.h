@@ -43,11 +43,11 @@
 
 namespace oomph
 {
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
   // THelmholtzElement
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
 
 
   //======================================================================
@@ -61,7 +61,7 @@ namespace oomph
                             public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///\short  Constructor: Call constructors for TElement and
+    /// Constructor: Call constructors for TElement and
     /// Helmholtz equations
     THelmholtzElement() : TElement<DIM, NNODE_1D>(), HelmholtzEquations<DIM>()
     {
@@ -69,10 +69,7 @@ namespace oomph
 
 
     /// Broken copy constructor
-    THelmholtzElement(const THelmholtzElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("THelmholtzElement");
-    }
+    THelmholtzElement(const THelmholtzElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -80,26 +77,23 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const THelmholtzElement<DIM,NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("THelmholtzElement");
-      }*/
+    /*void operator=(const THelmholtzElement<DIM,NNODE_1D>&) = delete;*/
 
-    /// \short  Access function for Nvalue: # of `values' (pinned or dofs)
+    ///  Access function for Nvalue: # of `values' (pinned or dofs)
     /// at node n (always returns the same value at every node, 1)
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    /// \short Output function:
+    /// Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
       HelmholtzEquations<DIM>::output(outfile);
     }
 
-    ///  \short Output function:
+    ///  Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -107,7 +101,7 @@ namespace oomph
     }
 
 
-    /// \short C-style output function:
+    /// C-style output function:
     ///  x,y,u   or    x,y,z,u
     void output(FILE* file_pt)
     {
@@ -115,7 +109,7 @@ namespace oomph
     }
 
 
-    ///  \short C-style output function:
+    ///  C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -123,7 +117,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for an exact solution:
+    /// Output function for an exact solution:
     ///  x,y,u_exact
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -133,7 +127,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for a time-dependent exact solution.
+    /// Output function for a time-dependent exact solution.
     ///  x,y,u_exact (calls the steady version)
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -163,7 +157,7 @@ namespace oomph
       DShape& dtestdx) const;
 
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
@@ -176,7 +170,7 @@ namespace oomph
       return 2 * DIM;
     }
 
-    /// \short Get 'flux' for Z2 error recovery:  Standard flux from
+    /// Get 'flux' for Z2 error recovery:  Standard flux from
     /// UnsteadyHeat equations
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -190,13 +184,13 @@ namespace oomph
       }
     }
 
-    /// \short Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return TElement<DIM, NNODE_1D>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<DIM, NNODE_1D>::vertex_node_pt(j);
@@ -281,7 +275,7 @@ namespace oomph
     : public virtual TElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : TElement<DIM - 1, NNODE_1D>() {}
   };
@@ -294,7 +288,7 @@ namespace oomph
     : public virtual PointElement
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : PointElement() {}
   };

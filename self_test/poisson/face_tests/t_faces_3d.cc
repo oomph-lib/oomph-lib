@@ -23,14 +23,14 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Driver code for a progam that exhaustively tests the faces of
-///Tetrahedral elements.
-///Note that the deformation of the cubic mesh into parabolic sides
-///will not be exactly representable by the TElement's because
-///the cross terms x^{2}y^{2} are not in the approximation space.
-///In order to construct an exactly representable surface, a single
-///TElement is created and rotated so that each face is "sloping"
-///in turn.
+/// Driver code for a progam that exhaustively tests the faces of
+/// Tetrahedral elements.
+/// Note that the deformation of the cubic mesh into parabolic sides
+/// will not be exactly representable by the TElement's because
+/// the cross terms x^{2}y^{2} are not in the approximation space.
+/// In order to construct an exactly representable surface, a single
+/// TElement is created and rotated so that each face is "sloping"
+/// in turn.
 
 //Generic routines
 #include "generic.h"
@@ -51,7 +51,7 @@ using namespace oomph;
 //====================================================================
 namespace MeshDeformation
 {
- ///Deform the cubic mesh so that its six sides are all parabolic
+ /// Deform the cubic mesh so that its six sides are all parabolic
  void deform_mesh(Mesh* const &mesh_pt)
  {
 
@@ -198,13 +198,13 @@ public:
 
 };
 
-///The TPoissonElement<3,2> is linear
+/// The TPoissonElement<3,2> is linear
 template<>
 string FileStem<TPoissonElement<3,2> >::Stem = "linear"; 
-///The TPoissonElement<3,3> is quadratic
+/// The TPoissonElement<3,3> is quadratic
 template<>
 string FileStem<TPoissonElement<3,3> >::Stem = "quadratic"; 
-///The TPoissonElement<3,4> is cubic
+/// The TPoissonElement<3,4> is cubic
 template<>
 string FileStem<TPoissonElement<3,4> >::Stem = "cubic"; 
 
@@ -510,9 +510,9 @@ TFaceTestProblem(const unsigned& h_power, const unsigned &rotate,
   }
 }
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //========================================================================
 /// Run the test for linear and quadratic TPoisson elements

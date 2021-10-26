@@ -44,7 +44,7 @@
 namespace oomph
 {
   //======================================================================
-  /// \short A class for elements that allow the imposition of an
+  /// A class for elements that allow the imposition of an
   /// applied flux on the boundaries of Fourier decomposed Helmholtz elements.
   /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
   /// policy class.
@@ -55,18 +55,18 @@ namespace oomph
       public virtual FaceElement
   {
   public:
-    /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
+    /// Function pointer to the prescribed-flux function fct(x,f(x)) --
     /// x is a Vector and  the flux is a complex
 
     typedef void (*PMLFourierDecomposedHelmholtzPrescribedFluxFctPt)(
       const Vector<double>& x, std::complex<double>& flux);
 
-    /// \short Constructor, takes the pointer to the "bulk" element and the
+    /// Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
     PMLFourierDecomposedHelmholtzFluxElement(FiniteElement* const& bulk_el_pt,
                                              const int& face_index);
 
-    ///\short  Broken empty constructor
+    /// Broken empty constructor
     PMLFourierDecomposedHelmholtzFluxElement()
     {
       throw OomphLibError("Don't call empty constructor for "
@@ -77,10 +77,7 @@ namespace oomph
 
     /// Broken copy constructor
     PMLFourierDecomposedHelmholtzFluxElement(
-      const PMLFourierDecomposedHelmholtzFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("PMLFourierDecomposedHelmholtzFluxElement");
-    }
+      const PMLFourierDecomposedHelmholtzFluxElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -88,11 +85,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const PMLFourierDecomposedHelmholtzFluxElement&)
-     {
-      BrokenCopy::broken_assign
-       ("PMLFourierDecomposedHelmholtzFluxElement");
-       }*/
+    /*void operator=(const PMLFourierDecomposedHelmholtzFluxElement&) =
+     * delete;*/
 
 
     /// Access function for the prescribed-flux function pointer
@@ -112,7 +106,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector and its
+    /// Add the element's contribution to its residual vector and its
     /// Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -129,7 +123,7 @@ namespace oomph
       FiniteElement::output(outfile);
     }
 
-    /// \short Output function -- forward to broken version in FiniteElement
+    /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -144,7 +138,7 @@ namespace oomph
       FiniteElement::output(file_pt);
     }
 
-    /// \short C-style output function -- forward to broken version in
+    /// C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -153,7 +147,7 @@ namespace oomph
     }
 
 
-    /// \short Return the index at which the unknown value
+    /// Return the index at which the unknown value
     /// is stored. (Real/imag part gives real index of real/imag part).
     virtual inline std::complex<unsigned> u_index_pml_fourier_decomposed_helmholtz()
       const
@@ -165,7 +159,7 @@ namespace oomph
 
 
   protected:
-    /// \short Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test(const Vector<double>& s,
@@ -189,7 +183,7 @@ namespace oomph
     }
 
 
-    /// \short Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test_at_knot(const unsigned& ipt,
@@ -230,12 +224,12 @@ namespace oomph
     }
 
 
-    /// \short The index at which the real and imag part of the
+    /// The index at which the real and imag part of the
     /// unknown is stored at the nodes
     std::complex<unsigned> U_index_pml_fourier_decomposed_helmholtz;
 
 
-    /// \short Add the element's contribution to its residual vector.
+    /// Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     virtual void fill_in_generic_residual_contribution_pml_fourier_decomposed_helmholtz_flux(
@@ -248,9 +242,9 @@ namespace oomph
     PMLFourierDecomposedHelmholtzPrescribedFluxFctPt Flux_fct_pt;
   };
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
   //===========================================================================
@@ -397,13 +391,13 @@ namespace oomph
   }
 
 
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
 
 
   //======================================================================
-  /// \short A class for elements that allow postprocessing of the
+  /// A class for elements that allow postprocessing of the
   /// results -- currently computes radiated power over domain
   /// boundaries.
   /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
@@ -415,12 +409,12 @@ namespace oomph
       public virtual FaceElement
   {
   public:
-    /// \short Constructor, takes the pointer to the "bulk" element and the
+    /// Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
     PMLFourierDecomposedHelmholtzPowerMonitorElement(
       FiniteElement* const& bulk_el_pt, const int& face_index);
 
-    ///\short Broken empty constructor
+    /// Broken empty constructor
     PMLFourierDecomposedHelmholtzPowerMonitorElement()
     {
       throw OomphLibError("Don't call empty constructor for "
@@ -431,21 +425,14 @@ namespace oomph
 
     /// Broken copy constructor
     PMLFourierDecomposedHelmholtzPowerMonitorElement(
-      const PMLFourierDecomposedHelmholtzPowerMonitorElement& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "PMLFourierDecomposedHelmholtzPowerMonitorElement");
-    }
+      const PMLFourierDecomposedHelmholtzPowerMonitorElement& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const PMLFourierDecomposedHelmholtzPowerMonitorElement&)
-     {
-      BrokenCopy::broken_assign
-       ("PMLFourierDecomposedHelmholtzPowerMonitorElement");
-       }*/
+    /*void operator=(const PMLFourierDecomposedHelmholtzPowerMonitorElement&) =
+     * delete;*/
 
 
-    /// \short Specify the value of nodal zeta from the face geometry
+    /// Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
@@ -465,7 +452,7 @@ namespace oomph
       FiniteElement::output(outfile);
     }
 
-    /// \short Output function -- forward to broken version in FiniteElement
+    /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -479,7 +466,7 @@ namespace oomph
       FiniteElement::output(file_pt);
     }
 
-    /// \short C-style output function -- forward to broken version in
+    /// C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -487,7 +474,7 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
-    /// \short Return the index at which the real/imag unknown value
+    /// Return the index at which the real/imag unknown value
     /// is stored.
     virtual inline std::complex<unsigned> u_index_pml_fourier_decomposed_helmholtz()
       const
@@ -497,7 +484,7 @@ namespace oomph
         U_index_pml_fourier_decomposed_helmholtz.imag());
     }
 
-    /// \short Compute the element's contribution to the time-averaged
+    /// Compute the element's contribution to the time-averaged
     /// radiated power over the artificial boundary.
     /// NOTE: This may give the wrong result
     /// if the constitutive parameters genuinely vary!
@@ -508,7 +495,7 @@ namespace oomph
       return global_power_contribution(outfile);
     }
 
-    /// \short Compute the element's contribution to the time-averaged
+    /// Compute the element's contribution to the time-averaged
     /// radiated power over the artificial boundary. Also output the
     /// power density as a fct of the zenith angle in the specified
     /// output file if it's open. NOTE: This may give the wrong result
@@ -643,7 +630,7 @@ namespace oomph
     }
 
   protected:
-    /// \short Function to compute the test functions and to return
+    /// Function to compute the test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test(const Vector<double>& s,
@@ -663,7 +650,7 @@ namespace oomph
       return J_eulerian(s);
     }
 
-    /// \short Function to compute the shape, test functions and derivates
+    /// Function to compute the shape, test functions and derivates
     /// and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
@@ -692,15 +679,15 @@ namespace oomph
       return J_eulerian(s);
     }
 
-    /// \short The index at which the real and imag part of the unknown
+    /// The index at which the real and imag part of the unknown
     /// is stored  at the nodes
     std::complex<unsigned> U_index_pml_fourier_decomposed_helmholtz;
   };
 
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
   //===========================================================================

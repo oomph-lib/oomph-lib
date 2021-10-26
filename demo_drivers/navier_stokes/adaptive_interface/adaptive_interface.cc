@@ -43,10 +43,10 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Poisson ratio
  double Nu=0.1;
 
- ///Direction of the wall normal vector
+ /// Direction of the wall normal vector
  Vector<double> Wall_normal;
 
- /// \short Function that specifies the wall unit normal
+ /// Function that specifies the wall unit normal
  void wall_unit_normal_fct(const Vector<double> &x, 
                       Vector<double> &normal)
  {
@@ -712,7 +712,7 @@ public:
   }
 
  
- /// \short Destructor: Empty
+ /// Destructor: Empty
  virtual ~RefineableCylinderAndInterfaceMesh() {}
 
 
@@ -748,7 +748,7 @@ public:
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve: 
+ /// Update the problem specs before solve: 
  void actions_before_newton_solve() {set_boundary_conditions();}
 
  /// Strip off the interface before adaptation
@@ -760,7 +760,7 @@ public:
 
  void actions_after_adapt() {finish_problem_setup(); this->rebuild_global_mesh();}
 
- /// \short Complete problem setup: Setup element-specific things 
+ /// Complete problem setup: Setup element-specific things 
  /// (source fct pointers etc.)
  void finish_problem_setup();
 
@@ -922,7 +922,7 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
  G.resize(2);
  G[0] = 0.0; G[1] = -1.0;
 
- ///Set the initial value of the ReInvFr = Bo/Ca
+ /// Set the initial value of the ReInvFr = Bo/Ca
  ReInvFr = Bo/Ca;
 
  /// Build a linear solver: Use HSL's MA42 frontal solver
@@ -993,7 +993,7 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
 
 
 //========================================================================
-/// \short Complete build of Poisson problem:
+/// Complete build of Poisson problem:
 /// Loop over elements and setup pointers to source function
 ///
 //========================================================================
@@ -1266,9 +1266,9 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
 }
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
  int main()

@@ -52,7 +52,7 @@ class ElasticRefineableCollapsibleChannelMesh :
 
 public:
 
- /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ /// Constructor: Build mesh and copy Eulerian coords to Lagrangian
  /// ones so that the initial configuration is the stress-free one.
  ElasticRefineableCollapsibleChannelMesh<ELEMENT>(const unsigned& nup, 
                                                   const unsigned& ncollapsible,
@@ -97,7 +97,7 @@ namespace BL_Squash
  /// Fraction of points in boundary layer
  double Fract_in_BL=0.5;
 
- /// \short Mapping [0,1] -> [0,1] that re-distributes
+ /// Mapping [0,1] -> [0,1] that re-distributes
  /// nodal points across the channel width
  double squash_fct(const double& s)
  {
@@ -164,7 +164,7 @@ class OscillatingWall : public GeomObject
 
 public:
 
- /// \short Constructor : It's a 2D object, parametrised by 
+ /// Constructor : It's a 2D object, parametrised by 
  /// one Lagrangian coordinate. Arguments: height at ends, x-coordinate of 
  /// left end, length, amplitude of deflection, period of oscillation, and
  /// pointer to time object
@@ -177,13 +177,13 @@ public:
  /// Destructor:  Empty
  ~OscillatingWall(){}
 
-///Access function to the amplitude
+/// Access function to the amplitude
  double& amplitude(){return A;}
 
-///Access function to the period
+/// Access function to the period
  double& period(){return T;}
 
- /// \short Position vector at Lagrangian coordinate zeta 
+ /// Position vector at Lagrangian coordinate zeta 
  /// at time level t.
  void position(const unsigned& t, const Vector<double>&zeta, 
                Vector<double>& r) const
@@ -208,7 +208,7 @@ public:
   } // end of "unsteady" version
 
 
- /// \short "Current" position vector at Lagrangian coordinate zeta 
+ /// "Current" position vector at Lagrangian coordinate zeta 
  void position(const Vector<double>&zeta, Vector<double>& r) const
   {
    position (0, zeta, r);
@@ -234,10 +234,10 @@ private:
  /// Relative amplitude of horizontal wall motion
  double B;
 
- ///Period of the oscillations
+ /// Period of the oscillations
  double T;
 
- ///Pointer to the global time object
+ /// Pointer to the global time object
  Time* Time_pt;
 
 }; // end of oscillating wall
@@ -287,7 +287,7 @@ namespace Global_Physical_Variables
 
 
 //=======start_of_problem_class=======================================
-///Problem class
+/// Problem class
 //====================================================================
 template <class ELEMENT>
 class CollapsibleChannelProblem : public Problem
@@ -295,9 +295,9 @@ class CollapsibleChannelProblem : public Problem
 
  public :
 
- /// \short Constructor : the arguments are the number of elements,
+ /// Constructor : the arguments are the number of elements,
  /// the length of the domain and the amplitude and period of 
- ///the oscillations
+ /// the oscillations
  CollapsibleChannelProblem(const unsigned& nup, 
                            const unsigned& ncollapsible,
                            const unsigned& ndown,
@@ -323,13 +323,13 @@ class CollapsibleChannelProblem : public Problem
 
   } // end of access to bulk mesh
  
- /// \short Update the problem specs before solve (empty) 
+ /// Update the problem specs before solve (empty) 
  void actions_before_newton_solve(){}
 
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
  
- /// \short Update no slip before Newton convergence check
+ /// Update no slip before Newton convergence check
  void actions_before_newton_convergence_check()
   {
    // Moving wall: No slip; this implies that the velocity needs
@@ -372,7 +372,7 @@ private :
  /// Delete prescribed traction elements from the surface mesh
  void delete_traction_elements(Mesh* const &surface_mesh_pt);
 
- /// \short Create elements that enforce prescribed boundary motion
+ /// Create elements that enforce prescribed boundary motion
  /// by Lagrange multiplilers
  void create_lagrange_multiplier_elements();
 
@@ -380,38 +380,38 @@ private :
  /// by Lagrange multiplilers
  void delete_lagrange_multiplier_elements();
 
- ///Number of elements in the x direction in the upstream part of the channel
+ /// Number of elements in the x direction in the upstream part of the channel
  unsigned Nup;
 
- /// \short Number of elements in the x direction in the "collapsible" 
+ /// Number of elements in the x direction in the "collapsible" 
  /// part of the channel
  unsigned Ncollapsible;
 
- ///Number of elements in the x direction in the downstream part of the channel
+ /// Number of elements in the x direction in the downstream part of the channel
  unsigned Ndown;
 
- ///Number of elements across the channel
+ /// Number of elements across the channel
  unsigned Ny;
 
- ///x-length in the upstream part of the channel
+ /// x-length in the upstream part of the channel
  double Lup;
 
- ///x-length in the "collapsible" part of the channel
+ /// x-length in the "collapsible" part of the channel
  double Lcollapsible;
 
- ///x-length in the downstream part of the channel
+ /// x-length in the downstream part of the channel
  double Ldown;
 
- ///Transverse length
+ /// Transverse length
  double Ly;
 
- ///Pointer to the geometric object that parametrises the "collapsible" wall
+ /// Pointer to the geometric object that parametrises the "collapsible" wall
  OscillatingWall* Wall_pt;
  
  /// Pointer to the "bulk" mesh
  ElasticRefineableCollapsibleChannelMesh<ELEMENT>* Bulk_mesh_pt;
  
- /// \short Pointer to the "surface" mesh that contains the applied traction
+ /// Pointer to the "surface" mesh that contains the applied traction
  /// elements
  Mesh* Surface_mesh_pt; 
  

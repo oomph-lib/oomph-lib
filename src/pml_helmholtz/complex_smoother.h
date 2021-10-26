@@ -51,7 +51,7 @@ namespace oomph
     /// Virtual empty destructor
     virtual ~HelmholtzSmoother(){};
 
-    /// \short The smoother_solve function performs fixed number of iterations
+    /// The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
@@ -62,7 +62,7 @@ namespace oomph
     /// Setup the smoother for the matrix specified by the pointer
     virtual void complex_smoother_setup(Vector<CRDoubleMatrix*> matrix_pt) = 0;
 
-    /// \short Helper function to calculate a complex matrix-vector product.
+    /// Helper function to calculate a complex matrix-vector product.
     /// Assumes the matrix has been provided as a Vector of length two; the
     /// first entry containing the real part of the system matrix and the
     /// second entry containing the imaginary part
@@ -158,7 +158,7 @@ namespace oomph
       soln[1] += temp;
     } // End of complex_matrix_multiplication
 
-    /// \short Self-test to check that all the dimensions of the inputs to
+    /// Self-test to check that all the dimensions of the inputs to
     /// solve helper are consistent and everything that needs to be built, is.
     template<typename MATRIX>
     void check_validity_of_solve_helper_inputs(
@@ -169,7 +169,7 @@ namespace oomph
       const double& n_dof);
 
   protected:
-    /// \short When a derived class object is being used as a smoother in
+    /// When a derived class object is being used as a smoother in
     /// the MG algorithm the residual norm
     /// does not need to be calculated. This boolean is used as a flag to
     /// indicate this in solve_helper(...)
@@ -177,7 +177,7 @@ namespace oomph
   };
 
   //==================================================================
-  /// \short Self-test to be called inside solve_helper to ensure
+  /// Self-test to be called inside solve_helper to ensure
   /// that all inputs are consistent and everything that needs to
   /// be built, is.
   //==================================================================
@@ -267,9 +267,9 @@ namespace oomph
   } // End of check_validity_of_solve_helper_inputs
 
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //=========================================================================
@@ -321,19 +321,13 @@ namespace oomph
       }
     } // End of clean_up_memory
 
-    /// \short Broken copy constructor
-    ComplexDampedJacobi(const ComplexDampedJacobi&)
-    {
-      BrokenCopy::broken_copy("ComplexDampedJacobi");
-    }
+    /// Broken copy constructor
+    ComplexDampedJacobi(const ComplexDampedJacobi&) = delete;
 
-    /// \short Broken assignment operator
-    void operator=(const ComplexDampedJacobi&)
-    {
-      BrokenCopy::broken_assign("ComplexDampedJacobi");
-    }
+    /// Broken assignment operator
+    void operator=(const ComplexDampedJacobi&) = delete;
 
-    /// \short Function to calculate the value of Omega by passing in the
+    /// Function to calculate the value of Omega by passing in the
     /// value of k and h [see Elman et al. "A multigrid method enhanced by
     /// Krylov subspace iteration for discrete Helmholtz equations", p.1303]
     void calculate_omega(const double& k, const double& h)
@@ -471,7 +465,7 @@ namespace oomph
       }
     } // End of complex_smoother_setup
 
-    /// \short The smoother_solve function performs fixed number of iterations
+    /// The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
@@ -485,7 +479,7 @@ namespace oomph
       complex_solve_helper(rhs, solution);
     } // End of complex_smoother_solve
 
-    /// \short Use damped Jacobi iteration as an IterativeLinearSolver:
+    /// Use damped Jacobi iteration as an IterativeLinearSolver:
     /// This obtains the Jacobian matrix J and the residual vector r
     /// (needed for the Newton method) from the problem's get_jacobian
     /// function and returns the result of Jx=r.
@@ -501,11 +495,11 @@ namespace oomph
     }
 
   private:
-    /// \short This is where the actual work is done
+    /// This is where the actual work is done
     void complex_solve_helper(const Vector<DoubleVector>& rhs,
                               Vector<DoubleVector>& solution);
 
-    /// \short Boolean flag to indicate if the matrices pointed to by
+    /// Boolean flag to indicate if the matrices pointed to by
     /// Matrix_real_pt and Matrix_imag_pt can be deleted.
     bool Matrix_can_be_deleted;
 
@@ -532,7 +526,7 @@ namespace oomph
   };
 
   //======================================================================
-  /// \short This is where the actual work is done.
+  /// This is where the actual work is done.
   //======================================================================
   template<typename MATRIX>
   void ComplexDampedJacobi<MATRIX>::complex_solve_helper(
@@ -858,7 +852,7 @@ namespace oomph
   } // End of complex_solve_helper function
 
   //======================================================================
-  /// \short The GMRES method rewritten for complex matrices
+  /// The GMRES method rewritten for complex matrices
   //======================================================================
   template<typename MATRIX>
   class ComplexGMRES : public HelmholtzSmoother
@@ -881,16 +875,10 @@ namespace oomph
     } // End of ~ComplexGMRES
 
     /// Broken copy constructor
-    ComplexGMRES(const ComplexGMRES&)
-    {
-      BrokenCopy::broken_copy("ComplexGMRES");
-    } // End of ComplexGMRES (copy constructor)
+    ComplexGMRES(const ComplexGMRES&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ComplexGMRES&)
-    {
-      BrokenCopy::broken_assign("ComplexGMRES");
-    } // End of operator= (assignment operator)
+    void operator=(const ComplexGMRES&) = delete;
 
     /// Overload disable resolve so that it cleans up memory too
     void disable_resolve()
@@ -902,7 +890,7 @@ namespace oomph
       clean_up_memory();
     } // End of disable resolve
 
-    /// \short Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result)
@@ -919,7 +907,7 @@ namespace oomph
         error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     } // End of solve
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix
+    /// Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -996,7 +984,7 @@ namespace oomph
 #endif
     } // End of complex_smoother_setup
 
-    /// \short The smoother_solve function performs fixed number of iterations
+    /// The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
@@ -1106,7 +1094,7 @@ namespace oomph
       } // for (unsigned j=0;j<=k;j++)
     } // End of update
 
-    /// \short Helper function: Generate a plane rotation. This is done by
+    /// Helper function: Generate a plane rotation. This is done by
     /// finding the value of \f$ \cos(\theta) \f$ (i.e. cs) and the value of
     /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
     /// \f[
@@ -1212,7 +1200,7 @@ namespace oomph
       }
     } // End of generate_plane_rotation
 
-    /// \short Helper function: Apply plane rotation. This is done using the
+    /// Helper function: Apply plane rotation. This is done using the
     /// update:
     /// \f[
     /// \begin{bmatrix}
@@ -1251,17 +1239,17 @@ namespace oomph
     /// Vector of pointers to the real and imaginary part of the system matrix
     Vector<CRDoubleMatrix*> Matrices_storage_pt;
 
-    /// \short Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    /// \short Boolean flag to indicate if the real and imaginary system
+    /// Boolean flag to indicate if the real and imaginary system
     /// matrices can be deleted
     bool Matrix_can_be_deleted;
   };
 
   //======================================================================
-  /// \short This is where the actual work is done
+  /// This is where the actual work is done
   //======================================================================
   template<typename MATRIX>
   void ComplexGMRES<MATRIX>::complex_solve_helper(
@@ -1770,13 +1758,13 @@ namespace oomph
   } // End of complex_solve_helper
 
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //======================================================================
-  /// \short The GMRES method for the Helmholtz solver.
+  /// The GMRES method for the Helmholtz solver.
   //======================================================================
   template<typename MATRIX>
   class HelmholtzGMRESMG : public IterativeLinearSolver,
@@ -1800,16 +1788,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HelmholtzGMRESMG(const HelmholtzGMRESMG&)
-    {
-      BrokenCopy::broken_copy("HelmholtzGMRESMG");
-    }
+    HelmholtzGMRESMG(const HelmholtzGMRESMG&) = delete;
 
     /// Broken assignment operator
-    void operator=(const HelmholtzGMRESMG&)
-    {
-      BrokenCopy::broken_assign("HelmholtzGMRESMG");
-    }
+    void operator=(const HelmholtzGMRESMG&) = delete;
 
     /// Overload disable resolve so that it cleans up memory too
     void disable_resolve()
@@ -1818,7 +1800,7 @@ namespace oomph
       clean_up_memory();
     }
 
-    /// \short Implementation of the pure virtual base class function. The
+    /// Implementation of the pure virtual base class function. The
     /// function has been broken because this is meant to be used as a linear
     /// solver
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
@@ -1837,7 +1819,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Implementation of the pure virtual base class function. This
+    /// Implementation of the pure virtual base class function. This
     /// accompanies the preconditioner_solve function and so is also broken
     void setup()
     {
@@ -1854,7 +1836,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result)
@@ -2012,7 +1994,7 @@ namespace oomph
       }
     } // End of solve
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+    /// Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     void solve(DoubleMatrixBase* const& matrix_pt,
                const DoubleVector& rhs,
@@ -2033,7 +2015,7 @@ namespace oomph
     }
 
 
-    /// \short Linear-algebra-type solver: Takes pointer to a matrix
+    /// Linear-algebra-type solver: Takes pointer to a matrix
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
@@ -2044,7 +2026,7 @@ namespace oomph
       LinearSolver::solve(matrix_pt, rhs, result);
     }
 
-    /// \short Re-solve the system defined by the last assembled Jacobian
+    /// Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
     void resolve(const DoubleVector& rhs, DoubleVector& result)
@@ -2085,13 +2067,13 @@ namespace oomph
       return Iterations;
     }
 
-    /// \short Set left preconditioning (the default)
+    /// Set left preconditioning (the default)
     void set_preconditioner_LHS()
     {
       Preconditioner_LHS = true;
     }
 
-    /// \short Enable right preconditioning
+    /// Enable right preconditioning
     void set_preconditioner_RHS()
     {
       Preconditioner_LHS = false;
@@ -2133,7 +2115,7 @@ namespace oomph
       }
     } // End of clean_up_memory
 
-    /// \short Helper function to calculate a complex matrix-vector product.
+    /// Helper function to calculate a complex matrix-vector product.
     /// Assumes the matrix has been provided as a Vector of length two; the
     /// first entry containing the real part of the system matrix and the
     /// second entry containing the imaginary part
@@ -2365,7 +2347,7 @@ namespace oomph
       } // if(Preconditioner_LHS) else
     } // End of update
 
-    /// \short Helper function: Generate a plane rotation. This is done by
+    /// Helper function: Generate a plane rotation. This is done by
     /// finding the value of \f$ \cos(\theta) \f$ (i.e. cs) and the value of
     /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
     /// \f[
@@ -2471,7 +2453,7 @@ namespace oomph
       }
     } // End of generate_plane_rotation
 
-    /// \short Helper function: Apply plane rotation. This is done using the
+    /// Helper function: Apply plane rotation. This is done using the
     /// update:
     /// \f[
     /// \begin{bmatrix}
@@ -2510,22 +2492,22 @@ namespace oomph
     /// Vector of pointers to the real and imaginary part of the system matrix
     Vector<CRDoubleMatrix*> Matrices_storage_pt;
 
-    /// \short Boolean flag to indicate if the solve is done in re-solve mode,
+    /// Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
     bool Resolving;
 
-    /// \short Boolean flag to indicate if the matrix pointed to be Matrix_pt
+    /// Boolean flag to indicate if the matrix pointed to be Matrix_pt
     /// can be deleted.
     bool Matrix_can_be_deleted;
 
-    /// \short boolean indicating use of left hand preconditioning (if true)
+    /// boolean indicating use of left hand preconditioning (if true)
     /// or right hand preconditioning (if false)
     bool Preconditioner_LHS;
   };
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
   //=============================================================================
   /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector
@@ -3310,13 +3292,13 @@ namespace oomph
   } // End of solve_helper
 
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //======================================================================
-  /// \short The FGMRES method, i.e. the flexible variant of the GMRES
+  /// The FGMRES method, i.e. the flexible variant of the GMRES
   /// method which allows for nonconstant preconditioners [see Saad Y,
   /// "Iterative methods for sparse linear systems", p.287]. Note, FGMRES
   /// can only cater to right preconditioning; if the user tries to switch
@@ -3341,18 +3323,12 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HelmholtzFGMRESMG(const HelmholtzFGMRESMG&)
-    {
-      BrokenCopy::broken_copy("HelmholtzFGMRESMG");
-    }
+    HelmholtzFGMRESMG(const HelmholtzFGMRESMG&) = delete;
 
     /// Broken assignment operator
-    void operator=(const HelmholtzFGMRESMG&)
-    {
-      BrokenCopy::broken_assign("HelmholtzFGMRESMG");
-    }
+    void operator=(const HelmholtzFGMRESMG&) = delete;
 
-    /// \short Overloaded function to let the user know that left
+    /// Overloaded function to let the user know that left
     /// preconditioning is not possible with FGMRES, only right preconditioning
     void set_preconditioner_LHS()
     {
@@ -3370,7 +3346,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     } // End of set_preconditioner_LHS
 
-    /// \short Solver: Takes pointer to problem and returns the results vector
+    /// Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
     void solve(Problem* const& problem_pt, DoubleVector& result)
@@ -3626,9 +3602,9 @@ namespace oomph
   };
 
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
   //=============================================================================

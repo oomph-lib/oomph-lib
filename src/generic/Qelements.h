@@ -51,9 +51,9 @@
 
 namespace oomph
 {
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
   //========================================================================
   /// Empty base class for Qelements (created so that
@@ -67,10 +67,7 @@ namespace oomph
     QElementGeometricBase() {}
 
     /// Broken copy constructor
-    QElementGeometricBase(const QElementGeometricBase&)
-    {
-      BrokenCopy::broken_copy("QElementGeometricBase");
-    }
+    QElementGeometricBase(const QElementGeometricBase&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -78,16 +75,13 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const QElementGeometricBase&)
-     {
-      BrokenCopy::broken_assign("QElementGeometricBase");
-      }*/
+    /*void operator=(const QElementGeometricBase&) = delete;*/
   };
 
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
   //========================================================================
@@ -100,16 +94,10 @@ namespace oomph
     QElementBase() : S_macro_ll_pt(0), S_macro_ur_pt(0) {}
 
     /// Broken copy constructor
-    QElementBase(const QElementBase&)
-    {
-      BrokenCopy::broken_copy("QElementBase");
-    }
+    QElementBase(const QElementBase&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QElementBase&)
-     {
-      BrokenCopy::broken_assign("QElementBase");
-      }*/
+    /*void operator=(const QElementBase&) = delete;*/
 
     /// Destructor: Kill storage for macro element reference coords
     virtual ~QElementBase()
@@ -136,7 +124,7 @@ namespace oomph
       return true;
     }
 
-    /// \short Adjust local coordinates so that they're located inside
+    /// Adjust local coordinates so that they're located inside
     /// the element
     void move_local_coord_back_into_element(Vector<double>& s) const
     {
@@ -150,7 +138,7 @@ namespace oomph
     }
 
 
-    /// \short Set pointer to macro element also sets up storage for the
+    /// Set pointer to macro element also sets up storage for the
     /// reference coordinates and initialises them
     virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
     {
@@ -193,7 +181,7 @@ namespace oomph
     }
 
 
-    /// \short Access fct to the i-th coordinate of the element's
+    /// Access fct to the i-th coordinate of the element's
     /// "lower left" vertex in the associated MacroElement
     double& s_macro_ll(const unsigned& i)
     {
@@ -209,7 +197,7 @@ namespace oomph
     }
 
 
-    /// \short Access fct to the i-th coordinate of the element's
+    /// Access fct to the i-th coordinate of the element's
     /// "upper right" vertex in the associated MacroElement
     double& s_macro_ur(const unsigned& i)
     {
@@ -225,7 +213,7 @@ namespace oomph
     }
 
 
-    /// \short Access fct to the i-th coordinate of the element's
+    /// Access fct to the i-th coordinate of the element's
     /// "lower left" vertex in the associated MacroElement. (const version)
     double s_macro_ll(const unsigned& i) const
     {
@@ -241,7 +229,7 @@ namespace oomph
     }
 
 
-    /// \short Access fct to the i-th coordinate of the element's
+    /// Access fct to the i-th coordinate of the element's
     /// "upper right" vertex in the associated MacroElement. (const version)
     double s_macro_ur(const unsigned& i) const
     {
@@ -256,7 +244,7 @@ namespace oomph
       return (*S_macro_ur_pt)[i];
     }
 
-    /// \short Global coordinates as function of local coordinates.
+    /// Global coordinates as function of local coordinates.
     /// using the macro element representation
     void get_x_from_macro_element(const Vector<double>& s,
                                   Vector<double>& x) const
@@ -280,7 +268,7 @@ namespace oomph
       Macro_elem_pt->macro_map(s_macro, x);
     }
 
-    /// \short Global coordinates as function of local coordinates
+    /// Global coordinates as function of local coordinates
     /// at previous time "level" t (t=0: present; t>0: previous)
     /// using the macro element representation
     void get_x_from_macro_element(const unsigned& t,
@@ -330,9 +318,9 @@ namespace oomph
   };
 
 
-  //////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
 
 
   //========================================================================
@@ -346,18 +334,12 @@ namespace oomph
     QSolidElementBase(){};
 
     /// Broken copy constructor
-    QSolidElementBase(const QSolidElementBase&)
-    {
-      BrokenCopy::broken_copy("QSolidElementBase");
-    }
+    QSolidElementBase(const QSolidElementBase&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QSolidElementBase&)
-     {
-      BrokenCopy::broken_assign("QSolidElementBase");
-      }*/
+    /*void operator=(const QSolidElementBase&) = delete;*/
 
-    /// \short Set pointer to MacroElement -- overloads generic version
+    /// Set pointer to MacroElement -- overloads generic version
     /// in RefineableQElement<2> and uses the MacroElement
     /// also as the default for the "undeformed" configuration.
     /// This assignment can/must be overwritten with
@@ -374,7 +356,7 @@ namespace oomph
       set_undeformed_macro_elem_pt(macro_elem_pt);
     }
 
-    /// \short Set pointers to "current" and "undeformed" MacroElements.
+    /// Set pointers to "current" and "undeformed" MacroElements.
     virtual void set_macro_elem_pt(MacroElement* macro_elem_pt,
                                    MacroElement* undeformed_macro_elem_pt)
     {
@@ -386,7 +368,7 @@ namespace oomph
       set_undeformed_macro_elem_pt(undeformed_macro_elem_pt);
     }
 
-    /// \short Eulerian and Lagrangian coordinates as function of the
+    /// Eulerian and Lagrangian coordinates as function of the
     /// local coordinates: The Eulerian position is returned in
     /// FE-interpolated form (\c x_fe) and then in the form obtained
     /// from the "current" MacroElement representation (if it exists -- if not,
@@ -462,9 +444,9 @@ namespace oomph
   };
 
 
-  //////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
 
 
   //=======================================================================
@@ -486,10 +468,10 @@ namespace oomph
     /// Constructor. Empty
     LineElementBase() {}
 
-    /// \short Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     virtual unsigned nvertex_node() const = 0;
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     virtual Node* vertex_node_pt(const unsigned& j) const = 0;
   };
 
@@ -500,7 +482,7 @@ namespace oomph
   class QElement<1, NNODE_1D> : public virtual LineElementBase
   {
   private:
-    /// \short Default integration rule: Gaussian integration of same 'order'
+    /// Default integration rule: Gaussian integration of same 'order'
     /// as the element
     // This is sort of optimal, because it means that the integration is exact
     // for the shape functions. Can overwrite this in specific element
@@ -520,27 +502,21 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QElement(const QElement&)
-    {
-      BrokenCopy::broken_copy("QElement");
-    }
+    QElement(const QElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QElement&)
-     {
-      BrokenCopy::broken_assign("QElement");
-      }*/
+    /*void operator=(const QElement&) = delete;*/
 
     /// Calculate the geometric shape functions at local coordinate s
     void shape(const Vector<double>& s, Shape& psi) const;
 
-    /// \short Compute the  geometric shape functions and
+    /// Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     void dshape_local(const Vector<double>& s,
                       Shape& psi,
                       DShape& dpsids) const;
 
-    /// \short Compute the geometric shape functions, derivatives and
+    /// Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
     void d2shape_local(const Vector<double>& s,
@@ -548,7 +524,7 @@ namespace oomph
                        DShape& dpsids,
                        DShape& d2psids) const;
 
-    /// \short Overload the template-free interface for the calculation of
+    /// Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one-dimensional element, so
     /// use the 1D version.
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -569,13 +545,13 @@ namespace oomph
       return 1.0;
     }
 
-    /// \short Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return 2;
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       unsigned n_node_1d = nnode_1d();
@@ -635,21 +611,21 @@ namespace oomph
       return NNODE_1D;
     }
 
-    /// \short Return the number of actual plot points for paraview
+    /// Return the number of actual plot points for paraview
     /// plot with parameter nplot.
     unsigned nplot_points_paraview(const unsigned& nplot) const
     {
       return nplot;
     }
 
-    /// \short Return the number of local sub-elements for paraview plot with
+    /// Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
     unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       return (nplot - 1);
     }
 
-    /// \short Fill in the offset information for paraview plot.
+    /// Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_output_offset_information(std::ofstream& file_out,
@@ -667,7 +643,7 @@ namespace oomph
       counter += nplot_points_paraview(nplot);
     }
 
-    /// \short Return the paraview element type.
+    /// Return the paraview element type.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     /// Use type "VTK_LINE" (== 3) for 2D quad elements
@@ -681,7 +657,7 @@ namespace oomph
       }
     }
 
-    /// \short Return the offsets for the paraview sub-elements. Needs
+    /// Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_offsets(std::ofstream& file_out,
@@ -711,7 +687,7 @@ namespace oomph
     void output(FILE* file_pt, const unsigned& n_plot);
 
 
-    /// \short  Get cector of local coordinates of plot point i (when plotting
+    ///  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
       const unsigned& i,
@@ -736,7 +712,7 @@ namespace oomph
       }
     }
 
-    /// \short Return string for tecplot zone header (when plotting
+    /// Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
     {
@@ -745,7 +721,7 @@ namespace oomph
       return header.str();
     }
 
-    /// \short Return total number of plot points (when plotting
+    /// Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
     unsigned nplot_points(const unsigned& nplot) const
     {
@@ -847,10 +823,10 @@ namespace oomph
     /// Constructor. Empty
     QuadElementBase() {}
 
-    /// \short Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     virtual unsigned nvertex_node() const = 0;
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     virtual Node* vertex_node_pt(const unsigned& j) const = 0;
   };
 
@@ -861,7 +837,7 @@ namespace oomph
   class QElement<2, NNODE_1D> : public virtual QuadElementBase
   {
   private:
-    /// \short Default integration rule: Gaussian integration of same 'order'
+    /// Default integration rule: Gaussian integration of same 'order'
     /// as the element
     // N.B. This is sort of optimal, because it means that the integration is
     // exact for the shape functions. Can overwrite this in specific element
@@ -881,27 +857,21 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QElement(const QElement&)
-    {
-      BrokenCopy::broken_copy("QElement");
-    }
+    QElement(const QElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QElement&)
-     {
-      BrokenCopy::broken_assign("QElement");
-      }*/
+    /*void operator=(const QElement&) = delete;*/
 
     /// Calculate the geometric shape functions at local coordinate s
     void shape(const Vector<double>& s, Shape& psi) const;
 
-    /// \short Compute the  geometric shape functions and
+    /// Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     void dshape_local(const Vector<double>& s,
                       Shape& psi,
                       DShape& dpsids) const;
 
-    /// \short Compute the geometric shape functions, derivatives and
+    /// Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
@@ -911,7 +881,7 @@ namespace oomph
                        DShape& dpsids,
                        DShape& d2psids) const;
 
-    /// \short Overload the template-free interface for the calculation of
+    /// Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a two-dimensional element, so use
     /// the two-d version.
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -933,13 +903,13 @@ namespace oomph
     }
 
 
-    /// \short Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return 4;
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       unsigned n_node_1d = nnode_1d();
@@ -1011,21 +981,21 @@ namespace oomph
       return NNODE_1D;
     }
 
-    /// \short Return the number of actual plot points for paraview
+    /// Return the number of actual plot points for paraview
     /// plot with parameter nplot.
     unsigned nplot_points_paraview(const unsigned& nplot) const
     {
       return nplot * nplot;
     }
 
-    /// \short Return the number of local sub-elements for paraview plot with
+    /// Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
     unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       return (nplot - 1) * (nplot - 1);
     }
 
-    /// \short Fill in the offset information for paraview plot.
+    /// Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_output_offset_information(std::ofstream& file_out,
@@ -1048,7 +1018,7 @@ namespace oomph
       counter += nplot_points_paraview(nplot);
     }
 
-    /// \short Return the paraview element type.
+    /// Return the paraview element type.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     /// Use type "VTK_QUAD" (== 9) for 2D quad elements
@@ -1062,7 +1032,7 @@ namespace oomph
       }
     }
 
-    /// \short Return the offsets for the paraview sub-elements. Needs
+    /// Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_offsets(std::ofstream& file_out,
@@ -1092,7 +1062,7 @@ namespace oomph
     void output(FILE* file_pt, const unsigned& n_plot);
 
 
-    /// \short  Get cector of local coordinates of plot point i (when plotting
+    ///  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
       const unsigned& i,
@@ -1123,7 +1093,7 @@ namespace oomph
       }
     }
 
-    /// \short Return string for tecplot zone header (when plotting
+    /// Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
     {
@@ -1265,10 +1235,10 @@ namespace oomph
     /// Constructor. Empty
     BrickElementBase() {}
 
-    /// \short Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     virtual unsigned nvertex_node() const = 0;
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     virtual Node* vertex_node_pt(const unsigned& j) const = 0;
   };
 
@@ -1279,7 +1249,7 @@ namespace oomph
   class QElement<3, NNODE_1D> : public virtual BrickElementBase
   {
   private:
-    /// \short Default integration rule: Gaussian integration of same 'order'
+    /// Default integration rule: Gaussian integration of same 'order'
     /// as the element
     // N.B. This is sort of optimal, because it means that the integration is
     // exact for the shape functions. Can overwrite this in specific element
@@ -1300,27 +1270,21 @@ namespace oomph
 
 
     /// Broken copy constructor
-    QElement(const QElement&)
-    {
-      BrokenCopy::broken_copy("QElement");
-    }
+    QElement(const QElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const QElement&)
-     {
-      BrokenCopy::broken_assign("QElement");
-      }*/
+    /*void operator=(const QElement&) = delete;*/
 
     /// Calculate the geometric shape functions at local coordinate s
     void shape(const Vector<double>& s, Shape& psi) const;
 
-    /// \short Compute the  geometric shape functions and
+    /// Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
     void dshape_local(const Vector<double>& s,
                       Shape& psi,
                       DShape& dpsids) const;
 
-    /// \short Compute the geometric shape functions, derivatives and
+    /// Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s.
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
@@ -1334,7 +1298,7 @@ namespace oomph
                        DShape& d2psids) const;
 
 
-    /// \short Overload the template-free interface for the calculation of
+    /// Overload the template-free interface for the calculation of
     /// the inverse jacobian mapping. This is a three-dimensional element,
     /// so use the 3d version
     double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
@@ -1355,13 +1319,13 @@ namespace oomph
       return 1.0;
     }
 
-    /// \short Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return 8;
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       unsigned N = nnode_1d();
@@ -1449,21 +1413,21 @@ namespace oomph
       return NNODE_1D;
     }
 
-    /// \short Return the number of actual plot points for paraview
+    /// Return the number of actual plot points for paraview
     /// plot with parameter nplot.
     unsigned nplot_points_paraview(const unsigned& nplot) const
     {
       return nplot * nplot * nplot;
     }
 
-    /// \short Return the number of local sub-elements for paraview plot with
+    /// Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
     unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       return (nplot - 1) * (nplot - 1) * (nplot - 1);
     }
 
-    /// \short Fill in the offset information for paraview plot.
+    /// Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_output_offset_information(std::ofstream& file_out,
@@ -1516,7 +1480,7 @@ namespace oomph
       counter += nplot_points_paraview(nplot);
     }
 
-    /// \short Return the paraview element type.
+    /// Return the paraview element type.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     /// Use type "VTK_HEXAHEDRON" (== 12) for 2D quad elements
@@ -1530,7 +1494,7 @@ namespace oomph
       }
     }
 
-    /// \short Return the offsets for the paraview sub-elements. Needs
+    /// Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     void write_paraview_offsets(std::ofstream& file_out,
@@ -1557,7 +1521,7 @@ namespace oomph
     /// C_style output at n_plot points
     void output(FILE* file_pt, const unsigned& n_plot);
 
-    /// \short  Get cector of local coordinates of plot point i (when plotting
+    ///  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
       const unsigned& i,
@@ -1593,7 +1557,7 @@ namespace oomph
       }
     }
 
-    /// \short Return string for tecplot zone header (when plotting
+    /// Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
     std::string tecplot_zone_string(const unsigned& nplot) const
     {
@@ -1795,16 +1759,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQElement(const SolidQElement&)
-    {
-      BrokenCopy::broken_copy("SolidQElement");
-    }
+    SolidQElement(const SolidQElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidQElement&)
-     {
-      BrokenCopy::broken_assign("SolidQElement");
-      }*/
+    /*void operator=(const SolidQElement&) = delete;*/
 
     /// Overload the output function
     void output(std::ostream& outfile)
@@ -1824,7 +1782,7 @@ namespace oomph
     /// C_style output at n_plot points
     inline void output(FILE* file_pt, const unsigned& n_plot);
 
-    /// \short Build the lower-dimensional FaceElement (an element of type
+    /// Build the lower-dimensional FaceElement (an element of type
     /// SolidQElement<0,NNODE_1D>).
     /// The face index takes one of two values corresponding
     /// to the two possible faces:
@@ -1836,15 +1794,15 @@ namespace oomph
 
   // For the dumb Intel 9.0 compiler, these need to live in here
 
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
   // SolidQElements
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
   // 1D SolidQElements
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
 
 
   //=======================================================================
@@ -1966,16 +1924,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQElement(const SolidQElement&)
-    {
-      BrokenCopy::broken_copy("SolidQElement");
-    }
+    SolidQElement(const SolidQElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidQElement&)
-     {
-      BrokenCopy::broken_assign("SolidQElement");
-      }*/
+    /*void operator=(const SolidQElement&) = delete;*/
 
     /// Overload the output function
     void output(std::ostream& outfile)
@@ -1996,7 +1948,7 @@ namespace oomph
     inline void output(FILE* file_pt, const unsigned& n_plot);
 
 
-    /// \short Build the lower-dimensional FaceElement (an element of type
+    /// Build the lower-dimensional FaceElement (an element of type
     /// SolidQElement<1,NNODE_1D>).The face index takes one of four values
     /// corresponding to the four possible faces:
     /// -1 (West)  s[0] = -1.0
@@ -2008,9 +1960,9 @@ namespace oomph
   };
 
 
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
   // 2D SolidQElements
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
 
   //===========================================================
   /// The output function for any number of points per element
@@ -2138,16 +2090,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQElement(const SolidQElement&)
-    {
-      BrokenCopy::broken_copy("SolidQElement");
-    }
+    SolidQElement(const SolidQElement&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SolidQElement&)
-     {
-      BrokenCopy::broken_assign("SolidQElement");
-      }*/
+    /*void operator=(const SolidQElement&) = delete;*/
 
     /// Overload the output function
     void output(std::ostream& outfile)
@@ -2168,7 +2114,7 @@ namespace oomph
     inline void output(FILE* file_pt, const unsigned& n_plot);
 
 
-    /// \short Build the lower-dimensional FaceElement (an element of type
+    /// Build the lower-dimensional FaceElement (an element of type
     /// SolidQElement<2,NNODE_1D>). The face index takes of one
     /// six values corresponding
     /// to the six possible faces:
@@ -2183,9 +2129,9 @@ namespace oomph
   };
 
 
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
   // 3D SolidQElements
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
 
   //===========================================================
   /// The output function for any number of points per element

@@ -71,21 +71,15 @@ namespace oomph
     ExplicitTimeSteppableObject() {}
 
     /// Broken copy constructor
-    ExplicitTimeSteppableObject(const ExplicitTimeSteppableObject&)
-    {
-      BrokenCopy::broken_copy("ExplicitTimeSteppableObject");
-    }
+    ExplicitTimeSteppableObject(const ExplicitTimeSteppableObject&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ExplicitTimeSteppableObject&)
-    {
-      BrokenCopy::broken_assign("ExplicitTimeSteppableObject");
-    }
+    void operator=(const ExplicitTimeSteppableObject&) = delete;
 
     /// Empty destructor
     virtual ~ExplicitTimeSteppableObject() {}
 
-    ///\short A single virtual function that returns the residuals
+    /// A single virtual function that returns the residuals
     /// vector multiplied by the inverse mass matrix
     virtual void get_dvaluesdt(DoubleVector& minv_res);
 
@@ -102,30 +96,30 @@ namespace oomph
     virtual void add_to_dofs(const double& lambda,
                              const DoubleVector& increment_dofs);
 
-    /// \short Empty virtual function to do anything needed before a stage of
+    /// Empty virtual function to do anything needed before a stage of
     /// an explicit time step (Runge-Kutta steps contain multiple stages per
     /// time step, most others only contain one).
     virtual void actions_before_explicit_stage() {}
 
-    /// \short Empty virtual function that should be overloaded to update any
+    /// Empty virtual function that should be overloaded to update any
     /// dependent data or boundary conditions that should be advanced after each
     /// stage of an explicit time step (Runge-Kutta steps contain multiple
     /// stages per time step, most others only contain one).
     virtual void actions_after_explicit_stage() {}
 
-    /// \short Empty virtual function that can be overloaded to do anything
+    /// Empty virtual function that can be overloaded to do anything
     /// needed before an explicit step.
     virtual void actions_before_explicit_timestep() {}
 
-    /// \short Empty virtual function that can be overloaded to do anything
+    /// Empty virtual function that can be overloaded to do anything
     /// needed after an explicit step.
     virtual void actions_after_explicit_timestep() {}
 
-    ///\short Broken virtual function that should be overloaded to
+    /// Broken virtual function that should be overloaded to
     /// return access to the local time in the object
     virtual double& time();
 
-    /// \short Virtual function that should be overloaded to return a pointer to
+    /// Virtual function that should be overloaded to return a pointer to
     /// a Time object.
     virtual Time* time_pt() const;
   };
@@ -137,25 +131,19 @@ namespace oomph
   class ExplicitTimeStepper
   {
   protected:
-    /// \short String that indicates the type of the timestepper
-    ///(e.g. "RungeKutta", etc.)
+    /// String that indicates the type of the timestepper
+    /// (e.g. "RungeKutta", etc.)
     std::string Type;
 
   public:
-    /// \short Empty Constructor.
+    /// Empty Constructor.
     ExplicitTimeStepper() {}
 
     /// Broken copy constructor
-    ExplicitTimeStepper(const ExplicitTimeStepper&)
-    {
-      BrokenCopy::broken_copy("ExplicitTimeStepper");
-    }
+    ExplicitTimeStepper(const ExplicitTimeStepper&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ExplicitTimeStepper&)
-    {
-      BrokenCopy::broken_assign("ExplicitTimeStepper");
-    }
+    void operator=(const ExplicitTimeStepper&) = delete;
 
     /// Empty virtual destructor --- no memory is allocated in this class
     virtual ~ExplicitTimeStepper() {}
@@ -167,7 +155,7 @@ namespace oomph
   };
 
 
-  ///===========================================================
+  /// ===========================================================
   /// Simple first-order Euler Timestepping
   //============================================================
   class Euler : public ExplicitTimeStepper
@@ -180,24 +168,18 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Euler(const Euler&)
-    {
-      BrokenCopy::broken_copy("Euler");
-    }
+    Euler(const Euler&) = delete;
 
     /// Broken assignment operator
-    void operator=(const Euler&)
-    {
-      BrokenCopy::broken_assign("Euler");
-    }
+    void operator=(const Euler&) = delete;
 
-    /// \short Overload function that is used to advance time in the object
+    /// Overload function that is used to advance time in the object
     /// reference by object_pt by an amount dt
     void timestep(ExplicitTimeSteppableObject* const& object_pt,
                   const double& dt);
   };
 
-  ///===========================================================
+  /// ===========================================================
   /// Standard Runge Kutta Timestepping
   //============================================================
   template<unsigned ORDER>
@@ -211,16 +193,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RungeKutta(const RungeKutta&)
-    {
-      BrokenCopy::broken_copy("RungeKutta");
-    }
+    RungeKutta(const RungeKutta&) = delete;
 
     /// Broken assignment operator
-    void operator=(const RungeKutta&)
-    {
-      BrokenCopy::broken_assign("RungeKutta");
-    }
+    void operator=(const RungeKutta&) = delete;
 
     /// Function that is used to advance time in the object
     // reference by object_pt by an amount dt
@@ -229,7 +205,7 @@ namespace oomph
   };
 
 
-  ///===========================================================
+  /// ===========================================================
   /// Runge Kutta Timestepping that uses low storage
   //============================================================
   template<unsigned ORDER>
@@ -243,16 +219,10 @@ namespace oomph
     LowStorageRungeKutta();
 
     /// Broken copy constructor
-    LowStorageRungeKutta(const LowStorageRungeKutta&)
-    {
-      BrokenCopy::broken_copy("LowStorageRungeKutta");
-    }
+    LowStorageRungeKutta(const LowStorageRungeKutta&) = delete;
 
     /// Broken assignment operator
-    void operator=(const LowStorageRungeKutta&)
-    {
-      BrokenCopy::broken_assign("LowStorageRungeKutta");
-    }
+    void operator=(const LowStorageRungeKutta&) = delete;
 
     /// Function that is used to advance the solution by time dt
     void timestep(ExplicitTimeSteppableObject* const& object_pt,
@@ -260,7 +230,7 @@ namespace oomph
   };
 
 
-  ///===========================================================
+  /// ===========================================================
   /// An explicit version of BDF3 (i.e. uses derivative evaluation at y_n
   /// instead of y_{n+1}). Useful as a predictor because it is third order
   /// accurate but requires only one function evaluation (i.e. only one mass
@@ -278,16 +248,10 @@ namespace oomph
     EBDF3() {}
 
     /// Broken copy constructor
-    EBDF3(const EBDF3&)
-    {
-      BrokenCopy::broken_copy("EBDF3");
-    }
+    EBDF3(const EBDF3&) = delete;
 
     /// Broken assignment operator
-    void operator=(const EBDF3&)
-    {
-      BrokenCopy::broken_assign("EBDF3");
-    }
+    void operator=(const EBDF3&) = delete;
 
     void set_weights(const double& dtn,
                      const double& dtnm1,

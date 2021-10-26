@@ -54,10 +54,10 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Poisson ratio
  double Nu=0.1;
 
- ///Direction of the wall normal vector
+ /// Direction of the wall normal vector
  Vector<double> Wall_normal;
 
- /// \short Function that specifies the wall unit normal
+ /// Function that specifies the wall unit normal
  void wall_unit_normal_fct(const Vector<double> &x, 
                       Vector<double> &normal)
  {
@@ -67,8 +67,8 @@ namespace Global_Physical_Variables
 }
 
 //============================================================================
-///A Problem class that solves the Navier--Stokes equations + free surface
-///in a 2D geometry using a spine-based node update
+/// A Problem class that solves the Navier--Stokes equations + free surface
+/// in a 2D geometry using a spine-based node update
 //============================================================================
 template<class ELEMENT>
 class CapProblem : public Problem
@@ -455,7 +455,7 @@ class ElasticTwoLayerMesh :
 
 public:
 
- /// \short Constructor: Pass number of elements in x-direction, number of
+ /// Constructor: Pass number of elements in x-direction, number of
  /// elements in y-direction in bottom and top layer, respectively,
  /// axial length and height of top and bottom layers, a boolean
  /// flag to make the mesh periodic in the x-direction, and pointer 
@@ -679,42 +679,42 @@ public:
    this->setup_boundary_element_info();
   }
 
- ///Access functions for pointers to elements in upper layer
+ /// Access functions for pointers to elements in upper layer
  FiniteElement* &upper_layer_element_pt(const unsigned long &i) 
   {return Upper_layer_element_pt[i];}
 
- ///Access functions for pointers to elements in bottom layer
+ /// Access functions for pointers to elements in bottom layer
  FiniteElement* &lower_layer_element_pt(const unsigned long &i) 
   {return Lower_layer_element_pt[i];}
 
- ///Number of elements in upper layer
+ /// Number of elements in upper layer
  unsigned long nupper() const {return Upper_layer_element_pt.size();}
 
- ///Number of elements in top layer
+ /// Number of elements in top layer
  unsigned long nlower() const {return Lower_layer_element_pt.size();}
 
- ///Access functions for pointers to elements in upper layer
+ /// Access functions for pointers to elements in upper layer
  FiniteElement* &interface_upper_boundary_element_pt(const unsigned long &i) 
   {return Interface_upper_boundary_element_pt[i];}
 
- ///Access functions for pointers to elements in bottom layer
+ /// Access functions for pointers to elements in bottom layer
  FiniteElement* &interface_lower_boundary_element_pt(const unsigned long &i) 
   {return Interface_lower_boundary_element_pt[i];}
 
- ///Number of elements in upper layer
+ /// Number of elements in upper layer
  unsigned long ninterface_upper() const 
  {return Interface_upper_boundary_element_pt.size();}
 
- ///Number of elements in top layer
+ /// Number of elements in top layer
  unsigned long ninterface_lower() const 
  {return Interface_lower_boundary_element_pt.size();}
 
- ///\short Index of the face of the elements next to the interface
- ///in the upper region (always -2)
+ /// Index of the face of the elements next to the interface
+ /// in the upper region (always -2)
  int interface_upper_face_index_at_boundary(const unsigned &e)
  {return -2;}
 
- ///\short Index of the face of the elements next to the interface in
+ /// Index of the face of the elements next to the interface in
  /// the lower region (always 2)
  int interface_lower_face_index_at_boundary(const unsigned &e)
  {return 2;}
@@ -727,11 +727,11 @@ private:
  /// Vector of pointers to element in the lower layer
  Vector <FiniteElement *> Upper_layer_element_pt;
 
- /// \short Vector of pointers to the elements adjacent to the interface
+ /// Vector of pointers to the elements adjacent to the interface
  /// on the lower layer
  Vector <FiniteElement*> Interface_lower_boundary_element_pt;
 
- /// \short Vector of pointers to the element adjacent to the interface
+ /// Vector of pointers to the element adjacent to the interface
  /// on the upper layer
  Vector<FiniteElement *> Interface_upper_boundary_element_pt;
 
@@ -741,9 +741,9 @@ private:
 
 
 //===========start_of_pseudo_elastic_class====================================
-///\short A class that solves the Navier--Stokes equations
-///to compute the shape of a static interface between two fluids in a 
-///rectangular container with an imposed contact angle at the boundary.
+/// A class that solves the Navier--Stokes equations
+/// to compute the shape of a static interface between two fluids in a 
+/// rectangular container with an imposed contact angle at the boundary.
 //============================================================================
 template<class ELEMENT>
 class PseudoSolidCapProblem : public Problem
@@ -800,7 +800,7 @@ private:
  /// Trace file
  ofstream Trace_file;
 
- ///Storage for the bulk mesh
+ /// Storage for the bulk mesh
  ElasticTwoLayerMesh<ELEMENT>* Bulk_mesh_pt;
 
  /// Storage for the free surface mesh
@@ -1224,7 +1224,7 @@ void PseudoSolidCapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
 //======================================================================
-///Main driver: Build problem and initiate parameter study
+/// Main driver: Build problem and initiate parameter study
 //======================================================================
 int main()
 {

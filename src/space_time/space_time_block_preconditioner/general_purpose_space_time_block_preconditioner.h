@@ -39,14 +39,14 @@
 // Add in the subsidiary preconditioners
 #include "general_purpose_space_time_subsidiary_block_preconditioner.h"
 
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////////
 
 namespace oomph
 {
   //=============================================================================
-  /// \short General purpose block tridiagonal preconditioner. By default
+  /// General purpose block tridiagonal preconditioner. By default
   /// SuperLUPreconditioner (or SuperLUDistPreconditioner) is used to solve the
   /// subsidiary systems, but other preconditioners can be used by setting them
   /// using passing a pointer to a function of type
@@ -89,24 +89,16 @@ namespace oomph
 
 
     /// Broken copy constructor
-    ExactDGPBlockPreconditioner(const ExactDGPBlockPreconditioner&)
-    {
-      BrokenCopy::broken_copy("ExactDGPBlockPreconditioner");
-    }
-
+    ExactDGPBlockPreconditioner(const ExactDGPBlockPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ExactDGPBlockPreconditioner&)
-    {
-      BrokenCopy::broken_assign("ExactDGPBlockPreconditioner");
-    }
-
+    void operator=(const ExactDGPBlockPreconditioner&) = delete;
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
 
-    /// \short Setup the preconditioner
+    /// Setup the preconditioner
     void setup();
 
 
@@ -179,21 +171,21 @@ namespace oomph
     } // End of get_memory_usage_in_bytes
 
   private:
-    /// \short Control flag is true if the preconditioner has been setup
+    /// Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
 
-    /// \short Flag to indicate whether or not to record the memory statistics
+    /// Flag to indicate whether or not to record the memory statistics
     /// this preconditioner
     bool Compute_memory_statistics;
 
-    /// \short Storage for the memory usage of the solver if the flag above
+    /// Storage for the memory usage of the solver if the flag above
     /// is set to true (in bytes)
     double Memory_usage_in_bytes;
   };
 
   //=============================================================================
-  /// \short General purpose block triangular preconditioner. By default this
+  /// General purpose block triangular preconditioner. By default this
   /// operates as an upper triangular preconditioner. Also, by default
   /// SuperLUPreconditioner (or SuperLUDistPreconditioner) is used to solve the
   /// subsidiary systems, but other preconditioners can be used by setting them
@@ -262,24 +254,16 @@ namespace oomph
 
     /// Broken copy constructor
     BandedBlockTriangularPreconditioner(
-      const BandedBlockTriangularPreconditioner&)
-    {
-      BrokenCopy::broken_copy("BandedBlockTriangularPreconditioner");
-    }
-
+      const BandedBlockTriangularPreconditioner&) = delete;
 
     /// Broken assignment operator
-    void operator=(const BandedBlockTriangularPreconditioner&)
-    {
-      BrokenCopy::broken_assign("BandedBlockTriangularPreconditioner");
-    }
-
+    void operator=(const BandedBlockTriangularPreconditioner&) = delete;
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
 
-    /// \short Setup the preconditioner
+    /// Setup the preconditioner
     void setup();
 
 
@@ -396,7 +380,7 @@ namespace oomph
     DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
 
   private:
-    /// \short Storage for the block bandwidth of the matrix. Defaults to -1
+    /// Storage for the block bandwidth of the matrix. Defaults to -1
     /// indicating that we assume every off-diagonal block is non-empty. If
     /// the matrix is block diagonal then the value is zero
     int Block_bandwidth;
@@ -404,15 +388,15 @@ namespace oomph
     /// Boolean indicating upper or lower triangular
     bool Upper_triangular;
 
-    /// \short Control flag is true if the preconditioner has been setup
+    /// Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
 
-    /// \short Flag to indicate whether or not to record the memory statistics
+    /// Flag to indicate whether or not to record the memory statistics
     /// this preconditioner
     bool Compute_memory_statistics;
 
-    /// \short Storage for the memory usage of the solver if the flag above
+    /// Storage for the memory usage of the solver if the flag above
     /// is set to true (in bytes)
     double Memory_usage_in_bytes;
   };

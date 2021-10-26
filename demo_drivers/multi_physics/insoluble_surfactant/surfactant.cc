@@ -53,13 +53,13 @@ namespace oomph
 {
 
 //==================================================================
-///Spine-based Marangoni surface tension elements that add
-///a linear dependence on temperature and concentration
-///of a surface chemical to the surface tension, 
-///which decreases with increasing temperature. In addition, 
-///this element adds a flux contribution to the advection-diffusion
-///equation to represent heat loss at the free surface. This
-///introduces the Biot number.
+/// Spine-based Marangoni surface tension elements that add
+/// a linear dependence on temperature and concentration
+/// of a surface chemical to the surface tension, 
+/// which decreases with increasing temperature. In addition, 
+/// this element adds a flux contribution to the advection-diffusion
+/// equation to represent heat loss at the free surface. This
+/// introduces the Biot number.
 //=================================================================
 template<class ELEMENT>
 class SpineLineMarangoniSurfactantFluidInterfaceElement :
@@ -94,7 +94,7 @@ private:
 
 protected:
 
- ///Get the temperature
+ /// Get the temperature
  double interpolated_T(const Vector<double> &s)
   {
      //Find number of nodes
@@ -122,7 +122,7 @@ protected:
   }
 
 
- ///Get the surfactant concentration
+ /// Get the surfactant concentration
  double interpolated_C(const Vector<double> &s)
   {
      //Find number of nodes
@@ -204,7 +204,7 @@ protected:
    return (1.0 - Ca*Ma*T - Ca*Beta*(C-1.0));
   }
 
- /// \short Fill in the contribution to the residuals
+ /// Fill in the contribution to the residuals
   /// Calculate the contribution to the jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
                                        DenseMatrix<double> &jacobian)
@@ -305,7 +305,7 @@ protected:
   }
 
  
- /// \short Overload the Helper function to calculate the residuals and 
+ /// Overload the Helper function to calculate the residuals and 
  /// jacobian entries. This particular function ensures that the
  /// additional entries are calculated inside the integration loop
  void add_additional_residual_contributions_interface(
@@ -484,8 +484,8 @@ protected:
   }
 
 public:
- ///Constructor that passes the bulk element and face index down
- ///to the underlying
+ /// Constructor that passes the bulk element and face index down
+ /// to the underlying
  SpineLineMarangoniSurfactantFluidInterfaceElement(
  FiniteElement* const &element_pt, const int &face_index) : 
   SpineLineFluidInterfaceElement<ELEMENT>
@@ -521,34 +521,34 @@ public:
    C_index = this->node_pt(0)->nvalue()-1;
   }
 
- ///Return the Biot number
+ /// Return the Biot number
  double bi() {return *Bi_pt;}
  
- ///Return the Marangoni number
+ /// Return the Marangoni number
  double ma() {return *Ma_pt;}
 
- ///Return the Elasticity number
+ /// Return the Elasticity number
  double beta() {return *Beta_pt;}
 
- ///Return the surface peclect number
+ /// Return the surface peclect number
  double peclet_s() {return *Peclet_S_pt;}
 
- ///Return the surface peclect strouhal number
+ /// Return the surface peclect strouhal number
  double peclet_strouhal_s() {return *Peclet_Strouhal_S_pt;}
 
- ///Access function for pointer to the Marangoni number
+ /// Access function for pointer to the Marangoni number
  double* &ma_pt() {return Ma_pt;}
 
- ///Access function for pointer to the Biot number
+ /// Access function for pointer to the Biot number
  double* &bi_pt() {return Bi_pt;}
 
- ///Access function for pointer to the Elasticity number
+ /// Access function for pointer to the Elasticity number
  double* &beta_pt() {return Beta_pt;}
 
- ///Access function for pointer to the surface Peclet number
+ /// Access function for pointer to the surface Peclet number
  double* &peclet_s_pt() {return Peclet_S_pt;}
 
- ///Access function for pointer to the surface Peclet x Strouhal number
+ /// Access function for pointer to the surface Peclet x Strouhal number
  double* &peclet_strouhal_s_pt() {return Peclet_Strouhal_S_pt;}
 
 void output(std::ostream &outfile, const unsigned &n_plot)
@@ -599,29 +599,29 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=0.1;//1.0;
 
- /// \short Rayleigh number, set to be zero so that
+ /// Rayleigh number, set to be zero so that
  /// there are no gravitational effects
  double Rayleigh = 0.0;
 
- /// \short Scaled Bond number (Bo/Ca), set to be zero
+ /// Scaled Bond number (Bo/Ca), set to be zero
  /// so that there are no gravitational effects
  double Scaled_Bond = 0.0;
  
- /// \short Biot number
+ /// Biot number
  double Biot = 0.0; //1.0;
 
- /// \short Marangoni number (just above the threshold for 
+ /// Marangoni number (just above the threshold for 
  /// linear instability)
  double Marangoni = 125.0;
 
- /// \short Capillary number (of which the results are independent
+ /// Capillary number (of which the results are independent
  /// for a pinned surface)
  double Capillary = 0.0045;
 
- /// \short Surface Elasticity number
+ /// Surface Elasticity number
  double Beta = 100.0;//1.0;//1.0e5;
 
- /// \short Surface Peclet number
+ /// Surface Peclet number
  double Peclet_S = 1.0;
 
  /// \shorT Sufrace Peclet number multiplied by Strouhal number
@@ -632,9 +632,9 @@ namespace Global_Physical_Variables
   
 } // end_of_namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D Convection  problem on rectangular domain, discretised 
@@ -647,14 +647,14 @@ class ConvectionProblem : public Problem
 
 public:
 
- ///Constructor. The boolean indicates whether the free surface
+ /// Constructor. The boolean indicates whether the free surface
  //should be pinned or not in the first instance
  ConvectionProblem(const bool &pin=true);
 
  /// Destructor. Empty
  ~ConvectionProblem() {}
 
- /// \short Release the free surface so that it can move
+ /// Release the free surface so that it can move
  void unpin_surface()
   {
    //Only bother if the surface is pinned
@@ -700,7 +700,7 @@ public:
   }
 
 
- /// \short Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
@@ -710,12 +710,12 @@ public:
  void actions_before_newton_convergence_check()
   {if(!Surface_pinned) {Bulk_mesh_pt->node_update();}}
 
- /// \short Actions before the timestep (update the the time-dependent 
+ /// Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
   {set_boundary_conditions(time_pt()->time());}
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -725,7 +725,7 @@ public:
   } // end_of_fix_pressure
 
 
- ///UnFix pressure in element e at pressure dof pdof and set to pvalue
+ /// UnFix pressure in element e at pressure dof pdof and set to pvalue
  void unfix_pressure(const unsigned &e, const unsigned &pdof)
   {
    //Cast to specific element and fix pressure
@@ -734,13 +734,13 @@ public:
   } // end_of_unfix_pressure
 
 
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution(std::ofstream &trace);
 
- /// \short Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
- /// \short Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  SingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt; 
@@ -758,7 +758,7 @@ private:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-/// \short Constructor for convection problem
+/// Constructor for convection problem
 //========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::

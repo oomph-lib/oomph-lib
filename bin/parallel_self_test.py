@@ -35,19 +35,27 @@ from __future__ import unicode_literals
 # x.encode()) / decoded (with str(y)) in python3. e.g. see
 # variable_from_makefile.
 
-
-import subprocess as subp
-from multiprocessing import Pool
-import sys
 import argparse
+import multiprocessing
 import os
 import os.path
-import multiprocessing
-import itertools as it
 import pprint
+import subprocess as subp
+import sys
+from typing import List
 
+from enum import IntEnum
 from functools import partial as pt
+from multiprocessing import Pool
 from os.path import join as pjoin
+
+
+class ExitCode(IntEnum):
+    """Define our own custom enumeration to represent certain exit codes."""
+    SUCCESS = 0
+    BUILD_FAILURE = 1
+    TEST_FAILURE = 2
+    MISSING_FEATURE = 4
 
 
 class Colours:
@@ -59,6 +67,7 @@ class Colours:
     Okgreen = '\033[92m'
     MakeFail = '\033[93m'
     TestFail = '\033[91m'
+    TestBypassed = '\033[95m'
     Endc = '\033[0m'
 
     def disable(self):
@@ -66,6 +75,7 @@ class Colours:
         self.Okgreen = ''
         self.MakeFail = ''
         self.TestFail = ''
+        self.TestBypassed = ''
         self.Endc = ''
 
 
@@ -78,32 +88,32 @@ COLOURS = Colours()
 # Various functions for printing with pretty colours
 
 
-def highlight(directorypath):
-    return os.path.dirname(directorypath) + "/" + COLOURS.Header + \
-        os.path.basename(directorypath) + COLOURS.Endc
+def highlight(directory_path: str) -> str:
+    return os.path.dirname(directory_path) + "/" + COLOURS.Header + \
+        os.path.basename(directory_path) + COLOURS.Endc
 
 
-def build_fail_message(directory):
+def build_fail_message(directory: str) -> str:
     print(COLOURS.MakeFail+"[BUILD FAIL] " + highlight(directory) +
           COLOURS.Endc)
 
 
-def check_fail_message(directory):
+def check_fail_message(directory: str) -> str:
     print(COLOURS.TestFail+"[FAILED]     " + highlight(directory) +
           COLOURS.Endc)
 
 
-def check_success_message(directory):
+def check_success_message(directory: str) -> str:
     print(COLOURS.Okgreen + "[OK]         " + highlight(directory) +
           COLOURS.Endc)
 
 
-def no_check_message(directory):
+def no_check_message(directory: str) -> str:
     print(COLOURS.Okgreen + "[NO CHECK]   " + highlight(directory) +
           COLOURS.Endc)
 
 
-def missing_feature_message(directory, feature):
+def missing_feature_message(directory: str, feature: str) -> str:
     print(COLOURS.Okgreen + "[NO " + feature.upper() + "]     " +
           highlight(directory) + COLOURS.Endc)
 
@@ -111,11 +121,68 @@ def missing_feature_message(directory, feature):
 # Some general utility functions
 # ============================================================
 
+def print_results_summary(test_results: List[ExitCode]) -> None:
+    """Prints a summary of the test results.
+
+    The number of passes, build fails, test fails, and bypassed tests are
+    determined from the test result exit codes.
+    """
+    header = (lambda s: f"{COLOURS.Header}{s}{COLOURS.Endc}")
+    green = (lambda s: f"{COLOURS.Okgreen}{s}{COLOURS.Endc}")
+    orange = (lambda s: f"{COLOURS.MakeFail}{s}{COLOURS.Endc}")
+    red = (lambda s: f"{COLOURS.TestFail}{s}{COLOURS.Endc}")
+    magenta = (lambda s: f"{COLOURS.TestBypassed}{s}{COLOURS.Endc}")
+
+    # Initialise values
+    (passes, build_fails, test_fails, tests_bypassed) = (0, 0, 0, 0)
+
+    # Stats collection: count the number of passes/fails, etc.
+    for exit_code in test_results:
+        if exit_code == ExitCode.SUCCESS:
+            passes += 1
+        elif exit_code == ExitCode.BUILD_FAILURE:
+            build_fails += 1
+        elif exit_code == ExitCode.TEST_FAILURE:
+            test_fails += 1
+        elif exit_code == ExitCode.MISSING_FEATURE:
+            tests_bypassed += 1
+        else:
+            print(
+                f"WARNING: Unexpected ExitCode '{exit_code}'; not sure how to deal with it!")
+
+    # Stringify a summary of the results
+    results_description = header(f"\nTest results:\n")
+    results_description += header(f" * Number of tests: {len(test_results)}\n")
+    results_description += green(f" * Tests passed: {passes}\n")
+    results_description += orange(f" * Builds failed: {build_fails}\n")
+    results_description += red(f" * Tests failed: {test_fails}\n")
+    results_description += magenta(
+        f" * Tests bypassed (due to missing features): {tests_bypassed}\n")
+
+    # Print the processed results
+    print(results_description)
+
+
+def get_overall_self_test_exit_code(test_results: List[ExitCode]) -> int:
+    """Returns the overall exit code based on the test results.
+
+    Only build and test failure exit codes classify the overall self-test as a
+    "failure". If either (or both) of those are present, an appropriate nonzero
+    exit code will be returned.
+    """
+    failing_exit_codes = (ExitCode.BUILD_FAILURE, ExitCode.TEST_FAILURE)
+    overall_exit_code = 0
+    for exit_code in test_results:
+        if exit_code in failing_exit_codes:
+            overall_exit_code |= int(exit_code)
+    return overall_exit_code
+
+
 class NoMakefileError(IOError):
     pass
 
 
-def variable_from_makefile(variable_name, makefile_path="Makefile"):
+def variable_from_makefile(variable_name: str, makefile_path: str = "Makefile") -> str:
     """Extract a variable from a makefile (using make).
 
     The basic idea is to cat a new "print-var" command, which prints the
@@ -161,13 +228,13 @@ def variable_from_makefile(variable_name, makefile_path="Makefile"):
     return stdout.decode().rstrip()
 
 
-def error(*args):
+def error(*args) -> None:
     """Write an error message to stderr and exit."""
     sys.stderr.write("\nERROR:\n" + "\n".join(args) + "\n")
     sys.exit(2)
 
 
-def get_oomph_root():
+def get_oomph_root() -> str:
     try:
         print("Trying to extract the root dir from a Makefile in the pwd.")
         oomph_root = variable_from_makefile("abs_top_srcdir")
@@ -184,20 +251,19 @@ def get_oomph_root():
 # ============================================================
 
 
-def find_validate_dirs(base_dirs):
+def find_validate_dirs(base_dirs: List[str]) -> List[str]:
     """Construct a list of validation directories by searching for
     validate.sh scripts."""
 
     all_validation_dirs = []
     for base in base_dirs:
-        for root, dirs, files in os.walk(base):
+        for root, _, files in os.walk(base):
             if 'validate.sh' in files:
                 all_validation_dirs.append(root)
-
     return all_validation_dirs
 
 
-def dispatch_dir(dirname, features, **kwargs):
+def dispatch_dir(dirname: str, features: dict, **kwargs) -> ExitCode:
     """Check for missing features and print the appropriate message if
     needed. Otherwise run the check function."""
 
@@ -208,21 +274,20 @@ def dispatch_dir(dirname, features, **kwargs):
         if not feature['have_feature']:
             if feature['check_driver_function'](dirname):
                 missing_feature_message(dirname, feature['feature_name'])
-                return
-
-    make_check_in_dir(dirname, **kwargs)
+                return ExitCode.MISSING_FEATURE
+    return make_check_in_dir(dirname, **kwargs)
 
 
 # Functions for checking if a test needs a certain feature
-def check_if_mpi_driver(d):
+def check_if_mpi_driver(d: str) -> bool:
     return "mpi" in d
 
 
-def check_if_arpack_driver(d):
+def check_if_arpack_driver(d: str) -> bool:
     return "eigenproblems" in d
 
 
-def check_if_hlib_driver(d):
+def check_if_hlib_driver(d: str) -> bool:
     # hlib is in "oomphlib", so take it out in case people use dirs called
     # oomphlib with no -.
     return "hlib" in d.replace("oomphlib", "")
@@ -230,7 +295,7 @@ def check_if_hlib_driver(d):
 
 # The function doing the bulk of the actual work (called many times in
 # parallel by main).
-def make_check_in_dir(directory, just_build=False):
+def make_check_in_dir(directory: str, just_build: bool = False) -> ExitCode:
     """
     Rebuild binaries in the directory using make if needed then run the
     tests.
@@ -263,10 +328,15 @@ def make_check_in_dir(directory, just_build=False):
                                  stdout=tracefile,
                                  stderr=subp.STDOUT)
 
-        # If it failed then return a build failure immediately
-        if build_return != 0:
-            build_fail_message(directory)
-            return
+    # If the build failed then return with a build failure immediately
+    if build_return != ExitCode.SUCCESS:
+        build_fail_message(directory)
+        with open(tracefile_path, 'r') as tracefile:
+            print(tracefile.read())
+        return ExitCode.BUILD_FAILURE
+
+    # Re-open the tracefile and continue appending to it
+    with open(tracefile_path, 'a') as tracefile:
 
         if not just_build:
             tracefile.write("\nRunning self test properly:\n")
@@ -283,7 +353,6 @@ def make_check_in_dir(directory, just_build=False):
             tracefile.write(
                 "\nNot running self test because you set the 'just_build' option\n")
             tracefile.flush()
-
             test_result = 0
 
     final_tracefile_path = pjoin(directory, "Validation", "make_check_output")
@@ -292,7 +361,7 @@ def make_check_in_dir(directory, just_build=False):
     # Validation dir should exist now. Move the output file there if so,
     # otherwise issue a warning.
     if not os.path.isdir(os.path.dirname(final_tracefile_path)):
-        sys.stderr.write("WARNING: no Validation directory in "+directory
+        sys.stderr.write("WARNING: no Validation directory in " + directory
                          + " so I couldn't put make_check_output in there\n")
         sys.stderr.flush()
     else:
@@ -301,12 +370,13 @@ def make_check_in_dir(directory, just_build=False):
 
     if test_result == 0:
         check_success_message(directory)
-        return
+        exit_code = ExitCode.SUCCESS
     else:
         with open(tracefile_name, 'r') as tracefile:
             print(tracefile.read())
         check_fail_message(directory)
-        return
+        exit_code = ExitCode.TEST_FAILURE
+    return exit_code
 
 
 # Function dealing with parsing of arguments, getting everything set up and
@@ -494,7 +564,7 @@ def main():
 
     # Clean up from past runs if requested
     if args.makeclean:
-        print("Running (recursive) make clean in", *abs_base_dirs)
+        print("Running (recursive) 'make clean' in", *abs_base_dirs)
         for directory in abs_base_dirs:
             # Make clean in "directory" with stdout thrown away.
             subp.check_call(['make', 'clean', '-k',
@@ -509,16 +579,24 @@ def main():
     f = pt(dispatch_dir, features=oomph_features, just_build=args.just_build)
 
     if args.serial_mode:
-        list(map(f, validation_dirs))  # list forces evaluation of the map
+        # list forces evaluation of the map
+        test_results = list(map(f, validation_dirs))
     else:
-        # Run it in parallel.
-        Pool(processes=int(args.ncores)).map(f, validation_dirs, 1)
-        # Set chunksize to 1 (i.e. each "make check" call is in its own "chunk
-        # of work") to avoid the situation where multiple slow "make check"s
-        # end up in the same chunk and we have to wait ages for it to finish.
+        # Run it in parallel, using a context manager to safely handle the
+        # destruction of any allocated resources
+        with Pool(processes=int(args.ncores)) as pool:
+            # Set chunksize to 1 (i.e. each "make check" call is in its own
+            # "chunk of work") to avoid the situation where multiple slow "make
+            # check"s end up in the same chunk and we have to wait ages for it
+            # to finish
+            test_results = pool.map(f, validation_dirs, 1)
 
-    # Done!
-    return 0
+    # Stats collection: count the number of passes/fails
+    print_results_summary(test_results)
+
+    # Done! If any of the tests returned a build or test failure exit code, then
+    # return a non-zero exit code here!
+    return get_overall_self_test_exit_code(test_results)
 
 
 # If this script is run from a shell then run main() and return the result.

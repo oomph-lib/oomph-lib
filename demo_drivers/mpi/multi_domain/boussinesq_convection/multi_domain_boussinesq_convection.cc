@@ -52,7 +52,7 @@ namespace Global_Physical_Variables
  /// 1/Prandtl number
  double Inverse_Prandtl=1.0;
 
- /// \short Rayleigh number, set to be greater than 
+ /// Rayleigh number, set to be greater than 
  /// the threshold for linear instability
  double Rayleigh = 1800.0;
 
@@ -61,9 +61,9 @@ namespace Global_Physical_Variables
   
 } // end_of_namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D Convection  problem on two rectangular domains, discretised 
@@ -76,13 +76,13 @@ class ConvectionProblem : public Problem
 
 public:
 
- ///Constructor
+ /// Constructor
  ConvectionProblem();
 
  /// Destructor. Empty
  ~ConvectionProblem() {}
 
- /// \short Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
@@ -99,14 +99,14 @@ public:
     <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
   }
 
- /// \short Actions before the timestep (update the the time-dependent 
+ /// Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
   {
    set_boundary_conditions(time_pt()->time());
   }
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -115,19 +115,19 @@ public:
     fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
 
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution();
 
- /// \short Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
- /// \short Access function to the Navier-Stokes mesh
+ /// Access function to the Navier-Stokes mesh
  RectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt() 
   {
    return dynamic_cast<RectangularQuadMesh<NST_ELEMENT>*>(Nst_mesh_pt);
   }
 
- /// \short Access function to the Advection-Diffusion mesh
+ /// Access function to the Advection-Diffusion mesh
  RectangularQuadMesh<AD_ELEMENT>* adv_diff_mesh_pt() 
   {
    return dynamic_cast<RectangularQuadMesh<AD_ELEMENT>*>(Adv_diff_mesh_pt);
@@ -149,7 +149,7 @@ protected:
 }; // end of problem class
 
 //===========start_of_constructor=========================================
-/// \short Constructor for convection problem
+/// Constructor for convection problem
 //========================================================================
 template<class NST_ELEMENT,class AD_ELEMENT>
 ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()

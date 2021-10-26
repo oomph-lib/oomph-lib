@@ -84,7 +84,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Assembles a DoubleVector with a distribution dist and coefficients
+  /// Assembles a DoubleVector with a distribution dist and coefficients
   /// taken from the vector v.
   /// Note. The vector v MUST be of length nrow()
   //============================================================================
@@ -100,15 +100,25 @@ namespace oomph
     // Set the distribution
     this->build_distribution(dist_pt);
 
-    // use the initialise method to populate the vector
-    this->initialise(v);
+    // update the values
+    if (dist_pt->built())
+    {
+      // re-allocate memory which was deleted by clear()
+      unsigned nrow_local = this->nrow_local();
+      Values_pt = new double[nrow_local];
 
-    // indicate that its built
-    Built = true;
+      // use the initialise method to populate the vector
+      this->initialise(v);
+      Built = true;
+    }
+    else
+    {
+      Built = false;
+    }
   }
 
   //============================================================================
-  /// \short initialise the whole vector with value v
+  /// initialise the whole vector with value v
   //============================================================================
   void DoubleVector::initialise(const double& v)
   {
@@ -122,7 +132,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short initialise the vector with coefficient from the vector v.
+  /// initialise the vector with coefficient from the vector v.
   /// Note: The vector v must be of length
   //============================================================================
   void DoubleVector::initialise(const Vector<double> v)
@@ -411,7 +421,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short == operator
+  /// == operator
   //============================================================================
   bool DoubleVector::operator==(const DoubleVector& v)
   {
@@ -444,7 +454,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short += operator
+  /// += operator
   //============================================================================
   void DoubleVector::operator+=(const DoubleVector& v)
   {
@@ -935,7 +945,7 @@ namespace oomph
     return sqrt(this->dot(x));
   }
 
-  /// \short output operator
+  /// output operator
   std::ostream& operator<<(std::ostream& out, const DoubleVector& v)
   {
     // Do the first value outside the loop to get the ", "s right.
@@ -956,7 +966,7 @@ namespace oomph
   namespace DoubleVectorHelpers
   {
     //===========================================================================
-    /// \short Concatenate DoubleVectors.
+    /// Concatenate DoubleVectors.
     /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
     /// build a new distribution. Otherwise we build a uniform distribution.
     ///
@@ -1355,7 +1365,7 @@ namespace oomph
     } // function concatenate
 
     //===========================================================================
-    /// \short Wrapper around the other concatenate(...) function.
+    /// Wrapper around the other concatenate(...) function.
     /// Be careful with Vector of vectors. If the DoubleVectors are resized,
     /// there could be reallocation of memory. If we wanted to use the function
     /// which takes a Vector of pointers to DoubleVectors, we would either have
@@ -1383,7 +1393,7 @@ namespace oomph
     } // function concatenate
 
     //===========================================================================
-    /// \short Split a DoubleVector into the out DoubleVectors.
+    /// Split a DoubleVector into the out DoubleVectors.
     /// Let vec_A be the in Vector, and let vec_B and vec_C be the out vectors.
     /// Then the splitting of vec_A is depicted below:
     /// vec_A: [a0  (on p0)
@@ -1779,7 +1789,7 @@ namespace oomph
     } // function split(...)
 
     //===========================================================================
-    /// \short Wrapper around the other split(...) function.
+    /// Wrapper around the other split(...) function.
     /// Be careful with Vector of vectors. If the DoubleVectors are resized,
     /// there could be reallocation of memory. If we wanted to use the function
     /// which takes a Vector of pointers to DoubleVectors, we would either have
@@ -1806,7 +1816,7 @@ namespace oomph
     } // function split(...)
 
     //===========================================================================
-    /// \short Concatenate DoubleVectors.
+    /// Concatenate DoubleVectors.
     /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
     /// build a new distribution. Otherwise a new distribution will be built
     /// using LinearAlgebraDistribution::concatenate(...).
@@ -2012,7 +2022,7 @@ namespace oomph
     } // function concatenate_without_communication
 
     //===========================================================================
-    /// \short Wrapper around the other concatenate_without_communication(...)
+    /// Wrapper around the other concatenate_without_communication(...)
     /// function.
     /// Be careful with Vector of vectors. If the DoubleVectors are resized,
     /// there could be reallocation of memory. If we wanted to use the function
@@ -2043,7 +2053,7 @@ namespace oomph
     } // function concatenate_without_communication
 
     //===========================================================================
-    /// \short Split a DoubleVector into the out DoubleVectors.
+    /// Split a DoubleVector into the out DoubleVectors.
     /// Data stays on its current processor, no data is sent between processors.
     /// This results in our vectors which are a permutation of the in vector.
     ///
@@ -2189,7 +2199,7 @@ namespace oomph
     } // function split_distribution_vector
 
     //===========================================================================
-    /// \short Wrapper around the other split_without_communication(...)
+    /// Wrapper around the other split_without_communication(...)
     /// function.
     /// Be careful with Vector of vectors. If the DoubleVectors are resized,
     /// there could be reallocation of memory. If we wanted to use the function

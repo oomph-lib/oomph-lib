@@ -49,9 +49,9 @@
 
 namespace oomph
 {
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
 
   //========================================================================
   /// Helper namespace for MeshAsGeomObject -- its only function creates
@@ -63,7 +63,7 @@ namespace oomph
     /// Default sample point container type
     extern unsigned Default_sample_point_container_version;
 
-    /// \short "Factory" for SamplePointContainerParameters of the right type as
+    /// "Factory" for SamplePointContainerParameters of the right type as
     /// selected by Default_sample_point_container_version
     extern void create_sample_point_container_parameters(
       Mesh* mesh_pt,
@@ -72,9 +72,9 @@ namespace oomph
   } // namespace MeshAsGeomObject_Helper
 
 
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
 
 
   //========================================================================
@@ -260,13 +260,13 @@ namespace oomph
     }
 
 
-    /// \short Vector of pointers to Data items that affects the object's shape
+    /// Vector of pointers to Data items that affects the object's shape
     Vector<Data*> Geom_data_pt;
 
     /// Internal storage for the elements that constitute the object
     Vector<FiniteElement*> Sub_geom_object_pt;
 
-    /// \short Pointer to the sample point container
+    /// Pointer to the sample point container
     SamplePointContainer* Sample_point_container_pt;
 
 #ifdef OOMPH_HAS_MPI
@@ -279,12 +279,12 @@ namespace oomph
     /// Pointer to mesh
     Mesh* Mesh_pt;
 
-    /// \short Which version of the sample point container
+    /// Which version of the sample point container
     /// are we using?
     unsigned Sample_point_container_version;
 
   public:
-    /// \short Pointer to the sample point container
+    /// Pointer to the sample point container
     SamplePointContainer* sample_point_container_pt() const
     {
       return Sample_point_container_pt;
@@ -297,7 +297,7 @@ namespace oomph
     }
 
 
-    /// \short Which sample point container is used in locate zeta? (uses enum
+    /// Which sample point container is used in locate zeta? (uses enum
     /// Sample_Point_Container_Type)
     unsigned sample_point_container_version() const
     {
@@ -310,7 +310,7 @@ namespace oomph
       return Sub_geom_object_pt.size();
     }
 
-    ///\short Constructor
+    /// Constructor
     MeshAsGeomObject(Mesh* const& mesh_pt) : GeomObject()
     {
       // Create default parameters
@@ -324,7 +324,7 @@ namespace oomph
     }
 
 
-    ///\short Constructor
+    /// Constructor
     MeshAsGeomObject(
       SamplePointContainerParameters* sample_point_container_parameters_pt)
       : GeomObject()
@@ -342,16 +342,10 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    MeshAsGeomObject(const MeshAsGeomObject&)
-    {
-      BrokenCopy::broken_copy("MeshAsGeomObject");
-    }
+    MeshAsGeomObject(const MeshAsGeomObject&) = delete;
 
     /// Broken assignment operator
-    void operator=(const MeshAsGeomObject&)
-    {
-      BrokenCopy::broken_assign("MeshAsGeomObject");
-    }
+    void operator=(const MeshAsGeomObject&) = delete;
 
     /// How many items of Data does the shape of the object depend on?
     unsigned ngeom_data() const
@@ -359,14 +353,14 @@ namespace oomph
       return Geom_data_pt.size();
     }
 
-    /// \short Return pointer to the j-th Data item that the object's
+    /// Return pointer to the j-th Data item that the object's
     /// shape depends on
     Data* geom_data_pt(const unsigned& j)
     {
       return Geom_data_pt[j];
     }
 
-    /// \short Find the sub geometric object and local coordinate therein that
+    /// Find the sub geometric object and local coordinate therein that
     /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
     /// on return from this function, none of the constituent sub-objects
     /// contain the required coordinate. Following from the general
@@ -396,7 +390,7 @@ namespace oomph
       Sample_point_container_pt->locate_zeta(zeta, sub_geom_object_pt, s);
     }
 
-    /// \short Return the position as a function of the intrinsic coordinate
+    /// Return the position as a function of the intrinsic coordinate
     /// zeta. This provides an (expensive!) default implementation in which we
     /// loop over all the constituent sub-objects and check if they contain zeta
     /// and then evaluate their position() function.
@@ -407,7 +401,7 @@ namespace oomph
       position(t, zeta, r);
     }
 
-    /// \short Parametrised position on object: r(zeta). Evaluated at
+    /// Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep. This provides an (expensive!) default implementation in which
     /// we loop over all the constituent sub-objects and check if they

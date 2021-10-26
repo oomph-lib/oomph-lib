@@ -65,7 +65,7 @@ namespace oomph
                                 public virtual LineElementBase
   {
   public:
-    /// \short Shorthand for pointer to an argument-free void member
+    /// Shorthand for pointer to an argument-free void member
     /// function of the refineable element
     typedef void (RefineableQElement<1>::*VoidMemberFctPt)();
 
@@ -78,10 +78,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableQElement(const RefineableQElement<1>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQElement<1>");
-    }
+    RefineableQElement(const RefineableQElement<1>& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -89,10 +86,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const RefineableQElement<1>&)
-     {
-      BrokenCopy::broken_assign("RefineableQElement<1>");
-      }*/
+    /*void operator=(const RefineableQElement<1>&) = delete;*/
 
     /// Destructor
     virtual ~RefineableQElement()
@@ -108,7 +102,7 @@ namespace oomph
       return 2;
     }
 
-    /// \short If a neighbouring element has already created a node at a
+    /// If a neighbouring element has already created a node at a
     /// position corresponding to the local fractional position within the
     /// present element, s_fraction, return a pointer to that node. If
     /// not, return NULL (0). If the node is on a periodic boundary the
@@ -116,7 +110,7 @@ namespace oomph
     Node* node_created_by_neighbour(const Vector<double>& s_fraction,
                                     bool& is_periodic);
 
-    /// \short If a neighbouring element has already created a node at a
+    /// If a neighbouring element has already created a node at a
     /// position corresponding to the local fractional position within the
     /// present element, s_fraction, return a pointer to that node. If
     /// not, return NULL (0). If the node is on a periodic boundary the
@@ -130,7 +124,7 @@ namespace oomph
       return 0;
     }
 
-    /// \short Build the element, i.e. give it nodal positions, apply BCs,
+    /// Build the element, i.e. give it nodal positions, apply BCs,
     /// etc. Pointers to any new nodes will be returned in new_node_pt.
     /// If it is open, the positions of the new nodes will be written to
     /// the file stream new_nodes_file.
@@ -139,7 +133,7 @@ namespace oomph
                        bool& was_already_built,
                        std::ofstream& new_nodes_file);
 
-    /// \short Check the integrity of the element: ensure that the position
+    /// Check the integrity of the element: ensure that the position
     /// and values are continuous across the element edges.
     void check_integrity(double& max_error);
 
@@ -162,11 +156,11 @@ namespace oomph
     void setup_hanging_nodes(Vector<std::ofstream*>& output_stream) {}
 
   protected:
-    /// \short Coincidence between son nodal points and father boundaries:
+    /// Coincidence between son nodal points and father boundaries:
     /// Father_bound[node_1d](jnod_son,son_type) = {L/R/OMEGA}
     static std::map<unsigned, DenseMatrix<int>> Father_bound;
 
-    /// \short Setup static matrix for coincidence between son nodal points
+    /// Setup static matrix for coincidence between son nodal points
     /// and father boundaries
     void setup_father_bounds();
 
@@ -210,28 +204,22 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableSolidQElement(const RefineableSolidQElement<1>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableSolidQElement<1>");
-    }
+    RefineableSolidQElement(const RefineableSolidQElement<1>& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const RefineableSolidQElement<1>&)
-     {
-      BrokenCopy::broken_assign("RefineableSolidQElement<1>");
-      }*/
+    /*void operator=(const RefineableSolidQElement<1>&) = delete;*/
 
     /// Virtual Destructor
     virtual ~RefineableSolidQElement() {}
 
 
-    /// \short Final over-ride: Use version in QSolidElementBase
+    /// Final over-ride: Use version in QSolidElementBase
     void set_macro_elem_pt(MacroElement* macro_elem_pt)
     {
       QSolidElementBase::set_macro_elem_pt(macro_elem_pt);
     }
 
-    /// \short Final over-ride: Use version in QSolidElementBase
+    /// Final over-ride: Use version in QSolidElementBase
     void set_macro_elem_pt(MacroElement* macro_elem_pt,
                            MacroElement* undeformed_macro_elem_pt)
     {
@@ -239,14 +227,14 @@ namespace oomph
                                            undeformed_macro_elem_pt);
     }
 
-    /// \short Use the generic finite difference routine defined in
+    /// Use the generic finite difference routine defined in
     /// RefineableSolidElement to calculate the Jacobian matrix
     void get_jacobian(Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       RefineableSolidElement::get_jacobian(residuals, jacobian);
     }
 
-    /// \short Build the element, i.e. give it nodal positions, apply BCs, etc.
+    /// Build the element, i.e. give it nodal positions, apply BCs, etc.
     /// Incl. documention into new_nodes_file
     // NOTE: FOR SOME REASON THIS NEEDS TO LIVE IN *.H TO WORK ON INTEL
     void build(Mesh*& mesh_pt,

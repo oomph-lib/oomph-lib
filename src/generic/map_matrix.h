@@ -112,10 +112,7 @@ namespace oomph
     MapMatrixMixed(){};
 
     /// Broken assignment operator
-    void operator=(const MapMatrixMixed&)
-    {
-      BrokenCopy::broken_assign("MapMatrixMixed");
-    }
+    void operator=(const MapMatrixMixed&) = delete;
 
     /// Typedef to keep the code more readable
     typedef std::map<KEY_TYPE_COL, VALUE_TYPE> InnerMapMixed;
@@ -224,7 +221,7 @@ namespace oomph
     }
 
 
-    /// \short Return (reference to) entry.
+    /// Return (reference to) entry.
     /// Careful: If the entry does not exist then it is created and
     /// set to zero
     VALUE_TYPE& operator()(const KEY_TYPE_ROW& i, const KEY_TYPE_COL& j)
@@ -232,7 +229,7 @@ namespace oomph
       return *entry_pt(i, j);
     }
 
-    /// \short Get an element corresponding to the key (i,j)
+    /// Get an element corresponding to the key (i,j)
     ///  Searches the container for an element with a key equivalent to
     /// (i,j) and returns the element if found, otherwise the default 0 value
     /// for the value type is returned. The container is not modified.
@@ -259,7 +256,7 @@ namespace oomph
     }
 
 
-    /// \short Dump all non-`zero' entries to file.
+    /// Dump all non-`zero' entries to file.
     /// Output is in the format
     ///   `i', `j', `entry[i][j]'
     void output(std::ostream& outfile)
@@ -294,7 +291,7 @@ namespace oomph
       }
     }
 
-    /// \short Work out number of non-`zero' entries
+    /// Work out number of non-`zero' entries
     unsigned long nnz()
     {
       // Initialise counter for # of nonzero entries
@@ -324,7 +321,7 @@ namespace oomph
       return count;
     }
 
-    /// \short Work out number of non-`zero' entries, const version
+    /// Work out number of non-`zero' entries, const version
     unsigned long nnz() const
     {
       // Initialise counter for # of nonzero entries
@@ -356,7 +353,7 @@ namespace oomph
     }
 
 
-    /// \short Work out total number of entries
+    /// Work out total number of entries
     unsigned long size()
     {
       // Initialise counter for # of nonzero entries
@@ -382,7 +379,7 @@ namespace oomph
       return count;
     }
 
-    /// \short Work out total number of entries const version
+    /// Work out total number of entries const version
     unsigned long size() const
     {
       // Initialise counter for # of nonzero entries
@@ -411,7 +408,7 @@ namespace oomph
 
 
   protected:
-    /// \short Return pointer to entry
+    /// Return pointer to entry
     VALUE_TYPE* entry_pt(const KEY_TYPE_ROW& i, const KEY_TYPE_COL& j)
     {
       // There's not a single entry in this row: Entry must be zero.
@@ -436,9 +433,9 @@ namespace oomph
   };
 
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //================================================================
@@ -559,10 +556,7 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    void operator=(const MapMatrix&)
-    {
-      BrokenCopy::broken_assign("MapMatrix");
-    }
+    void operator=(const MapMatrix&) = delete;
   };
 
 } // namespace oomph

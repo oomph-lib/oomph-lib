@@ -43,7 +43,7 @@
 namespace oomph
 {
   //=======================================================================
-  /// \short This policy class is used to associate specific bounding
+  /// This policy class is used to associate specific bounding
   /// elements with specific FluidInterface elements. It must be filled
   /// in for every class that uses the SpineUpdateFluidInterface<...>
   /// or ElasticUpdateFluidInterface<....> generic template classes.
@@ -56,7 +56,7 @@ namespace oomph
   };
 
   //======================================================================
-  /// \short This policy class is used to allow additional values to be
+  /// This policy class is used to allow additional values to be
   /// added to the nodes from new surface equations, for examples of
   /// usage see the SurfactantTransportFluidInterfaceElements.
   /// The use of this class avoids issues with calling virtual
@@ -92,7 +92,7 @@ namespace oomph
     /// Empty constructor
     FluidInterfaceAdditionalValues<ELEMENT>() {}
 
-    ///\short Specific interface that states how many additional values are
+    /// Specific interface that states how many additional values are
     /// required for the n-th node. Default is zero, but issue error_message.
     inline unsigned nadditional_values(const unsigned& n)
     {
@@ -100,7 +100,7 @@ namespace oomph
       return 0;
     }
 
-    ///\short Specify any additional index setup information that is required;
+    /// Specify any additional index setup information that is required;
     /// i.e. the look-up schemes for the additional values.
     /// Default is empty with error message
     inline void setup_equation_indices(ELEMENT* const& element_pt,
@@ -112,7 +112,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Specific policy class for the FluidInterfaceElemetnts,
+  /// Specific policy class for the FluidInterfaceElemetnts,
   /// which do not require any additional values at the nodes.
   //=====================================================================
   template<>
@@ -122,14 +122,14 @@ namespace oomph
     /// Empty constructor
     FluidInterfaceAdditionalValues<FluidInterfaceElement>() {}
 
-    ///\short Specific interface that states how many additional values are
+    /// Specific interface that states how many additional values are
     /// required for the n-th node. No additional values
     inline unsigned nadditional_values(const unsigned& n)
     {
       return 0;
     }
 
-    ///\short Specify any additional index setup information that is required;
+    /// Specify any additional index setup information that is required;
     /// i.e. the look-up schemes for the additional values.
     /// Empty
     inline void setup_equation_indices(FluidInterfaceElement* const& element_pt,
@@ -143,7 +143,7 @@ namespace oomph
   //---------------------------------------------------------------------
 
   //======================================================================
-  /// \short Generic Spine node update interface template class that can
+  /// Generic Spine node update interface template class that can
   /// be combined with a given surface equations class and surface
   /// derivative class to provide
   /// a concrete implementation of any surface element that uses spines.
@@ -155,7 +155,7 @@ namespace oomph
       public DERIVATIVE_CLASS
   {
   private:
-    /// \short In spine elements, the kinematic condition is the equation
+    /// In spine elements, the kinematic condition is the equation
     /// used to determine the unknown spine heights. Overload the
     /// function accordingly
     int kinematic_local_eqn(const unsigned& n)
@@ -163,7 +163,7 @@ namespace oomph
       return this->spine_local_eqn(n);
     }
 
-    /// \short Hijacking the kinematic condition corresponds to hijacking the
+    /// Hijacking the kinematic condition corresponds to hijacking the
     /// variables associated with the spine heights.
     void hijack_kinematic_conditions(const Vector<unsigned>& bulk_node_number)
     {
@@ -178,7 +178,7 @@ namespace oomph
     }
 
   protected:
-    ///\short Fill in the specific surface derivative calculations
+    /// Fill in the specific surface derivative calculations
     /// by calling the appropriate class function
     double compute_surface_derivatives(
       const Shape& psi,
@@ -198,7 +198,7 @@ namespace oomph
 
 
   public:
-    /// \short Constructor, the arguments are a pointer to the  "bulk" element
+    /// Constructor, the arguments are a pointer to the  "bulk" element
     /// and the index of the face to be created
     SpineUpdateFluidInterfaceElement(FiniteElement* const& element_pt,
                                      const int& face_index,
@@ -344,7 +344,7 @@ namespace oomph
     }
 
 
-    /// \short Create an "bounding" element of the type
+    /// Create an "bounding" element of the type
     /// specified by the BoundingElementType policy class
     /// Here, this allows
     /// the application of a contact angle boundary condition on the
@@ -469,7 +469,7 @@ namespace oomph
       this->fill_in_jacobian_from_geometric_data(jacobian);
     }
 
-    /// \short Return local equation number associated with the kinematic
+    /// Return local equation number associated with the kinematic
     /// constraint for local node n
     int kinematic_local_eqn(const unsigned& n)
     {
@@ -654,16 +654,16 @@ namespace oomph
   };
 
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
   //-------------ELASTIC NODE UPDATE CLASSES-------------------------------
   //---------------------------------------------------------------------
 
 
   //=======================================================================
-  /// \short Generic Elastic node update interface template class that can
+  /// Generic Elastic node update interface template class that can
   /// be combined with a given surface equations class and surface derivative
   /// class to provide a concrete implementation of any surface element
   /// that uses elastic node updates.
@@ -675,19 +675,19 @@ namespace oomph
       public DERIVATIVE_CLASS
   {
   private:
-    /// \short Storage for the location of the Lagrange multiplier
+    /// Storage for the location of the Lagrange multiplier
     /// (If other additional values have been added we need
     /// to add the Lagrange multiplier at the end)
     Vector<unsigned> Lagrange_index;
 
-    /// \short Return the index at which the lagrange multiplier is
+    /// Return the index at which the lagrange multiplier is
     /// stored at the n-th node
     inline unsigned lagrange_index(const unsigned& n)
     {
       return this->Lagrange_index[n];
     }
 
-    /// \short Equation number of the kinematic BC associated with node j.
+    /// Equation number of the kinematic BC associated with node j.
     /// (This is the equation for the Lagrange multiplier)
     inline int kinematic_local_eqn(const unsigned& n)
     {
@@ -695,7 +695,7 @@ namespace oomph
       return this->nodal_local_eqn(n, this->lagrange_index(n));
     }
 
-    /// \short Hijacking the kinematic condition corresponds to hijacking the
+    /// Hijacking the kinematic condition corresponds to hijacking the
     /// variables associated with the Lagrange multipliers that are assigned
     /// on construction of this element.
     void hijack_kinematic_conditions(const Vector<unsigned>& bulk_node_number)
@@ -711,7 +711,7 @@ namespace oomph
     }
 
   protected:
-    ///\short Fill in the specific surface derivative calculations
+    /// Fill in the specific surface derivative calculations
     /// by calling the appropriate function from the derivative class
     double compute_surface_derivatives(
       const Shape& psi,
@@ -731,7 +731,7 @@ namespace oomph
 
 
   public:
-    /// \short Constructor, pass a pointer to the bulk element and the face
+    /// Constructor, pass a pointer to the bulk element and the face
     /// index of the bulk element to which the element is to be attached to.
     /// The optional identifier can be used
     /// to distinguish the additional nodal value (Lagr mult) created by
@@ -816,7 +816,7 @@ namespace oomph
       interface_additional_values_pt = 0;
     }
 
-    /// \short The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     double zeta_nodal(const unsigned& n,
@@ -870,7 +870,7 @@ namespace oomph
     }
 
 
-    /// \short Helper function to calculate the additional contributions
+    /// Helper function to calculate the additional contributions
     /// to be added at each integration point. This deals with
     /// Lagrange multiplier contribution, as well as any
     /// additional contributions by the other equations.
@@ -953,7 +953,7 @@ namespace oomph
     }
 
 
-    /// \short Create an "bounding" element (here actually a 2D line element
+    /// Create an "bounding" element (here actually a 2D line element
     /// of type ElasticLineFluidInterfaceBoundingElement<ELEMENT> that allows
     /// the application of a contact angle boundary condition on the
     /// the specified face.
@@ -1046,14 +1046,14 @@ namespace oomph
     Vector<unsigned> Lagrange_index;
 
   public:
-    ///\short Set the Id and offset
+    /// Set the Id and offset
     void set_lagrange_index(const Vector<unsigned>& lagrange_index)
     {
       Lagrange_index = lagrange_index;
     }
 
 
-    /// \short Specify the value of nodal zeta from the face geometry
+    /// Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
@@ -1133,7 +1133,7 @@ namespace oomph
     Vector<unsigned> Lagrange_index;
 
   public:
-    ///\short Set the Id
+    /// Set the Id
     void set_lagrange_index(const Vector<unsigned>& lagrange_index)
     {
       Lagrange_index = lagrange_index;
@@ -1146,7 +1146,7 @@ namespace oomph
     {
     }
 
-    /// \short Specify the value of nodal zeta from the face geometry
+    /// Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default

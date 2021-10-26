@@ -58,21 +58,15 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableLineMesh(const RefineableLineMesh& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableLineMesh");
-    }
+    RefineableLineMesh(const RefineableLineMesh& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableLineMesh&)
-    {
-      BrokenCopy::broken_assign("RefineableLineMesh");
-    }
+    void operator=(const RefineableLineMesh&) = delete;
 
     /// Destructor:
     virtual ~RefineableLineMesh() {}
 
-    /// \short Set up the tree forest associated with the Mesh.
+    /// Set up the tree forest associated with the Mesh.
     /// Forwards call to setup_binary_tree_forest().
     virtual void setup_tree_forest()
     {

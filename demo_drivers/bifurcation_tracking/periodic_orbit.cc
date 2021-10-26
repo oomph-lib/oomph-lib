@@ -82,10 +82,10 @@ public virtual PeriodicOrbitBaseElement
  //Set the pointer
  Vector<double>* &p_pt() {return P_pt;}
 
- ///Switch
+ /// Switch
 
 
- ///Interface to get the current value of all (internal and shared) unknowns
+ /// Interface to get the current value of all (internal and shared) unknowns
  void get_non_external_dofs(Vector<double> &u)
   {
    Vector<double> val(3);
@@ -100,7 +100,7 @@ public virtual PeriodicOrbitBaseElement
   }
 
 
- ///Interface to get the current value of the time derivative of
+ /// Interface to get the current value of the time derivative of
  /// all (internal and shared) unknowns
  void get_non_external_ddofs_dt(Vector<double> &du_dt)
   {
@@ -115,7 +115,7 @@ public virtual PeriodicOrbitBaseElement
     }
   }
 
- ///Get the inner product matrix
+ /// Get the inner product matrix
  void get_inner_product_matrix(DenseMatrix<double> &inner_product)
   {
    inner_product.initialise(0.0);
@@ -155,7 +155,7 @@ public virtual PeriodicOrbitBaseElement
    fill_in_generic_residual_contribution(residuals,jacobian,mass_matrix,2);
   }
  
- /// \short Calculate the elemental contributions to the global 
+ /// Calculate the elemental contributions to the global 
  /// residual vector for the weak form of the Poisson equation
  void fill_in_generic_residual_contribution(Vector<double> &residuals,
                                             DenseMatrix<double> &jacobian,

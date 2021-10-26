@@ -48,7 +48,7 @@ namespace oomph
                                public virtual RefineableTetMeshBase
   {
   public:
-    /// \short Build mesh, based on a TetMeshFacetedClosedSurface that specifies
+    /// Build mesh, based on a TetMeshFacetedClosedSurface that specifies
     /// the outer boundary of the domain and any number of internal
     /// closed curves, specified by TetMeshFacetedSurfaces.
     /// Also specify target volume for uniform element size.
@@ -58,13 +58,15 @@ namespace oomph
       const double& element_volume,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& use_attributes = false,
-      const bool& split_corner_elements = false)
+      const bool& split_corner_elements = false,
+      Vector<double>* const& target_element_volume_in_region_pt = nullptr)
       : TetgenMesh<ELEMENT>(outer_boundary_pt,
                             internal_closed_surface_pt,
                             element_volume,
                             time_stepper_pt,
                             use_attributes,
-                            split_corner_elements),
+                            split_corner_elements,
+                            target_element_volume_in_region_pt),
         Corner_elements_must_be_split(split_corner_elements)
     {
       // Initialise the data associated with adaptation
@@ -73,7 +75,7 @@ namespace oomph
 
 
   protected:
-    /// \short Specialised constructor used during adaptation only.
+    /// Specialised constructor used during adaptation only.
     /// Element sizes are specified by vector tetgen_io is passed in
     /// from previous mesh (is then modified to build new mesh)
     /// Ditto with use_attributes, which comes from the previous mesh
@@ -189,7 +191,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Unrefine mesh uniformly: Return 0 for success,
+    /// Unrefine mesh uniformly: Return 0 for success,
     /// 1 for failure (if unrefinement has reached the coarsest permitted
     /// level)
     unsigned unrefine_uniformly()
@@ -245,22 +247,22 @@ namespace oomph
     // Update the inner hole
     void surface_remesh_for_inner_hole_boundaries();
 
-    /// \short Snap the boundary nodes onto any curvilinear boundaries
+    /// Snap the boundary nodes onto any curvilinear boundaries
     void snap_nodes_onto_boundary(RefineableTetgenMesh<ELEMENT>*& new_mesh_pt,
                                   const unsigned& b);
 
     /// Disable projection of solution onto new mesh during adaptation
     bool Projection_is_disabled;
 
-    /// \short Corner elements which have all of their nodes on the outer
+    /// Corner elements which have all of their nodes on the outer
     /// boundary are to be split into elements which have some non-boundary
     /// nodes
     bool Corner_elements_must_be_split;
   };
 
-  /////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////////
 
 
   //=========================================================================
@@ -272,7 +274,7 @@ namespace oomph
       public virtual SolidMesh
   {
   public:
-    /// \short Build mesh, based on closed curve that specifies
+    /// Build mesh, based on closed curve that specifies
     /// the outer boundary of the domain and any number of internal
     /// closed curves. Specify target area for uniform element size.
     RefineableSolidTetgenMesh(
@@ -301,7 +303,7 @@ namespace oomph
     }
 
 
-    /// \short Build mesh from specified triangulation and
+    /// Build mesh from specified triangulation and
     /// associated target areas for elements in it.
     RefineableSolidTetgenMesh(
       const Vector<double>& target_volume,

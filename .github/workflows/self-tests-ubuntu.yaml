@@ -4,21 +4,47 @@ on: push
 
 jobs:
   build:
+    strategy:
+      fail-fast: false
+      matrix:
+        # Each map in the 'mpi_options' array contains a flag indicating whether
+        # to enable MPI and the name of the configuration file required for the
+        # MPI case, respectively
+        mpi_options: [
+          {enable: false, config_file: default},
+          {enable: true,  config_file: mpi_default_ci}
+        ]
+
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v2
 
-    - name: Install requirements
-      run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++
+      - name: Install requirements
+        run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++
 
-    - name: Build
-      run: ./non_interactive_autogen.sh -s -j$(nproc)
+      - name: Install MPI requirements (if required)
+        if: ${{ matrix.mpi_options.enable == true }}
+        run: sudo apt-get install openmpi-bin libopenmpi-dev
 
-    - name: Validate
-      run: ./bin/parallel_self_test.py
+      - name: Build
+        run: |
+          config_file=config/configure_options/${{ matrix.mpi_options.config_file }};
+          ./non_interactive_autogen.sh -s -j$(nproc) -c $config_file
 
-    - name: Upload validation log file
-      uses: actions/upload-artifact@v2
-      with:
-        name: ubuntu-latest validation log
-        path: ./validation.log
+      # Continue running even if the test fails so that the validation.log can be
+      # uploaded and reviewed later on
+      - name: Validate
+        id: self_tests
+        run: ./bin/parallel_self_test.py
+        continue-on-error: true
+
+      - name: Upload validation log file
+        uses: actions/upload-artifact@v2
+        with:
+          name: validation-${{ runner.os }}-MPI_${{ matrix.mpi_options.enable }}.log
+          path: ./validation.log
+
+      - name: Propagate self-test status
+        if: steps.self_tests.outcome == 'failure'
+        run: exit 1

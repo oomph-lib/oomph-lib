@@ -77,9 +77,9 @@ namespace Boundary_Items
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 
@@ -100,7 +100,7 @@ public:
  ~SphericalSpinUpProblem();
 
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -111,16 +111,16 @@ public:
 
 
 
- /// \short Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions();
 
  /// Update the after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Update the problem specs before solve
+ /// Update the problem specs before solve
  void actions_before_newton_solve(){}
   
- /// \short Update the problem specs before next timestep: 
+ /// Update the problem specs before next timestep: 
  /// Set Dirichlet boundary conditions from exact solution.
  void actions_before_implicit_timestep() {set_boundary_conditions();}
 
@@ -162,7 +162,7 @@ public:
 
 private:
 
- ///Geometric object that defines the boundary of the domain
+ /// Geometric object that defines the boundary of the domain
  Ellipse* Curved_boundary_pt;
 
 }; // end_of_problem_class
@@ -174,7 +174,7 @@ private:
 template<class ELEMENT>
 SphericalSpinUpProblem<ELEMENT>::SphericalSpinUpProblem()
 { 
- ///Build the geometric object that describes the outer wall
+ /// Build the geometric object that describes the outer wall
  Curved_boundary_pt = new Ellipse(1.0,1.0);
  
  // Allocate the timestepper -- this constructs the Problem's 
@@ -276,7 +276,7 @@ SphericalSpinUpProblem<ELEMENT>::SphericalSpinUpProblem()
 
 
 //=========start of actions_before_implicit_timestep======================
-/// \short Actions before timestep: update the domain, then reset the 
+/// Actions before timestep: update the domain, then reset the 
 /// boundary conditions for the current time.
 //========================================================================
 template<class ELEMENT>
@@ -464,9 +464,9 @@ void SphericalSpinUpProblem<ELEMENT>::timestep(const double &dt,
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main======================================================
