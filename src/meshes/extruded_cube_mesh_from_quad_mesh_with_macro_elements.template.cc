@@ -648,7 +648,8 @@ namespace oomph
                 Node* cube_node_pt = 0;
 
                 //--------------------------------------------------------------
-                /// / Check if the node that we're about to construct lies on the
+                /// / Check if the node that we're about to construct lies on
+                /// the
                 // Front or back face of the mesh. The node can only lie on the
                 // front face if we're on the first element slice and first node
                 // slice. In contrast, the node can only lie on the back face if
