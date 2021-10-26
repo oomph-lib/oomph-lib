@@ -118,13 +118,28 @@ This page shows random figures from oomph-lib's documentation.
 Click on the figure to find out what it's all about. 
 Reload the page to load a different figure.
 
-<!-- jQuery for Bootstrap and Doxygen -->
-  <script src="../js/jquery-1.12.0.min.js"></script>
-  <!-- Minified boostrap plugins-->
-  <script src="../js/bootstrap.js"></script>
+<h2 id="random_picture_title" style="text-align:center;">$title</h2>
+<a id="random_picture_link">
+  <img id="random_picture_src" class="img-responsive centered">
+</a>
 
-<script language="JavaScript" src="https://matthiasheilmanchester.github.io/oomph-lib/doc/picture_show/rotate_gifs.php">
-</script>
+<!-- jQuery for Bootstrap and Doxygen -->
+<script src="../js/jquery-1.12.0.min.js"></script>
+<!-- Minified boostrap plugins-->
+<script src="../js/bootstrap.js"></script>
+
+<script src="rotate_gifs.js"></script>
+
+<script>
+  // Pick random figure
+  var figure = figures[Math.floor(Math.random() * figures.length)]
+
+  // Assign properties to HTML
+  document.getElementById("random_picture_title").innerHTML = figure.title;
+  document.getElementById("random_picture_src").src = figure.gif;
+  document.getElementById("random_picture_link").href = figure.link;
+</script> 
+
 </div>
 
 
