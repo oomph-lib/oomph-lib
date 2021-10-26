@@ -45,9 +45,9 @@
 using namespace std;
 using namespace oomph;
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -56,7 +56,7 @@ using namespace oomph;
 namespace Global_Parameters
 {
 
- /// \short Body force
+ /// Body force
  void body_force(const Vector<double>& x,
                  Vector<std::complex<double> >& b)
  {
@@ -112,7 +112,7 @@ namespace Global_Parameters
   N_y_top_pml    = N_y_top_pml    * N_pml_multiplier;
   N_y_bottom_pml = N_y_bottom_pml * N_pml_multiplier;
 
-  ///Adjust physical size of PML layers, set to be equal for all layers
+  /// Adjust physical size of PML layers, set to be equal for all layers
   Width_x_right_pml  = Width_x_right_pml  * L_pml_multiplier;
   Width_x_left_pml   = Width_x_left_pml   * L_pml_multiplier;
   Width_y_top_pml    = Width_y_top_pml    * L_pml_multiplier;
@@ -322,7 +322,7 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
  unsigned nel=this->mesh_pt()->nelement();
  for (unsigned e=0;e<nel;e++)
   {     
-   /// \short Upcast from GeneralisedElement to time harmonic 
+   /// Upcast from GeneralisedElement to time harmonic 
    /// linear elasticity bulk element
    PMLTimeHarmonicLinearElasticityEquations<2> *el_pt = 
     dynamic_cast<PMLTimeHarmonicLinearElasticityEquations<2>*>

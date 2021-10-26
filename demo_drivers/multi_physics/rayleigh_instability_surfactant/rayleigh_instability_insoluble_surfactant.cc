@@ -82,16 +82,16 @@ namespace Global_Physical_Variables
  /// Free surface cosine deformation parameter
  double Epsilon = 1.0e-3;
 
- /// \short Surface Elasticity number (weak case)
+ /// Surface Elasticity number (weak case)
  double Beta = 3.6e-3;
 
- /// \short Surface Peclet number
+ /// Surface Peclet number
  double Peclet_S = 4032.0;
 
- /// \short Sufrace Peclet number multiplied by Strouhal number
+ /// Sufrace Peclet number multiplied by Strouhal number
  double Peclet_St_S = 1.0; 
  
- /// \short Pvd file -- a wrapper for all the different
+ /// Pvd file -- a wrapper for all the different
  /// vtu output files plus information about continuous time
  /// to facilitate animations in paraview
  ofstream Pvd_file;
@@ -104,12 +104,12 @@ namespace oomph
 {
 
 //==================================================================
-///Spine-based Marangoni surface tension elements that add
-///a linear dependence on concentration
-///of a surface chemical to the surface tension, 
-///which decreases with increasing concentration.
-///The non-dimensionalisation is the same as Campana et al (2004)
-///but we may wish to revisit this.
+/// Spine-based Marangoni surface tension elements that add
+/// a linear dependence on concentration
+/// of a surface chemical to the surface tension, 
+/// which decreases with increasing concentration.
+/// The non-dimensionalisation is the same as Campana et al (2004)
+/// but we may wish to revisit this.
 //=================================================================
 template<class ELEMENT>
 class SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement : 
@@ -134,7 +134,7 @@ private:
 
 protected:
 
- ///Get the surfactant concentration
+ /// Get the surfactant concentration
  double interpolated_C(const Vector<double> &s)
   {
      //Find number of nodes
@@ -210,7 +210,7 @@ protected:
    return (1.0 - Beta*(C-1.0));
   } // End of sigma
 
- /// \short Fill in the contribution to the residuals
+ /// Fill in the contribution to the residuals
  /// Calculate the contribution to the jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,DenseMatrix<double> &jacobian)
   {
@@ -273,7 +273,7 @@ protected:
   }
 
  
-  /// \short Overload the Helper function to calculate the residuals and 
+  /// Overload the Helper function to calculate the residuals and 
   /// jacobian entries. This particular function ensures that the
   /// additional entries are calculated inside the integration loop
   void add_additional_residual_contributions_interface(Vector<double> &residuals, DenseMatrix<double> &jacobian,
@@ -527,8 +527,8 @@ protected:
   }
 
 public:
- ///Constructor that passes the bulk element and face index down
- ///to the underlying
+ /// Constructor that passes the bulk element and face index down
+ /// to the underlying
   SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement(FiniteElement* const &element_pt, const int &face_index) : SpineAxisymmetricFluidInterfaceElement<ELEMENT>
 														       (element_pt,face_index)
   {
@@ -554,22 +554,22 @@ public:
    C_index = this->node_pt(0)->nvalue()-1;
 }
  
- ///Return the Elasticity number
+ /// Return the Elasticity number
   double beta() {return *Beta_pt;}
 
- ///Return the surface peclect number
+ /// Return the surface peclect number
  double peclet_s() {return *Peclet_S_pt;}
  
- ///Return the surface peclect strouhal number
+ /// Return the surface peclect strouhal number
  double peclet_strouhal_s() {return *Peclet_Strouhal_S_pt;}
  
- ///Access function for pointer to the Elasticity number
+ /// Access function for pointer to the Elasticity number
  double* &beta_pt() {return Beta_pt;}
  
- ///Access function for pointer to the surface Peclet number
+ /// Access function for pointer to the surface Peclet number
  double* &peclet_s_pt() {return Peclet_S_pt;}
  
- ///Access function for pointer to the surface Peclet x Strouhal number
+ /// Access function for pointer to the surface Peclet x Strouhal number
  double* &peclet_strouhal_s_pt() {return Peclet_Strouhal_S_pt;}
  
  void output(std::ostream &outfile, const unsigned &n_plot)
@@ -623,7 +623,7 @@ public:
   }
 
  
- /// \short Compute the concentration intergated over the area
+ /// Compute the concentration intergated over the area
  double integrate_c() const
   {
    //Find out how many nodes there are
@@ -712,7 +712,7 @@ class MyHorizontalSingleLayerSpineMesh :
 
 public:
 
- /// \short Constructor: Pass number of elements in x-direction, number of
+ /// Constructor: Pass number of elements in x-direction, number of
  /// elements in y-direction, radial extent, axial length , and pointer 
  /// to timestepper (defaults to Steady timestepper)
  MyHorizontalSingleLayerSpineMesh(const unsigned &nx, 
@@ -723,7 +723,7 @@ public:
                                   &Mesh::Default_TimeStepper) :
   HorizontalSingleLayerSpineMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt) {}
 
- /// \short Node update function assumed spines rooted at the wall
+ /// Node update function assumed spines rooted at the wall
  /// fixed to be at r=1 and directed inwards to r=0.
  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
@@ -839,10 +839,10 @@ public:
   }
 
 
- /// \short Access function for the specific mesh
+ /// Access function for the specific mesh
  MyHorizontalSingleLayerSpineMesh<ELEMENT>*  Bulk_mesh_pt; 
 
- /// \short Mesh for the free surface (interface) elements
+ /// Mesh for the free surface (interface) elements
  Mesh* Interface_mesh_pt;
 
  /// Doc the solution
@@ -1244,9 +1244,9 @@ unsteady_run(const double &t_max, const double &dt)
 } // End of unsteady_run
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main=========================================================

@@ -71,9 +71,9 @@ namespace Boundary_Items
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 
@@ -92,7 +92,7 @@ public:
  /// Destructor to clean up memory
  ~SphericalSpinUpProblem();
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -105,10 +105,10 @@ public:
  /// Update the after solve (empty)
  void actions_after_newton_solve(){}
  
- /// \short Update the problem specs before solve
+ /// Update the problem specs before solve
  void actions_before_newton_solve(){}
  
- /// \short Update the problem specs before next timestep: 
+ /// Update the problem specs before next timestep: 
  /// Set Dirichlet boundary conditions from exact solution.
  void actions_before_implicit_timestep();
  
@@ -256,7 +256,7 @@ SphericalSpinUpProblem<ELEMENT>::SphericalSpinUpProblem()
 
 
 //=========start of actions_before_implicit_timestep======================
-/// \short Actions before timestep: update the domain, then reset the 
+/// Actions before timestep: update the domain, then reset the 
 /// boundary conditions for the current time.
 //========================================================================
 template<class ELEMENT>
@@ -457,9 +457,9 @@ void SphericalSpinUpProblem<ELEMENT>::timestep(const double &dt,
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main======================================================

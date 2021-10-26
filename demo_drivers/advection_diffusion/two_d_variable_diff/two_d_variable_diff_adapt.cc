@@ -114,14 +114,14 @@ namespace RachelsAdvectionDiffusion
   wind[1]= -pi*sin(pi*x[1])*cos(pi*x[0]);
  }
 
- ///Conserved bit (the swiming velocity)
+ /// Conserved bit (the swiming velocity)
  void swimming(const Vector<double> &x, Vector<double> &swim)
  {
   swim[0] = 0.0;
   swim[1] = U;
  }
  
- ///Diffusivity tensor
+ /// Diffusivity tensor
  void diff_function(const Vector<double> &x, DenseMatrix<double> &D)
  {
   D(0,0) = D11;
@@ -132,9 +132,9 @@ namespace RachelsAdvectionDiffusion
 
 } // end of namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 
 //====== start_of_problem_class=======================================
@@ -165,7 +165,7 @@ public:
    delete this->mesh_pt();
   }
 
- /// \short Update the problem specs before solve
+ /// Update the problem specs before solve
  void actions_before_newton_solve() {} 
 
  /// Update the problem after solve (empty)
@@ -181,10 +181,10 @@ public:
    Doc_info.number()++;
   }
 
- /// \short Doc the solution.
+ /// Doc the solution.
  void doc_solution();
 
- /// \short Overloaded version of the problem's access function to 
+ /// Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -216,7 +216,7 @@ private:
 
 
 //=====start_of_constructor===============================================
-/// \short Constructor for AdvectionDiffusion problem: Pass pointer to 
+/// Constructor for AdvectionDiffusion problem: Pass pointer to 
 /// source function.
 //========================================================================
 template<class ELEMENT>

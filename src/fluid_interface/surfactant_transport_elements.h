@@ -84,7 +84,7 @@ namespace oomph
       return -this->beta();
     }
 
-    /// \short Overload the Helper function to calculate the residuals and
+    /// Overload the Helper function to calculate the residuals and
     /// jacobian entries. This particular function ensures that the
     /// additional entries are calculated inside the integration loop
     void add_additional_residual_contributions_interface(
@@ -188,12 +188,12 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
-    /// \short Compute the concentration intergated over the surface area
+    /// Compute the concentration intergated over the surface area
     double integrate_c();
   };
 
 
-  ///=============================================================================
+  /// =============================================================================
   /// This is the policy class for the surfactanttransport equations which
   /// require one additional value for the surface concentration
   //=============================================================================

@@ -23,7 +23,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Driver for a 3D navier stokes flow with tetgen
+/// Driver for a 3D navier stokes flow with tetgen
 
 //Generic routines
 #include "generic.h"
@@ -76,7 +76,7 @@ public:
    Doc_info.number()++;
   }
 
- /// \short Update the problem specs before solve 
+ /// Update the problem specs before solve 
  void actions_before_newton_solve();
 
  /// Doc the solution
@@ -224,9 +224,9 @@ void NavierStokesProblem<ELEMENT>::doc_solution()
  
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //=start_of_main=======================================================

@@ -8,12 +8,21 @@ home_dir=`pwd`
 for dir in `echo $dir_list`; do
     cd $dir
     echo "Updating Doxyfile in " `pwd`
+
+    # CHANGE FLAGS
+    #-------------
     # Keep this around (commented out) because sed syntax is clunky
     # and I can never remember it... [but see below]
     #cp Doxyfile Doxyfile.tmp
-    #sed 's/a4wide/a4/g' Doxyfile.tmp > Doxyfile
+    #sed 's/MULTILINE_CPP_IS_BRIEF = NO/MULTILINE_CPP_IS_BRIEF = YES #/g' Doxyfile.tmp > Doxyfile
+    #sed 's/ALWAYS_DETAILED_SEC    = NO/ALWAYS_DETAILED_SEC    = YES/g' Doxyfile.tmp > Doxyfile
     #rm Doxyfile.tmp
-    doxygen -u
+
+    # Update doxyfile to current version
+    #-----------------------------------
+    #doxygen -u
+
+    
     cd $home_dir
 done
 

@@ -36,9 +36,9 @@
 #include "mixed_order_petrov_galerkin_space_time_navier_stokes_elements.h"
 #include "../space_time_block_preconditioner/general_purpose_space_time_block_preconditionable_elements.h"
 
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////////
 
 namespace oomph
 {
@@ -61,7 +61,7 @@ namespace oomph
     /// Empty destructor
     ~BlockPrecQTaylorHoodMixedOrderSpaceTimeElement() {}
 
-    /// \short Overload the pure virtual base class implementation.
+    /// Overload the pure virtual base class implementation.
     /// Create a list of pairs for all unknowns in this element,
     /// so the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number

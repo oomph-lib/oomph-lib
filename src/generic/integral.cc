@@ -335,7 +335,7 @@ namespace oomph
 
   const double TGauss<1, 5>::Weight[5] = {};
 
-  //// Define the positions and weights of the 2D Gauss points for triangles
+  /// / Define the positions and weights of the 2D Gauss points for triangles
   //
   //------------------------------------------------------------
   // "Full integration" weights for linear triangles
@@ -727,7 +727,7 @@ namespace oomph
                                            2 * 0.0375097224552317};
 
   //------------------------------------------------------------
-  //// Define the positions and weights of the 3D Gauss points for tets
+  /// / Define the positions and weights of the 3D Gauss points for tets
 
   //------------------------------------------------------------
   // "Full integration" weights for linear tets

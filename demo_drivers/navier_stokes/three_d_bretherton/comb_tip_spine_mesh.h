@@ -63,7 +63,7 @@ class CombTipSpineMesh : public SpineMesh
 
 public:
 
- /// \short Constructor: Pass number of elements in x-direction, number of
+ /// Constructor: Pass number of elements in x-direction, number of
  /// The composed mesh is too complicated for giving xmin,xmax etc.. Nevertheless we keep nx, ny, nz making reference 
 //   to the elements in each direction of each cubic mesh
 
@@ -80,12 +80,12 @@ public:
 
  unsigned long ninterface_element() const {return Interface_element_pt.size();}
  
- ///Access functions for pointers to elements in bulk
+ /// Access functions for pointers to elements in bulk
  FiniteElement* &bulk_element_pt(const unsigned long &i) 
   {return Bulk_element_pt[i];}
 
 
- ///Number of elements in bulk 
+ /// Number of elements in bulk 
  unsigned long nbulk() const {return Bulk_element_pt.size();}
 
 
@@ -104,7 +104,7 @@ public:
 
 
 
- /// \short General node update function implements pure virtual function 
+ /// General node update function implements pure virtual function 
  /// defined in SpineMesh base class and performs specific node update
  /// actions:  along vertical spines
 
@@ -234,7 +234,7 @@ protected:
 
 
 
- /// \short Helper function to actually build the single-layer spine mesh 
+ /// Helper function to actually build the single-layer spine mesh 
  /// (called from various constructors)
  virtual void build_single_layer_mesh(TimeStepper* time_stepper_pt);
 
@@ -595,9 +595,9 @@ for(unsigned i = 0; i< addmesh_pt->ninterface_element(); i++)
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //Merges this boundaries of the problem mesh. Both boundaries must contain nodes exactly in the same positions and equivalent spines.
@@ -628,7 +628,7 @@ template<class ELEMENT, class INTERFACE_ELEMENT> void  CombTipSpineMesh<ELEMENT,
   
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 

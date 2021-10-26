@@ -34,14 +34,14 @@
 
 namespace oomph
 {
-  ///////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////
   // Functions for the Data class
-  ///////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////
 
   //=================================================================
-  /// \short Private function to check that the arguments are within
+  /// Private function to check that the arguments are within
   /// the range of the stored data values and timesteps.
   //=================================================================
   void Data::range_check(const unsigned& t, const unsigned& i) const
@@ -153,7 +153,7 @@ namespace oomph
   }
 
   //================================================================
-  /// \short Helper function that should be overloaded in classes
+  /// Helper function that should be overloaded in classes
   /// that contain copies of Data. The function must
   /// reset the internal pointers to the copied data. This is used
   /// when resizing data to ensure that all the pointers remain valid.
@@ -167,7 +167,7 @@ namespace oomph
   }
 
   //=======================================================================
-  /// \short Helper function that should be overloaded classes
+  /// Helper function that should be overloaded classes
   /// that contain copies of data. The function must
   /// unset (NULL out) the internal pointers to the copied data.
   /// This is used when destructing data to ensure that all pointers remain
@@ -213,7 +213,7 @@ namespace oomph
   long Data::Is_pinned = -1;
 
   //================================================================
-  /// \short Static "Magic number" to indicate values that haven't
+  /// Static "Magic number" to indicate values that haven't
   /// been classified as pinned or free
   //================================================================
   long Data::Is_unclassified = -10;
@@ -225,7 +225,7 @@ namespace oomph
   //================================================================
   long Data::Is_constrained = -2;
 
-  /// \short Static "Magic number" used in place of the equation number to
+  /// Static "Magic number" used in place of the equation number to
   /// indicate that the value is pinned, but only for the duration of a
   /// segregated solve.
   long Data::Is_segregated_solve_pinned = -3;
@@ -927,7 +927,7 @@ namespace oomph
   }
 
   //================================================================
-  /// \short Function to describe the dofs of the Data. The ostream
+  /// Function to describe the dofs of the Data. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the
@@ -1368,11 +1368,11 @@ namespace oomph
   }
 
 
-  //////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
   // Functions for the CopiedData class
-  //////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
 
 
   //================================================================
@@ -1443,11 +1443,11 @@ namespace oomph
   }
 
 
-  //////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
   // Functions for the HangInfo class
-  //////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
 
   //================================================================
   /// Check that the argument is within the range of
@@ -1514,14 +1514,14 @@ namespace oomph
     ++Nmaster;
   }
 
-  //////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
   // Functions for the Node class
-  //////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////
 
   //=================================================================
-  /// \short Private function to check that the arguments are within
+  /// Private function to check that the arguments are within
   /// the range of the stored coordinates, position types and time history
   /// values.
   //=================================================================
@@ -1859,7 +1859,7 @@ namespace oomph
   }
 
   //================================================================
-  /// \short  i-th component of time derivative (velocity) of the
+  ///  i-th component of time derivative (velocity) of the
   /// generalised position, dx(k,i)/dt. `Type': k; Coordinate direction: i.
   //================================================================
   double Node::dx_gen_dt(const unsigned& k, const unsigned& i) const
@@ -1884,7 +1884,7 @@ namespace oomph
   }
 
   //================================================================
-  /// \short  i-th component of j-th time derivative (velocity) of the
+  ///  i-th component of j-th time derivative (velocity) of the
   /// generalised position, d^jx(k,i)/dt^j. `Type': k; Coordinate direction: i.
   //================================================================
   double Node::dx_gen_dt(const unsigned& j,
@@ -2654,7 +2654,7 @@ namespace oomph
 
   //================================================================
   ///  Return the i-th component of nodal velocity: dx/dt
-  //// Use the hanging node representation if required.
+  /// / Use the hanging node representation if required.
   //================================================================
   double Node::dposition_dt(const unsigned& i) const
   {
@@ -2701,7 +2701,7 @@ namespace oomph
   }
 
   //================================================================
-  /// \short  i-th component of time derivative (velocity) of the
+  ///  i-th component of time derivative (velocity) of the
   /// generalised position, dx(k,i)/dt. `Type': k; Coordinate direction: i.
   /// Use the hanging node representation
   //================================================================
@@ -2727,7 +2727,7 @@ namespace oomph
   }
 
   //================================================================
-  /// \short  i-th component of j-th time derivative (velocity) of the
+  ///  i-th component of j-th time derivative (velocity) of the
   /// generalised position, d^jx(k,i)/dt^j. `Type': k; Coordinate direction: i.
   /// Use the hanging node representation.
   //================================================================
@@ -2880,14 +2880,14 @@ namespace oomph
 #endif
 
 
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
   // Functions for the BoundaryNodeBase class
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
 
   //==================================================================
-  /// \short Helper function that is used to turn BoundaryNodes into
+  /// Helper function that is used to turn BoundaryNodes into
   /// periodic boundary nodes by setting the data values of the nodes
   /// in the vector periodic_copies_pt to be the same as those
   /// in copied_node_pt. This function should be used when making doubly
@@ -3298,11 +3298,11 @@ namespace oomph
   }
 
 
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
   // Functions for the SolidNode class
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
 
 
   //=================================================================
@@ -3659,7 +3659,7 @@ namespace oomph
   }
 
   //================================================================
-  /// \short Function to describe the dofs of the SolidNode. The ostream
+  /// Function to describe the dofs of the SolidNode. The ostream
   /// specifies the output stream to which the description
   /// is written; the string stores the currently
   /// assembled output that is ultimately written to the

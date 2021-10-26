@@ -1994,7 +1994,7 @@ namespace oomph
 
 
   //====================================================================
-  //// Force build of templates
+  /// / Force build of templates
   //====================================================================
   template class RefineableNavierStokesEquations<2>;
   template class RefineableNavierStokesEquations<3>;

@@ -87,7 +87,7 @@ template<class ELEMENT>
    
     public:
 
-   /// \short Build mesh, based on a TetgenMeshClosedSurface that specifies
+   /// Build mesh, based on a TetgenMeshClosedSurface that specifies
    /// the outer boundary of the domain and any number of internal
    /// closed curves, also specified by TriangleMeshClosedSurfaces.
    /// Also specify target area for uniform element size.
@@ -107,7 +107,7 @@ template<class ELEMENT>
       initialise_adaptation_data();
     }
    
-   /// \short Build mesh from specified triangulation and
+   /// Build mesh from specified triangulation and
    /// associated target volumes for elements in it
    RefineableTetgenMesh(const Vector<double> &target_volume,
                         tetgenio* const &tetgen_io_pt,
@@ -173,7 +173,7 @@ template<class ELEMENT>
    /// Empty Destructor
    virtual ~RefineableTetgenMesh() {}
    
-   /// \short Problem pointer (needed for multi-domain machinery during
+   /// Problem pointer (needed for multi-domain machinery during
    /// adaptation)
    Problem*& problem_pt(){return Problem_pt;}
    
@@ -213,7 +213,7 @@ template<class ELEMENT>
    }    
    
    
-   /// \short Unrefine mesh uniformly: Return 0 for success,
+   /// Unrefine mesh uniformly: Return 0 for success,
    /// 1 for failure (if unrefinement has reached the coarsest permitted
    /// level)
    unsigned unrefine_uniformly()
@@ -231,8 +231,8 @@ template<class ELEMENT>
    
    //protected:
 
-   ///Overload the standard setup of boundary coordinates to use area
-   ///coordinates for triangles
+   /// Overload the standard setup of boundary coordinates to use area
+   /// coordinates for triangles
    void setup_boundary_coordinates_generic(const unsigned& b,
                                            const bool& switch_normal,
                                            std::ofstream& outfile)
@@ -243,7 +243,7 @@ template<class ELEMENT>
 
 
    
-   /// \short Helper function that updates the input faceted surface
+   /// Helper function that updates the input faceted surface
    /// by using the flattened elements from FaceMesh(es) that are
    /// constructed for the boundaries associated with the segments of the
    /// polygon.
@@ -254,7 +254,7 @@ template<class ELEMENT>
      //positions of the key control nodes, leaving the connectivity alone,
      //but that doesn't allow for any surface remeshing
      
-     ///List of vertex nodes
+     /// List of vertex nodes
      std::list<Node*> new_vertex_nodes;
      //List of facets and boundary ids
      std::list<std::pair<Vector<unsigned>, unsigned>  > new_facet_list;
@@ -407,7 +407,7 @@ template<class ELEMENT>
     }
 
 
-   /// \short Generate a new faceted representation of the inner hole
+   /// Generate a new faceted representation of the inner hole
    /// boundaries
    virtual void surface_remesh_for_inner_hole_boundaries()
     {
@@ -432,11 +432,11 @@ template<class ELEMENT>
     }
    
    
-   /// \short Generate a new PSLG representation of the outer boundary
+   /// Generate a new PSLG representation of the outer boundary
    //virtual void surface_remesh_for_outer_boundary();
    
    
-   /// \short Snap the boundary nodes onto any curvilinear boundaries
+   /// Snap the boundary nodes onto any curvilinear boundaries
    void snap_nodes_onto_boundary(RefineableTetgenMesh<ELEMENT>* &new_mesh_pt,
                                  const unsigned &b)
     {
@@ -597,14 +597,14 @@ template<class ELEMENT>
     this->Problem_pt=0;
    }
    
-   /// \short Build a new tetgenio object from previous TriangulateIO
+   /// Build a new tetgenio object from previous TriangulateIO
    /// based on target area for each element
    //void refine_triangulateio(tetgenio& tetgen_io, 
    //                          const Vector<double> &target_volume,
    //                          tetgenio &tetgen_refine);
    
 
-   /// \short Compute target volume based on the element's error and the
+   /// Compute target volume based on the element's error and the
    /// error target; return max edge ratio
    double compute_volume_target(const Vector<double> &elem_error,
                                 Vector<double> &target_volume)
@@ -726,7 +726,7 @@ template<class ELEMENT>
    }
 
    
-   /// \short Problem pointer (needed for multi-domain machinery during
+   /// Problem pointer (needed for multi-domain machinery during
    /// adaptation
    Problem* Problem_pt;
    
@@ -741,9 +741,9 @@ template<class ELEMENT>
    
   }; 
 
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////////////
 
 //======================================================================
 /// Adapt problem based on specified elemental error estimates
@@ -892,12 +892,12 @@ void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
     std::map<GeneralisedElement*,double> target_size_map;
 
 
-    //////////////////////////////////////////////////////////////
+    /// ///////////////////////////////////////////////////////////
     // NOTE: Repeated setup of multidomain interaction could
     // be avoided by setting up a sufficiently fine bin
     // for the original mesh and reading out the target
     // area information from there
-    //////////////////////////////////////////////////////////////
+    /// ///////////////////////////////////////////////////////////
 
     // Now start iterating to refine mesh recursively
     //-----------------------------------------------
@@ -1259,7 +1259,7 @@ public virtual SolidMesh
   
    public:
   
-  /// \short Build mesh, based on closed curve that specifies
+  /// Build mesh, based on closed curve that specifies
   /// the outer boundary of the domain and any number of internal
   /// closed curves. Specify target area for uniform element size.
   RefineableSolidTetgenMesh(
@@ -1285,7 +1285,7 @@ public virtual SolidMesh
    }
   
      
-   /// \short Build mesh from specified triangulation and
+   /// Build mesh from specified triangulation and
    /// associated target areas for elements in it.
    RefineableSolidTetgenMesh(const Vector<double> &target_volume,
                              tetgenio* const &tetgen_io,
@@ -1333,10 +1333,10 @@ public:
    delete Outer_boundary_pt;
   }
 
-  /// \short Create free surface elements
+  /// Create free surface elements
  void create_free_surface_elements()
   {  
-   /// \short Volume constraint element stores the Data item that stores
+   /// Volume constraint element stores the Data item that stores
    /// the bubble pressure that is adjusted/traded to allow for
    /// volume conservation. Which value is the pressure stored in?
    unsigned p_traded_index=Vol_constraint_el_pt->index_of_traded_pressure();
@@ -1383,7 +1383,7 @@ public:
     }
   }
 
- /// \short Delete free surface elements 
+ /// Delete free surface elements 
  void delete_free_surface_elements()
   {
    // How many surface elements are in the surface mesh
@@ -1530,7 +1530,7 @@ public:
     }
   }
  
- /// \short Delete volume constraint elements
+ /// Delete volume constraint elements
  void delete_volume_constraint_elements()
   {
    // How many surface elements are in the surface mesh

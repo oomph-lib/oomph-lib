@@ -28,7 +28,7 @@
 
 namespace oomph
 {
-  ///\short Translation scheme that takes account of the symmetries of the
+  /// Translation scheme that takes account of the symmetries of the
   /// tensor. The independent coefficients are related to the coefficients of
   /// the elasticity tensor as follows:
   /**\f[\begin{array}{cc}    0 & E_{1111} \\
@@ -67,7 +67,7 @@ namespace oomph
      {{8, 11, 15}, {11, 17, 19}, {15, 19, 20}}}};
 
 
-  ///\short Translation scheme for the isotropic elasticity tensor
+  /// Translation scheme for the isotropic elasticity tensor
   const unsigned PMLTimeHarmonicIsotropicElasticityTensor::StaticIndex[21] = {
     1, 0, 2, 3, 0, 1, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 2, 3, 0, 1};
 

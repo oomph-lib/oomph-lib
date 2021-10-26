@@ -89,13 +89,13 @@ namespace Global_Physical_Variables
  /// Free surface cosine deformation parameter
  double Epsilon = 1.0e-3;
 
- /// \short Surface Elasticity number
+ /// Surface Elasticity number
  double Beta = 0.1;
 
- /// \short Alpha for absorption kinetics
+ /// Alpha for absorption kinetics
  double Alpha_absorption = 1.0;
 
- /// \short K parameter that
+ /// K parameter that
  /// describes solubility number
  double K = 0.01;
 
@@ -115,13 +115,13 @@ namespace Global_Physical_Variables
  //to be 1/Pe, after dividing through by Pe
  double Diff = 1.0/Pe;
  
- /// \short Surface Peclet number
+ /// Surface Peclet number
  double Peclet_S = 10000.0;
 
- /// \short Sufrace Peclet number multiplied by Strouhal number
+ /// Sufrace Peclet number multiplied by Strouhal number
  double Peclet_St_S = 1.0; 
  
- /// \short Pvd file -- a wrapper for all the different
+ /// Pvd file -- a wrapper for all the different
  /// vtu output files plus information about continuous time
  /// to facilitate animations in paraview
  ofstream Pvd_file;
@@ -134,8 +134,8 @@ namespace Global_Physical_Variables
 
 
 //================================================================
-///Interface class to handle the mass transport between bulk
-///and surface as well as the surfactant transport along the
+/// Interface class to handle the mass transport between bulk
+/// and surface as well as the surfactant transport along the
 //interface
 //================================================================
 template<class ELEMENT>
@@ -143,18 +143,18 @@ class ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement :
 public ElasticAxisymmetricSurfactantTransportInterfaceElement<ELEMENT>
 {
 private:
- ///Pointer to adsorption number
+ /// Pointer to adsorption number
  double *Alpha_pt;
- ///Pointer to solubility number
+ /// Pointer to solubility number
  double *K_pt;
 
- ///Storage for the index at
- ///which the bulk concentration is stored
+ /// Storage for the index at
+ /// which the bulk concentration is stored
  unsigned C_bulk_index;
 
 protected:
 
-  ///Get the bulk surfactant concentration
+  /// Get the bulk surfactant concentration
  double interpolated_C_bulk(const Vector<double> &s)
   {
      //Find number of nodes
@@ -206,7 +206,7 @@ protected:
    return dcdt;
   }
 
-  /// \short Overload the Helper function to calculate the residuals and 
+  /// Overload the Helper function to calculate the residuals and 
   /// jacobian entries. This particular function ensures that the
   /// additional entries are calculated inside the integration loop
   void add_additional_residual_contributions_interface(
@@ -323,8 +323,8 @@ protected:
   }
 
 public:
- ///Constructor that passes the bulk element and face index down
- ///to the underlying
+ /// Constructor that passes the bulk element and face index down
+ /// to the underlying
   ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement(
    FiniteElement* const &element_pt, const int &face_index) : 
    ElasticAxisymmetricSurfactantTransportInterfaceElement<ELEMENT>
@@ -339,19 +339,19 @@ public:
   }
 
  
- ///Return the adsorption number
+ /// Return the adsorption number
  double alpha() {return *Alpha_pt;}
  
- ///Return the solubility nubmer
+ /// Return the solubility nubmer
  double k() {return *K_pt;}
  
- ///Access function for pointer to adsorption number
+ /// Access function for pointer to adsorption number
  double* &alpha_pt() {return Alpha_pt;}
  
- ///Access function for pointer to solubility number
+ /// Access function for pointer to solubility number
  double* &k_pt() {return K_pt;}
 
- ///Overload the output function
+ /// Overload the output function
  void output(std::ostream &outfile, const unsigned &n_plot)
   {
    outfile.precision(16);
@@ -495,16 +495,16 @@ public:
   }
 
 
- /// \short Access function for the specific mesh
+ /// Access function for the specific mesh
  ElasticRectangularQuadMesh<ELEMENT>*  Bulk_mesh_pt; 
 
- /// \short Mesh for the free surface (interface) elements
+ /// Mesh for the free surface (interface) elements
  Mesh* Interface_mesh_pt;
 
- /// \short Pointer to the constitutive law
+ /// Pointer to the constitutive law
  ConstitutiveLaw* Constitutive_law_pt;
 
- /// \short Node for documentatin
+ /// Node for documentatin
  Node* Document_node_pt;
  
  /// Doc the solution
@@ -932,9 +932,9 @@ unsteady_run(const double &t_max, const double &dt)
 } // End of unsteady_run
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main=========================================================

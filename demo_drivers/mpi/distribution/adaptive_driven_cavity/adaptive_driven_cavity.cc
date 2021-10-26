@@ -69,7 +69,7 @@ public:
  /// Update the after solve (empty)
  void actions_after_newton_solve() {}
 
- /// \short Update the problem specs before solve. 
+ /// Update the problem specs before solve. 
  /// (Re-)set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve()
   { 
@@ -139,7 +139,7 @@ public:
  
 private:
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
