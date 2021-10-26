@@ -36,23 +36,23 @@ namespace oomph
 {
 
 //======================class definition==============================
-///A class that solves the Boussinesq approximation of the Navier--Stokes
-///and energy equations by coupling two pre-existing classes. 
-///The QAdvectionDiffusionReactionElement with 
-///bi-quadratic interpolation for the
-///scalar variables (temperature and concentration) and
-///QCrouzeixRaviartElement which solves the Navier--Stokes equations
-///using bi-quadratic interpolation for the velocities and a discontinuous
-///bi-linear interpolation for the pressure. Note that we are free to 
-///choose the order in which we store the variables at the nodes. In this
-///case we choose to store the variables in the order fluid velocities
-///followed by temperature. We must, therefore, overload the function
-///AdvectionDiffusionReactionEquations<2,DIM>::u_index_adv_diff_react() 
-///to indicate that
-///the temperature is stored at the DIM-th position not the 0-th. We do not
-///need to overload the corresponding function in the 
-///NavierStokesEquations<DIM> class because the velocities are stored
-///first.
+/// A class that solves the Boussinesq approximation of the Navier--Stokes
+/// and energy equations by coupling two pre-existing classes. 
+/// The QAdvectionDiffusionReactionElement with 
+/// bi-quadratic interpolation for the
+/// scalar variables (temperature and concentration) and
+/// QCrouzeixRaviartElement which solves the Navier--Stokes equations
+/// using bi-quadratic interpolation for the velocities and a discontinuous
+/// bi-linear interpolation for the pressure. Note that we are free to 
+/// choose the order in which we store the variables at the nodes. In this
+/// case we choose to store the variables in the order fluid velocities
+/// followed by temperature. We must, therefore, overload the function
+/// AdvectionDiffusionReactionEquations<2,DIM>::u_index_adv_diff_react() 
+/// to indicate that
+/// the temperature is stored at the DIM-th position not the 0-th. We do not
+/// need to overload the corresponding function in the 
+/// NavierStokesEquations<DIM> class because the velocities are stored
+/// first.
 //=========================================================================
 class AxisymmetricQAdvectionCrouzeixRaviartElement :
  public virtual QAxisymAdvectionDiffusionElement<3>,
@@ -69,9 +69,9 @@ public:
   AxisymmetricQCrouzeixRaviartElement() {}
  
 
- ///The required number of values stored at the nodes is the sum of the
- ///required values of the two single-physics  elements. Note that this step is
- ///generic for any multi-physics element of this type.
+ /// The required number of values stored at the nodes is the sum of the
+ /// required values of the two single-physics  elements. Note that this step is
+ /// generic for any multi-physics element of this type.
  unsigned required_nvalue(const unsigned &n) const
   {return (QAxisymAdvectionDiffusionElement<3>::required_nvalue(n) +
            AxisymmetricQCrouzeixRaviartElement::required_nvalue(n));}
@@ -190,8 +190,8 @@ public:
     output_fct(outfile,Nplot,time,exact_soln_pt);
   }
 
- ///Overload the index at which the temperature and solute
- ///concentration variables are stored. 
+ /// Overload the index at which the temperature and solute
+ /// concentration variables are stored. 
  // We choose to store them after the fluid velocities.
  inline unsigned u_index_axi_adv_diff() const {return 3;}
 
@@ -252,7 +252,7 @@ public:
 #ifdef USE_FD_JACOBIAN_FOR_ADVECTION_DIFFUSION_NAVIER_STOKES_ELEMENT
 
 
- ///Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -263,8 +263,8 @@ public:
 
 #else
 
- ///Helper function to get the off-diagonal blocks of the Jacobian
- ///matrix by finite differences
+ /// Helper function to get the off-diagonal blocks of the Jacobian
+ /// matrix by finite differences
  void fill_in_off_diagonal_jacobian_blocks_by_fd(Vector<double> &residuals,
                                                  DenseMatrix<double> &jacobian)
   {
@@ -350,7 +350,7 @@ public:
 
 }
  
- ///Compute the element's residual Vector and the Jacobian matrix.
+ /// Compute the element's residual Vector and the Jacobian matrix.
  /// Use finite-differencing only for the off-diagonal blocks.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)

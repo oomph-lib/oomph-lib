@@ -41,16 +41,16 @@ using namespace std;
 using namespace oomph;
  
 
-///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
 
 
 //A Comparison operator for the boundary nodes
 class CompareNodeCoordinatesX
 {
 public:
-///The actual comparison operator
+/// The actual comparison operator
  int operator() (Node* const &node1_pt,
                  Node* const &node2_pt)
   {
@@ -71,7 +71,7 @@ public:
 class CompareNodeCoordinatesY
 {
 public:
-///The actual comparison operator
+/// The actual comparison operator
  int operator() (Node* const &node1_pt,
                  Node* const &node2_pt)
   {
@@ -110,16 +110,16 @@ public:
   //Pointer to the tensor for the fibre
   ElasticityTensor *E_fibre_pt;
 
-  ///Function that returns a pointer to the elasticity tensor
-  ///associated with the bulk at position x
+  /// Function that returns a pointer to the elasticity tensor
+  /// associated with the bulk at position x
   void bulk_elasticity_tensor_pt(const Vector<double> &x, 
                                  ElasticityTensor* &E_pt)
   {
    E_pt = E_bulk_pt;
   }
 
-  ////Function that returns a pointer to the elasticity tensor
-  ///associated with the fibre at position x
+  /// /Function that returns a pointer to the elasticity tensor
+  /// associated with the fibre at position x
   void fibre_elasticity_tensor_pt(const Vector<double> &x, 
                                   ElasticityTensor* &E_pt)
   {
@@ -201,8 +201,8 @@ public:
     }
   }
  
- ///Solve the sub-problems
- ///This will only solve the problem if the first_solve flag is true
+ /// Solve the sub-problems
+ /// This will only solve the problem if the first_solve flag is true
  void sub_solve(const unsigned &n_dofs, DoubleVector &dx, DoubleVector &res,
                 const bool &first_solve)
   {
@@ -813,7 +813,7 @@ void HomogenisationProblem<ELEMENT>::doc_solution()
 }
 
 //============================================================
-///Driver code for moving block problem
+/// Driver code for moving block problem
 //============================================================
 int main(int argc, char **argv)
 {

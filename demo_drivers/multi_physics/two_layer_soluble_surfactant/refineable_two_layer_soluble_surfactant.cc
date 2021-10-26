@@ -80,7 +80,7 @@ namespace Global_Physical_Variables
   //----------------
   double L = 28.0;
 
-  ///Fluid property Ratios
+  /// Fluid property Ratios
   //----------------------------
   
   //Density ratio:
@@ -173,8 +173,8 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Poisson ratio
  double Nu = 0.1;
  
- ///This next set of functions is only used if we do NOT have
- ///periodic conditions
+ /// This next set of functions is only used if we do NOT have
+ /// periodic conditions
 
  
  /// Function that prescribes the hydrostatic pressure field at the outlet
@@ -228,7 +228,7 @@ namespace Global_Physical_Variables
   double Inlet_Angle = 2.0*atan(1.0);
 
   
- ///Direction of the wall normal vector (at the inlet)
+ /// Direction of the wall normal vector (at the inlet)
  Vector<double> Wall_normal;
 
  /// Function that specifies the wall unit normal at the inlet
@@ -257,10 +257,10 @@ namespace Global_Physical_Variables
 
 
 //==start_of_specific_element_class=============================
-///Element class used to insist that the vertical positions of
-///the periodic nodes coincide.
-///These are essentially point elements that are created
-///from existing periodic nodes.
+/// Element class used to insist that the vertical positions of
+/// the periodic nodes coincide.
+/// These are essentially point elements that are created
+/// from existing periodic nodes.
 //=============================================================
 class DependentPositionPointElement :
  public virtual SolidPointElement, public virtual SolidFaceElement
@@ -632,9 +632,9 @@ public:
 
 
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D surfactant transport problem on rectangular domain, discretised 
@@ -647,7 +647,7 @@ class SurfactantProblem : public Problem
 
 public:
 
- ///Constructor. The boolean indicates whether the free surface
+ /// Constructor. The boolean indicates whether the free surface
  //should be pinned or not in the first instance
  SurfactantProblem(const bool &pin=true);
 
@@ -952,7 +952,7 @@ public:
    set_boundary_conditions(this->time_pt()->time());
   }
 
-  ///Create the elements that make the position consistent on both sides
+  /// Create the elements that make the position consistent on both sides
   void create_dependent_position_elements()
   {
     //We know that boundary 1 is made periodic from boundary 3
@@ -1118,7 +1118,7 @@ public:
   }
   
  
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -1128,7 +1128,7 @@ public:
   } // end_of_fix_pressure
 
 
- ///UnFix pressure in element e at pressure dof pdof and set to pvalue
+ /// UnFix pressure in element e at pressure dof pdof and set to pvalue
  void unfix_pressure(const unsigned &e, const unsigned &pdof)
   {
    //Cast to specific element and fix pressure
@@ -1297,8 +1297,8 @@ void deform_interface(const double &epsilon,
   }
 
 
-  ///Return the total concentrations of the surfactant
-  ///integrated over the bulk or surface accordingly
+  /// Return the total concentrations of the surfactant
+  /// integrated over the bulk or surface accordingly
  void compute_integrated_concentrations(double &surface,
                                         double &bulk,
                                         double &micelle)

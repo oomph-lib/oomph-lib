@@ -132,7 +132,7 @@ namespace oomph
   {
   protected:
     /// String that indicates the type of the timestepper
-    ///(e.g. "RungeKutta", etc.)
+    /// (e.g. "RungeKutta", etc.)
     std::string Type;
 
   public:
@@ -155,7 +155,7 @@ namespace oomph
   };
 
 
-  ///===========================================================
+  /// ===========================================================
   /// Simple first-order Euler Timestepping
   //============================================================
   class Euler : public ExplicitTimeStepper
@@ -179,7 +179,7 @@ namespace oomph
                   const double& dt);
   };
 
-  ///===========================================================
+  /// ===========================================================
   /// Standard Runge Kutta Timestepping
   //============================================================
   template<unsigned ORDER>
@@ -205,7 +205,7 @@ namespace oomph
   };
 
 
-  ///===========================================================
+  /// ===========================================================
   /// Runge Kutta Timestepping that uses low storage
   //============================================================
   template<unsigned ORDER>
@@ -230,7 +230,7 @@ namespace oomph
   };
 
 
-  ///===========================================================
+  /// ===========================================================
   /// An explicit version of BDF3 (i.e. uses derivative evaluation at y_n
   /// instead of y_{n+1}). Useful as a predictor because it is third order
   /// accurate but requires only one function evaluation (i.e. only one mass

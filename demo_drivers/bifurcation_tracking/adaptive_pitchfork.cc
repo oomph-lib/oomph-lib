@@ -52,9 +52,9 @@ namespace Global_Physical_Variables
 } // end of GPV namespace
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //============================================================================
 /// A class to do comparison of the nodes based on
@@ -65,7 +65,7 @@ namespace Global_Physical_Variables
  {
  public:
   
-  ///Define the comparison operator using the round brackets
+  /// Define the comparison operator using the round brackets
   int operator() (Node* const &node1_pt,
                   Node* const &node2_pt)
    {
@@ -135,15 +135,15 @@ public:
  /// Set the boundary conditions
  void set_boundary_conditions();
 
- ///No actions are required after the change in bifurcation parameter.
- ///This overloads the default which calls actions before and after 
- ///newton solve.
+ /// No actions are required after the change in bifurcation parameter.
+ /// This overloads the default which calls actions before and after 
+ /// newton solve.
  void actions_after_change_in_bifurcation_parameter() {}
  
  /// Update the boundary conditions before next timestep: 
  void actions_before_implicit_timestep() {set_boundary_conditions();}
 
- ///Hacky function to symmetrise the problem
+ /// Hacky function to symmetrise the problem
  /// The idea is to sort all nodes in the mesh lexicographically
  /// Then we can loop over all nodes with the same x value and
  /// apply the appropriate symmetry conditions.
@@ -480,9 +480,9 @@ RefineablePorousChannelProblem<ELEMENT>::~RefineablePorousChannelProblem()
 } // end_of_destructor
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main======================================================

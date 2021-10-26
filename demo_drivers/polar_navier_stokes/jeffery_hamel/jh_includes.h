@@ -56,7 +56,7 @@ class FluxConstraint : public GeneralisedElement
    Pext_pt=0;
   }
 
- ///Function for setting up external pressure
+ /// Function for setting up external pressure
  void set_pressure_data(Data* pext_pt)
   {
    //Set external pressure pointer

@@ -38,10 +38,10 @@
 
 using namespace oomph;
 //======================================================================
-///Quater of a canieon mesh
-///Mesh with outer part cubic and inner part cilindric 
+/// Quater of a canieon mesh
+/// Mesh with outer part cubic and inner part cilindric 
 /// The outer face is given by the plane z = zmin 
-///The cilinder axis is given by the line x = xmin, z = zmax
+/// The cilinder axis is given by the line x = xmin, z = zmax
 // Rhe cilinder radius is radius
 // The cilinder may be the part of an ellipe if (xmax - xmi)n noneq ro (zmax -zmin)
 /// coincides with the numeration of the spines
@@ -78,11 +78,11 @@ public:
  /// Number of elements on interface
  unsigned long ninterface_element() const {return Interface_element_pt.size();}
  
- ///Access functions for pointers to elements in bulk
+ /// Access functions for pointers to elements in bulk
  FiniteElement* &bulk_element_pt(const unsigned long &i) 
   {return Bulk_element_pt[i];}
 
- ///Number of elements in bulk 
+ /// Number of elements in bulk 
  unsigned long nbulk() const {return Bulk_element_pt.size();}
 
 // Reurn radius of the canyon

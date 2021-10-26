@@ -35,9 +35,9 @@
 
 using namespace oomph;
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 // The specialisation of the PMLLayerElement and FaceGeometry element
 // has to be inside the oomph namespace
@@ -89,9 +89,9 @@ namespace oomph
   };
 } // End of namespace oomph
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //======start_of_OscillatingCylinder========================================
 /// Oscillating cylinder class
@@ -191,16 +191,16 @@ private:
   bool Use_transition_phase;
 }; // End of OscillatingCylinder class
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //======start_of_GlobalParameters_namespace=================================
 /// Global parameters
 //==========================================================================
 namespace GlobalParameters
 {
-  ///------------------------------------------------CYLINDER MOTION------
+  /// ------------------------------------------------CYLINDER MOTION------
   /// Amplitude of the cylinder motion used by Williamson &
   /// Roshko (1988). Probably best to fix the wavelength and vary this
   /// to get different wake modes. Also the easiest way to get different
@@ -210,9 +210,9 @@ namespace GlobalParameters
 
   /// The ratio T_e/T_s
   double Period_ratio=1.0;
-  ///------------------------------------------------CYLINDER MOTION------
+  /// ------------------------------------------------CYLINDER MOTION------
 
-  ///---------------------------------------NAVIER-STOKES PARAMETERS------
+  /// ---------------------------------------NAVIER-STOKES PARAMETERS------
   /// The current Reynolds number
   double Re=0.0;
 
@@ -298,17 +298,17 @@ namespace GlobalParameters
                << GlobalParameters::Re << "," << GlobalParameters::ReSt
                << ")" << std::endl;
   } // End of doc_navier_stokes_parameters
-  ///---------------------------------------NAVIER-STOKES PARAMETERS------
+  /// ---------------------------------------NAVIER-STOKES PARAMETERS------
 
-  ///------------------------------------TIME-INTEGRATION PARAMETERS------
+  /// ------------------------------------TIME-INTEGRATION PARAMETERS------
   /// Number of periods for unsteady run
   unsigned N_period_unsteady=1;
 
   /// Number of timesteps per period for unsteady run
   unsigned N_step_per_period_unsteady=100;
-  ///------------------------------------TIME-INTEGRATION PARAMETERS------
+  /// ------------------------------------TIME-INTEGRATION PARAMETERS------
 
-  ///----------------------------------------------DOMAIN PROPERTIES------
+  /// ----------------------------------------------DOMAIN PROPERTIES------
   /// Pointer to the cylinder
   OscillatingCylinder* Cylinder_pt=0;
 
@@ -335,9 +335,9 @@ namespace GlobalParameters
 
   /// Number of uniform refinements before any solve
   unsigned N_uniform_refinement_before_solve=2;
-  ///----------------------------------------------DOMAIN PROPERTIES------
+  /// ----------------------------------------------DOMAIN PROPERTIES------
 
-  ///------------------------------------------DOCUMENTATION HELPERS------
+  /// ------------------------------------------DOCUMENTATION HELPERS------
   /// The number of plot points in each direction
   unsigned N_plot_point=2;
 
@@ -403,21 +403,21 @@ namespace GlobalParameters
                  << deformation_ratio*100.0 << "%\n" << std::endl;
     }
   } // End of doc_maximum_central_box_deformation
-  ///------------------------------------------DOCUMENTATION HELPERS------
+  /// ------------------------------------------DOCUMENTATION HELPERS------
 
-  ///--------------------------------------------------MISCELLANEOUS------
+  /// --------------------------------------------------MISCELLANEOUS------
   /// Function to round a double to the nearest integral value
   double round(const double& d)
   {
     // Round it
     return std::floor(d+0.5);
   } // End of round
-  ///--------------------------------------------------MISCELLANEOUS------
+  /// --------------------------------------------------MISCELLANEOUS------
 } // End of GlobalParameters
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 //======start_of_FlowAroundCylinderProblem_class============================
 /// Flow around a cylinder in rectangular domain
@@ -914,9 +914,9 @@ void FlowAroundCylinderProblem<ELEMENT>::doc_solution(const bool& in_unsteady)
   GlobalParameters::Doc_info.number()++;
 } // End of doc_solution
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 //==========================================================================
 /// Driver

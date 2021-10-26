@@ -193,7 +193,7 @@ namespace oomph
   };
 
 
-  ///=============================================================================
+  /// =============================================================================
   /// This is the policy class for the surfactanttransport equations which
   /// require one additional value for the surface concentration
   //=============================================================================

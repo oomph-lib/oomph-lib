@@ -82,9 +82,9 @@ namespace BL_Squash
 
 
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
 
 
 //====start_of_underformed_wall============================================
@@ -226,7 +226,7 @@ namespace Global_Physical_Variables
 
 
 //====start_of_problem_class==========================================
-///Problem class
+/// Problem class
 //====================================================================
 template <class ELEMENT>
 class FSICollapsibleChannelProblem : public Problem
@@ -320,29 +320,29 @@ private :
  /// Delete prescribed traction elements from the surface mesh
  void delete_traction_elements(Mesh* const &traction_mesh_pt);
 
- ///Number of elements in the x direction in the upstream part of the channel
+ /// Number of elements in the x direction in the upstream part of the channel
  unsigned Nup;
 
  /// Number of elements in the x direction in the collapsible part of 
  /// the channel
  unsigned Ncollapsible;
 
- ///Number of elements in the x direction in the downstream part of the channel
+ /// Number of elements in the x direction in the downstream part of the channel
  unsigned Ndown;
 
- ///Number of elements across the channel
+ /// Number of elements across the channel
  unsigned Ny;
 
- ///x-length in the upstream part of the channel
+ /// x-length in the upstream part of the channel
  double Lup;
 
- ///x-length in the collapsible part of the channel
+ /// x-length in the collapsible part of the channel
  double Lcollapsible;
 
- ///x-length in the downstream part of the channel
+ /// x-length in the downstream part of the channel
  double Ldown;
 
- ///Transverse length
+ /// Transverse length
  double Ly;
  
 #ifdef MACRO_ELEMENT_NODE_UPDATE
@@ -364,10 +364,10 @@ private :
  /// Pointer to the "wall" mesh
  OneDLagrangianMesh<FSIHermiteBeamElement>* Wall_mesh_pt; 
 
- ///Pointer to the left control node
+ /// Pointer to the left control node
  Node* Left_node_pt;
  
- ///Pointer to right control node
+ /// Pointer to right control node
  Node* Right_node_pt;
  
  /// Pointer to control node on the wall

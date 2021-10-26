@@ -23,7 +23,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Driver for a 3D static cap problem in a quarter-tube domain
+/// Driver for a 3D static cap problem in a quarter-tube domain
 
 //Generic routines
 #include "generic.h"
@@ -44,7 +44,7 @@ using namespace oomph;
 //===================================================================
 namespace Global_Physical_Variables
 {
- ///Capillary number
+ /// Capillary number
  double Ca = 1.0;
 
  /// Contact angle
@@ -105,14 +105,14 @@ public:
  Vector<GeneralisedElement*> &bulk_element_pt()
   {return Bulk_element_pt;}
 
- ///Access functions for pointers to elements in bulk
+ /// Access functions for pointers to elements in bulk
  GeneralisedElement* &bulk_element_pt(const unsigned long &i) 
   {return Bulk_element_pt[i];}
 
- ///Number of elements in bulk 
+ /// Number of elements in bulk 
  unsigned long nbulk() const {return Bulk_element_pt.size();}
 
- ///Constructor
+ /// Constructor
  AxialSolidQuarterTubeMesh(GeomObject* wall_pt,
                            const Vector<double>& xi_lo,
                            const double& fract_mid,
@@ -275,27 +275,27 @@ public:
 
 private:
  
- ///Storage for the Bulk Mesh
+ /// Storage for the Bulk Mesh
  AxialSolidQuarterTubeMesh<
  ELEMENT, 
  ElasticSurfaceFluidInterfaceElement<ELEMENT> > *Bulk_mesh_pt;
 
- ///The mesh of free surface elements
+ /// The mesh of free surface elements
  Mesh *Free_surface_mesh_pt;
  
- ///Storage for the elements on the free surface boundary
+ /// Storage for the elements on the free surface boundary
  Mesh* Free_surface_bounding_mesh_pt;
 
- ///Storage for the elements that compute the enclosed fluid volume
+ /// Storage for the elements that compute the enclosed fluid volume
  Mesh *Volume_computation_mesh_pt;
 
- ///Storage for the volume constraint element
+ /// Storage for the volume constraint element
  Mesh* Volume_constraint_mesh_pt;
 
- ///Storage for the external pressure
+ /// Storage for the external pressure
  Data *External_pressure_data_pt;
 
- ///Storage for the pressure that is traded for the volume constraint
+ /// Storage for the pressure that is traded for the volume constraint
  Data *Traded_pressure_data_pt;
 
 }; // end_of_problem_class

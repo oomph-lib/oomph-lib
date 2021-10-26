@@ -49,7 +49,7 @@ class CompareElementCoordinate
 {
 public:
  
- ///The actual comparison operator
+ /// The actual comparison operator
  int operator() (GeneralisedElement* const &element1_pt,
                  GeneralisedElement* const &element2_pt)
   {
@@ -138,11 +138,11 @@ private:
 
 public:
 
- ///Constructor, initialise rotation to NULL (default)
+ /// Constructor, initialise rotation to NULL (default)
  Rotateable() : RefineableElement(), ELEMENT(), Rotated(0) { }
  
- ///Overload the further build function to pass the rotate information
- ///to the sons
+ /// Overload the further build function to pass the rotate information
+ /// to the sons
  void further_build()
   {
    ELEMENT::further_build();
@@ -151,7 +151,7 @@ public:
   }
 
   
- ///Rotate the element by a given angle:
+ /// Rotate the element by a given angle:
  /// 0 (0), 1(90 degrees), 2(180 degrees), 3 (270 degrees)
  void rotate(const unsigned &angle)
   {
@@ -597,26 +597,26 @@ namespace TanhSolnForPoisson
  /// Parameter for steepness of step
  double Alpha=50.0;
 
- ///Orientation (non-normalised x-component of unit vector in direction
+ /// Orientation (non-normalised x-component of unit vector in direction
  /// of step plane)
  double N_x=-1.0;
 
- ///Orientation (non-normalised y-component of unit vector in direction
+ /// Orientation (non-normalised y-component of unit vector in direction
  /// of step plane)
  double N_y=-1.0;
 
- ///Orientation (non-normalised z-component of unit vector in direction
+ /// Orientation (non-normalised z-component of unit vector in direction
  /// of step plane)
  double N_z=1.0;
 
 
- ///Orientation (x-coordinate of step plane) 
+ /// Orientation (x-coordinate of step plane) 
  double X_0=0.0;
 
- ///Orientation (y-coordinate of step plane) 
+ /// Orientation (y-coordinate of step plane) 
  double Y_0=0.0;
 
- ///Orientation (z-coordinate of step plane) 
+ /// Orientation (z-coordinate of step plane) 
  double Z_0=0.0;
 
 
@@ -668,9 +668,9 @@ N_z))),2.0))*Alpha*Alpha*N_z*N_z/(N_x*N_x+N_y*N_y+N_z*N_z);
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 
@@ -863,8 +863,8 @@ void TestPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 } // end of doc
 
-///Global function that is used to run the rotation tests for
-///different elements
+/// Global function that is used to run the rotation tests for
+/// different elements
 template<class ELEMENT>
 void run_test(const unsigned &i)
 {

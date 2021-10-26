@@ -138,14 +138,14 @@ namespace oomph
   };
 
 
-  ///=====================================================================
+  /// =====================================================================
   /// An extension of DoubleVector that allows access to certain
   /// global entries that are not stored locally. Synchronisation of these
   /// values must be performed manually by calling the synchronise()
   /// function. Synchronisation can only be from the haloed to the halo,
   /// but the local halo entries can all be summed and stored in the
   /// haloed value.
-  ///======================================================================
+  /// ======================================================================
   class DoubleVectorWithHaloEntries : public DoubleVector
   {
     /// Pointer to the lookup scheme that stores information about

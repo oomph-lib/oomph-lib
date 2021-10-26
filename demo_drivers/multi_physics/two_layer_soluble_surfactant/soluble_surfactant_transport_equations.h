@@ -63,7 +63,7 @@ double *Ma_pt;
 
 protected:
 
- ///Get the micelle concentration
+ /// Get the micelle concentration
  double interpolated_M(const Vector<double> &s)
   {
      //Find number of nodes
@@ -90,7 +90,7 @@ protected:
    return(M);
   }
 
-   ///Get the bulk concentration
+   /// Get the bulk concentration
  double interpolated_C_bulk(const Vector<double> &s)
   {
      //Find number of nodes
@@ -151,7 +151,7 @@ protected:
    //this->fill_in_jacobian_from_external_by_fd(jacobian);
    }*/
 
- ///Specify the flux from the bulk to the interface
+ /// Specify the flux from the bulk to the interface
  double flux_from_bulk(const double &C, const double &C_bulk)
  {
   const double Bi = this->bi();
@@ -159,8 +159,8 @@ protected:
   return Bi*(K*C_bulk*(1.0 - C) - C);
  }
 
-  ///Specify the derivative of the flux from the bulk
-  ///to the interface with respect to the bulk concentration
+  /// Specify the derivative of the flux from the bulk
+  /// to the interface with respect to the bulk concentration
  double dflux_from_bulk_dC_bulk(const double &C, const double &C_bulk)
  {
   const double Bi = this->bi();
@@ -168,8 +168,8 @@ protected:
   return Bi*K*(1.0 - C);
  }
 
-  ///Specify the derivative of the flux from the bulk
-  ///to the interface with respect to the surface concentration
+  /// Specify the derivative of the flux from the bulk
+  /// to the interface with respect to the surface concentration
  double dflux_from_bulk_dC(const double &C, const double &C_bulk)
  {
   const double Bi = this->bi();
@@ -329,8 +329,8 @@ protected:
 
 public:
 
- ///Constructor that passes the bulk element and face index
- ///down to the underlying 
+ /// Constructor that passes the bulk element and face index
+ /// down to the underlying 
   SolubleSurfactantTransportInterfaceElement() :
  SurfactantTransportInterfaceElement()
   {
@@ -347,29 +347,29 @@ public:
  inline void set_c_bulk_index(const unsigned &c_bulk_index)
  {C_bulk_index = c_bulk_index;}
   
-  ///Return the Biot number
+  /// Return the Biot number
  double bi() {return *Bi_pt;}
  
- ///Return the Marangoni number
+ /// Return the Marangoni number
  double ma() {return *Ma_pt;}
 
 
- ///Return the reaction ratio
+ /// Return the reaction ratio
  double k() {return *K_pt;}
 
   //Return bulk beta
  double beta_b() {return *Beta_b_pt;}
   
- ///Access function for pointer to the Marangoni number
+ /// Access function for pointer to the Marangoni number
  double* &ma_pt() {return Ma_pt;}
 
- ///Access function for pointer to the Biot number
+ /// Access function for pointer to the Biot number
  double* &bi_pt() {return Bi_pt;}
 
- ///Access function for pointer to the reaction ratios
+ /// Access function for pointer to the reaction ratios
  double* &k_pt() {return K_pt;}
 
- ///Access function for pointer
+ /// Access function for pointer
  double* &beta_b_pt() {return Beta_b_pt;}
 
 
@@ -527,13 +527,13 @@ void output(std::ostream &outfile, const unsigned &n_plot)
 }
 
 
-///Overload the output function
+/// Overload the output function
   void output(std::ostream &outfile) {FiniteElement::output(outfile);}
      
-  ///Overload the C-style output function
+  /// Overload the C-style output function
   void output(FILE* file_pt) {FiniteElement::output(file_pt);}
   
-  ///C-style Output function
+  /// C-style Output function
   void output(FILE* file_pt, const unsigned &n_plot)
   {FiniteElement::output(file_pt,n_plot);}
 
@@ -543,9 +543,9 @@ void output(std::ostream &outfile, const unsigned &n_plot)
  
 
 
-///=============================================================================
-///This is the policy class for the surfactanttransport equations which require
-///one additional value for the surface concentration
+/// =============================================================================
+/// This is the policy class for the surfactanttransport equations which require
+/// one additional value for the surface concentration
 //=============================================================================
 template<>
  class FluidInterfaceAdditionalValues<
@@ -584,7 +584,7 @@ template<>
 
 //-------------------------------GEOMETRIC SPECIALISATIONS----------------
 
-///Specialise to the Line geometry
+/// Specialise to the Line geometry
 template<class ELEMENT>
  class SpineLineSolubleSurfactantTransportInterfaceElement :
  public SpineUpdateFluidInterfaceElement<
@@ -615,7 +615,7 @@ template<class ELEMENT>
   SpinePointFluidInterfaceBoundingElement<ELEMENT>() { }
  };
 
- ///Specialise to the Line geometry
+ /// Specialise to the Line geometry
 template<class ELEMENT>
  class ElasticLineSolubleSurfactantTransportInterfaceElement :
  public ElasticUpdateFluidInterfaceElement<

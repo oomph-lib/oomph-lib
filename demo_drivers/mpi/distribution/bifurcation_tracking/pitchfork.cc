@@ -193,10 +193,10 @@ Mesh1D<ELEMENT>::Mesh1D(const unsigned &n1,
 
 
 //======================================================================
-///A class for elements that integrate the Berman equations in a mixed
-///formulation. The single fourth-order equation is written as a coupled
-///system of two second-order equations. The element is implemented as
-///an EigenElement, so that the temporal stability problem can be solved.
+/// A class for elements that integrate the Berman equations in a mixed
+/// formulation. The single fourth-order equation is written as a coupled
+/// system of two second-order equations. The element is implemented as
+/// an EigenElement, so that the temporal stability problem can be solved.
 //======================================================================
 class SSPorousChannelEquations : public virtual FiniteElement
 {
@@ -207,30 +207,30 @@ private:
 
 protected:
 
- ///Function to compute the shape functions and derivatives w.r.t.
- ///global coords at local coordinates.
+ /// Function to compute the shape functions and derivatives w.r.t.
+ /// global coords at local coordinates.
  virtual double dshape_and_dtest_eulerian_at_knot(const unsigned &ipt,
  Shape &psi, DShape &dpsidx, Shape &test, DShape &dtestdx)=0;
 
 public:
 
- ///Empty Constructor, set boolean flags to be false
+ /// Empty Constructor, set boolean flags to be false
  SSPorousChannelEquations() {}
 
- ///Access functions for the Reynolds number
+ /// Access functions for the Reynolds number
  const double &re() const {return *Re_pt;}
 
- ///Access function for a pointer to the Reynolds number
+ /// Access function for a pointer to the Reynolds number
  double* &re_pt() {return Re_pt;}
 
- ///Return the i-th ODE variable stored at the n-th local node
+ /// Return the i-th ODE variable stored at the n-th local node
  virtual double f(const unsigned &b, const unsigned &i)const =0;
 
- ///Return the i-th ODE variable stored at the n-th local node at time t.
+ /// Return the i-th ODE variable stored at the n-th local node at time t.
  virtual double f(const unsigned &t, const unsigned &n,
                   const unsigned &i) const=0;
 
- ///// i-th component of df/dt at local node n. 
+ /// // i-th component of df/dt at local node n. 
  /// Uses suitably interpolated value for hanging nodes.
  double df_dt(const unsigned &n, const unsigned &i) const
   {
@@ -254,7 +254,7 @@ public:
    return dfdt;
   }
 
- ///This function returns just the residuals
+ /// This function returns just the residuals
  inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
   {
    //Create a dummy matrix
@@ -263,7 +263,7 @@ public:
    add_generic_residual_contribution(residuals,dummy,0);
   }
 
- ///This function returns the residuals and the jacobian
+ /// This function returns the residuals and the jacobian
  inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
   {
@@ -273,8 +273,8 @@ public:
 
 
  //----------------------------------------------------------------------
- ///This function returns the residuals for the ODE; J
- ///FLAG=1(or 0): do (or don't) compute the Jacobian as well. 
+ /// This function returns the residuals for the ODE; J
+ /// FLAG=1(or 0): do (or don't) compute the Jacobian as well. 
  //----------------------------------------------------------------------
  void add_generic_residual_contribution(Vector<double> &residuals, 
                                         DenseMatrix<double> &jacobian, 
@@ -429,7 +429,7 @@ public:
     } //End of loop over integration points
   }
 
-///FE interpolated values of the arguments
+/// FE interpolated values of the arguments
  double interpolated_f(const Vector<double> &s, const unsigned &i)
   {
    //Find number of nodes
@@ -450,10 +450,10 @@ public:
    return(interpolated_f);
   }
 
- ///Overload the output function
+ /// Overload the output function
  void output(ostream &outfile) {FiniteElement::output(outfile);}
  
-///Output function: x,y,[z],u,v,[w],p in tecplot format
+/// Output function: x,y,[z],u,v,[w],p in tecplot format
  void output(ostream &outfile, const unsigned &Np)
   {FiniteElement::output(outfile,Np);}
  
@@ -492,10 +492,10 @@ class SSPorousChannelElement : public virtual QElement<1,3>,
 public:
  
 
- ///Constructor, there are no internal values 
+ /// Constructor, there are no internal values 
  SSPorousChannelElement() : QElement<1,3>(), SSPorousChannelEquations() { }
 
- ///Required number of values at node n
+ /// Required number of values at node n
  inline unsigned required_nvalue(const unsigned &n) const 
   {return Initial_Nvalue[n];}
  
@@ -511,10 +511,10 @@ public:
  double df0dx(const unsigned &l) const
   {return *node_pt(l)->value_pt(2);}
 
- ///Overload the output function
+ /// Overload the output function
  void output(ostream &outfile) {FiniteElement::output(outfile);}
 
- ///Output function: x,y[,z],u,v[,w],p at Nplot^DIM points
+ /// Output function: x,y[,z],u,v[,w],p at Nplot^DIM points
  void output(ostream &outfile, const unsigned &Nplot)
   {
    //Set output Vector

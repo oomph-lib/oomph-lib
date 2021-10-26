@@ -87,7 +87,7 @@ namespace Flag_definition
  /// Amplitude of tip deflection
  double Amplitude=0.33;
 
- ///Pointer to the global time object
+ /// Pointer to the global time object
  Time* Time_pt=0;
  
 
@@ -128,10 +128,10 @@ namespace Flag_definition
   
  public:
   
-  ///Constructor: It's a 1D object in 2D space 
+  /// Constructor: It's a 1D object in 2D space 
   TopOfFlag() : GeomObject(1,2) {}
 
-  ///Destructor (empty)
+  /// Destructor (empty)
   ~TopOfFlag(){}
   
   /// Return the position along the top of the flag (xi[0] varies 
@@ -178,10 +178,10 @@ namespace Flag_definition
   
  public:
   
-  ///Constructor: 
+  /// Constructor: 
   BottomOfFlag() : GeomObject(1,2) {}
   
-  ///Destructor (empty)
+  /// Destructor (empty)
   ~BottomOfFlag(){}
   
 
@@ -229,10 +229,10 @@ namespace Flag_definition
    
   public:
    
-   ///Constructor
+   /// Constructor
    TipOfFlag() : GeomObject(1,2) {}
    
-   ///Destructor (empty)
+   /// Destructor (empty)
    ~TipOfFlag(){}
    
    /// Return the position
@@ -298,9 +298,9 @@ namespace Flag_definition
 
 
 
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////
 
 
 
@@ -564,9 +564,9 @@ void TurekNonFSIProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 } // end_of_doc_solution
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
 //======start_of_main==================================================

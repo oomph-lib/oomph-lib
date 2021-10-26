@@ -82,8 +82,8 @@ namespace Global_Physical_Variables
   swim[2] = 0.0;
  }
 
- ///Diffusivity tensor (again 3x3 but only the upper 2x2 block affects
- ///the axisymmetric advection diffusion equations)
+ /// Diffusivity tensor (again 3x3 but only the upper 2x2 block affects
+ /// the axisymmetric advection diffusion equations)
  void diff_function(const Vector<double> &x, DenseMatrix<double> &D)
  {
   //Radial component
@@ -106,9 +106,9 @@ namespace Global_Physical_Variables
  
 } // end of namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// AdvectionDiffusion problem on rectangular domain, discretised 
@@ -268,7 +268,7 @@ RefineableAdvectionDiffusionPipeProblem()
 
 
 //=============================start_of_set_concentration_profile=======
-///Set a specified inlet concentration profile
+/// Set a specified inlet concentration profile
 //========================================================================
 template<class ELEMENT>
 void RefineableAdvectionDiffusionPipeProblem<ELEMENT>::

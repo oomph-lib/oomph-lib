@@ -304,7 +304,7 @@ void RotatingProblem<ELEMENT>::set_boundary_conditions()
 }
 
 //==========================================================================
-///Solve the system for a number of different values of the Reynolds number
+/// Solve the system for a number of different values of the Reynolds number
 //==========================================================================
 template<class ELEMENT>
 void RotatingProblem<ELEMENT>::solve_system()

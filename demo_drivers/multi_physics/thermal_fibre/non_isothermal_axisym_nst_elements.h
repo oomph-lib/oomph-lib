@@ -26,22 +26,22 @@
 #define USE_FD_JACOBIAN_FOR_NONISOTHERMAL_AXISYMMETRIC_NAVIER_STOKES
 
 //======================class definition======================
-///A class that solves the nonisothermal melt spinning problem using the 
-///axisymmetric Navier--Stokes and energy equations by coupling two pre-
-///existing classes. 
-///The QSteadyAxisymAdvectionDiffusionElement<Nnode1d> with bi-quadratic interpolation 
-///for the scalar variable (temperature) and QCrouzeixRaviartElement
-///which solves the Navier--Stokes equations
-///using bi-quadratic interpolation for the velocities and a discontinuous
-///bi-linear interpolation for the pressure. Note that we are free to 
-///choose the order in which we store the variables at the nodes. In this
-///case we choose to store the variables in the order fluid velocities
-///followed by temperature. We must, therefore, overload the function
-///AxisymAdvectionDiffusionEquations::u_index_axisym_adv_diff() to indicate that
-///the temperature is stored at the 3-th position not the 0-th. We do not
-///need to overload the corresponding function in the 
-///AxisymmetricNavierStokesEquations class because the velocities are stored
-///first.
+/// A class that solves the nonisothermal melt spinning problem using the 
+/// axisymmetric Navier--Stokes and energy equations by coupling two pre-
+/// existing classes. 
+/// The QSteadyAxisymAdvectionDiffusionElement<Nnode1d> with bi-quadratic interpolation 
+/// for the scalar variable (temperature) and QCrouzeixRaviartElement
+/// which solves the Navier--Stokes equations
+/// using bi-quadratic interpolation for the velocities and a discontinuous
+/// bi-linear interpolation for the pressure. Note that we are free to 
+/// choose the order in which we store the variables at the nodes. In this
+/// case we choose to store the variables in the order fluid velocities
+/// followed by temperature. We must, therefore, overload the function
+/// AxisymAdvectionDiffusionEquations::u_index_axisym_adv_diff() to indicate that
+/// the temperature is stored at the 3-th position not the 0-th. We do not
+/// need to overload the corresponding function in the 
+/// AxisymmetricNavierStokesEquations class because the velocities are stored
+/// first.
 //================================================================
 class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
  public virtual QSteadyAxisymAdvectionDiffusionElement<3> ,
@@ -65,16 +65,16 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   {}
 
 
- ///The required number of values stored at the nodes is the sum of the
- ///required values of the two single-physics  elements. Note that this step is
- ///generic for any multi-physics element of this type.
+ /// The required number of values stored at the nodes is the sum of the
+ /// required values of the two single-physics  elements. Note that this step is
+ /// generic for any multi-physics element of this type.
  unsigned required_nvalue(const unsigned &n) const
   {
    return ( QSteadyAxisymAdvectionDiffusionElement<3>::required_nvalue(n) +
             AxisymmetricQCrouzeixRaviartElement::required_nvalue(n) );
   }
 
- ///Overload the standard output function with the broken default
+ /// Overload the standard output function with the broken default
  void output(ostream &outfile) 
   {
    FiniteElement::output(outfile);
@@ -144,8 +144,8 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   }
 
 
- ///Overload the index at which the temperature 
- ///variable is stored. We choose to store it after the fluid velocities.
+ /// Overload the index at which the temperature 
+ /// variable is stored. We choose to store it after the fluid velocities.
  unsigned u_index_axisym_adv_diff() const 
   {
    return 3;
@@ -241,7 +241,7 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
 #ifdef USE_FD_JACOBIAN_FOR_NONISOTHERMAL_AXISYMMETRIC_NAVIER_STOKES
 
 
- ///Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
@@ -256,8 +256,8 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
 //-----------------------------------------------------------------------
 #ifdef USE_OFF_DIAGONAL_FD_JACOBIAN_FOR_NONISOTHERMAL_AXISYMMETRIC_NAVIER_STOKES
 
- ///Helper function to get the off-diagonal blocks of the Jacobian
- ///matrix by finite differences
+ /// Helper function to get the off-diagonal blocks of the Jacobian
+ /// matrix by finite differences
  void fill_in_off_diagonal_jacobian_blocks_by_fd(Vector<double> &residuals,
                                                  DenseMatrix<double> &jacobian)
   {
@@ -391,7 +391,7 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   }
 
 
- ///Compute the element's residual Vector and the Jacobian matrix.
+ /// Compute the element's residual Vector and the Jacobian matrix.
  /// Use finite-differencing only for the off-diagonal blocks.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
@@ -416,8 +416,8 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
  //----------------------------------------------------------------------
 #else
 
- ///Helper function to get the off-diagonal blocks of the Jacobian
- ///matrix analytically
+ /// Helper function to get the off-diagonal blocks of the Jacobian
+ /// matrix analytically
  void fill_in_off_diagonal_jacobian_blocks_analytic(Vector<double> &residuals, 
                                                     DenseMatrix<double> &jacobian)
   {
@@ -522,7 +522,7 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
   }
 
 
- ///Compute the element's residual Vector and the Jacobian matrix.
+ /// Compute the element's residual Vector and the Jacobian matrix.
  /// Use analytic expressions for the off-diagonal blocks
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
@@ -553,9 +553,9 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
 };
 
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 namespace oomph
 {

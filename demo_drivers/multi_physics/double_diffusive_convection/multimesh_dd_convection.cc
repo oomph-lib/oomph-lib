@@ -87,16 +87,16 @@ public:
    this->ignore_external_geometric_data();
   } 
 
- ///Access function for the thermal Rayleigh number (const version)
+ /// Access function for the thermal Rayleigh number (const version)
  const double &ra_t() const {return *Ra_T_pt;}
 
- ///Access function for the pointer to the thermal Rayleigh number
+ /// Access function for the pointer to the thermal Rayleigh number
  double* &ra_t_pt() {return Ra_T_pt;}
 
-  ///Access function for the solutal Rayleigh number (const version)
+  /// Access function for the solutal Rayleigh number (const version)
  const double &ra_s() const {return *Ra_S_pt;}
 
- ///Access function for the pointer to the solutal Rayleigh number
+ /// Access function for the pointer to the solutal Rayleigh number
  double* &ra_s_pt() {return Ra_S_pt;}
 
  // Overload get_body_force_nst to get the temperature "body force"
@@ -112,7 +112,7 @@ public:
   DenseMatrix<double> &result, Vector<unsigned> &global_eqn_number);
 
 
- ///Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing or analytically
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -275,7 +275,7 @@ public:
   Vector<double> &result, Vector<unsigned> &global_eqn_number);
 
 
- ///Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -632,9 +632,9 @@ namespace Global_Physical_Variables
   
 } // end_of_namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D double-diffusive Convection  problem on three rectangular domains, 
@@ -648,7 +648,7 @@ class DDConvectionProblem : public Problem
 
 public:
 
- ///Constructor
+ /// Constructor
  DDConvectionProblem();
 
  /// Destructor. Empty
@@ -678,7 +678,7 @@ public:
    set_boundary_conditions(time_pt()->time());
   }
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {

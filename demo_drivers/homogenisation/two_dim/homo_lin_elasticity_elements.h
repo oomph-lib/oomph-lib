@@ -122,10 +122,10 @@ namespace oomph
     Lambda_sq_pt(&Default_lambda_sq_value), P_pt(0), M_pt(0), Unsteady(false)
     {}
 
-   ///Access function for the pointer to the p value
+   /// Access function for the pointer to the p value
    unsigned* &p_pt() {return P_pt;}
    
-   ///Get the value of p
+   /// Get the value of p
    unsigned get_p()
    {
     if(P_pt==0) 
@@ -138,10 +138,10 @@ namespace oomph
     else {return *P_pt;}
    }
 
-   ///Access function for the pointer to the m value
+   /// Access function for the pointer to the m value
    unsigned* &m_pt() {return M_pt;}
  
-   ///Get the value of m
+   /// Get the value of m
    unsigned get_m()
    {
     if(M_pt==0) 
@@ -179,16 +179,16 @@ namespace oomph
      }
    }
 
-   ///Access function for timescale ratio (nondim density)
+   /// Access function for timescale ratio (nondim density)
    const double& lambda_sq() const {return *Lambda_sq_pt;}
    
    /// Access function for pointer to timescale ratio (nondim density)
    double* &lambda_sq_pt() {return Lambda_sq_pt;}
    
-   ///Access function to flag that switches inertia on/off
+   /// Access function to flag that switches inertia on/off
    bool& unsteady() {return Unsteady;}
    
-   ///Access function to flag that switches inertia on/off (const version)
+   /// Access function to flag that switches inertia on/off (const version)
    bool unsteady() const {return Unsteady;}
 
    virtual FaceElement* make_face_element(const unsigned &s_fixed_index,

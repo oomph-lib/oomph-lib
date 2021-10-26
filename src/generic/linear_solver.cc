@@ -808,7 +808,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
     // USING SUPERLU DIST
-    /////////////////////
+    /// //////////////////
     if (Solver_type == Distributed ||
         (Solver_type == Default && problem_pt->communicator_pt()->nproc() > 1))
     {
@@ -921,7 +921,7 @@ namespace oomph
     }
 
     // OTHERWISE WE ARE USING SUPERLU (SERIAL)
-    //////////////////////////////////////////
+    /// ///////////////////////////////////////
     else
 #endif
     {
@@ -1276,7 +1276,7 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
     // USING SUPERLU DIST
-    /////////////////////
+    /// //////////////////
     if (Solver_type == Distributed ||
         (Solver_type == Default && problem_pt->communicator_pt()->nproc() > 1))
     {
@@ -1389,7 +1389,7 @@ namespace oomph
     }
 
     // OTHERWISE WE ARE USING SUPERLU (SERIAL)
-    //////////////////////////////////////////
+    /// ///////////////////////////////////////
     else
 #endif
     {

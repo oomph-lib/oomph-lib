@@ -155,7 +155,7 @@ private:
  // The Line Visualiser.
  LineVisualiser* LV_pt;
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {

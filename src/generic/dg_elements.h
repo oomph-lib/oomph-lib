@@ -551,7 +551,7 @@ namespace oomph
 
   public:
     /// Constructor takes a value for the modification parameter M
-    ///(default to zero --- classic min mod) and a flag to indicate whether
+    /// (default to zero --- classic min mod) and a flag to indicate whether
     /// we use MUSCL limiting or not --- default false
     MinModLimiter(const double& m = 0.0, const bool& muscl = false)
       : SlopeLimiter(), M(m), MUSCL(muscl)

@@ -75,15 +75,15 @@ public:
    this->ignore_external_geometric_data();
   } 
 
- ///The required number of values stored at the nodes is the number of
- ///required values of the CrouzeixRaviartElement.
+ /// The required number of values stored at the nodes is the number of
+ /// required values of the CrouzeixRaviartElement.
  unsigned required_nvalue(const unsigned &n) const
   {return RefineableQCrouzeixRaviartElement<DIM>::required_nvalue(n);}
 
- ///Access function for the Rayleigh number (const version)
+ /// Access function for the Rayleigh number (const version)
  const double &ra() const {return *Ra_pt;}
 
- ///Access function for the pointer to the Rayleigh number
+ /// Access function for the pointer to the Rayleigh number
  double* &ra_pt() {return Ra_pt;}
 
  ///  Overload the standard output function with the broken default
@@ -218,7 +218,7 @@ public:
     residuals);
   }
 
- ///Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -428,8 +428,8 @@ public:
    this->ignore_external_geometric_data();
   }
 
- ///The required number of values stored at the nodes is the number of
- ///required values of the AdvectionDiffusionElement.
+ /// The required number of values stored at the nodes is the number of
+ /// required values of the AdvectionDiffusionElement.
  unsigned required_nvalue(const unsigned &n) const
   {return RefineableQAdvectionDiffusionElement<DIM,3>::required_nvalue(n);}
 
@@ -558,7 +558,7 @@ public:
     fill_in_contribution_to_residuals(residuals);
   }
 
- ///Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -935,8 +935,8 @@ double RefineableQCrouzeixRaviartElementWithExternalElement<2>::Default_Physical
 template<>
 double RefineableQCrouzeixRaviartElementWithExternalElement<3>::Default_Physical_Constant_Value=0.0;
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 

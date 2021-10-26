@@ -660,7 +660,7 @@ namespace oomph
     }
   };
 
-  ///===============================================================
+  /// ===============================================================
   /// Base class to avoid template complications
   //===============================================================
   class PeriodicOrbitAssemblyHandlerBase : public AssemblyHandler

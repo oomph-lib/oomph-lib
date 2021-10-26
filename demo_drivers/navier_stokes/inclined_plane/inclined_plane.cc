@@ -50,34 +50,34 @@ using namespace oomph;
 //The global physical variables
 namespace Global_Physical_Variables
 {
- ///Reynolds number, based on the average velocity within the fluid film
+ /// Reynolds number, based on the average velocity within the fluid film
  double Re=0.0;
 
- ///The product of Reynolds number and inverse Froude number 
- ///is set to two in this problem, which gives the free surface velocity
- ///to be sin(alpha). [Set to three in order to get the same scale as 
- ///used by Yih, Benjamin, etc]
+ /// The product of Reynolds number and inverse Froude number 
+ /// is set to two in this problem, which gives the free surface velocity
+ /// to be sin(alpha). [Set to three in order to get the same scale as 
+ /// used by Yih, Benjamin, etc]
  double ReInvFr=2.0;
 
- ///Angle of incline of the slope (45 degrees)
+ /// Angle of incline of the slope (45 degrees)
  double Alpha = 1.0*atan(1.0);
 
- ///The Vector direction of gravity, set in main()
+ /// The Vector direction of gravity, set in main()
  Vector<double> G(2,0.0);
 
- ///The Capillary number
+ /// The Capillary number
  double Ca= 1.0;
 
- ///Set the wavenumber
+ /// Set the wavenumber
  double K = 0.1;
 
- ///Set the number of waves desired in the domain
+ /// Set the number of waves desired in the domain
  double N_wave = 3;
 
- ///The length of the domain to fit the desired number of waves
+ /// The length of the domain to fit the desired number of waves
  double Length = 2*N_wave*4.0*atan(1.0)/K;
 
- ///Direction of the wall normal vector (at the inlet)
+ /// Direction of the wall normal vector (at the inlet)
  Vector<double> Wall_normal;
 
  /// Function that specifies the wall unit normal at the inlet
@@ -98,7 +98,7 @@ namespace Global_Physical_Variables
   for(unsigned i=0;i<n_dim;++i) {normal[i] *= -1.0;}
  }
 
- ///The contact angle that is imposed at the inlet (pi)
+ /// The contact angle that is imposed at the inlet (pi)
  double Inlet_Angle = 2.0*atan(1.0);
 
 
@@ -121,7 +121,7 @@ namespace Global_Physical_Variables
  }
  //end of traction functions
 
- ///Constitutive law used to determine the mesh deformation
+ /// Constitutive law used to determine the mesh deformation
  ConstitutiveLaw *Constitutive_law_pt;
 
  /// Pseudo-solid Poisson ratio
@@ -130,9 +130,9 @@ namespace Global_Physical_Variables
 }
 
 //=====================================================================
-///Generic problem class that will form the base class for both 
-///spine and elastic mesh-updates of the problem.
-///Templated by the bulk element and interface element types
+/// Generic problem class that will form the base class for both 
+/// spine and elastic mesh-updates of the problem.
+/// Templated by the bulk element and interface element types
 //====================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 class InclinedPlaneProblem : public Problem
@@ -140,32 +140,32 @@ class InclinedPlaneProblem : public Problem
 
 protected:
 
- ///Bulk fluid mesh
+ /// Bulk fluid mesh
  Mesh* Bulk_mesh_pt;
 
- ///Mesh for the traction elements that are added at inlet and outlet
+ /// Mesh for the traction elements that are added at inlet and outlet
  Mesh* Traction_mesh_pt;
 
- ///Mesh for the free surface elements
+ /// Mesh for the free surface elements
  Mesh* Surface_mesh_pt;
 
- ///Mesh for the point elements at each end of the free surface
+ /// Mesh for the point elements at each end of the free surface
  Mesh* Point_mesh_pt;
 
- ///Prefix for output files
+ /// Prefix for output files
  std::string Output_prefix;
 
 public:
 
- ///Generic Constructor (empty)
+ /// Generic Constructor (empty)
  InclinedPlaneProblem(const unsigned &nx, const unsigned &ny,
                       const double &length) :
   Output_prefix("Unset") { }
  
- ///Solve the steady problem
+ /// Solve the steady problem
  void solve_steady();
  
- ///Take n_tsteps timesteps of size dt
+ /// Take n_tsteps timesteps of size dt
  void timestep(const double &dt, const unsigned &n_tsteps);
 
  /// Actions before the timestep 
@@ -188,7 +188,7 @@ public:
     }
   } //end_of_actions_before_implicit_timestep
 
- ///Function to add the traction boundary elements to boundaries
+ /// Function to add the traction boundary elements to boundaries
  /// 3(inlet) and 1(outlet) of the mesh
  void make_traction_elements()
   {
@@ -295,8 +295,8 @@ public:
     }
   } //end of make_free_surface_elements
 
- ///Complete the build of the problem setting all standard
- ///parameters and boundary conditions
+ /// Complete the build of the problem setting all standard
+ /// parameters and boundary conditions
  void complete_build()
   {
    using namespace Global_Physical_Variables;
@@ -381,7 +381,7 @@ public:
    std::cout << assign_eqn_numbers() << " in the main problem" << std::endl; 
   } //end of complete_build
 
- ///Generic desructor to clean up the memory allocated in the problem
+ /// Generic desructor to clean up the memory allocated in the problem
  ~InclinedPlaneProblem()
   {
    //Clear node storage before the mesh can be deleted, 
@@ -405,7 +405,7 @@ public:
 
 
 //-------------------------------------------------------------------------
-///Solve the steady problem
+/// Solve the steady problem
 //-------------------------------------------------------------------------
 template<class ELEMENT,class INTERFACE_ELEMENT>
 void InclinedPlaneProblem<ELEMENT,INTERFACE_ELEMENT>::solve_steady()
@@ -734,8 +734,8 @@ public:
    this->complete_build();
   } //end of constructor
 
- ///Update Lagrangian positions after each timestep 
- ///(updated-lagrangian approach)
+ /// Update Lagrangian positions after each timestep 
+ /// (updated-lagrangian approach)
  void actions_after_implicit_timestep()
   {
    //Now loop over all the nodes and reset their Lagrangian coordinates

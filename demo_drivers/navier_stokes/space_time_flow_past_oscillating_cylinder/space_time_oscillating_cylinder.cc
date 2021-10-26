@@ -48,9 +48,9 @@
 // Include oomph namespace
 using namespace oomph;
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 // The specialisation of the PMLLayerElement and FaceGeometry element
 // has to be inside the oomph namespace
@@ -102,9 +102,9 @@ namespace oomph
   };
 } // End of namespace oomph
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //======start_of_OscillatingCylinder_class============================
 /// Oscillating cylinder class
@@ -239,9 +239,9 @@ private:
   Time* Time_pt;
 }; // End of OscillatingCylinder class
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //======start_of_NodeReordering_namespace=============================
 /// Contains helper function to reorganise nodes
@@ -466,16 +466,16 @@ namespace NodeReordering
   } // End of reorder_nodes
 } // End of NodeReordering
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //======start_of_GlobalParameters_namespace===========================
 /// Global parameters for the problem
 //====================================================================
 namespace GlobalParameters
 {
-  ///--------------------------Cylinder Motion----------------------------
+  /// --------------------------Cylinder Motion----------------------------
   /// Amplitude of the cylinder motion used by Williamson & Roshko
   /// (1988). As a side note, since the (simulation) cylinder has unit
   /// diameter (i.e. D=1) this is actually the dimensionless amplitude.
@@ -512,10 +512,10 @@ namespace GlobalParameters
 
   /// The number of steps used to reach the target Period_ratio value
   unsigned N_period_ratio_step=1;
-  ///--------------------------Cylinder Motion----------------------------
+  /// --------------------------Cylinder Motion----------------------------
 
 
-  ///---------------------Navier-Stokes Parameters------------------------
+  /// ---------------------Navier-Stokes Parameters------------------------
   /// Set the (current) Reynolds number. A pointer to this variable
   /// is provided to elements to make them fully functional. As this is
   /// used to calculate the Womersley number (=Re*St), the function
@@ -660,9 +660,9 @@ namespace GlobalParameters
     // Update the Womersley number
     ReSt=Re*St;
   } // End of update_physical_parameters
-  ///---------------------Navier-Stokes Parameters------------------------
+  /// ---------------------Navier-Stokes Parameters------------------------
 
-  ///-------------------------Domain Properties---------------------------
+  /// -------------------------Domain Properties---------------------------
   /// Radius of the cylinder
   double Radius=0.5;
 
@@ -715,10 +715,10 @@ namespace GlobalParameters
     Annular_region_radius=
       Radius+std::min(2.0*Radius,0.5*((0.5*Length_of_central_box)-Radius));
   } // End of update_mesh_parameters
-  ///-------------------------Domain Properties---------------------------
+  /// -------------------------Domain Properties---------------------------
 
 
-  ///----------------------------Solver Info------------------------------
+  /// ----------------------------Solver Info------------------------------
   /// Variable to choose which preconditioner to use. The actual
   /// preconditioner we choose to use is defined by the enumeration class
   /// implemented in the problem
@@ -783,10 +783,10 @@ namespace GlobalParameters
       }
     } // for (unsigned i=0;i<n_dof_types;i++)
   } // End of set_up_dof_to_block_mapping
-  ///----------------------------Solver Info------------------------------
+  /// ----------------------------Solver Info------------------------------
 
 
-  ///-----------------------Documentation Helpers-------------------------
+  /// -----------------------Documentation Helpers-------------------------
   // DocInfo object for documentation
   DocInfo Doc_info;
 
@@ -900,10 +900,10 @@ namespace GlobalParameters
       return std::string();
     } // if (parameter_pt==&Re)
   } // End of parameter_to_string
-  ///-----------------------Documentation Helpers-------------------------
+  /// -----------------------Documentation Helpers-------------------------
 
 
-  ///---------------------------Miscellaneous-----------------------------
+  /// ---------------------------Miscellaneous-----------------------------
   /// Find a node on the centerline
   /// N.B. We are modifying the *pointer* el_centerline_pt not the actual
   /// data. If we just pass a pointer to the element in then (from outside)
@@ -974,12 +974,12 @@ namespace GlobalParameters
     // Round it
     return std::floor(d+0.5);
   } // End of round
-  ///---------------------------Miscellaneous-----------------------------
+  /// ---------------------------Miscellaneous-----------------------------
 } // End of GlobalParameters
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //======start_of_Subsidiary_Preconditioner_Helper=======================
 /// The function get_new_preconditioner() returns an instance of
@@ -2040,9 +2040,9 @@ void NavierStokesProblem<ELEMENT>::doc_solution(const bool& doc_spacetime_soln)
   GlobalParameters::Doc_info.number()++;
 } // End of doc_solution
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //=======start_of_main====================================================
 /// Driver code for unsteady heat equation

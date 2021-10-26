@@ -70,17 +70,17 @@ public:
    Alpha_pt = &Default_Physical_Constant_Value;
   }
 
- ///The required number of values stored at the nodes is the sum of the
- ///required values of the two single-physics elements. Note that this step is
- ///generic for any multi-physics element of this type.
+ /// The required number of values stored at the nodes is the sum of the
+ /// required values of the two single-physics elements. Note that this step is
+ /// generic for any multi-physics element of this type.
  unsigned required_nvalue(const unsigned &n) const
   {return (QUnsteadyHeatElement<DIM,3>::required_nvalue(n) +
            QPVDElement<DIM,3>::required_nvalue(n));}
 
- ///Access function for the thermal expansion coefficient (const version)
+ /// Access function for the thermal expansion coefficient (const version)
  const double &alpha() const {return *Alpha_pt;}
 
- ///Access function for the pointer to the thermal expansion coefficientr
+ /// Access function for the pointer to the thermal expansion coefficientr
  double* &alpha_pt() {return Alpha_pt;}
   
  ///  Overload the standard output function with the broken default
@@ -199,7 +199,7 @@ public:
     fill_in_contribution_to_residuals(residuals);
   }
 
- ///Compute the element's residual Vector and the jacobian matrix
+ /// Compute the element's residual Vector and the jacobian matrix
  /// We assume that the residuals vector and jacobian matrix have been
  /// initialised to zero before calling this function
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
@@ -237,9 +237,9 @@ namespace Global_Physical_Variables
 
 } // end_of_namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D Thermoelasticity problem on rectangular domain, discretised 
@@ -252,7 +252,7 @@ class ThermalProblem : public Problem
 
 public:
 
- ///Constructor
+ /// Constructor
  ThermalProblem();
 
  /// Destructor. Empty

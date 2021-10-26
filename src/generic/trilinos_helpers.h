@@ -62,7 +62,7 @@
 
 namespace oomph
 {
-  //// forward declaration of oomph-lib compressed row matrix
+  /// / forward declaration of oomph-lib compressed row matrix
   class CRDoubleMatrix;
 
 

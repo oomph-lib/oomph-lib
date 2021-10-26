@@ -428,7 +428,7 @@ void FSIRingProblem::doc_solution(const unsigned& i,
             doc_info.number(),this->communicator_pt()->my_rank());
     //Open the output file
     some_file.open(filename);
-    ///Output the solution using 5x5 plot points 
+    /// Output the solution using 5x5 plot points 
     Fluid_mesh_pt->output(some_file,5);
     //Close the output file
     some_file.close();
@@ -439,7 +439,7 @@ void FSIRingProblem::doc_solution(const unsigned& i,
             doc_info.number(),this->communicator_pt()->my_rank());
     //Open the output file
     some_file.open(filename);
-    ///Output the solution using 5x5 plot points 
+    /// Output the solution using 5x5 plot points 
     Wall_mesh_pt->output(some_file,5);
     //Close the output file
     some_file.close();

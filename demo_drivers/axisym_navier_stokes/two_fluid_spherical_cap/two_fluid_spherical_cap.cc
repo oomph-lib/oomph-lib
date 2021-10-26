@@ -48,7 +48,7 @@ using namespace oomph;
 //The global physical variables
 namespace Global_Physical_Variables
 {
- ///Direction of the wall normal vector
+ /// Direction of the wall normal vector
  Vector<double> Wall_normal;
 
  /// Function that specifies the wall unit normal
@@ -61,10 +61,10 @@ namespace Global_Physical_Variables
 
 
 //============================================================================
-///A Problem class that solves the Navier--Stokes equations
-///in an axisymmetric geometry
-///N.B. we usually template problems by element-type and a timestepper in
-///any problems where different elements or timesteppers MAY be used
+/// A Problem class that solves the Navier--Stokes equations
+/// in an axisymmetric geometry
+/// N.B. we usually template problems by element-type and a timestepper in
+/// any problems where different elements or timesteppers MAY be used
 //============================================================================
 template<class ELEMENT>
 class CapProblem : public Problem

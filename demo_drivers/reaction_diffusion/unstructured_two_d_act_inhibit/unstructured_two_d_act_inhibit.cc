@@ -42,13 +42,13 @@ using namespace oomph;
 
 namespace GlobalVariables
 {
- ///The vector of timescales
+ /// The vector of timescales
  Vector<double> Tau(2,1.0);
  
- ///The vector of diffusion coefficients
+ /// The vector of diffusion coefficients
  Vector<double> D(2,1.0);
 
- ///Bifurcation (loss) parameter
+ /// Bifurcation (loss) parameter
  double A = -0.1;
 
  //Simple reaction kinetics
@@ -62,7 +62,7 @@ namespace GlobalVariables
   R[1] = C[1]*C[1]*C[1] - C[1] - C[0];
  }
 
- ///Derivative of simple reaction kinetics
+ /// Derivative of simple reaction kinetics
  void activator_inhibitor_reaction_derivative(const Vector<double> &C,
                                  DenseMatrix<double> &dRdC)
  {

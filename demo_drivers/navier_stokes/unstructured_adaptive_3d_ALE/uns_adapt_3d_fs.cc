@@ -231,8 +231,8 @@ template<class ELEMENT>
    
    //protected:
 
-   ///Overload the standard setup of boundary coordinates to use area
-   ///coordinates for triangles
+   /// Overload the standard setup of boundary coordinates to use area
+   /// coordinates for triangles
    void setup_boundary_coordinates_generic(const unsigned& b,
                                            const bool& switch_normal,
                                            std::ofstream& outfile)
@@ -254,7 +254,7 @@ template<class ELEMENT>
      //positions of the key control nodes, leaving the connectivity alone,
      //but that doesn't allow for any surface remeshing
      
-     ///List of vertex nodes
+     /// List of vertex nodes
      std::list<Node*> new_vertex_nodes;
      //List of facets and boundary ids
      std::list<std::pair<Vector<unsigned>, unsigned>  > new_facet_list;
@@ -741,9 +741,9 @@ template<class ELEMENT>
    
   }; 
 
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////////////////////////
 
 //======================================================================
 /// Adapt problem based on specified elemental error estimates
@@ -892,12 +892,12 @@ void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
     std::map<GeneralisedElement*,double> target_size_map;
 
 
-    //////////////////////////////////////////////////////////////
+    /// ///////////////////////////////////////////////////////////
     // NOTE: Repeated setup of multidomain interaction could
     // be avoided by setting up a sufficiently fine bin
     // for the original mesh and reading out the target
     // area information from there
-    //////////////////////////////////////////////////////////////
+    /// ///////////////////////////////////////////////////////////
 
     // Now start iterating to refine mesh recursively
     //-----------------------------------------------

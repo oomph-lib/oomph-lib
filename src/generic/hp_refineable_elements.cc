@@ -33,9 +33,9 @@
 
 namespace oomph
 {
-  ////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////
   //       1D PRefineableQElements
-  ////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////
 
   /// Get local coordinates of node j in the element; vector sets its own size
   template<unsigned INITIAL_NNODE_1D>
@@ -1201,9 +1201,9 @@ namespace oomph
     RefineableQElement<1>::check_integrity(max_error);
   }
 
-  ////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////
   //       2D PRefineableQElements
-  ////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////
 
   /// Get local coordinates of node j in the element; vector sets its own size
   template<unsigned INITIAL_NNODE_1D>
@@ -1969,14 +1969,14 @@ namespace oomph
         // Get vector of geometric objects
         Vector<GeomObject*> geom_object_pt = m_el_pt->geom_object_pt();
 
-        //// Build update info by passing vector of geometric objects:
-        //// This sets the current element to be the update element
-        //// for all of the element's nodes -- this is reversed
-        //// if the element is ever un-refined in the father element's
-        //// rebuild_from_sons() function which overwrites this
-        //// assignment to avoid nasty segmentation faults that occur
-        //// when a node tries to update itself via an element that no
-        //// longer exists...
+        /// / Build update info by passing vector of geometric objects:
+        /// / This sets the current element to be the update element
+        /// / for all of the element's nodes -- this is reversed
+        /// / if the element is ever un-refined in the father element's
+        /// / rebuild_from_sons() function which overwrites this
+        /// / assignment to avoid nasty segmentation faults that occur
+        /// / when a node tries to update itself via an element that no
+        /// / longer exists...
         m_el_pt->set_node_update_info(geom_object_pt);
       }
     }
@@ -2803,7 +2803,7 @@ namespace oomph
       // longer exists...
       m_el_pt->set_node_update_info(geom_object_pt);
 
-      //// Now loop over nodes in element
+      /// / Now loop over nodes in element
       // unsigned n_node = this->nnode();
       // for (unsigned j=0;j<n_node;j++)
       // {
@@ -2816,10 +2816,10 @@ namespace oomph
       //   set_node_update_info(this,s_in_node_update_element,m_el_pt->geom_object_pt());
       // }
 
-      ////BENFLAG:
+      /// /BENFLAG:
       // std::cout << "Checking that all the nodes have this as their update
       // element..." << std::endl;
-      ////std::cout << "this = " << this << std::endl;
+      /// /std::cout << "this = " << this << std::endl;
       // for(unsigned j=0; j<this->nnode(); j++)
       // {
       //  //std::cout << this->node_pt(j) << ":   [" << this->node_pt(j)->x(0)
@@ -4768,9 +4768,9 @@ namespace oomph
     } // End of case where this interface is to be mortared
   }
 
-  ////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////
   //       3D PRefineableQElements
-  ////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////
 
   /// Get local coordinates of node j in the element; vector sets its own size
   template<unsigned INITIAL_NNODE_1D>
@@ -5906,7 +5906,7 @@ namespace oomph
       // Number of history values (incl. present)
       unsigned ntstorage = time_stepper_pt->ntstorage();
 
-      //// Pass pointer to time object:
+      /// / Pass pointer to time object:
       // this->time_pt()=father_el_pt->time_pt();
 
       Vector<double> s_lo(3);
@@ -5991,9 +5991,9 @@ namespace oomph
           break;
       }
 
-      //// Pass macro element pointer on to sons and
-      //// set coordinates in macro element
-      //// hierher why can I see this?
+      /// / Pass macro element pointer on to sons and
+      /// / set coordinates in macro element
+      /// / hierher why can I see this?
       // if(father_el_pt->macro_elem_pt()!=0)
       // {
       //  set_macro_elem_pt(father_el_pt->macro_elem_pt());
@@ -9240,7 +9240,7 @@ namespace oomph
                     master_shapes[master_node_number[m]]);
               }
 
-              //// Set up hanging scheme for this node
+              /// / Set up hanging scheme for this node
               // HangInfo* explicit_hang_pt = new HangInfo(n_master_nodes);
               // for(unsigned m=0; m<n_master_nodes; m++)
               // {
@@ -9251,7 +9251,7 @@ namespace oomph
               dependent_node_pt[vertex_pos[v]]->set_hanging_pt(explicit_hang_pt,
                                                                -1);
 
-              //// Print out hanging scheme
+              /// / Print out hanging scheme
               // std::cout << "Hanging node: "
               //          << dependent_node_pt[vertex_pos[v]]->x(0) << "  "
               //          << dependent_node_pt[vertex_pos[v]]->x(1) << "  "
@@ -9474,7 +9474,7 @@ namespace oomph
               }
             }
 
-            //// Print out local projection matrix
+            /// / Print out local projection matrix
             // std::cout << "P_e:" << std::endl;
             // for(unsigned i=0; i<P.size(); i++)
             // {
@@ -9528,7 +9528,7 @@ namespace oomph
               }
             }
 
-            //// Print out global projection matrix
+            /// / Print out global projection matrix
             // std::cout << "P:" << std::endl;
             // for(unsigned i=0; i<P.size(); i++)
             // {
@@ -9550,7 +9550,7 @@ namespace oomph
               }
             }
 
-            //// Print out solved global projection matrix
+            /// / Print out solved global projection matrix
             // std::cout << "solved P:" << std::endl;
             // for(unsigned i=0; i<P.size(); i++)
             // {
@@ -9599,16 +9599,16 @@ namespace oomph
               }
             }
 
-            //// Create structures to hold the hanging info
-            ////-------------------------------------------
+            /// / Create structures to hold the hanging info
+            /// /-------------------------------------------
             // Vector<HangInfo*> hang_info_pt(n_dependent_nodes);
             // for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
             // {
             //  hang_info_pt[i] = new HangInfo(n_master_nodes);
             // }
             //
-            //// Copy information to hanging nodes
-            ////----------------------------------
+            /// / Copy information to hanging nodes
+            /// /----------------------------------
             // for(unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
             // {
             //  for(unsigned j=0; j<n_master_nodes; j++)
@@ -9656,7 +9656,7 @@ namespace oomph
                 dependent_node_pt[non_vertex_pos[i]]->set_hanging_pt(
                   hang_info_pt[i], -1);
 
-                //// Print out hanging scheme
+                /// / Print out hanging scheme
                 // std::cout << "Hanging node: "
                 //          << dependent_node_pt[non_vertex_pos[i]]->x(0) << " "
                 //          << dependent_node_pt[non_vertex_pos[i]]->x(1) << " "
@@ -9907,7 +9907,7 @@ namespace oomph
       const unsigned dependent_element_nnode_1d = my_n_p;
       const unsigned master_element_nnode_1d = neigh_n_p;
 
-      //// Print out dependent and master node coords
+      /// / Print out dependent and master node coords
       // std::cout << "Dependent nodes on face: " <<
       // OcTree::Direct_string[my_face] << std::endl; for(unsigned i=0;
       // i<dependent_node_pt.size(); i++)
@@ -10076,7 +10076,7 @@ namespace oomph
           diag_M[i] = psi[i] * dependent_weight[non_vertex_pos[i]];
         }
 
-        //// Print out diag(M)
+        /// / Print out diag(M)
         // std::cout << "diag(M):" << std::endl;
         // for(unsigned i=0; i<diag_M.size(); i++)
         // {
@@ -10141,7 +10141,7 @@ namespace oomph
           }
         }
 
-        //// Print out diag(M)
+        /// / Print out diag(M)
         // std::cout << "shared node M:" << std::endl;
         // for(unsigned i=0; i<shared_node_M.size(); i++)
         // {
@@ -10289,7 +10289,7 @@ namespace oomph
           }
         }
 
-        //// Print out local projection matrix
+        /// / Print out local projection matrix
         // std::cout << "P_e:" << std::endl;
         // for(unsigned i=0; i<P.size(); i++)
         // {
@@ -10350,7 +10350,7 @@ namespace oomph
           }
         }
 
-        //// Print out global projection matrix
+        /// / Print out global projection matrix
         // std::cout << "P:" << std::endl;
         // for(unsigned i=0; i<P.size(); i++)
         // {
@@ -10371,7 +10371,7 @@ namespace oomph
           }
         }
 
-        //// Print out solved matrix
+        /// / Print out solved matrix
         // std::cout << "solved P:" << std::endl;
         // for(unsigned i=0; i<P.size(); i++)
         // {
@@ -10643,7 +10643,7 @@ namespace oomph
 
           if (!is_master)
           {
-            //// Throw error
+            /// / Throw error
             // std::ostringstream error_string;
             // error_string
             // << "This node in the dependent element is neither" << std::endl

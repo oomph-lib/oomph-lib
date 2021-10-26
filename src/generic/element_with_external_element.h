@@ -510,11 +510,11 @@ namespace oomph
     /// Boolean flag to indicate whether to include the external geometric data
     bool Add_external_geometric_data;
 
-    //// Storage for pointers to external field Data that affect the
+    /// / Storage for pointers to external field Data that affect the
     /// interactions in the elemenet
     Data** External_interaction_field_data_pt;
 
-    //// Storage for pointers to external geometric Data that affect the
+    /// / Storage for pointers to external geometric Data that affect the
     /// interactions in the elemenet
     Data** External_interaction_geometric_data_pt;
 
@@ -601,7 +601,7 @@ namespace oomph
 
     ///  Storage for vectors of local coordinates in
     /// external elements that correspond to the appropriate integration
-    //// point.
+    /// / point.
     Vector<double>* External_element_local_coord;
 
     /// Storage for the index of the values in the external field data

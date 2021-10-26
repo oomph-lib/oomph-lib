@@ -46,7 +46,7 @@ namespace Global
  
  const double pi = MathematicalConstants::Pi;
 
- ///Function that determines the initial conditions
+ /// Function that determines the initial conditions
  void exact_solution(const double &t, const Vector<double> &x,
                      Vector<double> &u)
  {

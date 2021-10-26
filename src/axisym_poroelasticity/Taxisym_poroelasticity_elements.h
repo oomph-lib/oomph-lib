@@ -36,14 +36,14 @@
 
 namespace oomph
 {
-  ///=================================================================
+  /// =================================================================
   /// Element which solves the Darcy/linear elasticity equations
   /// using TElements
   /// Geometrically the element is always a six noded triangle.
   /// We use the mid-side nodes to store edge-based flux degrees of
   /// freedom and internal data for the discontinuous pressure
   /// and internal flux dofs.
-  ///=================================================================
+  /// =================================================================
   template<unsigned ORDER>
   class TAxisymmetricPoroelasticityElement
     : public TElement<2, 3>,

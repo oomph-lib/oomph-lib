@@ -68,9 +68,9 @@
 using namespace std;
 using namespace oomph;
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
 
@@ -267,8 +267,8 @@ public:
  
   }
 
- ///Output function to compute the strain energy in the solid and the 
- ///dissipation in the fluid and write to the output stream trace
+ /// Output function to compute the strain energy in the solid and the 
+ /// dissipation in the fluid and write to the output stream trace
  void output_strain_and_dissipation(std::ostream &trace)
   {
    double strain_energy = this->get_solid_strain_energy();
@@ -335,8 +335,8 @@ private:
     }
   }
 
-///Create the multipliers that add lagrange multipliers to the fluid
-///elements that apply the solid displacement conditions
+/// Create the multipliers that add lagrange multipliers to the fluid
+/// elements that apply the solid displacement conditions
  void create_lagrange_multiplier_elements() 
   {
    //Loop over the FSI boundaries

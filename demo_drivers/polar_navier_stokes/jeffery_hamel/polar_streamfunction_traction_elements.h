@@ -36,8 +36,8 @@ namespace oomph
 {
 
 //======================================================================
-///A class for elements that allow the imposition of an applied traction
-///to the Navier--Stokes equations 
+/// A class for elements that allow the imposition of an applied traction
+/// to the Navier--Stokes equations 
 //======================================================================
 template <class ELEMENT>
 class PolarStreamfunctionTractionElement : public virtual FaceGeometry<ELEMENT>, 
@@ -46,7 +46,7 @@ public virtual FaceElement
  
 private:
 
- ///The highest dimension of the problem 
+ /// The highest dimension of the problem 
  unsigned Dim;
 
 protected:
@@ -59,8 +59,8 @@ protected:
  virtual inline int s_local_eqn(const unsigned &n)
   {return nodal_local_eqn(n,0);}
  
- ///Function to compute the shape and test functions and to return 
- ///the Jacobian of mapping 
+ /// Function to compute the shape and test functions and to return 
+ /// the Jacobian of mapping 
  inline double shape_and_test_at_knot(const unsigned &ipt, 
                                       Shape &psi, Shape &test)
   const
@@ -75,9 +75,9 @@ protected:
    return J_eulerian_at_knot(ipt);
   }
 
- ///This function returns the residuals for the 
+ /// This function returns the residuals for the 
  /// traction function.
- ///flag=1(or 0): do (or don't) compute the Jacobian as well. 
+ /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
  void fill_in_generic_residual_contribution(Vector<double> &residuals, 
                                             DenseMatrix<double> &jacobian,
                                             DenseMatrix<double> &mass_matrix,
@@ -105,8 +105,8 @@ public:
  /// Function to set boundary
  void set_boundary(int bound) {Boundary=bound;}
 
- ///Constructor, which takes a "bulk" element and the value of the index
- ///and its limit
+ /// Constructor, which takes a "bulk" element and the value of the index
+ /// and its limit
  PolarStreamfunctionTractionElement(FiniteElement* const &element_pt, 
                                     const int &face_index) : 
   FaceGeometry<ELEMENT>(), FaceElement()
@@ -142,7 +142,7 @@ public:
  /// Destructor should not delete anything
  ~PolarStreamfunctionTractionElement() { }
  
- ///This function returns just the residuals
+ /// This function returns just the residuals
  inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
   {
    //Call the generic residuals function with flag set to 0
@@ -151,7 +151,7 @@ public:
     residuals,GeneralisedElement::Dummy_matrix,GeneralisedElement::Dummy_matrix,0);
   }
  
- ///This function returns the residuals and the jacobian
+ /// This function returns the residuals and the jacobian
  inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
   {
@@ -159,7 +159,7 @@ public:
    fill_in_generic_residual_contribution(residuals,jacobian,GeneralisedElement::Dummy_matrix,1);
   }
 
- ///Compute the element's residual Vector and the jacobian matrix
+ /// Compute the element's residual Vector and the jacobian matrix
  /// Plus the mass matrix especially for eigenvalue problems
  void fill_in_contribution_to_jacobian_and_mass_matrix(
   Vector<double> &residuals,
@@ -169,10 +169,10 @@ public:
    fill_in_generic_residual_contribution(residuals,jacobian,GeneralisedElement::Dummy_matrix,2);
   }
  
- ///Overload the output function
+ /// Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
 
-///Output function: x,y,[z],u,v,[w],p in tecplot format
+/// Output function: x,y,[z],u,v,[w],p in tecplot format
 void output(std::ostream &outfile, const unsigned &nplot)
  {FiniteElement::output(outfile,nplot);}
 
@@ -188,9 +188,9 @@ void output(std::ostream &outfile, const unsigned &nplot)
 
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
 

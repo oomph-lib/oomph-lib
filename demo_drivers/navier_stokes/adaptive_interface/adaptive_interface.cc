@@ -43,7 +43,7 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Poisson ratio
  double Nu=0.1;
 
- ///Direction of the wall normal vector
+ /// Direction of the wall normal vector
  Vector<double> Wall_normal;
 
  /// Function that specifies the wall unit normal
@@ -922,7 +922,7 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
  G.resize(2);
  G[0] = 0.0; G[1] = -1.0;
 
- ///Set the initial value of the ReInvFr = Bo/Ca
+ /// Set the initial value of the ReInvFr = Bo/Ca
  ReInvFr = Bo/Ca;
 
  /// Build a linear solver: Use HSL's MA42 frontal solver
@@ -1266,9 +1266,9 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
 }
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
  int main()

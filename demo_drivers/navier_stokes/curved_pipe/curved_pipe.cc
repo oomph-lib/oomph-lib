@@ -23,8 +23,8 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Driver for a 3D navier stokes steady entry flow problem in a 
-///uniformly curved tube
+/// Driver for a 3D navier stokes steady entry flow problem in a 
+/// uniformly curved tube
 
 //Generic routines
 #include "generic.h"
@@ -53,7 +53,7 @@ public:
 /// Destructor
 virtual~MyCurvedCylinder(){}
 
-///Lagrangian coordinate xi
+/// Lagrangian coordinate xi
 void position (const Vector<double>& xi, Vector<double>& r) const
 {
  r[0] = (1.0/Delta)*cos(xi[0]) + xi[2]*Radius*cos(xi[0])*cos(xi[1]);
@@ -72,7 +72,7 @@ void position(const unsigned& t,
 
 private:
 
- ///Storage for the radius of the tube
+ /// Storage for the radius of the tube
  double Radius;
 
  //Storage for the curvature of the tube
@@ -134,7 +134,7 @@ private:
  /// Doc info object
  DocInfo Doc_info;
  
- ///Pointer to GeomObject that specifies the domain volume
+ /// Pointer to GeomObject that specifies the domain volume
  GeomObject *Volume_pt;
 
 }; // end_of_problem_class
@@ -305,9 +305,9 @@ void SteadyCurvedTubeProblem<ELEMENT>::doc_solution()
  
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //=start_of_main=======================================================

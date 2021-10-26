@@ -67,7 +67,7 @@ public:
  FiniteElement* &interface_element_pt(const unsigned long &i) 
   {return Interface_element_pt[i];}
 
- ///Access functions for pointers to elements in bulk
+ /// Access functions for pointers to elements in bulk
  FiniteElement* &bulk_element_pt(const unsigned long &i) 
   {return Bulk_element_pt[i];}
 
@@ -85,7 +85,7 @@ public:
  //Face index for the outlet elements
  int face_index_outlet() {return  Face_index_outlet;}
 
- ///Number of elements in bulk 
+ /// Number of elements in bulk 
  unsigned long nbulk() const {return Bulk_element_pt.size();}
 
  /// Number of elements on interface
@@ -538,8 +538,8 @@ for(unsigned i = 0; i< addmesh_pt->ninterface_element(); i++)
 #endif
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 

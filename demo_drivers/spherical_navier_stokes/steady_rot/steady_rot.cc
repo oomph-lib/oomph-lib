@@ -53,11 +53,11 @@ namespace Global_Physical_Variables
 
 
 //=======================================================
-///Namespace for the exact rigid-body-rotation solution
+/// Namespace for the exact rigid-body-rotation solution
 //=======================================================
 namespace ExactSolution
 {
- ///The rigid-body rotation solution
+ /// The rigid-body rotation solution
  void rigid_body_rotation(const Vector<double> &x,
                           Vector<double> &u)
  {
@@ -71,7 +71,7 @@ namespace ExactSolution
   u[3] = 0.5*Global_Physical_Variables::Re*r_sin_theta*r_sin_theta;
  }
 
- ///The r-derivative of the rigid-body rotation solution
+ /// The r-derivative of the rigid-body rotation solution
  void rigid_body_rotation_dr(const Vector<double> &x,
                               Vector<double> &u)
  {
@@ -86,7 +86,7 @@ namespace ExactSolution
  }
 
 
- ///The theta-derivative of the rigid-body rotation solution
+ /// The theta-derivative of the rigid-body rotation solution
  void rigid_body_rotation_dtheta(const Vector<double> &x,
                               Vector<double> &u)
  {
@@ -102,9 +102,9 @@ namespace ExactSolution
 }
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 
@@ -123,7 +123,7 @@ public:
  /// Destructor to clean up memory
  ~SphericalSteadyRotationProblem();
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -156,7 +156,7 @@ private:
  //Storage for number of elements in the radial direction
  unsigned Nr;
  
- ///Storage for number of elements in the theta direction
+ /// Storage for number of elements in the theta direction
  unsigned Ntheta;
 
 }; // end_of_problem_class
@@ -347,9 +347,9 @@ void SphericalSteadyRotationProblem<ELEMENT>::parameter_study(
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main======================================================

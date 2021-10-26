@@ -80,17 +80,17 @@ public:
    this->ignore_external_geometric_data();
   } 
 
- ///Access function for the Rayleigh number (const version)
+ /// Access function for the Rayleigh number (const version)
  const double &ra_t() const {return *Ra_T_pt;}
 
- ///Access function for the pointer to the Rayleigh number
+ /// Access function for the pointer to the Rayleigh number
  double* &ra_t_pt() {return Ra_T_pt;}
 
 
-  ///Access function for the solutal Rayleigh number (const version)
+  /// Access function for the solutal Rayleigh number (const version)
  const double &ra_s() const {return *Ra_S_pt;}
 
- ///Access function for the pointer to the solutal Rayleigh number
+ /// Access function for the pointer to the solutal Rayleigh number
  double* &ra_s_pt() {return Ra_S_pt;}
 
  /// Call the underlying single-physics element's further_build()
@@ -136,7 +136,7 @@ public:
     residuals);
   }
 
- ///Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -352,7 +352,7 @@ public:
     fill_in_contribution_to_residuals(residuals);
   }
 
- ///Compute the element's residual vector and the Jacobian matrix.
+ /// Compute the element's residual vector and the Jacobian matrix.
  /// Jacobian is computed by finite-differencing.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -731,8 +731,8 @@ template<>
 double RefineableQCrouzeixRaviartElementWithTwoExternalElement<3>::
 Default_Physical_Constant_Value=0.0;
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 

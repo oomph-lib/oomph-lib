@@ -119,18 +119,18 @@ public:
  /// (advantageous in "wide" domains if a frontal solver is used).
  void element_reorder();
 
- ///Access functions for pointers to elements in upper layer
+ /// Access functions for pointers to elements in upper layer
  FiniteElement* &upper_layer_element_pt(const unsigned long &i) 
   { return Upper_layer_element_pt[i]; }
 
- ///Access functions for pointers to elements in lower layer
+ /// Access functions for pointers to elements in lower layer
  FiniteElement* &lower_layer_element_pt(const unsigned long &i) 
   { return Lower_layer_element_pt[i]; }
 
- ///Number of elements in upper layer
+ /// Number of elements in upper layer
  unsigned long nupper() const { return Upper_layer_element_pt.size(); }
 
- ///Number of elements in top layer
+ /// Number of elements in top layer
  unsigned long nlower() const { return Lower_layer_element_pt.size(); }
  
  /// General node update function implements pure virtual function 

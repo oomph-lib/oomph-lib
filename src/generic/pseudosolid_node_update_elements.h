@@ -1262,7 +1262,7 @@ namespace oomph
     }
 
     /// The basis interpolating the pressure is given by pshape().
-    //// The basis interpolating the velocity is shape().
+    /// / The basis interpolating the velocity is shape().
     void interpolating_basis(const Vector<double>& s,
                              Shape& psi,
                              const int& value_id) const

@@ -86,15 +86,15 @@ using namespace oomph;
 
 
 //=======================================================================
-///Exact solution for the rotation of an ellipse in unbounded shear flow
-///as computed by Jeffery (1922)
+/// Exact solution for the rotation of an ellipse in unbounded shear flow
+/// as computed by Jeffery (1922)
 //=======================================================================
 namespace Jeffery_Solution
 {
- ///Null function
+ /// Null function
  double null(const double &t) {return 0.0;}
 
- ///Angular position as a function of time t
+ /// Angular position as a function of time t
  double angle(const double &t)
  {
   const double a = Problem_Parameter::A;
@@ -103,7 +103,7 @@ namespace Jeffery_Solution
   return atan((b/a)*tan((a*b*t)/(b*b + a*a)));
  }
 
- ///Angular velocity as function of time t
+ /// Angular velocity as function of time t
  double velocity(const double &t)
  {
   const double a = Problem_Parameter::A;
@@ -116,7 +116,7 @@ namespace Jeffery_Solution
   return (a*a*sin(chi)*sin(chi) + b*b*cos(chi)*cos(chi))/(a*a + b*b);
  }
 
- ///Angular acceleration as a function of time t (should always be zero)
+ /// Angular acceleration as a function of time t (should always be zero)
  double acceleration(const double &t)
  {
   const double a = Problem_Parameter::A;
@@ -131,9 +131,9 @@ namespace Jeffery_Solution
  }
 }
 
-///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
 
 
 //===================start_of_general_ellipse=================================
@@ -161,8 +161,8 @@ public:
  /// Empty Destructor
  ~GeneralEllipse() {}
 
- ///Return the position of the ellipse boundary as a function of 
- ///the angle xi[0]
+ /// Return the position of the ellipse boundary as a function of 
+ /// the angle xi[0]
  void position(const Vector<double> &xi, Vector<double> &r) const
   {
    r[0] = Centre_x + A*cos(xi[0]);
@@ -180,9 +180,9 @@ public:
 //end_of_general_ellipse
 
 
-///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////
 
 
 //==start_of_problem_class============================================
@@ -226,12 +226,12 @@ public:
  /// computation of drag vector
  void complete_problem_setup();
 
- ///Set the boundary velocity
+ /// Set the boundary velocity
  void set_boundary_velocity();
 
- ///Function that solves a simplified problem to ensure that 
- ///the positions of the boundary nodes are initially consistent with
- ///the lagrange multiplier formulation
+ /// Function that solves a simplified problem to ensure that 
+ /// the positions of the boundary nodes are initially consistent with
+ /// the lagrange multiplier formulation
  void solve_for_consistent_nodal_positions();
 
  /// Doc the solution
@@ -258,10 +258,10 @@ private:
  /// boundaries
  void delete_drag_elements();
 
- ///Pin the degrees of freedom associated with the solid bodies
+ /// Pin the degrees of freedom associated with the solid bodies
  void pin_rigid_body();
 
- ///Unpin the degrees of freedom associated with the solid bodies
+ /// Unpin the degrees of freedom associated with the solid bodies
  void unpin_rigid_body();
  
  /// Pointers to mesh of Lagrange multiplier elements
@@ -730,7 +730,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::complete_problem_setup()
 
 
 //=================start_set_boundary_velocity===========================
-///Set the boundary velocity for current and history values
+/// Set the boundary velocity for current and history values
 //=======================================================================
 template<class ELEMENT>
 void UnstructuredImmersedEllipseProblem<ELEMENT>::
@@ -818,7 +818,7 @@ set_boundary_velocity()
 
 
 //====================start_of_pin_rigid_body=====================
-///Pin the degrees of freedom associated with the solid bodies
+/// Pin the degrees of freedom associated with the solid bodies
 //================================================================
 template<class ELEMENT>
 void UnstructuredImmersedEllipseProblem<ELEMENT>::pin_rigid_body()
@@ -836,7 +836,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::pin_rigid_body()
 
 
 //=================start_unpin_rigid_body==========================
-///Unpin the degrees of freedom associated with the solid bodies
+/// Unpin the degrees of freedom associated with the solid bodies
 //=================================================================
 template<class ELEMENT>
 void UnstructuredImmersedEllipseProblem<ELEMENT>::unpin_rigid_body()
@@ -854,10 +854,10 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::unpin_rigid_body()
 
 
 //==========start_solve_for_consistent_nodal_positions================
-///Assemble and solve a simplified problem that ensures that the 
-///positions of the boundary nodes are consistent with the weak 
-///imposition of the displacement boundary conditions on the surface
-///of the ellipse.
+/// Assemble and solve a simplified problem that ensures that the 
+/// positions of the boundary nodes are consistent with the weak 
+/// imposition of the displacement boundary conditions on the surface
+/// of the ellipse.
 //===================================================================
 template<class ELEMENT>
 void UnstructuredImmersedEllipseProblem<ELEMENT>::

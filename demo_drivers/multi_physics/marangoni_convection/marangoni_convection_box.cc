@@ -23,7 +23,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Driver for a multi-physics problem that couples the Navier--Stokes
+/// Driver for a multi-physics problem that couples the Navier--Stokes
 //equations to the advection diffusion equations, and also
 //implements temperature-dependent surface tension to give
 //Marangoni-Bernard convection
@@ -108,8 +108,8 @@ class SpineVolumeConstraintPointElement :
  
   public:
 
- ///Constructor, there are no internal values. The pointer to the 
- ///element's (single) spine has to be set manually "from the outside"
+ /// Constructor, there are no internal values. The pointer to the 
+ /// element's (single) spine has to be set manually "from the outside"
  SpineVolumeConstraintPointElement() : 
   SpinePointFluidInterfaceBoundingElement<ELEMENT>()
   {
@@ -122,7 +122,7 @@ class SpineVolumeConstraintPointElement :
  /// Access function to the prescribed volume fluid 
  double* &volume_pt() {return Volume_pt;}
 
- ///Custom overload the additional volume constraint
+ /// Custom overload the additional volume constraint
  void add_additional_residual_contributions_interface_boundary(
    Vector<double> &residuals, 
    DenseMatrix<double> &jacobian,
@@ -408,8 +408,8 @@ protected:
  
 public:
 
- ///Constructor that passes the bulk element and the face index
- ///down to the underlying 
+ /// Constructor that passes the bulk element and the face index
+ /// down to the underlying 
  FixedVolumeSpineLineMarangoniFluidInterfaceElement(
  FiniteElement* const &element_pt, const int &face_index) : 
   SpineLineFluidInterfaceElement<ELEMENT>
@@ -468,7 +468,7 @@ public:
     this->add_external_data(traded_pressure_data_pt);
   }
  
- //// Overload the making of the edge element to create out
+ /// / Overload the making of the edge element to create out
  /// volume constraint edge element
  FluidInterfaceBoundingElement* make_bounding_element(const int &face_index)
   {
@@ -554,16 +554,16 @@ namespace Global_Physical_Variables
  Vector<double> Direction_of_gravity(2);
 
  
- ///Set the value of Pi
+ /// Set the value of Pi
  const double Pi=MathematicalConstants::Pi;
 
  /// The volume of the domain
  double Volume = 1.2;
 
- ///The contact angle
+ /// The contact angle
  double Angle= 0.5*Pi;
 
- ///The external pressure
+ /// The external pressure
  double Pext = 0.0;
 
  /// Function that specifies the wall unit normal
@@ -588,9 +588,9 @@ namespace Global_Physical_Variables
 
 } // end_of_namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D Convection  problem on rectangular domain, discretised 
@@ -603,7 +603,7 @@ class ConvectionProblem : public Problem
 
 public:
 
- ///Constructor
+ /// Constructor
  ConvectionProblem();
 
  /// Destructor. Empty
@@ -659,7 +659,7 @@ public:
    set_boundary_conditions(time_pt()->time());
   }
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -669,7 +669,7 @@ public:
   } // end_of_fix_pressure
 
 
- ///UnFix pressure in element e at pressure dof pdof and set to pvalue
+ /// UnFix pressure in element e at pressure dof pdof and set to pvalue
  void unfix_pressure(const unsigned &e, const unsigned &pdof)
   {
    //Cast to specific element and fix pressure
@@ -698,7 +698,7 @@ private:
  /// DocInfo object
  DocInfo Doc_info;
 
- ///Pointer to the external data point
+ /// Pointer to the external data point
  Data* External_pressure_data_pt;
 
 

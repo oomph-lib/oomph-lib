@@ -89,7 +89,7 @@ class ShellMesh : public virtual RectangularQuadMesh<ELEMENT>,
 {
 public:
  
- ///Constructor for the mesh
+ /// Constructor for the mesh
  ShellMesh(const unsigned &nx, const unsigned &ny, 
            const double &lx, const double &ly);
  

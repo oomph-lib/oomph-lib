@@ -40,9 +40,9 @@ using namespace oomph;
 
 
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
 
 
 //====start_of_underformed_wall============================================
@@ -153,7 +153,7 @@ namespace Global_Physical_Variables
 
 
 //====start_of_problem_class==========================================
-///Problem class
+/// Problem class
 //====================================================================
 template <class ELEMENT>
 class FSIDrivenCavityProblem : public virtual Problem
@@ -239,10 +239,10 @@ class FSIDrivenCavityProblem : public virtual Problem
 
 protected : 
  
- ///Number of elements in the x direction 
+ /// Number of elements in the x direction 
  unsigned Nx;
 
- ///Number of elements in the y direction 
+ /// Number of elements in the y direction 
  unsigned Ny;
 
  /// Width of domain
@@ -260,16 +260,16 @@ protected :
  /// Pointer to the "wall" mesh
  OneDLagrangianMesh<FSIHermiteBeamElement>* Wall_mesh_pt; 
 
- ///Pointer to the left control node
+ /// Pointer to the left control node
  Node* Left_node_pt;
  
- ///Pointer to right control node
+ /// Pointer to right control node
  Node* Right_node_pt;
  
  /// Pointer to control node on the wall
  Node* Wall_node_pt;
 
- ///Pointer to geometric object (one Lagrangian, two Eulerian 
+ /// Pointer to geometric object (one Lagrangian, two Eulerian 
  /// coordinates) that will be built from the wall mesh
  MeshAsGeomObject* Wall_geom_object_pt;
 

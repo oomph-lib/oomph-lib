@@ -23,8 +23,8 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Driver for a 3D navier stokes steady entry flow problem in a helical
-///tube
+/// Driver for a 3D navier stokes steady entry flow problem in a helical
+/// tube
 
 //Generic routines
 #include "generic.h"
@@ -39,8 +39,8 @@ using namespace oomph;
 
 
 //=start_of_MyHelicalCylinder==============================================
-///The arguemts are the radius of the tube, its curvature in the x,y plane
-///and the pitch of the helix
+/// The arguemts are the radius of the tube, its curvature in the x,y plane
+/// and the pitch of the helix
 //=========================================================================
 class MyHelicalCylinder : public GeomObject
 {
@@ -58,7 +58,7 @@ public:
 /// Destructor
 virtual~MyHelicalCylinder(){}
 
-///Lagrangian coordinate xi
+/// Lagrangian coordinate xi
 void position (const Vector<double>& xi, Vector<double>& r) const
 {
  r[0] = (1.0/Delta)*cos(xi[0]) + xi[2]*Radius*cos(xi[0])*cos(xi[1]);
@@ -140,7 +140,7 @@ private:
  /// Doc info object
  DocInfo Doc_info;
  
- ///Pointer to GeomObject that specifies the domain boundary
+ /// Pointer to GeomObject that specifies the domain boundary
  GeomObject*Wall_pt;
 
 }; // end_of_problem_class
@@ -320,9 +320,9 @@ void SteadyHelicalProblem<ELEMENT>::doc_solution()
  
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //=start_of_main=======================================================

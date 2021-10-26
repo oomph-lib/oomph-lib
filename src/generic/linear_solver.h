@@ -467,9 +467,9 @@ namespace oomph
   };
 
 
-  ///////////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////////
 
 
   //=============================================================================
@@ -543,7 +543,7 @@ namespace oomph
     }
 
     // SuperLUSolver methods
-    ////////////////////////
+    /// /////////////////////
 
     /// Overload disable resolve so that it cleans up memory too
     void disable_resolve()
@@ -650,7 +650,7 @@ namespace oomph
     }
 
     // SuperLU (serial) methods
-    ///////////////////////////
+    /// ////////////////////////
 
     /// Use the compressed row format in superlu serial
     void use_compressed_row_for_superlu_serial()
@@ -667,7 +667,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
     // SuperLU Dist methods
-    ///////////////////////
+    /// ////////////////////
 
     /// Set Delete_matrix_data flag. SuperLU_dist needs its own copy
     /// of the input matrix, therefore a copy must be made if any matrix
@@ -755,7 +755,7 @@ namespace oomph
 #endif
 
     // SuperLUSolver member data
-    ////////////////////////////
+    /// /////////////////////////
 
     /// Jacobian setup time
     double Jacobian_setup_time;
@@ -776,7 +776,7 @@ namespace oomph
     bool Using_dist;
 
     // SuperLU (serial) member data
-    ///////////////////////////////
+    /// ////////////////////////////
 
     /// Storage for the LU factors as required by SuperLU
     void* Serial_f_factors;
@@ -804,7 +804,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
     // SuperLU Dist member data
-    ///////////////////////////
+    /// ////////////////////////
   public:
     /// Static flag that determines whether the warning about
     /// incorrect distribution of RHSs will be printed or not

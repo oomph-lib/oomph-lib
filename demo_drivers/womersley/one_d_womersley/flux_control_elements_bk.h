@@ -34,9 +34,9 @@ namespace oomph
 {
 
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
 
 
 //  CHECK WE DETECT OF HANGING NODES SOMEWHERE IN TRACTION MESH
@@ -45,9 +45,9 @@ namespace oomph
 template <class ELEMENT> class NavierStokesFluxControlElement;
 
 //======================================================================
-///A class for the elements that applies a net fluid flux across a 
-///boundary by the imposition of an applied traction
-///to the Navier--Stokes equations 
+/// A class for the elements that applies a net fluid flux across a 
+/// boundary by the imposition of an applied traction
+/// to the Navier--Stokes equations 
 //======================================================================
 template <class ELEMENT>
 class NetFluxControlElement : public virtual GeneralisedElement 
@@ -190,19 +190,19 @@ private:
 
 };
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////
 
 
 
 //======================================================================
-///A class for elements that allows a pressure to be imposed for volume
-///flux control by the the imposition of an applied traction
-///to the Navier--Stokes equations 
-///The geometrical information can be read from the FaceGeometery<ELEMENT> 
-///class and and thus, we can be generic enough without the need to have
-///a separate equations class
+/// A class for elements that allows a pressure to be imposed for volume
+/// flux control by the the imposition of an applied traction
+/// to the Navier--Stokes equations 
+/// The geometrical information can be read from the FaceGeometery<ELEMENT> 
+/// class and and thus, we can be generic enough without the need to have
+/// a separate equations class
 //======================================================================
 template <class ELEMENT>
 class NavierStokesFluxControlElement : 
@@ -210,8 +210,8 @@ class NavierStokesFluxControlElement :
 {
 public:
  
- ///Constructor, which takes a "bulk" element and the value of the index
- ///and its limit
+ /// Constructor, which takes a "bulk" element and the value of the index
+ /// and its limit
  NavierStokesFluxControlElement(FiniteElement* const &element_pt, 
                                 const int &face_index) : 
   NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index)
@@ -260,7 +260,7 @@ public:
   std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
   {}
  
- ///This function returns just the residuals
+ /// This function returns just the residuals
  inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
   {
    //Call the generic residuals function using a dummy matrix argument
@@ -276,7 +276,7 @@ public:
 /*    fill_in_generic_residual_contribution_fluid_traction(residuals,jacobian); */
 /*   } */
  
- ///Overload the output function
+ /// Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
  
  /// Output function: x,y,[z],u,v,[w],p in tecplot format
@@ -301,8 +301,8 @@ protected:
  virtual inline int u_local_eqn(const unsigned &n, const unsigned &i)
   {return this->nodal_local_eqn(n,i);}
  
- ///Function to compute the shape and test functions and to return 
- ///the Jacobian of mapping 
+ /// Function to compute the shape and test functions and to return 
+ /// the Jacobian of mapping 
  inline double shape_and_test_at_knot(const unsigned &ipt, 
                                       Shape &psi, Shape &test)
   const
@@ -318,9 +318,9 @@ protected:
   }
  
  
- ///This function returns the residuals for the 
+ /// This function returns the residuals for the 
  /// traction function.
- ///flag=1(or 0): do (or don't) compute the Jacobian as well. 
+ /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
  void fill_in_generic_residual_contribution_fluid_traction(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian)
@@ -409,7 +409,7 @@ private:
  /// pressure applied by the elements
  unsigned Pressure_data_id;
  
- ///The highest dimension of the problem 
+ /// The highest dimension of the problem 
  unsigned Dim;
  
  

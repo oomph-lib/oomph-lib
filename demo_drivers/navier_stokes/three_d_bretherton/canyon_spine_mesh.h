@@ -34,13 +34,13 @@
 
 using namespace oomph;
 //======================================================================
-///Quarter of a canyon mesh
-///Mesh with outer part assumed to be a straight line
-///and inner part a cylinder with given radius, but axially uniform.
-///The outer face is given by the plane z = zmin 
-///The cylinder axis is given by the line x = xmin, z = zmax
-///The interface elements are constructed on the inner (cylindrical)
-///boundary.
+/// Quarter of a canyon mesh
+/// Mesh with outer part assumed to be a straight line
+/// and inner part a cylinder with given radius, but axially uniform.
+/// The outer face is given by the plane z = zmin 
+/// The cylinder axis is given by the line x = xmin, z = zmax
+/// The interface elements are constructed on the inner (cylindrical)
+/// boundary.
 //======================================================================
 template <class ELEMENT, class INTERFACE_ELEMENT>
 class MyCanyonMesh : public  SimpleCubicMesh<ELEMENT >, 
@@ -79,11 +79,11 @@ public:
  unsigned long ninterface_element() const 
   {return Interface_element_pt.size();}
  
- ///Access functions for pointers to elements in bulk
+ /// Access functions for pointers to elements in bulk
  FiniteElement* &bulk_element_pt(const unsigned long &i) 
   {return Bulk_element_pt[i];}
  
- ///Number of elements in bulk 
+ /// Number of elements in bulk 
  unsigned long nbulk() const {return Bulk_element_pt.size();}
  
 // Reurn radius of the canyon

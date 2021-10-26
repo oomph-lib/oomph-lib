@@ -53,13 +53,13 @@ namespace oomph
 {
 
 //==================================================================
-///Spine-based Marangoni surface tension elements that add
-///a linear dependence on temperature and concentration
-///of a surface chemical to the surface tension, 
-///which decreases with increasing temperature. In addition, 
-///this element adds a flux contribution to the advection-diffusion
-///equation to represent heat loss at the free surface. This
-///introduces the Biot number.
+/// Spine-based Marangoni surface tension elements that add
+/// a linear dependence on temperature and concentration
+/// of a surface chemical to the surface tension, 
+/// which decreases with increasing temperature. In addition, 
+/// this element adds a flux contribution to the advection-diffusion
+/// equation to represent heat loss at the free surface. This
+/// introduces the Biot number.
 //=================================================================
 template<class ELEMENT>
 class SpineLineMarangoniSurfactantFluidInterfaceElement :
@@ -94,7 +94,7 @@ private:
 
 protected:
 
- ///Get the temperature
+ /// Get the temperature
  double interpolated_T(const Vector<double> &s)
   {
      //Find number of nodes
@@ -122,7 +122,7 @@ protected:
   }
 
 
- ///Get the surfactant concentration
+ /// Get the surfactant concentration
  double interpolated_C(const Vector<double> &s)
   {
      //Find number of nodes
@@ -484,8 +484,8 @@ protected:
   }
 
 public:
- ///Constructor that passes the bulk element and face index down
- ///to the underlying
+ /// Constructor that passes the bulk element and face index down
+ /// to the underlying
  SpineLineMarangoniSurfactantFluidInterfaceElement(
  FiniteElement* const &element_pt, const int &face_index) : 
   SpineLineFluidInterfaceElement<ELEMENT>
@@ -521,34 +521,34 @@ public:
    C_index = this->node_pt(0)->nvalue()-1;
   }
 
- ///Return the Biot number
+ /// Return the Biot number
  double bi() {return *Bi_pt;}
  
- ///Return the Marangoni number
+ /// Return the Marangoni number
  double ma() {return *Ma_pt;}
 
- ///Return the Elasticity number
+ /// Return the Elasticity number
  double beta() {return *Beta_pt;}
 
- ///Return the surface peclect number
+ /// Return the surface peclect number
  double peclet_s() {return *Peclet_S_pt;}
 
- ///Return the surface peclect strouhal number
+ /// Return the surface peclect strouhal number
  double peclet_strouhal_s() {return *Peclet_Strouhal_S_pt;}
 
- ///Access function for pointer to the Marangoni number
+ /// Access function for pointer to the Marangoni number
  double* &ma_pt() {return Ma_pt;}
 
- ///Access function for pointer to the Biot number
+ /// Access function for pointer to the Biot number
  double* &bi_pt() {return Bi_pt;}
 
- ///Access function for pointer to the Elasticity number
+ /// Access function for pointer to the Elasticity number
  double* &beta_pt() {return Beta_pt;}
 
- ///Access function for pointer to the surface Peclet number
+ /// Access function for pointer to the surface Peclet number
  double* &peclet_s_pt() {return Peclet_S_pt;}
 
- ///Access function for pointer to the surface Peclet x Strouhal number
+ /// Access function for pointer to the surface Peclet x Strouhal number
  double* &peclet_strouhal_s_pt() {return Peclet_Strouhal_S_pt;}
 
 void output(std::ostream &outfile, const unsigned &n_plot)
@@ -632,9 +632,9 @@ namespace Global_Physical_Variables
   
 } // end_of_namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D Convection  problem on rectangular domain, discretised 
@@ -647,7 +647,7 @@ class ConvectionProblem : public Problem
 
 public:
 
- ///Constructor. The boolean indicates whether the free surface
+ /// Constructor. The boolean indicates whether the free surface
  //should be pinned or not in the first instance
  ConvectionProblem(const bool &pin=true);
 
@@ -715,7 +715,7 @@ public:
  void actions_before_implicit_timestep() 
   {set_boundary_conditions(time_pt()->time());}
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -725,7 +725,7 @@ public:
   } // end_of_fix_pressure
 
 
- ///UnFix pressure in element e at pressure dof pdof and set to pvalue
+ /// UnFix pressure in element e at pressure dof pdof and set to pvalue
  void unfix_pressure(const unsigned &e, const unsigned &pdof)
   {
    //Cast to specific element and fix pressure

@@ -327,9 +327,9 @@ namespace oomph
     } // for (unsigned ipt=0;ipt<n_intpt;ipt++)
   } // End of fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
   //======================================================================
   /// Refineable version of the Navier-Stokes equations
@@ -1047,7 +1047,7 @@ namespace oomph
 
 
     /// The basis interpolating the pressure is given by pshape().
-    //// The basis interpolating the velocity is shape().
+    /// / The basis interpolating the velocity is shape().
     void interpolating_basis(const Vector<double>& s,
                              Shape& psi,
                              const int& value_id) const

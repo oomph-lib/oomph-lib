@@ -905,7 +905,7 @@ namespace oomph
   ///   - "hang_nodes_*.dat"
   ///     where the * denotes a direction (n,s,e,w) in 2D
   ///     or (r,l,u,d,f,b) in 3D
-  ///.
+  /// .
   ///   can be viewed with
   ///   - QHangingNodes.mcr
   ///   .
@@ -3936,9 +3936,9 @@ namespace oomph
 #endif
 
 
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
 
 
   //========================================================================
@@ -4038,7 +4038,7 @@ namespace oomph
             n_unrefine++;
           }
           // Don't mark as overruled - it's misleading
-          //// ... otherwise mark it as having been over-ruled
+          /// / ... otherwise mark it as having been over-ruled
           // else
           // {
           //  this->nrefinement_overruled()+=1;
@@ -4412,7 +4412,7 @@ namespace oomph
   ///   - "hang_nodes_*.dat"
   ///     where the * denotes a direction (n,s,e,w) in 2D
   ///     or (r,l,u,d,f,b) in 3D
-  ///.
+  /// .
   ///   can be viewed with
   ///   - QHangingNodes.mcr
   ///   .
@@ -5192,7 +5192,7 @@ namespace oomph
       } // End of documentation
     } // End if (this->nelement()>0)
 
-    ////BENFLAG: Check that all the nodes belong to their update elements
+    /// /BENFLAG: Check that all the nodes belong to their update elements
     // std::cout << "p_adapt_mesh(): Checking stuff works!" << std::endl;
     // for(unsigned j=0; j<this->nnode(); j++)
     // {

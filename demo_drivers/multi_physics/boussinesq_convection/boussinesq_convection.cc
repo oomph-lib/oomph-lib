@@ -62,9 +62,9 @@ namespace Global_Physical_Variables
   
 } // end_of_namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D Convection  problem on rectangular domain, discretised 
@@ -77,7 +77,7 @@ class ConvectionProblem : public Problem
 
 public:
 
- ///Constructor
+ /// Constructor
  ConvectionProblem();
 
  /// Destructor. Empty
@@ -99,7 +99,7 @@ public:
    set_boundary_conditions(time_pt()->time());
   }
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {

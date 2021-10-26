@@ -200,8 +200,8 @@ namespace oomph
         shared_node_index = it - shared_node_pt.begin();
       }
 
-      //// Slow search version without additional access function in Mesh class
-      ////Search the internal shared node storage for this node
+      /// / Slow search version without additional access function in Mesh class
+      /// /Search the internal shared node storage for this node
       // for(unsigned i=0; i<mesh_pt->nshared_node(iproc); i++)
       // {
       //  if(nod_pt == mesh_pt->shared_node_pt(iproc,i))
@@ -334,8 +334,8 @@ namespace oomph
         shared_node_index = it - shared_node_pt.begin();
       }
 
-      //// Slow search version without additional access function in Mesh class
-      ////Search the internal shared node storage for this node
+      /// / Slow search version without additional access function in Mesh class
+      /// /Search the internal shared node storage for this node
       // for(unsigned i=0; i<mesh_pt->nshared_node(iproc); i++)
       // {
       //  if(master_nod_pt == mesh_pt->shared_node_pt(iproc,i))

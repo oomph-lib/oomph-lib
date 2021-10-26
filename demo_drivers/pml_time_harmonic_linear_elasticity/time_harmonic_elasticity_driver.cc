@@ -44,9 +44,9 @@ using namespace oomph;
 
 #define ADAPTIVE
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 
 //=======start_namespace==========================================
@@ -94,7 +94,7 @@ namespace Global_Parameters
   N_y_top_pml    = N_y_top_pml    * N_pml_multiplier;
   N_y_bottom_pml = N_y_bottom_pml * N_pml_multiplier;
 
-  ///Adjust physical size of PML layers, set to be equal for all layers
+  /// Adjust physical size of PML layers, set to be equal for all layers
   Width_x_right_pml  = Width_x_right_pml  * L_pml_multiplier;
   Width_x_left_pml   = Width_x_left_pml   * L_pml_multiplier;
   Width_y_top_pml    = Width_y_top_pml    * L_pml_multiplier;

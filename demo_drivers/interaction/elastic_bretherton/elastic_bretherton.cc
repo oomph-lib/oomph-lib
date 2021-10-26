@@ -342,13 +342,13 @@ class SpineGravityTractionElement :
  public virtual SpineElement<FaceGeometry<ELEMENT> >, 
  public virtual FaceElement
 {
- ///The highest dimension of the problem 
+ /// The highest dimension of the problem 
  unsigned Dim;
 
- ///Pointer to the global Reynold number divided by the Froude number
+ /// Pointer to the global Reynold number divided by the Froude number
  double *ReInvFr_pt;
 
- ///Pointer to global gravity Vector
+ /// Pointer to global gravity Vector
  Vector<double> *G_pt;
 
  /// Pointer to the viscosity ratio (relative to the 
@@ -365,11 +365,11 @@ class SpineGravityTractionElement :
 
 protected:
 
- ///Array to hold local eqn number information for veloc: 
- ///U_local_eqn(jnod,i) = local equation number or < 0 if pinned
+ /// Array to hold local eqn number information for veloc: 
+ /// U_local_eqn(jnod,i) = local equation number or < 0 if pinned
  DenseMatrix<int> U_local_eqn;
 
- ///The local equation number for the external data associated
+ /// The local equation number for the external data associated
  /// with the unknown pressure gradient
  int Delta_P_local_eqn;
 
@@ -377,18 +377,18 @@ protected:
  /// stored
  unsigned External_Delta_P_index;
 
- ///Array to hold the local eqn number information for the
+ /// Array to hold the local eqn number information for the
  /// external data (other nodes in the bulk element)
  DenseMatrix<int> External_u_local_eqn;
 
- ///Vector to keep track of the external data associated
- ///with each bulk node
+ /// Vector to keep track of the external data associated
+ /// with each bulk node
  Vector<unsigned> External_node;
 
 public:
  
- ///Constructor, which takes a "bulk" element and the value of the index
- ///and its limit
+ /// Constructor, which takes a "bulk" element and the value of the index
+ /// and its limit
  SpineGravityTractionElement(FiniteElement* const &element_pt, 
                              const int &face_index) :
   SpineElement<FaceGeometry<ELEMENT> >(), FaceElement()
@@ -521,11 +521,11 @@ public:
  /// Pointer to Vector of gravitational components
  Vector<double>* &g_pt() {return G_pt;}
 
- ///Access function for the velocity. N. B. HEAVY ASSUMPTIONS HERE
+ /// Access function for the velocity. N. B. HEAVY ASSUMPTIONS HERE
  double u(const unsigned &l,const unsigned &i)
   {return nodal_value(l,i);}
  
- ////// Velocity i at local node l at timestep t (t=0: present; 
+ /// /// Velocity i at local node l at timestep t (t=0: present; 
  /// t>0: previous). SIMILAR HEAVY ASSUMPTIONS
  double u(const unsigned &t, const unsigned &l, 
           const unsigned &i) const
@@ -563,7 +563,7 @@ public:
    add_generic_residual_contribution(residuals,dummy,0);
   }
 
- ///This function returns the residuals and the jacobian
+ /// This function returns the residuals and the jacobian
  inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
   {
@@ -577,8 +577,8 @@ public:
 
 
  //----------------------------------------------------------------------
- ///This function returns the residuals for the Navier--Stokes equations; 
- ///flag=1(or 0): do (or don't) compute the Jacobian as well. 
+ /// This function returns the residuals for the Navier--Stokes equations; 
+ /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
  //----------------------------------------------------------------------
  void add_generic_residual_contribution(Vector<double> &residuals, 
                                         DenseMatrix<double> &jacobian, 
@@ -931,7 +931,7 @@ public:
   }
  
 
-///Define the local equation numbering schemes
+/// Define the local equation numbering schemes
  void assign_additional_local_eqn_numbers()
   {
    //Get number of nodes
@@ -977,10 +977,10 @@ public:
     }
   }
 
- ///Overload the output function
+ /// Overload the output function
  void output(ostream &outfile) { }
 
-///Output function: x,y,[z],u,v,[w],p in tecplot format
+/// Output function: x,y,[z],u,v,[w],p in tecplot format
 void output(ostream &outfile, const unsigned &Np) { }
 
 }; 
@@ -1011,7 +1011,7 @@ private:
  void shape(const Vector<double> &s, Shape &psi) const {psi[0] = 1.0;}
 
  /// Calculate the geometric shape functions and
- ///derivatives w.r.t. local coordinates at local coordinate s
+ /// derivatives w.r.t. local coordinates at local coordinate s
  void dshape_local(const Vector<double> &s, Shape &psi,
                            DShape &dpsids) const
   { 
@@ -1022,8 +1022,8 @@ private:
 
 public:
  
- ///Constructor, there are no internal values. The pointer to the 
- ///element's (single) spine is set on construction
+ /// Constructor, there are no internal values. The pointer to the 
+ /// element's (single) spine is set on construction
  FixSpineHeightElement(SpineNode* const &spine_node_pt) : 
   SpineElement<PointElement>() 
   {
@@ -1084,10 +1084,10 @@ public:
      add_external_data(traded_pressure_data_pt);
   }
  
- ///Overload the output function
+ /// Overload the output function
  void output(ostream &outfile) { }
 
- ///Output function: x,y,[z],u,v,[w],p in tecplot format
+ /// Output function: x,y,[z],u,v,[w],p in tecplot format
  void output(ostream &outfile, const unsigned &Np) { }
 
 }; 
@@ -1287,7 +1287,7 @@ public:
  /// is performed automatically after every Newton step.
  void actions_after_newton_solve() {}
 
- ///Fix pressure value l in element e to value p_value
+ /// Fix pressure value l in element e to value p_value
  void fix_pressure(const unsigned &e, const unsigned &l, 
                    const double &pvalue)
   {

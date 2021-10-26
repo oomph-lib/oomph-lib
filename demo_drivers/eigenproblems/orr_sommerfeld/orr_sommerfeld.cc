@@ -23,8 +23,8 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Diver to solve the orr-sommerfeld equation for Poiseuille flow
-///using the ARPACK (default) eigensolver.
+/// Diver to solve the orr-sommerfeld equation for Poiseuille flow
+/// using the ARPACK (default) eigensolver.
 
 // Generic oomph-lib routines only
 #include "generic.h"
@@ -481,7 +481,7 @@ public:
     }
   }
 
- ///Return FE representation of the pressure 
+ /// Return FE representation of the pressure 
  inline double interpolated_p(const Vector<double> &s, const unsigned &i) const
   {
    unsigned n_pres = npres();
@@ -559,9 +559,9 @@ private:
 
 
 
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////////
 
 
 
@@ -804,7 +804,7 @@ public:
  /// Destructor (empty)
  ~OrrSommerfeldProblem(){}
  
- ///Access function for the Real part of the wavenumber
+ /// Access function for the Real part of the wavenumber
  double* &a_real_pt() {return A_real_pt;}
 
  /// Update the problem specs before solve: (Re)set boundary conditions
@@ -922,18 +922,18 @@ void OrrSommerfeldProblem<ELEMENT>::doc_solution(const unsigned& label)
 
  
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
-///Mini Element to implement the eigenvalue constraint
+/// Mini Element to implement the eigenvalue constraint
 class ZeroResidualGenElement : public GeneralisedElement
 {
  //This Element actually stores a pointer to the eigenvalue problem
  OrrSommerfeldProblem<QOrrSommerfeldElement<1,3> > *eigenvalue_problem_pt;
  
 public:
- ///Simple constructor
+ /// Simple constructor
  ZeroResidualGenElement()
   {
    //One item of internal data will store the real part of the eigenvalue
@@ -945,11 +945,11 @@ public:
     (Param::N_element,internal_data_pt(0)->value_pt(0));
   }
 
- ///Destructor
+ /// Destructor
  virtual ~ZeroResidualGenElement() 
   {delete eigenvalue_problem_pt;}
 
- ///Access function for the the eigenvalue
+ /// Access function for the the eigenvalue
  double& eval() {return *(internal_data_pt(0)->value_pt(0));}
 
  double* eval_pt() {return internal_data_pt(0)->value_pt(0);}
@@ -992,7 +992,7 @@ public:
 };
 
 
-///Mini problem class for the continuation problem
+/// Mini problem class for the continuation problem
 class ContinuationProblem : public Problem
 {
 

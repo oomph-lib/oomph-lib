@@ -71,7 +71,7 @@ public:
 /// Destructor
 virtual ~GeneralCircle(){}
 
-///Lagrangian coordinate xi
+/// Lagrangian coordinate xi
 void position (const Vector<double>& xi, Vector<double>& r) const
 {
  r[0] = Centre_x + Radius*cos(xi[0]);
@@ -89,13 +89,13 @@ void position(const unsigned& t,
 
 private:
 
- ///Storage for the x-coordinate of the centre
+ /// Storage for the x-coordinate of the centre
  double Centre_x;
  
- ///Storage for the y-coordinate of the centre
+ /// Storage for the y-coordinate of the centre
  double Centre_y;
 
- ///Storage for the radius of the circle
+ /// Storage for the radius of the circle
  double Radius;
 
 };
@@ -597,7 +597,7 @@ void UnstructuredTorusProblem<ELEMENT>::set_boundary_conditions(
 
 
 //==========================================================================
-///Solve the system for a number of different values of the Reynolds number
+/// Solve the system for a number of different values of the Reynolds number
 //==========================================================================
 template<class ELEMENT>
 void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt, 

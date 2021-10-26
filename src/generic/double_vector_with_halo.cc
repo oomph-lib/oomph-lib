@@ -264,7 +264,7 @@ namespace oomph
 
   //=========================================================================
   /// Synchronise the halo data within the vector. This requires one
-  ///"all to all" communnication.
+  /// "all to all" communnication.
   //====================================================================
   void DoubleVectorWithHaloEntries::synchronise()
   {

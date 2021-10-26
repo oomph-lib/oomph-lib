@@ -43,7 +43,7 @@ namespace Global
  
  double Gamma = 1.4;
 
- ///Function that determines the initial conditions
+ /// Function that determines the initial conditions
  void exact_solution(const double &t, const Vector<double> &x,
                      Vector<double> &u)
  {
@@ -426,7 +426,7 @@ public:
    std::cout << "How many " << assign_eqn_numbers() << std::endl;
   }
  
- ///Compute the complete errors in the problem
+ /// Compute the complete errors in the problem
  void compute_error(const double &t, Vector<double> &error)
   {
    error.initialise(0.0);

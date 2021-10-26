@@ -166,13 +166,13 @@ public:
 };
 
 
-///The QPoissonElement<2,2> is linear
+/// The QPoissonElement<2,2> is linear
 template<>
 string FileStem<TPoissonElement<2,2> >::Stem = "linear"; 
-///The QPoissonElement<2,3> is quadratic
+/// The QPoissonElement<2,3> is quadratic
 template<>
 string FileStem<TPoissonElement<2,3> >::Stem = "quadratic"; 
-///The QPoissonElement<2,4> is cubic
+/// The QPoissonElement<2,4> is cubic
 template<>
 string FileStem<TPoissonElement<2,4> >::Stem = "cubic"; 
 
@@ -318,9 +318,9 @@ TriangleFaceTestProblem(const unsigned& h_power,const bool &permute) :
  output_error.close();
 }
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 //========================================================================
 /// Demonstrate how to solve TriangleFaceTest problem

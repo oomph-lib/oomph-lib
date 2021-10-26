@@ -23,10 +23,10 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Driver for a 3D static cap problem in a quarter-tube domain
-///Using spines. This is definitely a bit rough and ready and was
-///used as a proof of principle. The SpineMesh was set up in something
-///of a hurry and should NOT be used as a model of good behaviour!
+/// Driver for a 3D static cap problem in a quarter-tube domain
+/// Using spines. This is definitely a bit rough and ready and was
+/// used as a proof of principle. The SpineMesh was set up in something
+/// of a hurry and should NOT be used as a model of good behaviour!
 
 //Generic routines
 #include "generic.h"
@@ -50,10 +50,10 @@ namespace Global_Physical_Variables
  /// Reynolds number
  double Re= 0.0;
 
- ///Capillary number
+ /// Capillary number
  double Ca = 1.0;
 
- ///Rotation rate
+ /// Rotation rate
  double Omega = 0.0;
 
  //Inverse Froude number
@@ -124,14 +124,14 @@ public:
  Vector<GeneralisedElement*> &bulk_element_pt()
   {return Bulk_element_pt;}
 
- ///Access functions for pointers to elements in bulk
+ /// Access functions for pointers to elements in bulk
  GeneralisedElement* &bulk_element_pt(const unsigned long &i) 
   {return Bulk_element_pt[i];}
 
- ///Number of elements in bulk 
+ /// Number of elements in bulk 
  unsigned long nbulk() const {return Bulk_element_pt.size();}
 
- ///Constructor
+ /// Constructor
  AxialSpineQuarterTubeMesh(GeomObject* wall_pt,
                            const Vector<double>& xi_lo,
                            const double& fract_mid,
@@ -320,7 +320,7 @@ public:
   }
 
 
- ///Update nodal positions in response to spine changes
+ /// Update nodal positions in response to spine changes
  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
    //Get fraction along the spine
@@ -386,10 +386,10 @@ public:
  AxialSpineQuarterTubeMesh<
   ELEMENT, SpineSurfaceFluidInterfaceElement<ELEMENT> >* Bulk_mesh_pt;
 
- ///Storage for the elements that compute the enclosed fluid volume
+ /// Storage for the elements that compute the enclosed fluid volume
  Mesh *Volume_computation_mesh_pt;
 
- ///Storage for the volume constraint element
+ /// Storage for the volume constraint element
  Mesh* Volume_constraint_mesh_pt;
 
 private:
@@ -399,7 +399,7 @@ private:
 
  Data *Pext_pt;
 
- ///Storage for the pressure that is traded for the volume constraint
+ /// Storage for the pressure that is traded for the volume constraint
  Data *Traded_pressure_data_pt;
 
 }; // end_of_problem_class

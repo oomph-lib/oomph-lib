@@ -104,12 +104,12 @@ namespace oomph
 {
 
 //==================================================================
-///Spine-based Marangoni surface tension elements that add
-///a linear dependence on concentration
-///of a surface chemical to the surface tension, 
-///which decreases with increasing concentration.
-///The non-dimensionalisation is the same as Campana et al (2004)
-///but we may wish to revisit this.
+/// Spine-based Marangoni surface tension elements that add
+/// a linear dependence on concentration
+/// of a surface chemical to the surface tension, 
+/// which decreases with increasing concentration.
+/// The non-dimensionalisation is the same as Campana et al (2004)
+/// but we may wish to revisit this.
 //=================================================================
 template<class ELEMENT>
 class SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement : 
@@ -134,7 +134,7 @@ private:
 
 protected:
 
- ///Get the surfactant concentration
+ /// Get the surfactant concentration
  double interpolated_C(const Vector<double> &s)
   {
      //Find number of nodes
@@ -527,8 +527,8 @@ protected:
   }
 
 public:
- ///Constructor that passes the bulk element and face index down
- ///to the underlying
+ /// Constructor that passes the bulk element and face index down
+ /// to the underlying
   SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement(FiniteElement* const &element_pt, const int &face_index) : SpineAxisymmetricFluidInterfaceElement<ELEMENT>
 														       (element_pt,face_index)
   {
@@ -554,22 +554,22 @@ public:
    C_index = this->node_pt(0)->nvalue()-1;
 }
  
- ///Return the Elasticity number
+ /// Return the Elasticity number
   double beta() {return *Beta_pt;}
 
- ///Return the surface peclect number
+ /// Return the surface peclect number
  double peclet_s() {return *Peclet_S_pt;}
  
- ///Return the surface peclect strouhal number
+ /// Return the surface peclect strouhal number
  double peclet_strouhal_s() {return *Peclet_Strouhal_S_pt;}
  
- ///Access function for pointer to the Elasticity number
+ /// Access function for pointer to the Elasticity number
  double* &beta_pt() {return Beta_pt;}
  
- ///Access function for pointer to the surface Peclet number
+ /// Access function for pointer to the surface Peclet number
  double* &peclet_s_pt() {return Peclet_S_pt;}
  
- ///Access function for pointer to the surface Peclet x Strouhal number
+ /// Access function for pointer to the surface Peclet x Strouhal number
  double* &peclet_strouhal_s_pt() {return Peclet_Strouhal_S_pt;}
  
  void output(std::ostream &outfile, const unsigned &n_plot)
@@ -1244,9 +1244,9 @@ unsteady_run(const double &t_max, const double &dt)
 } // End of unsteady_run
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main=========================================================

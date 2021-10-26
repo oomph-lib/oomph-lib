@@ -37,24 +37,24 @@ namespace oomph
 {
 
 //============start_element_class============================================
-///A RefineableElement class that solves the 
-///Boussinesq approximation of the Navier--Stokes
-///and energy equations by coupling two pre-existing classes. 
-///The RefineableQAdvectionDiffusionElement 
-///with bi-quadratic interpolation for the
-///scalar variable (temperature) and
-///RefineableQCrouzeixRaviartElement which solves the Navier--Stokes equations
-///using bi-quadratic interpolation for the velocities and a discontinuous
-///bi-linear interpolation for the pressure. Note that we are free to 
-///choose the order in which we store the variables at the nodes. In this
-///case we choose to store the variables in the order fluid velocities
-///followed by temperature. We must, therefore, overload the function
-///AdvectionDiffusionEquations<DIM>::u_index_adv_diff() to indicate that
-///the temperature is stored at the DIM-th position not the 0-th. We do not
-///need to overload the corresponding function in the 
-///NavierStokesEquations<DIM> class because the velocities are stored
-///first. Finally, we choose to use the flux-recovery calculation from the
-///fluid velocities to provide the error used in the mesh adaptation.
+/// A RefineableElement class that solves the 
+/// Boussinesq approximation of the Navier--Stokes
+/// and energy equations by coupling two pre-existing classes. 
+/// The RefineableQAdvectionDiffusionElement 
+/// with bi-quadratic interpolation for the
+/// scalar variable (temperature) and
+/// RefineableQCrouzeixRaviartElement which solves the Navier--Stokes equations
+/// using bi-quadratic interpolation for the velocities and a discontinuous
+/// bi-linear interpolation for the pressure. Note that we are free to 
+/// choose the order in which we store the variables at the nodes. In this
+/// case we choose to store the variables in the order fluid velocities
+/// followed by temperature. We must, therefore, overload the function
+/// AdvectionDiffusionEquations<DIM>::u_index_adv_diff() to indicate that
+/// the temperature is stored at the DIM-th position not the 0-th. We do not
+/// need to overload the corresponding function in the 
+/// NavierStokesEquations<DIM> class because the velocities are stored
+/// first. Finally, we choose to use the flux-recovery calculation from the
+/// fluid velocities to provide the error used in the mesh adaptation.
 //==========================================================================
 class RefineableBuoyantQSphericalCrouzeixRaviartElement : 
 public virtual RefineableQSphericalAdvectionDiffusionElement<3>,
@@ -63,16 +63,16 @@ public virtual RefineableQSphericalCrouzeixRaviartElement
 
 private:
 
- ///Pointer to a new physical variable, the Rayleigh number
+ /// Pointer to a new physical variable, the Rayleigh number
  double* Ra_pt;
 
  /// The static default value of the Rayleigh number
  static double Default_Physical_Constant_Value;
 
 public:
- ///Constructor: call the underlying constructors and 
- ///initialise the pointer to the Rayleigh number to address the default
- ///value of 0.0
+ /// Constructor: call the underlying constructors and 
+ /// initialise the pointer to the Rayleigh number to address the default
+ /// value of 0.0
  RefineableBuoyantQSphericalCrouzeixRaviartElement() : 
   RefineableQSphericalAdvectionDiffusionElement<3>(),
   RefineableQSphericalCrouzeixRaviartElement()
@@ -80,18 +80,18 @@ public:
    Ra_pt = &Default_Physical_Constant_Value;
   }
 
- ///The required number of values stored at the nodes is 
- ///the sum of the required values of the two single-physics elements. This
- ///step is generic for any composed element of this type.
+ /// The required number of values stored at the nodes is 
+ /// the sum of the required values of the two single-physics elements. This
+ /// step is generic for any composed element of this type.
   inline unsigned required_nvalue(const unsigned &n) const
   {return 
     (RefineableQSphericalAdvectionDiffusionElement<3>::required_nvalue(n) +
      RefineableQSphericalCrouzeixRaviartElement::required_nvalue(n));}
   
-  ///Access function for the Rayleigh number (const version)
+  /// Access function for the Rayleigh number (const version)
   const double &ra() const {return *Ra_pt;}
   
-  ///Access function for the pointer to the Rayleigh number
+  /// Access function for the pointer to the Rayleigh number
   double* &ra_pt() {return Ra_pt;}
   
   
@@ -185,8 +185,8 @@ public:
     output_fct(outfile,Nplot,time,exact_soln_pt);
   }
 
- ///Overload the index at which the temperature 
- ///variable is stored. We choose to store is after the fluid velocities.
+ /// Overload the index at which the temperature 
+ /// variable is stored. We choose to store is after the fluid velocities.
  unsigned u_index_spherical_adv_diff() const {return 3;}
  
  /// Number of vertex nodes in the element is obtained from the
@@ -451,8 +451,8 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
   }
 
 
- ///Compute the element's residual Vector and the jacobian matrix
- ///using full finite differences, the default implementation
+ /// Compute the element's residual Vector and the jacobian matrix
+ /// using full finite differences, the default implementation
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
   {
@@ -820,7 +820,7 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
 
 
 //===================================================================
-///Set the default value of the Rayleigh number to be zero
+/// Set the default value of the Rayleigh number to be zero
 //=================================================================== 
 double RefineableBuoyantQSphericalCrouzeixRaviartElement::
 Default_Physical_Constant_Value=0.0;

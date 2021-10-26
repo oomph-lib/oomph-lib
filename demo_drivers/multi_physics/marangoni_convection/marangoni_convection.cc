@@ -50,12 +50,12 @@ namespace oomph
 {
 
 //==================================================================
-///Spine-based Marangoni surface tension elements that add
-///a linear dependence on temperature to the surface tension, 
-///which decreases with increasing temperature. In addition, 
-///this element adds a flux contribution to the advection-diffusion
-///equation to represent heat loss at the free surface. This
-///introduces the Biot number.
+/// Spine-based Marangoni surface tension elements that add
+/// a linear dependence on temperature to the surface tension, 
+/// which decreases with increasing temperature. In addition, 
+/// this element adds a flux contribution to the advection-diffusion
+/// equation to represent heat loss at the free surface. This
+/// introduces the Biot number.
 //=================================================================
 template<class ELEMENT>
 class SpineLineMarangoniFluidInterfaceElement :
@@ -248,8 +248,8 @@ protected:
   }
 
 public:
- ///Constructor that passes the bulk element and face index down 
- ///to the underlying element
+ /// Constructor that passes the bulk element and face index down 
+ /// to the underlying element
  SpineLineMarangoniFluidInterfaceElement(
  FiniteElement* const &element_pt, const int &face_index) : 
   SpineLineFluidInterfaceElement<ELEMENT>
@@ -266,16 +266,16 @@ public:
    T_index = cast_element_pt->u_index_adv_diff();
   }
 
- ///Return the Biot number
+ /// Return the Biot number
  double bi() {return *Bi_pt;}
  
- ///Return the Marangoni number
+ /// Return the Marangoni number
  double ma() {return *Ma_pt;}
 
- ///Access function for pointer to the Marangoni number
+ /// Access function for pointer to the Marangoni number
  double* &ma_pt() {return Ma_pt;}
 
- ///Access function for pointer to the Biot number
+ /// Access function for pointer to the Biot number
  double* &bi_pt() {return Bi_pt;}
 
 };
@@ -323,9 +323,9 @@ namespace Global_Physical_Variables
   
 } // end_of_namespace
 
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////
 
 //====== start_of_problem_class=======================================
 /// 2D Convection  problem on rectangular domain, discretised 
@@ -338,7 +338,7 @@ class ConvectionProblem : public Problem
 
 public:
 
- ///Constructor. The boolean indicates whether the free surface
+ /// Constructor. The boolean indicates whether the free surface
  //should be pinned or not in the first instance
  ConvectionProblem(const bool &pin=true);
 
@@ -422,7 +422,7 @@ public:
  void actions_before_implicit_timestep() 
   {set_boundary_conditions(time_pt()->time());}
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -432,7 +432,7 @@ public:
   } // end_of_fix_pressure
 
 
- ///UnFix pressure in element e at pressure dof pdof and set to pvalue
+ /// UnFix pressure in element e at pressure dof pdof and set to pvalue
  void unfix_pressure(const unsigned &e, const unsigned &pdof)
   {
    //Cast to specific element and fix pressure

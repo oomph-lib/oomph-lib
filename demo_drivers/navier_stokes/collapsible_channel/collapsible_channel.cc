@@ -131,10 +131,10 @@ public:
  /// Destructor:  Empty
  ~OscillatingWall(){}
 
-///Access function to the amplitude
+/// Access function to the amplitude
  double& amplitude(){return A;}
 
-///Access function to the period
+/// Access function to the period
  double& period(){return T;}
 
  /// Position vector at Lagrangian coordinate zeta 
@@ -188,10 +188,10 @@ private:
  /// Relative amplitude of horizontal wall motion
  double B;
 
- ///Period of the oscillations
+ /// Period of the oscillations
  double T;
 
- ///Pointer to the global time object
+ /// Pointer to the global time object
  Time* Time_pt;
 
 }; // end of oscillating wall
@@ -229,7 +229,7 @@ namespace Global_Physical_Variables
 
 
 //=======start_of_problem_class=======================================
-///Problem class
+/// Problem class
 //====================================================================
 template <class ELEMENT>
 class CollapsibleChannelProblem : public Problem
@@ -239,7 +239,7 @@ class CollapsibleChannelProblem : public Problem
 
  /// Constructor : the arguments are the number of elements,
  /// the length of the domain and the amplitude and period of 
- ///the oscillations
+ /// the oscillations
  CollapsibleChannelProblem(const unsigned& nup, 
                            const unsigned& ncollapsible,
                            const unsigned& ndown,
@@ -297,32 +297,32 @@ private :
  /// Delete prescribed traction elements from the surface mesh
  void delete_traction_elements(Mesh* const &surface_mesh_pt);
 
- ///Number of elements in the x direction in the upstream part of the channel
+ /// Number of elements in the x direction in the upstream part of the channel
  unsigned Nup;
 
  /// Number of elements in the x direction in the "collapsible" 
  /// part of the channel
  unsigned Ncollapsible;
 
- ///Number of elements in the x direction in the downstream part of the channel
+ /// Number of elements in the x direction in the downstream part of the channel
  unsigned Ndown;
 
- ///Number of elements across the channel
+ /// Number of elements across the channel
  unsigned Ny;
 
- ///x-length in the upstream part of the channel
+ /// x-length in the upstream part of the channel
  double Lup;
 
- ///x-length in the "collapsible" part of the channel
+ /// x-length in the "collapsible" part of the channel
  double Lcollapsible;
 
- ///x-length in the downstream part of the channel
+ /// x-length in the downstream part of the channel
  double Ldown;
 
- ///Transverse length
+ /// Transverse length
  double Ly;
 
- ///Pointer to the geometric object that parametrises the "collapsible" wall
+ /// Pointer to the geometric object that parametrises the "collapsible" wall
  OscillatingWall* Wall_pt;
  
  /// Pointer to the "bulk" mesh

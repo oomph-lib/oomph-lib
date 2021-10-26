@@ -70,7 +70,7 @@ namespace Global_Physical_Variables
  double Mu = 0.0;
 
 
-///A function to specify a constant axial body force
+/// A function to specify a constant axial body force
 void axial_pressure_gradient(const double &time,
                              const Vector<double> &x,
                              Vector<double> &result)
@@ -230,7 +230,7 @@ public:
 /// Destructor
 virtual ~GeneralCircle(){}
 
-///Lagrangian coordinate xi
+/// Lagrangian coordinate xi
 void position (const Vector<double>& xi, Vector<double>& r) const
 {
  Vector<double> r_circle(2);
@@ -303,10 +303,10 @@ void position(const unsigned& t,
 
 private:
 
- ///Storage for the y-coordinate of the centre
+ /// Storage for the y-coordinate of the centre
  double Centre_y;
 
- ///Storage for the radius of the circle
+ /// Storage for the radius of the circle
  double Radius;
 
 };
@@ -495,7 +495,7 @@ void set_initial_condition()
   }
 
  
- ///Pointer to the Backedup Surface mesh
+ /// Pointer to the Backedup Surface mesh
  Vector<BackupMeshForProjection<TElement<1,3> >*> Backed_up_surface_mesh_pt;
 
  /// Pointers to mesh of Lagrange multiplier elements
@@ -806,7 +806,7 @@ void UnstructuredTorusProblem<ELEMENT>::set_boundary_conditions(
 
 
 //==========================================================================
-///Solve the system for a number of different values of the Reynolds number
+/// Solve the system for a number of different values of the Reynolds number
 //==========================================================================
 template<class ELEMENT>
 void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt, 

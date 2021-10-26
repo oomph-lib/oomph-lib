@@ -384,7 +384,7 @@ void FSIRingProblem::doc_solution(const unsigned& i,
             i_case,doc_info.number());
     //Open the output file
     some_file.open(filename);
-    ///Output the solution using 5x5 plot points 
+    /// Output the solution using 5x5 plot points 
     Fluid_mesh_pt->output(some_file,5);
     //Close the output file
     some_file.close();

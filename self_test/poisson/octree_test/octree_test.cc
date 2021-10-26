@@ -140,12 +140,12 @@ private:
 
 public:
 
- ///Constructor, initialise rotation to zero (default)
+ /// Constructor, initialise rotation to zero (default)
  Rotateable() : RefineableElement(), ELEMENT(), Rotated(0) { }
  
 
- ///Overload the further build function to pass the rotate information
- ///to the sons
+ /// Overload the further build function to pass the rotate information
+ /// to the sons
  void further_build()
   {
    ELEMENT::further_build();
@@ -154,7 +154,7 @@ public:
   }
 
   
- ///Rotate the element
+ /// Rotate the element
  void rotate(const unsigned &angle)
   {
    Rotated = angle;
@@ -445,26 +445,26 @@ namespace TanhSolnForPoisson
  /// Parameter for steepness of step
  double Alpha=50.0;
 
- ///Orientation (non-normalised x-component of unit vector in direction
+ /// Orientation (non-normalised x-component of unit vector in direction
  /// of step plane)
  double N_x=-1.0;
 
- ///Orientation (non-normalised y-component of unit vector in direction
+ /// Orientation (non-normalised y-component of unit vector in direction
  /// of step plane)
  double N_y=-1.0;
 
- ///Orientation (non-normalised z-component of unit vector in direction
+ /// Orientation (non-normalised z-component of unit vector in direction
  /// of step plane)
  double N_z=1.0;
 
 
- ///Orientation (x-coordinate of step plane) 
+ /// Orientation (x-coordinate of step plane) 
  double X_0=0.0;
 
- ///Orientation (y-coordinate of step plane) 
+ /// Orientation (y-coordinate of step plane) 
  double Y_0=0.0;
 
- ///Orientation (z-coordinate of step plane) 
+ /// Orientation (z-coordinate of step plane) 
  double Z_0=0.0;
 
 
@@ -516,9 +516,9 @@ N_z))),2.0))*Alpha*Alpha*N_z*N_z/(N_x*N_x+N_y*N_y+N_z*N_z);
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 

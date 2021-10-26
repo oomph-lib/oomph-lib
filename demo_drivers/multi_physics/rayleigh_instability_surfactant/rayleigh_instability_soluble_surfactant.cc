@@ -134,8 +134,8 @@ namespace Global_Physical_Variables
 
 
 //================================================================
-///Interface class to handle the mass transport between bulk
-///and surface as well as the surfactant transport along the
+/// Interface class to handle the mass transport between bulk
+/// and surface as well as the surfactant transport along the
 //interface
 //================================================================
 template<class ELEMENT>
@@ -143,18 +143,18 @@ class ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement :
 public ElasticAxisymmetricSurfactantTransportInterfaceElement<ELEMENT>
 {
 private:
- ///Pointer to adsorption number
+ /// Pointer to adsorption number
  double *Alpha_pt;
- ///Pointer to solubility number
+ /// Pointer to solubility number
  double *K_pt;
 
- ///Storage for the index at
- ///which the bulk concentration is stored
+ /// Storage for the index at
+ /// which the bulk concentration is stored
  unsigned C_bulk_index;
 
 protected:
 
-  ///Get the bulk surfactant concentration
+  /// Get the bulk surfactant concentration
  double interpolated_C_bulk(const Vector<double> &s)
   {
      //Find number of nodes
@@ -323,8 +323,8 @@ protected:
   }
 
 public:
- ///Constructor that passes the bulk element and face index down
- ///to the underlying
+ /// Constructor that passes the bulk element and face index down
+ /// to the underlying
   ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement(
    FiniteElement* const &element_pt, const int &face_index) : 
    ElasticAxisymmetricSurfactantTransportInterfaceElement<ELEMENT>
@@ -339,19 +339,19 @@ public:
   }
 
  
- ///Return the adsorption number
+ /// Return the adsorption number
  double alpha() {return *Alpha_pt;}
  
- ///Return the solubility nubmer
+ /// Return the solubility nubmer
  double k() {return *K_pt;}
  
- ///Access function for pointer to adsorption number
+ /// Access function for pointer to adsorption number
  double* &alpha_pt() {return Alpha_pt;}
  
- ///Access function for pointer to solubility number
+ /// Access function for pointer to solubility number
  double* &k_pt() {return K_pt;}
 
- ///Overload the output function
+ /// Overload the output function
  void output(std::ostream &outfile, const unsigned &n_plot)
   {
    outfile.precision(16);
@@ -932,9 +932,9 @@ unsteady_run(const double &t_max, const double &dt)
 } // End of unsteady_run
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main=========================================================

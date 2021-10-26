@@ -5268,7 +5268,7 @@ namespace oomph
     }
   }
 
-  ///=====================================================================
+  /// =====================================================================
   /// Select face elements from a given boundary. In case the we are
   /// dealing with an internal boundary we use a set of criterias to
   /// decide which of the two face elements should be used on represent
@@ -5600,12 +5600,12 @@ namespace oomph
     }
   }
 
-  ///========================================================================
+  /// ========================================================================
   /// In charge of sinchronize the boundary coordinates for internal
   /// boundaries that were split as part of the distribution
   /// process. Called after setup_boundary_coordinates() for the
   /// original mesh only
-  ///========================================================================
+  /// ========================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::synchronize_boundary_coordinates(
     const unsigned& b)
@@ -44120,9 +44120,9 @@ namespace oomph
 #endif
         // Deal with six noded stuff for all (normal and enriched) elements
 
-        ///----------------------------------------------------------------
+        /// ----------------------------------------------------------------
         ///         Repositioning of mid-side nodes
-        ///----------------------------------------------------------------
+        /// ----------------------------------------------------------------
 
         // Side between 0 and 1
         if (el_pt->node_pt(3)->is_on_boundary(b))

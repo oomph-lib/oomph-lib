@@ -194,7 +194,7 @@ namespace oomph
     /// Static "Magic number" used in place of the equation number to
     /// indicate that the value is constrained because it is associated
     /// with non-conforming element boundaries --- a hanging node ---
-    ///(and is therefore pinned)
+    /// (and is therefore pinned)
     static long Is_constrained;
 
     /// Default: Just set pointer to (steady) timestepper.

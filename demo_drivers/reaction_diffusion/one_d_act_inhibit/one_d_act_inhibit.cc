@@ -62,7 +62,7 @@ namespace GlobalVariables
   R[1] = C[1]*C[1]*C[1] - C[1] - C[0];
  }
 
- ///Derivative of simple reaction kinetics above
+ /// Derivative of simple reaction kinetics above
  void activator_inhibitor_reaction_derivative(const Vector<double> &C,
                                  DenseMatrix<double> &dRdC)
  {
@@ -107,7 +107,7 @@ public:
 
 private:
 
- ///Internal storage for the timestep
+ /// Internal storage for the timestep
  double Dt;
  
 }; // End of problem class
